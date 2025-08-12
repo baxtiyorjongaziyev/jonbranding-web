@@ -19,6 +19,7 @@ import ExitIntentModal from '@/components/exit-intent-modal';
 import { Button } from '@/components/ui/button';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
+import ImageUploader from '@/components/image-uploader';
 
 const Home: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -73,6 +74,7 @@ const Home: FC = () => {
         <Testimonials />
         <Process />
         <Gallery />
+        <ImageUploader />
         <Faq />
       </main>
       <Footer />
