@@ -19,7 +19,6 @@ import ExitIntentModal from '@/components/exit-intent-modal';
 import { Button } from '@/components/ui/button';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
-import ImageUploader from '@/components/image-uploader';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const Home: FC = () => {
@@ -83,7 +82,6 @@ const Home: FC = () => {
         <Testimonials />
         <Process />
         <Gallery />
-        <ImageUploader />
         <Faq />
       </main>
       <Footer />
