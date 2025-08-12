@@ -4,6 +4,12 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
+import { Menu } from 'lucide-react';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface HeaderProps {
   onContactClick: () => void;
@@ -23,7 +29,7 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
         <Link href="/" className="flex items-center" aria-label="Bosh sahifa">
           <Logo />
         </Link>
-        <nav className="hidden items-center space-x-6 md:flex">
+        <nav className="hidden items-center space-x-6 lg:flex">
           {navItems.map((item) => (
             <Link
               key={item.label}
@@ -34,13 +40,34 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <Button onClick={onContactClick} className="hidden md:flex shadow-ocean">
-            Sotib olish
+            Hoziroq buyurtma berish
           </Button>
-          <Button onClick={onContactClick} size="sm" className="md:hidden">
-            Aloqa
-          </Button>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="lg:hidden">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Menyuni ochish</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <nav className="flex flex-col gap-6 pt-10">
+                {navItems.map((item) => (
+                   <Link
+                    key={item.label}
+                    href={item.href}
+                    className="text-xl font-medium text-gray-800 transition-colors hover:text-primary"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                 <Button onClick={onContactClick} className="w-full shadow-ocean mt-4">
+                  Hoziroq buyurtma berish
+                </Button>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>

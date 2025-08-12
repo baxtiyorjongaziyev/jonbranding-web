@@ -27,10 +27,10 @@ const Home: FC = () => {
   const [packageSummary, setPackageSummary] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const [selectedPackage] = useLocalStorage('selectedPackage', 'B');
-  const [includeNaming] = useLocalStorage('includeNaming', false);
-  const [paymentOption] = useLocalStorage('paymentOption', '50');
-  const [isPcgMember] = useLocalStorage('isPcgMember', true);
+  const [selectedPackage, setSelectedPackage] = useLocalStorage('selectedPackage', 'B');
+  const [includeNaming, setIncludeNaming] = useLocalStorage('includeNaming', false);
+  const [paymentOption, setPaymentOption] = useLocalStorage('paymentOption', '50');
+  const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', true);
   
   const [mobileCtaPrice, setMobileCtaPrice] = useState(0);
   const [packageDetailsForModal, setPackageDetailsForModal] = useState({ summary: '', price: 0 });
@@ -42,13 +42,15 @@ const Home: FC = () => {
 
 
   useEffect(() => {
-    const selections = { selectedPackage, includeNaming, paymentOption, isPcgMember };
-    const { final } = calculatePackagePrice(selections);
-    setMobileCtaPrice(final);
+    if (isClient) {
+      const selections = { selectedPackage, includeNaming, paymentOption, isPcgMember };
+      const { final } = calculatePackagePrice(selections);
+      setMobileCtaPrice(final);
 
-    const summary = generateSummary(selections);
-    setPackageDetailsForModal({ summary, price: final });
-  }, [selectedPackage, includeNaming, paymentOption, isPcgMember]);
+      const summary = generateSummary(selections);
+      setPackageDetailsForModal({ summary, price: final });
+    }
+  }, [selectedPackage, includeNaming, paymentOption, isPcgMember, isClient]);
 
   const handleOpenModal = (summary = 'Umumiy so\'rov', price = 0) => {
     setPackageSummary(summary);
@@ -108,7 +110,7 @@ const Home: FC = () => {
             </div>
           )}
             <Button onClick={handleMobileCtaClick} className="shadow-ocean">
-                Sotib olish
+                Hoziroq buyurtma berish
             </Button>
         </div>
       </div>

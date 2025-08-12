@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Logo isWhite />
             <p className="max-w-xs text-gray-300">
-              Brendingiz ovoz chiqarsin. Biznesingiz uchun strategiyaga asoslangan vizual ko'rinish.
+             Strategiyaga asoslangan vizual ko‘rinish bilan biznesingizni keyingi bosqichga olib chiqing.
             </p>
           </div>
           
@@ -19,6 +19,7 @@ const Footer = () => {
             <ul className="mt-4 space-y-2">
               <li><Link href="#services" className="hover:text-primary transition-colors">Xizmatlar</Link></li>
               <li><Link href="#portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
+              <li><Link href="#process" className="hover:text-primary transition-colors">Jarayon</Link></li>
               <li><Link href="#faq" className="hover:text-primary transition-colors">FAQ</Link></li>
             </ul>
           </div>

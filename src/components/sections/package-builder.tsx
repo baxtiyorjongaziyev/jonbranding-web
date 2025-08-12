@@ -31,14 +31,16 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
     const [total, setTotal] = useState({ base: 0, final: 0, discountApplied: '' });
 
     useEffect(() => {
-        const result = calculatePackagePrice({
-            selectedPackage,
-            includeNaming,
-            paymentOption,
-            isPcgMember
-        });
-        setTotal(result);
-    }, [selectedPackage, includeNaming, paymentOption, isPcgMember]);
+        if (isClient) {
+            const result = calculatePackagePrice({
+                selectedPackage,
+                includeNaming,
+                paymentOption,
+                isPcgMember
+            });
+            setTotal(result);
+        }
+    }, [selectedPackage, includeNaming, paymentOption, isPcgMember, isClient]);
 
     const handleOrder = () => {
         const selections = { selectedPackage, includeNaming, paymentOption, isPcgMember };
@@ -166,7 +168,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 </div>
                             </div>
                             <Button onClick={handleOrder} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean">
-                                Sotib olish
+                                Hoziroq buyurtma berish
                             </Button>
                         </Card>
                     </div>
