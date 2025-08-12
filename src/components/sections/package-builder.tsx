@@ -11,6 +11,7 @@ import { Switch } from '@/components/ui/switch';
 import { cn } from '@/lib/utils';
 import { Info } from 'lucide-react';
 import { servicePrices, basePackages, calculatePackagePrice, generateSummary } from '@/lib/pricing';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface PackageBuilderProps {
     onOrderNow: (summary: string, price: number) => void;
@@ -21,6 +22,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
     const [includeNaming, setIncludeNaming] = useLocalStorage('includeNaming', false);
     const [paymentOption, setPaymentOption] = useLocalStorage('paymentOption', '50');
     const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', true);
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     const [total, setTotal] = useState({ base: 0, final: 0, discountApplied: '' });
 
@@ -40,6 +46,31 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         const { final } = calculatePackagePrice(selections);
         onOrderNow(summary, final);
     };
+
+    if (!isClient) {
+        return (
+            <section id="package-builder" className="py-16 sm:py-24 bg-secondary">
+                <div className="container mx-auto px-4">
+                    <div className="text-center">
+                         <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Paketni Hisoblash</h2>
+                         <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
+                             O'zingizga mos keladigan xizmatlar to'plamini tanlang va chegirmalarni qo'llang.
+                         </p>
+                    </div>
+                     <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                        <div className="lg:col-span-2 space-y-8">
+                             <Skeleton className="h-48 w-full" />
+                             <Skeleton className="h-24 w-full" />
+                             <Skeleton className="h-48 w-full" />
+                        </div>
+                        <div className="lg:col-span-1 sticky top-24">
+                             <Skeleton className="h-64 w-full" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
 
     return (
         <section id="package-builder" className="py-16 sm:py-24 bg-secondary">

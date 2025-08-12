@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import ImageUploader from '@/components/image-uploader';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Home: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -33,6 +34,12 @@ const Home: FC = () => {
   
   const [mobileCtaPrice, setMobileCtaPrice] = useState(0);
   const [packageDetailsForModal, setPackageDetailsForModal] = useState({ summary: '', price: 0 });
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+      setIsClient(true);
+  }, []);
+
 
   useEffect(() => {
     const selections = { selectedPackage, includeNaming, paymentOption, isPcgMember };
@@ -89,10 +96,17 @@ const Home: FC = () => {
       {/* Mobile Sticky CTA Bar */}
       <div className="sticky bottom-0 md:hidden bg-white/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
         <div className="container mx-auto flex justify-between items-center">
-            <div className="text-sm">
-                <p className="font-bold text-dark-blue text-lg">${mobileCtaPrice.toLocaleString('en-US')}</p>
-                <p className="text-xs text-gray-600">Yakuniy narx</p>
+          {isClient ? (
+              <div className="text-sm">
+                  <p className="font-bold text-dark-blue text-lg">${mobileCtaPrice.toLocaleString('en-US')}</p>
+                  <p className="text-xs text-gray-600">Yakuniy narx</p>
+              </div>
+          ) : (
+            <div className="text-sm space-y-1">
+              <Skeleton className="h-6 w-16" />
+              <Skeleton className="h-3 w-20" />
             </div>
+          )}
             <Button onClick={handleMobileCtaClick} className="shadow-ocean">
                 Sotib olish
             </Button>

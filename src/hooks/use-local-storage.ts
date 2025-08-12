@@ -2,6 +2,17 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
+// A wrapper for "JSON.parse()"" to support "undefined" value
+const parseJSON = <T>(value: string | null): T | undefined => {
+  try {
+    return value === 'undefined' ? undefined : JSON.parse(value ?? '');
+  } catch {
+    console.log('parsing error on', { value });
+    return undefined;
+  }
+};
+
+
 export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val: T) => T)) => void] {
   const readValue = useCallback((): T => {
     if (typeof window === 'undefined') {
@@ -10,14 +21,14 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
 
     try {
       const item = window.localStorage.getItem(key);
-      return item ? (JSON.parse(item) as T) : initialValue;
+      return item ? (parseJSON(item) as T) : initialValue;
     } catch (error) {
       console.warn(`Error reading localStorage key “${key}”:`, error);
       return initialValue;
     }
   }, [initialValue, key]);
 
-  const [storedValue, setStoredValue] = useState<T>(readValue);
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
 
   const setValue = (value: T | ((val: T) => T)) => {
     if (typeof window == 'undefined') {
@@ -38,7 +49,8 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
 
   useEffect(() => {
     setStoredValue(readValue());
-  }, [readValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const handleStorageChange = () => {
