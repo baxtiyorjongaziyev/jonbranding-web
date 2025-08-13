@@ -75,30 +75,22 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setSubmitting(true);
-    
-    const message = `
-*Yangi xabar (Jon.Branding)*
-
-*Mijoz:* ${data.fullName}
-*Telefon:* \`${data.phone}\`
-*Telegram:* ${data.telegram ? '@' + data.telegram.replace('@','') : 'Kiritilmagan'}
-*Izoh:* ${data.notes || 'Kiritilmagan'}
-
-*Tanlangan paket:*
-\`\`\`
-${packageSummary}
-Yakuniy narx: $${totalPrice.toLocaleString('en-US')}
-\`\`\`
-    `;
 
     try {
-      const res = await fetch('/api/telegram', {
+      const res = await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: message }),
+        body: JSON.stringify({
+            ...data,
+            packageSummary,
+            totalPrice
+        }),
       });
 
-      if (!res.ok) throw new Error('Telegramga yuborishda xatolik');
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || 'So\'rovni yuborishda xatolik yuz berdi.');
+      }
       
       trackEvent('generate_lead', {
         value: totalPrice,
@@ -111,12 +103,12 @@ Yakuniy narx: $${totalPrice.toLocaleString('en-US')}
           onClose();
       }, 600);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       toast({
         variant: 'destructive',
         title: 'Xatolik!',
-        description: 'Xabarni yuborishda muammo yuzaga keldi. Iltimos, keyinroq qayta urinib ko\'ring yoki biz bilan to\'g\'ridan-to\'g\'ri bog\'laning.',
+        description: error.message || 'Xabarni yuborishda muammo yuzaga keldi. Iltimos, keyinroq qayta urinib ko\'ring yoki biz bilan to\'g\'ridan-to\'g\'ri bog\'laning.',
       });
     } finally {
       setSubmitting(false);

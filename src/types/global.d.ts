@@ -5,6 +5,9 @@ declare global {
       NEXT_PUBLIC_GA_ID?: string;
       NEXT_PUBLIC_SUPABASE_URL?: string;
       NEXT_PUBLIC_SUPABASE_ANON_KEY?: string;
+      NEXT_PUBLIC_AIRTABLE_API_KEY?: string;
+      NEXT_PUBLIC_AIRTABLE_BASE_ID?: string;
+      NEXT_PUBLIC_AIRTABLE_TABLE_NAME?: string;
     };
     gtag?: (...args: any[]) => void;
     bus?: {
