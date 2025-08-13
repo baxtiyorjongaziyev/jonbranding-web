@@ -1,11 +1,32 @@
 import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const steps = [
-  { icon: FileText, title: "Brief", description: "Sizning maqsadingiz, kutgan natijalaringiz va biznesingiz haqida ma'lumot to'playmiz." },
-  { icon: Search, title: "Tahlil", description: "Bozorni, raqobatchilarni va maqsadli auditoriyangizni chuqur o'rganamiz." },
-  { icon: Target, title: "Strategiya", description: "Tahlil natijalariga asosan brendingiz uchun yo'l xaritasini ishlab chiqamiz." },
-  { icon: Pencil, title: "Dizayn", description: "Strategiyaga asoslangan holda vizual elementlarni (logo, uslub) yaratamiz." },
-  { icon: Send, title: "Topshirish", description: "Barcha tayyor materiallarni sizga taqdim etamiz va qo'llab-quvvatlaymiz." },
+  {
+    icon: FileText,
+    title: "Brief",
+    description: "Sizning maqsadingiz, kutgan natijalaringiz va biznesingiz haqida ma'lumot to'playmiz."
+  },
+  {
+    icon: Search,
+    title: "Tahlil",
+    description: "Bozorni, raqobatchilarni va maqsadli auditoriyangizni chuqur o'rganamiz."
+  },
+  {
+    icon: Target,
+    title: "Strategiya",
+    description: "Tahlil natijalariga asosan brendingiz uchun yo'l xaritasini ishlab chiqamiz."
+  },
+  {
+    icon: Pencil,
+    title: "Dizayn",
+    description: "Strategiyaga asoslangan holda vizual elementlarni (logo, uslub) yaratamiz."
+  },
+  {
+    icon: Send,
+    title: "Topshirish",
+    description: "Barcha tayyor materiallarni sizga taqdim etamiz va qo'llab-quvvatlaymiz."
+  },
 ];
 
 const Process = () => {
@@ -18,28 +39,23 @@ const Process = () => {
             Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan 5 bosqichli tizim.
           </p>
         </div>
-        <div className="relative mt-16">
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 hidden md:block" aria-hidden="true"></div>
-          
-          <div className="space-y-12 md:space-y-0">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-center">
             {steps.map((step, index) => (
-              <div key={index} className="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-8 items-center">
-                <div className={`md:text-right ${index % 2 === 0 ? 'md:order-1' : 'md:order-3'}`}>
-                  <h3 className="text-xl font-bold text-dark-blue">{step.title}</h3>
-                  <p className="mt-2 text-gray-600">{step.description}</p>
-                </div>
-                
-                <div className="relative flex justify-center my-4 md:my-0 md:order-2">
-                   <div className="absolute h-full w-px bg-gray-200 md:hidden" />
-                   <div className="bg-primary text-white rounded-full p-4 z-10 shadow-lg">
-                    <step.icon className="w-8 h-8" />
+              <Card key={index} className="bg-transparent border-0 shadow-none">
+                <CardContent className="flex flex-col items-center p-0">
+                  <div className="relative mb-4">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-secondary">
+                      <step.icon className="h-10 w-10 text-primary" />
+                    </div>
+                     <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm">
+                      {index + 1}
+                    </div>
                   </div>
-                </div>
-
-                <div className={`${index % 2 === 0 ? 'md:order-3' : 'md:order-1'}`}></div>
-              </div>
+                  <h3 className="mt-4 text-xl font-bold text-dark-blue">{step.title}</h3>
+                  <p className="mt-2 text-gray-600">{step.description}</p>
+                </CardContent>
+              </Card>
             ))}
-          </div>
         </div>
       </div>
     </section>
