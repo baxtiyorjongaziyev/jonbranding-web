@@ -55,12 +55,12 @@ const TrustedBy = () => {
             </CarouselContent>
           </Carousel>
            <Carousel
+            dir="rtl"
             plugins={[
               Autoplay({
                 delay: 2000,
                 stopOnInteraction: false,
                 stopOnMouseEnter: true,
-                direction: 'right',
               }),
             ]}
             opts={{
@@ -74,6 +74,7 @@ const TrustedBy = () => {
                 <CarouselItem
                   key={index}
                   className="basis-auto pl-4"
+                  dir="ltr"
                 >
                   <Card className="px-5 py-3 whitespace-nowrap bg-secondary/50 border-gray-200">
                      <p className="font-semibold text-gray-700">{brand}</p>
