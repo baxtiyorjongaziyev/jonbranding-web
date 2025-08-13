@@ -28,7 +28,8 @@ const ServiceCard = ({ id, label, description, price, selected, onSelect, disabl
         className={cn(
             "rounded-2xl shadow-sm transition-all duration-300 cursor-pointer relative overflow-hidden",
             selected ? 'border-primary ring-2 ring-primary shadow-lg' : 'border-gray-200 hover:shadow-md hover:border-primary/50',
-            disabled && "cursor-not-allowed opacity-70 bg-gray-50"
+            disabled && "cursor-not-allowed opacity-70 bg-gray-50",
+            !selected && !disabled && "animate-subtle-pulse"
         )}
     >
         <CardContent className="p-5">
@@ -246,3 +247,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
+
+    
