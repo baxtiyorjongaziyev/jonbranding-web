@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import { Medal, Globe, Zap, Users } from 'lucide-react';
+import { Medal, Globe, Zap, Users, Phone, Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const founderPoints = [
   { icon: Medal, text: "50+ dan ortiq loyihalar" },
@@ -46,6 +48,20 @@ const Founder = () => {
                   <span className="text-gray-800 font-medium">{point.text}</span>
                 </div>
               ))}
+            </div>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <Button asChild size="lg" className="shadow-ocean">
+                    <Link href="tel:+998336450097">
+                        <Phone className="mr-2 h-5 w-5" />
+                        Telefon orqali bog'lanish
+                    </Link>
+                </Button>
+                 <Button asChild size="lg" variant="outline">
+                    <Link href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
+                        <Send className="mr-2 h-5 w-5" />
+                        Telegram orqali yozish
+                    </Link>
+                </Button>
             </div>
           </div>
         </div>
