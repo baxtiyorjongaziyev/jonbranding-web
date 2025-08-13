@@ -4,7 +4,8 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
-    const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
+    // Hardcoding the thread ID for the CRM topic as identified from getUpdates.
+    const messageThreadId = '52'; 
 
     if (!botToken || !chatId) {
         console.error("Server Configuration Error: Telegram environment variables (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID) are not set.");
@@ -48,6 +49,7 @@ ${packageInfo}
             parse_mode: 'Markdown'
         };
 
+        // Always add the message_thread_id if it exists.
         if (messageThreadId) {
             payload.message_thread_id = messageThreadId;
         }
