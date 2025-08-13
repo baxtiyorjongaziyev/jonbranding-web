@@ -5,11 +5,16 @@ import Airtable from 'airtable';
 // Helper function to send a message to Telegram
 async function sendToTelegram(message: string) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    let chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
         console.error("Telegram environment variables are not set.");
         throw new Error("Server configuration error: Telegram bot not configured.");
+    }
+    
+    // Ensure chat ID for channels/supergroups is correctly formatted
+    if (chatId.startsWith('100')) {
+        chatId = '-100' + chatId.substring(3);
     }
 
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
