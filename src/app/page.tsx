@@ -62,7 +62,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
             <Skeleton className="h-3 w-20" />
           </div>
         )}
-        <Button onClick={onOpenModal} className="shadow-ocean">
+        <Button onClick={onOpenModal} className="shadow-ocean animate-subtle-pulse">
           Hoziroq buyurtma berish
         </Button>
       </div>

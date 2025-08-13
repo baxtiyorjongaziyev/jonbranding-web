@@ -85,7 +85,7 @@ const Offer: FC<OfferProps> = ({ onCTAClick }) => {
                     <div className="mt-8 bg-black/20 rounded-2xl p-6">
                         <CountdownTimer />
                     </div>
-                    <Button onClick={onCTAClick} size="lg" className="mt-8 text-lg px-10 py-7 bg-accent text-dark-blue hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform">
+                    <Button onClick={onCTAClick} size="lg" className="mt-8 text-lg px-10 py-7 bg-accent text-dark-blue hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-subtle-pulse">
                         50% chegirmadan foydalanish
                     </Button>
                 </div>
