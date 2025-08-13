@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
 import Airtable from 'airtable';
 
 // Helper function to send a message to Telegram
@@ -28,26 +27,6 @@ async function sendToTelegram(message: string) {
     if (!result.ok) {
         console.error("Telegram API Error:", result);
         throw new Error('Failed to send message to Telegram.');
-    }
-}
-
-
-// Helper function to save data to Supabase
-async function saveToSupabase(data: any) {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (!supabaseUrl || !supabaseKey) {
-        console.error("Supabase environment variables are not set.");
-        throw new Error("Server configuration error: Supabase not configured.");
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    const { error } = await supabase.from('leads').insert([data]);
-
-    if (error) {
-        console.error('Supabase Error:', error);
-        throw new Error('Failed to save data to Supabase.');
     }
 }
 
@@ -109,16 +88,6 @@ ${packageSummary}
 Yakuniy narx: $${totalPrice.toLocaleString('en-US')}
 \`\`\`
         `;
-
-        const supabaseData = {
-            full_name: fullName,
-            phone,
-            telegram_username: telegram,
-            notes,
-            package_summary: packageSummary,
-            total_price: totalPrice,
-            submitted_at: new Date().toISOString(),
-        };
         
         const airtablePayload = {
             fullName,
@@ -132,7 +101,6 @@ Yakuniy narx: $${totalPrice.toLocaleString('en-US')}
         // 2. Execute all promises concurrently
         const results = await Promise.allSettled([
             sendToTelegram(telegramMessage),
-            saveToSupabase(supabaseData),
             saveToAirtable(airtablePayload),
         ]);
 
