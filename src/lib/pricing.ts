@@ -24,6 +24,7 @@ export interface PriceDetails {
     final: number;
     discountApplied: string;
     discountValue: number;
+    savings: number;
 }
 
 
@@ -45,12 +46,14 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     }
     
     const finalPrice = basePrice * (1 - discountValue);
+    const savings = basePrice - finalPrice;
 
     return {
         base: basePrice,
         final: finalPrice,
         discountApplied: discountType,
         discountValue: discountValue,
+        savings,
     };
 }
 

@@ -7,8 +7,8 @@ import {
 
 const faqItems = [
   {
-    question: "Narxlar qaysi valyutada ko'rsatilgan?",
-    answer: "Barcha narxlar AQSH dollarida (USD) ko'rsatilgan. To'lov O'zbekiston so'mida, to'lov kunidagi Markaziy Bank kursi bo'yicha amalga oshiriladi."
+    question: "Narxlar qaysi valyutada ko'rsatilgan va to'lov qanday amalga oshiriladi?",
+    answer: "Barcha narxlar AQSH dollarida (USD) ko'rsatilgan. To'lov O'zbekiston so'mida, to'lov kunidagi Markaziy Bank kursi bo'yicha amalga oshiriladi. Biz shartnoma asosida ishlaymiz va to'lovni bank hisob raqami orqali qabul qilamiz."
   },
   {
     question: "Loyiha qancha vaqt davom etadi?",
@@ -21,6 +21,10 @@ const faqItems = [
   {
     question: "Loyiha tugagandan keyin qo'llab-quvvatlash bormi?",
     answer: "Ha, loyiha tugagandan so'ng 1 oy davomida sizga brend materiallaridan to'g'ri foydalanish bo'yicha bepul maslahat va yordam beramiz."
+  },
+  {
+    question: "Ish qanday qabul qilinadi va qanday formatdagi fayllar beriladi?",
+    answer: "Loyiha yakunida biz sizga barcha kerakli fayllarni (vektor formatida .svg, .ai; rastr formatida .png, .jpg) va brandbookni (.pdf) taqdim etamiz. Ish dalolatnoma imzolangandan so'ng qabul qilingan hisoblanadi."
   }
 ];
 
