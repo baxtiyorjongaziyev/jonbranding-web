@@ -42,18 +42,20 @@ export async function POST(request: Request) {
         
         // Prepare data for Telegram
         const telegramMessage = `
-*Yangi xabar (Jon.Branding)*
+*🚀 Yangi buyurtma (Jon.Branding)*
 
-*Mijoz:* ${fullName}
-*Telefon:* \`${phone}\`
-*Telegram:* ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
-*Izoh:* ${notes || 'Kiritilmagan'}
+*👤 Mijoz ma'lumotlari:*
+  - *Ism:* ${fullName}
+  - *Telefon:* \`${phone}\`
+  - *Telegram:* ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
+  - *Izoh:* ${notes || 'Kiritilmagan'}
 
-*Tanlangan paket:*
+*📦 Tanlangan paket:*
 \`\`\`
 ${packageSummary}
-Yakuniy narx: $${totalPrice.toLocaleString('en-US')}
 \`\`\`
+
+*💰 Yakuniy narx: $${totalPrice.toLocaleString('en-US')}*
         `;
         
         // Send the message to Telegram
