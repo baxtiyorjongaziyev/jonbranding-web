@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { servicePrices, calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle, Zap } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 
 interface PackageBuilderProps {
     onOrderNow: (summary: string, price: number) => void;
@@ -93,8 +93,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                     </div>
                      <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                         <div className="lg:col-span-2 space-y-8">
-                             <Skeleton className="h-48 w-full" />
-                             <Skeleton className="h-24 w-full" />
+                            <div className="space-y-4">
+                                <Skeleton className="h-10 w-1/2" />
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <Skeleton className="h-24 w-full" />
+                                    <Skeleton className="h-24 w-full" />
+                                    <Skeleton className="h-24 w-full" />
+                                    <Skeleton className="h-24 w-full" />
+                                </div>
+                            </div>
+                            <div>
+                                <Skeleton className="h-10 w-1/3 mb-4" />
+                                <Skeleton className="h-24 w-full" />
+                            </div>
                         </div>
                         <div className="lg:col-span-1 sticky top-24">
                              <Skeleton className="h-64 w-full" />
@@ -181,15 +192,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                             <div className="mt-6 space-y-4">
                                 <div className="flex justify-between items-center text-lg">
                                     <span className="text-gray-300">Asl narx:</span>
-                                    <span className={cn("font-bold", total.discountApplied && "line-through")}>${total.base.toLocaleString('en-US')}</span>
+                                    <span className={cn("font-bold", total.discountApplied && "line-through text-gray-400")}>${total.base.toLocaleString('en-US')}</span>
                                 </div>
                                 
                                 {total.discountApplied && (
                                     <>
-                                        <div className="border-t border-gray-600 my-2"></div>
                                         <div className="flex justify-between items-baseline text-accent">
                                             <span className="text-sm font-medium">{total.discountApplied}</span>
                                         </div>
+                                        <div className="border-t border-gray-600 my-2"></div>
                                         <div className="flex justify-between items-center">
                                             <span className="text-gray-200 text-xl">Yakuniy narx:</span>
                                             <span className="text-4xl font-extrabold text-accent">${total.final.toLocaleString('en-US')}</span>
@@ -197,11 +208,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                     </>
                                 )}
 
-                                {!total.discountApplied && (
-                                    <div className="flex justify-between items-center mt-4">
-                                        <span className="text-gray-200 text-xl">Jami:</span>
-                                        <span className="text-4xl font-extrabold text-white">${total.final.toLocaleString('en-US')}</span>
-                                    </div>
+                                {!total.discountApplied && total.base > 0 && (
+                                     <>
+                                        <div className="border-t border-gray-600 my-2"></div>
+                                        <div className="flex justify-between items-center mt-4">
+                                            <span className="text-gray-200 text-xl">Jami:</span>
+                                            <span className="text-4xl font-extrabold text-white">${total.final.toLocaleString('en-US')}</span>
+                                        </div>
+                                     </>
                                 )}
                             </div>
                             <Button onClick={handleOrder} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean" disabled={total.final === 0}>
