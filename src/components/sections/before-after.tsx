@@ -12,7 +12,7 @@ const BeforeAfter = () => {
     <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Oldin va Keyin</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Avval va Hozir</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
             To'g'ri brending biznesingizni qanday o'zgartirishi mumkinligini o'z ko'zingiz bilan ko'ring.
           </p>
@@ -22,12 +22,12 @@ const BeforeAfter = () => {
             <Card key={index} className="overflow-hidden shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
               <CardContent className="p-0">
                 <div className="relative aspect-square">
-                  <Image src={item.oldImg} alt={`${item.brand} eski brendingi`} fill className="object-cover" data-ai-hint={item.oldHint}/>
-                  <div className="absolute top-2 left-2 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-bold">Oldin</div>
+                  <Image src={item.oldImg} alt={`${item.brand} eski brendingi`} fill className="object-cover opacity-80" data-ai-hint={item.oldHint}/>
+                  <div className="absolute top-2 left-2 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-bold">Avval</div>
                 </div>
                 <div className="relative aspect-square">
-                  <Image src={item.newImg} alt={`${item.brand} yangi brendingi`} fill className="object-cover opacity-80" data-ai-hint={item.newHint}/>
-                   <div className="absolute top-2 right-2 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">Keyin</div>
+                  <Image src={item.newImg} alt={`${item.brand} yangi brendingi`} fill className="object-cover" data-ai-hint={item.newHint}/>
+                   <div className="absolute top-2 right-2 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">Hozir</div>
                 </div>
               </CardContent>
             </Card>
