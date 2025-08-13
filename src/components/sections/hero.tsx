@@ -1,10 +1,12 @@
 'use client';
 
 import type {FC} from 'react';
+import { useState, useEffect } from 'react';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent} from '@/components/ui/card';
 import {CheckCircle, Package} from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 interface HeroProps {
   onPrimaryClick: () => void;
@@ -16,20 +18,60 @@ const trustPills = [
     { title: "Nega aynan hozir?", description: "PCG a'zolari uchun maxsus -50% chegirmadan foydalanib qoling!" }
 ];
 
+const headlines = [
+  <>Shunchaki chiroyli emas, balki <span className="text-primary">ishlaydigan</span> brending.</>,
+  <>Brendingizni <span className="text-primary">muvaffaqiyatga</span> yetaklang.</>,
+  <>Raqobatchilardan <span className="text-primary">ajralib</span> turing.</>,
+  <>Brendingiz <span className="text-primary">sotuvlaringizni</span> oshirsin.</>,
+  <>Kichik biznesdan <span className="text-primary">kuchli brendgacha</span>.</>,
+];
+
+const buttonTexts = [
+  "Bepul konsultatsiya olish",
+  "Brendimni baholatish",
+  "Brending audit o'tkazish",
+  "Strategiyani muhokama qilish"
+];
+
 const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
+  const [headlineIndex, setHeadlineIndex] = useState(0);
+  const [buttonIndex, setButtonIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    const headlineInterval = setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setHeadlineIndex((prevIndex) => (prevIndex + 1) % headlines.length);
+        setIsAnimating(false);
+      }, 500); // half a second for fade out
+    }, 4000); // 4 seconds per headline
+
+    const buttonInterval = setInterval(() => {
+      setButtonIndex((prevIndex) => (prevIndex + 1) % buttonTexts.length);
+    }, 4000);
+
+    return () => {
+      clearInterval(headlineInterval);
+      clearInterval(buttonInterval);
+    };
+  }, []);
+
   return (
     <section className="bg-secondary py-20 sm:py-28">
       <div className="container mx-auto px-4 text-center">
-        <h1 data-testid="hero-title" className="text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-dark-blue">
-          Shunchaki chiroyli emas, <br className="hidden sm:block" />
-          balki <span className="text-primary">ishlaydigan</span> brending.
+        <h1 data-testid="hero-title" className={cn(
+          "text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-dark-blue transition-opacity duration-500",
+          isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
+        )}>
+          {headlines[headlineIndex]}
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-gray-700">
           Jon.Branding bilan strategiyaga asoslangan vizual ko‘rinishga ega bo‘ling va raqobatchilardan ajralib turing.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button onClick={() => onPrimaryClick()} size="lg" className="w-full sm:w-auto text-lg px-8 py-6 shadow-ocean animate-subtle-pulse">
-            Bepul konsultatsiya olish
+            {buttonTexts[buttonIndex]}
           </Button>
           <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-dark-blue text-dark-blue hover:bg-dark-blue hover:text-white">
             <Link href="#package-builder">
