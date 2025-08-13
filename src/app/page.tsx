@@ -4,6 +4,7 @@ import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import Header from '@/components/layout/header';
 import Hero from '@/components/sections/hero';
+import TrustedBy from '@/components/sections/trusted-by';
 import Founder from '@/components/sections/founder';
 import Stats from '@/components/sections/stats';
 import WhyUs from '@/components/sections/why-us';
@@ -81,6 +82,7 @@ const Home: FC = () => {
       <Header onContactClick={() => handleOpenModal()} />
       <main className="flex-grow">
         <Hero onPrimaryClick={() => handleOpenModal('Bosh sahifadagi asosiy tugma')} />
+        <TrustedBy />
         <Founder />
         <Stats />
         <WhyUs />
