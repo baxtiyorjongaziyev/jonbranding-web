@@ -8,6 +8,7 @@ const testimonials = [
     name: "Sevara Xolmanova",
     company: "Fidda by Sevara asoschisi",
     avatar: "SX",
+    image: "https://placehold.co/40x40.png",
     imageHint: "female entrepreneur portrait",
     quote: "Men bu jamoa bn ishlab ko'rdim menga juda yoqdi samarali va natijasi siz kutgandanda A'lo bo'larkan brendlashni xam stikerlash va patenlashni xam berganman 7 oyda aniq boladi Hudo xohlasa Halol ishlarkansilar Allox rozi bo'lsin silardan juda xursand bo'ldim ishilarga rivoj Rahmat."
   },
@@ -15,6 +16,7 @@ const testimonials = [
     name: "Sherzod Beknazarov",
     company: "Incontrol Consulting asoschisi",
     avatar: "SB",
+    image: "https://placehold.co/40x40.png",
     imageHint: "male business owner",
     quote: "Did, estetik did. Bu tug'ma bo'ladimi yoki orttirilgan ko'nikma bo'ladimi? Shunday estetik did egasidan biri Baxtiyorjon - Bizni Incontrol va Sherzod Beknazarov logolarini qilishda bizga yordam berdi. Baxtiyorjonga minnatdorchilik bildirmoqchimiz. Rahmat."
   },
@@ -22,6 +24,7 @@ const testimonials = [
     name: "Nodirbek",
     company: "Barakah Restoran asoschisi",
     avatar: "N",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
     imageHint: "restaurant manager portrait",
     quote: "Esingizda bo‘lsa, 3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Sizlarga katta rahmat, ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka! 🤝🏻😊"
   },
@@ -29,6 +32,7 @@ const testimonials = [
     name: "Javohir Haqberdiyev",
     company: "Perfona asoschisi",
     avatar: "JH",
+    image: "https://placehold.co/40x40.png",
     imageHint: "tech startup founder",
     quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!"
   },
@@ -61,7 +65,7 @@ const Testimonials = () => {
                             </div>
                             <div className="mt-6 flex items-center gap-4">
                                 <Avatar>
-                                    <AvatarImage src={`https://placehold.co/40x40.png`} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
+                                    <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
                                     <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                                 </Avatar>
                                 <div>
