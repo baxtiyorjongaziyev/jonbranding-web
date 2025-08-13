@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Medal, Globe, Zap, Users } from 'lucide-react';
@@ -16,13 +18,13 @@ const Founder = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
             <Card className="overflow-hidden shadow-xl rounded-2xl">
-              <div className="aspect-w-1 aspect-h-1 md:aspect-w-4 md:aspect-h-5">
+              <div className="aspect-w-4 aspect-h-3">
                 <Image
                   src="https://img2.teletype.in/files/dd/c6/ddc6f06a-bc2b-4a67-b184-3380067a038e.jpeg"
                   alt="Baxtiyorjon Gaziyev, Jon.Branding asoschisi"
                   width={600}
-                  height={600}
-                  className="w-full h-full object-cover object-top"
+                  height={450}
+                  className="w-full h-full object-cover object-center"
                   data-ai-hint="professional male portrait"
                 />
               </div>

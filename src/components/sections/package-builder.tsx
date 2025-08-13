@@ -9,26 +9,37 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { servicePrices, calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
+import { CheckCircle } from 'lucide-react';
 
 interface PackageBuilderProps {
     onOrderNow: (summary: string, price: number) => void;
 }
 
-const ServiceCheckbox = ({ id, label, description, price, checked, onCheckedChange, disabled = false }: { id: string, label: string, description: string, price: number, checked: boolean, onCheckedChange: (checked: boolean) => void, disabled?: boolean }) => (
-    <div className="flex items-start space-x-3">
-        <Checkbox id={id} checked={checked} onCheckedChange={(c) => onCheckedChange(Boolean(c))} className="h-6 w-6 mt-1" disabled={disabled} />
-        <div className="grid gap-1.5 leading-none">
-            <label
-                htmlFor={id}
-                className={cn("text-base font-medium leading-none", !disabled && "cursor-pointer", disabled && "cursor-not-allowed opacity-70")}
-            >
-                {label} <span className="text-primary font-bold">(+${price})</span>
-            </label>
-            <p className="text-sm text-muted-foreground">
-                {description}
-            </p>
-        </div>
-    </div>
+const ServiceCard = ({ id, label, description, price, selected, onSelect, disabled = false }: { id: string, label: string, description: string, price: number, selected: boolean, onSelect: () => void, disabled?: boolean }) => (
+    <Card 
+        onClick={!disabled ? onSelect : undefined}
+        className={cn(
+            "rounded-2xl shadow-sm transition-all duration-300 cursor-pointer relative overflow-hidden",
+            selected ? 'border-primary ring-2 ring-primary shadow-lg' : 'border-gray-200 hover:shadow-md hover:border-primary/50',
+            disabled && "cursor-not-allowed opacity-70 bg-gray-50"
+        )}
+    >
+        <CardContent className="p-5">
+             {selected && (
+                <div className="absolute top-2 right-2 bg-primary text-white rounded-full p-1">
+                    <CheckCircle className="h-4 w-4" />
+                </div>
+            )}
+            <div className="grid gap-1.5 leading-none">
+                <h4 className="text-base font-bold text-dark-blue leading-none">
+                    {label} <span className="text-primary font-bold">(+${price})</span>
+                </h4>
+                <p className="text-sm text-muted-foreground mt-1">
+                    {description}
+                </p>
+            </div>
+        </CardContent>
+    </Card>
 );
 
 
@@ -65,8 +76,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         onOrderNow(summary, final);
     };
 
-    const handleServiceChange = (service: keyof typeof selectedServices, checked: boolean) => {
-        setSelectedServices(prev => ({ ...prev, [service]: checked }));
+    const handleServiceToggle = (service: keyof typeof selectedServices) => {
+        if (service === 'logo') return; // Logo is mandatory
+        setSelectedServices(prev => ({ ...prev, [service]: !prev[service] }));
     };
 
      if (!isClient) {
@@ -107,52 +119,49 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                     <div className="lg:col-span-2 space-y-8">
                         <div>
                             <h3 className="text-xl font-bold text-dark-blue mb-4">1. Kerakli xizmatlarni tanlang</h3>
-                            <Card className="p-6 rounded-2xl shadow-sm space-y-6">
-                                <ServiceCheckbox 
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <ServiceCard 
                                     id="naming"
                                     label="Naming"
                                     description="Brendingiz uchun unutilmas va kuchli nom tanlash."
                                     price={servicePrices.naming}
-                                    checked={selectedServices.naming}
-                                    onCheckedChange={(checked) => handleServiceChange('naming', checked)}
+                                    selected={selectedServices.naming}
+                                    onSelect={() => handleServiceToggle('naming')}
                                 />
-                                <hr />
-                                <ServiceCheckbox 
+                                <ServiceCard 
                                     id="logo"
                                     label="Logo"
                                     description="Biznesingizning o'ziga xosligini aks ettiruvchi professional logotip. (Asosiy xizmat)"
                                     price={servicePrices.logo}
-                                    checked={selectedServices.logo}
-                                    onCheckedChange={(checked) => handleServiceChange('logo', checked)}
+                                    selected={selectedServices.logo}
+                                    onSelect={() => {}}
                                     disabled={true}
                                 />
-                                 <hr />
-                                <ServiceCheckbox 
+                                <ServiceCard 
                                     id="style"
                                     label="Korporativ uslub"
                                     description="Brendingiz uchun yagona vizual tizim (ranglar, shriftlar, elementlar)."
                                     price={servicePrices.style}
-                                    checked={selectedServices.style}
-                                    onCheckedChange={(checked) => handleServiceChange('style', checked)}
+                                    selected={selectedServices.style}
+                                    onSelect={() => handleServiceToggle('style')}
                                 />
-                                 <hr />
-                                <ServiceCheckbox 
+                                <ServiceCard 
                                     id="brandbook"
                                     label="Brandbook"
                                     description="Brenddan foydalanish bo'yicha to'liq qo'llanma."
                                     price={servicePrices.brandbook}
-                                    checked={selectedServices.brandbook}
-                                    onCheckedChange={(checked) => handleServiceChange('brandbook', checked)}
+                                    selected={selectedServices.brandbook}
+                                    onSelect={() => handleServiceToggle('brandbook')}
                                 />
-                            </Card>
+                            </div>
                         </div>
                         
                         <div>
                             <h3 className="text-xl font-bold text-dark-blue mb-4">2. Chegirma</h3>
-                             <Card className="p-6 rounded-2xl shadow-sm">
-                                <div className="flex items-center space-x-3 bg-yellow-100/50 border border-yellow-300 p-4 rounded-lg">
-                                    <Checkbox id="pcg" checked={isPcgMember} onCheckedChange={(checked) => setIsPcgMember(Boolean(checked))} />
-                                    <Label htmlFor="pcg" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                             <Card className="p-1 rounded-2xl shadow-sm bg-yellow-100/50 border border-yellow-300">
+                                <div className="flex items-center space-x-4 p-4 rounded-lg cursor-pointer" onClick={() => setIsPcgMember(prev => !prev)}>
+                                    <Checkbox id="pcg" checked={isPcgMember} onCheckedChange={(checked) => setIsPcgMember(Boolean(checked))} className="h-6 w-6"/>
+                                    <Label htmlFor="pcg" className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
                                         PCG "Tez Natija 3" kursi a'zosiman (-50% chegirma)
                                     </Label>
                                 </div>
