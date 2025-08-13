@@ -4,7 +4,7 @@ import Image from 'next/image';
 const comparisons = [
   { brand: "Fidda", oldImg: "https://img2.teletype.in/files/9c/66/9c66a85f-486c-4f54-9682-fb4838061ab2.jpeg", newImg: "https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png", oldHint: "old logo design", newHint: "modern new logo" },
   { brand: "Incontrol", oldImg: "https://img1.teletype.in/files/83/47/83479180-eeb6-4e39-9169-c4f4fb22e375.jpeg", newImg: "https://img2.teletype.in/files/17/9c/179c7811-8cf7-4ee9-87ad-66709208b115.png", newHint: "outdated branding", newHint: "sleek professional branding" },
-  { brand: "Barakah", oldImg: "https://placehold.co/400x400.png", newImg: "https://placehold.co/400x400.png", oldHint: "generic restaurant logo", newHint: "unique restaurant branding" },
+  { brand: "Barakah", oldImg: "https://img2.teletype.in/files/55/fe/55fe2252-db0f-4fd2-8ee8-d674bffab68a.png", newImg: "https://img2.teletype.in/files/dc/5c/dc5cd481-115e-4d57-ac2a-3ea3142e5f54.png", oldHint: "generic restaurant logo", newHint: "unique restaurant branding" },
 ];
 
 const BeforeAfter = () => {
