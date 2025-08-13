@@ -7,16 +7,17 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
+import Image from 'next/image';
 
 const logos = [
   { name: 'Korzinka', src: 'https://placehold.co/140x60.png', hint: 'Korzinka supermarket logo' },
-  { name: 'Texnomart', src: 'https://placehold.co/140x60.png', hint: 'Texnomart electronics store logo' },
-  { name: 'Artel', src: 'https://placehold.co/140x60.png', hint: 'Artel electronics logo' },
-  { name: 'Akfa', src: 'https://placehold.co/140x60.png', hint: 'Akfa Group logo' },
   { name: 'Uzum', src: 'https://placehold.co/140x60.png', hint: 'Uzum market logo' },
+  { name: 'Artel', src: 'https://placehold.co/140x60.png', hint: 'Artel electronics logo' },
+  { name: 'Texnomart', src: 'https://placehold.co/140x60.png', hint: 'Texnomart electronics store logo' },
   { name: 'Click', src: 'https://placehold.co/140x60.png', hint: 'Click payment system logo' },
   { name: 'Payme', src: 'https://placehold.co/140x60.png', hint: 'Payme payment system logo' },
   { name: 'TBC Bank', src: 'https://placehold.co/140x60.png', hint: 'TBC Bank Uzbekistan logo' },
+  { name: 'Akfa', src: 'https://placehold.co/140x60.png', hint: 'Akfa Group logo' },
 ];
 
 const TrustedBy = () => {
@@ -47,10 +48,8 @@ const TrustedBy = () => {
                   key={index}
                   className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 pl-8"
                 >
-                  <div className="flex items-center justify-center h-20">
-                    <span className="text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300">
-                      {logo.name}
-                    </span>
+                  <div className="flex items-center justify-center h-20 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                     <Image src={logo.src} alt={logo.name} width={140} height={60} className="object-contain" data-ai-hint={logo.hint}/>
                   </div>
                 </CarouselItem>
               ))}

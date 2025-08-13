@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { servicePrices, calculatePackagePrice, generateSummary, type PriceDetails } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Sparkles } from 'lucide-react';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -65,7 +65,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         setIsClient(true);
     }, []);
 
-    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: '', discountValue: 0 });
+    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: '', discountValue: 0, savings: 0 });
 
     useEffect(() => {
         if (isClient) {
@@ -216,6 +216,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                     <>
                                         <div className="flex justify-between items-baseline text-accent">
                                             <span className="text-sm font-medium">{total.discountApplied}</span>
+                                        </div>
+                                         <div className="flex justify-center items-center gap-2 p-3 bg-green-500/10 rounded-lg text-green-300">
+                                            <Sparkles className="h-5 w-5" />
+                                            <p className="font-bold">Siz ${total.savings.toLocaleString('en-US')} tejadingiz!</p>
                                         </div>
                                         <div className="border-t border-gray-600 my-2"></div>
                                         <div className="flex justify-between items-center">
