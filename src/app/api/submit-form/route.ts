@@ -1,3 +1,4 @@
+
 import { NextResponse } from 'next/server';
 import Airtable from 'airtable';
 
@@ -14,18 +15,25 @@ async function sendToTelegram(message: string) {
     // Ensure chat ID for channels/supergroups is correctly formatted
     if (chatId.startsWith('100')) {
         chatId = '-100' + chatId.substring(3);
+    } else if (chatId.startsWith('-100')) {
+        // Already correct, do nothing
     }
 
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }),
-    });
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }),
+        });
 
-    const result = await response.json();
-    if (!result.ok) {
-        console.error("Telegram API Error:", result);
+        const result = await response.json();
+        if (!result.ok) {
+            console.error("Telegram API Error:", result);
+            throw new Error('Failed to send message to Telegram.');
+        }
+    } catch (error) {
+        console.error("Fetch to Telegram failed:", error);
         throw new Error('Failed to send message to Telegram.');
     }
 }
@@ -41,21 +49,19 @@ async function saveToAirtable(data: any) {
         throw new Error("Server configuration error: Airtable not configured.");
     }
     
-    Airtable.configure({ apiKey });
-    const base = Airtable.base(baseId);
-    
-    // Map your data to Airtable fields
-    const airtableData = {
-        'Full Name': data.fullName,
-        'Phone': data.phone,
-        'Telegram': data.telegram,
-        'Package Summary': data.packageSummary,
-        'Total Price': data.totalPrice,
-        'Notes': data.notes,
-        'Status': 'New',
-    };
-
     try {
+        const base = new Airtable({ apiKey }).base(baseId);
+        
+        const airtableData = {
+            'Full Name': data.fullName,
+            'Phone': data.phone,
+            'Telegram': data.telegram,
+            'Package Summary': data.packageSummary,
+            'Total Price': data.totalPrice,
+            'Notes': data.notes,
+            'Status': 'New',
+        };
+
         // The create method expects an array of records
         await base(tableName).create([{ fields: airtableData }]);
     } catch (error) {
@@ -110,9 +116,6 @@ Yakuniy narx: $${totalPrice.toLocaleString('en-US')}
             // Log all errors for debugging
             errors.forEach(error => console.error((error as PromiseRejectedResult).reason));
             
-            // If any service fails, but maybe not all, decide on the response.
-            // For now, we'll return a generic error if any of them fail.
-            // You could customize this to be more specific.
              return NextResponse.json({ 
                 ok: false, 
                 error: 'Bir yoki bir nechta xizmatga ma\'lumotlarni yuborishda xatolik yuz berdi.',
