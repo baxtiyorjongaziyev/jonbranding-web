@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
         hostname: 'img2.teletype.in',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img1.teletype.in',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
