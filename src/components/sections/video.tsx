@@ -13,11 +13,11 @@ const VideoSection = () => {
         <Card className="mt-12 max-w-4xl mx-auto shadow-2xl rounded-2xl overflow-hidden">
           <div style={{padding:'56.25% 0 0 0',position:'relative'}}>
             <iframe 
-                src="https://player.vimeo.com/video/909613592?badge=0&autopause=0&player_id=0&app_id=58479" 
+                src="https://player.vimeo.com/video/1109613592?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&dnt=1" 
                 frameBorder="0" 
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
                 style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} 
-                title="Jon.Branding video"
+                title="Blue and White Minimalist Goodbye Winter Video"
                 allowFullScreen
             >
             </iframe>
