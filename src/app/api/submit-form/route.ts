@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
+    const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
 
     if (!botToken || !chatId) {
         console.error("Telegram environment variables not set.");
@@ -42,14 +43,20 @@ ${packageInfo}
         
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
         
+        const payload: any = {
+            chat_id: chatId,
+            text: telegramMessage,
+            parse_mode: 'Markdown'
+        };
+
+        if (messageThreadId) {
+            payload.message_thread_id = messageThreadId;
+        }
+
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: telegramMessage,
-                parse_mode: 'Markdown'
-            }),
+            body: JSON.stringify(payload),
         });
 
         const result = await response.json();
