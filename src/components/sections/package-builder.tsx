@@ -235,7 +235,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                      </>
                                 )}
                             </div>
-                            <Button onClick={onOrderNow} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean" disabled={total.final === 0}>
+                            <Button onClick={onOrderNow} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean animate-subtle-pulse" disabled={total.final === 0}>
                                 Hoziroq buyurtma berish
                             </Button>
                         </Card>

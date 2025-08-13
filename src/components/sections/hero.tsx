@@ -28,7 +28,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
           Jon.Branding bilan strategiyaga asoslangan vizual ko‘rinishga ega bo‘ling va raqobatchilardan ajralib turing.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button onClick={() => onPrimaryClick()} size="lg" className="w-full sm:w-auto text-lg px-8 py-6 shadow-ocean">
+          <Button onClick={() => onPrimaryClick()} size="lg" className="w-full sm:w-auto text-lg px-8 py-6 shadow-ocean animate-subtle-pulse">
             Hoziroq buyurtma berish
           </Button>
           <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-dark-blue text-dark-blue hover:bg-dark-blue hover:text-white">

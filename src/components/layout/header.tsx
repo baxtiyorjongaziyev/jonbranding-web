@@ -50,7 +50,7 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
            </div>
         </nav>
         <div className="flex items-center gap-2">
-          <Button onClick={onContactClick} className="hidden md:flex shadow-ocean">
+          <Button onClick={onContactClick} className="hidden md:flex shadow-ocean animate-subtle-pulse">
             Hoziroq buyurtma berish
           </Button>
           <Sheet>
@@ -81,7 +81,7 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
                       Telegram orqali bog'lanish
                     </a>
                  </div>
-                 <Button onClick={onContactClick} className="w-full shadow-ocean mt-4">
+                 <Button onClick={onContactClick} className="w-full shadow-ocean mt-4 animate-subtle-pulse">
                   Hoziroq buyurtma berish
                 </Button>
               </nav>

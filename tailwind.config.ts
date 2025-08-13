@@ -89,7 +89,7 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'subtle-pulse': 'subtle-pulse 2.5s ease-in-out infinite',
+        'subtle-pulse': 'subtle-pulse 4s ease-in-out infinite',
       },
     },
   },
