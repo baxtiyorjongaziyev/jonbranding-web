@@ -9,6 +9,7 @@ import Stats from '@/components/sections/stats';
 import WhyUs from '@/components/sections/why-us';
 import TargetAudience from '@/components/sections/target-audience';
 import Services from '@/components/sections/services';
+import Video from '@/components/sections/video';
 import PackageBuilder from '@/components/sections/package-builder';
 import BeforeAfter from '@/components/sections/before-after';
 import Testimonials from '@/components/sections/testimonials';
@@ -85,6 +86,7 @@ const Home: FC = () => {
         <WhyUs />
         <TargetAudience />
         <Services />
+        <Video />
         <PackageBuilder onOrderNow={handleOrderNow} />
         <BeforeAfter />
         <Testimonials />
