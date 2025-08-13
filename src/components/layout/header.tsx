@@ -4,7 +4,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu } from 'lucide-react';
+import { Menu, Phone, Send } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -19,7 +19,6 @@ const navItems = [
   { href: '#services', label: 'Xizmatlar' },
   { href: '#founder', label: 'Asoschi' },
   { href: '#process', label: 'Jarayon' },
-  { href: '#faq', label: 'FAQ' },
 ];
 
 const Header: FC<HeaderProps> = ({ onContactClick }) => {
@@ -39,6 +38,16 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
               {item.label}
             </Link>
           ))}
+           <div className="flex items-center gap-6 ml-4">
+             <a href="tel:+998336450097" className="flex items-center gap-2 text-base font-medium text-gray-600 transition-colors hover:text-primary">
+                <Phone size={16} />
+                +998 33 645 00 97
+              </a>
+              <a href="https://t.me/baxtiyorjongaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-medium text-gray-600 transition-colors hover:text-primary">
+                <Send size={16} />
+                Telegram
+              </a>
+           </div>
         </nav>
         <div className="flex items-center gap-2">
           <Button onClick={onContactClick} className="hidden md:flex shadow-ocean">
@@ -62,6 +71,16 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
                     {item.label}
                   </Link>
                 ))}
+                 <div className="border-t pt-6 mt-4 space-y-4">
+                    <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-gray-800 transition-colors hover:text-primary">
+                      <Phone size={20} />
+                      +998 33 645 00 97
+                    </a>
+                    <a href="https://t.me/baxtiyorjongaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-gray-800 transition-colors hover:text-primary">
+                      <Send size={20} />
+                      Telegram orqali bog'lanish
+                    </a>
+                 </div>
                  <Button onClick={onContactClick} className="w-full shadow-ocean mt-4">
                   Hoziroq buyurtma berish
                 </Button>
