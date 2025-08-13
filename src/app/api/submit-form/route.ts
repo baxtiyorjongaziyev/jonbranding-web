@@ -4,11 +4,16 @@ import { NextResponse } from 'next/server';
 // Helper function to send a message to Telegram
 async function sendToTelegram(message: string) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    let chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
         console.error("Telegram environment variables (TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID) are not set.");
         throw new Error("Server configuration error: Telegram bot not configured.");
+    }
+    
+    // Ensure channel/supergroup chat IDs are prefixed correctly for the API
+    if (!chatId.startsWith('-')) {
+        chatId = "-100" + chatId;
     }
     
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
@@ -37,13 +42,13 @@ export async function POST(request: Request) {
         }
         
         let packageInfo = '';
+        // Check if package details are provided
         if (packageSummary && totalPrice !== undefined) {
           packageInfo = `
 *📦 Tanlangan paket:*
 \`\`\`
 ${packageSummary}
 \`\`\`
-
 *💰 Yakuniy narx: $${totalPrice.toLocaleString('en-US')}*
           `;
         }
