@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { servicePrices, calculatePackagePrice, generateSummary, type PriceDetails } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle, Sparkles, Gift } from 'lucide-react';
+import { CheckCircle, Sparkles, Gift, ShieldCheck } from 'lucide-react';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -183,6 +183,23 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                     <Label htmlFor="pcg" className="text-lg font-bold leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
                                         PCG "Tez Natija 3" kursi a'zosiman (-50% chegirma)
                                     </Label>
+                                </div>
+                            </Card>
+                        </div>
+
+                         <div>
+                            <h3 className="text-xl font-bold text-dark-blue mb-4">3. Bizning kafolatimiz</h3>
+                             <Card 
+                                className="rounded-2xl shadow-sm bg-primary/10 border-primary/30"
+                             >
+                                <div className="flex items-center space-x-4 p-6">
+                                    <ShieldCheck className="h-10 w-10 text-primary flex-shrink-0" />
+                                    <div className="flex flex-col">
+                                        <h4 className="font-bold text-dark-blue">100% Mamnuniyat Kafolati</h4>
+                                        <p className="text-muted-foreground text-sm">
+                                            Sizga yoqadigan dizayn yoki pulingizni 100% qaytarish kafolatimiz bor.
+                                        </p>
+                                    </div>
                                 </div>
                             </Card>
                         </div>
