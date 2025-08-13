@@ -11,28 +11,24 @@ async function sendToTelegram(message: string) {
         throw new Error("Server configuration error: Telegram bot not configured.");
     }
     
-    // The user-provided chat ID was "1002566480563", let's use the corrected form.
+    // Ensure chat ID is in the correct format for channels/supergroups
     if (!chatId.startsWith('-100')) {
-      chatId = "-100" + chatId;
+      chatId = "-100" + chatId.replace(/^-100/, '');
     }
     
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }),
-        });
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }),
+    });
 
-        const result = await response.json();
-        if (!result.ok) {
-            console.error("Telegram API Error:", result);
-            throw new Error('Failed to send message to Telegram.');
-        }
-    } catch (error) {
-        console.error("Fetch to Telegram failed:", error);
-        throw new Error('Failed to send message to Telegram.');
+    const result = await response.json();
+    if (!result.ok) {
+        console.error("Telegram API Error:", result);
+        throw new Error(`Failed to send message to Telegram. Response: ${JSON.stringify(result)}`);
     }
+    return result;
 }
 
 // Helper function to save data to Airtable using direct fetch
@@ -62,28 +58,22 @@ async function saveToAirtable(data: any) {
         }]
     };
 
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(airtableData),
-        });
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(airtableData),
+    });
 
-        if (!response.ok) {
-            const errorResult = await response.json();
-            console.error('Airtable API Error:', errorResult);
-            throw new Error(`Airtable API returned status ${response.status}`);
-        }
-
-        await response.json(); // Consume the successful JSON response
-
-    } catch (error) {
-        console.error('Airtable operation failed:', error);
-        throw new Error('Failed to save data to Airtable.');
+    if (!response.ok) {
+        const errorResult = await response.json();
+        console.error('Airtable API Error:', errorResult);
+        throw new Error(`Airtable API returned status ${response.status}: ${JSON.stringify(errorResult)}`);
     }
+
+    return await response.json();
 }
 
 export async function POST(request: Request) {
