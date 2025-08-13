@@ -22,12 +22,12 @@ const BeforeAfter = () => {
             <Card key={index} className="overflow-hidden shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
               <CardContent className="p-0">
                 <div className="relative aspect-square">
-                  <Image src={item.newImg} alt={`${item.brand} yangi brendingi`} fill className="object-cover" data-ai-hint={item.newHint}/>
-                  <div className="absolute top-2 right-2 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">Keyin</div>
+                  <Image src={item.oldImg} alt={`${item.brand} eski brendingi`} fill className="object-cover" data-ai-hint={item.oldHint}/>
+                  <div className="absolute top-2 left-2 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-bold">Oldin</div>
                 </div>
                 <div className="relative aspect-square">
-                  <Image src={item.oldImg} alt={`${item.brand} eski brendingi`} fill className="object-cover opacity-80" data-ai-hint={item.oldHint}/>
-                   <div className="absolute top-2 left-2 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-bold">Oldin</div>
+                  <Image src={item.newImg} alt={`${item.brand} yangi brendingi`} fill className="object-cover opacity-80" data-ai-hint={item.newHint}/>
+                   <div className="absolute top-2 right-2 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">Keyin</div>
                 </div>
               </CardContent>
             </Card>
