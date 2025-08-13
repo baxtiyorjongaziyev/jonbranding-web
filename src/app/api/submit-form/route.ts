@@ -40,6 +40,18 @@ export async function POST(request: Request) {
             return NextResponse.json({ ok: false, error: 'Ism va telefon raqam kiritilishi shart' }, { status: 400 });
         }
         
+        let packageInfo = '';
+        if (packageSummary && totalPrice !== undefined) {
+          packageInfo = `
+*📦 Tanlangan paket:*
+\`\`\`
+${packageSummary}
+\`\`\`
+
+*💰 Yakuniy narx: $${totalPrice.toLocaleString('en-US')}*
+          `;
+        }
+        
         // Prepare data for Telegram
         const telegramMessage = `
 *🚀 Yangi buyurtma (Jon.Branding)*
@@ -49,17 +61,11 @@ export async function POST(request: Request) {
   - *Telefon:* \`${phone}\`
   - *Telegram:* ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
   - *Izoh:* ${notes || 'Kiritilmagan'}
-
-*📦 Tanlangan paket:*
-\`\`\`
-${packageSummary}
-\`\`\`
-
-*💰 Yakuniy narx: $${totalPrice.toLocaleString('en-US')}*
+${packageInfo}
         `;
         
         // Send the message to Telegram
-        await sendToTelegram(telegramMessage);
+        await sendToTelegram(telegramMessage.trim());
 
         return NextResponse.json({ ok: true, message: 'So\'rovingiz muvaffaqiyatli yuborildi.' });
 
