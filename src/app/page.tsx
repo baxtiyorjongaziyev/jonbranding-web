@@ -14,6 +14,7 @@ import Testimonials from '@/components/sections/testimonials';
 import Process from '@/components/sections/process';
 import Gallery from '@/components/sections/gallery';
 import Faq from '@/components/sections/faq';
+import Offer from '@/components/sections/offer';
 import Footer from '@/components/layout/footer';
 import ContactModal from '@/components/contact-modal';
 import ExitIntentModal from '@/components/exit-intent-modal';
@@ -85,6 +86,7 @@ const Home: FC = () => {
         <Process />
         <Gallery />
         <Faq />
+        <Offer />
       </main>
       <Footer />
       <ContactModal

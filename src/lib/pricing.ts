@@ -52,16 +52,19 @@ export const calculatePackagePrice = (selections: PackageSelections) => {
     }
 
     let paymentDiscountValue = paymentDiscounts[paymentOption as keyof typeof paymentDiscounts] || 0;
-    let bestDiscount = paymentDiscountValue;
-    let discountType = `${(paymentDiscountValue * 100)}% chegirma (${paymentOption}% oldindan to'lov)`;
+    let bestDiscount = 0;
+    let discountType = "Chegirmasiz";
 
-    if (paymentOption === 'none') {
-        discountType = "Chegirmasiz";
-    }
+    if (basePrice > 550) {
+        bestDiscount = paymentDiscountValue;
+        if (paymentOption !== 'none') {
+            discountType = `${(paymentDiscountValue * 100)}% chegirma (${paymentOption}% oldindan to'lov)`;
+        }
 
-    if (isPcgMember && pcgDiscount > bestDiscount) {
-        bestDiscount = pcgDiscount;
-        discountType = 'PCG Tez Natija 3 uchun -50% chegirma';
+        if (isPcgMember && pcgDiscount > bestDiscount) {
+            bestDiscount = pcgDiscount;
+            discountType = 'PCG Tez Natija 3 uchun -50% chegirma';
+        }
     }
     
     const finalPrice = basePrice * (1 - bestDiscount);
