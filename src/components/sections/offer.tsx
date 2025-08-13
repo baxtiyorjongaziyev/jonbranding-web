@@ -72,7 +72,7 @@ const Offer: FC = () => {
                         <Clock className="w-6 h-6 text-accent" />
                         <p className="font-bold text-accent uppercase tracking-widest">Cheklangan taklif</p>
                     </div>
-                    <h2 className="text-4xl sm:text-5xl font-extrabold mt-4">
+                    <h2 className="text-4xl sm:text-5xl font-extrabold mt-4 text-white">
                         Rad etib bo'lmas <span className="text-accent">taklif</span>
                     </h2>
                     <p className="mt-4 text-lg text-gray-300">
