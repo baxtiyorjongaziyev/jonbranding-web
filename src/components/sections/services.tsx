@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 const services = [
-  { name: "Naming", price: "550+", description: "Brendingiz uchun unutilmas va kuchli nom tanlash." },
+  { name: "Naming", price: "550", description: "Brendingiz uchun unutilmas va kuchli nom tanlash." },
   { name: "Logo", price: "550", description: "Biznesingizning o'ziga xosligini aks ettiruvchi professional logotip." },
   { name: "Korporativ uslub", price: "850", description: "Brendingiz uchun yagona vizual tizim (ranglar, shriftlar, elementlar)." },
   { name: "Brandbook", price: "990", description: "Brenddan foydalanish bo'yicha to'liq qo'llanma." },
