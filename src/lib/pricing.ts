@@ -1,4 +1,5 @@
 
+
 export const servicePrices = {
     naming: 550,
     logo: 550,
@@ -7,6 +8,8 @@ export const servicePrices = {
 };
 
 export const pcgDiscount = 0.50;
+export const bonusThreshold = 1500;
+export const bonusDescription = "Biznes vizitka dizayni sovg'a tariqasida";
 
 interface SelectedServices {
     naming: boolean;
@@ -26,6 +29,7 @@ export interface PriceDetails {
     discountApplied: string;
     discountValue: number;
     savings: number;
+    bonus: string | null;
 }
 
 
@@ -50,12 +54,15 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     const finalPrice = basePrice * (1 - discountValue);
     const savings = basePrice - finalPrice;
 
+    const bonus = finalPrice > bonusThreshold ? bonusDescription : null;
+
     return {
         base: basePrice,
         final: finalPrice,
         discountApplied: discountType,
         discountValue: discountValue,
         savings,
+        bonus,
     };
 }
 
@@ -70,11 +77,16 @@ export const generateSummary = (selections: PackageSelections) => {
 
     let summary = `Tanlangan xizmatlar: ${services.join(', ') || 'Yo\'q'}`;
 
-    const { discountApplied } = calculatePackagePrice(selections);
+    const { discountApplied, bonus } = calculatePackagePrice(selections);
     
     if (discountApplied) {
         summary += ` | Chegirma: ${discountApplied}`;
     }
+    
+    if (bonus) {
+        summary += ` | Bonus: ${bonus}`;
+    }
+
 
     return summary;
 }

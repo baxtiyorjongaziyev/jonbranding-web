@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { servicePrices, calculatePackagePrice, generateSummary, type PriceDetails } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle, Sparkles } from 'lucide-react';
+import { CheckCircle, Sparkles, Gift } from 'lucide-react';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -65,7 +65,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         setIsClient(true);
     }, []);
 
-    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: '', discountValue: 0, savings: 0 });
+    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: '', discountValue: 0, savings: 0, bonus: null });
 
     useEffect(() => {
         if (isClient) {
@@ -221,26 +221,25 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                             <Sparkles className="h-5 w-5" />
                                             <p className="font-bold">Siz ${total.savings.toLocaleString('en-US')} tejadingiz!</p>
                                         </div>
-                                        <div className="border-t border-gray-600 my-2"></div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-gray-200 text-xl">Yakuniy narx:</span>
-                                            <span className="text-4xl font-extrabold text-accent">${total.final.toLocaleString('en-US')}</span>
-                                        </div>
                                     </>
                                 )}
 
-                                {!total.discountApplied && total.base > 0 && (
-                                     <>
-                                        <div className="border-t border-gray-600 my-2"></div>
-                                        <div className="flex justify-between items-center mt-4">
-                                            <span className="text-gray-200 text-xl">Jami:</span>
-                                            <span className="text-4xl font-extrabold text-white">${total.final.toLocaleString('en-US')}</span>
-                                        </div>
-                                     </>
+                                {total.bonus && (
+                                     <div className="flex justify-center items-center gap-2 p-3 bg-primary/20 rounded-lg text-sky-blue">
+                                        <Gift className="h-5 w-5" />
+                                        <p className="font-bold text-center">{total.bonus}</p>
+                                    </div>
                                 )}
+
+
+                                <div className="border-t border-gray-600 my-2"></div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-gray-200 text-xl">Yakuniy narx:</span>
+                                    <span className="text-4xl font-extrabold text-accent">${total.final.toLocaleString('en-US')}</span>
+                                </div>
                             </div>
                             <Button onClick={onOrderNow} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean" disabled={total.final === 0}>
-                                Hoziroq buyurtma berish
+                                Bepul konsultatsiya olish
                             </Button>
                         </Card>
                     </div>

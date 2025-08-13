@@ -80,7 +80,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md rounded-2xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-dark-blue">Buyurtma berish</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-dark-blue">Bepul konsultatsiya</DialogTitle>
           <DialogDescription>
             Ma'lumotlaringizni qoldiring va biz siz bilan tez orada bog'lanamiz.
           </DialogDescription>
