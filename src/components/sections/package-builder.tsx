@@ -15,6 +15,13 @@ interface PackageBuilderProps {
     onOrderNow: (summary: string, priceDetails: PriceDetails) => void;
 }
 
+const serviceDetails = {
+    naming: { id: "naming", label: "Naming", description: "Brendingiz uchun unutilmas va kuchli nom tanlash.", price: servicePrices.naming },
+    logo: { id: "logo", label: "Logo", description: "Biznesingizning o'ziga xosligini aks ettiruvchi professional logotip. (Asosiy xizmat)", price: servicePrices.logo },
+    style: { id: "style", label: "Korporativ uslub", description: "Brendingiz uchun yagona vizual tizim (ranglar, shriftlar, elementlar).", price: servicePrices.style },
+    brandbook: { id: "brandbook", label: "Brandbook", description: "Brenddan foydalanish bo'yicha to'liq qo'llanma.", price: servicePrices.brandbook }
+};
+
 const ServiceCard = ({ id, label, description, price, selected, onSelect, disabled = false }: { id: string, label: string, description: string, price: number, selected: boolean, onSelect: () => void, disabled?: boolean }) => (
     <Card 
         onClick={!disabled ? onSelect : undefined}
@@ -189,7 +196,22 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                     <div className="lg:col-span-1 sticky top-24">
                         <Card className="p-6 rounded-2xl shadow-xl bg-dark-blue text-white">
                             <h3 className="text-2xl font-bold text-center">Natija</h3>
-                            <div className="mt-6 space-y-4">
+                            <div className="mt-4 space-y-2 pb-4 border-b border-gray-600">
+                                {Object.entries(selectedServices).map(([key, value]) => {
+                                    if (value) {
+                                        const service = serviceDetails[key as keyof typeof serviceDetails];
+                                        return (
+                                            <div key={key} className="flex justify-between items-center text-sm">
+                                                <span className="text-gray-300">{service.label}</span>
+                                                <span className="font-medium text-gray-200">${service.price.toLocaleString('en-US')}</span>
+                                            </div>
+                                        );
+                                    }
+                                    return null;
+                                })}
+                            </div>
+
+                            <div className="mt-4 space-y-4">
                                 <div className="flex justify-between items-center text-lg">
                                     <span className="text-gray-300">Asl narx:</span>
                                     <span className={cn("font-bold", total.discountApplied && "line-through text-gray-400")}>${total.base.toLocaleString('en-US')}</span>
