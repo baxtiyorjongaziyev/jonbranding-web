@@ -17,7 +17,7 @@ const Founder = () => {
           <div className="lg:order-last">
             <Card className="overflow-hidden shadow-xl rounded-2xl">
               <Image
-                src="https://placehold.co/600x700.png"
+                src="https://img2.teletype.in/files/dd/c6/ddc6f06a-bc2b-4a67-b184-3380067a038e.jpeg"
                 alt="Baxtiyorjon Gaziyev, Jon.Branding asoschisi"
                 width={600}
                 height={700}
