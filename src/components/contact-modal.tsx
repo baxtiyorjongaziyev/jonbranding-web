@@ -15,8 +15,8 @@ import { Loader2 } from 'lucide-react';
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
-  packageSummary: string;
-  totalPrice: number;
+  packageSummary?: string;
+  totalPrice?: number;
 }
 
 const formSchema = z.object({
