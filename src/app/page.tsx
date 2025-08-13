@@ -37,6 +37,7 @@ const Home: FC = () => {
   const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', true);
   
   const [mobileCtaPrice, setMobileCtaPrice] = useState(0);
+  const [packageDetails, setPackageDetails] = useState({ summary: '', price: 0 });
 
   const [isClient, setIsClient] = useState(false);
 
@@ -48,7 +49,9 @@ const Home: FC = () => {
     if (isClient) {
       const selections = { selectedServices, isPcgMember };
       const priceDetails = calculatePackagePrice(selections);
+      const summary = generateSummary(selections);
       setMobileCtaPrice(priceDetails.final);
+      setPackageDetails({ summary, price: priceDetails.final });
     }
   }, [selectedServices, isPcgMember, isClient]);
 
@@ -88,6 +91,8 @@ const Home: FC = () => {
       <ContactModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
+        packageSummary={packageDetails.summary}
+        totalPrice={packageDetails.price}
       />
       <ExitIntentModal onPrimaryClick={handleOpenModal} />
 
