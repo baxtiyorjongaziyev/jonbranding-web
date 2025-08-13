@@ -115,13 +115,20 @@ Yakuniy narx: $${totalPrice.toLocaleString('en-US')}
             submitted_at: new Date().toISOString(),
         };
         
-        const airtableData = { ...body };
+        const airtablePayload = {
+            fullName,
+            phone,
+            telegram,
+            packageSummary,
+            totalPrice,
+            notes,
+        };
 
         // 2. Execute all promises concurrently
         const results = await Promise.allSettled([
             sendToTelegram(telegramMessage),
             saveToSupabase(supabaseData),
-            saveToAirtable(airtableData),
+            saveToAirtable(airtablePayload),
         ]);
 
         const errors = results.filter(result => result.status === 'rejected');
