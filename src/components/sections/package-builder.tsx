@@ -2,14 +2,14 @@
 
 import { useState, useEffect, FC } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { cn } from '@/lib/utils';
-import { Info } from 'lucide-react';
+import { Info, CheckCircle } from 'lucide-react';
 import { servicePrices, basePackages, calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -88,15 +88,23 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                     <div className="lg:col-span-2 space-y-8">
                         <div>
                             <h3 className="text-xl font-bold text-dark-blue mb-4">1. Asosiy paketni tanlang</h3>
-                            <div className="grid sm:grid-cols-3 gap-4">
+                             <div className="grid sm:grid-cols-3 gap-4">
                                 {basePackages.map(pkg => (
                                     <Card key={pkg.id} onClick={() => setSelectedPackage(pkg.id)}
                                         className={cn(
-                                            "cursor-pointer transition-all duration-200 text-center p-6 rounded-2xl",
+                                            "cursor-pointer transition-all duration-200 text-left p-6 rounded-2xl flex flex-col",
                                             selectedPackage === pkg.id ? 'border-primary ring-2 ring-primary shadow-xl' : 'hover:shadow-lg border-gray-200'
                                         )}>
                                         <h4 className="font-bold text-lg text-dark-blue">{pkg.name}</h4>
                                         <p className="text-2xl font-bold text-primary mt-2">${pkg.price}</p>
+                                        <ul className='mt-4 space-y-2 text-sm text-gray-600 flex-grow'>
+                                            {pkg.features.map(feature => (
+                                                <li key={feature} className='flex items-start gap-2'>
+                                                    <CheckCircle className='w-4 h-4 text-green-500 mt-0.5 flex-shrink-0' />
+                                                    <span>{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </Card>
                                 ))}
                             </div>
@@ -179,3 +187,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
+
+    

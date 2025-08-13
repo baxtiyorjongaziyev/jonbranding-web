@@ -6,9 +6,24 @@ export const servicePrices = {
 };
 
 export const basePackages = [
-    { id: 'A', name: 'Logo', price: servicePrices.logo },
-    { id: 'B', name: 'Logo + Korporativ uslub', price: servicePrices.logo + servicePrices.style },
-    { id: 'C', name: 'Logo + Korporativ uslub + Brandbook', price: servicePrices.logo + servicePrices.style + servicePrices.brandbook },
+    { 
+        id: 'A', 
+        name: 'Logo', 
+        price: servicePrices.logo,
+        features: ["Professional logotip", "2-3 xil konsepsiya", "Vektor formatlar (AI, SVG)"]
+    },
+    { 
+        id: 'B', 
+        name: 'Start', 
+        price: servicePrices.logo + servicePrices.style,
+        features: ["'Logo' paketidagi hamma narsa", "Korporativ uslub (rang, shrift)", "Vizitka, blank dizayni"]
+    },
+    { 
+        id: 'C', 
+        name: 'Kompleks', 
+        price: servicePrices.logo + servicePrices.style + servicePrices.brandbook,
+        features: ["'Start' paketidagi hamma narsa", "Brenddan foydalanish qo'llanmasi (Brandbook)", "Ijtimoiy tarmoqlar uchun shablonlar"]
+    },
 ];
 
 export const paymentDiscounts = {
@@ -76,3 +91,5 @@ export const generateSummary = (selections: PackageSelections) => {
 
     return summary;
 }
+
+    
