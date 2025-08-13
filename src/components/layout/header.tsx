@@ -51,7 +51,7 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
         </nav>
         <div className="flex items-center gap-2">
           <Button onClick={onContactClick} className="hidden md:flex shadow-ocean animate-subtle-pulse">
-            Hoziroq buyurtma berish
+            Bepul konsultatsiya olish
           </Button>
           <Sheet>
             <SheetTrigger asChild>
@@ -82,7 +82,7 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
                     </a>
                  </div>
                  <Button onClick={onContactClick} className="w-full shadow-ocean mt-4 animate-subtle-pulse">
-                  Hoziroq buyurtma berish
+                  Bepul konsultatsiya olish
                 </Button>
               </nav>
             </SheetContent>
