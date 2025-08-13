@@ -4,18 +4,18 @@ import { Target, ListChecks, Star } from 'lucide-react';
 const values = [
   {
     icon: Target,
-    title: "Strategiya birinchi o'rinda",
-    description: "Biz har bir loyihani chuqur tahlil va strategiya bilan boshlaymiz. Dizayn shunchaki bezak emas, balki biznes maqsadingizga erishish vositasidir."
+    title: "Strategik yondashuv",
+    description: "Biz shunchaki chiroyli rasm chizmaymiz. Har bir dizayn elementi sotuvingizni oshirishga va brendingizni mustahkamlashga xizmat qiladi."
   },
   {
     icon: ListChecks,
-    title: "Aniq ish jarayoni",
+    title: "Shaffof jarayon",
     description: "Brief → Tahlil → Strategiya → Dizayn → Topshirish. Har bir bosqichda siz bilan yaqin aloqada bo'lamiz va jarayonni to'liq nazorat qilasiz."
   },
   {
     icon: Star,
-    title: "Natijalar o'zi gapiradi",
-    description: "Bizning portfoliomiz va mijozlarimizning ijobiy fikrlari - ishimiz sifatining eng yaxshi isboti. Biz uzoq muddatli hamkorlikka intilamiz."
+    title: "Natija va tajriba",
+    description: "50 dan ortiq muvaffaqiyatli loyihalar va mamnun mijozlar - ishimiz sifatining eng yaxshi isboti. Biz uzoq muddatli hamkorlikka intilamiz."
   }
 ];
 
