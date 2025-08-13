@@ -22,22 +22,21 @@ export async function POST(request: Request) {
         let packageInfo = '';
         if (packageSummary && totalPrice !== undefined) {
           packageInfo = `
-*Paket:*
+*Tanlangan paket:*
 \`\`\`
 ${packageSummary}
+Yakuniy narx: $${totalPrice.toLocaleString('en-US')}
 \`\`\`
-*Jami narx: $${totalPrice.toLocaleString('en-US')}*
           `;
         }
         
         const telegramMessage = `
-*Yangi Buyurtma (Jon.Branding)*
+*Yangi xabar (Jon.Branding)*
 
-*Mijoz:*
-  - *Ism:* ${fullName}
-  - *Telefon:* \`${phone}\`
-  - *Telegram:* ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
-  - *Izoh:* ${notes || 'Kiritilmagan'}
+*Mijoz:* ${fullName}
+*Telefon:* \`${phone}\`
+*Telegram:* ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
+*Izoh:* ${notes || 'Kiritilmagan'}
 ${packageInfo}
         `.trim();
         
@@ -62,9 +61,7 @@ ${packageInfo}
         const result = await response.json();
 
         if (!result.ok) {
-            // Log the detailed error from Telegram
             console.error("Telegram API Error:", result);
-            // Return the specific error description from Telegram to the client
             return NextResponse.json({ ok: false, error: `Telegramga yuborishda xatolik: ${result.description || 'Noma\'lum xato'}` }, { status: response.status });
         }
 
