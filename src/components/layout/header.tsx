@@ -43,7 +43,7 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
                 <Phone size={16} />
                 +998 33 645 00 97
               </a>
-              <a href="https://t.me/baxtiyorjongaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-medium text-gray-600 transition-colors hover:text-primary">
+              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-medium text-gray-600 transition-colors hover:text-primary">
                 <Send size={16} />
                 Telegram
               </a>
@@ -76,7 +76,7 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
                       <Phone size={20} />
                       +998 33 645 00 97
                     </a>
-                    <a href="https://t.me/baxtiyorjongaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-gray-800 transition-colors hover:text-primary">
+                    <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-gray-800 transition-colors hover:text-primary">
                       <Send size={20} />
                       Telegram orqali bog'lanish
                     </a>
