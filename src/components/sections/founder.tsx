@@ -6,7 +6,7 @@ import { Medal, Globe, Zap, Users } from 'lucide-react';
 
 const founderPoints = [
   { icon: Medal, text: "50+ dan ortiq loyihalar" },
-  { icon: Globe, text: "3 xil davlatda tajriba" },
+  { icon: Globe, text: "Xalqaro tajriba" },
   { icon: Zap, text: "Tez va samarali aloqa" },
   { icon: Users, text: "Aniq va shaffof ish jarayoni" },
 ];
@@ -37,7 +37,7 @@ const Founder = () => {
               Salom! Men Baxtiyorjon, Jon.Branding asoschisi. PCG “Tez Natija 3” kursdoshlarimga va boshqa biznes egalariga o'z brendlarini keyingi bosqichga olib chiqishda yordam beraman.
             </p>
             <p className="mt-4 text-lg text-gray-700">
-              Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish.
+              Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish. Chet eldagi o'zbek tadbirkorlari bilan Tojikiston, Rossiya, Qirg'iziston, Yaponiya, Dubay (BAA), AQSH, Turkiya va Afrika mamlakatlarida ishlash tajribamiz bor.
             </p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {founderPoints.map((point, index) => (
