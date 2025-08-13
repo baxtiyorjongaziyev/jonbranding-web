@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/icons/logo';
-import { Phone, Send } from 'lucide-react';
+import { Phone, Send, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -34,6 +34,10 @@ const Footer = () => {
               <li className="flex items-center gap-2">
                 <Phone size={18} />
                 <a href="tel:+998336450097" className="hover:text-primary transition-colors">+998 33 645 00 97</a>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin size={18} className="mt-1 flex-shrink-0" />
+                <span className="hover:text-primary transition-colors">O‘zbekiston, Toshkent shahri</span>
               </li>
             </ul>
           </div>
