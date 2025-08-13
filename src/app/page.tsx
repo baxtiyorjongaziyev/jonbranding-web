@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/layout/header';
 import Hero from '@/components/sections/hero';
 import Founder from '@/components/sections/founder';
+import Stats from '@/components/sections/stats';
 import WhyUs from '@/components/sections/why-us';
 import TargetAudience from '@/components/sections/target-audience';
 import Services from '@/components/sections/services';
@@ -80,6 +81,7 @@ const Home: FC = () => {
       <main className="flex-grow">
         <Hero onPrimaryClick={() => handleOpenModal('Bosh sahifadagi asosiy tugma')} />
         <Founder />
+        <Stats />
         <WhyUs />
         <TargetAudience />
         <Services />
