@@ -7,27 +7,26 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import Image from 'next/image';
+import { Card } from '@/components/ui/card';
 
-const logos = [
-  { name: 'Korzinka', src: 'https://placehold.co/140x60.png', hint: 'Korzinka supermarket logo' },
-  { name: 'Uzum', src: 'https://placehold.co/140x60.png', hint: 'Uzum market logo' },
-  { name: 'Artel', src: 'https://placehold.co/140x60.png', hint: 'Artel electronics logo' },
-  { name: 'Texnomart', src: 'https://placehold.co/140x60.png', hint: 'Texnomart electronics store logo' },
-  { name: 'Click', src: 'https://placehold.co/140x60.png', hint: 'Click payment system logo' },
-  { name: 'Payme', src: 'https://placehold.co/140x60.png', hint: 'Payme payment system logo' },
-  { name: 'TBC Bank', src: 'https://placehold.co/140x60.png', hint: 'TBC Bank Uzbekistan logo' },
-  { name: 'Akfa', src: 'https://placehold.co/140x60.png', hint: 'Akfa Group logo' },
+const brands = [
+  'Korsun', 'Boyarin', 'Sarmilk', 'M-Karim', 'Prime Fit', 'Revo', 'To\'maris', 
+  'Aisha Mebel', 'Den Aroma', 'Velzo', 'Bodomchi', 'Fidda by Sevara', 'Viton',
+  'Ravza Mebel', 'Coloray', 'Dayan Color', 'Bekbazar', 'Climart', 'Sunnah Products',
+  'Petron Polymer', 'Perfona', 'Esviro', 'Savod'
 ];
+
+const brandsPart1 = brands.slice(0, Math.ceil(brands.length / 2));
+const brandsPart2 = brands.slice(Math.ceil(brands.length / 2));
 
 const TrustedBy = () => {
   return (
-    <section className="py-12 bg-white">
+    <section className="py-12 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <p className="text-center text-sm font-bold uppercase tracking-wider text-gray-500">
           Bizga ishonch bildirgan kompaniyalar
         </p>
-        <div className="mt-8">
+        <div className="mt-8 flex flex-col gap-4">
           <Carousel
             plugins={[
               Autoplay({
@@ -42,15 +41,43 @@ const TrustedBy = () => {
             }}
             className="w-full"
           >
-            <CarouselContent className="-ml-8">
-              {logos.concat(logos).map((logo, index) => (
+            <CarouselContent className="-ml-4">
+              {brandsPart1.map((brand, index) => (
                 <CarouselItem
                   key={index}
-                  className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 pl-8"
+                  className="basis-auto pl-4"
                 >
-                  <div className="flex items-center justify-center h-20 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                     <Image src={logo.src} alt={logo.name} width={140} height={60} className="object-contain" data-ai-hint={logo.hint}/>
-                  </div>
+                  <Card className="px-5 py-3 whitespace-nowrap bg-secondary/50 border-gray-200">
+                    <p className="font-semibold text-gray-700">{brand}</p>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+           <Carousel
+            plugins={[
+              Autoplay({
+                delay: 2000,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+                direction: 'right',
+              }),
+            ]}
+            opts={{
+              align: 'start',
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {brandsPart2.map((brand, index) => (
+                <CarouselItem
+                  key={index}
+                  className="basis-auto pl-4"
+                >
+                  <Card className="px-5 py-3 whitespace-nowrap bg-secondary/50 border-gray-200">
+                     <p className="font-semibold text-gray-700">{brand}</p>
+                  </Card>
                 </CarouselItem>
               ))}
             </CarouselContent>
