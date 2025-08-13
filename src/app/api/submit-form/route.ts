@@ -11,10 +11,10 @@ async function sendToTelegram(message: string) {
         throw new Error("Server configuration error: Telegram bot not configured.");
     }
     
-    // This logic to prepend -100 seems incorrect based on user feedback.
-    // The user provided ID seems to work directly. Let's adjust.
     // The user-provided chat ID was "1002566480563", let's use the corrected form.
-    chatId = "-1002566480563";
+    if (!chatId.startsWith('-100')) {
+      chatId = "-100" + chatId;
+    }
     
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
     try {
