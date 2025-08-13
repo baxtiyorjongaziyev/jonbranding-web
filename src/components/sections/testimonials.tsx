@@ -6,31 +6,31 @@ import { Star } from 'lucide-react';
 const testimonials = [
   {
     name: "Sevara Xolmanova",
-    company: "Fidda",
+    company: "Fidda by Sevara asoschisi",
     avatar: "SX",
     imageHint: "female entrepreneur portrait",
-    quote: "Jon.Branding jamoasi bilan ishlash biz uchun juda katta yutuq bo'ldi. Ular shunchaki logotip chizib berishmadi, balki brendimizning ruhini, maqsadini tushunib, uni dizayn tiliga o'girib berishdi. Natijadan 100% mamnunmiz."
+    quote: "Men bu jamoa bn ishlab ko'rdim menga juda yoqdi samarali va natijasi siz kutgandanda A'lo bo'larkan brendlashni xam stikerlash va patenlashni xam berganman 7 oyda aniq boladi Hudo xohlasa Halol ishlarkansilar Allox rozi bo'lsin silardan juda xursand bo'ldim ishilarga rivoj Rahmat."
   },
   {
     name: "Sherzod Beknazarov",
-    company: "Incontrol",
+    company: "Incontrol Consulting asoschisi",
     avatar: "SB",
     imageHint: "male business owner",
-    quote: "Baxtiyorjon va uning jamoasi o'z ishining ustalari. Jarayon boshidan oxirigacha juda aniq va shaffof olib borildi. Eng muhimi, natija biz kutgandan ham a'lo chiqdi. Korporativ uslubimiz endi xalqaro darajada."
+    quote: "Did, estetik did. Bu tug'ma bo'ladimi yoki orttirilgan ko'nikma bo'ladimi? Shunday estetik did egasidan biri Baxtiyorjon - Bizni Incontrol va Sherzod Beknazarov logolarini qilishda bizga yordam berdi. Baxtiyorjonga minnatdorchilik bildirmoqchimiz. Rahmat."
   },
   {
     name: "Nodirbek",
-    company: "Barakah Restoran",
+    company: "Barakah Restoran asoschisi",
     avatar: "N",
     imageHint: "restaurant manager portrait",
-    quote: "Restoranimiz uchun yangi nom va logotip kerak edi. Jon.Branding bizga shunday variantlarni taklif qildiki, tanlashga qiynalib qoldik. Ularning kreativ yondashuvi va bozor tushunchasi juda kuchli."
+    quote: "Esingizda bo‘lsa, 3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Sizlarga katta rahmat, ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka! 🤝🏻😊"
   },
   {
     name: "Javohir Haqberdiyev",
-    company: "Perfona",
+    company: "Perfona asoschisi",
     avatar: "JH",
     imageHint: "tech startup founder",
-    quote: "Bizga faqat dizayn emas, strategik hamkor kerak edi. Jon.Branding bu vazifani a'lo darajada uddaladi. Ular bizning g'oyamizni chuqur o'rganib, unga mos vizual qiyofa yaratib berishdi."
+    quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!"
   },
 ];
 
