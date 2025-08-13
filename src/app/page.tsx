@@ -25,6 +25,7 @@ import { Button } from '@/components/ui/button';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
+import CtaBlock from '@/components/sections/cta-block';
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
@@ -115,6 +116,12 @@ const Home: FC = () => {
         <Founder />
         <Stats />
         <WhyUs />
+        <CtaBlock 
+          onCtaClick={handleOpenModal}
+          title="Brendingizni keyingi bosqichga tayyormisiz?"
+          description="Bizning strategik yondashuvimiz biznesingiz uchun qanday qiymat yaratishini bilib oling."
+          buttonText="Strategiyani muhokama qilish"
+        />
         <TargetAudience />
         <Services />
         <Video />
@@ -123,6 +130,12 @@ const Home: FC = () => {
         <Testimonials />
         <Process />
         <Gallery />
+        <CtaBlock 
+          onCtaClick={handleOpenModal}
+          title="Sizning brendingiz ham shunday ko'zga ko'rinishi mumkin."
+          description="Portfolio sizga ma'qul keldimi? Keling, sizning biznesingiz uchun ham shunday ajoyib natijalar yaratamiz."
+          buttonText="Loyiha uchun bog'lanish"
+        />
         <Faq />
         <Offer onCTAClick={handleOpenModal} />
       </main>
