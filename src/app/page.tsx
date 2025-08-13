@@ -6,6 +6,7 @@ import Header from '@/components/layout/header';
 import Hero from '@/components/sections/hero';
 import Founder from '@/components/sections/founder';
 import WhyUs from '@/components/sections/why-us';
+import TargetAudience from '@/components/sections/target-audience';
 import Services from '@/components/sections/services';
 import PackageBuilder from '@/components/sections/package-builder';
 import BeforeAfter from '@/components/sections/before-after';
@@ -76,6 +77,7 @@ const Home: FC = () => {
         <Hero onPrimaryClick={() => handleOpenModal('Bosh sahifadagi asosiy tugma')} />
         <Founder />
         <WhyUs />
+        <TargetAudience />
         <Services />
         <PackageBuilder onOrderNow={handleOrderNow} />
         <BeforeAfter />
