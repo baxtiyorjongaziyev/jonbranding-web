@@ -22,7 +22,8 @@ async function sendToTelegram(message: string) {
     if (!result.ok) {
         console.error("Telegram API Error:", result);
         console.error("Used Chat ID:", chatId); // Log the chat_id that was used
-        throw new Error(`Failed to send message to Telegram. Response: ${JSON.stringify(result)}`);
+        // Include the used chatId in the error message for easier debugging from the client-side
+        throw new Error(`Failed to send message to Telegram. Used Chat ID: ${chatId}. Response: ${JSON.stringify(result)}`);
     }
     return result;
 }
