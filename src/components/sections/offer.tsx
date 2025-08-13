@@ -63,7 +63,11 @@ const CountdownTimer = () => {
     );
 };
 
-const Offer: FC = () => {
+interface OfferProps {
+  onCTAClick: () => void;
+}
+
+const Offer: FC<OfferProps> = ({ onCTAClick }) => {
     return (
         <section id="offer" className="py-16 sm:py-24 bg-dark-blue text-white">
             <div className="container mx-auto px-4">
@@ -81,10 +85,8 @@ const Offer: FC = () => {
                     <div className="mt-8 bg-black/20 rounded-2xl p-6">
                         <CountdownTimer />
                     </div>
-                    <Button asChild size="lg" className="mt-8 text-lg px-10 py-7 bg-accent text-dark-blue hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform">
-                        <Link href="/#package-builder">
-                            50% chegirmadan foydalanish
-                        </Link>
+                    <Button onClick={onCTAClick} size="lg" className="mt-8 text-lg px-10 py-7 bg-accent text-dark-blue hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform">
+                        50% chegirmadan foydalanish
                     </Button>
                 </div>
             </div>

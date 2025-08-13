@@ -85,7 +85,7 @@ const Home: FC = () => {
         <Process />
         <Gallery />
         <Faq />
-        <Offer />
+        <Offer onCTAClick={handleOpenModal} />
       </main>
       <Footer />
       <ContactModal
