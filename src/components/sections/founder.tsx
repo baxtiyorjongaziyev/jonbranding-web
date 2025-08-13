@@ -16,14 +16,16 @@ const Founder = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
             <Card className="overflow-hidden shadow-xl rounded-2xl">
-              <Image
-                src="https://img2.teletype.in/files/dd/c6/ddc6f06a-bc2b-4a67-b184-3380067a038e.jpeg"
-                alt="Baxtiyorjon Gaziyev, Jon.Branding asoschisi"
-                width={600}
-                height={700}
-                className="w-full h-auto object-cover"
-                data-ai-hint="professional male portrait"
-              />
+              <div className="aspect-w-1 aspect-h-1 md:aspect-w-4 md:aspect-h-5">
+                <Image
+                  src="https://img2.teletype.in/files/dd/c6/ddc6f06a-bc2b-4a67-b184-3380067a038e.jpeg"
+                  alt="Baxtiyorjon Gaziyev, Jon.Branding asoschisi"
+                  width={600}
+                  height={600}
+                  className="w-full h-full object-cover object-top"
+                  data-ai-hint="professional male portrait"
+                />
+              </div>
             </Card>
           </div>
           <div className="lg:order-first">
