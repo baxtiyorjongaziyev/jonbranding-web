@@ -14,8 +14,8 @@ const values = [
   },
   {
     icon: Star,
-    title: "Natija va tajriba",
-    description: "50 dan ortiq muvaffaqiyatli loyihalar va mamnun mijozlar - ishimiz sifatining eng yaxshi isboti. Biz uzoq muddatli hamkorlikka intilamiz."
+    title: "Natija va Sadoqat",
+    description: "50 dan ortiq loyiha va eng muhimi - mijozlarimizning 90% bizni o'z tanishlariga tavsiya qilishadi. Bu biz uchun eng katta yutuq."
   }
 ];
 
