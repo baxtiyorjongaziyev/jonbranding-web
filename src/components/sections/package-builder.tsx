@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { servicePrices, calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Zap } from 'lucide-react';
 
 interface PackageBuilderProps {
     onOrderNow: (summary: string, price: number) => void;
@@ -158,10 +158,16 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                         
                         <div>
                             <h3 className="text-xl font-bold text-dark-blue mb-4">2. Chegirma</h3>
-                             <Card className="p-1 rounded-2xl shadow-sm bg-yellow-100/50 border border-yellow-300">
-                                <div className="flex items-center space-x-4 p-4 rounded-lg cursor-pointer" onClick={() => setIsPcgMember(prev => !prev)}>
-                                    <Checkbox id="pcg" checked={isPcgMember} onCheckedChange={(checked) => setIsPcgMember(Boolean(checked))} className="h-6 w-6"/>
-                                    <Label htmlFor="pcg" className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
+                             <Card 
+                                onClick={() => setIsPcgMember(prev => !prev)}
+                                className={cn(
+                                    "p-1 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer",
+                                    isPcgMember ? "bg-accent/20 border-accent ring-2 ring-accent" : "bg-white hover:shadow-md"
+                                )}
+                             >
+                                <div className="flex items-center space-x-4 p-6 rounded-lg">
+                                    <Checkbox id="pcg" checked={isPcgMember} onCheckedChange={(checked) => setIsPcgMember(Boolean(checked))} className="h-8 w-8"/>
+                                    <Label htmlFor="pcg" className="text-lg font-bold leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
                                         PCG "Tez Natija 3" kursi a'zosiman (-50% chegirma)
                                     </Label>
                                 </div>
