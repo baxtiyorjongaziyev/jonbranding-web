@@ -1,3 +1,4 @@
+
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Building, Rocket, Store, Gem } from 'lucide-react';
 
@@ -6,13 +7,13 @@ const targetAudiences = [
     icon: Rocket,
     title: "Startaplar va yangi bizneslar",
     description: "Bozorga kuchli va esda qolarli kirib kelishni xohlaydiganlar uchun.",
-    problems: ["Brendim yo'q", "Qanday boshlashni bilmayapman", "Raqobatchilardan ajralib turishim kerak"]
+    problems: ["Brendim yo'q, bozor meni tanimaydi", "Qanday boshlashni bilmayapman", "Raqobatchilardan qanday ajralib turish mumkin?"]
   },
   {
     icon: Building,
     title: "Mavjud kompaniyalar",
     description: "Brendingini yangilamoqchi yoki rebrending qilmoqchi bo'lganlar uchun.",
-    problems: ["Dizaynim eski", "Sotuvlarim tushib ketyapti", "Brendimiz zamon talabiga javob bermayapti"]
+    problems: ["Brendim eskirgan, jozibador emas", "Sotuvlarimiz tushib ketyapti", "Biznesimiz o'sishdan to'xtab qoldi"]
   },
   {
     icon: Store,
@@ -24,7 +25,7 @@ const targetAudiences = [
     icon: Gem,
     title: "Premium segment",
     description: "O'z xizmat yoki mahsulotining yuqori qiymatini ko'rsatmoqchi bo'lganlar uchun.",
-    problems: ["O'zimni qimmat sota olmayapman", "Mijozlarim qiymatimni tushunmayapti", "Statusimni ko'rsatishim kerak"]
+    problems: ["O'zimni qimmat sota olmayapman", "Mijozlarim qiymatimni tushunmayapti", "Yuqori statusimni ko'rsatishim kerak"]
   }
 ];
 
