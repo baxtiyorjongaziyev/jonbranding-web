@@ -1,3 +1,4 @@
+
 export const servicePrices = {
     naming: 550,
     logo: 550,
@@ -40,7 +41,8 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     let discountValue = 0;
     let discountType = "";
 
-    if (isPcgMember) {
+    // Apply discount only if PCG member and base price is over $550
+    if (isPcgMember && basePrice > 550) {
         discountValue = pcgDiscount;
         discountType = 'PCG Tez Natija 3 uchun -50% chegirma';
     }
