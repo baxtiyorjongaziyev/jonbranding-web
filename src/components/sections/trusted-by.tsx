@@ -9,15 +9,15 @@ import {
 import Autoplay from 'embla-carousel-autoplay';
 import { Card } from '@/components/ui/card';
 
-const brands = [
+const brandsMovingLeft = [
   'Korsun', 'Boyarin', 'Sarmilk', 'M-Karim', 'Prime Fit', 'Revo', 'To\'maris', 
-  'Aisha Mebel', 'Den Aroma', 'Velzo', 'Bodomchi', 'Fidda by Sevara', 'Viton',
-  'Ravza Mebel', 'Coloray', 'Dayan Color', 'Bekbazar', 'Climart', 'Sunnah Products',
-  'Petron Polymer', 'Perfona', 'Esviro', 'Savod'
+  'Aisha Mebel', 'Den Aroma', 'Velzo', 'Bodomchi'
+];
+const brandsMovingRight = [
+  'Fidda by Sevara', 'Viton', 'Ravza Mebel', 'Coloray', 'Dayan Color', 'Bekbazar', 
+  'Climart', 'Sunnah Products', 'Petron Polymer', 'Perfona', 'Esviro', 'Savod'
 ];
 
-const brandsPart1 = brands.slice(0, Math.ceil(brands.length / 2));
-const brandsPart2 = brands.slice(Math.ceil(brands.length / 2));
 
 const TrustedBy = () => {
   return (
@@ -42,7 +42,7 @@ const TrustedBy = () => {
             className="w-full"
           >
             <CarouselContent className="-ml-4">
-              {brandsPart1.map((brand, index) => (
+              {brandsMovingLeft.map((brand, index) => (
                 <CarouselItem
                   key={index}
                   className="basis-auto pl-4"
@@ -70,7 +70,7 @@ const TrustedBy = () => {
             className="w-full"
           >
             <CarouselContent className="-ml-4">
-              {brandsPart2.map((brand, index) => (
+              {brandsMovingRight.map((brand, index) => (
                 <CarouselItem
                   key={index}
                   className="basis-auto pl-4"
