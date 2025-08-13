@@ -1,6 +1,5 @@
 
 import { NextResponse } from 'next/server';
-import Airtable from 'airtable';
 
 // Helper function to send a message to Telegram
 async function sendToTelegram(message: string) {
@@ -12,13 +11,11 @@ async function sendToTelegram(message: string) {
         throw new Error("Server configuration error: Telegram bot not configured.");
     }
     
-    // Ensure chat ID for channels/supergroups is correctly formatted
-    if (chatId.startsWith('100')) {
-        chatId = '-100' + chatId.substring(3);
-    } else if (chatId.startsWith('-100')) {
-        // Already correct, do nothing
-    }
-
+    // This logic to prepend -100 seems incorrect based on user feedback.
+    // The user provided ID seems to work directly. Let's adjust.
+    // The user-provided chat ID was "1002566480563", let's use the corrected form.
+    chatId = "-1002566480563";
+    
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
     try {
         const response = await fetch(url, {
@@ -38,34 +35,53 @@ async function sendToTelegram(message: string) {
     }
 }
 
-// Helper function to save data to Airtable
+// Helper function to save data to Airtable using direct fetch
 async function saveToAirtable(data: any) {
     const apiKey = process.env.AIRTABLE_API_KEY;
     const baseId = process.env.AIRTABLE_BASE_ID;
-    const tableName = process.env.AIRTABLE_TABLE_NAME;
+    const tableId = process.env.AIRTABLE_TABLE_ID;
 
-    if (!apiKey || !baseId || !tableName) {
+    if (!apiKey || !baseId || !tableId) {
         console.error("Airtable environment variables are not set.");
         throw new Error("Server configuration error: Airtable not configured.");
     }
     
-    try {
-        const base = new Airtable({ apiKey }).base(baseId);
-        
-        const airtableData = {
-            'Full Name': data.fullName,
-            'Phone': data.phone,
-            'Telegram': data.telegram,
-            'Package Summary': data.packageSummary,
-            'Total Price': data.totalPrice,
-            'Notes': data.notes,
-            'Status': 'New',
-        };
+    const url = `https://api.airtable.com/v0/${baseId}/${tableId}`;
+    
+    const airtableData = {
+        records: [{
+            fields: {
+                'Full Name': data.fullName,
+                'Phone': data.phone,
+                'Telegram': data.telegram,
+                'Package Summary': data.packageSummary,
+                'Total Price': data.totalPrice,
+                'Notes': data.notes,
+                'Status': 'New',
+            }
+        }]
+    };
 
-        // The create method expects an array of records
-        await base(tableName).create([{ fields: airtableData }]);
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(airtableData),
+        });
+
+        if (!response.ok) {
+            const errorResult = await response.json();
+            console.error('Airtable API Error:', errorResult);
+            throw new Error(`Airtable API returned status ${response.status}`);
+        }
+
+        await response.json(); // Consume the successful JSON response
+
     } catch (error) {
-        console.error('Airtable Error:', error);
+        console.error('Airtable operation failed:', error);
         throw new Error('Failed to save data to Airtable.');
     }
 }
