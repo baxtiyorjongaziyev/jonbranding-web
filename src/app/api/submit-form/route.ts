@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
 
     if (!botToken || !chatId) {
-        console.error("Telegram environment variables not set.");
+        console.error("Server Configuration Error: Telegram environment variables (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID) are not set.");
         return NextResponse.json({ ok: false, error: 'Serverda Telegram sozlamalari mavjud emas.' }, { status: 500 });
     }
 
@@ -22,18 +22,18 @@ export async function POST(request: Request) {
         let packageInfo = '';
         if (packageSummary && totalPrice !== undefined) {
           packageInfo = `
-*📦 Tanlangan paket:*
+*Paket:*
 \`\`\`
 ${packageSummary}
 \`\`\`
-*💰 Yakuniy narx: $${totalPrice.toLocaleString('en-US')}*
+*Jami narx: $${totalPrice.toLocaleString('en-US')}*
           `;
         }
         
         const telegramMessage = `
-*🚀 Yangi buyurtma (Jon.Branding)*
+*Yangi Buyurtma (Jon.Branding)*
 
-*👤 Mijoz ma'lumotlari:*
+*Mijoz:*
   - *Ism:* ${fullName}
   - *Telefon:* \`${phone}\`
   - *Telegram:* ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
@@ -61,15 +61,17 @@ ${packageInfo}
 
         const result = await response.json();
 
-        if (!response.ok) {
+        if (!result.ok) {
+            // Log the detailed error from Telegram
             console.error("Telegram API Error:", result);
-            return NextResponse.json({ ok: false, error: `Telegramga xabar yuborishda xatolik: ${result.description || 'Noma\'lum xato'}` }, { status: 500 });
+            // Return the specific error description from Telegram to the client
+            return NextResponse.json({ ok: false, error: `Telegramga yuborishda xatolik: ${result.description || 'Noma\'lum xato'}` }, { status: response.status });
         }
 
         return NextResponse.json({ ok: true, message: 'So\'rovingiz muvaffaqiyatli yuborildi.' });
 
     } catch (error: any) {
         console.error("Internal Server Error:", error);
-        return NextResponse.json({ ok: false, error: 'Ichki server xatoligi yuz berdi.' }, { status: 500 });
+        return NextResponse.json({ ok: false, error: 'Serverda ichki xatolik yuz berdi. Iltimos, administratorga murojaat qiling.' }, { status: 500 });
     }
 }
