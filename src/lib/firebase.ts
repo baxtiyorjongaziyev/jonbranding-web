@@ -6,12 +6,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  "projectId": "brandboost-landing",
+  "appId": "1:438222875372:web:e38a8a694ebd70496893c9",
+  "storageBucket": "brandboost-landing.firebasestorage.app",
+  "apiKey": "AIzaSyDwolBRXF_G3eRonaj6-oqalmOl2bYcDIk",
+  "authDomain": "brandboost-landing.firebaseapp.com",
+  "messagingSenderId": "438222875372"
 };
 
 // Initialize Firebase
