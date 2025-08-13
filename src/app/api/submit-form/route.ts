@@ -4,16 +4,11 @@ import { NextResponse } from 'next/server';
 // Helper function to send a message to Telegram
 async function sendToTelegram(message: string) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    let chatId = process.env.TELEGRAM_CHAT_ID;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
         console.error("Telegram environment variables are not set.");
         throw new Error("Server configuration error: Telegram bot not configured.");
-    }
-    
-    // Ensure chat ID is in the correct format for channels/supergroups
-    if (!chatId.startsWith('-100')) {
-      chatId = "-100" + chatId.replace(/^-100/, '');
     }
     
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
