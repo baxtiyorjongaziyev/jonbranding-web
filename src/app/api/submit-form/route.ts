@@ -2,11 +2,11 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    const botToken = '7738413085:AAE_CYNnbpyoW5KiheUTJOPBmz_jHLVWgWc';
+    const chatId = '-1002566480563';
 
     if (!botToken || !chatId) {
-        console.error("Server Configuration Error: Telegram environment variables (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID) are not set.");
+        console.error("Server Configuration Error: Telegram token or chat ID is missing in the code.");
         return NextResponse.json({ ok: false, error: "Serverda Telegram sozlamalari mavjud emas." }, { status: 500 });
     }
 
