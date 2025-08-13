@@ -2,6 +2,14 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+
+    if (!botToken || !chatId) {
+        console.error("Telegram environment variables not set.");
+        return NextResponse.json({ ok: false, error: 'Serverda Telegram sozlamalari mavjud emas.' }, { status: 500 });
+    }
+
     try {
         const body = await request.json();
         const { fullName, phone, telegram, notes, packageSummary, totalPrice } = body;
@@ -10,14 +18,6 @@ export async function POST(request: Request) {
             return NextResponse.json({ ok: false, error: 'Ism va telefon raqam kiritilishi shart' }, { status: 400 });
         }
         
-        const botToken = process.env.TELEGRAM_BOT_TOKEN;
-        const chatId = process.env.TELEGRAM_CHAT_ID;
-
-        if (!botToken || !chatId) {
-            console.error("Telegram environment variables not set.");
-            return NextResponse.json({ ok: false, error: 'Serverda Telegram sozlamalari mavjud emas.' }, { status: 500 });
-        }
-
         let packageInfo = '';
         if (packageSummary && totalPrice !== undefined) {
           packageInfo = `
