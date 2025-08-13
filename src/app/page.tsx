@@ -23,13 +23,16 @@ import ContactModal from '@/components/contact-modal';
 import ExitIntentModal from '@/components/exit-intent-modal';
 import { Button } from '@/components/ui/button';
 import { useLocalStorage } from '@/hooks/use-local-storage';
-import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
+import { calculatePackagePrice, generateSummary, type PriceDetails } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const Home: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [packageSummary, setPackageSummary] = useState('');
-  const [totalPrice, setTotalPrice] = useState(0);
+  // Let's use a single state for all modal-related package data
+  const [modalPackageInfo, setModalPackageInfo] = useState<{
+    summary: string;
+    priceDetails: PriceDetails | null;
+  }>({ summary: '', priceDetails: null });
 
   const [selectedServices, setSelectedServices] = useLocalStorage('selectedServices', {
     naming: false,
@@ -40,28 +43,27 @@ const Home: FC = () => {
   const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', true);
   
   const [mobileCtaPrice, setMobileCtaPrice] = useState(0);
-  const [packageDetailsForModal, setPackageDetailsForModal] = useState({ summary: '', price: 0 });
+  const [packageDetailsForModal, setPackageDetailsForModal] = useState<{ summary: string; price: number; priceDetails: PriceDetails | null;}>({ summary: '', price: 0, priceDetails: null });
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
       setIsClient(true);
   }, []);
 
-
   useEffect(() => {
     if (isClient) {
       const selections = { selectedServices, isPcgMember };
-      const { final } = calculatePackagePrice(selections);
-      setMobileCtaPrice(final);
+      const priceDetails = calculatePackagePrice(selections);
+      setMobileCtaPrice(priceDetails.final);
 
       const summary = generateSummary(selections);
-      setPackageDetailsForModal({ summary, price: final });
+      setPackageDetailsForModal({ summary, price: priceDetails.final, priceDetails });
     }
   }, [selectedServices, isPcgMember, isClient]);
 
-  const handleOpenModal = (summary = 'Umumiy so\'rov', price = 0) => {
-    setPackageSummary(summary);
-    setTotalPrice(price);
+ const handleOpenModal = (summary = 'Umumiy so\'rov', priceDetails: PriceDetails | null = null) => {
+    setModalPackageInfo({ summary, priceDetails });
     setModalOpen(true);
   };
 
@@ -69,12 +71,14 @@ const Home: FC = () => {
     setModalOpen(false);
   };
   
-  const handleOrderNow = (summary: string, price: number) => {
-    handleOpenModal(summary, price);
+  const handleOrderNow = (summary: string, priceDetails: PriceDetails) => {
+    handleOpenModal(summary, priceDetails);
   };
 
   const handleMobileCtaClick = () => {
-    handleOpenModal(packageDetailsForModal.summary, packageDetailsForModal.price);
+    if (packageDetailsForModal.priceDetails) {
+      handleOpenModal(packageDetailsForModal.summary, packageDetailsForModal.priceDetails);
+    }
   };
 
   return (
@@ -101,10 +105,10 @@ const Home: FC = () => {
       <ContactModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        packageSummary={packageSummary}
-        totalPrice={totalPrice}
+        packageSummary={modalPackageInfo.summary}
+        priceDetails={modalPackageInfo.priceDetails}
       />
-      <ExitIntentModal onPrimaryClick={() => handleOpenModal('Chiqish taklifi', 0)} />
+      <ExitIntentModal onPrimaryClick={() => handleOpenModal('Chiqish taklifi', null)} />
 
       {/* Mobile Sticky CTA Bar */}
       <div className="sticky bottom-0 md:hidden bg-white/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">

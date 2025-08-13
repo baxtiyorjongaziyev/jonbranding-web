@@ -19,7 +19,15 @@ interface PackageSelections {
     isPcgMember: boolean;
 }
 
-export const calculatePackagePrice = (selections: PackageSelections) => {
+export interface PriceDetails {
+    base: number;
+    final: number;
+    discountApplied: string;
+    discountValue: number;
+}
+
+
+export const calculatePackagePrice = (selections: PackageSelections): PriceDetails => {
     const { selectedServices, isPcgMember } = selections;
     
     let basePrice = 0;

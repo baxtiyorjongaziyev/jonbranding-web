@@ -12,12 +12,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, CheckCircle } from 'lucide-react';
 import { event as trackEvent } from '@/lib/gtag';
+import type { PriceDetails } from '@/lib/pricing';
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   packageSummary: string;
-  totalPrice: number;
+  priceDetails: PriceDetails | null;
 }
 
 const formSchema = z.object({
@@ -29,7 +30,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice }) => {
+const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, priceDetails }) => {
   const [isSubmitting, setSubmitting] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const { toast } = useToast();
@@ -62,7 +63,6 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         value = '+998';
     }
     
-    // Format to +998 XX XXX XX XX
     let formatted = '+998';
     const numbers = value.substring(4).replace(/\s/g, '');
     if (numbers.length > 0) formatted += ' ' + numbers.substring(0, 2);
@@ -83,7 +83,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         body: JSON.stringify({
             ...data,
             packageSummary,
-            totalPrice
+            totalPrice: priceDetails?.final ?? 0,
         }),
       });
 
@@ -93,7 +93,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       }
       
       trackEvent('generate_lead', {
-        value: totalPrice,
+        value: priceDetails?.final ?? 0,
         currency: 'USD',
         package_summary: packageSummary,
       });
@@ -114,6 +114,39 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       setSubmitting(false);
     }
   };
+  
+  const renderPackageInfo = () => {
+    if (!priceDetails || priceDetails.base === 0) return null;
+
+    const hasDiscount = priceDetails.discountApplied;
+
+    return (
+        <div className="mb-4 text-center text-sm text-muted-foreground bg-secondary/50 p-3 rounded-lg">
+            Sizning tanlovingiz: {packageSummary.replace('Tanlangan xizmatlar: ', '').replace(/\| Chegirma.*$/, '')}.
+            {hasDiscount ? (
+                <>
+                    <br /> Asl narx: <span className="line-through">${priceDetails.base.toLocaleString('en-US')}</span>.
+                    <span className="font-bold text-primary"> {priceDetails.discountApplied} bilan yakuniy narx ${priceDetails.final.toLocaleString('en-US')}</span>.
+                </>
+            ) : (
+                <>
+                    <br /> Jami narx: <span className="font-bold text-primary">${priceDetails.final.toLocaleString('en-US')}</span>.
+                </>
+            )}
+        </div>
+    );
+  };
+  
+  const getButtonText = () => {
+    if (isSubmitting) {
+      return <Loader2 className="mr-2 h-5 w-5 animate-spin" />;
+    }
+    if (priceDetails && priceDetails.final > 0) {
+      return <>${priceDetails.final.toLocaleString('en-US')} ga buyurtma berish</>;
+    }
+    return 'Yuborish';
+  }
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -131,11 +164,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                 <DialogHeader>
                 <DialogTitle className="text-2xl">Aloqaga chiqish</DialogTitle>
                 <DialogDescription>
-                    Ma'lumotlaringizni qoldiring, biz siz bilan tez orada bog'lanamiz.
+                    {priceDetails ? "Buyurtmani tasdiqlash uchun ma'lumotlarni to'ldiring." : "Ma'lumotlaringizni qoldiring, biz siz bilan tez orada bog'lanamiz."}
                 </DialogDescription>
                 </DialogHeader>
+
+                {renderPackageInfo()}
+
                 <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField control={form.control} name="fullName" render={({ field }) => (
                         <FormItem><FormLabel>To'liq ism</FormLabel><FormControl><Input placeholder="Ism Familya" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
@@ -150,7 +186,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     )} />
 
                     <Button type="submit" disabled={isSubmitting} className="w-full text-lg py-6 shadow-ocean">
-                    {isSubmitting ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : 'Yuborish'}
+                      {getButtonText()}
                     </Button>
                 </form>
                 </Form>

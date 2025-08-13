@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { servicePrices, calculatePackagePrice, generateSummary } from '@/lib/pricing';
+import { servicePrices, calculatePackagePrice, generateSummary, type PriceDetails } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { CheckCircle } from 'lucide-react';
 
 interface PackageBuilderProps {
-    onOrderNow: (summary: string, price: number) => void;
+    onOrderNow: (summary: string, priceDetails: PriceDetails) => void;
 }
 
 const ServiceCard = ({ id, label, description, price, selected, onSelect, disabled = false }: { id: string, label: string, description: string, price: number, selected: boolean, onSelect: () => void, disabled?: boolean }) => (
@@ -57,7 +57,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         setIsClient(true);
     }, []);
 
-    const [total, setTotal] = useState({ base: 0, final: 0, discountApplied: '' });
+    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: '', discountValue: 0 });
 
     useEffect(() => {
         if (isClient) {
@@ -72,8 +72,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
     const handleOrder = () => {
         const selections = { selectedServices, isPcgMember };
         const summary = generateSummary(selections);
-        const { final } = calculatePackagePrice(selections);
-        onOrderNow(summary, final);
+        const priceDetails = calculatePackagePrice(selections);
+        onOrderNow(summary, priceDetails);
     };
 
     const handleServiceToggle = (service: keyof typeof selectedServices) => {
