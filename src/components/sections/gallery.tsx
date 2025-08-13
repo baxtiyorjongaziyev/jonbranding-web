@@ -2,14 +2,14 @@ import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 
 const galleryImages = [
-  { src: 'https://placehold.co/600x400.png', alt: 'Loyiha 1', hint: 'modern logo design' },
-  { src: 'https://placehold.co/600x400.png', alt: 'Loyiha 2', hint: 'branding identity' },
-  { src: 'https://placehold.co/600x400.png', alt: 'Loyiha 3', hint: 'corporate style' },
-  { src: 'https://placehold.co/600x400.png', alt: 'Loyiha 4', hint: 'brandbook example' },
-  { src: 'https://placehold.co/600x400.png', alt: 'Loyiha 5', hint: 'logo concept' },
-  { src: 'https://placehold.co/600x400.png', alt: 'Loyiha 6', hint: 'website branding' },
-  { src: 'https://placehold.co/600x400.png', alt: 'Loyiha 7', hint: 'minimalist logo' },
-  { src: 'https://placehold.co/600x400.png', alt: 'Loyiha 8', hint: 'app icon design' },
+  { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif', alt: 'Animatsion logo', hint: 'animated logo' },
+  { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/67513d8fe1caee5495e0f9bd_ezgif-6-3f24b1faa6.gif', alt: 'Animatsion logo', hint: 'gif logo' },
+  { src: 'https://img1.teletype.in/files/88/92/8892f18d-a298-485d-8fe5-7d0444defd89.png', alt: 'Loyiha 3', hint: 'branding identity' },
+  { src: 'https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png', alt: 'Loyiha 4', hint: 'corporate style' },
+  { src: 'https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg', alt: 'Loyiha 5', hint: 'brandbook example' },
+  { src: 'https://img1.teletype.in/files/83/c2/83c2c300-af89-482e-8052-15189ac22aff.jpeg', alt: 'Loyiha 6', hint: 'logo concept' },
+  { src: 'https://img2.teletype.in/files/19/49/1949747d-4381-489d-87bf-753a9fac573a.jpeg', alt: 'Loyiha 7', hint: 'website branding' },
+  { src: 'https://img2.teletype.in/files/51/45/5145b60e-aca5-4225-8564-a4d601a148a7.jpeg', alt: 'Loyiha 8', hint: 'minimalist logo' },
 ];
 
 const Gallery = () => {
@@ -30,6 +30,7 @@ const Gallery = () => {
                 alt={image.alt}
                 width={600}
                 height={400}
+                unoptimized={image.src.endsWith('.gif')}
                 loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 data-ai-hint={image.hint}
