@@ -34,7 +34,6 @@ const Home: FC = () => {
     style: false,
     brandbook: false,
   });
-  const [paymentOption, setPaymentOption] = useLocalStorage('paymentOption', '50');
   const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', true);
   
   const [mobileCtaPrice, setMobileCtaPrice] = useState(0);
@@ -48,14 +47,14 @@ const Home: FC = () => {
 
   useEffect(() => {
     if (isClient) {
-      const selections = { selectedServices, paymentOption, isPcgMember };
+      const selections = { selectedServices, isPcgMember };
       const { final } = calculatePackagePrice(selections);
       setMobileCtaPrice(final);
 
       const summary = generateSummary(selections);
       setPackageDetailsForModal({ summary, price: final });
     }
-  }, [selectedServices, paymentOption, isPcgMember, isClient]);
+  }, [selectedServices, isPcgMember, isClient]);
 
   const handleOpenModal = (summary = 'Umumiy so\'rov', price = 0) => {
     setPackageSummary(summary);

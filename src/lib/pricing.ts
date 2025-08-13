@@ -5,12 +5,6 @@ export const servicePrices = {
     brandbook: 990,
 };
 
-export const paymentDiscounts = {
-    '100': 0.30,
-    '50': 0.15,
-    'none': 0,
-};
-
 export const pcgDiscount = 0.50;
 
 interface SelectedServices {
@@ -22,12 +16,11 @@ interface SelectedServices {
 
 interface PackageSelections {
     selectedServices: SelectedServices;
-    paymentOption: string;
     isPcgMember: boolean;
 }
 
 export const calculatePackagePrice = (selections: PackageSelections) => {
-    const { selectedServices, paymentOption, isPcgMember } = selections;
+    const { selectedServices, isPcgMember } = selections;
     
     let basePrice = 0;
     if (selectedServices.naming) basePrice += servicePrices.naming;
@@ -35,37 +28,26 @@ export const calculatePackagePrice = (selections: PackageSelections) => {
     if (selectedServices.style) basePrice += servicePrices.style;
     if (selectedServices.brandbook) basePrice += servicePrices.brandbook;
 
-    // Logo is the base, so at least its price must be there for discounts
-    const canApplyDiscount = selectedServices.logo && basePrice > servicePrices.logo;
+    let discountValue = 0;
+    let discountType = "";
 
-    let paymentDiscountValue = paymentDiscounts[paymentOption as keyof typeof paymentDiscounts] || 0;
-    let bestDiscount = 0;
-    let discountType = "Chegirmasiz";
-
-    if (canApplyDiscount) {
-        bestDiscount = paymentDiscountValue;
-        if (paymentOption !== 'none') {
-            discountType = `${(paymentDiscountValue * 100)}% chegirma (${paymentOption}% oldindan to'lov)`;
-        }
-
-        if (isPcgMember && pcgDiscount > bestDiscount) {
-            bestDiscount = pcgDiscount;
-            discountType = 'PCG Tez Natija 3 uchun -50% chegirma';
-        }
+    if (isPcgMember) {
+        discountValue = pcgDiscount;
+        discountType = 'PCG Tez Natija 3 uchun -50% chegirma';
     }
     
-    const finalPrice = basePrice * (1 - bestDiscount);
+    const finalPrice = basePrice * (1 - discountValue);
 
     return {
         base: basePrice,
         final: finalPrice,
-        discountApplied: finalPrice < basePrice ? discountType : 'Chegirma qo\'llanilmadi',
-        discountValue: bestDiscount,
+        discountApplied: discountType,
+        discountValue: discountValue,
     };
 }
 
 export const generateSummary = (selections: PackageSelections) => {
-    const { selectedServices, paymentOption } = selections;
+    const { selectedServices } = selections;
     
     const services = [];
     if (selectedServices.naming) services.push('Naming');
@@ -77,12 +59,9 @@ export const generateSummary = (selections: PackageSelections) => {
 
     const { discountApplied } = calculatePackagePrice(selections);
     
-    let paymentText = "Bo'lib to'lash";
-    if (paymentOption === '100') paymentText = "100% oldindan";
-    if (paymentOption === '50') paymentText = "50% oldindan";
-    
-    summary += ` | To'lov: ${paymentText}`;
-    summary += ` | Chegirma: ${discountApplied}`;
+    if (discountApplied) {
+        summary += ` | Chegirma: ${discountApplied}`;
+    }
 
     return summary;
 }
