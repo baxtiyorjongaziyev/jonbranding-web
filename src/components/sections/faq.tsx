@@ -19,12 +19,12 @@ const faqItems = [
     answer: "Albatta. Har bir bosqichda siz bilan kelishgan holda ishlaymiz. Odatda, paketga 2-3 marta o'zgartirish kiritish imkoniyati kiradi. Bizning maqsadimiz - siz 100% mamnun bo'lgan natijaga erishish."
   },
   {
-    question: "Loyiha tugagandan keyin qo'llab-quvvatlash bormi?",
-    answer: "Ha, loyiha tugagandan so'ng 1 oy davomida sizga brend materiallaridan to'g'ri foydalanish bo'yicha bepul maslahat va yordam beramiz."
-  },
-   {
     question: "Agar natijadan ko'nglim to'lmasa-chi? Qanday kafolat bor?",
     answer: "Sizning mamnunligingiz biz uchun birinchi o'rinda. Shuning uchun biz '100% Mamnuniyat Kafolati'ni taklif qilamiz. Agar dizayn konsepsiyasining dastlabki variantlaridan ko'nglingiz to'lmasa, biz siz bilan birga ishlab, sizga to'liq ma'qul keladigan yo'nalishni topmagunimizcha qayta ishlaymiz yoki to'lovingizni qaytarib beramiz."
+  },
+  {
+    question: "Loyiha tugagandan keyin qo'llab-quvvatlash bormi?",
+    answer: "Ha, loyiha tugagandan so'ng 1 oy davomida sizga brend materiallaridan to'g'ri foydalanish bo'yicha bepul maslahat va yordam beramiz."
   },
   {
     question: "Ish qanday qabul qilinadi va qanday formatdagi fayllar beriladi?",
