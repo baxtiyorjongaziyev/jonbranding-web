@@ -8,7 +8,7 @@ const testimonials = [
     name: "Sevara Xolmanova",
     company: "Fidda by Sevara asoschisi",
     avatar: "SX",
-    image: "https://placehold.co/40x40.png",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
     imageHint: "female entrepreneur portrait",
     quote: "Men bu jamoa bn ishlab ko'rdim menga juda yoqdi samarali va natijasi siz kutgandanda A'lo bo'larkan brendlashni xam stikerlash va patenlashni xam berganman 7 oyda aniq boladi Hudo xohlasa Halol ishlarkansilar Allox rozi bo'lsin silardan juda xursand bo'ldim ishilarga rivoj Rahmat."
   },
@@ -16,7 +16,7 @@ const testimonials = [
     name: "Sherzod Beknazarov",
     company: "Incontrol Consulting asoschisi",
     avatar: "SB",
-    image: "https://placehold.co/40x40.png",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
     imageHint: "male business owner",
     quote: "Did, estetik did. Bu tug'ma bo'ladimi yoki orttirilgan ko'nikma bo'ladimi? Shunday estetik did egasidan biri Baxtiyorjon - Bizni Incontrol va Sherzod Beknazarov logolarini qilishda bizga yordam berdi. Baxtiyorjonga minnatdorchilik bildirmoqchimiz. Rahmat."
   },
