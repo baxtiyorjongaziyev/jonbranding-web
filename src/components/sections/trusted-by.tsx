@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import {
   Carousel,
   CarouselContent,
@@ -49,14 +48,9 @@ const TrustedBy = () => {
                   className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 pl-8"
                 >
                   <div className="flex items-center justify-center h-20">
-                    <Image
-                      src={logo.src}
-                      alt={`${logo.name} logo`}
-                      width={140}
-                      height={60}
-                      className="object-contain max-h-12 w-auto grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                      data-ai-hint={logo.hint}
-                    />
+                    <span className="text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300">
+                      {logo.name}
+                    </span>
                   </div>
                 </CarouselItem>
               ))}
