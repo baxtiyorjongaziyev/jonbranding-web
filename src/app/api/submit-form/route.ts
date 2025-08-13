@@ -1,33 +1,6 @@
 
 import { NextResponse } from 'next/server';
 
-// Helper function to send a message to Telegram
-async function sendToTelegram(message: string) {
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
-
-    if (!botToken || !chatId) {
-        console.error("Telegram environment variables (TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID) are not set.");
-        throw new Error("Server configuration error: Telegram bot not configured.");
-    }
-    
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'Markdown' }),
-    });
-
-    const result = await response.json();
-    if (!result.ok) {
-        console.error("Telegram API Error:", result);
-        console.error("Used Chat ID:", chatId); // Log the chat_id that was used
-        // Include the used chatId in the error message for easier debugging from the client-side
-        throw new Error(`Failed to send message to Telegram. Used Chat ID: ${chatId}. Response: ${JSON.stringify(result)}`);
-    }
-    return result;
-}
-
 export async function POST(request: Request) {
     try {
         const body = await request.json();
@@ -37,8 +10,15 @@ export async function POST(request: Request) {
             return NextResponse.json({ ok: false, error: 'Ism va telefon raqam kiritilishi shart' }, { status: 400 });
         }
         
+        const botToken = process.env.TELEGRAM_BOT_TOKEN;
+        const chatId = process.env.TELEGRAM_CHAT_ID;
+
+        if (!botToken || !chatId) {
+            console.error("Telegram environment variables not set.");
+            return NextResponse.json({ ok: false, error: 'Serverda Telegram sozlamalari mavjud emas.' }, { status: 500 });
+        }
+
         let packageInfo = '';
-        // Check if package details are provided
         if (packageSummary && totalPrice !== undefined) {
           packageInfo = `
 *📦 Tanlangan paket:*
@@ -49,7 +29,6 @@ ${packageSummary}
           `;
         }
         
-        // Prepare data for Telegram
         const telegramMessage = `
 *🚀 Yangi buyurtma (Jon.Branding)*
 
@@ -59,15 +38,31 @@ ${packageSummary}
   - *Telegram:* ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
   - *Izoh:* ${notes || 'Kiritilmagan'}
 ${packageInfo}
-        `;
+        `.trim();
         
-        // Send the message to Telegram
-        await sendToTelegram(telegramMessage.trim());
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: telegramMessage,
+                parse_mode: 'Markdown'
+            }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            console.error("Telegram API Error:", result);
+            return NextResponse.json({ ok: false, error: `Telegramga xabar yuborishda xatolik: ${result.description || 'Noma\'lum xato'}` }, { status: 500 });
+        }
 
         return NextResponse.json({ ok: true, message: 'So\'rovingiz muvaffaqiyatli yuborildi.' });
 
     } catch (error: any) {
         console.error("Internal Server Error:", error);
-        return NextResponse.json({ ok: false, error: error.message || 'Ichki server xatoligi' }, { status: 500 });
+        return NextResponse.json({ ok: false, error: 'Ichki server xatoligi yuz berdi.' }, { status: 500 });
     }
 }
