@@ -12,7 +12,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { CheckCircle } from 'lucide-react';
 
 interface PackageBuilderProps {
-    onOrderNow: (summary: string, priceDetails: PriceDetails) => void;
+    onOrderNow: () => void;
 }
 
 const serviceDetails = {
@@ -76,12 +76,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         }
     }, [selectedServices, isPcgMember, isClient]);
 
-    const handleOrder = () => {
-        const selections = { selectedServices, isPcgMember };
-        const summary = generateSummary(selections);
-        const priceDetails = calculatePackagePrice(selections);
-        onOrderNow(summary, priceDetails);
-    };
 
     const handleServiceToggle = (service: keyof typeof selectedServices) => {
         if (service === 'logo') return; // Logo is mandatory
@@ -240,7 +234,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                      </>
                                 )}
                             </div>
-                            <Button onClick={handleOrder} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean" disabled={total.final === 0}>
+                            <Button onClick={onOrderNow} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean" disabled={total.final === 0}>
                                 Hoziroq buyurtma berish
                             </Button>
                         </Card>

@@ -28,12 +28,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 const Home: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  // Let's use a single state for all modal-related package data
-  const [modalPackageInfo, setModalPackageInfo] = useState<{
-    summary: string;
-    priceDetails: PriceDetails | null;
-  }>({ summary: '', priceDetails: null });
-
   const [selectedServices, setSelectedServices] = useLocalStorage('selectedServices', {
     naming: false,
     logo: true,
@@ -43,7 +37,6 @@ const Home: FC = () => {
   const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', true);
   
   const [mobileCtaPrice, setMobileCtaPrice] = useState(0);
-  const [packageDetailsForModal, setPackageDetailsForModal] = useState<{ summary: string; price: number; priceDetails: PriceDetails | null;}>({ summary: '', price: 0, priceDetails: null });
 
   const [isClient, setIsClient] = useState(false);
 
@@ -56,14 +49,10 @@ const Home: FC = () => {
       const selections = { selectedServices, isPcgMember };
       const priceDetails = calculatePackagePrice(selections);
       setMobileCtaPrice(priceDetails.final);
-
-      const summary = generateSummary(selections);
-      setPackageDetailsForModal({ summary, price: priceDetails.final, priceDetails });
     }
   }, [selectedServices, isPcgMember, isClient]);
 
- const handleOpenModal = (summary = 'Umumiy so\'rov', priceDetails: PriceDetails | null = null) => {
-    setModalPackageInfo({ summary, priceDetails });
+  const handleOpenModal = () => {
     setModalOpen(true);
   };
 
@@ -71,21 +60,15 @@ const Home: FC = () => {
     setModalOpen(false);
   };
   
-  const handleOrderNow = (summary: string, priceDetails: PriceDetails) => {
-    handleOpenModal(summary, priceDetails);
-  };
-
-  const handleMobileCtaClick = () => {
-    if (packageDetailsForModal.priceDetails) {
-      handleOpenModal(packageDetailsForModal.summary, packageDetailsForModal.priceDetails);
-    }
+  const handleOrderNow = () => {
+    handleOpenModal();
   };
 
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
-      <Header onContactClick={() => handleOpenModal()} />
+      <Header onContactClick={handleOpenModal} />
       <main className="flex-grow">
-        <Hero onPrimaryClick={() => handleOpenModal('Bosh sahifadagi asosiy tugma')} />
+        <Hero onPrimaryClick={handleOpenModal} />
         <TrustedBy />
         <Founder />
         <Stats />
@@ -105,10 +88,8 @@ const Home: FC = () => {
       <ContactModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        packageSummary={modalPackageInfo.summary}
-        priceDetails={modalPackageInfo.priceDetails}
       />
-      <ExitIntentModal onPrimaryClick={() => handleOpenModal('Chiqish taklifi', null)} />
+      <ExitIntentModal onPrimaryClick={handleOpenModal} />
 
       {/* Mobile Sticky CTA Bar */}
       <div className="sticky bottom-0 md:hidden bg-white/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
@@ -124,7 +105,7 @@ const Home: FC = () => {
               <Skeleton className="h-3 w-20" />
             </div>
           )}
-            <Button onClick={handleMobileCtaClick} className="shadow-ocean">
+            <Button onClick={handleOpenModal} className="shadow-ocean">
                 Hoziroq buyurtma berish
             </Button>
         </div>
