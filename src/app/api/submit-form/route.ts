@@ -30,7 +30,6 @@ async function sendToTelegram(message: string) {
     }
 }
 
-
 // Helper function to save data to Airtable
 async function saveToAirtable(data: any) {
     const apiKey = process.env.AIRTABLE_API_KEY;
@@ -57,6 +56,7 @@ async function saveToAirtable(data: any) {
     };
 
     try {
+        // The create method expects an array of records
         await base(tableName).create([{ fields: airtableData }]);
     } catch (error) {
         console.error('Airtable Error:', error);
