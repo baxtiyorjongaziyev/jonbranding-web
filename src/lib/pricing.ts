@@ -5,27 +5,6 @@ export const servicePrices = {
     brandbook: 990,
 };
 
-export const basePackages = [
-    { 
-        id: 'A', 
-        name: 'Logo', 
-        price: servicePrices.logo,
-        features: ["Professional logotip", "2-3 xil konsepsiya", "Vektor formatlar (AI, SVG)"]
-    },
-    { 
-        id: 'B', 
-        name: 'Start', 
-        price: servicePrices.logo + servicePrices.style,
-        features: ["'Logo' paketidagi hamma narsa", "Korporativ uslub (rang, shrift)", "Vizitka, blank dizayni"]
-    },
-    { 
-        id: 'C', 
-        name: 'Kompleks', 
-        price: servicePrices.logo + servicePrices.style + servicePrices.brandbook,
-        features: ["'Start' paketidagi hamma narsa", "Brenddan foydalanish qo'llanmasi (Brandbook)", "Ijtimoiy tarmoqlar uchun shablonlar"]
-    },
-];
-
 export const paymentDiscounts = {
     '100': 0.30,
     '50': 0.15,
@@ -34,28 +13,36 @@ export const paymentDiscounts = {
 
 export const pcgDiscount = 0.50;
 
+interface SelectedServices {
+    naming: boolean;
+    logo: boolean;
+    style: boolean;
+    brandbook: boolean;
+}
+
 interface PackageSelections {
-    selectedPackage: string;
-    includeNaming: boolean;
+    selectedServices: SelectedServices;
     paymentOption: string;
     isPcgMember: boolean;
 }
 
 export const calculatePackagePrice = (selections: PackageSelections) => {
-    const { selectedPackage, includeNaming, paymentOption, isPcgMember } = selections;
-    const currentPackage = basePackages.find(p => p.id === selectedPackage);
-    if (!currentPackage) return { base: 0, final: 0, discountApplied: '', discountValue: 0 };
+    const { selectedServices, paymentOption, isPcgMember } = selections;
+    
+    let basePrice = 0;
+    if (selectedServices.naming) basePrice += servicePrices.naming;
+    if (selectedServices.logo) basePrice += servicePrices.logo;
+    if (selectedServices.style) basePrice += servicePrices.style;
+    if (selectedServices.brandbook) basePrice += servicePrices.brandbook;
 
-    let basePrice = currentPackage.price;
-    if (includeNaming) {
-        basePrice += servicePrices.naming;
-    }
+    // Logo is the base, so at least its price must be there for discounts
+    const canApplyDiscount = selectedServices.logo && basePrice > servicePrices.logo;
 
     let paymentDiscountValue = paymentDiscounts[paymentOption as keyof typeof paymentDiscounts] || 0;
     let bestDiscount = 0;
     let discountType = "Chegirmasiz";
 
-    if (basePrice > 550) {
+    if (canApplyDiscount) {
         bestDiscount = paymentDiscountValue;
         if (paymentOption !== 'none') {
             discountType = `${(paymentDiscountValue * 100)}% chegirma (${paymentOption}% oldindan to'lov)`;
@@ -72,16 +59,21 @@ export const calculatePackagePrice = (selections: PackageSelections) => {
     return {
         base: basePrice,
         final: finalPrice,
-        discountApplied: discountType,
+        discountApplied: finalPrice < basePrice ? discountType : 'Chegirma qo\'llanilmadi',
         discountValue: bestDiscount,
     };
 }
 
 export const generateSummary = (selections: PackageSelections) => {
-    const { selectedPackage, includeNaming, paymentOption } = selections;
-    const pkg = basePackages.find(p => p.id === selectedPackage);
-    let summary = `Paket: ${pkg?.name || 'Noma\'lum'}`;
-    if (includeNaming) summary += ' + Naming';
+    const { selectedServices, paymentOption } = selections;
+    
+    const services = [];
+    if (selectedServices.naming) services.push('Naming');
+    if (selectedServices.logo) services.push('Logo');
+    if (selectedServices.style) services.push('Korporativ uslub');
+    if (selectedServices.brandbook) services.push('Brandbook');
+
+    let summary = `Tanlangan xizmatlar: ${services.join(', ') || 'Yo\'q'}`;
 
     const { discountApplied } = calculatePackagePrice(selections);
     
@@ -94,5 +86,3 @@ export const generateSummary = (selections: PackageSelections) => {
 
     return summary;
 }
-
-    

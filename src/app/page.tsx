@@ -28,8 +28,12 @@ const Home: FC = () => {
   const [packageSummary, setPackageSummary] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const [selectedPackage, setSelectedPackage] = useLocalStorage('selectedPackage', 'B');
-  const [includeNaming, setIncludeNaming] = useLocalStorage('includeNaming', false);
+  const [selectedServices, setSelectedServices] = useLocalStorage('selectedServices', {
+    naming: false,
+    logo: true,
+    style: false,
+    brandbook: false,
+  });
   const [paymentOption, setPaymentOption] = useLocalStorage('paymentOption', '50');
   const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', true);
   
@@ -44,14 +48,14 @@ const Home: FC = () => {
 
   useEffect(() => {
     if (isClient) {
-      const selections = { selectedPackage, includeNaming, paymentOption, isPcgMember };
+      const selections = { selectedServices, paymentOption, isPcgMember };
       const { final } = calculatePackagePrice(selections);
       setMobileCtaPrice(final);
 
       const summary = generateSummary(selections);
       setPackageDetailsForModal({ summary, price: final });
     }
-  }, [selectedPackage, includeNaming, paymentOption, isPcgMember, isClient]);
+  }, [selectedServices, paymentOption, isPcgMember, isClient]);
 
   const handleOpenModal = (summary = 'Umumiy so\'rov', price = 0) => {
     setPackageSummary(summary);

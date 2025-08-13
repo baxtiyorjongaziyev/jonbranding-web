@@ -8,17 +8,39 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { Info, CheckCircle } from 'lucide-react';
-import { servicePrices, basePackages, calculatePackagePrice, generateSummary } from '@/lib/pricing';
+import { Info } from 'lucide-react';
+import { servicePrices, calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface PackageBuilderProps {
     onOrderNow: (summary: string, price: number) => void;
 }
 
+const ServiceCheckbox = ({ id, label, description, price, checked, onCheckedChange }: { id: string, label: string, description: string, price: number, checked: boolean, onCheckedChange: (checked: boolean) => void }) => (
+    <div className="flex items-start space-x-3">
+        <Checkbox id={id} checked={checked} onCheckedChange={(c) => onCheckedChange(Boolean(c))} className="h-6 w-6 mt-1" disabled={id === 'logo'} />
+        <div className="grid gap-1.5 leading-none">
+            <label
+                htmlFor={id}
+                className={cn("text-base font-medium leading-none", id !== 'logo' && "cursor-pointer", id === 'logo' && "cursor-not-allowed opacity-70")}
+            >
+                {label} <span className="text-primary font-bold">(+${price})</span>
+            </label>
+            <p className="text-sm text-muted-foreground">
+                {description}
+            </p>
+        </div>
+    </div>
+);
+
+
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
-    const [selectedPackage, setSelectedPackage] = useLocalStorage('selectedPackage', 'B');
-    const [includeNaming, setIncludeNaming] = useLocalStorage('includeNaming', false);
+    const [selectedServices, setSelectedServices] = useLocalStorage('selectedServices', {
+        naming: false,
+        logo: true,
+        style: false,
+        brandbook: false,
+    });
     const [paymentOption, setPaymentOption] = useLocalStorage('paymentOption', '50');
     const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', true);
     const [isClient, setIsClient] = useState(false);
@@ -32,23 +54,26 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
     useEffect(() => {
         if (isClient) {
             const result = calculatePackagePrice({
-                selectedPackage,
-                includeNaming,
+                selectedServices,
                 paymentOption,
                 isPcgMember
             });
             setTotal(result);
         }
-    }, [selectedPackage, includeNaming, paymentOption, isPcgMember, isClient]);
+    }, [selectedServices, paymentOption, isPcgMember, isClient]);
 
     const handleOrder = () => {
-        const selections = { selectedPackage, includeNaming, paymentOption, isPcgMember };
+        const selections = { selectedServices, paymentOption, isPcgMember };
         const summary = generateSummary(selections);
         const { final } = calculatePackagePrice(selections);
         onOrderNow(summary, final);
     };
 
-    if (!isClient) {
+    const handleServiceChange = (service: keyof typeof selectedServices, checked: boolean) => {
+        setSelectedServices(prev => ({ ...prev, [service]: checked }));
+    };
+
+     if (!isClient) {
         return (
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary">
                 <div className="container mx-auto px-4">
@@ -86,51 +111,48 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                 <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                     <div className="lg:col-span-2 space-y-8">
                         <div>
-                            <h3 className="text-xl font-bold text-dark-blue mb-4">1. Asosiy paketni tanlang</h3>
-                             <div className="grid sm:grid-cols-3 gap-4">
-                                {basePackages.map(pkg => (
-                                    <Card key={pkg.id} onClick={() => setSelectedPackage(pkg.id)}
-                                        className={cn(
-                                            "cursor-pointer transition-all duration-200 text-left p-6 rounded-2xl flex flex-col",
-                                            selectedPackage === pkg.id ? 'border-primary ring-2 ring-primary shadow-xl' : 'hover:shadow-lg border-gray-200'
-                                        )}>
-                                        <h4 className="font-bold text-lg text-dark-blue">{pkg.name}</h4>
-                                        <p className="text-2xl font-bold text-primary mt-2">${pkg.price}</p>
-                                        <ul className='mt-4 space-y-2 text-sm text-gray-600 flex-grow'>
-                                            {pkg.features.map(feature => (
-                                                <li key={feature} className='flex items-start gap-2'>
-                                                    <CheckCircle className='w-4 h-4 text-green-500 mt-0.5 flex-shrink-0' />
-                                                    <span>{feature}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </Card>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-xl font-bold text-dark-blue mb-4">2. Qo'shimcha xizmatlar</h3>
-                            <Card className="p-6 rounded-2xl shadow-sm">
-                                <div className="flex items-center space-x-3">
-                                    <Checkbox id="naming-checkbox" checked={includeNaming} onCheckedChange={(checked) => setIncludeNaming(Boolean(checked))} className="h-6 w-6" />
-                                    <div className="grid gap-1.5 leading-none">
-                                        <label
-                                            htmlFor="naming-checkbox"
-                                            className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                        >
-                                            Naming xizmatini qo'shish (+${servicePrices.naming})
-                                        </label>
-                                        <p className="text-sm text-muted-foreground">
-                                            Brendingiz uchun unutilmas va kuchli nom tanlash.
-                                        </p>
-                                    </div>
-                                </div>
+                            <h3 className="text-xl font-bold text-dark-blue mb-4">1. Kerakli xizmatlarni tanlang</h3>
+                            <Card className="p-6 rounded-2xl shadow-sm space-y-6">
+                                <ServiceCheckbox 
+                                    id="naming"
+                                    label="Naming"
+                                    description="Brendingiz uchun unutilmas va kuchli nom tanlash."
+                                    price={servicePrices.naming}
+                                    checked={selectedServices.naming}
+                                    onCheckedChange={(checked) => handleServiceChange('naming', checked)}
+                                />
+                                <hr />
+                                <ServiceCheckbox 
+                                    id="logo"
+                                    label="Logo"
+                                    description="Biznesingizning o'ziga xosligini aks ettiruvchi professional logotip. (Asosiy xizmat)"
+                                    price={servicePrices.logo}
+                                    checked={selectedServices.logo}
+                                    onCheckedChange={(checked) => handleServiceChange('logo', checked)}
+                                />
+                                 <hr />
+                                <ServiceCheckbox 
+                                    id="style"
+                                    label="Korporativ uslub"
+                                    description="Brendingiz uchun yagona vizual tizim (ranglar, shriftlar, elementlar)."
+                                    price={servicePrices.style}
+                                    checked={selectedServices.style}
+                                    onCheckedChange={(checked) => handleServiceChange('style', checked)}
+                                />
+                                 <hr />
+                                <ServiceCheckbox 
+                                    id="brandbook"
+                                    label="Brandbook"
+                                    description="Brenddan foydalanish bo'yicha to'liq qo'llanma."
+                                    price={servicePrices.brandbook}
+                                    checked={selectedServices.brandbook}
+                                    onCheckedChange={(checked) => handleServiceChange('brandbook', checked)}
+                                />
                             </Card>
                         </div>
-
+                        
                         <div>
-                            <h3 className="text-xl font-bold text-dark-blue mb-4">3. To'lov turi va chegirmalar</h3>
+                            <h3 className="text-xl font-bold text-dark-blue mb-4">2. To'lov turi va chegirmalar</h3>
                             <Card className="p-6 rounded-2xl shadow-sm space-y-6">
                                 <RadioGroup value={paymentOption} onValueChange={setPaymentOption} className="grid sm:grid-cols-3 gap-4">
                                     <Label className="flex flex-col items-center justify-center gap-2 border rounded-lg p-4 cursor-pointer has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-colors">
@@ -180,7 +202,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                     <span className="text-4xl font-extrabold text-accent">${total.final.toLocaleString('en-US')}</span>
                                 </div>
                             </div>
-                            <Button onClick={handleOrder} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean">
+                            <Button onClick={handleOrder} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean" disabled={total.base === 0}>
                                 Hoziroq buyurtma berish
                             </Button>
                         </Card>
