@@ -7,7 +7,7 @@ async function sendToTelegram(message: string) {
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
-        console.error("Telegram environment variables are not set.");
+        console.error("Telegram environment variables (TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID) are not set.");
         throw new Error("Server configuration error: Telegram bot not configured.");
     }
     
@@ -21,6 +21,7 @@ async function sendToTelegram(message: string) {
     const result = await response.json();
     if (!result.ok) {
         console.error("Telegram API Error:", result);
+        console.error("Used Chat ID:", chatId); // Log the chat_id that was used
         throw new Error(`Failed to send message to Telegram. Response: ${JSON.stringify(result)}`);
     }
     return result;
