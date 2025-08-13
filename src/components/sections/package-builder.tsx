@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
 import { cn } from '@/lib/utils';
 import { Info, CheckCircle } from 'lucide-react';
 import { servicePrices, basePackages, calculatePackagePrice, generateSummary } from '@/lib/pricing';
@@ -112,14 +111,20 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 
                         <div>
                             <h3 className="text-xl font-bold text-dark-blue mb-4">2. Qo'shimcha xizmatlar</h3>
-                            <Card className="p-6 flex items-center justify-between rounded-2xl shadow-sm">
-                                <div>
-                                    <Label htmlFor="naming-switch" className="font-bold text-lg text-dark-blue">Naming</Label>
-                                    <p className="text-sm text-gray-600">Brendingiz uchun unutilmas nom</p>
-                                </div>
-                                <div className='flex items-center gap-4'>
-                                    <p className="text-xl font-bold text-primary">${servicePrices.naming}+</p>
-                                    <Switch id="naming-switch" checked={includeNaming} onCheckedChange={setIncludeNaming} />
+                            <Card className="p-6 rounded-2xl shadow-sm">
+                                <div className="flex items-center space-x-3">
+                                    <Checkbox id="naming-checkbox" checked={includeNaming} onCheckedChange={(checked) => setIncludeNaming(Boolean(checked))} className="h-6 w-6" />
+                                    <div className="grid gap-1.5 leading-none">
+                                        <label
+                                            htmlFor="naming-checkbox"
+                                            className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        >
+                                            Naming xizmatini qo'shish (+${servicePrices.naming})
+                                        </label>
+                                        <p className="text-sm text-muted-foreground">
+                                            Brendingiz uchun unutilmas va kuchli nom tanlash.
+                                        </p>
+                                    </div>
                                 </div>
                             </Card>
                         </div>
@@ -187,5 +192,3 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
-
-    
