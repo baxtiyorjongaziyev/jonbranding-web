@@ -56,7 +56,7 @@ const jsonLd = {
     '@type': 'Person',
     'name': 'Baxtiyorjon Gaziyev',
   },
-  telephone: '+998 33 645 00 97',
+  telephone: '+998336450097',
   url: 'https://jonbranding.uz',
 };
 

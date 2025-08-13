@@ -29,7 +29,7 @@ const Footer = () => {
             <ul className="mt-4 space-y-3">
               <li className="flex items-center gap-2">
                 <Send size={18} />
-                <a href="https://t.me/baxtiyorjongaziyev" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@baxtiyorjongaziyev</a>
+                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@baxtiyorjon_gaziyev</a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={18} />
