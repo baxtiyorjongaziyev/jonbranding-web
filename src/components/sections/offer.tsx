@@ -6,7 +6,7 @@ import { Clock } from 'lucide-react';
 import Link from 'next/link';
 
 const CountdownTimer = () => {
-    const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
+    const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
     useEffect(() => {
         const getEndTime = () => {
