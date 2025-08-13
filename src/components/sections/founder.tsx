@@ -18,13 +18,12 @@ const Founder = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
             <Card className="overflow-hidden shadow-xl rounded-2xl">
-              <div className="aspect-[4/5]">
+              <div className="aspect-[4/5] relative">
                 <Image
-                  src="https://img2.teletype.in/files/dd/c6/ddc6f06a-bc2b-4a67-b184-3380067a038e.jpeg"
+                  src="https://img1.teletype.in/files/06/12/06122643-c462-4c8d-aa63-55a8ca1dca38.jpeg"
                   alt="Baxtiyorjon Gaziyev, Jon.Branding asoschisi"
-                  width={600}
-                  height={750}
-                  className="w-full h-full object-cover object-center"
+                  fill
+                  className="object-cover object-center"
                   data-ai-hint="professional male portrait"
                 />
               </div>
