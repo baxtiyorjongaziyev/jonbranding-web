@@ -1,9 +1,9 @@
 'use client';
 
-import { FC } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Send, CheckCircle, Package } from 'lucide-react';
+import type {FC} from 'react';
+import {Button} from '@/components/ui/button';
+import {Card, CardContent} from '@/components/ui/card';
+import {CheckCircle, Package} from 'lucide-react';
 import Link from 'next/link';
 
 interface HeroProps {
@@ -11,9 +11,9 @@ interface HeroProps {
 }
 
 const trustPills = [
-    { title: "Xizmatlar", description: "Logo, Korporativ uslub, Brandbook" },
-    { title: "Aynan bizdan", description: "50+ loyiha, 3 mamlakat, tez aloqa" },
-    { title: "Aynan hozir", description: "PCG Tez Natija 3 uchun -50% chegirma" }
+    { title: "Nega bu xizmat?", description: "Chunki kuchli brending sizni raqobatchilardan ajratib turadi va daromadingizni oshiradi." },
+    { title: "Nega aynan biz?", description: "50+ muvaffaqiyatli loyiha, 3 davlatda tajriba va har bir bosqichda siz bilan hamkorlik." },
+    { title: "Nega aynan hozir?", description: "PCG a'zolari uchun maxsus -50% chegirmadan foydalanib qoling!" }
 ];
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
