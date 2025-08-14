@@ -38,33 +38,40 @@ const Process = () => {
             Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan 5 bosqichli tizim.
           </p>
         </div>
-        <div className="mt-20">
-          <div className="relative">
-            {/* Dotted line for large screens */}
-            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-px -translate-y-12">
-               <div className="w-full h-full" style={{
-                  backgroundImage: "linear-gradient(to right, hsl(var(--border)) 50%, transparent 50%)",
-                  backgroundSize: "20px 1px",
-                  backgroundRepeat: "repeat-x"
-                }}></div>
+        <div className="mt-16">
+          <div className="relative flex flex-col lg:flex-row justify-between items-center w-full gap-y-12 lg:gap-y-0">
+            {/* Dotted line connecting the steps */}
+            <div className="absolute top-12 left-0 lg:top-1/2 w-full h-px -translate-y-1/2 hidden lg:block">
+              <div className="w-full h-full" style={{
+                backgroundImage: "linear-gradient(to right, hsl(var(--border)) 50%, transparent 50%)",
+                backgroundSize: "20px 1px",
+                backgroundRepeat: "repeat-x"
+              }}></div>
             </div>
-            
-            <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-0">
-              {steps.map((step, index) => (
-                <div key={index} className="flex-1 text-center w-full lg:w-auto flex flex-col items-center">
-                  <div className="relative z-10">
-                    <div className="flex h-24 w-24 items-center justify-center rounded-full bg-secondary border-4 border-white shadow-md transform hover:scale-110 transition-transform duration-300">
-                      <step.icon className="h-12 w-12 text-primary" />
-                    </div>
-                    <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm shadow-sm">
-                      {index + 1}
-                    </div>
+             <div className="absolute top-0 left-12 lg:left-0 w-px h-full -translate-x-1/2 lg:hidden">
+              <div className="w-full h-full" style={{
+                backgroundImage: "linear-gradient(to bottom, hsl(var(--border)) 50%, transparent 50%)",
+                backgroundSize: "1px 20px",
+                backgroundRepeat: "repeat-y"
+              }}></div>
+            </div>
+
+            {steps.map((step, index) => (
+              <div key={index} className="flex-1 w-full text-center flex flex-row lg:flex-col items-center z-10 gap-6 lg:gap-0">
+                <div className="relative shrink-0">
+                  <div className="flex h-24 w-24 items-center justify-center rounded-full bg-secondary border-4 border-white shadow-md transform hover:scale-110 transition-transform duration-300">
+                    <step.icon className="h-12 w-12 text-primary" />
                   </div>
-                  <h3 className="mt-6 text-xl font-bold text-dark-blue">{step.title}</h3>
+                  <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm shadow-sm">
+                    {index + 1}
+                  </div>
+                </div>
+                <div className="text-left lg:text-center">
+                  <h3 className="mt-0 lg:mt-6 text-xl font-bold text-dark-blue">{step.title}</h3>
                   <p className="mt-2 text-gray-600 max-w-xs">{step.description}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
