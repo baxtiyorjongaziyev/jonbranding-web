@@ -28,8 +28,7 @@ const ServiceCard = ({ id, label, description, price, selected, onSelect, disabl
         className={cn(
             "rounded-2xl shadow-sm transition-all duration-300 cursor-pointer relative overflow-hidden",
             selected ? 'border-primary ring-2 ring-primary shadow-lg' : 'border-gray-200 hover:shadow-md hover:border-primary/50',
-            disabled && "cursor-not-allowed opacity-70 bg-gray-50",
-            !selected && !disabled && "animate-subtle-pulse"
+            disabled && "cursor-not-allowed opacity-70 bg-gray-50"
         )}
     >
         <CardContent className="p-5">
@@ -174,7 +173,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                              <Card 
                                 onClick={() => setIsPcgMember(prev => !prev)}
                                 className={cn(
-                                    "p-1 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer",
+                                    "p-1 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer animate-subtle-pulse",
                                     isPcgMember ? "bg-accent/20 border-accent ring-2 ring-accent" : "bg-white hover:shadow-md"
                                 )}
                              >
