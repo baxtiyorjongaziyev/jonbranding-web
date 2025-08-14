@@ -20,14 +20,14 @@ const Founder = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
             <Card className="overflow-hidden shadow-xl rounded-2xl">
-              <div className="aspect-[4/5] relative">
-                <Image
-                  src="https://img1.teletype.in/files/06/12/06122643-c462-4c8d-aa63-55a8ca1dca38.jpeg"
-                  alt="Baxtiyorjon Gaziyev, Jon.Branding asoschisi"
-                  fill
-                  className="object-cover object-center"
-                  data-ai-hint="professional male portrait"
-                />
+              <div className="aspect-[9/16] relative w-full h-full">
+                <iframe 
+                  src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&dnt=1" 
+                  frameBorder="0" 
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  className="absolute top-0 left-0 w-full h-full"
+                  title="Baxtiyorjon Gaziyev"
+                ></iframe>
               </div>
             </Card>
           </div>
