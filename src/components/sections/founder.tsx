@@ -40,10 +40,9 @@ const Founder = () => {
                     <Image 
                       src="https://img1.teletype.in/files/06/12/06122643-c462-4c8d-aa63-55a8ca1dca38.jpeg"
                       alt="Baxtiyorjon Gaziyev"
-                      layout="fill"
-                      objectFit="cover"
+                      fill
                       data-ai-hint="founder portrait"
-                      className="opacity-80"
+                      className="object-cover opacity-80"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <Button
