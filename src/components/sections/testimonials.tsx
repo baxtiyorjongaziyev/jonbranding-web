@@ -50,50 +50,67 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
 
     const isVideo = !!testimonial.videoUrl;
 
-    return (
-      <Card className={cn(
-        "h-full flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden",
-        isVideo ? "md:flex-row" : ""
-      )}>
-        <div className={cn(
-            "relative flex-shrink-0 bg-black",
-            isVideo ? "md:w-5/12 min-h-[300px] md:min-h-0" : "w-full h-64"
-        )}>
-          {isVideo && testimonial.videoUrl ? (
-            playVideo ? (
-                 <iframe 
-                    src="https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&dnt=1" 
-                    frameBorder="0" 
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
-                    className="w-full h-full"
-                    title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"
-                ></iframe>
-            ) : (
-                <div className="relative w-full h-full cursor-pointer group" onClick={() => setPlayVideo(true)}>
-                    <Image src={testimonial.image!} alt={testimonial.name} data-ai-hint={testimonial.imageHint} fill className="object-cover" />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                        <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
+    if (isVideo) {
+        return (
+            <Card className="h-full flex flex-col md:flex-row bg-white shadow-lg rounded-2xl overflow-hidden">
+                <div className="md:w-5/12 flex-shrink-0 relative bg-black">
+                    <div style={{padding:'177.78% 0 0 0', position:'relative'}}>
+                        {playVideo ? (
+                            <iframe
+                                src={testimonial.videoUrl}
+                                frameBorder="0"
+                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
+                                title={testimonial.name + " - Baxtiyorjon Gaziyev haqida fikrlari"}
+                            ></iframe>
+                        ) : (
+                            <div className="absolute inset-0 w-full h-full cursor-pointer group" onClick={() => setPlayVideo(true)}>
+                                <Image src={testimonial.image!} alt={testimonial.name} data-ai-hint={testimonial.imageHint} fill className="object-cover" />
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                    <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
-            )
-          ) : (
+                <div className="p-6 flex flex-col justify-between flex-grow">
+                    <div>
+                        <CardContent className="p-0 text-gray-700">
+                            <p>"{testimonial.quote}"</p>
+                        </CardContent>
+                    </div>
+                    <div className="mt-6 flex items-center gap-4">
+                        <Avatar>
+                            <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
+                            <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                            <p className="font-bold text-dark-blue">{testimonial.name}</p>
+                            <p className="text-sm text-gray-500">{testimonial.company}</p>
+                        </div>
+                    </div>
+                </div>
+            </Card>
+        );
+    }
+    
+    return (
+      <Card className="h-full flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden">
+        <div className="relative w-full h-64 flex-shrink-0 bg-black">
              <Image 
                 src={testimonial.image!} 
                 alt={testimonial.name} 
                 data-ai-hint={testimonial.imageHint} 
                 fill
-                className={cn("object-cover", testimonial.name === 'Javohir Haqberdiyev' ? 'object-center' : 'object-center')}
+                className={cn("object-cover", testimonial.name === 'Javohir Haqberdiyev' ? 'object-top' : 'object-center')}
             />
-          )}
         </div>
         
         <div className="p-6 flex flex-col justify-between flex-grow">
             <div>
-                 {!isVideo && (
-                    <div className="flex text-yellow-400 mb-4">
-                       {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
-                   </div>
-                 )}
+                 <div className="flex text-yellow-400 mb-4">
+                    {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
+                </div>
                 <CardContent className="p-0 text-gray-700">
                     <p>"{testimonial.quote}"</p>
                 </CardContent>
