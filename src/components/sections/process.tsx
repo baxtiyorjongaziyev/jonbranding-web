@@ -41,7 +41,7 @@ const Process = () => {
         </div>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-center">
             {steps.map((step, index) => (
-              <Card key={index} className="bg-transparent border-0 shadow-none">
+              <Card key={index} className="bg-transparent border-0 shadow-none transition-transform duration-300 transform hover:scale-105">
                 <CardContent className="flex flex-col items-center p-0">
                   <div className="relative mb-4">
                     <div className="flex h-20 w-20 items-center justify-center rounded-full bg-secondary">

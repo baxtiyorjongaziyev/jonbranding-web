@@ -21,7 +21,7 @@ const Services = () => {
         </div>
         <div data-testid="services-list" className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map(service => (
-            <Card key={service.name} className="flex flex-col text-center shadow-lg rounded-2xl">
+            <Card key={service.name} className="flex flex-col text-center shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
               <CardHeader>
                 <CardTitle className="text-2xl text-dark-blue">{service.name}</CardTitle>
                 <CardDescription className="text-base !mt-2">{service.description}</CardDescription>
