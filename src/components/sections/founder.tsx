@@ -2,16 +2,18 @@
 
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import { Medal, Globe, Zap, Users, Phone, Send, PlayCircle } from 'lucide-react';
+import { Medal, Globe, Zap, Users, Phone, Send, PlayCircle, type LucideProps } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, type FC } from 'react';
+
+const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
 const founderPoints = [
-  { icon: Medal, text: "50+ dan ortiq loyihalar" },
-  { icon: Globe, text: "Xalqaro tajriba" },
-  { icon: Zap, text: "Tez va samarali aloqa" },
-  { icon: Users, text: "Aniq va shaffof ish jarayoni" },
+  { icon: 'Medal', text: "50+ dan ortiq loyihalar" },
+  { icon: 'Globe', text: "Xalqaro tajriba" },
+  { icon: 'Zap', text: "Tez va samarali aloqa" },
+  { icon: 'Users', text: "Aniq va shaffof ish jarayoni" },
 ];
 
 const founderMessage = "Salom! Men Baxtiyorjon, Jon.Branding asoschisi. PCG “Tez Natija 3” kursdoshlarimga va boshqa biznes egalariga o'z brendlarini keyingi bosqichga olib chiqishda yordam beraman. Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish. Keling, brendingizni birgalikda tahlil qilamiz va uning 'uxlab yotgan' potensialini uyg'otamiz.";
@@ -68,12 +70,15 @@ const Founder = () => {
               {founderMessage}
             </p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {founderPoints.map((point, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <point.icon className="w-6 h-6 text-primary flex-shrink-0" />
-                  <span className="text-gray-800 font-medium">{point.text}</span>
-                </div>
-              ))}
+              {founderPoints.map((point, index) => {
+                const Icon = icons[point.icon];
+                return (
+                    <div key={index} className="flex items-center gap-3">
+                        {Icon && <Icon className="w-6 h-6 text-primary flex-shrink-0" />}
+                        <span className="text-gray-800 font-medium">{point.text}</span>
+                    </div>
+                );
+              })}
             </div>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="shadow-ocean">
