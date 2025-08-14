@@ -94,10 +94,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
                     src={testimonial.image} 
                     alt={testimonial.name} 
                     data-ai-hint={testimonial.imageHint} 
-                    className={cn(
-                        "object-cover w-full h-full", 
-                        testimonial.name === "Javohir Haqberdiyev" && "object-top"
-                    )} 
+                    className="object-cover w-full h-full"
                   />
                   <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                 </Avatar>
