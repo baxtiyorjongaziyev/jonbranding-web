@@ -7,6 +7,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Star, PlayCircle } from 'lucide-react';
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 const testimonials = [
   {
@@ -16,7 +17,7 @@ const testimonials = [
     image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
     imageHint: "male business owner",
     quote: "Did, estetik did. Bu tug'ma bo'ladimi yoki orttirilgan ko'nikma bo'ladimi? Shunday estetik did egasidan biri Baxtiyorjon - Bizni Incontrol va Sherzod Beknazarov logolarini qilishda bizga yordam berdi. Baxtiyorjonga minnatdorchilik bildirmoqchimiz. Rahmat.",
-    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479&loop=1&dnt=1"
+    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&dnt=1"
   },
   {
     name: "Sevara Xolmanova",
@@ -47,82 +48,71 @@ const testimonials = [
 const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0] }) => {
     const [playVideo, setPlayVideo] = useState(false);
 
-    if (testimonial.videoUrl) {
-      return (
-        <Card className="h-full bg-white shadow-lg rounded-2xl overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-12 h-full">
-            <div className="md:col-span-5 relative bg-black min-h-[300px] md:min-h-0">
-              {playVideo ? (
-                <div style={{padding:'177.78% 0 0 0',position:'relative', height: '100%'}}><iframe src="https://player.vimeo.com/video/1109892890?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1&amp;dnt=1" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"></iframe></div>
-              ) : (
+    const isVideo = !!testimonial.videoUrl;
+
+    return (
+      <Card className={cn(
+        "h-full flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden",
+        isVideo ? "md:flex-row" : ""
+      )}>
+        <div className={cn(
+            "relative flex-shrink-0 bg-black",
+            isVideo ? "md:w-5/12 min-h-[300px] md:min-h-0" : "w-full h-64"
+        )}>
+          {isVideo && testimonial.videoUrl ? (
+            playVideo ? (
+                 <iframe 
+                    src="https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&dnt=1" 
+                    frameBorder="0" 
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
+                    className="w-full h-full"
+                    title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"
+                ></iframe>
+            ) : (
                 <div className="relative w-full h-full cursor-pointer group" onClick={() => setPlayVideo(true)}>
-                   <Avatar className="absolute top-0 left-0 w-full h-full rounded-none">
-                     <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
-                     <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                   </Avatar>
-                   <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                     <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
-                   </div>
+                    <Image src={testimonial.image!} alt={testimonial.name} data-ai-hint={testimonial.imageHint} fill className="object-cover" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                        <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
+                    </div>
                 </div>
-              )}
-            </div>
-            <div className="md:col-span-7 p-6 flex flex-col justify-center">
+            )
+          ) : (
+             <Image 
+                src={testimonial.image!} 
+                alt={testimonial.name} 
+                data-ai-hint={testimonial.imageHint} 
+                fill
+                className={cn("object-cover", testimonial.name === 'Javohir Haqberdiyev' ? 'object-center' : 'object-center')}
+            />
+          )}
+        </div>
+        
+        <div className="p-6 flex flex-col justify-between flex-grow">
+            <div>
+                 {!isVideo && (
+                    <div className="flex text-yellow-400 mb-4">
+                       {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
+                   </div>
+                 )}
                 <CardContent className="p-0 text-gray-700">
                     <p>"{testimonial.quote}"</p>
                 </CardContent>
-                <div className="mt-6 flex items-center gap-4">
-                    <Avatar>
-                        <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
-                        <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                        <p className="font-bold text-dark-blue">{testimonial.name}</p>
-                        <p className="text-sm text-gray-500">{testimonial.company}</p>
-                    </div>
-                </div>
             </div>
-          </div>
-        </Card>
-      )
-    }
-
-    return (
-        <Card className="h-full flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden">
-            <div className="w-full h-64 relative bg-black flex-shrink-0">
-                <Avatar className="w-full h-full rounded-none">
-                  <AvatarImage 
-                    src={testimonial.image} 
-                    alt={testimonial.name} 
-                    data-ai-hint={testimonial.imageHint} 
-                    className="object-cover w-full h-full"
-                  />
-                  <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+            <div className="mt-6 flex items-center gap-4">
+                <Avatar>
+                    <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
+                    <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                 </Avatar>
-            </div>
-            
-            <div className="p-6 flex flex-col justify-between flex-grow">
                 <div>
-                     <div className="flex text-yellow-400 mb-4">
-                        {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
-                    </div>
-                    <CardContent className="p-0 text-gray-700">
-                        <p>"{testimonial.quote}"</p>
-                    </CardContent>
-                </div>
-                <div className="mt-6 flex items-center gap-4">
-                    <Avatar>
-                        <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
-                        <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                        <p className="font-bold text-dark-blue">{testimonial.name}</p>
-                        <p className="text-sm text-gray-500">{testimonial.company}</p>
-                    </div>
+                    <p className="font-bold text-dark-blue">{testimonial.name}</p>
+                    <p className="text-sm text-gray-500">{testimonial.company}</p>
                 </div>
             </div>
-        </Card>
+        </div>
+      </Card>
     );
 };
+
 
 const Testimonials = () => {
   return (
