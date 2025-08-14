@@ -170,7 +170,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                         </div>
                         
                         <div>
-                            <h3 className="text-xl font-bold text-dark-blue mb-4">2. Chegirma</h3>
+                            <h3 className="text-xl font-bold text-dark-blue mb-4">2. Maxsus taklif</h3>
                              <Card 
                                 onClick={() => setIsPcgMember(prev => !prev)}
                                 className={cn(
@@ -180,8 +180,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                              >
                                 <div className="flex items-center space-x-4 p-6 rounded-lg">
                                     <Checkbox id="pcg" checked={isPcgMember} onCheckedChange={(checked) => setIsPcgMember(Boolean(checked))} className="h-8 w-8"/>
-                                    <Label htmlFor="pcg" className="text-lg font-bold leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
+                                    <Label htmlFor="pcg" className="text-base font-bold leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer flex flex-col">
                                         PCG "Tez Natija 3" kursi a'zosiman (-50% chegirma)
+                                        <span className="font-normal text-sm text-gray-600 mt-1">Faqat PCG a'zolari uchun! Bu imkoniyatni qo'ldan boy bermang!</span>
                                     </Label>
                                 </div>
                             </Card>
