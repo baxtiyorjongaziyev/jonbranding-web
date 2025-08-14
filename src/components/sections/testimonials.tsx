@@ -56,12 +56,14 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
                 title={`${testimonial.name} - Fikrlar`}
               ></iframe>
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center cursor-pointer" onClick={() => setPlayVideo(true)}>
-                <Avatar className="w-full h-full opacity-50 rounded-none">
-                  <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover" />
+              <div className="relative w-full h-full cursor-pointer" onClick={() => setPlayVideo(true)}>
+                <Avatar className="w-full h-full rounded-none">
+                  <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
                   <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                 </Avatar>
-                <PlayCircle className="absolute w-16 h-16 text-white/80 hover:text-white transition-colors" />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                  <PlayCircle className="w-16 h-16 text-white/80 hover:text-white transition-colors" />
+                </div>
               </div>
             )}
           </div>
