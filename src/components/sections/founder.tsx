@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import { Medal, Globe, Zap, Users, Phone, Send } from 'lucide-react';
+import { Medal, Globe, Zap, Users, Phone, Send, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const founderPoints = [
   { icon: Medal, text: "50+ dan ortiq loyihalar" },
@@ -14,21 +15,47 @@ const founderPoints = [
 ];
 
 const Founder = () => {
+  const [playVideo, setPlayVideo] = useState(false);
+
   return (
     <section id="founder" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
             <Card className="overflow-hidden shadow-xl rounded-2xl">
-              <div className="aspect-[9/16] relative w-full h-full">
-                <iframe 
-                  src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&dnt=1" 
-                  frameBorder="0" 
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                  className="absolute top-0 left-0 w-full h-full"
-                  title="Baxtiyorjon Gaziyev"
-                ></iframe>
-              </div>
+              <CardContent className="p-0 aspect-[9/16] relative w-full h-full bg-black">
+                {playVideo ? (
+                    <iframe 
+                      src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1" 
+                      frameBorder="0" 
+                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                      className="absolute top-0 left-0 w-full h-full"
+                      title="Baxtiyorjon Gaziyev"
+                    ></iframe>
+                ) : (
+                  <>
+                    <Image 
+                      src="https://placehold.co/1080x1920.png"
+                      alt="Baxtiyorjon Gaziyev"
+                      layout="fill"
+                      objectFit="cover"
+                      data-ai-hint="founder portrait"
+                      className="opacity-80"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="w-24 h-24 text-white hover:bg-white/20 hover:text-white rounded-full"
+                        onClick={() => setPlayVideo(true)}
+                        aria-label="Play video"
+                      >
+                        <PlayCircle className="w-20 h-20" />
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </CardContent>
             </Card>
           </div>
           <div className="lg:order-first">
