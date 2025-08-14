@@ -46,11 +46,11 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
     if (testimonial.videoUrl) {
       return (
         <Card className="h-full flex flex-col md:flex-row bg-white shadow-lg rounded-2xl overflow-hidden">
-          <div className="w-full md:w-5/12 flex-shrink-0 bg-black">
+          <div className="w-full md:w-5/12 flex-shrink-0 relative bg-black">
             {playVideo ? (
                  <div style={{padding:'177.78% 0 0 0',position:'relative'}}><iframe src="https://player.vimeo.com/video/1109892890?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1&amp;dnt=1" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"></iframe></div>
             ) : (
-              <div className="relative w-full h-full cursor-pointer group" onClick={() => setPlayVideo(true)} style={{padding:'177.78% 0 0 0'}}>
+              <div className="relative w-full h-full cursor-pointer group" onClick={() => setPlayVideo(true)}>
                 <Avatar className="absolute top-0 left-0 w-full h-full rounded-none">
                   <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
                   <AvatarFallback>{testimonial.avatar}</AvatarFallback>
