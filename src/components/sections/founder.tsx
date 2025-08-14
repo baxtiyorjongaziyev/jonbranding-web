@@ -5,8 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Medal, Globe, Zap, Users, Phone, Send, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
+import { useState } from 'react';
 
 const founderPoints = [
   { icon: Medal, text: "50+ dan ortiq loyihalar" },
@@ -15,32 +14,11 @@ const founderPoints = [
   { icon: Users, text: "Aniq va shaffof ish jarayoni" },
 ];
 
-const founderMessages = [
-  "Salom! Men Baxtiyorjon, Jon.Branding asoschisi. PCG “Tez Natija 3” kursdoshlarimga va boshqa biznes egalariga o'z brendlarini keyingi bosqichga olib chiqishda yordam beraman.",
-  "Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish.",
-  "Men siz kabi tadbirkorlarning o'z biznesini brending orqali qanday qilib keyingi bosqichga olib chiqqanini ko'p kuzatdim. Keling, brendingizni birgalikda tahlil qilamiz va uning 'uxlab yotgan' potensialini uyg'otamiz.",
-  "Biznesingiz uchun to'g'ri brending nafaqat logotip, balki mijozlaringiz qalbidan joy oladigan hikoyadir. Keling shu hikoyani birga yozamiz.",
-  "Chet eldagi o'zbek tadbirkorlari bilan Tojikiston, Rossiya, Qirg'iziston, Yaponiya, Dubay (BAA), AQSH, Turkiya va Afrika mamlakatlarida ishlash tajribamiz bor."
-];
+const founderMessage = "Salom! Men Baxtiyorjon, Jon.Branding asoschisi. PCG “Tez Natija 3” kursdoshlarimga va boshqa biznes egalariga o'z brendlarini keyingi bosqichga olib chiqishda yordam beraman. Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish. Keling, brendingizni birgalikda tahlil qilamiz va uning 'uxlab yotgan' potensialini uyg'otamiz.";
 
 
 const Founder = () => {
   const [playVideo, setPlayVideo] = useState(false);
-  const [messageIndex, setMessageIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setMessageIndex((prevIndex) => (prevIndex + 1) % founderMessages.length);
-        setIsAnimating(false);
-      }, 500); // fade-out duration
-    }, 5000); // 5 seconds per message
-
-    return () => clearInterval(interval);
-  }, []);
-
 
   return (
     <section id="founder" className="py-16 sm:py-24 bg-white">
@@ -87,11 +65,8 @@ const Founder = () => {
             <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">
               Asoschi: Baxtiyorjon Gaziyev
             </h2>
-            <p className={cn(
-              "mt-4 text-lg text-gray-700 min-h-[160px] sm:min-h-[140px] md:min-h-[168px] lg:min-h-[224px] transition-opacity duration-500",
-              isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
-            )}>
-              {founderMessages[messageIndex]}
+            <p className="mt-4 text-lg text-gray-700">
+              {founderMessage}
             </p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {founderPoints.map((point, index) => (
