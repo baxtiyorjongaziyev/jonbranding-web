@@ -1,5 +1,4 @@
 import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
 
 const steps = [
   {
@@ -39,23 +38,34 @@ const Process = () => {
             Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan 5 bosqichli tizim.
           </p>
         </div>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-center">
-            {steps.map((step, index) => (
-              <Card key={index} className="bg-transparent border-0 shadow-none transition-transform duration-300 transform hover:scale-105">
-                <CardContent className="flex flex-col items-center p-0">
-                  <div className="relative mb-4">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-secondary">
-                      <step.icon className="h-10 w-10 text-primary" />
+        <div className="mt-20">
+          <div className="relative">
+            {/* Dotted line for large screens */}
+            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-px -translate-y-12">
+               <div className="w-full h-full" style={{
+                  backgroundImage: "linear-gradient(to right, hsl(var(--border)) 50%, transparent 50%)",
+                  backgroundSize: "20px 1px",
+                  backgroundRepeat: "repeat-x"
+                }}></div>
+            </div>
+            
+            <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-0">
+              {steps.map((step, index) => (
+                <div key={index} className="flex-1 text-center w-full lg:w-auto flex flex-col items-center">
+                  <div className="relative z-10">
+                    <div className="flex h-24 w-24 items-center justify-center rounded-full bg-secondary border-4 border-white shadow-md transform hover:scale-110 transition-transform duration-300">
+                      <step.icon className="h-12 w-12 text-primary" />
                     </div>
-                     <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm">
+                    <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm shadow-sm">
                       {index + 1}
                     </div>
                   </div>
-                  <h3 className="mt-4 text-xl font-bold text-dark-blue">{step.title}</h3>
-                  <p className="mt-2 text-gray-600">{step.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+                  <h3 className="mt-6 text-xl font-bold text-dark-blue">{step.title}</h3>
+                  <p className="mt-2 text-gray-600 max-w-xs">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
