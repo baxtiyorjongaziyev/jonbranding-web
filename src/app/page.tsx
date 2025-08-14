@@ -124,10 +124,10 @@ const Home: FC = () => {
         />
         <TargetAudience />
         <Services />
+        <Testimonials />
+        <BeforeAfter />
         <Video />
         <PackageBuilder onOrderNow={handleOpenModal} />
-        <BeforeAfter />
-        <Testimonials />
         <Process />
         <Gallery />
         <CtaBlock 
