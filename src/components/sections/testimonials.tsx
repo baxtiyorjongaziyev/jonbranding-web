@@ -46,26 +46,28 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
     if (testimonial.videoUrl) {
       return (
         <Card className="h-full flex flex-col md:flex-row bg-white shadow-lg rounded-2xl overflow-hidden">
-          <div className="w-full md:w-5/12 aspect-video md:aspect-auto relative bg-black flex-shrink-0">
-            {playVideo ? (
-              <iframe
-                src={`${testimonial.videoUrl}&autoplay=1`}
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                className="absolute top-0 left-0 w-full h-full"
-                title={`${testimonial.name} - Fikrlar`}
-              ></iframe>
-            ) : (
-              <div className="relative w-full h-full cursor-pointer" onClick={() => setPlayVideo(true)}>
-                <Avatar className="w-full h-full rounded-none">
-                  <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
-                  <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                </Avatar>
-                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                  <PlayCircle className="w-16 h-16 text-white/80 hover:text-white transition-colors" />
-                </div>
-              </div>
-            )}
+          <div className="w-full md:w-5/12 flex-shrink-0">
+             <div className="relative aspect-video w-full h-full bg-black">
+                {playVideo ? (
+                  <iframe
+                    src={`${testimonial.videoUrl}&autoplay=1`}
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                    className="absolute top-0 left-0 w-full h-full"
+                    title={`${testimonial.name} - Fikrlar`}
+                  ></iframe>
+                ) : (
+                  <div className="relative w-full h-full cursor-pointer" onClick={() => setPlayVideo(true)}>
+                    <Avatar className="w-full h-full rounded-none">
+                      <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
+                      <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                    </Avatar>
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                      <PlayCircle className="w-16 h-16 text-white/80 hover:text-white transition-colors" />
+                    </div>
+                  </div>
+                )}
+            </div>
           </div>
           <div className="p-6 flex flex-col justify-between flex-grow">
               <CardContent className="p-0 text-gray-700">
