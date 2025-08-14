@@ -48,22 +48,20 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
 
     if (testimonial.videoUrl) {
       return (
-        <Card className="h-full bg-white shadow-lg rounded-2xl overflow-hidden">
+        <Card className="h-full bg-white shadow-lg rounded-2xl overflow-hidden md:max-h-[500px]">
           <div className="grid grid-cols-1 md:grid-cols-12 h-full">
-            <div className="md:col-span-5 w-full h-full relative bg-black">
+            <div className="md:col-span-5 relative bg-black aspect-[9/16] md:aspect-auto">
               {playVideo ? (
-                 <div style={{padding:'177.78% 0 0 0',position:'relative'}}><iframe src="https://player.vimeo.com/video/1109892890?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1&amp;dnt=1" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"></iframe></div>
+                <iframe src="https://player.vimeo.com/video/1109892890?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1&amp;dnt=1" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" className="absolute top-0 left-0 w-full h-full" title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"></iframe>
               ) : (
                 <div className="relative w-full h-full cursor-pointer group" onClick={() => setPlayVideo(true)}>
-                   <div style={{padding:'177.78% 0 0 0',position:'relative'}}>
-                      <Avatar className="absolute top-0 left-0 w-full h-full rounded-none">
-                        <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
-                        <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                      </Avatar>
+                   <Avatar className="absolute top-0 left-0 w-full h-full rounded-none">
+                     <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
+                     <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                   </Avatar>
+                   <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                     <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
                    </div>
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                    <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
-                  </div>
                 </div>
               )}
             </div>
