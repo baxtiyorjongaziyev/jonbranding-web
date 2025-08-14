@@ -46,23 +46,23 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
     if (testimonial.videoUrl) {
       return (
         <Card className="h-full flex flex-col md:flex-row bg-white shadow-lg rounded-2xl overflow-hidden">
-          <div className="w-full md:w-5/12 flex-shrink-0">
+          <div className="w-full md:w-5/12 flex-shrink-0 bg-black">
             {playVideo ? (
                  <div style={{padding:'177.78% 0 0 0',position:'relative'}}><iframe src="https://player.vimeo.com/video/1109892890?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1&amp;dnt=1" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"></iframe></div>
             ) : (
-              <div className="relative w-full h-full cursor-pointer" onClick={() => setPlayVideo(true)}>
-                <Avatar className="w-full h-full rounded-none">
+              <div className="relative w-full h-full cursor-pointer group" onClick={() => setPlayVideo(true)} style={{padding:'177.78% 0 0 0'}}>
+                <Avatar className="absolute top-0 left-0 w-full h-full rounded-none">
                   <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
                   <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                 </Avatar>
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                  <PlayCircle className="w-16 h-16 text-white/80 hover:text-white transition-colors" />
+                  <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
                 </div>
               </div>
             )}
           </div>
-          <div className="p-6 flex flex-col justify-between flex-grow">
-              <CardContent className="p-0 text-gray-700">
+          <div className="p-6 flex flex-col flex-grow">
+              <CardContent className="p-0 text-gray-700 flex-grow">
                   <p>"{testimonial.quote}"</p>
               </CardContent>
               <div className="mt-6 flex items-center gap-4">
