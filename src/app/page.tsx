@@ -50,20 +50,27 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
     }
   }, [selectedServices, isPcgMember, isClient]);
 
+  if (!isClient) {
+    return (
+        <div className="sticky bottom-0 md:hidden bg-white/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
+            <div className="container mx-auto flex justify-between items-center">
+                <div className="text-sm space-y-1">
+                    <Skeleton className="h-6 w-16" />
+                    <Skeleton className="h-3 w-20" />
+                </div>
+                <Skeleton className="h-10 w-40" />
+            </div>
+        </div>
+    );
+  }
+
   return (
     <div className="sticky bottom-0 md:hidden bg-white/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
       <div className="container mx-auto flex justify-between items-center">
-        {isClient ? (
-          <div className="text-sm">
+        <div className="text-sm">
             <p className="font-bold text-dark-blue text-lg">${price.toLocaleString('en-US')}</p>
             <p className="text-xs text-gray-600">Yakuniy narx</p>
-          </div>
-        ) : (
-          <div className="text-sm space-y-1">
-            <Skeleton className="h-6 w-16" />
-            <Skeleton className="h-3 w-20" />
-          </div>
-        )}
+        </div>
         <Button onClick={onOpenModal} className="shadow-ocean animate-subtle-pulse">
           Bepul konsultatsiya olish
         </Button>
@@ -115,6 +122,19 @@ const Home: FC = () => {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+  
+  if (!isClient) {
+    return (
+       <div className="flex min-h-screen flex-col overflow-x-hidden">
+        <Skeleton className="h-20 w-full" />
+        <main className="flex-grow">
+            <Skeleton className="h-96 w-full" />
+            <Skeleton className="h-48 w-full mt-4" />
+        </main>
+        <Skeleton className="h-64 w-full" />
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
