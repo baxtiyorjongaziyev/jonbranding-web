@@ -51,9 +51,9 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
       return (
         <Card className="h-full bg-white shadow-lg rounded-2xl overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-12 h-full">
-            <div className="md:col-span-5 relative bg-black">
+            <div className="md:col-span-5 relative bg-black min-h-[300px] md:min-h-0">
               {playVideo ? (
-                <div style={{padding:'177.78% 0 0 0',position:'relative'}}><iframe src="https://player.vimeo.com/video/1109892890?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1&amp;dnt=1" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"></iframe></div>
+                <div style={{padding:'177.78% 0 0 0',position:'relative', height: '100%'}}><iframe src="https://player.vimeo.com/video/1109892890?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1&amp;dnt=1" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"></iframe></div>
               ) : (
                 <div className="relative w-full h-full cursor-pointer group" onClick={() => setPlayVideo(true)}>
                    <Avatar className="absolute top-0 left-0 w-full h-full rounded-none">
@@ -94,7 +94,10 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
                     src={testimonial.image} 
                     alt={testimonial.name} 
                     data-ai-hint={testimonial.imageHint} 
-                    className={cn("object-cover w-full h-full", testimonial.name === "Javohir Haqberdiyev" && "object-bottom")} 
+                    className={cn(
+                        "object-cover w-full h-full", 
+                        testimonial.name === "Javohir Haqberdiyev" && "object-top"
+                    )} 
                   />
                   <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                 </Avatar>
