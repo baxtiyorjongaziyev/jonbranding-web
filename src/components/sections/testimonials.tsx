@@ -56,26 +56,26 @@ const Testimonials = () => {
                     <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                         <div className="p-1 h-full">
                         <Card className="h-full flex flex-col justify-between p-6 bg-white shadow-lg rounded-2xl overflow-hidden">
-                             {testimonial.videoUrl ? (
-                                <div className="aspect-w-9 aspect-h-16 mb-4 -m-6 relative">
-                                  <iframe
-                                    src={testimonial.videoUrl}
-                                    frameBorder="0"
-                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                                    className="absolute top-0 left-0 w-full h-full"
-                                    title={`${testimonial.name} - Fikrlar`}
-                                  ></iframe>
-                                </div>
-                              ) : (
-                                <div>
+                             <div>
+                                {testimonial.videoUrl ? (
+                                    <div className="aspect-video mb-4 -mx-6 -mt-6 relative bg-black">
+                                      <iframe
+                                        src={testimonial.videoUrl}
+                                        frameBorder="0"
+                                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                        className="absolute top-0 left-0 w-full h-full"
+                                        title={`${testimonial.name} - Fikrlar`}
+                                      ></iframe>
+                                    </div>
+                                ) : (
                                     <div className="flex text-yellow-400 mb-4">
                                         {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
                                     </div>
-                                    <CardContent className="p-0 text-gray-700">
-                                        <p>"{testimonial.quote}"</p>
-                                    </CardContent>
-                                </div>
-                              )}
+                                )}
+                                <CardContent className="p-0 text-gray-700">
+                                    <p>"{testimonial.quote}"</p>
+                                </CardContent>
+                              </div>
                             <div className="mt-6 flex items-center gap-4">
                                 <Avatar>
                                     <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
