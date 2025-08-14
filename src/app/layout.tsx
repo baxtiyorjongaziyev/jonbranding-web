@@ -46,6 +46,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://jonbranding.uz',
   },
+  icons: {
+    icon: '/favicon.ico',
+  }
 };
 
 const jsonLd = {
