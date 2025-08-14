@@ -2,7 +2,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Star, PlayCircle } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import React, { useState } from 'react';
 
 const testimonials = [
@@ -44,37 +43,61 @@ const testimonials = [
 const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0] }) => {
     const [playVideo, setPlayVideo] = useState(false);
 
+    if (testimonial.videoUrl) {
+      return (
+        <Card className="h-full flex flex-col md:flex-row bg-white shadow-lg rounded-2xl overflow-hidden">
+          <div className="w-full md:w-5/12 aspect-video md:aspect-auto relative bg-black flex-shrink-0">
+            {playVideo ? (
+              <iframe
+                src={`${testimonial.videoUrl}&autoplay=1`}
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                className="absolute top-0 left-0 w-full h-full"
+                title={`${testimonial.name} - Fikrlar`}
+              ></iframe>
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center cursor-pointer" onClick={() => setPlayVideo(true)}>
+                <Avatar className="w-full h-full opacity-50 rounded-none">
+                  <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover" />
+                  <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                </Avatar>
+                <PlayCircle className="absolute w-16 h-16 text-white/80 hover:text-white transition-colors" />
+              </div>
+            )}
+          </div>
+          <div className="p-6 flex flex-col justify-between flex-grow">
+              <CardContent className="p-0 text-gray-700">
+                  <p>"{testimonial.quote}"</p>
+              </CardContent>
+              <div className="mt-6 flex items-center gap-4">
+                  <Avatar>
+                      <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
+                      <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                      <p className="font-bold text-dark-blue">{testimonial.name}</p>
+                      <p className="text-sm text-gray-500">{testimonial.company}</p>
+                  </div>
+              </div>
+          </div>
+        </Card>
+      )
+    }
+
     return (
         <Card className="h-full flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden">
-            {testimonial.videoUrl && (
-                <div className="w-full aspect-video relative bg-black flex-shrink-0">
-                    {playVideo ? (
-                        <iframe
-                            src={`${testimonial.videoUrl}&autoplay=1`}
-                            frameBorder="0"
-                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                            className="absolute top-0 left-0 w-full h-full"
-                            title={`${testimonial.name} - Fikrlar`}
-                        ></iframe>
-                    ) : (
-                        <div className="absolute inset-0 flex items-center justify-center cursor-pointer" onClick={() => setPlayVideo(true)}>
-                             <Avatar className="w-full h-full opacity-50">
-                                <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover" />
-                                <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                            </Avatar>
-                            <PlayCircle className="absolute w-16 h-16 text-white/80 hover:text-white transition-colors" />
-                        </div>
-                    )}
-                </div>
-            )}
+            <div className="w-full aspect-video relative bg-black flex-shrink-0">
+                <Avatar className="w-full h-full rounded-none">
+                  <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover" />
+                  <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                </Avatar>
+            </div>
             
             <div className="p-6 flex flex-col justify-between flex-grow">
                 <div>
-                    {!testimonial.videoUrl && (
-                         <div className="flex text-yellow-400 mb-4">
-                            {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
-                        </div>
-                    )}
+                     <div className="flex text-yellow-400 mb-4">
+                        {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
+                    </div>
                     <CardContent className="p-0 text-gray-700">
                         <p>"{testimonial.quote}"</p>
                     </CardContent>
