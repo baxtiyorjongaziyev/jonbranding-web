@@ -47,27 +47,19 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
       return (
         <Card className="h-full flex flex-col md:flex-row bg-white shadow-lg rounded-2xl overflow-hidden">
           <div className="w-full md:w-5/12 flex-shrink-0">
-             <div className="relative aspect-video w-full h-full bg-black">
-                {playVideo ? (
-                  <iframe
-                    src={`${testimonial.videoUrl}&autoplay=1`}
-                    frameBorder="0"
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                    className="absolute top-0 left-0 w-full h-full"
-                    title={`${testimonial.name} - Fikrlar`}
-                  ></iframe>
-                ) : (
-                  <div className="relative w-full h-full cursor-pointer" onClick={() => setPlayVideo(true)}>
-                    <Avatar className="w-full h-full rounded-none">
-                      <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
-                      <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                    </Avatar>
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                      <PlayCircle className="w-16 h-16 text-white/80 hover:text-white transition-colors" />
-                    </div>
-                  </div>
-                )}
-            </div>
+            {playVideo ? (
+                 <div style={{padding:'177.78% 0 0 0',position:'relative'}}><iframe src="https://player.vimeo.com/video/1109892890?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1&amp;dnt=1" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} title="Sherzod Beknazarov - Baxtiyorjon Gaziyev haqida fikrlari"></iframe></div>
+            ) : (
+              <div className="relative w-full h-full cursor-pointer" onClick={() => setPlayVideo(true)}>
+                <Avatar className="w-full h-full rounded-none">
+                  <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover w-full h-full" />
+                  <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                </Avatar>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                  <PlayCircle className="w-16 h-16 text-white/80 hover:text-white transition-colors" />
+                </div>
+              </div>
+            )}
           </div>
           <div className="p-6 flex flex-col justify-between flex-grow">
               <CardContent className="p-0 text-gray-700">
@@ -135,7 +127,7 @@ const Testimonials = () => {
             <Carousel opts={{ align: "start", loop: true }} className="w-full">
                 <CarouselContent className="-ml-4">
                     {testimonials.map((testimonial, index) => (
-                    <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-2/5">
+                    <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-2/3">
                         <div className="p-1 h-full">
                             <TestimonialCard testimonial={testimonial} />
                         </div>
