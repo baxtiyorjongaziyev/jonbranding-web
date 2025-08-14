@@ -1,9 +1,18 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Star } from 'lucide-react';
+import { Star, Video } from 'lucide-react';
 
 const testimonials = [
+  {
+    name: "Sherzod Beknazarov",
+    company: "Incontrol Consulting asoschisi",
+    avatar: "SB",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
+    imageHint: "male business owner",
+    quote: "Did, estetik did. Bu tug'ma bo'ladimi yoki orttirilgan ko'nikma bo'ladimi? Shunday estetik did egasidan biri Baxtiyorjon - Bizni Incontrol va Sherzod Beknazarov logolarini qilishda bizga yordam berdi. Baxtiyorjonga minnatdorchilik bildirmoqchimiz. Rahmat.",
+    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&dnt=1"
+  },
   {
     name: "Sevara Xolmanova",
     company: "Fidda by Sevara asoschisi",
@@ -11,14 +20,6 @@ const testimonials = [
     image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
     imageHint: "female entrepreneur portrait",
     quote: "Men bu jamoa bn ishlab ko'rdim menga juda yoqdi samarali va natijasi siz kutgandanda A'lo bo'larkan brendlashni xam stikerlash va patenlashni xam berganman 7 oyda aniq boladi Hudo xohlasa Halol ishlarkansilar Allox rozi bo'lsin silardan juda xursand bo'ldim ishilarga rivoj Rahmat."
-  },
-  {
-    name: "Sherzod Beknazarov",
-    company: "Incontrol Consulting asoschisi",
-    avatar: "SB",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
-    imageHint: "male business owner",
-    quote: "Did, estetik did. Bu tug'ma bo'ladimi yoki orttirilgan ko'nikma bo'ladimi? Shunday estetik did egasidan biri Baxtiyorjon - Bizni Incontrol va Sherzod Beknazarov logolarini qilishda bizga yordam berdi. Baxtiyorjonga minnatdorchilik bildirmoqchimiz. Rahmat."
   },
   {
     name: "Nodirbek",
@@ -54,15 +55,27 @@ const Testimonials = () => {
                     {testimonials.map((testimonial, index) => (
                     <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                         <div className="p-1 h-full">
-                        <Card className="h-full flex flex-col justify-between p-6 bg-white shadow-lg rounded-2xl">
-                            <div>
-                                <div className="flex text-yellow-400 mb-4">
-                                    {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
+                        <Card className="h-full flex flex-col justify-between p-6 bg-white shadow-lg rounded-2xl overflow-hidden">
+                             {testimonial.videoUrl ? (
+                                <div className="aspect-w-9 aspect-h-16 mb-4 -m-6 relative">
+                                  <iframe
+                                    src={testimonial.videoUrl}
+                                    frameBorder="0"
+                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                    className="absolute top-0 left-0 w-full h-full"
+                                    title={`${testimonial.name} - Fikrlar`}
+                                  ></iframe>
                                 </div>
-                                <CardContent className="p-0 text-gray-700">
-                                    <p>"{testimonial.quote}"</p>
-                                </CardContent>
-                            </div>
+                              ) : (
+                                <div>
+                                    <div className="flex text-yellow-400 mb-4">
+                                        {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
+                                    </div>
+                                    <CardContent className="p-0 text-gray-700">
+                                        <p>"{testimonial.quote}"</p>
+                                    </CardContent>
+                                </div>
+                              )}
                             <div className="mt-6 flex items-center gap-4">
                                 <Avatar>
                                     <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
