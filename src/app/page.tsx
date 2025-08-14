@@ -118,7 +118,7 @@ const Home: FC = () => {
         <WhyUs />
         <CtaBlock 
           onCtaClick={handleOpenModal}
-          title="Brendingizni keyingi bosqichga tayyormisiz?"
+          title="Brendingiz shunchaki chiroyli emas, sotadigan bo'lishini xohlaysizmi?"
           description="Bizning strategik yondashuvimiz biznesingiz uchun qanday qiymat yaratishini bilib oling."
           buttonText="Strategiyani muhokama qilish"
         />
@@ -132,7 +132,7 @@ const Home: FC = () => {
         <Gallery />
         <CtaBlock 
           onCtaClick={handleOpenModal}
-          title="Sizning brendingiz ham shunday ko'zga ko'rinishi mumkin."
+          title="Biznesingizni raqobatchilardan bir umrga ajratib turadigan brend yarating."
           description="Portfolio sizga ma'qul keldimi? Keling, sizning biznesingiz uchun ham shunday ajoyib natijalar yaratamiz."
           buttonText="Loyiha uchun bog'lanish"
         />
