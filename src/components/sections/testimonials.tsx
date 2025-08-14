@@ -87,7 +87,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
 
     return (
         <Card className="h-full flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden">
-            <div className="w-full aspect-video relative bg-black flex-shrink-0">
+            <div className="w-full h-64 relative bg-black flex-shrink-0">
                 <Avatar className="w-full h-full rounded-none">
                   <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} className="object-cover" />
                   <AvatarFallback>{testimonial.avatar}</AvatarFallback>
