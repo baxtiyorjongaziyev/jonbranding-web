@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: APP_NAME,
     images: [
       {
-        url: 'https://placehold.co/1200x630.png',
+        url: 'https://img1.teletype.in/files/88/92/8892f18d-a298-485d-8fe5-7d0444defd89.png',
         width: 1200,
         height: 630,
         alt: APP_DESCRIPTION,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: APP_NAME,
     description: APP_DESCRIPTION,
-    images: ['https://placehold.co/1200x630.png'],
+    images: ['https://img1.teletype.in/files/88/92/8892f18d-a298-485d-8fe5-7d0444defd89.png'],
   },
   alternates: {
     canonical: 'https://jonbranding.uz',
