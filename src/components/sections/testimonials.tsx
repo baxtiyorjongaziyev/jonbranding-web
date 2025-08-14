@@ -1,7 +1,8 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Star, Video } from 'lucide-react';
+import { Star } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const testimonials = [
   {
@@ -53,39 +54,62 @@ const Testimonials = () => {
             <Carousel opts={{ align: "start", loop: true }} className="w-full">
                 <CarouselContent className="-ml-4">
                     {testimonials.map((testimonial, index) => (
-                    <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                    <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-2/5">
                         <div className="p-1 h-full">
-                        <Card className="h-full flex flex-col justify-between p-6 bg-white shadow-lg rounded-2xl overflow-hidden">
-                             <div>
-                                {testimonial.videoUrl ? (
-                                    <div className="aspect-video mb-4 -mx-6 -mt-6 relative bg-black">
-                                      <iframe
-                                        src={testimonial.videoUrl}
-                                        frameBorder="0"
-                                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                                        className="absolute top-0 left-0 w-full h-full"
-                                        title={`${testimonial.name} - Fikrlar`}
-                                      ></iframe>
+                        <Card className={cn("h-full flex justify-between bg-white shadow-lg rounded-2xl overflow-hidden",
+                         testimonial.videoUrl ? "flex-col sm:flex-row" : "flex-col"
+                        )}>
+                            {testimonial.videoUrl ? (
+                                <>
+                                    <div className="w-full sm:w-1/2 aspect-[9/16] relative bg-black flex-shrink-0">
+                                        <iframe
+                                            src={testimonial.videoUrl}
+                                            frameBorder="0"
+                                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                            className="absolute top-0 left-0 w-full h-full"
+                                            title={`${testimonial.name} - Fikrlar`}
+                                        ></iframe>
                                     </div>
-                                ) : (
-                                    <div className="flex text-yellow-400 mb-4">
-                                        {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
+                                    <div className="p-6 flex flex-col justify-between">
+                                        <div>
+                                          <CardContent className="p-0 text-gray-700">
+                                            <p>"{testimonial.quote}"</p>
+                                          </CardContent>
+                                        </div>
+                                        <div className="mt-6 flex items-center gap-4">
+                                            <Avatar>
+                                                <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
+                                                <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                                            </Avatar>
+                                            <div>
+                                                <p className="font-bold text-dark-blue">{testimonial.name}</p>
+                                                <p className="text-sm text-gray-500">{testimonial.company}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                )}
-                                <CardContent className="p-0 text-gray-700">
-                                    <p>"{testimonial.quote}"</p>
-                                </CardContent>
-                              </div>
-                            <div className="mt-6 flex items-center gap-4">
-                                <Avatar>
-                                    <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
-                                    <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                                </Avatar>
-                                <div>
-                                    <p className="font-bold text-dark-blue">{testimonial.name}</p>
-                                    <p className="text-sm text-gray-500">{testimonial.company}</p>
+                                </>
+                            ) : (
+                                <div className="p-6 flex flex-col justify-between h-full">
+                                    <div>
+                                        <div className="flex text-yellow-400 mb-4">
+                                            {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
+                                        </div>
+                                        <CardContent className="p-0 text-gray-700">
+                                            <p>"{testimonial.quote}"</p>
+                                        </CardContent>
+                                    </div>
+                                    <div className="mt-6 flex items-center gap-4">
+                                        <Avatar>
+                                            <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
+                                            <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                                        </Avatar>
+                                        <div>
+                                            <p className="font-bold text-dark-blue">{testimonial.name}</p>
+                                            <p className="text-sm text-gray-500">{testimonial.company}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </Card>
                         </div>
                     </CarouselItem>
