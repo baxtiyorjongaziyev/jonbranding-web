@@ -26,6 +26,7 @@ import { useLocalStorage } from '@/hooks/use-local-storage';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import CtaBlock from '@/components/sections/cta-block';
+import { useTelegram } from '@/hooks/use-telegram';
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
@@ -85,6 +86,14 @@ const Home: FC = () => {
   const [packageDetails, setPackageDetails] = useState({ summary: '', price: 0 });
 
   const [isClient, setIsClient] = useState(false);
+
+  const { tg } = useTelegram();
+
+  useEffect(() => {
+    if (tg) {
+      tg.BackButton.show();
+    }
+  }, [tg]);
 
   useEffect(() => {
       setIsClient(true);

@@ -72,6 +72,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
         <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet" />
         
+        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <Script
             id="app-config"
             strategy="beforeInteractive"
