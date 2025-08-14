@@ -33,7 +33,7 @@ const testimonials = [
     name: "Javohir Haqberdiyev",
     company: "Perfona asoschisi",
     avatar: "JH",
-    image: "https://placehold.co/40x40.png",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/67480e63648c1fa51ca4adff_A5%20-%201.jpg",
     imageHint: "tech startup founder",
     quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!"
   },
