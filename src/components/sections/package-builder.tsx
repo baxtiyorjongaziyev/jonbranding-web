@@ -7,9 +7,10 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { servicePrices, calculatePackagePrice, generateSummary, type PriceDetails } from '@/lib/pricing';
+import { servicePrices, calculatePackagePrice, type PriceDetails } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { CheckCircle, Sparkles, Gift, ShieldCheck } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -81,6 +82,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         if (service === 'logo') return; // Logo is mandatory
         setSelectedServices(prev => ({ ...prev, [service]: !prev[service] }));
     };
+    
+    const handlePcgToggle = (checked: boolean) => {
+        if(checked && !isPcgMember) {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+        setIsPcgMember(checked);
+    }
 
      if (!isClient) {
         return (
@@ -171,14 +183,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                         <div>
                             <h3 className="text-xl font-bold text-dark-blue mb-4">2. Maxsus taklif</h3>
                              <Card 
-                                onClick={() => setIsPcgMember(prev => !prev)}
+                                onClick={() => handlePcgToggle(!isPcgMember)}
                                 className={cn(
                                     "p-1 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer animate-subtle-pulse",
                                     isPcgMember ? "bg-accent/20 border-accent ring-2 ring-accent" : "bg-white hover:shadow-md"
                                 )}
                              >
                                 <div className="flex items-center space-x-4 p-6 rounded-lg">
-                                    <Checkbox id="pcg" checked={isPcgMember} onCheckedChange={(checked) => setIsPcgMember(Boolean(checked))} className="h-8 w-8"/>
+                                    <Checkbox id="pcg" checked={isPcgMember} onCheckedChange={(checked) => handlePcgToggle(Boolean(checked))} className="h-8 w-8"/>
                                     <Label htmlFor="pcg" className="text-base font-bold leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer flex flex-col">
                                         PCG "Tez Natija 3" kursi a'zosiman (-50% chegirma)
                                         <span className="font-normal text-sm text-gray-600 mt-1">Faqat PCG a'zolari uchun! Bu imkoniyatni qo'ldan boy bermang!</span>
