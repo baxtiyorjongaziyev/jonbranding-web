@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: APP_NAME,
     images: [
       {
-        url: 'https://img2.teletype.in/files/54/1b/541b6748-37c2-43f7-9252-25442531a26d.png',
+        url: 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg',
         width: 1200,
         height: 630,
         alt: APP_DESCRIPTION,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: APP_NAME,
     description: APP_DESCRIPTION,
-    images: ['https://img2.teletype.in/files/54/1b/541b6748-37c2-43f7-9252-25442531a26d.png'],
+    images: ['https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg'],
   },
   alternates: {
     canonical: 'https://jonbranding.uz',
