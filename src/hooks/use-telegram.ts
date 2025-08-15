@@ -47,7 +47,7 @@ interface TelegramWebApp {
 declare global {
     interface Window {
         Telegram?: {
-            WebApp: TelegramWebApp;
+            WebApp?: TelegramWebApp;
         }
     }
 }
@@ -56,7 +56,7 @@ export const useTelegram = () => {
   const [tg, setTg] = useState<TelegramWebApp | null>(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.Telegram) {
+    if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
       const telegramApp = window.Telegram.WebApp;
       telegramApp.ready();
       setTg(telegramApp);
