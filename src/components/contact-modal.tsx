@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Loader2 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -56,6 +57,12 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       if (!response.ok) {
         throw new Error(result.error || 'Serverda xatolik yuz berdi.');
       }
+      
+      confetti({
+          particleCount: 150,
+          spread: 90,
+          origin: { y: 0.6 }
+      });
       
       toast({
         title: 'Muvaffaqiyatli!',
