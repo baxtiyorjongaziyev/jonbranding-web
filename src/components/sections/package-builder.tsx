@@ -268,7 +268,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 </div>
                             </div>
                             <Button onClick={onOrderNow} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean" disabled={total.final === 0}>
-                                Bepul konsultatsiya olish
+                                {total.discountApplied ? "50% chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
                             </Button>
                         </Card>
                     </div>
