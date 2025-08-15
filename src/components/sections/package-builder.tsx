@@ -267,7 +267,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                     <span className="text-4xl font-extrabold text-accent">${total.final.toLocaleString('en-US')}</span>
                                 </div>
                             </div>
-                            <Button onClick={onOrderNow} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean whitespace-normal h-auto py-7" disabled={total.final === 0}>
+                            <Button onClick={onOrderNow} size="lg" className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse" disabled={total.final === 0}>
                                 {total.discountApplied ? "50% chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
                             </Button>
                         </Card>
