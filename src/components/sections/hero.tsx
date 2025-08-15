@@ -21,7 +21,7 @@ const trustPills = [
 const headlines = [
   <>Shunchaki chiroyli emas, balki <span className="text-primary">ishlaydigan</span> brending.</>,
   <>Brendingizni <span className="text-primary">muvaffaqiyatga</span> yetaklang.</>,
-  <>Raqobatchilardan <span className="text-primary">ajralib</span> turing.</>,
+  <>PCG kursdoshlar uchun <span className="text-primary">-50% chegirma</span>.</>,
   <>Brendingiz <span className="text-primary">sotuvlaringizni</span> oshirsin.</>,
   <>Kichik biznesdan <span className="text-primary">kuchli brendgacha</span>.</>,
 ];
