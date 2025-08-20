@@ -23,7 +23,7 @@ const Founder = () => {
   const [playVideo, setPlayVideo] = useState(false);
 
   return (
-    <section id="founder" className="py-16 sm:py-24 bg-white">
+    <section id="founder" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">

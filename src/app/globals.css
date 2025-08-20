@@ -12,7 +12,7 @@
     --popover-foreground: 240 5% 25%;
     --primary: 193 100% 49%;
     --primary-foreground: 240 93% 10%;
-    --secondary: 180 100% 95%;
+    --secondary: 180 100% 84%; /* Updated to #ADFFFE (Sky Blue) */
     --secondary-foreground: 240 5% 25%;
     --muted: 180 100% 95%;
     --muted-foreground: 0 0% 45.1%;

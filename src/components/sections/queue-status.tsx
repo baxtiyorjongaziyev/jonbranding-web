@@ -36,9 +36,9 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
 
 
   return (
-    <section className="py-16 sm:py-24 bg-white">
+    <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
-        <Card className="max-w-3xl mx-auto bg-secondary/50 rounded-2xl shadow-lg border-primary/20">
+        <Card className="max-w-3xl mx-auto bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border-primary/20">
           <CardHeader className="text-center pb-4">
             <div className="flex justify-center items-center gap-4">
               <Hourglass className="h-6 w-6 text-primary" />
@@ -52,12 +52,12 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
           </CardHeader>
           <CardContent className="p-6 pt-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
-              <div className="bg-white/70 p-6 rounded-xl shadow-sm border">
+              <div className="bg-white/80 p-6 rounded-xl shadow-sm border">
                 <Briefcase className="h-8 w-8 text-primary mx-auto mb-3" />
                 <p className="text-lg text-gray-700">Hozirda band loyihalar:</p>
                 <p className="text-4xl md:text-5xl font-bold text-dark-blue my-2">{currentProjects} ta</p>
               </div>
-              <div className="bg-white/70 p-6 rounded-xl shadow-sm border">
+              <div className="bg-white/80 p-6 rounded-xl shadow-sm border">
                 <CalendarClock className="h-8 w-8 text-primary mx-auto mb-3" />
                 <p className="text-lg text-gray-700">Yangi buyurtmalar uchun:</p>
                 <p className="text-4xl md:text-5xl font-bold text-dark-blue my-2">{nextAvailable}</p>

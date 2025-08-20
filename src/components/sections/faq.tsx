@@ -34,7 +34,7 @@ const faqItems = [
 
 const Faq = () => {
   return (
-    <section id="faq" className="py-16 sm:py-24 bg-white">
+    <section id="faq" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Ko'p beriladigan savollar</h2>
@@ -45,7 +45,7 @@ const Faq = () => {
         <div className="mt-12 max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full space-y-4">
             {faqItems.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border rounded-2xl shadow-sm bg-secondary/50 px-6 hover:bg-secondary transition-colors duration-300">
+              <AccordionItem key={index} value={`item-${index}`} className="border rounded-2xl shadow-sm bg-white/70 px-6 hover:bg-white transition-colors duration-300">
                 <AccordionTrigger className="text-left font-bold text-dark-blue hover:no-underline text-lg">
                   {item.question}
                 </AccordionTrigger>

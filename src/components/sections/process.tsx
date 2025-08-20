@@ -30,7 +30,7 @@ const steps = [
 
 const Process = () => {
   return (
-    <section id="process" className="py-16 sm:py-24 bg-white">
+    <section id="process" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Bizning ish jarayonimiz</h2>
@@ -60,7 +60,7 @@ const Process = () => {
             {steps.map((step, index) => (
               <div key={index} className="relative flex lg:flex-col items-start lg:items-center lg:flex-1 w-full mb-12 lg:mb-0 last:mb-0">
                 <div className="flex-shrink-0 z-10">
-                  <div className="flex h-24 w-24 items-center justify-center rounded-full bg-secondary border-4 border-white shadow-md transform hover:scale-110 transition-transform duration-300">
+                  <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white border-4 border-white shadow-md transform hover:scale-110 transition-transform duration-300">
                     <step.icon className="h-12 w-12 text-primary" />
                   </div>
                    <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm shadow-sm z-20">
