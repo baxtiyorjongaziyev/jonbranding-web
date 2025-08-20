@@ -27,7 +27,7 @@ const ServiceCard = ({ id, label, description, price, selected, onSelect, disabl
     <Card 
         onClick={!disabled ? onSelect : undefined}
         className={cn(
-            "rounded-2xl shadow-sm transition-all duration-300 cursor-pointer relative overflow-hidden",
+            "rounded-2xl shadow-sm transition-all duration-300 cursor-pointer relative overflow-hidden transform hover:-translate-y-2",
             selected ? 'border-primary ring-2 ring-primary shadow-lg' : 'border-gray-200 hover:shadow-md hover:border-primary/50',
             disabled && "cursor-not-allowed opacity-70 bg-gray-50"
         )}

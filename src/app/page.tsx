@@ -138,7 +138,7 @@ const Home: FC = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-hidden animate-fade-in">
       <Header onContactClick={handleOpenModal} />
       <main className="flex-grow">
         <Hero onPrimaryClick={handleOpenModal} />
