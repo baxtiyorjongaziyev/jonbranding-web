@@ -24,7 +24,6 @@ import { Button } from '@/components/ui/button';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import CtaBlock from '@/components/sections/cta-block';
 import { useTelegram } from '@/hooks/use-telegram';
 import QueueStatus from '@/components/sections/queue-status';
 import Footer from '@/components/layout/footer';
@@ -70,7 +69,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
     <div className="sticky bottom-0 md:hidden bg-white/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-sm">
-            <p className="font-bold text-dark-blue text-lg">${price.toLocaleString('en-US')}</p>
+            <p className="font-bold text-primary-foreground text-lg">${price.toLocaleString('en-US')}</p>
             <p className="text-xs text-gray-600">Yakuniy narx</p>
         </div>
         <Button onClick={onOpenModal} className="shadow-ocean animate-subtle-pulse">
@@ -157,12 +156,6 @@ const Home: FC = () => {
         <PackageBuilder onOrderNow={handleOpenModal} />
         <Process />
         <Gallery />
-        <CtaBlock 
-          onCtaClick={handleOpenModal}
-          title="Biznesingizni raqobatchilardan bir umrga ajratib turadigan brend yarating."
-          description="Portfolio sizga ma'qul keldimi? Keling, sizning biznesingiz uchun ham shunday ajoyib natijalar yaratamiz."
-          buttonText="Loyiha uchun bog'lanish"
-        />
         <Faq />
         <Offer onCTAClick={handleOpenModal} />
       </main>

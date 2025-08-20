@@ -90,7 +90,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
     <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{title}</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">{title}</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">{subtitle}</p>
         </div>
 
@@ -146,7 +146,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
               <div className="flex-shrink-0 bg-primary/10 text-primary p-3 rounded-full">
                 <Lightbulb className="h-6 w-6" />
               </div>
-              <p className="text-base text-dark-blue font-medium">{result.message}</p>
+              <p className="text-base text-primary-foreground font-medium">{result.message}</p>
             </div>
           </Card>
 

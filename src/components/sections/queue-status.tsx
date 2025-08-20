@@ -36,13 +36,13 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
 
 
   return (
-    <section className="py-16 sm:py-24 bg-secondary">
+    <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <Card className="max-w-3xl mx-auto bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border-primary/20">
           <CardHeader className="text-center pb-4">
             <div className="flex justify-center items-center gap-4">
               <Hourglass className="h-6 w-6 text-primary" />
-              <CardTitle className="text-2xl md:text-3xl text-dark-blue">
+              <CardTitle className="text-2xl md:text-3xl text-primary-foreground">
                 Ishlarimiz Navbat Asosida
               </CardTitle>
             </div>
@@ -55,12 +55,12 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
               <div className="bg-white/80 p-6 rounded-xl shadow-sm border">
                 <Briefcase className="h-8 w-8 text-primary mx-auto mb-3" />
                 <p className="text-lg text-gray-700">Hozirda band loyihalar:</p>
-                <p className="text-4xl md:text-5xl font-bold text-dark-blue my-2">{currentProjects} ta</p>
+                <p className="text-4xl md:text-5xl font-bold text-primary-foreground my-2">{currentProjects} ta</p>
               </div>
               <div className="bg-white/80 p-6 rounded-xl shadow-sm border">
                 <CalendarClock className="h-8 w-8 text-primary mx-auto mb-3" />
                 <p className="text-lg text-gray-700">Yangi buyurtmalar uchun:</p>
-                <p className="text-4xl md:text-5xl font-bold text-dark-blue my-2">{nextAvailable}</p>
+                <p className="text-4xl md:text-5xl font-bold text-primary-foreground my-2">{nextAvailable}</p>
               </div>
             </div>
             <div className="mt-6 text-center">

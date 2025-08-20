@@ -14,7 +14,7 @@ const Services = () => {
     <section id="services" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Xizmatlarimiz</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Xizmatlarimiz</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
             Biznesingiz ehtiyojlariga mos keladigan professional brending yechimlari.
           </p>
@@ -23,7 +23,7 @@ const Services = () => {
           {services.map(service => (
             <Card key={service.name} className="flex flex-col text-center shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
               <CardHeader>
-                <CardTitle className="text-2xl text-dark-blue">{service.name}</CardTitle>
+                <CardTitle className="text-2xl text-primary-foreground">{service.name}</CardTitle>
                 <CardDescription className="text-base !mt-2">{service.description}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow flex flex-col justify-end">

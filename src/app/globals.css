@@ -60,7 +60,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline text-dark-blue;
+    @apply font-headline text-primary-foreground;
   }
 
   h1 { @apply text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter; }

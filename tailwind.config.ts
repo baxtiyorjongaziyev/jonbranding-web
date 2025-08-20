@@ -21,7 +21,6 @@ export default {
         headline: ['Poppins', 'sans-serif'],
       },
       colors: {
-        'dark-blue': '#050583',
         'ocean-blue': '#00C9FD',
         'sky-blue': '#ADFFFE',
         'yellow-green': '#B1FF00',

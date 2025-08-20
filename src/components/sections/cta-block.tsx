@@ -13,7 +13,7 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
   return (
     <section className="bg-white py-16">
       <div className="container mx-auto px-4">
-        <div className="rounded-2xl bg-dark-blue p-8 sm:p-12 text-center text-white shadow-xl">
+        <div className="rounded-2xl bg-primary-foreground p-8 sm:p-12 text-center text-white shadow-xl">
           <h2 className="text-3xl sm:text-4xl font-bold text-white">{title}</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-300">
             {description}

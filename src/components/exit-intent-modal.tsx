@@ -29,7 +29,7 @@ const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick }) => {
             <Gift className="h-10 w-10 text-primary" />
         </div>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-extrabold text-dark-blue">Ketishga shoshilmang!</DialogTitle>
+          <DialogTitle className="text-2xl font-extrabold text-primary-foreground">Ketishga shoshilmang!</DialogTitle>
           <DialogDescription className="mt-2 text-lg text-gray-600">
             Siz uchun maxsus taklifimiz bor. <br/>
             <span className="font-bold text-primary">PCG a'zolari uchun -50%</span> yoki boshqa chegirmalardan foydalaning!
