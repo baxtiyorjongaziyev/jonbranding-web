@@ -28,6 +28,7 @@ import CtaBlock from '@/components/sections/cta-block';
 import { useTelegram } from '@/hooks/use-telegram';
 import QueueStatus from '@/components/sections/queue-status';
 import Footer from '@/components/layout/footer';
+import PickTwoSelector from '@/components/sections/pick-two-selector';
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
@@ -158,6 +159,7 @@ const Home: FC = () => {
         <Testimonials />
         <BeforeAfter />
         <Video />
+        <PickTwoSelector />
         <PackageBuilder onOrderNow={handleOpenModal} />
         <Process />
         <Gallery />
