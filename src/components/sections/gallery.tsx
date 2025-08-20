@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
+import CtaBlock from './cta-block';
 
 const galleryImages = [
   { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif', alt: 'Animatsion logo', hint: 'animated logo' },
@@ -12,7 +13,11 @@ const galleryImages = [
   { src: 'https://img2.teletype.in/files/51/45/5145b60e-aca5-4225-8564-a4d601a148a7.jpeg', alt: 'Loyiha 8', hint: 'minimalist logo' },
 ];
 
-const Gallery = () => {
+interface GalleryProps {
+    onCtaClick: () => void;
+}
+
+const Gallery: React.FC<GalleryProps> = ({ onCtaClick }) => {
   return (
     <section id="portfolio" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
@@ -39,6 +44,12 @@ const Gallery = () => {
           ))}
         </div>
       </div>
+       <CtaBlock 
+            title="Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin."
+            description="Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz."
+            buttonText="Bunday natija mening biznesim uchun ham kerak"
+            onCtaClick={onCtaClick}
+        />
     </section>
   );
 };

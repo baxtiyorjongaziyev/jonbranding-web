@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Target, ListChecks, Star } from 'lucide-react';
+import CtaBlock from './cta-block';
 
 const values = [
   {
@@ -19,9 +20,13 @@ const values = [
   }
 ];
 
-const WhyUs = () => {
+interface WhyUsProps {
+  onCtaClick: () => void;
+}
+
+const WhyUs: React.FC<WhyUsProps> = ({ onCtaClick }) => {
   return (
-    <section className="py-16 sm:py-24 bg-white">
+    <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Nima uchun aynan biz?</h2>
@@ -45,6 +50,12 @@ const WhyUs = () => {
           ))}
         </div>
       </div>
+      <CtaBlock 
+        title="Bizning yondashuvimiz sizga ma'qul keldimi?"
+        description="Keling, brendingizni bepul tahlil qilib, uning kuchli va zaif tomonlarini aniqlaymiz. Bu siz uchun hech qanday majburiyat yuklamaydi."
+        buttonText="Brendimni bepul tahlil qiling"
+        onCtaClick={onCtaClick}
+      />
     </section>
   );
 };

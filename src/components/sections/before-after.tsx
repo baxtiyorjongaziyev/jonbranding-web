@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import Image from 'next/image';
+import CtaBlock from './cta-block';
 
 const comparisons = [
   { brand: "Fidda", oldImg: "https://img2.teletype.in/files/9c/66/9c66a85f-486c-4f54-9682-fb4838061ab2.jpeg", newImg: "https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png", oldHint: "old logo design", newHint: "modern new logo" },
@@ -7,9 +7,13 @@ const comparisons = [
   { brand: "Barakah", oldImg: "https://img2.teletype.in/files/55/fe/55fe2252-db0f-4fd2-8ee8-d674bffab68a.png", newImg: "https://img2.teletype.in/files/dc/5c/dc5cd481-115e-4d57-ac2a-3ea3142e5f54.png", newHint: "generic restaurant logo", newHint: "unique restaurant branding" },
 ];
 
-const BeforeAfter = () => {
+interface BeforeAfterProps {
+  onCtaClick: () => void;
+}
+
+const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick }) => {
   return (
-    <section className="py-16 sm:py-24 bg-white">
+    <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Avval va Hozir</h2>
@@ -22,11 +26,11 @@ const BeforeAfter = () => {
             <Card key={index} className="overflow-hidden shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
               <CardContent className="p-0">
                 <div className="relative aspect-square">
-                  <Image src={item.oldImg} alt={`${item.brand} eski brendingi`} fill className="object-cover opacity-80" data-ai-hint={item.oldHint}/>
+                  <img src={item.oldImg} alt={`${item.brand} eski brendingi`} className="object-cover opacity-80 w-full h-full" data-ai-hint={item.oldHint}/>
                   <div className="absolute top-2 left-2 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-bold">Avval</div>
                 </div>
                 <div className="relative aspect-square">
-                  <Image src={item.newImg} alt={`${item.brand} yangi brendingi`} fill className="object-cover" data-ai-hint={item.newHint}/>
+                  <img src={item.newImg} alt={`${item.brand} yangi brendingi`} className="object-cover w-full h-full" data-ai-hint={item.newHint}/>
                    <div className="absolute top-2 right-2 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">Hozir</div>
                 </div>
               </CardContent>
@@ -34,6 +38,12 @@ const BeforeAfter = () => {
           ))}
         </div>
       </div>
+      <CtaBlock 
+        title="Sizning brendingiz ham o'zgarishga tayyormi?"
+        description="Keling, brendingizni tahlil qilib, uni yangi bosqichga olib chiqish rejasini tuzamiz."
+        buttonText="Mening brendimni ham o'zgartiring"
+        onCtaClick={onCtaClick}
+      />
     </section>
   );
 };

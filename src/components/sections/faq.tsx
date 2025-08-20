@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import CtaBlock from './cta-block';
 
 const faqItems = [
   {
@@ -32,9 +33,13 @@ const faqItems = [
   }
 ];
 
-const Faq = () => {
+interface FaqProps {
+  onCtaClick: () => void;
+}
+
+const Faq: React.FC<FaqProps> = ({ onCtaClick }) => {
   return (
-    <section id="faq" className="py-16 sm:py-24 bg-white">
+    <section id="faq" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Ko'p beriladigan savollar</h2>
@@ -57,6 +62,12 @@ const Faq = () => {
           </Accordion>
         </div>
       </div>
+      <CtaBlock 
+        title="Ikkilanishlarga o'rin qoldirmang!"
+        description="Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni keyingi bosqichga olib chiqamiz."
+        buttonText="Barcha savollarga javob oldim, boshlashga tayyorman!"
+        onCtaClick={onCtaClick}
+      />
     </section>
   );
 };

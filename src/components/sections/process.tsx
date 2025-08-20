@@ -1,4 +1,5 @@
 import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
+import CtaBlock from './cta-block';
 
 const steps = [
   {
@@ -28,9 +29,13 @@ const steps = [
   },
 ];
 
-const Process = () => {
+interface ProcessProps {
+  onCtaClick: () => void;
+}
+
+const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
   return (
-    <section id="process" className="py-16 sm:py-24 bg-white">
+    <section id="process" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Bizning ish jarayonimiz</h2>
@@ -76,6 +81,12 @@ const Process = () => {
           </div>
         </div>
       </div>
+      <CtaBlock 
+        title="Jarayon bilan tanishdingizmi? Endi natijaga o'tish vaqti!"
+        description="Biznesingizni strategik brending orqali yangi bosqichga olib chiqishga tayyormisiz? Bizning sinovdan o'tgan tizimimiz sizga yordam beradi."
+        buttonText="Keling, birinchi qadamni tashlaymiz!"
+        onCtaClick={onCtaClick}
+      />
     </section>
   );
 };
