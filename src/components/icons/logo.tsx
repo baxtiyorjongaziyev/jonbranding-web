@@ -6,10 +6,10 @@ export const Logo = ({ isWhite = false }) => (
       fontFamily="Poppins, sans-serif"
       fontSize="28"
       fontWeight="bold"
-      fill={isWhite ? '#FFFFFF' : '#050583'}
+      fill={isWhite ? 'hsl(var(--card-foreground))' : 'hsl(var(--primary-foreground))'}
     >
       Jon.
-      <tspan fill={isWhite ? '#ADFFFE' : '#00C9FD'}>Branding</tspan>
+      <tspan fill={isWhite ? 'hsl(var(--secondary))' : 'hsl(var(--primary))'}>Branding</tspan>
     </text>
   </svg>
 );

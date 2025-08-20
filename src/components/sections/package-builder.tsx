@@ -39,7 +39,7 @@ const ServiceCard = ({ id, label, description, price, selected, onSelect, disabl
                 </div>
             )}
             <div className="grid gap-1.5 leading-none">
-                <h4 className="text-base font-bold text-dark-blue leading-none">
+                <h4 className="text-base font-bold text-primary-foreground leading-none">
                     {label} <span className="text-primary font-bold">(+${price})</span>
                 </h4>
                 <p className="text-sm text-muted-foreground mt-1">
@@ -99,7 +99,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary">
                 <div className="container mx-auto px-4">
                     <div className="text-center">
-                         <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Paketni Hisoblash</h2>
+                         <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Paketni Hisoblash</h2>
                          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
                              O'zingizga mos keladigan xizmatlar to'plamini tanlang va chegirmalarni qo'llang.
                          </p>
@@ -133,7 +133,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         <section id="package-builder" className="py-16 sm:py-24 bg-secondary">
             <div className="container mx-auto px-4">
                 <div className="text-center">
-                    <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Paketni Hisoblash</h2>
+                    <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Paketni Hisoblash</h2>
                     <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
                         O'zingizga mos keladigan xizmatlar to'plamini tanlang va chegirmalarni qo'llang.
                     </p>
@@ -142,7 +142,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                 <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                     <div className="lg:col-span-2 space-y-8">
                         <div>
-                            <h3 className="text-xl font-bold text-dark-blue mb-4">1. Kerakli xizmatlarni tanlang</h3>
+                            <h3 className="text-xl font-bold text-primary-foreground mb-4">1. Kerakli xizmatlarni tanlang</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <ServiceCard 
                                     id="naming"
@@ -181,7 +181,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                         </div>
                         
                         <div>
-                            <h3 className="text-xl font-bold text-dark-blue mb-4">2. Maxsus taklif</h3>
+                            <h3 className="text-xl font-bold text-primary-foreground mb-4">2. Maxsus taklif</h3>
                              <Card 
                                 onClick={() => handlePcgToggle(!isPcgMember)}
                                 className={cn(
@@ -200,14 +200,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                         </div>
 
                          <div>
-                            <h3 className="text-xl font-bold text-dark-blue mb-4">3. Bizning kafolatimiz</h3>
+                            <h3 className="text-xl font-bold text-primary-foreground mb-4">3. Bizning kafolatimiz</h3>
                              <Card 
                                 className="rounded-2xl shadow-sm bg-primary/10 border-primary/30"
                              >
                                 <div className="flex items-center space-x-4 p-6">
                                     <ShieldCheck className="h-10 w-10 text-primary flex-shrink-0" />
                                     <div className="flex flex-col">
-                                        <h4 className="font-bold text-dark-blue">100% Mamnuniyat Kafolati</h4>
+                                        <h4 className="font-bold text-primary-foreground">100% Mamnuniyat Kafolati</h4>
                                         <p className="text-muted-foreground text-sm">
                                             Sizga yoqadigan dizayn yoki pulingizni 100% qaytarish kafolatimiz bor.
                                         </p>
@@ -218,7 +218,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                     </div>
 
                     <div className="lg:col-span-1 sticky top-24">
-                        <Card className="p-6 rounded-2xl shadow-xl bg-dark-blue text-white">
+                        <Card className="p-6 rounded-2xl shadow-xl bg-primary-foreground text-white">
                             <h3 className="text-2xl font-bold text-center">Natija</h3>
                             <div className="mt-4 space-y-2 pb-4 border-b border-gray-600">
                                 {Object.entries(selectedServices).map(([key, value]) => {

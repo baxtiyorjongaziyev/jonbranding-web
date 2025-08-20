@@ -30,10 +30,10 @@ const steps = [
 
 const Process = () => {
   return (
-    <section id="process" className="py-16 sm:py-24 bg-secondary">
+    <section id="process" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Bizning ish jarayonimiz</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Bizning ish jarayonimiz</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
             Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan 5 bosqichli tizim.
           </p>
@@ -68,7 +68,7 @@ const Process = () => {
                   </div>
                 </div>
                 <div className="ml-6 lg:ml-0 lg:mt-6 text-left lg:text-center">
-                  <h3 className="text-xl font-bold text-dark-blue">{step.title}</h3>
+                  <h3 className="text-xl font-bold text-primary-foreground">{step.title}</h3>
                   <p className="mt-2 text-gray-600 max-w-xs">{step.description}</p>
                 </div>
               </div>

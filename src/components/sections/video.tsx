@@ -2,10 +2,10 @@ import { Card } from '@/components/ui/card';
 
 const VideoSection = () => {
   return (
-    <section className="py-16 sm:py-24 bg-secondary">
+    <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Ish jarayonimiz videoda</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Ish jarayonimiz videoda</h2>
           <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
             Nega strategiyaga asoslangan brending muhim? Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday qilib o'lchanadigan natijalar keltirishini videoda ko'ring.
           </p>
