@@ -1,11 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type FC } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Briefcase, CalendarClock, Hourglass } from 'lucide-react';
+import { Briefcase, CalendarClock, Hourglass, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-const QueueStatus = () => {
+interface QueueStatusProps {
+  onCtaClick: () => void;
+}
+
+const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
   // ** O'zgartirish uchun ma'lumotlar **
   const currentProjects = 4;
   const nextAvailable = "2 hafta";
@@ -70,6 +75,16 @@ const QueueStatus = () => {
                       </span>
                       Hozir onlayn: {onlineCount} kishi
                   </div>
+              </div>
+               <div className="mt-6">
+                <Button
+                  onClick={onCtaClick}
+                  size="lg"
+                  className="bg-primary text-white hover:bg-primary/90 shadow-ocean text-lg animate-subtle-pulse"
+                >
+                  O'z joyimni band qilish
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
               </div>
               <p className="text-sm text-gray-500 mt-3">
                 O'z joyingizni band qilish uchun hoziroq bog'laning!
