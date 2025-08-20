@@ -28,7 +28,7 @@ const Founder = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
             <Card className="overflow-hidden shadow-xl rounded-2xl">
-              <CardContent className="p-0 aspect-[9/16] relative w-full h-full bg-black">
+              <CardContent className="p-0 aspect-w-9 aspect-h-16 relative w-full bg-black">
                 {playVideo ? (
                     <iframe 
                       src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1" 
@@ -42,9 +42,10 @@ const Founder = () => {
                     <Image 
                       src="https://img1.teletype.in/files/06/12/06122643-c462-4c8d-aa63-55a8ca1dca38.jpeg"
                       alt="Baxtiyorjon Gaziyev"
-                      fill
+                      layout="fill"
+                      objectFit="cover"
                       data-ai-hint="founder portrait"
-                      className="object-cover opacity-80"
+                      className="opacity-80"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <Button
@@ -81,7 +82,7 @@ const Founder = () => {
               })}
             </div>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="shadow-ocean">
+                <Button asChild size="lg" className="shadow-ocean animate-subtle-pulse">
                     <Link href="tel:+998336450097">
                         <Phone className="mr-2 h-5 w-5" />
                         Telefon orqali bog'lanish
