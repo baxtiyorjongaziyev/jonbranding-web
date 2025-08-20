@@ -18,7 +18,6 @@ import Process from '@/components/sections/process';
 import Gallery from '@/components/sections/gallery';
 import Faq from '@/components/sections/faq';
 import Offer from '@/components/sections/offer';
-import Footer from '@/components/layout/footer';
 import ContactModal from '@/components/contact-modal';
 import ExitIntentModal from '@/components/exit-intent-modal';
 import { Button } from '@/components/ui/button';
@@ -27,6 +26,7 @@ import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import CtaBlock from '@/components/sections/cta-block';
 import { useTelegram } from '@/hooks/use-telegram';
+import QueueStatus from '@/components/sections/queue-status';
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
@@ -145,6 +145,7 @@ const Home: FC = () => {
         <Founder />
         <Stats />
         <WhyUs />
+        <QueueStatus />
         <CtaBlock 
           onCtaClick={handleOpenModal}
           title="Brendingiz shunchaki chiroyli emas, sotadigan bo'lishini xohlaysizmi?"
