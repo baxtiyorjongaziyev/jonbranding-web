@@ -26,6 +26,39 @@ const Founder = () => {
     <section id="founder" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="lg:order-last">
+            <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">
+              Asoschi: Baxtiyorjon Gaziyev
+            </h2>
+            <p className="mt-4 text-lg text-gray-700">
+              {founderMessage}
+            </p>
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {founderPoints.map((point, index) => {
+                const Icon = icons[point.icon];
+                return (
+                    <div key={index} className="flex items-center gap-3">
+                        {Icon && <Icon className="w-6 h-6 text-primary flex-shrink-0" />}
+                        <span className="text-gray-800 font-medium">{point.text}</span>
+                    </div>
+                );
+              })}
+            </div>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <Button asChild size="lg" className="shadow-ocean animate-subtle-pulse">
+                    <Link href="tel:+998336450097">
+                        <Phone className="mr-2 h-5 w-5" />
+                        Telefon orqali bog'lanish
+                    </Link>
+                </Button>
+                 <Button asChild size="lg" variant="outline">
+                    <Link href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
+                        <Send className="mr-2 h-5 w-5" />
+                        Telegram orqali yozish
+                    </Link>
+                </Button>
+            </div>
+          </div>
           <div>
             <Card className="overflow-hidden shadow-xl rounded-2xl">
               <CardContent className="p-0 aspect-w-1 aspect-h-1 relative w-full bg-black">
@@ -65,39 +98,6 @@ const Founder = () => {
                 )}
               </CardContent>
             </Card>
-          </div>
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">
-              Asoschi: Baxtiyorjon Gaziyev
-            </h2>
-            <p className="mt-4 text-lg text-gray-700">
-              {founderMessage}
-            </p>
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {founderPoints.map((point, index) => {
-                const Icon = icons[point.icon];
-                return (
-                    <div key={index} className="flex items-center gap-3">
-                        {Icon && <Icon className="w-6 h-6 text-primary flex-shrink-0" />}
-                        <span className="text-gray-800 font-medium">{point.text}</span>
-                    </div>
-                );
-              })}
-            </div>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="shadow-ocean animate-subtle-pulse">
-                    <Link href="tel:+998336450097">
-                        <Phone className="mr-2 h-5 w-5" />
-                        Telefon orqali bog'lanish
-                    </Link>
-                </Button>
-                 <Button asChild size="lg" variant="outline">
-                    <Link href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
-                        <Send className="mr-2 h-5 w-5" />
-                        Telegram orqali yozish
-                    </Link>
-                </Button>
-            </div>
           </div>
         </div>
       </div>
