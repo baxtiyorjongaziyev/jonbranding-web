@@ -27,6 +27,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import CtaBlock from '@/components/sections/cta-block';
 import { useTelegram } from '@/hooks/use-telegram';
 import QueueStatus from '@/components/sections/queue-status';
+import Footer from '@/components/layout/footer';
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
