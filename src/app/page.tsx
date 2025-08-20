@@ -147,13 +147,7 @@ const Home: FC = () => {
         <Founder />
         <Stats />
         <WhyUs />
-        <QueueStatus />
-        <CtaBlock 
-          onCtaClick={handleOpenModal}
-          title="O'z joyingizni hoziroq band qiling!"
-          description="Talab yuqori bo'lgani uchun joylar tezda to'lib qolmoqda. Brendingiz kelajagini kechiktirmang, birinchi qadamni bugun tashlang."
-          buttonText="Joyni band qilish"
-        />
+        <QueueStatus onCtaClick={handleOpenModal} />
         <TargetAudience />
         <Services />
         <Testimonials />
