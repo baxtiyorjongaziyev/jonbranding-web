@@ -28,15 +28,18 @@ const Founder = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
             <Card className="overflow-hidden shadow-xl rounded-2xl">
-              <CardContent className="p-0 aspect-w-9 aspect-h-16 relative w-full bg-black">
+              <CardContent className="p-0 aspect-w-1 aspect-h-1 relative w-full bg-black">
                 {playVideo ? (
-                    <iframe 
-                      src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1" 
-                      frameBorder="0" 
-                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                      className="absolute top-0 left-0 w-full h-full"
-                      title="Baxtiyorjon Gaziyev"
-                    ></iframe>
+                    <div style={{padding:'177.78% 0 0 0',position:'relative'}}>
+                        <iframe 
+                        src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1" 
+                        frameBorder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                        className="absolute top-0 left-0 w-full h-full"
+                        style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
+                        title="Baxtiyorjon Gaziyev"
+                        ></iframe>
+                    </div>
                 ) : (
                   <>
                     <Image 
