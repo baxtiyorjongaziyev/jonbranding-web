@@ -26,7 +26,7 @@ const Founder = () => {
     <section id="founder" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="lg:order-last">
+          <div>
             <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">
               Asoschi: Baxtiyorjon Gaziyev
             </h2>
@@ -59,23 +59,20 @@ const Founder = () => {
                 </Button>
             </div>
           </div>
-          <div>
-            <Card className="overflow-hidden shadow-xl rounded-2xl">
-              <CardContent className="p-0 aspect-w-1 aspect-h-1 relative w-full bg-black">
+          <div className="lg:order-first">
+            <Card className="overflow-hidden shadow-xl rounded-2xl w-full">
+              <CardContent className="p-0 relative bg-black" style={{ paddingBottom: '177.78%' }}>
                 {playVideo ? (
-                    <div style={{padding:'177.78% 0 0 0',position:'relative', width: '100%', height: '100%'}}>
-                        <iframe
-                            src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1"
-                            frameBorder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                            className="absolute top-0 left-0 w-full h-full"
-                            style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} 
-                            title="Baxtiyorjon Gaziyev">
-                        </iframe>
-                    </div>
+                    <iframe
+                        src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                        className="absolute top-0 left-0 w-full h-full"
+                        title="Baxtiyorjon Gaziyev">
+                    </iframe>
                 ) : (
                   <>
-                    <Image 
+                    <Image
                       src="https://img1.teletype.in/files/06/12/06122643-c462-4c8d-aa63-55a8ca1dca38.jpeg"
                       alt="Baxtiyorjon Gaziyev"
                       layout="fill"
