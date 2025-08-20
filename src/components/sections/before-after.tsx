@@ -9,7 +9,7 @@ const comparisons = [
 
 const BeforeAfter = () => {
   return (
-    <section className="py-16 sm:py-24 bg-white">
+    <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Avval va Hozir</h2>
