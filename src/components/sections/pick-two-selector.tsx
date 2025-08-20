@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import { Lightbulb, CheckCircle } from 'lucide-react';
+import { Lightbulb, CheckCircle, Gem, Rocket, Tags, type LucideIcon } from 'lucide-react';
 
 type OptionKey = 'cheap' | 'quality' | 'fast';
 
@@ -17,10 +17,10 @@ interface PickTwoSelectorProps {
   onCtaClick?: () => void;
 }
 
-const optionDetails: Record<OptionKey, { label: string }> = {
-  cheap: { label: 'Arzon' },
-  quality: { label: 'Sifatli' },
-  fast: { label: 'Tez' },
+const optionDetails: Record<OptionKey, { label: string, icon: LucideIcon }> = {
+  cheap: { label: 'Arzon', icon: Tags },
+  quality: { label: 'Sifatli', icon: Gem },
+  fast: { label: 'Tez', icon: Rocket },
 };
 
 const messages: Record<string, string> = {
@@ -48,7 +48,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
+        if (Array.isArray(parsed) && parsed.length <= 2) {
           setSelected(parsed);
         }
       } catch (e) {
@@ -65,13 +65,11 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
 
   const handleSelect = (option: OptionKey) => {
     setSelected(prev => {
-      if (prev.includes(option)) {
-        return prev.filter(item => item !== option);
-      }
-      if (prev.length < 2) {
-        return [...prev, option];
-      }
-      return prev;
+      const newSelection = prev.includes(option)
+        ? prev.filter(item => item !== option)
+        : [...prev, option];
+      
+      return newSelection.length > 2 ? prev : newSelection;
     });
   };
 
@@ -80,7 +78,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
       return { key: 'default', message: messages.default };
     }
     const sorted = [...selected].sort().join('_') as keyof typeof messages;
-    return { key: sorted, message: messages[sorted] };
+    return { key: sorted, message: messages[sorted] || messages.default };
   }, [selected]);
 
   return (
@@ -97,14 +95,15 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
               {(Object.keys(optionDetails) as OptionKey[]).map(key => {
                 const isSelected = selected.includes(key);
                 const isDisabled = !isSelected && selected.length >= 2;
+                const Icon = optionDetails[key].icon;
 
                 const card = (
                   <Card
                     onClick={() => !isDisabled && handleSelect(key)}
                     className={cn(
-                      "text-center p-8 rounded-2xl shadow-sm transition-all duration-300 relative cursor-pointer",
-                      isSelected ? 'bg-primary text-primary-foreground ring-2 ring-primary-foreground/50 shadow-lg' : 'bg-secondary hover:bg-secondary/80',
-                      isDisabled && 'opacity-50 cursor-not-allowed bg-gray-100'
+                      "text-center p-8 rounded-2xl shadow-sm transition-all duration-300 relative cursor-pointer transform hover:-translate-y-1",
+                      isSelected ? 'bg-primary text-primary-foreground ring-2 ring-primary/50 shadow-lg' : 'bg-secondary hover:shadow-md',
+                      isDisabled && 'opacity-50 cursor-not-allowed bg-gray-100 hover:translate-y-0'
                     )}
                   >
                      {isSelected && (
@@ -112,7 +111,8 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
                             <CheckCircle className="h-5 w-5" />
                         </div>
                     )}
-                    <CardContent className="p-0">
+                    <CardContent className="p-0 flex flex-col items-center justify-center gap-4">
+                       <Icon className="w-12 h-12" />
                       <p className="text-2xl font-bold">{optionDetails[key].label}</p>
                     </CardContent>
                   </Card>
@@ -148,7 +148,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
           <div className="mt-10 text-center">
             <Button
               size="lg"
-              className="text-lg shadow-ocean animate-subtle-pulse"
+              className="text-lg shadow-ocean animate-subtle-pulse disabled:shadow-none disabled:animate-none"
               disabled={selected.length !== 2}
               onClick={onCtaClick}
             >
