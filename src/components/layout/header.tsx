@@ -8,6 +8,8 @@ import { Menu, Phone, Send } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
@@ -61,6 +63,9 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
+              <SheetHeader>
+                  <SheetTitle className="sr-only">Menyu</SheetTitle>
+              </SheetHeader>
               <nav className="flex flex-col gap-6 pt-10">
                 {navItems.map((item) => (
                    <Link
