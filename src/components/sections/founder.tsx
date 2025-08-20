@@ -26,13 +26,13 @@ const Founder = () => {
     <section id="founder" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="lg:order-last">
+          <div className="lg:order-first">
             <Card className="overflow-hidden shadow-xl rounded-2xl">
               <CardContent className="p-0 aspect-w-1 aspect-h-1 relative w-full bg-black">
                 {playVideo ? (
                     <div style={{padding:'56.25% 0 0 0',position:'relative', width: '100%', height: '100%'}}>
                         <iframe 
-                        src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1" 
+                        src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1"
                         frameBorder="0" 
                         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                         className="absolute top-0 left-0 w-full h-full"
@@ -66,7 +66,7 @@ const Founder = () => {
               </CardContent>
             </Card>
           </div>
-          <div className="lg:order-first">
+          <div className="lg:order-last">
             <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">
               Asoschi: Baxtiyorjon Gaziyev
             </h2>
