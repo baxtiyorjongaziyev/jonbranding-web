@@ -44,18 +44,23 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
 
   useEffect(() => {
     setIsClient(true);
-    const stored = localStorage.getItem('pick2_pref');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length <= 2) {
-          setSelected(parsed);
+  }, []);
+  
+  useEffect(() => {
+    if (isClient) {
+      const stored = localStorage.getItem('pick2_pref');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length <= 2) {
+            setSelected(parsed);
+          }
+        } catch (e) {
+          console.error("Failed to parse localStorage item 'pick2_pref'", e);
         }
-      } catch (e) {
-        console.error("Failed to parse localStorage item 'pick2_pref'", e);
       }
     }
-  }, []);
+  }, [isClient]);
 
   useEffect(() => {
     if(isClient) {
