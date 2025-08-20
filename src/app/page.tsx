@@ -149,9 +149,9 @@ const Home: FC = () => {
         <QueueStatus />
         <CtaBlock 
           onCtaClick={handleOpenModal}
-          title="Brendingiz shunchaki chiroyli emas, sotadigan bo'lishini xohlaysizmi?"
-          description="Bizning strategik yondashuvimiz biznesingiz uchun qanday qiymat yaratishini bilib oling."
-          buttonText="Strategiyani muhokama qilish"
+          title="O'z joyingizni hoziroq band qiling!"
+          description="Talab yuqori bo'lgani uchun joylar tezda to'lib qolmoqda. Brendingiz kelajagini kechiktirmang, birinchi qadamni bugun tashlang."
+          buttonText="Joyni band qilish"
         />
         <TargetAudience />
         <Services />
