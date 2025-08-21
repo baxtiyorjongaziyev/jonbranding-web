@@ -13,10 +13,10 @@ interface BeforeAfterProps {
 
 const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick }) => {
   return (
-    <section className="py-16 sm:py-24 bg-secondary">
+    <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Avval va Hozir</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">Avval va Hozir</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
             To'g'ri brending biznesingizni qanday o'zgartirishi mumkinligini o'z ko'zingiz bilan ko'ring.
           </p>

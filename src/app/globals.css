@@ -5,47 +5,25 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 240 5% 25%;
+    --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 240 5% 25%;
+    --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 5% 25%;
-    --primary: 193 100% 49%;
-    --primary-foreground: 240 93% 10%;
-    --secondary: 180 100% 84%; /* Updated to #ADFFFE (Sky Blue) */
-    --secondary-foreground: 240 5% 25%;
-    --muted: 180 100% 95%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 81 100% 50%;
-    --accent-foreground: 240 93% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 193 100% 49%;
-    --radius: 1rem;
-  }
-
-  .dark {
-    --background: 240 8% 10%;
-    --foreground: 0 0% 98%;
-    --card: 240 8% 10%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 8% 10%;
-    --popover-foreground: 0 0% 98%;
+    --popover-foreground: 240 10% 3.9%;
     --primary: 193 100% 49%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4% 18%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 4% 18%;
-    --muted-foreground: 0 0% 63.9%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
     --accent: 81 100% 50%;
-    --accent-foreground: 240 8% 10%;
-    --destructive: 0 62.8% 30.6%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 4% 18%;
-    --input: 240 4% 18%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
     --ring: 193 100% 49%;
+    --radius: 1rem;
   }
 }
 
@@ -60,7 +38,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline text-primary-foreground;
+    @apply font-headline text-dark-blue;
   }
 
   h1 { @apply text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter; }

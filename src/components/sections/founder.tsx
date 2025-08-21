@@ -23,11 +23,11 @@ const Founder = () => {
   const [playVideo, setPlayVideo] = useState(false);
 
   return (
-    <section id="founder" className="py-16 sm:py-24 bg-white">
+    <section id="founder" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
-            <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">
+            <h2 className="text-3xl sm:text-4xl font-bold">
               Asoschi: Baxtiyorjon Gaziyev
             </h2>
             <p className="mt-4 text-lg text-gray-700">
@@ -67,7 +67,7 @@ const Founder = () => {
                         src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1"
                         frameBorder="0"
                         allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                        className="absolute left-0 w-full"
+                        className="absolute w-full h-full top-0 left-0"
                         style={{ height: '140%', top: '-20%' }}
                         title="Baxtiyorjon Gaziyev">
                     </iframe>

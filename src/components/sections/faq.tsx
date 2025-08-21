@@ -39,10 +39,10 @@ interface FaqProps {
 
 const Faq: React.FC<FaqProps> = ({ onCtaClick }) => {
   return (
-    <section id="faq" className="py-16 sm:py-24 bg-secondary">
+    <section id="faq" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Ko'p beriladigan savollar</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">Ko'p beriladigan savollar</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
             Sizni qiziqtirgan savollarga shu yerdan javob toping.
           </p>
@@ -50,8 +50,8 @@ const Faq: React.FC<FaqProps> = ({ onCtaClick }) => {
         <div className="mt-12 max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full space-y-4">
             {faqItems.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border rounded-2xl shadow-sm bg-white/70 px-6 hover:bg-white transition-colors duration-300">
-                <AccordionTrigger className="text-left font-bold text-primary-foreground hover:no-underline text-lg">
+              <AccordionItem key={index} value={`item-${index}`} className="border rounded-2xl shadow-sm bg-secondary/70 px-6 hover:bg-secondary transition-colors duration-300">
+                <AccordionTrigger className="text-left font-bold text-dark-blue hover:no-underline text-lg">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-700 pt-2 text-base">

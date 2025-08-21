@@ -22,7 +22,7 @@ const Gallery: React.FC<GalleryProps> = ({ onCtaClick }) => {
     <section id="portfolio" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Ishlarimizdan namunalar</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">Ishlarimizdan namunalar</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
             Biz yaratgan brendlar o'z sohasida qanday ajralib turishini ko'ring.
           </p>

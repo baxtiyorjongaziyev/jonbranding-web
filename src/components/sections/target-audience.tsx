@@ -36,7 +36,7 @@ const TargetAudience = () => {
     <section id="target-audience" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Xizmatlarimiz kimlar uchun?</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">Xizmatlarimiz kimlar uchun?</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
             Agar quyidagi muammolarga duch kelayotgan bo'lsangiz, demak biz sizga yordam bera olamiz.
           </p>
@@ -48,11 +48,11 @@ const TargetAudience = () => {
                 <div className="bg-primary/10 p-4 rounded-full">
                   <audience.icon className="w-8 h-8 text-primary" />
                 </div>
-                <CardTitle className="!mt-4 text-xl text-primary-foreground">{audience.title}</CardTitle>
+                <CardTitle className="!mt-4 text-xl">{audience.title}</CardTitle>
                 <CardDescription className="text-base !mt-2 px-4">{audience.description}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow flex flex-col justify-center bg-red-500/5 p-6 rounded-b-2xl">
-                 <h4 className="font-bold text-primary-foreground mb-4">Bu muammolar sizga tanishmi?</h4>
+                 <h4 className="font-bold text-dark-blue mb-4">Bu muammolar sizga tanishmi?</h4>
                  <ul className="space-y-3 text-left">
                     {audience.problems.map((problem, pIndex) => (
                         <li key={pIndex} className="flex items-start text-sm text-gray-800 font-medium">
