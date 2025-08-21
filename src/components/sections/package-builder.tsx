@@ -58,7 +58,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         style: false,
         brandbook: false,
     });
-    const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', true);
+    const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', false);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
