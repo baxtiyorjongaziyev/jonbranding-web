@@ -37,7 +37,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
     style: false,
     brandbook: false,
   });
-  const [isPcgMember] = useLocalStorage('isPcgMember', true);
+  const [isPcgMember] = useLocalStorage('isPcgMember', false);
   const [price, setPrice] = useState(0);
   const [isClient, setIsClient] = useState(false);
 
@@ -90,7 +90,7 @@ const Home: FC = () => {
     style: false,
     brandbook: false,
   });
-  const [isPcgMember] = useLocalStorage('isPcgMember', true);
+  const [isPcgMember] = useLocalStorage('isPcgMember', false);
   
   const [packageDetails, setPackageDetails] = useState({ summary: '', price: 0 });
 
