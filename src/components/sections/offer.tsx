@@ -69,7 +69,7 @@ interface OfferProps {
 
 const Offer: FC<OfferProps> = ({ onCTAClick }) => {
     return (
-        <section id="offer" className="py-16 sm:py-24 bg-primary-foreground text-white">
+        <section id="offer" className="py-16 sm:py-24 bg-dark-blue text-white">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-3xl mx-auto">
                     <div className="flex justify-center items-center gap-2">
@@ -85,7 +85,7 @@ const Offer: FC<OfferProps> = ({ onCTAClick }) => {
                     <div className="mt-8 bg-black/20 rounded-2xl p-6">
                         <CountdownTimer />
                     </div>
-                    <Button onClick={onCTAClick} size="lg" className="mt-8 text-lg px-10 py-7 bg-accent text-primary-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-subtle-pulse">
+                    <Button onClick={onCTAClick} size="lg" className="mt-8 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-subtle-pulse">
                         50% chegirmadan foydalanish
                     </Button>
                 </div>

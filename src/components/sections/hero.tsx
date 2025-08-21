@@ -61,7 +61,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
     <section className="bg-secondary py-20 sm:py-28">
       <div className="container mx-auto px-4 text-center">
         <h1 data-testid="hero-title" className={cn(
-          "text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-primary-foreground transition-opacity duration-500",
+          "text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-dark-blue transition-opacity duration-500",
           isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
         )}>
           {headlines[headlineIndex]}
@@ -73,7 +73,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
           <Button onClick={() => onPrimaryClick()} size="lg" className="w-full sm:w-auto text-lg px-8 py-6 shadow-ocean animate-subtle-pulse">
             {buttonTexts[buttonIndex]}
           </Button>
-          <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-white">
+          <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-dark-blue text-dark-blue hover:bg-dark-blue hover:text-white">
             <Link href="#package-builder">
               <Package className="mr-2 h-5 w-5" />
               Paketlarni tanlash
@@ -87,7 +87,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
                     <CardContent className="p-5 flex items-start gap-4">
                         <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                         <div>
-                            <h3 className="font-bold text-primary-foreground text-base">{pill.title}</h3>
+                            <h3 className="font-bold text-dark-blue text-base">{pill.title}</h3>
                             <p className="text-gray-600 text-sm">{pill.description}</p>
                         </div>
                     </CardContent>

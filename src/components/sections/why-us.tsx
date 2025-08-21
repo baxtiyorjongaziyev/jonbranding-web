@@ -29,7 +29,7 @@ const WhyUs: React.FC<WhyUsProps> = ({ onCtaClick }) => {
     <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Nima uchun aynan biz?</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">Nima uchun aynan biz?</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
             Biz shunchaki va'da bermaymiz. Biz tizimli yondashuv orqali brendingiz uchun aniq qiymat yaratamiz.
           </p>
@@ -41,7 +41,7 @@ const WhyUs: React.FC<WhyUsProps> = ({ onCtaClick }) => {
                 <div className="bg-primary/10 p-4 rounded-full">
                   <value.icon className="w-8 h-8 text-primary" />
                 </div>
-                <CardTitle className="!mt-4 text-xl text-primary-foreground">{value.title}</CardTitle>
+                <CardTitle className="!mt-4 text-xl">{value.title}</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600">{value.description}</p>

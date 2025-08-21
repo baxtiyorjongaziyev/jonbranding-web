@@ -1,7 +1,6 @@
 import type {Config} from 'tailwindcss';
 
 export default {
-  darkMode: ['class'],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -24,6 +23,7 @@ export default {
         'ocean-blue': '#00C9FD',
         'sky-blue': '#ADFFFE',
         'yellow-green': '#B1FF00',
+        'dark-blue': '#050583',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

@@ -85,7 +85,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
                             <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                         </Avatar>
                         <div>
-                            <p className="font-bold text-primary-foreground">{testimonial.name}</p>
+                            <p className="font-bold text-dark-blue">{testimonial.name}</p>
                             <p className="text-sm text-gray-500">{testimonial.company}</p>
                         </div>
                     </div>
@@ -121,7 +121,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
                     <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                 </Avatar>
                 <div>
-                    <p className="font-bold text-primary-foreground">{testimonial.name}</p>
+                    <p className="font-bold text-dark-blue">{testimonial.name}</p>
                     <p className="text-sm text-gray-500">{testimonial.company}</p>
                 </div>
             </div>
@@ -136,7 +136,7 @@ const Testimonials = () => {
     <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">Mijozlarimiz biz haqimizda</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">Mijozlarimiz biz haqimizda</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
             Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz.
           </p>
