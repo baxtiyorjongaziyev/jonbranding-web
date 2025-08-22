@@ -8,18 +8,9 @@ export const Logo = ({ isWhite = false }) => (
       fontWeight="500"
       fill={isWhite ? 'white' : 'hsl(var(--foreground))'}
     >
-      Jon
-    </text>
-    <circle cx="58" cy="24" r="4" fill="hsl(var(--primary))" />
-    <text
-      x="70"
-      y="28"
-      fontFamily="Poppins, sans-serif"
-      fontSize="28"
-      fontWeight="500"
-      fill={isWhite ? 'white' : 'hsl(var(--foreground))'}
-    >
-      Branding
+      <tspan>Jon</tspan>
+      <tspan fill="hsl(var(--primary))">.</tspan>
+      <tspan>Branding</tspan>
     </text>
   </svg>
 );
