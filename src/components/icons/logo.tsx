@@ -5,7 +5,7 @@ export const Logo = ({ isWhite = false }) => (
       y="28"
       fontFamily="Poppins, sans-serif"
       fontSize="28"
-      fontWeight="700"
+      fontWeight="500"
       fill={isWhite ? 'white' : 'hsl(var(--foreground))'}
     >
       Jon
@@ -16,7 +16,7 @@ export const Logo = ({ isWhite = false }) => (
       y="28"
       fontFamily="Poppins, sans-serif"
       fontSize="28"
-      fontWeight="700"
+      fontWeight="500"
       fill={isWhite ? 'white' : 'hsl(var(--foreground))'}
     >
       Branding
