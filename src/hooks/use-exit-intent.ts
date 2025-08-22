@@ -24,22 +24,11 @@ export const useExitIntent = (onExitIntent: () => void) => {
         }
     };
 
-    const handleScroll = () => {
-        if(window.scrollY / (document.body.scrollHeight - window.innerHeight) > 0.6) {
-            scrollTimeoutId = setTimeout(trigger, 20000); // 20 seconds after 60% scroll
-        }
-    }
-
     const removeListeners = () => {
         document.removeEventListener('mouseleave', handleMouseLeave);
-        window.removeEventListener('scroll', handleScroll);
-        if (scrollTimeoutId) clearTimeout(scrollTimeoutId);
     }
-
-    let scrollTimeoutId: NodeJS.Timeout | null = null;
     
     document.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('scroll', handleScroll);
 
     return () => {
         removeListeners();
