@@ -10,7 +10,7 @@ export const Logo = ({ isWhite = false }) => (
     >
       Jon
     </text>
-    <circle cx="58" cy="23" r="5" fill="hsl(var(--primary))" />
+    <circle cx="58" cy="24" r="4" fill="hsl(var(--primary))" />
     <text
       x="70"
       y="28"
