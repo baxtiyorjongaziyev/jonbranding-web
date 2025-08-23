@@ -147,6 +147,7 @@ const Home: FC = () => {
         <Founder />
         <Stats />
         <WhyUs onCtaClick={handleOpenModal} />
+        <Gallery onCtaClick={handleOpenModal} />
         <QueueStatus onCtaClick={handleOpenModal} />
         <TargetAudience />
         <Services />
@@ -156,7 +157,6 @@ const Home: FC = () => {
         <PickTwoSelector />
         <PackageBuilder onOrderNow={handleOpenModal} />
         <Process onCtaClick={handleOpenModal} />
-        <Gallery onCtaClick={handleOpenModal} />
         <Faq onCtaClick={handleOpenModal} />
         <Offer onCTAClick={handleOpenModal} />
       </main>

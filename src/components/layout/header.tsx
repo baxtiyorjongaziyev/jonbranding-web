@@ -19,6 +19,7 @@ interface HeaderProps {
 
 const navItems = [
   { href: '#services', label: 'Xizmatlar' },
+  { href: '#portfolio', label: 'Portfolio' },
   { href: '#founder', label: 'Asoschi' },
   { href: '#process', label: 'Jarayon' },
 ];
