@@ -3,31 +3,35 @@
 
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero';
 import TrustedBy from '@/components/sections/trusted-by';
-import Founder from '@/components/sections/founder';
-import LeadMagnet from '@/components/sections/lead-magnet';
-import Stats from '@/components/sections/stats';
-import WhyUs from '@/components/sections/why-us';
-import TargetAudience from '@/components/sections/target-audience';
-import Video from '@/components/sections/video';
-import PackageBuilder from '@/components/sections/package-builder';
-import BeforeAfter from '@/components/sections/before-after';
-import Testimonials from '@/components/sections/testimonials';
-import Process from '@/components/sections/process';
-import Gallery from '@/components/sections/gallery';
-import Faq from '@/components/sections/faq';
-import Offer from '@/components/sections/offer';
-import ContactModal from '@/components/contact-modal';
-import ExitIntentModal from '@/components/exit-intent-modal';
-import { Button } from '@/components/ui/button';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
-import QueueStatus from '@/components/sections/queue-status';
-import Comparison from '@/components/sections/comparison';
-import PickTwoSelector from '@/components/sections/pick-two-selector';
+import { Button } from '@/components/ui/button';
+
+// Dynamically import components that are not immediately visible
+const Founder = dynamic(() => import('@/components/sections/founder'));
+const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'));
+const Stats = dynamic(() => import('@/components/sections/stats'));
+const WhyUs = dynamic(() => import('@/components/sections/why-us'));
+const Gallery = dynamic(() => import('@/components/sections/gallery'));
+const QueueStatus = dynamic(() => import('@/components/sections/queue-status'));
+const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
+const PickTwoSelector = dynamic(() => import('@/components/sections/pick-two-selector'));
+const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
+const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
+const Video = dynamic(() => import('@/components/sections/video'));
+const PackageBuilder = dynamic(() => import('@/components/sections/package-builder'));
+const Comparison = dynamic(() => import('@/components/sections/comparison'));
+const Process = dynamic(() => import('@/components/sections/process'));
+const Faq = dynamic(() => import('@/components/sections/faq'));
+const Offer = dynamic(() => import('@/components/sections/offer'));
+const ContactModal = dynamic(() => import('@/components/contact-modal'));
+const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
+
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
