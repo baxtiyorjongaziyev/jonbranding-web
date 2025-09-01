@@ -5,6 +5,7 @@ import type { FC } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, ListChecks, Video, Download } from 'lucide-react';
+import Link from 'next/link';
 
 interface LeadMagnetProps {
     onCtaClick: () => void;
@@ -12,25 +13,31 @@ interface LeadMagnetProps {
 
 const magnets = [
   {
+    id: "pdf",
     icon: FileText,
     title: "PDF-Checklist",
     subtitle: "Brendingda 7 ta eng katta xato",
     description: "Brendingizni tahlil qilish va keng tarqalgan xatolardan saqlanish uchun amaliy qo'llanma.",
     cta: "PDF yuklab olish",
+    href: null,
   },
   {
+    id: "quiz",
     icon: ListChecks,
     title: "Mini-test",
     subtitle: "Biznesingiz brendga tayyormi?",
     description: "Bir nechta oddiy savollarga javob bering va biznesingizning brendingga qanchalik tayyorligini bilib oling.",
     cta: "Testni boshlash",
+    href: "/quiz",
   },
   {
+    id: "video",
     icon: Video,
     title: "Mini-video darslik",
     subtitle: "Nega brendsiz biznes unutiladi?",
     description: "10 daqiqalik videoda kuchli brendning nima uchun muhimligi va uning biznes o'sishiga ta'siri haqida bilib oling.",
     cta: "Videoni ko'rish",
+    href: null,
   },
 ];
 
@@ -47,8 +54,8 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-          {magnets.map((magnet, index) => (
-            <Card key={index} className="flex flex-col text-center shadow-lg rounded-2xl hover:shadow-xl transition-shadow bg-secondary/50">
+          {magnets.map((magnet) => (
+            <Card key={magnet.id} className="flex flex-col text-center shadow-lg rounded-2xl hover:shadow-xl transition-shadow bg-secondary/50">
               <CardHeader className="items-center pb-4">
                 <div className="bg-primary/10 p-4 rounded-full">
                   <magnet.icon className="w-8 h-8 text-primary" />
@@ -58,10 +65,19 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
               </CardHeader>
               <CardContent className="flex-grow flex flex-col justify-between px-6 pb-6">
                 <p className="text-gray-600 mb-6">{magnet.description}</p>
-                <Button onClick={onCtaClick} className="w-full shadow-md hover:shadow-lg transition-shadow">
-                  <Download className="w-4 h-4 mr-2" />
-                  {magnet.cta}
-                </Button>
+                {magnet.href ? (
+                    <Button asChild className="w-full shadow-md hover:shadow-lg transition-shadow">
+                        <Link href={magnet.href}>
+                            <Download className="w-4 h-4 mr-2" />
+                            {magnet.cta}
+                        </Link>
+                    </Button>
+                ) : (
+                    <Button onClick={onCtaClick} className="w-full shadow-md hover:shadow-lg transition-shadow">
+                        <Download className="w-4 h-4 mr-2" />
+                        {magnet.cta}
+                    </Button>
+                )}
               </CardContent>
             </Card>
           ))}
