@@ -25,10 +25,16 @@ export async function POST(request: Request) {
             const answersJsonString = packageSummary.replace("Brending-test natijasini kutmoqda. Javoblar: ", "");
             let formattedAnswers = '';
             try {
-                const answersArray = JSON.parse(answersJsonString);
-                formattedAnswers = answersArray.map((answer: string, index: number) => `${index + 1}. ${answer.substring(answer.indexOf(':') + 2)}`).join('\n');
-            } catch {
-                formattedAnswers = "Javoblarni formatlashda xatolik."
+                const answersArray: string[] = JSON.parse(answersJsonString);
+                // Format: ["S1: Answer 1", "S2: Answer 2"] -> "1. Answer 1 \n 2. Answer 2"
+                formattedAnswers = answersArray.map((answer: string, index: number) => {
+                    const answerText = answer.substring(answer.indexOf(':') + 2); // Get text after ": "
+                    return `${index + 1}. ${answerText}`;
+                }).join('\n');
+            } catch (e) {
+                console.error("Error parsing quiz answers:", e);
+                // Fallback for safety
+                formattedAnswers = "Javoblarni formatlashda xatolik yuz berdi.";
             }
 
             telegramMessage = `
