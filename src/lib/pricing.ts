@@ -97,7 +97,7 @@ export const comparisonData = [
     competitors: {
         jon: `${formatPrice(serviceDetails.naming.price)}`,
         mano: `${formatPrice(40000000)}`,
-        abba: `${formatPrice(45000000)}`,
+        abba: `${formatPrice(38000000)}`,
         mountain: `${formatPrice(35000000)}`,
     }
   },
@@ -106,7 +106,7 @@ export const comparisonData = [
     competitors: {
         jon: `${formatPrice(serviceDetails.logo.price)}`,
         mano: `${formatPrice(82000000)}`,
-        abba: `${formatPrice(90000000)}`,
+        abba: `${formatPrice(78000000)}`,
         mountain: `${formatPrice(71500000)}`,
     }
   },
@@ -115,7 +115,7 @@ export const comparisonData = [
     competitors: {
         jon: `${formatPrice(serviceDetails.brandbook.price)}`,
         mano: `${formatPrice(42000000)}`,
-        abba: `${formatPrice(45000000)}`,
+        abba: `${formatPrice(40000000)}`,
         mountain: `${formatPrice(50000000)}`,
     }
   },
@@ -124,7 +124,7 @@ export const comparisonData = [
     competitors: {
         jon: `${formatPrice(serviceDetails.packaging.price)}`,
         mano: `${formatPrice(120000000)}`,
-        abba: `${formatPrice(130000000)}`,
+        abba: `${formatPrice(110000000)}`,
         mountain: `${formatPrice(150000000)}`,
     }
   },
