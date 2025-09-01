@@ -23,7 +23,7 @@ export async function POST(request: Request) {
           packageInfo = `
 Tanlangan paket:
 ${packageSummary}
-Yakuniy narx: $${totalPrice.toLocaleString('en-US')}
+Yakuniy narx: ${totalPrice.toLocaleString('fr-FR')} so'm
           `;
         }
         

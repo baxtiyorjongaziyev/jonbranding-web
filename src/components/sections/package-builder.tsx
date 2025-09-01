@@ -16,6 +16,10 @@ interface PackageBuilderProps {
     onOrderNow: () => void;
 }
 
+const formatPrice = (price: number) => {
+    return price.toLocaleString('fr-FR');
+}
+
 const serviceDetails = {
     naming: { id: "naming", label: "Naming", description: "Brendingiz uchun unutilmas va kuchli nom tanlash.", price: servicePrices.naming },
     logo: { id: "logo", label: "Logo", description: "Biznesingizning o'ziga xosligini aks ettiruvchi professional logotip. (Asosiy xizmat)", price: servicePrices.logo },
@@ -40,7 +44,7 @@ const ServiceCard = ({ id, label, description, price, selected, onSelect, disabl
             )}
             <div className="grid gap-1.5 leading-none">
                 <h4 className="text-base font-bold text-dark-blue leading-none">
-                    {label} <span className="text-primary font-bold">(+${price})</span>
+                    {label} <span className="text-primary font-bold">(+{formatPrice(price)} so'm)</span>
                 </h4>
                 <p className="text-sm text-muted-foreground mt-1">
                     {description}
@@ -243,7 +247,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         return (
                                             <div key={key} className="flex justify-between items-center text-sm">
                                                 <span className="text-gray-300">{service.label}</span>
-                                                <span className="font-medium text-gray-200">${service.price.toLocaleString('en-US')}</span>
+                                                <span className="font-medium text-gray-200">{formatPrice(service.price)} so'm</span>
                                             </div>
                                         );
                                     }
@@ -254,7 +258,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                             <div className="mt-4 space-y-4">
                                 <div className="flex justify-between items-center text-lg">
                                     <span className="text-gray-300">Asl narx:</span>
-                                    <span className={cn("font-bold", total.discountApplied && "line-through text-gray-400")}>${total.base.toLocaleString('en-US')}</span>
+                                    <span className={cn("font-bold", total.discountApplied && "line-through text-gray-400")}>{formatPrice(total.base)} so'm</span>
                                 </div>
                                 
                                 {total.discountApplied && (
@@ -264,7 +268,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         </div>
                                          <div className="flex justify-center items-center gap-2 p-3 bg-green-500/10 rounded-lg text-green-300">
                                             <Sparkles className="h-5 w-5" />
-                                            <p className="font-bold">Siz ${total.savings.toLocaleString('en-US')} tejadingiz!</p>
+                                            <p className="font-bold">Siz {formatPrice(total.savings)} so'm tejadingiz!</p>
                                         </div>
                                     </>
                                 )}
@@ -280,7 +284,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 <div className="border-t border-gray-600 my-2"></div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-200 text-xl">Yakuniy narx:</span>
-                                    <span className="text-4xl font-extrabold text-accent">${total.final.toLocaleString('en-US')}</span>
+                                    <span className="text-4xl font-extrabold text-accent">{formatPrice(total.final)} so'm</span>
                                 </div>
                             </div>
                             <Button onClick={onOrderNow} className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-3 px-8 rounded-md" disabled={total.final === 0}>

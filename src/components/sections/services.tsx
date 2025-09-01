@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 const services = [
-  { name: "Naming", price: "550", description: "Brendingiz uchun unutilmas va kuchli nom tanlash." },
-  { name: "Logo", price: "550", description: "Biznesingizning o'ziga xosligini aks ettiruvchi professional logotip." },
-  { name: "Korporativ uslub", price: "850", description: "Brendingiz uchun yagona vizual tizim (ranglar, shriftlar, elementlar)." },
-  { name: "Brandbook", price: "990", description: "Brenddan foydalanish bo'yicha to'liq qo'llanma." },
+  { name: "Naming", price: "7,150,000", description: "Brendingiz uchun unutilmas va kuchli nom tanlash." },
+  { name: "Logo", price: "7,150,000", description: "Biznesingizning o'ziga xosligini aks ettiruvchi professional logotip." },
+  { name: "Korporativ uslub", price: "11,050,000", description: "Brendingiz uchun yagona vizual tizim (ranglar, shriftlar, elementlar)." },
+  { name: "Brandbook", price: "12,870,000", description: "Brenddan foydalanish bo'yicha to'liq qo'llanma." },
 ];
 
 const Services = () => {
@@ -28,8 +28,8 @@ const Services = () => {
               </CardHeader>
               <CardContent className="flex-grow flex flex-col justify-end">
                 <p className="text-4xl font-bold text-primary mb-6">
-                  ${service.price}
-                  {service.name === "Naming" && <span className="text-2xl">+</span>}
+                  {service.price}
+                  <span className="text-2xl font-light"> so'm</span>
                 </p>
                 <Button asChild variant="outline" className="w-full">
                   <Link href="#package-builder">Tanlash</Link>

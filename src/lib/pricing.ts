@@ -1,14 +1,14 @@
 
 
 export const servicePrices = {
-    naming: 550,
-    logo: 550,
-    style: 850,
-    brandbook: 990,
+    naming: 7150000,
+    logo: 7150000,
+    style: 11050000,
+    brandbook: 12870000,
 };
 
 export const pcgDiscount = 0.50;
-export const bonusThreshold = 1500;
+export const bonusThreshold = 19500000;
 export const bonusDescription = "Biznes vizitka dizayni sovg'a tariqasida";
 
 interface SelectedServices {
@@ -45,8 +45,8 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     let discountValue = 0;
     let discountType = "";
 
-    // Apply discount only if PCG member and base price is over $550
-    if (isPcgMember && basePrice > 550) {
+    // Apply discount only if PCG member and base price is over the logo price
+    if (isPcgMember && basePrice > servicePrices.logo) {
         discountValue = pcgDiscount;
         discountType = 'PCG Tez Natija 3 uchun -50% chegirma';
     }
