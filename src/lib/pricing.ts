@@ -35,7 +35,7 @@ export const serviceDetails = {
     },
     designSystem: { 
         label: "To'liq dizayn-tizim", 
-        description: "Logotip, ranglar, shriftlar, firma grafikasi, ikonikalar, tasvirlar uslubi. 3 ta konsepsiya.", 
+        description: "<strong>Logotipni o'z ichiga oladi.</strong> Ranglar, shriftlar, firma grafikasi, ikonikalar, tasvirlar uslubi. 3 ta konsepsiya.", 
         price: 39000000,
         marketPrice: 120000000,
         timeline: "4-6 hafta",

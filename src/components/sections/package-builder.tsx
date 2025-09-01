@@ -53,7 +53,7 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
                         {marketPrice && <span className="text-xs text-muted-foreground whitespace-nowrap line-through block">{formatPrice(marketPrice)}</span>}
                     </div>
                 </div>
-                 <p className="text-sm text-muted-foreground mt-1">{description}</p>
+                 <p className="text-sm text-muted-foreground mt-1" dangerouslySetInnerHTML={{ __html: description }}></p>
                  <div className="text-xs text-muted-foreground mt-2 space-x-4">
                     {timeline && <span>Muddati: <strong>{timeline}</strong></span>}
                     {note && <span className="text-red-600 font-bold"><strong>{note}</strong></span>}
