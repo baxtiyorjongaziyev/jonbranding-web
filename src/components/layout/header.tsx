@@ -43,9 +43,9 @@ const services: { title: string; href: string; description: string }[] = [
     description: "Brendingiz uchun unutilmas, kuchli va huquqiy jihatdan toza nom tanlash.",
   },
   {
-    title: "Logotip va Dizayn-tizim",
-    href: "/#package-builder",
-    description: "Tizimli yondashuv orqali brendingizning vizual qiyofasini yaratish.",
+    title: "Firma Uslubi",
+    href: "/xizmatlar/firmenniy-stil",
+    description: "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
   },
   {
     title: "Qadoq dizayni",
@@ -119,7 +119,7 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href} passHref>
+                <Link href={item.href} legacyBehavior={false} passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     {item.label}
                   </NavigationMenuLink>
