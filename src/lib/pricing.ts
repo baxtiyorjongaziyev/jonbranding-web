@@ -1,22 +1,75 @@
-
-
-export const servicePrices = {
-    naming: 7150000,
-    logo: 7150000,
-    style: 11050000,
-    brandbook: 12870000,
+export const serviceDetails = {
+    strategy: { 
+        label: "Brend-strategiya va platforma", 
+        description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", 
+        price: 240000000, 
+        timeline: "8 haftadan",
+        note: null,
+        isBase: false
+    },
+    commStrategy: { 
+        label: "Kommunikatsion strategiya", 
+        description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", 
+        price: 190000000, 
+        timeline: "8 haftadan",
+        note: null,
+        isBase: false
+    },
+    naming: { 
+        label: "Neyming", 
+        description: "Brendingiz uchun unutilmas va kuchli nom tanlash.", 
+        price: 40000000, 
+        timeline: "2-3 hafta",
+        note: null,
+        isBase: false
+    },
+    logo: { 
+        label: "Logotip va bazaviy stil", 
+        description: "Logotip, ranglar palitrasi, shriftlar. 2 ta konsepsiya, 5 ta nositelda namoyish.", 
+        price: 82000000, 
+        timeline: "2-4 hafta",
+        note: "Asosiy xizmat, olib tashlab bo'lmaydi.",
+        isBase: true
+    },
+    designSystem: { 
+        label: "To'liq dizayn-tizim", 
+        description: "Logotip, ranglar, shriftlar, firma grafikasi, ikonikalar, tasvirlar uslubi. 3 ta konsepsiya.", 
+        price: 120000000, 
+        timeline: "4-6 hafta",
+        note: null,
+        isBase: false
+    },
+    brandbook: { 
+        label: "Brendbuk va gaydlayn", 
+        description: "Firma uslubidan foydalanish bo'yicha qoidalar hujjati.", 
+        price: 42000000, 
+        timeline: "1 haftadan",
+        note: null,
+        isBase: false
+    },
+    packaging: { 
+        label: "Qadoq dizayni", 
+        description: "3 SKU uchun qadoq ishlab chiqish, chop etishga tayyorlash. Qadoq formasi alohida ishlab chiqiladi.", 
+        price: 120000000, 
+        timeline: "4-6 hafta",
+        note: null,
+        isBase: false
+    },
+    smm: { 
+        label: "Ijtimoiy tarmoqlar uchun stil", 
+        description: "Postlar va storislarni firma uslubida bezash.", 
+        price: 45000000, 
+        timeline: "2 haftadan",
+        note: null,
+        isBase: false
+    }
 };
 
-export const pcgDiscount = 0.50;
-export const bonusThreshold = 19500000;
-export const bonusDescription = "Biznes vizitka dizayni sovg'a tariqasida";
+export type SelectedServices = Record<keyof typeof serviceDetails, boolean>;
 
-interface SelectedServices {
-    naming: boolean;
-    logo: boolean;
-    style: boolean;
-    brandbook: boolean;
-}
+export const pcgDiscount = 0.50;
+export const bonusThreshold = 150000000;
+export const bonusDescription = "Biznes vizitka dizayni sovg'a tariqasida";
 
 interface PackageSelections {
     selectedServices: SelectedServices;
@@ -37,16 +90,19 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     const { selectedServices, isPcgMember } = selections;
     
     let basePrice = 0;
-    if (selectedServices.naming) basePrice += servicePrices.naming;
-    if (selectedServices.logo) basePrice += servicePrices.logo;
-    if (selectedServices.style) basePrice += servicePrices.style;
-    if (selectedServices.brandbook) basePrice += servicePrices.brandbook;
+    for (const serviceKey in selectedServices) {
+        if (selectedServices[serviceKey as keyof SelectedServices]) {
+            basePrice += serviceDetails[serviceKey as keyof SelectedServices].price;
+        }
+    }
 
     let discountValue = 0;
     let discountType = "";
+    
+    // Asosiy xizmat narxini bilish uchun
+    const baseServicePrice = serviceDetails.logo.price;
 
-    // Apply discount only if PCG member and base price is over the logo price
-    if (isPcgMember && basePrice > servicePrices.logo) {
+    if (isPcgMember && basePrice > baseServicePrice) {
         discountValue = pcgDiscount;
         discountType = 'PCG Tez Natija 3 uchun -50% chegirma';
     }
@@ -70,10 +126,11 @@ export const generateSummary = (selections: PackageSelections) => {
     const { selectedServices } = selections;
     
     const services = [];
-    if (selectedServices.naming) services.push('Naming');
-    if (selectedServices.logo) services.push('Logo');
-    if (selectedServices.style) services.push('Korporativ uslub');
-    if (selectedServices.brandbook) services.push('Brandbook');
+    for (const serviceKey in selectedServices) {
+        if (selectedServices[serviceKey as keyof SelectedServices]) {
+            services.push(serviceDetails[serviceKey as keyof SelectedServices].label);
+        }
+    }
 
     let summary = `Tanlangan xizmatlar: ${services.join(', ') || 'Yo\'q'}`;
 
@@ -86,7 +143,6 @@ export const generateSummary = (selections: PackageSelections) => {
     if (bonus) {
         summary += ` | Bonus: ${bonus}`;
     }
-
 
     return summary;
 }
