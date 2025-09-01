@@ -83,7 +83,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
             __html: `
                 window.__ENV__ = {
                   NEXT_PUBLIC_TELEGRAM_WEBHOOK_URL: '${process.env.NEXT_PUBLIC_TELEGRAM_WEBHOOK_URL || '/api/telegram'}',
-                  NEXT_PUBLIC_GA_ID: '${process.env.NEXT_PUBLIC_GA_ID || 'G-B3ZSKB40XY'}',
+                  NEXT_PUBLIC_GA_ID: '${process.env.NEXT_PUBLIC_GA_ID || 'G-1CE32W25SP'}',
                   NEXT_PUBLIC_SUPABASE_URL: '${process.env.NEXT_PUBLIC_SUPABASE_URL || ''}',
                   NEXT_PUBLIC_SUPABASE_ANON_KEY: '${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''}'
                 };
