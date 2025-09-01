@@ -85,7 +85,7 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick }) => {
 
       </div>
       <CtaBlock 
-        title="Farqni o'zingiz ko'rdingiz. Endi tanlash vaqti!"
+        title="Farqni o'zingiz ko'rdingiz. Endi tanlash vaqti keldi!"
         description="Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun eng to'g'ri qarorni qabul qiling va biz bilan bog'laning."
         buttonText="Menga shunday yondashuv kerak"
         onCtaClick={onCtaClick}
