@@ -66,12 +66,14 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
               <CardContent className="flex-grow flex flex-col justify-between px-6 pb-6">
                 <p className="text-gray-600 mb-6">{magnet.description}</p>
                 {magnet.href ? (
-                    <Button asChild className="w-full shadow-md hover:shadow-lg transition-shadow">
-                        <Link href={magnet.href}>
-                            <Download className="w-4 h-4 mr-2" />
-                            {magnet.cta}
-                        </Link>
-                    </Button>
+                    <Link href={magnet.href} passHref>
+                        <Button asChild className="w-full shadow-md hover:shadow-lg transition-shadow">
+                            <a>
+                                <ListChecks className="w-4 h-4 mr-2" />
+                                {magnet.cta}
+                            </a>
+                        </Button>
+                    </Link>
                 ) : (
                     <Button onClick={onCtaClick} className="w-full shadow-md hover:shadow-lg transition-shadow">
                         <Download className="w-4 h-4 mr-2" />
