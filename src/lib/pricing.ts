@@ -3,7 +3,7 @@ export const serviceDetails = {
     strategy: { 
         label: "Brend-strategiya va platforma", 
         description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", 
-        price: 240000000, 
+        price: 120000000, 
         timeline: "8 haftadan",
         note: null,
         isBase: false
@@ -11,7 +11,7 @@ export const serviceDetails = {
     commStrategy: { 
         label: "Kommunikatsion strategiya", 
         description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", 
-        price: 190000000, 
+        price: 95000000, 
         timeline: "8 haftadan",
         note: null,
         isBase: false
@@ -19,7 +19,7 @@ export const serviceDetails = {
     naming: { 
         label: "Neyming", 
         description: "Brendingiz uchun unutilmas va kuchli nom tanlash.", 
-        price: 40000000, 
+        price: 20000000, 
         timeline: "2-3 hafta",
         note: null,
         isBase: false
@@ -27,7 +27,7 @@ export const serviceDetails = {
     logo: { 
         label: "Logotip va bazaviy stil", 
         description: "Logotip, ranglar palitrasi, shriftlar. 2 ta konsepsiya, 5 ta nositelda namoyish.", 
-        price: 82000000, 
+        price: 41000000, 
         timeline: "2-4 hafta",
         note: "Asosiy xizmat, olib tashlab bo'lmaydi.",
         isBase: true
@@ -35,7 +35,7 @@ export const serviceDetails = {
     designSystem: { 
         label: "To'liq dizayn-tizim", 
         description: "Logotip, ranglar, shriftlar, firma grafikasi, ikonikalar, tasvirlar uslubi. 3 ta konsepsiya.", 
-        price: 120000000, 
+        price: 60000000, 
         timeline: "4-6 hafta",
         note: null,
         isBase: false
@@ -43,7 +43,7 @@ export const serviceDetails = {
     brandbook: { 
         label: "Brendbuk va gaydlayn", 
         description: "Firma uslubidan foydalanish bo'yicha qoidalar hujjati.", 
-        price: 42000000, 
+        price: 21000000, 
         timeline: "1 haftadan",
         note: null,
         isBase: false
@@ -51,7 +51,7 @@ export const serviceDetails = {
     packaging: { 
         label: "Qadoq dizayni", 
         description: "3 SKU uchun qadoq ishlab chiqish, chop etishga tayyorlash. Qadoq formasi alohida ishlab chiqiladi.", 
-        price: 120000000, 
+        price: 60000000, 
         timeline: "4-6 hafta",
         note: null,
         isBase: false
@@ -59,7 +59,7 @@ export const serviceDetails = {
     smm: { 
         label: "Ijtimoiy tarmoqlar uchun stil", 
         description: "Postlar va storislarni firma uslubida bezash.", 
-        price: 45000000, 
+        price: 22500000, 
         timeline: "2 haftadan",
         note: null,
         isBase: false
@@ -69,7 +69,7 @@ export const serviceDetails = {
 export type SelectedServices = Record<keyof typeof serviceDetails, boolean>;
 
 export const pcgDiscount = 0.50;
-export const bonusThreshold = 150000000;
+export const bonusThreshold = 75000000;
 export const bonusDescription = "Biznes vizitka dizayni sovg'a tariqasida";
 
 interface PackageSelections {
@@ -100,7 +100,6 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     let discountValue = 0;
     let discountType = "";
     
-    // Asosiy xizmat narxini bilish uchun
     const baseServicePrice = serviceDetails.logo.price;
 
     if (isPcgMember && basePrice > baseServicePrice) {
