@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { servicePrices, calculatePackagePrice, type PriceDetails } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle, Sparkles, Gift, ShieldCheck } from 'lucide-react';
+import { CheckCircle, Sparkles, Gift, ShieldCheck, FileText, CreditCard } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface PackageBuilderProps {
@@ -200,20 +200,36 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                         </div>
 
                          <div>
-                            <h3 className="text-xl font-bold text-dark-blue mb-4">3. Bizning kafolatimiz</h3>
-                             <Card 
-                                className="rounded-2xl shadow-sm bg-primary/10 border-primary/30"
-                             >
-                                <div className="flex items-center space-x-4 p-6">
-                                    <ShieldCheck className="h-10 w-10 text-primary flex-shrink-0" />
-                                    <div className="flex flex-col">
-                                        <h4 className="font-bold text-dark-blue">100% Mamnuniyat Kafolati</h4>
-                                        <p className="text-muted-foreground text-sm">
-                                            Sizga yoqadigan dizayn yoki pulingizni 100% qaytarish kafolatimiz bor.
-                                        </p>
-                                    </div>
-                                </div>
-                            </Card>
+                            <h3 className="text-xl font-bold text-dark-blue mb-4">3. Bizning kafolatimiz va shartlar</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <Card className="rounded-2xl shadow-sm bg-primary/10 border-primary/30">
+                                    <CardContent className="flex items-center space-x-4 p-4">
+                                        <ShieldCheck className="h-10 w-10 text-primary flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-bold text-dark-blue">100% Kafolat</h4>
+                                            <p className="text-muted-foreground text-sm">Sizga yoqadigan dizayn yoki pulingizni qaytarish.</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                                 <Card className="rounded-2xl shadow-sm bg-secondary border">
+                                    <CardContent className="flex items-center space-x-4 p-4">
+                                        <CreditCard className="h-10 w-10 text-dark-blue/70 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-bold text-dark-blue">To'lov shartlari</h4>
+                                            <p className="text-muted-foreground text-sm">50% oldindan to'lov, 50% loyiha yakunida.</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                                 <Card className="rounded-2xl shadow-sm bg-secondary border col-span-1 md:col-span-2">
+                                    <CardContent className="flex items-center space-x-4 p-4">
+                                        <FileText className="h-10 w-10 text-dark-blue/70 flex-shrink-0" />
+                                        <div>
+                                            <h4 className="font-bold text-dark-blue">Yuridik ma'lumot</h4>
+                                            <p className="text-muted-foreground text-sm">Narxlar tanishuvingiz uchun ko'rsatilgan va ommaviy oferta hisoblanmaydi. Yakuniy narx loyiha murakkabligiga qarab belgilanadi.</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </div>
                         </div>
                     </div>
 
@@ -279,3 +295,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
+
+    
