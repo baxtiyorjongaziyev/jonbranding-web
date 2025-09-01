@@ -1,6 +1,14 @@
 
 
 export const serviceDetails = {
+    audit: {
+        label: "Brending Auditi",
+        description: "Mavjud brendingiz (logotip, ranglar, ijtimoiy tarmoqlar) tahlili va rivojlanish bo'yicha tavsiyalar bilan 1 soatlik strategik sessiya.",
+        price: 2500000,
+        marketPrice: 5000000,
+        timeline: "3-5 kun",
+        note: null,
+    },
     strategy: { 
         label: "Brend-strategiya va platforma", 
         description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", 
