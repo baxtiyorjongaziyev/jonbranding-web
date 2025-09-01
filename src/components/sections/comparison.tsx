@@ -1,6 +1,6 @@
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Check, X, Minus } from 'lucide-react';
+import { Check, X, Minus, Info } from 'lucide-react';
 import CtaBlock from './cta-block';
 import { comparisonData } from '@/lib/pricing';
 import { Logo } from '../icons/logo';
@@ -66,6 +66,23 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick }) => {
             </div>
           </Card>
         </div>
+
+        <div className="mt-10 max-w-3xl mx-auto">
+            <Card className="bg-sky-blue/30 border-primary/20 rounded-2xl p-6 shadow-sm">
+                <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 bg-primary/10 text-primary p-3 rounded-full mt-1">
+                        <Info className="h-6 w-6" />
+                    </div>
+                    <div>
+                         <h4 className="font-bold text-dark-blue">Nega faqat premium agentliklar?</h4>
+                         <p className="text-base text-dark-blue/80 mt-1">
+                             Biz o'zimizni faqat eng yuqori darajadagi, strategik yondashuvga ega kompaniyalar bilan taqqoslaymiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda taqdim etish. Sifat va strategiya jihatidan biz bilan bir darajada bo'lmagan agentliklar bilan solishtirish, mijoz uchun ham, biz uchun ham to'g'ri bo'lmaydi.
+                         </p>
+                    </div>
+                </div>
+            </Card>
+        </div>
+
       </div>
       <CtaBlock 
         title="Farqni o'zingiz ko'rdingiz. Endi tanlash vaqti!"
