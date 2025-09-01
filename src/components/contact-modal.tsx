@@ -1,6 +1,7 @@
+
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -18,6 +19,7 @@ interface ContactModalProps {
   onClose: () => void;
   packageSummary?: string;
   totalPrice?: number;
+  onFormSubmitSuccess?: () => void;
 }
 
 const formSchema = z.object({
@@ -29,7 +31,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice }) => {
+const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice, onFormSubmitSuccess }) => {
   const { toast } = useToast();
   const [isSubmitting, setSubmitting] = useState(false);
 
@@ -42,7 +44,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       notes: '',
     },
   });
-  
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setSubmitting(true);
     try {
@@ -70,7 +72,12 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         variant: 'default',
       });
       form.reset();
-      onClose();
+      
+      if (onFormSubmitSuccess) {
+          onFormSubmitSuccess();
+      } else {
+          onClose();
+      }
 
     } catch (error: any) {
       toast({
@@ -82,6 +89,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       setSubmitting(false);
     }
   };
+
+  // Reset form when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      form.reset();
+    }
+  }, [isOpen, form]);
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

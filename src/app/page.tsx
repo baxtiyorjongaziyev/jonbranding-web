@@ -184,6 +184,7 @@ const Home: FC = () => {
         onClose={handleCloseModal}
         packageSummary={packageSummary}
         totalPrice={totalPrice}
+        onFormSubmitSuccess={handleCloseModal}
       />
       <ExitIntentModal onPrimaryClick={handleOpenModal} />
       <MobileCtaBar onOpenModal={handleOpenModal} />
