@@ -98,7 +98,7 @@ export const comparisonData = [
         jon: `${formatPrice(serviceDetails.naming.price)}`,
         mano: `${formatPrice(40000000)}`,
         abba: `${formatPrice(45000000)}`,
-        mountain: `${formatPrice(50000000)}`,
+        mountain: `${formatPrice(35000000)}`,
     }
   },
   { 
