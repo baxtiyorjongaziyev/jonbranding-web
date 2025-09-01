@@ -16,8 +16,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['"General Sans"', 'sans-serif'],
-        headline: ['Poppins', 'sans-serif'],
+        body: ['var(--font-general-sans)', 'sans-serif'],
+        headline: ['var(--font-poppins)', 'sans-serif'],
       },
       colors: {
         'ocean-blue': '#00C9FD',
