@@ -120,9 +120,9 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href} legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    {item.label}
+                <Link href={item.href} passHref>
+                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                    <a>{item.label}</a>
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
@@ -198,3 +198,5 @@ const Header: FC = () => {
 };
 
 export default Header;
+
+    
