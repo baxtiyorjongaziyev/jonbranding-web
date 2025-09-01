@@ -2,7 +2,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Check, X, Minus } from 'lucide-react';
 import CtaBlock from './cta-block';
-import { comparisonData, formatPrice } from '@/lib/pricing';
+import { comparisonData } from '@/lib/pricing';
 import { Logo } from '../icons/logo';
 import { cn } from '@/lib/utils';
 
