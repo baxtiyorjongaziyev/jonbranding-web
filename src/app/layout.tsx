@@ -7,7 +7,6 @@ import type { FC, ReactNode } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Poppins } from 'next/font/google';
-import localFont from 'next/font/local';
 
 const APP_NAME = "Jon.Branding";
 const APP_DESCRIPTION = "Jon.Branding bilan strategiyaga asoslangan vizual ko‘rinishga ega bo‘ling.";
@@ -16,25 +15,8 @@ const poppins = Poppins({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-poppins',
-  weight: ['500', '700', '800'],
+  weight: ['400', '500', '600', '700', '800'],
 });
-
-const generalSans = localFont({
-  src: [
-    {
-      path: '../../public/fonts/GeneralSans-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/GeneralSans-Medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-general-sans',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: {
@@ -94,7 +76,7 @@ const jsonLd = {
 
 const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
   return (
-    <html lang="uz" suppressHydrationWarning className={`${poppins.variable} ${generalSans.variable}`}>
+    <html lang="uz" suppressHydrationWarning className={`${poppins.variable}`}>
       <head>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <Script
