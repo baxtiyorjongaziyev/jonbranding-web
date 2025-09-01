@@ -21,24 +21,16 @@ const formatPrice = (price: number) => {
     return `${price.toLocaleString('fr-FR')} so'm`;
 }
 
-type ServiceCategory = 'strategy' | 'naming' | 'identity' | 'communication';
+type ServiceCategory = 'main' | 'additional';
 
 const serviceCategories: Record<ServiceCategory, { title: string; services: (keyof SelectedServices)[] }> = {
-    strategy: {
-        title: "Strategiya",
-        services: ['strategy', 'commStrategy']
+    main: {
+        title: "Asosiy xizmatlarimiz",
+        services: ['naming', 'logo', 'designSystem', 'brandbook', 'packaging']
     },
-    naming: {
-        title: "Neyming",
-        services: ['naming']
-    },
-    identity: {
-        title: "Firmenniy stil va Aydentika",
-        services: ['logo', 'designSystem', 'brandbook', 'packaging']
-    },
-    communication: {
-        title: "Kommunikatsiya va vizual kontent",
-        services: ['smm']
+    additional: {
+        title: "Qo'shimcha xizmatlar",
+        services: ['strategy', 'commStrategy', 'smm']
     }
 };
 
@@ -91,8 +83,8 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 };
 
 const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
-    <Card className="bg-white/10 p-4 rounded-xl border-white/20 flex items-start gap-3">
-        <div className="flex-shrink-0 bg-primary/20 text-white p-2 rounded-lg mt-1">
+    <Card className="bg-primary/10 p-4 rounded-xl border-white/20 flex items-start gap-3">
+        <div className="flex-shrink-0 bg-white/20 text-white p-2 rounded-lg mt-1">
             <Icon className="w-5 h-5" />
         </div>
         <div>
@@ -139,7 +131,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
             
             newState[service] = !newState[service];
 
-            // If one is selected, deselect the other
             if (service === 'logo' && newState.logo) {
                 newState.designSystem = false;
             } else if (service === 'designSystem' && newState.designSystem) {
