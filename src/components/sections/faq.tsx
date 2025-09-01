@@ -7,30 +7,30 @@ import {
 import CtaBlock from './cta-block';
 
 const faqItems = [
-  {
-    question: "Narxlar qaysi valyutada ko'rsatilgan va to'lov qanday amalga oshiriladi?",
-    answer: "Barcha narxlar O'zbekiston so'mida ko'rsatilgan. Biz shartnoma asosida ishlaymiz va to'lovni bank hisob raqami orqali qabul qilamiz."
+   {
+    question: "Nima uchun narxlar qat'iy belgilanmagan?",
+    answer: "Har bir loyiha o'ziga xos. Narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga qarab individual ravishda hisoblanadi. Biz sizning brendingiz uchun eng maqbul yechimni taklif qilamiz."
   },
   {
-    question: "Loyiha qancha vaqt davom etadi?",
-    answer: "Odatda, loyihaning murakkabligiga qarab, logo dizayni 2-3 hafta, to'liq brandbook esa 4-6 hafta vaqt oladi. Bu muddatlar sizning qayta aloqangiz tezligiga ham bog'liq."
+    question: "Ish jarayoni qanday quriladi?",
+    answer: "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishilgan holda amalga oshiriladi va siz jarayonni to'liq nazorat qilasiz."
   },
   {
-    question: "Dizayn yoqmasa, o'zgartirishlar kiritish mumkinmi?",
-    answer: "Albatta. Har bir bosqichda siz bilan kelishgan holda ishlaymiz. Odatda, paketga 2-3 marta o'zgartirish kiritish imkoniyati kiradi. Bizning maqsadimiz - siz 100% mamnun bo'lgan natijaga erishish."
+    question: "Faqat logotip buyurtma qilsam bo'ladimi?",
+    answer: "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'laqonli identifikatsiya tizimini ishlab chiqamiz. Bu sizning biznesingizga uzoq muddatli qiymat yaratadi."
   },
   {
-    question: "Agar natijadan ko'nglim to'lmasa-chi? Qanday kafolat bor?",
-    answer: "Sizning mamnunligingiz biz uchun birinchi o'rinda. Shuning uchun biz '100% Mamnuniyat Kafolati'ni taklif qilamiz. Agar dizayn konsepsiyasining dastlabki variantlaridan ko'nglingiz to'lmasa, biz siz bilan birga ishlab, sizga to'liq ma'qul keladigan yo'nalishni topmagunimizcha qayta ishlaymiz yoki to'lovingizni qaytarib beramiz."
+    question: "To'lov shartlari qanday?",
+    answer: "Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng. Sizning qulayligingiz uchun individual shartlarni ham muhokama qilishimiz mumkin."
+  },
+  {
+    question: "Ish qancha vaqt davom etadi?",
+    answer: "Muddlatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend-strategiya — 8 haftadan boshlanadi. Yakuniy muddat loyiha tasdiqlangandan so'ng aniq bo'ladi."
   },
   {
     question: "Loyiha tugagandan keyin qo'llab-quvvatlash bormi?",
     answer: "Ha, loyiha tugagandan so'ng 1 oy davomida sizga brend materiallaridan to'g'ri foydalanish bo'yicha bepul maslahat va yordam beramiz."
   },
-  {
-    question: "Ish qanday qabul qilinadi va qanday formatdagi fayllar beriladi?",
-    answer: "Loyiha yakunida biz sizga barcha kerakli fayllarni (vektor formatida .svg, .ai; rastr formatida .png, .jpg) va brandbookni (.pdf) taqdim etamiz. Ish dalolatnoma imzolangandan so'ng qabul qilingan hisoblanadi."
-  }
 ];
 
 interface FaqProps {

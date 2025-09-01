@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Shield, CreditCard, ShieldCheck, ShoppingCart, CheckCircle, Trash2, FileText, ClipboardSignature } from 'lucide-react';
+import { Sparkles, Gift, Shield, CreditCard, ShieldCheck, ShoppingCart, CheckCircle, Trash2, FileText, ClipboardSignature, Info, Banknote } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface PackageBuilderProps {
@@ -17,7 +17,7 @@ interface PackageBuilderProps {
 }
 
 const formatPrice = (price: number) => {
-    if (price === 0) return "Individual";
+    if (price === 0) return "Kelishiladi";
     return `${price.toLocaleString('fr-FR')} so'm`;
 }
 
@@ -30,7 +30,7 @@ const serviceCategories: Record<ServiceCategory, { title: string; services: (key
     },
     additional: {
         title: "Qo'shimcha xizmatlar",
-        services: ['strategy', 'commStrategy', 'smm']
+        services: ['strategy', 'commStrategy', 'smm', 'merch', 'illustrations']
     }
 };
 
@@ -49,14 +49,14 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
                  <div className="flex justify-between items-start gap-4">
                     <h4 className="text-base font-bold text-dark-blue leading-tight pr-2">{label}</h4>
                     <div className="text-right">
-                        <span className="text-base font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
+                        <span className="text-base font-bold text-primary whitespace-nowrap">{price > 0 ? `+${formatPrice(price)}` : formatPrice(price)}</span>
                         {marketPrice && <span className="text-xs text-muted-foreground whitespace-nowrap line-through block">{formatPrice(marketPrice)}</span>}
                     </div>
                 </div>
                  <p className="text-sm text-muted-foreground mt-1">{description}</p>
                  <div className="text-xs text-muted-foreground mt-2 space-x-4">
                     {timeline && <span>Muddati: <strong>{timeline}</strong></span>}
-                    {note && <span className="text-red-600"><strong>{note}</strong></span>}
+                    {note && <span className="text-red-600 font-bold"><strong>{note}</strong></span>}
                  </div>
             </div>
              <div className="p-4 bg-gray-50/70 border-t">
@@ -83,9 +83,9 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 };
 
 const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
-    <Card className="bg-primary/10 p-4 rounded-xl border-white/20 flex items-start gap-3">
+    <Card className="bg-primary/5 p-4 rounded-xl border-white/20 flex items-start gap-3">
         <div className="flex-shrink-0 bg-white/20 text-white p-2 rounded-lg mt-1">
-            <Icon className="w-5 h-5" />
+            <Icon className="w-5 h-5 text-primary" />
         </div>
         <div>
             <h5 className="font-bold text-sm text-white">{title}</h5>
@@ -104,6 +104,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         brandbook: false,
         packaging: false,
         smm: false,
+        merch: false,
+        illustrations: false,
     });
     const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', false);
     const [isClient, setIsClient] = useState(false);
@@ -305,7 +307,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         <span className="text-4xl font-extrabold text-accent">{formatPrice(total.final)}</span>
                                     </div>
                                 </div>
-                                <Button onClick={onOrderNow} className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-3 px-8 rounded-md" disabled={total.final === 0}>
+                                <Button onClick={onOrderNow} className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-3 px-8 rounded-md" disabled={total.base === 0}>
                                     {total.discountApplied ? "Chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
                                 </Button>
                                 
@@ -316,14 +318,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         description="Agar dastlabki konsepsiyalar yoqmasa, to'lovingizni qaytarib beramiz."
                                     />
                                      <InfoCard
-                                        icon={ClipboardSignature}
+                                        icon={Banknote}
                                         title="To'lov shartlari"
                                         description="Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng."
                                     />
                                     <InfoCard
-                                        icon={Shield}
-                                        title="Yuridik ma'lumot"
+                                        icon={Info}
+                                        title="Bu ommaviy oferta emas"
                                         description="Narxlar tanishish uchun. Yakuniy narx shartnomada belgilanadi."
+                                    />
+                                    <InfoCard
+                                        icon={Shield}
+                                        title="Mualliflik huquqi"
+                                        description="Buyurtmachi faqat tasdiqlangan konsepsiyaga huquq oladi. Boshqa variantlarni alohida sotib olish mumkin."
                                     />
                                 </div>
 

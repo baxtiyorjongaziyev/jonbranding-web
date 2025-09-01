@@ -64,6 +64,22 @@ export const serviceDetails = {
         marketPrice: 45000000,
         timeline: "2 haftadan",
         note: null,
+    },
+    merch: {
+        label: "Brendli merch va nositellar",
+        description: "Kiyim, aksessuarlar, POSM materiallari dizayni.",
+        price: 0,
+        marketPrice: null,
+        timeline: "2 haftadan",
+        note: "Individual hisoblanadi"
+    },
+    illustrations: {
+        label: "Illustratsiyalar va animatsiya",
+        description: "Firma grafikasi, infografika va animatsiyalar yaratish.",
+        price: 0,
+        marketPrice: null,
+        timeline: "3 haftadan",
+        note: "Individual hisoblanadi"
     }
 };
 
