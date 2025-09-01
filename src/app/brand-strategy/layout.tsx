@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: APP_NAME,
     description: APP_DESCRIPTION,
-    url: 'https://jonbranding.uz/brand-strategy',
+    url: 'https://jonbranding.uz/xizmatlar/brand-strategy',
     siteName: 'Jon.Branding',
     images: [
       {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     images: ['https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2'],
   },
   alternates: {
-    canonical: 'https://jonbranding.uz/brand-strategy',
+    canonical: 'https://jonbranding.uz/xizmatlar/brand-strategy',
   },
 };
 
