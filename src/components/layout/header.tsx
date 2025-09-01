@@ -110,6 +110,7 @@ const Header: FC = () => {
                       key={component.title}
                       title={component.title}
                       href={component.href}
+                      as={Link}
                     >
                       {component.description}
                     </ListItem>
@@ -119,7 +120,7 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href} legacyBehavior={false}>
+                <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     {item.label}
                   </NavigationMenuLink>
