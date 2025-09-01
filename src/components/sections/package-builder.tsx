@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -9,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, FileText, CreditCard, ShieldCheck } from 'lucide-react';
+import { Sparkles, Gift, FileText, CreditCard, ShieldCheck, ShoppingCart, CheckCircle, Trash2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface PackageBuilderProps {
@@ -48,33 +49,43 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 
     return (
         <Card 
-            onClick={!isBase ? onSelect : undefined}
             className={cn(
-                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex",
-                isBase ? "cursor-not-allowed bg-gray-50/50" : "cursor-pointer hover:shadow-md hover:border-primary/50",
-                selected && 'border-primary ring-2 ring-primary shadow-lg'
+                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between",
+                 isBase ? "bg-gray-50/50" : "bg-white",
+                 selected && 'border-primary ring-2 ring-primary shadow-lg'
             )}
         >
-            <div className="flex-shrink-0 flex items-center p-4">
-                 <Checkbox 
-                    checked={selected} 
-                    onCheckedChange={!isBase ? onSelect : undefined}
-                    disabled={isBase}
-                    id={id}
-                    className="h-6 w-6"
-                />
-            </div>
-            <Label htmlFor={id} className="p-4 pl-0 w-full cursor-pointer">
-                <div className="flex justify-between items-start">
-                    <h4 className="text-base font-bold text-dark-blue leading-tight">{label}</h4>
-                    <span className="text-base font-bold text-primary whitespace-nowrap pl-4">{`+${formatPrice(price)}`}</span>
+            <div className="p-5 flex-grow">
+                 <div className="flex justify-between items-start">
+                    <h4 className="text-base font-bold text-dark-blue leading-tight pr-4">{label}</h4>
+                    <span className="text-base font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
                 </div>
                  <p className="text-sm text-muted-foreground mt-1">{description}</p>
                  <div className="text-xs text-muted-foreground mt-2 space-x-4">
                     {timeline && <span>Muddati: <strong>{timeline}</strong></span>}
                     {note && <span className="text-red-600"><strong>{note}</strong></span>}
                  </div>
-            </Label>
+            </div>
+             <div className="p-4 bg-gray-50/70 border-t">
+                <Button 
+                    onClick={onSelect} 
+                    disabled={isBase}
+                    className="w-full"
+                    variant={selected ? 'secondary' : 'default'}
+                >
+                    {selected ? (
+                        <>
+                            <CheckCircle className="h-5 w-5 mr-2" />
+                            Savatchada
+                        </>
+                    ) : (
+                        <>
+                            <ShoppingCart className="h-5 w-5 mr-2" />
+                            Savatchaga qo'shish
+                        </>
+                    )}
+                </Button>
+            </div>
         </Card>
     );
 };
@@ -124,11 +135,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 
     const handleServiceToggle = (service: keyof SelectedServices) => {
         if (service === 'logo') return;
-        setSelectedServices(prev => {
-            const newServices = { ...prev };
-            newServices[service] = !newServices[service];
-            return newServices;
-        });
+        setSelectedServices(prev => ({ ...prev, [service]: !prev[service] }));
     };
     
     const handlePcgToggle = (checked: boolean) => {
@@ -166,13 +173,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         )
     }
 
+    const selectedServiceKeys = Object.entries(selectedServices)
+                                .filter(([, value]) => value)
+                                .map(([key]) => key as keyof SelectedServices);
+
     return (
         <section id="package-builder" className="py-16 sm:py-24 bg-secondary">
             <div className="container mx-auto px-4">
                 <div className="text-center">
                     <h2 className="text-3xl sm:text-4xl font-bold">Narxlar va Xizmatlar</h2>
                      <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
-                        Bu yerda xizmatlarimizning taxminiy boshlang'ich narxlari ko'rsatilgan. Har bir kompaniya o'ziga xos bo'lgani uchun, yakuniy narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga bog'liq.
+                        Bu yerda xizmatlarimizning taxminiy boshlang'ich narxlari ko'rsatilgan. O'zingizga mos to'plamni yig'ing va yakuniy narxni darhol bilib oling.
                     </p>
                 </div>
 
@@ -181,7 +192,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                         {Object.entries(serviceCategories).map(([key, category]) => (
                             <div key={key}>
                                 <h3 className="text-2xl font-bold text-dark-blue mb-4">{category.title}</h3>
-                                <div className="space-y-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {category.services.map((serviceId) => {
                                     if (!serviceDetails[serviceId]) return null;
                                     return (
@@ -220,25 +231,36 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                     <div className="lg:col-span-1 sticky top-24">
                         <Card className="p-6 rounded-2xl shadow-xl bg-dark-blue text-white">
                             <CardHeader className="p-0 text-center">
-                               <CardTitle className="text-2xl font-bold text-white">Sizning tanlovingiz</CardTitle>
+                               <CardTitle className="text-2xl font-bold text-white">Sizning savatchangiz</CardTitle>
                             </CardHeader>
                             <CardContent className="p-0">
                                 <div className="mt-4 space-y-2 pb-4 border-b border-gray-600 min-h-[100px]">
-                                    {Object.entries(selectedServices).filter(([, value]) => value).length > 0 ?
-                                     Object.entries(selectedServices).map(([key, value]) => {
-                                        if (value) {
-                                            const service = serviceDetails[key as keyof SelectedServices];
-                                            if (!service) return null;
-                                            return (
-                                                <div key={key} className="flex justify-between items-center text-sm animate-fade-in">
-                                                    <span className="text-gray-300">{service.label}</span>
-                                                    <span className="font-medium text-gray-200">{formatPrice(service.price)}</span>
-                                                </div>
-                                            );
-                                        }
-                                        return null;
+                                    {selectedServiceKeys.length > 0 ?
+                                     selectedServiceKeys.map((key) => {
+                                        const service = serviceDetails[key as keyof SelectedServices];
+                                        if (!service) return null;
+                                        return (
+                                            <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
+                                                <span className="text-gray-300 flex-1 pr-2">{service.label}</span>
+                                                <span className="font-medium text-gray-200">{formatPrice(service.price)}</span>
+                                                {!service.isBase && (
+                                                     <Button 
+                                                        variant="ghost" 
+                                                        size="icon" 
+                                                        className="h-6 w-6 ml-2 text-gray-400 hover:bg-red-500/20 hover:text-white"
+                                                        onClick={() => handleServiceToggle(key)}
+                                                    >
+                                                        <Trash2 className="h-4 w-4"/>
+                                                    </Button>
+                                                )}
+                                            </div>
+                                        );
                                     })
-                                    : <p className="text-center text-gray-400 text-sm pt-6">O'zingizga kerakli xizmatlarni tanlang</p>
+                                    : <div className="text-center text-gray-400 text-sm pt-6 flex flex-col items-center">
+                                        <ShoppingCart className="w-10 h-10 mb-2"/>
+                                        <p>Savatchangiz bo'sh</p>
+                                        <p className="text-xs">O'zingizga kerakli xizmatlarni qo'shing</p>
+                                    </div>
                                    }
                                 </div>
 
