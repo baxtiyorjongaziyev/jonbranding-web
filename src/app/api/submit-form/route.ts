@@ -18,16 +18,39 @@ export async function POST(request: Request) {
             return NextResponse.json({ ok: false, error: "Ism va telefon raqam kiritilishi shart" }, { status: 400 });
         }
         
-        let packageInfo = '';
-        if (packageSummary && totalPrice !== undefined) {
-          packageInfo = `
+        let telegramMessage = '';
+
+        if (packageSummary && packageSummary.includes("Brending-test natijasini kutmoqda")) {
+            // This is a quiz submission
+            const answers = packageSummary.replace("Brending-test natijasini kutmoqda. Javoblar: ", "");
+            telegramMessage = `
+📝 Yangi Quiz Natijasi (Jon.Branding)
+
+Mijoz: ${fullName}
+Telefon: ${phone}
+Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
+Izoh: ${notes || 'Kiritilmagan'}
+
+Javoblar:
+${JSON.parse(answers).join('\n')}
+
+---
+📞 ALOQA SKRIPTI:
+"Assalomu alaykum, ${fullName}. Ismim Baxtiyorjon, Jon.Branding agentligidan. Saytimizda brendingga tayyorlik bo'yicha mini-test topshirgan edingiz. Hozir sizga natijalarni tahlil qilib, shaxsiy maslahatlar berish uchun qo'ng'iroq qilyapman. Vaqtingiz bormi?"
+`.trim();
+
+        } else {
+            // This is a standard contact/package submission
+            let packageInfo = '';
+            if (packageSummary && totalPrice !== undefined) {
+              packageInfo = `
 Tanlangan paket:
 ${packageSummary}
 Yakuniy narx: ${totalPrice.toLocaleString('fr-FR')} so'm
-          `;
-        }
-        
-        const telegramMessage = `
+              `.trim();
+            }
+            
+            telegramMessage = `
 Yangi xabar (Jon.Branding)
 
 Mijoz: ${fullName}
@@ -35,7 +58,8 @@ Telefon: ${phone}
 Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
 Izoh: ${notes || 'Kiritilmagan'}
 ${packageInfo}
-        `.trim();
+            `.trim();
+        }
         
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
         
