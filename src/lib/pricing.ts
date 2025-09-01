@@ -28,7 +28,7 @@ export const serviceDetails = {
     logo: { 
         label: "Logotip va bazaviy stil", 
         description: "Logotip, ranglar palitrasi, shriftlar. 2 ta konsepsiya, 5 ta nositelda namoyish.", 
-        price: 13000000,
+        price: 26000000,
         marketPrice: 82000000,
         timeline: "2-4 hafta",
         note: null,
@@ -36,7 +36,7 @@ export const serviceDetails = {
     designSystem: { 
         label: "To'liq dizayn-tizim", 
         description: "Logotip, ranglar, shriftlar, firma grafikasi, ikonikalar, tasvirlar uslubi. 3 ta konsepsiya.", 
-        price: 13000000,
+        price: 39000000,
         marketPrice: 120000000,
         timeline: "4-6 hafta",
         note: null,
