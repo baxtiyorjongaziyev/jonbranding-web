@@ -25,8 +25,8 @@ const optionDetails: Record<OptionKey, { label: string, icon: LucideIcon }> = {
 
 const messages: Record<string, string> = {
   cheap_fast: 'Sifat barqaror bo‘lmasligi mumkin. Bu variant shoshilinch va byudjetli loyihalar uchun mos keladi.',
-  cheap_quality: 'Muddat uzunroq bo‘lishi mumkin. Biz byudjetingizga moslashib, sifatni ta\'minlash uchun ko\'proq vaqt sarflaymiz.',
-  quality_fast: 'Narx yuqoriroq bo‘lishi mumkin. A\'lo sifat va qisqa muddat uchun resurslarni safarbar qilish qo\'shimcha xarajat talab etadi.',
+  cheap_quality: 'Natijani kutish uchun ko‘proq vaqt kerak bo‘ladi. Biz byudjetingizga moslashib, sifatni ta\'minlash uchun navbat asosida ishlaymiz.',
+  quality_fast: 'Narx yuqoriroq bo‘ladi. Shoshilinch (2-3 kunlik) loyihalar uchun standart narxga +50% ustama qo\'llaniladi. Biz jamoani safarbar qilib, sizning dedlayningizga ustuvorlik beramiz.',
   default: 'Iltimos, o\'zingiz uchun eng muhim 2 ta ustuvorlikni tanlang.',
 };
 
