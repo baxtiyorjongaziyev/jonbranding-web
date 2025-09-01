@@ -64,7 +64,7 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick }) => {
               <div className="col-span-1 p-6 bg-primary/5 text-center">
                   <Logo />
               </div>
-              <div className="col-span-1 p-6 text-center font-bold text-lg text-dark-blue">Boshqa agentliklar</div>
+              <div className="col-span-1 p-6 text-center font-bold text-lg text-dark-blue">Premium agentliklar</div>
             </div>
             
             <div className="divide-y divide-gray-200">
