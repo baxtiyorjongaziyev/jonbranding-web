@@ -67,48 +67,56 @@ export const serviceDetails = {
     }
 };
 
+export function formatPrice(price: number) {
+    if (price >= 1000000) {
+        return `${(price / 1000000).toLocaleString('fr-FR').replace(',', '.')} mln so'm`;
+    }
+    return `${price.toLocaleString('fr-FR')} so'm`;
+}
+
+
 export const comparisonData = [
   { 
     feature: 'Neyming',
     competitors: {
-        jon: `dan ${formatPrice(serviceDetails.naming.price)}`,
-        mano: `dan ${formatPrice(40000000)}`,
-        abba: `dan ${formatPrice(45000000)}`,
-        mountain: `dan ${formatPrice(50000000)}`,
+        jon: `${formatPrice(serviceDetails.naming.price)}`,
+        mano: `${formatPrice(40000000)}`,
+        abba: `${formatPrice(45000000)}`,
+        mountain: `${formatPrice(50000000)}`,
     }
   },
   { 
     feature: 'Logotip va stil',
     competitors: {
-        jon: `dan ${formatPrice(serviceDetails.logo.price)}`,
-        mano: `dan ${formatPrice(82000000)}`,
-        abba: `dan ${formatPrice(90000000)}`,
-        mountain: `dan ${formatPrice(100000000)}`,
+        jon: `${formatPrice(serviceDetails.logo.price)}`,
+        mano: `${formatPrice(82000000)}`,
+        abba: `${formatPrice(90000000)}`,
+        mountain: `${formatPrice(100000000)}`,
     }
   },
    { 
     feature: 'Brendbuk',
     competitors: {
-        jon: `dan ${formatPrice(serviceDetails.brandbook.price)}`,
-        mano: `dan ${formatPrice(42000000)}`,
-        abba: `dan ${formatPrice(45000000)}`,
-        mountain: `dan ${formatPrice(50000000)}`,
+        jon: `${formatPrice(serviceDetails.brandbook.price)}`,
+        mano: `${formatPrice(42000000)}`,
+        abba: `${formatPrice(45000000)}`,
+        mountain: `${formatPrice(50000000)}`,
     }
   },
   { 
     feature: 'Qadoq dizayni',
     competitors: {
-        jon: `dan ${formatPrice(serviceDetails.packaging.price)}`,
-        mano: `dan ${formatPrice(120000000)}`,
-        abba: `dan ${formatPrice(130000000)}`,
-        mountain: `dan ${formatPrice(150000000)}`,
+        jon: `${formatPrice(serviceDetails.packaging.price)}`,
+        mano: `${formatPrice(120000000)}`,
+        abba: `${formatPrice(130000000)}`,
+        mountain: `${formatPrice(150000000)}`,
     }
   },
   { 
     feature: 'Brend-strategiya',
     competitors: {
-        jon: `dan ${formatPrice(serviceDetails.strategy.price)}`,
-        mano: `dan ${formatPrice(240000000)}`,
+        jon: `${formatPrice(serviceDetails.strategy.price)}`,
+        mano: `${formatPrice(240000000)}`,
         abba: null,
         mountain: null,
     }
@@ -116,8 +124,8 @@ export const comparisonData = [
    { 
     feature: 'Kommunikatsion strategiya',
     competitors: {
-        jon: `dan ${formatPrice(serviceDetails.commStrategy.price)}`,
-        mano: `dan ${formatPrice(190000000)}`,
+        jon: `${formatPrice(serviceDetails.commStrategy.price)}`,
+        mano: `${formatPrice(190000000)}`,
         abba: null,
         mountain: null,
     }
@@ -125,8 +133,8 @@ export const comparisonData = [
   { 
     feature: 'SMM uchun stil',
     competitors: {
-        jon: `dan ${formatPrice(serviceDetails.smm.price)}`,
-        mano: `dan ${formatPrice(45000000)}`,
+        jon: `${formatPrice(serviceDetails.smm.price)}`,
+        mano: `${formatPrice(45000000)}`,
         abba: null,
         mountain: null,
     }
@@ -162,13 +170,6 @@ export const comparisonData = [
     }
   },
 ];
-
-export function formatPrice(price: number) {
-    if (price >= 1000000) {
-        return `${(price / 1000000).toLocaleString('fr-FR').replace(',', '.')} mln so'm`;
-    }
-    return `${price.toLocaleString('fr-FR')} so'm`;
-}
 
 
 export type SelectedServices = Record<keyof typeof serviceDetails, boolean>;
