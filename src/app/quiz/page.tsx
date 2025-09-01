@@ -61,6 +61,7 @@ const QuizPage: FC = () => {
   const [answers, setAnswers] = useState<Answers>(Array(questions.length).fill(null));
   const [isModalOpen, setModalOpen] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [packageSummary, setPackageSummary] = useState('');
 
   const handleAnswerChange = (value: string) => {
     const newAnswers = [...answers];
@@ -76,6 +77,9 @@ const QuizPage: FC = () => {
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
+      const answerTexts = answers.map((a, index) => a ? `S${index+1}: ${a.text}` : null).filter(Boolean);
+      const summary = `Brending-test natijasini kutmoqda. Javoblar: ${JSON.stringify(answerTexts)}`;
+      setPackageSummary(summary);
       setModalOpen(true);
     }
   };
@@ -87,11 +91,6 @@ const QuizPage: FC = () => {
 
   const progressPercentage = ((step + 1) / questions.length) * 100;
   const isCurrentStepAnswered = answers[step] !== null;
-  
-  const stringifiedAnswers = useMemo(() => {
-      const answerTexts = answers.map((a, index) => a ? `S${index+1}: ${a.text}` : null).filter(Boolean);
-      return JSON.stringify(answerTexts);
-  }, [answers]);
 
   if (showResult) {
     return (
@@ -161,7 +160,7 @@ const QuizPage: FC = () => {
            isOpen={isModalOpen} 
            onClose={() => setModalOpen(false)}
            onFormSubmitSuccess={handleFormSubmit}
-           packageSummary={`Brending-test natijasini kutmoqda. Javoblar: ${stringifiedAnswers}`}
+           packageSummary={packageSummary}
         />
     </main>
   );
