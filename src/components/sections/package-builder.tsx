@@ -45,13 +45,12 @@ const serviceCategories: Record<ServiceCategory, { title: string; services: (key
 
 
 const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean }) => {
-    const { label, description, price, timeline, note, isBase } = serviceDetails[id];
+    const { label, description, price, timeline, note } = serviceDetails[id];
 
     return (
         <Card 
             className={cn(
-                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between",
-                 isBase ? "bg-gray-50/50" : "bg-white",
+                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white",
                  selected && 'border-primary ring-2 ring-primary shadow-lg'
             )}
         >
@@ -69,7 +68,6 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
              <div className="p-4 bg-gray-50/70 border-t">
                 <Button 
                     onClick={onSelect} 
-                    disabled={isBase}
                     className="w-full"
                     variant={selected ? 'secondary' : 'default'}
                 >
@@ -107,7 +105,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         strategy: false,
         commStrategy: false,
         naming: false,
-        logo: true,
+        logo: false,
         designSystem: false,
         brandbook: false,
         packaging: false,
@@ -134,7 +132,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 
 
     const handleServiceToggle = (service: keyof SelectedServices) => {
-        if (service === 'logo') return;
         setSelectedServices(prev => ({ ...prev, [service]: !prev[service] }));
     };
     
@@ -243,16 +240,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                             <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
                                                 <span className="text-gray-300 flex-1 pr-2">{service.label}</span>
                                                 <span className="font-medium text-gray-200">{formatPrice(service.price)}</span>
-                                                {!service.isBase && (
-                                                     <Button 
-                                                        variant="ghost" 
-                                                        size="icon" 
-                                                        className="h-6 w-6 ml-2 text-gray-400 hover:bg-red-500/20 hover:text-white"
-                                                        onClick={() => handleServiceToggle(key)}
-                                                    >
-                                                        <Trash2 className="h-4 w-4"/>
-                                                    </Button>
-                                                )}
+                                                <Button 
+                                                    variant="ghost" 
+                                                    size="icon" 
+                                                    className="h-6 w-6 ml-2 text-gray-400 hover:bg-red-500/20 hover:text-white"
+                                                    onClick={() => handleServiceToggle(key)}
+                                                >
+                                                    <Trash2 className="h-4 w-4"/>
+                                                </Button>
                                             </div>
                                         );
                                     })
