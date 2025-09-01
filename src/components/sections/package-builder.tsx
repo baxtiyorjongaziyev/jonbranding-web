@@ -89,13 +89,13 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 };
 
 const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
-    <Card className="bg-white/70 backdrop-blur-sm p-4 rounded-xl shadow-sm border flex items-start gap-4">
-        <div className="flex-shrink-0 bg-primary/10 text-primary p-2 rounded-full">
+    <Card className="bg-white/10 p-4 rounded-xl border border-white/20 flex items-start gap-4">
+        <div className="flex-shrink-0 bg-primary text-primary-foreground p-2 rounded-full">
             <Icon className="w-5 h-5" />
         </div>
         <div>
-            <h5 className="font-bold text-sm text-dark-blue">{title}</h5>
-            <p className="text-xs text-gray-600">{description}</p>
+            <h5 className="font-bold text-sm text-white">{title}</h5>
+            <p className="text-xs text-gray-300">{description}</p>
         </div>
     </Card>
 );
