@@ -71,6 +71,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         description: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
         variant: 'default',
       });
+      
       form.reset();
       
       if (onFormSubmitSuccess) {

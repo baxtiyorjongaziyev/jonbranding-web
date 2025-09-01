@@ -1,39 +1,60 @@
 
 'use client';
 
-import { useState, FC } from 'react';
+import { useState, FC, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
-import { ArrowRight, PartyPopper } from 'lucide-react';
+import { ArrowRight, PartyPopper, Rocket, Shield, TrendingUp } from 'lucide-react';
 import ContactModal from '@/components/contact-modal';
 
 const questions = [
   {
     question: "Sizning biznesingizning asosiy g'oyasi yoki missiyasi bir jumla bilan ifodalanganmi?",
-    options: ["Ha, aniq va hammaga tushunarli", "Qisman, lekin hali to'liq emas", "Yo'q, bu haqida o'ylab ko'rmaganman"],
+    options: [
+        { text: "Ha, aniq va hammaga tushunarli", score: 3 }, 
+        { text: "Qisman, lekin hali to'liq emas", score: 2 },
+        { text: "Yo'q, bu haqida o'ylab ko'rmaganman", score: 1 }
+    ],
   },
   {
     question: "Maqsadli auditoriyangizni (ideal mijozingizni) aniq tasavvur qila olasizmi?",
-    options: ["Ha, ularning ehtiyojlari va xohishlarini bilaman", "Umumiy tasavvurga egaman", "Yo'q, hammaga sotishga harakat qilaman"],
+    options: [
+        { text: "Ha, ularning ehtiyojlari va xohishlarini bilaman", score: 3 },
+        { text: "Umumiy tasavvurga egaman", score: 2 },
+        { text: "Yo'q, hammaga sotishga harakat qilaman", score: 1 }
+    ],
   },
   {
     question: "Brendingiz raqobatchilardan qanday aniq ustunliklari bilan ajralib turadi?",
-    options: ["Kamida 2-3 ta aniq ustunligim bor", "Faqat narx bilan ajralib turaman", "Hech qanday yaqqol ustunligim yo'q"],
+    options: [
+        { text: "Kamida 2-3 ta aniq ustunligim bor", score: 3 },
+        { text: "Faqat narx bilan ajralib turaman", score: 2 },
+        { text: "Hech qanday yaqqol ustunligim yo'q", score: 1 }
+    ],
   },
   {
     question: "Vizual ko'rinishingiz (logotip, ranglar, dizayn) biznesingiz qadriyatlarini aks ettiradimi?",
-    options: ["Ha, to'liq mos keladi", "Qisman, ba'zi elementlarni yangilash kerak", "Yo'q, bunga e'tibor bermaganman"],
+    options: [
+        { text: "Ha, to'liq mos keladi", score: 3 },
+        { text: "Qisman, ba'zi elementlarni yangilash kerak", score: 2 },
+        { text: "Yo'q, bunga e'tibor bermaganman", score: 1 }
+    ],
   },
   {
     question: "Mijozlaringiz siz haqingizda bir xil va ijobiy fikrdami?",
-    options: ["Ha, brendim obro'si mustahkam", "Har xil, ba'zan salbiy fikrlar ham bor", "Bilmayman, so'rov o'tkazmaganman"],
+    options: [
+        { text: "Ha, brendim obro'si mustahkam", score: 3 },
+        { text: "Har xil, ba'zan salbiy fikrlar ham bor", score: 2 },
+        { text: "Bilmayman, so'rov o'tkazmaganman", score: 1 }
+    ],
   },
 ];
 
-type Answers = (string | null)[];
+type Answer = { text: string; score: number };
+type Answers = (Answer | null)[];
 
 const QuizPage: FC = () => {
   const [step, setStep] = useState(0);
@@ -43,7 +64,11 @@ const QuizPage: FC = () => {
 
   const handleAnswerChange = (value: string) => {
     const newAnswers = [...answers];
-    newAnswers[step] = value;
+    const currentQuestion = questions[step];
+    const selectedOption = currentQuestion.options.find(opt => opt.text === value);
+    if (selectedOption) {
+        newAnswers[step] = selectedOption;
+    }
     setAnswers(newAnswers);
   };
 
@@ -54,36 +79,75 @@ const QuizPage: FC = () => {
       setModalOpen(true);
     }
   };
+  
+  const totalScore = useMemo(() => {
+    return answers.reduce((sum, answer) => sum + (answer?.score || 0), 0);
+  }, [answers]);
+  
+  const resultData = useMemo(() => {
+    if (totalScore >= 12) {
+      return {
+        icon: Rocket,
+        title: "Ajoyib! Brendingiz uchishga tayyor!",
+        description: "Sizda kuchli poydevor mavjud. Brendingizni keyingi bosqichga olib chiqish va bozor yetakchisiga aylanish uchun bir nechta strategik teginishlar qoldi. Keling, bu imkoniyatlarni birga muhokama qilamiz.",
+        color: "text-green-500"
+      };
+    } else if (totalScore >= 7) {
+      return {
+        icon: TrendingUp,
+        title: "Yaxshi! O'sish uchun imkoniyatlar bor!",
+        description: "Siz to'g'ri yo'ldasiz, lekin brendingizning ba'zi jihatlarini kuchaytirish kerak. Biz sizga zaif nuqtalarni aniqlashga va ularni kuchli tomonlarga aylantirishga yordam beramiz.",
+         color: "text-yellow-500"
+      };
+    } else {
+      return {
+        icon: Shield,
+        title: "Poydevorni mustahkamlash vaqti keldi!",
+        description: "Brendingiz hozircha himoyasiz. Raqobatda yutqazmaslik va barqaror o'sish uchun shoshilinch ravishda brend strategiyasini ishlab chiqish kerak. Biz sizga noldan mustahkam brend qurishga yordam beramiz.",
+         color: "text-red-500"
+      };
+    }
+  }, [totalScore]);
+
 
   const handleFormSubmit = () => {
-    // This is called when the contact form inside the modal is submitted successfully
     setModalOpen(false);
     setShowResult(true);
   };
 
   const progressPercentage = ((step + 1) / questions.length) * 100;
   const isCurrentStepAnswered = answers[step] !== null;
+  
+  const stringifiedAnswers = useMemo(() => {
+      return JSON.stringify(answers.map(a => a?.text));
+  }, [answers]);
 
   if (showResult) {
+    const ResultIcon = resultData.icon;
     return (
         <main className="flex-grow bg-secondary/50">
             <section className="py-20 sm:py-28">
                 <div className="container mx-auto px-4 text-center">
                      <Card className="max-w-2xl mx-auto p-8 shadow-2xl rounded-3xl animate-fade-in">
-                        <PartyPopper className="h-20 w-20 text-primary mx-auto mb-6" />
+                        <ResultIcon className={`h-20 w-20 ${resultData.color} mx-auto mb-6`} />
                         <h1 className="text-3xl sm:text-4xl font-extrabold text-dark-blue">
-                            Test uchun rahmat!
+                           {resultData.title}
                         </h1>
                         <p className="mx-auto mt-4 max-w-xl text-lg text-gray-700">
-                            So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanib, testingiz natijalari va brendingizni rivojlantirish bo'yicha shaxsiy tavsiyalarimizni beramiz.
+                           {resultData.description}
                         </p>
-                         <Button onClick={() => window.location.href = '/'} className="mt-8" size="lg">
-                            Bosh sahifaga qaytish
-                        </Button>
+                        <p className="font-bold mt-4">Umumiy ball: {totalScore}/{questions.length * 3}</p>
+                        <div className="mt-8">
+                             <p className="text-base text-gray-800">
+                                Batafsil tahlil va shaxsiy tavsiyalar uchun siz bilan tez orada bog'lanamiz!
+                             </p>
+                             <Button onClick={() => window.location.href = '/'} className="mt-6" size="lg">
+                                Bosh sahifaga qaytish
+                            </Button>
+                        </div>
                     </Card>
                 </div>
             </section>
-             <ContactModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
         </main>
     )
   }
@@ -102,14 +166,14 @@ const QuizPage: FC = () => {
                     </CardHeader>
                     <CardContent className="p-8 pt-0">
                         <RadioGroup
-                            value={answers[step] || ''}
+                            value={answers[step]?.text || ''}
                             onValueChange={handleAnswerChange}
                             className="space-y-4"
                         >
                             {questions[step].options.map((option, index) => (
                                 <Label key={index} htmlFor={`q${step}-o${index}`} className="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-white transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
-                                    <RadioGroupItem value={option} id={`q${step}-o${index}`} />
-                                    <span className="font-medium text-base text-gray-800">{option}</span>
+                                    <RadioGroupItem value={option.text} id={`q${step}-o${index}`} />
+                                    <span className="font-medium text-base text-gray-800">{option.text}</span>
                                 </Label>
                             ))}
                         </RadioGroup>
@@ -130,7 +194,8 @@ const QuizPage: FC = () => {
         <ContactModal 
            isOpen={isModalOpen} 
            onClose={() => setModalOpen(false)}
-           packageSummary={`Brending-test natijasini so'rash. Javoblar: ${JSON.stringify(answers)}`}
+           onFormSubmitSuccess={handleFormSubmit}
+           packageSummary={`Brending-test natijasini so'rash. Javoblar: ${stringifiedAnswers}`}
         />
     </main>
   );
