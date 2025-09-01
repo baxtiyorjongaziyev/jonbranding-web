@@ -40,8 +40,9 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 
     return (
         <Card 
+            onClick={onSelect}
             className={cn(
-                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white",
+                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white cursor-pointer hover:shadow-md",
                  selected && 'border-primary ring-2 ring-primary shadow-lg'
             )}
         >
@@ -59,11 +60,11 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
                     {note && <span className="text-red-600 font-bold"><strong>{note}</strong></span>}
                  </div>
             </div>
-             <div className="p-4 bg-gray-50/70 border-t">
+             <div className="p-4 bg-gray-50/70 border-t pointer-events-none">
                 <Button 
-                    onClick={onSelect} 
                     className="w-full"
                     variant={selected ? 'secondary' : 'default'}
+                    tabIndex={-1}
                 >
                     {selected ? (
                         <>
@@ -218,7 +219,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                              <Card 
                                 onClick={() => handlePcgToggle(!isPcgMember)}
                                 className={cn(
-                                    "p-1 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer animate-subtle-pulse",
+                                    "p-1 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer",
                                     isPcgMember ? "bg-accent/20 border-accent ring-2 ring-accent" : "bg-white hover:shadow-md"
                                 )}
                              >
