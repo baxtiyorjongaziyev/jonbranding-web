@@ -2,14 +2,14 @@
 
 import { useState, useEffect, FC } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift } from 'lucide-react';
+import { Sparkles, Gift, FileText, CreditCard, ShieldCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface PackageBuilderProps {
@@ -79,6 +79,17 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
     );
 };
 
+const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
+    <Card className="bg-white/70 backdrop-blur-sm p-4 rounded-xl shadow-sm border flex items-start gap-4">
+        <div className="flex-shrink-0 bg-primary/10 text-primary p-2 rounded-full">
+            <Icon className="w-5 h-5" />
+        </div>
+        <div>
+            <h5 className="font-bold text-sm text-dark-blue">{title}</h5>
+            <p className="text-xs text-gray-600">{description}</p>
+        </div>
+    </Card>
+);
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
@@ -113,7 +124,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 
     const handleServiceToggle = (service: keyof SelectedServices) => {
         if (service === 'logo') return;
-        setSelectedServices(prev => ({ ...prev, [service]: !prev[service] }));
+        setSelectedServices(prev => {
+            const newServices = { ...prev };
+            newServices[service] = !newServices[service];
+            return newServices;
+        });
     };
     
     const handlePcgToggle = (checked: boolean) => {
@@ -167,14 +182,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                             <div key={key}>
                                 <h3 className="text-2xl font-bold text-dark-blue mb-4">{category.title}</h3>
                                 <div className="space-y-4">
-                                {category.services.map((serviceId) => (
-                                    <ServiceCard
-                                        key={serviceId}
-                                        id={serviceId}
-                                        selected={selectedServices[serviceId]}
-                                        onSelect={() => handleServiceToggle(serviceId)}
-                                    />
-                                ))}
+                                {category.services.map((serviceId) => {
+                                    if (!serviceDetails[serviceId]) return null;
+                                    return (
+                                        <ServiceCard
+                                            key={serviceId}
+                                            id={serviceId}
+                                            selected={selectedServices[serviceId]}
+                                            onSelect={() => handleServiceToggle(serviceId)}
+                                        />
+                                    );
+                                })}
                                 </div>
                             </div>
                         ))}
@@ -201,60 +219,84 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 
                     <div className="lg:col-span-1 sticky top-24">
                         <Card className="p-6 rounded-2xl shadow-xl bg-dark-blue text-white">
-                            <h3 className="text-2xl font-bold text-center">Sizning tanlovingiz</h3>
-                            <div className="mt-4 space-y-2 pb-4 border-b border-gray-600 min-h-[100px]">
-                                {Object.entries(selectedServices).filter(([, value]) => value).length > 0 ?
-                                 Object.entries(selectedServices).map(([key, value]) => {
-                                    if (value) {
-                                        const service = serviceDetails[key as keyof SelectedServices];
-                                        return (
-                                            <div key={key} className="flex justify-between items-center text-sm animate-fade-in">
-                                                <span className="text-gray-300">{service.label}</span>
-                                                <span className="font-medium text-gray-200">{formatPrice(service.price)}</span>
-                                            </div>
-                                        );
-                                    }
-                                    return null;
-                                })
-                                : <p className="text-center text-gray-400 text-sm pt-6">O'zingizga kerakli xizmatlarni tanlang</p>
-                               }
-                            </div>
-
-                            <div className="mt-4 space-y-4">
-                                <div className="flex justify-between items-center text-lg">
-                                    <span className="text-gray-300">Asl narx:</span>
-                                    <span className={cn("font-bold", total.discountApplied && "line-through text-gray-400")}>{formatPrice(total.base)}</span>
+                            <CardHeader className="p-0 text-center">
+                               <CardTitle className="text-2xl font-bold text-white">Sizning tanlovingiz</CardTitle>
+                            </CardHeader>
+                            <CardContent className="p-0">
+                                <div className="mt-4 space-y-2 pb-4 border-b border-gray-600 min-h-[100px]">
+                                    {Object.entries(selectedServices).filter(([, value]) => value).length > 0 ?
+                                     Object.entries(selectedServices).map(([key, value]) => {
+                                        if (value) {
+                                            const service = serviceDetails[key as keyof SelectedServices];
+                                            if (!service) return null;
+                                            return (
+                                                <div key={key} className="flex justify-between items-center text-sm animate-fade-in">
+                                                    <span className="text-gray-300">{service.label}</span>
+                                                    <span className="font-medium text-gray-200">{formatPrice(service.price)}</span>
+                                                </div>
+                                            );
+                                        }
+                                        return null;
+                                    })
+                                    : <p className="text-center text-gray-400 text-sm pt-6">O'zingizga kerakli xizmatlarni tanlang</p>
+                                   }
                                 </div>
-                                
-                                {total.discountApplied && (
-                                    <>
-                                        <div className="flex justify-between items-baseline text-accent">
-                                            <span className="text-sm font-medium">{total.discountApplied}</span>
-                                        </div>
-                                         <div className="flex justify-center items-center gap-2 p-3 bg-green-500/10 rounded-lg text-green-300">
-                                            <Sparkles className="h-5 w-5" />
-                                            <p className="font-bold">Siz {formatPrice(total.savings)} tejadingiz!</p>
-                                        </div>
-                                    </>
-                                )}
 
-                                {total.bonus && (
-                                     <div className="flex justify-center items-center gap-2 p-3 bg-primary/20 rounded-lg text-sky-blue">
-                                        <Gift className="h-5 w-5" />
-                                        <p className="font-bold text-center">{total.bonus}</p>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex justify-between items-center text-lg">
+                                        <span className="text-gray-300">Asl narx:</span>
+                                        <span className={cn("font-bold", total.discountApplied && "line-through text-gray-400")}>{formatPrice(total.base)}</span>
                                     </div>
-                                )}
+                                    
+                                    {total.discountApplied && (
+                                        <>
+                                            <div className="flex justify-between items-baseline text-accent">
+                                                <span className="text-sm font-medium">{total.discountApplied}</span>
+                                            </div>
+                                             <div className="flex justify-center items-center gap-2 p-3 bg-green-500/10 rounded-lg text-green-300">
+                                                <Sparkles className="h-5 w-5" />
+                                                <p className="font-bold">Siz {formatPrice(total.savings)} tejadingiz!</p>
+                                            </div>
+                                        </>
+                                    )}
+
+                                    {total.bonus && (
+                                         <div className="flex justify-center items-center gap-2 p-3 bg-primary/20 rounded-lg text-sky-300">
+                                            <Gift className="h-5 w-5" />
+                                            <p className="font-bold text-center text-sm">{total.bonus}</p>
+                                        </div>
+                                    )}
 
 
-                                <div className="border-t border-gray-600 my-2"></div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-gray-200 text-xl">Yakuniy narx:</span>
-                                    <span className="text-4xl font-extrabold text-accent">{formatPrice(total.final)}</span>
+                                    <div className="border-t border-gray-600 my-2"></div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-gray-200 text-xl">Yakuniy narx:</span>
+                                        <span className="text-4xl font-extrabold text-accent">{formatPrice(total.final)}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <Button onClick={onOrderNow} className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-3 px-8 rounded-md" disabled={total.final === 0}>
-                                {total.discountApplied ? "50% chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
-                            </Button>
+                                <Button onClick={onOrderNow} className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-3 px-8 rounded-md" disabled={total.final === 0}>
+                                    {total.discountApplied ? "Chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
+                                </Button>
+                                
+                                <div className="mt-6 space-y-3">
+                                    <InfoCard
+                                        icon={ShieldCheck}
+                                        title="100% Mamnuniyat Kafolati"
+                                        description="Agar dastlabki konsepsiyalar yoqmasa, to'lovingizni qaytarib beramiz."
+                                    />
+                                     <InfoCard
+                                        icon={CreditCard}
+                                        title="To'lov shartlari"
+                                        description="Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng."
+                                    />
+                                    <InfoCard
+                                        icon={FileText}
+                                        title="Yuridik ma'lumot"
+                                        description="Narxlar tanishish uchun. Yakuniy narx shartnomada belgilanadi."
+                                    />
+                                </div>
+
+                            </CardContent>
                         </Card>
                     </div>
                 </div>
