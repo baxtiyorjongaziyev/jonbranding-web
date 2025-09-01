@@ -105,6 +105,33 @@ export const comparisonData = [
     }
   },
   { 
+    feature: 'Brend-strategiya',
+    competitors: {
+        jon: `dan ${formatPrice(serviceDetails.strategy.price)}`,
+        mano: `dan ${formatPrice(240000000)}`,
+        abba: null,
+        mountain: null,
+    }
+  },
+   { 
+    feature: 'Kommunikatsion strategiya',
+    competitors: {
+        jon: `dan ${formatPrice(serviceDetails.commStrategy.price)}`,
+        mano: `dan ${formatPrice(190000000)}`,
+        abba: null,
+        mountain: null,
+    }
+  },
+  { 
+    feature: 'SMM uchun stil',
+    competitors: {
+        jon: `dan ${formatPrice(serviceDetails.smm.price)}`,
+        mano: `dan ${formatPrice(45000000)}`,
+        abba: null,
+        mountain: null,
+    }
+  },
+  { 
     feature: '100% Mamnuniyat Kafolati', 
     isBenefit: true,
     competitors: {
@@ -170,7 +197,7 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     
     let basePrice = 0;
     for (const serviceKey in selectedServices) {
-        if (selectedServices[serviceKey as keyof SelectedServices] && serviceDetails[serviceKey as keyof SelectedServices]) {
+        if (serviceKey in serviceDetails && selectedServices[serviceKey as keyof SelectedServices]) {
             basePrice += serviceDetails[serviceKey as keyof SelectedServices].price;
         }
     }
