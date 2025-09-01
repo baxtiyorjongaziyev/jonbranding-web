@@ -18,10 +18,11 @@ interface HeaderProps {
 }
 
 const navItems = [
-  { href: '#services', label: 'Xizmatlar' },
-  { href: '#portfolio', label: 'Portfolio' },
-  { href: '#founder', label: 'Asoschi' },
-  { href: '#process', label: 'Jarayon' },
+  { href: '/#services', label: 'Xizmatlar' },
+  { href: '/#portfolio', label: 'Portfolio' },
+  { href: '/brand-strategy', label: 'Brend Strategiyasi' },
+  { href: '/#founder', label: 'Asoschi' },
+  { href: '/#process', label: 'Jarayon' },
 ];
 
 const Header: FC<HeaderProps> = ({ onContactClick }) => {
