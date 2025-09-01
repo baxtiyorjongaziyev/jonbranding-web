@@ -4,7 +4,7 @@ import type {FC} from 'react';
 import { useState, useEffect } from 'react';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent} from '@/components/ui/card';
-import {CheckCircle, Package} from 'lucide-react';
+import {CheckCircle, Search} from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -75,8 +75,8 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
           </Button>
           <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-dark-blue text-dark-blue hover:bg-dark-blue hover:text-white">
             <Link href="#package-builder">
-              <Package className="mr-2 h-5 w-5" />
-              Paketlarni tanlash
+              <Search className="mr-2 h-5 w-5" />
+              Brending Audit o'tkazish
             </Link>
           </Button>
         </div>

@@ -21,9 +21,13 @@ const formatPrice = (price: number) => {
     return `${price.toLocaleString('fr-FR')} so'm`;
 }
 
-type ServiceCategory = 'main' | 'additional';
+type ServiceCategory = 'tripwire' |'main' | 'additional';
 
 const serviceCategories: Record<ServiceCategory, { title: string; services: (keyof SelectedServices)[] }> = {
+    tripwire: {
+        title: "Birinchi qadam",
+        services: ['audit']
+    },
     main: {
         title: "Asosiy xizmatlarimiz",
         services: ['naming', 'logo', 'designSystem', 'brandbook', 'packaging']
@@ -97,6 +101,7 @@ const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType,
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
+        audit: false,
         strategy: false,
         commStrategy: false,
         naming: false,
@@ -198,7 +203,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                         {Object.entries(serviceCategories).map(([key, category]) => (
                             <div key={key}>
                                 <h3 className="text-2xl font-bold text-dark-blue mb-4">{category.title}</h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className={cn(
+                                    "grid grid-cols-1 md:grid-cols-2 gap-4",
+                                    key === 'tripwire' && 'md:grid-cols-1 max-w-lg'
+                                )}>
                                 {category.services.map((serviceId) => {
                                     if (!serviceDetails[serviceId]) return null;
                                     return (
