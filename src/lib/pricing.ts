@@ -85,7 +85,7 @@ export const serviceDetails = {
 
 export function formatPrice(price: number) {
     if (price >= 1000000) {
-        return `${(price / 1000000).toLocaleString('fr-FR').replace(',', '.')} mln so'm`;
+        return `${price.toLocaleString('fr-FR').replace(/\s/g, ' ')} so'm`;
     }
     return `${price.toLocaleString('fr-FR')} so'm`;
 }
@@ -107,7 +107,7 @@ export const comparisonData = [
         jon: `${formatPrice(serviceDetails.logo.price)}`,
         mano: `${formatPrice(82000000)}`,
         abba: `${formatPrice(90000000)}`,
-        mountain: `${formatPrice(100000000)}`,
+        mountain: `${formatPrice(71500000)}`,
     }
   },
    { 
