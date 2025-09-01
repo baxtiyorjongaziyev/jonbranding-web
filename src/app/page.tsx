@@ -25,6 +25,7 @@ import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import QueueStatus from '@/components/sections/queue-status';
+import Comparison from '@/components/sections/comparison';
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
@@ -163,6 +164,7 @@ const Home: FC = () => {
         <BeforeAfter onCtaClick={handleOpenModal} />
         <Video />
         <PackageBuilder onOrderNow={handleOpenModal} />
+        <Comparison onCtaClick={handleOpenModal} />
         <Process onCtaClick={handleOpenModal} />
         <Faq onCtaClick={handleOpenModal} />
         <Offer onCTAClick={handleOpenModal} />

@@ -5,7 +5,6 @@ import { useState, useEffect, FC } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
@@ -92,7 +91,7 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 };
 
 const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
-    <Card className="bg-white/10 p-4 rounded-xl border border-white/20 flex items-start gap-3">
+    <Card className="bg-white/10 p-4 rounded-xl border-white/20 flex items-start gap-3">
         <div className="flex-shrink-0 bg-primary/20 text-white p-2 rounded-lg mt-1">
             <Icon className="w-5 h-5" />
         </div>
@@ -140,12 +139,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
             
             newState[service] = !newState[service];
 
-            if (newState[service]) { 
-                if (service === 'logo') {
-                    newState.designSystem = false;
-                } else if (service === 'designSystem') {
-                    newState.logo = false;
-                }
+            // If one is selected, deselect the other
+            if (service === 'logo' && newState.logo) {
+                newState.designSystem = false;
+            } else if (service === 'designSystem' && newState.designSystem) {
+                newState.logo = false;
             }
 
             return newState;
@@ -232,11 +230,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 )}
                              >
                                 <div className="flex items-center space-x-4 p-5 rounded-lg">
-                                    <Checkbox id="pcg" checked={isPcgMember} onCheckedChange={(checked) => handlePcgToggle(Boolean(checked))} className="h-8 w-8"/>
-                                    <Label htmlFor="pcg" className="text-base font-bold leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer flex flex-col">
-                                        PCG "Tez Natija 3" kursi a'zosiman (-50% chegirma)
-                                        <span className="font-normal text-sm text-gray-600 mt-1">Faqat PCG a'zolari uchun! Bu imkoniyatni qo'ldan boy bermang!</span>
-                                    </Label>
+                                    <div className="flex items-center space-x-3">
+                                      <input 
+                                          type="checkbox"
+                                          id="pcg" 
+                                          checked={isPcgMember} 
+                                          onChange={(e) => handlePcgToggle(e.target.checked)}
+                                          className="h-6 w-6 text-primary focus:ring-primary border-gray-300 rounded"
+                                      />
+                                      <Label htmlFor="pcg" className="text-base font-bold leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer flex flex-col">
+                                          PCG "Tez Natija 3" kursi a'zosiman (-50% chegirma)
+                                          <span className="font-normal text-sm text-gray-600 mt-1">Faqat PCG a'zolari uchun! Bu imkoniyatni qo'ldan boy bermang!</span>
+                                      </Label>
+                                    </div>
                                 </div>
                             </Card>
                         </div>
@@ -313,7 +319,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 </Button>
                                 
                                 <div className="mt-6 space-y-3">
-                                    <InfoCard
+                                   <InfoCard
                                         icon={Sparkles}
                                         title="100% Mamnuniyat Kafolati"
                                         description="Agar dastlabki konsepsiyalar yoqmasa, to'lovingizni qaytarib beramiz."
@@ -340,5 +346,3 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
-
-    
