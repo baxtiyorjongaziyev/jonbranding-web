@@ -90,7 +90,7 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 
 const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
     <Card className="bg-white/10 p-4 rounded-xl border border-white/20 flex items-start gap-4">
-        <div className="flex-shrink-0 bg-primary text-primary-foreground p-2 rounded-full">
+        <div className="flex-shrink-0 bg-primary/20 text-white p-2 rounded-lg">
             <Icon className="w-5 h-5" />
         </div>
         <div>
@@ -132,10 +132,23 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 
 
     const handleServiceToggle = (service: keyof SelectedServices) => {
-        setSelectedServices(prev => ({
-          ...prev,
-          [service]: !prev[service],
-        }));
+        setSelectedServices(prev => {
+            const newState = { ...prev };
+            
+            // Toggle the selected service
+            newState[service] = !newState[service];
+
+            // Handle mutual exclusivity for logo and designSystem
+            if (newState[service]) { // If the service was just turned ON
+                if (service === 'logo') {
+                    newState.designSystem = false;
+                } else if (service === 'designSystem') {
+                    newState.logo = false;
+                }
+            }
+
+            return newState;
+        });
     };
     
     const handlePcgToggle = (checked: boolean) => {
@@ -326,3 +339,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
+
+    
