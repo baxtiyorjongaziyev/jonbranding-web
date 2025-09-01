@@ -1,3 +1,4 @@
+
 'use client';
 
 import type { FC } from 'react';
@@ -83,22 +84,10 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
 
 const Home: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [selectedServices] = useLocalStorage('selectedServices', {
-    strategy: false,
-    commStrategy: false,
-    naming: false,
-    logo: true,
-    designSystem: false,
-    brandbook: false,
-    packaging: false,
-    smm: false,
-  });
-  const [isPcgMember] = useLocalStorage('isPcgMember', false);
+  const [packageSummary, setPackageSummary] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
   
-  const [packageDetails, setPackageDetails] = useState({ summary: '', price: 0 });
-
   const [isClient, setIsClient] = useState(false);
-
   const { tg } = useTelegram();
 
   useEffect(() => {
@@ -111,19 +100,29 @@ const Home: FC = () => {
       setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    if (isClient) {
-      const selections = { selectedServices, isPcgMember };
-      const priceDetails = calculatePackagePrice(selections);
-      const summary = generateSummary(selections);
-      setPackageDetails({ summary, price: priceDetails.final });
-    }
-  }, [selectedServices, isPcgMember, isClient]);
-
   const handleOpenModal = () => {
+    const selectionsJSON = localStorage.getItem('selectedServices');
+    const isPcgMemberJSON = localStorage.getItem('isPcgMember');
+
+    if (selectionsJSON && isPcgMemberJSON) {
+        try {
+            const selectedServices = JSON.parse(selectionsJSON);
+            const isPcgMember = JSON.parse(isPcgMemberJSON);
+            const selections = { selectedServices, isPcgMember };
+            const priceDetails = calculatePackagePrice(selections);
+            const summary = generateSummary(selections);
+            
+            setPackageSummary(summary);
+            setTotalPrice(priceDetails.final);
+        } catch (e) {
+            console.error("Failed to parse package details from localStorage", e);
+             setPackageSummary('');
+             setTotalPrice(0);
+        }
+    }
     setModalOpen(true);
   };
-
+  
   const handleCloseModal = () => {
     setModalOpen(false);
   };
@@ -171,8 +170,8 @@ const Home: FC = () => {
       <ContactModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        packageSummary={packageDetails.summary}
-        totalPrice={packageDetails.price}
+        packageSummary={packageSummary}
+        totalPrice={totalPrice}
       />
       <ExitIntentModal onPrimaryClick={handleOpenModal} />
       <MobileCtaBar onOpenModal={handleOpenModal} />
