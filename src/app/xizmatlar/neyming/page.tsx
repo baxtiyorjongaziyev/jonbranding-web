@@ -1,4 +1,6 @@
 
+'use client';
+
 import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -29,6 +31,12 @@ const creationSteps = [
 ];
 
 const NamingPage: FC = () => {
+
+  const handleOpenModal = () => {
+    const contactEvent = new CustomEvent('openContactModal');
+    window.dispatchEvent(contactEvent);
+  };
+
   return (
     <main className="flex-grow">
       <section className="py-20 sm:py-28 bg-white">
@@ -129,10 +137,8 @@ const NamingPage: FC = () => {
              </div>
 
              <div className="mt-16">
-                <Button asChild size="lg" className="text-lg shadow-ocean animate-subtle-pulse">
-                    <Link href="/#package-builder">
-                        Brendim uchun nom tanlash
-                    </Link>
+                <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse">
+                   Brendim uchun nom tanlash
                 </Button>
             </div>
           </div>
