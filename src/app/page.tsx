@@ -8,7 +8,6 @@ import Founder from '@/components/sections/founder';
 import Stats from '@/components/sections/stats';
 import WhyUs from '@/components/sections/why-us';
 import TargetAudience from '@/components/sections/target-audience';
-import Services from '@/components/sections/services';
 import Video from '@/components/sections/video';
 import PackageBuilder from '@/components/sections/package-builder';
 import BeforeAfter from '@/components/sections/before-after';
@@ -25,15 +24,17 @@ import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import QueueStatus from '@/components/sections/queue-status';
-import PickTwoSelector from '@/components/sections/pick-two-selector';
-import CtaBlock from '@/components/sections/cta-block';
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
+    strategy: false,
+    commStrategy: false,
     naming: false,
     logo: true,
-    style: false,
+    designSystem: false,
     brandbook: false,
+    packaging: false,
+    smm: false,
   });
   const [isPcgMember] = useLocalStorage('isPcgMember', false);
   const [price, setPrice] = useState(0);
@@ -83,10 +84,14 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
 const Home: FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedServices] = useLocalStorage('selectedServices', {
+    strategy: false,
+    commStrategy: false,
     naming: false,
     logo: true,
-    style: false,
+    designSystem: false,
     brandbook: false,
+    packaging: false,
+    smm: false,
   });
   const [isPcgMember] = useLocalStorage('isPcgMember', false);
   
@@ -155,11 +160,9 @@ const Home: FC = () => {
         <Gallery onCtaClick={handleOpenModal} />
         <QueueStatus onCtaClick={handleOpenModal} />
         <TargetAudience />
-        <Services />
         <Testimonials />
         <BeforeAfter onCtaClick={handleOpenModal} />
         <Video />
-        <PickTwoSelector />
         <PackageBuilder onOrderNow={handleOpenModal} />
         <Process onCtaClick={handleOpenModal} />
         <Faq onCtaClick={handleOpenModal} />
