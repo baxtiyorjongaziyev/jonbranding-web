@@ -41,7 +41,21 @@ export async function POST(request: Request) {
             }
 
             const totalScore = parseInt(scoreString.replace('Ball: ', ''));
-            const resultCategory = totalScore <= 8 ? 'Zaif' : totalScore <= 12 ? 'O\'rta' : 'A\'lo';
+            
+            let resultCategory = '';
+            let communicationScript = '';
+
+            if (totalScore <= 8) {
+                resultCategory = 'Zaif';
+                communicationScript = `"Assalomu alaykum, ${fullName}. Ismim Baxtiyorjon, Jon.Branding agentligidan. Saytimizda brendingga tayyorlik bo'yicha mini-test topshirgan edingiz. Natijangiz ${resultCategory} chiqdi. Brendingiz poydevori hozircha zaif ko'rinadi. Raqobatchilardan ajralib turish va mijozlar mehrini qozonish uchun nimalar qilish kerakligi haqida sizga shaxsiy maslahatlar berish uchun qo'ng'iroq qilyapman. Vaqtingiz bormi?"`;
+            } else if (totalScore <= 12) {
+                resultCategory = 'O\'rta';
+                communicationScript = `"Assalomu alaykum, ${fullName}. Ismim Baxtiyorjon, Jon.Branding agentligidan. Saytimizda brendingga tayyorlik bo'yicha mini-test topshirgan edingiz. Natijangiz ${resultCategory} chiqdi. Sizda yaxshi poydevor bor, lekin brendingizni yanada kuchliroq qilish uchun bir nechta bo'shliqlar mavjud. Shu haqida sizga shaxsiy maslahatlar berish uchun qo'ng'iroq qilyapman. Vaqtingiz bormi?"`;
+            } else {
+                resultCategory = 'A\'lo';
+                 communicationScript = `"Assalomu alaykum, ${fullName}. Ismim Baxtiyorjon, Jon.Branding agentligidan. Saytimizda brendingga tayyorlik bo'yicha mini-test topshirganingizni ko'rdim. Tabriklayman, natijangiz ${resultCategory} chiqdi! Bu sizning brending borasida to'g'ri yo'lda ekaningizni ko'rsatadi. Endi bu poydevorni yanada mustahkamlab, bozor yetakchisiga aylanish uchun nimalarga e'tibor berish kerakligi haqida gaplashib olsak. Vaqtingiz bormi?"`;
+            }
+
             const finalResultText = `Natija: ${resultCategory} (${totalScore} ball)`;
 
 
@@ -59,7 +73,7 @@ Javoblar:
 ${formattedAnswers}
 ---
 📞 ALOQA SKRIPTI:
-"Assalomu alaykum, ${fullName}. Ismim Baxtiyorjon, Jon.Branding agentligidan. Saytimizda brendingga tayyorlik bo'yicha mini-test topshirgan edingiz. Natijangiz ${resultCategory} chiqdi. Hozir sizga natijalarni tahlil qilib, shaxsiy maslahatlar berish uchun qo'ng'iroq qilyapman. Vaqtingiz bormi?"
+${communicationScript}
 `.trim();
 
         } else {
