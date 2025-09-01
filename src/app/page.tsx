@@ -26,6 +26,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import QueueStatus from '@/components/sections/queue-status';
 import Comparison from '@/components/sections/comparison';
+import PickTwoSelector from '@/components/sections/pick-two-selector';
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
@@ -37,6 +38,8 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
     brandbook: false,
     packaging: false,
     smm: false,
+    merch: false,
+    illustrations: false,
   });
   const [isPcgMember] = useLocalStorage('isPcgMember', false);
   const [price, setPrice] = useState(0);
@@ -160,6 +163,10 @@ const Home: FC = () => {
         <Gallery onCtaClick={handleOpenModal} />
         <QueueStatus onCtaClick={handleOpenModal} />
         <TargetAudience />
+        <PickTwoSelector onCtaClick={() => {
+            const el = document.getElementById('package-builder');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }}/>
         <Testimonials />
         <BeforeAfter onCtaClick={handleOpenModal} />
         <Video />
