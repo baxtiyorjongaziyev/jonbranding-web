@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import Hero from '@/components/sections/hero';
 import TrustedBy from '@/components/sections/trusted-by';
 import Founder from '@/components/sections/founder';
+import LeadMagnet from '@/components/sections/lead-magnet';
 import Stats from '@/components/sections/stats';
 import WhyUs from '@/components/sections/why-us';
 import TargetAudience from '@/components/sections/target-audience';
@@ -40,6 +41,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
     smm: false,
     merch: false,
     illustrations: false,
+    audit: false,
   });
   const [isPcgMember] = useLocalStorage('isPcgMember', false);
   const [price, setPrice] = useState(0);
@@ -158,6 +160,7 @@ const Home: FC = () => {
         <Hero onPrimaryClick={handleOpenModal} />
         <TrustedBy />
         <Founder />
+        <LeadMagnet onCtaClick={handleOpenModal} />
         <Stats />
         <WhyUs onCtaClick={handleOpenModal} />
         <Gallery onCtaClick={handleOpenModal} />
