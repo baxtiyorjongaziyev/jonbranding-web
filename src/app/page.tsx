@@ -2,7 +2,6 @@
 
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
-import Header from '@/components/layout/header';
 import Hero from '@/components/sections/hero';
 import TrustedBy from '@/components/sections/trusted-by';
 import Founder from '@/components/sections/founder';
@@ -26,7 +25,6 @@ import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import QueueStatus from '@/components/sections/queue-status';
-import Footer from '@/components/layout/footer';
 import PickTwoSelector from '@/components/sections/pick-two-selector';
 import CtaBlock from '@/components/sections/cta-block';
 
@@ -70,7 +68,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
     <div className="sticky bottom-0 md:hidden bg-white/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-sm">
-            <p className="font-bold text-primary-foreground text-lg">${price.toLocaleString('en-US')}</p>
+            <p className="font-bold text-primary-foreground text-lg">{price.toLocaleString('fr-FR')} so'm</p>
             <p className="text-xs text-gray-600">Yakuniy narx</p>
         </div>
         <Button onClick={onOpenModal} className="shadow-ocean animate-subtle-pulse">

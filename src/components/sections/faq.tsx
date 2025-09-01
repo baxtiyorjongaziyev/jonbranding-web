@@ -9,7 +9,7 @@ import CtaBlock from './cta-block';
 const faqItems = [
   {
     question: "Narxlar qaysi valyutada ko'rsatilgan va to'lov qanday amalga oshiriladi?",
-    answer: "Barcha narxlar AQSH dollarida (USD) ko'rsatilgan. To'lov O'zbekiston so'mida, to'lov kunidagi Markaziy Bank kursi bo'yicha amalga oshiriladi. Biz shartnoma asosida ishlaymiz va to'lovni bank hisob raqami orqali qabul qilamiz."
+    answer: "Barcha narxlar O'zbekiston so'mida ko'rsatilgan. Biz shartnoma asosida ishlaymiz va to'lovni bank hisob raqami orqali qabul qilamiz."
   },
   {
     question: "Loyiha qancha vaqt davom etadi?",
