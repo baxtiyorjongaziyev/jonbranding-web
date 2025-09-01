@@ -45,7 +45,7 @@ const serviceCategories: Record<ServiceCategory, { title: string; services: (key
 
 
 const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean }) => {
-    const { label, description, price, timeline, note } = serviceDetails[id];
+    const { label, description, price, marketPrice, timeline, note } = serviceDetails[id];
 
     return (
         <Card 
@@ -55,9 +55,12 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
             )}
         >
             <div className="p-5 flex-grow">
-                 <div className="flex justify-between items-start">
-                    <h4 className="text-base font-bold text-dark-blue leading-tight pr-4">{label}</h4>
-                    <span className="text-base font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
+                 <div className="flex justify-between items-start gap-4">
+                    <h4 className="text-base font-bold text-dark-blue leading-tight pr-2">{label}</h4>
+                    <div className="text-right">
+                        <span className="text-base font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
+                        {marketPrice && <span className="text-xs text-muted-foreground whitespace-nowrap line-through block">{formatPrice(marketPrice)}</span>}
+                    </div>
                 </div>
                  <p className="text-sm text-muted-foreground mt-1">{description}</p>
                  <div className="text-xs text-muted-foreground mt-2 space-x-4">
@@ -89,8 +92,8 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 };
 
 const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
-    <Card className="bg-white/10 p-4 rounded-xl border border-white/20 flex items-start gap-4">
-        <div className="flex-shrink-0 bg-primary/20 text-white p-2 rounded-lg">
+    <Card className="bg-white/10 p-4 rounded-xl border border-white/20 flex items-start gap-3">
+        <div className="flex-shrink-0 bg-primary/20 text-white p-2 rounded-lg mt-1">
             <Icon className="w-5 h-5" />
         </div>
         <div>
@@ -135,11 +138,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         setSelectedServices(prev => {
             const newState = { ...prev };
             
-            // Toggle the selected service
             newState[service] = !newState[service];
 
-            // Handle mutual exclusivity for logo and designSystem
-            if (newState[service]) { // If the service was just turned ON
+            if (newState[service]) { 
                 if (service === 'logo') {
                     newState.designSystem = false;
                 } else if (service === 'designSystem') {
