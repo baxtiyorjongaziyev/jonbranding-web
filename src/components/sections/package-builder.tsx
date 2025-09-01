@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, FileText, CreditCard, ShieldCheck, ShoppingCart, CheckCircle, Trash2 } from 'lucide-react';
+import { Sparkles, Gift, Shield, CreditCard, ShieldCheck, ShoppingCart, CheckCircle, Trash2, FileText, ClipboardSignature } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface PackageBuilderProps {
@@ -132,7 +132,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 
 
     const handleServiceToggle = (service: keyof SelectedServices) => {
-        setSelectedServices(prev => ({ ...prev, [service]: !prev[service] }));
+        setSelectedServices(prev => ({
+          ...prev,
+          [service]: !prev[service],
+        }));
     };
     
     const handlePcgToggle = (checked: boolean) => {
@@ -302,12 +305,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         description="Agar dastlabki konsepsiyalar yoqmasa, to'lovingizni qaytarib beramiz."
                                     />
                                      <InfoCard
-                                        icon={CreditCard}
+                                        icon={ClipboardSignature}
                                         title="To'lov shartlari"
                                         description="Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng."
                                     />
                                     <InfoCard
-                                        icon={FileText}
+                                        icon={Shield}
                                         title="Yuridik ma'lumot"
                                         description="Narxlar tanishish uchun. Yakuniy narx shartnomada belgilanadi."
                                     />
