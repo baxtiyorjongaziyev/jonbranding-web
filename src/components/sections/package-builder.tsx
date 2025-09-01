@@ -300,7 +300,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 
                                 <div className="mt-6 space-y-3">
                                     <InfoCard
-                                        icon={ShieldCheck}
+                                        icon={Sparkles}
                                         title="100% Mamnuniyat Kafolati"
                                         description="Agar dastlabki konsepsiyalar yoqmasa, to'lovingizni qaytarib beramiz."
                                     />
