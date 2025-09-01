@@ -22,7 +22,15 @@ export async function POST(request: Request) {
 
         if (packageSummary && packageSummary.includes("Brending-test natijasini kutmoqda")) {
             // This is a quiz submission
-            const answers = packageSummary.replace("Brending-test natijasini kutmoqda. Javoblar: ", "");
+            const answersJsonString = packageSummary.replace("Brending-test natijasini kutmoqda. Javoblar: ", "");
+            let formattedAnswers = '';
+            try {
+                const answersArray = JSON.parse(answersJsonString);
+                formattedAnswers = answersArray.map((answer: string, index: number) => `${index + 1}. ${answer.substring(answer.indexOf(':') + 2)}`).join('\n');
+            } catch {
+                formattedAnswers = "Javoblarni formatlashda xatolik."
+            }
+
             telegramMessage = `
 📝 Yangi Quiz Natijasi (Jon.Branding)
 
@@ -32,7 +40,7 @@ Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
 Izoh: ${notes || 'Kiritilmagan'}
 
 Javoblar:
-${JSON.parse(answers).join('\n')}
+${formattedAnswers}
 
 ---
 📞 ALOQA SKRIPTI:
