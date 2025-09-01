@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC } from 'react';
@@ -13,10 +14,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-interface HeaderProps {
-  onContactClick: () => void;
-}
-
 const navItems = [
   { href: '/#services', label: 'Xizmatlar' },
   { href: '/#portfolio', label: 'Portfolio' },
@@ -25,7 +22,12 @@ const navItems = [
   { href: '/#process', label: 'Jarayon' },
 ];
 
-const Header: FC<HeaderProps> = ({ onContactClick }) => {
+const Header: FC = () => {
+  const handleContactClick = () => {
+    const contactEvent = new CustomEvent('openContactModal');
+    window.dispatchEvent(contactEvent);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-sm">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -54,7 +56,7 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
            </div>
         </nav>
         <div className="flex items-center gap-2">
-          <Button onClick={onContactClick} className="hidden md:flex shadow-ocean animate-subtle-pulse">
+          <Button onClick={handleContactClick} className="hidden md:flex shadow-ocean animate-subtle-pulse">
             Bepul konsultatsiya olish
           </Button>
           <Sheet>
@@ -88,7 +90,7 @@ const Header: FC<HeaderProps> = ({ onContactClick }) => {
                       Telegram orqali bog'lanish
                     </a>
                  </div>
-                 <Button onClick={onContactClick} className="w-full shadow-ocean mt-4 animate-subtle-pulse">
+                 <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 animate-subtle-pulse">
                   Bepul konsultatsiya olish
                 </Button>
               </nav>

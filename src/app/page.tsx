@@ -124,6 +124,14 @@ const Home: FC = () => {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+
+  useEffect(() => {
+    const handleOpen = () => handleOpenModal();
+    window.addEventListener('openContactModal', handleOpen);
+    return () => {
+        window.removeEventListener('openContactModal', handleOpen);
+    };
+  }, []);
   
   if (!isClient) {
     return (
@@ -139,8 +147,7 @@ const Home: FC = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden animate-fade-in">
-      <Header onContactClick={handleOpenModal} />
+    <div className="flex flex-col overflow-x-hidden animate-fade-in">
       <main className="flex-grow">
         <Hero onPrimaryClick={handleOpenModal} />
         <TrustedBy />
@@ -160,7 +167,6 @@ const Home: FC = () => {
         <Faq onCtaClick={handleOpenModal} />
         <Offer onCTAClick={handleOpenModal} />
       </main>
-      <Footer />
       <ContactModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
