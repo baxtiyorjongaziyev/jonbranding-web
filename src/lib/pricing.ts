@@ -1,3 +1,4 @@
+
 export const serviceDetails = {
     strategy: { 
         label: "Brend-strategiya va platforma", 
@@ -91,7 +92,7 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     
     let basePrice = 0;
     for (const serviceKey in selectedServices) {
-        if (selectedServices[serviceKey as keyof SelectedServices]) {
+        if (serviceKey in serviceDetails && selectedServices[serviceKey as keyof SelectedServices]) {
             basePrice += serviceDetails[serviceKey as keyof SelectedServices].price;
         }
     }
@@ -127,7 +128,7 @@ export const generateSummary = (selections: PackageSelections) => {
     
     const services = [];
     for (const serviceKey in selectedServices) {
-        if (selectedServices[serviceKey as keyof SelectedServices]) {
+        if (serviceKey in serviceDetails && selectedServices[serviceKey as keyof SelectedServices]) {
             services.push(serviceDetails[serviceKey as keyof SelectedServices].label);
         }
     }
