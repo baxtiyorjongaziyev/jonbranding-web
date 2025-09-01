@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
-import { ArrowRight, PartyPopper } from 'lucide-react';
+import { ArrowRight, Frown, Meh, Smile } from 'lucide-react';
 import ContactModal from '@/components/contact-modal';
 
 const questions = [
@@ -56,12 +56,37 @@ const questions = [
 type Answer = { text: string; score: number };
 type Answers = (Answer | null)[];
 
+const resultData = {
+    bad: {
+        icon: Frown,
+        title: "Sizga yordam kerak (5-8 ball)",
+        description: "Brendingiz poydevori zaif. Raqobatchilardan ajralib turish va mijozlar mehrini qozonish uchun sizga shubhasiz professional yordam kerak. Keling, buni birgalikda to'g'rilaymiz!",
+        className: 'text-red-500'
+    },
+    medium: {
+        icon: Meh,
+        title: "Yaxshi potentsial, lekin bo'shliqlar bor (9-12 ball)",
+        description: "Sizda yaxshi poydevor bor, lekin brendingiz yanada kuchliroq va samaraliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldirib, biznesingizni yangi bosqichga olib chiqamiz.",
+        className: 'text-yellow-500'
+    },
+    good: {
+        icon: Smile,
+        title: "Ajoyib! Brendingiz poydevori mustahkam (13-15 ball)",
+        description: "Tabriklaymiz! Siz brending borasida to'g'ri yo'ldasiz. Endi bu poydevorni yanada mustahkamlab, bozor yetakchisiga aylanish vaqti keldi. Biz sizga bu yo'lda yordam beramiz.",
+        className: 'text-green-500'
+    }
+};
+
 const QuizPage: FC = () => {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>(Array(questions.length).fill(null));
   const [isModalOpen, setModalOpen] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [packageSummary, setPackageSummary] = useState('');
+  
+  const totalScore = useMemo(() => {
+    return answers.reduce((acc, curr) => acc + (curr?.score || 0), 0);
+  }, [answers]);
 
   const handleAnswerChange = (value: string) => {
     const newAnswers = [...answers];
@@ -77,8 +102,8 @@ const QuizPage: FC = () => {
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
-      const answerTexts = answers.map((a, index) => a ? `S${index+1}: ${a.text}` : null).filter(Boolean);
-      const summary = `Brending-test natijasini kutmoqda. Javoblar: ${JSON.stringify(answerTexts)}`;
+      const answerTexts = answers.map((a, index) => a ? `S${index+1}: ${a.text}` : null).filter(Boolean) as string[];
+      const summary = `Brending-test natijasi. Javoblar: ${JSON.stringify(answerTexts)} | Ball: ${totalScore}`;
       setPackageSummary(summary);
       setModalOpen(true);
     }
@@ -93,16 +118,23 @@ const QuizPage: FC = () => {
   const isCurrentStepAnswered = answers[step] !== null;
 
   if (showResult) {
+      const resultKey = totalScore <= 8 ? 'bad' : totalScore <= 12 ? 'medium' : 'good';
+      const result = resultData[resultKey];
+      const Icon = result.icon;
+
     return (
         <main className="flex-grow bg-secondary/50">
             <section className="py-20 sm:py-28">
                 <div className="container mx-auto px-4 text-center">
                      <Card className="max-w-2xl mx-auto p-8 shadow-2xl rounded-3xl animate-fade-in">
-                        <PartyPopper className={`h-20 w-20 text-primary mx-auto mb-6`} />
+                        <Icon className={`h-20 w-20 ${result.className} mx-auto mb-6`} />
                         <h1 className="text-3xl sm:text-4xl font-extrabold text-dark-blue">
-                           Rahmat, so'rovingiz qabul qilindi!
+                           {result.title}
                         </h1>
                         <p className="mx-auto mt-4 max-w-xl text-lg text-gray-700">
+                           {result.description}
+                        </p>
+                         <p className="mx-auto mt-4 max-w-xl text-lg text-gray-700 font-bold">
                            Tez orada mutaxassisimiz siz bilan bog'lanib, testingiz natijalari bo'yicha batafsil tahlil va shaxsiy tavsiyalar beradi.
                         </p>
                         <div className="mt-8">

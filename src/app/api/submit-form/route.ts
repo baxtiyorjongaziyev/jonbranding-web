@@ -20,9 +20,12 @@ export async function POST(request: Request) {
         
         let telegramMessage = '';
 
-        if (packageSummary && packageSummary.includes("Brending-test natijasini kutmoqda")) {
+        if (packageSummary && packageSummary.includes("Brending-test natijasi")) {
             // This is a quiz submission
-            const answersJsonString = packageSummary.replace("Brending-test natijasini kutmoqda. Javoblar: ", "");
+            const parts = packageSummary.split(' | ');
+            const answersJsonString = parts[0].replace("Brending-test natijasi. Javoblar: ", "");
+            const scoreString = parts[1] || "Ball: N/A";
+            
             let formattedAnswers = '';
             try {
                 const answersArray: string[] = JSON.parse(answersJsonString);
@@ -37,6 +40,11 @@ export async function POST(request: Request) {
                 formattedAnswers = "Javoblarni formatlashda xatolik yuz berdi.";
             }
 
+            const totalScore = parseInt(scoreString.replace('Ball: ', ''));
+            const resultCategory = totalScore <= 8 ? 'Zaif' : totalScore <= 12 ? 'O\'rta' : 'A\'lo';
+            const finalResultText = `Natija: ${resultCategory} (${totalScore} ball)`;
+
+
             telegramMessage = `
 📝 Yangi Quiz Natijasi (Jon.Branding)
 
@@ -45,12 +53,13 @@ Telefon: ${phone}
 Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
 Izoh: ${notes || 'Kiritilmagan'}
 
+${finalResultText}
+---
 Javoblar:
 ${formattedAnswers}
-
 ---
 📞 ALOQA SKRIPTI:
-"Assalomu alaykum, ${fullName}. Ismim Baxtiyorjon, Jon.Branding agentligidan. Saytimizda brendingga tayyorlik bo'yicha mini-test topshirgan edingiz. Hozir sizga natijalarni tahlil qilib, shaxsiy maslahatlar berish uchun qo'ng'iroq qilyapman. Vaqtingiz bormi?"
+"Assalomu alaykum, ${fullName}. Ismim Baxtiyorjon, Jon.Branding agentligidan. Saytimizda brendingga tayyorlik bo'yicha mini-test topshirgan edingiz. Natijangiz ${resultCategory} chiqdi. Hozir sizga natijalarni tahlil qilib, shaxsiy maslahatlar berish uchun qo'ng'iroq qilyapman. Vaqtingiz bormi?"
 `.trim();
 
         } else {
