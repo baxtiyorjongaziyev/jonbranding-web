@@ -4,6 +4,8 @@ import Script from 'next/script';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import type { FC, ReactNode } from 'react';
+import Header from '@/components/layout/header';
+import Footer from '@/components/layout/footer';
 
 const APP_NAME = "Jon.Branding";
 const APP_DESCRIPTION = "Jon.Branding bilan strategiyaga asoslangan vizual ko‘rinishga ega bo‘ling.";
@@ -70,7 +72,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet" />
         <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet" />
         
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
@@ -81,7 +83,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
             __html: `
                 window.__ENV__ = {
                   NEXT_PUBLIC_TELEGRAM_WEBHOOK_URL: '${process.env.NEXT_PUBLIC_TELEGRAM_WEBHOOK_URL || '/api/telegram'}',
-                  NEXT_PUBLIC_GA_ID: '${process.env.NEXT_PUBLIC_GA_ID || ''}',
+                  NEXT_PUBLIC_GA_ID: '${process.env.NEXT_PUBLIC_GA_ID || 'G-B3ZSKB40XY'}',
                   NEXT_PUBLIC_SUPABASE_URL: '${process.env.NEXT_PUBLIC_SUPABASE_URL || ''}',
                   NEXT_PUBLIC_SUPABASE_ANON_KEY: '${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''}'
                 };
@@ -118,7 +120,11 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         />
       </head>
       <body className="font-body bg-white antialiased">
-        {children}
+        <div className="flex min-h-screen flex-col bg-secondary/50">
+           <Header />
+            {children}
+           <Footer />
+        </div>
         <Toaster />
       </body>
     </html>
