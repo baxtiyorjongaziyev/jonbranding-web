@@ -1,78 +1,148 @@
 
+
 export const serviceDetails = {
     strategy: { 
         label: "Brend-strategiya va platforma", 
         description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", 
-        price: 30000000, 
+        price: 15000000, 
         marketPrice: 240000000,
         timeline: "8 haftadan",
         note: null,
-        isBase: false
     },
     commStrategy: { 
         label: "Kommunikatsion strategiya", 
         description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", 
-        price: 23750000, 
+        price: 11875000,
         marketPrice: 190000000,
         timeline: "8 haftadan",
         note: null,
-        isBase: false
     },
     naming: { 
         label: "Neyming", 
         description: "Brendingiz uchun unutilmas va kuchli nom tanlash.", 
-        price: 5000000, 
+        price: 2500000,
         marketPrice: 40000000,
         timeline: "2-3 hafta",
         note: null,
-        isBase: false
     },
     logo: { 
         label: "Logotip va bazaviy stil", 
         description: "Logotip, ranglar palitrasi, shriftlar. 2 ta konsepsiya, 5 ta nositelda namoyish.", 
-        price: 10250000, 
+        price: 5125000,
         marketPrice: 82000000,
         timeline: "2-4 hafta",
         note: null,
-        isBase: false
     },
     designSystem: { 
         label: "To'liq dizayn-tizim", 
         description: "Logotip, ranglar, shriftlar, firma grafikasi, ikonikalar, tasvirlar uslubi. 3 ta konsepsiya.", 
-        price: 15000000, 
+        price: 7500000,
         marketPrice: 120000000,
         timeline: "4-6 hafta",
         note: null,
-        isBase: false
     },
     brandbook: { 
         label: "Brendbuk va gaydlayn", 
         description: "Firma uslubidan foydalanish bo'yicha qoidalar hujjati.", 
-        price: 5250000, 
+        price: 2625000,
         marketPrice: 42000000,
         timeline: "1 haftadan",
         note: null,
-        isBase: false
     },
     packaging: { 
         label: "Qadoq dizayni", 
         description: "3 SKU uchun qadoq ishlab chiqish, chop etishga tayyorlash. Qadoq formasi alohida ishlab chiqiladi.", 
-        price: 15000000, 
+        price: 7500000,
         marketPrice: 120000000,
         timeline: "4-6 hafta",
         note: null,
-        isBase: false
     },
     smm: { 
         label: "Ijtimoiy tarmoqlar uchun stil", 
         description: "Postlar va storislarni firma uslubida bezash.", 
-        price: 5625000, 
+        price: 2812500,
         marketPrice: 45000000,
         timeline: "2 haftadan",
         note: null,
-        isBase: false
     }
 };
+
+export const comparisonData = [
+  { 
+    feature: 'Neyming',
+    competitors: {
+        jon: `dan ${formatPrice(serviceDetails.naming.price)}`,
+        mano: `dan ${formatPrice(40000000)}`,
+        abba: `dan ${formatPrice(45000000)}`,
+        mountain: `dan ${formatPrice(50000000)}`,
+    }
+  },
+  { 
+    feature: 'Logotip va stil',
+    competitors: {
+        jon: `dan ${formatPrice(serviceDetails.logo.price)}`,
+        mano: `dan ${formatPrice(82000000)}`,
+        abba: `dan ${formatPrice(90000000)}`,
+        mountain: `dan ${formatPrice(100000000)}`,
+    }
+  },
+   { 
+    feature: 'Brendbuk',
+    competitors: {
+        jon: `dan ${formatPrice(serviceDetails.brandbook.price)}`,
+        mano: `dan ${formatPrice(42000000)}`,
+        abba: `dan ${formatPrice(45000000)}`,
+        mountain: `dan ${formatPrice(50000000)}`,
+    }
+  },
+  { 
+    feature: 'Qadoq dizayni',
+    competitors: {
+        jon: `dan ${formatPrice(serviceDetails.packaging.price)}`,
+        mano: `dan ${formatPrice(120000000)}`,
+        abba: `dan ${formatPrice(130000000)}`,
+        mountain: `dan ${formatPrice(150000000)}`,
+    }
+  },
+  { 
+    feature: '100% Mamnuniyat Kafolati', 
+    isBenefit: true,
+    competitors: {
+        jon: true, // check
+        mano: false, // x
+        abba: false, // x
+        mountain: false, // x
+    }
+  },
+  { 
+    feature: 'Shaffof jarayon va doimiy aloqa', 
+    isBenefit: true,
+    competitors: {
+        jon: true, // check
+        mano: true, // check
+        abba: null, // minus
+        mountain: true, // check
+    }
+  },
+   { 
+    feature: 'PCG a\'zolari uchun -50% chegirma', 
+    isBenefit: true,
+    competitors: {
+        jon: true, // check
+        mano: false, // x
+        abba: false, // x
+        mountain: false, // x
+    }
+  },
+];
+
+export function formatPrice(price: number) {
+    if (price >= 1000000) {
+        return `${(price / 1000000).toLocaleString('fr-FR').replace(',', '.')} mln so'm`;
+    }
+    return `${price.toLocaleString('fr-FR')} so'm`;
+}
+
 
 export type SelectedServices = Record<keyof typeof serviceDetails, boolean>;
 
@@ -100,7 +170,7 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     
     let basePrice = 0;
     for (const serviceKey in selectedServices) {
-        if (serviceKey in serviceDetails && selectedServices[serviceKey as keyof SelectedServices]) {
+        if (selectedServices[serviceKey as keyof SelectedServices] && serviceDetails[serviceKey as keyof SelectedServices]) {
             basePrice += serviceDetails[serviceKey as keyof SelectedServices].price;
         }
     }
