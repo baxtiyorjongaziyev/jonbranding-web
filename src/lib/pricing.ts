@@ -172,7 +172,7 @@ export const comparisonData = [
     feature: 'Brend-strategiya',
     competitors: {
         jon: `${formatPrice(serviceDetails.strategy.price)}`,
-        mano: true,
+        mano: "Juda baland",
         abba: null,
         mountain: false,
     }
