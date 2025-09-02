@@ -8,17 +8,17 @@ import { Toaster } from '@/components/ui/toaster';
 import type { FC, ReactNode } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import { Inter } from 'next/font/google';
+import { Manrope } from 'next/font/google';
 import { useState, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'));
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-manrope',
 });
 
 const jsonLd = {
@@ -75,7 +75,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 
 
   return (
-    <html lang="uz" suppressHydrationWarning className={`${inter.variable}`}>
+    <html lang="uz" suppressHydrationWarning className={`${manrope.variable}`}>
       <head>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <Script
