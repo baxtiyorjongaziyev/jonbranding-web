@@ -2,11 +2,27 @@
 
 export const serviceDetails = {
     audit: {
-        label: "Brending Auditi",
-        description: "Mavjud brendingiz (logotip, ranglar, ijtimoiy tarmoqlar) tahlili va rivojlanish bo'yicha tavsiyalar bilan 1 soatlik strategik sessiya.",
-        price: 2500000,
-        marketPrice: 5000000,
-        timeline: "3-5 kun",
+        label: "Logo Auditi",
+        description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.",
+        price: 1500000,
+        marketPrice: 3000000,
+        timeline: "2-3 kun",
+        note: null,
+    },
+    namingCheck: {
+        label: "Neyming Tekshiruvi",
+        description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.",
+        price: 2000000,
+        marketPrice: 4000000,
+        timeline: "1-2 kun",
+        note: null,
+    },
+    consultation: {
+        label: "30 daqiqalik maslahat",
+        description: "Brending bo'yicha har qanday savolingizga tezkor yo'l-yo'riq va professional maslahat.",
+        price: 500000,
+        marketPrice: 1000000,
+        timeline: "30 daqiqa",
         note: null,
     },
     strategy: { 
