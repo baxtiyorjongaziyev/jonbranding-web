@@ -53,12 +53,10 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
             )}
         >
             <div className="p-5 flex-grow">
-                 <div className="flex justify-between items-start gap-4">
-                    <h4 className="text-base font-bold text-dark-blue leading-tight pr-2">{label}</h4>
-                    <div className="text-right">
-                        <span className="text-base font-bold text-primary whitespace-nowrap">{price > 0 ? `+${formatPrice(price)}` : formatPrice(price)}</span>
-                        {marketPrice && <span className="text-xs text-muted-foreground whitespace-nowrap line-through block">{formatPrice(marketPrice)}</span>}
-                    </div>
+                <h4 className="text-base font-bold text-dark-blue leading-tight pr-2">{label}</h4>
+                <div className="my-2">
+                    <span className="text-xl font-bold text-primary whitespace-nowrap">{price > 0 ? `+${formatPrice(price)}` : formatPrice(price)}</span>
+                    {marketPrice && <span className="text-sm text-muted-foreground whitespace-nowrap line-through ml-2">{formatPrice(marketPrice)}</span>}
                 </div>
                  <p className="text-sm text-muted-foreground mt-1" dangerouslySetInnerHTML={{ __html: description }}></p>
                  <div className="text-xs text-muted-foreground mt-2 space-x-4">
@@ -357,3 +355,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
+
+    
