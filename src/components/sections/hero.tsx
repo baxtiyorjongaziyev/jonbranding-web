@@ -7,6 +7,7 @@ import {Card, CardContent} from '@/components/ui/card';
 import {CheckCircle, Search} from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 interface HeroProps {
   onPrimaryClick: () => void;
@@ -31,6 +32,12 @@ const buttonTexts = [
   "Brendimni baholatish",
   "Brending audit o'tkazish",
   "Strategiyani muhokama qilish"
+];
+
+const heroImages = [
+    { src: 'https://picsum.photos/300/400', alt: 'Brand Style Guide', hint: 'brand styleguide', className: 'rounded-xl col-span-2 row-span-2' },
+    { src: 'https://picsum.photos/300/190', alt: 'Logo Design', hint: 'logo design', className: 'rounded-xl' },
+    { src: 'https://picsum.photos/300/190', alt: 'Packaging Design', hint: 'packaging design', className: 'rounded-xl' },
 ];
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
@@ -59,26 +66,46 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
 
   return (
     <section className="bg-background py-20 sm:py-28">
-      <div className="container mx-auto px-4 text-center">
-        <h1 data-testid="hero-title" className={cn(
-          "text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground transition-opacity duration-500",
-          isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
-        )}>
-          {headlines[headlineIndex]}
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground">
-          Jon.Branding bilan strategiyaga asoslangan vizual ko‘rinishga ega bo‘ling va raqobatchilardan ajralib turing.
-        </p>
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-lg px-8 py-6 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-subtle-pulse">
-            {buttonTexts[buttonIndex]}
-          </Button>
-          <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-foreground/20 text-foreground hover:bg-primary hover:text-primary-foreground">
-            <Link href="#package-builder">
-              <Search className="mr-2 h-5 w-5" />
-              Brending Audit o'tkazish
-            </Link>
-          </Button>
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center lg:text-left">
+            <h1 data-testid="hero-title" className={cn(
+              "text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground transition-opacity duration-500",
+              isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
+            )}>
+              {headlines[headlineIndex]}
+            </h1>
+            <p className="mx-auto lg:mx-0 mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground">
+              Jon.Branding bilan strategiyaga asoslangan vizual ko‘rinishga ega bo‘ling va raqobatchilardan ajralib turing.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-lg px-8 py-6 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-subtle-pulse">
+                {buttonTexts[buttonIndex]}
+              </Button>
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-foreground/20 text-foreground hover:bg-primary hover:text-primary-foreground">
+                <Link href="#package-builder">
+                  <Search className="mr-2 h-5 w-5" />
+                  Brending Audit o'tkazish
+                </Link>
+              </Button>
+            </div>
+          </div>
+          <div className="hidden lg:block">
+            <div className="grid grid-cols-3 grid-rows-2 gap-4 h-[400px]">
+                {heroImages.map((image, index) => (
+                     <div key={index} className={cn("relative shadow-lg", image.className)}>
+                        <Image
+                            src={image.src}
+                            alt={image.alt}
+                            fill
+                            className="object-cover rounded-xl"
+                            data-ai-hint={image.hint}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    </div>
+                ))}
+            </div>
+          </div>
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

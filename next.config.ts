@@ -34,6 +34,12 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.prod.website-files.com',
         port: '',
         pathname: '/**',
+      },
+       {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
