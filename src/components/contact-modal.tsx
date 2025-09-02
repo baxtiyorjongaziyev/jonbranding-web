@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Loader2, ArrowLeft, ArrowRight, Building2, MapPin } from 'lucide-react';
+import { Loader2, ArrowLeft, ArrowRight, Building2, MapPin, Coffee, Briefcase } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Progress } from '@/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -46,22 +46,32 @@ const goalOptions = [
     { value: "ready_to_start", label: "Brendingiz kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." },
 ];
 
+const meetingPlaceOptions = [
+    { value: "our_office", label: "Bizning ofisimizda", icon: Briefcase, description: "Loyihaga to'liq sho'ng'ish va barcha materiallar bilan tanishish uchun eng yaxshi variant." },
+    { value: "neutral", label: "Shahardagi neytral kafe/restoranda", icon: Coffee, description: "Erkin va norasmiy muhitda loyihani muhokama qilish uchun qulay tanlov." },
+    { value: "client_office", label: "Sizning ofisingizda", icon: Building2, description: "Biznesingiz muhiti bilan yaqindan tanishib, siz uchun qulay joyda uchrashishimiz mumkin." },
+];
+
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Ism-sharifingizni to'liq kiriting." }),
   phone: z.string().min(9, { message: "Telefon raqamingizni to'g'ri kiriting." }),
   telegram: z.string().optional(),
   companyName: z.string().optional(),
   website: z.string().optional(),
-  goal: z.string({
-    required_error: "Asosiy maqsadingizni tanlang."
-  }),
-  budget: z.string({
-    required_error: "Taxminiy byudjetingizni tanlang."
-  }),
-  location: z.string({
-    required_error: "Joylashuvingizni tanlang."
-  }),
+  goal: z.string({ required_error: "Asosiy maqsadingizni tanlang." }),
+  budget: z.string({ required_error: "Taxminiy byudjetingizni tanlang." }),
+  location: z.string({ required_error: "Joylashuvingizni tanlang." }),
+  meetingPlace: z.string().optional(),
+}).refine(data => {
+    if ((data.location === 'Toshkent' || data.location === 'Farg\'ona') && !data.meetingPlace) {
+        return false;
+    }
+    return true;
+}, {
+    message: "Uchrashuv joyini tanlashingiz kerak.",
+    path: ["meetingPlace"],
 });
+
 
 type FormData = z.infer<typeof formSchema>;
 
@@ -69,7 +79,7 @@ const STEPS = [
     { id: 1, title: 'Aloqa ma’lumotlari', fields: ['fullName', 'phone', 'telegram'] },
     { id: 2, title: 'Loyiha haqida', fields: ['companyName', 'website', 'goal'] },
     { id: 3, title: 'Byudjet', fields: ['budget'] },
-    { id: 4, title: 'Uchrashuv', fields: ['location'] },
+    { id: 4, title: 'Uchrashuv', fields: ['location', 'meetingPlace'] },
 ];
 
 const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice, onFormSubmitSuccess }) => {
@@ -88,10 +98,12 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       goal: undefined,
       budget: undefined,
       location: undefined,
+      meetingPlace: undefined,
     },
   });
 
   const locationValue = form.watch('location');
+  const meetingPlaceValue = form.watch('meetingPlace');
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setSubmitting(true);
@@ -321,7 +333,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
             )}
 
             {step === 4 && (
-                 <div className="space-y-4 animate-fade-in">
+                 <div className="space-y-6 animate-fade-in">
                     <FormField
                         control={form.control}
                         name="location"
@@ -344,25 +356,52 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                             </FormItem>
                         )}
                     />
-                    {locationValue && (
-                        <Alert variant="default" className="bg-sky-blue/30 border-primary/20">
-                            {locationValue === 'Toshkent' || locationValue === 'Farg\'ona' ? (
-                               <div className="flex items-start gap-3">
-                                <Building2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5"/>
-                                <AlertDescription>
-                                    Ajoyib! Siz bilan ofisimizda oflayn uchrashuv belgilash uchun tez orada bog'lanamiz.
-                                </AlertDescription>
-                               </div>
-                            ) : (
-                               <div className="flex items-start gap-3">
-                                <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-0.5"/>
-                                <AlertDescription>
-                                    Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.
-                                </AlertDescription>
-                               </div>
+                    { (locationValue === 'Toshkent' || locationValue === 'Farg\'ona') &&
+                        <FormField
+                            control={form.control}
+                            name="meetingPlace"
+                            render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                    <FormLabel>Uchrashuv qayerda bo'lishini xohlaysiz?</FormLabel>
+                                    <FormControl>
+                                        <RadioGroup
+                                            onValueChange={field.onChange}
+                                            defaultValue={field.value}
+                                            className="flex flex-col space-y-2"
+                                        >
+                                         {meetingPlaceOptions.map((option, index) => (
+                                            <Label key={option.value} htmlFor={`place-${index}`} className="flex items-start gap-4 p-4 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
+                                                <RadioGroupItem value={option.value} id={`place-${index}`} className="mt-1" />
+                                                <div className="flex-1">
+                                                    <span className="font-medium text-sm text-gray-800">{option.label}</span>
+                                                    {meetingPlaceValue === option.value &&
+                                                        <Alert variant="default" className="mt-2 text-xs bg-sky-blue/30 border-primary/20">
+                                                             <div className="flex items-start gap-2">
+                                                                <option.icon className="h-4 w-4 text-primary flex-shrink-0 mt-0.5"/>
+                                                                <AlertDescription>{option.description}</AlertDescription>
+                                                             </div>
+                                                        </Alert>
+                                                    }
+                                                </div>
+                                            </Label>
+                                        ))}
+                                        </RadioGroup>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
                             )}
+                        />
+                    }
+                    { locationValue === 'Boshqa viloyat' &&
+                         <Alert variant="default" className="bg-sky-blue/30 border-primary/20">
+                           <div className="flex items-start gap-3">
+                            <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-0.5"/>
+                            <AlertDescription>
+                                Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.
+                            </AlertDescription>
+                           </div>
                         </Alert>
-                    )}
+                    }
                  </div>
             )}
             
