@@ -11,8 +11,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ArrowLeft, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { Progress } from '@/components/ui/progress';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -22,18 +25,38 @@ interface ContactModalProps {
   onFormSubmitSuccess?: () => void;
 }
 
+const budgetOptions = [
+  "Mavjud emas / Faqat o'rganayapman",
+  "$500 gacha",
+  "$500 - $1,500",
+  "$1,500 - $3,000",
+  "$3,000 dan yuqori"
+];
+
+
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Ism-sharifingizni to'liq kiriting." }),
   phone: z.string().min(9, { message: "Telefon raqamingizni to'g'ri kiriting." }),
   telegram: z.string().optional(),
   notes: z.string().optional(),
+  companyName: z.string().optional(),
+  website: z.string().optional(),
+  goal: z.string().optional(),
+  budget: z.string().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
+const STEPS = [
+    { id: 1, title: 'Aloqa ma’lumotlari', fields: ['fullName', 'phone', 'telegram'] },
+    { id: 2, title: 'Loyiha haqida', fields: ['companyName', 'website', 'goal'] },
+    { id: 3, title: 'Byudjet', fields: ['budget'] },
+];
+
 const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice, onFormSubmitSuccess }) => {
   const { toast } = useToast();
   const [isSubmitting, setSubmitting] = useState(false);
+  const [step, setStep] = useState(1);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -42,6 +65,10 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       phone: '',
       telegram: '',
       notes: '',
+      companyName: '',
+      website: '',
+      goal: '',
+      budget: '',
     },
   });
 
@@ -88,84 +115,180 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       });
     } finally {
       setSubmitting(false);
+      setStep(1);
     }
   };
 
-  // Reset form when modal opens
+  const handleNext = async () => {
+      const fields = STEPS[step - 1].fields;
+      const output = await form.trigger(fields as any, { shouldFocus: true });
+
+      if (!output) return;
+
+      if (step < STEPS.length) {
+          setStep(step + 1);
+      } else {
+          await form.handleSubmit(onSubmit)();
+      }
+  };
+
+  const handlePrev = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
+  };
+
   useEffect(() => {
     if (isOpen) {
       form.reset();
+      setStep(1);
     }
   }, [isOpen, form]);
 
+  const progress = (step / STEPS.length) * 100;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md rounded-2xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-foreground">Bepul konsultatsiya</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-foreground">Sifatli konsultatsiya uchun</DialogTitle>
           <DialogDescription>
-            Ma'lumotlaringizni qoldiring va biz siz bilan tez orada bog'lanamiz.
+            Loyihangizni yaxshiroq tushunishimiz uchun bir nechta savollarga javob bering.
           </DialogDescription>
         </DialogHeader>
+        <Progress value={progress} className="h-2" />
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="fullName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Ism, Familiya</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Abdulla Qodiriy" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-             <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Telefon raqam</FormLabel>
-                  <FormControl>
-                    <Input placeholder="+998 90 123 45 67" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="telegram"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Telegram username (ixtiyoriy)</FormLabel>
-                  <FormControl>
-                    <Input placeholder="@username" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-             <FormField
-              control={form.control}
-              name="notes"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Qo'shimcha izoh (ixtiyoriy)</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="Loyiha haqida qisqacha..." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full shadow-ocean" disabled={isSubmitting}>
-              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Yuborish
-            </Button>
+          <form className="space-y-4">
+            {step === 1 && (
+                <div className="space-y-4 animate-fade-in">
+                    <FormField
+                    control={form.control}
+                    name="fullName"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Ism, Familiya</FormLabel>
+                        <FormControl>
+                            <Input placeholder="Abdulla Qodiriy" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                    />
+                    <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Telefon raqam</FormLabel>
+                        <FormControl>
+                            <Input placeholder="+998 90 123 45 67" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                    />
+                    <FormField
+                    control={form.control}
+                    name="telegram"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Telegram username (ixtiyoriy)</FormLabel>
+                        <FormControl>
+                            <Input placeholder="@username" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                    />
+                </div>
+            )}
+            
+            {step === 2 && (
+                <div className="space-y-4 animate-fade-in">
+                     <FormField
+                        control={form.control}
+                        name="companyName"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Kompaniya yoki loyiha nomi</FormLabel>
+                            <FormControl>
+                                <Input placeholder="Jon.Branding" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                        />
+                         <FormField
+                        control={form.control}
+                        name="website"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)</FormLabel>
+                            <FormControl>
+                                <Input placeholder="https://t.me/jonbranding" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                        />
+                        <FormField
+                        control={form.control}
+                        name="goal"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Asosiy maqsad nima?</FormLabel>
+                            <FormControl>
+                                <Textarea placeholder="Masalan: brendni noldan yaratish, sotuvlarni oshirish, rebrending qilish..." {...field} />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
+                        )}
+                        />
+                </div>
+            )}
+
+            {step === 3 && (
+                 <div className="space-y-4 animate-fade-in">
+                    <FormField
+                        control={form.control}
+                        name="budget"
+                        render={({ field }) => (
+                             <FormItem className="space-y-3">
+                                <FormLabel>Loyiha uchun taxminiy byudjet?</FormLabel>
+                                <FormControl>
+                                    <RadioGroup
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                    className="flex flex-col space-y-1"
+                                    >
+                                    {budgetOptions.map(option => (
+                                        <FormItem key={option} className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value={option} />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">{option}</FormLabel>
+                                        </FormItem>
+                                    ))}
+                                    </RadioGroup>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                 </div>
+            )}
+            
+            <div className="flex justify-between items-center pt-4">
+                <Button type="button" variant="ghost" onClick={handlePrev} disabled={step === 1 || isSubmitting}>
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Orqaga
+                </Button>
+                <Button type="button" onClick={handleNext} disabled={isSubmitting} className="shadow-ocean">
+                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    {step === STEPS.length ? "So'rovni yuborish" : "Keyingisi"}
+                    {step < STEPS.length && <ArrowRight className="ml-2 h-4 w-4" />}
+                </Button>
+            </div>
           </form>
         </Form>
       </DialogContent>

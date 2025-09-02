@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
     try {
         const body = await request.json();
-        const { fullName, phone, telegram, notes, packageSummary, totalPrice } = body;
+        const { fullName, phone, telegram, notes, packageSummary, totalPrice, companyName, website, goal, budget } = body;
 
         if (!fullName || !phone) {
             return NextResponse.json({ ok: false, error: "Ism va telefon raqam kiritilishi shart" }, { status: 400 });
@@ -65,7 +65,6 @@ export async function POST(request: Request) {
 Mijoz: ${fullName}
 Telefon: ${phone}
 Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
-Izoh: ${notes || 'Kiritilmagan'}
 
 ${finalResultText}
 ---
@@ -81,21 +80,31 @@ ${communicationScript}
             let packageInfo = '';
             if (packageSummary && totalPrice !== undefined) {
               packageInfo = `
-Tanlangan paket:
+---
+🛒 Tanlangan paket:
 ${packageSummary}
 Yakuniy narx: ${totalPrice.toLocaleString('fr-FR')} so'm
               `.trim();
             }
+
+            const projectDetails = `
+---
+ℹ️ Proyekti haqida ma'lumot:
+Kompaniya: ${companyName || 'Kiritilmagan'}
+Veb-sayt: ${website || 'Kiritilmagan'}
+Maqsad: ${goal || 'Kiritilmagan'}
+Byudjet: ${budget || 'Kiritilmagan'}
+            `.trim();
             
             telegramMessage = `
 Yangi xabar (Jon.Branding)
 
-Mijoz: ${fullName}
-Telefon: ${phone}
-Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
-Izoh: ${notes || 'Kiritilmagan'}
+👤 Mijoz: ${fullName}
+📞 Telefon: ${phone}
+✈️ Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
+${projectDetails}
 ${packageInfo}
-            `.trim();
+`.trim();
         }
         
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
