@@ -20,10 +20,9 @@ export default {
         headline: ['var(--font-poppins)', 'sans-serif'],
       },
       colors: {
-        'ocean-blue': '#00C9FD',
+        'ocean-blue': 'hsl(var(--accent))',
         'sky-blue': '#ADFFFE',
-        'yellow-green': '#B1FF00',
-        'dark-blue': '#050583', // This will be deprecated by primary
+        'dark-blue': 'hsl(var(--primary))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -93,8 +92,8 @@ export default {
           '100%': { opacity: '0' },
         },
         'fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          'from': { opacity: '0' },
+          'to': { opacity: '1' },
         }
       },
       animation: {

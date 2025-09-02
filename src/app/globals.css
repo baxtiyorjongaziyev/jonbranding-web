@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 240 10% 98%; /* Light Gray */
+    --background: 0 0% 100%; /* White */
     --foreground: 222 47% 11%;
     --card: 240 10% 100%;
     --card-foreground: 222 47% 11%;
@@ -16,7 +16,7 @@
     --secondary-foreground: 222 47% 11%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215 25% 45%;
-    --accent: 45 93% 47%; /* Yellow/Gold */
+    --accent: 191 97% 50%; /* Ocean Blue */
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -52,5 +52,5 @@
 }
 
 .shadow-ocean {
-  box-shadow: 0 10px 15px -3px hsl(var(--primary) / 0.1), 0 4px 6px -4px hsl(var(--primary) / 0.1);
+  box-shadow: 0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2);
 }
