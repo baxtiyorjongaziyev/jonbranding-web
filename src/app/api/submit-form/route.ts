@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
     try {
         const body = await request.json();
-        const { fullName, phone, telegram, notes, packageSummary, totalPrice, companyName, website, goal, budget } = body;
+        const { fullName, phone, telegram, notes, packageSummary, totalPrice, companyName, website, goal, budget, location } = body;
 
         if (!fullName || !phone) {
             return NextResponse.json({ ok: false, error: "Ism va telefon raqam kiritilishi shart" }, { status: 400 });
@@ -87,6 +87,8 @@ Yakuniy narx: ${totalPrice.toLocaleString('fr-FR')} so'm
               `.trim();
             }
 
+            const meetingType = (location === 'Toshkent' || location === 'Farg\'ona') ? 'OFLAYN' : 'ONLAYN';
+
             const projectDetails = `
 ---
 ℹ️ Proyekti haqida ma'lumot:
@@ -94,6 +96,8 @@ Kompaniya: ${companyName || 'Kiritilmagan'}
 Veb-sayt: ${website || 'Kiritilmagan'}
 Maqsad: ${goal || 'Kiritilmagan'}
 Byudjet: ${budget || 'Kiritilmagan'}
+Joylashuv: ${location || 'Kiritilmagan'}
+Uchrashuv turi: ${meetingType}
             `.trim();
             
             telegramMessage = `

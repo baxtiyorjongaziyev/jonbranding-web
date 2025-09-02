@@ -11,11 +11,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Loader2, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Loader2, ArrowLeft, ArrowRight, Building2, MapPin } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Progress } from '@/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -33,16 +35,23 @@ const budgetOptions = [
   "$3,000 dan yuqori"
 ];
 
+const locationOptions = [
+    "Toshkent",
+    "Farg'ona",
+    "Boshqa viloyat"
+];
 
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Ism-sharifingizni to'liq kiriting." }),
   phone: z.string().min(9, { message: "Telefon raqamingizni to'g'ri kiriting." }),
   telegram: z.string().optional(),
-  notes: z.string().optional(),
   companyName: z.string().optional(),
   website: z.string().optional(),
   goal: z.string().optional(),
   budget: z.string().optional(),
+  location: z.string({
+    required_error: "Joylashuvingizni tanlang."
+  }),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -51,6 +60,7 @@ const STEPS = [
     { id: 1, title: 'Aloqa ma’lumotlari', fields: ['fullName', 'phone', 'telegram'] },
     { id: 2, title: 'Loyiha haqida', fields: ['companyName', 'website', 'goal'] },
     { id: 3, title: 'Byudjet', fields: ['budget'] },
+    { id: 4, title: 'Uchrashuv', fields: ['location'] },
 ];
 
 const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice, onFormSubmitSuccess }) => {
@@ -64,13 +74,15 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       fullName: '',
       phone: '',
       telegram: '',
-      notes: '',
       companyName: '',
       website: '',
       goal: '',
       budget: '',
+      location: undefined,
     },
   });
+
+  const locationValue = form.watch('location');
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setSubmitting(true);
@@ -278,7 +290,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                             <FormControl>
                                                 <RadioGroupItem value={option} />
                                             </FormControl>
-                                            <FormLabel className="font-normal">{option}</FormLabel>
+                                            <FormLabel className="font-normal cursor-pointer">{option}</FormLabel>
                                         </FormItem>
                                     ))}
                                     </RadioGroup>
@@ -287,6 +299,52 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                             </FormItem>
                         )}
                     />
+                 </div>
+            )}
+
+            {step === 4 && (
+                 <div className="space-y-4 animate-fade-in">
+                    <FormField
+                        control={form.control}
+                        name="location"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Uchrashuv uchun joylashuvingiz</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Viloyatingizni tanlang" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {locationOptions.map(loc => (
+                                            <SelectItem key={loc} value={loc}>{loc}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    {locationValue && (
+                        <Alert variant="default" className="bg-sky-blue/30 border-primary/20">
+                            {locationValue === 'Toshkent' || locationValue === 'Farg\'ona' ? (
+                               <div className="flex items-start gap-3">
+                                <Building2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5"/>
+                                <AlertDescription>
+                                    Ajoyib! Siz bilan ofisimizda oflayn uchrashuv belgilash uchun tez orada bog'lanamiz.
+                                </AlertDescription>
+                               </div>
+                            ) : (
+                               <div className="flex items-start gap-3">
+                                <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-0.5"/>
+                                <AlertDescription>
+                                    Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.
+                                </AlertDescription>
+                               </div>
+                            )}
+                        </Alert>
+                    )}
                  </div>
             )}
             
@@ -309,5 +367,3 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 };
 
 export default ContactModal;
-
-    
