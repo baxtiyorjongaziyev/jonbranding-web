@@ -91,7 +91,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
             </div>
           </div>
           <div className="hidden lg:block">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
                 {heroImages.map((image, index) => (
                      <div key={index} className={cn("relative shadow-lg aspect-video", image.className)}>
                         <Image
