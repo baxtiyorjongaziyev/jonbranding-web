@@ -36,9 +36,8 @@ const buttonTexts = [
 ];
 
 const heroImages = [
-    { src: 'https://img2.teletype.in/files/51/45/5145b60e-aca5-4225-8564-a4d601a148a7.jpeg', alt: 'Brand Style Guide', hint: 'brand styleguide', className: 'rounded-xl col-span-2 row-span-2' },
-    { src: 'https://img1.teletype.in/files/83/c2/83c2c300-af89-482e-8052-15189ac22aff.jpeg', alt: 'Logo Design Process', hint: 'logo design process', className: 'rounded-xl' },
-    { src: 'https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg', alt: 'Packaging Design', hint: 'branding application', className: 'rounded-xl' },
+    { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif', alt: 'Animatsion Logo', hint: 'animated logo', className: 'rounded-xl col-span-1 row-span-1' },
+    { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/67513d8fe1caee5495e0f9bd_ezgif-6-3f24b1faa6.gif', alt: 'Brend animatsiyasi', hint: 'brand animation', className: 'rounded-xl col-span-1 row-span-1' },
 ];
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
@@ -92,16 +91,17 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
             </div>
           </div>
           <div className="hidden lg:block">
-            <div className="grid grid-cols-3 grid-rows-2 gap-4 h-[400px]">
+            <div className="grid grid-cols-2 grid-rows-1 gap-4 h-[250px]">
                 {heroImages.map((image, index) => (
                      <div key={index} className={cn("relative shadow-lg", image.className)}>
                         <Image
                             src={image.src}
                             alt={image.alt}
                             fill
-                            className="object-cover rounded-xl"
+                            className="object-contain rounded-xl"
                             data-ai-hint={image.hint}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            unoptimized
+                            sizes="(max-width: 1200px) 50vw, 33vw"
                         />
                     </div>
                 ))}
