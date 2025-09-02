@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Search, Palette, Box, Check, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 const processSteps = [
     {
@@ -59,8 +60,8 @@ const QadoqDizayniPage: FC = () => {
                   </div>
                    <div className="lg:order-last">
                       <Card className="shadow-xl rounded-2xl">
-                         <CardContent className="p-8">
-                          <img src="https://picsum.photos/800/610" data-ai-hint="product packaging shelf" alt="Do'kon peshtaxtasidagi mahsulotlar" className="rounded-lg object-cover"/>
+                         <CardContent className="p-0">
+                          <Image src="https://picsum.photos/800/610" width={800} height={610} data-ai-hint="product packaging shelf" alt="Do'kon peshtaxtasidagi mahsulotlar" className="rounded-2xl object-cover"/>
                          </CardContent>
                       </Card>
                   </div>
@@ -101,7 +102,7 @@ const QadoqDizayniPage: FC = () => {
                 </p>
              </div>
              <div className="mt-10">
-                <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse">
+                <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse whitespace-normal h-auto">
                    Mahsulotim uchun dizayn yaratish <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
             </div>

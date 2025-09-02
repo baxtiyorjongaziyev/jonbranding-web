@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Lightbulb, Search, ShieldCheck, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const creationSteps = [
     {
@@ -66,8 +67,8 @@ const NamingPage: FC = () => {
                   </div>
                    <div className="lg:order-last">
                       <Card className="shadow-xl rounded-2xl">
-                         <CardContent className="p-8">
-                          <img src="https://picsum.photos/800/602" data-ai-hint="words brainstorm" alt="G'oyalar muhokamasi" className="rounded-lg object-cover"/>
+                         <CardContent className="p-0">
+                          <Image src="https://picsum.photos/800/602" width={800} height={602} data-ai-hint="words brainstorm" alt="G'oyalar muhokamasi" className="rounded-2xl object-cover"/>
                          </CardContent>
                       </Card>
                   </div>
@@ -91,8 +92,8 @@ const NamingPage: FC = () => {
                   </div>
                   <div>
                       <Card className="shadow-xl rounded-2xl">
-                         <CardContent className="p-8">
-                           <img src="https://picsum.photos/800/603" data-ai-hint="idea lightbulb" alt="G'oya" className="rounded-lg object-cover"/>
+                         <CardContent className="p-0">
+                           <Image src="https://picsum.photos/800/603" width={800} height={603} data-ai-hint="idea lightbulb" alt="G'oya" className="rounded-2xl object-cover"/>
                          </CardContent>
                       </Card>
                   </div>
