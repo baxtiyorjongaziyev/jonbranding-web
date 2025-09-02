@@ -4,7 +4,7 @@
 import type { FC } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { FileText, Search, Package, Download, ArrowRight } from 'lucide-react';
+import { FileText, ListChecks, Film, Download, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface LeadMagnetProps {
@@ -15,39 +15,39 @@ const magnets = [
   {
     id: "pdf",
     icon: FileText,
-    title: "1-qadam: Bepul PDF",
+    title: "Bepul PDF-Cheklist",
     subtitle: "Brendingda 7 ta eng katta xato",
     description: "Biznesingizda qanday xatolarga yo'l qo'ymaslik kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.",
     cta: "PDF yuklab olish",
-    href: null,
-    onClick: 'onCtaClick'
+    href: null, // this will trigger onCtaClick
+    action: 'onCtaClick'
   },
   {
-    id: "audit",
-    icon: Search,
-    title: "2-qadam: Audit yoki Tekshiruv",
-    subtitle: "Brending audit yoki Naming check",
-    description: "Kichik, ammo samarali xizmatlarimiz orqali ishimiz sifatini sinab ko'ring va birinchi natijalarga ega bo'ling.",
-    cta: "Xizmatni tanlash",
-    href: "#package-builder",
+    id: "quiz",
+    icon: ListChecks,
+    title: "Mini-Test",
+    subtitle: "Biznesingiz brendga tayyormi?",
+    description: "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.",
+    cta: "Testni boshlash",
+    href: "/quiz",
   },
   {
-    id: "package",
-    icon: Package,
-    title: "3-qadam: Paket Yig'ish",
-    subtitle: "Starter yoki Premium paket",
-    description: "Biznesingiz uchun zarur bo'lgan xizmatlarni o'zingiz yig'ing va shaffof narxlarda to'liq brending yechimiga ega bo'ling.",
-    cta: "Paket yig'ish",
-    href: "#package-builder",
+    id: "video",
+    icon: Film,
+    title: "Video Qo'llanma",
+    subtitle: "Strategik brending nima?",
+    description: "Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday natija keltirishini videoda ko'ring.",
+    cta: "Videoni ko'rish",
+    href: "#video",
   },
 ];
 
 const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
-  const handleClick = (action: string | null | undefined) => {
-    if (action === 'onCtaClick') {
+  const handleClick = (magnet: (typeof magnets)[0]) => {
+    if (magnet.action === 'onCtaClick') {
       onCtaClick();
-    } else {
-        const el = document.getElementById('package-builder');
+    } else if (magnet.href?.startsWith('#')) {
+        const el = document.getElementById(magnet.href.substring(1));
         if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -60,7 +60,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
             Brendingizni Keyingi Bosqichga Olib Chiqing
           </h2>
           <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
-            Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun oddiy va tushunarli yo'l xaritasi ishlab chiqdik. Har bir qadam sizni muvaffaqiyatli brend sari yetaklaydi.
+            Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
@@ -75,18 +75,19 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
               </CardHeader>
               <CardContent className="flex-grow flex flex-col justify-between px-6 pb-6">
                 <p className="text-gray-600 mb-6">{magnet.description}</p>
-                {magnet.href ? (
+                {magnet.href && !magnet.href.startsWith('#') ? (
                     <Link href={magnet.href} passHref>
                         <Button asChild className="w-full shadow-md hover:shadow-lg transition-shadow">
                             <a>
-                               {magnet.id === 'audit' ? <Search className="w-4 h-4 mr-2" /> : <Package className="w-4 h-4 mr-2" />}
+                               {magnet.icon === ListChecks ? <ListChecks className="w-4 h-4 mr-2" /> : <Download className="w-4 h-4 mr-2" />}
                                 {magnet.cta}
+                                <ArrowRight className="w-4 h-4 ml-2" />
                             </a>
                         </Button>
                     </Link>
                 ) : (
-                    <Button onClick={() => handleClick(magnet.onClick)} className="w-full shadow-md hover:shadow-lg transition-shadow">
-                        <Download className="w-4 h-4 mr-2" />
+                    <Button onClick={() => handleClick(magnet)} className="w-full shadow-md hover:shadow-lg transition-shadow">
+                        {magnet.icon === Download || magnet.icon === FileText ? <Download className="w-4 h-4 mr-2" /> : <ArrowRight className="w-4 h-4 mr-2" />}
                         {magnet.cta}
                     </Button>
                 )}
