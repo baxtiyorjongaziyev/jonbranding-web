@@ -142,11 +142,16 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
           </TooltipProvider>
 
           <Card className="mt-8 bg-sky-blue/30 border-primary/20 rounded-2xl p-6 shadow-sm">
-            <div className="flex items-center gap-4">
-              <div className="flex-shrink-0 bg-primary/10 text-primary p-3 rounded-full">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 bg-primary/10 text-primary p-3 rounded-full mt-1">
                 <Lightbulb className="h-6 w-6" />
               </div>
-              <p className="text-base text-dark-blue font-medium">{result.message}</p>
+              <div>
+                <p className="text-base text-dark-blue font-medium">{result.message}</p>
+                <p className="text-sm text-dark-blue/80 mt-2">
+                  <span className="font-bold">Eslatma:</span> Maxfiylik (NDA) shartnomasi asosida ishlash uchun loyiha umumiy qiymatiga +25% qo'shiladi.
+                </p>
+              </div>
             </div>
           </Card>
 
