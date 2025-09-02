@@ -1,3 +1,4 @@
+
 declare global {
   interface Window {
     __ENV__?: {
@@ -5,7 +6,8 @@ declare global {
       NEXT_PUBLIC_GA_ID?: string;
       AIRTABLE_API_KEY?: string;
       AIRTABLE_BASE_ID?: string;
-      AIRTABLE_TABLE_NAME?: string;
+      AIRTABLE_TABLE_NAME_FAQ?: string;
+      AIRTABLE_TABLE_NAME_TESTIMONIALS?: string;
     };
     gtag?: (...args: any[]) => void;
     bus?: {
