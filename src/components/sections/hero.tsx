@@ -58,7 +58,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
   }, []);
 
   return (
-    <section className="bg-card py-20 sm:py-28">
+    <section className="bg-background py-20 sm:py-28">
       <div className="container mx-auto px-4 text-center">
         <h1 data-testid="hero-title" className={cn(
           "text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground transition-opacity duration-500",
@@ -70,7 +70,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
           Jon.Branding bilan strategiyaga asoslangan vizual ko‘rinishga ega bo‘ling va raqobatchilardan ajralib turing.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button onClick={() => onPrimaryClick()} size="lg" variant="secondary" className="w-full sm:w-auto text-lg px-8 py-6 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-subtle-pulse">
+          <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-lg px-8 py-6 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-subtle-pulse">
             {buttonTexts[buttonIndex]}
           </Button>
           <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-foreground/20 text-foreground hover:bg-primary hover:text-primary-foreground">
@@ -83,11 +83,11 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
 
         <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {trustPills.map((pill, index) => (
-                <Card key={index} className="text-left bg-background/70 backdrop-blur-sm border-border/60 shadow-sm hover:shadow-md transition-shadow">
+                <Card key={index} className="text-left bg-secondary/70 backdrop-blur-sm border-border/60 shadow-sm hover:shadow-md transition-shadow">
                     <CardContent className="p-5 flex items-start gap-4">
                         <CheckCircle className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
                         <div>
-                            <h3 className="font-bold text-foreground text-base">{pill.title}</h3>
+                            <h3 className="font-bold text-dark-blue text-base">{pill.title}</h3>
                             <p className="text-muted-foreground text-sm">{pill.description}</p>
                         </div>
                     </CardContent>

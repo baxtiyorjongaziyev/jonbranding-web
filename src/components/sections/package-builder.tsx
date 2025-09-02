@@ -46,6 +46,9 @@ const serviceIcons: { [key in keyof SelectedServices]?: React.ElementType } = {
     illustrations: PenTool,
     urgency: Flame,
     nda: ShieldCheck,
+    audit: FileText,
+    namingCheck: ClipboardSignature,
+    consultation: Info
 };
 
 
@@ -62,15 +65,20 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
             onClick={onSelect}
             className={cn(
                 "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white cursor-pointer hover:shadow-md",
-                 selected && 'border-primary ring-2 ring-primary shadow-lg'
+                 selected && 'border-accent ring-2 ring-accent shadow-lg'
             )}
         >
             <div className="p-5 flex-grow">
-                 <div className="flex items-center gap-2">
-                    {Icon && <Icon className={cn("h-5 w-5", id === 'urgency' ? 'text-red-500' : 'text-primary' )} />}
-                    <h4 className="text-base font-bold text-dark-blue leading-tight flex-1">{label}</h4>
+                 <div className="flex items-start gap-3">
+                    {Icon && <Icon className={cn("h-6 w-6 flex-shrink-0 mt-1", id === 'urgency' ? 'text-red-500' : 'text-accent' )} />}
+                    <div className='flex-1'>
+                        <h4 className="text-base font-bold text-dark-blue leading-tight">{label}</h4>
+                         <p className="text-xs text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: description }}></p>
+                    </div>
                 </div>
-                <div className="my-2">
+            </div>
+             <div className="p-4 bg-gray-50/70 border-t">
+                 <div className="my-2 text-center">
                     {price > 0 && (
                        <span className="text-xl font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
                     )}
@@ -82,26 +90,20 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
                     )}
                     {marketPrice && <span className="text-sm text-muted-foreground whitespace-nowrap line-through ml-2">{formatPrice(marketPrice)}</span>}
                 </div>
-                 <p className="text-sm text-muted-foreground mt-1" dangerouslySetInnerHTML={{ __html: description }}></p>
-                 <div className="text-xs text-muted-foreground mt-2 space-x-4">
-                    {timeline && <span>Muddati: <strong>{timeline}</strong></span>}
-                 </div>
-            </div>
-             <div className="p-4 bg-gray-50/70 border-t pointer-events-none">
                 <Button 
                     className="w-full"
-                    variant={selected ? 'secondary' : 'default'}
+                    variant={selected ? 'default' : 'outline'}
                     tabIndex={-1}
                 >
                     {selected ? (
                         <>
                             <CheckCircle className="h-5 w-5 mr-2" />
-                            Savatchada
+                            Tanlangan
                         </>
                     ) : (
                         <>
                             <ShoppingCart className="h-5 w-5 mr-2" />
-                            Savatchaga qo'shish
+                            Tanlash
                         </>
                     )}
                 </Button>
@@ -111,13 +113,13 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 };
 
 const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
-    <Card className="bg-primary/5 p-4 rounded-xl border-white/20 flex items-start gap-3">
-        <div className="flex-shrink-0 bg-white/20 text-white p-2 rounded-lg mt-1">
-            <Icon className="w-5 h-5 text-primary" />
+    <Card className="bg-primary/10 p-4 rounded-xl border-primary/20 flex items-start gap-3 text-left">
+        <div className="flex-shrink-0 bg-primary/20 text-primary p-2 rounded-lg mt-1">
+            <Icon className="w-5 h-5 text-white" />
         </div>
         <div>
-            <h5 className="font-bold text-sm text-white">{title}</h5>
-            <p className="text-xs text-gray-300">{description}</p>
+            <h5 className="font-bold text-sm text-primary">{title}</h5>
+            <p className="text-xs text-primary/80">{description}</p>
         </div>
     </Card>
 );
@@ -233,7 +235,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 <div className={cn(
                                     "grid grid-cols-1 md:grid-cols-2 gap-4",
                                     key === 'tripwire' && 'md:grid-cols-3',
-                                    key === 'additional' && 'md:grid-cols-3'
+                                    key === 'additional' && 'md:grid-cols-3',
+                                     key === 'main' && 'md:grid-cols-3'
                                 )}>
                                 {category.services.map((serviceId) => {
                                     if (!serviceDetails[serviceId]) return null;
@@ -266,7 +269,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                           id="pcg" 
                                           checked={isPcgMember} 
                                           onChange={(e) => handlePcgToggle(e.target.checked)}
-                                          className="h-6 w-6 text-primary focus:ring-primary border-gray-300 rounded"
+                                          className="h-6 w-6 text-accent focus:ring-accent border-gray-300 rounded"
                                       />
                                       <Label htmlFor="pcg" className="text-base font-bold leading-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer flex flex-col">
                                           PCG "Tez Natija 3" kursi a'zosiman (-50% chegirma)
@@ -279,9 +282,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                     </div>
 
                     <div className="lg:col-span-1 sticky top-24">
-                        <Card className="p-6 rounded-2xl shadow-xl bg-dark-blue text-white">
+                        <Card className="p-6 rounded-2xl shadow-xl bg-primary text-white">
                             <CardHeader className="p-0 text-center">
-                               <CardTitle className="text-2xl font-bold text-white">Sizning savatchangiz</CardTitle>
+                               <CardTitle className="text-2xl font-bold text-white">Sizning buyurtmangiz</CardTitle>
                             </CardHeader>
                             <CardContent className="p-0">
                                 <div className="mt-4 space-y-2 pb-4 border-b border-gray-600 min-h-[100px]">
@@ -345,7 +348,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                     )}
 
                                     {total.bonus && (
-                                         <div className="flex justify-center items-center gap-2 p-3 bg-primary/20 rounded-lg text-sky-300">
+                                         <div className="flex justify-center items-center gap-2 p-3 bg-accent/20 rounded-lg text-accent">
                                             <Gift className="h-5 w-5" />
                                             <p className="font-bold text-center text-sm">{total.bonus}</p>
                                         </div>
@@ -358,11 +361,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         <span className="text-4xl font-extrabold text-accent">{formatPrice(total.final)}</span>
                                     </div>
                                 </div>
-                                <Button onClick={onOrderNow} className="w-full mt-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-3 px-8 rounded-md" disabled={total.base === 0}>
+                                <Button onClick={onOrderNow} className="w-full mt-8 text-lg bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-3 px-8 rounded-md" disabled={total.base === 0}>
                                     {total.discountApplied ? "Chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
                                 </Button>
                                 
-                                <div className="mt-6 space-y-3">
+                                <div className="mt-6 space-y-3 text-left">
                                    <InfoCard
                                         icon={Sparkles}
                                         title="100% Mamnuniyat Kafolati"
