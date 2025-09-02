@@ -25,8 +25,8 @@ type ServiceCategory = 'tripwire' |'main' | 'additional';
 
 const serviceCategories: Record<ServiceCategory, { title: string; services: (keyof SelectedServices)[] }> = {
     tripwire: {
-        title: "Birinchi qadam",
-        services: ['audit']
+        title: "Birinchi qadam (Tezkor xizmatlar)",
+        services: ['audit', 'namingCheck', 'consultation']
     },
     main: {
         title: "Asosiy xizmatlarimiz",
@@ -40,7 +40,9 @@ const serviceCategories: Record<ServiceCategory, { title: string; services: (key
 
 
 const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean }) => {
-    const { label, description, price, marketPrice, timeline, note } = serviceDetails[id];
+    const detail = serviceDetails[id];
+    if (!detail) return null;
+    const { label, description, price, marketPrice, timeline, note } = detail;
 
     return (
         <Card 
@@ -102,6 +104,8 @@ const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType,
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
         audit: false,
+        namingCheck: false,
+        consultation: false,
         strategy: false,
         commStrategy: false,
         naming: false,
@@ -205,7 +209,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 <h3 className="text-2xl font-bold text-dark-blue mb-4">{category.title}</h3>
                                 <div className={cn(
                                     "grid grid-cols-1 md:grid-cols-2 gap-4",
-                                    key === 'tripwire' && 'md:grid-cols-1 max-w-lg'
+                                    key === 'tripwire' && 'md:grid-cols-3'
                                 )}>
                                 {category.services.map((serviceId) => {
                                     if (!serviceDetails[serviceId]) return null;
@@ -213,7 +217,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         <ServiceCard
                                             key={serviceId}
                                             id={serviceId}
-                                            selected={selectedServices[serviceId]}
+                                            selected={selectedServices[serviceId] || false}
                                             onSelect={() => handleServiceToggle(serviceId)}
                                         />
                                     );
