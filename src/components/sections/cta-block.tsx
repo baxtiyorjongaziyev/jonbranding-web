@@ -11,10 +11,10 @@ interface CtaBlockProps {
 
 const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClick }) => {
   return (
-    <section className="bg-white py-16">
+    <section className="bg-background py-16">
       <div className="container mx-auto px-4">
-        <div className="rounded-2xl bg-dark-blue p-8 sm:p-12 text-center text-white shadow-xl">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">{title}</h2>
+        <div className="rounded-2xl bg-primary p-8 sm:p-12 text-center text-primary-foreground shadow-xl">
+          <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">{title}</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-300">
             {description}
           </p>
@@ -22,7 +22,8 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
             <Button
               onClick={onCtaClick}
               size="lg"
-              className="bg-primary text-white hover:bg-primary/90 shadow-ocean text-lg animate-subtle-pulse"
+              variant="secondary"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean text-lg animate-subtle-pulse"
             >
               {buttonText}
               <ArrowRight className="ml-2 h-5 w-5" />

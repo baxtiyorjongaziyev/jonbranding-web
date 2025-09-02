@@ -71,7 +71,7 @@ const ListItem = React.forwardRef<
           href={href!}
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground",
             className
           )}
           {...props}
@@ -95,7 +95,7 @@ const Header: FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center" aria-label="Bosh sahifa">
           <Logo />
@@ -132,18 +132,18 @@ const Header: FC = () => {
 
         <div className="hidden items-center space-x-6 lg:flex">
            <div className="flex items-center gap-6 ml-4">
-             <a href="tel:+998336450097" className="flex items-center gap-2 text-base font-medium text-gray-600 transition-colors hover:text-primary">
+             <a href="tel:+998336450097" className="flex items-center gap-2 text-base font-medium text-foreground transition-colors hover:text-accent">
                 <Phone size={16} />
                 +998 33 645 00 97
               </a>
-              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-medium text-gray-600 transition-colors hover:text-primary">
+              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-medium text-foreground transition-colors hover:text-accent">
                 <Send size={16} />
                 Telegram
               </a>
            </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button onClick={handleContactClick} className="hidden md:flex shadow-ocean animate-subtle-pulse">
+          <Button onClick={handleContactClick} className="hidden md:flex shadow-ocean animate-subtle-pulse" variant="secondary">
             Bepul konsultatsiya olish
           </Button>
           <Sheet>
@@ -158,11 +158,11 @@ const Header: FC = () => {
                   <SheetTitle className="sr-only">Menyu</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-6 pt-10">
-                 <div className="text-xl font-medium text-gray-800">Xizmatlar</div>
+                 <div className="text-xl font-medium text-foreground">Xizmatlar</div>
                  <ul className="pl-4 space-y-4">
                     {services.map((service) => (
                        <li key={service.title}>
-                         <Link href={service.href} className="text-lg font-normal text-gray-600 hover:text-primary">{service.title}</Link>
+                         <Link href={service.href} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
                        </li>
                     ))}
                  </ul>
@@ -170,22 +170,22 @@ const Header: FC = () => {
                    <Link
                     key={item.label}
                     href={item.href}
-                    className="text-xl font-medium text-gray-800 transition-colors hover:text-primary"
+                    className="text-xl font-medium text-foreground transition-colors hover:text-accent"
                   >
                     {item.label}
                   </Link>
                 ))}
                  <div className="border-t pt-6 mt-4 space-y-4">
-                    <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-gray-800 transition-colors hover:text-primary">
+                    <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
                       <Phone size={20} />
                       +998 33 645 00 97
                     </a>
-                    <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-gray-800 transition-colors hover:text-primary">
+                    <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
                       <Send size={20} />
                       Telegram orqali bog'lanish
                     </a>
                  </div>
-                 <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 animate-subtle-pulse">
+                 <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 animate-subtle-pulse" variant="secondary">
                   Bepul konsultatsiya olish
                 </Button>
               </nav>

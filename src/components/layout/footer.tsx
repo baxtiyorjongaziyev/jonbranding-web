@@ -4,7 +4,7 @@ import { Phone, Send, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark-blue text-white">
+    <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="space-y-4">
@@ -17,11 +17,11 @@ const Footer = () => {
           <div className="md:justify-self-center">
             <h3 className="text-lg font-bold text-white">Sahifalar</h3>
             <ul className="mt-4 space-y-2">
-              <li><Link href="/#services" className="hover:text-primary transition-colors">Xizmatlar</Link></li>
-              <li><Link href="/#portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
-              <li><Link href="/brand-strategy" className="hover:text-primary transition-colors">Brend Strategiyasi</Link></li>
-              <li><Link href="/#process" className="hover:text-primary transition-colors">Jarayon</Link></li>
-              <li><Link href="/#faq" className="hover:text-primary transition-colors">FAQ</Link></li>
+              <li><Link href="/#services" className="text-gray-300 hover:text-accent transition-colors">Xizmatlar</Link></li>
+              <li><Link href="/#portfolio" className="text-gray-300 hover:text-accent transition-colors">Portfolio</Link></li>
+              <li><Link href="/brand-strategy" className="text-gray-300 hover:text-accent transition-colors">Brend Strategiyasi</Link></li>
+              <li><Link href="/#process" className="text-gray-300 hover:text-accent transition-colors">Jarayon</Link></li>
+              <li><Link href="/#faq" className="text-gray-300 hover:text-accent transition-colors">FAQ</Link></li>
             </ul>
           </div>
 
@@ -30,15 +30,15 @@ const Footer = () => {
             <ul className="mt-4 space-y-3">
               <li className="flex items-center gap-2">
                 <Send size={18} />
-                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@baxtiyorjon_gaziyev</a>
+                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-accent transition-colors">@baxtiyorjon_gaziyev</a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={18} />
-                <a href="tel:+998336450097" className="hover:text-primary transition-colors">+998 33 645 00 97</a>
+                <a href="tel:+998336450097" className="text-gray-300 hover:text-accent transition-colors">+998 33 645 00 97</a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={18} className="mt-1 flex-shrink-0" />
-                <span className="hover:text-primary transition-colors">O‘zbekiston, Toshkent shahri</span>
+                <span className="text-gray-300 hover:text-accent transition-colors">O‘zbekiston, Toshkent shahri</span>
               </li>
             </ul>
           </div>

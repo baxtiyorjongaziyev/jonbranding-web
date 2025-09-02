@@ -23,7 +23,7 @@ export default {
         'ocean-blue': '#00C9FD',
         'sky-blue': '#ADFFFE',
         'yellow-green': '#B1FF00',
-        'dark-blue': '#050583',
+        'dark-blue': '#050583', // This will be deprecated by primary
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -60,8 +60,8 @@ export default {
       },
       borderRadius: {
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 4px)',
-        sm: 'calc(var(--radius) - 8px)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
         'accordion-down': {
@@ -81,8 +81,8 @@ export default {
           },
         },
         'subtle-pulse': {
-          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 10px 15px -3px hsl(var(--primary) / 0.1), 0 4px 6px -4px hsl(var(--primary) / 0.1)' },
-          '50%': { transform: 'scale(1.02)', boxShadow: '0 20px 25px -5px hsl(var(--primary) / 0.15), 0 8px 10px -6px hsl(var(--primary) / 0.15)' },
+          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2)' },
+          '50%': { transform: 'scale(1.03)', boxShadow: '0 20px 25px -5px hsl(var(--accent) / 0.25), 0 8px 10px -6px hsl(var(--accent) / 0.25)' },
         },
         'text-fade-in': {
           '0%': { opacity: '0' },
@@ -100,7 +100,7 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'subtle-pulse': 'subtle-pulse 8s ease-in-out infinite',
+        'subtle-pulse': 'subtle-pulse 4s ease-in-out infinite',
         'text-fade-in': 'text-fade-in 0.5s ease-in-out forwards',
         'text-fade-out': 'text-fade-out 0.5s ease-in-out forwards',
         'fade-in': 'fade-in 1s ease-out forwards',
