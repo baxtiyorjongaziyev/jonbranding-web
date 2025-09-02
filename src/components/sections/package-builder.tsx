@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -113,9 +114,9 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 };
 
 const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
-    <Card className="bg-primary/10 p-4 rounded-xl border-primary/20 flex items-start gap-3 text-left">
-        <div className="flex-shrink-0 bg-primary/20 text-primary p-2 rounded-lg mt-1">
-            <Icon className="w-5 h-5 text-white" />
+    <Card className="bg-primary/5 p-4 rounded-xl border-primary/10 flex items-start gap-3 text-left">
+        <div className="flex-shrink-0 bg-primary/10 text-primary p-2 rounded-lg mt-1">
+            <Icon className="w-5 h-5 text-primary" />
         </div>
         <div>
             <h5 className="font-bold text-sm text-primary">{title}</h5>
@@ -402,3 +403,4 @@ export default PackageBuilder;
     
 
     
+
