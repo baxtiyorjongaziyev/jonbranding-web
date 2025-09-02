@@ -55,7 +55,9 @@ const formSchema = z.object({
   goal: z.string({
     required_error: "Asosiy maqsadingizni tanlang."
   }),
-  budget: z.string().optional(),
+  budget: z.string({
+    required_error: "Taxminiy byudjetingizni tanlang."
+  }),
   location: z.string({
     required_error: "Joylashuvingizni tanlang."
   }),
@@ -84,7 +86,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       companyName: '',
       website: '',
       goal: undefined,
-      budget: '',
+      budget: undefined,
       location: undefined,
     },
   });
