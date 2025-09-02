@@ -128,7 +128,21 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       if (step < STEPS.length) {
           setStep(step + 1);
       } else {
-          await form.handleSubmit(onSubmit)();
+          // Final step logic
+          const budget = form.getValues('budget');
+          if (budget === budgetOptions[0]) {
+              toast({
+                  title: "Siz uchun maxsus resurslar!",
+                  description: "Ajoyib! Boshlanishiga siz uchun tayyorlagan bepul materiallarimizga yo'naltirildingiz.",
+              });
+              onClose();
+              const leadMagnetSection = document.getElementById('lead-magnet');
+              if (leadMagnetSection) {
+                  leadMagnetSection.scrollIntoView({ behavior: 'smooth' });
+              }
+          } else {
+             await form.handleSubmit(onSubmit)();
+          }
       }
   };
 
