@@ -8,8 +8,9 @@ import { Star, PlayCircle } from 'lucide-react';
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { getTestimonials, type Testimonial } from '@/lib/airtable';
 
-const testimonials = [
+const staticTestimonials: Testimonial[] = [
   {
     name: "Sherzod Beknazarov",
     company: "Incontrol Consulting asoschisi",
@@ -45,7 +46,7 @@ const testimonials = [
   },
 ];
 
-const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0] }) => {
+const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     const [playVideo, setPlayVideo] = useState(false);
 
     const isVideo = !!testimonial.videoUrl;
@@ -131,7 +132,18 @@ const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0
 };
 
 
-const Testimonials = () => {
+const Testimonials = async () => {
+    let testimonials: Testimonial[] = staticTestimonials;
+    try {
+        const airtableTestimonials = await getTestimonials();
+        if (airtableTestimonials.length > 0) {
+            testimonials = airtableTestimonials;
+        }
+    } catch (error) {
+        console.error("Failed to fetch testimonials from Airtable, using static data.", error);
+    }
+
+
   return (
     <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
