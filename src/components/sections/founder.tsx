@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -46,16 +47,16 @@ const Founder = () => {
             </div>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="shadow-ocean animate-subtle-pulse">
-                    <Link href="tel:+998336450097">
+                    <a href="tel:+998336450097">
                         <Phone className="mr-2 h-5 w-5" />
                         Telefon orqali bog'lanish
-                    </Link>
+                    </a>
                 </Button>
                  <Button asChild size="lg" variant="outline">
-                    <Link href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
+                    <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
                         <Send className="mr-2 h-5 w-5" />
                         Telegram orqali yozish
-                    </Link>
+                    </a>
                 </Button>
             </div>
           </div>
