@@ -94,7 +94,7 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
                     {price === 0 && !isPercentageBased && (
                          <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPrice(price)}</span>
                     )}
-                    {marketPrice && <span className="text-sm text-muted-foreground whitespace-nowrap line-through ml-2">{formatPrice(marketPrice)}</span>}
+                    
                 </div>
                 <Button 
                     className="w-full"
@@ -119,13 +119,13 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
 };
 
 const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
-    <Card className="bg-primary/5 p-4 rounded-xl border-primary/10 flex items-start gap-3 text-left">
-        <div className="flex-shrink-0 bg-primary/10 text-primary p-2 rounded-lg mt-1">
-            <Icon className="w-5 h-5 text-primary" />
+    <Card className="bg-white/10 p-4 rounded-xl border border-white/20 flex items-start gap-3 text-left">
+        <div className="flex-shrink-0 bg-white/10 text-white p-2 rounded-lg mt-1">
+            <Icon className="w-5 h-5 text-white" />
         </div>
         <div>
-            <h5 className="font-bold text-sm text-primary">{title}</h5>
-            <p className="text-xs text-primary/80">{description}</p>
+            <h5 className="font-bold text-sm text-white">{title}</h5>
+            <p className="text-xs text-white/80">{description}</p>
         </div>
     </Card>
 );
@@ -410,3 +410,6 @@ export default PackageBuilder;
     
 
 
+
+
+    
