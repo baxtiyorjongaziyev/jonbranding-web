@@ -158,7 +158,7 @@ export const comparisonData = [
         jon: `${formatPrice(serviceDetails.strategy.price)}`,
         mano: `${formatPrice(240000000)}`,
         abba: null,
-        mountain: null,
+        mountain: false,
     }
   },
    { 
@@ -167,7 +167,7 @@ export const comparisonData = [
         jon: `${formatPrice(serviceDetails.commStrategy.price)}`,
         mano: `${formatPrice(190000000)}`,
         abba: null,
-        mountain: null,
+        mountain: false,
     }
   },
   { 
@@ -183,30 +183,30 @@ export const comparisonData = [
     feature: '100% Mamnuniyat Kafolati', 
     isBenefit: true,
     competitors: {
-        jon: true, // check
-        mano: false, // x
-        abba: false, // x
-        mountain: false, // x
+        jon: true,
+        mano: false,
+        abba: false,
+        mountain: false,
     }
   },
   { 
     feature: 'Shaffof jarayon va doimiy aloqa', 
     isBenefit: true,
     competitors: {
-        jon: true, // check
-        mano: true, // check
-        abba: null, // minus
-        mountain: true, // check
+        jon: true,
+        mano: true,
+        abba: null,
+        mountain: true,
     }
   },
    { 
     feature: 'PCG a\'zolari uchun -50% chegirma', 
     isBenefit: true,
     competitors: {
-        jon: true, // check
-        mano: false, // x
-        abba: false, // x
-        mountain: false, // x
+        jon: true,
+        mano: false,
+        abba: false,
+        mountain: false,
     }
   },
 ];
