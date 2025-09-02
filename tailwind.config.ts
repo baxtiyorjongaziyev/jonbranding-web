@@ -21,7 +21,7 @@ export default {
       },
       colors: {
         'ocean-blue': 'hsl(var(--accent))',
-        'sky-blue': 'hsl(210 40% 96.1%)',
+        'sky-blue': 'hsl(var(--secondary))',
         'dark-blue': 'hsl(var(--primary))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
