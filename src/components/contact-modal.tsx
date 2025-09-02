@@ -7,7 +7,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -41,13 +40,21 @@ const locationOptions = [
     "Boshqa viloyat"
 ];
 
+const goalOptions = [
+    { value: "exploring", label: "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman." },
+    { value: "has_problem", label: "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak." },
+    { value: "ready_to_start", label: "Brendingiz kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." },
+];
+
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Ism-sharifingizni to'liq kiriting." }),
   phone: z.string().min(9, { message: "Telefon raqamingizni to'g'ri kiriting." }),
   telegram: z.string().optional(),
   companyName: z.string().optional(),
   website: z.string().optional(),
-  goal: z.string().optional(),
+  goal: z.string({
+    required_error: "Asosiy maqsadingizni tanlang."
+  }),
   budget: z.string().optional(),
   location: z.string({
     required_error: "Joylashuvingizni tanlang."
@@ -76,7 +83,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       telegram: '',
       companyName: '',
       website: '',
-      goal: '',
+      goal: undefined,
       budget: '',
       location: undefined,
     },
@@ -158,7 +165,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const handlePrev = () => {
     if (step > 1) {
-      setStep(step - 1);
+      setStep(step + 1);
     }
   };
 
@@ -256,17 +263,30 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         )}
                         />
                         <FormField
-                        control={form.control}
-                        name="goal"
-                        render={({ field }) => (
-                            <FormItem>
-                            <FormLabel>Asosiy maqsad nima?</FormLabel>
-                            <FormControl>
-                                <Textarea placeholder="Masalan: brendni noldan yaratish, sotuvlarni oshirish, rebrending qilish..." {...field} />
-                            </FormControl>
-                            <FormMessage />
-                            </FormItem>
-                        )}
+                            control={form.control}
+                            name="goal"
+                            render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                    <FormLabel>Asosiy maqsadingiz qaysi biriga yaqin?</FormLabel>
+                                     <FormControl>
+                                        <RadioGroup
+                                            onValueChange={field.onChange}
+                                            defaultValue={field.value}
+                                            className="flex flex-col space-y-2"
+                                        >
+                                         {goalOptions.map(option => (
+                                            <FormItem key={option.value} className="flex items-center space-x-3 space-y-0">
+                                                <FormControl>
+                                                    <RadioGroupItem value={option.value} />
+                                                </FormControl>
+                                                <FormLabel className="font-normal cursor-pointer text-sm">{option.label}</FormLabel>
+                                            </FormItem>
+                                        ))}
+                                        </RadioGroup>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
                         />
                 </div>
             )}
@@ -367,5 +387,3 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 };
 
 export default ContactModal;
-
-    
