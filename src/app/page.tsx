@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero';
 import TrustedBy from '@/components/sections/trusted-by';
 import { useLocalStorage } from '@/hooks/use-local-storage';
-import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
+import { calculatePackagePrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import { Button } from '@/components/ui/button';
@@ -29,9 +29,7 @@ const Comparison = dynamic(() => import('@/components/sections/comparison'));
 const Process = dynamic(() => import('@/components/sections/process'));
 const Faq = dynamic(() => import('@/components/sections/faq'));
 const Offer = dynamic(() => import('@/components/sections/offer'));
-const ContactModal = dynamic(() => import('@/components/contact-modal'));
 const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
-
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
@@ -93,12 +91,13 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
 
 
 const Home: FC = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [packageSummary, setPackageSummary] = useState('');
-  const [totalPrice, setTotalPrice] = useState(0);
-  
   const [isClient, setIsClient] = useState(false);
   const { tg } = useTelegram();
+
+  const handleOpenModal = useCallback(() => {
+    const event = new CustomEvent('openContactModal');
+    window.dispatchEvent(event);
+  }, []);
 
   useEffect(() => {
     if (tg) {
@@ -109,41 +108,6 @@ const Home: FC = () => {
   useEffect(() => {
       setIsClient(true);
   }, []);
-
-  const handleOpenModal = useCallback(() => {
-    const selectionsJSON = localStorage.getItem('selectedServices');
-    const isPcgMemberJSON = localStorage.getItem('isPcgMember');
-
-    if (selectionsJSON && isPcgMemberJSON) {
-        try {
-            const selectedServices = JSON.parse(selectionsJSON);
-            const isPcgMember = JSON.parse(isPcgMemberJSON);
-            const selections = { selectedServices, isPcgMember };
-            const priceDetails = calculatePackagePrice(selections);
-            const summary = generateSummary(selections);
-            
-            setPackageSummary(summary);
-            setTotalPrice(priceDetails.final);
-        } catch (e) {
-            console.error("Failed to parse package details from localStorage", e);
-             setPackageSummary('');
-             setTotalPrice(0);
-        }
-    }
-    setModalOpen(true);
-  }, []);
-  
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
-  useEffect(() => {
-    const handleOpen = () => handleOpenModal();
-    window.addEventListener('openContactModal', handleOpen);
-    return () => {
-        window.removeEventListener('openContactModal', handleOpen);
-    };
-  }, [handleOpenModal]);
   
   if (!isClient) {
     return (
@@ -183,13 +147,6 @@ const Home: FC = () => {
         <Faq onCtaClick={handleOpenModal} />
         <Offer onCTAClick={handleOpenModal} />
       </main>
-      <ContactModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        packageSummary={packageSummary}
-        totalPrice={totalPrice}
-        onFormSubmitSuccess={handleCloseModal}
-      />
       <ExitIntentModal onPrimaryClick={handleOpenModal} />
       <MobileCtaBar onOpenModal={handleOpenModal} />
     </div>
