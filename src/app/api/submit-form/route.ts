@@ -1,6 +1,12 @@
 
 import { NextResponse } from 'next/server';
 
+const goalOptionsMap: Record<string, string> = {
+    exploring: "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman.",
+    has_problem: "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak.",
+    ready_to_start: "Brendingiz kuchini tushunaman va aniq maqsad bilan murojaat qilyapman.",
+};
+
 export async function POST(request: Request) {
     const botToken = '7738413085:AAE_CYNnbpyoW5KiheUTJOPBmz_jHLVWgWc';
     const chatId = '-1002566480563';
@@ -88,13 +94,14 @@ Yakuniy narx: ${totalPrice.toLocaleString('fr-FR')} so'm
             }
 
             const meetingType = (location === 'Toshkent' || location === 'Farg\'ona') ? 'OFLAYN' : 'ONLAYN';
+            const goalText = goalOptionsMap[goal] || goal || 'Kiritilmagan';
 
             const projectDetails = `
 ---
 ℹ️ Proyekti haqida ma'lumot:
 Kompaniya: ${companyName || 'Kiritilmagan'}
 Veb-sayt: ${website || 'Kiritilmagan'}
-Maqsad: ${goal || 'Kiritilmagan'}
+Maqsad: ${goalText}
 Byudjet: ${budget || 'Kiritilmagan'}
 Joylashuv: ${location || 'Kiritilmagan'}
 Uchrashuv turi: ${meetingType}
