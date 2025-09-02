@@ -5,24 +5,32 @@
 @layer base {
   :root {
     --background: 0 0% 100%; /* White */
-    --foreground: 222 47% 11%;
-    --card: 240 10% 100%;
+    --foreground: 222 47% 11%; /* Dark Blue */
+
+    --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
-    --popover: 240 10% 100%;
+
+    --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
+
     --primary: 222 47% 11%; /* Dark Blue */
     --primary-foreground: 0 0% 98%;
-    --secondary: 210 40% 96.1%;
+
+    --secondary: 210 40% 96.1%; /* Light Sky Blue */
     --secondary-foreground: 222 47% 11%;
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215 25% 45%;
+
     --accent: 191 97% 50%; /* Ocean Blue */
-    --accent-foreground: 222 47% 11%;
+    --accent-foreground: 0 0% 98%; /* White text on accent */
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
+
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 222 47% 11%;
+    --ring: 191 97% 50%; /* Ocean blue for focus rings */
     --radius: 0.75rem;
   }
 
@@ -42,7 +50,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline text-foreground;
+    @apply font-headline text-dark-blue;
   }
 
   h1 { @apply text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter; }
@@ -53,4 +61,13 @@
 
 .shadow-ocean {
   box-shadow: 0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2);
+}
+
+.animate-subtle-pulse {
+   animation: subtle-pulse 4s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+  '0%, 100%': { transform: 'scale(1)', boxShadow: '0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2)' },
+  '50%': { transform: 'scale(1.03)', boxShadow: '0 20px 25px -5px hsl(var(--accent) / 0.25), 0 8px 10px -6px hsl(var(--accent) / 0.25)' },
 }

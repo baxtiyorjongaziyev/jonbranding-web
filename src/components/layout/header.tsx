@@ -120,7 +120,7 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href} passHref legacyBehavior>
+                <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     {item.label}
                   </NavigationMenuLink>
@@ -143,7 +143,7 @@ const Header: FC = () => {
            </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button onClick={handleContactClick} className="hidden md:flex shadow-ocean animate-subtle-pulse" variant="secondary">
+          <Button onClick={handleContactClick} className="hidden md:flex shadow-ocean animate-subtle-pulse">
             Bepul konsultatsiya olish
           </Button>
           <Sheet>
@@ -185,7 +185,7 @@ const Header: FC = () => {
                       Telegram orqali bog'lanish
                     </a>
                  </div>
-                 <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 animate-subtle-pulse" variant="secondary">
+                 <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 animate-subtle-pulse">
                   Bepul konsultatsiya olish
                 </Button>
               </nav>
