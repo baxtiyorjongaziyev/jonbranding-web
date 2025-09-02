@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const processSteps = [
   {
@@ -74,8 +75,8 @@ const BrandStrategyPage: FC = () => {
                   </div>
                    <div className="lg:order-last">
                       <Card className="shadow-xl rounded-2xl">
-                         <CardContent className="p-8">
-                          <img src="https://picsum.photos/800/600" data-ai-hint="strategy flowchart" alt="Strategiya sxemasi" className="rounded-lg object-cover"/>
+                         <CardContent className="p-0">
+                           <Image src="https://picsum.photos/800/600" data-ai-hint="strategy flowchart" alt="Strategiya sxemasi" width={800} height={600} className="rounded-2xl object-cover"/>
                          </CardContent>
                       </Card>
                   </div>
@@ -105,8 +106,8 @@ const BrandStrategyPage: FC = () => {
                   </div>
                   <div>
                       <Card className="shadow-xl rounded-2xl">
-                         <CardContent className="p-8">
-                           <img src="https://picsum.photos/800/601" data-ai-hint="business owner thinking" alt="Biznes egasi o'ylanmoqda" className="rounded-lg object-cover"/>
+                         <CardContent className="p-0">
+                           <Image src="https://picsum.photos/800/601" data-ai-hint="business owner thinking" alt="Biznes egasi o'ylanmoqda" width={800} height={601} className="rounded-2xl object-cover"/>
                          </CardContent>
                       </Card>
                   </div>

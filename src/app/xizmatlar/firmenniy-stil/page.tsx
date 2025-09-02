@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Layers, Palette, PenTool, ClipboardCheck, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 const processSteps = [
     {
@@ -64,8 +65,8 @@ const FirmenniyStilPage: FC = () => {
                   </div>
                    <div className="lg:order-last">
                       <Card className="shadow-xl rounded-2xl">
-                         <CardContent className="p-8">
-                          <img src="https://picsum.photos/800/604" data-ai-hint="visual perception moodboard" alt="Brendni idrok etish" className="rounded-lg object-cover"/>
+                         <CardContent className="p-0">
+                          <Image src="https://picsum.photos/800/604" width={800} height={604} data-ai-hint="visual perception moodboard" alt="Brendni idrok etish" className="rounded-2xl object-cover"/>
                          </CardContent>
                       </Card>
                   </div>
@@ -92,8 +93,8 @@ const FirmenniyStilPage: FC = () => {
                   </div>
                   <div>
                       <Card className="shadow-xl rounded-2xl">
-                         <CardContent className="p-8">
-                           <img src="https://picsum.photos/800/605" data-ai-hint="design system grid" alt="Dizayn tizimi" className="rounded-lg object-cover"/>
+                         <CardContent className="p-0">
+                           <Image src="https://picsum.photos/800/605" width={800} height={605} data-ai-hint="design system grid" alt="Dizayn tizimi" className="rounded-2xl object-cover"/>
                          </CardContent>
                       </Card>
                   </div>
@@ -134,7 +135,7 @@ const FirmenniyStilPage: FC = () => {
                 </p>
              </div>
              <div className="mt-10">
-                <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse">
+                <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse whitespace-normal h-auto">
                    Mening brendim uchun uslub ishlab chiqish <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
             </div>
