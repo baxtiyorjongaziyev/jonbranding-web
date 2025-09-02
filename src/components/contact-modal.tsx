@@ -165,7 +165,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const handlePrev = () => {
     if (step > 1) {
-      setStep(step + 1);
+      setStep(step - 1);
     }
   };
 
@@ -274,13 +274,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                             defaultValue={field.value}
                                             className="flex flex-col space-y-2"
                                         >
-                                         {goalOptions.map(option => (
-                                            <FormItem key={option.value} className="flex items-center space-x-3 space-y-0">
-                                                <FormControl>
-                                                    <RadioGroupItem value={option.value} />
-                                                </FormControl>
-                                                <FormLabel className="font-normal cursor-pointer text-sm">{option.label}</FormLabel>
-                                            </FormItem>
+                                         {goalOptions.map((option, index) => (
+                                            <Label key={option.value} htmlFor={`goal-${index}`} className="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
+                                                <RadioGroupItem value={option.value} id={`goal-${index}`} />
+                                                <span className="font-medium text-sm text-gray-800">{option.label}</span>
+                                            </Label>
                                         ))}
                                         </RadioGroup>
                                     </FormControl>
@@ -305,13 +303,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                     defaultValue={field.value}
                                     className="flex flex-col space-y-1"
                                     >
-                                    {budgetOptions.map(option => (
-                                        <FormItem key={option} className="flex items-center space-x-3 space-y-0">
-                                            <FormControl>
-                                                <RadioGroupItem value={option} />
-                                            </FormControl>
-                                            <FormLabel className="font-normal cursor-pointer">{option}</FormLabel>
-                                        </FormItem>
+                                    {budgetOptions.map((option, index) => (
+                                        <Label key={option} htmlFor={`budget-${index}`} className="flex items-center gap-4 p-3 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
+                                            <RadioGroupItem value={option} id={`budget-${index}`} />
+                                            <span className="font-medium text-sm text-gray-800">{option}</span>
+                                        </Label>
                                     ))}
                                     </RadioGroup>
                                 </FormControl>
