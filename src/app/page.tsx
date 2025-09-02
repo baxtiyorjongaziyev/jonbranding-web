@@ -2,7 +2,7 @@
 'use client';
 
 import type { FC } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero';
 import TrustedBy from '@/components/sections/trusted-by';
@@ -110,7 +110,7 @@ const Home: FC = () => {
       setIsClient(true);
   }, []);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = useCallback(() => {
     const selectionsJSON = localStorage.getItem('selectedServices');
     const isPcgMemberJSON = localStorage.getItem('isPcgMember');
 
@@ -131,7 +131,7 @@ const Home: FC = () => {
         }
     }
     setModalOpen(true);
-  };
+  }, []);
   
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -143,7 +143,7 @@ const Home: FC = () => {
     return () => {
         window.removeEventListener('openContactModal', handleOpen);
     };
-  }, []);
+  }, [handleOpenModal]);
   
   if (!isClient) {
     return (
