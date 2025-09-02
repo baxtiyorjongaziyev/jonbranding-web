@@ -6,6 +6,7 @@ const APP_NAME = "Neyming | Jon.Branding";
 const APP_DESCRIPTION = "Brend uchun unutilmas va kuchli nom tanlash. Yaxshi nom shunchaki chiroyli eshitilmaydi, u mohiyatni yetkazadi, esda qoladi va brendning raqobatchilar orasida ajralib turishiga yordam beradi.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jonbranding.uz'),
   title: APP_NAME,
   description: APP_DESCRIPTION,
   openGraph: {

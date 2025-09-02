@@ -5,6 +5,7 @@ const APP_NAME = "Brend Strategiyasi | Jon.Branding";
 const APP_DESCRIPTION = "Brend strategiyasi — bu biznesning o'sish vositasi. Brendingizni shunchaki chiroyli emas, balki ishlaydigan tizimga aylantiring.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jonbranding.uz'),
   title: APP_NAME,
   description: APP_DESCRIPTION,
   openGraph: {

@@ -6,6 +6,7 @@ const APP_NAME = "Mini-Test: Biznesingiz brendga tayyormi? | Jon.Branding";
 const APP_DESCRIPTION = "Bir nechta oddiy savollarga javob bering va biznesingizning brendingga qanchalik tayyorligini, uning kuchli va zaif tomonlarini bilib oling.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jonbranding.uz'),
   title: APP_NAME,
   description: APP_DESCRIPTION,
   openGraph: {

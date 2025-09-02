@@ -5,6 +5,7 @@ const APP_NAME = "Firma Uslubi | Jon.Branding";
 const APP_DESCRIPTION = "Biz shunchaki chiroyli rasmlar yaratmaymiz, biz brendingiz uchun ishlaydigan va natija keltiradigan tizimli vizual uslubni ishlab chiqamiz. Logotip, ranglar, shriftlar va boshqa elementlar orqali brendingizni taniladigan va esda qolarli qiling.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jonbranding.uz'),
   title: APP_NAME,
   description: APP_DESCRIPTION,
   openGraph: {

@@ -1,4 +1,6 @@
 
+'use client';
+
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
@@ -7,9 +9,11 @@ import type { FC, ReactNode } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Poppins } from 'next/font/google';
+import { useState, useCallback, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 
-const APP_NAME = "Jon.Branding";
-const APP_DESCRIPTION = "Jon.Branding bilan strategiyaga asoslangan vizual ko‘rinishga ega bo‘ling.";
+const ContactModal = dynamic(() => import('@/components/contact-modal'));
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -17,50 +21,6 @@ const poppins = Poppins({
   variable: '--font-poppins',
   weight: ['400', '500', '600', '700', '800'],
 });
-
-export const metadata: Metadata = {
-  title: {
-    default: APP_NAME,
-    template: `%s | ${APP_NAME}`,
-  },
-  description: APP_DESCRIPTION,
-  applicationName: APP_NAME,
-  appleWebApp: {
-    capable: true,
-    title: APP_NAME,
-    statusBarStyle: 'default',
-  },
-  formatDetection: {
-    telephone: false,
-  },
-  openGraph: {
-    url: 'https://jonbranding.uz',
-    title: APP_NAME,
-    description: APP_DESCRIPTION,
-    type: 'website',
-    siteName: APP_NAME,
-    images: [
-      {
-        url: 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2',
-        width: 1200,
-        height: 630,
-        alt: APP_DESCRIPTION,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: APP_NAME,
-    description: APP_DESCRIPTION,
-    images: ['https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2'],
-  },
-  alternates: {
-    canonical: 'https://jonbranding.uz',
-  },
-  icons: {
-    icon: '/favicon.ico',
-  }
-};
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -75,6 +35,46 @@ const jsonLd = {
 };
 
 const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [packageSummary, setPackageSummary] = useState('');
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const handleOpenModal = useCallback(() => {
+        const selectionsJSON = localStorage.getItem('selectedServices');
+        const isPcgMemberJSON = localStorage.getItem('isPcgMember');
+
+        if (selectionsJSON && isPcgMemberJSON) {
+            try {
+                const selectedServices = JSON.parse(selectionsJSON);
+                const isPcgMember = JSON.parse(isPcgMemberJSON);
+                const selections = { selectedServices, isPcgMember };
+                const priceDetails = calculatePackagePrice(selections);
+                const summary = generateSummary(selections);
+                
+                setPackageSummary(summary);
+                setTotalPrice(priceDetails.final);
+            } catch (e) {
+                console.error("Failed to parse package details from localStorage", e);
+                 setPackageSummary('');
+                 setTotalPrice(0);
+            }
+        }
+        setModalOpen(true);
+    }, []);
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
+    useEffect(() => {
+        const handleOpen = () => handleOpenModal();
+        window.addEventListener('openContactModal', handleOpen);
+        return () => {
+            window.removeEventListener('openContactModal', handleOpen);
+        };
+    }, [handleOpenModal]);
+
+
   return (
     <html lang="uz" suppressHydrationWarning className={`${poppins.variable}`}>
       <head>
@@ -129,6 +129,13 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
            <Footer />
         </div>
         <Toaster />
+        <ContactModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            packageSummary={packageSummary}
+            totalPrice={totalPrice}
+            onFormSubmitSuccess={handleCloseModal}
+        />
       </body>
     </html>
   );
