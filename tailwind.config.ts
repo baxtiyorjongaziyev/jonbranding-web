@@ -20,8 +20,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        body: ['var(--font-manrope)', 'sans-serif'],
-        headline: ['var(--font-manrope)', 'sans-serif'],
+        body: ['var(--font-poppins)', 'sans-serif'],
+        headline: ['var(--font-poppins)', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

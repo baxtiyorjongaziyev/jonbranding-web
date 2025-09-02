@@ -8,17 +8,18 @@ import { Toaster } from '@/components/ui/toaster';
 import type { FC, ReactNode } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import { Manrope } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import { useState, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'));
 
-const manrope = Manrope({
+const poppins = Poppins({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-manrope',
+  variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 
 const jsonLd = {
@@ -75,7 +76,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 
 
   return (
-    <html lang="uz" suppressHydrationWarning className={`${manrope.variable}`}>
+    <html lang="uz" suppressHydrationWarning className={`${poppins.variable}`}>
       <head>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <Script
