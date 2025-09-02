@@ -175,7 +175,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md rounded-2xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-foreground">Sifatli konsultatsiya uchun</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-dark-blue">Sifatli konsultatsiya uchun</DialogTitle>
           <DialogDescription>
             Loyihangizni yaxshiroq tushunishimiz uchun bir nechta savollarga javob bering.
           </DialogDescription>
@@ -353,7 +353,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Orqaga
                 </Button>
-                <Button type="button" onClick={handleNext} disabled={isSubmitting} className="shadow-ocean">
+                <Button type="button" onClick={handleNext} disabled={isSubmitting} className="shadow-ocean bg-ocean-blue hover:bg-ocean-blue/90">
                     {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     {step === STEPS.length ? "So'rovni yuborish" : "Keyingisi"}
                     {step < STEPS.length && <ArrowRight className="ml-2 h-4 w-4" />}
@@ -367,3 +367,5 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 };
 
 export default ContactModal;
+
+    
