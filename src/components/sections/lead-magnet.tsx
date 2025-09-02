@@ -57,10 +57,10 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold">
-            Siz uchun maxsus sotuv voronkasi
+            Brendingizni Keyingi Bosqichga Olib Chiqing
           </h2>
           <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
-            Biz siz uchun oddiy va tushunarli yo'l xaritasi ishlab chiqdik. Har bir bosqich sizni muvaffaqiyatli brend sari yetaklaydi.
+            Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun oddiy va tushunarli yo'l xaritasi ishlab chiqdik. Har bir qadam sizni muvaffaqiyatli brend sari yetaklaydi.
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
