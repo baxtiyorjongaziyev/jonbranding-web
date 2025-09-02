@@ -7,6 +7,12 @@ const goalOptionsMap: Record<string, string> = {
     ready_to_start: "Brendingiz kuchini tushunaman va aniq maqsad bilan murojaat qilyapman.",
 };
 
+const meetingPlaceMap: Record<string, string> = {
+    our_office: "Jon.Branding ofisida",
+    neutral: "Neytral hududda (kafe/restoran)",
+    client_office: "Mijoz ofisida",
+};
+
 export async function POST(request: Request) {
     const botToken = '7738413085:AAE_CYNnbpyoW5KiheUTJOPBmz_jHLVWgWc';
     const chatId = '-1002566480563';
@@ -18,7 +24,7 @@ export async function POST(request: Request) {
 
     try {
         const body = await request.json();
-        const { fullName, phone, telegram, notes, packageSummary, totalPrice, companyName, website, goal, budget, location } = body;
+        const { fullName, phone, telegram, notes, packageSummary, totalPrice, companyName, website, goal, budget, location, meetingPlace } = body;
 
         if (!fullName || !phone) {
             return NextResponse.json({ ok: false, error: "Ism va telefon raqam kiritilishi shart" }, { status: 400 });
@@ -92,9 +98,10 @@ ${packageSummary}
 Yakuniy narx: ${totalPrice.toLocaleString('fr-FR')} so'm
               `.trim();
             }
-
+            
             const meetingType = (location === 'Toshkent' || location === 'Farg\'ona') ? 'OFLAYN' : 'ONLAYN';
             const goalText = goalOptionsMap[goal] || goal || 'Kiritilmagan';
+            const meetingPlaceText = meetingPlace ? meetingPlaceMap[meetingPlace] || meetingPlace : 'Belgilanmagan';
 
             const projectDetails = `
 ---
@@ -105,6 +112,7 @@ Maqsad: ${goalText}
 Byudjet: ${budget || 'Kiritilmagan'}
 Joylashuv: ${location || 'Kiritilmagan'}
 Uchrashuv turi: ${meetingType}
+${meetingType === 'OFLAYN' ? `Uchrashuv joyi: ${meetingPlaceText}` : ''}
             `.trim();
             
             telegramMessage = `
