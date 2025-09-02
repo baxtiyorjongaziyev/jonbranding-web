@@ -34,7 +34,7 @@ const serviceCategories: Record<ServiceCategory, { title: string; services: (key
     },
     additional: {
         title: "Qo'shimcha xizmatlar",
-        services: ['strategy', 'commStrategy', 'smm', 'merch', 'illustrations']
+        services: ['strategy', 'commStrategy', 'smm', 'merch', 'illustrations', 'urgency', 'nda']
     }
 };
 
@@ -43,6 +43,7 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
     const detail = serviceDetails[id];
     if (!detail) return null;
     const { label, description, price, marketPrice, timeline, note } = detail;
+    const isPercentageBased = note === 'Narxga qo\'shiladi';
 
     return (
         <Card 
@@ -55,13 +56,20 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
             <div className="p-5 flex-grow">
                 <h4 className="text-base font-bold text-dark-blue leading-tight pr-2">{label}</h4>
                 <div className="my-2">
-                    <span className="text-xl font-bold text-primary whitespace-nowrap">{price > 0 ? `+${formatPrice(price)}` : formatPrice(price)}</span>
+                    {price > 0 && (
+                       <span className="text-xl font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
+                    )}
+                    {isPercentageBased && (
+                        <span className="text-xl font-bold text-primary whitespace-nowrap">{note}</span>
+                    )}
+                    {price === 0 && !isPercentageBased && (
+                         <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPrice(price)}</span>
+                    )}
                     {marketPrice && <span className="text-sm text-muted-foreground whitespace-nowrap line-through ml-2">{formatPrice(marketPrice)}</span>}
                 </div>
                  <p className="text-sm text-muted-foreground mt-1" dangerouslySetInnerHTML={{ __html: description }}></p>
                  <div className="text-xs text-muted-foreground mt-2 space-x-4">
                     {timeline && <span>Muddati: <strong>{timeline}</strong></span>}
-                    {note && <span className="text-red-600 font-bold"><strong>{note}</strong></span>}
                  </div>
             </div>
              <div className="p-4 bg-gray-50/70 border-t pointer-events-none">
@@ -114,6 +122,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         smm: false,
         merch: false,
         illustrations: false,
+        urgency: false,
+        nda: false,
     });
     const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', false);
     const [isClient, setIsClient] = useState(false);
@@ -122,7 +132,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         setIsClient(true);
     }, []);
 
-    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: '', discountValue: 0, savings: 0, bonus: null });
+    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: '', discountValue: 0, savings: 0, bonus: null, surcharges: [] });
 
     useEffect(() => {
         if (isClient) {
@@ -263,10 +273,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                      selectedServiceKeys.map((key) => {
                                         const service = serviceDetails[key as keyof SelectedServices];
                                         if (!service) return null;
+                                        if (service.price === 0 && !service.note?.includes('qo\'shiladi')) return null;
+                                        
+                                        let displayPrice = formatPrice(service.price);
+                                        if (service.note?.includes('qo\'shiladi')) {
+                                          displayPrice = service.note;
+                                        }
+
                                         return (
                                             <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
                                                 <span className="text-gray-300 flex-1 pr-2">{service.label}</span>
-                                                <span className="font-medium text-gray-200">{formatPrice(service.price)}</span>
+                                                <span className="font-medium text-gray-200">{displayPrice}</span>
                                                 <Button 
                                                     variant="ghost" 
                                                     size="icon" 
@@ -286,11 +303,18 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                    }
                                 </div>
 
-                                <div className="mt-4 space-y-4">
-                                    <div className="flex justify-between items-center text-lg">
+                                <div className="mt-4 space-y-2">
+                                    <div className="flex justify-between items-center text-base">
                                         <span className="text-gray-300">Asl narx:</span>
-                                        <span className={cn("font-bold", total.discountApplied && "line-through text-gray-400")}>{formatPrice(total.base)}</span>
+                                        <span className={cn("font-medium", total.discountApplied && "line-through text-gray-400")}>{formatPrice(total.base)}</span>
                                     </div>
+
+                                    {total.surcharges.map((surcharge, index) => (
+                                       <div key={index} className="flex justify-between items-center text-base">
+                                            <span className="text-gray-300">{surcharge.name}:</span>
+                                            <span className="font-medium text-white">+{formatPrice(surcharge.value)}</span>
+                                       </div>
+                                    ))}
                                     
                                     {total.discountApplied && (
                                         <>
@@ -312,7 +336,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                     )}
 
 
-                                    <div className="border-t border-gray-600 my-2"></div>
+                                    <div className="border-t border-gray-600 my-4"></div>
                                     <div className="flex justify-between items-center">
                                         <span className="text-gray-200 text-xl">Yakuniy narx:</span>
                                         <span className="text-4xl font-extrabold text-accent">{formatPrice(total.final)}</span>

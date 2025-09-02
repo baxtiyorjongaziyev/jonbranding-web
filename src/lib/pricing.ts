@@ -104,6 +104,22 @@ export const serviceDetails = {
         marketPrice: null,
         timeline: "3 haftadan",
         note: "Individual hisoblanadi"
+    },
+    urgency: {
+        label: "Shoshilinch loyiha (+50%)",
+        description: "Loyiha navbatsiz, qisqa muddatda (2-3 kun) tayyorlanadi. Umumiy narxga 50% ustama qo'shiladi.",
+        price: 0,
+        marketPrice: null,
+        timeline: "Individual",
+        note: "Narxga qo'shiladi"
+    },
+    nda: {
+        label: "Maxfiylik shartnomasi (NDA) (+25%)",
+        description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi. Umumiy narxga 25% ustama qo'shiladi.",
+        price: 0,
+        marketPrice: null,
+        timeline: "Individual",
+        note: "Narxga qo'shiladi"
     }
 };
 
@@ -156,7 +172,7 @@ export const comparisonData = [
     feature: 'Brend-strategiya',
     competitors: {
         jon: `${formatPrice(serviceDetails.strategy.price)}`,
-        mano: `${formatPrice(240000000)}`,
+        mano: true,
         abba: null,
         mountain: false,
     }
@@ -165,7 +181,7 @@ export const comparisonData = [
     feature: 'Kommunikatsion strategiya',
     competitors: {
         jon: `${formatPrice(serviceDetails.commStrategy.price)}`,
-        mano: `${formatPrice(190000000)}`,
+        mano: true,
         abba: null,
         mountain: false,
     }
@@ -215,6 +231,8 @@ export const comparisonData = [
 export type SelectedServices = Record<keyof typeof serviceDetails, boolean>;
 
 export const pcgDiscount = 0.50;
+export const urgencySurcharge = 0.50;
+export const ndaSurcharge = 0.25;
 export const bonusThreshold = 18750000;
 export const bonusDescription = "Biznes vizitka dizayni sovg'a tariqasida";
 
@@ -230,6 +248,7 @@ export interface PriceDetails {
     discountValue: number;
     savings: number;
     bonus: string | null;
+    surcharges: { name: string, value: number }[];
 }
 
 
@@ -237,22 +256,47 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     const { selectedServices, isPcgMember } = selections;
     
     let basePrice = 0;
+    // Exclude percentage-based services from initial sum
+    const percentageServices: (keyof SelectedServices)[] = ['urgency', 'nda'];
+
     for (const serviceKey in selectedServices) {
-        if (serviceKey in serviceDetails && selectedServices[serviceKey as keyof SelectedServices]) {
+        if (
+            serviceKey in serviceDetails && 
+            selectedServices[serviceKey as keyof SelectedServices] &&
+            !percentageServices.includes(serviceKey as keyof SelectedServices)
+        ) {
             basePrice += serviceDetails[serviceKey as keyof SelectedServices].price;
         }
     }
 
+    let priceAfterSurcharges = basePrice;
+    const surcharges: { name: string, value: number }[] = [];
+
+    if (selectedServices.urgency) {
+        const surchargeAmount = basePrice * urgencySurcharge;
+        priceAfterSurcharges += surchargeAmount;
+        surcharges.push({ name: 'Shoshilinch uchun ustama (+50%)', value: surchargeAmount });
+    }
+
+    if (selectedServices.nda) {
+        const surchargeAmount = basePrice * ndaSurcharge;
+        priceAfterSurcharges += surchargeAmount;
+        surcharges.push({ name: 'NDA uchun ustama (+25%)', value: surchargeAmount });
+    }
+    
+    let priceAfterDiscount = priceAfterSurcharges;
     let discountValue = 0;
     let discountType = "";
     
     if (isPcgMember && basePrice > 0) {
+        const discountAmount = priceAfterSurcharges * pcgDiscount;
+        priceAfterDiscount -= discountAmount;
         discountValue = pcgDiscount;
         discountType = 'PCG Tez Natija 3 uchun -50% chegirma';
     }
     
-    const finalPrice = basePrice * (1 - discountValue);
-    const savings = basePrice - finalPrice;
+    const finalPrice = priceAfterDiscount;
+    const savings = priceAfterSurcharges - finalPrice;
 
     const bonus = finalPrice > bonusThreshold ? bonusDescription : null;
 
@@ -263,6 +307,7 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
         discountValue: discountValue,
         savings,
         bonus,
+        surcharges,
     };
 }
 
@@ -278,8 +323,13 @@ export const generateSummary = (selections: PackageSelections) => {
 
     let summary = `Tanlangan xizmatlar: ${services.join(', ') || 'Yo\'q'}`;
 
-    const { discountApplied, bonus } = calculatePackagePrice(selections);
+    const { discountApplied, bonus, surcharges } = calculatePackagePrice(selections);
     
+    if (surcharges.length > 0) {
+        const surchargeSummary = surcharges.map(s => s.name).join(', ');
+        summary += ` | Qo'shimcha shartlar: ${surchargeSummary}`;
+    }
+
     if (discountApplied) {
         summary += ` | Chegirma: ${discountApplied}`;
     }
