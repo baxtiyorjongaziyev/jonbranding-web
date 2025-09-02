@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Shield, CreditCard, ShieldCheck, ShoppingCart, CheckCircle, Trash2, FileText, ClipboardSignature, Info, Banknote, Flame, Megaphone, Shirt, PenTool, Share2, ClipboardList } from 'lucide-react';
+import { Sparkles, Gift, Shield, CreditCard, ShieldCheck, ShoppingCart, CheckCircle, Trash2, FileText, ClipboardSignature, Info, Banknote, Flame, Megaphone, Shirt, PenTool, Share2, ClipboardList, Type, Palette, Layers, BookMarked, Box } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface PackageBuilderProps {
@@ -49,7 +49,12 @@ const serviceIcons: { [key in keyof SelectedServices]?: React.ElementType } = {
     nda: ShieldCheck,
     audit: FileText,
     namingCheck: ClipboardSignature,
-    consultation: Info
+    consultation: Info,
+    naming: Type,
+    logo: Palette,
+    designSystem: Layers,
+    brandbook: BookMarked,
+    packaging: Box
 };
 
 
@@ -403,4 +408,5 @@ export default PackageBuilder;
     
 
     
+
 
