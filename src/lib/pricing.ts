@@ -5,7 +5,7 @@ export const serviceDetails = {
         label: "Logo Auditi",
         description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.",
         price: 1500000,
-        marketPrice: null,
+        
         timeline: "2-3 kun",
         note: null,
     },
@@ -13,7 +13,7 @@ export const serviceDetails = {
         label: "Neyming Tekshiruvi",
         description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.",
         price: 2000000,
-        marketPrice: null,
+        
         timeline: "1-2 kun",
         note: null,
     },
@@ -21,7 +21,7 @@ export const serviceDetails = {
         label: "30 daqiqalik maslahat",
         description: "Brending bo'yicha har qanday savolingizga tezkor yo'l-yo'riq va professional maslahat.",
         price: 500000,
-        marketPrice: null,
+        
         timeline: "30 daqiqa",
         note: null,
     },
@@ -29,7 +29,7 @@ export const serviceDetails = {
         label: "Brend-strategiya va platforma", 
         description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", 
         price: 60000000, 
-        marketPrice: null,
+        
         timeline: "8 haftadan",
         note: null,
     },
@@ -37,7 +37,7 @@ export const serviceDetails = {
         label: "Kommunikatsion strategiya", 
         description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", 
         price: 50000000,
-        marketPrice: null,
+        
         timeline: "8 haftadan",
         note: null,
     },
@@ -45,7 +45,7 @@ export const serviceDetails = {
         label: "Neyming (Brend nom ishlab chiqish)", 
         description: "Brendingiz uchun unutilmas va kuchli nom tanlash.", 
         price: 13000000,
-        marketPrice: null,
+        
         timeline: "2-3 hafta",
         note: null,
     },
@@ -53,7 +53,7 @@ export const serviceDetails = {
         label: "Logotip va bazaviy stil", 
         description: "Logotip, ranglar palitrasi, shriftlar. 2 ta konsepsiya, 5 ta nositelda namoyish.", 
         price: 26000000,
-        marketPrice: null,
+        
         timeline: "2-4 hafta",
         note: null,
     },
@@ -61,7 +61,7 @@ export const serviceDetails = {
         label: "To'liq dizayn-tizim", 
         description: "<strong>Logotipni o'z ichiga oladi.</strong> Ranglar, shriftlar, firma grafikasi, ikonikalar, tasvirlar uslubi. 3 ta konsepsiya.", 
         price: 39000000,
-        marketPrice: null,
+        
         timeline: "4-6 hafta",
         note: null,
     },
@@ -69,7 +69,7 @@ export const serviceDetails = {
         label: "Brendbuk va gaydlayn", 
         description: "Firma uslubidan foydalanish bo'yicha qoidalar hujjati.", 
         price: 13000000,
-        marketPrice: null,
+        
         timeline: "1 haftadan",
         note: null,
     },
@@ -77,7 +77,7 @@ export const serviceDetails = {
         label: "Qadoq dizayni", 
         description: "3 SKU uchun qadoq ishlab chiqish, chop etishga tayyorlash. Qadoq formasi alohida ishlab chiqiladi.", 
         price: 13000000,
-        marketPrice: null,
+        
         timeline: "4-6 hafta",
         note: null,
     },
@@ -85,7 +85,7 @@ export const serviceDetails = {
         label: "Ijtimoiy tarmoqlar uchun stil", 
         description: "Postlar va storislarni firma uslubida bezash.", 
         price: 13000000,
-        marketPrice: null,
+        
         timeline: "2 haftadan",
         note: null,
     },
@@ -93,7 +93,7 @@ export const serviceDetails = {
         label: "Brendli merch va nositellar",
         description: "Kiyim, aksessuarlar, POSM materiallari dizayni.",
         price: 0,
-        marketPrice: null,
+        
         timeline: "2 haftadan",
         note: "Individual hisoblanadi"
     },
@@ -101,7 +101,7 @@ export const serviceDetails = {
         label: "Illustratsiyalar va animatsiya",
         description: "Firma grafikasi, infografika va animatsiyalar yaratish.",
         price: 0,
-        marketPrice: null,
+        
         timeline: "3 haftadan",
         note: "Individual hisoblanadi"
     },
@@ -109,7 +109,7 @@ export const serviceDetails = {
         label: "Shoshilinch loyiha (+50%)",
         description: "Loyiha navbatsiz, qisqa muddatda (2-3 kun) tayyorlanadi. Umumiy narxga 50% ustama qo'shiladi.",
         price: 0,
-        marketPrice: null,
+        
         timeline: "Individual",
         note: "Narxga qo'shiladi"
     },
@@ -117,7 +117,7 @@ export const serviceDetails = {
         label: "Maxfiylik shartnomasi (NDA) (+25%)",
         description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi. Umumiy narxga 25% ustama qo'shiladi.",
         price: 0,
-        marketPrice: null,
+        
         timeline: "Individual",
         note: "Narxga qo'shiladi"
     }
@@ -340,3 +340,5 @@ export const generateSummary = (selections: PackageSelections) => {
 
     return summary;
 }
+
+    
