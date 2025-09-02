@@ -120,7 +120,7 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href} legacyBehavior={false} passHref>
+                <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     {item.label}
                   </NavigationMenuLink>
