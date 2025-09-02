@@ -36,8 +36,8 @@ const buttonTexts = [
 ];
 
 const heroImages = [
-    { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif', alt: 'Animatsion Logo', hint: 'animated logo', className: 'rounded-xl col-span-1 row-span-1' },
-    { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/67513d8fe1caee5495e0f9bd_ezgif-6-3f24b1faa6.gif', alt: 'Brend animatsiyasi', hint: 'brand animation', className: 'rounded-xl col-span-1 row-span-1' },
+    { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif', alt: 'Animatsion Logo', hint: 'animated logo', className: 'rounded-xl' },
+    { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/67513d8fe1caee5495e0f9bd_ezgif-6-3f24b1faa6.gif', alt: 'Brend animatsiyasi', hint: 'brand animation', className: 'rounded-xl' },
 ];
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
@@ -91,14 +91,14 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
             </div>
           </div>
           <div className="hidden lg:block">
-            <div className="grid grid-cols-2 grid-rows-1 gap-4 h-[250px]">
+            <div className="grid grid-cols-2 gap-4">
                 {heroImages.map((image, index) => (
-                     <div key={index} className={cn("relative shadow-lg", image.className)}>
+                     <div key={index} className={cn("relative shadow-lg aspect-video", image.className)}>
                         <Image
                             src={image.src}
                             alt={image.alt}
                             fill
-                            className="object-contain rounded-xl"
+                            className="object-cover rounded-xl"
                             data-ai-hint={image.hint}
                             unoptimized
                             sizes="(max-width: 1200px) 50vw, 33vw"
