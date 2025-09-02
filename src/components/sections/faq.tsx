@@ -5,8 +5,10 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import CtaBlock from './cta-block';
+import { getFaqItems, type FaqItem } from '@/lib/airtable';
 
-const faqItems = [
+
+const staticFaqItems: FaqItem[] = [
    {
     question: "Nima uchun narxlar qat'iy belgilanmagan?",
     answer: "Har bir loyiha o'ziga xos. Narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga qarab individual ravishda hisoblanadi. Biz sizning brendingiz uchun eng maqbul yechimni taklif qilamiz."
@@ -37,7 +39,17 @@ interface FaqProps {
   onCtaClick: () => void;
 }
 
-const Faq: React.FC<FaqProps> = ({ onCtaClick }) => {
+const Faq: React.FC<FaqProps> = async ({ onCtaClick }) => {
+  let faqItems: FaqItem[] = staticFaqItems;
+  try {
+    const airtableItems = await getFaqItems();
+    if (airtableItems.length > 0) {
+      faqItems = airtableItems;
+    }
+  } catch (error) {
+    console.error("Failed to fetch FAQ items from Airtable, using static data.", error);
+  }
+
   return (
     <section id="faq" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">

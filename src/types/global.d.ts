@@ -3,9 +3,9 @@ declare global {
     __ENV__?: {
       NEXT_PUBLIC_TELEGRAM_WEBHOOK_URL?: string;
       NEXT_PUBLIC_GA_ID?: string;
-      NEXT_PUBLIC_AIRTABLE_API_KEY?: string;
-      NEXT_PUBLIC_AIRTABLE_BASE_ID?: string;
-      NEXT_PUBLIC_AIRTABLE_TABLE_NAME?: string;
+      AIRTABLE_API_KEY?: string;
+      AIRTABLE_BASE_ID?: string;
+      AIRTABLE_TABLE_NAME?: string;
     };
     gtag?: (...args: any[]) => void;
     bus?: {
