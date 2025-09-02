@@ -1,10 +1,13 @@
 
+'use client';
+
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Check, X, Minus, Info } from 'lucide-react';
 import CtaBlock from './cta-block';
 import { comparisonData } from '@/lib/pricing';
 import { Logo } from '../icons/logo';
 import { cn } from '@/lib/utils';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const competitors = [
     { id: 'jon', name: 'Jon.Branding', isPrimary: true },
@@ -15,12 +18,12 @@ const competitors = [
 
 const renderCompetitorValue = (value: string | boolean | null) => {
     if (typeof value === 'boolean') {
-        return value ? <Check className="w-6 h-6 text-green-500" /> : <X className="w-6 h-6 text-red-500" />;
+        return value ? <Check className="w-5 h-5 text-green-500" /> : <X className="w-5 h-5 text-red-500" />;
     }
     if (value === null) {
-        return <Minus className="w-6 h-6 text-gray-400" />;
+        return <Minus className="w-5 h-5 text-gray-400" />;
     }
-    return <span className="font-semibold text-gray-800 text-sm sm:text-base">{value}</span>;
+    return <span className="font-semibold text-gray-800 text-sm">{value}</span>;
 }
 
 
@@ -38,7 +41,9 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick }) => {
                 Biz yuqori sifatli brending xizmatlarini premium agentliklarga qaraganda ancha hamyonbop narxlarda taqdim etamiz. Natija esa siz kutgandan ham a'lo bo'ladi.
             </p>
         </div>
-        <div className="mt-12 max-w-6xl mx-auto">
+        
+        {/* Desktop View */}
+        <div className="mt-12 max-w-6xl mx-auto hidden md:block">
           <Card className="rounded-2xl shadow-xl border-2 border-primary/20 overflow-hidden">
             <div className="grid grid-cols-5 bg-secondary/50">
               <div className="col-span-1 p-4 font-bold text-sm sm:text-lg text-dark-blue border-r border-gray-200 flex items-center">Xususiyatlar</div>
@@ -65,6 +70,29 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick }) => {
               ))}
             </div>
           </Card>
+        </div>
+
+        {/* Mobile View */}
+        <div className="mt-12 max-w-3xl mx-auto md:hidden">
+            <Accordion type="single" collapsible defaultValue='item-0' className="w-full space-y-4">
+                {competitors.map((competitor, index) => (
+                     <AccordionItem key={competitor.id} value={`item-${index}`} className="border rounded-2xl shadow-sm bg-secondary/70 px-6 hover:bg-secondary transition-colors duration-300 data-[state=open]:bg-white data-[state=open]:shadow-lg">
+                        <AccordionTrigger className={cn("text-left font-bold text-dark-blue hover:no-underline text-xl", competitor.isPrimary && "text-primary")}>
+                            {competitor.id === 'jon' ? <Logo /> : competitor.name}
+                        </AccordionTrigger>
+                        <AccordionContent className="pt-2 text-base">
+                           <div className="space-y-4">
+                            {comparisonData.map(item => (
+                                <div key={item.feature} className="flex justify-between items-center py-2 border-b last:border-b-0">
+                                    <span className="font-medium text-gray-700">{item.feature}</span>
+                                    {renderCompetitorValue(item.competitors[competitor.id as keyof typeof item.competitors])}
+                                </div>
+                            ))}
+                           </div>
+                        </AccordionContent>
+                    </AccordionItem>
+                ))}
+            </Accordion>
         </div>
 
         <div className="mt-10 max-w-3xl mx-auto">
