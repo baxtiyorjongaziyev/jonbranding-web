@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Shield, CreditCard, ShieldCheck, ShoppingCart, CheckCircle, Trash2, FileText, ClipboardSignature, Info, Banknote } from 'lucide-react';
+import { Sparkles, Gift, Shield, CreditCard, ShieldCheck, ShoppingCart, CheckCircle, Trash2, FileText, ClipboardSignature, Info, Banknote, Flame } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface PackageBuilderProps {
@@ -45,6 +45,12 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
     const { label, description, price, marketPrice, timeline, note } = detail;
     const isPercentageBased = note === 'Narxga qo\'shiladi';
 
+    const renderIcon = () => {
+        if (id === 'urgency') return <Flame className="h-4 w-4 mr-2 text-red-500" />;
+        if (id === 'nda') return <ShieldCheck className="h-4 w-4 mr-2 text-blue-500" />;
+        return null;
+    }
+
     return (
         <Card 
             onClick={onSelect}
@@ -54,7 +60,10 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
             )}
         >
             <div className="p-5 flex-grow">
-                <h4 className="text-base font-bold text-dark-blue leading-tight pr-2">{label}</h4>
+                 <div className="flex items-center">
+                    {renderIcon()}
+                    <h4 className="text-base font-bold text-dark-blue leading-tight">{label}</h4>
+                </div>
                 <div className="my-2">
                     {price > 0 && (
                        <span className="text-xl font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
@@ -379,5 +388,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
+
+    
 
     
