@@ -49,7 +49,7 @@ const services: { title: string; href: string; description: string }[] = [
   },
   {
     title: "Qadoq dizayni",
-    href: "/#package-builder",
+    href: "/xizmatlar/qadoq-dizayni",
     description: "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
   },
    {
