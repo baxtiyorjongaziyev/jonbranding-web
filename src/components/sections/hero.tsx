@@ -1,3 +1,4 @@
+
 'use client';
 
 import type {FC} from 'react';
@@ -35,9 +36,9 @@ const buttonTexts = [
 ];
 
 const heroImages = [
-    { src: 'https://picsum.photos/300/400', alt: 'Brand Style Guide', hint: 'brand styleguide', className: 'rounded-xl col-span-2 row-span-2' },
-    { src: 'https://picsum.photos/300/190', alt: 'Logo Design', hint: 'logo design', className: 'rounded-xl' },
-    { src: 'https://picsum.photos/300/190', alt: 'Packaging Design', hint: 'packaging design', className: 'rounded-xl' },
+    { src: 'https://img2.teletype.in/files/51/45/5145b60e-aca5-4225-8564-a4d601a148a7.jpeg', alt: 'Brand Style Guide', hint: 'brand styleguide', className: 'rounded-xl col-span-2 row-span-2' },
+    { src: 'https://img1.teletype.in/files/83/c2/83c2c300-af89-482e-8052-15189ac22aff.jpeg', alt: 'Logo Design Process', hint: 'logo design process', className: 'rounded-xl' },
+    { src: 'https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg', alt: 'Packaging Design', hint: 'branding application', className: 'rounded-xl' },
 ];
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
