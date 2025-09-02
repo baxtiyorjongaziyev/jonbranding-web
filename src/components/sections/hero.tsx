@@ -83,11 +83,11 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
 
         <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {trustPills.map((pill, index) => (
-                <Card key={index} className="text-left bg-secondary/70 backdrop-blur-sm border-border/60 shadow-sm hover:shadow-md transition-shadow">
+                <Card key={index} className="text-left bg-card/70 backdrop-blur-sm border-border/60 shadow-sm hover:shadow-md transition-shadow">
                     <CardContent className="p-5 flex items-start gap-4">
                         <CheckCircle className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
                         <div>
-                            <h3 className="font-bold text-dark-blue text-base">{pill.title}</h3>
+                            <h3 className="font-bold text-card-foreground text-base">{pill.title}</h3>
                             <p className="text-muted-foreground text-sm">{pill.description}</p>
                         </div>
                     </CardContent>
