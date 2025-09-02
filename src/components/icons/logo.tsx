@@ -3,7 +3,7 @@ export const Logo = ({ isWhite = false }) => (
     <text
       x="0"
       y="28"
-      fontFamily="Poppins, sans-serif"
+      fontFamily="Inter, sans-serif"
       fontSize="28"
       fontWeight="500"
       fill={isWhite ? 'white' : 'hsl(var(--foreground))'}

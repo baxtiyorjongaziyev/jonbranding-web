@@ -19,8 +19,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        body: ['var(--font-poppins)', 'sans-serif'],
-        headline: ['var(--font-poppins)', 'sans-serif'],
+        body: ['var(--font-inter)', 'sans-serif'],
+        headline: ['var(--font-inter)', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -74,10 +74,29 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "subtle-pulse": {
+          "0%, 100%": {
+            boxShadow: "0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2)",
+          },
+          "50%": {
+            boxShadow: "0 20px 25px -5px hsl(var(--accent) / 0.3), 0 8px 10px -6px hsl(var(--accent) / 0.3)",
+          },
+        },
+        "text-fade-in": {
+          from: { opacity: "0", transform: "translateY(10px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "text-fade-out": {
+          from: { opacity: "1", transform: "translateY(0)" },
+          to: { opacity: "0", transform: "translateY(-10px)" },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "subtle-pulse": "subtle-pulse 2.5s infinite",
+        "text-fade-in": "text-fade-in 0.8s ease-in-out",
+        "text-fade-out": "text-fade-out 0.8s ease-in-out",
       },
     },
   },
