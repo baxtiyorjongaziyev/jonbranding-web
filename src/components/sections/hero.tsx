@@ -90,22 +90,20 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
               </Button>
             </div>
           </div>
-          <div className="hidden lg:block">
-            <div className="grid grid-cols-1 gap-4">
-                {heroImages.map((image, index) => (
-                     <div key={index} className={cn("relative shadow-lg aspect-video", image.className)}>
-                        <Image
-                            src={image.src}
-                            alt={image.alt}
-                            fill
-                            className="object-cover rounded-xl"
-                            data-ai-hint={image.hint}
-                            unoptimized
-                            sizes="(max-width: 1200px) 50vw, 33vw"
-                        />
-                    </div>
-                ))}
-            </div>
+          <div className="grid grid-cols-1 gap-4 mt-8 lg:mt-0">
+            {heroImages.map((image, index) => (
+                 <div key={index} className={cn("relative shadow-lg aspect-video", image.className)}>
+                    <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        className="object-cover rounded-xl"
+                        data-ai-hint={image.hint}
+                        unoptimized
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                </div>
+            ))}
           </div>
         </div>
 
