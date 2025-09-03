@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import dynamic from 'next/dynamic';
 import PageClient from '@/components/page-client';
 import Offer from '@/components/sections/offer';
-import Airtable, { type FieldSet, type Records, type Attachment } from 'airtable';
 import { type Brand } from '@/lib/airtable';
 
 // Dynamically import components that are not immediately visible
@@ -20,41 +19,10 @@ const staticBrands: Brand[] = [
 
 
 const getBrands = async (): Promise<Brand[]> => {
-    // Hardcoding credentials for server-side fetching to ensure reliability.
-    // This code runs only on the server, so these keys are not exposed to the client.
-    const apiKey = 'keyek4uDxgA6oZsBO';
-    const baseId = 'app8xoyx1XCumYFXV';
-    const tableName = 'Brands';
-
-    if (!apiKey || !baseId) {
-        console.error("Airtable config is hardcoded but missing.");
-        return staticBrands;
-    }
-
-    try {
-        const base = new Airtable({ apiKey }).base(baseId);
-        const records: Records<FieldSet> = await base(tableName).select({
-            view: "Grid view",
-            fields: ["Name", "Logo"],
-            filterByFormula: '{Name} != ""'
-        }).all();
-        
-        const brands = records.map(record => {
-            const logoField = record.get("Logo") as Attachment[];
-            const logoUrl = (logoField && logoField.length > 0) ? logoField[0].url : null;
-            
-            return {
-                name: record.get("Name") as string,
-                logo: logoUrl
-            };
-        });
-
-        return brands.length > 0 ? brands : staticBrands;
-
-    } catch(error) {
-        console.error(`Error fetching data from Airtable table ${tableName}:`, error);
-        return staticBrands;
-    }
+    // We are now returning a static list of brands instead of fetching from Airtable.
+    // This is more reliable and faster.
+    // To add or remove brands, you can edit the `staticBrands` array above.
+    return staticBrands;
 }
 
 
