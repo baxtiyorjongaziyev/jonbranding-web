@@ -142,6 +142,7 @@ const PageClient: FC<{ children: ReactNode }> = ({ children }) => {
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }} />
                 {children}
+                 <Offer onCTAClick={handleOpenModal} />
                 <BeforeAfter onCtaClick={handleOpenModal} />
                 <Video />
                 <PackageBuilder onOrderNow={handleOpenModal} />

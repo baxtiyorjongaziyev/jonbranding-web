@@ -12,10 +12,6 @@ const Home: FC = () => {
     <PageClient>
         <Testimonials />
         <Faq />
-        <Offer onCTAClick={() => {
-            const event = new CustomEvent('openContactModal');
-            window.dispatchEvent(event);
-        }} />
     </PageClient>
   );
 };
