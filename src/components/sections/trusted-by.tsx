@@ -33,19 +33,15 @@ const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], dir
             return (
                 <CarouselItem
                 key={index}
-                className="basis-1/3 sm:basis-1/4 md:basis-1/6 lg:basis-1/8 pl-4"
+                className="basis-1/3 sm:basis-1/4 md:basis-1/6 lg:basis-1/8 pl-4 h-20"
                 >
-                <div className="flex items-center justify-center p-2 filter grayscale hover:grayscale-0 transition-all duration-300 h-20">
+                <div className="flex items-center justify-center p-2 filter grayscale hover:grayscale-0 transition-all duration-300 h-full">
                     {brand.logo ? (
-                        <div className="relative w-full h-full">
-                            <Image
-                                src={brand.logo}
-                                alt={brand.name}
-                                fill
-                                sizes="120px"
-                                className="object-contain"
-                            />
-                        </div>
+                        <img
+                            src={brand.logo}
+                            alt={brand.name}
+                            className="object-contain max-w-full max-h-full"
+                        />
                     ) : (
                         <p className="font-semibold text-gray-500 text-base text-center whitespace-nowrap">{brand.name}</p>
                     )}
