@@ -8,7 +8,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Star, PlayCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import { type Testimonial } from '@/lib/airtable';
+import { type Testimonial } from '@/lib/types';
 
 const staticTestimonials: Testimonial[] = [
   {

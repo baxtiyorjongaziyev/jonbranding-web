@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import CtaBlock from './cta-block';
-import { type FaqItem } from '@/lib/airtable';
+import { type FaqItem } from '@/lib/types';
 import { useState, useEffect } from 'react';
 
 const staticFaqItems: FaqItem[] = [

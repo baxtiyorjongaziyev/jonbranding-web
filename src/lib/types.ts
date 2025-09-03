@@ -1,6 +1,4 @@
 
-import { type FC } from 'react';
-
 export interface FaqItem {
     question: string;
     answer: string;
