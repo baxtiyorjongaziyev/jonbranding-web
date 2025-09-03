@@ -2,55 +2,53 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from '@/components/ui/carousel';
-import Autoplay from 'embla-carousel-autoplay';
 import { type Brand } from '@/lib/types';
 import { cn } from '@/lib/utils';
 
-const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => (
-    <Carousel
-        plugins={[
-        Autoplay({
-            delay: 2000,
-            stopOnInteraction: false,
-            stopOnMouseEnter: true,
-            direction,
-        }),
-        ]}
-        opts={{
-        align: 'start',
-        loop: true,
-        }}
-        className="w-full"
-    >
-        <CarouselContent className="-ml-4">
-        {brands.map((brand, index) => {
-            return (
-                <CarouselItem
-                key={index}
-                className="basis-1/3 sm:basis-1/4 md:basis-1/6 lg:basis-1/8 pl-4 h-20"
-                >
-                <div className="flex items-center justify-center p-2 filter grayscale hover:grayscale-0 transition-all duration-300 h-full">
-                    {brand.logo ? (
-                        <img
-                            src={brand.logo}
-                            alt={brand.name}
-                            className="object-contain max-w-full max-h-full"
-                        />
-                    ) : (
-                        <p className="font-semibold text-gray-500 text-base text-center whitespace-nowrap">{brand.name}</p>
-                    )}
-                </div>
-                </CarouselItem>
-            );
-        })}
-        </CarouselContent>
-    </Carousel>
+const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => (
+    <div className="flex w-full overflow-hidden">
+      <ul className={cn(
+        "flex min-w-full shrink-0 items-center justify-around gap-12",
+        direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
+      )}>
+        {brands.map((brand, index) => (
+          <li key={index} className="flex-shrink-0 h-16 w-40 flex items-center justify-center">
+             <div className="flex items-center justify-center p-2 h-full w-full filter grayscale hover:grayscale-0 transition-all duration-300">
+                {brand.logo ? (
+                    <img
+                        src={brand.logo}
+                        alt={brand.name}
+                        className="object-contain max-w-full max-h-full"
+                    />
+                ) : (
+                    <p className="font-semibold text-gray-500 text-base text-center whitespace-nowrap">{brand.name}</p>
+                )}
+            </div>
+          </li>
+        ))}
+      </ul>
+      {/* Second list for seamless animation */}
+      <ul className={cn(
+        "flex min-w-full shrink-0 items-center justify-around gap-12",
+        direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
+      )} aria-hidden="true">
+        {brands.map((brand, index) => (
+          <li key={index + brands.length} className="flex-shrink-0 h-16 w-40 flex items-center justify-center">
+             <div className="flex items-center justify-center p-2 h-full w-full filter grayscale hover:grayscale-0 transition-all duration-300">
+                {brand.logo ? (
+                    <img
+                        src={brand.logo}
+                        alt={brand.name}
+                        className="object-contain max-w-full max-h-full"
+                    />
+                ) : (
+                    <p className="font-semibold text-gray-500 text-base text-center whitespace-nowrap">{brand.name}</p>
+                )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
 );
 
 interface TrustedByProps {
@@ -59,8 +57,8 @@ interface TrustedByProps {
 
 const TrustedBy: React.FC<TrustedByProps> = ({ brands }) => {
     const middleIndex = Math.ceil(brands.length / 2);
-    const brandsMovingLeft = brands.slice(0, middleIndex);
-    const brandsMovingRight = brands.slice(middleIndex);
+    const brandsTopRow = brands.slice(0, middleIndex);
+    const brandsBottomRow = brands.slice(middleIndex);
 
   return (
     <section className="py-12 bg-white overflow-hidden">
@@ -69,8 +67,8 @@ const TrustedBy: React.FC<TrustedByProps> = ({ brands }) => {
           Bizga ishonch bildirgan kompaniyalar
         </p>
         <div className="mt-8 flex flex-col gap-4">
-            <BrandCarousel brands={brandsMovingLeft} direction="forward" />
-            <BrandCarousel brands={brandsMovingRight} direction="backward" />
+            <Marquee brands={brandsTopRow} direction="forward" />
+            <Marquee brands={brandsBottomRow} direction="backward" />
         </div>
       </div>
     </section>

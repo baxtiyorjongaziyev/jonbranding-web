@@ -93,4 +93,21 @@
       box-shadow: 0 20px 25px -5px hsl(var(--accent) / 0.3), 0 8px 10px -6px hsl(var(--accent) / 0.3);
     }
   }
+
+  .animate-marquee-forward {
+    animation: marquee-forward 40s linear infinite;
+  }
+  .animate-marquee-backward {
+    animation: marquee-backward 40s linear infinite;
+  }
+
+  @keyframes marquee-forward {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  @keyframes marquee-backward {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
 }
