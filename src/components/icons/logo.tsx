@@ -1,16 +1,12 @@
+import Image from 'next/image';
+
 export const Logo = ({ isWhite = false }) => (
-  <svg width="200" height="40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <text
-      x="0"
-      y="28"
-      fontFamily="Inter, sans-serif"
-      fontSize="28"
-      fontWeight="500"
-      fill={isWhite ? 'white' : 'hsl(var(--foreground))'}
-    >
-      <tspan>Jon</tspan>
-      <tspan fill="hsl(var(--accent))">.</tspan>
-      <tspan>Branding</tspan>
-    </text>
-  </svg>
+    <Image
+      src="https://img4.teletype.in/files/fc/d0/fcd09308-b559-4818-8570-dc078bfa0915.png"
+      alt="Jon.Branding Logo"
+      width={160}
+      height={32}
+      className={isWhite ? 'filter brightness-0 invert' : ''}
+      priority
+    />
 );
