@@ -1,7 +1,6 @@
-
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -161,20 +160,24 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
   )
 }
 
-const Testimonials = async () => {
-    let testimonials: Testimonial[] = staticTestimonials;
-    try {
-        const airtableTestimonials = await getTestimonials();
-        if (airtableTestimonials && airtableTestimonials.length > 0) {
-            testimonials = airtableTestimonials;
+const Testimonials = () => {
+    const [testimonials, setTestimonials] = useState<Testimonial[]>(staticTestimonials);
+
+    useEffect(() => {
+      const fetchTestimonials = async () => {
+        try {
+          const airtableTestimonials = await getTestimonials();
+          if (airtableTestimonials && airtableTestimonials.length > 0) {
+              setTestimonials(airtableTestimonials);
+          }
+        } catch (error) {
+            console.error("Failed to fetch testimonials from Airtable, using static data.", error);
         }
-    } catch (error) {
-        console.error("Failed to fetch testimonials from Airtable, using static data.", error);
-    }
+      };
+      fetchTestimonials();
+    }, []);
 
     return <TestimonialsClient testimonials={testimonials} />
 };
 
 export default Testimonials;
-
-    
