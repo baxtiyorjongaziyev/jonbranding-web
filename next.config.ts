@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  publicRuntimeConfig: {
+  env: {
       AIRTABLE_API_KEY: 'keyek4uDxgA6oZsBO',
       AIRTABLE_BASE_ID: 'app8xoyx1XCumYFXV',
       AIRTABLE_TABLE_NAME_FAQ: 'FAQ',

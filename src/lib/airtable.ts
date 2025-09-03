@@ -1,6 +1,5 @@
 
 import Airtable, { type FieldSet, type Records, type Attachment } from 'airtable';
-import getConfig from 'next/config';
 
 export interface FaqItem {
     question: string;
@@ -24,12 +23,11 @@ export interface Brand {
 
 
 const getAirtableBase = () => {
-    const { publicRuntimeConfig } = getConfig() || {};
-    const apiKey = publicRuntimeConfig?.AIRTABLE_API_KEY;
-    const baseId = publicRuntimeConfig?.AIRTABLE_BASE_ID;
+    const apiKey = process.env.AIRTABLE_API_KEY;
+    const baseId = process.env.AIRTABLE_BASE_ID;
     
     if (!apiKey || !baseId) {
-        console.warn("Airtable public runtime config (AIRTABLE_API_KEY, AIRTABLE_BASE_ID) are not set.");
+        console.warn("Airtable environment variables (AIRTABLE_API_KEY, AIRTABLE_BASE_ID) are not set.");
         return null;
     }
     return new Airtable({ apiKey }).base(baseId);
@@ -41,8 +39,7 @@ export const getFaqItems = async (): Promise<FaqItem[]> => {
         return [];
     }
     
-    const { publicRuntimeConfig } = getConfig() || {};
-    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
+    const table = process.env.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
     
     try {
         const records: Records<FieldSet> = await base(table).select({
@@ -66,8 +63,7 @@ export const getTestimonials = async (): Promise<Testimonial[] | null> => {
      if (!base) {
         return null;
     }
-    const { publicRuntimeConfig } = getConfig() || {};
-    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
+    const table = process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
     
     try {
         const records: Records<FieldSet> = await base(table).select({
@@ -96,8 +92,7 @@ export const getBrands = async (): Promise<Brand[] | null> => {
     if (!base) {
         return null;
     }
-    const { publicRuntimeConfig } = getConfig() || {};
-    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
+    const table = process.env.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
 
     try {
         const records: Records<FieldSet> = await base(table).select({
@@ -121,4 +116,3 @@ export const getBrands = async (): Promise<Brand[] | null> => {
         return null;
     }
 }
-    
