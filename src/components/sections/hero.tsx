@@ -9,6 +9,8 @@ import {CheckCircle, Search} from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import Parallax from '../parallax-provider';
+
 
 interface HeroProps {
   onPrimaryClick: () => void;
@@ -67,8 +69,12 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
   return (
     <section className="relative bg-background py-12 sm:py-16 overflow-hidden">
        <div aria-hidden="true" className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[40rem] h-[40rem] bg-accent/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[50rem] h-[50rem] bg-primary/5 rounded-full blur-3xl"></div>
+          <Parallax speed={0.4}>
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[40rem] h-[40rem] bg-accent/10 rounded-full blur-3xl"></div>
+          </Parallax>
+          <Parallax speed={0.7}>
+            <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[50rem] h-[50rem] bg-primary/5 rounded-full blur-3xl"></div>
+          </Parallax>
       </div>
       <div className="relative z-10 container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
