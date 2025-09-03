@@ -34,10 +34,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
   title = "Uchta ichidan ikkitani tanlang",
   subtitle = "Narx—Sifat—Tezlik: bir vaqtning o‘zida uchtalasi kamdan-kam to‘g‘ri keladi.",
   ctaText = "Taklif so‘rash",
-  onCtaClick = () => {
-    const el = document.getElementById('package-builder');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  },
+  onCtaClick,
 }) => {
   const [selected, setSelected] = useState<OptionKey[]>([]);
   const [isClient, setIsClient] = useState(false);
@@ -76,6 +73,15 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
       
       return newSelection.length > 2 ? prev : newSelection;
     });
+  };
+  
+  const handleCta = () => {
+    if (onCtaClick) {
+      onCtaClick();
+    } else {
+        const el = document.getElementById('package-builder');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const result = useMemo(() => {
@@ -160,7 +166,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
               size="lg"
               className="text-lg shadow-ocean animate-subtle-pulse disabled:shadow-none disabled:animate-none"
               disabled={selected.length !== 2}
-              onClick={onCtaClick}
+              onClick={handleCta}
             >
               {ctaText}
             </Button>

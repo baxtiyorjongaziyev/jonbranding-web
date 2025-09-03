@@ -47,7 +47,8 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
     if (magnet.action === 'onCtaClick') {
       onCtaClick();
     } else if (magnet.href?.startsWith('#')) {
-        const el = document.getElementById(magnet.href.substring(1));
+        const elementId = magnet.href.substring(1);
+        const el = document.getElementById(elementId);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -87,7 +88,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
                     </Link>
                 ) : (
                     <Button onClick={() => handleClick(magnet)} className="w-full shadow-md hover:shadow-lg transition-shadow">
-                        {magnet.icon === Download || magnet.icon === FileText ? <Download className="w-4 h-4 mr-2" /> : <ArrowRight className="w-4 h-4 mr-2" />}
+                        {magnet.id === 'video' ? <Film className="w-4 h-4 mr-2" /> : <Download className="w-4 h-4 mr-2" />}
                         {magnet.cta}
                     </Button>
                 )}
