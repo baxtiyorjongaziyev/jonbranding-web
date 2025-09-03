@@ -8,8 +8,14 @@ const Testimonials = dynamic(() => import('@/components/sections/testimonials'))
 const Faq = dynamic(() => import('@/components/sections/faq'));
 
 const Home: FC = () => {
+  const handleOpenModal = () => {
+    const event = new CustomEvent('openContactModal');
+    window.dispatchEvent(event);
+  };
+  
   return (
     <PageClient>
+        <Offer onCTAClick={handleOpenModal} />
         <Testimonials />
         <Faq />
     </PageClient>
