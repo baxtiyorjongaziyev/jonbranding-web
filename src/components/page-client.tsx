@@ -1,3 +1,4 @@
+
 'use client';
 
 import type { FC, ReactNode } from 'react';
@@ -15,12 +16,9 @@ import Offer from '@/components/sections/offer';
 // Dynamically import components that are not immediately visible
 const Founder = dynamic(() => import('@/components/sections/founder'));
 const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'));
-const Stats = dynamic(() => import('@/components/sections/stats'));
 const WhyUs = dynamic(() => import('@/components/sections/why-us'));
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const QueueStatus = dynamic(() => import('@/components/sections/queue-status'));
-const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
-const PickTwoSelector = dynamic(() => import('@/components/sections/pick-two-selector'));
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
 const Video = dynamic(() => import('@/components/sections/video'));
 const PackageBuilder = dynamic(() => import('@/components/sections/package-builder'));
@@ -132,17 +130,10 @@ const PageClient: FC<{ children: ReactNode }> = ({ children }) => {
                 <TrustedBy />
                 <Founder />
                 <LeadMagnet onCtaClick={handleOpenModal} />
-                <Stats />
                 <WhyUs onCtaClick={handleOpenModal} />
                 <Gallery onCtaClick={handleOpenModal} />
                 <QueueStatus onCtaClick={handleOpenModal} />
-                <TargetAudience />
-                <PickTwoSelector onCtaClick={() => {
-                    const el = document.getElementById('package-builder');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }} />
                 {children}
-                 <Offer onCTAClick={handleOpenModal} />
                 <BeforeAfter onCtaClick={handleOpenModal} />
                 <Video />
                 <PackageBuilder onOrderNow={handleOpenModal} />
