@@ -2,20 +2,20 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { Card } from '@/components/ui/card';
 import { getBrands, type Brand } from '@/lib/airtable';
 
 const staticBrands: Brand[] = [
-  { name: 'Korsun' }, { name: 'Boyarin' }, { name: 'Sarmilk' }, { name: 'M-Karim' }, { name: 'Prime Fit' }, { name: 'Revo' }, { name: 'To\'maris' }, 
-  { name: 'Aisha Mebel' }, { name: 'Den Aroma' }, { name: 'Velzo' }, { name: 'Bodomchi' },
-  { name: 'Fidda by Sevara' }, { name: 'Viton' }, { name: 'Ravza Mebel' }, { name: 'Coloray' }, { name: 'Dayan Color' }, { name: 'Bekbazar' }, 
-  { name: 'Climart' }, { name: 'Sunnah Products' }, { name: 'Petron Polymer' }, { name: 'Perfona' }, { name: 'Esviro' }, { name: 'Savod' }
+  { name: 'Korsun', logo: null }, { name: 'Boyarin', logo: null }, { name: 'Sarmilk', logo: null }, { name: 'M-Karim', logo: null }, { name: 'Prime Fit', logo: null }, { name: 'Revo', logo: null }, { name: 'To\'maris', logo: null }, 
+  { name: 'Aisha Mebel', logo: null }, { name: 'Den Aroma', logo: null }, { name: 'Velzo', logo: null }, { name: 'Bodomchi', logo: null },
+  { name: 'Fidda by Sevara', logo: null }, { name: 'Viton', logo: null }, { name: 'Ravza Mebel', logo: null }, { name: 'Coloray', logo: null }, { name: 'Dayan Color', logo: null }, { name: 'Bekbazar', logo: null }, 
+  { name: 'Climart', logo: null }, { name: 'Sunnah Products', logo: null }, { name: 'Petron Polymer', logo: null }, { name: 'Perfona', logo: null }, { name: 'Esviro', logo: null }, { name: 'Savod', logo: null }
 ];
 
 const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => (
@@ -38,14 +38,22 @@ const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], dir
         {brands.map((brand, index) => (
             <CarouselItem
             key={index}
-            className="basis-auto pl-4"
+            className="basis-1/3 sm:basis-1/4 md:basis-1/6 lg:basis-1/8 pl-4"
             >
              <div className="h-12 flex items-center justify-center p-4 filter grayscale hover:grayscale-0 transition-all duration-300">
-                {/* 
-                  Ideal variant: SVG logotipini joylash
-                  <img src="/logos/brand.svg" alt={brand.name} className="h-full w-auto object-contain" /> 
-                */}
-                <p className="font-semibold text-gray-500 text-lg">{brand.name}</p>
+                {brand.logo ? (
+                     <div className="relative w-full h-full">
+                        <Image 
+                            src={brand.logo}
+                            alt={brand.name}
+                            fill
+                            sizes="(max-width: 768px) 10vw, (max-width: 1200px) 8vw, 6vw"
+                            className="object-contain"
+                        />
+                    </div>
+                ) : (
+                    <p className="font-semibold text-gray-500 text-lg text-center whitespace-nowrap">{brand.name}</p>
+                )}
              </div>
             </CarouselItem>
         ))}

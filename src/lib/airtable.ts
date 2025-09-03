@@ -1,5 +1,5 @@
 
-import Airtable, { type FieldSet, type Records } from 'airtable';
+import Airtable, { type FieldSet, type Records, type Attachment } from 'airtable';
 
 export interface FaqItem {
     question: string;
@@ -18,6 +18,7 @@ export interface Testimonial {
 
 export interface Brand {
     name: string;
+    logo: string | null;
 }
 
 
@@ -95,13 +96,19 @@ export const getBrands = async (): Promise<Brand[] | null> => {
     try {
         const records: Records<FieldSet> = await base(table).select({
             view: "Grid view",
-            fields: ["Name"],
+            fields: ["Name", "Logo"],
             filterByFormula: '{Name} != ""'
         }).all();
         
-        return records.map(record => ({
-            name: record.get("Name") as string,
-        }));
+        return records.map(record => {
+            const logoField = record.get("Logo") as Attachment[];
+            const logoUrl = (logoField && logoField.length > 0) ? logoField[0].url : null;
+            
+            return {
+                name: record.get("Name") as string,
+                logo: logoUrl
+            };
+        });
 
     } catch(error) {
         console.error(`Error fetching data from Airtable table ${table}:`, error);
