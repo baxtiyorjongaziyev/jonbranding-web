@@ -26,22 +26,21 @@ const getAirtableBase = () => {
     const apiKey = process.env.AIRTABLE_API_KEY;
     const baseId = process.env.AIRTABLE_BASE_ID;
     
-    if (!apiKey || !baseId) {
-        console.warn("Airtable environment variables (AIRTABLE_API_KEY, AIRTABLE_BASE_ID) are not set.");
-        return null;
+    if (!apiKey) {
+        throw new Error("Airtable API Key is not set in environment variables.");
     }
+    if (!baseId) {
+        throw new Error("Airtable Base ID is not set in environment variables.");
+    }
+    
     return new Airtable({ apiKey }).base(baseId);
 };
 
 export const getFaqItems = async (): Promise<FaqItem[]> => {
-    const base = getAirtableBase();
-    if (!base) {
-        return [];
-    }
-    
-    const table = process.env.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
-    
     try {
+        const base = getAirtableBase();
+        const table = process.env.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
+        
         const records: Records<FieldSet> = await base(table).select({
             view: "Grid view",
             fields: ["Question", "Answer"], 
@@ -53,19 +52,16 @@ export const getFaqItems = async (): Promise<FaqItem[]> => {
             answer: record.get("Answer") as string,
         }));
     } catch (error) {
-        console.error(`Error fetching data from Airtable table ${table}:`, error);
+        console.error(`Error fetching data from Airtable table FAQ:`, error);
         return [];
     }
 };
 
 export const getTestimonials = async (): Promise<Testimonial[] | null> => {
-    const base = getAirtableBase();
-     if (!base) {
-        return null;
-    }
-    const table = process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
-    
     try {
+        const base = getAirtableBase();
+        const table = process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
+        
         const records: Records<FieldSet> = await base(table).select({
             view: "Grid view",
             fields: ["name", "company", "avatar", "image", "imageHint", "quote", "videoUrl"],
@@ -82,19 +78,16 @@ export const getTestimonials = async (): Promise<Testimonial[] | null> => {
             videoUrl: record.get("videoUrl") as string | undefined,
         }));
     } catch (error) {
-        console.error(`Error fetching data from Airtable table ${table}:`, error);
+        console.error(`Error fetching data from Airtable table Testimonials:`, error);
         return null;
     }
 }
 
 export const getBrands = async (): Promise<Brand[] | null> => {
-    const base = getAirtableBase();
-    if (!base) {
-        return null;
-    }
-    const table = process.env.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
-
     try {
+        const base = getAirtableBase();
+        const table = process.env.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
+
         const records: Records<FieldSet> = await base(table).select({
             view: "Grid view",
             fields: ["Name", "Logo"],

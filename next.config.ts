@@ -10,13 +10,6 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  env: {
-      AIRTABLE_API_KEY: 'keyek4uDxgA6oZsBO',
-      AIRTABLE_BASE_ID: 'app8xoyx1XCumYFXV',
-      AIRTABLE_TABLE_NAME_FAQ: 'FAQ',
-      AIRTABLE_TABLE_NAME_TESTIMONIALS: 'Testimonials',
-      AIRTABLE_TABLE_NAME_BRANDS: 'Brands',
-  },
   images: {
     remotePatterns: [
       {
