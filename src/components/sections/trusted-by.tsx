@@ -10,6 +10,8 @@ import {
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { type Brand } from '@/lib/airtable';
+import { cn } from '@/lib/utils';
+import { DenAromaLogo } from '@/components/icons/brands/den-aroma';
 
 const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => (
     <Carousel
@@ -28,28 +30,33 @@ const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], dir
         className="w-full"
     >
         <CarouselContent className="-ml-4">
-        {brands.map((brand, index) => (
-            <CarouselItem
-            key={index}
-            className="basis-1/3 sm:basis-1/4 md:basis-1/6 lg:basis-1/8 pl-4"
-            >
-             <div className="h-12 flex items-center justify-center p-4 filter grayscale hover:grayscale-0 transition-all duration-300">
-                {brand.logo ? (
-                     <div className="relative w-full h-full">
-                        <Image 
-                            src={brand.logo}
-                            alt={brand.name}
-                            fill
-                            sizes="(max-width: 768px) 10vw, (max-width: 1200px) 8vw, 6vw"
-                            className="object-contain"
-                        />
-                    </div>
-                ) : (
-                    <p className="font-semibold text-gray-500 text-lg text-center whitespace-nowrap">{brand.name}</p>
-                )}
-             </div>
-            </CarouselItem>
-        ))}
+        {brands.map((brand, index) => {
+            const isDenAroma = brand.name === 'Den Aroma';
+            return (
+                <CarouselItem
+                key={index}
+                className="basis-1/3 sm:basis-1/4 md:basis-1/6 lg:basis-1/8 pl-4"
+                >
+                <div className={cn("h-12 flex items-center justify-center p-2 filter grayscale hover:grayscale-0 transition-all duration-300", !isDenAroma && "p-4")}>
+                    {isDenAroma ? (
+                        <DenAromaLogo className="h-full w-auto" />
+                    ) : brand.logo ? (
+                        <div className="relative w-full h-full">
+                            <Image 
+                                src={brand.logo}
+                                alt={brand.name}
+                                fill
+                                sizes="(max-width: 768px) 10vw, (max-width: 1200px) 8vw, 6vw"
+                                className="object-contain"
+                            />
+                        </div>
+                    ) : (
+                        <p className="font-semibold text-gray-500 text-lg text-center whitespace-nowrap">{brand.name}</p>
+                    )}
+                </div>
+                </CarouselItem>
+            );
+        })}
         </CarouselContent>
     </Carousel>
 );
