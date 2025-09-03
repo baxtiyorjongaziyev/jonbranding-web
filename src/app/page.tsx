@@ -20,12 +20,14 @@ const staticBrands: Brand[] = [
 
 
 const getBrands = async (): Promise<Brand[]> => {
-    const apiKey = process.env.NEXT_PUBLIC_AIRTABLE_API_KEY;
-    const baseId = process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID;
-    const tableName = process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
+    // Hardcoding credentials for server-side fetching to ensure reliability.
+    // This code runs only on the server, so these keys are not exposed to the client.
+    const apiKey = 'keyek4uDxgA6oZsBO';
+    const baseId = 'app8xoyx1XCumYFXV';
+    const tableName = 'Brands';
 
     if (!apiKey || !baseId) {
-        console.error("Airtable config is missing in environment variables.");
+        console.error("Airtable config is hardcoded but missing.");
         return staticBrands;
     }
 
