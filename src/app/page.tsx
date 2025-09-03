@@ -11,7 +11,7 @@ const Faq = dynamic(() => import('@/components/sections/faq'));
 
 
 const staticBrands: Brand[] = [
-  { name: 'Korsun', logo: null }, { name: 'Boyarin', logo: null }, { name: 'Sarmilk', logo: null }, { name: 'M-Karim', logo: null }, { name: 'Prime Fit', logo: null }, { name: 'Revo', logo: null }, { name: 'To\'maris', logo: null }, 
+  { name: 'Korsun', logo: 'https://img2.teletype.in/files/5a/82/5a828854-35e3-469b-98a7-24a3501a2434.png' }, { name: 'Boyarin', logo: null }, { name: 'Sarmilk', logo: null }, { name: 'M-Karim', logo: null }, { name: 'Prime Fit', logo: null }, { name: 'Revo', logo: null }, { name: 'To\'maris', logo: null }, 
   { name: 'Aisha Mebel', logo: null }, { name: 'Den Aroma', logo: 'https://picsum.photos/seed/denaroma/280/60' }, { name: 'Velzo', logo: null }, { name: 'Bodomchi', logo: null },
   { name: 'Fidda by Sevara', logo: null }, { name: 'Viton', logo: null }, { name: 'Ravza Mebel', logo: null }, { name: 'Coloray', logo: null }, { name: 'Dayan Color', logo: null }, { name: 'Bekbazar', logo: null }, 
   { name: 'Climart', logo: null }, { name: 'Sunnah Products', logo: null }, { name: 'Petron Polymer', logo: null }, { name: 'Perfona', logo: null }, { name: 'Esviro', logo: null }, { name: 'Savod', logo: null }
