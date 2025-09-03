@@ -37,9 +37,9 @@ const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], dir
                 key={index}
                 className="basis-1/3 sm:basis-1/4 md:basis-1/6 lg:basis-1/8 pl-4"
                 >
-                <div className={cn("h-12 flex items-center justify-center p-2 filter grayscale hover:grayscale-0 transition-all duration-300", !isDenAroma && "p-4")}>
+                <div className="h-12 flex items-center justify-center p-2 filter grayscale hover:grayscale-0 transition-all duration-300">
                     {isDenAroma ? (
-                        <DenAromaLogo className="h-full w-auto" />
+                        <DenAromaLogo />
                     ) : brand.logo ? (
                         <div className="relative w-full h-full">
                             <Image 
