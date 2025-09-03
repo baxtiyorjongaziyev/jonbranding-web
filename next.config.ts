@@ -42,12 +42,6 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'v5.airtableusercontent.com',
-        port: '',
-        pathname: '/**',
-      }
     ],
   },
 };
