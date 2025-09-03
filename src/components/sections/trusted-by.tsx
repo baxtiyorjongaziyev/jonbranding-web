@@ -38,11 +38,11 @@ const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], dir
                 <div className="flex items-center justify-center p-2 filter grayscale hover:grayscale-0 transition-all duration-300 h-20">
                     {brand.logo ? (
                         <div className="relative w-full h-full">
-                            <Image 
+                            <Image
                                 src={brand.logo}
                                 alt={brand.name}
                                 fill
-                                sizes="(max-width: 768px) 10vw, (max-width: 1200px) 8vw, 6vw"
+                                sizes="120px"
                                 className="object-contain"
                             />
                         </div>
