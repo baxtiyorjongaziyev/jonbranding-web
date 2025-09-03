@@ -1,9 +1,9 @@
-import { Medal, Users, Briefcase } from 'lucide-react';
+import { Medal, Users, Star } from 'lucide-react';
 
 const stats = [
   { icon: Medal, value: "9+", label: "Yillik tajriba" },
   { icon: Users, value: "500+", label: "Mamnun mijozlar" },
-  { icon: Briefcase, value: "1000+", label: "Muvaffaqiyatli loyiha" }
+  { icon: Star, value: "90%", label: "Mijozlar tavsiya qilishadi" }
 ];
 
 const Stats = () => {
