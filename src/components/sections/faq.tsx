@@ -1,3 +1,4 @@
+
 'use client';
 import {
   Accordion,
@@ -6,7 +7,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import CtaBlock from './cta-block';
-import { getFaqItems, type FaqItem } from '@/lib/airtable';
+import { type FaqItem } from '@/lib/airtable';
 import { useState, useEffect } from 'react';
 
 const staticFaqItems: FaqItem[] = [
@@ -80,17 +81,8 @@ const Faq = () => {
   const [faqItems, setFaqItems] = useState<FaqItem[]>(staticFaqItems);
 
   useEffect(() => {
-    const fetchFaqs = async () => {
-      try {
-        const airtableItems = await getFaqItems();
-        if (airtableItems.length > 0) {
-          setFaqItems(airtableItems);
-        }
-      } catch (error) {
-        console.error("Failed to fetch FAQ items from Airtable, using static data.", error);
-      }
-    };
-    fetchFaqs();
+    // Data is now static, no need to fetch
+    setFaqItems(staticFaqItems);
   }, []);
   
 

@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -7,7 +8,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Star, PlayCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import { getTestimonials, type Testimonial } from '@/lib/airtable';
+import { type Testimonial } from '@/lib/airtable';
 
 const staticTestimonials: Testimonial[] = [
   {
@@ -164,17 +165,8 @@ const Testimonials = () => {
     const [testimonials, setTestimonials] = useState<Testimonial[]>(staticTestimonials);
 
     useEffect(() => {
-      const fetchTestimonials = async () => {
-        try {
-          const airtableTestimonials = await getTestimonials();
-          if (airtableTestimonials && airtableTestimonials.length > 0) {
-              setTestimonials(airtableTestimonials);
-          }
-        } catch (error) {
-            console.error("Failed to fetch testimonials from Airtable, using static data.", error);
-        }
-      };
-      fetchTestimonials();
+        // Data is now static, no need to fetch.
+        setTestimonials(staticTestimonials);
     }, []);
 
     return <TestimonialsClient testimonials={testimonials} />
