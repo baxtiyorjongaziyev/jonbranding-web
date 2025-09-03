@@ -1,11 +1,11 @@
 
 'use client';
 
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Star, PlayCircle } from 'lucide-react';
-import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { getTestimonials, type Testimonial } from '@/lib/airtable';
@@ -131,19 +131,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     );
 };
 
-
-const Testimonials = async () => {
-    let testimonials: Testimonial[] = staticTestimonials;
-    try {
-        const airtableTestimonials = await getTestimonials();
-        if (airtableTestimonials.length > 0) {
-            testimonials = airtableTestimonials;
-        }
-    } catch (error) {
-        console.error("Failed to fetch testimonials from Airtable, using static data.", error);
-    }
-
-
+const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
   return (
     <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
@@ -170,7 +158,21 @@ const Testimonials = async () => {
         </div>
       </div>
     </section>
-  );
+  )
+}
+
+const Testimonials = async () => {
+    let testimonials: Testimonial[] = staticTestimonials;
+    try {
+        const airtableTestimonials = await getTestimonials();
+        if (airtableTestimonials.length > 0) {
+            testimonials = airtableTestimonials;
+        }
+    } catch (error) {
+        console.error("Failed to fetch testimonials from Airtable, using static data.", error);
+    }
+
+    return <TestimonialsClient testimonials={testimonials} />
 };
 
 export default Testimonials;
