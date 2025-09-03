@@ -65,7 +65,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
   }, []);
 
   return (
-    <section className="bg-background py-20 sm:py-28">
+    <section className="bg-background py-12 sm:py-16">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
