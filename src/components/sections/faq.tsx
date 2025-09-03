@@ -1,3 +1,4 @@
+'use client';
 import {
   Accordion,
   AccordionContent,
@@ -6,6 +7,7 @@ import {
 } from '@/components/ui/accordion';
 import CtaBlock from './cta-block';
 import { getFaqItems, type FaqItem } from '@/lib/airtable';
+import { useState, useEffect } from 'react';
 
 const staticFaqItems: FaqItem[] = [
    {
@@ -34,8 +36,12 @@ const staticFaqItems: FaqItem[] = [
   },
 ];
 
-const FaqClient = ({ items, onCtaClick }: { items: FaqItem[], onCtaClick: () => void; }) => {
-  'use client';
+const FaqClient = ({ items }: { items: FaqItem[] }) => {
+  const handleOpenModal = () => {
+    const event = new CustomEvent('openContactModal');
+    window.dispatchEvent(event);
+  }
+  
   return (
     <section id="faq" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
@@ -64,29 +70,31 @@ const FaqClient = ({ items, onCtaClick }: { items: FaqItem[], onCtaClick: () => 
         title="Ikkilanishlarga o'rin qoldirmang!"
         description="Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni keyingi bosqichga olib chiqamiz."
         buttonText="Barcha savollarga javob oldim, boshlashga tayyorman!"
-        onCtaClick={onCtaClick}
+        onCtaClick={handleOpenModal}
       />
     </section>
   )
 }
 
+const Faq = () => {
+  const [faqItems, setFaqItems] = useState<FaqItem[]>(staticFaqItems);
 
-interface FaqProps {
-  onCtaClick: () => void;
-}
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const airtableItems = await getFaqItems();
+        if (airtableItems.length > 0) {
+          setFaqItems(airtableItems);
+        }
+      } catch (error) {
+        console.error("Failed to fetch FAQ items from Airtable, using static data.", error);
+      }
+    };
+    fetchFaqs();
+  }, []);
+  
 
-const Faq: React.FC<FaqProps> = async ({ onCtaClick }) => {
-  let faqItems: FaqItem[] = staticFaqItems;
-  try {
-    const airtableItems = await getFaqItems();
-    if (airtableItems.length > 0) {
-      faqItems = airtableItems;
-    }
-  } catch (error) {
-    console.error("Failed to fetch FAQ items from Airtable, using static data.", error);
-  }
-
-  return <FaqClient items={faqItems} onCtaClick={onCtaClick} />;
+  return <FaqClient items={faqItems} />;
 };
 
 export default Faq;
