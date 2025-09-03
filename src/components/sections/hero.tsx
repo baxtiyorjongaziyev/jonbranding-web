@@ -9,18 +9,11 @@ import {CheckCircle, Search} from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import Parallax from '../parallax-provider';
 
 
 interface HeroProps {
   onPrimaryClick: () => void;
 }
-
-const trustPills = [
-    { title: "Nega bu xizmat?", description: "Chunki kuchli brending sizni raqobatchilardan ajratib turadi va daromadingizni oshiradi." },
-    { title: "Nega aynan biz?", description: "50+ muvaffaqiyatli loyiha, 3 davlatda tajriba va har bir bosqichda siz bilan hamkorlik." },
-    { title: "Nega aynan hozir?", description: "PCG a'zolari uchun maxsus -50% chegirmadan foydalanib qoling!" }
-];
 
 const headlines = [
   <>Shunchaki chiroyli emas, balki <span className="text-accent">ishlaydigan</span> brending.</>,
@@ -111,20 +104,6 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
                 </div>
             ))}
           </div>
-        </div>
-
-        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {trustPills.map((pill, index) => (
-                <Card key={index} className="text-left bg-card/70 backdrop-blur-sm border-border/60 shadow-sm hover:shadow-md transition-shadow">
-                    <CardContent className="p-5 flex items-start gap-4">
-                        <CheckCircle className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                        <div>
-                            <h3 className="font-bold text-card-foreground text-base">{pill.title}</h3>
-                            <p className="text-muted-foreground text-sm">{pill.description}</p>
-                        </div>
-                    </CardContent>
-                </Card>
-            ))}
         </div>
       </div>
     </section>
