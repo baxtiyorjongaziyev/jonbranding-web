@@ -40,9 +40,13 @@ const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], dir
             key={index}
             className="basis-auto pl-4"
             >
-            <Card className="px-5 py-3 whitespace-nowrap bg-secondary/50 border-gray-200">
-                <p className="font-semibold text-gray-700">{brand.name}</p>
-            </Card>
+             <div className="h-12 flex items-center justify-center p-4 filter grayscale hover:grayscale-0 transition-all duration-300">
+                {/* 
+                  Ideal variant: SVG logotipini joylash
+                  <img src="/logos/brand.svg" alt={brand.name} className="h-full w-auto object-contain" /> 
+                */}
+                <p className="font-semibold text-gray-500 text-lg">{brand.name}</p>
+             </div>
             </CarouselItem>
         ))}
         </CarouselContent>
