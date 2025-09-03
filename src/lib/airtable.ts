@@ -24,12 +24,12 @@ export interface Brand {
 
 
 const getAirtableBase = () => {
-    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig() || {};
-    const apiKey = publicRuntimeConfig?.AIRTABLE_API_KEY || process.env.AIRTABLE_API_KEY;
-    const baseId = publicRuntimeConfig?.AIRTABLE_BASE_ID || process.env.AIRTABLE_BASE_ID;
+    const { publicRuntimeConfig } = getConfig() || {};
+    const apiKey = publicRuntimeConfig?.AIRTABLE_API_KEY;
+    const baseId = publicRuntimeConfig?.AIRTABLE_BASE_ID;
     
     if (!apiKey || !baseId) {
-        console.warn("Airtable environment variables (AIRTABLE_API_KEY, AIRTABLE_BASE_ID) are not set.");
+        console.warn("Airtable public runtime config (AIRTABLE_API_KEY, AIRTABLE_BASE_ID) are not set.");
         return null;
     }
     return new Airtable({ apiKey }).base(baseId);
@@ -42,7 +42,7 @@ export const getFaqItems = async (): Promise<FaqItem[]> => {
     }
     
     const { publicRuntimeConfig } = getConfig() || {};
-    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_FAQ || process.env.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
+    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
     
     try {
         const records: Records<FieldSet> = await base(table).select({
@@ -67,7 +67,7 @@ export const getTestimonials = async (): Promise<Testimonial[] | null> => {
         return null;
     }
     const { publicRuntimeConfig } = getConfig() || {};
-    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_TESTIMONIALS || process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
+    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
     
     try {
         const records: Records<FieldSet> = await base(table).select({
@@ -97,7 +97,7 @@ export const getBrands = async (): Promise<Brand[] | null> => {
         return null;
     }
     const { publicRuntimeConfig } = getConfig() || {};
-    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_BRANDS || process.env.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
+    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
 
     try {
         const records: Records<FieldSet> = await base(table).select({

@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './.env.local' });
+
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
@@ -11,11 +11,11 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   publicRuntimeConfig: {
-      AIRTABLE_API_KEY: process.env.AIRTABLE_API_KEY,
-      AIRTABLE_BASE_ID: process.env.AIRTABLE_BASE_ID,
-      AIRTABLE_TABLE_NAME_FAQ: process.env.AIRTABLE_TABLE_NAME_FAQ,
-      AIRTABLE_TABLE_NAME_TESTIMONIALS: process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS,
-      AIRTABLE_TABLE_NAME_BRANDS: process.env.AIRTABLE_TABLE_NAME_BRANDS,
+      AIRTABLE_API_KEY: 'keyek4uDxgA6oZsBO',
+      AIRTABLE_BASE_ID: 'app8xoyx1XCumYFXV',
+      AIRTABLE_TABLE_NAME_FAQ: 'FAQ',
+      AIRTABLE_TABLE_NAME_TESTIMONIALS: 'Testimonials',
+      AIRTABLE_TABLE_NAME_BRANDS: 'Brands',
   },
   images: {
     remotePatterns: [
