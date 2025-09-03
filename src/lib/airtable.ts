@@ -16,6 +16,10 @@ export interface Testimonial {
     videoUrl?: string;
 }
 
+export interface Brand {
+    name: string;
+}
+
 
 const getAirtableBase = () => {
     const apiKey = process.env.AIRTABLE_API_KEY;
@@ -81,4 +85,27 @@ export const getTestimonials = async (): Promise<Testimonial[] | null> => {
     }
 }
 
+export const getBrands = async (): Promise<Brand[] | null> => {
+    const base = getAirtableBase();
+    if (!base) {
+        return null;
+    }
+    const table = process.env.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
+
+    try {
+        const records: Records<FieldSet> = await base(table).select({
+            view: "Grid view",
+            fields: ["Name"],
+            filterByFormula: '{Name} != ""'
+        }).all();
+        
+        return records.map(record => ({
+            name: record.get("Name") as string,
+        }));
+
+    } catch(error) {
+        console.error(`Error fetching data from Airtable table ${table}:`, error);
+        return null;
+    }
+}
     

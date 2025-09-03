@@ -1,6 +1,7 @@
+
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -8,18 +9,68 @@ import {
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { Card } from '@/components/ui/card';
+import { getBrands, type Brand } from '@/lib/airtable';
 
-const brandsMovingLeft = [
-  'Korsun', 'Boyarin', 'Sarmilk', 'M-Karim', 'Prime Fit', 'Revo', 'To\'maris', 
-  'Aisha Mebel', 'Den Aroma', 'Velzo', 'Bodomchi'
+const staticBrands: Brand[] = [
+  { name: 'Korsun' }, { name: 'Boyarin' }, { name: 'Sarmilk' }, { name: 'M-Karim' }, { name: 'Prime Fit' }, { name: 'Revo' }, { name: 'To\'maris' }, 
+  { name: 'Aisha Mebel' }, { name: 'Den Aroma' }, { name: 'Velzo' }, { name: 'Bodomchi' },
+  { name: 'Fidda by Sevara' }, { name: 'Viton' }, { name: 'Ravza Mebel' }, { name: 'Coloray' }, { name: 'Dayan Color' }, { name: 'Bekbazar' }, 
+  { name: 'Climart' }, { name: 'Sunnah Products' }, { name: 'Petron Polymer' }, { name: 'Perfona' }, { name: 'Esviro' }, { name: 'Savod' }
 ];
-const brandsMovingRight = [
-  'Fidda by Sevara', 'Viton', 'Ravza Mebel', 'Coloray', 'Dayan Color', 'Bekbazar', 
-  'Climart', 'Sunnah Products', 'Petron Polymer', 'Perfona', 'Esviro', 'Savod'
-];
+
+const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => (
+    <Carousel
+        plugins={[
+        Autoplay({
+            delay: 2000,
+            stopOnInteraction: false,
+            stopOnMouseEnter: true,
+            direction,
+        }),
+        ]}
+        opts={{
+        align: 'start',
+        loop: true,
+        }}
+        className="w-full"
+    >
+        <CarouselContent className="-ml-4">
+        {brands.map((brand, index) => (
+            <CarouselItem
+            key={index}
+            className="basis-auto pl-4"
+            >
+            <Card className="px-5 py-3 whitespace-nowrap bg-secondary/50 border-gray-200">
+                <p className="font-semibold text-gray-700">{brand.name}</p>
+            </Card>
+            </CarouselItem>
+        ))}
+        </CarouselContent>
+    </Carousel>
+);
 
 
 const TrustedBy = () => {
+    const [brands, setBrands] = useState<Brand[]>(staticBrands);
+
+    useEffect(() => {
+        const fetchBrands = async () => {
+            try {
+                const airtableBrands = await getBrands();
+                if (airtableBrands && airtableBrands.length > 0) {
+                    setBrands(airtableBrands);
+                }
+            } catch (error) {
+                console.error("Failed to fetch brands from Airtable, using static data.", error);
+            }
+        };
+        fetchBrands();
+    }, []);
+
+    const middleIndex = Math.ceil(brands.length / 2);
+    const brandsMovingLeft = brands.slice(0, middleIndex);
+    const brandsMovingRight = brands.slice(middleIndex);
+
   return (
     <section className="py-12 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
@@ -27,61 +78,8 @@ const TrustedBy = () => {
           Bizga ishonch bildirgan kompaniyalar
         </p>
         <div className="mt-8 flex flex-col gap-4">
-          <Carousel
-            plugins={[
-              Autoplay({
-                delay: 2000,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-              }),
-            ]}
-            opts={{
-              align: 'start',
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-4">
-              {brandsMovingLeft.map((brand, index) => (
-                <CarouselItem
-                  key={index}
-                  className="basis-auto pl-4"
-                >
-                  <Card className="px-5 py-3 whitespace-nowrap bg-secondary/50 border-gray-200">
-                    <p className="font-semibold text-gray-700">{brand}</p>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-           <Carousel
-            plugins={[
-              Autoplay({
-                delay: 2000,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-                direction: 'backward',
-              }),
-            ]}
-            opts={{
-              align: 'start',
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-4">
-              {brandsMovingRight.map((brand, index) => (
-                <CarouselItem
-                  key={index}
-                  className="basis-auto pl-4"
-                >
-                  <Card className="px-5 py-3 whitespace-nowrap bg-secondary/50 border-gray-200">
-                     <p className="font-semibold text-gray-700">{brand}</p>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
+            <BrandCarousel brands={brandsMovingLeft} direction="forward" />
+            <BrandCarousel brands={brandsMovingRight} direction="backward" />
         </div>
       </div>
     </section>
