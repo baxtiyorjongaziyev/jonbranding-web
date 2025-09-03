@@ -23,8 +23,8 @@ export interface Brand {
 
 
 const getAirtableBase = () => {
-    const apiKey = process.env.AIRTABLE_API_KEY;
-    const baseId = process.env.AIRTABLE_BASE_ID;
+    const apiKey = process.env.NEXT_PUBLIC_AIRTABLE_API_KEY;
+    const baseId = process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID;
     
     if (!apiKey) {
         throw new Error("Airtable API Key is not set in environment variables.");
@@ -39,7 +39,7 @@ const getAirtableBase = () => {
 export const getFaqItems = async (): Promise<FaqItem[]> => {
     try {
         const base = getAirtableBase();
-        const table = process.env.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
+        const table = process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
         
         const records: Records<FieldSet> = await base(table).select({
             view: "Grid view",
@@ -60,7 +60,7 @@ export const getFaqItems = async (): Promise<FaqItem[]> => {
 export const getTestimonials = async (): Promise<Testimonial[] | null> => {
     try {
         const base = getAirtableBase();
-        const table = process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
+        const table = process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
         
         const records: Records<FieldSet> = await base(table).select({
             view: "Grid view",
@@ -86,7 +86,7 @@ export const getTestimonials = async (): Promise<Testimonial[] | null> => {
 export const getBrands = async (): Promise<Brand[] | null> => {
     try {
         const base = getAirtableBase();
-        const table = process.env.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
+        const table = process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
 
         const records: Records<FieldSet> = await base(table).select({
             view: "Grid view",
