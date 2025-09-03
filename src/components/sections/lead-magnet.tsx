@@ -79,11 +79,11 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
                 {magnet.href && !magnet.href.startsWith('#') ? (
                     <Link href={magnet.href} passHref>
                         <Button asChild className="w-full shadow-md hover:shadow-lg transition-shadow">
-                            <a>
+                           <span>
                                {magnet.icon === ListChecks ? <ListChecks className="w-4 h-4 mr-2" /> : <Download className="w-4 h-4 mr-2" />}
                                 {magnet.cta}
                                 <ArrowRight className="w-4 h-4 ml-2" />
-                            </a>
+                           </span>
                         </Button>
                     </Link>
                 ) : (
