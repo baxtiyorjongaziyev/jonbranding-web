@@ -8,6 +8,7 @@ declare global {
       AIRTABLE_BASE_ID?: string;
       AIRTABLE_TABLE_NAME_FAQ?: string;
       AIRTABLE_TABLE_NAME_TESTIMONIALS?: string;
+      AIRTABLE_TABLE_NAME_BRANDS?: string;
     };
     gtag?: (...args: any[]) => void;
     bus?: {
