@@ -18,6 +18,7 @@ const staticBrands: Brand[] = [
   { name: 'Climart', logo: null }, { name: 'Sunnah Products', logo: 'https://img1.teletype.in/files/0f/a6/0fa6fe98-f227-4046-9cfa-6e4114adfc84.png' }, { name: 'Petron Polymer', logo: null }, { name: 'Perfona', logo: 'https://img1.teletype.in/files/0c/2c/0c2c079a-40f7-4b0e-93f3-87fcf124ea5e.png' }, { name: 'Esviro', logo: 'https://img3.teletype.in/files/a6/97/a6977482-12ab-43e9-a896-74475b97b869.png' }, { name: 'Savod', logo: 'https://img4.teletype.in/files/bd/2e/bd2e4311-fe77-4b14-a784-5409028a305f.png' },
   { name: 'Sherzod Beknazarov', logo: 'https://img3.teletype.in/files/e0/be/e0bef570-3d46-43be-9479-3fb56e64e94f.png' }, { name: 'O\'rman', logo: 'https://img4.teletype.in/files/f1/19/f11904e6-d300-4bd1-b9f0-a1d715eefc96.png' },
   { name: 'R Studio', logo: 'https://img2.teletype.in/files/d2/aa/d2aa2d6e-22e7-44c3-a941-6fc441560619.png' },
+  { name: 'Jafiko light', logo: 'https://img2.teletype.in/files/16/ff/16ff7f19-7a74-4771-9c78-55b810979273.png' },
 ];
 
 
