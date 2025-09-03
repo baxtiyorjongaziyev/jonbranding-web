@@ -63,7 +63,7 @@ const TrustedBy: React.FC<TrustedByProps> = ({ brands }) => {
   return (
     <section className="py-12 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
-        <p className="text-center text-sm font-bold uppercase tracking-wider text-gray-500">
+        <p className="text-center text-base font-bold uppercase tracking-wider text-gray-600">
           Bizga ishonch bildirgan kompaniyalar
         </p>
         <div className="mt-8 flex flex-col gap-4">
