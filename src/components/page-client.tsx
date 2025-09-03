@@ -133,6 +133,7 @@ const PageClient: FC<{ children: ReactNode }> = ({ children }) => {
                 <WhyUs onCtaClick={handleOpenModal} />
                 <Gallery onCtaClick={handleOpenModal} />
                 <QueueStatus onCtaClick={handleOpenModal} />
+                <Offer onCTAClick={handleOpenModal} />
                 {children}
                 <BeforeAfter onCtaClick={handleOpenModal} />
                 <Video />
