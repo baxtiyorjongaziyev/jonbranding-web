@@ -179,7 +179,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const handlePrev = () => {
     if (step > 1) {
-      setStep(step - 1);
+      setStep(step + 1);
     }
   };
 

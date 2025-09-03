@@ -17,7 +17,7 @@ const Footer = () => {
           <div className="md:justify-self-center">
             <h3 className="text-lg font-bold text-white">Sahifalar</h3>
             <ul className="mt-4 space-y-2">
-              <li><Link href="/#services" className="text-gray-300 hover:text-accent transition-colors">Xizmatlar</Link></li>
+              <li><Link href="/#package-builder" className="text-gray-300 hover:text-accent transition-colors">Xizmatlar</Link></li>
               <li><Link href="/#portfolio" className="text-gray-300 hover:text-accent transition-colors">Portfolio</Link></li>
               <li><Link href="/brand-strategy" className="text-gray-300 hover:text-accent transition-colors">Brend Strategiyasi</Link></li>
               <li><Link href="/#process" className="text-gray-300 hover:text-accent transition-colors">Jarayon</Link></li>
