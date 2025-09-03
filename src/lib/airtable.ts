@@ -19,14 +19,20 @@ export interface Testimonial {
 
 const getAirtableBase = () => {
     const apiKey = process.env.AIRTABLE_API_KEY;
-    if (!apiKey) {
-        throw new Error("AIRTABLE_API_KEY is not defined in environment variables.");
+    const baseId = process.env.AIRTABLE_BASE_ID;
+    if (!apiKey || !baseId) {
+        console.warn("Airtable environment variables (AIRTABLE_API_KEY, AIRTABLE_BASE_ID) are not set.");
+        return null;
     }
-    return new Airtable({ apiKey }).base(process.env.AIRTABLE_BASE_ID || '');
+    return new Airtable({ apiKey }).base(baseId);
 };
 
 export const getFaqItems = async (): Promise<FaqItem[]> => {
     const base = getAirtableBase();
+    if (!base) {
+        return [];
+    }
+
     const table = process.env.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
     
     try {
@@ -48,6 +54,9 @@ export const getFaqItems = async (): Promise<FaqItem[]> => {
 
 export const getTestimonials = async (): Promise<Testimonial[]> => {
     const base = getAirtableBase();
+     if (!base) {
+        return [];
+    }
     const table = process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
     
     try {
