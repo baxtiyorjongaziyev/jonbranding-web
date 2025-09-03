@@ -52,10 +52,10 @@ export const getFaqItems = async (): Promise<FaqItem[]> => {
     }
 };
 
-export const getTestimonials = async (): Promise<Testimonial[]> => {
+export const getTestimonials = async (): Promise<Testimonial[] | null> => {
     const base = getAirtableBase();
      if (!base) {
-        return [];
+        return null;
     }
     const table = process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
     
@@ -77,6 +77,8 @@ export const getTestimonials = async (): Promise<Testimonial[]> => {
         }));
     } catch (error) {
         console.error(`Error fetching data from Airtable table ${table}:`, error);
-        return [];
+        return null;
     }
 }
+
+    

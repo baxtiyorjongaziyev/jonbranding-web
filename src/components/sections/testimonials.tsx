@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -165,7 +165,7 @@ const Testimonials = async () => {
     let testimonials: Testimonial[] = staticTestimonials;
     try {
         const airtableTestimonials = await getTestimonials();
-        if (airtableTestimonials.length > 0) {
+        if (airtableTestimonials && airtableTestimonials.length > 0) {
             testimonials = airtableTestimonials;
         }
     } catch (error) {
@@ -176,3 +176,5 @@ const Testimonials = async () => {
 };
 
 export default Testimonials;
+
+    
