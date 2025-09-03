@@ -17,11 +17,12 @@ const Parallax: FC<ParallaxProps> = ({ children, className, speed = 0.5 }) => {
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', `${(1 - speed) * 100}%`]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, (1 - speed) * 100]);
+  const yPercentage = useTransform(y, value => `${value}%`);
 
   return (
     <div ref={ref} className={className}>
-      <motion.div style={{ y }}>{children}</motion.div>
+      <motion.div style={{ y: yPercentage }}>{children}</motion.div>
     </div>
   );
 };
