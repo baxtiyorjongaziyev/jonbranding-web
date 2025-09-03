@@ -12,6 +12,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import { Button } from '@/components/ui/button';
 import Offer from '@/components/sections/offer';
+import { type Brand } from '@/lib/airtable';
 
 // Dynamically import components that are not immediately visible
 const Founder = dynamic(() => import('@/components/sections/founder'));
@@ -91,7 +92,12 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
 };
 
 
-const PageClient: FC<{ children: ReactNode }> = ({ children }) => {
+interface PageClientProps {
+  children: ReactNode;
+  brands: Brand[];
+}
+
+const PageClient: FC<PageClientProps> = ({ children, brands }) => {
     const [isClient, setIsClient] = useState(false);
     const { tg } = useTelegram();
 
@@ -127,7 +133,7 @@ const PageClient: FC<{ children: ReactNode }> = ({ children }) => {
         <div className="flex flex-col overflow-x-hidden animate-fade-in">
             <main className="flex-grow">
                 <Hero onPrimaryClick={handleOpenModal} />
-                <TrustedBy />
+                <TrustedBy brands={brands} />
                 <Founder />
                 <LeadMagnet onCtaClick={handleOpenModal} />
                 <WhyUs onCtaClick={handleOpenModal} />

@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import {
   Carousel,
@@ -9,14 +9,7 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { getBrands, type Brand } from '@/lib/airtable';
-
-const staticBrands: Brand[] = [
-  { name: 'Korsun', logo: null }, { name: 'Boyarin', logo: null }, { name: 'Sarmilk', logo: null }, { name: 'M-Karim', logo: null }, { name: 'Prime Fit', logo: null }, { name: 'Revo', logo: null }, { name: 'To\'maris', logo: null }, 
-  { name: 'Aisha Mebel', logo: null }, { name: 'Den Aroma', logo: null }, { name: 'Velzo', logo: null }, { name: 'Bodomchi', logo: null },
-  { name: 'Fidda by Sevara', logo: null }, { name: 'Viton', logo: null }, { name: 'Ravza Mebel', logo: null }, { name: 'Coloray', logo: null }, { name: 'Dayan Color', logo: null }, { name: 'Bekbazar', logo: null }, 
-  { name: 'Climart', logo: null }, { name: 'Sunnah Products', logo: null }, { name: 'Petron Polymer', logo: null }, { name: 'Perfona', logo: null }, { name: 'Esviro', logo: null }, { name: 'Savod', logo: null }
-];
+import { type Brand } from '@/lib/airtable';
 
 const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => (
     <Carousel
@@ -61,24 +54,11 @@ const BrandCarousel = ({ brands, direction = 'forward' }: { brands: Brand[], dir
     </Carousel>
 );
 
+interface TrustedByProps {
+  brands: Brand[];
+}
 
-const TrustedBy = () => {
-    const [brands, setBrands] = useState<Brand[]>(staticBrands);
-
-    useEffect(() => {
-        const fetchBrands = async () => {
-            try {
-                const airtableBrands = await getBrands();
-                if (airtableBrands && airtableBrands.length > 0) {
-                    setBrands(airtableBrands);
-                }
-            } catch (error) {
-                console.error("Failed to fetch brands from Airtable, using static data.", error);
-            }
-        };
-        fetchBrands();
-    }, []);
-
+const TrustedBy: React.FC<TrustedByProps> = ({ brands }) => {
     const middleIndex = Math.ceil(brands.length / 2);
     const brandsMovingLeft = brands.slice(0, middleIndex);
     const brandsMovingRight = brands.slice(middleIndex);
