@@ -82,30 +82,3 @@ export const getTestimonials = async (): Promise<Testimonial[] | null> => {
         return null;
     }
 }
-
-export const getBrands = async (): Promise<Brand[] | null> => {
-    try {
-        const base = getAirtableBase();
-        const table = process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
-
-        const records: Records<FieldSet> = await base(table).select({
-            view: "Grid view",
-            fields: ["Name", "Logo"],
-            filterByFormula: '{Name} != ""'
-        }).all();
-        
-        return records.map(record => {
-            const logoField = record.get("Logo") as Attachment[];
-            const logoUrl = (logoField && logoField.length > 0) ? logoField[0].url : null;
-            
-            return {
-                name: record.get("Name") as string,
-                logo: logoUrl
-            };
-        });
-
-    } catch(error) {
-        console.error(`Error fetching data from Airtable table ${table}:`, error);
-        return null;
-    }
-}
