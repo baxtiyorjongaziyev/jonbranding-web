@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export const Logo = ({ isWhite = false }) => (
     <Image
-      src="https://img4.teletype.in/files/fc/d0/fcd09308-b559-4818-8570-dc078bfa0915.png"
+      src="https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png"
       alt="Jon.Branding Logo"
       width={160}
       height={32}
