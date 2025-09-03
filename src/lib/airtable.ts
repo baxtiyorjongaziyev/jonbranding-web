@@ -1,5 +1,6 @@
 
 import Airtable, { type FieldSet, type Records, type Attachment } from 'airtable';
+import getConfig from 'next/config';
 
 export interface FaqItem {
     question: string;
@@ -23,8 +24,10 @@ export interface Brand {
 
 
 const getAirtableBase = () => {
-    const apiKey = process.env.AIRTABLE_API_KEY;
-    const baseId = process.env.AIRTABLE_BASE_ID;
+    const { serverRuntimeConfig, publicRuntimeConfig } = getConfig() || {};
+    const apiKey = publicRuntimeConfig?.AIRTABLE_API_KEY || process.env.AIRTABLE_API_KEY;
+    const baseId = publicRuntimeConfig?.AIRTABLE_BASE_ID || process.env.AIRTABLE_BASE_ID;
+    
     if (!apiKey || !baseId) {
         console.warn("Airtable environment variables (AIRTABLE_API_KEY, AIRTABLE_BASE_ID) are not set.");
         return null;
@@ -37,8 +40,9 @@ export const getFaqItems = async (): Promise<FaqItem[]> => {
     if (!base) {
         return [];
     }
-
-    const table = process.env.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
+    
+    const { publicRuntimeConfig } = getConfig() || {};
+    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_FAQ || process.env.AIRTABLE_TABLE_NAME_FAQ || 'FAQ';
     
     try {
         const records: Records<FieldSet> = await base(table).select({
@@ -62,7 +66,8 @@ export const getTestimonials = async (): Promise<Testimonial[] | null> => {
      if (!base) {
         return null;
     }
-    const table = process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
+    const { publicRuntimeConfig } = getConfig() || {};
+    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_TESTIMONIALS || process.env.AIRTABLE_TABLE_NAME_TESTIMONIALS || 'Testimonials';
     
     try {
         const records: Records<FieldSet> = await base(table).select({
@@ -91,7 +96,8 @@ export const getBrands = async (): Promise<Brand[] | null> => {
     if (!base) {
         return null;
     }
-    const table = process.env.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
+    const { publicRuntimeConfig } = getConfig() || {};
+    const table = publicRuntimeConfig?.AIRTABLE_TABLE_NAME_BRANDS || process.env.AIRTABLE_TABLE_NAME_BRANDS || 'Brands';
 
     try {
         const records: Records<FieldSet> = await base(table).select({
