@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Parallax from '@/components/parallax-provider';
+
 
 const processSteps = [
   {
@@ -45,16 +47,18 @@ const BrandStrategyPage: FC = () => {
 
   return (
     <main className="flex-grow">
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
-            Brend Strategiyasi
-          </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
-           Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesning o'sishiga yordam beradigan aniq g'oya.
-          </p>
-        </div>
-      </section>
+      <Parallax speed={0.5}>
+        <section className="py-20 sm:py-28 bg-white">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
+              Brend Strategiyasi
+            </h1>
+            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
+            Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesning o'sishiga yordam beradigan aniq g'oya.
+            </p>
+          </div>
+        </section>
+      </Parallax>
 
       <section className="py-16 sm:py-24">
           <div className="container mx-auto px-4">

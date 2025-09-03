@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC } from 'react';
@@ -5,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Search, Palette, Box, Check, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import Parallax from '@/components/parallax-provider';
 
 const processSteps = [
     {
@@ -33,16 +35,18 @@ const QadoqDizayniPage: FC = () => {
 
   return (
     <main className="flex-grow">
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
-            Qadoq Dizaynini Ishlab Chiqish
-          </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
-            Yuqori raqobat sharoitida qadoq ko'pincha asosiy marketing vositasiga aylanadi. U brendni peshtaxtada ajratib ko'rsatadi, uning tarixini so'zlab beradi va bir qarashdayoq auditoriya bilan aloqa o'rnatadi.
-          </p>
-        </div>
-      </section>
+      <Parallax speed={0.5}>
+        <section className="py-20 sm:py-28 bg-white">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
+              Qadoq Dizaynini Ishlab Chiqish
+            </h1>
+            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
+              Yuqori raqobat sharoitida qadoq ko'pincha asosiy marketing vositasiga aylanadi. U brendni peshtaxtada ajratib ko'rsatadi, uning tarixini so'zlab beradi va bir qarashdayoq auditoriya bilan aloqa o'rnatadi.
+            </p>
+          </div>
+        </section>
+      </Parallax>
 
        <section className="py-16 sm:py-24">
           <div className="container mx-auto px-4">
