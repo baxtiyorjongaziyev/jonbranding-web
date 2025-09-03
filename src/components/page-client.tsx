@@ -12,7 +12,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import { Button } from '@/components/ui/button';
 import Offer from '@/components/sections/offer';
-import { type Brand } from '@/lib/airtable';
+import { type Brand } from '@/lib/types';
 
 // Dynamically import components that are not immediately visible
 const Founder = dynamic(() => import('@/components/sections/founder'));
