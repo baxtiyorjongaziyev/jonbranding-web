@@ -40,6 +40,12 @@ const nextConfig: NextConfig = {
         hostname: 'picsum.photos',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'v5.airtableusercontent.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
