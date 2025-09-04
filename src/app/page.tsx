@@ -24,6 +24,7 @@ const staticBrands: Brand[] = [
   { name: 'Rahimov School', logo: 'https://img3.teletype.in/files/ec/47/ec47862b-c93c-42e8-b13b-c072a9c3ffef.png' },
   { name: 'Doctor Herbal', logo: 'https://img3.teletype.in/files/28/a8/28a8bbe7-39cf-4796-906d-2fe5712d751f.png' },
   { name: 'Doctor Fresh', logo: 'https://img4.teletype.in/files/f6/e1/f6e1a215-6589-4141-a7e1-0d7b3264398e.png' },
+  { name: 'online hamshira', logo: 'https://img2.teletype.in/files/d7/30/d730cbeb-390d-4d49-b392-856ef49ce60c.png' },
 ];
 
 
