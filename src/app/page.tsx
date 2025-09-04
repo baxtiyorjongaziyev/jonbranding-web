@@ -23,6 +23,7 @@ const staticBrands: Brand[] = [
   { name: 'Russkiy les', logo: 'https://img1.teletype.in/files/86/d6/86d60b0b-bc17-4125-9f36-abf9c2013242.png' },
   { name: 'Rahimov School', logo: 'https://img3.teletype.in/files/ec/47/ec47862b-c93c-42e8-b13b-c072a9c3ffef.png' },
   { name: 'Doctor Herbal', logo: 'https://img3.teletype.in/files/28/a8/28a8bbe7-39cf-4796-906d-2fe5712d751f.png' },
+  { name: 'Doctor Fresh', logo: 'https://img4.teletype.in/files/f6/e1/f6e1a215-6589-4141-a7e1-0d7b3264398e.png' },
 ];
 
 
