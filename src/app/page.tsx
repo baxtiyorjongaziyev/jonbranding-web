@@ -19,6 +19,7 @@ const staticBrands: Brand[] = [
   { name: 'Sherzod Beknazarov', logo: 'https://img3.teletype.in/files/e0/be/e0bef570-3d46-43be-9479-3fb56e64e94f.png' }, { name: 'O\'rman', logo: 'https://img4.teletype.in/files/f1/19/f11904e6-d300-4bd1-b9f0-a1d715eefc96.png' },
   { name: 'R Studio', logo: 'https://img2.teletype.in/files/d2/aa/d2aa2d6e-22e7-44c3-a941-6fc441560619.png' },
   { name: 'Jafiko light', logo: 'https://img2.teletype.in/files/16/ff/16ff7f19-7a74-4771-9c78-55b810979273.png' },
+  { name: 'Vibro', logo: 'https://img3.teletype.in/files/ec/e4/ece494de-57e9-490d-989b-7aaa5ec5ef19.png' },
 ];
 
 
