@@ -21,6 +21,7 @@ const staticBrands: Brand[] = [
   { name: 'Jafiko light', logo: 'https://img2.teletype.in/files/16/ff/16ff7f19-7a74-4771-9c78-55b810979273.png' },
   { name: 'Vibro', logo: 'https://img3.teletype.in/files/ec/e4/ece494de-57e9-490d-989b-7aaa5ec5ef19.png' },
   { name: 'Russkiy les', logo: 'https://img1.teletype.in/files/86/d6/86d60b0b-bc17-4125-9f36-abf9c2013242.png' },
+  { name: 'Rahimov School', logo: 'https://img3.teletype.in/files/ec/47/ec47862b-c93c-42e8-b13b-c072a9c3ffef.png' },
 ];
 
 
