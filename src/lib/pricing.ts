@@ -242,7 +242,6 @@ const mainServices: (keyof SelectedServices)[] = ['naming', 'logo', 'designSyste
 
 interface PackageSelections {
     selectedServices: SelectedServices;
-    isPcgMember?: boolean; // This can be deprecated or kept for other logic
 }
 
 export interface PriceDetails {
