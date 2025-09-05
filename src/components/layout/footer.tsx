@@ -19,7 +19,7 @@ const Footer = () => {
             <ul className="mt-4 space-y-2">
               <li><Link href="/#package-builder" className="text-gray-300 hover:text-accent transition-colors">Xizmatlar</Link></li>
               <li><Link href="/#portfolio" className="text-gray-300 hover:text-accent transition-colors">Portfolio</Link></li>
-              <li><Link href="/brand-strategy" className="text-gray-300 hover:text-accent transition-colors">Brend Strategiyasi</Link></li>
+              <li><Link href="/xizmatlar/brand-strategy" className="text-gray-300 hover:text-accent transition-colors">Brend Strategiyasi</Link></li>
               <li><Link href="/#process" className="text-gray-300 hover:text-accent transition-colors">Jarayon</Link></li>
               <li><Link href="/#faq" className="text-gray-300 hover:text-accent transition-colors">FAQ</Link></li>
             </ul>

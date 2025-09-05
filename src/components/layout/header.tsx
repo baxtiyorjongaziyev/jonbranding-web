@@ -34,7 +34,7 @@ const navItems = [
 const services: { title: string; href: string; description: string }[] = [
   {
     title: "Brend Strategiyasi",
-    href: "/brand-strategy",
+    href: "/xizmatlar/brand-strategy",
     description: "Brendingiz uchun poydevor — bozor tahlili, pozitsiyalash va kommunikatsiya.",
   },
   {
