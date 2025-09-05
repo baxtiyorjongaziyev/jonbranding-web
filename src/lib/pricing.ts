@@ -230,15 +230,19 @@ export const comparisonData = [
 
 export type SelectedServices = Record<keyof typeof serviceDetails, boolean>;
 
-export const pcgDiscount = 0.50;
+export const packageDiscountThreshold = 3;
+export const packageDiscount = 0.20; // 20%
 export const urgencySurcharge = 0.50;
 export const ndaSurcharge = 0.25;
 export const bonusThreshold = 18750000;
 export const bonusDescription = "Biznes vizitka dizayni sovg'a tariqasida";
 
+const mainServices: (keyof SelectedServices)[] = ['naming', 'logo', 'designSystem', 'brandbook', 'packaging'];
+
+
 interface PackageSelections {
     selectedServices: SelectedServices;
-    isPcgMember: boolean;
+    isPcgMember?: boolean; // This can be deprecated or kept for other logic
 }
 
 export interface PriceDetails {
@@ -253,19 +257,25 @@ export interface PriceDetails {
 
 
 export const calculatePackagePrice = (selections: PackageSelections): PriceDetails => {
-    const { selectedServices, isPcgMember } = selections;
+    const { selectedServices } = selections;
     
     let basePrice = 0;
+    let mainServicesCount = 0;
+    
     // Exclude percentage-based services from initial sum
     const percentageServices: (keyof SelectedServices)[] = ['urgency', 'nda'];
 
     for (const serviceKey in selectedServices) {
+        const key = serviceKey as keyof SelectedServices;
         if (
-            serviceKey in serviceDetails && 
-            selectedServices[serviceKey as keyof SelectedServices] &&
-            !percentageServices.includes(serviceKey as keyof SelectedServices)
+            serviceDetails[key] && 
+            selectedServices[key] &&
+            !percentageServices.includes(key)
         ) {
-            basePrice += serviceDetails[serviceKey as keyof SelectedServices].price;
+            basePrice += serviceDetails[key].price;
+            if(mainServices.includes(key)) {
+                mainServicesCount++;
+            }
         }
     }
 
@@ -288,11 +298,11 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     let discountValue = 0;
     let discountType = "";
     
-    if (isPcgMember && basePrice > 0) {
-        const discountAmount = priceAfterSurcharges * pcgDiscount;
+    if (mainServicesCount >= packageDiscountThreshold) {
+        const discountAmount = priceAfterSurcharges * packageDiscount;
         priceAfterDiscount -= discountAmount;
-        discountValue = pcgDiscount;
-        discountType = 'PCG Tez Natija 3 uchun -50% chegirma';
+        discountValue = packageDiscount;
+        discountType = `Paketli chegirma (${mainServicesCount} ta xizmat) -20%`;
     }
     
     const finalPrice = priceAfterDiscount;
@@ -340,5 +350,3 @@ export const generateSummary = (selections: PackageSelections) => {
 
     return summary;
 }
-
-    

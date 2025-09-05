@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
+import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, packageDiscountThreshold, packageDiscount } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Sparkles, Gift, Shield, Banknote, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, Share2, ClipboardList, Type, Palette, Layers, BookMarked, Box } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -119,8 +119,8 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
     );
 };
 
-const InfoCard = ({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) => (
-    <Card className="bg-primary/80 p-4 rounded-xl border border-white/20 flex items-start gap-4 text-left">
+const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.ElementType, title: string, description: string, className?: string }) => (
+    <Card className={cn("bg-primary/80 p-4 rounded-xl border border-white/20 flex items-start gap-4 text-left", className)}>
         <div className="flex-shrink-0 text-accent p-2 rounded-lg mt-1">
             <Icon className="w-6 h-6" />
         </div>
@@ -149,7 +149,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         urgency: false,
         nda: false,
     });
-    const [isPcgMember, setIsPcgMember] = useLocalStorage('isPcgMember', false);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -162,11 +161,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         if (isClient) {
             const result = calculatePackagePrice({
                 selectedServices,
-                isPcgMember
             });
             setTotal(result);
         }
-    }, [selectedServices, isPcgMember, isClient]);
+    }, [selectedServices, isClient]);
 
 
     const handleServiceToggle = (service: keyof SelectedServices) => {
@@ -185,17 +183,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         });
     };
     
-    const handlePcgToggle = (checked: boolean) => {
-        if(checked && !isPcgMember) {
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-        }
-        setIsPcgMember(checked);
-    }
-
      if (!isClient) {
         return (
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary">
@@ -335,27 +322,13 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         <span className="text-4xl font-extrabold text-accent">{formatPrice(total.final)}</span>
                                     </div>
                                 </div>
-
-                                <Card 
-                                    className={cn(
-                                        "p-1 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer mt-6",
-                                        isPcgMember ? "bg-gradient-to-r from-accent to-yellow-400" : "bg-primary-foreground/10 hover:shadow-md"
-                                    )}
-                                >
-                                    <div className="p-4 rounded-xl flex items-center space-x-4">
-                                        <Switch
-                                            id="pcg" 
-                                            checked={isPcgMember} 
-                                            onCheckedChange={handlePcgToggle}
-                                            aria-label="PCG a'zosi"
-                                        />
-                                        <Label htmlFor="pcg" className="flex-1 cursor-pointer">
-                                            <span className={cn("text-base font-bold", isPcgMember ? "text-white" : "text-white")}>
-                                                PCG "Tez Natija 3" a'zosiman (-50%)
-                                            </span>
-                                        </Label>
-                                    </div>
-                                </Card>
+                                
+                                <InfoCard
+                                    icon={Gift}
+                                    title={`Paketli chegirma -${packageDiscount * 100}%`}
+                                    description={`Asosiy xizmatlardan ${packageDiscountThreshold} yoki undan ko'p tanlasangiz, umumiy narxga chegirma qo'llaniladi.`}
+                                    className="mt-6 bg-accent/10 border-accent/20"
+                                />
 
                                 <Button onClick={onOrderNow} className="w-full mt-6 text-lg bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-4 rounded-xl" disabled={total.base === 0}>
                                     {total.discountApplied ? "Chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
