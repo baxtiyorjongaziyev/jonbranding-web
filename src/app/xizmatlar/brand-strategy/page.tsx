@@ -143,11 +143,6 @@ const BrandStrategyPage: FC = () => {
                     </Card>
                     ))}
                 </div>
-                <div className="text-center mt-16">
-                    <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse">
-                        Strategiyani muhokama qilish
-                    </Button>
-                </div>
             </div>
         </section>
         </main>

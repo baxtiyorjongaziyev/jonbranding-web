@@ -141,11 +141,6 @@ const FirmenniyStilPage: FC = () => {
                         Kuchli aydentikaga ega brendlar tezroq taniladi, uzoq vaqt esda qoladi va ko'proq ishonch uyg'otadi. Biz shunchaki vizual uslub emas, balki brendning o'sishiga, izchil va boshqariladigan bo'lishiga yordam beradigan vosita yaratamiz.
                     </p>
                 </div>
-                <div className="mt-10">
-                    <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse whitespace-normal h-auto">
-                    Mening brendim uchun uslub ishlab chiqish <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
-                </div>
             </div>
         </section>
         </main>
