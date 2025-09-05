@@ -67,54 +67,57 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
     const Icon = serviceIcons[id];
 
     return (
-        <Card 
-            onClick={onSelect}
-            className={cn(
-                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white cursor-pointer hover:shadow-md",
-                 selected && 'border-accent ring-2 ring-accent shadow-lg'
-            )}
+        <div 
+            className="h-screen w-full flex snap-start items-center justify-center p-4 md:p-8"
         >
-            <div className="p-5 flex-grow">
-                 <div className="flex items-start gap-4">
-                    {Icon && <Icon className={cn("h-8 w-8 flex-shrink-0 mt-1", id === 'urgency' ? 'text-red-500' : 'text-primary' )} />}
-                    <div className='flex-1'>
-                        <h4 className="text-lg font-bold text-dark-blue leading-tight">{label}</h4>
-                         <p className="text-sm text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: description }}></p>
+            <Card 
+                onClick={onSelect}
+                className={cn(
+                    "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white cursor-pointer hover:shadow-md w-full max-w-sm h-full max-h-[700px]",
+                    selected && 'border-accent ring-2 ring-accent shadow-lg'
+                )}
+            >
+                <div className="p-5 flex-grow overflow-y-auto">
+                    <div className="flex items-start gap-4">
+                        {Icon && <Icon className={cn("h-8 w-8 flex-shrink-0 mt-1", id === 'urgency' ? 'text-red-500' : 'text-primary' )} />}
+                        <div className='flex-1'>
+                            <h4 className="text-lg font-bold text-dark-blue leading-tight">{label}</h4>
+                            <p className="text-sm text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: description }}></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-             <div className="p-4 bg-secondary/50 border-t">
-                 <div className="my-2 text-center">
-                    {price > 0 && (
-                       <span className="text-2xl font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
-                    )}
-                    {isPercentageBased && (
-                        <span className="text-lg font-semibold text-primary whitespace-nowrap">{note}</span>
-                    )}
-                    {price === 0 && !isPercentageBased && (
-                         <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPrice(price)}</span>
-                    )}
-                    
+                <div className="p-4 bg-secondary/50 border-t">
+                    <div className="my-2 text-center">
+                        {price > 0 && (
+                        <span className="text-2xl font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
+                        )}
+                        {isPercentageBased && (
+                            <span className="text-lg font-semibold text-primary whitespace-nowrap">{note}</span>
+                        )}
+                        {price === 0 && !isPercentageBased && (
+                            <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPrice(price)}</span>
+                        )}
+                    </div>
+                    <Button 
+                        className="w-full text-base py-3 h-auto"
+                        variant={selected ? 'default' : 'outline'}
+                        tabIndex={-1}
+                    >
+                        {selected ? (
+                            <>
+                                <CheckCircle className="h-5 w-5 mr-2" />
+                                Tanlangan
+                            </>
+                        ) : (
+                            <>
+                                <ShoppingCart className="h-5 w-5 mr-2" />
+                                Tanlash
+                            </>
+                        )}
+                    </Button>
                 </div>
-                <Button 
-                    className="w-full text-base py-3 h-auto"
-                    variant={selected ? 'default' : 'outline'}
-                    tabIndex={-1}
-                >
-                    {selected ? (
-                        <>
-                            <CheckCircle className="h-5 w-5 mr-2" />
-                            Tanlangan
-                        </>
-                    ) : (
-                        <>
-                            <ShoppingCart className="h-5 w-5 mr-2" />
-                            Tanlash
-                        </>
-                    )}
-                </Button>
-            </div>
-        </Card>
+            </Card>
+        </div>
     );
 };
 
@@ -224,71 +227,66 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 .map(([key]) => key as keyof SelectedServices);
 
     return (
-        <section id="package-builder" className="py-16 sm:py-24 bg-secondary">
-            <div className="container mx-auto px-4">
-                <div className="text-center">
-                    <h2 className="text-3xl sm:text-4xl font-bold">Narxlar va Xizmatlar</h2>
-                     <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
-                        Bu yerda xizmatlarimizning taxminiy boshlang'ich narxlari ko'rsatilgan. O'zingizga mos to'plamni yig'ing va yakuniy narxni darhol bilib oling.
-                    </p>
+        <section id="package-builder" className="bg-secondary">
+            <div className="grid grid-cols-1 lg:grid-cols-3">
+                <div className="lg:col-span-2 h-screen overflow-y-auto snap-y snap-mandatory">
+                    {Object.entries(serviceCategories).map(([key, category]) => (
+                        <div key={key} className="snap-start">
+                            <div className="h-screen flex items-center justify-center p-4 md:p-8 flex-col">
+                                <h3 className="text-3xl font-bold text-dark-blue mb-6 text-center">{category.title}</h3>
+                                <p className="text-lg text-gray-700 max-w-xl text-center">Pastga aylantiring va ushbu bo'limdagi xizmatlar bilan tanishing.</p>
+                            </div>
+                            {category.services.map((serviceId) => {
+                                if (!serviceDetails[serviceId]) return null;
+                                return (
+                                    <ServiceCard
+                                        key={serviceId}
+                                        id={serviceId}
+                                        selected={selectedServices[serviceId] || false}
+                                        onSelect={() => handleServiceToggle(serviceId)}
+                                    />
+                                );
+                            })}
+                        </div>
+                    ))}
+                    <div className="h-screen w-full flex snap-start items-center justify-center p-4 md:p-8">
+                         <div className="w-full max-w-sm">
+                            <h3 className="text-2xl font-bold text-dark-blue mb-6 text-center">Maxsus taklif</h3>
+                                <Card 
+                                    onClick={() => handlePcgToggle(!isPcgMember)}
+                                    className={cn(
+                                        "p-1 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer",
+                                        isPcgMember ? "bg-gradient-to-r from-accent to-yellow-400" : "bg-white hover:shadow-md"
+                                    )}
+                                >
+                                    <div className={cn("p-6 rounded-xl flex items-center space-x-4", isPcgMember ? "bg-transparent" : "bg-white")}>
+                                        <input 
+                                            type="checkbox"
+                                            id="pcg" 
+                                            checked={isPcgMember} 
+                                            onChange={(e) => handlePcgToggle(e.target.checked)}
+                                            className={cn(
+                                                "h-7 w-7 text-accent focus:ring-accent border-gray-300 rounded-md cursor-pointer",
+                                                isPcgMember && "border-white"
+                                            )}
+                                        />
+                                        <Label htmlFor="pcg" className="flex-1 cursor-pointer">
+                                            <span className={cn("text-lg font-bold", isPcgMember ? "text-white" : "text-dark-blue")}>
+                                                PCG "Tez Natija 3" a'zosiman (-50%)
+                                            </span>
+                                            <p className={cn("text-sm mt-1", isPcgMember ? "text-white/80" : "text-muted-foreground")}>
+                                                Faqat PCG a'zolari uchun! Bu imkoniyatni qo'ldan boy bermang!
+                                            </p>
+                                        </Label>
+                                    </div>
+                                </Card>
+                            </div>
+                    </div>
                 </div>
 
-                <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                    <div className="lg:col-span-2 space-y-12">
-                        {Object.entries(serviceCategories).map(([key, category]) => (
-                            <div key={key}>
-                                <h3 className="text-2xl font-bold text-dark-blue mb-6">{category.title}</h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {category.services.map((serviceId) => {
-                                    if (!serviceDetails[serviceId]) return null;
-                                    return (
-                                        <ServiceCard
-                                            key={serviceId}
-                                            id={serviceId}
-                                            selected={selectedServices[serviceId] || false}
-                                            onSelect={() => handleServiceToggle(serviceId)}
-                                        />
-                                    );
-                                })}
-                                </div>
-                            </div>
-                        ))}
-                        
-                        <div>
-                            <h3 className="text-2xl font-bold text-dark-blue mb-6">Maxsus taklif</h3>
-                             <Card 
-                                onClick={() => handlePcgToggle(!isPcgMember)}
-                                className={cn(
-                                    "p-1 rounded-2xl shadow-sm transition-all duration-300 cursor-pointer",
-                                    isPcgMember ? "bg-gradient-to-r from-accent to-yellow-400" : "bg-white hover:shadow-md"
-                                )}
-                             >
-                                <div className={cn("p-6 rounded-xl flex items-center space-x-4", isPcgMember ? "bg-transparent" : "bg-white")}>
-                                      <input 
-                                          type="checkbox"
-                                          id="pcg" 
-                                          checked={isPcgMember} 
-                                          onChange={(e) => handlePcgToggle(e.target.checked)}
-                                          className={cn(
-                                            "h-7 w-7 text-accent focus:ring-accent border-gray-300 rounded-md cursor-pointer",
-                                            isPcgMember && "border-white"
-                                          )}
-                                      />
-                                      <Label htmlFor="pcg" className="flex-1 cursor-pointer">
-                                          <span className={cn("text-lg font-bold", isPcgMember ? "text-white" : "text-dark-blue")}>
-                                            PCG "Tez Natija 3" a'zosiman (-50%)
-                                          </span>
-                                          <p className={cn("text-sm mt-1", isPcgMember ? "text-white/80" : "text-muted-foreground")}>
-                                              Faqat PCG a'zolari uchun! Bu imkoniyatni qo'ldan boy bermang!
-                                          </p>
-                                      </Label>
-                                </div>
-                            </Card>
-                        </div>
-                    </div>
-
-                    <div className="lg:col-span-1 sticky top-24">
-                        <Card className="p-6 rounded-2xl shadow-xl bg-primary text-white">
+                <div className="lg:col-span-1 lg:h-screen lg:overflow-y-auto p-6 bg-primary text-white">
+                    <div className="sticky top-6">
+                        <Card className="p-6 rounded-2xl shadow-xl bg-transparent border-0">
                             <CardHeader className="p-0 text-center">
                                <CardTitle className="text-3xl font-bold text-white">Sizning to'plamingiz</CardTitle>
                             </CardHeader>
@@ -404,7 +402,3 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
-
-    
-
-    
