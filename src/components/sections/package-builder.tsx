@@ -123,15 +123,16 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
     );
 };
 
-const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.ElementType, title: string, description: string, className?: string }) => (
+const InfoCard = ({ icon: Icon, title, description, className, children }: { icon: React.ElementType, title: string, description: string, className?: string, children?: React.ReactNode }) => (
     <Card className={cn("bg-primary/80 p-4 rounded-xl border border-white/20 flex items-start gap-4 text-left", className)}>
         <div className="flex-shrink-0 text-accent p-2 rounded-lg mt-1">
             <Icon className="w-6 h-6" />
         </div>
-        <div>
+        <div className="flex-1">
             <h5 className="font-bold text-white">{title}</h5>
             <p className="text-sm text-blue-200">{description}</p>
         </div>
+        {children}
     </Card>
 );
 
@@ -153,23 +154,25 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
         urgency: false,
         nda: false,
     });
+    const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
         setIsClient(true);
     }, []);
 
-    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: '', discountValue: 0, savings: 0, bonus: null, surcharges: [] });
+    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: [], savings: 0, bonus: null, surcharges: [] });
     const [hasDiscountBeenApplied, setHasDiscountBeenApplied] = useState(false);
 
     useEffect(() => {
         if (isClient) {
             const result = calculatePackagePrice({
                 selectedServices,
+                wantsUpfrontPayment,
             });
             setTotal(result);
 
-            const justAppliedDiscount = result.discountApplied && !hasDiscountBeenApplied;
+            const justAppliedDiscount = result.discountApplied.length > 0 && !hasDiscountBeenApplied;
 
             if (justAppliedDiscount) {
                  confetti({
@@ -181,11 +184,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                 setHasDiscountBeenApplied(true);
             }
             
-            if(!result.discountApplied && hasDiscountBeenApplied) {
+            if(result.discountApplied.length === 0 && hasDiscountBeenApplied) {
                 setHasDiscountBeenApplied(false);
             }
         }
-    }, [selectedServices, isClient, hasDiscountBeenApplied]);
+    }, [selectedServices, wantsUpfrontPayment, isClient, hasDiscountBeenApplied]);
 
 
     const handleServiceToggle = (service: keyof SelectedServices) => {
@@ -307,7 +310,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 <div className="mt-4 space-y-2">
                                     <div className="flex justify-between items-center text-base">
                                         <span className="text-blue-200">Asl narx:</span>
-                                        <span className={cn("font-medium", total.discountApplied && "line-through text-gray-400")}>{formatPrice(total.base)}</span>
+                                        <span className={cn("font-medium", total.discountApplied.length > 0 && "line-through text-gray-400")}>{formatPrice(total.base)}</span>
                                     </div>
 
                                     {total.surcharges.map((surcharge, index) => (
@@ -317,11 +320,13 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                        </div>
                                     ))}
                                     
-                                    {total.discountApplied && (
+                                    {total.discountApplied.length > 0 && (
                                         <>
-                                            <div className="flex justify-between items-baseline text-accent">
-                                                <span className="text-sm font-medium">{total.discountApplied}</span>
-                                            </div>
+                                            {total.discountApplied.map((discountText, index) => (
+                                                <div key={index} className="flex justify-between items-baseline text-accent">
+                                                    <span className="text-sm font-medium">{discountText}</span>
+                                                </div>
+                                            ))}
                                              <div className="flex justify-center items-center gap-2 p-3 bg-green-500/10 rounded-lg text-green-300">
                                                 <Sparkles className="h-5 w-5" />
                                                 <p className="font-bold">Siz {formatPrice(total.savings)} tejadingiz!</p>
@@ -352,7 +357,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 />
 
                                 <Button onClick={onOrderNow} className="w-full mt-6 text-lg bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-4 rounded-xl" disabled={total.base === 0}>
-                                    {total.discountApplied ? "Chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
+                                    {total.discountApplied.length > 0 ? "Chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
                                 </Button>
                                 
                                 <div className="mt-8 space-y-4 text-left">
@@ -366,11 +371,18 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         title="Sodiqlik Chegirmasi"
                                         description="Biz bilan 3+ loyiha qilgan mijozlarga navbatdagi ish uchun 20% gacha maxsus chegirma."
                                     />
-                                     <InfoCard
+                                    <InfoCard
                                         icon={Banknote}
                                         title="Oldindan to'lov uchun -10%"
                                         description="Loyiha uchun 100% oldindan to'lov qiling va qo'shimcha 10% chegirmaga ega bo'ling."
-                                    />
+                                    >
+                                        <Switch
+                                            checked={wantsUpfrontPayment}
+                                            onCheckedChange={setWantsUpfrontPayment}
+                                            aria-label="Oldindan to'lov chegirmasi"
+                                            className="flex-shrink-0"
+                                        />
+                                    </InfoCard>
                                     <InfoCard
                                         icon={Info}
                                         title="Bu ommaviy oferta emas"
