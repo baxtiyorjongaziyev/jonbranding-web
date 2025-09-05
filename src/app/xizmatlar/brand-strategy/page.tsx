@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
+import React from 'react';
 
 
 const processSteps = [
