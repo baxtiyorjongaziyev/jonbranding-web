@@ -124,9 +124,7 @@ export const serviceDetails = {
 };
 
 export function formatPrice(price: number) {
-    if (price >= 1000000) {
-        return `${price.toLocaleString('fr-FR').replace(/\s/g, ' ')} so'm`;
-    }
+    if (price === 0) return "Kelishiladi";
     return `${price.toLocaleString('fr-FR')} so'm`;
 }
 
