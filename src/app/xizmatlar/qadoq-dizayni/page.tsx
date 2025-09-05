@@ -68,7 +68,7 @@ const QadoqDizayniPage: FC = () => {
                     <div className="lg:order-last">
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/610" width={800} height={610} data-ai-hint="product packaging shelf" alt="Do'kon peshtaxtasidagi mahsulotlar" className="rounded-2xl object-cover"/>
+                            <Image src="https://picsum.photos/800/600" width={800} height={600} data-ai-hint="product packaging shelf" alt="Do'kon peshtaxtasidagi mahsulotlar" className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>

@@ -74,7 +74,7 @@ const NamingPage: FC = () => {
                     <div className="lg:order-last">
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/602" width={800} height={602} data-ai-hint="words brainstorm" alt="G'oyalar muhokamasi" className="rounded-2xl object-cover"/>
+                            <Image src="https://picsum.photos/800/600" width={800} height={600} data-ai-hint="words brainstorm" alt="G'oyalar muhokamasi" className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>
@@ -99,7 +99,7 @@ const NamingPage: FC = () => {
                     <div>
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/603" width={800} height={603} data-ai-hint="idea lightbulb" alt="G'oya" className="rounded-2xl object-cover"/>
+                            <Image src="https://picsum.photos/800/601" width={800} height={601} data-ai-hint="idea lightbulb" alt="G'oya" className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>

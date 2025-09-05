@@ -73,7 +73,7 @@ const FirmenniyStilPage: FC = () => {
                     <div className="lg:order-last">
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/604" width={800} height={604} data-ai-hint="visual perception moodboard" alt="Brendni idrok etish" className="rounded-2xl object-cover"/>
+                            <Image src="https://picsum.photos/800/600" width={800} height={600} data-ai-hint="visual perception moodboard" alt="Brendni idrok etish" className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>
@@ -101,7 +101,7 @@ const FirmenniyStilPage: FC = () => {
                     <div>
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/605" width={800} height={605} data-ai-hint="design system grid" alt="Dizayn tizimi" className="rounded-2xl object-cover"/>
+                            <Image src="https://picsum.photos/800/601" width={800} height={601} data-ai-hint="design system grid" alt="Dizayn tizimi" className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>
