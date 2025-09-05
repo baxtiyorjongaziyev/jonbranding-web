@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => (
     <div className="flex w-full overflow-hidden">
       <ul className={cn(
-        "flex min-w-full shrink-0 items-center justify-around gap-16",
+        "flex min-w-full shrink-0 items-center gap-16",
         direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
       )}>
         {brands.map((brand, index) => (
@@ -29,7 +29,7 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
       </ul>
       {/* Second list for seamless animation */}
       <ul className={cn(
-        "flex min-w-full shrink-0 items-center justify-around gap-16",
+        "flex min-w-full shrink-0 items-center gap-16",
         direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
       )} aria-hidden="true">
         {brands.map((brand, index) => (
