@@ -110,4 +110,8 @@
     from { transform: translateX(-100%); }
     to { transform: translateX(0); }
   }
+  
+  #savod-logo-li img {
+    max-width: calc(100% - 2rem) !important;
+  }
 }
