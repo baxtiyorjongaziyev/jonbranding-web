@@ -53,8 +53,8 @@ const services: { title: string; href: string; description: string }[] = [
     description: "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
   },
    {
-    title: "Barcha narxlar",
-    href: "/#package-builder",
+    title: "Xizmatlar va Narxlar",
+    href: "/xizmatlar",
     description: "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
   },
 ];
