@@ -63,13 +63,13 @@ const TrustedBy: React.FC<TrustedByProps> = ({ brands }) => {
     const brandsBottomRow = brands.slice(third * 2);
 
   return (
-    <section className="py-12 bg-white overflow-hidden">
+    <section className="py-16 sm:py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
-        <p className="text-center text-base font-bold uppercase tracking-wider text-gray-600">
+        <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Bizga ishonch bildirgan kompaniyalar
-        </p>
+        </h2>
       </div>
-       <div className="mt-8 flex flex-col gap-4">
+       <div className="mt-10 flex flex-col gap-4">
             <Marquee brands={brandsTopRow} direction="forward" />
             <Marquee brands={brandsMiddleRow} direction="backward" />
             <Marquee brands={brandsBottomRow} direction="forward" />
