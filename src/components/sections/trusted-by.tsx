@@ -8,12 +8,8 @@ import { cn } from '@/lib/utils';
 const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => {
     if (!brands || brands.length === 0) return null;
 
-    const firstBrandName = brands[0].name;
-    const lastBrandName = brands[brands.length - 1].name;
-
     return (
-        <div className="flex w-full overflow-hidden items-center">
-            <span className="font-semibold text-gray-400 text-lg px-8 hidden md:inline">{firstBrandName}</span>
+        <div className="flex w-full overflow-hidden">
             <div className="flex-grow flex w-full overflow-hidden">
                 <ul className={cn(
                     "flex min-w-full shrink-0 items-center justify-around",
@@ -57,7 +53,6 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                     ))}
                 </ul>
             </div>
-            <span className="font-semibold text-gray-400 text-lg px-8 hidden md:inline">{lastBrandName}</span>
         </div>
     );
 };
