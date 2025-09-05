@@ -16,7 +16,7 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                     direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
                 )}>
                     {brands.map((brand, index) => (
-                        <li key={index} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-16 w-40 flex items-center justify-center">
+                        <li key={index} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-16 w-40 flex items-center justify-center mx-4">
                             <div className="flex items-center justify-center p-2 h-full w-full transition-all duration-300">
                                 {brand.logo ? (
                                     <img
@@ -37,7 +37,7 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                     direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
                 )} aria-hidden="true">
                     {brands.map((brand, index) => (
-                        <li key={index + brands.length} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-16 w-40 flex items-center justify-center">
+                        <li key={index + brands.length} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-16 w-40 flex items-center justify-center mx-4">
                             <div className="flex items-center justify-center p-2 h-full w-full transition-all duration-300">
                                 {brand.logo ? (
                                     <img
