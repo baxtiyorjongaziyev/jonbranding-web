@@ -156,6 +156,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
     }, []);
 
     const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: '', discountValue: 0, savings: 0, bonus: null, surcharges: [] });
+    const [hasDiscountBeenApplied, setHasDiscountBeenApplied] = useState(false);
 
     useEffect(() => {
         if (isClient) {
@@ -163,8 +164,24 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                 selectedServices,
             });
             setTotal(result);
+
+            const justAppliedDiscount = result.discountApplied && !hasDiscountBeenApplied;
+
+            if (justAppliedDiscount) {
+                 confetti({
+                    particleCount: 150,
+                    spread: 90,
+                    origin: { y: 0.6 },
+                    colors: ['#00C9FD', '#ADFFFE', '#FFFFFF', '#050583']
+                });
+                setHasDiscountBeenApplied(true);
+            }
+            
+            if(!result.discountApplied && hasDiscountBeenApplied) {
+                setHasDiscountBeenApplied(false);
+            }
         }
-    }, [selectedServices, isClient]);
+    }, [selectedServices, isClient, hasDiscountBeenApplied]);
 
 
     const handleServiceToggle = (service: keyof SelectedServices) => {
