@@ -22,7 +22,6 @@ const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const QueueStatus = dynamic(() => import('@/components/sections/queue-status'));
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
 const Video = dynamic(() => import('@/components/sections/video'));
-const Comparison = dynamic(() => import('@/components/sections/comparison'));
 const Process = dynamic(() => import('@/components/sections/process'));
 const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
 
@@ -142,7 +141,6 @@ const PageClient: FC<PageClientProps> = ({ children, brands }) => {
                 {children}
                 <BeforeAfter onCtaClick={handleOpenModal} />
                 <Video />
-                <Comparison onCtaClick={handleOpenModal} />
                 <Process onCtaClick={handleOpenModal} />
             </main>
             <ExitIntentModal onPrimaryClick={handleOpenModal} />
