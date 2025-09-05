@@ -230,6 +230,7 @@ export type SelectedServices = Record<keyof typeof serviceDetails, boolean>;
 
 export const packageDiscountThreshold = 3;
 export const packageDiscount = 0.20; // 20%
+export const upfrontDiscount = 0.10; // 10%
 export const urgencySurcharge = 0.50;
 export const ndaSurcharge = 0.25;
 export const bonusThreshold = 18750000;
@@ -240,13 +241,13 @@ const mainServices: (keyof SelectedServices)[] = ['naming', 'logo', 'designSyste
 
 interface PackageSelections {
     selectedServices: SelectedServices;
+    wantsUpfrontPayment: boolean;
 }
 
 export interface PriceDetails {
     base: number;
     final: number;
-    discountApplied: string;
-    discountValue: number;
+    discountApplied: string[];
     savings: number;
     bonus: string | null;
     surcharges: { name: string, value: number }[];
@@ -254,12 +255,11 @@ export interface PriceDetails {
 
 
 export const calculatePackagePrice = (selections: PackageSelections): PriceDetails => {
-    const { selectedServices } = selections;
+    const { selectedServices, wantsUpfrontPayment } = selections;
     
     let basePrice = 0;
     let mainServicesCount = 0;
     
-    // Exclude percentage-based services from initial sum
     const percentageServices: (keyof SelectedServices)[] = ['urgency', 'nda'];
 
     for (const serviceKey in selectedServices) {
@@ -292,14 +292,18 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     }
     
     let priceAfterDiscount = priceAfterSurcharges;
-    let discountValue = 0;
-    let discountType = "";
+    const discountsApplied: string[] = [];
     
     if (mainServicesCount >= packageDiscountThreshold) {
-        const discountAmount = priceAfterSurcharges * packageDiscount;
+        const discountAmount = priceAfterDiscount * packageDiscount;
         priceAfterDiscount -= discountAmount;
-        discountValue = packageDiscount;
-        discountType = `Paketli chegirma (${mainServicesCount} ta xizmat) -20%`;
+        discountsApplied.push(`Paketli chegirma (${mainServicesCount} ta xizmat) -${packageDiscount * 100}%`);
+    }
+
+    if (wantsUpfrontPayment) {
+        const discountAmount = priceAfterDiscount * upfrontDiscount;
+        priceAfterDiscount -= discountAmount;
+        discountsApplied.push(`Oldindan to'lov uchun -${upfrontDiscount * 100}%`);
     }
     
     const finalPrice = priceAfterDiscount;
@@ -310,8 +314,7 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     return {
         base: basePrice,
         final: finalPrice,
-        discountApplied: discountType,
-        discountValue: discountValue,
+        discountApplied: discountsApplied,
         savings,
         bonus,
         surcharges,
@@ -319,7 +322,7 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
 }
 
 export const generateSummary = (selections: PackageSelections) => {
-    const { selectedServices } = selections;
+    const { selectedServices, wantsUpfrontPayment } = selections;
     
     const services = [];
     for (const serviceKey in selectedServices) {
@@ -337,10 +340,14 @@ export const generateSummary = (selections: PackageSelections) => {
         summary += ` | Qo'shimcha shartlar: ${surchargeSummary}`;
     }
 
-    if (discountApplied) {
-        summary += ` | Chegirma: ${discountApplied}`;
+    if (discountApplied.length > 0) {
+        summary += ` | Chegirmalar: ${discountApplied.join('; ')}`;
     }
     
+    if (wantsUpfrontPayment) {
+        summary += ' | 100% oldindan to\'lov tanlandi.';
+    }
+
     if (bonus) {
         summary += ` | Bonus: ${bonus}`;
     }
