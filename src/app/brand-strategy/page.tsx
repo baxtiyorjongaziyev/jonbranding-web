@@ -80,7 +80,7 @@ const BrandStrategyPage: FC = () => {
                    <div className="lg:order-last">
                       <Card className="shadow-xl rounded-2xl">
                          <CardContent className="p-0">
-                           <Image src="https://picsum.photos/800/600" data-ai-hint="strategy flowchart" alt="Strategiya sxemasi" width={800} height={600} className="rounded-2xl object-cover"/>
+                           <Image src="https://picsum.photos/800/600" data-ai-hint="business growth strategy" alt="Strategiya sxemasi" width={800} height={600} className="rounded-2xl object-cover"/>
                          </CardContent>
                       </Card>
                   </div>
