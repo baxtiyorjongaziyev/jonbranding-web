@@ -68,12 +68,12 @@ const TrustedBy: React.FC<TrustedByProps> = ({ brands }) => {
         <p className="text-center text-base font-bold uppercase tracking-wider text-gray-600">
           Bizga ishonch bildirgan kompaniyalar
         </p>
-        <div className="mt-8 flex flex-col gap-4">
+      </div>
+       <div className="mt-8 flex flex-col gap-4">
             <Marquee brands={brandsTopRow} direction="forward" />
             <Marquee brands={brandsMiddleRow} direction="backward" />
             <Marquee brands={brandsBottomRow} direction="forward" />
         </div>
-      </div>
     </section>
   );
 };
