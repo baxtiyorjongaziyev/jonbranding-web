@@ -56,9 +56,11 @@ interface TrustedByProps {
 }
 
 const TrustedBy: React.FC<TrustedByProps> = ({ brands }) => {
-    const middleIndex = Math.ceil(brands.length / 2);
-    const brandsTopRow = brands.slice(0, middleIndex);
-    const brandsBottomRow = brands.slice(middleIndex);
+    const numBrands = brands.length;
+    const third = Math.ceil(numBrands / 3);
+    const brandsTopRow = brands.slice(0, third);
+    const brandsMiddleRow = brands.slice(third, third * 2);
+    const brandsBottomRow = brands.slice(third * 2);
 
   return (
     <section className="py-12 bg-white overflow-hidden">
@@ -68,7 +70,8 @@ const TrustedBy: React.FC<TrustedByProps> = ({ brands }) => {
         </p>
         <div className="mt-8 flex flex-col gap-4">
             <Marquee brands={brandsTopRow} direction="forward" />
-            <Marquee brands={brandsBottomRow} direction="backward" />
+            <Marquee brands={brandsMiddleRow} direction="backward" />
+            <Marquee brands={brandsBottomRow} direction="forward" />
         </div>
       </div>
     </section>
