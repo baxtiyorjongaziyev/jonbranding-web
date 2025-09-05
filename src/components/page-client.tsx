@@ -144,7 +144,6 @@ const PageClient: FC<PageClientProps> = ({ children, brands }) => {
                 <Process onCtaClick={handleOpenModal} />
             </main>
             <ExitIntentModal onPrimaryClick={handleOpenModal} />
-            <MobileCtaBar onOpenModal={handleOpenModal} />
         </div>
     )
 }
