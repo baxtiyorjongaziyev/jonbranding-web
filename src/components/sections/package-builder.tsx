@@ -24,7 +24,7 @@ const formatPrice = (price: number) => {
     return `${price.toLocaleString('fr-FR')} so'm`;
 }
 
-type ServiceCategory = 'tripwire' |'main' | 'additional';
+type ServiceCategory = 'tripwire' |'main' | 'additional' | 'options';
 
 const serviceCategories: Record<ServiceCategory, { title: string; services: (keyof SelectedServices)[] }> = {
     tripwire: {
@@ -37,7 +37,11 @@ const serviceCategories: Record<ServiceCategory, { title: string; services: (key
     },
     additional: {
         title: "Qo'shimcha xizmatlar",
-        services: ['strategy', 'commStrategy', 'smm', 'merch', 'illustrations', 'urgency', 'nda']
+        services: ['strategy', 'commStrategy', 'smm', 'merch', 'illustrations']
+    },
+    options: {
+        title: "Maxsus shartlar",
+        services: ['urgency', 'nda']
     }
 };
 
@@ -239,8 +243,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
                     <div className="lg:col-span-2 space-y-12">
-                        {Object.values(serviceCategories).map((category, index) => (
-                            <div key={index}>
+                        {Object.entries(serviceCategories).map(([key, category]) => (
+                            <div key={key}>
                                 <h3 className="text-2xl font-bold text-dark-blue mb-6">{category.title}</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                      {category.services.map((serviceId) => {
