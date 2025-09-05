@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, packageDiscountThreshold, packageDiscount } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Shield, Banknote, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, Share2, ClipboardList, Type, Palette, Layers, BookMarked, Box } from 'lucide-react';
+import { Sparkles, Gift, Shield, Banknote, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, Share2, ClipboardList, Type, Palette, Layers, BookMarked, Box, Repeat, Award } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 
@@ -357,10 +357,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         title="100% Mamnuniyat Kafolati"
                                         description="Agar dastlabki konsepsiyalar yoqmasa, to'lovingizni qaytarib beramiz."
                                     />
+                                    <InfoCard
+                                        icon={Repeat}
+                                        title="Sodiqlik Chegirmasi"
+                                        description="Biz bilan 3+ loyiha qilgan mijozlarga navbatdagi ish uchun 20% gacha maxsus chegirma."
+                                    />
                                      <InfoCard
                                         icon={Banknote}
-                                        title="To'lov shartlari"
-                                        description="Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng."
+                                        title="Oldindan to'lov uchun -10%"
+                                        description="Loyiha uchun 100% oldindan to'lov qiling va qo'shimcha 10% chegirmaga ega bo'ling."
                                     />
                                     <InfoCard
                                         icon={Info}
