@@ -108,11 +108,6 @@ const QadoqDizayniPage: FC = () => {
                         Yaxshi qadoq dizayni — bu shunchaki chiroyli bezak emas, balki biznes uchun ishlaydigan vositadir. Biz funksional, strategik jihatdan puxta o'ylangan dizaynni ishlab chiqamiz, bunda qadoq to'laqonli savdo vositasi bo'lib xizmat qiladi.
                     </p>
                 </div>
-                <div className="mt-10">
-                    <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse whitespace-normal h-auto">
-                    Mahsulotim uchun dizayn yaratish <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
-                </div>
             </div>
         </section>
         </main>

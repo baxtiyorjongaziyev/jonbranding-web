@@ -142,12 +142,6 @@ const NamingPage: FC = () => {
                     <Card className="bg-secondary/50 p-6 rounded-xl"><h4 className="font-bold">Domenlar va raqamli muhit</h4><p className="text-gray-600 mt-1">Raqamli muhitda nomlarning mavjudligini tekshiramiz.</p></Card>
                     <Card className="bg-secondary/50 p-6 rounded-xl"><h4 className="font-bold">Ma'no va assotsiatsiyalar</h4><p className="text-gray-600 mt-1">O'qilishi, ohangi, mumkin bo'lgan assotsiativ qator, madaniy idrok va brend toifasiga muvofiqligini tekshiramiz.</p></Card>
                 </div>
-
-                <div className="mt-16">
-                    <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse">
-                    Brendim uchun nom tanlash
-                    </Button>
-                </div>
             </div>
         </section>
         </main>
