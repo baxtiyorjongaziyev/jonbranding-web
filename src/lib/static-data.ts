@@ -2,11 +2,9 @@
 import { type Brand } from '@/lib/types';
 
 export const staticBrands: Brand[] = [
-    { name: 'Goodwell', logo: 'https://img3.teletype.in/files/ee/42/ee42432f-65c8-4f2a-a982-5f34a469d95b.png' },
     { name: 'Sarmilk', logo: 'https://img4.teletype.in/files/36/a0/36a05cc3-f4a4-4592-b025-d4ccf6d9b27f.png' }, 
-    { name: 'Korsun', logo: 'https://img4.teletype.in/files/fc/d0/fcd09308-b559-4818-8570-dc078bfa0915.png' }, 
+    { name: 'Goodwell', logo: 'https://img3.teletype.in/files/ee/42/ee42432f-65c8-4f2a-a982-5f34a469d95b.png' },
     { name: 'M-Karim', logo: 'https://img4.teletype.in/files/ff/4e/ff4e4596-2b83-47f2-8fdd-59b36e6df4d5.png' }, 
-    { name: 'Boyarin', logo: 'https://img1.teletype.in/files/c1/05/c105eef2-f611-4004-8cab-aa96752fb767.png' }, 
     { name: 'Prime Fit', logo: 'https://img2.teletype.in/files/95/db/95dbe2db-423e-4df3-a09b-fe76af32ad40.png' }, 
     { name: 'Revo', logo: 'https://img4.teletype.in/files/75/02/7502c144-d092-4e18-9f26-782628ddc49c.png' }, 
     { name: 'To\'maris', logo: 'https://img1.teletype.in/files/8d/2e/8d2ea8a6-a110-4bfa-b726-081ae9d2194a.png' }, 
@@ -15,6 +13,7 @@ export const staticBrands: Brand[] = [
     { name: 'Velzo', logo: 'https://img1.teletype.in/files/c1/85/c185f779-620e-4ec7-bfe1-1580a000d80a.png' }, 
     { name: 'Bodomchi', logo: 'https://img4.teletype.in/files/ff/50/ff50be41-df24-49fa-95e7-7d50a7840f3e.png' },
     { name: 'Fidda by Sevara', logo: 'https://img4.teletype.in/files/36/31/36315fc2-fcda-4133-86a4-85362a8197ce.png' }, 
+    { name: 'Korsun', logo: 'https://img4.teletype.in/files/fc/d0/fcd09308-b559-4818-8570-dc078bfa0915.png' }, 
     { name: 'Viton', logo: 'https://img2.teletype.in/files/9c/fc/9cfc9326-cfdc-4a0f-8262-9a69bdd6f0a2.png' }, 
     { name: 'Ravza Mebel', logo: 'https://img3.teletype.in/files/25/47/2547cc84-f669-43f0-b0a6-93421a65a68a.png' }, 
     { name: 'Dayan Color', logo: 'https://img3.teletype.in/files/e8/8d/e88d7cdc-7351-4c32-9d54-25a8994f3cb6.png' }, 
@@ -26,6 +25,7 @@ export const staticBrands: Brand[] = [
     { name: 'Perfona', logo: 'https://img1.teletype.in/files/0c/2c/0c2c079a-40f7-4b0e-93f3-87fcf124ea5e.png' }, 
     { name: 'Esviro', logo: 'https://img3.teletype.in/files/a6/97/a6977482-12ab-43e9-a896-74475b97b869.png' }, 
     { name: 'Savod', logo: 'https://img4.teletype.in/files/bd/2e/bd2e4311-fe77-4b14-a784-5409028a305f.png' },
+    { name: 'Boyarin', logo: 'https://img1.teletype.in/files/c1/05/c105eef2-f611-4004-8cab-aa96752fb767.png' }, 
     { name: 'Sherzod Beknazarov', logo: 'https://img3.teletype.in/files/e0/be/e0bef570-3d46-43be-9479-3fb56e64e94f.png' }, 
     { name: 'O\'rman', logo: 'https://img4.teletype.in/files/f1/19/f11904e6-d300-4bd1-b9f0-a1d715eefc96.png' }, 
     { name: 'R Studio', logo: 'https://img2.teletype.in/files/d2/aa/d2aa2d6e-22e7-44c3-a941-6fc441560619.png' },
