@@ -356,6 +356,20 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                     className="mt-6 bg-accent/10 border-accent/20"
                                 />
 
+                                <InfoCard
+                                    icon={Banknote}
+                                    title="Oldindan to'lov uchun -10%"
+                                    description="Loyiha uchun 100% oldindan to'lov qiling va qo'shimcha 10% chegirmaga ega bo'ling."
+                                    className="mt-4"
+                                >
+                                    <Switch
+                                        checked={wantsUpfrontPayment}
+                                        onCheckedChange={setWantsUpfrontPayment}
+                                        aria-label="Oldindan to'lov chegirmasi"
+                                        className="flex-shrink-0"
+                                    />
+                                </InfoCard>
+
                                 <Button onClick={onOrderNow} className="w-full mt-6 text-lg bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-4 rounded-xl" disabled={total.base === 0}>
                                     {total.discountApplied.length > 0 ? "Chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
                                 </Button>
@@ -371,18 +385,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         title="Sodiqlik Chegirmasi"
                                         description="Biz bilan 3+ loyiha qilgan mijozlarga navbatdagi ish uchun 20% gacha maxsus chegirma."
                                     />
-                                    <InfoCard
-                                        icon={Banknote}
-                                        title="Oldindan to'lov uchun -10%"
-                                        description="Loyiha uchun 100% oldindan to'lov qiling va qo'shimcha 10% chegirmaga ega bo'ling."
-                                    >
-                                        <Switch
-                                            checked={wantsUpfrontPayment}
-                                            onCheckedChange={setWantsUpfrontPayment}
-                                            aria-label="Oldindan to'lov chegirmasi"
-                                            className="flex-shrink-0"
-                                        />
-                                    </InfoCard>
                                     <InfoCard
                                         icon={Info}
                                         title="Bu ommaviy oferta emas"
