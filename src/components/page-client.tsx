@@ -25,6 +25,8 @@ const Video = dynamic(() => import('@/components/sections/video'));
 const Process = dynamic(() => import('@/components/sections/process'));
 const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
 const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
+const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
+const Faq = dynamic(() => import('@/components/sections/faq'));
 
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
@@ -137,13 +139,14 @@ const PageClient: FC<PageClientProps> = ({ children, brands }) => {
                 <Gallery onCtaClick={handleOpenModal} />
                 <BeforeAfter onCtaClick={handleOpenModal} />
                 <WhyUs onCtaClick={handleOpenModal} />
-                {children}
+                <Testimonials />
                 <Founder />
                 <Process onCtaClick={handleOpenModal} />
                 <Video />
                 <LeadMagnet onCtaClick={handleOpenModal} />
                 <Offer onCTAClick={handleOpenModal} />
                 <QueueStatus onCtaClick={handleOpenModal} />
+                <Faq />
             </main>
             <ExitIntentModal onPrimaryClick={handleOpenModal} />
         </div>

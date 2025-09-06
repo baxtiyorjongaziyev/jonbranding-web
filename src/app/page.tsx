@@ -6,12 +6,6 @@ import { type Brand } from '@/lib/types';
 import { staticBrands } from '@/lib/static-data';
 
 
-// Dynamically import components that are not immediately visible
-const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
-const Faq = dynamic(() => import('@/components/sections/faq'));
-
-
-
 const getBrands = async (): Promise<Brand[]> => {
     // We are now returning a static list of brands.
     // This is more reliable and faster.
@@ -26,8 +20,6 @@ const Home: FC = async () => {
   return (
     <>
       <PageClient brands={brands}>
-          <Testimonials />
-          <Faq />
       </PageClient>
     </>
   );
