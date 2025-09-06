@@ -154,9 +154,6 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
               </div>
               <div>
                 <p className="text-base text-dark-blue font-medium">{result.message}</p>
-                <p className="text-sm text-dark-blue/80 mt-2">
-                  <span className="font-bold">Eslatma:</span> Maxfiylik (NDA) shartnomasi asosida ishlash uchun loyiha umumiy qiymatiga +25% qo'shiladi.
-                </p>
               </div>
             </div>
           </Card>
