@@ -114,7 +114,7 @@ const BrandStrategyPage: FC = () => {
                     <div>
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/601" data-ai-hint="business owner thinking" alt="Biznes egasi o'ylanmoqda" width={800} height={601} className="rounded-2xl object-cover"/>
+                            <Image src="https://picsum.photos/800/601" data-ai-hint="brand strategy" alt="Biznes egasi o'ylanmoqda" width={800} height={601} className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>
