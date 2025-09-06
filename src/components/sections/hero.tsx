@@ -59,6 +59,14 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
     };
   }, []);
 
+  const handleScroll = (e: React.MouseEvent<HTMLButtonElement>, anchor: string) => {
+    e.preventDefault();
+    const element = document.querySelector(anchor);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative bg-background py-12 sm:py-16 overflow-hidden">
       <div aria-hidden="true" className="absolute inset-0 z-0">
@@ -81,11 +89,9 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
               <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-lg px-8 py-6 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-subtle-pulse">
                 {buttonTexts[buttonIndex]}
               </Button>
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-foreground/20 text-foreground hover:bg-primary hover:text-primary-foreground">
-                <Link href="#package-builder">
+              <Button onClick={(e) => handleScroll(e, '#package-builder')} variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-foreground/20 text-foreground hover:bg-primary hover:text-primary-foreground">
                   <Search className="mr-2 h-5 w-5" />
                   Brending Audit o'tkazish
-                </Link>
               </Button>
             </div>
           </div>
