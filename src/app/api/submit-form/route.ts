@@ -90,12 +90,13 @@ ${communicationScript}
         } else {
             // This is a standard contact/package submission
             let packageInfo = '';
-            if (packageSummary && totalPrice !== undefined) {
+            if (packageSummary && totalPrice !== undefined && totalPrice > 0) {
               packageInfo = `
 ---
-🛒 Tanlangan paket:
+🛒 Tanlangan xizmatlar xulosasi:
 ${packageSummary}
-Yakuniy narx: ${totalPrice.toLocaleString('fr-FR')} so'm
+
+💰 Yakuniy narx: ${totalPrice.toLocaleString('fr-FR')} so'm
               `.trim();
             }
             
@@ -116,7 +117,7 @@ ${meetingType === 'OFLAYN' ? `Uchrashuv joyi: ${meetingPlaceText}` : ''}
             `.trim();
             
             telegramMessage = `
-Yangi xabar (Jon.Branding)
+🔔 Yangi so'rov (Jon.Branding)
 
 👤 Mijoz: ${fullName}
 📞 Telefon: ${phone}

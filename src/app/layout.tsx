@@ -41,18 +41,25 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 
     const handleOpenModal = useCallback(() => {
         const selectionsJSON = localStorage.getItem('selectedServices');
-        const isPcgMemberJSON = localStorage.getItem('isPcgMember');
+        const wantsUpfrontPaymentJSON = localStorage.getItem('wantsUpfrontPayment');
+        
+        // Reset before calculating
+        setPackageSummary('');
+        setTotalPrice(0);
 
-        if (selectionsJSON && isPcgMemberJSON) {
+        if (selectionsJSON && wantsUpfrontPaymentJSON) {
             try {
                 const selectedServices = JSON.parse(selectionsJSON);
-                const isPcgMember = JSON.parse(isPcgMemberJSON);
-                const selections = { selectedServices, isPcgMember };
-                const priceDetails = calculatePackagePrice(selections);
-                const summary = generateSummary(selections);
+                const wantsUpfrontPayment = JSON.parse(wantsUpfrontPaymentJSON);
+                const selections = { selectedServices, wantsUpfrontPayment };
                 
-                setPackageSummary(summary);
-                setTotalPrice(priceDetails.final);
+                const priceDetails = calculatePackagePrice(selections);
+                if (priceDetails.base > 0) {
+                    const summary = generateSummary(selections);
+                    setPackageSummary(summary);
+                    setTotalPrice(priceDetails.final);
+                }
+
             } catch (e) {
                 console.error("Failed to parse package details from localStorage", e);
                  setPackageSummary('');

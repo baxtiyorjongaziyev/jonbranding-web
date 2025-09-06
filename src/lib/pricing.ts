@@ -327,7 +327,10 @@ export const generateSummary = (selections: PackageSelections) => {
     const services = [];
     for (const serviceKey in selectedServices) {
         if (serviceKey in serviceDetails && selectedServices[serviceKey as keyof SelectedServices]) {
-            services.push(serviceDetails[serviceKey as keyof SelectedServices].label);
+            const service = serviceDetails[serviceKey as keyof SelectedServices];
+            if(service.price > 0 || service.note?.includes('qo\'shiladi')) {
+                services.push(service.label);
+            }
         }
     }
 
@@ -335,21 +338,28 @@ export const generateSummary = (selections: PackageSelections) => {
 
     const { discountApplied, bonus, surcharges } = calculatePackagePrice(selections);
     
-    if (surcharges.length > 0) {
-        const surchargeSummary = surcharges.map(s => s.name).join(', ');
-        summary += ` | Qo'shimcha shartlar: ${surchargeSummary}`;
+    const conditions = [];
+
+    if (surcharges.some(s => s.name.includes('Shoshilinch'))) {
+        conditions.push("Shoshilinch");
+    }
+     if (surcharges.some(s => s.name.includes('NDA'))) {
+        conditions.push("NDA");
+    }
+    if (wantsUpfrontPayment) {
+        conditions.push("100% oldindan to'lov");
+    }
+
+    if (conditions.length > 0) {
+        summary += `\nMaxsus shartlar: ${conditions.join(', ')}`;
     }
 
     if (discountApplied.length > 0) {
-        summary += ` | Chegirmalar: ${discountApplied.join('; ')}`;
-    }
-    
-    if (wantsUpfrontPayment) {
-        summary += ' | 100% oldindan to\'lov tanlandi.';
+        summary += `\nQo'llanilgan chegirmalar: ${discountApplied.join('; ')}`;
     }
 
     if (bonus) {
-        summary += ` | Bonus: ${bonus}`;
+        summary += `\nBonus: ${bonus}`;
     }
 
     return summary;
