@@ -1,3 +1,4 @@
+'use client';
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Building, Rocket, Store, Gem, AlertTriangle, ArrowRight } from 'lucide-react';
@@ -32,6 +33,11 @@ const targetAudiences = [
 ];
 
 const TargetAudience = () => {
+  const handleOpenModal = () => {
+    const contactEvent = new CustomEvent('openContactModal');
+    window.dispatchEvent(contactEvent);
+  };
+
   return (
     <section id="target-audience" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
@@ -66,10 +72,8 @@ const TargetAudience = () => {
           ))}
         </div>
          <div className="text-center mt-12">
-            <Button asChild size="lg" className="text-lg shadow-ocean animate-subtle-pulse">
-                <Link href="#package-builder">
-                    Mening muammom bor <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
+            <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse">
+                Mening muammom bor <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
         </div>
       </div>
