@@ -27,6 +27,8 @@ const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
 const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
 const Faq = dynamic(() => import('@/components/sections/faq'));
+const Stats = dynamic(() => import('@/components/sections/stats'));
+const PickTwoSelector = dynamic(() => import('@/components/sections/pick-two-selector'));
 
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
@@ -139,11 +141,13 @@ const PageClient: FC<PageClientProps> = ({ children, brands }) => {
                 <Gallery onCtaClick={handleOpenModal} />
                 <BeforeAfter onCtaClick={handleOpenModal} />
                 <WhyUs onCtaClick={handleOpenModal} />
+                <Stats />
                 <Testimonials />
                 <Founder />
                 <Process onCtaClick={handleOpenModal} />
                 <Video />
                 <LeadMagnet onCtaClick={handleOpenModal} />
+                <PickTwoSelector onCtaClick={handleOpenModal}/>
                 <Offer onCTAClick={handleOpenModal} />
                 <QueueStatus onCtaClick={handleOpenModal} />
                 <Faq />
