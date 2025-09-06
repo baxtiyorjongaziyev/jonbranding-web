@@ -24,6 +24,7 @@ const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
 const Video = dynamic(() => import('@/components/sections/video'));
 const Process = dynamic(() => import('@/components/sections/process'));
 const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
+const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
 
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
@@ -132,16 +133,17 @@ const PageClient: FC<PageClientProps> = ({ children, brands }) => {
             <main className="flex-grow">
                 <Hero onPrimaryClick={handleOpenModal} />
                 <TrustedBy brands={brands} />
-                <Founder />
-                <LeadMagnet onCtaClick={handleOpenModal} />
-                <WhyUs onCtaClick={handleOpenModal} />
+                <TargetAudience />
                 <Gallery onCtaClick={handleOpenModal} />
-                <QueueStatus onCtaClick={handleOpenModal} />
-                <Offer onCTAClick={handleOpenModal} />
-                {children}
                 <BeforeAfter onCtaClick={handleOpenModal} />
-                <Video />
+                <WhyUs onCtaClick={handleOpenModal} />
+                {children}
+                <Founder />
                 <Process onCtaClick={handleOpenModal} />
+                <Video />
+                <LeadMagnet onCtaClick={handleOpenModal} />
+                <Offer onCTAClick={handleOpenModal} />
+                <QueueStatus onCtaClick={handleOpenModal} />
             </main>
             <ExitIntentModal onPrimaryClick={handleOpenModal} />
         </div>
