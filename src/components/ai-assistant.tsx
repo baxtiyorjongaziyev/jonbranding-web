@@ -28,7 +28,7 @@ const AiAssistant: FC = () => {
         { id: 'initial', text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending bo'yicha qanday savollaringiz bor?", sender: 'bot' }
       ]);
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length]);
   
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -112,7 +112,7 @@ const AiAssistant: FC = () => {
                           : 'bg-secondary text-secondary-foreground rounded-bl-none'
                       )}
                     >
-                      <p className="text-sm">{message.text}</p>
+                      <p className="text-sm break-words">{message.text}</p>
                     </div>
                      {message.sender === 'user' && (
                       <div className="w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center flex-shrink-0">
