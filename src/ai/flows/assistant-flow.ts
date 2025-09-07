@@ -132,12 +132,13 @@ const assistantFlow = ai.defineFlow(
         return { reply: llmResponse.text()! };
       }
 
-      const toolCall = llmResponse.toolRequest()?.toolCalls[0];
-      if (!toolCall) {
+      const toolRequest = llmResponse.toolRequest();
+      if (!toolRequest || !toolRequest.toolCalls.length) {
         // Should not happen, but as a fallback
         break;
       }
       
+      const toolCall = toolRequest.toolCalls[0];
       const toolResult = await ai.runTool(toolCall);
       
       llmResponse = await llmResponse.continue({
