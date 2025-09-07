@@ -128,8 +128,8 @@ const assistantFlow = ai.defineFlow(
     let llmResponse = await prompt(input);
 
     while (true) {
-      if (llmResponse.text()) {
-        return { reply: llmResponse.text()! };
+      if (llmResponse.text) {
+        return { reply: llmResponse.text! };
       }
 
       const toolRequest = llmResponse.toolRequest();
