@@ -2,6 +2,9 @@
 import { NextResponse } from 'next/server';
 
 const goalOptionsMap: Record<string, string> = {
+    "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak.": "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman.",
+    "Brendim bor, lekin u samarasiz, tahlil va maslahat kerak.": "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak.",
+    "Brending kuchini tushunaman va aniq maqsad bilan keldim.": "Brendingiz kuchini tushunaman va aniq maqsad bilan murojaat qilyapman.",
     exploring: "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman.",
     has_problem: "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak.",
     ready_to_start: "Brendingiz kuchini tushunaman va aniq maqsad bilan murojaat qilyapman.",

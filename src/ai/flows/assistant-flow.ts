@@ -13,32 +13,38 @@ const MessageSchema = z.object({
   content: z.string(),
 });
 
+// AI'dan keladigan javob sxemasi
+const AssistantOutputSchema = z.object({
+  reply: z.string().describe("AI assistentning matnli javobi."),
+  choices: z.array(z.string()).optional().describe("Agar foydalanuvchiga tanlov taklif qilinsa, shu variantlar ro'yxati."),
+});
+export type AssistantOutput = z.infer<typeof AssistantOutputSchema>;
+
+// Foydalanuvchidan keladigan so'rov sxemasi
 const AssistantInputSchema = z.object({
   query: z.string().describe('Foydalanuvchining oxirgi savoli yoki xabari.'),
   history: z.array(MessageSchema).optional().describe("Oldingi suhbat tarixi."),
 });
 export type AssistantInput = z.infer<typeof AssistantInputSchema>;
 
-const AssistantOutputSchema = z.object({
-  reply: z.string().describe("AI assistentning javobi"),
-});
-export type AssistantOutput = z.infer<typeof AssistantOutputSchema>;
 
-
-// 1. Tool uchun Zod schema'sini yaratamiz
+// 1. Tool uchun Zod schema'sini kengaytiramiz
 const SendLeadInputSchema = z.object({
     fullName: z.string().describe("Mijozning to'liq ismi."),
     phone: z.string().optional().describe("Mijozning telefon raqami."),
     telegram: z.string().optional().describe("Mijozning Telegram niki."),
     companyName: z.string().optional().describe("Mijozning kompaniyasi yoki loyiha nomi."),
+    goal: z.string().optional().describe("Mijozning asosiy maqsadi."),
+    budget: z.string().optional().describe("Mijozning taxminiy byudjeti."),
+    location: z.string().optional().describe("Mijozning joylashuvi."),
     notes: z.string().describe("Suhbatdan olingan barcha muhim ma'lumotlar, mijozning ehtiyojlari va muammolari haqidagi qisqacha xulosa."),
 });
 
-// 2. Telegramga ma'lumot yuboradigan Tool'ni aniqlaymiz
+// 2. Telegramga ma'lumot yuboradigan Tool'ni yangilaymiz
 const sendLeadToTelegram = ai.defineTool(
     {
         name: 'sendLeadToTelegram',
-        description: "Mijoz haqida yetarlicha ma'lumot to'planganda (ismi, kompaniyasi, ehtiyoji, aloqa ma'lumoti) bu tool'ni ishlat. Bu ma'lumotni menejerga yuboradi.",
+        description: "Mijoz haqida BARCHA kerakli ma'lumotlar (ismi, kompaniyasi, maqsadi, byudjeti, joylashuvi, aloqa ma'lumoti) to'planganda, faqat o'shanda bu tool'ni ishlat. Bu ma'lumotni menejerga yuboradi.",
         inputSchema: SendLeadInputSchema,
         outputSchema: z.string(),
     },
@@ -48,19 +54,23 @@ const sendLeadToTelegram = ai.defineTool(
             const chatId = '-1002566480563';
 
             const message = `
-🤖 AI Assistant orqali yangi LEAD!
+🤖 AI Assistant orqali YANGI SIFATLI LEAD!
 
 👤 Ismi: ${input.fullName}
 📞 Telefon: ${input.phone || "Noma'lum"}
 ✈️ Telegram: ${input.telegram || "Noma'lum"}
 🏢 Kompaniya: ${input.companyName || "Noma'lum"}
 
+🎯 Maqsadi: ${input.goal || "Noma'lum"}
+💰 Byudjeti: ${input.budget || "Noma'lum"}
+📍 Joylashuvi: ${input.location || "Noma'lum"}
+
 📝 Suhbat xulosasi:
 ${input.notes}
             `.trim();
 
             const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-            const payload = { chat_id: chatId, text: message };
+            const payload = { chat_id: chatId, text: message, parse_mode: 'Markdown' };
             
             const response = await fetch(url, {
                 method: 'POST',
@@ -82,34 +92,45 @@ ${input.notes}
     }
 );
 
-
 export async function chatAssistant(input: AssistantInput): Promise<AssistantOutput> {
   return assistantFlow(input);
 }
 
-// 3. System promptni yangilaymiz
-const systemPrompt = `Sen "Jon.Branding" nomli brending agentligining "Jon" ismli virtual yordamchisisan. Sen allaqachon salomlashib, o'zingni tanishtirding. Endi sening vazifang - tashrif buyuruvchilar bilan qisqa savol-javoblar orqali muloqot o'rnatib, ularni sifatli "lead" (potensial mijoz) holatiga olib kelish.
 
-**Sening asosiy maqsading:** Mijoz haqida asosiy ma'lumotlarni (ismi, kompaniyasi, ehtiyojlari, aloqa ma'lumotlari) aniqlash va bu ma'lumotlarni menejerga yuborish uchun 'sendLeadToTelegram' tool'ini ishlatish.
+// 3. System promptni butunlay yangilaymiz
+const systemPrompt = `Sen "Jon.Branding" nomli brending agentligining "Jon" ismli malakali va aqlli virtual yordamchisisan. Sening vazifang - tashrif buyuruvchilarni sifatli "lead"ga aylantirish.
+
+**Sening asosiy maqsading:** Mijoz haqida BARCHA kerakli ma'lumotlarni bosqichma-bosqich yig'ish va oxirida 'sendLeadToTelegram' tool'ini ishlatish.
 
 **Muloqot uslubing:**
-- **Qisqa va aniq:** Uzoq paragraflar yozma. **Bir vaqtning o'zida faqat bitta savol ber.**
-- **Suhbatni boshqar:** Suhbatdan kelib chiqib, mantiqiy savollar ber. Javobni kutib o'tirma, suhbatni o'zing rivojlantir.
-- **Ma'lumot yig'uvchi:** Asosiy maqsading - ma'lumot to'plash.
-- **Takrorlama:** Hech qachon bir xil savolni qayta-qayta so'rama va "Assalomu alaykum, men Jon..." deb qayta tanishtirma.
+- **Qisqa va aniq:** Uzoq gapirma. **Bir vaqtning o'zida faqat bitta savol ber.**
+- **Suhbatni boshqar:** Mantiqiy ketma-ketlikda savollar ber. Hech qachon bir xil savolni qayta so'rama.
+- **Tanishish:** Sen allaqachon salomlashib, o'zingni tanishtirgansan. Buni qaytarma.
 
-**Suhbat mantig'i (QAT'IY AMAL QIL):**
-1.  **Loyiha nomini so'ra:** Suhbatni darhol "Biznesingiz yoki loyihangiz nomi nima?" deb boshla. Agar allaqachon so'ragan bo'lsang, bu qadamni o'tkazib yubor.
-2.  **Maqsadni aniqla:** Keyingi savoling "Brending sohasida qanday maqsadingiz yoki muammoingiz bor?" bo'lsin. (Masalan, "yangi logotip kerak", "sotuvlar tushib ketyapti"). Agar allaqachon so'ragan bo'lsang, bu qadamni o'tkazib yubor.
-3.  **Ismini so'ra:** Keyin, "Tushunarli. O'zingizni tanishtirsangiz, ismingiz nima?" deb savol ber. Agar allaqachon so'ragan bo'lsang, bu qadamni o'tkazib yubor.
-4.  **Aloqa ma'lumotini so'ra:** Ismini bilgandan so'ng, "Xursandman, [Mijozning ismi]. Endi menejerimiz siz bilan bog'lanishi uchun telefon raqamingizni yoki telegram linkingizni yozib yuboring" deb so'ra.
-5.  **Tool'ni ishlatish:** Mijoz haqida yetarlicha ma'lumot (ismi, ehtiyoji va aloqa ma'lumoti) to'plaganingdan so'ng, darhol 'sendLeadToTelegram' tool'ini ishga tushir. Suhbatdan olgan barcha ma'lumotlaringni 'notes' maydoniga yoz.
-6.  **Yakunlash:** Tool'dan "muvaffaqiyatli yuborildi" javobini olganingdan so'ng, foydalanuvchiga "Rahmat! Ma'lumotlaringizni menejerimizga yubordim. Tez orada siz bilan bog'lanishadi!" deb javob ber va suhbatni yakunla.
+**SUHBATNING QAT'IY STSENARIYSI:**
+Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud bo'lsa, keyingi bosqichga o't.
 
-**Muhim qoidalar:**
-- **Narxlar haqida savol berilsa, ALOHIDA-ALOHIDA SO'RA:** Agar foydalanuvchi narxlar haqida so'rasa va sen uning ismini hali bilmasang, "Bu haqda menejerimiz sizga batafsil ma'lumot beradi. Avval ismingizni bilsam bo'ladimi?" deb javob ber. Agar ismini bilsang, "Rahmat, [Mijozning ismi]. Endi telefon raqamingizni yozib yuboring, menejerimiz bog'lanib narxlar haqida to'liq ma'lumot beradi" deb so'ra. Hech qachon ism va telefonni birga so'rama.
-- Hech qachon o'zing narx yoki muddat aytma.
+1.  **Loyiha nomi:** "Biznesingiz yoki loyihangiz nomi nima?" deb so'ra.
+
+2.  **Asosiy maqsad:** "Brending sohasida qanday asosiy maqsadingiz bor?" deb so'ra va **choices** maydoniga quyidagi variantlarni JSON massivi sifatida yubor:
+    ["Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak.", "Brendim bor, lekin u samarasiz, tahlil va maslahat kerak.", "Brending kuchini tushunaman va aniq maqsad bilan keldim."]
+
+3.  **Byudjet:** "Loyiha uchun taxminiy byudjetingiz qanday?" deb so'ra va **choices** maydoniga quyidagi variantlarni JSON massivi sifatida yubor:
+    ["Hali mavjud emas / Faqat o'rganayapman", "$500 gacha", "$500 - $1,500", "$1,500 - $3,000", "$3,000 dan yuqori"]
+
+4.  **Joylashuv:** "Qayerdansiz? Joylashuvingizni tanlang." deb so'ra va **choices** maydoniga quyidagi variantlarni JSON massivi sifatida yubor:
+    ["Toshkent", "Farg'ona", "Boshqa viloyat"]
+
+5.  **Ism:** "Tushunarli. Endi o'zingizni tanishtirsangiz, ismingiz nima?" deb so'ra.
+
+6.  **Aloqa ma'lumoti:** "Xursandman, [Mijozning ismi]. Menejerimiz siz bilan bog'lanishi uchun telefon raqamingizni yoki telegram linkingizni yozib yuboring." deb so'ra.
+
+7.  **Tool'ni ishlatish:** Yuqoridagi BARCHA ma'lumotlar yig'ilgandan keyingina, 'sendLeadToTelegram' tool'ini ishga tushir. Suhbatdan olgan barcha ma'lumotlaringni 'notes' maydoniga yoz.
+
+**MUHIM QOIDALAR:**
 - Agar foydalanuvchi ma'lumot berishdan bosh tortsa, "Tushunarli. Qachonki tayyor bo'lsangiz, men shu yerdaman" deb javob ber.
+- Hech qachon o'zing narx yoki muddat aytma.
+- Agar foydalanuvchi jarayondan chetga chiqib, boshqa savol bersa (masalan, "Portfolioingizni ko'rsating"), avval uning savoliga javob ber, keyin stsenariy bo'yicha to'xtagan joyingdan davom et.
 
 {{#if history}}
 **Suhbat tarixi:**
@@ -121,10 +142,11 @@ const systemPrompt = `Sen "Jon.Branding" nomli brending agentligining "Jon" isml
 
 Mijozning hozirgi savoli: {{{query}}}`;
 
-
+// Promptni aniqlaymiz, chiqish sxemasini qo'shamiz
 const prompt = ai.definePrompt({
   name: 'assistantPrompt',
   input: {schema: AssistantInputSchema},
+  output: {schema: AssistantOutputSchema},
   prompt: systemPrompt,
   tools: [sendLeadToTelegram],
 });
@@ -148,13 +170,12 @@ const assistantFlow = ai.defineFlow(
     let llmResponse = await prompt(promptInput);
 
     while (true) {
-      if (llmResponse.text) {
-        return { reply: llmResponse.text };
+      if (llmResponse.output()) {
+        return llmResponse.output()!;
       }
 
       const toolRequest = llmResponse.toolRequest();
       if (!toolRequest || !toolRequest.toolCalls.length) {
-        // Should not happen, but as a fallback
         break;
       }
       
