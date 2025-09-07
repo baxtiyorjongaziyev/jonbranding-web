@@ -128,25 +128,26 @@ const assistantFlow = ai.defineFlow(
     let llmResponse = await prompt(input);
 
     while (true) {
-      const text = llmResponse.text();
-      if (text) {
-        return { reply: text };
+      if (llmResponse.text()) {
+        return { reply: llmResponse.text()! };
       }
 
-      const toolCall = llmResponse.toolCalls()?.[0];
+      const toolCall = llmResponse.toolRequest()?.toolCalls[0];
       if (!toolCall) {
         // Should not happen, but as a fallback
         break;
       }
       
-      const toolResult = await llmResponse.toolRequest(toolCall.id);
+      const toolResult = await ai.runTool(toolCall);
       
       llmResponse = await llmResponse.continue({
         toolResult: {
-          id: toolCall.id,
-          toolName: toolCall.name,
-          output: toolResult.output as any,
-        }
+          toolResult: {
+            tool: toolCall.name,
+            callId: toolCall.callId,
+            result: toolResult as any,
+          },
+        },
       });
     }
     
