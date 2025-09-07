@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useRef, useEffect, FC } from 'react';
@@ -41,7 +40,7 @@ const AiAssistant: FC = () => {
       }, 500);
       return () => clearTimeout(timer);
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length]);
   
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -56,14 +55,23 @@ const AiAssistant: FC = () => {
   const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
 
-    const userMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
-    setMessages(prev => [...prev, userMessage]);
+    const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
+    const newMessages = [...messages, newUserMessage];
+    setMessages(newMessages);
     setInputValue('');
     setIsLoading(true);
     setShowSuggestions(false);
 
+    // Prepare history for the AI
+    const history = newMessages.map(msg => ({
+        role: msg.sender,
+        content: msg.text,
+    }));
+    // Remove the current query from history, as it's passed separately
+    history.pop(); 
+
     try {
-      const response = await chatAssistant({ query: messageText });
+      const response = await chatAssistant({ query: messageText, history });
       const botMessage: Message = { id: (Date.now() + 1).toString(), text: response.reply, sender: 'bot' };
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
@@ -106,7 +114,7 @@ const AiAssistant: FC = () => {
           <CardHeader className="flex flex-row items-center justify-between p-4 border-b">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <Bot className="w-7 h-7 text-primary" />
+                <Bot className="w-6 h-6 text-primary" />
                 <span className="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-white" />
               </div>
               <div className="grid gap-0.5">
@@ -125,7 +133,7 @@ const AiAssistant: FC = () => {
                   <div
                     key={message.id}
                     className={cn(
-                      "flex items-end gap-2 animate-fade-in",
+                      "flex items-end gap-2",
                       message.sender === 'user' ? 'justify-end' : 'justify-start'
                     )}
                   >
