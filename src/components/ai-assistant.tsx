@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useState, useRef, useEffect, FC } from 'react';
+import { useState, useRef, useEffect, FC, Fragment } from 'react';
 import { Button } from '@/components/ui/button';
 import { MessageSquare, Send, X, Bot, User, Loader2 } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
@@ -13,7 +14,7 @@ interface Message {
   id: string;
   text: string;
   sender: 'user' | 'bot';
-  choices?: string[];
+  choices?: string[] | null;
 }
 
 const suggestionChips = [
@@ -21,6 +22,27 @@ const suggestionChips = [
     "Portfolioingizni ko'rsating",
     "Ishlash jarayoni qanday?",
 ];
+
+const renderTextWithLinks = (text: string) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.split(urlRegex).map((part, index) => {
+    if (part.match(urlRegex)) {
+      return (
+        <a
+          key={index}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary underline hover:text-primary/80 font-medium"
+        >
+          {part}
+        </a>
+      );
+    }
+    return <Fragment key={index}>{part}</Fragment>;
+  });
+};
+
 
 const AiAssistant: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -173,7 +195,7 @@ const AiAssistant: FC = () => {
                             : 'bg-secondary text-secondary-foreground rounded-bl-none'
                         )}
                       >
-                        <p className="text-sm break-words whitespace-pre-wrap">{message.text}</p>
+                        <p className="text-sm break-words whitespace-pre-wrap">{renderTextWithLinks(message.text)}</p>
                       </div>
                        {message.sender === 'user' && (
                         <div className="w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center flex-shrink-0">
