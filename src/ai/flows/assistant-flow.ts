@@ -116,8 +116,8 @@ const systemPrompt = `Sen "Jon.Branding" nomli brending agentligining "Jon" isml
 {{#if history}}
 **Suhbat tarixi:**
 {{#each history}}
-  {{#if (eq role 'user')}}Foydalanuvchi: {{content}}{{/if}}
-  {{#if (eq role 'bot')}}Jon (AI): {{content}}{{/if}}
+  {{#if isUser}}Foydalanuvchi: {{content}}{{/if}}
+  {{#if isBot}}Jon (AI): {{content}}{{/if}}
 {{/each}}
 {{/if}}
 
@@ -138,7 +138,16 @@ const assistantFlow = ai.defineFlow(
     outputSchema: AssistantOutputSchema,
   },
   async (input) => {
-    let llmResponse = await prompt(input);
+    
+    const augmentedHistory = input.history?.map(msg => ({
+      ...msg,
+      isUser: msg.role === 'user',
+      isBot: msg.role === 'bot'
+    }));
+
+    const promptInput = { ...input, history: augmentedHistory };
+
+    let llmResponse = await prompt(promptInput);
 
     while (true) {
       if (llmResponse.text) {
