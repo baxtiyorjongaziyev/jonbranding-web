@@ -13,13 +13,13 @@ interface Message {
   id: string;
   text: string;
   sender: 'user' | 'bot';
+  choices?: string[];
 }
 
 const suggestionChips = [
     "Xizmatlar va narxlar",
     "Portfolioingizni ko'rsating",
     "Ishlash jarayoni qanday?",
-    "PCG a'zolariga chegirma bormi?"
 ];
 
 const AiAssistant: FC = () => {
@@ -27,7 +27,6 @@ const AiAssistant: FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const chatCardRef = useRef<HTMLDivElement>(null);
 
@@ -36,9 +35,8 @@ const AiAssistant: FC = () => {
     if (isOpen && messages.length === 0) {
       const timer = setTimeout(() => {
         setMessages([
-          { id: 'initial', text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.", sender: 'bot' }
+          { id: 'initial', text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.", sender: 'bot', choices: suggestionChips }
         ]);
-        setShowSuggestions(true);
       }, 500);
       return () => clearTimeout(timer);
     }
@@ -75,9 +73,12 @@ const AiAssistant: FC = () => {
   const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
 
+    // Remove choices from previous bot message
+    setMessages(prev => prev.map(m => m.sender === 'bot' ? { ...m, choices: undefined } : m));
+
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
     
-    const currentHistory = messages.map(msg => ({
+    const currentHistory = [...messages, newUserMessage].map(msg => ({
         role: msg.sender === 'user' ? 'user' : 'bot',
         content: msg.text
     }));
@@ -85,11 +86,15 @@ const AiAssistant: FC = () => {
     setMessages(prev => [...prev, newUserMessage]);
     setInputValue('');
     setIsLoading(true);
-    setShowSuggestions(false);
 
     try {
       const response = await chatAssistant({ query: messageText, history: currentHistory });
-      const botMessage: Message = { id: (Date.now() + 1).toString(), text: response.reply, sender: 'bot' };
+      const botMessage: Message = { 
+          id: (Date.now() + 1).toString(), 
+          text: response.reply, 
+          sender: 'bot',
+          choices: response.choices 
+      };
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error("AI Assistant Error:", error);
@@ -122,12 +127,12 @@ const AiAssistant: FC = () => {
       </div>
 
       <div className={cn(
-        "fixed bottom-6 right-6 z-[60] w-[calc(100%-3rem)] sm:w-[380px] transition-all duration-300 ease-in-out",
+        "fixed bottom-6 right-6 z-[60] w-[calc(100%-3rem)] sm:w-[400px] transition-all duration-300 ease-in-out",
         isOpen 
           ? 'opacity-100 translate-y-0' 
           : 'opacity-0 translate-y-10 pointer-events-none'
       )}>
-        <Card ref={chatCardRef} className="h-[600px] max-h-[80vh] flex flex-col shadow-2xl rounded-2xl">
+        <Card ref={chatCardRef} className="h-[650px] max-h-[80vh] flex flex-col shadow-2xl rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between p-4 border-b">
             <div className="flex items-center gap-3">
               <div className="relative">
@@ -149,30 +154,47 @@ const AiAssistant: FC = () => {
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={cn(
+                    className="flex flex-col gap-2"
+                  >
+                    <div className={cn(
                       "flex items-end gap-2",
                       message.sender === 'user' ? 'justify-end' : 'justify-start'
-                    )}
-                  >
-                    {message.sender === 'bot' && (
-                      <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0">
-                        <Bot className="w-5 h-5" />
-                      </div>
-                    )}
-                    <div
-                      className={cn(
-                        "p-3 rounded-2xl max-w-[85%]",
-                        message.sender === 'user'
-                          ? 'bg-primary text-primary-foreground rounded-br-none'
-                          : 'bg-secondary text-secondary-foreground rounded-bl-none'
+                    )}>
+                      {message.sender === 'bot' && (
+                        <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0">
+                          <Bot className="w-5 h-5" />
+                        </div>
                       )}
-                    >
-                      <p className="text-sm break-words whitespace-pre-wrap">{message.text}</p>
-                    </div>
-                     {message.sender === 'user' && (
-                      <div className="w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center flex-shrink-0">
-                        <User className="w-5 h-5" />
+                      <div
+                        className={cn(
+                          "p-3 rounded-2xl max-w-[85%]",
+                          message.sender === 'user'
+                            ? 'bg-primary text-primary-foreground rounded-br-none'
+                            : 'bg-secondary text-secondary-foreground rounded-bl-none'
+                        )}
+                      >
+                        <p className="text-sm break-words whitespace-pre-wrap">{message.text}</p>
                       </div>
+                       {message.sender === 'user' && (
+                        <div className="w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center flex-shrink-0">
+                          <User className="w-5 h-5" />
+                        </div>
+                      )}
+                    </div>
+                    {message.choices && message.choices.length > 0 && (
+                       <div className="flex flex-col items-start gap-2 pt-2 animate-fade-in pl-10">
+                          {message.choices.map((choice) => (
+                              <Button 
+                                  key={choice}
+                                  variant="outline"
+                                  size="sm"
+                                  className="bg-background h-auto py-2 whitespace-normal text-left"
+                                  onClick={() => handleSuggestionClick(choice)}
+                              >
+                                  {choice}
+                              </Button>
+                          ))}
+                       </div>
                     )}
                   </div>
                 ))}
@@ -186,21 +208,6 @@ const AiAssistant: FC = () => {
                          </div>
                     </div>
                  )}
-                  {showSuggestions && (
-                     <div className="flex flex-col items-start gap-2 pt-2 animate-fade-in">
-                        {suggestionChips.map((suggestion) => (
-                            <Button 
-                                key={suggestion}
-                                variant="outline"
-                                size="sm"
-                                className="bg-background"
-                                onClick={() => handleSuggestionClick(suggestion)}
-                            >
-                                {suggestion}
-                            </Button>
-                        ))}
-                     </div>
-                  )}
               </div>
             </ScrollArea>
           </CardContent>
