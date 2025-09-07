@@ -170,11 +170,11 @@ const assistantFlow = ai.defineFlow(
     let llmResponse = await prompt(promptInput);
 
     while (true) {
-      if (llmResponse.output()) {
-        return llmResponse.output()!;
+      if (llmResponse.output) {
+        return llmResponse.output!;
       }
 
-      const toolRequest = llmResponse.toolRequest();
+      const toolRequest = llmResponse.toolRequest;
       if (!toolRequest || !toolRequest.toolCalls.length) {
         break;
       }
