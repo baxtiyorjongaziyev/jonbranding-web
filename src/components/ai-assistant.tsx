@@ -28,7 +28,7 @@ const AiAssistant: FC = () => {
       // Add a small delay to make it feel more natural
       const timer = setTimeout(() => {
         setMessages([
-          { id: 'initial', text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending bo'yicha qanday savollaringiz bor?", sender: 'bot' }
+          { id: 'initial', text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.", sender: 'bot' }
         ]);
       }, 500);
       return () => clearTimeout(timer);
