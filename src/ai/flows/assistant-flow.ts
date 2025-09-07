@@ -114,20 +114,8 @@ Mijozning hozirgi savoli: {{{query}}}`;
 const prompt = ai.definePrompt({
   name: 'assistantPrompt',
   input: {schema: AssistantInputSchema},
-  output: {schema: AssistantOutputSchema},
   prompt: systemPrompt,
-  // 4. Promptga tool'ni qo'shamiz
   tools: [sendLeadToTelegram],
-  // 5. Tool'dan kelgan javobni qayta ishlash uchun `output.format`dan foydalanamiz
-  output: {
-    format: (response) => ({
-      reply:
-        response.toolCalls?.[0]?.output ||
-        response.text ||
-        "Kechirasiz, hozir javob bera olmayman.",
-    }),
-    schema: AssistantOutputSchema,
-  },
 });
 
 const assistantFlow = ai.defineFlow(
@@ -137,7 +125,15 @@ const assistantFlow = ai.defineFlow(
     outputSchema: AssistantOutputSchema,
   },
   async (input) => {
-    const {output} = await prompt(input);
-    return output!;
+    const response = await prompt(input);
+    const toolCallOutput = response.toolCalls()?.[0]?.output;
+    const textOutput = response.text();
+
+    const reply =
+        typeof toolCallOutput === 'string'
+        ? toolCallOutput
+        : textOutput || "Kechirasiz, hozir javob bera olmayman.";
+        
+    return { reply };
   }
 );
