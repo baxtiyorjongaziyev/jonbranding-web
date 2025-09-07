@@ -29,6 +29,8 @@ const AiAssistant: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const chatCardRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
@@ -51,27 +53,42 @@ const AiAssistant: FC = () => {
     }
   }, [messages, isLoading]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+        if (chatCardRef.current && !chatCardRef.current.contains(event.target as Node)) {
+            setIsOpen(false);
+        }
+    };
+
+    if (isOpen) {
+        document.addEventListener('mousedown', handleClickOutside);
+    } else {
+        document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
 
   const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
-    const newMessages = [...messages, newUserMessage];
-    setMessages(newMessages);
+    
+    const currentHistory = messages.map(msg => ({
+        role: msg.sender === 'user' ? 'user' : 'bot',
+        content: msg.text
+    }));
+    
+    setMessages(prev => [...prev, newUserMessage]);
     setInputValue('');
     setIsLoading(true);
     setShowSuggestions(false);
 
-    // Prepare history for the AI
-    const history = newMessages.map(msg => ({
-        role: msg.sender,
-        content: msg.text,
-    }));
-    // Remove the current query from history, as it's passed separately
-    history.pop(); 
-
     try {
-      const response = await chatAssistant({ query: messageText, history });
+      const response = await chatAssistant({ query: messageText, history: currentHistory });
       const botMessage: Message = { id: (Date.now() + 1).toString(), text: response.reply, sender: 'bot' };
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
@@ -110,7 +127,7 @@ const AiAssistant: FC = () => {
           ? 'opacity-100 translate-y-0' 
           : 'opacity-0 translate-y-10 pointer-events-none'
       )}>
-        <Card className="h-[600px] max-h-[80vh] flex flex-col shadow-2xl rounded-2xl">
+        <Card ref={chatCardRef} className="h-[600px] max-h-[80vh] flex flex-col shadow-2xl rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between p-4 border-b">
             <div className="flex items-center gap-3">
               <div className="relative">
