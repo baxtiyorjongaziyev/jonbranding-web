@@ -25,9 +25,13 @@ const AiAssistant: FC = () => {
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      setMessages([
-        { id: 'initial', text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending bo'yicha qanday savollaringiz bor?", sender: 'bot' }
-      ]);
+      // Add a small delay to make it feel more natural
+      const timer = setTimeout(() => {
+        setMessages([
+          { id: 'initial', text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending bo'yicha qanday savollaringiz bor?", sender: 'bot' }
+        ]);
+      }, 500);
+      return () => clearTimeout(timer);
     }
   }, [isOpen, messages.length]);
   
@@ -69,23 +73,25 @@ const AiAssistant: FC = () => {
         <Button
           onClick={() => setIsOpen(true)}
           size="icon"
-          className="rounded-full w-16 h-16 bg-primary text-primary-foreground shadow-lg hover:bg-primary/90"
+          className="rounded-full w-16 h-16 bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 animate-subtle-pulse"
         >
           <Bot className="w-8 h-8" />
         </Button>
       </div>
 
       <div className={cn(
-        "fixed bottom-6 right-6 z-50 transition-all duration-300 ease-in-out",
-        isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+        "fixed bottom-6 right-6 z-50 w-[350px] transition-all duration-500 ease-in-out",
+        isOpen 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-10 pointer-events-none'
       )}>
-        <Card className="w-[350px] h-[500px] flex flex-col shadow-2xl rounded-2xl">
+        <Card className="h-[500px] flex flex-col shadow-2xl rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between p-4 border-b">
             <div className="flex items-center gap-3">
-              <Bot className="w-7 h-7 text-primary" />
+              <Bot className="w-6 h-6 text-primary" />
               <CardTitle className="text-lg font-bold">Jon Assistant</CardTitle>
             </div>
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
+            <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 rounded-full">
               <X className="w-5 h-5" />
             </Button>
           </CardHeader>
