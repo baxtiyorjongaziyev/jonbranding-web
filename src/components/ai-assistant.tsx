@@ -95,7 +95,7 @@ const AiAssistant: FC = () => {
               <X className="w-5 h-5" />
             </Button>
           </CardHeader>
-          <CardContent className="flex-1 p-0">
+          <CardContent className="flex-1 p-0 min-h-0">
             <ScrollArea className="h-full p-4" ref={scrollAreaRef}>
               <div className="space-y-4">
                 {messages.map((message) => (
