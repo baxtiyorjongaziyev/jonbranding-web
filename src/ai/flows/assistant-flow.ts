@@ -116,6 +116,9 @@ const prompt = ai.definePrompt({
   input: {schema: AssistantInputSchema},
   prompt: systemPrompt,
   tools: [sendLeadToTelegram],
+  output: {
+    schema: AssistantOutputSchema,
+  }
 });
 
 const assistantFlow = ai.defineFlow(
@@ -125,15 +128,21 @@ const assistantFlow = ai.defineFlow(
     outputSchema: AssistantOutputSchema,
   },
   async (input) => {
-    const response = await prompt(input);
-    const toolCallOutput = response.toolCalls()?.[0]?.output;
-    const textOutput = response.text();
-
-    const reply =
-        typeof toolCallOutput === 'string'
-        ? toolCallOutput
-        : textOutput || "Kechirasiz, hozir javob bera olmayman.";
-        
-    return { reply };
+    const llmResponse = await prompt(input);
+    const textOutput = llmResponse.text();
+    
+    if (textOutput) {
+        return { reply: textOutput };
+    }
+    
+    // Agar LLM to'g'ridan-to'g'ri javob bermasa (masalan, faqat tool ishlatsa), 
+    // tool natijasini qaytaramiz.
+    const toolCall = llmResponse.toolCalls()?.[0];
+    if (toolCall) {
+        const toolOutput = (await llmResponse.toolRequest(toolCall.id))?.output as string;
+        return { reply: toolOutput || "Ma'lumotlar yuborildi. Tez orada siz bilan bog'lanamiz." };
+    }
+    
+    return { reply: "Kechirasiz, hozir javob bera olmayman." };
   }
 );
