@@ -12,6 +12,7 @@ import { Poppins } from 'next/font/google';
 import { useState, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
+import AiAssistant from '@/components/ai-assistant';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'));
 
@@ -47,10 +48,10 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         setPackageSummary('');
         setTotalPrice(0);
 
-        if (selectionsJSON && wantsUpfrontPaymentJSON) {
+        if (selectionsJSON) {
             try {
                 const selectedServices = JSON.parse(selectionsJSON);
-                const wantsUpfrontPayment = JSON.parse(wantsUpfrontPaymentJSON);
+                const wantsUpfrontPayment = wantsUpfrontPaymentJSON ? JSON.parse(wantsUpfrontPaymentJSON) : false;
                 const selections = { selectedServices, wantsUpfrontPayment };
                 
                 const priceDetails = calculatePackagePrice(selections);
@@ -143,6 +144,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
             totalPrice={totalPrice}
             onFormSubmitSuccess={handleCloseModal}
         />
+        <AiAssistant />
       </body>
     </html>
   );
