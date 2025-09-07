@@ -131,7 +131,9 @@ Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud
 **MUHIM QOIDALAR:**
 - Agar foydalanuvchi ma'lumot berishdan bosh tortsa, "Tushunarli. Qachonki tayyor bo'lsangiz, men shu yerdaman" deb javob ber.
 - Hech qachon o'zing narx yoki muddat aytma.
-- Agar foydalanuvchi jarayondan chetga chiqib, boshqa savol bersa (masalan, "Portfolioingizni ko'rsating"), avval uning savoliga javob ber, keyin stsenariy bo'yicha to'xtagan joyingdan davom et.
+- Agar foydalanuvchi jarayondan chetga chiqib, boshqa savol bersa, uning savoliga javob ber va keyin stsenariy bo'yicha to'xtagan joyingdan davom et. Masalan:
+  - "Portfolio", "ishlaringiz", "namunalar" kabi so'zlar bo'lsa, shunday javob ber: "Albatta! Ishlarimiz bilan mana bu havolada tanishishingiz mumkin: https://jonbranding.uz/#portfolio . Tanib-chiqib, suhbatimizni davom ettiramiz."
+  - Narx haqida so'rasa, shunday javob ber: "Narxlar loyihaga qarab individual hisoblanadi. To'liqroq ma'lumot uchun menejerimiz sizga aloqaga chiqadi. Suhbatimizni davom ettirsak maylimi?"
 
 {{#if history}}
 **Suhbat tarixi:**
@@ -178,6 +180,11 @@ const assistantFlow = ai.defineFlow(
 
       const toolRequest = llmResponse.toolRequest;
       if (!toolRequest || !toolRequest.toolCalls.length) {
+        // Agar tool chaqirilmagan bo'lsa va javob ham bo'lmasa,
+        // bu odatda promptning o'zidan to'g'ri javob kelganini bildiradi.
+        // Ammo Genkitning ba'zi versiyalarida bu .output() ichida bo'lmasligi mumkin.
+        // Bizda bunday holatda text() bo'lmasligi kerak, lekin ehtiyot shart.
+        // Asosiy logikamiz yuqoridagi if(llmResponse.output) da.
         break;
       }
       
@@ -195,8 +202,7 @@ const assistantFlow = ai.defineFlow(
       });
     }
     
+    // Agar biror sabab bilan loopdan chiqib ketsa va javob bo'lmasa
     return { reply: "Kechirasiz, hozir javob bera olmayman." };
   }
 );
-
-    
