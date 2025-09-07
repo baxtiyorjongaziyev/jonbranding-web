@@ -116,9 +116,6 @@ const prompt = ai.definePrompt({
   input: {schema: AssistantInputSchema},
   prompt: systemPrompt,
   tools: [sendLeadToTelegram],
-  output: {
-    schema: AssistantOutputSchema,
-  }
 });
 
 const assistantFlow = ai.defineFlow(
@@ -128,28 +125,29 @@ const assistantFlow = ai.defineFlow(
     outputSchema: AssistantOutputSchema,
   },
   async (input) => {
-    const llmResponse = await prompt(input);
-    const textOutput = llmResponse.text();
-    
-    if (textOutput) {
-        return { reply: textOutput };
-    }
-    
-    const toolCall = llmResponse.toolCalls()?.[0];
-    if (toolCall) {
-        const toolResult = await llmResponse.toolRequest(toolCall.id);
-        const toolOutput = toolResult?.output as string;
-        
-        // Tool ishlatilgandan keyin ham modeldan javob olishga harakat qilamiz
-        const finalResponse = await llmResponse.continue({
-            toolResult: {
-                id: toolCall.id,
-                toolName: toolCall.name,
-                output: toolOutput
-            }
-        });
+    let llmResponse = await prompt(input);
 
-        return { reply: finalResponse.text() || toolOutput || "Ma'lumotlar yuborildi. Tez orada siz bilan bog'lanamiz." };
+    while (true) {
+      const text = llmResponse.text();
+      if (text) {
+        return { reply: text };
+      }
+
+      const toolCall = llmResponse.toolCalls()?.[0];
+      if (!toolCall) {
+        // Should not happen, but as a fallback
+        break;
+      }
+      
+      const toolResult = await llmResponse.toolRequest(toolCall.id);
+      
+      llmResponse = await llmResponse.continue({
+        toolResult: {
+          id: toolCall.id,
+          toolName: toolCall.name,
+          output: toolResult.output as any,
+        }
+      });
     }
     
     return { reply: "Kechirasiz, hozir javob bera olmayman." };
