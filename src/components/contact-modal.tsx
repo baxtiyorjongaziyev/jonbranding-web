@@ -108,10 +108,13 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setSubmitting(true);
     try {
+      const pickTwoPreferenceJSON = localStorage.getItem('pick2_pref');
+      const pickTwoPreference = pickTwoPreferenceJSON ? JSON.parse(pickTwoPreferenceJSON) : [];
+
       const response = await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, packageSummary, totalPrice }),
+        body: JSON.stringify({ ...data, packageSummary, totalPrice, pickTwoPreference }),
       });
 
       const result = await response.json();
@@ -179,7 +182,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const handlePrev = () => {
     if (step > 1) {
-      setStep(step + 1);
+      setStep(step - 1);
     }
   };
 

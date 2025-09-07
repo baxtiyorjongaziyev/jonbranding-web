@@ -13,6 +13,12 @@ const meetingPlaceMap: Record<string, string> = {
     client_office: "Mijoz ofisida",
 };
 
+const pickTwoLabels: Record<string, string> = {
+    cheap: 'Arzon',
+    quality: 'Sifatli',
+    fast: 'Tez',
+};
+
 export async function POST(request: Request) {
     const botToken = '7738413085:AAE_CYNnbpyoW5KiheUTJOPBmz_jHLVWgWc';
     const chatId = '-1002566480563';
@@ -24,7 +30,7 @@ export async function POST(request: Request) {
 
     try {
         const body = await request.json();
-        const { fullName, phone, telegram, notes, packageSummary, totalPrice, companyName, website, goal, budget, location, meetingPlace } = body;
+        const { fullName, phone, telegram, notes, packageSummary, totalPrice, companyName, website, goal, budget, location, meetingPlace, pickTwoPreference } = body;
 
         if (!fullName || !phone) {
             return NextResponse.json({ ok: false, error: "Ism va telefon raqam kiritilishi shart" }, { status: 400 });
@@ -99,6 +105,15 @@ ${packageSummary}
 💰 Yakuniy narx: ${totalPrice.toLocaleString('fr-FR')} so'm
               `.trim();
             }
+
+            let pickTwoInfo = '';
+            if (pickTwoPreference && Array.isArray(pickTwoPreference) && pickTwoPreference.length > 0) {
+                const translatedPreferences = pickTwoPreference.map(p => pickTwoLabels[p] || p).join(', ');
+                pickTwoInfo = `
+---
+⚖️ Mijoz ustuvorliklari: ${translatedPreferences}
+                `.trim();
+            }
             
             const meetingType = (location === 'Toshkent' || location === 'Farg\'ona') ? 'OFLAYN' : 'ONLAYN';
             const goalText = goalOptionsMap[goal] || goal || 'Kiritilmagan';
@@ -123,6 +138,7 @@ ${meetingType === 'OFLAYN' ? `Uchrashuv joyi: ${meetingPlaceText}` : ''}
 📞 Telefon: ${phone}
 ✈️ Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
 ${projectDetails}
+${pickTwoInfo}
 ${packageInfo}
 `.trim();
         }
