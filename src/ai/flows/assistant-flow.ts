@@ -16,7 +16,7 @@ const MessageSchema = z.object({
 // AI'dan keladigan javob sxemasi
 const AssistantOutputSchema = z.object({
   reply: z.string().describe("AI assistentning matnli javobi."),
-  choices: z.array(z.string()).optional().describe("Agar foydalanuvchiga tanlov taklif qilinsa, shu variantlar ro'yxati."),
+  choices: z.array(z.string()).nullable().optional().describe("Agar foydalanuvchiga tanlov taklif qilinsa, shu variantlar ro'yxati."),
 });
 export type AssistantOutput = z.infer<typeof AssistantOutputSchema>;
 
