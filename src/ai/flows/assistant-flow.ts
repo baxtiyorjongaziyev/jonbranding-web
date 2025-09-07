@@ -124,7 +124,7 @@ Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud
 
 5.  **Ism:** "Deyarli tugatdik. Endi o'zingizni tanishtirsangiz, ismingiz nima?"
 
-6.  **Aloqa ma'lumoti:** "Tanishganimdan xursandman, [Mijozning ismi]! Menejerimiz siz bilan bog'lanishi uchun telefon raqamingiz yoki telegram linkingizni yozib yuborsangiz."
+6.  **Aloqa ma'lumoti:** "Tanishganimdan xursandman, [Mijozning ismi]! Menejerimiz siz bilan bog'lanishi uchun telefon raqamingizni yozib yuborsangiz."
 
 7.  **Tool'ni ishlatish:** Yuqoridagi BARCHA ma'lumotlar yig'ilgandan keyingina, 'sendLeadToTelegram' tool'ini ishga tushir. Suhbatdan olgan barcha ma'lumotlaringni 'notes' maydoniga yoz.
 
@@ -203,6 +203,6 @@ const assistantFlow = ai.defineFlow(
     }
     
     // Agar biror sabab bilan loopdan chiqib ketsa va javob bo'lmasa
-    return { reply: "Kechirasiz, hozir javob bera olmayman." };
+    return { reply: "Kechirasiz, hozir javob bera olmayman.", choices: null };
   }
 );
