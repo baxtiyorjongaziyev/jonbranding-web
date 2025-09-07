@@ -8,9 +8,14 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'zod';
 
+const MessageSchema = z.object({
+  role: z.enum(['user', 'bot']),
+  content: z.string(),
+});
+
 const AssistantInputSchema = z.object({
-  query: z.string().describe('Foydalanuvchining savoli'),
-  // Xabarlar tarixini qo'shish mumkin, lekin hozircha oddiy saqlaymiz.
+  query: z.string().describe('Foydalanuvchining oxirgi savoli yoki xabari.'),
+  history: z.array(MessageSchema).optional().describe("Oldingi suhbat tarixi."),
 });
 export type AssistantInput = z.infer<typeof AssistantInputSchema>;
 
@@ -39,7 +44,6 @@ const sendLeadToTelegram = ai.defineTool(
     },
     async (input) => {
        try {
-            // Bu yerda bizning mavjud Telegramga yuborish logikamizni chaqiramiz
             const botToken = '7738413085:AAE_CYNnbpyoW5KiheUTJOPBmz_jHLVWgWc';
             const chatId = '-1002566480563';
 
@@ -90,13 +94,13 @@ const systemPrompt = `Sen "Jon.Branding" nomli brending agentligining "Jon" isml
 
 **Muloqot uslubing:**
 - **Qisqa va aniq:** Uzoq paragraflar yozma. Bir vaqtning o'zida faqat bitta savol ber.
-- **Suhbatni boshqar:** Javobni kutib o'tirma, suhbatni o'zing rivojlantir.
+- **Suhbatni boshqar:** Suhbatdan kelib chiqib, mantiqiy savollar ber. Javobni kutib o'tirma, suhbatni o'zing rivojlantir.
 - **Ma'lumot yig'uvchi:** Asosiy maqsading - ma'lumot to'plash.
-- **Takrorlama:** Hech qachon "Assalomu alaykum, men Jon..." deb qayta tanishtirma.
+- **Takrorlama:** Hech qachon bir xil savolni qayta-qayta so'rama va "Assalomu alaykum, men Jon..." deb qayta tanishtirma.
 
 **Suhbat mantig'i:**
 1.  **Suhbatni boshlash:** Darhol birinchi savolni ber. Masalan: "Biznesingiz yoki loyihangiz nomi nima?"
-2.  **Ma'lumot yig'ish:** Quyidagi ma'lumotlarni olishga harakat qil (tartib muhim emas, suhbatga qarab ish tut):
+2.  **Ma'lumot yig'ish:** Suhbat tarixidan foydalanib, quyidagi ma'lumotlarni olishga harakat qil (tartib muhim emas, suhbatga qarab ish tut):
     - Kompaniya yoki loyiha nomi.
     - Brending sohasidagi maqsadi yoki muammosi (masalan, "yangi logotip kerak", "sotuvlarimiz tushib ketyapti", "raqobatchilardan ajralib turmoqchimiz").
     - Ismi.
@@ -108,6 +112,14 @@ const systemPrompt = `Sen "Jon.Branding" nomli brending agentligining "Jon" isml
 - Narxlar, xizmatlar haqida umumiy savol berilsa, "Bu haqda menejerimiz sizga batafsil ma'lumot beradi. Ular siz bilan bog'lanishlari uchun ismingiz va telefon raqamingizni qoldira olasizmi?" deb javob ber.
 - Hech qachon o'zing narx yoki muddat aytma.
 - Agar foydalanuvchi ma'lumot berishdan bosh tortsa, "Tushunarli. Qachonki tayyor bo'lsangiz, men shu yerdaman" deb javob ber.
+
+{{#if history}}
+**Suhbat tarixi:**
+{{#each history}}
+  {{#if (eq role 'user')}}Foydalanuvchi: {{content}}{{/if}}
+  {{#if (eq role 'bot')}}Jon (AI): {{content}}{{/if}}
+{{/each}}
+{{/if}}
 
 Mijozning hozirgi savoli: {{{query}}}`;
 
