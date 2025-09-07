@@ -135,12 +135,21 @@ const assistantFlow = ai.defineFlow(
         return { reply: textOutput };
     }
     
-    // Agar LLM to'g'ridan-to'g'ri javob bermasa (masalan, faqat tool ishlatsa), 
-    // tool natijasini qaytaramiz.
     const toolCall = llmResponse.toolCalls()?.[0];
     if (toolCall) {
-        const toolOutput = (await llmResponse.toolRequest(toolCall.id))?.output as string;
-        return { reply: toolOutput || "Ma'lumotlar yuborildi. Tez orada siz bilan bog'lanamiz." };
+        const toolResult = await llmResponse.toolRequest(toolCall.id);
+        const toolOutput = toolResult?.output as string;
+        
+        // Tool ishlatilgandan keyin ham modeldan javob olishga harakat qilamiz
+        const finalResponse = await llmResponse.continue({
+            toolResult: {
+                id: toolCall.id,
+                toolName: toolCall.name,
+                output: toolOutput
+            }
+        });
+
+        return { reply: finalResponse.text() || toolOutput || "Ma'lumotlar yuborildi. Tez orada siz bilan bog'lanamiz." };
     }
     
     return { reply: "Kechirasiz, hozir javob bera olmayman." };
