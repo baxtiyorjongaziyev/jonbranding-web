@@ -92,7 +92,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                 <Button
                   onClick={onCtaClick}
                   size="lg"
-                  className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform text-lg animate-subtle-pulse px-8 py-6"
+                  className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform text-lg animate-subtle-pulse px-6 sm:px-8 py-6"
                 >
                   O'z joyimni band qilish
                   <ArrowRight className="ml-2 h-5 w-5" />
