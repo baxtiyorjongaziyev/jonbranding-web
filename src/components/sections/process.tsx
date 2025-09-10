@@ -1,4 +1,4 @@
-import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
+import { FileText, Search, Target, Pencil, Send, ClipboardSignature } from 'lucide-react';
 import CtaBlock from './cta-block';
 
 const steps = [
@@ -6,6 +6,11 @@ const steps = [
     icon: FileText,
     title: "Brief",
     description: "Sizning maqsadingiz, kutgan natijalaringiz va biznesingiz haqida ma'lumot to'playmiz."
+  },
+  {
+    icon: ClipboardSignature,
+    title: "Shartnoma va Kelishuv",
+    description: "Loyiha shartlarini kelishib olamiz, shartnoma imzolaymiz va oldindan to'lovni qabul qilamiz."
   },
   {
     icon: Search,
@@ -40,7 +45,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold">Bizning ish jarayonimiz</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
-            Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan 5 bosqichli tizim.
+            Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan bosqichli tizim.
           </p>
         </div>
         <div className="mt-16">
