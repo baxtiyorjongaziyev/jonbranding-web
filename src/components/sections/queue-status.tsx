@@ -49,7 +49,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
             <div className="mb-8">
                 <h3 className="text-center font-bold text-lg mb-4 text-white">Loyiha navbati</h3>
                  <TooltipProvider>
-                    <div className="flex justify-center items-center gap-2 sm:gap-4 p-4 bg-black/20 rounded-xl">
+                    <div className="flex justify-center items-center flex-wrap gap-1 sm:gap-4 p-2 sm:p-4 bg-black/20 rounded-xl">
                         {slots.map((_, index) => {
                             const isBooked = index < currentProjects;
                             const isNext = index === currentProjects;
@@ -57,7 +57,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                                 <Tooltip key={index}>
                                     <TooltipTrigger asChild>
                                         <div className={cn(
-                                            "relative flex flex-col items-center gap-2 p-2 rounded-lg transition-all",
+                                            "relative flex flex-col items-center gap-1 p-1 sm:p-2 rounded-lg transition-all",
                                             isBooked ? "text-gray-400" : "text-green-400",
                                             isNext && "animate-subtle-pulse bg-accent/20"
                                         )}>
