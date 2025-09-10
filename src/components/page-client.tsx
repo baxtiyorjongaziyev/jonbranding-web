@@ -55,7 +55,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
         <div className="text-sm">
             <p className="font-bold text-primary text-base">Loyihangizni muhokama qilamizmi?</p>
         </div>
-        <Button onClick={onOpenModal} className="shadow-ocean animate-subtle-pulse">
+        <Button onClick={onOpenModal} className="shadow-ocean animate-breathing">
           Murojaat qoldirish
         </Button>
       </div>

@@ -86,10 +86,10 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
               Jon.Branding bilan strategiyaga asoslangan vizual ko‘rinishga ega bo‘ling va raqobatchilardan ajralib turing.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-lg px-8 py-6 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-subtle-pulse">
+              <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-lg px-8 py-6 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-breathing">
                 {buttonTexts[buttonIndex]}
               </Button>
-              <Button onClick={(e) => handleScroll(e, '#package-builder')} variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-foreground/20 text-foreground hover:bg-primary hover:text-primary-foreground">
+              <Button onClick={(e) => handleScroll(e, '#package-builder')} variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-6 border-primary bg-transparent hover:bg-primary/10 text-foreground">
                   <Search className="mr-2 h-5 w-5" />
                   Brending Audit o'tkazish
               </Button>
