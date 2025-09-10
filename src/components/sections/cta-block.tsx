@@ -23,7 +23,7 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
               onClick={onCtaClick}
               size="lg"
               variant="secondary"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean text-base sm:text-lg animate-subtle-pulse h-auto py-3 px-6 whitespace-normal w-full sm:w-auto"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean text-base sm:text-lg animate-breathing h-auto py-3 px-6 whitespace-normal w-full sm:w-auto"
             >
               {buttonText}
               <ArrowRight className="ml-2 h-5 w-5 flex-shrink-0" />

@@ -370,7 +370,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                     />
                                 </InfoCard>
 
-                                <Button onClick={onOrderNow} className="w-full mt-6 text-lg bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean whitespace-normal h-auto animate-subtle-pulse py-4 rounded-xl" disabled={total.base === 0}>
+                                <Button onClick={onOrderNow} className="w-full mt-6 text-lg bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean whitespace-normal h-auto animate-breathing py-4 rounded-xl" disabled={total.base === 0}>
                                     {total.discountApplied.length > 0 ? "Chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
                                 </Button>
                                 

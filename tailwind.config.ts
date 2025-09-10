@@ -75,13 +75,9 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "subtle-pulse": {
-          "0%, 100%": {
-            boxShadow: "0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2)",
-          },
-          "50%": {
-            boxShadow: "0 20px 25px -5px hsl(var(--accent) / 0.3), 0 8px 10px -6px hsl(var(--accent) / 0.3)",
-          },
+        "breathing": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
         },
         "text-fade-in": {
           from: { opacity: "0", transform: "translateY(10px)" },
@@ -95,7 +91,7 @@ const config: Config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "subtle-pulse": "subtle-pulse 2.5s infinite",
+        "breathing": "breathing 2.5s ease-in-out infinite",
         "text-fade-in": "text-fade-in 0.8s ease-in-out",
         "text-fade-out": "text-fade-out 0.8s ease-in-out",
       },
