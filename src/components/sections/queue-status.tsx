@@ -49,7 +49,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
             <div className="mb-8">
                 <h3 className="text-center font-bold text-lg mb-4 text-white">Loyiha navbati</h3>
                  <TooltipProvider>
-                    <div className="flex justify-center items-center flex-wrap gap-1 sm:gap-4 p-2 sm:p-4 bg-black/20 rounded-xl">
+                    <div className="flex justify-center items-center flex-wrap gap-2 sm:gap-4 p-2 sm:p-4 bg-black/20 rounded-xl">
                         {slots.map((_, index) => {
                             const isBooked = index < currentProjects;
                             const isNext = index === currentProjects;
