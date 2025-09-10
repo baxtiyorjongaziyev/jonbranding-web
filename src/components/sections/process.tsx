@@ -69,11 +69,11 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
 
             {steps.map((step, index) => (
               <div key={index} className="relative flex lg:flex-col items-start lg:items-center lg:flex-1 w-full mb-12 lg:mb-0 last:mb-0">
-                <div className="flex-shrink-0 z-10">
+                <div className="flex-shrink-0 z-10 relative">
                   <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white border-4 border-white shadow-md transform hover:scale-110 transition-transform duration-300">
                     <step.icon className="h-12 w-12 text-primary" />
                   </div>
-                   <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm shadow-sm z-20">
+                   <div className="absolute -top-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm shadow-sm z-20">
                     {index + 1}
                   </div>
                 </div>

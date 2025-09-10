@@ -46,13 +46,13 @@ const Founder = () => {
               })}
             </div>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="shadow-ocean animate-subtle-pulse">
+                <Button asChild size="lg" className="w-full sm:w-auto shadow-ocean animate-subtle-pulse">
                     <a href="tel:+998336450097">
                         <Phone className="mr-2 h-5 w-5" />
                         Telefon orqali bog'lanish
                     </a>
                 </Button>
-                 <Button asChild size="lg" variant="outline">
+                 <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
                     <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
                         <Send className="mr-2 h-5 w-5" />
                         Telegram orqali yozish
