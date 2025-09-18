@@ -1,0 +1,51 @@
+{
+  "strategy-growth": {
+    "src": "https://picsum.photos/seed/strat1/800/600",
+    "width": 800,
+    "height": 600,
+    "alt": "Business growth strategy chart",
+    "hint": "business growth"
+  },
+  "strategy-thinking": {
+    "src": "https://picsum.photos/seed/strat2/800/601",
+    "width": 800,
+    "height": 601,
+    "alt": "Business owner thinking about brand strategy",
+    "hint": "brand strategy"
+  },
+  "style-perception": {
+    "src": "https://picsum.photos/seed/style1/800/600",
+    "width": 800,
+    "height": 600,
+    "alt": "Brand perception moodboard",
+    "hint": "visual perception"
+  },
+  "style-system": {
+    "src": "https://picsum.photos/seed/style2/800/601",
+    "width": 800,
+    "height": 601,
+    "alt": "Design system grid",
+    "hint": "design system"
+  },
+  "naming-brainstorm": {
+    "src": "https://picsum.photos/seed/name1/800/600",
+    "width": 800,
+    "height": 600,
+    "alt": "Brainstorming session for a brand name",
+    "hint": "words brainstorm"
+  },
+  "naming-idea": {
+    "src": "https://picsum.photos/seed/name2/800/601",
+    "width": 800,
+    "height": 601,
+    "alt": "Lightbulb representing a new idea",
+    "hint": "idea lightbulb"
+  },
+  "packaging-shelf": {
+    "src": "https://picsum.photos/seed/pack1/800/600",
+    "width": 800,
+    "height": 600,
+    "alt": "Products on a store shelf",
+    "hint": "product packaging"
+  }
+}

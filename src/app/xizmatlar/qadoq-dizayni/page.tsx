@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
+import placeholderImages from '@/app/lib/placeholder-images.json';
 
 const processSteps = [
     {
@@ -34,6 +35,8 @@ const QadoqDizayniPage: FC = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
+  
+  const packagingShelfImage = placeholderImages['packaging-shelf'];
 
   return (
     <>
@@ -68,7 +71,13 @@ const QadoqDizayniPage: FC = () => {
                     <div className="lg:order-last">
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/600" width={800} height={600} data-ai-hint="product packaging shelf" alt="Do'kon peshtaxtasidagi mahsulotlar" className="rounded-2xl object-cover"/>
+                            <Image 
+                                src={packagingShelfImage.src}
+                                width={packagingShelfImage.width}
+                                height={packagingShelfImage.height}
+                                data-ai-hint={packagingShelfImage.hint}
+                                alt={packagingShelfImage.alt}
+                                className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>

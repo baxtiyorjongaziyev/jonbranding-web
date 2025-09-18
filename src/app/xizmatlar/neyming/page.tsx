@@ -10,6 +10,7 @@ import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
+import placeholderImages from '@/app/lib/placeholder-images.json';
 
 const creationSteps = [
     {
@@ -40,6 +41,9 @@ const NamingPage: FC = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
+  
+  const namingBrainstormImage = placeholderImages['naming-brainstorm'];
+  const namingIdeaImage = placeholderImages['naming-idea'];
 
   return (
     <>
@@ -74,7 +78,13 @@ const NamingPage: FC = () => {
                     <div className="lg:order-last">
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/600" width={800} height={600} data-ai-hint="words brainstorm" alt="G'oyalar muhokamasi" className="rounded-2xl object-cover"/>
+                            <Image 
+                                src={namingBrainstormImage.src}
+                                width={namingBrainstormImage.width}
+                                height={namingBrainstormImage.height}
+                                data-ai-hint={namingBrainstormImage.hint}
+                                alt={namingBrainstormImage.alt}
+                                className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>
@@ -99,7 +109,13 @@ const NamingPage: FC = () => {
                     <div>
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/601" width={800} height={601} data-ai-hint="idea lightbulb" alt="G'oya" className="rounded-2xl object-cover"/>
+                            <Image 
+                                src={namingIdeaImage.src}
+                                width={namingIdeaImage.width}
+                                height={namingIdeaImage.height}
+                                data-ai-hint={namingIdeaImage.hint}
+                                alt={namingIdeaImage.alt}
+                                className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>

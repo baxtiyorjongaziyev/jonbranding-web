@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
+import placeholderImages from '@/app/lib/placeholder-images.json';
 
 const processSteps = [
     {
@@ -39,6 +40,9 @@ const FirmenniyStilPage: FC = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
+  
+  const stylePerceptionImage = placeholderImages['style-perception'];
+  const styleSystemImage = placeholderImages['style-system'];
 
   return (
     <>
@@ -73,7 +77,13 @@ const FirmenniyStilPage: FC = () => {
                     <div className="lg:order-last">
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/600" width={800} height={600} data-ai-hint="visual perception moodboard" alt="Brendni idrok etish" className="rounded-2xl object-cover"/>
+                            <Image 
+                                src={stylePerceptionImage.src}
+                                width={stylePerceptionImage.width}
+                                height={stylePerceptionImage.height}
+                                data-ai-hint={stylePerceptionImage.hint}
+                                alt={stylePerceptionImage.alt}
+                                className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>
@@ -101,7 +111,13 @@ const FirmenniyStilPage: FC = () => {
                     <div>
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image src="https://picsum.photos/800/601" width={800} height={601} data-ai-hint="design system grid" alt="Dizayn tizimi" className="rounded-2xl object-cover"/>
+                            <Image 
+                                src={styleSystemImage.src}
+                                width={styleSystemImage.width}
+                                height={styleSystemImage.height}
+                                data-ai-hint={styleSystemImage.hint}
+                                alt={styleSystemImage.alt}
+                                className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
                     </div>

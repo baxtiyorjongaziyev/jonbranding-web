@@ -8,6 +8,7 @@ import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
+import placeholderImages from '@/app/lib/placeholder-images.json';
 
 
 const processSteps = [
@@ -44,6 +45,9 @@ const BrandStrategyPage: FC = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
+  
+  const strategyGrowthImage = placeholderImages['strategy-growth'];
+  const strategyThinkingImage = placeholderImages['strategy-thinking'];
 
   return (
     <main className="flex-grow">
@@ -80,7 +84,14 @@ const BrandStrategyPage: FC = () => {
                    <div className="lg:order-last">
                       <Card className="shadow-xl rounded-2xl">
                          <CardContent className="p-0">
-                           <Image src="https://picsum.photos/800/600" data-ai-hint="business growth strategy" alt="Strategiya sxemasi" width={800} height={600} className="rounded-2xl object-cover"/>
+                           <Image 
+                             src={strategyGrowthImage.src} 
+                             data-ai-hint={strategyGrowthImage.hint} 
+                             alt={strategyGrowthImage.alt}
+                             width={strategyGrowthImage.width} 
+                             height={strategyGrowthImage.height} 
+                             className="rounded-2xl object-cover"
+                           />
                          </CardContent>
                       </Card>
                   </div>
@@ -111,7 +122,14 @@ const BrandStrategyPage: FC = () => {
                   <div>
                       <Card className="shadow-xl rounded-2xl">
                          <CardContent className="p-0">
-                           <Image src="https://picsum.photos/800/601" data-ai-hint="brand strategy" alt="Biznes egasi o'ylanmoqda" width={800} height={601} className="rounded-2xl object-cover"/>
+                            <Image 
+                              src={strategyThinkingImage.src} 
+                              data-ai-hint={strategyThinkingImage.hint} 
+                              alt={strategyThinkingImage.alt}
+                              width={strategyThinkingImage.width} 
+                              height={strategyThinkingImage.height} 
+                              className="rounded-2xl object-cover"
+                            />
                          </CardContent>
                       </Card>
                   </div>
