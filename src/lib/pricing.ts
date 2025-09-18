@@ -162,7 +162,7 @@ export const comparisonData = [
     competitors: {
         jon: `${formatPrice(serviceDetails.packaging.price)}`,
         mano: `${formatPrice(120000000)}`,
-        abba: `${formatPrice(110000000)}`,
+        abba: `${formatPrice(80000000)}`,
         mountain: `${formatPrice(60000000)}`,
     }
   },
