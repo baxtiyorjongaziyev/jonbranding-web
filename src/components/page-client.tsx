@@ -13,6 +13,7 @@ import { useTelegram } from '@/hooks/use-telegram';
 import { Button } from '@/components/ui/button';
 import Offer from '@/components/sections/offer';
 import { type Brand } from '@/lib/types';
+import { motion } from 'framer-motion';
 
 // Dynamically import components that are not immediately visible
 const Founder = dynamic(() => import('@/components/sections/founder'));
@@ -69,6 +70,20 @@ interface PageClientProps {
   brands: Brand[];
 }
 
+const AnimatedSection: FC<{children: ReactNode}> = ({ children }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+            {children}
+        </motion.div>
+    );
+};
+
+
 const PageClient: FC<PageClientProps> = ({ children, brands }) => {
     const [isClient, setIsClient] = useState(false);
     const { tg } = useTelegram();
@@ -102,24 +117,24 @@ const PageClient: FC<PageClientProps> = ({ children, brands }) => {
     }
 
     return (
-        <div className="flex flex-col overflow-x-hidden animate-fade-in">
+        <div className="flex flex-col overflow-x-hidden">
             <main className="flex-grow">
-                <Hero onPrimaryClick={handleOpenModal} />
-                <TrustedBy brands={brands} />
-                <TargetAudience />
-                <Gallery onCtaClick={handleOpenModal} />
-                <BeforeAfter onCtaClick={handleOpenModal} />
-                <WhyUs onCtaClick={handleOpenModal} />
-                <Stats />
-                <Testimonials />
-                <Founder />
-                <Process onCtaClick={handleOpenModal} />
-                <Video />
-                <LeadMagnet onCtaClick={handleOpenModal} />
-                <PickTwoSelector onCtaClick={handleOpenModal}/>
-                <Offer onCTAClick={handleOpenModal} />
-                <QueueStatus onCtaClick={handleOpenModal} />
-                <Faq />
+                <AnimatedSection><Hero onPrimaryClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><TrustedBy brands={brands} /></AnimatedSection>
+                <AnimatedSection><TargetAudience /></AnimatedSection>
+                <AnimatedSection><Gallery onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><WhyUs onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><Stats /></AnimatedSection>
+                <AnimatedSection><Testimonials /></AnimatedSection>
+                <AnimatedSection><Founder /></AnimatedSection>
+                <AnimatedSection><Process onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><Video /></AnimatedSection>
+                <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><PickTwoSelector onCtaClick={handleOpenModal}/></AnimatedSection>
+                <AnimatedSection><Offer onCTAClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><QueueStatus onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><Faq /></AnimatedSection>
             </main>
             <ExitIntentModal onPrimaryClick={handleOpenModal} />
             <MobileCtaBar onOpenModal={handleOpenModal} />
