@@ -78,9 +78,9 @@ const NamingPage: FC = () => {
                             <Image 
                                 src="https://img3.teletype.in/files/ae/08/ae08ba83-e433-45a6-8518-9e9973256316.png"
                                 width={800}
-                                height={600}
+                                height={800}
                                 alt="Brainstorming session for a brand name"
-                                className="rounded-2xl object-cover"/>
+                                className="rounded-2xl object-cover aspect-square"/>
                             </CardContent>
                         </Card>
                     </div>
