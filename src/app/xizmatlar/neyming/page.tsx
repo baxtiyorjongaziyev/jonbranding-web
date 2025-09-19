@@ -8,7 +8,6 @@ import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
-import placeholderImages from '@/app/lib/placeholder-images.json';
 import TrademarkCalculator from '@/components/sections/trademark-calculator';
 import { Separator } from '@/components/ui/separator';
 
@@ -42,8 +41,6 @@ const NamingPage: FC = () => {
     window.dispatchEvent(contactEvent);
   };
   
-  const namingBrainstormImage = placeholderImages['naming-brainstorm'];
-  const namingIdeaImage = placeholderImages['naming-idea'];
 
   return (
     <>
@@ -79,11 +76,11 @@ const NamingPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src={namingBrainstormImage.src}
-                                width={namingBrainstormImage.width}
-                                height={namingBrainstormImage.height}
-                                data-ai-hint={namingBrainstormImage.hint}
-                                alt={namingBrainstormImage.alt}
+                                src="https://img1.teletype.in/files/54/10/54109439-e939-4475-ac10-48281313d526.jpeg"
+                                width={800}
+                                height={600}
+                                data-ai-hint="words brainstorm"
+                                alt="Brainstorming session for a brand name"
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
@@ -110,11 +107,11 @@ const NamingPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src={namingIdeaImage.src}
-                                width={namingIdeaImage.width}
-                                height={namingIdeaImage.height}
-                                data-ai-hint={namingIdeaImage.hint}
-                                alt={namingIdeaImage.alt}
+                                src="https://img1.teletype.in/files/ce/9b/ce9bc8f3-433b-48b4-93c6-3bf4813589c3.jpeg"
+                                width={800}
+                                height={601}
+                                data-ai-hint="idea lightbulb"
+                                alt="Lightbulb representing a new idea"
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>

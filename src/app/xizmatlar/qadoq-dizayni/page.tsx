@@ -9,7 +9,6 @@ import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
-import placeholderImages from '@/app/lib/placeholder-images.json';
 
 const processSteps = [
     {
@@ -36,8 +35,6 @@ const QadoqDizayniPage: FC = () => {
     window.dispatchEvent(contactEvent);
   };
   
-  const packagingShelfImage = placeholderImages['packaging-shelf'];
-
   return (
     <>
         <main className="flex-grow">
@@ -72,11 +69,11 @@ const QadoqDizayniPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src={packagingShelfImage.src}
-                                width={packagingShelfImage.width}
-                                height={packagingShelfImage.height}
-                                data-ai-hint={packagingShelfImage.hint}
-                                alt={packagingShelfImage.alt}
+                                src="https://img1.teletype.in/files/5a/a2/5aa2830f-b6c8-47c7-8c26-a07a126284a1.png"
+                                width={800}
+                                height={600}
+                                data-ai-hint="product packaging"
+                                alt="Products on a store shelf"
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>

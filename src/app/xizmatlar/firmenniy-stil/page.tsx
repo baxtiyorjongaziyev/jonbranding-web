@@ -9,7 +9,6 @@ import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
-import placeholderImages from '@/app/lib/placeholder-images.json';
 
 const processSteps = [
     {
@@ -40,9 +39,6 @@ const FirmenniyStilPage: FC = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
-  
-  const stylePerceptionImage = placeholderImages['style-perception'];
-  const styleSystemImage = placeholderImages['style-system'];
 
   return (
     <>
@@ -78,11 +74,11 @@ const FirmenniyStilPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src={stylePerceptionImage.src}
-                                width={stylePerceptionImage.width}
-                                height={stylePerceptionImage.height}
-                                data-ai-hint={stylePerceptionImage.hint}
-                                alt={stylePerceptionImage.alt}
+                                src="https://img1.teletype.in/files/54/10/54109439-e939-4475-ac10-48281313d526.jpeg"
+                                width={800}
+                                height={600}
+                                data-ai-hint="visual perception"
+                                alt="Brand perception moodboard"
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
@@ -112,11 +108,11 @@ const FirmenniyStilPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src={styleSystemImage.src}
-                                width={styleSystemImage.width}
-                                height={styleSystemImage.height}
-                                data-ai-hint={styleSystemImage.hint}
-                                alt={styleSystemImage.alt}
+                                src="https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg"
+                                width={800}
+                                height={601}
+                                data-ai-hint="design system"
+                                alt="Design system grid"
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
