@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/brand-strategy',
+        destination: '/xizmatlar/brand-strategy',
+        permanent: true,
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       {
