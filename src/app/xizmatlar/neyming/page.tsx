@@ -166,12 +166,9 @@ const NamingPage: FC = () => {
         <section className="py-16 sm:py-24 bg-secondary">
           <div className="container mx-auto px-4">
               <div className="text-center max-w-3xl mx-auto">
-                  <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Tovar Belgisini Ro'yxatdan O'tkazish Xarajatlari</h2>
+                  <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Tovar Belgisi Xarajatlari</h2>
                   <p className="mt-4 text-lg text-gray-700">
-                      Brend nomini tanlash (Neyming) — bu ijodiy jarayon. Tovar belgisini ro'yxatdan o'tkazish (Patentlash) esa — yuridik masala. Biz neyming xizmatini o'zimiz taqdim etsak-da, patentlash jarayonlari bilan jamoamizdagi maxsus patent mutaxassisi shug'ullanadi.
-                  </p>
-                  <p className="mt-2 text-lg text-gray-700">
-                      Quyidagi kalkulyator sizga tovar belgisini ro'yxatdan o'tkazish bilan bog'liq BARCHA xarajatlarni (ham davlat bojlari, ham yuridik firma xizmatlari) taxminan hisoblashga yordam beradi.
+                     Neyming (nom tanlash) — ijodiy jarayon, Patentlash esa — yuridik. Jamoamizdagi patent mutaxassisi yordamida tovar belgisini ro'yxatdan o'tkazish bilan bog'liq barcha xarajatlarni (davlat bojlari va xizmat haqi) shu yerda taxminan hisoblang.
                   </p>
               </div>
               <Separator className="my-12" />
