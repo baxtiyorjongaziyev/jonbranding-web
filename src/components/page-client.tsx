@@ -105,7 +105,7 @@ const PageClient: FC<PageClientProps> = ({ children, brands }) => {
 
     if (!isClient) {
         return (
-            <div className="flex min-h-screen flex-col overflow-x-hidden">
+            <div>
                 <Skeleton className="h-20 w-full" />
                 <main className="flex-grow">
                     <Skeleton className="h-96 w-full" />
@@ -117,7 +117,7 @@ const PageClient: FC<PageClientProps> = ({ children, brands }) => {
     }
 
     return (
-        <div className="flex flex-col overflow-x-hidden">
+        <div>
             <main className="flex-grow">
                 <AnimatedSection><Hero onPrimaryClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><TrustedBy brands={brands} /></AnimatedSection>
