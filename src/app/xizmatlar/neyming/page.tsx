@@ -76,7 +76,7 @@ const NamingPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://img1.teletype.in/files/54/10/54109439-e939-4475-ac10-48281313d526.jpeg"
+                                src="https://picsum.photos/seed/words-brainstorm/800/600"
                                 width={800}
                                 height={600}
                                 data-ai-hint="words brainstorm"
@@ -107,7 +107,7 @@ const NamingPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://img1.teletype.in/files/ce/9b/ce9bc8f3-433b-48b4-93c6-3bf4813589c3.jpeg"
+                                src="https://picsum.photos/seed/idea-lightbulb/800/601"
                                 width={800}
                                 height={601}
                                 data-ai-hint="idea lightbulb"

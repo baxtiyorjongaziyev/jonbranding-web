@@ -84,7 +84,7 @@ const BrandStrategyPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://img1.teletype.in/files/70/4e/704e6c38-8c17-4a0b-8515-b289c565d75d.jpeg"
+                                src="https://picsum.photos/seed/business-growth/800/600"
                                 data-ai-hint="business growth"
                                 alt="Business growth strategy chart"
                                 width={800}
@@ -121,7 +121,7 @@ const BrandStrategyPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://img2.teletype.in/files/54/6b/546b8474-c361-464a-93a0-38827e779a6d.jpeg"
+                                src="https://picsum.photos/seed/brand-strategy/800/601"
                                 data-ai-hint="brand strategy"
                                 alt="Business owner thinking about brand strategy"
                                 width={800}
