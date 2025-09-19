@@ -41,7 +41,16 @@ export async function POST(request: Request) {
         
         let telegramMessage = '';
 
-        if (packageSummary && packageSummary.includes("Brending-test natijasi")) {
+        if (packageSummary && packageSummary.includes("Yangi patent arizasi")) {
+            // This is a patent calculator submission
+            telegramMessage = `
+${packageSummary.replace('Brend:', `🏢 Brend:`).replace('Faoliyat turlari:', `📄 Faoliyat turlari:`)}
+
+👤 Ism: ${fullName}
+📞 Telefon: ${phone}
+            `.trim();
+
+        } else if (packageSummary && packageSummary.includes("Brending-test natijasi")) {
             // This is a quiz submission
             const parts = packageSummary.split(' | ');
             const answersJsonString = parts[0].replace("Brending-test natijasi. Javoblar: ", "");

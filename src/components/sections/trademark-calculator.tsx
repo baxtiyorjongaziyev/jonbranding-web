@@ -13,14 +13,14 @@
 // =============================================================
 
 import React, { useMemo, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { Logo } from '../icons/logo';
 import { Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 // ========================
 // 1) Konstanta va tariflar
@@ -57,14 +57,14 @@ const EXPERT_PER_EXTRA_CLASS = 1 * BHM; // 412 000
 // 2) Kichik yordamchi funksiyalar
 // ========================
 /** classCount qiymatini 1..45 oralig'ida ushlab turadi (xavfsiz clamp) */
-const clampClassCount = (n) => {
+const clampClassCount = (n: number) => {
   const x = Number(n);
   if (!Number.isFinite(x)) return 1;
   return Math.max(1, Math.min(45, Math.trunc(x)));
 };
 
 /** Telefon validatsiyasi: '+998' + 9 ta raqam (jami 13 belgi) */
-const isUzPhone = (s) => {
+const isUzPhone = (s: string) => {
   if (!s || s.length !== 13) return false;
   if (!s.startsWith('+998')) return false;
   for (let i = 4; i < s.length; i++) {
@@ -75,7 +75,7 @@ const isUzPhone = (s) => {
 };
 
 /** Inputga telefon terishda qadam-baqadam cheklash (typing guard) */
-const allowPhoneTyping = (s) => {
+const allowPhoneTyping = (s: string) => {
   if (!s.startsWith('+998')) return false;  // prefiks majburiy
   if (s.length > 13) return false;          // maksimal uzunlik
   for (let i = 4; i < s.length; i++) {
@@ -102,6 +102,11 @@ export function calculateFees({
   classCount = 1,
   speed = 'oddiy',
   hasEkspert = false,
+}: {
+    isYuridik?: boolean;
+    classCount?: number;
+    speed?: 'oddiy' | 'tez';
+    hasEkspert?: boolean;
 }) {
   const cc = clampClassCount(classCount);
 
@@ -143,6 +148,7 @@ export function calculateFees({
 // 4) UI komponent
 // ========================
 export default function TrademarkCalculator() {
+  const { toast } = useToast();
   // --- Foydalanuvchi kiritmalari holati ---
   const [brand, setBrand] = useState('');
   const [name, setName] = useState('');
@@ -150,7 +156,7 @@ export default function TrademarkCalculator() {
   const [activity, setActivity] = useState('');
   const [classCount, setClassCount] = useState(1);
   const [isYuridik, setIsYuridik] = useState(false); // default: jismoniy
-  const [speed, setSpeed] = useState('oddiy');       // 'oddiy' | 'tez'
+  const [speed, setSpeed] = useState<'oddiy' | 'tez'>('oddiy');
   const [hasEkspert, setHasEkspert] = useState(false);
 
   // --- Jarayon holati ---
@@ -166,41 +172,62 @@ export default function TrademarkCalculator() {
   // --- Forma yuborish ---
   const handleSubmit = async () => {
     // Minimal validatsiya
-    if (!brand.trim()) return alert('Iltimos, brend nomini kiriting.');
-    if (!name.trim()) return alert('Iltimos, ismingizni kiriting.');
-    if (!isUzPhone(phone)) return alert('Iltimos, to‘g‘ri telefon raqam kiriting.');
+    if (!brand.trim()) {
+        toast({ title: "Xatolik", description: "Iltimos, brend nomini kiriting.", variant: "destructive" });
+        return;
+    }
+    if (!name.trim()) {
+         toast({ title: "Xatolik", description: "Iltimos, ismingizni kiriting.", variant: "destructive" });
+        return;
+    }
+    if (!isUzPhone(phone)) {
+        toast({ title: "Xatolik", description: "Iltimos, to‘g‘ri telefon raqam kiriting.", variant: "destructive" });
+        return;
+    }
 
     setLoading(true);
 
-    // Telegram matni — massivni .join('\n') bilan birlashtirib quramiz
-    const text = [
+    const telegramMessage = [
       '🧾 Yangi patent arizasi (Kalkulyatordan)',
-      `🏢 Brend: ${brand}`,
-      `👤 Ism: ${name}`,
-      `📞 Telefon: ${phone}`,
-      `📄 Faoliyat: ${activity || '—'}`,
-      `👥 Turi: ${isYuridik ? 'Yuridik' : 'Jismoniy'}`,
-      `🔢 Klasslar: ${fees.classCount}`,
-      `⚡ Rejim: ${speed === 'tez' ? 'Tezkor (1.5 oy)' : 'Oddiy (7 oy)'}`,
-      `🧠 Ekspert tekshiruvi: ${hasEkspert ? 'Bor' : 'Yo‘q'}`,
-      `💰 Umumiy to‘lov: ${fees.total.toLocaleString()} so‘m`,
+      `Brend: ${brand}`,
+      `Faoliyat turlari: ${activity || 'Kiritilmagan'}`,
+      '---',
+      `Turi: ${isYuridik ? 'Yuridik' : 'Jismoniy'}`,
+      `Klasslar soni: ${fees.classCount}`,
+      `Rejim: ${speed === 'tez' ? 'Tezkor (1.5 oy)' : 'Oddiy (7 oy)'}`,
+      `Ekspert tekshiruvi: ${hasEkspert ? 'Bor' : 'Yo‘q'}`,
+      '---',
+      `UMUMIY NARX: ${fees.total.toLocaleString()} so‘m`,
     ].join('\n');
 
     try {
       const response = await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName: name, phone, telegram: '', notes: text }),
+        body: JSON.stringify({
+            fullName: name, 
+            phone,
+            packageSummary: telegramMessage, // Sending calc details in a structured way
+            totalPrice: fees.total
+        }),
       });
 
       if (!response.ok) {
           const result = await response.json();
           throw new Error(result.error || "Serverda xatolik yuz berdi.");
       }
+      toast({
+        title: "Muvaffaqiyatli!",
+        description: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
+        variant: 'default',
+      });
       setSuccess(true);
-    } catch (e) {
-      console.error(e);
-      alert('Xatolik yuz berdi. Qayta urinib ko‘ring.');
+    } catch (e: any) {
+       toast({
+        title: 'Xatolik!',
+        description: e.message || 'So‘rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.',
+        variant: 'destructive',
+      });
     } finally {
       setLoading(false);
     }
@@ -223,19 +250,19 @@ export default function TrademarkCalculator() {
   // 5) UI
   // ========================
   return (
-    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       {/* Left: Form */}
-      <Card className="p-5 sm:p-6">
+      <Card className="p-6">
         <h2 className="text-xl font-bold text-dark-blue mb-4">Ma'lumotlarni kiriting</h2>
         <div className="space-y-4">
-          <LabeledInput label="Brend nomi" placeholder="Masalan: MyBrand" value={brand} onChange={e=>setBrand(e.target.value)} />
-          <LabeledInput label="Ismingiz" placeholder="To'liq ismingizni kiriting" value={name} onChange={e=>setName(e.target.value)} />
-          <LabeledInput label="Telefon raqam" placeholder="+998901234567" value={phone} onChange={e=>{ const v=e.target.value; if(allowPhoneTyping(v)) setPhone(v); }} />
+          <LabeledInput label="Brend nomi" placeholder="Masalan: MyBrand" value={brand} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setBrand(e.target.value)} />
+          <LabeledInput label="Ismingiz" placeholder="To'liq ismingizni kiriting" value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setName(e.target.value)} />
+          <LabeledInput label="Telefon raqam" placeholder="+998901234567" value={phone} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{ const v=e.target.value; if(allowPhoneTyping(v)) setPhone(v); }} />
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <Label className="text-sm font-medium">Faoliyat yo'nalishlari soni (klass)</Label>
-              <span className="text-xs text-slate-500">1 klass = 1 ta faoliyat turi (maks. 45 ta)</span>
+              <Label className="font-medium">Faoliyat yo'nalishlari soni (klass)</Label>
+              <span className="text-xs text-slate-500">Maks. 45 ta</span>
             </div>
             <div className="flex items-center gap-3">
               <IconButton onClick={() => setClassCount(c=>clampClassCount((Number(c)||1)-1))}>-</IconButton>
@@ -243,14 +270,14 @@ export default function TrademarkCalculator() {
               <IconButton onClick={() => setClassCount(c=>clampClassCount((Number(c)||1)+1))}>+</IconButton>
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
-              {[1,3,5,10,15,20,25,30,45].map(n=> (
+              {[1,3,5,10,15,20,45].map(n=> (
                 <Chip key={n} active={fees.classCount===n} onClick={()=>setClassCount(n)}>{n}</Chip>
               ))}
             </div>
           </div>
 
           <div>
-            <Label className="text-sm font-medium">Shaxs turi</Label>
+            <Label className="font-medium">Shaxs turi</Label>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <ToggleButton active={!isYuridik} onClick={()=>setIsYuridik(false)}>Jismoniy shaxs</ToggleButton>
               <ToggleButton active={isYuridik} onClick={()=>setIsYuridik(true)}>Yuridik shaxs</ToggleButton>
@@ -258,46 +285,45 @@ export default function TrademarkCalculator() {
           </div>
 
           <div>
-            <Label className="text-sm font-medium">Ko‘rib chiqish tezligi</Label>
+            <Label className="font-medium">Ko‘rib chiqish tezligi</Label>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <ToggleButton active={speed==='oddiy'} onClick={()=>setSpeed('oddiy')}>Oddiy (7 oy)</ToggleButton>
               <ToggleButton active={speed==='tez'} onClick={()=>setSpeed('tez')}>Tezkor (1.5 oy)</ToggleButton>
             </div>
-            <p className="mt-1 text-xs text-slate-500">Tezkor: 12 BHM + 12% NDS ({EXPEDITE_BASE.toLocaleString()} so‘m) + har qo‘shimcha klass uchun {EXPEDITE_PER_EXTRA_CLASS.toLocaleString()} so‘m</p>
           </div>
 
           <div>
-            <Label className="text-sm font-medium">Ekspert tekshiruvi</Label>
+            <Label className="font-medium">Qo'shimcha ekspert tekshiruvi</Label>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <ToggleButton active={hasEkspert} onClick={()=>setHasEkspert(true)}>Yoqilgan</ToggleButton>
               <ToggleButton active={!hasEkspert} onClick={()=>setHasEkspert(false)}>O‘chirilgan</ToggleButton>
             </div>
-            <p className="mt-1 text-xs text-slate-500">Ekspert: 2×BHM (bazaviy){fees.classCount>1 ? ` + ${(fees.classCount-1)}×1×BHM (qo‘shimcha klass)` : ''}</p>
           </div>
 
           <div>
-            <Label className="text-sm font-medium">Faoliyat turlari</Label>
+            <Label className="font-medium">Faoliyat turlari (ixtiyoriy)</Label>
             <Textarea
               className="mt-1"
               rows={3}
-              placeholder="Masalan: dizayn, qurilish..."
+              placeholder="Masalan: dizayn, qurilish, kiyim-kechak ishlab chiqarish..."
               value={activity}
-              onChange={e=>setActivity(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>setActivity(e.target.value)}
             />
+             <p className="mt-1 text-xs text-slate-500">Bu klasslarni aniqlashda yordam beradi.</p>
           </div>
-
-          <Button
-            className="w-full text-base"
-            onClick={handleSubmit}
-            disabled={loading}
-          >
-            {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Jo‘natilmoqda...</> : 'Patentlashga buyurtma berish'}
-          </Button>
-
-          {success && (
-            <div className="text-center text-green-700 bg-green-50 border border-green-200 p-3 rounded-xl flex items-center justify-center gap-4">
+        
+          {!success ? (
+            <Button
+                className="w-full text-base py-6 shadow-ocean animate-breathing"
+                onClick={handleSubmit}
+                disabled={loading}
+              >
+                {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Yuborilmoqda...</> : "Patentlashga buyurtma berish"}
+            </Button>
+          ) : (
+             <div className="text-center text-green-700 bg-green-50 border border-green-200 p-3 rounded-xl flex items-center justify-center gap-4">
                 <span>✅ Buyurtma qabul qilindi!</span>
-              <Button variant="outline" size="sm" onClick={resetForm}>Yana yuborish</Button>
+                <Button variant="outline" size="sm" onClick={resetForm}>Yana hisoblash</Button>
             </div>
           )}
         </div>
@@ -305,16 +331,16 @@ export default function TrademarkCalculator() {
 
       {/* Right: Summary */}
       <aside className="lg:sticky lg:top-24 h-fit space-y-4">
-        <Card className="p-6 bg-gradient-to-br from-primary to-blue-900 text-white shadow-xl">
-          <div className="text-sm leading-5 opacity-90">10 yillik patent uchun umumiy xarajat</div>
-          <div className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight">{fees.total.toLocaleString()} so‘m</div>
+        <Card className="p-6 bg-gradient-to-br from-primary to-blue-900 text-white shadow-xl rounded-2xl">
+          <div className="text-sm leading-5 opacity-90">10 yillik patent uchun taxminiy umumiy xarajat</div>
+          <div className="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight">{fees.total.toLocaleString()} so‘m</div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Pill>{fees.classCount} klass</Pill>
             <Pill>{isYuridik ? 'Yuridik' : 'Jismoniy'} shaxs</Pill>
-            <Pill>{speed==='tez' ? 'Tezkor (1.5 oy)' : 'Oddiy (7 oy)'}</Pill>
-            <Pill>{hasEkspert ? 'Ekspert bor' : 'Ekspert yo‘q'}</Pill>
+            <Pill>{speed==='tez' ? 'Tezkor' : 'Oddiy'}</Pill>
+            {hasEkspert && <Pill>Ekspert+</Pill>}
           </div>
-          <div className="mt-1 text-xs leading-5 opacity-90">10 yil muddat bilan himoyalanadi</div>
+          <div className="mt-1 text-xs leading-5 opacity-90">Barcha davlat bojlari va xizmatlar narxi ichida</div>
         </Card>
 
         <Card className="p-5">
@@ -322,7 +348,7 @@ export default function TrademarkCalculator() {
           <div className="space-y-4">
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-4">
               <div className="font-semibold text-primary">1-bosqich (Dastlabki to‘lov)</div>
-              <Row label="Yuridik xizmat (hamkorimiz)" value={PATENT_XIZMATI} />
+              <Row label="Jamoamiz xizmati" value={PATENT_XIZMATI} />
               <Row label="Tovar belgisi uchun ariza boji" value={fees.step1} />
               <Divider />
               <Row label="1-bosqich jami" value={PATENT_XIZMATI + fees.step1} bold />
@@ -340,19 +366,19 @@ export default function TrademarkCalculator() {
 
             {speed==='tez' && (
               <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
-                <div className="font-semibold text-amber-700">Tezkor topshirish</div>
+                <div className="font-semibold text-amber-700">Tezkor topshirish uchun qo'shimcha</div>
                 <Row label="Asosiy (12 BHM + 12% NDS)" value={fees.expediteBase} />
                 {fees.classCount>1 && (
-                  <Row label={`Qo‘shimcha klasslar tezkor (${fees.classCount-1} ta)`} value={fees.expediteExtra} />
+                  <Row label={`Qo‘shimcha klasslar (${fees.classCount-1} ta)`} value={fees.expediteExtra} />
                 )}
                 <Divider />
-                <Row label="Tezkor qo‘shimcha jami" value={fees.expediteTotal} bold />
+                <Row label="Tezkor to'lov jami" value={fees.expediteTotal} bold />
               </div>
             )}
 
             {hasEkspert && (
               <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
-                <div className="font-semibold text-purple-700">Ekspert tekshiruv</div>
+                <div className="font-semibold text-purple-700">Ekspert tekshiruvi</div>
                 <Row label="Bazaviy (2×BHM)" value={fees.ekspertBase} />
                 {fees.classCount>1 && (
                   <Row label={`Qo‘shimcha klasslar (${fees.classCount-1} ta)`} value={fees.ekspertExtra} />
@@ -363,12 +389,9 @@ export default function TrademarkCalculator() {
             )}
 
             <div className="rounded-xl border border-amber-300 bg-amber-100/50 p-4 text-amber-900 text-xs">
-              <div className="font-semibold mb-1">Eslatma</div>
+              <div className="font-semibold mb-1">Muhim eslatma</div>
               <p>
-                Guvohnoma 10 yil amal qiladi. Uzaytirish: jismoniy — {(4*BHM).toLocaleString()} so‘m, yuridik — {(6*BHM).toLocaleString()} so‘m.
-                Qo‘shimcha klass: jismoniy — {(0.5*BHM).toLocaleString()} so‘m (1-bosqich), {(1*BHM).toLocaleString()} so‘m (2-bosqich);
-                yuridik — {(4*BHM).toLocaleString()} so‘m (ikkala bosqich). Tezkor opsiya har bir qo‘shimcha klass uchun {EXPEDITE_PER_EXTRA_CLASS.toLocaleString()} so‘m.
-                Barcha narxlar BHM (bazaviy hisoblash miqdori)ga bog'liq va o'zgarishi mumkin. BHM hozirda {BHM.toLocaleString()} so'm.
+                Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan bazaviy hisoblash miqdori (BHM)ga bog'liq va o'zgarishi mumkin. Hozirgi BHM {BHM.toLocaleString()} so'm. Bu kalkulyator ommaviy oferta emas va faqat tanishish uchun mo'ljallangan.
               </p>
             </div>
           </div>
@@ -381,7 +404,7 @@ export default function TrademarkCalculator() {
 // ========================
 // 6) Kichik prezentatsion komponentlar
 // ========================
-function LabeledInput({ label, ...rest }) {
+function LabeledInput({ label, ...rest }: {label: string, [key: string]: any}) {
   return (
     <div className="space-y-1.5">
       <Label>{label}</Label>
@@ -390,7 +413,7 @@ function LabeledInput({ label, ...rest }) {
   );
 }
 
-function IconButton({ children, ...props }) {
+function IconButton({ children, ...props }: { children: React.ReactNode, [key: string]: any }) {
   return (
     <Button type="button" variant="outline" size="icon" className="h-10 w-10 text-lg" {...props}>
       {children}
@@ -398,7 +421,7 @@ function IconButton({ children, ...props }) {
   );
 }
 
-function ToggleButton({ active, children, ...props }) {
+function ToggleButton({ active, children, ...props }: { active: boolean, children: React.ReactNode, [key: string]: any }) {
   return (
     <Button type="button" variant={active ? 'default' : 'outline'} {...props}>
         {children}
@@ -406,23 +429,23 @@ function ToggleButton({ active, children, ...props }) {
   );
 }
 
-function Chip({ active, children, ...props }) {
+function Chip({ active, children, ...props }: { active: boolean, children: React.ReactNode, [key: string]: any }) {
   return (
-    <Button type="button" size="sm" variant={active ? 'default' : 'outline'} {...props}>
+    <Button type="button" size="sm" variant={active ? 'default' : 'outline'} className="h-auto" {...props}>
         {children}
     </Button>
   );
 }
 
-function Pill({ children }) {
+function Pill({ children }: { children: React.ReactNode }) {
   return <span className="px-2.5 py-1 rounded-full text-xs bg-white/15 ring-1 ring-white/25">{children}</span>;
 }
 
-function Row({ label, value, bold=false }) {
+function Row({ label, value, bold=false }: { label: string, value: number, bold?: boolean }) {
   return (
     <div className="mt-2 flex items-center justify-between text-sm">
       <span className="text-muted-foreground">{label}</span>
-      <span className={cn(bold ? 'font-bold text-foreground' : 'font-semibold text-foreground')}>{Number(value).toLocaleString()} so‘m</span>
+      <span className={cn("font-semibold text-foreground", bold && 'font-bold')}>{Number(value).toLocaleString()} so‘m</span>
     </div>
   );
 }
