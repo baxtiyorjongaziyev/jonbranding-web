@@ -188,5 +188,3 @@ const NamingPage: FC = () => {
 };
 
 export default NamingPage;
-
-    
