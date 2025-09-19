@@ -69,7 +69,7 @@ const QadoqDizayniPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://img1.teletype.in/files/5a/a2/5aa2830f-b6c8-47c7-8c26-a07a126284a1.png"
+                                src="https://picsum.photos/seed/product-packaging/800/600"
                                 width={800}
                                 height={600}
                                 data-ai-hint="product packaging"
