@@ -3,14 +3,14 @@
 
 import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Lightbulb, Search, ShieldCheck, CheckCircle } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
 import placeholderImages from '@/app/lib/placeholder-images.json';
+import TrademarkCalculator from '@/components/sections/trademark-calculator';
+import { Separator } from '@/components/ui/separator';
 
 const creationSteps = [
     {
@@ -148,11 +148,13 @@ const NamingPage: FC = () => {
         </section>
 
         <section className="py-16 sm:py-24 bg-white">
-            <div className="container mx-auto px-4 text-center">
-                <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Nomni tekshirish — yaratishdan kam emas</h2>
-                <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
-                    Daho g'oya ham, agar uni ro'yxatdan o'tkazish imkoni bo'lmasa yoki nomaqbul assotsiatsiyalarga ega bo'lsa, ishlamaydi. Biz nomlarni bir nechta asosiy parametrlar bo'yicha tekshiramiz:
-                </p>
+            <div className="container mx-auto px-4">
+                <div className="text-center">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Nomni tekshirish — yaratishdan kam emas</h2>
+                    <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
+                        Daho g'oya ham, agar uni ro'yxatdan o'tkazish imkoni bo'lmasa yoki nomaqbul assotsiatsiyalarga ega bo'lsa, ishlamaydi. Biz nomlarni bir nechta asosiy parametrlar bo'yicha tekshiramiz:
+                    </p>
+                </div>
                 <div className="mt-8 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                     <Card className="bg-secondary/50 p-6 rounded-xl"><h4 className="font-bold">Huquqiy tozalik</h4><p className="text-gray-600 mt-1">Tovar belgisini kerakli mintaqa va sinfda ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz.</p></Card>
                     <Card className="bg-secondary/50 p-6 rounded-xl"><h4 className="font-bold">Domenlar va raqamli muhit</h4><p className="text-gray-600 mt-1">Raqamli muhitda nomlarning mavjudligini tekshiramiz.</p></Card>
@@ -160,6 +162,23 @@ const NamingPage: FC = () => {
                 </div>
             </div>
         </section>
+
+        <section className="py-16 sm:py-24 bg-secondary">
+          <div className="container mx-auto px-4">
+              <div className="text-center max-w-3xl mx-auto">
+                  <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Tovar Belgisini Ro'yxatdan O'tkazish Xarajatlari</h2>
+                  <p className="mt-4 text-lg text-gray-700">
+                      Brend nomini tanlash (Neyming) — bu ijodiy jarayon. Tovar belgisini ro'yxatdan o'tkazish (Patentlash) esa — yuridik masala. Biz neyming xizmatini o'zimiz taqdim etamiz, ammo patentlash jarayoni uchun hamkorimiz — <a href="https://legalact.uz/" target="_blank" rel="noopener noreferrer" className="font-bold text-primary underline">Legalact</a> yuridik firmasi mas'ul. Ular bu sohada katta tajribaga ega.
+                  </p>
+                  <p className="mt-2 text-lg text-gray-700">
+                      Quyidagi kalkulyator sizga tovar belgisini ro'yxatdan o'tkazish bilan bog'liq BARCHA xarajatlarni (ham davlat bojlari, ham yuridik firma xizmatlari) taxminan hisoblashga yordam beradi.
+                  </p>
+              </div>
+              <Separator className="my-12" />
+              <TrademarkCalculator />
+          </div>
+        </section>
+
         </main>
         <React.Suspense fallback={<div>Loading sections...</div>}>
             <ServiceSections />
