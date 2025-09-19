@@ -133,8 +133,7 @@ const BrandStrategyPage: FC = () => {
                             <CarouselContent>
                                 <CarouselItem>
                                     <Image 
-                                        src="https://picsum.photos/seed/startup-strategy/800/601"
-                                        data-ai-hint="startup strategy meeting"
+                                        src="https://img4.teletype.in/files/bd/d7/bdd7f837-5be9-47eb-9a9e-43dafefe5a17.png"
                                         alt="Startup team brainstorming brand strategy"
                                         width={800}
                                         height={601}
@@ -142,8 +141,7 @@ const BrandStrategyPage: FC = () => {
                                 </CarouselItem>
                                 <CarouselItem>
                                     <Image 
-                                        src="https://picsum.photos/seed/corporate-strategy/800/601"
-                                        data-ai-hint="corporate building modern"
+                                        src="https://img2.teletype.in/files/56/5b/565b8553-53d2-4439-bfa2-3cb80d90ec77.png"
                                         alt="Modern corporate building representing established business"
                                         width={800}
                                         height={601}
@@ -189,5 +187,7 @@ const BrandStrategyPage: FC = () => {
 };
 
 export default BrandStrategyPage;
+
+    
 
     
