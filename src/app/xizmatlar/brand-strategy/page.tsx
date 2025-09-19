@@ -10,7 +10,6 @@ import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
-import placeholderImages from '@/app/lib/placeholder-images.json';
 
 
 const processSteps = [
@@ -47,9 +46,6 @@ const BrandStrategyPage: FC = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
-
-  const strategyGrowthImage = placeholderImages['strategy-growth'];
-  const strategyThinkingImage = placeholderImages['strategy-thinking'];
 
   return (
     <>
@@ -88,11 +84,11 @@ const BrandStrategyPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src={strategyGrowthImage.src}
-                                data-ai-hint={strategyGrowthImage.hint}
-                                alt={strategyGrowthImage.alt}
-                                width={strategyGrowthImage.width}
-                                height={strategyGrowthImage.height}
+                                src="https://img1.teletype.in/files/70/4e/704e6c38-8c17-4a0b-8515-b289c565d75d.jpeg"
+                                data-ai-hint="business growth"
+                                alt="Business growth strategy chart"
+                                width={800}
+                                height={600}
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
@@ -125,11 +121,11 @@ const BrandStrategyPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src={strategyThinkingImage.src}
-                                data-ai-hint={strategyThinkingImage.hint}
-                                alt={strategyThinkingImage.alt}
-                                width={strategyThinkingImage.width}
-                                height={strategyThinkingImage.height}
+                                src="https://img2.teletype.in/files/54/6b/546b8474-c361-464a-93a0-38827e779a6d.jpeg"
+                                data-ai-hint="brand strategy"
+                                alt="Business owner thinking about brand strategy"
+                                width={800}
+                                height={601}
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
                         </Card>
