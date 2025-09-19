@@ -84,8 +84,7 @@ const BrandStrategyPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://picsum.photos/seed/business-growth/800/600"
-                                data-ai-hint="business growth"
+                                src="https://img2.teletype.in/files/d3/40/d3406311-28bc-4c55-bf19-19aa3f17e306.png"
                                 alt="Business growth strategy chart"
                                 width={800}
                                 height={600}
