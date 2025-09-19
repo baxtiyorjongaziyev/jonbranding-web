@@ -106,10 +106,9 @@ const NamingPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://picsum.photos/seed/idea-lightbulb/800/601"
+                                src="https://img4.teletype.in/files/b0/93/b093f7f9-cc7f-49dc-b2d7-88bd2e2fe29b.png"
                                 width={800}
                                 height={601}
-                                data-ai-hint="idea lightbulb"
                                 alt="Lightbulb representing a new idea"
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
