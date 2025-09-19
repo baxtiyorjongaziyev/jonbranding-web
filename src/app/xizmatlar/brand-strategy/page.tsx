@@ -1,7 +1,7 @@
 
 'use client';
 
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
@@ -10,6 +10,8 @@ import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
 
 
 const processSteps = [
@@ -46,6 +48,10 @@ const BrandStrategyPage: FC = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
+  
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
 
   return (
     <>
@@ -117,16 +123,34 @@ const BrandStrategyPage: FC = () => {
                         </div>
                     </div>
                     <div>
-                        <Card className="shadow-xl rounded-2xl">
-                            <CardContent className="p-0">
-                            <Image 
-                                src="https://picsum.photos/seed/brand-strategy/800/601"
-                                data-ai-hint="brand strategy"
-                                alt="Business owner thinking about brand strategy"
-                                width={800}
-                                height={601}
-                                className="rounded-2xl object-cover"/>
-                            </CardContent>
+                        <Card className="shadow-xl rounded-2xl overflow-hidden">
+                           <Carousel
+                            plugins={[plugin.current]}
+                            className="w-full"
+                            onMouseEnter={plugin.current.stop}
+                            onMouseLeave={plugin.current.reset}
+                           >
+                            <CarouselContent>
+                                <CarouselItem>
+                                    <Image 
+                                        src="https://picsum.photos/seed/startup-strategy/800/601"
+                                        data-ai-hint="startup strategy meeting"
+                                        alt="Startup team brainstorming brand strategy"
+                                        width={800}
+                                        height={601}
+                                        className="object-cover aspect-square"/>
+                                </CarouselItem>
+                                <CarouselItem>
+                                    <Image 
+                                        src="https://picsum.photos/seed/corporate-strategy/800/601"
+                                        data-ai-hint="corporate building modern"
+                                        alt="Modern corporate building representing established business"
+                                        width={800}
+                                        height={601}
+                                        className="object-cover aspect-square"/>
+                                </CarouselItem>
+                            </CarouselContent>
+                            </Carousel>
                         </Card>
                     </div>
                 </div>
@@ -165,3 +189,5 @@ const BrandStrategyPage: FC = () => {
 };
 
 export default BrandStrategyPage;
+
+    
