@@ -168,7 +168,7 @@ const NamingPage: FC = () => {
               <div className="text-center max-w-3xl mx-auto">
                   <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Tovar Belgisini Ro'yxatdan O'tkazish Xarajatlari</h2>
                   <p className="mt-4 text-lg text-gray-700">
-                      Brend nomini tanlash (Neyming) — bu ijodiy jarayon. Tovar belgisini ro'yxatdan o'tkazish (Patentlash) esa — yuridik masala. Biz neyming xizmatini o'zimiz taqdim etamiz, ammo patentlash jarayoni uchun hamkorimiz — <a href="https://legalact.uz/" target="_blank" rel="noopener noreferrer" className="font-bold text-primary underline">Legalact</a> yuridik firmasi mas'ul. Ular bu sohada katta tajribaga ega.
+                      Brend nomini tanlash (Neyming) — bu ijodiy jarayon. Tovar belgisini ro'yxatdan o'tkazish (Patentlash) esa — yuridik masala. Biz neyming xizmatini o'zimiz taqdim etsak-da, patentlash jarayonlari bilan jamoamizdagi maxsus patent mutaxassisi shug'ullanadi.
                   </p>
                   <p className="mt-2 text-lg text-gray-700">
                       Quyidagi kalkulyator sizga tovar belgisini ro'yxatdan o'tkazish bilan bog'liq BARCHA xarajatlarni (ham davlat bojlari, ham yuridik firma xizmatlari) taxminan hisoblashga yordam beradi.
@@ -188,3 +188,5 @@ const NamingPage: FC = () => {
 };
 
 export default NamingPage;
+
+    
