@@ -83,7 +83,7 @@ const FirmenniyStilPage: FC = () => {
                                 src="https://picsum.photos/seed/visual-perception/800/600"
                                 width={800}
                                 height={600}
-                                data-ai-hint="visual perception"
+                                data-ai-hint="visual perception moodboard"
                                 alt="Brand perception moodboard"
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
@@ -116,10 +116,10 @@ const FirmenniyStilPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://picsum.photos/seed/design-system/800/601"
+                                src="https://picsum.photos/seed/design-system/800/600"
                                 width={800}
-                                height={601}
-                                data-ai-hint="design system"
+                                height={600}
+                                data-ai-hint="design system grid"
                                 alt="Design system grid"
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
