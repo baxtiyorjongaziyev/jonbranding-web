@@ -134,7 +134,7 @@ const BrandStrategyPage: FC = () => {
                             <CarouselContent>
                                 <CarouselItem>
                                     <Image 
-                                        src="https://picsum.photos/seed/startup/800/600"
+                                        src="https://img4.teletype.in/files/bd/d7/bdd7f837-5be9-47eb-9a9e-43dafefe5a17.png"
                                         alt="Startup team brainstorming brand strategy"
                                         width={800}
                                         height={600}
@@ -143,20 +143,11 @@ const BrandStrategyPage: FC = () => {
                                 </CarouselItem>
                                 <CarouselItem>
                                     <Image 
-                                        src="https://picsum.photos/seed/corporate/800/600"
+                                        src="https://img2.teletype.in/files/56/5b/565b8553-53d2-4439-bfa2-3cb80d90ec77.png"
                                         alt="Modern corporate building representing established business"
                                         width={800}
                                         height={600}
                                         data-ai-hint="modern corporate building"
-                                        className="object-cover aspect-square"/>
-                                </CarouselItem>
-                                <CarouselItem>
-                                    <Image 
-                                        src="https://picsum.photos/seed/customer-choice/800/600"
-                                        alt="Customer choosing a product"
-                                        width={800}
-                                        height={600}
-                                        data-ai-hint="customer choice"
                                         className="object-cover aspect-square"/>
                                 </CarouselItem>
                             </CarouselContent>
