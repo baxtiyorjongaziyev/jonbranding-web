@@ -77,7 +77,7 @@ const QadoqDizayniPage: FC = () => {
                                 src="https://picsum.photos/seed/product-packaging/800/600"
                                 width={800}
                                 height={600}
-                                data-ai-hint="product packaging"
+                                data-ai-hint="product packaging shelf"
                                 alt="Products on a store shelf"
                                 className="rounded-2xl object-cover"/>
                             </CardContent>
