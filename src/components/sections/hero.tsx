@@ -2,13 +2,16 @@
 'use client';
 
 import type {FC} from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {Button} from '@/components/ui/button';
 import {CheckCircle, Search} from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { Card } from '../ui/card';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
+import React from 'react';
 
 
 interface HeroProps {
@@ -30,11 +33,21 @@ const buttonTexts = [
   "Menga kuchli brend kerak"
 ];
 
+const portfolioImages = [
+  'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif',
+  'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/67513d8fe1caee5495e0f9bd_ezgif-6-3f24b1faa6.gif',
+  'https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png',
+  'https://img2.teletype.in/files/17/9c/179c7811-8cf7-4ee9-87ad-66709208b115.png',
+  'https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png'
+];
+
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
   const [headlineIndex, setHeadlineIndex] = useState(0);
   const [buttonIndex, setButtonIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const plugin = useRef(Autoplay({ delay: 2500, stopOnInteraction: false }));
 
   useEffect(() => {
     const headlineInterval = setInterval(() => {
@@ -83,16 +96,30 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
                 </div>
             </div>
             <div className="hidden lg:flex justify-center items-center">
-                <Card className="rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-500">
-                    <Image 
-                        src="https://img1.teletype.in/files/5a/04/5a043c70-3453-487b-a320-f5a6b0c68d2a.gif"
-                        alt="Brendingdan avval va keyin"
-                        width={500}
-                        height={500}
-                        unoptimized
-                        className="object-cover"
-                        data-ai-hint="before after branding"
-                    />
+                <Card className="rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-500 w-[500px] h-[500px]">
+                    <Carousel
+                        plugins={[plugin.current]}
+                        className="w-full h-full"
+                        onMouseEnter={plugin.current.stop}
+                        onMouseLeave={plugin.current.play}
+                    >
+                        <CarouselContent>
+                            {portfolioImages.map((src, index) => (
+                                <CarouselItem key={index}>
+                                    <div className="w-full h-[500px] relative">
+                                        <Image 
+                                            src={src}
+                                            alt={`Portfolio ishi ${index + 1}`}
+                                            layout="fill"
+                                            objectFit="cover"
+                                            unoptimized={src.endsWith('.gif')}
+                                            className="bg-white"
+                                        />
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                    </Carousel>
                 </Card>
             </div>
         </div>
