@@ -1,4 +1,3 @@
-
 'use client';
 import {
   Accordion,
@@ -44,27 +43,33 @@ const FaqClient = ({ items }: { items: FaqItem[] }) => {
   }
   
   return (
-    <section id="faq" className="py-16 sm:py-24 bg-white">
+    <section id="faq" className="py-16 sm:py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold">Ko'p beriladigan savollar</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
-            Sizni qiziqtirgan savollarga shu yerdan javob toping.
-          </p>
-        </div>
-        <div className="mt-12 max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="w-full space-y-4">
-            {items.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border rounded-2xl shadow-sm bg-secondary/70 px-6 hover:bg-secondary transition-colors duration-300">
-                <AccordionTrigger className="text-left font-bold text-dark-blue hover:no-underline text-lg">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-gray-700 pt-2 text-base">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <div className="lg:sticky top-24">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-medium text-foreground">
+                    Frequently Asked 
+                    <br />
+                    <span className="font-extrabold">Questions</span>
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                    Eng ko'p beriladigan savollarga shu yerdan javob toping.
+                </p>
+            </div>
+            <div className="max-w-3xl">
+                <Accordion type="single" collapsible defaultValue="item-0" className="w-full space-y-4">
+                    {items.map((item, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                        <AccordionTrigger className="text-left text-lg font-semibold text-foreground">
+                        {item.question}
+                        </AccordionTrigger>
+                        <AccordionContent className="text-muted-foreground pt-2 text-base">
+                        {item.answer}
+                        </AccordionContent>
+                    </AccordionItem>
+                    ))}
+                </Accordion>
+            </div>
         </div>
       </div>
       <CtaBlock 
