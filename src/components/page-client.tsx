@@ -23,6 +23,7 @@ const TargetAudience = dynamic(() => import('@/components/sections/target-audien
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const Faq = dynamic(() => import('@/components/sections/faq'));
+const WhyUs = dynamic(() => import('@/components/sections/why-us'));
 
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
@@ -117,6 +118,7 @@ const PageClient: FC<PageClientProps> = ({ brands }) => {
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Testimonials /></AnimatedSection>
                 <AnimatedSection><Gallery onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><WhyUs onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Founder /></AnimatedSection>
                 <AnimatedSection><Process onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Video /></AnimatedSection>

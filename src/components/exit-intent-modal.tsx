@@ -32,12 +32,12 @@ const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick }) => {
           <DialogTitle className="text-2xl font-extrabold text-primary-foreground">Ketishga shoshilmang!</DialogTitle>
           <DialogDescription className="mt-2 text-lg text-gray-600">
             Siz uchun maxsus taklifimiz bor. <br/>
-            <span className="font-bold text-primary">PCG a'zolari uchun -50%</span> yoki boshqa chegirmalardan foydalaning!
+            Bizda <span className="font-bold text-primary">turli chegirmalar</span> mavjud. Imkoniyatdan foydalaning!
           </DialogDescription>
         </DialogHeader>
         <div className="mt-6">
           <Button onClick={handleOpen} size="lg" className="w-full text-lg py-6 shadow-ocean">
-            Chegirmadan foydalanish
+            Chegirmalarni ko'rish
           </Button>
         </div>
       </DialogContent>

@@ -17,7 +17,7 @@ const founderPoints = [
   { icon: 'Users', text: "Aniq va shaffof ish jarayoni" },
 ];
 
-const founderMessage = "Salom! Men Baxtiyorjon, Jon.Branding asoschisi. PCG “Tez Natija 3” kursdoshlarimga va boshqa biznes egalariga o'z brendlarini keyingi bosqichga olib chiqishda yordam beraman. Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish. Keling, brendingizni birgalikda tahlil qilamiz va uning 'uxlab yotgan' potensialini uyg'otamiz.";
+const founderMessage = "Salom! Men Baxtiyorjon, Jon.Branding asoschisi. Men biznes egalariga o'z brendlarini keyingi bosqichga olib chiqishda yordam beraman. Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish. Keling, brendingizni birgalikda tahlil qilamiz va uning 'uxlab yotgan' potensialini uyg'otamiz.";
 
 
 const Founder = () => {
