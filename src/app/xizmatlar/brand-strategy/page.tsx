@@ -125,33 +125,13 @@ const BrandStrategyPage: FC = () => {
                     </div>
                     <div>
                         <Card className="shadow-xl rounded-2xl overflow-hidden">
-                           <Carousel
-                            plugins={[plugin.current]}
-                            className="w-full"
-                            onMouseEnter={plugin.current.stop}
-                            onMouseLeave={plugin.current.reset}
-                           >
-                            <CarouselContent>
-                                <CarouselItem>
-                                    <Image 
-                                        src="https://img4.teletype.in/files/bd/d7/bdd7f837-5be9-47eb-9a9e-43dafefe5a17.png"
-                                        alt="Startup team brainstorming brand strategy"
-                                        width={800}
-                                        height={600}
-                                        data-ai-hint="startup team meeting"
-                                        className="object-cover aspect-square"/>
-                                </CarouselItem>
-                                <CarouselItem>
-                                    <Image 
-                                        src="https://img2.teletype.in/files/56/5b/565b8553-53d2-4439-bfa2-3cb80d90ec77.png"
-                                        alt="Modern corporate building representing established business"
-                                        width={800}
-                                        height={600}
-                                        data-ai-hint="modern corporate building"
-                                        className="object-cover aspect-square"/>
-                                </CarouselItem>
-                            </CarouselContent>
-                            </Carousel>
+                           <Image 
+                                src="https://img4.teletype.in/files/bd/d7/bdd7f837-5be9-47eb-9a9e-43dafefe5a17.png"
+                                alt="Startup team brainstorming brand strategy"
+                                width={800}
+                                height={600}
+                                data-ai-hint="startup team meeting"
+                                className="object-cover aspect-square"/>
                         </Card>
                     </div>
                 </div>
