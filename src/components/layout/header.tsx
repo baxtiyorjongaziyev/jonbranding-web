@@ -61,16 +61,15 @@ const services: { title: string; href: string; description: string }[] = [
 
 
 const ListItem = React.forwardRef<
-  HTMLAnchorElement,
+  React.ElementRef<typeof Link>,
   React.ComponentPropsWithoutRef<typeof Link> & { title: string; children: React.ReactNode }
 >(({ className, title, children, href, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
-          href={href}
+          href={href!}
           ref={ref}
-          data-radix-collection-item // This closes the menu on click
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground",
             className
@@ -121,7 +120,7 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href} legacyBehavior passHref>
+                <Link href={item.href} passHref legacyBehavior>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     {item.label}
                   </NavigationMenuLink>
