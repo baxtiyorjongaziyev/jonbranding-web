@@ -74,7 +74,7 @@ const QadoqDizayniPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://picsum.photos/seed/product-packaging/800/600"
+                                src="https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png"
                                 width={800}
                                 height={600}
                                 data-ai-hint="product packaging shelf"
