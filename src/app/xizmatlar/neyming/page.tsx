@@ -6,10 +6,16 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Lightbulb, Search, ShieldCheck, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
-import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
 import TrademarkCalculator from '@/components/sections/trademark-calculator';
 import { Separator } from '@/components/ui/separator';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
+    loading: () => <Skeleton className="h-96 w-full mt-4" />,
+});
+
 
 const creationSteps = [
     {
@@ -174,9 +180,7 @@ const NamingPage: FC = () => {
         </section>
 
         </main>
-        <React.Suspense fallback={<div>Loading sections...</div>}>
-            <ServiceSections />
-        </React.Suspense>
+        <ServiceSections />
     </>
   );
 };
