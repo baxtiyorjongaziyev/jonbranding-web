@@ -1,35 +1,14 @@
 'use client';
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { Building, Rocket, Store, Gem, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { AlertTriangle, ArrowRight, ThumbsUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 
-const targetAudiences = [
-  {
-    icon: Rocket,
-    title: "Startaplar va yangi bizneslar",
-    description: "Bozorga kuchli va esda qolarli kirib kelishni xohlaydiganlar uchun.",
-    problems: ["Brendim yo'q, bozor meni tanimaydi", "Qanday boshlashni bilmayapman", "Raqobatchilardan qanday ajralib turish mumkin?"]
-  },
-  {
-    icon: Building,
-    title: "Mavjud kompaniyalar",
-    description: "Brendingini yangilamoqchi yoki rebrending qilmoqchi bo'lganlar uchun.",
-    problems: ["Brendim eskirgan, jozibador emas", "Sotuvlarimiz tushib ketyapti", "Biznesimiz o'sishdan to'xtab qoldi"]
-  },
-  {
-    icon: Store,
-    title: "Mahsulot ishlab chiqaruvchilar",
-    description: "O'z mahsulotlarini jozibador qadoq va brend bilan sotuvga olib chiqmoqchilar uchun.",
-    problems: ["Qadog'im e'tibor tortmaydi", "Mahsulotim narxini ko'tara olmayapman", "Mijozlar raqobatchimni tanlayapti"]
-  },
-  {
-    icon: Gem,
-    title: "Premium segment",
-    description: "O'z xizmat yoki mahsulotining yuqori qiymatini ko'rsatmoqchi bo'lganlar uchun.",
-    problems: ["O'zimni qimmat sota olmayapman", "Mijozlarim qiymatimni tushunmayapti", "Yuqori statusimni ko'rsatishim kerak"]
-  }
+const problems = [
+  { text: "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi." },
+  { text: "Brendim eskirgan, raqobatchilarimdan orqada qolyapman." },
+  { text: "Mijozlarim qiymatimni tushunmayapti, faqat narx so'rayapti." },
+  { text: "Sotuvlarim bor, lekin barqaror emas. Mijozlar qaytib kelmayapti." },
 ];
 
 const TargetAudience = () => {
@@ -42,40 +21,48 @@ const TargetAudience = () => {
     <section id="target-audience" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold">Xizmatlarimiz kimlar uchun?</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">Bu muammolar sizga tanishmi?</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
-            Agar quyidagi muammolarga duch kelayotgan bo'lsangiz, demak biz sizga yordam bera olamiz.
+            Agar quyidagi fikrlar sizni bezovta qilayotgan bo'lsa, demak, biz siz uchun to'g'ri yechimmiz.
           </p>
         </div>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          {targetAudiences.map((audience, index) => (
-            <Card key={index} className="flex flex-col text-center shadow-lg rounded-2xl hover:shadow-xl transition-shadow bg-white">
-              <CardHeader className="items-center">
-                <div className="bg-primary/10 p-4 rounded-full">
-                  <audience.icon className="w-8 h-8 text-primary" />
-                </div>
-                <CardTitle className="!mt-4 text-xl">{audience.title}</CardTitle>
-                <CardDescription className="text-base !mt-2 px-4">{audience.description}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow flex flex-col justify-center bg-red-500/5 p-6 rounded-b-2xl">
-                 <h4 className="font-bold text-dark-blue mb-4">Bu muammolar sizga tanishmi?</h4>
-                 <ul className="space-y-3 text-left">
-                    {audience.problems.map((problem, pIndex) => (
-                        <li key={pIndex} className="flex items-start text-sm text-gray-800 font-medium">
-                           <AlertTriangle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0 mt-px" />
-                           <span>{problem}</span>
-                        </li>
+        <div className="mt-12 max-w-4xl mx-auto">
+            <Card className="p-6 sm:p-8 rounded-2xl shadow-lg bg-white">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {problems.map((problem, index) => (
+                        <Card key={index} className="bg-red-500/10 border-red-500/20 rounded-xl p-5">
+                             <div className="flex items-start gap-4">
+                                <AlertTriangle className="h-6 w-6 text-red-600 flex-shrink-0 mt-1" />
+                                <p className="text-base font-semibold text-red-900">{problem.text}</p>
+                            </div>
+                        </Card>
                     ))}
-                 </ul>
-              </CardContent>
+                </div>
             </Card>
-          ))}
         </div>
-         <div className="text-center mt-12">
-            <Button onClick={handleOpenModal} size="lg" className="text-lg shadow-ocean animate-subtle-pulse">
-                Mening muammom bor <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-        </div>
+
+        <Card className="max-w-4xl mx-auto mt-8 bg-gradient-to-r from-primary to-blue-800 text-white p-8 rounded-2xl shadow-xl">
+             <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+                <div className="flex-shrink-0 bg-white/10 p-4 rounded-full">
+                    <ThumbsUp className="w-10 h-10 text-accent" />
+                </div>
+                <div className="flex-1">
+                    <h3 className="text-2xl font-bold">Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!</h3>
+                    <p className="mt-2 text-blue-200 text-lg">
+                       To'g'ri qurilgan brend strategiyasi bu kabi muammolarni bartaraf etib, biznesingizni barqaror o'sish yo'liga olib chiqadi.
+                    </p>
+                </div>
+                <div className="flex-shrink-0 w-full md:w-auto mt-4 md:mt-0">
+                     <Button 
+                        onClick={handleOpenModal} 
+                        size="lg" 
+                        className="text-lg w-full md:w-auto shadow-ocean animate-subtle-pulse bg-accent text-accent-foreground hover:bg-accent/90"
+                    >
+                        Yechimni muhokama qilish <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                </div>
+             </div>
+        </Card>
       </div>
     </section>
   );
