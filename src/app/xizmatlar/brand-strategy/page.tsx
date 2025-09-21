@@ -11,11 +11,14 @@ import Parallax from '@/components/parallax-provider';
 import React from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
-import WhyUs from '@/components/sections/why-us';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
+    loading: () => <Skeleton className="h-96 w-full mt-4" />,
+});
+
+const WhyUs = dynamic(() => import('@/components/sections/why-us'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
 
