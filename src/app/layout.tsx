@@ -6,6 +6,7 @@ import Script from 'next/script';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import type { FC, ReactNode } from 'react';
+import Head from 'next/head';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Poppins } from 'next/font/google';
@@ -22,6 +23,12 @@ const poppins = Poppins({
   variable: '--font-poppins',
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
+
+const APP_NAME = "Jon.Branding | Biznesingiz uchun natija keltiradigan brending";
+const APP_DESCRIPTION = "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun natija keltiradigan, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.";
+const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
+const CANONICAL_URL = 'https://jonbranding.uz';
+
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -85,7 +92,20 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 
   return (
     <html lang="uz" suppressHydrationWarning className={`${poppins.variable}`}>
-      <head>
+      <Head>
+        <title>{APP_NAME}</title>
+        <meta name="description" content={APP_DESCRIPTION} />
+        <link rel="canonical" href={CANONICAL_URL} />
+        <meta property="og:url" content={CANONICAL_URL} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={APP_NAME} />
+        <meta property="og:description" content={APP_DESCRIPTION} />
+        <meta property="og:image" content={OG_IMAGE_URL} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={APP_NAME} />
+        <meta name="twitter:description" content={APP_DESCRIPTION} />
+        <meta name="twitter:image" content={OG_IMAGE_URL} />
+
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <Script
             id="app-config"
@@ -129,7 +149,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
+      </Head>
       <body className="font-body bg-white antialiased">
         <div className="flex min-h-screen flex-col bg-secondary/50">
            <Header />

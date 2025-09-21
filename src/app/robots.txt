@@ -1,0 +1,7 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: /api/
+Disallow: /_next/
+Allow: /
+
+Sitemap: https://jonbranding.uz/sitemap.xml
