@@ -9,6 +9,7 @@ import { Star, PlayCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { type Testimonial } from '@/lib/types';
+import Autoplay from "embla-carousel-autoplay";
 
 const staticTestimonials: Testimonial[] = [
   {
@@ -132,6 +133,10 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 };
 
 const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
+    const plugin = React.useRef(
+      Autoplay({ delay: 8000, stopOnInteraction: true })
+    );
+
   return (
     <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
@@ -142,7 +147,12 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
           </p>
         </div>
         <div className="mt-12">
-            <Carousel opts={{ align: "start", loop: true }} className="w-full">
+            <Carousel 
+                opts={{ align: "start", loop: true }} 
+                plugins={[plugin.current]}
+                onMouseEnter={plugin.current.stop}
+                onMouseLeave={plugin.current.reset}
+                className="w-full">
                 <CarouselContent className="-ml-4">
                     {testimonials.map((testimonial, index) => (
                     <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-2/3">
