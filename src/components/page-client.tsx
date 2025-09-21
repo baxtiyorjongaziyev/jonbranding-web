@@ -11,6 +11,7 @@ import { useTelegram } from '@/hooks/use-telegram';
 import { Button } from '@/components/ui/button';
 import { type Brand } from '@/lib/types';
 import { motion } from 'framer-motion';
+import Stats from '@/components/sections/stats';
 
 // Dynamically import components that are not immediately visible
 const Founder = dynamic(() => import('@/components/sections/founder'));
@@ -23,7 +24,6 @@ const TargetAudience = dynamic(() => import('@/components/sections/target-audien
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const Faq = dynamic(() => import('@/components/sections/faq'));
-const WhyUs = dynamic(() => import('@/components/sections/why-us'));
 
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
@@ -113,12 +113,12 @@ const PageClient: FC<PageClientProps> = ({ brands }) => {
         <div>
             <main>
                 <AnimatedSection><Hero onPrimaryClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><Stats /></AnimatedSection>
                 <AnimatedSection><TrustedBy brands={brands} /></AnimatedSection>
                 <AnimatedSection><TargetAudience /></AnimatedSection>
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Testimonials /></AnimatedSection>
                 <AnimatedSection><Gallery onCtaClick={handleOpenModal} /></AnimatedSection>
-                <AnimatedSection><WhyUs onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Founder /></AnimatedSection>
                 <AnimatedSection><Process onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Video /></AnimatedSection>

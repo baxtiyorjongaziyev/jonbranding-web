@@ -2,7 +2,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Target, ListChecks, Star } from 'lucide-react';
 import CtaBlock from './cta-block';
-import Stats from './stats';
 
 const values = [
   {
@@ -54,7 +53,6 @@ const WhyUs: React.FC<WhyUsProps> = ({ onCtaClick }) => {
         </div>
       </div>
     </section>
-    <Stats />
     <CtaBlock 
         title="Bizning yondashuvimiz sizga ma'qul keldimi?"
         description="Keling, brendingizni bepul tahlil qilib, uning kuchli va zaif tomonlarini aniqlaymiz. Bu siz uchun hech qanday majburiyat yuklamaydi."

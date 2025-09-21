@@ -8,6 +8,7 @@ import {CheckCircle, Search} from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { Card } from '../ui/card';
 
 
 interface HeroProps {
@@ -61,24 +62,38 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
           <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[50rem] h-[50rem] bg-primary/5 rounded-full blur-3xl"></div>
       </div>
       <div className="relative z-10 container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          
-            <h1 data-testid="hero-title" className={cn(
-              "text-4xl leading-tight sm:text-5xl md:text-6xl font-extrabold text-foreground transition-opacity duration-500",
-              isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
-            )}>
-              {headlines[headlineIndex]}
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground">
-              Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span className="font-bold text-foreground">natija keltiradigan</span>, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.
-            </p>
-            <div className="mt-10 flex justify-center">
-              <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-breathing">
-                {buttonTexts[buttonIndex]}
-              </Button>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-2xl text-center lg:text-left">
+                <h1 data-testid="hero-title" className={cn(
+                "text-4xl leading-tight sm:text-5xl md:text-6xl font-extrabold text-foreground transition-opacity duration-500",
+                isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
+                )}>
+                {headlines[headlineIndex]}
+                </h1>
+                <p className="mx-auto lg:mx-0 mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground">
+                Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span className="font-bold text-foreground">natija keltiradigan</span>, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.
+                </p>
+                <div className="mt-10 flex justify-center lg:justify-start">
+                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-breathing">
+                        {buttonTexts[buttonIndex]}
+                    </Button>
+                </div>
+                <div className="mt-6 text-sm text-muted-foreground">
+                    Bepul. Majburiyatlarsiz.
+                </div>
             </div>
-            <div className="mt-6 text-sm text-muted-foreground">
-                Bepul. Majburiyatlarsiz.
+            <div className="hidden lg:flex justify-center items-center">
+                <Card className="rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-500">
+                    <Image 
+                        src="https://img1.teletype.in/files/5a/04/5a043c70-3453-487b-a320-f5a6b0c68d2a.gif"
+                        alt="Brendingdan avval va keyin"
+                        width={500}
+                        height={500}
+                        unoptimized
+                        className="object-cover"
+                        data-ai-hint="before after branding"
+                    />
+                </Card>
             </div>
         </div>
       </div>
