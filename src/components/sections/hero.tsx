@@ -21,7 +21,7 @@ interface HeroProps {
 const headlines = [
   <>Brendingiz <span className="text-accent">sotmayaptimi?</span> Biz buni to'g'rilaymiz.</>,
   <>Raqobatchilardan <span className="text-accent">keskin ajralib</span> turing.</>,
-  <>Brendingizni shunchaki "chiroyli" emas, <span className="text-accent">daromadli</span> qiling.</>,
+  <>Brendingizni shunchaki “chiroyli” emas, <span className="text-accent">daromadli</span> qiling.</>,
   <>Mijozlar sizni <span className="text-accent">sevib qolsin</span>. Qayta va qayta.</>,
   <>Kichik biznesdan <span className="text-accent">kuchli brendgacha</span>. Bir qadamda.</>,
 ];
