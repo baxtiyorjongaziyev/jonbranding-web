@@ -7,11 +7,14 @@ import { Layers, Palette, PenTool, ClipboardCheck } from 'lucide-react';
 import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import React from 'react';
-import PickTwoSelector from '@/components/sections/pick-two-selector';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
+    loading: () => <Skeleton className="h-96 w-full mt-4" />,
+});
+
+const PickTwoSelector = dynamic(() => import('@/components/sections/pick-two-selector'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
 
