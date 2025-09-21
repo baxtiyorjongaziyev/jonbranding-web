@@ -3,12 +3,17 @@
 
 import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Search, Palette, Box, Check, ArrowRight } from 'lucide-react';
+import { Search, Palette, Box } from 'lucide-react';
 import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
-import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
+    loading: () => <Skeleton className="h-96 w-full mt-4" />,
+});
+
 
 const processSteps = [
     {
@@ -117,9 +122,7 @@ const QadoqDizayniPage: FC = () => {
             </div>
         </section>
         </main>
-        <React.Suspense fallback={<div>Loading sections...</div>}>
-            <ServiceSections />
-        </React.Suspense>
+        <ServiceSections />
     </>
   );
 };
