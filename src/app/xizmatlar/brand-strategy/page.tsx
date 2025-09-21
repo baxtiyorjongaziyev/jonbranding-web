@@ -8,11 +8,16 @@ import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
-import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import WhyUs from '@/components/sections/why-us';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
+    loading: () => <Skeleton className="h-96 w-full mt-4" />,
+});
 
 
 const processSteps = [
@@ -163,9 +168,7 @@ const BrandStrategyPage: FC = () => {
         </section>
         <WhyUs onCtaClick={handleOpenModal} />
         </main>
-        <React.Suspense fallback={<div>Loading sections...</div>}>
-            <ServiceSections />
-        </React.Suspense>
+        <ServiceSections />
     </>
   );
 };
