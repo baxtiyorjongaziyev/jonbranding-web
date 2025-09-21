@@ -21,6 +21,8 @@ const Process = dynamic(() => import('@/components/sections/process'));
 const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
 const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
+const Gallery = dynamic(() => import('@/components/sections/gallery'));
+const Faq = dynamic(() => import('@/components/sections/faq'));
 
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
@@ -114,10 +116,12 @@ const PageClient: FC<PageClientProps> = ({ brands }) => {
                 <AnimatedSection><TargetAudience /></AnimatedSection>
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Testimonials /></AnimatedSection>
+                <AnimatedSection><Gallery onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Founder /></AnimatedSection>
                 <AnimatedSection><Process onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Video /></AnimatedSection>
                 <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><Faq /></AnimatedSection>
             </main>
             <ExitIntentModal onPrimaryClick={handleOpenModal} />
             <MobileCtaBar onOpenModal={handleOpenModal} />
