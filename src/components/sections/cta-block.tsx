@@ -14,7 +14,7 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
   return (
     <section className="bg-background py-16">
       <div className="container mx-auto px-4">
-        <div className="rounded-2xl bg-gradient-to-b from-gray-900 to-primary p-8 sm:p-12 text-center text-primary-foreground shadow-xl">
+        <div className="rounded-2xl bg-gradient-to-b from-black to-primary p-8 sm:p-12 text-center text-primary-foreground shadow-xl">
           <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground">{title}</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-300">
             {description}
@@ -24,7 +24,7 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
               onClick={onCtaClick}
               size="lg"
               variant="default"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg text-base sm:text-lg animate-breathing h-auto py-3 px-6 whitespace-normal w-full sm:w-auto"
+              className="bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg text-base sm:text-lg animate-breathing h-auto py-3 px-6 whitespace-normal w-full sm:w-auto"
             >
               {buttonText}
               <ArrowRight className="ml-2 h-5 w-5 flex-shrink-0" />
