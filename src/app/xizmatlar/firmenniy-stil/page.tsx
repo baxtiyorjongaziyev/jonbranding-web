@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
 import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
+import PickTwoSelector from '@/components/sections/pick-two-selector';
 
 const processSteps = [
     {
@@ -86,6 +87,8 @@ const FirmenniyStilPage: FC = () => {
                 </div>
             </div>
         </section>
+        
+        <PickTwoSelector onCtaClick={handleOpenModal} />
 
         <section className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4">

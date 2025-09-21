@@ -12,6 +12,7 @@ import ServiceSections from '@/components/sections/service-sections';
 import React from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
+import WhyUs from '@/components/sections/why-us';
 
 
 const processSteps = [
@@ -178,6 +179,7 @@ const BrandStrategyPage: FC = () => {
                 </div>
             </div>
         </section>
+        <WhyUs onCtaClick={handleOpenModal} />
         </main>
         <React.Suspense fallback={<div>Loading sections...</div>}>
             <ServiceSections />
@@ -187,7 +189,3 @@ const BrandStrategyPage: FC = () => {
 };
 
 export default BrandStrategyPage;
-
-    
-
-    
