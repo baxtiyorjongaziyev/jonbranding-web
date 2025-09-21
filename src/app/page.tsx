@@ -1,6 +1,5 @@
 
 import type { FC } from 'react';
-import dynamic from 'next/dynamic';
 import PageClient from '@/components/page-client';
 import { type Brand } from '@/lib/types';
 import { staticBrands } from '@/lib/static-data';
@@ -18,10 +17,7 @@ const Home: FC = async () => {
   const brands = await getBrands();
 
   return (
-    <>
-      <PageClient brands={brands}>
-      </PageClient>
-    </>
+    <PageClient brands={brands} />
   );
 };
 
