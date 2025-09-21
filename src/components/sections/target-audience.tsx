@@ -41,10 +41,10 @@ const TargetAudience = () => {
             </Card>
         </div>
 
-        <Card className="max-w-4xl mx-auto mt-8 bg-gradient-to-r from-primary to-blue-800 text-white p-8 rounded-2xl shadow-xl">
+        <Card className="max-w-4xl mx-auto mt-8 bg-gradient-to-r from-sky-500 to-blue-900 text-white p-8 rounded-2xl shadow-xl">
              <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
                 <div className="flex-shrink-0 bg-white/10 p-4 rounded-full">
-                    <ThumbsUp className="w-10 h-10 text-accent" />
+                    <ThumbsUp className="w-10 h-10 text-white" />
                 </div>
                 <div className="flex-1">
                     <h3 className="text-2xl font-bold">Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!</h3>
@@ -56,7 +56,8 @@ const TargetAudience = () => {
                      <Button 
                         onClick={handleOpenModal} 
                         size="lg" 
-                        className="text-lg w-full md:w-auto shadow-ocean animate-subtle-pulse bg-accent text-accent-foreground hover:bg-accent/90"
+                        variant="secondary"
+                        className="text-lg w-full md:w-auto shadow-md animate-breathing"
                     >
                         Yechimni muhokama qilish <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
