@@ -4,8 +4,7 @@
 import type {FC} from 'react';
 import { useState, useEffect, useRef } from 'react';
 import {Button} from '@/components/ui/button';
-import {CheckCircle, Search} from 'lucide-react';
-import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { Card } from '../ui/card';
@@ -19,11 +18,11 @@ interface HeroProps {
 }
 
 const headlines = [
-  <>Brendingiz <span className="text-accent">sotmayaptimi?</span> Biz buni to'g'rilaymiz.</>,
-  <>Raqobatchilardan <span className="text-accent">keskin ajralib</span> turing.</>,
-  <>Brendingizni shunchaki “chiroyli” emas, <span className="text-accent">daromadli</span> qiling.</>,
-  <>Mijozlar sizni <span className="text-accent">sevib qolsin</span>. Qayta va qayta.</>,
-  <>Kichik biznesdan <span className="text-accent">kuchli brendgacha</span>. Bir qadamda.</>,
+  <>Brendingiz <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">sotmayaptimi?</span> Biz buni to'g'rilaymiz.</>,
+  <>Raqobatchilardan <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">keskin ajralib</span> turing.</>,
+  <>Brendingizni shunchaki “chiroyli” emas, <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">daromadli</span> qiling.</>,
+  <>Mijozlar sizni <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">sevib qolsin</span>. Qayta va qayta.</>,
+  <>Kichik biznesdan <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">kuchli brendgacha</span>. Bir qadamda.</>,
 ];
 
 const buttonTexts = [
@@ -87,8 +86,9 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
                 Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span className="font-bold text-foreground">natija keltiradigan</span>, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.
                 </p>
                 <div className="mt-10 flex justify-center lg:justify-start">
-                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-ocean animate-breathing">
+                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-base px-8 py-6 shadow-ocean animate-breathing">
                         {buttonTexts[buttonIndex]}
+                        <ArrowRight className="w-5 h-5 ml-2"/>
                     </Button>
                 </div>
                 <div className="mt-6 text-sm text-muted-foreground">
