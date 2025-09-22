@@ -136,11 +136,11 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10")}>
-                  <Link href={item.href}>
+                <Link href={item.href} legacyBehavior passHref>
+                  <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10")}>
                     {item.label}
-                  </Link>
-                </NavigationMenuLink>
+                  </NavigationMenuLink>
+                </Link>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
@@ -162,7 +162,7 @@ const Header: FC = () => {
           <Button 
             onClick={handleContactClick} 
             className={cn(
-                "hidden md:flex shadow-ocean animate-breathing"
+                "hidden md:flex shadow-ocean"
             )}
           >
              Bepul konsultatsiya olish
@@ -206,7 +206,7 @@ const Header: FC = () => {
                       Telegram orqali bog'lanish
                     </a>
                  </div>
-                 <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 animate-breathing">
+                 <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4">
                   Bepul konsultatsiya olish
                 </Button>
               </nav>

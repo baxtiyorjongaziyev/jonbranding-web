@@ -346,7 +346,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 </div>
 
 
-                                <Button onClick={onOrderNow} variant="secondary" className="w-full mt-6 text-lg bg-white text-primary hover:bg-gray-200 shadow-lg whitespace-normal h-auto animate-breathing py-4 rounded-xl" disabled={total.base === 0}>
+                                <Button onClick={onOrderNow} variant="secondary" className="w-full mt-6 text-lg bg-white text-primary hover:bg-gray-200 shadow-lg whitespace-normal h-auto py-4 rounded-xl" disabled={total.base === 0}>
                                     {total.discountApplied.length > 0 ? "Chegirma bilan buyurtma berish" : "Bepul konsultatsiya olish"}
                                 </Button>
                                 
