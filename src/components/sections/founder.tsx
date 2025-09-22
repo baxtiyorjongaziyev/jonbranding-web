@@ -62,7 +62,7 @@ const Founder = () => {
           </div>
           <div >
             <Card className="overflow-hidden shadow-xl rounded-2xl w-full">
-              <CardContent className="p-0 relative bg-black" style={{ paddingBottom: '125%' }}>
+              <CardContent className="p-0 relative bg-black" style={{ paddingBottom: '140%' }}>
                 {playVideo ? (
                     <iframe
                         src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1"
