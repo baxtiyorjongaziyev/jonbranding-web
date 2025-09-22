@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import { Logo } from '@/components/icons/logo';
-import { Phone, Send, MapPin, Instagram, Linkedin, Twitter, ArrowUp } from 'lucide-react';
+import { Phone, Send, Instagram, ArrowUp } from 'lucide-react';
 import { Separator } from '../ui/separator';
 
 const Footer = () => {
@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <footer className="bg-black text-gray-300 relative overflow-hidden pt-16 sm:pt-24 pb-8">
        <div 
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_50%_at_50%_100%,_rgba(var(--primary-rgb),0.15),_rgba(var(--primary-rgb),0))]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_50%_at_50%_100%,hsl(var(--accent)/0.15),transparent)]"
         aria-hidden="true"
       />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,9 +24,9 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Biz bilan bog'laning</h3>
             <div className="mt-4 space-y-4">
-               <a href="mailto:info@jonbranding.uz" className="block group">
-                  <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">info@jonbranding.uz</p>
-                  <p className="text-xs text-gray-400">Umumiy so'rovlar uchun</p>
+               <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="block group">
+                  <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">@baxtiyorjon_gaziyev</p>
+                  <p className="text-xs text-gray-400">Telegram orqali</p>
                </a>
                <a href="tel:+998336450097" className="block group">
                   <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">+998 33 645 00 97</p>
@@ -63,16 +63,10 @@ const Footer = () => {
            <p className="text-sm text-gray-400 order-2 sm:order-1">&copy; {new Date().getFullYear()} Jon.Branding. Barcha huquqlar himoyalangan.</p>
            
            <div className="flex items-center gap-6 order-1 sm:order-2">
-             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+             <a href="https://www.instagram.com/jon.branding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                <Instagram size={20} />
              </a>
-             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-               <Linkedin size={20} />
-             </a>
-             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-               <Twitter size={20} />
-             </a>
-              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+             <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                <Send size={20} />
              </a>
            </div>
