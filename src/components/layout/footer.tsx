@@ -27,6 +27,7 @@ const Footer = () => {
   const additionalLinks = [
       { href: '/xizmatlar', label: 'Xizmat Narxlari' },
       { href: '/quiz', label: 'Brending Testi' },
+      { href: '/blog', label: 'Blog' },
   ];
 
   return (

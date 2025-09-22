@@ -29,6 +29,7 @@ const navItems = [
   { href: '/#portfolio', label: 'Portfolio' },
   { href: '/#founder', label: 'Asoschi' },
   { href: '/#process', label: 'Jarayon' },
+  { href: '/blog', label: 'Blog' },
 ];
 
 const services: { title: string; href: string; description: string }[] = [
@@ -136,11 +137,11 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href} passHref>
-                  <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10")}>
+                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10")}>
+                  <Link href={item.href}>
                     {item.label}
-                  </NavigationMenuLink>
-                </Link>
+                  </Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>

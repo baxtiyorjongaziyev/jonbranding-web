@@ -18,3 +18,15 @@ export interface Brand {
     name: string;
     logo: string | null;
 }
+
+export interface BlogPost {
+    slug: string;
+    title: string;
+    description: string;
+    date: string;
+    author: string;
+    image: string;
+    imageHint: string;
+    content: string;
+}
+`
