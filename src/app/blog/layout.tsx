@@ -40,4 +40,3 @@ const BlogLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 }
 
 export default BlogLayout;
-`
