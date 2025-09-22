@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -44,7 +45,7 @@ const TargetAudience = () => {
 
         <Card className="max-w-4xl mx-auto mt-8 bg-gradient-to-br from-primary to-dark-blue text-white p-8 rounded-2xl shadow-xl overflow-hidden relative text-center animate-breathing">
              <div className="relative z-10">
-                <h3 className="text-3xl lg:text-4xl font-bold leading-tight">Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!</h3>
+                <h3 className="text-3xl lg:text-4xl font-bold leading-tight text-white">Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!</h3>
                 <p className="mt-4 text-blue-200 text-lg max-w-2xl mx-auto">
                    To'g'ri qurilgan brend strategiyasi bu kabi muammolarni bartaraf etib, biznesingizni barqaror o'sish yo'liga olib chiqadi.
                 </p>
