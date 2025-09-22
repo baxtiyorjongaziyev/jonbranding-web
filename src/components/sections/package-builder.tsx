@@ -268,7 +268,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                     </div>
     
                     <div className="lg:col-span-1 lg:sticky top-24">
-                        <Card className="p-6 sm:p-8 rounded-2xl shadow-xl bg-primary text-white">
+                        <Card className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
                             <CardHeader className="p-0 text-left">
                                <CardTitle className="text-2xl font-bold text-white">Sizning to'plamingiz</CardTitle>
                                <p className="text-blue-200 text-sm mt-1">O'zingizga mos xizmatlarni tanlang.</p>
