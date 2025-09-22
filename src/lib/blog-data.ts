@@ -69,4 +69,3 @@ Yaxshi nomni topish vaqt va izlanish talab etadi. Bu jarayonga jiddiy yondashing
 `
   },
 ];
-`
