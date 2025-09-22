@@ -1,4 +1,6 @@
 
+'use client';
+
 import { blogPosts } from '@/lib/blog-data';
 import { type BlogPost } from '@/lib/types';
 import { notFound } from 'next/navigation';
@@ -13,12 +15,8 @@ type Props = {
   params: { slug: string };
 };
 
-export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
+// generateMetadata is still supported in a Client Component file,
+// but it will be run on the server.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = blogPosts.find((p) => p.slug === params.slug);
 
@@ -59,55 +57,62 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// generateStaticParams is also supported and runs on the server.
+export async function generateStaticParams() {
+  return blogPosts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 // Markdown-like content to HTML
 const renderContent = (content: string) => {
     const lines = content.split('\n');
-    const elements = [];
-    let listItems: {type: 'ul' | 'ol', items: string[]} = {type: 'ul', items: []};
+    const elements: React.ReactNode[] = [];
+    let listBuffer: { type: 'ul' | 'ol'; items: React.ReactNode[] } | null = null;
 
-    const flushList = () => {
-        if (listItems.items.length > 0) {
-            if (listItems.type === 'ul') {
-                 elements.push(<ul key={`ul-${elements.length}`} className="list-disc pl-5 my-6 space-y-2">{listItems.items.map((li, idx) => <li key={idx} className="text-lg text-gray-800 leading-relaxed">{li}</li>)}</ul>);
-            } else {
-                elements.push(<ol key={`ol-${elements.length}`} className="list-decimal pl-5 my-6 space-y-2">{listItems.items.map((li, idx) => <li key={idx} className="text-lg text-gray-800 leading-relaxed">{li}</li>)}</ol>);
-            }
-            listItems = {type: 'ul', items: []};
+    const flushListBuffer = () => {
+        if (listBuffer) {
+            const ListComponent = listBuffer.type;
+            const key = `${ListComponent}-${elements.length}`;
+            elements.push(
+                <ListComponent key={key} className={`list-${listBuffer.type === 'ul' ? 'disc' : 'decimal'} pl-5 my-6 space-y-2`}>
+                    {listBuffer.items}
+                </ListComponent>
+            );
+            listBuffer = null;
         }
     };
 
+    lines.forEach((line, i) => {
+        const trimmedLine = line.trim();
 
-    for (let i = 0; i < lines.length; i++) {
-        let line = lines[i].trim();
-
-        if (line.startsWith('## ')) {
-            flushList();
-            elements.push(<h2 key={i} className="text-2xl sm:text-3xl font-bold text-dark-blue mt-8 mb-4">{line.substring(3)}</h2>);
-        } else if (line.startsWith('> ')) {
-            flushList();
+        if (trimmedLine.startsWith('## ')) {
+            flushListBuffer();
+            elements.push(<h2 key={i} className="text-2xl sm:text-3xl font-bold text-dark-blue mt-8 mb-4">{trimmedLine.substring(3)}</h2>);
+        } else if (trimmedLine.startsWith('> ')) {
+            flushListBuffer();
             elements.push(
                 <blockquote key={i} className="border-l-4 border-primary pl-4 italic text-gray-700 my-6">
-                    {line.substring(2)}
+                    {trimmedLine.substring(2)}
                 </blockquote>
             );
-        } else if (line.startsWith('*   ')) {
-            if (listItems.type !== 'ul') flushList();
-            listItems.type = 'ul';
-            listItems.items.push(line.substring(4));
-        } else if (line.match(/^\d+\.\s/)) {
-            if (listItems.type !== 'ol') flushList();
-            listItems.type = 'ol';
-            listItems.items.push(line.substring(line.indexOf(' ') + 1));
-        } else if (line === '') {
-            flushList();
-            elements.push(<br key={i} />);
+        } else if (trimmedLine.startsWith('* ')) {
+            if (listBuffer?.type !== 'ul') flushListBuffer();
+            if (!listBuffer) listBuffer = { type: 'ul', items: [] };
+            listBuffer.items.push(<li key={i} className="text-lg text-gray-800 leading-relaxed">{trimmedLine.substring(2)}</li>);
+        } else if (trimmedLine.match(/^\d+\.\s/)) {
+            if (listBuffer?.type !== 'ol') flushListBuffer();
+            if (!listBuffer) listBuffer = { type: 'ol', items: [] };
+            listBuffer.items.push(<li key={i} className="text-lg text-gray-800 leading-relaxed">{trimmedLine.substring(trimmedLine.indexOf(' ') + 1)}</li>);
+        } else if (trimmedLine === '') {
+            flushListBuffer();
         } else {
-            flushList();
-            elements.push(<p key={i} className="text-lg text-gray-800 leading-relaxed mb-4">{line}</p>);
+            flushListBuffer();
+            elements.push(<p key={i} className="text-lg text-gray-800 leading-relaxed mb-4">{trimmedLine}</p>);
         }
-    }
-    
-    flushList(); // End of content flush
+    });
+
+    flushListBuffer(); // Flush any remaining list items at the end
 
     return elements;
 };
