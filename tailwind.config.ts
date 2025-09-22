@@ -90,6 +90,10 @@ const config: Config = {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.05)" },
         },
+        "shine": {
+          "from": { transform: "translateX(-100%) skewX(-25deg)" },
+          "to": { transform: "translateX(200%) skewX(-25deg)" },
+        },
         "text-fade-in": {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
@@ -102,7 +106,8 @@ const config: Config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "breathing": "breathing 2.5s ease-in-out infinite",
+        "breathing": "breathing 4s ease-in-out infinite",
+        "shine": "shine 2s infinite",
         "text-fade-in": "text-fade-in 0.8s ease-in-out",
         "text-fade-out": "text-fade-out 0.8s ease-in-out",
       },
