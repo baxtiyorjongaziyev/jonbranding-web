@@ -1,4 +1,3 @@
-
 'use client';
 
 import type {FC} from 'react';
@@ -86,9 +85,9 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
                 Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span className="font-bold text-foreground">natija keltiradigan</span>, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.
                 </p>
                 <div className="mt-10 flex justify-center lg:justify-start">
-                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-base px-8 py-6 shadow-ocean animate-breathing">
+                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-base px-8 py-6 shadow-lg animate-breathing">
                         {buttonTexts[buttonIndex]}
-                        <ArrowRight className="w-5 h-5 ml-2"/>
+                        <ArrowRight className="w-5 h-5"/>
                     </Button>
                 </div>
                 <div className="mt-6 text-sm text-muted-foreground">
