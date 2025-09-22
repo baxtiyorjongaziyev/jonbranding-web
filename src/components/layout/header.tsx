@@ -111,15 +111,15 @@ const Header: FC = () => {
     )}>
       <div className={cn(
         "container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
-        scrolled ? "bg-black/80 backdrop-blur-lg rounded-full shadow-2xl border border-white/10" : "bg-transparent"
+        scrolled ? "bg-white/20 backdrop-blur-lg rounded-full shadow-2xl border border-white/30" : "bg-transparent"
       )}>
         <Link href="/" className="flex items-center" aria-label="Bosh sahifa">
-          <Logo isWhite={scrolled} />
+          <Logo isWhite={false} />
         </Link>
         <NavigationMenu className="hidden lg:flex">
            <NavigationMenuList>
              <NavigationMenuItem>
-              <NavigationMenuTrigger className={cn(scrolled && "text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[state=open]:bg-white/10")}>Xizmatlar</NavigationMenuTrigger>
+              <NavigationMenuTrigger className={cn("bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10 focus:text-foreground data-[state=open]:bg-black/10")}>Xizmatlar</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {services.map((component) => (
@@ -136,7 +136,7 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), scrolled && "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10")}>
+                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10")}>
                   <Link href={item.href}>
                     {item.label}
                   </Link>
@@ -148,23 +148,27 @@ const Header: FC = () => {
 
         <div className="hidden items-center space-x-6 lg:flex">
            <div className="flex items-center gap-6 ml-4">
-             <a href="tel:+998336450097" className={cn("flex items-center gap-2 text-base font-medium transition-colors hover:text-accent", scrolled ? "text-white" : "text-foreground")}>
+             <a href="tel:+998336450097" className={cn("flex items-center gap-2 text-base font-medium transition-colors hover:text-accent", scrolled ? "text-foreground" : "text-foreground")}>
                 <Phone size={16} />
                 +998 33 645 00 97
               </a>
-              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className={cn("flex items-center gap-2 text-base font-medium transition-colors hover:text-accent", scrolled ? "text-white" : "text-foreground")}>
+              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className={cn("flex items-center gap-2 text-base font-medium transition-colors hover:text-accent", scrolled ? "text-foreground" : "text-foreground")}>
                 <Send size={16} />
                 Telegram
               </a>
            </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button onClick={handleContactClick} className={cn("hidden md:flex shadow-ocean animate-breathing", scrolled && "bg-blue-600 hover:bg-blue-500")}>
-            Bepul konsultatsiya olish
+          <Button onClick={handleContactClick} className={cn("hidden md:flex shadow-ocean animate-breathing relative group overflow-hidden")}>
+             <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700"></span>
+              <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:bg-black/20">
+                Bepul konsultatsiya olish
+              </span>
+              <span className="absolute w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-500 ease-in-out group-hover:translate-x-full skew-x-[-25deg]"></span>
           </Button>
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className={cn("lg:hidden", scrolled && "text-white border-white/20 hover:bg-white/10 hover:text-white")}>
+              <Button variant="outline" size="icon" className={cn("lg:hidden", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Menyuni ochish</span>
               </Button>
@@ -214,5 +218,3 @@ const Header: FC = () => {
 };
 
 export default Header;
-
-    
