@@ -42,29 +42,18 @@ const TargetAudience = () => {
             </Card>
         </div>
 
-        <Card className="max-w-4xl mx-auto mt-8 bg-dark-blue text-white p-8 rounded-2xl shadow-xl overflow-hidden relative">
-            <div className="absolute -right-40 -top-20 opacity-50">
-                <Image 
-                    src="https://img1.teletype.in/files/54/1b/541ba35a-b6e8-4687-9571-067980327f31.png"
-                    width={500}
-                    height={500}
-                    alt="Abstract 3D graphic"
-                    className='pointer-events-none'
-                />
-            </div>
-             <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
-                <div className="text-center md:text-left">
-                    <h3 className="text-3xl lg:text-4xl font-bold leading-tight">Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!</h3>
-                    <p className="mt-4 text-blue-200 text-lg">
-                       To'g'ri qurilgan brend strategiyasi bu kabi muammolarni bartaraf etib, biznesingizni barqaror o'sish yo'liga olib chiqadi.
-                    </p>
-                </div>
-                <div className="flex justify-center md:justify-end">
+        <Card className="max-w-4xl mx-auto mt-8 bg-gradient-to-br from-primary to-dark-blue text-white p-8 rounded-2xl shadow-xl overflow-hidden relative text-center animate-breathing">
+             <div className="relative z-10">
+                <h3 className="text-3xl lg:text-4xl font-bold leading-tight">Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!</h3>
+                <p className="mt-4 text-blue-200 text-lg max-w-2xl mx-auto">
+                   To'g'ri qurilgan brend strategiyasi bu kabi muammolarni bartaraf etib, biznesingizni barqaror o'sish yo'liga olib chiqadi.
+                </p>
+                 <div className="mt-8 flex justify-center">
                      <Button 
                         onClick={handleOpenModal} 
                         size="lg" 
                         variant="secondary"
-                        className="text-lg w-full sm:w-auto shadow-md animate-breathing"
+                        className="text-lg w-full sm:w-auto shadow-md"
                     >
                         Barcha muammolar yechimini ko'rish <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
