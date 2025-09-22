@@ -130,18 +130,18 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                                 </div>
                             </div>
                         </div>
-                        <div className="relative aspect-[9/16] sm:aspect-video rounded-2xl overflow-hidden shadow-2xl cursor-pointer group" onClick={() => setPlayVideo(true)}>
+                        <div className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl cursor-pointer group" onClick={() => setPlayVideo(true)}>
                             {playVideo ? (
                                 <iframe
                                     src={videoTestimonial.videoUrl}
                                     frameBorder="0"
                                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                                    className="absolute inset-0 w-full h-full sm:object-cover"
+                                    className="absolute inset-0 w-full h-full"
                                     title={videoTestimonial.name + " - Baxtiyorjon Gaziyev haqida fikrlari"}
                                 ></iframe>
                             ) : (
                                 <>
-                                    <Image src={videoTestimonial.image!} alt={videoTestimonial.name} data-ai-hint={videoTestimonial.imageHint} fill className="object-cover sm:object-cover" />
+                                    <Image src={videoTestimonial.image!} alt={videoTestimonial.name} data-ai-hint={videoTestimonial.imageHint} fill className="object-cover" />
                                     <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                                         <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
                                     </div>
