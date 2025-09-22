@@ -74,6 +74,12 @@
   }
 }
 
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 @layer utilities {
   .shadow-ocean {
     box-shadow: 0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2);
@@ -88,6 +94,38 @@
   }
   .animate-text-fade-out {
     animation: text-fade-out 0.8s ease-in-out;
+  }
+
+  @keyframes gradient-rotate {
+    0% {
+      --gradient-angle: 0deg;
+    }
+    100% {
+      --gradient-angle: 360deg;
+    }
+  }
+
+  .btn-animated-border {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-animated-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(from var(--gradient-angle), hsl(var(--primary) / 0.8), hsl(var(--accent) / 0.9), hsl(var(--primary) / 0.8));
+    animation: gradient-rotate 4s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
   }
   
   @keyframes text-fade-in {
