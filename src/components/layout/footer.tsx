@@ -4,7 +4,11 @@ import { Phone, Send, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-black text-white relative overflow-hidden">
+       <div 
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_80%_at_10%_100%,_rgba(0,201,253,0.3),_rgba(0,201,253,0))]"
+        aria-hidden="true"
+      />
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="space-y-4">
