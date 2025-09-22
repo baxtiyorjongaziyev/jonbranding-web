@@ -159,12 +159,28 @@ const Header: FC = () => {
            </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button onClick={handleContactClick} className={cn("hidden md:flex shadow-ocean animate-breathing relative group overflow-hidden")}>
-             <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700"></span>
-              <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:bg-black/20">
+          <Button 
+            onClick={handleContactClick} 
+            className={cn(
+                "hidden md:flex shadow-ocean animate-breathing relative group overflow-hidden",
+                 scrolled && "bg-transparent border border-foreground/50 text-foreground hover:bg-foreground/10"
+            )}
+            variant={scrolled ? 'outline' : 'default'}
+          >
+             <span className={cn(
+                "absolute inset-0", 
+                !scrolled && "bg-gradient-to-r from-blue-500 to-blue-700"
+              )}></span>
+              <span className={cn(
+                "absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:bg-black/20",
+                scrolled ? "text-foreground group-hover:text-white" : "text-white"
+              )}>
                 Bepul konsultatsiya olish
               </span>
-              <span className="absolute w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-500 ease-in-out group-hover:translate-x-full skew-x-[-25deg]"></span>
+              <span className={cn(
+                 "absolute w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-500 ease-in-out group-hover:translate-x-full skew-x-[-25deg]",
+                 scrolled && "via-black/20"
+              )}></span>
           </Button>
           <Sheet>
             <SheetTrigger asChild>
