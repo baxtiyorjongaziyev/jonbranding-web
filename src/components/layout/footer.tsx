@@ -10,16 +10,31 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const mainPageLinks = [
+      { href: '/#portfolio', label: 'Portfolio' },
+      { href: '/#founder', label: 'Asoschi' },
+      { href: '/#process', label: 'Jarayon' },
+      { href: '/#faq', label: 'FAQ' },
+  ];
+
+  const serviceLinks = [
+      { href: '/xizmatlar/brand-strategy', label: 'Brend Strategiyasi' },
+      { href: '/xizmatlar/neyming', label: 'Neyming' },
+      { href: '/xizmatlar/firmenniy-stil', label: 'Firma Uslubi' },
+      { href: '/xizmatlar/qadoq-dizayni', label: 'Qadoq Dizayni' },
+  ];
+  
+  const additionalLinks = [
+      { href: '/xizmatlar', label: 'Barcha Xizmatlar' },
+      { href: '/quiz', label: 'Brending Testi' },
+  ];
+
   return (
-    <footer className="bg-black text-gray-300 relative overflow-hidden pt-16 sm:pt-24 pb-8">
-       <div 
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_50%_at_50%_100%,hsl(var(--accent)/0.15),transparent)]"
-        aria-hidden="true"
-      />
+    <footer className="bg-black text-gray-300 pt-16 sm:pt-24 pb-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Contact */}
           <div>
             <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Biz bilan bog'laning</h3>
@@ -35,24 +50,34 @@ const Footer = () => {
             </div>
           </div>
           
+          {/* Main Page Links */}
+          <div>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Asosiy sahifa</h3>
+            <ul className="mt-4 space-y-2">
+              {mainPageLinks.map(link => (
+                  <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+
           {/* Services */}
           <div>
             <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Xizmatlarimiz</h3>
             <ul className="mt-4 space-y-2">
-              <li><Link href="/xizmatlar/brand-strategy" className="text-gray-300 hover:text-white transition-colors">Brend Strategiyasi</Link></li>
-              <li><Link href="/xizmatlar/neyming" className="text-gray-300 hover:text-white transition-colors">Neyming</Link></li>
-              <li><Link href="/xizmatlar/firmenniy-stil" className="text-gray-300 hover:text-white transition-colors">Firma Uslubi</Link></li>
-              <li><Link href="/xizmatlar/qadoq-dizayni" className="text-gray-300 hover:text-white transition-colors">Qadoq Dizayni</Link></li>
+              {serviceLinks.map(link => (
+                  <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
+              ))}
             </ul>
           </div>
 
-          {/* Office */}
+          {/* Additional Links */}
           <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Bizning ofisimiz</h3>
-            <p className="mt-4 text-white font-semibold">
-              O‘zbekiston, Toshkent shahri, <br/>
-              Mustaqillik shoh ko'chasi, 59
-            </p>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Qo'shimcha</h3>
+             <ul className="mt-4 space-y-2">
+                {additionalLinks.map(link => (
+                    <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
+                ))}
+            </ul>
           </div>
         </div>
 
