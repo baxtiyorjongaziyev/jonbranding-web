@@ -1,54 +1,93 @@
+
 import Link from 'next/link';
 import { Logo } from '@/components/icons/logo';
-import { Phone, Send, MapPin } from 'lucide-react';
+import { Phone, Send, MapPin, Instagram, Linkedin, Twitter, ArrowUp } from 'lucide-react';
+import { Separator } from '../ui/separator';
 
 const Footer = () => {
+
+  const handleScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="bg-black text-white relative overflow-hidden">
+    <footer className="bg-black text-gray-300 relative overflow-hidden pt-16 sm:pt-24 pb-8">
        <div 
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_80%_at_10%_100%,_rgba(0,201,253,0.3),_rgba(0,201,253,0))]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_50%_at_50%_100%,_rgba(var(--primary-rgb),0.15),_rgba(var(--primary-rgb),0))]"
         aria-hidden="true"
       />
-      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div className="space-y-4">
-            <Logo isWhite />
-            <p className="max-w-xs text-gray-400">
-             Strategiyaga asoslangan vizual ko‘rinish bilan biznesingizni keyingi bosqichga olib chiqing.
-            </p>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Top Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {/* Contact */}
+          <div>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Biz bilan bog'laning</h3>
+            <div className="mt-4 space-y-4">
+               <a href="mailto:info@jonbranding.uz" className="block group">
+                  <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">info@jonbranding.uz</p>
+                  <p className="text-xs text-gray-400">Umumiy so'rovlar uchun</p>
+               </a>
+               <a href="tel:+998336450097" className="block group">
+                  <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">+998 33 645 00 97</p>
+                  <p className="text-xs text-gray-400">Telefon orqali</p>
+               </a>
+            </div>
           </div>
           
-          <div className="md:justify-self-center">
-            <h3 className="text-lg font-bold text-white">Sahifalar</h3>
+          {/* Services */}
+          <div>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Xizmatlarimiz</h3>
             <ul className="mt-4 space-y-2">
-              <li><Link href="/#package-builder" className="text-gray-400 hover:text-accent transition-colors">Xizmatlar</Link></li>
-              <li><Link href="/#portfolio" className="text-gray-400 hover:text-accent transition-colors">Portfolio</Link></li>
-              <li><Link href="/xizmatlar/brand-strategy" className="text-gray-400 hover:text-accent transition-colors">Brend Strategiyasi</Link></li>
-              <li><Link href="/#process" className="text-gray-400 hover:text-accent transition-colors">Jarayon</Link></li>
-              <li><Link href="/#faq" className="text-gray-400 hover:text-accent transition-colors">FAQ</Link></li>
+              <li><Link href="/xizmatlar/brand-strategy" className="text-gray-300 hover:text-white transition-colors">Brend Strategiyasi</Link></li>
+              <li><Link href="/xizmatlar/neyming" className="text-gray-300 hover:text-white transition-colors">Neyming</Link></li>
+              <li><Link href="/xizmatlar/firmenniy-stil" className="text-gray-300 hover:text-white transition-colors">Firma Uslubi</Link></li>
+              <li><Link href="/xizmatlar/qadoq-dizayni" className="text-gray-300 hover:text-white transition-colors">Qadoq Dizayni</Link></li>
             </ul>
           </div>
 
-          <div className="md:justify-self-end">
-            <h3 className="text-lg font-bold text-white">Aloqa</h3>
-            <ul className="mt-4 space-y-3">
-              <li className="flex items-center gap-2">
-                <Send size={18} />
-                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">@baxtiyorjon_gaziyev</a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone size={18} />
-                <a href="tel:+998336450097" className="text-gray-400 hover:text-accent transition-colors">+998 33 645 00 97</a>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin size={18} className="mt-1 flex-shrink-0" />
-                <span className="text-gray-400 hover:text-accent transition-colors">O‘zbekiston, Toshkent shahri</span>
-              </li>
-            </ul>
+          {/* Office */}
+          <div>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Bizning ofisimiz</h3>
+            <p className="mt-4 text-white font-semibold">
+              O‘zbekiston, Toshkent shahri, <br/>
+              Mustaqillik shoh ko'chasi, 59
+            </p>
           </div>
         </div>
-        <div className="mt-8 border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Jon.Branding. Barcha huquqlar himoyalangan.</p>
+
+        <Separator className="my-12 bg-gray-700" />
+        
+        {/* Bottom Section */}
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+           <p className="text-sm text-gray-400 order-2 sm:order-1">&copy; {new Date().getFullYear()} Jon.Branding. Barcha huquqlar himoyalangan.</p>
+           
+           <div className="flex items-center gap-6 order-1 sm:order-2">
+             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+               <Instagram size={20} />
+             </a>
+             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+               <Linkedin size={20} />
+             </a>
+             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+               <Twitter size={20} />
+             </a>
+              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+               <Send size={20} />
+             </a>
+           </div>
+
+           <div className="hidden lg:flex order-3">
+              <button onClick={handleScrollTop} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
+                Yuqoriga qaytish <ArrowUp size={16} />
+              </button>
+           </div>
+        </div>
+
+        <div className="mt-16 text-center">
+             <Link href="/">
+                <Logo isWhite />
+             </Link>
         </div>
       </div>
     </footer>
