@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { type Brand } from '@/lib/types';
 import { motion } from 'framer-motion';
 import Stats from '@/components/sections/stats';
+import { useExitIntent } from '@/hooks/use-exit-intent';
 
 // Dynamically import components that are not immediately visible
 const Founder = dynamic(() => import('@/components/sections/founder'));
@@ -20,11 +21,49 @@ const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
 const Video = dynamic(() => import('@/components/sections/video'));
 const Process = dynamic(() => import('@/components/sections/process'));
 const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
-const ScrollIntentModal = dynamic(() => import('@/components/scroll-intent-modal'));
 const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const Faq = dynamic(() => import('@/components/sections/faq'));
+
+const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
+  useEffect(() => {
+    const SESSION_STORAGE_KEY = 'scroll_intent_shown';
+    if (sessionStorage.getItem(SESSION_STORAGE_KEY)) {
+      return;
+    }
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      const scrolledPercentage = (scrollPosition + windowHeight) / documentHeight;
+
+      if (scrolledPercentage >= scrollThreshold) {
+        trigger();
+      }
+    };
+
+    const trigger = () => {
+        if (!sessionStorage.getItem(SESSION_STORAGE_KEY)) {
+            onScrollIntent();
+            sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+            removeListeners();
+        }
+    };
+
+    const removeListeners = () => {
+        window.removeEventListener('scroll', handleScroll);
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+        removeListeners();
+    };
+  }, [onScrollIntent, scrollThreshold]);
+};
 
 
 const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
@@ -87,6 +126,9 @@ const PageClient: FC<PageClientProps> = ({ brands }) => {
         window.dispatchEvent(event);
     }, []);
 
+    useScrollIntent(handleOpenModal, 0.8);
+    useExitIntent(handleOpenModal);
+
     useEffect(() => {
         if (tg) {
             tg.BackButton.show();
@@ -126,8 +168,6 @@ const PageClient: FC<PageClientProps> = ({ brands }) => {
                 <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Faq /></AnimatedSection>
             </main>
-            <ExitIntentModal onPrimaryClick={handleOpenModal} />
-            <ScrollIntentModal onPrimaryClick={handleOpenModal} />
             <MobileCtaBar onOpenModal={handleOpenModal} />
         </div>
     )
