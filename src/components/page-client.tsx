@@ -20,6 +20,7 @@ const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
 const Video = dynamic(() => import('@/components/sections/video'));
 const Process = dynamic(() => import('@/components/sections/process'));
 const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
+const ScrollIntentModal = dynamic(() => import('@/components/scroll-intent-modal'));
 const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
@@ -126,6 +127,7 @@ const PageClient: FC<PageClientProps> = ({ brands }) => {
                 <AnimatedSection><Faq /></AnimatedSection>
             </main>
             <ExitIntentModal onPrimaryClick={handleOpenModal} />
+            <ScrollIntentModal onPrimaryClick={handleOpenModal} />
             <MobileCtaBar onOpenModal={handleOpenModal} />
         </div>
     )
