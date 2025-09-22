@@ -13,6 +13,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Sparkles, Gift, Shield, Banknote, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, Share2, ClipboardList, Type, Palette, Layers, BookMarked, Box, Repeat, Award } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
+import { Badge } from '@/components/ui/badge';
 
 
 interface PackageBuilderProps {
@@ -273,7 +274,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                <p className="text-blue-200 text-sm mt-1">O'zingizga mos xizmatlarni tanlang.</p>
                             </CardHeader>
                             <CardContent className="p-0 mt-6">
-                                <div className="mt-6 space-y-3 pb-4 border-b border-white/20 min-h-[60px]">
+                                <div className="space-y-3 pb-4 border-b border-white/20 min-h-[60px]">
                                     {selectedServiceKeys.length > 0 ?
                                      selectedServiceKeys.map((key) => {
                                         const service = serviceDetails[key as keyof SelectedServices];
@@ -304,7 +305,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                    }
                                 </div>
 
-                                <div className="border-t border-white/20 my-6 pt-6">
+                                <div className="space-y-4 my-6">
                                     <div className="flex justify-between items-baseline">
                                         <span className="text-blue-200 text-base">Yakuniy narx:</span>
                                         <div className="text-right">
@@ -314,22 +315,21 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                             <p className="text-4xl font-extrabold text-white">{formatPrice(total.final)}</p>
                                         </div>
                                     </div>
+                                    <div className="flex flex-wrap gap-2 justify-end">
+                                      {total.savings > 0 && (
+                                          <Badge variant="secondary" className="bg-green-500/20 text-green-300 border-none">
+                                              <Sparkles className="h-3 w-3 mr-1" />
+                                              Siz {formatPrice(total.savings)} tejadingiz!
+                                          </Badge>
+                                      )}
+                                      {total.bonus && (
+                                          <Badge variant="secondary" className="bg-accent/20 text-accent-light border-none">
+                                              <Gift className="h-3 w-3 mr-1" />
+                                              {total.bonus}
+                                          </Badge>
+                                      )}
+                                    </div>
                                 </div>
-                                
-
-                                {total.discountApplied.length > 0 && (
-                                    <div className="flex items-center gap-2 p-2 bg-green-500/10 rounded-lg text-green-300 text-sm mb-4">
-                                        <Sparkles className="h-4 w-4 flex-shrink-0" />
-                                        <p className="font-bold">Siz {formatPrice(total.savings)} tejadingiz!</p>
-                                    </div>
-                                )}
-
-                                {total.bonus && (
-                                     <div className="flex items-center gap-2 p-2 bg-accent/20 rounded-lg text-accent text-sm mb-4">
-                                        <Gift className="h-4 w-4 flex-shrink-0" />
-                                        <p className="font-bold">{total.bonus}</p>
-                                    </div>
-                                )}
                                 
                                 <div className="mt-4 flex items-center justify-between bg-white/5 p-3 rounded-lg border border-white/10">
                                    <Label htmlFor="upfront-payment" className="flex flex-col">
@@ -373,3 +373,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
+
+    
