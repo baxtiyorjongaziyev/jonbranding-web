@@ -130,7 +130,7 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                                 </div>
                             </div>
                         </div>
-                        <div className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl cursor-pointer group" onClick={() => setPlayVideo(true)}>
+                        <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl cursor-pointer group" onClick={() => setPlayVideo(true)}>
                             {playVideo ? (
                                 <iframe
                                     src={videoTestimonial.videoUrl}
