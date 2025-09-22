@@ -3,6 +3,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { AlertTriangle, ArrowRight, ThumbsUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 const problems = [
   { text: "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi." },
@@ -41,25 +42,31 @@ const TargetAudience = () => {
             </Card>
         </div>
 
-        <Card className="max-w-4xl mx-auto mt-8 bg-gradient-to-r from-sky-500 to-blue-900 text-white p-8 rounded-2xl shadow-xl">
-             <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                <div className="flex-shrink-0 bg-white/10 p-4 rounded-full">
-                    <ThumbsUp className="w-10 h-10 text-white" />
-                </div>
-                <div className="flex-1">
-                    <h3 className="text-2xl font-bold">Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!</h3>
-                    <p className="mt-2 text-blue-200 text-lg">
+        <Card className="max-w-4xl mx-auto mt-8 bg-dark-blue text-white p-8 rounded-2xl shadow-xl overflow-hidden relative">
+            <div className="absolute -right-40 -top-20 opacity-50">
+                <Image 
+                    src="https://img1.teletype.in/files/54/1b/541ba35a-b6e8-4687-9571-067980327f31.png"
+                    width={500}
+                    height={500}
+                    alt="Abstract 3D graphic"
+                    className='pointer-events-none'
+                />
+            </div>
+             <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+                <div className="text-center md:text-left">
+                    <h3 className="text-3xl lg:text-4xl font-bold leading-tight">Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!</h3>
+                    <p className="mt-4 text-blue-200 text-lg">
                        To'g'ri qurilgan brend strategiyasi bu kabi muammolarni bartaraf etib, biznesingizni barqaror o'sish yo'liga olib chiqadi.
                     </p>
                 </div>
-                <div className="flex-shrink-0 w-full md:w-auto mt-4 md:mt-0">
+                <div className="flex justify-center md:justify-end">
                      <Button 
                         onClick={handleOpenModal} 
                         size="lg" 
                         variant="secondary"
-                        className="text-lg w-full md:w-auto shadow-md animate-breathing"
+                        className="text-lg w-full sm:w-auto shadow-md animate-breathing"
                     >
-                        Yechimni muhokama qilish <ArrowRight className="w-5 h-5 ml-2" />
+                        Barcha muammolar yechimini ko'rish <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                 </div>
              </div>
