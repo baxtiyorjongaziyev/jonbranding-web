@@ -306,9 +306,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 </div>
 
                                 <div className="space-y-4 my-6">
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-blue-200 text-base">Yakuniy narx:</span>
-                                        <div className="text-right flex items-baseline gap-2">
+                                    <div className="flex justify-between items-start">
+                                        <span className="text-blue-200 text-base mt-1">Yakuniy narx:</span>
+                                        <div className="text-right flex flex-col items-end">
                                             {total.savings > 0 && (
                                                 <p className="text-lg line-through text-gray-400">{formatPrice(total.base + total.surcharges.reduce((a,b) => a + b.value, 0))}</p>
                                             )}
@@ -375,4 +375,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 export default PackageBuilder;
 
     
+    
+
     
