@@ -48,53 +48,6 @@ const staticTestimonials: Testimonial[] = [
 ];
 
 const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
-    const [playVideo, setPlayVideo] = useState(false);
-
-    const isVideo = !!testimonial.videoUrl;
-
-    if (isVideo) {
-        return (
-            <Card className="h-full flex flex-col md:flex-row bg-white shadow-lg rounded-2xl overflow-hidden">
-                <div className="md:w-5/12 flex-shrink-0 relative bg-black">
-                    <div style={{padding:'177.78% 0 0 0', position:'relative'}}>
-                        {playVideo ? (
-                            <iframe
-                                src={testimonial.videoUrl}
-                                frameBorder="0"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                                style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
-                                title={testimonial.name + " - Baxtiyorjon Gaziyev haqida fikrlari"}
-                            ></iframe>
-                        ) : (
-                            <div className="absolute inset-0 w-full h-full cursor-pointer group" onClick={() => setPlayVideo(true)}>
-                                <Image src={testimonial.image!} alt={testimonial.name} data-ai-hint={testimonial.imageHint} fill className="object-cover" />
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                                    <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-                <div className="p-6 flex flex-col justify-between flex-grow">
-                    <div>
-                        <CardContent className="p-0 text-gray-700">
-                            <p>"{testimonial.quote}"</p>
-                        </CardContent>
-                    </div>
-                    <div className="mt-6 flex items-center gap-4">
-                        <Avatar>
-                            <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
-                            <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                            <p className="font-bold text-dark-blue">{testimonial.name}</p>
-                            <p className="text-sm text-gray-500">{testimonial.company}</p>
-                        </div>
-                    </div>
-                </div>
-            </Card>
-        );
-    }
     
     return (
       <Card className="h-full flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden">
@@ -137,6 +90,11 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
       Autoplay({ delay: 8000, stopOnInteraction: true })
     );
 
+    const [playVideo, setPlayVideo] = useState(false);
+
+    const videoTestimonial = testimonials.find(t => t.videoUrl);
+    const otherTestimonials = testimonials.filter(t => !t.videoUrl);
+
   return (
     <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
@@ -146,26 +104,77 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
             Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz.
           </p>
         </div>
-        <div className="mt-12">
-            <Carousel 
-                opts={{ align: "start", loop: true }} 
-                plugins={[plugin.current]}
-                onMouseEnter={plugin.current.stop}
-                onMouseLeave={plugin.current.reset}
-                className="w-full">
-                <CarouselContent className="-ml-4">
-                    {testimonials.map((testimonial, index) => (
-                    <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-2/3">
-                        <div className="p-1 h-full">
-                            <TestimonialCard testimonial={testimonial} />
+        
+        {videoTestimonial && (
+            <div className="mt-12 max-w-5xl mx-auto">
+                <Card className="bg-white shadow-xl rounded-2xl p-8">
+                     <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                        <div className="flex flex-col gap-6">
+                            <div className="flex items-center gap-2">
+                                <div className="flex text-yellow-400">
+                                    {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
+                                </div>
+                                <span className="font-bold text-gray-800">5.0</span>
+                            </div>
+                            <blockquote className="text-lg text-gray-700 leading-relaxed">
+                                "{videoTestimonial.quote}"
+                            </blockquote>
+                            <div className="mt-2 flex items-center gap-4">
+                                <Avatar>
+                                    <AvatarImage src={videoTestimonial.image} alt={videoTestimonial.name} data-ai-hint={videoTestimonial.imageHint} />
+                                    <AvatarFallback>{videoTestimonial.avatar}</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                    <p className="font-bold text-dark-blue">{videoTestimonial.name}</p>
+                                    <p className="text-sm text-gray-500">{videoTestimonial.company}</p>
+                                </div>
+                            </div>
                         </div>
-                    </CarouselItem>
-                    ))}
-                </CarouselContent>
-                <CarouselPrevious className="hidden sm:flex" />
-                <CarouselNext className="hidden sm:flex" />
-            </Carousel>
-        </div>
+                        <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl cursor-pointer group" onClick={() => setPlayVideo(true)}>
+                            {playVideo ? (
+                                <iframe
+                                    src={videoTestimonial.videoUrl}
+                                    frameBorder="0"
+                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                    className="absolute inset-0 w-full h-full"
+                                    title={videoTestimonial.name + " - Baxtiyorjon Gaziyev haqida fikrlari"}
+                                ></iframe>
+                            ) : (
+                                <>
+                                    <Image src={videoTestimonial.image!} alt={videoTestimonial.name} data-ai-hint={videoTestimonial.imageHint} fill className="object-cover" />
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                        <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                     </div>
+                </Card>
+            </div>
+        )}
+
+        {otherTestimonials.length > 0 && (
+            <div className="mt-16">
+                <Carousel 
+                    opts={{ align: "start", loop: true }} 
+                    plugins={[plugin.current]}
+                    onMouseEnter={plugin.current.stop}
+                    onMouseLeave={plugin.current.reset}
+                    className="w-full">
+                    <CarouselContent className="-ml-4">
+                        {otherTestimonials.map((testimonial, index) => (
+                        <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                            <div className="p-1 h-full">
+                                <TestimonialCard testimonial={testimonial} />
+                            </div>
+                        </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="hidden sm:flex" />
+                    <CarouselNext className="hidden sm:flex" />
+                </Carousel>
+            </div>
+        )}
       </div>
     </section>
   )
