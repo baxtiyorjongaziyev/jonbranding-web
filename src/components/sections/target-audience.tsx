@@ -53,8 +53,7 @@ const TargetAudience = () => {
                      <Button 
                         onClick={handleOpenModal} 
                         size="lg" 
-                        variant="secondary"
-                        className="text-lg w-full sm:w-auto shadow-md"
+                        variant="default"
                     >
                         Barcha muammolar yechimini ko'rish <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
