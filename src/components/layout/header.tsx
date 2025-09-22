@@ -162,22 +162,10 @@ const Header: FC = () => {
           <Button 
             onClick={handleContactClick} 
             className={cn(
-                "hidden md:flex shadow-ocean animate-breathing",
-                 scrolled && "bg-transparent border border-foreground/50 text-foreground hover:bg-foreground/10"
+                "hidden md:flex shadow-ocean animate-breathing"
             )}
-            variant={scrolled ? 'outline' : 'default'}
           >
-             <span className={cn(
-                "absolute inset-0 z-0", 
-                !scrolled && "bg-gradient-to-r from-blue-500 to-blue-700"
-              )}></span>
-             <span className="relative z-10">
-                Bepul konsultatsiya olish
-             </span>
-             <span className={cn(
-                 "absolute w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-500 ease-in-out group-hover:translate-x-full skew-x-[-25deg] z-20",
-                 scrolled && "via-black/20"
-              )}></span>
+             Bepul konsultatsiya olish
           </Button>
           <Sheet>
             <SheetTrigger asChild>
