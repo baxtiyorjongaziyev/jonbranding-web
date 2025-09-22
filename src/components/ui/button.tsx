@@ -46,11 +46,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (variant === 'default') {
       return (
         <Comp
-          className={cn(buttonVariants({ variant, size, className }))}
+          className={cn(buttonVariants({ variant, size, className }), "bg-gradient-to-r from-blue-500 to-blue-700")}
           ref={ref}
           {...props}
         >
-          <span className="absolute inset-0 z-0 bg-gradient-to-r from-blue-500 to-blue-700"></span>
           <span className="relative z-10 flex items-center justify-center">{children}</span>
           <span className="absolute w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-500 ease-in-out group-hover:translate-x-full skew-x-[-25deg] z-20"></span>
         </Comp>
