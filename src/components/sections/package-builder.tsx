@@ -306,13 +306,13 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 </div>
 
                                 <div className="space-y-4 my-6">
-                                    <div className="flex justify-between items-baseline">
+                                    <div className="flex justify-between items-center">
                                         <span className="text-blue-200 text-base">Yakuniy narx:</span>
-                                        <div className="text-right">
+                                        <div className="text-right flex items-baseline gap-2">
                                             {total.savings > 0 && (
-                                                <p className="text-sm line-through text-gray-400">{formatPrice(total.base + total.surcharges.reduce((a,b) => a + b.value, 0))}</p>
+                                                <p className="text-lg line-through text-gray-400">{formatPrice(total.base + total.surcharges.reduce((a,b) => a + b.value, 0))}</p>
                                             )}
-                                            <p className="text-4xl font-extrabold text-white">{formatPrice(total.final)}</p>
+                                            <p className="text-3xl font-extrabold text-white">{formatPrice(total.final)}</p>
                                         </div>
                                     </div>
                                     <div className="flex flex-wrap gap-2 justify-end">
