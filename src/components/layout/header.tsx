@@ -1,7 +1,7 @@
 
 'use client';
 
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
@@ -61,8 +61,8 @@ const services: { title: string; href: string; description: string }[] = [
 
 
 const ListItem = React.forwardRef<
-  React.ElementRef<typeof Link>,
-  React.ComponentPropsWithoutRef<typeof Link> & { title: string; children: React.ReactNode }
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a"> & { title: string; children: React.ReactNode }
 >(({ className, title, children, href, ...props }, ref) => {
   return (
     <li>
@@ -89,21 +89,37 @@ ListItem.displayName = "ListItem"
 
 
 const Header: FC = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
   const handleContactClick = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm">
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+      scrolled ? "top-4" : "top-0"
+    )}>
+      <div className={cn(
+        "container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
+        scrolled ? "bg-black/80 backdrop-blur-lg rounded-full shadow-2xl border border-white/10" : "bg-transparent"
+      )}>
         <Link href="/" className="flex items-center" aria-label="Bosh sahifa">
-          <Logo />
+          <Logo isWhite={scrolled} />
         </Link>
         <NavigationMenu className="hidden lg:flex">
            <NavigationMenuList>
              <NavigationMenuItem>
-              <NavigationMenuTrigger>Xizmatlar</NavigationMenuTrigger>
+              <NavigationMenuTrigger className={cn(scrolled && "text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[state=open]:bg-white/10")}>Xizmatlar</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {services.map((component) => (
@@ -120,11 +136,11 @@ const Header: FC = () => {
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href} legacyBehavior={false}>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), scrolled && "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10")}>
+                  <Link href={item.href}>
                     {item.label}
-                  </NavigationMenuLink>
-                </Link>
+                  </Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
@@ -132,23 +148,23 @@ const Header: FC = () => {
 
         <div className="hidden items-center space-x-6 lg:flex">
            <div className="flex items-center gap-6 ml-4">
-             <a href="tel:+998336450097" className="flex items-center gap-2 text-base font-medium text-foreground transition-colors hover:text-accent">
+             <a href="tel:+998336450097" className={cn("flex items-center gap-2 text-base font-medium transition-colors hover:text-accent", scrolled ? "text-white" : "text-foreground")}>
                 <Phone size={16} />
                 +998 33 645 00 97
               </a>
-              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-medium text-foreground transition-colors hover:text-accent">
+              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className={cn("flex items-center gap-2 text-base font-medium transition-colors hover:text-accent", scrolled ? "text-white" : "text-foreground")}>
                 <Send size={16} />
                 Telegram
               </a>
            </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button onClick={handleContactClick} className="hidden md:flex shadow-ocean animate-breathing">
+          <Button onClick={handleContactClick} className={cn("hidden md:flex shadow-ocean animate-breathing", scrolled && "bg-blue-600 hover:bg-blue-500")}>
             Bepul konsultatsiya olish
           </Button>
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="lg:hidden">
+              <Button variant="outline" size="icon" className={cn("lg:hidden", scrolled && "text-white border-white/20 hover:bg-white/10 hover:text-white")}>
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Menyuni ochish</span>
               </Button>
@@ -198,3 +214,5 @@ const Header: FC = () => {
 };
 
 export default Header;
+
+    

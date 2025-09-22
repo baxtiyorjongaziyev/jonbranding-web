@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 export const Logo = ({ isWhite = false }) => (
     <Image
@@ -6,7 +7,9 @@ export const Logo = ({ isWhite = false }) => (
       alt="Jon.Branding Logo"
       width={160}
       height={32}
-      className={isWhite ? 'filter brightness-0 invert' : ''}
+      className={cn(isWhite ? 'filter brightness-0 invert' : '', 'transition-all duration-300')}
       priority
     />
 );
+
+    
