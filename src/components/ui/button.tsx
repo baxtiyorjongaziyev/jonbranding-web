@@ -5,11 +5,11 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative group overflow-hidden",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative group overflow-hidden",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg transform hover:-translate-y-px",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg transform hover:-translate-y-px rounded-full",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -46,12 +46,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (variant === 'default') {
       return (
         <Comp
-          className={cn(buttonVariants({ variant, size, className }), "bg-gradient-to-r from-blue-500 to-blue-700")}
+          className={cn(buttonVariants({ variant, size, className }), "bg-gradient-to-r from-blue-500 to-blue-700 btn-animated-border")}
           ref={ref}
           {...props}
         >
           <span className="relative z-10 flex items-center justify-center">{children}</span>
-          <span className="absolute w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-500 ease-in-out group-hover:translate-x-full skew-x-[-25deg] z-20"></span>
         </Comp>
       )
     }
