@@ -150,4 +150,3 @@ const BlogPostPage = ({ params }: { params: { slug: string } }) => {
 };
 
 export default BlogPostPage;
-`
