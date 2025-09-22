@@ -30,7 +30,7 @@ const ScrollIntentModal: FC<ScrollIntentModalProps> = ({ onPrimaryClick }) => {
             <MessageSquarePlus className="h-10 w-10 text-primary" />
         </div>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-extrabold text-primary-foreground">Yordam kerakmi?</DialogTitle>
+          <DialogTitle className="text-2xl font-extrabold text-foreground">Yordam kerakmi?</DialogTitle>
           <DialogDescription className="mt-2 text-lg text-gray-600">
             Saytimizni deyarli oxirigacha ko'rib chiqdingiz. Keling, loyihangizni muhokama qilamiz va sizga qanday yordam bera olishimizni bilib olamiz.
           </DialogDescription>
