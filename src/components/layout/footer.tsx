@@ -25,7 +25,7 @@ const Footer = () => {
   ];
   
   const additionalLinks = [
-      { href: '/xizmatlar', label: 'Barcha Xizmatlar' },
+      { href: '/xizmatlar', label: 'Xizmat Narxlari' },
       { href: '/quiz', label: 'Brending Testi' },
   ];
 
