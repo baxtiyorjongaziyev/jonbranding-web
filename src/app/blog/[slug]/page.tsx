@@ -7,6 +7,7 @@ import { format, parseISO } from 'date-fns';
 import { uz } from 'date-fns/locale';
 import { Metadata } from 'next';
 import CtaBlock from '@/components/sections/cta-block';
+import React from 'react';
 
 type Props = {
   params: { slug: string };
@@ -60,31 +61,55 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // Markdown-like content to HTML
 const renderContent = (content: string) => {
-    return content
-        .split('\n')
-        .map((line, index) => {
-            line = line.trim();
-            if (line.startsWith('## ')) {
-                return <h2 key={index} className="text-2xl sm:text-3xl font-bold text-dark-blue mt-8 mb-4">{line.substring(3)}</h2>;
+    const lines = content.split('\n');
+    const elements = [];
+    let listItems: {type: 'ul' | 'ol', items: string[]} = {type: 'ul', items: []};
+
+    const flushList = () => {
+        if (listItems.items.length > 0) {
+            if (listItems.type === 'ul') {
+                 elements.push(<ul key={`ul-${elements.length}`} className="list-disc pl-5 my-6 space-y-2">{listItems.items.map((li, idx) => <li key={idx} className="text-lg text-gray-800 leading-relaxed">{li}</li>)}</ul>);
+            } else {
+                elements.push(<ol key={`ol-${elements.length}`} className="list-decimal pl-5 my-6 space-y-2">{listItems.items.map((li, idx) => <li key={idx} className="text-lg text-gray-800 leading-relaxed">{li}</li>)}</ol>);
             }
-            if (line.startsWith('> ')) {
-                return (
-                    <blockquote key={index} className="border-l-4 border-primary pl-4 italic text-gray-700 my-6">
-                        {line.substring(2)}
-                    </blockquote>
-                );
-            }
-            if (line.startsWith('*   ')) {
-                 return <li key={index} className="mb-2 ml-6">{line.substring(4)}</li>;
-            }
-            if (line.match(/^\d+\.\s/)) {
-                 return <li key={index} className="mb-2 ml-6">{line.substring(line.indexOf(' ') + 1)}</li>;
-            }
-            if (line === '') {
-                return <br key={index} />;
-            }
-            return <p key={index} className="text-lg text-gray-800 leading-relaxed mb-4">{line}</p>;
-        });
+            listItems = {type: 'ul', items: []};
+        }
+    };
+
+
+    for (let i = 0; i < lines.length; i++) {
+        let line = lines[i].trim();
+
+        if (line.startsWith('## ')) {
+            flushList();
+            elements.push(<h2 key={i} className="text-2xl sm:text-3xl font-bold text-dark-blue mt-8 mb-4">{line.substring(3)}</h2>);
+        } else if (line.startsWith('> ')) {
+            flushList();
+            elements.push(
+                <blockquote key={i} className="border-l-4 border-primary pl-4 italic text-gray-700 my-6">
+                    {line.substring(2)}
+                </blockquote>
+            );
+        } else if (line.startsWith('*   ')) {
+            if (listItems.type !== 'ul') flushList();
+            listItems.type = 'ul';
+            listItems.items.push(line.substring(4));
+        } else if (line.match(/^\d+\.\s/)) {
+            if (listItems.type !== 'ol') flushList();
+            listItems.type = 'ol';
+            listItems.items.push(line.substring(line.indexOf(' ') + 1));
+        } else if (line === '') {
+            flushList();
+            elements.push(<br key={i} />);
+        } else {
+            flushList();
+            elements.push(<p key={i} className="text-lg text-gray-800 leading-relaxed mb-4">{line}</p>);
+        }
+    }
+    
+    flushList(); // End of content flush
+
+    return elements;
 };
 
 
