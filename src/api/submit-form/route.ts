@@ -23,11 +23,12 @@ const pickTwoLabels: Record<string, string> = {
 };
 
 export async function POST(request: Request) {
-    const botToken = '7738413085:AAE_CYNnbpyoW5KiheUTJOPBmz_jHLVWgWc';
-    const chatId = '-1002566480563';
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+    const threadId = process.env.TELEGRAM_THREAD_ID;
 
     if (!botToken || !chatId) {
-        console.error("Server Configuration Error: Telegram token or chat ID is missing in the code.");
+        console.error("Server Configuration Error: Telegram token or chat ID is missing in the environment variables.");
         return NextResponse.json({ ok: false, error: "Serverda Telegram sozlamalari mavjud emas." }, { status: 500 });
     }
 
@@ -157,10 +158,14 @@ ${packageInfo}
         
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
         
-        const payload = {
+        const payload: any = {
             chat_id: chatId,
             text: telegramMessage,
         };
+
+        if (threadId) {
+            payload.message_thread_id = threadId;
+        }
 
         const response = await fetch(url, {
             method: 'POST',

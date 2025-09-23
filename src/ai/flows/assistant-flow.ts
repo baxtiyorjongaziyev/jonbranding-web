@@ -70,13 +70,10 @@ const sendLeadToTelegram = ai.defineTool(
     outputSchema: z.string(),
   },
   async input => {
-    // Temporarily disabled to prevent server crashes due to missing env vars
-    console.log("sendLeadToTelegram tool was called with input:", input);
-    return "Ma'lumotlar menejerga muvaffaqiyatli yuborildi. Endi foydalanuvchiga tez orada u bilan bog'lanishlarini ayting.";
-    /*
     try {
       const botToken = process.env.TELEGRAM_BOT_TOKEN;
       const chatId = process.env.TELEGRAM_CHAT_ID;
+      const threadId = process.env.TELEGRAM_THREAD_ID;
 
       if (!botToken || !chatId) {
         console.error(
@@ -102,7 +99,11 @@ ${input.notes}
             `.trim();
 
       const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-      const payload = {chat_id: chatId, text: message, parse_mode: 'Markdown'};
+      const payload: any = {chat_id: chatId, text: message, parse_mode: 'Markdown'};
+      
+      if (threadId) {
+        payload.message_thread_id = threadId;
+      }
 
       const response = await fetch(url, {
         method: 'POST',
@@ -120,7 +121,6 @@ ${input.notes}
       console.error(error);
       return 'Ichki xatolik yuz berdi.';
     }
-    */
   }
 );
 
@@ -216,5 +216,3 @@ const assistantFlow = ai.defineFlow(
     };
   }
 );
-
-    
