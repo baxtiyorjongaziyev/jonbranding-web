@@ -18,6 +18,7 @@ const MessageSchema = z.object({
 const AssistantOutputSchema = z.object({
   acknowledgement: z
     .string()
+    .nullable()
     .optional()
     .describe(
       "Foydalanuvchi javobiga qisqa tasdiq. Masalan: 'Tushunarli', 'Ajoyib!'. Bu maydon bo'sh bo'lishi ham mumkin."
