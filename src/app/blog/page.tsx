@@ -26,34 +26,37 @@ const BlogPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {sortedPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
-                <Card className="h-full flex flex-col overflow-hidden shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
-                  <div className="relative w-full h-56 flex-shrink-0">
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="block group">
+                <Card className="h-full flex flex-col overflow-hidden shadow-lg rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
+                  <div className="relative w-full h-56 flex-shrink-0 overflow-hidden">
                     <Image
                       src={post.image}
                       alt={post.title}
                       data-ai-hint={post.imageHint}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
-                      {post.title}
-                    </CardTitle>
-                    <CardDescription className="text-sm text-gray-500 pt-1">
-                      <span>{format(parseISO(post.date), 'd-MMMM, yyyy', { locale: uz })}</span>
-                      {' '} &bull; {' '}
-                      <span>{post.author}</span>
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <p className="text-gray-600 line-clamp-3">{post.description}</p>
-                  </CardContent>
-                  <div className="p-6 pt-0 mt-auto">
-                     <span className="font-semibold text-primary group-hover:underline flex items-center">
-                        Batafsil o'qish <ArrowRight className="ml-2 h-4 w-4" />
-                     </span>
+                  <div className="flex flex-col flex-grow">
+                    <CardHeader>
+                      <CardDescription className="text-sm text-gray-500 pt-1">
+                        <span>{format(parseISO(post.date), 'd-MMMM, yyyy', { locale: uz })}</span>
+                        {' '} &bull; {' '}
+                        <span>{post.author}</span>
+                      </CardDescription>
+                      <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
+                        {post.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                      <p className="text-gray-600 line-clamp-3">{post.description}</p>
+                    </CardContent>
+                    <div className="p-6 pt-0 mt-auto">
+                       <span className="font-semibold text-primary flex items-center transition-all duration-300">
+                          Batafsil o'qish <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                       </span>
+                    </div>
                   </div>
                 </Card>
               </Link>
