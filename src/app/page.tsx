@@ -1,8 +1,6 @@
 
 import type { FC } from 'react';
 import PageClient from '@/components/page-client';
-import { type Brand } from '@/lib/types';
-import { staticBrands } from '@/lib/static-data';
 import { type Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,10 +9,8 @@ export const metadata: Metadata = {
 };
 
 const Home: FC = () => {
-  const brands = staticBrands;
-
   return (
-    <PageClient brands={brands} />
+    <PageClient />
   );
 };
 
