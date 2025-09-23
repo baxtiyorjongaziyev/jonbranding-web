@@ -105,6 +105,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         <meta name="twitter:title" content={APP_NAME} />
         <meta name="twitter:description" content={APP_DESCRIPTION} />
         <meta name="twitter:image" content={OG_IMAGE_URL} />
+        <meta name="metadata" content={JSON.stringify({ icons: null })} />
 
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <Script
