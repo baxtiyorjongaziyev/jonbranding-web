@@ -125,7 +125,7 @@ export const serviceDetails = {
 
 export function formatPrice(price: number) {
     if (price === 0) return "Kelishiladi";
-    return `${price.toLocaleString('fr-FR')} so'm`;
+    return price.toLocaleString('fr-FR');
 }
 
 
@@ -133,44 +133,44 @@ export const comparisonData = [
   { 
     feature: 'Neyming',
     competitors: {
-        jon: `${formatPrice(serviceDetails.naming.price)}`,
-        mano: `${formatPrice(40000000)}`,
-        abba: `${formatPrice(38000000)}`,
-        mountain: `${formatPrice(35000000)}`,
+        jon: `${formatPrice(serviceDetails.naming.price)} so'm`,
+        mano: `${formatPrice(40000000)} so'm`,
+        abba: `${formatPrice(38000000)} so'm`,
+        mountain: `${formatPrice(35000000)} so'm`,
     }
   },
   { 
     feature: 'Logotip va stil',
     competitors: {
-        jon: `${formatPrice(serviceDetails.logo.price)}`,
-        mano: `${formatPrice(82000000)}`,
-        abba: `${formatPrice(78000000)}`,
-        mountain: `${formatPrice(71500000)}`,
+        jon: `${formatPrice(serviceDetails.logo.price)} so'm`,
+        mano: `${formatPrice(82000000)} so'm`,
+        abba: `${formatPrice(78000000)} so'm`,
+        mountain: `${formatPrice(71500000)} so'm`,
     }
   },
    { 
     feature: 'Brendbuk',
     competitors: {
-        jon: `${formatPrice(serviceDetails.brandbook.price)}`,
-        mano: `${formatPrice(42000000)}`,
-        abba: `${formatPrice(40000000)}`,
-        mountain: `${formatPrice(50000000)}`,
+        jon: `${formatPrice(serviceDetails.brandbook.price)} so'm`,
+        mano: `${formatPrice(42000000)} so'm`,
+        abba: `${formatPrice(40000000)} so'm`,
+        mountain: `${formatPrice(50000000)} so'm`,
     }
   },
   { 
     feature: 'Qadoq dizayni',
     competitors: {
-        jon: `${formatPrice(serviceDetails.packaging.price)}`,
-        mano: `${formatPrice(120000000)}`,
-        abba: `${formatPrice(80000000)}`,
-        mountain: `${formatPrice(60000000)}`,
+        jon: `${formatPrice(serviceDetails.packaging.price)} so'm`,
+        mano: `${formatPrice(120000000)} so'm`,
+        abba: `${formatPrice(80000000)} so'm`,
+        mountain: `${formatPrice(60000000)} so'm`,
     }
   },
   { 
     feature: 'Brend-strategiya',
     competitors: {
-        jon: `${formatPrice(serviceDetails.strategy.price)}`,
-        mano: `${formatPrice(240000000)}`,
+        jon: `${formatPrice(serviceDetails.strategy.price)} so'm`,
+        mano: `${formatPrice(240000000)} so'm`,
         abba: null,
         mountain: false,
     }
@@ -178,8 +178,8 @@ export const comparisonData = [
    { 
     feature: 'Kommunikatsion strategiya',
     competitors: {
-        jon: `${formatPrice(serviceDetails.commStrategy.price)}`,
-        mano: `${formatPrice(190000000)}`,
+        jon: `${formatPrice(serviceDetails.commStrategy.price)} so'm`,
+        mano: `${formatPrice(190000000)} so'm`,
         abba: null,
         mountain: false,
     }
@@ -187,8 +187,8 @@ export const comparisonData = [
   { 
     feature: 'SMM uchun stil',
     competitors: {
-        jon: `${formatPrice(serviceDetails.smm.price)}`,
-        mano: `${formatPrice(45000000)}`,
+        jon: `${formatPrice(serviceDetails.smm.price)} so'm`,
+        mano: `${formatPrice(45000000)} so'm`,
         abba: null,
         mountain: null,
     }
@@ -355,7 +355,7 @@ export const generateSummary = (selections: PackageSelections) => {
     }
 
     if (discountApplied.length > 0) {
-        const discountText = discountApplied.map(d => `${d.name} (${formatPrice(d.value)})`).join('; ');
+        const discountText = discountApplied.map(d => `${d.name} (${formatPrice(d.value)} so'm)`).join('; ');
         summary += `\nQo'llanilgan chegirmalar: ${discountText}`;
     }
 

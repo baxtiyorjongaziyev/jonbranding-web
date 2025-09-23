@@ -333,7 +333,10 @@ export default function TrademarkCalculator() {
       <aside className="lg:sticky lg:top-24 h-fit space-y-4">
         <Card className="p-6 bg-gradient-to-br from-primary to-blue-900 text-white shadow-xl rounded-2xl">
           <div className="text-sm leading-5 opacity-90">10 yillik patent uchun taxminiy umumiy xarajat</div>
-          <div className="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight">{fees.total.toLocaleString()} so‘m</div>
+          <div className="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight flex items-baseline">
+            {fees.total.toLocaleString('fr-FR')}
+            <span className="text-2xl font-medium text-blue-200 ml-2">so'm</span>
+          </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Pill>{fees.classCount} klass</Pill>
             <Pill>{isYuridik ? 'Yuridik' : 'Jismoniy'} shaxs</Pill>
@@ -445,7 +448,7 @@ function Row({ label, value, bold=false }: { label: string, value: number, bold?
   return (
     <div className="mt-2 flex items-center justify-between text-sm">
       <span className="text-muted-foreground">{label}</span>
-      <span className={cn("font-semibold text-foreground", bold && 'font-bold')}>{Number(value).toLocaleString()} so‘m</span>
+      <span className={cn("font-semibold text-foreground", bold && 'font-bold')}>{Number(value).toLocaleString('fr-FR')} so‘m</span>
     </div>
   );
 }

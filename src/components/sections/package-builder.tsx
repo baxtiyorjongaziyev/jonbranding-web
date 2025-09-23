@@ -22,7 +22,7 @@ interface PackageBuilderProps {
     onOrderNow: () => void;
 }
 
-const formatPrice = (price: number) => {
+const formatPriceForDisplay = (price: number) => {
     if (price === 0) return "Kelishiladi";
     return `${price.toLocaleString('fr-FR')} so'm`;
 }
@@ -95,13 +95,13 @@ const ServiceCard = ({ id, onSelect, selected }: { id: keyof SelectedServices, o
             <div className="p-4 bg-secondary/50 border-t mt-auto">
                  <div className="my-2 text-center">
                     {price > 0 && (
-                    <span className="text-2xl font-bold text-primary whitespace-nowrap">{`+${formatPrice(price)}`}</span>
+                    <span className="text-2xl font-bold text-primary whitespace-nowrap">{`+${formatPriceForDisplay(price)}`}</span>
                     )}
                     {isPercentageBased && (
                         <span className="text-lg font-semibold text-primary whitespace-nowrap">{note}</span>
                     )}
                     {price === 0 && !isPercentageBased && (
-                        <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPrice(price)}</span>
+                        <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPriceForDisplay(price)}</span>
                     )}
                 </div>
                 <Button 
@@ -302,7 +302,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                                         <span className="text-white flex-1 pr-2">{service.label}</span>
                                                         <div className="flex items-center gap-2">
                                                             <span className="font-mono text-gray-300">
-                                                                {service.price > 0 ? `+${formatPrice(service.price)}` : service.note}
+                                                                {service.price > 0 ? `+${formatPriceForDisplay(service.price)}` : service.note}
                                                             </span>
                                                             <Button 
                                                                 variant="ghost" 
@@ -348,7 +348,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 {total.savings > 0 && (
                                     <div className="text-center py-4 my-4 bg-green-500/20 rounded-lg animate-fade-in border border-green-400/30">
                                         <p className="text-sm text-green-200">Umumiy tejagan mablag'ingiz</p>
-                                        <p className="text-3xl font-bold text-green-300 animate-pulse">{formatPrice(total.savings)}</p>
+                                        <p className="text-3xl font-bold text-green-300 animate-pulse">{formatPriceForDisplay(total.savings)}</p>
                                     </div>
                                 )}
                                 
@@ -377,7 +377,16 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 
                                 <div className='mt-6 text-center'>
                                      <p className="text-sm text-blue-200">Yakuniy narx:</p>
-                                     <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">{formatPrice(total.final)}</p>
+                                      <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight flex justify-center items-baseline">
+                                        {total.final > 0 ? (
+                                            <>
+                                                {total.final.toLocaleString('fr-FR')}
+                                                <span className="text-2xl font-medium text-blue-200 ml-2">so'm</span>
+                                            </>
+                                        ) : (
+                                            "Kelishiladi"
+                                        )}
+                                    </p>
                                 </div>
 
 
