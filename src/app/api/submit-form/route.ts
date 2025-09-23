@@ -4,10 +4,10 @@ import { NextResponse } from 'next/server';
 const goalOptionsMap: Record<string, string> = {
     "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak.": "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman.",
     "Brendim bor, lekin u samarasiz, tahlil va maslahat kerak.": "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak.",
-    "Brending kuchini tushunaman va aniq maqsad bilan keldim.": "Brendingiz kuchini tushunaman va aniq maqsad bilan murojaat qilyapman.",
+    "Brending kuchini tushunaman va aniq maqsad bilan keldim.": "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman.",
     exploring: "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman.",
     has_problem: "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak.",
-    ready_to_start: "Brendingiz kuchini tushunaman va aniq maqsad bilan murojaat qilyapman.",
+    ready_to_start: "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman.",
 };
 
 const meetingPlaceMap: Record<string, string> = {
@@ -23,11 +23,11 @@ const pickTwoLabels: Record<string, string> = {
 };
 
 export async function POST(request: Request) {
-    const botToken = '7738413085:AAE_CYNnbpyoW5KiheUTJOPBmz_jHLVWgWc';
-    const chatId = '-1002566480563';
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
-        console.error("Server Configuration Error: Telegram token or chat ID is missing in the code.");
+        console.error("Server Configuration Error: Telegram token or chat ID is missing in the environment variables.");
         return NextResponse.json({ ok: false, error: "Serverda Telegram sozlamalari mavjud emas." }, { status: 500 });
     }
 

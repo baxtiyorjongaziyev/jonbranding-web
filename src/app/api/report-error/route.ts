@@ -2,12 +2,11 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-    // These are hardcoded in the original submit-form endpoint. Reusing them here.
-    const botToken = '7738413085:AAE_CYNnbpyoW5KiheUTJOPBmz_jHLVWgWc';
-    const chatId = '-1002566480563';
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
-        console.error("Server Configuration Error: Telegram token or chat ID is missing.");
+        console.error("Server Configuration Error: Telegram token or chat ID is missing in environment variables.");
         return NextResponse.json({ ok: false, error: "Serverda Telegram sozlamalari mavjud emas." }, { status: 500 });
     }
 
