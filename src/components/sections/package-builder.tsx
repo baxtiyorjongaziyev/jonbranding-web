@@ -14,6 +14,7 @@ import { Sparkles, Gift, Shield, Banknote, Info, ShoppingCart, CheckCircle, Tras
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
+import { Separator } from '../ui/separator';
 
 
 interface PackageBuilderProps {
@@ -274,7 +275,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                <p className="text-blue-200 text-sm mt-1">O'zingizga mos xizmatlarni tanlang.</p>
                             </CardHeader>
                             <CardContent className="p-0 mt-6">
-                                <div className="space-y-3 pb-4 min-h-[120px]">
+                                <div className="space-y-4 border-b border-white/20 pb-4 min-h-[100px]">
                                     {selectedServiceKeys.length > 0 ? (
                                         selectedServiceKeys
                                             .filter(key => serviceDetails[key]?.price > 0 || serviceDetails[key]?.note?.includes('qo\'shiladi'))
@@ -283,17 +284,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                                 return (
                                                     <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
                                                         <span className="text-white flex-1 pr-2">{service.label}</span>
-                                                        <span className="font-mono text-gray-300">
-                                                            {service.price > 0 ? `+${service.price.toLocaleString('fr-FR')}` : service.note}
-                                                        </span>
-                                                        <Button 
-                                                            variant="ghost" 
-                                                            size="icon" 
-                                                            className="h-6 w-6 ml-2 text-gray-400 hover:bg-red-500/20 hover:text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
-                                                            onClick={() => handleServiceToggle(key)}
-                                                        >
-                                                            <Trash2 className="h-4 w-4"/>
-                                                        </Button>
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="font-mono text-gray-300">
+                                                                {service.price > 0 ? `+${service.price.toLocaleString('fr-FR')}` : service.note}
+                                                            </span>
+                                                            <Button 
+                                                                variant="ghost" 
+                                                                size="icon" 
+                                                                className="h-6 w-6 text-gray-400 hover:bg-red-500/20 hover:text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+                                                                onClick={() => handleServiceToggle(key)}
+                                                            >
+                                                                <Trash2 className="h-4 w-4"/>
+                                                            </Button>
+                                                        </div>
                                                     </div>
                                                 );
                                             })
@@ -304,32 +307,30 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         </div>
                                     )}
                                 </div>
-
-                                <div className="space-y-4 py-4 border-t border-b border-white/20">
-                                    {total.base > 0 && (
-                                        <>
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-blue-200">Xizmatlar jami:</span>
-                                                <span className="font-mono">{total.base.toLocaleString('fr-FR')} so'm</span>
-                                            </div>
-                                            {total.surcharges.map(s => (
-                                                <div key={s.name} className="flex justify-between items-center text-amber-300">
-                                                    <span>{s.name}</span>
-                                                    <span className="font-mono">+ {s.value.toLocaleString('fr-FR')} so'm</span>
-                                                </div>
-                                            ))}
-                                            {total.discountApplied.map(d => (
-                                                <div key={d} className="flex justify-between items-center text-green-300">
-                                                    <span>{d.name}</span>
-                                                    <span className="font-mono">- {d.value.toLocaleString('fr-FR')} so'm</span>
-                                                </div>
-                                            ))}
-                                        </>
-                                    )}
-                                </div>
-
+                                
+                                {total.base > 0 && (
+                                  <div className="py-4 space-y-3 border-b border-white/20">
+                                      <div className="flex justify-between items-center">
+                                          <span className="text-blue-200">Xizmatlar jami:</span>
+                                          <span className="font-mono">{total.base.toLocaleString('fr-FR')} so'm</span>
+                                      </div>
+                                      {total.surcharges.map(s => (
+                                          <div key={s.name} className="flex justify-between items-center text-amber-300">
+                                              <span>{s.name}</span>
+                                              <span className="font-mono">+ {s.value.toLocaleString('fr-FR')} so'm</span>
+                                          </div>
+                                      ))}
+                                       {total.discountApplied.map(d => (
+                                          <div key={d.name} className="flex justify-between items-center text-green-300">
+                                              <span>{d.name}</span>
+                                              <span className="font-mono">- {d.value.toLocaleString('fr-FR')} so'm</span>
+                                          </div>
+                                      ))}
+                                  </div>
+                                )}
+                                
                                 {total.savings > 0 && (
-                                    <div className="text-center py-4 animate-fade-in">
+                                    <div className="text-center py-4 border-b border-white/20 animate-fade-in">
                                         <p className="text-sm text-blue-200">Umumiy tejagan mablag'ingiz</p>
                                         <p className="text-3xl font-bold text-green-300 animate-pulse">{formatPrice(total.savings)}</p>
                                     </div>
@@ -391,3 +392,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
+
+    
