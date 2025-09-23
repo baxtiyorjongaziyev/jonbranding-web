@@ -1,9 +1,9 @@
 ---
-title: "Kichik biznes uchun logo dizayn: Yo'l qo'yiladigan 5 ta asosiy xato"
+title: "small business logo"
 description: "Logotip — bu biznesning yuzi. Kichik biznes egalari ko'pincha qanday xatolarga yo'l qo'yishadi va ularni qanday qilib chetlab o'tish mumkin? Ushbu maqolada biz amaliy maslahatlar beramiz."
 date: "2024-08-05"
 author: "Baxtiyorjon Gaziyev"
-image: "https://picsum.photos/seed/logo-mistakes/1200/630"
+image: "https://images.unsplash.com/photo-1668775589972-3aa874ea191b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzbWFsbCUyMGJ1c2luZXNzJTIwbG9nb3xlbnwwfHx8fDE3NTg2NDkwMzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
 imageHint: "logo design mistakes"
 ---
 
