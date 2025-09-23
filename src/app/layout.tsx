@@ -165,13 +165,13 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         
         {/* Google Analytics */}
         <Script
-            strategy="afterInteractive"
+            strategy="beforeInteractive"
             async
             src={`https://www.googletagmanager.com/gtag/js?id=G-1CE32W25SP`}
         />
         <Script
           id="gtag-init"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -220,3 +220,5 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 }
 
 export default RootLayout;
+
+    
