@@ -67,6 +67,11 @@ const AiAssistant: FC = () => {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const chatCardRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
 
   useEffect(() => {
@@ -118,17 +123,18 @@ const AiAssistant: FC = () => {
         sender: 'user' 
     };
     
-    const newHistoryWithUserMessage = [
-        ...messages.map(m => ({ ...m, choices: undefined })),
-        newUserMessage
+    // Immediately update the UI with the user's message
+    const updatedMessages = [
+      ...messages.map(m => ({ ...m, choices: undefined })),
+      newUserMessage
     ];
-    setMessages(newHistoryWithUserMessage);
+    setMessages(updatedMessages);
     
     setInputValue('');
     setIsLoading(true);
 
     try {
-      const apiHistory = newHistoryWithUserMessage.slice(1).map(msg => ({ 
+      const apiHistory = updatedMessages.slice(1).map(msg => ({ 
           role: msg.sender === 'user' ? 'user' : 'bot',
           content: msg.text
       }));
@@ -160,8 +166,7 @@ const AiAssistant: FC = () => {
             description: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
             variant: 'destructive',
         });
-        // Remove the user's message on error to allow them to retry.
-        setMessages(messages.map(m => ({ ...m, choices: undefined })));
+        // On error, we don't add a new message, just log it. The user's message remains.
     } finally {
       setIsLoading(false);
     }
@@ -175,6 +180,10 @@ const AiAssistant: FC = () => {
   const handleSuggestionClick = (suggestion: string) => {
       handleSendMessage(suggestion);
   };
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <>
