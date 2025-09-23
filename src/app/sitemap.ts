@@ -1,5 +1,6 @@
+
 import { MetadataRoute } from 'next'
-import { blogPosts } from '@/lib/blog-data';
+import { getSortedPostsData } from '@/lib/blog-posts';
  
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://jonbranding.uz';
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '/' ? 1 : (route === '/blog' || route === '/xizmatlar' ? 0.9 : 0.8),
   }));
 
+  const blogPosts = getSortedPostsData();
   const blogEntries = blogPosts.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
@@ -31,4 +33,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...sitemapEntries, ...blogEntries];
 }
-`

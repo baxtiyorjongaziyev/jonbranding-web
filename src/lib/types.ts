@@ -27,6 +27,5 @@ export interface BlogPost {
     author: string;
     image: string;
     imageHint: string;
-    content: string;
+    htmlContent?: string;
 }
-`
