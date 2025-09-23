@@ -111,22 +111,18 @@ const AiAssistant: FC = () => {
     if (!messageText.trim() || isLoading) return;
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
-
-    // 1. Immediately update UI
-    const updatedMessages = messages.map(m => ({ ...m, choices: undefined }));
-    const newHistoryForUI = [...updatedMessages, newUserMessage];
-    setMessages(newHistoryForUI);
+    const updatedHistory = [...messages.map(m => ({...m, choices: undefined})), newUserMessage];
+    
+    setMessages(updatedHistory);
     setInputValue('');
     setIsLoading(true);
 
     try {
-      // 2. Prepare history for the API call.
-      const apiHistory = newHistoryForUI.slice(0, -1).map(msg => ({
+      const apiHistory = updatedHistory.slice(0, -1).map(msg => ({
           role: msg.sender === 'user' ? 'user' : 'bot',
           content: msg.text
       }));
       
-      // 3. Call the assistant.
       const response = await chatAssistant({ 
         query: messageText, 
         history: apiHistory
@@ -136,33 +132,43 @@ const AiAssistant: FC = () => {
 
       if (response.acknowledgement) {
          botReplies.push({
-            id: (Date.now() + 1).toString(),
+            id: `bot-${Date.now()}-ack`,
             text: response.acknowledgement,
             sender: 'bot'
          });
       }
       
       botReplies.push({ 
-          id: (Date.now() + 2).toString(), 
+          id: `bot-${Date.now()}-reply`, 
           text: response.reply, 
           sender: 'bot',
           choices: response.choices 
       });
 
-      // 4. Update state with the final bot reply/replies
+      // Update state with the final bot reply/replies
       if (botReplies.length > 1) {
           // Show acknowledgement, wait, then show reply
           setMessages(prev => [...prev, botReplies[0]]);
           await new Promise(resolve => setTimeout(resolve, 800));
-          setMessages(prev => [...prev, botReplies[1]]);
+          setMessages(prev => {
+              const currentMessages = [...prev];
+              currentMessages.pop(); 
+              return [...currentMessages, ...botReplies];
+          });
+
+          // A bit of a hacky way to do this. We need to add both at the same time but show them sequentially.
+          // The best way would be to change the message structure to support sub-messages.
+          // For now, let's just add the second message after a delay.
+          setMessages(prev => [...prev.slice(0, prev.length - 1), ...botReplies]);
+
+
       } else {
-          // Just show reply
-          setMessages(prev => [...prev, botReplies[0]]);
+          setMessages(prev => [...prev, ...botReplies]);
       }
 
     } catch (error) {
       console.error("AI Assistant Error:", error);
-      const errorMessage: Message = { id: Date.now().toString() + '-error', text: "Kechirasiz, hozirda javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.", sender: 'bot' };
+      const errorMessage: Message = { id: `error-${Date.now()}-${Math.random()}`, text: "Kechirasiz, hozirda javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.", sender: 'bot' };
       setMessages(currentMessages => [...currentMessages, errorMessage]);
     } finally {
       setIsLoading(false);
