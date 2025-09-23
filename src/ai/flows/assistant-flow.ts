@@ -205,7 +205,7 @@ const assistantFlow = ai.defineFlow(
 
     // Agar biror sabab bilan javob bo'lmasa
     return {
-      acknowledgement: '',
+      acknowledgement: null,
       reply: "Kechirasiz, hozir javob bera olmayman.",
       choices: null,
     };
