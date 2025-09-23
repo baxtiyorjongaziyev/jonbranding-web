@@ -18,6 +18,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useTelegram } from '@/hooks/use-telegram';
+import { event as gtagEvent } from '@/lib/gtag';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -125,6 +126,13 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         throw new Error(result.error || 'Serverda xatolik yuz berdi.');
       }
       
+      // Trigger Google Analytics event
+      gtagEvent('form_submit', {
+        'event_category': 'Contact',
+        'event_label': 'Main Contact Form',
+        'value': totalPrice
+      });
+
       confetti({
           particleCount: 150,
           spread: 90,
@@ -438,3 +446,5 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 };
 
 export default ContactModal;
+
+    

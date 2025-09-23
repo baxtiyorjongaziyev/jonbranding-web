@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { ArrowRight, Frown, Meh, Smile } from 'lucide-react';
 import ContactModal from '@/components/contact-modal';
+import { event as gtagEvent } from '@/lib/gtag';
 
 const questions = [
   {
@@ -112,6 +113,12 @@ const QuizPage: FC = () => {
   const handleFormSubmit = () => {
     setModalOpen(false);
     setShowResult(true);
+    // Trigger Google Analytics event
+    gtagEvent('form_submit', {
+      'event_category': 'Quiz',
+      'event_label': 'Branding Quiz',
+      'value': totalScore
+    });
   };
 
   const progressPercentage = ((step + 1) / questions.length) * 100;
@@ -199,3 +206,5 @@ const QuizPage: FC = () => {
 };
 
 export default QuizPage;
+
+    

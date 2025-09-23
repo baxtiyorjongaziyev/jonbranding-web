@@ -21,6 +21,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { event as gtagEvent } from '@/lib/gtag';
 
 // ========================
 // 1) Konstanta va tariflar
@@ -216,6 +217,14 @@ export default function TrademarkCalculator() {
           const result = await response.json();
           throw new Error(result.error || "Serverda xatolik yuz berdi.");
       }
+
+      // Trigger Google Analytics event
+      gtagEvent('form_submit', {
+        'event_category': 'Calculator',
+        'event_label': 'Trademark Calculator',
+        'value': fees.total
+      });
+
       toast({
         title: "Muvaffaqiyatli!",
         description: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
@@ -456,3 +465,5 @@ function Row({ label, value, bold=false }: { label: string, value: number, bold?
 function Divider() {
   return <div className="mt-2 pt-2 border-t" />;
 }
+
+    
