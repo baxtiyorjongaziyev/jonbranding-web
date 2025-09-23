@@ -50,8 +50,13 @@ const sendLeadToTelegram = ai.defineTool(
     },
     async (input) => {
        try {
-            const botToken = '7738413085:AAE_CYNnbpyoW5KiheUTJOPBmz_jHLVWgWc';
-            const chatId = '-1002566480563';
+            const botToken = process.env.TELEGRAM_BOT_TOKEN;
+            const chatId = process.env.TELEGRAM_CHAT_ID;
+
+            if (!botToken || !chatId) {
+                console.error('Telegram bot token or chat ID is not set in environment variables.');
+                return "Serverda Telegram sozlamalari mavjud emas. Foydalanuvchiga bu haqida xabar bering.";
+            }
 
             const message = `
 🤖 AI Assistant orqali YANGI SIFATLI LEAD!
@@ -171,27 +176,21 @@ const assistantFlow = ai.defineFlow(
 
     const promptInput = { ...input, history: augmentedHistory };
 
-    let llmResponse = await prompt(promptInput);
+    const llmResponse = await prompt(promptInput);
 
-    while (true) {
-      if (llmResponse.output) {
-        return llmResponse.output;
-      }
-
-      const toolRequest = llmResponse.toolRequest;
-      if (!toolRequest || !toolRequest.toolCalls.length) {
-        // Agar tool chaqirilmagan bo'lsa va javob ham bo'lmasa,
-        // bu odatda promptning o'zidan to'g'ri javob kelganini bildiradi.
-        // Ammo Genkitning ba'zi versiyalarida bu .output() ichida bo'lmasligi mumkin.
-        // Bizda bunday holatda text() bo'lmasligi kerak, lekin ehtiyot shart.
-        // Asosiy logikamiz yuqoridagi if(llmResponse.output) da.
-        break;
-      }
-      
-      const toolCall = toolRequest.toolCalls[0];
+    // Genkit 1.x da .toolRequest() va .continue() o'rniga to'g'ridan-to'g'ri tool chaqiruvlari bilan ishlash
+    // Bu yerda bizda loop shart emas, chunki prompt tool ishlatish yoki ishlatmaslikni o'zi hal qiladi.
+    // Agar tool ishlatilsa, Genkit avtomatik ravishda uni bajaradi va natijani LLMga qaytaradi.
+    
+    if (llmResponse.toolRequest) {
+      // Agar model tool ishlatishni so'rasa, biz uni bajaramiz.
+      // Biroq, bizning logikada LLM oxirgi javobni o'zi berishi kerak.
+      // Shuning uchun bu yerda toolni alohida chaqirib, natijasini LLMga yuborishimiz kerak.
+      const toolCall = llmResponse.toolRequest.toolCalls[0];
       const toolResult = await ai.runTool(toolCall);
-      
-      llmResponse = await llmResponse.continue({
+
+      // Tool natijasi bilan promptni davom ettiramiz
+      const finalResponse = await llmResponse.continue({
         toolResult: {
           toolResult: {
             tool: toolCall.name,
@@ -200,9 +199,17 @@ const assistantFlow = ai.defineFlow(
           },
         },
       });
+      return finalResponse.output!;
     }
     
-    // Agar biror sabab bilan loopdan chiqib ketsa va javob bo'lmasa
+    // Agar tool ishlatilmasa, shunchaki javobni qaytaramiz
+    if (llmResponse.output) {
+      return llmResponse.output;
+    }
+
+    // Agar biror sabab bilan javob bo'lmasa
     return { reply: "Kechirasiz, hozir javob bera olmayman.", choices: null };
   }
 );
+
+    
