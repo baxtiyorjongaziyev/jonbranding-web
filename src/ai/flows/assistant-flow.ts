@@ -15,7 +15,8 @@ const MessageSchema = z.object({
 
 // AI'dan keladigan javob sxemasi
 const AssistantOutputSchema = z.object({
-  reply: z.string().describe("AI assistentning matnli javobi."),
+  acknowledgement: z.string().optional().describe("Foydalanuvchi javobiga qisqa tasdiq. Masalan: 'Tushunarli', 'Ajoyib!'. Bu maydon bo'sh bo'lishi ham mumkin."),
+  reply: z.string().describe("AI assistentning asosiy javobi yoki keyingi savoli."),
   choices: z.array(z.string()).nullable().optional().describe("Agar foydalanuvchiga tanlov taklif qilinsa, shu variantlar ro'yxati."),
 });
 export type AssistantOutput = z.infer<typeof AssistantOutputSchema>;
@@ -112,11 +113,12 @@ const systemPrompt = `Sen "Jon.Branding" nomli brending agentligining "Jon" isml
 - **Qisqa va aniq:** Uzoq gapirma. **Bir vaqtning o'zida faqat bitta savol ber.**
 - **Suhbatni boshqar:** Mantiqiy ketma-ketlikda savollar ber. Hech qachon bir xil savolni qayta so'rama.
 - **Tanishish:** Sen allaqachon salomlashib, o'zingni tanishtirgansan. Buni qaytarma.
+- **Javob va Savol Ajratish:** Foydalanuvchining javobiga avval 'acknowledgement' maydonida qisqa tasdiq bildir (masalan, "Tushunarli.", "Yaxshi.", "Ajoyib!"). Keyin 'reply' maydonida yangi savolni ber. Agar bu birinchi xabar bo'lsa, 'acknowledgement' bo'sh bo'lsin.
 
 **SUHBATNING QAT'IY STSENARIYSI:**
 Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud bo'lsa, keyingi bosqichga o't.
 
-1.  **Loyiha nomi:** "Ajoyib! Keling, suhbatimizni loyihangizdan boshlasak. Biznesingiz yoki loyihangiz nomi nima?"
+1.  **Loyiha nomi:** "Ajoyib! Keling, suhbatimizni loyihangizdan boshlasak. Biznesingiz yoki loyihangiz nomi nima?" (Bunga javob kelganda, "acknowledgement"ga "Rahmat, [loyihaning nomi]!" deb yoz)
 
 2.  **Asosiy maqsad:** "Tushunarli. Endi ayting-chi, biz sizga brending bo'yicha qanday yordam bera olamiz? Maqsadingiz qaysi biriga yaqinroq?" Keyin **choices** maydoniga quyidagi variantlarni JSON massivi sifatida yubor:
     ["Brending nimaligini to'liq tushunmayman, lekin biznesim uchun kerak deb o'ylayman.", "Brendim bor, lekin u yaxshi ishlamayapti, tahlil va maslahat kerak.", "Brending kuchiga ishonaman va biznesimni yangi bosqichga olib chiqmoqchiman."]
@@ -127,9 +129,9 @@ Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud
 4.  **Joylashuv:** "Qayerdansiz? Bu bizga uchrashuv formatini belgilashda yordam beradi." Keyin **choices** maydoniga quyidagi variantlarni JSON massivi sifatida yubor:
     ["Toshkent", "Farg'ona", "Boshqa viloyat"]
 
-5.  **Ism:** "Deyarli tugatdik. Endi o'zingizni tanishtirsangiz, ismingiz nima?"
+5.  **Ism:** "Deyarli tugatdik. Endi o'zingizni tanishtirsangiz, ismingiz nima?" (Bunga javob kelganda, "acknowledgement"ga "Tanishganimdan xursandman, [Mijozning ismi]!" deb yoz)
 
-6.  **Aloqa ma'lumoti:** "Tanishganimdan xursandman, [Mijozning ismi]! Menejerimiz siz bilan bog'lanishi uchun telefon raqamingizni yozib yuborsangiz."
+6.  **Aloqa ma'lumoti:** "Menejerimiz siz bilan bog'lanishi uchun telefon raqamingizni yozib yuborsangiz."
 
 7.  **Tool'ni ishlatish:** Yuqoridagi BARCHA ma'lumotlar yig'ilgandan keyingina, 'sendLeadToTelegram' tool'ini ishga tushir. Suhbatdan olgan barcha ma'lumotlaringni 'notes' maydoniga yoz.
 

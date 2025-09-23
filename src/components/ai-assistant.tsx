@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useRef, useEffect, FC, Fragment } from 'react';
@@ -91,6 +90,10 @@ const AiAssistant: FC = () => {
     };
   }, [isOpen]);
 
+  const addMessage = (message: Message) => {
+    setMessages(prev => [...prev, message]);
+  }
+
 
   const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
@@ -105,23 +108,35 @@ const AiAssistant: FC = () => {
         content: msg.text
     }));
     
-    setMessages(prev => [...prev, newUserMessage]);
+    addMessage(newUserMessage);
     setInputValue('');
     setIsLoading(true);
 
     try {
       const response = await chatAssistant({ query: messageText, history: currentHistory });
+      
+      if (response.acknowledgement) {
+         const ackMessage: Message = {
+            id: (Date.now() + 1).toString(),
+            text: response.acknowledgement,
+            sender: 'bot'
+         };
+         addMessage(ackMessage);
+         await new Promise(resolve => setTimeout(resolve, 500)); // wait 500ms
+      }
+      
       const botMessage: Message = { 
-          id: (Date.now() + 1).toString(), 
+          id: (Date.now() + 2).toString(), 
           text: response.reply, 
           sender: 'bot',
           choices: response.choices 
       };
-      setMessages(prev => [...prev, botMessage]);
+      addMessage(botMessage);
+
     } catch (error) {
       console.error("AI Assistant Error:", error);
       const errorMessage: Message = { id: 'error', text: "Kechirasiz, hozirda javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.", sender: 'bot' };
-      setMessages(prev => [...prev, errorMessage]);
+      addMessage(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -254,3 +269,5 @@ const AiAssistant: FC = () => {
 };
 
 export default AiAssistant;
+
+    
