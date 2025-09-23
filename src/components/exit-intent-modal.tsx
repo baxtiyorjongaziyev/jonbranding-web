@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useState } from 'react';
@@ -29,7 +30,7 @@ const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick }) => {
             <Gift className="h-10 w-10 text-primary" />
         </div>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-extrabold text-primary-foreground">Ketishga shoshilmang!</DialogTitle>
+          <DialogTitle className="text-2xl font-extrabold text-foreground">Ketishga shoshilmang!</DialogTitle>
           <DialogDescription className="mt-2 text-lg text-gray-600">
             Siz uchun maxsus taklifimiz bor. <br/>
             Bizda <span className="font-bold text-primary">turli chegirmalar</span> mavjud. Imkoniyatdan foydalaning!
