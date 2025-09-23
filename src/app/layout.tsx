@@ -85,8 +85,30 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
     useEffect(() => {
         const handleOpen = () => handleOpenModal();
         window.addEventListener('openContactModal', handleOpen);
+
+        // Global Error Handler
+        const handleError = (event: ErrorEvent) => {
+            const { message, filename, lineno, colno, error } = event;
+            // Avoid sending feedback loop errors
+            if (message.includes('Telegram API Error')) return;
+
+            fetch('/api/report-error', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: message,
+                    stack: error ? error.stack : `${filename}:${lineno}:${colno}`,
+                    pathname: window.location.pathname,
+                    userInfo: navigator.userAgent,
+                }),
+            }).catch(e => console.error("Failed to report error:", e)); // Log reporting failure
+        };
+
+        window.addEventListener('error', handleError);
+
         return () => {
             window.removeEventListener('openContactModal', handleOpen);
+            window.removeEventListener('error', handleError);
         };
     }, [handleOpenModal]);
 
