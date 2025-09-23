@@ -29,20 +29,28 @@ const renderTextWithLinks = (text: string) => {
   const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\B\/[^\s,.]*[^\s,.'!?)])/ig;
   return text.split(urlRegex).filter(Boolean).map((part, index) => {
     if (part.match(urlRegex)) {
-      const isExternal = part.startsWith('http');
-      const linkProps = isExternal 
-        ? { href: part, target: '_blank', rel: 'noopener noreferrer' } 
-        : {};
-
+      const isInternal = part.startsWith('/');
+      if (isInternal) {
+        return (
+          <Link
+            key={index}
+            href={part}
+            className="text-primary underline hover:text-primary/80 font-medium"
+          >
+            {part}
+          </Link>
+        );
+      }
       return (
-        <Link
+        <a
           key={index}
           href={part}
-          {...linkProps}
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-primary underline hover:text-primary/80 font-medium"
         >
           {part}
-        </Link>
+        </a>
       );
     }
     return <Fragment key={index}>{part}</Fragment>;
@@ -107,27 +115,24 @@ const AiAssistant: FC = () => {
   const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
 
-    // Remove choices from previous bot message
-    setMessages(prev => prev.map(m => m.sender === 'bot' ? { ...m, choices: undefined } : m));
-
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
-    
-    // Use a function to get the most up-to-date history, including the new user message
-    const getHistory = () => {
-        const currentMessages = JSON.parse(localStorage.getItem('ai-assistant-messages') || '[]');
-        return [...currentMessages, newUserMessage].map(msg => ({
-            role: msg.sender === 'user' ? 'user' : 'bot',
-            content: msg.text
-        }));
-    };
-    
     addMessage(newUserMessage);
+
+    // Remove choices from previous bot message before sending the new one
+    setMessages(prev => prev.map(m => m.sender === 'bot' ? { ...m, choices: undefined } : m));
+    
     setInputValue('');
     setIsLoading(true);
 
     try {
       // Pass the latest history to the flow
-      const response = await chatAssistant({ query: messageText, history: getHistory() });
+      const response = await chatAssistant({ 
+        query: messageText, 
+        history: [...messages, newUserMessage].map(msg => ({
+            role: msg.sender === 'user' ? 'user' : 'bot',
+            content: msg.text
+        }))
+      });
       
       setIsLoading(false); // Turn off loader before showing acknowledgment
 
