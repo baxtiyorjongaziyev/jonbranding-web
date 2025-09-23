@@ -1,3 +1,4 @@
+
 'use client';
 
 import { type BlogPost } from '@/lib/types';
@@ -9,21 +10,24 @@ import React from 'react';
 
 // Renders simple markdown-like syntax to HTML elements for both bold and italic
 const renderTextWithFormatting = (text: string) => {
-    // Regex to find **bold** or *italic* text. It's important to check for ** first.
-    const markdownRegex = /(\*\*(.*?)\*\*|\*(.*?)\*)/g;
-    const parts = text.split(markdownRegex);
+    // Regex to find **bold**, *italic*, or plain text segments.
+    // It will match markdown parts and capture the content, or match a sequence of non-markdown characters.
+    const markdownRegex = /(\*\*(.*?)\*\*)|(\*(.*?)\*)|([^*]+)/g;
+    const matches = Array.from(text.matchAll(markdownRegex));
 
-    return parts.filter(Boolean).map((part, index) => {
-        if (part.startsWith('**') && part.endsWith('**')) {
-            // It's a bold part
-            return <strong key={index}>{part.slice(2, -2)}</strong>;
+    return matches.map((match, index) => {
+        const [fullMatch, boldDelim, boldText, italicDelim, italicText, plainText] = match;
+
+        if (boldText) {
+            return <strong key={index}>{boldText}</strong>;
         }
-        if (part.startsWith('*') && part.endsWith('*')) {
-            // It's an italic part
-            return <em key={index}>{part.slice(1, -1)}</em>;
+        if (italicText) {
+            return <em key={index}>{italicText}</em>;
         }
-        // It's a regular text part
-        return part;
+        if (plainText) {
+            return <React.Fragment key={index}>{plainText}</React.Fragment>;
+        }
+        return null;
     });
 };
 
