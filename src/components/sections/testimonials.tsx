@@ -185,14 +185,9 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
 }
 
 const Testimonials = () => {
-    const [testimonials, setTestimonials] = useState<Testimonial[]>(staticTestimonials);
-
-    useEffect(() => {
-        // Data is now static, no need to fetch.
-        setTestimonials(staticTestimonials);
-    }, []);
-
-    return <TestimonialsClient testimonials={testimonials} />
+    return <TestimonialsClient testimonials={staticTestimonials} />
 };
 
 export default Testimonials;
+
+    
