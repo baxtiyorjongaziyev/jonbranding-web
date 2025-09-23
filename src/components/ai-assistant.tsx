@@ -11,6 +11,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { chatAssistant } from '@/ai/flows/assistant-flow';
 import { useLocalStorage } from '@/hooks/use-local-storage';
+import { useToast } from '@/hooks/use-toast';
 
 interface Message {
   id: string;
@@ -65,6 +66,7 @@ const AiAssistant: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const chatCardRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
 
   useEffect(() => {
@@ -111,21 +113,23 @@ const AiAssistant: FC = () => {
     if (!messageText.trim() || isLoading) return;
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
-    const updatedHistory = [...messages.map(m => ({...m, choices: undefined})), newUserMessage];
     
+    // Clear choices from previous messages and add the new user message
+    const updatedHistory = [...messages.map(m => ({...m, choices: undefined})), newUserMessage];
     setMessages(updatedHistory);
+    
     setInputValue('');
     setIsLoading(true);
 
     try {
-      const apiHistory = updatedHistory.slice(0, -1).map(msg => ({
+      const apiHistory = updatedHistory.slice(1).map(msg => ({ // Start from index 1 to exclude initial bot message
           role: msg.sender === 'user' ? 'user' : 'bot',
           content: msg.text
       }));
       
       const response = await chatAssistant({ 
         query: messageText, 
-        history: apiHistory
+        history: apiHistory.slice(0, -1) // Exclude the last user message from history for the prompt
       });
       
       let botReplies: Message[] = [];
@@ -145,9 +149,7 @@ const AiAssistant: FC = () => {
           choices: response.choices 
       });
 
-      // Update state with the final bot reply/replies
       if (botReplies.length > 1) {
-          // Show acknowledgement, wait, then show reply
           setMessages(prev => [...prev, botReplies[0]]);
           await new Promise(resolve => setTimeout(resolve, 800));
           setMessages(prev => {
@@ -155,21 +157,18 @@ const AiAssistant: FC = () => {
               currentMessages.pop(); 
               return [...currentMessages, ...botReplies];
           });
-
-          // A bit of a hacky way to do this. We need to add both at the same time but show them sequentially.
-          // The best way would be to change the message structure to support sub-messages.
-          // For now, let's just add the second message after a delay.
           setMessages(prev => [...prev.slice(0, prev.length - 1), ...botReplies]);
-
-
       } else {
           setMessages(prev => [...prev, ...botReplies]);
       }
 
     } catch (error) {
       console.error("AI Assistant Error:", error);
-      const errorMessage: Message = { id: `error-${Date.now()}-${Math.random()}`, text: "Kechirasiz, hozirda javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.", sender: 'bot' };
-      setMessages(currentMessages => [...currentMessages, errorMessage]);
+      toast({
+        title: "Xatolik",
+        description: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
+        variant: "destructive"
+      });
     } finally {
       setIsLoading(false);
     }
@@ -302,3 +301,5 @@ const AiAssistant: FC = () => {
 };
 
 export default AiAssistant;
+
+    
