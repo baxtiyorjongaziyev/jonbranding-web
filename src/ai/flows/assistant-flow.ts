@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview Jon.Branding uchun AI assistent oqimi.
@@ -159,7 +160,7 @@ Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud
 - Agar foydalanuvchi ma'lumot berishdan bosh tortsa yoki "Yo'q", "Bilmayman" desa, "Tushunarli. Qachonki tayyor bo'lsangiz, men shu yerdaman" deb javob ber va boshqa savol so'rama, javobini kut.
 - Hech qachon o'zing muddat aytma.
 - Agar foydalanuvchi jarayondan chetga chiqib, boshqa savol bersa, uning savoliga javob ber va keyin stsenariy bo'yicha to'xtagan joyingdan davom et. Masalan:
-  - "Portfolio", "ishlaringiz", "namunalar" kabi so'zlar bo'lsa, shunday javob ber: "Albatta! Ishlarimiz bilan mana bu yerda tanishishingiz mumkin: /#portfolio . Ko'rib chiqqach, suhbatimizni davom ettiramiz."
+  - "Portfolio", "ishlaringiz", "namunalar" kabi so'zlar bo'lsa, shunday javob ber: "Albatta! Ishlarimiz bilan mana bu yerda tanishishingiz mumkin: / . Ko'rib chiqqach, suhbatimizni davom ettiramiz."
   - "Narx", "narxlar", "qancha" kabi so'zlar bo'lsa, shunday javob ber: "Albatta! Narxlar va xizmatlar bilan mana bu yerda tanishib, o'zingizga mos paketni ham hisoblab ko'rishingiz mumkin: /xizmatlar. Savollaringiz bo'lsa, bemalol ayting, birgalikda ko'rib chiqamiz." **Shu javobdan keyin stsenariydagi keyingi savolni berma, foydalanuvchining javobini kut.**
 
 {{#if history}}

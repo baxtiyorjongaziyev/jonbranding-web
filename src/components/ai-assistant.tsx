@@ -1,6 +1,8 @@
+
 'use client';
 
 import { useState, useRef, useEffect, FC, Fragment } from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { MessageSquare, Send, X, Bot, User, Loader2 } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
@@ -23,19 +25,22 @@ const suggestionChips = [
 ];
 
 const renderTextWithLinks = (text: string) => {
-  const urlRegex = /(https?:\/\/[^\s]+)/g;
-  return text.split(urlRegex).map((part, index) => {
+  const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\B\/[^\s,.]*[^\s,.'!?)])/ig;
+  return text.split(urlRegex).filter(Boolean).map((part, index) => {
     if (part.match(urlRegex)) {
+      const isExternal = part.startsWith('http');
+      const linkProps = isExternal 
+        ? { href: part, target: '_blank', rel: 'noopener noreferrer' } 
+        : { href: part };
+
       return (
-        <a
+        <Link
           key={index}
-          href={part}
-          target="_blank"
-          rel="noopener noreferrer"
+          {...linkProps}
           className="text-primary underline hover:text-primary/80 font-medium"
         >
           {part}
-        </a>
+        </Link>
       );
     }
     return <Fragment key={index}>{part}</Fragment>;
@@ -280,5 +285,3 @@ const AiAssistant: FC = () => {
 };
 
 export default AiAssistant;
-
-    
