@@ -172,16 +172,6 @@ Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud
 
 Mijozning hozirgi savoli: {{{query}}}`;
 
-// Promptni aniqlaymiz, chiqish sxemasini qo'shamiz
-const prompt = ai.definePrompt({
-  name: 'assistantPrompt',
-  system: systemPrompt,
-  tools: [sendLeadToTelegram],
-  output: {
-    schema: AssistantOutputSchema,
-  },
-});
-
 const assistantFlow = ai.defineFlow(
   {
     name: 'assistantFlow',
@@ -195,20 +185,15 @@ const assistantFlow = ai.defineFlow(
     }));
 
     const response = await ai.generate({
-      prompt: input.query,
       model: 'googleai/gemini-2.5-flash',
-      history,
+      prompt: {
+        system: systemPrompt,
+        messages: [...history, {role: 'user', content: input.query}],
+      },
       tools: [sendLeadToTelegram],
       output: {
         schema: AssistantOutputSchema,
       },
-      config: {
-        // system is part of the prompt now, not a separate config.
-      }
-    }, {
-      prompt: {
-        system: systemPrompt,
-      }
     });
 
     const output = response.output;

@@ -120,16 +120,19 @@ const AiAssistant: FC = () => {
       // Pass the latest history to the flow
       const response = await chatAssistant({ query: messageText, history: getHistory(newUserMessage) });
       
+      setIsLoading(false); // Turn off loader before showing acknowledgment
+
       if (response.acknowledgement) {
-         // The thinking indicator is already on
-         await new Promise(resolve => setTimeout(resolve, 800)); // Simulate typing
+         await new Promise(resolve => setTimeout(resolve, 500)); // Short pause
          const ackMessage: Message = {
             id: (Date.now() + 1).toString(),
             text: response.acknowledgement,
             sender: 'bot'
          };
          addMessage(ackMessage);
-         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait before showing the next part
+         setIsLoading(true); // Show loader again while "thinking" of the next question
+         await new Promise(resolve => setTimeout(resolve, 800)); // "Thinking" time
+         setIsLoading(false);
       }
       
       const botMessage: Message = { 
@@ -142,6 +145,7 @@ const AiAssistant: FC = () => {
 
     } catch (error) {
       console.error("AI Assistant Error:", error);
+      setIsLoading(false);
       const errorMessage: Message = { id: 'error', text: "Kechirasiz, hozirda javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.", sender: 'bot' };
       addMessage(errorMessage);
     } finally {
