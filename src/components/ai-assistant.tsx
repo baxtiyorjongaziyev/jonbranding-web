@@ -109,27 +109,27 @@ const AiAssistant: FC = () => {
     };
   }, [isOpen]);
 
-  const handleSendMessage = async (messageText: string) => {
+ const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
     
-    // Clear choices from previous messages and add the new user message
-    const updatedHistory = [...messages.map(m => ({...m, choices: undefined})), newUserMessage];
-    setMessages(updatedHistory);
+    const updatedHistory = messages.map(m => ({ ...m, choices: undefined }));
+    const newHistory = [...updatedHistory, newUserMessage];
+    setMessages(newHistory);
     
     setInputValue('');
     setIsLoading(true);
 
     try {
-      const apiHistory = updatedHistory.slice(1).map(msg => ({ // Start from index 1 to exclude initial bot message
+      const apiHistory = newHistory.slice(1).map(msg => ({ 
           role: msg.sender === 'user' ? 'user' : 'bot',
           content: msg.text
       }));
       
       const response = await chatAssistant({ 
         query: messageText, 
-        history: apiHistory.slice(0, -1) // Exclude the last user message from history for the prompt
+        history: apiHistory.slice(0, -1)
       });
       
       let botReplies: Message[] = [];
@@ -157,18 +157,18 @@ const AiAssistant: FC = () => {
               currentMessages.pop(); 
               return [...currentMessages, ...botReplies];
           });
-          setMessages(prev => [...prev.slice(0, prev.length - 1), ...botReplies]);
       } else {
           setMessages(prev => [...prev, ...botReplies]);
       }
 
     } catch (error) {
-      console.error("AI Assistant Error:", error);
-      toast({
-        title: "Xatolik",
-        description: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
-        variant: "destructive"
-      });
+        console.error("AI Assistant Error:", error);
+        const errorMessage: Message = {
+            id: `error-${Date.now()}-${Math.random()}`,
+            text: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
+            sender: 'bot'
+        };
+        setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -301,5 +301,7 @@ const AiAssistant: FC = () => {
 };
 
 export default AiAssistant;
+
+    
 
     
