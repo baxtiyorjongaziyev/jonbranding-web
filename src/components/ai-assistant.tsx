@@ -26,7 +26,7 @@ const suggestionChips = [
 ];
 
 const renderTextWithLinks = (text: string) => {
-  const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\B\/[^\s,.]*[^\s,.'!?)])/ig;
+  const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\B\/[#\w\/-]*)/ig;
   return text.split(urlRegex).filter(Boolean).map((part, index) => {
     if (part.match(urlRegex)) {
       const isInternal = part.startsWith('/');
@@ -117,19 +117,22 @@ const AiAssistant: FC = () => {
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
     
-    const updatedMessages = messages.map(m => ({ ...m, choices: undefined }));
-    const newHistory = [...updatedMessages, newUserMessage];
-    
+    // 1. Remove choices from previous bot messages and add the new user message immediately.
+    const updatedHistoryForUI = messages.map(m => ({ ...m, choices: undefined }));
+    const newHistory = [...updatedHistoryForUI, newUserMessage];
     setMessages(newHistory);
+
     setInputValue('');
     setIsLoading(true);
 
     try {
+      // 2. Prepare history for the API call (without the latest user message in the history part)
       const apiHistory = newHistory.slice(0, -1).map(msg => ({
           role: msg.sender === 'user' ? 'user' : 'bot',
           content: msg.text
       }));
       
+      // 3. Call the assistant
       const response = await chatAssistant({ 
         query: messageText, 
         history: apiHistory
