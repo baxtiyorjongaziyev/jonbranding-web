@@ -15,6 +15,7 @@ import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '../ui/separator';
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 
 
 interface PackageBuilderProps {
@@ -251,6 +252,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                         {Object.entries(serviceCategories).map(([key, category]) => (
                             <div key={key}>
                                 <h3 className="text-2xl font-bold text-dark-blue mb-6">{category.title}</h3>
+                                {key === 'main' && (
+                                    <Alert className="mb-6 bg-sky-blue border-primary/20 text-dark-blue shadow-sm">
+                                        <div className="flex items-center gap-4">
+                                            <PercentCircle className="h-10 w-10 text-primary flex-shrink-0"/>
+                                            <div>
+                                                <AlertTitle className="font-extrabold text-lg text-primary">Paketli chegirma!</AlertTitle>
+                                                <AlertDescription className="text-dark-blue/80">
+                                                    Ushbu bo'limdan **3 yoki undan ko'p** xizmatni tanlang va umumiy summadan **-20% chegirmaga** ega bo'ling!
+                                                </AlertDescription>
+                                            </div>
+                                        </div>
+                                    </Alert>
+                                )}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                      {category.services.map((serviceId) => {
                                         if (!serviceDetails[serviceId]) return null;
@@ -275,14 +289,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                <p className="text-blue-200 text-sm mt-1">O'zingizga mos xizmatlarni tanlang.</p>
                             </CardHeader>
                             <CardContent className="p-0 mt-6">
-                                <div className="space-y-4 border-b border-white/20 pb-4 min-h-[100px]">
+                                <div className="space-y-3 min-h-[100px]">
                                     {selectedServiceKeys.length > 0 ? (
                                         selectedServiceKeys
                                             .filter(key => serviceDetails[key]?.price > 0 || serviceDetails[key]?.note?.includes('qo\'shiladi'))
                                             .map((key) => {
                                                 const service = serviceDetails[key];
                                                 return (
-                                                    <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
+                                                    <div key={key} className="flex justify-between items-center text-sm animate-fade-in group border-b border-white/10 pb-2 last:border-b-0">
                                                         <span className="text-white flex-1 pr-2">{service.label}</span>
                                                         <div className="flex items-center gap-2">
                                                             <span className="font-mono text-gray-300">
@@ -309,19 +323,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 </div>
                                 
                                 {total.base > 0 && (
-                                  <div className="py-4 space-y-3 border-b border-white/20">
-                                      <div className="flex justify-between items-center">
+                                  <div className="py-4 space-y-3 border-t border-white/20 mt-4">
+                                      <div className="flex justify-between items-center text-sm">
                                           <span className="text-blue-200">Xizmatlar jami:</span>
                                           <span className="font-mono">{total.base.toLocaleString('fr-FR')} so'm</span>
                                       </div>
                                       {total.surcharges.map(s => (
-                                          <div key={s.name} className="flex justify-between items-center text-amber-300">
+                                          <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
                                               <span>{s.name}</span>
                                               <span className="font-mono">+ {s.value.toLocaleString('fr-FR')} so'm</span>
                                           </div>
                                       ))}
                                        {total.discountApplied.map(d => (
-                                          <div key={d.name} className="flex justify-between items-center text-green-300">
+                                          <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
                                               <span>{d.name}</span>
                                               <span className="font-mono">- {d.value.toLocaleString('fr-FR')} so'm</span>
                                           </div>
@@ -330,8 +344,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 )}
                                 
                                 {total.savings > 0 && (
-                                    <div className="text-center py-4 border-b border-white/20 animate-fade-in">
-                                        <p className="text-sm text-blue-200">Umumiy tejagan mablag'ingiz</p>
+                                    <div className="text-center py-4 my-4 bg-green-500/10 rounded-lg animate-fade-in">
+                                        <p className="text-sm text-green-200">Umumiy tejagan mablag'ingiz</p>
                                         <p className="text-3xl font-bold text-green-300 animate-pulse">{formatPrice(total.savings)}</p>
                                     </div>
                                 )}
@@ -346,7 +360,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 )}
 
                                 <div className="mt-4 flex items-center justify-between bg-white/5 p-3 rounded-lg border border-white/10">
-                                   <Label htmlFor="upfront-payment" className="flex flex-col">
+                                   <Label htmlFor="upfront-payment" className="flex flex-col cursor-pointer">
                                         <span className="font-semibold text-white">Oldindan to'lov uchun -10%</span>
                                         <span className="text-xs text-blue-200">Loyiha uchun 100% oldindan to'lov qiling</span>
                                    </Label>
