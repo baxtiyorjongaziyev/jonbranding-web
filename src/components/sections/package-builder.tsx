@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { serviceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, packageDiscountThreshold, packageDiscount } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Shield, Banknote, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, Share2, ClipboardList, Type, Palette, Layers, BookMarked, Box, Repeat, Award } from 'lucide-react';
+import { Sparkles, Gift, Shield, Banknote, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, Share2, ClipboardList, Type, Palette, Layers, BookMarked, Box, Repeat, Award, ArrowDown, PercentCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
@@ -274,63 +274,76 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                <p className="text-blue-200 text-sm mt-1">O'zingizga mos xizmatlarni tanlang.</p>
                             </CardHeader>
                             <CardContent className="p-0 mt-6">
-                                <div className="space-y-3 pb-4 border-b border-white/20 min-h-[60px]">
-                                    {selectedServiceKeys.length > 0 ?
-                                     selectedServiceKeys.map((key) => {
-                                        const service = serviceDetails[key as keyof SelectedServices];
-                                        if (!service) return null;
-                                        if (service.price === 0 && !service.note?.includes('qo\'shiladi')) return null;
-                                        
-                                        return (
-                                            <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
-                                                <div className="flex items-center gap-2">
-                                                    <CheckCircle className="w-4 h-4 text-accent"/>
-                                                    <span className="text-white flex-1 pr-2">{service.label}</span>
-                                                </div>
-                                                <Button 
-                                                    variant="ghost" 
-                                                    size="icon" 
-                                                    className="h-7 w-7 ml-2 text-gray-400 hover:bg-red-500/20 hover:text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
-                                                    onClick={() => handleServiceToggle(key)}
-                                                >
-                                                    <Trash2 className="h-4 w-4"/>
-                                                </Button>
-                                            </div>
-                                        );
-                                    })
-                                    : <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
-                                        <ShoppingCart className="w-8 h-8"/>
-                                        <p>Xizmatlarni tanlang</p>
-                                    </div>
-                                   }
+                                <div className="space-y-3 pb-4 min-h-[120px]">
+                                    {selectedServiceKeys.length > 0 ? (
+                                        selectedServiceKeys
+                                            .filter(key => serviceDetails[key]?.price > 0 || serviceDetails[key]?.note?.includes('qo\'shiladi'))
+                                            .map((key) => {
+                                                const service = serviceDetails[key];
+                                                return (
+                                                    <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
+                                                        <span className="text-white flex-1 pr-2">{service.label}</span>
+                                                        <span className="font-mono text-gray-300">
+                                                            {service.price > 0 ? `+${service.price.toLocaleString('fr-FR')}` : service.note}
+                                                        </span>
+                                                        <Button 
+                                                            variant="ghost" 
+                                                            size="icon" 
+                                                            className="h-6 w-6 ml-2 text-gray-400 hover:bg-red-500/20 hover:text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+                                                            onClick={() => handleServiceToggle(key)}
+                                                        >
+                                                            <Trash2 className="h-4 w-4"/>
+                                                        </Button>
+                                                    </div>
+                                                );
+                                            })
+                                    ) : (
+                                        <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
+                                            <ShoppingCart className="w-8 h-8"/>
+                                            <p>Xizmatlarni tanlang</p>
+                                        </div>
+                                    )}
                                 </div>
 
-                                <div className="space-y-4 my-6">
-                                    <div className="flex justify-between items-start">
-                                        <span className="text-blue-200 text-base mt-1">Yakuniy narx:</span>
-                                        <div className="text-right flex flex-col items-end">
-                                            {total.savings > 0 && (
-                                                <p className="text-lg line-through text-gray-400">{formatPrice(total.base + total.surcharges.reduce((a,b) => a + b.value, 0))}</p>
-                                            )}
-                                            <p className="text-3xl font-extrabold text-white">{formatPrice(total.final)}</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2 justify-end">
-                                      {total.savings > 0 && (
-                                          <Badge variant="secondary" className="bg-green-500/20 text-green-300 border-none">
-                                              <Sparkles className="h-3 w-3 mr-1" />
-                                              Siz {formatPrice(total.savings)} tejadingiz!
-                                          </Badge>
-                                      )}
-                                      {total.bonus && (
-                                          <Badge variant="secondary" className="bg-accent/20 text-accent-light border-none">
-                                              <Gift className="h-3 w-3 mr-1" />
-                                              {total.bonus}
-                                          </Badge>
-                                      )}
-                                    </div>
+                                <div className="space-y-4 py-4 border-t border-b border-white/20">
+                                    {total.base > 0 && (
+                                        <>
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-blue-200">Xizmatlar jami:</span>
+                                                <span className="font-mono">{total.base.toLocaleString('fr-FR')} so'm</span>
+                                            </div>
+                                            {total.surcharges.map(s => (
+                                                <div key={s.name} className="flex justify-between items-center text-amber-300">
+                                                    <span>{s.name}</span>
+                                                    <span className="font-mono">+ {s.value.toLocaleString('fr-FR')} so'm</span>
+                                                </div>
+                                            ))}
+                                            {total.discountApplied.map(d => (
+                                                <div key={d} className="flex justify-between items-center text-green-300">
+                                                    <span>{d.name}</span>
+                                                    <span className="font-mono">- {d.value.toLocaleString('fr-FR')} so'm</span>
+                                                </div>
+                                            ))}
+                                        </>
+                                    )}
                                 </div>
+
+                                {total.savings > 0 && (
+                                    <div className="text-center py-4 animate-fade-in">
+                                        <p className="text-sm text-blue-200">Umumiy tejagan mablag'ingiz</p>
+                                        <p className="text-3xl font-bold text-green-300 animate-pulse">{formatPrice(total.savings)}</p>
+                                    </div>
+                                )}
                                 
+                                {total.bonus && (
+                                    <InfoCard
+                                        icon={Gift}
+                                        title="Sovg'a!"
+                                        description={total.bonus}
+                                        className="my-4 bg-accent/10 border-accent/20 text-accent-light"
+                                    />
+                                )}
+
                                 <div className="mt-4 flex items-center justify-between bg-white/5 p-3 rounded-lg border border-white/10">
                                    <Label htmlFor="upfront-payment" className="flex flex-col">
                                         <span className="font-semibold text-white">Oldindan to'lov uchun -10%</span>
@@ -343,6 +356,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                         aria-label="Oldindan to'lov chegirmasi"
                                         className="flex-shrink-0"
                                     />
+                                </div>
+
+                                <div className='mt-6 text-center'>
+                                     <p className="text-sm text-blue-200">Yakuniy narx:</p>
+                                     <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">{formatPrice(total.final)}</p>
                                 </div>
 
 
@@ -373,8 +391,3 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 };
 
 export default PackageBuilder;
-
-    
-    
-
-    

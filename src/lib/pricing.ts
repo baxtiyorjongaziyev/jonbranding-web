@@ -247,7 +247,7 @@ interface PackageSelections {
 export interface PriceDetails {
     base: number;
     final: number;
-    discountApplied: string[];
+    discountApplied: { name: string, value: number }[];
     savings: number;
     bonus: string | null;
     surcharges: { name: string, value: number }[];
@@ -292,18 +292,18 @@ export const calculatePackagePrice = (selections: PackageSelections): PriceDetai
     }
     
     let priceAfterDiscount = priceAfterSurcharges;
-    const discountsApplied: string[] = [];
+    const discountsApplied: { name: string, value: number }[] = [];
     
     if (mainServicesCount >= packageDiscountThreshold) {
-        const discountAmount = priceAfterDiscount * packageDiscount;
+        const discountAmount = priceAfterSurcharges * packageDiscount;
         priceAfterDiscount -= discountAmount;
-        discountsApplied.push(`Paketli chegirma (${mainServicesCount} ta xizmat) -${packageDiscount * 100}%`);
+        discountsApplied.push({ name: `Paketli chegirma (-20%)`, value: discountAmount });
     }
 
     if (wantsUpfrontPayment) {
         const discountAmount = priceAfterDiscount * upfrontDiscount;
         priceAfterDiscount -= discountAmount;
-        discountsApplied.push(`Oldindan to'lov uchun -${upfrontDiscount * 100}%`);
+        discountsApplied.push({ name: `Oldindan to'lov uchun (-10%)`, value: discountAmount });
     }
     
     const finalPrice = priceAfterDiscount;
@@ -355,7 +355,8 @@ export const generateSummary = (selections: PackageSelections) => {
     }
 
     if (discountApplied.length > 0) {
-        summary += `\nQo'llanilgan chegirmalar: ${discountApplied.join('; ')}`;
+        const discountText = discountApplied.map(d => `${d.name} (${formatPrice(d.value)})`).join('; ');
+        summary += `\nQo'llanilgan chegirmalar: ${discountText}`;
     }
 
     if (bonus) {
