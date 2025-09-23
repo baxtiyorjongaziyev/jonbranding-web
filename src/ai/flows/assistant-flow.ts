@@ -224,5 +224,3 @@ const assistantFlow = ai.defineFlow(
     };
   }
 );
-
-    
