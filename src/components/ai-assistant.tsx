@@ -116,10 +116,12 @@ const AiAssistant: FC = () => {
     if (!messageText.trim() || isLoading) return;
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
-    addMessage(newUserMessage);
 
-    // Remove choices from previous bot message before sending the new one
-    setMessages(prev => prev.map(m => m.sender === 'bot' ? { ...m, choices: undefined } : m));
+    // Add user message to the list and remove choices from previous bot message
+    setMessages(prev => 
+        prev.map(m => (m.sender === 'bot' ? { ...m, choices: undefined } : m))
+            .concat([newUserMessage])
+    );
     
     setInputValue('');
     setIsLoading(true);
@@ -128,7 +130,7 @@ const AiAssistant: FC = () => {
       // Pass the latest history to the flow
       const response = await chatAssistant({ 
         query: messageText, 
-        history: [...messages, newUserMessage].map(msg => ({
+        history: messages.map(msg => ({ // Send previous history
             role: msg.sender === 'user' ? 'user' : 'bot',
             content: msg.text
         }))
