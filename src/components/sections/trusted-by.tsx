@@ -4,6 +4,7 @@
 import React from 'react';
 import { type Brand } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import { staticBrands } from '@/lib/static-data';
 
 const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => {
     if (!brands || brands.length === 0) return null;
@@ -57,11 +58,8 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
     );
 };
 
-interface TrustedByProps {
-  brands: Brand[];
-}
-
-const TrustedBy: React.FC<TrustedByProps> = ({ brands }) => {
+const TrustedBy: React.FC = () => {
+    const brands = staticBrands;
     const numBrands = brands.length;
     const third = Math.ceil(numBrands / 3);
     const brandsTopRow = brands.slice(0, third);

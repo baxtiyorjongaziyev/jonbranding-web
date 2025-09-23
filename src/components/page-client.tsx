@@ -9,7 +9,6 @@ import TrustedBy from '@/components/sections/trusted-by';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import { Button } from '@/components/ui/button';
-import { type Brand } from '@/lib/types';
 import { motion } from 'framer-motion';
 import Stats from '@/components/sections/stats';
 import { useExitIntent } from '@/hooks/use-exit-intent';
@@ -99,9 +98,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
 };
 
 
-interface PageClientProps {
-  brands: Brand[];
-}
+interface PageClientProps {}
 
 const AnimatedSection: FC<{children: ReactNode}> = ({ children }) => {
     return (
@@ -117,7 +114,7 @@ const AnimatedSection: FC<{children: ReactNode}> = ({ children }) => {
 };
 
 
-const PageClient: FC<PageClientProps> = ({ brands }) => {
+const PageClient: FC<PageClientProps> = () => {
     const [isClient, setIsClient] = useState(false);
     const { tg } = useTelegram();
 
@@ -164,7 +161,7 @@ const PageClient: FC<PageClientProps> = ({ brands }) => {
             <main>
                 <AnimatedSection><Hero onPrimaryClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Stats /></AnimatedSection>
-                <AnimatedSection><TrustedBy brands={brands} /></AnimatedSection>
+                <AnimatedSection><TrustedBy /></AnimatedSection>
                 <AnimatedSection><TargetAudience /></AnimatedSection>
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Testimonials /></AnimatedSection>
