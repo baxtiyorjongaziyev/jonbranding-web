@@ -160,6 +160,7 @@ const AiAssistant: FC = () => {
             description: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
             variant: 'destructive',
         });
+        // Remove the user's message on error to allow them to retry.
         setMessages(messages.map(m => ({ ...m, choices: undefined })));
     } finally {
       setIsLoading(false);
@@ -177,7 +178,11 @@ const AiAssistant: FC = () => {
 
   return (
     <>
-      <div className={cn("fixed bottom-6 right-6 z-50 transition-transform duration-300", isOpen ? 'scale-0' : 'scale-100')}>
+      <div className={cn(
+        "fixed bottom-6 right-6 z-50 transition-all duration-300", 
+        "pb-[76px] md:pb-0", // Adjust position to avoid overlap with mobile CTA bar
+        isOpen ? 'scale-0' : 'scale-100'
+      )}>
         <Button
           onClick={() => setIsOpen(true)}
           size="icon"
