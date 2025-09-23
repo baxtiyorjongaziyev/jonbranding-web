@@ -50,11 +50,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
-  const paths = getAllPostSlugs();
-  return paths.map(p => ({ slug: p.slug }));
-}
-
 const generateJsonLd = (post: BlogPost) => {
   return {
     '@context': 'https://schema.org',
