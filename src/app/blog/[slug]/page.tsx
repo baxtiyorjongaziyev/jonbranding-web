@@ -10,8 +10,8 @@ type Props = {
   params: { slug: string };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostData(params.slug);
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const post = await getPostData(props.params.slug);
 
   if (!post) {
     return {
@@ -73,8 +73,8 @@ const generateJsonLd = (post: BlogPost) => {
   };
 };
 
-const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
-  const post = await getPostData(params.slug);
+const BlogPostPage = async (props: { params: { slug: string } }) => {
+  const post = await getPostData(props.params.slug);
 
   if (!post) {
     notFound();
