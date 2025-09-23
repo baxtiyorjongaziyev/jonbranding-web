@@ -3,6 +3,8 @@ import { getPostData, getAllPostSlugs } from '@/lib/blog-posts';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import BlogPostClient from '@/components/blog-post-client';
+import Script from 'next/script';
+import { BlogPost } from '@/lib/types';
 
 type Props = {
   params: { slug: string };
@@ -53,14 +55,48 @@ export async function generateStaticParams() {
   return paths.map(p => ({ slug: p.slug }));
 }
 
+const generateJsonLd = (post: BlogPost) => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    image: post.image,
+    datePublished: new Date(post.date).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: post.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Jon.Branding',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
+      },
+    },
+  };
+};
+
 const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
   const post = await getPostData(params.slug);
 
   if (!post) {
     notFound();
   }
+  
+  const jsonLd = generateJsonLd(post);
 
-  return <BlogPostClient post={post} />;
+  return (
+    <>
+      <Script
+        id="blog-post-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BlogPostClient post={post} />
+    </>
+  );
 };
 
 export default BlogPostPage;
