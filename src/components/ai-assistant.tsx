@@ -107,65 +107,69 @@ const AiAssistant: FC = () => {
     };
   }, [isOpen]);
 
-  const addMessage = (message: Message) => {
-    setMessages(prev => [...prev, message]);
-  }
-
-
   const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
-    
-    // 1. Remove choices from previous bot messages and add the new user message immediately.
-    const updatedHistoryForUI = messages.map(m => ({ ...m, choices: undefined }));
-    const newHistory = [...updatedHistoryForUI, newUserMessage];
-    setMessages(newHistory);
 
+    // 1. Immediately update the UI with the new user message and remove old choices.
+    const newHistoryForUI = [...messages.map(m => ({ ...m, choices: undefined })), newUserMessage];
+    setMessages(newHistoryForUI);
     setInputValue('');
     setIsLoading(true);
 
     try {
-      // 2. Prepare history for the API call (without the latest user message in the history part)
-      const apiHistory = newHistory.slice(0, -1).map(msg => ({
+      // 2. Prepare history for the API call.
+      const apiHistory = newHistoryForUI.slice(0, -1).map(msg => ({
           role: msg.sender === 'user' ? 'user' : 'bot',
           content: msg.text
       }));
       
-      // 3. Call the assistant
+      // 3. Call the assistant.
       const response = await chatAssistant({ 
         query: messageText, 
         history: apiHistory
       });
       
-      setIsLoading(false); 
+      let finalBotMessages: Message[] = [];
 
       if (response.acknowledgement) {
-         await new Promise(resolve => setTimeout(resolve, 500)); 
+         // Create acknowledgement message
          const ackMessage: Message = {
             id: (Date.now() + 1).toString(),
             text: response.acknowledgement,
             sender: 'bot'
          };
-         addMessage(ackMessage);
-         setIsLoading(true); 
-         await new Promise(resolve => setTimeout(resolve, 800));
-         setIsLoading(false);
+         // To show it incrementally, we can update state here
+         setMessages(currentMessages => [...currentMessages, ackMessage]);
+         await new Promise(resolve => setTimeout(resolve, 800)); // wait for ack to be visible
+         finalBotMessages.push(ackMessage); // it's already in state, but keep track
       }
       
-      const botMessage: Message = { 
+      const botReplyMessage: Message = { 
           id: (Date.now() + 2).toString(), 
           text: response.reply, 
           sender: 'bot',
           choices: response.choices 
       };
-      addMessage(botMessage);
+      finalBotMessages.push(botReplyMessage);
+
+      // 4. Update state with the final bot reply/choices
+      setMessages(currentMessages => {
+          // If there was an ack, it's already in the state. Just add the final reply.
+          // Otherwise, add the reply.
+          // This logic ensures we don't add messages twice.
+          const currentWithoutAck = currentMessages.filter(m => m.id !== (Date.now() + 1).toString());
+          if (response.acknowledgement) {
+             return [...currentWithoutAck, finalBotMessages[0], finalBotMessages[1]];
+          }
+          return [...currentWithoutAck, finalBotMessages[0]];
+      });
 
     } catch (error) {
       console.error("AI Assistant Error:", error);
-      setIsLoading(false);
       const errorMessage: Message = { id: 'error', text: "Kechirasiz, hozirda javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.", sender: 'bot' };
-      addMessage(errorMessage);
+      setMessages(currentMessages => [...currentMessages, errorMessage]);
     } finally {
       setIsLoading(false);
     }
