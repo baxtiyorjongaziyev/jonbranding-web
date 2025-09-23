@@ -1,16 +1,15 @@
 
-import { blogPosts } from '@/lib/blog-data';
+import { getSortedPostsData } from '@/lib/blog-posts';
 import { type BlogPost } from '@/lib/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { uz } from 'date-fns/locale';
 
 const BlogPage = () => {
-  const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const sortedPosts = getSortedPostsData();
 
   return (
     <main className="flex-grow bg-secondary/50">
@@ -26,7 +25,7 @@ const BlogPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sortedPosts.map((post: BlogPost) => (
+            {sortedPosts.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
                 <Card className="h-full flex flex-col overflow-hidden shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
                   <div className="relative w-full h-56 flex-shrink-0">

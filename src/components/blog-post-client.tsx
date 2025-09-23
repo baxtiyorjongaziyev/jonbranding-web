@@ -8,84 +8,6 @@ import { uz } from 'date-fns/locale';
 import CtaBlock from '@/components/sections/cta-block';
 import React from 'react';
 
-// Renders simple markdown-like syntax to HTML elements for both bold and italic
-const renderTextWithFormatting = (text: string) => {
-    // Regex to find **bold**, *italic*, or plain text segments.
-    // It will match markdown parts and capture the content, or match a sequence of non-markdown characters.
-    const markdownRegex = /(\*\*(.*?)\*\*)|(\*(.*?)\*)|([^*]+)/g;
-    const matches = Array.from(text.matchAll(markdownRegex));
-
-    return matches.map((match, index) => {
-        const [fullMatch, boldDelim, boldText, italicDelim, italicText, plainText] = match;
-
-        if (boldText) {
-            return <strong key={index}>{boldText}</strong>;
-        }
-        if (italicText) {
-            return <em key={index}>{italicText}</em>;
-        }
-        if (plainText) {
-            return <React.Fragment key={index}>{plainText}</React.Fragment>;
-        }
-        return null;
-    });
-};
-
-
-// Markdown-like content to HTML
-const renderContent = (content: string) => {
-    const lines = content.split('\n');
-    const elements: React.ReactNode[] = [];
-    let listBuffer: { type: 'ul' | 'ol'; items: React.ReactNode[] } | null = null;
-
-    const flushListBuffer = () => {
-        if (listBuffer) {
-            const ListComponent = listBuffer.type;
-            const key = `${ListComponent}-${elements.length}`;
-            elements.push(
-                <ListComponent key={key} className={`list-${listBuffer.type === 'ul' ? 'disc' : 'decimal'} pl-5 my-6 space-y-2`}>
-                    {listBuffer.items}
-                </ListComponent>
-            );
-            listBuffer = null;
-        }
-    };
-
-    lines.forEach((line, i) => {
-        const trimmedLine = line.trim();
-
-        if (trimmedLine.startsWith('## ')) {
-            flushListBuffer();
-            elements.push(<h2 key={i} className="text-2xl sm:text-3xl font-bold text-dark-blue mt-8 mb-4">{renderTextWithFormatting(trimmedLine.substring(3))}</h2>);
-        } else if (trimmedLine.startsWith('> ')) {
-            flushListBuffer();
-            elements.push(
-                <blockquote key={i} className="border-l-4 border-primary pl-4 italic text-gray-700 my-6">
-                    {renderTextWithFormatting(trimmedLine.substring(2))}
-                </blockquote>
-            );
-        } else if (trimmedLine.startsWith('* ')) {
-            if (listBuffer?.type !== 'ul') flushListBuffer();
-            if (!listBuffer) listBuffer = { type: 'ul', items: [] };
-            listBuffer.items.push(<li key={i} className="text-lg text-gray-800 leading-relaxed">{renderTextWithFormatting(trimmedLine.substring(2))}</li>);
-        } else if (trimmedLine.match(/^\d+\.\s/)) {
-            if (listBuffer?.type !== 'ol') flushListBuffer();
-            if (!listBuffer) listBuffer = { type: 'ol', items: [] };
-            listBuffer.items.push(<li key={i} className="text-lg text-gray-800 leading-relaxed">{renderTextWithFormatting(trimmedLine.substring(trimmedLine.indexOf(' ') + 1))}</li>);
-        } else if (trimmedLine === '') {
-            flushListBuffer();
-        } else {
-            flushListBuffer();
-            elements.push(<p key={i} className="text-lg text-gray-800 leading-relaxed mb-4">{renderTextWithFormatting(trimmedLine)}</p>);
-        }
-    });
-
-    flushListBuffer(); // Flush any remaining list items at the end
-
-    return elements;
-};
-
-
 const BlogPostClient = ({ post }: { post: BlogPost }) => {
   
   const handleOpenModal = () => {
@@ -127,7 +49,7 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
              <p className="text-xl text-gray-700 font-semibold leading-relaxed mb-8 border-l-4 border-primary pl-4">
                 {post.description}
             </p>
-            {renderContent(post.content)}
+            <div dangerouslySetInnerHTML={{ __html: post.htmlContent || '' }} />
           </div>
         </div>
       </article>
