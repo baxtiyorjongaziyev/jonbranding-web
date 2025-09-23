@@ -1,13 +1,19 @@
+
 'use client';
 
 import { useEffect } from 'react';
 
-const SESSION_STORAGE_KEY = 'exit_intent_shown';
+const LOCAL_STORAGE_KEY = 'exit_intent_shown_at';
+const COOLDOWN_PERIOD_MS = 7 * 24 * 60 * 60 * 1000; // 7 kun
 
 export const useExitIntent = (onExitIntent: () => void) => {
   useEffect(() => {
-    if (sessionStorage.getItem(SESSION_STORAGE_KEY)) {
-      return;
+    const lastShownString = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (lastShownString) {
+        const lastShownTime = new Date(lastShownString).getTime();
+        if (Date.now() - lastShownTime < COOLDOWN_PERIOD_MS) {
+            return; // Cooldown davrida bo'lsa, hech narsa qilmaymiz
+        }
     }
 
     const handleMouseLeave = (e: MouseEvent) => {
@@ -17,11 +23,17 @@ export const useExitIntent = (onExitIntent: () => void) => {
     };
     
     const trigger = () => {
-        if (!sessionStorage.getItem(SESSION_STORAGE_KEY)) {
-            onExitIntent();
-            sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
-            removeListeners();
+        const lastShownString = localStorage.getItem(LOCAL_STORAGE_KEY);
+         if (lastShownString) {
+            const lastShownTime = new Date(lastShownString).getTime();
+            if (Date.now() - lastShownTime < COOLDOWN_PERIOD_MS) {
+                return;
+            }
         }
+        
+        onExitIntent();
+        localStorage.setItem(LOCAL_STORAGE_KEY, new Date().toISOString());
+        removeListeners();
     };
 
     const removeListeners = () => {
