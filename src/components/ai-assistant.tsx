@@ -117,38 +117,36 @@ const AiAssistant: FC = () => {
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
     
-    // Add user message to the list and remove choices from previous bot message
-    setMessages(prev => 
-        prev.map(m => ({ ...m, choices: undefined })).concat([newUserMessage])
-    );
+    const updatedMessages = messages.map(m => ({ ...m, choices: undefined }));
+    const newHistory = [...updatedMessages, newUserMessage];
     
+    setMessages(newHistory);
     setInputValue('');
     setIsLoading(true);
 
     try {
-      // Pass the latest history to the flow (including the new user message)
-      const currentHistory = messages.map(msg => ({
+      const apiHistory = newHistory.slice(0, -1).map(msg => ({
           role: msg.sender === 'user' ? 'user' : 'bot',
           content: msg.text
       }));
       
       const response = await chatAssistant({ 
         query: messageText, 
-        history: currentHistory
+        history: apiHistory
       });
       
-      setIsLoading(false); // Turn off loader before showing acknowledgment
+      setIsLoading(false); 
 
       if (response.acknowledgement) {
-         await new Promise(resolve => setTimeout(resolve, 500)); // Short pause
+         await new Promise(resolve => setTimeout(resolve, 500)); 
          const ackMessage: Message = {
             id: (Date.now() + 1).toString(),
             text: response.acknowledgement,
             sender: 'bot'
          };
          addMessage(ackMessage);
-         setIsLoading(true); // Show loader again while "thinking" of the next question
-         await new Promise(resolve => setTimeout(resolve, 800)); // "Thinking" time
+         setIsLoading(true); 
+         await new Promise(resolve => setTimeout(resolve, 800));
          setIsLoading(false);
       }
       
