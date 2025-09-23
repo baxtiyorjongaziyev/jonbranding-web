@@ -253,17 +253,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                             <div key={key}>
                                 <h3 className="text-2xl font-bold text-dark-blue mb-6">{category.title}</h3>
                                 {key === 'main' && (
-                                    <Alert className="mb-6 bg-primary/10 border-primary/20 text-dark-blue shadow-sm">
+                                    <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
                                         <div className="flex items-center gap-4">
-                                            <PercentCircle className="h-10 w-10 text-primary flex-shrink-0"/>
+                                            <div className="bg-white/10 p-3 rounded-full">
+                                                <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
+                                            </div>
                                             <div>
-                                                <AlertTitle className="font-extrabold text-lg text-primary">Paketli chegirma!</AlertTitle>
-                                                <AlertDescription className="text-dark-blue/80">
+                                                <h4 className="font-extrabold text-lg text-white">Paketli chegirma!</h4>
+                                                <p className="text-blue-200">
                                                     Ushbu bo'limdan <strong>3 yoki undan ko'p</strong> xizmatni tanlang va umumiy summadan <strong>-20% chegirmaga</strong> ega bo'ling!
-                                                </AlertDescription>
+                                                </p>
                                             </div>
                                         </div>
-                                    </Alert>
+                                    </div>
                                 )}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                      {category.services.map((serviceId) => {
@@ -289,7 +291,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                <p className="text-blue-200 text-sm mt-1">O'zingizga mos xizmatlarni tanlang.</p>
                             </CardHeader>
                             <CardContent className="p-0 mt-6">
-                                <div className="space-y-4 min-h-[100px] border-b border-white/10 pb-4">
+                                <div className="space-y-3 min-h-[100px] border-b border-white/10 pb-4 mb-4">
                                     {selectedServiceKeys.length > 0 ? (
                                         selectedServiceKeys
                                             .filter(key => serviceDetails[key]?.price > 0 || serviceDetails[key]?.note?.includes('qo\'shiladi'))
@@ -323,24 +325,24 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 </div>
                                 
                                 {total.base > 0 && (
-                                  <div className="py-4 space-y-3 border-b border-white/10">
-                                      <div className="flex justify-between items-center text-sm font-medium">
-                                          <span className="text-blue-200">Xizmatlar jami:</span>
-                                          <span className="font-mono">{total.base.toLocaleString('fr-FR')} so'm</span>
-                                      </div>
-                                      {total.surcharges.map(s => (
-                                          <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
-                                              <span>{s.name}</span>
-                                              <span className="font-mono">+ {s.value.toLocaleString('fr-FR')} so'm</span>
-                                          </div>
-                                      ))}
-                                       {total.discountApplied.map(d => (
-                                          <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
-                                              <span>{d.name}</span>
-                                              <span className="font-mono">- {d.value.toLocaleString('fr-FR')} so'm</span>
-                                          </div>
-                                      ))}
-                                  </div>
+                                    <div className="py-4 space-y-3 border-b border-white/10 mb-4">
+                                        <div className="flex justify-between items-center text-sm font-medium">
+                                            <span className="text-blue-200">Xizmatlar jami:</span>
+                                            <span className="font-mono">{total.base.toLocaleString('fr-FR')} so'm</span>
+                                        </div>
+                                        {total.surcharges.map(s => (
+                                            <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
+                                                <span>{s.name}</span>
+                                                <span className="font-mono">+ {s.value.toLocaleString('fr-FR')} so'm</span>
+                                            </div>
+                                        ))}
+                                        {total.discountApplied.map(d => (
+                                            <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
+                                                <span>{d.name}</span>
+                                                <span className="font-mono">- {d.value.toLocaleString('fr-FR')} so'm</span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 )}
                                 
                                 {total.savings > 0 && (
