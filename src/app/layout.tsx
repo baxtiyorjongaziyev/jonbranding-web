@@ -107,7 +107,12 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         <meta name="twitter:title" content={APP_NAME} />
         <meta name="twitter:description" content={APP_DESCRIPTION} />
         <meta name="twitter:image" content={OG_IMAGE_URL} />
-
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </Head>
+      <body className="font-body bg-white antialiased">
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <Script
             id="app-config"
@@ -146,13 +151,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
           `,
           }}
         />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </Head>
-      <body className="font-body bg-white antialiased">
         <div className="flex min-h-screen flex-col bg-secondary/50">
            <Header />
             {children}
