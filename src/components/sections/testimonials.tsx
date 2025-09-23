@@ -92,6 +92,10 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
 
     const [playVideo, setPlayVideo] = useState(false);
 
+    if (!testimonials || testimonials.length === 0) {
+      return null;
+    }
+
     const videoTestimonial = testimonials.find(t => t.videoUrl);
     const otherTestimonials = testimonials.filter(t => !t.videoUrl);
 
