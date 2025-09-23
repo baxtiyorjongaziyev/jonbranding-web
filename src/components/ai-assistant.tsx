@@ -114,6 +114,7 @@ const AiAssistant: FC = () => {
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
     
+    // Clear choices from previous messages and add the new user message
     const updatedHistory = messages.map(m => ({ ...m, choices: undefined }));
     const newHistory = [...updatedHistory, newUserMessage];
     setMessages(newHistory);
@@ -129,37 +130,23 @@ const AiAssistant: FC = () => {
       
       const response = await chatAssistant({ 
         query: messageText, 
-        history: apiHistory.slice(0, -1)
+        history: apiHistory.slice(0, -1) // Send history *before* the user's latest message
       });
       
-      let botReplies: Message[] = [];
-
+      let combinedReply = '';
       if (response.acknowledgement) {
-         botReplies.push({
-            id: `bot-${Date.now()}-ack`,
-            text: response.acknowledgement,
-            sender: 'bot'
-         });
+        combinedReply += `${response.acknowledgement}\n\n`;
       }
+      combinedReply += response.reply;
       
-      botReplies.push({ 
-          id: `bot-${Date.now()}-reply`, 
-          text: response.reply, 
-          sender: 'bot',
-          choices: response.choices 
-      });
+      const botMessage: Message = {
+         id: `bot-${Date.now()}`,
+         text: combinedReply.trim(),
+         sender: 'bot',
+         choices: response.choices
+      };
 
-      if (botReplies.length > 1) {
-          setMessages(prev => [...prev, botReplies[0]]);
-          await new Promise(resolve => setTimeout(resolve, 800));
-          setMessages(prev => {
-              const currentMessages = [...prev];
-              currentMessages.pop(); 
-              return [...currentMessages, ...botReplies];
-          });
-      } else {
-          setMessages(prev => [...prev, ...botReplies]);
-      }
+      setMessages(prev => [...prev, botMessage]);
 
     } catch (error) {
         console.error("AI Assistant Error:", error);
@@ -168,6 +155,8 @@ const AiAssistant: FC = () => {
             description: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
             variant: 'destructive',
         });
+        // Remove the user's message if the API call fails to prevent confusion
+        setMessages(updatedHistory);
     } finally {
       setIsLoading(false);
     }
@@ -288,7 +277,7 @@ const AiAssistant: FC = () => {
                 autoComplete="off"
                 disabled={isLoading}
               />
-              <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()}>
+              <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()} className="rounded-full">
                 <Send className="w-5 h-5" />
               </Button>
             </form>
@@ -300,7 +289,3 @@ const AiAssistant: FC = () => {
 };
 
 export default AiAssistant;
-
-    
-
-    
