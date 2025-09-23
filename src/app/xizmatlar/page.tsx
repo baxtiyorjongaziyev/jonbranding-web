@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import PackageBuilder from '@/components/sections/package-builder';
 import { Skeleton } from '@/components/ui/skeleton';
 import Head from 'next/head';
+import MobileCtaBar from '@/components/sections/mobile-cta-bar';
 
 
 const Comparison = dynamic(() => import('@/components/sections/comparison'), {
@@ -36,6 +37,7 @@ const XizmatlarPage = () => {
                 <Offer onCTAClick={handleOpenModal} />
                 <QueueStatus onCtaClick={handleOpenModal} />
             </main>
+            <MobileCtaBar onOpenModal={handleOpenModal} />
         </>
     );
 };
