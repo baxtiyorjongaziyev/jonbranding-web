@@ -72,7 +72,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
             </div>
             <div className="mt-6 flex items-center gap-4">
                 <Avatar>
-                    <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
+                    <AvatarImage src={testimonial.image} alt={testimonial.name} />
                     <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                 </Avatar>
                 <div>
@@ -121,7 +121,7 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                             </blockquote>
                             <div className="mt-2 flex items-center gap-4">
                                 <Avatar>
-                                    <AvatarImage src={videoTestimonial.image} alt={videoTestimonial.name} data-ai-hint={videoTestimonial.imageHint} />
+                                    <AvatarImage src={videoTestimonial.image} alt={videoTestimonial.name} />
                                     <AvatarFallback>{videoTestimonial.avatar}</AvatarFallback>
                                 </Avatar>
                                 <div>
