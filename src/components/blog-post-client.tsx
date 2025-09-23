@@ -7,6 +7,22 @@ import { uz } from 'date-fns/locale';
 import CtaBlock from '@/components/sections/cta-block';
 import React from 'react';
 
+// Renders simple markdown-like syntax to HTML elements
+const renderTextWithFormatting = (text: string) => {
+    // Regex to find **bold** text
+    const boldRegex = /\*\*(.*?)\*\*/g;
+    const parts = text.split(boldRegex);
+
+    return parts.map((part, index) => {
+        // Every second part is the captured group (the bold text)
+        if (index % 2 === 1) {
+            return <strong key={index}>{part}</strong>;
+        }
+        return part;
+    });
+};
+
+
 // Markdown-like content to HTML
 const renderContent = (content: string) => {
     const lines = content.split('\n');
@@ -31,27 +47,27 @@ const renderContent = (content: string) => {
 
         if (trimmedLine.startsWith('## ')) {
             flushListBuffer();
-            elements.push(<h2 key={i} className="text-2xl sm:text-3xl font-bold text-dark-blue mt-8 mb-4">{trimmedLine.substring(3)}</h2>);
+            elements.push(<h2 key={i} className="text-2xl sm:text-3xl font-bold text-dark-blue mt-8 mb-4">{renderTextWithFormatting(trimmedLine.substring(3))}</h2>);
         } else if (trimmedLine.startsWith('> ')) {
             flushListBuffer();
             elements.push(
                 <blockquote key={i} className="border-l-4 border-primary pl-4 italic text-gray-700 my-6">
-                    {trimmedLine.substring(2)}
+                    {renderTextWithFormatting(trimmedLine.substring(2))}
                 </blockquote>
             );
         } else if (trimmedLine.startsWith('* ')) {
             if (listBuffer?.type !== 'ul') flushListBuffer();
             if (!listBuffer) listBuffer = { type: 'ul', items: [] };
-            listBuffer.items.push(<li key={i} className="text-lg text-gray-800 leading-relaxed">{trimmedLine.substring(2)}</li>);
+            listBuffer.items.push(<li key={i} className="text-lg text-gray-800 leading-relaxed">{renderTextWithFormatting(trimmedLine.substring(2))}</li>);
         } else if (trimmedLine.match(/^\d+\.\s/)) {
             if (listBuffer?.type !== 'ol') flushListBuffer();
             if (!listBuffer) listBuffer = { type: 'ol', items: [] };
-            listBuffer.items.push(<li key={i} className="text-lg text-gray-800 leading-relaxed">{trimmedLine.substring(trimmedLine.indexOf(' ') + 1)}</li>);
+            listBuffer.items.push(<li key={i} className="text-lg text-gray-800 leading-relaxed">{renderTextWithFormatting(trimmedLine.substring(trimmedLine.indexOf(' ') + 1))}</li>);
         } else if (trimmedLine === '') {
             flushListBuffer();
         } else {
             flushListBuffer();
-            elements.push(<p key={i} className="text-lg text-gray-800 leading-relaxed mb-4">{trimmedLine}</p>);
+            elements.push(<p key={i} className="text-lg text-gray-800 leading-relaxed mb-4">{renderTextWithFormatting(trimmedLine)}</p>);
         }
     });
 
