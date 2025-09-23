@@ -1,5 +1,5 @@
 ---
-title: "small business logo"
+title: "Kichik biznes uchun logotip yaratishda 5 ta asosiy xato"
 description: "Logotip — bu biznesning yuzi. Kichik biznes egalari ko'pincha qanday xatolarga yo'l qo'yishadi va ularni qanday qilib chetlab o'tish mumkin? Ushbu maqolada biz amaliy maslahatlar beramiz."
 date: "2024-08-05"
 author: "Baxtiyorjon Gaziyev"
