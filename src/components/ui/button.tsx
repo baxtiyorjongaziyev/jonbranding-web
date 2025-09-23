@@ -13,7 +13,7 @@ const buttonVariants = cva(
         default:
           "bg-gradient-to-r from-ocean-blue to-primary text-primary-foreground hover:from-ocean-blue/90 hover:to-primary/90 hover:shadow-lg transform hover:-translate-y-px btn-animated-border",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-full",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
           "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
         secondary:
@@ -22,9 +22,9 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-10 px-4 py-2 rounded-md",
-        sm: "h-9 px-3 rounded-md",
-        lg: "h-11 px-8 rounded-md",
+        default: "h-10 px-4 py-2 rounded-full",
+        sm: "h-9 px-3 rounded-full",
+        lg: "h-11 px-8 rounded-full",
         icon: "h-10 w-10 rounded-full",
       },
     },
