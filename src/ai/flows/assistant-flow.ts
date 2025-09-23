@@ -196,7 +196,7 @@ const assistantFlow = ai.defineFlow(
 
     const response = await ai.generate({
       prompt: input.query,
-      model: ai.model('googleai/gemini-2.5-flash'),
+      model: 'googleai/gemini-2.5-flash',
       history,
       tools: [sendLeadToTelegram],
       output: {
@@ -211,7 +211,7 @@ const assistantFlow = ai.defineFlow(
       }
     });
 
-    const output = response.output();
+    const output = response.output;
     if (output) {
       return output;
     }
