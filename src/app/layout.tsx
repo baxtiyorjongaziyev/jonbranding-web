@@ -10,10 +10,12 @@ import Head from 'next/head';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Poppins } from 'next/font/google';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import AiAssistant from '@/components/ai-assistant';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { pageview } from '@/lib/gtag';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'));
 
@@ -42,6 +44,20 @@ const jsonLd = {
   telephone: '+998336450097',
   url: 'https://jonbranding.uz',
 };
+
+// This component handles the page view tracking
+function AnalyticsTracker() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const url = pathname + searchParams.toString();
+    pageview(url);
+  }, [pathname, searchParams]);
+
+  return null;
+}
+
 
 const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -161,6 +177,9 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 
       </Head>
       <body className="font-body bg-white antialiased">
+        <Suspense fallback={null}>
+          <AnalyticsTracker />
+        </Suspense>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         
         {/* Google Analytics */}
