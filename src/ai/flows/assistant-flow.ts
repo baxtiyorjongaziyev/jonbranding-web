@@ -15,51 +15,71 @@ const MessageSchema = z.object({
 
 // AI'dan keladigan javob sxemasi
 const AssistantOutputSchema = z.object({
-  acknowledgement: z.string().optional().describe("Foydalanuvchi javobiga qisqa tasdiq. Masalan: 'Tushunarli', 'Ajoyib!'. Bu maydon bo'sh bo'lishi ham mumkin."),
+  acknowledgement: z
+    .string()
+    .optional()
+    .describe(
+      "Foydalanuvchi javobiga qisqa tasdiq. Masalan: 'Tushunarli', 'Ajoyib!'. Bu maydon bo'sh bo'lishi ham mumkin."
+    ),
   reply: z.string().describe("AI assistentning asosiy javobi yoki keyingi savoli."),
-  choices: z.array(z.string()).nullable().optional().describe("Agar foydalanuvchiga tanlov taklif qilinsa, shu variantlar ro'yxati."),
+  choices: z
+    .array(z.string())
+    .nullable()
+    .optional()
+    .describe(
+      "Agar foydalanuvchiga tanlov taklif qilinsa, shu variantlar ro'yxati."
+    ),
 });
 export type AssistantOutput = z.infer<typeof AssistantOutputSchema>;
 
 // Foydalanuvchidan keladigan so'rov sxemasi
 const AssistantInputSchema = z.object({
   query: z.string().describe('Foydalanuvchining oxirgi savoli yoki xabari.'),
-  history: z.array(MessageSchema).optional().describe("Oldingi suhbat tarixi."),
+  history: z.array(MessageSchema).optional().describe('Oldingi suhbat tarixi.'),
 });
 export type AssistantInput = z.infer<typeof AssistantInputSchema>;
 
-
 // 1. Tool uchun Zod schema'sini kengaytiramiz
 const SendLeadInputSchema = z.object({
-    fullName: z.string().describe("Mijozning to'liq ismi."),
-    phone: z.string().optional().describe("Mijozning telefon raqami."),
-    telegram: z.string().optional().describe("Mijozning Telegram niki."),
-    companyName: z.string().optional().describe("Mijozning kompaniyasi yoki loyiha nomi."),
-    goal: z.string().optional().describe("Mijozning asosiy maqsadi."),
-    budget: z.string().optional().describe("Mijozning taxminiy byudjeti."),
-    location: z.string().optional().describe("Mijozning joylashuvi."),
-    notes: z.string().describe("Suhbatdan olingan barcha muhim ma'lumotlar, mijozning ehtiyojlari va muammolari haqidagi qisqacha xulosa."),
+  fullName: z.string().describe("Mijozning to'liq ismi."),
+  phone: z.string().optional().describe("Mijozning telefon raqami."),
+  telegram: z.string().optional().describe("Mijozning Telegram niki."),
+  companyName: z
+    .string()
+    .optional()
+    .describe("Mijozning kompaniyasi yoki loyiha nomi."),
+  goal: z.string().optional().describe("Mijozning asosiy maqsadi."),
+  budget: z.string().optional().describe("Mijozning taxminiy byudjeti."),
+  location: z.string().optional().describe("Mijozning joylashuvi."),
+  notes: z
+    .string()
+    .describe(
+      "Suhbatdan olingan barcha muhim ma'lumotlar, mijozning ehtiyojlari va muammolari haqidagi qisqacha xulosa."
+    ),
 });
 
 // 2. Telegramga ma'lumot yuboradigan Tool'ni yangilaymiz
 const sendLeadToTelegram = ai.defineTool(
-    {
-        name: 'sendLeadToTelegram',
-        description: "Mijoz haqida BARCHA kerakli ma'lumotlar (ismi, kompaniyasi, maqsadi, byudjeti, joylashuvi, aloqa ma'lumoti) to'planganda, faqat o'shanda bu tool'ni ishlat. Bu ma'lumotni menejerga yuboradi.",
-        inputSchema: SendLeadInputSchema,
-        outputSchema: z.string(),
-    },
-    async (input) => {
-       try {
-            const botToken = process.env.TELEGRAM_BOT_TOKEN;
-            const chatId = process.env.TELEGRAM_CHAT_ID;
+  {
+    name: 'sendLeadToTelegram',
+    description:
+      "Mijoz haqida BARCHA kerakli ma'lumotlar (ismi, kompaniyasi, maqsadi, byudjeti, joylashuvi, aloqa ma'lumoti) to'planganda, faqat o'shanda bu tool'ni ishlat. Bu ma'lumotni menejerga yuboradi.",
+    inputSchema: SendLeadInputSchema,
+    outputSchema: z.string(),
+  },
+  async input => {
+    try {
+      const botToken = process.env.TELEGRAM_BOT_TOKEN;
+      const chatId = process.env.TELEGRAM_CHAT_ID;
 
-            if (!botToken || !chatId) {
-                console.error('Telegram bot token or chat ID is not set in environment variables.');
-                return "Serverda Telegram sozlamalari mavjud emas. Foydalanuvchiga bu haqida xabar bering.";
-            }
+      if (!botToken || !chatId) {
+        console.error(
+          'Telegram bot token or chat ID is not set in environment variables.'
+        );
+        return "Serverda Telegram sozlamalari mavjud emas. Foydalanuvchiga bu haqida xabar bering.";
+      }
 
-            const message = `
+      const message = `
 🤖 AI Assistant orqali YANGI SIFATLI LEAD!
 
 👤 Ismi: ${input.fullName}
@@ -75,33 +95,33 @@ const sendLeadToTelegram = ai.defineTool(
 ${input.notes}
             `.trim();
 
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-            const payload = { chat_id: chatId, text: message, parse_mode: 'Markdown' };
-            
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+      const payload = {chat_id: chatId, text: message, parse_mode: 'Markdown'};
 
-            if (!response.ok) {
-                console.error("Telegram API Error:", await response.json());
-                return "Menejerga ma'lumot yuborishda xatolik yuz berdi. Iltimos, buni foydalanuvchiga bildiring.";
-            }
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload),
+      });
 
-            return "Ma'lumotlar menejerga muvaffaqiyatli yuborildi. Endi foydalanuvchiga tez orada u bilan bog'lanishlarini ayting.";
+      if (!response.ok) {
+        console.error('Telegram API Error:', await response.json());
+        return "Menejerga ma'lumot yuborishda xatolik yuz berdi. Iltimos, buni foydalanuvchiga bildiring.";
+      }
 
-       } catch (error) {
-           console.error(error);
-           return "Ichki xatolik yuz berdi.";
-       }
+      return "Ma'lumotlar menejerga muvaffaqiyatli yuborildi. Endi foydalanuvchiga tez orada u bilan bog'lanishlarini ayting.";
+    } catch (error) {
+      console.error(error);
+      return 'Ichki xatolik yuz berdi.';
     }
+  }
 );
 
-export async function chatAssistant(input: AssistantInput): Promise<AssistantOutput> {
+export async function chatAssistant(
+  input: AssistantInput
+): Promise<AssistantOutput> {
   return assistantFlow(input);
 }
-
 
 // 3. System promptni butunlay yangilaymiz
 const systemPrompt = `Sen "Jon.Branding" nomli brending agentligining "Jon" ismli malakali va aqlli virtual yordamchisisan. Sening vazifang - tashrif buyuruvchilarni sifatli "lead"ga aylantirish.
@@ -152,14 +172,14 @@ Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud
 
 Mijozning hozirgi savoli: {{{query}}}`;
 
-
 // Promptni aniqlaymiz, chiqish sxemasini qo'shamiz
 const prompt = ai.definePrompt({
   name: 'assistantPrompt',
-  input: {schema: AssistantInputSchema},
-  output: {schema: AssistantOutputSchema},
-  prompt: systemPrompt,
+  system: systemPrompt,
   tools: [sendLeadToTelegram],
+  output: {
+    schema: AssistantOutputSchema,
+  },
 });
 
 const assistantFlow = ai.defineFlow(
@@ -168,50 +188,39 @@ const assistantFlow = ai.defineFlow(
     inputSchema: AssistantInputSchema,
     outputSchema: AssistantOutputSchema,
   },
-  async (input) => {
-    
-    const augmentedHistory = input.history?.map(msg => ({
-      ...msg,
-      isUser: msg.role === 'user',
-      isBot: msg.role === 'bot'
+  async input => {
+    const history = (input.history || []).map(message => ({
+      role: message.role as 'user' | 'bot' | 'tool',
+      content: message.content,
     }));
 
-    const promptInput = { ...input, history: augmentedHistory };
+    const response = await ai.generate({
+      prompt: input.query,
+      model: ai.model('googleai/gemini-2.5-flash'),
+      history,
+      tools: [sendLeadToTelegram],
+      output: {
+        schema: AssistantOutputSchema,
+      },
+      config: {
+        // system is part of the prompt now, not a separate config.
+      }
+    }, {
+      prompt: {
+        system: systemPrompt,
+      }
+    });
 
-    const llmResponse = await prompt(promptInput);
-
-    // Genkit 1.x da .toolRequest() va .continue() o'rniga to'g'ridan-to'g'ri tool chaqiruvlari bilan ishlash
-    // Bu yerda bizda loop shart emas, chunki prompt tool ishlatish yoki ishlatmaslikni o'zi hal qiladi.
-    // Agar tool ishlatilsa, Genkit avtomatik ravishda uni bajaradi va natijani LLMga qaytaradi.
-    
-    if (llmResponse.toolRequest) {
-      // Agar model tool ishlatishni so'rasa, biz uni bajaramiz.
-      // Biroq, bizning logikada LLM oxirgi javobni o'zi berishi kerak.
-      // Shuning uchun bu yerda toolni alohida chaqirib, natijasini LLMga yuborishimiz kerak.
-      const toolCall = llmResponse.toolRequest.toolCalls[0];
-      const toolResult = await ai.runTool(toolCall);
-
-      // Tool natijasi bilan promptni davom ettiramiz
-      const finalResponse = await llmResponse.continue({
-        toolResult: {
-          toolResult: {
-            tool: toolCall.name,
-            callId: toolCall.callId,
-            result: toolResult as any,
-          },
-        },
-      });
-      return finalResponse.output!;
-    }
-    
-    // Agar tool ishlatilmasa, shunchaki javobni qaytaramiz
-    if (llmResponse.output) {
-      return llmResponse.output;
+    const output = response.output();
+    if (output) {
+      return output;
     }
 
     // Agar biror sabab bilan javob bo'lmasa
-    return { reply: "Kechirasiz, hozir javob bera olmayman.", choices: null };
+    return {
+      acknowledgement: '',
+      reply: "Kechirasiz, hozir javob bera olmayman.",
+      choices: null,
+    };
   }
 );
-
-    
