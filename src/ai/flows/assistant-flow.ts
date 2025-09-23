@@ -186,13 +186,11 @@ const assistantFlow = ai.defineFlow(
 
     const response = await ai.generate({
       model: 'googleai/gemini-2.5-flash',
-      prompt: {
-        messages: [
-          {role: 'system', content: systemPrompt},
-          ...history,
-          {role: 'user', content: input.query}
-        ],
-      },
+      prompt: [
+        {role: 'system', content: systemPrompt},
+        ...history,
+        {role: 'user', content: input.query}
+      ],
       tools: [sendLeadToTelegram],
       output: {
         schema: AssistantOutputSchema,
