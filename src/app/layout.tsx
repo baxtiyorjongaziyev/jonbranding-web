@@ -27,6 +27,7 @@ const poppins = Poppins({
 const APP_NAME = "Jon.Branding | Biznesingiz uchun natija keltiradigan brending";
 const APP_DESCRIPTION = "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun natija keltiradigan, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.";
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
+const FAVICON_URL = 'https://img3.teletype.in/files/e2/2b/e22bf3d7-9a75-4df5-aa37-7e75e7846dda.png';
 const CANONICAL_URL = 'https://jonbranding.uz';
 
 
@@ -95,6 +96,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
       <Head>
         <title>{APP_NAME}</title>
         <meta name="description" content={APP_DESCRIPTION} />
+        <link rel="icon" href={FAVICON_URL} type="image/png" sizes="any" />
         <link rel="canonical" href={CANONICAL_URL} />
         <meta property="og:url" content={CANONICAL_URL} />
         <meta property="og:type" content="website" />
@@ -105,7 +107,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         <meta name="twitter:title" content={APP_NAME} />
         <meta name="twitter:description" content={APP_DESCRIPTION} />
         <meta name="twitter:image" content={OG_IMAGE_URL} />
-        <meta name="metadata" content={JSON.stringify({ icons: null })} />
 
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <Script
