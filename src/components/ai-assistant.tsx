@@ -54,11 +54,13 @@ const AiAssistant: FC = () => {
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
+      setIsLoading(true);
       const timer = setTimeout(() => {
         setMessages([
           { id: 'initial', text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.", sender: 'bot', choices: suggestionChips }
         ]);
-      }, 500);
+        setIsLoading(false);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [isOpen, messages.length]);
@@ -103,26 +105,31 @@ const AiAssistant: FC = () => {
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
     
-    const currentHistory = [...messages, newUserMessage].map(msg => ({
-        role: msg.sender === 'user' ? 'user' : 'bot',
-        content: msg.text
-    }));
+    // Use a function to get the most up-to-date history
+    const getHistory = (newMsg: Message) => 
+        [...messages, newMsg].map(msg => ({
+            role: msg.sender === 'user' ? 'user' : 'bot',
+            content: msg.text
+        }));
     
     addMessage(newUserMessage);
     setInputValue('');
     setIsLoading(true);
 
     try {
-      const response = await chatAssistant({ query: messageText, history: currentHistory });
+      // Pass the latest history to the flow
+      const response = await chatAssistant({ query: messageText, history: getHistory(newUserMessage) });
       
       if (response.acknowledgement) {
+         // The thinking indicator is already on
+         await new Promise(resolve => setTimeout(resolve, 800)); // Simulate typing
          const ackMessage: Message = {
             id: (Date.now() + 1).toString(),
             text: response.acknowledgement,
             sender: 'bot'
          };
          addMessage(ackMessage);
-         await new Promise(resolve => setTimeout(resolve, 500)); // wait 500ms
+         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait before showing the next part
       }
       
       const botMessage: Message = { 
