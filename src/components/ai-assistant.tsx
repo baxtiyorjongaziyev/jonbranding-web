@@ -74,7 +74,7 @@ const AiAssistant: FC = () => {
       setIsLoading(true);
       const timer = setTimeout(() => {
         setMessages([
-          { id: 'initial', text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.", sender: 'bot', choices: suggestionChips }
+          { id: Date.now().toString(), text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.", sender: 'bot', choices: suggestionChips }
         ]);
         setIsLoading(false);
       }, 1000);
@@ -163,12 +163,11 @@ const AiAssistant: FC = () => {
 
     } catch (error) {
         console.error("AI Assistant Error:", error);
-        const errorMessage: Message = {
-            id: `error-${Date.now()}-${Math.random()}`,
-            text: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
-            sender: 'bot'
-        };
-        setMessages(prev => [...prev, errorMessage]);
+        toast({
+            title: 'Xatolik!',
+            description: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
+            variant: 'destructive',
+        });
     } finally {
       setIsLoading(false);
     }
