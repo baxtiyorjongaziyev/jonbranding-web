@@ -126,8 +126,15 @@ const PageClient: FC<PageClientProps> = ({ brands }) => {
         window.dispatchEvent(event);
     }, []);
 
+    const handleOpenServiceModal = useCallback(() => {
+        const servicesSection = document.getElementById('package-builder');
+        if (servicesSection) {
+            servicesSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, []);
+
     useScrollIntent(handleOpenModal, 0.8);
-    useExitIntent(handleOpenModal);
+    
 
     useEffect(() => {
         if (tg) {
@@ -168,6 +175,7 @@ const PageClient: FC<PageClientProps> = ({ brands }) => {
                 <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Faq /></AnimatedSection>
             </main>
+            <ExitIntentModal onPrimaryClick={handleOpenServiceModal} />
             <MobileCtaBar onOpenModal={handleOpenModal} />
         </div>
     )
