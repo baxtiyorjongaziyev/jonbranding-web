@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { chatAssistant } from '@/ai/flows/assistant-flow';
+import { useLocalStorage } from '@/hooks/use-local-storage';
 
 interface Message {
   id: string;
@@ -31,11 +32,12 @@ const renderTextWithLinks = (text: string) => {
       const isExternal = part.startsWith('http');
       const linkProps = isExternal 
         ? { href: part, target: '_blank', rel: 'noopener noreferrer' } 
-        : { href: part };
+        : {};
 
       return (
         <Link
           key={index}
+          href={part}
           {...linkProps}
           className="text-primary underline hover:text-primary/80 font-medium"
         >
@@ -50,7 +52,7 @@ const renderTextWithLinks = (text: string) => {
 
 const AiAssistant: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useLocalStorage<Message[]>('ai-assistant-messages', []);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
@@ -68,7 +70,7 @@ const AiAssistant: FC = () => {
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [isOpen, messages.length]);
+  }, [isOpen, messages.length, setMessages]);
   
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -110,12 +112,14 @@ const AiAssistant: FC = () => {
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
     
-    // Use a function to get the most up-to-date history
-    const getHistory = (newMsg: Message) => 
-        [...messages, newMsg].map(msg => ({
+    // Use a function to get the most up-to-date history, including the new user message
+    const getHistory = () => {
+        const currentMessages = JSON.parse(localStorage.getItem('ai-assistant-messages') || '[]');
+        return [...currentMessages, newUserMessage].map(msg => ({
             role: msg.sender === 'user' ? 'user' : 'bot',
             content: msg.text
         }));
+    };
     
     addMessage(newUserMessage);
     setInputValue('');
@@ -123,7 +127,7 @@ const AiAssistant: FC = () => {
 
     try {
       // Pass the latest history to the flow
-      const response = await chatAssistant({ query: messageText, history: getHistory(newUserMessage) });
+      const response = await chatAssistant({ query: messageText, history: getHistory() });
       
       setIsLoading(false); // Turn off loader before showing acknowledgment
 
