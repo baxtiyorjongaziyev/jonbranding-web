@@ -73,7 +73,7 @@ const sendLeadToTelegram = ai.defineTool(
     try {
       const botToken = process.env.TELEGRAM_BOT_TOKEN;
       const chatId = process.env.TELEGRAM_CHAT_ID;
-      const threadId = process.env.TELEGRAM_THREAD_ID;
+      const threadId = '52';
 
       if (!botToken || !chatId) {
         console.error(
@@ -112,8 +112,9 @@ ${input.notes}
       });
 
       if (!response.ok) {
-        console.error('Telegram API Error:', await response.json());
-        return "Menejerga ma'lumot yuborishda xatolik yuz berdi. Iltimos, buni foydalanuvchiga bildiring.";
+        const errorData = await response.json();
+        console.error('Telegram API Error:', errorData);
+        return `Menejerga ma'lumot yuborishda xatolik yuz berdi: ${errorData.description}. Iltimos, buni foydalanuvchiga bildiring.`;
       }
 
       return "Ma'lumotlar menejerga muvaffaqiyatli yuborildi. Endi foydalanuvchiga tez orada u bilan bog'lanishlarini ayting.";
@@ -142,8 +143,14 @@ const systemPrompt = `Sen "Jon.Branding" nomli brending agentligining "Jon" isml
 - **Tanishish:** Sen allaqachon salomlashib, o'zingni tanishtirgansan. Buni qaytarma.
 - **Javob va Savol Ajratish:** Foydalanuvchining javobiga avval 'acknowledgement' maydonida qisqa tasdiq bildir (masalan, "Tushunarli.", "Yaxshi.", "Ajoyib!"). Keyin 'reply' maydonida yangi savolni ber. Agar bu birinchi xabar bo'lsa, 'acknowledgement' bo'sh bo'lsin.
 
+**MAXSUS HOLAT: NEYMING XIZMATI**
+Agar foydalanuvchi "nomim yo'q", "nom topib ber", "nom tanlash", "neyming" kabi so'zlarni ishlatsa, bu "Neyming" xizmatiga to'g'ridan-to'g'ri so'rov deb hisobla. Bunday holda, darhol quyidagicha javob ber:
+'acknowledgement': "Ajoyib!",
+'reply': "Neyming — bizning eng kuchli xizmatlarimizdan biri. Keling, siz uchun mukammal nom topishga yordam berishim uchun bir nechta savollarga javob olsak.",
+Va keyin stsenariydagi 2-bosqichdan (Asosiy maqsad) davom et. 1-bosqichni (Loyiha nomi) o'tkazib yubor.
+
 **SUHBATNING QAT'IY STSENARIYSI:**
-Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud bo'lsa, keyingi bosqichga o't.
+Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud bo'lsa yoki maxsus holat (Neyming) bo'lsa, tegishli bosqichga o't.
 
 1.  **Loyiha nomi:** "Ajoyib! Keling, suhbatimizni loyihangizdan boshlasak. Biznesingiz yoki loyihangiz nomi nima?" (Bunga javob kelganda, "acknowledgement"ga "Rahmat, [loyihaning nomi]!" deb yoz)
 
@@ -216,3 +223,5 @@ const assistantFlow = ai.defineFlow(
     };
   }
 );
+
+    
