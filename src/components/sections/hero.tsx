@@ -46,7 +46,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
   const [buttonIndex, setButtonIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const plugin = useRef(Autoplay({ delay: 2500, stopOnInteraction: false }));
+  const plugin = useRef(Autoplay({ delay: 2500, stopOnInteraction: true }));
 
   useEffect(() => {
     const headlineInterval = setInterval(() => {

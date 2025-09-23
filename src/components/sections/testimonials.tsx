@@ -87,7 +87,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 
 const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
     const plugin = React.useRef(
-      Autoplay({ delay: 5000, stopOnInteraction: false })
+      Autoplay({ delay: 5000, stopOnInteraction: true })
     );
 
     const [playVideo, setPlayVideo] = useState(false);
@@ -189,5 +189,3 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
-
-    
