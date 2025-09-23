@@ -112,14 +112,12 @@ const AiAssistant: FC = () => {
  const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
 
-    // 1. Create the new user message
     const newUserMessage: Message = { 
         id: `user-${Date.now()}-${Math.random()}`, 
         text: messageText, 
         sender: 'user' 
     };
     
-    // 2. Clear choices from previous bot messages and add the new user message immediately
     const newHistoryWithUserMessage = [
         ...messages.map(m => ({ ...m, choices: undefined })),
         newUserMessage
@@ -130,19 +128,16 @@ const AiAssistant: FC = () => {
     setIsLoading(true);
 
     try {
-      // 3. Prepare history for the API call (excluding the very first "greeting" message)
       const apiHistory = newHistoryWithUserMessage.slice(1).map(msg => ({ 
           role: msg.sender === 'user' ? 'user' : 'bot',
           content: msg.text
       }));
       
-      // 4. Make the API call
       const response = await chatAssistant({ 
         query: messageText, 
-        history: apiHistory.slice(0, -1) // Send history *before* the user's latest message
+        history: apiHistory.slice(0, -1)
       });
       
-      // 5. Combine reply and add the new bot message
       let combinedReply = '';
       if (response.acknowledgement) {
         combinedReply += `${response.acknowledgement}\n\n`;
@@ -165,7 +160,6 @@ const AiAssistant: FC = () => {
             description: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
             variant: 'destructive',
         });
-        // 6. If API fails, remove the user's message to allow them to try again without clutter
         setMessages(messages.map(m => ({ ...m, choices: undefined })));
     } finally {
       setIsLoading(false);
@@ -218,9 +212,9 @@ const AiAssistant: FC = () => {
           <CardContent className="flex-1 p-0 min-h-0">
             <ScrollArea className="h-full p-4" ref={scrollAreaRef}>
               <div className="space-y-4">
-                {messages.map((message) => (
+                {messages.map((message, index) => (
                   <div
-                    key={message.id}
+                    key={`${message.id}-${index}`}
                     className="flex flex-col gap-2"
                   >
                     <div className={cn(
