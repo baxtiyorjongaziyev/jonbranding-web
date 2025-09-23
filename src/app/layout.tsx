@@ -114,29 +114,13 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
       </Head>
       <body className="font-body bg-white antialiased">
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+        
+        {/* Google Analytics */}
         <Script
-            id="app-config"
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{
-            __html: `
-                window.__ENV__ = {
-                  NEXT_PUBLIC_TELEGRAM_WEBHOOK_URL: '${process.env.NEXT_PUBLIC_TELEGRAM_WEBHOOK_URL || '/api/telegram'}',
-                  NEXT_PUBLIC_GA_ID: '${process.env.NEXT_PUBLIC_GA_ID || 'G-1CE32W25SP'}',
-                  NEXT_PUBLIC_SUPABASE_URL: '${process.env.NEXT_PUBLIC_SUPABASE_URL || ''}',
-                  NEXT_PUBLIC_SUPABASE_ANON_KEY: '${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''}'
-                };
-                window.bus = window.bus || { emit:() => {}, on:() => {}, off:() => {} };
-                window.analytics = window.analytics || { eventBus: { emit:() => {}, on:() => {}, off:() => {} } };
-            `,
-            }}
-        />
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <Script
             strategy="afterInteractive"
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-          />
-        )}
+            src={`https://www.googletagmanager.com/gtag/js?id=G-1CE32W25SP`}
+        />
         <Script
           id="gtag-init"
           strategy="afterInteractive"
@@ -145,12 +129,29 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              if (window.__ENV__ && window.__ENV__.NEXT_PUBLIC_GA_ID) {
-                  gtag('config', window.__ENV__.NEXT_PUBLIC_GA_ID);
-              }
+              gtag('config', 'G-1CE32W25SP');
           `,
           }}
         />
+
+        {/* Hotjar */}
+        <Script
+          id="hotjar-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+                (function(h,o,t,j,a,r){
+                    h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                    h._hjSettings={hjid:5084931,hjsv:6};
+                    a=o.getElementsByTagName('head')[0];
+                    r=o.createElement('script');r.async=1;
+                    r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                    a.appendChild(r);
+                })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+            `,
+          }}
+        />
+
         <div className="flex min-h-screen flex-col bg-secondary/50">
            <Header />
             {children}
