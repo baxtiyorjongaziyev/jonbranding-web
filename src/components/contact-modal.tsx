@@ -17,6 +17,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useTelegram } from '@/hooks/use-telegram';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -86,6 +87,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const { toast } = useToast();
   const [isSubmitting, setSubmitting] = useState(false);
   const [step, setStep] = useState(1);
+  const { user } = useTelegram();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -190,8 +192,17 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     if (isOpen) {
       form.reset();
       setStep(1);
+       if (user) {
+        const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+        if (fullName) {
+            form.setValue('fullName', fullName);
+        }
+        if (user.username) {
+            form.setValue('telegram', user.username);
+        }
+      }
     }
-  }, [isOpen, form]);
+  }, [isOpen, form, user]);
 
   const progress = (step / STEPS.length) * 100;
 
