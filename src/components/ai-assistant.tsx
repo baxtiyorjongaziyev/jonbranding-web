@@ -112,27 +112,37 @@ const AiAssistant: FC = () => {
  const handleSendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
 
-    const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
+    // 1. Create the new user message
+    const newUserMessage: Message = { 
+        id: `user-${Date.now()}-${Math.random()}`, 
+        text: messageText, 
+        sender: 'user' 
+    };
     
-    // Clear choices from previous messages and add the new user message
-    const updatedHistory = messages.map(m => ({ ...m, choices: undefined }));
-    const newHistory = [...updatedHistory, newUserMessage];
-    setMessages(newHistory);
+    // 2. Clear choices from previous bot messages and add the new user message immediately
+    const newHistoryWithUserMessage = [
+        ...messages.map(m => ({ ...m, choices: undefined })),
+        newUserMessage
+    ];
+    setMessages(newHistoryWithUserMessage);
     
     setInputValue('');
     setIsLoading(true);
 
     try {
-      const apiHistory = newHistory.slice(1).map(msg => ({ 
+      // 3. Prepare history for the API call (excluding the very first "greeting" message)
+      const apiHistory = newHistoryWithUserMessage.slice(1).map(msg => ({ 
           role: msg.sender === 'user' ? 'user' : 'bot',
           content: msg.text
       }));
       
+      // 4. Make the API call
       const response = await chatAssistant({ 
         query: messageText, 
         history: apiHistory.slice(0, -1) // Send history *before* the user's latest message
       });
       
+      // 5. Combine reply and add the new bot message
       let combinedReply = '';
       if (response.acknowledgement) {
         combinedReply += `${response.acknowledgement}\n\n`;
@@ -140,7 +150,7 @@ const AiAssistant: FC = () => {
       combinedReply += response.reply;
       
       const botMessage: Message = {
-         id: `bot-${Date.now()}`,
+         id: `bot-${Date.now()}-${Math.random()}`,
          text: combinedReply.trim(),
          sender: 'bot',
          choices: response.choices
@@ -155,8 +165,8 @@ const AiAssistant: FC = () => {
             description: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
             variant: 'destructive',
         });
-        // Remove the user's message if the API call fails to prevent confusion
-        setMessages(updatedHistory);
+        // 6. If API fails, remove the user's message to allow them to try again without clutter
+        setMessages(messages.map(m => ({ ...m, choices: undefined })));
     } finally {
       setIsLoading(false);
     }
