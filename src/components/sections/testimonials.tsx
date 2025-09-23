@@ -87,7 +87,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 
 const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
     const plugin = React.useRef(
-      Autoplay({ delay: 8000, stopOnInteraction: true })
+      Autoplay({ delay: 5000, stopOnInteraction: false })
     );
 
     const [playVideo, setPlayVideo] = useState(false);
@@ -159,7 +159,7 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                     opts={{ align: "start", loop: true }} 
                     plugins={[plugin.current]}
                     onMouseEnter={plugin.current.stop}
-                    onMouseLeave={plugin.current.reset}
+                    onMouseLeave={plugin.current.play}
                     className="w-full">
                     <CarouselContent className="-ml-4">
                         {otherTestimonials.map((testimonial, index) => (
