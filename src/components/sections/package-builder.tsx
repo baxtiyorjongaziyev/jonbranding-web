@@ -253,7 +253,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                             <div key={key}>
                                 <h3 className="text-2xl font-bold text-dark-blue mb-6">{category.title}</h3>
                                 {key === 'main' && (
-                                    <Alert className="mb-6 bg-sky-blue border-primary/20 text-dark-blue shadow-sm">
+                                    <Alert className="mb-6 bg-primary/10 border-primary/20 text-dark-blue shadow-sm">
                                         <div className="flex items-center gap-4">
                                             <PercentCircle className="h-10 w-10 text-primary flex-shrink-0"/>
                                             <div>
@@ -289,18 +289,18 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                <p className="text-blue-200 text-sm mt-1">O'zingizga mos xizmatlarni tanlang.</p>
                             </CardHeader>
                             <CardContent className="p-0 mt-6">
-                                <div className="space-y-3 min-h-[100px]">
+                                <div className="space-y-4 min-h-[100px] border-b border-white/10 pb-4">
                                     {selectedServiceKeys.length > 0 ? (
                                         selectedServiceKeys
                                             .filter(key => serviceDetails[key]?.price > 0 || serviceDetails[key]?.note?.includes('qo\'shiladi'))
                                             .map((key) => {
                                                 const service = serviceDetails[key];
                                                 return (
-                                                    <div key={key} className="flex justify-between items-center text-sm animate-fade-in group border-b border-white/10 pb-2 last:border-b-0">
+                                                    <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
                                                         <span className="text-white flex-1 pr-2">{service.label}</span>
                                                         <div className="flex items-center gap-2">
                                                             <span className="font-mono text-gray-300">
-                                                                {service.price > 0 ? `+${service.price.toLocaleString('fr-FR')}` : service.note}
+                                                                {service.price > 0 ? `+${formatPrice(service.price)}` : service.note}
                                                             </span>
                                                             <Button 
                                                                 variant="ghost" 
@@ -323,8 +323,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 </div>
                                 
                                 {total.base > 0 && (
-                                  <div className="py-4 space-y-3 border-t border-white/20 mt-4">
-                                      <div className="flex justify-between items-center text-sm">
+                                  <div className="py-4 space-y-3 border-b border-white/10">
+                                      <div className="flex justify-between items-center text-sm font-medium">
                                           <span className="text-blue-200">Xizmatlar jami:</span>
                                           <span className="font-mono">{total.base.toLocaleString('fr-FR')} so'm</span>
                                       </div>
@@ -344,7 +344,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 )}
                                 
                                 {total.savings > 0 && (
-                                    <div className="text-center py-4 my-4 bg-green-500/10 rounded-lg animate-fade-in">
+                                    <div className="text-center py-4 my-4 bg-green-500/20 rounded-lg animate-fade-in border border-green-400/30">
                                         <p className="text-sm text-green-200">Umumiy tejagan mablag'ingiz</p>
                                         <p className="text-3xl font-bold text-green-300 animate-pulse">{formatPrice(total.savings)}</p>
                                     </div>
