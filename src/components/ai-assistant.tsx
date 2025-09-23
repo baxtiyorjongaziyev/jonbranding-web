@@ -116,6 +116,7 @@ const AiAssistant: FC = () => {
     if (!messageText.trim() || isLoading) return;
 
     const newUserMessage: Message = { id: Date.now().toString(), text: messageText, sender: 'user' };
+    const currentHistory = [...messages, newUserMessage];
 
     // Add user message to the list and remove choices from previous bot message
     setMessages(prev => 
@@ -130,7 +131,7 @@ const AiAssistant: FC = () => {
       // Pass the latest history to the flow
       const response = await chatAssistant({ 
         query: messageText, 
-        history: messages.map(msg => ({ // Send previous history
+        history: messages.map(msg => ({ // Send previous history before the new message
             role: msg.sender === 'user' ? 'user' : 'bot',
             content: msg.text
         }))
