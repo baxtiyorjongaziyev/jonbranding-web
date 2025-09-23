@@ -7,17 +7,22 @@ import { uz } from 'date-fns/locale';
 import CtaBlock from '@/components/sections/cta-block';
 import React from 'react';
 
-// Renders simple markdown-like syntax to HTML elements
+// Renders simple markdown-like syntax to HTML elements for both bold and italic
 const renderTextWithFormatting = (text: string) => {
-    // Regex to find **bold** text
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    const parts = text.split(boldRegex);
+    // Regex to find **bold** or *italic* text. It's important to check for ** first.
+    const markdownRegex = /(\*\*(.*?)\*\*|\*(.*?)\*)/g;
+    const parts = text.split(markdownRegex);
 
-    return parts.map((part, index) => {
-        // Every second part is the captured group (the bold text)
-        if (index % 2 === 1) {
-            return <strong key={index}>{part}</strong>;
+    return parts.filter(Boolean).map((part, index) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+            // It's a bold part
+            return <strong key={index}>{part.slice(2, -2)}</strong>;
         }
+        if (part.startsWith('*') && part.endsWith('*')) {
+            // It's an italic part
+            return <em key={index}>{part.slice(1, -1)}</em>;
+        }
+        // It's a regular text part
         return part;
     });
 };
