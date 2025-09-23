@@ -44,7 +44,7 @@ const locationOptions = [
 const goalOptions = [
     { value: "exploring", label: "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman." },
     { value: "has_problem", label: "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak." },
-    { value: "ready_to_start", label: "Brendingiz kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." },
+    { value: "ready_to_start", label: "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." },
 ];
 
 const meetingPlaceOptions = [
