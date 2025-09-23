@@ -259,7 +259,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                             <div>
                                                 <AlertTitle className="font-extrabold text-lg text-primary">Paketli chegirma!</AlertTitle>
                                                 <AlertDescription className="text-dark-blue/80">
-                                                    Ushbu bo'limdan **3 yoki undan ko'p** xizmatni tanlang va umumiy summadan **-20% chegirmaga** ega bo'ling!
+                                                    Ushbu bo'limdan <strong>3 yoki undan ko'p</strong> xizmatni tanlang va umumiy summadan <strong>-20% chegirmaga</strong> ega bo'ling!
                                                 </AlertDescription>
                                             </div>
                                         </div>
@@ -407,4 +407,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
 
 export default PackageBuilder;
 
+    
     
