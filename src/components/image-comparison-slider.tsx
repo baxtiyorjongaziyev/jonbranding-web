@@ -30,7 +30,7 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className }: ImageComp
   return (
     <motion.div 
         ref={containerRef} 
-        className={cn("relative w-full aspect-[4/3] cursor-ew-resize group", className)}
+        className={cn("relative w-full aspect-square cursor-ew-resize group", className)}
         onPan={handlePan}
         onPanStart={handlePan}
         onPanEnd={handlePan}
