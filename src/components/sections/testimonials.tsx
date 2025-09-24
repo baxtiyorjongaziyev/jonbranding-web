@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Star, PlayCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
@@ -86,9 +86,22 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 };
 
 const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
-    const plugin = useRef(
-      Autoplay({ delay: 5000, stopOnInteraction: true })
-    );
+    const plugin = useRef<any>(null);
+    const [api, setApi] = useState<CarouselApi>()
+
+    useEffect(() => {
+        if (!api) {
+            return
+        }
+
+        plugin.current = Autoplay({ delay: 5000, stopOnInteraction: true });
+        // Manually re-init to add the plugin
+        api.reInit({
+            plugins: [plugin.current]
+        });
+
+    }, [api]);
+
 
     const [playVideo, setPlayVideo] = useState(false);
     const [isClient, setIsClient] = useState(false);
@@ -166,8 +179,8 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
         {otherTestimonials.length > 0 && (
             <div className="mt-16">
                 <Carousel 
+                    setApi={setApi}
                     opts={{ align: "start", loop: true }} 
-                    plugins={isClient ? [plugin.current] : []}
                     onMouseEnter={() => isClient && plugin.current && plugin.current.stop()}
                     onMouseLeave={() => isClient && plugin.current && plugin.current.play()}
                     className="w-full">
