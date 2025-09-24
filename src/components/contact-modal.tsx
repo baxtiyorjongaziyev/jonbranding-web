@@ -19,6 +19,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useTelegram } from '@/hooks/use-telegram';
 import { event as gtagEvent } from '@/lib/gtag';
+import LiveLocationCard from './live-location-card';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -49,9 +50,9 @@ const goalOptions = [
 ];
 
 const meetingPlaceOptions = [
-    { value: "our_office", label: "Bizning ofisimizda", icon: Briefcase, description: "Loyihaga to'liq sho'ng'ish va barcha materiallar bilan tanishish uchun eng yaxshi variant." },
-    { value: "neutral", label: "Shahardagi neytral kafe/restoranda", icon: Coffee, description: "Erkin va norasmiy muhitda loyihani muhokama qilish uchun qulay tanlov." },
-    { value: "client_office", label: "Sizning ofisingizda", icon: Building2, description: "Biznesingiz muhiti bilan yaqindan tanishib, siz uchun qulay joyda uchrashishimiz mumkin." },
+    { value: "our_office", label: "Bizning ofisimizda", icon: Briefcase, description: "Loyihaga to'liq sho'ng'ish" },
+    { value: "neutral", label: "Neytral hududda", icon: Coffee, description: "Erkin muhitda muhokama" },
+    { value: "client_office", label: "Sizning ofisingizda", icon: Building2, description: "Biznesingiz bilan tanishish" },
 ];
 
 const formSchema = z.object({
@@ -385,30 +386,18 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                             render={({ field }) => (
                                 <FormItem className="space-y-3">
                                     <FormLabel>Uchrashuv qayerda bo'lishini xohlaysiz?</FormLabel>
-                                    <FormControl>
-                                        <RadioGroup
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
-                                            className="flex flex-col space-y-2"
-                                        >
-                                         {meetingPlaceOptions.map((option, index) => (
-                                            <Label key={option.value} htmlFor={`place-${index}`} className="flex items-start gap-4 p-4 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
-                                                <RadioGroupItem value={option.value} id={`place-${index}`} className="mt-1" />
-                                                <div className="flex-1">
-                                                    <span className="font-medium text-sm text-gray-800">{option.label}</span>
-                                                    {meetingPlaceValue === option.value &&
-                                                        <Alert variant="default" className="mt-2 text-xs bg-sky-blue/30 border-primary/20">
-                                                             <div className="flex items-start gap-2">
-                                                                <option.icon className="h-4 w-4 text-primary flex-shrink-0 mt-0.5"/>
-                                                                <AlertDescription>{option.description}</AlertDescription>
-                                                             </div>
-                                                        </Alert>
-                                                    }
-                                                </div>
-                                            </Label>
+                                    <div className="space-y-2">
+                                        {meetingPlaceOptions.map((option) => (
+                                            <LiveLocationCard
+                                                key={option.value}
+                                                icon={option.icon}
+                                                title={option.label}
+                                                description={option.description}
+                                                isSelected={field.value === option.value}
+                                                onClick={() => field.onChange(option.value)}
+                                            />
                                         ))}
-                                        </RadioGroup>
-                                    </FormControl>
+                                    </div>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -446,5 +435,3 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 };
 
 export default ContactModal;
-
-    
