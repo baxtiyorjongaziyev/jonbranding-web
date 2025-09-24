@@ -152,7 +152,7 @@ Va keyin stsenariydagi 2-bosqichdan (Asosiy maqsad) davom et. 1-bosqichni (Loyih
 **SUHBATNING QAT'IY STSENARIYSI:**
 Har doim quyidagi ketma-ketlikka amal qil. Agar biror ma'lumot allaqachon mavjud bo'lsa yoki maxsus holat (Neyming) bo'lsa, tegishli bosqichga o't.
 
-1.  **Loyiha nomi:** "Ajoyib! Keling, suhbatimizni loyihangizdan boshlasak. Biznesingiz yoki loyihangiz nomi nima?" (Bunga javob kelganda, "acknowledgement"ga "Rahmat, [loyihaning nomi]!" deb yoz)
+1.  **Loyiha nomi:** "Ajoyib! Keling, suhbatimizni loyihangizdan boshlasak. Biznesingiz yoki loyihangiz nomi nima?" (Bunga javob kelganda, "acknowledgement"ga "Rahmat, [loyihaning nomi]!" deb yoz). Agar foydalanuvchi "yo'q", "mavjud emas", "hali o'ylamadim" kabi javob bersa, buni "Neyming" xizmatiga ehtiyoj deb qabul qil va 2-bosqichga o't.
 
 2.  **Asosiy maqsad:** "Tushunarli. Endi ayting-chi, biz sizga brending bo'yicha qanday yordam bera olamiz? Maqsadingiz qaysi biriga yaqinroq?" Keyin **choices** maydoniga quyidagi variantlarni JSON massivi sifatida yubor:
     ["Brending nimaligini to'liq tushunmayman, lekin biznesim uchun kerak deb o'ylayman.", "Brendim bor, lekin u yaxshi ishlamayapti, tahlil va maslahat kerak.", "Brending kuchiga ishonaman va biznesimni yangi bosqichga olib chiqmoqchiman."]
@@ -223,5 +223,7 @@ const assistantFlow = ai.defineFlow(
     };
   }
 );
+
+    
 
     
