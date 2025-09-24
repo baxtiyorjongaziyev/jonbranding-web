@@ -10,7 +10,6 @@ const VideoSection = () => {
     offset: ['start end', 'end start'],
   });
 
-  // Scale will now go from 0.9 (when it's far) to 1 (when it's centered)
   const scale = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
@@ -23,12 +22,18 @@ const VideoSection = () => {
     ["24px", "0px", "0px", "24px"]
   );
 
+  const maxWidth = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    ['1280px', '100vw', '1280px']
+  );
+
   return (
     <section id="video" className="h-[200vh] bg-white" ref={ref}>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <motion.div
-          className="relative w-full max-w-4xl aspect-video shadow-2xl bg-black"
-          style={{ scale, borderRadius }}
+          className="relative w-full aspect-video shadow-2xl bg-black"
+          style={{ scale, borderRadius, maxWidth }}
         >
           <iframe
             src="https://player.vimeo.com/video/1109613592?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&dnt=1"
