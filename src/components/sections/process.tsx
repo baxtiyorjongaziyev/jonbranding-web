@@ -1,11 +1,17 @@
+
 'use client';
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import CtaBlock from './cta-block';
+import { Card, CardContent } from '@/components/ui/card';
 
-const processSteps = [
+interface ProcessProps {
+  onCtaClick: () => void;
+}
+
+const phases = [
   {
     phase: 'To‘g‘ri Brendni Loyihalash',
     title: 'Kashfiyot',
@@ -79,27 +85,6 @@ const processSteps = [
   },
 ];
 
-const Timeline = () => (
-  <div className="absolute top-0 left-0 right-0 h-10 w-full">
-    <div className="relative h-full w-full">
-      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-200" />
-      <div className="absolute top-1/2 left-[25%] w-6 h-6 -translate-x-1/2 -translate-y-1/2">
-        <div className="w-full h-full rounded-full bg-primary" />
-      </div>
-      <div className="absolute top-1/2 left-[50%] -translate-x-1/2 -translate-y-1/2 text-sm text-gray-500 bg-white px-2">
-         To‘g‘ri Brendni Loyihalash
-      </div>
-       <div className="absolute top-1/2 left-[75%] w-6 h-6 -translate-x-1/2 -translate-y-1/2">
-        <div className="w-full h-full rounded-full bg-primary" />
-      </div>
-    </div>
-  </div>
-);
-
-
-interface ProcessProps {
-  onCtaClick: () => void;
-}
 
 const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -112,11 +97,11 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
 
   return (
     <>
-      <section ref={targetRef} id="process" className="relative h-[400vh] bg-white">
+      <section ref={targetRef} id="process" className="relative h-[300vh] bg-white">
         <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
            <div className="container mx-auto px-4 text-center mb-16">
               <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
-                G'oyadan Mukammallikka
+                Bizning ish jarayonimiz
               </h2>
               <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
                 Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan bosqichli tizim.
@@ -124,34 +109,20 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
            </div>
           
           <motion.div style={{ x }} className="flex gap-12">
-            {processSteps.map((step, index) => (
+            {phases.map((step, index) => (
               <div key={index} className="w-[90vw] md:w-[45vw] lg:w-[30vw] flex-shrink-0 px-4">
-                <div className="relative pt-12 h-full">
-                   {index < 4 && (
-                      <div className="absolute top-[2px] left-1/2 w-[calc(100%+3rem)] h-[1px] bg-gray-200">
-                          <div className="absolute top-1/2 left-0 w-3 h-3 -translate-y-1/2 -translate-x-1/2 rounded-full bg-primary" />
-                      </div>
-                   )}
-                   {index === 3 && (
-                       <div className="absolute top-[2px] right-[-3rem] w-1/2 h-[1px] bg-gray-200">
-                           <div className="absolute top-1/2 right-0 w-3 h-3 -translate-y-1/2 translate-x-1/2 rounded-full bg-primary" />
-                       </div>
-                   )}
-
-                    <h3 className="text-gray-500 text-sm mb-6 relative bg-white px-2 w-fit mx-auto">{step.phase}</h3>
-                    
-                    <div className="h-full">
-                        <h4 className="text-2xl font-bold text-dark-blue">{step.title}</h4>
-                        <p className="text-gray-500 mt-1 mb-4">{step.subtitle}</p>
-                        <div className="flex flex-wrap gap-2">
-                        {step.tasks.map(task => (
-                            <Badge key={task} variant="secondary" className="font-normal bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-lg px-3 py-1 text-sm">
-                            {task}
-                            </Badge>
-                        ))}
-                        </div>
+                 <Card className="h-full rounded-2xl border p-6 flex flex-col items-center text-center bg-secondary/50">
+                    <div className="text-primary font-bold text-sm mb-2">{step.phase}</div>
+                    <h3 className="text-xl font-bold text-dark-blue">{step.title}</h3>
+                    <p className="text-gray-500 text-sm mb-4">{step.subtitle}</p>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                    {step.tasks.map(task => (
+                        <Badge key={task} variant="secondary" className="font-normal bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg px-3 py-1 text-sm">
+                        {task}
+                        </Badge>
+                    ))}
                     </div>
-                </div>
+                </Card>
               </div>
             ))}
           </motion.div>
