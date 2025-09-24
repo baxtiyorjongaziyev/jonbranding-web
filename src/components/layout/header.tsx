@@ -118,7 +118,7 @@ const ExpandingIconButton: FC<{
       variants={buttonVariants}
       animate={isHovered ? 'hover' : 'rest'}
       initial="rest"
-      className="relative flex items-center justify-center h-11 rounded-full bg-secondary text-secondary-foreground shadow-sm overflow-hidden"
+      className="relative flex items-center justify-start h-11 rounded-full bg-secondary text-secondary-foreground shadow-sm overflow-hidden"
     >
       <div className="absolute left-3.5">
           <Icon size={18} />
@@ -223,7 +223,7 @@ const Header: FC = () => {
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
-           <ExpandingIconButton icon={Phone} text="+998 33 645 00 97" href="tel:+998336450097" expandedWidth={180}/>
+           <ExpandingIconButton icon={Phone} text="+998 33 645 00 97" href="tel:+998336450097" expandedWidth={190}/>
            <ExpandingIconButton icon={Send} text="Telegram" href="https://t.me/baxtiyorjon_gaziyev" isExternal={true} />
            <Button 
             onClick={handleContactClick} 
