@@ -22,6 +22,7 @@ import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { event as gtagEvent } from '@/lib/gtag';
+import { motion } from 'framer-motion';
 
 // ========================
 // 1) Konstanta va tariflar
@@ -145,6 +146,39 @@ export function calculateFees({
   };
 }
 
+
+// Yangi Dynamic Toggle komponenti
+const DynamicToggle = ({ options, selected, onSelect }: {
+    options: { value: string, label: string }[];
+    selected: string;
+    onSelect: (value: string) => void;
+}) => {
+    return (
+        <div className="relative flex w-full rounded-full bg-secondary p-1">
+            {options.map(option => (
+                <div key={option.value} className="relative flex-1">
+                    {selected === option.value && (
+                        <motion.div
+                            layoutId="calculator-toggle-bg"
+                            className="absolute inset-0 rounded-full bg-primary shadow-md"
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        />
+                    )}
+                    <button
+                        onClick={() => onSelect(option.value)}
+                        className={cn(
+                            "relative w-full rounded-full py-2 px-4 text-center text-sm font-semibold transition-colors",
+                            selected === option.value ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                        )}
+                    >
+                        {option.label}
+                    </button>
+                </div>
+            ))}
+        </div>
+    );
+};
+
 // ========================
 // 4) UI komponent
 // ========================
@@ -263,7 +297,7 @@ export default function TrademarkCalculator() {
       {/* Left: Form */}
       <Card className="p-6">
         <h2 className="text-xl font-bold text-dark-blue mb-4">Ma'lumotlarni kiriting</h2>
-        <div className="space-y-4">
+        <div className="space-y-6">
           <LabeledInput label="Brend nomi" placeholder="Masalan: MyBrand" value={brand} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setBrand(e.target.value)} />
           <LabeledInput label="Ismingiz" placeholder="To'liq ismingizni kiriting" value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setName(e.target.value)} />
           <LabeledInput label="Telefon raqam" placeholder="+998901234567" value={phone} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{ const v=e.target.value; if(allowPhoneTyping(v)) setPhone(v); }} />
@@ -286,27 +320,39 @@ export default function TrademarkCalculator() {
           </div>
 
           <div>
-            <Label className="font-medium">Shaxs turi</Label>
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              <ToggleButton active={!isYuridik} onClick={()=>setIsYuridik(false)}>Jismoniy shaxs</ToggleButton>
-              <ToggleButton active={isYuridik} onClick={()=>setIsYuridik(true)}>Yuridik shaxs</ToggleButton>
-            </div>
+            <Label className="font-medium mb-2 block">Shaxs turi</Label>
+            <DynamicToggle 
+              options={[
+                { value: 'jismoniy', label: 'Jismoniy shaxs' },
+                { value: 'yuridik', label: 'Yuridik shaxs' }
+              ]}
+              selected={isYuridik ? 'yuridik' : 'jismoniy'}
+              onSelect={(value) => setIsYuridik(value === 'yuridik')}
+            />
           </div>
 
           <div>
-            <Label className="font-medium">Ko‘rib chiqish tezligi</Label>
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              <ToggleButton active={speed==='oddiy'} onClick={()=>setSpeed('oddiy')}>Oddiy (7 oy)</ToggleButton>
-              <ToggleButton active={speed==='tez'} onClick={()=>setSpeed('tez')}>Tezkor (1.5 oy)</ToggleButton>
-            </div>
+            <Label className="font-medium mb-2 block">Ko‘rib chiqish tezligi</Label>
+             <DynamicToggle 
+              options={[
+                { value: 'oddiy', label: 'Oddiy (7 oy)' },
+                { value: 'tez', label: 'Tezkor (1.5 oy)' }
+              ]}
+              selected={speed}
+              onSelect={(value) => setSpeed(value as 'oddiy' | 'tez')}
+            />
           </div>
 
           <div>
-            <Label className="font-medium">Qo'shimcha ekspert tekshiruvi</Label>
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              <ToggleButton active={hasEkspert} onClick={()=>setHasEkspert(true)}>Yoqilgan</ToggleButton>
-              <ToggleButton active={!hasEkspert} onClick={()=>setHasEkspert(false)}>O‘chirilgan</ToggleButton>
-            </div>
+            <Label className="font-medium mb-2 block">Qo'shimcha ekspert tekshiruvi</Label>
+            <DynamicToggle 
+              options={[
+                { value: 'ha', label: 'Yoqilgan' },
+                { value: 'yoq', label: 'O‘chirilgan' }
+              ]}
+              selected={hasEkspert ? 'ha' : 'yoq'}
+              onSelect={(value) => setHasEkspert(value === 'ha')}
+            />
           </div>
 
           <div>
@@ -433,14 +479,6 @@ function IconButton({ children, ...props }: { children: React.ReactNode, [key: s
   );
 }
 
-function ToggleButton({ active, children, ...props }: { active: boolean, children: React.ReactNode, [key: string]: any }) {
-  return (
-    <Button type="button" variant={active ? 'default' : 'outline'} {...props}>
-        {children}
-    </Button>
-  );
-}
-
 function Chip({ active, children, ...props }: { active: boolean, children: React.ReactNode, [key: string]: any }) {
   return (
     <Button type="button" size="sm" variant={active ? 'default' : 'outline'} className="h-auto" {...props}>
@@ -465,5 +503,3 @@ function Row({ label, value, bold=false }: { label: string, value: number, bold?
 function Divider() {
   return <div className="mt-2 pt-2 border-t" />;
 }
-
-    
