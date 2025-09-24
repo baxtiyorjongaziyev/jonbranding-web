@@ -2,6 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Target, ListChecks, Star } from 'lucide-react';
 import CtaBlock from './cta-block';
+import TiltCard from '@/components/ui/tilt-card';
 
 const values = [
   {
@@ -38,17 +39,19 @@ const WhyUs: React.FC<WhyUsProps> = ({ onCtaClick }) => {
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {values.map((value, index) => (
-            <Card key={index} className="bg-white shadow-lg hover:shadow-xl transition-shadow rounded-2xl">
-              <CardHeader className="items-center text-center">
-                <div className="bg-primary/10 p-4 rounded-full">
-                  <value.icon className="w-8 h-8 text-primary" />
-                </div>
-                <CardTitle className="!mt-4 text-xl">{value.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-gray-600">{value.description}</p>
-              </CardContent>
-            </Card>
+             <TiltCard key={index} strength={10}>
+                <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow rounded-2xl h-full">
+                  <CardHeader className="items-center text-center">
+                    <div className="bg-primary/10 p-4 rounded-full">
+                      <value.icon className="w-8 h-8 text-primary" />
+                    </div>
+                    <CardTitle className="!mt-4 text-xl">{value.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-center">
+                    <p className="text-gray-600">{value.description}</p>
+                  </CardContent>
+                </Card>
+            </TiltCard>
           ))}
         </div>
       </div>
