@@ -1,6 +1,9 @@
+
+'use client';
+
 import { Card, CardContent } from '@/components/ui/card';
 import CtaBlock from './cta-block';
-import Image from 'next/image';
+import ImageComparisonSlider from '@/components/image-comparison-slider';
 
 const comparisons = [
   { brand: "Fidda", oldImg: "https://img2.teletype.in/files/9c/66/9c66a85f-486c-4f54-9682-fb4838061ab2.jpeg", newImg: "https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png", oldHint: "old logo design", newHint: "modern new logo" },
@@ -26,14 +29,10 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick }) => {
           {comparisons.map((item, index) => (
             <Card key={index} className="overflow-hidden shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
               <CardContent className="p-0">
-                <div className="relative aspect-square">
-                  <Image src={item.oldImg} alt={`${item.brand} eski brendingi`} className="object-cover opacity-80 w-full h-full" data-ai-hint={item.oldHint} fill />
-                  <div className="absolute top-2 left-2 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-bold">Avval</div>
-                </div>
-                <div className="relative aspect-square">
-                  <Image src={item.newImg} alt={`${item.brand} yangi brendingi`} className="object-cover w-full h-full" data-ai-hint={item.newHint} fill />
-                   <div className="absolute top-2 right-2 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">Hozir</div>
-                </div>
+                <ImageComparisonSlider 
+                  beforeImage={{src: item.oldImg, alt: `${item.brand} eski brendingi`, 'data-ai-hint': item.oldHint}}
+                  afterImage={{src: item.newImg, alt: `${item.brand} yangi brendingi`, 'data-ai-hint': item.newHint}}
+                />
               </CardContent>
             </Card>
           ))}
