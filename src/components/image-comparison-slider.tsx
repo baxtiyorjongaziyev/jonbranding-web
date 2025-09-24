@@ -1,9 +1,9 @@
 
 'use client';
 
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import Image, { type ImageProps } from 'next/image';
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -15,14 +15,27 @@ interface ImageComparisonSliderProps {
 
 const ImageComparisonSlider = ({ beforeImage, afterImage, className }: ImageComparisonSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0.5);
+  const x = useMotionValue(0.5); // Represents position from 0 to 1
 
   const afterWidth = useTransform(x, (latest) => `${latest * 100}%`);
-  const handleX = useTransform(x, (latest) => `${latest * 100}%`);
-  const handleRotation = useTransform(x, [0, 1], [-20, 20]);
+  const handleX = useTransform(x, (latest) => `calc(${latest * 100}% - 2px)`);
+
+  const handlePan = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const newX = Math.max(0, Math.min(1, (info.point.x - rect.left) / rect.width));
+      x.set(newX);
+  }, [x]);
   
   return (
-    <div ref={containerRef} className={cn("relative w-full aspect-square cursor-e-resize group", className)}>
+    <div 
+        ref={containerRef} 
+        className={cn("relative w-full aspect-[4/3] cursor-ew-resize group", className)}
+        onPan={handlePan}
+        onPanStart={handlePan}
+        onPanEnd={handlePan}
+        style={{ touchAction: 'pan-y' }} // Allow vertical scroll on touch devices
+    >
       {/* Before Image */}
       <div className="absolute inset-0 select-none">
         <Image 
@@ -42,34 +55,26 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className }: ImageComp
         <Image 
             {...afterImage}
             fill
-            className="absolute inset-0 object-cover h-full w-[200%] max-w-none pointer-events-none"
-            style={{ left: '-100%', transform: "translateX(50%)"}}
+            className="absolute inset-0 object-cover h-full w-full max-w-none pointer-events-none"
+            style={{ 
+                clipPath: `inset(0 calc(100% - 100vw) 0 0)` // Prevents image from stretching
+            }}
         />
         <div className="absolute top-2 right-2 bg-primary/80 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">Hozir</div>
       </motion.div>
 
       {/* Slider Handle */}
       <motion.div
-        className="absolute inset-y-0 w-1.5 bg-white/70 backdrop-blur-sm cursor-ew-resize z-10"
-        style={{ left: handleX, x: "-50%" }}
-        drag="x"
-        dragConstraints={containerRef}
-        dragElastic={0.1}
-        onDrag={() => {
-            if(containerRef.current) {
-                 const newX = (containerRef.current.getBoundingClientRect().left - event.clientX) / containerRef.current.getBoundingClientRect().width * -1
-                 x.set(newX);
-            }
-        }}
-        initial={{ left: '50%' }}
+        className="absolute inset-y-0 w-1.5 bg-white/80 backdrop-blur-sm z-10 pointer-events-none"
+        style={{ left: handleX }}
+        initial={{ left: 'calc(50% - 2px)' }}
       >
-        <motion.div 
-            className="absolute top-1/2 -translate-y-1/2 h-10 w-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 shadow-xl"
-            style={{ left: "50%", x: "-50%", rotate: handleRotation }}
+        <div 
+            className="absolute top-1/2 -translate-y-1/2 h-10 w-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 shadow-xl left-1/2 -translate-x-1/2"
         >
             <ChevronLeft size={20} />
             <ChevronRight size={20} />
-        </motion.div>
+        </div>
       </motion.div>
     </div>
   );
