@@ -52,19 +52,19 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
     offset: ['start start', 'end end']
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["5%", `-${100 - 100/steps.length - 15}%`]);
+  const x = useTransform(scrollYProgress, [0.05, 0.95], ["0%", `calc(-100% + 100vw)`]);
   const progressBarWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
     <section id="process" className="bg-white">
-        <div className="container mx-auto px-4 py-16 sm:py-24 text-center">
+        <div className="container mx-auto px-4 pt-16 sm:pt-24 pb-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold">Bizning ish jarayonimiz</h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
                 Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan bosqichli tizim.
             </p>
         </div>
 
-        <div ref={targetRef} className="relative h-[400vh]">
+        <div ref={targetRef} className="relative h-[300vh]">
             <div className="sticky top-0 flex h-screen items-center overflow-hidden">
                 <div className="relative w-full">
                     {/* Progress Bar */}
@@ -75,9 +75,9 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
                         />
                     </div>
 
-                    <motion.div style={{ x }} className="flex gap-16">
+                    <motion.div style={{ x }} className="flex">
                         {steps.map((step, index) => (
-                            <div key={index} className="relative w-[90vw] lg:w-[50vw] flex-shrink-0 px-4">
+                            <div key={index} className="relative w-[90vw] lg:w-[45vw] flex-shrink-0 px-4 md:px-8">
                                 <div className="relative lg:text-center max-w-sm mx-auto p-8 rounded-2xl bg-secondary/50 lg:bg-transparent">
                                     <div className="flex items-center lg:justify-center gap-4">
                                         <div className="relative z-10 flex-shrink-0">
