@@ -25,39 +25,6 @@ const suggestionChips = [
     "Ishlash jarayoni qanday?",
 ];
 
-const renderTextWithLinks = (text: string) => {
-  const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\B\/[#\w\/-]*)/ig;
-  return text.split(urlRegex).filter(Boolean).map((part, index) => {
-    if (part.match(urlRegex)) {
-      const isInternal = part.startsWith('/');
-      if (isInternal) {
-        return (
-          <Link
-            key={index}
-            href={part}
-            className="text-primary underline hover:text-primary/80 font-medium"
-          >
-            {part}
-          </Link>
-        );
-      }
-      return (
-        <a
-          key={index}
-          href={part}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary underline hover:text-primary/80 font-medium"
-        >
-          {part}
-        </a>
-      );
-    }
-    return <Fragment key={index}>{part}</Fragment>;
-  });
-};
-
-
 const AiAssistant: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -191,6 +158,39 @@ const AiAssistant: FC = () => {
   const handleSuggestionClick = (suggestion: string) => {
       handleSendMessage(suggestion);
   };
+  
+  const renderTextWithLinks = (text: string) => {
+    const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\B\/[#\w\/-]*)/ig;
+    return text.split(urlRegex).filter(Boolean).map((part, index) => {
+      if (part.match(urlRegex)) {
+        const isInternal = part.startsWith('/');
+        if (isInternal) {
+          return (
+            <Link
+              key={index}
+              href={part}
+              className="text-primary underline hover:text-primary/80 font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              {part}
+            </Link>
+          );
+        }
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline hover:text-primary/80 font-medium"
+          >
+            {part}
+          </a>
+        );
+      }
+      return <Fragment key={index}>{part}</Fragment>;
+    });
+  };
 
   if (!isClient) {
     return null;
@@ -318,5 +318,3 @@ const AiAssistant: FC = () => {
 };
 
 export default AiAssistant;
-
-    
