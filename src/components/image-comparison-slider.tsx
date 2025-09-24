@@ -44,7 +44,7 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className }: ImageComp
             className="object-cover pointer-events-none"
             priority
         />
-        <div className="absolute top-2 left-2 bg-black/50 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">Avval</div>
+        <div className="absolute top-2 right-2 bg-black/50 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">Avval</div>
       </div>
 
       {/* After Image */}
