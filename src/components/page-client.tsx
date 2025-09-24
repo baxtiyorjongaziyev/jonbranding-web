@@ -166,9 +166,9 @@ const PageClient: FC<PageClientProps> = () => {
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Testimonials /></AnimatedSection>
                 <AnimatedSection><Gallery onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><Video /></AnimatedSection>
                 <AnimatedSection><Founder /></AnimatedSection>
                 <AnimatedSection><Process onCtaClick={handleOpenModal} /></AnimatedSection>
-                <AnimatedSection><Video /></AnimatedSection>
                 <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Faq /></AnimatedSection>
             </main>
