@@ -16,6 +16,7 @@ import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '../ui/separator';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
+import TiltCard from '../ui/tilt-card';
 
 
 interface PackageBuilderProps {
@@ -271,12 +272,13 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                      {category.services.map((serviceId) => {
                                         if (!serviceDetails[serviceId]) return null;
                                         return (
-                                            <ServiceCard
-                                                key={serviceId}
-                                                id={serviceId}
-                                                selected={selectedServices[serviceId] || false}
-                                                onSelect={() => handleServiceToggle(serviceId)}
-                                            />
+                                            <TiltCard key={serviceId} strength={10}>
+                                                <ServiceCard
+                                                    id={serviceId}
+                                                    selected={selectedServices[serviceId] || false}
+                                                    onSelect={() => handleServiceToggle(serviceId)}
+                                                />
+                                            </TiltCard>
                                         );
                                     })}
                                 </div>
