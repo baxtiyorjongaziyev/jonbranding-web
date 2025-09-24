@@ -50,11 +50,11 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
     offset: ['start start', 'end end'],
   });
 
-  const x = useTransform(scrollYProgress, [0.05, 0.95], ["0%", "-83.33%"]); // 100% * 5/6 = 83.33%
+  const x = useTransform(scrollYProgress, [0.05, 0.8], ["5%", "-88%"]);
 
   return (
     <>
-      <section ref={targetRef} id="process" className="relative h-[400vh] bg-white">
+      <section ref={targetRef} id="process" className="relative h-[500vh] bg-white">
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <div className="absolute top-0 left-0 right-0 pt-16 sm:pt-24 pb-12">
             <div className="container mx-auto px-4 text-center">
@@ -69,18 +69,16 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
         
           <motion.div style={{ x }} className="flex gap-8 pl-8 sm:pl-16 md:pl-24">
             {processPhases.map((phase, index) => (
-              <div key={index} className="w-[80vw] md:w-[40vw] lg:w-[30vw] flex-shrink-0">
+              <div key={index} className="w-[80vw] md:w-[45vw] lg:w-[30vw] flex-shrink-0">
                 <div className="relative pt-16">
-                  <div className="absolute top-8 left-0 right-0 h-0.5 bg-gray-200">
-                    <div className="absolute top-1/2 -translate-y-1/2 left-0 w-3 h-3 rounded-full bg-primary z-10"></div>
-                  </div>
+                  {/* Bu joy bo'sh qolishi mumkin yoki timeline chizig'i qo'shilishi */}
                 </div>
-                <div className="h-full rounded-2xl flex flex-col items-start p-4">
+                <div className="h-full rounded-2xl flex flex-col items-start p-4 bg-secondary/50 border border-gray-200/80 shadow-sm">
                   <h3 className="text-2xl font-bold text-dark-blue">{phase.title}</h3>
                   <p className="text-gray-500 text-sm mb-4">{phase.subtitle}</p>
                   <div className="flex flex-wrap gap-2 justify-start">
                     {phase.tasks.map((task) => (
-                      <Badge key={task} variant="secondary" className="font-normal bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-lg px-3 py-1 text-sm">
+                      <Badge key={task} variant="secondary" className="font-normal bg-white text-gray-700 hover:bg-gray-200/50 rounded-lg px-3 py-1 text-sm border-gray-200/80">
                         {task}
                       </Badge>
                     ))}
