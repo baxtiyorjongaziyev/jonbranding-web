@@ -93,13 +93,14 @@ const ExpandingIconButton: FC<{
     icon: React.ElementType,
     text: string,
     href: string,
-    isExternal?: boolean
-}> = ({ icon: Icon, text, href, isExternal = false }) => {
+    isExternal?: boolean,
+    expandedWidth?: number
+}> = ({ icon: Icon, text, href, isExternal = false, expandedWidth = 130 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const buttonVariants = {
     rest: { width: 44, transition: { type: 'spring', stiffness: 300, damping: 20 } },
-    hover: { width: 130, transition: { type: 'spring', stiffness: 300, damping: 20 } },
+    hover: { width: expandedWidth, transition: { type: 'spring', stiffness: 300, damping: 20 } },
   };
 
   const textVariants = {
@@ -129,7 +130,7 @@ const ExpandingIconButton: FC<{
             initial="rest"
             animate="hover"
             exit="rest"
-            className="absolute left-11 text-sm font-medium"
+            className="absolute left-11 text-sm font-medium whitespace-nowrap"
           >
             {text}
           </motion.span>
@@ -222,7 +223,7 @@ const Header: FC = () => {
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
-           <ExpandingIconButton icon={Phone} text="Telefon" href="tel:+998336450097" />
+           <ExpandingIconButton icon={Phone} text="+998 33 645 00 97" href="tel:+998336450097" expandedWidth={180}/>
            <ExpandingIconButton icon={Send} text="Telegram" href="https://t.me/baxtiyorjon_gaziyev" isExternal={true} />
            <Button 
             onClick={handleContactClick} 
