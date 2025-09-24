@@ -235,7 +235,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         <FormItem>
                         <FormLabel>Ism, Familiya</FormLabel>
                         <FormControl>
-                            <Input placeholder="Abdulla Qodiriy" {...field} />
+                            <Input placeholder="Murad Nazarov" {...field} />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
