@@ -10,13 +10,16 @@ const VideoSection = () => {
     offset: ['start end', 'end start'],
   });
 
-  // Map scroll progress to border radius
-  // When the component is in the middle of the viewport (progress 0.5), radius is 0
-  // When it's at the top or bottom edges, radius is 24px (1.5rem)
   const borderRadius = useTransform(
     scrollYProgress,
     [0, 0.2, 0.8, 1],
-    ['1.5rem', '0rem', '0rem', '1.5rem']
+    ['24px', '0px', '0px', '24px']
+  );
+  
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.9, 1.1, 0.9]
   );
 
   return (
@@ -35,7 +38,7 @@ const VideoSection = () => {
         <div ref={ref} className="mt-12 max-w-4xl mx-auto">
           <motion.div
             className="shadow-2xl overflow-hidden"
-            style={{ borderRadius }}
+            style={{ borderRadius, scale, transformOrigin: 'center' }}
           >
             <div
               style={{ padding: '56.25% 0 0 0', position: 'relative' }}
