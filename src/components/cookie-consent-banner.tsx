@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -47,10 +48,12 @@ const CookieConsentBanner = () => {
                         <Cookie className="w-8 h-8" />
                     </div>
                     <p className="flex-grow text-sm text-muted-foreground">
-                        Мы используем куки на всех своих сайтах, включая этот, потому что без кук вообще весь интернет работал бы через жопу.
+                        Biz kukilarsiz yashay olmaymiz. Chunki ular bo‘lmasa, saytimiz sizni tanimaydi, tugmalarga bosganingiz unutiladi, hatto “salom” deganimiz ham havoga uchib ketadi. Internet kukisiz — qandolsiz choy kabi.
+                        <br/><br/>
+                        Shuning uchun biz kukilarni sevamiz, sizga ham tavsiya qilamiz. Ular xavfli emas, aksincha shirin. Agar rozi bo‘lsangiz — “Yeb qo‘yaman” tugmasini bosing.
                     </p>
                     <Button onClick={handleAccept} className="w-full sm:w-auto flex-shrink-0">
-                        Прекрасно
+                        Yeb qo'yaman
                     </Button>
                 </div>
             </Card>
