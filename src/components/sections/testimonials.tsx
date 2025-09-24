@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -86,11 +86,17 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 };
 
 const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
-    const plugin = React.useRef(
+    const plugin = useRef(
       Autoplay({ delay: 5000, stopOnInteraction: true })
     );
 
     const [playVideo, setPlayVideo] = useState(false);
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
 
     if (!testimonials || testimonials.length === 0) {
       return null;
@@ -161,9 +167,9 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
             <div className="mt-16">
                 <Carousel 
                     opts={{ align: "start", loop: true }} 
-                    plugins={[plugin.current]}
-                    onMouseEnter={plugin.current.stop}
-                    onMouseLeave={plugin.current.play}
+                    plugins={isClient ? [plugin.current] : []}
+                    onMouseEnter={() => isClient && plugin.current.stop()}
+                    onMouseLeave={() => isClient && plugin.current.play()}
                     className="w-full">
                     <CarouselContent className="-ml-4">
                         {otherTestimonials.map((testimonial, index) => (
