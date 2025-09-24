@@ -11,7 +11,7 @@ const processSteps = [
     {
         title: "Kashfiyot",
         subtitle: "Boshlanish nuqtasi",
-        tasks: ["Briflash", "Biznes muammolarini aniqlash", "Auditoriya ehtiyojlari", "Bozor va raqobatchilar tahlili", "Ilhom va g‘oyalar yig‘ish"]
+        tasks: ["Briflash", "Biznes muammolarini aniqlash", "Auditoriya ehtojlari", "Bozor va raqobatchilar tahlili", "Ilhom va g‘oyalar yig‘ish"]
     },
     {
         title: "Strategiya",
@@ -34,9 +34,9 @@ const processSteps = [
         tasks: ["Tayyor dizayn fayllari", "Brandbook topshirish", "Vizual qo‘llanmalar va kontent", "Tatbiq qilish bo‘yicha yo‘riqnoma"]
     },
     {
-        title: "Qo‘llab-quvvatlash va Rivojlanish",
+        title: "Qo‘llab-quvvatlash",
         subtitle: "Brend hech qachon to‘xtamaydi",
-        tasks: ["Doimiy qo‘llab-quvvatlash", "Mijozlardan fikr yig‘ish", "Trend va yangiliklarni kuzatish", "Brendni yangilash va kengaytirish"]
+        tasks: ["Doimiy qo‘llab-quvvatlash", "Mijozlardan fikr yig‘ish", "Trend va yangiliklarni kuzatish", "Brendni yangilash"]
     },
 ];
 
@@ -48,32 +48,29 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
     const targetRef = useRef<HTMLDivElement | null>(null);
     const { scrollYProgress } = useScroll({
         target: targetRef,
+        offset: ['start start', 'end start']
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "calc(-100% + 100vw)"]); 
+    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-83.33%"]);
 
     return (
     <>
         <section ref={targetRef} id="process" className="relative h-[300vh] bg-white">
-             <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-                <div className="absolute top-16 left-0 right-0 z-10">
-                     <div className="container mx-auto px-4 text-center">
-                        <p className="font-semibold text-primary">Bizning ish jarayonimiz</p>
-                        <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue mt-2">
-                           G'oyadan Mukammallikka
-                        </h2>
-                        <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
-                           Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan bosqichli tizim.
-                        </p>
-                    </div>
+             <div className="sticky top-0 flex flex-col h-screen pt-16 sm:pt-24 overflow-hidden">
+                <div className="container mx-auto px-4 text-center mb-12">
+                    <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
+                       G'oyadan Mukammallikka
+                    </h2>
+                    <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+                       Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan bosqichli tizim.
+                    </p>
                 </div>
-
-                <motion.div style={{ x }} className="flex pl-4">
+                
+                <motion.div style={{ x }} className="flex-1 flex items-start gap-12 pl-8 pr-8">
                    {processSteps.map((step, index) => (
-                       <div key={index} className="flex-shrink-0 w-[90vw] lg:w-[30vw] px-4">
-                           <Card className="h-full rounded-2xl shadow-lg border border-gray-200/80">
+                       <div key={index} className="flex-shrink-0 w-[90vw] md:w-[45vw] lg:w-[30vw]">
+                           <Card className="h-full rounded-2xl shadow-sm border border-gray-200/80 bg-white/80 backdrop-blur-sm">
                                <CardHeader>
-                                   <Badge variant="outline" className="w-fit text-primary border-primary/50 mb-2">{`0${index + 1}-bosqich`}</Badge>
                                    <CardTitle className="text-2xl font-bold text-dark-blue">{step.title}</CardTitle>
                                    <p className="text-gray-500 !mt-1">{step.subtitle}</p>
                                </CardHeader>
