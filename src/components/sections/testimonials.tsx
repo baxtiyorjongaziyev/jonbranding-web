@@ -168,8 +168,8 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                 <Carousel 
                     opts={{ align: "start", loop: true }} 
                     plugins={isClient ? [plugin.current] : []}
-                    onMouseEnter={() => isClient && plugin.current.stop()}
-                    onMouseLeave={() => isClient && plugin.current.play()}
+                    onMouseEnter={() => isClient && plugin.current && plugin.current.stop()}
+                    onMouseLeave={() => isClient && plugin.current && plugin.current.play()}
                     className="w-full">
                     <CarouselContent className="-ml-4">
                         {otherTestimonials.map((testimonial, index) => (
