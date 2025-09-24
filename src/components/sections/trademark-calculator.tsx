@@ -23,6 +23,8 @@ import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { event as gtagEvent } from '@/lib/gtag';
 import { motion } from 'framer-motion';
+import { Slider } from '@/components/ui/slider';
+
 
 // ========================
 // 1) Konstanta va tariflar
@@ -308,15 +310,18 @@ export default function TrademarkCalculator() {
               <Label className="font-medium">Faoliyat yo'nalishlari soni (klass)</Label>
               <span className="text-xs text-slate-500">Maks. 45 ta</span>
             </div>
-            <div className="flex items-center gap-3">
-              <IconButton onClick={() => setClassCount(c=>clampClassCount((Number(c)||1)-1))}>-</IconButton>
-              <div className="min-w-[3rem] text-center font-semibold text-lg">{fees.classCount}</div>
-              <IconButton onClick={() => setClassCount(c=>clampClassCount((Number(c)||1)+1))}>+</IconButton>
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {[1,3,5,10,15,20,45].map(n=> (
-                <Chip key={n} active={fees.classCount===n} onClick={()=>setClassCount(n)}>{n}</Chip>
-              ))}
+            <div className="flex items-center gap-4">
+                <Slider
+                    value={[classCount]}
+                    onValueChange={(value) => setClassCount(value[0])}
+                    min={1}
+                    max={45}
+                    step={1}
+                    className="flex-1"
+                />
+                <div className="flex items-center justify-center w-16 h-10 rounded-md border bg-secondary font-bold text-primary text-lg">
+                    {classCount}
+                </div>
             </div>
           </div>
 
@@ -507,3 +512,5 @@ function Row({ label, value, bold=false }: { label: string, value: number, bold?
 function Divider() {
   return <div className="mt-2 pt-2 border-t" />;
 }
+
+    
