@@ -163,6 +163,14 @@
     from { transform: translateX(-100%); }
     to { transform: translateX(0); }
   }
+
+  .animate-marquee-up {
+    animation: marquee-up 30s linear infinite;
+  }
+
+  .animate-marquee-down {
+    animation: marquee-down 30s linear infinite;
+  }
   
   #savod-logo-li img {
     max-width: calc(100% - 2rem) !important;
