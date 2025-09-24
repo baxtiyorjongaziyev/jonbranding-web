@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const navItems = [
   { href: '/#portfolio', label: 'Portfolio' },
@@ -90,17 +91,31 @@ ListItem.displayName = "ListItem"
 
 
 const Header: FC = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
+  
+  const { scrollY } = useScroll();
+  const top = useTransform(scrollY, [0, 80], [0, 16]); // 1rem = 16px
+  const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
+  const backgroundColor = useTransform(
+    scrollY,
+    [0, 80],
+    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.2)']
+  );
+  const textAndBorderStyle = useTransform(
+      scrollY,
+      [0, 80],
+      ['hsl(var(--foreground))', 'hsl(var(--foreground))'] 
+  );
+  
+  const [scrolled, setScrolled] = useState(false);
+   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   const handleContactClick = () => {
     setMobileMenuOpen(false);
     const contactEvent = new CustomEvent('openContactModal');
@@ -112,14 +127,22 @@ const Header: FC = () => {
   };
 
   return (
-    <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      scrolled ? "top-4" : "top-0"
-    )}>
-      <div className={cn(
-        "container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
-        scrolled ? "bg-white/20 backdrop-blur-lg rounded-full shadow-2xl border border-white/30" : "bg-transparent"
-      )}>
+    <motion.header 
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{ top }}
+    >
+      <motion.div
+        className={cn(
+          "container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
+          "backdrop-blur-lg border border-transparent" // Always apply backdrop and prepare for border
+        )}
+        style={{ 
+          borderRadius,
+          backgroundColor,
+          borderColor: useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(255,255,255,0.3)']),
+          boxShadow: useTransform(scrollY, [0, 80], ['none', '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'])
+        }}
+      >
         <Link href="/" className="flex items-center" aria-label="Bosh sahifa">
           <Logo isWhite={false} />
         </Link>
@@ -221,8 +244,8 @@ const Header: FC = () => {
             </SheetContent>
           </Sheet>
         </div>
-      </div>
-    </header>
+      </motion.div>
+    </motion.header>
   );
 };
 
