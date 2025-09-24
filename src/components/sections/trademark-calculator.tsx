@@ -148,7 +148,8 @@ export function calculateFees({
 
 
 // Yangi Dynamic Toggle komponenti
-const DynamicToggle = ({ options, selected, onSelect }: {
+const DynamicToggle = ({ id, options, selected, onSelect }: {
+    id: string; // Unique ID for layoutId
     options: { value: string, label: string }[];
     selected: string;
     onSelect: (value: string) => void;
@@ -159,7 +160,7 @@ const DynamicToggle = ({ options, selected, onSelect }: {
                 <div key={option.value} className="relative flex-1">
                     {selected === option.value && (
                         <motion.div
-                            layoutId="calculator-toggle-bg"
+                            layoutId={`calculator-toggle-bg-${id}`}
                             className="absolute inset-0 rounded-full bg-primary shadow-md"
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
@@ -322,6 +323,7 @@ export default function TrademarkCalculator() {
           <div>
             <Label className="font-medium mb-2 block">Shaxs turi</Label>
             <DynamicToggle 
+              id="person-type"
               options={[
                 { value: 'jismoniy', label: 'Jismoniy shaxs' },
                 { value: 'yuridik', label: 'Yuridik shaxs' }
@@ -334,6 +336,7 @@ export default function TrademarkCalculator() {
           <div>
             <Label className="font-medium mb-2 block">Ko‘rib chiqish tezligi</Label>
              <DynamicToggle 
+              id="speed"
               options={[
                 { value: 'oddiy', label: 'Oddiy (7 oy)' },
                 { value: 'tez', label: 'Tezkor (1.5 oy)' }
@@ -346,6 +349,7 @@ export default function TrademarkCalculator() {
           <div>
             <Label className="font-medium mb-2 block">Qo'shimcha ekspert tekshiruvi</Label>
             <DynamicToggle 
+              id="expert-check"
               options={[
                 { value: 'ha', label: 'Yoqilgan' },
                 { value: 'yoq', label: 'O‘chirilgan' }
