@@ -25,8 +25,8 @@ const ServiceSections = () => {
     return (
         <>
             <Gallery onCtaClick={handleOpenModal} />
-            <TrustedBy brands={brands} />
             <Video />
+            <TrustedBy brands={brands} />
             <CtaBlock 
                 title="Loyihangizni muhokama qilishga tayyormisiz?"
                 description="Biznesingiz uchun qanday yechimlar taklif qila olishimizni bilish uchun bepul konsultatsiyaga yoziling."
