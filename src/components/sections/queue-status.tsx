@@ -13,24 +13,22 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface QueueStatusProps {
   onCtaClick: () => void;
 }
 
-const LiquidBlob = ({ style, duration }: { style: React.CSSProperties, duration: number }) => (
+const LiquidBlob = ({ className, style, transition }: { className: string, style: React.CSSProperties, transition: object }) => (
     <motion.div
-        className="absolute z-0"
+        className={cn("absolute mix-blend-soft-light", className)}
         style={style}
         animate={{
-            rotate: 360,
+            x: ['-20%', '20%', '-20%'],
+            y: ['-10%', '10%', '-10%'],
+            rotate: [0, 360, 0],
         }}
-        transition={{
-            duration: duration,
-            ease: "linear",
-            repeat: Infinity,
-        }}
+        transition={transition}
     />
 );
 
@@ -48,13 +46,33 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
   return (
     <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
-        <Card className="relative overflow-hidden max-w-4xl mx-auto bg-gradient-to-br from-dark-blue to-blue-900 text-white rounded-3xl shadow-2xl p-6 sm:p-10">
-            <div className="absolute inset-0 z-0 opacity-50">
-                <div className="absolute inset-0 backdrop-blur-3xl"></div>
-                 <LiquidBlob style={{ top: '-10%', left: '-10%', width: 300, height: 300, backgroundColor: 'hsla(var(--accent))', borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }} duration={25} />
-                 <LiquidBlob style={{ bottom: '-15%', right: '-5%', width: 350, height: 350, backgroundColor: 'hsla(var(--primary))', borderRadius: '80% 20% 60% 40% / 50% 70% 30% 50%' }} duration={30} />
-                 <LiquidBlob style={{ top: '20%', right: '20%', width: 200, height: 200, backgroundColor: 'hsla(var(--secondary) / 0.5)', borderRadius: '30% 70% 50% 50% / 60% 40% 60% 40%' }} duration={35} />
-                 <LiquidBlob style={{ bottom: '25%', left: '15%', width: 250, height: 250, backgroundColor: 'hsla(var(--accent) / 0.7)', borderRadius: '50% 50% 30% 70% / 40% 40% 60% 60%' }} duration={20} />
+        <Card className="relative overflow-hidden max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl p-6 sm:p-10">
+            <div className="absolute inset-0 z-0 opacity-40">
+                <div className="absolute inset-0 bg-gradient-to-br from-dark-blue to-blue-900" />
+                <AnimatePresence>
+                     <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1 }}
+                        className="absolute inset-0 filter blur-3xl"
+                    >
+                        <LiquidBlob 
+                            className="bg-accent" 
+                            style={{ top: '5%', left: '10%', width: 300, height: 300, borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }} 
+                            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+                        />
+                         <LiquidBlob 
+                            className="bg-primary" 
+                            style={{ bottom: '10%', right: '15%', width: 350, height: 350, borderRadius: '80% 20% 60% 40% / 50% 70% 30% 50%' }} 
+                            transition={{ duration: 35, repeat: Infinity, ease: 'linear', delay: 5 }}
+                        />
+                         <LiquidBlob 
+                            className="bg-sky-blue" 
+                            style={{ top: '25%', right: '5%', width: 250, height: 250, borderRadius: '30% 70% 50% 50% / 60% 40% 60% 40%' }} 
+                            transition={{ duration: 40, repeat: Infinity, ease: 'linear', delay: 10 }}
+                        />
+                    </motion.div>
+                </AnimatePresence>
             </div>
 
           <div className="relative z-10">
