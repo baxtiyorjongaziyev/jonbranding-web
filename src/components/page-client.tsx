@@ -29,6 +29,12 @@ const Faq = dynamic(() => import('@/components/sections/faq'));
 const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
   useEffect(() => {
     const SESSION_STORAGE_KEY = 'scroll_intent_shown';
+    
+    // Ensure this runs only on the client
+    if (typeof window === 'undefined') {
+        return;
+    }
+
     if (sessionStorage.getItem(SESSION_STORAGE_KEY)) {
       return;
     }
