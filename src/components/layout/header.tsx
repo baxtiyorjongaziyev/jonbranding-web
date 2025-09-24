@@ -91,6 +91,7 @@ ListItem.displayName = "ListItem"
 
 const Header: FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,8 +102,13 @@ const Header: FC = () => {
   }, []);
   
   const handleContactClick = () => {
+    setMobileMenuOpen(false);
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
+  };
+
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -168,7 +174,7 @@ const Header: FC = () => {
           >
              Bepul konsultatsiya olish
           </Button>
-          <Sheet>
+          <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className={cn("lg:hidden", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
                 <Menu className="h-5 w-5" />
@@ -184,7 +190,7 @@ const Header: FC = () => {
                  <ul className="pl-4 space-y-4">
                     {services.map((service) => (
                        <li key={service.title}>
-                         <Link href={service.href} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
+                         <Link href={service.href} onClick={handleLinkClick} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
                        </li>
                     ))}
                  </ul>
@@ -192,6 +198,7 @@ const Header: FC = () => {
                    <Link
                     key={item.label}
                     href={item.href}
+                    onClick={handleLinkClick}
                     className="text-xl font-medium text-foreground transition-colors hover:text-accent"
                   >
                     {item.label}
