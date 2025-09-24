@@ -89,76 +89,53 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem"
 
-const ExpandingContactButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const ExpandingIconButton: FC<{
+    icon: React.ElementType,
+    text: string,
+    href: string,
+    isExternal?: boolean
+}> = ({ icon: Icon, text, href, isExternal = false }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
-  const wrapperVariants = {
-    open: {
-      width: 320,
-      transition: { type: "spring", stiffness: 300, damping: 25 },
-    },
-    closed: {
-      width: 140,
-      transition: { type: "spring", stiffness: 300, damping: 25 },
-    },
+  const buttonVariants = {
+    rest: { width: 44, transition: { type: 'spring', stiffness: 300, damping: 20 } },
+    hover: { width: 130, transition: { type: 'spring', stiffness: 300, damping: 20 } },
   };
 
-  const contentVariants = {
-    open: {
-      opacity: 1,
-      x: 0,
-      transition: { delay: 0.2, duration: 0.2 },
-    },
-    closed: {
-      opacity: 0,
-      x: -10,
-      transition: { duration: 0.2 },
-    },
+  const textVariants = {
+    rest: { opacity: 0, x: -10, transition: { duration: 0.1 } },
+    hover: { opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.2 } },
   };
 
   return (
-    <motion.div
-      variants={wrapperVariants}
-      animate={isOpen ? "open" : "closed"}
-      initial="closed"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+    <motion.a
+      href={href}
+      target={isExternal ? '_blank' : '_self'}
+      rel={isExternal ? 'noopener noreferrer' : ''}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      variants={buttonVariants}
+      animate={isHovered ? 'hover' : 'rest'}
+      initial="rest"
       className="relative flex items-center justify-center h-11 rounded-full bg-secondary text-secondary-foreground shadow-sm overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine" />
+      <div className="absolute left-3.5">
+          <Icon size={18} />
+      </div>
       <AnimatePresence>
-        {isOpen ? (
-          <motion.div
-            key="content"
-            variants={contentVariants}
-            initial="closed"
-            animate="open"
-            exit="closed"
-            className="flex items-center justify-around w-full"
+        {isHovered && (
+          <motion.span
+            variants={textVariants}
+            initial="rest"
+            animate="hover"
+            exit="rest"
+            className="absolute left-11 text-sm font-medium"
           >
-            <a href="tel:+998336450097" className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary">
-              <Phone size={16} /> Telefon
-            </a>
-            <div className="h-6 w-px bg-border" />
-            <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary">
-              <Send size={16} /> Telegram
-            </a>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="button"
-            variants={contentVariants}
-            initial="closed"
-            animate="open"
-            exit="closed"
-            className="flex items-center gap-2 cursor-pointer"
-          >
-            <Mail size={16} />
-            <span className="font-medium">Bog'lanish</span>
-          </motion.div>
+            {text}
+          </motion.span>
         )}
       </AnimatePresence>
-    </motion.div>
+    </motion.a>
   );
 };
 
@@ -244,8 +221,9 @@ const Header: FC = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden items-center space-x-4 lg:flex">
-           <ExpandingContactButton />
+        <div className="hidden items-center space-x-2 lg:flex">
+           <ExpandingIconButton icon={Phone} text="Telefon" href="tel:+998336450097" />
+           <ExpandingIconButton icon={Send} text="Telegram" href="https://t.me/baxtiyorjon_gaziyev" isExternal={true} />
            <Button 
             onClick={handleContactClick} 
             className="shadow-ocean"
