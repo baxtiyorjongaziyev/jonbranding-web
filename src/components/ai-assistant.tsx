@@ -10,7 +10,6 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { chatAssistant } from '@/ai/flows/assistant-flow';
-import { useLocalStorage } from '@/hooks/use-local-storage';
 import { useToast } from '@/hooks/use-toast';
 
 interface Message {
@@ -61,7 +60,7 @@ const renderTextWithLinks = (text: string) => {
 
 const AiAssistant: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useLocalStorage<Message[]>('ai-assistant-messages', []);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
@@ -73,19 +72,32 @@ const AiAssistant: FC = () => {
     setIsClient(true);
   }, []);
 
-
-  useEffect(() => {
-    if (isOpen && messages.length === 0) {
+  const initializeChat = () => {
       setIsLoading(true);
       const timer = setTimeout(() => {
         setMessages([
-          { id: Date.now().toString(), text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.", sender: 'bot', choices: suggestionChips }
+          { 
+            id: Date.now().toString(), 
+            text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.", 
+            sender: 'bot', 
+            choices: suggestionChips 
+          }
         ]);
         setIsLoading(false);
       }, 1000);
       return () => clearTimeout(timer);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      // Har safar chat oynasi ochilganda, suhbatni boshidan boshlaymiz.
+      initializeChat();
+    } else {
+      // Oyna yopilganda xabarlarni tozalaymiz.
+      setMessages([]);
     }
-  }, [isOpen, messages.length, setMessages]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
   
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -123,7 +135,6 @@ const AiAssistant: FC = () => {
         sender: 'user' 
     };
     
-    // Immediately update the UI with the user's message
     const updatedMessages = [
       ...messages.map(m => ({ ...m, choices: undefined })),
       newUserMessage
@@ -189,7 +200,7 @@ const AiAssistant: FC = () => {
     <>
       <div className={cn(
         "fixed bottom-6 right-6 z-50 transition-all duration-300", 
-        "pb-[76px] md:pb-0", // Adjust position to avoid overlap with mobile CTA bar
+        "pb-[76px] md:pb-0",
         isOpen ? 'scale-0' : 'scale-100'
       )}>
         <Button
@@ -307,3 +318,5 @@ const AiAssistant: FC = () => {
 };
 
 export default AiAssistant;
+
+    
