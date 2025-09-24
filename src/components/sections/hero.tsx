@@ -11,6 +11,7 @@ import { Card } from '../ui/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import React from 'react';
+import TiltCard from '../ui/tilt-card';
 
 
 interface HeroProps {
@@ -96,31 +97,33 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
                 </div>
             </div>
             <div className="hidden lg:flex justify-center items-center">
-                <Card className="rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-500 w-[500px] h-[500px]">
-                    <Carousel
-                        plugins={[plugin.current]}
-                        className="w-full h-full"
-                        onMouseEnter={plugin.current.stop}
-                        onMouseLeave={plugin.current.play}
-                    >
-                        <CarouselContent>
-                            {portfolioImages.map((src, index) => (
-                                <CarouselItem key={index}>
-                                    <div className="w-full h-[500px] relative">
-                                        <Image 
-                                            src={src}
-                                            alt={`Portfolio ishi ${index + 1}`}
-                                            layout="fill"
-                                            objectFit="cover"
-                                            unoptimized={src.endsWith('.gif')}
-                                            className="bg-white"
-                                        />
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                    </Carousel>
-                </Card>
+                <TiltCard strength={10} className="w-[500px] h-[500px]">
+                    <Card className="rounded-2xl shadow-2xl overflow-hidden w-full h-full">
+                        <Carousel
+                            plugins={[plugin.current]}
+                            className="w-full h-full"
+                            onMouseEnter={plugin.current.stop}
+                            onMouseLeave={plugin.current.play}
+                        >
+                            <CarouselContent>
+                                {portfolioImages.map((src, index) => (
+                                    <CarouselItem key={index}>
+                                        <div className="w-full h-[500px] relative">
+                                            <Image 
+                                                src={src}
+                                                alt={`Portfolio ishi ${index + 1}`}
+                                                layout="fill"
+                                                objectFit="cover"
+                                                unoptimized={src.endsWith('.gif')}
+                                                className="bg-white"
+                                            />
+                                        </div>
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                        </Carousel>
+                    </Card>
+                </TiltCard>
             </div>
         </div>
       </div>
