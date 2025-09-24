@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Minus, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { event as gtagEvent } from '@/lib/gtag';
 import { motion } from 'framer-motion';
@@ -310,7 +310,10 @@ export default function TrademarkCalculator() {
               <Label className="font-medium">Faoliyat yo'nalishlari soni (klass)</Label>
               <span className="text-xs text-slate-500">Maks. 45 ta</span>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+                <IconButton onClick={() => setClassCount(clampClassCount(classCount - 1))} disabled={classCount <= 1}>
+                    <Minus className="h-4 w-4"/>
+                </IconButton>
                 <Slider
                     value={[classCount]}
                     onValueChange={(value) => setClassCount(value[0])}
@@ -319,6 +322,9 @@ export default function TrademarkCalculator() {
                     step={1}
                     className="flex-1"
                 />
+                 <IconButton onClick={() => setClassCount(clampClassCount(classCount + 1))} disabled={classCount >= 45}>
+                    <Plus className="h-4 w-4"/>
+                </IconButton>
                 <div className="flex items-center justify-center w-16 h-10 rounded-md border bg-secondary font-bold text-primary text-lg">
                     {classCount}
                 </div>
@@ -482,7 +488,7 @@ function LabeledInput({ label, ...rest }: {label: string, [key: string]: any}) {
 
 function IconButton({ children, ...props }: { children: React.ReactNode, [key: string]: any }) {
   return (
-    <Button type="button" variant="outline" size="icon" className="h-10 w-10 text-lg" {...props}>
+    <Button type="button" variant="outline" size="icon" className="h-10 w-10 text-lg rounded-md" {...props}>
       {children}
     </Button>
   );
