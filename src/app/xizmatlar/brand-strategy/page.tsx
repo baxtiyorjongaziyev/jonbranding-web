@@ -1,14 +1,14 @@
 
 'use client';
 
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Parallax from '@/components/parallax-provider';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import dynamic from 'next/dynamic';
@@ -58,10 +58,6 @@ const BrandStrategyPage: FC = () => {
     window.dispatchEvent(contactEvent);
   };
   
-  const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
-  );
-
   return (
     <>
         <main className="flex-grow">
