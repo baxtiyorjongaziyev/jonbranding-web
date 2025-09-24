@@ -29,7 +29,7 @@ const ServiceSections = () => {
             <CtaBlock 
                 title="Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin."
                 description="Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz."
-                buttonText="Mening biznesim uchun ham shunday natija xohlayman"
+                buttonText="Mening biznesim uchun ham"
                 onCtaClick={handleOpenModal}
             />
             <TrustedBy brands={brands} />
