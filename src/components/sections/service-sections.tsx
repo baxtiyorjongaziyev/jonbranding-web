@@ -24,8 +24,14 @@ const ServiceSections = () => {
 
     return (
         <>
-            <Gallery onCtaClick={handleOpenModal} />
+            <Gallery />
             <Video />
+            <CtaBlock 
+                title="Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin."
+                description="Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz."
+                buttonText="Mening biznesim uchun ham shunday natija xohlayman"
+                onCtaClick={handleOpenModal}
+            />
             <TrustedBy brands={brands} />
             <CtaBlock 
                 title="Loyihangizni muhokama qilishga tayyormisiz?"

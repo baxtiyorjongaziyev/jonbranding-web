@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import Stats from '@/components/sections/stats';
 import { useExitIntent } from '@/hooks/use-exit-intent';
+import CtaBlock from '@/components/sections/cta-block';
 
 // Dynamically import components that are not immediately visible
 const Founder = dynamic(() => import('@/components/sections/founder'));
@@ -165,8 +166,16 @@ const PageClient: FC<PageClientProps> = () => {
                 <AnimatedSection><TargetAudience /></AnimatedSection>
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Testimonials /></AnimatedSection>
-                <AnimatedSection><Gallery onCtaClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><Gallery /></AnimatedSection>
                 <AnimatedSection><Video /></AnimatedSection>
+                 <AnimatedSection>
+                    <CtaBlock 
+                        title="Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin."
+                        description="Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz."
+                        buttonText="Mening biznesim uchun ham shunday natija xohlayman"
+                        onCtaClick={handleOpenModal}
+                    />
+                </AnimatedSection>
                 <AnimatedSection><Founder /></AnimatedSection>
                 <AnimatedSection><Process onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} /></AnimatedSection>
