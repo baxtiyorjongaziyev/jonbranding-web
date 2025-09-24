@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FileText, Search, Target, Pencil, Send, ClipboardSignature } from 'lucide-react';
@@ -51,7 +52,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
     offset: ['start start', 'end end']
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${100 - 100/steps.length}%`]);
+  const x = useTransform(scrollYProgress, [0, 1], ["5%", `-${100 - 100/steps.length - 15}%`]);
   const progressBarWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
@@ -74,9 +75,9 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
                         />
                     </div>
 
-                    <motion.div style={{ x }} className="flex gap-4 lg:gap-8">
+                    <motion.div style={{ x }} className="flex gap-16">
                         {steps.map((step, index) => (
-                            <div key={index} className="relative w-screen lg:w-auto flex-shrink-0 lg:flex-1 px-4 lg:px-0">
+                            <div key={index} className="relative w-[90vw] lg:w-[50vw] flex-shrink-0 px-4">
                                 <div className="relative lg:text-center max-w-sm mx-auto p-8 rounded-2xl bg-secondary/50 lg:bg-transparent">
                                     <div className="flex items-center lg:justify-center gap-4">
                                         <div className="relative z-10 flex-shrink-0">
