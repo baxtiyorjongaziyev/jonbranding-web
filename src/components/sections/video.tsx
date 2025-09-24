@@ -23,6 +23,8 @@ const VideoSection = () => {
     ["24px", "0px", "0px", "24px"]
   );
 
+  const videoUrl = "https://player.vimeo.com/video/1109613592?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&dnt=1&title=0&byline=0&portrait=0";
+
   return (
     <section id="video" className="h-[200vh] bg-white" ref={ref}>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden p-4 sm:p-8 md:p-12">
@@ -30,8 +32,17 @@ const VideoSection = () => {
           className="relative w-full max-w-6xl aspect-video shadow-2xl bg-black"
           style={{ scale, borderRadius }}
         >
+          {/* Blurred background video (Ambilight effect) */}
           <iframe
-            src="https://player.vimeo.com/video/1109613592?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&dnt=1&title=0&byline=0&portrait=0"
+            src={videoUrl}
+            frameBorder="0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            className="absolute -inset-12 w-[calc(100%+6rem)] h-[calc(100%+6rem)] blur-3xl opacity-50 -z-10"
+            title="Jon.Branding Showreel Background"
+          ></iframe>
+          {/* Main video */}
+          <iframe
+            src={videoUrl}
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             className="absolute top-0 left-0 w-full h-full"
