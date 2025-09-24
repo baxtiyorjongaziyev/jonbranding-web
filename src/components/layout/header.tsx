@@ -5,7 +5,7 @@ import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu, Phone, Send } from 'lucide-react';
+import { Menu, Phone, Send, X, Mail } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
 const navItems = [
   { href: '/#portfolio', label: 'Portfolio' },
@@ -89,6 +89,79 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem"
 
+const ExpandingContactButton = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const wrapperVariants = {
+    open: {
+      width: 320,
+      transition: { type: "spring", stiffness: 300, damping: 25 },
+    },
+    closed: {
+      width: 140,
+      transition: { type: "spring", stiffness: 300, damping: 25 },
+    },
+  };
+
+  const contentVariants = {
+    open: {
+      opacity: 1,
+      x: 0,
+      transition: { delay: 0.2, duration: 0.2 },
+    },
+    closed: {
+      opacity: 0,
+      x: -10,
+      transition: { duration: 0.2 },
+    },
+  };
+
+  return (
+    <motion.div
+      variants={wrapperVariants}
+      animate={isOpen ? "open" : "closed"}
+      initial="closed"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+      className="relative flex items-center justify-center h-11 rounded-full bg-secondary text-secondary-foreground shadow-sm overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine" />
+      <AnimatePresence>
+        {isOpen ? (
+          <motion.div
+            key="content"
+            variants={contentVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            className="flex items-center justify-around w-full"
+          >
+            <a href="tel:+998336450097" className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary">
+              <Phone size={16} /> Telefon
+            </a>
+            <div className="h-6 w-px bg-border" />
+            <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary">
+              <Send size={16} /> Telegram
+            </a>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="button"
+            variants={contentVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            <Mail size={16} />
+            <span className="font-medium">Bog'lanish</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
 
 const Header: FC = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -100,11 +173,6 @@ const Header: FC = () => {
     scrollY,
     [0, 80],
     ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.2)']
-  );
-  const textAndBorderStyle = useTransform(
-      scrollY,
-      [0, 80],
-      ['hsl(var(--foreground))', 'hsl(var(--foreground))'] 
   );
   
   const [scrolled, setScrolled] = useState(false);
@@ -134,7 +202,7 @@ const Header: FC = () => {
       <motion.div
         className={cn(
           "container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
-          "backdrop-blur-lg border border-transparent" // Always apply backdrop and prepare for border
+          "backdrop-blur-lg border border-transparent"
         )}
         style={{ 
           borderRadius,
@@ -176,30 +244,19 @@ const Header: FC = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden items-center space-x-6 lg:flex">
-           <div className="flex items-center gap-6 ml-4">
-             <a href="tel:+998336450097" className={cn("flex items-center gap-2 text-base font-medium transition-colors hover:text-accent", scrolled ? "text-foreground" : "text-foreground")}>
-                <Phone size={16} />
-                +998 33 645 00 97
-              </a>
-              <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className={cn("flex items-center gap-2 text-base font-medium transition-colors hover:text-accent", scrolled ? "text-foreground" : "text-foreground")}>
-                <Send size={16} />
-                Telegram
-              </a>
-           </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button 
+        <div className="hidden items-center space-x-4 lg:flex">
+           <ExpandingContactButton />
+           <Button 
             onClick={handleContactClick} 
-            className={cn(
-                "hidden md:flex shadow-ocean"
-            )}
+            className="shadow-ocean"
           >
-             Bepul konsultatsiya olish
+             Bepul konsultatsiya
           </Button>
+        </div>
+        <div className="flex items-center gap-2 lg:hidden">
           <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className={cn("lg:hidden", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
+              <Button variant="outline" size="icon" className={cn(scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Menyuni ochish</span>
               </Button>
