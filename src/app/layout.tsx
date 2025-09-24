@@ -16,6 +16,7 @@ import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import AiAssistant from '@/components/ai-assistant';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { pageview } from '@/lib/gtag';
+import CookieConsentBanner from '@/components/cookie-consent-banner';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'));
 
@@ -171,7 +172,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         />
         <noscript>
           <img height="1" width="1" style={{display: 'none'}}
-               src="https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}&ev=PageView&noscript=1" />
+               src={`https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}&ev=PageView&noscript=1`} />
         </noscript>
         {/* End Meta Pixel Code */}
 
@@ -233,6 +234,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
             onFormSubmitSuccess={handleCloseModal}
         />
         <AiAssistant />
+        <CookieConsentBanner />
       </body>
     </html>
   );
