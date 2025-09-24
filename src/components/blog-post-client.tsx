@@ -32,13 +32,14 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
         </header>
 
         <div className="container mx-auto px-4 -mt-16 z-10 relative">
-          <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
+          <div className="w-full rounded-2xl overflow-hidden shadow-2xl">
             <Image
               src={post.image}
               alt={post.title}
               data-ai-hint={post.imageHint}
-              fill
-              className="object-cover"
+              width={1200}
+              height={630}
+              className="w-full h-auto object-cover"
               priority
             />
           </div>
