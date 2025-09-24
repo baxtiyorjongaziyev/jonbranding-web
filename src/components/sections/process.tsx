@@ -57,7 +57,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
 
   return (
     <section id="process" className="bg-white">
-        <div className="container mx-auto px-4 pt-16 sm:pt-24 pb-8 text-center">
+        <div className="container mx-auto px-4 pt-16 sm:pt-24 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold">Bizning ish jarayonimiz</h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
                 Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan bosqichli tizim.
