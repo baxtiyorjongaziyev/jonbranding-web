@@ -1,3 +1,4 @@
+
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -36,7 +37,7 @@ const VideoSection = () => {
           style={{ scale, borderRadius, maxWidth }}
         >
           <iframe
-            src="https://player.vimeo.com/video/1109613592?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&dnt=1"
+            src="https://player.vimeo.com/video/1109613592?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&dnt=1&title=0&byline=0&portrait=0"
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             className="absolute top-0 left-0 w-full h-full"

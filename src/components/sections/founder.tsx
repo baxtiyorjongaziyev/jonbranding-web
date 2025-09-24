@@ -65,7 +65,7 @@ const Founder = () => {
               <CardContent className="p-0 relative bg-black" style={{ paddingBottom: '140%' }}>
                 {playVideo ? (
                     <iframe
-                        src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1"
+                        src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1&title=0&byline=0&portrait=0"
                         frameBorder="0"
                         allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                         className="absolute w-full h-full top-0 left-0"
