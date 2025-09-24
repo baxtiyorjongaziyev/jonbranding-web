@@ -1,11 +1,15 @@
 
+'use client';
+
 import Link from 'next/link';
 import { Logo } from '@/components/icons/logo';
 import { Phone, Send, Instagram, ArrowUp } from 'lucide-react';
 import { Separator } from '../ui/separator';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
 const Footer = () => {
-
+  const [isHovered, setIsHovered] = useState(false);
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -86,7 +90,26 @@ const Footer = () => {
         
         {/* Bottom Section */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-           <p className="text-sm text-gray-400 order-2 sm:order-1">&copy; {new Date().getFullYear()} Jon.Branding. Barcha huquqlar himoyalangan.</p>
+           <motion.div
+              onHoverStart={() => setIsHovered(true)}
+              onHoverEnd={() => setIsHovered(false)}
+              className="relative flex items-center text-sm text-gray-400 order-2 sm:order-1 cursor-pointer"
+            >
+              <p>&copy; {new Date().getFullYear()} Jon.Branding.</p>
+              <AnimatePresence>
+                {isHovered && (
+                  <motion.div
+                    initial={{ opacity: 0, width: 0, marginLeft: 0 }}
+                    animate={{ opacity: 1, width: 'auto', marginLeft: '0.25rem' }}
+                    exit={{ opacity: 0, width: 0, marginLeft: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden whitespace-nowrap"
+                  >
+                    <span>Barcha huquqlar himoyalangan.</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
            
            <div className="flex items-center gap-6 order-1 sm:order-2">
              <a href="https://www.instagram.com/jon.branding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
