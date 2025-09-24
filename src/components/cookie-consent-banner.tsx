@@ -48,9 +48,7 @@ const CookieConsentBanner = () => {
                         <Cookie className="w-8 h-8" />
                     </div>
                     <p className="flex-grow text-sm text-muted-foreground">
-                        Biz kukilarsiz yashay olmaymiz. Chunki ular bo‘lmasa, saytimiz sizni tanimaydi, tugmalarga bosganingiz unutiladi, hatto “salom” deganimiz ham havoga uchib ketadi. Internet kukisiz — qandolsiz choy kabi.
-                        <br/><br/>
-                        Shuning uchun biz kukilarni sevamiz, sizga ham tavsiya qilamiz. Ular xavfli emas, aksincha shirin. Agar rozi bo‘lsangiz — “Yeb qo‘yaman” tugmasini bosing.
+                        Saytimizda shirin kukilar bor. Ular bizga sizni eslab qolishda yordam beradi. Rozi bo'lsangiz, birgalikda baham ko'ramiz.
                     </p>
                     <Button onClick={handleAccept} className="w-full sm:w-auto flex-shrink-0">
                         Yeb qo'yaman
