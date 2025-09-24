@@ -8,6 +8,11 @@ const COOLDOWN_PERIOD_MS = 7 * 24 * 60 * 60 * 1000; // 7 kun
 
 export const useExitIntent = (onExitIntent: () => void) => {
   useEffect(() => {
+    // Ensure this runs only on the client
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+        return;
+    }
+
     const lastShownString = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (lastShownString) {
         const lastShownTime = new Date(lastShownString).getTime();
