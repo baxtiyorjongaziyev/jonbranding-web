@@ -34,7 +34,7 @@ const processSteps = [
         tasks: ["Tayyor dizayn fayllari", "Brandbook topshirish", "Vizual qo‘llanmalar va kontent", "Tatbiq qilish bo‘yicha yo‘riqnoma"]
     },
     {
-        title: "Qo‘llab-quvvatlash",
+        title: "Qo‘llab-quvvatlash va Rivojlanish",
         subtitle: "Brend hech qachon to‘xtamaydi",
         tasks: ["Doimiy qo‘llab-quvvatlash", "Mijozlardan fikr yig‘ish", "Trend va yangiliklarni kuzatish", "Brendni yangilash va kengaytirish"]
     },
@@ -50,7 +50,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
         target: targetRef,
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-83.33%"]); // 100 - 100/6 = 83.33
+    const x = useTransform(scrollYProgress, [0, 1], ["0%", "calc(-100% + 100vw)"]); 
 
     return (
     <>
@@ -68,7 +68,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
                     </div>
                 </div>
 
-                <motion.div style={{ x }} className="flex gap-8 px-4">
+                <motion.div style={{ x }} className="flex pl-4">
                    {processSteps.map((step, index) => (
                        <div key={index} className="flex-shrink-0 w-[90vw] lg:w-[30vw] px-4">
                            <Card className="h-full rounded-2xl shadow-lg border border-gray-200/80">
