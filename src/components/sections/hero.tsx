@@ -47,8 +47,6 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
   const [buttonIndex, setButtonIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const plugin = useRef(Autoplay({ delay: 2500, stopOnInteraction: true }));
-
   useEffect(() => {
     const headlineInterval = setInterval(() => {
       setIsAnimating(true);
@@ -100,10 +98,8 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick }) => {
                 <TiltCard strength={10} className="w-[500px] h-[500px]">
                     <Card className="rounded-2xl shadow-2xl overflow-hidden w-full h-full">
                         <Carousel
-                            plugins={[plugin.current]}
+                            plugins={[Autoplay({ delay: 2500, stopOnInteraction: true })]}
                             className="w-full h-full"
-                            onMouseEnter={plugin.current.stop}
-                            onMouseLeave={plugin.current.play}
                         >
                             <CarouselContent>
                                 {portfolioImages.map((src, index) => (
