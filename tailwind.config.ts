@@ -98,7 +98,15 @@ const config: Config = {
         "text-fade-out": {
           from: { opacity: "0", transform: "translateY(-10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
-        }
+        },
+        "marquee-up": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(-100%)" },
+        },
+        "marquee-down": {
+          from: { transform: "translateY(-100%)" },
+          to: { transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -106,6 +114,8 @@ const config: Config = {
         "shine": "shine 2s infinite",
         "text-fade-in": "text-fade-in 0.8s ease-in-out",
         "text-fade-out": "text-fade-out 0.8s ease-in-out",
+        "marquee-up": "marquee-up 30s linear infinite",
+        "marquee-down": "marquee-down 30s linear infinite",
       },
     },
   },
