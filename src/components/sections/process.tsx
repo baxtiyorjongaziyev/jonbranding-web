@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useRef } from 'react';
@@ -11,24 +12,34 @@ interface ProcessProps {
 
 const processPhases = [
   {
-    title: 'Discovery',
-    subtitle: 'Beginning the Journey',
-    tasks: ['Briefing', 'People Problem', 'Market Research', 'People Needs', 'Creative Ideation'],
+    title: 'Kashfiyot',
+    subtitle: 'Boshlanish nuqtasi',
+    tasks: ['Briflash', 'Biznes muammolarini aniqlash', 'Auditoriya ehtiyojlari', 'Bozor va raqobatchilar tahlili', 'Ilhom va g‘oyalar yig‘ish'],
   },
   {
-    title: 'Strategy',
-    subtitle: 'Mapping the Path',
-    tasks: ['Goal Setting', 'User Analysis', 'Competitor Analysis', 'Design Principles', 'Roadmapping', 'Design Vision'],
+    title: 'Strategiya',
+    subtitle: 'Yo‘l xaritasini belgilash',
+    tasks: ['Maqsad qo‘yish', 'Auditoriya tahlili', 'Brendni joylashtirish (pozitsiyalash)', 'Asosiy tamoyillar', 'Rejalashtirish (roadmap)', 'Brend vizyoni'],
   },
   {
-    title: 'Evaluation',
-    subtitle: 'Challenging the Views',
-    tasks: ['Heuristic Evaluation', 'User Testing', 'A/B Testing', 'Feedback Analysis', 'Design System', 'Accessibility Checks'],
+    title: 'Ijodiy Dizayn',
+    subtitle: 'Brendni shakllantirish',
+    tasks: ['Nomingizni yaratish (naming)', 'Logo ishlanmalari', 'Rang va shrift tizimi', 'Vizual konsepsiya', 'Qadoqlash dizayni', 'Brandbook asoslari'],
   },
   {
-    title: 'Development',
-    subtitle: 'Crafting the Experience',
-    tasks: ['Wireframing', 'Interactive Design', 'Visual Design', 'Prototyping', 'Handoff'],
+    title: 'Taqdimot va Fikr',
+    subtitle: 'Sinov va takomillashtirish',
+    tasks: ['Dizayn taqdimoti', 'Mijozdan fikr olish', 'Taklif va variantlarni moslashtirish', 'Yakuniy yechimni tanlash'],
+  },
+  {
+    title: 'Amaliyotga Tatbiq',
+    subtitle: 'Brendni hayotga tadbiq etish',
+    tasks: ['Tayyor dizayn fayllari', 'Brandbook topshirish', 'Vizual qo‘llanmalar va kontent', 'Tatbiq qilish bo‘yicha yo‘riqnoma'],
+  },
+  {
+    title: 'Qo‘llab-quvvatlash va Rivojlanish',
+    subtitle: 'Brend hech qachon to‘xtamaydi',
+    tasks: ['Doimiy qo‘llab-quvvatlash', 'Mijozlardan fikr yig‘ish', 'Trend va yangiliklarni kuzatish', 'Brendni yangilash va kengaytirish'],
   },
 ];
 
@@ -39,30 +50,26 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
     offset: ['start start', 'end end'],
   });
 
-  // We have 4 items, so we want to scroll through 3 "screens" worth of content.
-  // We'll map scrollYProgress (0 to 1) to a horizontal translation.
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-75%']);
+  const x = useTransform(scrollYProgress, [0.05, 0.95], ["0%", "-83.33%"]); // 100% * 5/6 = 83.33%
 
   return (
     <>
-      <section ref={targetRef} id="process" className="relative h-[300vh] bg-white">
+      <section ref={targetRef} id="process" className="relative h-[400vh] bg-white">
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <div className="absolute top-0 left-0 right-0 pt-16 sm:pt-24 pb-12">
             <div className="container mx-auto px-4 text-center">
-              <p className="text-lg font-medium text-gray-600">From Vision To Perfection</p>
               <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
-                Our Design Journey
+                Bizning ish jarayonimiz
               </h2>
               <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-500">
-                Jon.Branding offers a convenient and proactive process from brainstorming design ideas to unfolding them into a magnificent digital product, delighting your users.
+                Har bir loyihada muvaffaqiyatni ta'minlaydigan sinovdan o'tgan bosqichli tizim.
               </p>
             </div>
           </div>
         
-          <motion.div style={{ x }} className="flex gap-8">
-            <div className="w-[10vw] flex-shrink-0"></div> {/* Start padding */}
+          <motion.div style={{ x }} className="flex gap-8 pl-8 sm:pl-16 md:pl-24">
             {processPhases.map((phase, index) => (
-              <div key={index} className="w-[80vw] md:w-[40vw] lg:w-[20vw] flex-shrink-0">
+              <div key={index} className="w-[80vw] md:w-[40vw] lg:w-[30vw] flex-shrink-0">
                 <div className="relative pt-16">
                   <div className="absolute top-8 left-0 right-0 h-0.5 bg-gray-200">
                     <div className="absolute top-1/2 -translate-y-1/2 left-0 w-3 h-3 rounded-full bg-primary z-10"></div>
@@ -81,7 +88,6 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
                 </div>
               </div>
             ))}
-             <div className="w-[10vw] flex-shrink-0"></div> {/* End padding */}
           </motion.div>
         </div>
       </section>
