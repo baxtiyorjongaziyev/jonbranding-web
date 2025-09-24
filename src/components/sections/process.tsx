@@ -49,11 +49,11 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ['start start', 'end end']
+    offset: ['start start', 'end start']
   });
 
-  const x = useTransform(scrollYProgress, [0.05, 0.95], ["0%", `calc(-100% + 100vw)`]);
-  const progressBarWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const x = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "-83.33%"]); // 100% / 6 steps * 5 moves = 83.33%
+  const progressBarWidth = useTransform(scrollYProgress, [0.1, 0.9], ['16.66%', '100%']);
 
   return (
     <section id="process" className="bg-white">
@@ -64,42 +64,38 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
             </p>
         </div>
 
-        <div ref={targetRef} className="relative h-[300vh]">
-            <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-                <div className="relative w-full">
-                    {/* Progress Bar */}
-                    <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full h-0.5 bg-gray-200 hidden lg:block">
-                        <motion.div 
-                            className="h-full bg-primary"
-                            style={{ width: progressBarWidth }}
-                        />
-                    </div>
-
-                    <motion.div style={{ x }} className="flex">
-                        {steps.map((step, index) => (
-                            <div key={index} className="relative w-[90vw] lg:w-[45vw] flex-shrink-0 px-4 md:px-8">
-                                <div className="relative lg:text-center max-w-sm mx-auto p-8 rounded-2xl bg-secondary/50 lg:bg-transparent">
-                                    <div className="flex items-center lg:justify-center gap-4">
-                                        <div className="relative z-10 flex-shrink-0">
-                                            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-md border-2 border-gray-100">
-                                                <step.icon className="h-10 w-10 text-primary" />
-                                            </div>
-                                            <div className="absolute -top-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm shadow-sm z-20">
-                                                {index + 1}
-                                            </div>
+        <div ref={targetRef} className="relative h-[400vh] mt-12">
+            <div className="sticky top-1/4 flex items-center overflow-hidden">
+                <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full h-0.5 bg-gray-200 hidden lg:block">
+                    <motion.div 
+                        className="h-full bg-primary"
+                        style={{ width: progressBarWidth }}
+                    />
+                </div>
+                <motion.div style={{ x }} className="flex">
+                    {steps.map((step, index) => (
+                        <div key={index} className="flex-shrink-0 w-screen lg:w-[33.33vw] px-8 md:px-12">
+                            <div className="relative text-left lg:text-center max-w-sm mx-auto p-8 rounded-2xl">
+                                <div className="flex items-center lg:justify-center gap-4">
+                                    <div className="relative z-10 flex-shrink-0">
+                                        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-md border-2 border-gray-100">
+                                            <step.icon className="h-10 w-10 text-primary" />
                                         </div>
-                                        <h3 className="text-xl font-bold text-dark-blue lg:hidden">{step.title}</h3>
+                                        <div className="absolute -top-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm shadow-sm z-20">
+                                            {index + 1}
+                                        </div>
                                     </div>
+                                    <h3 className="text-xl font-bold text-dark-blue lg:hidden">{step.title}</h3>
+                                </div>
 
-                                    <div className="mt-4 text-left lg:text-center">
-                                        <h3 className="hidden lg:block text-xl font-bold text-dark-blue">{step.title}</h3>
-                                        <p className="mt-2 text-gray-600">{step.description}</p>
-                                    </div>
+                                <div className="mt-4 text-left lg:text-center">
+                                    <h3 className="hidden lg:block text-xl font-bold text-dark-blue">{step.title}</h3>
+                                    <p className="mt-2 text-gray-600">{step.description}</p>
                                 </div>
                             </div>
-                        ))}
-                    </motion.div>
-                </div>
+                        </div>
+                    ))}
+                </motion.div>
             </div>
         </div>
 
