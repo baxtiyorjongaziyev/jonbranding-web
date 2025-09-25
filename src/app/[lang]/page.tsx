@@ -25,6 +25,7 @@ const TargetAudience = dynamic(() => import('@/components/sections/target-audien
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const Faq = dynamic(() => import('@/components/sections/faq'));
+const Offer = dynamic(() => import('@/components/sections/offer'));
 
 const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
   useEffect(() => {
@@ -166,6 +167,7 @@ const Home: FC = () => {
                 <AnimatedSection><Stats /></AnimatedSection>
                 <AnimatedSection><TrustedBy /></AnimatedSection>
                 <AnimatedSection><TargetAudience /></AnimatedSection>
+                <AnimatedSection><Offer onCTAClick={handleOpenServiceModal}/></AnimatedSection>
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Testimonials /></AnimatedSection>
                 <AnimatedSection><Gallery /></AnimatedSection>

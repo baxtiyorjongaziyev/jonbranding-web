@@ -17,6 +17,10 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  i18n: {
+    locales: ['uz', 'ru'],
+    defaultLocale: 'uz',
+  },
   /* config options here */
   devIndicators: false,
   typescript: {

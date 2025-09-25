@@ -1,8 +1,9 @@
+
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 
-const APP_NAME = "Firma Uslubi | Jon.Branding";
-const APP_DESCRIPTION = "Biz shunchaki chiroyli rasmlar yaratmaymiz, biz brendingiz uchun ishlaydigan va natija keltiradigan tizimli vizual uslubni ishlab chiqamiz. Logotip, ranglar, shriftlar va boshqa elementlar orqali brendingizni taniladigan va esda qolarli qiling.";
+const APP_NAME = "Qadoq Dizayni | Jon.Branding";
+const APP_DESCRIPTION = "Biz shunchaki chiroyli qadoq emas, balki mahsulotingizni sotadigan kuchli marketing vositasini yaratamiz. Qadoq dizayni orqali brendingizni raqobatchilardan ajratib turing va mijozlar mehrini qozoning.";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://jonbranding.uz'),
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: APP_NAME,
     description: APP_DESCRIPTION,
-    url: 'https://jonbranding.uz/xizmatlar/firmenniy-stil',
+    url: 'https://jonbranding.uz/xizmatlar/qadoq-dizayni',
     siteName: 'Jon.Branding',
     images: [
       {
@@ -30,12 +31,12 @@ export const metadata: Metadata = {
     images: ['https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2'],
   },
   alternates: {
-    canonical: 'https://jonbranding.uz/xizmatlar/firmenniy-stil',
+    canonical: 'https://jonbranding.uz/xizmatlar/qadoq-dizayni',
   },
 };
 
-const FirmenniyStilLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
+const QadoqDizayniLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
   return <>{children}</>;
 }
 
-export default FirmenniyStilLayout;
+export default QadoqDizayniLayout;
