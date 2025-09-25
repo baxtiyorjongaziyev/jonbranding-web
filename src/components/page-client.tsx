@@ -164,7 +164,7 @@ const PageClient: FC<PageClientProps> = () => {
     }
 
     return (
-        <div>
+        <>
             <main>
                 <AnimatedSection><Hero onPrimaryClick={handleOpenModal} /></AnimatedSection>
                 <AnimatedSection><Stats /></AnimatedSection>
@@ -189,7 +189,7 @@ const PageClient: FC<PageClientProps> = () => {
             </main>
             <ExitIntentModal onPrimaryClick={handleOpenServiceModal} />
             <MobileCtaBar onOpenModal={handleOpenModal} />
-        </div>
+        </>
     )
 }
 
