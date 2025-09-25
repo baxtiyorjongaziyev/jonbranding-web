@@ -4,7 +4,7 @@
 import { useState, useEffect, type FC } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { User, ArrowRight, Sparkles, UserCheck } from 'lucide-react';
+import { User, ArrowRight, Sparkles, UserCheck, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,
@@ -39,6 +39,25 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
   const currentProjects = 4;
   const nextAvailable = "2 hafta";
   // *********************************
+
+  const [onlineUsers, setOnlineUsers] = useState(0);
+
+  useEffect(() => {
+    // Set initial random number between 12 and 25
+    setOnlineUsers(Math.floor(Math.random() * (25 - 12 + 1)) + 12);
+
+    const interval = setInterval(() => {
+      setOnlineUsers(prev => {
+        const change = Math.random() > 0.5 ? 1 : -1;
+        const newCount = prev + change;
+        // Keep it within a realistic range
+        return Math.max(10, Math.min(30, newCount));
+      });
+    }, 2500); // Update every 2.5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   const slots = Array.from({ length: totalSlots });
   const remainingSlots = totalSlots - currentProjects;
@@ -121,10 +140,20 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                 </div>
 
 
-                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                   <div className="bg-black/20 p-4 rounded-xl">
                     <p className="text-sm text-blue-200">Qolgan bo'sh o'rinlar</p>
                     <p className="text-2xl font-bold text-white">{remainingSlots} ta</p>
+                  </div>
+                   <div className="bg-black/20 p-4 rounded-xl border-2 border-accent/50 shadow-lg">
+                    <p className="text-sm text-accent flex items-center justify-center gap-2">
+                        <span className="relative flex h-3 w-3">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
+                        </span>
+                        Hozir saytda
+                    </p>
+                    <p className="text-2xl font-bold text-white">{onlineUsers} kishi</p>
                   </div>
                   <div className="bg-black/20 p-4 rounded-xl">
                     <p className="text-sm text-blue-200">Keyingi loyihani boshlash</p>
