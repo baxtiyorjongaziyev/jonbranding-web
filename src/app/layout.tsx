@@ -218,6 +218,15 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
           }}
         />
 
+        {/* amoCRM Forms */}
+        <Script id="amocrm-forms-init" strategy="afterInteractive" dangerouslySetInnerHTML={{
+          __html: `
+            !function(a,m,o,c,r,m){a[o+c]=a[o+c]||{setMeta:function(p){this.params=(this.params||[]).concat([p])}},a[o+r]=a[o+r]||function(f){a[o+r].f=(a[o+r].f||[]).concat([f])},a[o+r]({id:"1606118",hash:"b516c9ed3d053b4b3566efa732751cc9",locale:"ru"}),a[o+m]=a[o+m]||function(f,k){a[o+m].f=(a[o+m].f||[]).concat([[f,k]])}}(window,0,"amo_forms_","params","load","loaded");
+          `
+        }} />
+        <Script id="amoforms_script_1606118" async={true} charSet="utf-8" src="https://forms.amocrm.ru/forms/assets/js/amoforms.js?1758806203" strategy="afterInteractive" />
+
+
         <div className="flex min-h-screen flex-col bg-secondary/50">
            <Header />
             {children}
