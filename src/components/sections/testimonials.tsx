@@ -19,7 +19,7 @@ const staticTestimonials: Testimonial[] = [
     image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
     imageHint: "male business owner",
     quote: "Did, estetik did. Bu tug'ma bo'ladimi yoki orttirilgan ko'nikma bo'ladimi? Shunday estetik did egasidan biri Baxtiyorjon - Bizni Incontrol va Sherzod Beknazarov logolarini qilishda bizga yordam berdi. Baxtiyorjonga minnatdorchilik bildirmoqchimiz. Rahmat.",
-    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1"
+    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
   },
   {
     name: "Sevara Xolmanova",
@@ -86,24 +86,9 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 };
 
 const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
-    const plugin = useRef<any>();
-    const [api, setApi] = useState<CarouselApi>()
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-    
-    useEffect(() => {
-        if (isClient && api) {
-            if (!plugin.current) {
-                plugin.current = Autoplay({ delay: 5000, stopOnInteraction: true });
-                api.reInit({ plugins: [plugin.current] });
-            }
-        }
-    }, [api, isClient]);
-
-
+    const autoplayPlugin = useRef(
+      Autoplay({ delay: 5000, stopOnInteraction: true })
+    );
     const [playVideo, setPlayVideo] = useState(false);
     
     if (!testimonials || testimonials.length === 0) {
@@ -152,7 +137,7 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                             {playVideo ? (
                                 <div className="absolute inset-0 w-full h-full z-10">
                                 <iframe
-                                    src={videoTestimonial.videoUrl}
+                                    src={`${videoTestimonial.videoUrl}&autoplay=1`}
                                     frameBorder="0"
                                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                                     className="absolute inset-0 w-full h-full"
@@ -176,10 +161,10 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
         {otherTestimonials.length > 0 && (
             <div className="mt-16">
                 <Carousel 
-                    setApi={setApi}
+                    plugins={[autoplayPlugin.current]}
                     opts={{ align: "start", loop: true }} 
-                    onMouseEnter={() => isClient && plugin.current?.stop()}
-                    onMouseLeave={() => isClient && plugin.current?.play()}
+                    onMouseEnter={autoplayPlugin.current.stop}
+                    onMouseLeave={autoplayPlugin.current.reset}
                     className="w-full">
                     <CarouselContent className="-ml-4">
                         {otherTestimonials.map((testimonial, index) => (
@@ -205,3 +190,5 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+
+    
