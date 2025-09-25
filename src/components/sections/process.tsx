@@ -78,13 +78,10 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
     offset: ['start start', 'end end'],
   });
   
-  // 6 cards, so we need to scroll more.
-  // The value '-125%' is an approximation that should work for 6 cards of 350px width + gaps
-  // It might need fine-tuning based on the exact width and gap values.
-  const x = useTransform(scrollYProgress, [0.1, 0.9], ['5%', '-125%']);
+  const x = useTransform(scrollYProgress, [0.1, 0.9], ['5%', '-155%']);
 
   return (
-    <section id="process" ref={targetRef} className="relative h-[600vh] bg-white">
+    <section id="process" ref={targetRef} className="relative h-[500vh] bg-white">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div className="absolute top-1/4 left-0 right-0 z-20">
              <div className="container mx-auto px-4">
