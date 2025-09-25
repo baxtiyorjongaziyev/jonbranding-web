@@ -17,18 +17,18 @@ const Offer: FC<OfferProps> = ({ onCTAClick }) => {
                 <div className="text-center max-w-3xl mx-auto">
                     <div className="flex justify-center items-center gap-2">
                         <PercentSquare className="w-6 h-6 text-accent" />
-                        <p className="font-bold text-accent uppercase tracking-widest">Maxsus taklif</p>
+                        <p className="font-bold text-accent uppercase tracking-widest">Rad Etib Bo'lmas Taklif</p>
                     </div>
                     <h2 className="text-4xl sm:text-5xl font-extrabold mt-4 text-white">
-                        Sizning <span className="text-accent">imkoniyatingiz!</span>
+                        Yaxlit brending — <span className="text-accent">katta chegirma</span> bilan!
                     </h2>
                     <p className="mt-4 text-lg text-gray-300">
-                        Biznesingiz uchun kompleks yechim izlayapsizmi? Xizmatlar bo'limimizdan <strong>3 yoki undan ortiq asosiy brending xizmatini</strong> tanlang va umumiy to'plamingiz uchun <strong>kafolatlangan 20% chegirmaga</strong> ega bo'ling. Bu sizning biznesingiz uchun eng yaxshi sarmoyadir.
+                        Brending — bu bir-birini to'ldiruvchi qismlardan iborat tizim. Xizmatlarimizdan bir martada **3 yoki undan ortiq asosiy yo'nalishni** (masalan, Neyming + Logotip + Brendbuk) tanlang va biz sizga shunchaki chegirma emas, balki loyihangizga yaxlit yondashuvni kafolatlaymiz. Bu esa yanada kuchliroq natija va umumiy summadan **kafolatlangan -20% tejash** degani!
                     </p>
                     
                     <Button asChild size="lg" className="mt-8 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
                         <Link href="/xizmatlar">
-                           Chegirmadan foydalanish
+                           O'z to'plamimni yaratish
                         </Link>
                     </Button>
                     <p className="mt-2 text-xs text-gray-400">*Chegirma xizmatlar bo'limida to'plamingizni yig'ganingizdan so'ng avtomatik tarzda hisoblanadi.</p>
