@@ -88,29 +88,35 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
     const plugin = useRef<any>(null);
     const [api, setApi] = useState<CarouselApi>()
-
-    useEffect(() => {
-        if (!api) {
-            return
-        }
-
-        plugin.current = Autoplay({ delay: 5000, stopOnInteraction: true });
-        // Manually re-init to add the plugin
-        api.reInit({
-            plugins: [plugin.current]
-        });
-
-    }, [api]);
-
-
-    const [playVideo, setPlayVideo] = useState(false);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
         setIsClient(true);
     }, []);
 
+    useEffect(() => {
+        if (!api || !isClient) {
+            return;
+        }
 
+        plugin.current = Autoplay({ delay: 5000, stopOnInteraction: true });
+        
+        // Add the plugin on re-initialization
+        api.reInit({
+            plugins: [plugin.current]
+        });
+
+        // Cleanup function
+        return () => {
+            if (plugin.current) {
+                plugin.current.destroy();
+            }
+        };
+    }, [api, isClient]);
+
+
+    const [playVideo, setPlayVideo] = useState(false);
+    
     if (!testimonials || testimonials.length === 0) {
       return null;
     }
@@ -181,8 +187,8 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                 <Carousel 
                     setApi={setApi}
                     opts={{ align: "start", loop: true }} 
-                    onMouseEnter={() => isClient && plugin.current && plugin.current.stop()}
-                    onMouseLeave={() => isClient && plugin.current && plugin.current.play()}
+                    onMouseEnter={() => plugin.current?.stop()}
+                    onMouseLeave={() => plugin.current?.play()}
                     className="w-full">
                     <CarouselContent className="-ml-4">
                         {otherTestimonials.map((testimonial, index) => (
