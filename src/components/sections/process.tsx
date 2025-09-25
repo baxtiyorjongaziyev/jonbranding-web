@@ -75,20 +75,16 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ['start start', 'end end'],
   });
   
-  const x = useTransform(scrollYProgress, [0.1, 0.9], ['5%', '-128%']);
+  const x = useTransform(scrollYProgress, [0.1, 0.8], ['0%', '-100%']);
 
   return (
-    <section id="process" ref={targetRef} className="relative h-[500vh] bg-white">
+    <section id="process" ref={targetRef} className="relative h-[400vh] bg-white">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <div className="absolute top-1/4 left-0 right-0 z-20">
-             <div className="container mx-auto px-4">
+        <div className="absolute top-1/4 left-0 right-0 z-20 px-4">
+             <div className="container mx-auto">
                 <div className="max-w-4xl">
-                     <h1 className="text-4xl sm:text-5xl font-light text-foreground">
-                        To‘g‘ri Brendni Loyihalash
-                    </h1>
                     <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue mt-1">
                         Bizning ish jarayonimiz
                     </h2>
