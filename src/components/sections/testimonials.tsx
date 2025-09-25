@@ -107,11 +107,6 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
             });
         }
     
-        return () => {
-            if (plugin.current && typeof plugin.current.destroy === 'function') {
-                // plugin.current.destroy();
-            }
-        };
     }, [api, isClient]);
 
 
@@ -166,7 +161,7 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                                     src={videoTestimonial.videoUrl}
                                     frameBorder="0"
                                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                                    className="w-full h-full"
+                                    className="absolute inset-0 w-full h-full"
                                     title={videoTestimonial.name + " - Baxtiyorjon Gaziyev haqida fikrlari"}
                                 ></iframe>
                                 </div>
@@ -188,6 +183,7 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
             <div className="mt-16">
                 <Carousel 
                     setApi={setApi}
+                    plugins={isClient ? [Autoplay({ delay: 5000, stopOnInteraction: true })] : []}
                     opts={{ align: "start", loop: true }} 
                     onMouseEnter={() => plugin.current?.stop()}
                     onMouseLeave={() => plugin.current?.play()}

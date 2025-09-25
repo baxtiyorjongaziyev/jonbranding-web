@@ -34,24 +34,28 @@ const VideoSection = () => {
         >
           {/* Blurred background video (Ambilight effect) */}
           <div className="absolute -inset-12 w-[calc(100%+6rem)] h-[calc(100%+6rem)] -z-10">
-            <iframe
-              src={videoUrl}
-              frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              className="w-full h-full blur-3xl opacity-50"
-              title="Jon.Branding Showreel Background"
-            ></iframe>
+            <div className="absolute inset-0 w-full h-full">
+              <iframe
+                src={videoUrl}
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                className="w-full h-full blur-3xl opacity-50"
+                title="Jon.Branding Showreel Background"
+              ></iframe>
+            </div>
           </div>
           {/* Main video */}
           <div className="relative w-full h-full z-10">
-            <iframe
-              src={videoUrl}
-              frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              className="w-full h-full"
-              title="Jon.Branding Showreel"
-              allowFullScreen
-            ></iframe>
+             <div className="absolute inset-0 w-full h-full">
+              <iframe
+                src={videoUrl}
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                className="w-full h-full"
+                title="Jon.Branding Showreel"
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
         </motion.div>
       </div>
