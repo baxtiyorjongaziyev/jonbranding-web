@@ -8,43 +8,44 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Badge } from '../ui/badge';
 import CtaBlock from './cta-block';
+import { cn } from '@/lib/utils';
 
 const processPhases = [
   {
     phase: "01",
     title: "Kashfiyot",
-    description: "Boshlanish nuqtasi",
+    description: "Sayohatning boshlanishi",
     tasks: ["Briflash", "Biznes muammolarini aniqlash", "Auditoriya ehtiyojlari", "Bozor va raqobatchilar tahlili", "Ilhom va g‘oyalar yig‘ish"],
   },
   {
     phase: "02",
     title: "Strategiya",
-    description: "Yo‘l xaritasini belgilash",
+    description: "Yo‘lni xaritaga solish",
     tasks: ["Maqsad qo‘yish", "Auditoriya tahlili", "Brendni joylashtirish", "Asosiy tamoyillar", "Rejalashtirish", "Brend vizyoni"],
   },
   {
     phase: "03",
     title: "Ijodiy Dizayn",
     description: "Brendni shakllantirish",
-    tasks: ["Naming ishlanmalari", "Logo dizayni", "Rang va shrift tizimi", "Vizual konsepsiya", "Qadoqlash dizayni", "Brandbook asoslari"],
+    tasks: ["Neyming", "Logo dizayni", "Vizual konsepsiya", "Qadoqlash dizayni", "Brandbook"],
   },
   {
     phase: "04",
-    title: "Taqdimot va Fikr",
-    description: "Sinov va takomillashtirish",
-    tasks: ["Dizayn taqdimoti", "Mijozdan fikr olish", "Taklif va variantlarni moslashtirish", "Yakuniy yechimni tanlash"],
+    title: "Taqdimot",
+    description: "G'oyalarni sinovdan o'tkazish",
+    tasks: ["Dizayn taqdimoti", "Fikr-mulohazalarni moslashtirish", "Yakuniy iteratsiya"],
   },
   {
     phase: "05",
-    title: "Amaliyotga Tatbiq",
+    title: "Amaliyot",
     description: "Brendni hayotga tadbiq etish",
-    tasks: ["Tayyor dizayn fayllari", "Brandbook topshirish", "Vizual qo‘llanmalar va kontent", "Tatbiq qilish bo‘yicha yo‘riqnoma"],
+    tasks: ["Tayyor dizayn fayllari", "Brandbook topshirish", "Vizual qo‘llanmalar"],
   },
   {
     phase: "06",
-    title: "Qo‘llab-quvvatlash va Rivojlanish",
-    description: "Brend hech qachon to‘xtamaydi",
-    tasks: ["Doimiy qo‘llab-quvvatlash", "Mijozlardan fikr yig‘ish", "Trend va yangiliklarni kuzatish", "Brendni yangilash va kengaytirish"],
+    title: "Rivojlanish",
+    description: "Brendni qo'llab-quvvatlash",
+    tasks: ["Tatbiq qilish bo‘yicha yo‘riqnoma", "Doimiy qo‘llab-quvvatlash", "Keyingi qadamlar"],
   },
 ];
 
@@ -67,6 +68,41 @@ const ProcessCard = ({ title, description, tasks, phase }: (typeof processPhases
     </div>
 );
 
+const MobileProcessView = () => (
+    <div className="container mx-auto px-4 md:px-8">
+        <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
+                Bizning ish jarayonimiz
+            </h2>
+            <p className="mt-4 text-lg max-w-2xl mx-auto text-muted-foreground">
+              Har bir loyihada biz sinovdan o'tgan, shaffof va samarali jarayonni qo'llaymiz.
+            </p>
+        </div>
+        <div className="relative">
+             {/* Timeline line */}
+            <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-gray-200"></div>
+            
+            <div className="space-y-12">
+                 {processPhases.map((phase) => (
+                    <div key={phase.phase} className="relative pl-12">
+                        {/* Timeline dot */}
+                        <div className="absolute left-4 top-1 -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-white"></div>
+                        
+                        <h3 className="text-2xl font-bold text-dark-blue">{phase.title}</h3>
+                        <p className="mt-1 text-gray-500">{phase.description}</p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                            {phase.tasks.map((task) => (
+                                <Badge key={task} variant="secondary">{task}</Badge>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+);
+
+
 interface ProcessProps {
   onCtaClick: () => void;
 }
@@ -76,41 +112,73 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
-  
-  const x = useTransform(scrollYProgress, [0.1, 0.8], ['0%', '-66.66%']);
-  const ctaOpacity = useTransform(scrollYProgress, [0.8, 0.9], [0, 1]);
-  const ctaY = useTransform(scrollYProgress, [0.8, 0.9], ["50px", "0px"]);
+
+  // Calculate the total width of the scrolling content
+  // 350px per card * 6 cards + 5 gaps * 16px (approx)
+  // This needs to be responsive. Let's make a rough calculation
+  // The transform will move the content from 0% to -83.33% (5/6 of the way)
+  // This means the last item will be at the start. We need to adjust this.
+  // We want the last item to be at the end of the viewport.
+  // Total width of carousel is 6 * 350px = 2100px.
+  // Viewport width is ~100vw.
+  // We need to scroll 2100px - 100vw.
+  // It's much simpler to use a percentage that leaves the last item visible.
+  // With 6 items, 100% / 6 = 16.66% per item.
+  // We want to scroll 5 items past. 5 * 16.66% = 83.33%.
+  // So the transform should be from '0%' to '-83.33%'
+  const x = useTransform(scrollYProgress, [0.1, 0.9], ['0%', '-83.33%']);
+  const ctaOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
+  const ctaY = useTransform(scrollYProgress, [0.9, 1], ["50px", "0px"]);
 
   return (
-    <section id="process" ref={targetRef} className="relative h-[400vh] bg-white">
-      <div className="sticky top-0 flex flex-col h-screen pt-24 overflow-hidden">
-        <div className="container mx-auto px-4 text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
-                Bizning ish jarayonimiz
-            </h2>
-            <p className="mt-4 text-lg max-w-2xl mx-auto text-muted-foreground">
-              Har bir loyihada biz sinovdan o'tgan, shaffof va samarali jarayonni qo'llaymiz.
-            </p>
+    <section id="process" className="py-16 sm:py-24 bg-white">
+        {/* Desktop View with Sticky Horizontal Scroll */}
+        <div ref={targetRef} className="relative h-[300vh] hidden lg:block">
+            <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+                <div className="absolute top-24 left-0 right-0">
+                    <div className="container mx-auto px-4 text-center">
+                        <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
+                            Bizning ish jarayonimiz
+                        </h2>
+                        <p className="mt-4 text-lg max-w-2xl mx-auto text-muted-foreground">
+                            Har bir loyihada biz sinovdan o'tgan, shaffof va samarali jarayonni qo'llaymiz.
+                        </p>
+                    </div>
+                </div>
+                
+                <motion.div style={{ x }} className="flex">
+                    {processPhases.map((phase, index) => (
+                        <ProcessCard key={index} {...phase} />
+                    ))}
+                </motion.div>
+                
+                <motion.div style={{ opacity: ctaOpacity, y: ctaY }} className="absolute bottom-0 left-0 right-0 z-10">
+                    <div className={cn(scrollYProgress.get() < 0.9 && "pointer-events-none")}>
+                        <CtaBlock 
+                            title="Loyihangizni muhokama qilishga tayyormisiz?"
+                            description="Keling, g'oyalaringizni hayotga tatbiq etishni boshlaymiz."
+                            buttonText="Loyihani muhokama qilish"
+                            onCtaClick={onCtaClick}
+                        />
+                    </div>
+                </motion.div>
+            </div>
         </div>
-        
-        <motion.div style={{ x }} className="flex pb-16">
-            {processPhases.map((phase, index) => (
-                <ProcessCard key={index} {...phase} />
-            ))}
-        </motion.div>
-        
-        <motion.div style={{ opacity: ctaOpacity, y: ctaY }} className="absolute bottom-0 left-0 right-0 z-10">
-          <CtaBlock 
-              title="Loyihangizni muhokama qilishga tayyormisiz?"
-              description="Keling, g'oyalaringizni hayotga tatbiq etishni boshlaymiz."
-              buttonText="Loyihani muhokama qilish"
-              onCtaClick={onCtaClick}
-          />
-       </motion.div>
 
-      </div>
+        {/* Mobile and Tablet View */}
+        <div className="lg:hidden">
+            <MobileProcessView />
+             <CtaBlock 
+                title="Loyihangizni muhokama qilishga tayyormisiz?"
+                description="Keling, g'oyalaringizni hayotga tatbiq etishni boshlaymiz."
+                buttonText="Loyihani muhokama qilish"
+                onCtaClick={onCtaClick}
+            />
+        </div>
     </section>
   );
 };
 
 export default Process;
+
+    
