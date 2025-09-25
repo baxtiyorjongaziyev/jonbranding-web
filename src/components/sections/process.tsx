@@ -78,7 +78,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
     offset: ['start start', 'end end'],
   });
   
-  const x = useTransform(scrollYProgress, [0.1, 0.9], ['5%', '-155%']);
+  const x = useTransform(scrollYProgress, [0.1, 0.9], ['5%', '-128%']);
 
   return (
     <section id="process" ref={targetRef} className="relative h-[500vh] bg-white">
