@@ -213,7 +213,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
     
      if (!isClient) {
         return (
-            <section id="package-builder" className="py-16 sm:py-24 bg-secondary">
+            <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
                 <div className="container mx-auto px-4">
                     <div className="text-center">
                          <h2 className="text-3xl sm:text-4xl font-bold">Narxlar va Xizmatlar</h2>
@@ -240,7 +240,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow }) => {
                                 .map(([key]) => key as keyof SelectedServices);
 
     return (
-        <section id="package-builder" className="py-16 sm:py-24 bg-secondary">
+        <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
              <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
                      <h2 className="text-3xl sm:text-4xl font-bold">Narxlar va Xizmatlar</h2>
