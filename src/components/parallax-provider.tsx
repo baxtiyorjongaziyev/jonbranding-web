@@ -3,6 +3,7 @@
 
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import { useRef, type FC, type ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ParallaxProps {
   children: ReactNode;
