@@ -64,12 +64,12 @@ const Founder = () => {
             <Card className="overflow-hidden shadow-xl rounded-2xl w-full">
               <CardContent className="p-0 relative bg-black aspect-[4/5]">
                 {playVideo ? (
-                     <div className="absolute inset-0 z-10">
+                     <div className="absolute inset-0 w-full h-full">
                         <iframe 
                             src="https://player.vimeo.com/video/1109894697?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1" 
                             frameBorder="0" 
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
-                            className="absolute top-0 left-0 w-full h-full"
+                            className="absolute inset-0 w-full h-full"
                             title="Baxtiyorjon Gaziyev">
                         </iframe>
                     </div>
