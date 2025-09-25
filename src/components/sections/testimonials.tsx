@@ -94,7 +94,7 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
         setIsClient(true);
     }, []);
     
-    useEffect(() => {
+     useEffect(() => {
         if (!api || !isClient) {
             return;
         }
@@ -109,8 +109,8 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
     
         return () => {
             if (plugin.current && typeof plugin.current.destroy === 'function') {
-                plugin.current.destroy();
-                plugin.current = undefined;
+                // plugin.current.destroy(); // This line causes the error
+                // plugin.current = undefined;
             }
         };
     }, [api, isClient]);
@@ -189,9 +189,10 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
             <div className="mt-16">
                 <Carousel 
                     setApi={setApi}
+                    plugins={[Autoplay({ delay: 5000, stopOnInteraction: true })]}
                     opts={{ align: "start", loop: true }} 
-                    onMouseEnter={() => isClient && plugin.current && plugin.current.stop()}
-                    onMouseLeave={() => isClient && plugin.current && plugin.current.play()}
+                    onMouseEnter={() => plugin.current?.stop()}
+                    onMouseLeave={() => plugin.current?.play()}
                     className="w-full">
                     <CarouselContent className="-ml-4">
                         {otherTestimonials.map((testimonial, index) => (
