@@ -69,7 +69,6 @@ const Founder = () => {
                         frameBorder="0"
                         allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                         className="absolute w-full h-full top-0 left-0"
-                        style={{ height: '140%', top: '-20%' }}
                         title="Baxtiyorjon Gaziyev">
                     </iframe>
                 ) : (
