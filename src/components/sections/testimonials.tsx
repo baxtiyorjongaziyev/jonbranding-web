@@ -86,30 +86,36 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 };
 
 const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
-    const plugin = useRef<any>(null);
+    const plugin = useRef<any>();
     const [api, setApi] = useState<CarouselApi>()
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
         setIsClient(true);
     }, []);
-
+    
     useEffect(() => {
         if (!api || !isClient) {
             return;
         }
-
-        plugin.current = Autoplay({ delay: 5000, stopOnInteraction: true });
-        
-        // Add the plugin on re-initialization
-        api.reInit({
-            plugins: [plugin.current]
-        });
-
+    
+        // Initialize the plugin only once
+        if (!plugin.current) {
+            plugin.current = Autoplay({ delay: 5000, stopOnInteraction: true });
+            
+            // Add the plugin on initialization
+            api.reInit({
+                plugins: [plugin.current]
+            });
+        }
+    
         // Cleanup function
         return () => {
-            if (plugin.current) {
+            if (plugin.current && typeof plugin.current.destroy === 'function') {
+                // It's good practice to destroy the plugin, though embla-carousel-autoplay
+                // might not explicitly require it if the carousel instance is destroyed.
                 plugin.current.destroy();
+                plugin.current = undefined;
             }
         };
     }, [api, isClient]);
@@ -165,13 +171,13 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                                     src={videoTestimonial.videoUrl}
                                     frameBorder="0"
                                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                                    className="absolute inset-0 w-full h-full"
+                                    className="absolute inset-0 w-full h-full z-10"
                                     title={videoTestimonial.name + " - Baxtiyorjon Gaziyev haqida fikrlari"}
                                 ></iframe>
                             ) : (
                                 <>
                                     <Image src={videoTestimonial.image!} alt={videoTestimonial.name} data-ai-hint={videoTestimonial.imageHint} fill className="object-cover" />
-                                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-10">
                                         <PlayCircle className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
                                     </div>
                                 </>
@@ -187,8 +193,8 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                 <Carousel 
                     setApi={setApi}
                     opts={{ align: "start", loop: true }} 
-                    onMouseEnter={() => plugin.current?.stop()}
-                    onMouseLeave={() => plugin.current?.play()}
+                    onMouseEnter={() => isClient && plugin.current && plugin.current.stop()}
+                    onMouseLeave={() => isClient && plugin.current && plugin.current.play()}
                     className="w-full">
                     <CarouselContent className="-ml-4">
                         {otherTestimonials.map((testimonial, index) => (
