@@ -64,12 +64,12 @@ const Founder = () => {
             <Card className="overflow-hidden shadow-xl rounded-2xl w-full">
               <CardContent className="p-0 relative bg-black aspect-[4/5]">
                 {playVideo ? (
-                    <div className="absolute inset-0 w-full h-full z-10">
-                        <iframe
-                            src="https://player.vimeo.com/video/1109894697?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&dnt=1&title=0&byline=0&portrait=0"
-                            frameBorder="0"
-                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                            className="w-full h-full"
+                     <div style={{padding:'177.59% 0 0 0',position:'relative'}}>
+                        <iframe 
+                            src="https://player.vimeo.com/video/1109894697?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1" 
+                            frameBorder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
+                            style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}} 
                             title="Baxtiyorjon Gaziyev">
                         </iframe>
                     </div>
@@ -78,10 +78,9 @@ const Founder = () => {
                     <Image
                       src="https://img1.teletype.in/files/06/12/06122643-c462-4c8d-aa63-55a8ca1dca38.jpeg"
                       alt="Baxtiyorjon Gaziyev"
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      className="object-cover opacity-80"
                       data-ai-hint="founder portrait"
-                      className="opacity-80"
                     />
                     <div className="absolute inset-0 flex items-center justify-center z-10">
                       <Button
