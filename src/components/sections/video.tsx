@@ -36,7 +36,7 @@ const VideoSection = () => {
           <iframe
             src={videoUrl}
             frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            allow="autoplay; fullscreen; picture-in-picture"
             className="absolute -inset-12 w-[calc(100%+6rem)] h-[calc(100%+6rem)] blur-3xl opacity-50 -z-10"
             title="Jon.Branding Showreel Background"
           ></iframe>
@@ -44,7 +44,7 @@ const VideoSection = () => {
           <iframe
             src={videoUrl}
             frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            allow="autoplay; fullscreen; picture-in-picture"
             className="absolute top-0 left-0 w-full h-full"
             title="Jon.Branding Showreel"
             allowFullScreen
