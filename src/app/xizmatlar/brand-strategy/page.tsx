@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Parallax from '@/components/parallax-provider';
 import React, { useRef } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
@@ -61,7 +60,6 @@ const BrandStrategyPage: FC = () => {
   return (
     <>
         <main className="flex-grow pt-20">
-        <Parallax speed={0.1}>
             <section className="py-20 sm:py-28 bg-white">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
@@ -72,7 +70,6 @@ const BrandStrategyPage: FC = () => {
                 </p>
             </div>
             </section>
-        </Parallax>
 
         <section className="py-16 sm:py-24">
             <div className="container mx-auto px-4">
