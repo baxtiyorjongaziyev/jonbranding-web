@@ -78,7 +78,7 @@ async function createAmoCRMLEAD(data: any, telegramMessage: string, totalPrice: 
             _embedded: {
                 contacts: [
                     {
-                        name: data.fullName,
+                        first_name: data.fullName,
                         custom_fields_values: [
                             {
                                 field_code: "PHONE",
@@ -92,7 +92,7 @@ async function createAmoCRMLEAD(data: any, telegramMessage: string, totalPrice: 
                                 field_code: "EMAIL",
                                 values: [
                                     {
-                                        value: data.email || `${data.phone}@jonbranding.uz`,
+                                        value: data.email || `${data.phone.replace(/[^0-9]/g, '')}@jonbranding.uz`,
                                     },
                                 ],
                             },
@@ -114,7 +114,7 @@ async function createAmoCRMLEAD(data: any, telegramMessage: string, totalPrice: 
     ];
 
     try {
-        await fetch(url, {
+        const amoResponse = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -122,8 +122,16 @@ async function createAmoCRMLEAD(data: any, telegramMessage: string, totalPrice: 
             },
             body: JSON.stringify(leadData),
         });
+
+        if (!amoResponse.ok) {
+            const errorText = await amoResponse.text();
+            console.error('Error creating amoCRM lead:', amoResponse.status, errorText);
+        } else {
+            console.log('amoCRM lead created successfully');
+        }
+
     } catch (error) {
-        console.error('Error creating amoCRM lead:', error);
+        console.error('Exception while creating amoCRM lead:', error);
     }
 }
 
@@ -260,33 +268,25 @@ ${packageInfo}
 `.trim();
         }
         
-        // Parallel requests
-        const promises = [];
-
-        // 1. Send to Telegram
-        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-        const payload = { chat_id: chatId, text: telegramMessage };
-        promises.push(
-            fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            }).then(async (response) => {
-                if (!response.ok) {
-                    const result = await response.json();
-                    console.error("Telegram API Error:", result);
-                    // Don't throw, just log, so amoCRM can still proceed
-                }
-            })
-        );
+        // Send to Telegram (don't wait for it to finish)
+        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        const telegramPayload = { chat_id: chatId, text: telegramMessage };
+        fetch(telegramUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(telegramPayload),
+        }).catch(e => {
+            console.error("Failed to send message to Telegram:", e);
+        });
         
-        // 2. Send to amoCRM
+        // Send to amoCRM if configured (don't wait for it to finish)
         if (process.env.AMOCRM_SUBDOMAIN) {
-            promises.push(createAmoCRMLEAD(body, telegramMessage, totalPrice));
+            createAmoCRMLEAD(body, telegramMessage, totalPrice).catch(e => {
+                console.error("Failed to create amoCRM lead in background:", e);
+            });
         }
 
-        await Promise.all(promises);
-
+        // Immediately respond to the user
         return NextResponse.json({ ok: true, message: "So'rovingiz muvaffaqiyatli yuborildi." });
 
     } catch (error: any) {
