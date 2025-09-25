@@ -175,4 +175,19 @@
   #savod-logo-li img {
     max-width: calc(100% - 2rem) !important;
   }
+
+  .animate-breathing {
+    animation: breathing 2.5s infinite;
+  }
+  @keyframes breathing {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 10px 20px -5px hsl(var(--accent) / 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 20px 30px -10px hsl(var(--accent) / 0.3);
+    }
+  }
+
 }
