@@ -94,19 +94,13 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
         setIsClient(true);
     }, []);
     
-     useEffect(() => {
-        if (!api || !isClient) {
-            return;
+    useEffect(() => {
+        if (isClient && api) {
+            if (!plugin.current) {
+                plugin.current = Autoplay({ delay: 5000, stopOnInteraction: true });
+                api.reInit({ plugins: [plugin.current] });
+            }
         }
-    
-        if (!plugin.current) {
-            plugin.current = Autoplay({ delay: 5000, stopOnInteraction: true });
-            
-            api.reInit({
-                plugins: [plugin.current]
-            });
-        }
-    
     }, [api, isClient]);
 
 
@@ -183,10 +177,9 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
             <div className="mt-16">
                 <Carousel 
                     setApi={setApi}
-                    plugins={isClient ? [Autoplay({ delay: 5000, stopOnInteraction: true })] : []}
                     opts={{ align: "start", loop: true }} 
-                    onMouseEnter={() => plugin.current?.stop()}
-                    onMouseLeave={() => plugin.current?.play()}
+                    onMouseEnter={() => isClient && plugin.current?.stop()}
+                    onMouseLeave={() => isClient && plugin.current?.play()}
                     className="w-full">
                     <CarouselContent className="-ml-4">
                         {otherTestimonials.map((testimonial, index) => (
@@ -212,5 +205,3 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
-
-    
