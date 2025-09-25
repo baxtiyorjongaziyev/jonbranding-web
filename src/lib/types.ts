@@ -29,3 +29,16 @@ export interface BlogPost {
     imageHint: string;
     htmlContent?: string;
 }
+
+export interface Project {
+    brand: string;
+    oldImg: string;
+    newImg: string;
+    oldHint: string;
+    newHint: string;
+    galleryImages: { 
+        src: string; 
+        alt: string; 
+        hint: string; 
+    }[];
+}
