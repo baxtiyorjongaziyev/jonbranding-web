@@ -50,7 +50,7 @@ const processPhases = [
 
 
 const ProcessCard = ({ title, description, tasks, phase }: (typeof processPhases)[0]) => (
-    <div className="w-[300px] md:w-[350px] flex-shrink-0">
+    <div className="w-[320px] md:w-[350px] flex-shrink-0 px-4">
         <div className="flex items-center gap-4">
           <span className="text-sm font-bold text-primary">{phase}</span>
           <div className="h-px flex-grow bg-gray-200"></div>
@@ -77,39 +77,38 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
     target: targetRef,
   });
   
-  const x = useTransform(scrollYProgress, [0.1, 0.8], ['0%', '-100%']);
+  const x = useTransform(scrollYProgress, [0.1, 0.8], ['0%', '-66.66%']);
+  const ctaOpacity = useTransform(scrollYProgress, [0.8, 0.9], [0, 1]);
+  const ctaY = useTransform(scrollYProgress, [0.8, 0.9], ["50px", "0px"]);
 
   return (
     <section id="process" ref={targetRef} className="relative h-[400vh] bg-white">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <div className="absolute top-1/4 left-0 right-0 z-20 px-4">
-             <div className="container mx-auto">
-                <div className="max-w-4xl">
-                    <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue mt-1">
-                        Bizning ish jarayonimiz
-                    </h2>
-                </div>
-            </div>
+      <div className="sticky top-0 flex flex-col h-screen pt-24 overflow-hidden">
+        <div className="container mx-auto px-4 text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
+                Bizning ish jarayonimiz
+            </h2>
+            <p className="mt-4 text-lg max-w-2xl mx-auto text-muted-foreground">
+              Har bir loyihada biz sinovdan o'tgan, shaffof va samarali jarayonni qo'llaymiz.
+            </p>
         </div>
         
-        <motion.div style={{ x }} className="flex items-start gap-16 pl-8">
+        <motion.div style={{ x }} className="flex pb-16">
             {processPhases.map((phase, index) => (
-                <div key={index} className="pt-24">
-                  <ProcessCard {...phase} />
-                </div>
+                <ProcessCard key={index} {...phase} />
             ))}
         </motion.div>
-      </div>
-
-       <div className="absolute bottom-16 left-0 right-0 z-10">
+        
+        <motion.div style={{ opacity: ctaOpacity, y: ctaY }} className="absolute bottom-0 left-0 right-0 z-10">
           <CtaBlock 
               title="Loyihangizni muhokama qilishga tayyormisiz?"
               description="Keling, g'oyalaringizni hayotga tatbiq etishni boshlaymiz."
               buttonText="Loyihani muhokama qilish"
               onCtaClick={onCtaClick}
           />
-       </div>
+       </motion.div>
 
+      </div>
     </section>
   );
 };
