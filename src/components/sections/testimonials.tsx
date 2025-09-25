@@ -99,21 +99,16 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
             return;
         }
     
-        // Initialize the plugin only once
         if (!plugin.current) {
             plugin.current = Autoplay({ delay: 5000, stopOnInteraction: true });
             
-            // Add the plugin on initialization
             api.reInit({
                 plugins: [plugin.current]
             });
         }
     
-        // Cleanup function
         return () => {
             if (plugin.current && typeof plugin.current.destroy === 'function') {
-                // It's good practice to destroy the plugin, though embla-carousel-autoplay
-                // might not explicitly require it if the carousel instance is destroyed.
                 plugin.current.destroy();
                 plugin.current = undefined;
             }
@@ -167,13 +162,15 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
                         </div>
                         <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl cursor-pointer group" onClick={() => setPlayVideo(true)}>
                             {playVideo ? (
+                                <div className="absolute inset-0 w-full h-full z-10">
                                 <iframe
                                     src={videoTestimonial.videoUrl}
                                     frameBorder="0"
-                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                                    className="absolute inset-0 w-full h-full z-10"
+                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                                    className="w-full h-full"
                                     title={videoTestimonial.name + " - Baxtiyorjon Gaziyev haqida fikrlari"}
                                 ></iframe>
+                                </div>
                             ) : (
                                 <>
                                     <Image src={videoTestimonial.image!} alt={videoTestimonial.name} data-ai-hint={videoTestimonial.imageHint} fill className="object-cover" />
