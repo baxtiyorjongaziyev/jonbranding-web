@@ -62,7 +62,7 @@ const BrandStrategyPage: FC = () => {
     <>
         <main className="flex-grow">
         <Parallax speed={0.5}>
-            <section className="py-20 sm:py-28 bg-white">
+            <section className="py-20 sm:py-28 bg-white pt-32">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
                 Brend Strategiyasi

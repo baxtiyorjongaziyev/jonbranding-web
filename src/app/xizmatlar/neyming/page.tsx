@@ -52,7 +52,7 @@ const NamingPage: FC = () => {
     <>
         <main className="flex-grow">
         <Parallax speed={0.5}>
-            <section className="py-20 sm:py-28 bg-white">
+            <section className="py-20 sm:py-28 bg-white pt-32">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
                 Neyming — Kuchli Brend Nomi
@@ -159,7 +159,7 @@ const NamingPage: FC = () => {
                     </p>
                 </div>
                 <div className="mt-8 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                    <Card className="bg-secondary/50 p-6 rounded-xl"><h4 className="font-bold">Huquqiy tozalik</h4><p className="text-gray-600 mt-1">Tovar belgisini kerakli mintaqa va sinfda ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz.</p></Card>
+                    <Card className="bg-secondary/50 p-6 rounded-xl"><h4 className="font-bold">Huquqiy tozalik</h4><p className="text-gray-600 mt-1">Tovar belgisi ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz.</p></Card>
                     <Card className="bg-secondary/50 p-6 rounded-xl"><h4 className="font-bold">Domenlar va raqamli muhit</h4><p className="text-gray-600 mt-1">Raqamli muhitda nomlarning mavjudligini tekshiramiz.</p></Card>
                     <Card className="bg-secondary/50 p-6 rounded-xl"><h4 className="font-bold">Ma'no va assotsiatsiyalar</h4><p className="text-gray-600 mt-1">O'qilishi, ohangi, mumkin bo'lgan assotsiativ qator, madaniy idrok va brend toifasiga muvofiqligini tekshiramiz.</p></Card>
                 </div>
