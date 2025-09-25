@@ -5,7 +5,6 @@ import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Layers, Palette, PenTool, ClipboardCheck } from 'lucide-react';
 import Image from 'next/image';
-import Parallax from '@/components/parallax-provider';
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -52,7 +51,6 @@ const FirmenniyStilPage: FC = () => {
   return (
     <>
         <main className="flex-grow pt-20">
-        <Parallax speed={0.1}>
             <section className="py-20 sm:py-28 bg-white">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
@@ -63,7 +61,6 @@ const FirmenniyStilPage: FC = () => {
                 </p>
             </div>
             </section>
-        </Parallax>
 
         <section className="py-16 sm:py-24">
             <div className="container mx-auto px-4">
