@@ -10,6 +10,7 @@ import { Progress } from '@/components/ui/progress';
 import { ArrowRight, Frown, Meh, Smile } from 'lucide-react';
 import ContactModal from '@/components/contact-modal';
 import { event as gtagEvent } from '@/lib/gtag';
+import Link from 'next/link';
 
 const questions = [
   {
@@ -145,8 +146,8 @@ const QuizPage: FC = () => {
                            Tez orada mutaxassisimiz siz bilan bog'lanib, testingiz natijalari bo'yicha batafsil tahlil va shaxsiy tavsiyalar beradi.
                         </p>
                         <div className="mt-8">
-                             <Button onClick={() => window.location.href = '/'} className="mt-6" size="lg">
-                                Bosh sahifaga qaytish
+                             <Button asChild className="mt-6" size="lg">
+                                <Link href="/">Bosh sahifaga qaytish</Link>
                             </Button>
                         </div>
                     </Card>
@@ -206,5 +207,3 @@ const QuizPage: FC = () => {
 };
 
 export default QuizPage;
-
-    

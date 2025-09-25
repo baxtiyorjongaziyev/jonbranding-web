@@ -1,4 +1,6 @@
 
+'use client';
+
 import { getSortedPostsData } from '@/lib/blog-posts';
 import { type BlogPost } from '@/lib/types';
 import Link from 'next/link';

@@ -7,7 +7,7 @@ import Script from 'next/script';
 import { BlogPost } from '@/lib/types';
 
 type Props = {
-  params: { slug: string };
+  params: { slug: string; lang: string };
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
@@ -18,17 +18,24 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       title: 'Maqola topilmadi',
     };
   }
+  
+  const canonicalUrl = `https://jonbranding.uz/${props.params.lang === 'uz' ? '' : props.params.lang + '/'}blog/${post.slug}`;
+
 
   return {
     title: `${post.title} | Jon.Branding Blog`,
     description: post.description,
      alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: canonicalUrl,
+      languages: {
+        'uz': `https://jonbranding.uz/blog/${post.slug}`,
+        'ru': `https://jonbranding.uz/ru/blog/${post.slug}`,
+      },
     },
     openGraph: {
       title: `${post.title} | Jon.Branding Blog`,
       description: post.description,
-      url: `https://jonbranding.uz/blog/${post.slug}`,
+      url: canonicalUrl,
       type: 'article',
       publishedTime: new Date(post.date).toISOString(),
       authors: [post.author],
