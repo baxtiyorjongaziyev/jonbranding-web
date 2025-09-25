@@ -66,7 +66,7 @@ const Offer: FC<OfferProps> = ({ onCTAClick }) => {
                        Yaxlit brending — bu shunchaki chegirma emas, bu strategik ustunlik.
                     </h2>
                     <p className="mt-6 text-lg text-gray-300">
-                        Brending bu — qismlarga bo'lib bo'lmaydigan yaxlit tizim. Xizmatlarimizdan bir martada **3 yoki undan ortiq asosiy yo'nalishni** tanlab, siz nafaqat umumiy summadan **kafolatlangan -20% tejaysiz**, balki bundan ham muhimi — brendingiz uchun **yagona, kuchli va izchil poydevor** qurasiz. Bu premium agentliklarga nisbatan ikki karra foyda degani!
+                        Brending bu — qismlarga bo'lib bo'lmaydigan yaxlit tizim. Xizmatlarimizdan bir martada &lt;strong&gt;3 yoki undan ortiq asosiy yo'nalishni&lt;/strong&gt; tanlab, siz nafaqat umumiy summadan &lt;strong&gt;kafolatlangan -20% tejaysiz&lt;/strong&gt;, balki bundan ham muhimi — brendingiz uchun &lt;strong&gt;yagona, kuchli va izchil poydevor&lt;/strong&gt; qurasiz. Bu premium agentliklarga nisbatan ikki karra foyda degani!
                     </p>
                     
                     <Button asChild size="lg" className="mt-10 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
