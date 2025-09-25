@@ -45,7 +45,7 @@ const VideoSection = () => {
             src={videoUrl}
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture"
-            className="absolute top-0 left-0 w-full h-full"
+            className="absolute top-0 left-0 w-full h-full z-10"
             title="Jon.Branding Showreel"
             allowFullScreen
           ></iframe>
