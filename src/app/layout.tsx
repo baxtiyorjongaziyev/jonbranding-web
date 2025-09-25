@@ -239,5 +239,3 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 }
 
 export default RootLayout;
-
-    
