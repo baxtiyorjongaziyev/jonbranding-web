@@ -22,10 +22,114 @@ const pickTwoLabels: Record<string, string> = {
     fast: 'Tez',
 };
 
+// amoCRM uchun yordamchi funksiyalar
+async function getAccessToken() {
+    const subdomain = process.env.AMOCRM_SUBDOMAIN;
+    const integrationId = process.env.AMOCRM_INTEGRATION_ID;
+    const integrationSecret = process.env.AMOCRM_INTEGRATION_SECRET;
+    const authCode = process.env.AMOCRM_AUTH_CODE;
+    const redirectUri = process.env.AMOCRM_REDIRECT_URI;
+
+    if (!subdomain || !integrationId || !integrationSecret || !authCode || !redirectUri) {
+        console.error("amoCRM environment variables are not set");
+        return null;
+    }
+
+    try {
+        const url = `https://${subdomain}/oauth2/access_token`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                client_id: integrationId,
+                client_secret: integrationSecret,
+                grant_type: 'authorization_code',
+                code: authCode,
+                redirect_uri: redirectUri,
+            }),
+        });
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Failed to get amoCRM access token:', errorData);
+            return null;
+        }
+        const data = await response.json();
+        return data.access_token;
+    } catch (error) {
+        console.error('Error fetching amoCRM access token:', error);
+        return null;
+    }
+}
+
+async function createAmoCRMLEAD(data: any, telegramMessage: string, totalPrice: number) {
+    const accessToken = await getAccessToken();
+    if (!accessToken) {
+        console.error("Could not create amoCRM lead due to missing access token.");
+        return;
+    }
+
+    const subdomain = process.env.AMOCRM_SUBDOMAIN;
+    const url = `https://${subdomain}/api/v4/leads/complex`;
+
+    const leadData = [
+        {
+            name: `Saytdan yangi so'rov: ${data.fullName}`,
+            price: totalPrice || 0,
+            _embedded: {
+                contacts: [
+                    {
+                        name: data.fullName,
+                        custom_fields_values: [
+                            {
+                                field_code: "PHONE",
+                                values: [
+                                    {
+                                        value: data.phone,
+                                    },
+                                ],
+                            },
+                            {
+                                field_code: "EMAIL",
+                                values: [
+                                    {
+                                        value: data.email || `${data.phone}@jonbranding.uz`,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+            custom_fields_values: [
+                {
+                    field_id: 1108219, // Izoh maydoni ID'si
+                    values: [
+                        {
+                            value: telegramMessage,
+                        },
+                    ],
+                },
+            ]
+        },
+    ];
+
+    try {
+        await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify(leadData),
+        });
+    } catch (error) {
+        console.error('Error creating amoCRM lead:', error);
+    }
+}
+
 export async function POST(request: Request) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
-    const threadId = process.env.TELEGRAM_THREAD_ID;
 
     if (!botToken || !chatId) {
         console.error("Server Configuration Error: Telegram token or chat ID is missing in the environment variables.");
@@ -156,29 +260,32 @@ ${packageInfo}
 `.trim();
         }
         
+        // Parallel requests
+        const promises = [];
+
+        // 1. Send to Telegram
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        const payload = { chat_id: chatId, text: telegramMessage };
+        promises.push(
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            }).then(async (response) => {
+                if (!response.ok) {
+                    const result = await response.json();
+                    console.error("Telegram API Error:", result);
+                    // Don't throw, just log, so amoCRM can still proceed
+                }
+            })
+        );
         
-        const payload: any = {
-            chat_id: chatId,
-            text: telegramMessage,
-        };
-
-        if (threadId) {
-            payload.message_thread_id = threadId;
+        // 2. Send to amoCRM
+        if (process.env.AMOCRM_SUBDOMAIN) {
+            promises.push(createAmoCRMLEAD(body, telegramMessage, totalPrice));
         }
 
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        });
-
-        const result = await response.json();
-
-        if (!result.ok) {
-            console.error("Telegram API Error:", result);
-            return NextResponse.json({ ok: false, error: `Telegramga yuborishda xatolik: ${result.description || 'Noma\'lum xato'}` }, { status: response.status });
-        }
+        await Promise.all(promises);
 
         return NextResponse.json({ ok: true, message: "So'rovingiz muvaffaqiyatli yuborildi." });
 
