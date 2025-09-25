@@ -50,9 +50,9 @@ const NamingPage: FC = () => {
 
   return (
     <>
-        <main className="flex-grow">
+        <main className="flex-grow pt-20">
         <Parallax speed={0.1}>
-            <section className="py-20 sm:py-28 bg-white pt-32">
+            <section className="py-20 sm:py-28 bg-white">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
                 Neyming — Kuchli Brend Nomi
