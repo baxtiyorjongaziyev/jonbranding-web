@@ -1,117 +1,108 @@
 
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Badge } from '@/components/ui/badge';
-import CtaBlock from './cta-block';
-import { Card } from '../ui/card';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import React from 'react';
+
+const processPhases = [
+  {
+    phase: "01",
+    title: "Kashfiyot",
+    description: "Boshlanish nuqtasi",
+    tasks: ["Briflash", "Biznes muammolari", "Auditoriya ehtiyojlari", "Bozor tahlili", "Raqobatchilar", "Ilhom/g‘oya"],
+  },
+  {
+    phase: "02",
+    title: "Strategiya",
+    description: "Yo‘l xaritasini belgilash",
+    tasks: ["Maqsad qo‘yish", "Auditoriya tahlili", "Pozitsiyalash", "Asosiy tamoyillar", "Roadmap", "Brend vizyoni"],
+  },
+  {
+    phase: "03",
+    title: "Ijodiy Dizayn",
+    description: "Brendni shakllantirish",
+    tasks: ["Naming", "Logo", "Rang & shrift", "Vizual konsepsiya", "Qadoqlash", "Brandbook asoslari"],
+  },
+  {
+    phase: "04",
+    title: "Taqdimot va Fikr",
+    description: "Sinov va takomillashtirish",
+    tasks: ["Taqdimot", "Fikr-mulohaza", "Iteratsiya", "Moslashtirish"],
+  },
+  {
+    phase: "05",
+    title: "Amaliyotga Tatbiq",
+    description: "Brendni hayotga tadbiq etish",
+    tasks: ["Tayyor fayllar", "Brandbook", "Vizual qo‘llanmalar", "Tatbiq yo‘riqnomasi"],
+  },
+  {
+    phase: "06",
+    title: "Qo‘llab-quvvatlash",
+    description: "Brend hech qachon to‘xtamaydi",
+    tasks: ["Doimiy support", "Fikr yig‘ish", "Trendlarni kuzatish", "Yangilash/kengaytirish"],
+  },
+];
+
+
+const ProcessCard = ({ phase, title, description, tasks }: (typeof processPhases)[0]) => (
+    <li className="flex-shrink-0 w-full sm:w-auto snap-start">
+        <div className="h-full p-6 bg-white rounded-2xl border border-gray-200/80 shadow-sm flex flex-col">
+            <h2 className="text-2xl font-bold text-dark-blue">{title}</h2>
+            <p className="mt-1 text-sm text-gray-500">{description}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+                {tasks.map((task) => (
+                    <span key={task} className="px-3 py-1 text-sm font-medium text-gray-700 bg-gray-100 rounded-full">
+                        {task}
+                    </span>
+                ))}
+            </div>
+        </div>
+    </li>
+);
 
 interface ProcessProps {
   onCtaClick: () => void;
 }
 
-const processPhases = [
-    {
-        phase: "01",
-        title: "Kashfiyot",
-        description: "Boshlanish nuqtasi",
-        tasks: [
-            "Briflash", 
-            "Biznes muammolarini aniqlash", 
-            "Auditoriya ehtiyojlari", 
-            "Bozor va raqobatchilar tahlili", 
-            "Ilhom va g‘oyalar yig‘ish"
-        ],
-    },
-    {
-        phase: "02",
-        title: "Strategiya",
-        description: "Yo‘l xaritasini belgilash",
-        tasks: [
-            "Maqsad qo‘yish", 
-            "Brendni joylashtirish (pozitsiyalash)", 
-            "Asosiy tamoyillar", 
-            "Rejalashtirish (roadmap)", 
-            "Brend vizyoni"
-        ],
-    },
-    {
-        phase: "03",
-        title: "Ijodiy Dizayn & Taqdimot",
-        description: "Brendni shakllantirish va sinov",
-        tasks: [
-            "Neyming", 
-            "Logo ishlanmalari", 
-            "Rang va shrift tizimi", 
-            "Vizual konsepsiya", 
-            "Qadoqlash dizayni",
-            "Dizayn taqdimoti", 
-            "Mijozdan fikr olish",
-        ],
-    },
-    {
-        phase: "04",
-        title: "Tatbiq & Rivojlanish",
-        description: "Hayotga tadbiq etish va qo‘llab-quvvatlash",
-        tasks: [
-            "Tayyor dizayn fayllari", 
-            "Brandbook topshirish", 
-            "Vizual qo‘llanmalar", 
-            "Doimiy qo‘llab-quvvatlash", 
-            "Brendni yangilash"
-        ],
-    },
-];
-
 const Process: React.FC<ProcessProps> = ({ onCtaClick }) => {
-  const targetRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const x = useTransform(scrollYProgress, [0.1, 0.7], ["0%", "-77%"]);
-
   return (
-    <section ref={targetRef} id="process" className="relative h-[400vh] bg-white">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 pt-16 sm:pt-24 pb-12 text-center w-full z-10 bg-white">
-            <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
-                Bizning ish jarayonimiz
-            </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-500">
-                G‘oyalarni ajoyib natijaga aylantirish uchun qulay va proaktiv jarayonni taklif etamiz.
-            </p>
+    <section id="process" className="py-16 sm:py-24 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-3xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl font-bold text-dark-blue">
+            To‘g‘ri Brendni Loyihalash
+          </h1>
+          <p className="mt-4 text-lg text-gray-600">
+            G‘oyalarni ajoyib natijaga aylantirish uchun qulay, shaffof va samarali ish jarayonini taklif etamiz.
+          </p>
+        </div>
+
+        {/* This container handles the unique mobile-to-desktop layout transition */}
+        <div className="mt-12">
+            {/* 
+              On small screens (sm and below):
+              - A horizontal scroll container is created with `overflow-x-auto`.
+              - `snap-x` and `snap-mandatory` ensure that scrolling snaps to the beginning of each card.
+              - `sm:grid` and other `sm:` prefixes reset these styles for larger screens.
+              - A `pb-6` is added for scrollbar spacing.
+            */}
+            <ul className="grid grid-cols-1 gap-6 
+                         md:grid-cols-2 lg:grid-cols-3
+                         sm:overflow-visible sm:p-0 
+                         overflow-x-auto snap-x snap-mandatory py-4 -mx-4 px-4 pb-6">
+                {processPhases.map((phase) => (
+                    <ProcessCard key={phase.phase} {...phase} />
+                ))}
+            </ul>
         </div>
         
-        <motion.div style={{ x }} className="flex gap-8 pl-[5vw] sm:pl-[10vw]">
-          {processPhases.map((phase, index) => (
-            <div key={index} className="w-[80vw] md:w-[45vw] lg:w-[24vw] flex-shrink-0">
-              <Card className="h-full rounded-2xl flex flex-col p-6 sm:p-8 bg-secondary/50 border-gray-200/80">
-                <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-dark-blue">{phase.title}</h3>
-                    <span className="text-4xl font-extrabold text-primary/10">{phase.phase}</span>
-                </div>
-                <p className="text-gray-500 text-sm mb-6">{phase.description}</p>
-                <div className="flex flex-wrap gap-2 justify-start">
-                  {phase.tasks.map((task) => (
-                    <Badge key={task} variant="outline" className="font-normal bg-white text-gray-600 border-gray-200/80">
-                      {task}
-                    </Badge>
-                  ))}
-                </div>
-              </Card>
-            </div>
-          ))}
-        </motion.div>
+        <div className="mt-16 text-center">
+            <Button size="lg" onClick={onCtaClick}>
+                Loyihani muhokama qilish <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+        </div>
       </div>
-       <CtaBlock
-            title="Loyihangizni muhokama qilishga tayyormisiz?"
-            description="Biznesingiz uchun qanday yechimlar taklif qila olishimizni bilish uchun bepul konsultatsiyaga yoziling."
-            buttonText="LOYIHANI MUHOKAMA QILISH"
-            onCtaClick={onCtaClick}
-        />
     </section>
   );
 };
