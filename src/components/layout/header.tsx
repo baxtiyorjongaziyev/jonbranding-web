@@ -26,40 +26,50 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
-const navItems = [
-  { href: '/#portfolio', label: 'Portfolio' },
-  { href: '/#founder', label: 'Asoschi' },
-  { href: '/#process', label: 'Jarayon' },
-  { href: '/blog', label: 'Blog' },
-];
-
-const services: { title: string; href: string; description: string }[] = [
-  {
-    title: "Brend Strategiyasi",
-    href: "/xizmatlar/brand-strategy",
-    description: "Brendingiz uchun poydevor — bozor tahlili, pozitsiyalash va kommunikatsiya.",
+const t = {
+  uz: {
+    portfolio: 'Portfolio',
+    founder: 'Asoschi',
+    process: 'Jarayon',
+    blog: 'Blog',
+    services: 'Xizmatlar',
+    brand_strategy: 'Brend Strategiyasi',
+    brand_strategy_desc: "Brendingiz uchun poydevor — bozor tahlili, pozitsiyalash va kommunikatsiya.",
+    naming: 'Neyming',
+    naming_desc: "Brendingiz uchun unutilmas, kuchli va huquqiy jihatdan toza nom tanlash.",
+    corporate_style: 'Firma Uslubi',
+    corporate_style_desc: "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
+    packaging_design: 'Qadoq dizayni',
+    packaging_design_desc: "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
+    services_and_prices: 'Xizmatlar va Narxlar',
+    services_and_prices_desc: "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
+    contact_by_phone: 'Telefon orqali bog\'lanish',
+    contact_by_telegram: 'Telegram orqali yozish',
+    free_consultation: 'Bepul konsultatsiya',
+    open_menu: 'Menyuni ochish',
   },
-  {
-    title: "Neyming",
-    href: "/xizmatlar/neyming",
-    description: "Brendingiz uchun unutilmas, kuchli va huquqiy jihatdan toza nom tanlash.",
-  },
-  {
-    title: "Firma Uslubi",
-    href: "/xizmatlar/firmenniy-stil",
-    description: "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
-  },
-  {
-    title: "Qadoq dizayni",
-    href: "/xizmatlar/qadoq-dizayni",
-    description: "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
-  },
-   {
-    title: "Xizmatlar va Narxlar",
-    href: "/xizmatlar",
-    description: "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
-  },
-];
+  ru: {
+    portfolio: 'Портфолио',
+    founder: 'Основатель',
+    process: 'Процесс',
+    blog: 'Блог',
+    services: 'Услуги',
+    brand_strategy: 'Бренд-стратегия',
+    brand_strategy_desc: "Фундамент для вашего бренда — анализ рынка, позиционирование и коммуникация.",
+    naming: 'Нейминг',
+    naming_desc: "Выбор запоминающегося, сильного и юридически чистого названия для вашего бренда.",
+    corporate_style: 'Фирменный стиль',
+    corporate_style_desc: "Система логотипов, цветов и шрифтов, делающая ваш бренд узнаваемым.",
+    packaging_design: 'Дизайн упаковки',
+    packaging_design_desc: "Привлекательный дизайн, который выделит ваш продукт на полке.",
+    services_and_prices: 'Услуги и цены',
+    services_and_prices_desc: "Соберите свой пакет услуг и узнайте цену прямо сейчас.",
+    contact_by_phone: 'Связаться по телефону',
+    contact_by_telegram: 'Написать в Telegram',
+    free_consultation: 'Бесплатная консультация',
+    open_menu: 'Открыть меню',
+  }
+};
 
 
 const ListItem = React.forwardRef<
@@ -141,11 +151,10 @@ const ExpandingIconButton: FC<{
 };
 
 
-const Header: FC = () => {
+const Header: FC<{ lang?: string }> = ({ lang = 'uz' }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
   const { scrollY } = useScroll();
-  const top = useTransform(scrollY, [0, 80], [0, 16]); // 1rem = 16px
+  const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
     scrollY,
@@ -172,6 +181,23 @@ const Header: FC = () => {
     setMobileMenuOpen(false);
   };
 
+  const translations = lang === 'ru' ? t.ru : t.uz;
+
+  const navItems = [
+    { href: `/${lang}/#portfolio`, label: translations.portfolio },
+    { href: `/${lang}/#founder`, label: translations.founder },
+    { href: `/${lang}/#process`, label: translations.process },
+    { href: `/${lang}/blog`, label: translations.blog },
+  ];
+
+  const services = [
+    { title: translations.brand_strategy, href: `/${lang}/xizmatlar/brand-strategy`, description: translations.brand_strategy_desc },
+    { title: translations.naming, href: `/${lang}/xizmatlar/neyming`, description: translations.naming_desc },
+    { title: translations.corporate_style, href: `/${lang}/xizmatlar/firmenniy-stil`, description: translations.corporate_style_desc },
+    { title: translations.packaging_design, href: `/${lang}/xizmatlar/qadoq-dizayni`, description: translations.packaging_design_desc },
+    { title: translations.services_and_prices, href: `/${lang}/xizmatlar`, description: translations.services_and_prices_desc },
+  ];
+
   return (
     <motion.header 
       className="fixed top-0 left-0 right-0 z-50"
@@ -189,13 +215,15 @@ const Header: FC = () => {
           boxShadow: useTransform(scrollY, [0, 80], ['none', '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'])
         }}
       >
-        <Link href="/" className="flex items-center" aria-label="Bosh sahifa">
+        <Link href={`/${lang}`} className="flex items-center" aria-label="Bosh sahifa">
           <Logo isWhite={false} />
         </Link>
         <NavigationMenu className="hidden lg:flex">
            <NavigationMenuList>
              <NavigationMenuItem>
-              <NavigationMenuTrigger className={cn("bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10 focus:text-foreground data-[state=open]:bg-black/10")}>Xizmatlar</NavigationMenuTrigger>
+              <NavigationMenuTrigger className={cn("bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10 focus:text-foreground data-[state=open]:bg-black/10")}>
+                {translations.services}
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {services.map((component) => (
@@ -229,7 +257,7 @@ const Header: FC = () => {
             onClick={handleContactClick} 
             className="shadow-ocean"
           >
-             Bepul konsultatsiya
+             {translations.free_consultation}
           </Button>
         </div>
         <div className="flex items-center gap-2 lg:hidden">
@@ -237,7 +265,7 @@ const Header: FC = () => {
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className={cn(scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Menyuni ochish</span>
+                <span className="sr-only">{translations.open_menu}</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
@@ -245,7 +273,7 @@ const Header: FC = () => {
                   <SheetTitle className="sr-only">Menyu</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-6 pt-10">
-                 <div className="text-xl font-medium text-foreground">Xizmatlar</div>
+                 <div className="text-xl font-medium text-foreground">{translations.services}</div>
                  <ul className="pl-4 space-y-4">
                     {services.map((service) => (
                        <li key={service.title}>
@@ -270,11 +298,11 @@ const Header: FC = () => {
                     </a>
                     <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
                       <Send size={20} />
-                      Telegram orqali bog'lanish
+                      {translations.contact_by_telegram}
                     </a>
                  </div>
                  <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4">
-                  Bepul konsultatsiya olish
+                  {translations.free_consultation}
                 </Button>
               </nav>
             </SheetContent>
