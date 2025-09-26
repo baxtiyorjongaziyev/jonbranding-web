@@ -92,11 +92,11 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
 
   return (
     <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-sm">
+      <div className="container mx-auto flex justify-between items-center gap-4">
+        <div className="text-sm flex-shrink">
             <p className="font-bold text-primary text-base">Loyihangizni muhokama qilamizmi?</p>
         </div>
-        <Button onClick={onOpenModal} className="shadow-ocean">
+        <Button onClick={onOpenModal} className="shadow-ocean flex-shrink-0 whitespace-normal h-auto py-2 px-4 text-center">
           Murojaat qoldirish
         </Button>
       </div>
