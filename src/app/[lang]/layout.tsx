@@ -105,8 +105,8 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: string } }>
         // Global Error Handler
         const handleError = (event: ErrorEvent) => {
             const { message, filename, lineno, colno, error } = event;
-            // Avoid sending feedback loop errors
-            if (message.includes('Telegram API Error')) return;
+            // Avoid sending feedback loop errors or generic script errors
+            if (message.includes('Telegram API Error') || message === 'Script error.') return;
 
             fetch('/api/report-error', {
                 method: 'POST',
