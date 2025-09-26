@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import type { Metadata } from 'next';
@@ -7,8 +8,6 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import type { FC, ReactNode } from 'react';
 import Head from 'next/head';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
 import { Poppins } from 'next/font/google';
 import { useState, useCallback, useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
@@ -108,7 +107,8 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: string } }>
         const handleError = (event: ErrorEvent) => {
             const { message, filename, lineno, colno, error } = event;
             // Avoid sending feedback loop errors or generic script errors
-            if (message.includes('Telegram API Error') || message === 'Script error.') return;
+            if (!message || message.includes('Telegram API Error') || message === 'Script error.') return;
+
 
             fetch('/api/report-error', {
                 method: 'POST',
@@ -221,9 +221,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: string } }>
         />
 
         <div className="flex min-h-screen flex-col bg-secondary/50">
-           <Header />
-            {children}
-           <Footer />
+           {children}
         </div>
         <Toaster />
         <ContactModal
@@ -241,5 +239,3 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: string } }>
 }
 
 export default RootLayout;
-
-    

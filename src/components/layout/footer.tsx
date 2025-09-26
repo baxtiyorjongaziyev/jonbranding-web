@@ -8,30 +8,76 @@ import { Separator } from '../ui/separator';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
-const Footer = () => {
+const t = {
+  uz: {
+    contact: "Biz bilan bog'laning",
+    by_telegram: "Telegram orqali",
+    by_phone: "Telefon orqali",
+    main_page: "Asosiy sahifa",
+    portfolio: "Portfolio",
+    founder: "Asoschi",
+    process: "Jarayon",
+    services: "Xizmatlarimiz",
+    brand_strategy: "Brend Strategiyasi",
+    naming: "Neyming",
+    corporate_style: "Firma Uslubi",
+    packaging_design: "Qadoq Dizayni",
+    additional: "Qo'shimcha",
+    service_prices: "Xizmat Narxlari",
+    branding_test: "Brending Testi",
+    blog: "Blog",
+    all_rights_reserved: "Barcha huquqlar himoyalangan.",
+    back_to_top: "Yuqoriga qaytish",
+  },
+  ru: {
+    contact: "Свяжитесь с нами",
+    by_telegram: "Через Telegram",
+    by_phone: "По телефону",
+    main_page: "Главная страница",
+    portfolio: "Портфолио",
+    founder: "Основатель",
+    process: "Процесс",
+    services: "Наши услуги",
+    brand_strategy: "Бренд-стратегия",
+    naming: "Нейминг",
+    corporate_style: "Фирменный стиль",
+    packaging_design: "Дизайн упаковки",
+    additional: "Дополнительно",
+    service_prices: "Цены на услуги",
+    branding_test: "Тест по брендингу",
+    blog: "Блог",
+    all_rights_reserved: "Все права защищены.",
+    back_to_top: "Вернуться наверх",
+  }
+};
+
+
+const Footer = ({ lang = 'uz' }: { lang: string }) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  
+  const translations = lang === 'ru' ? t.ru : t.uz;
 
   const mainPageLinks = [
-      { href: '/#portfolio', label: 'Portfolio' },
-      { href: '/#founder', label: 'Asoschi' },
-      { href: '/#process', label: 'Jarayon' },
-      { href: '/#faq', label: 'FAQ' },
+      { href: `/${lang}/#portfolio`, label: translations.portfolio },
+      { href: `/${lang}/#founder`, label: translations.founder },
+      { href: `/${lang}/#process`, label: translations.process },
+      { href: `/${lang}/#faq`, label: 'FAQ' },
   ];
 
   const serviceLinks = [
-      { href: '/xizmatlar/brand-strategy', label: 'Brend Strategiyasi' },
-      { href: '/xizmatlar/neyming', label: 'Neyming' },
-      { href: '/xizmatlar/firmenniy-stil', label: 'Firma Uslubi' },
-      { href: '/xizmatlar/qadoq-dizayni', label: 'Qadoq Dizayni' },
+      { href: `/${lang}/xizmatlar/brand-strategy`, label: translations.brand_strategy },
+      { href: `/${lang}/xizmatlar/neyming`, label: translations.naming },
+      { href: `/${lang}/xizmatlar/firmenniy-stil`, label: translations.corporate_style },
+      { href: `/${lang}/xizmatlar/qadoq-dizayni`, label: translations.packaging_design },
   ];
   
   const additionalLinks = [
-      { href: '/xizmatlar', label: 'Xizmat Narxlari' },
-      { href: '/quiz', label: 'Brending Testi' },
-      { href: '/blog', label: 'Blog' },
+      { href: `/${lang}/xizmatlar`, label: translations.service_prices },
+      { href: `/${lang}/quiz`, label: translations.branding_test },
+      { href: `/${lang}/blog`, label: translations.blog },
   ];
 
   return (
@@ -42,22 +88,22 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Biz bilan bog'laning</h3>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{translations.contact}</h3>
             <div className="mt-4 space-y-4">
                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="block group">
                   <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">@baxtiyorjon_gaziyev</p>
-                  <p className="text-xs text-gray-400">Telegram orqali</p>
+                  <p className="text-xs text-gray-400">{translations.by_telegram}</p>
                </a>
                <a href="tel:+998336450097" className="block group">
                   <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">+998 33 645 00 97</p>
-                  <p className="text-xs text-gray-400">Telefon orqali</p>
+                  <p className="text-xs text-gray-400">{translations.by_phone}</p>
                </a>
             </div>
           </div>
           
           {/* Main Page Links */}
           <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Asosiy sahifa</h3>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{translations.main_page}</h3>
             <ul className="mt-4 space-y-2">
               {mainPageLinks.map(link => (
                   <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
@@ -67,7 +113,7 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Xizmatlarimiz</h3>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{translations.services}</h3>
             <ul className="mt-4 space-y-2">
               {serviceLinks.map(link => (
                   <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
@@ -77,7 +123,7 @@ const Footer = () => {
 
           {/* Additional Links */}
           <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Qo'shimcha</h3>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{translations.additional}</h3>
              <ul className="mt-4 space-y-2">
                 {additionalLinks.map(link => (
                     <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
@@ -105,7 +151,7 @@ const Footer = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden whitespace-nowrap"
                   >
-                    <span>Barcha huquqlar himoyalangan.</span>
+                    <span>{translations.all_rights_reserved}</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -122,13 +168,13 @@ const Footer = () => {
 
            <div className="hidden lg:flex order-3">
               <button onClick={handleScrollTop} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
-                Yuqoriga qaytish <ArrowUp size={16} />
+                {translations.back_to_top} <ArrowUp size={16} />
               </button>
            </div>
         </div>
 
         <div className="mt-16 text-center">
-             <Link href="/">
+             <Link href={`/${lang}`}>
                 <Logo isWhite />
              </Link>
         </div>

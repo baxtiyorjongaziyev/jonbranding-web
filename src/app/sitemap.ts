@@ -18,51 +18,53 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog',
   ];
 
-  const sitemapEntries = locales.flatMap((locale) => 
-    routes.map((route) => {
-      const url = locale === 'uz' 
-        ? `${baseUrl}${route}`
-        : `${baseUrl}/${locale}${route}`;
+  const sitemapEntries = routes.flatMap((route) => {
+      const urlUz = route === '/' ? baseUrl : `${baseUrl}${route}`;
+      const urlRu = route === '/' ? `${baseUrl}/ru` : `${baseUrl}/ru${route}`;
       
-      const priority = route === '/' ? 1 : (route === '/blog' || route === '/xizmatlar' ? 0.9 : 0.8);
-      
+      const priority = route === '/' ? 1.0 : (route.startsWith('/xizmatlar') || route === '/blog' ? 0.9 : 0.8);
+      const changeFrequency: 'daily' | 'weekly' | 'monthly' | 'yearly' = route === '/' ? 'daily' : 'monthly';
+
       return {
-        url: url,
+        url: urlUz,
         lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
+        changeFrequency: changeFrequency,
         priority: priority,
         alternates: {
           languages: {
-            uz: `${baseUrl}${route}`,
-            ru: `${baseUrl}/ru${route}`,
+            uz: urlUz,
+            ru: urlRu,
+            'x-default': urlUz,
           },
         },
       };
-    })
-  );
+    });
 
 
   const blogPosts = getSortedPostsData();
-  const blogEntries = locales.flatMap((locale) => 
-    blogPosts.map(post => {
-      const url = locale === 'uz' 
-        ? `${baseUrl}/blog/${post.slug}`
-        : `${baseUrl}/${locale}/blog/${post.slug}`;
+  const blogEntries = blogPosts.map(post => {
+      const urlUz = `${baseUrl}/blog/${post.slug}`;
+      const urlRu = `${baseUrl}/ru/blog/${post.slug}`;
       
       return {
-        url: url,
+        url: urlUz,
         lastModified: new Date(post.date),
         changeFrequency: 'yearly' as const,
         priority: 0.7,
         alternates: {
            languages: {
-            uz: `${baseUrl}/blog/${post.slug}`,
-            ru: `${baseUrl}/ru/blog/${post.slug}`,
+            uz: urlUz,
+            ru: urlRu,
+            'x-default': urlUz,
           },
         }
       };
-    })
-  );
+    });
+
+  // Since alternates are handled within each entry, we can flatten everything,
+  // but we need to avoid duplicate canonical URLs.
+  // The current logic creates entries for each locale for each route, which is not ideal.
+  // Let's create one entry per canonical URL with alternates.
 
   return [...sitemapEntries, ...blogEntries];
 }
