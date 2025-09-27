@@ -77,7 +77,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
                   variant="ghost"
                   role="menuitem"
                   className={cn(
-                  "justify-start gap-2 font-normal border-0 hover:bg-secondary"
+                  "justify-start gap-2 font-normal border-0 hover:bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
                   )}
                   onClick={() => handleLanguageChange(locale)}
               >
