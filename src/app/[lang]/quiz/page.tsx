@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, FC, useMemo } from 'react';
@@ -11,6 +10,7 @@ import { ArrowRight, Frown, Meh, Smile } from 'lucide-react';
 import ContactModal from '@/components/contact-modal';
 import { event as gtagEvent } from '@/lib/gtag';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 const questions = [
   {
@@ -145,7 +145,9 @@ const resultData = {
     }
 };
 
-const QuizPage: FC<{ params: { lang: string } }> = ({ params: { lang } }) => {
+const QuizPage: FC = () => {
+  const params = useParams();
+  const lang = params.lang as string;
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>(Array(questions.length).fill(null));
   const [isModalOpen, setModalOpen] = useState(false);
@@ -286,5 +288,3 @@ const QuizPage: FC<{ params: { lang: string } }> = ({ params: { lang } }) => {
 };
 
 export default QuizPage;
-
-    
