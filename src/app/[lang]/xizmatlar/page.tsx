@@ -12,7 +12,7 @@ import { useParams } from 'next/navigation';
 const Comparison = dynamic(() => import('@/components/sections/comparison'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
-const Offer = dynamic(() => import('@-components/sections/offer'), {
+const Offer = dynamic(() => import('@/components/sections/offer'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
 const QueueStatus = dynamic(() => import('@/components/sections/queue-status'), {
