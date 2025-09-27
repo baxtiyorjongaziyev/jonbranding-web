@@ -82,6 +82,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         phone: "Telefon raqamingizni to'g'ri kiriting.",
         goal: "Asosiy maqsadingizni tanlang.",
         budget: "Taxminiy byudjetingizni tanlang.",
+        location: "Joylashuvingizni tanlang.",
         meetingPlace: "Uchrashuv joyini tanlashingiz kerak.",
       },
       successToast: {
@@ -142,6 +143,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         phone: "Введите правильный номер телефона.",
         goal: "Выберите вашу основную цель.",
         budget: "Выберите примерный бюджет.",
+        location: "Выберите ваше местоположение.",
         meetingPlace: "Вам нужно выбрать место встречи.",
       },
       successToast: {
@@ -489,7 +491,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                         {translations.meetingPlaceOptions.map((option) => (
                                             <LiveLocationCard
                                                 key={option.value}
-                                                icon={option.icon}
+                                                icon={option.value === 'our_office' ? Briefcase : option.value === 'neutral' ? Coffee : Building2}
                                                 title={option.label}
                                                 description={option.description}
                                                 isSelected={field.value === option.value}
@@ -534,3 +536,5 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 };
 
 export default ContactModal;
+
+    
