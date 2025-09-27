@@ -103,7 +103,7 @@ const ExpandingButton = ({ children, text, scrolled }: { children: React.ReactNo
                 variant="outline"
                 className={cn(
                     "gap-2 overflow-hidden w-[40px] h-[40px] p-0 flex items-center justify-center transition-colors duration-300",
-                    scrolled ? "text-foreground border-black/20 hover:bg-black/10" : "text-foreground border-white/20 hover:bg-white/10"
+                     scrolled ? "text-foreground border-black/20 hover:bg-transparent" : "text-foreground border-white/20 hover:bg-transparent"
                  )} 
                 asChild
             >
@@ -254,13 +254,19 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div className="hidden items-center space-x-2 lg:flex">
              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <div>
-                        <ExpandingButton text={languageOptions[lang as 'uz' | 'ru' | 'en']?.label} scrolled={scrolled}>
-                            <CurrentLangIcon />
-                        </ExpandingButton>
-                    </div>
+                    <Button 
+                        variant="outline"
+                        className={cn(
+                            "gap-2 transition-colors duration-300",
+                            scrolled ? "text-foreground border-black/20 hover:bg-black/10" : "text-foreground border-white/20 hover:bg-white/10"
+                        )}
+                    >
+                        <CurrentLangIcon />
+                        <span>{languageOptions[lang as 'uz' | 'ru' | 'en']?.label}</span>
+                        <ChevronDown className="h-4 w-4" />
+                    </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent align="end">
                 {Object.keys(languageOptions).map((langKey) => {
                     const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
                     return (
