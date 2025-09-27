@@ -25,7 +25,7 @@ function AnalyticsTracker() {
   return null;
 }
 
-const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
+const MainLayout: FC<Readonly<{ children: ReactNode, lang: string }>> = ({ children, lang }) => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [packageSummary, setPackageSummary] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
@@ -45,7 +45,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 
                 const priceDetails = calculatePackagePrice(selections);
                 if (priceDetails.base > 0) {
-                    const summary = generateSummary(selections);
+                    const summary = generateSummary(selections, lang);
                     setPackageSummary(summary);
                     setTotalPrice(priceDetails.final);
                 }
@@ -57,7 +57,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
             }
         }
         setModalOpen(true);
-    }, []);
+    }, [lang]);
 
     const handleCloseModal = () => {
         setModalOpen(false);
@@ -104,6 +104,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 packageSummary={packageSummary}
                 totalPrice={totalPrice}
                 onFormSubmitSuccess={handleCloseModal}
+                lang={lang}
             />
             <AiAssistant />
             <CookieConsentBanner />

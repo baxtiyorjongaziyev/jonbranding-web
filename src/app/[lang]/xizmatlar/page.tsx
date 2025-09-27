@@ -19,7 +19,7 @@ const QueueStatus = dynamic(() => import('@/components/sections/queue-status'), 
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
 
-const XizmatlarPage = () => {
+const XizmatlarPage = ({ params: { lang } }: { params: { lang: string } }) => {
     const handleOpenModal = useCallback(() => {
         const event = new CustomEvent('openContactModal');
         window.dispatchEvent(event);
@@ -32,14 +32,22 @@ const XizmatlarPage = () => {
                 <meta name="description" content="Bizning barcha xizmatlarimiz bilan tanishing va o'zingizga mos bo'lgan brending to'plamini yarating. Onlayn kalkulyator yordamida narxlarni darhol hisoblang." />
             </Head>
             <main className="flex-grow">
-                <PackageBuilder onOrderNow={handleOpenModal} />
-                <Comparison onCtaClick={handleOpenModal} />
-                <Offer onCTAClick={handleOpenModal} />
-                <QueueStatus onCtaClick={handleOpenModal} />
+                <PackageBuilder onOrderNow={handleOpenModal} lang={lang} />
+                <Comparison onCtaClick={handleOpenModal} lang={lang} />
+                <Offer onCTAClick={handleOpenServiceModal} lang={lang}/>
+                <QueueStatus onCtaClick={handleOpenModal} lang={lang} />
             </main>
-            <MobileCtaBar onOpenModal={handleOpenModal} />
+            <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} />
         </>
     );
 };
+
+function handleOpenServiceModal() {
+    const servicesSection = document.getElementById('package-builder');
+    if (servicesSection) {
+        servicesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
 
 export default XizmatlarPage;
