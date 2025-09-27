@@ -119,7 +119,7 @@ const AnimatedSection: FC<{children: ReactNode}> = ({ children }) => {
 };
 
 
-const Home: FC = () => {
+const Home: FC<{ params: { lang: string } }> = ({ params: { lang } }) => {
     const [isClient, setIsClient] = useState(false);
     const { tg } = useTelegram();
 
@@ -163,7 +163,7 @@ const Home: FC = () => {
     return (
         <>
             <main>
-                <AnimatedSection><Hero onPrimaryClick={handleOpenModal} /></AnimatedSection>
+                <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} /></AnimatedSection>
                 <AnimatedSection><Stats /></AnimatedSection>
                 <AnimatedSection><TrustedBy /></AnimatedSection>
                 <AnimatedSection><TargetAudience /></AnimatedSection>
