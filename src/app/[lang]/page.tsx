@@ -119,7 +119,8 @@ const AnimatedSection: FC<{children: ReactNode}> = ({ children }) => {
 };
 
 
-const Home: FC<{ params: { lang: string } }> = ({ params: { lang } }) => {
+const Home: FC<{ params: { lang: string } }> = ({ params }) => {
+    const { lang } = params;
     const [isClient, setIsClient] = useState(false);
     const { tg } = useTelegram();
 
