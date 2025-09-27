@@ -5,7 +5,7 @@ import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu, Phone, Send, X, Mail } from 'lucide-react';
+import { Menu, Phone, Send, X, Mail, Languages } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -50,6 +50,9 @@ const t = {
     contact_by_telegram: 'Telegram orqali yozish',
     free_consultation: 'Bepul konsultatsiya',
     open_menu: 'Menyuni ochish',
+    switch_lang: "Tilni o'zgartirish",
+    lang_ru: "Русский",
+    lang_uz: "O'zbekcha"
   },
   ru: {
     portfolio: 'Портфолио',
@@ -71,6 +74,9 @@ const t = {
     contact_by_telegram: 'Написать в Telegram',
     free_consultation: 'Бесплатная консультация',
     open_menu: 'Открыть меню',
+    switch_lang: "Сменить язык",
+    lang_ru: "Русский",
+    lang_uz: "O'zbekcha"
   }
 };
 
@@ -107,8 +113,9 @@ const ExpandingIconButton: FC<{
     text: string,
     href: string,
     isExternal?: boolean,
+    isLink?: boolean,
     expandedWidth?: number
-}> = ({ icon: Icon, text, href, isExternal = false, expandedWidth = 130 }) => {
+}> = ({ icon: Icon, text, href, isExternal = false, isLink = true, expandedWidth = 130 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const buttonVariants = {
@@ -121,35 +128,43 @@ const ExpandingIconButton: FC<{
     hover: { opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.2 } },
   };
 
+  const Component = isLink ? Link : 'a';
+  const motionProps: any = {
+      href: href,
+      onMouseEnter: () => setIsHovered(true),
+      onMouseLeave: () => setIsHovered(false),
+      variants: buttonVariants,
+      animate: isHovered ? 'hover' : 'rest',
+      initial: "rest",
+      className: "relative flex items-center justify-start h-11 rounded-full bg-secondary text-secondary-foreground shadow-sm overflow-hidden"
+  };
+
+  if (!isLink) {
+    motionProps.target = isExternal ? '_blank' : '_self';
+    motionProps.rel = isExternal ? 'noopener noreferrer' : '';
+  }
+
   return (
-    <motion.a
-      href={href}
-      target={isExternal ? '_blank' : '_self'}
-      rel={isExternal ? 'noopener noreferrer' : ''}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      variants={buttonVariants}
-      animate={isHovered ? 'hover' : 'rest'}
-      initial="rest"
-      className="relative flex items-center justify-start h-11 rounded-full bg-secondary text-secondary-foreground shadow-sm overflow-hidden"
-    >
-      <div className="absolute left-3.5">
-          <Icon size={18} />
-      </div>
-      <AnimatePresence>
-        {isHovered && (
-          <motion.span
-            variants={textVariants}
-            initial="rest"
-            animate="hover"
-            exit="rest"
-            className="absolute left-11 text-sm font-medium whitespace-nowrap"
-          >
-            {text}
-          </motion.span>
-        )}
-      </AnimatePresence>
-    </motion.a>
+    <motion.div>
+      <Component {...motionProps}>
+        <div className="absolute left-3.5 flex items-center justify-center h-full">
+            <Icon size={18} />
+        </div>
+        <AnimatePresence>
+          {isHovered && (
+            <motion.span
+              variants={textVariants}
+              initial="rest"
+              animate="hover"
+              exit="rest"
+              className="absolute left-11 text-sm font-medium whitespace-nowrap"
+            >
+              {text}
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </Component>
+    </motion.div>
   );
 };
 
@@ -260,14 +275,15 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
-            <Link href={newPath}>
-              <Button variant="ghost" size="icon" className="h-11 w-11">
-                {otherLang === 'ru' ? <RuFlagIcon /> : <UzFlagIcon />}
-                <span className="sr-only">Switch to {otherLang}</span>
-              </Button>
-            </Link>
-           <ExpandingIconButton icon={Phone} text="+998 33 645 00 97" href="tel:+998336450097" expandedWidth={190}/>
-           <ExpandingIconButton icon={Send} text="Telegram" href="https://t.me/baxtiyorjon_gaziyev" isExternal={true} />
+            <ExpandingIconButton 
+              icon={otherLang === 'ru' ? RuFlagIcon : UzFlagIcon}
+              text={otherLang === 'ru' ? translations.lang_ru : translations.lang_uz}
+              href={newPath}
+              isLink={true}
+              expandedWidth={120}
+            />
+           <ExpandingIconButton icon={Phone} text="+998 33 645 00 97" href="tel:+998336450097" isExternal={false} isLink={false} expandedWidth={190}/>
+           <ExpandingIconButton icon={Send} text="Telegram" href="https://t.me/baxtiyorjon_gaziyev" isExternal={true} isLink={false} />
            <Button 
             onClick={handleContactClick} 
             className="shadow-ocean"
@@ -323,7 +339,7 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
                     <Link href={newPath} className="mt-4">
                       <Button variant="outline" size="icon" className="w-12 h-12">
                         {otherLang === 'ru' ? <RuFlagIcon /> : <UzFlagIcon />}
-                        <span className="sr-only">Switch to {otherLang}</span>
+                        <span className="sr-only">{translations.switch_lang}</span>
                       </Button>
                     </Link>
                  </div>
