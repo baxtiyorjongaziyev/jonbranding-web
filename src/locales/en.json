@@ -22,7 +22,7 @@
         "open_menu": "Open Menu",
         "switch_lang": "Switch Language",
         "lang_ru": "Русский",
-        "lang_uz": "O'zbekcha",
+        "lang_uz": "O‘zbekcha",
         "lang_en": "English"
     },
     "footer": {
@@ -246,10 +246,7 @@
            { "question": "What are the payment terms?", "answer": "The standard scheme is 50% prepayment, 50% after project delivery. We can also discuss individual terms for your convenience." },
            { "question": "How long does the work take?", "answer": "The timing depends on the type of service. For example, creating a logo takes 2-4 weeks, brand strategy starts from 8 weeks. The final deadline is determined after project approval." },
            { "question": "Is there support after the project is completed?", "answer": "Yes, within 1 month after the project completion, we provide free advice and assistance on the correct use of brand materials." }
-        ],
-        "ctaTitle": "Don't leave room for doubt!",
-        "ctaDesc": "Got all your questions answered? Let's discuss your project and take your brand to the next level.",
-        "ctaButton": "I've got all the answers, ready to start!"
+        ]
     },
     "mobileCtaBar": {
         "final_price": "Final price",
@@ -483,8 +480,14 @@
         "title": "Services and Prices",
         "subtitle": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator.",
         "comparison": {
+            "title": "Us vs. Competitors",
+            "description": "We provide high-quality branding services at much more affordable prices than premium agencies. And the result will be even better than you expect.",
+            "features": "Features",
             "whyPremiumTitle": "Why only premium agencies?",
-            "whyPremiumDesc": "We compare ourselves only with top-tier companies that have a strategic approach. Our goal is not just to be cheaper, but to provide premium quality at an affordable price. Comparing with agencies that do not match our level of quality and strategy would be incorrect for both the client and us."
+            "whyPremiumDesc": "We compare ourselves only with top-tier companies that have a strategic approach. Our goal is not just to be cheaper, but to provide premium quality at an affordable price. Comparing with agencies that do not match our level of quality and strategy would be incorrect for both the client and us.",
+            "ctaTitle": "You've seen the difference. Now it's time to choose!",
+            "ctaDesc": "You don't have to overpay for quality branding. Make the right decision for your business and contact us.",
+            "ctaButton": "I need this approach"
         }
     },
     "packageBuilder": {
@@ -543,5 +546,25 @@
         "title": "Don't leave yet!",
         "description": "We have a special offer for you. <br/>We have <span class='font-bold text-primary'>various discounts</span> available. Seize the opportunity!",
         "button": "View Discounts"
+    },
+    "queueStatus": {
+        "subtitle": "Limited Slots",
+        "title": "Hurry! Book your slot!",
+        "description": "We dedicate time to each project to ensure high quality. Therefore, we only work on a limited number of projects at a time.",
+        "queueTitle": "Project Queue",
+        "booked": "Booked",
+        "available": "Available",
+        "tooltipBooked": "Slot is booked",
+        "tooltipAvailable": "You can sign up for the queue",
+        "remainingSlots": "Remaining slots",
+        "slotsUnit": "slots",
+        "onlineNow": "Online now",
+        "peopleUnit": "people",
+        "nextProjectStart": "Next project starts",
+        "ctaButton": "Book my slot",
+        "ctaSubtitle": "Be one step ahead of your competitors!",
+        "timeframes": {
+            "2 weeks": "in 2 weeks"
+        }
     }
 }

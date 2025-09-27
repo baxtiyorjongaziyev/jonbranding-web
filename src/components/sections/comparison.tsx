@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -49,9 +50,9 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang }) => {
     <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold">{"Biz va Raqobatchilar"}</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
             <p className="mt-4 text-lg text-gray-700">
-                {"Biz yuqori sifatli brending xizmatlarini premium agentliklarga qaraganda ancha hamyonbop narxlarda taqdim etamiz. Natija esa siz kutgandan ham a'lo bo'ladi."}
+                {translations.description}
             </p>
         </div>
         
@@ -59,7 +60,7 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang }) => {
         <div className="mt-12 max-w-6xl mx-auto hidden md:block">
           <Card className="rounded-2xl shadow-xl border-2 border-primary/20 overflow-hidden">
             <div className="grid grid-cols-5 bg-secondary/50">
-              <div className="col-span-1 p-4 font-bold text-sm sm:text-lg text-dark-blue border-r border-gray-200 flex items-center">{"Xususiyatlar"}</div>
+              <div className="col-span-1 p-4 font-bold text-sm sm:text-lg text-dark-blue border-r border-gray-200 flex items-center">{translations.features}</div>
               {competitors.map(c => (
                  <div key={c.id} className={cn("col-span-1 p-4 text-center font-bold text-sm sm:text-lg", c.isPrimary ? 'text-primary' : 'text-dark-blue')}>
                    {c.id === 'jon' ? <Logo /> : c.name}
@@ -126,9 +127,9 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang }) => {
 
       </div>
       <CtaBlock 
-        title={"Farqni o'zingiz ko'rdingiz. Endi tanlash vaqti keldi!"}
-        description={"Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun eng to'g'ri qarorni qabul qiling va biz bilan bog'laning."}
-        buttonText={"Menga shunday yondashuv kerak"}
+        title={translations.ctaTitle}
+        description={translations.ctaDesc}
+        buttonText={translations.ctaButton}
         onCtaClick={onCtaClick}
       />
     </section>
