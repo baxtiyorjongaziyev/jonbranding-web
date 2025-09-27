@@ -27,69 +27,169 @@ interface ContactModalProps {
   packageSummary?: string;
   totalPrice?: number;
   onFormSubmitSuccess?: () => void;
+  lang: string;
 }
 
-const budgetOptions = [
-  "Mavjud emas / Faqat o'rganayapman",
-  "$500 gacha",
-  "$500 - $1,500",
-  "$1,500 - $3,000",
-  "$3,000 dan yuqori"
-];
+const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice, onFormSubmitSuccess, lang }) => {
+  const { toast } = useToast();
+  const [isSubmitting, setSubmitting] = useState(false);
+  const [step, setStep] = useState(1);
+  const { user } = useTelegram();
 
-const locationOptions = [
-    "Toshkent",
-    "Farg'ona",
-    "Boshqa viloyat"
-];
-
-const goalOptions = [
-    { value: "exploring", label: "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman." },
-    { value: "has_problem", label: "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak." },
-    { value: "ready_to_start", label: "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." },
-];
-
-const meetingPlaceOptions = [
-    { value: "our_office", label: "Bizning ofisimizda", description: "Loyihaga to'liq sho'ng'ish" },
-    { value: "neutral", label: "Neytral hududda", description: "Erkin muhitda muhokama" },
-    { value: "client_office", label: "Sizning ofisingizda", description: "Biznesingiz bilan tanishish" },
-];
-
-const formSchema = z.object({
-  fullName: z.string().min(2, { message: "Ism-sharifingizni to'liq kiriting." }),
-  phone: z.string().min(9, { message: "Telefon raqamingizni to'g'ri kiriting." }),
-  telegram: z.string().optional(),
-  companyName: z.string().optional(),
-  website: z.string().optional(),
-  goal: z.string({ required_error: "Asosiy maqsadingizni tanlang." }),
-  budget: z.string({ required_error: "Taxminiy byudjetingizni tanlang." }),
-  location: z.string({ required_error: "Joylashuvingizni tanlang." }),
-  meetingPlace: z.string().optional(),
-}).refine(data => {
-    if ((data.location === 'Toshkent' || data.location === 'Farg\'ona') && !data.meetingPlace) {
-        return false;
+  const t = {
+    uz: {
+      title: "Sifatli konsultatsiya uchun",
+      description: "Loyihangizni yaxshiroq tushunishimiz uchun bir nechta savollarga javob bering.",
+      fullName: "Ism, Familiya",
+      fullNamePlaceholder: "Murad Nazarov",
+      phone: "Telefon raqam",
+      phonePlaceholder: "+998 90 123 45 67",
+      telegram: "Telegram username (ixtiyoriy)",
+      telegramPlaceholder: "@username",
+      companyName: "Kompaniya yoki loyiha nomi",
+      companyNamePlaceholder: "Jon.Branding",
+      website: "Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)",
+      websitePlaceholder: "https://t.me/jonbranding",
+      goal: "Asosiy maqsadingiz qaysi biriga yaqin?",
+      goalOptions: [
+        { value: "exploring", label: "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman." },
+        { value: "has_problem", label: "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak." },
+        { value: "ready_to_start", label: "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." },
+      ],
+      budget: "Loyiha uchun taxminiy byudjet?",
+      budgetOptions: [
+        "Mavjud emas / Faqat o'rganayapman",
+        "$500 gacha",
+        "$500 - $1,500",
+        "$1,500 - $3,000",
+        "$3,000 dan yuqori"
+      ],
+      location: "Uchrashuv uchun joylashuvingiz",
+      locationPlaceholder: "Viloyatingizni tanlang",
+      locationOptions: ["Toshkent", "Farg'ona", "Boshqa viloyat"],
+      meetingPlace: "Uchrashuv qayerda bo'lishini xohlaysiz?",
+      meetingPlaceOptions: [
+        { value: "our_office", label: "Bizning ofisimizda", description: "Loyihaga to'liq sho'ng'ish" },
+        { value: "neutral", label: "Neytral hududda", description: "Erkin muhitda muhokama" },
+        { value: "client_office", label: "Sizning ofisingizda", description: "Biznesingiz bilan tanishish" },
+      ],
+      onlineMeetingAlert: "Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.",
+      backButton: "Orqaga",
+      nextButton: "Keyingisi",
+      submitButton: "So'rovni yuborish",
+      formErrors: {
+        fullName: "Ism-sharifingizni to'liq kiriting.",
+        phone: "Telefon raqamingizni to'g'ri kiriting.",
+        goal: "Asosiy maqsadingizni tanlang.",
+        budget: "Taxminiy byudjetingizni tanlang.",
+        meetingPlace: "Uchrashuv joyini tanlashingiz kerak.",
+      },
+      successToast: {
+        title: "Muvaffaqiyatli!",
+        description: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
+      },
+      leadMagnetToast: {
+        title: "Siz uchun maxsus resurslar!",
+        description: "So'rovingiz qabul qilindi! Boshlanishiga siz uchun tayyorlagan bepul materiallarimizga yo'naltiryapmiz.",
+      },
+      errorToast: {
+          title: "Xatolik!",
+          description: (msg: string) => msg || "So‘rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring."
+      }
+    },
+    ru: {
+      title: "Для качественной консультации",
+      description: "Ответьте на несколько вопросов, чтобы мы лучше поняли ваш проект.",
+      fullName: "Имя, Фамилия",
+      fullNamePlaceholder: "Мурад Назаров",
+      phone: "Номер телефона",
+      phonePlaceholder: "+998 90 123 45 67",
+      telegram: "Имя пользователя Telegram (необязательно)",
+      telegramPlaceholder: "@username",
+      companyName: "Название компании или проекта",
+      companyNamePlaceholder: "Jon.Branding",
+      website: "Веб-сайт или социальная сеть (необязательно)",
+      websitePlaceholder: "https://t.me/jonbranding",
+      goal: "Какая из целей вам ближе?",
+      goalOptions: [
+        { value: "exploring", label: "Я не разбираюсь в брендинге, но думаю, что это нужно моему бизнесу." },
+        { value: "has_problem", label: "У меня есть бренд, но он неэффективен, нужен анализ и консультация." },
+        { value: "ready_to_start", label: "Я понимаю силу брендинга и пришел с конкретной целью." },
+      ],
+      budget: "Примерный бюджет на проект?",
+      budgetOptions: [
+        "Пока нет бюджета / Только изучаю",
+        "До $500",
+        "$500 - $1,500",
+        "$1,500 - $3,000",
+        "Выше $3,000"
+      ],
+      location: "Ваше местоположение для встречи",
+      locationPlaceholder: "Выберите вашу область",
+      locationOptions: ["Ташкент", "Фергана", "Другая область"],
+      meetingPlace: "Где бы вы хотели встретиться?",
+      meetingPlaceOptions: [
+        { value: "our_office", label: "В нашем офисе", description: "Полное погружение в проект" },
+        { value: "neutral", label: "На нейтральной территории", description: "Обсуждение в свободной обстановке" },
+        { value: "client_office", label: "В вашем офисе", description: "Знакомство с вашим бизнесом" },
+      ],
+      onlineMeetingAlert: "Понятно. Мы договоримся с вами об удобном времени и проведем онлайн-встречу.",
+      backButton: "Назад",
+      nextButton: "Далее",
+      submitButton: "Отправить запрос",
+      formErrors: {
+        fullName: "Введите ваше полное имя.",
+        phone: "Введите правильный номер телефона.",
+        goal: "Выберите вашу основную цель.",
+        budget: "Выберите примерный бюджет.",
+        meetingPlace: "Вам нужно выбрать место встречи.",
+      },
+      successToast: {
+        title: "Успешно!",
+        description: "Ваш запрос принят. Мы скоро с вами свяжемся!",
+      },
+      leadMagnetToast: {
+        title: "Специальные ресурсы для вас!",
+        description: "Ваш запрос принят! Для начала мы направляем вас к нашим бесплатным материалам.",
+      },
+       errorToast: {
+          title: "Ошибка!",
+          description: (msg: string) => msg || "Произошла ошибка при отправке запроса. Пожалуйста, попробуйте снова."
+      }
     }
-    return true;
-}, {
-    message: "Uchrashuv joyini tanlashingiz kerak.",
-    path: ["meetingPlace"],
-});
+  }
 
+  const translations = lang === 'ru' ? t.ru : t.uz;
+  const budgetOptions = translations.budgetOptions;
 
-type FormData = z.infer<typeof formSchema>;
+  const formSchema = z.object({
+    fullName: z.string().min(2, { message: translations.formErrors.fullName }),
+    phone: z.string().min(9, { message: translations.formErrors.phone }),
+    telegram: z.string().optional(),
+    companyName: z.string().optional(),
+    website: z.string().optional(),
+    goal: z.string({ required_error: translations.formErrors.goal }),
+    budget: z.string({ required_error: translations.formErrors.budget }),
+    location: z.string({ required_error: translations.formErrors.location }),
+    meetingPlace: z.string().optional(),
+  }).refine(data => {
+      if ((data.location === translations.locationOptions[0] || data.location === translations.locationOptions[1]) && !data.meetingPlace) {
+          return false;
+      }
+      return true;
+  }, {
+      message: translations.formErrors.meetingPlace,
+      path: ["meetingPlace"],
+  });
 
-const STEPS = [
+  type FormData = z.infer<typeof formSchema>;
+
+  const STEPS = [
     { id: 1, title: 'Aloqa ma’lumotlari', fields: ['fullName', 'phone', 'telegram'] },
     { id: 2, title: 'Loyiha haqida', fields: ['companyName', 'website', 'goal'] },
     { id: 3, title: 'Byudjet', fields: ['budget'] },
     { id: 4, title: 'Uchrashuv', fields: ['location', 'meetingPlace'] },
 ];
-
-const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice, onFormSubmitSuccess }) => {
-  const { toast } = useToast();
-  const [isSubmitting, setSubmitting] = useState(false);
-  const [step, setStep] = useState(1);
-  const { user } = useTelegram();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -127,7 +227,6 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         throw new Error(result.error || 'Serverda xatolik yuz berdi.');
       }
       
-      // Trigger Google Analytics event
       gtagEvent('form_submit', {
         'event_category': 'Contact',
         'event_label': 'Main Contact Form',
@@ -144,8 +243,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       
       if (data.budget === budgetOptions[0]) {
          toast({
-            title: "Siz uchun maxsus resurslar!",
-            description: "So'rovingiz qabul qilindi! Boshlanishiga siz uchun tayyorlagan bepul materiallarimizga yo'naltiryapmiz.",
+            title: translations.leadMagnetToast.title,
+            description: translations.leadMagnetToast.description,
          });
          onClose();
          const leadMagnetSection = document.getElementById('lead-magnet');
@@ -154,8 +253,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
          }
       } else {
          toast({
-           title: 'Muvaffaqiyatli!',
-           description: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
+           title: translations.successToast.title,
+           description: translations.successToast.description,
            variant: 'default',
          });
          if (onFormSubmitSuccess) {
@@ -168,8 +267,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
     } catch (error: any) {
       toast({
-        title: 'Xatolik!',
-        description: error.message || 'So‘rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.',
+        title: translations.errorToast.title,
+        description: translations.errorToast.description(error.message),
         variant: 'destructive',
       });
     } finally {
@@ -219,9 +318,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md rounded-2xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-dark-blue">Sifatli konsultatsiya uchun</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-dark-blue">{translations.title}</DialogTitle>
           <DialogDescription>
-            Loyihangizni yaxshiroq tushunishimiz uchun bir nechta savollarga javob bering.
+            {translations.description}
           </DialogDescription>
         </DialogHeader>
         <Progress value={progress} className="h-2" />
@@ -234,9 +333,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     name="fullName"
                     render={({ field }) => (
                         <FormItem>
-                        <FormLabel>Ism, Familiya</FormLabel>
+                        <FormLabel>{translations.fullName}</FormLabel>
                         <FormControl>
-                            <Input placeholder="Murad Nazarov" {...field} />
+                            <Input placeholder={translations.fullNamePlaceholder} {...field} />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -247,9 +346,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     name="phone"
                     render={({ field }) => (
                         <FormItem>
-                        <FormLabel>Telefon raqam</FormLabel>
+                        <FormLabel>{translations.phone}</FormLabel>
                         <FormControl>
-                            <Input placeholder="+998 90 123 45 67" {...field} />
+                            <Input placeholder={translations.phonePlaceholder} {...field} />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -260,9 +359,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     name="telegram"
                     render={({ field }) => (
                         <FormItem>
-                        <FormLabel>Telegram username (ixtiyoriy)</FormLabel>
+                        <FormLabel>{translations.telegram}</FormLabel>
                         <FormControl>
-                            <Input placeholder="@username" {...field} />
+                            <Input placeholder={translations.telegramPlaceholder} {...field} />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -278,9 +377,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         name="companyName"
                         render={({ field }) => (
                             <FormItem>
-                            <FormLabel>Kompaniya yoki loyiha nomi</FormLabel>
+                            <FormLabel>{translations.companyName}</FormLabel>
                             <FormControl>
-                                <Input placeholder="Jon.Branding" {...field} />
+                                <Input placeholder={translations.companyNamePlaceholder} {...field} />
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -291,9 +390,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         name="website"
                         render={({ field }) => (
                             <FormItem>
-                            <FormLabel>Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)</FormLabel>
+                            <FormLabel>{translations.website}</FormLabel>
                             <FormControl>
-                                <Input placeholder="https://t.me/jonbranding" {...field} />
+                                <Input placeholder={translations.websitePlaceholder} {...field} />
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -304,14 +403,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                             name="goal"
                             render={({ field }) => (
                                 <FormItem className="space-y-3">
-                                    <FormLabel>Asosiy maqsadingiz qaysi biriga yaqin?</FormLabel>
+                                    <FormLabel>{translations.goal}</FormLabel>
                                      <FormControl>
                                         <RadioGroup
                                             onValueChange={field.onChange}
                                             defaultValue={field.value}
                                             className="flex flex-col space-y-2"
                                         >
-                                         {goalOptions.map((option, index) => (
+                                         {translations.goalOptions.map((option, index) => (
                                             <Label key={option.value} htmlFor={`goal-${index}`} className="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
                                                 <RadioGroupItem value={option.value} id={`goal-${index}`} />
                                                 <span className="font-medium text-sm text-gray-800">{option.label}</span>
@@ -333,14 +432,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         name="budget"
                         render={({ field }) => (
                              <FormItem className="space-y-3">
-                                <FormLabel>Loyiha uchun taxminiy byudjet?</FormLabel>
+                                <FormLabel>{translations.budget}</FormLabel>
                                 <FormControl>
                                     <RadioGroup
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
                                     className="flex flex-col space-y-1"
                                     >
-                                    {budgetOptions.map((option, index) => (
+                                    {translations.budgetOptions.map((option, index) => (
                                         <Label key={option} htmlFor={`budget-${index}`} className="flex items-center gap-4 p-3 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
                                             <RadioGroupItem value={option} id={`budget-${index}`} />
                                             <span className="font-medium text-sm text-gray-800">{option}</span>
@@ -362,15 +461,15 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         name="location"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Uchrashuv uchun joylashuvingiz</FormLabel>
+                                <FormLabel>{translations.location}</FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="Viloyatingizni tanlang" />
+                                            <SelectValue placeholder={translations.locationPlaceholder} />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {locationOptions.map(loc => (
+                                        {translations.locationOptions.map(loc => (
                                             <SelectItem key={loc} value={loc}>{loc}</SelectItem>
                                         ))}
                                     </SelectContent>
@@ -379,15 +478,15 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                             </FormItem>
                         )}
                     />
-                    { (locationValue === 'Toshkent' || locationValue === 'Farg\'ona') &&
+                    { (locationValue === translations.locationOptions[0] || locationValue === translations.locationOptions[1]) &&
                         <FormField
                             control={form.control}
                             name="meetingPlace"
                             render={({ field }) => (
                                 <FormItem className="space-y-3">
-                                    <FormLabel>Uchrashuv qayerda bo'lishini xohlaysiz?</FormLabel>
+                                    <FormLabel>{translations.meetingPlace}</FormLabel>
                                     <div className="space-y-2">
-                                        {meetingPlaceOptions.map((option) => (
+                                        {translations.meetingPlaceOptions.map((option) => (
                                             <LiveLocationCard
                                                 key={option.value}
                                                 icon={option.icon}
@@ -403,12 +502,12 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                             )}
                         />
                     }
-                    { locationValue === 'Boshqa viloyat' &&
+                    { locationValue === translations.locationOptions[2] &&
                          <Alert variant="default" className="bg-sky-blue/30 border-primary/20">
                            <div className="flex items-start gap-3">
                             <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-0.5"/>
                             <AlertDescription>
-                                Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.
+                                {translations.onlineMeetingAlert}
                             </AlertDescription>
                            </div>
                         </Alert>
@@ -419,11 +518,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
             <div className="flex justify-between items-center pt-4">
                 <Button type="button" variant="ghost" onClick={handlePrev} disabled={step === 1 || isSubmitting}>
                     <ArrowLeft className="mr-2 h-4 w-4" />
-                    Orqaga
+                    {translations.backButton}
                 </Button>
                 <Button type="button" onClick={handleNext} disabled={isSubmitting} className="shadow-ocean bg-ocean-blue hover:bg-ocean-blue/90">
                     {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {step === STEPS.length ? "So'rovni yuborish" : "Keyingisi"}
+                    {step === STEPS.length ? translations.submitButton : translations.nextButton}
                     {step < STEPS.length && <ArrowRight className="ml-2 h-4 w-4" />}
                 </Button>
             </div>

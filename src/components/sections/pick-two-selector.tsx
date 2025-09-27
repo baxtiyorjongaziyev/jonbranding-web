@@ -15,29 +15,62 @@ interface PickTwoSelectorProps {
   subtitle?: string;
   ctaText?: string;
   onCtaClick?: () => void;
+  lang: string;
 }
 
-const optionDetails: Record<OptionKey, { label: string, icon: LucideIcon }> = {
-  cheap: { label: 'Arzon', icon: Tags },
-  quality: { label: 'Sifatli', icon: Gem },
-  fast: { label: 'Tez', icon: Rocket },
-};
-
-const messages: Record<string, string> = {
-  cheap_fast: 'Sifat barqaror bo‘lmasligi mumkin. Bu variant shoshilinch va byudjetli loyihalar uchun mos keladi.',
-  cheap_quality: 'Natijani kutish uchun ko‘proq vaqt kerak bo‘ladi. Biz byudjetingizga moslashib, sifatni ta\'minlash uchun navbat asosida ishlaymiz.',
-  quality_fast: 'Narx yuqoriroq bo‘ladi. Shoshilinch (2-3 kunlik) loyihalar uchun standart narxga +50% ustama qo\'llaniladi. Biz jamoani safarbar qilib, sizning dedlayningizga ustuvorlik beramiz.',
-  default: 'Iltimos, o\'zingiz uchun eng muhim 2 ta ustuvorlikni tanlang.',
-};
-
 const PickTwoSelector: FC<PickTwoSelectorProps> = ({
-  title = "Uchta ichidan ikkitani tanlang",
-  subtitle = "Narx—Sifat—Tezlik: bir vaqtning o‘zida uchtalasi kamdan-kam to‘g‘ri keladi.",
-  ctaText = "Taklif so‘rash",
   onCtaClick,
+  lang,
 }) => {
   const [selected, setSelected] = useState<OptionKey[]>([]);
   const [isClient, setIsClient] = useState(false);
+
+  const t = {
+    uz: {
+      title: "Uchta ichidan ikkitani tanlang",
+      subtitle: "Narx—Sifat—Tezlik: bir vaqtning o‘zida uchtalasi kamdan-kam to‘g‘ri keladi.",
+      ctaText: "Taklif so‘rash",
+      options: {
+        cheap: 'Arzon',
+        quality: 'Sifatli',
+        fast: 'Tez',
+      },
+      messages: {
+        cheap_fast: 'Sifat barqaror bo‘lmasligi mumkin. Bu variant shoshilinch va byudjetli loyihalar uchun mos keladi.',
+        cheap_quality: 'Natijani kutish uchun ko‘proq vaqt kerak bo‘ladi. Biz byudjetingizga moslashib, sifatni ta\'minlash uchun navbat asosida ishlaymiz.',
+        quality_fast: 'Narx yuqoriroq bo‘ladi. Shoshilinch (2-3 kunlik) loyihalar uchun standart narxga +50% ustama qo\'llaniladi. Biz jamoani safarbar qilib, sizning dedlayningizga ustuvorlik beramiz.',
+        default: 'Iltimos, o\'zingiz uchun eng muhim 2 ta ustuvorlikni tanlang.',
+      },
+      tooltip: "Avval bitta tanlovni bekor qiling"
+    },
+    ru: {
+      title: "Выберите два из трех",
+      subtitle: "Цена—Качество—Скорость: редко можно получить все три одновременно.",
+      ctaText: "Запросить предложение",
+      options: {
+        cheap: 'Дешево',
+        quality: 'Качественно',
+        fast: 'Быстро',
+      },
+      messages: {
+        cheap_fast: 'Качество может быть нестабильным. Этот вариант подходит для срочных и бюджетных проектов.',
+        cheap_quality: 'Придется подождать результат дольше. Мы подстроимся под ваш бюджет и будем работать в порядке очереди, чтобы обеспечить качество.',
+        quality_fast: 'Цена будет выше. Для срочных проектов (2-3 дня) применяется надбавка +50% к стандартной цене. Мы мобилизуем команду и отдадим приоритет вашему дедлайну.',
+        default: 'Пожалуйста, выберите 2 наиболее важных для вас приоритета.',
+      },
+      tooltip: "Сначала отмените один выбор"
+    }
+  }
+
+  const translations = lang === 'ru' ? t.ru : t.uz;
+  
+  const optionDetails: Record<OptionKey, { label: string, icon: LucideIcon }> = {
+    cheap: { label: translations.options.cheap, icon: Tags },
+    quality: { label: translations.options.quality, icon: Gem },
+    fast: { label: translations.options.fast, icon: Rocket },
+  };
+
+  const messages = translations.messages;
 
   useEffect(() => {
     setIsClient(true);
@@ -90,14 +123,14 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
     }
     const sorted = [...selected].sort().join('_') as keyof typeof messages;
     return { key: sorted, message: messages[sorted] || messages.default };
-  }, [selected]);
+  }, [selected, messages]);
 
   return (
     <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold">{title}</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">{subtitle}</p>
+          <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">{translations.subtitle}</p>
         </div>
 
         <div className="mt-12 max-w-4xl mx-auto">
@@ -136,7 +169,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
                         <div>{card}</div>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Avval bitta tanlovni bekor qiling</p>
+                        <p>{translations.tooltip}</p>
                       </TooltipContent>
                     </Tooltip>
                   );
@@ -165,7 +198,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
               disabled={selected.length !== 2}
               onClick={handleCta}
             >
-              {ctaText}
+              {translations.ctaText}
             </Button>
           </div>
         </div>
