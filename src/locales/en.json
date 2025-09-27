@@ -51,7 +51,7 @@
             "Your branding <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>isn't selling?</span> We'll fix it.",
             "Stand out <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>from the competition</span>.",
             "Make your brand not just \"pretty\", but <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>profitable</span>.",
-            "Make customers <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>fall in love with you</span>. Again and again.",
+            "Make customers <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>fall in love</span> with you. Again and again.",
             "From small business to a <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>strong brand</span>. In one step."
         ],
         "description": "We don't just draw logos. We build a <span class='font-bold text-foreground'>results-driven</span>, strategy-based brand system for your business that will win the hearts of your customers.",
@@ -246,7 +246,10 @@
            { "question": "What are the payment terms?", "answer": "The standard scheme is 50% prepayment, 50% after project delivery. We can also discuss individual terms for your convenience." },
            { "question": "How long does the work take?", "answer": "The timing depends on the type of service. For example, creating a logo takes 2-4 weeks, brand strategy starts from 8 weeks. The final deadline is determined after project approval." },
            { "question": "Is there support after the project is completed?", "answer": "Yes, within 1 month after the project completion, we provide free advice and assistance on the correct use of brand materials." }
-        ]
+        ],
+        "ctaTitle": "Ready to discuss your project?",
+        "ctaDesc": "Got answers to all your questions? Let's discuss your project and take your brand to the next level.",
+        "ctaButton": "I'm ready to start!"
     },
     "mobileCtaBar": {
         "final_price": "Final price",
@@ -393,72 +396,7 @@
             { "title": "Meaning and associations", "description": "We check readability, sound, possible associative array, cultural perception, and compliance with the brand category." }
         ],
         "calculator_title": "Trademark Costs",
-        "calculator_subtitle": "Naming (choosing a name) is a creative process, and patenting is a legal one. With the help of a patent specialist on our team, calculate the approximate costs associated with trademark registration (state fees and service charges) here.",
-        "trademarkCalculator": {
-            "formTitle": "Enter Details",
-            "brandNameLabel": "Brand Name",
-            "brandNamePlaceholder": "e.g., MyBrand",
-            "yourNameLabel": "Your Name",
-            "yourNamePlaceholder": "Enter your full name",
-            "phoneLabel": "Phone Number",
-            "phonePlaceholder": "+998901234567",
-            "classCountLabel": "Number of Activity Classes",
-            "classCountMax": "Max. 45",
-            "personTypeLabel": "Person Type",
-            "personTypeOptions": [
-                { "value": "jismoniy", "label": "Individual" },
-                { "value": "yuridik", "label": "Legal Entity" }
-            ],
-            "speedLabel": "Review Speed",
-            "speedOptions": [
-                { "value": "oddiy", "label": "Normal (7 months)" , "labelShort": "Normal"},
-                { "value": "tez", "label": "Expedited (1.5 months)", "labelShort": "Expedited" }
-            ],
-            "expertCheckLabel": "Additional Expert Review",
-            "expertCheckOptions": [
-                { "value": "ha", "label": "Enabled" },
-                { "value": "yoq", "label": "Disabled" }
-            ],
-            "activityLabel": "Types of Activity (optional)",
-            "activityPlaceholder": "e.g., design, construction, clothing production...",
-            "activityHelp": "This helps in determining the classes.",
-            "submitButton": "Order Patenting",
-            "submittingButton": "Submitting...",
-            "successMessage": "✅ Order received!",
-            "tryAgainButton": "Calculate Again",
-            "summaryTitle": "Cost Breakdown",
-            "totalCostTitle": "Estimated total cost for a 10-year patent",
-            "currency": "sum",
-            "classLabel": "class",
-            "expertCheckLabelShort": "Expert+",
-            "totalCostNote": "Includes all state fees and service charges",
-            "step1Title": "Step 1 (Initial Payment)",
-            "ourServiceFee": "Our Team's Service Fee",
-            "applicationFee": "Trademark Application Fee",
-            "step1Total": "Step 1 Total",
-            "step2Title": "Step 2 (Certificate Acquisition)",
-            "stateFeeBase": "State Fee (base)",
-            "extraClassesFee": "Extra Classes ({count})",
-            "step2Total": "Step 2 Total",
-            "expediteTitle": "Surcharge for Expedited Review",
-            "expediteBaseFee": "Base (12 BCV + 12% VAT)",
-            "expediteTotal": "Expedited Total",
-            "expertCheckTitle": "Expert Review",
-            "expertBaseFee": "Base (2×BCV)",
-            "expertTotal": "Expert Service Total",
-            "importantNoteTitle": "Important Note",
-            "importantNoteText": "All prices depend on the Base Calculation Value (BCV) set by the Ministry of Justice of the Republic of Uzbekistan and are subject to change. This calculator is not a public offer and is for informational purposes only.",
-            "importantNoteBHM": "The current BCV is {bhm} sum.",
-            "error_brand": "Please enter the brand name.",
-            "error_name": "Please enter your name.",
-            "error_phone": "Please enter a valid phone number.",
-            "error_server": "A server error occurred.",
-            "success_toast_title": "Success!",
-            "success_toast_desc": "Your request has been received. We will contact you shortly!",
-            "error_toast_title": "Error!",
-            "telegramTitle": "New Patent Application (from calculator)",
-            "notSpecified": "Not specified"
-        }
+        "calculator_subtitle": "Naming (choosing a name) is a creative process, and patenting is a legal one. With the help of a patent specialist on our team, calculate the approximate costs associated with trademark registration (state fees and service charges) here."
     },
     "packagingPage": {
         "title": "Packaging Design Development",
@@ -477,8 +415,6 @@
         "cta_description": "Good packaging design is not just beautiful decoration, but a tool that works for the business. We develop a functional, strategically thought-out design where the packaging serves as a full-fledged sales tool."
     },
     "servicesPage": {
-        "title": "Services and Prices",
-        "subtitle": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator.",
         "comparison": {
             "title": "Us vs. Competitors",
             "description": "We provide high-quality branding services at much more affordable prices than premium agencies. And the result will be even better than you expect.",
@@ -492,7 +428,7 @@
     },
     "packageBuilder": {
         "title": "Services and Prices",
-        "subtitle": "Here are the approximate starting prices for our services. As each company is unique, the final price depends on the complexity of the project, scope of work, and your tasks.",
+        "subtitle": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator.",
         "categories": {
             "tripwire": "First Step (Quick Services)",
             "main": "Our Main Services",
@@ -524,6 +460,71 @@
             "urgency": "Urgency surcharge (+50%)",
             "nda": "NDA surcharge (+25%)"
         }
+    },
+    "trademarkCalculator": {
+        "formTitle": "Enter Details",
+        "brandNameLabel": "Brand Name",
+        "brandNamePlaceholder": "e.g., MyBrand",
+        "yourNameLabel": "Your Name",
+        "yourNamePlaceholder": "Enter your full name",
+        "phoneLabel": "Phone Number",
+        "phonePlaceholder": "+998901234567",
+        "classCountLabel": "Number of Activity Classes",
+        "classCountMax": "Max. 45",
+        "personTypeLabel": "Person Type",
+        "personTypeOptions": [
+            { "value": "jismoniy", "label": "Individual" },
+            { "value": "yuridik", "label": "Legal Entity" }
+        ],
+        "speedLabel": "Review Speed",
+        "speedOptions": [
+            { "value": "oddiy", "label": "Normal (7 months)" , "labelShort": "Normal"},
+            { "value": "tez", "label": "Expedited (1.5 months)", "labelShort": "Expedited" }
+        ],
+        "expertCheckLabel": "Additional Expert Review",
+        "expertCheckOptions": [
+            { "value": "ha", "label": "Enabled" },
+            { "value": "yoq", "label": "Disabled" }
+        ],
+        "activityLabel": "Types of Activity (optional)",
+        "activityPlaceholder": "e.g., design, construction, clothing production...",
+        "activityHelp": "This helps in determining the classes.",
+        "submitButton": "Order Patenting",
+        "submittingButton": "Submitting...",
+        "successMessage": "✅ Order received!",
+        "tryAgainButton": "Calculate Again",
+        "summaryTitle": "Cost Breakdown",
+        "totalCostTitle": "Estimated total cost for a 10-year patent",
+        "currency": "sum",
+        "classLabel": "class",
+        "expertCheckLabelShort": "Expert+",
+        "totalCostNote": "Includes all state fees and service charges",
+        "step1Title": "Step 1 (Initial Payment)",
+        "ourServiceFee": "Our Team's Service Fee",
+        "applicationFee": "Trademark Application Fee",
+        "step1Total": "Step 1 Total",
+        "step2Title": "Step 2 (Certificate Acquisition)",
+        "stateFeeBase": "State Fee (base)",
+        "extraClassesFee": "Extra Classes ({count})",
+        "step2Total": "Step 2 Total",
+        "expediteTitle": "Surcharge for Expedited Review",
+        "expediteBaseFee": "Base (12 BCV + 12% VAT)",
+        "expediteTotal": "Expedited Total",
+        "expertCheckTitle": "Expert Review",
+        "expertBaseFee": "Base (2×BCV)",
+        "expertTotal": "Expert Service Total",
+        "importantNoteTitle": "Important Note",
+        "importantNoteText": "All prices depend on the Base Calculation Value (BCV) set by the Ministry of Justice of the Republic of Uzbekistan and are subject to change. This calculator is not a public offer and is for informational purposes only.",
+        "importantNoteBHM": "The current BCV is {bhm} sum.",
+        "error_brand": "Please enter the brand name.",
+        "error_name": "Please enter your name.",
+        "error_phone": "Please enter a valid phone number.",
+        "error_server": "A server error occurred.",
+        "success_toast_title": "Success!",
+        "success_toast_desc": "Your request has been received. We will contact you shortly!",
+        "error_toast_title": "Error!",
+        "telegramTitle": "New Patent Application (from calculator)",
+        "notSpecified": "Not specified"
     },
     "pickTwoSelector": {
       "title": "Pick two of the three",
