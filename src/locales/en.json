@@ -175,7 +175,14 @@
         "title": "Holistic branding is not just a discount, it's a strategic advantage.",
         "description": "Branding is a holistic system that cannot be divided into parts. By choosing <strong>3 or more main areas</strong> of our services at once, you not only <strong>get a guaranteed -20% discount</strong> on the total amount, but more importantly, you build a <strong>single, strong, and consistent foundation</strong> for your brand. This is a double benefit compared to premium agencies!",
         "button": "Create my package",
-        "note": "*The discount will be calculated automatically after you build your package in the services section."
+        "note": "*The discount will be calculated automatically after you build your package in the services section.",
+        "dictionary": {
+            "subtitle": "Strategic Opportunity",
+            "title": "Holistic branding is not just a discount, it's a strategic advantage.",
+            "description": "Branding is a holistic system that cannot be divided into parts. By choosing <strong>3 or more main areas</strong> of our services at once, you not only <strong>get a guaranteed -20% discount</strong> on the total amount, but more importantly, you build a <strong>single, strong, and consistent foundation</strong> for your brand. This is a double benefit compared to premium agencies!",
+            "button": "Create my package",
+            "note": "*The discount will be calculated automatically after you build your package in the services section."
+        }
     },
     "beforeAfter": {
         "title": "Before and After",
