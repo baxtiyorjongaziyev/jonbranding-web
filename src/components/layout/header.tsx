@@ -135,6 +135,7 @@ const ExpandingButton = ({ children, text, scrolled }: { children: React.ReactNo
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLangMenuOpen, setLangMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const pathname = usePathname();
 
@@ -252,33 +253,35 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
-             <DropdownMenu>
+             <DropdownMenu open={isLangMenuOpen} onOpenChange={setLangMenuOpen}>
                 <DropdownMenuTrigger asChild>
-                    <Button 
-                        variant="outline"
-                        className={cn(
-                            "gap-2 transition-colors duration-300",
-                            scrolled ? "text-foreground border-black/20 hover:bg-black/10" : "text-foreground border-white/20 hover:bg-white/10"
-                        )}
-                    >
-                        <CurrentLangIcon />
-                        <span>{languageOptions[lang as 'uz' | 'ru' | 'en']?.label}</span>
-                        <ChevronDown className="h-4 w-4" />
-                    </Button>
+                    <div onMouseEnter={() => setLangMenuOpen(true)} onMouseLeave={() => setLangMenuOpen(false)}>
+                        <Button 
+                            variant="outline"
+                            className={cn(
+                                "gap-2 transition-colors duration-300",
+                                scrolled ? "text-foreground border-black/20 hover:bg-black/10" : "text-foreground border-white/20 hover:bg-white/10"
+                            )}
+                        >
+                            <CurrentLangIcon />
+                            <span>{languageOptions[lang as 'uz' | 'ru' | 'en']?.label}</span>
+                            <ChevronDown className={cn("h-4 w-4 transition-transform", isLangMenuOpen && "rotate-180")} />
+                        </Button>
+                    </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                {Object.keys(languageOptions).map((langKey) => {
-                    const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
-                    return (
-                        <DropdownMenuItem key={langKey} asChild>
-                        <Link href={getNewPath(langKey as 'uz' | 'ru' | 'en')} className="flex items-center gap-2 cursor-pointer">
-                            <Icon className="w-5 h-auto" />
-                            <span>{label}</span>
-                            {lang === langKey && <Check className="ml-auto h-4 w-4" />}
-                        </Link>
-                        </DropdownMenuItem>
-                    );
-                })}
+                <DropdownMenuContent align="end" onMouseEnter={() => setLangMenuOpen(true)} onMouseLeave={() => setLangMenuOpen(false)}>
+                    {Object.keys(languageOptions).map((langKey) => {
+                        const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
+                        return (
+                            <DropdownMenuItem key={langKey} asChild>
+                                <Link href={getNewPath(langKey as 'uz' | 'ru' | 'en')} className="flex items-center gap-2 cursor-pointer">
+                                    <Icon className="w-5 h-auto" />
+                                    <span>{label}</span>
+                                    {lang === langKey && <Check className="ml-auto h-4 w-4" />}
+                                </Link>
+                            </DropdownMenuItem>
+                        );
+                    })}
                 </DropdownMenuContent>
             </DropdownMenu>
 
@@ -289,7 +292,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             </a>
             
             <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" aria-label={dictionary.contact_by_telegram}>
-                <ExpandingButton text="@baxtiyorjon_gaziyev" scrolled={scrolled}>
+                <ExpandingButton text="Telegram" scrolled={scrolled}>
                      <Send />
                 </ExpandingButton>
             </a>
