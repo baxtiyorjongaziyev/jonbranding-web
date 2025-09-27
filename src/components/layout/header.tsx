@@ -25,6 +25,9 @@ import {
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import { UzFlagIcon } from '../icons/uz-flag';
+import { RuFlagIcon } from '../icons/ru-flag';
 
 const t = {
   uz: {
@@ -154,6 +157,8 @@ const ExpandingIconButton: FC<{
 const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const pathname = usePathname();
+
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
@@ -197,6 +202,10 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
     { title: translations.packaging_design, href: `/${lang}/xizmatlar/qadoq-dizayni`, description: translations.packaging_design_desc },
     { title: translations.services_and_prices, href: `/${lang}/xizmatlar`, description: translations.services_and_prices_desc },
   ];
+  
+  const otherLang = lang === 'uz' ? 'ru' : 'uz';
+  const newPath = pathname.startsWith(`/${lang}`) ? pathname.replace(`/${lang}`, `/${otherLang}`) : `/${otherLang}${pathname}`;
+
 
   return (
     <motion.header 
@@ -251,6 +260,12 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
+            <Link href={newPath}>
+              <Button variant="ghost" size="icon" className="h-11 w-11">
+                {otherLang === 'ru' ? <RuFlagIcon /> : <UzFlagIcon />}
+                <span className="sr-only">Switch to {otherLang}</span>
+              </Button>
+            </Link>
            <ExpandingIconButton icon={Phone} text="+998 33 645 00 97" href="tel:+998336450097" expandedWidth={190}/>
            <ExpandingIconButton icon={Send} text="Telegram" href="https://t.me/baxtiyorjon_gaziyev" isExternal={true} />
            <Button 
@@ -301,9 +316,17 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
                       {translations.contact_by_telegram}
                     </a>
                  </div>
-                 <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4">
-                  {translations.free_consultation}
-                </Button>
+                 <div className="flex gap-4">
+                    <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4">
+                      {translations.free_consultation}
+                    </Button>
+                    <Link href={newPath} className="mt-4">
+                      <Button variant="outline" size="icon" className="w-12 h-12">
+                        {otherLang === 'ru' ? <RuFlagIcon /> : <UzFlagIcon />}
+                        <span className="sr-only">Switch to {otherLang}</span>
+                      </Button>
+                    </Link>
+                 </div>
               </nav>
             </SheetContent>
           </Sheet>
