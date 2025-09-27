@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useCallback } from "react";
+import { FC, useCallback, useState, useEffect } from "react";
 import dynamic from 'next/dynamic';
 import CtaBlock from "./cta-block";
 import { getDictionary, Locale } from "@/lib/dictionaries";
@@ -16,9 +16,9 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
         window.dispatchEvent(event);
     }, []);
 
-    const [dictionary, setDictionary] = React.useState<any>(null);
+    const [dictionary, setDictionary] = useState<any>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         getDictionary(lang as Locale).then(setDictionary);
     }, [lang]);
 
