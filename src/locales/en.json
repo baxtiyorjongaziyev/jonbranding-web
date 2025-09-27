@@ -142,7 +142,10 @@
         "toastErrorDescription": "Sorry, there was an error processing your request. Please try again later.",
         "cardTitle": "Jon Assistant",
         "cardSubtitle": "Usually replies instantly"
+    },
+    "home": {
+      "cta1_title": "Your brand could look this good too.",
+      "cta1_desc": "Take your business to the next level with professional design. We'll help find the perfect solution for your business.",
+      "cta1_button": "For my business too"
     }
 }
-
-    
