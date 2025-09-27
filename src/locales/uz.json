@@ -359,7 +359,7 @@
         "section2_title": "Firma uslubi — bu tizim",
         "section2_p1": "Bu shunchaki go'zallik haqida emas, balki samaradorlik, ma'no va nazorat haqida. Brend o'zining vizual obrazini rivojlantirishda ko'p qirrali va izchil bo'lib qolishi uchun grafik elementlar to'plamini yaratish kerak.",
         "section2_p2": "Bunday to'plam har doim biznesning vazifalari va imkoniyatlariga qarab individual ravishda tanlanadi. Minimal to'plamga logotip, ranglar, shriftlar, fotosurat uslubi, reklama tashuvchilarining uslubi va yaxlit obrazni yaratadigan boshqa elementlar kiradi.",
-        "section2_p3": "Vizual uslub aniq va izchil qurilganda, u brend obrazini boshqarish va muloqot qilish uchun kuchli vositaga aylanadi. Uning barcha elementlari bir-biriga mos kelganda, brend professional, ishonchli va taniladigan sifatida qabul qilinadi.",
+        "section2p3": "Vizual uslub aniq va izchil qurilganda, u brend obrazini boshqarish va muloqot qilish uchun kuchli vositaga aylanadi. Uning barcha elementlari bir-biriga mos kelganda, brend professional, ishonchli va taniladigan sifatida qabul qilinadi.",
         "process_title": "Firma uslubini qanday yaratamiz?",
         "process_subtitle": "Biz firma uslubini ishlab chiqishga tizimli yondashamiz, toki har bir detal brendning tanilishi va uning strategiyasi uchun ishlasin.",
         "process_steps": [
@@ -487,6 +487,41 @@
             "whyPremiumDesc": "Biz o'zimizni faqat eng yuqori darajadagi, strategik yondashuvga ega kompaniyalar bilan taqqoslaymiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda taqdim etish. Sifat va strategiya jihatidan biz bilan bir darajada bo'lmagan agentliklar bilan solishtirish, mijoz uchun ham, biz uchun ham to'g'ri bo'lmaydi."
         }
     },
+     "packageBuilder": {
+        "title": "Narxlar va Xizmatlar",
+        "subtitle": "Bu yerda xizmatlarimizning taxminiy boshlang'ich narxlari ko'rsatilgan. Har bir kompaniya o'ziga xos bo'lgani uchun, yakuniy narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga bog'liq.",
+        "categories": {
+            "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
+            "main": "Asosiy xizmatlarimiz",
+            "additional": "Qo'shimcha xizmatlar",
+            "options": "Maxsus shartlar"
+        },
+        "discount_alert_title": "Paketli chegirma!",
+        "discount_alert_desc": "Ushbu bo'limdan <strong>3 yoki undan ko'p</strong> xizmatni tanlang va umumiy summadan <strong>-20% chegirmaga</strong> ega bo'ling!",
+        "your_package": "Sizning to'plamingiz",
+        "your_package_desc": "O'zingizga mos xizmatlarni tanlang.",
+        "select_services": "Xizmatlarni tanlang",
+        "selected": "Tanlangan",
+        "select": "Tanlash",
+        "services_total": "Xizmatlar jami:",
+        "upfront_discount_title": "Oldindan to'lov uchun -10%",
+        "upfront_discount_desc": "Loyiha uchun 100% oldindan to'lov qiling",
+        "final_price": "Yakuniy narx:",
+        "order_with_discount": "Chegirma bilan buyurtma berish",
+        "get_free_consultation": "Bepul konsultatsiya olish",
+        "satisfaction_guarantee": "100% Mamnuniyat Kafolati",
+        "satisfaction_guarantee_desc": "Agar dastlabki konsepsiyalar yoqmasa, to'lovingizni qaytarib beramiz.",
+        "not_public_offer": "Bu ommaviy oferta emas",
+        "not_public_offer_desc": "Narxlar tanishish uchun. Yakuniy narx shartnomada belgilanadi.",
+        "total_savings": "Umumiy tejagan mablag'ingiz",
+        "gift_title": "Sovg'a!",
+        "agreed_price": "Kelishiladi",
+        "currency": "so'm",
+        "surcharges": {
+            "urgency": "Shoshilinch uchun ustama (+50%)",
+            "nda": "NDA uchun ustama (+25%)"
+        }
+    },
     "pickTwoSelector": {
       "title": "Uchta ichidan ikkitani tanlang",
       "subtitle": "Narx—Sifat—Tezlik: bir vaqtning o‘zida uchtalasi kamdan-kam to‘g‘ri keladi.",
@@ -510,4 +545,3 @@
         "button": "Chegirmalarni ko'rish"
     }
 }
-

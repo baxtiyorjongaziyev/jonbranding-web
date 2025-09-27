@@ -55,7 +55,7 @@ const XizmatlarPage = () => {
                 <meta name="description" content={dictionary.servicesPage.subtitle} />
             </Head>
             <main className="flex-grow">
-                <PackageBuilder onOrderNow={handleOpenModal} lang={lang} />
+                <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.packageBuilder} />
                 <Comparison onCtaClick={handleOpenModal} lang={lang} />
                 <Offer onCTAClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.offer} />
                 <QueueStatus onCtaClick={handleOpenModal} />

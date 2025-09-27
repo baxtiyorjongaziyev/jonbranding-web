@@ -22,106 +22,32 @@ import TiltCard from '../ui/tilt-card';
 interface PackageBuilderProps {
     onOrderNow: () => void;
     lang: string;
+    dictionary: any;
 }
 
-
-const t = {
-    uz: {
-        title: "Narxlar va Xizmatlar",
-        subtitle: "Bu yerda xizmatlarimizning taxminiy boshlang'ich narxlari ko'rsatilgan. Har bir kompaniya o'ziga xos bo'lgani uchun, yakuniy narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga bog'liq.",
-        categories: {
-            tripwire: "Birinchi qadam (Tezkor xizmatlar)",
-            main: "Asosiy xizmatlarimiz",
-            additional: "Qo'shimcha xizmatlar",
-            options: "Maxsus shartlar"
-        },
-        discount_alert_title: "Paketli chegirma!",
-        discount_alert_desc: "Ushbu bo'limdan <strong>3 yoki undan ko'p</strong> xizmatni tanlang va umumiy summadan <strong>-20% chegirmaga</strong> ega bo'ling!",
-        your_package: "Sizning to'plamingiz",
-        your_package_desc: "O'zingizga mos xizmatlarni tanlang.",
-        select_services: "Xizmatlarni tanlang",
-        selected: "Tanlangan",
-        select: "Tanlash",
-        services_total: "Xizmatlar jami:",
-        upfront_discount_title: "Oldindan to'lov uchun -10%",
-        upfront_discount_desc: "Loyiha uchun 100% oldindan to'lov qiling",
-        final_price: "Yakuniy narx:",
-        order_with_discount: "Chegirma bilan buyurtma berish",
-        get_free_consultation: "Bepul konsultatsiya olish",
-        satisfaction_guarantee: "100% Mamnuniyat Kafolati",
-        satisfaction_guarantee_desc: "Agar dastlabki konsepsiyalar yoqmasa, to'lovingizni qaytarib beramiz.",
-        not_public_offer: "Bu ommaviy oferta emas",
-        not_public_offer_desc: "Narxlar tanishish uchun. Yakuniy narx shartnomada belgilanadi.",
-        total_savings: "Umumiy tejagan mablag'ingiz",
-        gift_title: "Sovg'a!",
-        agreed_price: "Kelishiladi",
-        currency: "so'm",
-        surcharges: {
-            urgency: "Shoshilinch uchun ustama (+50%)",
-            nda: "NDA uchun ustama (+25%)"
-        }
-    },
-    ru: {
-        title: "Цены и Услуги",
-        subtitle: "Здесь указаны примерные стартовые цены на наши услуги. Поскольку каждая компания уникальна, окончательная цена зависит от сложности проекта, объема работы и ваших задач.",
-        categories: {
-            tripwire: "Первый шаг (Быстрые услуги)",
-            main: "Наши основные услуги",
-            additional: "Дополнительные услуги",
-            options: "Особые условия"
-        },
-        discount_alert_title: "Пакетная скидка!",
-        discount_alert_desc: "Выберите <strong>3 или более</strong> услуг из этого раздела и получите <strong>-20% скидку</strong> от общей суммы!",
-        your_package: "Ваш пакет",
-        your_package_desc: "Выберите подходящие вам услуги.",
-        select_services: "Выберите услуги",
-        selected: "Выбрано",
-        select: "Выбрать",
-        services_total: "Итого по услугам:",
-        upfront_discount_title: "Скидка -10% за предоплату",
-        upfront_discount_desc: "Внесите 100% предоплату за проект",
-        final_price: "Итоговая цена:",
-        order_with_discount: "Заказать со скидкой",
-        get_free_consultation: "Получить бесплатную консультацию",
-        satisfaction_guarantee: "100% Гарантия Удовлетворенности",
-        satisfaction_guarantee_desc: "Если вам не понравятся первоначальные концепции, мы вернем вам деньги.",
-        not_public_offer: "Это не публичная оферта",
-        not_public_offer_desc: "Цены указаны для ознакомления. Окончательная цена будет зафиксирована в договоре.",
-        total_savings: "Ваша общая экономия",
-        gift_title: "Подарок!",
-        agreed_price: "По догов.",
-        currency: "сум",
-         surcharges: {
-            urgency: "Надбавка за срочность (+50%)",
-            nda: "Надбавка за NDA (+25%)"
-        }
-    }
-}
-
-const formatPriceForDisplay = (price: number, lang: 'uz' | 'ru') => {
-    const translations = t[lang];
-    if (price === 0) return translations.agreed_price;
-    return `${price.toLocaleString('fr-FR')} ${translations.currency}`;
+const formatPriceForDisplay = (price: number, lang: 'uz' | 'ru' | 'en', dictionary: any) => {
+    if (price === 0) return dictionary.agreed_price;
+    return `${price.toLocaleString('fr-FR')} ${dictionary.currency}`;
 }
 
 
 type ServiceCategory = 'tripwire' |'main' | 'additional' | 'options';
 
-const serviceCategories: Record<ServiceCategory, { title: string; services: (keyof SelectedServices)[] }> = {
+const serviceCategories: Record<ServiceCategory, { titleKey: string; services: (keyof SelectedServices)[] }> = {
     tripwire: {
-        title: "Birinchi qadam (Tezkor xizmatlar)",
+        titleKey: "tripwire",
         services: ['audit', 'namingCheck', 'consultation']
     },
     main: {
-        title: "Asosiy xizmatlarimiz",
+        titleKey: "main",
         services: ['naming', 'logo', 'designSystem', 'brandbook', 'packaging']
     },
     additional: {
-        title: "Qo'shimcha xizmatlar",
+        titleKey: "additional",
         services: ['strategy', 'commStrategy', 'smm', 'merch', 'illustrations']
     },
     options: {
-        title: "Maxsus shartlar",
+        titleKey: "options",
         services: ['urgency', 'nda']
     }
 };
@@ -145,13 +71,12 @@ const serviceIcons: { [key in keyof SelectedServices]?: React.ElementType } = {
 };
 
 
-const ServiceCard = ({ id, onSelect, selected, lang }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' }) => {
+const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
-    const translations = t[lang];
     if (!detail) return null;
     const { label, description, price, note, timeline } = detail;
-    const isPercentageBased = note && (note.includes('Narxga qo\'shiladi') || note.includes('к цене'));
+    const isPercentageBased = note && (note.includes('Narxga qo\'shiladi') || note.includes('к цене') || note.includes('to the price'));
 
     const Icon = serviceIcons[id];
 
@@ -175,13 +100,13 @@ const ServiceCard = ({ id, onSelect, selected, lang }: { id: keyof SelectedServi
             <div className="p-4 bg-secondary/50 border-t mt-auto">
                  <div className="my-2 text-center">
                     {price > 0 && (
-                    <span className="text-2xl font-bold text-primary whitespace-nowrap">{`+${formatPriceForDisplay(price, lang)}`}</span>
+                    <span className="text-2xl font-bold text-primary whitespace-nowrap">{`+${formatPriceForDisplay(price, lang, dictionary)}`}</span>
                     )}
                     {isPercentageBased && (
                         <span className="text-lg font-semibold text-primary whitespace-nowrap">{note}</span>
                     )}
                     {price === 0 && !isPercentageBased && (
-                        <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPriceForDisplay(price, lang)}</span>
+                        <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
                     )}
                 </div>
                 <Button 
@@ -192,12 +117,12 @@ const ServiceCard = ({ id, onSelect, selected, lang }: { id: keyof SelectedServi
                     {selected ? (
                         <>
                             <CheckCircle className="h-5 w-5 mr-2" />
-                            {translations.selected}
+                            {dictionary.selected}
                         </>
                     ) : (
                         <>
                             <ShoppingCart className="h-5 w-5 mr-2" />
-                            {translations.select}
+                            {dictionary.select}
                         </>
                     )}
                 </Button>
@@ -219,9 +144,9 @@ const InfoCard = ({ icon: Icon, title, description, className, children }: { ico
     </div>
 );
 
-const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang }) => {
-    const translations = t[lang as 'uz' | 'ru'];
-    const serviceDetails = getServiceDetails(lang as 'uz' | 'ru');
+const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
+    const translations = dictionary;
+    const serviceDetails = getServiceDetails(lang as 'uz' | 'ru' | 'en');
     
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
         audit: false, namingCheck: false, consultation: false, strategy: false, commStrategy: false,
@@ -238,7 +163,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang }) => {
 
     useEffect(() => {
         if (isClient) {
-            const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment }, lang as 'uz' | 'ru');
+            const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment }, lang as 'uz' | 'ru' | 'en');
             setTotal(result);
             const justAppliedDiscount = result.discountApplied.length > 0 && !hasDiscountBeenApplied;
             if (justAppliedDiscount) {
@@ -261,13 +186,13 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang }) => {
         });
     };
     
-    if (!isClient) {
+    if (!isClient || !translations) {
         return (
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
                 <div className="container mx-auto px-4">
                     <div className="text-center">
-                         <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
-                         <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">{translations.subtitle}</p>
+                         <Skeleton className="h-10 w-1/2 mx-auto" />
+                         <Skeleton className="h-6 w-3/4 mx-auto mt-4" />
                     </div>
                      <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                         <div className="lg:col-span-2 space-y-8">
@@ -287,13 +212,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang }) => {
                                 .filter(([, value]) => value)
                                 .map(([key]) => key as keyof SelectedServices);
 
-    const translatedServiceCategories = {
-        tripwire: { title: translations.categories.tripwire, services: serviceCategories.tripwire.services },
-        main: { title: translations.categories.main, services: serviceCategories.main.services },
-        additional: { title: translations.categories.additional, services: serviceCategories.additional.services },
-        options: { title: translations.categories.options, services: serviceCategories.options.services }
-    };
-
     return (
         <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
              <div className="container mx-auto px-4">
@@ -303,9 +221,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang }) => {
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
                     <div className="lg:col-span-2 space-y-12">
-                        {Object.entries(translatedServiceCategories).map(([key, category]) => (
+                        {Object.entries(serviceCategories).map(([key, category]) => (
                             <div key={key}>
-                                <h3 className="text-2xl font-bold text-dark-blue mb-6">{category.title}</h3>
+                                <h3 className="text-2xl font-bold text-dark-blue mb-6">{translations.categories[category.titleKey]}</h3>
                                 {key === 'main' && (
                                     <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
                                         <div className="flex items-center gap-4">
@@ -328,7 +246,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang }) => {
                                                     id={serviceId}
                                                     selected={selectedServices[serviceId] || false}
                                                     onSelect={() => handleServiceToggle(serviceId)}
-                                                    lang={lang as 'uz' | 'ru'}
+                                                    lang={lang as 'uz' | 'ru' | 'en'}
+                                                    dictionary={translations}
                                                 />
                                             </TiltCard>
                                         );
@@ -348,7 +267,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang }) => {
                                 <div className="space-y-3 min-h-[100px] border-b border-white/10 pb-4 mb-4">
                                     {selectedServiceKeys.length > 0 ? (
                                         selectedServiceKeys
-                                            .filter(key => serviceDetails[key]?.price > 0 || serviceDetails[key]?.note?.includes('qo\'shiladi') || serviceDetails[key]?.note?.includes('к цене'))
+                                            .filter(key => serviceDetails[key]?.price > 0 || serviceDetails[key]?.note?.includes('qo\'shiladi') || serviceDetails[key]?.note?.includes('к цене') || serviceDetails[key]?.note?.includes('to the price'))
                                             .map((key) => {
                                                 const service = serviceDetails[key];
                                                 return (
@@ -356,7 +275,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang }) => {
                                                         <span className="text-white flex-1 pr-2">{service.label}</span>
                                                         <div className="flex items-center gap-2">
                                                             <span className="font-mono text-gray-300">
-                                                                {service.price > 0 ? `+${formatPriceForDisplay(service.price, lang as 'uz' | 'ru')}` : service.note}
+                                                                {service.price > 0 ? `+${formatPriceForDisplay(service.price, lang as 'uz' | 'ru' | 'en', translations)}` : service.note}
                                                             </span>
                                                             <Button 
                                                                 variant="ghost" 
@@ -402,7 +321,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang }) => {
                                 {total.savings > 0 && (
                                     <div className="text-center py-4 my-4 bg-green-500/20 rounded-lg animate-fade-in border border-green-400/30">
                                         <p className="text-sm text-green-200">{translations.total_savings}</p>
-                                        <p className="text-3xl font-bold text-green-300 animate-pulse">{formatPriceForDisplay(total.savings, lang as 'uz' | 'ru')}</p>
+                                        <p className="text-3xl font-bold text-green-300 animate-pulse">{formatPriceForDisplay(total.savings, lang as 'uz' | 'ru' | 'en', translations)}</p>
                                     </div>
                                 )}
                                 
