@@ -128,7 +128,7 @@ const ExpandingIconButton: FC<{
     hover: { opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.2 } },
   };
 
-  const Component = isLink ? Link : 'a';
+  const Component = isLink ? motion(Link) : motion.a;
   const motionProps: any = {
       href: href,
       onMouseEnter: () => setIsHovered(true),
@@ -145,7 +145,6 @@ const ExpandingIconButton: FC<{
   }
 
   return (
-    <motion.div>
       <Component {...motionProps}>
         <div className="absolute left-3.5 flex items-center justify-center h-full">
             <Icon size={18} />
@@ -164,7 +163,6 @@ const ExpandingIconButton: FC<{
           )}
         </AnimatePresence>
       </Component>
-    </motion.div>
   );
 };
 
