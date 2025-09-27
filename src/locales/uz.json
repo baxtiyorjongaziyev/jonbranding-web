@@ -336,6 +336,10 @@
         "section1_p1": "Har bir shuhratparast kompaniyaning o'z maqsadlari bor. Kimdir uchun bu bozorda ma'lum bir o'rinni egallash bo'lsa, boshqalar uchun o'zlari haqidagi bilim darajasi, yangi hududlarga kengayish va hokazo bo'lishi mumkin.",
         "section1_p2": "Brend strategiyasi — kompaniyaning ushbu maqsadlarga erishishiga, shunchaki tovar yoki xizmat bo'lib qolmasdan, balki undan ham kattaroq narsaga — o'z mijozlari va xaridorlarining hayotining bir qismiga aylanishiga, taniqli obrazni olib yurishiga yordam beradigan narsadir.",
         "section1_p3": "Eng muhimi, bu marketing xarajatlarini tizimlashtirishga, kompaniyaning pozitsiyasini qo'llab-quvvatlamaydigan va shuning uchun xarajatlarga loyiq bo'lmagan vositalar, kanallar va g'oyalardan voz kechishga imkon beradi.",
+        "section2_title": "Brend-strategiya har qanday biznesga kerak",
+        "section2_p1": "Brend strategiyasi ham yangi, ham uzoq vaqtdan beri mavjud bo'lgan kompaniyalarga kerak.",
+        "section2_p2": "Startaplarga u boshidanoq o'z missiyasi, qadriyatlari va o'ziga xosligini aniqlashga, bozorda kerakli o'rinni egallashga va mijozlarni jalb qilishga yordam beradi.",
+        "section2_p3": "Yirik kompaniyalar uchun strategiya — bu o'sish va obro'ni boshqarish vositasidir. Bunday holda u dolzarblikni saqlashga, o'zgarishlarga moslashishga va auditoriya bilan mustahkam munosabatlar o'rnatishga yordam beradi. Biznes hajmidan qat'i nazar, brend-strategiya asosiy savolga javob beradi: mijoz nima uchun aynan sizni tanlashi kerak?",
         "process_title": "Brending — bu jarayon",
         "process_subtitle": "Bizning agentligimizda biz brendingning logotip yaratishdan ko'ra ko'proq narsa ekanligiga aminmiz. Brending — bu bir martalik vazifa emas, balki davriy jarayondir. Har bir bosqich o'zining asosiy rolini o'ynaydi va ulardan birortasini o'tkazib yuborish brendni va uning bozordagi o'rnini zaiflashtirishi mumkin. Ammo agar hamma narsa to'g'ri va izchil bajarilsa, brending biznesning o'sishiga va mahsulot ishlab chiqarishdan tortib marketinggacha bo'lgan ko'plab jarayonlarni osonroq boshqarishga yordam beradi.",
         "process_steps": [
@@ -393,7 +397,7 @@
         ],
         "calculator_title": "Tovar Belgisi Xarajatlari",
         "calculator_subtitle": "Neyming (nom tanlash) — ijodiy jarayon, Patentlash esa — yuridik. Jamoamizdagi patent mutaxassisi yordamida tovar belgisini ro'yxatdan o'tkazish bilan bog'liq barcha xarajatlarni (davlat bojlari va xizmat haqi) shu yerda taxminan hisoblang.",
-        "calculator": {
+        "trademarkCalculator": {
             "formTitle": "Ma'lumotlarni kiriting",
             "brandNameLabel": "Brend nomi",
             "brandNamePlaceholder": "Masalan: MyBrand",
@@ -418,7 +422,6 @@
                 { "value": "ha", "label": "Yoqilgan" },
                 { "value": "yoq", "label": "O‘chirilgan" }
             ],
-            "expertCheckLabelShort": "Ekspert+",
             "activityLabel": "Faoliyat turlari (ixtiyoriy)",
             "activityPlaceholder": "Masalan: dizayn, qurilish, kiyim-kechak ishlab chiqarish...",
             "activityHelp": "Bu klasslarni aniqlashda yordam beradi.",
@@ -430,6 +433,7 @@
             "totalCostTitle": "10 yillik patent uchun taxminiy umumiy xarajat",
             "currency": "so'm",
             "classLabel": "klass",
+            "expertCheckLabelShort": "Ekspert+",
             "totalCostNote": "Barcha davlat bojlari va xizmatlar narxi ichida",
             "step1Title": "1-bosqich (Dastlabki to‘lov)",
             "ourServiceFee": "Jamoamiz xizmati",
@@ -446,7 +450,8 @@
             "expertBaseFee": "Bazaviy (2×BHM)",
             "expertTotal": "Ekspert xizmati jami",
             "importantNoteTitle": "Muhim eslatma",
-            "importantNoteText": "Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan bazaviy hisoblash miqdori (BHM)ga bog'liq va o'zgarishi mumkin. Hozirgi BHM {bhm} so'm. Bu kalkulyator ommaviy oferta emas va faqat tanishish uchun mo'ljallangan.",
+            "importantNoteText": "Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan bazaviy hisoblash miqdori (BHM)ga bog'liq va o'zgarishi mumkin. Bu kalkulyator ommaviy oferta emas va faqat tanishish uchun mo'ljallangan.",
+            "importantNoteBHM": "Hozirgi BHM {bhm} so'm.",
             "error_brand": "Iltimos, brend nomini kiriting.",
             "error_name": "Iltimos, ismingizni kiriting.",
             "error_phone": "Iltimos, to‘g‘ri telefon raqam kiriting.",
@@ -454,7 +459,6 @@
             "success_toast_title": "Muvaffaqiyatli!",
             "success_toast_desc": "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
             "error_toast_title": "Xatolik!",
-            "error_toast_desc": "So‘rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.",
             "telegramTitle": "Yangi patent arizasi (Kalkulyatordan)",
             "notSpecified": "Kiritilmagan"
         }
@@ -507,4 +511,3 @@
     }
 }
 
-    

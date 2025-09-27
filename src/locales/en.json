@@ -397,7 +397,7 @@
         ],
         "calculator_title": "Trademark Costs",
         "calculator_subtitle": "Naming (choosing a name) is a creative process, and patenting is a legal one. With the help of a patent specialist on our team, calculate the approximate costs associated with trademark registration (state fees and service charges) here.",
-        "calculator": {
+        "trademarkCalculator": {
             "formTitle": "Enter Details",
             "brandNameLabel": "Brand Name",
             "brandNamePlaceholder": "e.g., MyBrand",
@@ -444,13 +444,14 @@
             "extraClassesFee": "Extra Classes ({count})",
             "step2Total": "Step 2 Total",
             "expediteTitle": "Surcharge for Expedited Review",
-            "expediteBaseFee": "Base (12 BRV + 12% VAT)",
+            "expediteBaseFee": "Base (12 BCV + 12% VAT)",
             "expediteTotal": "Expedited Total",
             "expertCheckTitle": "Expert Review",
-            "expertBaseFee": "Base (2×BRV)",
+            "expertBaseFee": "Base (2×BCV)",
             "expertTotal": "Expert Service Total",
             "importantNoteTitle": "Important Note",
-            "importantNoteText": "All prices depend on the Base Calculation Value (BCV) set by the Ministry of Justice of the Republic of Uzbekistan and are subject to change. The current BCV is {bhm} sum. This calculator is not a public offer and is for informational purposes only.",
+            "importantNoteText": "All prices depend on the Base Calculation Value (BCV) set by the Ministry of Justice of the Republic of Uzbekistan and are subject to change. This calculator is not a public offer and is for informational purposes only.",
+            "importantNoteBHM": "The current BCV is {bhm} sum.",
             "error_brand": "Please enter the brand name.",
             "error_name": "Please enter your name.",
             "error_phone": "Please enter a valid phone number.",
@@ -458,7 +459,6 @@
             "success_toast_title": "Success!",
             "success_toast_desc": "Your request has been received. We will contact you shortly!",
             "error_toast_title": "Error!",
-            "error_toast_desc": "An error occurred while submitting the request. Please try again.",
             "telegramTitle": "New Patent Application (from calculator)",
             "notSpecified": "Not specified"
         }
@@ -511,4 +511,3 @@
     }
 }
 
-    
