@@ -82,7 +82,7 @@ const FirmenniyStilPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://picsum.photos/seed/visual-perception/800/600"
+                                src="https://images.unsplash.com/photo-1614036634955-ae5e90f9b9eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx2aXN1YWwlMjBpZGVudGl0eXxlbnwwfHx8fDE3NTg5NzgwMzl8MA&ixlib=rb-4.1.0&q=80&w=1080"
                                 width={800}
                                 height={600}
                                 data-ai-hint="visual perception moodboard"
