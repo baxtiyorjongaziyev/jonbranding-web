@@ -1,4 +1,3 @@
-
 'use client';
 
 import type { FC, ReactNode } from 'react';
@@ -10,6 +9,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import AiAssistant from '@/components/ai-assistant';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
+import { getDictionary } from '@/lib/dictionaries';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'));
 
@@ -25,10 +25,18 @@ function AnalyticsTracker() {
   return null;
 }
 
-const MainLayout: FC<Readonly<{ children: ReactNode, lang: string }>> = ({ children, lang }) => {
+const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [packageSummary, setPackageSummary] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
+    
+    const pathname = usePathname();
+    const lang = pathname.split('/')[1] as 'uz' | 'ru' || 'uz';
+    const [dictionary, setDictionary] = useState<any>(null);
+
+    useEffect(() => {
+        getDictionary(lang).then(setDictionary);
+    }, [lang]);
     
     const handleOpenModal = useCallback(() => {
         const selectionsJSON = localStorage.getItem('selectedServices');
@@ -43,7 +51,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode, lang: string }>> = ({ child
                 const wantsUpfrontPayment = wantsUpfrontPaymentJSON ? JSON.parse(wantsUpfrontPaymentJSON) : false;
                 const selections = { selectedServices, wantsUpfrontPayment };
                 
-                const priceDetails = calculatePackagePrice(selections);
+                const priceDetails = calculatePackagePrice(selections, lang);
                 if (priceDetails.base > 0) {
                     const summary = generateSummary(selections, lang);
                     setPackageSummary(summary);
@@ -90,6 +98,8 @@ const MainLayout: FC<Readonly<{ children: ReactNode, lang: string }>> = ({ child
             window.removeEventListener('error', handleError);
         };
     }, [handleOpenModal]);
+    
+    if (!dictionary) return null; // Or a loading spinner
 
     return (
         <div className="flex min-h-screen flex-col bg-secondary/50">
@@ -106,7 +116,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode, lang: string }>> = ({ child
                 onFormSubmitSuccess={handleCloseModal}
                 lang={lang}
             />
-            <AiAssistant />
+            <AiAssistant lang={lang} dictionary={dictionary.aiAssistant} />
             <CookieConsentBanner />
         </div>
     );

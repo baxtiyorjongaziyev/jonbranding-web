@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useRef, useEffect, FC, Fragment } from 'react';
@@ -20,40 +19,9 @@ interface Message {
   choices?: string[] | null;
 }
 
-const AiAssistant: FC = () => {
-  const params = useParams();
-  const lang = params.lang as 'uz' | 'ru';
+const AiAssistant: FC<{lang: 'uz' | 'ru', dictionary: any}> = ({ lang, dictionary }) => {
   
-  const t = {
-    uz: {
-      initialMessage: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.",
-      suggestionChips: [
-        "Xizmatlar va narxlar",
-        "Portfolioingizni ko'rsating",
-        "Ishlash jarayoni qanday?",
-      ],
-      inputPlaceholder: "Savolingizni yozing...",
-      toastErrorTitle: "Xatolik!",
-      toastErrorDescription: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
-      cardTitle: "Jon Assistant",
-      cardSubtitle: "Odatda darhol javob beradi",
-    },
-    ru: {
-      initialMessage: "Здравствуйте! Я Jon, ваш виртуальный помощник. Вы можете смело спрашивать о стратегии брендинга, ценах или нашем рабочем процессе.",
-      suggestionChips: [
-        "Услуги и цены",
-        "Покажите ваше портфолио",
-        "Каков процесс работы?",
-      ],
-      inputPlaceholder: "Напишите ваш вопрос...",
-      toastErrorTitle: "Ошибка!",
-      toastErrorDescription: "Извините, произошла ошибка при ответе. Пожалуйста, попробуйте позже.",
-      cardTitle: "Jon Assistant",
-      cardSubtitle: "Обычно отвечает сразу",
-    }
-  }
-
-  const translations = lang === 'ru' ? t.ru : t.uz;
+  const translations = dictionary;
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);

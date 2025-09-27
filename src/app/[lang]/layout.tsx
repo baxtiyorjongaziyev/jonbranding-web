@@ -1,20 +1,21 @@
-
 import { ReactNode } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import { getDictionary } from '@/lib/dictionaries';
 
-export default function LangLayout({
+export default async function LangLayout({
   children,
   params: { lang },
 }: {
   children: ReactNode;
-  params: { lang: string };
+  params: { lang: 'uz' | 'ru' };
 }) {
+  const dictionary = await getDictionary(lang);
   return (
     <>
-      <Header lang={lang} />
+      <Header lang={lang} dictionary={dictionary.header} />
       {children}
-      <Footer lang={lang} />
+      <Footer lang={lang} dictionary={dictionary.footer} />
     </>
   );
 }
