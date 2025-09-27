@@ -4,7 +4,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Check, X, Minus, Info } from 'lucide-react';
 import CtaBlock from './cta-block';
-import { comparisonData, serviceDetails } from '@/lib/pricing';
+import { comparisonData } from '@/lib/pricing';
 import { Logo } from '../icons/logo';
 import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -58,7 +58,7 @@ const t = {
 
 const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang }) => {
   const translations = lang === 'ru' ? t.ru : t.uz;
-  const cData = comparisonData(lang);
+  const cData = comparisonData(lang as 'uz' | 'ru');
 
   return (
     <section className="py-16 sm:py-24 bg-white">
