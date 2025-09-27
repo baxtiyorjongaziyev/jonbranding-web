@@ -7,6 +7,7 @@ import type { FC, ReactNode } from 'react';
 import Head from 'next/head';
 import { Poppins } from 'next/font/google';
 import MainLayout from '@/components/layout/main-layout';
+import { Locale } from '@/lib/dictionaries';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -34,7 +35,7 @@ const jsonLd = {
 };
 
 
-const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: string } }>> = ({ children, params }) => {
+const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>> = ({ children, params }) => {
     const lang = params.lang || 'uz';
 
   return (
@@ -131,3 +132,5 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: string } }>
 }
 
 export default RootLayout;
+
+    

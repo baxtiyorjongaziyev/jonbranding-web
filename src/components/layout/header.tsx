@@ -1,10 +1,11 @@
+
 'use client';
 
 import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu, Phone, Send, X, Languages } from 'lucide-react';
+import { Menu, Phone, Send, X, Languages, Check } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -21,12 +22,19 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { UzFlagIcon } from '../icons/uz-flag';
 import { RuFlagIcon } from '../icons/ru-flag';
+import { GbFlagIcon } from '../icons/gb-flag';
 import { ScrollArea } from '../ui/scroll-area';
 
 type Dictionary = {
@@ -52,6 +60,7 @@ type Dictionary = {
     switch_lang: string;
     lang_ru: string;
     lang_uz: string;
+    lang_en: string;
 }
 
 const ListItem = React.forwardRef<
@@ -81,63 +90,6 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem"
 
-const ExpandingIconButton: FC<{
-    icon: React.ElementType,
-    text: string,
-    href: string,
-    isExternal?: boolean,
-    isLink?: boolean,
-    expandedWidth?: number
-}> = ({ icon: Icon, text, href, isExternal = false, isLink = true, expandedWidth = 130 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const buttonVariants = {
-    rest: { width: 44, transition: { type: 'spring', stiffness: 300, damping: 20 } },
-    hover: { width: expandedWidth, transition: { type: 'spring', stiffness: 300, damping: 20 } },
-  };
-
-  const textVariants = {
-    rest: { opacity: 0, x: -10, transition: { duration: 0.1 } },
-    hover: { opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.2 } },
-  };
-
-  const Component = isLink ? motion(Link) : motion.a;
-  const motionProps: any = {
-      href: href,
-      onMouseEnter: () => setIsHovered(true),
-      onMouseLeave: () => setIsHovered(false),
-      variants: buttonVariants,
-      animate: isHovered ? 'hover' : 'rest',
-      initial: "rest",
-      className: "relative flex items-center justify-start h-11 rounded-full bg-secondary text-secondary-foreground shadow-sm overflow-hidden"
-  };
-
-  if (!isLink) {
-    motionProps.target = isExternal ? '_blank' : '_self';
-    motionProps.rel = isExternal ? 'noopener noreferrer' : '';
-  }
-
-  return (
-      <Component {...motionProps}>
-        <div className="absolute left-3.5 flex items-center justify-center h-full">
-            <Icon size={18} />
-        </div>
-        <AnimatePresence>
-          {isHovered && (
-            <motion.span
-              variants={textVariants}
-              initial="rest"
-              animate="hover"
-              exit="rest"
-              className="absolute left-11 text-sm font-medium whitespace-nowrap"
-            >
-              {text}
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </Component>
-  );
-};
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -186,8 +138,23 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     { title: dictionary.services_and_prices, href: `/${lang}/xizmatlar`, description: dictionary.services_and_prices_desc },
   ];
   
-  const otherLang = lang === 'uz' ? 'ru' : 'uz';
-  const newPath = pathname.startsWith(`/${lang}`) ? pathname.replace(`/${lang}`, `/${otherLang}`) : `/${otherLang}${pathname}`;
+  const getNewPath = (newLang: 'uz' | 'ru' | 'en') => {
+      const pathSegments = pathname.split('/').filter(Boolean);
+      if (pathSegments.length > 0 && ['uz', 'ru', 'en'].includes(pathSegments[0])) {
+          pathSegments[0] = newLang;
+      } else {
+          pathSegments.unshift(newLang);
+      }
+      return `/${pathSegments.join('/')}`;
+  }
+
+  const languageOptions = {
+    uz: { label: dictionary.lang_uz, Icon: UzFlagIcon },
+    ru: { label: dictionary.lang_ru, Icon: RuFlagIcon },
+    en: { label: dictionary.lang_en, Icon: GbFlagIcon },
+  };
+
+  const CurrentLangIcon = languageOptions[lang as 'uz' | 'ru' | 'en']?.Icon || UzFlagIcon;
 
 
   return (
@@ -243,15 +210,39 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
-            <ExpandingIconButton 
-              icon={otherLang === 'ru' ? RuFlagIcon : UzFlagIcon}
-              text={otherLang === 'ru' ? dictionary.lang_ru : dictionary.lang_uz}
-              href={newPath}
-              isLink={true}
-              expandedWidth={120}
-            />
-           <ExpandingIconButton icon={Phone} text="+998 33 645 00 97" href="tel:+998336450097" isExternal={false} isLink={false} expandedWidth={190}/>
-           <ExpandingIconButton icon={Send} text="Telegram" href="https://t.me/baxtiyorjon_gaziyev" isExternal={true} isLink={false} />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="gap-2">
+                <CurrentLangIcon />
+                <span className="hidden sm:inline">{languageOptions[lang as 'uz' | 'ru' | 'en']?.label}</span>
+                <Languages className="h-4 w-4 opacity-50" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+               {Object.keys(languageOptions).map((langKey) => {
+                  const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
+                  return (
+                    <DropdownMenuItem key={langKey} asChild>
+                      <Link href={getNewPath(langKey as 'uz' | 'ru' | 'en')} className="flex items-center gap-2 cursor-pointer">
+                        <Icon className="w-5 h-auto" />
+                        <span>{label}</span>
+                        {lang === langKey && <Check className="ml-auto h-4 w-4" />}
+                      </Link>
+                    </DropdownMenuItem>
+                  );
+               })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+           <Button variant="ghost" size="icon" asChild>
+                <a href="tel:+998336450097" aria-label={dictionary.contact_by_phone}>
+                    <Phone />
+                </a>
+           </Button>
+            <Button variant="ghost" size="icon" asChild>
+                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" aria-label={dictionary.contact_by_telegram}>
+                    <Send />
+                </a>
+           </Button>
            <Button 
             onClick={handleContactClick} 
             className="shadow-ocean"
@@ -301,16 +292,27 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                         {dictionary.contact_by_telegram}
                         </a>
                     </div>
-                    <div className="flex gap-4">
-                        <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4">
+                     <div className="border-t pt-6 mt-4">
+                        <p className="text-sm font-semibold text-muted-foreground mb-3">{dictionary.switch_lang}</p>
+                        <div className="flex flex-col space-y-2">
+                           {Object.keys(languageOptions).map((langKey) => {
+                                const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
+                                return (
+                                <Link key={langKey} href={getNewPath(langKey as 'uz' | 'ru' | 'en')} onClick={handleLinkClick}>
+                                    <Button variant={lang === langKey ? 'default' : 'outline'} className="w-full justify-start gap-3">
+                                        <Icon />
+                                        <span>{label}</span>
+                                        {lang === langKey && <Check className="ml-auto h-5 w-5" />}
+                                    </Button>
+                                </Link>
+                                );
+                            })}
+                        </div>
+                     </div>
+                    <div className="pt-6">
+                        <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 py-6 text-lg">
                         {dictionary.free_consultation}
                         </Button>
-                        <Link href={newPath} className="mt-4">
-                        <Button variant="outline" size="icon" className="w-12 h-12">
-                            {otherLang === 'ru' ? <RuFlagIcon /> : <UzFlagIcon />}
-                            <span className="sr-only">{dictionary.switch_lang}</span>
-                        </Button>
-                        </Link>
                     </div>
                 </nav>
                </ScrollArea>
@@ -323,3 +325,5 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 };
 
 export default Header;
+
+    
