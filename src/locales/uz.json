@@ -359,7 +359,7 @@
         "section2_title": "Firma uslubi — bu tizim",
         "section2_p1": "Bu shunchaki go'zallik haqida emas, balki samaradorlik, ma'no va nazorat haqida. Brend o'zining vizual obrazini rivojlantirishda ko'p qirrali va izchil bo'lib qolishi uchun grafik elementlar to'plamini yaratish kerak.",
         "section2_p2": "Bunday to'plam har doim biznesning vazifalari va imkoniyatlariga qarab individual ravishda tanlanadi. Minimal to'plamga logotip, ranglar, shriftlar, fotosurat uslubi, reklama tashuvchilarining uslubi va yaxlit obrazni yaratadigan boshqa elementlar kiradi.",
-        "section2p3": "Vizual uslub aniq va izchil qurilganda, u brend obrazini boshqarish va muloqot qilish uchun kuchli vositaga aylanadi. Uning barcha elementlari bir-biriga mos kelganda, brend professional, ishonchli va taniladigan sifatida qabul qilinadi.",
+        "section2_p3": "Vizual uslub aniq va izchil qurilganda, u brend obrazini boshqarish va muloqot qilish uchun kuchli vositaga aylanadi. Uning barcha elementlari bir-biriga mos kelganda, brend professional, ishonchli va taniladigan sifatida qabul qilinadi.",
         "process_title": "Firma uslubini qanday yaratamiz?",
         "process_subtitle": "Biz firma uslubini ishlab chiqishga tizimli yondashamiz, toki har bir detal brendning tanilishi va uning strategiyasi uchun ishlasin.",
         "process_steps": [
@@ -483,8 +483,14 @@
         "title": "Xizmatlar va Narxlar",
         "subtitle": "Bizning barcha xizmatlarimiz bilan tanishing va o'zingizga mos bo'lgan brending to'plamini yarating. Onlayn kalkulyator yordamida narxlarni darhol hisoblang.",
         "comparison": {
+            "title": "Biz va Raqobatchilar",
+            "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklarga qaraganda ancha hamyonbop narxlarda taqdim etamiz. Natija esa siz kutgandan ham a'lo bo'ladi.",
+            "features": "Xususiyatlar",
             "whyPremiumTitle": "Nega faqat premium agentliklar?",
-            "whyPremiumDesc": "Biz o'zimizni faqat eng yuqori darajadagi, strategik yondashuvga ega kompaniyalar bilan taqqoslaymiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda taqdim etish. Sifat va strategiya jihatidan biz bilan bir darajada bo'lmagan agentliklar bilan solishtirish, mijoz uchun ham, biz uchun ham to'g'ri bo'lmaydi."
+            "whyPremiumDesc": "Biz o'zimizni faqat eng yuqori darajadagi, strategik yondashuvga ega kompaniyalar bilan taqqoslaymiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda taqdim etish. Sifat va strategiya jihatidan biz bilan bir darajada bo'lmagan agentliklar bilan solishtirish, mijoz uchun ham, biz uchun ham to'g'ri bo'lmaydi.",
+            "ctaTitle": "Farqni o'zingiz ko'rdingiz. Endi tanlash vaqti keldi!",
+            "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun eng to'g'ri qarorni qabul qiling va biz bilan bog'laning.",
+            "ctaButton": "Menga shunday yondashuv kerak"
         }
     },
      "packageBuilder": {
@@ -543,5 +549,25 @@
         "title": "Hali ketmang!",
         "description": "Siz uchun maxsus taklifimiz bor. <br/>Bizda <span class='font-bold text-primary'>turli chegirmalar</span> mavjud. Imkoniyatdan foydalanib qoling!",
         "button": "Chegirmalarni ko'rish"
+    },
+    "queueStatus": {
+        "subtitle": "Joylar cheklangan",
+        "title": "Shoshiling! O'z joyingizni band qiling!",
+        "description": "Biz har bir loyihaga yuksak sifatni ta'minlash uchun vaqt ajratamiz. Shu sababli, bir vaqtning o'zida faqat cheklangan miqdordagi loyihalar ustida ishlaymiz.",
+        "queueTitle": "Loyiha navbati",
+        "booked": "Band",
+        "available": "Bo'sh",
+        "tooltipBooked": "O'rin band qilingan",
+        "tooltipAvailable": "Navbatga yozilishingiz mumkin",
+        "remainingSlots": "Qolgan bo'sh o'rinlar",
+        "slotsUnit": "ta",
+        "onlineNow": "Hozir saytda",
+        "peopleUnit": "kishi",
+        "nextProjectStart": "Keyingi loyihani boshlash",
+        "ctaButton": "O'z joyimni band qilish",
+        "ctaSubtitle": "Raqobatchilaringizdan bir qadam oldinda bo'ling!",
+        "timeframes": {
+            "2 weeks": "2 haftadan keyin"
+        }
     }
 }

@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/tooltip"
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getDictionary, Locale } from '@/lib/dictionaries';
+import { useParams } from 'next/navigation';
 
 interface QueueStatusProps {
   onCtaClick: () => void;
@@ -34,13 +36,21 @@ const LiquidBlob = ({ className, style, transition }: { className: string, style
 
 
 const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
+  const params = useParams();
+  const lang = params.lang as Locale;
+  const [translations, setTranslations] = useState<any>(null);
+
   // ** O'zgartirish uchun ma'lumotlar **
   const totalSlots = 7;
   const currentProjects = 4;
-  const nextAvailable = "2 hafta";
+  const nextAvailableKey = '2 weeks'; // Key for translation
   // *********************************
 
   const [onlineUsers, setOnlineUsers] = useState(0);
+
+  useEffect(() => {
+    getDictionary(lang).then(dict => setTranslations(dict.queueStatus));
+  }, [lang]);
 
   useEffect(() => {
     // Set initial random number between 12 and 25
@@ -58,9 +68,13 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
     return () => clearInterval(interval);
   }, []);
 
+  if (!translations) {
+    return null; // Or a loading skeleton
+  }
 
   const slots = Array.from({ length: totalSlots });
   const remainingSlots = totalSlots - currentProjects;
+  const nextAvailable = translations.timeframes[nextAvailableKey] || nextAvailableKey;
 
   return (
     <section className="py-16 sm:py-24 bg-white">
@@ -98,19 +112,19 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
               <CardHeader className="text-center p-0 mb-8">
                   <div className="flex justify-center items-center gap-2 mb-2">
                     <Sparkles className="w-6 h-6 text-accent" />
-                    <p className="font-bold text-accent uppercase tracking-widest">Joylar cheklangan</p>
+                    <p className="font-bold text-accent uppercase tracking-widest">{translations.subtitle}</p>
                   </div>
                   <CardTitle className="text-3xl md:text-4xl font-extrabold">
-                    Tezda! O'z o'rningizni band qiling!
+                    {translations.title}
                   </CardTitle>
                  <CardDescription className="text-blue-200 mt-2 max-w-2xl mx-auto text-lg">
-                   Biz har bir loyihaga yuksak sifatni ta'minlash uchun vaqt ajratamiz. Shu sababli, bir vaqtning o'zida faqat cheklangan miqdordagi loyihalar ustida ishlaymiz.
+                   {translations.description}
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-0">
                 
                 <div className="mb-8">
-                    <h3 className="text-center font-bold text-lg mb-4 text-white">Loyiha navbati</h3>
+                    <h3 className="text-center font-bold text-lg mb-4 text-white">{translations.queueTitle}</h3>
                      <TooltipProvider>
                         <div className="flex justify-center items-center flex-wrap gap-2 sm:gap-4 p-2 sm:p-4 bg-black/20 rounded-xl">
                             {slots.map((_, index) => {
@@ -125,12 +139,12 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                                                 isNext && "animate-subtle-pulse bg-accent/20"
                                             )}>
                                                 {isBooked ? <UserCheck className="h-8 w-8 sm:h-10 sm:w-10" /> : <User className="h-8 w-8 sm:h-10 sm:w-10" />}
-                                                <span className="text-xs font-mono">{isBooked ? `Band` : `Bo'sh`}</span>
+                                                <span className="text-xs font-mono">{isBooked ? translations.booked : translations.available}</span>
                                                 {isNext && <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent ring-2 ring-background"></div>}
                                             </div>
                                         </TooltipTrigger>
                                         <TooltipContent>
-                                            <p>{isBooked ? `O'rin band` : `Navbatga yozilishingiz mumkin`}</p>
+                                            <p>{isBooked ? translations.tooltipBooked : translations.tooltipAvailable}</p>
                                         </TooltipContent>
                                     </Tooltip>
                                 )
@@ -142,8 +156,8 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
 
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                   <div className="bg-black/20 p-4 rounded-xl">
-                    <p className="text-sm text-blue-200">Qolgan bo'sh o'rinlar</p>
-                    <p className="text-2xl font-bold text-white">{remainingSlots} ta</p>
+                    <p className="text-sm text-blue-200">{translations.remainingSlots}</p>
+                    <p className="text-2xl font-bold text-white">{remainingSlots} {translations.slotsUnit}</p>
                   </div>
                    <div className="bg-black/20 p-4 rounded-xl border-2 border-accent/50 shadow-lg">
                     <p className="text-sm text-accent flex items-center justify-center gap-2">
@@ -151,13 +165,13 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                           <span className="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
                         </span>
-                        Hozir saytda
+                        {translations.onlineNow}
                     </p>
-                    <p className="text-2xl font-bold text-white">{onlineUsers} kishi</p>
+                    <p className="text-2xl font-bold text-white">{onlineUsers} {translations.peopleUnit}</p>
                   </div>
                   <div className="bg-black/20 p-4 rounded-xl">
-                    <p className="text-sm text-blue-200">Keyingi loyihani boshlash</p>
-                    <p className="text-2xl font-bold text-white">{nextAvailable}dan keyin</p>
+                    <p className="text-sm text-blue-200">{translations.nextProjectStart}</p>
+                    <p className="text-2xl font-bold text-white">{nextAvailable}</p>
                   </div>
                 </div>
 
@@ -167,11 +181,11 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                       size="lg"
                       className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform text-lg animate-subtle-pulse px-6 sm:px-8 py-6"
                     >
-                      O'z joyimni band qilish
+                      {translations.ctaButton}
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   <p className="text-sm text-blue-300 mt-3">
-                    Raqobatchilaringizdan bir qadam oldinda bo'ling!
+                    {translations.ctaSubtitle}
                   </p>
                 </div>
               </CardContent>
