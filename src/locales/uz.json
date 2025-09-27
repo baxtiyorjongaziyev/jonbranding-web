@@ -392,7 +392,72 @@
             { "title": "Ma'no va assotsiatsiyalar", "description": "O'qilishi, ohangi, mumkin bo'lgan assotsiativ qator, madaniy idrok va brend toifasiga muvofiqligini tekshiramiz." }
         ],
         "calculator_title": "Tovar Belgisi Xarajatlari",
-        "calculator_subtitle": "Neyming (nom tanlash) — ijodiy jarayon, Patentlash esa — yuridik. Jamoamizdagi patent mutaxassisi yordamida tovar belgisini ro'yxatdan o'tkazish bilan bog'liq barcha xarajatlarni (davlat bojlari va xizmat haqi) shu yerda taxminan hisoblang."
+        "calculator_subtitle": "Neyming (nom tanlash) — ijodiy jarayon, Patentlash esa — yuridik. Jamoamizdagi patent mutaxassisi yordamida tovar belgisini ro'yxatdan o'tkazish bilan bog'liq barcha xarajatlarni (davlat bojlari va xizmat haqi) shu yerda taxminan hisoblang.",
+        "calculator": {
+            "formTitle": "Ma'lumotlarni kiriting",
+            "brandNameLabel": "Brend nomi",
+            "brandNamePlaceholder": "Masalan: MyBrand",
+            "yourNameLabel": "Ismingiz",
+            "yourNamePlaceholder": "To'liq ismingizni kiriting",
+            "phoneLabel": "Telefon raqam",
+            "phonePlaceholder": "+998901234567",
+            "classCountLabel": "Faoliyat yo'nalishlari soni (klass)",
+            "classCountMax": "Maks. 45 ta",
+            "personTypeLabel": "Shaxs turi",
+            "personTypeOptions": [
+                { "value": "jismoniy", "label": "Jismoniy shaxs" },
+                { "value": "yuridik", "label": "Yuridik shaxs" }
+            ],
+            "speedLabel": "Ko‘rib chiqish tezligi",
+            "speedOptions": [
+                { "value": "oddiy", "label": "Oddiy (7 oy)", "labelShort": "Oddiy" },
+                { "value": "tez", "label": "Tezkor (1.5 oy)", "labelShort": "Tezkor" }
+            ],
+            "expertCheckLabel": "Qo'shimcha ekspert tekshiruvi",
+            "expertCheckOptions": [
+                { "value": "ha", "label": "Yoqilgan" },
+                { "value": "yoq", "label": "O‘chirilgan" }
+            ],
+            "expertCheckLabelShort": "Ekspert+",
+            "activityLabel": "Faoliyat turlari (ixtiyoriy)",
+            "activityPlaceholder": "Masalan: dizayn, qurilish, kiyim-kechak ishlab chiqarish...",
+            "activityHelp": "Bu klasslarni aniqlashda yordam beradi.",
+            "submitButton": "Patentlashga buyurtma berish",
+            "submittingButton": "Yuborilmoqda...",
+            "successMessage": "✅ Buyurtma qabul qilindi!",
+            "tryAgainButton": "Yana hisoblash",
+            "summaryTitle": "Xarajatlar tafsiloti",
+            "totalCostTitle": "10 yillik patent uchun taxminiy umumiy xarajat",
+            "currency": "so'm",
+            "classLabel": "klass",
+            "totalCostNote": "Barcha davlat bojlari va xizmatlar narxi ichida",
+            "step1Title": "1-bosqich (Dastlabki to‘lov)",
+            "ourServiceFee": "Jamoamiz xizmati",
+            "applicationFee": "Tovar belgisi uchun ariza boji",
+            "step1Total": "1-bosqich jami",
+            "step2Title": "2-bosqich (Guvohnoma olish)",
+            "stateFeeBase": "Davlat boji (bazaviy)",
+            "extraClassesFee": "Qo‘shimcha klasslar ({count} ta)",
+            "step2Total": "2-bosqich jami",
+            "expediteTitle": "Tezkor topshirish uchun qo'shimcha",
+            "expediteBaseFee": "Asosiy (12 BHM + 12% NDS)",
+            "expediteTotal": "Tezkor to'lov jami",
+            "expertCheckTitle": "Ekspert tekshiruvi",
+            "expertBaseFee": "Bazaviy (2×BHM)",
+            "expertTotal": "Ekspert xizmati jami",
+            "importantNoteTitle": "Muhim eslatma",
+            "importantNoteText": "Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan bazaviy hisoblash miqdori (BHM)ga bog'liq va o'zgarishi mumkin. Hozirgi BHM {bhm} so'm. Bu kalkulyator ommaviy oferta emas va faqat tanishish uchun mo'ljallangan.",
+            "error_brand": "Iltimos, brend nomini kiriting.",
+            "error_name": "Iltimos, ismingizni kiriting.",
+            "error_phone": "Iltimos, to‘g‘ri telefon raqam kiriting.",
+            "error_server": "Serverda xatolik yuz berdi.",
+            "success_toast_title": "Muvaffaqiyatli!",
+            "success_toast_desc": "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
+            "error_toast_title": "Xatolik!",
+            "error_toast_desc": "So‘rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.",
+            "telegramTitle": "Yangi patent arizasi (Kalkulyatordan)",
+            "notSpecified": "Kiritilmagan"
+        }
     },
     "packagingPage": {
         "title": "Qadoq Dizaynini Ishlab Chiqish",
@@ -441,3 +506,5 @@
         "button": "Chegirmalarni ko'rish"
     }
 }
+
+    

@@ -160,7 +160,7 @@ const NamingPage: FC = () => {
                   </p>
               </div>
               <Separator className="my-12" />
-              <TrademarkCalculator lang={lang} />
+              <TrademarkCalculator translations={translations.calculator} />
           </div>
         </section>
 
@@ -171,3 +171,5 @@ const NamingPage: FC = () => {
 };
 
 export default NamingPage;
+
+    

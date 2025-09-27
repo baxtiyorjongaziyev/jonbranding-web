@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useMemo, useState } from 'react';
@@ -129,134 +130,8 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
     );
 };
 
-const t = {
-    uz: {
-        formTitle: "Ma'lumotlarni kiriting",
-        brandNameLabel: "Brend nomi",
-        brandNamePlaceholder: "Masalan: MyBrand",
-        yourNameLabel: "Ismingiz",
-        yourNamePlaceholder: "To'liq ismingizni kiriting",
-        phoneLabel: "Telefon raqam",
-        phonePlaceholder: "+998901234567",
-        classCountLabel: "Faoliyat yo'nalishlari soni (klass)",
-        classCountMax: "Maks. 45 ta",
-        personTypeLabel: "Shaxs turi",
-        personTypeOptions: [
-            { value: 'jismoniy', label: 'Jismoniy shaxs' },
-            { value: 'yuridik', label: 'Yuridik shaxs' }
-        ],
-        speedLabel: "Ko‘rib chiqish tezligi",
-        speedOptions: [
-            { value: 'oddiy', label: 'Oddiy (7 oy)' },
-            { value: 'tez', label: 'Tezkor (1.5 oy)' }
-        ],
-        expertCheckLabel: "Qo'shimcha ekspert tekshiruvi",
-        expertCheckOptions: [
-            { value: 'ha', label: 'Yoqilgan' },
-            { value: 'yoq', label: 'O‘chirilgan' }
-        ],
-        activityLabel: "Faoliyat turlari (ixtiyoriy)",
-        activityPlaceholder: "Masalan: dizayn, qurilish, kiyim-kechak ishlab chiqarish...",
-        activityHelp: "Bu klasslarni aniqlashda yordam beradi.",
-        submitButton: "Patentlashga buyurtma berish",
-        submittingButton: "Yuborilmoqda...",
-        successMessage: "✅ Buyurtma qabul qilindi!",
-        tryAgainButton: "Yana hisoblash",
-        summaryTitle: "Xarajatlar tafsiloti",
-        totalCostTitle: "10 yillik patent uchun taxminiy umumiy xarajat",
-        currency: "so'm",
-        totalCostNote: "Barcha davlat bojlari va xizmatlar narxi ichida",
-        step1Title: "1-bosqich (Dastlabki to‘lov)",
-        ourServiceFee: "Jamoamiz xizmati",
-        applicationFee: "Tovar belgisi uchun ariza boji",
-        step1Total: "1-bosqich jami",
-        step2Title: "2-bosqich (Guvohnoma olish)",
-        stateFeeBase: "Davlat boji (bazaviy)",
-        extraClassesFee: (count: number) => `Qo‘shimcha klasslar (${count} ta)`,
-        step2Total: "2-bosqich jami",
-        expediteTitle: "Tezkor topshirish uchun qo'shimcha",
-        expediteBaseFee: "Asosiy (12 BHM + 12% NDS)",
-        expediteTotal: "Tezkor to'lov jami",
-        expertCheckTitle: "Ekspert tekshiruvi",
-        expertBaseFee: "Bazaviy (2×BHM)",
-        expertTotal: "Ekspert xizmati jami",
-        importantNoteTitle: "Muhim eslatma",
-        importantNoteText: (bhm: string) => `Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan bazaviy hisoblash miqdori (BHM)ga bog'liq va o'zgarishi mumkin. Hozirgi BHM ${bhm} so'm. Bu kalkulyator ommaviy oferta emas va faqat tanishish uchun mo'ljallangan.`,
-        error_brand: "Iltimos, brend nomini kiriting.",
-        error_name: "Iltimos, ismingizni kiriting.",
-        error_phone: "Iltimos, to‘g‘ri telefon raqam kiriting.",
-        error_server: "Serverda xatolik yuz berdi.",
-        success_toast_title: "Muvaffaqiyatli!",
-        success_toast_desc: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
-        error_toast_title: "Xatolik!",
-        error_toast_desc: (msg: string) => msg || 'So‘rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.',
-    },
-    ru: {
-        formTitle: "Введите данные",
-        brandNameLabel: "Название бренда",
-        brandNamePlaceholder: "Например: MyBrand",
-        yourNameLabel: "Ваше имя",
-        yourNamePlaceholder: "Введите ваше полное имя",
-        phoneLabel: "Номер телефона",
-        phonePlaceholder: "+998901234567",
-        classCountLabel: "Количество классов деятельности",
-        classCountMax: "Макс. 45",
-        personTypeLabel: "Тип лица",
-        personTypeOptions: [
-            { value: 'jismoniy', label: 'Физическое лицо' },
-            { value: 'yuridik', label: 'Юридическое лицо' }
-        ],
-        speedLabel: "Скорость рассмотрения",
-        speedOptions: [
-            { value: 'oddiy', label: 'Обычная (7 мес.)' },
-            { value: 'tez', label: 'Ускоренная (1.5 мес.)' }
-        ],
-        expertCheckLabel: "Дополнительная экспертиза",
-        expertCheckOptions: [
-            { value: 'ha', label: 'Включена' },
-            { value: 'yoq', label: 'Отключена' }
-        ],
-        activityLabel: "Виды деятельности (необязательно)",
-        activityPlaceholder: "Например: дизайн, строительство, производство одежды...",
-        activityHelp: "Это поможет определить классы.",
-        submitButton: "Заказать патентование",
-        submittingButton: "Отправка...",
-        successMessage: "✅ Заявка принята!",
-        tryAgainButton: "Рассчитать снова",
-        summaryTitle: "Детализация расходов",
-        totalCostTitle: "Примерная общая стоимость патента на 10 лет",
-        currency: "сум",
-        totalCostNote: "Включая все госпошлины и стоимость услуг",
-        step1Title: "Этап 1 (Первоначальный платеж)",
-        ourServiceFee: "Услуги нашей команды",
-        applicationFee: "Пошлина за подачу заявки",
-        step1Total: "Итого за 1-й этап",
-        step2Title: "Этап 2 (Получение свидетельства)",
-        stateFeeBase: "Госпошлина (базовая)",
-        extraClassesFee: (count: number) => `Дополнительные классы (${count})`,
-        step2Total: "Итого за 2-й этап",
-        expediteTitle: "Доплата за ускоренное рассмотрение",
-        expediteBaseFee: "Основная (12 БРВ + 12% НДС)",
-        expediteTotal: "Итого за ускорение",
-        expertCheckTitle: "Экспертиза",
-        expertBaseFee: "Базовая (2×БРВ)",
-        expertTotal: "Итого за экспертизу",
-        importantNoteTitle: "Важное примечание",
-        importantNoteText: (bhm: string) => `Все цены зависят от базовой расчетной величины (БРВ), установленной Министерством юстиции Республики Узбекистан, и могут меняться. Текущая БРВ составляет ${bhm} сум. Этот калькулятор не является публичной офертой и предназначен только для ознакомления.`,
-        error_brand: "Пожалуйста, введите название бренда.",
-        error_name: "Пожалуйста, введите ваше имя.",
-        error_phone: "Пожалуйста, введите правильный номер телефона.",
-        error_server: "Произошла ошибка на сервере.",
-        success_toast_title: "Успешно!",
-        success_toast_desc: "Ваш запрос принят. Мы скоро с вами свяжемся!",
-        error_toast_title: "Ошибка!",
-        error_toast_desc: (msg: string) => msg || 'Произошла ошибка при отправке запроса. Пожалуйста, попробуйте снова.',
-    }
-};
-
-export default function TrademarkCalculator({ lang = 'uz' }: { lang: string }) {
+export default function TrademarkCalculator({ translations }: { translations: any }) {
   const { toast } = useToast();
-  const translations = t[lang as 'uz' | 'ru'];
 
   const [brand, setBrand] = useState('');
   const [name, setName] = useState('');
@@ -274,6 +149,8 @@ export default function TrademarkCalculator({ lang = 'uz' }: { lang: string }) {
     () => calculateFees({ isYuridik, classCount, speed, hasEkspert }),
     [isYuridik, classCount, speed, hasEkspert]
   );
+  
+  if (!translations) return null;
 
   const handleSubmit = async () => {
     if (!brand.trim()) {
@@ -292,16 +169,16 @@ export default function TrademarkCalculator({ lang = 'uz' }: { lang: string }) {
     setLoading(true);
 
     const telegramMessage = [
-      `🧾 ${lang === 'ru' ? 'Новая заявка на патент (с калькулятора)' : 'Yangi patent arizasi (Kalkulyatordan)'}`,
+      `🧾 ${translations.telegramTitle}`,
       `Brend: ${brand}`,
-      `${lang === 'ru' ? 'Виды деятельности' : 'Faoliyat turlari'}: ${activity || (lang === 'ru' ? 'Не указано' : 'Kiritilmagan')}`,
+      `${translations.activityLabel}: ${activity || translations.notSpecified}`,
       '---',
-      `${lang === 'ru' ? 'Тип' : 'Turi'}: ${isYuridik ? (lang === 'ru' ? 'Юридическое' : 'Yuridik') : (lang === 'ru' ? 'Физическое' : 'Jismoniy')}`,
-      `${lang === 'ru' ? 'Кол-во классов' : 'Klasslar soni'}: ${fees.classCount}`,
-      `${lang === 'ru' ? 'Режим' : 'Rejim'}: ${speed === 'tez' ? (lang === 'ru' ? 'Ускоренный (1.5 мес.)' : 'Tezkor (1.5 oy)') : (lang === 'ru' ? 'Обычный (7 мес.)' : 'Oddiy (7 oy)')}`,
-      `${lang === 'ru' ? 'Экспертиза' : 'Ekspert tekshiruvi'}: ${hasEkspert ? (lang === 'ru' ? 'Да' : 'Bor') : (lang === 'ru' ? 'Нет' : 'Yo‘q')}`,
+      `${translations.personTypeLabel}: ${isYuridik ? translations.personTypeOptions[1].label : translations.personTypeOptions[0].label}`,
+      `${translations.classCountLabel}: ${fees.classCount}`,
+      `${translations.speedLabel}: ${speed === 'tez' ? translations.speedOptions[1].label : translations.speedOptions[0].label}`,
+      `${translations.expertCheckLabel}: ${hasEkspert ? translations.expertCheckOptions[0].label : translations.expertCheckOptions[1].label}`,
       '---',
-      `${lang === 'ru' ? 'ОБЩАЯ СТОИМОСТЬ' : 'UMUMIY NARX'}: ${fees.total.toLocaleString()} ${translations.currency}`,
+      `${translations.totalCostTitle.toUpperCase()}: ${fees.total.toLocaleString()} ${translations.currency}`,
     ].join('\n');
 
     try {
@@ -336,7 +213,7 @@ export default function TrademarkCalculator({ lang = 'uz' }: { lang: string }) {
     } catch (e: any) {
        toast({
         title: translations.error_toast_title,
-        description: translations.error_toast_desc(e.message),
+        description: (translations.error_toast_desc as (msg: string) => string)(e.message || ''),
         variant: 'destructive',
       });
     } finally {
@@ -458,10 +335,10 @@ export default function TrademarkCalculator({ lang = 'uz' }: { lang: string }) {
             <span className="text-2xl font-medium text-blue-200 ml-2">{translations.currency}</span>
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Pill>{fees.classCount} {lang === 'ru' ? 'класс' : 'klass'}</Pill>
-            <Pill>{isYuridik ? (lang === 'ru' ? 'Юр. лицо' : 'Yuridik shaxs') : (lang === 'ru' ? 'Физ. лицо' : 'Jismoniy shaxs')}</Pill>
-            <Pill>{speed==='tez' ? (lang === 'ru' ? 'Ускоренно' : 'Tezkor') : (lang === 'ru' ? 'Обычно' : 'Oddiy')}</Pill>
-            {hasEkspert && <Pill>Ekspert+</Pill>}
+            <Pill>{fees.classCount} {translations.classLabel}</Pill>
+            <Pill>{isYuridik ? translations.personTypeOptions[1].label : translations.personTypeOptions[0].label}</Pill>
+            <Pill>{speed==='tez' ? translations.speedOptions[1].labelShort : translations.speedOptions[0].labelShort}</Pill>
+            {hasEkspert && <Pill>{translations.expertCheckLabelShort}</Pill>}
           </div>
           <div className="mt-1 text-xs leading-5 opacity-90">{translations.totalCostNote}</div>
         </Card>
@@ -555,3 +432,5 @@ function Row({ label, value, bold=false, currency }: { label: string, value: num
 function Divider() {
   return <div className="mt-2 pt-2 border-t" />;
 }
+
+    
