@@ -233,12 +233,12 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                })}
             </DropdownMenuContent>
           </DropdownMenu>
-           <Button variant="ghost" size="icon" asChild>
+           <Button variant="outline" size="icon" asChild>
                 <a href="tel:+998336450097" aria-label={dictionary.contact_by_phone}>
                     <Phone />
                 </a>
            </Button>
-            <Button variant="ghost" size="icon" asChild>
+            <Button variant="outline" size="icon" asChild>
                 <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" aria-label={dictionary.contact_by_telegram}>
                     <Send />
                 </a>
