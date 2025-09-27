@@ -1,3 +1,4 @@
+
 'use client';
 
 import type { FC, ReactNode } from 'react';
@@ -130,7 +131,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
         <>
             <main>
                 <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} /></AnimatedSection>
-                <AnimatedSection><Stats lang={lang} dictionary={dictionary.stats} /></AnimatedSection>
+                <AnimatedSection><Stats dictionary={dictionary.stats} /></AnimatedSection>
                 <AnimatedSection><TrustedBy lang={lang} dictionary={dictionary.trustedBy} /></AnimatedSection>
                 <AnimatedSection><TargetAudience lang={lang} dictionary={dictionary.targetAudience} /></AnimatedSection>
                 <AnimatedSection><Offer onCTAClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.offer} /></AnimatedSection>

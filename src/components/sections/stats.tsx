@@ -37,23 +37,11 @@ const AnimatedNumber = ({ value, suffix }: AnimatedNumberProps) => {
 };
 
 
-const Stats = ({ lang }: { lang: string }) => {
-  const t = {
-    uz: {
-      experience: "Yillik tajriba",
-      clients: "Mamnun mijozlar",
-      projects: "Muvaffaqiyatli loyiha",
-      recommend: "Mijozlar tavsiya qilishadi"
-    },
-    ru: {
-      experience: "Лет опыта",
-      clients: "Довольных клиентов",
-      projects: "Успешных проектов",
-      recommend: "Клиентов рекомендуют нас"
-    }
-  }
-  const translations = lang === 'ru' ? t.ru : t.uz;
+const Stats = ({ dictionary }: { dictionary: any }) => {
+  const translations = dictionary;
   
+  if (!translations) return null;
+
   const stats = [
     { icon: Medal, value: 9, suffix: "+", label: translations.experience },
     { icon: Users, value: 500, suffix: "+", label: translations.clients },
