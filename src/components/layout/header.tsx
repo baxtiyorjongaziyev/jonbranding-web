@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useState, useEffect } from 'react';
@@ -23,7 +24,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { UzFlagIcon } from '../icons/uz-flag';
 import { RuFlagIcon } from '../icons/ru-flag';
@@ -83,11 +84,67 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem"
 
+const ExpandingButton: FC<{
+  icon: React.ReactNode;
+  label: string;
+  href?: string;
+  onClick?: () => void;
+  className?: string;
+}> = ({ icon, label, href, onClick, className }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const Comp = href ? 'a' : 'button';
+  const motionProps = {
+    initial: { width: '2.5rem' },
+    animate: { width: isHovered ? 'auto' : '2.5rem' },
+    transition: { type: 'spring', stiffness: 400, damping: 20 },
+  };
+
+  return (
+    <motion.div
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className="relative"
+    >
+      <Comp
+        href={href}
+        onClick={onClick}
+        target={href ? "_blank" : undefined}
+        rel={href ? "noopener noreferrer" : undefined}
+        className={cn(
+          "flex items-center justify-center h-10 px-3 bg-secondary rounded-full text-foreground font-semibold overflow-hidden",
+          className
+        )}
+      >
+        <motion.div {...motionProps} className="flex items-center">
+          <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center">
+            {icon}
+          </div>
+          <AnimatePresence>
+            {isHovered && (
+              <motion.span
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                transition={{ duration: 0.2, delay: 0.1 }}
+                className="whitespace-nowrap pr-2"
+              >
+                {label}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </Comp>
+    </motion.div>
+  );
+};
+
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const pathname = usePathname();
+  const [isLangSheetOpen, setLangSheetOpen] = useState(false);
+
 
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
@@ -147,9 +204,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     en: { label: dictionary.lang_en, Icon: GbFlagIcon },
   };
 
-  const CurrentLangIcon = languageOptions[lang as 'uz' | 'ru' | 'en']?.Icon || UzFlagIcon;
-
-
   return (
     <motion.header 
       className="fixed top-0 left-0 right-0 z-50"
@@ -202,21 +256,14 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden items-center space-x-4 lg:flex">
-             <Sheet>
-                <SheetTrigger asChild>
-                    <Button 
-                        variant="ghost"
-                        size="icon"
-                        className={cn(
-                            "transition-colors duration-300",
-                             scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10"
-                         )}
-                    >
-                        <Languages className="h-5 w-5" />
-                        <span className="sr-only">{dictionary.switch_lang}</span>
-                    </Button>
-                </SheetTrigger>
+        <div className="hidden items-center space-x-2 lg:flex">
+             <Sheet open={isLangSheetOpen} onOpenChange={setLangSheetOpen}>
+                <ExpandingButton
+                    icon={<Languages className="h-5 w-5" />}
+                    label={dictionary.switch_lang}
+                    onClick={() => setLangSheetOpen(true)}
+                    className={cn(scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}
+                />
                  <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                     <SheetHeader>
                         <SheetTitle>{dictionary.switch_lang}</SheetTitle>
@@ -225,9 +272,13 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                        {Object.keys(languageOptions).map((langKey) => {
                             const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
                             return (
-                               <Link key={langKey} href={getNewPath(langKey as 'uz' | 'ru' | 'en')} className={cn(
-                                   "flex items-center gap-3 p-3 rounded-lg transition-colors",
-                                   lang === langKey ? 'bg-primary/10 text-primary font-bold' : 'hover:bg-secondary'
+                               <Link 
+                                    key={langKey} 
+                                    href={getNewPath(langKey as 'uz' | 'ru' | 'en')} 
+                                    onClick={() => setLangSheetOpen(false)}
+                                    className={cn(
+                                        "flex items-center gap-3 p-3 rounded-lg transition-colors",
+                                        lang === langKey ? 'bg-primary/10 text-primary font-bold' : 'hover:bg-secondary'
                                 )}>
                                     <Icon className="w-6 h-auto" />
                                     <span>{label}</span>
@@ -238,16 +289,18 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                     </div>
                 </SheetContent>
             </Sheet>
-          <Button variant="ghost" className={cn(scrolled && "text-foreground hover:bg-black/10 hover:text-foreground")} asChild>
-            <a href="tel:+998336450097" aria-label={dictionary.contact_by_phone}>
-              <Phone />
-            </a>
-          </Button>
-          <Button variant="ghost" className={cn(scrolled && "text-foreground hover:bg-black/10 hover:text-foreground")} asChild>
-            <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" aria-label={dictionary.contact_by_telegram}>
-              <Send />
-            </a>
-          </Button>
+          <ExpandingButton
+            icon={<Phone />}
+            label={dictionary.contact_by_phone}
+            href="tel:+998336450097"
+            className={cn(scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}
+          />
+          <ExpandingButton
+            icon={<Send />}
+            label="Telegram"
+            href="https://t.me/baxtiyorjon_gaziyev"
+            className={cn(scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}
+          />
           <Button 
             onClick={handleContactClick} 
             className="shadow-ocean"
