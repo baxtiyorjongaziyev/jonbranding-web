@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Check, Globe } from 'lucide-react';
+import { Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { locales, localeNames, setLocaleCookie } from '@/lib/i18n/locale';
 import type { Locale } from '@/lib/i18n/locale';
@@ -69,6 +69,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
       </PopoverTrigger>
       <PopoverContent className="w-auto p-1" role="menu" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
         {locales.map((locale) => {
+          if (locale === lang) return null; // Don't show current language
           const Icon = localeIcons[locale];
           return (
             <Button
@@ -76,17 +77,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
                 variant="ghost"
                 role="menuitem"
                 className={cn(
-                "w-full justify-start gap-2",
-                lang === locale ? "font-bold" : "font-normal"
+                "justify-start gap-2 font-normal"
                 )}
                 onClick={() => handleLanguageChange(locale)}
             >
-                <Check
-                className={cn(
-                    "mr-2 h-4 w-4",
-                    lang === locale ? "opacity-100" : "opacity-0"
-                )}
-                />
                 <Icon />
                 {localeNames[locale]}
             </Button>
