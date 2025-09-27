@@ -148,6 +148,14 @@
       "cta1_desc": "Take your business to the next level with professional design. We'll help find the perfect solution for your business.",
       "cta1_button": "For my business too"
     },
+    "serviceSections": {
+        "cta1_title": "Your brand could look this good too.",
+        "cta1_desc": "Take your business to the next level with professional design. We'll help find the perfect solution for your business.",
+        "cta1_button": "For my business too",
+        "cta2_title": "Ready to discuss your project?",
+        "cta2_desc": "Sign up for a free consultation to find out what solutions we can offer for your business.",
+        "cta2_button": "Get a free consultation"
+    },
     "stats": {
         "experience": "Years of experience",
         "clients": "Satisfied clients",
@@ -238,7 +246,10 @@
            { "question": "What are the payment terms?", "answer": "The standard scheme is 50% prepayment, 50% after project delivery. We can also discuss individual terms for your convenience." },
            { "question": "How long does the work take?", "answer": "The timing depends on the type of service. For example, creating a logo takes 2-4 weeks, brand strategy starts from 8 weeks. The final deadline is determined after project approval." },
            { "question": "Is there support after the project is completed?", "answer": "Yes, within 1 month after the project completion, we provide free advice and assistance on the correct use of brand materials." }
-        ]
+        ],
+        "ctaTitle": "Don't leave room for doubt!",
+        "ctaDesc": "Got all your questions answered? Let's discuss your project and take your brand to the next level.",
+        "ctaButton": "I've got all the answers, ready to start!"
     },
     "mobileCtaBar": {
         "final_price": "Final price",

@@ -148,6 +148,14 @@
        "cta1_desc": "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
        "cta1_button": "Mening biznesim uchun ham"
     },
+    "serviceSections": {
+        "cta1_title": "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
+        "cta1_desc": "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
+        "cta1_button": "Mening biznesim uchun ham",
+        "cta2_title": "Loyihangizni muhokama qilishga tayyormisiz?",
+        "cta2_desc": "Biznesingiz uchun qanday yechimlar taklif qila olishimizni bilish uchun bepul konsultatsiyaga yoziling.",
+        "cta2_button": "Bepul konsultatsiya olish"
+    },
     "stats": {
         "experience": "Yillik tajriba",
         "clients": "Mamnun mijozlar",
@@ -426,5 +434,10 @@
         "default": "Iltimos, o'zingiz uchun eng muhim 2 ta ustuvorlikni tanlang."
       },
       "tooltip": "Avval bitta tanlovni bekor qiling"
+    },
+    "exitIntentModal": {
+        "title": "Hali ketmang!",
+        "description": "Siz uchun maxsus taklifimiz bor. <br/>Bizda <span class='font-bold text-primary'>turli chegirmalar</span> mavjud. Imkoniyatdan foydalanib qoling!",
+        "button": "Chegirmalarni ko'rish"
     }
 }

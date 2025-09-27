@@ -1,9 +1,9 @@
-
 'use client';
 
 import { FC, useCallback } from "react";
 import dynamic from 'next/dynamic';
 import CtaBlock from "./cta-block";
+import { getDictionary, Locale } from "@/lib/dictionaries";
 
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'));
@@ -16,30 +16,21 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
         window.dispatchEvent(event);
     }, []);
 
-    const t = {
-        uz: {
-            cta1_title: "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
-            cta1_desc: "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
-            cta1_button: "Mening biznesim uchun ham",
-            cta2_title: "Loyihangizni muhokama qilishga tayyormisiz?",
-            cta2_desc: "Biznesingiz uchun qanday yechimlar taklif qila olishimizni bilish uchun bepul konsultatsiyaga yoziling.",
-            cta2_button: "Bepul konsultatsiya olish"
-        },
-        ru: {
-            cta1_title: "Ваш бренд может выглядеть так же.",
-            cta1_desc: "Выведите свой бизнес на новый уровень с помощью профессионального дизайна. Мы поможем найти идеальное решение для вашего бизнеса.",
-            cta1_button: "И для моего бизнеса тоже",
-            cta2_title: "Готовы обсудить ваш проект?",
-            cta2_desc: "Запишитесь на бесплатную консультацию, чтобы узнать, какие решения мы можем предложить для вашего бизнеса.",
-            cta2_button: "Получить бесплатную консультацию"
-        }
+    const [dictionary, setDictionary] = React.useState<any>(null);
+
+    React.useEffect(() => {
+        getDictionary(lang as Locale).then(setDictionary);
+    }, [lang]);
+
+    if (!dictionary) {
+        return null; // Or a loading skeleton
     }
 
-    const translations = lang === 'ru' ? t.ru : t.uz;
+    const translations = dictionary.serviceSections;
 
     return (
         <>
-            <Gallery lang={lang} />
+            <Gallery lang={lang} dictionary={dictionary.gallery} />
             <Video />
             <CtaBlock 
                 title={translations.cta1_title}
@@ -47,7 +38,7 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
                 buttonText={translations.cta1_button}
                 onCtaClick={handleOpenModal}
             />
-            <TrustedBy lang={lang} />
+            <TrustedBy lang={lang} dictionary={dictionary.trustedBy}/>
             <CtaBlock 
                 title={translations.cta2_title}
                 description={translations.cta2_desc}
