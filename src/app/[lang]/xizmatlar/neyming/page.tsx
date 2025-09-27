@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -10,17 +11,21 @@ import { Separator } from '@/components/ui/separator';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { useParams } from 'next/navigation';
 
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
 
-const NamingPage: FC<{ params: { lang: string } }> = ({ params }) => {
-  const { lang } = params;
+const NamingPage: FC = () => {
+  const params = useParams();
+  const lang = params.lang as string;
   const [translations, setTranslations] = useState<any>(null);
 
   useEffect(() => {
-    getDictionary(lang as Locale).then(dict => setTranslations(dict.namingPage));
+    if (lang) {
+      getDictionary(lang as Locale).then(dict => setTranslations(dict.namingPage));
+    }
   }, [lang]);
   
   if (!translations) {
