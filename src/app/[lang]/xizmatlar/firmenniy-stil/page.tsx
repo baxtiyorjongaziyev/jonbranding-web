@@ -1,7 +1,7 @@
 
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Layers, Palette, PenTool, ClipboardCheck } from 'lucide-react';
 import Image from 'next/image';
@@ -34,6 +34,14 @@ const FirmenniyStilPage: FC = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
+
+  const result = useMemo(() => {
+    if (!translations) {
+      return { key: 'default', message: 'Loading...' };
+    }
+    // This is just a placeholder, actual logic is in PickTwoSelector
+    return { key: 'default', message: translations.pickTwoSelector?.messages?.default || '' };
+  }, [translations]);
   
   if (!translations) {
     return <main className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></main>;
@@ -104,7 +112,7 @@ const FirmenniyStilPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://picsum.photos/seed/design-system/800/600"
+                                src="https://images.unsplash.com/photo-1603873908720-e56361eca7d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxDb3Jwb3JhdGUlMjBpZGVudGl0eSUyMGlzJTIwYSUyMHN5c3RlbXxlbnwwfHx8fDE3NTg5Nzc5Nzh8MA&ixlib=rb-4.1.0&q=80&w=1080"
                                 width={800}
                                 height={600}
                                 data-ai-hint="design system grid"
