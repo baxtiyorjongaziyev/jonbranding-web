@@ -26,6 +26,7 @@ const Testimonials = dynamic(() => import('@/components/sections/testimonials'))
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const Offer = dynamic(() => import('@/components/sections/offer'));
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
+const Faq = dynamic(() => import('@/components/sections/faq'));
 
 
 const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
