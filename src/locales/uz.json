@@ -147,5 +147,104 @@
        "cta1_title": "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
        "cta1_desc": "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
        "cta1_button": "Mening biznesim uchun ham"
+    },
+    "stats": {
+        "experience": "Yillik tajriba",
+        "clients": "Mamnun mijozlar",
+        "projects": "Muvaffaqiyatli loyiha",
+        "recommend": "Mijozlar tavsiya qilishadi"
+    },
+    "trustedBy": {
+        "title": "Bizga ishonch bildirgan kompaniyalar"
+    },
+    "targetAudience": {
+        "title": "Bu muammolar sizga tanishmi?",
+        "subtitle": "Agar quyidagi fikrlar sizni bezovta qilayotgan bo'lsa, demak, biz siz uchun to'g'ri yechimmiz.",
+        "problems": [
+            { "text": "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi." },
+            { "text": "Brendim eskirgan, raqobatchilarimdan orqada qolyapman." },
+            { "text": "Mijozlarim qiymatimni tushunmayapti, faqat narx so'rayapti." },
+            { "text": "Sotuvlarim bor, lekin barqaror emas. Mijozlar qaytib kelmayapti." }
+        ],
+        "solutionTitle": "Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!",
+        "solutionSubtitle": "To'g'ri qurilgan brend strategiyasi bu kabi muammolarni bartaraf etib, biznesingizni barqaror o'sish yo'liga olib chiqadi.",
+        "solutionButton": "Barcha muammolar yechimini ko'rish"
+    },
+    "offer": {
+        "subtitle": "Strategik Imkoniyat",
+        "title": "Yaxlit brending — bu shunchaki chegirma emas, bu strategik ustunlik.",
+        "description": "Brending bu — qismlarga bo'lib bo'lmaydigan yaxlit tizim. Xizmatlarimizdan bir martada <strong>3 yoki undan ortiq asosiy yo'nalishni</strong> tanlab, siz nafaqat umumiy summadan <strong>kafolatlangan -20% tejaysiz</strong>, balki bundan ham muhimi — brendingiz uchun <strong>yagona, kuchli va izchil poydevor</strong> qurasiz. Bu premium agentliklarga nisbatan ikki karra foyda degani!",
+        "button": "O'z to'plamimni yaratish",
+        "note": "*Chegirma xizmatlar bo'limida to'plamingizni yig'ganingizdan so'ng avtomatik tarzda hisoblanadi."
+    },
+    "beforeAfter": {
+        "title": "Avval va Hozir",
+        "subtitle": "To'g'ri brending biznesingizni qanday o'zgartirishi mumkinligini o'z ko'zingiz bilan ko'ring.",
+        "ctaTitle": "Sizning brendingiz ham o'zgarishga tayyormi?",
+        "ctaDesc": "Keling, brendingizni tahlil qilib, uni yangi bosqichga olib chiqish rejasini tuzamiz.",
+        "ctaButton": "Mening brendimni ham o'zgartiring"
+    },
+    "testimonials": {
+        "title": "Mijozlarimiz biz haqimizda",
+        "subtitle": "Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz."
+    },
+    "gallery": {
+        "title": "Ishlarimizdan namunalar",
+        "subtitle": "Biz yaratgan brendlar o'z sohasida qanday ajralib turishini ko'ring."
+    },
+    "founder": {
+        "title": "Asoschi: Baxtiyorjon Gaziyev",
+        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisi. Men biznes egalariga o'z brendlarini keyingi bosqichga olib chiqishda yordam beraman. Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish. Keling, brendingizni birgalikda tahlil qilamiz va uning 'uxlab yotgan' potensialini uyg'otamiz.",
+        "points": [
+            { "icon": "Medal", "text": "50+ dan ortiq loyihalar" },
+            { "icon": "Globe", "text": "Xalqaro tajriba" },
+            { "icon": "Zap", "text": "Tez va samarali aloqa" },
+            { "icon": "Users", "text": "Aniq va shaffof ish jarayoni" }
+        ],
+        "phoneButton": "Telefon orqali bog'lanish",
+        "telegramButton": "Telegram orqali yozish"
+    },
+    "process": {
+        "title": "Bizning ish jarayonimiz",
+        "subtitle": "Har bir loyihada biz sinovdan o'tgan, shaffof va samarali jarayonni qo'llaymiz.",
+        "phases": [
+          { "phase": "01", "title": "Kashfiyot", "description": "Sayohatning boshlanishi", "tasks": ["Briflash", "Biznes muammolarini aniqlash", "Auditoriya ehtiyojlari", "Bozor va raqobatchilar tahlili", "Ilhom va g‘oyalar yig‘ish"] },
+          { "phase": "02", "title": "Strategiya", "description": "Yo‘lni xaritaga solish", "tasks": ["Maqsad qo‘yish", "Auditoriya tahlili", "Brendni joylashtirish", "Asosiy tamoyillar", "Rejalashtirish", "Brend vizyoni"] },
+          { "phase": "03", "title": "Ijodiy Dizayn", "description": "Brendni shakllantirish", "tasks": ["Neyming", "Logo dizayni", "Vizual konsepsiya", "Qadoqlash dizayni", "Brandbook"] },
+          { "phase": "04", "title": "Taqdimot", "description": "G'oyalarni sinovdan o'tkazish", "tasks": ["Dizayn taqdimoti", "Fikr-mulohazalarni moslashtirish", "Yakuniy iteratsiya"] },
+          { "phase": "05", "title": "Amaliyot", "description": "Brendni hayotga tadbiq etish", "tasks": ["Tayyor dizayn fayllari", "Brandbook topshirish", "Vizual qo‘llanmalar"] },
+          { "phase": "06", "title": "Rivojlanish", "description": "Brendni qo'llab-quvvatlash", "tasks": ["Tatbiq qilish bo‘yicha yo‘riqnoma", "Doimiy qo‘llab-quvvatlash", "Keyingi qadamlar"] }
+        ],
+        "ctaTitle": "Loyihangizni muhokama qilishga tayyormisiz?",
+        "ctaDesc": "Keling, g'oyalaringizni hayotga tatbiq etishni boshlaymiz.",
+        "ctaButton": "Loyihani muhokama qilish"
+    },
+    "leadMagnet": {
+        "title": "Brendingizni Keyingi Bosqichga Olib Chiqing",
+        "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.",
+        "magnets": [
+          { "id": "pdf", "icon": "FileText", "title": "Bepul PDF-Cheklist", "subtitle": "Brendingda 7 ta eng katta xato", "description": "Biznesingizda qanday xatolarga yo'l qo'ymaslik kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.", "cta": "PDF yuklab olish", "action": "onCtaClick" },
+          { "id": "quiz", "icon": "ListChecks", "title": "Mini-Test", "subtitle": "Biznesingiz brendga tayyormi?", "description": "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.", "cta": "Testni boshlash", "href": "/quiz" },
+          { "id": "video", "icon": "Film", "title": "Video Qo'llanma", "subtitle": "Strategik brending nima?", "description": "Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday natija keltirishini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
+        ]
+    },
+    "faq": {
+        "title": "Ko'p beriladigan savollar",
+        "subtitle": "Brending jarayoni, narxlar va boshqa mavzular bo'yicha eng ko'p uchraydigan savollarga javoblar.",
+        "faqItems": [
+           { "question": "Nima uchun narxlar qat'iy belgilanmagan?", "answer": "Har bir loyiha o'ziga xos. Narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga qarab individual ravishda hisoblanadi. Biz sizning brendingiz uchun eng maqbul yechimni taklif qilamiz." },
+           { "question": "Ish jarayoni qanday quriladi?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishilgan holda amalga oshiriladi va siz jarayonni to'liq nazorat qilasiz." },
+           { "question": "Faqat logotip buyurtma qilsam bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'laqonli identifikatsiya tizimini ishlab chiqamiz. Bu sizning biznesingizga uzoq muddatli qiymat yaratadi." },
+           { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng. Sizning qulayligingiz uchun individual shartlarni ham muhokama qilishimiz mumkin." },
+           { "question": "Ish qancha vaqt davom etadi?", "answer": "Muddlatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend-strategiya — 8 haftadan boshlanadi. Yakuniy muddat loyiha tasdiqlangandan so'ng aniq bo'ladi." },
+           { "question": "Loyiha tugagandan keyin qo'llab-quvvatlash bormi?", "answer": "Ha, loyiha tugagandan so'ng 1 oy davomida sizga brend materiallaridan to'g'ri foydalanish bo'yicha bepul maslahat va yordam beramiz." }
+        ],
+        "ctaTitle": "Ikkilanishlarga o'rin qoldirmang!",
+        "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni keyingi bosqichga olib chiqamiz.",
+        "ctaButton": "Barcha savollarga javob oldim, boshlashga tayyorman!"
+    },
+    "mobileCtaBar": {
+        "final_price": "Yakuniy narx",
+        "get_offer": "Murojaat qoldirish"
     }
 }

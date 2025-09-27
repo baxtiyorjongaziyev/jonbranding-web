@@ -113,7 +113,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
         setIsClient(true);
     }, []);
     
-    if (!isClient) {
+    if (!isClient || !dictionary.home) {
         return (
             <div>
                 <Skeleton className="h-20 w-full" />
@@ -151,7 +151,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} /></AnimatedSection>
                 <AnimatedSection><Faq lang={lang} dictionary={dictionary.faq} /></AnimatedSection>
             </main>
-            <ExitIntentModal onPrimaryClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.exitIntentModal} />
+            <ExitIntentModal onPrimaryClick={handleOpenServiceModal} lang={lang} />
             <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
         </>
     )
