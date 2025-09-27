@@ -396,7 +396,72 @@
             { "title": "Meaning and associations", "description": "We check readability, sound, possible associative array, cultural perception, and compliance with the brand category." }
         ],
         "calculator_title": "Trademark Costs",
-        "calculator_subtitle": "Naming (choosing a name) is a creative process, and patenting is a legal one. With the help of a patent specialist on our team, calculate the approximate costs associated with trademark registration (state fees and service charges) here."
+        "calculator_subtitle": "Naming (choosing a name) is a creative process, and patenting is a legal one. With the help of a patent specialist on our team, calculate the approximate costs associated with trademark registration (state fees and service charges) here.",
+        "calculator": {
+            "formTitle": "Enter Details",
+            "brandNameLabel": "Brand Name",
+            "brandNamePlaceholder": "e.g., MyBrand",
+            "yourNameLabel": "Your Name",
+            "yourNamePlaceholder": "Enter your full name",
+            "phoneLabel": "Phone Number",
+            "phonePlaceholder": "+998901234567",
+            "classCountLabel": "Number of Activity Classes",
+            "classCountMax": "Max. 45",
+            "personTypeLabel": "Person Type",
+            "personTypeOptions": [
+                { "value": "jismoniy", "label": "Individual" },
+                { "value": "yuridik", "label": "Legal Entity" }
+            ],
+            "speedLabel": "Review Speed",
+            "speedOptions": [
+                { "value": "oddiy", "label": "Normal (7 months)" , "labelShort": "Normal"},
+                { "value": "tez", "label": "Expedited (1.5 months)", "labelShort": "Expedited" }
+            ],
+            "expertCheckLabel": "Additional Expert Review",
+            "expertCheckOptions": [
+                { "value": "ha", "label": "Enabled" },
+                { "value": "yoq", "label": "Disabled" }
+            ],
+            "activityLabel": "Types of Activity (optional)",
+            "activityPlaceholder": "e.g., design, construction, clothing production...",
+            "activityHelp": "This helps in determining the classes.",
+            "submitButton": "Order Patenting",
+            "submittingButton": "Submitting...",
+            "successMessage": "✅ Order received!",
+            "tryAgainButton": "Calculate Again",
+            "summaryTitle": "Cost Breakdown",
+            "totalCostTitle": "Estimated total cost for a 10-year patent",
+            "currency": "sum",
+            "classLabel": "class",
+            "expertCheckLabelShort": "Expert+",
+            "totalCostNote": "Includes all state fees and service charges",
+            "step1Title": "Step 1 (Initial Payment)",
+            "ourServiceFee": "Our Team's Service Fee",
+            "applicationFee": "Trademark Application Fee",
+            "step1Total": "Step 1 Total",
+            "step2Title": "Step 2 (Certificate Acquisition)",
+            "stateFeeBase": "State Fee (base)",
+            "extraClassesFee": "Extra Classes ({count})",
+            "step2Total": "Step 2 Total",
+            "expediteTitle": "Surcharge for Expedited Review",
+            "expediteBaseFee": "Base (12 BRV + 12% VAT)",
+            "expediteTotal": "Expedited Total",
+            "expertCheckTitle": "Expert Review",
+            "expertBaseFee": "Base (2×BRV)",
+            "expertTotal": "Expert Service Total",
+            "importantNoteTitle": "Important Note",
+            "importantNoteText": "All prices depend on the Base Calculation Value (BCV) set by the Ministry of Justice of the Republic of Uzbekistan and are subject to change. The current BCV is {bhm} sum. This calculator is not a public offer and is for informational purposes only.",
+            "error_brand": "Please enter the brand name.",
+            "error_name": "Please enter your name.",
+            "error_phone": "Please enter a valid phone number.",
+            "error_server": "A server error occurred.",
+            "success_toast_title": "Success!",
+            "success_toast_desc": "Your request has been received. We will contact you shortly!",
+            "error_toast_title": "Error!",
+            "error_toast_desc": "An error occurred while submitting the request. Please try again.",
+            "telegramTitle": "New Patent Application (from calculator)",
+            "notSpecified": "Not specified"
+        }
     },
     "packagingPage": {
         "title": "Packaging Design Development",
@@ -445,3 +510,5 @@
         "button": "View Discounts"
     }
 }
+
+    
