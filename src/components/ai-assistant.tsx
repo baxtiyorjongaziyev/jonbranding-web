@@ -11,6 +11,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { chatAssistant } from '@/ai/flows/assistant-flow';
 import { useToast } from '@/hooks/use-toast';
+import { useParams } from 'next/navigation';
 
 interface Message {
   id: string;
@@ -19,13 +20,41 @@ interface Message {
   choices?: string[] | null;
 }
 
-const suggestionChips = [
-    "Xizmatlar va narxlar",
-    "Portfolioingizni ko'rsating",
-    "Ishlash jarayoni qanday?",
-];
-
 const AiAssistant: FC = () => {
+  const params = useParams();
+  const lang = params.lang as 'uz' | 'ru';
+  
+  const t = {
+    uz: {
+      initialMessage: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.",
+      suggestionChips: [
+        "Xizmatlar va narxlar",
+        "Portfolioingizni ko'rsating",
+        "Ishlash jarayoni qanday?",
+      ],
+      inputPlaceholder: "Savolingizni yozing...",
+      toastErrorTitle: "Xatolik!",
+      toastErrorDescription: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
+      cardTitle: "Jon Assistant",
+      cardSubtitle: "Odatda darhol javob beradi",
+    },
+    ru: {
+      initialMessage: "Здравствуйте! Я Jon, ваш виртуальный помощник. Вы можете смело спрашивать о стратегии брендинга, ценах или нашем рабочем процессе.",
+      suggestionChips: [
+        "Услуги и цены",
+        "Покажите ваше портфолио",
+        "Каков процесс работы?",
+      ],
+      inputPlaceholder: "Напишите ваш вопрос...",
+      toastErrorTitle: "Ошибка!",
+      toastErrorDescription: "Извините, произошла ошибка при ответе. Пожалуйста, попробуйте позже.",
+      cardTitle: "Jon Assistant",
+      cardSubtitle: "Обычно отвечает сразу",
+    }
+  }
+
+  const translations = lang === 'ru' ? t.ru : t.uz;
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -45,9 +74,9 @@ const AiAssistant: FC = () => {
         setMessages([
           { 
             id: Date.now().toString(), 
-            text: "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.", 
+            text: translations.initialMessage,
             sender: 'bot', 
-            choices: suggestionChips 
+            choices: translations.suggestionChips 
           }
         ]);
         setIsLoading(false);
@@ -64,7 +93,7 @@ const AiAssistant: FC = () => {
       setMessages([]);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  }, [isOpen, lang]);
   
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -117,7 +146,8 @@ const AiAssistant: FC = () => {
           content: msg.text
       }));
       
-      const response = await chatAssistant({ 
+      const response = await chatAssistant({
+        lang,
         query: messageText, 
         history: apiHistory.slice(0, -1)
       });
@@ -140,8 +170,8 @@ const AiAssistant: FC = () => {
     } catch (error) {
         console.error("AI Assistant Error:", error);
         toast({
-            title: 'Xatolik!',
-            description: "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
+            title: translations.toastErrorTitle,
+            description: translations.toastErrorDescription,
             variant: 'destructive',
         });
         // On error, we don't add a new message, just log it. The user's message remains.
@@ -168,7 +198,7 @@ const AiAssistant: FC = () => {
           return (
             <Link
               key={index}
-              href={part}
+              href={`/${lang}${part}`}
               className="text-primary underline hover:text-primary/80 font-medium"
               onClick={() => setIsOpen(false)}
             >
@@ -226,8 +256,8 @@ const AiAssistant: FC = () => {
                 <span className="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-white" />
               </div>
               <div className="grid gap-0.5">
-                <CardTitle className="text-base font-bold">Jon Assistant</CardTitle>
-                <p className="text-xs text-muted-foreground">Odatda darhol javob beradi</p>
+                <CardTitle className="text-base font-bold">{translations.cardTitle}</CardTitle>
+                <p className="text-xs text-muted-foreground">{translations.cardSubtitle}</p>
               </div>
             </div>
             <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 rounded-full">
@@ -302,7 +332,7 @@ const AiAssistant: FC = () => {
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Savolingizni yozing..."
+                placeholder={translations.inputPlaceholder}
                 autoComplete="off"
                 disabled={isLoading}
               />
