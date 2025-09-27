@@ -313,6 +313,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       }
     }
   }, [isOpen, form, user]);
+  
+  useEffect(() => {
+    form.trigger();
+  }, [lang, form]);
+
 
   const progress = (step / STEPS.length) * 100;
 
