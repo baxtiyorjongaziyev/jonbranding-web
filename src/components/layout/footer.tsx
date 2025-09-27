@@ -1,83 +1,58 @@
-
 'use client';
 
 import Link from 'next/link';
 import { Logo } from '@/components/icons/logo';
-import { Phone, Send, Instagram, ArrowUp } from 'lucide-react';
+import { ArrowUp, Instagram, Send } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, FC } from 'react';
 
-const t = {
-  uz: {
-    contact: "Biz bilan bog'laning",
-    by_telegram: "Telegram orqali",
-    by_phone: "Telefon orqali",
-    main_page: "Asosiy sahifa",
-    portfolio: "Portfolio",
-    founder: "Asoschi",
-    process: "Jarayon",
-    services: "Xizmatlarimiz",
-    brand_strategy: "Brend Strategiyasi",
-    naming: "Neyming",
-    corporate_style: "Firma Uslubi",
-    packaging_design: "Qadoq Dizayni",
-    additional: "Qo'shimcha",
-    service_prices: "Xizmatlar va Narxlar",
-    branding_test: "Brending Testi",
-    blog: "Blog",
-    all_rights_reserved: "Barcha huquqlar himoyalangan.",
-    back_to_top: "Yuqoriga qaytish",
-  },
-  ru: {
-    contact: "Свяжитесь с нами",
-    by_telegram: "Через Telegram",
-    by_phone: "По телефону",
-    main_page: "Главная страница",
-    portfolio: "Портфолио",
-    founder: "Основатель",
-    process: "Процесс",
-    services: "Наши услуги",
-    brand_strategy: "Бренд-стратегия",
-    naming: "Нейминг",
-    corporate_style: "Фирменный стиль",
-    packaging_design: "Дизайн упаковки",
-    additional: "Дополнительно",
-    service_prices: "Услуги и цены",
-    branding_test: "Тест по брендингу",
-    blog: "Блог",
-    all_rights_reserved: "Все права защищены.",
-    back_to_top: "Вернуться наверх",
-  }
-};
+type Dictionary = {
+    contact: string;
+    by_telegram: string;
+    by_phone: string;
+    main_page: string;
+    portfolio: string;
+    founder: string;
+    process: string;
+    faq: string;
+    services: string;
+    brand_strategy: string;
+    naming: string;
+    corporate_style: string;
+    packaging_design: string;
+    additional: string;
+    service_prices: string;
+    branding_test: string;
+    blog: string;
+    all_rights_reserved: string;
+    back_to_top: string;
+}
 
-
-const Footer: FC<{ lang: string }> = ({ lang = 'uz' }) => {
+const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  
-  const translations = lang === 'ru' ? t.ru : t.uz;
 
   const mainPageLinks = [
-      { href: `/${lang}/#portfolio`, label: translations.portfolio },
-      { href: `/${lang}/#founder`, label: translations.founder },
-      { href: `/${lang}/#process`, label: translations.process },
-      { href: `/${lang}/#faq`, label: 'FAQ' },
+      { href: `/${lang}/#portfolio`, label: dictionary.portfolio },
+      { href: `/${lang}/#founder`, label: dictionary.founder },
+      { href: `/${lang}/#process`, label: dictionary.process },
+      { href: `/${lang}/#faq`, label: dictionary.faq },
   ];
 
   const serviceLinks = [
-      { href: `/${lang}/xizmatlar/brand-strategy`, label: translations.brand_strategy },
-      { href: `/${lang}/xizmatlar/neyming`, label: translations.naming },
-      { href: `/${lang}/xizmatlar/firmenniy-stil`, label: translations.corporate_style },
-      { href: `/${lang}/xizmatlar/qadoq-dizayni`, label: translations.packaging_design },
+      { href: `/${lang}/xizmatlar/brand-strategy`, label: dictionary.brand_strategy },
+      { href: `/${lang}/xizmatlar/neyming`, label: dictionary.naming },
+      { href: `/${lang}/xizmatlar/firmenniy-stil`, label: dictionary.corporate_style },
+      { href: `/${lang}/xizmatlar/qadoq-dizayni`, label: dictionary.packaging_design },
   ];
   
   const additionalLinks = [
-      { href: `/${lang}/xizmatlar`, label: translations.service_prices },
-      { href: `/${lang}/quiz`, label: translations.branding_test },
-      { href: `/${lang}/blog`, label: translations.blog },
+      { href: `/${lang}/xizmatlar`, label: dictionary.service_prices },
+      { href: `/${lang}/quiz`, label: dictionary.branding_test },
+      { href: `/${lang}/blog`, label: dictionary.blog },
   ];
 
   return (
@@ -88,22 +63,22 @@ const Footer: FC<{ lang: string }> = ({ lang = 'uz' }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{translations.contact}</h3>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.contact}</h3>
             <div className="mt-4 space-y-4">
                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="block group">
                   <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">@baxtiyorjon_gaziyev</p>
-                  <p className="text-xs text-gray-400">{translations.by_telegram}</p>
+                  <p className="text-xs text-gray-400">{dictionary.by_telegram}</p>
                </a>
                <a href="tel:+998336450097" className="block group">
                   <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">+998 33 645 00 97</p>
-                  <p className="text-xs text-gray-400">{translations.by_phone}</p>
+                  <p className="text-xs text-gray-400">{dictionary.by_phone}</p>
                </a>
             </div>
           </div>
           
           {/* Main Page Links */}
           <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{translations.main_page}</h3>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.main_page}</h3>
             <ul className="mt-4 space-y-2">
               {mainPageLinks.map(link => (
                   <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
@@ -113,7 +88,7 @@ const Footer: FC<{ lang: string }> = ({ lang = 'uz' }) => {
 
           {/* Services */}
           <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{translations.services}</h3>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.services}</h3>
             <ul className="mt-4 space-y-2">
               {serviceLinks.map(link => (
                   <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
@@ -123,7 +98,7 @@ const Footer: FC<{ lang: string }> = ({ lang = 'uz' }) => {
 
           {/* Additional Links */}
           <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{translations.additional}</h3>
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.additional}</h3>
              <ul className="mt-4 space-y-2">
                 {additionalLinks.map(link => (
                     <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
@@ -151,7 +126,7 @@ const Footer: FC<{ lang: string }> = ({ lang = 'uz' }) => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden whitespace-nowrap"
                   >
-                    <span>{translations.all_rights_reserved}</span>
+                    <span>{dictionary.all_rights_reserved}</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -168,7 +143,7 @@ const Footer: FC<{ lang: string }> = ({ lang = 'uz' }) => {
 
            <div className="hidden lg:flex order-3">
               <button onClick={handleScrollTop} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
-                {translations.back_to_top} <ArrowUp size={16} />
+                {dictionary.back_to_top} <ArrowUp size={16} />
               </button>
            </div>
         </div>

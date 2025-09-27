@@ -1,4 +1,3 @@
-
 'use client';
 
 import type {FC} from 'react';
@@ -13,49 +12,11 @@ import Autoplay from "embla-carousel-autoplay";
 import React from 'react';
 import TiltCard from '../ui/tilt-card';
 
-
 interface HeroProps {
   onPrimaryClick: () => void;
   lang: string;
+  dictionary: any;
 }
-
-const t = {
-  uz: {
-    headlines: [
-      <>Brendingiz <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">sotmayaptimi?</span> Biz buni to'g'rilaymiz.</>,
-      <>Raqobatchilardan <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">keskin ajralib</span> turing.</>,
-      <>Brendingizni shunchaki “chiroyli” emas, <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">daromadli</span> qiling.</>,
-      <>Mijozlar sizni <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">sevib qolsin</span>. Qayta va qayta.</>,
-      <>Kichik biznesdan <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">kuchli brendgacha</span>. Bir qadamda.</>,
-    ],
-    description: <>Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span className="font-bold text-foreground">natija keltiradigan</span>, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.</>,
-    buttonTexts: [
-      "Brendimni tahlil qiling",
-      "Sotuvni oshirishga yordam bering",
-      "Bepul strategik konsultatsiya",
-      "Menga kuchli brend kerak"
-    ],
-    buttonHint: "Bepul. Majburiyatlarsiz."
-  },
-  ru: {
-    headlines: [
-      <>Ваш брендинг <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">не продает?</span> Мы это исправим.</>,
-      <>Выделитесь <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">на фоне конкурентов</span>.</>,
-      <>Сделайте ваш бренд не просто "красивым", а <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">прибыльным</span>.</>,
-      <>Пусть клиенты <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">влюбятся в вас</span>. Снова и снова.</>,
-      <>От малого бизнеса до <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">сильного бренда</span>. За один шаг.</>,
-    ],
-    description: <>Мы не просто рисуем логотипы. Мы строим <span className="font-bold text-foreground">результативную</span>, основанную на стратегии бренд-систему для вашего бизнеса, которая завоюет сердца ваших клиентов.</>,
-    buttonTexts: [
-      "Проанализировать мой бренд",
-      "Помогите увеличить продажи",
-      "Бесплатная стратегическая консультация",
-      "Мне нужен сильный бренд"
-    ],
-    buttonHint: "Бесплатно. Без обязательств."
-  }
-};
-
 
 const portfolioImages = [
   'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif',
@@ -66,8 +27,7 @@ const portfolioImages = [
 ];
 
 
-const Hero: FC<HeroProps> = ({ onPrimaryClick, lang }) => {
-  const translations = lang === 'ru' ? t.ru : t.uz;
+const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary }) => {
   const [headlineIndex, setHeadlineIndex] = useState(0);
   const [buttonIndex, setButtonIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -76,20 +36,20 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang }) => {
     const headlineInterval = setInterval(() => {
       setIsAnimating(true);
       setTimeout(() => {
-        setHeadlineIndex((prevIndex) => (prevIndex + 1) % translations.headlines.length);
+        setHeadlineIndex((prevIndex) => (prevIndex + 1) % dictionary.headlines.length);
         setIsAnimating(false);
       }, 500); // half a second for fade out
     }, 4000); // 4 seconds per headline
 
     const buttonInterval = setInterval(() => {
-      setButtonIndex((prevIndex) => (prevIndex + 1) % translations.buttonTexts.length);
+      setButtonIndex((prevIndex) => (prevIndex + 1) % dictionary.buttonTexts.length);
     }, 4000);
 
     return () => {
       clearInterval(headlineInterval);
       clearInterval(buttonInterval);
     };
-  }, [translations]);
+  }, [dictionary]);
 
   return (
     <section className="relative bg-background py-20 sm:py-28 lg:py-32 overflow-hidden">
@@ -103,20 +63,18 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang }) => {
                 <h1 data-testid="hero-title" className={cn(
                 "text-4xl leading-tight sm:text-5xl md:text-6xl font-extrabold text-foreground transition-opacity duration-500",
                 isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
-                )}>
-                {translations.headlines[headlineIndex]}
+                )} dangerouslySetInnerHTML={{ __html: dictionary.headlines[headlineIndex] }}>
                 </h1>
-                <p className="mx-auto lg:mx-0 mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground">
-                {translations.description}
+                <p className="mx-auto lg:mx-0 mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground" dangerouslySetInnerHTML={{ __html: dictionary.description }}>
                 </p>
                 <div className="mt-10 flex justify-center lg:justify-start">
                     <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-base px-8 py-6 shadow-lg">
-                        {translations.buttonTexts[buttonIndex]}
+                        {dictionary.buttonTexts[buttonIndex]}
                         <ArrowRight className="w-5 h-5"/>
                     </Button>
                 </div>
                 <div className="mt-6 text-sm text-muted-foreground">
-                    {translations.buttonHint}
+                    {dictionary.buttonHint}
                 </div>
             </div>
             <div className="hidden lg:flex justify-center items-center">

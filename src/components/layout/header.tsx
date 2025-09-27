@@ -1,11 +1,10 @@
-
 'use client';
 
 import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu, Phone, Send, X, Mail, Languages } from 'lucide-react';
+import { Menu, Phone, Send, X, Languages } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -30,57 +29,30 @@ import { UzFlagIcon } from '../icons/uz-flag';
 import { RuFlagIcon } from '../icons/ru-flag';
 import { ScrollArea } from '../ui/scroll-area';
 
-const t = {
-  uz: {
-    portfolio: 'Portfolio',
-    founder: 'Asoschi',
-    process: 'Jarayon',
-    blog: 'Blog',
-    services: 'Xizmatlar',
-    brand_strategy: 'Brend Strategiyasi',
-    brand_strategy_desc: "Brendingiz uchun poydevor — bozor tahlili, pozitsiyalash va kommunikatsiya.",
-    naming: 'Neyming',
-    naming_desc: "Brendingiz uchun unutilmas, kuchli va huquqiy jihatdan toza nom tanlash.",
-    corporate_style: 'Firma Uslubi',
-    corporate_style_desc: "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
-    packaging_design: 'Qadoq dizayni',
-    packaging_design_desc: "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
-    services_and_prices: 'Xizmatlar va Narxlar',
-    services_and_prices_desc: "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
-    contact_by_phone: 'Telefon orqali bog\'lanish',
-    contact_by_telegram: 'Telegram orqali yozish',
-    free_consultation: 'Bepul konsultatsiya',
-    open_menu: 'Menyuni ochish',
-    switch_lang: "Tilni o'zgartirish",
-    lang_ru: "Русский",
-    lang_uz: "O'zbekcha"
-  },
-  ru: {
-    portfolio: 'Портфолио',
-    founder: 'Основатель',
-    process: 'Процесс',
-    blog: 'Блог',
-    services: 'Услуги',
-    brand_strategy: 'Бренд-стратегия',
-    brand_strategy_desc: "Фундамент для вашего бренда — анализ рынка, позиционирование и коммуникация.",
-    naming: 'Нейминг',
-    naming_desc: "Выбор запоминающегося, сильного и юридически чистого названия для вашего бренда.",
-    corporate_style: 'Фирменный стиль',
-    corporate_style_desc: "Система логотипов, цветов и шрифтов, делающая ваш бренд узнаваемым.",
-    packaging_design: 'Дизайн упаковки',
-    packaging_design_desc: "Привлекательный дизайн, который выделит ваш продукт на полке.",
-    services_and_prices: 'Услуги и цены',
-    services_and_prices_desc: "Соберите свой пакет услуг и узнайте цену прямо сейчас.",
-    contact_by_phone: 'Связаться по телефону',
-    contact_by_telegram: 'Написать в Telegram',
-    free_consultation: 'Бесплатная консультация',
-    open_menu: 'Открыть меню',
-    switch_lang: "Сменить язык",
-    lang_ru: "Русский",
-    lang_uz: "O'zbekcha"
-  }
-};
-
+type Dictionary = {
+    portfolio: string;
+    founder: string;
+    process: string;
+    blog: string;
+    services: string;
+    brand_strategy: string;
+    brand_strategy_desc: string;
+    naming: string;
+    naming_desc: string;
+    corporate_style: string;
+    corporate_style_desc: string;
+    packaging_design: string;
+    packaging_design_desc: string;
+    services_and_prices: string;
+    services_and_prices_desc: string;
+    contact_by_phone: string;
+    contact_by_telegram: string;
+    free_consultation: string;
+    open_menu: string;
+    switch_lang: string;
+    lang_ru: string;
+    lang_uz: string;
+}
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -167,8 +139,7 @@ const ExpandingIconButton: FC<{
   );
 };
 
-
-const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
+const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const pathname = usePathname();
@@ -200,21 +171,19 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
     setMobileMenuOpen(false);
   };
 
-  const translations = lang === 'ru' ? t.ru : t.uz;
-
   const navItems = [
-    { href: `/${lang}/#portfolio`, label: translations.portfolio },
-    { href: `/${lang}/#founder`, label: translations.founder },
-    { href: `/${lang}/#process`, label: translations.process },
-    { href: `/${lang}/blog`, label: translations.blog },
+    { href: `/${lang}/#portfolio`, label: dictionary.portfolio },
+    { href: `/${lang}/#founder`, label: dictionary.founder },
+    { href: `/${lang}/#process`, label: dictionary.process },
+    { href: `/${lang}/blog`, label: dictionary.blog },
   ];
 
   const services = [
-    { title: translations.brand_strategy, href: `/${lang}/xizmatlar/brand-strategy`, description: translations.brand_strategy_desc },
-    { title: translations.naming, href: `/${lang}/xizmatlar/neyming`, description: translations.naming_desc },
-    { title: translations.corporate_style, href: `/${lang}/xizmatlar/firmenniy-stil`, description: translations.corporate_style_desc },
-    { title: translations.packaging_design, href: `/${lang}/xizmatlar/qadoq-dizayni`, description: translations.packaging_design_desc },
-    { title: translations.services_and_prices, href: `/${lang}/xizmatlar`, description: translations.services_and_prices_desc },
+    { title: dictionary.brand_strategy, href: `/${lang}/xizmatlar/brand-strategy`, description: dictionary.brand_strategy_desc },
+    { title: dictionary.naming, href: `/${lang}/xizmatlar/neyming`, description: dictionary.naming_desc },
+    { title: dictionary.corporate_style, href: `/${lang}/xizmatlar/firmenniy-stil`, description: dictionary.corporate_style_desc },
+    { title: dictionary.packaging_design, href: `/${lang}/xizmatlar/qadoq-dizayni`, description: dictionary.packaging_design_desc },
+    { title: dictionary.services_and_prices, href: `/${lang}/xizmatlar`, description: dictionary.services_and_prices_desc },
   ];
   
   const otherLang = lang === 'uz' ? 'ru' : 'uz';
@@ -245,7 +214,7 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
            <NavigationMenuList>
              <NavigationMenuItem>
               <NavigationMenuTrigger className={cn("bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10 focus:text-foreground data-[state=open]:bg-black/10")}>
-                {translations.services}
+                {dictionary.services}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -276,7 +245,7 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
         <div className="hidden items-center space-x-2 lg:flex">
             <ExpandingIconButton 
               icon={otherLang === 'ru' ? RuFlagIcon : UzFlagIcon}
-              text={otherLang === 'ru' ? translations.lang_ru : translations.lang_uz}
+              text={otherLang === 'ru' ? dictionary.lang_ru : dictionary.lang_uz}
               href={newPath}
               isLink={true}
               expandedWidth={120}
@@ -287,7 +256,7 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
             onClick={handleContactClick} 
             className="shadow-ocean"
           >
-             {translations.free_consultation}
+             {dictionary.free_consultation}
           </Button>
         </div>
         <div className="flex items-center gap-2 lg:hidden">
@@ -295,7 +264,7 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className={cn(scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">{translations.open_menu}</span>
+                <span className="sr-only">{dictionary.open_menu}</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
@@ -304,7 +273,7 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
               </SheetHeader>
                <ScrollArea className="h-full">
                 <nav className="flex flex-col gap-6 pt-10 pr-6">
-                    <div className="text-xl font-medium text-foreground">{translations.services}</div>
+                    <div className="text-xl font-medium text-foreground">{dictionary.services}</div>
                     <ul className="pl-4 space-y-4">
                         {services.map((service) => (
                         <li key={service.title}>
@@ -329,17 +298,17 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
                         </a>
                         <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
                         <Send size={20} />
-                        {translations.contact_by_telegram}
+                        {dictionary.contact_by_telegram}
                         </a>
                     </div>
                     <div className="flex gap-4">
                         <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4">
-                        {translations.free_consultation}
+                        {dictionary.free_consultation}
                         </Button>
                         <Link href={newPath} className="mt-4">
                         <Button variant="outline" size="icon" className="w-12 h-12">
                             {otherLang === 'ru' ? <RuFlagIcon /> : <UzFlagIcon />}
-                            <span className="sr-only">{translations.switch_lang}</span>
+                            <span className="sr-only">{dictionary.switch_lang}</span>
                         </Button>
                         </Link>
                     </div>
@@ -354,5 +323,3 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
 };
 
 export default Header;
-
-    

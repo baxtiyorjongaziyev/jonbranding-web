@@ -1,4 +1,3 @@
-
 'use client';
 
 import type { FC, ReactNode } from 'react';
@@ -8,10 +7,8 @@ import Hero from '@/components/sections/hero';
 import TrustedBy from '@/components/sections/trusted-by';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
-import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import Stats from '@/components/sections/stats';
-import { useExitIntent } from '@/hooks/use-exit-intent';
 import CtaBlock from '@/components/sections/cta-block';
 
 // Dynamically import components that are not immediately visible
@@ -88,7 +85,7 @@ const AnimatedSection: FC<{children: ReactNode}> = ({ children }) => {
 };
 
 
-const HomeComponent: FC<{ lang: string }> = ({ lang }) => {
+const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) => {
     const [isClient, setIsClient] = useState(false);
     const { tg } = useTelegram();
 
@@ -116,21 +113,6 @@ const HomeComponent: FC<{ lang: string }> = ({ lang }) => {
         setIsClient(true);
     }, []);
     
-    const t = {
-        uz: {
-            cta1_title: "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
-            cta1_desc: "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
-            cta1_button: "Mening biznesim uchun ham",
-        },
-        ru: {
-            cta1_title: "Ваш бренд может выглядеть так же.",
-            cta1_desc: "Выведите свой бизнес на новый уровень с помощью профессионального дизайна. Мы поможем найти идеальное решение для вашего бизнеса.",
-            cta1_button: "И для моего бизнеса тоже",
-        }
-    }
-    const translations = lang === 'ru' ? t.ru : t.uz;
-
-
     if (!isClient) {
         return (
             <div>
@@ -147,30 +129,30 @@ const HomeComponent: FC<{ lang: string }> = ({ lang }) => {
     return (
         <>
             <main>
-                <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} /></AnimatedSection>
-                <AnimatedSection><Stats lang={lang} /></AnimatedSection>
-                <AnimatedSection><TrustedBy lang={lang} /></AnimatedSection>
-                <AnimatedSection><TargetAudience lang={lang} /></AnimatedSection>
-                <AnimatedSection><Offer onCTAClick={handleOpenServiceModal} lang={lang}/></AnimatedSection>
-                <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
-                <AnimatedSection><Testimonials lang={lang} /></AnimatedSection>
-                <AnimatedSection><Gallery lang={lang} /></AnimatedSection>
+                <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} /></AnimatedSection>
+                <AnimatedSection><Stats lang={lang} dictionary={dictionary.stats} /></AnimatedSection>
+                <AnimatedSection><TrustedBy lang={lang} dictionary={dictionary.trustedBy} /></AnimatedSection>
+                <AnimatedSection><TargetAudience lang={lang} dictionary={dictionary.targetAudience} /></AnimatedSection>
+                <AnimatedSection><Offer onCTAClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.offer} /></AnimatedSection>
+                <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} /></AnimatedSection>
+                <AnimatedSection><Testimonials lang={lang} dictionary={dictionary.testimonials} /></AnimatedSection>
+                <AnimatedSection><Gallery lang={lang} dictionary={dictionary.gallery} /></AnimatedSection>
                 <AnimatedSection><Video /></AnimatedSection>
                  <AnimatedSection>
                     <CtaBlock 
-                        title={translations.cta1_title}
-                        description={translations.cta1_desc}
-                        buttonText={translations.cta1_button}
+                        title={dictionary.home.cta1_title}
+                        description={dictionary.home.cta1_desc}
+                        buttonText={dictionary.home.cta1_button}
                         onCtaClick={handleOpenModal}
                     />
                 </AnimatedSection>
-                <AnimatedSection><Founder lang={lang} /></AnimatedSection>
-                <AnimatedSection><Process onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
-                <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
-                <AnimatedSection><Faq lang={lang} /></AnimatedSection>
+                <AnimatedSection><Founder lang={lang} dictionary={dictionary.founder} /></AnimatedSection>
+                <AnimatedSection><Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} /></AnimatedSection>
+                <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} /></AnimatedSection>
+                <AnimatedSection><Faq lang={lang} dictionary={dictionary.faq} /></AnimatedSection>
             </main>
-            <ExitIntentModal onPrimaryClick={handleOpenServiceModal} lang={lang} />
-            <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} />
+            <ExitIntentModal onPrimaryClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.exitIntentModal} />
+            <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
         </>
     )
 };
