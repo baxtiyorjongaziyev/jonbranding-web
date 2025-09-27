@@ -213,7 +213,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
     } catch (e: any) {
        toast({
         title: translations.error_toast_title,
-        description: (translations.error_toast_desc as (msg: string) => string)(e.message || ''),
+        description: e.message || translations.error_server,
         variant: 'destructive',
       });
     } finally {
@@ -231,6 +231,11 @@ export default function TrademarkCalculator({ translations }: { translations: an
     setIsYuridik(false);
     setSpeed('oddiy');
     setHasEkspert(false);
+  };
+  
+  const getExtraClassesFeeLabel = () => {
+    const count = fees.classCount - 1;
+    return translations.extraClassesFee.replace('{count}', count.toString());
   };
 
   return (
@@ -358,7 +363,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
               <div className="font-semibold text-green-700">{translations.step2Title}</div>
               <Row label={translations.stateFeeBase} value={fees.step2Base} currency={translations.currency} />
               {fees.classCount > 1 && (
-                <Row label={translations.extraClassesFee(fees.classCount - 1)} value={fees.step2Extra} currency={translations.currency} />
+                <Row label={getExtraClassesFeeLabel()} value={fees.step2Extra} currency={translations.currency} />
               )}
               <Divider />
               <Row label={translations.step2Total} value={fees.step2} bold currency={translations.currency} />
@@ -369,7 +374,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
                 <div className="font-semibold text-amber-700">{translations.expediteTitle}</div>
                 <Row label={translations.expediteBaseFee} value={fees.expediteBase} currency={translations.currency} />
                 {fees.classCount>1 && (
-                  <Row label={translations.extraClassesFee(fees.classCount - 1)} value={fees.expediteExtra} currency={translations.currency} />
+                  <Row label={getExtraClassesFeeLabel()} value={fees.expediteExtra} currency={translations.currency} />
                 )}
                 <Divider />
                 <Row label={translations.expediteTotal} value={fees.expediteTotal} bold currency={translations.currency} />
@@ -381,7 +386,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
                 <div className="font-semibold text-purple-700">{translations.expertCheckTitle}</div>
                 <Row label={translations.expertBaseFee} value={fees.ekspertBase} currency={translations.currency} />
                 {fees.classCount>1 && (
-                  <Row label={translations.extraClassesFee(fees.classCount - 1)} value={fees.ekspertExtra} currency={translations.currency} />
+                  <Row label={getExtraClassesFeeLabel()} value={fees.ekspertExtra} currency={translations.currency} />
                 )}
                 <Divider />
                 <Row label={translations.expertTotal} value={fees.ekspertTotal} bold currency={translations.currency} />
@@ -390,7 +395,8 @@ export default function TrademarkCalculator({ translations }: { translations: an
 
             <div className="rounded-xl border border-amber-300 bg-amber-100/50 p-4 text-amber-900 text-xs">
               <div className="font-semibold mb-1">{translations.importantNoteTitle}</div>
-              <p>{translations.importantNoteText(BHM.toLocaleString())}</p>
+              <p>{translations.importantNoteText}</p>
+              <p>{translations.importantNoteBHM.replace("{bhm}", BHM.toLocaleString())}</p>
             </div>
           </div>
         </Card>
@@ -434,3 +440,4 @@ function Divider() {
 }
 
     
+
