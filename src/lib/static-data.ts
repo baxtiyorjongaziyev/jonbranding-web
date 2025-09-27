@@ -110,6 +110,41 @@ export const staticTestimonialsRu: Testimonial[] = [
   },
 ];
 
+export const staticTestimonialsEn: Testimonial[] = [
+  {
+    name: "Sherzod Beknazarov",
+    company: "Founder of Incontrol Consulting",
+    avatar: "SB",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
+    imageHint: "male business owner",
+    quote: "Taste, aesthetic taste. Is it innate or an acquired skill? Bakhtiyorjon is one of those with such an aesthetic sense - he helped us with the Incontrol and Sherzod Beknazarov logos. We want to thank Bakhtiyorjon. Thank you.",
+    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
+  },
+  {
+    name: "Sevara Kholmanova",
+    company: "Founder of Fidda by Sevara",
+    avatar: "SK",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
+    imageHint: "female entrepreneur portrait",
+    quote: "I worked with this team and I really liked it, it was effective and the result was even better than I expected. I ordered branding, stickers, and patenting. In 7 months, God willing, it will be ready. You work honestly, may Allah be pleased with you. I am very happy, success to your work. Thank you."
+  },
+  {
+    name: "Nodirbek",
+    company: "Founder of Barakah Restaurant",
+    avatar: "N",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
+    imageHint: "restaurant manager portrait",
+    quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! 🤝🏻😊"
+  },
+  {
+    name: "Javohir Haqberdiyev",
+    company: "Founder of Perfona",
+    avatar: "JH",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/67480e63648c1fa51ca4adff_A5%20-%201.jpg",
+    imageHint: "tech startup founder",
+    quote: "It turned out even better than I expected. I'm looking at the logo now and I'm enjoying it myself. What I liked was the trust. And the fact that it was delivered ahead of schedule was great. It's great that you shared the results quickly. Thanks a lot, aka!"
+  },
+];
 
 export const projects: Project[] = [
     { 

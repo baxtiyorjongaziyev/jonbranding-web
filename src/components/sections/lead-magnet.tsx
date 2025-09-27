@@ -10,84 +10,24 @@ import Link from 'next/link';
 interface LeadMagnetProps {
     onCtaClick: () => void;
     lang: string;
+    dictionary: any;
 }
 
-const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang }) => {
+const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
+  const translations = dictionary;
   
-  const t = {
-    uz: {
-        title: "Brendingizni Keyingi Bosqichga Olib Chiqing",
-        subtitle: "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.",
-        magnets: [
-          {
-            id: "pdf",
-            icon: FileText,
-            title: "Bepul PDF-Cheklist",
-            subtitle: "Brendingda 7 ta eng katta xato",
-            description: "Biznesingizda qanday xatolarga yo'l qo'ymaslik kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.",
-            cta: "PDF yuklab olish",
-            href: null,
-            action: 'onCtaClick'
-          },
-          {
-            id: "quiz",
-            icon: ListChecks,
-            title: "Mini-Test",
-            subtitle: "Biznesingiz brendga tayyormi?",
-            description: "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.",
-            cta: "Testni boshlash",
-            href: "/quiz",
-          },
-          {
-            id: "video",
-            icon: Film,
-            title: "Video Qo'llanma",
-            subtitle: "Strategik brending nima?",
-            description: "Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday natija keltirishini videoda ko'ring.",
-            cta: "Videoni ko'rish",
-            href: "#video",
-          },
-        ]
-    },
-    ru: {
-        title: "Выведите свой бренд на новый уровень",
-        subtitle: "Не знаете, с чего начать работу с нами? Мы подготовили для вас несколько бесплатных и полезных ресурсов. Изучите мир брендинга и сделайте первый шаг.",
-        magnets: [
-          {
-            id: "pdf",
-            icon: FileText,
-            title: "Бесплатный PDF-чек-лист",
-            subtitle: "7 самых больших ошибок в брендинге",
-            description: "Узнайте, каких ошибок следует избегать в вашем бизнесе, и получите практическое руководство по анализу вашего бренда.",
-            cta: "Скачать PDF",
-            href: null,
-            action: 'onCtaClick'
-          },
-          {
-            id: "quiz",
-            icon: ListChecks,
-            title: "Мини-тест",
-            subtitle: "Готов ли ваш бизнес к брендингу?",
-            description: "Ответьте на несколько вопросов и узнайте, насколько ваш бизнес готов к брендингу, его сильные и слабые стороны.",
-            cta: "Начать тест",
-            href: "/ru/quiz",
-          },
-          {
-            id: "video",
-            icon: Film,
-            title: "Видео-руководство",
-            subtitle: "Что такое стратегический брендинг?",
-            description: "Почему просто красивого логотипа недостаточно? Посмотрите в видео, какой результат наш подход принесет вашему бизнесу.",
-            cta: "Смотреть видео",
-            href: "#video",
-          },
-        ]
-    }
-  }
-  
-  const translations = lang === 'ru' ? t.ru : t.uz;
+  if (!translations) return null;
 
-  const handleClick = (magnet: (typeof translations.magnets)[0]) => {
+  const getIcon = (id: string) => {
+    switch (id) {
+      case 'pdf': return FileText;
+      case 'quiz': return ListChecks;
+      case 'video': return Film;
+      default: return FileText;
+    }
+  };
+
+  const handleClick = (magnet: any) => {
     if (magnet.action === 'onCtaClick') {
       onCtaClick();
     } else if (magnet.href?.startsWith('#')) {
@@ -109,36 +49,39 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang }) => {
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-          {translations.magnets.map((magnet) => (
-            <Card key={magnet.id} className="flex flex-col text-center shadow-lg rounded-2xl hover:shadow-xl transition-shadow bg-secondary/50">
-              <CardHeader className="items-center pb-4">
-                <div className="bg-primary/10 p-4 rounded-full">
-                  <magnet.icon className="w-8 h-8 text-primary" />
-                </div>
-                <CardTitle className="!mt-4 text-xl">{magnet.title}</CardTitle>
-                <CardDescription className="font-bold text-primary !mt-1 px-4">{magnet.subtitle}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow flex flex-col justify-between px-6 pb-6">
-                <p className="text-gray-600 mb-6">{magnet.description}</p>
-                {magnet.href && !magnet.href.startsWith('#') ? (
-                    <Link href={magnet.href} passHref>
-                        <Button asChild className="w-full shadow-md hover:shadow-lg transition-shadow">
-                           <span>
-                               {magnet.icon === ListChecks ? <ListChecks className="w-4 h-4 mr-2" /> : <Download className="w-4 h-4 mr-2" />}
+          {translations.magnets.map((magnet: any) => {
+            const Icon = getIcon(magnet.id);
+            return (
+              <Card key={magnet.id} className="flex flex-col text-center shadow-lg rounded-2xl hover:shadow-xl transition-shadow bg-secondary/50">
+                <CardHeader className="items-center pb-4">
+                  <div className="bg-primary/10 p-4 rounded-full">
+                    <Icon className="w-8 h-8 text-primary" />
+                  </div>
+                  <CardTitle className="!mt-4 text-xl">{magnet.title}</CardTitle>
+                  <CardDescription className="font-bold text-primary !mt-1 px-4">{magnet.subtitle}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex-grow flex flex-col justify-between px-6 pb-6">
+                  <p className="text-gray-600 mb-6">{magnet.description}</p>
+                  {magnet.href && !magnet.href.startsWith('#') ? (
+                      <Link href={magnet.href} passHref>
+                          <Button asChild className="w-full shadow-md hover:shadow-lg transition-shadow">
+                            <span>
+                                {magnet.id === 'quiz' ? <ListChecks className="w-4 h-4 mr-2" /> : <Download className="w-4 h-4 mr-2" />}
                                 {magnet.cta}
                                 <ArrowRight className="w-4 h-4 ml-2" />
-                           </span>
-                        </Button>
-                    </Link>
-                ) : (
-                    <Button onClick={() => handleClick(magnet)} className="w-full shadow-md hover:shadow-lg transition-shadow">
-                        {magnet.id === 'video' ? <Film className="w-4 h-4 mr-2" /> : <Download className="w-4 h-4 mr-2" />}
-                        {magnet.cta}
-                    </Button>
-                )}
-              </CardContent>
-            </Card>
-          ))}
+                            </span>
+                          </Button>
+                      </Link>
+                  ) : (
+                      <Button onClick={() => handleClick(magnet)} className="w-full shadow-md hover:shadow-lg transition-shadow">
+                          {magnet.id === 'video' ? <Film className="w-4 h-4 mr-2" /> : <Download className="w-4 h-4 mr-2" />}
+                          {magnet.cta}
+                      </Button>
+                  )}
+                </CardContent>
+              </Card>
+            )
+          })}
         </div>
       </div>
     </section>
