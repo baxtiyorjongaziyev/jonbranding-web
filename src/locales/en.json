@@ -238,10 +238,7 @@
            { "question": "What are the payment terms?", "answer": "The standard scheme is 50% prepayment, 50% after project delivery. We can also discuss individual terms for your convenience." },
            { "question": "How long does the work take?", "answer": "The timing depends on the type of service. For example, creating a logo takes 2-4 weeks, brand strategy starts from 8 weeks. The final deadline is determined after project approval." },
            { "question": "Is there support after the project is completed?", "answer": "Yes, within 1 month after the project completion, we provide free advice and assistance on the correct use of brand materials." }
-        ],
-        "ctaTitle": "Leave no room for doubt!",
-        "ctaDesc": "Got answers to all your questions? Let's discuss your project and take your brand to the next level.",
-        "ctaButton": "I got all the answers, ready to start!"
+        ]
     },
     "mobileCtaBar": {
         "final_price": "Final price",
