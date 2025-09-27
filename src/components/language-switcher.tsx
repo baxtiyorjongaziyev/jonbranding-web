@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -68,27 +69,30 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
         </div>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-1" role="menu" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-        {locales.map((locale) => {
-          if (locale === lang) return null; // Don't show current language
-          const Icon = localeIcons[locale];
-          return (
-            <Button
-                key={locale}
-                variant="ghost"
-                role="menuitem"
-                className={cn(
-                "justify-start gap-2 font-normal"
-                )}
-                onClick={() => handleLanguageChange(locale)}
-            >
-                <Icon />
-                {localeNames[locale]}
-            </Button>
-          );
-        })}
+        <div className="flex flex-col">
+          {locales.map((locale) => {
+            if (locale === lang) return null; // Don't show current language
+            const Icon = localeIcons[locale];
+            return (
+              <Button
+                  key={locale}
+                  variant="ghost"
+                  role="menuitem"
+                  className={cn(
+                  "justify-start gap-2 font-normal"
+                  )}
+                  onClick={() => handleLanguageChange(locale)}
+              >
+                  <Icon />
+                  {localeNames[locale]}
+              </Button>
+            );
+          })}
+        </div>
       </PopoverContent>
     </Popover>
   );
 };
 
 export default LanguageSwitcher;
+
