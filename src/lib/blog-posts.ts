@@ -7,11 +7,16 @@ import { type BlogPost } from '@/lib/types';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
 
-export function getSortedPostsData(): Omit<BlogPost, 'content' | 'htmlContent'>[] {
-  const fileNames = fs.readdirSync(postsDirectory);
+export function getSortedPostsData(lang: string = 'uz'): Omit<BlogPost, 'content' | 'htmlContent'>[] {
+  const langDirectory = path.join(postsDirectory, lang);
+  if (!fs.existsSync(langDirectory)) {
+    return [];
+  }
+  
+  const fileNames = fs.readdirSync(langDirectory);
   const allPostsData = fileNames.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
-    const fullPath = path.join(postsDirectory, fileName);
+    const fullPath = path.join(langDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const matterResult = matter(fileContents);
 
@@ -37,8 +42,12 @@ export function getSortedPostsData(): Omit<BlogPost, 'content' | 'htmlContent'>[
   });
 }
 
-export async function getPostData(slug: string): Promise<BlogPost> {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
+export async function getPostData(lang: string, slug: string): Promise<BlogPost | null> {
+  const fullPath = path.join(postsDirectory, lang, `${slug}.md`);
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
+  
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
   
@@ -59,10 +68,20 @@ export async function getPostData(slug: string): Promise<BlogPost> {
 }
 
 export function getAllPostSlugs() {
-  const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames.map((fileName) => {
-    return {
-      slug: fileName.replace(/\.md$/, ''),
-    };
+  const languages = fs.readdirSync(postsDirectory).filter(item => fs.statSync(path.join(postsDirectory, item)).isDirectory());
+  
+  const allSlugs: { slug: string, lang: string }[] = [];
+
+  languages.forEach(lang => {
+    const langDirectory = path.join(postsDirectory, lang);
+    const fileNames = fs.readdirSync(langDirectory);
+    fileNames.forEach(fileName => {
+      allSlugs.push({
+        lang,
+        slug: fileName.replace(/\.md$/, ''),
+      });
+    });
   });
+
+  return allSlugs;
 }

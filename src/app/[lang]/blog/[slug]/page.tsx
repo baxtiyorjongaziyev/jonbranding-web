@@ -10,8 +10,8 @@ type Props = {
   params: { slug: string; lang: string };
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const post = await getPostData(props.params.slug);
+export async function generateMetadata({ params: { slug, lang } }: Props): Promise<Metadata> {
+  const post = await getPostData(lang, slug);
 
   if (!post) {
     return {
@@ -19,7 +19,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     };
   }
   
-  const canonicalUrl = `https://jonbranding.uz/${props.params.lang === 'uz' ? '' : props.params.lang + '/'}blog/${post.slug}`;
+  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}blog/${post.slug}`;
 
 
   return {
@@ -80,8 +80,8 @@ const generateJsonLd = (post: BlogPost) => {
   };
 };
 
-const BlogPostPage = async (props: { params: { slug: string } }) => {
-  const post = await getPostData(props.params.slug);
+const BlogPostPage = async ({ params: { lang, slug } }: { params: { lang: string, slug: string } }) => {
+  const post = await getPostData(lang, slug);
 
   if (!post) {
     notFound();
