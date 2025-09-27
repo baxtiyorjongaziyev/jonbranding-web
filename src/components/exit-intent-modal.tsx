@@ -1,12 +1,13 @@
 
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useExitIntent } from '@/hooks/use-exit-intent';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Gift } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { getDictionary, Locale } from '@/lib/dictionaries';
 
 interface ExitIntentModalProps {
   onPrimaryClick: () => void;
@@ -16,6 +17,11 @@ interface ExitIntentModalProps {
 const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick, lang }) => {
   const [isOpen, setOpen] = useState(false);
   const router = useRouter();
+  const [translations, setTranslations] = useState<any>(null);
+
+  useEffect(() => {
+    getDictionary(lang as Locale).then(dict => setTranslations(dict.exitIntentModal));
+  }, [lang]);
   
   const handleClose = () => setOpen(false);
 
@@ -24,22 +30,17 @@ const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick, lang }) => 
     handleClose();
   }
 
-  useExitIntent(() => setOpen(true));
-  
-  const t = {
-    uz: {
-        title: "Ketishga shoshilmang!",
-        description: "Siz uchun maxsus taklifimiz bor. <br/>Bizda <span class='font-bold text-primary'>turli chegirmalar</span> mavjud. Imkoniyatdan foydalaning!",
-        button: "Chegirmalarni ko'rish"
-    },
-    ru: {
-        title: "Не спешите уходить!",
-        description: "У нас есть специальное предложение для вас. <br/>У нас действуют <span class='font-bold text-primary'>различные скидки</span>. Воспользуйтесь возможностью!",
-        button: "Посмотреть скидки"
+  useExitIntent(() => {
+    // Only trigger if not already shown in this session
+    if (!sessionStorage.getItem('exit_intent_shown')) {
+      setOpen(true);
+      sessionStorage.setItem('exit_intent_shown', 'true');
     }
+  });
+  
+  if (!translations) {
+    return null;
   }
-  const translations = lang === 'ru' ? t.ru : t.uz;
-
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>

@@ -223,9 +223,9 @@
         "title": "Take Your Brand to the Next Level",
         "subtitle": "Not sure where to start with us? We have prepared several free and useful resources for you. Explore the world of branding and take the first step.",
         "magnets": [
-          { "id": "pdf", "icon": "FileText", "title": "Free PDF-Checklist", "subtitle": "7 biggest mistakes in branding", "description": "Find out what mistakes to avoid in your business and get a practical guide to analyzing your brand.", "cta": "Download PDF", "action": "onCtaClick" },
-          { "id": "quiz", "icon": "ListChecks", "title": "Mini-Test", "subtitle": "Is your business ready for branding?", "description": "Answer a few questions and find out how ready your business is for branding, its strengths and weaknesses.", "cta": "Start the test", "href": "/en/quiz" },
-          { "id": "video", "icon": "Film", "title": "Video Guide", "subtitle": "What is strategic branding?", "description": "Why is just a beautiful logo not enough? See in the video what results our approach will bring to your business.", "cta": "Watch the video", "href": "#video" }
+          { "id": "pdf", "title": "Free PDF-Checklist", "subtitle": "7 biggest mistakes in branding", "description": "Find out what mistakes to avoid in your business and get a practical guide to analyzing your brand.", "cta": "Download PDF", "action": "onCtaClick", "href": null },
+          { "id": "quiz", "title": "Mini-Test", "subtitle": "Is your business ready for branding?", "description": "Answer a few questions and find out how ready your business is for branding, its strengths and weaknesses.", "cta": "Start the test", "href": "/en/quiz" },
+          { "id": "video", "title": "Video Guide", "subtitle": "What is strategic branding?", "description": "Why is just a beautiful logo not enough? See in the video what results our approach will bring to your business.", "cta": "Watch the video", "href": "#video" }
         ]
     },
     "faq": {
@@ -430,7 +430,10 @@
         "default": "Please select the 2 most important priorities for you."
       },
       "tooltip": "Deselect one first"
+    },
+    "exitIntentModal": {
+        "title": "Don't leave yet!",
+        "description": "We have a special offer for you. <br/>We have <span class='font-bold text-primary'>various discounts</span> available. Seize the opportunity!",
+        "button": "View Discounts"
     }
 }
-
-    

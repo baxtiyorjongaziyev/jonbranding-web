@@ -6,42 +6,15 @@ import { AlertTriangle, ArrowRight, ThumbsUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
-const TargetAudience = ({ lang }: { lang: string }) => {
+const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const handleOpenModal = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
   
-  const t = {
-      uz: {
-          title: "Bu muammolar sizga tanishmi?",
-          subtitle: "Agar quyidagi fikrlar sizni bezovta qilayotgan bo'lsa, demak, biz siz uchun to'g'ri yechimmiz.",
-          problems: [
-              { text: "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi." },
-              { text: "Brendim eskirgan, raqobatchilarimdan orqada qolyapman." },
-              { text: "Mijozlarim qiymatimni tushunmayapti, faqat narx so'rayapti." },
-              { text: "Sotuvlarim bor, lekin barqaror emas. Mijozlar qaytib kelmayapti." },
-          ],
-          solutionTitle: "Yaxshi yangilik: Bu muammolarning barchasini yechsa bo'ladi!",
-          solutionSubtitle: "To'g'ri qurilgan brend strategiyasi bu kabi muammolarni bartaraf etib, biznesingizni barqaror o'sish yo'liga olib chiqadi.",
-          solutionButton: "Barcha muammolar yechimini ko'rish"
-      },
-      ru: {
-          title: "Вам знакомы эти проблемы?",
-          subtitle: "Если следующие мысли вас беспокоят, значит, мы — правильное решение для вас.",
-          problems: [
-              { text: "У меня есть бизнес, но нет бренда. Меня никто не знает." },
-              { text: "Мой бренд устарел, я отстаю от конкурентов." },
-              { text: "Мои клиенты не понимают моей ценности, они спрашивают только цену." },
-              { text: "У меня есть продажи, но они нестабильны. Клиенты не возвращаются." },
-          ],
-          solutionTitle: "Хорошая новость: все эти проблемы можно решить!",
-          solutionSubtitle: "Правильно выстроенная бренд-стратегия устраняет подобные проблемы и выводит ваш бизнес на путь стабильного роста.",
-          solutionButton: "Увидеть решение всех проблем"
-      }
-  }
+  const translations = dictionary;
 
-  const translations = lang === 'ru' ? t.ru : t.uz;
+  if (!translations) return null;
 
   return (
     <section id="target-audience" className="py-16 sm:py-24 bg-secondary">
@@ -55,7 +28,7 @@ const TargetAudience = ({ lang }: { lang: string }) => {
         <div className="mt-12 max-w-4xl mx-auto">
             <Card className="p-6 sm:p-8 rounded-2xl shadow-lg bg-white">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {translations.problems.map((problem, index) => (
+                    {translations.problems.map((problem: any, index: number) => (
                         <Card key={index} className="bg-red-500/10 border-red-500/20 rounded-xl p-5">
                              <div className="flex items-start gap-4">
                                 <AlertTriangle className="h-6 w-6 text-red-600 flex-shrink-0 mt-1" />

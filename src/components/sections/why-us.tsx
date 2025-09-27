@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,7 +12,9 @@ interface WhyUsProps {
   lang: string;
 }
 
-const t = {
+
+const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang }) => {
+  const t = {
     uz: {
         title: "Nima uchun aynan biz?",
         subtitle: "Biz shunchaki va'da bermaymiz. Biz tizimli yondashuv orqali brendingiz uchun aniq qiymat yaratamiz.",
@@ -37,11 +38,22 @@ const t = {
         ctaTitle: "Вам нравится наш подход?",
         ctaDesc: "Давайте бесплатно проанализируем ваш бренд, определим его сильные и слабые стороны. Это не накладывает на вас никаких обязательств.",
         ctaButton: "Проанализировать мой бренд бесплатно"
+    },
+    en: {
+        title: "Why Us?",
+        subtitle: "We don't just make promises. We create tangible value for your brand through a systematic approach.",
+        values: [
+            { icon: Target, title: "Strategic Approach", description: "We don't just draw pretty pictures. Every design element serves to increase your sales and strengthen your brand." },
+            { icon: ListChecks, title: "Transparent Process", description: "Brief → Analysis → Strategy → Design → Delivery. We work closely with you at every stage, giving you full control." },
+            { icon: Star, title: "Results and Loyalty", description: "Over 50 projects, and most importantly - 90% of our clients recommend us. This is our greatest achievement." }
+        ],
+        ctaTitle: "Do you like our approach?",
+        ctaDesc: "Let's analyze your brand for free to identify its strengths and weaknesses. No strings attached.",
+        ctaButton: "Analyze My Brand for Free"
     }
-}
+  }
 
-const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang }) => {
-  const translations = lang === 'ru' ? t.ru : t.uz;
+  const translations = t[lang as 'uz' | 'ru' | 'en'];
   const values = translations.values;
   
   return (

@@ -7,7 +7,7 @@ import { useLocalStorage } from '@/hooks/use-local-storage';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
-const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string }> = ({ onOpenModal, lang }) => {
+const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string, dictionary: any }> = ({ onOpenModal, lang, dictionary }) => {
   const [selectedServices] = useLocalStorage('selectedServices', {
     strategy: false,
     commStrategy: false,
@@ -28,19 +28,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string }> = ({ onOpenMod
   const [wantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
   const [price, setPrice] = useState(0);
   const [isClient, setIsClient] = useState(false);
-  
-  const t = {
-    uz: {
-        final_price: "Yakuniy narx",
-        get_offer: "Murojaat qoldirish"
-    },
-    ru: {
-        final_price: "Итоговая цена",
-        get_offer: "Оставить заявку"
-    }
-  }
-  const translations = lang === 'ru' ? t.ru : t.uz;
-
+  const translations = dictionary;
 
   useEffect(() => {
     setIsClient(true);
@@ -48,12 +36,12 @@ const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string }> = ({ onOpenMod
 
   useEffect(() => {
     if (isClient) {
-      const priceDetails = calculatePackagePrice({ selectedServices, wantsUpfrontPayment });
+      const priceDetails = calculatePackagePrice({ selectedServices, wantsUpfrontPayment }, lang as 'uz' | 'ru' | 'en');
       setPrice(priceDetails.final);
     }
-  }, [selectedServices, wantsUpfrontPayment, isClient]);
+  }, [selectedServices, wantsUpfrontPayment, isClient, lang]);
 
-  if (!isClient) {
+  if (!isClient || !translations) {
     return (
         <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
             <div className="container mx-auto flex justify-between items-center">
@@ -66,12 +54,15 @@ const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string }> = ({ onOpenMod
         </div>
     );
   }
+  
+  const currency = lang === 'uz' ? "so'm" : lang === 'ru' ? 'сум' : 'sum';
+  const agreedPriceText = lang === 'uz' ? 'Kelishiladi' : lang === 'ru' ? 'По догов.' : 'Agreed';
 
   return (
     <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-sm">
-            <p className="font-bold text-primary text-lg">{price > 0 ? price.toLocaleString('fr-FR') + ' so\'m' : 'Kelishiladi'}</p>
+            <p className="font-bold text-primary text-lg">{price > 0 ? price.toLocaleString('fr-FR') + ` ${currency}` : agreedPriceText}</p>
             <p className="text-xs text-muted-foreground">{translations.final_price}</p>
         </div>
         <Button onClick={onOpenModal} className="shadow-ocean animate-subtle-pulse">

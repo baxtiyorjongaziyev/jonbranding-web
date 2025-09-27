@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 interface ProcessProps {
   onCtaClick: () => void;
   lang: string;
+  dictionary: any;
 }
 
 const ProcessCard = ({ title, description, tasks, phase }: {title: string, description: string, tasks: string[], phase: string}) => (
@@ -69,109 +70,18 @@ const MobileProcessView = ({ phases, title, subtitle }: { phases: any[], title: 
 );
 
 
-const Process: React.FC<ProcessProps> = ({ onCtaClick, lang }) => {
+const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
-  
-  const t = {
-    uz: {
-        title: "Bizning ish jarayonimiz",
-        subtitle: "Har bir loyihada biz sinovdan o'tgan, shaffof va samarali jarayonni qo'llaymiz.",
-        phases: [
-          {
-            phase: "01",
-            title: "Kashfiyot",
-            description: "Sayohatning boshlanishi",
-            tasks: ["Briflash", "Biznes muammolarini aniqlash", "Auditoriya ehtiyojlari", "Bozor va raqobatchilar tahlili", "Ilhom va g‘oyalar yig‘ish"],
-          },
-          {
-            phase: "02",
-            title: "Strategiya",
-            description: "Yo‘lni xaritaga solish",
-            tasks: ["Maqsad qo‘yish", "Auditoriya tahlili", "Brendni joylashtirish", "Asosiy tamoyillar", "Rejalashtirish", "Brend vizyoni"],
-          },
-          {
-            phase: "03",
-            title: "Ijodiy Dizayn",
-            description: "Brendni shakllantirish",
-            tasks: ["Neyming", "Logo dizayni", "Vizual konsepsiya", "Qadoqlash dizayni", "Brandbook"],
-          },
-          {
-            phase: "04",
-            title: "Taqdimot",
-            description: "G'oyalarni sinovdan o'tkazish",
-            tasks: ["Dizayn taqdimoti", "Fikr-mulohazalarni moslashtirish", "Yakuniy iteratsiya"],
-          },
-          {
-            phase: "05",
-            title: "Amaliyot",
-            description: "Brendni hayotga tadbiq etish",
-            tasks: ["Tayyor dizayn fayllari", "Brandbook topshirish", "Vizual qo‘llanmalar"],
-          },
-          {
-            phase: "06",
-            title: "Rivojlanish",
-            description: "Brendni qo'llab-quvvatlash",
-            tasks: ["Tatbiq qilish bo‘yicha yo‘riqnoma", "Doimiy qo‘llab-quvvatlash", "Keyingi qadamlar"],
-          },
-        ],
-        ctaTitle: "Loyihangizni muhokama qilishga tayyormisiz?",
-        ctaDesc: "Keling, g'oyalaringizni hayotga tatbiq etishni boshlaymiz.",
-        ctaButton: "Loyihani muhokama qilish"
-    },
-    ru: {
-        title: "Наш рабочий процесс",
-        subtitle: "В каждом проекте мы используем проверенный, прозрачный и эффективный процесс.",
-        phases: [
-            {
-                phase: "01",
-                title: "Открытие",
-                description: "Начало путешествия",
-                tasks: ["Брифинг", "Выявление бизнес-проблем", "Потребности аудитории", "Анализ рынка и конкурентов", "Сбор вдохновения и идей"],
-            },
-            {
-                phase: "02",
-                title: "Стратегия",
-                description: "Прокладывание пути",
-                tasks: ["Постановка целей", "Анализ аудитории", "Позиционирование бренда", "Основные принципы", "Планирование", "Видение бренда"],
-            },
-            {
-                phase: "03",
-                title: "Креативный Дизайн",
-                description: "Формирование бренда",
-                tasks: ["Нейминг", "Дизайн логотипа", "Визуальная концепция", "Дизайн упаковки", "Брендбук"],
-            },
-            {
-                phase: "04",
-                title: "Презентация",
-                description: "Тестирование идей",
-                tasks: ["Презентация дизайна", "Адаптация на основе отзывов", "Финальная итерация"],
-            },
-            {
-                phase: "05",
-                title: "Реализация",
-                description: "Воплощение бренда в жизнь",
-                tasks: ["Готовые файлы дизайна", "Передача брендбука", "Визуальные руководства"],
-            },
-            {
-                phase: "06",
-                title: "Развитие",
-                description: "Поддержка бренда",
-                tasks: ["Инструкции по внедрению", "Постоянная поддержка", "Следующие шаги"],
-            },
-        ],
-        ctaTitle: "Готовы обсудить ваш проект?",
-        ctaDesc: "Давайте начнем воплощать ваши идеи в жизнь.",
-        ctaButton: "Обсудить проект"
-    }
-  }
-  const translations = lang === 'ru' ? t.ru : t.uz;
+  const translations = dictionary;
 
   const x = useTransform(scrollYProgress, [0.1, 0.9], ['0%', '-83.33%']);
   const ctaOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
   const ctaY = useTransform(scrollYProgress, [0.9, 1], ["50px", "0px"]);
+
+  if (!translations) return null;
 
   return (
     <section id="process" className="py-16 sm:py-24 bg-white">
@@ -190,7 +100,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang }) => {
                 </div>
                 
                 <motion.div style={{ x }} className="flex">
-                    {translations.phases.map((phase, index) => (
+                    {translations.phases.map((phase: any, index: number) => (
                         <ProcessCard key={index} {...phase} />
                     ))}
                 </motion.div>

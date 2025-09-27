@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { type Testimonial } from '@/lib/types';
 import Autoplay from "embla-carousel-autoplay";
-import { staticTestimonials, staticTestimonialsRu } from '@/lib/static-data';
+import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn } from '@/lib/static-data';
 
 const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     
@@ -50,25 +50,15 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     );
 };
 
-const TestimonialsClient = ({ testimonials, lang }: { testimonials: Testimonial[], lang: string }) => {
+const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: Testimonial[], dictionary: any, lang: string }) => {
     const autoplayPlugin = useRef(
       Autoplay({ delay: 5000, stopOnInteraction: true })
     );
     const [playVideo, setPlayVideo] = useState(false);
     
-    const t = {
-        uz: {
-            title: "Mijozlarimiz biz haqimizda",
-            subtitle: "Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz."
-        },
-        ru: {
-            title: "Что о нас говорят клиенты",
-            subtitle: "Наше самое большое достижение — это наши довольные клиенты."
-        }
-    }
-    const translations = lang === 'ru' ? t.ru : t.uz;
+    const translations = dictionary;
     
-    if (!testimonials || testimonials.length === 0) {
+    if (!testimonials || testimonials.length === 0 || !translations) {
       return null;
     }
 
@@ -118,7 +108,7 @@ const TestimonialsClient = ({ testimonials, lang }: { testimonials: Testimonial[
                                     frameBorder="0"
                                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                                     className="absolute inset-0 w-full h-full"
-                                    title={videoTestimonial.name + " - Baxtiyorjon Gaziyev haqida fikrlari"}
+                                    title={videoTestimonial.name + " - testimonial"}
                                 ></iframe>
                                 </div>
                             ) : (
@@ -162,9 +152,9 @@ const TestimonialsClient = ({ testimonials, lang }: { testimonials: Testimonial[
   )
 }
 
-const Testimonials = ({ lang }: { lang: string }) => {
-    const testimonials = lang === 'ru' ? staticTestimonialsRu : staticTestimonials;
-    return <TestimonialsClient testimonials={testimonials} lang={lang} />
+const Testimonials = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
+    const testimonials = lang === 'ru' ? staticTestimonialsRu : (lang === 'en' ? staticTestimonialsEn : staticTestimonials);
+    return <TestimonialsClient testimonials={testimonials} dictionary={dictionary} lang={lang} />
 };
 
 export default Testimonials;

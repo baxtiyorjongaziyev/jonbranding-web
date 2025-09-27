@@ -58,7 +58,7 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
     );
 };
 
-const TrustedBy: React.FC<{ lang: string }> = ({ lang }) => {
+const TrustedBy: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) => {
     const brands = staticBrands;
     const numBrands = brands.length;
     const third = Math.ceil(numBrands / 3);
@@ -66,11 +66,9 @@ const TrustedBy: React.FC<{ lang: string }> = ({ lang }) => {
     const brandsMiddleRow = brands.slice(third, third * 2);
     const brandsBottomRow = brands.slice(third * 2);
 
-    const t = {
-        uz: "Bizga ishonch bildirgan kompaniyalar",
-        ru: "Компании, которые нам доверяют"
-    }
-    const title = lang === 'ru' ? t.ru : t.uz;
+    const title = dictionary?.title;
+    
+    if (!title) return null;
 
   return (
     <section className="py-16 sm:py-24 bg-white overflow-hidden">

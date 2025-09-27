@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 interface OfferProps {
   onCTAClick: () => void;
   lang: string;
+  dictionary: any;
 }
 
 const LiquidBlob = ({ className, style, transition }: { className: string, style: React.CSSProperties, transition: object }) => (
@@ -27,25 +28,10 @@ const LiquidBlob = ({ className, style, transition }: { className: string, style
 );
 
 
-const Offer: FC<OfferProps> = ({ onCTAClick, lang }) => {
+const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
+    const translations = dictionary;
     
-    const t = {
-        uz: {
-            subtitle: "Strategik Imkoniyat",
-            title: "Yaxlit brending — bu shunchaki chegirma emas, bu strategik ustunlik.",
-            description: "Brending bu — qismlarga bo'lib bo'lmaydigan yaxlit tizim. Xizmatlarimizdan bir martada <strong>3 yoki undan ortiq asosiy yo'nalishni</strong> tanlab, siz nafaqat umumiy summadan <strong>kafolatlangan -20% tejaysiz</strong>, balki bundan ham muhimi — brendingiz uchun <strong>yagona, kuchli va izchil poydevor</strong> qurasiz. Bu premium agentliklarga nisbatan ikki karra foyda degani!",
-            button: "O'z to'plamimni yaratish",
-            note: "*Chegirma xizmatlar bo'limida to'plamingizni yig'ganingizdan so'ng avtomatik tarzda hisoblanadi."
-        },
-        ru: {
-            subtitle: "Стратегическая возможность",
-            title: "Целостный брендинг — это не просто скидка, это стратегическое преимущество.",
-            description: "Брендинг — это целостная система, которую нельзя делить на части. Выбирая <strong>3 или более основных направлений</strong> наших услуг единовременно, вы не только <strong>гарантированно экономите -20%</strong> от общей суммы, но и, что более важно, строите <strong>единый, сильный и последовательный фундамент</strong> для вашего бренда. Это двойная выгода по сравнению с премиум-агентствами!",
-            button: "Создать свой пакет",
-            note: "*Скидка будет рассчитана автоматически после того, как вы соберете свой пакет в разделе услуг."
-        }
-    }
-    const translations = lang === 'ru' ? t.ru : t.uz;
+    if (!translations) return null;
 
     return (
         <section id="offer" className="relative py-20 sm:py-28 bg-dark-blue text-white overflow-hidden">
