@@ -487,6 +487,41 @@
             "whyPremiumDesc": "We compare ourselves only with top-tier companies that have a strategic approach. Our goal is not just to be cheaper, but to provide premium quality at an affordable price. Comparing with agencies that do not match our level of quality and strategy would be incorrect for both the client and us."
         }
     },
+    "packageBuilder": {
+        "title": "Services and Prices",
+        "subtitle": "Here are the approximate starting prices for our services. As each company is unique, the final price depends on the complexity of the project, scope of work, and your tasks.",
+        "categories": {
+            "tripwire": "First Step (Quick Services)",
+            "main": "Our Main Services",
+            "additional": "Additional Services",
+            "options": "Special Conditions"
+        },
+        "discount_alert_title": "Package Discount!",
+        "discount_alert_desc": "Choose <strong>3 or more</strong> services from this section and get a <strong>-20% discount</strong> on the total amount!",
+        "your_package": "Your Package",
+        "your_package_desc": "Select the services that suit you.",
+        "select_services": "Select services",
+        "selected": "Selected",
+        "select": "Select",
+        "services_total": "Services total:",
+        "upfront_discount_title": "-10% for upfront payment",
+        "upfront_discount_desc": "Make a 100% upfront payment for the project",
+        "final_price": "Final price:",
+        "order_with_discount": "Order with discount",
+        "get_free_consultation": "Get free consultation",
+        "satisfaction_guarantee": "100% Satisfaction Guarantee",
+        "satisfaction_guarantee_desc": "If you don't like the initial concepts, we will refund your payment.",
+        "not_public_offer": "This is not a public offer",
+        "not_public_offer_desc": "Prices are for informational purposes. The final price will be fixed in the contract.",
+        "total_savings": "Your total savings",
+        "gift_title": "Gift!",
+        "agreed_price": "On Request",
+        "currency": "sum",
+        "surcharges": {
+            "urgency": "Urgency surcharge (+50%)",
+            "nda": "NDA surcharge (+25%)"
+        }
+    },
     "pickTwoSelector": {
       "title": "Pick two of the three",
       "subtitle": "Price—Quality—Speed: you can rarely have all three at the same time.",
@@ -510,4 +545,3 @@
         "button": "View Discounts"
     }
 }
-
