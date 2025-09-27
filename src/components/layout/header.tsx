@@ -91,7 +91,7 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 
-const ExpandingButton = ({ children, text }: { children: React.ReactNode, text: string }) => {
+const ExpandingButton = ({ children, text, scrolled }: { children: React.ReactNode, text: string, scrolled: boolean }) => {
     const [isHovered, setHovered] = useState(false);
     return (
         <motion.div
@@ -99,7 +99,14 @@ const ExpandingButton = ({ children, text }: { children: React.ReactNode, text: 
             onHoverEnd={() => setHovered(false)}
             className="relative"
         >
-            <Button variant="outline" className="gap-2 overflow-hidden w-[40px] h-[40px] p-0 flex items-center justify-center" asChild>
+            <Button 
+                variant="outline"
+                className={cn(
+                    "gap-2 overflow-hidden w-[40px] h-[40px] p-0 flex items-center justify-center transition-colors duration-300",
+                    scrolled ? "text-foreground border-black/20 hover:bg-black/10" : "text-foreground border-white/20 hover:bg-white/10"
+                 )} 
+                asChild
+            >
                  <motion.div
                     animate={{ width: isHovered ? 'auto' : 40 }}
                     transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
@@ -215,7 +222,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <NavigationMenu className="hidden lg:flex">
            <NavigationMenuList>
              <NavigationMenuItem>
-              <NavigationMenuTrigger className={cn("bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10 focus:text-foreground data-[state=open]:bg-black/10")}>
+              <NavigationMenuTrigger className={cn("bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
                 {dictionary.services}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -234,7 +241,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             </NavigationMenuItem>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.label}>
-                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled && "text-foreground hover:bg-black/10 hover:text-foreground focus:bg-black/10")}>
+                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
                   <Link href={item.href}>
                     {item.label}
                   </Link>
@@ -248,7 +255,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <div>
-                        <ExpandingButton text={languageOptions[lang as 'uz' | 'ru' | 'en']?.label}>
+                        <ExpandingButton text={languageOptions[lang as 'uz' | 'ru' | 'en']?.label} scrolled={scrolled}>
                             <CurrentLangIcon />
                         </ExpandingButton>
                     </div>
@@ -270,13 +277,13 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             </DropdownMenu>
 
             <a href="tel:+998336450097" aria-label={dictionary.contact_by_phone}>
-                <ExpandingButton text="+998 33 645 00 97">
+                <ExpandingButton text="+998 33 645 00 97" scrolled={scrolled}>
                     <Phone />
                 </ExpandingButton>
             </a>
             
             <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" aria-label={dictionary.contact_by_telegram}>
-                <ExpandingButton text="@baxtiyorjon_gaziyev">
+                <ExpandingButton text="@baxtiyorjon_gaziyev" scrolled={scrolled}>
                      <Send />
                 </ExpandingButton>
             </a>
@@ -363,6 +370,3 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 };
 
 export default Header;
-
-
-    
