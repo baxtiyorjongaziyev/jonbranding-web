@@ -147,5 +147,104 @@
       "cta1_title": "Your brand could look this good too.",
       "cta1_desc": "Take your business to the next level with professional design. We'll help find the perfect solution for your business.",
       "cta1_button": "For my business too"
+    },
+    "stats": {
+        "experience": "Years of experience",
+        "clients": "Satisfied clients",
+        "projects": "Successful projects",
+        "recommend": "Clients recommend us"
+    },
+    "trustedBy": {
+        "title": "Companies that trust us"
+    },
+    "targetAudience": {
+        "title": "Are these problems familiar to you?",
+        "subtitle": "If the following thoughts bother you, then we are the right solution for you.",
+        "problems": [
+            { "text": "I have a business, but no brand. Nobody knows me." },
+            { "text": "My brand is outdated, I'm falling behind competitors." },
+            { "text": "My customers don't understand my value, they only ask for the price." },
+            { "text": "I have sales, but they are not stable. Customers are not coming back." }
+        ],
+        "solutionTitle": "Good news: All these problems can be solved!",
+        "solutionSubtitle": "A well-built brand strategy eliminates such problems and puts your business on the path of stable growth.",
+        "solutionButton": "See the solution to all problems"
+    },
+    "offer": {
+        "subtitle": "Strategic Opportunity",
+        "title": "Holistic branding is not just a discount, it's a strategic advantage.",
+        "description": "Branding is a holistic system that cannot be divided into parts. By choosing <strong>3 or more main areas</strong> of our services at once, you not only <strong>get a guaranteed -20% discount</strong> on the total amount, but more importantly, you build a <strong>single, strong, and consistent foundation</strong> for your brand. This is a double benefit compared to premium agencies!",
+        "button": "Create my package",
+        "note": "*The discount will be calculated automatically after you build your package in the services section."
+    },
+    "beforeAfter": {
+        "title": "Before and After",
+        "subtitle": "See for yourself how proper branding can transform your business.",
+        "ctaTitle": "Is your brand also ready for a change?",
+        "ctaDesc": "Let's analyze your brand and create a plan to take it to the next level.",
+        "ctaButton": "Transform my brand too"
+    },
+    "testimonials": {
+        "title": "What Our Clients Say About Us",
+        "subtitle": "Our greatest achievement is our satisfied clients."
+    },
+    "gallery": {
+        "title": "Examples of Our Work",
+        "subtitle": "See how the brands we create stand out in their niche."
+    },
+    "founder": {
+        "title": "Founder: Baxtiyorjon Gaziyev",
+        "message": "Hello! I'm Baxtiyorjon, the founder of Jon.Branding. I help business owners take their brands to the next level. My goal is not just to create a beautiful design, but to build a results-driven, strategy-based brand system for your business. Let's analyze your brand together and awaken its 'sleeping' potential.",
+        "points": [
+            { "icon": "Medal", "text": "Over 50+ projects" },
+            { "icon": "Globe", "text": "International experience" },
+            { "icon": "Zap", "text": "Fast and effective communication" },
+            { "icon": "Users", "text": "Clear and transparent work process" }
+        ],
+        "phoneButton": "Contact by Phone",
+        "telegramButton": "Write on Telegram"
+    },
+    "process": {
+        "title": "Our Work Process",
+        "subtitle": "In every project, we use a proven, transparent, and effective process.",
+        "phases": [
+          { "phase": "01", "title": "Discovery", "description": "The beginning of the journey", "tasks": ["Briefing", "Identifying business problems", "Audience needs", "Market and competitor analysis", "Gathering inspiration and ideas"] },
+          { "phase": "02", "title": "Strategy", "description": "Mapping the path", "tasks": ["Goal setting", "Audience analysis", "Brand positioning", "Core principles", "Planning", "Brand vision"] },
+          { "phase": "03", "title": "Creative Design", "description": "Shaping the brand", "tasks": ["Naming", "Logo design", "Visual concept", "Packaging design", "Brandbook"] },
+          { "phase": "04", "title": "Presentation", "description": "Testing the ideas", "tasks": ["Design presentation", "Adjusting based on feedback", "Final iteration"] },
+          { "phase": "05", "title": "Implementation", "description": "Bringing the brand to life", "tasks": ["Ready design files", "Brandbook handover", "Visual guides"] },
+          { "phase": "06", "title": "Growth", "description": "Supporting the brand", "tasks": ["Implementation guidance", "Ongoing support", "Next steps"] }
+        ],
+        "ctaTitle": "Ready to discuss your project?",
+        "ctaDesc": "Let's start bringing your ideas to life.",
+        "ctaButton": "Discuss the project"
+    },
+    "leadMagnet": {
+        "title": "Take Your Brand to the Next Level",
+        "subtitle": "Not sure where to start with us? We have prepared several free and useful resources for you. Explore the world of branding and take the first step.",
+        "magnets": [
+          { "id": "pdf", "icon": "FileText", "title": "Free PDF-Checklist", "subtitle": "7 biggest mistakes in branding", "description": "Find out what mistakes to avoid in your business and get a practical guide to analyzing your brand.", "cta": "Download PDF", "action": "onCtaClick" },
+          { "id": "quiz", "icon": "ListChecks", "title": "Mini-Test", "subtitle": "Is your business ready for branding?", "description": "Answer a few questions and find out how ready your business is for branding, its strengths and weaknesses.", "cta": "Start the test", "href": "/en/quiz" },
+          { "id": "video", "icon": "Film", "title": "Video Guide", "subtitle": "What is strategic branding?", "description": "Why is just a beautiful logo not enough? See in the video what results our approach will bring to your business.", "cta": "Watch the video", "href": "#video" }
+        ]
+    },
+    "faq": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Answers to the most common questions about the branding process, prices, and other topics.",
+        "faqItems": [
+           { "question": "Why are the prices not fixed?", "answer": "Every project is unique. The price is calculated individually depending on the complexity of the project, the scope of work, and your tasks. We offer the best solution for your brand." },
+           { "question": "How is the work process structured?", "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is agreed upon with you, and you have full control over the process." },
+           { "question": "Can I order just a logo?", "answer": "We create not just a logo, but a complete identification system that makes the brand recognizable and effective. This creates long-term value for your business." },
+           { "question": "What are the payment terms?", "answer": "The standard scheme is 50% prepayment, 50% after project delivery. We can also discuss individual terms for your convenience." },
+           { "question": "How long does the work take?", "answer": "The timing depends on the type of service. For example, creating a logo takes 2-4 weeks, brand strategy starts from 8 weeks. The final deadline is determined after project approval." },
+           { "question": "Is there support after the project is completed?", "answer": "Yes, within 1 month after the project completion, we provide free advice and assistance on the correct use of brand materials." }
+        ],
+        "ctaTitle": "Leave no room for doubt!",
+        "ctaDesc": "Got answers to all your questions? Let's discuss your project and take your brand to the next level.",
+        "ctaButton": "I got all the answers, ready to start!"
+    },
+    "mobileCtaBar": {
+        "final_price": "Final price",
+        "get_offer": "Send Request"
     }
 }

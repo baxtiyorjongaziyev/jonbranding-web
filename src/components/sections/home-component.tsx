@@ -113,7 +113,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
         setIsClient(true);
     }, []);
     
-    if (!isClient || !dictionary.home) {
+    if (!isClient) {
         return (
             <div>
                 <Skeleton className="h-20 w-full" />
