@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useMemo, type FC } from 'react';
@@ -53,6 +54,18 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
     }
   }, [selected, isClient]);
 
+  const result = useMemo(() => {
+    if (!translations) {
+      return { key: 'default', message: 'Loading...' };
+    }
+    const messages = translations.messages;
+    if (selected.length < 2) {
+      return { key: 'default', message: messages.default };
+    }
+    const sorted = [...selected].sort().join('_') as keyof typeof messages;
+    return { key: sorted, message: messages[sorted] || messages.default };
+  }, [selected, translations]);
+
   if (!translations) {
     return <section className="py-16 sm:py-24 bg-white"><div className="container">Loading...</div></section>;
   }
@@ -83,14 +96,6 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
         if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const result = useMemo(() => {
-    if (selected.length < 2) {
-      return { key: 'default', message: messages.default };
-    }
-    const sorted = [...selected].sort().join('_') as keyof typeof messages;
-    return { key: sorted, message: messages[sorted] || messages.default };
-  }, [selected, messages]);
 
   return (
     <section className="py-16 sm:py-24 bg-white">
