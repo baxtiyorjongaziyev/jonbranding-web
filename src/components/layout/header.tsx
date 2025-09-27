@@ -265,7 +265,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div className="hidden items-center space-x-2 lg:flex">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className={cn("gap-2", scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}>
+                    <Button variant="ghost" className={cn("gap-2 border-0", scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}>
                         <CurrentLangIcon />
                         <span>{languageOptions[lang as 'uz' | 'ru' | 'en']?.label}</span>
                         <ChevronDown className="h-4 w-4" />
