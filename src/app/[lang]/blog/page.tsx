@@ -5,25 +5,15 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
-import { uz, ru } from 'date-fns/locale';
+import { uz, ru, enUS } from 'date-fns/locale';
+import { getDictionary, Locale } from '@/lib/dictionaries';
 
 const BlogPage = async ({ params: { lang } }: { params: { lang: string } }) => {
   const sortedPosts = getSortedPostsData(lang);
+  const dictionary = await getDictionary(lang as Locale);
+  const translations = dictionary.blog;
   
-  const t = {
-    uz: {
-      title: "Bizning Blog",
-      subtitle: "Brending, marketing va dizayn olamidagi so'nggi yangiliklar, maslahatlar va tahliliy maqolalar. Biznesingizni o'stirishga yordam beramiz.",
-      readMore: "Batafsil o'qish"
-    },
-    ru: {
-      title: "Наш Блог",
-      subtitle: "Последние новости, советы и аналитические статьи из мира брендинга, маркетинга и дизайна. Помогаем вашему бизнесу расти.",
-      readMore: "Читать далее"
-    }
-  }
-  const translations = lang === 'ru' ? t.ru : t.uz;
-  const locale = lang === 'ru' ? ru : uz;
+  const locale = lang === 'ru' ? ru : (lang === 'en' ? enUS : uz);
 
   return (
     <main className="flex-grow bg-secondary/50">
@@ -55,7 +45,7 @@ const BlogPage = async ({ params: { lang } }: { params: { lang: string } }) => {
                   <div className="flex flex-col flex-grow">
                     <CardHeader>
                       <CardDescription className="text-sm text-gray-500 pt-1">
-                        <span>{format(parseISO(post.date), 'd-MMMM, yyyy', { locale })}</span>
+                        <span>{format(parseISO(post.date), 'MMMM d, yyyy', { locale })}</span>
                         {' '} &bull; {' '}
                         <span>{post.author}</span>
                       </CardDescription>

@@ -1,58 +1,35 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Search, Palette, Box } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
+import { getDictionary, Locale } from '@/lib/dictionaries';
 
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
 
-const t = {
-    uz: {
-        title: "Qadoq Dizaynini Ishlab Chiqish",
-        subtitle: "Yuqori raqobat sharoitida qadoq ko'pincha asosiy marketing vositasiga aylanadi. U brendni peshtaxtada ajratib ko'rsatadi, uning tarixini so'zlab beradi va bir qarashdayoq auditoriya bilan aloqa o'rnatadi.",
-        section1_title: "Qadoq — brend kimligini tashuvchidan ko'ra ko'proq narsa",
-        section1_p1: "Qadoq — bu savdo nuqtalarida brend bilan birinchi aloqa, mahsulot haqida bir zumda tasavvur hosil qiluvchi vizual murojaatdir. Ko'p hollarda aynan qadoq odamning xarid qilish yoki qilmaslik qarorini belgilaydi.",
-        section1_p2: "Agentligimizning maqsadi — shunchaki estetik va chiroyli qadoq yaratish emas, balki biznes vazifalariga javob beradigan va uning o'sishiga yordam beradigan samarali vositani yaratishdir.",
-        process_title: "Qadoqni qanday yaratamiz?",
-        process_subtitle: "Biz qadoqni ishlab chiqishga alohida dizayn sifatida emas, balki biznes uchun ishlashi va auditoriya kutganlariga mos kelishi kerak bo'lgan kompleks tizim sifatida yondashamiz. Jarayonimiz bir nechta asosiy bosqichlarni o'z ichiga oladi:",
-        process_steps: [
-            { icon: Search, title: "Tahlil va strategiya", description: "Mahsulotingiz, auditoriya, raqobatchilar va qadoq ishlatiladigan muhitni o'rganamiz. Kategoriyaning vizual kodini tahlil qilamiz." },
-            { icon: Palette, title: "Konsepsiya va dizayn", description: "To'plangan ma'lumotlar asosida mahsulot mohiyatini aks ettiruvchi vizual g'oyalarni ishlab chiqamiz: rang, grafika, tipografika va boshqalar." },
-            { icon: Box, title: "Yakunlash va tayyorlash", description: "Tanlangan konsepsiyaning barcha texnik jihatlarini (har xil formatlarga moslashtirish, bosmaga tayyorlash) puxta ishlab chiqamiz." }
-        ],
-        cta_title: "Qadoq shunchaki e'tiborni tortmaydi, balki sotadi",
-        cta_description: "Yaxshi qadoq dizayni — bu shunchaki chiroyli bezak emas, balki biznes uchun ishlaydigan vositadir. Biz funksional, strategik jihatdan puxta o'ylangan dizaynni ishlab chiqamiz, bunda qadoq to'laqonli savdo vositasi bo'lib xizmat qiladi.",
-    },
-    ru: {
-        title: "Разработка дизайна упаковки",
-        subtitle: "В условиях высокой конкуренции упаковка часто становится ключевым маркетинговым инструментом. Она выделяет бренд на полке, рассказывает его историю и устанавливает контакт с аудиторией с первого взгляда.",
-        section1_title: "Упаковка — это больше, чем просто носитель идентичности бренда",
-        section1_p1: "Упаковка — это первый контакт с брендом в точках продаж, визуальное обращение, которое мгновенно создает представление о продукте. Во многих случаях именно упаковка определяет решение человека о покупке.",
-        section1_p2: "Цель нашего агентства — не просто создать эстетичную и красивую упаковку, а создать эффективный инструмент, который отвечает бизнес-задачам и способствует его росту.",
-        process_title: "Как мы создаем упаковку?",
-        process_subtitle: "Мы подходим к разработке упаковки не как к отдельному дизайну, а как к комплексной системе, которая должна работать на бизнес и соответствовать ожиданиям аудитории. Наш процесс включает несколько ключевых этапов:",
-        process_steps: [
-            { icon: Search, title: "Анализ и стратегия", description: "Изучаем ваш продукт, аудиторию, конкурентов и среду, в которой используется упаковка. Анализируем визуальный код категории." },
-            { icon: Palette, title: "Концепция и дизайн", description: "На основе собранных данных разрабатываем визуальные идеи, отражающие суть продукта: цвет, графика, типографика и т.д." },
-            { icon: Box, title: "Завершение и подготовка", description: "Тщательно прорабатываем все технические аспекты выбранной концепции (адаптация под разные форматы, подготовка к печати)." }
-        ],
-        cta_title: "Упаковка не просто привлекает внимание, она продает",
-        cta_description: "Хороший дизайн упаковки — это не просто красивое оформление, а работающий на бизнес инструмент. Мы разрабатываем функциональный, стратегически продуманный дизайн, где упаковка служит полноценным инструментом продаж.",
-    }
-}
-
-
 const QadoqDizayniPage: FC<{ params: { lang: string } }> = ({ params }) => {
   const { lang } = params;
+  const [translations, setTranslations] = useState<any>(null);
 
-  const translations = lang === 'ru' ? t.ru : t.uz;
-  const processSteps = translations.process_steps;
+  useEffect(() => {
+    getDictionary(lang as Locale).then(dict => setTranslations(dict.packagingPage));
+  }, [lang]);
+
+  if (!translations) {
+    return <main className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></main>;
+  }
+
+  const processSteps = [
+      { icon: Search, ...translations.process_steps[0] },
+      { icon: Palette, ...translations.process_steps[1] },
+      { icon: Box, ...translations.process_steps[2] }
+  ];
 
   return (
     <>

@@ -246,5 +246,185 @@
     "mobileCtaBar": {
         "final_price": "Final price",
         "get_offer": "Send Request"
+    },
+    "blog": {
+        "title": "Our Blog",
+        "subtitle": "Latest news, tips, and analysis from the world of branding, marketing, and design. We help your business grow.",
+        "readMore": "Read more"
+    },
+    "blogPost": {
+        "author": "Author",
+        "ctaTitle": "Was this article helpful?",
+        "ctaDesc": "Now it's time to move from theory to practice. Take your brand to the next level with us.",
+        "ctaButton": "Get a free consultation"
+    },
+    "quiz": {
+        "questions": [
+            {
+                "question": "Is the main idea or mission of your business expressed in one sentence?",
+                "options": [
+                    { "text": "Yes, clearly and understandably for everyone", "score": 3 },
+                    { "text": "Partially, but not yet complete", "score": 2 },
+                    { "text": "No, I haven't thought about it", "score": 1 }
+                ]
+            },
+            {
+                "question": "Can you clearly envision your target audience (ideal client)?",
+                "options": [
+                    { "text": "Yes, I know their needs and desires", "score": 3 },
+                    { "text": "I have a general idea", "score": 2 },
+                    { "text": "No, I try to sell to everyone", "score": 1 }
+                ]
+            },
+            {
+                "question": "What specific advantages does your brand have over competitors?",
+                "options": [
+                    { "text": "I have at least 2-3 clear advantages", "score": 3 },
+                    { "text": "I only stand out by price", "score": 2 },
+                    { "text": "I have no clear advantages", "score": 1 }
+                ]
+            },
+            {
+                "question": "Does your visual identity (logo, colors, design) reflect your business values?",
+                "options": [
+                    { "text": "Yes, it's a perfect match", "score": 3 },
+                    { "text": "Partially, some elements need updating", "score": 2 },
+                    { "text": "No, I haven't paid attention to this", "score": 1 }
+                ]
+            },
+            {
+                "question": "Do your customers have a consistent and positive opinion of you?",
+                "options": [
+                    { "text": "Yes, my brand reputation is strong", "score": 3 },
+                    { "text": "It varies, sometimes there are negative reviews", "score": 2 },
+                    { "text": "I don't know, I haven't conducted a survey", "score": 1 }
+                ]
+            }
+        ],
+        "result": {
+            "bad": {
+                "title": "You need help (5-8 points)",
+                "description": "Your brand's foundation is weak. You undoubtedly need professional help to stand out from competitors and win customer loyalty. Let's fix this together!"
+            },
+            "medium": {
+                "title": "Good potential, but there are gaps (9-12 points)",
+                "description": "You have a good foundation, but your brand can be stronger and more effective. Let's fill the existing gaps and take your business to the next level."
+            },
+            "good": {
+                "title": "Excellent! Your brand's foundation is solid (13-15 points)",
+                "description": "Congratulations! You are on the right track with branding. Now it's time to strengthen this foundation and become a market leader. We will help you with this."
+            },
+            "afterSubmitText": "Our specialist will contact you soon for a detailed analysis of your test results and to provide personal recommendations.",
+            "backToHome": "Back to Home"
+        },
+        "questionLabel": "Question {step} / {total}",
+        "nextButton": "Next",
+        "resultButton": "See result"
+    },
+    "brandStrategyPage": {
+        "title": "Brand Strategy",
+        "subtitle": "A strong brand is a clear idea that inspires, unites, and helps a business grow.",
+        "section1_title": "Brand strategy is a business growth tool",
+        "section1_p1": "Every ambitious company has its goals. For some, it's capturing a certain market share; for others, it's brand awareness, expanding into new territories, and so on.",
+        "section1_p2": "Brand strategy is what helps a company achieve these goals, to become not just a product or service, but something more — a part of its customers' lives, a carrier of a recognizable image.",
+        "section1_p3": "Most importantly, it allows for the systemization of marketing expenses, abandoning tools, channels, and ideas that do not support the company's positioning and, therefore, do not deserve the cost.",
+        "process_title": "Branding is a process",
+        "process_subtitle": "In our agency, we are convinced that branding is more than just creating a logo. Branding is not a one-time task, but a cyclical process. Each stage plays its key role, and skipping any of them can weaken the brand and its market position. But if everything is done correctly and consistently, branding helps the business grow and makes it easier to manage many processes, from product production to marketing.",
+        "process_steps": [
+            { "title": "Analysis and research", "description": "This is the first and most important stage where data about the market, competitors, and audience is collected. Without this, it's impossible to define the brand's uniqueness and understand its target audience." },
+            { "title": "Brand platform formation", "description": "Here the brand's mission, values, and unique proposition are born - this is the foundation that defines its character and voice. Without a clear platform, all subsequent actions risk being disjointed and unconvincing." },
+            { "title": "Strategy development", "description": "The strategy answers how the brand will interact with the audience and through which channels it will communicate. This systematizes communication, making it targeted and effective." },
+            { "title": "Visual identification", "description": "Translating the brand's meanings into a visual language - logo, colors, fonts, and graphic elements. This makes the brand recognizable and different from competitors." },
+            { "title": "Implementation and integration", "description": "Creating a brand is just the beginning. It is important to correctly integrate it into the company and contact points so that it becomes part of the corporate culture and communication with customers." }
+        ]
+    },
+    "corporateStylePage": {
+        "title": "Corporate Identity Development",
+        "subtitle": "One of the key elements of a brand is its visual component. It is what turns ideas, meanings, and values into images that can be seen, felt, and remembered.",
+        "section1_title": "Brand perception starts with the picture",
+        "section1_p1": "In the modern world, visual information is perceived and absorbed faster than text or words. We live in an age of instant impressions: it takes people a second to form an opinion about a brand, and this often happens through its visual image.",
+        "section1_p2": "For an idea to be consolidated in the audience's mind, it's not enough to just talk about it — it's important to reinforce it with visual elements. A well-designed corporate identity allows you to demonstrate brand values without extra explanations, instantly evoking the necessary emotions and associations.",
+        "section2_title": "Corporate identity is a system",
+        "section2_p1": "It's not just about beauty, but about efficiency, meaning, and control. To ensure a brand remains multifaceted and consistent in developing its visual image, a set of graphic elements must be created.",
+        "section2_p2": "Such a set is always selected individually, depending on the business's tasks and capabilities. The minimum set includes a logo, colors, fonts, photo style, style of advertising media, and other elements that create a cohesive image.",
+        "section2_p3": "When a visual style is built clearly and consistently, it becomes a powerful tool for managing the brand's image and communication. When all its elements are aligned, the brand is perceived as professional, reliable, and recognizable.",
+        "process_title": "How do we create a corporate identity?",
+        "process_subtitle": "We take a systematic approach to developing a corporate identity so that every detail works for brand recognition and its strategy.",
+        "process_steps": [
+            { "title": "Research and concept", "description": "We analyze the audience, market, competitors, and the brand's position. We identify the key meanings and ideas that should be reflected in the visual style." },
+            { "title": "Visual code development", "description": "We create the logo, corporate colors, typography, graphics, iconography, and layout principles that form a cohesive brand image." },
+            { "title": "Corporate identity system", "description": "We develop flexible elements that help maintain the consistency of the visual image across all formats — from packaging to the digital environment." },
+            { "title": "Finalization and guideline", "description": "We create a guideline with rules for using the style so that the brand maintains a unified image on any carrier." }
+        ],
+        "cta_title": "Corporate identity is a growth tool",
+        "cta_description": "Brands with a strong identity are recognized faster, remembered longer, and inspire more trust. We create not just a visual style, but a tool that helps the brand grow, be consistent, and manageable."
+    },
+    "namingPage": {
+        "title": "Naming — A Strong Brand Name",
+        "subtitle": "A brand name is the first impression of it, its energy, character, and the idea expressed in a word. A good name doesn't just sound beautiful; it conveys the essence, is memorable, and helps the brand stand out among competitors.",
+        "section1_title": "The name is part of the brand strategy",
+        "section1_p1": "A good name supports associations, recognition, and emotional connection. Creating such a name is a strategic work that takes into account the brand's positioning, the market, the target audience, and the company's long-term goals.",
+        "section1_p2": "We approach naming as an important element of branding. It's not a random collection of ideas, but a thoughtful work where every word has meaning.",
+        "section2_title": "Every strong name starts with an idea",
+        "section2_p1": "Before searching for a name, we ask the main question: what is this brand about? What feelings and images should it evoke? Therefore, we carefully analyze the product, its audience, and the environment to determine the semantic directions for finding the ideal name.",
+        "section2_p2": "It can be built on an emotion, a metaphor, a cultural code, professional language, or even a play on words. The main thing is that it works, conveys the essence, and helps the brand be remembered.",
+        "process_title": "How do we create a name?",
+        "process_subtitle": "In our agency, naming development is a clear process where every stage is important:",
+        "process_steps": [
+            { "title": "Research", "description": "We study the market, audience, competitors, and semantic directions." },
+            { "title": "Concept formation", "description": "We determine possible vectors for finding a name." },
+            { "title": "Idea generation and testing", "description": "We create a list of options, testing them for sound, meaning, and potential." },
+            { "title": "Verification and finalization", "description": "We analyze the possibility of registration, check domains and associations, and select the best ones." }
+        ],
+        "check_title": "Verifying a name is as important as creating one",
+        "check_subtitle": "Even a brilliant idea won't work if it can't be registered or has undesirable associations. We check names against several key parameters:",
+        "check_points": [
+            { "title": "Legal clarity", "description": "We analyze the possibility of trademark registration." },
+            { "title": "Domains and digital environment", "description": "We check the availability of names in the digital environment." },
+            { "title": "Meaning and associations", "description": "We check readability, sound, possible associative array, cultural perception, and compliance with the brand category." }
+        ],
+        "calculator_title": "Trademark Costs",
+        "calculator_subtitle": "Naming (choosing a name) is a creative process, and patenting is a legal one. With the help of a patent specialist on our team, calculate the approximate costs associated with trademark registration (state fees and service charges) here."
+    },
+    "packagingPage": {
+        "title": "Packaging Design Development",
+        "subtitle": "In a highly competitive environment, packaging often becomes a key marketing tool. It distinguishes the brand on the shelf, tells its story, and connects with the audience at first glance.",
+        "section1_title": "Packaging is more than just a carrier of brand identity",
+        "section1_p1": "Packaging is the first contact with the brand at points of sale, a visual appeal that instantly creates an impression of the product. In many cases, it is the packaging that determines a person's decision to buy.",
+        "section1_p2": "The goal of our agency is not just to create an aesthetic and beautiful package, but to create an effective tool that meets business objectives and contributes to its growth.",
+        "process_title": "How do we create packaging?",
+        "process_subtitle": "We approach packaging development not as a separate design, but as a complex system that should work for the business and meet audience expectations. Our process includes several key stages:",
+        "process_steps": [
+            { "title": "Analysis and strategy", "description": "We study your product, audience, competitors, and the environment in which the packaging is used. We analyze the visual code of the category." },
+            { "title": "Concept and design", "description": "Based on the collected data, we develop visual ideas that reflect the essence of the product: color, graphics, typography, etc." },
+            { "title": "Finalization and preparation", "description": "We thoroughly work out all the technical aspects of the chosen concept (adaptation to different formats, preparation for printing)." }
+        ],
+        "cta_title": "Packaging doesn't just attract attention, it sells",
+        "cta_description": "Good packaging design is not just beautiful decoration, but a tool that works for the business. We develop a functional, strategically thought-out design where the packaging serves as a full-fledged sales tool."
+    },
+    "servicesPage": {
+        "title": "Services and Prices",
+        "subtitle": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator.",
+        "comparison": {
+            "whyPremiumTitle": "Why only premium agencies?",
+            "whyPremiumDesc": "We compare ourselves only with top-tier companies that have a strategic approach. Our goal is not just to be cheaper, but to provide premium quality at an affordable price. Comparing with agencies that do not match our level of quality and strategy would be incorrect for both the client and us."
+        }
+    },
+    "pickTwoSelector": {
+      "title": "Pick two of the three",
+      "subtitle": "Price—Quality—Speed: you can rarely have all three at the same time.",
+      "ctaText": "Request a Quote",
+      "options": {
+        "cheap": "Cheap",
+        "quality": "Quality",
+        "fast": "Fast"
+      },
+      "messages": {
+        "cheap_fast": "Quality may not be consistent. This option is suitable for urgent and budget projects.",
+        "cheap_quality": "You will have to wait longer for the result. We will adapt to your budget and work on a first-come, first-served basis to ensure quality.",
+        "quality_fast": "The price will be higher. A +50% surcharge is applied to the standard price for urgent projects (2-3 days). We will mobilize the team and prioritize your deadline.",
+        "default": "Please select the 2 most important priorities for you."
+      },
+      "tooltip": "Deselect one first"
     }
 }

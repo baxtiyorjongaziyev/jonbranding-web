@@ -1,10 +1,11 @@
-
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
 import CtaBlock from './cta-block';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
 import { projects } from '@/lib/static-data';
+import { useEffect, useState } from 'react';
+import { getDictionary, Locale } from '@/lib/dictionaries';
 
 const comparisons = projects.filter(p => p.oldImg && p.newImg);
 
@@ -14,24 +15,16 @@ interface BeforeAfterProps {
 }
 
 const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang }) => {
-  const t = {
-    uz: {
-      title: "Avval va Hozir",
-      subtitle: "To'g'ri brending biznesingizni qanday o'zgartirishi mumkinligini o'z ko'zingiz bilan ko'ring.",
-      ctaTitle: "Sizning brendingiz ham o'zgarishga tayyormi?",
-      ctaDesc: "Keling, brendingizni tahlil qilib, uni yangi bosqichga olib chiqish rejasini tuzamiz.",
-      ctaButton: "Mening brendimni ham o'zgartiring"
-    },
-    ru: {
-      title: "До и После",
-      subtitle: "Убедитесь сами, как правильный брендинг может преобразить ваш бизнес.",
-      ctaTitle: "Ваш бренд тоже готов к переменам?",
-      ctaDesc: "Давайте проанализируем ваш бренд и составим план по его выводу на новый уровень.",
-      ctaButton: "Измените и мой бренд тоже"
-    }
-  }
-  const translations = lang === 'ru' ? t.ru : t.uz;
+  const [translations, setTranslations] = useState<any>(null);
+  
+  useEffect(() => {
+    getDictionary(lang as Locale).then(dict => setTranslations(dict.beforeAfter));
+  }, [lang]);
 
+  if (!translations) {
+    return null;
+  }
+  
   return (
     <section className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
@@ -46,8 +39,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang }) => {
             <Card key={index} className="overflow-hidden shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
               <CardContent className="p-0">
                 <ImageComparisonSlider 
-                  beforeImage={{src: item.oldImg, alt: `${item.brand} eski brendingi`, 'data-ai-hint': item.oldHint}}
-                  afterImage={{src: item.newImg, alt: `${item.brand} yangi brendingi`, 'data-ai-hint': item.newHint}}
+                  beforeImage={{src: item.oldImg, alt: `${item.brand} old branding`, 'data-ai-hint': item.oldHint}}
+                  afterImage={{src: item.newImg, alt: `${item.brand} new branding`, 'data-ai-hint': item.newHint}}
                   lang={lang}
                 />
               </CardContent>
