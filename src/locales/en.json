@@ -1,0 +1,148 @@
+
+{
+    "header": {
+        "portfolio": "Portfolio",
+        "founder": "Founder",
+        "process": "Process",
+        "blog": "Blog",
+        "services": "Services",
+        "brand_strategy": "Brand Strategy",
+        "brand_strategy_desc": "The foundation for your brand — market analysis, positioning, and communication.",
+        "naming": "Naming",
+        "naming_desc": "Choosing a memorable, strong, and legally clear name for your brand.",
+        "corporate_style": "Corporate Identity",
+        "corporate_style_desc": "A system of logos, colors, and fonts that makes your brand recognizable.",
+        "packaging_design": "Packaging Design",
+        "packaging_design_desc": "Attractive design that will make your product stand out on the shelf.",
+        "services_and_prices": "Services & Prices",
+        "services_and_prices_desc": "Build your own service package and get an instant price.",
+        "contact_by_phone": "Contact by Phone",
+        "contact_by_telegram": "Contact via Telegram",
+        "free_consultation": "Free Consultation",
+        "open_menu": "Open Menu",
+        "switch_lang": "Switch Language",
+        "lang_ru": "Русский",
+        "lang_uz": "O'zbekcha",
+        "lang_en": "English"
+    },
+    "footer": {
+        "contact": "Contact Us",
+        "by_telegram": "Via Telegram",
+        "by_phone": "By Phone",
+        "main_page": "Main Page",
+        "portfolio": "Portfolio",
+        "founder": "Founder",
+        "process": "Process",
+        "faq": "FAQ",
+        "services": "Our Services",
+        "brand_strategy": "Brand Strategy",
+        "naming": "Naming",
+        "corporate_style": "Corporate Identity",
+        "packaging_design": "Packaging Design",
+        "additional": "Additional",
+        "service_prices": "Services & Prices",
+        "branding_test": "Branding Test",
+        "blog": "Blog",
+        "all_rights_reserved": "All rights reserved.",
+        "back_to_top": "Back to top"
+    },
+    "hero": {
+        "headlines": [
+            "Your branding <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>isn't selling?</span> We'll fix it.",
+            "Stand out <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>from the competition</span>.",
+            "Make your brand not just \"pretty\", but <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>profitable</span>.",
+            "Make customers <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>fall in love with you</span>. Again and again.",
+            "From small business to a <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>strong brand</span>. In one step."
+        ],
+        "description": "We don't just draw logos. We build a <span class='font-bold text-foreground'>results-driven</span>, strategy-based brand system for your business that will win the hearts of your customers.",
+        "buttonTexts": [
+            "Analyze my brand",
+            "Help me increase sales",
+            "Free strategy session",
+            "I need a strong brand"
+        ],
+        "buttonHint": "Free. No strings attached."
+    },
+    "contactModal": {
+        "stepTitles": {
+            "contact": "Contact Details",
+            "project": "About the Project",
+            "budget": "Budget",
+            "meeting": "Meeting"
+        },
+        "title": "For a quality consultation",
+        "description": "Answer a few questions so we can better understand your project.",
+        "fullName": "Full Name",
+        "fullNamePlaceholder": "John Doe",
+        "phone": "Phone Number",
+        "phonePlaceholder": "+998 90 123 45 67",
+        "telegram": "Telegram Username (optional)",
+        "telegramPlaceholder": "@username",
+        "companyName": "Company or Project Name",
+        "companyNamePlaceholder": "Jon.Branding",
+        "website": "Website or Social Media (optional)",
+        "websitePlaceholder": "https://t.me/jonbranding",
+        "goal": "Which goal is closest to you?",
+        "goalOptions": [
+            { "value": "exploring", "label": "I'm not familiar with branding, but I think my business needs it." },
+            { "value": "has_problem", "label": "I have a brand, but it's not effective; I need an analysis and consultation." },
+            { "value": "ready_to_start", "label": "I understand the power of branding and have a specific goal." }
+        ],
+        "budget": "Approximate budget for the project?",
+        "budgetOptions": [
+            "No budget yet / Just exploring",
+            "Up to $500",
+            "$500 - $1,500",
+            "$1,500 - $3,000",
+            "Above $3,000"
+        ],
+        "location": "Your location for the meeting",
+        "locationPlaceholder": "Select your region",
+        "locationOptions": ["Tashkent", "Fergana", "Other region"],
+        "meetingPlace": "Where would you like to meet?",
+        "meetingPlaceOptions": [
+            { "value": "our_office", "label": "In our office", "description": "Full immersion into the project" },
+            { "value": "neutral", "label": "In a neutral territory", "description": "Discussion in a relaxed atmosphere" },
+            { "value": "client_office", "label": "In your office", "description": "Getting to know your business" }
+        ],
+        "onlineMeetingAlert": "Understood. We will arrange a convenient time with you for an online meeting.",
+        "backButton": "Back",
+        "nextButton": "Next",
+        "submitButton": "Send Request",
+        "formErrors": {
+            "fullName": "Please enter your full name.",
+            "phone": "Please enter a valid phone number.",
+            "goal": "Please select your main goal.",
+            "budget": "Please select an approximate budget.",
+            "location": "Please select your location.",
+            "meetingPlace": "You need to choose a meeting place."
+        },
+        "successToast": {
+            "title": "Success!",
+            "description": "Your request has been received. We will contact you shortly!"
+        },
+        "leadMagnetToast": {
+            "title": "Special Resources for You!",
+            "description": "Your request is accepted! To start, we're directing you to our free materials."
+        },
+        "errorToast": {
+            "title": "Error!",
+            "description": "There was an error submitting your request. Please try again."
+        }
+    },
+    "aiAssistant": {
+        "initialMessage": "Hello! I'm Jon, your virtual assistant. Feel free to ask about branding strategy, pricing, or our work process.",
+        "suggestionChips": [
+            "Services and Prices",
+            "Show me your portfolio",
+            "What is the work process?"
+        ],
+        "inputPlaceholder": "Write your question...",
+        "toastErrorTitle": "Error!",
+        "toastErrorDescription": "Sorry, there was an error processing your request. Please try again later.",
+        "cardTitle": "Jon Assistant",
+        "cardSubtitle": "Usually replies instantly"
+    }
+}
+
+    
