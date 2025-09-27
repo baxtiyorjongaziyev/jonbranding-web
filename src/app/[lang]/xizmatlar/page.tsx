@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -26,7 +27,9 @@ const XizmatlarPage = () => {
     const [dictionary, setDictionary] = useState<any>(null);
 
     useEffect(() => {
-        getDictionary(lang as Locale).then(setDictionary);
+        if (lang) {
+            getDictionary(lang as Locale).then(setDictionary);
+        }
     }, [lang]);
 
     const handleOpenModal = useCallback(() => {
@@ -41,7 +44,7 @@ const XizmatlarPage = () => {
         }
     }, []);
 
-    if (!dictionary) {
+    if (!dictionary || !lang) {
         return <main className="flex-grow"><Skeleton className="h-screen w-full" /></main>
     }
 
@@ -54,10 +57,10 @@ const XizmatlarPage = () => {
             <main className="flex-grow">
                 <PackageBuilder onOrderNow={handleOpenModal} lang={lang} />
                 <Comparison onCtaClick={handleOpenModal} lang={lang} />
-                <Offer onCTAClick={handleOpenServiceModal} lang={lang} />
+                <Offer onCTAClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.offer} />
                 <QueueStatus onCtaClick={handleOpenModal} />
             </main>
-            <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} />
+            <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
         </>
     );
 };

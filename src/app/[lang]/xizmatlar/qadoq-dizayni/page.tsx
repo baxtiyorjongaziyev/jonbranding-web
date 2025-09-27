@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -8,17 +9,21 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { useParams } from 'next/navigation';
 
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
 
-const QadoqDizayniPage: FC<{ params: { lang: string } }> = ({ params }) => {
-  const { lang } = params;
+const QadoqDizayniPage: FC = () => {
+  const params = useParams();
+  const lang = params.lang as string;
   const [translations, setTranslations] = useState<any>(null);
 
   useEffect(() => {
-    getDictionary(lang as Locale).then(dict => setTranslations(dict.packagingPage));
+    if (lang) {
+      getDictionary(lang as Locale).then(dict => setTranslations(dict.packagingPage));
+    }
   }, [lang]);
 
   if (!translations) {

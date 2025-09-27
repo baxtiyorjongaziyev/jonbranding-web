@@ -1,3 +1,4 @@
+
 'use client';
 
 import { type BlogPost } from '@/lib/types';
@@ -16,7 +17,9 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
   const [translations, setTranslations] = useState<any>(null);
 
   useEffect(() => {
-    getDictionary(lang).then(dict => setTranslations(dict.blogPost));
+    if (lang) {
+      getDictionary(lang).then(dict => setTranslations(dict.blogPost));
+    }
   }, [lang]);
   
   const handleOpenModal = () => {
