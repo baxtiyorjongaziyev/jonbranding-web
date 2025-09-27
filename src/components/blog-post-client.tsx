@@ -4,16 +4,37 @@
 import { type BlogPost } from '@/lib/types';
 import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
-import { uz } from 'date-fns/locale';
+import { uz, ru } from 'date-fns/locale';
 import CtaBlock from '@/components/sections/cta-block';
 import React from 'react';
+import { useParams } from 'next/navigation';
 
 const BlogPostClient = ({ post }: { post: BlogPost }) => {
+  const params = useParams();
+  const lang = params.lang as 'uz' | 'ru';
   
   const handleOpenModal = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
+  
+  const t = {
+    uz: {
+      author: "Muallif",
+      ctaTitle: "Maqola foydali bo'ldimi?",
+      ctaDesc: "Endi nazariyadan amaliyotga o'tish vaqti keldi. Brendingizni biz bilan keyingi bosqichga olib chiqing.",
+      ctaButton: "Bepul konsultatsiya olish"
+    },
+    ru: {
+      author: "Автор",
+      ctaTitle: "Статья была полезной?",
+      ctaDesc: "Теперь пришло время перейти от теории к практике. Выведите свой бренд на новый уровень вместе с нами.",
+      ctaButton: "Получить бесплатную консультацию"
+    }
+  }
+
+  const translations = lang === 'ru' ? t.ru : t.uz;
+  const locale = lang === 'ru' ? ru : uz;
 
   return (
     <main className="flex-grow bg-white">
@@ -24,9 +45,9 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
               {post.title}
             </h1>
             <p className="mt-6 text-lg text-gray-600">
-                <span>{format(parseISO(post.date), 'd-MMMM, yyyy', { locale: uz })}</span>
+                <span>{format(parseISO(post.date), 'd-MMMM, yyyy', { locale })}</span>
                 {' '} &bull; {' '}
-                <span>Muallif: {post.author}</span>
+                <span>{translations.author}: {post.author}</span>
             </p>
           </div>
         </header>
@@ -56,9 +77,9 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
       </article>
       
        <CtaBlock 
-            title="Maqola foydali bo'ldimi?"
-            description="Endi nazariyadan amaliyotga o'tish vaqti keldi. Brendingizni biz bilan keyingi bosqichga olib chiqing."
-            buttonText="Bepul konsultatsiya olish"
+            title={translations.ctaTitle}
+            description={translations.ctaDesc}
+            buttonText={translations.ctaButton}
             onCtaClick={handleOpenModal}
         />
     </main>
