@@ -1,5 +1,5 @@
 
-import { type Brand, type Project } from '@/lib/types';
+import { type Brand, type Project, type Testimonial } from '@/lib/types';
 
 export const staticBrands: Brand[] = [
     { name: 'Sarmilk', logo: 'https://img4.teletype.in/files/36/a0/36a05cc3-f4a4-4592-b025-d4ccf6d9b27f.png' }, 
@@ -38,6 +38,79 @@ export const staticBrands: Brand[] = [
     { name: 'Climart', logo: 'https://img4.teletype.in/files/b5/81/b581c892-50c0-4f9d-a146-17cd32d93597.png' }, 
 ];
 
+export const staticTestimonials: Testimonial[] = [
+  {
+    name: "Sherzod Beknazarov",
+    company: "Incontrol Consulting asoschisi",
+    avatar: "SB",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
+    imageHint: "male business owner",
+    quote: "Did, estetik did. Bu tug'ma bo'ladimi yoki orttirilgan ko'nikma bo'ladimi? Shunday estetik did egasidan biri Baxtiyorjon - Bizni Incontrol va Sherzod Beknazarov logolarini qilishda bizga yordam berdi. Baxtiyorjonga minnatdorchilik bildirmoqchimiz. Rahmat.",
+    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
+  },
+  {
+    name: "Sevara Xolmanova",
+    company: "Fidda by Sevara asoschisi",
+    avatar: "SX",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
+    imageHint: "female entrepreneur portrait",
+    quote: "Men bu jamoa bn ishlab ko'rdim menga juda yoqdi samarali va natijasi siz kutgandanda A'lo bo'larkan brendlashni xam stikerlash va patenlashni xam berganman 7 oyda aniq boladi Hudo xohlasa Halol ishlarkansilar Allox rozi bo'lsin silardan juda xursand bo'ldim ishilarga rivoj Rahmat."
+  },
+  {
+    name: "Nodirbek",
+    company: "Barakah Restoran asoschisi",
+    avatar: "N",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
+    imageHint: "restaurant manager portrait",
+    quote: "Esingizda bo‘lsa, 3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Sizlarga katta rahmat, ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka! 🤝🏻😊"
+  },
+  {
+    name: "Javohir Haqberdiyev",
+    company: "Perfona asoschisi",
+    avatar: "JH",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/67480e63648c1fa51ca4adff_A5%20-%201.jpg",
+    imageHint: "tech startup founder",
+    quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!"
+  },
+];
+
+export const staticTestimonialsRu: Testimonial[] = [
+  {
+    name: "Шерзод Бекназаров",
+    company: "Основатель Incontrol Consulting",
+    avatar: "ШБ",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
+    imageHint: "male business owner",
+    quote: "Вкус, эстетический вкус. Это врожденное или приобретенное? Один из обладателей такого эстетического вкуса — Бахтиёржон. Он помог нам с логотипами Incontrol и Шерзода Бекназарова. Хотим выразить Бахтиёржону благодарность. Спасибо.",
+    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
+  },
+  {
+    name: "Севара Холманова",
+    company: "Основательница Fidda by Sevara",
+    avatar: "СХ",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
+    imageHint: "female entrepreneur portrait",
+    quote: "Я работала с этой командой, мне очень понравилось. Эффективно, и результат превзошел все ожидания. Я заказывала и брендинг, и стикеры, и патентование. Через 7 месяцев, даст Бог, все будет готово. Вы работаете честно, да будет доволен вами Аллах. Я очень рада, успехов в вашей работе. Спасибо."
+  },
+  {
+    name: "Нодирбек",
+    company: "Основатель ресторана Barakah",
+    avatar: "Н",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
+    imageHint: "restaurant manager portrait",
+    quote: "Если помните, 3 года назад вы разработали логотип для этого бренда. Огромное вам спасибо, получилось великолепно, действительно все хвалят. Большое спасибо, Бахтиёр ака! 🤝🏻😊"
+  },
+  {
+    name: "Джавохир Хакбердиев",
+    company: "Основатель Perfona",
+    avatar: "ДХ",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/67480e63648c1fa51ca4adff_A5%20-%201.jpg",
+    imageHint: "tech startup founder",
+    quote: "Получилось даже лучше, чем я ожидал. Сейчас смотрю на логотип и сам наслаждаюсь. Что мне понравилось — это доверие. И то, что сдали раньше срока, было здорово. Отлично, что быстро поделились результатами. Большое спасибо, ака!"
+  },
+];
+
+
 export const projects: Project[] = [
     { 
         brand: "Fidda", 
@@ -62,7 +135,7 @@ export const projects: Project[] = [
         oldImg: "https://img2.teletype.in/files/55/fe/55fe2252-db0f-4fd2-8ee8-d674bffab68a.png", 
         newImg: "https://img2.teletype.in/files/dc/5c/dc5cd481-115e-4d57-ac2a-3ea3142e5f54.png", 
         newHint: "generic restaurant logo", 
-        newHint: "unique restaurant branding",
+        oldHint: "unique restaurant branding",
         galleryImages: []
     },
     {
