@@ -4,7 +4,7 @@ import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu, Phone, Send, X, Languages, Check, ChevronDown } from 'lucide-react';
+import { Menu, Phone, Send, X, Languages, Check } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -21,15 +21,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { UzFlagIcon } from '../icons/uz-flag';
 import { RuFlagIcon } from '../icons/ru-flag';
@@ -90,51 +84,8 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 
-const ExpandingButton = ({ children, text, scrolled }: { children: React.ReactNode, text: string, scrolled: boolean }) => {
-    const [isHovered, setHovered] = useState(false);
-    return (
-        <motion.div
-            onHoverStart={() => setHovered(true)}
-            onHoverEnd={() => setHovered(false)}
-            className="relative"
-        >
-            <Button 
-                variant="outline"
-                className={cn(
-                    "gap-2 overflow-hidden w-[40px] h-[40px] p-0 flex items-center justify-center transition-colors duration-300",
-                     scrolled ? "text-foreground border-black/20 hover:bg-transparent" : "text-foreground border-white/20 hover:bg-transparent"
-                 )} 
-                asChild
-            >
-                 <motion.div
-                    animate={{ width: isHovered ? 'auto' : 40 }}
-                    transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-                    className="flex items-center justify-center px-3"
-                 >
-                    {children}
-                    <AnimatePresence>
-                        {isHovered && (
-                            <motion.span
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -10 }}
-                                transition={{ duration: 0.2, delay: 0.1 }}
-                                className="ml-2 whitespace-nowrap"
-                            >
-                                {text}
-                            </motion.span>
-                        )}
-                    </AnimatePresence>
-                </motion.div>
-            </Button>
-        </motion.div>
-    );
-};
-
-
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLangMenuOpen, setLangMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const pathname = usePathname();
 
@@ -251,52 +202,53 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden items-center space-x-2 lg:flex">
-             <DropdownMenu open={isLangMenuOpen} onOpenChange={setLangMenuOpen}>
-                <DropdownMenuTrigger asChild>
-                    <div onMouseEnter={() => setLangMenuOpen(true)} onMouseLeave={() => setLangMenuOpen(false)}>
-                        <Button 
-                            variant="outline"
-                            className={cn(
-                                "gap-2 transition-colors duration-300",
-                                scrolled ? "text-foreground border-black/20 hover:bg-black/10" : "text-foreground border-white/20 hover:bg-white/10"
-                            )}
-                        >
-                            <CurrentLangIcon />
-                            <span>{languageOptions[lang as 'uz' | 'ru' | 'en']?.label}</span>
-                            <ChevronDown className={cn("h-4 w-4 transition-transform", isLangMenuOpen && "rotate-180")} />
-                        </Button>
-                    </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" onMouseEnter={() => setLangMenuOpen(true)} onMouseLeave={() => setLangMenuOpen(false)}>
-                    {Object.keys(languageOptions).map((langKey) => {
-                        const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
-                        return (
-                            <DropdownMenuItem key={langKey} asChild>
-                                <Link href={getNewPath(langKey as 'uz' | 'ru' | 'en')} className="flex items-center gap-2 cursor-pointer">
-                                    <Icon className="w-5 h-auto" />
+        <div className="hidden items-center space-x-4 lg:flex">
+             <Sheet>
+                <SheetTrigger asChild>
+                    <Button 
+                        variant="ghost"
+                        size="icon"
+                        className={cn(
+                            "transition-colors duration-300",
+                             scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10"
+                         )}
+                    >
+                        <Languages className="h-5 w-5" />
+                        <span className="sr-only">{dictionary.switch_lang}</span>
+                    </Button>
+                </SheetTrigger>
+                 <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                    <SheetHeader>
+                        <SheetTitle>{dictionary.switch_lang}</SheetTitle>
+                    </SheetHeader>
+                    <div className="mt-8 flex flex-col space-y-3">
+                       {Object.keys(languageOptions).map((langKey) => {
+                            const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
+                            return (
+                               <Link key={langKey} href={getNewPath(langKey as 'uz' | 'ru' | 'en')} className={cn(
+                                   "flex items-center gap-3 p-3 rounded-lg transition-colors",
+                                   lang === langKey ? 'bg-primary/10 text-primary font-bold' : 'hover:bg-secondary'
+                                )}>
+                                    <Icon className="w-6 h-auto" />
                                     <span>{label}</span>
-                                    {lang === langKey && <Check className="ml-auto h-4 w-4" />}
-                                </Link>
-                            </DropdownMenuItem>
-                        );
-                    })}
-                </DropdownMenuContent>
-            </DropdownMenu>
-
+                                    {lang === langKey && <Check className="ml-auto h-5 w-5" />}
+                               </Link>
+                            );
+                        })}
+                    </div>
+                </SheetContent>
+            </Sheet>
+          <Button variant="ghost" className={cn(scrolled && "text-foreground hover:bg-black/10 hover:text-foreground")} asChild>
             <a href="tel:+998336450097" aria-label={dictionary.contact_by_phone}>
-                <ExpandingButton text="+998 33 645 00 97" scrolled={scrolled}>
-                    <Phone />
-                </ExpandingButton>
+              <Phone />
             </a>
-            
+          </Button>
+          <Button variant="ghost" className={cn(scrolled && "text-foreground hover:bg-black/10 hover:text-foreground")} asChild>
             <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" aria-label={dictionary.contact_by_telegram}>
-                <ExpandingButton text="Telegram" scrolled={scrolled}>
-                     <Send />
-                </ExpandingButton>
+              <Send />
             </a>
-
-           <Button 
+          </Button>
+          <Button 
             onClick={handleContactClick} 
             className="shadow-ocean"
           >
