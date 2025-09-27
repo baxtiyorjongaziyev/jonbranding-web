@@ -11,9 +11,10 @@ interface ImageComparisonSliderProps {
   beforeImage: Omit<ImageProps, 'fill' | 'className'>;
   afterImage: Omit<ImageProps, 'fill' | 'className'>;
   className?: string;
+  lang: string;
 }
 
-const ImageComparisonSlider = ({ beforeImage, afterImage, className }: ImageComparisonSliderProps) => {
+const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: ImageComparisonSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0.5); // Represents position from 0 to 1
 
@@ -26,6 +27,19 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className }: ImageComp
   
   const afterWidth = useTransform(x, val => `${val * 100}%`);
   const handleX = useTransform(x, val => `${val * 100}%`);
+
+  const t = {
+    uz: {
+      before: "Avval",
+      after: "Hozir"
+    },
+    ru: {
+      before: "До",
+      after: "После"
+    }
+  }
+
+  const translations = lang === 'ru' ? t.ru : t.uz;
 
   return (
     <motion.div 
@@ -44,7 +58,7 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className }: ImageComp
             className="object-cover pointer-events-none"
             priority
         />
-        <div className="absolute top-2 right-2 bg-black/50 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">Avval</div>
+        <div className="absolute top-2 right-2 bg-black/50 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">{translations.before}</div>
       </div>
 
       {/* After Image */}
@@ -63,7 +77,7 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className }: ImageComp
             }}
             priority
         />
-        <div className="absolute top-2 right-2 bg-primary/80 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">Hozir</div>
+        <div className="absolute top-2 right-2 bg-primary/80 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">{translations.after}</div>
       </motion.div>
 
       {/* Slider Handle */}

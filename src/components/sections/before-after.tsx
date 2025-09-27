@@ -48,6 +48,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang }) => {
                 <ImageComparisonSlider 
                   beforeImage={{src: item.oldImg, alt: `${item.brand} eski brendingi`, 'data-ai-hint': item.oldHint}}
                   afterImage={{src: item.newImg, alt: `${item.brand} yangi brendingi`, 'data-ai-hint': item.newHint}}
+                  lang={lang}
                 />
               </CardContent>
             </Card>
