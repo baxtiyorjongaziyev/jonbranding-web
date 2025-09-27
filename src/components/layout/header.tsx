@@ -28,6 +28,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { usePathname } from 'next/navigation';
 import { UzFlagIcon } from '../icons/uz-flag';
 import { RuFlagIcon } from '../icons/ru-flag';
+import { ScrollArea } from '../ui/scroll-area';
 
 const t = {
   uz: {
@@ -301,47 +302,49 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
               <SheetHeader>
                   <SheetTitle className="sr-only">Menyu</SheetTitle>
               </SheetHeader>
-              <nav className="flex flex-col gap-6 pt-10">
-                 <div className="text-xl font-medium text-foreground">{translations.services}</div>
-                 <ul className="pl-4 space-y-4">
-                    {services.map((service) => (
-                       <li key={service.title}>
-                         <Link href={service.href} onClick={handleLinkClick} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
-                       </li>
-                    ))}
-                 </ul>
-                {navItems.map((item) => (
-                   <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={handleLinkClick}
-                    className="text-xl font-medium text-foreground transition-colors hover:text-accent"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-                 <div className="border-t pt-6 mt-4 space-y-4">
-                    <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
-                      <Phone size={20} />
-                      +998 33 645 00 97
-                    </a>
-                    <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
-                      <Send size={20} />
-                      {translations.contact_by_telegram}
-                    </a>
-                 </div>
-                 <div className="flex gap-4">
-                    <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4">
-                      {translations.free_consultation}
-                    </Button>
-                    <Link href={newPath} className="mt-4">
-                      <Button variant="outline" size="icon" className="w-12 h-12">
-                        {otherLang === 'ru' ? <RuFlagIcon /> : <UzFlagIcon />}
-                        <span className="sr-only">{translations.switch_lang}</span>
-                      </Button>
+               <ScrollArea className="h-full">
+                <nav className="flex flex-col gap-6 pt-10 pr-6">
+                    <div className="text-xl font-medium text-foreground">{translations.services}</div>
+                    <ul className="pl-4 space-y-4">
+                        {services.map((service) => (
+                        <li key={service.title}>
+                            <Link href={service.href} onClick={handleLinkClick} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
+                        </li>
+                        ))}
+                    </ul>
+                    {navItems.map((item) => (
+                    <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={handleLinkClick}
+                        className="text-xl font-medium text-foreground transition-colors hover:text-accent"
+                    >
+                        {item.label}
                     </Link>
-                 </div>
-              </nav>
+                    ))}
+                    <div className="border-t pt-6 mt-4 space-y-4">
+                        <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
+                        <Phone size={20} />
+                        +998 33 645 00 97
+                        </a>
+                        <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
+                        <Send size={20} />
+                        {translations.contact_by_telegram}
+                        </a>
+                    </div>
+                    <div className="flex gap-4">
+                        <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4">
+                        {translations.free_consultation}
+                        </Button>
+                        <Link href={newPath} className="mt-4">
+                        <Button variant="outline" size="icon" className="w-12 h-12">
+                            {otherLang === 'ru' ? <RuFlagIcon /> : <UzFlagIcon />}
+                            <span className="sr-only">{translations.switch_lang}</span>
+                        </Button>
+                        </Link>
+                    </div>
+                </nav>
+               </ScrollArea>
             </SheetContent>
           </Sheet>
         </div>
@@ -351,3 +354,5 @@ const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
 };
 
 export default Header;
+
+    
