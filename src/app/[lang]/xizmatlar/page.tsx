@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useCallback } from 'react';
@@ -19,7 +18,8 @@ const QueueStatus = dynamic(() => import('@/components/sections/queue-status'), 
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
 
-const XizmatlarPage = ({ params: { lang } }: { params: { lang: string } }) => {
+const XizmatlarPage = ({ params }: { params: { lang: string } }) => {
+    const { lang } = params;
     const handleOpenModal = useCallback(() => {
         const event = new CustomEvent('openContactModal');
         window.dispatchEvent(event);
