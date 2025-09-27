@@ -151,7 +151,7 @@ const ExpandingIconButton: FC<{
 };
 
 
-const Header: FC<{ lang?: string }> = ({ lang = 'uz' }) => {
+const Header: FC<{ lang: string }> = ({ lang = 'uz' }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const top = useTransform(scrollY, [0, 80], [0, 16]);

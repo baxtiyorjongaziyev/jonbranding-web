@@ -72,8 +72,20 @@ const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
 };
 
 
-const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
+const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string }> = ({ onOpenModal, lang }) => {
   const [isClient, setIsClient] = useState(false);
+  
+  const t = {
+    uz: {
+      title: "Loyihangizni muhokama qilamizmi?",
+      button: "Murojaat qoldirish"
+    },
+    ru: {
+      title: "Обсудим ваш проект?",
+      button: "Оставить заявку"
+    }
+  }
+  const translations = lang === 'ru' ? t.ru : t.uz;
 
   useEffect(() => {
     setIsClient(true);
@@ -94,10 +106,10 @@ const MobileCtaBar: FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
     <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
       <div className="container mx-auto flex justify-between items-center gap-4">
         <div className="text-sm flex-shrink">
-            <p className="font-bold text-primary text-base">Loyihangizni muhokama qilamizmi?</p>
+            <p className="font-bold text-primary text-base">{translations.title}</p>
         </div>
         <Button onClick={onOpenModal} className="shadow-ocean flex-shrink-0 whitespace-normal h-auto py-2 px-4 text-center">
-          Murojaat qoldirish
+          {translations.button}
         </Button>
       </div>
     </div>
@@ -146,6 +158,21 @@ const HomeComponent: FC<{ lang: string }> = ({ lang }) => {
     useEffect(() => {
         setIsClient(true);
     }, []);
+    
+    const t = {
+        uz: {
+            cta1_title: "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
+            cta1_desc: "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
+            cta1_button: "Mening biznesim uchun ham",
+        },
+        ru: {
+            cta1_title: "Ваш бренд может выглядеть так же.",
+            cta1_desc: "Выведите свой бизнес на новый уровень с помощью профессионального дизайна. Мы поможем найти идеальное решение для вашего бизнеса.",
+            cta1_button: "И для моего бизнеса тоже",
+        }
+    }
+    const translations = lang === 'ru' ? t.ru : t.uz;
+
 
     if (!isClient) {
         return (
@@ -164,29 +191,29 @@ const HomeComponent: FC<{ lang: string }> = ({ lang }) => {
         <>
             <main>
                 <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} /></AnimatedSection>
-                <AnimatedSection><Stats /></AnimatedSection>
-                <AnimatedSection><TrustedBy /></AnimatedSection>
-                <AnimatedSection><TargetAudience /></AnimatedSection>
-                <AnimatedSection><Offer onCTAClick={handleOpenServiceModal}/></AnimatedSection>
-                <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} /></AnimatedSection>
-                <AnimatedSection><Testimonials /></AnimatedSection>
-                <AnimatedSection><Gallery /></AnimatedSection>
+                <AnimatedSection><Stats lang={lang} /></AnimatedSection>
+                <AnimatedSection><TrustedBy lang={lang} /></AnimatedSection>
+                <AnimatedSection><TargetAudience lang={lang} /></AnimatedSection>
+                <AnimatedSection><Offer onCTAClick={handleOpenServiceModal} lang={lang}/></AnimatedSection>
+                <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
+                <AnimatedSection><Testimonials lang={lang} /></AnimatedSection>
+                <AnimatedSection><Gallery lang={lang} /></AnimatedSection>
                 <AnimatedSection><Video /></AnimatedSection>
                  <AnimatedSection>
                     <CtaBlock 
-                        title="Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin."
-                        description="Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz."
-                        buttonText="Mening biznesim uchun ham"
+                        title={translations.cta1_title}
+                        description={translations.cta1_desc}
+                        buttonText={translations.cta1_button}
                         onCtaClick={handleOpenModal}
                     />
                 </AnimatedSection>
-                <AnimatedSection><Founder /></AnimatedSection>
-                <AnimatedSection><Process onCtaClick={handleOpenModal} /></AnimatedSection>
-                <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} /></AnimatedSection>
-                <AnimatedSection><Faq /></AnimatedSection>
+                <AnimatedSection><Founder lang={lang} /></AnimatedSection>
+                <AnimatedSection><Process onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
+                <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
+                <AnimatedSection><Faq lang={lang} /></AnimatedSection>
             </main>
-            <ExitIntentModal onPrimaryClick={handleOpenServiceModal} />
-            <MobileCtaBar onOpenModal={handleOpenModal} />
+            <ExitIntentModal onPrimaryClick={handleOpenServiceModal} lang={lang} />
+            <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} />
         </>
     )
 };

@@ -9,41 +9,85 @@ import Link from 'next/link';
 
 interface LeadMagnetProps {
     onCtaClick: () => void;
+    lang: string;
 }
 
-const magnets = [
-  {
-    id: "pdf",
-    icon: FileText,
-    title: "Bepul PDF-Cheklist",
-    subtitle: "Brendingda 7 ta eng katta xato",
-    description: "Biznesingizda qanday xatolarga yo'l qo'ymaslik kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.",
-    cta: "PDF yuklab olish",
-    href: null, // this will trigger onCtaClick
-    action: 'onCtaClick'
-  },
-  {
-    id: "quiz",
-    icon: ListChecks,
-    title: "Mini-Test",
-    subtitle: "Biznesingiz brendga tayyormi?",
-    description: "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.",
-    cta: "Testni boshlash",
-    href: "/quiz",
-  },
-  {
-    id: "video",
-    icon: Film,
-    title: "Video Qo'llanma",
-    subtitle: "Strategik brending nima?",
-    description: "Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday natija keltirishini videoda ko'ring.",
-    cta: "Videoni ko'rish",
-    href: "#video",
-  },
-];
+const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang }) => {
+  
+  const t = {
+    uz: {
+        title: "Brendingizni Keyingi Bosqichga Olib Chiqing",
+        subtitle: "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.",
+        magnets: [
+          {
+            id: "pdf",
+            icon: FileText,
+            title: "Bepul PDF-Cheklist",
+            subtitle: "Brendingda 7 ta eng katta xato",
+            description: "Biznesingizda qanday xatolarga yo'l qo'ymaslik kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.",
+            cta: "PDF yuklab olish",
+            href: null,
+            action: 'onCtaClick'
+          },
+          {
+            id: "quiz",
+            icon: ListChecks,
+            title: "Mini-Test",
+            subtitle: "Biznesingiz brendga tayyormi?",
+            description: "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.",
+            cta: "Testni boshlash",
+            href: "/quiz",
+          },
+          {
+            id: "video",
+            icon: Film,
+            title: "Video Qo'llanma",
+            subtitle: "Strategik brending nima?",
+            description: "Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday natija keltirishini videoda ko'ring.",
+            cta: "Videoni ko'rish",
+            href: "#video",
+          },
+        ]
+    },
+    ru: {
+        title: "Выведите свой бренд на новый уровень",
+        subtitle: "Не знаете, с чего начать работу с нами? Мы подготовили для вас несколько бесплатных и полезных ресурсов. Изучите мир брендинга и сделайте первый шаг.",
+        magnets: [
+          {
+            id: "pdf",
+            icon: FileText,
+            title: "Бесплатный PDF-чек-лист",
+            subtitle: "7 самых больших ошибок в брендинге",
+            description: "Узнайте, каких ошибок следует избегать в вашем бизнесе, и получите практическое руководство по анализу вашего бренда.",
+            cta: "Скачать PDF",
+            href: null,
+            action: 'onCtaClick'
+          },
+          {
+            id: "quiz",
+            icon: ListChecks,
+            title: "Мини-тест",
+            subtitle: "Готов ли ваш бизнес к брендингу?",
+            description: "Ответьте на несколько вопросов и узнайте, насколько ваш бизнес готов к брендингу, его сильные и слабые стороны.",
+            cta: "Начать тест",
+            href: "/ru/quiz",
+          },
+          {
+            id: "video",
+            icon: Film,
+            title: "Видео-руководство",
+            subtitle: "Что такое стратегический брендинг?",
+            description: "Почему просто красивого логотипа недостаточно? Посмотрите в видео, какой результат наш подход принесет вашему бизнесу.",
+            cta: "Смотреть видео",
+            href: "#video",
+          },
+        ]
+    }
+  }
+  
+  const translations = lang === 'ru' ? t.ru : t.uz;
 
-const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
-  const handleClick = (magnet: (typeof magnets)[0]) => {
+  const handleClick = (magnet: (typeof translations.magnets)[0]) => {
     if (magnet.action === 'onCtaClick') {
       onCtaClick();
     } else if (magnet.href?.startsWith('#')) {
@@ -58,14 +102,14 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick }) => {
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold">
-            Brendingizni Keyingi Bosqichga Olib Chiqing
+            {translations.title}
           </h2>
           <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
-            Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.
+            {translations.subtitle}
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-          {magnets.map((magnet) => (
+          {translations.magnets.map((magnet) => (
             <Card key={magnet.id} className="flex flex-col text-center shadow-lg rounded-2xl hover:shadow-xl transition-shadow bg-secondary/50">
               <CardHeader className="items-center pb-4">
                 <div className="bg-primary/10 p-4 rounded-full">

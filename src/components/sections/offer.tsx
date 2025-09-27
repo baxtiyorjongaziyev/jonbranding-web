@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 
 interface OfferProps {
   onCTAClick: () => void;
+  lang: string;
 }
 
 const LiquidBlob = ({ className, style, transition }: { className: string, style: React.CSSProperties, transition: object }) => (
@@ -26,7 +27,26 @@ const LiquidBlob = ({ className, style, transition }: { className: string, style
 );
 
 
-const Offer: FC<OfferProps> = ({ onCTAClick }) => {
+const Offer: FC<OfferProps> = ({ onCTAClick, lang }) => {
+    
+    const t = {
+        uz: {
+            subtitle: "Strategik Imkoniyat",
+            title: "Yaxlit brending — bu shunchaki chegirma emas, bu strategik ustunlik.",
+            description: "Brending bu — qismlarga bo'lib bo'lmaydigan yaxlit tizim. Xizmatlarimizdan bir martada <strong>3 yoki undan ortiq asosiy yo'nalishni</strong> tanlab, siz nafaqat umumiy summadan <strong>kafolatlangan -20% tejaysiz</strong>, balki bundan ham muhimi — brendingiz uchun <strong>yagona, kuchli va izchil poydevor</strong> qurasiz. Bu premium agentliklarga nisbatan ikki karra foyda degani!",
+            button: "O'z to'plamimni yaratish",
+            note: "*Chegirma xizmatlar bo'limida to'plamingizni yig'ganingizdan so'ng avtomatik tarzda hisoblanadi."
+        },
+        ru: {
+            subtitle: "Стратегическая возможность",
+            title: "Целостный брендинг — это не просто скидка, это стратегическое преимущество.",
+            description: "Брендинг — это целостная система, которую нельзя делить на части. Выбирая <strong>3 или более основных направлений</strong> наших услуг единовременно, вы не только <strong>гарантированно экономите -20%</strong> от общей суммы, но и, что более важно, строите <strong>единый, сильный и последовательный фундамент</strong> для вашего бренда. Это двойная выгода по сравнению с премиум-агентствами!",
+            button: "Создать свой пакет",
+            note: "*Скидка будет рассчитана автоматически после того, как вы соберете свой пакет в разделе услуг."
+        }
+    }
+    const translations = lang === 'ru' ? t.ru : t.uz;
+
     return (
         <section id="offer" className="relative py-20 sm:py-28 bg-dark-blue text-white overflow-hidden">
              <div className="absolute inset-0 z-0 opacity-40">
@@ -60,23 +80,23 @@ const Offer: FC<OfferProps> = ({ onCTAClick }) => {
                 <div className="text-center max-w-3xl mx-auto">
                     <div className="flex justify-center items-center gap-2">
                         <Sparkles className="w-6 h-6 text-accent" />
-                        <p className="font-bold text-accent uppercase tracking-widest">Strategik Imkoniyat</p>
+                        <p className="font-bold text-accent uppercase tracking-widest">{translations.subtitle}</p>
                     </div>
                     <h2 className="text-4xl sm:text-5xl font-extrabold mt-4 text-white">
-                       Yaxlit brending — bu shunchaki chegirma emas, bu strategik ustunlik.
+                       {translations.title}
                     </h2>
                     <p 
                         className="mt-6 text-lg text-gray-300"
-                        dangerouslySetInnerHTML={{ __html: "Brending bu — qismlarga bo'lib bo'lmaydigan yaxlit tizim. Xizmatlarimizdan bir martada <strong>3 yoki undan ortiq asosiy yo'nalishni</strong> tanlab, siz nafaqat umumiy summadan <strong>kafolatlangan -20% tejaysiz</strong>, balki bundan ham muhimi — brendingiz uchun <strong>yagona, kuchli va izchil poydevor</strong> qurasiz. Bu premium agentliklarga nisbatan ikki karra foyda degani!" }}
+                        dangerouslySetInnerHTML={{ __html: translations.description }}
                     >
                     </p>
                     
                     <Button asChild size="lg" className="mt-10 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
-                        <Link href="/xizmatlar">
-                           O'z to'plamimni yaratish
+                        <Link href={`/${lang}/xizmatlar`}>
+                           {translations.button}
                         </Link>
                     </Button>
-                    <p className="mt-3 text-xs text-gray-400">*Chegirma xizmatlar bo'limida to'plamingizni yig'ganingizdan so'ng avtomatik tarzda hisoblanadi.</p>
+                    <p className="mt-3 text-xs text-gray-400">{translations.note}</p>
                 </div>
             </div>
         </section>
