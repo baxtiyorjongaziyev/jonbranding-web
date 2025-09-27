@@ -19,52 +19,51 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const sitemapEntries = routes.flatMap((route) => {
-      const urlUz = route === '/' ? baseUrl : `${baseUrl}${route}`;
-      const urlRu = route === '/' ? `${baseUrl}/ru` : `${baseUrl}/ru${route}`;
-      
+    const routePath = route === '/' ? '' : route;
+    return locales.map((locale) => {
+      const url = `${baseUrl}/${locale}${routePath}`.replace(`/${locale}/`, `/${locale}/`).replace(/\/$/, '');
       const priority = route === '/' ? 1.0 : (route.startsWith('/xizmatlar') || route === '/blog' ? 0.9 : 0.8);
-      const changeFrequency: 'daily' | 'weekly' | 'monthly' | 'yearly' = route === '/' ? 'daily' : 'monthly';
+      const changeFrequency: 'daily' | 'weekly' | 'monthly' = route === '/' ? 'daily' : 'monthly';
 
       return {
-        url: urlUz,
+        url: url.endsWith('/uz') ? baseUrl : url, // root for uz
         lastModified: new Date(),
-        changeFrequency: changeFrequency,
-        priority: priority,
+        changeFrequency,
+        priority,
         alternates: {
           languages: {
-            uz: urlUz,
-            ru: urlRu,
-            'x-default': urlUz,
+            uz: `${baseUrl}${routePath}`,
+            ru: `${baseUrl}/ru${routePath}`,
           },
         },
       };
     });
+  });
+
+  const uniqueSitemapEntries = Array.from(new Map(sitemapEntries.map(entry => [entry.url, entry])).values());
 
 
   const blogPosts = getSortedPostsData();
-  const blogEntries = blogPosts.map(post => {
-      const urlUz = `${baseUrl}/blog/${post.slug}`;
-      const urlRu = `${baseUrl}/ru/blog/${post.slug}`;
-      
-      return {
-        url: urlUz,
-        lastModified: new Date(post.date),
-        changeFrequency: 'yearly' as const,
-        priority: 0.7,
-        alternates: {
-           languages: {
-            uz: urlUz,
-            ru: urlRu,
-            'x-default': urlUz,
-          },
-        }
-      };
+  const blogEntries = blogPosts.flatMap(post => {
+      return locales.map(locale => {
+        const url = `${baseUrl}/${locale}/blog/${post.slug}`;
+        return {
+            url: url,
+            lastModified: new Date(post.date),
+            changeFrequency: 'yearly' as const,
+            priority: 0.7,
+            alternates: {
+               languages: {
+                uz: `${baseUrl}/blog/${post.slug}`,
+                ru: `${baseUrl}/ru/blog/${post.slug}`,
+              },
+            }
+          };
+      });
     });
 
-  // Since alternates are handled within each entry, we can flatten everything,
-  // but we need to avoid duplicate canonical URLs.
-  // The current logic creates entries for each locale for each route, which is not ideal.
-  // Let's create one entry per canonical URL with alternates.
+  const uniqueBlogEntries = Array.from(new Map(blogEntries.map(entry => [entry.url, entry])).values());
 
-  return [...sitemapEntries, ...blogEntries];
+
+  return [...uniqueSitemapEntries, ...uniqueBlogEntries];
 }
