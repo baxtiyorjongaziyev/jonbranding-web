@@ -119,8 +119,7 @@ const AnimatedSection: FC<{children: ReactNode}> = ({ children }) => {
 };
 
 
-const Home: FC<{ params: { lang: string } }> = ({ params }) => {
-    const { lang } = params;
+const HomeComponent: FC<{ lang: string }> = ({ lang }) => {
     const [isClient, setIsClient] = useState(false);
     const { tg } = useTelegram();
 
@@ -192,4 +191,10 @@ const Home: FC<{ params: { lang: string } }> = ({ params }) => {
     )
 };
 
-export default Home;
+
+const Page = ({ params }: { params: { lang: string } }) => {
+  return <HomeComponent lang={params.lang} />;
+};
+
+export default Page;
+
