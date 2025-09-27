@@ -5,7 +5,7 @@ import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu, Phone, Send, X, Languages, Check } from 'lucide-react';
+import { Menu, Phone, Send, X, Languages, Check, ChevronDown } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
