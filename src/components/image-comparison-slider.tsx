@@ -71,10 +71,7 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
             {...afterImage}
             alt={afterImage.alt}
             fill
-            className="absolute inset-0 object-cover h-full pointer-events-none"
-             style={{ 
-                width: containerRef.current?.getBoundingClientRect().width,
-            }}
+            className="absolute inset-0 object-cover h-full w-auto max-w-none pointer-events-none"
             priority
         />
         <div className="absolute top-2 right-2 bg-primary/80 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">{translations.after}</div>
