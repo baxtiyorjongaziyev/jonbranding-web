@@ -1,8 +1,5 @@
 
-'use client';
-
 import { getSortedPostsData } from '@/lib/blog-posts';
-import { type BlogPost } from '@/lib/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -10,7 +7,7 @@ import { ArrowRight } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { uz } from 'date-fns/locale';
 
-const BlogPage = () => {
+const BlogPage = async () => {
   const sortedPosts = getSortedPostsData();
 
   return (
