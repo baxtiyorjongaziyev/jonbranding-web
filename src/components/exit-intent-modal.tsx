@@ -9,9 +9,10 @@ import { Gift } from 'lucide-react';
 
 interface ExitIntentModalProps {
   onPrimaryClick: () => void;
+  lang: string;
 }
 
-const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick }) => {
+const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick, lang }) => {
   const [isOpen, setOpen] = useState(false);
   
   const handleClose = () => setOpen(false);
@@ -22,6 +23,21 @@ const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick }) => {
   }
 
   useExitIntent(() => setOpen(true));
+  
+  const t = {
+    uz: {
+        title: "Ketishga shoshilmang!",
+        description: "Siz uchun maxsus taklifimiz bor. <br/>Bizda <span class='font-bold text-primary'>turli chegirmalar</span> mavjud. Imkoniyatdan foydalaning!",
+        button: "Chegirmalarni ko'rish"
+    },
+    ru: {
+        title: "Не спешите уходить!",
+        description: "У нас есть специальное предложение для вас. <br/>У нас действуют <span class='font-bold text-primary'>различные скидки</span>. Воспользуйтесь возможностью!",
+        button: "Посмотреть скидки"
+    }
+  }
+  const translations = lang === 'ru' ? t.ru : t.uz;
+
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -30,15 +46,13 @@ const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick }) => {
             <Gift className="h-10 w-10 text-primary" />
         </div>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-extrabold text-foreground">Ketishga shoshilmang!</DialogTitle>
-          <DialogDescription className="mt-2 text-lg text-gray-600">
-            Siz uchun maxsus taklifimiz bor. <br/>
-            Bizda <span className="font-bold text-primary">turli chegirmalar</span> mavjud. Imkoniyatdan foydalaning!
+          <DialogTitle className="text-2xl font-extrabold text-foreground">{translations.title}</DialogTitle>
+          <DialogDescription className="mt-2 text-lg text-gray-600" dangerouslySetInnerHTML={{ __html: translations.description }}>
           </DialogDescription>
         </DialogHeader>
         <div className="mt-6">
           <Button onClick={handleOpen} size="lg" className="w-full text-lg py-6 shadow-ocean">
-            Chegirmalarni ko'rish
+            {translations.button}
           </Button>
         </div>
       </DialogContent>

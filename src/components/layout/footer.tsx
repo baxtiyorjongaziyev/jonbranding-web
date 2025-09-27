@@ -23,7 +23,7 @@ const t = {
     corporate_style: "Firma Uslubi",
     packaging_design: "Qadoq Dizayni",
     additional: "Qo'shimcha",
-    service_prices: "Xizmat Narxlari",
+    service_prices: "Xizmatlar va Narxlar",
     branding_test: "Brending Testi",
     blog: "Blog",
     all_rights_reserved: "Barcha huquqlar himoyalangan.",
@@ -43,7 +43,7 @@ const t = {
     corporate_style: "Фирменный стиль",
     packaging_design: "Дизайн упаковки",
     additional: "Дополнительно",
-    service_prices: "Цены на услуги",
+    service_prices: "Услуги и цены",
     branding_test: "Тест по брендингу",
     blog: "Блог",
     all_rights_reserved: "Все права защищены.",
@@ -52,7 +52,7 @@ const t = {
 };
 
 
-const Footer = ({ lang = 'uz' }: { lang: string }) => {
+const Footer: FC<{ lang: string }> = ({ lang = 'uz' }) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

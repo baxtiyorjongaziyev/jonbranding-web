@@ -50,9 +50,9 @@ const goalOptions = [
 ];
 
 const meetingPlaceOptions = [
-    { value: "our_office", label: "Bizning ofisimizda", icon: Briefcase, description: "Loyihaga to'liq sho'ng'ish" },
-    { value: "neutral", label: "Neytral hududda", icon: Coffee, description: "Erkin muhitda muhokama" },
-    { value: "client_office", label: "Sizning ofisingizda", icon: Building2, description: "Biznesingiz bilan tanishish" },
+    { value: "our_office", label: "Bizning ofisimizda", description: "Loyihaga to'liq sho'ng'ish" },
+    { value: "neutral", label: "Neytral hududda", description: "Erkin muhitda muhokama" },
+    { value: "client_office", label: "Sizning ofisingizda", description: "Biznesingiz bilan tanishish" },
 ];
 
 const formSchema = z.object({

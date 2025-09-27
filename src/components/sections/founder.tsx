@@ -10,18 +10,36 @@ import { useState, type FC } from 'react';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
-const founderPoints = [
-  { icon: 'Medal', text: "50+ dan ortiq loyihalar" },
-  { icon: 'Globe', text: "Xalqaro tajriba" },
-  { icon: 'Zap', text: "Tez va samarali aloqa" },
-  { icon: 'Users', text: "Aniq va shaffof ish jarayoni" },
-];
-
-const founderMessage = "Salom! Men Baxtiyorjon, Jon.Branding asoschisi. Men biznes egalariga o'z brendlarini keyingi bosqichga olib chiqishda yordam beraman. Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish. Keling, brendingizni birgalikda tahlil qilamiz va uning 'uxlab yotgan' potensialini uyg'otamiz.";
-
-
-const Founder = () => {
+const Founder = ({ lang }: { lang: string }) => {
   const [playVideo, setPlayVideo] = useState(false);
+  
+  const t = {
+    uz: {
+        title: "Asoschi: Baxtiyorjon Gaziyev",
+        message: "Salom! Men Baxtiyorjon, Jon.Branding asoschisi. Men biznes egalariga o'z brendlarini keyingi bosqichga olib chiqishda yordam beraman. Mening maqsadim – shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurish. Keling, brendingizni birgalikda tahlil qilamiz va uning 'uxlab yotgan' potensialini uyg'otamiz.",
+        points: [
+            { icon: 'Medal', text: "50+ dan ortiq loyihalar" },
+            { icon: 'Globe', text: "Xalqaro tajriba" },
+            { icon: 'Zap', text: "Tez va samarali aloqa" },
+            { icon: 'Users', text: "Aniq va shaffof ish jarayoni" },
+        ],
+        phoneButton: "Telefon orqali bog'lanish",
+        telegramButton: "Telegram orqali yozish"
+    },
+    ru: {
+        title: "Основатель: Бахтиёрджон Газиев",
+        message: "Привет! Я Бахтиёрджон, основатель Jon.Branding. Я помогаю владельцам бизнеса вывести их бренды на новый уровень. Моя цель — не просто создать красивый дизайн, а построить работающую, основанную на стратегии и приносящую результат бренд-систему для вашего бизнеса. Давайте вместе проанализируем ваш бренд и пробудим его 'спящий' потенциал.",
+        points: [
+            { icon: 'Medal', text: "Более 50+ проектов" },
+            { icon: 'Globe', text: "Международный опыт" },
+            { icon: 'Zap', text: "Быстрая и эффективная связь" },
+            { icon: 'Users', text: "Четкий и прозрачный рабочий процесс" },
+        ],
+        phoneButton: "Связаться по телефону",
+        telegramButton: "Написать в Telegram"
+    }
+  }
+  const translations = lang === 'ru' ? t.ru : t.uz;
 
   return (
     <section id="founder" className="py-16 sm:py-24 bg-secondary">
@@ -29,13 +47,13 @@ const Founder = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
             <h2 className="text-3xl sm:text-4xl font-bold">
-              Asoschi: Baxtiyorjon Gaziyev
+              {translations.title}
             </h2>
             <p className="mt-4 text-lg text-gray-700">
-              {founderMessage}
+              {translations.message}
             </p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {founderPoints.map((point, index) => {
+              {translations.points.map((point, index) => {
                 const Icon = icons[point.icon];
                 return (
                     <div key={index} className="flex items-center gap-3">
@@ -49,13 +67,13 @@ const Founder = () => {
                 <Button size="lg" className="w-full sm:w-auto" asChild>
                     <a href="tel:+998336450097">
                         <Phone className="mr-2 h-5 w-5" />
-                        Telefon orqali bog'lanish
+                        {translations.phoneButton}
                     </a>
                 </Button>
                  <Button size="lg" variant="default" className="w-full sm:w-auto" asChild>
                     <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
                         <Send className="mr-2 h-5 w-5" />
-                        Telegram orqali yozish
+                        {translations.telegramButton}
                     </a>
                 </Button>
             </div>

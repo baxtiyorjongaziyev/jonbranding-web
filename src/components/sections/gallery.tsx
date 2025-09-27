@@ -46,19 +46,31 @@ const MarqueeColumn = ({ images, animationClass }: { images: typeof galleryImage
 );
 
 
-const Gallery: React.FC = () => {
+const Gallery: React.FC<{ lang: string }> = ({ lang }) => {
   // To make the columns more balanced
   const midPoint = Math.ceil(galleryImages.length / 2);
   const firstColumn = galleryImages.slice(0, midPoint);
   const secondColumn = galleryImages.slice(midPoint);
+  
+  const t = {
+    uz: {
+        title: "Ishlarimizdan namunalar",
+        subtitle: "Biz yaratgan brendlar o'z sohasida qanday ajralib turishini ko'ring."
+    },
+    ru: {
+        title: "Примеры наших работ",
+        subtitle: "Посмотрите, как созданные нами бренды выделяются в своей нише."
+    }
+  }
+  const translations = lang === 'ru' ? t.ru : t.uz;
 
   return (
     <section id="portfolio" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold">Ishlarimizdan namunalar</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
-            Biz yaratgan brendlar o'z sohasida qanday ajralib turishini ko'ring.
+            {translations.subtitle}
           </p>
         </div>
       </div>

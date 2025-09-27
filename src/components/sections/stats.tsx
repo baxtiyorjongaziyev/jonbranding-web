@@ -5,13 +5,6 @@ import { Medal, Users, Star, Award } from 'lucide-react';
 import { motion, useInView, useAnimate } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
-const stats = [
-  { icon: Medal, value: 9, suffix: "+", label: "Yillik tajriba" },
-  { icon: Users, value: 500, suffix: "+", label: "Mamnun mijozlar" },
-  { icon: Award, value: 1000, suffix: "+", label: "Muvaffaqiyatli loyiha" },
-  { icon: Star, value: 90, suffix: "%", label: "Mijozlar tavsiya qilishadi" }
-];
-
 interface AnimatedNumberProps {
   value: number;
   suffix?: string;
@@ -44,7 +37,30 @@ const AnimatedNumber = ({ value, suffix }: AnimatedNumberProps) => {
 };
 
 
-const Stats = () => {
+const Stats = ({ lang }: { lang: string }) => {
+  const t = {
+    uz: {
+      experience: "Yillik tajriba",
+      clients: "Mamnun mijozlar",
+      projects: "Muvaffaqiyatli loyiha",
+      recommend: "Mijozlar tavsiya qilishadi"
+    },
+    ru: {
+      experience: "Лет опыта",
+      clients: "Довольных клиентов",
+      projects: "Успешных проектов",
+      recommend: "Клиентов рекомендуют нас"
+    }
+  }
+  const translations = lang === 'ru' ? t.ru : t.uz;
+  
+  const stats = [
+    { icon: Medal, value: 9, suffix: "+", label: translations.experience },
+    { icon: Users, value: 500, suffix: "+", label: translations.clients },
+    { icon: Award, value: 1000, suffix: "+", label: translations.projects },
+    { icon: Star, value: 90, suffix: "%", label: translations.recommend }
+  ];
+
   return (
     <section className="bg-white py-16 sm:py-20">
       <div className="container mx-auto px-4">

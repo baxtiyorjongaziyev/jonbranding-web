@@ -85,11 +85,23 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     );
 };
 
-const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) => {
+const TestimonialsClient = ({ testimonials, lang }: { testimonials: Testimonial[], lang: string }) => {
     const autoplayPlugin = useRef(
       Autoplay({ delay: 5000, stopOnInteraction: true })
     );
     const [playVideo, setPlayVideo] = useState(false);
+    
+    const t = {
+        uz: {
+            title: "Mijozlarimiz biz haqimizda",
+            subtitle: "Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz."
+        },
+        ru: {
+            title: "Что о нас говорят клиенты",
+            subtitle: "Наше самое большое достижение — это наши довольные клиенты."
+        }
+    }
+    const translations = lang === 'ru' ? t.ru : t.uz;
     
     if (!testimonials || testimonials.length === 0) {
       return null;
@@ -102,9 +114,9 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
     <section className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold">Mijozlarimiz biz haqimizda</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
-            Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz.
+            {translations.subtitle}
           </p>
         </div>
         
@@ -185,10 +197,8 @@ const TestimonialsClient = ({ testimonials }: { testimonials: Testimonial[] }) =
   )
 }
 
-const Testimonials = () => {
-    return <TestimonialsClient testimonials={staticTestimonials} />
+const Testimonials = ({ lang }: { lang: string }) => {
+    return <TestimonialsClient testimonials={staticTestimonials} lang={lang} />
 };
 
 export default Testimonials;
-
-    
