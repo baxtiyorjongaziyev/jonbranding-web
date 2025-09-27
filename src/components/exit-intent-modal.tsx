@@ -6,6 +6,7 @@ import { useExitIntent } from '@/hooks/use-exit-intent';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Gift } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface ExitIntentModalProps {
   onPrimaryClick: () => void;
@@ -14,11 +15,12 @@ interface ExitIntentModalProps {
 
 const ExitIntentModal: FC<ExitIntentModalProps> = ({ onPrimaryClick, lang }) => {
   const [isOpen, setOpen] = useState(false);
+  const router = useRouter();
   
   const handleClose = () => setOpen(false);
 
   const handleOpen = () => {
-    onPrimaryClick();
+    router.push(`/${lang}/xizmatlar`);
     handleClose();
   }
 
