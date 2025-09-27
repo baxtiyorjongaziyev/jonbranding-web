@@ -1,7 +1,4 @@
 
-
-'use client';
-
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
@@ -9,15 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 import type { FC, ReactNode } from 'react';
 import Head from 'next/head';
 import { Poppins } from 'next/font/google';
-import { useState, useCallback, useEffect, Suspense } from 'react';
-import dynamic from 'next/dynamic';
-import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
-import AiAssistant from '@/components/ai-assistant';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { pageview } from '@/lib/gtag';
-import CookieConsentBanner from '@/components/cookie-consent-banner';
-
-const ContactModal = dynamic(() => import('@/components/contact-modal'));
+import MainLayout from '@/components/layout/main-layout';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -44,92 +33,9 @@ const jsonLd = {
   url: 'https://jonbranding.uz',
 };
 
-// This component handles the page view tracking
-function AnalyticsTracker() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const url = pathname + searchParams.toString();
-    pageview(url);
-  }, [pathname, searchParams]);
-
-  return null;
-}
-
 
 const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: string } }>> = ({ children, params }) => {
-    const [isModalOpen, setModalOpen] = useState(false);
-    const [packageSummary, setPackageSummary] = useState('');
-    const [totalPrice, setTotalPrice] = useState(0);
-    const pathname = usePathname();
-    const lang = pathname.split('/')[1] || 'uz';
-
-    const handleOpenModal = useCallback(() => {
-        const selectionsJSON = localStorage.getItem('selectedServices');
-        const wantsUpfrontPaymentJSON = localStorage.getItem('wantsUpfrontPayment');
-        
-        // Reset before calculating
-        setPackageSummary('');
-        setTotalPrice(0);
-
-        if (selectionsJSON) {
-            try {
-                const selectedServices = JSON.parse(selectionsJSON);
-                const wantsUpfrontPayment = wantsUpfrontPaymentJSON ? JSON.parse(wantsUpfrontPaymentJSON) : false;
-                const selections = { selectedServices, wantsUpfrontPayment };
-                
-                const priceDetails = calculatePackagePrice(selections);
-                if (priceDetails.base > 0) {
-                    const summary = generateSummary(selections);
-                    setPackageSummary(summary);
-                    setTotalPrice(priceDetails.final);
-                }
-
-            } catch (e) {
-                console.error("Failed to parse package details from localStorage", e);
-                 setPackageSummary('');
-                 setTotalPrice(0);
-            }
-        }
-        setModalOpen(true);
-    }, []);
-
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
-
-    useEffect(() => {
-        const handleOpen = () => handleOpenModal();
-        window.addEventListener('openContactModal', handleOpen);
-
-        // Global Error Handler
-        const handleError = (event: ErrorEvent) => {
-            const { message, filename, lineno, colno, error } = event;
-            // Avoid sending feedback loop errors or generic script errors
-            if (!message || message.includes('Telegram API Error') || message === 'Script error.') return;
-
-
-            fetch('/api/report-error', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    message: message,
-                    stack: error ? error.stack : `${filename}:${lineno}:${colno}`,
-                    pathname: window.location.pathname,
-                    userInfo: navigator.userAgent,
-                }),
-            }).catch(e => console.error("Failed to report error:", e)); // Log reporting failure
-        };
-
-        window.addEventListener('error', handleError);
-
-        return () => {
-            window.removeEventListener('openContactModal', handleOpen);
-            window.removeEventListener('error', handleError);
-        };
-    }, [handleOpenModal]);
-
+    const lang = params.lang || 'uz';
 
   return (
     <html lang={lang} suppressHydrationWarning className={`${poppins.variable}`}>
@@ -178,9 +84,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: string } }>
 
       </Head>
       <body className="font-body bg-white antialiased">
-        <Suspense fallback={null}>
-          <AnalyticsTracker />
-        </Suspense>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         
         {/* Google Analytics */}
@@ -219,20 +122,9 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: string } }>
             `,
           }}
         />
-
-        <div className="flex min-h-screen flex-col bg-secondary/50">
-           {children}
-        </div>
-        <Toaster />
-        <ContactModal
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-            packageSummary={packageSummary}
-            totalPrice={totalPrice}
-            onFormSubmitSuccess={handleCloseModal}
-        />
-        <AiAssistant />
-        <CookieConsentBanner />
+        <MainLayout>
+          {children}
+        </MainLayout>
       </body>
     </html>
   );
