@@ -1,13 +1,14 @@
 
+
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import type { FC, ReactNode } from 'react';
-import Head from 'next/head';
 import { Poppins } from 'next/font/google';
 import MainLayout from '@/components/layout/main-layout';
-import { Locale } from '@/lib/dictionaries';
+import type { Locale } from '@/lib/i18n/locale';
+import { locales } from '@/lib/i18n/locale';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -19,8 +20,45 @@ const poppins = Poppins({
 const APP_NAME = "Jon.Branding | Biznesingiz uchun natija keltiradigan brending";
 const APP_DESCRIPTION = "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun natija keltiradigan, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.";
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
-const CANONICAL_URL = 'https://jonbranding.uz';
+const BASE_URL = 'https://jonbranding.uz';
 
+export function generateMetadata({ params: { lang } }: { params: { lang: Locale } }): Metadata {
+  const alternates: { [key: string]: string } = {};
+  locales.forEach(l => {
+    alternates[l] = `${BASE_URL}/${l}`;
+  });
+
+  return {
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
+    alternates: {
+      canonical: `${BASE_URL}/${lang}`,
+      languages: alternates,
+    },
+    openGraph: {
+      title: APP_NAME,
+      description: APP_DESCRIPTION,
+      url: `${BASE_URL}/${lang}`,
+      siteName: 'Jon.Branding',
+      images: [
+        {
+          url: OG_IMAGE_URL,
+          width: 1200,
+          height: 630,
+          alt: APP_DESCRIPTION,
+        },
+      ],
+      type: 'website',
+      locale: lang,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: APP_NAME,
+      description: APP_DESCRIPTION,
+      images: [OG_IMAGE_URL],
+    },
+  };
+}
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -40,19 +78,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
 
   return (
     <html lang={lang} suppressHydrationWarning className={`${poppins.variable}`}>
-      <Head>
-        <title>{APP_NAME}</title>
-        <meta name="description" content={APP_DESCRIPTION} />
-        <link rel="canonical" href={CANONICAL_URL} />
-        <meta property="og:url" content={CANONICAL_URL} />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={APP_NAME} />
-        <meta property="og:description" content={APP_DESCRIPTION} />
-        <meta property="og:image" content={OG_IMAGE_URL} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={APP_NAME} />
-        <meta name="twitter:description" content={APP_DESCRIPTION} />
-        <meta name="twitter:image" content={OG_IMAGE_URL} />
+      <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -83,7 +109,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
         </noscript>
         {/* End Meta Pixel Code */}
 
-      </Head>
+      </head>
       <body className="font-body bg-white antialiased">
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         
@@ -132,5 +158,3 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
 }
 
 export default RootLayout;
-
-    
