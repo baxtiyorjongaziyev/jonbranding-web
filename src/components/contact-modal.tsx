@@ -38,6 +38,12 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const t = {
     uz: {
+      stepTitles: {
+        contact: "Aloqa ma'lumotlari",
+        project: "Loyiha haqida",
+        budget: "Byudjet",
+        meeting: "Uchrashuv"
+      },
       title: "Sifatli konsultatsiya uchun",
       description: "Loyihangizni yaxshiroq tushunishimiz uchun bir nechta savollarga javob bering.",
       fullName: "Ism, Familiya",
@@ -99,6 +105,12 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       }
     },
     ru: {
+      stepTitles: {
+        contact: "Контактные данные",
+        project: "О проекте",
+        budget: "Бюджет",
+        meeting: "Встреча"
+      },
       title: "Для качественной консультации",
       description: "Ответьте на несколько вопросов, чтобы мы лучше поняли ваш проект.",
       fullName: "Имя, Фамилия",
@@ -164,6 +176,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const translations = lang === 'ru' ? t.ru : t.uz;
   const budgetOptions = translations.budgetOptions;
 
+  const STEPS = [
+    { id: 1, title: translations.stepTitles.contact, fields: ['fullName', 'phone', 'telegram'] },
+    { id: 2, title: translations.stepTitles.project, fields: ['companyName', 'website', 'goal'] },
+    { id: 3, title: translations.stepTitles.budget, fields: ['budget'] },
+    { id: 4, title: translations.stepTitles.meeting, fields: ['location', 'meetingPlace'] },
+];
+
+
   const formSchema = z.object({
     fullName: z.string().min(2, { message: translations.formErrors.fullName }),
     phone: z.string().min(9, { message: translations.formErrors.phone }),
@@ -185,13 +205,6 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   });
 
   type FormData = z.infer<typeof formSchema>;
-
-  const STEPS = [
-    { id: 1, title: 'Aloqa ma’lumotlari', fields: ['fullName', 'phone', 'telegram'] },
-    { id: 2, title: 'Loyiha haqida', fields: ['companyName', 'website', 'goal'] },
-    { id: 3, title: 'Byudjet', fields: ['budget'] },
-    { id: 4, title: 'Uchrashuv', fields: ['location', 'meetingPlace'] },
-];
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -541,7 +554,3 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 };
 
 export default ContactModal;
-
-    
-
-    
