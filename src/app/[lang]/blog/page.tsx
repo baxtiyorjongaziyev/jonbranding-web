@@ -5,10 +5,25 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
-import { uz } from 'date-fns/locale';
+import { uz, ru } from 'date-fns/locale';
 
-const BlogPage = async () => {
+const BlogPage = async ({ params: { lang } }: { params: { lang: string } }) => {
   const sortedPosts = getSortedPostsData();
+  
+  const t = {
+    uz: {
+      title: "Bizning Blog",
+      subtitle: "Brending, marketing va dizayn olamidagi so'nggi yangiliklar, maslahatlar va tahliliy maqolalar. Biznesingizni o'stirishga yordam beramiz.",
+      readMore: "Batafsil o'qish"
+    },
+    ru: {
+      title: "Наш Блог",
+      subtitle: "Последние новости, советы и аналитические статьи из мира брендинга, маркетинга и дизайна. Помогаем вашему бизнесу расти.",
+      readMore: "Читать далее"
+    }
+  }
+  const translations = lang === 'ru' ? t.ru : t.uz;
+  const locale = lang === 'ru' ? ru : uz;
 
   return (
     <main className="flex-grow bg-secondary/50">
@@ -16,16 +31,16 @@ const BlogPage = async () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
-              Bizning Blog
+              {translations.title}
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
-              Brending, marketing va dizayn olamidagi so'nggi yangiliklar, maslahatlar va tahliliy maqolalar. Biznesingizni o'stirishga yordam beramiz.
+              {translations.subtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {sortedPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="block group">
+              <Link key={post.slug} href={`/${lang}/blog/${post.slug}`} className="block group">
                 <Card className="h-full flex flex-col overflow-hidden shadow-lg rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                   <div className="relative w-full h-56 flex-shrink-0 overflow-hidden">
                     <Image
@@ -40,7 +55,7 @@ const BlogPage = async () => {
                   <div className="flex flex-col flex-grow">
                     <CardHeader>
                       <CardDescription className="text-sm text-gray-500 pt-1">
-                        <span>{format(parseISO(post.date), 'd-MMMM, yyyy', { locale: uz })}</span>
+                        <span>{format(parseISO(post.date), 'd-MMMM, yyyy', { locale })}</span>
                         {' '} &bull; {' '}
                         <span>{post.author}</span>
                       </CardDescription>
@@ -53,7 +68,7 @@ const BlogPage = async () => {
                     </CardContent>
                     <div className="p-6 pt-0 mt-auto">
                        <span className="font-semibold text-primary flex items-center transition-all duration-300">
-                          Batafsil o'qish <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                          {translations.readMore} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                        </span>
                     </div>
                   </div>
