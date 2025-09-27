@@ -1,40 +1,34 @@
-
 'use client';
 
 import { type BlogPost } from '@/lib/types';
 import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
-import { uz, ru } from 'date-fns/locale';
+import { uz, ru, enUS } from 'date-fns/locale';
 import CtaBlock from '@/components/sections/cta-block';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { getDictionary, Locale } from '@/lib/dictionaries';
+import { Skeleton } from './ui/skeleton';
 
 const BlogPostClient = ({ post }: { post: BlogPost }) => {
   const params = useParams();
-  const lang = params.lang as 'uz' | 'ru';
+  const lang = params.lang as Locale;
+  const [translations, setTranslations] = useState<any>(null);
+
+  useEffect(() => {
+    getDictionary(lang).then(dict => setTranslations(dict.blogPost));
+  }, [lang]);
   
   const handleOpenModal = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
   
-  const t = {
-    uz: {
-      author: "Muallif",
-      ctaTitle: "Maqola foydali bo'ldimi?",
-      ctaDesc: "Endi nazariyadan amaliyotga o'tish vaqti keldi. Brendingizni biz bilan keyingi bosqichga olib chiqing.",
-      ctaButton: "Bepul konsultatsiya olish"
-    },
-    ru: {
-      author: "Автор",
-      ctaTitle: "Статья была полезной?",
-      ctaDesc: "Теперь пришло время перейти от теории к практике. Выведите свой бренд на новый уровень вместе с нами.",
-      ctaButton: "Получить бесплатную консультацию"
-    }
+  if (!translations) {
+    return <main className="flex-grow bg-white"><Skeleton className="h-screen w-full"/></main>;
   }
 
-  const translations = lang === 'ru' ? t.ru : t.uz;
-  const locale = lang === 'ru' ? ru : uz;
+  const locale = lang === 'ru' ? ru : (lang === 'en' ? enUS : uz);
 
   return (
     <main className="flex-grow bg-white">
@@ -45,7 +39,7 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
               {post.title}
             </h1>
             <p className="mt-6 text-lg text-gray-600">
-                <span>{format(parseISO(post.date), 'd-MMMM, yyyy', { locale })}</span>
+                <span>{format(parseISO(post.date), 'MMMM d, yyyy', { locale })}</span>
                 {' '} &bull; {' '}
                 <span>{translations.author}: {post.author}</span>
             </p>

@@ -1,11 +1,11 @@
-
 'use client';
 
 import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import Image, { type ImageProps } from 'next/image';
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { getDictionary, Locale } from '@/lib/dictionaries';
 
 interface ImageComparisonSliderProps {
   beforeImage: Omit<ImageProps, 'fill' | 'className'>;
@@ -17,6 +17,18 @@ interface ImageComparisonSliderProps {
 const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: ImageComparisonSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0.5); // Represents position from 0 to 1
+  const [translations, setTranslations] = useState<{ before: string, after: string } | null>(null);
+
+  useEffect(() => {
+    // A simplified way to get specific translations for this component
+    if (lang === 'uz') {
+      setTranslations({ before: "Avval", after: "Hozir" });
+    } else if (lang === 'ru') {
+      setTranslations({ before: "До", after: "После" });
+    } else {
+      setTranslations({ before: "Before", after: "After" });
+    }
+  }, [lang]);
 
   const handlePan = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
       if (!containerRef.current) return;
@@ -28,18 +40,9 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
   const afterWidth = useTransform(x, val => `${val * 100}%`);
   const handleX = useTransform(x, val => `${val * 100}%`);
 
-  const t = {
-    uz: {
-      before: "Avval",
-      after: "Hozir"
-    },
-    ru: {
-      before: "До",
-      after: "После"
-    }
+  if (!translations) {
+    return <div className={cn("relative w-full aspect-square cursor-ew-resize group", className)}></div>
   }
-
-  const translations = lang === 'ru' ? t.ru : t.uz;
 
   return (
     <motion.div 
@@ -67,13 +70,15 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
         style={{ width: afterWidth }}
         initial={{ width: "50%" }}
       >
-        <Image 
-            {...afterImage}
-            alt={afterImage.alt}
-            fill
-            className="absolute inset-0 object-cover h-full w-auto max-w-none pointer-events-none"
-            priority
-        />
+        <div style={{ width: '100vw', height: '100%', position: 'relative' }}>
+          <Image 
+              {...afterImage}
+              alt={afterImage.alt}
+              fill
+              className="absolute inset-0 object-cover h-full w-auto max-w-none pointer-events-none"
+              priority
+          />
+        </div>
         <div className="absolute top-2 right-2 bg-primary/80 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">{translations.after}</div>
       </motion.div>
 
