@@ -1,4 +1,3 @@
-
 'use client';
 
 import { FC } from 'react';
@@ -64,7 +63,8 @@ const t = {
 }
 
 
-const FirmenniyStilPage: FC<{ lang: string }> = ({ lang }) => {
+const FirmenniyStilPage: FC<{ params: { lang: string } }> = ({ params }) => {
+  const { lang } = params;
 
   const handleOpenModal = () => {
     const contactEvent = new CustomEvent('openContactModal');

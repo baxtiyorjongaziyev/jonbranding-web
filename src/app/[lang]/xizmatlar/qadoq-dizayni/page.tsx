@@ -1,4 +1,3 @@
-
 'use client';
 
 import { FC } from 'react';
@@ -49,13 +48,9 @@ const t = {
 }
 
 
-const QadoqDizayniPage: FC<{ lang: string }> = ({ lang }) => {
+const QadoqDizayniPage: FC<{ params: { lang: string } }> = ({ params }) => {
+  const { lang } = params;
 
-  const handleOpenModal = () => {
-    const contactEvent = new CustomEvent('openContactModal');
-    window.dispatchEvent(contactEvent);
-  };
-  
   const translations = lang === 'ru' ? t.ru : t.uz;
   const processSteps = translations.process_steps;
 

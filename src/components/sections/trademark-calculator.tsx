@@ -1,19 +1,7 @@
-
 'use client';
 
-// =============================================================
-// Jon.Branding – Patent hisoblagichi (React client, no emit deps)
-// BHM = 412 000 so'm
-// -------------------------------------------------------------
-// Muhim dizayn qarorlari:
-// • Hech qanday Suspense, event emitter, yoki tashqi UI kutubxonasi ishlatilmaydi
-//   → 'emit' / 'addListener' xatolarining ildizi bo'ladigan joylar yo'q.
-// • Hisob-kitoblar alohida pure-funktsiyada (calculateFees) → testlash oson.
-// • Inline kommentlar murakkab qismlarni izohlaydi.
-// =============================================================
-
 import React, { useMemo, useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -26,48 +14,27 @@ import { motion } from 'framer-motion';
 import { Slider } from '@/components/ui/slider';
 
 
-// ========================
-// 1) Konstanta va tariflar
-// ========================
-const BHM = 412000;              // Bazaviy hisoblash miqdori
-const PATENT_XIZMATI = 3000000;  // Agentlik xizmat haqi (doimiy)
-
-// Tezkor topshirish (1.5 oy): 12×BHM + 12% NDS
-// 12 * 412 000 * 1.12 = 5 537 280 (Math.round – ehtiyot chorasi)
+const BHM = 412000;
+const PATENT_XIZMATI = 3000000;
 const EXPEDITE_BASE = Math.round(12 * BHM * 1.12);
-
-// Tezkor topshirishda har bir qo'shimcha klass uchun qat'iy summa
 const EXPEDITE_PER_EXTRA_CLASS = 461000;
+const STEP1_JISMONIY = 4 * BHM;
+const STEP1_YURIDIK  = 6 * BHM;
+const STEP1_EXTRA_JISMONIY = 0.5 * BHM;
+const STEP1_EXTRA_YURIDIK  = 4 * BHM;
+const STEP2_JISMONIY = 6.8 * BHM;
+const STEP2_YURIDIK  = 11.6 * BHM;
+const STEP2_EXTRA_JISMONIY = 1 * BHM;
+const STEP2_EXTRA_YURIDIK  = 4 * BHM;
+const EXPERT_BASE = 2 * BHM;
+const EXPERT_PER_EXTRA_CLASS = 1 * BHM;
 
-// 1-bosqich: talabnoma berish (1-klass bazaviy)
-const STEP1_JISMONIY = 4 * BHM;      // 1 648 000
-const STEP1_YURIDIK  = 6 * BHM;      // 2 472 000
-// 1-bosqich qo'shimcha klasslar
-const STEP1_EXTRA_JISMONIY = 0.5 * BHM; // 206 000 / klass
-const STEP1_EXTRA_YURIDIK  = 4 * BHM;   // 1 648 000 / klass
-
-// 2-bosqich: guvohnoma olish (1-klass bazaviy)
-const STEP2_JISMONIY = 6.8 * BHM;    // 2 801 600
-const STEP2_YURIDIK  = 11.6 * BHM;   // 4 779 200
-// 2-bosqich qo'shimcha klasslar
-const STEP2_EXTRA_JISMONIY = 1 * BHM;   // 412 000 / klass
-const STEP2_EXTRA_YURIDIK  = 4 * BHM;   // 1 648 000 / klass
-
-// Ekspert tekshiruvi: yoqilganda 2×BHM + har bir qo'shimcha klass uchun 1×BHM
-const EXPERT_BASE = 2 * BHM;            // 824 000
-const EXPERT_PER_EXTRA_CLASS = 1 * BHM; // 412 000
-
-// ========================
-// 2) Kichik yordamchi funksiyalar
-// ========================
-/** classCount qiymatini 1..45 oralig'ida ushlab turadi (xavfsiz clamp) */
 const clampClassCount = (n: number) => {
   const x = Number(n);
   if (!Number.isFinite(x)) return 1;
   return Math.max(1, Math.min(45, Math.trunc(x)));
 };
 
-/** Telefon validatsiyasi: '+998' + 9 ta raqam (jami 13 belgi) */
 const isUzPhone = (s: string) => {
   if (!s || s.length !== 13) return false;
   if (!s.startsWith('+998')) return false;
@@ -78,29 +45,16 @@ const isUzPhone = (s: string) => {
   return true;
 };
 
-/** Inputga telefon terishda qadam-baqadam cheklash (typing guard) */
 const allowPhoneTyping = (s: string) => {
-  if (!s.startsWith('+998')) return false;  // prefiks majburiy
-  if (s.length > 13) return false;          // maksimal uzunlik
+  if (!s.startsWith('+998')) return false;
+  if (s.length > 13) return false;
   for (let i = 4; i < s.length; i++) {
     const c = s[i];
-    if (c < '0' || c > '9') return false;  // faqat raqam
+    if (c < '0' || c > '9') return false;
   }
   return true;
 };
 
-// ========================
-// 3) Hisob-kitoblar (pure function)
-// ========================
-/**
- * calculateFees — barcha to'lovlarni hisoblaydi (deterministik/pure)
- * Parametrlar:
- *  - isYuridik: true → yuridik, false → jismoniy
- *  - classCount: klasslar soni (1..45)
- *  - speed: 'oddiy' | 'tez' (tezkor topshirish)
- *  - hasEkspert: ekspert tekshiruvi yooqlimi
- * Qaytaradi: step1/step2/expedite/ekspert/davlatBoj/total
- */
 export function calculateFees({
   isYuridik = false,
   classCount = 1,
@@ -114,29 +68,24 @@ export function calculateFees({
 }) {
   const cc = clampClassCount(classCount);
 
-  // --- 1-bosqich ---
   const step1Base = isYuridik ? STEP1_YURIDIK : STEP1_JISMONIY;
   const step1Extra = (cc - 1) * (isYuridik ? STEP1_EXTRA_YURIDIK : STEP1_EXTRA_JISMONIY);
   const step1 = step1Base + step1Extra;
 
-  // --- 2-bosqich ---
   const step2Base = isYuridik ? STEP2_YURIDIK : STEP2_JISMONIY;
   const step2Extra = (cc - 1) * (isYuridik ? STEP2_EXTRA_YURIDIK : STEP2_EXTRA_JISMONIY);
   const step2 = step2Base + step2Extra;
 
-  // --- Tezkor topshirish ---
   const expediteBase = speed === 'tez' ? EXPEDITE_BASE : 0;
   const expediteExtra = speed === 'tez' ? (cc - 1) * EXPEDITE_PER_EXTRA_CLASS : 0;
   const expediteTotal = expediteBase + expediteExtra;
 
-  // --- Ekspert tekshiruvi ---
   const ekspertBase = hasEkspert ? EXPERT_BASE : 0;
   const ekspertExtra = hasEkspert ? (cc - 1) * EXPERT_PER_EXTRA_CLASS : 0;
   const ekspertTotal = ekspertBase + ekspertExtra;
 
-  // --- Yakun ---
-  const davlatBoj = step1 + step2 + expediteTotal;          // faqat davlat yig'imlari
-  const total = davlatBoj + PATENT_XIZMATI + ekspertTotal;  // agentlik + (ixtiyoriy) ekspert
+  const davlatBoj = step1 + step2 + expediteTotal;
+  const total = davlatBoj + PATENT_XIZMATI + ekspertTotal;
 
   return {
     step1, step1Base, step1Extra,
@@ -148,10 +97,8 @@ export function calculateFees({
   };
 }
 
-
-// Yangi Dynamic Toggle komponenti
 const DynamicToggle = ({ id, options, selected, onSelect }: {
-    id: string; // Unique ID for layoutId
+    id: string;
     options: { value: string, label: string }[];
     selected: string;
     onSelect: (value: string) => void;
@@ -182,60 +129,179 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
     );
 };
 
-// ========================
-// 4) UI komponent
-// ========================
-export default function TrademarkCalculator() {
+const t = {
+    uz: {
+        formTitle: "Ma'lumotlarni kiriting",
+        brandNameLabel: "Brend nomi",
+        brandNamePlaceholder: "Masalan: MyBrand",
+        yourNameLabel: "Ismingiz",
+        yourNamePlaceholder: "To'liq ismingizni kiriting",
+        phoneLabel: "Telefon raqam",
+        phonePlaceholder: "+998901234567",
+        classCountLabel: "Faoliyat yo'nalishlari soni (klass)",
+        classCountMax: "Maks. 45 ta",
+        personTypeLabel: "Shaxs turi",
+        personTypeOptions: [
+            { value: 'jismoniy', label: 'Jismoniy shaxs' },
+            { value: 'yuridik', label: 'Yuridik shaxs' }
+        ],
+        speedLabel: "Ko‘rib chiqish tezligi",
+        speedOptions: [
+            { value: 'oddiy', label: 'Oddiy (7 oy)' },
+            { value: 'tez', label: 'Tezkor (1.5 oy)' }
+        ],
+        expertCheckLabel: "Qo'shimcha ekspert tekshiruvi",
+        expertCheckOptions: [
+            { value: 'ha', label: 'Yoqilgan' },
+            { value: 'yoq', label: 'O‘chirilgan' }
+        ],
+        activityLabel: "Faoliyat turlari (ixtiyoriy)",
+        activityPlaceholder: "Masalan: dizayn, qurilish, kiyim-kechak ishlab chiqarish...",
+        activityHelp: "Bu klasslarni aniqlashda yordam beradi.",
+        submitButton: "Patentlashga buyurtma berish",
+        submittingButton: "Yuborilmoqda...",
+        successMessage: "✅ Buyurtma qabul qilindi!",
+        tryAgainButton: "Yana hisoblash",
+        summaryTitle: "Xarajatlar tafsiloti",
+        totalCostTitle: "10 yillik patent uchun taxminiy umumiy xarajat",
+        currency: "so'm",
+        totalCostNote: "Barcha davlat bojlari va xizmatlar narxi ichida",
+        step1Title: "1-bosqich (Dastlabki to‘lov)",
+        ourServiceFee: "Jamoamiz xizmati",
+        applicationFee: "Tovar belgisi uchun ariza boji",
+        step1Total: "1-bosqich jami",
+        step2Title: "2-bosqich (Guvohnoma olish)",
+        stateFeeBase: "Davlat boji (bazaviy)",
+        extraClassesFee: (count: number) => `Qo‘shimcha klasslar (${count} ta)`,
+        step2Total: "2-bosqich jami",
+        expediteTitle: "Tezkor topshirish uchun qo'shimcha",
+        expediteBaseFee: "Asosiy (12 BHM + 12% NDS)",
+        expediteTotal: "Tezkor to'lov jami",
+        expertCheckTitle: "Ekspert tekshiruvi",
+        expertBaseFee: "Bazaviy (2×BHM)",
+        expertTotal: "Ekspert xizmati jami",
+        importantNoteTitle: "Muhim eslatma",
+        importantNoteText: (bhm: string) => `Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan bazaviy hisoblash miqdori (BHM)ga bog'liq va o'zgarishi mumkin. Hozirgi BHM ${bhm} so'm. Bu kalkulyator ommaviy oferta emas va faqat tanishish uchun mo'ljallangan.`,
+        error_brand: "Iltimos, brend nomini kiriting.",
+        error_name: "Iltimos, ismingizni kiriting.",
+        error_phone: "Iltimos, to‘g‘ri telefon raqam kiriting.",
+        error_server: "Serverda xatolik yuz berdi.",
+        success_toast_title: "Muvaffaqiyatli!",
+        success_toast_desc: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
+        error_toast_title: "Xatolik!",
+        error_toast_desc: (msg: string) => msg || 'So‘rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.',
+    },
+    ru: {
+        formTitle: "Введите данные",
+        brandNameLabel: "Название бренда",
+        brandNamePlaceholder: "Например: MyBrand",
+        yourNameLabel: "Ваше имя",
+        yourNamePlaceholder: "Введите ваше полное имя",
+        phoneLabel: "Номер телефона",
+        phonePlaceholder: "+998901234567",
+        classCountLabel: "Количество классов деятельности",
+        classCountMax: "Макс. 45",
+        personTypeLabel: "Тип лица",
+        personTypeOptions: [
+            { value: 'jismoniy', label: 'Физическое лицо' },
+            { value: 'yuridik', label: 'Юридическое лицо' }
+        ],
+        speedLabel: "Скорость рассмотрения",
+        speedOptions: [
+            { value: 'oddiy', label: 'Обычная (7 мес.)' },
+            { value: 'tez', label: 'Ускоренная (1.5 мес.)' }
+        ],
+        expertCheckLabel: "Дополнительная экспертиза",
+        expertCheckOptions: [
+            { value: 'ha', label: 'Включена' },
+            { value: 'yoq', label: 'Отключена' }
+        ],
+        activityLabel: "Виды деятельности (необязательно)",
+        activityPlaceholder: "Например: дизайн, строительство, производство одежды...",
+        activityHelp: "Это поможет определить классы.",
+        submitButton: "Заказать патентование",
+        submittingButton: "Отправка...",
+        successMessage: "✅ Заявка принята!",
+        tryAgainButton: "Рассчитать снова",
+        summaryTitle: "Детализация расходов",
+        totalCostTitle: "Примерная общая стоимость патента на 10 лет",
+        currency: "сум",
+        totalCostNote: "Включая все госпошлины и стоимость услуг",
+        step1Title: "Этап 1 (Первоначальный платеж)",
+        ourServiceFee: "Услуги нашей команды",
+        applicationFee: "Пошлина за подачу заявки",
+        step1Total: "Итого за 1-й этап",
+        step2Title: "Этап 2 (Получение свидетельства)",
+        stateFeeBase: "Госпошлина (базовая)",
+        extraClassesFee: (count: number) => `Дополнительные классы (${count})`,
+        step2Total: "Итого за 2-й этап",
+        expediteTitle: "Доплата за ускоренное рассмотрение",
+        expediteBaseFee: "Основная (12 БРВ + 12% НДС)",
+        expediteTotal: "Итого за ускорение",
+        expertCheckTitle: "Экспертиза",
+        expertBaseFee: "Базовая (2×БРВ)",
+        expertTotal: "Итого за экспертизу",
+        importantNoteTitle: "Важное примечание",
+        importantNoteText: (bhm: string) => `Все цены зависят от базовой расчетной величины (БРВ), установленной Министерством юстиции Республики Узбекистан, и могут меняться. Текущая БРВ составляет ${bhm} сум. Этот калькулятор не является публичной офертой и предназначен только для ознакомления.`,
+        error_brand: "Пожалуйста, введите название бренда.",
+        error_name: "Пожалуйста, введите ваше имя.",
+        error_phone: "Пожалуйста, введите правильный номер телефона.",
+        error_server: "Произошла ошибка на сервере.",
+        success_toast_title: "Успешно!",
+        success_toast_desc: "Ваш запрос принят. Мы скоро с вами свяжемся!",
+        error_toast_title: "Ошибка!",
+        error_toast_desc: (msg: string) => msg || 'Произошла ошибка при отправке запроса. Пожалуйста, попробуйте снова.',
+    }
+};
+
+export default function TrademarkCalculator({ lang = 'uz' }: { lang: string }) {
   const { toast } = useToast();
-  // --- Foydalanuvchi kiritmalari holati ---
+  const translations = t[lang as 'uz' | 'ru'];
+
   const [brand, setBrand] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('+998');
   const [activity, setActivity] = useState('');
   const [classCount, setClassCount] = useState(1);
-  const [isYuridik, setIsYuridik] = useState(false); // default: jismoniy
+  const [isYuridik, setIsYuridik] = useState(false);
   const [speed, setSpeed] = useState<'oddiy' | 'tez'>('oddiy');
   const [hasEkspert, setHasEkspert] = useState(false);
 
-  // --- Jarayon holati ---
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  // Hisobni memoga olish → keraksiz qayta-hisoblashlarni oldini oladi
   const fees = useMemo(
     () => calculateFees({ isYuridik, classCount, speed, hasEkspert }),
     [isYuridik, classCount, speed, hasEkspert]
   );
 
-  // --- Forma yuborish ---
   const handleSubmit = async () => {
-    // Minimal validatsiya
     if (!brand.trim()) {
-        toast({ title: "Xatolik", description: "Iltimos, brend nomini kiriting.", variant: "destructive" });
+        toast({ title: translations.error_toast_title, description: translations.error_brand, variant: "destructive" });
         return;
     }
     if (!name.trim()) {
-         toast({ title: "Xatolik", description: "Iltimos, ismingizni kiriting.", variant: "destructive" });
+         toast({ title: translations.error_toast_title, description: translations.error_name, variant: "destructive" });
         return;
     }
     if (!isUzPhone(phone)) {
-        toast({ title: "Xatolik", description: "Iltimos, to‘g‘ri telefon raqam kiriting.", variant: "destructive" });
+        toast({ title: translations.error_toast_title, description: translations.error_phone, variant: "destructive" });
         return;
     }
 
     setLoading(true);
 
     const telegramMessage = [
-      '🧾 Yangi patent arizasi (Kalkulyatordan)',
+      `🧾 ${lang === 'ru' ? 'Новая заявка на патент (с калькулятора)' : 'Yangi patent arizasi (Kalkulyatordan)'}`,
       `Brend: ${brand}`,
-      `Faoliyat turlari: ${activity || 'Kiritilmagan'}`,
+      `${lang === 'ru' ? 'Виды деятельности' : 'Faoliyat turlari'}: ${activity || (lang === 'ru' ? 'Не указано' : 'Kiritilmagan')}`,
       '---',
-      `Turi: ${isYuridik ? 'Yuridik' : 'Jismoniy'}`,
-      `Klasslar soni: ${fees.classCount}`,
-      `Rejim: ${speed === 'tez' ? 'Tezkor (1.5 oy)' : 'Oddiy (7 oy)'}`,
-      `Ekspert tekshiruvi: ${hasEkspert ? 'Bor' : 'Yo‘q'}`,
+      `${lang === 'ru' ? 'Тип' : 'Turi'}: ${isYuridik ? (lang === 'ru' ? 'Юридическое' : 'Yuridik') : (lang === 'ru' ? 'Физическое' : 'Jismoniy')}`,
+      `${lang === 'ru' ? 'Кол-во классов' : 'Klasslar soni'}: ${fees.classCount}`,
+      `${lang === 'ru' ? 'Режим' : 'Rejim'}: ${speed === 'tez' ? (lang === 'ru' ? 'Ускоренный (1.5 мес.)' : 'Tezkor (1.5 oy)') : (lang === 'ru' ? 'Обычный (7 мес.)' : 'Oddiy (7 oy)')}`,
+      `${lang === 'ru' ? 'Экспертиза' : 'Ekspert tekshiruvi'}: ${hasEkspert ? (lang === 'ru' ? 'Да' : 'Bor') : (lang === 'ru' ? 'Нет' : 'Yo‘q')}`,
       '---',
-      `UMUMIY NARX: ${fees.total.toLocaleString()} so‘m`,
+      `${lang === 'ru' ? 'ОБЩАЯ СТОИМОСТЬ' : 'UMUMIY NARX'}: ${fees.total.toLocaleString()} ${translations.currency}`,
     ].join('\n');
 
     try {
@@ -245,17 +311,16 @@ export default function TrademarkCalculator() {
         body: JSON.stringify({
             fullName: name, 
             phone,
-            packageSummary: telegramMessage, // Sending calc details in a structured way
+            packageSummary: telegramMessage,
             totalPrice: fees.total
         }),
       });
 
       if (!response.ok) {
           const result = await response.json();
-          throw new Error(result.error || "Serverda xatolik yuz berdi.");
+          throw new Error(result.error || translations.error_server);
       }
 
-      // Trigger Google Analytics event
       gtagEvent('form_submit', {
         'event_category': 'Calculator',
         'event_label': 'Trademark Calculator',
@@ -263,15 +328,15 @@ export default function TrademarkCalculator() {
       });
 
       toast({
-        title: "Muvaffaqiyatli!",
-        description: "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
+        title: translations.success_toast_title,
+        description: translations.success_toast_desc,
         variant: 'default',
       });
       setSuccess(true);
     } catch (e: any) {
        toast({
-        title: 'Xatolik!',
-        description: e.message || 'So‘rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.',
+        title: translations.error_toast_title,
+        description: translations.error_toast_desc(e.message),
         variant: 'destructive',
       });
     } finally {
@@ -279,7 +344,6 @@ export default function TrademarkCalculator() {
     }
   };
 
-  // Formani tozalash
   const resetForm = () => {
     setSuccess(false);
     setBrand('');
@@ -292,23 +356,19 @@ export default function TrademarkCalculator() {
     setHasEkspert(false);
   };
 
-  // ========================
-  // 5) UI
-  // ========================
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-      {/* Left: Form */}
       <Card className="p-6">
-        <h2 className="text-xl font-bold text-dark-blue mb-4">Ma'lumotlarni kiriting</h2>
+        <h2 className="text-xl font-bold text-dark-blue mb-4">{translations.formTitle}</h2>
         <div className="space-y-6">
-          <LabeledInput label="Brend nomi" placeholder="Masalan: MyBrand" value={brand} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setBrand(e.target.value)} />
-          <LabeledInput label="Ismingiz" placeholder="To'liq ismingizni kiriting" value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setName(e.target.value)} />
-          <LabeledInput label="Telefon raqam" placeholder="+998901234567" value={phone} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{ const v=e.target.value; if(allowPhoneTyping(v)) setPhone(v); }} />
+          <LabeledInput label={translations.brandNameLabel} placeholder={translations.brandNamePlaceholder} value={brand} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setBrand(e.target.value)} />
+          <LabeledInput label={translations.yourNameLabel} placeholder={translations.yourNamePlaceholder} value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setName(e.target.value)} />
+          <LabeledInput label={translations.phoneLabel} placeholder={translations.phonePlaceholder} value={phone} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{ const v=e.target.value; if(allowPhoneTyping(v)) setPhone(v); }} />
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <Label className="font-medium">Faoliyat yo'nalishlari soni (klass)</Label>
-              <span className="text-xs text-slate-500">Maks. 45 ta</span>
+              <Label className="font-medium">{translations.classCountLabel}</Label>
+              <span className="text-xs text-slate-500">{translations.classCountMax}</span>
             </div>
             <div className="flex items-center gap-2">
                 <IconButton onClick={() => setClassCount(clampClassCount(classCount - 1))} disabled={classCount <= 1}>
@@ -332,54 +392,45 @@ export default function TrademarkCalculator() {
           </div>
 
           <div>
-            <Label className="font-medium mb-2 block">Shaxs turi</Label>
+            <Label className="font-medium mb-2 block">{translations.personTypeLabel}</Label>
             <DynamicToggle 
               id="person-type"
-              options={[
-                { value: 'jismoniy', label: 'Jismoniy shaxs' },
-                { value: 'yuridik', label: 'Yuridik shaxs' }
-              ]}
+              options={translations.personTypeOptions}
               selected={isYuridik ? 'yuridik' : 'jismoniy'}
               onSelect={(value) => setIsYuridik(value === 'yuridik')}
             />
           </div>
 
           <div>
-            <Label className="font-medium mb-2 block">Ko‘rib chiqish tezligi</Label>
+            <Label className="font-medium mb-2 block">{translations.speedLabel}</Label>
              <DynamicToggle 
               id="speed"
-              options={[
-                { value: 'oddiy', label: 'Oddiy (7 oy)' },
-                { value: 'tez', label: 'Tezkor (1.5 oy)' }
-              ]}
+              options={translations.speedOptions}
               selected={speed}
               onSelect={(value) => setSpeed(value as 'oddiy' | 'tez')}
             />
           </div>
 
           <div>
-            <Label className="font-medium mb-2 block">Qo'shimcha ekspert tekshiruvi</Label>
+            <Label className="font-medium mb-2 block">{translations.expertCheckLabel}</Label>
             <DynamicToggle 
               id="expert-check"
-              options={[
-                { value: 'ha', label: 'Yoqilgan' },
-                { value: 'yoq', label: 'O‘chirilgan' }
-              ]}
+              options={translations.expertCheckOptions}
               selected={hasEkspert ? 'ha' : 'yoq'}
               onSelect={(value) => setHasEkspert(value === 'ha')}
             />
           </div>
 
           <div>
-            <Label className="font-medium">Faoliyat turlari (ixtiyoriy)</Label>
+            <Label className="font-medium">{translations.activityLabel}</Label>
             <Textarea
               className="mt-1"
               rows={3}
-              placeholder="Masalan: dizayn, qurilish, kiyim-kechak ishlab chiqarish..."
+              placeholder={translations.activityPlaceholder}
               value={activity}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>setActivity(e.target.value)}
             />
-             <p className="mt-1 text-xs text-slate-500">Bu klasslarni aniqlashda yordam beradi.</p>
+             <p className="mt-1 text-xs text-slate-500">{translations.activityHelp}</p>
           </div>
         
           {!success ? (
@@ -388,84 +439,81 @@ export default function TrademarkCalculator() {
                 onClick={handleSubmit}
                 disabled={loading}
               >
-                {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Yuborilmoqda...</> : "Patentlashga buyurtma berish"}
+                {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> {translations.submittingButton}</> : translations.submitButton}
             </Button>
           ) : (
              <div className="text-center text-green-700 bg-green-50 border border-green-200 p-3 rounded-xl flex items-center justify-center gap-4">
-                <span>✅ Buyurtma qabul qilindi!</span>
-                <Button variant="outline" size="sm" onClick={resetForm}>Yana hisoblash</Button>
+                <span>{translations.successMessage}</span>
+                <Button variant="outline" size="sm" onClick={resetForm}>{translations.tryAgainButton}</Button>
             </div>
           )}
         </div>
       </Card>
 
-      {/* Right: Summary */}
       <aside className="lg:sticky lg:top-24 h-fit space-y-4">
         <Card className="p-6 bg-gradient-to-br from-primary to-blue-900 text-white shadow-xl rounded-2xl">
-          <div className="text-sm leading-5 opacity-90">10 yillik patent uchun taxminiy umumiy xarajat</div>
+          <div className="text-sm leading-5 opacity-90">{translations.totalCostTitle}</div>
           <div className="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight flex items-baseline">
             {fees.total.toLocaleString('fr-FR')}
-            <span className="text-2xl font-medium text-blue-200 ml-2">so'm</span>
+            <span className="text-2xl font-medium text-blue-200 ml-2">{translations.currency}</span>
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Pill>{fees.classCount} klass</Pill>
-            <Pill>{isYuridik ? 'Yuridik' : 'Jismoniy'} shaxs</Pill>
-            <Pill>{speed==='tez' ? 'Tezkor' : 'Oddiy'}</Pill>
+            <Pill>{fees.classCount} {lang === 'ru' ? 'класс' : 'klass'}</Pill>
+            <Pill>{isYuridik ? (lang === 'ru' ? 'Юр. лицо' : 'Yuridik shaxs') : (lang === 'ru' ? 'Физ. лицо' : 'Jismoniy shaxs')}</Pill>
+            <Pill>{speed==='tez' ? (lang === 'ru' ? 'Ускоренно' : 'Tezkor') : (lang === 'ru' ? 'Обычно' : 'Oddiy')}</Pill>
             {hasEkspert && <Pill>Ekspert+</Pill>}
           </div>
-          <div className="mt-1 text-xs leading-5 opacity-90">Barcha davlat bojlari va xizmatlar narxi ichida</div>
+          <div className="mt-1 text-xs leading-5 opacity-90">{translations.totalCostNote}</div>
         </Card>
 
         <Card className="p-5">
-          <h3 className="font-bold text-dark-blue mb-3">Xarajatlar tafsiloti</h3>
+          <h3 className="font-bold text-dark-blue mb-3">{translations.summaryTitle}</h3>
           <div className="space-y-4">
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-4">
-              <div className="font-semibold text-primary">1-bosqich (Dastlabki to‘lov)</div>
-              <Row label="Jamoamiz xizmati" value={PATENT_XIZMATI} />
-              <Row label="Tovar belgisi uchun ariza boji" value={fees.step1} />
+              <div className="font-semibold text-primary">{translations.step1Title}</div>
+              <Row label={translations.ourServiceFee} value={PATENT_XIZMATI} currency={translations.currency} />
+              <Row label={translations.applicationFee} value={fees.step1} currency={translations.currency} />
               <Divider />
-              <Row label="1-bosqich jami" value={PATENT_XIZMATI + fees.step1} bold />
+              <Row label={translations.step1Total} value={PATENT_XIZMATI + fees.step1} bold currency={translations.currency} />
             </div>
 
             <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-4">
-              <div className="font-semibold text-green-700">2-bosqich (Guvohnoma olish)</div>
-              <Row label="Davlat boji (bazaviy)" value={fees.step2Base} />
+              <div className="font-semibold text-green-700">{translations.step2Title}</div>
+              <Row label={translations.stateFeeBase} value={fees.step2Base} currency={translations.currency} />
               {fees.classCount > 1 && (
-                <Row label={`Qo‘shimcha klasslar (${fees.classCount-1} ta)`} value={fees.step2Extra} />
+                <Row label={translations.extraClassesFee(fees.classCount - 1)} value={fees.step2Extra} currency={translations.currency} />
               )}
               <Divider />
-              <Row label="2-bosqich jami" value={fees.step2} bold />
+              <Row label={translations.step2Total} value={fees.step2} bold currency={translations.currency} />
             </div>
 
             {speed==='tez' && (
               <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
-                <div className="font-semibold text-amber-700">Tezkor topshirish uchun qo'shimcha</div>
-                <Row label="Asosiy (12 BHM + 12% NDS)" value={fees.expediteBase} />
+                <div className="font-semibold text-amber-700">{translations.expediteTitle}</div>
+                <Row label={translations.expediteBaseFee} value={fees.expediteBase} currency={translations.currency} />
                 {fees.classCount>1 && (
-                  <Row label={`Qo‘shimcha klasslar (${fees.classCount-1} ta)`} value={fees.expediteExtra} />
+                  <Row label={translations.extraClassesFee(fees.classCount - 1)} value={fees.expediteExtra} currency={translations.currency} />
                 )}
                 <Divider />
-                <Row label="Tezkor to'lov jami" value={fees.expediteTotal} bold />
+                <Row label={translations.expediteTotal} value={fees.expediteTotal} bold currency={translations.currency} />
               </div>
             )}
 
             {hasEkspert && (
               <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
-                <div className="font-semibold text-purple-700">Ekspert tekshiruvi</div>
-                <Row label="Bazaviy (2×BHM)" value={fees.ekspertBase} />
+                <div className="font-semibold text-purple-700">{translations.expertCheckTitle}</div>
+                <Row label={translations.expertBaseFee} value={fees.ekspertBase} currency={translations.currency} />
                 {fees.classCount>1 && (
-                  <Row label={`Qo‘shimcha klasslar (${fees.classCount-1} ta)`} value={fees.ekspertExtra} />
+                  <Row label={translations.extraClassesFee(fees.classCount - 1)} value={fees.ekspertExtra} currency={translations.currency} />
                 )}
                 <Divider />
-                <Row label="Ekspert xizmati jami" value={fees.ekspertTotal} bold />
+                <Row label={translations.expertTotal} value={fees.ekspertTotal} bold currency={translations.currency} />
               </div>
             )}
 
             <div className="rounded-xl border border-amber-300 bg-amber-100/50 p-4 text-amber-900 text-xs">
-              <div className="font-semibold mb-1">Muhim eslatma</div>
-              <p>
-                Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan bazaviy hisoblash miqdori (BHM)ga bog'liq va o'zgarishi mumkin. Hozirgi BHM {BHM.toLocaleString()} so'm. Bu kalkulyator ommaviy oferta emas va faqat tanishish uchun mo'ljallangan.
-              </p>
+              <div className="font-semibold mb-1">{translations.importantNoteTitle}</div>
+              <p>{translations.importantNoteText(BHM.toLocaleString())}</p>
             </div>
           </div>
         </Card>
@@ -474,9 +522,6 @@ export default function TrademarkCalculator() {
   );
 }
 
-// ========================
-// 6) Kichik prezentatsion komponentlar
-// ========================
 function LabeledInput({ label, ...rest }: {label: string, [key: string]: any}) {
   return (
     <div className="space-y-1.5">
@@ -494,23 +539,15 @@ function IconButton({ children, ...props }: { children: React.ReactNode, [key: s
   );
 }
 
-function Chip({ active, children, ...props }: { active: boolean, children: React.ReactNode, [key: string]: any }) {
-  return (
-    <Button type="button" size="sm" variant={active ? 'default' : 'outline'} className="h-auto" {...props}>
-        {children}
-    </Button>
-  );
-}
-
 function Pill({ children }: { children: React.ReactNode }) {
   return <span className="px-2.5 py-1 rounded-full text-xs bg-white/15 ring-1 ring-white/25">{children}</span>;
 }
 
-function Row({ label, value, bold=false }: { label: string, value: number, bold?: boolean }) {
+function Row({ label, value, bold=false, currency }: { label: string, value: number, bold?: boolean, currency: string }) {
   return (
     <div className="mt-2 flex items-center justify-between text-sm">
       <span className="text-muted-foreground">{label}</span>
-      <span className={cn("font-semibold text-foreground", bold && 'font-bold')}>{Number(value).toLocaleString('fr-FR')} so‘m</span>
+      <span className={cn("font-semibold text-foreground", bold && 'font-bold')}>{Number(value).toLocaleString('fr-FR')} {currency}</span>
     </div>
   );
 }
@@ -518,5 +555,3 @@ function Row({ label, value, bold=false }: { label: string, value: number, bold?
 function Divider() {
   return <div className="mt-2 pt-2 border-t" />;
 }
-
-    

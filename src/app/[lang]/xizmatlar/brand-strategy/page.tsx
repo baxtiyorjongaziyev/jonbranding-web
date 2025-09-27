@@ -1,14 +1,10 @@
-
 'use client';
 
 import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
-import React, { useRef } from 'react';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import Autoplay from "embla-carousel-autoplay";
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -30,8 +26,10 @@ const t = {
         section1_p3: "Eng muhimi, bu marketing xarajatlarini tizimlashtirishga, kompaniyaning pozitsiyasini qo'llab-quvvatlamaydigan va shuning uchun xarajatlarga loyiq bo'lmagan vositalar, kanallar va g'oyalardan voz kechishga imkon beradi.",
         section2_title: "Brend-strategiya har qanday biznesga kerak",
         section2_p1: "Brend strategiyasi ham yangi, ham uzoq vaqtdan beri mavjud bo'lgan kompaniyalarga kerak.",
-        section2_p2: "Startaplarga u boshidanoq o'z missiyasi, qadriyatlari va o'ziga xosligini aniqlashga, bozorda kerakli o'rinni egallashga va mijozlarni jalb qilishga yordam beradi.",
-        section2_p3: "Yirik kompaniyalar uchun strategiya — bu o'sish va obro'ni boshqarish vositasidir. Bunday holda u dolzarblikni saqlashga, o'zgarishlarga moslashishga va auditoriya bilan mustahkam munosabatlar o'rnatishga yordam beradi.",
+        section2_p2_key: "Startaplarga",
+        section2_p2_val: "u boshidanoq o'z missiyasi, qadriyatlari va o'ziga xosligini aniqlashga, bozorda kerakli o'rinni egallashga va mijozlarni jalb qilishga yordam beradi.",
+        section2_p3_key: "Yirik kompaniyalar uchun",
+        section2_p3_val: "strategiya — bu o'sish va obro'ni boshqarish vositasidir. Bunday holda u dolzarblikni saqlashga, o'zgarishlarga moslashishga va auditoriya bilan mustahkam munosabatlar o'rnatishga yordam beradi.",
         section2_p4: "Biznes hajmidan qat'i nazar, brend-strategiya asosiy savolga javob beradi: mijoz nima uchun aynan sizni tanlashi kerak?",
         process_title: "Brending — bu jarayon",
         process_subtitle: "Bizning agentligimizda biz brendingning logotip yaratishdan ko'ra ko'proq narsa ekanligiga aminmiz. Brending — bu bir martalik vazifa emas, balki davriy jarayondir. Har bir bosqich o'zining asosiy rolini o'ynaydi va ulardan birortasini o'tkazib yuborish brendni va uning bozordagi o'rnini zaiflashtirishi mumkin. Ammo agar hamma narsa to'g'ri va izchil bajarilsa, brending biznesning o'sishiga va mahsulot ishlab chiqarishdan tortib marketinggacha bo'lgan ko'plab jarayonlarni osonroq boshqarishga yordam beradi.",
@@ -52,8 +50,10 @@ const t = {
         section1_p3: "Самое главное, это позволяет систематизировать маркетинговые расходы, отказаться от инструментов, каналов и идей, которые не поддерживают позиционирование компании, а значит, не заслуживают затрат.",
         section2_title: "Бренд-стратегия нужна любому бизнесу",
         section2_p1: "Бренд-стратегия нужна как новым, так и давно существующим компаниям.",
-        section2_p2: "Стартапам она помогает с самого начала определить свою миссию, ценности и уникальность, занять нужную нишу на рынке и привлечь клиентов.",
-        section2_p3: "Для крупных компаний стратегия — это инструмент роста и управления репутацией. В этом случае она помогает сохранять актуальность, адаптироваться к изменениям и строить прочные отношения с аудиторией.",
+        section2_p2_key: "Стартапам",
+        section2_p2_val: "она помогает с самого начала определить свою миссию, ценности и уникальность, занять нужную нишу на рынке и привлечь клиентов.",
+        section2_p3_key: "Для крупных компаний",
+        section2_p3_val: "стратегия — это инструмент роста и управления репутацией. В этом случае она помогает сохранять актуальность, адаптироваться к изменениям и строить прочные отношения с аудиторией.",
         section2_p4: "Независимо от размера бизнеса, бренд-стратегия отвечает на главный вопрос: почему клиент должен выбрать именно вас?",
         process_title: "Брендинг — это процесс",
         process_subtitle: "В нашем агентстве мы уверены, что брендинг — это нечто большее, чем просто создание логотипа. Брендинг — это не разовая задача, а циклический процесс. Каждый этап играет свою ключевую роль, и пропуск любого из них может ослабить бренд и его позиции на рынке. Но если все сделано правильно и последовательно, брендинг помогает бизнесу расти и легче управлять многими процессами, от производства продукта до маркетинга.",
@@ -65,10 +65,11 @@ const t = {
             { icon: Send, title: "Реализация и внедрение", description: "Создание бренда — это только начало. Важно правильно внедрить его в компанию и точки контакта, чтобы он стал частью корпоративной культуры и общения с клиентами." }
         ],
     }
-}
+};
 
+const BrandStrategyPage: FC<{ params: { lang: string } }> = ({ params }) => {
+  const { lang } = params;
 
-const BrandStrategyPage: FC<{ lang: string }> = ({ lang }) => {
   const handleOpenModal = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
@@ -124,8 +125,8 @@ const BrandStrategyPage: FC<{ lang: string }> = ({ lang }) => {
                         <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{translations.section2_title}</h2>
                         <div className="mt-4 space-y-4 text-lg text-gray-700">
                             <p>{translations.section2_p1}</p>
-                            <p><span className="font-bold text-dark-blue">{lang === 'uz' ? 'Startaplarga' : 'Стартапам'}</span> {translations.section2_p2.replace(lang === 'uz' ? 'Startaplarga' : 'Стартапам', '')}</p>
-                            <p><span className="font-bold text-dark-blue">{lang === 'uz' ? 'Yirik kompaniyalar uchun' : 'Для крупных компаний'}</span> {translations.section2_p3.replace(lang === 'uz' ? 'Yirik kompaniyalar uchun' : 'Для крупных компаний', '')}</p>
+                            <p><span className="font-bold text-dark-blue">{translations.section2_p2_key}</span> {translations.section2_p2_val}</p>
+                            <p><span className="font-bold text-dark-blue">{translations.section2_p3_key}</span> {translations.section2_p3_val}</p>
                             <p className="font-bold text-dark-blue">{translations.section2_p4}</p>
                         </div>
                     </div>

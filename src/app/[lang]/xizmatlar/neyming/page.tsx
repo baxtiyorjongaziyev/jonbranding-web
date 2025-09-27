@@ -1,4 +1,3 @@
-
 'use client';
 
 import { FC } from 'react';
@@ -74,12 +73,8 @@ const t = {
 }
 
 
-const NamingPage: FC<{ lang: string }> = ({ lang }) => {
-
-  const handleOpenModal = () => {
-    const contactEvent = new CustomEvent('openContactModal');
-    window.dispatchEvent(contactEvent);
-  };
+const NamingPage: FC<{ params: { lang: string } }> = ({ params }) => {
+  const { lang } = params;
   
   const translations = lang === 'ru' ? t.ru : t.uz;
   const creationSteps = translations.process_steps;
