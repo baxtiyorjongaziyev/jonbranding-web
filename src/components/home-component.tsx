@@ -24,8 +24,9 @@ const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
 const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
-const Faq = dynamic(() => import('@/components/sections/faq'));
 const Offer = dynamic(() => import('@/components/sections/offer'));
+const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
+
 
 const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
   useEffect(() => {
@@ -69,51 +70,6 @@ const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
         removeListeners();
     };
   }, [onScrollIntent, scrollThreshold]);
-};
-
-
-const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string }> = ({ onOpenModal, lang }) => {
-  const [isClient, setIsClient] = useState(false);
-  
-  const t = {
-    uz: {
-      title: "Loyihangizni muhokama qilamizmi?",
-      button: "Murojaat qoldirish"
-    },
-    ru: {
-      title: "Обсудим ваш проект?",
-      button: "Оставить заявку"
-    }
-  }
-  const translations = lang === 'ru' ? t.ru : t.uz;
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    return (
-        <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
-            <div className="container mx-auto flex justify-between items-center">
-                <Skeleton className="h-6 w-24" />
-                <Skeleton className="h-10 w-40" />
-            </div>
-        </div>
-    );
-  }
-
-  return (
-    <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
-      <div className="container mx-auto flex justify-between items-center gap-4">
-        <div className="text-sm flex-shrink">
-            <p className="font-bold text-primary text-base">{translations.title}</p>
-        </div>
-        <Button onClick={onOpenModal} className="shadow-ocean flex-shrink-0 whitespace-normal h-auto py-2 px-4 text-center">
-          {translations.button}
-        </Button>
-      </div>
-    </div>
-  );
 };
 
 
