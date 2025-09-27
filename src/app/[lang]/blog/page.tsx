@@ -8,7 +8,7 @@ import { format, parseISO } from 'date-fns';
 import { uz, ru } from 'date-fns/locale';
 
 const BlogPage = async ({ params: { lang } }: { params: { lang: string } }) => {
-  const sortedPosts = getSortedPostsData();
+  const sortedPosts = getSortedPostsData(lang);
   
   const t = {
     uz: {

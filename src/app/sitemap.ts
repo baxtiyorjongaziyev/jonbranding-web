@@ -1,6 +1,6 @@
 
 import { MetadataRoute } from 'next'
-import { getSortedPostsData } from '@/lib/blog-posts';
+import { getAllPostSlugs } from '@/lib/blog-posts';
  
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://jonbranding.uz';
@@ -20,13 +20,45 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const sitemapEntries = routes.flatMap((route) => {
     const routePath = route === '/' ? '' : route;
+    // Special handling for the root uz route
+    if (routePath === '' && locales.includes('uz')) {
+      const uzSitemap = {
+        url: baseUrl,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 1.0,
+        alternates: {
+          languages: {
+            uz: baseUrl,
+            ru: `${baseUrl}/ru`,
+          },
+        },
+      };
+      const ruSitemap = {
+        url: `${baseUrl}/ru`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 1.0,
+         alternates: {
+          languages: {
+            uz: baseUrl,
+            ru: `${baseUrl}/ru`,
+          },
+        },
+      };
+      return [uzSitemap, ruSitemap];
+    }
+    
     return locales.map((locale) => {
-      const url = `${baseUrl}/${locale}${routePath}`.replace(`/${locale}/`, `/${locale}/`).replace(/\/$/, '');
+      // Skip uz for root as it's handled above
+      if (routePath === '' && locale === 'uz') return null;
+
+      const url = `${baseUrl}/${locale}${routePath}`.replace(/\/$/, '');
       const priority = route === '/' ? 1.0 : (route.startsWith('/xizmatlar') || route === '/blog' ? 0.9 : 0.8);
       const changeFrequency: 'daily' | 'weekly' | 'monthly' = route === '/' ? 'daily' : 'monthly';
 
       return {
-        url: url.endsWith('/uz') ? baseUrl : url, // root for uz
+        url: url,
         lastModified: new Date(),
         changeFrequency,
         priority,
@@ -38,28 +70,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       };
     });
-  });
+  }).flat().filter(Boolean) as MetadataRoute.Sitemap;
 
   const uniqueSitemapEntries = Array.from(new Map(sitemapEntries.map(entry => [entry.url, entry])).values());
 
 
-  const blogPosts = getSortedPostsData();
-  const blogEntries = blogPosts.flatMap(post => {
-      return locales.map(locale => {
-        const url = `${baseUrl}/${locale}/blog/${post.slug}`;
-        return {
-            url: url,
-            lastModified: new Date(post.date),
-            changeFrequency: 'yearly' as const,
-            priority: 0.7,
-            alternates: {
-               languages: {
-                uz: `${baseUrl}/blog/${post.slug}`,
-                ru: `${baseUrl}/ru/blog/${post.slug}`,
-              },
-            }
-          };
-      });
+  const blogPosts = getAllPostSlugs();
+  const blogEntries = blogPosts.map(post => {
+      const url = `${baseUrl}/${post.lang}/blog/${post.slug}`;
+      return {
+          url: url,
+          lastModified: new Date(), // We don't have date info here, so using current date
+          changeFrequency: 'yearly' as const,
+          priority: 0.7,
+          alternates: {
+             languages: {
+              uz: `${baseUrl}/uz/blog/${post.slug}`,
+              ru: `${baseUrl}/ru/blog/${post.slug}`,
+            },
+          }
+        };
     });
 
   const uniqueBlogEntries = Array.from(new Map(blogEntries.map(entry => [entry.url, entry])).values());
