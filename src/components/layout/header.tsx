@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { UzFlagIcon } from '../icons/uz-flag';
 import { RuFlagIcon } from '../icons/ru-flag';
@@ -89,6 +89,41 @@ const ListItem = React.forwardRef<
   );
 });
 ListItem.displayName = "ListItem"
+
+
+const ExpandingButton = ({ children, text }: { children: React.ReactNode, text: string }) => {
+    const [isHovered, setHovered] = useState(false);
+    return (
+        <motion.div
+            onHoverStart={() => setHovered(true)}
+            onHoverEnd={() => setHovered(false)}
+            className="relative"
+        >
+            <Button variant="outline" className="gap-2 overflow-hidden w-[40px] h-[40px] p-0 flex items-center justify-center" asChild>
+                 <motion.div
+                    animate={{ width: isHovered ? 'auto' : 40 }}
+                    transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                    className="flex items-center justify-center px-3"
+                 >
+                    {children}
+                    <AnimatePresence>
+                        {isHovered && (
+                            <motion.span
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                transition={{ duration: 0.2, delay: 0.1 }}
+                                className="ml-2 whitespace-nowrap"
+                            >
+                                {text}
+                            </motion.span>
+                        )}
+                    </AnimatePresence>
+                </motion.div>
+            </Button>
+        </motion.div>
+    );
+};
 
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
@@ -210,39 +245,42 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="gap-2">
-                <CurrentLangIcon />
-                <span className="hidden sm:inline">{languageOptions[lang as 'uz' | 'ru' | 'en']?.label}</span>
-                <Languages className="h-4 w-4 opacity-50" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-               {Object.keys(languageOptions).map((langKey) => {
-                  const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
-                  return (
-                    <DropdownMenuItem key={langKey} asChild>
-                      <Link href={getNewPath(langKey as 'uz' | 'ru' | 'en')} className="flex items-center gap-2 cursor-pointer">
-                        <Icon className="w-5 h-auto" />
-                        <span>{label}</span>
-                        {lang === langKey && <Check className="ml-auto h-4 w-4" />}
-                      </Link>
-                    </DropdownMenuItem>
-                  );
-               })}
-            </DropdownMenuContent>
-          </DropdownMenu>
-           <Button variant="outline" size="icon" asChild>
-                <a href="tel:+998336450097" aria-label={dictionary.contact_by_phone}>
+             <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <div>
+                        <ExpandingButton text={languageOptions[lang as 'uz' | 'ru' | 'en']?.label}>
+                            <CurrentLangIcon />
+                        </ExpandingButton>
+                    </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                {Object.keys(languageOptions).map((langKey) => {
+                    const { label, Icon } = languageOptions[langKey as 'uz' | 'ru' | 'en'];
+                    return (
+                        <DropdownMenuItem key={langKey} asChild>
+                        <Link href={getNewPath(langKey as 'uz' | 'ru' | 'en')} className="flex items-center gap-2 cursor-pointer">
+                            <Icon className="w-5 h-auto" />
+                            <span>{label}</span>
+                            {lang === langKey && <Check className="ml-auto h-4 w-4" />}
+                        </Link>
+                        </DropdownMenuItem>
+                    );
+                })}
+                </DropdownMenuContent>
+            </DropdownMenu>
+
+            <a href="tel:+998336450097" aria-label={dictionary.contact_by_phone}>
+                <ExpandingButton text="+998 33 645 00 97">
                     <Phone />
-                </a>
-           </Button>
-            <Button variant="outline" size="icon" asChild>
-                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" aria-label={dictionary.contact_by_telegram}>
-                    <Send />
-                </a>
-           </Button>
+                </ExpandingButton>
+            </a>
+            
+            <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" aria-label={dictionary.contact_by_telegram}>
+                <ExpandingButton text="@baxtiyorjon_gaziyev">
+                     <Send />
+                </ExpandingButton>
+            </a>
+
            <Button 
             onClick={handleContactClick} 
             className="shadow-ocean"
@@ -325,3 +363,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 };
 
 export default Header;
+
+
+    
