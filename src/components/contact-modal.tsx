@@ -65,7 +65,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       budget: "Loyiha uchun taxminiy byudjet?",
       budgetOptions: [
         "Mavjud emas / Faqat o'rganayapman",
-        "$500 gacha",
+        "До $500",
         "$500 - $1,500",
         "$1,500 - $3,000",
         "$3,000 dan yuqori"
@@ -554,3 +554,5 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 };
 
 export default ContactModal;
+
+    
