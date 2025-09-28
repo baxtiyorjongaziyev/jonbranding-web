@@ -113,6 +113,20 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     useEffect(() => {
         setIsClient(true);
     }, []);
+
+    const renderHeadline = (headline: string) => {
+        const parts = headline.split('|');
+        if (parts.length === 3) {
+            return (
+                <>
+                    {parts[0]}
+                    <span className="gradient">{parts[1]}</span>
+                    {parts[2]}
+                </>
+            );
+        }
+        return headline.replace(/\|/g, '');
+    };
     
     if (!isClient || !dictionary.home) {
         return (
@@ -130,7 +144,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     return (
         <>
             <main>
-                <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} /></AnimatedSection>
+                <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} /></AnimatedSection>
                 <AnimatedSection><Stats dictionary={dictionary.stats} /></AnimatedSection>
                 <AnimatedSection><TrustedBy lang={lang} dictionary={dictionary.trustedBy} /></AnimatedSection>
                 <AnimatedSection><TargetAudience lang={lang} dictionary={dictionary.targetAudience} /></AnimatedSection>

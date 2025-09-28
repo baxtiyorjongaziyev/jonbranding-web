@@ -48,11 +48,11 @@
     },
     "hero": {
         "headlines": [
-            "Brendingiz <span class='gradient'>sotmayaptimi?</span> Biz buni to'g'rilaymiz.",
-            "Raqobatchilardan <span class='gradient'>keskin ajralib</span> turing.",
-            "Brendingizni shunchaki “chiroyli” emas, <span class='gradient'>daromadli</span> qiling.",
-            "Mijozlar sizni <span class='gradient'>sevib qolsin</span>. Qayta va qayta.",
-            "Kichik biznesdan <span class='gradient'>kuchli brendgacha</span>. Bir qadamda."
+            "Brendingiz |sotmayaptimi?| Biz buni to'g'rilaymiz.",
+            "Raqobatchilardan |keskin ajralib| turing.",
+            "Brendingizni shunchaki “chiroyli” emas, |daromadli| qiling.",
+            "Mijozlar sizni |sevib qolsin|. Qayta va qayta.",
+            "Kichik biznesdan |kuchli brendgacha|. Bir qadamda."
         ],
         "description": "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span class='font-bold text-foreground'>natija keltiradigan</span>, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.",
         "buttonTexts": [
