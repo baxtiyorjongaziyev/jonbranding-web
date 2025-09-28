@@ -97,7 +97,10 @@
   }
 
   .gradient {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(to right, hsl(var(--accent)), hsl(var(--primary)));
   }
 
   @keyframes gradient-rotate {
