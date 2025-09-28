@@ -528,11 +528,10 @@
             "subtitle": "Bizning barcha xizmatlarimiz bilan tanishing va o'zingizga mos bo'lgan brending to'plamini yarating. Onlayn kalkulyator yordamida narxlarni darhol hisoblang.",
             "categories": {
                 "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
-                "main": "Asosiy xizmatlarimiz",
                 "strategy": "Strategik xizmatlar",
-                "identity": "Aydentika va Dizayn",
                 "naming": "Neyming",
-                "additional": "Qo'shimcha xizmatlar",
+                "identity": "Aydentika va Dizayn",
+                "addons": "Qo'shimcha xizmatlar",
                 "options": "Maxsus shartlar"
             },
             "discount_alert_title": "Paketli chegirma!",
@@ -557,7 +556,8 @@
             "total_savings": "Umumiy tejagan mablag'ingiz",
             "gift_title": "Sovg'a!",
             "agreed_price": "Kelishiladi",
-            "currency": "so'm"
+            "currency": "so'm",
+            "recommended": "Tavsiya etiladi"
         },
         "comparison": {
             "title": "Biz va Raqobatchilar",

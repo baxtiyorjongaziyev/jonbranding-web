@@ -6,17 +6,17 @@ const uzServiceDetails = {
     consultation: { label: "1 soatlik konsultatsiya", description: "Brending bo'yicha har qanday savolingizga tezkor yo'l-yo'riq va professional maslahat.", price: 1000000, timeline: "1 soat", note: null },
     strategy: { label: "Brend-strategiya va platforma", description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", price: 60000000, timeline: "8 haftadan", note: null },
     commStrategy: { label: "Kommunikatsion strategiya", description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", price: 50000000, timeline: "8 haftadan", note: null },
-    namingStart: { label: "Neyming Start", description: "Brend uchun 5-7 ta nom variantlari, asosiy tekshiruv. Kichik biznes uchun ideal.", price: 7000000, timeline: "1-2 hafta", note: null },
-    namingPro: { label: "Neyming Pro", description: "10-15 ta nom, chuqurroq tahlil, domen va ijtimoiy tarmoqlarni tekshirish.", price: 13000000, timeline: "2-3 hafta", note: null },
-    namingMax: { label: "Neyming Max", description: "To'liq strategik neyming, 20+ variant, xalqaro tekshiruv, shior (slogan) ishlab chiqish.", price: 20000000, timeline: "3-4 hafta", note: null },
-    logoStart: { label: "Logotip Start", description: "1 ta konsepsiya, asosiy ranglar va shriftlar. Startaplar uchun tezkor yechim.", price: 13000000, timeline: "1-2 hafta", note: null },
-    logoPro: { label: "Logotip Pro", description: "2 ta konsepsiya, to'liq firma uslubi (rang, shrift), 5 ta nositelda namoyish.", price: 26000000, timeline: "2-4 hafta", note: null },
-    logoMax: { label: "To'liq dizayn-tizim", description: "<strong>Logotipni o'z ichiga oladi.</strong> 3+ konsepsiya, grafika, ikonikalar, foto uslub. Yirik brendlar uchun.", price: 39000000, timeline: "4-6 hafta", note: null },
+    namingStart: { label: "Neyming Start", description: "Kichik biznes uchun ideal.", price: 7000000, timeline: "1-2 hafta", note: null, features: ["5-7 ta nom varianti", "Asosiy tekshiruv", "Domen tekshiruvi"] },
+    namingPro: { label: "Neyming Pro", description: "O'rta va rivojlanayotgan biznes uchun.", price: 13000000, timeline: "2-3 hafta", note: null, features: ["10-15 ta nom varianti", "Chuqurroq tahlil", "Domen va ijtimoiy tarmoqlar tekshiruvi", "Slogan (shior) konsepsiyasi"], recommended: true },
+    namingMax: { label: "Neyming Max", description: "Katta va xalqaro bozorga mo'ljallangan loyihalar uchun.", price: 20000000, timeline: "3-4 hafta", note: null, features: ["20+ nom varianti", "To'liq strategik neyming", "Xalqaro bazalarda tekshiruv", "Slogan (shior) ishlab chiqish", "Falsafiy ma'no"] },
+    logoStart: { label: "Logotip Start", description: "Startaplar uchun tezkor yechim.", price: 13000000, timeline: "1-2 hafta", note: null, features: ["1 ta konsepsiya", "Asosiy ranglar va shriftlar", "2 ta o'zgartirish", "Vektor formatlar (SVG, AI)"] },
+    logoPro: { label: "Logotip Pro", description: "O'z brendini jiddiy rivojlantirish niyatidagilar uchun.", price: 26000000, timeline: "2-4 hafta", note: null, features: ["2 ta konsepsiya", "To'liq firma uslubi (rang, shrift)", "5 ta nositelda namoyish", "Brend-falsafasi", "Brendbuk Light versiya"], recommended: true },
+    logoMax: { label: "To'liq dizayn-tizim", description: "<strong>Logotipni o'z ichiga oladi.</strong> Yirik brendlar uchun.", price: 39000000, timeline: "4-6 hafta", note: null, features: ["3+ konsepsiya", "Kengaytirilgan firma uslubi", "Ikonikalar va piktogrammalar", "Brend patternlari", "To'liq Brendbuk"] },
     brandbook: { label: "Brendbuk va gaydlayn", description: "Firma uslubidan foydalanish bo'yicha qoidalar hujjati.", price: 13000000, timeline: "1 haftadan", note: null },
     packaging: { label: "Qadoq dizayni", description: "3 SKU uchun qadoq ishlab chiqish, chop etishga tayyorlash. Qadoq formasi alohida ishlab chiqiladi.", price: 13000000, timeline: "4-6 hafta", note: null },
     smm: { label: "Ijtimoiy tarmoqlar uchun stil", description: "Postlar va storislarni firma uslubida bezash.", price: 13000000, timeline: "2 haftadan", note: null },
-    merch: { label: "Brendli merch va nositellar", description: "Kiyim, aksessuarlar, POSM materiallari dizayni.", price: 0, timeline: "2 haftadan", note: "Individual hisoblanadi" },
-    illustrations: { label: "Illustratsiyalar va animatsiya", description: "Firma grafikasi, infografika va animatsiyalar yaratish.", price: 0, timeline: "3 haftadan", note: "Individual hisoblanadi" },
+    merch: { label: "Brendli merch va nositellar", description: "Kiyim, aksessuarlar, POSM materiallari dizayni.", price: 0, timeline: "2 haftadan", note: "Individual" },
+    illustrations: { label: "Illustratsiyalar va animatsiya", description: "Firma grafikasi, infografika va animatsiyalar yaratish.", price: 0, timeline: "3 haftadan", note: "Individual" },
     urgency: { label: "Shoshilinch loyiha (+50%)", description: "Loyiha navbatsiz, qisqa muddatda (2-3 kun) tayyorlanadi. Umumiy narxga 50% ustama qo'shiladi.", price: 0, timeline: "Individual", note: "+50%" },
     nda: { label: "Maxfiylik shartnomasi (NDA) (+25%)", description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi. Umumiy narxga 25% ustama qo'shiladi.", price: 0, timeline: "Individual", note: "+25%" }
 };
@@ -27,17 +27,17 @@ const ruServiceDetails = {
     consultation: { label: "1-часовая консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга.", price: 1000000, timeline: "1 час", note: null },
     strategy: { label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.", price: 60000000, timeline: "от 8 недель", note: null },
     commStrategy: { label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", price: 50000000, timeline: "от 8 недель", note: null },
-    namingStart: { label: "Нейминг Старт", description: "5-7 вариантов имени для бренда, базовая проверка. Идеально для малого бизнеса.", price: 7000000, timeline: "1-2 недели", note: null },
-    namingPro: { label: "Нейминг Про", description: "10-15 вариантов имени, глубокий анализ, проверка доменов и соцсетей.", price: 13000000, timeline: "2-3 недели", note: null },
-    namingMax: { label: "Нейминг Макс", description: "Полный стратегический нейминг, 20+ вариантов, международная проверка, разработка слогана.", price: 20000000, timeline: "3-4 недели", note: null },
-    logoStart: { label: "Логотип Старт", description: "1 концепция, основные цвета и шрифты. Быстрое решение для стартапов.", price: 13000000, timeline: "1-2 недели", note: null },
-    logoPro: { label: "Логотип Про", description: "2 концепции, полный фирменный стиль (цвет, шрифт), демонстрация на 5 носителях.", price: 26000000, timeline: "2-4 недели", note: null },
-    logoMax: { label: "Полная дизайн-система", description: "<strong>Включает логотип.</strong> 3+ концепции, графика, иконки, фотостиль. Для крупных брендов.", price: 39000000, timeline: "4-6 недель", note: null },
+    namingStart: { label: "Нейминг Старт", description: "Идеально для малого бизнеса.", price: 7000000, timeline: "1-2 недели", note: null, features: ["5-7 вариантов имени", "Базовая проверка", "Проверка домена"] },
+    namingPro: { label: "Нейминг Про", description: "Для среднего и развивающегося бизнеса.", price: 13000000, timeline: "2-3 недели", note: null, features: ["10-15 вариантов имени", "Глубокий анализ", "Проверка доменов и соцсетей", "Концепция слогана"], recommended: true },
+    namingMax: { label: "Нейминг Макс", description: "Для крупных и международных проектов.", price: 20000000, timeline: "3-4 недели", note: null, features: ["20+ вариантов имени", "Полный стратегический нейминг", "Международная проверка", "Разработка слогана", "Философский смысл"] },
+    logoStart: { label: "Логотип Старт", description: "Быстрое решение для стартапов.", price: 13000000, timeline: "1-2 недели", note: null, features: ["1 концепция", "Основные цвета и шрифты", "2 правки", "Векторные форматы (SVG, AI)"] },
+    logoPro: { label: "Логотип Про", description: "Для тех, кто серьезно настроен развивать свой бренд.", price: 26000000, timeline: "2-4 недели", note: null, features: ["2 концепции", "Полный фирменный стиль (цвет, шрифт)", "Демонстрация на 5 носителях", "Философия бренда", "Брендбук Light версия"], recommended: true },
+    logoMax: { label: "Полная дизайн-система", description: "<strong>Включает логотип.</strong> Для крупных брендов.", price: 39000000, timeline: "4-6 недель", note: null, features: ["3+ концепции", "Расширенный фирменный стиль", "Иконки и пиктограммы", "Фирменные паттерны", "Полный Брендбук"] },
     brandbook: { label: "Брендбук и гайдлайн", description: "Документ с правилами использования фирменного стиля.", price: 13000000, timeline: "от 1 недели", note: null },
     packaging: { label: "Дизайн упаковки", description: "Разработка упаковки для 3 SKU, подготовка к печати. Форма упаковки разрабатывается отдельно.", price: 13000000, timeline: "4-6 недель", note: null },
     smm: { label: "Стиль для социальных сетей", description: "Оформление постов и сторис в фирменном стиле.", price: 13000000, timeline: "от 2 недель", note: null },
-    merch: { label: "Брендированный мерч и носители", description: "Дизайн одежды, аксессуаров, POSM-материалов.", price: 0, timeline: "от 2 недель", note: "Рассчитывается индивидуально" },
-    illustrations: { label: "Иллюстрации и анимация", description: "Создание фирменной графики, инфографики и анимаций.", price: 0, timeline: "от 3 недель", note: "Рассчитывается индивидуально" },
+    merch: { label: "Брендированный мерч и носители", description: "Дизайн одежды, аксессуаров, POSM-материалов.", price: 0, timeline: "от 2 недель", note: "Индивидуально" },
+    illustrations: { label: "Иллюстрации и анимация", description: "Создание фирменной графики, инфографики и анимаций.", price: 0, timeline: "от 3 недель", note: "Индивидуально" },
     urgency: { label: "Срочный проект (+50%)", description: "Проект выполняется вне очереди, в короткие сроки (2-3 дня). К общей стоимости добавляется 50%.", price: 0, timeline: "Индивидуально", note: "+50%" },
     nda: { label: "Договор о неразглашении (NDA) (+25%)", description: "Договор о неразглашении информации о проекте. К общей стоимости добавляется 25%.", price: 0, timeline: "Индивидуально", note: "+25%" }
 };
@@ -48,17 +48,17 @@ const enServiceDetails = {
     consultation: { label: "1-hour consultation", description: "Quick guidance and professional advice on any branding question.", price: 1000000, timeline: "1 hour", note: null },
     strategy: { label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.", price: 60000000, timeline: "from 8 weeks", note: null },
     commStrategy: { label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", price: 50000000, timeline: "from 8 weeks", note: null },
-    namingStart: { label: "Naming Start", description: "5-7 name options for the brand, basic check. Ideal for small businesses.", price: 7000000, timeline: "1-2 weeks", note: null },
-    namingPro: { label: "Naming Pro", description: "10-15 name options, in-depth analysis, domain and social media checks.", price: 13000000, timeline: "2-3 weeks", note: null },
-    namingMax: { label: "Naming Max", description: "Full strategic naming, 20+ options, international check, slogan development.", price: 20000000, timeline: "3-4 weeks", note: null },
-    logoStart: { label: "Logo Start", description: "1 concept, basic colors and fonts. A quick solution for startups.", price: 13000000, timeline: "1-2 weeks", note: null },
-    logoPro: { label: "Logo Pro", description: "2 concepts, full corporate identity (color, font), demonstration on 5 carriers.", price: 26000000, timeline: "2-4 weeks", note: null },
-    logoMax: { label: "Full Design System", description: "<strong>Includes logo.</strong> 3+ concepts, graphics, icons, photo style. For major brands.", price: 39000000, timeline: "4-6 weeks", note: null },
+    namingStart: { label: "Naming Start", description: "Ideal for small businesses.", price: 7000000, timeline: "1-2 weeks", note: null, features: ["5-7 name options", "Basic check", "Domain check"] },
+    namingPro: { label: "Naming Pro", description: "For medium and growing businesses.", price: 13000000, timeline: "2-3 weeks", note: null, features: ["10-15 name options", "In-depth analysis", "Domain and social media check", "Slogan concept"], recommended: true },
+    namingMax: { label: "Naming Max", description: "For large and international projects.", price: 20000000, timeline: "3-4 weeks", note: null, features: ["20+ name options", "Full strategic naming", "International database check", "Slogan development", "Philosophical meaning"] },
+    logoStart: { label: "Logo Start", description: "A quick solution for startups.", price: 13000000, timeline: "1-2 weeks", note: null, features: ["1 concept", "Basic colors and fonts", "2 revisions", "Vector formats (SVG, AI)"] },
+    logoPro: { label: "Logo Pro", description: "For those serious about developing their brand.", price: 26000000, timeline: "2-4 weeks", note: null, features: ["2 concepts", "Full corporate identity (color, font)", "5 mockups", "Brand philosophy", "Brandbook Light version"], recommended: true },
+    logoMax: { label: "Full Design System", description: "<strong>Includes logo.</strong> For major brands.", price: 39000000, timeline: "4-6 weeks", note: null, features: ["3+ concepts", "Expanded corporate identity", "Icons and pictograms", "Brand patterns", "Full Brandbook"] },
     brandbook: { label: "Brandbook and Guideline", description: "A document with rules for using the corporate identity.", price: 13000000, timeline: "from 1 week", note: null },
     packaging: { label: "Packaging Design", description: "Packaging development for 3 SKUs, preparation for printing. The packaging form is developed separately.", price: 13000000, timeline: "4-6 weeks", note: null },
     smm: { label: "Style for Social Networks", description: "Design of posts and stories in corporate style.", price: 13000000, timeline: "from 2 weeks", note: null },
-    merch: { label: "Branded Merch and Carriers", description: "Design of clothing, accessories, POSM materials.", price: 0, timeline: "from 2 weeks", note: "Calculated individually" },
-    illustrations: { label: "Illustrations and Animation", description: "Creation of corporate graphics, infographics and animations.", price: 0, timeline: "from 3 weeks", note: "Calculated individually" },
+    merch: { label: "Branded Merch and Carriers", description: "Design of clothing, accessories, POSM materials.", price: 0, timeline: "from 2 weeks", note: "Individual" },
+    illustrations: { label: "Illustrations and Animation", description: "Creation of corporate graphics, infographics and animations.", price: 0, timeline: "from 3 weeks", note: "Individual" },
     urgency: { label: "Urgent Project (+50%)", description: "The project is carried out out of turn, in a short time (2-3 days). 50% is added to the total cost.", price: 0, timeline: "Individual", note: "+50%" },
     nda: { label: "Non-Disclosure Agreement (NDA) (+25%)", description: "Agreement on non-disclosure of project information. 25% is added to the total cost.", price: 0, timeline: "Individual", note: "+25%" }
 };
@@ -85,7 +85,7 @@ export function formatPrice(price: number, lang: 'uz' | 'ru' | 'en' = 'uz') {
     if (price >= 1000000) {
         const millions = price / 1000000;
         const formattedMillions = millions % 1 === 0 ? millions.toFixed(0) : millions.toFixed(1).replace('.', ',');
-        return `${formattedMillions} mln ${currency}`;
+        return `${formattedMillions} mln`;
     }
 
     return `${price.toLocaleString('fr-FR')} ${currency}`;
@@ -305,3 +305,4 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
 
     return summary;
 }
+
