@@ -480,16 +480,6 @@
         "cta_description": "Good packaging design is not just beautiful decoration, but a tool that works for the business. We develop a functional, strategically thought-out design where the packaging serves as a full-fledged sales tool."
     },
     "servicesPage": {
-        "comparison": {
-            "title": "Us vs. Competitors",
-            "description": "We provide high-quality branding services at much more affordable prices than premium agencies. And the result will be even better than you expect.",
-            "features": "Features",
-            "whyPremiumTitle": "Why only premium agencies?",
-            "whyPremiumDesc": "We compare ourselves only with top-tier companies that have a strategic approach. Our goal is not just to be cheaper, but to provide premium quality at an affordable price. Comparing with agencies that do not match our level of quality and strategy would be incorrect for both the client and us.",
-            "ctaTitle": "You've seen the difference. Now it's time to choose!",
-            "ctaDesc": "You don't have to overpay for quality branding. Make the right decision for your business and contact us.",
-            "ctaButton": "I need this approach"
-        },
         "packageBuilder": {
             "title": "Services and Prices",
             "subtitle": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator.",
@@ -520,6 +510,16 @@
             "gift_title": "Gift!",
             "agreed_price": "On Request",
             "currency": "sum"
+        },
+        "comparison": {
+            "title": "Us vs. Competitors",
+            "description": "We provide high-quality branding services at much more affordable prices than premium agencies. And the result will be even better than you expect.",
+            "features": "Features",
+            "whyPremiumTitle": "Why only premium agencies?",
+            "whyPremiumDesc": "We compare ourselves only with top-tier companies that have a strategic approach. Our goal is not just to be cheaper, but to provide premium quality at an affordable price. Comparing with agencies that do not match our level of quality and strategy would be incorrect for both the client and us.",
+            "ctaTitle": "You've seen the difference. Now it's time to choose!",
+            "ctaDesc": "You don't have to overpay for quality branding. Make the right decision for your business and contact us.",
+            "ctaButton": "I need this approach"
         }
     },
     "pickTwoSelector": {

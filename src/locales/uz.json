@@ -480,18 +480,8 @@
         "cta_description": "Yaxshi qadoq dizayni — bu shunchaki chiroyli bezak emas, balki biznes uchun ishlaydigan vositadir. Biz funksional, strategik jihatdan puxta o'ylangan dizaynni ishlab chiqamiz, bunda qadoq to'laqonli savdo vositasi bo'lib xizmat qiladi."
     },
     "servicesPage": {
-        "comparison": {
-            "title": "Biz va Raqobatchilar",
-            "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklarga qaraganda ancha hamyonbop narxlarda taqdim etamiz. Natija esa siz kutgandan ham a'lo bo'ladi.",
-            "features": "Xususiyatlar",
-            "whyPremiumTitle": "Nega faqat premium agentliklar?",
-            "whyPremiumDesc": "Biz o'zimizni faqat eng yuqori darajadagi, strategik yondashuvga ega kompaniyalar bilan taqqoslaymiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda taqdim etish. Sifat va strategiya jihatidan biz bilan bir darajada bo'lmagan agentliklar bilan solishtirish, mijoz uchun ham, biz uchun ham to'g'ri bo'lmaydi.",
-            "ctaTitle": "Farqni o'zingiz ko'rdingiz. Endi tanlash vaqti keldi!",
-            "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun eng to'g'ri qarorni qabul qiling va biz bilan bog'laning.",
-            "ctaButton": "Menga shunday yondashuv kerak"
-        },
         "packageBuilder": {
-            "title": "Narxlar va Xizmatlar",
+            "title": "Xizmatlar va Narxlar",
             "subtitle": "Bizning barcha xizmatlarimiz bilan tanishing va o'zingizga mos bo'lgan brending to'plamini yarating. Onlayn kalkulyator yordamida narxlarni darhol hisoblang.",
             "categories": {
                 "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
@@ -520,6 +510,16 @@
             "gift_title": "Sovg'a!",
             "agreed_price": "Kelishiladi",
             "currency": "so'm"
+        },
+        "comparison": {
+            "title": "Biz va Raqobatchilar",
+            "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklarga qaraganda ancha hamyonbop narxlarda taqdim etamiz. Natija esa siz kutgandan ham a'lo bo'ladi.",
+            "features": "Xususiyatlar",
+            "whyPremiumTitle": "Nega faqat premium agentliklar?",
+            "whyPremiumDesc": "Biz o'zimizni faqat eng yuqori darajadagi, strategik yondashuvga ega kompaniyalar bilan taqqoslaymiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda taqdim etish. Sifat va strategiya jihatidan biz bilan bir darajada bo'lmagan agentliklar bilan solishtirish, mijoz uchun ham, biz uchun ham to'g'ri bo'lmaydi.",
+            "ctaTitle": "Farqni o'zingiz ko'rdingiz. Endi tanlash vaqti keldi!",
+            "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun eng to'g'ri qarorni qabul qiling va biz bilan bog'laning.",
+            "ctaButton": "Menga shunday yondashuv kerak"
         }
     },
     "pickTwoSelector": {
