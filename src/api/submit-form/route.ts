@@ -22,118 +22,56 @@ const pickTwoLabels: Record<string, string> = {
     fast: 'Tez',
 };
 
-// amoCRM uchun yordamchi funksiyalar
-async function getAccessToken() {
-    const subdomain = process.env.AMOCRM_SUBDOMAIN;
-    const integrationId = process.env.AMOCRM_INTEGRATION_ID;
-    const integrationSecret = process.env.AMOCRM_INTEGRATION_SECRET;
-    const authCode = process.env.AMOCRM_AUTH_CODE;
-    const redirectUri = process.env.AMOCRM_REDIRECT_URI;
 
-    if (!subdomain || !integrationId || !integrationSecret || !authCode || !redirectUri) {
-        console.error("amoCRM environment variables are not set");
-        return null;
-    }
+async function sendMetaConversionEvent(data: any) {
+    const accessToken = process.env.META_API_ACCESS_TOKEN;
+    const pixelId = '1134785364752294';
 
-    try {
-        const url = `https://${subdomain}/oauth2/access_token`;
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                client_id: integrationId,
-                client_secret: integrationSecret,
-                grant_type: 'authorization_code',
-                code: authCode,
-                redirect_uri: redirectUri,
-            }),
-        });
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Failed to get amoCRM access token:', errorData);
-            return null;
-        }
-        const data = await response.json();
-        return data.access_token;
-    } catch (error) {
-        console.error('Error fetching amoCRM access token:', error);
-        return null;
-    }
-}
-
-async function createAmoCRMLEAD(data: any, telegramMessage: string, totalPrice: number) {
-    const accessToken = await getAccessToken();
-    if (!accessToken) {
-        console.error("Could not create amoCRM lead due to missing access token.");
+    if (!accessToken || !pixelId) {
+        console.warn("Meta Pixel ID or Access Token is not configured for server-side events.");
         return;
     }
 
-    const subdomain = process.env.AMOCRM_SUBDOMAIN;
-    const url = `https://${subdomain}/api/v4/leads/complex`;
+    const url = `https://graph.facebook.com/v20.0/${pixelId}/events`;
+    const eventId = `server-event-${Date.now()}`;
 
-    const leadData = [
-        {
-            name: `Saytdan yangi so'rov: ${data.fullName}`,
-            price: totalPrice || 0,
-            _embedded: {
-                contacts: [
-                    {
-                        first_name: data.fullName,
-                        custom_fields_values: [
-                            {
-                                field_code: "PHONE",
-                                values: [
-                                    {
-                                        value: data.phone,
-                                    },
-                                ],
-                            },
-                            {
-                                field_code: "EMAIL",
-                                values: [
-                                    {
-                                        value: data.email || `${data.phone.replace(/[^0-9]/g, '')}@jonbranding.uz`,
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-            custom_fields_values: [
-                {
-                    field_id: 1108219, // Izoh maydoni ID'si
-                    values: [
-                        {
-                            value: telegramMessage,
-                        },
-                    ],
+    const payload = {
+        data: [
+            {
+                event_name: 'Lead',
+                event_time: Math.floor(Date.now() / 1000),
+                action_source: 'website',
+                event_id: eventId,
+                user_data: {
+                    ph: [data.phone], // Phone number
+                    fn: [data.fullName], // First name
                 },
-            ]
-        },
-    ];
-
+                custom_data: {
+                    ...data,
+                }
+            }
+        ],
+        access_token: accessToken,
+    };
+    
     try {
-        const amoResponse = await fetch(url, {
+        const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify(leadData),
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload),
         });
 
-        if (!amoResponse.ok) {
-            const errorText = await amoResponse.text();
-            console.error('Error creating amoCRM lead:', amoResponse.status, errorText);
+        if (!response.ok) {
+           const errorData = await response.json();
+           console.error('Failed to send Meta Conversion API event:', errorData);
         } else {
-            console.log('amoCRM lead created successfully');
+           console.log("Meta Conversion API event sent successfully.");
         }
-
     } catch (error) {
-        console.error('Exception while creating amoCRM lead:', error);
+        console.error('Error sending Meta Conversion API event:', error);
     }
 }
+
 
 export async function POST(request: Request) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
@@ -172,14 +110,12 @@ ${packageSummary.replace('Brend:', `🏢 Brend:`).replace('Faoliyat turlari:', `
             let formattedAnswers = '';
             try {
                 const answersArray: string[] = JSON.parse(answersJsonString);
-                // Format: ["S1: Answer 1", "S2: Answer 2"] -> "1. Answer 1 \n 2. Answer 2"
                 formattedAnswers = answersArray.map((answer: string, index: number) => {
-                    const answerText = answer.substring(answer.indexOf(':') + 2); // Get text after ": "
+                    const answerText = answer.substring(answer.indexOf(':') + 2);
                     return `${index + 1}. ${answerText}`;
                 }).join('\n');
             } catch (e) {
                 console.error("Error parsing quiz answers:", e);
-                // Fallback for safety
                 formattedAnswers = "Javoblarni formatlashda xatolik yuz berdi.";
             }
 
@@ -278,13 +214,12 @@ ${packageInfo}
         }).catch(e => {
             console.error("Failed to send message to Telegram:", e);
         });
-        
-        // Send to amoCRM if configured (don't wait for it to finish)
-        if (process.env.AMOCRM_SUBDOMAIN) {
-            createAmoCRMLEAD(body, telegramMessage, totalPrice).catch(e => {
-                console.error("Failed to create amoCRM lead in background:", e);
-            });
-        }
+
+        // Send to Meta Conversion API (don't wait for it to finish)
+        sendMetaConversionEvent(body).catch(e => {
+            console.error("Failed to send Meta CAPI event in background:", e);
+        });
+
 
         // Immediately respond to the user
         return NextResponse.json({ ok: true, message: "So'rovingiz muvaffaqiyatli yuborildi." });
