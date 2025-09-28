@@ -149,6 +149,11 @@
       "cta1_desc": "Take your business to the next level with professional design. We'll help find the perfect solution for your business.",
       "cta1_button": "For my business too"
     },
+    "servicesHero": {
+        "title": "Services that empower your branding",
+        "subtitle": "Guaranteed results and a clear solution for your business",
+        "cta": "View prices"
+    },
     "serviceSections": {
         "cta1_title": "Your brand could look this good too.",
         "cta1_desc": "Take your business to the next level with professional design. We'll help find the perfect solution for your business.",

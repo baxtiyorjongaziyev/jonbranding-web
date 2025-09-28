@@ -149,6 +149,11 @@
        "cta1_desc": "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
        "cta1_button": "Mening biznesim uchun ham"
     },
+    "servicesHero": {
+        "title": "Brendingingizga kuch bag‘ishlaydigan xizmatlar",
+        "subtitle": "Biznesingiz uchun aniq natija va kafolatli yechim",
+        "cta": "Narxlarni ko‘rish"
+    },
     "serviceSections": {
         "cta1_title": "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
         "cta1_desc": "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
