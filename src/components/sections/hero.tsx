@@ -2,7 +2,7 @@
 'use client';
 
 import type {FC} from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import {Button} from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -17,6 +17,7 @@ interface HeroProps {
   onPrimaryClick: () => void;
   lang: string;
   dictionary: any;
+  renderHeadline: (headline: string) => React.ReactNode;
 }
 
 const portfolioImages = [
@@ -28,7 +29,7 @@ const portfolioImages = [
 ];
 
 
-const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary }) => {
+const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline }) => {
   const [headlineIndex, setHeadlineIndex] = useState(0);
   const [buttonIndex, setButtonIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -64,7 +65,8 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary }) => {
                 <h1 data-testid="hero-title" className={cn(
                 "text-4xl leading-tight sm:text-5xl md:text-6xl font-extrabold text-foreground transition-opacity duration-500",
                 isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
-                )} dangerouslySetInnerHTML={{ __html: dictionary.headlines[headlineIndex] }}>
+                )}>
+                  {renderHeadline(dictionary.headlines[headlineIndex])}
                 </h1>
                 <p className="mx-auto lg:mx-0 mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground" dangerouslySetInnerHTML={{ __html: dictionary.description }}>
                 </p>
