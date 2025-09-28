@@ -151,7 +151,7 @@ const NamingPage: FC = () => {
             </div>
         </section>
 
-        <section className="py-16 sm:py-24 bg-secondary">
+        <section id="patent-calculator" className="py-16 sm:py-24 bg-secondary">
           <div className="container mx-auto px-4">
               <div className="text-center max-w-3xl mx-auto">
                   <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{translations.calculator_title}</h2>
