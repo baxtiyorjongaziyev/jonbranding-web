@@ -55,7 +55,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
     const { label, description, price, features, recommended } = detail;
 
     return (
-        <div 
+        <Card 
             onClick={onSelect}
             className={cn(
                 "relative rounded-2xl h-full border transition-all duration-300 cursor-pointer",
@@ -110,7 +110,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                     </Button>
                 </div>
             </div>
-        </div>
+        </Card>
     );
 };
 
