@@ -57,11 +57,6 @@ const allowPhoneTyping = (s: string) => {
 };
 
 const formatPrice = (price: number, currency: string) => {
-    if (price >= 1000000) {
-        const millions = price / 1000000;
-        const formattedMillions = millions % 1 === 0 ? millions.toFixed(0) : millions.toFixed(1);
-        return `${formattedMillions} mln ${currency}`;
-    }
     return `${price.toLocaleString('fr-FR')} ${currency}`;
 }
 
@@ -446,6 +441,3 @@ function Row({ label, value, bold=false, currency }: { label: string, value: num
 function Divider() {
   return <div className="mt-2 pt-2 border-t" />;
 }
-
-    
-    
