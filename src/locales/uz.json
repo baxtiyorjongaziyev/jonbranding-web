@@ -525,6 +525,8 @@
             "discount_alert_desc": "Ushbu bo'limdan <strong>3 yoki undan ko'p</strong> xizmatni tanlang va umumiy summadan <strong>-20% chegirmaga</strong> ega bo'ling!",
             "your_package": "Sizning to'plamingiz",
             "your_package_desc": "O'zingizga mos xizmatlarni tanlang.",
+            "selected_services_title": "Tanlangan xizmatlar",
+            "cost_calculation_title": "Narx hisob-kitobi",
             "select_services": "Xizmatlarni tanlang",
             "selected": "Tanlangan",
             "select": "Tanlash",

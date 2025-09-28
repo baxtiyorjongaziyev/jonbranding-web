@@ -525,6 +525,8 @@
             "discount_alert_desc": "Choose <strong>3 or more</strong> services from this section and get a <strong>-20% discount</strong> on the total amount!",
             "your_package": "Your Package",
             "your_package_desc": "Select the services that suit you.",
+            "selected_services_title": "Selected Services",
+            "cost_calculation_title": "Cost Calculation",
             "select_services": "Select services",
             "selected": "Selected",
             "select": "Select",

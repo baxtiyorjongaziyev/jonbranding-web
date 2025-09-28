@@ -102,11 +102,11 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
                  <div className="my-2 text-center min-h-[40px] flex items-center justify-center">
                     {(price > 0 || note) && (
                        <span className="text-2xl font-bold text-primary whitespace-nowrap">
-                         {isPercentageBased ? note : formatPrice(price, lang)}
+                         {isPercentageBased ? note : formatPrice(price, lang, dictionary)}
                        </span>
                     )}
                     {price === 0 && !note && (
-                         <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPrice(price, lang)}</span>
+                         <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPrice(price, lang, dictionary)}</span>
                     )}
                 </div>
                 <Button 
@@ -214,14 +214,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 .map(([key]) => key as keyof SelectedServices);
 
     return (
-        <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
-             <div className="container mx-auto px-4">
-                <div className="text-center mb-12">
-                     <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
-                     <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">{translations.subtitle}</p>
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
-                    <div className="lg:col-span-2 space-y-12">
+        <>
+            <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
+                        <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">{translations.subtitle}</p>
+                    </div>
+                    
+                    <div className="space-y-12">
                         {Object.entries(serviceCategories).map(([key, category]) => (
                             <div key={key}>
                                 <h3 className="text-2xl font-bold text-dark-blue mb-6">{translations.categories[category.titleKey]}</h3>
@@ -238,7 +239,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                     </div>
                                 )}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                      {category.services.map((serviceId) => {
                                         if (!serviceDetails[serviceId]) return null;
                                         return (
@@ -257,89 +258,111 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                         ))}
                     </div>
-    
-                    <div className="lg:col-span-1 lg:sticky top-24">
-                        <Card className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
-                            <CardHeader className="p-0 text-left">
-                               <CardTitle className="text-2xl font-bold text-white">{translations.your_package}</CardTitle>
-                               <p className="text-blue-200 text-sm mt-1">{translations.your_package_desc}</p>
-                            </CardHeader>
-                            <CardContent className="p-0 mt-6">
-                                <div className="space-y-3 min-h-[100px] border-b border-white/10 pb-4 mb-4">
-                                    {selectedServiceKeys.length > 0 ? (
-                                        selectedServiceKeys
-                                            .filter(key => {
-                                                const service = serviceDetails[key];
-                                                return service && (service.price > 0 || service.note?.includes('%'));
-                                            })
-                                            .map((key) => {
-                                                const service = serviceDetails[key];
-                                                return (
-                                                    <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
-                                                        <span className="text-white flex-1 pr-2">{service.label}</span>
-                                                        <div className="flex items-center gap-2">
-                                                            <span className="font-mono text-gray-300">
-                                                                {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en')}` : service.note}
-                                                            </span>
-                                                            <Button 
-                                                                variant="ghost" 
-                                                                size="icon" 
-                                                                className="h-6 w-6 text-gray-400 hover:bg-red-500/20 hover:text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
-                                                                onClick={() => handleServiceToggle(key)}
-                                                            >
-                                                                <Trash2 className="h-4 w-4"/>
-                                                            </Button>
-                                                        </div>
-                                                    </div>
-                                                );
-                                            })
-                                    ) : (
-                                        <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
-                                            <ShoppingCart className="w-8 h-8"/>
-                                            <p>{translations.select_services}</p>
+                </div>
+            </section>
+        
+            <section className="bg-secondary sticky bottom-0 z-40 py-8 border-t-2 border-primary/20 shadow-[0_-20px_40px_-20px_rgba(0,0,0,0.1)]">
+                <div className="container mx-auto px-4">
+                    <Card className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
+                            
+                            {/* Calculation Details */}
+                            <div className="lg:col-span-2">
+                                <CardHeader className="p-0 text-left mb-6">
+                                    <CardTitle className="text-2xl font-bold text-white">{translations.your_package}</CardTitle>
+                                    <p className="text-blue-200 text-sm mt-1">{translations.your_package_desc}</p>
+                                </CardHeader>
+                                <CardContent className="p-0">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                                        <div className="space-y-3 border-b sm:border-b-0 sm:border-r border-white/10 pb-4 sm:pb-0 sm:pr-8">
+                                            <h4 className="font-semibold text-white">{translations.selected_services_title}</h4>
+                                            {selectedServiceKeys.length > 0 ? (
+                                                selectedServiceKeys
+                                                    .filter(key => {
+                                                        const service = serviceDetails[key];
+                                                        return service && (service.price > 0 || service.note?.includes('%'));
+                                                    })
+                                                    .map((key) => {
+                                                        const service = serviceDetails[key];
+                                                        return (
+                                                            <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
+                                                                <span className="text-white flex-1 pr-2">{service.label}</span>
+                                                                <div className="flex items-center gap-2">
+                                                                    <span className="font-mono text-gray-300">
+                                                                        {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en', translations)}` : service.note}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })
+                                            ) : (
+                                                <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
+                                                    <ShoppingCart className="w-8 h-8"/>
+                                                    <p>{translations.select_services}</p>
+                                                </div>
+                                            )}
                                         </div>
+
+                                        <div className="space-y-3">
+                                            <h4 className="font-semibold text-white">{translations.cost_calculation_title}</h4>
+                                            {total.base > 0 && (
+                                                <>
+                                                    <div className="flex justify-between items-center text-sm font-medium">
+                                                        <span className="text-blue-200">{translations.services_total}</span>
+                                                        <span className="font-mono">{total.base.toLocaleString('fr-FR')} {translations.currency}</span>
+                                                    </div>
+                                                    {total.surcharges.map(s => (
+                                                        <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
+                                                            <span>{s.name}</span>
+                                                            <span className="font-mono">+ {s.value.toLocaleString('fr-FR')} {translations.currency}</span>
+                                                        </div>
+                                                    ))}
+                                                    {total.discountApplied.map(d => (
+                                                        <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
+                                                            <span>{d.name}</span>
+                                                            <span className="font-mono">- {formatPriceForDisplay(d.value, lang as 'uz' | 'ru' | 'en', translations)}</span>
+                                                        </div>
+                                                    ))}
+                                                </>
+                                            )}
+                                            {total.savings > 0 && (
+                                                <div className="flex justify-between items-center text-sm font-bold text-green-300 pt-2 border-t border-green-400/20">
+                                                    <span>{translations.total_savings}</span>
+                                                    <span className="font-mono">{formatPriceForDisplay(total.savings, lang as 'uz' | 'ru' | 'en', translations)}</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {total.bonus && (
+                                        <InfoCard
+                                            icon={Gift}
+                                            title={translations.gift_title}
+                                            description={total.bonus}
+                                            className="mt-6 bg-accent/10 border-accent/20 text-accent-light"
+                                        />
                                     )}
+
+                                </CardContent>
+                            </div>
+
+                            {/* Final Price & CTA */}
+                            <div className="flex flex-col justify-center items-center text-center bg-white/5 rounded-xl p-6 border border-white/10">
+                                <div className='text-center'>
+                                        <p className="text-sm text-blue-200">{translations.final_price}</p>
+                                        <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+                                        {total.final > 0 ? (
+                                            <>
+                                                {formatPriceForDisplay(total.final, lang as 'uz' | 'ru' | 'en', translations)}
+                                            </>
+                                        ) : (
+                                            translations.agreed_price
+                                        )}
+                                    </p>
                                 </div>
                                 
-                                {total.base > 0 && (
-                                    <div className="py-4 space-y-3 border-b border-white/10 mb-4">
-                                        <div className="flex justify-between items-center text-sm font-medium">
-                                            <span className="text-blue-200">{translations.services_total}</span>
-                                            <span className="font-mono">{total.base.toLocaleString('fr-FR')} {translations.currency}</span>
-                                        </div>
-                                        {total.surcharges.map(s => (
-                                            <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
-                                                <span>{s.name}</span>
-                                                <span className="font-mono">+ {s.value.toLocaleString('fr-FR')} {translations.currency}</span>
-                                            </div>
-                                        ))}
-                                        {total.discountApplied.map(d => (
-                                            <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
-                                                <span>{d.name}</span>
-                                                <span className="font-mono">- {formatPriceForDisplay(d.value, lang as 'uz' | 'ru' | 'en', translations)}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                                
-                                {total.savings > 0 && (
-                                    <div className="text-center py-4 my-4 bg-green-500/20 rounded-lg animate-fade-in border border-green-400/30">
-                                        <p className="text-sm text-green-200">{translations.total_savings}</p>
-                                        <p className="text-3xl font-bold text-green-300 animate-pulse">{formatPriceForDisplay(total.savings, lang as 'uz' | 'ru' | 'en', translations)}</p>
-                                    </div>
-                                )}
-                                
-                                {total.bonus && (
-                                    <InfoCard
-                                        icon={Gift}
-                                        title={translations.gift_title}
-                                        description={total.bonus}
-                                        className="my-4 bg-accent/10 border-accent/20 text-accent-light"
-                                    />
-                                )}
-
-                                <div className="mt-4 flex items-center justify-between bg-white/5 p-3 rounded-lg border border-white/10">
-                                   <Label htmlFor="upfront-payment" className="flex flex-col cursor-pointer flex-1 pr-4">
+                                <div className="mt-4 flex items-center justify-between w-full max-w-xs">
+                                   <Label htmlFor="upfront-payment" className="flex flex-col cursor-pointer flex-1 pr-4 text-left">
                                         <span className="font-semibold text-white">{translations.upfront_discount_title}</span>
                                         <span className="text-xs text-blue-200">{translations.upfront_discount_desc}</span>
                                    </Label>
@@ -352,43 +375,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     />
                                 </div>
 
-                                <div className='mt-6 text-center'>
-                                     <p className="text-sm text-blue-200">{translations.final_price}</p>
-                                      <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-                                        {total.final > 0 ? (
-                                            <>
-                                                {formatPriceForDisplay(total.final, lang as 'uz' | 'ru' | 'en', translations)}
-                                            </>
-                                        ) : (
-                                            translations.agreed_price
-                                        )}
-                                    </p>
-                                </div>
-
-
                                 <Button id="package-builder-cta" onClick={onOrderNow} variant="default" size="lg" className="w-full mt-6 text-lg py-3" disabled={total.base === 0}>
                                     {total.discountApplied.length > 0 ? translations.order_with_discount : translations.get_free_consultation}
                                 </Button>
-                                
-                                <div className="mt-8 space-y-4 text-left">
-                                   <InfoCard
-                                        icon={Sparkles}
-                                        title={translations.satisfaction_guarantee}
-                                        description={translations.satisfaction_guarantee_desc}
-                                    />
-                                    <InfoCard
-                                        icon={Info}
-                                        title={translations.not_public_offer}
-                                        description={translations.not_public_offer_desc}
-                                    />
-                                </div>
-
-                            </CardContent>
-                        </Card>
-                    </div>
+                            </div>
+                        </div>
+                    </Card>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 
