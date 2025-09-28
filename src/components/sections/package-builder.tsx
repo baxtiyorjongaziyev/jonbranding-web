@@ -98,7 +98,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
                  <div className="my-2 text-center min-h-[40px] flex items-center justify-center">
                     {(price > 0 || note) && (
                        <span className="text-2xl font-bold text-primary whitespace-nowrap">
-                         {isPercentageBased ? note : `+${formatPriceForDisplay(price, lang, dictionary)}`}
+                         {isPercentageBased ? note : formatPriceForDisplay(price, lang, dictionary)}
                        </span>
                     )}
                     {price === 0 && !note && (
@@ -275,7 +275,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                         <span className="text-white flex-1 pr-2">{service.label}</span>
                                                         <div className="flex items-center gap-2">
                                                             <span className="font-mono text-gray-300">
-                                                                {service.price > 0 ? `+${formatPriceForDisplay(service.price, lang as 'uz' | 'ru' | 'en', translations)}` : service.note}
+                                                                {service.price > 0 ? `${formatPriceForDisplay(service.price, lang as 'uz' | 'ru' | 'en', translations)}` : service.note}
                                                             </span>
                                                             <Button 
                                                                 variant="ghost" 
@@ -363,7 +363,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
 
 
-                                <Button id="package-builder-cta" variant="default" size="lg" className="w-full mt-6 text-lg py-3" disabled={total.base === 0}>
+                                <Button id="package-builder-cta" onClick={onOrderNow} variant="default" size="lg" className="w-full mt-6 text-lg py-3" disabled={total.base === 0}>
                                     {total.discountApplied.length > 0 ? translations.order_with_discount : translations.get_free_consultation}
                                 </Button>
                                 
