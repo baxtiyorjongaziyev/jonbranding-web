@@ -1,6 +1,7 @@
 
 
 
+
 const uzServiceDetails = {
     audit: { label: "Logo Auditi", description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.", price: 1500000, timeline: "2-3 kun", note: null },
     namingCheck: { label: "Neyming Tekshiruvi", description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.", price: 2000000, timeline: "1-2 kun", note: null },
@@ -15,8 +16,8 @@ const uzServiceDetails = {
     smm: { label: "Ijtimoiy tarmoqlar uchun stil", description: "Postlar va storislarni firma uslubida bezash.", price: 13000000, timeline: "2 haftadan", note: null },
     merch: { label: "Brendli merch va nositellar", description: "Kiyim, aksessuarlar, POSM materiallari dizayni.", price: 0, timeline: "2 haftadan", note: "Individual hisoblanadi" },
     illustrations: { label: "Illustratsiyalar va animatsiya", description: "Firma grafikasi, infografika va animatsiyalar yaratish.", price: 0, timeline: "3 haftadan", note: "Individual hisoblanadi" },
-    urgency: { label: "Shoshilinch loyiha (+50%)", description: "Loyiha navbatsiz, qisqa muddatda (2-3 kun) tayyorlanadi. Umumiy narxga 50% ustama qo'shiladi.", price: 0, timeline: "Individual", note: "Narxga qo'shiladi" },
-    nda: { label: "Maxfiylik shartnomasi (NDA) (+25%)", description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi. Umumiy narxga 25% ustama qo'shiladi.", price: 0, timeline: "Individual", note: "Narxga qo'shiladi" }
+    urgency: { label: "Shoshilinch loyiha (+50%)", description: "Loyiha navbatsiz, qisqa muddatda (2-3 kun) tayyorlanadi. Umumiy narxga 50% ustama qo'shiladi.", price: 0, timeline: "Individual", note: "+50%" },
+    nda: { label: "Maxfiylik shartnomasi (NDA) (+25%)", description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi. Umumiy narxga 25% ustama qo'shiladi.", price: 0, timeline: "Individual", note: "+25%" }
 };
 
 const ruServiceDetails = {
@@ -33,8 +34,8 @@ const ruServiceDetails = {
     smm: { label: "Стиль для социальных сетей", description: "Оформление постов и сторис в фирменном стиле.", price: 13000000, timeline: "от 2 недель", note: null },
     merch: { label: "Брендированный мерч и носители", description: "Дизайн одежды, аксессуаров, POSM-материалов.", price: 0, timeline: "от 2 недель", note: "Рассчитывается индивидуально" },
     illustrations: { label: "Иллюстрации и анимация", description: "Создание фирменной графики, инфографики и анимаций.", price: 0, timeline: "от 3 недель", note: "Рассчитывается индивидуально" },
-    urgency: { label: "Срочный проект (+50%)", description: "Проект выполняется вне очереди, в короткие сроки (2-3 дня). К общей стоимости добавляется 50%.", price: 0, timeline: "Индивидуально", note: "к цене" },
-    nda: { label: "Договор о неразглашении (NDA) (+25%)", description: "Договор о неразглашении информации о проекте. К общей стоимости добавляется 25%.", price: 0, timeline: "Индивидуально", note: "к цене" }
+    urgency: { label: "Срочный проект (+50%)", description: "Проект выполняется вне очереди, в короткие сроки (2-3 дня). К общей стоимости добавляется 50%.", price: 0, timeline: "Индивидуально", note: "+50%" },
+    nda: { label: "Договор о неразглашении (NDA) (+25%)", description: "Договор о неразглашении информации о проекте. К общей стоимости добавляется 25%.", price: 0, timeline: "Индивидуально", note: "+25%" }
 };
 
 const enServiceDetails = {
@@ -51,8 +52,8 @@ const enServiceDetails = {
     smm: { label: "Style for Social Networks", description: "Design of posts and stories in corporate style.", price: 13000000, timeline: "from 2 weeks", note: null },
     merch: { label: "Branded Merch and Carriers", description: "Design of clothing, accessories, POSM materials.", price: 0, timeline: "from 2 weeks", note: "Calculated individually" },
     illustrations: { label: "Illustrations and Animation", description: "Creation of corporate graphics, infographics and animations.", price: 0, timeline: "from 3 weeks", note: "Calculated individually" },
-    urgency: { label: "Urgent Project (+50%)", description: "The project is carried out out of turn, in a short time (2-3 days). 50% is added to the total cost.", price: 0, timeline: "Individual", note: "to the price" },
-    nda: { label: "Non-Disclosure Agreement (NDA) (+25%)", description: "Agreement on non-disclosure of project information. 25% is added to the total cost.", price: 0, timeline: "Individual", note: "to the price" }
+    urgency: { label: "Urgent Project (+50%)", description: "The project is carried out out of turn, in a short time (2-3 days). 50% is added to the total cost.", price: 0, timeline: "Individual", note: "+50%" },
+    nda: { label: "Non-Disclosure Agreement (NDA) (+25%)", description: "Agreement on non-disclosure of project information. 25% is added to the total cost.", price: 0, timeline: "Individual", note: "+25%" }
 };
 
 export const getServiceDetails = (lang: 'uz' | 'ru' | 'en') => {
@@ -138,7 +139,7 @@ export const packageDiscount = 0.20; // 20%
 export const upfrontDiscount = 0.10; // 10%
 export const urgencySurcharge = 0.50;
 export const ndaSurcharge = 0.25;
-export const bonusThreshold = 18750000;
+export const bonusThreshold = 50000000;
 
 
 interface PackageSelections {
@@ -230,9 +231,9 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     const savings = priceAfterSurcharges - finalPrice;
     
     let bonusDescription;
-    if (lang === 'ru') bonusDescription = "Дизайн визитной карточки в подарок";
-    else if (lang === 'en') bonusDescription = "Business card design as a gift";
-    else bonusDescription = "Biznes vizitka dizayni sovg'a tariqasida";
+    if (lang === 'ru') bonusDescription = "Аудит логотипа и 30-минутная консультация в подарок";
+    else if (lang === 'en') bonusDescription = "Logo audit and 30-minute consultation as a gift";
+    else bonusDescription = "Logotip auditi va 30 daqiqalik konsultatsiya sovg'a tariqasida";
     const bonus = finalPrice > bonusThreshold ? bonusDescription : null;
 
     return {
@@ -253,7 +254,7 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
     for (const serviceKey in selectedServices) {
         if (serviceKey in sd && selectedServices[serviceKey as keyof SelectedServices]) {
             const service = sd[serviceKey as keyof SelectedServices];
-            if(service.price > 0 || service.note?.includes('qo\'shiladi') || service.note?.includes('к цене') || service.note?.includes('to the price')) {
+            if(service.price > 0 || service.note?.includes('%')) {
                 services.push(service.label);
             }
         }

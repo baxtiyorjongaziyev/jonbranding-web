@@ -8,14 +8,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, packageDiscountThreshold, packageDiscount } from '@/lib/pricing';
+import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Shield, Banknote, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, Share2, ClipboardList, Type, Palette, Layers, BookMarked, Box, Repeat, Award, ArrowDown, PercentCircle } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '../ui/separator';
-import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import TiltCard from '../ui/tilt-card';
 
 
@@ -55,17 +52,17 @@ const serviceCategories: Record<ServiceCategory, { titleKey: string; services: (
 const serviceIcons: { [key in keyof SelectedServices]?: React.ElementType } = {
     strategy: ClipboardList,
     commStrategy: Megaphone,
-    smm: Share2,
+    smm: PenTool,
     merch: Shirt,
-    illustrations: PenTool,
+    illustrations: Palette,
     urgency: Flame,
     nda: ShieldCheck,
     audit: FileText,
     namingCheck: ClipboardSignature,
     consultation: Info,
     naming: Type,
-    logo: Palette,
-    designSystem: Layers,
+    logo: Layers,
+    designSystem: BookMarked,
     brandbook: BookMarked,
     packaging: Box
 };
@@ -75,8 +72,8 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, note, timeline } = detail;
-    const isPercentageBased = note && (note.includes('Narxga qo\'shiladi') || note.includes('к цене') || note.includes('to the price'));
+    const { label, description, price, note } = detail;
+    const isPercentageBased = note && (note.includes('%'));
 
     const Icon = serviceIcons[id];
 
@@ -98,15 +95,15 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
                 </div>
             </div>
             <div className="p-4 bg-secondary/50 border-t mt-auto">
-                 <div className="my-2 text-center">
-                    {price > 0 && (
-                    <span className="text-2xl font-bold text-primary whitespace-nowrap">{`+${formatPriceForDisplay(price, lang, dictionary)}`}</span>
+                 <div className="my-2 text-center min-h-[40px] flex items-center justify-center">
+                    {price > 0 && !isPercentageBased && (
+                       <span className="text-2xl font-bold text-primary whitespace-nowrap">{`+${formatPriceForDisplay(price, lang, dictionary)}`}</span>
                     )}
-                    {isPercentageBased && (
+                    {note && (
                         <span className="text-lg font-semibold text-primary whitespace-nowrap">{note}</span>
                     )}
-                    {price === 0 && !isPercentageBased && (
-                        <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
+                    {price === 0 && !note && (
+                         <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
                     )}
                 </div>
                 <Button 
@@ -150,7 +147,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
         audit: false, namingCheck: false, consultation: false, strategy: false, commStrategy: false,
-        naming: false, logo: false, designSystem: false, brandbook: false, packaging: false,
+        naming: false, logo: true, designSystem: false, brandbook: false, packaging: false,
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
     const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
@@ -180,6 +177,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         setSelectedServices(prev => {
             const newState = { ...prev };
             newState[service] = !newState[service];
+            // If `logo` is selected, deselect `designSystem` and vice versa
             if (service === 'logo' && newState.logo) newState.designSystem = false;
             else if (service === 'designSystem' && newState.designSystem) newState.logo = false;
             return newState;
@@ -267,7 +265,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 <div className="space-y-3 min-h-[100px] border-b border-white/10 pb-4 mb-4">
                                     {selectedServiceKeys.length > 0 ? (
                                         selectedServiceKeys
-                                            .filter(key => serviceDetails[key]?.price > 0 || serviceDetails[key]?.note?.includes('qo\'shiladi') || serviceDetails[key]?.note?.includes('к цене') || serviceDetails[key]?.note?.includes('to the price'))
+                                            .filter(key => {
+                                                const service = serviceDetails[key];
+                                                return service && (service.price > 0 || service.note?.includes('%'));
+                                            })
                                             .map((key) => {
                                                 const service = serviceDetails[key];
                                                 return (
@@ -335,7 +336,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 )}
 
                                 <div className="mt-4 flex items-center justify-between bg-white/5 p-3 rounded-lg border border-white/10">
-                                   <Label htmlFor="upfront-payment" className="flex flex-col cursor-pointer">
+                                   <Label htmlFor="upfront-payment" className="flex flex-col cursor-pointer flex-1 pr-4">
                                         <span className="font-semibold text-white">{translations.upfront_discount_title}</span>
                                         <span className="text-xs text-blue-200">{translations.upfront_discount_desc}</span>
                                    </Label>
