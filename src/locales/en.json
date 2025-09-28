@@ -518,6 +518,9 @@
             "categories": {
                 "tripwire": "First Step (Quick Services)",
                 "main": "Our Main Services",
+                "strategy": "Strategic Services",
+                "identity": "Identity and Design",
+                "naming": "Naming",
                 "additional": "Additional Services",
                 "options": "Special Conditions"
             },
