@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Clock, PercentSquare, Sparkles } from 'lucide-react';
 import Link from 'next/link';
@@ -77,10 +77,8 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
                     >
                     </p>
                     
-                    <Button asChild size="lg" className="mt-10 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
-                        <Link href={`/${lang}/xizmatlar`}>
-                           {translations.button}
-                        </Link>
+                    <Button id="offer-cta" size="lg" className="mt-10 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
+                       {translations.button}
                     </Button>
                     <p className="mt-3 text-xs text-gray-400">{translations.note}</p>
                 </div>

@@ -8,8 +8,10 @@ import { comparisonData } from '@/lib/pricing';
 import { Logo } from '../icons/logo';
 import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { Button } from '../ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const competitors = [
     { id: 'jon', name: 'Jon.Branding', isPrimary: true },
@@ -124,14 +126,29 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang }) => {
                 </div>
             </Card>
         </div>
-
       </div>
-      <CtaBlock 
-        title={translations.ctaTitle}
-        description={translations.ctaDesc}
-        buttonText={translations.ctaButton}
-        onCtaClick={onCtaClick}
-      />
+      
+       <section className="bg-background py-16">
+          <div className="container mx-auto px-4">
+            <div className="rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-8 sm:p-12 text-center text-white shadow-xl">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white">{translations.ctaTitle}</h2>
+              <p className="mt-4 max-w-2xl mx-auto text-lg text-blue-200">
+                {translations.ctaDesc}
+              </p>
+              <div className="mt-8">
+                <Button
+                  id="comparison-cta"
+                  size="lg"
+                  variant="default"
+                  className="text-white shadow-lg text-base sm:text-lg h-auto py-3 px-6 whitespace-normal w-full sm:w-auto"
+                >
+                  {translations.ctaButton}
+                  <ArrowRight className="ml-2 h-5 w-5 flex-shrink-0" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
     </section>
   );
 };
