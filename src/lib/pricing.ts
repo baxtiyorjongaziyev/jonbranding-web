@@ -2,9 +2,10 @@
 
 
 
+
 const uzServiceDetails = {
     audit: { label: "Logo Auditi", description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.", price: 1500000, timeline: "2-3 kun", note: null },
-    namingCheck: { label: "Neyming Tekshiruvi", description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.", price: 2000000, timeline: "1-2 kun", note: null },
+    namingCheck: { label: "Neyming Tekshiruvi", description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.", price: 1500000, timeline: "1-2 kun", note: null },
     consultation: { label: "30 daqiqalik maslahat", description: "Brending bo'yicha har qanday savolingizga tezkor yo'l-yo'riq va professional maslahat.", price: 500000, timeline: "30 daqiqa", note: null },
     strategy: { label: "Brend-strategiya va platforma", description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", price: 60000000, timeline: "8 haftadan", note: null },
     commStrategy: { label: "Kommunikatsion strategiya", description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", price: 50000000, timeline: "8 haftadan", note: null },
@@ -22,7 +23,7 @@ const uzServiceDetails = {
 
 const ruServiceDetails = {
     audit: { label: "Аудит логотипа", description: "Анализ существующего логотипа и рекомендации по улучшению.", price: 1500000, timeline: "2-3 дня", note: null },
-    namingCheck: { label: "Проверка нейминга", description: "Проверка доступности имени бренда в базах данных Узбекистана и международных базах.", price: 2000000, timeline: "1-2 дня", note: null },
+    namingCheck: { label: "Проверка нейминга", description: "Проверка доступности имени бренда в базах данных Узбекистана и международных базах.", price: 1500000, timeline: "1-2 дня", note: null },
     consultation: { label: "30-минутная консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга.", price: 500000, timeline: "30 минут", note: null },
     strategy: { label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.", price: 60000000, timeline: "от 8 недель", note: null },
     commStrategy: { label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", price: 50000000, timeline: "от 8 недель", note: null },
@@ -40,7 +41,7 @@ const ruServiceDetails = {
 
 const enServiceDetails = {
     audit: { label: "Logo Audit", description: "Analysis of the existing logo and recommendations for improvement.", price: 1500000, timeline: "2-3 days", note: null },
-    namingCheck: { label: "Naming Check", description: "Checking the availability of the brand name in Uzbekistan and international databases.", price: 2000000, timeline: "1-2 days", note: null },
+    namingCheck: { label: "Naming Check", description: "Checking the availability of the brand name in Uzbekistan and international databases.", price: 1500000, timeline: "1-2 days", note: null },
     consultation: { label: "30-minute consultation", description: "Quick guidance and professional advice on any branding question.", price: 500000, timeline: "30 minutes", note: null },
     strategy: { label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.", price: 60000000, timeline: "from 8 weeks", note: null },
     commStrategy: { label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", price: 50000000, timeline: "from 8 weeks", note: null },
