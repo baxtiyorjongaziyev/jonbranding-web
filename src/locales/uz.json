@@ -267,6 +267,10 @@
         "ctaButton": "Bepul konsultatsiya olish"
     },
     "quiz": {
+        "metadata": {
+            "title": "Mini-Test: Biznesingiz brendga tayyormi? | Jon.Branding",
+            "description": "Bir nechta oddiy savollarga javob bering va biznesingizning brendingga qanchalik tayyorligini, uning kuchli va zaif tomonlarini bilib oling."
+        },
         "questions": [
             {
                 "question": "Sizning biznesingizning asosiy g'oyasi yoki missiyasi bir jumla bilan ifodalanganmi?",
@@ -330,6 +334,10 @@
         "resultButton": "Natijani bilish"
     },
     "brandStrategyPage": {
+        "metadata": {
+            "title": "Brend Strategiyasi | Jon.Branding",
+            "description": "Brend strategiyasi — bu biznesning o'sish vositasi. Brendingizni shunchaki chiroyli emas, balki ishlaydigan tizimga aylantiring."
+        },
         "title": "Brend Strategiyasi",
         "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesning o'sishiga yordam beradigan aniq g'oya.",
         "section1_title": "Brend-strategiya — bu biznesning o'sish vositasi",
@@ -351,6 +359,10 @@
         ]
     },
     "corporateStylePage": {
+        "metadata": {
+            "title": "Firma Uslubi | Jon.Branding",
+            "description": "Biz shunchaki chiroyli rasmlar yaratmaymiz, biz brendingiz uchun ishlaydigan va natija keltiradigan tizimli vizual uslubni ishlab chiqamiz. Logotip, ranglar, shriftlar va boshqa elementlar orqali brendingizni taniladigan va esda qolarli qiling."
+        },
         "title": "Firma Uslubini Ishlab Chiqish",
         "subtitle": "Brendning asosiy elementlaridan biri — uning vizual tarkibiy qismidir. Aynan u g'oyalarni, ma'nolarni va qadriyatlarni ko'rish, his qilish va eslab qolish mumkin bo'lgan obrazlarga aylantiradi.",
         "section1_title": "Brendni idrok etish rasmdan boshlanadi",
@@ -372,6 +384,10 @@
         "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi, uzoq vaqt esda qoladi va ko'proq ishonch uyg'otadi. Biz shunchaki vizual uslub emas, balki brendning o'sishiga, izchil va boshqariladigan bo'lishiga yordam beradigan vosita yaratamiz."
     },
     "namingPage": {
+        "metadata": {
+            "title": "Neyming | Jon.Branding",
+            "description": "Brend uchun unutilmas va kuchli nom tanlash. Yaxshi nom shunchaki chiroyli eshitilmaydi, u mohiyatni yetkazadi, esda qoladi va brendning raqobatchilar orasida ajralib turishiga yordam beradi."
+        },
         "title": "Neyming — Kuchli Brend Nomi",
         "subtitle": "Brend nomi — bu u haqidagi birinchi taassurot, uning energiyasi, xarakteri va so'zda ifodalangan g'oyasi. Yaxshi nom shunchaki chiroyli eshitilmaydi, u mohiyatni yetkazadi, esda qoladi va brendning raqobatchilar orasida ajralib turishiga yordam beradi.",
         "section1_title": "Nomi brend strategiyasining bir qismidir",
@@ -464,6 +480,10 @@
         }
     },
     "packagingPage": {
+        "metadata": {
+            "title": "Qadoq Dizayni | Jon.Branding",
+            "description": "Biz shunchaki chiroyli qadoq emas, balki mahsulotingizni sotadigan kuchli marketing vositasini yaratamiz. Qadoq dizayni orqali brendingizni raqobatchilardan ajratib turing va mijozlar mehrini qozoning."
+        },
         "title": "Qadoq Dizaynini Ishlab Chiqish",
         "subtitle": "Yuqori raqobat sharoitida qadoq ko'pincha asosiy marketing vositasiga aylanadi. U brendni peshtaxtada ajratib ko'rsatadi, uning tarixini so'zlab beradi va bir qarashdayoq auditoriya bilan aloqa o'rnatadi.",
         "section1_title": "Qadoq — brend kimligini tashuvchidan ko'ra ko'proq narsa",
@@ -480,6 +500,10 @@
         "cta_description": "Yaxshi qadoq dizayni — bu shunchaki chiroyli bezak emas, balki biznes uchun ishlaydigan vositadir. Biz funksional, strategik jihatdan puxta o'ylangan dizaynni ishlab chiqamiz, bunda qadoq to'laqonli savdo vositasi bo'lib xizmat qiladi."
     },
     "servicesPage": {
+        "metadata": {
+            "title": "Xizmatlar va Narxlar | Jon.Branding",
+            "description": "Bizning barcha xizmatlarimiz bilan tanishing va o'zingizga mos bo'lgan brending to'plamini yarating. Onlayn kalkulyator yordamida narxlarni darhol hisoblang."
+        },
         "packageBuilder": {
             "title": "Xizmatlar va Narxlar",
             "subtitle": "Bizning barcha xizmatlarimiz bilan tanishing va o'zingizga mos bo'lgan brending to'plamini yarating. Onlayn kalkulyator yordamida narxlarni darhol hisoblang.",
@@ -566,5 +590,3 @@
     }
 }
   
-
-    
