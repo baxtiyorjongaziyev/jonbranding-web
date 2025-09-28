@@ -1,3 +1,4 @@
+
 'use client';
 
 import type {FC} from 'react';
@@ -58,7 +59,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary }) => {
           <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[50rem] h-[50rem] bg-primary/5 rounded-full blur-3xl"></div>
       </div>
       <div className="relative z-10 container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="max-w-2xl text-center lg:text-left">
                 <h1 data-testid="hero-title" className={cn(
                 "text-4xl leading-tight sm:text-5xl md:text-6xl font-extrabold text-foreground transition-opacity duration-500",
@@ -77,8 +78,8 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary }) => {
                     {dictionary.buttonHint}
                 </div>
             </div>
-            <div className="hidden lg:flex justify-center items-center">
-                <TiltCard strength={10} className="w-[500px] h-[500px]">
+            <div className="flex justify-center items-center mt-10 lg:mt-0">
+                <TiltCard strength={10} className="w-full max-w-[500px] h-auto aspect-square">
                     <Card className="rounded-2xl shadow-2xl overflow-hidden w-full h-full">
                         <Carousel
                             plugins={[Autoplay({ delay: 2500, stopOnInteraction: true })]}
@@ -87,7 +88,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary }) => {
                             <CarouselContent>
                                 {portfolioImages.map((src, index) => (
                                     <CarouselItem key={index}>
-                                        <div className="w-full h-[500px] relative">
+                                        <div className="w-full h-full relative aspect-square">
                                             <Image 
                                                 src={src}
                                                 alt={`Portfolio ishi ${index + 1}`}
