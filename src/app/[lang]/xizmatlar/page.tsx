@@ -2,24 +2,16 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
-import PackageBuilder from '@/components/sections/package-builder';
 import { Skeleton } from '@/components/ui/skeleton';
 import Head from 'next/head';
 import MobileCtaBar from '@/components/sections/mobile-cta-bar';
 import { useParams } from 'next/navigation';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import PackageBuilder from '@/components/sections/package-builder';
+import Comparison from '@/components/sections/comparison';
+import Offer from '@/components/sections/offer';
+import QueueStatus from '@/components/sections/queue-status';
 
-
-const Comparison = dynamic(() => import('@/components/sections/comparison'), {
-    loading: () => <Skeleton className="h-96 w-full mt-4" />,
-});
-const Offer = dynamic(() => import('@/components/sections/offer'), {
-    loading: () => <Skeleton className="h-96 w-full mt-4" />,
-});
-const QueueStatus = dynamic(() => import('@/components/sections/queue-status'), {
-    loading: () => <Skeleton className="h-96 w-full mt-4" />,
-});
 
 const XizmatlarPage = () => {
     const params = useParams();
