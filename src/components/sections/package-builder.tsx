@@ -282,7 +282,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         <>
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto mb-16 grid grid-cols-1 gap-8">
+                     <div className="max-w-4xl mx-auto mb-16 grid grid-cols-1 gap-8">
                         <Card className="p-6 sm:p-8 rounded-2xl shadow-sm">
                             <h3 className="font-bold text-dark-blue text-xl mb-3">{translations.introTitle}</h3>
                             <p className="text-muted-foreground">{translations.introP1}</p>
@@ -495,5 +495,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
-
-    
