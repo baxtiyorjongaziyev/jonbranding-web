@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/xizmatlar/neyming',
     '/xizmatlar/firmenniy-stil',
     '/xizmatlar/qadoq-dizayni',
+    '/xizmatlar/patent-kalkulyatori',
     '/blog',
   ];
 
@@ -110,5 +111,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...uniqueSitemapEntries, ...uniqueBlogEntries];
 }
-
-    

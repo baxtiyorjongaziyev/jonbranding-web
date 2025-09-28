@@ -3,15 +3,15 @@
 
 import { FC, useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Lightbulb, Search, ShieldCheck, CheckCircle } from 'lucide-react';
+import { Lightbulb, Search, ShieldCheck, CheckCircle, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import TrademarkCalculator from '@/components/sections/trademark-calculator';
-import { Separator } from '@/components/ui/separator';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
@@ -148,20 +148,15 @@ const NamingPage: FC = () => {
                         </Card>
                     ))}
                 </div>
+                 <div className="mt-12 text-center">
+                    <Button asChild size="lg">
+                        <Link href={`/${lang}/xizmatlar/patent-kalkulyatori`}>
+                            {translations.calculator_cta_button}
+                            <ArrowRight className="ml-2 h-5 w-5"/>
+                        </Link>
+                    </Button>
+                </div>
             </div>
-        </section>
-
-        <section id="patent-calculator" className="py-16 sm:py-24 bg-secondary">
-          <div className="container mx-auto px-4">
-              <div className="text-center max-w-3xl mx-auto">
-                  <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{translations.calculator_title}</h2>
-                  <p className="mt-4 text-lg text-gray-700">
-                     {translations.calculator_subtitle}
-                  </p>
-              </div>
-              <Separator className="my-12" />
-              <TrademarkCalculator translations={translations.trademarkCalculator} />
-          </div>
         </section>
 
         </main>
