@@ -525,6 +525,8 @@
             "discount_alert_desc": "Выберите <strong>3 или более</strong> услуг из этого раздела и получите <strong>-20% скидку</strong> от общей суммы!",
             "your_package": "Ваш пакет",
             "your_package_desc": "Выберите подходящие вам услуги.",
+            "selected_services_title": "Выбранные услуги",
+            "cost_calculation_title": "Расчет стоимости",
             "select_services": "Выберите услуги",
             "selected": "Выбрано",
             "select": "Выбрать",
