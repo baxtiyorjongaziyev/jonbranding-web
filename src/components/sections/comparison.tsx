@@ -137,7 +137,7 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang }) => {
               </p>
               <div className="mt-8">
                 <Button
-                  id="comparison-cta"
+                  onClick={onCtaClick}
                   size="lg"
                   variant="default"
                   className="text-white shadow-lg text-base sm:text-lg h-auto py-3 px-6 whitespace-normal w-full sm:w-auto"
