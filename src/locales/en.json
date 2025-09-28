@@ -48,11 +48,11 @@
     },
     "hero": {
         "headlines": [
-            "Your branding <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>isn't selling?</span> We'll fix it.",
-            "Stand out <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>from the competition</span>.",
-            "Make your brand not just \"pretty\", but <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>profitable</span>.",
-            "Make customers <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>fall in love</span> with you. Again and again.",
-            "From small business to a <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>strong brand</span>. In one step."
+            "Your branding <span class='gradient'>isn't selling?</span> We'll fix it.",
+            "Stand out <span class='gradient'>from the competition</span>.",
+            "Make your brand not just \"pretty\", but <span class='gradient'>profitable</span>.",
+            "Make customers <span class='gradient'>fall in love</span> with you. Again and again.",
+            "From small business to a <span class='gradient'>strong brand</span>. In one step."
         ],
         "description": "We don't just draw logos. We build a <span class='font-bold text-foreground'>results-driven</span>, strategy-based brand system for your business that will win the hearts of your customers.",
         "buttonTexts": [
@@ -567,3 +567,5 @@
 }
 
   
+
+    

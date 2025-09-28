@@ -48,11 +48,11 @@
     },
     "hero": {
         "headlines": [
-            "Brendingiz <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>sotmayaptimi?</span> Biz buni to'g'rilaymiz.",
-            "Raqobatchilardan <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>keskin ajralib</span> turing.",
-            "Brendingizni shunchaki “chiroyli” emas, <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>daromadli</span> qiling.",
-            "Mijozlar sizni <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>sevib qolsin</span>. Qayta va qayta.",
-            "Kichik biznesdan <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>kuchli brendgacha</span>. Bir qadamda."
+            "Brendingiz <span class='gradient'>sotmayaptimi?</span> Biz buni to'g'rilaymiz.",
+            "Raqobatchilardan <span class='gradient'>keskin ajralib</span> turing.",
+            "Brendingizni shunchaki “chiroyli” emas, <span class='gradient'>daromadli</span> qiling.",
+            "Mijozlar sizni <span class='gradient'>sevib qolsin</span>. Qayta va qayta.",
+            "Kichik biznesdan <span class='gradient'>kuchli brendgacha</span>. Bir qadamda."
         ],
         "description": "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span class='font-bold text-foreground'>natija keltiradigan</span>, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.",
         "buttonTexts": [
@@ -565,5 +565,6 @@
         }
     }
 }
-
   
+
+    

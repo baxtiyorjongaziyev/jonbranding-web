@@ -48,11 +48,11 @@
     },
     "hero": {
         "headlines": [
-            "Ваш брендинг <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>не продает?</span> Мы это исправим.",
-            "Выделитесь <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>на фоне конкурентов</span>.",
-            "Сделайте ваш бренд не просто \"красивым\", а <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>прибыльным</span>.",
-            "Пусть клиенты <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>влюбятся в вас</span>. Снова и снова.",
-            "От малого бизнеса до <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary'>сильного бренда</span>. За один шаг."
+            "Ваш брендинг <span class='gradient'>не продает?</span> Мы это исправим.",
+            "Выделитесь <span class='gradient'>на фоне конкурентов</span>.",
+            "Сделайте ваш бренд не просто \"красивым\", а <span class='gradient'>прибыльным</span>.",
+            "Пусть клиенты <span class='gradient'>влюбятся в вас</span>. Снова и снова.",
+            "От малого бизнеса до <span class='gradient'>сильного бренда</span>. За один шаг."
         ],
         "description": "Мы не просто рисуем логотипы. Мы строим <span class='font-bold text-foreground'>результативную</span>, основанную на стратегии бренд-систему для вашего бизнеса, которая завоюет сердца ваших клиентов.",
         "buttonTexts": [
@@ -567,3 +567,5 @@
 }
 
   
+
+    
