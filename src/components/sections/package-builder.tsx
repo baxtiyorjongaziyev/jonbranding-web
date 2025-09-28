@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Announce } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -19,12 +19,6 @@ interface PackageBuilderProps {
     lang: string;
     dictionary: any;
 }
-
-const formatPriceForDisplay = (price: number, lang: 'uz' | 'ru' | 'en', dictionary: any) => {
-    if (price === 0) return dictionary.agreed_price;
-    return `${price.toLocaleString('fr-FR')} ${dictionary.currency}`;
-}
-
 
 const serviceIcons: { [key: string]: React.ElementType } = {
     audit: FileText,
@@ -51,70 +45,7 @@ const introIcons: { [key: string]: React.ElementType } = {
     research: Search,
     strategy: BrainCircuit,
     identity: Paintbrush,
-    communication: Announce
-};
-
-const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
-    const serviceDetails = getServiceDetails(lang);
-    const detail = serviceDetails[id];
-    if (!detail) return null;
-    const { label, description, price, note } = detail;
-    const Icon = serviceIcons[id] || Sparkles;
-
-    return (
-        <Card 
-            onClick={onSelect}
-            className={cn(
-                "relative group rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
-                "bg-secondary text-foreground",
-                 selected ? 'bg-primary' : 'bg-background hover:bg-background/80'
-            )}
-        >
-            <div className={cn('relative rounded-[15px] h-full p-6 flex flex-col',  selected ? 'bg-primary/5' : 'bg-background')}>
-                <div className="flex items-center gap-3 mb-3">
-                    <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
-                        <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
-                    </div>
-                </div>
-                <h4 className="text-xl font-bold leading-tight">{label}</h4>
-                <p className="text-sm text-muted-foreground mt-2 min-h-[40px]" dangerouslySetInnerHTML={{ __html: description }}></p>
-                
-                <div className="mt-auto pt-4">
-                    <div className="my-2 min-h-[40px] flex items-baseline justify-start">
-                        {price > 0 || note ? (
-                            <span className="text-3xl font-bold whitespace-nowrap">
-                                {note ? note : formatPrice(price, lang, dictionary)}
-                            </span>
-                        ) : (
-                            <span className="text-xl font-bold whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
-                        )}
-                    </div>
-                    <Button 
-                        className={cn(
-                            "w-full text-base py-3 h-auto transition-colors duration-300",
-                            selected 
-                                ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                        )}
-                        variant="secondary"
-                        tabIndex={-1}
-                    >
-                        {selected ? (
-                            <>
-                                <CheckCircle className="h-5 w-5 mr-2" />
-                                {dictionary.selected}
-                            </>
-                        ) : (
-                            <>
-                                <ShoppingCart className="h-5 w-5 mr-2" />
-                                {dictionary.select}
-                            </>
-                        )}
-                    </Button>
-                </div>
-            </div>
-        </Card>
-    );
+    communication: Megaphone
 };
 
 const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
@@ -139,7 +70,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
             <div className='p-6 flex flex-col h-full'>
                 <div className="text-center">
                     <h3 className="font-bold text-lg text-primary">{label}</h3>
-                    <p className="text-4xl font-extrabold text-dark-blue mt-2">{formatPrice(price, lang, dictionary)}</p>
+                    <p className="text-4xl font-extrabold text-dark-blue mt-2">{formatPrice(price, lang)}</p>
                     <p className="text-sm text-muted-foreground mt-1 h-10">{description}</p>
                 </div>
                 
@@ -182,6 +113,71 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
         </div>
     );
 };
+
+
+const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
+    const serviceDetails = getServiceDetails(lang);
+    const detail = serviceDetails[id];
+    if (!detail) return null;
+    const { label, description, price, note } = detail;
+    const Icon = serviceIcons[id] || Sparkles;
+
+    return (
+        <Card 
+            onClick={onSelect}
+            className={cn(
+                "relative group rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
+                "bg-secondary text-foreground",
+                 selected ? 'bg-primary' : 'bg-background hover:bg-background/80'
+            )}
+        >
+            <div className={cn('relative rounded-[15px] h-full p-6 flex flex-col',  selected ? 'bg-primary/5' : 'bg-background')}>
+                <div className="flex items-center gap-3 mb-3">
+                    <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
+                        <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
+                    </div>
+                </div>
+                <h4 className="text-xl font-bold leading-tight">{label}</h4>
+                <p className="text-sm text-muted-foreground mt-2 min-h-[40px]" dangerouslySetInnerHTML={{ __html: description }}></p>
+                
+                <div className="mt-auto pt-4">
+                    <div className="my-2 min-h-[40px] flex items-baseline justify-start">
+                        {price > 0 || note ? (
+                            <span className="text-3xl font-bold whitespace-nowrap">
+                                {note ? note : formatPrice(price, lang)}
+                            </span>
+                        ) : (
+                            <span className="text-xl font-bold whitespace-nowrap">{dictionary.agreed_price}</span>
+                        )}
+                    </div>
+                    <Button 
+                        className={cn(
+                            "w-full text-base py-3 h-auto transition-colors duration-300",
+                            selected 
+                                ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                        )}
+                        variant="secondary"
+                        tabIndex={-1}
+                    >
+                        {selected ? (
+                            <>
+                                <CheckCircle className="h-5 w-5 mr-2" />
+                                {dictionary.selected}
+                            </>
+                        ) : (
+                            <>
+                                <ShoppingCart className="h-5 w-5 mr-2" />
+                                {dictionary.select}
+                            </>
+                        )}
+                    </Button>
+                </div>
+            </div>
+        </Card>
+    );
+};
+
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
     <div className="space-y-6">
@@ -430,7 +426,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                     {total.discountApplied.map(d => (
                                                         <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
                                                             <span>{d.name}</span>
-                                                            <span className="font-mono">- {formatPriceForDisplay(d.value, lang as 'uz' | 'ru' | 'en', translations)}</span>
+                                                            <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en')}</span>
                                                         </div>
                                                     ))}
                                                 </>
@@ -438,7 +434,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             {total.savings > 0 && (
                                                 <div className="flex justify-between items-center text-sm font-bold text-green-300 pt-2 border-t border-green-400/20">
                                                     <span>{translations.total_savings}</span>
-                                                    <span className="font-mono">{formatPriceForDisplay(total.savings, lang as 'uz' | 'ru' | 'en', translations)}</span>
+                                                    <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en')}</span>
                                                 </div>
                                             )}
                                         </div>
