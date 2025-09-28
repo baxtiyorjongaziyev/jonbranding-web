@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -12,15 +13,12 @@ const comparisons = projects.filter(p => p.oldImg && p.newImg);
 interface BeforeAfterProps {
   onCtaClick: () => void;
   lang: string;
+  dictionary: any;
 }
 
-const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang }) => {
-  const [translations, setTranslations] = useState<any>(null);
+const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary }) => {
+  const translations = dictionary;
   
-  useEffect(() => {
-    getDictionary(lang as Locale).then(dict => setTranslations(dict.beforeAfter));
-  }, [lang]);
-
   if (!translations) {
     return null;
   }

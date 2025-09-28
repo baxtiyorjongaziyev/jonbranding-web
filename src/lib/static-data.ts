@@ -161,16 +161,16 @@ export const projects: Project[] = [
         brand: "Incontrol", 
         oldImg: "https://img1.teletype.in/files/83/47/83479180-eeb6-4e39-9169-c4f4fb22e375.jpeg", 
         newImg: "https://img2.teletype.in/files/17/9c/179c7811-8cf7-4ee9-87ad-66709208b115.png", 
-        oldHint: "outdated branding", 
-        newHint: "sleek professional branding",
+        newHint: "generic restaurant logo", 
+        oldHint: "unique restaurant branding",
         galleryImages: []
     },
     { 
         brand: "Barakah", 
         oldImg: "https://img2.teletype.in/files/55/fe/55fe2252-db0f-4fd2-8ee8-d674bffab68a.png", 
         newImg: "https://img2.teletype.in/files/dc/5c/dc5cd481-115e-4d57-ac2a-3ea3142e5f54.png", 
-        newHint: "generic restaurant logo", 
-        oldHint: "unique restaurant branding",
+        newHint: "sleek professional branding", 
+        oldHint: "outdated branding",
         galleryImages: []
     },
     {
