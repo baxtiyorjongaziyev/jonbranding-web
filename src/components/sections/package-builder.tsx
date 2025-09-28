@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -26,28 +27,7 @@ const formatPriceForDisplay = (price: number, lang: 'uz' | 'ru' | 'en', dictiona
 }
 
 
-type ServiceCategory = 'tripwire' |'main' | 'additional' | 'options';
-
-const serviceCategories: Record<ServiceCategory, { titleKey: string; services: (keyof SelectedServices)[] }> = {
-    tripwire: {
-        titleKey: "tripwire",
-        services: ['audit', 'namingCheck', 'consultation']
-    },
-    main: {
-        titleKey: "main",
-        services: ['naming', 'logo', 'designSystem', 'brandbook', 'packaging']
-    },
-    additional: {
-        titleKey: "additional",
-        services: ['strategy', 'commStrategy', 'smm', 'merch', 'illustrations']
-    },
-    options: {
-        titleKey: "options",
-        services: ['urgency', 'nda']
-    }
-};
-
-const serviceIcons: { [key in keyof SelectedServices]?: React.ElementType } = {
+const serviceIcons: { [key: string]: React.ElementType } = {
     strategy: ClipboardList,
     commStrategy: Megaphone,
     smm: PenTool,
@@ -62,9 +42,14 @@ const serviceIcons: { [key in keyof SelectedServices]?: React.ElementType } = {
     logo: Layers,
     designSystem: BookMarked,
     brandbook: BookMarked,
-    packaging: Box
+    packaging: Box,
+    namingStart: Type,
+    namingPro: Type,
+    namingMax: Type,
+    logoStart: Layers,
+    logoPro: Layers,
+    logoMax: Layers,
 };
-
 
 const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
     const serviceDetails = getServiceDetails(lang);
@@ -75,23 +60,27 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
     const Icon = serviceIcons[id] || Sparkles;
 
     return (
-        <TiltCard strength={10} className="h-full">
+        <TiltCard strength={5} className="h-full">
             <div 
                 onClick={onSelect}
                 className={cn(
-                    "relative group overflow-hidden rounded-2xl p-px cursor-pointer transition-all duration-300 h-full"
+                    "relative group overflow-hidden rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
+                    "bg-secondary text-foreground"
                 )}
             >
-                <div className={cn("absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 transition-opacity duration-300", selected ? "opacity-100" : "opacity-0 group-hover:opacity-50" )} />
+                <div className={cn(
+                    "absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 transition-opacity duration-300", 
+                    selected ? "opacity-100" : "opacity-0 group-hover:opacity-50"
+                )} />
                 <div className="relative bg-background text-foreground rounded-[15px] h-full p-6 flex flex-col justify-between">
                     <div>
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="bg-secondary p-3 rounded-full">
-                                <Icon className="w-6 h-6 text-primary" />
+                             <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
+                                <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
                             </div>
                         </div>
                         <h4 className="text-xl font-bold leading-tight">{label}</h4>
-                        <p className="text-sm text-muted-foreground mt-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: description }}></p>
+                        <p className="text-sm text-muted-foreground mt-2 min-h-[40px]" dangerouslySetInnerHTML={{ __html: description }}></p>
                     </div>
                     <div className="mt-4">
                         <div className="my-2 min-h-[40px] flex items-baseline justify-start">
@@ -101,7 +90,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
                             </span>
                             )}
                             {price === 0 && !note && (
-                                <span className="text-2xl font-bold whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
+                                <span className="text-xl font-bold whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
                             )}
                         </div>
                         <Button 
@@ -133,6 +122,13 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
     );
 };
 
+const ServiceGroup = ({ title, children }: { title: string, children: React.ReactNode }) => (
+    <div className="space-y-6">
+        <h3 className="text-2xl font-bold text-dark-blue">{title}</h3>
+        {children}
+    </div>
+);
+
 const InfoCard = ({ icon: Icon, title, description, className, children }: { icon: React.ElementType, title: string, description: string, className?: string, children?: React.ReactNode }) => (
     <div className={cn("bg-white/5 p-4 rounded-xl border border-white/10 flex items-start gap-4 text-left", className)}>
         <div className="flex-shrink-0 text-accent p-2 rounded-lg mt-1">
@@ -152,7 +148,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
         audit: false, namingCheck: false, consultation: false, strategy: false, commStrategy: false,
-        naming: false, logo: true, designSystem: false, brandbook: false, packaging: false,
+        namingStart: false, namingPro: true, namingMax: false,
+        logoStart: false, logoPro: true, logoMax: false,
+        brandbook: false, packaging: false,
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
     const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
@@ -178,15 +176,27 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         }
     }, [selectedServices, wantsUpfrontPayment, isClient, hasDiscountBeenApplied, lang]);
 
-    const handleServiceToggle = (service: keyof SelectedServices) => {
+    const handleTariffSelect = (group: ('namingStart' | 'namingPro' | 'namingMax')[] | ('logoStart' | 'logoPro' | 'logoMax')[], serviceId: keyof SelectedServices) => {
         setSelectedServices(prev => {
             const newState = { ...prev };
-            newState[service] = !newState[service];
-            // If `logo` is selected, deselect `designSystem` and vice versa
-            if (service === 'logo' && newState.logo) newState.designSystem = false;
-            else if (service === 'designSystem' && newState.designSystem) newState.logo = false;
+            // First, deselect all other services in the group
+            group.forEach(id => {
+                if (id !== serviceId) newState[id] = false;
+            });
+            // Then, toggle the selected one
+            newState[serviceId] = !newState[serviceId];
             return newState;
         });
+    };
+
+    const handleServiceToggle = (serviceId: keyof SelectedServices) => {
+        if (['namingStart', 'namingPro', 'namingMax'].includes(serviceId)) {
+            handleTariffSelect(['namingStart', 'namingPro', 'namingMax'], serviceId);
+        } else if (['logoStart', 'logoPro', 'logoMax'].includes(serviceId)) {
+            handleTariffSelect(['logoStart', 'logoPro', 'logoMax'], serviceId);
+        } else {
+             setSelectedServices(prev => ({...prev, [serviceId]: !prev[serviceId]}));
+        }
     };
     
     if (!isClient || !translations) {
@@ -209,6 +219,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const selectedServiceKeys = Object.entries(selectedServices)
                                 .filter(([, value]) => value)
                                 .map(([key]) => key as keyof SelectedServices);
+    
+    const serviceGroups = {
+        tripwire: { titleKey: "tripwire", services: ['audit', 'namingCheck', 'consultation'] },
+        strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'] },
+        naming: { titleKey: "naming", services: ['namingStart', 'namingPro', 'namingMax'] },
+        identity: { titleKey: "identity", services: ['logoStart', 'logoPro', 'logoMax', 'brandbook', 'packaging'] },
+        additional: { titleKey: "additional", services: ['smm', 'merch', 'illustrations'] },
+        options: { titleKey: "options", services: ['urgency', 'nda'] }
+    };
 
     return (
         <>
@@ -219,11 +238,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                         <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">{translations.subtitle}</p>
                     </div>
                     
-                    <div className="space-y-12">
-                        {Object.entries(serviceCategories).map(([key, category]) => (
-                            <div key={key}>
-                                <h3 className="text-2xl font-bold text-dark-blue mb-6">{translations.categories[category.titleKey]}</h3>
-                                {key === 'main' && (
+                    <div className="space-y-16">
+                        {Object.values(serviceGroups).map((group, index) => (
+                           <ServiceGroup key={index} title={translations.categories[group.titleKey]}>
+                               {group.titleKey === 'identity' && (
                                     <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
                                         <div className="flex items-center gap-4">
                                             <div className="bg-white/10 p-3 rounded-full">
@@ -237,32 +255,32 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                 )}
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                     {category.services.map((serviceId) => {
-                                        if (!serviceDetails[serviceId]) return null;
+                                     {group.services.map((serviceId) => {
+                                        const typedServiceId = serviceId as keyof SelectedServices;
+                                        if (!serviceDetails[typedServiceId]) return null;
                                         return (
                                             <ServiceCard
-                                                key={serviceId}
-                                                id={serviceId}
-                                                selected={selectedServices[serviceId] || false}
-                                                onSelect={() => handleServiceToggle(serviceId)}
+                                                key={typedServiceId}
+                                                id={typedServiceId}
+                                                selected={selectedServices[typedServiceId] || false}
+                                                onSelect={() => handleServiceToggle(typedServiceId)}
                                                 lang={lang as 'uz' | 'ru' | 'en'}
                                                 dictionary={translations}
                                             />
                                         );
                                     })}
                                 </div>
-                            </div>
+                           </ServiceGroup>
                         ))}
                     </div>
                 </div>
             </section>
         
-            <section className="bg-secondary py-8">
+            <section className="bg-secondary py-16">
                 <div className="container mx-auto px-4">
                     <Card className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                             
-                            {/* Calculation Details */}
                             <div className="lg:col-span-2">
                                 <CardHeader className="p-0 text-left mb-6">
                                     <CardTitle className="text-2xl font-bold text-white">{translations.your_package}</CardTitle>
@@ -342,7 +360,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </CardContent>
                             </div>
 
-                            {/* Final Price & CTA */}
                             <div className="flex flex-col justify-center items-center text-center bg-white/5 rounded-xl p-6 border border-white/10">
                                 <div className='text-center'>
                                         <p className="text-sm text-blue-200">{translations.final_price}</p>

@@ -518,6 +518,9 @@
             "categories": {
                 "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
                 "main": "Asosiy xizmatlarimiz",
+                "strategy": "Strategik xizmatlar",
+                "identity": "Aydentika va Dizayn",
+                "naming": "Neyming",
                 "additional": "Qo'shimcha xizmatlar",
                 "options": "Maxsus shartlar"
             },
