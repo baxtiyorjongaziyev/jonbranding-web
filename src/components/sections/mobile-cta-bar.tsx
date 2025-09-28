@@ -1,8 +1,9 @@
 
+
 'use client';
 
 import { FC, useState, useEffect } from 'react';
-import { calculatePackagePrice } from '@/lib/pricing';
+import { calculatePackagePrice, formatPrice } from '@/lib/pricing';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -55,14 +56,13 @@ const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string, dictionary: any 
     );
   }
   
-  const currency = lang === 'uz' ? "so'm" : lang === 'ru' ? 'сум' : 'sum';
   const agreedPriceText = lang === 'uz' ? 'Kelishiladi' : lang === 'ru' ? 'По догов.' : 'Agreed';
 
   return (
     <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-sm">
-            <p className="font-bold text-primary text-lg">{price > 0 ? price.toLocaleString('fr-FR') + ` ${currency}` : agreedPriceText}</p>
+            <p className="font-bold text-primary text-lg">{price > 0 ? formatPrice(price, lang as 'uz' | 'ru' | 'en') : agreedPriceText}</p>
             <p className="text-xs text-muted-foreground">{translations.final_price}</p>
         </div>
         <Button onClick={onOpenModal} className="shadow-ocean animate-subtle-pulse">
@@ -74,3 +74,5 @@ const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string, dictionary: any 
 };
 
 export default MobileCtaBar;
+
+    

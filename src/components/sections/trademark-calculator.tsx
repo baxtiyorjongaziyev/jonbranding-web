@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useMemo, useState } from 'react';
@@ -54,6 +55,15 @@ const allowPhoneTyping = (s: string) => {
   }
   return true;
 };
+
+const formatPrice = (price: number, currency: string) => {
+    if (price >= 1000000) {
+        const millions = price / 1000000;
+        const formattedMillions = millions % 1 === 0 ? millions.toFixed(0) : millions.toFixed(1);
+        return `${formattedMillions} mln ${currency}`;
+    }
+    return `${price.toLocaleString('fr-FR')} ${currency}`;
+}
 
 export function calculateFees({
   isYuridik = false,
@@ -177,7 +187,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
       `${translations.speedLabel}: ${speed === 'tez' ? translations.speedOptions[1].label : translations.speedOptions[0].label}`,
       `${translations.expertCheckLabel}: ${hasEkspert ? translations.expertCheckOptions[0].label : translations.expertCheckOptions[1].label}`,
       '---',
-      `${translations.totalCostTitle.toUpperCase()}: ${fees.total.toLocaleString()} ${translations.currency}`,
+      `${translations.totalCostTitle.toUpperCase()}: ${formatPrice(fees.total, translations.currency)}`,
     ].join('\n');
 
     try {
@@ -335,8 +345,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
         <Card className="p-6 bg-gradient-to-br from-primary to-blue-900 text-white shadow-xl rounded-2xl">
           <div className="text-sm leading-5 opacity-90">{translations.totalCostTitle}</div>
           <div className="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight flex items-baseline">
-            {fees.total.toLocaleString('fr-FR')}
-            <span className="text-2xl font-medium text-blue-200 ml-2">{translations.currency}</span>
+            {formatPrice(fees.total, translations.currency)}
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Pill>{fees.classCount} {translations.classLabel}</Pill>
@@ -438,4 +447,5 @@ function Divider() {
   return <div className="mt-2 pt-2 border-t" />;
 }
 
+    
     

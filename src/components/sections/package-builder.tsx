@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices } from '@/lib/pricing';
+import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -24,6 +24,11 @@ interface PackageBuilderProps {
 
 const formatPriceForDisplay = (price: number, lang: 'uz' | 'ru' | 'en', dictionary: any) => {
     if (price === 0) return dictionary.agreed_price;
+     if (price >= 1000000) {
+        const millions = price / 1000000;
+        const formattedMillions = millions % 1 === 0 ? millions.toFixed(0) : millions.toFixed(1);
+        return `${formattedMillions} mln ${dictionary.currency}`;
+    }
     return `${price.toLocaleString('fr-FR')} ${dictionary.currency}`;
 }
 
@@ -98,11 +103,11 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
                  <div className="my-2 text-center min-h-[40px] flex items-center justify-center">
                     {(price > 0 || note) && (
                        <span className="text-2xl font-bold text-primary whitespace-nowrap">
-                         {isPercentageBased ? note : formatPriceForDisplay(price, lang, dictionary)}
+                         {isPercentageBased ? note : formatPrice(price, lang)}
                        </span>
                     )}
                     {price === 0 && !note && (
-                         <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
+                         <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPrice(price, lang)}</span>
                     )}
                 </div>
                 <Button 
@@ -275,7 +280,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                         <span className="text-white flex-1 pr-2">{service.label}</span>
                                                         <div className="flex items-center gap-2">
                                                             <span className="font-mono text-gray-300">
-                                                                {service.price > 0 ? `${formatPriceForDisplay(service.price, lang as 'uz' | 'ru' | 'en', translations)}` : service.note}
+                                                                {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en')}` : service.note}
                                                             </span>
                                                             <Button 
                                                                 variant="ghost" 
@@ -312,7 +317,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         {total.discountApplied.map(d => (
                                             <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
                                                 <span>{d.name}</span>
-                                                <span className="font-mono">- {d.value.toLocaleString('fr-FR')} {translations.currency}</span>
+                                                <span className="font-mono">- {formatPriceForDisplay(d.value, lang as 'uz' | 'ru' | 'en', translations)}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -353,8 +358,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                       <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight flex justify-center items-baseline">
                                         {total.final > 0 ? (
                                             <>
-                                                {total.final.toLocaleString('fr-FR')}
-                                                <span className="text-2xl font-medium text-blue-200 ml-2">{translations.currency}</span>
+                                                {formatPriceForDisplay(total.final, lang as 'uz' | 'ru' | 'en', translations)}
                                             </>
                                         ) : (
                                             translations.agreed_price
@@ -390,3 +394,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 };
 
 export default PackageBuilder;
+
+    
