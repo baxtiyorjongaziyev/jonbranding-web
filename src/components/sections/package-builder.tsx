@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 
@@ -36,17 +36,14 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     audit: FileText,
     namingCheck: ClipboardSignature,
     consultation: Info,
-    naming: Type,
-    logo: Layers,
-    designSystem: BookMarked,
-    brandbook: BookMarked,
-    packaging: Box,
     namingStart: Type,
     namingPro: Type,
     namingMax: Type,
     logoStart: Layers,
     logoPro: Layers,
     logoMax: Layers,
+    brandbook: BookMarked,
+    packaging: Box,
 };
 
 const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
@@ -54,39 +51,33 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
     const detail = serviceDetails[id];
     if (!detail) return null;
     const { label, description, price, note } = detail;
-    const isPercentageBased = note && (note.includes('%'));
     const Icon = serviceIcons[id] || Sparkles;
 
     return (
-        <div 
+        <Card 
             onClick={onSelect}
             className={cn(
-                "relative group overflow-hidden rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
-                "bg-secondary text-foreground"
+                "relative group rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
+                "bg-secondary text-foreground",
+                 selected ? 'bg-primary' : 'bg-background hover:bg-background/80'
             )}
         >
-            <div className={cn(
-                "absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 transition-opacity duration-300", 
-                selected ? "opacity-100" : "opacity-0 group-hover:opacity-50"
-            )} />
-            <div className="relative bg-background text-foreground rounded-[15px] h-full p-6 flex flex-col justify-between">
-                <div>
-                    <div className="flex items-center gap-3 mb-3">
-                         <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
-                            <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
-                        </div>
+            <div className={cn('relative rounded-[15px] h-full p-6 flex flex-col',  selected ? 'bg-primary/5' : 'bg-background')}>
+                <div className="flex items-center gap-3 mb-3">
+                    <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
+                        <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
                     </div>
-                    <h4 className="text-xl font-bold leading-tight">{label}</h4>
-                    <p className="text-sm text-muted-foreground mt-2 min-h-[40px]" dangerouslySetInnerHTML={{ __html: description }}></p>
                 </div>
-                <div className="mt-4">
+                <h4 className="text-xl font-bold leading-tight">{label}</h4>
+                <p className="text-sm text-muted-foreground mt-2 min-h-[40px]" dangerouslySetInnerHTML={{ __html: description }}></p>
+                
+                <div className="mt-auto pt-4">
                     <div className="my-2 min-h-[40px] flex items-baseline justify-start">
-                        {(price > 0 || note) && (
-                        <span className="text-3xl font-bold whitespace-nowrap">
-                            {isPercentageBased ? note : formatPrice(price, lang, dictionary)}
-                        </span>
-                        )}
-                        {price === 0 && !note && (
+                        {price > 0 || note ? (
+                            <span className="text-3xl font-bold whitespace-nowrap">
+                                {note ? note : formatPrice(price, lang, dictionary)}
+                            </span>
+                        ) : (
                             <span className="text-xl font-bold whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
                         )}
                     </div>
@@ -114,14 +105,83 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
                     </Button>
                 </div>
             </div>
+        </Card>
+    );
+};
+
+const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
+    const serviceDetails = getServiceDetails(lang);
+    const detail = serviceDetails[id];
+    if (!detail) return null;
+    const { label, description, price, features, recommended } = detail;
+    const Icon = serviceIcons[id] || Sparkles;
+
+    return (
+        <div 
+            onClick={onSelect}
+            className={cn(
+                "relative rounded-2xl h-full border transition-all duration-300 cursor-pointer",
+                selected ? 'border-primary ring-2 ring-primary/50 shadow-lg' : 'border-gray-200 bg-white hover:shadow-md'
+            )}
+        >
+             {recommended && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <div className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">{dictionary.recommended}</div>
+                </div>
+            )}
+            <div className='p-6 flex flex-col h-full'>
+                <div className="text-center">
+                    <h3 className="font-bold text-lg text-primary">{label}</h3>
+                    <p className="text-4xl font-extrabold text-dark-blue mt-2">{formatPrice(price, lang, dictionary)}</p>
+                    <p className="text-sm text-muted-foreground mt-1 h-10">{description}</p>
+                </div>
+                
+                <div className="mt-6 mb-8 flex-grow">
+                    <ul className="space-y-3">
+                        {features?.map((feature, index) => (
+                             <li key={index} className="flex items-start gap-3">
+                                <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                                <span className="text-sm text-gray-700">{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                
+                <div className="mt-auto">
+                     <Button 
+                        className={cn(
+                            "w-full text-base py-3 h-auto transition-colors duration-300",
+                            selected 
+                                ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                        )}
+                        variant={selected ? 'default' : 'secondary'}
+                        tabIndex={-1}
+                    >
+                         {selected ? (
+                            <>
+                                <CheckCircle className="h-5 w-5 mr-2" />
+                                {dictionary.selected}
+                            </>
+                        ) : (
+                            <>
+                                <ShoppingCart className="h-5 w-5 mr-2" />
+                                {dictionary.select}
+                            </>
+                        )}
+                    </Button>
+                </div>
+            </div>
         </div>
     );
 };
 
-const ServiceGroup = ({ title, children }: { title: string, children: React.ReactNode }) => (
+const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
     <div className="space-y-6">
         <h3 className="text-2xl font-bold text-dark-blue">{title}</h3>
-        {children}
+        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>
+            {children}
+        </div>
     </div>
 );
 
@@ -172,24 +232,25 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         }
     }, [selectedServices, wantsUpfrontPayment, isClient, hasDiscountBeenApplied, lang]);
 
-    const handleTariffSelect = (group: ('namingStart' | 'namingPro' | 'namingMax')[] | ('logoStart' | 'logoPro' | 'logoMax')[], serviceId: keyof SelectedServices) => {
+    const handleTariffSelect = (group: (keyof SelectedServices)[], serviceId: keyof SelectedServices) => {
         setSelectedServices(prev => {
             const newState = { ...prev };
-            // First, deselect all other services in the group
             group.forEach(id => {
                 if (id !== serviceId) newState[id] = false;
             });
-            // Then, toggle the selected one
             newState[serviceId] = !newState[serviceId];
             return newState;
         });
     };
 
     const handleServiceToggle = (serviceId: keyof SelectedServices) => {
-        if (['namingStart', 'namingPro', 'namingMax'].includes(serviceId)) {
-            handleTariffSelect(['namingStart', 'namingPro', 'namingMax'], serviceId);
-        } else if (['logoStart', 'logoPro', 'logoMax'].includes(serviceId)) {
-            handleTariffSelect(['logoStart', 'logoPro', 'logoMax'], serviceId);
+        const namingGroup: (keyof SelectedServices)[] = ['namingStart', 'namingPro', 'namingMax'];
+        const logoGroup: (keyof SelectedServices)[] = ['logoStart', 'logoPro', 'logoMax'];
+
+        if (namingGroup.includes(serviceId)) {
+            handleTariffSelect(namingGroup, serviceId);
+        } else if (logoGroup.includes(serviceId)) {
+            handleTariffSelect(logoGroup, serviceId);
         } else {
              setSelectedServices(prev => ({...prev, [serviceId]: !prev[serviceId]}));
         }
@@ -219,10 +280,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const serviceGroups = {
         tripwire: { titleKey: "tripwire", services: ['audit', 'namingCheck', 'consultation'] },
         strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'] },
-        naming: { titleKey: "naming", services: ['namingStart', 'namingPro', 'namingMax'] },
-        identity: { titleKey: "identity", services: ['logoStart', 'logoPro', 'logoMax', 'brandbook', 'packaging'] },
-        additional: { titleKey: "additional", services: ['smm', 'merch', 'illustrations'] },
-        options: { titleKey: "options", services: ['urgency', 'nda'] }
+        naming: { titleKey: "naming", services: ['namingStart', 'namingPro', 'namingMax'], isTariff: true },
+        identity: { titleKey: "identity", services: ['logoStart', 'logoPro', 'logoMax'], isTariff: true },
+        addons: { titleKey: "addons", services: ['brandbook', 'packaging', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
+        options: { titleKey: "options", services: ['urgency', 'nda'], gridCols: "lg:grid-cols-2" }
     };
 
     return (
@@ -251,36 +312,39 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     
                     <div className="space-y-16">
                         {Object.values(serviceGroups).map((group, index) => (
-                           <ServiceGroup key={index} title={translations.categories[group.titleKey]}>
-                               {group.titleKey === 'identity' && (
-                                    <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
-                                        <div className="flex items-center gap-4">
-                                            <div className="bg-white/10 p-3 rounded-full">
-                                                <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
-                                            </div>
-                                            <div>
-                                                <h4 className="font-extrabold text-lg text-white">{translations.discount_alert_title}</h4>
-                                                <p className="text-blue-200" dangerouslySetInnerHTML={{ __html: translations.discount_alert_desc }}></p>
+                           <ServiceGroup key={index} title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
+                                {group.titleKey === 'identity' && (
+                                    <div className="col-span-1 md:col-span-2 lg:col-span-3">
+                                        <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
+                                            <div className="flex items-center gap-4">
+                                                <div className="bg-white/10 p-3 rounded-full">
+                                                    <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-extrabold text-lg text-white">{translations.discount_alert_title}</h4>
+                                                    <p className="text-blue-200" dangerouslySetInnerHTML={{ __html: translations.discount_alert_desc }}></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 )}
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                     {group.services.map((serviceId) => {
-                                        const typedServiceId = serviceId as keyof SelectedServices;
-                                        if (!serviceDetails[typedServiceId]) return null;
-                                        return (
-                                            <ServiceCard
-                                                key={typedServiceId}
-                                                id={typedServiceId}
-                                                selected={selectedServices[typedServiceId] || false}
-                                                onSelect={() => handleServiceToggle(typedServiceId)}
-                                                lang={lang as 'uz' | 'ru' | 'en'}
-                                                dictionary={translations}
-                                            />
-                                        );
-                                    })}
-                                </div>
+                                {group.services.map((serviceId) => {
+                                    const typedServiceId = serviceId as keyof SelectedServices;
+                                    if (!serviceDetails[typedServiceId]) return null;
+                                    
+                                    const CardComponent = group.isTariff ? TariffCard : ServiceCard;
+
+                                    return (
+                                        <CardComponent
+                                            key={typedServiceId}
+                                            id={typedServiceId}
+                                            selected={selectedServices[typedServiceId] || false}
+                                            onSelect={() => handleServiceToggle(typedServiceId)}
+                                            lang={lang as 'uz' | 'ru' | 'en'}
+                                            dictionary={translations}
+                                        />
+                                    );
+                                })}
                            </ServiceGroup>
                         ))}
                     </div>

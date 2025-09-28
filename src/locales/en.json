@@ -528,11 +528,10 @@
             "subtitle": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator.",
             "categories": {
                 "tripwire": "First Step (Quick Services)",
-                "main": "Our Main Services",
                 "strategy": "Strategic Services",
-                "identity": "Identity and Design",
                 "naming": "Naming",
-                "additional": "Additional Services",
+                "identity": "Identity and Design",
+                "addons": "Add-on Services",
                 "options": "Special Conditions"
             },
             "discount_alert_title": "Package Discount!",
@@ -557,7 +556,8 @@
             "total_savings": "Your total savings",
             "gift_title": "Gift!",
             "agreed_price": "On Request",
-            "currency": "sum"
+            "currency": "sum",
+            "recommended": "Recommended"
         },
         "comparison": {
             "title": "Us vs. Competitors",
