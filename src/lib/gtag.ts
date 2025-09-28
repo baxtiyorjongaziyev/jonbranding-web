@@ -1,10 +1,10 @@
 'use client';
 
 // This should match the GA_TRACKING_ID in your environment
-const GA_TRACKING_ID = 'G-1CE32W25SP';
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const pageview = (url: string) => {
-  if (typeof window.gtag !== 'function') {
+  if (typeof window.gtag !== 'function' || !GA_TRACKING_ID) {
     return;
   }
   window.gtag('config', GA_TRACKING_ID, {
@@ -13,7 +13,7 @@ export const pageview = (url: string) => {
 };
 
 export const event = (name: string, params: Record<string, any>) => {
-  if (typeof window.gtag !== 'function') {
+  if (typeof window.gtag !== 'function' || !GA_TRACKING_ID) {
     return;
   }
   window.gtag('event', name, params);
