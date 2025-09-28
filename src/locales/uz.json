@@ -513,6 +513,17 @@
             "description": "Bizning barcha xizmatlarimiz bilan tanishing va o'zingizga mos bo'lgan brending to'plamini yarating. Onlayn kalkulyator yordamida narxlarni darhol hisoblang."
         },
         "packageBuilder": {
+            "introTitle": "Brending xizmatlari uchun boshlang'ich narxlar",
+            "introP1": "Ushbu sahifada xizmatlarimiz uchun taxminiy boshlang'ich narxlar ko'rsatilgan. Har bir kompaniya o'ziga xos, shuning uchun yakuniy narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga bog'liq.",
+            "introP2": "Bu narxlar sizga brendingiz ustida ishlash qanchaga tushishi mumkinligini tushunishga yordam beradi.",
+            "introSubtitle": "Brending ustida ish qanday quriladi?",
+            "introP3": "Brend yaratish — bu shunchaki logotip yoki firma uslubi emas. Bu butun bir jarayon bo‘lib, quyidagilarni o‘z ichiga oladi:",
+            "introList": [
+                "Tadqiqot — bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o‘rganish.",
+                "Strategiya — brendning ma'nosini, uning pozitsiyasi va qadriyatlarini aniqlash.",
+                "Identifikatsiyani ishlab chiqish — logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish.",
+                "Kommunikatsiya — reklama materiallari, brend tashuvchilari va kontentni rasmiylashtirish."
+            ],
             "title": "Xizmatlar va Narxlar",
             "subtitle": "Bizning barcha xizmatlarimiz bilan tanishing va o'zingizga mos bo'lgan brending to'plamini yarating. Onlayn kalkulyator yordamida narxlarni darhol hisoblang.",
             "categories": {

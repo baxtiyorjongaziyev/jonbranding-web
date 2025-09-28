@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -12,7 +11,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
-import TiltCard from '../ui/tilt-card';
 
 
 interface PackageBuilderProps {
@@ -60,65 +58,63 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
     const Icon = serviceIcons[id] || Sparkles;
 
     return (
-        <TiltCard strength={5} className="h-full">
-            <div 
-                onClick={onSelect}
-                className={cn(
-                    "relative group overflow-hidden rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
-                    "bg-secondary text-foreground"
-                )}
-            >
-                <div className={cn(
-                    "absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 transition-opacity duration-300", 
-                    selected ? "opacity-100" : "opacity-0 group-hover:opacity-50"
-                )} />
-                <div className="relative bg-background text-foreground rounded-[15px] h-full p-6 flex flex-col justify-between">
-                    <div>
-                        <div className="flex items-center gap-3 mb-3">
-                             <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
-                                <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
-                            </div>
+        <div 
+            onClick={onSelect}
+            className={cn(
+                "relative group overflow-hidden rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
+                "bg-secondary text-foreground"
+            )}
+        >
+            <div className={cn(
+                "absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 transition-opacity duration-300", 
+                selected ? "opacity-100" : "opacity-0 group-hover:opacity-50"
+            )} />
+            <div className="relative bg-background text-foreground rounded-[15px] h-full p-6 flex flex-col justify-between">
+                <div>
+                    <div className="flex items-center gap-3 mb-3">
+                         <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
+                            <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
                         </div>
-                        <h4 className="text-xl font-bold leading-tight">{label}</h4>
-                        <p className="text-sm text-muted-foreground mt-2 min-h-[40px]" dangerouslySetInnerHTML={{ __html: description }}></p>
                     </div>
-                    <div className="mt-4">
-                        <div className="my-2 min-h-[40px] flex items-baseline justify-start">
-                            {(price > 0 || note) && (
-                            <span className="text-3xl font-bold whitespace-nowrap">
-                                {isPercentageBased ? note : formatPrice(price, lang, dictionary)}
-                            </span>
-                            )}
-                            {price === 0 && !note && (
-                                <span className="text-xl font-bold whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
-                            )}
-                        </div>
-                        <Button 
-                            className={cn(
-                                "w-full text-base py-3 h-auto transition-colors duration-300",
-                                selected 
-                                    ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                            )}
-                            variant="secondary"
-                            tabIndex={-1}
-                        >
-                            {selected ? (
-                                <>
-                                    <CheckCircle className="h-5 w-5 mr-2" />
-                                    {dictionary.selected}
-                                </>
-                            ) : (
-                                <>
-                                    <ShoppingCart className="h-5 w-5 mr-2" />
-                                    {dictionary.select}
-                                </>
-                            )}
-                        </Button>
+                    <h4 className="text-xl font-bold leading-tight">{label}</h4>
+                    <p className="text-sm text-muted-foreground mt-2 min-h-[40px]" dangerouslySetInnerHTML={{ __html: description }}></p>
+                </div>
+                <div className="mt-4">
+                    <div className="my-2 min-h-[40px] flex items-baseline justify-start">
+                        {(price > 0 || note) && (
+                        <span className="text-3xl font-bold whitespace-nowrap">
+                            {isPercentageBased ? note : formatPrice(price, lang, dictionary)}
+                        </span>
+                        )}
+                        {price === 0 && !note && (
+                            <span className="text-xl font-bold whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
+                        )}
                     </div>
+                    <Button 
+                        className={cn(
+                            "w-full text-base py-3 h-auto transition-colors duration-300",
+                            selected 
+                                ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                        )}
+                        variant="secondary"
+                        tabIndex={-1}
+                    >
+                        {selected ? (
+                            <>
+                                <CheckCircle className="h-5 w-5 mr-2" />
+                                {dictionary.selected}
+                            </>
+                        ) : (
+                            <>
+                                <ShoppingCart className="h-5 w-5 mr-2" />
+                                {dictionary.select}
+                            </>
+                        )}
+                    </Button>
                 </div>
             </div>
-        </TiltCard>
+        </div>
     );
 };
 
@@ -233,6 +229,21 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         <>
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
                 <div className="container mx-auto px-4">
+                    <div className="text-center max-w-4xl mx-auto mb-16">
+                        <div className="prose prose-lg mx-auto text-left">
+                            <h3 className="font-bold text-dark-blue">{translations.introTitle}</h3>
+                            <p className="text-muted-foreground">{translations.introP1}</p>
+                            <p className="text-muted-foreground">{translations.introP2}</p>
+                            <h4 className="font-bold text-dark-blue">{translations.introSubtitle}</h4>
+                            <p className="text-muted-foreground">{translations.introP3}</p>
+                            <ul className="text-muted-foreground">
+                                {translations.introList.map((item: string, index: number) => (
+                                    <li key={index}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+
                     <div className="text-center mb-12">
                         <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
                         <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">{translations.subtitle}</p>
