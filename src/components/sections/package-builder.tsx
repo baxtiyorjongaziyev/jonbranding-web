@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -85,18 +84,14 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
         <Card 
             onClick={onSelect}
             className={cn(
-                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white cursor-pointer hover:shadow-md h-full",
+                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white cursor-pointer hover:shadow-md h-full aspect-[9/16] md:aspect-[16/9]",
                 selected && 'border-accent ring-2 ring-accent shadow-lg'
             )}
         >
-            <div className="p-5 flex-grow">
-                <div className="flex items-start gap-4">
-                    {Icon && <Icon className={cn("h-8 w-8 flex-shrink-0 mt-1", id === 'urgency' ? 'text-red-500' : 'text-primary' )} />}
-                    <div className='flex-1'>
-                        <h4 className="text-lg font-bold text-dark-blue leading-tight">{label}</h4>
-                        <p className="text-sm text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: description }}></p>
-                    </div>
-                </div>
+            <div className="p-5 flex-grow flex flex-col justify-center items-center text-center">
+                 {Icon && <Icon className={cn("h-10 w-10 md:h-12 md:w-12 mb-4", id === 'urgency' ? 'text-red-500' : 'text-primary' )} />}
+                 <h4 className="text-lg md:text-xl font-bold text-dark-blue leading-tight">{label}</h4>
+                 <p className="text-sm text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: description }}></p>
             </div>
             <div className="p-4 bg-secondary/50 border-t mt-auto">
                  <div className="my-2 text-center min-h-[40px] flex items-center justify-center">
@@ -195,15 +190,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                          <Skeleton className="h-10 w-1/2 mx-auto" />
                          <Skeleton className="h-6 w-3/4 mx-auto mt-4" />
                     </div>
-                     <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                        <div className="lg:col-span-2 space-y-8">
-                           <Skeleton className="h-64 w-full" />
-                           <Skeleton className="h-64 w-full" />
-                        </div>
-                        <div className="lg:col-span-1 sticky top-24">
-                             <Skeleton className="h-64 w-full" />
-                        </div>
-                    </div>
+                     <div className="mt-12 space-y-8">
+                        <Skeleton className="h-64 w-full" />
+                        <Skeleton className="h-64 w-full" />
+                     </div>
                 </div>
             </section>
         )
@@ -243,7 +233,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                      {category.services.map((serviceId) => {
                                         if (!serviceDetails[serviceId]) return null;
                                         return (
-                                            <TiltCard key={serviceId} strength={10}>
+                                            <TiltCard key={serviceId} strength={5}>
                                                 <ServiceCard
                                                     id={serviceId}
                                                     selected={selectedServices[serviceId] || false}
@@ -389,4 +379,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
 export default PackageBuilder;
     
+    
+
     
