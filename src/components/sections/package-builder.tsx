@@ -78,51 +78,56 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
     const { label, description, price, note } = detail;
     const isPercentageBased = note && (note.includes('%'));
 
-    const Icon = serviceIcons[id];
-
     return (
-        <Card 
+        <div 
             onClick={onSelect}
             className={cn(
-                "rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden flex flex-col justify-between bg-white cursor-pointer hover:shadow-md h-full aspect-[9/16] md:aspect-[16/9]",
-                selected && 'border-accent ring-2 ring-accent shadow-lg'
+                "relative group overflow-hidden rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
+                selected ? "shadow-2xl" : "shadow-md"
             )}
         >
-            <div className="p-5 flex-grow flex flex-col justify-center items-center text-center">
-                 {Icon && <Icon className={cn("h-10 w-10 md:h-12 md:w-12 mb-4", id === 'urgency' ? 'text-red-500' : 'text-primary' )} />}
-                 <h4 className="text-lg md:text-xl font-bold text-dark-blue leading-tight">{label}</h4>
-                 <p className="text-sm text-muted-foreground mt-2" dangerouslySetInnerHTML={{ __html: description }}></p>
-            </div>
-            <div className="p-4 bg-secondary/50 border-t mt-auto">
-                 <div className="my-2 text-center min-h-[40px] flex items-center justify-center">
-                    {(price > 0 || note) && (
-                       <span className="text-2xl font-bold text-primary whitespace-nowrap">
-                         {isPercentageBased ? note : formatPrice(price, lang, dictionary)}
-                       </span>
-                    )}
-                    {price === 0 && !note && (
-                         <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPrice(price, lang, dictionary)}</span>
-                    )}
+             <div className={cn("absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 transition-opacity duration-300", selected ? "opacity-100" : "opacity-0 group-hover:opacity-50" )} />
+             <div className="relative bg-dark-blue text-white rounded-[15px] h-full p-6 flex flex-col justify-between card-glow">
+                <div>
+                    <h4 className="text-xl font-bold text-white leading-tight">{label}</h4>
+                    <p className="text-sm text-gray-400 mt-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: description }}></p>
                 </div>
-                <Button 
-                    className="w-full text-base py-3 h-auto"
-                    variant={selected ? 'default' : 'outline'}
-                    tabIndex={-1}
-                >
-                    {selected ? (
-                        <>
-                            <CheckCircle className="h-5 w-5 mr-2" />
-                            {dictionary.selected}
-                        </>
-                    ) : (
-                        <>
-                            <ShoppingCart className="h-5 w-5 mr-2" />
-                            {dictionary.select}
-                        </>
-                    )}
-                </Button>
+                <div className="mt-4">
+                     <div className="my-2 min-h-[40px] flex items-baseline justify-start">
+                        {(price > 0 || note) && (
+                           <span className="text-3xl font-bold text-white whitespace-nowrap">
+                             {isPercentageBased ? note : formatPrice(price, lang, dictionary)}
+                           </span>
+                        )}
+                        {price === 0 && !note && (
+                             <span className="text-2xl font-bold text-white whitespace-nowrap">{formatPrice(price, lang, dictionary)}</span>
+                        )}
+                    </div>
+                    <Button 
+                        className={cn(
+                            "w-full text-base py-3 h-auto transition-colors duration-300",
+                            selected 
+                                ? "bg-white text-black hover:bg-gray-200" 
+                                : "bg-white/10 text-white hover:bg-white/20"
+                        )}
+                        variant="secondary"
+                        tabIndex={-1}
+                    >
+                        {selected ? (
+                            <>
+                                <CheckCircle className="h-5 w-5 mr-2" />
+                                {dictionary.selected}
+                            </>
+                        ) : (
+                            <>
+                                <ShoppingCart className="h-5 w-5 mr-2" />
+                                {dictionary.select}
+                            </>
+                        )}
+                    </Button>
+                </div>
             </div>
-        </Card>
+        </div>
     );
 };
 
@@ -233,15 +238,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                      {category.services.map((serviceId) => {
                                         if (!serviceDetails[serviceId]) return null;
                                         return (
-                                            <TiltCard key={serviceId} strength={5}>
-                                                <ServiceCard
-                                                    id={serviceId}
-                                                    selected={selectedServices[serviceId] || false}
-                                                    onSelect={() => handleServiceToggle(serviceId)}
-                                                    lang={lang as 'uz' | 'ru' | 'en'}
-                                                    dictionary={translations}
-                                                />
-                                            </TiltCard>
+                                            <ServiceCard
+                                                key={serviceId}
+                                                id={serviceId}
+                                                selected={selectedServices[serviceId] || false}
+                                                onSelect={() => handleServiceToggle(serviceId)}
+                                                lang={lang as 'uz' | 'ru' | 'en'}
+                                                dictionary={translations}
+                                            />
                                         );
                                     })}
                                 </div>
@@ -251,10 +255,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
             </section>
         
-            <section className="bg-secondary sticky bottom-0 z-40 py-8 border-t-2 border-primary/20 shadow-[0_-20px_40px_-20px_rgba(0,0,0,0.1)]">
+            <section className="bg-secondary py-8">
                 <div className="container mx-auto px-4">
                     <Card className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                             
                             {/* Calculation Details */}
                             <div className="lg:col-span-2">
