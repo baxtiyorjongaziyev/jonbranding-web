@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useMemo, useState } from 'react';
@@ -74,7 +73,7 @@ export function calculateFees({
   const step1 = step1Base + step1Extra;
 
   const step2Base = isYuridik ? STEP2_YURIDIK : STEP2_JISMONIY;
-  const step2Extra = (cc - 1) * (isYuridik ? STEP2_EXTRA_YURIDIK : STEP2_EXTRA_JISMONIY);
+  const step2Extra = (cc - 1) * (isYuridik ? STEP2_EXTRA_JISMONIY : STEP2_EXTRA_YURIDIK);
   const step2 = step2Base + step2Extra;
 
   const expediteBase = speed === 'tez' ? EXPEDITE_BASE : 0;
@@ -241,7 +240,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       <Card className="p-6">
-        <h2 className="text-xl font-bold text-dark-blue mb-4">{translations.formTitle}</h2>
+        <h3 className="text-xl font-bold text-dark-blue mb-4">{translations.formTitle}</h3>
         <div className="space-y-6">
           <LabeledInput label={translations.brandNameLabel} placeholder={translations.brandNamePlaceholder} value={brand} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setBrand(e.target.value)} />
           <LabeledInput label={translations.yourNameLabel} placeholder={translations.yourNamePlaceholder} value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setName(e.target.value)} />
@@ -440,4 +439,3 @@ function Divider() {
 }
 
     
-

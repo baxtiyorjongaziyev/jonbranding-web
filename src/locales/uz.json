@@ -411,8 +411,15 @@
             { "title": "Domenlar va raqamli muhit", "description": "Raqamli muhitda nomlarning mavjudligini tekshiramiz." },
             { "title": "Ma'no va assotsiatsiyalar", "description": "O'qilishi, ohangi, mumkin bo'lgan assotsiativ qator, madaniy idrok va brend toifasiga muvofiqligini tekshiramiz." }
         ],
-        "calculator_title": "Tovar Belgisi Xarajatlari",
-        "calculator_subtitle": "Neyming (nom tanlash) — ijodiy jarayon, Patentlash esa — yuridik. Jamoamizdagi patent mutaxassisi yordamida tovar belgisini ro'yxatdan o'tkazish bilan bog'liq barcha xarajatlarni (davlat bojlari va xizmat haqi) shu yerda taxminan hisoblang.",
+        "calculator_cta_button": "Patent kalkulyatoriga o'tish"
+    },
+    "patentCalculatorPage": {
+        "metadata": {
+            "title": "Patent Kalkulyatori | Jon.Branding",
+            "description": "O'zbekistonda tovar belgisini ro'yxatdan o'tkazish bilan bog'liq taxminiy xarajatlarni (davlat bojlari va xizmat haqi) hisoblang."
+        },
+        "title": "Tovar Belgisini Patentlash Kalkulyatori",
+        "subtitle": "Neyming (nom tanlash) — ijodiy jarayon, Patentlash esa — yuridik. Jamoamizdagi patent mutaxassisi yordamida tovar belgisini ro'yxatdan o'tkazish bilan bog'liq barcha xarajatlarni (davlat bojlari va xizmat haqi) shu yerda taxminan hisoblang.",
         "trademarkCalculator": {
             "formTitle": "Ma'lumotlarni kiriting",
             "brandNameLabel": "Brend nomi",

@@ -411,8 +411,15 @@
             { "title": "Domains and digital environment", "description": "We check the availability of names in the digital environment." },
             { "title": "Meaning and associations", "description": "We check readability, sound, possible associative array, cultural perception, and compliance with the brand category." }
         ],
-        "calculator_title": "Trademark Costs",
-        "calculator_subtitle": "Naming (choosing a name) is a creative process, and patenting is a legal one. With the help of a patent specialist on our team, calculate the approximate costs associated with trademark registration (state fees and service charges) here.",
+        "calculator_cta_button": "Go to Patent Calculator"
+    },
+    "patentCalculatorPage": {
+        "metadata": {
+            "title": "Trademark Calculator | Jon.Branding",
+            "description": "Calculate the approximate costs associated with trademark registration (state fees and service charges) in Uzbekistan."
+        },
+        "title": "Trademark Registration Calculator",
+        "subtitle": "Naming is a creative process, and patenting is a legal one. With the help of a patent specialist on our team, calculate the approximate costs associated with trademark registration (state fees and service charges) here.",
         "trademarkCalculator": {
             "formTitle": "Enter Details",
             "brandNameLabel": "Brand Name",
