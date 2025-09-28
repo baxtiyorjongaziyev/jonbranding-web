@@ -38,15 +38,17 @@ async function sendMetaConversionEvent(data: any) {
     const payload = {
         data: [
             {
-                event_name: 'Lead',
+                event_name: 'Purchase',
                 event_time: Math.floor(Date.now() / 1000),
                 action_source: 'website',
                 event_id: eventId,
                 user_data: {
-                    ph: [data.phone], // Phone number
-                    fn: [data.fullName], // First name
+                    ph: data.phone ? [data.phone] : [],
+                    fn: data.fullName ? [data.fullName] : [],
                 },
                 custom_data: {
+                    value: data.totalPrice || 0,
+                    currency: 'UZS',
                     ...data,
                 }
             }
@@ -229,3 +231,5 @@ ${packageInfo}
         return NextResponse.json({ ok: false, error: "Serverda ichki xatolik yuz berdi. Iltimos, administratorga murojaat qiling." }, { status: 500 });
     }
 }
+
+    
