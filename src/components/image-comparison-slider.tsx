@@ -5,7 +5,6 @@ import Image, { type ImageProps } from 'next/image';
 import { useRef, useCallback, useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { getDictionary, Locale } from '@/lib/dictionaries';
 
 interface ImageComparisonSliderProps {
   beforeImage: Omit<ImageProps, 'fill' | 'className'>;
@@ -37,7 +36,7 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
       x.set(newX);
   }, [x]);
   
-  const afterWidth = useTransform(x, val => `${val * 100}%`);
+  const clipPath = useTransform(x, val => `inset(0 ${100 - (val * 100)}% 0 0)`);
   const handleX = useTransform(x, val => `${val * 100}%`);
 
   if (!translations) {
@@ -47,14 +46,14 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
   return (
     <motion.div 
         ref={containerRef} 
-        className={cn("relative w-full aspect-square cursor-ew-resize group", className)}
+        className={cn("relative w-full aspect-square cursor-ew-resize group select-none", className)}
         onPan={handlePan}
         onPanStart={handlePan}
         onPanEnd={handlePan}
         style={{ touchAction: 'pan-y' }} // Allow vertical scroll on touch devices
     >
       {/* Before Image */}
-      <div className="absolute inset-0 select-none">
+      <div className="absolute inset-0">
         <Image 
             {...beforeImage}
             fill 
@@ -64,21 +63,18 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
         <div className="absolute top-2 right-2 bg-black/50 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">{translations.before}</div>
       </div>
 
-      {/* After Image */}
+      {/* After Image (clipped) */}
       <motion.div
-        className="absolute inset-0 select-none overflow-hidden"
-        style={{ width: afterWidth }}
-        initial={{ width: "50%" }}
+        className="absolute inset-0"
+        style={{ clipPath }}
+        initial={{ clipPath: 'inset(0 50% 0 0)'}}
       >
-        <div style={{ width: '100vw', height: '100%', position: 'relative' }}>
-          <Image 
-              {...afterImage}
-              alt={afterImage.alt}
-              fill
-              className="absolute inset-0 object-cover h-full w-auto max-w-none pointer-events-none"
-              priority
-          />
-        </div>
+        <Image 
+            {...afterImage}
+            fill
+            className="object-cover pointer-events-none"
+            priority
+        />
         <div className="absolute top-2 right-2 bg-primary/80 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">{translations.after}</div>
       </motion.div>
 
