@@ -263,7 +263,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           <ExpandingButton
             icon={<Phone />}
-            label={dictionary.contact_by_phone}
+            label="+998 33 645 00 97"
             href="tel:+998336450097"
             className={cn(scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}
           />
