@@ -177,7 +177,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
 
                 <div className="mt-10 text-center">
                     <Button
-                      onClick={onCtaClick}
+                      id="queue-cta"
                       size="lg"
                       className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform text-lg animate-subtle-pulse px-6 sm:px-8 py-6"
                     >

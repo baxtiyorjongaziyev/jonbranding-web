@@ -96,11 +96,10 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
             </div>
             <div className="p-4 bg-secondary/50 border-t mt-auto">
                  <div className="my-2 text-center min-h-[40px] flex items-center justify-center">
-                    {price > 0 && !isPercentageBased && (
-                       <span className="text-2xl font-bold text-primary whitespace-nowrap">{`+${formatPriceForDisplay(price, lang, dictionary)}`}</span>
-                    )}
-                    {note && (
-                        <span className="text-lg font-semibold text-primary whitespace-nowrap">{note}</span>
+                    {(price > 0 || note) && (
+                       <span className="text-2xl font-bold text-primary whitespace-nowrap">
+                         {isPercentageBased ? note : `+${formatPriceForDisplay(price, lang, dictionary)}`}
+                       </span>
                     )}
                     {price === 0 && !note && (
                          <span className="text-xl font-bold text-primary whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
@@ -364,7 +363,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
 
 
-                                <Button onClick={onOrderNow} variant="default" size="lg" className="w-full mt-6 text-lg py-3" disabled={total.base === 0}>
+                                <Button id="package-builder-cta" variant="default" size="lg" className="w-full mt-6 text-lg py-3" disabled={total.base === 0}>
                                     {total.discountApplied.length > 0 ? translations.order_with_discount : translations.get_free_consultation}
                                 </Button>
                                 
