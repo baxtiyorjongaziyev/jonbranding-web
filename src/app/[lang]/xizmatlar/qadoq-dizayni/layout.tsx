@@ -1,39 +1,53 @@
 
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
+import { getDictionary, Locale } from '@/lib/dictionaries';
 
-const APP_NAME = "Qadoq Dizayni | Jon.Branding";
-const APP_DESCRIPTION = "Biz shunchaki chiroyli qadoq emas, balki mahsulotingizni sotadigan kuchli marketing vositasini yaratamiz. Qadoq dizayni orqali brendingizni raqobatchilardan ajratib turing va mijozlar mehrini qozoning.";
-
-export const metadata: Metadata = {
-  metadataBase: new URL('https://jonbranding.uz'),
-  title: APP_NAME,
-  description: APP_DESCRIPTION,
-  openGraph: {
-    title: APP_NAME,
-    description: APP_DESCRIPTION,
-    url: 'https://jonbranding.uz/xizmatlar/qadoq-dizayni',
-    siteName: 'Jon.Branding',
-    images: [
-      {
-        url: 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2',
-        width: 1200,
-        height: 630,
-        alt: APP_DESCRIPTION,
-      },
-    ],
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: APP_NAME,
-    description: APP_DESCRIPTION,
-    images: ['https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2'],
-  },
-  alternates: {
-    canonical: 'https://jonbranding.uz/xizmatlar/qadoq-dizayni',
-  },
+type Props = {
+  params: { lang: string };
 };
+
+export async function generateMetadata({ params: { lang } }: Props): Promise<Metadata> {
+  const dict = await getDictionary(lang as Locale);
+  const t = dict.packagingPage.metadata;
+
+  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/qadoq-dizayni`;
+
+  return {
+    metadataBase: new URL('https://jonbranding.uz'),
+    title: t.title,
+    description: t.description,
+    openGraph: {
+      title: t.title,
+      description: t.description,
+      url: canonicalUrl,
+      siteName: 'Jon.Branding',
+      images: [
+        {
+          url: 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2',
+          width: 1200,
+          height: 630,
+          alt: t.description,
+        },
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t.title,
+      description: t.description,
+      images: ['https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2'],
+    },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        'uz': 'https://jonbranding.uz/xizmatlar/qadoq-dizayni',
+        'ru': 'https://jonbranding.uz/ru/xizmatlar/qadoq-dizayni',
+        'en': 'https://jonbranding.uz/en/xizmatlar/qadoq-dizayni',
+      },
+    },
+  };
+}
 
 const QadoqDizayniLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
   return <>{children}</>;

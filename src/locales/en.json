@@ -267,6 +267,10 @@
         "ctaButton": "Get a free consultation"
     },
     "quiz": {
+        "metadata": {
+            "title": "Mini-Test: Is Your Business Ready for Branding? | Jon.Branding",
+            "description": "Answer a few simple questions and find out how ready your business is for branding, its strengths and weaknesses."
+        },
         "questions": [
             {
                 "question": "Is the main idea or mission of your business expressed in one sentence?",
@@ -330,6 +334,10 @@
         "resultButton": "See result"
     },
     "brandStrategyPage": {
+        "metadata": {
+            "title": "Brand Strategy | Jon.Branding",
+            "description": "Brand strategy is a business growth tool. Turn your brand from just beautiful into a working system."
+        },
         "title": "Brand Strategy",
         "subtitle": "A strong brand is a clear idea that inspires, unites, and helps a business grow.",
         "section1_title": "Brand strategy is a business growth tool",
@@ -351,6 +359,10 @@
         ]
     },
     "corporateStylePage": {
+        "metadata": {
+            "title": "Corporate Identity | Jon.Branding",
+            "description": "We don't just create beautiful pictures; we develop a systematic visual style that works for your brand and delivers results. Make your brand recognizable and memorable through a logo, colors, fonts, and other elements."
+        },
         "title": "Corporate Identity Development",
         "subtitle": "One of the key elements of a brand is its visual component. It is what turns ideas, meanings, and values into images that can be seen, felt, and remembered.",
         "section1_title": "Brand perception starts with the picture",
@@ -372,6 +384,10 @@
         "cta_description": "Brands with a strong identity are recognized faster, remembered longer, and inspire more trust. We create not just a visual style, but a tool that helps the brand grow, be consistent, and manageable."
     },
     "namingPage": {
+        "metadata": {
+            "title": "Naming | Jon.Branding",
+            "description": "Choosing a memorable and strong name for a brand. A good name doesn't just sound beautiful; it conveys the essence, is memorable, and helps the brand stand out among competitors."
+        },
         "title": "Naming — A Strong Brand Name",
         "subtitle": "A brand name is the first impression of it, its energy, character, and the idea expressed in a word. A good name doesn't just sound beautiful; it conveys the essence, is memorable, and helps the brand stand out among competitors.",
         "section1_title": "The name is part of the brand strategy",
@@ -464,6 +480,10 @@
         }
     },
     "packagingPage": {
+        "metadata": {
+            "title": "Packaging Design | Jon.Branding",
+            "description": "We don't just create beautiful packaging; we create a powerful marketing tool that sells your product. Differentiate your brand from competitors and win customers' affection through packaging design."
+        },
         "title": "Packaging Design Development",
         "subtitle": "In a highly competitive environment, packaging often becomes a key marketing tool. It distinguishes the brand on the shelf, tells its story, and connects with the audience at first glance.",
         "section1_title": "Packaging is more than just a carrier of brand identity",
@@ -480,6 +500,10 @@
         "cta_description": "Good packaging design is not just beautiful decoration, but a tool that works for the business. We develop a functional, strategically thought-out design where the packaging serves as a full-fledged sales tool."
     },
     "servicesPage": {
+        "metadata": {
+            "title": "Services and Prices | Jon.Branding",
+            "description": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator."
+        },
         "packageBuilder": {
             "title": "Services and Prices",
             "subtitle": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator.",
@@ -566,5 +590,3 @@
     }
 }
   
-
-    
