@@ -123,12 +123,12 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           id="gtag-init"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `
+            __html: \`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'G-1CE32W25SP');
-          `,
+          \`,
           }}
         />
 
@@ -137,7 +137,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           id="hotjar-init"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `
+            __html: \`
                 (function(h,o,t,j,a,r){
                     h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
                     h._hjSettings={hjid:6527829,hjsv:6};
@@ -146,7 +146,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
                     r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
                     a.appendChild(r);
                 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-            `,
+            \`,
           }}
         />
         <MainLayout>
