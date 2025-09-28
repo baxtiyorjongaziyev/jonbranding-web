@@ -5,7 +5,7 @@ import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu, Phone, Send, Globe, Languages } from 'lucide-react';
+import { Menu, Phone, Send, Languages } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -25,9 +25,13 @@ import {
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { ScrollArea } from '../ui/scroll-area';
 import LanguageSwitcher from '../language-switcher';
+import { Locale, locales, localeNames, setLocaleCookie } from '@/lib/i18n/locale';
+import { UzFlagIcon } from '../icons/uz-flag';
+import { RuFlagIcon } from '../icons/ru-flag';
+import { GbFlagIcon } from '../icons/gb-flag';
 
 type Dictionary = {
     portfolio: string;
@@ -54,6 +58,12 @@ type Dictionary = {
     lang_uz: string;
     lang_en: string;
 }
+
+const localeIcons: Record<Locale, React.FC<{ className?: string }>> = {
+  uz: UzFlagIcon,
+  ru: RuFlagIcon,
+  en: GbFlagIcon,
+};
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -140,6 +150,9 @@ const ExpandingButton: FC<{
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const pathname = usePathname();
+  const router = useRouter();
+
 
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
@@ -165,6 +178,16 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   };
 
   const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
+  
+  const handleLanguageChange = (newLocale: Locale) => {
+    setLocaleCookie(newLocale);
+    
+    const currentPathWithoutLocale = pathname.startsWith(`/${lang}`) ? pathname.substring(`/${lang}`.length) : pathname;
+    const newPath = `/${newLocale}${currentPathWithoutLocale || '/'}`;
+    
+    router.push(newPath);
     setMobileMenuOpen(false);
   };
 
@@ -258,7 +281,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           </Button>
         </div>
         <div className="flex items-center gap-2 lg:hidden">
-          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
           <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className={cn("text-foreground border-border/50", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
@@ -290,6 +312,32 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                         {item.label}
                     </Link>
                     ))}
+                    <div className="border-t pt-6 mt-4 space-y-4">
+                        <div className="flex items-center gap-2 text-xl font-medium text-foreground">
+                            <Languages size={20} />
+                            <span>{dictionary.switch_lang}</span>
+                        </div>
+                        <div className="pl-4 space-y-2">
+                             {locales.map((locale) => {
+                                const Icon = localeIcons[locale];
+                                return (
+                                <Button
+                                    key={locale}
+                                    variant="ghost"
+                                    role="menuitem"
+                                    className={cn(
+                                        "w-full justify-start gap-3 text-lg font-normal text-muted-foreground hover:text-accent",
+                                        lang === locale && 'font-bold text-accent bg-accent/10'
+                                    )}
+                                    onClick={() => handleLanguageChange(locale)}
+                                >
+                                    <Icon className="w-6 h-auto" />
+                                    {localeNames[locale]}
+                                </Button>
+                                );
+                            })}
+                        </div>
+                    </div>
                     <div className="border-t pt-6 mt-4 space-y-4">
                         <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
                         <Phone size={20} />
