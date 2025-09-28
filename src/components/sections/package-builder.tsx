@@ -22,11 +22,6 @@ interface PackageBuilderProps {
 
 const formatPriceForDisplay = (price: number, lang: 'uz' | 'ru' | 'en', dictionary: any) => {
     if (price === 0) return dictionary.agreed_price;
-     if (price >= 1000000) {
-        const millions = price / 1000000;
-        const formattedMillions = millions % 1 === 0 ? millions.toFixed(0) : millions.toFixed(1);
-        return `${formattedMillions} mln ${dictionary.currency}`;
-    }
     return `${price.toLocaleString('fr-FR')} ${dictionary.currency}`;
 }
 
@@ -77,57 +72,64 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
     if (!detail) return null;
     const { label, description, price, note } = detail;
     const isPercentageBased = note && (note.includes('%'));
+    const Icon = serviceIcons[id] || Sparkles;
 
     return (
-        <div 
-            onClick={onSelect}
-            className={cn(
-                "relative group overflow-hidden rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
-                selected ? "shadow-2xl" : "shadow-md"
-            )}
-        >
-             <div className={cn("absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 transition-opacity duration-300", selected ? "opacity-100" : "opacity-0 group-hover:opacity-50" )} />
-             <div className="relative bg-dark-blue text-white rounded-[15px] h-full p-6 flex flex-col justify-between card-glow">
-                <div>
-                    <h4 className="text-xl font-bold text-white leading-tight">{label}</h4>
-                    <p className="text-sm text-gray-400 mt-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: description }}></p>
-                </div>
-                <div className="mt-4">
-                     <div className="my-2 min-h-[40px] flex items-baseline justify-start">
-                        {(price > 0 || note) && (
-                           <span className="text-3xl font-bold text-white whitespace-nowrap">
-                             {isPercentageBased ? note : formatPrice(price, lang, dictionary)}
-                           </span>
-                        )}
-                        {price === 0 && !note && (
-                             <span className="text-2xl font-bold text-white whitespace-nowrap">{formatPrice(price, lang, dictionary)}</span>
-                        )}
+        <TiltCard strength={10} className="h-full">
+            <div 
+                onClick={onSelect}
+                className={cn(
+                    "relative group overflow-hidden rounded-2xl p-px cursor-pointer transition-all duration-300 h-full"
+                )}
+            >
+                <div className={cn("absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 transition-opacity duration-300", selected ? "opacity-100" : "opacity-0 group-hover:opacity-50" )} />
+                <div className="relative bg-background text-foreground rounded-[15px] h-full p-6 flex flex-col justify-between">
+                    <div>
+                        <div className="flex items-center gap-3 mb-3">
+                            <div className="bg-secondary p-3 rounded-full">
+                                <Icon className="w-6 h-6 text-primary" />
+                            </div>
+                        </div>
+                        <h4 className="text-xl font-bold leading-tight">{label}</h4>
+                        <p className="text-sm text-muted-foreground mt-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: description }}></p>
                     </div>
-                    <Button 
-                        className={cn(
-                            "w-full text-base py-3 h-auto transition-colors duration-300",
-                            selected 
-                                ? "bg-white text-black hover:bg-gray-200" 
-                                : "bg-white/10 text-white hover:bg-white/20"
-                        )}
-                        variant="secondary"
-                        tabIndex={-1}
-                    >
-                        {selected ? (
-                            <>
-                                <CheckCircle className="h-5 w-5 mr-2" />
-                                {dictionary.selected}
-                            </>
-                        ) : (
-                            <>
-                                <ShoppingCart className="h-5 w-5 mr-2" />
-                                {dictionary.select}
-                            </>
-                        )}
-                    </Button>
+                    <div className="mt-4">
+                        <div className="my-2 min-h-[40px] flex items-baseline justify-start">
+                            {(price > 0 || note) && (
+                            <span className="text-3xl font-bold whitespace-nowrap">
+                                {isPercentageBased ? note : formatPrice(price, lang, dictionary)}
+                            </span>
+                            )}
+                            {price === 0 && !note && (
+                                <span className="text-2xl font-bold whitespace-nowrap">{formatPriceForDisplay(price, lang, dictionary)}</span>
+                            )}
+                        </div>
+                        <Button 
+                            className={cn(
+                                "w-full text-base py-3 h-auto transition-colors duration-300",
+                                selected 
+                                    ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+                                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                            )}
+                            variant="secondary"
+                            tabIndex={-1}
+                        >
+                            {selected ? (
+                                <>
+                                    <CheckCircle className="h-5 w-5 mr-2" />
+                                    {dictionary.selected}
+                                </>
+                            ) : (
+                                <>
+                                    <ShoppingCart className="h-5 w-5 mr-2" />
+                                    {dictionary.select}
+                                </>
+                            )}
+                        </Button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </TiltCard>
     );
 };
 
@@ -283,7 +285,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                                 <span className="text-white flex-1 pr-2">{service.label}</span>
                                                                 <div className="flex items-center gap-2">
                                                                     <span className="font-mono text-gray-300">
-                                                                        {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en', translations)}` : service.note}
+                                                                        {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en')}` : service.note}
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -347,7 +349,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
                                         {total.final > 0 ? (
                                             <>
-                                                {formatPriceForDisplay(total.final, lang as 'uz' | 'ru' | 'en', translations)}
+                                                {formatPrice(total.final, lang as 'uz' | 'ru' | 'en')}
                                             </>
                                         ) : (
                                             translations.agreed_price
