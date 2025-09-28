@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -27,6 +28,7 @@ type Dictionary = {
     blog: string;
     all_rights_reserved: string;
     back_to_top: string;
+    patent_calculator: string;
 }
 
 const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
@@ -53,6 +55,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
       { href: `/${lang}/xizmatlar`, label: dictionary.service_prices },
       { href: `/${lang}/quiz`, label: dictionary.branding_test },
       { href: `/${lang}/blog`, label: dictionary.blog },
+      { href: `/${lang}/xizmatlar/patent-kalkulyatori`, label: dictionary.patent_calculator },
   ];
 
   return (
