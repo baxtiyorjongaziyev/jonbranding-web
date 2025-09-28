@@ -1,9 +1,5 @@
 
 
-
-
-
-
 const uzServiceDetails = {
     audit: { label: "Logo Auditi", description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.", price: 1300000, timeline: "2-3 kun", note: null },
     namingCheck: { label: "Neyming Tekshiruvi", description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.", price: 1500000, timeline: "1-2 kun", note: null },
@@ -75,7 +71,15 @@ export function formatPrice(price: number, lang: 'uz' | 'ru' | 'en' = 'uz') {
         if (lang === 'en') return 'On Request';
         return "Kelishiladi";
     }
-    const currency = lang === 'ru' ? 'сум' : (lang === 'en' ? 'sum' : 'so\'m');
+
+    const currency = lang === 'ru' ? 'сум' : (lang === 'en' ? 'sum' : "so'm");
+    
+    if (price >= 1000000) {
+        const millions = price / 1000000;
+        const formattedMillions = millions % 1 === 0 ? millions.toFixed(0) : millions.toFixed(1);
+        return `${formattedMillions} mln ${currency}`;
+    }
+
     return `${price.toLocaleString('fr-FR')} ${currency}`;
 }
 
@@ -293,3 +297,5 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
 
     return summary;
 }
+
+    
