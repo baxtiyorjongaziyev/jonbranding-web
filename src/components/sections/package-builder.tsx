@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -355,7 +354,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
                                 <div className='mt-6 text-center'>
                                      <p className="text-sm text-blue-200">{translations.final_price}</p>
-                                      <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight flex justify-center items-baseline">
+                                      <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
                                         {total.final > 0 ? (
                                             <>
                                                 {formatPriceForDisplay(total.final, lang as 'uz' | 'ru' | 'en', translations)}
@@ -394,5 +393,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 };
 
 export default PackageBuilder;
-
+    
     
