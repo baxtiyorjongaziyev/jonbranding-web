@@ -8,9 +8,10 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Announce } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 
 interface PackageBuilderProps {
@@ -26,6 +27,9 @@ const formatPriceForDisplay = (price: number, lang: 'uz' | 'ru' | 'en', dictiona
 
 
 const serviceIcons: { [key: string]: React.ElementType } = {
+    audit: FileText,
+    namingCheck: ClipboardSignature,
+    consultation: Info,
     strategy: ClipboardList,
     commStrategy: Megaphone,
     smm: PenTool,
@@ -33,9 +37,6 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     illustrations: Palette,
     urgency: Flame,
     nda: ShieldCheck,
-    audit: FileText,
-    namingCheck: ClipboardSignature,
-    consultation: Info,
     namingStart: Type,
     namingPro: Type,
     namingMax: Type,
@@ -44,6 +45,13 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     logoMax: Layers,
     brandbook: BookMarked,
     packaging: Box,
+};
+
+const introIcons: { [key: string]: React.ElementType } = {
+    research: Search,
+    strategy: BrainCircuit,
+    identity: Paintbrush,
+    communication: Announce
 };
 
 const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
@@ -114,7 +122,6 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
     const detail = serviceDetails[id];
     if (!detail) return null;
     const { label, description, price, features, recommended } = detail;
-    const Icon = serviceIcons[id] || Sparkles;
 
     return (
         <div 
@@ -138,7 +145,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                 
                 <div className="mt-6 mb-8 flex-grow">
                     <ul className="space-y-3">
-                        {features?.map((feature, index) => (
+                        {features?.map((feature: any, index: number) => (
                              <li key={index} className="flex items-start gap-3">
                                 <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                                 <span className="text-sm text-gray-700">{feature}</span>
@@ -290,19 +297,33 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         <>
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
                 <div className="container mx-auto px-4">
-                    <div className="text-center max-w-4xl mx-auto mb-16">
-                        <div className="prose prose-lg mx-auto text-left">
-                            <h3 className="font-bold text-dark-blue">{translations.introTitle}</h3>
-                            <p className="text-muted-foreground">{translations.introP1}</p>
-                            <p className="text-muted-foreground">{translations.introP2}</p>
-                            <h4 className="font-bold text-dark-blue">{translations.introSubtitle}</h4>
-                            <p className="text-muted-foreground">{translations.introP3}</p>
-                            <ul className="text-muted-foreground">
-                                {translations.introList.map((item: string, index: number) => (
-                                    <li key={index}>{item}</li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div className="max-w-4xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <Card className="p-6 rounded-xl shadow-sm">
+                            <h3 className="font-bold text-dark-blue text-lg mb-2">{translations.introTitle}</h3>
+                            <p className="text-muted-foreground text-sm">{translations.introP1}</p>
+                            <p className="text-muted-foreground text-sm mt-2">{translations.introP2}</p>
+                        </Card>
+                        <Card className="p-6 rounded-xl shadow-sm">
+                            <h4 className="font-bold text-dark-blue text-lg mb-3">{translations.introSubtitle}</h4>
+                             <Accordion type="single" collapsible className="w-full">
+                                {translations.introList.map((item: any, index: number) => {
+                                     const Icon = introIcons[item.icon] || Sparkles;
+                                     return (
+                                        <AccordionItem value={`item-${index}`} key={index}>
+                                            <AccordionTrigger className="font-semibold text-base py-3">
+                                                 <div className="flex items-center gap-3">
+                                                    <Icon className="w-5 h-5 text-primary" />
+                                                    <span>{item.title}</span>
+                                                 </div>
+                                            </AccordionTrigger>
+                                            <AccordionContent className="text-sm">
+                                                {item.description}
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                     )
+                                })}
+                            </Accordion>
+                        </Card>
                     </div>
 
                     <div className="text-center mb-12">

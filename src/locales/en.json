@@ -519,10 +519,10 @@
             "introSubtitle": "How is branding work structured?",
             "introP3": "Creating a brand is not just a logo or corporate identity. It's a whole process that includes:",
             "introList": [
-                "Research — market analysis, competitor audit, target audience study.",
-                "Strategy — defining the brand's meaning, its positioning, and values.",
-                "Identity development — creating a logo, colors, fonts, graphics, and visual style.",
-                "Communication — designing advertising materials, branded media, and content."
+                { "icon": "research", "title": "Research", "description": "Market analysis, competitor audit, target audience study." },
+                { "icon": "strategy", "title": "Strategy", "description": "Defining the brand's meaning, its positioning, and values." },
+                { "icon": "identity", "title": "Identity Development", "description": "Creating a logo, colors, fonts, graphics, and visual style." },
+                { "icon": "communication", "title": "Communication", "description": "Designing advertising materials, branded media, and content." }
             ],
             "title": "Services and Prices",
             "subtitle": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator.",

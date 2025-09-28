@@ -519,10 +519,10 @@
             "introSubtitle": "Brending ustida ish qanday quriladi?",
             "introP3": "Brend yaratish — bu shunchaki logotip yoki firma uslubi emas. Bu butun bir jarayon bo‘lib, quyidagilarni o‘z ichiga oladi:",
             "introList": [
-                "Tadqiqot — bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o‘rganish.",
-                "Strategiya — brendning ma'nosini, uning pozitsiyasi va qadriyatlarini aniqlash.",
-                "Identifikatsiyani ishlab chiqish — logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish.",
-                "Kommunikatsiya — reklama materiallari, brend tashuvchilari va kontentni rasmiylashtirish."
+                { "icon": "research", "title": "Tadqiqot", "description": "Bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o‘rganish." },
+                { "icon": "strategy", "title": "Strategiya", "description": "Brendning ma'nosini, uning pozitsiyasi va qadriyatlarini aniqlash." },
+                { "icon": "identity", "title": "Identifikatsiyani ishlab chiqish", "description": "Logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish." },
+                { "icon": "communication", "title": "Kommunikatsiya", "description": "Reklama materiallari, brend tashuvchilari va kontentni rasmiylashtirish." }
             ],
             "title": "Xizmatlar va Narxlar",
             "subtitle": "Bizning barcha xizmatlarimiz bilan tanishing va o'zingizga mos bo'lgan brending to'plamini yarating. Onlayn kalkulyator yordamida narxlarni darhol hisoblang.",
