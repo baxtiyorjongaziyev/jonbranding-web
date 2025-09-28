@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useCallback } from 'react';
@@ -24,7 +23,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
 
   return (
     <>
-      <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.packageBuilder} />
+      <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
       <Comparison onCtaClick={handleOpenModal} lang={lang} />
       <Offer onCTAClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.offer} />
       <QueueStatus onCtaClick={handleOpenModal} />
