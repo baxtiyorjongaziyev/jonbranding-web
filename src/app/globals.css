@@ -103,23 +103,6 @@
     background-image: linear-gradient(to right, hsl(var(--accent)), hsl(var(--primary)));
   }
 
-  .card-glow::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background-image: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--primary) / 0.3), transparent);
-    transition: opacity 0.5s ease-in-out;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .card-glow:hover::before {
-    opacity: 1;
-  }
-
   @keyframes gradient-rotate {
     0% {
       --gradient-angle: 0deg;
