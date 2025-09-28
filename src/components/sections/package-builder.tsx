@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -58,20 +59,20 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
         <Card 
             onClick={onSelect}
             className={cn(
-                "relative rounded-2xl h-full border transition-all duration-300 cursor-pointer",
-                selected ? 'border-primary ring-2 ring-primary/50 shadow-lg' : 'border-gray-200 bg-white hover:shadow-md'
+                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer",
+                selected ? 'border-primary ring-4 ring-primary/20 bg-primary/5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
             )}
         >
              {recommended && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <div className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">{dictionary.recommended}</div>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                    <div className="bg-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">{dictionary.recommended}</div>
                 </div>
             )}
             <div className='p-6 flex flex-col h-full'>
-                <div className="text-center">
-                    <h3 className="font-bold text-lg text-primary">{label}</h3>
-                    <p className="text-4xl font-extrabold text-dark-blue mt-2">{formatPrice(price, lang)}</p>
+                <div className="text-center pt-2">
+                    <h3 className="font-bold text-xl text-dark-blue">{label}</h3>
                     <p className="text-sm text-muted-foreground mt-1 h-10">{description}</p>
+                    <p className="text-4xl font-extrabold text-dark-blue mt-4">{formatPrice(price, lang)}</p>
                 </div>
                 
                 <div className="mt-6 mb-8 flex-grow">
@@ -88,10 +89,11 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                 <div className="mt-auto">
                      <Button 
                         className={cn(
-                            "w-full text-base py-3 h-auto transition-colors duration-300",
+                            "w-full text-base py-3 h-auto transition-all duration-300",
                             selected 
-                                ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                                ? "shadow-lg" 
+                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+                            recommended && !selected && "bg-primary/10 text-primary hover:bg-primary/20"
                         )}
                         variant={selected ? 'default' : 'secondary'}
                         tabIndex={-1}
@@ -126,19 +128,19 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
         <Card 
             onClick={onSelect}
             className={cn(
-                "relative group rounded-2xl p-px cursor-pointer transition-all duration-300 h-full",
+                "relative group rounded-2xl cursor-pointer transition-all duration-300 h-full",
                 "bg-secondary text-foreground",
-                 selected ? 'bg-primary' : 'bg-background hover:bg-background/80'
+                 selected ? 'bg-primary border-primary ring-4 ring-primary/20' : 'bg-background hover:bg-background/80 hover:shadow-md'
             )}
         >
-            <div className={cn('relative rounded-[15px] h-full p-6 flex flex-col',  selected ? 'bg-primary/5' : 'bg-background')}>
-                <div className="flex items-center gap-3 mb-3">
+            <div className={cn('relative rounded-[15px] h-full p-6 flex flex-col', selected ? 'bg-primary/5' : 'bg-background')}>
+                <div className="flex items-center gap-4 mb-4">
                     <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
                         <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
                     </div>
                 </div>
                 <h4 className="text-xl font-bold leading-tight">{label}</h4>
-                <p className="text-sm text-muted-foreground mt-2 min-h-[40px]" dangerouslySetInnerHTML={{ __html: description }}></p>
+                <p className="text-sm text-muted-foreground mt-2 min-h-[60px]" dangerouslySetInnerHTML={{ __html: description }}></p>
                 
                 <div className="mt-auto pt-4">
                     <div className="my-2 min-h-[40px] flex items-baseline justify-start">
@@ -154,7 +156,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
                         className={cn(
                             "w-full text-base py-3 h-auto transition-colors duration-300",
                             selected 
-                                ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+                                ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg" 
                                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                         )}
                         variant="secondary"
@@ -185,19 +187,6 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
         <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>
             {children}
         </div>
-    </div>
-);
-
-const InfoCard = ({ icon: Icon, title, description, className, children }: { icon: React.ElementType, title: string, description: string, className?: string, children?: React.ReactNode }) => (
-    <div className={cn("bg-white/5 p-4 rounded-xl border border-white/10 flex items-start gap-4 text-left", className)}>
-        <div className="flex-shrink-0 text-accent p-2 rounded-lg mt-1">
-            {Icon && <Icon className="w-5 h-5" />}
-        </div>
-        <div className="flex-1">
-            <h5 className="font-semibold text-white">{title}</h5>
-            <p className="text-sm text-blue-200">{description}</p>
-        </div>
-        {children}
     </div>
 );
 
@@ -293,26 +282,26 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         <>
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <Card className="p-6 rounded-xl shadow-sm">
-                            <h3 className="font-bold text-dark-blue text-lg mb-2">{translations.introTitle}</h3>
-                            <p className="text-muted-foreground text-sm">{translations.introP1}</p>
-                            <p className="text-muted-foreground text-sm mt-2">{translations.introP2}</p>
+                    <div className="max-w-4xl mx-auto mb-16 grid grid-cols-1 gap-8">
+                        <Card className="p-6 sm:p-8 rounded-2xl shadow-sm">
+                            <h3 className="font-bold text-dark-blue text-xl mb-3">{translations.introTitle}</h3>
+                            <p className="text-muted-foreground">{translations.introP1}</p>
+                            <p className="text-muted-foreground mt-2">{translations.introP2}</p>
                         </Card>
-                        <Card className="p-6 rounded-xl shadow-sm">
-                            <h4 className="font-bold text-dark-blue text-lg mb-3">{translations.introSubtitle}</h4>
+                        <Card className="p-6 sm:p-8 rounded-2xl shadow-sm">
+                            <h4 className="font-bold text-dark-blue text-xl mb-4">{translations.introSubtitle}</h4>
                              <Accordion type="single" collapsible className="w-full">
                                 {translations.introList.map((item: any, index: number) => {
                                      const Icon = introIcons[item.icon] || Sparkles;
                                      return (
                                         <AccordionItem value={`item-${index}`} key={index}>
-                                            <AccordionTrigger className="font-semibold text-base py-3">
-                                                 <div className="flex items-center gap-3">
-                                                    <Icon className="w-5 h-5 text-primary" />
+                                            <AccordionTrigger className="font-semibold text-lg py-4">
+                                                 <div className="flex items-center gap-4">
+                                                    <Icon className="w-6 h-6 text-primary" />
                                                     <span>{item.title}</span>
                                                  </div>
                                             </AccordionTrigger>
-                                            <AccordionContent className="text-sm">
+                                            <AccordionContent className="text-base text-muted-foreground pl-14">
                                                 {item.description}
                                             </AccordionContent>
                                         </AccordionItem>
@@ -492,8 +481,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     );
 };
 
+
+const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.ElementType, title: string, description: string, className?: string }) => (
+    <div className={cn("bg-white/5 p-4 rounded-xl border border-white/10 flex items-start gap-4 text-left", className)}>
+        <div className="flex-shrink-0 text-accent p-2 rounded-lg mt-1">
+            {Icon && <Icon className="w-5 h-5" />}
+        </div>
+        <div className="flex-1">
+            <h5 className="font-semibold text-white">{title}</h5>
+            <p className="text-sm text-blue-200">{description}</p>
+        </div>
+    </div>
+);
+
 export default PackageBuilder;
-    
-    
 
     
