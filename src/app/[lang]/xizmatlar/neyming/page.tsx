@@ -159,8 +159,8 @@ const NamingPage: FC = () => {
             </div>
         </section>
 
-        </main>
         <ServiceSections lang={lang} />
+        </main>
     </>
   );
 };

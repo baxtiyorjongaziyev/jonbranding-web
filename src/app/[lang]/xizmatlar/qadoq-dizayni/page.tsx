@@ -111,8 +111,8 @@ const QadoqDizayniPage: FC = () => {
                 </div>
             </div>
         </section>
-        </main>
         <ServiceSections lang={lang} />
+        </main>
     </>
   );
 };

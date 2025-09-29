@@ -1,51 +1,64 @@
 'use client';
 
-import { FC, useCallback, useState, useEffect } from "react";
-import dynamic from 'next/dynamic';
-import CtaBlock from "./cta-block";
-import { getDictionary, Locale } from "@/lib/dictionaries";
+import { FC, useState, useEffect } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ArrowRight, BrainCircuit, ScanText, Package, Paintbrush } from 'lucide-react';
+import { getDictionary, Locale } from '@/lib/dictionaries';
+import { Skeleton } from '../ui/skeleton';
 
-const Gallery = dynamic(() => import('@/components/sections/gallery'));
-const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'));
-const Video = dynamic(() => import('@/components/sections/video'));
+const serviceIcons: { [key: string]: React.ElementType } = {
+    'brand-strategy': BrainCircuit,
+    'naming': ScanText,
+    'corporate-style': Paintbrush,
+    'packaging-design': Package,
+};
 
 const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
-    
-    const handleOpenModal = useCallback(() => {
-        const event = new CustomEvent('openContactModal');
-        window.dispatchEvent(event);
-    }, []);
-
-    const [dictionary, setDictionary] = useState<any>(null);
+    const [translations, setTranslations] = useState<any>(null);
 
     useEffect(() => {
-        getDictionary(lang as Locale).then(setDictionary);
+        getDictionary(lang as Locale).then(dict => setTranslations(dict.serviceSections));
     }, [lang]);
 
-    if (!dictionary) {
-        return null; // Or a loading skeleton
+    if (!translations) {
+        return (
+            <section className="py-16 sm:py-24 bg-white">
+                <div className="container mx-auto px-4">
+                    <Skeleton className="h-64 w-full" />
+                </div>
+            </section>
+        );
     }
-
-    const translations = dictionary.serviceSections;
-
+    
     return (
-        <>
-            <Gallery lang={lang} dictionary={dictionary.gallery} />
-            <Video />
-            <CtaBlock 
-                title={translations.cta1_title}
-                description={translations.cta1_desc}
-                buttonText={translations.cta1_button}
-                onCtaClick={handleOpenModal}
-            />
-            <TrustedBy lang={lang} dictionary={dictionary.trustedBy}/>
-            <CtaBlock 
-                title={translations.cta2_title}
-                description={translations.cta2_desc}
-                buttonText={translations.cta2_button}
-                onCtaClick={handleOpenModal}
-            />
-        </>
+        <section className="py-16 sm:py-24 bg-white">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {translations.services.map((service: any) => {
+                        const Icon = serviceIcons[service.id] || Paintbrush;
+                        return (
+                             <Card key={service.id} className="group relative flex flex-col text-center shadow-lg rounded-2xl bg-secondary/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                                <CardContent className="p-8 flex flex-col items-center flex-grow">
+                                    <div className="bg-primary/10 p-4 rounded-full mb-4">
+                                        <Icon className="w-8 h-8 text-primary" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-dark-blue">{service.title}</h3>
+                                    <p className="text-gray-600 mt-2 flex-grow">{service.description}</p>
+                                    <Button asChild variant="ghost" className="mt-6 text-primary hover:text-primary">
+                                        <Link href={`/${lang}/xizmatlar/${service.id}`}>
+                                            {service.buttonText}
+                                            <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                        </Link>
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
     );
 };
 
