@@ -69,6 +69,7 @@ const jsonLd = {
   },
   telephone: '+998336450097',
   url: 'https://jonbranding.uz',
+  logo: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
 };
 
 
@@ -78,6 +79,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
   return (
     <html lang={lang} suppressHydrationWarning className={`${poppins.variable}`}>
       <head>
+        <link rel="icon" href="https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png" sizes="any" />
         <Script
           id="gtm-script"
           strategy="afterInteractive"
