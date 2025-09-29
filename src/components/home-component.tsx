@@ -147,8 +147,8 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} /></AnimatedSection>
                 <AnimatedSection><Stats dictionary={dictionary.stats} /></AnimatedSection>
                 <AnimatedSection><TrustedBy lang={lang} dictionary={dictionary.trustedBy} /></AnimatedSection>
-                <AnimatedSection><WhyUs onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
                 <AnimatedSection><TargetAudience lang={lang} dictionary={dictionary.targetAudience} /></AnimatedSection>
+                <AnimatedSection><WhyUs onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
                 <AnimatedSection><Offer onCTAClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.offer} /></AnimatedSection>
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} /></AnimatedSection>
                 <AnimatedSection><Testimonials lang={lang} dictionary={dictionary.testimonials} /></AnimatedSection>
