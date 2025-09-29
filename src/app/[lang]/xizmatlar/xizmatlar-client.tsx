@@ -7,6 +7,7 @@ import Comparison from '@/components/sections/comparison';
 import Offer from '@/components/sections/offer';
 import QueueStatus from '@/components/sections/queue-status';
 import ServicesHero from '@/components/sections/services-hero';
+import WhyUs from '@/components/sections/why-us';
 
 const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const handleOpenModal = useCallback(() => {
@@ -25,6 +26,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
   return (
     <>
       <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary.servicesHero} />
+      <WhyUs onCtaClick={handleOpenModal} lang={lang} />
       <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
       <Comparison onCtaClick={handleOpenModal} lang={lang} />
       <Offer onCTAClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.offer} />
