@@ -34,14 +34,6 @@ const FirmenniyStilPage: FC = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
   };
-
-  const result = useMemo(() => {
-    if (!translations) {
-      return { key: 'default', message: 'Loading...' };
-    }
-    // This is just a placeholder, actual logic is in PickTwoSelector
-    return { key: 'default', message: translations.pickTwoSelector?.messages?.default || '' };
-  }, [translations]);
   
   if (!translations) {
     return <main className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></main>;
@@ -159,8 +151,8 @@ const FirmenniyStilPage: FC = () => {
                 </div>
             </div>
         </section>
-        </main>
         <ServiceSections lang={lang} />
+        </main>
     </>
   );
 };

@@ -10,12 +10,9 @@ import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { useParams } from 'next/navigation';
+import WhyUs from '@/components/sections/why-us';
 
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
-    loading: () => <Skeleton className="h-96 w-full mt-4" />,
-});
-
-const WhyUs = dynamic(() => import('@/components/sections/why-us'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
 });
 
@@ -139,8 +136,8 @@ const BrandStrategyPage: FC = () => {
             </div>
         </section>
         <WhyUs onCtaClick={handleOpenModal} lang={lang} />
-        </main>
         <ServiceSections lang={lang} />
+        </main>
     </>
   );
 };

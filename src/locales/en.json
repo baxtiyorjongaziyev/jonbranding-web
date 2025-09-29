@@ -154,6 +154,32 @@
         "cta": "View prices"
     },
     "serviceSections": {
+        "services": [
+            {
+                "id": "brand-strategy",
+                "title": "Brand Strategy",
+                "description": "The foundation for your brand — analysis, positioning, and communication.",
+                "buttonText": "Read More"
+            },
+            {
+                "id": "naming",
+                "title": "Naming",
+                "description": "Choosing a memorable and strong name for a brand.",
+                "buttonText": "Read More"
+            },
+            {
+                "id": "corporate-style",
+                "title": "Corporate Identity",
+                "description": "A system of logos, colors, and fonts that makes your brand recognizable.",
+                "buttonText": "Read More"
+            },
+            {
+                "id": "packaging-design",
+                "title": "Packaging Design",
+                "description": "Attractive design that will make your product stand out on the shelf.",
+                "buttonText": "Read More"
+            }
+        ],
         "cta1_title": "Your brand could look this good too.",
         "cta1_desc": "Take your business to the next level with professional design. We'll help find the perfect solution for your business.",
         "cta1_button": "For my business too",
