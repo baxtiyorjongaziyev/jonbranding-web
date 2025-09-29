@@ -1,4 +1,3 @@
-
 {
     "header": {
         "portfolio": "Portfolio",
@@ -170,6 +169,18 @@
     },
     "trustedBy": {
         "title": "Bizga ishonch bildirgan kompaniyalar"
+    },
+    "whyUs": {
+        "title": "Nima uchun aynan biz?",
+        "subtitle": "Biz shunchaki va'da bermaymiz. Biz tizimli yondashuv orqali brendingiz uchun aniq qiymat yaratamiz.",
+        "values": [
+            { "title": "Strategik yondashuv", "description": "Biz shunchaki chiroyli rasm chizmaymiz. Har bir dizayn elementi sotuvingizni oshirishga va brendingizni mustahkamlashga xizmat qiladi." },
+            { "title": "Shaffof jarayon", "description": "Brif → Tahlil → Strategiya → Dizayn → Topshirish. Har bir bosqichda siz bilan yaqin aloqada bo'lamiz va jarayonni to'liq nazorat qilasiz." },
+            { "title": "Natija va Sadoqat", "description": "50 dan ortiq loyiha va eng muhimi - mijozlarimizning 90% bizni o'z tanishlariga tavsiya qilishadi. Bu biz uchun eng katta yutuq." }
+        ],
+        "ctaTitle": "Bizning yondashuvimiz sizga ma'qul keldimi?",
+        "ctaDesc": "Keling, brendingizni bepul tahlil qilib, uning kuchli va zaif tomonlarini aniqlaymiz. Bu siz uchun hech qanday majburiyat yuklamaydi.",
+        "ctaButton": "Brendimni bepul tahlil qiling"
     },
     "targetAudience": {
         "title": "Bu muammolar sizga tanishmi?",

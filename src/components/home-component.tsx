@@ -1,4 +1,3 @@
-
 'use client';
 
 import type { FC, ReactNode } from 'react';
@@ -25,6 +24,7 @@ const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const Offer = dynamic(() => import('@/components/sections/offer'));
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Faq = dynamic(() => import('@/components/sections/faq'));
+const WhyUs = dynamic(() => import('@/components/sections/why-us'));
 
 
 const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
@@ -147,6 +147,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} /></AnimatedSection>
                 <AnimatedSection><Stats dictionary={dictionary.stats} /></AnimatedSection>
                 <AnimatedSection><TrustedBy lang={lang} dictionary={dictionary.trustedBy} /></AnimatedSection>
+                <AnimatedSection><WhyUs onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
                 <AnimatedSection><TargetAudience lang={lang} dictionary={dictionary.targetAudience} /></AnimatedSection>
                 <AnimatedSection><Offer onCTAClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.offer} /></AnimatedSection>
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} /></AnimatedSection>
