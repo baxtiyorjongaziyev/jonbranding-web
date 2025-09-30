@@ -30,6 +30,43 @@ const LiquidBlob = ({ className, style, transition }: { className: string, style
 
 const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
     const translations = dictionary;
+    const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
+
+    useEffect(() => {
+        const getOfferEndTime = () => {
+            let endTime = localStorage.getItem('offerEndTime');
+            if (!endTime || new Date().getTime() > parseInt(endTime)) {
+                endTime = (new Date().getTime() + 24 * 60 * 60 * 1000).toString();
+                localStorage.setItem('offerEndTime', endTime);
+            }
+            return parseInt(endTime);
+        };
+
+        const offerEndTime = getOfferEndTime();
+
+        const interval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = offerEndTime - now;
+
+            if (distance < 0) {
+                // Reset timer for a new 24h cycle
+                const newEndTime = (new Date().getTime() + 24 * 60 * 60 * 1000).toString();
+                localStorage.setItem('offerEndTime', newEndTime);
+                // The main logic will pick up the new time on the next interval
+                return;
+            }
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            setTimeLeft({ hours, minutes, seconds });
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const formatTime = (time: number) => time.toString().padStart(2, '0');
     
     if (!translations) return null;
 
@@ -71,6 +108,16 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
                     <h2 className="text-4xl sm:text-5xl font-extrabold mt-4 text-white">
                        {translations.title}
                     </h2>
+                     <div className="mt-6 flex justify-center items-center gap-4">
+                        <div className="text-center">
+                            <div className="font-bold text-lg text-gray-300">{translations.timerLabel}</div>
+                            <div className="flex gap-2 text-4xl font-mono font-bold text-accent tracking-widest">
+                                <span>{formatTime(timeLeft.hours)}</span>:
+                                <span>{formatTime(timeLeft.minutes)}</span>:
+                                <span>{formatTime(timeLeft.seconds)}</span>
+                            </div>
+                        </div>
+                    </div>
                     <p 
                         className="mt-6 text-lg text-gray-300"
                         dangerouslySetInnerHTML={{ __html: translations.description }}

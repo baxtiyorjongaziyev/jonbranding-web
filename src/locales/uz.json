@@ -224,7 +224,8 @@
     },
     "offer": {
         "subtitle": "Rad etib bo'lmas taklif",
-        "title": "Hozir buyurtma qiling — 0% xavf, 100% foyda",
+        "title": "24 soat ichida buyurtma bering: 0% xavf, 100% foyda",
+        "timerLabel": "Taklif tugashiga:",
         "description": "Bugun buyurtma berganlar uchun (cheklangan joylar!): <ul><li><strong>Boshlash bonusi:</strong> 1 soatlik strategik konsultatsiya — bepul</li><li><strong>Tez start kafolati:</strong> 48 soat ichida 1-konsepsiya / yo‘nalish taqdimoti</li><li><strong>Risk-free:</strong> “Yoqar-yoqmas” kafolati — birinchi taqdimot yoqmasa, **10 kun ichida 100% avansni qaytaramiz**</li><li><strong>Patent yordami:</strong> BEPUL patent auditi + topshirish jarayonini **biz boshqaramiz** (davlat boji alohida)</li><li><strong>Qo‘shimcha qiymat:</strong> Mini-brendbuk (rang + shrift qo‘llanma) **yoki** 1 yil domen band qilish — **bepul tanlov**</li><li><strong>Post-support:</strong> 30 kunlik texnik yordam (fayllar, formatlar, qo‘llash bo‘yicha)</li><li><strong>Narxni muzlatish:</strong> Bugungi narxni **30 kunga** qulflaymiz (hech qanday yashirin to‘lovlarsiz)</li></ul>",
         "button": "Bugun band qilish",
         "note": "1 daqiqalik forma, 10% avans bilan joyingizni band qiling."
