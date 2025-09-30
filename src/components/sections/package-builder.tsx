@@ -283,9 +283,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const serviceGroups = {
         tripwire: { titleKey: "tripwire", services: ['namingCheck', 'audit', 'consultation'] },
         strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'] },
-        naming: { titleKey: "naming", services: ['namingStart', 'namingPro', 'namingMax'], isTariff: true },
-        identity: { titleKey: "identity", services: ['logoStart', 'logoPro', 'logoMax'], isTariff: true },
-        addons: { titleKey: "addons", services: ['brandbook', 'packaging', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
+        naming: { titleKey: "naming", services: ['namingMax', 'namingPro', 'namingStart'], isTariff: true },
+        identity: { titleKey: "identity", services: ['logoMax', 'logoPro', 'logoStart'], isTariff: true },
+        addons: { titleKey: "addons", services: ['packaging', 'brandbook', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
         options: { titleKey: "options", services: ['urgency', 'nda'], gridCols: "lg:grid-cols-2" }
     };
 
