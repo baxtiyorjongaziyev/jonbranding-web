@@ -54,16 +54,13 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                     ? (isVip ? 'bg-background' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
                     : 'bg-white hover:border-gray-300 hover:shadow-sm',
                 isVip
-                    ? 'border-transparent bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-white shadow-2xl'
+                    ? 'border-amber-400 bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-white shadow-2xl'
                     : (isPremium ? 'border-primary/50' : 'border-gray-200'),
                 selected && isVip && 'ring-4 ring-amber-400/30'
             )}
         >
-             {isVip && !selected && (
-                <div className="absolute inset-0 z-0 btn-animated-border before:p-1" />
-             )}
              {isPremium && (
-                <div className="absolute -top-16 -right-16 w-48 h-48 bg-primary/20 rounded-full blur-3xl" />
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-primary/20 rounded-full blur-3xl z-0" />
              )}
             <div className='relative p-6 flex flex-col h-full z-10'>
                 <div className="text-center mb-4 -mt-2 min-h-[34px]">
@@ -86,7 +83,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                     <ul className="space-y-3">
                         {features?.map((feature: any, index: number) => (
                              <li key={index} className="flex items-start gap-3">
-                                <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                                <Check className={cn("w-5 h-5  flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
                                 <span className={cn("text-sm", isVip ? "text-gray-200" : "text-gray-700")}>{feature}</span>
                             </li>
                         ))}
@@ -526,4 +523,3 @@ export default PackageBuilder;
 
     
     
-

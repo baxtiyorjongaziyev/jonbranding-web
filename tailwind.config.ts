@@ -72,6 +72,7 @@ const config: Config = {
         'dark-blue': '#050583',
         'ocean-blue': '#00C9FD',
         'sky-blue': '#ADFFFE',
+        'blue-950': 'hsl(223, 89%, 10%)',
       },
       borderRadius: {
         lg: "var(--radius)",
