@@ -40,7 +40,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, features, recommended, timeline } = detail;
+    const { label, description, price, features, timeline } = detail;
 
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium');
@@ -51,19 +51,18 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
             className={cn(
                 "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
                 selected
-                    ? (isVip ? 'bg-background' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
+                    ? (isVip ? 'ring-4 ring-amber-400/30' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
                     : 'bg-white hover:border-gray-300 hover:shadow-sm',
                 isVip
                     ? 'border-amber-400 bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-white shadow-2xl'
-                    : (isPremium ? 'border-primary/50' : 'border-gray-200'),
-                selected && isVip && 'ring-4 ring-amber-400/30'
+                    : (isPremium ? 'border-primary/50' : 'border-gray-200')
             )}
         >
-             {isPremium && (
+             {isPremium && !selected && (
                 <div className="absolute -top-16 -right-16 w-48 h-48 bg-primary/20 rounded-full blur-3xl z-0" />
              )}
             <div className='relative p-6 flex flex-col h-full z-10'>
-                <div className="text-center mb-4 -mt-2 min-h-[34px]">
+                 <div className="text-center mb-4 -mt-2 min-h-[34px]">
                     {(isPremium || isVip) && (
                          <div className={cn(
                              "inline-flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
