@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -495,3 +494,5 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
+    
