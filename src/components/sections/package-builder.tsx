@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
+import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice, packageDiscountThreshold } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -52,10 +52,9 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                 "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
                 selected
                     ? (isVip ? 'border-amber-400 bg-gray-900 ring-4 ring-amber-400/30' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
-                    : 'bg-white hover:border-gray-300 hover:shadow-sm',
-                 isVip
-                    ? 'border-amber-400 bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-white shadow-2xl'
-                    : (isPremium ? 'border-primary/50' : 'border-gray-200')
+                    : (isVip ? 'bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 border-gray-700 hover:border-amber-400' : (isPremium ? 'bg-white border-primary/30 hover:border-primary' : 'bg-white border-gray-200 hover:border-gray-300')),
+                 isPremium && !isVip && "shadow-lg",
+                 isVip && "shadow-2xl"
             )}
         >
              {isPremium && !selected && (
