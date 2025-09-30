@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -121,7 +120,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, note } = detail;
+    const { label, description, price, note, features } = detail;
     const Icon = serviceIcons[id] || Sparkles;
 
     return (
@@ -133,16 +132,26 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
             )}
         >
             <div className='p-6 flex flex-col h-full'>
-                <div className="flex items-center gap-4 mb-4">
-                     <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
+                <div className="flex items-start gap-4 mb-4">
+                     <div className={cn("p-3 rounded-full flex-shrink-0", selected ? "bg-primary/10" : "bg-secondary")}>
                         <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
                     </div>
                     <div>
                          <h4 className="text-lg font-bold leading-tight text-dark-blue">{label}</h4>
+                         <p className="text-sm text-muted-foreground mt-1" dangerouslySetInnerHTML={{ __html: description }}></p>
                     </div>
                 </div>
-
-                <p className="text-sm text-muted-foreground mt-2 flex-grow" dangerouslySetInnerHTML={{ __html: description }}></p>
+                
+                <div className="mt-4 mb-6 flex-grow">
+                     <ul className="space-y-3">
+                        {features?.map((feature: any, index: number) => (
+                             <li key={index} className="flex items-start gap-3">
+                                <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                                <span className="text-sm text-gray-700">{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
                 
                 <div className="mt-auto pt-4">
                     <div className="text-3xl font-extrabold text-dark-blue my-4">
@@ -272,7 +281,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 .map(([key]) => key as keyof SelectedServices);
     
     const serviceGroups = {
-        tripwire: { titleKey: "tripwire", services: ['audit', 'namingCheck', 'consultation'] },
+        tripwire: { titleKey: "tripwire", services: ['namingCheck', 'audit', 'consultation'] },
         strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'] },
         naming: { titleKey: "naming", services: ['namingStart', 'namingPro', 'namingMax'], isTariff: true },
         identity: { titleKey: "identity", services: ['logoStart', 'logoPro', 'logoMax'], isTariff: true },
@@ -497,5 +506,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
-
-    
