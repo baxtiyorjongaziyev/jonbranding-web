@@ -13,7 +13,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-primary/90 btn-animated-border",
+          "bg-primary text-primary-foreground hover:bg-primary/90 btn-animated-border before:absolute before:inset-0 before:-translate-x-full before:animate-[shine_2s_infinite] before:border-t before:border-white/30 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
