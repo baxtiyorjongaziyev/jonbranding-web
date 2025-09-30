@@ -13,7 +13,7 @@ const uzServiceDetails = {
     strategy: { label: "Brend-strategiya va platforma", description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", price: convertToUzs(4700), note: null, features: ["Bozor va raqobatchilar tahlili", "Brend platformasi (missiya, qadriyatlar)", "Pozitsiyalash strategiyasi", "Brend arxitekturasi"] },
     commStrategy: { label: "Kommunikatsion strategiya", description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", price: convertToUzs(3900), note: null, features: ["Maqsadli auditoriya segmentatsiyasi", "Brend ovozi (Tone of Voice)", "Asosiy xabarlar (Key Messages)", "Kommunikatsiya kanallari rejasi"] },
     namingStandard: { label: "Naming Standard", description: "Kichik biznes uchun ideal.", price: 8200000, note: null, features: ["Kompaniya va soha qisqa o‘rganiladi", "Raqobatchilar umumiy ko‘rib chiqiladi", "Mijoz xohish-istaklari yig‘iladi", "3 ta nom varianti ishlab chiqiladi", "Domen va ijtimoiy tarmoqlarda bo‘shlik tekshiriladi", "Patent bo‘yicha 1 klass auditi qilinadi", "Har bir variant fonetik jihatdan tekshiriladi"], timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" },
-    namingPremium: { label: "Naming Premium", description: "O'rta va rivojlanayotgan biznes uchun.", price: convertToUzs(1000), note: null, features: ["Kompaniya va soha chuqurroq o‘rganiladi", "Raqobatchilar va bozor tahlili qilinadi", "10+ nom varianti ishlab chiqiladi", "Domen va ijtimoiy tarmoqlarda bo‘shlik tekshiriladi", "6 tilda semantik va fonetik tekshiruv (Ingliz, Rus, Turk, Ispan, Italyan, Fransuz)", "Patent bo‘yicha 2 klass auditi va huquqiy xulosa", "5 yilga domen band qilib beriladi", "Nom variantlari qisqa taqdimot shaklida ko‘rsatiladi"], recommended: true, timeline: "Birinchi konsepsiyalar 14–20 ish kuni ichida taqdim etiladi" },
+    namingPremium: { label: "Naming Premium", description: "O'rta va rivojlanayotgan biznes uchun.", price: 12700000, note: null, features: ["Kompaniya va soha chuqurroq o‘rganiladi", "Raqobatchilar va bozor tahlili qilinadi", "10+ nom varianti ishlab chiqiladi", "Domen va ijtimoiy tarmoqlarda bo‘shlik tekshiriladi", "6 tilda semantik va fonetik tekshiruv (Ingliz, Rus, Turk, Ispan, Italyan, Fransuz)", "Patent bo‘yicha 2 klass auditi va huquqiy xulosa", "5 yilga domen band qilib beriladi", "Nom variantlari qisqa taqdimot shaklida ko‘rsatiladi"], recommended: true, timeline: "Birinchi konsepsiyalar 14–20 ish kuni ichida taqdim etiladi" },
     namingVIP: { label: "Naming VIP", description: "Katta va xalqaro bozorga mo'ljallangan loyihalar uchun.", price: 17875000, note: null, features: ["Shaxsan Baxtiyorjon Gaziyev ishtiroki va nazorati", "Kompaniya, soha va auditoriya chuqur tahlil qilinadi", "Raqobatchilar va bozorning keng qamrovli tahlili qilinadi", "20+ keng konsepsiyali nom variantlari ishlab chiqiladi", "Domen va ijtimoiy tarmoqlarda bo‘shlik tekshiriladi", "6 tilda semantik + fonetik + huquqiy tekshiruv", "Patent tezlashtirilgan topshiruv (boj alohida)", "10 yilga domen band qilib beriladi", "Har bir nom uchun storytelling asosida tushuntirish beriladi", "Taqdimot professional prezentatsiya formatida qilinadi", "3 oygacha post-delivery huquqiy maslahat va kuzatuv"], timeline: "Birinchi konsepsiyalar 20–25 ish kuni ichida taqdim etiladi" },
     logoStandard: { label: "Logotip Standard", description: "Startaplar uchun tezkor yechim.", price: 9900000, note: null, features: ["Kompaniya brifi asosida 3 ta logotip konsepsiyasi ishlab chiqiladi", "Raqobatchilar logotiplari tahlil qilinadi", "5 ta touchpoint vizualizatsiya (vizitka, post, web, qadoq, signage)", "Logotip vektor fayllari (AI, EPS, PNG, JPG, PDF) taqdim qilinadi", "Har bir konsepsiya texnik va vizual standartlarga tekshiriladi"], timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" },
     logoPremium: { label: "Logo va firma uslubi", description: "O'z brendini jiddiy rivojlantirish niyatidagilar uchun.", price: 19552500, note: null, features: ["Kompaniya qadriyatlari va strategiyasiga mos 5 ta logotip konsepsiyasi ishlab chiqiladi", "Raqobatchilar va bozor vizual identifikatsiyasi o‘rganiladi", "15+ touchpoint vizualizatsiya (vizitka, qadoq, reklama, web, social post)", "Firma uslubi (asosiy ranglar, shriftlar, logotip qo‘llash qoidalari) ishlab chiqiladi", "10 ta Telegram stiker tayyorlanadi", "Taqdimot professional maketlar bilan ko‘rsatiladi"], recommended: true, timeline: "Birinchi konsepsiyalar 14–20 ish kuni ichida taqdim etiladi" },
@@ -33,7 +33,7 @@ const ruServiceDetails = {
     strategy: { label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.", price: convertToUzs(4700), note: null, features: ["Анализ рынка и конкурентов", "Платформа бренда (миссия, ценности)", "Стратегия позиционирования", "Архитектура бренда"] },
     commStrategy: { label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", price: convertToUzs(3900), note: null, features: ["Сегментация целевой аудитории", "Голос бренда (Tone of Voice)", "Ключевые сообщения (Key Messages)", "План коммуникационных каналов"] },
     namingStandard: { label: "Нейминг Standard", description: "Идеально для малого бизнеса.", price: 8200000, note: null, features: ["Краткое изучение компании и сферы", "Общий обзор конкурентов", "Сбор пожеланий клиента", "Разработка 3 вариантов имени", "Проверка доступности домена и в соцсетях", "Аудит 1 класса по патенту", "Фонетическая проверка каждого варианта"], timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
-    namingPremium: { label: "Нейминг Premium", description: "Для среднего и развивающегося бизнеса.", price: convertToUzs(1000), note: null, features: ["Более глубокое изучение компании и сферы", "Анализ конкурентов и рынка", "Разработка 10+ вариантов имени", "Проверка доступности домена и в соцсетях", "Семантическая и фонетическая проверка на 6 языках (Английский, Русский, Турецкий, Испанский, Итальянский, Французский)", "Аудит 2 классов по патенту и юридическое заключение", "Бронирование домена на 5 лет", "Варианты имени представляются в виде краткой презентации"], recommended: true, timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
+    namingPremium: { label: "Нейминг Premium", description: "Для среднего и развивающегося бизнеса.", price: 12700000, note: null, features: ["Более глубокое изучение компании и сферы", "Анализ конкурентов и рынка", "Разработка 10+ вариантов имени", "Проверка доступности домена и в соцсетях", "Семантическая и фонетическая проверка на 6 языках (Английский, Русский, Турецкий, Испанский, Итальянский, Французский)", "Аудит 2 классов по патенту и юридическое заключение", "Бронирование домена на 5 лет", "Варианты имени представляются в виде краткой презентации"], recommended: true, timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
     namingVIP: { label: "Нейминг VIP", description: "Для крупных и международных проектов.", price: 17875000, note: null, features: ["Личное участие и контроль Бахтиёржона Газиева", "Глубокий анализ компании, сферы и аудитории", "Всесторонний анализ конкурентов и рынка", "Разработка 20+ вариантов имени с широкими концепциями", "Проверка доступности домена и в соцсетях", "Семантическая + фонетическая + юридическая проверка на 6 языках", "Ускоренная подача патента (пошлина отдельно)", "Бронирование домена на 10 лет", "Объяснение каждого имени на основе сторителлинга", "Представление в формате профессиональной презентации", "До 3 месяцев юридических консультаций и сопровождения после сдачи"], timeline: "Первые концепции предоставляются в течение 20–25 рабочих дней" },
     logoStandard: { label: "Логотип Standard", description: "Быстрое решение для стартапов.", price: 9900000, note: null, features: ["Разработка 3 концепций логотипа на основе брифа компании", "Анализ логотипов конкурентов", "Визуализация на 5 носителях (визитка, пост, веб, упаковка, вывеска)", "Предоставление векторных файлов логотипа (AI, EPS, PNG, JPG, PDF)", "Проверка каждой концепции на технические и визуальные стандарты"], timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
     logoPremium: { label: "Логотип и фирменный стиль", description: "Для тех, кто серьезно настроен развивать свой бренд.", price: 19552500, note: null, features: ["Разработка 5 концепций логотипа в соответствии с ценностями и стратегией компании", "Изучение визуальной идентификации конкурентов и рынка", "15+ визуализаций на носителях (визитка, упаковка, реклама, веб, пост в соцсетях)", "Разработка фирменного стиля (основные цвета, шрифты, правила использования логотипа)", "Подготовка 10 Telegram-стикеров", "Представление с профессиональными макетами"], recommended: true, timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
@@ -53,7 +53,7 @@ const enServiceDetails = {
     strategy: { label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.", price: convertToUzs(4700), note: null, features: ["Market and competitor analysis", "Brand platform (mission, values)", "Positioning strategy", "Brand architecture"] },
     commStrategy: { label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", price: convertToUzs(3900), note: null, features: ["Target audience segmentation", "Brand Tone of Voice", "Key Messages", "Communication channels plan"] },
     namingStandard: { label: "Naming Standard", description: "Ideal for small businesses.", price: 8200000, note: null, features: ["Brief study of the company and industry", "General overview of competitors", "Collection of client's wishes", "Development of 3 name variants", "Domain and social media availability check", "Patent audit for 1 class", "Phonetic check of each variant"], timeline: "First concepts are presented within 7–10 working days" },
-    namingPremium: { label: "Naming Premium", description: "For medium and growing businesses.", price: convertToUzs(1000), note: null, features: ["Deeper study of the company and industry", "Analysis of competitors and market", "Development of 10+ name variants", "Domain and social media availability check", "Semantic and phonetic check in 6 languages (English, Russian, Turkish, Spanish, Italian, French)", "Patent audit for 2 classes and legal opinion", "5-year domain reservation", "Name variants are presented in a short presentation format"], recommended: true, timeline: "First concepts are presented within 14–20 working days" },
+    namingPremium: { label: "Naming Premium", description: "For medium and growing businesses.", price: 12700000, note: null, features: ["Deeper study of the company and industry", "Analysis of competitors and market", "Development of 10+ name variants", "Domain and social media availability check", "Semantic and phonetic check in 6 languages (English, Russian, Turkish, Spanish, Italian, French)", "Patent audit for 2 classes and legal opinion", "5-year domain reservation", "Name variants are presented in a short presentation format"], recommended: true, timeline: "First concepts are presented within 14–20 working days" },
     namingVIP: { label: "Naming VIP", description: "For large and international projects.", price: 17875000, note: null, features: ["Personal involvement and supervision by Bakhtiyorjon Gaziyev", "In-depth analysis of the company, industry, and audience", "Comprehensive analysis of competitors and market", "Development of 20+ name variants with broad concepts", "Domain and social media availability check", "Semantic + phonetic + legal check in 6 languages", "Expedited patent filing (fee separate)", "10-year domain reservation", "Storytelling-based explanation for each name", "Presentation in a professional format", "Up to 3 months of post-delivery legal advice and monitoring"], timeline: "First concepts are presented within 20–25 working days" },
     logoStandard: { label: "Logo Standard", description: "A quick solution for startups.", price: 9900000, note: null, features: ["Development of 3 logo concepts based on the company brief", "Analysis of competitors' logos", "5 touchpoint visualizations (business card, post, web, packaging, signage)", "Provision of logo vector files (AI, EPS, PNG, JPG, PDF)", "Check of each concept for technical and visual standards"], timeline: "First concepts are presented within 7–10 working days" },
     logoPremium: { label: "Logo & Corporate Identity", description: "For those serious about developing their brand.", price: 19552500, note: null, features: ["Development of 5 logo concepts matching the company's values and strategy", "Study of competitors' and market's visual identity", "15+ touchpoint visualizations (business card, packaging, advertising, web, social post)", "Development of corporate identity (main colors, fonts, logo usage rules)", "Creation of 10 Telegram stickers", "Presentation with professional mockups"], recommended: true, timeline: "First concepts are presented within 14–20 working days" },
@@ -167,31 +167,35 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     const { selectedServices, wantsUpfrontPayment } = selections;
     const sd = getServiceDetails(lang);
     
-    let basePrice = 0;
+    let nonVipBasePrice = 0;
+    let vipServicesPrice = 0;
     let mainServicesCount = 0;
     
-    const mainServices: (keyof SelectedServices)[] = ['namingPremium', 'namingVIP', 'logoPremium', 'logoVIP', 'packaging', 'strategy'];
+    const mainServices: (keyof SelectedServices)[] = ['namingPremium', 'logoPremium', 'packaging', 'strategy'];
+    const vipServices: (keyof SelectedServices)[] = ['namingVIP', 'logoVIP'];
     const percentageServices: (keyof SelectedServices)[] = ['urgency', 'nda'];
 
     for (const serviceKey in selectedServices) {
         const key = serviceKey as keyof SelectedServices;
-        if (
-            sd[key] && 
-            selectedServices[key] &&
-            !percentageServices.includes(key)
-        ) {
-            basePrice += sd[key].price;
-            if(mainServices.includes(key)) {
-                mainServicesCount++;
+        if (sd[key] && selectedServices[key]) {
+            const servicePrice = sd[key].price;
+            if (vipServices.includes(key)) {
+                vipServicesPrice += servicePrice;
+            } else if (!percentageServices.includes(key)) {
+                nonVipBasePrice += servicePrice;
+                if (mainServices.includes(key)) {
+                    mainServicesCount++;
+                }
             }
         }
     }
 
-    let priceAfterSurcharges = basePrice;
+    const totalBasePrice = nonVipBasePrice + vipServicesPrice;
+    let priceAfterSurcharges = totalBasePrice;
     const surcharges: { name: string, value: number }[] = [];
 
     if (selectedServices.urgency) {
-        const surchargeAmount = basePrice * urgencySurcharge;
+        const surchargeAmount = totalBasePrice * urgencySurcharge;
         priceAfterSurcharges += surchargeAmount;
         let surchargeName;
         if (lang === 'ru') surchargeName = 'Надбавка за срочность (+50%)';
@@ -201,7 +205,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     }
 
     if (selectedServices.nda) {
-        const surchargeAmount = basePrice * ndaSurcharge;
+        const surchargeAmount = totalBasePrice * ndaSurcharge;
         priceAfterSurcharges += surchargeAmount;
         let surchargeName;
         if (lang === 'ru') surchargeName = 'Надбавка за NDA (+25%)';
@@ -210,12 +214,15 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         surcharges.push({ name: surchargeName, value: surchargeAmount });
     }
     
-    let priceAfterDiscount = priceAfterSurcharges;
+    let finalPrice = vipServicesPrice > 0 ? vipServicesPrice + (priceAfterSurcharges - totalBasePrice) : priceAfterSurcharges;
+
     const discountsApplied: { name: string, value: number }[] = [];
     
+    // Apply package discount only on non-VIP services
+    let nonVipPriceAfterDiscount = nonVipBasePrice;
     if (mainServicesCount >= packageDiscountThreshold) {
-        const discountAmount = priceAfterSurcharges * packageDiscount;
-        priceAfterDiscount -= discountAmount;
+        const discountAmount = nonVipBasePrice * packageDiscount;
+        nonVipPriceAfterDiscount -= discountAmount;
         let discountName;
         if (lang === 'ru') discountName = 'Пакетная скидка (-20%)';
         else if (lang === 'en') discountName = 'Package Discount (-20%)';
@@ -223,17 +230,21 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         discountsApplied.push({ name: discountName, value: discountAmount });
     }
 
+    // Apply upfront discount on the sum of discounted non-VIP and all VIP services
+    let priceBeforeUpfrontDiscount = nonVipPriceAfterDiscount + vipServicesPrice + (priceAfterSurcharges - totalBasePrice);
+
     if (wantsUpfrontPayment) {
-        const discountAmount = priceAfterDiscount * upfrontDiscount;
-        priceAfterDiscount -= discountAmount;
+        const discountAmount = priceBeforeUpfrontDiscount * upfrontDiscount;
+        finalPrice = priceBeforeUpfrontDiscount - discountAmount;
         let discountName;
         if (lang === 'ru') discountName = 'За предоплату (-10%)';
         else if (lang === 'en') discountName = 'For upfront payment (-10%)';
         else discountName = 'Oldindan to\'lov uchun (-10%)';
         discountsApplied.push({ name: discountName, value: discountAmount });
+    } else {
+        finalPrice = priceBeforeUpfrontDiscount;
     }
     
-    const finalPrice = priceAfterDiscount;
     const savings = priceAfterSurcharges - finalPrice;
     
     let bonusDescription;
@@ -243,7 +254,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     const bonus = finalPrice > bonusThreshold ? bonusDescription : null;
 
     return {
-        base: basePrice,
+        base: totalBasePrice,
         final: finalPrice,
         discountApplied: discountsApplied,
         savings,
@@ -251,6 +262,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         surcharges,
     };
 }
+
 
 export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' = 'uz') => {
     const { selectedServices, wantsUpfrontPayment } = selections;
