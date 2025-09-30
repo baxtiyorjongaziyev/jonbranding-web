@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -31,12 +31,12 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     illustrations: Palette,
     urgency: Flame,
     nda: ShieldCheck,
-    namingStart: Type,
-    namingPro: Type,
-    namingMax: Type,
-    logoStart: Layers,
-    logoPro: Layers,
-    logoMax: Layers,
+    namingStandard: Type,
+    namingPremium: Type,
+    namingVIP: Type,
+    logoStandard: Layers,
+    logoPremium: Layers,
+    logoVIP: Layers,
     brandbook: BookMarked,
     packaging: Box,
 };
@@ -52,7 +52,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, features, recommended } = detail;
+    const { label, description, price, features, recommended, timeline } = detail;
 
     return (
         <Card 
@@ -83,6 +83,11 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                             </li>
                         ))}
                     </ul>
+                </div>
+
+                 <div className="text-center text-xs text-muted-foreground mb-4 flex items-center justify-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>{timeline}</span>
                 </div>
                 
                 <div className="mt-auto">
@@ -207,8 +212,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
         audit: false, namingCheck: false, consultation: false, strategy: false, commStrategy: false,
-        namingStart: false, namingPro: true, namingMax: false,
-        logoStart: false, logoPro: true, logoMax: false,
+        namingStandard: false, namingPremium: true, namingVIP: false,
+        logoStandard: false, logoPremium: true, logoVIP: false,
         brandbook: false, packaging: false,
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
@@ -247,8 +252,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     };
 
     const handleServiceToggle = (serviceId: keyof SelectedServices) => {
-        const namingGroup: (keyof SelectedServices)[] = ['namingStart', 'namingPro', 'namingMax'];
-        const logoGroup: (keyof SelectedServices)[] = ['logoStart', 'logoPro', 'logoMax'];
+        const namingGroup: (keyof SelectedServices)[] = ['namingStandard', 'namingPremium', 'namingVIP'];
+        const logoGroup: (keyof SelectedServices)[] = ['logoStandard', 'logoPremium', 'logoVIP'];
 
         if (namingGroup.includes(serviceId)) {
             handleTariffSelect(namingGroup, serviceId);
@@ -283,8 +288,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const serviceGroups = {
         tripwire: { titleKey: "tripwire", services: ['namingCheck', 'audit', 'consultation'] },
         strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'] },
-        naming: { titleKey: "naming", services: ['namingMax', 'namingPro', 'namingStart'], isTariff: true },
-        identity: { titleKey: "identity", services: ['logoMax', 'logoPro', 'logoStart'], isTariff: true },
+        naming: { titleKey: "naming", services: ['namingVIP', 'namingPremium', 'namingStandard'], isTariff: true },
+        identity: { titleKey: "identity", services: ['logoVIP', 'logoPremium', 'logoStandard'], isTariff: true },
         addons: { titleKey: "addons", services: ['packaging', 'brandbook', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
         options: { titleKey: "options", services: ['urgency', 'nda'], gridCols: "lg:grid-cols-2" }
     };
