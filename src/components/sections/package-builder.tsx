@@ -43,7 +43,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
     const { label, description, price, features, timeline } = detail;
 
     const isVip = id.toLowerCase().includes('vip');
-    const isPremium = id.toLowerCase().includes('premium');
+    const isPremium = id.toLowerCase().includes('premium') && !isVip;
     
     return (
         <Card 
@@ -51,9 +51,9 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
             className={cn(
                 "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
                 selected
-                    ? (isVip ? 'ring-4 ring-amber-400/30' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
+                    ? (isVip ? 'border-amber-400 bg-gray-900 ring-4 ring-amber-400/30' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
                     : 'bg-white hover:border-gray-300 hover:shadow-sm',
-                isVip
+                 isVip
                     ? 'border-amber-400 bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-white shadow-2xl'
                     : (isPremium ? 'border-primary/50' : 'border-gray-200')
             )}
@@ -219,7 +219,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const serviceDetails = getServiceDetails(lang as 'uz' | 'ru' | 'en');
     
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
-        audit: false, namingCheck: false, consultation: false, strategy: false, commStrategy: false,
+        audit: false, namingCheck: false, consultation: false, 
+        strategy: false, commStrategy: false,
         namingStandard: false, namingPremium: true, namingVIP: false,
         logoStandard: false, logoPremium: true, logoVIP: false,
         packaging: false,
@@ -519,6 +520,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
-
-    
-    
