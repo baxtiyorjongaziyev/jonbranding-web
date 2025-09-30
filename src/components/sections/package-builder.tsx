@@ -37,7 +37,6 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     logoStandard: Layers,
     logoPremium: Layers,
     logoVIP: Layers,
-    brandbook: BookMarked,
     packaging: Box,
 };
 
@@ -218,7 +217,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         audit: false, namingCheck: false, consultation: false, strategy: false, commStrategy: false,
         namingStandard: false, namingPremium: true, namingVIP: false,
         logoStandard: false, logoPremium: true, logoVIP: false,
-        brandbook: false, packaging: false,
+        packaging: false,
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
     const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
@@ -294,7 +293,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'] },
         naming: { titleKey: "naming", services: ['namingVIP', 'namingPremium', 'namingStandard'], isTariff: true },
         identity: { titleKey: "identity", services: ['logoVIP', 'logoPremium', 'logoStandard'], isTariff: true },
-        addons: { titleKey: "addons", services: ['packaging', 'brandbook', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
+        addons: { titleKey: "addons", services: ['packaging', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
         options: { titleKey: "options", services: ['urgency', 'nda'], gridCols: "lg:grid-cols-2" }
     };
 
@@ -515,3 +514,5 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
+    
