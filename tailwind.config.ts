@@ -89,8 +89,7 @@ const config: Config = {
           to: { height: "0" },
         },
         "shine": {
-          "from": { transform: "translateX(-100%) skewX(-25deg)" },
-          "to": { transform: "translateX(200%) skewX(-25deg)" },
+          "to": { transform: "translateX(100%)" },
         },
         "text-fade-in": {
           from: { opacity: "0", transform: "translateY(10px)" },
@@ -112,7 +111,7 @@ const config: Config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "shine": "shine 2s infinite",
+        "shine": "shine 1s ease-in-out",
         "text-fade-in": "text-fade-in 0.8s ease-in-out",
         "text-fade-out": "text-fade-out 0.8s ease-in-out",
         "marquee-up": "marquee-up 30s linear infinite",
