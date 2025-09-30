@@ -79,7 +79,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
   return (
     <html lang={lang} suppressHydrationWarning className={`${poppins.variable}`}>
       <head>
-        <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3ctext x='10' y='80' font-family='Poppins, sans-serif' font-weight='700' font-size='80' fill='black'%3eJ%3c/text%3e%3ccircle cx='80' cy='80' r='10' fill='%233B82F6'/%3e%3c/svg%3e" sizes="any" />
+        <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3ctext x='5' y='85' font-family='Poppins, sans-serif' font-weight='900' font-size='85' fill='black'%3eJ%3c/text%3e%3ccircle cx='75' cy='80' r='10' fill='%230060FF'/%3e%3c/svg%3e" sizes="any" />
         <Script
           id="gtm-script"
           strategy="afterInteractive"
