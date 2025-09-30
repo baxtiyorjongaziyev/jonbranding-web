@@ -34,10 +34,10 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
       <ServiceSections lang={lang} />
       <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
-      <Testimonials lang={lang} dictionary={dictionary.testimonials} />
-      <Comparison onCtaClick={handleOpenModal} lang={lang} />
       <Offer onCTAClick={handleOpenServiceModal} lang={lang} dictionary={dictionary.offer} />
       <QueueStatus onCtaClick={handleOpenModal} />
+      <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+      <Comparison onCtaClick={handleOpenModal} lang={lang} />
       <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
     </>
   );
