@@ -110,13 +110,12 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
                 </AnimatePresence>
             </div>
             <div className="relative container mx-auto px-4 z-10">
-                <div className="text-center max-w-3xl mx-auto">
+                <div className="text-center max-w-4xl mx-auto">
                     <div className="flex justify-center items-center gap-2">
                         <Sparkles className="w-6 h-6 text-accent" />
                         <p className="font-bold text-accent uppercase tracking-widest">{translations.subtitle}</p>
                     </div>
-                    <h2 className="text-4xl sm:text-5xl font-extrabold mt-4 text-white">
-                       {translations.title}
+                    <h2 className="text-4xl sm:text-5xl font-extrabold mt-4 text-white" dangerouslySetInnerHTML={{ __html: translations.title }}>
                     </h2>
                      <div className="mt-6 flex justify-center items-center gap-4">
                         <div className="text-center">
@@ -129,16 +128,16 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
                         </div>
                     </div>
 
-                    <div className="mt-8 space-y-4 max-w-2xl mx-auto">
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
                         {translations.description.map((item: {icon: string, text: string}, index: number) => {
                              const Icon = offerIcons[item.icon] || Sparkles;
                              return (
-                                 <div key={index} className="flex items-start text-left gap-4 p-3 bg-white/5 rounded-lg border border-white/10">
+                                 <div key={index} className="flex items-start text-left gap-4 p-3 bg-white/5 rounded-lg border border-white/10 h-full">
                                      <div className="flex-shrink-0 bg-accent/20 text-accent p-2 rounded-md mt-1">
                                         <Icon className="w-5 h-5" />
                                      </div>
                                      <p 
-                                        className="text-gray-300"
+                                        className="text-gray-300 text-sm"
                                         dangerouslySetInnerHTML={{ __html: item.text }}
                                     ></p>
                                  </div>
