@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -25,8 +26,6 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     audit: Search, namingCheck: ClipboardSignature, consultation: Info,
     strategy: BrainCircuit, commStrategy: Megaphone, smm: PenTool,
     merch: Shirt, illustrations: Palette, urgency: Flame, nda: ShieldCheck,
-    namingStandard: Type, namingPremium: Type, namingVIP: Type,
-    logoStandard: Layers, logoPremium: Layers, logoVIP: Layers,
     packaging: Box,
 };
 
@@ -50,7 +49,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
         <Card 
             onClick={onSelect}
             className={cn(
-                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
+                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer",
                 selected
                     ? (isVip ? 'bg-background' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
                     : 'bg-white hover:border-gray-300 hover:shadow-sm',
@@ -60,19 +59,23 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                 selected && isVip && 'ring-4 ring-amber-400/30'
             )}
         >
-             {(isPremium || isVip) && (
-                <div className={cn(
-                    "absolute -top-3 left-1/2 -translate-x-1/2 z-10 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
-                    isVip ? "bg-amber-400 text-black flex items-center gap-1.5" : "bg-primary text-primary-foreground"
-                )}>
-                    {isVip ? <><Crown className="w-4 h-4" /> VIP</> : dictionary.recommended}
-                </div>
-            )}
              {isVip && !selected && (
                 <div className="absolute inset-0 z-0 btn-animated-border before:p-1" />
              )}
             <div className='relative p-6 flex flex-col h-full z-10'>
-                <div className="text-center pt-2">
+                 {(isPremium || isVip) && (
+                    <div className={cn(
+                        "text-center mb-4 -mt-2"
+                    )}>
+                        <div className={cn(
+                             "inline-flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
+                             isVip ? "bg-amber-400 text-black" : "bg-primary text-primary-foreground"
+                        )}>
+                             {isVip ? <><Crown className="w-4 h-4" /> VIP</> : dictionary.recommended}
+                        </div>
+                    </div>
+                )}
+                <div className="text-center">
                     <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
                     <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
                     <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang)}</p>
