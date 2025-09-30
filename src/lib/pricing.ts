@@ -1,6 +1,3 @@
-
-
-
 const USD_TO_UZS_RATE = 12700;
 
 const convertToUzs = (usd: number) => {
@@ -307,3 +304,5 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
 
     return summary;
 }
+
+    
