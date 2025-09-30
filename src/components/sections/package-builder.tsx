@@ -52,7 +52,10 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, features, recommended, timeline } = detail;
+    const { label, description, price, features, recommended } = detail;
+    const timeline = features.slice(-1)[0];
+    const cardFeatures = features.slice(0, -1);
+
 
     return (
         <Card 
@@ -76,7 +79,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                 
                 <div className="mt-6 mb-8 flex-grow">
                     <ul className="space-y-3">
-                        {features?.map((feature: any, index: number) => (
+                        {cardFeatures?.map((feature: any, index: number) => (
                              <li key={index} className="flex items-start gap-3">
                                 <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                                 <span className="text-sm text-gray-700">{feature}</span>
@@ -84,11 +87,12 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                         ))}
                     </ul>
                 </div>
-
-                 <div className="text-center text-xs text-muted-foreground mb-4 flex items-center justify-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    <span>{timeline}</span>
-                </div>
+                {timeline && (
+                    <div className="text-center text-xs text-muted-foreground mb-4 flex items-center justify-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        <span>{timeline}</span>
+                    </div>
+                )}
                 
                 <div className="mt-auto">
                      <Button 
