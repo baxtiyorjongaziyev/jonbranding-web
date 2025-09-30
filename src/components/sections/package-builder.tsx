@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Trash2, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -21,10 +21,10 @@ interface PackageBuilderProps {
 }
 
 const serviceIcons: { [key: string]: React.ElementType } = {
-    audit: FileText,
+    audit: Search,
     namingCheck: ClipboardSignature,
     consultation: Info,
-    strategy: ClipboardList,
+    strategy: BrainCircuit,
     commStrategy: Megaphone,
     smm: PenTool,
     merch: Shirt,
@@ -127,38 +127,40 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
         <Card 
             onClick={onSelect}
             className={cn(
-                "relative group rounded-2xl cursor-pointer transition-all duration-300 h-full",
-                "bg-secondary text-foreground",
-                 selected ? 'bg-primary border-primary ring-4 ring-primary/20' : 'bg-background hover:bg-background/80 hover:shadow-md'
+                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer",
+                selected ? 'border-primary ring-4 ring-primary/20 bg-primary/5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
             )}
         >
-            <div className={cn('relative rounded-[15px] h-full p-6 flex flex-col', selected ? 'bg-primary/5' : 'bg-background')}>
+            <div className='p-6 flex flex-col h-full'>
                 <div className="flex items-center gap-4 mb-4">
-                    <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
+                     <div className={cn("p-3 rounded-full", selected ? "bg-primary/10" : "bg-secondary")}>
                         <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
                     </div>
+                    <div>
+                         <h4 className="text-lg font-bold leading-tight text-dark-blue">{label}</h4>
+                    </div>
                 </div>
-                <h4 className="text-xl font-bold leading-tight">{label}</h4>
-                <p className="text-sm text-muted-foreground mt-2 min-h-[60px]" dangerouslySetInnerHTML={{ __html: description }}></p>
+
+                <p className="text-sm text-muted-foreground mt-2 flex-grow" dangerouslySetInnerHTML={{ __html: description }}></p>
                 
                 <div className="mt-auto pt-4">
-                    <div className="my-2 min-h-[40px] flex items-baseline justify-start">
-                        {price > 0 || note ? (
-                            <span className="text-3xl font-bold whitespace-nowrap">
+                    <div className="text-3xl font-extrabold text-dark-blue my-4">
+                         {price > 0 || note ? (
+                            <span>
                                 {note ? note : formatPrice(price, lang)}
                             </span>
                         ) : (
-                            <span className="text-xl font-bold whitespace-nowrap">{dictionary.agreed_price}</span>
+                            <span className="text-xl">{dictionary.agreed_price}</span>
                         )}
                     </div>
-                    <Button 
+                     <Button 
                         className={cn(
-                            "w-full text-base py-3 h-auto transition-colors duration-300",
+                            "w-full text-base py-3 h-auto transition-all duration-300",
                             selected 
-                                ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg" 
+                                ? "shadow-lg" 
                                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                         )}
-                        variant="secondary"
+                        variant={selected ? 'default' : 'secondary'}
                         tabIndex={-1}
                     >
                         {selected ? (
