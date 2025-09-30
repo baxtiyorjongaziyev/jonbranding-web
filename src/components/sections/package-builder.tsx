@@ -49,7 +49,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
         <Card 
             onClick={onSelect}
             className={cn(
-                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer",
+                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
                 selected
                     ? (isVip ? 'bg-background' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
                     : 'bg-white hover:border-gray-300 hover:shadow-sm',
@@ -62,19 +62,20 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
              {isVip && !selected && (
                 <div className="absolute inset-0 z-0 btn-animated-border before:p-1" />
              )}
+             {isPremium && (
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-primary/20 rounded-full blur-3xl" />
+             )}
             <div className='relative p-6 flex flex-col h-full z-10'>
-                 {(isPremium || isVip) && (
-                    <div className={cn(
-                        "text-center mb-4 -mt-2"
-                    )}>
-                        <div className={cn(
+                <div className="text-center mb-4 -mt-2 min-h-[34px]">
+                    {(isPremium || isVip) && (
+                         <div className={cn(
                              "inline-flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
                              isVip ? "bg-amber-400 text-black" : "bg-primary text-primary-foreground"
                         )}>
                              {isVip ? <><Crown className="w-4 h-4" /> VIP</> : dictionary.recommended}
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
                 <div className="text-center">
                     <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
                     <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
@@ -297,8 +298,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 .map(([key]) => key as keyof SelectedServices);
     
     const serviceGroups = {
-        tripwire: { titleKey: "tripwire", services: ['namingCheck', 'audit', 'consultation'] },
-        strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'] },
+        tripwire: { titleKey: "tripwire", services: ['namingCheck', 'audit', 'consultation'], gridCols: "lg:grid-cols-3" },
+        strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'], gridCols: "lg:grid-cols-2" },
         naming: { titleKey: "naming", services: ['namingVIP', 'namingPremium', 'namingStandard'], isTariff: true },
         identity: { titleKey: "identity", services: ['logoVIP', 'logoPremium', 'logoStandard'], isTariff: true },
         addons: { titleKey: "addons", services: ['packaging', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
@@ -525,3 +526,4 @@ export default PackageBuilder;
 
     
     
+
