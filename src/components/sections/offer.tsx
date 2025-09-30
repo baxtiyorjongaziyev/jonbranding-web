@@ -118,13 +118,13 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
                             </div>
                         </div>
                     </div>
-                    <p 
-                        className="mt-6 text-lg text-gray-300"
+                    <div 
+                        className="mt-6 text-lg text-gray-300 prose prose-invert prose-ul:list-disc prose-li:my-1 prose-strong:text-white"
                         dangerouslySetInnerHTML={{ __html: translations.description }}
                     >
-                    </p>
+                    </div>
                     
-                    <Button id="offer-cta" size="lg" className="mt-10 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
+                    <Button id="offer-cta" size="lg" onClick={onCTAClick} className="mt-10 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
                        {translations.button}
                     </Button>
                     <p className="mt-3 text-xs text-gray-400">{translations.note}</p>
