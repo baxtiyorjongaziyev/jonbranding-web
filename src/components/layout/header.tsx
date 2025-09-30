@@ -5,7 +5,7 @@ import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu, Phone, Send, Languages } from 'lucide-react';
+import { Menu, Phone, Send, Languages, ChevronsUpDown } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { ScrollArea } from '../ui/scroll-area';
 import LanguageSwitcher from '../language-switcher';
@@ -91,60 +91,6 @@ const ListItem = React.forwardRef<
   );
 });
 ListItem.displayName = "ListItem"
-
-const ExpandingButton: FC<{
-  icon: React.ReactNode;
-  label: string;
-  href?: string;
-  onClick?: () => void;
-  className?: string;
-}> = ({ icon, label, href, onClick, className }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const Comp = href ? 'a' : 'button';
-  const motionProps = {
-    initial: { width: '2.5rem' },
-    animate: { width: isHovered ? 'auto' : '2.5rem' },
-    transition: { type: 'spring', stiffness: 400, damping: 20 },
-  };
-
-  return (
-    <motion.div
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      className="relative"
-    >
-      <Comp
-        href={href}
-        onClick={onClick}
-        target={href ? "_blank" : undefined}
-        rel={href ? "noopener noreferrer" : undefined}
-        className={cn(
-          "flex items-center justify-center h-10 px-3 bg-secondary rounded-full text-foreground font-semibold overflow-hidden",
-          className
-        )}
-      >
-        <motion.div {...motionProps} className="flex items-center">
-          <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center">
-            {icon}
-          </div>
-          <AnimatePresence>
-            {isHovered && (
-              <motion.span
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.2, delay: 0.1 }}
-                className="whitespace-nowrap pr-2"
-              >
-                {label}
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </Comp>
-    </motion.div>
-  );
-};
 
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
@@ -261,18 +207,18 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div className="hidden items-center space-x-2 lg:flex">
           <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
 
-          <ExpandingButton
-            icon={<Phone />}
-            label="+998 33 645 00 97"
-            href="tel:+998336450097"
-            className={cn(scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}
-          />
-          <ExpandingButton
-            icon={<Send />}
-            label="Telegram"
-            href="https://t.me/baxtiyorjon_gaziyev"
-            className={cn(scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}
-          />
+          <Button asChild size="icon" variant="ghost" className={cn("rounded-full", scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}>
+            <a href="tel:+998336450097">
+                <Phone />
+                <span className="sr-only">{dictionary.contact_by_phone}</span>
+            </a>
+          </Button>
+          <Button asChild size="icon" variant="ghost" className={cn("rounded-full", scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}>
+            <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
+                <Send />
+                <span className="sr-only">{dictionary.contact_by_telegram}</span>
+            </a>
+          </Button>
           <Button 
             onClick={handleContactClick} 
             className="shadow-ocean"
@@ -281,6 +227,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           </Button>
         </div>
         <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
           <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className={cn("text-foreground border-border/50", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
@@ -312,32 +259,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                         {item.label}
                     </Link>
                     ))}
-                    <div className="border-t pt-6 mt-4 space-y-4">
-                        <div className="flex items-center gap-2 text-xl font-medium text-foreground">
-                            <Languages size={20} />
-                            <span>{dictionary.switch_lang}</span>
-                        </div>
-                        <div className="pl-4 space-y-2">
-                             {locales.map((locale) => {
-                                const Icon = localeIcons[locale];
-                                return (
-                                <Button
-                                    key={locale}
-                                    variant="ghost"
-                                    role="menuitem"
-                                    className={cn(
-                                        "w-full justify-start gap-3 text-lg font-normal text-muted-foreground hover:text-accent",
-                                        lang === locale && 'font-bold text-accent bg-accent/10'
-                                    )}
-                                    onClick={() => handleLanguageChange(locale)}
-                                >
-                                    <Icon className="w-6 h-auto" />
-                                    {localeNames[locale]}
-                                </Button>
-                                );
-                            })}
-                        </div>
-                    </div>
                     <div className="border-t pt-6 mt-4 space-y-4">
                         <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
                         <Phone size={20} />

@@ -10,6 +10,7 @@ import type { Locale } from '@/lib/i18n/locale';
 import { UzFlagIcon } from './icons/uz-flag';
 import { RuFlagIcon } from './icons/ru-flag';
 import { GbFlagIcon } from './icons/gb-flag';
+import { ChevronsUpDown } from 'lucide-react';
 
 const localeIcons: Record<Locale, React.FC<{ className?: string }>> = {
   uz: UzFlagIcon,
@@ -50,34 +51,31 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <div onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-            <Button
+          <Button
             variant="ghost"
             role="combobox"
             aria-expanded={open}
-            aria-haspopup="menu"
             className={cn(
-                "w-auto justify-start gap-2 border-0 focus-visible:ring-0 focus-visible:ring-offset-0",
-                scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10"
-                )}
-            >
+                "w-auto justify-start gap-2 font-semibold",
+                scrolled ? "bg-white/20 hover:bg-white/30 text-foreground" : "bg-black/5 hover:bg-black/10 text-foreground"
+            )}
+          >
             <CurrentLangIcon />
             <span className="hidden sm:inline">{localeNames[lang]}</span>
-            </Button>
-        </div>
+            <ChevronsUpDown className="ml-1 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-1 border-0" role="menu" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <PopoverContent className="w-auto p-1 border-border/20 bg-background/80 backdrop-blur-md">
         <div className="flex flex-col">
           {locales.map((locale) => {
-            if (locale === lang) return null; // Don't show current language
             const Icon = localeIcons[locale];
             return (
               <Button
                   key={locale}
                   variant="ghost"
-                  role="menuitem"
                   className={cn(
-                  "justify-start gap-2 font-normal border-0 hover:bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
+                    "justify-start gap-2 font-normal",
+                    lang === locale ? "bg-accent/80 text-accent-foreground" : "hover:bg-secondary"
                   )}
                   onClick={() => handleLanguageChange(locale)}
               >
