@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, FC } from 'react';
@@ -8,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -21,22 +22,11 @@ interface PackageBuilderProps {
 }
 
 const serviceIcons: { [key: string]: React.ElementType } = {
-    audit: Search,
-    namingCheck: ClipboardSignature,
-    consultation: Info,
-    strategy: BrainCircuit,
-    commStrategy: Megaphone,
-    smm: PenTool,
-    merch: Shirt,
-    illustrations: Palette,
-    urgency: Flame,
-    nda: ShieldCheck,
-    namingStandard: Type,
-    namingPremium: Type,
-    namingVIP: Type,
-    logoStandard: Layers,
-    logoPremium: Layers,
-    logoVIP: Layers,
+    audit: Search, namingCheck: ClipboardSignature, consultation: Info,
+    strategy: BrainCircuit, commStrategy: Megaphone, smm: PenTool,
+    merch: Shirt, illustrations: Palette, urgency: Flame, nda: ShieldCheck,
+    namingStandard: Type, namingPremium: Type, namingVIP: Type,
+    logoStandard: Layers, logoPremium: Layers, logoVIP: Layers,
     packaging: Box,
 };
 
@@ -51,43 +41,55 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, features, recommended } = detail;
-    const timeline = features.slice(-1)[0];
-    const cardFeatures = features.slice(0, -1);
+    const { label, description, price, features, recommended, timeline } = detail;
 
-
+    const isVip = id.toLowerCase().includes('vip');
+    const isPremium = id.toLowerCase().includes('premium');
+    
     return (
         <Card 
             onClick={onSelect}
             className={cn(
-                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer",
-                selected ? 'border-primary ring-4 ring-primary/20 bg-primary/5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
+                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
+                selected
+                    ? (isVip ? 'bg-background' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
+                    : 'bg-white hover:border-gray-300 hover:shadow-sm',
+                isVip
+                    ? 'border-transparent bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-white shadow-2xl'
+                    : (isPremium ? 'border-primary/50' : 'border-gray-200'),
+                selected && isVip && 'ring-4 ring-amber-400/30'
             )}
         >
-             {recommended && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                    <div className="bg-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">{dictionary.recommended}</div>
+             {(isPremium || isVip) && (
+                <div className={cn(
+                    "absolute -top-3 left-1/2 -translate-x-1/2 z-10 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
+                    isVip ? "bg-amber-400 text-black flex items-center gap-1.5" : "bg-primary text-primary-foreground"
+                )}>
+                    {isVip ? <><Crown className="w-4 h-4" /> VIP</> : dictionary.recommended}
                 </div>
             )}
-            <div className='p-6 flex flex-col h-full'>
+             {isVip && !selected && (
+                <div className="absolute inset-0 z-0 btn-animated-border before:p-1" />
+             )}
+            <div className='relative p-6 flex flex-col h-full z-10'>
                 <div className="text-center pt-2">
-                    <h3 className="font-bold text-xl text-dark-blue">{label}</h3>
-                    <p className="text-sm text-muted-foreground mt-1 h-10">{description}</p>
-                    <p className="text-4xl font-extrabold text-dark-blue mt-4">{formatPrice(price, lang)}</p>
+                    <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
+                    <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
+                    <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang)}</p>
                 </div>
                 
                 <div className="mt-6 mb-8 flex-grow">
                     <ul className="space-y-3">
-                        {cardFeatures?.map((feature: any, index: number) => (
+                        {features?.map((feature: any, index: number) => (
                              <li key={index} className="flex items-start gap-3">
-                                <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                                <span className="text-sm text-gray-700">{feature}</span>
+                                <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                                <span className={cn("text-sm", isVip ? "text-gray-200" : "text-gray-700")}>{feature}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
                 {timeline && (
-                    <div className="text-center text-xs text-muted-foreground mb-4 flex items-center justify-center gap-2">
+                    <div className={cn("text-center text-xs mb-4 flex items-center justify-center gap-2", isVip ? "text-gray-400" : "text-muted-foreground")}>
                         <Clock className="w-4 h-4" />
                         <span>{timeline}</span>
                     </div>
@@ -100,9 +102,10 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                             selected 
                                 ? "shadow-lg" 
                                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-                            recommended && !selected && "bg-primary/10 text-primary hover:bg-primary/20"
+                             isVip && !selected && "bg-white/10 hover:bg-white/20 text-white",
+                             isVip && selected && "bg-amber-400 hover:bg-amber-500 text-black"
                         )}
-                        variant={selected ? 'default' : 'secondary'}
+                        variant={selected ? (isVip ? 'default' : 'default') : 'secondary'}
                         tabIndex={-1}
                     >
                          {selected ? (
@@ -150,16 +153,18 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
                     </div>
                 </div>
                 
-                <div className="mt-4 mb-6 flex-grow">
-                     <ul className="space-y-3">
-                        {features?.map((feature: any, index: number) => (
-                             <li key={index} className="flex items-start gap-3">
-                                <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                                <span className="text-sm text-gray-700">{feature}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                 {features && features.length > 0 && (
+                     <div className="mt-4 mb-6 flex-grow">
+                         <ul className="space-y-3">
+                            {features?.map((feature: any, index: number) => (
+                                 <li key={index} className="flex items-start gap-3">
+                                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                                    <span className="text-sm text-gray-700">{feature}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
                 
                 <div className="mt-auto pt-4">
                     <div className="text-3xl font-extrabold text-dark-blue my-4">
@@ -515,4 +520,5 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 
 export default PackageBuilder;
 
+    
     
