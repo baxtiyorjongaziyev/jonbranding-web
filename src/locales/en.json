@@ -587,7 +587,7 @@
                 "options": "Special Conditions"
             },
             "discount_alert_title": "Package Discount!",
-            "discount_alert_desc": "Choose <strong>3 or more</strong> services from this section and get a <strong>-20% discount</strong> on the total amount!",
+            "discount_alert_desc": "Choose <strong>2 or more</strong> services from this section and get a <strong>-20% discount</strong> on the total amount!",
             "your_package": "Your Package",
             "your_package_desc": "Select the services that suit you.",
             "selected_services_title": "Selected Services",
