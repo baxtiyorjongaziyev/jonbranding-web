@@ -223,11 +223,11 @@
         "solutionButton": "See the solution to all problems"
     },
     "offer": {
-        "subtitle": "Strategic Opportunity",
-        "title": "Holistic branding is not just a discount, it's a strategic advantage.",
-        "description": "Branding is a holistic system that cannot be divided into parts. By choosing <strong>3 or more main areas</strong> of our services at once, you not only <strong>get a guaranteed -20% discount</strong> on the total amount, but more importantly, you build a <strong>single, strong, and consistent foundation</strong> for your brand. This is a double benefit compared to premium agencies!",
-        "button": "Create my package",
-        "note": "*The discount will be calculated automatically after you build your package in the services section."
+        "subtitle": "Irresistible Offer",
+        "title": "Order now — 0% risk, 100% profit",
+        "description": "For those who order today (limited slots!): <ul><li><strong>Starting bonus:</strong> 1-hour strategic consultation — free</li><li><strong>Fast start guarantee:</strong> 1st concept/direction presentation within 48 hours</li><li><strong>Risk-free:</strong> “Like it or not” guarantee — 100% advance refund within 10 days if the first presentation is not liked</li><li><strong>Patent support:</strong> FREE patent audit + we manage the submission process (state fee is separate)</li><li><strong>Extra value:</strong> Mini-brandbook (color + font guide) OR 1-year domain reservation — free choice</li><li><strong>Post-support:</strong> 30-day technical support (files, formats, usage)</li><li><strong>Price freeze:</strong> Lock today's price for 30 days (no hidden fees)</li></ul>",
+        "button": "Book Today",
+        "note": "1-minute form, book your place with a 10% advance."
     },
     "beforeAfter": {
         "title": "Before and After",
