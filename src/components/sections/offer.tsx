@@ -3,16 +3,26 @@
 
 import { useState, useEffect, FC, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { Clock, PercentSquare, Sparkles } from 'lucide-react';
-import Link from 'next/link';
+import { Clock, PercentSquare, Sparkles, Rocket, ShieldCheck, FileCheck, Gift, LifeBuoy, BadgePercent } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import React from 'react';
 
 interface OfferProps {
   onCTAClick: () => void;
   lang: string;
   dictionary: any;
 }
+
+const offerIcons: { [key: string]: React.ElementType } = {
+    Clock,
+    Rocket,
+    ShieldCheck,
+    FileCheck,
+    Gift,
+    LifeBuoy,
+    BadgePercent
+};
 
 const LiquidBlob = ({ className, style, transition }: { className: string, style: React.CSSProperties, transition: object }) => (
     <motion.div
@@ -118,10 +128,22 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
                             </div>
                         </div>
                     </div>
-                    <div 
-                        className="mt-6 text-lg text-gray-300 prose prose-invert prose-ul:list-disc prose-li:my-1 prose-strong:text-white"
-                        dangerouslySetInnerHTML={{ __html: translations.description }}
-                    >
+
+                    <div className="mt-8 space-y-4 max-w-2xl mx-auto">
+                        {translations.description.map((item: {icon: string, text: string}, index: number) => {
+                             const Icon = offerIcons[item.icon] || Sparkles;
+                             return (
+                                 <div key={index} className="flex items-start text-left gap-4 p-3 bg-white/5 rounded-lg border border-white/10">
+                                     <div className="flex-shrink-0 bg-accent/20 text-accent p-2 rounded-md mt-1">
+                                        <Icon className="w-5 h-5" />
+                                     </div>
+                                     <p 
+                                        className="text-gray-300"
+                                        dangerouslySetInnerHTML={{ __html: item.text }}
+                                    ></p>
+                                 </div>
+                             )
+                        })}
                     </div>
                     
                     <Button id="offer-cta" size="lg" onClick={onCTAClick} className="mt-10 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
