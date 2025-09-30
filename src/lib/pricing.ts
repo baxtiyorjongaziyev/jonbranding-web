@@ -140,7 +140,7 @@ export const comparisonData = (lang: 'uz' | 'ru' | 'en' = 'uz') => {
 
 export type SelectedServices = Record<keyof ServiceDetailsType, boolean>;
 
-export const packageDiscountThreshold = 3;
+export const packageDiscountThreshold = 2;
 export const packageDiscount = 0.20; // 20%
 export const upfrontDiscount = 0.10; // 10%
 export const urgencySurcharge = 0.50;
@@ -297,3 +297,4 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
 
     return summary;
 }
+

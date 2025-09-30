@@ -587,7 +587,7 @@
                 "options": "Особые условия"
             },
             "discount_alert_title": "Пакетная скидка!",
-            "discount_alert_desc": "Выберите <strong>3 или более</strong> услуг из этого раздела и получите <strong>-20% скидку</strong> от общей суммы!",
+            "discount_alert_desc": "Выберите <strong>2 или более</strong> услуг из этого раздела и получите <strong>-20% скидку</strong> от общей суммы!",
             "your_package": "Ваш пакет",
             "your_package_desc": "Выберите подходящие вам услуги.",
             "selected_services_title": "Выбранные услуги",
