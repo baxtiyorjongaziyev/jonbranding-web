@@ -93,6 +93,47 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 
+const ExpandingButton = ({ href, target, icon, text, scrolled, dictionaryKey }: { href: string; target?: string; icon: React.ReactNode; text: string; scrolled: boolean, dictionaryKey: string }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    const buttonVariants = {
+        initial: { width: 40, transition: { type: "spring", stiffness: 300, damping: 20 } },
+        hover: { width: 120, transition: { type: "spring", stiffness: 300, damping: 20 } },
+    };
+
+    const textVariants = {
+        initial: { opacity: 0, x: -10, transition: { duration: 0.1 } },
+        hover: { opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.2 } },
+    };
+
+    return (
+        <motion.a
+            href={href}
+            target={target}
+            onHoverStart={() => setIsHovered(true)}
+            onHoverEnd={() => setIsHovered(false)}
+            initial="initial"
+            animate={isHovered ? "hover" : "initial"}
+            variants={buttonVariants}
+            className={cn(
+                "flex items-center justify-center h-10 rounded-full cursor-pointer overflow-hidden",
+                scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10"
+            )}
+        >
+            <div className="flex items-center justify-center gap-2 px-3 text-foreground">
+                {icon}
+                <motion.span
+                    variants={textVariants}
+                    className="text-sm font-medium whitespace-nowrap"
+                >
+                    {text}
+                </motion.span>
+            </div>
+        </motion.a>
+    );
+};
+
+
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
@@ -206,19 +247,24 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
         <div className="hidden items-center space-x-2 lg:flex">
           <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
+           
+            <ExpandingButton 
+              href="tel:+998336450097"
+              icon={<Phone />}
+              text={lang === 'ru' ? 'Телефон' : 'Telefon'}
+              scrolled={scrolled}
+              dictionaryKey="contact_by_phone"
+            />
+            
+            <ExpandingButton 
+              href="https://t.me/baxtiyorjon_gaziyev"
+              target="_blank"
+              icon={<Send />}
+              text="Telegram"
+              scrolled={scrolled}
+              dictionaryKey="contact_by_telegram"
+            />
 
-          <Button asChild size="icon" variant="ghost" className={cn("rounded-full", scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}>
-            <a href="tel:+998336450097">
-                <Phone />
-                <span className="sr-only">{dictionary.contact_by_phone}</span>
-            </a>
-          </Button>
-          <Button asChild size="icon" variant="ghost" className={cn("rounded-full", scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10")}>
-            <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
-                <Send />
-                <span className="sr-only">{dictionary.contact_by_telegram}</span>
-            </a>
-          </Button>
           <Button 
             onClick={handleContactClick} 
             className="shadow-ocean"
