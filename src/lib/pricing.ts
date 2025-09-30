@@ -1,3 +1,4 @@
+
 const USD_TO_UZS_RATE = 12700;
 
 const convertToUzs = (usd: number) => {
@@ -12,10 +13,10 @@ const uzServiceDetails = {
     consultation: { label: "1 soatlik konsultatsiya", description: "Brending bo'yicha har qanday savolingizga tezkor yo'l-yo'riq va professional maslahat.", price: convertToUzs(80), timeline: "1 soat", note: null, features: [] },
     strategy: { label: "Brend-strategiya va platforma", description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", price: convertToUzs(4700), timeline: "8 haftadan", note: null, features: [] },
     commStrategy: { label: "Kommunikatsion strategiya", description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", price: convertToUzs(3900), timeline: "8 haftadan", note: null, features: [] },
-    namingStart: { label: "Neyming Start", description: "Kichik biznes uchun ideal.", price: convertToUzs(550), timeline: "1-2 hafta", note: null, features: ["5-7 ta nom varianti", "Asosiy tekshiruv", "Domen tekshiruvi"] },
+    namingStart: { label: "Neyming Start", description: "Kichik biznes uchun ideal.", price: 8200000, timeline: "1-2 hafta", note: null, features: ["5-7 ta nom varianti", "Asosiy tekshiruv", "Domen tekshiruvi"] },
     namingPro: { label: "Neyming Pro", description: "O'rta va rivojlanayotgan biznes uchun.", price: convertToUzs(1000), timeline: "2-3 hafta", note: null, features: ["10-15 ta nom varianti", "Chuqurroq tahlil", "Domen va ijtimoiy tarmoqlar tekshiruvi", "Slogan (shior) konsepsiyasi"], recommended: true },
     namingMax: { label: "Neyming Max", description: "Katta va xalqaro bozorga mo'ljallangan loyihalar uchun.", price: convertToUzs(1600), timeline: "3-4 hafta", note: null, features: ["20+ nom varianti", "To'liq strategik neyming", "Xalqaro bazalarda tekshiruv", "Slogan (shior) ishlab chiqish", "Falsafiy ma'no"] },
-    logoStart: { label: "Logotip Start", description: "Startaplar uchun tezkor yechim.", price: convertToUzs(1000), timeline: "1-2 hafta", note: null, features: ["1 ta konsepsiya", "Asosiy ranglar va shriftlar", "2 ta o'zgartirish", "Vektor formatlar (SVG, AI)"] },
+    logoStart: { label: "Logotip Start", description: "Startaplar uchun tezkor yechim.", price: 9900000, timeline: "1-2 hafta", note: null, features: ["1 ta konsepsiya", "Asosiy ranglar va shriftlar", "2 ta o'zgartirish", "Vektor formatlar (SVG, AI)"] },
     logoPro: { label: "Logotip Pro", description: "O'z brendini jiddiy rivojlantirish niyatidagilar uchun.", price: convertToUzs(2000), timeline: "2-4 hafta", note: null, features: ["2 ta konsepsiya", "To'liq firma uslubi (rang, shrift)", "5 ta nositelda namoyish", "Brend-falsafasi", "Brendbuk Light versiya"], recommended: true },
     logoMax: { label: "To'liq dizayn-tizim", description: "<strong>Logotipni o'z ichiga oladi.</strong> Yirik brendlar uchun.", price: convertToUzs(3000), timeline: "4-6 hafta", note: null, features: ["3+ konsepsiya", "Kengaytirilgan firma uslubi", "Ikonikalar va piktogrammalar", "Brend patternlari", "To'liq Brendbuk"] },
     brandbook: { label: "Brendbuk va gaydlayn", description: "Firma uslubidan foydalanish bo'yicha qoidalar hujjati.", price: convertToUzs(1000), timeline: "1 haftadan", note: null, features: [] },
@@ -33,10 +34,10 @@ const ruServiceDetails = {
     consultation: { label: "1-часовая консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга.", price: convertToUzs(80), timeline: "1 час", note: null, features: [] },
     strategy: { label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.", price: convertToUzs(4700), timeline: "от 8 недель", note: null, features: [] },
     commStrategy: { label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", price: convertToUzs(3900), timeline: "от 8 недель", note: null, features: [] },
-    namingStart: { label: "Нейминг Старт", description: "Идеально для малого бизнеса.", price: convertToUzs(550), timeline: "1-2 недели", note: null, features: ["5-7 вариантов имени", "Базовая проверка", "Проверка домена"] },
+    namingStart: { label: "Нейминг Старт", description: "Идеально для малого бизнеса.", price: 8200000, timeline: "1-2 недели", note: null, features: ["5-7 вариантов имени", "Базовая проверка", "Проверка домена"] },
     namingPro: { label: "Нейминг Про", description: "Для среднего и развивающегося бизнеса.", price: convertToUzs(1000), timeline: "2-3 недели", note: null, features: ["10-15 вариантов имени", "Глубокий анализ", "Проверка доменов и соцсетей", "Концепция слогана"], recommended: true },
     namingMax: { label: "Нейминг Макс", description: "Для крупных и международных проектов.", price: convertToUzs(1600), timeline: "3-4 недели", note: null, features: ["20+ вариантов имени", "Полный стратегический нейминг", "Международная проверка", "Разработка слогана", "Философский смысл"] },
-    logoStart: { label: "Логотип Старт", description: "Быстрое решение для стартапов.", price: convertToUzs(1000), timeline: "1-2 недели", note: null, features: ["1 концепция", "Основные цвета и шрифты", "2 правки", "Векторные форматы (SVG, AI)"] },
+    logoStart: { label: "Логотип Старт", description: "Быстрое решение для стартапов.", price: 9900000, timeline: "1-2 недели", note: null, features: ["1 концепция", "Основные цвета и шрифты", "2 правки", "Векторные форматы (SVG, AI)"] },
     logoPro: { label: "Логотип Про", description: "Для тех, кто серьезно настроен развивать свой бренд.", price: convertToUzs(2000), timeline: "2-4 недели", note: null, features: ["2 концепции", "Полный фирменный стиль (цвет, шрифт)", "Демонстрация на 5 носителях", "Философия бренда", "Брендбук Light версия"], recommended: true },
     logoMax: { label: "Полная дизайн-система", description: "<strong>Включает логотип.</strong> Для крупных брендов.", price: convertToUzs(3000), timeline: "4-6 недель", note: null, features: ["3+ концепции", "Расширенный фирменный стиль", "Иконки и пиктограммы", "Фирменные паттерны", "Полный Брендбук"] },
     brandbook: { label: "Брендбук и гайдлайн", description: "Документ с правилами использования фирменного стиля.", price: convertToUzs(1000), timeline: "от 1 недели", note: null, features: [] },
@@ -54,10 +55,10 @@ const enServiceDetails = {
     consultation: { label: "1-hour consultation", description: "Quick guidance and professional advice on any branding question.", price: convertToUzs(80), timeline: "1 hour", note: null, features: [] },
     strategy: { label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.", price: convertToUzs(4700), timeline: "from 8 weeks", note: null, features: [] },
     commStrategy: { label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", price: convertToUzs(3900), timeline: "from 8 weeks", note: null, features: [] },
-    namingStart: { label: "Naming Start", description: "Ideal for small businesses.", price: convertToUzs(550), timeline: "1-2 weeks", note: null, features: ["5-7 name options", "Basic check", "Domain check"] },
+    namingStart: { label: "Naming Start", description: "Ideal for small businesses.", price: 8200000, timeline: "1-2 weeks", note: null, features: ["5-7 name options", "Basic check", "Domain check"] },
     namingPro: { label: "Naming Pro", description: "For medium and growing businesses.", price: convertToUzs(1000), timeline: "2-3 weeks", note: null, features: ["10-15 name options", "In-depth analysis", "Domain and social media check", "Slogan concept"], recommended: true },
     namingMax: { label: "Naming Max", description: "For large and international projects.", price: convertToUzs(1600), timeline: "3-4 weeks", note: null, features: ["20+ name options", "Full strategic naming", "International database check", "Slogan development", "Philosophical meaning"] },
-    logoStart: { label: "Logo Start", description: "A quick solution for startups.", price: convertToUzs(1000), timeline: "1-2 weeks", note: null, features: ["1 concept", "Basic colors and fonts", "2 revisions", "Vector formats (SVG, AI)"] },
+    logoStart: { label: "Logo Start", description: "A quick solution for startups.", price: 9900000, timeline: "1-2 weeks", note: null, features: ["1 concept", "Basic colors and fonts", "2 revisions", "Vector formats (SVG, AI)"] },
     logoPro: { label: "Logo Pro", description: "For those serious about developing their brand.", price: convertToUzs(2000), timeline: "2-4 weeks", note: null, features: ["2 concepts", "Full corporate identity (color, font)", "5 mockups", "Brand philosophy", "Brandbook Light version"], recommended: true },
     logoMax: { label: "Full Design System", description: "<strong>Includes logo.</strong> For major brands.", price: convertToUzs(3000), timeline: "4-6 weeks", note: null, features: ["3+ concepts", "Expanded corporate identity", "Icons and pictograms", "Brand patterns", "Full Brandbook"] },
     brandbook: { label: "Brandbook and Guideline", description: "A document with rules for using the corporate identity.", price: convertToUzs(1000), timeline: "from 1 week", note: null, features: [] },
@@ -304,5 +305,3 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
 
     return summary;
 }
-
-    
