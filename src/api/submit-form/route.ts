@@ -209,13 +209,20 @@ ${packageInfo}
         // Send to Telegram (don't wait for it to finish)
         const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
         const telegramPayload = { chat_id: chatId, text: telegramMessage };
-        fetch(telegramUrl, {
+        
+        const telegramResponse = await fetch(telegramUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(telegramPayload),
-        }).catch(e => {
-            console.error("Failed to send message to Telegram:", e);
         });
+
+        if (!telegramResponse.ok) {
+            const errorResult = await telegramResponse.json();
+            console.error("Telegram API Error:", errorResult);
+            // Don't throw, but return a client-friendly error
+            return NextResponse.json({ ok: false, error: `Telegramga yuborishda xatolik: ${errorResult.description || 'Noma\'lum xato'}` }, { status: telegramResponse.status });
+        }
+
 
         // Send to Meta Conversion API (don't wait for it to finish)
         sendMetaConversionEvent(body).catch(e => {
@@ -231,5 +238,3 @@ ${packageInfo}
         return NextResponse.json({ ok: false, error: "Serverda ichki xatolik yuz berdi. Iltimos, administratorga murojaat qiling." }, { status: 500 });
     }
 }
-
-    

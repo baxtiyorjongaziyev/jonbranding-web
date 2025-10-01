@@ -71,18 +71,19 @@ const sendLeadToTelegram = ai.defineTool(
     outputSchema: z.string(),
   },
   async input => {
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+    const threadId = '52'; // Bu topic IDsi, ixtiyoriy
+
+    if (!botToken || !chatId) {
+      console.error(
+        'Telegram bot token or chat ID is not set in environment variables.'
+      );
+      // Foydalanuvchiga bu haqida xabar berish muhim
+      return "Kechirasiz, hozirda menejer bilan bog'lanishda texnik nosozlik mavjud. Iltimos, saytdagi ariza formasini to'ldiring.";
+    }
+
     try {
-      const botToken = process.env.TELEGRAM_BOT_TOKEN;
-      const chatId = process.env.TELEGRAM_CHAT_ID;
-      const threadId = '52';
-
-      if (!botToken || !chatId) {
-        console.error(
-          'Telegram bot token or chat ID is not set in environment variables.'
-        );
-        return "Serverda Telegram sozlamalari mavjud emas. Foydalanuvchiga bu haqida xabar bering.";
-      }
-
       const message = `
 🤖 AI Assistant orqali YANGI SIFATLI LEAD!
 
@@ -115,16 +116,19 @@ ${input.notes}
       if (!response.ok) {
         const errorData = await response.json();
         console.error('Telegram API Error:', errorData);
-        return `Menejerga ma'lumot yuborishda xatolik yuz berdi: ${errorData.description}. Iltimos, buni foydalanuvchiga bildiring.`;
+        // Foydalanuvchiga texnik muammo haqida xabar berish
+        return `Menejerga ma'lumot yuborishda xatolik yuz berdi. Iltimos, administratorga xabar bering yoki saytdagi ariza formasini to'ldiring.`;
       }
 
       return "Ma'lumotlar menejerga muvaffaqiyatli yuborildi. Endi foydalanuvchiga tez orada u bilan bog'lanishlarini ayting.";
     } catch (error) {
-      console.error(error);
-      return 'Ichki xatolik yuz berdi.';
+      console.error('Internal error sending to Telegram:', error);
+      // Ichki xatolik yuz berganda ham foydalanuvchiga tushunarli javob qaytarish
+      return 'Kechirasiz, ichki tizim xatoligi sababli ma\'lumot yuborilmadi. Iltimos, keyinroq qayta urinib ko\'ring.';
     }
   }
 );
+
 
 export async function chatAssistant(
   input: AssistantInput
@@ -277,5 +281,3 @@ const assistantFlow = ai.defineFlow(
     };
   }
 );
-
-    
