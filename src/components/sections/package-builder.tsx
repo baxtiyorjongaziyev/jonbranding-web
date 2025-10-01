@@ -38,11 +38,7 @@ const introIcons: { [key: string]: React.ElementType } = {
 
 const KnobToggle = ({ isOn, onToggle, lang }: { isOn: boolean, onToggle: (value: boolean) => void, lang: 'uz' | 'ru' | 'en' }) => {
     const x = useMotionValue(isOn ? 28 : 0);
-    const background = useTransform(
-        x,
-        [0, 28],
-        ["hsl(var(--muted))", "hsl(var(--primary))"]
-    );
+    
     const label = isOn ? (lang === 'uz' ? 'Ha' : lang === 'ru' ? 'Да' : 'Yes') : (lang === 'uz' ? 'Yo\'q' : lang === 'ru' ? 'Нет' : 'No');
 
     useEffect(() => {
@@ -50,13 +46,15 @@ const KnobToggle = ({ isOn, onToggle, lang }: { isOn: boolean, onToggle: (value:
     }, [isOn, x]);
 
     return (
-        <motion.div 
-            style={{ background }} 
-            className="w-[60px] h-8 flex items-center p-1 rounded-full cursor-pointer"
+        <motion.div
+            className="w-[60px] h-8 flex items-center p-1 rounded-full cursor-pointer bg-white/10"
             onClick={() => onToggle(!isOn)}
         >
             <motion.div
-                className="w-6 h-6 bg-white rounded-full flex items-center justify-center text-primary"
+                className={cn(
+                    "w-6 h-6 rounded-full flex items-center justify-center",
+                    isOn ? "bg-primary text-white" : "bg-white text-primary"
+                )}
                 drag="x"
                 dragConstraints={{ left: 0, right: 28 }}
                 style={{ x }}
