@@ -4,6 +4,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -44,14 +45,41 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    
+    const slideInVariants = {
+        initial: { y: "100%" },
+        animate: { y: "0%" },
+    };
+
+    if (variant === 'default') {
+      return (
+        <Comp
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref}
+          {...props}
+        >
+          <motion.div 
+            className="absolute inset-0 bg-ocean-blue"
+            variants={slideInVariants}
+            initial="initial"
+            whileHover="animate"
+            transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
+          />
+          <span className="relative z-10">{children}</span>
+        </Comp>
+      );
+    }
+    
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+      </Comp>
     )
   }
 )
