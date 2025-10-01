@@ -93,44 +93,34 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 
-const ExpandingButton = ({ href, target, icon, text, scrolled }: { href: string; target?: string; icon: React.ReactNode; text: string; scrolled: boolean }) => {
-    const [isHovered, setIsHovered] = useState(false);
-
-    const buttonVariants = {
-        initial: { width: 40, transition: { type: "spring", stiffness: 300, damping: 20 } },
-        hover: { width: 120, transition: { type: "spring", stiffness: 300, damping: 20 } },
-    };
-
-    const textVariants = {
-        initial: { opacity: 0, x: -10, transition: { duration: 0.1 } },
-        hover: { opacity: 1, x: 0, transition: { delay: 0.1, duration: 0.2 } },
-    };
-
-    return (
-        <motion.a
-            href={href}
-            target={target}
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            initial="initial"
-            animate={isHovered ? "hover" : "initial"}
-            variants={buttonVariants}
-            className={cn(
-                "relative flex items-center justify-center h-10 rounded-full cursor-pointer overflow-hidden",
-                scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10"
-            )}
-        >
-            <div className="absolute left-3 text-foreground">
-              {icon}
-            </div>
-            <motion.span
-                variants={textVariants}
-                className="text-sm font-medium whitespace-nowrap pl-5 text-foreground"
-            >
-                {text}
-            </motion.span>
-        </motion.a>
-    );
+const GlassyButton = ({ href, target, icon }: { href: string; target?: string; icon: React.ReactNode; }) => {
+  return (
+    <motion.a
+      href={href}
+      target={target}
+      rel="noopener noreferrer"
+      whileHover="hover"
+      className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/50 text-foreground shadow-md backdrop-blur-sm transition-colors duration-300 hover:border-white/20 hover:bg-white/20"
+      aria-label={target === '_blank' ? 'Open in new tab' : undefined}
+    >
+      <motion.div
+        variants={{
+          hover: { scale: 1.4, opacity: 1 },
+        }}
+        initial={{ scale: 0, opacity: 0 }}
+        className="absolute inset-0 rounded-full bg-white/30"
+        style={{ originX: "50%", originY: "50%" }}
+      />
+      <motion.div
+        variants={{
+          hover: { scale: 1.2 },
+        }}
+        className="relative z-10"
+      >
+        {icon}
+      </motion.div>
+    </motion.a>
+  );
 };
 
 
@@ -248,19 +238,15 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div className="hidden items-center space-x-2 lg:flex">
           <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
            
-            <ExpandingButton 
+            <GlassyButton 
               href="tel:+998336450097"
-              icon={<Phone />}
-              text={lang === 'ru' ? 'Телефон' : 'Telefon'}
-              scrolled={scrolled}
+              icon={<Phone className="h-5 w-5" />}
             />
             
-            <ExpandingButton 
+            <GlassyButton 
               href="https://t.me/baxtiyorjon_gaziyev"
               target="_blank"
-              icon={<Send />}
-              text="Telegram"
-              scrolled={scrolled}
+              icon={<Send className="h-5 w-5" />}
             />
 
           <Button 
