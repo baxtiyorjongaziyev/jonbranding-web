@@ -4,7 +4,6 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils"
 
@@ -45,43 +44,14 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-    
-    const slideInVariants = {
-      initial: {
-        x: "-110%",
-        opacity: 0.8,
-      },
-      hover: {
-        x: "0%",
-        opacity: 1,
-      },
-    };
-
     return (
-      <motion.div
-        whileHover="hover"
-        initial="initial"
-        className="relative inline-block"
-      >
-        <Comp
-          className={cn(buttonVariants({ variant, size, className }))}
-          ref={ref}
-          {...props}
-        >
-           {variant === "default" && (
-            <motion.span
-              variants={slideInVariants}
-              transition={{ ease: "easeInOut", duration: 0.4 }}
-              className="absolute inset-0 bg-dark-blue z-0"
-            />
-          )}
-          <span className="relative z-10">
-            {children}
-          </span>
-        </Comp>
-      </motion.div>
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
     )
   }
 )
