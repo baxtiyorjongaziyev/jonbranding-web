@@ -114,7 +114,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                     <Sparkles className="w-6 h-6 text-accent" />
                     <p className="font-bold text-accent uppercase tracking-widest">{translations.subtitle}</p>
                   </div>
-                  <CardTitle className="text-3xl md:text-4xl font-extrabold">
+                  <CardTitle className="text-3xl md:text-4xl font-extrabold text-white">
                     {translations.title}
                   </CardTitle>
                  <CardDescription className="text-blue-200 mt-2 max-w-2xl mx-auto text-lg">
@@ -179,6 +179,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                     <Button
                       id="queue-cta"
                       size="lg"
+                      onClick={onCtaClick}
                       className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform text-lg animate-subtle-pulse px-6 sm:px-8 py-6"
                     >
                       {translations.ctaButton}
