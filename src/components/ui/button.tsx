@@ -4,11 +4,12 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 overflow-hidden group active:scale-[0.98]",
+  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 overflow-hidden group active:scale-[0.98]",
   {
     variants: {
       variant: {
@@ -46,14 +47,41 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    
+    const slideInVariants = {
+      initial: {
+        x: "-110%",
+        opacity: 0.8,
+      },
+      hover: {
+        x: "0%",
+        opacity: 1,
+      },
+    };
+
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
+      <motion.div
+        whileHover="hover"
+        initial="initial"
+        className="relative inline-block"
       >
-        {children}
-      </Comp>
+        <Comp
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref}
+          {...props}
+        >
+           {variant === "default" && (
+            <motion.span
+              variants={slideInVariants}
+              transition={{ ease: "easeInOut", duration: 0.4 }}
+              className="absolute inset-0 bg-dark-blue z-0"
+            />
+          )}
+          <span className="relative z-10">
+            {children}
+          </span>
+        </Comp>
+      </motion.div>
     )
   }
 )
