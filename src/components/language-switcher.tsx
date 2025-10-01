@@ -1,9 +1,15 @@
+
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { locales, localeNames, setLocaleCookie } from '@/lib/i18n/locale';
 import type { Locale } from '@/lib/i18n/locale';
@@ -11,6 +17,35 @@ import { UzFlagIcon } from './icons/uz-flag';
 import { RuFlagIcon } from './icons/ru-flag';
 import { GbFlagIcon } from './icons/gb-flag';
 import { ChevronsUpDown } from 'lucide-react';
+
+const useHover = () => {
+  const [open, setOpen] = useState(false);
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  const handleOpen = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    timeoutRef.current = setTimeout(() => {
+      setOpen(false);
+    }, 100); // 100ms delay to allow moving mouse from trigger to content
+  }, []);
+
+  const handleContentMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  };
+
+  return { open, handleOpen, handleClose, handleContentMouseEnter, setOpen };
+};
+
 
 const localeIcons: Record<Locale, React.FC<{ className?: string }>> = {
   uz: UzFlagIcon,
@@ -23,7 +58,7 @@ interface LanguageSwitcherProps {
 }
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
-  const [open, setOpen] = useState(false);
+  const { open, handleOpen, handleClose, handleContentMouseEnter, setOpen } = useHover();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -49,8 +84,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
   const CurrentLangIcon = localeIcons[lang];
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
             role="combobox"
@@ -59,34 +94,38 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
                 "w-auto justify-start gap-2 font-semibold",
                 scrolled ? "bg-white/20 hover:bg-white/30 text-foreground" : "bg-black/5 hover:bg-black/10 text-foreground"
             )}
+            onMouseEnter={handleOpen}
+            onMouseLeave={handleClose}
           >
             <CurrentLangIcon />
             <span className="hidden sm:inline">{localeNames[lang]}</span>
             <ChevronsUpDown className="ml-1 h-4 w-4 shrink-0 opacity-50" />
           </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-1 border-border/20 bg-background/80 backdrop-blur-md">
-        <div className="flex flex-col">
+      </DropdownMenuTrigger>
+      <DropdownMenuContent 
+        className="w-auto p-1 border-border/20 bg-background/80 backdrop-blur-md"
+        onMouseEnter={handleContentMouseEnter}
+        onMouseLeave={handleClose}
+        align="end"
+      >
           {locales.map((locale) => {
             const Icon = localeIcons[locale];
             return (
-              <Button
+              <DropdownMenuItem
                   key={locale}
-                  variant="ghost"
                   className={cn(
-                    "justify-start gap-2 font-normal",
+                    "justify-start gap-2 font-normal cursor-pointer",
                     lang === locale ? "bg-accent/80 text-accent-foreground" : "hover:bg-secondary"
                   )}
                   onClick={() => handleLanguageChange(locale)}
               >
                   <Icon />
                   {localeNames[locale]}
-              </Button>
+              </DropdownMenuItem>
             );
           })}
-        </div>
-      </PopoverContent>
-    </Popover>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
