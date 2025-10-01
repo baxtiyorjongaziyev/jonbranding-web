@@ -254,7 +254,6 @@ const assistantFlow = ai.defineFlow(
     const systemPrompt = input.lang === 'ru' ? systemPromptRu : systemPromptUz;
 
     const response = await ai.generate({
-      model: 'googleai/gemini-pro',
       system: systemPrompt,
       prompt: input.query,
       history,
