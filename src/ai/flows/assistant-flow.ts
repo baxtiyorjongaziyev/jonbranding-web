@@ -73,7 +73,6 @@ const sendLeadToTelegram = ai.defineTool(
   async input => {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
-    const threadId = '52'; // Bu topic IDsi, ixtiyoriy
 
     if (!botToken || !chatId) {
       console.error(
@@ -101,12 +100,12 @@ ${input.notes}
             `.trim();
 
       const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-      const payload: any = {chat_id: chatId, text: message, parse_mode: 'Markdown'};
+      const payload = {
+        chat_id: chatId, 
+        text: message, 
+        parse_mode: 'Markdown'
+      };
       
-      if (threadId) {
-        payload.message_thread_id = threadId;
-      }
-
       const response = await fetch(url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -117,7 +116,7 @@ ${input.notes}
         const errorData = await response.json();
         console.error('Telegram API Error:', errorData);
         // Foydalanuvchiga texnik muammo haqida xabar berish
-        return `Menejerga ma'lumot yuborishda xatolik yuz berdi. Iltimos, administratorga xabar bering yoki saytdagi ariza formasini to'ldiring.`;
+        return `Menejerga ma'lumot yuborishda xatolik yuz berdi: ${errorData.description}. Iltimos, administratorga xabar bering yoki saytdagi ariza formasini to'ldiring.`;
       }
 
       return "Ma'lumotlar menejerga muvaffaqiyatli yuborildi. Endi foydalanuvchiga tez orada u bilan bog'lanishlarini ayting.";
@@ -258,7 +257,6 @@ const assistantFlow = ai.defineFlow(
     const systemPrompt = input.lang === 'ru' ? systemPromptRu : systemPromptUz;
 
     const response = await ai.generate({
-      model: 'googleai/gemini-pro',
       system: systemPrompt,
       prompt: input.query,
       history,
@@ -281,3 +279,5 @@ const assistantFlow = ai.defineFlow(
     };
   }
 );
+
+    

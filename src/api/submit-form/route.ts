@@ -208,7 +208,11 @@ ${packageInfo}
         
         // Send to Telegram (don't wait for it to finish)
         const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-        const telegramPayload = { chat_id: chatId, text: telegramMessage };
+        const telegramPayload = { 
+            chat_id: chatId, 
+            text: telegramMessage,
+            parse_mode: 'Markdown'
+        };
         
         const telegramResponse = await fetch(telegramUrl, {
             method: 'POST',
@@ -238,3 +242,5 @@ ${packageInfo}
         return NextResponse.json({ ok: false, error: "Serverda ichki xatolik yuz berdi. Iltimos, administratorga murojaat qiling." }, { status: 500 });
     }
 }
+
+    
