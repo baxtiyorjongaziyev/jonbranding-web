@@ -250,7 +250,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <ExpandingButton 
               href="tel:+998336450097"
               icon={<Phone className="h-5 w-5" />}
-              text={dictionary.contact_by_phone}
+              text="+998336450097"
             />
             
             <ExpandingButton 
