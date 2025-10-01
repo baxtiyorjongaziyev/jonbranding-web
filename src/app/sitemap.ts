@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/xizmatlar/qadoq-dizayni',
     '/xizmatlar/patent-kalkulyatori',
     '/blog',
+    '/sitemap', // Added sitemap page
   ];
 
   const sitemapEntries = locales.flatMap((locale) =>

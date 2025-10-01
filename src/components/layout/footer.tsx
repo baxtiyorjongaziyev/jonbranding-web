@@ -26,6 +26,7 @@ type Dictionary = {
     service_prices: string;
     branding_test: string;
     blog: string;
+    sitemap: string; // Added sitemap
     all_rights_reserved: string;
     back_to_top: string;
     patent_calculator: string;
@@ -56,6 +57,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
       { href: `/${lang}/quiz`, label: dictionary.branding_test },
       { href: `/${lang}/blog`, label: dictionary.blog },
       { href: `/${lang}/xizmatlar/patent-kalkulyatori`, label: dictionary.patent_calculator },
+      { href: `/${lang}/sitemap`, label: dictionary.sitemap }, // Added sitemap link
   ];
 
   return (
