@@ -4,7 +4,6 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -14,7 +13,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-primary/90",
+          "bg-primary text-primary-foreground before:bg-ocean-blue before:absolute before:inset-0 before:-translate-y-full before:transition-transform before:duration-300 before:ease-in-out hover:before:translate-y-0",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -48,11 +47,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     
-    const slideInVariants = {
-        initial: { y: "100%" },
-        animate: { y: "0%" },
-    };
-
+    // For the default variant, we wrap children in a span to keep them above the pseudo-element
     if (variant === 'default') {
       return (
         <Comp
@@ -60,18 +55,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ref={ref}
           {...props}
         >
-          <motion.div 
-            className="absolute inset-0 bg-ocean-blue"
-            variants={slideInVariants}
-            initial="initial"
-            whileHover="animate"
-            transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
-          />
           <span className="relative z-10">{children}</span>
         </Comp>
-      );
+      )
     }
-    
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
