@@ -245,22 +245,6 @@
         "solutionSubtitle": "To'g'ri qurilgan brend strategiyasi bu kabi muammolarni bartaraf etib, biznesingizni barqaror o'sish yo'liga olib chiqadi.",
         "solutionButton": "Barcha muammolar yechimini ko'rish"
     },
-    "offer": {
-        "subtitle": "Rad etib bo'lmas taklif",
-        "title": "🔥 SIZ BU SAHIFANI YOPISHDAN OLDIN...\n\nTasavvur qiling:\n\nErtaga sizning raqibingiz professional brend bilan chiqdi.\nLogo — aql bovar qilmaydi.\nPackaging — do'konda birinchi bo'lib ko'zga tashlanadi.\nMijozlar — sizdan emas, UNDAN sotib olishyapti.\n\nSabab oddiy: U sarmoya kiritdi. Siz esa... o'yladingiz.",
-        "timerLabel": "Taklif tugashiga:",
-        "description": [
-            {"icon": "Clock", "text": "<strong>Boshlash bonusi:</strong> 1 soatlik strategik konsultatsiya — bepul"},
-            {"icon": "Rocket", "text": "<strong>Tez start kafolati:</strong> 48 soat ichida 1-konsepsiya / yo‘nalish taqdimoti"},
-            {"icon": "ShieldCheck", "text": "<strong>Risk-free:</strong> “Yoqar-yoqmas” kafolati — birinchi taqdimot yoqmasa, <strong>10 kun ichida 100% avansni qaytaramiz</strong>"},
-            {"icon": "FileCheck", "text": "<strong>Patent yordami:</strong> BEPUL patent auditi + topshirish jarayonini <strong>biz boshqaramiz</strong> (davlat boji alohida)"},
-            {"icon": "Gift", "text": "<strong>Qo‘shimcha qiymat:</strong> Mini-brendbuk (rang + shrift qo‘llanma) <strong>yoki</strong> 1 yil domen band qilish — <strong>bepul tanlov</strong>"},
-            {"icon": "LifeBuoy", "text": "<strong>Post-support:</strong> 30 kunlik texnik yordam (fayllar, formatlar, qo‘llash bo‘yicha)"},
-            {"icon": "BadgePercent", "text": "<strong>Narxni muzlatish:</strong> Bugungi narxni <strong>30 kunga</strong> qulflaymiz (hech qanday yashirin to‘lovlarsiz)"}
-        ],
-        "button": "Bugun band qilish",
-        "note": "1 daqiqalik forma, 10% avans bilan joyingizni band qiling."
-    },
     "beforeAfter": {
         "title": "Avval va Hozir",
         "subtitle": "To'g'ri brending biznesingizni qanday o'zgartirishi mumkinligini o'z ko'zingiz bilan ko'ring.",
@@ -694,4 +678,5 @@
 }
   
 
+    
     
