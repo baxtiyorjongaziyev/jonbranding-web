@@ -93,7 +93,7 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 
-const ExpandingButton = ({ href, target, icon, text, scrolled, dictionaryKey }: { href: string; target?: string; icon: React.ReactNode; text: string; scrolled: boolean, dictionaryKey: string }) => {
+const ExpandingButton = ({ href, target, icon, text, scrolled }: { href: string; target?: string; icon: React.ReactNode; text: string; scrolled: boolean }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const buttonVariants = {
@@ -116,19 +116,19 @@ const ExpandingButton = ({ href, target, icon, text, scrolled, dictionaryKey }: 
             animate={isHovered ? "hover" : "initial"}
             variants={buttonVariants}
             className={cn(
-                "flex items-center justify-center h-10 rounded-full cursor-pointer overflow-hidden",
+                "relative flex items-center justify-center h-10 rounded-full cursor-pointer overflow-hidden",
                 scrolled ? "bg-white/20 hover:bg-white/30" : "bg-black/5 hover:bg-black/10"
             )}
         >
-            <div className="flex items-center justify-center gap-2 px-3 text-foreground">
-                {icon}
-                <motion.span
-                    variants={textVariants}
-                    className="text-sm font-medium whitespace-nowrap"
-                >
-                    {text}
-                </motion.span>
+            <div className="absolute left-3 text-foreground">
+              {icon}
             </div>
+            <motion.span
+                variants={textVariants}
+                className="text-sm font-medium whitespace-nowrap pl-5 text-foreground"
+            >
+                {text}
+            </motion.span>
         </motion.a>
     );
 };
@@ -253,7 +253,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               icon={<Phone />}
               text={lang === 'ru' ? 'Телефон' : 'Telefon'}
               scrolled={scrolled}
-              dictionaryKey="contact_by_phone"
             />
             
             <ExpandingButton 
@@ -262,7 +261,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               icon={<Send />}
               text="Telegram"
               scrolled={scrolled}
-              dictionaryKey="contact_by_telegram"
             />
 
           <Button 
