@@ -499,7 +499,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <div className="flex flex-col justify-center items-center text-center bg-white/5 rounded-xl p-6 border border-white/10">
                                 <div className='text-center'>
                                         <p className="text-sm text-blue-200">{translations.final_price}</p>
-                                        <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+                                        <p className="text-4xl sm:text-5xl font-bold text-white tracking-normal">
                                         {total.final > 0 ? (
                                             <>
                                                 {formatPrice(total.final, lang as 'uz' | 'ru' | 'en')}
