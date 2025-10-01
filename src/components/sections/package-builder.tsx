@@ -10,10 +10,10 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice, packageDiscountThreshold } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight, Loader2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 
 
 interface PackageBuilderProps {
@@ -36,18 +36,16 @@ const introIcons: { [key: string]: React.ElementType } = {
     communication: Megaphone
 };
 
-const KnobToggle = ({ isOn, onToggle, lang }: { isOn: boolean, onToggle: (value: boolean) => void, lang: 'uz' | 'ru' | 'en' }) => {
-    const x = useMotionValue(isOn ? 28 : 0);
-    
-    const label = isOn ? (lang === 'uz' ? 'Ha' : lang === 'ru' ? 'Да' : 'Yes') : (lang === 'uz' ? 'Yo\'q' : lang === 'ru' ? 'Нет' : 'No');
+const KnobToggle = ({ isOn, onToggle }: { isOn: boolean, onToggle: (value: boolean) => void }) => {
+    const x = useMotionValue(isOn ? 20 : 0);
 
     useEffect(() => {
-        x.set(isOn ? 28 : 0);
+        x.set(isOn ? 20 : 0);
     }, [isOn, x]);
 
     return (
         <motion.div
-            className="w-[60px] h-8 flex items-center p-1 rounded-full cursor-pointer bg-white/10"
+            className="w-12 h-8 flex items-center p-1 rounded-full cursor-pointer bg-white/10"
             onClick={() => onToggle(!isOn)}
         >
             <motion.div
@@ -56,13 +54,12 @@ const KnobToggle = ({ isOn, onToggle, lang }: { isOn: boolean, onToggle: (value:
                     isOn ? "bg-primary text-white" : "bg-white text-primary"
                 )}
                 drag="x"
-                dragConstraints={{ left: 0, right: 28 }}
+                dragConstraints={{ left: 0, right: 20 }}
                 style={{ x }}
-                onDragEnd={() => onToggle(x.get() > 14)}
+                onDragEnd={() => onToggle(x.get() > 10)}
             >
                 {isOn && <Check className="w-4 h-4" />}
             </motion.div>
-            <span className="flex-1 text-center text-xs font-bold text-white pr-1">{label}</span>
         </motion.div>
     );
 };
@@ -518,7 +515,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                          <KnobToggle 
                                             isOn={wantsUpfrontPayment}
                                             onToggle={setWantsUpfrontPayment}
-                                            lang={lang as 'uz' | 'ru' | 'en'}
                                         />
                                    </Label>
                                </div>
