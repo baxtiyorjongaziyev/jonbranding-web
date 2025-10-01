@@ -96,22 +96,11 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="font-body bg-white antialiased">
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-5GRQBW84"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          ></iframe>
-        </noscript>
-        <Script id="telegram-web-app" src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         
         {/* Google Analytics */}
         <Script
             strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+            src="https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY"
         />
         <Script
           id="gtag-init"
@@ -121,7 +110,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+              gtag('config', 'G-B3ZSKB40XY', {
                 page_path: window.location.pathname,
               });
             `,
@@ -201,7 +190,18 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           </div>
         </noscript>
         {/* /Yandex.Metrika counter */}
-
+      </head>
+      <body className="font-body bg-white antialiased">
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5GRQBW84"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
+        <Script id="telegram-web-app" src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+        
         <MainLayout>
           {children}
         </MainLayout>
