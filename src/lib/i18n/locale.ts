@@ -1,11 +1,10 @@
-
 import { match } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
 import type { NextRequest } from 'next/server';
 
 export const locales = ['uz', 'en', 'ru'] as const;
 export type Locale = typeof locales[number];
-export const defaultLocale: Locale = 'en';
+export const defaultLocale: Locale = 'uz';
 
 export const localeNames: Record<Locale, string> = {
   en: 'English',
