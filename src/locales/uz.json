@@ -43,9 +43,32 @@
         "service_prices": "Xizmatlar va Narxlar",
         "branding_test": "Brending Testi",
         "blog": "Blog",
+        "sitemap": "Sayt xaritasi",
         "all_rights_reserved": "Barcha huquqlar himoyalangan.",
         "back_to_top": "Yuqoriga qaytish",
         "patent_calculator": "Patent Kalkulyatori"
+    },
+    "sitemapPage": {
+        "title": "Sayt xaritasi",
+        "subtitle": "Kerakli ma'lumotni tezda topishingizga yordam berish uchun saytimizdagi barcha sahifalarning umumiy ko'rinishi.",
+        "sections": {
+            "main": "Asosiy bo'limlar",
+            "services": "Xizmatlar",
+            "blog": "Blog maqolalari"
+        },
+        "links": {
+            "home": "Bosh sahifa",
+            "quiz": "Brending Testi",
+            "portfolio": "Portfolio",
+            "process": "Ish jarayoni",
+            "faq": "Ko'p beriladigan savollar",
+            "services_prices": "Barcha xizmatlar va narxlar",
+            "brand_strategy": "Brend Strategiyasi",
+            "naming": "Neyming",
+            "corporate_style": "Firma Uslubi",
+            "packaging_design": "Qadoq Dizayni",
+            "patent_calculator": "Patent Kalkulyatori"
+        }
     },
     "hero": {
         "headlines": [

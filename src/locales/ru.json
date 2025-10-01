@@ -43,9 +43,32 @@
         "service_prices": "Услуги и цены",
         "branding_test": "Тест по брендингу",
         "blog": "Блог",
+        "sitemap": "Карта сайта",
         "all_rights_reserved": "Все права защищены.",
         "back_to_top": "Вернуться наверх",
         "patent_calculator": "Калькулятор патента"
+    },
+    "sitemapPage": {
+        "title": "Карта сайта",
+        "subtitle": "Обзор всех страниц нашего сайта, чтобы помочь вам быстро найти нужную информацию.",
+        "sections": {
+            "main": "Основные разделы",
+            "services": "Услуги",
+            "blog": "Статьи блога"
+        },
+        "links": {
+            "home": "Главная",
+            "quiz": "Тест по брендингу",
+            "portfolio": "Портфолио",
+            "process": "Рабочий процесс",
+            "faq": "FAQ",
+            "services_prices": "Все услуги и цены",
+            "brand_strategy": "Бренд-стратегия",
+            "naming": "Нейминг",
+            "corporate_style": "Фирменный стиль",
+            "packaging_design": "Дизайн упаковки",
+            "patent_calculator": "Калькулятор патента"
+        }
     },
     "hero": {
         "headlines": [

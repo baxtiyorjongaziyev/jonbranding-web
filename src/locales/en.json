@@ -43,9 +43,32 @@
         "service_prices": "Services & Prices",
         "branding_test": "Branding Test",
         "blog": "Blog",
+        "sitemap": "Sitemap",
         "all_rights_reserved": "All rights reserved.",
         "back_to_top": "Back to top",
         "patent_calculator": "Patent Calculator"
+    },
+    "sitemapPage": {
+        "title": "Sitemap",
+        "subtitle": "An overview of all pages on our site to help you quickly find the information you need.",
+        "sections": {
+            "main": "Main Sections",
+            "services": "Services",
+            "blog": "Blog Articles"
+        },
+        "links": {
+            "home": "Home",
+            "quiz": "Branding Test",
+            "portfolio": "Portfolio",
+            "process": "Work Process",
+            "faq": "FAQ",
+            "services_prices": "All Services and Prices",
+            "brand_strategy": "Brand Strategy",
+            "naming": "Naming",
+            "corporate_style": "Corporate Identity",
+            "packaging_design": "Packaging Design",
+            "patent_calculator": "Patent Calculator"
+        }
     },
     "hero": {
         "headlines": [
