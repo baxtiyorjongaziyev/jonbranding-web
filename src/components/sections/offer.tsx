@@ -45,6 +45,7 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
 
     useEffect(() => {
         const getOfferEndTime = () => {
+            if (typeof window === 'undefined') return new Date().getTime() + 24 * 60 * 60 * 1000;
             let endTime = localStorage.getItem('offerEndTime');
             if (!endTime || new Date().getTime() > parseInt(endTime)) {
                 endTime = (new Date().getTime() + 24 * 60 * 60 * 1000).toString();
@@ -60,10 +61,10 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
             const distance = offerEndTime - now;
 
             if (distance < 0) {
-                // Reset timer for a new 24h cycle
-                const newEndTime = (new Date().getTime() + 24 * 60 * 60 * 1000).toString();
-                localStorage.setItem('offerEndTime', newEndTime);
-                // The main logic will pick up the new time on the next interval
+                if (typeof window !== 'undefined') {
+                    const newEndTime = (new Date().getTime() + 24 * 60 * 60 * 1000).toString();
+                    localStorage.setItem('offerEndTime', newEndTime);
+                }
                 return;
             }
 
@@ -80,11 +81,16 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
     const formatTime = (time: number) => time.toString().padStart(2, '0');
     
     if (!translations) return null;
+    
+    const handleCta = () => {
+        const el = document.getElementById('package-builder-cta');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+    };
 
     return (
         <section id="offer" className="relative py-20 sm:py-28 bg-dark-blue text-white overflow-hidden">
              <div className="absolute inset-0 z-0 opacity-40">
-                <div className="absolute inset-0 bg-gradient-to-br from-dark-blue to-blue-900" />
+                <div className="absolute inset-0 bg-gradient-to-br from-dark-blue to-blue-950" />
                  <AnimatePresence>
                      <motion.div 
                         initial={{ opacity: 0 }}
@@ -146,10 +152,8 @@ const Offer: FC<OfferProps> = ({ onCTAClick, lang, dictionary }) => {
                         })}
                     </div>
                     
-                    <Button id="offer-cta" size="lg" asChild className="mt-10 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
-                        <Link href={`/${lang}/offer`}>
-                            {translations.button} <ArrowRight className="ml-2 h-5 w-5" />
-                        </Link>
+                    <Button id="offer-cta" size="lg" onClick={handleCta} className="mt-10 text-lg px-10 py-7 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform animate-breathing">
+                       {translations.button} <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                     <p className="mt-3 text-xs text-gray-400">{translations.note}</p>
                 </div>
