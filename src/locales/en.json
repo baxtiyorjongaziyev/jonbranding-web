@@ -245,22 +245,6 @@
         "solutionSubtitle": "A well-built brand strategy eliminates such problems and puts your business on the path of stable growth.",
         "solutionButton": "See the solution to all problems"
     },
-    "offer": {
-        "subtitle": "Irresistible Offer",
-        "title": "🔥 BEFORE YOU CLOSE THIS PAGE...\n\nImagine:\n\nTomorrow, your competitor launches with a professional brand.\nThe logo is mind-blowing.\nThe packaging is the first thing that catches the eye in the store.\nCustomers are buying from THEM, not you.\n\nThe reason is simple: They invested. You... thought about it.",
-        "timerLabel": "Time left for the offer:",
-        "description": [
-            {"icon": "Clock", "text": "<strong>Starting bonus:</strong> 1-hour strategic consultation — free"},
-            {"icon": "Rocket", "text": "<strong>Fast start guarantee:</strong> 1st concept/direction presentation within 48 hours"},
-            {"icon": "ShieldCheck", "text": "<strong>Risk-free:</strong> “Like it or not” guarantee — 100% advance refund within 10 days if the first presentation is not liked"},
-            {"icon": "FileCheck", "text": "<strong>Patent support:</strong> FREE patent audit + we manage the submission process (state fee is separate)"},
-            {"icon": "Gift", "text": "<strong>Extra value:</strong> Mini-brandbook (color + font guide) OR 1-year domain reservation — free choice"},
-            {"icon": "LifeBuoy", "text": "<strong>Post-support:</strong> 30-day technical support (files, formats, usage)"},
-            {"icon": "BadgePercent", "text": "<strong>Price freeze:</strong> Lock today's price for 30 days (no hidden fees)"}
-        ],
-        "button": "Book Today",
-        "note": "1-minute form, book your place with a 10% advance."
-    },
     "beforeAfter": {
         "title": "Before and After",
         "subtitle": "See for yourself how proper branding can transform your business.",

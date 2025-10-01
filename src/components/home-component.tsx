@@ -18,11 +18,9 @@ const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'));
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
 const Video = dynamic(() => import('@/components/sections/video'));
 const Process = dynamic(() => import('@/components/sections/process'));
-const ExitIntentModal = dynamic(() => import('@/components/exit-intent-modal'));
 const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
-const Offer = dynamic(() => import('@/components/sections/offer'));
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Faq = dynamic(() => import('@/components/sections/faq'));
 const WhyUs = dynamic(() => import('@/components/sections/why-us'));
@@ -150,7 +148,6 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <AnimatedSection><TrustedBy lang={lang} dictionary={dictionary.trustedBy} /></AnimatedSection>
                 <AnimatedSection><TargetAudience lang={lang} dictionary={dictionary.targetAudience} /></AnimatedSection>
                 <AnimatedSection><WhyUs onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
-                <AnimatedSection><Offer onCTAClick={handleOpenModal} lang={lang} dictionary={dictionary.offer} /></AnimatedSection>
                 <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} /></AnimatedSection>
                 <AnimatedSection><Testimonials lang={lang} dictionary={dictionary.testimonials} /></AnimatedSection>
                 <AnimatedSection><Gallery lang={lang} dictionary={dictionary.gallery} /></AnimatedSection>
@@ -168,7 +165,6 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} /></AnimatedSection>
                 <AnimatedSection><Faq lang={lang} dictionary={dictionary.faq} /></AnimatedSection>
             </main>
-            <ExitIntentModal onPrimaryClick={handleOpenServiceModal} lang={lang} />
             <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
         </>
     )
