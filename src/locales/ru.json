@@ -598,6 +598,10 @@
             "services_total": "Итого по услугам:",
             "upfront_discount_title": "Скидка -10% за предоплату",
             "upfront_discount_desc": "Внесите 100% предоплату за проект",
+            "upfront_discount_options": {
+                "yes": "Да",
+                "no": "Нет"
+            },
             "final_price": "Итоговая цена:",
             "order_with_discount": "Заказ со скидкой",
             "get_free_consultation": "Получить бесплатную консультацию",

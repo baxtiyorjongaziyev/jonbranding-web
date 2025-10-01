@@ -14,6 +14,7 @@ import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, Fi
 import confetti from 'canvas-confetti';
 import { Switch } from '@/components/ui/switch';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { motion } from 'framer-motion';
 
 
 interface PackageBuilderProps {
@@ -34,6 +35,38 @@ const introIcons: { [key: string]: React.ElementType } = {
     strategy: BrainCircuit,
     identity: Paintbrush,
     communication: Megaphone
+};
+
+const DynamicToggle = ({ id, options, selected, onSelect }: {
+    id: string;
+    options: { value: string, label: string }[];
+    selected: string;
+    onSelect: (value: string) => void;
+}) => {
+    return (
+        <div className="relative flex w-full rounded-full bg-secondary p-1">
+            {options.map(option => (
+                <div key={option.value} className="relative flex-1">
+                    {selected === option.value && (
+                        <motion.div
+                            layoutId={`calculator-toggle-bg-${id}`}
+                            className="absolute inset-0 rounded-full bg-primary shadow-md"
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        />
+                    )}
+                    <button
+                        onClick={() => onSelect(option.value)}
+                        className={cn(
+                            "relative w-full rounded-full py-2 px-4 text-center text-sm font-semibold transition-colors",
+                            selected === option.value ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                        )}
+                    >
+                        {option.label}
+                    </button>
+                </div>
+            ))}
+        </div>
+    );
 };
 
 const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
@@ -301,6 +334,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         addons: { titleKey: "addons", services: ['packaging', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
         options: { titleKey: "options", services: ['urgency', 'nda'], gridCols: "lg:grid-cols-2" }
     };
+    
+    const upfrontPaymentOptions = [
+        { value: 'ha', label: translations.upfront_discount_options.yes },
+        { value: 'yoq', label: translations.upfront_discount_options.no }
+    ];
 
     return (
         <>
@@ -479,19 +517,18 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </p>
                                 </div>
                                 
-                                <div className="mt-4 flex items-center justify-between w-full max-w-xs">
-                                   <Label htmlFor="upfront-payment" className="flex flex-col cursor-pointer flex-1 pr-4 text-left">
+                               <div className="mt-4 w-full max-w-xs space-y-2">
+                                     <Label htmlFor="upfront-payment" className="flex flex-col text-left">
                                         <span className="font-semibold text-white">{translations.upfront_discount_title}</span>
                                         <span className="text-xs text-blue-200">{translations.upfront_discount_desc}</span>
                                    </Label>
-                                   <Switch
-                                        id="upfront-payment"
-                                        checked={wantsUpfrontPayment}
-                                        onCheckedChange={setWantsUpfrontPayment}
-                                        aria-label={translations.upfront_discount_title}
-                                        className="flex-shrink-0"
-                                    />
-                                </div>
+                                   <DynamicToggle
+                                        id="upfront-payment-toggle"
+                                        options={upfrontPaymentOptions}
+                                        selected={wantsUpfrontPayment ? 'ha' : 'yoq'}
+                                        onSelect={(value) => setWantsUpfrontPayment(value === 'ha')}
+                                   />
+                               </div>
 
                                 <Button id="package-builder-cta" onClick={onOrderNow} variant="default" size="lg" className="w-full mt-6 text-lg py-3" disabled={total.base === 0}>
                                     {total.discountApplied.length > 0 ? translations.order_with_discount : translations.get_free_consultation}
