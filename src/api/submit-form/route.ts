@@ -78,6 +78,8 @@ async function sendMetaConversionEvent(data: any) {
 export async function POST(request: Request) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
+    const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
+
 
     if (!botToken || !chatId) {
         console.error("Server Configuration Error: Telegram token or chat ID is missing in the environment variables.");
@@ -208,11 +210,15 @@ ${packageInfo}
         
         // Send to Telegram (don't wait for it to finish)
         const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-        const telegramPayload = { 
+        const telegramPayload: any = { 
             chat_id: chatId, 
             text: telegramMessage,
             parse_mode: 'Markdown'
         };
+
+        if (messageThreadId) {
+          telegramPayload.message_thread_id = messageThreadId;
+        }
         
         const telegramResponse = await fetch(telegramUrl, {
             method: 'POST',
@@ -242,5 +248,3 @@ ${packageInfo}
         return NextResponse.json({ ok: false, error: "Serverda ichki xatolik yuz berdi. Iltimos, administratorga murojaat qiling." }, { status: 500 });
     }
 }
-
-    

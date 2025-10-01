@@ -73,6 +73,8 @@ const sendLeadToTelegram = ai.defineTool(
   async input => {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
+    const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
+
 
     if (!botToken || !chatId) {
       console.error(
@@ -100,11 +102,16 @@ ${input.notes}
             `.trim();
 
       const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-      const payload = {
+      
+      const payload: any = {
         chat_id: chatId, 
         text: message, 
         parse_mode: 'Markdown'
       };
+
+      if (messageThreadId) {
+        payload.message_thread_id = messageThreadId;
+      }
       
       const response = await fetch(url, {
         method: 'POST',
@@ -279,5 +286,3 @@ const assistantFlow = ai.defineFlow(
     };
   }
 );
-
-    
