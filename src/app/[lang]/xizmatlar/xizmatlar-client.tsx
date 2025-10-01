@@ -5,7 +5,6 @@ import { useCallback } from 'react';
 import MobileCtaBar from '@/components/sections/mobile-cta-bar';
 import PackageBuilder from '@/components/sections/package-builder';
 import Comparison from '@/components/sections/comparison';
-import Offer from '@/components/sections/offer';
 import QueueStatus from '@/components/sections/queue-status';
 import ServicesHero from '@/components/sections/services-hero';
 import WhyUs from '@/components/sections/why-us';
@@ -34,7 +33,6 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
       <ServiceSections lang={lang} />
       <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
-      <Offer onCTAClick={handleOpenModal} lang={lang} dictionary={dictionary.offer} />
       <QueueStatus onCtaClick={handleOpenModal} />
       <Testimonials lang={lang} dictionary={dictionary.testimonials} />
       <Comparison onCtaClick={handleOpenModal} lang={lang} />
