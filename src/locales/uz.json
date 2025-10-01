@@ -247,7 +247,7 @@
     },
     "offer": {
         "subtitle": "Rad etib bo'lmas taklif",
-        "title": "🔥 SIZ BU SAHIFANI YOPISHDAN OLDIN...<br/><br/>Tasavvur qiling: Ertaga sizning raqibingiz professional brend bilan chiqdi. Logo — aql bovar qilmaydi. Packaging — do'konda birinchi bo'lib ko'zga tashlanadi. Mijozlar — sizdan emas, UNDAN sotib olishyapti.<br/><br/>Sabab oddiy: U sarmoya kiritdi. Siz esa... o'yladingiz.",
+        "title": "🔥 SIZ BU SAHIFANI YOPISHDAN OLDIN...\n\nTasavvur qiling:\n\nErtaga sizning raqibingiz professional brend bilan chiqdi.\nLogo — aql bovar qilmaydi.\nPackaging — do'konda birinchi bo'lib ko'zga tashlanadi.\nMijozlar — sizdan emas, UNDAN sotib olishyapti.\n\nSabab oddiy: U sarmoya kiritdi. Siz esa... o'yladingiz.",
         "timerLabel": "Taklif tugashiga:",
         "description": [
             {"icon": "Clock", "text": "<strong>Boshlash bonusi:</strong> 1 soatlik strategik konsultatsiya — bepul"},
@@ -296,7 +296,7 @@
           { "phase": "02", "title": "Strategiya", "description": "Yo‘lni xaritaga solish", "tasks": ["Maqsad qo‘yish", "Auditoriya tahlili", "Brendni joylashtirish", "Asosiy tamoyillar", "Rejalashtirish", "Brend vizyoni"] },
           { "phase": "03", "title": "Ijodiy Dizayn", "description": "Brendni shakllantirish", "tasks": ["Neyming", "Logo dizayni", "Vizual konsepsiya", "Qadoqlash dizayni", "Brandbook"] },
           { "phase": "04", "title": "Taqdimot", "description": "G'oyalarni sinovdan o'tkazish", "tasks": ["Dizayn taqdimoti", "Fikr-mulohazalarni moslashtirish", "Yakuniy iteratsiya"] },
-          { "phase": "05", "title": "Amaliyot", "description": "Brendni hayotga tadbiq etish", "tasks": ["Tayyor dizayn fayllari", "Brandbook topshirish", "Vizual qo‘llanmalar"] },
+          { "phase": "05", "title": "Amaliyot", "description": "Brendni hayotga tatbiq etish", "tasks": ["Tayyor dizayn fayllari", "Brandbook topshirish", "Vizual qo‘llanmalar"] },
           { "phase": "06", "title": "Rivojlanish", "description": "Brendni qo'llab-quvvatlash", "tasks": ["Tatbiq qilish bo‘yicha yo‘riqnoma", "Doimiy qo‘llab-quvvatlash", "Keyingi qadamlar"] }
         ],
         "ctaTitle": "Loyihangizni muhokama qilishga tayyormisiz?",
