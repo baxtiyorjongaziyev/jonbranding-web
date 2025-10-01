@@ -109,14 +109,16 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
         onMouseLeave={handleClose}
         align="end"
       >
-          {locales.map((locale) => {
+          {locales
+            .filter((locale) => locale !== lang)
+            .map((locale) => {
             const Icon = localeIcons[locale];
             return (
               <DropdownMenuItem
                   key={locale}
                   className={cn(
                     "justify-start gap-2 font-normal cursor-pointer",
-                    lang === locale ? "bg-accent/80 text-accent-foreground" : "hover:bg-secondary"
+                    "hover:bg-secondary"
                   )}
                   onClick={() => handleLanguageChange(locale)}
               >
