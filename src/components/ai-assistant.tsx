@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef, useEffect, FC, Fragment } from 'react';
@@ -193,6 +194,9 @@ const AiAssistant: FC<{lang: 'uz' | 'ru', dictionary: any}> = ({ lang, dictionar
   if (!isClient) {
     return null;
   }
+
+  // To hide the assistant temporarily
+  return null;
 
   return (
     <>
