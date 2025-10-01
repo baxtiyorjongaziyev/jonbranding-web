@@ -93,32 +93,41 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem"
 
 
-const GlassyButton = ({ href, target, icon }: { href: string; target?: string; icon: React.ReactNode; }) => {
+const ExpandingButton = ({ 
+  href, 
+  target, 
+  icon, 
+  text 
+}: { 
+  href: string; 
+  target?: string; 
+  icon: React.ReactNode; 
+  text: string;
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.a
       href={href}
       target={target}
       rel="noopener noreferrer"
-      whileHover="hover"
-      className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/50 text-foreground shadow-md backdrop-blur-sm transition-colors duration-300 hover:border-white/20 hover:bg-white/20"
-      aria-label={target === '_blank' ? 'Open in new tab' : undefined}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      animate={{ width: isHovered ? 'auto' : 40 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className="relative flex h-10 items-center justify-start rounded-full border border-black/10 bg-white/50 text-foreground shadow-md backdrop-blur-sm transition-colors duration-300 hover:border-white/20 hover:bg-white/20 overflow-hidden px-2.5"
     >
-      <motion.div
-        variants={{
-          hover: { scale: 1.4, opacity: 1 },
-        }}
-        initial={{ scale: 0, opacity: 0 }}
-        className="absolute inset-0 rounded-full bg-white/30"
-        style={{ originX: "50%", originY: "50%" }}
-      />
-      <motion.div
-        variants={{
-          hover: { scale: 1.2 },
-        }}
-        className="relative z-10"
-      >
-        {icon}
-      </motion.div>
+      <div className="flex items-center gap-2">
+        <div className="flex-shrink-0 h-5 w-5">{icon}</div>
+        <motion.span 
+          className="whitespace-nowrap text-sm font-medium"
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
+          transition={{ duration: 0.2, delay: isHovered ? 0.1 : 0 }}
+        >
+          {text}
+        </motion.span>
+      </div>
     </motion.a>
   );
 };
@@ -238,15 +247,17 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div className="hidden items-center space-x-2 lg:flex">
           <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
            
-            <GlassyButton 
+            <ExpandingButton 
               href="tel:+998336450097"
               icon={<Phone className="h-5 w-5" />}
+              text={dictionary.contact_by_phone}
             />
             
-            <GlassyButton 
+            <ExpandingButton 
               href="https://t.me/baxtiyorjon_gaziyev"
               target="_blank"
               icon={<Send className="h-5 w-5" />}
+              text={dictionary.contact_by_telegram}
             />
 
           <Button 
