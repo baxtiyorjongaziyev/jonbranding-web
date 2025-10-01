@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from "react"
@@ -12,7 +13,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-b from-dark-blue to-ocean-blue text-primary-foreground shadow-lg btn-animated-border hover:from-ocean-blue hover:to-dark-blue",
+          "bg-gradient-to-b from-dark-blue to-primary text-primary-foreground shadow-lg btn-animated-border hover:from-primary hover:to-dark-blue",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
