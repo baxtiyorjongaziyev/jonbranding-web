@@ -10,11 +10,10 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice, packageDiscountThreshold } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { Switch } from '@/components/ui/switch';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 
 interface PackageBuilderProps {
@@ -37,37 +36,39 @@ const introIcons: { [key: string]: React.ElementType } = {
     communication: Megaphone
 };
 
-const DynamicToggle = ({ id, options, selected, onSelect }: {
-    id: string;
-    options: { value: string, label: string }[];
-    selected: string;
-    onSelect: (value: string) => void;
-}) => {
+const KnobToggle = ({ isOn, onToggle, lang }: { isOn: boolean, onToggle: (value: boolean) => void, lang: 'uz' | 'ru' | 'en' }) => {
+    const x = useMotionValue(isOn ? 28 : 0);
+    const background = useTransform(
+        x,
+        [0, 28],
+        ["hsl(var(--muted))", "hsl(var(--primary))"]
+    );
+    const label = isOn ? (lang === 'uz' ? 'Ha' : lang === 'ru' ? 'Да' : 'Yes') : (lang === 'uz' ? 'Yo\'q' : lang === 'ru' ? 'Нет' : 'No');
+
+    useEffect(() => {
+        x.set(isOn ? 28 : 0);
+    }, [isOn, x]);
+
     return (
-        <div className="relative flex w-full rounded-full bg-secondary p-1">
-            {options.map(option => (
-                <div key={option.value} className="relative flex-1">
-                    {selected === option.value && (
-                        <motion.div
-                            layoutId={`calculator-toggle-bg-${id}`}
-                            className="absolute inset-0 rounded-full bg-primary shadow-md"
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        />
-                    )}
-                    <button
-                        onClick={() => onSelect(option.value)}
-                        className={cn(
-                            "relative w-full rounded-full py-2 px-4 text-center text-sm font-semibold transition-colors",
-                            selected === option.value ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-                        )}
-                    >
-                        {option.label}
-                    </button>
-                </div>
-            ))}
-        </div>
+        <motion.div 
+            style={{ background }} 
+            className="w-[60px] h-8 flex items-center p-1 rounded-full cursor-pointer"
+            onClick={() => onToggle(!isOn)}
+        >
+            <motion.div
+                className="w-6 h-6 bg-white rounded-full flex items-center justify-center text-primary"
+                drag="x"
+                dragConstraints={{ left: 0, right: 28 }}
+                style={{ x }}
+                onDragEnd={() => onToggle(x.get() > 14)}
+            >
+                {isOn && <Check className="w-4 h-4" />}
+            </motion.div>
+            <span className="flex-1 text-center text-xs font-bold text-white pr-1">{label}</span>
+        </motion.div>
     );
 };
+
 
 const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
     const serviceDetails = getServiceDetails(lang);
@@ -335,11 +336,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         options: { titleKey: "options", services: ['urgency', 'nda'], gridCols: "lg:grid-cols-2" }
     };
     
-    const upfrontPaymentOptions = [
-        { value: 'ha', label: translations.upfront_discount_options.yes },
-        { value: 'yoq', label: translations.upfront_discount_options.no }
-    ];
-
     return (
         <>
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
@@ -518,16 +514,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
                                 
                                <div className="mt-4 w-full max-w-xs space-y-2">
-                                     <Label htmlFor="upfront-payment" className="flex flex-col text-left">
+                                     <Label htmlFor="upfront-payment" className="flex flex-col text-left items-center">
                                         <span className="font-semibold text-white">{translations.upfront_discount_title}</span>
-                                        <span className="text-xs text-blue-200">{translations.upfront_discount_desc}</span>
+                                        <span className="text-xs text-blue-200 mb-2">{translations.upfront_discount_desc}</span>
+                                         <KnobToggle 
+                                            isOn={wantsUpfrontPayment}
+                                            onToggle={setWantsUpfrontPayment}
+                                            lang={lang as 'uz' | 'ru' | 'en'}
+                                        />
                                    </Label>
-                                   <DynamicToggle
-                                        id="upfront-payment-toggle"
-                                        options={upfrontPaymentOptions}
-                                        selected={wantsUpfrontPayment ? 'ha' : 'yoq'}
-                                        onSelect={(value) => setWantsUpfrontPayment(value === 'ha')}
-                                   />
                                </div>
 
                                 <Button id="package-builder-cta" onClick={onOrderNow} variant="default" size="lg" className="w-full mt-6 text-lg py-3" disabled={total.base === 0}>
@@ -556,3 +551,5 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
+    
