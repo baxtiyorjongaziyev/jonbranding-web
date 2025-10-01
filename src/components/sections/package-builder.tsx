@@ -45,20 +45,22 @@ const KnobToggle = ({ isOn, onToggle }: { isOn: boolean, onToggle: (value: boole
 
     return (
         <motion.div
-            className="w-12 h-8 flex items-center p-1 rounded-full cursor-pointer bg-white/10"
+            className={cn(
+                "w-12 h-8 flex items-center p-1 rounded-full cursor-pointer transition-colors",
+                isOn ? "bg-primary" : "bg-white/10"
+            )}
             onClick={() => onToggle(!isOn)}
         >
             <motion.div
                 className={cn(
-                    "w-6 h-6 rounded-full flex items-center justify-center",
-                    isOn ? "bg-primary text-white" : "bg-white text-primary"
+                    "w-6 h-6 rounded-full flex items-center justify-center bg-white"
                 )}
                 drag="x"
                 dragConstraints={{ left: 0, right: 20 }}
                 style={{ x }}
                 onDragEnd={() => onToggle(x.get() > 10)}
             >
-                {isOn && <Check className="w-4 h-4" />}
+                {isOn && <Check className="w-4 h-4 text-primary" />}
             </motion.div>
         </motion.div>
     );
