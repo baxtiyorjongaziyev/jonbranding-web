@@ -12,6 +12,7 @@ import ServiceSections from '@/components/sections/service-sections';
 import TrustedBy from '@/components/sections/trusted-by';
 import Testimonials from '@/components/sections/testimonials';
 import UrgencyBlock from '@/components/sections/urgency-block';
+import PersonalOfferBlock from '@/components/sections/personal-offer-block';
 
 const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const handleOpenModal = useCallback(() => {
@@ -35,6 +36,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       <ServiceSections lang={lang} />
       <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
       <UrgencyBlock />
+      <PersonalOfferBlock onCtaClick={handleOpenModal} />
       <QueueStatus onCtaClick={handleOpenModal} />
       <Testimonials lang={lang} dictionary={dictionary.testimonials} />
       <Comparison onCtaClick={handleOpenModal} lang={lang} />

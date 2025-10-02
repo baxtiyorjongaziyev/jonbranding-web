@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -13,7 +14,9 @@ const UrgencyBlock: FC = () => {
     const [translations, setTranslations] = useState<any>(null);
 
     useEffect(() => {
-        getDictionary(lang).then(dict => setTranslations(dict.urgencyBlock));
+        if (lang) {
+            getDictionary(lang).then(dict => setTranslations(dict.urgencyBlock));
+        }
     }, [lang]);
 
     if (!translations) {

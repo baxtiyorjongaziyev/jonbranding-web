@@ -187,6 +187,17 @@
         "line2": "Customers are buying not from you, but from THEM.",
         "line3": "The reason is simple: They invested. You... thought about it."
     },
+    "personalOfferBlock": {
+        "title": "📢 My offer is simple:",
+        "points": [
+            "9 years of experience — worked with 500+ companies",
+            "Logo + Corporate Identity + Packaging Design — all in one place",
+            "Free advice on naming and patenting",
+            "Ready result in 2-3 weeks"
+        ],
+        "price": "Price? Let's agree. But...",
+        "ctaButton": "I Need This"
+    },
     "servicesHero": {
         "title": "Services that empower your branding",
         "subtitle": "Guaranteed results and a clear solution for your business",
