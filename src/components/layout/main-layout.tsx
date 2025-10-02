@@ -1,4 +1,3 @@
-
 'use client';
 
 import type { FC, ReactNode } from 'react';
@@ -117,7 +116,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 onFormSubmitSuccess={handleCloseModal}
                 lang={lang}
             />
-            <AiAssistant lang={lang} dictionary={dictionary.aiAssistant} />
+            {dictionary.aiAssistant && <AiAssistant lang={lang} dictionary={dictionary.aiAssistant} />}
             <CookieConsentBanner />
         </div>
     );

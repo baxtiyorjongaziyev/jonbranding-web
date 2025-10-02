@@ -18,7 +18,7 @@
         "packaging_design_desc": "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
         "services_and_prices": "Xizmatlar va Narxlar",
         "services_and_prices_desc": "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
-        "contact_by_phone": "Telefon orqali bog'lanish",
+        "contact_by_phone": "+998336450097",
         "contact_by_telegram": "Telegram orqali yozish",
         "free_consultation": "Bepul konsultatsiya",
         "open_menu": "Menyuni ochish",
@@ -50,6 +50,10 @@
         "all_rights_reserved": "Barcha huquqlar himoyalangan.",
         "back_to_top": "Yuqoriga qaytish",
         "patent_calculator": "Patent Kalkulyatori"
+    },
+    "cookieConsent": {
+        "message": "Saytimizda shirin kukilar bor. Ular bizga sizni eslab qolishda yordam beradi. Rozi bo'lsangiz, birgalikda baham ko'ramiz.",
+        "acceptButton": "Yeb qo'yaman"
     },
     "sitemapPage": {
         "title": "Sayt xaritasi",
