@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/xizmatlar/brand-strategy',
     '/xizmatlar/neyming',
     '/xizmatlar/firmenniy-stil',
+    '/xizmatlar/logo-dizayni',
     '/xizmatlar/qadoq-dizayni',
     '/xizmatlar/patent-kalkulyatori',
     '/blog',

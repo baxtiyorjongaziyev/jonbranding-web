@@ -12,6 +12,8 @@
         "naming_desc": "Choosing a memorable, strong, and legally clear name for your brand.",
         "corporate_style": "Corporate Identity",
         "corporate_style_desc": "A system of logos, colors, and fonts that makes your brand recognizable.",
+        "logo_design": "Logo Design",
+        "logo_design_desc": "Creating a unique and memorable sign that reflects the essence of your business.",
         "packaging_design": "Packaging Design",
         "packaging_design_desc": "Attractive design that will make your product stand out on the shelf.",
         "services_and_prices": "Services & Prices",
@@ -39,6 +41,7 @@
         "naming": "Naming",
         "corporate_style": "Corporate Identity",
         "packaging_design": "Packaging Design",
+        "logo_design": "Logo Design",
         "additional": "Additional",
         "service_prices": "Services & Prices",
         "branding_test": "Branding Test",
@@ -67,6 +70,7 @@
             "naming": "Naming",
             "corporate_style": "Corporate Identity",
             "packaging_design": "Packaging Design",
+            "logo_design": "Logo Design",
             "patent_calculator": "Patent Calculator"
         }
     },
@@ -186,6 +190,12 @@
                 "buttonText": "Read More"
             },
             {
+                "id": "logo-design",
+                "title": "Logo Design",
+                "description": "Creating a unique and memorable sign that reflects the essence of your business.",
+                "buttonText": "Read More"
+            },
+            {
                 "id": "naming",
                 "title": "Naming",
                 "description": "Choosing a memorable and strong name for a brand.",
@@ -203,13 +213,7 @@
                 "description": "Attractive design that will make your product stand out on the shelf.",
                 "buttonText": "Read More"
             }
-        ],
-        "cta1_title": "Your brand could look this good too.",
-        "cta1_desc": "Take your business to the next level with professional design. We'll help find the perfect solution for your business.",
-        "cta1_button": "For my business too",
-        "cta2_title": "Ready to discuss your project?",
-        "cta2_desc": "Sign up for a free consultation to find out what solutions we can offer for your business.",
-        "cta2_button": "Get a free consultation"
+        ]
     },
     "stats": {
         "experience": "Years of experience",
@@ -442,6 +446,34 @@
         ],
         "cta_title": "Corporate identity is a growth tool",
         "cta_description": "Brands with a strong identity are recognized faster, remembered longer, and inspire more trust. We create not just a visual style, but a tool that helps the brand grow, be consistent, and manageable."
+    },
+    "logoDesignPage": {
+        "metadata": {
+            "title": "Logo Design | Jon.Branding",
+            "description": "A logo is the face of your business. We create unique, memorable, and strategic logos that reflect the essence of your brand and help you stand out from the competition."
+        },
+        "title": "Logo Design",
+        "subtitle": "A logo is more than just a picture; it's a strategic tool, the face of your business, and the first impression you make.",
+        "section1_title": "Why is a logo so important?",
+        "section1_p1": "In today's competitive market, a logo is the first thing that catches a customer's eye. A good logo is not just a beautiful design, but a symbol that conveys the values, professionalism, and uniqueness of your business.",
+        "section1_p2": "It is a key element that helps customers recognize and remember you. A professional logo builds trust and forms an emotional connection, turning one-time buyers into loyal fans.",
+        "values_title": "A good logo should be:",
+        "values": [
+            { "title": "Simple and Memorable", "description": "The best logos are easy to recognize and remember even at a small size or from a distance." },
+            { "title": "Unique and Timeless", "description": "It should set you apart from competitors and not go out of fashion after a few years." },
+            { "title": "Strategic and Meaningful", "description": "Every line, color, and shape should reflect the character and goals of your business." }
+        ],
+        "process_title": "How do we create a logo?",
+        "process_subtitle": "Our logo design process is based on deep analysis and strategic thinking, not just fleeting inspiration.",
+        "process_steps": [
+            { "title": "Brief and Research", "description": "We thoroughly study your business, goals, target audience, and competitors." },
+            { "title": "Concept Development", "description": "We develop several visual concepts that reflect your brand's strategy and character." },
+            { "title": "Design and Presentation", "description": "We refine the chosen concept, show it on real-world examples (mockups), and explain the logic behind it." },
+            { "title": "Finalization and Handover", "description": "We prepare all necessary file formats (vector, raster) for use in any context and provide a mini-guide on its usage." }
+        ],
+        "cta_title": "Ready to create a logo that works?",
+        "cta_description": "Don't settle for a template logo. Let's create a unique and powerful sign for your business that will become the foundation of your success.",
+        "cta_button": "Get a Free Consultation"
     },
     "namingPage": {
         "metadata": {
@@ -679,3 +711,4 @@
   
 
     
+
