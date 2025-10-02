@@ -195,9 +195,6 @@ const AiAssistant: FC<{lang: 'uz' | 'ru', dictionary: any}> = ({ lang, dictionar
     return null;
   }
 
-  // To hide the assistant temporarily
-  return null;
-
   return (
     <>
       <div className={cn(
