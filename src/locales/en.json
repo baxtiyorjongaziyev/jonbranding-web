@@ -18,7 +18,7 @@
         "packaging_design_desc": "Attractive design that will make your product stand out on the shelf.",
         "services_and_prices": "Services & Prices",
         "services_and_prices_desc": "Build your own service package and get an instant price.",
-        "contact_by_phone": "Contact by Phone",
+        "contact_by_phone": "+998336450097",
         "contact_by_telegram": "Contact via Telegram",
         "free_consultation": "Free Consultation",
         "open_menu": "Open Menu",
@@ -50,6 +50,10 @@
         "all_rights_reserved": "All rights reserved.",
         "back_to_top": "Back to top",
         "patent_calculator": "Patent Calculator"
+    },
+    "cookieConsent": {
+        "message": "Our website uses delicious cookies. They help us remember you. If you agree, let's share them together.",
+        "acceptButton": "I'll eat them"
     },
     "sitemapPage": {
         "title": "Sitemap",
@@ -265,8 +269,8 @@
         "subtitle": "See how the brands we create stand out in their niche."
     },
     "founder": {
-        "title": "Founder: Baxtiyorjon Gaziyev",
-        "message": "Hello! I'm Baxtiyorjon, the founder of Jon.Branding. I help business owners take their brands to the next level. My goal is not just to create a beautiful design, but to build a results-driven, strategy-based brand system for your business. Let's analyze your brand together and awaken its 'sleeping' potential.",
+        "title": "Founder: Bakhtiyorjon Gaziyev",
+        "message": "Hello! I'm Bakhtiyorjon, the founder of Jon.Branding. I help business owners take their brands to the next level. My goal is not just to create a beautiful design, but to build a results-driven, strategy-based brand system for your business. Let's analyze your brand together and awaken its 'sleeping' potential.",
         "points": [
             { "icon": "Medal", "text": "Over 50+ projects" },
             { "icon": "Globe", "text": "International experience" },
@@ -711,4 +715,5 @@
   
 
     
+
 

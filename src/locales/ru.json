@@ -18,7 +18,7 @@
         "packaging_design_desc": "Привлекательный дизайн, который выделит ваш продукт на полке.",
         "services_and_prices": "Услуги и цены",
         "services_and_prices_desc": "Соберите свой пакет услуг и узнайте цену прямо сейчас.",
-        "contact_by_phone": "Связаться по телефону",
+        "contact_by_phone": "+998336450097",
         "contact_by_telegram": "Написать в Telegram",
         "free_consultation": "Бесплатная консультация",
         "open_menu": "Открыть меню",
@@ -50,6 +50,10 @@
         "all_rights_reserved": "Все права защищены.",
         "back_to_top": "Вернуться наверх",
         "patent_calculator": "Калькулятор патента"
+    },
+    "cookieConsent": {
+        "message": "На нашем сайте есть вкусные 'куки'. Они помогают нам запомнить вас. Если вы согласны, давайте разделим их вместе.",
+        "acceptButton": "Я их съем"
     },
     "sitemapPage": {
         "title": "Карта сайта",
