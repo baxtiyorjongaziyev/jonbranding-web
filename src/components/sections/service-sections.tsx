@@ -33,12 +33,20 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
             </section>
         );
     }
+
+    const orderedServices = [
+        translations.services.find((s: any) => s.id === 'brand-strategy'),
+        translations.services.find((s: any) => s.id === 'naming'),
+        translations.services.find((s: any) => s.id === 'logo-design'),
+        translations.services.find((s: any) => s.id === 'corporate-style'),
+        translations.services.find((s: any) => s.id === 'packaging-design'),
+    ].filter(Boolean);
     
     return (
         <section className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
-                    {translations.services.map((service: any) => {
+                    {orderedServices.map((service: any) => {
                         const Icon = serviceIcons[service.id] || Paintbrush;
                         return (
                              <Card key={service.id} className="group relative flex flex-col text-center shadow-lg rounded-2xl bg-secondary/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 max-w-sm mx-auto">
