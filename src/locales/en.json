@@ -10,10 +10,10 @@
         "brand_strategy_desc": "The foundation for your brand — market analysis, positioning, and communication.",
         "naming": "Naming",
         "naming_desc": "Choosing a memorable, strong, and legally clear name for your brand.",
-        "corporate_style": "Corporate Identity",
-        "corporate_style_desc": "A system of logos, colors, and fonts that makes your brand recognizable.",
         "logo_design": "Logo Design",
         "logo_design_desc": "Creating a unique and memorable sign that reflects the essence of your business.",
+        "corporate_style": "Corporate Identity",
+        "corporate_style_desc": "A system of logos, colors, and fonts that makes your brand recognizable.",
         "packaging_design": "Packaging Design",
         "packaging_design_desc": "Attractive design that will make your product stand out on the shelf.",
         "services_and_prices": "Services & Prices",
@@ -39,9 +39,9 @@
         "services": "Our Services",
         "brand_strategy": "Brand Strategy",
         "naming": "Naming",
+        "logo_design": "Logo Design",
         "corporate_style": "Corporate Identity",
         "packaging_design": "Packaging Design",
-        "logo_design": "Logo Design",
         "additional": "Additional",
         "service_prices": "Services & Prices",
         "branding_test": "Branding Test",
@@ -179,6 +179,13 @@
       "cta1_title": "Your brand could look this good too.",
       "cta1_desc": "Take your business to the next level with professional design. We'll help find the perfect solution for your business.",
       "cta1_button": "For my business too"
+    },
+    "urgencyBlock": {
+        "title": "🔥 BEFORE YOU CLOSE THIS PAGE...",
+        "subtitle": "Imagine:",
+        "line1": "Tomorrow your competitor launched with a professional brand. The logo is mind-blowing. The packaging is the first thing that catches the eye in the store.",
+        "line2": "Customers are buying not from you, but from THEM.",
+        "line3": "The reason is simple: They invested. You... thought about it."
     },
     "servicesHero": {
         "title": "Services that empower your branding",
@@ -715,5 +722,4 @@
   
 
     
-
-
+    

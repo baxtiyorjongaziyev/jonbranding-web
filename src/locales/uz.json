@@ -10,10 +10,10 @@
         "brand_strategy_desc": "Brendingiz uchun poydevor — bozor tahlili, pozitsiyalash va kommunikatsiya.",
         "naming": "Neyming",
         "naming_desc": "Brendingiz uchun unutilmas, kuchli va huquqiy jihatdan toza nom tanlash.",
-        "corporate_style": "Firma Uslubi",
-        "corporate_style_desc": "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
         "logo_design": "Logotip Dizayni",
         "logo_design_desc": "Biznesingiz mohiyatini aks ettiruvchi noyob va esda qolarli belgi yaratish.",
+        "corporate_style": "Firma Uslubi",
+        "corporate_style_desc": "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
         "packaging_design": "Qadoq Dizayni",
         "packaging_design_desc": "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
         "services_and_prices": "Xizmatlar va Narxlar",
@@ -39,9 +39,9 @@
         "services": "Xizmatlarimiz",
         "brand_strategy": "Brend Strategiyasi",
         "naming": "Neyming",
+        "logo_design": "Logotip Dizayni",
         "corporate_style": "Firma Uslubi",
         "packaging_design": "Qadoq Dizayni",
-        "logo_design": "Logotip Dizayni",
         "additional": "Qo'shimcha",
         "service_prices": "Xizmatlar va Narxlar",
         "branding_test": "Brending Testi",
@@ -179,6 +179,13 @@
        "cta1_title": "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
        "cta1_desc": "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
        "cta1_button": "Mening biznesim uchun ham"
+    },
+    "urgencyBlock": {
+        "title": "🔥 SIZ BU SAHIFANI YOPISHDAN OLDIN...",
+        "subtitle": "Tasavvur qiling:",
+        "line1": "Ertaga sizning raqibingiz professional brend bilan chiqdi.",
+        "line2": "Logo — aql bovar qilmaydi. Qadoq — do'konda birinchi bo'lib ko'zga tashlanadi. Mijozlar — sizdan emas, UNDAN sotib olishyapti.",
+        "line3": "Sabab oddiy: U sarmoya kiritdi. Siz esa... o'yladingiz."
     },
     "servicesHero": {
         "title": "Brendingingizga kuch bag‘ishlaydigan xizmatlar",
