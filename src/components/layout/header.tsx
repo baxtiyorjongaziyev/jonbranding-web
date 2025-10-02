@@ -47,6 +47,8 @@ type Dictionary = {
     corporate_style_desc: string;
     packaging_design: string;
     packaging_design_desc: string;
+    logo_design: string;
+    logo_design_desc: string;
     services_and_prices: string;
     services_and_prices_desc: string;
     contact_by_phone: string;
@@ -186,6 +188,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   const services = [
     { title: dictionary.brand_strategy, href: `/${lang}/xizmatlar/brand-strategy`, description: dictionary.brand_strategy_desc },
+    { title: dictionary.logo_design, href: `/${lang}/xizmatlar/logo-dizayni`, description: dictionary.logo_design_desc },
     { title: dictionary.naming, href: `/${lang}/xizmatlar/neyming`, description: dictionary.naming_desc },
     { title: dictionary.corporate_style, href: `/${lang}/xizmatlar/firmenniy-stil`, description: dictionary.corporate_style_desc },
     { title: dictionary.packaging_design, href: `/${lang}/xizmatlar/qadoq-dizayni`, description: dictionary.packaging_design_desc },

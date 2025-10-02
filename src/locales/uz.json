@@ -12,6 +12,8 @@
         "naming_desc": "Brendingiz uchun unutilmas, kuchli va huquqiy jihatdan toza nom tanlash.",
         "corporate_style": "Firma Uslubi",
         "corporate_style_desc": "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
+        "logo_design": "Logotip Dizayni",
+        "logo_design_desc": "Biznesingiz mohiyatini aks ettiruvchi noyob va esda qolarli belgi yaratish.",
         "packaging_design": "Qadoq Dizayni",
         "packaging_design_desc": "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
         "services_and_prices": "Xizmatlar va Narxlar",
@@ -39,6 +41,7 @@
         "naming": "Neyming",
         "corporate_style": "Firma Uslubi",
         "packaging_design": "Qadoq Dizayni",
+        "logo_design": "Logotip Dizayni",
         "additional": "Qo'shimcha",
         "service_prices": "Xizmatlar va Narxlar",
         "branding_test": "Brending Testi",
@@ -67,6 +70,7 @@
             "naming": "Neyming",
             "corporate_style": "Firma Uslubi",
             "packaging_design": "Qadoq Dizayni",
+            "logo_design": "Logotip Dizayni",
             "patent_calculator": "Patent Kalkulyatori"
         }
     },
@@ -186,6 +190,12 @@
                 "buttonText": "Ko'proq o'qish"
             },
             {
+                "id": "logo-design",
+                "title": "Logotip Dizayni",
+                "description": "Biznesingiz mohiyatini aks ettiruvchi noyob va esda qolarli belgi yaratish.",
+                "buttonText": "Ko'proq o'qish"
+            },
+            {
                 "id": "naming",
                 "title": "Neyming",
                 "description": "Brend uchun unutilmas va kuchli nom tanlash.",
@@ -203,13 +213,7 @@
                 "description": "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
                 "buttonText": "Ko'proq o'qish"
             }
-        ],
-        "cta1_title": "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
-        "cta1_desc": "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
-        "cta1_button": "Mening biznesim uchun ham",
-        "cta2_title": "Loyihangizni muhokama qilishga tayyormisiz?",
-        "cta2_desc": "Biznesingiz uchun qanday yechimlar taklif qila olishimizni bilish uchun bepul konsultatsiyaga yoziling.",
-        "cta2_button": "Bepul konsultatsiya olish"
+        ]
     },
     "stats": {
         "experience": "Yillik tajriba",
@@ -442,6 +446,34 @@
         ],
         "cta_title": "Firma uslubi — o'sish vositasi",
         "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi, uzoq vaqt esda qoladi va ko'proq ishonch uyg'otadi. Biz shunchaki vizual uslub emas, balki brendning o'sishiga, izchil va boshqariladigan bo'lishiga yordam beradigan vosita yaratamiz."
+    },
+    "logoDesignPage": {
+        "metadata": {
+            "title": "Logotip Dizayni | Jon.Branding",
+            "description": "Logotip — bu biznesning yuzi. Biz sizning brendingiz mohiyatini aks ettiruvchi, raqobatchilardan ajralib turishga yordam beradigan noyob, esda qolarli va strategik logotiplar yaratamiz."
+        },
+        "title": "Logotip Dizayni",
+        "subtitle": "Logotip shunchaki rasm emas, bu — strategik vosita, biznesingizning yuzi va siz qoldiradigan birinchi taassurot.",
+        "section1_title": "Nima uchun logotip bunchalik muhim?",
+        "section1_p1": "Bugungi raqobatli bozorda logotip mijozning ko'ziga birinchi bo'lib tashlanadigan narsadir. Yaxshi logotip nafaqat chiroyli dizayn, balki biznesingiz qadriyatlari, professionalligi va o'ziga xosligini ifodalovchi ramzdir.",
+        "section1_p2": "Bu mijozlar sizni tanib olishi va eslab qolishiga yordam beradigan asosiy element. Professional logotip ishonch uyg'otadi va hissiy aloqani shakllantirib, bir martalik xaridorlarni sodiq muxlislarga aylantiradi.",
+        "values_title": "Yaxshi logotip qanday bo'lishi kerak:",
+        "values": [
+            { "title": "Oddiy va Esda Qolarli", "description": "Eng yaxshi logotiplar kichik hajmda yoki uzoqdan ham oson taniladi va eslab qolinadi." },
+            { "title": "Noyob va Vaqtdan Mustaqil", "description": "U sizni raqobatchilardan ajratib turishi va bir necha yildan keyin modadan chiqib qolmasligi kerak." },
+            { "title": "Strategik va Ma'noli", "description": "Har bir chiziq, rang va shakl biznesingizning xarakteri va maqsadlarini aks ettirishi lozim." }
+        ],
+        "process_title": "Biz logotipni qanday yaratamiz?",
+        "process_subtitle": "Logotip yaratish jarayonimiz shunchaki o'tkinchi ilhomga emas, balki chuqur tahlil va strategik fikrlashga asoslangan.",
+        "process_steps": [
+            { "title": "Brif va Tadqiqot", "description": "Biznesingiz, maqsadingiz, maqsadli auditoriyangiz va raqobatchilaringizni chuqur o'rganamiz." },
+            { "title": "Konsepsiyalarni ishlab chiqish", "description": "Brendingiz strategiyasi va xarakterini aks ettiruvchi bir nechta vizual konsepsiyalarni ishlab chiqamiz." },
+            { "title": "Dizayn va Taqdimot", "description": "Tanlangan konsepsiyani takomillashtiramiz, real tashuvchilarda (mokaplarda) ko'rsatamiz va uning mantig'ini tushuntiramiz." },
+            { "title": "Yakunlash va Topshirish", "description": "Har qanday kontekstda foydalanish uchun barcha kerakli fayl formatlarini (vektor, rastr) tayyorlaymiz va uni qo'llash bo'yicha mini-qo'llanma taqdim etamiz." }
+        ],
+        "cta_title": "Ishlaydigan logotip yaratishga tayyormisiz?",
+        "cta_description": "Shablon logotipga rozi bo'lmang. Keling, biznesingiz uchun muvaffaqiyatingiz poydevoriga aylanadigan noyob va kuchli belgi yaratamiz.",
+        "cta_button": "Bepul Maslahat Olish"
     },
     "namingPage": {
         "metadata": {

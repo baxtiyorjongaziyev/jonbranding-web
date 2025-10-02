@@ -1,10 +1,11 @@
+
 'use client';
 
 import { FC, useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, BrainCircuit, ScanText, Package, Paintbrush } from 'lucide-react';
+import { ArrowRight, BrainCircuit, ScanText, Package, Paintbrush, Fingerprint } from 'lucide-react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Skeleton } from '../ui/skeleton';
 
@@ -13,6 +14,7 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     'naming': ScanText,
     'corporate-style': Paintbrush,
     'packaging-design': Package,
+    'logo-design': Fingerprint,
 };
 
 const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
@@ -35,7 +37,7 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
     return (
         <section className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {translations.services.map((service: any) => {
                         const Icon = serviceIcons[service.id] || Paintbrush;
                         return (
