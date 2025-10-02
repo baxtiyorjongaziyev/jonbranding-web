@@ -22,6 +22,8 @@ const pickTwoLabels: Record<string, string> = {
     fast: 'Tez',
 };
 
+const UZS_TO_USD_RATE = 1 / 12700;
+
 
 async function sendMetaConversionEvent(data: any) {
     const accessToken = process.env.META_API_ACCESS_TOKEN;
@@ -35,6 +37,10 @@ async function sendMetaConversionEvent(data: any) {
     const url = `https://graph.facebook.com/v20.0/${pixelId}/events`;
     const eventId = `server-event-${Date.now()}`;
 
+    const valueInUzs = data.totalPrice || 0;
+    const valueInUsd = (valueInUzs * UZS_TO_USD_RATE).toFixed(2);
+
+
     const payload = {
         data: [
             {
@@ -47,9 +53,8 @@ async function sendMetaConversionEvent(data: any) {
                     fn: data.fullName ? [data.fullName] : [],
                 },
                 custom_data: {
-                    value: data.totalPrice || 0,
-                    currency: 'UZS',
-                    ...data,
+                    value: valueInUsd,
+                    currency: 'USD',
                 }
             }
         ],
