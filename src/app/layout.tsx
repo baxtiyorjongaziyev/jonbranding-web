@@ -100,7 +100,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
         {/* Google Analytics */}
         <Script
             strategy="afterInteractive"
-            src="https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY"
+            src="https://www.googletagmanager.com/gtag/js?id=G-BTSGJQLMMV"
         />
         <Script
           id="gtag-init"
@@ -110,7 +110,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-B3ZSKB40XY', {
+              gtag('config', 'G-BTSGJQLMMV', {
                 page_path: window.location.pathname,
               });
             `,
