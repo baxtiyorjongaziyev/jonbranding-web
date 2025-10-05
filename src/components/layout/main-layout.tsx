@@ -116,7 +116,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 onFormSubmitSuccess={handleCloseModal}
                 lang={lang}
             />
-            {dictionary.aiAssistant && <AiAssistant lang={lang} dictionary={dictionary.aiAssistant} />}
+            {/* {dictionary.aiAssistant && <AiAssistant lang={lang} dictionary={dictionary.aiAssistant} />} */}
             <CookieConsentBanner />
         </div>
     );
