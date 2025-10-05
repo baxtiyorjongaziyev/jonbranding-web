@@ -86,7 +86,7 @@
             "Mijozlar sizni |sevib qolsin|. Qayta va qayta.",
             "Kichik biznesdan |kuchli brendgacha|. Bir qadamda."
         ],
-        "description": "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span class='font-bold text-foreground'>natija keltiradigan</span>, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.",
+        "description": "Biz shunchaki logotip chizmaymiz. Toshkentdagi yetakchi brending agentligi sifatida, biz biznesingiz uchun <span class='font-bold text-foreground'>natija keltiradigan</span>, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz. Brend strategiyasi, neyming va logotip dizayn xizmatlarini taklif etamiz.",
         "buttonTexts": [
             "Brendimni tahlil qiling",
             "Sotuvni oshirishga yordam bering",
@@ -161,19 +161,6 @@
             "title": "Xatolik!",
             "description": "So‘rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring."
         }
-    },
-    "aiAssistant": {
-        "initialMessage": "Assalomu alaykum! Men Jon, sizning virtual yordamchingizman. Brending strategiyasi, narxlar yoki ish jarayonimiz haqida bemalol so'rashingiz mumkin.",
-        "suggestionChips": [
-            "Xizmatlar va narxlar",
-            "Portfolioingizni ko'rsating",
-            "Ishlash jarayoni qanday?"
-        ],
-        "inputPlaceholder": "Savolingizni yozing...",
-        "toastErrorTitle": "Xatolik!",
-        "toastErrorDescription": "Kechirasiz, javob berishda xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring.",
-        "cardTitle": "Jon Assistant",
-        "cardSubtitle": "Odatda darhol javob beradi"
     },
     "home": {
        "cta1_title": "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
@@ -421,8 +408,8 @@
     },
     "brandStrategyPage": {
         "metadata": {
-            "title": "Brend Strategiyasi | Jon.Branding",
-            "description": "Brend strategiyasi — bu biznesning o'sish vositasi. Brendingizni shunchaki chiroyli emas, balki ishlaydigan tizimga aylantiring."
+            "title": "Brend Strategiyasi va Platformasi | Jon.Branding Agentligi Toshkent",
+            "description": "Brend strategiyasi — bu biznesning o'sish vositasi. Brendingizni shunchaki chiroyli emas, balki ishlaydigan tizimga aylantiring. Toshkentdagi brending agentligimizda brend platformasi va strategiyasini ishlab chiqamiz."
         },
         "title": "Brend Strategiyasi",
         "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesning o'sishiga yordam beradigan aniq g'oya.",
@@ -446,8 +433,8 @@
     },
     "corporateStylePage": {
         "metadata": {
-            "title": "Firma Uslubi | Jon.Branding",
-            "description": "Biz shunchaki chiroyli rasmlar yaratmaymiz, biz brendingiz uchun ishlaydigan va natija keltiradigan tizimli vizual uslubni ishlab chiqamiz. Logotip, ranglar, shriftlar va boshqa elementlar orqali brendingizni taniladigan va esda qolarli qiling."
+            "title": "Firma uslubi va Brandbook | Jon.Branding Agentligi Toshkent",
+            "description": "Biz shunchaki chiroyli rasmlar yaratmaymiz, biz brendingiz uchun ishlaydigan va natija keltiradigan tizimli vizual uslubni (firma uslubi, brendbuk) ishlab chiqamiz. Logotip, ranglar, shriftlar va boshqa elementlar orqali brendingizni taniladigan va esda qolarli qiling."
         },
         "title": "Firma Uslubini Ishlab Chiqish",
         "subtitle": "Brendning asosiy elementlaridan biri — uning vizual tarkibiy qismidir. Aynan u g'oyalarni, ma'nolarni va qadriyatlarni ko'rish, his qilish va eslab qolish mumkin bo'lgan obrazlarga aylantiradi.",
@@ -464,15 +451,15 @@
             { "title": "Tadqiqot va konsepsiya", "description": "Auditoriya, bozor, raqobatchilar va brendning o'rnini tahlil qilamiz. Vizual uslubda aks ettirilishi kerak bo'lgan asosiy ma'no va g'oyalarni aniqlaymiz." },
             { "title": "Vizual kodni ishlab chiqish", "description": "Brendning yaxlit obrazini shakllantiradigan logotip, firma ranglari, tipografika, grafika, ikonografiya, maket tamoyillarini yaratamiz." },
             { "title": "Firma uslubi tizimi", "description": "Barcha formatlarda — qadoqdan tortib raqamli muhitgacha — vizual obrazning izchilligini saqlashga yordam beradigan moslashuvchan elementlarni ishlab chiqamiz." },
-            { "title": "Yakunlash va gaydlayn", "description": "Brend har qanday tashuvchida yagona obrazni saqlab qolishi uchun uslubdan foydalanish qoidalari yozilgan gaydlaynni yaratamiz." }
+            { "title": "Yakunlash va gaydlayn", "description": "Brend har qanday tashuvchida yagona obrazni saqlab qolishi uchun uslubdan foydalanish qoidalari yozilgan gaydlaynni (brendbukni) yaratamiz." }
         ],
         "cta_title": "Firma uslubi — o'sish vositasi",
         "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi, uzoq vaqt esda qoladi va ko'proq ishonch uyg'otadi. Biz shunchaki vizual uslub emas, balki brendning o'sishiga, izchil va boshqariladigan bo'lishiga yordam beradigan vosita yaratamiz."
     },
     "logoDesignPage": {
         "metadata": {
-            "title": "Logotip Dizayni | Jon.Branding",
-            "description": "Logotip — bu biznesning yuzi. Biz sizning brendingiz mohiyatini aks ettiruvchi, raqobatchilardan ajralib turishga yordam beradigan noyob, esda qolarli va strategik logotiplar yaratamiz."
+            "title": "Professional Logotip Dizayn Xizmatlari | Jon.Branding Agentligi O'zbekiston",
+            "description": "Logotip — bu biznesning yuzi. O'zbekistondagi logotip dizayn agentligimiz brendingiz mohiyatini aks ettiruvchi va raqobatchilardan ajralib turishga yordam beradigan noyob, esda qolarli va strategik logotiplar yaratadi."
         },
         "title": "Logotip Dizayni",
         "subtitle": "Logotip shunchaki rasm emas, bu — strategik vosita, biznesingizning yuzi va siz qoldiradigan birinchi taassurot.",
@@ -499,8 +486,8 @@
     },
     "namingPage": {
         "metadata": {
-            "title": "Neyming | Jon.Branding",
-            "description": "Brend uchun unutilmas va kuchli nom tanlash. Yaxshi nom shunchaki chiroyli eshitilmaydi, u mohiyatni yetkazadi, esda qoladi va brendning raqobatchilar orasida ajralib turishiga yordam beradi."
+            "title": "Neyming Xizmatlari Toshkentda | Jon.Branding Agentligi",
+            "description": "Brend uchun unutilmas va kuchli nom tanlash. Yaxshi nom shunchaki chiroyli eshitilmaydi, u mohiyatni yetkazadi, esda qoladi va brendning raqobatchilar orasida ajralib turishiga yordam beradi. Neyming xizmatlarimiz sizga ideal nom topishga yordam beradi."
         },
         "title": "Neyming — Kuchli Brend Nomi",
         "subtitle": "Brend nomi — bu u haqidagi birinchi taassurot, uning energiyasi, xarakteri va so'zda ifodalangan g'oyasi. Yaxshi nom shunchaki chiroyli eshitilmaydi, u mohiyatni yetkazadi, esda qoladi va brendning raqobatchilar orasida ajralib turishiga yordam beradi.",
@@ -602,8 +589,8 @@
     },
     "packagingPage": {
         "metadata": {
-            "title": "Qadoq Dizayni | Jon.Branding",
-            "description": "Biz shunchaki chiroyli qadoq emas, balki mahsulotingizni sotadigan kuchli marketing vositasini yaratamiz. Qadoq dizayni orqali brendingizni raqobatchilardan ajratib turing va mijozlar mehrini qozoning."
+            "title": "Qadoq Dizayni Xizmatlari O'zbekistonda | Jon.Branding",
+            "description": "Biz shunchaki chiroyli qadoq emas, balki mahsulotingizni sotadigan kuchli marketing vositasini yaratamiz. Qadoq dizayn agentligimiz brendingizni raqobatchilardan ajratib turishiga va mijozlar mehrini qozonishiga yordam beradi."
         },
         "title": "Qadoq Dizaynini Ishlab Chiqish",
         "subtitle": "Yuqori raqobat sharoitida qadoq ko'pincha asosiy marketing vositasiga aylanadi. U brendni peshtaxtada ajratib ko'rsatadi, uning tarixini so'zlab beradi va bir qarashdayoq auditoriya bilan aloqa o'rnatadi.",
@@ -730,7 +717,5 @@
         }
     }
 }
-  
 
-    
     

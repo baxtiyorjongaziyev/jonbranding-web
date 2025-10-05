@@ -86,7 +86,7 @@
             "Make customers |fall in love| with you. Again and again.",
             "From small business to a |strong brand|. In one step."
         ],
-        "description": "We don't just draw logos. We build a <span class='font-bold text-foreground'>results-driven</span>, strategy-based brand system for your business that will win the hearts of your customers.",
+        "description": "We don't just draw logos. As a leading branding agency in Tashkent, we build a <span class='font-bold text-foreground'>results-driven</span>, strategy-based brand system for your business that will win the hearts of your customers. We offer brand strategy, naming, and logo design services.",
         "buttonTexts": [
             "Analyze my brand",
             "Help me increase sales",
@@ -161,19 +161,6 @@
             "title": "Error!",
             "description": "There was an error submitting your request. Please try again."
         }
-    },
-    "aiAssistant": {
-        "initialMessage": "Hello! I'm Jon, your virtual assistant. Feel free to ask about branding strategy, pricing, or our work process.",
-        "suggestionChips": [
-            "Services and Prices",
-            "Show me your portfolio",
-            "What is the work process?"
-        ],
-        "inputPlaceholder": "Write your question...",
-        "toastErrorTitle": "Error!",
-        "toastErrorDescription": "Sorry, there was an error processing your request. Please try again later.",
-        "cardTitle": "Jon Assistant",
-        "cardSubtitle": "Usually replies instantly"
     },
     "home": {
       "cta1_title": "Your brand could look this good too.",
@@ -421,8 +408,8 @@
     },
     "brandStrategyPage": {
         "metadata": {
-            "title": "Brand Strategy | Jon.Branding",
-            "description": "Brand strategy is a business growth tool. Turn your brand from just beautiful into a working system."
+            "title": "Brand Strategy and Platform | Jon.Branding Agency Tashkent",
+            "description": "A brand strategy is a business growth tool. Turn your brand from just beautiful into a working system with our branding agency in Tashkent. We develop brand platforms and strategies."
         },
         "title": "Brand Strategy",
         "subtitle": "A strong brand is a clear idea that inspires, unites, and helps a business grow.",
@@ -446,8 +433,8 @@
     },
     "corporateStylePage": {
         "metadata": {
-            "title": "Corporate Identity | Jon.Branding",
-            "description": "We don't just create beautiful pictures; we develop a systematic visual style that works for your brand and delivers results. Make your brand recognizable and memorable through a logo, colors, fonts, and other elements."
+            "title": "Corporate Identity and Brandbook | Jon.Branding Agency Tashkent",
+            "description": "We don't just create beautiful pictures; we develop a systematic visual style (corporate identity, brandbook) that works for your brand and delivers results. Make your brand recognizable and memorable through a logo, colors, fonts, and other elements."
         },
         "title": "Corporate Identity Development",
         "subtitle": "One of the key elements of a brand is its visual component. It is what turns ideas, meanings, and values into images that can be seen, felt, and remembered.",
@@ -464,15 +451,15 @@
             { "title": "Research and concept", "description": "We analyze the audience, market, competitors, and the brand's position. We identify the key meanings and ideas that should be reflected in the visual style." },
             { "title": "Visual code development", "description": "We create the logo, corporate colors, typography, graphics, iconography, and layout principles that form a cohesive brand image." },
             { "title": "Corporate identity system", "description": "We develop flexible elements that help maintain the consistency of the visual image across all formats — from packaging to the digital environment." },
-            { "title": "Finalization and guideline", "description": "We create a guideline with rules for using the style so that the brand maintains a unified image on any carrier." }
+            { "title": "Finalization and guideline", "description": "We create a guideline (brandbook) with rules for using the style so that the brand maintains a unified image on any carrier." }
         ],
         "cta_title": "Corporate identity is a growth tool",
         "cta_description": "Brands with a strong identity are recognized faster, remembered longer, and inspire more trust. We create not just a visual style, but a tool that helps the brand grow, be consistent, and manageable."
     },
     "logoDesignPage": {
         "metadata": {
-            "title": "Logo Design | Jon.Branding",
-            "description": "A logo is the face of your business. We create unique, memorable, and strategic logos that reflect the essence of your brand and help you stand out from the competition."
+            "title": "Professional Logo Design Services | Jon.Branding Agency Uzbekistan",
+            "description": "A logo is the face of your business. Our logo design agency in Uzbekistan creates unique, memorable, and strategic logos that reflect the essence of your brand and help you stand out from the competition."
         },
         "title": "Logo Design",
         "subtitle": "A logo is more than just a picture; it's a strategic tool, the face of your business, and the first impression you make.",
@@ -499,8 +486,8 @@
     },
     "namingPage": {
         "metadata": {
-            "title": "Naming | Jon.Branding",
-            "description": "Choosing a memorable and strong name for a brand. A good name doesn't just sound beautiful; it conveys the essence, is memorable, and helps the brand stand out among competitors."
+            "title": "Naming Services in Tashkent | Jon.Branding Agency",
+            "description": "Choosing a memorable and strong name for a brand. A good name doesn't just sound beautiful; it conveys the essence, is memorable, and helps the brand stand out. Our naming services will help you find the perfect name."
         },
         "title": "Naming — A Strong Brand Name",
         "subtitle": "A brand name is the first impression of it, its energy, character, and the idea expressed in a word. A good name doesn't just sound beautiful; it conveys the essence, is memorable, and helps the brand stand out among competitors.",
@@ -602,8 +589,8 @@
     },
     "packagingPage": {
         "metadata": {
-            "title": "Packaging Design | Jon.Branding",
-            "description": "We don't just create beautiful packaging; we create a powerful marketing tool that sells your product. Differentiate your brand from competitors and win customers' affection through packaging design."
+            "title": "Packaging Design Services in Uzbekistan | Jon.Branding",
+            "description": "We don't just create beautiful packaging; we create a powerful marketing tool that sells your product. Our packaging design agency in Uzbekistan will help your brand stand out from competitors and win customers' affection."
         },
         "title": "Packaging Design Development",
         "subtitle": "In a highly competitive environment, packaging often becomes a key marketing tool. It distinguishes the brand on the shelf, tells its story, and connects with the audience at first glance.",
@@ -730,7 +717,5 @@
         }
     }
 }
-  
 
-    
     

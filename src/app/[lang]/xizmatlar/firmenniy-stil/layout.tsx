@@ -17,6 +17,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
+    keywords: ["firma uslubi yaratish", "brend dizayn toshkent", "korporativ aydentika", "brandbook tayyorlash", "vizual uslub"],
     openGraph: {
       title: t.title,
       description: t.description,
@@ -54,3 +55,5 @@ const FirmenniyStilLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }
 }
 
 export default FirmenniyStilLayout;
+
+    
