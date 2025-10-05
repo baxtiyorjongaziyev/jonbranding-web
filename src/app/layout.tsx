@@ -16,8 +16,8 @@ const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 
-const APP_NAME = "Jon.Branding | Biznesingiz uchun natija keltiradigan brending";
-const APP_DESCRIPTION = "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun natija keltiradigan, strategiyaga asoslangan va mijozlaringiz qalbidan joy oladigan brend tizimini qurib beramiz.";
+const APP_NAME = "Jon.Branding | Toshkentdagi brending agentligi: Brend strategiyasi, Naming, Logotip dizayn";
+const APP_DESCRIPTION = "Jon.Branding — O'zbekistondagi premium brending agentligi. Brend strategiyasi, neyming, logotip dizayn, firma uslubi va brandbook tayyorlash xizmatlari. Biznesingiz uchun natija keltiradigan brend yaratamiz.";
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
 const BASE_URL = 'https://jonbranding.uz';
 
@@ -30,6 +30,23 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
   return {
     title: APP_NAME,
     description: APP_DESCRIPTION,
+    keywords: [
+        "branding agentligi toshkent",
+        "brend strategiyasi",
+        "naming xizmatlari",
+        "logotip dizayn",
+        "firma uslubi yaratish",
+        "brandbook tayyorlash",
+        "qadoqlash dizayni",
+        "qadoq dizayn agentligi",
+        "brend yaratish xizmati",
+        "brend dizayn toshkent",
+        "premium brending o‘zbekiston",
+        "packaging design uzbekistan",
+        "logo design agency uzbekistan",
+        "creative agency fergana valley",
+        "jon branding agency"
+    ],
     alternates: {
       canonical: `${BASE_URL}/${lang}`,
       languages: alternates,
@@ -70,6 +87,12 @@ const jsonLd = {
   telephone: '+998336450097',
   url: 'https://jonbranding.uz',
   logo: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
+  description: APP_DESCRIPTION,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Toshkent',
+    addressCountry: 'UZ'
+  }
 };
 
 
@@ -86,7 +109,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
-        {/* Google Tag Manager */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -98,6 +120,28 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
             })(window,document,'script','dataLayer','GTM-5GRQBW84');`,
           }}
         />
+
+        <Script id="yandex-metrika" strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+                (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+                ym(97914878, "init", {
+                      clickmap:true,
+                      trackLinks:true,
+                      accurateTrackBounce:true,
+                      webvisor:true
+                });
+              `
+            }}
+        />
+        <noscript>
+          <div><img src="https://mc.yandex.ru/watch/97914878" style={{ position:'absolute', left:'-9999px' }} alt="" /></div>
+        </noscript>
       </head>
       <body className="font-body bg-white antialiased">
         <noscript>
@@ -119,3 +163,5 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
 }
 
 export default RootLayout;
+
+    

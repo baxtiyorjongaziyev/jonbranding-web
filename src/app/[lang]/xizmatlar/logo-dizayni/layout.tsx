@@ -17,6 +17,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
+    keywords: ["logotip dizayn", "logo design agency uzbekistan", "toshkentda logotip yasash", "brend dizayn", "professional logotip"],
     openGraph: {
       title: t.title,
       description: t.description,
@@ -54,3 +55,5 @@ const LogoDesignLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) =
 }
 
 export default LogoDesignLayout;
+
+    

@@ -17,6 +17,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
+    keywords: ["qadoqlash dizayni", "packaging design uzbekistan", "qadoq dizayn agentligi", "mahsulot qadog'i dizayni", "dizayn studiyasi toshkent"],
     openGraph: {
       title: t.title,
       description: t.description,
@@ -54,3 +55,5 @@ const QadoqDizayniLayout: FC<Readonly<{ children: ReactNode }>> = ({ children })
 }
 
 export default QadoqDizayniLayout;
+
+    
