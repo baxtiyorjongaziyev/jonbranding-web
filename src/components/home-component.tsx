@@ -8,7 +8,6 @@ import Hero from '@/components/sections/hero';
 import TrustedBy from '@/components/sections/trusted-by';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
-import { motion } from 'framer-motion';
 import Stats from '@/components/sections/stats';
 import CtaBlock from '@/components/sections/cta-block';
 
@@ -71,20 +70,6 @@ const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
 };
 
 
-const AnimatedSection: FC<{children: ReactNode}> = ({ children }) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-        >
-            {children}
-        </motion.div>
-    );
-};
-
-
 const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) => {
     const [isClient, setIsClient] = useState(false);
     const { tg } = useTelegram();
@@ -143,27 +128,25 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     return (
         <>
             <main>
-                <AnimatedSection><Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} /></AnimatedSection>
-                <AnimatedSection><Stats dictionary={dictionary.stats} /></AnimatedSection>
-                <AnimatedSection><TrustedBy lang={lang} dictionary={dictionary.trustedBy} /></AnimatedSection>
-                <AnimatedSection><TargetAudience lang={lang} dictionary={dictionary.targetAudience} /></AnimatedSection>
-                <AnimatedSection><WhyUs onCtaClick={handleOpenModal} lang={lang} /></AnimatedSection>
-                <AnimatedSection><BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} /></AnimatedSection>
-                <AnimatedSection><Testimonials lang={lang} dictionary={dictionary.testimonials} /></AnimatedSection>
-                <AnimatedSection><Gallery lang={lang} dictionary={dictionary.gallery} /></AnimatedSection>
-                <AnimatedSection><Video /></AnimatedSection>
-                 <AnimatedSection>
-                    <CtaBlock 
-                        title={dictionary.home.cta1_title}
-                        description={dictionary.home.cta1_desc}
-                        buttonText={dictionary.home.cta1_button}
-                        onCtaClick={handleOpenModal}
-                    />
-                </AnimatedSection>
-                <AnimatedSection><Founder lang={lang} dictionary={dictionary.founder} /></AnimatedSection>
-                <AnimatedSection><Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} /></AnimatedSection>
-                <AnimatedSection><LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} /></AnimatedSection>
-                <AnimatedSection><Faq lang={lang} dictionary={dictionary.faq} /></AnimatedSection>
+                <Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
+                <Stats dictionary={dictionary.stats} />
+                <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
+                <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />
+                <WhyUs onCtaClick={handleOpenModal} lang={lang} />
+                <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
+                <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+                <Gallery lang={lang} dictionary={dictionary.gallery} />
+                <Video />
+                <CtaBlock 
+                    title={dictionary.home.cta1_title}
+                    description={dictionary.home.cta1_desc}
+                    buttonText={dictionary.home.cta1_button}
+                    onCtaClick={handleOpenModal}
+                />
+                <Founder lang={lang} dictionary={dictionary.founder} />
+                <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />
+                <LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} />
+                <Faq lang={lang} dictionary={dictionary.faq} />
             </main>
             <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
         </>
