@@ -21,7 +21,7 @@ export function middleware(request: NextRequest) {
     // Force Uzbek for users from Uzbekistan on their first visit.
     locale = 'uz';
   } else {
-    // For other users, determine locale from browser settings.
+    // For other users, default to uzbek as well.
     locale = getLocale(request);
   }
 
