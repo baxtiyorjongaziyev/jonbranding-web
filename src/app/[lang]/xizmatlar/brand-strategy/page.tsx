@@ -89,12 +89,12 @@ const BrandStrategyPage: FC = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div className="lg:order-last">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{translations.section2_title || "Brend-strategiya har qanday biznesga kerak"}</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{translations.section2_title}</h2>
                         <div className="mt-4 space-y-4 text-lg text-gray-700">
-                            <p>{"Brend strategiyasi ham yangi, ham uzoq vaqtdan beri mavjud bo'lgan kompaniyalarga kerak."}</p>
-                            <p><span className="font-bold text-dark-blue">{"Startaplarga"}</span> {"u boshidanoq o'z missiyasi, qadriyatlari va o'ziga xosligini aniqlashga, bozorda kerakli o'rinni egallashga va mijozlarni jalb qilishga yordam beradi."}</p>
-                            <p><span className="font-bold text-dark-blue">{"Yirik kompaniyalar uchun"}</span> {"strategiya — bu o'sish va obro'ni boshqarish vositasidir. Bunday holda u dolzarblikni saqlashga, o'zgarishlarga moslashishga va auditoriya bilan mustahkam munosabatlar o'rnatishga yordam beradi."}</p>
-                            <p className="font-bold text-dark-blue">{"Biznes hajmidan qat'i nazar, brend-strategiya asosiy savolga javob beradi: mijoz nima uchun aynan sizni tanlashi kerak?"}</p>
+                            <p>{translations.section2_p1}</p>
+                            <p><span className="font-bold text-dark-blue">{translations.section2_p2_bold}</span> {translations.section2_p2_text}</p>
+                            <p><span className="font-bold text-dark-blue">{translations.section2_p3_bold}</span> {translations.section2_p3_text}</p>
+                            <p className="font-bold text-dark-blue">{translations.section2_p4}</p>
                         </div>
                     </div>
                     <div>
