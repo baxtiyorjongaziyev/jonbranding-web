@@ -3,7 +3,7 @@
 
 import { FC, useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, Gem } from 'lucide-react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { useParams } from 'next/navigation';
 import { Skeleton } from '../ui/skeleton';
@@ -13,6 +13,29 @@ import { Button } from '../ui/button';
 interface PersonalOfferBlockProps {
     onCtaClick: () => void;
 }
+
+const offerDetails = [
+    {
+        title: "STRATEGIYA",
+        points: ["Brend pozitsiyasi va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Unikal savdo taklifi (UST)"]
+    },
+    {
+        title: "IDENTITET",
+        points: ["Professional logo (3-5 variant)", "Korporativ rang palitrasi", "Tipografiya va stil yo'riqnomasi"]
+    },
+    {
+        title: "HUJJATLAR",
+        points: ["To'liq Brandbook (30-50 sahifa)", "Fayllar barcha formatlarda (AI, PNG, PDF, SVG)", "Qo'llanma: logoni qanday ishlatish"]
+    },
+    {
+        title: "HUQUQIY HIMOYA",
+        points: ["Naming bo'yicha maslahat", "Patent va Trademark ro'yxatga olish jarayoni", "Intellektual mulk himoyasi strategiyasi"]
+    },
+    {
+        title: "QO'LLAB-QUVVATLASH",
+        points: ["3 oy bepul tahrirlash", "Telegram orqali doimiy aloqa", "Brend qo'llash bo'yicha maslahatlar"]
+    }
+]
 
 const PersonalOfferBlock: FC<PersonalOfferBlockProps> = ({ onCtaClick }) => {
     const params = useParams();
@@ -38,26 +61,33 @@ const PersonalOfferBlock: FC<PersonalOfferBlockProps> = ({ onCtaClick }) => {
     return (
         <section className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4">
-                <Card className="max-w-3xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl p-8 sm:p-12 text-center relative overflow-hidden">
+                <Card className="max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl p-8 sm:p-12 text-center relative overflow-hidden">
                     <div className="absolute -bottom-20 -right-20 w-64 h-64 opacity-10">
                         <Logo isWhite={true} />
                     </div>
                     <div className="relative z-10">
                         <h2 className="text-3xl sm:text-4xl font-bold text-white">
-                           {translations.title}
+                           💎 MENING TAKLIFIM:
                         </h2>
-                        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-left max-w-lg mx-auto">
-                            {translations.points.map((point: string, index: number) => (
-                                <div key={index} className="flex items-start gap-3">
-                                    <Check className="h-6 w-6 text-green-400 flex-shrink-0 mt-1" />
-                                    <span className="text-lg text-blue-100">{point}</span>
+                        <p className="mt-2 text-xl text-blue-200">Siz oladigan narsa:</p>
+                        
+                        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+                            {offerDetails.map((section, index) => (
+                                <div key={index} className="bg-white/5 p-4 rounded-xl border border-white/10">
+                                    <h3 className="font-bold text-base text-accent mb-2">{`${index + 1}️⃣ ${section.title}`}</h3>
+                                    <ul className="space-y-1">
+                                        {section.points.map((point, pIndex) => (
+                                            <li key={pIndex} className="flex items-start gap-2 text-sm text-blue-100">
+                                                <ArrowRight className="h-4 w-4 text-green-400 flex-shrink-0 mt-1" />
+                                                <span>{point}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
                             ))}
                         </div>
-                        <p className="mt-8 text-2xl text-blue-200">
-                           {translations.price}
-                        </p>
-                        <div className="mt-8">
+
+                        <div className="mt-10">
                              <Button
                                 size="lg"
                                 onClick={onCtaClick}
