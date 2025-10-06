@@ -16,44 +16,75 @@ const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 
-const APP_NAME = "Jon.Branding | Toshkentdagi brending agentligi: Brend strategiyasi, Naming, Logotip dizayn";
-const APP_DESCRIPTION = "Jon.Branding — O'zbekistondagi premium brending agentligi. Brend strategiyasi, neyming, logotip dizayn, firma uslubi va brandbook tayyorlash xizmatlari. Biznesingiz uchun natija keltiradigan brend yaratamiz.";
+const APP_NAME_UZ = "Jon.Branding | Toshkentdagi brending agentligi: Brend strategiyasi, Naming, Logotip dizayn";
+const APP_DESCRIPTION_UZ = "Jon.Branding — O'zbekistondagi premium brending agentligi. Brend strategiyasi, neyming, logotip dizayn, firma uslubi, brandbook tayyorlash va biznes upakovka xizmatlari. Biznesingiz uchun natija keltiradigan brend yaratamiz.";
+const KEYWORDS_UZ = [
+    "branding agentligi toshkent", "brend strategiyasi", "naming xizmatlari", "logotip dizayn", 
+    "firma uslubi yaratish", "brandbook tayyorlash", "qadoqlash dizayni", "qadoq dizayn agentligi", 
+    "brend yaratish xizmati", "brend dizayn toshkent", "premium brending o‘zbekiston", 
+    "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
+    "jon branding agency", "biznes upakovka", "biznesni upakovka qilish"
+];
+
+const APP_NAME_RU = "Jon.Branding | Брендинговое агентство в Ташкенте: Бренд-стратегия, Нейминг, Дизайн логотипа";
+const APP_DESCRIPTION_RU = "Jon.Branding — премиальное брендинговое агентство в Узбекистане. Услуги по разработке бренд-стратегии, неймингу, дизайну логотипа, фирменному стилю, созданию брендбука и упаковке бизнеса. Создаем бренды, приносящие результат вашему бизнесу.";
+const KEYWORDS_RU = [
+    "брендинговое агентство ташкент", "бренд стратегия", "услуги нейминга", "дизайн логотипа", 
+    "создание фирменного стиля", "разработка брендбука", "дизайн упаковки", "агентство по дизайну упаковки", 
+    "услуги по созданию бренда", "бренд дизайн ташкент", "премиум брендинг узбекистан", 
+    "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
+    "jon branding agency", "упаковка бизнеса"
+];
+
+const APP_NAME_EN = "Jon.Branding | Branding Agency in Tashkent: Brand Strategy, Naming, Logo Design";
+const APP_DESCRIPTION_EN = "Jon.Branding is a premium branding agency in Uzbekistan. We offer brand strategy, naming, logo design, corporate identity, brandbook creation, and business packaging services. We create brands that bring results to your business.";
+const KEYWORDS_EN = [
+    "branding agency tashkent", "brand strategy", "naming services", "logo design", 
+    "corporate identity creation", "brandbook development", "packaging design", "packaging design agency", 
+    "brand creation service", "brand design tashkent", "premium branding uzbekistan", 
+    "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
+    "jon branding agency", "business packaging"
+];
+
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
 const BASE_URL = 'https://jonbranding.uz';
 
 export function generateMetadata({ params: { lang } }: { params: { lang: Locale } }): Metadata {
   const alternates: { [key: string]: string } = {};
   locales.forEach(l => {
-    alternates[l] = `${BASE_URL}/${l}`;
+    alternates[l] = `${BASE_URL}/${l === defaultLocale ? '' : l}`;
   });
 
+  let title, description, keywords;
+  switch (lang) {
+      case 'ru':
+          title = APP_NAME_RU;
+          description = APP_DESCRIPTION_RU;
+          keywords = KEYWORDS_RU;
+          break;
+      case 'en':
+          title = APP_NAME_EN;
+          description = APP_DESCRIPTION_EN;
+          keywords = KEYWORDS_EN;
+          break;
+      default:
+          title = APP_NAME_UZ;
+          description = APP_DESCRIPTION_UZ;
+          keywords = KEYWORDS_UZ;
+          break;
+  }
+
   return {
-    title: APP_NAME,
-    description: APP_DESCRIPTION,
-    keywords: [
-        "branding agentligi toshkent",
-        "brend strategiyasi",
-        "naming xizmatlari",
-        "logotip dizayn",
-        "firma uslubi yaratish",
-        "brandbook tayyorlash",
-        "qadoqlash dizayni",
-        "qadoq dizayn agentligi",
-        "brend yaratish xizmati",
-        "brend dizayn toshkent",
-        "premium brending o‘zbekiston",
-        "packaging design uzbekistan",
-        "logo design agency uzbekistan",
-        "creative agency fergana valley",
-        "jon branding agency"
-    ],
+    title,
+    description,
+    keywords,
     alternates: {
-      canonical: `${BASE_URL}/${lang}`,
+      canonical: `${BASE_URL}/${lang === defaultLocale ? '' : lang}`,
       languages: alternates,
     },
     openGraph: {
-      title: APP_NAME,
-      description: APP_DESCRIPTION,
+      title,
+      description,
       url: `${BASE_URL}/${lang}`,
       siteName: 'Jon.Branding',
       images: [
@@ -61,7 +92,7 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
           url: OG_IMAGE_URL,
           width: 1200,
           height: 630,
-          alt: APP_DESCRIPTION,
+          alt: description,
         },
       ],
       type: 'website',
@@ -69,8 +100,8 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
     },
     twitter: {
       card: 'summary_large_image',
-      title: APP_NAME,
-      description: APP_DESCRIPTION,
+      title,
+      description,
       images: [OG_IMAGE_URL],
     },
   };
@@ -87,7 +118,7 @@ const jsonLd = {
   telephone: '+998336450097',
   url: 'https://jonbranding.uz',
   logo: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
-  description: APP_DESCRIPTION,
+  description: APP_DESCRIPTION_UZ,
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Toshkent',
