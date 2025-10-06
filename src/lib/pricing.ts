@@ -66,33 +66,56 @@ const enServiceDetails = {
     nda: { label: "Non-Disclosure Agreement (NDA) (+25%)", description: "Agreement on non-disclosure of project information.", price: 0, note: "+25%", features: ["Preparation of a legal document", "Full confidentiality guarantee", "Project information protection", "25% surcharge on standard price"] }
 };
 
-export const getServiceDetails = (lang: 'uz' | 'ru' | 'en') => {
+const zhServiceDetails = {
+    audit: { label: "标志审核", description: "对现有标志进行分析并提供改进建议。", price: convertToUzs(100), note: null, features: ["标志的优缺点", "与竞争对手的对比分析", "具体的改进建议"] },
+    namingCheck: { label: "名称检查", description: "检查品牌名称在乌兹别克斯坦和国际数据库中的可用性。", price: convertToUzs(120), note: null, features: ["在乌兹别克斯坦数据库中检查", "在国际WIPO数据库中检查", "域名可用性检查", "法律咨询"] },
+    consultation: { label: "1小时咨询", description: "为任何品牌问题提供快速指导和专业建议。", price: convertToUzs(80), note: null, features: ["识别业务问题", "回答品牌问题", "后续步骤建议"] },
+    strategy: { label: "品牌策略与平台", description: "市场分析、品牌审核、定位和价值主张开发。", price: convertToUzs(4700), note: null, features: ["市场与竞争对手分析", "品牌平台（使命、价值观）", "定位策略", "品牌架构"] },
+    commStrategy: { label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", price: convertToUzs(3900), note: null, features: ["目标受众细分", "品牌语调（Tone of Voice）", "关键信息（Key Messages）", "传播渠道计划"] },
+    namingStandard: { label: "标准命名", description: "适合小型企业。", price: 8200000, note: null, features: ["公司和行业简要研究", "竞争对手概览", "收集客户意愿", "开发3个名称方案", "域名和社交媒体可用性检查", "1个类别的专利审核", "每个方案的语音检查"], timeline: "初步概念在7-10个工作日内提交" },
+    namingPremium: { label: "高级命名", description: "适合中型和成长型企业。", price: 12700000, note: null, features: ["公司和行业深入研究", "竞争对手和市场分析", "开发5个以上名称方案", "域名和社交媒体可用性检查", "6种语言的语义和语音检查（英语、俄语、土耳其语、西班牙语、意大利语、法语）", "2个类别的专利审核和法律意见", "5年域名预留", "以简短演示文稿形式呈现名称方案"], recommended: true, timeline: "初步概念在14-20个工作日内提交" },
+    namingVIP: { label: "VIP命名", description: "适合大型和国际项目。", price: 17875000, note: null, features: ["巴赫蒂约尔洪·加济耶夫亲自参与和监督", "公司、行业和受众的深入分析", "竞争对手和市场的全面分析", "开发10个以上具有广泛概念的名称方案", "域名和社交媒体可用性检查", "6种语言的语义+语音+法律检查", "加急专利申请（费用另计）", "10年域名预留", "为每个名称提供基于故事的解释", "以专业格式进行演示", "交付后长达3个月的法律咨询和监控"], timeline: "初步概念在20-25个工作日内提交" },
+    logoStandard: { label: "标准标志", description: "为初创公司提供的快速解决方案。", price: 9900000, note: null, features: ["根据公司简介开发3个标志概念", "竞争对手标志分析", "5个接触点可视化（名片、帖子、网站、包装、标牌）", "提供标志矢量文件（AI, EPS, PNG, JPG, PDF）", "检查每个概念的技术和视觉标准"], timeline: "初步概念在7-10个工作日内提交" },
+    logoPremium: { label: "标志与企业形象", description: "为那些认真发展品牌的企业。", price: 19552500, note: null, features: ["开发5个符合公司价值观和战略的标志概念", "研究竞争对手和市场的视觉识别", "15个以上接触点可视化（名片、包装、广告、网站、社交帖子）", "开发企业形象（主色、字体、标志使用规则）", "制作10个Telegram贴纸", "使用专业模型进行演示"], recommended: true, timeline: "初步概念在14-20个工作日内提交" },
+    logoVIP: { label: "VIP标志", description: "扩展的形象和全面支持。", price: 37115000, note: null, features: ["巴赫蒂约尔洪·加济耶夫亲自参与和监督", "基于品牌策略开发8个以上标志概念", "竞争对手和行业的广泛视觉分析", "25个以上接触点设计（线下和线上）", "视觉品牌手册：颜色、字体、标志使用规则、网格、迷你指南", "标志手册（PDF + 印刷版）", "30个Telegram贴纸 + 20个图标", "标志动画（高级质量）", "协助专利申请（费用另计）", "交付后长达3个月的支持"], timeline: "初步概念在20-30个工作日内提交" },
+    packaging: { label: "包装设计", description: "为3个SKU开发包装，为印刷做准备。", price: convertToUzs(1000), note: null, features: ["市场分析与概念", "为3个SKU设计", "为印刷做准备（印前）", "3D可视化"] },
+    smm: { label: "社交网络风格", description: "以企业风格设计帖子和故事。", price: convertToUzs(1000), note: null, features: ["6个帖子模板", "6个故事模板", "个人资料头像和封面图片", "亮点故事图标"] },
+    merch: { label: "品牌商品和载体", description: "服装、配饰、POSM材料的设计。", price: 0, note: "个别", features: ["T恤、帽子设计", "笔记本、笔设计", "包、包装袋设计", "根据客户要求提供其他服务"] },
+    illustrations: { label: "插图与动画", description: "创建企业图形、信息图和动画。", price: 0, note: "个别", features: ["创建品牌角色", "网站或广告插图", "标志动画", "2D/3D动画视频"] },
+    urgency: { label: "紧急项目（+50%）", description: "该项目将不按顺序在短时间内（2-3天）执行。", price: 0, note: "+50%", features: ["不按顺序工作", "加速分析与设计", "48小时内出第一稿", "标准价格加收50%"] },
+    nda: { label: "保密协议（NDA）（+25%）", description: "关于不披露项目信息的协议。", price: 0, note: "+25%", features: ["准备法律文件", "完全保密保证", "项目信息保护", "标准价格加收25%"] }
+};
+
+
+export const getServiceDetails = (lang: 'uz' | 'ru' | 'en' | 'zh') => {
     switch (lang) {
         case 'ru': return ruServiceDetails;
         case 'en': return enServiceDetails;
+        case 'zh': return zhServiceDetails;
         default: return uzServiceDetails;
     }
 };
 
 type ServiceDetailsType = typeof uzServiceDetails;
 
-export function formatPrice(price: number, lang: 'uz' | 'ru' | 'en' = 'uz') {
+export function formatPrice(price: number, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') {
     if (price === 0) {
         if (lang === 'ru') return 'По догов.';
         if (lang === 'en') return 'On Request';
+        if (lang === 'zh') return '面议';
         return "Kelishiladi";
     }
 
-    const currency = lang === 'ru' ? 'сум' : (lang === 'en' ? 'sum' : "so'm");
+    const currency = lang === 'ru' ? 'сум' : (lang === 'en' ? 'sum' : (lang === 'zh' ? '苏姆' : "so'm"));
     return `${price.toLocaleString('fr-FR')} ${currency}`;
 }
 
 
-export const comparisonData = (lang: 'uz' | 'ru' | 'en' = 'uz') => {
+export const comparisonData = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
     const sd = getServiceDetails(lang);
-    const satisfactionGuarantee = lang === 'ru' ? '100% Гарантия Удовлетворенности' : lang === 'en' ? '100% Satisfaction Guarantee' : '100% Mamnuniyat Kafolati';
-    const transparentProcess = lang === 'ru' ? 'Прозрачный процесс и постоянная связь' : lang === 'en' ? 'Transparent process and constant communication' : 'Shaffof jarayon va doimiy aloqa';
-    const pcgDiscount = lang === 'ru' ? 'Скидка -50% для членов PCG' : lang === 'en' ? '-50% discount for PCG members' : 'PCG a\'zolari uchun -50% chegirma';
+    const satisfactionGuarantee = lang === 'ru' ? '100% Гарантия Удовлетворенности' : lang === 'en' ? '100% Satisfaction Guarantee' : lang === 'zh' ? '100% 满意保证' : '100% Mamnuniyat Kafolati';
+    const transparentProcess = lang === 'ru' ? 'Прозрачный процесс и постоянная связь' : lang === 'en' ? 'Transparent process and constant communication' : lang === 'zh' ? '透明的流程和持续的沟通' : 'Shaffof jarayon va doimiy aloqa';
+    const pcgDiscount = lang === 'ru' ? 'Скидка -50% для членов PCG' : lang === 'en' ? '-50% discount for PCG members' : lang === 'zh' ? 'PCG会员-50%折扣' : 'PCG a\'zolari uchun -50% chegirma';
 
     return [
       { 
@@ -163,7 +186,7 @@ export interface PriceDetails {
 }
 
 
-export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' = 'uz'): PriceDetails => {
+export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz'): PriceDetails => {
     const { selectedServices, wantsUpfrontPayment } = selections;
     const sd = getServiceDetails(lang);
     
@@ -200,6 +223,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         let surchargeName;
         if (lang === 'ru') surchargeName = 'Надбавка за срочность (+50%)';
         else if (lang === 'en') surchargeName = 'Urgency Surcharge (+50%)';
+        else if (lang === 'zh') surchargeName = '紧急项目附加费 (+50%)';
         else surchargeName = 'Shoshilinch uchun ustama (+50%)';
         surcharges.push({ name: surchargeName, value: surchargeAmount });
     }
@@ -210,6 +234,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         let surchargeName;
         if (lang === 'ru') surchargeName = 'Надбавка за NDA (+25%)';
         else if (lang === 'en') surchargeName = 'NDA Surcharge (+25%)';
+        else if (lang === 'zh') surchargeName = '保密协议附加费 (+25%)';
         else surchargeName = 'NDA uchun ustama (+25%)';
         surcharges.push({ name: surchargeName, value: surchargeAmount });
     }
@@ -226,6 +251,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         let discountName;
         if (lang === 'ru') discountName = 'Пакетная скидка (-20%)';
         else if (lang === 'en') discountName = 'Package Discount (-20%)';
+        else if (lang === 'zh') discountName = '套餐折扣 (-20%)';
         else discountName = 'Paketli chegirma (-20%)';
         discountsApplied.push({ name: discountName, value: discountAmount });
     }
@@ -239,6 +265,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         let discountName;
         if (lang === 'ru') discountName = 'За предоплату (-10%)';
         else if (lang === 'en') discountName = 'For upfront payment (-10%)';
+        else if (lang === 'zh') discountName = '预付款折扣 (-10%)';
         else discountName = 'Oldindan to\'lov uchun (-10%)';
         discountsApplied.push({ name: discountName, value: discountAmount });
     } else {
@@ -250,6 +277,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     let bonusDescription;
     if (lang === 'ru') bonusDescription = "Аудит логотипа и 1-часовая консультация в подарок";
     else if (lang === 'en') bonusDescription = "Logo audit and 1-hour consultation as a gift";
+    else if (lang === 'zh') bonusDescription = "免费赠送标志审核和1小时咨询";
     else bonusDescription = "Logotip auditi va 1 soatlik konsultatsiya sovg'a tariqasida";
     const bonus = finalPrice > bonusThreshold ? bonusDescription : null;
 
@@ -264,7 +292,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
 }
 
 
-export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' = 'uz') => {
+export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
     const { selectedServices, wantsUpfrontPayment } = selections;
     const sd = getServiceDetails(lang);
     
@@ -278,34 +306,36 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
         }
     }
 
-    let summary = `${lang === 'ru' ? 'Выбранные услуги' : lang === 'en' ? 'Selected services' : 'Tanlangan xizmatlar'}: ${services.join(', ') || (lang === 'ru' ? 'Нет' : lang === 'en' ? 'None' : 'Yo\'q')}`;
+    let summary = `${lang === 'ru' ? 'Выбранные услуги' : lang === 'en' ? 'Selected services' : lang === 'zh' ? '所选服务' : 'Tanlangan xizmatlar'}: ${services.join(', ') || (lang === 'ru' ? 'Нет' : lang === 'en' ? 'None' : lang === 'zh' ? '无' : 'Yo\'q')}`;
 
     const { discountApplied, bonus, surcharges } = calculatePackagePrice(selections, lang);
     
     const conditions = [];
 
-    if (surcharges.some(s => s.name.includes('Shoshilinch') || s.name.includes('Срочность') || s.name.includes('Urgency'))) {
-        conditions.push(lang === 'ru' ? "Срочный" : lang === 'en' ? 'Urgent' : "Shoshilinch");
+    if (surcharges.some(s => s.name.includes('Shoshilinch') || s.name.includes('Срочность') || s.name.includes('Urgency') || s.name.includes('紧急'))) {
+        conditions.push(lang === 'ru' ? "Срочный" : lang === 'en' ? 'Urgent' : lang === 'zh' ? '紧急' : "Shoshilinch");
     }
      if (surcharges.some(s => s.name.includes('NDA'))) {
         conditions.push("NDA");
     }
     if (wantsUpfrontPayment) {
-        conditions.push(lang === 'ru' ? "100% предоплата" : lang === 'en' ? '100% upfront payment' : "100% oldindan to'lov");
+        conditions.push(lang === 'ru' ? "100% предоплата" : lang === 'en' ? '100% upfront payment' : lang === 'zh' ? '100% 预付款' : "100% oldindan to'lov");
     }
 
     if (conditions.length > 0) {
-        summary += `\n${lang === 'ru' ? 'Особые условия' : lang === 'en' ? 'Special conditions' : 'Maxsus shartlar'}: ${conditions.join(', ')}`;
+        summary += `\n${lang === 'ru' ? 'Особые условия' : lang === 'en' ? 'Special conditions' : lang === 'zh' ? '特殊条件' : 'Maxsus shartlar'}: ${conditions.join(', ')}`;
     }
 
     if (discountApplied.length > 0) {
         const discountText = discountApplied.map(d => `${d.name} (${formatPrice(d.value, lang)})`).join('; ');
-        summary += `\n${lang === 'ru' ? 'Примененные скидки' : lang === 'en' ? 'Applied discounts' : 'Qo\'llanilgan chegirmalar'}: ${discountText}`;
+        summary += `\n${lang === 'ru' ? 'Примененные скидки' : lang === 'en' ? 'Applied discounts' : lang === 'zh' ? '应用的折扣' : 'Qo\'llanilgan chegirmalar'}: ${discountText}`;
     }
 
     if (bonus) {
-        summary += `\n${lang === 'ru' ? 'Бонус' : 'Bonus'}: ${bonus}`;
+        summary += `\n${lang === 'ru' ? 'Бонус' : lang === 'en' ? 'Bonus' : 'Bonus'}: ${bonus}`;
     }
 
     return summary;
 }
+
+    

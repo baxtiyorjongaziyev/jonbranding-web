@@ -122,7 +122,7 @@
         ],
         "budget": "项目的大概预算？",
         "budgetOptions": [
-            "还没有预算/只是在探索",
+            "还没有预算 / 只是在探索",
             "最高500美元",
             "500 - 1,500美元",
             "1,500 - 3,000美元",
@@ -620,7 +620,6 @@
             "introP1": "此页面显示我们服务的估计起步价。每家公司都是独一无二的，因此最终成本取决于项目的复杂性、工作范围和您的目标。",
             "introP2": "这些价格将帮助您了解为您的品牌工作可能需要多少费用。",
             "introSubtitle": "品牌工作是如何构建的？",
-            "introP3": "创建一个品牌不仅仅是标志或企业形象。这是一个包括以下内容的完整过程：",
             "introList": [
                 { "icon": "research", "title": "研究", "description": "市场分析、竞争对手审计、目标受众研究。" },
                 { "icon": "strategy", "title": "策略", "description": "定义品牌的意义、其定位和价值观。" },
@@ -649,17 +648,9 @@
             "services_total": "服务总计：",
             "upfront_discount_title": "预付款-10%折扣",
             "upfront_discount_desc": "为项目支付100%预付款",
-            "upfront_discount_options": {
-                "yes": "是",
-                "no": "否"
-            },
             "final_price": "最终价格：",
             "order_with_discount": "带折扣订购",
             "get_free_consultation": "获得免费咨询",
-            "satisfaction_guarantee": "100%满意保证",
-            "satisfaction_guarantee_desc": "如果您不喜欢初步概念，我们将退还您的款项。",
-            "not_public_offer": "这不是公开要约",
-            "not_public_offer_desc": "价格仅供参考。最终价格将在合同中确定。",
             "total_savings": "您节省的总额",
             "gift_title": "礼物！",
             "agreed_price": "面议",
@@ -720,3 +711,5 @@
         }
     }
 }
+
+    
