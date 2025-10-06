@@ -43,7 +43,7 @@ const PersonalOfferBlock: FC<PersonalOfferBlockProps> = ({ onCtaClick }) => {
                         <Logo isWhite={true} />
                     </div>
                     <div className="relative z-10">
-                        <h2 className="text-3xl sm:text-4xl font-bold">
+                        <h2 className="text-3xl sm:text-4xl font-bold text-white">
                            {translations.title}
                         </h2>
                         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-left max-w-lg mx-auto">
