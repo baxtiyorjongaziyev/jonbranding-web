@@ -1,14 +1,13 @@
 
 import { MetadataRoute } from 'next'
 import { getAllPostSlugs } from '@/lib/blog-posts';
- 
+import { locales, defaultLocale } from '@/lib/i18n/locale';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://jonbranding.uz';
 
-  const locales = ['uz', 'ru', 'en'];
-
   const routes = [
-    '/',
+    '', // Home page
     '/quiz',
     '/xizmatlar',
     '/xizmatlar/brand-strategy',
@@ -18,98 +17,56 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/xizmatlar/qadoq-dizayni',
     '/xizmatlar/patent-kalkulyatori',
     '/blog',
-    '/sitemap', // Added sitemap page
+    '/sitemap',
   ];
 
-  const sitemapEntries = locales.flatMap((locale) =>
-    routes.map((route) => {
-      const isDefaultLang = locale === 'uz';
-      const routePath = route === '/' ? '' : route;
+  const getUrl = (locale: string, route: string) => {
+    if (locale === defaultLocale) {
+      return `${baseUrl}${route}`;
+    }
+    return `${baseUrl}/${locale}${route}`;
+  };
 
-      // Handle root URL for default language
-      if (routePath === '' && isDefaultLang) {
-        return {
-          url: baseUrl,
-          lastModified: new Date(),
-          changeFrequency: 'daily' as const,
-          priority: 1.0,
-          alternates: {
-            languages: {
-              uz: baseUrl,
-              ru: `${baseUrl}/ru`,
-              en: `${baseUrl}/en`,
-            },
-          },
-        };
+  // Generate URLs for static pages
+  const staticPageEntries = routes.flatMap((route) => {
+    const alternates: Record<string, string> = {};
+    locales.forEach(locale => {
+      alternates[locale] = getUrl(locale, route);
+    });
+
+    return locales.map(locale => ({
+      url: getUrl(locale, route),
+      lastModified: new Date(),
+      changeFrequency: route === '' ? 'daily' as const : 'monthly' as const,
+      priority: route === '' ? 1.0 : (route.startsWith('/xizmatlar') || route === '/blog' ? 0.9 : 0.8),
+      alternates: {
+        languages: alternates
       }
+    }));
+  });
 
-      // Skip creating default lang URL with prefix for root
-      if (routePath === '' && !isDefaultLang) {
-         return {
-          url: `${baseUrl}/${locale}`,
-          lastModified: new Date(),
-          changeFrequency: 'daily' as const,
-          priority: 1.0,
-           alternates: {
-            languages: {
-              uz: baseUrl,
-              ru: `${baseUrl}/ru`,
-              en: `${baseUrl}/en`,
-            },
-          },
-        };
-      }
-      
-      if (routePath === '') return null; // Already handled
-
-      const url = `${baseUrl}/${locale}${routePath}`;
-      const priority = route === '/' ? 1.0 : (route.startsWith('/xizmatlar') || route === '/blog' ? 0.9 : 0.8);
-      const changeFrequency: 'daily' | 'weekly' | 'monthly' = route === '/' ? 'daily' : 'monthly';
-
-      return {
-        url: url,
-        lastModified: new Date(),
-        changeFrequency,
-        priority,
-        alternates: {
-          languages: {
-            uz: `${baseUrl}${routePath}`,
-            ru: `${baseUrl}/ru${routePath}`,
-            en: `${baseUrl}/en${routePath}`,
-          },
-        },
-      };
-    })
-  ).flat().filter(Boolean) as MetadataRoute.Sitemap;
-
-  // Remove duplicates that might be created by the logic
-  const uniqueSitemapEntries = Array.from(new Map(sitemapEntries.map(entry => [entry.url, entry])).values());
-
-
+  // Generate URLs for blog posts
   const blogPosts = getAllPostSlugs();
-  const blogEntries = locales.flatMap(locale => 
-      blogPosts
-        .filter(post => post.lang === locale)
-        .map(post => {
-          const url = `${baseUrl}/${post.lang}/blog/${post.slug}`;
-          return {
-              url: url,
-              lastModified: new Date(), // We don't have date info here, so using current date
-              changeFrequency: 'yearly' as const,
-              priority: 0.7,
-              alternates: {
-                 languages: {
-                  uz: `${baseUrl}/uz/blog/${post.slug}`,
-                  ru: `${baseUrl}/ru/blog/${post.slug}`,
-                  en: `${baseUrl}/en/blog/${post.slug}`, // Assuming you will have EN blog posts
-                },
-              }
-            };
-        })
-    );
-
-  const uniqueBlogEntries = Array.from(new Map(blogEntries.map(entry => [entry.url, entry])).values());
-
-
-  return [...uniqueSitemapEntries, ...uniqueBlogEntries];
+  const blogEntries = blogPosts.map(post => {
+      const alternates: Record<string, string> = {};
+      locales.forEach(locale => {
+          alternates[locale] = getUrl(locale, `/blog/${post.slug}`);
+      });
+      
+      return {
+          url: getUrl(post.lang, `/blog/${post.slug}`),
+          lastModified: new Date(),
+          changeFrequency: 'yearly' as const,
+          priority: 0.7,
+          alternates: {
+              languages: alternates
+          }
+      };
+  });
+  
+  // Combine all entries and remove duplicates
+  const allEntries = [...staticPageEntries, ...blogEntries];
+  const uniqueEntries = Array.from(new Map(allEntries.map(entry => [entry.url, entry])).values());
+  
+  return uniqueEntries;
 }
