@@ -14,17 +14,8 @@ export function middleware(request: NextRequest) {
   if (pathnameHasLocale) return
 
   // If not, determine the best locale and redirect.
-  const country = request.geo?.country;
-  let locale: string;
-
-  if (country === 'UZ') {
-    // Force Uzbek for users from Uzbekistan on their first visit.
-    locale = 'uz';
-  } else {
-    // For other users, default to uzbek as well.
-    locale = getLocale(request);
-  }
-
+  const locale = getLocale(request);
+  
   // Redirect to the URL with the determined locale.
   request.nextUrl.pathname = `/${locale}${pathname}`
   
