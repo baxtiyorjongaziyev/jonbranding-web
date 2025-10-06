@@ -12,12 +12,20 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
   const t = dict.brandStrategyPage.metadata;
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/brand-strategy`;
+  
+  let keywords = ["brend strategiyasi", "brend platformasi", "brending agentligi toshkent", "strategik brending", "biznes uchun strategiya", "biznes upakovka"];
+  if (lang === 'ru') {
+    keywords = ["бренд стратегия", "платформа бренда", "брендинговое агентство ташкент", "стратегический брендинг", "стратегия для бизнеса", "упаковка бизнеса"];
+  } else if (lang === 'en') {
+    keywords = ["brand strategy", "brand platform", "branding agency tashkent", "strategic branding", "strategy for business", "business packaging"];
+  }
+
 
   return {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords: ["brend strategiyasi", "brend platformasi", "brending agentligi toshkent", "strategik brending", "biznes uchun strategiya"],
+    keywords,
     openGraph: {
       title: t.title,
       description: t.description,
@@ -55,5 +63,3 @@ const BrandStrategyLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }
 }
 
 export default BrandStrategyLayout;
-
-    

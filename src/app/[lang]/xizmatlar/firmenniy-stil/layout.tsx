@@ -13,11 +13,18 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/firmenniy-stil`;
 
+  let keywords = ["firma uslubi yaratish", "brend dizayn toshkent", "korporativ aydentika", "brandbook tayyorlash", "vizual uslub", "biznes upakovka"];
+  if (lang === 'ru') {
+    keywords = ["создание фирменного стиля", "бренд дизайн ташкент", "корпоративная айдентика", "разработка брендбука", "визуальный стиль", "упаковка бизнеса"];
+  } else if (lang === 'en') {
+    keywords = ["corporate identity creation", "brand design tashkent", "corporate identity", "brandbook development", "visual style", "business packaging"];
+  }
+
   return {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords: ["firma uslubi yaratish", "brend dizayn toshkent", "korporativ aydentika", "brandbook tayyorlash", "vizual uslub"],
+    keywords,
     openGraph: {
       title: t.title,
       description: t.description,
@@ -55,5 +62,3 @@ const FirmenniyStilLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }
 }
 
 export default FirmenniyStilLayout;
-
-    
