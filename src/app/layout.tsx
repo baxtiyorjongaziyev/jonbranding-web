@@ -24,7 +24,8 @@ const KEYWORDS_UZ = [
     "brend yaratish xizmati", "brend dizayn toshkent", "premium brending o‘zbekiston", 
     "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
     "jon branding agency", "biznes upakovka", "biznesni upakovka qilish",
-    "Branding.uz", "Jamal Akbarov", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding"
+    "Branding.uz", "Jamal Akbarov", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding",
+    "Minim", "OQILA", "xspace.uz", "change.uz", "Golden Minds"
 ];
 
 const APP_NAME_RU = "Jon.Branding | Брендинговое агентство в Ташкенте: Бренд-стратегия, Нейминг, Дизайн логотипа";
@@ -35,7 +36,8 @@ const KEYWORDS_RU = [
     "услуги по созданию бренда", "бренд дизайн ташкент", "премиум брендинг узбекистан", 
     "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
     "jon branding agency", "упаковка бизнеса",
-    "Branding.uz", "Джамал Акбаров", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding"
+    "Branding.uz", "Джамал Акбаров", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding",
+    "Minim", "OQILA", "xspace.uz", "change.uz", "Golden Minds"
 ];
 
 const APP_NAME_EN = "Jon.Branding | Branding Agency in Tashkent: Brand Strategy, Naming, Logo Design";
@@ -46,7 +48,8 @@ const KEYWORDS_EN = [
     "brand creation service", "brand design tashkent", "premium branding uzbekistan", 
     "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
     "jon branding agency", "business packaging",
-    "Branding.uz", "Jamal Akbarov", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding"
+    "Branding.uz", "Jamal Akbarov", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding",
+    "Minim", "OQILA", "xspace.uz", "change.uz", "Golden Minds"
 ];
 
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
@@ -197,3 +200,5 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
 }
 
 export default RootLayout;
+
+    
