@@ -23,7 +23,8 @@ const KEYWORDS_UZ = [
     "firma uslubi yaratish", "brandbook tayyorlash", "qadoqlash dizayni", "qadoq dizayn agentligi", 
     "brend yaratish xizmati", "brend dizayn toshkent", "premium brending o‘zbekiston", 
     "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
-    "jon branding agency", "biznes upakovka", "biznesni upakovka qilish"
+    "jon branding agency", "biznes upakovka", "biznesni upakovka qilish",
+    "Branding.uz", "Jamal Akbarov", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding"
 ];
 
 const APP_NAME_RU = "Jon.Branding | Брендинговое агентство в Ташкенте: Бренд-стратегия, Нейминг, Дизайн логотипа";
@@ -33,7 +34,8 @@ const KEYWORDS_RU = [
     "создание фирменного стиля", "разработка брендбука", "дизайн упаковки", "агентство по дизайну упаковки", 
     "услуги по созданию бренда", "бренд дизайн ташкент", "премиум брендинг узбекистан", 
     "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
-    "jon branding agency", "упаковка бизнеса"
+    "jon branding agency", "упаковка бизнеса",
+    "Branding.uz", "Джамал Акбаров", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding"
 ];
 
 const APP_NAME_EN = "Jon.Branding | Branding Agency in Tashkent: Brand Strategy, Naming, Logo Design";
@@ -43,7 +45,8 @@ const KEYWORDS_EN = [
     "corporate identity creation", "brandbook development", "packaging design", "packaging design agency", 
     "brand creation service", "brand design tashkent", "premium branding uzbekistan", 
     "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
-    "jon branding agency", "business packaging"
+    "jon branding agency", "business packaging",
+    "Branding.uz", "Jamal Akbarov", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding"
 ];
 
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
