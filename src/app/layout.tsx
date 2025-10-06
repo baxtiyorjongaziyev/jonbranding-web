@@ -140,6 +140,7 @@ const jsonLd = {
 
 const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>> = ({ children, params }) => {
     const lang = params.lang || 'uz';
+    const GA_ID = "G-BTSGJQLMMV";
 
   return (
     <html lang={lang} suppressHydrationWarning className={`${poppins.variable}`}>
@@ -150,15 +151,17 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
+        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></Script>
         <Script
-          id="gtm-script"
+          id="gtag-init"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-5GRQBW84');`,
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_ID}');
+            `,
           }}
         />
 
@@ -185,14 +188,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
         </noscript>
       </head>
       <body className="font-body bg-white antialiased">
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-5GRQBW84"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          ></iframe>
-        </noscript>
         <Script id="telegram-web-app" src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         
         <MainLayout>
