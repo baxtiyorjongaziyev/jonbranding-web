@@ -66,8 +66,33 @@ const KnobToggle = ({ isOn, onToggle }: { isOn: boolean, onToggle: (value: boole
     );
 };
 
+const CurrencyToggle = ({ currency, onCurrencyChange }: { currency: 'uzs' | 'usd', onCurrencyChange: (c: 'uzs' | 'usd') => void }) => (
+    <div className="relative flex w-auto rounded-full bg-secondary p-1">
+        {(['uzs', 'usd'] as const).map(c => (
+            <div key={c} className="relative flex-1">
+                {currency === c && (
+                    <motion.div
+                        layoutId="currency-toggle-bg"
+                        className="absolute inset-0 rounded-full bg-primary shadow-md"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                )}
+                <button
+                    onClick={() => onCurrencyChange(c)}
+                    className={cn(
+                        "relative w-full rounded-full py-2 px-6 text-center text-sm font-semibold transition-colors",
+                        currency === c ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                    )}
+                >
+                    {c.toUpperCase()}
+                </button>
+            </div>
+        ))}
+    </div>
+);
 
-const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
+
+const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en' | 'zh', dictionary: any, currency: 'uzs' | 'usd' }) => {
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
@@ -105,7 +130,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
                 <div className="text-center">
                     <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
                     <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
-                    <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang)}</p>
+                    <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang, currency)}</p>
                 </div>
                 
                 <div className="mt-6 mb-8 flex-grow">
@@ -157,7 +182,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof Se
 };
 
 
-const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en', dictionary: any }) => {
+const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en' | 'zh', dictionary: any, currency: 'uzs' | 'usd' }) => {
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
@@ -200,7 +225,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary }: { id: keyof S
                     <div className="text-3xl font-extrabold text-dark-blue my-4">
                          {price > 0 || note ? (
                             <span>
-                                {note ? note : formatPrice(price, lang)}
+                                {note ? note : formatPrice(price, lang, currency)}
                             </span>
                         ) : (
                             <span className="text-xl">{dictionary.agreed_price}</span>
@@ -246,7 +271,7 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const translations = dictionary;
-    const serviceDetails = getServiceDetails(lang as 'uz' | 'ru' | 'en');
+    const serviceDetails = getServiceDetails(lang as 'uz' | 'ru' | 'en' | 'zh');
     
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
         audit: false, namingCheck: false, consultation: false, 
@@ -257,6 +282,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
     const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
+    const [currency, setCurrency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
@@ -266,7 +292,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     useEffect(() => {
         if (isClient) {
-            const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment }, lang as 'uz' | 'ru' | 'en');
+            const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment }, lang as 'uz' | 'ru' | 'en' | 'zh');
             setTotal(result);
             const justAppliedDiscount = result.discountApplied.length > 0 && !hasDiscountBeenApplied;
             if (justAppliedDiscount) {
@@ -370,6 +396,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                         <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
                         <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">{translations.subtitle}</p>
                     </div>
+
+                    <div className="flex justify-center mb-12">
+                        <CurrencyToggle currency={currency} onCurrencyChange={setCurrency} />
+                    </div>
                     
                     <div className="space-y-16">
                         {Object.values(serviceGroups).map((group, index) => (
@@ -401,8 +431,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             id={typedServiceId}
                                             selected={selectedServices[typedServiceId] || false}
                                             onSelect={() => handleServiceToggle(typedServiceId)}
-                                            lang={lang as 'uz' | 'ru' | 'en'}
+                                            lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
                                             dictionary={translations}
+                                            currency={currency}
                                         />
                                     );
                                 })}
@@ -439,7 +470,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                                 <span className="text-white flex-1 pr-2">{service.label}</span>
                                                                 <div className="flex items-center gap-2">
                                                                     <span className="font-mono text-gray-300">
-                                                                        {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en')}` : service.note}
+                                                                        {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}` : service.note}
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -459,18 +490,18 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 <>
                                                     <div className="flex justify-between items-center text-sm font-medium">
                                                         <span className="text-blue-200">{translations.services_total}</span>
-                                                        <span className="font-mono">{total.base.toLocaleString('fr-FR')} {translations.currency}</span>
+                                                        <span className="font-mono">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}</span>
                                                     </div>
                                                     {total.surcharges.map(s => (
                                                         <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
                                                             <span>{s.name}</span>
-                                                            <span className="font-mono">+ {s.value.toLocaleString('fr-FR')} {translations.currency}</span>
+                                                            <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}</span>
                                                         </div>
                                                     ))}
                                                     {total.discountApplied.map(d => (
                                                         <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
                                                             <span>{d.name}</span>
-                                                            <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en')}</span>
+                                                            <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                                         </div>
                                                     ))}
                                                 </>
@@ -478,7 +509,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             {total.savings > 0 && (
                                                 <div className="flex justify-between items-center text-sm font-bold text-green-300 pt-2 border-t border-green-400/20">
                                                     <span>{translations.total_savings}</span>
-                                                    <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en')}</span>
+                                                    <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                                 </div>
                                             )}
                                         </div>
@@ -502,7 +533,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <p className="text-4xl sm:text-5xl font-bold text-white tracking-normal">
                                         {total.final > 0 ? (
                                             <>
-                                                {formatPrice(total.final, lang as 'uz' | 'ru' | 'en')}
+                                                {formatPrice(total.final, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}
                                             </>
                                         ) : (
                                             translations.agreed_price
@@ -548,4 +579,5 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 
 export default PackageBuilder;
 
+    
     

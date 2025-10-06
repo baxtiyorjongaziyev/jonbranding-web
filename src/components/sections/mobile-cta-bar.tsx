@@ -27,6 +27,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string, dictionary: any 
     nda: false,
   });
   const [wantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
+  const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
   const [price, setPrice] = useState(0);
   const [isClient, setIsClient] = useState(false);
   const translations = dictionary;
@@ -37,7 +38,7 @@ const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string, dictionary: any 
 
   useEffect(() => {
     if (isClient) {
-      const priceDetails = calculatePackagePrice({ selectedServices, wantsUpfrontPayment }, lang as 'uz' | 'ru' | 'en');
+      const priceDetails = calculatePackagePrice({ selectedServices, wantsUpfrontPayment }, lang as 'uz' | 'ru' | 'en' | 'zh');
       setPrice(priceDetails.final);
     }
   }, [selectedServices, wantsUpfrontPayment, isClient, lang]);
@@ -56,13 +57,14 @@ const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string, dictionary: any 
     );
   }
   
-  const agreedPriceText = lang === 'uz' ? 'Kelishiladi' : lang === 'ru' ? 'По догов.' : 'Agreed';
+  const agreedPriceText = lang === 'uz' ? 'Kelishiladi' : lang === 'ru' ? 'По догов.' : lang === 'en' ? 'Agreed' : '面议';
+
 
   return (
     <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-sm">
-            <p className="font-bold text-primary text-lg">{price > 0 ? formatPrice(price, lang as 'uz' | 'ru' | 'en') : agreedPriceText}</p>
+            <p className="font-bold text-primary text-lg">{price > 0 ? formatPrice(price, lang as 'uz' | 'ru' | 'en' | 'zh', currency) : agreedPriceText}</p>
             <p className="text-xs text-muted-foreground">{translations.final_price}</p>
         </div>
         <Button onClick={onOpenModal} className="shadow-ocean animate-subtle-pulse">
