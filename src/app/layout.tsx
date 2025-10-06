@@ -73,6 +73,11 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
           description = APP_DESCRIPTION_EN;
           keywords = KEYWORDS_EN;
           break;
+      case 'zh':
+          title = "Jon.Branding | 塔什干的品牌代理机构：品牌策略、命名、标志设计";
+          description = "Jon.Branding是乌兹别克斯坦的一家高端品牌代理机构。我们提供品牌策略、命名、标志设计、企业形象、品牌手册创作和商业包装服务。我们创造为您的业务带来成果的品牌。";
+          keywords = ["塔什干品牌代理", "品牌策略", "命名服务", "标志设计", "企业形象创作", "品牌手册开发", "包装设计", "包装设计代理", "品牌创建服务", "塔什干品牌设计", "乌兹别克斯坦高端品牌", "乌兹别克斯坦包装设计", "乌兹别克斯坦标志设计代理", "费尔干纳谷创意代理", "jon branding agency", "商业包装"];
+          break;
       default:
           title = APP_NAME_UZ;
           description = APP_DESCRIPTION_UZ;
@@ -200,5 +205,3 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
 }
 
 export default RootLayout;
-
-    

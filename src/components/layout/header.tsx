@@ -43,12 +43,12 @@ type Dictionary = {
     brand_strategy_desc: string;
     naming: string;
     naming_desc: string;
+    logo_design: string;
+    logo_design_desc: string;
     corporate_style: string;
     corporate_style_desc: string;
     packaging_design: string;
     packaging_design_desc: string;
-    logo_design: string;
-    logo_design_desc: string;
     services_and_prices: string;
     services_and_prices_desc: string;
     contact_by_phone: string;
@@ -65,6 +65,7 @@ const localeIcons: Record<Locale, React.FC<{ className?: string }>> = {
   uz: UzFlagIcon,
   ru: RuFlagIcon,
   en: GbFlagIcon,
+  zh: () => <></>
 };
 
 const ListItem = React.forwardRef<
@@ -248,7 +249,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
-          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
+          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en' | 'zh'} />
            
             <ExpandingButton 
               href="tel:+998336450097"
@@ -271,7 +272,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           </Button>
         </div>
         <div className="flex items-center gap-2 lg:hidden">
-          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
+          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en' | 'zh'} />
           <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className={cn("text-foreground border-border/50", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
