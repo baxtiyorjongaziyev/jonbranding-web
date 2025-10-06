@@ -7,7 +7,7 @@ import type { FC, ReactNode } from 'react';
 import { Poppins } from 'next/font/google';
 import MainLayout from '@/components/layout/main-layout';
 import type { Locale } from '@/lib/i18n/locale';
-import { locales } from '@/lib/i18n/locale';
+import { locales, defaultLocale } from '@/lib/i18n/locale';
 
 const poppins = Poppins({
   subsets: ['latin'],
