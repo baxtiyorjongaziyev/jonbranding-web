@@ -19,7 +19,7 @@
         "services_and_prices": "Xizmatlar va Narxlar",
         "services_and_prices_desc": "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
         "contact_by_phone": "+998336450097",
-        "contact_by_telegram": "Telegram orqali yozish",
+        "contact_by_telegram": "Telegramdan yozaman",
         "free_consultation": "Bepul konsultatsiya",
         "open_menu": "Menyuni ochish",
         "switch_lang": "Tilni o'zgartirish",
@@ -283,7 +283,7 @@
             { "icon": "Users", "text": "Aniq va shaffof ish jarayoni" }
         ],
         "phoneButton": "Telefon orqali bog'lanish",
-        "telegramButton": "Telegram orqali yozish"
+        "telegramButton": "Telegramdan yozaman"
     },
     "process": {
         "title": "Bizning ish jarayonimiz",
@@ -717,5 +717,3 @@
         }
     }
 }
-
-    
