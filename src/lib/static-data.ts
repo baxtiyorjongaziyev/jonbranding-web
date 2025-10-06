@@ -146,6 +146,43 @@ export const staticTestimonialsEn: Testimonial[] = [
   },
 ];
 
+export const staticTestimonialsZh: Testimonial[] = [
+  {
+    name: "Sherzod Beknazarov (舍尔佐德·别克纳扎罗夫)",
+    company: "Incontrol Consulting 创始人",
+    avatar: "SB",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
+    imageHint: "male business owner",
+    quote: "品味，审美情趣。是天生的还是后天习得的？巴赫蒂约尔洪就是这样一位具有审美情趣的人——他帮助我们设计了Incontrol和Sherzod Beknazarov的标志。我们要感谢巴赫蒂约尔洪。谢谢。",
+    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
+  },
+  {
+    name: "Sevara Kholmanova (塞瓦拉·霍尔玛诺娃)",
+    company: "Fidda by Sevara 创始人",
+    avatar: "SK",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
+    imageHint: "female entrepreneur portrait",
+    quote: "我和这个团队合作过，我非常喜欢，效率很高，结果甚至比我预期的还要好。我订购了品牌塑造、贴纸和专利申请。7个月后，如果上帝愿意，一切都会准备好。你们工作很诚实，愿真主喜悦你们。我很高兴，祝你们工作顺利。谢谢。"
+  },
+  {
+    name: "Nodirbek (诺迪尔别克)",
+    company: "Barakah 餐厅创始人",
+    avatar: "N",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
+    imageHint: "restaurant manager portrait",
+    quote: "如果你还记得，3年前你为这个品牌设计了标志。非常感谢，做得太棒了，每个人都赞不绝口。非常感谢，巴赫蒂约尔大哥！🤝🏻😊"
+  },
+  {
+    name: "Javohir Haqberdiyev (贾沃希尔·哈克别尔季耶夫)",
+    company: "Perfona 创始人",
+    avatar: "JH",
+    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/67480e63648c1fa51ca4adff_A5%20-%201.jpg",
+    imageHint: "tech startup founder",
+    quote: "结果比我预期的还要好。我现在看着标志，自己也很享受。我喜欢的是信任。而且它提前交付了，这很棒。你们能快速分享结果，这太好了。非常感谢，大哥！"
+  },
+];
+
+
 export const projects: Project[] = [
     { 
         brand: "Fidda", 

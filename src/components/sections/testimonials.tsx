@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { type Testimonial } from '@/lib/types';
 import Autoplay from "embla-carousel-autoplay";
-import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn } from '@/lib/static-data';
+import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn, staticTestimonialsZh } from '@/lib/static-data';
 
 const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     
@@ -153,7 +153,20 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
 }
 
 const Testimonials = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
-    const testimonials = lang === 'ru' ? staticTestimonialsRu : (lang === 'en' ? staticTestimonialsEn : staticTestimonials);
+    let testimonials;
+    switch (lang) {
+        case 'ru':
+            testimonials = staticTestimonialsRu;
+            break;
+        case 'en':
+            testimonials = staticTestimonialsEn;
+            break;
+        case 'zh':
+            testimonials = staticTestimonialsZh;
+            break;
+        default:
+            testimonials = staticTestimonials;
+    }
     return <TestimonialsClient testimonials={testimonials} dictionary={dictionary} lang={lang} />
 };
 
