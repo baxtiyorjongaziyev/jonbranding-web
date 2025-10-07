@@ -35,7 +35,6 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       <WhyUs onCtaClick={handleOpenModal} lang={lang} />
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
       <ServiceSections lang={lang} />
-      <PopularPackages lang={lang} />
       <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
       <UrgencyBlock />
       <PersonalOfferBlock onCtaClick={handleOpenModal} />
