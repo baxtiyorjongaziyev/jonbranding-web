@@ -14,6 +14,7 @@ import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, Fi
 import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion, useMotionValue } from 'framer-motion';
+import PopularPackages from './popular-packages';
 
 
 interface PackageBuilderProps {
@@ -402,42 +403,51 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </div>
                     
                     <div className="space-y-16">
-                        {Object.values(serviceGroups).map((group, index) => (
-                           <ServiceGroup key={index} title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
-                                {group.titleKey === 'identity' && (
-                                    <div className="col-span-1 md:col-span-2 lg:col-span-3">
-                                        <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
-                                            <div className="flex items-center gap-4">
-                                                <div className="bg-white/10 p-3 rounded-full">
-                                                    <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
-                                                </div>
-                                                <div>
-                                                    <h4 className="font-extrabold text-lg text-white">{translations.discount_alert_title}</h4>
-                                                    <p className="text-blue-200" dangerouslySetInnerHTML={{ __html: translations.discount_alert_desc }}></p>
+                        {Object.entries(serviceGroups).map(([groupKey, group]) => (
+                           <React.Fragment key={groupKey}>
+                                <ServiceGroup title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
+                                    {group.titleKey === 'identity' && (
+                                        <div className="col-span-1 md:col-span-2 lg:col-span-3">
+                                            <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="bg-white/10 p-3 rounded-full">
+                                                        <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-extrabold text-lg text-white">{translations.discount_alert_title}</h4>
+                                                        <p className="text-blue-200" dangerouslySetInnerHTML={{ __html: translations.discount_alert_desc }}></p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    )}
+                                    {group.services.map((serviceId) => {
+                                        const typedServiceId = serviceId as keyof SelectedServices;
+                                        if (!serviceDetails[typedServiceId]) return null;
+                                        
+                                        const CardComponent = group.isTariff ? TariffCard : ServiceCard;
+
+                                        return (
+                                            <CardComponent
+                                                key={typedServiceId}
+                                                id={typedServiceId}
+                                                selected={selectedServices[typedServiceId] || false}
+                                                onSelect={() => handleServiceToggle(typedServiceId)}
+                                                lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
+                                                dictionary={translations}
+                                                currency={currency}
+                                            />
+                                        );
+                                    })}
+                                </ServiceGroup>
+                                {groupKey === 'naming' && (
+                                    <div className="py-8">
+                                        <PopularPackages lang={lang} onSelectPackage={() => {
+                                            setSelectedServices(prev => ({...prev, namingPremium: true, logoPremium: true, namingStandard: false, namingVIP: false, logoStandard: false, logoVIP: false }));
+                                        }} />
                                     </div>
                                 )}
-                                {group.services.map((serviceId) => {
-                                    const typedServiceId = serviceId as keyof SelectedServices;
-                                    if (!serviceDetails[typedServiceId]) return null;
-                                    
-                                    const CardComponent = group.isTariff ? TariffCard : ServiceCard;
-
-                                    return (
-                                        <CardComponent
-                                            key={typedServiceId}
-                                            id={typedServiceId}
-                                            selected={selectedServices[typedServiceId] || false}
-                                            onSelect={() => handleServiceToggle(typedServiceId)}
-                                            lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
-                                            dictionary={translations}
-                                            currency={currency}
-                                        />
-                                    );
-                                })}
-                           </ServiceGroup>
+                           </React.Fragment>
                         ))}
                     </div>
                 </div>
@@ -470,7 +480,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                                 <span className="text-white flex-1 pr-2">{service.label}</span>
                                                                 <div className="flex items-center gap-2">
                                                                     <span className="font-mono text-gray-300">
-                                                                        {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}` : service.note}
+                                                                        {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}` : service.note}
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -578,6 +588,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
-
-    
-    

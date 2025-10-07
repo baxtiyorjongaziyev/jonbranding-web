@@ -8,7 +8,13 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import { calculatePackagePrice, getServiceDetails, formatPrice, SelectedServices } from '@/lib/pricing';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 
-const PopularPackages: FC<{ lang: string }> = ({ lang }) => {
+interface PopularPackagesProps {
+    lang: string;
+    onSelectPackage: () => void;
+}
+
+
+const PopularPackages: FC<PopularPackagesProps> = ({ lang, onSelectPackage }) => {
     const [translations, setTranslations] = useState<any>(null);
     const [currency, setCurrency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
 
@@ -17,16 +23,7 @@ const PopularPackages: FC<{ lang: string }> = ({ lang }) => {
     }, [lang]);
 
     const handleCtaClick = () => {
-        const services: SelectedServices = {
-            audit: false, namingCheck: false, consultation: false,
-            strategy: false, commStrategy: false,
-            namingStandard: false, namingPremium: true, namingVIP: false,
-            logoStandard: false, logoPremium: true, logoVIP: false,
-            packaging: false,
-            smm: false, merch: false, illustrations: false, urgency: false, nda: false,
-        };
-        localStorage.setItem('selectedServices', JSON.stringify(services));
-        
+        onSelectPackage();
         const packageBuilder = document.getElementById('package-builder');
         if (packageBuilder) {
             packageBuilder.scrollIntoView({ behavior: 'smooth' });
