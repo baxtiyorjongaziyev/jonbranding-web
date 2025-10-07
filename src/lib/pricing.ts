@@ -1,4 +1,5 @@
 
+
 const USD_TO_UZS_RATE = 12700;
 
 const convertToUzs = (usd: number) => {
@@ -8,9 +9,9 @@ const convertToUzs = (usd: number) => {
 }
 
 const basePricesUSD = {
-    audit: 95,
+    audit: 75,
     namingCheck: 125,
-    consultation: 80,
+    consultation: 51,
     strategy: 4750,
     commStrategy: 3950,
     namingStandard: 650,
@@ -31,7 +32,7 @@ const basePricesUSD = {
 const uzServiceDetails = {
     audit: { label: "Logo Auditi", description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.", price: basePricesUSD.audit, note: null, features: ["Logotipning kuchli va zaif tomonlari", "Raqobatchilarga nisbatan tahlil", "Yaxshilash bo'yicha aniq tavsiyalar"] },
     namingCheck: { label: "Neyming Tekshiruvi", description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.", price: basePricesUSD.namingCheck, note: null, features: ["O'zbekiston bazasi bo'yicha tekshiruv", "Xalqaro WIPO bazasi bo'yicha tekshiruv", "Domen bo'shligini tekshirish", "Huquqiy maslahat"] },
-    consultation: { label: "1 soatlik konsultatsiya", description: "Brending bo'yicha har qanday savolingizga tezkor yo'l-yo'riq va professional maslahat.", price: basePricesUSD.consultation, note: null, features: ["Biznes-muammolarni aniqlash", "Brending bo'yicha savollarga javob", "Keyingi qadamlar bo'yicha tavsiyalar"] },
+    consultation: { label: "30 daqiqalik konsultatsiya", description: "Brending bo'yicha har qanday savolingizga tezkor yo'l-yo'riq va professional maslahat.", price: basePricesUSD.consultation, note: null, features: ["Biznes-muammolarni aniqlash", "Brending bo'yicha savollarga javob", "Keyingi qadamlar bo'yicha tavsiyalar"] },
     strategy: { label: "Brend-strategiya va platforma", description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", price: basePricesUSD.strategy, note: null, features: ["Bozor va raqobatchilar tahlili", "Brend platformasi (missiya, qadriyatlar)", "Pozitsiyalash strategiyasi", "Brend arxitekturasi"] },
     commStrategy: { label: "Kommunikatsion strategiya", description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", price: basePricesUSD.commStrategy, note: null, features: ["Maqsadli auditoriya segmentatsiyasi", "Brend ovozi (Tone of Voice)", "Asosiy xabarlar (Key Messages)", "Kommunikatsiya kanallari rejasi"] },
     namingStandard: { label: "Naming Standard", description: "Kichik biznes uchun ideal.", price: basePricesUSD.namingStandard, note: null, features: ["Kompaniya va soha qisqa o‘rganiladi", "Raqobatchilar umumiy ko‘rib chiqiladi", "Mijoz xohish-istaklari yig‘iladi", "3 ta nom varianti ishlab chiqiladi", "Domen va ijtimoiy tarmoqlarda bo‘shlik tekshiriladi", "Patent bo‘yicha 1 klass auditi qilinadi", "Har bir variant fonetik jihatdan tekshiriladi"], timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" },
@@ -51,7 +52,7 @@ const uzServiceDetails = {
 const ruServiceDetails = {
     audit: { ...uzServiceDetails.audit, label: "Аудит логотипа", description: "Анализ существующего логотипа и рекомендации по улучшению.", features: ["Сильные и слабые стороны логотипа", "Анализ относительно конкурентов", "Конкретные рекомендации по улучшению"] },
     namingCheck: { ...uzServiceDetails.namingCheck, label: "Проверка нейминга", description: "Проверка доступности имени бренда в базах данных Узбекистана и международных базах.", features: ["Проверка по базе Узбекистана", "Проверка по международной базе WIPO", "Проверка доступности домена", "Юридическая консультация"] },
-    consultation: { ...uzServiceDetails.consultation, label: "1-часовая консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга.", features: ["Выявление бизнес-проблем", "Ответы на вопросы по брендингу", "Рекомендации по следующим шагам"] },
+    consultation: { ...uzServiceDetails.consultation, label: "30-минутная консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга.", features: ["Выявление бизнес-проблем", "Ответы на вопросы по брендингу", "Рекомендации по следующим шагам"] },
     strategy: { ...uzServiceDetails.strategy, label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.", features: ["Анализ рынка и конкурентов", "Платформа бренда (миссия, ценности)", "Стратегия позиционирования", "Архитектура бренда"] },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: ["Сегментация целевой аудитории", "Голос бренда (Tone of Voice)", "Ключевые сообщения (Key Messages)", "План коммуникационных каналов"] },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса.", features: ["Краткое изучение компании и сферы", "Общий обзор конкурентов", "Сбор пожеланий клиента", "Разработка 3 вариантов имени", "Проверка доступности домена и в соцсетях", "Аудит 1 класса по патенту", "Фонетическая проверка каждого варианта"], timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
@@ -71,7 +72,7 @@ const ruServiceDetails = {
 const enServiceDetails = {
     audit: { ...uzServiceDetails.audit, label: "Logo Audit", description: "Analysis of the existing logo and recommendations for improvement.", features: ["Logo's strengths and weaknesses", "Analysis against competitors", "Specific recommendations for improvement"] },
     namingCheck: { ...uzServiceDetails.namingCheck, label: "Naming Check", description: "Checking the availability of the brand name in Uzbekistan and international databases.", features: ["Check in Uzbekistan database", "Check in international WIPO database", "Domain availability check", "Legal advice"] },
-    consultation: { ...uzServiceDetails.consultation, label: "1-hour consultation", description: "Quick guidance and professional advice on any branding question.", features: ["Identifying business problems", "Answering branding questions", "Recommendations for next steps"] },
+    consultation: { ...uzServiceDetails.consultation, label: "30-minute consultation", description: "Quick guidance and professional advice on any branding question.", features: ["Identifying business problems", "Answering branding questions", "Recommendations for next steps"] },
     strategy: { ...uzServiceDetails.strategy, label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.", features: ["Market and competitor analysis", "Brand platform (mission, values)", "Positioning strategy", "Brand architecture"] },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: ["Target audience segmentation", "Brand Tone of Voice", "Key Messages", "Communication channels plan"] },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses.", features: ["Brief study of the company and industry", "General overview of competitors", "Collection of client's wishes", "Development of 3 name variants", "Domain and social media availability check", "Patent audit for 1 class", "Phonetic check of each variant"], timeline: "First concepts are presented within 7–10 working days" },
@@ -91,7 +92,7 @@ const enServiceDetails = {
 const zhServiceDetails = {
     audit: { ...uzServiceDetails.audit, label: "标志审核", description: "对现有标志进行分析并提供改进建议。", features: ["标志的优缺点", "与竞争对手的对比分析", "具体的改进建议"] },
     namingCheck: { ...uzServiceDetails.namingCheck, label: "名称检查", description: "检查品牌名称在乌兹别克斯坦和国际数据库中的可用性。", features: ["在乌兹别克斯坦数据库中检查", "在国际WIPO数据库中检查", "域名可用性检查", "法律咨询"] },
-    consultation: { ...uzServiceDetails.consultation, label: "1小时咨询", description: "为任何品牌问题提供快速指导和专业建议。", features: ["识别业务问题", "回答品牌问题", "后续步骤建议"] },
+    consultation: { ...uzServiceDetails.consultation, label: "30分钟咨询", description: "为任何品牌问题提供快速指导和专业建议。", features: ["识别业务问题", "回答品牌问题", "后续步骤建议"] },
     strategy: { ...uzServiceDetails.strategy, label: "品牌策略与平台", description: "市场分析、品牌审核、定位和价值主张开发。", features: ["市场与竞争对手分析", "品牌平台（使命、价值观）", "定位策略", "品牌架构"] },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", features: ["目标受众细分", "品牌语调（Tone of Voice）", "关键信息（Key Messages）", "传播渠道计划"] },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业。", features: ["公司和行业简要研究", "竞争对手概览", "收集客户意愿", "开发3个名称方案", "域名和社交媒体可用性检查", "1个类别的专利审核", "每个方案的语音检查"], timeline: "初步概念在7-10个工作日内提交" },
@@ -319,10 +320,10 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     const savings = priceAfterSurcharges - finalPrice;
     
     let bonusDescription;
-    if (lang === 'ru') bonusDescription = "Аудит логотипа и 1-часовая консультация в подарок";
-    else if (lang === 'en') bonusDescription = "Logo audit and 1-hour consultation as a gift";
-    else if (lang === 'zh') bonusDescription = "免费赠送标志审核和1小时咨询";
-    else bonusDescription = "Logotip auditi va 1 soatlik konsultatsiya sovg'a tariqasida";
+    if (lang === 'ru') bonusDescription = "Аудит логотипа и 30-минутная консультация в подарок";
+    else if (lang === 'en') bonusDescription = "Logo audit and 30-minute consultation as a gift";
+    else if (lang === 'zh') bonusDescription = "免费赠送标志审核和30分钟咨询";
+    else bonusDescription = "Logotip auditi va 30 daqiqalik konsultatsiya sovg'a tariqasida";
     const bonus = finalPrice > bonusThreshold ? bonusDescription : null;
 
     return {
