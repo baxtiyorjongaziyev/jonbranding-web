@@ -15,19 +15,13 @@ export const localeNames: Record<Locale, string> = {
 };
 
 export function getLocale(request: NextRequest): Locale {
-  // 1. Check for country from geo-ip header
-  const country = request.geo?.country;
-  if (country === 'UZ') {
-    return 'uz';
-  }
-
-  // 2. Check for locale in cookie
+  // 1. Check for locale in cookie
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
   if (cookieLocale && locales.includes(cookieLocale as Locale)) {
     return cookieLocale as Locale;
   }
 
-  // 3. Use Negotiator and intl-localematcher to find the best-matching locale from browser headers
+  // 2. Use Negotiator and intl-localematcher to find the best-matching locale from browser headers
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
