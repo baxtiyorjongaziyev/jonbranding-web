@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -405,6 +405,13 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <div className="space-y-16">
                         {Object.entries(serviceGroups).map(([groupKey, group]) => (
                            <React.Fragment key={groupKey}>
+                                {groupKey === 'identity' && (
+                                    <div className="py-8">
+                                        <PopularPackages lang={lang} onSelectPackage={() => {
+                                            setSelectedServices(prev => ({...prev, namingPremium: true, logoPremium: true, namingStandard: false, namingVIP: false, logoStandard: false, logoVIP: false }));
+                                        }} />
+                                    </div>
+                                )}
                                 <ServiceGroup title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
                                     {group.titleKey === 'identity' && (
                                         <div className="col-span-1 md:col-span-2 lg:col-span-3">
@@ -440,13 +447,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         );
                                     })}
                                 </ServiceGroup>
-                                {groupKey === 'naming' && (
-                                    <div className="py-8">
-                                        <PopularPackages lang={lang} onSelectPackage={() => {
-                                            setSelectedServices(prev => ({...prev, namingPremium: true, logoPremium: true, namingStandard: false, namingVIP: false, logoStandard: false, logoVIP: false }));
-                                        }} />
-                                    </div>
-                                )}
                            </React.Fragment>
                         ))}
                     </div>
