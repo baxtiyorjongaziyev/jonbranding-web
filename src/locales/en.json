@@ -55,6 +55,24 @@
         "message": "Our website uses delicious cookies. They help us remember you. If you agree, let's share them together.",
         "acceptButton": "I'll eat them"
     },
+    "popularPackages": {
+        "title": "Most Popular Packages",
+        "packageTitle": "Naming + Logo (Premium)",
+        "packageSubtitle": "The perfect combination to start a strong brand.",
+        "features": [
+            "Perfect name for your brand (check in 6 languages)",
+            "Professional logo (5 concepts)",
+            "Full corporate identity (colors, fonts)",
+            "Demonstration on 15+ real mockups",
+            "Patent audit and consultation",
+            "10 branded stickers"
+        ],
+        "separate": "Separately",
+        "packagePrice": "Package price",
+        "packageDiscount": "(-20% discount!)",
+        "upfrontDiscount": "with 100% upfront payment (-28% total!)",
+        "ctaButton": "Choose this package"
+    },
     "sitemapPage": {
         "title": "Sitemap",
         "subtitle": "An overview of all pages on our site to help you quickly find the information you need.",
@@ -175,15 +193,16 @@
         "line3": "The reason is simple: They invested. You... thought about it."
     },
     "personalOfferBlock": {
-        "title": "📢 My offer is simple:",
-        "points": [
-            "9 years of experience — worked with 500+ companies",
-            "Logo + Corporate Identity + Packaging Design — all in one place",
-            "Free advice on naming and patenting",
-            "Ready result in 2-3 weeks"
-        ],
-        "price": "Price? Let's agree. But...",
-        "ctaButton": "I Need This"
+        "title": "💎 MY OFFER:",
+        "subtitle": "What you will get:",
+        "ctaButton": "I Need This",
+        "sections": [
+            { "title": "1️⃣ STRATEGY", "points": ["Brand positioning and competitive analysis", "Target audience map", "Unique Selling Proposition (USP)"] },
+            { "title": "2️⃣ IDENTITY", "points": ["Professional logo (3-5 variants)", "Corporate color palette", "Typography and style guide"] },
+            { "title": "3️⃣ DOCUMENTATION", "points": ["Full Brandbook (30-50 pages)", "Files in all formats (AI, PNG, PDF, SVG)", "Guide: how to use the logo"] },
+            { "title": "4️⃣ LEGAL PROTECTION", "points": ["Naming consultation", "Patent and Trademark registration process", "Intellectual property protection strategy"] },
+            { "title": "5️⃣ SUPPORT", "points": ["3 months of free revisions", "Constant communication via Telegram", "Brand application advice"] }
+        ]
     },
     "servicesHero": {
         "title": "Services that empower your branding",
@@ -717,5 +736,3 @@
         }
     }
 }
-
-    

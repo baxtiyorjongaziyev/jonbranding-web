@@ -13,6 +13,7 @@ import TrustedBy from '@/components/sections/trusted-by';
 import Testimonials from '@/components/sections/testimonials';
 import UrgencyBlock from '@/components/sections/urgency-block';
 import PersonalOfferBlock from '@/components/sections/personal-offer-block';
+import PopularPackages from '@/components/sections/popular-packages';
 
 const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const handleOpenModal = useCallback(() => {
@@ -34,6 +35,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       <WhyUs onCtaClick={handleOpenModal} lang={lang} />
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
       <ServiceSections lang={lang} />
+      <PopularPackages lang={lang} />
       <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
       <UrgencyBlock />
       <PersonalOfferBlock onCtaClick={handleOpenModal} />
