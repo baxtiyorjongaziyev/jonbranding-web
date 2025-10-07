@@ -408,12 +408,20 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 {groupKey === 'identity' && (
                                     <div className="py-8">
                                         <PopularPackages lang={lang} onSelectPackage={() => {
-                                            setSelectedServices(prev => ({...prev, namingPremium: true, logoPremium: true, namingStandard: false, namingVIP: false, logoStandard: false, logoVIP: false }));
+                                            setSelectedServices(prev => ({
+                                                ...prev, 
+                                                namingStandard: false,
+                                                namingPremium: true, 
+                                                namingVIP: false,
+                                                logoStandard: false, 
+                                                logoPremium: true, 
+                                                logoVIP: false 
+                                            }));
                                         }} />
                                     </div>
                                 )}
                                 <ServiceGroup title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
-                                    {group.titleKey === 'identity' && (
+                                    {groupKey === 'identity' && (
                                         <div className="col-span-1 md:col-span-2 lg:col-span-3">
                                             <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
                                                 <div className="flex items-center gap-4">
