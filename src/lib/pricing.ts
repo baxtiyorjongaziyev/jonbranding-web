@@ -8,19 +8,19 @@ const convertToUzs = (usd: number) => {
 }
 
 const basePricesUSD = {
-    audit: 100,
-    namingCheck: 120,
+    audit: 95,
+    namingCheck: 125,
     consultation: 80,
-    strategy: 4700,
-    commStrategy: 3900,
-    namingStandard: 650, // 8,200,000 UZS
-    namingPremium: 1000, // 12,700,000 UZS
-    namingVIP: 1400, // 17,875,000 UZS
-    logoStandard: 780, // 9,900,000 UZS
-    logoPremium: 1540, // 19,552,500 UZS
-    logoVIP: 2920, // 37,115,000 UZS
-    packaging: 1000,
-    smm: 1000,
+    strategy: 4750,
+    commStrategy: 3950,
+    namingStandard: 650,
+    namingPremium: 980,
+    namingVIP: 1450,
+    logoStandard: 780,
+    logoPremium: 1550,
+    logoVIP: 2950,
+    packaging: 1150,
+    smm: 980,
     merch: 0,
     illustrations: 0,
     urgency: 0,
@@ -381,5 +381,3 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
 
     return summary;
 }
-
-    
