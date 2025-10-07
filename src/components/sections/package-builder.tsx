@@ -187,7 +187,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, note, features } = detail;
+    const { label, description, price, note, features, oldPrice, discount } = detail;
     const Icon = serviceIcons[id] || Sparkles;
 
     return (
@@ -223,15 +223,23 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 )}
                 
                 <div className="mt-auto pt-4">
-                    <div className="text-3xl font-extrabold text-dark-blue my-4">
-                         {price > 0 || note ? (
-                            <span>
-                                {note ? note : formatPrice(price, lang, currency)}
-                            </span>
-                        ) : (
-                            <span className="text-xl">{dictionary.agreed_price}</span>
-                        )}
-                    </div>
+                     {discount && oldPrice && oldPrice > 0 ? (
+                        <div className="my-4 text-left">
+                            <div className="inline-block bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-md mb-1">-{discount * 100}%</div>
+                            <div className="text-3xl font-extrabold text-dark-blue">{formatPrice(price, lang, currency)}</div>
+                            <div className="text-base text-gray-400 line-through">{formatPrice(oldPrice, lang, currency)}</div>
+                        </div>
+                    ) : (
+                        <div className="text-3xl font-extrabold text-dark-blue my-4">
+                            {price > 0 || note ? (
+                                <span>
+                                    {note ? note : formatPrice(price, lang, currency)}
+                                </span>
+                            ) : (
+                                <span className="text-xl">{dictionary.agreed_price}</span>
+                            )}
+                        </div>
+                    )}
                      <Button 
                         className={cn(
                             "w-full text-base py-3 h-auto transition-all duration-300",
