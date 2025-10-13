@@ -24,10 +24,6 @@ const PopularPackages: FC<PopularPackagesProps> = ({ lang, onSelectPackage }) =>
 
     const handleCtaClick = () => {
         onSelectPackage();
-        const packageBuilder = document.getElementById('package-builder');
-        if (packageBuilder) {
-            packageBuilder.scrollIntoView({ behavior: 'smooth' });
-        }
     };
 
     if (!translations) {
