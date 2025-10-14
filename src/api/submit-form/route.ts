@@ -34,9 +34,7 @@ const amocrm = new Client({
         client_id: process.env.AMOCRM_CLIENT_ID!,
         client_secret: process.env.AMOCRM_CLIENT_SECRET!,
         redirect_uri: process.env.AMOCRM_REDIRECT_URI!,
-        server: {
-            port: 3001
-        }
+        code: process.env.AMOCRM_AUTH_CODE!,
     },
 });
 
