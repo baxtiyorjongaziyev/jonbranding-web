@@ -1,5 +1,6 @@
 
 import { NextResponse } from 'next/server';
+import { Client } from 'amocrm-js';
 
 const goalOptionsMap: Record<string, string> = {
     "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak.": "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman.",
@@ -23,6 +24,79 @@ const pickTwoLabels: Record<string, string> = {
 };
 
 const UZS_TO_USD_RATE = 1 / 12700;
+
+// AmoCRM Integration
+const amocrm = new Client({
+    // Your amoCRM subdomain
+    domain: process.env.AMOCRM_DOMAIN!,
+    // Integration tokens
+    auth: {
+        client_id: process.env.AMOCRM_CLIENT_ID!,
+        client_secret: process.env.AMOCRM_CLIENT_SECRET!,
+        redirect_uri: process.env.AMOCRM_REDIRECT_URI!,
+        server: {
+            port: 3001
+        }
+    },
+});
+
+const connectToAmoCRM = async () => {
+    try {
+        const status = await amocrm.connection.connect();
+        console.log('amoCRM connection status:', status);
+    } catch (error) {
+        console.error('Failed to connect to amoCRM:', error);
+    }
+};
+
+// Connect once on server start
+if (process.env.AMOCRM_DOMAIN) {
+    connectToAmoCRM();
+}
+
+const createAmoCRMLead = async (data: any) => {
+    if (!amocrm.connection.isTokenExpired()) {
+       try {
+            const lead = new amocrm.Lead({
+                name: `So'rov: ${data.fullName}`,
+                price: data.totalPrice ? Math.round(data.totalPrice * UZS_TO_USD_RATE) : 0,
+            });
+
+            // Add contact
+            const contact = new amocrm.Contact({
+                name: data.fullName,
+            });
+            contact.addCustomField(232353, data.phone, 'WORK'); // Phone field ID
+            if (data.telegram) {
+                contact.addCustomField(232355, data.telegram, 'OTHER'); // Telegram field ID
+            }
+            lead.addContact(contact);
+            
+            // Add custom fields to lead
+            if (data.goal) lead.addCustomField(987259, goalOptionsMap[data.goal] || data.goal); // Maqsad
+            if (data.budget) lead.addCustomField(987261, data.budget); // Byudjet
+            if (data.location) lead.addCustomField(987263, data.location); // Joylashuv
+            if (data.companyName) lead.addCustomField(987265, data.companyName); // Kompaniya
+            if (data.website) lead.addCustomField(987267, data.website); // Veb-sayt
+            
+            let notes = '';
+            if (data.packageSummary) notes += data.packageSummary + '\n\n';
+            if (data.pickTwoPreference && data.pickTwoPreference.length > 0) {
+                 const translatedPreferences = data.pickTwoPreference.map((p: string) => pickTwoLabels[p] || p).join(', ');
+                 notes += `Mijoz ustuvorliklari: ${translatedPreferences}\n`;
+            }
+            lead.addCustomField(987269, notes); // Izohlar
+
+            await lead.save();
+            console.log('Lead created in amoCRM');
+
+        } catch (error: any) {
+            console.error('Failed to create lead in amoCRM:', error.message);
+        }
+    } else {
+        console.warn('amoCRM token is expired or connection is not available.');
+    }
+};
 
 
 async function sendMetaConversionEvent(data: any) {
@@ -97,6 +171,13 @@ export async function POST(request: Request) {
 
         if (!fullName || !phone) {
             return NextResponse.json({ ok: false, error: "Ism va telefon raqam kiritilishi shart" }, { status: 400 });
+        }
+
+        // --- Send to AmoCRM (don't wait for it) ---
+        if (process.env.AMOCRM_DOMAIN) {
+            createAmoCRMLead(body).catch(e => {
+                console.error("Failed to send amoCRM lead in background:", e);
+            });
         }
         
         let telegramMessage = '';
