@@ -1,7 +1,7 @@
 
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Check, Mail, Send } from 'lucide-react';
+import { Check, Send } from 'lucide-react';
 import Script from 'next/script';
 import React from 'react';
 
@@ -262,19 +262,11 @@ export default function ObloshkaPricingPage() {
                     href="https://t.me/baxtiyorjongaziyev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Telegram orqali buyurtma berish"
+                    aria-label="Telegram orqali paketni tanlash"
                     className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 transition"
                 >
                     <Send className="w-5 h-5 mr-2" />
-                    Buyurtma berish (Telegram)
-                </Link>
-                <Link
-                    href="mailto:info@jonbranding.uz"
-                    aria-label="Email orqali so'rov yuborish"
-                    className="inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-base font-medium rounded-full text-slate-700 bg-white hover:bg-slate-50 transition"
-                >
-                    <Mail className="w-5 h-5 mr-2" />
-                    Email orqali so‘rov
+                    Paketni tanlash
                 </Link>
                 </div>
             </div>
