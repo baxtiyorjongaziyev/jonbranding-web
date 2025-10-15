@@ -314,9 +314,12 @@ export default function ObloshkaPricingPage() {
                         </div>
                         <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+30 %</span>
                     </li>
-                    <li className="flex justify-between items-center">
-                        <span>24 soatda tayyor</span>
-                        <span className="font-semibold text-slate-800 dark:text-white">+25 %</span>
+                    <li className="flex justify-between items-center gap-4">
+                         <div>
+                            <span className="font-medium text-slate-700 dark:text-slate-200">24 soatda tezkor tayyorlash</span>
+                             <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +50% qo'shiladi</p>
+                        </div>
+                        <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+50 %</span>
                     </li>
                     <li className="flex justify-between items-center">
                         <span>Manba fayllar (PSD/AI)</span>
@@ -358,3 +361,5 @@ export default function ObloshkaPricingPage() {
     </>
   );
 }
+
+    
