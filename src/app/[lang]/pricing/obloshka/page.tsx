@@ -301,9 +301,12 @@ export default function ObloshkaPricingPage() {
                     Qo‘shimcha xizmatlar
                     </h2>
                     <ul className="mt-6 space-y-4 text-slate-600 dark:text-slate-300">
-                    <li className="flex justify-between items-center">
-                        <span>2-variant (A/B test)</span>
-                        <span className="font-semibold text-slate-800 dark:text-white">+30 %</span>
+                    <li className="flex justify-between items-center gap-4">
+                        <div>
+                            <span className="font-medium text-slate-700 dark:text-slate-200">A/B test uchun 2-variant</span>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">1ta mahsulot uchun 2 xil dizayn variantini olish</p>
+                        </div>
+                        <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+30 %</span>
                     </li>
                     <li className="flex justify-between items-center">
                         <span>24 soatda tayyor</span>
