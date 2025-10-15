@@ -65,17 +65,21 @@ const pricingData = [
 // Reusable Components
 const TierTable = ({
   data,
+  isRecommended,
 }: {
   data: { quantity: string; price: number }[];
+  isRecommended?: boolean;
 }) => (
-  <div className="w-full mt-4 text-sm text-slate-600">
-    <div className="grid grid-cols-2 gap-2 text-center">
-      <div className="font-semibold text-slate-700 bg-slate-50 p-2 rounded-t-lg">Miqdor</div>
-      <div className="font-semibold text-slate-700 bg-slate-50 p-2 rounded-t-lg">Narx (1 dona)</div>
+  <div className="w-full mt-4 text-sm rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700">
+    <div className="grid grid-cols-2 text-center bg-slate-50 dark:bg-slate-800">
+      <div className="font-semibold text-slate-700 dark:text-slate-200 p-2 border-b border-r border-slate-200 dark:border-slate-700">Miqdor</div>
+      <div className="font-semibold text-slate-700 dark:text-slate-200 p-2 border-b border-slate-200 dark:border-slate-700">Narx (1 dona)</div>
+    </div>
+    <div className="grid grid-cols-2 text-center">
       {data.map((row, index) => (
         <React.Fragment key={index}>
-          <div className="bg-white p-2 border-b border-slate-100">{row.quantity}</div>
-          <div className="bg-white p-2 border-b border-slate-100">{row.price.toLocaleString('fr-FR')} so‘m</div>
+          <div className={`p-2 border-r border-slate-200 dark:border-slate-700 ${index < data.length - 1 ? 'border-b' : ''} ${isRecommended ? 'text-blue-100' : 'text-slate-600'}`}>{row.quantity}</div>
+          <div className={`p-2 ${index < data.length - 1 ? 'border-b border-slate-200 dark:border-slate-700' : ''} ${isRecommended ? 'text-blue-100' : 'text-slate-600'}`}>{row.price.toLocaleString('fr-FR')} so‘m</div>
         </React.Fragment>
       ))}
     </div>
@@ -161,7 +165,7 @@ const PricingCard = ({
       }`}
     >
       <p className="font-semibold">Miqdor bo‘yicha chegirma (Alibaba uslubi):</p>
-      <TierTable data={tier.discounts} />
+      <TierTable data={tier.discounts} isRecommended={tier.isRecommended} />
     </div>
   </div>
 );
