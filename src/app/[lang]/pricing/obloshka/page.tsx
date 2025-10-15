@@ -70,16 +70,16 @@ const TierTable = ({
   data: { quantity: string; price: number }[];
   isRecommended?: boolean;
 }) => (
-  <div className="w-full mt-4 text-sm rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700">
-    <div className="grid grid-cols-2 text-center bg-slate-50 dark:bg-slate-800">
-      <div className="font-semibold text-slate-700 dark:text-slate-200 p-2 border-b border-r border-slate-200 dark:border-slate-700">Miqdor</div>
-      <div className="font-semibold text-slate-700 dark:text-slate-200 p-2 border-b border-slate-200 dark:border-slate-700">Narx (1 dona)</div>
+  <div className={`w-full mt-4 text-sm rounded-lg overflow-hidden border ${isRecommended ? 'border-blue-800' : 'border-slate-200 dark:border-slate-700'}`}>
+    <div className={`grid grid-cols-2 text-center ${isRecommended ? 'bg-blue-900' : 'bg-slate-50 dark:bg-slate-800'}`}>
+      <div className={`font-semibold p-2 border-b border-r ${isRecommended ? 'text-blue-100 border-blue-800' : 'text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'}`}>Miqdor</div>
+      <div className={`font-semibold p-2 border-b ${isRecommended ? 'text-blue-100 border-blue-800' : 'text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'}`}>Narx (1 dona)</div>
     </div>
     <div className="grid grid-cols-2 text-center">
       {data.map((row, index) => (
         <React.Fragment key={index}>
-          <div className={`p-2 border-r border-slate-200 dark:border-slate-700 ${index < data.length - 1 ? 'border-b' : ''} ${isRecommended ? 'text-blue-100' : 'text-slate-600'}`}>{row.quantity}</div>
-          <div className={`p-2 ${index < data.length - 1 ? 'border-b border-slate-200 dark:border-slate-700' : ''} ${isRecommended ? 'text-blue-100' : 'text-slate-600'}`}>{row.price.toLocaleString('fr-FR')} so‘m</div>
+          <div className={`p-2 border-r ${isRecommended ? 'border-blue-800' : 'border-slate-200 dark:border-slate-700'} ${index < data.length - 1 ? 'border-b' : ''} ${isRecommended ? 'text-blue-100' : 'text-slate-600 dark:text-slate-300'}`}>{row.quantity}</div>
+          <div className={`p-2 ${index < data.length - 1 ? `border-b ${isRecommended ? 'border-blue-800' : 'border-slate-200 dark:border-slate-700'}` : ''} ${isRecommended ? 'text-blue-100' : 'text-slate-600 dark:text-slate-300'}`}>{row.price.toLocaleString('fr-FR')} so‘m</div>
         </React.Fragment>
       ))}
     </div>
@@ -105,7 +105,7 @@ const PricingCard = ({
         </span>
       </div>
     )}
-    <h3 className="text-2xl font-bold text-center">{tier.name}</h3>
+    <h3 className={`text-2xl font-bold text-center ${tier.isRecommended ? 'text-white' : 'text-slate-900'}`}>{tier.name}</h3>
     <p
       className={`text-center text-sm mt-2 h-12 ${
         tier.isRecommended ? 'text-blue-200' : 'text-slate-500'
@@ -150,7 +150,7 @@ const PricingCard = ({
         tier.isRecommended ? 'border-blue-700' : 'border-slate-200'
       }`}
     >
-      <p className="font-semibold">Farqi:</p>
+      <p className="font-semibold">Afzalligi:</p>
       <p
         className={`mt-2 text-sm ${
           tier.isRecommended ? 'text-blue-200' : 'text-slate-500'
@@ -252,13 +252,13 @@ export default function ObloshkaPricingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FaqSchema) }}
       />
-        <main className="bg-slate-50 min-h-screen text-slate-800 pt-20">
-            <section className="py-12 bg-white border-b border-slate-200">
+        <main className="bg-slate-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-200 pt-20">
+            <section className="py-12 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
             <div className="container mx-auto px-6 text-center">
-                <h1 className="text-4xl md:text-5xl font-extrabold text-blue-950">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-blue-950 dark:text-white">
                 Marketplace uchun mahsulot obloşkasi dizayni
                 </h1>
-                <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">
                 Bitta asosiy sotuvchi rasm – qolganlari oddiy lightbox suratlar bilan.
                 </p>
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -296,22 +296,22 @@ export default function ObloshkaPricingPage() {
                 className="pb-20"
             >
                 <div className="container mx-auto px-6">
-                <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-                    <h2 id="additional-services-title" className="text-2xl font-bold text-center text-blue-950">
+                <div className="max-w-2xl mx-auto bg-white dark:bg-slate-950 rounded-2xl shadow-lg p-8">
+                    <h2 id="additional-services-title" className="text-2xl font-bold text-center text-blue-950 dark:text-white">
                     Qo‘shimcha xizmatlar
                     </h2>
-                    <ul className="mt-6 space-y-4 text-slate-600">
+                    <ul className="mt-6 space-y-4 text-slate-600 dark:text-slate-300">
                     <li className="flex justify-between items-center">
                         <span>2-variant (A/B test)</span>
-                        <span className="font-semibold text-slate-800">+30 %</span>
+                        <span className="font-semibold text-slate-800 dark:text-white">+30 %</span>
                     </li>
                     <li className="flex justify-between items-center">
                         <span>24 soatda tayyor</span>
-                        <span className="font-semibold text-slate-800">+25 %</span>
+                        <span className="font-semibold text-slate-800 dark:text-white">+25 %</span>
                     </li>
                     <li className="flex justify-between items-center">
                         <span>Manba fayllar (PSD/AI)</span>
-                        <span className="font-semibold text-slate-800">+15 %</span>
+                        <span className="font-semibold text-slate-800 dark:text-white">+15 %</span>
                     </li>
                     </ul>
                 </div>
@@ -321,25 +321,25 @@ export default function ObloshkaPricingPage() {
             <section id="faq" aria-labelledby="faq-title" className="pb-20">
                 <div className="container mx-auto px-6">
                 <div className="max-w-3xl mx-auto">
-                    <h2 id="faq-title" className="text-3xl font-bold text-center text-blue-950">
+                    <h2 id="faq-title" className="text-3xl font-bold text-center text-blue-950 dark:text-white">
                     Ko‘p beriladigan savollar
                     </h2>
                     <div className="mt-8 space-y-4">
-                        <div className="rounded-lg border border-slate-200 bg-white p-4">
-                            <h3 className="font-semibold text-slate-800">Nega faqat obloşka rasm dizayn qilamiz?</h3>
-                            <p className="text-slate-600 mt-2">Chunki marketplace sotuvlarining 80% birinchi rasmga bog'liq. Biz aynan shu eng muhim nuqtaga e'tibor qaratib, maksimal natija berishni maqsad qilganmiz.</p>
+                        <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
+                            <h3 className="font-semibold text-slate-800 dark:text-white">Nega faqat obloşka rasm dizayn qilamiz?</h3>
+                            <p className="text-slate-600 dark:text-slate-300 mt-2">Chunki marketplace sotuvlarining 80% birinchi rasmga bog'liq. Biz aynan shu eng muhim nuqtaga e'tibor qaratib, maksimal natija berishni maqsad qilganmiz.</p>
                         </div>
-                        <div className="rounded-lg border border-slate-200 bg-white p-4">
-                            <h3 className="font-semibold text-slate-800">Lightbox suratlar yetarlimi yoki studio kerakmi?</h3>
-                            <p className="text-slate-600 mt-2">Start va Pro tariflar uchun lightbox suratlar yetarli. Premium tarifda esa mahsulotni yanada jozibador ko'rsatish uchun studiyada olingan professional suratlardan foydalanishni tavsiya etamiz.</p>
+                        <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
+                            <h3 className="font-semibold text-slate-800 dark:text-white">Lightbox suratlar yetarlimi yoki studio kerakmi?</h3>
+                            <p className="text-slate-600 dark:text-slate-300 mt-2">Start va Pro tariflar uchun lightbox suratlar yetarli. Premium tarifda esa mahsulotni yanada jozibador ko'rsatish uchun studiyada olingan professional suratlardan foydalanishni tavsiya etamiz.</p>
                         </div>
-                        <div className="rounded-lg border border-slate-200 bg-white p-4">
-                            <h3 className="font-semibold text-slate-800">Uzum/WB/Ozon o‘lchamlariga moslab berasizmi?</h3>
-                            <p className="text-slate-600 mt-2">Albatta. Biz har bir marketplace'ning texnik talablarini bilamiz va dizaynni aynan kerakli o'lcham va formatda tayyorlab beramiz.</p>
+                        <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
+                            <h3 className="font-semibold text-slate-800 dark:text-white">Uzum/WB/Ozon o‘lchamlariga moslab berasizmi?</h3>
+                            <p className="text-slate-600 dark:text-slate-300 mt-2">Albatta. Biz har bir marketplace'ning texnik talablarini bilamiz va dizaynni aynan kerakli o'lcham va formatda tayyorlab beramiz.</p>
                         </div>
-                        <div className="rounded-lg border border-slate-200 bg-white p-4">
-                            <h3 className="font-semibold text-slate-800">Seriyali buyurtmada yana chegirma bormi?</h3>
-                            <p className="text-slate-600 mt-2">Ha, 5 donadan ko'p buyurtmalar uchun qo'shimcha individual chegirmalar ko'zda tutilgan. Bu masalani menejer bilan muhokama qilishingiz mumkin.</p>
+                        <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
+                            <h3 className="font-semibold text-slate-800 dark:text-white">Seriyali buyurtmada yana chegirma bormi?</h3>
+                            <p className="text-slate-600 dark:text-slate-300 mt-2">Ha, 5 donadan ko'p buyurtmalar uchun qo'shimcha individual chegirmalar ko'zda tutilgan. Bu masalani menejer bilan muhokama qilishingiz mumkin.</p>
                         </div>
                     </div>
                 </div>
