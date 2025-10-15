@@ -79,6 +79,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {
       fullName: '',
       phone: '',
@@ -196,12 +197,6 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       }
     }
   }, [isOpen, form, user]);
-  
-  useEffect(() => {
-    if(dictionary) {
-      form.trigger();
-    }
-  }, [dictionary, form]);
 
 
   if (!isOpen || !dictionary) {
@@ -430,3 +425,5 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 };
 
 export default ContactModal;
+
+    
