@@ -1,10 +1,10 @@
 # Settings to manage and configure a Firebase App Hosting backend.
 # https://firebase.google.com/docs/app-hosting/configure
 # Using the Node.js runtime buildpack
-build:
-  runtime: nodejs20
 run:
   command: npm start
   env:
     - name: PORT
       value: "8080"
+build:
+  runtime: nodejs20
