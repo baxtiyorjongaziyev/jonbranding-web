@@ -31,7 +31,7 @@ const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) =
         { href: '/xizmatlar/firmenniy-stil', label: t.links.corporate_style, icon: Paintbrush },
         { href: '/xizmatlar/qadoq-dizayni', label: t.links.packaging_design, icon: Package },
         { href: '/xizmatlar/patent-kalkulyatori', label: t.links.patent_calculator, icon: PenSquare },
-        { href: '/pricing/obloshka', label: t.links.marketplace_cover, icon: Image },
+        { href: '/pricing/sotuvchi-kartochka', label: t.links.marketplace_cover, icon: Image },
       ],
     },
     {

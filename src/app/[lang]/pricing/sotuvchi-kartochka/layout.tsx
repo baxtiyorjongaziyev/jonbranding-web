@@ -29,7 +29,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
     }
   }
 
-  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}pricing/obloshka`;
+  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}pricing/sotuvchi-kartochka`;
 
   return {
     metadataBase: new URL('https://jonbranding.uz'),
@@ -53,16 +53,16 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'uz': `https://jonbranding.uz/pricing/obloshka`,
-        'ru': `https://jonbranding.uz/ru/pricing/obloshka`,
-        'en': `https://jonbranding.uz/en/pricing/obloshka`,
+        'uz': `https://jonbranding.uz/pricing/sotuvchi-kartochka`,
+        'ru': `https://jonbranding.uz/ru/pricing/sotuvchi-kartochka`,
+        'en': `https://jonbranding.uz/en/pricing/sotuvchi-kartochka`,
       },
     },
   };
 }
 
-const ObloshkaLayout: FC<Readonly<Props>> = ({ children }) => {
+const SotuvchiKartochkaLayout: FC<Readonly<Props>> = ({ children }) => {
   return <>{children}</>;
 }
 
-export default ObloshkaLayout;
+export default SotuvchiKartochkaLayout;

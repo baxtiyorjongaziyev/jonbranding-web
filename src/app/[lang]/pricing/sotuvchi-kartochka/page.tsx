@@ -16,7 +16,7 @@ const pricingData = [
     price: 300000,
     forWho: 'Yangi joylayotgan yoki test qilayotgan sotuvchilar.',
     includes: [
-      '1 ta asosiy obloşka rasm',
+      '1 ta asosiy sotuvchi kartochka rasmi',
       'Lightbox surat asosida ishlov',
       'Rang, matn va foyda qisqacha ko‘rsatiladi',
     ],
@@ -33,7 +33,7 @@ const pricingData = [
     price: 450000,
     forWho: 'Professional ko‘rinish va ishonch kerak bo‘lgan sotuvchilar.',
     includes: [
-      '1 ta asosiy obloşka rasm',
+      '1 ta asosiy sotuvchi kartochka rasmi',
       'Brend ranglari va muvozanatli kompozitsiya',
       'Matn bloklari: foyda, afzallik, xaridga undov',
       'Uzum, Wildberries yoki Ozon formatida tayyor',
@@ -51,7 +51,7 @@ const pricingData = [
     price: 650000,
     forWho: 'Brend obro‘sini oshirish va yuqori konversiya xohlaganlar.',
     includes: [
-      '1 ta asosiy obloşka rasm',
+      '1 ta asosiy sotuvchi kartochka rasmi',
       '3D yoki realistik mockup ishlov',
       'Brend muhitida kompozitsiya',
       '2 ta variant (A/B test uchun)',
@@ -186,15 +186,15 @@ const PricingCard = ({
 const ProductSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: 'Marketplace uchun mahsulot obloşkasi dizayni',
-  description: 'Sotuvlarni oshiradigan professional mahsulot obloshkasi dizayni. Marketplace uchun START, PRO va PREMIUM tariflar bilan tanishing va buyurtma bering.',
+  name: 'Marketplace uchun sotuvchi kartochka dizayni',
+  description: 'Sotuvlarni oshiradigan professional mahsulot kartochkasi dizayni. Marketplace uchun START, PRO va PREMIUM tariflar bilan tanishing va buyurtma bering.',
   brand: {
     '@type': 'Brand',
     name: 'Jon Branding',
   },
   offers: {
     '@type': 'OfferCatalog',
-    name: 'Obloshka dizayni tariflari',
+    name: 'Sotuvchi kartochka dizayni tariflari',
     itemListElement: pricingData.map((tier) => ({
       '@type': 'Offer',
       itemOffered: {
@@ -218,7 +218,7 @@ const FaqSchema = {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Nega faqat obloşka rasm dizayn qilamiz?",
+        "name": "Nega faqat sotuvchi kartochka rasmi dizayn qilamiz?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Chunki marketplace sotuvlarining 80% birinchi rasmga bog'liq. Biz aynan shu eng muhim nuqtaga e'tibor qaratib, maksimal natija berishni maqsad qilganmiz."
@@ -251,7 +251,7 @@ const FaqSchema = {
     ]
   };
 
-export default function ObloshkaPricingPage() {
+export default function SotuvchiKartochkaPricingPage() {
   const params = useParams();
   const lang = params.lang;
   
@@ -366,7 +366,7 @@ export default function ObloshkaPricingPage() {
                     </h2>
                     <div className="mt-8 space-y-4">
                         <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
-                            <h3 className="font-semibold text-slate-800 dark:text-white">Nega faqat obloşka rasm dizayn qilamiz?</h3>
+                            <h3 className="font-semibold text-slate-800 dark:text-white">Nega faqat sotuvchi kartochka rasmi dizayn qilamiz?</h3>
                             <p className="text-slate-600 dark:text-slate-300 mt-2">Chunki marketplace sotuvlarining 80% birinchi rasmga bog'liq. Biz aynan shu eng muhim nuqtaga e'tibor qaratib, maksimal natija berishni maqsad qilganmiz.</p>
                         </div>
                         <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
