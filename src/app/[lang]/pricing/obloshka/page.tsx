@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Check, Mail, Send } from 'lucide-react';
 import Script from 'next/script';
+import React from 'react';
 
 // SEO Metadata Generation
 export const metadata: Metadata = {
