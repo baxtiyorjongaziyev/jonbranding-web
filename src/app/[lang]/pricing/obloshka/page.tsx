@@ -238,10 +238,10 @@ const FaqSchema = {
       },
       {
         "@type": "Question",
-        "name": "Seriyali buyurtmada yana chegirma bormi?",
+        "name": "To'lov tartibi qanday?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ha, 5 donadan ko'p buyurtmalar uchun qo'shimcha individual chegirmalar ko'zda tutilgan. Bu masalani menejer bilan muhokama qilishingiz mumkin."
+          "text": "Standart to'lov tartibi 50% oldindan to'lov va 50% ish topshirilgandan so'ng. Bu bizga sizning loyihangizni darhol boshlashga va unga kerakli vaqt va resurslarni ajratishga imkon beradi."
         }
       }
     ]
@@ -309,7 +309,7 @@ export default function ObloshkaPricingPage() {
                     <ul className="mt-6 space-y-4 text-slate-600 dark:text-slate-300">
                     <li className="flex justify-between items-center gap-4">
                         <div>
-                            <span className="font-medium text-slate-700 dark:text-slate-200">1ta mahsulot uchun 2 xil dizayn (A/B test uchun)</span>
+                            <span className="font-medium text-slate-700 dark:text-slate-200">1ta mahsulot uchun 2 xil dizayn varianti (A/B test uchun)</span>
                             <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +30% qo'shiladi</p>
                         </div>
                         <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+30 %</span>
@@ -350,8 +350,8 @@ export default function ObloshkaPricingPage() {
                             <p className="text-slate-600 dark:text-slate-300 mt-2">Albatta. Biz har bir marketplace'ning texnik talablarini bilamiz va dizaynni aynan kerakli o'lcham va formatda tayyorlab beramiz.</p>
                         </div>
                         <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
-                            <h3 className="font-semibold text-slate-800 dark:text-white">Seriyali buyurtmada yana chegirma bormi?</h3>
-                            <p className="text-slate-600 dark:text-slate-300 mt-2">Ha, 5 donadan ko'p buyurtmalar uchun qo'shimcha individual chegirmalar ko'zda tutilgan. Bu masalani menejer bilan muhokama qilishingiz mumkin.</p>
+                            <h3 className="font-semibold text-slate-800 dark:text-white">To'lov tartibi qanday?</h3>
+                            <p className="text-slate-600 dark:text-slate-300 mt-2">Standart to'lov tartibi 50% oldindan to'lov va 50% ish topshirilgandan so'ng. Bu bizga sizning loyihangizni darhol boshlashga va unga kerakli vaqt va resurslarni ajratishga imkon beradi.</p>
                         </div>
                     </div>
                 </div>
@@ -361,5 +361,3 @@ export default function ObloshkaPricingPage() {
     </>
   );
 }
-
-    
