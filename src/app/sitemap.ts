@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/xizmatlar/patent-kalkulyatori',
     '/blog',
     '/sitemap',
+    '/pricing/obloshka',
   ];
 
   const getUrl = (locale: string, route: string) => {
