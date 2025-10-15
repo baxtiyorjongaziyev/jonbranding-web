@@ -1,35 +1,37 @@
-# --- Dockerfile ---
-# Use the official lightweight Node.js 20 image.
-# https://hub.docker.com/_/node
-FROM node:20-alpine AS base
+# Use an official Node.js runtime as a parent image
+FROM node:20-alpine AS builder
 
-# 1. ---- Builder ----
-FROM base AS builder
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
-# Copy package.json and package-lock.json
+
+# Copy package.json and package-lock.json (or yarn.lock)
 COPY package*.json ./
+
 # Install dependencies
 RUN npm ci
-# Copy all other files
+
+# Copy the rest of the application's code
 COPY . .
+
 # Build the Next.js application
 RUN npm run build
 
-# 2. ---- Runner ----
-FROM base AS runner
+# ---
+# Second stage: create a smaller image for production
+FROM node:20-alpine AS runner
+
 WORKDIR /app
 
-# Set environment variables
+# Set the environment to production
 ENV NODE_ENV=production
 
-# Copy necessary files from the builder stage
+# Copy the built app from the builder stage
+COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/package.json ./package.json
 
 # Expose the port the app runs on
 EXPOSE 8080
 
-# Command to run the application
-CMD ["node", "server.js"]
+# The command to run the application
+CMD ["npm", "start"]
