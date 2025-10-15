@@ -1,4 +1,6 @@
 
+'use client';
+
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Check, Send } from 'lucide-react';
@@ -20,6 +22,7 @@ const pricingData = [
       'Rang, matn va foyda qisqacha ko‘rsatiladi',
     ],
     difference: 'Tez tayyorlanadi, soddaligi bilan e’tibor tortadi.',
+    isRecommended: false,
     discounts: [
       { quantity: '1 dona', price: 300000 },
       { quantity: '3+', price: 270000 },
@@ -56,6 +59,7 @@ const pricingData = [
       'Professional matnlar va CTA’lar',
     ],
     difference: 'Qimmat ko‘rinadi, darrov e’tibor tortadi.',
+    isRecommended: false,
     discounts: [
       { quantity: '1 dona', price: 650000 },
       { quantity: '3+', price: 600000 },
@@ -331,7 +335,7 @@ export default function ObloshkaPricingPage() {
                     <ul className="mt-6 space-y-4 text-slate-600 dark:text-slate-300">
                     <li className="flex justify-between items-center gap-4">
                         <div>
-                            <span className="font-medium text-slate-700 dark:text-slate-200">1ta mahsulot uchun 2 xil dizayn varianti (A/B test uchun)</span>
+                            <span className="font-medium text-slate-700 dark:text-slate-200">1 ta mahsulot uchun 2 xil dizayn varianti (A/B test uchun)</span>
                             <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +30% qo'shiladi</p>
                         </div>
                         <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+30 %</span>
