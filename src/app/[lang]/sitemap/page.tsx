@@ -2,7 +2,7 @@
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush } from 'lucide-react';
+import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Image } from 'lucide-react';
 
 const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) => {
   const sortedPosts = getSortedPostsData(lang);
@@ -31,6 +31,7 @@ const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) =
         { href: '/xizmatlar/firmenniy-stil', label: t.links.corporate_style, icon: Paintbrush },
         { href: '/xizmatlar/qadoq-dizayni', label: t.links.packaging_design, icon: Package },
         { href: '/xizmatlar/patent-kalkulyatori', label: t.links.patent_calculator, icon: PenSquare },
+        { href: '/pricing/obloshka', label: t.links.marketplace_cover, icon: Image },
       ],
     },
     {

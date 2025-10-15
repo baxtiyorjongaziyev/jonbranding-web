@@ -93,7 +93,8 @@
             "corporate_style": "Corporate Identity",
             "packaging_design": "Packaging Design",
             "logo_design": "Logo Design",
-            "patent_calculator": "Patent Calculator"
+            "patent_calculator": "Patent Calculator",
+            "marketplace_cover": "Marketplace Cover Design"
         }
     },
     "hero": {
@@ -438,8 +439,8 @@
         "section1_p3": "Most importantly, it allows for the systemization of marketing expenses, abandoning tools, channels, and ideas that do not support the company's positioning and, therefore, do not deserve the cost.",
         "section2_title": "Brand strategy is necessary for any business",
         "section2_p1": "Brand strategy is necessary for both new and long-existing companies.",
-        "section2_p2": "For startups, it helps to define their mission, values, and identity from the very beginning, to occupy the right position in the market, and to attract customers.",
-        "section2_p3": "For large companies, strategy is a tool for growth and reputation management. In this case, it helps to maintain relevance, adapt to changes, and build strong relationships with the audience. Regardless of business size, brand strategy answers the main question: why should a customer choose you?",
+        "section2_p2_bold": "For startups, it helps to define their mission, values, and identity from the very beginning, to occupy the right position in the market, and to attract customers.",
+        "section2_p3_bold": "For large companies, strategy is a tool for growth and reputation management. In this case, it helps to maintain relevance, adapt to changes, and build strong relationships with the audience. Regardless of business size, brand strategy answers the main question: why should a customer choose you?",
         "process_title": "Branding is a process",
         "process_subtitle": "In our agency, we are convinced that branding is more than just creating a logo. Branding is not a one-time task, but a cyclical process. Each stage plays its key role, and skipping any of them can weaken the brand and its market position. But if everything is done correctly and consistently, branding helps the business grow and makes it easier to manage many processes, from product production to marketing.",
         "process_steps": [
@@ -636,7 +637,6 @@
             "introP1": "This page shows the estimated starting prices for our services. Every company is unique, so the final cost depends on the project's complexity, scope of work, and your goals.",
             "introP2": "These prices will help you understand how much working on your brand might cost.",
             "introSubtitle": "How is branding work structured?",
-            "introP3": "Creating a brand is not just a logo or corporate identity. It's a whole process that includes:",
             "introList": [
                 { "icon": "research", "title": "Research", "description": "Market analysis, competitor audit, target audience study." },
                 { "icon": "strategy", "title": "Strategy", "description": "Defining the brand's meaning, its positioning, and values." },
