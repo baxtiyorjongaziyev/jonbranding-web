@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Check, Send } from 'lucide-react';
 import Script from 'next/script';
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 
 // Data for pricing tiers
@@ -71,7 +72,7 @@ const TierTable = ({
   isRecommended?: boolean;
 }) => (
   <div className={`w-full mt-4 text-sm rounded-lg overflow-hidden border ${isRecommended ? 'border-blue-800' : 'border-slate-200 dark:border-slate-700'}`}>
-    <div className={`grid grid-cols-2 text-center ${isRecommended ? 'bg-blue-900' : 'bg-slate-50 dark:bg-slate-800'}`}>
+    <div className={`grid grid-cols-2 text-center ${isRecommended ? 'bg-blue-900/70' : 'bg-slate-50 dark:bg-slate-800'}`}>
       <div className={`font-semibold p-2 border-b border-r ${isRecommended ? 'text-blue-100 border-blue-800' : 'text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'}`}>Miqdor</div>
       <div className={`font-semibold p-2 border-b ${isRecommended ? 'text-blue-100 border-blue-800' : 'text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'}`}>Narx (1 dona)</div>
     </div>
@@ -166,6 +167,13 @@ const PricingCard = ({
     >
       <p className="font-semibold">Miqdor bo‘yicha chegirma (Alibaba uslubi):</p>
       <TierTable data={tier.discounts} isRecommended={tier.isRecommended} />
+    </div>
+    <div className="mt-8">
+      <Button asChild className="w-full" variant={tier.isRecommended ? 'default' : 'outline'}>
+        <Link href="https://t.me/baxtiyorjongaziyev" target="_blank" rel="noopener noreferrer">
+          Buyurtma berish <Send className="w-4 h-4 ml-2" />
+        </Link>
+      </Button>
     </div>
   </div>
 );
@@ -263,9 +271,7 @@ export default function ObloshkaPricingPage() {
                 </p>
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <Link
-                    href="https://t.me/baxtiyorjongaziyev"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#pricing-tiers"
                     aria-label="Telegram orqali paketni tanlash"
                     className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 transition"
                 >
@@ -303,8 +309,8 @@ export default function ObloshkaPricingPage() {
                     <ul className="mt-6 space-y-4 text-slate-600 dark:text-slate-300">
                     <li className="flex justify-between items-center gap-4">
                         <div>
-                            <span className="font-medium text-slate-700 dark:text-slate-200">A/B test uchun 2-variant</span>
-                            <p className="text-xs text-slate-500 dark:text-slate-400">1ta mahsulot uchun 2 xil dizayn variantini olish</p>
+                            <span className="font-medium text-slate-700 dark:text-slate-200">1ta mahsulot uchun 2 xil dizayn (A/B test uchun)</span>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +30% qo'shiladi</p>
                         </div>
                         <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+30 %</span>
                     </li>
