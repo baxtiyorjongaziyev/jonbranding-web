@@ -298,7 +298,7 @@ export default function ObloshkaPricingPage() {
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <a
                     href="#pricing-tiers"
-                    aria-label="Telegram orqali paketni tanlash"
+                    aria-label="Paketni tanlash"
                     className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 transition"
                 >
                     <Send className="w-5 h-5 mr-2" />
@@ -347,9 +347,12 @@ export default function ObloshkaPricingPage() {
                         </div>
                         <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+50 %</span>
                     </li>
-                    <li className="flex justify-between items-center">
-                        <span>Manba fayllar (PSD/AI)</span>
-                        <span className="font-semibold text-slate-800 dark:text-white">+15 %</span>
+                    <li className="flex justify-between items-center gap-4">
+                         <div>
+                            <span className="font-medium text-slate-700 dark:text-slate-200">Manba fayllar (PSD/AI)</span>
+                             <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +100% qo'shiladi</p>
+                        </div>
+                        <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+100 %</span>
                     </li>
                     </ul>
                 </div>
