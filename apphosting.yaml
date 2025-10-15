@@ -1,10 +1,10 @@
 # Settings to manage and configure a Firebase App Hosting backend.
 # https://firebase.google.com/docs/app-hosting/configure
-runConfig:
-  cpu: 1
-  memoryMiB: 1024
-  maxInstances: 2
-customBuild:
-  run:
-    command: 'docker build -t image . && docker push image'
-    dir: /workspace
+# Using the Node.js runtime buildpack
+build:
+  runtime: nodejs20
+run:
+  command: npm start
+  env:
+    - name: PORT
+      value: "8080"
