@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Metadata } from 'next';
@@ -170,7 +169,7 @@ const PricingCard = ({
         tier.isRecommended ? 'border-blue-700' : 'border-slate-200'
       }`}
     >
-      <p className="font-semibold">Miqdor bo‘yicha chegirma (Alibaba uslubi):</p>
+      <p className="font-semibold">Miqdor bo‘yicha chegirma:</p>
       <TierTable data={tier.discounts} isRecommended={tier.isRecommended} />
     </div>
     <div className="mt-8">
@@ -246,7 +245,7 @@ const FaqSchema = {
         "name": "To'lov tartibi qanday?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Standart to'lov tartibi 50% oldindan to'lov va 50% ish topshirilgandan so'ng. Bu bizga sizning loyihangizni darhol boshlashga va unga kerakli vaqt va resurslarni ajratishga imkon beradi."
+          "text": "Agar buyurtma 1 dona bo'lsa, to'lov 100% oldindan amalga oshiriladi. Agar buyurtmalar soni bir nechta bo'lsa, 50% oldindan to'lov va qolgan 50% ish topshirilgandan so'ng to'lanadi. Bu bizga sizning loyihangizni darhol boshlashga va unga kerakli vaqt va resurslarni ajratishga imkon beradi."
         }
       }
     ]
@@ -380,7 +379,7 @@ export default function ObloshkaPricingPage() {
                         </div>
                         <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
                             <h3 className="font-semibold text-slate-800 dark:text-white">To'lov tartibi qanday?</h3>
-                            <p className="text-slate-600 dark:text-slate-300 mt-2">Standart to'lov tartibi 50% oldindan to'lov va 50% ish topshirilgandan so'ng. Bu bizga sizning loyihangizni darhol boshlashga va unga kerakli vaqt va resurslarni ajratishga imkon beradi.</p>
+                            <p className="text-slate-600 dark:text-slate-300 mt-2">Agar buyurtma 1 dona bo'lsa, to'lov 100% oldindan amalga oshiriladi. Agar buyurtmalar soni bir nechta bo'lsa, 50% oldindan to'lov va qolgan 50% ish topshirilgandan so'ng to'lanadi. Bu bizga sizning loyihangizni darhol boshlashga va unga kerakli vaqt va resurslarni ajratishga imkon beradi.</p>
                         </div>
                     </div>
                 </div>
