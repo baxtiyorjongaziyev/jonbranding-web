@@ -7,7 +7,8 @@ type Props = {
   params: { lang: string };
 };
 
-export async function generateMetadata({ params: { lang } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = params;
   const isRu = lang === 'ru';
   const isEn = lang === 'en';
   
