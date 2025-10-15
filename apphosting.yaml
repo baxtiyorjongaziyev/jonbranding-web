@@ -4,7 +4,7 @@ runConfig:
   cpu: 1
   memoryMiB: 1024
   maxInstances: 2
-# Optional. Controls the build process.
-# build:
-#   run:
-#   - command: npm run build
+customBuild:
+  run:
+    command: 'docker build -t image . && docker push image'
+    dir: /workspace
