@@ -471,7 +471,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         
             <section className="bg-secondary py-16">
                 <div className="container mx-auto px-4">
-                    <Card className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
+                    <Card id="your-package-card" className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                             
                             <div className="lg:col-span-2">
