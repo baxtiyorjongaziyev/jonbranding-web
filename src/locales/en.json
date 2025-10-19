@@ -649,7 +649,7 @@
                 "tripwire": "First Step (Quick Services)",
                 "strategy": "Strategic Services",
                 "naming": "Naming",
-                "identity": "Visual Identity",
+                "identity": "Visual Identity: Logo, Corporate Style, Brandbook",
                 "addons": "Add-on Services",
                 "options": "Special Conditions"
             },
@@ -663,6 +663,8 @@
             "empty_package_title": "Your perfect package starts here",
             "empty_package_desc": "Choose services or start with our most popular offer.",
             "empty_package_cta": "Add Best Offer",
+            "best_start": "Best Start!",
+            "best_start_desc": "Try our most popular package: Naming + Logo",
             "selected": "Selected",
             "select": "Select",
             "services_total": "Services total:",
