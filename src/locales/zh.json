@@ -362,7 +362,7 @@
     "quiz": {
         "metadata": {
             "title": "迷你测试：您的业务准备好进行品牌塑造了吗？ | Jon.Branding",
-            "description": "回答几个简单的问题，了解您的业务对品牌塑造的准备程度、其优势和劣势。"
+            "description": "回答几个简单的问题，了解您的业务对品牌塑造的准备程度、其优势和劣劣势。"
         },
         "questions": [
             {
@@ -436,7 +436,7 @@
         "section1_title": "品牌策略是业务增长的工具",
         "section1_p1": "每个有抱负的公司都有其目标。对于一些公司来说，是占领一定的市场份额；对于另一些公司来说，是品牌知名度、向新领域扩张等等。",
         "section1_p2": "品牌策略是帮助公司实现这些目标的工具，使其不仅仅是一个产品或服务，而是更多的东西——成为其客户生活的一部分，一个可识别形象的载体。",
-        "section1_p3": "最重要的是，它允许系统化营销开支，放弃那些不支持公司定位的工具、渠道和想法，因此不值得花费。",
+        "section1p3": "最重要的是，它允许系统化营销开支，放弃那些不支持公司定位的工具、渠道和想法，因此不值得花费。",
         "section2_title": "任何业务都需要品牌策略",
         "section2_p1": "品牌策略对于新公司和长期存在的公司都是必要的。",
         "section2_p2_bold": "对于初创公司，",
@@ -652,7 +652,7 @@
                 "tripwire": "第一步（快速服务）",
                 "strategy": "战略服务",
                 "naming": "命名",
-                "identity": "形象与设计",
+                "identity": "视觉形象",
                 "addons": "附加服务",
                 "options": "特殊条件"
             },
@@ -668,9 +668,17 @@
             "services_total": "服务总计：",
             "upfront_discount_title": "预付款-10%折扣",
             "upfront_discount_desc": "为项目支付100%预付款",
+            "upfront_discount_options": {
+                "yes": "是",
+                "no": "否"
+            },
             "final_price": "最终价格：",
             "order_with_discount": "带折扣订购",
             "get_free_consultation": "获得免费咨询",
+            "satisfaction_guarantee": "100% 满意保证",
+            "satisfaction_guarantee_desc": "如果您不喜欢最初的概念，我们将退还您的付款。",
+            "not_public_offer": "这不是一个公开要约",
+            "not_public_offer_desc": "价格仅供参考。最终价格将在合同中确定。",
             "total_savings": "您节省的总额",
             "gift_title": "礼物！",
             "agreed_price": "面议",
