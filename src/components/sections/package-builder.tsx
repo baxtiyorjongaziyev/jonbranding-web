@@ -413,6 +413,21 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <div className="space-y-16">
                         {Object.entries(serviceGroups).map(([groupKey, group]) => (
                            <React.Fragment key={groupKey}>
+                                {groupKey === 'naming' && (
+                                    <div className="py-8">
+                                        <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
+                                            <div className="flex items-center gap-4">
+                                                <div className="bg-white/10 p-3 rounded-full">
+                                                    <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-extrabold text-lg text-white">{translations.discount_alert_title}</h4>
+                                                    <p className="text-blue-200" dangerouslySetInnerHTML={{ __html: translations.discount_alert_desc }}></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                                 {groupKey === 'identity' && (
                                     <div className="py-8">
                                         <PopularPackages lang={lang} onSelectPackage={() => {
@@ -429,21 +444,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                 )}
                                 <ServiceGroup title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
-                                    {groupKey === 'identity' && (
-                                        <div className="col-span-1 md:col-span-2 lg:col-span-3">
-                                            <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="bg-white/10 p-3 rounded-full">
-                                                        <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
-                                                    </div>
-                                                    <div>
-                                                        <h4 className="font-extrabold text-lg text-white">{translations.discount_alert_title}</h4>
-                                                        <p className="text-blue-200" dangerouslySetInnerHTML={{ __html: translations.discount_alert_desc }}></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
                                     {group.services.map((serviceId) => {
                                         const typedServiceId = serviceId as keyof SelectedServices;
                                         if (!serviceDetails[typedServiceId]) return null;
