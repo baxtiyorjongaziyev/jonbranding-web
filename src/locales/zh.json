@@ -651,7 +651,7 @@
                 "tripwire": "第一步（快速服务）",
                 "strategy": "战略服务",
                 "naming": "命名",
-                "identity": "视觉形象",
+                "identity": "视觉形象：标志、企业风格、品牌手册",
                 "addons": "附加服务",
                 "options": "特殊条件"
             },
@@ -665,6 +665,8 @@
             "empty_package_title": "您的完美套餐从这里开始",
             "empty_package_desc": "选择服务或从我们最受欢迎的优惠开始。",
             "empty_package_cta": "添加最佳优惠",
+            "best_start": "最佳开始！",
+            "best_start_desc": "试试我们最受欢迎的套餐：命名 + 标志",
             "selected": "已选",
             "select": "选择",
             "services_total": "服务总计：",

@@ -652,7 +652,7 @@
                 "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
                 "strategy": "Strategik xizmatlar",
                 "naming": "Neyming",
-                "identity": "Vizual aydentika",
+                "identity": "Vizual aydentika: Logo, Firma uslubi, Brandbook",
                 "addons": "Qo'shimcha xizmatlar",
                 "options": "Maxsus shartlar"
             },
@@ -666,6 +666,8 @@
             "empty_package_title": "Sizning mukammal paketingiz shu yerdan boshlanadi",
             "empty_package_desc": "Xizmatlarni tanlang yoki eng ommabop taklifimizdan boshlang.",
             "empty_package_cta": "Eng yaxshi taklifni qo'shish",
+            "best_start": "Eng yaxshi start!",
+            "best_start_desc": "Eng ommabop paketimizni sinab ko'ring: Neyming + Logotip",
             "selected": "Tanlangan",
             "select": "Tanlash",
             "services_total": "Xizmatlar jami:",
