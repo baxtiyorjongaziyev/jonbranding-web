@@ -1,4 +1,5 @@
 
+
 const USD_TO_UZS_RATE = 12700;
 
 const convertToUzs = (usd: number) => {

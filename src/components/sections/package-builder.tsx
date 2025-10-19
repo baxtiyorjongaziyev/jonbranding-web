@@ -285,8 +285,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
         audit: false, namingCheck: false, consultation: false, 
         strategy: false, commStrategy: false,
-        namingStandard: false, namingPremium: true, namingVIP: false,
-        logoStandard: false, logoPremium: true, logoVIP: false,
+        namingStandard: false, namingPremium: false, namingVIP: false,
+        logoStandard: false, logoPremium: false, logoVIP: false,
         packaging: false,
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
@@ -368,6 +368,22 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         options: { titleKey: "options", services: ['urgency', 'nda'], gridCols: "lg:grid-cols-2" }
     };
     
+    const handlePopularPackageSelect = () => {
+        setSelectedServices(prev => ({
+            ...prev,
+            namingStandard: false,
+            namingPremium: true,
+            namingVIP: false,
+            logoStandard: false,
+            logoPremium: true,
+            logoVIP: false,
+        }));
+        const card = document.getElementById('your-package-card');
+        if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
+
     return (
         <>
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
@@ -430,17 +446,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 )}
                                 {groupKey === 'identity' && (
                                     <div className="py-8">
-                                        <PopularPackages lang={lang} onSelectPackage={() => {
-                                            setSelectedServices(prev => ({
-                                                ...prev, 
-                                                namingStandard: false,
-                                                namingPremium: true, 
-                                                namingVIP: false,
-                                                logoStandard: false, 
-                                                logoPremium: true, 
-                                                logoVIP: false 
-                                            }));
-                                        }} />
+                                        <PopularPackages lang={lang} onSelectPackage={handlePopularPackageSelect} />
                                     </div>
                                 )}
                                 <ServiceGroup title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
@@ -504,8 +510,16 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                     })
                                             ) : (
                                                 <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
-                                                    <ShoppingCart className="w-8 h-8"/>
-                                                    <p>{translations.select_services}</p>
+                                                    <div className="text-lg font-bold text-white mb-2">{translations.empty_package_title}</div>
+                                                    <p className="mb-4">{translations.empty_package_desc}</p>
+                                                    <Button 
+                                                        onClick={handlePopularPackageSelect} 
+                                                        variant="secondary" 
+                                                        className="bg-white/10 text-white hover:bg-white/20"
+                                                    >
+                                                        <Sparkles className="w-4 h-4 mr-2" />
+                                                        {translations.empty_package_cta}
+                                                    </Button>
                                                 </div>
                                             )}
                                         </div>
