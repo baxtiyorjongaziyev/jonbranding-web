@@ -142,7 +142,7 @@ const jsonLd = {
 
 const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>> = ({ children, params }) => {
     const lang = params.lang || 'uz';
-    const GA_ID = "G-BTSGJQLMMV";
+    const GA_ID = "G-B3ZSKB40XY";
 
   return (
     <html lang={lang} suppressHydrationWarning className={`${poppins.variable}`}>
