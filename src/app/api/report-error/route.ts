@@ -6,7 +6,7 @@ export async function POST(request: Request) {
     const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
-        console.error("Server Configuration Error: Telegram token or chat ID is missing in environment variables.");
+        console.error("Server Configuration Error: Telegram token or chat ID is missing in environment variables for error reporting.");
         return NextResponse.json({ ok: false, error: "Serverda Telegram sozlamalari mavjud emas." }, { status: 500 });
     }
 
@@ -53,18 +53,18 @@ ${userInfo || 'Noma\'lum'}
             body: JSON.stringify(payload),
         });
 
-        const result = await response.json();
-
-        if (!result.ok) {
-            console.error("Telegram API Error:", result);
-            return NextResponse.json({ ok: false, error: `Telegramga yuborishda xatolik: ${result.description || 'Noma\'lum xato'}` }, { status: response.status });
+        if (!response.ok) {
+            const errorResult = await response.json();
+            console.error("Telegram API Error while reporting error:", errorResult);
+            // Still return ok to prevent error loops on the client
+            return NextResponse.json({ ok: true, reported: false });
         }
 
-        return NextResponse.json({ ok: true });
+        return NextResponse.json({ ok: true, reported: true });
 
     } catch (error: any) {
-        console.error("Internal Server Error in error reporting:", error);
+        console.error("Internal Server Error in error reporting endpoint:", error);
         // Don't return an error to the client to avoid an error loop
-        return NextResponse.json({ ok: true });
+        return NextResponse.json({ ok: true, reported: false });
     }
 }
