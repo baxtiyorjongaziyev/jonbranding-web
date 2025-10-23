@@ -147,6 +147,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
   return (
     <html lang={lang} suppressHydrationWarning className={`${poppins.variable}`}>
       <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <Script
           id="json-ld"
           type="application/ld+json"
