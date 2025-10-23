@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, FC, useMemo, useEffect } from 'react';
@@ -170,3 +171,5 @@ const QuizPage: FC = () => {
 };
 
 export default QuizPage;
+
+    

@@ -78,7 +78,7 @@ export function calculateFees({
   const step1 = step1Base + step1Extra;
 
   const step2Base = isYuridik ? STEP2_YURIDIK : STEP2_JISMONIY;
-  const step2Extra = (cc - 1) * (isYuridik ? STEP2_EXTRA_JISMONIY : STEP2_EXTRA_YURIDIK);
+  const step2Extra = (cc - 1) * (isYuridik ? STEP2_EXTRA_YURIDIK : STEP2_EXTRA_JISMONIY);
   const step2 = step2Base + step2Extra;
 
   const expediteBase = speed === 'tez' ? EXPEDITE_BASE : 0;
@@ -441,3 +441,5 @@ function Row({ label, value, bold=false, currency }: { label: string, value: num
 function Divider() {
   return <div className="mt-2 pt-2 border-t" />;
 }
+
+    
