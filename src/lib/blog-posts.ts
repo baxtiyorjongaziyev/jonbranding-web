@@ -80,19 +80,29 @@ export async function getPostData(lang: string, slug: string): Promise<BlogPost 
 }
 
 export function getAllPostSlugs() {
-  const languages = fs.readdirSync(postsDirectory).filter(item => fs.statSync(path.join(postsDirectory, item)).isDirectory());
+  const languages = fs.readdirSync(postsDirectory).filter(item => {
+    const itemPath = path.join(postsDirectory, item);
+    // Check if it's a directory and not a hidden file like .DS_Store
+    return fs.statSync(itemPath).isDirectory() && !item.startsWith('.');
+  });
   
   const allSlugs: { slug: string, lang: string }[] = [];
 
   languages.forEach(lang => {
     const langDirectory = path.join(postsDirectory, lang);
-    const fileNames = fs.readdirSync(langDirectory);
-    fileNames.forEach(fileName => {
-      allSlugs.push({
-        lang,
-        slug: fileName.replace(/\.md$/, ''),
+    try {
+      const fileNames = fs.readdirSync(langDirectory);
+      fileNames.forEach(fileName => {
+        if (fileName.endsWith('.md')) {
+            allSlugs.push({
+            lang,
+            slug: fileName.replace(/\.md$/, ''),
+          });
+        }
       });
-    });
+    } catch (error) {
+        console.error(`Could not read directory: ${langDirectory}`, error);
+    }
   });
 
   return allSlugs;

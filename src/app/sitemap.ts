@@ -1,4 +1,3 @@
-
 import { MetadataRoute } from 'next'
 import { getAllPostSlugs } from '@/lib/blog-posts';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
@@ -22,10 +21,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const getUrl = (locale: string, route: string) => {
+    const newRoute = route.startsWith('/') ? route : `/${route}`;
     if (locale === defaultLocale) {
-      return `${baseUrl}${route}`;
+      return `${baseUrl}${newRoute}`;
     }
-    return `${baseUrl}/${locale}${route}`;
+    return `${baseUrl}/${locale}${newRoute}`;
   };
 
   // Generate URLs for static pages
@@ -35,15 +35,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates[locale] = getUrl(locale, route);
     });
 
-    return locales.map(locale => ({
-      url: getUrl(locale, route),
+    return {
+      url: getUrl(defaultLocale, route),
       lastModified: new Date(),
       changeFrequency: route === '' ? 'daily' as const : 'monthly' as const,
       priority: route === '' ? 1.0 : (route.startsWith('/xizmatlar') || route === '/blog' ? 0.9 : 0.8),
       alternates: {
         languages: alternates
       }
-    }));
+    };
   });
 
   // Generate URLs for blog posts
@@ -65,9 +65,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       };
   });
   
-  // Combine all entries and remove duplicates
+  // Combine all entries and remove duplicates by URL
   const allEntries = [...staticPageEntries, ...blogEntries];
-  const uniqueEntries = Array.from(new Map(allEntries.map(entry => [entry.url, entry])).values());
-  
-  return uniqueEntries;
+  const uniqueEntriesMap = new Map<string, MetadataRoute.Sitemap[0]>();
+
+  allEntries.forEach(entry => {
+    const existingEntry = uniqueEntriesMap.get(entry.url);
+    if (!existingEntry || (existingEntry.lastModified && entry.lastModified && existingEntry.lastModified < entry.lastModified)) {
+      uniqueEntriesMap.set(entry.url, entry);
+    }
+  });
+
+  return Array.from(uniqueEntriesMap.values());
 }

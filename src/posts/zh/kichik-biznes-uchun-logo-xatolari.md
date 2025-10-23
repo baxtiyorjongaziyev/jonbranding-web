@@ -4,7 +4,7 @@ description: "标志是企业的门面。小企业主常犯哪些错误，如何
 date: "2024-08-05"
 author: "巴赫蒂约尔洪·加济耶夫"
 image: "https://images.unsplash.com/photo-1668775589972-3aa874ea191b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzbWFsbCUyMGJ1c2luZXNzJTIwbG9nb3xlbnwwfHx8fDE3NTg2NDkwMzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
-imageHint: "标志设计错误"
+imageHint: "logo design mistakes"
 ---
 
 ## 为什么标志对小企业如此重要？
