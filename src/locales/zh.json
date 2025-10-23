@@ -325,7 +325,7 @@
         "subtitle": "不确定从哪里开始与我们合作？我们为您准备了一些免费且有用的资源。探索品牌世界，迈出第一步。",
         "magnets": [
           { "id": "pdf", "title": "免费PDF清单", "subtitle": "品牌塑造中的7个最大错误", "description": "找出在您的业务中应避免的错误，并获得分析您品牌的实用指南。", "cta": "下载PDF", "action": "onCtaClick", "href": null },
-          { "id": "quiz", "title": "迷你测试", "subtitle": "您的业务准备好进行品牌塑造了吗？", "description": "回答几个问题，了解您的业务对品牌塑造的准备程度、其优势和劣势。", "cta": "开始测试", "href": "/zh/quiz" },
+          { "id": "quiz", "title": "迷你测试", "subtitle": "您的业务准备好进行品牌塑造了吗？", "description": "回答几个问题，了解您的业务对品牌塑造的准备程度、其优势和劣劣势。", "cta": "开始测试", "href": "/zh/quiz" },
           { "id": "video", "title": "视频指南", "subtitle": "什么是战略品牌塑造？", "description": "为什么仅仅一个漂亮的标志是不够的？在视频中了解我们的方法将为您的业务带来什么结果。", "cta": "观看视频", "href": "#video" }
         ]
     },
@@ -653,7 +653,8 @@
                 "naming": "命名",
                 "identity": "视觉形象：标志、企业风格、品牌手册",
                 "addons": "附加服务",
-                "options": "特殊条件"
+                "options": "特殊条件",
+                "more_services": "更多服务与条件"
             },
             "discount_alert_title": "套餐折扣！",
             "discount_alert_desc": "从此部分选择<strong>2个或更多</strong>服务，即可享受总金额的<strong>-20%折扣</strong>！",
@@ -670,6 +671,7 @@
             "selected": "已选",
             "select": "选择",
             "services_total": "服务总计：",
+            "base_price": "基础价格",
             "upfront_discount_title": "预付款-10%折扣",
             "upfront_discount_desc": "为项目支付100%预付款",
             "upfront_discount_options": {
