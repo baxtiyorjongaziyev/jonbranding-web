@@ -528,14 +528,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             <h4 className="font-semibold text-white">{translations.cost_calculation_title}</h4>
                                             {total.base > 0 && (
                                                 <>
-                                                    <div className="flex justify-between items-center text-sm font-medium">
+                                                    <div className="flex justify-between items-center text-lg">
                                                         <span className="text-blue-200">{translations.services_total}</span>
-                                                        <span className="font-mono">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}</span>
+                                                        <span className="font-mono line-through">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                                     </div>
                                                     {total.surcharges.map(s => (
                                                         <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
                                                             <span>{s.name}</span>
-                                                            <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}</span>
+                                                            <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                                         </div>
                                                     ))}
                                                     {total.discountApplied.map(d => (
@@ -547,7 +547,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 </>
                                             )}
                                             {total.savings > 0 && (
-                                                <div className="flex justify-between items-center text-sm font-bold text-green-300 pt-2 border-t border-green-400/20">
+                                                <div className="flex justify-between items-center text-lg font-bold text-green-300 pt-2 border-t border-green-400/20">
                                                     <span>{translations.total_savings}</span>
                                                     <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                                 </div>
@@ -618,3 +618,4 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
