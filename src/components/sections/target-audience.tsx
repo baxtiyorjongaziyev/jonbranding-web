@@ -2,7 +2,7 @@
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
-import { AlertTriangle, ArrowRight, ThumbsUp } from 'lucide-react';
+import { AlertTriangle, ArrowRight, ThumbsUp, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
@@ -26,18 +26,16 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
           </p>
         </div>
         <div className="mt-12 max-w-4xl mx-auto">
-            <Card className="p-6 sm:p-8 rounded-2xl shadow-lg bg-white">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {translations.problems.map((problem: any, index: number) => (
-                        <Card key={index} className="bg-red-500/10 border-red-500/20 rounded-xl p-5">
-                             <div className="flex items-start gap-4">
-                                <AlertTriangle className="h-6 w-6 text-red-600 flex-shrink-0 mt-1" />
-                                <p className="text-base font-semibold text-red-900">{problem.text}</p>
-                            </div>
-                        </Card>
-                    ))}
-                </div>
-            </Card>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {translations.problems.map((problem: any, index: number) => (
+                    <Card key={index} className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
+                         <div className="flex items-start gap-4">
+                            <XCircle className="h-7 w-7 text-red-500 flex-shrink-0 mt-1" />
+                            <p className="text-base font-medium text-gray-800">{problem.text}</p>
+                        </div>
+                    </Card>
+                ))}
+            </div>
         </div>
 
         <Card className="max-w-4xl mx-auto mt-8 bg-gradient-to-br from-primary to-dark-blue text-white p-8 rounded-2xl shadow-xl overflow-hidden relative text-center">
@@ -63,3 +61,5 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
 };
 
 export default TargetAudience;
+
+    
