@@ -35,7 +35,7 @@ async function sendMetaConversionEvent(data: any) {
     }
 
     const url = `https://graph.facebook.com/v20.0/${pixelId}/events`;
-    const eventId = `server-event-${Date.now()}`;
+    const eventId = `server-event-meta-${Date.now()}`;
 
     const valueInUzs = data.totalPrice || 0;
     const valueInUsd = (valueInUzs * UZS_TO_USD_RATE).toFixed(2);
@@ -76,6 +76,58 @@ async function sendMetaConversionEvent(data: any) {
         }
     } catch (error) {
         console.error('Error sending Meta Conversion API event:', error);
+    }
+}
+
+async function sendGAConversionEvent(data: any) {
+    const gaApiSecret = process.env.GA_API_SECRET;
+    const gaMeasurementId = 'G-B3ZSKB40XY';
+
+    if (!gaApiSecret) {
+        console.warn("Google Analytics API Secret is not configured for server-side events.");
+        return;
+    }
+
+    const url = `https://www.google-analytics.com/mp/collect?measurement_id=${gaMeasurementId}&api_secret=${gaApiSecret}`;
+    const eventId = `server-event-ga-${Date.now()}`;
+    
+    const valueInUzs = data.totalPrice || 0;
+
+    const payload = {
+        client_id: data.phone || data.fullName || 'unknown', // Use a stable identifier if available
+        events: [
+            {
+                name: 'purchase',
+                params: {
+                    transaction_id: eventId,
+                    value: valueInUzs,
+                    currency: 'UZS',
+                    items: [{
+                       item_id: 'brending_package',
+                       item_name: data.packageSummary || 'Branding Services',
+                       price: valueInUzs,
+                       quantity: 1
+                    }]
+                }
+            }
+        ],
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+           const errorData = await response.text();
+           console.error('Failed to send Google Analytics event:', response.status, errorData);
+        } else {
+           console.log("Google Analytics event sent successfully.");
+        }
+    } catch (error) {
+        console.error('Error sending Google Analytics event:', error);
     }
 }
 
@@ -244,6 +296,11 @@ ${packageInfo}
             console.error("Failed to send Meta CAPI event in background:", e);
         });
 
+        // Send to Google Analytics (don't wait for it to finish)
+        sendGAConversionEvent(body).catch(e => {
+            console.error("Failed to send GA event in background:", e);
+        });
+
 
         // Immediately respond to the user
         return NextResponse.json({ ok: true, message: "So'rovingiz muvaffaqiyatli yuborildi." });
@@ -253,5 +310,3 @@ ${packageInfo}
         return NextResponse.json({ ok: false, error: "Serverda ichki xatolik yuz berdi. Iltimos, administratorga murojaat qiling." }, { status: 500 });
     }
 }
-
-    
