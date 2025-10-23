@@ -142,7 +142,6 @@ const jsonLd = {
 
 const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>> = ({ children, params }) => {
     const lang = params.lang || 'uz';
-    const GA_ID = "G-B3ZSKB40XY";
 
   return (
     <html lang={lang} suppressHydrationWarning className={`${poppins.variable}`}>
@@ -153,42 +152,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        
-        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></Script>
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${GA_ID}');
-            `,
-          }}
-        />
-
-        <Script id="yandex-metrika" strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                m[i].l=1*new Date();
-                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-                (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-                ym(97914878, "init", {
-                      clickmap:true,
-                      trackLinks:true,
-                      accurateTrackBounce:true,
-                      webvisor:true
-                });
-              `
-            }}
-        />
-        <noscript>
-          <div><img src="https://mc.yandex.ru/watch/97914878" style={{ position:'absolute', left:'-9999px' }} alt="" /></div>
-        </noscript>
       </head>
       <body className="font-body bg-white antialiased">
         <Script id="telegram-web-app" src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
