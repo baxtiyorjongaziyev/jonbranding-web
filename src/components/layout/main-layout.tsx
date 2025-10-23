@@ -109,32 +109,33 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
     const handleCloseModal = () => {
         setModalOpen(false);
     };
+    
+    const reportError = (error: ErrorEvent) => {
+        const { message, filename, lineno, colno, error: errorObj } = error;
+        // Avoid reporting errors from browser extensions or third-party scripts
+        if (!message || message.includes('Telegram API Error') || message === 'Script error.' || (filename && !filename.includes(window.location.origin))) return;
+
+        fetch('/api/report-error', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message: message,
+                stack: errorObj ? errorObj.stack : `${filename}:${lineno}:${colno}`,
+                pathname: window.location.pathname,
+                userInfo: navigator.userAgent,
+            }),
+        }).catch(e => console.error("Failed to report error:", e));
+    };
+
 
     useEffect(() => {
         const handleOpen = () => handleOpenModal();
         window.addEventListener('openContactModal', handleOpen);
-
-        const handleError = (event: ErrorEvent) => {
-            const { message, filename, lineno, colno, error } = event;
-            if (!message || message.includes('Telegram API Error') || message === 'Script error.') return;
-
-            fetch('/api/report-error', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    message: message,
-                    stack: error ? error.stack : `${filename}:${lineno}:${colno}`,
-                    pathname: window.location.pathname,
-                    userInfo: navigator.userAgent,
-                }),
-            }).catch(e => console.error("Failed to report error:", e));
-        };
-
-        window.addEventListener('error', handleError);
+        window.addEventListener('error', reportError);
 
         return () => {
             window.removeEventListener('openContactModal', handleOpen);
-            window.removeEventListener('error', handleError);
+            window.removeEventListener('error', reportError);
         };
     }, [handleOpenModal]);
     
@@ -155,7 +156,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 onFormSubmitSuccess={handleCloseModal}
                 lang={lang}
             />
-            {/* {dictionary.aiAssistant && <AiAssistant lang={lang} dictionary={dictionary.aiAssistant} />} */}
+            {dictionary.aiAssistant && <AiAssistant lang={lang} dictionary={dictionary.aiAssistant} />}
             <CookieConsentBanner />
         </div>
     );

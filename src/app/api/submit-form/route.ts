@@ -22,9 +22,121 @@ const pickTwoLabels: Record<string, string> = {
     fast: 'Tez',
 };
 
+const UZS_TO_USD_RATE = 1 / 12700;
+
+
+async function sendMetaConversionEvent(data: any) {
+    const accessToken = process.env.META_API_ACCESS_TOKEN;
+    const pixelId = '1134785364752294';
+
+    if (!accessToken || !pixelId) {
+        console.warn("Meta Pixel ID or Access Token is not configured for server-side events.");
+        return;
+    }
+
+    const url = `https://graph.facebook.com/v20.0/${pixelId}/events`;
+    const eventId = `server-event-meta-${Date.now()}`;
+
+    const valueInUzs = data.totalPrice || 0;
+    const valueInUsd = (valueInUzs * UZS_TO_USD_RATE).toFixed(2);
+
+
+    const payload = {
+        data: [
+            {
+                event_name: 'Purchase',
+                event_time: Math.floor(Date.now() / 1000),
+                action_source: 'website',
+                event_id: eventId,
+                user_data: {
+                    ph: data.phone ? [data.phone] : [],
+                    fn: data.fullName ? [data.fullName] : [],
+                },
+                custom_data: {
+                    value: valueInUsd,
+                    currency: 'USD',
+                }
+            }
+        ],
+        access_token: accessToken,
+    };
+    
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+           const errorData = await response.json();
+           console.error('Failed to send Meta Conversion API event:', errorData);
+        } else {
+           console.log("Meta Conversion API event sent successfully.");
+        }
+    } catch (error) {
+        console.error('Error sending Meta Conversion API event:', error);
+    }
+}
+
+async function sendGAConversionEvent(data: any) {
+    const gaApiSecret = process.env.GA_API_SECRET;
+    const gaMeasurementId = 'G-B3ZSKB40XY';
+
+    if (!gaApiSecret) {
+        console.warn("Google Analytics API Secret is not configured for server-side events.");
+        return;
+    }
+
+    const url = `https://www.google-analytics.com/mp/collect?measurement_id=${gaMeasurementId}&api_secret=${gaApiSecret}`;
+    const eventId = `server-event-ga-${Date.now()}`;
+    
+    const valueInUzs = data.totalPrice || 0;
+
+    const payload = {
+        client_id: data.phone || data.fullName || 'unknown', // Use a stable identifier if available
+        events: [
+            {
+                name: 'purchase',
+                params: {
+                    transaction_id: eventId,
+                    value: valueInUzs,
+                    currency: 'UZS',
+                    items: [{
+                       item_id: 'brending_package',
+                       item_name: data.packageSummary || 'Branding Services',
+                       price: valueInUzs,
+                       quantity: 1
+                    }]
+                }
+            }
+        ],
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+           const errorData = await response.text();
+           console.error('Failed to send Google Analytics event:', response.status, errorData);
+        } else {
+           console.log("Google Analytics event sent successfully.");
+        }
+    } catch (error) {
+        console.error('Error sending Google Analytics event:', error);
+    }
+}
+
+
 export async function POST(request: Request) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
+    const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
+
 
     if (!botToken || !chatId) {
         console.error("Server Configuration Error: Telegram token or chat ID is missing in the environment variables.");
@@ -59,14 +171,12 @@ ${packageSummary.replace('Brend:', `🏢 Brend:`).replace('Faoliyat turlari:', `
             let formattedAnswers = '';
             try {
                 const answersArray: string[] = JSON.parse(answersJsonString);
-                // Format: ["S1: Answer 1", "S2: Answer 2"] -> "1. Answer 1 \n 2. Answer 2"
                 formattedAnswers = answersArray.map((answer: string, index: number) => {
-                    const answerText = answer.substring(answer.indexOf(':') + 2); // Get text after ": "
+                    const answerText = answer.substring(answer.indexOf(':') + 2);
                     return `${index + 1}. ${answerText}`;
                 }).join('\n');
             } catch (e) {
                 console.error("Error parsing quiz answers:", e);
-                // Fallback for safety
                 formattedAnswers = "Javoblarni formatlashda xatolik yuz berdi.";
             }
 
@@ -155,26 +265,39 @@ ${packageInfo}
 `.trim();
         }
         
-        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-        
-        const payload = {
-            chat_id: chatId,
+        // Send to Telegram (don't wait for it to finish)
+        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        const telegramPayload: any = { 
+            chat_id: chatId, 
             text: telegramMessage,
+            parse_mode: 'Markdown'
         };
 
-        const response = await fetch(url, {
+        if (messageThreadId) {
+          telegramPayload.message_thread_id = messageThreadId;
+        }
+        
+        fetch(telegramUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(telegramPayload),
+        }).catch(e => {
+            console.error("Failed to send Telegram message in background:", e);
         });
 
-        const result = await response.json();
 
-        if (!result.ok) {
-            console.error("Telegram API Error:", result);
-            return NextResponse.json({ ok: false, error: `Telegramga yuborishda xatolik: ${result.description || 'Noma\'lum xato'}` }, { status: response.status });
-        }
+        // Send to Meta Conversion API (don't wait for it to finish)
+        sendMetaConversionEvent(body).catch(e => {
+            console.error("Failed to send Meta CAPI event in background:", e);
+        });
 
+        // Send to Google Analytics (don't wait for it to finish)
+        sendGAConversionEvent(body).catch(e => {
+            console.error("Failed to send GA event in background:", e);
+        });
+
+
+        // Immediately respond to the user
         return NextResponse.json({ ok: true, message: "So'rovingiz muvaffaqiyatli yuborildi." });
 
     } catch (error: any) {
