@@ -9,7 +9,7 @@ imageHint: "logo design mistakes"
 
 ## Nega logotip kichik biznes uchun bunchalik muhim?
 
-Kichik biznes uchun logotip shunchaki chiroyli belgi emas, balki bu — birinchi taassurot, ishonch va professionallik ramzi. To'g'ri yaratilgan logotip sizni raqobatchilardan ajratib turadi va mijozlar ongida mustahkam o'rin egallaydi. Afsuski, ko'plab kichik biznes egalari byudjetni tejash maqsadida logotipga yetarlicha e'tibor bermaydilar va jiddiy xatolarga yo'l qo'yadilar.
+Kichik biznes uchun logotip shunchaki chiroyli belgi emas, balki bu — birinchi taassurot, ishonch va professionallik ramzi. To'g'ri yaratilgan logotip sizni raqobatchilardan ajratib turadi va mijozlar ongida mustahkam o'rin egallaydi. Afsuski, ko'plab kichik biznes egalari byudjetni tejash maqsadida logotipga yetarlicha e'tibor bermaydilar va jiddiy xatolarga yo'l qo'yishadi.
 
 ## Kichik bizneslar yo'l qo'yadigan 5 ta asosiy xato:
 
