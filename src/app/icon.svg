@@ -1,7 +1,4 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<style>
-    .heavy { font: bold 30px sans-serif; }
-</style>
-<text x="4" y="27" class="heavy" fill="black">J</text>
-<circle cx="21" cy="23" r="3" fill="#00C9FD"/>
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M33.75 15C33.75 15 33.75 30 33.75 37.5C33.75 45 28.125 48.75 22.5 48.75" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="45" cy="45" r="6" fill="#0057FF"/>
 </svg>
