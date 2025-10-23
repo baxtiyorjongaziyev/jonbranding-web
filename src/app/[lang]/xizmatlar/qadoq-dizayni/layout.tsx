@@ -55,5 +55,4 @@ const QadoqDizayniLayout: FC<Readonly<{ children: ReactNode }>> = ({ children })
 }
 
 export default QadoqDizayniLayout;
-
     

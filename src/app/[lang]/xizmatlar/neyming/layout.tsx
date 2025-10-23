@@ -55,5 +55,4 @@ const NamingLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 }
 
 export default NamingLayout;
-
     

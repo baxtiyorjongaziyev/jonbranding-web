@@ -55,5 +55,4 @@ const LogoDesignLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) =
 }
 
 export default LogoDesignLayout;
-
     
