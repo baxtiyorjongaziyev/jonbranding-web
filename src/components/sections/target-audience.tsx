@@ -34,7 +34,7 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
                     return (
                         <Card key={index} className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
                              <div className="flex items-start gap-4">
-                                <Icon className="h-8 w-8 text-primary flex-shrink-0 mt-1" />
+                                <Icon className="h-8 w-8 text-red-500 flex-shrink-0 mt-1" />
                                 <p className="text-base font-medium text-gray-800">{problem.text}</p>
                             </div>
                         </Card>
