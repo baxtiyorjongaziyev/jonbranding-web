@@ -8,6 +8,8 @@ import { Poppins } from 'next/font/google';
 import MainLayout from '@/components/layout/main-layout';
 import type { Locale } from '@/lib/i18n/locale';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
+import { cn } from '@/lib/utils';
+import { Logo } from '@/components/icons/logo';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -193,6 +195,8 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
         <MainLayout>
           {children}
         </MainLayout>
+        
+        <script dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436565",hash:"18e8139df8663a8a487088b0dfb033008181860152438c8b7248cf2ad331e81c",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};a[o+'Config']=a[o+'Config']||{};a[o+'Config'].hidden=!0;var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
       </body>
     </html>
   );
