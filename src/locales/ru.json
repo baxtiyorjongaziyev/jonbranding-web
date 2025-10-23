@@ -654,7 +654,8 @@
                 "naming": "Нейминг",
                 "identity": "Визуальная айдентика: Лого, Фирменный стиль, Брендбук",
                 "addons": "Дополнительные услуги",
-                "options": "Особые условия"
+                "options": "Особые условия",
+                "more_services": "Дополнительные услуги и условия"
             },
             "discount_alert_title": "Пакетная скидка!",
             "discount_alert_desc": "Выберите <strong>2 или более</strong> услуг из этого раздела и получите <strong>-20% скидку</strong> от общей суммы!",
@@ -671,6 +672,7 @@
             "selected": "Выбрано",
             "select": "Выбрать",
             "services_total": "Итого по услугам:",
+            "base_price": "Начальная цена",
             "upfront_discount_title": "Скидка -10% за предоплату",
             "upfront_discount_desc": "Внесите 100% предоплату за проект",
             "upfront_discount_options": {

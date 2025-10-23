@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice, packageDiscountThreshold } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight, Loader2 } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight, Loader2, ChevronsDown } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion, useMotionValue } from 'framer-motion';
@@ -427,50 +427,95 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </div>
                     
                     <div className="space-y-16">
-                        {Object.entries(serviceGroups).map(([groupKey, group]) => (
-                           <React.Fragment key={groupKey}>
-                                {groupKey === 'naming' && (
-                                    <div className="py-8">
-                                        <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
-                                            <div className="flex items-center gap-4">
-                                                <div className="bg-white/10 p-3 rounded-full">
-                                                    <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
-                                                </div>
-                                                <div>
-                                                    <h4 className="font-extrabold text-lg text-white">{translations.discount_alert_title}</h4>
-                                                    <p className="text-blue-200" dangerouslySetInnerHTML={{ __html: translations.discount_alert_desc }}></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                                {groupKey === 'identity' && (
-                                    <div className="py-8">
-                                        <PopularPackages lang={lang} onSelectPackage={handlePopularPackageSelect} />
-                                    </div>
-                                )}
-                                <ServiceGroup title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
-                                    {group.services.map((serviceId) => {
-                                        const typedServiceId = serviceId as keyof SelectedServices;
-                                        if (!serviceDetails[typedServiceId]) return null;
-                                        
-                                        const CardComponent = group.isTariff ? TariffCard : ServiceCard;
+                         {['tripwire', 'strategy'].map((groupKey) => {
+                             const group = serviceGroups[groupKey as keyof typeof serviceGroups];
+                             return (
+                                 <ServiceGroup key={groupKey} title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
+                                     {group.services.map((serviceId) => (
+                                         <ServiceCard
+                                             key={serviceId}
+                                             id={serviceId as keyof SelectedServices}
+                                             selected={selectedServices[serviceId as keyof SelectedServices] || false}
+                                             onSelect={() => handleServiceToggle(serviceId as keyof SelectedServices)}
+                                             lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
+                                             dictionary={translations}
+                                             currency={currency}
+                                         />
+                                     ))}
+                                 </ServiceGroup>
+                             );
+                         })}
 
-                                        return (
-                                            <CardComponent
-                                                key={typedServiceId}
-                                                id={typedServiceId}
-                                                selected={selectedServices[typedServiceId] || false}
-                                                onSelect={() => handleServiceToggle(typedServiceId)}
-                                                lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
-                                                dictionary={translations}
-                                                currency={currency}
-                                            />
-                                        );
-                                    })}
-                                </ServiceGroup>
-                           </React.Fragment>
-                        ))}
+                        <div className="py-8">
+                            <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
+                                <div className="flex items-center gap-4">
+                                    <div className="bg-white/10 p-3 rounded-full">
+                                        <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
+                                    </div>
+                                    <div>
+                                        <h4 className="font-extrabold text-lg text-white">{translations.discount_alert_title}</h4>
+                                        <p className="text-blue-200" dangerouslySetInnerHTML={{ __html: translations.discount_alert_desc }}></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {['naming', 'identity'].map((groupKey) => {
+                             const group = serviceGroups[groupKey as keyof typeof serviceGroups];
+                             return (
+                                 <React.Fragment key={groupKey}>
+                                     {groupKey === 'identity' && (
+                                         <div className="py-8">
+                                             <PopularPackages lang={lang} onSelectPackage={handlePopularPackageSelect} />
+                                         </div>
+                                     )}
+                                     <ServiceGroup title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
+                                         {group.services.map((serviceId) => (
+                                             <TariffCard
+                                                 key={serviceId}
+                                                 id={serviceId as keyof SelectedServices}
+                                                 selected={selectedServices[serviceId as keyof SelectedServices] || false}
+                                                 onSelect={() => handleServiceToggle(serviceId as keyof SelectedServices)}
+                                                 lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
+                                                 dictionary={translations}
+                                                 currency={currency}
+                                             />
+                                         ))}
+                                     </ServiceGroup>
+                                 </React.Fragment>
+                             );
+                         })}
+                        
+                         <Accordion type="single" collapsible className="w-full">
+                           <AccordionItem value="item-1" className="border-none">
+                               <AccordionTrigger className="text-xl font-bold text-dark-blue hover:no-underline justify-center gap-2">
+                                 {translations.categories.more_services}
+                                 <ChevronsDown className="h-5 w-5 transition-transform duration-300 group-data-[state=open]:rotate-180" />
+                               </AccordionTrigger>
+                               <AccordionContent className="pt-8">
+                                 <div className="space-y-16">
+                                     {['addons', 'options'].map((groupKey) => {
+                                         const group = serviceGroups[groupKey as keyof typeof serviceGroups];
+                                         return (
+                                             <ServiceGroup key={groupKey} title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
+                                                 {group.services.map((serviceId) => (
+                                                     <ServiceCard
+                                                         key={serviceId}
+                                                         id={serviceId as keyof SelectedServices}
+                                                         selected={selectedServices[serviceId as keyof SelectedServices] || false}
+                                                         onSelect={() => handleServiceToggle(serviceId as keyof SelectedServices)}
+                                                         lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
+                                                         dictionary={translations}
+                                                         currency={currency}
+                                                     />
+                                                 ))}
+                                             </ServiceGroup>
+                                         );
+                                     })}
+                                 </div>
+                               </AccordionContent>
+                           </AccordionItem>
+                         </Accordion>
                     </div>
                 </div>
             </section>
@@ -486,74 +531,74 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     <p className="text-blue-200 text-sm mt-1">{translations.your_package_desc}</p>
                                 </CardHeader>
                                 <CardContent className="p-0">
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-                                        <div className="space-y-3 border-b sm:border-b-0 sm:border-r border-white/10 pb-4 sm:pb-0 sm:pr-8">
-                                            <h4 className="font-semibold text-white">{translations.selected_services_title}</h4>
-                                            {selectedServiceKeys.length > 0 ? (
-                                                selectedServiceKeys
-                                                    .filter(key => {
-                                                        const service = serviceDetails[key];
-                                                        return service && (service.price > 0 || service.note?.includes('%'));
-                                                    })
-                                                    .map((key) => {
-                                                        const service = serviceDetails[key];
-                                                        return (
-                                                            <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
-                                                                <span className="text-white flex-1 pr-2">{service.label}</span>
-                                                                <div className="flex items-center gap-2">
-                                                                    <span className="font-mono text-gray-300">
-                                                                        {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}` : service.note}
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })
-                                            ) : (
-                                                <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
-                                                    <div className="text-lg font-bold text-white mb-2">{translations.empty_package_title}</div>
-                                                    <p className="mb-4">{translations.empty_package_desc}</p>
-                                                    <Button 
-                                                        onClick={handlePopularPackageSelect} 
-                                                        variant="secondary" 
-                                                        className="bg-white/10 text-white hover:bg-white/20"
-                                                    >
-                                                        <Sparkles className="w-4 h-4 mr-2" />
-                                                        {translations.empty_package_cta}
-                                                    </Button>
-                                                </div>
-                                            )}
-                                        </div>
+                                   {selectedServiceKeys.length > 0 ? (
+                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                                          <div className="space-y-3 border-b sm:border-b-0 sm:border-r border-white/10 pb-4 sm:pb-0 sm:pr-8">
+                                              <h4 className="font-semibold text-white">{translations.selected_services_title}</h4>
+                                                  {selectedServiceKeys
+                                                      .filter(key => {
+                                                          const service = serviceDetails[key];
+                                                          return service && (service.price > 0 || service.note?.includes('%'));
+                                                      })
+                                                      .map((key) => {
+                                                          const service = serviceDetails[key];
+                                                          return (
+                                                              <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
+                                                                  <span className="text-white flex-1 pr-2">{service.label}</span>
+                                                                  <div className="flex items-center gap-2">
+                                                                      <span className="font-mono text-gray-300">
+                                                                          {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}` : service.note}
+                                                                      </span>
+                                                                  </div>
+                                                              </div>
+                                                          );
+                                                      })}
+                                          </div>
 
-                                        <div className="space-y-3">
-                                            <h4 className="font-semibold text-white">{translations.cost_calculation_title}</h4>
-                                            {total.base > 0 && (
-                                                <>
-                                                    <div className="flex justify-between items-center text-lg">
-                                                        <span className="text-blue-200">{translations.services_total}</span>
-                                                        <span className="font-mono line-through">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                    </div>
-                                                    {total.surcharges.map(s => (
-                                                        <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
-                                                            <span>{s.name}</span>
-                                                            <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                        </div>
-                                                    ))}
-                                                    {total.discountApplied.map(d => (
-                                                        <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
-                                                            <span>{d.name}</span>
-                                                            <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                        </div>
-                                                    ))}
-                                                </>
-                                            )}
-                                            {total.savings > 0 && (
-                                                <div className="flex justify-between items-center text-lg font-bold text-green-300 pt-2 border-t border-green-400/20">
-                                                    <span>{translations.total_savings}</span>
-                                                    <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
+                                          <div className="space-y-3">
+                                              <h4 className="font-semibold text-white">{translations.cost_calculation_title}</h4>
+                                              {total.base > 0 && (
+                                                  <>
+                                                      <div className="flex justify-between items-center text-lg">
+                                                          <span className="text-blue-200 line-through text-base">{translations.base_price}</span>
+                                                          <span className="font-mono line-through text-base">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                      </div>
+                                                      {total.surcharges.map(s => (
+                                                          <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
+                                                              <span>{s.name}</span>
+                                                              <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                          </div>
+                                                      ))}
+                                                      {total.discountApplied.map(d => (
+                                                          <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
+                                                              <span>{d.name}</span>
+                                                              <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                          </div>
+                                                      ))}
+                                                  </>
+                                              )}
+                                              {total.savings > 0 && (
+                                                  <div className="flex justify-between items-center text-lg font-bold text-green-300 pt-2 border-t border-green-400/20">
+                                                      <span>{translations.total_savings}</span>
+                                                      <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                  </div>
+                                              )}
+                                          </div>
+                                      </div>
+                                   ) : (
+                                       <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
+                                           <div className="text-lg font-bold text-white mb-2">{translations.empty_package_title}</div>
+                                           <p className="mb-4">{translations.empty_package_desc}</p>
+                                           <Button 
+                                               onClick={handlePopularPackageSelect} 
+                                               variant="secondary" 
+                                               className="bg-white/10 text-white hover:bg-white/20"
+                                           >
+                                               <Sparkles className="w-4 h-4 mr-2" />
+                                               {translations.empty_package_cta}
+                                           </Button>
+                                       </div>
+                                   )}
 
                                     {total.bonus && (
                                         <InfoCard
@@ -618,4 +663,5 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
 

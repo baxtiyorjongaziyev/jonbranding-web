@@ -651,7 +651,8 @@
                 "naming": "Naming",
                 "identity": "Visual Identity: Logo, Corporate Style, Brandbook",
                 "addons": "Add-on Services",
-                "options": "Special Conditions"
+                "options": "Special Conditions",
+                "more_services": "More services & conditions"
             },
             "discount_alert_title": "Package Discount!",
             "discount_alert_desc": "Choose <strong>2 or more</strong> services from this section and get a <strong>-20% discount</strong> on the total amount!",
@@ -668,6 +669,7 @@
             "selected": "Selected",
             "select": "Select",
             "services_total": "Services total:",
+            "base_price": "Base price",
             "upfront_discount_title": "-10% for upfront payment",
             "upfront_discount_desc": "Make a 100% upfront payment for the project",
             "upfront_discount_options": {
