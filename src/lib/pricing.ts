@@ -239,19 +239,27 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     let vipServicesPrice = 0;
     let mainServicesCount = 0;
     
-    const mainServices: (keyof SelectedServices)[] = ['namingPremium', 'logoPremium', 'packaging', 'strategy'];
+    const premiumServices: (keyof SelectedServices)[] = ['namingPremium', 'logoPremium', 'packaging', 'strategy'];
+    const standardServices: (keyof SelectedServices)[] = ['namingStandard', 'logoStandard'];
     const vipServices: (keyof SelectedServices)[] = ['namingVIP', 'logoVIP'];
     const percentageServices: (keyof SelectedServices)[] = ['urgency', 'nda'];
+
+    let hasNamingStandard = false;
+    let hasLogoStandard = false;
 
     for (const serviceKey in selectedServices) {
         const key = serviceKey as keyof SelectedServices;
         if (sd[key] && selectedServices[key]) {
             const servicePrice = sd[key].price;
+
+            if (key === 'namingStandard') hasNamingStandard = true;
+            if (key === 'logoStandard') hasLogoStandard = true;
+
             if (vipServices.includes(key)) {
                 vipServicesPrice += servicePrice;
             } else if (!percentageServices.includes(key)) {
                 nonVipBasePrice += servicePrice;
-                if (mainServices.includes(key)) {
+                if (premiumServices.includes(key)) {
                     mainServicesCount++;
                 }
             }
@@ -290,15 +298,32 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     
     // Apply package discount only on non-VIP services
     let nonVipPriceAfterDiscount = nonVipBasePrice;
-    if (mainServicesCount >= packageDiscountThreshold) {
-        const discountAmount = nonVipBasePrice * packageDiscount;
+
+    // Check for standard package discount
+    if (hasNamingStandard && hasLogoStandard) {
+        const standardPackagePrice = sd.namingStandard.price + sd.logoStandard.price;
+        const discountAmount = standardPackagePrice * packageDiscount;
         nonVipPriceAfterDiscount -= discountAmount;
         let discountName;
-        if (lang === 'ru') discountName = 'Пакетная скидка (-20%)';
-        else if (lang === 'en') discountName = 'Package Discount (-20%)';
-        else if (lang === 'zh') discountName = '套餐折扣 (-20%)';
-        else discountName = 'Paketli chegirma (-20%)';
+        if (lang === 'ru') discountName = 'Пакетная скидка (Стандарт) (-20%)';
+        else if (lang === 'en') discountName = 'Package Discount (Standard) (-20%)';
+        else if (lang === 'zh') discountName = '套餐折扣 (标准) (-20%)';
+        else discountName = 'Paketli chegirma (Standard) (-20%)';
         discountsApplied.push({ name: discountName, value: discountAmount });
+    }
+    
+    if (mainServicesCount >= packageDiscountThreshold) {
+        const discountableAmount = nonVipBasePrice - (hasNamingStandard && hasLogoStandard ? (sd.namingStandard.price + sd.logoStandard.price) : 0);
+        const discountAmount = discountableAmount * packageDiscount;
+        if(discountAmount > 0) {
+            nonVipPriceAfterDiscount -= discountAmount;
+            let discountName;
+            if (lang === 'ru') discountName = 'Пакетная скидка (-20%)';
+            else if (lang === 'en') discountName = 'Package Discount (-20%)';
+            else if (lang === 'zh') discountName = '套餐折扣 (-20%)';
+            else discountName = 'Paketli chegirma (-20%)';
+            discountsApplied.push({ name: discountName, value: discountAmount });
+        }
     }
 
     // Apply upfront discount on the sum of discounted non-VIP and all VIP services
