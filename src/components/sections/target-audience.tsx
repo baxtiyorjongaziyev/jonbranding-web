@@ -2,7 +2,7 @@
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
-import { AlertTriangle, ArrowRight, ThumbsUp, XCircle } from 'lucide-react';
+import { ArrowRight, Ghost, TrendingDown, Tag, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
@@ -16,6 +16,8 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
 
   if (!translations) return null;
 
+  const icons = [Ghost, TrendingDown, Tag, BarChart];
+
   return (
     <section id="target-audience" className="py-16 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4">
@@ -27,14 +29,17 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
         </div>
         <div className="mt-12 max-w-4xl mx-auto">
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {translations.problems.map((problem: any, index: number) => (
-                    <Card key={index} className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
-                         <div className="flex items-start gap-4">
-                            <XCircle className="h-7 w-7 text-red-500 flex-shrink-0 mt-1" />
-                            <p className="text-base font-medium text-gray-800">{problem.text}</p>
-                        </div>
-                    </Card>
-                ))}
+                {translations.problems.map((problem: any, index: number) => {
+                    const Icon = icons[index] || Ghost;
+                    return (
+                        <Card key={index} className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
+                             <div className="flex items-start gap-4">
+                                <Icon className="h-8 w-8 text-primary flex-shrink-0 mt-1" />
+                                <p className="text-base font-medium text-gray-800">{problem.text}</p>
+                            </div>
+                        </Card>
+                    )
+                })}
             </div>
         </div>
 
