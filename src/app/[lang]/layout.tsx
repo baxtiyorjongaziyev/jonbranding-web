@@ -6,11 +6,12 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 
 export default async function LangLayout({
   children,
-  params: { lang },
+  params,
 }: {
   children: ReactNode;
   params: { lang: Locale };
 }) {
+  const { lang } = params;
   const dictionary = await getDictionary(lang);
   return (
     <>
@@ -20,5 +21,3 @@ export default async function LangLayout({
     </>
   );
 }
-
-    
