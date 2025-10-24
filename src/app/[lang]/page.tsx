@@ -11,5 +11,3 @@ const Page = async ({ params }: { params: { lang: Locale } }) => {
 };
 
 export default Page;
-
-    
