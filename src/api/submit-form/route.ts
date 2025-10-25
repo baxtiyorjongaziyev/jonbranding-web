@@ -92,9 +92,11 @@ async function sendGAConversionEvent(data: any) {
     const eventId = `server-event-ga-${Date.now()}`;
     
     const valueInUzs = data.totalPrice || 0;
+    const clientIdentifier = data.phone || data.fullName || `client_${Date.now()}`;
+
 
     const payload = {
-        client_id: data.phone || data.fullName || 'unknown', // Use a stable identifier if available
+        client_id: clientIdentifier,
         events: [
             {
                 name: 'purchase',
@@ -103,8 +105,8 @@ async function sendGAConversionEvent(data: any) {
                     value: valueInUzs,
                     currency: 'UZS',
                     items: [{
-                       item_id: 'brending_package',
-                       item_name: data.packageSummary || 'Branding Services',
+                       item_id: data.packageSummary ? 'brending_package' : 'contact_form',
+                       item_name: data.packageSummary || 'Standard Request',
                        price: valueInUzs,
                        quantity: 1
                     }]
@@ -265,7 +267,6 @@ ${packageInfo}
 `.trim();
         }
         
-        // Send to Telegram (don't wait for it to finish)
         const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
         const telegramPayload: any = { 
             chat_id: chatId, 
@@ -277,38 +278,27 @@ ${packageInfo}
           telegramPayload.message_thread_id = messageThreadId;
         }
         
-        const telegramResponse = await fetch(telegramUrl, {
+        // Don't await, send in background
+        fetch(telegramUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(telegramPayload),
-        });
-
-        if (!telegramResponse.ok) {
-            const errorResult = await telegramResponse.json();
-            console.error("Telegram API Error:", errorResult);
-            // Don't throw, but return a client-friendly error
-            return NextResponse.json({ ok: false, error: `Telegramga yuborishda xatolik: ${errorResult.description || 'Noma\'lum xato'}` }, { status: telegramResponse.status });
-        }
+        }).catch(e => console.error("Telegram API Error:", e));
 
 
-        // Send to Meta Conversion API (don't wait for it to finish)
+        // Send analytics events in the background
         sendMetaConversionEvent(body).catch(e => {
             console.error("Failed to send Meta CAPI event in background:", e);
         });
-
-        // Send to Google Analytics (don't wait for it to finish)
         sendGAConversionEvent(body).catch(e => {
             console.error("Failed to send GA event in background:", e);
         });
 
-
-        // Immediately respond to the user
         return NextResponse.json({ ok: true, message: "So'rovingiz muvaffaqiyatli yuborildi." });
 
     } catch (error: any) {
         console.error("Internal Server Error:", error);
         return NextResponse.json({ ok: false, error: "Serverda ichki xatolik yuz berdi. Iltimos, administratorga murojaat qiling." }, { status: 500 });
     }
-}
 
     
