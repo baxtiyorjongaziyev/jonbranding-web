@@ -39,6 +39,16 @@ const CookieConsentBanner: FC = () => {
     const handleAccept = () => {
         try {
             localStorage.setItem(COOKIE_CONSENT_KEY, 'true');
+
+            if (window.gtag) {
+                window.gtag('consent', 'update', {
+                    'analytics_storage': 'granted',
+                    'ad_storage': 'granted',
+                    'ad_user_data': 'granted',
+                    'ad_personalization': 'granted',
+                });
+            }
+
         } catch (error) {
             console.error('Could not write to localStorage', error);
         }
