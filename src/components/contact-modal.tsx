@@ -32,6 +32,14 @@ interface ContactModalProps {
   lang: string;
 }
 
+declare global {
+  interface Window {
+    amoSocialButton?: {
+      sendLead: (data: any, callback?: () => void) => void;
+    };
+  }
+}
+
 const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice, onFormSubmitSuccess, lang }) => {
   const { toast } = useToast();
   const [isSubmitting, setSubmitting] = useState(false);
@@ -95,6 +103,36 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const locationValue = form.watch('location');
 
+  const sendToAmoCRM = (data: FormData) => {
+    if (typeof window.amoSocialButton?.sendLead !== 'function') {
+      console.warn("amoCRM Social Button script not loaded or initialized.");
+      return;
+    }
+
+    const goalMap = translations.goalOptions.reduce((acc: any, option: any) => {
+      acc[option.value] = option.label;
+      return acc;
+    }, {});
+
+    const leadInfo = {
+      name: data.fullName,
+      phone: data.phone,
+      telegram: data.telegram,
+      company: data.companyName,
+      custom_fields: {
+        'Veb-sayt': data.website,
+        'Asosiy maqsad': goalMap[data.goal] || data.goal,
+        'Byudjet': data.budget,
+        'Joylashuv': data.location,
+        'Uchrashuv joyi': data.meetingPlace,
+        'Xizmatlar to\'plami': packageSummary,
+        'Yakuniy narx': totalPrice
+      }
+    };
+    
+    window.amoSocialButton.sendLead(leadInfo);
+  }
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setSubmitting(true);
     try {
@@ -118,6 +156,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         'event_label': 'Main Contact Form',
         'value': totalPrice
       });
+
+      sendToAmoCRM(data);
 
       confetti({
           particleCount: 150,
