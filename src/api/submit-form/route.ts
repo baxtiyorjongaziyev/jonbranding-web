@@ -261,6 +261,7 @@ ${meetingType === 'OFLAYN' ? `Uchrashuv joyi: ${meetingPlaceText}` : ''}
 👤 Mijoz: ${fullName}
 📞 Telefon: ${phone}
 ✈️ Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Kiritilmagan'}
+${notes ? `\n📝 Qo'shimcha izoh:\n${notes}` : ''}
 ${projectDetails}
 ${pickTwoInfo}
 ${packageInfo}
