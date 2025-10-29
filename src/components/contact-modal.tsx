@@ -194,7 +194,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     } catch (error: any) {
       toast({
         title: translations.errorToast.title,
-        description: (translations.errorToast.description as (msg: string) => string)(error.message),
+        description: `${translations.errorToast.description} ${error.message}`,
         variant: 'destructive',
       });
     } finally {
