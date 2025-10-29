@@ -1,7 +1,7 @@
 'use client';
 
 // This should match the GA_TRACKING_ID in your environment
-const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GA_TRACKING_ID = "G-B3ZSKB40XY";
 
 export const pageview = (url: string) => {
   if (typeof window.gtag !== 'function' || !GA_TRACKING_ID) {

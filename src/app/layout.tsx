@@ -2,7 +2,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
-import { Toaster } from '@/components/ui/toaster';
 import type { FC, ReactNode } from 'react';
 import { Poppins } from 'next/font/google';
 import MainLayout from '@/components/layout/main-layout';
