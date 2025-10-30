@@ -1,7 +1,8 @@
 
 'use client';
 
-import type { FC, useState } from 'react';
+import type { FC } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, ListChecks, Film, Download, ArrowRight } from 'lucide-react';
