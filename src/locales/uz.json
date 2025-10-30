@@ -324,10 +324,15 @@
         "title": "Brendingizni Keyingi Bosqichga Olib Chiqing",
         "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.",
         "magnets": [
-          { "id": "pdf", "icon": "FileText", "title": "Bepul PDF-Cheklist", "subtitle": "Brendingda 7 ta eng katta xato", "description": "Biznesingizda qanday xatolarga yo'l qo'ymaslik kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.", "cta": "PDF yuklab olish", "action": "onCtaClick" },
-          { "id": "quiz", "icon": "ListChecks", "title": "Mini-Test", "subtitle": "Biznesingiz brendga tayyormi?", "description": "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.", "cta": "Testni boshlash", "href": "/uz/quiz" },
-          { "id": "video", "icon": "Film", "title": "Video Qo'llanma", "subtitle": "Strategik brending nima?", "description": "Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday natija keltirishini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
-        ]
+          { "id": "pdf", "title": "Bepul PDF-Cheklist", "subtitle": "Brendingda 7 ta eng katta xato", "description": "Biznesingizda qanday xatolarga yo'l qo'ymaslik kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.", "cta": "Cheklistni ko'rish" },
+          { "id": "quiz", "title": "Mini-Test", "subtitle": "Biznesingiz brendga tayyormi?", "description": "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.", "cta": "Testni boshlash", "href": "/uz/quiz" },
+          { "id": "video", "title": "Video Qo'llanma", "subtitle": "Strategik brending nima?", "description": "Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday natija keltirishini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
+        ],
+         "cta": {
+          "title": "Cheklist yordam berdimi?",
+          "description": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Keling brendingizni bepul tahlil qilib, o'sish nuqtalarini aniqlaymiz.",
+          "button": "Bepul Konsultatsiya Olish"
+        }
     },
     "faq": {
         "title": "Ko'p beriladigan savollar",

@@ -1,11 +1,12 @@
 
 'use client';
 
-import type { FC } from 'react';
+import type { FC, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, ListChecks, Film, Download, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import ChecklistModal from '@/components/checklist-modal';
 
 interface LeadMagnetProps {
     onCtaClick: () => void;
@@ -15,6 +16,7 @@ interface LeadMagnetProps {
 
 const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
   const translations = dictionary;
+  const [isChecklistOpen, setChecklistOpen] = useState(false);
   
   if (!translations) return null;
 
@@ -28,7 +30,9 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
   };
 
   const handleClick = (magnet: any) => {
-    if (magnet.action === 'onCtaClick') {
+    if (magnet.id === 'pdf') {
+        setChecklistOpen(true);
+    } else if (magnet.action === 'onCtaClick') {
       onCtaClick();
     } else if (magnet.href?.startsWith('#')) {
         const elementId = magnet.href.substring(1);
@@ -38,6 +42,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
   };
 
   return (
+    <>
     <section id="lead-magnet" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
@@ -51,9 +56,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {translations.magnets.map((magnet: any) => {
             const Icon = getIcon(magnet.id);
-            const isPdf = magnet.id === 'pdf';
-            const pdfHref = `/checklists/7-mistakes-in-branding-${lang}.md`;
-
+            
             return (
               <Card key={magnet.id} className="flex flex-col text-center shadow-lg rounded-2xl hover:shadow-xl transition-shadow bg-secondary/50">
                 <CardHeader className="items-center pb-4">
@@ -65,14 +68,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
                 </CardHeader>
                 <CardContent className="flex-grow flex flex-col justify-between px-6 pb-6">
                   <p className="text-gray-600 mb-6">{magnet.description}</p>
-                  {isPdf ? (
-                      <a href={pdfHref} download={`7-branding-mistakes-${lang}.md`}>
-                        <Button className="w-full shadow-md hover:shadow-lg transition-shadow">
-                            <Download className="w-4 h-4 mr-2" />
-                            {magnet.cta}
-                        </Button>
-                      </a>
-                  ) : magnet.href && !magnet.href.startsWith('#') ? (
+                  {magnet.href && !magnet.href.startsWith('#') ? (
                       <Link href={magnet.href} passHref>
                           <Button asChild className="w-full shadow-md hover:shadow-lg transition-shadow">
                             <span>
@@ -84,8 +80,9 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
                       </Link>
                   ) : (
                       <Button onClick={() => handleClick(magnet)} className="w-full shadow-md hover:shadow-lg transition-shadow">
-                          {magnet.id === 'video' ? <Film className="w-4 h-4 mr-2" /> : <Download className="w-4 h-4 mr-2" />}
+                          {magnet.id === 'video' ? <Film className="w-4 h-4 mr-2" /> : <FileText className="w-4 h-4 mr-2" />}
                           {magnet.cta}
+                          {magnet.id === 'pdf' && <ArrowRight className="w-4 h-4 ml-2" />}
                       </Button>
                   )}
                 </CardContent>
@@ -95,6 +92,8 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
         </div>
       </div>
     </section>
+    <ChecklistModal lang={lang} isOpen={isChecklistOpen} onClose={() => setChecklistOpen(false)} />
+    </>
   );
 };
 
