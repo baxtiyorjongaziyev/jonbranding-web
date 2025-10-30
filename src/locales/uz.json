@@ -328,11 +328,51 @@
           { "id": "quiz", "title": "Mini-Test", "subtitle": "Biznesingiz brendga tayyormi?", "description": "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.", "cta": "Testni boshlash", "href": "/{lang}/quiz" },
           { "id": "video", "title": "Video Qo'llanma", "subtitle": "Strategik brending nima?", "description": "Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday natija keltirishini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
         ],
-         "cta": {
+        "cta": {
           "title": "Cheklist yordam berdimi?",
           "description": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Keling brendingizni bepul tahlil qilib, o'sish nuqtalarini aniqlaymiz.",
           "button": "Bepul Konsultatsiya Olish"
-        }
+        },
+        "checklistContent": {
+          "intro": "Brending — bu shunchaki chiroyli logotip yoki yorqin ranglar emas. Bu sizning biznesingiz va mijozlaringiz o'rtasidagi munosabatlar poydevori. Ko'pchilik tadbirkorlar, ayniqsa, ish boshida brending borasida jiddiy xatolarga yo'l qo'yishadi. Keling, 7 ta eng kattasini ko'rib chiqamiz.",
+          "mistake1": {
+              "title": "1. Strategiyasiz ishlash",
+              "description": "Eng katta xato — aniq strategiyasiz dizaynni boshlash. Mijozingiz kim? Raqobatchilardan qanday farq qilasiz? Asosiy xabaringiz nima? Bu savollarga javob bermaydigan logotip yoki sayt — shunchaki chiroyli rasm.",
+              "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchun?' va 'Nima uchun?' degan savollarga javob berishdan boshlang. Bu brendingiz uchun mustahkam poydevor yaratadi."
+          },
+          "mistake2": {
+              "title": "2. Hammaga birdek yoqishga urinish",
+              "description": "'Hamma uchun' bo'lishga harakat qilgan brend, oxir-oqibat hech kim uchun bo'lmaydi. Aholining barcha qatlamlariga yoqishga urinish, xira va kuchsiz brendga olib keladi.",
+              "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling. 'Ideal mijozingiz' portretini yarating va marketing harakatlaringizni aynan unga qarating."
+          },
+          "mistake3": {
+              "title": "3. Raqobatchilardan ko'chirish",
+              "description": "Raqobatchilarni o'rganish muhim, lekin ulardan ko'r-ko'rona ko'chirish — bu berklikka olib boradigan yo'l. Agar dizayningiz mashhur brendga o'xshasa, sizni doim 'arzon alternativa' sifatida qabul qilishadi.",
+              "solution": "Yechim: Raqobatchilarni o'ziga xos yo'lingizni topish uchun o'rganing. Boshqacha bo'lishdan qo'rqmang."
+          },
+          "mistake4": {
+              "title": "4. Nomuvofiqlik (Inconsistency)",
+              "description": "Saytingizda logotip bir xil, Instagramda boshqa, qadog'ingizda esa umuman boshqacha. Bu vizual tartibsizlik ishonchni susaytiradi va brendning tanilishiga to'sqinlik qiladi.",
+              "solution": "Yechim: Logotip, ranglar va shriftlardan foydalanish qoidalari belgilangan 'brendbuk' (gaydlayn) yarating. Uni hamma joyda izchil qo'llang."
+          },
+          "mistake5": {
+              "title": "5. Haddan tashqari murakkab logotip",
+              "description": "Ko'p mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt faviconi yoki ijtimoiy tarmoq avatarida) yomon ko'rinadi.",
+              "solution": "Yechim: Oddiylik va minimalizmga intiling. Eng yaxshi logotiplar — bu xotiradan chizish mumkin bo'lganlaridir."
+          },
+          "mistake6": {
+              "title": "6. Talaffuzi yoki eslab qolish qiyin bo'lgan nom",
+              "description": "Agar mijozlaringiz nomingizni talaffuz qila olmasa yoki to'g'ri yoza olmasa, ular sizni topa olmaydi yoki boshqalarga tavsiya qila olmaydi.",
+              "solution": "Yechim: Oddiy, jarangdor va yuridik jihatdan toza (tovar belgisi band qilinmagan) nom tanlang."
+          },
+          "mistake7": {
+              "title": "7. Brendingni bir martalik ish deb o'ylash",
+              "description": "Bozorlar, mijozlar talablari, texnologiyalar doim o'zgarib turadi. Vaqt bilan o'zgarmaydigan brend eskiradi.",
+              "solution": "Yechim: Vaqti-vaqti bilan 'brend auditi' o'tkazing. Agar kerak bo'lsa, dizayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir."
+          },
+          "conclusion_title": "Xulosa",
+          "conclusion_text": "Kuchli brend — bu sizning eng qimmatli aktingiz. Bu xatolardan qochish sizga mustahkam poydevor qurishga va biznesingizning barqaror o'sishini ta'minlashga yordam beradi."
+      }
     },
     "faq": {
         "title": "Ko'p beriladigan savollar",

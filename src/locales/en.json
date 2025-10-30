@@ -332,7 +332,47 @@
           "title": "Did the checklist help?",
           "description": "Now it's time to move from theory to practice. Let's analyze your brand for free and identify growth opportunities.",
           "button": "Get a Free Consultation"
-        }
+        },
+        "checklistContent": {
+          "intro": "Branding is not just about a pretty logo or bright colors. It's the foundation of the relationship between your business and your customers. Many entrepreneurs, especially at the beginning, make serious mistakes in branding. Let's look at the 7 biggest ones.",
+          "mistake1": {
+              "title": "1. Working without a strategy",
+              "description": "The biggest mistake is starting to design without a clear strategy. Who is your customer? How do you differ from competitors? What is your main message? A logo or website that doesn't answer these questions is just a pretty picture.",
+              "solution": "Solution: Start by answering the questions 'Who are we?', 'For whom?', and 'Why?'. This will create a solid foundation for your brand."
+          },
+          "mistake2": {
+              "title": "2. Trying to please everyone",
+              "description": "A brand that tries to be 'for everyone' ends up being for no one. Trying to appeal to all segments of the population leads to a blurred and weak brand.",
+              "solution": "Solution: Clearly define your target audience. Create a portrait of your 'ideal customer' and focus your marketing efforts on them."
+          },
+          "mistake3": {
+              "title": "3. Copying competitors",
+              "description": "Looking at competitors is important, but blindly copying them is a path to oblivion. If your design is similar to a well-known brand, you will always be perceived as a 'cheap alternative'.",
+              "solution": "Solution: Study your competitors to find your unique path. Don't be afraid to be different."
+          },
+          "mistake4": {
+              "title": "4. Inconsistency",
+              "description": "Your logo is one style on your website, another on Instagram, and your packaging is completely different. This visual chaos undermines trust and hinders brand recognition.",
+              "solution": "Solution: Create a 'brandbook' (guideline) that defines the rules for using your logo, colors, and fonts. Use it consistently everywhere."
+          },
+          "mistake5": {
+              "title": "5. Too complex a logo",
+              "description": "A logo with many small details, gradients, and text is difficult to remember and looks bad in small sizes (e.g., a website favicon or social media avatar).",
+              "solution": "Solution: Strive for simplicity and minimalism. The best logos are the ones that can be drawn from memory."
+          },
+          "mistake6": {
+              "title": "6. A name that is hard to pronounce or remember",
+              "description": "If your customers can't pronounce your name or spell it correctly, they won't be able to find you or recommend you to others.",
+              "solution": "Solution: Choose a name that is simple, sonorous, and legally clear (the trademark is not taken)."
+          },
+          "mistake7": {
+              "title": "7. Thinking that branding is a one-time thing",
+              "description": "Markets, customer demands, and technologies are constantly changing. A brand that does not change with the times will become obsolete.",
+              "solution": "Solution: Periodically conduct a 'brand audit'. Don't be afraid to refresh your design (rebrand) if necessary. It's a sign of growth, not weakness."
+          },
+          "conclusion_title": "Conclusion",
+          "conclusion_text": "A strong brand is your most valuable asset. Avoiding these mistakes will help you build a solid foundation and ensure stable growth for your business."
+      }
     },
     "faq": {
         "title": "Frequently Asked Questions",
