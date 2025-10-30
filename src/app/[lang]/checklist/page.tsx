@@ -2,47 +2,66 @@
 'use client';
 
 import { FC, useState, useEffect } from 'react';
-import { marked } from 'marked';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
 import CtaBlock from '@/components/sections/cta-block';
 
+const ChecklistContent = ({ lang, translations }: { lang: string, translations: any }) => {
+    const content = translations.checklistContent;
+
+    if (!content) return null;
+
+    return (
+        <div className="prose lg:prose-xl max-w-none">
+            <p className="lead">{content.intro}</p>
+
+            <h2>{content.mistake1.title}</h2>
+            <p>{content.mistake1.description}</p>
+            <blockquote>{content.mistake1.solution}</blockquote>
+
+            <h2>{content.mistake2.title}</h2>
+            <p>{content.mistake2.description}</p>
+            <blockquote>{content.mistake2.solution}</blockquote>
+
+            <h2>{content.mistake3.title}</h2>
+            <p>{content.mistake3.description}</p>
+            <blockquote>{content.mistake3.solution}</blockquote>
+
+            <h2>{content.mistake4.title}</h2>
+            <p>{content.mistake4.description}</p>
+            <blockquote>{content.mistake4.solution}</blockquote>
+
+            <h2>{content.mistake5.title}</h2>
+            <p>{content.mistake5.description}</p>
+            <blockquote>{content.mistake5.solution}</blockquote>
+
+            <h2>{content.mistake6.title}</h2>
+            <p>{content.mistake6.description}</p>
+            <blockquote>{content.mistake6.solution}</blockquote>
+
+            <h2>{content.mistake7.title}</h2>
+            <p>{content.mistake7.description}</p>
+            <blockquote>{content.mistake7.solution}</blockquote>
+            
+            <hr />
+
+            <h3>{content.conclusion_title}</h3>
+            <p>{content.conclusion_text}</p>
+        </div>
+    );
+};
+
+
 const ChecklistPage: FC = () => {
-  const [content, setContent] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [translations, setTranslations] = useState<any>(null);
   const params = useParams();
   const lang = params.lang as string;
 
   useEffect(() => {
-    setIsLoading(true);
     getDictionary(lang as Locale).then(dict => {
         setTranslations(dict.leadMagnet);
     });
-
-    const filePath = `/checklists/7-mistakes-in-branding-${lang}.md`;
-    
-    fetch(filePath)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(text => {
-             const cleanText = text.replace(/---[\s\S]*?---/, '');
-             const htmlContent = marked(cleanText);
-             setContent(htmlContent);
-        })
-        .catch(error => {
-            console.error('Error fetching checklist:', error);
-            setContent(`<p>Error loading content.</p>`);
-        })
-        .finally(() => {
-            setIsLoading(false);
-        });
   }, [lang]);
 
   const handleOpenContact = () => {
@@ -74,19 +93,8 @@ const ChecklistPage: FC = () => {
       </header>
 
       <div className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto prose lg:prose-xl">
-           {isLoading ? (
-              <div className="space-y-4">
-                  <Skeleton className="h-8 w-3/4" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-5/6" />
-                  <Skeleton className="h-8 w-1/2 mt-4" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-full" />
-              </div>
-          ) : (
-              <div dangerouslySetInnerHTML={{ __html: content }} />
-          )}
+        <div className="max-w-3xl mx-auto">
+           <ChecklistContent lang={lang} translations={translations} />
         </div>
       </div>
       
