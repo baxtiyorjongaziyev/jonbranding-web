@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '', // Home page
     '/quiz',
+    '/checklist', // New checklist page
     '/xizmatlar',
     '/xizmatlar/brand-strategy',
     '/xizmatlar/neyming',

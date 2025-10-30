@@ -324,8 +324,8 @@
         "title": "Brendingizni Keyingi Bosqichga Olib Chiqing",
         "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.",
         "magnets": [
-          { "id": "pdf", "title": "Bepul PDF-Cheklist", "subtitle": "Brendingda 7 ta eng katta xato", "description": "Biznesingizda qanday xatolarga yo'l qo'ymaslik kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.", "cta": "Cheklistni ko'rish" },
-          { "id": "quiz", "title": "Mini-Test", "subtitle": "Biznesingiz brendga tayyormi?", "description": "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.", "cta": "Testni boshlash", "href": "/uz/quiz" },
+          { "id": "pdf", "title": "Bepul PDF-Cheklist", "subtitle": "Brendingda 7 ta eng katta xato", "description": "Biznesingizda qanday xatolarga yo'l qo'ymaslik kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.", "cta": "Cheklistni ko'rish", "href": "/{lang}/checklist" },
+          { "id": "quiz", "title": "Mini-Test", "subtitle": "Biznesingiz brendga tayyormi?", "description": "Bir nechta savolga javob bering va biznesingizning brendingga qanchalik tayyorligini, kuchli va zaif tomonlarini bilib oling.", "cta": "Testni boshlash", "href": "/{lang}/quiz" },
           { "id": "video", "title": "Video Qo'llanma", "subtitle": "Strategik brending nima?", "description": "Nega shunchaki chiroyli logotip yetarli emas? Bizning yondashuvimiz biznesingizga qanday natija keltirishini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
         ],
          "cta": {
