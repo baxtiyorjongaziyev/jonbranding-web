@@ -52,7 +52,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
           {translations.magnets.map((magnet: any) => {
             const Icon = getIcon(magnet.id);
             const isPdf = magnet.id === 'pdf';
-            const pdfHref = `/checklists/7-mistakes-in-branding-${lang}.pdf`;
+            const pdfHref = `/checklists/7-mistakes-in-branding-${lang}.md`;
 
             return (
               <Card key={magnet.id} className="flex flex-col text-center shadow-lg rounded-2xl hover:shadow-xl transition-shadow bg-secondary/50">
@@ -66,7 +66,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
                 <CardContent className="flex-grow flex flex-col justify-between px-6 pb-6">
                   <p className="text-gray-600 mb-6">{magnet.description}</p>
                   {isPdf ? (
-                      <a href={pdfHref} download>
+                      <a href={pdfHref} download={`7-branding-mistakes-${lang}.md`}>
                         <Button className="w-full shadow-md hover:shadow-lg transition-shadow">
                             <Download className="w-4 h-4 mr-2" />
                             {magnet.cta}
