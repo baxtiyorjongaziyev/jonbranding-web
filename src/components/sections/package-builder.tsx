@@ -15,6 +15,7 @@ import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion, useMotionValue } from 'framer-motion';
 import PopularPackages from './popular-packages';
+import { event as gtagEvent } from '@/lib/gtag';
 
 
 interface PackageBuilderProps {
@@ -314,7 +315,26 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         }
     }, [selectedServices, wantsUpfrontPayment, isClient, hasDiscountBeenApplied, lang]);
 
+    const trackGtagEvent = (serviceId: keyof SelectedServices, isSelected: boolean) => {
+        const service = serviceDetails[serviceId];
+        if (service && service.price > 0) {
+            gtagEvent(isSelected ? 'remove_from_cart' : 'add_to_cart', {
+                currency: 'USD',
+                value: service.price,
+                items: [{
+                    item_id: serviceId,
+                    item_name: service.label,
+                    price: service.price,
+                    quantity: 1
+                }]
+            });
+        }
+    };
+
     const handleTariffSelect = (group: (keyof SelectedServices)[], serviceId: keyof SelectedServices) => {
+        const isCurrentlySelected = selectedServices[serviceId];
+        trackGtagEvent(serviceId, isCurrentlySelected);
+
         setSelectedServices(prev => {
             const newState = { ...prev };
             group.forEach(id => {
@@ -326,6 +346,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     };
 
     const handleServiceToggle = (serviceId: keyof SelectedServices) => {
+        const isCurrentlySelected = selectedServices[serviceId];
+        trackGtagEvent(serviceId, isCurrentlySelected);
+
         const namingGroup: (keyof SelectedServices)[] = ['namingStandard', 'namingPremium', 'namingVIP'];
         const logoGroup: (keyof SelectedServices)[] = ['logoStandard', 'logoPremium', 'logoVIP'];
 
@@ -369,6 +392,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     };
     
     const handlePopularPackageSelect = () => {
+        const isNamingPremiumSelected = selectedServices['namingPremium'];
+        const isLogoPremiumSelected = selectedServices['logoPremium'];
+
+        if (!isNamingPremiumSelected) trackGtagEvent('namingPremium', false);
+        if (!isLogoPremiumSelected) trackGtagEvent('logoPremium', false);
+
         setSelectedServices(prev => ({
             ...prev,
             namingStandard: false,
@@ -663,5 +692,6 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
 
 
