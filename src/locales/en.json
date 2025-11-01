@@ -160,13 +160,15 @@
         "backButton": "Back",
         "nextButton": "Next",
         "submitButton": "Send Request",
+        "privacyPolicyText": "I accept the Privacy Policy and consent to the processing of personal data.",
         "formErrors": {
             "fullName": "Please enter your full name.",
             "phone": "Please enter a valid phone number.",
             "goal": "Please select your main goal.",
             "budget": "Please select an approximate budget.",
             "location": "Please select your location.",
-            "meetingPlace": "You need to choose a meeting place."
+            "meetingPlace": "You need to choose a meeting place.",
+            "privacyPolicy": "You must accept the privacy policy."
         },
         "successToast": {
             "title": "Success!",
@@ -659,6 +661,8 @@
             "error_name": "Please enter your name.",
             "error_phone": "Please enter a valid phone number.",
             "error_server": "A server error occurred.",
+            "privacyPolicyText": "I accept the Privacy Policy and consent to the processing of personal data.",
+            "error_privacy": "You must accept the privacy policy.",
             "success_toast_title": "Success!",
             "success_toast_desc": "Your request has been received. We will contact you shortly!",
             "error_toast_title": "Error!",
@@ -802,3 +806,5 @@
         }
     }
 }
+
+    

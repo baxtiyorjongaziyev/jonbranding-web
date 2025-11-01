@@ -160,13 +160,15 @@
         "backButton": "Orqaga",
         "nextButton": "Keyingisi",
         "submitButton": "So'rovni yuborish",
+        "privacyPolicyText": "Men Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarni qayta ishlashga rozilik bildiraman.",
         "formErrors": {
             "fullName": "Ism-sharifingizni to'liq kiriting.",
             "phone": "Telefon raqamingizni to'g'ri kiriting.",
             "goal": "Asosiy maqsadingizni tanlang.",
             "budget": "Taxminiy byudjetingizni tanlang.",
             "location": "Joylashuvingizni tanlang.",
-            "meetingPlace": "Uchrashuv joyini tanlashingiz kerak."
+            "meetingPlace": "Uchrashuv joyini tanlashingiz kerak.",
+            "privacyPolicy": "Maxfiylik siyosatini qabul qilishingiz kerak."
         },
         "successToast": {
             "title": "Muvaffaqiyatli!",
@@ -662,6 +664,8 @@
             "error_name": "Iltimos, ismingizni kiriting.",
             "error_phone": "Iltimos, to‘g‘ri telefon raqam kiriting.",
             "error_server": "Serverda xatolik yuz berdi.",
+            "privacyPolicyText": "Men Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarni qayta ishlashga rozilik bildiraman.",
+            "error_privacy": "Maxfiylik siyosatini qabul qilishingiz kerak.",
             "success_toast_title": "Muvaffaqiyatli!",
             "success_toast_desc": "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
             "error_toast_title": "Xatolik!",
@@ -805,3 +809,5 @@
         }
     }
 }
+
+    
