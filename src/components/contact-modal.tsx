@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Loader2, ArrowLeft, ArrowRight, Building2, MapPin, Coffee, Briefcase } from 'lucide-react';
+import { Loader2, ArrowLeft, ArrowRight, Building2, MapPin, Coffee, Briefcase, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Progress } from '@/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -21,6 +21,7 @@ import { useTelegram } from '@/hooks/use-telegram';
 import { event as gtagEvent } from '@/lib/gtag';
 import LiveLocationCard from './live-location-card';
 import { getDictionary } from '@/lib/dictionaries';
+import { Checkbox } from './ui/checkbox';
 
 
 interface ContactModalProps {
@@ -73,6 +74,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     budget: z.string({ required_error: translations.formErrors.budget }),
     location: z.string({ required_error: translations.formErrors.location }),
     meetingPlace: z.string().optional(),
+    privacyPolicy: z.boolean().refine(val => val === true, {
+        message: translations.formErrors.privacyPolicy,
+    }),
   }).refine(data => {
       if ((data.location === translations.locationOptions[0] || data.location === translations.locationOptions[1]) && !data.meetingPlace) {
           return false;
@@ -98,6 +102,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       budget: undefined,
       location: undefined,
       meetingPlace: undefined,
+      privacyPolicy: false,
     },
   });
 
@@ -244,6 +249,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   }
 
   const progress = (step / STEPS.length) * 100;
+  const isFinalStep = step === STEPS.length;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -444,6 +450,29 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         </Alert>
                     }
                  </div>
+            )}
+            
+            {isFinalStep && (
+                 <FormField
+                    control={form.control}
+                    name="privacyPolicy"
+                    render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 mt-6">
+                            <FormControl>
+                                <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                                />
+                            </FormControl>
+                            <div className="space-y-1 leading-none">
+                                <FormLabel className="text-xs">
+                                     {translations.privacyPolicyText}
+                                </FormLabel>
+                                <FormMessage className="text-xs" />
+                            </div>
+                        </FormItem>
+                    )}
+                />
             )}
             
             <div className="flex justify-between items-center pt-4">

@@ -13,6 +13,11 @@ import { useToast } from '@/hooks/use-toast';
 import { event as gtagEvent } from '@/lib/gtag';
 import { motion } from 'framer-motion';
 import { Slider } from '@/components/ui/slider';
+import { Checkbox } from '../ui/checkbox';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 
 const BHM = 412000;
@@ -34,26 +39,6 @@ const clampClassCount = (n: number) => {
   const x = Number(n);
   if (!Number.isFinite(x)) return 1;
   return Math.max(1, Math.min(45, Math.trunc(x)));
-};
-
-const isUzPhone = (s: string) => {
-  if (!s || s.length !== 13) return false;
-  if (!s.startsWith('+998')) return false;
-  for (let i = 4; i < s.length; i++) {
-    const c = s[i];
-    if (c < '0' || c > '9') return false;
-  }
-  return true;
-};
-
-const allowPhoneTyping = (s: string) => {
-  if (!s.startsWith('+998')) return false;
-  if (s.length > 13) return false;
-  for (let i = 4; i < s.length; i++) {
-    const c = s[i];
-    if (c < '0' || c > '9') return false;
-  }
-  return true;
 };
 
 const formatPrice = (price: number, currency: string) => {
@@ -136,51 +121,64 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
 
 export default function TrademarkCalculator({ translations }: { translations: any }) {
   const { toast } = useToast();
-
-  const [brand, setBrand] = useState('');
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('+998');
-  const [activity, setActivity] = useState('');
-  const [classCount, setClassCount] = useState(1);
-  const [isYuridik, setIsYuridik] = useState(false);
-  const [speed, setSpeed] = useState<'oddiy' | 'tez'>('oddiy');
-  const [hasEkspert, setHasEkspert] = useState(false);
-
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const fees = useMemo(
-    () => calculateFees({ isYuridik, classCount, speed, hasEkspert }),
-    [isYuridik, classCount, speed, hasEkspert]
-  );
   
   if (!translations) return null;
 
-  const handleSubmit = async () => {
-    if (!brand.trim()) {
-        toast({ title: translations.error_toast_title, description: translations.error_brand, variant: "destructive" });
-        return;
-    }
-    if (!name.trim()) {
-         toast({ title: translations.error_toast_title, description: translations.error_name, variant: "destructive" });
-        return;
-    }
-    if (!isUzPhone(phone)) {
-        toast({ title: translations.error_toast_title, description: translations.error_phone, variant: "destructive" });
-        return;
-    }
+  const formSchema = z.object({
+    brand: z.string().min(1, { message: translations.error_brand }),
+    name: z.string().min(2, { message: translations.error_name }),
+    phone: z.string().refine(phone => phone.startsWith('+998') && phone.length === 13, {
+      message: translations.error_phone,
+    }),
+    activity: z.string().optional(),
+    classCount: z.number().min(1).max(45),
+    isYuridik: z.boolean(),
+    speed: z.enum(['oddiy', 'tez']),
+    hasEkspert: z.boolean(),
+    privacyPolicy: z.boolean().refine(val => val === true, {
+        message: translations.error_privacy,
+    }),
+  });
 
+  type FormData = z.infer<typeof formSchema>;
+  
+  const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+        brand: '',
+        name: '',
+        phone: '+998',
+        activity: '',
+        classCount: 1,
+        isYuridik: false,
+        speed: 'oddiy',
+        hasEkspert: false,
+        privacyPolicy: false
+    }
+  });
+  
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const watchFields = form.watch();
+  const fees = useMemo(
+    () => calculateFees({ isYuridik: watchFields.isYuridik, classCount: watchFields.classCount, speed: watchFields.speed, hasEkspert: watchFields.hasEkspert }),
+    [watchFields.isYuridik, watchFields.classCount, watchFields.speed, watchFields.hasEkspert]
+  );
+  
+
+  const onSubmit = async (data: FormData) => {
     setLoading(true);
 
     const telegramMessage = [
       `🧾 ${translations.telegramTitle}`,
-      `Brend: ${brand}`,
-      `${translations.activityLabel}: ${activity || translations.notSpecified}`,
+      `Brend: ${data.brand}`,
+      `${translations.activityLabel}: ${data.activity || translations.notSpecified}`,
       '---',
-      `${translations.personTypeLabel}: ${isYuridik ? translations.personTypeOptions[1].label : translations.personTypeOptions[0].label}`,
+      `${translations.personTypeLabel}: ${data.isYuridik ? translations.personTypeOptions[1].label : translations.personTypeOptions[0].label}`,
       `${translations.classCountLabel}: ${fees.classCount}`,
-      `${translations.speedLabel}: ${speed === 'tez' ? translations.speedOptions[1].label : translations.speedOptions[0].label}`,
-      `${translations.expertCheckLabel}: ${hasEkspert ? translations.expertCheckOptions[0].label : translations.expertCheckOptions[1].label}`,
+      `${translations.speedLabel}: ${data.speed === 'tez' ? translations.speedOptions[1].label : translations.speedOptions[0].label}`,
+      `${translations.expertCheckLabel}: ${data.hasEkspert ? translations.expertCheckOptions[0].label : translations.expertCheckOptions[1].label}`,
       '---',
       `${translations.totalCostTitle.toUpperCase()}: ${formatPrice(fees.total, translations.currency)}`,
     ].join('\n');
@@ -190,8 +188,8 @@ export default function TrademarkCalculator({ translations }: { translations: an
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            fullName: name, 
-            phone,
+            fullName: data.name, 
+            phone: data.phone,
             packageSummary: telegramMessage,
             totalPrice: fees.total
         }),
@@ -227,14 +225,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
 
   const resetForm = () => {
     setSuccess(false);
-    setBrand('');
-    setName('');
-    setPhone('+998');
-    setActivity('');
-    setClassCount(1);
-    setIsYuridik(false);
-    setSpeed('oddiy');
-    setHasEkspert(false);
+    form.reset();
   };
   
   const getExtraClassesFeeLabel = () => {
@@ -246,94 +237,106 @@ export default function TrademarkCalculator({ translations }: { translations: an
     <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       <Card className="p-6">
         <h3 className="text-xl font-bold text-dark-blue mb-4">{translations.formTitle}</h3>
-        <div className="space-y-6">
-          <LabeledInput label={translations.brandNameLabel} placeholder={translations.brandNamePlaceholder} value={brand} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setBrand(e.target.value)} />
-          <LabeledInput label={translations.yourNameLabel} placeholder={translations.yourNamePlaceholder} value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setName(e.target.value)} />
-          <LabeledInput label={translations.phoneLabel} placeholder={translations.phonePlaceholder} value={phone} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{ const v=e.target.value; if(allowPhoneTyping(v)) setPhone(v); }} />
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField control={form.control} name="brand" render={({ field }) => ( <FormItem><FormLabel>{translations.brandNameLabel}</FormLabel><FormControl><Input placeholder={translations.brandNamePlaceholder} {...field} /></FormControl><FormMessage /></FormItem> )} />
+                <FormField control={form.control} name="name" render={({ field }) => ( <FormItem><FormLabel>{translations.yourNameLabel}</FormLabel><FormControl><Input placeholder={translations.yourNamePlaceholder} {...field} /></FormControl><FormMessage /></FormItem> )} />
+                <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>{translations.phoneLabel}</FormLabel><FormControl><Input placeholder={translations.phonePlaceholder} {...field} /></FormControl><FormMessage /></FormItem> )} />
 
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <Label className="font-medium">{translations.classCountLabel}</Label>
-              <span className="text-xs text-slate-500">{translations.classCountMax}</span>
-            </div>
-            <div className="flex items-center gap-2">
-                <IconButton onClick={() => setClassCount(clampClassCount(classCount - 1))} disabled={classCount <= 1}>
-                    <Minus className="h-4 w-4"/>
-                </IconButton>
-                <Slider
-                    value={[classCount]}
-                    onValueChange={(value) => setClassCount(value[0])}
-                    min={1}
-                    max={45}
-                    step={1}
-                    className="flex-1"
+                <FormField control={form.control} name="classCount" render={({ field }) => (
+                    <FormItem>
+                         <div className="flex items-center justify-between mb-2">
+                            <FormLabel className="font-medium">{translations.classCountLabel}</FormLabel>
+                            <span className="text-xs text-slate-500">{translations.classCountMax}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <IconButton onClick={() => form.setValue('classCount', clampClassCount(field.value - 1))} disabled={field.value <= 1}>
+                                <Minus className="h-4 w-4"/>
+                            </IconButton>
+                            <Slider
+                                value={[field.value]}
+                                onValueChange={(value) => field.onChange(value[0])}
+                                min={1} max={45} step={1} className="flex-1"
+                            />
+                            <IconButton onClick={() => form.setValue('classCount', clampClassCount(field.value + 1))} disabled={field.value >= 45}>
+                                <Plus className="h-4 w-4"/>
+                            </IconButton>
+                            <div className="flex items-center justify-center w-16 h-10 rounded-md border bg-secondary font-bold text-primary text-lg">
+                                {field.value}
+                            </div>
+                        </div>
+                    </FormItem>
+                )}/>
+
+                <FormField control={form.control} name="isYuridik" render={({ field }) => (
+                    <FormItem>
+                        <FormLabel className="font-medium mb-2 block">{translations.personTypeLabel}</FormLabel>
+                        <FormControl>
+                            <DynamicToggle id="person-type" options={translations.personTypeOptions} selected={field.value ? 'yuridik' : 'jismoniy'} onSelect={(value) => field.onChange(value === 'yuridik')} />
+                        </FormControl>
+                    </FormItem>
+                )} />
+                
+                <FormField control={form.control} name="speed" render={({ field }) => (
+                     <FormItem>
+                        <FormLabel className="font-medium mb-2 block">{translations.speedLabel}</FormLabel>
+                        <FormControl>
+                             <DynamicToggle id="speed" options={translations.speedOptions} selected={field.value} onSelect={(value) => field.onChange(value as 'oddiy' | 'tez')} />
+                        </FormControl>
+                    </FormItem>
+                )} />
+
+                <FormField control={form.control} name="hasEkspert" render={({ field }) => (
+                     <FormItem>
+                        <FormLabel className="font-medium mb-2 block">{translations.expertCheckLabel}</FormLabel>
+                        <FormControl>
+                             <DynamicToggle id="expert-check" options={translations.expertCheckOptions} selected={field.value ? 'ha' : 'yoq'} onSelect={(value) => field.onChange(value === 'ha')} />
+                        </FormControl>
+                    </FormItem>
+                )} />
+
+                <FormField control={form.control} name="activity" render={({ field }) => (
+                    <FormItem>
+                        <FormLabel className="font-medium">{translations.activityLabel}</FormLabel>
+                        <FormControl>
+                            <Textarea className="mt-1" rows={3} placeholder={translations.activityPlaceholder} {...field} />
+                        </FormControl>
+                        <p className="mt-1 text-xs text-slate-500">{translations.activityHelp}</p>
+                    </FormItem>
+                )} />
+                 <FormField
+                    control={form.control}
+                    name="privacyPolicy"
+                    render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 mt-6">
+                            <FormControl>
+                                <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                                />
+                            </FormControl>
+                            <div className="space-y-1 leading-none">
+                                <FormLabel className="text-xs">
+                                     {translations.privacyPolicyText}
+                                </FormLabel>
+                                <FormMessage className="text-xs" />
+                            </div>
+                        </FormItem>
+                    )}
                 />
-                 <IconButton onClick={() => setClassCount(clampClassCount(classCount + 1))} disabled={classCount >= 45}>
-                    <Plus className="h-4 w-4"/>
-                </IconButton>
-                <div className="flex items-center justify-center w-16 h-10 rounded-md border bg-secondary font-bold text-primary text-lg">
-                    {classCount}
-                </div>
-            </div>
-          </div>
-
-          <div>
-            <Label className="font-medium mb-2 block">{translations.personTypeLabel}</Label>
-            <DynamicToggle 
-              id="person-type"
-              options={translations.personTypeOptions}
-              selected={isYuridik ? 'yuridik' : 'jismoniy'}
-              onSelect={(value) => setIsYuridik(value === 'yuridik')}
-            />
-          </div>
-
-          <div>
-            <Label className="font-medium mb-2 block">{translations.speedLabel}</Label>
-             <DynamicToggle 
-              id="speed"
-              options={translations.speedOptions}
-              selected={speed}
-              onSelect={(value) => setSpeed(value as 'oddiy' | 'tez')}
-            />
-          </div>
-
-          <div>
-            <Label className="font-medium mb-2 block">{translations.expertCheckLabel}</Label>
-            <DynamicToggle 
-              id="expert-check"
-              options={translations.expertCheckOptions}
-              selected={hasEkspert ? 'ha' : 'yoq'}
-              onSelect={(value) => setHasEkspert(value === 'ha')}
-            />
-          </div>
-
-          <div>
-            <Label className="font-medium">{translations.activityLabel}</Label>
-            <Textarea
-              className="mt-1"
-              rows={3}
-              placeholder={translations.activityPlaceholder}
-              value={activity}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>)=>setActivity(e.target.value)}
-            />
-             <p className="mt-1 text-xs text-slate-500">{translations.activityHelp}</p>
-          </div>
         
-          {!success ? (
-            <Button
-                className="w-full text-base py-6 shadow-ocean animate-breathing"
-                onClick={handleSubmit}
-                disabled={loading}
-              >
-                {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> {translations.submittingButton}</> : translations.submitButton}
-            </Button>
-          ) : (
-             <div className="text-center text-green-700 bg-green-50 border border-green-200 p-3 rounded-xl flex items-center justify-center gap-4">
-                <span>{translations.successMessage}</span>
-                <Button variant="outline" size="sm" onClick={resetForm}>{translations.tryAgainButton}</Button>
-            </div>
-          )}
-        </div>
+                {!success ? (
+                    <Button type="submit" className="w-full text-base py-6 shadow-ocean animate-breathing" disabled={loading}>
+                        {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> {translations.submittingButton}</> : translations.submitButton}
+                    </Button>
+                ) : (
+                    <div className="text-center text-green-700 bg-green-50 border border-green-200 p-3 rounded-xl flex items-center justify-center gap-4">
+                        <span>{translations.successMessage}</span>
+                        <Button variant="outline" size="sm" onClick={resetForm}>{translations.tryAgainButton}</Button>
+                    </div>
+                )}
+            </form>
+        </Form>
       </Card>
 
       <aside className="lg:sticky lg:top-24 h-fit space-y-4">
@@ -344,9 +347,9 @@ export default function TrademarkCalculator({ translations }: { translations: an
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Pill>{fees.classCount} {translations.classLabel}</Pill>
-            <Pill>{isYuridik ? translations.personTypeOptions[1].label : translations.personTypeOptions[0].label}</Pill>
-            <Pill>{speed==='tez' ? translations.speedOptions[1].labelShort : translations.speedOptions[0].labelShort}</Pill>
-            {hasEkspert && <Pill>{translations.expertCheckLabelShort}</Pill>}
+            <Pill>{watchFields.isYuridik ? translations.personTypeOptions[1].label : translations.personTypeOptions[0].label}</Pill>
+            <Pill>{watchFields.speed==='tez' ? translations.speedOptions[1].labelShort : translations.speedOptions[0].labelShort}</Pill>
+            {watchFields.hasEkspert && <Pill>{translations.expertCheckLabelShort}</Pill>}
           </div>
           <div className="mt-1 text-xs leading-5 opacity-90">{translations.totalCostNote}</div>
         </Card>
@@ -372,7 +375,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
               <Row label={translations.step2Total} value={fees.step2} bold currency={translations.currency} />
             </div>
 
-            {speed==='tez' && (
+            {watchFields.speed==='tez' && (
               <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
                 <div className="font-semibold text-amber-700">{translations.expediteTitle}</div>
                 <Row label={translations.expediteBaseFee} value={fees.expediteBase} currency={translations.currency} />
@@ -384,7 +387,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
               </div>
             )}
 
-            {hasEkspert && (
+            {watchFields.hasEkspert && (
               <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
                 <div className="font-semibold text-purple-700">{translations.expertCheckTitle}</div>
                 <Row label={translations.expertBaseFee} value={fees.ekspertBase} currency={translations.currency} />
@@ -404,15 +407,6 @@ export default function TrademarkCalculator({ translations }: { translations: an
           </div>
         </Card>
       </aside>
-    </div>
-  );
-}
-
-function LabeledInput({ label, ...rest }: {label: string, [key: string]: any}) {
-  return (
-    <div className="space-y-1.5">
-      <Label>{label}</Label>
-      <Input {...rest} />
     </div>
   );
 }
