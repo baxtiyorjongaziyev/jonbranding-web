@@ -154,7 +154,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
         <script dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
         
         {/* Google Analytics & Ads */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17674872079"></script>
         <script
           id="gtag-init"
           dangerouslySetInnerHTML={{
@@ -207,3 +207,5 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
 }
 
 export default RootLayout;
+
+    
