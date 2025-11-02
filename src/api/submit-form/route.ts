@@ -302,5 +302,3 @@ ${packageInfo}
         return NextResponse.json({ ok: false, error: "Serverda ichki xatolik yuz berdi. Iltimos, administratorga murojaat qiling." }, { status: 500 });
     }
 }
-
-    
