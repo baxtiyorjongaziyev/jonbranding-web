@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -328,6 +327,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     quantity: 1
                 }]
             });
+            if (!isSelected) {
+                // Also fire the Google Ads conversion event
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'conversion', {'send_to': 'AW-17674872079/Kcy8CN3cvbgbEI_KhOxB'});
+                }
+            }
         }
     };
 
@@ -693,5 +698,4 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 
 export default PackageBuilder;
 
-
-
+    
