@@ -156,7 +156,7 @@ export const comparisonData = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
     const sd = getServiceDetails(lang);
     const satisfactionGuarantee = lang === 'ru' ? '100% Гарантия Удовлетворенности' : lang === 'en' ? '100% Satisfaction Guarantee' : lang === 'zh' ? '100% 满意保证' : '100% Mamnuniyat Kafolati';
     const transparentProcess = lang === 'ru' ? 'Прозрачный процесс и постоянная связь' : lang === 'en' ? 'Transparent process and constant communication' : lang === 'zh' ? '透明的流程和持续的沟通' : 'Shaffof jarayon va doimiy aloqa';
-    const pcgDiscount = lang === 'ru' ? 'Скидка -50% для членов PCG' : lang === 'en' ? '-50% discount for PCG members' : lang === 'zh' ? 'PCG会员-50%折扣' : 'PCG a\'zolari uchun -50% chegirma';
+    const pcgDiscount = lang === 'ru' ? 'Специальные скидки для членов PCG' : lang === 'en' ? 'Special discounts for PCG members' : lang === 'zh' ? 'PCG会员特别折扣' : 'PCG a\'zolari uchun maxsus chegirmalar';
 
     const formatCompPrice = (price: number) => {
         return formatPrice(price, lang, 'usd');
@@ -407,5 +407,3 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
 
     return summary;
 }
-
-    
