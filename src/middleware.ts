@@ -1,7 +1,7 @@
 
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { locales, defaultLocale } from './lib/i18n/locale';
+import { getLocale, locales, defaultLocale } from './lib/i18n/locale';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -13,12 +13,17 @@ export function middleware(request: NextRequest) {
 
   if (pathnameHasLocale) return
 
-  // Always redirect to the default 'uz' locale
-  const locale = defaultLocale;
+  // Get the best-matching locale from the request headers or cookie
+  const locale = getLocale(request);
   
   request.nextUrl.pathname = `/${locale}${pathname}`
+
+  // For the root path, we perform a hard redirect. For others, we rewrite.
+  if (pathname === '/') {
+    return Response.redirect(request.nextUrl)
+  }
   
-  return Response.redirect(request.nextUrl)
+  return NextResponse.rewrite(request.nextUrl)
 }
 
 export const config = {
