@@ -4,10 +4,13 @@ import { useState, useEffect, useCallback } from 'react';
 
 // A wrapper for "JSON.parse()"" to support "undefined" value
 const parseJSON = <T>(value: string | null): T | undefined => {
+  if (value === null || value === '') {
+    return undefined;
+  }
   try {
-    return value === 'undefined' ? undefined : JSON.parse(value ?? '');
-  } catch {
-    console.log('parsing error on', { value });
+    return value === 'undefined' ? undefined : JSON.parse(value);
+  } catch (error) {
+    console.warn('parsing error on', { value }, error);
     return undefined;
   }
 };
@@ -21,7 +24,8 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
 
     try {
       const item = window.localStorage.getItem(key);
-      return item ? (parseJSON(item) as T) : initialValue;
+      const parsedItem = item ? (parseJSON(item) as T) : undefined;
+      return parsedItem !== undefined ? parsedItem : initialValue;
     } catch (error) {
       console.warn(`Error reading localStorage key “${key}”:`, error);
       return initialValue;

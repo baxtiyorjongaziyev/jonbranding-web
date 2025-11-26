@@ -154,23 +154,6 @@
     }
   }
 
-  .animate-marquee-forward {
-    animation: marquee-forward 40s linear infinite;
-  }
-  .animate-marquee-backward {
-    animation: marquee-backward 40s linear infinite;
-  }
-
-  @keyframes marquee-forward {
-    from { transform: translateX(0); }
-    to { transform: translateX(-100%); }
-  }
-
-  @keyframes marquee-backward {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-  }
-
   .animate-marquee-up {
     animation: marquee-up 30s linear infinite;
   }

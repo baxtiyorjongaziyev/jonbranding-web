@@ -107,6 +107,14 @@ const config: Config = {
           from: { transform: "translateY(-100%)" },
           to: { transform: "translateY(0)" },
         },
+        "marquee-forward": {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        },
+        "marquee-backward": {
+            from: { transform: 'translateX(-100%)' },
+            to: { transform: 'translateX(0)' },
+        },
         "gradient-rotate": {
           "0%": { "--gradient-angle": "0deg" },
           "100%": { "--gradient-angle": "360deg" },
@@ -120,6 +128,8 @@ const config: Config = {
         "text-fade-out": "text-fade-out 0.8s ease-in-out",
         "marquee-up": "marquee-up 30s linear infinite",
         "marquee-down": "marquee-down 30s linear infinite",
+        "marquee-forward": "marquee-forward 60s linear infinite",
+        "marquee-backward": "marquee-backward 60s linear infinite",
         "gradient-rotate": "gradient-rotate 4s linear infinite",
       },
     },
