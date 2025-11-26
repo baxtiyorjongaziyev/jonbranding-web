@@ -46,7 +46,7 @@ const uzServiceDetails = {
     merch: { label: "Brendli merch va nositellar", description: "Kiyim, aksessuarlar, POSM materiallari dizayni.", price: 0, note: "Individual", features: ["Futbolka, kepka dizayni", "Bloknot, ruchka dizayni", "Sumka, paket dizayni", "Mijoz talabiga ko'ra boshqalar"] },
     illustrations: { label: "Illustratsiyalar va animatsiya", description: "Firma grafikasi, infografika va animatsiyalar yaratish.", price: 0, note: "Individual", features: ["Brend personajini yaratish", "Sayt yoki reklama uchun illustratsiyalar", "Logo animatsiyasi", "2D/3D animatsion roliklar"] },
     urgency: { label: "Shoshilinch loyiha (+50%)", description: "Loyiha navbatsiz, qisqa muddatda (2-3 kun) tayyorlanadi.", price: 0, note: "+50%", features: ["Navbatdan tashqari ishlash", "Tezlashtirilgan tahlil va dizayn", "Birinchi natija 48 soatda", "Standart narxga 50% ustama"] },
-    nda: { label: "Maxfiylik shartnomasi (NDA) (+25%)", description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi.", price: 0, note: "+25%", features: ["Yuridik hujjat tayyorlash", "To'liq maxfiylik kafolati", "Loyiha ma'lumotlarini himoya qilish", "Standart narxga 25% ustama"] }
+    nda: { label: "Maxfiylik shartnomasi (NDA) (+50%)", description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi.", price: 0, note: "+50%", features: ["Yuridik hujjat tayyorlash", "To'liq maxfiylik kafolati", "Loyiha ma'lumotlarini himoya qilish", "Standart narxga 50% ustama"] }
 };
 
 const ruServiceDetails = {
@@ -66,7 +66,7 @@ const ruServiceDetails = {
     merch: { ...uzServiceDetails.merch, label: "Брендированный мерч и носители", description: "Дизайн одежды, аксессуаров, POSM-материалов.", features: ["Дизайн футболки, кепки", "Дизайн блокнота, ручки", "Дизайн сумки, пакета", "Другое по требованию клиента"] },
     illustrations: { ...uzServiceDetails.illustrations, label: "Иллюстрации и анимация", description: "Создание фирменной графики, инфографики и анимаций.", features: ["Создание бренд-персонажа", "Иллюстрации для сайта или рекламы", "Анимация логотипа", "2D/3D анимационные ролики"] },
     urgency: { ...uzServiceDetails.urgency, label: "Срочный проект (+50%)", description: "Проект выполняется вне очереди, в короткие сроки (2-3 дня).", features: ["Работа вне очереди", "Ускоренный анализ и дизайн", "Первый результат через 48 часов", "Надбавка 50% к стандартной цене"] },
-    nda: { ...uzServiceDetails.nda, label: "Договор о неразглашении (NDA) (+25%)", description: "Договор о неразглашении информации о проекте.", features: ["Подготовка юридического документа", "Полная гарантия конфиденциальности", "Защита информации о проекте", "Надбавка 25% к стандартной цене"] }
+    nda: { ...uzServiceDetails.nda, label: "Договор о неразглашении (NDA) (+50%)", description: "Договор о неразглашении информации о проекте.", features: ["Подготовка юридического документа", "Полная гарантия конфиденциальности", "Защита информации о проекте", "Надбавка 50% к стандартной цене"] }
 };
 
 const enServiceDetails = {
@@ -86,7 +86,7 @@ const enServiceDetails = {
     merch: { ...uzServiceDetails.merch, label: "Branded Merch and Carriers", description: "Design of clothing, accessories, POSM materials.", features: ["T-shirt, cap design", "Notebook, pen design", "Bag, package design", "Other upon client's request"] },
     illustrations: { ...uzServiceDetails.illustrations, label: "Illustrations and Animation", description: "Creation of corporate graphics, infographics and animations.", features: ["Creating a brand character", "Illustrations for website or advertising", "Logo animation", "2D/3D animated videos"] },
     urgency: { ...uzServiceDetails.urgency, label: "Urgent Project (+50%)", description: "The project is carried out out of turn, in a short time (2-3 days).", features: ["Out-of-turn work", "Accelerated analysis and design", "First result in 48 hours", "50% surcharge on standard price"] },
-    nda: { ...uzServiceDetails.nda, label: "Non-Disclosure Agreement (NDA) (+25%)", description: "Agreement on non-disclosure of project information.", features: ["Preparation of a legal document", "Full confidentiality guarantee", "Project information protection", "25% surcharge on standard price"] }
+    nda: { ...uzServiceDetails.nda, label: "Non-Disclosure Agreement (NDA) (+50%)", description: "Agreement on non-disclosure of project information.", features: ["Preparation of a legal document", "Full confidentiality guarantee", "Project information protection", "50% surcharge on standard price"] }
 };
 
 const zhServiceDetails = {
@@ -106,7 +106,7 @@ const zhServiceDetails = {
     merch: { ...uzServiceDetails.merch, label: "品牌商品和载体", description: "服装、配饰、POSM材料的设计。", features: ["T恤、帽子设计", "笔记本、笔设计", "包、包装袋设计", "根据客户要求提供其他服务"] },
     illustrations: { ...uzServiceDetails.illustrations, label: "插图与动画", description: "创建企业图形、信息图和动画。", features: ["创建品牌角色", "网站或广告插图", "标志动画", "2D/3D动画视频"] },
     urgency: { ...uzServiceDetails.urgency, label: "紧急项目（+50%）", description: "该项目将不按顺序在短时间内（2-3天）执行。", features: ["不按顺序工作", "加速分析与设计", "48小时内出第一稿", "标准价格加收50%"] },
-    nda: { ...uzServiceDetails.nda, label: "保密协议（NDA）（+25%）", description: "关于不披露项目信息的协议。", features: ["准备法律文件", "完全保密保证", "项目信息保护", "标准价格加收25%"] }
+    nda: { ...uzServiceDetails.nda, label: "保密协议（NDA）（+50%）", description: "关于不披露项目信息的协议。", features: ["准备法律文件", "完全保密保证", "项目信息保护", "标准价格加收50%"] }
 };
 
 
@@ -212,7 +212,7 @@ export const packageDiscountThreshold = 2;
 export const packageDiscount = 0.20; // 20%
 export const upfrontDiscount = 0.10; // 10%
 export const urgencySurcharge = 0.50;
-export const ndaSurcharge = 0.25;
+export const ndaSurcharge = 0.50; // Changed from 0.25 to 0.50
 export const bonusThreshold = 4000;
 
 
@@ -285,10 +285,10 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         const surchargeAmount = totalBasePrice * ndaSurcharge;
         priceAfterSurcharges += surchargeAmount;
         let discountName;
-        if (lang === 'ru') discountName = 'Надбавка за NDA (+25%)';
-        else if (lang === 'en') discountName = 'NDA Surcharge (+25%)';
-        else if (lang === 'zh') discountName = '保密协议附加费 (+25%)';
-        else discountName = 'NDA uchun ustama (+25%)';
+        if (lang === 'ru') discountName = 'Надбавка за NDA (+50%)';
+        else if (lang === 'en') discountName = 'NDA Surcharge (+50%)';
+        else if (lang === 'zh') discountName = '保密协议附加费 (+50%)';
+        else discountName = 'NDA uchun ustama (+50%)';
         surcharges.push({ name: discountName, value: surchargeAmount });
     }
     
