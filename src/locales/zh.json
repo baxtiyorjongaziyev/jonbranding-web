@@ -289,7 +289,9 @@
     },
     "testimonials": {
         "title": "客户对我们的评价",
-        "subtitle": "我们最大的成就是我们满意的客户。"
+        "subtitle": "我们最大的成就是我们满意的客户。",
+        "textReviewsTitle": "文字评价",
+        "textReviewsSubtitle": "来自我们其他尊贵的客户"
     },
     "gallery": {
         "title": "我们的作品示例",
