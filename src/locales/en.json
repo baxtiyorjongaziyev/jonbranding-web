@@ -289,7 +289,9 @@
     },
     "testimonials": {
         "title": "What Our Clients Say About Us",
-        "subtitle": "Our greatest achievement is our satisfied clients."
+        "subtitle": "Our greatest achievement is our satisfied clients.",
+        "textReviewsTitle": "Text Reviews",
+        "textReviewsSubtitle": "From our other valued clients"
     },
     "gallery": {
         "title": "Examples of Our Work",

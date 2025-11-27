@@ -289,7 +289,9 @@
     },
     "testimonials": {
         "title": "Mijozlarimiz biz haqimizda",
-        "subtitle": "Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz."
+        "subtitle": "Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz.",
+        "textReviewsTitle": "Matnli fikrlar",
+        "textReviewsSubtitle": "Boshqa hurmatli mijozlarimizdan"
     },
     "gallery": {
         "title": "Ishlarimizdan namunalar",
