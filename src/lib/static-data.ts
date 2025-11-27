@@ -40,6 +40,15 @@ export const staticBrands: Brand[] = [
 
 export const staticTestimonials: Testimonial[] = [
   {
+    name: "Ibrohimjon Mahammadjonov",
+    company: "Den Aroma asoschisi",
+    avatar: "IM",
+    image: "https://img1.teletype.in/files/5a/09/5a0928a6-5c8e-4a6c-94e8-4670b30a6c0b.jpeg",
+    imageHint: "male founder portrait",
+    quote: "Jon.Branding bilan ishlaganimdan juda xursandman. Ular nafaqat chiroyli logotip yaratib berishdi, balki brendimizning mohiyatini tushunib, uni dizaynda aks ettira olishdi. Natija men kutgandan ham a'lo bo'ldi!",
+    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
+  },
+  {
     name: "Sherzod Beknazarov",
     company: "Incontrol Consulting asoschisi",
     avatar: "SB",
@@ -76,6 +85,15 @@ export const staticTestimonials: Testimonial[] = [
 
 export const staticTestimonialsRu: Testimonial[] = [
   {
+    name: "Иброхимжон Махаммаджонов",
+    company: "Основатель Den Aroma",
+    avatar: "ИМ",
+    image: "https://img1.teletype.in/files/5a/09/5a0928a6-5c8e-4a6c-94e8-4670b30a6c0b.jpeg",
+    imageHint: "male founder portrait",
+    quote: "Я очень рад работать с Jon.Branding. Они не только создали красивый логотип, но и смогли понять суть нашего бренда и отразить ее в дизайне. Результат превзошел все мои ожидания!",
+    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
+  },
+  {
     name: "Шерзод Бекназаров",
     company: "Основатель Incontrol Consulting",
     avatar: "ШБ",
@@ -111,6 +129,15 @@ export const staticTestimonialsRu: Testimonial[] = [
 ];
 
 export const staticTestimonialsEn: Testimonial[] = [
+   {
+    name: "Ibrohimjon Mahammadjonov",
+    company: "Founder of Den Aroma",
+    avatar: "IM",
+    image: "https://img1.teletype.in/files/5a/09/5a0928a6-5c8e-4a6c-94e8-4670b30a6c0b.jpeg",
+    imageHint: "male founder portrait",
+    quote: "I am very pleased with my collaboration with Jon.Branding. They not only created a beautiful logo but also understood the essence of our brand and reflected it in the design. The result exceeded my expectations!",
+    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
+  },
   {
     name: "Sherzod Beknazarov",
     company: "Founder of Incontrol Consulting",
@@ -147,6 +174,15 @@ export const staticTestimonialsEn: Testimonial[] = [
 ];
 
 export const staticTestimonialsZh: Testimonial[] = [
+  {
+    name: "易卜拉欣·马哈马德约诺夫",
+    company: "Den Aroma 创始人",
+    avatar: "IM",
+    image: "https://img1.teletype.in/files/5a/09/5a0928a6-5c8e-4a6c-94e8-4670b30a6c0b.jpeg",
+    imageHint: "male founder portrait",
+    quote: "我很高兴能与Jon.Branding合作。他们不仅创造了一个漂亮的标志，还理解了我们品牌的精髓，并在设计中体现了出来。结果超出了我的预期！",
+    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
+  },
   {
     name: "Sherzod Beknazarov (舍尔佐德·别克纳扎罗夫)",
     company: "Incontrol Consulting 创始人",
@@ -237,3 +273,5 @@ export const projects: Project[] = [
         ]
     }
 ];
+
+    
