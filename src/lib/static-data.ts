@@ -273,5 +273,3 @@ export const projects: Project[] = [
         ]
     }
 ];
-
-    
