@@ -24,7 +24,7 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
     return (
         <Card className="h-full flex flex-col bg-white shadow-xl rounded-2xl overflow-hidden group">
             <CardContent className="p-0">
-                <div className="relative w-full aspect-video bg-black cursor-pointer" onClick={handlePlayVideo}>
+                <div className="relative w-full aspect-[9/16] bg-black cursor-pointer" onClick={handlePlayVideo}>
                     {playVideo ? (
                         <div className="absolute inset-0 w-full h-full z-10">
                             <iframe
@@ -44,7 +44,7 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
                                 fill
                                 className={cn("object-cover", testimonial.name === 'Javohir Haqberdiyev' ? 'object-top' : 'object-center', "transition-transform duration-500 group-hover:scale-105")}
                             />
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-10 transition-opacity opacity-0 group-hover:opacity-100">
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-10 transition-opacity opacity-70 group-hover:opacity-100">
                                 <PlayCircle className="w-20 h-20 text-white/80" />
                             </div>
                         </>
@@ -61,9 +61,11 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
                             <p className="text-sm text-gray-500">{testimonial.company}</p>
                         </div>
                     </div>
-                     <blockquote className="mt-4 border-l-4 border-primary/20 pl-4 text-gray-600 italic">
-                        "{testimonial.quote}"
-                    </blockquote>
+                     {testimonial.quote && (
+                        <blockquote className="mt-4 border-l-4 border-primary/20 pl-4 text-gray-600 italic">
+                            "{testimonial.quote}"
+                        </blockquote>
+                     )}
                 </div>
             </CardContent>
         </Card>
@@ -107,7 +109,6 @@ const TestimonialsClient = ({ testimonials, dictionary }: { testimonials: Testim
         const video = testimonials.filter(t => t.videoUrl);
         const text = testimonials.filter(t => !t.videoUrl);
         
-        // Ensure Sherzod Beknazarov and Ibrohimjon Mahammadjonov are first if they exist
         const prioritizedVideos = video.sort((a, b) => {
             if (a.name.includes('Sherzod Beknazarov')) return -1;
             if (b.name.includes('Sherzod Beknazarov')) return 1;

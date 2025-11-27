@@ -45,7 +45,7 @@ export const staticTestimonials: Testimonial[] = [
     avatar: "IM",
     image: "https://img1.teletype.in/files/4e/d7/4ed7845f-6eeb-4528-894b-07b985d1a0d1.jpeg",
     imageHint: "male founder portrait",
-    quote: "Jon.Branding bilan ishlaganimdan juda xursandman. Ular nafaqat chiroyli logotip yaratib berishdi, balki brendimizning mohiyatini tushunib, uni dizaynda aks ettira olishdi. Natija men kutgandan ham a'lo bo'ldi!",
+    quote: "",
     videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
@@ -54,7 +54,7 @@ export const staticTestimonials: Testimonial[] = [
     avatar: "SB",
     image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
     imageHint: "male business owner",
-    quote: "Did, estetik did. Bu tug'ma bo'ladimi yoki orttirilgan ko'nikma bo'ladimi? Shunday estetik did egasidan biri Baxtiyorjon - Bizni Incontrol va Sherzod Beknazarov logolarini qilishda bizga yordam berdi. Baxtiyorjonga minnatdorchilik bildirmoqchimiz. Rahmat.",
+    quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
   },
   {
@@ -71,7 +71,7 @@ export const staticTestimonials: Testimonial[] = [
     avatar: "N",
     image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
     imageHint: "restaurant manager portrait",
-    quote: "Esingizda bo‘lsa, 3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Sizlarga katta rahmat, ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka! 🤝🏻😊"
+    quote: "Esingizda bo'lsa, 3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Sizlarga katta rahmat, ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka! 🤝🏻😊"
   },
   {
     name: "Javohir Haqberdiyev",
@@ -90,7 +90,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     avatar: "ИМ",
     image: "https://img1.teletype.in/files/4e/d7/4ed7845f-6eeb-4528-894b-07b985d1a0d1.jpeg",
     imageHint: "male founder portrait",
-    quote: "Я очень рад работать с Jon.Branding. Они не только создали красивый логотип, но и смогли понять суть нашего бренда и отразить ее в дизайне. Результат превзошел все мои ожидания!",
+    quote: "",
     videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
@@ -99,7 +99,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     avatar: "ШБ",
     image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
     imageHint: "male business owner",
-    quote: "Вкус, эстетический вкус. Это врожденное или приобретенное? Один из обладателей такого эстетического вкуса — Бахтиёржон. Он помог нам с логотипами Incontrol и Шерзода Бекназарова. Хотим выразить Бахтиёржону благодарность. Спасибо.",
+    quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
   },
   {
@@ -135,7 +135,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     avatar: "IM",
     image: "https://img1.teletype.in/files/4e/d7/4ed7845f-6eeb-4528-894b-07b985d1a0d1.jpeg",
     imageHint: "male founder portrait",
-    quote: "I am very pleased with my collaboration with Jon.Branding. They not only created a beautiful logo but also understood the essence of our brand and reflected it in the design. The result exceeded my expectations!",
+    quote: "",
     videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
@@ -144,7 +144,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     avatar: "SB",
     image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
     imageHint: "male business owner",
-    quote: "Taste, aesthetic taste. Is it innate or an acquired skill? Bakhtiyorjon is one of those with such an aesthetic sense - he helped us with the Incontrol and Sherzod Beknazarov logos. We want to thank Bakhtiyorjon. Thank you.",
+    quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
   },
   {
@@ -180,7 +180,7 @@ export const staticTestimonialsZh: Testimonial[] = [
     avatar: "IM",
     image: "https://img1.teletype.in/files/4e/d7/4ed7845f-6eeb-4528-894b-07b985d1a0d1.jpeg",
     imageHint: "male founder portrait",
-    quote: "我很高兴能与Jon.Branding合作。他们不仅创造了一个漂亮的标志，还理解了我们品牌的精髓，并在设计中体现了出来。结果超出了我的预期！",
+    quote: "",
     videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
@@ -189,7 +189,7 @@ export const staticTestimonialsZh: Testimonial[] = [
     avatar: "SB",
     image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
     imageHint: "male business owner",
-    quote: "品味，审美情趣。是天生的还是后天习得的？巴赫蒂约尔洪就是这样一位具有审美情趣的人——他帮助我们设计了Incontrol和Sherzod Beknazarov的标志。我们要感谢巴赫蒂约尔洪。谢谢。",
+    quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
   },
   {
