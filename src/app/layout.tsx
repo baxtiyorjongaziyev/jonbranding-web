@@ -207,5 +207,3 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
 }
 
 export default RootLayout;
-
-    
