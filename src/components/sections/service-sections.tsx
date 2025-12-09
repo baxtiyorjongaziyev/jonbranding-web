@@ -5,14 +5,14 @@ import { FC, useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, BrainCircuit, ScanText, Package, Paintbrush, Fingerprint } from 'lucide-react';
+import { ArrowRight, BrainCircuit, ScanText, Package, Paintbrush, Fingerprint, Book } from 'lucide-react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Skeleton } from '../ui/skeleton';
 
 const serviceIcons: { [key: string]: React.ElementType } = {
     'brand-strategy': BrainCircuit,
     'naming': ScanText,
-    'corporate-style': Paintbrush,
+    'brandbook': Book,
     'packaging-design': Package,
     'logo-design': Fingerprint,
 };
@@ -38,7 +38,7 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
         translations.services.find((s: any) => s.id === 'brand-strategy'),
         translations.services.find((s: any) => s.id === 'naming'),
         translations.services.find((s: any) => s.id === 'logo-design'),
-        translations.services.find((s: any) => s.id === 'corporate-style'),
+        translations.services.find((s: any) => s.id === 'brandbook'),
         translations.services.find((s: any) => s.id === 'packaging-design'),
     ].filter(Boolean);
     

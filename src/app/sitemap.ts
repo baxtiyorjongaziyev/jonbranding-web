@@ -1,3 +1,4 @@
+
 import { MetadataRoute } from 'next'
 import { getAllPostSlugs } from '@/lib/blog-posts';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
@@ -8,11 +9,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '', // Home page
     '/quiz',
-    '/checklist', // New checklist page
+    '/checklist',
     '/xizmatlar',
     '/xizmatlar/brand-strategy',
     '/xizmatlar/neyming',
-    '/xizmatlar/firmenniy-stil',
+    '/xizmatlar/brandbook',
     '/xizmatlar/logo-dizayni',
     '/xizmatlar/qadoq-dizayni',
     '/xizmatlar/patent-kalkulyatori',
