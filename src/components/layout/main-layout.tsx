@@ -8,7 +8,6 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { pageview } from '@/lib/gtag';
 import { Toaster } from '@/components/ui/toaster';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
-import AiAssistant from '@/components/ai-assistant';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
 import { getDictionary } from '@/lib/dictionaries';
 import Script from 'next/script';
@@ -119,7 +118,6 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 onFormSubmitSuccess={handleCloseModal}
                 lang={lang}
             />
-            {dictionary.aiAssistant && <AiAssistant lang={lang} dictionary={dictionary.aiAssistant} />}
             <CookieConsentBanner />
         </div>
     );
