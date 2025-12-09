@@ -427,17 +427,20 @@
             "title": "Mini-Test: Biznesingiz brendga tayyormi? | Jon.Branding",
             "description": "Bir nechta oddiy savollarga javob bering va biznesingizning brendingga qanchalik tayyorligini, uning kuchli va zaif tomonlarini bilib oling."
         },
+        "exampleTitle": "Dunyo brendlarida misol:",
         "questions": [
             {
                 "question": "Sizning biznesingizning asosiy g'oyasi yoki missiyasi bir jumla bilan ifodalanganmi?",
+                "brandExample": "Volvo — xavfsizlik; Nike — har bir insondagi sportchini ilhomlantirish.",
                 "options": [
-                    { "text": "Ha, aniq va hammaga tushunarli", "score": 3 }, 
+                    { "text": "Ha, aniq va hammaga tushunarli", "score": 3 },
                     { "text": "Qisman, lekin hali to'liq emas", "score": 2 },
                     { "text": "Yo'q, bu haqida o'ylab ko'rmaganman", "score": 1 }
                 ]
             },
             {
                 "question": "Maqsadli auditoriyangizni (ideal mijozingizni) aniq tasavvur qila olasizmi?",
+                "brandExample": "Apple — ijodiy professionallar va texnologiya ixlosmandlari; Johnson's Baby — yosh onalar.",
                 "options": [
                     { "text": "Ha, ularning ehtiyojlari va xohishlarini bilaman", "score": 3 },
                     { "text": "Umumiy tasavvurga egaman", "score": 2 },
@@ -446,6 +449,7 @@
             },
             {
                 "question": "Brendingiz raqobatchilardan qanday aniq ustunliklari bilan ajralib turadi?",
+                "brandExample": "Tesla — innovatsion elektromobillar va avtopilot; M&M's — 'qo'lda erimaydigan' shokolad.",
                 "options": [
                     { "text": "Kamida 2-3 ta aniq ustunligim bor", "score": 3 },
                     { "text": "Faqat narx bilan ajralib turaman", "score": 2 },
@@ -454,6 +458,7 @@
             },
             {
                 "question": "Vizual ko'rinishingiz (logotip, ranglar, dizayn) biznesingiz qadriyatlarini aks ettiradimi?",
+                "brandExample": "Coca-Cola qizil rangi — energiya va ehtiros; Tiffany & Co. firuza rangi — hashamat va nafosat.",
                 "options": [
                     { "text": "Ha, to'liq mos keladi", "score": 3 },
                     { "text": "Qisman, ba'zi elementlarni yangilash kerak", "score": 2 },
@@ -462,6 +467,7 @@
             },
             {
                 "question": "Mijozlaringiz siz haqingizda bir xil va ijobiy fikrdami?",
+                "brandExample": "Starbucks — shunchaki kofe emas, uchinchi makon; Zappos — ajoyib mijozlarga xizmat ko'rsatish.",
                 "options": [
                     { "text": "Ha, brendim obro'si mustahkam", "score": 3 },
                     { "text": "Har xil, ba'zan salbiy fikrlar ham bor", "score": 2 },

@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
-import { ArrowRight, Frown, Meh, Smile } from 'lucide-react';
+import { ArrowRight, Frown, Meh, Smile, Lightbulb } from 'lucide-react';
 import ContactModal from '@/components/contact-modal';
 import { event as gtagEvent } from '@/lib/gtag';
 import Link from 'next/link';
@@ -131,6 +131,15 @@ const QuizPage: FC = () => {
                             {currentQuestion.question}
                         </CardTitle>
                         <CardDescription>{questionLabel}</CardDescription>
+                         {currentQuestion.brandExample && (
+                            <div className="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-3">
+                                <Lightbulb className="h-5 w-5 text-amber-500 flex-shrink-0 mt-1" />
+                                <div>
+                                    <h4 className="font-semibold text-amber-700">{translations.exampleTitle}</h4>
+                                    <p className="text-sm text-amber-600">{currentQuestion.brandExample}</p>
+                                </div>
+                            </div>
+                        )}
                     </CardHeader>
                     <CardContent className="p-8 pt-0">
                         <RadioGroup
@@ -171,5 +180,3 @@ const QuizPage: FC = () => {
 };
 
 export default QuizPage;
-
-    
