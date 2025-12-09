@@ -427,9 +427,11 @@
             "title": "Mini-Test: Is Your Business Ready for Branding? | Jon.Branding",
             "description": "Answer a few simple questions and find out how ready your business is for branding, its strengths and weaknesses."
         },
+        "exampleTitle": "Example from world brands:",
         "questions": [
             {
                 "question": "Is the main idea or mission of your business expressed in one sentence?",
+                "brandExample": "Volvo — safety; Nike — to inspire every athlete in the world.",
                 "options": [
                     { "text": "Yes, clearly and understandably for everyone", "score": 3 },
                     { "text": "Partially, but not yet complete", "score": 2 },
@@ -438,6 +440,7 @@
             },
             {
                 "question": "Can you clearly envision your target audience (ideal client)?",
+                "brandExample": "Apple — creative professionals and technology enthusiasts; Johnson's Baby — young mothers.",
                 "options": [
                     { "text": "Yes, I know their needs and desires", "score": 3 },
                     { "text": "I have a general idea", "score": 2 },
@@ -446,6 +449,7 @@
             },
             {
                 "question": "What specific advantages does your brand have over competitors?",
+                "brandExample": "Tesla — innovative electric cars and autopilot; M&M's — chocolate that 'melts in your mouth, not in your hand'.",
                 "options": [
                     { "text": "I have at least 2-3 clear advantages", "score": 3 },
                     { "text": "I only stand out by price", "score": 2 },
@@ -454,6 +458,7 @@
             },
             {
                 "question": "Does your visual identity (logo, colors, design) reflect your business values?",
+                "brandExample": "Coca-Cola's red color — energy and passion; Tiffany & Co.'s turquoise color — luxury and elegance.",
                 "options": [
                     { "text": "Yes, it's a perfect match", "score": 3 },
                     { "text": "Partially, some elements need updating", "score": 2 },
@@ -462,6 +467,7 @@
             },
             {
                 "question": "Do your customers have a consistent and positive opinion of you?",
+                "brandExample": "Starbucks — not just coffee, but a third place; Zappos — amazing customer service.",
                 "options": [
                     { "text": "Yes, my brand reputation is strong", "score": 3 },
                     { "text": "It varies, sometimes there are negative reviews", "score": 2 },
