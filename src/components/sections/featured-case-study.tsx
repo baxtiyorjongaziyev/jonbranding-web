@@ -4,7 +4,7 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '../ui/button';
-import { ArrowRight, CheckCircle, CaseUpper } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 
 const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any}) => {
     const caseData = {
@@ -61,9 +61,9 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                 <Card className="max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl overflow-hidden p-8 lg:p-12">
                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         <div className="text-center lg:text-left">
-                             <div className="flex items-center justify-center lg:justify-start gap-2 text-sm font-semibold text-accent uppercase tracking-wider mb-4">
-                                <CaseUpper className="w-5 h-5"/>
-                                <span>Case Study: Den Aroma</span>
+                            <div className="flex items-center justify-center lg:justify-start gap-3 text-sm font-semibold text-accent uppercase tracking-wider mb-4">
+                               <img src="https://img3.teletype.in/files/e2/90/e290fd28-87f2-4175-bc39-f15f945ac215.png" alt="Den Aroma Logo" className="h-6 w-auto" />
+                               <span className="border-l border-accent/50 pl-3">Case Study</span>
                             </div>
                             <h2 className="text-3xl lg:text-4xl font-extrabold text-white">{t.title}</h2>
                             <p className="mt-4 text-blue-200" dangerouslySetInnerHTML={{ __html: t.description }} />
