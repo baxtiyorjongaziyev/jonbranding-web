@@ -3,8 +3,8 @@ title: "商业“包装”：不仅仅是包装纸"
 description: "我们经常听到“商业包装”这个术语。但它到底意味着什么？仅仅是漂亮的设计，还是背后有更深层次的策略？让我们来一探究竟。"
 date: "2024-08-07"
 author: "巴赫蒂约尔洪·加济耶夫"
-image: "https://picsum.photos/seed/business-packaging/1200/630"
-imageHint: "商业包装策略"
+image: "https://images.unsplash.com/photo-1633533452148-a9657d2c9a5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxicmFuZCUyMGlkZW50aXR5JTIwcGFja2FnZSUyMGRlc2lnbnxlbnwwfHx8fDE3NjU0NTEyNjl8MA&ixlib=rb-4.1.0&q=80&w=1080"
+imageHint: "business packaging strategy"
 ---
 
 ## 什么是“商业包装”？
