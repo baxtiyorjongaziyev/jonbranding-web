@@ -67,7 +67,6 @@ const localeIcons: Record<Locale, React.FC<{ className?: string }>> = {
   uz: UzFlagIcon,
   ru: RuFlagIcon,
   en: GbFlagIcon,
-  zh: () => <></>
 };
 
 const ListItem = React.forwardRef<
@@ -216,7 +215,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         }}
       >
         <Link href={`/${lang}`} className="flex items-center" aria-label="Bosh sahifa">
-          <Logo isWhite={false} />
+          <Logo />
         </Link>
         <NavigationMenu className="hidden lg:flex">
            <NavigationMenuList>
@@ -251,7 +250,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
-          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en' | 'zh'} />
+          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
            
             <ExpandingButton 
               href="tel:+998336450097"
@@ -274,7 +273,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           </Button>
         </div>
         <div className="flex items-center gap-2 lg:hidden">
-          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en' | 'zh'} />
+          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en'} />
           <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className={cn("text-foreground border-border/50", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
@@ -332,5 +331,3 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 };
 
 export default Header;
-
-    

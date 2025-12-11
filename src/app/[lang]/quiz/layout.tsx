@@ -45,7 +45,6 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
         'uz': 'https://jonbranding.uz/quiz',
         'ru': 'https://jonbranding.uz/ru/quiz',
         'en': 'https://jonbranding.uz/en/quiz',
-        'zh': 'https://jonbranding.uz/zh/quiz',
       },
     },
   };

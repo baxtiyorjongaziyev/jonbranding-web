@@ -45,7 +45,6 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
         'uz': 'https://jonbranding.uz/xizmatlar/brandbook',
         'ru': 'https://jonbranding.uz/ru/xizmatlar/brandbook',
         'en': 'https://jonbranding.uz/en/xizmatlar/brandbook',
-        'zh': 'https://jonbranding.uz/zh/xizmatlar/brandbook',
       },
     },
   };
