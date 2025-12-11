@@ -23,6 +23,7 @@ const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Faq = dynamic(() => import('@/components/sections/faq'));
 const WhyUs = dynamic(() => import('@/components/sections/why-us'));
+const FeaturedCaseStudy = dynamic(() => import('@/components/sections/featured-case-study'), { ssr: false });
 
 
 const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
@@ -136,6 +137,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
                 <Testimonials lang={lang} dictionary={dictionary.testimonials} />
                 <Gallery lang={lang} dictionary={dictionary.gallery} />
+                <FeaturedCaseStudy lang={lang} dictionary={dictionary.testimonials} />
                 <Video />
                 <CtaBlock 
                     title={dictionary.home.cta1_title}
