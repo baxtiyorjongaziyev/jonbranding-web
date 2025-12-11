@@ -344,510 +344,509 @@
     },
     "process": {
         "title": "Bizning ish jarayonimiz",
-        "subtitle": "В каждом проекте мы используем проверенный, прозрачный и эффективный процесс.",
+        "subtitle": "Har bir loyihada biz sinalgan, shaffof va samarali jarayondan foydalanamiz.",
         "phases": [
-          { "phase": "01", "title": "Discovery", "description": "The beginning of the journey", "tasks": ["Briefing", "Identifying business problems", "Audience needs", "Market and competitor analysis", "Gathering inspiration and ideas"] },
-          { "phase": "02", "title": "Strategy", "description": "Mapping the path", "tasks": ["Goal setting", "Audience analysis", "Brand positioning", "Core principles", "Planning", "Brand vision"] },
-          { "phase": "03", "title": "Creative Design", "description": "Shaping the brand", "tasks": ["Naming", "Logo design", "Visual concept", "Packaging design", "Brandbook"] },
-          { "phase": "04", "title": "Presentation", "description": "Testing the ideas", "tasks": ["Design presentation", "Adjusting based on feedback", "Final iteration"] },
-          { "phase": "05", "title": "Implementation", "description": "Bringing the brand to life", "tasks": ["Ready design files", "Brandbook handover", "Visual guides"] },
-          { "phase": "06", "title": "Growth", "description": "Supporting the brand", "tasks": ["Implementation guidance", "Ongoing support", "Next steps"] }
+          { "phase": "01", "title": "Kashfiyot", "description": "Sayohatning boshlanishi", "tasks": ["Brifing", "Biznes muammolarini aniqlash", "Auditoriya ehtiyojlari", "Bozor va raqobatchilar tahlili", "Ilhom va g'oyalar yig'ish"] },
+          { "phase": "02", "title": "Strategiya", "description": "Yo'lni belgilash", "tasks": ["Maqsad qo'yish", "Auditoriya tahlili", "Brend pozitsiyasi", "Asosiy tamoyillar", "Rejalashtirish", "Brend qarashlari"] },
+          { "phase": "03", "title": "Kreativ Dizayn", "description": "Brendni shakllantirish", "tasks": ["Neyming", "Logotip dizayni", "Vizual konsepsiya", "Qadoq dizayni", "Brendbuk"] },
+          { "phase": "04", "title": "Taqdimot", "description": "G'oyalarni sinovdan o'tkazish", "tasks": ["Dizayn taqdimoti", "Fikr-mulohazalar asosida o'zgartirish", "Yakuniy iteratsiya"] },
+          { "phase": "05", "title": "Amalga oshirish", "description": "Brendni hayotga tatbiq etish", "tasks": ["Tayyor dizayn fayllari", "Brendbuk topshirish", "Vizual qo'llanmalar"] },
+          { "phase": "06", "title": "O'sish", "description": "Brendni qo'llab-quvvatlash", "tasks": ["Amalga oshirish bo'yicha ko'rsatmalar", "Doimiy qo'llab-quvvatlash", "Keyingi qadamlar"] }
         ],
-        "ctaTitle": "Ready to discuss your project?",
-        "ctaDesc": "Let's start bringing your ideas to life.",
-        "ctaButton": "Discuss the project"
+        "ctaTitle": "Loyihangizni muhokama qilishga tayyormisiz?",
+        "ctaDesc": "Keling, g'oyalaringizni hayotga tatbiq etishni boshlaymiz.",
+        "ctaButton": "Loyihani muhokama qilish"
     },
     "leadMagnet": {
-        "title": "Take Your Brand to the Next Level",
-        "subtitle": "Not sure where to start with us? We have prepared several free and useful resources for you. Explore the world of branding and take the first step.",
+        "title": "Brendingizni yangi bosqichga olib chiqing",
+        "subtitle": "Biz bilan ishni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali manbalarni tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.",
         "magnets": [
-          { "id": "pdf", "title": "Free PDF-Checklist", "subtitle": "7 biggest mistakes in branding", "description": "Find out what mistakes to avoid in your business and get a practical guide to analyzing your brand.", "cta": "View Checklist", "href": "/{lang}/checklist" },
-          { "id": "quiz", "title": "Mini-Test", "subtitle": "Is your business ready for branding?", "description": "Answer a few questions and find out how ready your business is for branding, its strengths and weaknesses.", "cta": "Start the test", "href": "/{lang}/quiz" },
-          { "id": "video", "title": "Video Guide", "subtitle": "What is strategic branding?",
-            "description": "Why is just a beautiful logo not enough? See in the video what results our approach will bring to your business.", "cta": "Watch the video", "href": "#video" }
+          { "id": "pdf", "title": "Bepul PDF-Cheklist", "subtitle": "Brendingdagi 7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani qo'lga kiriting.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
+          { "id": "quiz", "title": "Mini-Test", "subtitle": "Biznesingiz brendingga tayyormi?", "description": "Bir nechta savollarga javob bering va biznesingiz brendingga qanchalik tayyorligini, uning kuchli va zaif tomonlarini bilib oling.", "cta": "Testni boshlash", "href": "/{lang}/quiz" },
+          { "id": "video", "title": "Video-qo'llanma", "subtitle": "Strategik brending nima degani?", "description": "Nima uchun shunchaki chiroyli logotip yetarli emas? Videoda bizning yondashuvimiz biznesingizga qanday natija keltirishini ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
         ],
         "cta": {
-          "title": "Did the checklist help?",
-          "description": "Now it's time to move from theory to practice. Let's analyze your brand for free and identify growth opportunities.",
-          "button": "Get a Free Consultation"
+          "title": "Chek-list yordam berdimi?",
+          "description": "Endi nazariyadan amaliyotga o'tish vaqti. Keling, brendingizni bepul tahlil qilib, o'sish nuqtalarini aniqlaymiz.",
+          "button": "Bepul konsultatsiya olish"
         },
         "checklistContent": {
-          "progress_text": "Completed: {checkedCount} of {total}",
+          "progress_text": "Bajarildi: {checkedCount} / {total} ta",
           "items": [
             {
-              "title": "1. Working without a strategy",
-              "description": "The biggest mistake is starting to design without a clear strategy. Who is your customer? How do you differ from competitors? What is your main message? A logo or website that doesn't answer these questions is just a pretty picture.",
-              "solution": "Solution: Start by answering the questions 'Who are we?', 'For whom?', and 'Why?'. This will create a solid foundation for your brand."
+              "title": "1. Strategiyasiz ishlash",
+              "description": "Eng katta xato — aniq strategiyasiz dizaynni boshlash. Mijozingiz kim? Raqobatchilardan nimangiz bilan farq qilasiz? Asosiy xabaringiz nima? Bu savollarga javob bermaydigan logotip yoki sayt — shunchaki chiroyli rasm.",
+              "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchun?' va 'Nima uchun?' degan savollarga javob berishdan boshlang. Bu brendingiz uchun mustahkam poydevor yaratadi."
             },
             {
-              "title": "2. Trying to please everyone",
-              "description": "A brand that tries to be 'for everyone' ends up being for no one. Trying to appeal to all segments of the population leads to a blurred and weak brand.",
-              "solution": "Solution: Clearly define your target audience. Create a portrait of your 'ideal customer' and focus your marketing efforts on them."
+              "title": "2. Hammaga birdek yoqishga urinish",
+              "description": "'Hamma uchun' bo'lishga harakat qilgan brend, oxir-oqibat hech kim uchun bo'lmaydi. Aholining barcha qatlamlariga yoqishga urinish xira va kuchsiz brendga olib keladi.",
+              "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling. 'Ideal mijoz' portretini yarating va marketing harakatlaringizni aynan unga qarating."
             },
             {
-              "title": "3. Copying competitors",
-              "description": "Looking at competitors is important, but blindly copying them is a path to oblivion. If your design is similar to a well-known brand, you will always be perceived as a 'cheap alternative'.",
-              "solution": "Solution: Study your competitors to find your unique path. Don't be afraid to be different."
+              "title": "3. Raqobatchilardan ko'chirish",
+              "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona ko'chirish — bu tubanlikka yo'l. Agar sizning dizayningiz taniqli brendga o'xshasa, sizni doim 'arzonroq alternativa' deb qabul qilishadi.",
+              "solution": "Yechim: O'ziga xos yo'lingizni topish uchun raqobatchilaringizni o'rganing. Boshqacha bo'lishdan qo'rqmang."
             },
             {
-              "title": "4. Inconsistency",
-              "description": "Your logo is one style on your website, another on Instagram, and your packaging is completely different. This visual chaos undermines trust and hinders brand recognition.",
-              "solution": "Solution: Create a 'brandbook' (guideline) that defines the rules for using your logo, colors, and fonts. Use it consistently everywhere."
+              "title": "4. Izchillikning yo'qligi (Inconsistency)",
+              "description": "Saytingizdagi logotip bir xil, Instagramda boshqacha, qadog'ingiz esa butunlay uchunchi uslubda. Bu vizual tartibsizlik ishonchni yo'qotadi va brendning tanilishiga to'sqinlik qiladi.",
+              "solution": "Yechim: Logotip, ranglar va shriftlardan foydalanish qoidalari yozilgan 'brendbuk' (gaydlain) yarating. Uni hamma joyda izchil qo'llang."
             },
             {
-              "title": "5. Too complex a logo",
-              "description": "A logo with many small details, gradients, and text is difficult to remember and looks bad in small sizes (e.g., a website favicon or social media avatar).",
-              "solution": "Solution: Strive for simplicity and minimalism. The best logos are the ones that can be drawn from memory."
+              "title": "5. Haddan tashqari murakkab logotip",
+              "description": "Ko'p mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt favikoni yoki ijtimoiy tarmoq avatari) yomon ko'rinadi.",
+              "solution": "Yechim: Oddiylik va minimalizmga intiling. Eng yaxshi logotiplar — bu xotiradan chizish mumkin bo'lganlaridir."
             },
             {
-              "title": "6. A name that is hard to pronounce or remember",
-              "description": "If your customers can't pronounce your name or spell it correctly, they won't be able to find you or recommend you to others.",
-              "solution": "Solution: Choose a name that is simple, sonorous, and legally clear (the trademark is not taken)."
+              "title": "6. Talaffuz qilish yoki eslab qolish qiyin bo'lgan nom",
+              "description": "Agar mijozlaringiz nomingizni talaffuz qila olmasa yoki to'g'ri yoza olmasa, ular sizni topa olmaydi yoki boshqalarga tavsiya qila olmaydi.",
+              "solution": "Yechim: Oddiy, jarangdor va yuridik jihatdan toza (tovar belgisi olinmagan) nom tanlang."
             },
             {
-              "title": "7. Thinking that branding is a one-time thing",
-              "description": "Markets, customer demands, and technologies are constantly changing. A brand that does not change with the times will become obsolete.",
-              "solution": "Solution: Periodically conduct a 'brand audit'. Don't be afraid to refresh your design (rebrand) if necessary. It's a sign of growth, not weakness."
+              "title": "7. Brending bir martalik ish deb o'ylash",
+              "description": "Bozorlar, mijozlar talablari, texnologiyalar doim o'zgarib turadi. Vaqt bilan birga o'zgarmaydigan brend eskiradi.",
+              "solution": "Yechim: Vaqti-vaqti bilan 'brend auditi' o'tkazing. Agar kerak bo'lsa, dizayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir."
             }
           ],
           "result": {
             "bad": {
-              "title": "Urgent Help Needed!",
-              "description": "Your brand has several critical vulnerabilities. This is a great opportunity for growth! We can help you turn these weaknesses into strengths."
+              "title": "Shoshilinch yordam kerak!",
+              "description": "Brendingizda bir nechta jiddiy zaif nuqtalar bor. Bu o'sish uchun ajoyib imkoniyat! Biz sizga bu zaifliklarni kuchli tomonlarga aylantirishda yordam beramiz."
             },
             "good": {
-              "title": "On the Right Track!",
-              "description": "You have a good foundation, but there are a few points that can be strengthened to achieve even better results. Let's discuss how we can do this together."
+              "title": "To'g'ri yo'ldasiz!",
+              "description": "Sizda yaxshi poydevor bor, lekin yanada yaxshi natijalarga erishish uchun kuchaytirish mumkin bo'lgan bir nechta nuqtalar mavjud. Keling, buni qanday qilishni birgalikda muhokama qilamiz."
             },
             "perfect": {
-              "title": "Excellent! Your brand is in great shape!",
-              "description": "Congratulations! You have a strong foundation. Now it's time to think about the next step - how to scale and become a market leader. We have ideas for you."
+              "title": "Ajoyib! Brendingiz a'lo holatda!",
+              "description": "Tabriklaymiz! Sizda mustahkam poydevor bor. Endi keyingi qadam — qanday qilib masshtabni kengaytirish va bozor lideriga aylanish haqida o'ylash vaqti keldi. Bizda siz uchun g'oyalar bor."
             }
           }
         }
     },
     "faq": {
-        "title": "Frequently Asked Questions",
-        "subtitle": "Answers to the most common questions about the branding process, prices, and other topics.",
+        "title": "Ko'p beriladigan savollar",
+        "subtitle": "Brending jarayoni, narxlar va boshqa mavzular bo'yicha eng ko'p uchraydigan savollarga javoblar.",
         "faqItems": [
-           { "question": "Why are the prices not fixed?", "answer": "Every project is unique. The price is calculated individually depending on the complexity of the project, the scope of work, and your tasks. We offer the best solution for your brand." },
-           { "question": "How is the work process structured?", "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is agreed upon with you, and you have full control over the process." },
-           { "question": "Can I order just a logo?", "answer": "We create not just a logo, but a complete identification system that makes the brand recognizable and effective. This creates long-term value for your business." },
-           { "question": "What are the payment terms?", "answer": "The standard scheme is 50% prepayment, 50% after project delivery. We can also discuss individual terms for your convenience." },
-           { "question": "How long does the work take?", "answer": "The timing depends on the type of service. For example, creating a logo takes 2-4 weeks, brand strategy starts from 8 weeks. The final deadline is determined after project approval." },
-           { "question": "Is there support after the project is completed?", "answer": "Yes, within 1 month after the project completion, we provide free advice and assistance on the correct use of brand materials." }
+           { "question": "Nima uchun narxlar qat'iy belgilanmagan?", "answer": "Har bir loyiha o'ziga xos. Narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga qarab individual hisoblanadi. Biz sizning brendingiz uchun optimal yechimni taklif qilamiz." },
+           { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishiladi va siz jarayonni to'liq nazorat qilasiz." },
+           { "question": "Faqat logotip buyurtma qilsam bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz. Bu biznesingiz uchun uzoq muddatli qiymat yaratadi." },
+           { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng. Shuningdek, sizning qulayligingiz uchun individual shartlarni muhokama qilishimiz mumkin." },
+           { "question": "Ish qancha vaqt davom etadi?", "answer": "Muddatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend strategiyasi — 8 haftadan boshlanadi. Yakuniy muddat loyiha tasdiqlangandan so'ng aniqlanadi." },
+           { "question": "Loyiha tugagandan keyin qo'llab-quvvatlash bormi?", "answer": "Ha, loyiha tugagandan so'ng 1 oy davomida biz brend materiallaridan to'g'ri foydalanish bo'yicha bepul maslahat va yordam beramiz." }
         ],
-        "ctaTitle": "Ready to discuss your project?",
-        "ctaDesc": "Got answers to all your questions? Let's discuss your project and take your brand to the next level.",
-        "ctaButton": "I'm ready to start!"
+        "ctaTitle": "Shubhalarga o'rin qoldirmang!",
+        "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilib, brendingizni yangi bosqichga olib chiqamiz.",
+        "ctaButton": "Men barcha javoblarni oldim, boshlashga tayyorman!"
     },
     "mobileCtaBar": {
-        "final_price": "Final price",
-        "get_offer": "Send Request"
+        "final_price": "Yakuniy narx",
+        "get_offer": "So'rov qoldirish"
     },
     "blog": {
-        "title": "Our Blog",
-        "subtitle": "Latest news, tips, and analysis from the world of branding, marketing, and design. We help your business grow.",
-        "readMore": "Read more"
+        "title": "Bizning Blogimiz",
+        "subtitle": "Brending, marketing va dizayn olamidagi so'nggi yangiliklar, maslahatlar va tahliliy maqolalar. Biznesingizni o'stirishga yordam beramiz.",
+        "readMore": "Ko'proq o'qish"
     },
     "blogPost": {
-        "author": "Author",
-        "ctaTitle": "Was this article helpful?",
-        "ctaDesc": "Now it's time to move from theory to practice. Take your brand to the next level with us.",
-        "ctaButton": "Get a free consultation"
+        "author": "Muallif",
+        "ctaTitle": "Maqola foydali bo'ldimi?",
+        "ctaDesc": "Endi nazariyadan amaliyotga o'tish vaqti. Brendingizni biz bilan yangi bosqichga olib chiqing.",
+        "ctaButton": "Bepul konsultatsiya olish"
     },
     "quiz": {
         "metadata": {
-            "title": "Mini-Test: Is Your Business Ready for Branding? | Jon.Branding",
-            "description": "Answer a few simple questions and find out how ready your business is for branding, its strengths and weaknesses."
+            "title": "Mini-test: Biznesingiz brendingga tayyormi? | Jon.Branding",
+            "description": "Bir nechta oddiy savollarga javob bering va biznesingiz brendingga qanchalik tayyorligini, uning kuchli va zaif tomonlarini bilib oling."
         },
-        "exampleTitle": "Example from world brands:",
+        "exampleTitle": "Dunyo brendlarida misol:",
         "questions": [
             {
-                "question": "Is the main idea or mission of your business expressed in one sentence?",
-                "brandExample": "Volvo — safety; Nike — to inspire every athlete in the world.",
+                "question": "Biznesingizning asosiy g'oyasi yoki missiyasi bir jumlada ifodalanganmi?",
+                "brandExample": "Volvo — xavfsizlik; Nike — dunyodagi har bir sportchini ilhomlantirish.",
                 "options": [
-                    { "text": "Yes, clearly and understandably for everyone", "score": 3 },
-                    { "text": "Partially, but not yet complete", "score": 2 },
-                    { "text": "No, I haven't thought about it", "score": 1 }
+                    { "text": "Ha, hamma uchun aniq va tushunarli", "score": 3 },
+                    { "text": "Qisman, lekin hali to'liq emas", "score": 2 },
+                    { "text": "Yo'q, bu haqda o'ylab ko'rmaganman", "score": 1 }
                 ]
             },
             {
-                "question": "Can you clearly envision your target audience (ideal client)?",
-                "brandExample": "Apple — creative professionals and technology enthusiasts; Johnson's Baby — young mothers.",
+                "question": "Maqsadli auditoriyangizni (ideal mijoz) aniq tasavvur qila olasizmi?",
+                "brandExample": "Apple — ijodiy mutaxassislar va texnologiya ishqibozlari; Johnson's Baby — yosh onalar.",
                 "options": [
-                    { "text": "Yes, I know their needs and desires", "score": 3 },
-                    { "text": "I have a general idea", "score": 2 },
-                    { "text": "No, I try to sell to everyone", "score": 1 }
+                    { "text": "Ha, ularning ehtiyojlari va istaklarini bilaman", "score": 3 },
+                    { "text": "Umumiy tasavvurga egaman", "score": 2 },
+                    { "text": "Yo'q, men hammaga sotishga harakat qilaman", "score": 1 }
                 ]
             },
             {
-                "question": "What specific advantages does your brand have over competitors?",
-                "brandExample": "Tesla — innovative electric cars and autopilot; M&M's — chocolate that 'melts in your mouth, not in your hand'.",
+                "question": "Brendingiz raqobatchilardan qanday aniq afzalliklarga ega?",
+                "brandExample": "Tesla — innovatsion elektromobillar va avtopilot; M&M's — 'qo'lda emas, og'izda eriydigan' shokolad.",
                 "options": [
-                    { "text": "I have at least 2-3 clear advantages", "score": 3 },
-                    { "text": "I only stand out by price", "score": 2 },
-                    { "text": "I have no clear advantages", "score": 1 }
+                    { "text": "Kamida 2-3 ta aniq afzalligim bor", "score": 3 },
+                    { "text": "Faqat narx bilan ajralib turaman", "score": 2 },
+                    { "text": "Aniq afzalliklarim yo'q", "score": 1 }
                 ]
             },
             {
-                "question": "Does your visual identity (logo, colors, design) reflect your business values?",
-                "brandExample": "Coca-Cola's red color — energy and passion; Tiffany & Co.'s turquoise color — luxury and elegance.",
+                "question": "Vizual ko'rinishingiz (logotip, ranglar, dizayn) biznesingiz qadriyatlarini aks ettiradimi?",
+                "brandExample": "Coca-Cola'ning qizil rangi — energiya va ehtiros; Tiffany & Co.ning firuza rangi — hashamat va nafosat.",
                 "options": [
-                    { "text": "Yes, it's a perfect match", "score": 3 },
-                    { "text": "Partially, some elements need updating", "score": 2 },
-                    { "text": "No, I haven't paid attention to this", "score": 1 }
+                    { "text": "Ha, to'liq mos keladi", "score": 3 },
+                    { "text": "Qisman, ba'zi elementlarni yangilash kerak", "score": 2 },
+                    { "text": "Yo'q, bu haqda e'tibor bermaganman", "score": 1 }
                 ]
             },
             {
-                "question": "Do your customers have a consistent and positive opinion of you?",
-                "brandExample": "Starbucks — not just coffee, but a third place; Zappos — amazing customer service.",
+                "question": "Mijozlaringiz siz haqingizda bir xil va ijobiy fikrdami?",
+                "brandExample": "Starbucks — shunchaki kofe emas, balki uchinchi makon (Third Place); Zappos — ajoyib mijozlarga xizmat ko'rsatish.",
                 "options": [
-                    { "text": "Yes, my brand reputation is strong", "score": 3 },
-                    { "text": "It varies, sometimes there are negative reviews", "score": 2 },
-                    { "text": "I don't know, I haven't conducted a survey", "score": 1 }
+                    { "text": "Ha, brendim obro'si mustahkam", "score": 3 },
+                    { "text": "Har xil, ba'zida salbiy fikrlar ham bo'ladi", "score": 2 },
+                    { "text": "Bilmayman, so'rovnoma o'tkazmaganman", "score": 1 }
                 ]
             }
         ],
         "result": {
             "bad": {
-                "title": "You need help (5-8 points)",
-                "description": "Your brand's foundation is weak. You undoubtedly need professional help to stand out from competitors and win customer loyalty. Let's fix this together!"
+                "title": "Sizga yordam kerak (5-8 ball)",
+                "description": "Brendingiz poydevori zaif. Raqobatchilardan ajralib turish va mijozlar sadoqatini qozonish uchun sizga, shubhasiz, professional yordam kerak. Keling, buni birgalikda to'g'rilaymiz!"
             },
             "medium": {
-                "title": "Good potential, but there are gaps (9-12 points)",
-                "description": "You have a good foundation, but your brand can be stronger and more effective. Let's fill the existing gaps and take your business to the next level."
+                "title": "Yaxshi potensial, lekin bo'shliqlar bor (9-12 ball)",
+                "description": "Sizda yaxshi poydevor bor, lekin brendingiz yanada kuchliroq va samaraliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldirib, biznesingizni yangi bosqichga olib chiqamiz."
             },
             "good": {
-                "title": "Excellent! Your brand is in great shape!",
-                "description": "Congratulations! You are on the right track with branding. Now it's time to strengthen this foundation and become a market leader. We will help you with this."
+                "title": "Ajoyib! Brendingiz poydevori mustahkam (13-15 ball)",
+                "description": "Tabriklaymiz! Siz brending masalasida to'g'ri yo'ldasiz. Endi bu poydevorni yanada mustahkamlab, bozor lideriga aylanish vaqti keldi. Biz sizga bu borada yordam beramiz."
             },
-            "afterSubmitText": "Our specialist will contact you soon for a detailed analysis of your test results and to provide personal recommendations.",
-            "backToHome": "Back to Home"
+            "afterSubmitText": "Tez orada mutaxassisimiz siz bilan bog'lanib, testingiz natijalarini batafsil tahlil qiladi va shaxsiy tavsiyalar beradi.",
+            "backToHome": "Bosh sahifaga qaytish"
         },
-        "questionLabel": "Question {step} / {total}",
-        "nextButton": "Next",
-        "resultButton": "See result"
+        "questionLabel": "Savol {step} / {total}",
+        "nextButton": "Keyingisi",
+        "resultButton": "Natijani ko'rish"
     },
     "brandStrategyPage": {
         "metadata": {
-            "title": "Brand Strategy and Platform | Jon.Branding Agency Tashkent",
-            "description": "A brand strategy is a business growth tool. Turn your brand from just beautiful into a working system with our branding agency in Tashkent. We develop brand platforms and strategies."
+            "title": "Brend strategiyasi va Platforma | Toshkentdagi brending agentligi",
+            "description": "Brend strategiyasi — bu biznesning o'sish vositasidir. Brendingizni shunchaki chiroylidan ishlaydigan tizimga aylantiring. Biz brend platformalari va strategiyalarini ishlab chiqamiz."
         },
-        "title": "Brand Strategy",
-        "subtitle": "A strong brand is a clear idea that inspires, unites, and helps a business grow.",
-        "section1_title": "Brand strategy is a business growth tool",
-        "section1_p1": "Every ambitious company has its goals. For some, it's capturing a certain market share; for others, it's brand awareness, expanding into new territories, and so on.",
-        "section1_p2": "Brand strategy is what helps a company achieve these goals, to become not just a product or service, but something more — a part of its customers' lives, a carrier of a recognizable image.",
-        "section1_p3": "Most importantly, it allows for the systemization of marketing expenses, abandoning tools, channels, and ideas that do not support the company's positioning and, therefore, do not deserve the cost.",
-        "section2_title": "Brand strategy is necessary for any business",
-        "section2_p1": "Brand strategy is necessary for both new and long-existing companies.",
-        "section2_p2_bold": "For startups,",
-        "section2_p2_text": " it helps to define their mission, values, and identity from the very beginning, to occupy the right position in the market, and to attract customers.",
-        "section2_p3_bold": "For large companies,",
-        "section2_p3_text": " strategy is a tool for growth and reputation management. In this case, it helps to maintain relevance, adapt to changes, and build strong relationships with the audience.",
-        "section2_p4": "Regardless of business size, brand strategy answers the main question: why should a customer choose you?",
-        "process_title": "Branding is a process",
-        "process_subtitle": "In our agency, we are convinced that branding is more than just creating a logo. Branding is not a one-time task, but a cyclical process. Each stage plays its key role, and skipping any of them can weaken the brand and its market position. But if everything is done correctly and consistently, branding helps the business grow and makes it easier to manage many processes, from product production to marketing.",
+        "title": "Brend strategiyasi",
+        "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesning o'sishiga yordam beradigan aniq g'oyadir.",
+        "section1_title": "Brend strategiyasi — bu biznes o'sish vositasidir",
+        "section1_p1": "Har bir shuhratparast kompaniyaning o'z maqsadlari bor. Kimdir uchun bu ma'lum bir bozor ulushini egallash bo'lsa, boshqalar uchun bu brend taniluvchanligi, yangi hududlarga kengayish va hokazo.",
+        "section1_p2": "Brend strategiyasi — bu kompaniyaga ushbu maqsadlarga erishishda yordam beradigan, shunchaki tovar yoki xizmat emas, balki undan kattaroq narsaga — o'z mijozlari va xaridorlarining hayotining bir qismiga, taniladigan obraz tashuvchisiga aylanishiga yordam beradigan narsadir.",
+        "section1_p3": "Eng muhimi, bu marketing xarajatlarini tizimlashtirishga, kompaniyaning pozitsiyasini qo'llab-quvvatlamaydigan va shuning uchun xarajatlarni oqlamaydigan vositalar, kanallar va g'oyalardan voz kechishga imkon beradi.",
+        "section2_title": "Brend strategiyasi har qanday biznes uchun zarur",
+        "section2_p1": "Brend strategiyasi ham yangi, ham uzoq vaqtdan beri mavjud bo'lgan kompaniyalar uchun zarur.",
+        "section2_p2_bold": "Startaplar uchun,",
+        "section2_p2_text": "u boshidanoq o'z missiyasi, qadriyatlari va identifikatsiyasini aniqlashga, bozorda to'g'ri o'rin egallashga va mijozlarni jalb qilishga yordam beradi.",
+        "section2_p3_bold": "Yirik kompaniyalar uchun,",
+        "section2_p3_text": "strategiya — bu o'sish va obro'ni boshqarish vositasidir. Bu holda u dolzarblikni saqlab qolishga, o'zgarishlarga moslashishga va auditoriya bilan mustahkam aloqalar o'rnatishga yordam beradi.",
+        "section2_p4": "Biznes hajmidan qat'i nazar, brend strategiyasi asosiy savolga javob beradi: mijoz nima uchun aynan sizni tanlashi kerak?",
+        "process_title": "Brending — bu jarayon",
+        "process_subtitle": "Bizning agentligimizda brending shunchaki logotip yaratishdan ko'ra ko'proq narsa ekanligiga aminmiz. Brending — bu bir martalik vazifa emas, balki tsiklik jarayondir. Har bir bosqich o'zining asosiy rolini o'ynaydi va ulardan birini o'tkazib yuborish brendni va uning bozordagi o'rnini zaiflashtirishi mumkin. Ammo agar hamma narsa to'g'ri va izchil bajarilsa, brending biznesning o'sishiga yordam beradi va mahsulot ishlab chiqarishdan tortib marketinggacha bo'lgan ko'plab jarayonlarni boshqarishni osonlashtiradi.",
         "process_steps": [
-            { "title": "Analysis and research", "description": "This is the first and most important stage where data about the market, competitors, and audience is collected. Without this, it's impossible to define the brand's uniqueness and understand its target audience." },
-            { "title": "Brand platform formation", "description": "Here the brand's mission, values, and unique proposition are born - this is the foundation that defines its character and voice. Without a clear platform, all subsequent actions risk being disjointed and unconvincing." },
-            { "title": "Strategy development", "description": "The strategy answers how the brand will interact with the audience and through which channels it will communicate. This systematizes communication, making it targeted and effective." },
-            { "title": "Visual identification", "description": "Translating the brand's meanings into a visual language - logo, colors, fonts, and graphic elements. This makes the brand recognizable and different from competitors." },
-            { "title": "Implementation and integration", "description": "Creating a brand is just the beginning. It is important to correctly integrate it into the company and contact points so that it becomes part of the corporate culture and communication with customers." }
+            { "title": "Tahlil va tadqiqot", "description": "Bu bozor, raqobatchilar va auditoriya haqidagi ma'lumotlar yig'iladigan birinchi va eng muhim bosqichdir. Busiz brendning o'ziga xosligini aniqlash va uning maqsadli auditoriyasini tushunish mumkin emas." },
+            { "title": "Brend platformasini shakllantirish", "description": "Bu yerda brendning missiyasi, qadriyatlari va noyob taklifi tug'iladi — bu uning xarakteri va ovozini belgilaydigan asosdir. Aniq platformasiz barcha keyingi harakatlar tarqoq va ishonchsiz bo'lish xavfi bor." },
+            { "title": "Strategiya ishlab chiqish", "description": "Strategiya brendning auditoriya bilan qanday muloqot qilishi va qaysi kanallar orqali aloqa o'rnatishi haqidagi savolga javob beradi. Bu kommunikatsiyani tizimlashtiradi, uni maqsadli va samarali qiladi." },
+            { "title": "Vizual identifikatsiya", "description": "Brend ma'nolarini vizual tilga o'tkazish — logotip, ranglar, shriftlar va grafik elementlar. Bu brendni taniladigan va raqobatchilardan farqli qiladi." },
+            { "title": "Amalga oshirish va integratsiya", "description": "Brend yaratish — bu faqat boshlanishi. Uni kompaniyaga va aloqa nuqtalariga to'g'ri integratsiya qilish muhim, shunda u korporativ madaniyat va mijozlar bilan muloqotning bir qismiga aylanadi." }
         ]
     },
     "corporateStylePage": {
         "metadata": {
-            "title": "Corporate Identity and Brandbook | Jon.Branding Agency Tashkent",
-            "description": "We don't just create beautiful pictures, we develop a systematic visual style (corporate identity, brandbook) that works for your brand and delivers results. Make your brand recognizable and memorable through a logo, colors, fonts, and other elements."
+            "title": "Firma uslubi va Brendbuk | Toshkentdagi brending agentligi",
+            "description": "Biz shunchaki chiroyli rasmlar yaratmaymiz, biz sizning brendingiz uchun ishlaydigan va natija keltiradigan tizimli vizual uslub (firma uslubi, brendbuk) ishlab chiqamiz. Logotip, ranglar, shriftlar va boshqa elementlar orqali brendingizni taniladigan va esda qolarli qiling."
         },
-        "title": "Corporate Identity Development",
-        "subtitle": "One of the key elements of a brand is its visual component. It is what turns ideas, meanings, and values into images that can be seen, felt, and remembered.",
-        "section1_title": "Brand perception starts with the picture",
-        "section1_p1": "In the modern world, visual information is perceived and absorbed faster than text or words. We live in an age of instant impressions: it takes people a second to form an opinion about a brand, and this often happens through its visual image.",
-        "section1_p2": "To consolidate an idea in the audience's mind, it is not enough to just talk about it — it is important to reinforce it with visual elements. A well-designed corporate identity allows you to demonstrate brand values without extra explanations, instantly evoking the necessary emotions and associations.",
-        "section2_title": "Corporate identity is a system",
-        "section2_p1": "It's not just about beauty, but about efficiency, meaning, and control. To ensure a brand remains multifaceted and consistent in developing its visual image, a set of graphic elements must be created.",
-        "section2_p2": "Such a set is always selected individually, depending on the business's tasks and capabilities. The minimum set includes a logo, colors, fonts, photo style, style of advertising media, and other elements that create a cohesive image.",
-        "section2p3": "When a visual style is built clearly and consistently, it becomes a powerful tool for managing the brand's image and communication. When all its elements are aligned, the brand is perceived as professional, reliable, and recognizable.",
-        "process_title": "How do we create a corporate identity?",
-        "process_subtitle": "We take a systematic approach to developing a corporate identity so that every detail works for brand recognition and its strategy.",
+        "title": "Firma Uslubini Ishlab Chiqish",
+        "subtitle": "Brendning asosiy elementlaridan biri — uning vizual tarkibiy qismidir. Aynan u g'oyalar, ma'nolar va qadriyatlarni ko'rish, his qilish va eslab qolish mumkin bo'lgan obrazlarga aylantiradi.",
+        "section1_title": "Brendni idrok etish rasmdan boshlanadi",
+        "section1_p1": "Zamonaviy dunyoda vizual ma'lumot matn yoki so'zlarga qaraganda tezroq qabul qilinadi va o'zlashtiriladi. Biz bir zumlik taassurotlar davrida yashayapmiz: odamlar brend haqida tasavvur hosil qilish uchun bir soniya vaqt sarflashadi va bu ko'pincha uning vizual obrazi orqali sodir bo'ladi.",
+        "section1_p2": "G'oya auditoriya ongida mustahkamlanishi uchun u haqida faqat gapirishning o'zi yetarli emas — uni vizual elementlar bilan mustahkamlash muhim. Yaxshi ishlab chiqilgan firma uslubi brend qadriyatlarini ortiqcha tushuntirishlarsiz namoyish etishga imkon beradi, bir zumda kerakli hissiyotlar va assotsiatsiyalarni uyg'otadi.",
+        "section2_title": "Firma uslubi — bu tizim",
+        "section2_p1": "Bu faqat go'zallik haqida emas, balki samaradorlik, ma'no va nazorat haqida. Brend o'zining vizual obrazini rivojlantirishda ko'p qirrali va izchil bo'lib qolishini ta'minlash uchun grafik elementlar to'plamini yaratish kerak.",
+        "section2_p2": "Bunday to'plam har doim biznesning vazifalari va imkoniyatlariga qarab individual tanlanadi. Minimal to'plam logotip, ranglar, shriftlar, fotosurat uslubi, reklama tashuvchilarining uslubi va yaxlit obrazni yaratuvchi boshqa elementlarni o'z ichiga oladi.",
+        "section2p3": "Vizual uslub aniq va izchil qurilganida, u brend obrazini va kommunikatsiyasini boshqarish uchun kuchli vositaga aylanadi. Uning barcha elementlari kelishilgan bo'lsa, brend professional, ishonchli va taniladigan sifatida idrok etiladi.",
+        "process_title": "Biz firma uslubini qanday yaratamiz?",
+        "process_subtitle": "Biz firma uslubini ishlab chiqishga tizimli yondashamiz, shunda har bir detal brendning tanilishi va uning strategiyasi uchun ishlaydi.",
         "process_steps": [
-            { "title": "Research and concept", "description": "We analyze the audience, market, competitors, and the brand's position. We identify the key meanings and ideas that should be reflected in the visual style." },
-            { "title": "Visual code development", "description": "We create the logo, corporate colors, typography, graphics, iconography, and layout principles that form a cohesive brand image." },
-            { "title": "Corporate identity system", "description": "We develop flexible elements that help maintain the consistency of the visual image across all formats — from packaging to the digital environment." },
-            { "title": "Finalization and guideline", "description": "We create a guideline (brandbook) with rules for using the style so that the brand maintains a unified image on any carrier." }
+            { "title": "Tadqiqot va konsepsiya", "description": "Auditoriya, bozor, raqobatchilar va brendning o'rnini tahlil qilamiz. Vizual uslubda aks ettirilishi kerak bo'lgan asosiy ma'nolar va g'oyalarni aniqlaymiz." },
+            { "title": "Vizual kodni ishlab chiqish", "description": "Brendning yaxlit obrazini shakllantiruvchi logotip, firma ranglari, tipografika, grafika, ikonografika, sahifalash tamoyillarini yaratamiz." },
+            { "title": "Firma uslubi tizimi", "description": "Barcha formatlarda — qadoqdan tortib raqamli muhitgacha — vizual obrazning izchilligini saqlashga yordam beradigan moslashuvchan elementlarni ishlab chiqamiz." },
+            { "title": "Yakunlash va gaydlayn", "description": "Brend har qanday tashuvchida yagona obrazni saqlab qolishi uchun uslubdan foydalanish qoidalari bilan gaydlayn (brendbuk) yaratamiz." }
         ],
-        "cta_title": "Corporate identity is a growth tool",
-        "cta_description": "Brands with a strong identity are recognized faster, remembered longer, and inspire more trust. We create not just a visual style, but a tool that helps the brand grow, be consistent, and manageable."
+        "cta_title": "Firma uslubi — o'sish vositasi",
+        "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi, uzoqroq esda qoladi va ko'proq ishonch uyg'otadi. Biz shunchaki vizual uslub emas, balki brendning o'sishiga, izchil va boshqariladigan bo'lishiga yordam beradigan vosita yaratamiz."
     },
     "logoDesignPage": {
         "metadata": {
-            "title": "Professional Logo Design Services | Jon.Branding Agency Uzbekistan",
-            "description": "A logo is the face of your business. Our logo design agency in Uzbekistan creates unique, memorable, and strategic logos that reflect the essence of your brand and help you stand out from the competition."
+            "title": "Professional Logotip Dizayni Xizmatlari | Jon.Branding Agentligi O'zbekiston",
+            "description": "Logotip — bu sizning biznesingizning yuzi. O'zbekistondagi logotip dizayn agentligimiz brendingiz mohiyatini aks ettiruvchi va raqobatchilardan ajralib turishingizga yordam beruvchi noyob, esda qolarli va strategik logotiplarni yaratadi."
         },
-        "title": "Logo Design",
-        "subtitle": "A logo is more than just a picture; it's a strategic tool, the face of your business, and the first impression you make.",
-        "section1_title": "Why is a logo so important?",
-        "section1_p1": "In today's competitive market, a logo is the first thing that catches a customer's eye. A good logo is not just a beautiful design, but a symbol that conveys the values, professionalism, and uniqueness of your business.",
-        "section1_p2": "It is a key element that helps customers recognize and remember you. A professional logo builds trust and forms an emotional connection, turning one-time buyers into loyal fans.",
-        "values_title": "A good logo should be:",
+        "title": "Logotip Dizayni",
+        "subtitle": "Logotip — bu shunchaki rasm emas; u strategik vosita, biznesingizning yuzi va siz qoldiradigan birinchi taassurotdir.",
+        "section1_title": "Nima uchun logotip bunchalik muhim?",
+        "section1_p1": "Bugungi raqobatli bozorda logotip mijozning ko'ziga birinchi bo'lib tashlanadigan narsadir. Yaxshi logotip nafaqat chiroyli dizayn, balki biznesingizning qadriyatlari, professionalligi va o'ziga xosligini yetkazadigan ramzdir.",
+        "section1_p2": "U mijozlar sizni tanib olishi va eslab qolishiga yordam beradigan asosiy elementdir. Professional logotip ishonch hosil qiladi va hissiy aloqa o'rnatib, bir martalik xaridorlarni sodiq muxlislarga aylantiradi.",
+        "values_title": "Yaxshi logotip quyidagicha bo'lishi kerak:",
         "values": [
-            { "title": "Simple and Memorable", "description": "The best logos are easy to recognize and remember even at a small size or from a distance." },
-            { "title": "Unique and Timeless", "description": "It should set you apart from competitors and not go out of fashion after a few years." },
-            { "title": "Strategic and Meaningful", "description": "Every line, color, and shape should reflect the character and goals of your business." }
+            { "title": "Oddiy va Esda qolarli", "description": "Eng yaxshi logotiplar hatto kichik o'lchamda yoki uzoq masofadan ham oson taniladi va esda qoladi." },
+            { "title": "Noyob va Vaqtga bo'ysunmaydigan", "description": "U sizni raqobatchilardan ajratib turishi va bir necha yildan keyin modadan chiqib ketmasligi kerak." },
+            { "title": "Strategik va Ma'noli", "description": "Har bir chiziq, rang va shakl biznesingizning xarakteri va maqsadlarini aks ettirishi kerak." }
         ],
-        "process_title": "How do we create a logo?",
-        "process_subtitle": "Our logo design process is based on deep analysis and strategic thinking, not just fleeting inspiration.",
+        "process_title": "Biz logotipni qanday yaratamiz?",
+        "process_subtitle": "Bizning logotip yaratish jarayonimiz shunchaki o'tkinchi ilhomga emas, balki chuqur tahlil va strategik fikrlashga asoslangan.",
         "process_steps": [
-            { "title": "Brief and Research", "description": "We thoroughly study your business, goals, target audience, and competitors." },
-            { "title": "Concept Development", "description": "We develop several visual concepts that reflect your brand's strategy and character." },
-            { "title": "Design and Presentation", "description": "We refine the chosen concept, show it on real-world examples (mockups), and explain the logic behind it." },
-            { "title": "Finalization and Handover", "description": "We prepare all necessary file formats (vector, raster) for use in any context and provide a mini-guide on its usage." }
+            { "title": "Brif va Tadqiqot", "description": "Biznesingiz, maqsadlaringiz, maqsadli auditoriyangiz va raqobatchilaringizni puxta o'rganamiz." },
+            { "title": "Konsepsiya ishlab chiqish", "description": "Brendingiz strategiyasi va xarakterini aks ettiruvchi bir nechta vizual konsepsiyalarni ishlab chiqamiz." },
+            { "title": "Dizayn va Taqdimot", "description": "Tanlangan konsepsiyani takomillashtiramiz, uni real misollarda (mokaplarda) ko'rsatamiz va uning ortidagi mantiqni tushuntiramiz." },
+            { "title": "Yakunlash va Topshirish", "description": "Har qanday kontekstda foydalanish uchun barcha kerakli fayl formatlarini (vektor, rastr) tayyorlaymiz va undan foydalanish bo'yicha mini-qo'llanmani taqdim etamiz." }
         ],
-        "cta_title": "Ready to create a logo that works?",
-        "cta_description": "Don't settle for a template logo. Let's create a unique and powerful sign for your business that will become the foundation of your success.",
-        "cta_button": "Get a Free Consultation"
+        "cta_title": "Ishlaydigan logotip yaratishga tayyormisiz?",
+        "cta_description": "Shablon logotipga rozi bo'lmang. Keling, biznesingiz uchun muvaffaqiyatingiz poydevoriga aylanadigan noyob va kuchli belgi yaratamiz.",
+        "cta_button": "Bepul Konsultatsiya Olish"
     },
     "namingPage": {
         "metadata": {
-            "title": "Naming Services in Tashkent | Jon.Branding Agency",
-            "description": "Choosing a memorable and strong name for a brand. A good name doesn't just sound beautiful; it conveys the essence, is memorable, and helps the brand stand out. Our naming services will help you find the perfect name."
+            "title": "Toshkentdagi Neyming Xizmatlari | Jon.Branding Agentligi",
+            "description": "Brend uchun esda qolarli va kuchli nom tanlash. Yaxshi nom nafaqat chiroyli eshitiladi; u mohiyatni yetkazadi, esda qoladi va brendning ajralib turishiga yordam beradi. Bizning neyming xizmatlarimiz sizga mukammal nom topishda yordam beradi."
         },
-        "title": "Naming — A Strong Brand Name",
-        "subtitle": "A brand name is the first impression of it, its energy, character, and the idea expressed in a word. A good name doesn't just sound beautiful; it conveys the essence, is memorable, and helps the brand stand out among competitors.",
-        "section1_title": "The name is part of the brand strategy",
-        "section1_p1": "A good name supports associations, recognition, and emotional connection. Creating such a name is a strategic work that takes into account the brand's positioning, the market, the target audience, and the company's long-term goals.",
-        "section1_p2": "We approach naming as an important element of branding. It's not a random collection of ideas, but a thoughtful work where every word has meaning.",
-        "section2_title": "Every strong name starts with an idea",
-        "section2_p1": "Before searching for a name, we ask the main question: what is this brand about? What feelings and images should it evoke? Therefore, we carefully analyze the product, its audience, and the environment to determine the semantic directions for finding the ideal name.",
-        "section2_p2": "It can be built on an emotion, a metaphor, a cultural code, professional language, or even a play on words. The main thing is that it works, conveys the essence, and helps the brand be remembered.",
-        "process_title": "How do we create a name?",
-        "process_subtitle": "In our agency, naming development is a clear process where every stage is important:",
+        "title": "Neyming — Kuchli Brend Nomi",
+        "subtitle": "Brend nomi — bu uning birinchi taassuroti, uning energiyasi, xarakteri va so'zda ifodalangan g'oyasi. Yaxshi nom nafaqat chiroyli eshitiladi, balki mohiyatni yetkazadi, esda qoladi va brendning raqobatchilar orasida ajralib turishiga yordam beradi.",
+        "section1_title": "Nom — bu brend strategiyasining bir qismidir",
+        "section1_p1": "Yaxshi nom assotsiatsiyalarni, tanilishni va hissiy aloqani qo'llab-quvvatlaydi. Bunday nomni yaratish — bu brendning pozitsiyasi, bozor, maqsadli auditoriya va kompaniyaning uzoq muddatli maqsadlarini hisobga olgan strategik ishdir.",
+        "section1_p2": "Biz neymingga brendingning muhim elementi sifatida yondashamiz. Bu tasodifiy g'oyalar to'plami emas, balki har bir so'z ma'noga ega bo'lgan puxta o'ylangan ishdir.",
+        "section2_title": "Har bir kuchli nom g'oyadan boshlanadi",
+        "section2_p1": "Nom qidirishdan oldin biz asosiy savolni beramiz: bu brend nima haqida? U qanday his-tuyg'ular va obrazlarni uyg'otishi kerak? Shu sababli biz mahsulotni, uning auditoriyasini va muhitini diqqat bilan tahlil qilamiz, ideal nomni topish uchun semantik yo'nalishlarni aniqlaymiz.",
+        "section2_p2": "U hissiyot, metafora, madaniy kod, professional til yoki hatto so'z o'yiniga qurilishi mumkin. Asosiysi, u ishlashi, mohiyatni yetkazishi va brendning esda qolishiga yordam berishi kerak.",
+        "process_title": "Biz nomni qanday yaratamiz?",
+        "process_subtitle": "Bizning agentligimizda neymingni ishlab chiqish har bir bosqichi muhim bo'lgan aniq jarayondir:",
         "process_steps": [
-            { "title": "Research", "description": "We study the market, audience, competitors, and semantic directions." },
-            { "title": "Concept formation", "description": "We determine possible vectors for finding a name." },
-            { "title": "Idea generation and testing", "description": "We create a list of options, testing them for sound, meaning, and potential." },
-            { "title": "Verification and finalization", "description": "We analyze the possibility of registration, check domains and associations, and select the best ones." }
+            { "title": "Tadqiqot", "description": "Bozor, auditoriya, raqobatchilar va semantik yo'nalishlarni o'rganamiz." },
+            { "title": "Konsepsiya shakllantirish", "description": "Nomni topish uchun mumkin bo'lgan vektorlarni aniqlaymiz." },
+            { "title": "G'oya generatsiyasi va testlash", "description": "Variantlar ro'yxatini yaratamiz, ularni ovoz, ma'no va potentsial bo'yicha sinovdan o'tkazamiz." },
+            { "title": "Tekshirish va yakunlash", "description": "Ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz, domenlar va assotsiatsiyalarni tekshiramiz va eng yaxshilarini tanlaymiz." }
         ],
-        "check_title": "Verifying a name is as important as creating one",
-        "check_subtitle": "Even a brilliant idea won't work if it can't be registered or has undesirable associations. We check names against several key parameters:",
+        "check_title": "Nomni tekshirish yaratishdan kam emas",
+        "check_subtitle": "Hatto daho g'oya ham, agar uni ro'yxatdan o'tkazib bo'lmasa yoki u istalmagan assotsiatsiyalarga ega bo'lsa, ish bermaydi. Biz nomlarni bir nechta asosiy parametrlar bo'yicha tekshiramiz:",
         "check_points": [
-            { "title": "Legal clarity", "description": "We analyze the possibility of trademark registration." },
-            { "title": "Domains and digital environment", "description": "We check the availability of names in the digital environment." },
-            { "title": "Meaning and associations", "description": "We check readability, sound, possible associative array, cultural perception, and compliance with the brand category." }
+            { "title": "Huquqiy tozalik", "description": "Tovar belgisini ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz." },
+            { "title": "Domenlar va raqamli muhit", "description": "Raqamli muhitda nomlarning mavjudligini tekshiramiz." },
+            { "title": "Ma'no va assotsiatsiyalar", "description": "O'qilishi, jaranglashi, mumkin bo'lgan assotsiativ qator, madaniy idrok va brend kategoriyasiga muvofiqligini tekshiramiz." }
         ],
-        "calculator_cta_button": "Go to Patent Calculator"
+        "calculator_cta_button": "Patent Kalkulyatoriga o'tish"
     },
     "patentCalculatorPage": {
         "metadata": {
-            "title": "Trademark Calculator | Jon.Branding",
-            "description": "Calculate the approximate costs associated with trademark registration (state fees and service charges) in Uzbekistan."
+            "title": "Tovar belgisi kalkulyatori | Jon.Branding",
+            "description": "O'zbekistonda tovar belgisini ro'yxatdan o'tkazish bilan bog'liq taxminiy xarajatlarni (davlat bojlari va xizmat haqi) hisoblang."
         },
-        "title": "Trademark Registration Calculator",
-        "subtitle": "Naming is a creative process, and patenting is a legal one. With the help of a patent specialist on our team, calculate the approximate costs associated with trademark registration (state fees and service charges) here.",
+        "title": "Tovar Belgisini Ro'yxatdan O'tkazish Kalkulyatori",
+        "subtitle": "Neyming (nom tanlash) — ijodiy jarayon, patentlash esa — yuridik. Jamoamizdagi patent mutaxassisi yordamida shu yerda tovar belgisini ro'yxatdan o'tkazish bilan bog'liq taxminiy xarajatlarni (davlat bojlari va xizmat haqi) hisoblang.",
         "trademarkCalculator": {
-            "formTitle": "Enter Details",
-            "brandNameLabel": "Brand Name",
-            "brandNamePlaceholder": "e.g., MyBrand",
-            "yourNameLabel": "Your Name",
-            "yourNamePlaceholder": "Enter your full name",
-            "phoneLabel": "Phone Number",
+            "formTitle": "Ma'lumotlarni kiriting",
+            "brandNameLabel": "Brend nomi",
+            "brandNamePlaceholder": "Masalan: MyBrand",
+            "yourNameLabel": "Sizning ismingiz",
+            "yourNamePlaceholder": "Ism-sharifingizni to'liq kiriting",
+            "phoneLabel": "Telefon raqamingiz",
             "phonePlaceholder": "+998901234567",
-            "classCountLabel": "Number of Activity Classes",
-            "classCountMax": "Max. 45",
-            "personTypeLabel": "Person Type",
+            "classCountLabel": "Faoliyat klasslari soni",
+            "classCountMax": "Maks. 45",
+            "personTypeLabel": "Shaxs turi",
             "personTypeOptions": [
-                { "value": "jismoniy", "label": "Individual" },
-                { "value": "yuridik", "label": "Legal Entity" }
+                { "value": "jismoniy", "label": "Jismoniy shaxs" },
+                { "value": "yuridik", "label": "Yuridik shaxs" }
             ],
-            "speedLabel": "Review Speed",
+            "speedLabel": "Ko'rib chiqish tezligi",
             "speedOptions": [
-                { "value": "oddiy", "label": "Normal (7 months)" , "labelShort": "Normal"},
-                { "value": "tez", "label": "Expedited (1.5 months)", "labelShort": "Expedited" }
+                { "value": "oddiy", "label": "Oddiy (7 oy)", "labelShort": "Oddiy" },
+                { "value": "tez", "label": "Tezlashtirilgan (1.5 oy)", "labelShort": "Tezkor" }
             ],
-            "expertCheckLabel": "Additional Expert Review",
+            "expertCheckLabel": "Qo'shimcha ekspert tekshiruvi",
             "expertCheckOptions": [
-                { "value": "ha", "label": "Enabled" },
-                { "value": "yoq", "label": "Disabled" }
+                { "value": "ha", "label": "Yoqilgan" },
+                { "value": "yoq", "label": "O'chirilgan" }
             ],
-            "activityLabel": "Types of Activity (optional)",
-            "activityPlaceholder": "e.g., design, construction, clothing production...",
-            "activityHelp": "This helps in determining the classes.",
-            "submitButton": "Order Patenting",
-            "submittingButton": "Submitting...",
-            "successMessage": "✅ Order received!",
-            "tryAgainButton": "Calculate Again",
-            "summaryTitle": "Cost Breakdown",
-            "totalCostTitle": "Estimated total cost for a 10-year patent",
-            "currency": "sum",
-            "classLabel": "class",
-            "expertCheckLabelShort": "Expert+",
-            "totalCostNote": "Includes all state fees and service charges",
-            "step1Title": "Step 1 (Initial Payment)",
-            "ourServiceFee": "Our Team's Service Fee",
-            "applicationFee": "Trademark Application Fee",
-            "step1Total": "Step 1 Total",
-            "step2Title": "Step 2 (Certificate Acquisition)",
-            "stateFeeBase": "State Fee (base)",
-            "extraClassesFee": "Extra Classes ({count})",
-            "step2Total": "Step 2 Total",
-            "expediteTitle": "Surcharge for Expedited Review",
-            "expediteBaseFee": "Base (12 BCV + 12% VAT)",
-            "expediteTotal": "Expedited Total",
-            "expertCheckTitle": "Expert Review",
-            "expertBaseFee": "Base (2×BCV)",
-            "expertTotal": "Expert Service Total",
-            "importantNoteTitle": "Important Note",
-            "importantNoteText": "All prices depend on the Base Calculation Value (BCV) set by the Ministry of Justice of the Republic of Uzbekistan and are subject to change. This calculator is not a public offer and is for informational purposes only.",
-            "importantNoteBHM": "The current BCV is {bhm} sum.",
-            "error_brand": "Please enter the brand name.",
-            "error_name": "Please enter your name.",
-            "error_phone": "Please enter a valid phone number.",
-            "error_server": "A server error occurred.",
-            "privacyPolicyText": "I accept the Privacy Policy and consent to the processing of personal data.",
-            "error_privacy": "You must accept the privacy policy.",
-            "success_toast_title": "Success!",
-            "success_toast_desc": "Your request has been received. We will contact you shortly!",
-            "error_toast_title": "Error!",
-            "telegramTitle": "New Patent Application (from calculator)",
-            "notSpecified": "Not specified"
+            "activityLabel": "Faoliyat turlari (ixtiyoriy)",
+            "activityPlaceholder": "Masalan: dizayn, qurilish, kiyim-kechak ishlab chiqarish...",
+            "activityHelp": "Bu klasslarni aniqlashda yordam beradi.",
+            "submitButton": "Patentlashga buyurtma berish",
+            "submittingButton": "Yuborilmoqda...",
+            "successMessage": "✅ Buyurtma qabul qilindi!",
+            "tryAgainButton": "Qayta hisoblash",
+            "summaryTitle": "Xarajatlar tafsiloti",
+            "totalCostTitle": "10 yillik patent uchun taxminiy umumiy xarajat",
+            "currency": "so'm",
+            "classLabel": "klass",
+            "expertCheckLabelShort": "Ekspert+",
+            "totalCostNote": "Barcha davlat bojlari va xizmat haqini o'z ichiga oladi",
+            "step1Title": "1-qadam (Boshlang'ich to'lov)",
+            "ourServiceFee": "Jamoamiz xizmat haqi",
+            "applicationFee": "Talabnoma topshirish boji",
+            "step1Total": "1-qadam jami",
+            "step2Title": "2-qadam (Guvohnoma olish)",
+            "stateFeeBase": "Davlat boji (asosiy)",
+            "extraClassesFee": "Qo'shimcha klasslar ({count} ta)",
+            "step2Total": "2-qadam jami",
+            "expediteTitle": "Tezlashtirilgan ko'rib chiqish uchun qo'shimcha to'lov",
+            "expediteBaseFee": "Asosiy (12 BHM + 12% QQS)",
+            "expediteTotal": "Tezlashtirish jami",
+            "expertCheckTitle": "Ekspert tekshiruvi",
+            "expertBaseFee": "Asosiy (2×BHM)",
+            "expertTotal": "Ekspert xizmati jami",
+            "importantNoteTitle": "Muhim eslatma",
+            "importantNoteText": "Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan Bazaviy Hisoblash Miqdoriga (BHM) bog'liq va o'zgarishi mumkin. Ushbu kalkulyator ommaviy oferta hisoblanmaydi va faqat tanishuv uchun mo'ljallangan.",
+            "importantNoteBHM": "Hozirgi BHM {bhm} so'mni tashkil etadi.",
+            "error_brand": "Iltimos, brend nomini kiriting.",
+            "error_name": "Iltimos, ismingizni kiriting.",
+            "error_phone": "Iltimos, to'g'ri telefon raqam kiriting.",
+            "error_server": "Serverda xatolik yuz berdi.",
+            "privacyPolicyText": "Men Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarni qayta ishlashga rozilik bildiraman.",
+            "error_privacy": "Siz maxfiylik siyosatini qabul qilishingiz kerak.",
+            "success_toast_title": "Muvaffaqiyatli!",
+            "success_toast_desc": "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
+            "error_toast_title": "Xatolik!",
+            "telegramTitle": "Yangi patent arizasi (kalkulyatordan)",
+            "notSpecified": "Kiritilmagan"
         }
     },
     "packagingPage": {
         "metadata": {
-            "title": "Packaging Design Services in Uzbekistan | Jon.Branding",
-            "description": "We don't just create beautiful packaging; we create a powerful marketing tool that sells your product. Our packaging design agency in Uzbekistan will help your brand stand out from competitors and win customers' affection."
+            "title": "O'zbekistondagi Qadoq Dizayni Xizmatlari | Jon.Branding",
+            "description": "Biz shunchaki chiroyli qadoq yaratmaymiz; biz mahsulotingizni sotadigan kuchli marketing vositasini yaratamiz. O'zbekistondagi qadoq dizayn agentligimiz brendingizni raqobatchilardan ajratib turishga va mijozlar mehrini qozonishga yordam beradi."
         },
-        "title": "Packaging Design Development",
-        "subtitle": "In a highly competitive environment, packaging often becomes a key marketing tool. It distinguishes the brand on the shelf, tells its story, and connects with the audience at first glance。",
-        "section1_title": "Packaging is more than just a carrier of brand identity",
-        "section1_p1": "Packaging is the first contact with the brand at points of sale, a visual appeal that instantly creates an impression of the product. In many cases, it is the packaging that determines a person's decision to buy.",
-        "section1_p2": "The goal of our agency is not just to create an aesthetic and beautiful package, but to create an effective tool that meets business objectives and contributes to its growth。",
-        "process_title": "How do we create packaging?",
-        "process_subtitle": "We approach packaging development not as a separate design, but as a complex system that should work for the business and meet audience expectations. Our process includes several key stages:",
+        "title": "Qadoq Dizaynini Ishlab Chiqish",
+        "subtitle": "Yuqori raqobat sharoitida qadoq ko'pincha asosiy marketing vositasiga aylanadi. U brendni javonda ajratib turadi, uning tarixini aytib beradi va birinchi qarashdayoq auditoriya bilan aloqa o'rnatadi.",
+        "section1_title": "Qadoq — bu brend identifikatsiyasining tashuvchisidan ko'prog'i",
+        "section1_p1": "Qadoq — bu sotuv nuqtalarida brend bilan birinchi aloqa, mahsulot haqida bir zumda taassurot yaratadigan vizual murojaat. Ko'p hollarda aynan qadoq odamning sotib olish qarorini belgilaydi.",
+        "section1_p2": "Bizning agentligimizning maqsadi — nafaqat estetik va chiroyli qadoq yaratish, balki biznes vazifalariga javob beradigan va uning o'sishiga hissa qo'shadigan samarali vosita yaratishdir.",
+        "process_title": "Biz qadoqni qanday yaratamiz?",
+        "process_subtitle": "Biz qadoqni ishlab chiqishga alohida dizayn sifatida emas, balki biznes uchun ishlashi va auditoriya kutganlariga javob berishi kerak bo'lgan murakkab tizim sifatida yondashamiz. Bizning jarayonimiz bir nechta asosiy bosqichlarni o'z ichiga oladi:",
         "process_steps": [
-            { "title": "Analysis and strategy", "description": "We study your product, audience, competitors, and the environment in which the packaging is used. We analyze the visual code of the category." },
-            { "title": "Concept and design", "description": "Based on the collected data, we develop visual ideas that reflect the essence of the product: color, graphics, typography, etc." },
-            { "title": "Finalization and preparation", "description": "We thoroughly work out all the technical aspects of the chosen concept (adaptation to different formats, preparation for printing)." }
+            { "title": "Tahlil va strategiya", "description": "Mahsulotingiz, auditoriyangiz, raqobatchilaringiz va qadoq ishlatiladigan muhitni o'rganamiz. Kategoriyaning vizual kodini tahlil qilamiz." },
+            { "title": "Konsepsiya va dizayn", "description": "Yig'ilgan ma'lumotlar asosida mahsulot mohiyatini aks ettiruvchi vizual g'oyalarni ishlab chiqamiz: rang, grafika, tipografiya va h.k." },
+            { "title": "Yakunlash va tayyorlash", "description": "Tanlangan konsepsiyaning barcha texnik jihatlarini (turli formatlarga moslashtirish, chop etishga tayyorlash) puxta ishlab chiqamiz." }
         ],
-        "cta_title": "Packaging doesn't just attract attention, it sells",
-        "cta_description": "Good packaging design is not just beautiful decoration, but a tool that works for the business. We develop a functional, strategically thought-out design where the packaging serves as a full-fledged sales tool."
+        "cta_title": "Qadoq nafaqat e'tiborni tortadi, u sotadi",
+        "cta_description": "Yaxshi qadoq dizayni — bu shunchaki chiroyli bezak emas, balki biznes uchun ishlaydigan vositadir. Biz funksional, strategik jihatdan puxta o'ylangan dizaynni ishlab chiqamiz, unda qadoq to'laqonli savdo vositasi sifatida xizmat qiladi."
     },
     "servicesPage": {
         "metadata": {
-            "title": "Services and Prices | Jon.Branding",
-            "description": "Explore all our services and create a branding package that suits you. Calculate prices instantly with our online calculator."
+            "title": "Xizmatlar va Narxlar | Jon.Branding",
+            "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang."
         },
         "packageBuilder": {
-            "introTitle": "Starting Prices for Branding Services",
-            "introP1": "This page shows the estimated starting prices for our services. Every company is unique, so the final cost depends on the project's complexity, scope of work, and your goals。",
-            "introP2": "These prices will help you understand how much working on your brand might cost。",
-            "introSubtitle": "Как строится работа над брендингом?",
+            "introTitle": "Brending xizmatlarining boshlang'ich narxlari",
+            "introP1": "Ushbu sahifada bizning xizmatlarimiz uchun taxminiy boshlang'ich narxlar ko'rsatilgan. Har bir kompaniya o'ziga xos, shuning uchun yakuniy narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga bog'liq.",
+            "introP2": "Ushbu narxlar brendingiz ustida ishlash qanchaga tushishi mumkinligini tushunishingizga yordam beradi.",
+            "introSubtitle": "Brending ustida ish qanday tuziladi?",
             "introList": [
-                { "icon": "research", "title": "Исследование", "description": "Анализ рынка, аудит конкурентов, изучение целевой аудитории。" },
-                { "icon": "strategy", "title": "Стратегия", "description": "Определение смысла бренда, его позиционирования и ценностей。" },
-                { "icon": "identity", "title": "Разработка идентификации", "description": "Создание логотипа, цветов, шрифтов, графики и визуального стиля。" },
-                { "icon": "communication", "title": "Коммуникация", "description": "Оформление рекламных материалов, брендированных носителей и контента。" }
+                { "icon": "research", "title": "Tadqiqot", "description": "Bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o'rganish." },
+                { "icon": "strategy", "title": "Strategiya", "description": "Brendning ma'nosini, uning pozitsiyasini va qadriyatlarini aniqlash." },
+                { "icon": "identity", "title": "Identifikatsiyani ishlab chiqish", "description": "Logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish." },
+                { "icon": "communication", "title": "Kommunikatsiya", "description": "Reklama materiallari, brendli tashuvchilar va kontentni rasmiylashtirish." }
             ],
-            "title": "Цены и Услуги",
-            "subtitle": "Ознакомьтесь со всеми нашими услугами и создайте пакет брендинга, который вам подходит. Рассчитайте цены мгновенно с помощью нашего онлайн-калькулятора。",
+            "title": "Xizmatlar va Narxlar",
+            "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang.",
             "categories": {
-                "tripwire": "Первый шаг (Быстрые услуги)",
-                "strategy": "Стратегические услуги",
-                "naming": "Нейминг",
-                "identity": "Визуальная айдентика: Лого, Фирменный стиль, Брендбук",
-                "addons": "Дополнительные услуги",
-                "options": "Особые условия",
-                "more_services": "Дополнительные услуги и условия"
+                "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
+                "strategy": "Strategik xizmatlar",
+                "naming": "Neyming",
+                "identity": "Vizual Aydentika: Logo, Firma uslubi, Brendbuk",
+                "addons": "Qo'shimcha xizmatlar",
+                "options": "Maxsus shartlar",
+                "more_services": "Qo'shimcha xizmatlar va shartlar"
             },
-            "discount_alert_title": "Пакетная скидка!",
-            "discount_alert_desc": "Выберите <strong>2 или более</strong> услуг из этого раздела и получите <strong>-20% скидку</strong> от общей суммы!",
-            "your_package": "Ваш пакет",
-            "your_package_desc": "Выберите подходящие вам услуги。",
-            "selected_services_title": "Выбранные услуги",
-            "cost_calculation_title": "Расчет стоимости",
-            "select_services": "Выберите услуги",
-            "empty_package_title": "Ваш идеальный пакет начинается здесь",
-            "empty_package_desc": "Выберите услуги или начните с нашего самого популярного предложения。",
-            "empty_package_cta": "Добавить лучшее предложение",
-            "best_start": "Лучший старт!",
-            "best_start_desc": "Попробуйте наш самый популярный пакет: Нейминг + Логотип",
-            "selected": "Выбрано",
-            "select": "Выбрать",
-            "services_total": "Итого по услугам:",
-            "base_price": "Начальная цена",
-            "upfront_discount_title": "Скидка -10% за предоплату",
-            "upfront_discount_desc": "Внесите 100% предоплату за проект",
+            "discount_alert_title": "Paketli Chegirma!",
+            "discount_alert_desc": "Ushbu bo'limdan <strong>2 yoki undan ortiq</strong> xizmatni tanlang va umumiy summadan <strong>-20% chegirma</strong> oling!",
+            "your_package": "Sizning paketingiz",
+            "your_package_desc": "O'zingizga mos xizmatlarni tanlang.",
+            "selected_services_title": "Tanlangan xizmatlar",
+            "cost_calculation_title": "Narxni hisoblash",
+            "select_services": "Xizmatlarni tanlang",
+            "empty_package_title": "Sizning mukammal paketingiz shu yerdan boshlanadi",
+            "empty_package_desc": "Xizmatlarni tanlang yoki bizning eng ommabop taklifimizdan boshlang.",
+            "empty_package_cta": "Eng yaxshi taklifni qo'shish",
+            "best_start": "Eng yaxshi start!",
+            "best_start_desc": "Eng ommabop paketimizni sinab ko'ring: Neyming + Logotip",
+            "selected": "Tanlandi",
+            "select": "Tanlash",
+            "services_total": "Xizmatlar jami:",
+            "base_price": "Boshlang'ich narx",
+            "upfront_discount_title": "Oldindan to'lov uchun -10% chegirma",
+            "upfront_discount_desc": "Loyiha uchun 100% oldindan to'lov qiling",
             "upfront_discount_options": {
-                "yes": "Да",
-                "no": "Нет"
+                "yes": "Ha",
+                "no": "Yo'q"
             },
-            "final_price": "Итоговая цена:",
-            "order_with_discount": "Заказ со скидкой",
-            "get_free_consultation": "Получить бесплатную консультацию",
-            "satisfaction_guarantee": "100% Гарантия Удовлетворенности",
-            "satisfaction_guarantee_desc": "Если вам не понравятся первоначальные концепции, мы вернем вам деньги。",
-            "not_public_offer": "Это не публичная оферта",
-            "not_public_offer_desc": "Цены указаны для ознакомления. Окончательная цена будет зафиксирована в договоре。",
-            "total_savings": "Ваша общая экономия",
-            "gift_title": "Подарок!",
-            "agreed_price": "По догов.",
-            "currency": "сум",
-            "recommended": "Рекомендуемый"
+            "final_price": "Yakuniy narx:",
+            "order_with_discount": "Chegirma bilan buyurtma",
+            "get_free_consultation": "Bepul konsultatsiya olish",
+            "satisfaction_guarantee": "100% Mamnuniyat Kafolati",
+            "satisfaction_guarantee_desc": "Agar sizga dastlabki konsepsiyalar yoqmasa, biz to'lovingizni qaytarib beramiz.",
+            "not_public_offer": "Bu ommaviy oferta emas",
+            "not_public_offer_desc": "Narxlar tanishuv uchun ko'rsatilgan. Yakuniy narx shartnomada belgilanadi.",
+            "total_savings": "Sizning umumiy tejamingiz",
+            "gift_title": "Sovg'a!",
+            "agreed_price": "Kelishiladi",
+            "currency": "so'm",
+            "recommended": "Tavsiya etiladi"
         },
         "comparison": {
-            "title": "Us vs. Competitors",
-            "description": "We provide high-quality branding services at much more affordable prices than premium agencies. And the result will be even better than you expect。",
-            "features": "Характеристики",
-            "whyPremiumTitle": "Why only premium agencies?",
-            "whyPremiumDesc": "We compare ourselves only with top-tier companies that have a strategic approach. Our goal is not just to be cheaper, but to provide premium quality at an affordable price. Comparing with agencies that do not match our level of quality and strategy would be incorrect for both the client and us。",
-            "ctaTitle": "You've seen the difference. Now it's time to choose!",
-            "ctaDesc": "You don't have to overpay for quality branding. Make the right decision for your business and contact us。",
-            "ctaButton": "I need this approach"
+            "title": "Biz va Raqobatchilar",
+            "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklarga qaraganda ancha arzon narxlarda taqdim etamiz. Natija esa siz kutganingizdan ham yaxshiroq bo'ladi.",
+            "features": "Xususiyatlar",
+            "whyPremiumTitle": "Nega faqat premium agentliklar?",
+            "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Bizning maqsadimiz — nafaqat arzonroq bo'lish, balki premium sifatni hamyonbop narxda taqdim etish. Sifat va strategiya bo'yicha bizning darajamizga mos kelmaydigan agentliklar bilan solishtirish ham mijoz uchun, ham biz uchun noto'g'ri bo'lardi.",
+            "ctaTitle": "Farqni ko'rdingiz. Endi tanlash vaqti!",
+            "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling va biz bilan bog'laning.",
+            "ctaButton": "Menga shunday yondashuv kerak"
         }
     },
     "pickTwoSelector": {
-      "title": "Pick two of the three",
-      "subtitle": "Price—Quality—Speed: you can rarely have all three at the same time。",
-      "ctaText": "Request a Quote",
+      "title": "Uchtasidan ikkitasini tanlang",
+      "subtitle": "Narx—Sifat—Tezlik: kamdan-kam hollarda uchalasini bir vaqtda ololmaysiz.",
+      "ctaText": "Taklif so'rash",
       "options": {
-        "cheap": "Cheap",
-        "quality": "Quality",
-        "fast": "Fast"
+        "cheap": "Arzon",
+        "quality": "Sifatli",
+        "fast": "Tez"
       },
       "messages": {
-        "cheap_fast": "Quality may not be consistent. This option is suitable for urgent and budget projects。",
-        "cheap_quality": "You will have to wait longer for the result. We will adapt to your budget and work on a first-come, first-served basis to ensure quality。",
-        "quality_fast": "The price will be higher. A +50% surcharge is applied to the standard price for urgent projects (2-3 days). We will mobilize the team and prioritize your deadline。",
-        "default": "Please select the 2 most important priorities for you。"
+        "cheap_fast": "Sifat barqaror bo'lmasligi mumkin. Bu variant shoshilinch va byudjetli loyihalar uchun mos keladi.",
+        "cheap_quality": "Natijani uzoqroq kutishga to'g'ri keladi. Biz sizning byudjetingizga moslashamiz va sifatni ta'minlash uchun navbat asosida ishlaymiz.",
+        "quality_fast": "Narx yuqoriroq bo'ladi. Shoshilinch loyihalar (2-3 kun) uchun standart narxga +50% ustama qo'llaniladi. Biz jamoani safarbar qilamiz va sizning dedlayningizga ustunlik beramiz.",
+        "default": "Iltimos, siz uchun eng muhim 2 ta ustuvorlikni tanlang."
       },
-      "tooltip": "Deselect one first"
+      "tooltip": "Avval birini bekor qiling"
     },
     "exitIntentModal": {
-        "title": "Don't leave yet!",
-        "description": "We have a special offer for you. <br/>We have <span class='font-bold text-primary'>various discounts</span> available. Seize the opportunity!",
-        "button": "View Discounts"
+        "title": "Hali ketmang!",
+        "description": "Siz uchun maxsus taklifimiz bor. <br/>Bizda <span class='font-bold text-primary'>turli chegirmalar</span> mavjud. Imkoniyatdan foydalaning!",
+        "button": "Chegirmalarni ko'rish"
     },
     "queueStatus": {
-        "subtitle": "Места ограничены",
-        "title": "Скорее! Забронируйте свое место!",
-        "description": "Мы уделяем время каждому проекту, чтобы обеспечить высокое качество. Поэтому мы работаем только с ограниченным количеством проектов одновременно.",
-        "queueTitle": "Очередь проектов",
-        "booked": "Занято",
-        "available": "Свободно",
-        "tooltipBooked": "Место занято",
-        "tooltipAvailable": "Вы можете записаться в очередь",
-        "remainingSlots": "Оставшиеся свободные места",
-        "slotsUnit": "места",
-        "onlineNow": "Сейчас на сайте",
-        "peopleUnit": "человек",
-        "nextProjectStart": "Начало следующего проекта",
-        "ctaButton": "Забронировать свое место",
-        "ctaSubtitle": "Будьте на шаг впереди своих конкурентов!",
+        "subtitle": "Joylar cheklangan",
+        "title": "Shoshiling! O'z joyingizni band qiling!",
+        "description": "Biz har bir loyihaga yuqori sifatni ta'minlash uchun vaqt ajratamiz. Shu sababli, biz bir vaqtning o'zida faqat cheklangan miqdordagi loyihalar bilan ishlaymiz.",
+        "queueTitle": "Loyihalar navbati",
+        "booked": "Band",
+        "available": "Bo'sh",
+        "tooltipBooked": "Joy band qilingan",
+        "tooltipAvailable": "Siz navbatga yozilishingiz mumkin",
+        "remainingSlots": "Qolgan bo'sh joylar",
+        "slotsUnit": "ta",
+        "onlineNow": "Hozir saytda",
+        "peopleUnit": "kishi",
+        "nextProjectStart": "Keyingi loyiha boshlanishi",
+        "ctaButton": "Joyimni band qilish",
+        "ctaSubtitle": "Raqobatchilaringizdan bir qadam oldinda bo'ling!",
         "timeframes": {
-            "2 weeks": "через 2 недели"
+            "2 weeks": "2 hafta ichida"
         }
     }
 }
