@@ -52,7 +52,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Sherzod Beknazarov",
     company: "Incontrol Consulting asoschisi",
     avatar: "SB",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
+    image: "https://img3.teletype.in/files/f4/19/f419b480-1a1a-472e-8367-12c8b0e8b2b6.jpeg",
     imageHint: "male business owner",
     quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
@@ -61,7 +61,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Sevara Xolmanova",
     company: "Fidda by Sevara asoschisi",
     avatar: "SX",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
+    image: "https://img2.teletype.in/files/a2/e5/a2e5d953-b090-482a-a957-c46b5d92120b.jpeg",
     imageHint: "female entrepreneur portrait",
     quote: "Men bu jamoa bn ishlab ko'rdim menga juda yoqdi samarali va natijasi siz kutgandanda A'lo bo'larkan brendlashni xam stikerlash va patenlashni xam berganman 7 oyda aniq boladi Hudo xohlasa Halol ishlarkansilar Allox rozi bo'lsin silardan juda xursand bo'ldim ishilarga rivoj Rahmat."
   },
@@ -69,7 +69,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Nodirbek",
     company: "Barakah Restoran asoschisi",
     avatar: "N",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
+    image: "https://img1.teletype.in/files/e9/87/e987c32e-5036-41f2-b88a-2c8153c3933c.jpeg",
     imageHint: "restaurant manager portrait",
     quote: "Esingizda bo'lsa, 3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Sizlarga katta rahmat, ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka! 🤝🏻😊"
   },
@@ -77,7 +77,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Javohir Haqberdiyev",
     company: "Perfona asoschisi",
     avatar: "JH",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/67480e63648c1fa51ca4adff_A5%20-%201.jpg",
+    image: "https://img2.teletype.in/files/06/ab/06abe383-29a3-4877-90c7-e31b143493e9.jpeg",
     imageHint: "tech startup founder",
     quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!"
   },
@@ -97,7 +97,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Шерзод Бекназаров",
     company: "Основатель Incontrol Consulting",
     avatar: "ШБ",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
+    image: "https://img3.teletype.in/files/f4/19/f419b480-1a1a-472e-8367-12c8b0e8b2b6.jpeg",
     imageHint: "male business owner",
     quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
@@ -106,7 +106,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Севара Холманова",
     company: "Основательница Fidda by Sevara",
     avatar: "СХ",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
+    image: "https://img2.teletype.in/files/a2/e5/a2e5d953-b090-482a-a957-c46b5d92120b.jpeg",
     imageHint: "female entrepreneur portrait",
     quote: "Я работала с этой командой, мне очень понравилось. Эффективно, и результат превзошел все ожидания. Я заказывала и брендинг, и стикеры, и патентование. Через 7 месяцев, даст Бог, все будет готово. Вы работаете честно, да будет доволен вами Аллах. Я очень рада, успехов в вашей работе. Спасибо."
   },
@@ -114,7 +114,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Нодирбек",
     company: "Основатель ресторана Barakah",
     avatar: "Н",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
+    image: "https://img1.teletype.in/files/e9/87/e987c32e-5036-41f2-b88a-2c8153c3933c.jpeg",
     imageHint: "restaurant manager portrait",
     quote: "Если помните, 3 года назад вы разработали логотип для этого бренда. Огромное вам спасибо, получилось великолепно, действительно все хвалят. Большое спасибо, Бахтиёр ака! 🤝🏻😊"
   },
@@ -122,7 +122,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Джавохир Хакбердиев",
     company: "Основатель Perfona",
     avatar: "ДХ",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/67480e63648c1fa51ca4adff_A5%20-%201.jpg",
+    image: "https://img2.teletype.in/files/06/ab/06abe383-29a3-4877-90c7-e31b143493e9.jpeg",
     imageHint: "tech startup founder",
     quote: "Получилось даже лучше, чем я ожидал. Сейчас смотрю на логотип и сам наслаждаюсь. Что мне понравилось — это доверие. И то, что сдали раньше срока, было здорово. Отлично, что быстро поделились результатами. Большое спасибо, ака!"
   },
@@ -142,7 +142,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Sherzod Beknazarov",
     company: "Founder of Incontrol Consulting",
     avatar: "SB",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
+    image: "https://img3.teletype.in/files/f4/19/f419b480-1a1a-472e-8367-12c8b0e8b2b6.jpeg",
     imageHint: "male business owner",
     quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
@@ -151,7 +151,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Sevara Kholmanova",
     company: "Founder of Fidda by Sevara",
     avatar: "SK",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
+    image: "https://img2.teletype.in/files/a2/e5/a2e5d953-b090-482a-a957-c46b5d92120b.jpeg",
     imageHint: "female entrepreneur portrait",
     quote: "I worked with this team and I really liked it, it was effective and the result was even better than I expected. I ordered branding, stickers, and patenting. In 7 months, God willing, it will be ready. You work honestly, may Allah be pleased with you. I am very happy, success to your work. Thank you."
   },
@@ -159,7 +159,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Nodirbek",
     company: "Founder of Barakah Restaurant",
     avatar: "N",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
+    image: "https://img1.teletype.in/files/e9/87/e987c32e-5036-41f2-b88a-2c8153c3933c.jpeg",
     imageHint: "restaurant manager portrait",
     quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! 🤝🏻😊"
   },
@@ -167,7 +167,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Javohir Haqberdiyev",
     company: "Founder of Perfona",
     avatar: "JH",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/67480e63648c1fa51ca4adff_A5%20-%201.jpg",
+    image: "https://img2.teletype.in/files/06/ab/06abe383-29a3-4877-90c7-e31b143493e9.jpeg",
     imageHint: "tech startup founder",
     quote: "It turned out even better than I expected. I'm looking at the logo now and I'm enjoying it myself. What I liked was the trust. And the fact that it was delivered ahead of schedule was great. It's great that you shared the results quickly. Thanks a lot, aka!"
   },
@@ -187,7 +187,7 @@ export const staticTestimonialsZh: Testimonial[] = [
     name: "Sherzod Beknazarov (舍尔佐德·别克纳扎罗夫)",
     company: "Incontrol Consulting 创始人",
     avatar: "SB",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6889ad93216bbf489283543b_photo_2025-07-29_18-13-15.jpg",
+    image: "https://img3.teletype.in/files/f4/19/f419b480-1a1a-472e-8367-12c8b0e8b2b6.jpeg",
     imageHint: "male business owner",
     quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
@@ -196,7 +196,7 @@ export const staticTestimonialsZh: Testimonial[] = [
     name: "Sevara Kholmanova (塞瓦拉·霍尔玛诺娃)",
     company: "Fidda by Sevara 创始人",
     avatar: "SK",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/6870dc24eb7c5e3e218d41be_photo_2025-07-11_14-39-49-p-1080.jpg",
+    image: "https://img2.teletype.in/files/a2/e5/a2e5d953-b090-482a-a957-c46b5d92120b.jpeg",
     imageHint: "female entrepreneur portrait",
     quote: "我和这个团队合作过，我非常喜欢，效率很高，结果甚至比我预期的还要好。我订购了品牌塑造、贴纸和专利申请。7个月后，如果上帝愿意，一切都会准备好。你们工作很诚实，愿真主喜悦你们。我很高兴，祝你们工作顺利。谢谢。"
   },
@@ -204,7 +204,7 @@ export const staticTestimonialsZh: Testimonial[] = [
     name: "Nodirbek (诺迪尔别克)",
     company: "Barakah 餐厅创始人",
     avatar: "N",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/673806bc7ef0810b3f78b5db_photo_2024-11-16_07-42-43.jpg",
+    image: "https://img1.teletype.in/files/e9/87/e987c32e-5036-41f2-b88a-2c8153c3933c.jpeg",
     imageHint: "restaurant manager portrait",
     quote: "如果你还记得，3年前你为这个品牌设计了标志。非常感谢，做得太棒了，每个人都赞不绝口。非常感谢，巴赫蒂约尔大哥！🤝🏻😊"
   },
@@ -212,7 +212,7 @@ export const staticTestimonialsZh: Testimonial[] = [
     name: "Javohir Haqberdiyev (贾沃希尔·哈克别尔季耶夫)",
     company: "Perfona 创始人",
     avatar: "JH",
-    image: "https://cdn.prod.website-files.com/6732e36be7888a23d003ba42/67480e63648c1fa51ca4adff_A5%20-%201.jpg",
+    image: "https://img2.teletype.in/files/06/ab/06abe383-29a3-4877-90c7-e31b143493e9.jpeg",
     imageHint: "tech startup founder",
     quote: "结果比我预期的还要好。我现在看着标志，自己也很享受。我喜欢的是信任。而且它提前交付了，这很棒。你们能快速分享结果，这太好了。非常感谢，大哥！"
   },
@@ -253,8 +253,8 @@ export const projects: Project[] = [
         oldHint: "",
         newHint: "",
         galleryImages: [
-            { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif', alt: 'Animatsion logo', hint: 'animated logo' },
-            { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/67513d8fe1caee5495e0f9bd_ezgif-6-3f24b1faa6.gif', alt: 'Animatsion logo 2', hint: 'gif logo' }
+            { src: 'https://img4.teletype.in/files/2f/ab/2fabc269-e317-4389-8d75-47e29789304e.png', alt: 'Animatsion logo', hint: 'animated logo' },
+            { src: 'https://img3.teletype.in/files/70/41/704146a7-4b72-4632-9c3a-231a3138b320.png', alt: 'Animatsion logo 2', hint: 'gif logo' }
         ]
     },
     {
