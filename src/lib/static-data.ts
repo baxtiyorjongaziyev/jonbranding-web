@@ -253,8 +253,8 @@ export const projects: Project[] = [
         oldHint: "",
         newHint: "",
         galleryImages: [
-            { src: 'https://img4.teletype.in/files/2f/ab/2fabc269-e317-4389-8d75-47e29789304e.png', alt: 'Animatsion logo', hint: 'animated logo' },
-            { src: 'https://img3.teletype.in/files/70/41/704146a7-4b72-4632-9c3a-231a3138b320.png', alt: 'Animatsion logo 2', hint: 'gif logo' }
+            { src: 'https://img4.teletype.in/files/2f/ab/2fabc269-e317-4389-8d75-47e29789304e.gif', alt: 'Animatsion logo', hint: 'animated logo' },
+            { src: 'https://img3.teletype.in/files/70/41/704146a7-4b72-4632-9c3a-231a3138b320.gif', alt: 'Animatsion logo 2', hint: 'gif logo' }
         ]
     },
     {
