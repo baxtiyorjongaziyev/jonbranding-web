@@ -12,8 +12,8 @@
         "naming_desc": "Choosing a memorable, strong, and legally clear name for your brand.",
         "logo_design": "Logo Design",
         "logo_design_desc": "Creating a unique and memorable sign that reflects the essence of your business.",
-        "corporate_style": "Corporate Identity",
-        "corporate_style_desc": "A system of logos, colors, and fonts that makes your brand recognizable.",
+        "brandbook": "Brandbook",
+        "brandbook_desc": "A document that describes the rules for using your brand's identity.",
         "packaging_design": "Packaging Design",
         "packaging_design_desc": "Attractive design that will make your product stand out on the shelf.",
         "services_and_prices": "Services & Prices",
@@ -39,6 +39,7 @@
         "services": "Our Services",
         "brand_strategy": "Brand Strategy",
         "naming": "Naming",
+        "brandbook": "Brandbook",
         "logo_design": "Logo Design",
         "corporate_style": "Corporate Identity",
         "packaging_design": "Packaging Design",
@@ -54,6 +55,35 @@
     "cookieConsent": {
         "message": "Our website uses delicious cookies. They help us remember you. If you agree, let's share them together.",
         "acceptButton": "I'll eat them"
+    },
+    "brandbookPage": {
+        "metadata": {
+            "title": "Brandbook Development | Jon.Branding Agency",
+            "description": "A brandbook is the constitution of your brand. We create comprehensive brandbooks that ensure the consistency of your brand and save on marketing costs.",
+            "keywords": "brandbook, guideline, corporate identity, brand design, logo usage rules, branding agency"
+        },
+        "title": "Brandbook Development",
+        "subtitle": "A brandbook is not just a document with logos, it is the constitution of your brand, which ensures its consistency and integrity.",
+        "section1_title": "Why does every business need a brandbook?",
+        "section1_p1": "A brandbook is a key tool for managing a brand. It clearly defines all the rules for using the visual and ideological elements of your company - from the logo and colors to the tone of communication.",
+        "section1_p2": "This document helps to avoid chaos in marketing, ensures brand recognition, and saves time and money when working with designers, marketers, and other contractors.",
+        "values_title": "A brandbook solves these problems:",
+        "values": [
+            { "title": "Consistency and Recognition", "description": "Ensures that your brand looks the same and professional on all platforms - from a business card to a website." },
+            { "title": "Resource Savings", "description": "Eliminates the need to explain the design rules to each new employee or contractor, speeding up the work process." },
+            { "title": "Brand Protection", "description": "Protects your identity from incorrect use, preserving the integrity and value of your brand." }
+        ],
+        "process_title": "What does a brandbook include?",
+        "process_subtitle": "Our brandbooks contain all the necessary sections for effective brand management:",
+        "process_steps": [
+            { "title": "Brand Platform", "description": "Mission, values, brand character, and target audience." },
+            { "title": "Logo and Identity", "description": "Rules for using the logo, corporate colors, and fonts." },
+            { "title": "Visual Style", "description": "Rules for using photos, illustrations, and graphic elements." },
+            { "title": "Practical Application", "description": "Examples of design for real media (business cards, presentations, social media)." }
+        ],
+        "cta_title": "Ready to bring order to your brand?",
+        "cta_description": "A professional brandbook is an investment in the stable future of your business. Let's create a document that will become your reliable assistant.",
+        "cta_button": "Order a Brandbook"
     },
     "popularPackages": {
         "title": "Most Popular Packages",
@@ -814,3 +844,5 @@
         }
     }
 }
+
+    
