@@ -21,11 +21,11 @@ interface HeroProps {
 }
 
 const portfolioImages = [
-  'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif',
-  'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/67513d8fe1caee5495e0f9bd_ezgif-6-3f24b1faa6.gif',
   'https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png',
   'https://img2.teletype.in/files/17/9c/179c7811-8cf7-4ee9-87ad-66709208b115.png',
-  'https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png'
+  'https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png',
+  'https://img4.teletype.in/files/ff/50/ff50be41-df24-49fa-95e7-7d50a7840f3e.png',
+  'https://img2.teletype.in/files/9c/fc/9cfc9326-cfdc-4a0f-8262-9a69bdd6f0a2.png',
 ];
 
 
@@ -98,6 +98,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                                                 objectFit="cover"
                                                 unoptimized={src.endsWith('.gif')}
                                                 className="bg-white"
+                                                priority
                                             />
                                         </div>
                                     </CarouselItem>
