@@ -77,7 +77,7 @@ const BrandbookPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://picsum.photos/seed/brandbook-guide/800/600"
+                                src="https://images.unsplash.com/photo-1581080247486-57989c1f14ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsb2dvJTIwZ3VpZGVsaW5lc3xlbnwwfHx8fDE3NjU0NTA2NTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
                                 width={800}
                                 height={600}
                                 data-ai-hint="brandbook guide document"
