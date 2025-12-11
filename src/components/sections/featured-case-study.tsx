@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -9,7 +10,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
     const caseData = {
         uz: {
             title: "Nega ba'zi brendlar qimmat sota oladi, sizniki esa yo'q?",
-            description: "Javob oddiy: ular shunchaki mahsulot sotmaydi, ular **tajriba, obro' va ishonch** sotadi. Bularning barchasi kuchli brending orqali yaratiladi.",
+            description: "Javob oddiy: ular shunchaki mahsulot sotmaydi, ular <strong>tajriba, obro' va ishonch</strong> sotadi. Bularning barchasi kuchli brending orqali yaratiladi.",
             case_desc: "'Den Aroma' misolida biz oddiy atir do'konini premium boutique'ga aylantirdik. Natijada ular endi yuqori narxda sota oladi, 'qimmat' degan e'tirozlarsiz.",
             buttonText: "Batafsil ma'lumot",
             videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1",
@@ -22,7 +23,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
         },
         ru: {
             title: "Почему одни бренды могут продавать дорого, а ваш — нет?",
-            description: "Ответ прост: они продают не просто продукт, они продают **опыт, репутацию и доверие**. Все это создается через сильный брендинг.",
+            description: "Ответ прост: они продают не просто продукт, они продают <strong>опыт, репутацию и доверие</strong>. Все это создается через сильный брендинг.",
             case_desc: "На примере 'Den Aroma' мы превратили обычный парфюмерный магазин в премиальный бутик. В результате они теперь могут продавать по высокой цене, без возражений 'дорого'.",
             buttonText: "Подробнее",
             videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1",
@@ -35,7 +36,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
         },
         en: {
             title: "Why can some brands sell at a premium, but yours can't?",
-            description: "The answer is simple: they don't just sell a product; they sell an **experience, reputation, and trust**. All of this is created through strong branding.",
+            description: "The answer is simple: they don't just sell a product; they sell an <strong>experience, reputation, and trust</strong>. All of this is created through strong branding.",
             case_desc: "Using 'Den Aroma' as an example, we transformed an ordinary perfume shop into a premium boutique. As a result, they can now sell at a high price without 'it's expensive' objections.",
             buttonText: "Learn More",
             videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1",
@@ -68,7 +69,16 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                             <p className="mt-4 text-blue-200" dangerouslySetInnerHTML={{ __html: t.description }} />
                             <p className="mt-4 text-blue-200">{t.case_desc}</p>
                             
-                            <Button onClick={handleCtaClick} className="mt-8 bg-white text-primary hover:bg-gray-200">
+                            <ul className="mt-6 space-y-2">
+                                {t.results.map((result: string, index: number) => (
+                                    <li key={index} className="flex items-center gap-3 text-green-300">
+                                        <CheckCircle className="w-5 h-5" />
+                                        <span className="font-medium">{result}</span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <Button onClick={handleCtaClick} className="mt-8 bg-accent text-white hover:bg-accent/90">
                                 {t.ctaButton}
                                 <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
@@ -92,3 +102,5 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
 }
 
 export default FeaturedCaseStudy;
+
+    
