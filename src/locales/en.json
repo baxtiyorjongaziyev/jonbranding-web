@@ -14,6 +14,8 @@
         "logo_design_desc": "Creating a unique and memorable sign that reflects the essence of your business.",
         "brandbook": "Brandbook",
         "brandbook_desc": "A document that describes the rules for using your brand's identity.",
+        "corporate_style": "Corporate Identity",
+        "corporate_style_desc": "A system of logos, colors, and fonts that makes your brand recognizable.",
         "packaging_design": "Packaging Design",
         "packaging_design_desc": "Attractive design that will make your product stand out on the shelf.",
         "services_and_prices": "Services & Prices",
@@ -245,31 +247,31 @@
     "serviceSections": {
         "services": [
             {
-                "id": "brand-strategy",
-                "title": "Brand Strategy",
-                "description": "The foundation for your brand — analysis, positioning, and communication.",
-                "buttonText": "Read More"
-            },
-            {
-                "id": "logo-design",
-                "title": "Logo Design",
-                "description": "Creating a unique and memorable sign that reflects the essence of your business.",
-                "buttonText": "Read More"
-            },
-            {
                 "id": "naming",
                 "title": "Naming",
                 "description": "Choosing a memorable and strong name for a brand.",
                 "buttonText": "Read More"
             },
             {
-                "id": "corporate-style",
+                "id": "logo-dizayni",
+                "title": "Logo Design",
+                "description": "Creating a unique and memorable sign that reflects the essence of your business.",
+                "buttonText": "Read More"
+            },
+            {
+                "id": "firmenniy-stil",
                 "title": "Corporate Identity",
                 "description": "A system of logos, colors, and fonts that makes your brand recognizable.",
                 "buttonText": "Read More"
             },
             {
-                "id": "packaging-design",
+                "id": "brandbook",
+                "title": "Brandbook",
+                "description": "A document that describes the rules for using your brand's identity.",
+                "buttonText": "Read More"
+            },
+            {
+                "id": "qadoq-dizayni",
                 "title": "Packaging Design",
                 "description": "Attractive design that will make your product stand out on the shelf.",
                 "buttonText": "Read More"

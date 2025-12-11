@@ -2,7 +2,7 @@
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Image } from 'lucide-react';
+import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Image, Book } from 'lucide-react';
 
 const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) => {
   const sortedPosts = getSortedPostsData(lang);
@@ -25,11 +25,13 @@ const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) =
       title: t.sections.services,
       icon: Settings,
       links: [
+        { href: '/xizmatlar/neyming', label: t.links.naming, icon: ScanText },
+        { href: '/xizmatlar/logo-dizayni', label: t.links.logo_design, icon: Paintbrush },
+        { href: '/xizmatlar/firmenniy-stil', label: t.links.corporate_style, icon: Paintbrush },
+        { href: '/xizmatlar/brandbook', label: t.links.brandbook, icon: Book },
+        { href: '/xizmatlar/qadoq-dizayni', label: t.links.packaging_design, icon: Package },
         { href: '/xizmatlar', label: t.links.services_prices, icon: List },
         { href: '/xizmatlar/brand-strategy', label: t.links.brand_strategy, icon: BrainCircuit },
-        { href: '/xizmatlar/neyming', label: t.links.naming, icon: ScanText },
-        { href: '/xizmatlar/firmenniy-stil', label: t.links.corporate_style, icon: Paintbrush },
-        { href: '/xizmatlar/qadoq-dizayni', label: t.links.packaging_design, icon: Package },
         { href: '/xizmatlar/patent-kalkulyatori', label: t.links.patent_calculator, icon: PenSquare },
         { href: '/pricing/sotuvchi-kartochka', label: t.links.marketplace_cover, icon: Image },
       ],
@@ -81,3 +83,5 @@ const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) =
 };
 
 export default SitemapPage;
+
+    
