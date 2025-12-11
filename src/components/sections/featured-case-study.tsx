@@ -58,10 +58,10 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
     return (
         <section className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4">
-                <Card className="max-w-6xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl overflow-hidden">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                        <div className="p-8 lg:p-12">
-                            <div className="flex items-center gap-2 text-sm font-semibold text-accent uppercase tracking-wider mb-4">
+                <Card className="max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl overflow-hidden p-8 lg:p-12">
+                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                        <div className="text-center lg:text-left">
+                             <div className="flex items-center justify-center lg:justify-start gap-2 text-sm font-semibold text-accent uppercase tracking-wider mb-4">
                                 <CaseUpper className="w-5 h-5"/>
                                 <span>Case Study: Den Aroma</span>
                             </div>
@@ -69,7 +69,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                             <p className="mt-4 text-blue-200" dangerouslySetInnerHTML={{ __html: t.description }} />
                             <p className="mt-4 text-blue-200">{t.case_desc}</p>
                             
-                            <ul className="mt-6 space-y-2">
+                            <ul className="mt-6 space-y-2 text-left max-w-md mx-auto lg:mx-0">
                                 {t.results.map((result: string, index: number) => (
                                     <li key={index} className="flex items-center gap-3 text-green-300">
                                         <CheckCircle className="w-5 h-5" />
@@ -83,15 +83,17 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                                 <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
                         </div>
-                        <div className="relative w-full h-full min-h-[450px] p-4 lg:p-0">
-                            <div className="w-full h-full rounded-2xl overflow-hidden shadow-2xl">
-                                <iframe
-                                    src={t.videoUrl}
-                                    frameBorder="0"
-                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                                    className="w-full h-full aspect-video"
-                                    title="Den Aroma Case Study Video"
-                                ></iframe>
+                        <div className="w-full max-w-sm mx-auto">
+                            <div className="bg-black/20 p-2 rounded-2xl">
+                                <div className="w-full aspect-[9/16] rounded-xl overflow-hidden shadow-2xl">
+                                    <iframe
+                                        src={t.videoUrl}
+                                        frameBorder="0"
+                                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                                        className="w-full h-full"
+                                        title="Den Aroma Case Study Video"
+                                    ></iframe>
+                                </div>
                             </div>
                         </div>
                     </div>
