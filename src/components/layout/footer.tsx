@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Logo } from '@/components/icons/logo';
-import { ArrowUp, Instagram, Send } from 'lucide-react';
+import { ArrowUp, Instagram, Linkedin, Send } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, FC } from 'react';
@@ -141,11 +141,14 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             </motion.div>
            
            <div className="flex items-center gap-6 order-1 sm:order-2">
-             <a href="https://www.instagram.com/jon.branding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+             <a href="https://instagram.com/baxtiyorjongaziyev" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                <Instagram size={20} />
              </a>
-             <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+             <a href="https://t.me/baxtiyorjongaziyev" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                <Send size={20} />
+             </a>
+              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+               <Linkedin size={20} />
              </a>
            </div>
 
@@ -167,5 +170,3 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 };
 
 export default Footer;
-
-    
