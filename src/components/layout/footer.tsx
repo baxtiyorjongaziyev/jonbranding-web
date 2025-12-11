@@ -23,6 +23,7 @@ type Dictionary = {
     brandbook: string;
     packaging_design: string;
     logo_design: string;
+    corporate_style: string;
     additional: string;
     service_prices: string;
     branding_test: string;
@@ -47,9 +48,9 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   ];
 
   const serviceLinks = [
-      { href: `/${lang}/xizmatlar/brand-strategy`, label: dictionary.brand_strategy },
       { href: `/${lang}/xizmatlar/neyming`, label: dictionary.naming },
       { href: `/${lang}/xizmatlar/logo-dizayni`, label: dictionary.logo_design },
+      { href: `/${lang}/xizmatlar/firmenniy-stil`, label: dictionary.corporate_style },
       { href: `/${lang}/xizmatlar/brandbook`, label: dictionary.brandbook },
       { href: `/${lang}/xizmatlar/qadoq-dizayni`, label: dictionary.packaging_design },
   ];
@@ -166,3 +167,5 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 };
 
 export default Footer;
+
+    

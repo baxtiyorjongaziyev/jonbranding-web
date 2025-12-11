@@ -247,31 +247,31 @@
     "serviceSections": {
         "services": [
             {
-                "id": "brand-strategy",
-                "title": "品牌策略",
-                "description": "您品牌的基础 — 分析、定位和传播。",
-                "buttonText": "阅读更多"
-            },
-            {
-                "id": "logo-design",
-                "title": "标志设计",
-                "description": "创建一个独特且令人难忘的标志，以反映您业务的精髓。",
-                "buttonText": "阅读更多"
-            },
-            {
                 "id": "naming",
                 "title": "命名",
                 "description": "为品牌选择一个难忘且强大的名称。",
                 "buttonText": "阅读更多"
             },
             {
-                "id": "corporate-style",
+                "id": "logo-dizayni",
+                "title": "标志设计",
+                "description": "创建一个独特且令人难忘的标志，以反映您业务的精髓。",
+                "buttonText": "阅读更多"
+            },
+            {
+                "id": "firmenniy-stil",
                 "title": "企业形象",
                 "description": "一个使您的品牌易于识别的标志、颜色和字体系统。",
                 "buttonText": "阅读更多"
             },
             {
-                "id": "packaging-design",
+                "id": "brandbook",
+                "title": "品牌手册",
+                "description": "一份描述您品牌形象使用规则的文件。",
+                "buttonText": "阅读更多"
+            },
+            {
+                "id": "qadoq-dizayni",
                 "title": "包装设计",
                 "description": "吸引人的设计，使您的产品在货架上脱颖而出。",
                 "buttonText": "阅读更多"

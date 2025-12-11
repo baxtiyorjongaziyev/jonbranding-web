@@ -247,31 +247,31 @@
     "serviceSections": {
         "services": [
             {
-                "id": "brand-strategy",
-                "title": "Brend Strategiyasi",
-                "description": "Brendingiz uchun poydevor — tahlil, pozitsiyalash va kommunikatsiya.",
-                "buttonText": "Ko'proq o'qish"
-            },
-            {
-                "id": "logo-design",
-                "title": "Logotip Dizayni",
-                "description": "Biznesingiz mohiyatini aks ettiruvchi noyob va esda qolarli belgi yaratish.",
-                "buttonText": "Ko'proq o'qish"
-            },
-            {
                 "id": "naming",
                 "title": "Neyming",
                 "description": "Brend uchun unutilmas va kuchli nom tanlash.",
                 "buttonText": "Ko'proq o'qish"
             },
             {
-                "id": "corporate-style",
+                "id": "logo-dizayni",
+                "title": "Logotip Dizayni",
+                "description": "Biznesingiz mohiyatini aks ettiruvchi noyob va esda qolarli belgi yaratish.",
+                "buttonText": "Ko'proq o'qish"
+            },
+            {
+                "id": "firmenniy-stil",
                 "title": "Firma Uslubi",
                 "description": "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
                 "buttonText": "Ko'proq o'qish"
             },
             {
-                "id": "packaging-design",
+                "id": "brandbook",
+                "title": "Brendbuk",
+                "description": "Brendingiz aydentikasidan foydalanish qoidalarini tavsiflovchi hujjat.",
+                "buttonText": "Ko'proq o'qish"
+            },
+            {
+                "id": "qadoq-dizayni",
                 "title": "Qadoq Dizayni",
                 "description": "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
                 "buttonText": "Ko'proq o'qish"

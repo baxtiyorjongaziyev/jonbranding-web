@@ -10,11 +10,11 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Skeleton } from '../ui/skeleton';
 
 const serviceIcons: { [key: string]: React.ElementType } = {
-    'brand-strategy': BrainCircuit,
     'naming': ScanText,
+    'logo-dizayni': Fingerprint,
+    'firmenniy-stil': Paintbrush,
     'brandbook': Book,
-    'packaging-design': Package,
-    'logo-design': Fingerprint,
+    'qadoq-dizayni': Package,
 };
 
 const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
@@ -35,11 +35,11 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
     }
 
     const orderedServices = [
-        translations.services.find((s: any) => s.id === 'brand-strategy'),
         translations.services.find((s: any) => s.id === 'naming'),
-        translations.services.find((s: any) => s.id === 'logo-design'),
+        translations.services.find((s: any) => s.id === 'logo-dizayni'),
+        translations.services.find((s: any) => s.id === 'firmenniy-stil'),
         translations.services.find((s: any) => s.id === 'brandbook'),
-        translations.services.find((s: any) => s.id === 'packaging-design'),
+        translations.services.find((s: any) => s.id === 'qadoq-dizayni'),
     ].filter(Boolean);
     
     return (
@@ -73,3 +73,5 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
 };
 
 export default ServiceSections;
+
+    
