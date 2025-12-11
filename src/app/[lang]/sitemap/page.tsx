@@ -83,5 +83,3 @@ const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) =
 };
 
 export default SitemapPage;
-
-    
