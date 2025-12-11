@@ -3,7 +3,7 @@ title: "Premium Narx Olmoqchimisiz? Brendingiz Premium Bo'lishi Kerak"
 description: "'3 atirchi'dan Den Aroma'ga: Qanday qilib to'liq rebranding o'rtacha chekni oshirdi va e'tirozlarni yo'q qildi."
 date: "2024-12-11"
 author: "Baxtiyorjon Gaziyev"
-image: "https://img1.teletype.in/files/4e/d7/4ed7845f-6eeb-4528-894b-07b985d1a0d1.jpeg"
+image: "https://img1.teletype.in/files/81/55/8155bf93-39f5-45b3-b996-55115f926e79.jpeg"
 imageHint: "perfume branding"
 ---
 
