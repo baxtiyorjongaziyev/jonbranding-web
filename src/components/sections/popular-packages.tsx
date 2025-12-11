@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -99,7 +100,7 @@ const PopularPackages: FC<PopularPackagesProps> = ({ lang, onSelectPackage }) =>
                             </div>
                             <div className="text-sm font-semibold text-accent">{translations.upfrontDiscount}</div>
 
-                             <Button onClick={handleCtaClick} size="lg" className="w-full mt-6 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg text-base">
+                             <Button onClick={handleCtaClick} size="lg" className="w-full mt-6 bg-accent text-white hover:bg-accent/90 shadow-lg text-base">
                                 {translations.ctaButton} <ArrowRight className="w-4 h-4 ml-2"/>
                             </Button>
                         </div>
