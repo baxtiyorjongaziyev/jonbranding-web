@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -10,50 +9,37 @@ import { ArrowRight, CaseUpper } from 'lucide-react';
 const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any}) => {
     const caseData = {
         uz: {
-            title: "Noldan mashhurlikkacha: Den Aroma",
-            description: "'3 atirchi'dan premium brendga aylanish hikoyasi. Qanday qilib to'g'ri rebranding o'rtacha chekni 60%ga oshirdi va mijozlar e'tirozlarini keskin kamaytirdi.",
-            buttonText: "Keys-stadini to'liq o'qish",
-            videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa&autoplay=1&muted=1&loop=1&background=1"
+            title: "Premium brend = Premium narx",
+            description: "Mahsulot yoki xizmatingizni premium narxda sotmoqchimisiz? Unda hamma narsa premium bo'lishi kerak. Brend nomingizdan tortib, logotipingizgacha, mebeldan tortib xizmat ko'rsatishgacha, qadoq dizaynlaridan paket dizaynlarigacha — hamma narsasi. Biz Den Aroma brendiga nom tanlash, logotip, firma uslubi va brendbuklarini ishlab chiqishda yordam berdik. Natijada o'rta chek oshdi, 'qimmat' degan e'tirozlar kamaydi va mijozlarda brendga nisbatan ishonch ortdi.",
+            buttonText: "Batafsil ma'lumot",
+            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
         },
         ru: {
-            title: "С нуля до популярности: Den Aroma",
-            description: "История превращения из '3 парфюмеров' в премиум-бренд. Как правильный ребрендинг увеличил средний чек на 60% и резко сократил возражения клиентов.",
-            buttonText: "Читать кейс-стади полностью",
-            videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa&autoplay=1&muted=1&loop=1&background=1"
+            title: "Премиум бренд = Премиум цена",
+            description: "Хотите продавать свой продукт или услугу по премиальной цене? Тогда все должно быть премиальным. От названия вашего бренда до логотипа, от мебели до обслуживания, от дизайна упаковки до пакетов — все. Мы помогли бренду Den Aroma с выбором названия, разработкой логотипа, фирменного стиля и брендбука. В результате средний чек вырос, возражения 'дорого' уменьшились, а доверие клиентов к бренду возросло.",
+            buttonText: "Подробнее",
+            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
         },
         en: {
-            title: "From Zero to Hero: Den Aroma",
-            description: "The story of transformation from '3 perfumers' to a premium brand. How proper rebranding increased the average check by 60% and drastically reduced customer objections.",
-            buttonText: "Read the full case study",
-            videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa&autoplay=1&muted=1&loop=1&background=1"
+            title: "Premium Brand = Premium Price",
+            description: "Want to sell your product or service at a premium price? Then everything has to be premium. From your brand name to your logo, from furniture to service, from packaging design to bags. We helped the Den Aroma brand with naming, logo design, corporate identity, and brandbooks. As a result, the average check increased, 'it's expensive' objections decreased, and customer trust in the brand grew.",
+            buttonText: "Learn More",
+            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"
         }
     };
     const t = caseData[lang as keyof typeof caseData] || caseData.uz;
+    
+    const handleCtaClick = () => {
+        const event = new CustomEvent('openContactModal');
+        window.dispatchEvent(event);
+    }
 
     return (
         <section className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4">
                 <Card className="max-w-5xl mx-auto bg-gradient-to-br from-dark-blue to-blue-950 text-white rounded-3xl shadow-2xl overflow-hidden">
-                    <div className="grid grid-cols-1 lg:grid-cols-2">
-                        <div className="p-8 sm:p-12 flex flex-col justify-center">
-                            <CardHeader className="p-0 mb-4">
-                                <div className="flex items-center gap-2 text-sm font-semibold text-accent uppercase tracking-wider mb-2">
-                                    <CaseUpper className="w-5 h-5"/>
-                                    <span>Case Study</span>
-                                </div>
-                                <CardTitle className="text-3xl font-extrabold text-white">{t.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-0">
-                                <p className="text-blue-200">{t.description}</p>
-                                <Button asChild className="mt-6 bg-white text-primary hover:bg-gray-200">
-                                    <Link href={`/${lang}/blog/den-aroma-case-study`}>
-                                        {t.buttonText}
-                                        <ArrowRight className="ml-2 h-4 w-4" />
-                                    </Link>
-                                </Button>
-                            </CardContent>
-                        </div>
-                        <div className="relative min-h-[300px] lg:min-h-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-1">
+                         <div className="relative min-h-[300px] lg:min-h-0 w-full aspect-video">
                              <iframe
                                 src={t.videoUrl}
                                 frameBorder="0"
@@ -61,6 +47,22 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                                 className="absolute inset-0 w-full h-full"
                                 title="Den Aroma Case Study Video"
                             ></iframe>
+                        </div>
+                        <div className="p-8 sm:p-12 flex flex-col justify-center text-center">
+                            <CardHeader className="p-0 mb-4">
+                                <div className="flex items-center justify-center gap-2 text-sm font-semibold text-accent uppercase tracking-wider mb-2">
+                                    <CaseUpper className="w-5 h-5"/>
+                                    <span>Case Study</span>
+                                </div>
+                                <CardTitle className="text-3xl font-extrabold text-white">{t.title}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="p-0">
+                                <p className="text-blue-200 max-w-3xl mx-auto">{t.description}</p>
+                                <Button onClick={handleCtaClick} className="mt-6 bg-white text-primary hover:bg-gray-200">
+                                    {t.buttonText}
+                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                </Button>
+                            </CardContent>
                         </div>
                     </div>
                 </Card>
