@@ -1,7 +1,7 @@
 ---
 title: "Top 5 Logo Design Mistakes for Small Businesses"
 description: "A logo is the face of a business. What mistakes do small business owners often make, and how can they be avoided? In this article, we provide practical advice."
-date: "2024-08-05"
+date: "2025-08-05"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://images.unsplash.com/photo-1668775589972-3aa874ea191b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzbWFsbCUyMGJ1c2luZXNzJTIwbG9nb3xlbnwwfHx8fDE3NTg2NDkwMzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
 imageHint: "logo design mistakes"

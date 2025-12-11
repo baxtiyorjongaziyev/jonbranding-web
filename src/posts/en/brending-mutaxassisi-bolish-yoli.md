@@ -1,7 +1,7 @@
 ---
 title: "9 Years of Experience: What is the Path to Becoming a Branding Specialist?"
 description: "The field of branding may seem glamorous from the outside, but what lies beneath? Get to know the secrets of this field through the personal experience of the founder of Jon.Branding."
-date: "2024-07-27"
+date: "2025-07-27"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/expert-journey/1200/630"
 imageHint: "expert journey path"

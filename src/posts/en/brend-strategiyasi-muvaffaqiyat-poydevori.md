@@ -1,7 +1,7 @@
 ---
 title: "Brand Strategy: The Foundation for Success"
 description: "What is brand strategy and why is it vital for every business? In this article, we show that branding without a strategy is just a collection of pretty pictures."
-date: "2024-08-06"
+date: "2025-08-06"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/brand-strategy-foundation/1200/630"
 imageHint: "chess strategy board"

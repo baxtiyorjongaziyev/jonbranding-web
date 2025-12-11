@@ -1,7 +1,7 @@
 ---
 title: "What is Brand Identity and How Does It Affect Business?"
 description: "Brand identity is more than just a logo. It's the visual look and soul of your business. Learn about its role in business success."
-date: '2024-07-31'
+date: '2025-07-31'
 author: 'Bakhtiyorjon Gaziyev'
 image: 'https://picsum.photos/seed/brand-identity/1200/630'
 imageHint: 'brand identity moodboard'

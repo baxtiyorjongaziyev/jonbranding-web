@@ -1,7 +1,7 @@
 ---
 title: "What is a Brandbook and why does EVERY business need one?"
 description: "A brandbook is not just a collection of logos; it's the Constitution of your brand. Learn about its role in organizing your business and saving marketing costs."
-date: '2024-07-29'
+date: '2025-07-29'
 author: 'Bakhtiyorjon Gaziyev'
 image: 'https://picsum.photos/seed/brandbook-guide/1200/630'
 imageHint: 'brandbook guide document'

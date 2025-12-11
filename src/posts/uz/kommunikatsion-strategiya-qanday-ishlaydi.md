@@ -1,7 +1,7 @@
 ---
 title: "Kommunikatsion strategiya: Mijozlar bilan qanday til topishish kerak?"
 description: "Brendingiz bor, lekin mijozlar bilan muloqotda nimadir yetishmayaptimi? Kommunikatsion strategiya — bu sizning brendingiz va auditoriyangiz o'rtasidagi ko'prik. Uning qanday ishlashini bilib oling."
-date: "2024-08-06"
+date: "2025-08-06"
 author: "Baxtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/communication-strategy/1200/630"
 imageHint: "communication bridge people"

@@ -1,7 +1,7 @@
 ---
 title: "Business 'Packaging': More Than Just a Wrapper"
 description: "We often hear the term 'business packaging.' But what does it really mean? Is it just about beautiful design, or is there a deeper strategy behind it? Let's figure it out."
-date: "2024-08-07"
+date: "2025-08-07"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://images.unsplash.com/photo-1633533452148-a9657d2c9a5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxicmFuZCUyMGlkZW50aXR5JTIwcGFja2FnZSUyMGRlc2lnbnxlbnwwfHx8fDE3NjU0NTEyNjl8MA&ixlib=rb-4.1.0&q=80&w=1080"
 imageHint: "business packaging strategy"
