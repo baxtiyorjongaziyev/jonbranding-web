@@ -5,7 +5,7 @@ export const Logo = ({ isWhite = false, className }: { isWhite?: boolean, classN
     <div className={cn("flex items-center", className)}>
         <div className="flex flex-col items-center">
             <span className={cn("text-xl font-bold tracking-tighter leading-none", isWhite ? "text-white" : "text-dark-blue")}>
-                Jon.Branding
+                Jon<span className={cn(isWhite ? "text-sky-blue" : "text-accent")}>.</span>Branding
             </span>
             <span className={cn("text-xs font-medium tracking-widest uppercase w-full text-center", isWhite ? "text-white/80" : "text-muted-foreground")}>
                 Agency
