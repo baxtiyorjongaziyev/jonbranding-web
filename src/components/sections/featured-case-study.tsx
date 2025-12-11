@@ -13,7 +13,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             description: "Javob oddiy: ular shunchaki mahsulot sotmaydi, ular <strong>tajriba, obro' va ishonch</strong> sotadi. Bularning barchasi kuchli brending orqali yaratiladi.",
             case_desc: "'Den Aroma' misolida biz oddiy atir do'konini premium boutique'ga aylantirdik. Natijada ular endi yuqori narxda sota oladi, 'qimmat' degan e'tirozlarsiz.",
             buttonText: "Batafsil ma'lumot",
-            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1",
+            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
             ctaButton: "Mening brendim uchun ham",
             results: [
                 "O'rtacha chekning 60% ga oshishi",
@@ -26,7 +26,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             description: "Ответ прост: они продают не просто продукт, они продают <strong>опыт, репутацию и доверие</strong>. Все это создается через сильный брендинг.",
             case_desc: "На примере 'Den Aroma' мы превратили обычный парфюмерный магазин в премиальный бутик. В результате они теперь могут продавать по высокой цене, без возражений 'дорого'.",
             buttonText: "Подробнее",
-            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1",
+            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
             ctaButton: "И для моего бренда",
             results: [
                 "Увеличение среднего чека на 60%",
@@ -39,7 +39,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             description: "The answer is simple: they don't just sell a product; they sell an <strong>experience, reputation, and trust</strong>. All of this is created through strong branding.",
             case_desc: "Using 'Den Aroma' as an example, we transformed an ordinary perfume shop into a premium boutique. As a result, they can now sell at a high price without 'it's expensive' objections.",
             buttonText: "Learn More",
-            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1",
+            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
             ctaButton: "For my brand too",
             results: [
                 "60% increase in average check",
@@ -102,5 +102,3 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
 }
 
 export default FeaturedCaseStudy;
-
-    
