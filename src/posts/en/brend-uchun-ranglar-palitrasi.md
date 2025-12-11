@@ -1,7 +1,7 @@
 ---
 title: "How to choose the perfect color palette for a brand?"
 description: "Colors are not just decoration; they evoke emotions and convey information about your brand. Learn how to strengthen your brand by choosing the right color palette."
-date: '2024-07-29'
+date: '2025-07-29'
 author: 'Bakhtiyorjon Gaziyev'
 image: 'https://picsum.photos/seed/color-palette/1200/630'
 imageHint: 'color palette swatches'

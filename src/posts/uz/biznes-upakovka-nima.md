@@ -1,7 +1,7 @@
 ---
 title: "Biznes 'upakovka': Shunchaki o'ramdan ko'prog'i"
 description: "Biz tez-tez 'biznesni upakovka qilish' atamasini eshitamiz. Lekin bu aslida nimani anglatadi? Bu shunchaki chiroyli dizaynmi yoki uning ortida chuqur strategiya yotibdimi? Keling, aniqlik kiritamiz."
-date: "2024-08-07"
+date: "2025-08-07"
 author: "Baxtiyorjon Gaziyev"
 image: "https://images.unsplash.com/photo-1633533452148-a9657d2c9a5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxicmFuZCUyMGlkZW50aXR5JTIwcGFja2FnZSUyMGRlc2lnbnxlbnwwfHx8fDE3NjU0NTEyNjl8MA&ixlib=rb-4.1.0&q=80&w=1080"
 imageHint: "business packaging strategy"

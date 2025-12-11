@@ -1,7 +1,7 @@
 ---
 title: "Ijtimoiy tarmoqlar uchun dizayn: Nega shablonlar brendingizni 'o'ldiradi'?"
 description: "Instagram yoki Facebook sahifangiz brendingizning yuzimi yoki shunchaki rasmlar to'plamimi? Ijtimoiy tarmoqlar uchun ishlab chiqilgan maxsus stil nima uchun muhim va u qanday yaratiladi?"
-date: "2024-08-06"
+date: "2025-08-06"
 author: "Baxtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/social-media-design/1200/630"
 imageHint: "social media feed design"

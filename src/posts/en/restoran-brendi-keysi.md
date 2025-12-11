@@ -1,7 +1,7 @@
 ---
 title: "From Scratch to Popularity: How We Created a Brand for a Local Restaurant (Case Study)"
 description: "The process of turning an ordinary cafe into one of the most popular restaurants in Tashkent. In this case study, we reveal the strategy, design, and marketing approaches we applied."
-date: "2024-08-03"
+date: "2025-08-03"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/restaurant-case-study/1200/630"
 imageHint: "restaurant interior design"

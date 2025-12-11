@@ -1,7 +1,7 @@
 ---
 title: "The Naming Process: How is the Right Name Chosen for a Brand?"
 description: "A brand name is one of your most valuable assets. How does the process of choosing an effective and legally clean name work? Get acquainted with the naming process at our agency."
-date: "2024-08-02"
+date: "2025-08-02"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/naming-process/1200/630"
 imageHint: "naming process brainstorm"

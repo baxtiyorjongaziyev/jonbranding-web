@@ -1,7 +1,7 @@
 ---
 title: "Дизайн для социальных сетей: Почему шаблоны 'убивают' ваш бренд?"
 description: "Ваша страница в Instagram или Facebook — это лицо вашего бренда или просто набор картинок? Почему важен специальный стиль для социальных сетей и как он создается?"
-date: "2024-08-06"
+date: "2025-08-06"
 author: "Бахтиёржон Газиев"
 image: "https://picsum.photos/seed/social-media-design/1200/630"
 imageHint: "social media feed design"

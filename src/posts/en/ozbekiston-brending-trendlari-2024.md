@@ -1,7 +1,7 @@
 ---
 title: "Branding Trends in Uzbekistan in 2024: What to Pay Attention To?"
 description: "The market is changing, and so are customer demands. What branding trends will be relevant in the Uzbekistan market in 2024? What should you pay attention to so as not to fall behind competitors?"
-date: "2024-07-28"
+date: "2025-07-28"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/branding-trends-2024/1200/630"
 imageHint: "branding trends abstract"

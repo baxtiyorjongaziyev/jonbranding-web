@@ -1,7 +1,7 @@
 ---
 title: "Social Media Design: Why Templates 'Kill' Your Brand?"
 description: "Is your Instagram or Facebook page the face of your brand or just a collection of pictures? Why is a special style for social media important and how is it created?"
-date: "2024-08-06"
+date: "2025-08-06"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/social-media-design/1200/630"
 imageHint: "social media feed design"

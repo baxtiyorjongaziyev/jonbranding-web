@@ -1,7 +1,7 @@
 ---
 title: "Premium Narx Olmoqchimisiz? Brendingiz Premium Bo'lishi Kerak"
 description: "'3 atirchi'dan Den Aroma'ga: Qanday qilib to'liq rebranding o'rtacha chekni oshirdi va e'tirozlarni yo'q qildi."
-date: "2024-12-11"
+date: "2025-12-11"
 author: "Baxtiyorjon Gaziyev"
 image: "https://img1.teletype.in/files/81/55/8155bf93-39f5-45b3-b996-55115f926e79.jpeg"
 imageHint: "perfume branding"
@@ -182,14 +182,14 @@ Biz jamoani o'rgatdik:
 
 ### 1. O'rtacha chek 60% oshdi
 
-Ilgari: 300,000 so'm  
+Ilgari: 300,000 so'm
 Hozir: 480,000 so'm (va ko'paymoqda)
 
 Nega? Chunki mijozlar endi qiymatni **ko'rishadi**.
 
 ### 2. "Qimmat" e'tirozlari 80% kamaydi
 
-Ilgari: Har 10 mijozdan 7 tasi "qimmat" derdi  
+Ilgari: Har 10 mijozdan 7 tasi "qimmat" derdi
 Hozir: Har 10 mijozdan 1-2 tasi
 
 Nega? Chunki premium ko'rinish premium narxni oqlaydi.
@@ -330,8 +330,8 @@ Agar siz:
 
 ...unda sizga **to'liq brend identifikatsiyasi** kerak.
 
-Faqat logo emas.  
-Faqat qadoq emas.  
+Faqat logo emas.
+Faqat qadoq emas.
 **Hamma narsa.**
 
 ---
@@ -340,14 +340,14 @@ Faqat qadoq emas.
 
 Biz Jon Branding'da **to'liq brend identifikatsiyasi** yaratamiz:
 
-✓ Brend strategiyasi  
-✓ Neyming (agar kerak bo'lsa)  
-✓ Logo va vizual identifikatsiya  
-✓ Brendbuk  
-✓ Qadoq dizayni  
-✓ Marketing materiallari  
-✓ Veb-sayt dizayni  
-✓ Ijtimoiy tarmoq shablonlari  
+✓ Brend strategiyasi
+✓ Neyming (agar kerak bo'lsa)
+✓ Logo va vizual identifikatsiya
+✓ Brendbuk
+✓ Qadoq dizayni
+✓ Marketing materiallari
+✓ Veb-sayt dizayni
+✓ Ijtimoiy tarmoq shablonlari
 ✓ Xizmat ko'rsatish standartlari
 
 **9+ yillik tajriba. 500+ mijoz. 1000+ loyiha.**
@@ -396,9 +396,9 @@ Va men har doim bir xil javob beraman:
 
 To'g'ri savol: **"Zaif brend sizga qancha turadi?"**
 
-Har bir yo'qolgan mijoz.  
-Har bir "qimmat" degan etirozdan keyin yo'qolgan savdo.  
-Har bir arzon narxga berilgan premium mahsulot.  
+Har bir yo'qolgan mijoz.
+Har bir "qimmat" degan etirozdan keyin yo'qolgan savdo.
+Har bir arzon narxga berilgan premium mahsulot.
 Har bir yo'qolgan imkoniyat (franchayzing, kengayish, korporativ mijozlar).
 
 **Shu narsalar sizga qancha turadi?**
@@ -433,20 +433,20 @@ Sizning navbatingiz.
 
 ---
 
-**Baxtiyorjon Gaziyev**  
-Branding mutaxassisi  
+**Baxtiyorjon Gaziyev**
+Branding mutaxassisi
 Jon Branding asoschisi va art-direktori
 
 Telefon: +998336450097
 Telegram profil: @baxtiyorjon_gaziyev
 
-Ijtimoiy tarmoqlarda sahifalarim:  
-🔝 Telegram (http://t.me/baxtiyorjongaziyev) | 🌐 Instagram (http://instagram.com/baxtiyorjongaziyev) |🌐 LinkedIn (https://www.linkedin.com/in/baxtiyorjongaziyev/)
+Ijtimoiy tarmoqlarda sahifalarim:
+🔝 [Telegram](http://t.me/baxtiyorjongaziyev) | 🌐 [Instagram](http://instagram.com/baxtiyorjongaziyev) |🌐 [LinkedIn](https://www.linkedin.com/in/baxtiyorjongaziyev/)
 
 
 ---
 
-*Blog yozilgan sana: 11 Dekabr 2024*  
+*Blog yozilgan sana: 11 Dekabr 2025*
 *O'qish vaqti: 12 daqiqa*
 
 ---

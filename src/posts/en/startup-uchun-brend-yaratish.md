@@ -1,7 +1,7 @@
 ---
 title: "How to Create a Brand for a Startup? 7 Important Steps"
 description: "You have a great idea, but you don't know how to present it to the market? This guide will help you create a strong and memorable brand from scratch."
-date: '2024-08-01'
+date: '2025-08-01'
 author: 'Bakhtiyorjon Gaziyev'
 image: 'https://picsum.photos/seed/startup-branding/1200/630'
 imageHint: 'startup rocket launch'

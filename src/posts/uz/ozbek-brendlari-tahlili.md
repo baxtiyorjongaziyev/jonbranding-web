@@ -1,7 +1,7 @@
 ---
 title: "O'zbek brendlari: Muvaffaqiyat sirlari va xatolar tahlili (Case Study)"
 description: "Nega ba'zi o'zbek brendlari yillar davomida muvaffaqiyat qozonadi, boshqalari esa unutiladi? Ushbu maqolada biz mahalliy brendlar misolida ularning strategiyalarini tahlil qilamiz."
-date: "2024-08-04"
+date: "2025-08-04"
 author: "Baxtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/uzbek-brands/1200/630"
 imageHint: "Uzbekistan market brands"

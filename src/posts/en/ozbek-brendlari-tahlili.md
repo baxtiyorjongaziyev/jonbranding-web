@@ -1,7 +1,7 @@
 ---
 title: "Uzbek Brands: Analysis of Success Secrets and Mistakes (Case Study)"
 description: "Why do some Uzbek brands succeed for years while others are forgotten? In this article, we analyze the strategies of local brands through their examples."
-date: "2024-08-04"
+date: "2025-08-04"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/uzbek-brands/1200/630"
 imageHint: "Uzbekistan market brands"

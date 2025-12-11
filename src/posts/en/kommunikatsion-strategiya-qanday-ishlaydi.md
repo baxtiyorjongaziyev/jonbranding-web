@@ -1,7 +1,7 @@
 ---
 title: "Communication Strategy: How to Find a Common Language with Customers?"
 description: "You have a brand, but something is missing in your communication with customers? A communication strategy is the bridge between your brand and your audience. Find out how it works."
-date: "2024-08-06"
+date: "2025-08-06"
 author: "Bakhtiyorjon Gaziyev"
 image: "https://picsum.photos/seed/communication-strategy/1200/630"
 imageHint: "communication bridge people"
