@@ -173,51 +173,6 @@ export const staticTestimonialsEn: Testimonial[] = [
   },
 ];
 
-export const staticTestimonialsZh: Testimonial[] = [
-  {
-    name: "易卜拉欣·马哈马德约诺夫",
-    company: "Den Aroma 创始人",
-    avatar: "IM",
-    image: "https://img1.teletype.in/files/4e/d7/4ed7845f-6eeb-4528-894b-07b985d1a0d1.jpeg",
-    imageHint: "male founder portrait",
-    quote: "",
-    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
-  },
-  {
-    name: "Sherzod Beknazarov (舍尔佐德·别克纳扎罗夫)",
-    company: "Incontrol Consulting 创始人",
-    avatar: "SB",
-    image: "https://img3.teletype.in/files/f4/19/f419b480-1a1a-472e-8367-12c8b0e8b2b6.jpeg",
-    imageHint: "male business owner",
-    quote: "",
-    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
-  },
-  {
-    name: "Sevara Kholmanova (塞瓦拉·霍尔玛诺娃)",
-    company: "Fidda by Sevara 创始人",
-    avatar: "SK",
-    image: "https://img2.teletype.in/files/a2/e5/a2e5d953-b090-482a-a957-c46b5d92120b.jpeg",
-    imageHint: "female entrepreneur portrait",
-    quote: "我和这个团队合作过，我非常喜欢，效率很高，结果甚至比我预期的还要好。我订购了品牌塑造、贴纸和专利申请。7个月后，如果上帝愿意，一切都会准备好。你们工作很诚实，愿真主喜悦你们。我很高兴，祝你们工作顺利。谢谢。"
-  },
-  {
-    name: "Nodirbek (诺迪尔别克)",
-    company: "Barakah 餐厅创始人",
-    avatar: "N",
-    image: "https://img1.teletype.in/files/e9/87/e987c32e-5036-41f2-b88a-2c8153c3933c.jpeg",
-    imageHint: "restaurant manager portrait",
-    quote: "如果你还记得，3年前你为这个品牌设计了标志。非常感谢，做得太棒了，每个人都赞不绝口。非常感谢，巴赫蒂约尔大哥！🤝🏻😊"
-  },
-  {
-    name: "Javohir Haqberdiyev (贾沃希尔·哈克别尔季耶夫)",
-    company: "Perfona 创始人",
-    avatar: "JH",
-    image: "https://img2.teletype.in/files/06/ab/06abe383-29a3-4877-90c7-e31b143493e9.jpeg",
-    imageHint: "tech startup founder",
-    quote: "结果比我预期的还要好。我现在看着标志，自己也很享受。我喜欢的是信任。而且它提前交付了，这很棒。你们能快速分享结果，这太好了。非常感谢，大哥！"
-  },
-];
-
 
 export const projects: Project[] = [
     { 
@@ -227,7 +182,7 @@ export const projects: Project[] = [
         oldHint: "old logo design", 
         newHint: "modern new logo",
         galleryImages: [
-            { src: 'https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png', alt: 'Fidda Logotipi', hint: 'modern minimalist logo' }
+            { src: 'https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png', alt: 'Fidda Logotipi', hint: 'modern minimalist logo', unoptimized: false }
         ]
     },
     { 
@@ -253,8 +208,8 @@ export const projects: Project[] = [
         oldHint: "",
         newHint: "",
         galleryImages: [
-            { src: 'https://img4.teletype.in/files/2f/ab/2fabc269-e317-4389-8d75-47e29789304e.gif', alt: 'Animatsion logo', hint: 'animated logo' },
-            { src: 'https://img3.teletype.in/files/70/41/704146a7-4b72-4632-9c3a-231a3138b320.gif', alt: 'Animatsion logo 2', hint: 'gif logo' }
+            { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/6747f48137e17a98411d6346_LOGO.gif', alt: 'Animatsion logo', hint: 'animated logo', unoptimized: true },
+            { src: 'https://cdn.prod.website-files.com/6732e36be7888a23d003baac/67513d8fe1caee5495e0f9bd_ezgif-6-3f24b1faa6.gif', alt: 'Animatsion logo 2', hint: 'gif logo', unoptimized: true }
         ]
     },
     {
@@ -264,12 +219,12 @@ export const projects: Project[] = [
         oldHint: "",
         newHint: "",
         galleryImages: [
-            { src: 'https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png', alt: 'Loyiha 4', hint: 'corporate style' },
-            { src: 'https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg', alt: 'Loyiha 5', hint: 'brandbook example' },
-            { src: 'https://img1.teletype.in/files/88/92/8892f18d-a298-485d-8fe5-7d0444defd89.png', alt: 'Loyiha 3', hint: 'branding identity' },
-            { src: 'https://img2.teletype.in/files/19/49/1949747d-4381-489d-87bf-753a9fac573a.jpeg', alt: 'Loyiha 7', hint: 'website branding' },
-            { src: 'https://img1.teletype.in/files/83/c2/83c2c300-af89-482e-8052-15189ac22aff.jpeg', alt: 'Loyiha 6', hint: 'logo concept' },
-            { src: 'https://img2.teletype.in/files/51/45/5145b60e-aca5-4225-8564-a4d601a148a7.jpeg', alt: 'Loyiha 8', hint: 'minimalist logo' },
+            { src: 'https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png', alt: 'Loyiha 4', hint: 'corporate style', unoptimized: false },
+            { src: 'https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg', alt: 'Loyiha 5', hint: 'brandbook example', unoptimized: false },
+            { src: 'https://img1.teletype.in/files/88/92/8892f18d-a298-485d-8fe5-7d0444defd89.png', alt: 'Loyiha 3', hint: 'branding identity', unoptimized: false },
+            { src: 'https://img2.teletype.in/files/19/49/1949747d-4381-489d-87bf-753a9fac573a.jpeg', alt: 'Loyiha 7', hint: 'website branding', unoptimized: false },
+            { src: 'https://img1.teletype.in/files/83/c2/83c2c300-af89-482e-8052-15189ac22aff.jpeg', alt: 'Loyiha 6', hint: 'logo concept', unoptimized: false },
+            { src: 'https://img2.teletype.in/files/51/45/5145b60e-aca5-4225-8564-a4d601a148a7.jpeg', alt: 'Loyiha 8', hint: 'minimalist logo', unoptimized: false },
         ]
     }
 ];

@@ -30,15 +30,18 @@ export interface BlogPost {
     htmlContent?: string;
 }
 
+export interface GalleryImage {
+    src: string;
+    alt: string;
+    hint: string;
+    unoptimized?: boolean;
+}
+
 export interface Project {
     brand: string;
     oldImg: string;
     newImg: string;
     oldHint: string;
     newHint: string;
-    galleryImages: { 
-        src: string; 
-        alt: string; 
-        hint: string; 
-    }[];
+    galleryImages: GalleryImage[];
 }
