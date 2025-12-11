@@ -2,7 +2,7 @@
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Image, Book } from 'lucide-react';
+import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book } from 'lucide-react';
 
 const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) => {
   const sortedPosts = getSortedPostsData(lang);
@@ -26,7 +26,7 @@ const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) =
       icon: Settings,
       links: [
         { href: '/xizmatlar/neyming', label: t.links.naming, icon: ScanText },
-        { href: '/xizmatlar/logo-dizayni', label: t.links.logo_design, icon: Paintbrush },
+        { href: '/xizmatlar/logo-dizayni', label: t.links.logo_design, icon: Fingerprint },
         { href: '/xizmatlar/firmenniy-stil', label: t.links.corporate_style, icon: Paintbrush },
         { href: '/xizmatlar/brandbook', label: t.links.brandbook, icon: Book },
         { href: '/xizmatlar/qadoq-dizayni', label: t.links.packaging_design, icon: Package },
