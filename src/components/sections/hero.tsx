@@ -12,22 +12,9 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import Autoplay from "embla-carousel-autoplay";
 import React from 'react';
 import TiltCard from '../ui/tilt-card';
+import { projects } from '@/lib/static-data';
 
-interface HeroProps {
-  onPrimaryClick: () => void;
-  lang: string;
-  dictionary: any;
-  renderHeadline: (headline: string) => React.ReactNode;
-}
-
-const portfolioImages = [
-  'https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png',
-  'https://img2.teletype.in/files/17/9c/179c7811-8cf7-4ee9-87ad-66709208b115.png',
-  'https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png',
-  'https://img4.teletype.in/files/ff/50/ff50be41-df24-49fa-95e7-7d50a7840f3e.png',
-  'https://img2.teletype.in/files/9c/fc/9cfc9326-cfdc-4a0f-8262-9a69bdd6f0a2.png',
-];
-
+const portfolioImages = projects.flatMap(p => p.galleryImages.map(gi => gi.src)).filter(Boolean);
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline }) => {
   const [headlineIndex, setHeadlineIndex] = useState(0);
