@@ -90,7 +90,9 @@ Men Ibrohimjon akaga aytdim:
 
 Va biz ishni boshladik.
 
-### 1. Strategik Neyming: "3 atirchi"dan "Den Aroma"ga
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1145601343?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Premium narx = Premium brend"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+### 1. Strategic Naming: "3 atirchi"dan "Den Aroma"ga
 
 Birinchi qadam - to'g'ri nom.
 
@@ -106,7 +108,7 @@ Birinchi qadam - to'g'ri nom.
 
 Oddiy ko'rinadi? Ha. Lekin bu birinchi qadam edi.
 
-### 2. Vizual Identifikatsiya: Logo, ranglar, uslub
+### 2. Visual Identity: Logo, ranglar, uslub
 
 Keyingi qadam - vizual identifikatsiya.
 
@@ -171,6 +173,8 @@ Biz jamoani o'rgatdik:
 **Har bir detal premium tajriba yaratishi kerak.**
 
 ---
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1141138719?badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Ibrohimjon Mahammadjonov - Den Aroma"></iframe></div>
 
 ## Natija: Raqamlar yolg'on gapirmaydi
 
@@ -388,12 +392,12 @@ Bu savol har doim beriladi.
 
 Va men har doim bir xil javob beraman:
 
-**"Bu to'g'ri savol emas."**
+**"To'g'ri savol emas."**
 
 To'g'ri savol: **"Zaif brend sizga qancha turadi?"**
 
 Har bir yo'qolgan mijoz.  
-Har bir "qimmat" degan e'tirozdan keyin yo'qolgan savdo.  
+Har bir "qimmat" degan etirozdan keyin yo'qolgan savdo.  
 Har bir arzon narxga berilgan premium mahsulot.  
 Har bir yo'qolgan imkoniyat (franchayzing, kengayish, korporativ mijozlar).
 
