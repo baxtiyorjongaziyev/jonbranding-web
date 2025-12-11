@@ -52,7 +52,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Sherzod Beknazarov",
     company: "Incontrol Consulting asoschisi",
     avatar: "SB",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3kXnPMqII5ckwBB1YAhFnN5zwI7bzrNeI7Q&s",
+    image: "https://img2.teletype.in/files/1e/f7/1ef7f7bb-55a7-4247-af0d-71216446a0a1.png",
     imageHint: "male business owner",
     quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
@@ -97,7 +97,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Шерзод Бекназаров",
     company: "Основатель Incontrol Consulting",
     avatar: "ШБ",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3kXnPMqII5ckwBB1YAhFnN5zwI7bzrNeI7Q&s",
+    image: "https://img2.teletype.in/files/1e/f7/1ef7f7bb-55a7-4247-af0d-71216446a0a1.png",
     imageHint: "male business owner",
     quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
@@ -142,7 +142,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Sherzod Beknazarov",
     company: "Founder of Incontrol Consulting",
     avatar: "SB",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3kXnPMqII5ckwBB1YAhFnN5zwI7bzrNeI7Q&s",
+    image: "https://img2.teletype.in/files/1e/f7/1ef7f7bb-55a7-4247-af0d-71216446a0a1.png",
     imageHint: "male business owner",
     quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"

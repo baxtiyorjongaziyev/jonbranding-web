@@ -362,24 +362,17 @@ Den Aroma kabi.
 
 Agar siz o'z biznesingizni premium darajaga olib chiqmoqchi bo'lsangiz:
 
-1. **Bosing** quyidagi tugmani
-2. **To'ldiring** qisqa forma (2 daqiqa)
-3. **Kutib oling** - men shaxsan 24 soat ichida aloqaga chiqaman
-
-Biz muhokama qilamiz:
-- Sizning biznesingiz va maqsadlaringiz
-- Qaysi elementlar eng muhim
-- Taxminiy vaqt va narx
-- Keyingi qadamlar
-
-**Konsultatsiya - bepul. Majburiyat yo'q.**
-
-Faqat samimiy suhbat - sizning biznesingiz uchun to'g'ri yo'l haqida.
+<script>
+    function handleCtaClick() {
+        const event = new CustomEvent('openContactModal');
+        window.dispatchEvent(event);
+    }
+</script>
 
 <div style="text-align: center; margin: 40px 0;">
-  <a href="#" style="background: #1a5f3f; color: white; padding: 20px 40px; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block;">
+  <button onclick="handleCtaClick()" style="background: #1a5f3f; color: white; padding: 20px 40px; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; border: none; cursor: pointer;">
     BEPUL KONSULTATSIYA OLISH
-  </a>
+  </button>
 </div>
 
 ---
@@ -426,9 +419,9 @@ Den Aroma ham tayyor emas edi. Lekin ular boshlashdi. Va qarang - hozir qayerdal
 Sizning navbatingiz.
 
 <div style="text-align: center; margin: 40px 0;">
-  <a href="#" style="background: #1a5f3f; color: white; padding: 20px 40px; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block;">
+  <button onclick="handleCtaClick()" style="background: #1a5f3f; color: white; padding: 20px 40px; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: bold; display: inline-block; border: none; cursor: pointer;">
     HA, MEN TAYYORMAN
-  </a>
+  </button>
 </div>
 
 ---
@@ -438,10 +431,10 @@ Branding mutaxassisi
 Jon Branding asoschisi va art-direktori
 
 Telefon: +998336450097
-Telegram profil: @baxtiyorjon_gaziyev
+Telegram profil: [@baxtiyorjon_gaziyev](https://t.me/baxtiyorjongaziyev)
 
-Ijtimoiy tarmoqlarda sahifalarim:
-🔝 [Telegram](http://t.me/baxtiyorjongaziyev) | 🌐 [Instagram](http://instagram.com/baxtiyorjongaziyev) |🌐 [LinkedIn](https://www.linkedin.com/in/baxtiyorjongaziyev/)
+Ijtimoiy tarmoqlarda sahifalarim:  
+🔝 [Telegram](http://t.me/baxtiyorjongaziyev) | 🌐 [Instagram](http://instagram.com/baxtiyorjongaziyev) | 🌐 [LinkedIn](https://www.linkedin.com/in/baxtiyorjongaziyev/)
 
 
 ---
