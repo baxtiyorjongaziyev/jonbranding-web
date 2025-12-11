@@ -12,6 +12,8 @@
         "naming_desc": "Brendingiz uchun unutilmas, kuchli va huquqiy jihatdan toza nom tanlash.",
         "logo_design": "Logotip Dizayni",
         "logo_design_desc": "Biznesingiz mohiyatini aks ettiruvchi noyob va esda qolarli belgi yaratish.",
+        "brandbook": "Brendbuk",
+        "brandbook_desc": "Brendingiz aydentikasidan foydalanish qoidalarini tavsiflovchi hujjat.",
         "corporate_style": "Firma Uslubi",
         "corporate_style_desc": "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
         "packaging_design": "Qadoq Dizayni",
@@ -39,6 +41,7 @@
         "services": "Xizmatlarimiz",
         "brand_strategy": "Brend Strategiyasi",
         "naming": "Neyming",
+        "brandbook": "Brendbuk",
         "logo_design": "Logotip Dizayni",
         "corporate_style": "Firma Uslubi",
         "packaging_design": "Qadoq Dizayni",
@@ -54,6 +57,35 @@
     "cookieConsent": {
         "message": "Saytimizda shirin kukilar bor. Ular bizga sizni eslab qolishda yordam beradi. Rozi bo'lsangiz, birgalikda baham ko'ramiz.",
         "acceptButton": "Yeb qo'yaman"
+    },
+    "brandbookPage": {
+        "metadata": {
+            "title": "Brendbuk ishlab chiqish | Jon.Branding Agentligi",
+            "description": "Brendbuk — bu sizning brendingizning konstitutsiyasi. Biz brendingizning yaxlitligini ta'minlaydigan va marketing xarajatlarini tejaydigan keng qamrovli brendbuklar yaratamiz.",
+            "keywords": "brendbuk, gaydlayn, firma uslubi, brend dizayn, logotipdan foydalanish qoidalari, brending agentligi"
+        },
+        "title": "Brendbuk Ishlab Chiqish",
+        "subtitle": "Brendbuk — bu shunchaki logotiplar solingan hujjat emas, bu sizning brendingizning izchilligi va yaxlitligini ta'minlovchi konstitutsiyadir.",
+        "section1_title": "Nima uchun har bir biznesga brendbuk kerak?",
+        "section1_p1": "Brendbuk — bu brendni boshqarish uchun asosiy vositadir. U kompaniyangizning vizual va g'oyaviy elementlaridan foydalanishning barcha qoidalarini aniq belgilab beradi — logotip va ranglardan tortib, muloqot ohangigacha.",
+        "section1_p2": "Ushbu hujjat marketingdagi tartibsizliklarning oldini olishga yordam beradi, brendning tanilishini ta'minlaydi, dizaynerlar, marketologlar va boshqa pudratchilar bilan ishlashda vaqt va pulni tejaydi.",
+        "values_title": "Brendbuk quyidagi muammolarni hal qiladi:",
+        "values": [
+            { "title": "Izchillik va Taniluvchanlik", "description": "Brendingiz barcha platformalarda — vizitkadan tortib saytgacha — bir xil va professional ko'rinishini ta'minlaydi." },
+            { "title": "Resurslarni Tejash", "description": "Har bir yangi xodim yoki pudratchiga dizayn qoidalarini tushuntirish zaruratini yo'qotib, ish jarayonini tezlashtiradi." },
+            { "title": "Brendni Himoya Qilish", "description": "Aydentikangizni noto'g'ri ishlatilishidan himoya qilib, brendingiz yaxlitligi va qiymatini saqlab qoladi." }
+        ],
+        "process_title": "Brendbuk nimalarni o'z ichiga oladi?",
+        "process_subtitle": "Bizning brendbuklarimiz brendni samarali boshqarish uchun barcha kerakli bo'limlarni o'z ichiga oladi:",
+        "process_steps": [
+            { "title": "Brend Platformasi", "description": "Missiya, qadriyatlar, brend xarakteri va maqsadli auditoriya." },
+            { "title": "Logotip va Aydentika", "description": "Logotip, firma ranglari va shriftlaridan foydalanish qoidalari." },
+            { "title": "Vizual Uslub", "description": "Fotosuratlar, illustratsiyalar va grafik elementlardan foydalanish qoidalari." },
+            { "title": "Amaliy Qo'llash", "description": "Real tashuvchilar (vizitka, taqdimot, ijtimoiy tarmoq) dizaynining namunalari." }
+        ],
+        "cta_title": "Brendingizga tartib olib kirishga tayyormisiz?",
+        "cta_description": "Professional brendbuk — bu biznesingizning barqaror kelajagiga sarmoyadir. Keling, sizning ishonchli yordamchingizga aylanadigan hujjatni yaratamiz.",
+        "cta_button": "Brendbuk buyurtma qilish"
     },
     "popularPackages": {
         "title": "Eng ko'p tanlanadigan paketlar",
@@ -817,3 +849,5 @@
         }
     }
 }
+
+    
