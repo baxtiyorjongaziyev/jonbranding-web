@@ -173,6 +173,7 @@ Biz jamoani o'rgatdik:
 **Har bir detal premium tajriba yaratishi kerak.**
 
 ---
+
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1141138719?h=fdc64d08aa&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Ibrohimjon Mahammadjonov - Den Aroma"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 ## Natija: Raqamlar yolg'on gapirmaydi
@@ -307,11 +308,11 @@ Chunki:
 
 Ibrohimjon aka bilan ham shu muammo bor edi. U birinchi kelganida dedi:
 
-"Menga faqat logo va qadoq kerak."
+"Menga faqat logo va packaging kerak."
 
 Men javob berdim:
 
-"Agar siz faqat shu narsani qilsangiz, mijoz do'koningizga kirib, eski interni ko'radi. Keyin zaif veb-saytga kiradi. Keyin xizmat nomuvofiq bo'ladi. Natija? Chalkashlik. Va mijoz ketadi."
+"Agar siz faqat shu narsani qilsangiz, mijoz do'koningizga kirib, eski interni ko'radi. Keyin zaif website'ga kiradi. Keyin xizmat nomuvofiq bo'ladi. Natija? Chalkashlik. Va mijoz ketadi."
 
 Shunday qilib, biz **to'liq rebranding** qildik.
 
@@ -436,11 +437,12 @@ Sizning navbatingiz.
 Branding mutaxassisi  
 Jon Branding asoschisi va art-direktori
 
-📧 [email protected]  
-📱 +998 XX XXX XX XX  
-📍 Toshkent, O'zbekiston
+Telefon: +998336450097
+Telegram profil: @baxtiyorjon_gaziyev
 
-Instagram | Telegram | LinkedIn: @baxtiyorjongaziyev
+Ijtimoiy tarmoqlarda sahifalarim:  
+🔝 Telegram (http://t.me/baxtiyorjongaziyev) | 🌐 Instagram (http://instagram.com/baxtiyorjongaziyev) |🌐 LinkedIn (https://www.linkedin.com/in/baxtiyorjongaziyev/)
+
 
 ---
 

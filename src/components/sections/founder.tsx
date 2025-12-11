@@ -3,7 +3,7 @@
 
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import { Medal, Globe, Zap, Users, Phone, Send, PlayCircle, type LucideProps } from 'lucide-react';
+import { Medal, Globe, Zap, Users, Phone, Send, PlayCircle, type LucideProps, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useState, type FC } from 'react';
@@ -49,6 +49,12 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                     <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
                         <Send className="mr-2 h-5 w-5" />
                         {translations.telegramButton}
+                    </a>
+                </Button>
+                 <Button size="lg" variant="outline" className="w-full sm:w-auto" asChild>
+                    <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank">
+                        <Linkedin className="mr-2 h-5 w-5" />
+                        LinkedIn
                     </a>
                 </Button>
             </div>
