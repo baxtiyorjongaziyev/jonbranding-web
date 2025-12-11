@@ -122,6 +122,7 @@
             "services_prices": "All Services and Prices",
             "brand_strategy": "Brand Strategy",
             "naming": "Naming",
+            "brandbook": "Brandbook",
             "corporate_style": "Corporate Identity",
             "packaging_design": "Packaging Design",
             "logo_design": "Logo Design",
@@ -362,7 +363,8 @@
         "magnets": [
           { "id": "pdf", "title": "Free PDF-Checklist", "subtitle": "7 biggest mistakes in branding", "description": "Find out what mistakes to avoid in your business and get a practical guide to analyzing your brand.", "cta": "View Checklist", "href": "/{lang}/checklist" },
           { "id": "quiz", "title": "Mini-Test", "subtitle": "Is your business ready for branding?", "description": "Answer a few questions and find out how ready your business is for branding, its strengths and weaknesses.", "cta": "Start the test", "href": "/{lang}/quiz" },
-          { "id": "video", "title": "Video Guide", "subtitle": "What is strategic branding?", "description": "Why is just a beautiful logo not enough? See in the video what results our approach will bring to your business.", "cta": "Watch the video", "href": "#video" }
+          { "id": "video", "title": "Video Guide", "subtitle": "What is strategic branding?",
+            "description": "Why is just a beautiful logo not enough? See in the video what results our approach will bring to your business.", "cta": "Watch the video", "href": "#video" }
         ],
         "cta": {
           "title": "Did the checklist help?",
@@ -517,7 +519,7 @@
                 "description": "You have a good foundation, but your brand can be stronger and more effective. Let's fill the existing gaps and take your business to the next level."
             },
             "good": {
-                "title": "Excellent! Your brand's foundation is solid (13-15 points)",
+                "title": "Excellent! Your brand is in great shape!",
                 "description": "Congratulations! You are on the right track with branding. Now it's time to strengthen this foundation and become a market leader. We will help you with this."
             },
             "afterSubmitText": "Our specialist will contact you soon for a detailed analysis of your test results and to provide personal recommendations.",
@@ -540,8 +542,11 @@
         "section1_p3": "Most importantly, it allows for the systemization of marketing expenses, abandoning tools, channels, and ideas that do not support the company's positioning and, therefore, do not deserve the cost.",
         "section2_title": "Brand strategy is necessary for any business",
         "section2_p1": "Brand strategy is necessary for both new and long-existing companies.",
-        "section2_p2_bold": "For startups, it helps to define their mission, values, and identity from the very beginning, to occupy the right position in the market, and to attract customers.",
-        "section2_p3_bold": "For large companies, strategy is a tool for growth and reputation management. In this case, it helps to maintain relevance, adapt to changes, and build strong relationships with the audience. Regardless of business size, brand strategy answers the main question: why should a customer choose you?",
+        "section2_p2_bold": "For startups,",
+        "section2_p2_text": " it helps to define their mission, values, and identity from the very beginning, to occupy the right position in the market, and to attract customers.",
+        "section2_p3_bold": "For large companies,",
+        "section2_p3_text": " strategy is a tool for growth and reputation management. In this case, it helps to maintain relevance, adapt to changes, and build strong relationships with the audience.",
+        "section2_p4": "Regardless of business size, brand strategy answers the main question: why should a customer choose you?",
         "process_title": "Branding is a process",
         "process_subtitle": "In our agency, we are convinced that branding is more than just creating a logo. Branding is not a one-time task, but a cyclical process. Each stage plays its key role, and skipping any of them can weaken the brand and its market position. But if everything is done correctly and consistently, branding helps the business grow and makes it easier to manage many processes, from product production to marketing.",
         "process_steps": [
@@ -555,17 +560,17 @@
     "corporateStylePage": {
         "metadata": {
             "title": "Corporate Identity and Brandbook | Jon.Branding Agency Tashkent",
-            "description": "We don't just create beautiful pictures; we develop a systematic visual style (corporate identity, brandbook) that works for your brand and delivers results. Make your brand recognizable and memorable through a logo, colors, fonts, and other elements."
+            "description": "We don't just create beautiful pictures, we develop a systematic visual style (corporate identity, brandbook) that works for your brand and delivers results. Make your brand recognizable and memorable through a logo, colors, fonts, and other elements."
         },
         "title": "Corporate Identity Development",
         "subtitle": "One of the key elements of a brand is its visual component. It is what turns ideas, meanings, and values into images that can be seen, felt, and remembered.",
         "section1_title": "Brand perception starts with the picture",
         "section1_p1": "In the modern world, visual information is perceived and absorbed faster than text or words. We live in an age of instant impressions: it takes people a second to form an opinion about a brand, and this often happens through its visual image.",
-        "section1_p2": "For an idea to be consolidated in the audience's mind, it's not enough to just talk about it — it's important to reinforce it with visual elements. A well-designed corporate identity allows you to demonstrate brand values without extra explanations, instantly evoking the necessary emotions and associations.",
+        "section1_p2": "To consolidate an idea in the audience's mind, it is not enough to just talk about it — it is important to reinforce it with visual elements. A well-designed corporate identity allows you to demonstrate brand values without extra explanations, instantly evoking the necessary emotions and associations.",
         "section2_title": "Corporate identity is a system",
         "section2_p1": "It's not just about beauty, but about efficiency, meaning, and control. To ensure a brand remains multifaceted and consistent in developing its visual image, a set of graphic elements must be created.",
         "section2_p2": "Such a set is always selected individually, depending on the business's tasks and capabilities. The minimum set includes a logo, colors, fonts, photo style, style of advertising media, and other elements that create a cohesive image.",
-        "section2_p3": "When a visual style is built clearly and consistently, it becomes a powerful tool for managing the brand's image and communication. When all its elements are aligned, the brand is perceived as professional, reliable, and recognizable.",
+        "section2p3": "When a visual style is built clearly and consistently, it becomes a powerful tool for managing the brand's image and communication. When all its elements are aligned, the brand is perceived as professional, reliable, and recognizable.",
         "process_title": "How do we create a corporate identity?",
         "process_subtitle": "We take a systematic approach to developing a corporate identity so that every detail works for brand recognition and its strategy.",
         "process_steps": [
