@@ -13,8 +13,18 @@ import Autoplay from "embla-carousel-autoplay";
 import React from 'react';
 import TiltCard from '../ui/tilt-card';
 import { projects } from '@/lib/static-data';
+import type { GalleryImage } from '@/lib/types';
 
-const portfolioImages = projects.flatMap(p => p.galleryImages.map(gi => gi.src)).filter(Boolean);
+
+const portfolioImages: GalleryImage[] = projects.flatMap(p => p.galleryImages);
+
+interface HeroProps {
+    onPrimaryClick: () => void;
+    lang: string;
+    dictionary: any;
+    renderHeadline: (headline: string) => React.ReactNode;
+}
+
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline }) => {
   const [headlineIndex, setHeadlineIndex] = useState(0);
@@ -75,15 +85,15 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                             className="w-full h-full"
                         >
                             <CarouselContent>
-                                {portfolioImages.map((src, index) => (
+                                {portfolioImages.map((image, index) => (
                                     <CarouselItem key={index}>
                                         <div className="w-full h-full relative aspect-square">
                                             <Image 
-                                                src={src}
-                                                alt={`Portfolio ishi ${index + 1}`}
+                                                src={image.src}
+                                                alt={image.alt}
                                                 layout="fill"
                                                 objectFit="cover"
-                                                unoptimized={src.endsWith('.gif')}
+                                                unoptimized={image.unoptimized}
                                                 className="bg-white"
                                                 priority
                                             />

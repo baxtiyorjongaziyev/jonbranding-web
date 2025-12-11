@@ -5,8 +5,10 @@ import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { projects } from '@/lib/static-data';
+import type { GalleryImage } from '@/lib/types';
 
-const galleryImages = projects.flatMap(p => p.galleryImages);
+
+const galleryImages: GalleryImage[] = projects.flatMap(p => p.galleryImages);
 
 const MarqueeColumn = ({ images, animationClass }: { images: typeof galleryImages, animationClass: string }) => (
     <div className="flex flex-col gap-6">
@@ -18,7 +20,7 @@ const MarqueeColumn = ({ images, animationClass }: { images: typeof galleryImage
                         alt={image.alt}
                         width={600}
                         height={400}
-                        unoptimized={image.src.endsWith('.gif')}
+                        unoptimized={image.unoptimized}
                         loading="lazy"
                         className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
                         data-ai-hint={image.hint}
@@ -34,7 +36,7 @@ const MarqueeColumn = ({ images, animationClass }: { images: typeof galleryImage
                         alt={image.alt}
                         width={600}
                         height={400}
-                        unoptimized={image.src.endsWith('.gif')}
+                        unoptimized={image.unoptimized}
                         loading="lazy"
                         className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
                         data-ai-hint={image.hint}
