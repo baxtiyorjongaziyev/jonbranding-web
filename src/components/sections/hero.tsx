@@ -94,9 +94,8 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                                                 fill
                                                 priority={index === 0}
                                                 loading={index === 0 ? "eager" : "lazy"}
-                                                objectFit="cover"
-                                                unoptimized={image.unoptimized}
-                                                className="bg-white"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                className="object-cover bg-white"
                                             />
                                         </div>
                                     </CarouselItem>
