@@ -105,10 +105,10 @@ const uzServiceDetails = {
         price: basePricesUSD.namingStandard, 
         note: null, 
         features: [
-            { feature: "3 ta nom varianti ishlab chiqiladi", benefit: "Sizda bir nechta kuchli variantlardan tanlash imkoniyati bo'ladi." },
-            { feature: "Domen va ijtimoiy tarmoqlarda bo'shlik tekshiriladi", benefit: "Tanlagan nomingiz raqamli muhitda band bo'lmaydi, marketingda to'siqsiz ishlaysiz." },
-            { feature: "Patent bo‘yicha 1 klass auditi qilinadi", benefit: "Kelajakdagi katta huquqiy muammolarning oldini olasiz." },
-            { feature: "Har bir variant fonetik jihatdan tekshiriladi", benefit: "Nomingiz oson talaffuz qilinadi va esda qoladi." }
+            { feature: "Qisqa, jarangdor va esda qolarli 3 ta nom varianti", benefit: "Sizda bir nechta kuchli variantlardan tanlash imkoniyati bo'ladi." },
+            { feature: "Domen va ijtimoiy tarmoqlarda bo'shlik tekshiruvi", benefit: "Tanlagan nomingiz internetda band bo'lmaydi, marketingda to'siqsiz ishlaysiz." },
+            { feature: "Patentga yaroqlilik bo'yicha dastlabki tekshiruv (1 klass)", benefit: "Kelajakdagi katta huquqiy muammolarning oldini olasiz." },
+            { feature: "Eshitgan odam yoza oladigan va topa oladigan nomlar", benefit: "Nomingiz oson talaffuz qilinadi va esda qoladi, bu esa og'zaki reklamani (word-of-mouth) kuchaytiradi." }
         ], 
         benefits: ["Tez va hamyonbop nomga ega bo'ling", "Biznesingizga professional start bering"], 
         timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" 
@@ -119,10 +119,10 @@ const uzServiceDetails = {
         price: basePricesUSD.namingPremium, 
         note: null, 
         features: [
-            { feature: "5+ nom varianti ishlab chiqiladi", benefit: "Strategiyangizga mos bir nechta kuchli yo'nalishdan eng yaxshisini tanlab olasiz." },
+            { feature: "5+ strategiyaga mos, puxta o'ylangan nom variantlari", benefit: "Strategiyangizga mos bir nechta kuchli yo'nalishdan eng yaxshisini tanlab olasiz." },
             { feature: "6 tilda semantik va fonetik tekshiruv", benefit: "Xalqaro bozorga chiqqanda nomingiz salbiy ma'no bermaydi va oson talaffuz qilinadi." },
-            { feature: "Patent bo‘yicha 2 klass auditi va huquqiy xulosa", benefit: "Brend nomingizni huquqiy jihatdan himoya qilish uchun to'liq asosga ega bo'lasiz." },
-            { feature: "5 yilga domen band qilib beriladi", benefit: "Eng muhim onlayn aktivingiz 5 yil davomida himoyada bo'ladi." }
+            { feature: "Patentga yaroqlilik bo'yicha chuqur tekshiruv va huquqiy xulosa", benefit: "Brend nomingizni huquqiy jihatdan himoya qilish uchun to'liq asosga ega bo'lasiz." },
+            { feature: "5 yilga bepul domen band qilib beriladi", benefit: "Eng muhim onlayn aktivingiz 5 yil davomida himoyada bo'ladi." }
         ], 
         benefits: ["Brendingiz uchun strategik jihatdan kuchli nom oling", "Xalqaro bozorga chiqish imkoniyatini yarating", "Huquqiy jihatdan himoyalangan nomga ega bo'ling"], 
         recommended: true, 
@@ -135,9 +135,9 @@ const uzServiceDetails = {
         note: null, 
         features: [
             { feature: "Shaxsan Baxtiyorjon Gaziyev ishtiroki va nazorati", benefit: "Sizga top darajadagi mutaxassisning bevosita e’tibori tushadi — nomingiz tasodifga emas, tajribaga tayangan bo‘ladi." },
-            { feature: "10+ keng konsepsiyali nom variantlari", benefit: "Sizda tanlov keng bo‘ladi — bir nechta kuchli yo‘nalishdan sizga eng ko‘p foyda keltiradiganini tanlaysiz." },
-            { feature: "10 yilga domen band qilib beriladi", benefit: "Onlayn makoningiz 10 yil davomida xavfsiz. Raqobatchilar domeningizni olib qo‘yolmaydi." },
-            { feature: "Har bir nom uchun storytelling asosida tushuntirish", benefit: "Siz brend nomini chiroyli va ishonchli tarzda asoslay olasiz. Investor, hamkor yoki mijoz eshitishi bilanoq nimaga bu nom tanlanganini tushunadi." },
+            { feature: "10+ keng konsepsiyali, hikoyaga ega nom variantlari", benefit: "Sizda tanlov keng bo‘ladi — bir nechta kuchli yo‘nalishdan sizga eng ko‘p foyda keltiradiganini tanlaysiz." },
+            { feature: "10 yilga bepul domen band qilib beriladi", benefit: "Onlayn makoningiz 10 yil davomida xavfsiz. Raqobatchilar domeningizni olib qo‘yolmaydi." },
+            { feature: "Har bir nom uchun storytelling asosida professional taqdimot", benefit: "Siz brend nomini chiroyli va ishonchli tarzda asoslay olasiz. Investor, hamkor yoki mijoz eshitishi bilanoq nimaga bu nom tanlanganini tushunadi." },
             { feature: "3 oygacha post-delivery huquqiy maslahat va kuzatuv", benefit: "Nom ishga tushgandan keyin ham yolg'iz qolmaysiz. Patent, domen, huquqiy masalalar bo'yicha qo'llab-quvvatlov davom etadi." }
         ], 
         benefits: ["Bozorda mutlaq yetakchilikka da'vogar nomga ega bo'ling", "Maksimal darajada himoyalangan va puxta o'ylangan brend nomi", "Shaxsiy ekspert nazorati va qo'llab-quvvatlash"], 
@@ -277,9 +277,38 @@ const ruServiceDetails = {
         benefits: ["Получите четкую карту развития для вашего бизнеса", "Оптимизируйте ваши маркетинговые расходы", "Займите прочное место на рынке"]
     },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
-    namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса.", features: uzServiceDetails.namingStandard.features.map(f => ({...f})), benefits: uzServiceDetails.namingStandard.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
-    namingPremium: { ...uzServiceDetails.namingPremium, label: "Нейминг Premium", description: "Для среднего и развивающегося бизнеса.", features: uzServiceDetails.namingPremium.features.map(f => ({...f})), benefits: uzServiceDetails.namingPremium.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
-    namingVIP: { ...uzServiceDetails.namingVIP, label: "Нейминг VIP", description: "Для крупных и международных проектов.", features: uzServiceDetails.namingVIP.features.map(f => ({...f})), benefits: uzServiceDetails.namingVIP.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 20–25 рабочих дней" },
+    namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса.", 
+        features: [
+            { feature: "3 варианта короткого, звучного и запоминающегося названия", benefit: "У вас будет возможность выбрать из нескольких сильных вариантов." },
+            { feature: "Проверка доступности домена и в социальных сетях", benefit: "Выбранное вами имя не будет занято в интернете, вы сможете без препятствий работать в маркетинге." },
+            { feature: "Первичная проверка на патентоспособность (1 класс)", benefit: "Вы предотвратите крупные юридические проблемы в будущем." },
+            { feature: "Названия, которые легко написать и найти на слух", benefit: "Ваше имя будет легко произноситься и запоминаться, что усилит сарафанное радио." }
+        ], 
+        benefits: ["Получите быстрое и доступное имя", "Дайте профессиональный старт вашему бизнесу"], 
+        timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" 
+    },
+    namingPremium: { ...uzServiceDetails.namingPremium, label: "Нейминг Premium", description: "Для среднего и развивающегося бизнеса.", 
+        features: [
+            { feature: "5+ продуманных вариантов названия, соответствующих стратегии", benefit: "Вы сможете выбрать лучшее из нескольких сильных направлений, соответствующих вашей стратегии." },
+            { feature: "Семантическая и фонетическая проверка на 6 языках", benefit: "При выходе на международный рынок ваше имя не будет иметь негативного значения и будет легко произноситься." },
+            { feature: "Глубокая проверка на патентоспособность и юридическое заключение", benefit: "Вы получите полное основание для юридической защиты вашего бренда." },
+            { feature: "Бесплатная регистрация домена на 5 лет", benefit: "Ваш самый важный онлайн-актив будет защищен на 5 лет." }
+        ], 
+        benefits: ["Получите стратегически сильное имя для вашего бренда", "Создайте возможность выхода на международный рынок", "Получите юридически защищенное имя"], 
+        recommended: true, 
+        timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" 
+    },
+    namingVIP: { ...uzServiceDetails.namingVIP, label: "Нейминг VIP", description: "Для крупных и международных проектов.", 
+        features: [
+            { feature: "Личное участие и контроль Бахтиёржона Газиева", benefit: "Вам будет уделено непосредственное внимание специалиста высшего уровня — ваше имя будет основано на опыте, а не на случайности." },
+            { feature: "10+ вариантов названия с широкой концепцией и историей", benefit: "У вас будет широкий выбор — из нескольких сильных направлений вы выберете то, которое принесет вам наибольшую пользу." },
+            { feature: "Бесплатная регистрация домена на 10 лет", benefit: "Ваше онлайн-пространство будет в безопасности на 10 лет. Конкуренты не смогут забрать ваш домен." },
+            { feature: "Профессиональная презентация для каждого названия на основе сторителлинга", benefit: "Вы сможете красиво и убедительно обосновать название бренда. Инвестор, партнер или клиент с первого раза поймет, почему было выбрано именно это имя." },
+            { feature: "До 3 месяцев юридической консультации и поддержки после сдачи", benefit: "После запуска имени вы не останетесь одни. Поддержка по вопросам патента, домена, юридическим вопросам продолжится." }
+        ], 
+        benefits: ["Получите имя, претендующее на абсолютное лидерство на рынке", "Максимально защищенное и продуманное имя бренда", "Личный контроль и поддержка эксперта"], 
+        timeline: "Первые концепции предоставляются в течение 20–25 рабочих дней" 
+    },
     logoStandard: { ...uzServiceDetails.logoStandard, label: "Логотип Standard", description: "Быстрое решение для стартапов.", features: uzServiceDetails.logoStandard.features.map(f => ({...f})), benefits: uzServiceDetails.logoStandard.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
     logoPremium: { ...uzServiceDetails.logoPremium, label: "Логотип и фирменный стиль", description: "Для тех, кто серьезно настроен развивать свой бренд.", features: uzServiceDetails.logoPremium.features.map(f => ({...f})), benefits: uzServiceDetails.logoPremium.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
     logoVIP: { ...uzServiceDetails.logoVIP, label: "Логотип + Фирменный стиль + Брендбук", description: "Расширенная айдентика и полная поддержка.", features: uzServiceDetails.logoVIP.features.map(f => ({...f})), benefits: uzServiceDetails.logoVIP.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 20–30 рабочих дней" },
@@ -307,9 +336,38 @@ const enServiceDetails = {
         benefits: ["Get a clear development map for your business", "Optimize your marketing expenses", "Establish a strong position in the market"]
     },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
-    namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses.", features: uzServiceDetails.namingStandard.features.map(f => ({...f})), benefits: uzServiceDetails.namingStandard.benefits.map(b => b), timeline: "First concepts are presented within 7–10 working days" },
-    namingPremium: { ...uzServiceDetails.namingPremium, label: "Naming Premium", description: "For medium and growing businesses.", features: uzServiceDetails.namingPremium.features.map(f => ({...f})), benefits: uzServiceDetails.namingPremium.benefits.map(b => b), timeline: "First concepts are presented within 14–20 working days" },
-    namingVIP: { ...uzServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects.", features: uzServiceDetails.namingVIP.features.map(f => ({...f})), benefits: uzServiceDetails.namingVIP.benefits.map(b => b), timeline: "First concepts are presented within 20–25 working days" },
+    namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses.",
+        features: [
+            { feature: "3 short, sonorous, and memorable name options", benefit: "You'll have the opportunity to choose from several strong options." },
+            { feature: "Domain and social media availability check", benefit: "Your chosen name won't be taken on the internet, allowing you to market without obstacles." },
+            { feature: "Preliminary patentability check (1 class)", benefit: "You'll prevent major legal issues in the future." },
+            { feature: "Names that are easy to write and find by ear", benefit: "Your name will be easy to pronounce and remember, which enhances word-of-mouth marketing." }
+        ],
+        benefits: ["Get a quick and affordable name", "Give your business a professional start"], 
+        timeline: "First concepts are presented within 7–10 working days" 
+    },
+    namingPremium: { ...uzServiceDetails.namingPremium, label: "Naming Premium", description: "For medium and growing businesses.", 
+        features: [
+            { feature: "5+ well-thought-out name options aligned with the strategy", benefit: "You'll be able to choose the best from several strong directions that match your strategy." },
+            { feature: "Semantic and phonetic check in 6 languages", benefit: "When entering the international market, your name will not have negative connotations and will be easy to pronounce." },
+            { feature: "In-depth patentability check and legal opinion", benefit: "You'll have a full basis for legally protecting your brand name." },
+            { feature: "Free domain registration for 5 years", benefit: "Your most important online asset will be protected for 5 years." }
+        ],
+        benefits: ["Get a strategically strong name for your brand", "Create an opportunity for international market entry", "Get a legally protected name"], 
+        recommended: true, 
+        timeline: "First concepts are presented within 14–20 working days" 
+    },
+    namingVIP: { ...uzServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects.", 
+        features: [
+            { feature: "Personal involvement and supervision by Bakhtiyorjon Gaziyev", benefit: "You'll receive direct attention from a top-level expert—your name will be based on experience, not chance." },
+            { feature: "10+ name options with broad concepts and stories", benefit: "You'll have a wide choice—from several strong directions, you'll choose the one that benefits you the most." },
+            { feature: "Free domain registration for 10 years", benefit: "Your online space will be secure for 10 years. Competitors won't be able to take your domain." },
+            { feature: "Professional presentation for each name based on storytelling", benefit: "You'll be able to justify the brand name beautifully and convincingly. An investor, partner, or client will understand why this name was chosen right away." },
+            { feature: "Up to 3 months of post-delivery legal advice and monitoring", benefit: "You won't be alone after the name launch. Support on patent, domain, and legal issues will continue." }
+        ],
+        benefits: ["Get a name that contends for absolute market leadership", "A maximally protected and well-thought-out brand name", "Personal expert supervision and support"], 
+        timeline: "First concepts are presented within 20–25 working days" 
+    },
     logoStandard: { ...uzServiceDetails.logoStandard, label: "Logo Standard", description: "A quick solution for startups.", features: uzServiceDetails.logoStandard.features.map(f => ({...f})), benefits: uzServiceDetails.logoStandard.benefits.map(b => b), timeline: "First concepts are presented within 7–10 working days" },
     logoPremium: { ...uzServiceDetails.logoPremium, label: "Logo & Corporate Identity", description: "For those serious about developing their brand.", features: uzServiceDetails.logoPremium.features.map(f => ({...f})), benefits: uzServiceDetails.logoPremium.benefits.map(b => b), timeline: "First concepts are presented within 14–20 working days" },
     logoVIP: { ...uzServiceDetails.logoVIP, label: "Logo + Corporate Identity + Brandbook", description: "Expanded identity and full support.", features: uzServiceDetails.logoVIP.features.map(f => ({...f})), benefits: uzServiceDetails.logoVIP.benefits.map(b => b), timeline: "First concepts are presented within 20–30 working days" },
@@ -337,9 +395,38 @@ const zhServiceDetails = {
         benefits: ["为您的业务获得清晰的发展蓝图", "优化您的营销开支", "在市场上建立稳固的地位"]
     },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
-    namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业。", features: uzServiceDetails.namingStandard.features.map(f => ({...f})), benefits: uzServiceDetails.namingStandard.benefits.map(b => b), timeline: "初步概念在7-10个工作日内提交" },
-    namingPremium: { ...uzServiceDetails.namingPremium, label: "高级命名", description: "适合中型和成长型企业。", features: uzServiceDetails.namingPremium.features.map(f => ({...f})), benefits: uzServiceDetails.namingPremium.benefits.map(b => b), timeline: "初步概念在14-20个工作日内提交" },
-    namingVIP: { ...uzServiceDetails.namingVIP, label: "VIP命名", description: "适合大型和国际项目。", features: uzServiceDetails.namingVIP.features.map(f => ({...f})), benefits: uzServiceDetails.namingVIP.benefits.map(b => b), timeline: "初步概念在20-25个工作日内提交" },
+    namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业。", 
+        features: [
+            { feature: "3个简短、响亮、易记的名称选项", benefit: "您将有机会从几个强有力的选项中进行选择。" },
+            { feature: "域名和社交媒体可用性检查", benefit: "您选择的名称在互联网上不会被占用，您可以在营销中无障碍地工作。" },
+            { feature: "初步可专利性检查（1类）", benefit: "您将避免未来重大的法律问题。" },
+            { feature: "听得懂、写得出、找得到的名称", benefit: "您的名字将易于发音和记忆，这会增强口碑营销。" }
+        ],
+        benefits: ["获得一个快速且实惠的名称", "为您的业务提供专业的开端"], 
+        timeline: "初步概念在7-10个工作日内提交" 
+    },
+    namingPremium: { ...uzServiceDetails.namingPremium, label: "高级命名", description: "适合中型和成长型企业。", 
+        features: [
+            { feature: "5个以上符合战略的深思熟虑的名称选项", benefit: "您将能够从几个符合您战略的强有力方向中选择最好的一个。" },
+            { feature: "6种语言的语义和语音检查", benefit: "进入国际市场时，您的名字不会有负面含义，并且易于发音。" },
+            { feature: "深入的可专利性检查和法律意见", benefit: "您将有充分的依据来合法保护您的品牌名称。" },
+            { feature: "免费注册域名5年", benefit: "您最重要的在线资产将受到5年的保护。" }
+        ],
+        benefits: ["为您的品牌获得一个战略上强大的名称", "创造进入国际市场的机会", "获得一个受法律保护的名称"], 
+        recommended: true, 
+        timeline: "初步概念在14-20个工作日内提交" 
+    },
+    namingVIP: { ...uzServiceDetails.namingVIP, label: "VIP命名", description: "适合大型和国际项目。", 
+        features: [
+            { feature: "由Bakhtiyorjon Gaziyev亲自参与和监督", benefit: "您将获得顶级专家的直接关注——您的名字将基于经验，而非偶然。" },
+            { feature: "10个以上具有广泛概念和故事的名称选项", benefit: "您将有广泛的选择——从几个强有力的方向中，您将选择对您最有利的一个。" },
+            { feature: "免费注册域名10年", benefit: "您的在线空间将安全10年。竞争对手无法抢走您的域名。" },
+            { feature: "基于讲故事的每个名称的专业演示", benefit: "您将能够精美且有说服力地为品牌名称辩护。投资者、合作伙伴或客户会立刻明白为什么选择这个名字。" },
+            { feature: "交付后长达3个月的法律咨询和监控", benefit: "名称启动后您不会孤单。关于专利、域名和法律问题的支持将继续。" }
+        ],
+        benefits: ["获得一个争夺绝对市场领导地位的名称", "一个受到最大保护且深思熟虑的品牌名称", "个人专家监督和支持"], 
+        timeline: "初步概念在20-25个工作日内提交" 
+    },
     logoStandard: { ...uzServiceDetails.logoStandard, label: "标准标志", description: "为初创公司提供的快速解决方案。", features: uzServiceDetails.logoStandard.features.map(f => ({...f})), benefits: uzServiceDetails.logoStandard.benefits.map(b => b), timeline: "初步概念在7-10个工作日内提交" },
     logoPremium: { ...uzServiceDetails.logoPremium, label: "标志与企业形象", description: "为那些认真发展品牌的企业。", features: uzServiceDetails.logoPremium.features.map(f => ({...f})), benefits: uzServiceDetails.logoPremium.benefits.map(b => b), timeline: "初步概念在14-20个工作日内提交" },
     logoVIP: { ...uzServiceDetails.logoVIP, label: "标志 + 企业形象 + 品牌手册", description: "扩展的形象和全面支持。", features: uzServiceDetails.logoVIP.features.map(f => ({...f})), benefits: uzServiceDetails.logoVIP.benefits.map(b => b), timeline: "初步概念在20-30个工作日内提交" },
