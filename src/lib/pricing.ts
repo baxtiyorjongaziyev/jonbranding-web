@@ -54,7 +54,7 @@ const uzServiceDetails = {
         features: [
             { feature: "O'zbekiston bazasi bo'yicha tekshiruv", benefit: "Mahalliy bozorda huquqiy muammolarning oldini olasiz." },
             { feature: "Xalqaro WIPO bazasi bo'yicha tekshiruv", benefit: "Xalqaro miqyosda kengayish imkoniyatini saqlab qolasiz." },
-            { feature: "Domen bo'shligini tekshirish", benefit: "Brendingiz uchun mos veb-sayt nomini topishni kafolatlaysiz." },
+            { feature: "Domen va ijtimoiy tarmoqlarda bo'shlik tekshiruvi", benefit: "Tanlagan nomingiz internetda band bo'lmaydi, marketingda to'siqsiz ishlaysiz." },
             { feature: "Huquqiy maslahat", benefit: "Patentlash jarayonida nimalarga e'tibor berish kerakligini bilib olasiz." }
         ],
         benefits: ["Kelajakdagi yuridik muammolardan saqlaning", "Brendingiz uchun mustahkam poydevor yarating"] 
@@ -186,6 +186,7 @@ const uzServiceDetails = {
         features: [
             { feature: "Shaxsan Baxtiyorjon Gaziyev ishtiroki", benefit: "Loyihangiz sohaning eng tajribali mutaxassislaridan biri tomonidan shaxsan nazorat qilinadi." },
             { feature: "8+ strategiyaga asoslangan logotip konsepsiyasi", benefit: "Brendingiz uchun eng mukammal yechimni topish uchun maksimal darajada keng tanlovga ega bo'lasiz." },
+            { feature: "Firma uslubi (asosiy ranglar, shriftlar, qoidalar)", benefit: "Brendingizning barcha vizual elementlari bir tizimga solinadi, bu esa uning mustahkamligini ta'minlaydi." },
             { feature: "Vizual Brandbook va Logobook", benefit: "Brendingizni boshqarish uchun 'konstitutsiya'ga ega bo'lasiz, bu kelajakda dizayn xarajatlaringizni tejaydi." },
             { feature: "Logotip vektor fayllari (AI, EPS, PNG, JPG, PDF)", benefit: "Logotipni istalgan o'lchamda, istalgan joyda sifatini yo'qotmasdan ishlata olasiz." },
             { feature: "Logotip animatsiyasi (premium sifatli)", benefit: "Raqamli platformalarda brendingiz jonlanadi va raqobatchilardan keskin ajralib turadi." },
@@ -329,6 +330,7 @@ const ruServiceDetails = {
     logoVIP: { ...uzServiceDetails.logoVIP, label: "Логотип + Фирменный стиль + Брендбук", description: "Расширенная айдентика и полная поддержка.", features: [
             { feature: "Личное участие Бахтиёржона Газиева", benefit: "Ваш проект будет лично контролироваться одним из самых опытных специалистов в отрасли." },
             { feature: "8+ концепций логотипа на основе стратегии", benefit: "Вы получите максимальный выбор для поиска идеального решения для вашего бренда." },
+            { feature: "Фирменный стиль (основные цвета, шрифты, правила)", benefit: "Все визуальные элементы вашего бренда будут систематизированы, что обеспечит его целостность." },
             { feature: "Визуальный брендбук и логобук", benefit: "Вы получите 'конституцию' для управления вашим брендом, что сэкономит ваши будущие расходы на дизайн." },
             { feature: "Векторные файлы логотипа (AI, EPS, PNG, JPG, PDF)", benefit: "Вы сможете использовать логотип в любом размере и в любом месте без потери качества." },
             { feature: "Анимация логотипа (премиум-качество)", benefit: "На цифровых платформах ваш бренд оживет и резко выделится среди конкурентов." },
@@ -402,6 +404,7 @@ const enServiceDetails = {
     logoVIP: { ...uzServiceDetails.logoVIP, label: "Logo + Corporate Identity + Brandbook", description: "Expanded identity and full support.", features: [
             { feature: "Personal involvement of Bakhtiyorjon Gaziyev", benefit: "Your project will be personally supervised by one of the most experienced specialists in the industry." },
             { feature: "8+ logo concepts based on strategy", benefit: "You will have the maximum choice to find the perfect solution for your brand." },
+            { feature: "Corporate identity (main colors, fonts, rules)", benefit: "All visual elements of your brand will be systematized, which will ensure its consistency." },
             { feature: "Visual Brandbook and Logobook", benefit: "You will get a 'constitution' for managing your brand, which will save you future design costs." },
             { feature: "Vector logo files (AI, EPS, PNG, JPG, PDF)", benefit: "You can use the logo in any size and in any place without loss of quality." },
             { feature: "Logo animation (premium quality)", benefit: "On digital platforms, your brand will come to life and stand out sharply from competitors." },
@@ -475,6 +478,7 @@ const zhServiceDetails = {
     logoVIP: { ...uzServiceDetails.logoVIP, label: "标志 + 企业形象 + 品牌手册", description: "扩展的形象和全面支持。", features: [
             { feature: "Bakhtiyorjon Gaziyev的亲自参与", benefit: "您的项目将由业内最有经验的专家之一亲自监督。" },
             { feature: "8个以上基于战略的标志概念", benefit: "您将有最大的选择来为您的品牌找到完美的解决方案。" },
+            { feature: "企业形象（主色、字体、规则）", benefit: "您品牌的所有视觉元素都将系统化，这将确保其一致性。" },
             { feature: "视觉品牌手册和标志手册", benefit: "您将获得管理品牌的“宪法”，这将为您节省未来的设计成本。" },
             { feature: "矢量标志文件（AI, EPS, PNG, JPG, PDF）", benefit: "您可以在任何尺寸和任何地方使用标志而不会损失质量。" },
             { feature: "标志动画（高品质）", benefit: "在数字平台上，您的品牌将栩栩如生，并从竞争对手中脱颖而出。" },
