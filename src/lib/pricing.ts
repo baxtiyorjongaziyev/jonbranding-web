@@ -101,7 +101,7 @@ const uzServiceDetails = {
     },
     namingStandard: { 
         label: "Naming Standard", 
-        description: "Kichik biznes uchun ideal.", 
+        description: "Kichik biznes va startaplar uchun ideal.", 
         price: basePricesUSD.namingStandard, 
         note: null, 
         features: [
@@ -115,7 +115,7 @@ const uzServiceDetails = {
     },
     namingPremium: { 
         label: "Naming Premium", 
-        description: "O'rta va rivojlanayotgan biznes uchun.", 
+        description: "O'rta va rivojlanayotgan biznes uchun strategik yondashuv.", 
         price: basePricesUSD.namingPremium, 
         note: null, 
         features: [
@@ -138,6 +138,7 @@ const uzServiceDetails = {
             { feature: "10+ keng konsepsiyali, hikoyaga ega nom variantlari", benefit: "Sizda tanlov keng bo‘ladi — bir nechta kuchli yo‘nalishdan sizga eng ko‘p foyda keltiradiganini tanlaysiz." },
             { feature: "10 yilga bepul domen band qilib beriladi", benefit: "Onlayn makoningiz 10 yil davomida xavfsiz. Raqobatchilar domeningizni olib qo‘yolmaydi." },
             { feature: "Har bir nom uchun storytelling asosida professional taqdimot", benefit: "Siz brend nomini chiroyli va ishonchli tarzda asoslay olasiz. Investor, hamkor yoki mijoz eshitishi bilanoq nimaga bu nom tanlanganini tushunadi." },
+            { feature: "Patentga topshirib berish xizmati (bojlar alohida)", benefit: "Brend nomingizni darhol qonuniy himoyaga olish jarayonini boshlaymiz, vaqt yo'qotmaysiz." },
             { feature: "3 oygacha post-delivery huquqiy maslahat va kuzatuv", benefit: "Nom ishga tushgandan keyin ham yolg'iz qolmaysiz. Patent, domen, huquqiy masalalar bo'yicha qo'llab-quvvatlov davom etadi." }
         ], 
         benefits: ["Bozorda mutlaq yetakchilikka da'vogar nomga ega bo'ling", "Maksimal darajada himoyalangan va puxta o'ylangan brend nomi", "Shaxsiy ekspert nazorati va qo'llab-quvvatlash"], 
@@ -277,7 +278,7 @@ const ruServiceDetails = {
         benefits: ["Получите четкую карту развития для вашего бизнеса", "Оптимизируйте ваши маркетинговые расходы", "Займите прочное место на рынке"]
     },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
-    namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса.", 
+    namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса и стартапов.", 
         features: [
             { feature: "3 варианта короткого, звучного и запоминающегося названия", benefit: "У вас будет возможность выбрать из нескольких сильных вариантов." },
             { feature: "Проверка доступности домена и в социальных сетях", benefit: "Выбранное вами имя не будет занято в интернете, вы сможете без препятствий работать в маркетинге." },
@@ -304,6 +305,7 @@ const ruServiceDetails = {
             { feature: "10+ вариантов названия с широкой концепцией и историей", benefit: "У вас будет широкий выбор — из нескольких сильных направлений вы выберете то, которое принесет вам наибольшую пользу." },
             { feature: "Бесплатная регистрация домена на 10 лет", benefit: "Ваше онлайн-пространство будет в безопасности на 10 лет. Конкуренты не смогут забрать ваш домен." },
             { feature: "Профессиональная презентация для каждого названия на основе сторителлинга", benefit: "Вы сможете красиво и убедительно обосновать название бренда. Инвестор, партнер или клиент с первого раза поймет, почему было выбрано именно это имя." },
+            { feature: "Услуга подачи на патент (госпошлины отдельно)", benefit: "Мы немедленно начинаем процесс юридической защиты вашего бренда, вы не теряете времени." },
             { feature: "До 3 месяцев юридической консультации и поддержки после сдачи", benefit: "После запуска имени вы не останетесь одни. Поддержка по вопросам патента, домена, юридическим вопросам продолжится." }
         ], 
         benefits: ["Получите имя, претендующее на абсолютное лидерство на рынке", "Максимально защищенное и продуманное имя бренда", "Личный контроль и поддержка эксперта"], 
@@ -336,7 +338,7 @@ const enServiceDetails = {
         benefits: ["Get a clear development map for your business", "Optimize your marketing expenses", "Establish a strong position in the market"]
     },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
-    namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses.",
+    namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses and startups.",
         features: [
             { feature: "3 short, sonorous, and memorable name options", benefit: "You'll have the opportunity to choose from several strong options." },
             { feature: "Domain and social media availability check", benefit: "Your chosen name won't be taken on the internet, allowing you to market without obstacles." },
@@ -346,7 +348,7 @@ const enServiceDetails = {
         benefits: ["Get a quick and affordable name", "Give your business a professional start"], 
         timeline: "First concepts are presented within 7–10 working days" 
     },
-    namingPremium: { ...uzServiceDetails.namingPremium, label: "Naming Premium", description: "For medium and growing businesses.", 
+    namingPremium: { ...uzServiceDetails.namingPremium, label: "Naming Premium", description: "A strategic approach for medium and growing businesses.", 
         features: [
             { feature: "5+ well-thought-out name options aligned with the strategy", benefit: "You'll be able to choose the best from several strong directions that match your strategy." },
             { feature: "Semantic and phonetic check in 6 languages", benefit: "When entering the international market, your name will not have negative connotations and will be easy to pronounce." },
@@ -363,6 +365,7 @@ const enServiceDetails = {
             { feature: "10+ name options with broad concepts and stories", benefit: "You'll have a wide choice—from several strong directions, you'll choose the one that benefits you the most." },
             { feature: "Free domain registration for 10 years", benefit: "Your online space will be secure for 10 years. Competitors won't be able to take your domain." },
             { feature: "Professional presentation for each name based on storytelling", benefit: "You'll be able to justify the brand name beautifully and convincingly. An investor, partner, or client will understand why this name was chosen right away." },
+            { feature: "Patent filing service (government fees are separate)", benefit: "We immediately start the process of legally protecting your brand name, you don't lose time." },
             { feature: "Up to 3 months of post-delivery legal advice and monitoring", benefit: "You won't be alone after the name launch. Support on patent, domain, and legal issues will continue." }
         ],
         benefits: ["Get a name that contends for absolute market leadership", "A maximally protected and well-thought-out brand name", "Personal expert supervision and support"], 
@@ -395,7 +398,7 @@ const zhServiceDetails = {
         benefits: ["为您的业务获得清晰的发展蓝图", "优化您的营销开支", "在市场上建立稳固的地位"]
     },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
-    namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业。", 
+    namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业和初创公司。", 
         features: [
             { feature: "3个简短、响亮、易记的名称选项", benefit: "您将有机会从几个强有力的选项中进行选择。" },
             { feature: "域名和社交媒体可用性检查", benefit: "您选择的名称在互联网上不会被占用，您可以在营销中无障碍地工作。" },
@@ -405,7 +408,7 @@ const zhServiceDetails = {
         benefits: ["获得一个快速且实惠的名称", "为您的业务提供专业的开端"], 
         timeline: "初步概念在7-10个工作日内提交" 
     },
-    namingPremium: { ...uzServiceDetails.namingPremium, label: "高级命名", description: "适合中型和成长型企业。", 
+    namingPremium: { ...uzServiceDetails.namingPremium, label: "高级命名", description: "适合中型和成长型企业的战略方法。", 
         features: [
             { feature: "5个以上符合战略的深思熟虑的名称选项", benefit: "您将能够从几个符合您战略的强有力方向中选择最好的一个。" },
             { feature: "6种语言的语义和语音检查", benefit: "进入国际市场时，您的名字不会有负面含义，并且易于发音。" },
@@ -422,6 +425,7 @@ const zhServiceDetails = {
             { feature: "10个以上具有广泛概念和故事的名称选项", benefit: "您将有广泛的选择——从几个强有力的方向中，您将选择对您最有利的一个。" },
             { feature: "免费注册域名10年", benefit: "您的在线空间将安全10年。竞争对手无法抢走您的域名。" },
             { feature: "基于讲故事的每个名称的专业演示", benefit: "您将能够精美且有说服力地为品牌名称辩护。投资者、合作伙伴或客户会立刻明白为什么选择这个名字。" },
+            { feature: "专利申请服务（政府费用另计）", benefit: "我们立即开始合法保护您的品牌名称的过程，您不会浪费时间。" },
             { feature: "交付后长达3个月的法律咨询和监控", benefit: "名称启动后您不会孤单。关于专利、域名和法律问题的支持将继续。" }
         ],
         benefits: ["获得一个争夺绝对市场领导地位的名称", "一个受到最大保护且深思熟虑的品牌名称", "个人专家监督和支持"], 
@@ -722,18 +726,22 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
     }
 
     if (conditions.length > 0) {
-        summary += `\n${lang === 'ru' ? 'Особые условия' : lang === 'en' ? 'Special conditions' : lang === 'zh' ? '特殊条件' : 'Maxsus shartlar'}: ${conditions.join(', ')}`;
+        summary += `
+${lang === 'ru' ? 'Особые условия' : lang === 'en' ? 'Special conditions' : lang === 'zh' ? '特殊条件' : 'Maxsus shartlar'}: ${conditions.join(', ')}`;
     }
 
     if (discountApplied.length > 0) {
         const discountText = discountApplied.map(d => `${d.name} (${formatPrice(d.value, lang, 'usd')})`).join('; ');
-        summary += `\n${lang === 'ru' ? 'Примененные скидки' : lang === 'en' ? 'Applied discounts' : lang === 'zh' ? '应用的折扣' : 'Qo\'llanilgan chegirmalar'}: ${discountText}`;
+        summary += `
+${lang === 'ru' ? 'Примененные скидки' : lang === 'en' ? 'Applied discounts' : lang === 'zh' ? '应用的折扣' : 'Qo\'llanilgan chegirmalar'}: ${discountText}`;
     }
 
     if (bonus) {
-        summary += `\n${lang === 'ru' ? 'Бонус' : lang === 'en' ? 'Bonus' : 'Bonus'}: ${bonus}`;
+        summary += `
+${lang === 'ru' ? 'Бонус' : lang === 'en' ? 'Bonus' : 'Bonus'}: ${bonus}`;
     }
 
     return summary;
 }
+
 
