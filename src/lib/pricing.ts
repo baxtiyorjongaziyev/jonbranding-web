@@ -105,10 +105,10 @@ const uzServiceDetails = {
         price: basePricesUSD.namingStandard, 
         note: null, 
         features: [
-            { feature: "Qisqa, jarangdor va esda qolarli 3 ta nom varianti", benefit: "Sizda bir nechta kuchli variantlardan tanlash imkoniyati bo'ladi." },
+            { feature: "Qisqa, jarangli va esda qolarli 3 ta nom", benefit: "Biznesingizga professional start beradigan bir nechta kuchli variantdan tanlaysiz." },
             { feature: "Domen va ijtimoiy tarmoqlarda bo'shlik tekshiruvi", benefit: "Tanlagan nomingiz internetda band bo'lmaydi, marketingda to'siqsiz ishlaysiz." },
             { feature: "Patentga yaroqlilik bo'yicha dastlabki tekshiruv (1 klass)", benefit: "Kelajakdagi katta huquqiy muammolarning oldini olasiz." },
-            { feature: "Eshitgan odam yoza oladigan va topa oladigan nomlar", benefit: "Nomingiz oson talaffuz qilinadi va esda qoladi, bu esa og'zaki reklamani (word-of-mouth) kuchaytiradi." }
+            { feature: "100% Mamnuniyat Kafolati", benefit: "Agar taklif qilingan nom variantlaridan birortasi sizga ma'qul kelmasa, to'lovingizni to'liq qaytarib beramiz." }
         ], 
         benefits: ["Tez va hamyonbop nomga ega bo'ling", "Biznesingizga professional start bering"], 
         timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" 
@@ -122,7 +122,8 @@ const uzServiceDetails = {
             { feature: "5+ strategiyaga mos, puxta o'ylangan nom variantlari", benefit: "Strategiyangizga mos bir nechta kuchli yo'nalishdan eng yaxshisini tanlab olasiz." },
             { feature: "6 tilda semantik va fonetik tekshiruv", benefit: "Xalqaro bozorga chiqqanda nomingiz salbiy ma'no bermaydi va oson talaffuz qilinadi." },
             { feature: "Patentga yaroqlilik bo'yicha chuqur tekshiruv va huquqiy xulosa", benefit: "Brend nomingizni huquqiy jihatdan himoya qilish uchun to'liq asosga ega bo'lasiz." },
-            { feature: "5 yilga bepul domen band qilib beriladi", benefit: "Eng muhim onlayn aktivingiz 5 yil davomida himoyada bo'ladi." }
+            { feature: "5 yilga bepul domen band qilib beriladi", benefit: "Eng muhim onlayn aktivingiz 5 yil davomida himoyada bo'ladi." },
+            { feature: "100% Mamnuniyat Kafolati", benefit: "Agar taklif qilingan nom variantlaridan birortasi sizga ma'qul kelmasa, to'lovingizni to'liq qaytarib beramiz." }
         ], 
         benefits: ["Brendingiz uchun strategik jihatdan kuchli nom oling", "Xalqaro bozorga chiqish imkoniyatini yarating", "Huquqiy jihatdan himoyalangan nomga ega bo'ling"], 
         recommended: true, 
@@ -138,8 +139,8 @@ const uzServiceDetails = {
             { feature: "10+ keng konsepsiyali, hikoyaga ega nom variantlari", benefit: "Sizda tanlov keng bo‘ladi — bir nechta kuchli yo‘nalishdan sizga eng ko‘p foyda keltiradiganini tanlaysiz." },
             { feature: "10 yilga bepul domen band qilib beriladi", benefit: "Onlayn makoningiz 10 yil davomida xavfsiz. Raqobatchilar domeningizni olib qo‘yolmaydi." },
             { feature: "Har bir nom uchun storytelling asosida professional taqdimot", benefit: "Siz brend nomini chiroyli va ishonchli tarzda asoslay olasiz. Investor, hamkor yoki mijoz eshitishi bilanoq nimaga bu nom tanlanganini tushunadi." },
-            { feature: "Patentga topshirib berish xizmati (bojlar alohida)", benefit: "Brend nomingizni darhol qonuniy himoyaga olish jarayonini boshlaymiz, vaqt yo'qotmaysiz." },
-            { feature: "3 oygacha post-delivery huquqiy maslahat va kuzatuv", benefit: "Nom ishga tushgandan keyin ham yolg'iz qolmaysiz. Patent, domen, huquqiy masalalar bo'yicha qo'llab-quvvatlov davom etadi." }
+            { feature: "Patentga topshirish xizmati (bojlar alohida)", benefit: "Brend nomingizni darhol qonuniy himoyaga olish jarayonini boshlaymiz, vaqt yo'qotmaysiz." },
+            { feature: "100% Mamnuniyat Kafolati", benefit: "Agar taklif qilingan nom variantlaridan birortasi sizga ma'qul kelmasa, to'lovingizni to'liq qaytarib beramiz." }
         ], 
         benefits: ["Bozorda mutlaq yetakchilikka da'vogar nomga ega bo'ling", "Maksimal darajada himoyalangan va puxta o'ylangan brend nomi", "Shaxsiy ekspert nazorati va qo'llab-quvvatlash"], 
         timeline: "Birinchi konsepsiyalar 20–25 ish kuni ichida taqdim etiladi" 
@@ -152,7 +153,8 @@ const uzServiceDetails = {
         features: [
             { feature: "Kompaniya brifi asosida 3 ta logotip konsepsiyasi", benefit: "Biznesingizga mos bir nechta variantdan birini tanlab olish imkoniyatiga ega bo'lasiz." },
             { feature: "5 ta touchpoint vizualizatsiya", benefit: "Logotipingiz real hayotda (vizitka, post, web) qanday ko'rinishini oldindan ko'rasiz." },
-            { feature: "Logotip vektor fayllari (AI, EPS, PNG, JPG, PDF)", benefit: "Logotipni istalgan o'lchamda, istalgan joyda sifatini yo'qotmasdan ishlata olasiz." }
+            { feature: "Logotip vektor fayllari (AI, EPS, PNG, JPG, PDF)", benefit: "Logotipni istalgan o'lchamda, istalgan joyda sifatini yo'qotmasdan ishlata olasiz." },
+            { feature: "100% Mamnuniyat Kafolati", benefit: "Agar dastlabki konsepsiyalar sizga ma'qul kelmasa, to'lovingizni to'liq qaytarib beramiz." }
         ], 
         benefits: ["Biznesingiz uchun professional vizual asos yarating", "Tez va sifatli logotipga ega bo'ling"], 
         timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" 
@@ -166,7 +168,8 @@ const uzServiceDetails = {
             { feature: "5 ta strategiyaga mos logotip konsepsiyasi", benefit: "Logotipingiz shunchaki chiroyli emas, balki biznes maqsadingizga xizmat qiladigan bo'ladi." },
             { feature: "Firma uslubi (asosiy ranglar, shriftlar, qoidalar)", benefit: "Barcha marketing materiallaringiz bir xil, professional ko'rinishda bo'ladi, bu esa brendingizni mustahkamlaydi." },
             { feature: "15+ touchpoint vizualizatsiya", benefit: "Brendingiz turli vaziyatlarda (reklama, qadoq, ijtimoiy tarmoq) qanday ishlashini aniq ko'rasiz." },
-            { feature: "10 ta Telegram stiker", benefit: "Mijozlar bilan muloqotda brendingizni norasmiy va qiziqarli tarzda namoyon qilasiz." }
+            { feature: "10 ta Telegram stiker", benefit: "Mijozlar bilan muloqotda brendingizni norasmiy va qiziqarli tarzda namoyon qilasiz." },
+            { feature: "100% Mamnuniyat Kafolati", benefit: "Agar dastlabki konsepsiyalar sizga ma'qul kelmasa, to'lovingizni to'liq qaytarib beramiz." }
         ], 
         benefits: ["Brendingiz uchun to'liq va tizimli vizual yechimga ega bo'ling", "Mijozlar ongida mustahkam va yagona obraz yarating", "Marketing materiallaringizda professional ko'rinishga erishing"], 
         recommended: true, 
@@ -182,7 +185,8 @@ const uzServiceDetails = {
             { feature: "8+ strategiyaga asoslangan logotip konsepsiyasi", benefit: "Brendingiz uchun eng mukammal yechimni topish uchun maksimal darajada keng tanlovga ega bo'lasiz." },
             { feature: "Vizual Brandbook va Logobook", benefit: "Brendingizni boshqarish uchun 'konstitutsiya'ga ega bo'lasiz, bu kelajakda dizayn xarajatlaringizni tejaydi." },
             { feature: "Logotip animatsiyasi (premium sifatli)", benefit: "Raqamli platformalarda brendingiz jonlanadi va raqobatchilardan keskin ajralib turadi." },
-            { feature: "3 oygacha post-delivery qo‘llab-quvvatlash", benefit: "Loyiha tugaganidan keyin ham dizaynni amaliyotga tatbiq etishda yolg'iz qolmaysiz." }
+            { feature: "3 oygacha post-delivery qo‘llab-quvvatlash", benefit: "Loyiha tugaganidan keyin ham dizaynni amaliyotga tatbiq etishda yolg'iz qolmaysiz." },
+            { feature: "100% Mamnuniyat Kafolati", benefit: "Agar dastlabki konsepsiyalar sizga ma'qul kelmasa, to'lovingizni to'liq qaytarib beramiz." }
         ], 
         benefits: ["Brendingiz uchun 'kalit taslim' yechim oling", "Bozorda premium segmentga da'vo qiling", "Brendingizni boshqarish uchun to'liq qo'llanma va vositalarga ega bo'ling"], 
         timeline: "Birinchi konsepsiyalar 20–30 ish kuni ichida taqdim etiladi" 
@@ -277,13 +281,18 @@ const ruServiceDetails = {
         ],
         benefits: ["Получите четкую карту развития для вашего бизнеса", "Оптимизируйте ваши маркетинговые расходы", "Займите прочное место на рынке"]
     },
-    commStrategy: { ...uzServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
+    commStrategy: { ...uzServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: [
+            { feature: "Сегментация целевой аудитории", benefit: "Вы будете говорить с каждой группой клиентов на их языке, повышая эффективность продаж." },
+            { feature: "Голос бренда (Tone of Voice)", benefit: "Ваш бренд начнет говорить как человек, что усилит эмоциональную связь с клиентами." },
+            { feature: "Ключевые сообщения (Key Messages)", benefit: "Вы будете продвигать единую, сильную идею во всей вашей рекламе и контенте." },
+            { feature: "План коммуникационных каналов", benefit: "Вы направите свой маркетинговый бюджет на самые эффективные каналы, избавившись от лишних трат." }
+        ], benefits: ["Найдите общий язык с вашими клиентами", "Создайте систему общения, которая увеличит ваши продажи", "Повысьте лояльность к вашему бренду"] },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса и стартапов.", 
         features: [
-            { feature: "3 варианта короткого, звучного и запоминающегося названия", benefit: "У вас будет возможность выбрать из нескольких сильных вариантов." },
+            { feature: "3 варианта короткого, звучного и запоминающегося названия", benefit: "У вас будет возможность выбрать из нескольких сильных вариантов, дающих профессиональный старт вашему бизнесу." },
             { feature: "Проверка доступности домена и в социальных сетях", benefit: "Выбранное вами имя не будет занято в интернете, вы сможете без препятствий работать в маркетинге." },
             { feature: "Первичная проверка на патентоспособность (1 класс)", benefit: "Вы предотвратите крупные юридические проблемы в будущем." },
-            { feature: "Названия, которые легко написать и найти на слух", benefit: "Ваше имя будет легко произноситься и запоминаться, что усилит сарафанное радио." }
+            { feature: "100% Гарантия Удовлетворенности", benefit: "Если вам не понравится ни один из предложенных вариантов названия, мы полностью вернем вам деньги." }
         ], 
         benefits: ["Получите быстрое и доступное имя", "Дайте профессиональный старт вашему бизнесу"], 
         timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" 
@@ -293,7 +302,8 @@ const ruServiceDetails = {
             { feature: "5+ продуманных вариантов названия, соответствующих стратегии", benefit: "Вы сможете выбрать лучшее из нескольких сильных направлений, соответствующих вашей стратегии." },
             { feature: "Семантическая и фонетическая проверка на 6 языках", benefit: "При выходе на международный рынок ваше имя не будет иметь негативного значения и будет легко произноситься." },
             { feature: "Глубокая проверка на патентоспособность и юридическое заключение", benefit: "Вы получите полное основание для юридической защиты вашего бренда." },
-            { feature: "Бесплатная регистрация домена на 5 лет", benefit: "Ваш самый важный онлайн-актив будет защищен на 5 лет." }
+            { feature: "Бесплатная регистрация домена на 5 лет", benefit: "Ваш самый важный онлайн-актив будет защищен на 5 лет." },
+            { feature: "100% Гарантия Удовлетворенности", benefit: "Если вам не понравится ни один из предложенных вариантов названия, мы полностью вернем вам деньги." }
         ], 
         benefits: ["Получите стратегически сильное имя для вашего бренда", "Создайте возможность выхода на международный рынок", "Получите юридически защищенное имя"], 
         recommended: true, 
@@ -306,14 +316,32 @@ const ruServiceDetails = {
             { feature: "Бесплатная регистрация домена на 10 лет", benefit: "Ваше онлайн-пространство будет в безопасности на 10 лет. Конкуренты не смогут забрать ваш домен." },
             { feature: "Профессиональная презентация для каждого названия на основе сторителлинга", benefit: "Вы сможете красиво и убедительно обосновать название бренда. Инвестор, партнер или клиент с первого раза поймет, почему было выбрано именно это имя." },
             { feature: "Услуга подачи на патент (госпошлины отдельно)", benefit: "Мы немедленно начинаем процесс юридической защиты вашего бренда, вы не теряете времени." },
-            { feature: "До 3 месяцев юридической консультации и поддержки после сдачи", benefit: "После запуска имени вы не останетесь одни. Поддержка по вопросам патента, домена, юридическим вопросам продолжится." }
+            { feature: "100% Гарантия Удовлетворенности", benefit: "Если вам не понравится ни один из предложенных вариантов названия, мы полностью вернем вам деньги." }
         ], 
         benefits: ["Получите имя, претендующее на абсолютное лидерство на рынке", "Максимально защищенное и продуманное имя бренда", "Личный контроль и поддержка эксперта"], 
         timeline: "Первые концепции предоставляются в течение 20–25 рабочих дней" 
     },
-    logoStandard: { ...uzServiceDetails.logoStandard, label: "Логотип Standard", description: "Быстрое решение для стартапов.", features: uzServiceDetails.logoStandard.features.map(f => ({...f})), benefits: uzServiceDetails.logoStandard.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
-    logoPremium: { ...uzServiceDetails.logoPremium, label: "Логотип и фирменный стиль", description: "Для тех, кто серьезно настроен развивать свой бренд.", features: uzServiceDetails.logoPremium.features.map(f => ({...f})), benefits: uzServiceDetails.logoPremium.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
-    logoVIP: { ...uzServiceDetails.logoVIP, label: "Логотип + Фирменный стиль + Брендбук", description: "Расширенная айдентика и полная поддержка.", features: uzServiceDetails.logoVIP.features.map(f => ({...f})), benefits: uzServiceDetails.logoVIP.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 20–30 рабочих дней" },
+    logoStandard: { ...uzServiceDetails.logoStandard, label: "Логотип Standard", description: "Быстрое решение для стартапов.", features: [
+            { feature: "3 концепции логотипа на основе брифа компании", benefit: "Вы сможете выбрать один из нескольких вариантов, подходящих вашему бизнесу." },
+            { feature: "Визуализация на 5 точках контакта", benefit: "Вы заранее увидите, как ваш логотип будет выглядеть в реальной жизни (на визитке, в посте, на сайте)." },
+            { feature: "Векторные файлы логотипа (AI, EPS, PNG, JPG, PDF)", benefit: "Вы сможете использовать логотип в любом размере и в любом месте без потери качества." },
+            { feature: "100% Гарантия Удовлетворенности", benefit: "Если вам не понравятся первоначальные концепции, мы полностью вернем вам деньги." }
+        ], benefits: ["Создайте профессиональную визуальную основу для вашего бизнеса", "Получите быстрый и качественный логотип"], timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
+    logoPremium: { ...uzServiceDetails.logoPremium, label: "Логотип и фирменный стиль", description: "Для тех, кто серьезно настроен развивать свой бренд.", features: [
+            { feature: "5 концепций логотипа, соответствующих стратегии", benefit: "Ваш логотип будет не просто красивым, а служить бизнес-целям." },
+            { feature: "Фирменный стиль (основные цвета, шрифты, правила)", benefit: "Все ваши маркетинговые материалы будут выглядеть единообразно и профессионально, что укрепит ваш бренд." },
+            { feature: "Визуализация на 15+ точках контакта", benefit: "Вы точно увидите, как ваш бренд будет работать в различных ситуациях (реклама, упаковка, соцсети)." },
+            { feature: "10 стикеров для Telegram", benefit: "Вы сможете неформально и интересно представлять ваш бренд в общении с клиентами." },
+            { feature: "100% Гарантия Удовлетворенности", benefit: "Если вам не понравятся первоначальные концепции, мы полностью вернем вам деньги." }
+        ], benefits: ["Получите полное и системное визуальное решение для вашего бренда", "Создайте прочный и единый образ в сознании клиентов", "Достигните профессионального вида в ваших маркетинговых материалах"], timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
+    logoVIP: { ...uzServiceDetails.logoVIP, label: "Логотип + Фирменный стиль + Брендбук", description: "Расширенная айдентика и полная поддержка.", features: [
+            { feature: "Личное участие Бахтиёржона Газиева", benefit: "Ваш проект будет лично контролироваться одним из самых опытных специалистов в отрасли." },
+            { feature: "8+ концепций логотипа на основе стратегии", benefit: "Вы получите максимальный выбор для поиска идеального решения для вашего бренда." },
+            { feature: "Визуальный брендбук и логобук", benefit: "Вы получите 'конституцию' для управления вашим брендом, что сэкономит ваши будущие расходы на дизайн." },
+            { feature: "Анимация логотипа (премиум-качество)", benefit: "На цифровых платформах ваш бренд оживет и резко выделится среди конкурентов." },
+            { feature: "Поддержка до 3 месяцев после сдачи", benefit: "Вы не останетесь одни при внедрении дизайна в практику после завершения проекта." },
+            { feature: "100% Гарантия Удовлетворенности", benefit: "Если вам не понравятся первоначальные концепции, мы полностью вернем вам деньги." }
+        ], benefits: ["Получите решение 'под ключ' для вашего бренда", "Претендуйте на премиум-сегмент на рынке", "Получите полное руководство и инструменты для управления вашим брендом"], timeline: "Первые концепции предоставляются в течение 20–30 рабочих дней" },
     packaging: { ...uzServiceDetails.packaging, label: "Дизайн упаковки", description: "Разработка упаковки для 3 SKU, подготовка к печати.", features: uzServiceDetails.packaging.features.map(f => ({...f})), benefits: uzServiceDetails.packaging.benefits.map(b => b) },
     smm: { ...uzServiceDetails.smm, label: "Стиль для социальных сетей", description: "Оформление постов и сторис в фирменном стиле.", features: uzServiceDetails.smm.features.map(f => ({...f})), benefits: uzServiceDetails.smm.benefits.map(b => b) },
     merch: { ...uzServiceDetails.merch, label: "Брендированный мерч и носители", description: "Дизайн одежды, аксессуаров, POSM-материалов.", features: uzServiceDetails.merch.features.map(f => ({...f})), benefits: uzServiceDetails.merch.benefits.map(b => b) },
@@ -337,13 +365,18 @@ const enServiceDetails = {
         ],
         benefits: ["Get a clear development map for your business", "Optimize your marketing expenses", "Establish a strong position in the market"]
     },
-    commStrategy: { ...uzServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
+    commStrategy: { ...uzServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: [
+        { feature: "Target audience segmentation", benefit: "You will speak to each customer group in their language, increasing sales efficiency." },
+        { feature: "Brand Voice (Tone of Voice)", benefit: "Your brand will start to speak like a person, which will strengthen the emotional connection with customers." },
+        { feature: "Key Messages", benefit: "You will promote a single, strong idea in all your advertising and content." },
+        { feature: "Communication channels plan", benefit: "You will direct your marketing budget to the most effective channels, getting rid of unnecessary expenses." }
+    ], benefits: ["Find a common language with your customers", "Create a communication system that will increase your sales", "Increase loyalty to your brand"] },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses and startups.",
         features: [
-            { feature: "3 short, sonorous, and memorable name options", benefit: "You'll have the opportunity to choose from several strong options." },
+            { feature: "3 short, sonorous, and memorable name options", benefit: "You'll have the opportunity to choose from several strong options that give your business a professional start." },
             { feature: "Domain and social media availability check", benefit: "Your chosen name won't be taken on the internet, allowing you to market without obstacles." },
             { feature: "Preliminary patentability check (1 class)", benefit: "You'll prevent major legal issues in the future." },
-            { feature: "Names that are easy to write and find by ear", benefit: "Your name will be easy to pronounce and remember, which enhances word-of-mouth marketing." }
+            { feature: "100% Satisfaction Guarantee", benefit: "If you don't like any of the proposed name options, we will give you a full refund." }
         ],
         benefits: ["Get a quick and affordable name", "Give your business a professional start"], 
         timeline: "First concepts are presented within 7–10 working days" 
@@ -353,7 +386,8 @@ const enServiceDetails = {
             { feature: "5+ well-thought-out name options aligned with the strategy", benefit: "You'll be able to choose the best from several strong directions that match your strategy." },
             { feature: "Semantic and phonetic check in 6 languages", benefit: "When entering the international market, your name will not have negative connotations and will be easy to pronounce." },
             { feature: "In-depth patentability check and legal opinion", benefit: "You'll have a full basis for legally protecting your brand name." },
-            { feature: "Free domain registration for 5 years", benefit: "Your most important online asset will be protected for 5 years." }
+            { feature: "Free domain registration for 5 years", benefit: "Your most important online asset will be protected for 5 years." },
+            { feature: "100% Satisfaction Guarantee", benefit: "If you don't like any of the proposed name options, we will give you a full refund." }
         ],
         benefits: ["Get a strategically strong name for your brand", "Create an opportunity for international market entry", "Get a legally protected name"], 
         recommended: true, 
@@ -366,14 +400,32 @@ const enServiceDetails = {
             { feature: "Free domain registration for 10 years", benefit: "Your online space will be secure for 10 years. Competitors won't be able to take your domain." },
             { feature: "Professional presentation for each name based on storytelling", benefit: "You'll be able to justify the brand name beautifully and convincingly. An investor, partner, or client will understand why this name was chosen right away." },
             { feature: "Patent filing service (government fees are separate)", benefit: "We immediately start the process of legally protecting your brand name, you don't lose time." },
-            { feature: "Up to 3 months of post-delivery legal advice and monitoring", benefit: "You won't be alone after the name launch. Support on patent, domain, and legal issues will continue." }
+            { feature: "100% Satisfaction Guarantee", benefit: "If you don't like any of the proposed name options, we will give you a full refund." }
         ],
         benefits: ["Get a name that contends for absolute market leadership", "A maximally protected and well-thought-out brand name", "Personal expert supervision and support"], 
         timeline: "First concepts are presented within 20–25 working days" 
     },
-    logoStandard: { ...uzServiceDetails.logoStandard, label: "Logo Standard", description: "A quick solution for startups.", features: uzServiceDetails.logoStandard.features.map(f => ({...f})), benefits: uzServiceDetails.logoStandard.benefits.map(b => b), timeline: "First concepts are presented within 7–10 working days" },
-    logoPremium: { ...uzServiceDetails.logoPremium, label: "Logo & Corporate Identity", description: "For those serious about developing their brand.", features: uzServiceDetails.logoPremium.features.map(f => ({...f})), benefits: uzServiceDetails.logoPremium.benefits.map(b => b), timeline: "First concepts are presented within 14–20 working days" },
-    logoVIP: { ...uzServiceDetails.logoVIP, label: "Logo + Corporate Identity + Brandbook", description: "Expanded identity and full support.", features: uzServiceDetails.logoVIP.features.map(f => ({...f})), benefits: uzServiceDetails.logoVIP.benefits.map(b => b), timeline: "First concepts are presented within 20–30 working days" },
+    logoStandard: { ...uzServiceDetails.logoStandard, label: "Logo Standard", description: "A quick solution for startups.", features: [
+            { feature: "3 logo concepts based on the company brief", benefit: "You will have the opportunity to choose one of several options suitable for your business." },
+            { feature: "Visualization on 5 touchpoints", benefit: "You will see in advance how your logo will look in real life (on a business card, in a post, on a website)." },
+            { feature: "Vector logo files (AI, EPS, PNG, JPG, PDF)", benefit: "You can use the logo in any size and in any place without loss of quality." },
+            { feature: "100% Satisfaction Guarantee", benefit: "If you don't like the initial concepts, we will give you a full refund." }
+        ], benefits: ["Create a professional visual foundation for your business", "Get a quick and high-quality logo"], timeline: "First concepts are presented within 7–10 working days" },
+    logoPremium: { ...uzServiceDetails.logoPremium, label: "Logo & Corporate Identity", description: "For those serious about developing their brand.", features: [
+            { feature: "5 logo concepts that match the strategy", benefit: "Your logo will not just be beautiful, but will serve business goals." },
+            { feature: "Corporate identity (main colors, fonts, rules)", benefit: "All your marketing materials will look uniform and professional, which will strengthen your brand." },
+            { feature: "Visualization on 15+ touchpoints", benefit: "You will see exactly how your brand will work in various situations (advertising, packaging, social networks)." },
+            { feature: "10 Telegram stickers", benefit: "You can informally and interestingly present your brand in communication with customers." },
+            { feature: "100% Satisfaction Guarantee", benefit: "If you don't like the initial concepts, we will give you a full refund." }
+        ], benefits: ["Get a complete and systematic visual solution for your brand", "Create a strong and unified image in the minds of customers", "Achieve a professional look in your marketing materials"], timeline: "First concepts are presented within 14–20 working days" },
+    logoVIP: { ...uzServiceDetails.logoVIP, label: "Logo + Corporate Identity + Brandbook", description: "Expanded identity and full support.", features: [
+            { feature: "Personal involvement of Bakhtiyorjon Gaziyev", benefit: "Your project will be personally supervised by one of the most experienced specialists in the industry." },
+            { feature: "8+ logo concepts based on strategy", benefit: "You will have the maximum choice to find the perfect solution for your brand." },
+            { feature: "Visual Brandbook and Logobook", benefit: "You will get a 'constitution' for managing your brand, which will save you future design costs." },
+            { feature: "Logo animation (premium quality)", benefit: "On digital platforms, your brand will come to life and stand out sharply from competitors." },
+            { feature: "Up to 3 months of post-delivery support", benefit: "You will not be left alone in implementing the design in practice after the project is completed." },
+            { feature: "100% Satisfaction Guarantee", benefit: "If you don't like the initial concepts, we will give you a full refund." }
+        ], benefits: ["Get a 'turnkey' solution for your brand", "Claim the premium segment in the market", "Get a complete guide and tools for managing your brand"], timeline: "First concepts are presented within 20–30 working days" },
     packaging: { ...uzServiceDetails.packaging, label: "Packaging Design", description: "Packaging development for 3 SKUs, preparation for printing.", features: uzServiceDetails.packaging.features.map(f => ({...f})), benefits: uzServiceDetails.packaging.benefits.map(b => b) },
     smm: { ...uzServiceDetails.smm, label: "Style for Social Networks", description: "Design of posts and stories in corporate style.", features: uzServiceDetails.smm.features.map(f => ({...f})), benefits: uzServiceDetails.smm.benefits.map(b => b) },
     merch: { ...uzServiceDetails.merch, label: "Branded Merch and Carriers", description: "Design of clothing, accessories, POSM materials.", features: uzServiceDetails.merch.features.map(f => ({...f})), benefits: uzServiceDetails.merch.benefits.map(b => b) },
@@ -397,13 +449,18 @@ const zhServiceDetails = {
         ],
         benefits: ["为您的业务获得清晰的发展蓝图", "优化您的营销开支", "在市场上建立稳固的地位"]
     },
-    commStrategy: { ...uzServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
+    commStrategy: { ...uzServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", features: [
+        { feature: "目标受众细分", benefit: "您将用每种客户群体的语言说话，提高销售效率。" },
+        { feature: "品牌声音（语调）", benefit: "您的品牌将开始像人一样说话，这将加强与客户的情感联系。" },
+        { feature: "关键信息", benefit: "您将在所有广告和内容中推广一个统一、强大的理念。" },
+        { feature: "传播渠道计划", benefit: "您将把营销预算投向最有效的渠道，摆脱不必要的开支。" }
+    ], benefits: ["与您的客户找到共同语言", "创建一个能增加您销售额的传播系统", "提高对您品牌的忠诚度"] },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业和初创公司。", 
         features: [
-            { feature: "3个简短、响亮、易记的名称选项", benefit: "您将有机会从几个强有力的选项中进行选择。" },
+            { feature: "3个简短、响亮、易记的名称选项", benefit: "您将有机会从几个强有力的选项中进行选择，为您的业务提供专业的开端。" },
             { feature: "域名和社交媒体可用性检查", benefit: "您选择的名称在互联网上不会被占用，您可以在营销中无障碍地工作。" },
             { feature: "初步可专利性检查（1类）", benefit: "您将避免未来重大的法律问题。" },
-            { feature: "听得懂、写得出、找得到的名称", benefit: "您的名字将易于发音和记忆，这会增强口碑营销。" }
+            { feature: "100% 满意保证", benefit: "如果您不喜欢任何一个提议的名称选项，我们将全额退款。" }
         ],
         benefits: ["获得一个快速且实惠的名称", "为您的业务提供专业的开端"], 
         timeline: "初步概念在7-10个工作日内提交" 
@@ -413,7 +470,8 @@ const zhServiceDetails = {
             { feature: "5个以上符合战略的深思熟虑的名称选项", benefit: "您将能够从几个符合您战略的强有力方向中选择最好的一个。" },
             { feature: "6种语言的语义和语音检查", benefit: "进入国际市场时，您的名字不会有负面含义，并且易于发音。" },
             { feature: "深入的可专利性检查和法律意见", benefit: "您将有充分的依据来合法保护您的品牌名称。" },
-            { feature: "免费注册域名5年", benefit: "您最重要的在线资产将受到5年的保护。" }
+            { feature: "免费注册域名5年", benefit: "您最重要的在线资产将受到5年的保护。" },
+            { feature: "100% 满意保证", benefit: "如果您不喜欢任何一个提议的名称选项，我们将全额退款。" }
         ],
         benefits: ["为您的品牌获得一个战略上强大的名称", "创造进入国际市场的机会", "获得一个受法律保护的名称"], 
         recommended: true, 
@@ -426,14 +484,32 @@ const zhServiceDetails = {
             { feature: "免费注册域名10年", benefit: "您的在线空间将安全10年。竞争对手无法抢走您的域名。" },
             { feature: "基于讲故事的每个名称的专业演示", benefit: "您将能够精美且有说服力地为品牌名称辩护。投资者、合作伙伴或客户会立刻明白为什么选择这个名字。" },
             { feature: "专利申请服务（政府费用另计）", benefit: "我们立即开始合法保护您的品牌名称的过程，您不会浪费时间。" },
-            { feature: "交付后长达3个月的法律咨询和监控", benefit: "名称启动后您不会孤单。关于专利、域名和法律问题的支持将继续。" }
+            { feature: "100% 满意保证", benefit: "如果您不喜欢任何一个提议的名称选项，我们将全额退款。" }
         ],
         benefits: ["获得一个争夺绝对市场领导地位的名称", "一个受到最大保护且深思熟虑的品牌名称", "个人专家监督和支持"], 
         timeline: "初步概念在20-25个工作日内提交" 
     },
-    logoStandard: { ...uzServiceDetails.logoStandard, label: "标准标志", description: "为初创公司提供的快速解决方案。", features: uzServiceDetails.logoStandard.features.map(f => ({...f})), benefits: uzServiceDetails.logoStandard.benefits.map(b => b), timeline: "初步概念在7-10个工作日内提交" },
-    logoPremium: { ...uzServiceDetails.logoPremium, label: "标志与企业形象", description: "为那些认真发展品牌的企业。", features: uzServiceDetails.logoPremium.features.map(f => ({...f})), benefits: uzServiceDetails.logoPremium.benefits.map(b => b), timeline: "初步概念在14-20个工作日内提交" },
-    logoVIP: { ...uzServiceDetails.logoVIP, label: "标志 + 企业形象 + 品牌手册", description: "扩展的形象和全面支持。", features: uzServiceDetails.logoVIP.features.map(f => ({...f})), benefits: uzServiceDetails.logoVIP.benefits.map(b => b), timeline: "初步概念在20-30个工作日内提交" },
+    logoStandard: { ...uzServiceDetails.logoStandard, label: "标准标志", description: "为初创公司提供的快速解决方案。", features: [
+            { feature: "基于公司简报的3个标志概念", benefit: "您将有机会从几个适合您业务的选项中选择一个。" },
+            { feature: "在5个接触点上的可视化", benefit: "您将提前看到您的标志在现实生活中的样子（在名片上、在帖子中、在网站上）。" },
+            { feature: "矢量标志文件（AI, EPS, PNG, JPG, PDF）", benefit: "您可以在任何尺寸和任何地方使用标志而不会损失质量。" },
+            { feature: "100% 满意保证", benefit: "如果您不喜欢最初的概念，我们将全额退款。" }
+        ], benefits: ["为您的业务创建一个专业的视觉基础", "获得一个快速且高质量的标志"], timeline: "初步概念在7-10个工作日内提交" },
+    logoPremium: { ...uzServiceDetails.logoPremium, label: "标志与企业形象", description: "为那些认真发展品牌的企业。", features: [
+            { feature: "5个符合战略的标志概念", benefit: "您的标志将不仅仅是漂亮的，还将服务于商业目标。" },
+            { feature: "企业形象（主色、字体、规则）", benefit: "您所有的营销材料都将看起来统一和专业，这将加强您的品牌。" },
+            { feature: "在15个以上接触点上的可视化", benefit: "您将确切地看到您的品牌在各种情况下的工作方式（广告、包装、社交网络）。" },
+            { feature: "10个Telegram贴纸", benefit: "您可以在与客户的沟通中非正式且有趣地展示您的品牌。" },
+            { feature: "100% 满意保证", benefit: "如果您不喜欢最初的概念，我们将全额退款。" }
+        ], benefits: ["为您的品牌获得一个完整和系统的视觉解决方案", "在客户心目中创建一个强大和统一的形象", "在您的营销材料中实现专业外观"], timeline: "初步概念在14-20个工作日内提交" },
+    logoVIP: { ...uzServiceDetails.logoVIP, label: "标志 + 企业形象 + 品牌手册", description: "扩展的形象和全面支持。", features: [
+            { feature: "Bakhtiyorjon Gaziyev的亲自参与", benefit: "您的项目将由业内最有经验的专家之一亲自监督。" },
+            { feature: "8个以上基于战略的标志概念", benefit: "您将有最大的选择来为您的品牌找到完美的解决方案。" },
+            { feature: "视觉品牌手册和标志手册", benefit: "您将获得管理品牌的“宪法”，这将为您节省未来的设计成本。" },
+            { feature: "标志动画（高品质）", benefit: "在数字平台上，您的品牌将栩栩如生，并从竞争对手中脱颖而出。" },
+            { feature: "项目完成后长达3个月的支持", benefit: "在项目完成后，您在实践中实施设计时不会孤单。" },
+            { feature: "100% 满意保证", benefit: "如果您不喜欢最初的概念，我们将全额退款。" }
+        ], benefits: ["为您的品牌获得一个“交钥匙”解决方案", "在市场上争取高端细分市场", "获得管理品牌的完整指南和工具"], timeline: "初步概念在20-30个工作日内提交" },
     packaging: { ...uzServiceDetails.packaging, label: "包装设计", description: "为3个SKU开发包装，为印刷做准备。", features: uzServiceDetails.packaging.features.map(f => ({...f})), benefits: uzServiceDetails.packaging.benefits.map(b => b) },
     smm: { ...uzServiceDetails.smm, label: "社交网络风格", description: "以企业风格设计帖子和故事。", features: uzServiceDetails.smm.features.map(f => ({...f})), benefits: uzServiceDetails.smm.benefits.map(b => b) },
     merch: { ...uzServiceDetails.merch, label: "品牌商品和载体", description: "服装、配饰、POSM材料的设计。", features: uzServiceDetails.merch.features.map(f => ({...f})), benefits: uzServiceDetails.merch.benefits.map(b => b) },
@@ -745,3 +821,6 @@ ${lang === 'ru' ? 'Бонус' : lang === 'en' ? 'Bonus' : 'Bonus'}: ${bonus}`;
 }
 
 
+
+
+    
