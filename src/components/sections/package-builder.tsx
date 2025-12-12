@@ -634,34 +634,32 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                           </div>
 
                                           <div className="space-y-3">
-                                              <h4 className="font-semibold text-white">{translations.cost_calculation_title}</h4>
-                                              {total.base > 0 && (
-                                                  <>
-                                                      <div className="flex justify-between items-center text-lg">
-                                                          <span className="text-blue-200 line-through text-base">{translations.base_price}</span>
-                                                          <span className="font-mono line-through text-base">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                      </div>
-                                                      {total.surcharges.map(s => (
-                                                          <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
-                                                              <span>{s.name}</span>
-                                                              <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                          </div>
-                                                      ))}
-                                                      {total.discountApplied.map(d => (
-                                                          <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
-                                                              <span>{d.name}</span>
-                                                              <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                          </div>
-                                                      ))}
-                                                  </>
-                                              )}
-                                              {total.savings > 0 && (
-                                                  <div className="flex justify-between items-center text-lg font-bold text-green-300 pt-2 border-t border-green-400/20">
-                                                      <span>{translations.total_savings}</span>
-                                                      <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                  </div>
-                                              )}
-                                          </div>
+                                                <h4 className="font-semibold text-white">{translations.cost_calculation_title}</h4>
+                                                {total.base > 0 && (
+                                                    <div className="flex justify-between items-baseline text-2xl">
+                                                        <span className="text-blue-200 line-through text-base">{translations.base_price}</span>
+                                                        <span className="font-mono line-through">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                    </div>
+                                                )}
+                                                {total.surcharges.map(s => (
+                                                    <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
+                                                        <span>{s.name}</span>
+                                                        <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                    </div>
+                                                ))}
+                                                {total.discountApplied.map(d => (
+                                                    <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
+                                                        <span>{d.name}</span>
+                                                        <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                    </div>
+                                                ))}
+                                                {total.savings > 0 && (
+                                                    <div className="flex justify-between items-baseline text-xl font-bold text-green-300 pt-2 border-t border-green-400/20">
+                                                        <span>{translations.total_savings}</span>
+                                                        <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                    </div>
+                                                )}
+                                            </div>
                                       </div>
                                    ) : (
                                        <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
@@ -741,3 +739,4 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
