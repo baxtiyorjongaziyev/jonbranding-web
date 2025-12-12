@@ -166,8 +166,8 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
                         </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious className="hidden sm:flex" />
-                    <CarouselNext className="hidden sm:flex" />
+                    <CarouselPrevious aria-label="Oldingi fikr" className="hidden sm:flex" />
+                    <CarouselNext aria-label="Keyingi fikr" className="hidden sm:flex" />
                 </Carousel>
             </div>
         )}

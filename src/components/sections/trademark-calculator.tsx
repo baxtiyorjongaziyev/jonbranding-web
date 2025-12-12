@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useMemo, useState } from 'react';
@@ -14,7 +13,7 @@ import { event as gtagEvent } from '@/lib/gtag';
 import { motion } from 'framer-motion';
 import { Slider } from '@/components/ui/slider';
 import { Checkbox } from '../ui/checkbox';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '../ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -257,6 +256,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
                                 value={[field.value]}
                                 onValueChange={(value) => field.onChange(value[0])}
                                 min={1} max={45} step={1} className="flex-1"
+                                aria-label={translations.classCountLabel}
                             />
                             <IconButton onClick={() => form.setValue('classCount', clampClassCount(field.value + 1))} disabled={field.value >= 45}>
                                 <Plus className="h-4 w-4"/>
@@ -295,13 +295,16 @@ export default function TrademarkCalculator({ translations }: { translations: an
                     </FormItem>
                 )} />
 
-                <FormField control={form.control} name="activity" render={({ field }) => (
+                <FormField control={form.control} name="activity" render={({ field, fieldState }) => (
                     <FormItem>
                         <FormLabel className="font-medium">{translations.activityLabel}</FormLabel>
                         <FormControl>
-                            <Textarea className="mt-1" rows={3} placeholder={translations.activityPlaceholder} {...field} />
+                            <Textarea className="mt-1" rows={3} placeholder={translations.activityPlaceholder} {...field} aria-describedby={!fieldState.error ? 'activity-desc' : undefined} />
                         </FormControl>
-                        <p className="mt-1 text-xs text-slate-500">{translations.activityHelp}</p>
+                        <FormDescription id="activity-desc">
+                           {translations.activityHelp}
+                        </FormDescription>
+                        <FormMessage />
                     </FormItem>
                 )} />
                  <FormField
@@ -435,5 +438,3 @@ function Row({ label, value, bold=false, currency }: { label: string, value: num
 function Divider() {
   return <div className="mt-2 pt-2 border-t" />;
 }
-
-    
