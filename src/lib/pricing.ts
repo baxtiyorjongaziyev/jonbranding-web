@@ -105,7 +105,7 @@ const uzServiceDetails = {
         price: basePricesUSD.namingStandard, 
         note: null, 
         features: [
-            { feature: "Qisqa, jarangli va esda qolarli 3 ta nom", benefit: "Biznesingizga professional start beradigan bir nechta kuchli variantdan tanlaysiz." },
+            { feature: "Qisqa, jarangli va esda qolarli 3 ta nom", benefit: "Biznesingizga professional start beradigan bir nechta kuchli variantdan tanlaysiz. Eshitgan odam oson topa oladi." },
             { feature: "Domen va ijtimoiy tarmoqlarda bo'shlik tekshiruvi", benefit: "Tanlagan nomingiz internetda band bo'lmaydi, marketingda to'siqsiz ishlaysiz." },
             { feature: "Patentga yaroqlilik bo'yicha dastlabki tekshiruv (1 klass)", benefit: "Kelajakdagi katta huquqiy muammolarning oldini olasiz." },
             { feature: "100% Mamnuniyat Kafolati", benefit: "Agar taklif qilingan nom variantlaridan birortasi sizga ma'qul kelmasa, to'lovingizni to'liq qaytarib beramiz." }
@@ -119,9 +119,9 @@ const uzServiceDetails = {
         price: basePricesUSD.namingPremium, 
         note: null, 
         features: [
-            { feature: "5+ strategiyaga mos, puxta o'ylangan nom variantlari", benefit: "Strategiyangizga mos bir nechta kuchli yo'nalishdan eng yaxshisini tanlab olasiz." },
+            { feature: "5+ strategiyaga mos, puxta o'ylangan nom variantlari", benefit: "Strategiyangizga mos bir nechta kuchli yo'nalishdan eng yaxshisini tanlab olasiz. Eshitgan odam oson topa oladi." },
             { feature: "6 tilda semantik va fonetik tekshiruv", benefit: "Xalqaro bozorga chiqqanda nomingiz salbiy ma'no bermaydi va oson talaffuz qilinadi." },
-            { feature: "Patentga yaroqlilik bo'yicha chuqur tekshiruv va huquqiy xulosa", benefit: "Brend nomingizni huquqiy jihatdan himoya qilish uchun to'liq asosga ega bo'lasiz." },
+            { feature: "Patentga yaroqlilik bo'yicha chuqur tekshiruv (2 klassgacha) va huquqiy xulosa", benefit: "Brend nomingizni huquqiy jihatdan himoya qilish uchun to'liq asosga ega bo'lasiz." },
             { feature: "5 yilga bepul domen band qilib beriladi", benefit: "Eng muhim onlayn aktivingiz 5 yil davomida himoyada bo'ladi." },
             { feature: "100% Mamnuniyat Kafolati", benefit: "Agar taklif qilingan nom variantlaridan birortasi sizga ma'qul kelmasa, to'lovingizni to'liq qaytarib beramiz." }
         ], 
@@ -136,10 +136,10 @@ const uzServiceDetails = {
         note: null, 
         features: [
             { feature: "Shaxsan Baxtiyorjon Gaziyev ishtiroki va nazorati", benefit: "Sizga top darajadagi mutaxassisning bevosita e’tibori tushadi — nomingiz tasodifga emas, tajribaga tayangan bo‘ladi." },
-            { feature: "10+ keng konsepsiyali, hikoyaga ega nom variantlari", benefit: "Sizda tanlov keng bo‘ladi — bir nechta kuchli yo‘nalishdan sizga eng ko‘p foyda keltiradiganini tanlaysiz." },
+            { feature: "10+ keng konsepsiyali, hikoyaga ega nom variantlari", benefit: "Sizda tanlov keng bo‘ladi — bir nechta kuchli yo‘nalishdan sizga eng ko‘p foyda keltiradiganini tanlaysiz. Eshitgan odam oson topa oladi." },
             { feature: "10 yilga bepul domen band qilib beriladi", benefit: "Onlayn makoningiz 10 yil davomida xavfsiz. Raqobatchilar domeningizni olib qo‘yolmaydi." },
             { feature: "Har bir nom uchun storytelling asosida professional taqdimot", benefit: "Siz brend nomini chiroyli va ishonchli tarzda asoslay olasiz. Investor, hamkor yoki mijoz eshitishi bilanoq nimaga bu nom tanlanganini tushunadi." },
-            { feature: "Patentga topshirish xizmati (bojlar alohida)", benefit: "Brend nomingizni darhol qonuniy himoyaga olish jarayonini boshlaymiz, vaqt yo'qotmaysiz." },
+            { feature: "Patentga topshirishda yordam xizmati (bojlar alohida)", benefit: "Brend nomingizni darhol qonuniy himoyaga olish jarayonini boshlaymiz, vaqt yo'qotmaysiz." },
             { feature: "100% Mamnuniyat Kafolati", benefit: "Agar taklif qilingan nom variantlaridan birortasi sizga ma'qul kelmasa, to'lovingizni to'liq qaytarib beramiz." }
         ], 
         benefits: ["Bozorda mutlaq yetakchilikka da'vogar nomga ega bo'ling", "Maksimal darajada himoyalangan va puxta o'ylangan brend nomi", "Shaxsiy ekspert nazorati va qo'llab-quvvatlash"], 
@@ -289,7 +289,7 @@ const ruServiceDetails = {
         ], benefits: ["Найдите общий язык с вашими клиентами", "Создайте систему общения, которая увеличит ваши продажи", "Повысьте лояльность к вашему бренду"] },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса и стартапов.", 
         features: [
-            { feature: "3 варианта короткого, звучного и запоминающегося названия", benefit: "У вас будет возможность выбрать из нескольких сильных вариантов, дающих профессиональный старт вашему бизнесу." },
+            { feature: "3 варианта короткого, звучного и запоминающегося названия", benefit: "У вас будет возможность выбрать из нескольких сильных вариантов, дающих профессиональный старт вашему бизнесу. Услышав его, человек сможет легко его найти." },
             { feature: "Проверка доступности домена и в социальных сетях", benefit: "Выбранное вами имя не будет занято в интернете, вы сможете без препятствий работать в маркетинге." },
             { feature: "Первичная проверка на патентоспособность (1 класс)", benefit: "Вы предотвратите крупные юридические проблемы в будущем." },
             { feature: "100% Гарантия Удовлетворенности", benefit: "Если вам не понравится ни один из предложенных вариантов названия, мы полностью вернем вам деньги." }
@@ -299,9 +299,9 @@ const ruServiceDetails = {
     },
     namingPremium: { ...uzServiceDetails.namingPremium, label: "Нейминг Premium", description: "Для среднего и развивающегося бизнеса.", 
         features: [
-            { feature: "5+ продуманных вариантов названия, соответствующих стратегии", benefit: "Вы сможете выбрать лучшее из нескольких сильных направлений, соответствующих вашей стратегии." },
+            { feature: "5+ продуманных вариантов названия, соответствующих стратегии", benefit: "Вы сможете выбрать лучшее из нескольких сильных направлений, соответствующих вашей стратегии. Услышав его, человек сможет легко его найти." },
             { feature: "Семантическая и фонетическая проверка на 6 языках", benefit: "При выходе на международный рынок ваше имя не будет иметь негативного значения и будет легко произноситься." },
-            { feature: "Глубокая проверка на патентоспособность и юридическое заключение", benefit: "Вы получите полное основание для юридической защиты вашего бренда." },
+            { feature: "Глубокая проверка на патентоспособность (до 2 классов) и юридическое заключение", benefit: "Вы получите полное основание для юридической защиты вашего бренда." },
             { feature: "Бесплатная регистрация домена на 5 лет", benefit: "Ваш самый важный онлайн-актив будет защищен на 5 лет." },
             { feature: "100% Гарантия Удовлетворенности", benefit: "Если вам не понравится ни один из предложенных вариантов названия, мы полностью вернем вам деньги." }
         ], 
@@ -312,10 +312,10 @@ const ruServiceDetails = {
     namingVIP: { ...uzServiceDetails.namingVIP, label: "Нейминг VIP", description: "Для крупных и международных проектов.", 
         features: [
             { feature: "Личное участие и контроль Бахтиёржона Газиева", benefit: "Вам будет уделено непосредственное внимание специалиста высшего уровня — ваше имя будет основано на опыте, а не на случайности." },
-            { feature: "10+ вариантов названия с широкой концепцией и историей", benefit: "У вас будет широкий выбор — из нескольких сильных направлений вы выберете то, которое принесет вам наибольшую пользу." },
+            { feature: "10+ вариантов названия с широкой концепцией и историей", benefit: "У вас будет широкий выбор — из нескольких сильных направлений вы выберете то, которое принесет вам наибольшую пользу. Услышав его, человек сможет легко его найти." },
             { feature: "Бесплатная регистрация домена на 10 лет", benefit: "Ваше онлайн-пространство будет в безопасности на 10 лет. Конкуренты не смогут забрать ваш домен." },
             { feature: "Профессиональная презентация для каждого названия на основе сторителлинга", benefit: "Вы сможете красиво и убедительно обосновать название бренда. Инвестор, партнер или клиент с первого раза поймет, почему было выбрано именно это имя." },
-            { feature: "Услуга подачи на патент (госпошлины отдельно)", benefit: "Мы немедленно начинаем процесс юридической защиты вашего бренда, вы не теряете времени." },
+            { feature: "Помощь в подаче на патент (госпошлины отдельно)", benefit: "Мы немедленно начинаем процесс юридической защиты вашего бренда, вы не теряете времени." },
             { feature: "100% Гарантия Удовлетворенности", benefit: "Если вам не понравится ни один из предложенных вариантов названия, мы полностью вернем вам деньги." }
         ], 
         benefits: ["Получите имя, претендующее на абсолютное лидерство на рынке", "Максимально защищенное и продуманное имя бренда", "Личный контроль и поддержка эксперта"], 
@@ -373,7 +373,7 @@ const enServiceDetails = {
     ], benefits: ["Find a common language with your customers", "Create a communication system that will increase your sales", "Increase loyalty to your brand"] },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses and startups.",
         features: [
-            { feature: "3 short, sonorous, and memorable name options", benefit: "You'll have the opportunity to choose from several strong options that give your business a professional start." },
+            { feature: "3 short, sonorous, and memorable name options", benefit: "You'll have the opportunity to choose from several strong options that give your business a professional start. Anyone who hears it can easily find it." },
             { feature: "Domain and social media availability check", benefit: "Your chosen name won't be taken on the internet, allowing you to market without obstacles." },
             { feature: "Preliminary patentability check (1 class)", benefit: "You'll prevent major legal issues in the future." },
             { feature: "100% Satisfaction Guarantee", benefit: "If you don't like any of the proposed name options, we will give you a full refund." }
@@ -383,9 +383,9 @@ const enServiceDetails = {
     },
     namingPremium: { ...uzServiceDetails.namingPremium, label: "Naming Premium", description: "A strategic approach for medium and growing businesses.", 
         features: [
-            { feature: "5+ well-thought-out name options aligned with the strategy", benefit: "You'll be able to choose the best from several strong directions that match your strategy." },
+            { feature: "5+ well-thought-out name options aligned with the strategy", benefit: "You'll be able to choose the best from several strong directions that match your strategy. Anyone who hears it can easily find it." },
             { feature: "Semantic and phonetic check in 6 languages", benefit: "When entering the international market, your name will not have negative connotations and will be easy to pronounce." },
-            { feature: "In-depth patentability check and legal opinion", benefit: "You'll have a full basis for legally protecting your brand name." },
+            { feature: "In-depth patentability check (up to 2 classes) and legal opinion", benefit: "You'll have a full basis for legally protecting your brand name." },
             { feature: "Free domain registration for 5 years", benefit: "Your most important online asset will be protected for 5 years." },
             { feature: "100% Satisfaction Guarantee", benefit: "If you don't like any of the proposed name options, we will give you a full refund." }
         ],
@@ -396,10 +396,10 @@ const enServiceDetails = {
     namingVIP: { ...uzServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects.", 
         features: [
             { feature: "Personal involvement and supervision by Bakhtiyorjon Gaziyev", benefit: "You'll receive direct attention from a top-level expert—your name will be based on experience, not chance." },
-            { feature: "10+ name options with broad concepts and stories", benefit: "You'll have a wide choice—from several strong directions, you'll choose the one that benefits you the most." },
+            { feature: "10+ name options with broad concepts and stories", benefit: "You'll have a wide choice—from several strong directions, you'll choose the one that benefits you the most. Anyone who hears it can easily find it." },
             { feature: "Free domain registration for 10 years", benefit: "Your online space will be secure for 10 years. Competitors won't be able to take your domain." },
             { feature: "Professional presentation for each name based on storytelling", benefit: "You'll be able to justify the brand name beautifully and convincingly. An investor, partner, or client will understand why this name was chosen right away." },
-            { feature: "Patent filing service (government fees are separate)", benefit: "We immediately start the process of legally protecting your brand name, you don't lose time." },
+            { feature: "Assistance with patent filing (government fees are separate)", benefit: "We immediately start the process of legally protecting your brand name, you don't lose time." },
             { feature: "100% Satisfaction Guarantee", benefit: "If you don't like any of the proposed name options, we will give you a full refund." }
         ],
         benefits: ["Get a name that contends for absolute market leadership", "A maximally protected and well-thought-out brand name", "Personal expert supervision and support"], 
@@ -457,7 +457,7 @@ const zhServiceDetails = {
     ], benefits: ["与您的客户找到共同语言", "创建一个能增加您销售额的传播系统", "提高对您品牌的忠诚度"] },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业和初创公司。", 
         features: [
-            { feature: "3个简短、响亮、易记的名称选项", benefit: "您将有机会从几个强有力的选项中进行选择，为您的业务提供专业的开端。" },
+            { feature: "3个简短、响亮、易记的名称选项", benefit: "您将有机会从几个强有力的选项中进行选择，为您的业务提供专业的开端。任何听到它的人都可以轻松找到它。" },
             { feature: "域名和社交媒体可用性检查", benefit: "您选择的名称在互联网上不会被占用，您可以在营销中无障碍地工作。" },
             { feature: "初步可专利性检查（1类）", benefit: "您将避免未来重大的法律问题。" },
             { feature: "100% 满意保证", benefit: "如果您不喜欢任何一个提议的名称选项，我们将全额退款。" }
@@ -467,9 +467,9 @@ const zhServiceDetails = {
     },
     namingPremium: { ...uzServiceDetails.namingPremium, label: "高级命名", description: "适合中型和成长型企业的战略方法。", 
         features: [
-            { feature: "5个以上符合战略的深思熟虑的名称选项", benefit: "您将能够从几个符合您战略的强有力方向中选择最好的一个。" },
+            { feature: "5个以上符合战略的深思熟虑的名称选项", benefit: "您将能够从几个符合您战略的强有力方向中选择最好的一个。任何听到它的人都可以轻松找到它。" },
             { feature: "6种语言的语义和语音检查", benefit: "进入国际市场时，您的名字不会有负面含义，并且易于发音。" },
-            { feature: "深入的可专利性检查和法律意见", benefit: "您将有充分的依据来合法保护您的品牌名称。" },
+            { feature: "深入的可专利性检查（最多2类）和法律意见", benefit: "您将有充分的依据来合法保护您的品牌名称。" },
             { feature: "免费注册域名5年", benefit: "您最重要的在线资产将受到5年的保护。" },
             { feature: "100% 满意保证", benefit: "如果您不喜欢任何一个提议的名称选项，我们将全额退款。" }
         ],
@@ -480,10 +480,10 @@ const zhServiceDetails = {
     namingVIP: { ...uzServiceDetails.namingVIP, label: "VIP命名", description: "适合大型和国际项目。", 
         features: [
             { feature: "由Bakhtiyorjon Gaziyev亲自参与和监督", benefit: "您将获得顶级专家的直接关注——您的名字将基于经验，而非偶然。" },
-            { feature: "10个以上具有广泛概念和故事的名称选项", benefit: "您将有广泛的选择——从几个强有力的方向中，您将选择对您最有利的一个。" },
+            { feature: "10个以上具有广泛概念和故事的名称选项", benefit: "您将有广泛的选择——从几个强有力的方向中，您将选择对您最有利的一个。任何听到它的人都可以轻松找到它。" },
             { feature: "免费注册域名10年", benefit: "您的在线空间将安全10年。竞争对手无法抢走您的域名。" },
             { feature: "基于讲故事的每个名称的专业演示", benefit: "您将能够精美且有说服力地为品牌名称辩护。投资者、合作伙伴或客户会立刻明白为什么选择这个名字。" },
-            { feature: "专利申请服务（政府费用另计）", benefit: "我们立即开始合法保护您的品牌名称的过程，您不会浪费时间。" },
+            { feature: "协助专利申请（政府费用另计）", benefit: "我们立即开始合法保护您的品牌名称的过程，您不会浪费时间。" },
             { feature: "100% 满意保证", benefit: "如果您不喜欢任何一个提议的名称选项，我们将全额退款。" }
         ],
         benefits: ["获得一个争夺绝对市场领导地位的名称", "一个受到最大保护且深思熟虑的品牌名称", "个人专家监督和支持"], 
