@@ -257,7 +257,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                                 {benefits.map((benefit: string, index: number) => (
                                     <li key={index} className="flex items-start gap-3 text-sm">
                                         <HeartHandshake className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                                        <span className="text-gray-700">{benefit}</span>
+                                        <span className="text-gray-700" dangerouslySetInnerHTML={{ __html: benefit }}></span>
                                     </li>
                                 ))}
                             </ul>
@@ -636,8 +636,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                           <div className="space-y-3">
                                                 <h4 className="font-semibold text-white">{translations.cost_calculation_title}</h4>
                                                 {total.base > 0 && (
-                                                    <div className="flex justify-between items-baseline text-2xl">
-                                                        <span className="text-blue-200 line-through text-base">{translations.base_price}</span>
+                                                    <div className="flex justify-between items-baseline text-sm">
+                                                        <span className="text-blue-200">{translations.base_price}</span>
                                                         <span className="font-mono line-through">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                                     </div>
                                                 )}
@@ -654,7 +654,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                     </div>
                                                 ))}
                                                 {total.savings > 0 && (
-                                                    <div className="flex justify-between items-baseline text-xl font-bold text-green-300 pt-2 border-t border-green-400/20">
+                                                    <div className="flex justify-between items-baseline text-sm text-green-300 pt-2 border-t border-green-400/20">
                                                         <span>{translations.total_savings}</span>
                                                         <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                                     </div>
@@ -739,4 +739,5 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
 
