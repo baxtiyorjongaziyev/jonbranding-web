@@ -91,11 +91,12 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                                             <Image 
                                                 src={image.src}
                                                 alt={image.alt}
-                                                layout="fill"
+                                                fill
+                                                priority={index === 0}
+                                                loading={index === 0 ? "eager" : "lazy"}
                                                 objectFit="cover"
                                                 unoptimized={image.unoptimized}
                                                 className="bg-white"
-                                                priority
                                             />
                                         </div>
                                     </CarouselItem>
