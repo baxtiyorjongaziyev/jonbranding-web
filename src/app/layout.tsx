@@ -10,7 +10,6 @@ import { locales, defaultLocale } from '@/lib/i18n/locale';
 const poppins = Poppins({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-poppins',
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 
@@ -135,7 +134,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
     const lang = params.lang || 'uz';
 
   return (
-    <html lang={lang} suppressHydrationWarning className={`${poppins.variable}`}>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <Script
@@ -189,7 +188,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           }}
       />
       </head>
-      <body className="font-body bg-white antialiased">
+      <body className={`${poppins.className} font-body bg-white antialiased`}>
         <MainLayout>
           {children}
         </MainLayout>

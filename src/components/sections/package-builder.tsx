@@ -93,11 +93,13 @@ const CurrencyToggle = ({ currency, onCurrencyChange }: { currency: 'uzs' | 'usd
     </div>
 );
 
-const FeatureBenefitAccordion = ({ items, isVip }: { items: { feature: string, benefit: string }[], isVip: boolean }) => (
+const FeatureBenefitAccordion = ({ items, isVip }: { items: { feature: string; benefit: string }[], isVip: boolean }) => (
     <Accordion type="single" collapsible className="w-full space-y-2">
         {items.map((item, index) => (
             <AccordionItem value={`item-${index}`} key={index} className={cn("border-b-0 rounded-lg", isVip ? "bg-white/5" : "bg-gray-50")}>
-                <AccordionTrigger className={cn("text-left text-sm font-medium hover:no-underline p-3", isVip ? "text-gray-200" : "text-gray-700")}>
+                <AccordionTrigger 
+                    onClick={(e) => e.stopPropagation()} 
+                    className={cn("text-left text-sm font-medium hover:no-underline p-3", isVip ? "text-gray-200" : "text-gray-700")}>
                     <div className="flex items-start gap-3">
                          <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
                          <span>{item.feature}</span>
@@ -118,7 +120,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, features, timeline } = detail;
+    const { label, description, price, features, timeline, benefits } = detail;
 
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium') && !isVip;
@@ -161,6 +163,19 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
                              <FeatureBenefitAccordion items={features} isVip={isVip} />
                          </div>
+                    )}
+                     {benefits && benefits.length > 0 && (
+                        <div className="mt-6">
+                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.benefits}</p>
+                            <ul className="space-y-2">
+                                {benefits.map((benefit: string, index: number) => (
+                                    <li key={index} className="flex items-start gap-3 text-sm">
+                                        <HeartHandshake className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-300" : "text-green-500")} />
+                                        <span className={isVip ? "text-gray-300" : "text-gray-700"}>{benefit}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     )}
                 </div>
                 {timeline && (
@@ -234,6 +249,19 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
                             <FeatureBenefitAccordion items={features} isVip={false} />
                          </div>
+                    )}
+                    {benefits && benefits.length > 0 && (
+                        <div className="mt-6">
+                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.benefits}</p>
+                            <ul className="space-y-2">
+                                {benefits.map((benefit: string, index: number) => (
+                                    <li key={index} className="flex items-start gap-3 text-sm">
+                                        <HeartHandshake className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                                        <span className="text-gray-700">{benefit}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     )}
                 </div>
 
