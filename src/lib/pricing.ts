@@ -30,83 +30,293 @@ const basePricesUSD = {
 
 
 const uzServiceDetails = {
-    audit: { label: "Logo Auditi", description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.", price: basePricesUSD.audit, oldPrice: 118, discount: 0.5, note: null, features: ["Logotipning kuchli va zaif tomonlari", "Raqobatchilarga nisbatan tahlil", "Yaxshilash bo'yicha aniq tavsiyalar"], benefits: ["Brendingizni kuchaytirish uchun aniq yo'l-yo'riq oling", "Raqobatchilardan qanday ajralib turishni tushuning"] },
-    namingCheck: { label: "Neyming Tekshiruvi", description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.", price: basePricesUSD.namingCheck, oldPrice: 158, discount: 0.5, note: null, features: ["O'zbekiston bazasi bo'yicha tekshiruv", "Xalqaro WIPO bazasi bo'yicha tekshiruv", "Domen bo'shligini tekshirish", "Huquqiy maslahat"], benefits: ["Kelajakdagi yuridik muammolardan saqlaning", "Brendingiz uchun mustahkam poydevor yarating"] },
-    consultation: { label: "30 daqiqalik konsultatsiya", description: "Brending bo'yicha har qanday savolingizga tezkor yo'l-yo'riq va professional maslahat.", price: basePricesUSD.consultation, note: null, features: ["Biznes-muammolarni aniqlash", "Brending bo'yicha savollarga javob", "Keyingi qadamlar bo'yicha tavsiyalar"], benefits: ["Biznesingiz uchun to'g'ri yo'nalishni tezda aniqlang", "Qimmatli vaqt va pulingizni tejang"] },
-    strategy: { label: "Brend-strategiya va platforma", description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", price: basePricesUSD.strategy, note: null, features: ["Bozor va raqobatchilar tahlili", "Brend platformasi (missiya, qadriyatlar)", "Pozitsiyalash strategiyasi", "Brend arxitekturasi"], benefits: ["Biznesingiz uchun aniq rivojlanish xaritasini oling", "Marketing xarajatlaringizni optimallashtiring", "Bozorda mustahkam o'rin egallang"] },
-    commStrategy: { label: "Kommunikatsion strategiya", description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", price: basePricesUSD.commStrategy, note: null, features: ["Maqsadli auditoriya segmentatsiyasi", "Brend ovozi (Tone of Voice)", "Asosiy xabarlar (Key Messages)", "Kommunikatsiya kanallari rejasi"], benefits: ["Mijozlaringiz bilan to'g'ri til topishing", "Sotuvlaringizni oshiruvchi muloqot tizimini yarating", "Brendingizga sodiqlikni oshiring"] },
-    namingStandard: { label: "Naming Standard", description: "Kichik biznes uchun ideal.", price: basePricesUSD.namingStandard, note: null, features: ["Kompaniya va soha qisqa o‘rganiladi", "Raqobatchilar umumiy ko‘rib chiqiladi", "Mijoz xohish-istaklari yig‘iladi", "3 ta nom varianti ishlab chiqiladi", "Domen va ijtimoiy tarmoqlarda bo‘shlik tekshiriladi", "Patent bo‘yicha 1 klass auditi qilinadi", "Har bir variant fonetik jihatdan tekshiriladi"], benefits: ["Tez va hamyonbop nomga ega bo'ling", "Biznesingizga professional start bering"], timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" },
-    namingPremium: { label: "Naming Premium", description: "O'rta va rivojlanayotgan biznes uchun.", price: basePricesUSD.namingPremium, note: null, features: ["Kompaniya va soha chuqurroq o‘rganiladi", "Raqobatchilar va bozor tahlili qilinadi", "5+ nom varianti ishlab chiqiladi", "Domen va ijtimoiy tarmoqlarda bo‘shlik tekshiriladi", "6 tilda semantik va fonetik tekshiruv (Ingliz, Rus, Turk, Ispan, Italyan, Fransuz)", "Patent bo‘yicha 2 klass auditi va huquqiy xulosa", "5 yilga domen band qilib beriladi", "Nom variantlari qisqa taqdimot shaklida ko‘rsatiladi"], benefits: ["Brendingiz uchun strategik jihatdan kuchli nom oling", "Xalqaro bozorga chiqish imkoniyatini yarating", "Huquqiy jihatdan himoyalangan nomga ega bo'ling"], recommended: true, timeline: "Birinchi konsepsiyalar 14–20 ish kuni ichida taqdim etiladi" },
-    namingVIP: { label: "Naming VIP", description: "Katta va xalqaro bozorga mo'ljallangan loyihalar uchun.", price: basePricesUSD.namingVIP, note: null, features: ["Shaxsan Baxtiyorjon Gaziyev ishtiroki va nazorati", "Kompaniya, soha va auditoriya chuqur tahlil qilinadi", "Raqobatchilar va bozorning keng qamrovli tahlili qilinadi", "10+ keng konsepsiyali nom variantlari ishlab chiqiladi", "Domen va ijtimoiy tarmoqlarda bo‘shlik tekshiriladi", "6 tilda semantik + fonetik + huquqiy tekshiruv", "Patent tezlashtirilgan topshiruv (boj alohida)", "10 yilga domen band qilib beriladi", "Har bir nom uchun storytelling asosida tushuntirish beriladi", "Taqdimot professional prezentatsiya formatida qilinadi", "3 oygacha post-delivery huquqiy maslahat va kuzatuv"], benefits: ["Bozorda mutlaq yetakchilikka da'vogar nomga ega bo'ling", "Maksimal darajada himoyalangan va puxta o'ylangan brend nomi", "Shaxsiy ekspert nazorati va qo'llab-quvvatlash"], timeline: "Birinchi konsepsiyalar 20–25 ish kuni ichida taqdim etiladi" },
-    logoStandard: { label: "Logotip Standard", description: "Startaplar uchun tezkor yechim.", price: basePricesUSD.logoStandard, note: null, features: ["Kompaniya brifi asosida 3 ta logotip konsepsiyasi ishlab chiqiladi", "Raqobatchilar logotiplari tahlil qilinadi", "5 ta touchpoint vizualizatsiya (vizitka, post, web, qadoq, signage)", "Logotip vektor fayllari (AI, EPS, PNG, JPG, PDF) taqdim qilinadi", "Har bir konsepsiya texnik va vizual standartlarga tekshiriladi"], benefits: ["Biznesingiz uchun professional vizual asos yarating", "Tez va sifatli logotipga ega bo'ling"], timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" },
-    logoPremium: { label: "Logo va firma uslubi", description: "O'z brendini jiddiy rivojlantirish niyatidagilar uchun.", price: basePricesUSD.logoPremium, note: null, features: ["Kompaniya qadriyatlari va strategiyasiga mos 5 ta logotip konsepsiyasi ishlab chiqiladi", "Raqobatchilar va bozor vizual identifikatsiyasi o‘rganiladi", "15+ touchpoint vizualizatsiya (vizitka, qadoq, reklama, web, social post)", "Firma uslubi (asosiy ranglar, shriftlar, logotip qo‘llash qoidalari) ishlab chiqiladi", "10 ta Telegram stiker tayyorlanadi", "Taqdimot professional maketlar bilan ko‘rsatiladi"], benefits: ["Brendingiz uchun to'liq va tizimli vizual yechimga ega bo'ling", "Mijozlar ongida mustahkam va yagona obraz yarating", "Marketing materiallaringizda professional ko'rinishga erishing"], recommended: true, timeline: "Birinchi konsepsiyalar 14–20 ish kuni ichida taqdim etiladi" },
-    logoVIP: { label: "Logo + Firma uslubi + Brandbook", description: "Kengaytirilgan identifikatsiya va to'liq qo'llab-quvvatlash.", price: basePricesUSD.logoVIP, note: null, features: ["Shaxsan Baxtiyorjon Gaziyev ishtiroki va nazorati", "Brend strategiyasi asosida 8+ logotip konsepsiyasi ishlab chiqiladi", "Raqobatchilar va soha bo‘yicha keng vizual tahlil qilinadi", "25+ touchpoint dizayn (offline va online)", "Vizual Brandbook: ranglar, shriftlar, logotip qo‘llash qoidalari, grid, minimal qo‘llanma", "Logobook (PDF + print-ready)", "30 ta Telegram stiker + 20 ikon", "Logotip animatsiyasi (premium sifatli)", "Patent topshiruv jarayonida hamrohlik (boj alohida)", "3 oygacha post-delivery qo‘llab-quvvatlash"], benefits: ["Brendingiz uchun 'kalit taslim' yechim oling", "Bozorda premium segmentga da'vo qiling", "Brendingizni boshqarish uchun to'liq qo'llanma va vositalarga ega bo'ling"], timeline: "Birinchi konsepsiyalar 20–30 ish kuni ichida taqdim etiladi" },
-    packaging: { label: "Qadoq dizayni", description: "3 SKU uchun qadoq ishlab chiqish, chop etishga tayyorlash.", price: basePricesUSD.packaging, note: null, features: ["Bozor tahlili va konsepsiya", "3 SKU uchun dizayn", "Chop etishga tayyorlash (pre-press)", "3D vizualizatsiya"], benefits: ["Mahsulotingizni javonda ajralib turadigan qiling", "Xaridorlarda birinchi qarashdayoq ishonch uyg'oting"] },
-    smm: { label: "Ijtimoiy tarmoqlar uchun stil", description: "Postlar va storislarni firma uslubida bezash.", price: basePricesUSD.smm, note: null, features: ["6 ta post uchun shablon", "6 ta storis uchun shablon", "Profil avatar va cover rasmi", "Aktual storislar uchun ikonikalar"], benefits: ["Ijtimoiy tarmoqlarda professional va yagona obraz yarating", "Obunachilarning e'tiborini torting va saqlab qoling"] },
-    merch: { label: "Brendli merch va nositellar", description: "Kiyim, aksessuarlar, POSM materiallari dizayni.", price: 0, note: "Individual", features: ["Futbolka, kepka dizayni", "Bloknot, ruchka dizayni", "Sumka, paket dizayni", "Mijoz talabiga ko'ra boshqalar"], benefits: ["Brendingizni oflayn hayotga olib chiqing", "Mijozlar va xodimlar uchun esda qolarli sovg'alar yarating"] },
-    illustrations: { label: "Illustratsiyalar va animatsiya", description: "Firma grafikasi, infografika va animatsiyalar yaratish.", price: 0, note: "Individual", features: ["Brend personajini yaratish", "Sayt yoki reklama uchun illustratsiyalar", "Logo animatsiyasi", "2D/3D animatsion roliklar"], benefits: ["Brendingizga o'ziga xos va jonli ko'rinish bering", "Murakkab ma'lumotlarni oson va qiziqarli tarzda yetkazing"] },
-    urgency: { label: "Shoshilinch loyiha (+50%)", description: "Loyiha navbatsiz, qisqa muddatda (2-3 kun) tayyorlanadi.", price: 0, note: "+50%", features: ["Navbatdan tashqari ishlash", "Tezlashtirilgan tahlil va dizayn", "Birinchi natija 48 soatda", "Standart narxga 50% ustama"], benefits: ["Loyiha natijalarini tezroq oling", "Bozorga tezda kirib borish imkoniyati"] },
-    nda: { label: "Maxfiylik shartnomasi (NDA) (+50%)", description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi.", price: 0, note: "+50%", features: ["Yuridik hujjat tayyorlash", "To'liq maxfiylik kafolati", "Loyiha ma'lumotlarini himoya qilish", "Standart narxga 50% ustama"], benefits: ["Loyiha g'oyalaringiz va ma'lumotlaringiz xavfsizligini ta'minlang", "Tijoriy sirlaringizni himoya qiling"] }
+    audit: { 
+        label: "Logo Auditi", 
+        description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.", 
+        price: basePricesUSD.audit, 
+        oldPrice: 118, 
+        discount: 0.5, 
+        note: null, 
+        features: [
+            { feature: "Logotipning kuchli va zaif tomonlari", benefit: "Brendingizni qayerda kuchaytirish kerakligini aniq bilib olasiz." },
+            { feature: "Raqobatchilarga nisbatan tahlil", benefit: "Bozorda qanday ajralib turish mumkinligi haqida tushunchaga ega bo'lasiz." },
+            { feature: "Yaxshilash bo'yicha aniq tavsiyalar", benefit: "Keyingi qadamlaringiz aniq va tushunarli bo'ladi, taxminlarga asoslanib pul sarflamaysiz." }
+        ],
+        benefits: ["Brendingizni kuchaytirish uchun aniq yo'l-yo'riq oling", "Raqobatchilardan qanday ajralib turishni tushuning"] 
+    },
+    namingCheck: { 
+        label: "Neyming Tekshiruvi", 
+        description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.", 
+        price: basePricesUSD.namingCheck, 
+        oldPrice: 158, 
+        discount: 0.5, 
+        note: null, 
+        features: [
+            { feature: "O'zbekiston bazasi bo'yicha tekshiruv", benefit: "Mahalliy bozorda huquqiy muammolarning oldini olasiz." },
+            { feature: "Xalqaro WIPO bazasi bo'yicha tekshiruv", benefit: "Xalqaro miqyosda kengayish imkoniyatini saqlab qolasiz." },
+            { feature: "Domen bo'shligini tekshirish", benefit: "Brendingiz uchun mos veb-sayt nomini topishni kafolatlaysiz." },
+            { feature: "Huquqiy maslahat", benefit: "Patentlash jarayonida nimalarga e'tibor berish kerakligini bilib olasiz." }
+        ],
+        benefits: ["Kelajakdagi yuridik muammolardan saqlaning", "Brendingiz uchun mustahkam poydevor yarating"] 
+    },
+    consultation: { 
+        label: "30 daqiqalik konsultatsiya", 
+        description: "Brending bo'yicha har qanday savolingizga tezkor yo'l-yo'riq va professional maslahat.", 
+        price: basePricesUSD.consultation, 
+        note: null, 
+        features: [
+            { feature: "Biznes-muammolarni aniqlash", benefit: "Asosiy muammoingizni aniqlab, uni hal qilishga e'tiboringizni qaratasiz." },
+            { feature: "Brending bo'yicha savollarga javob", benefit: "Ikki-uch haftalik izlanish o'rniga, 30 daqiqada aniq javoblar olasiz." },
+            { feature: "Keyingi qadamlar bo'yicha tavsiyalar", benefit: "Harakatingizni qayerdan boshlashni bilib olasiz, vaqtingiz tejaladi." }
+        ],
+        benefits: ["Biznesingiz uchun to'g'ri yo'nalishni tezda aniqlang", "Qimmatli vaqt va pulingizni tejang"] 
+    },
+    strategy: { 
+        label: "Brend-strategiya va platforma", 
+        description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", 
+        price: basePricesUSD.strategy, 
+        note: null, 
+        features: [
+            { feature: "Bozor va raqobatchilar tahlili", benefit: "Raqobatchilardan qanday ajralib turishni va bozorning 'bo'sh joylari'ni bilib olasiz." },
+            { feature: "Brend platformasi (missiya, qadriyatlar)", benefit: "Kompaniyangiz shunchaki pul ishlash uchun emas, balki kattaroq maqsadga ega ekanligini his qilasiz va buni mijozlarga yetkaza olasiz." },
+            { feature: "Pozitsiyalash strategiyasi", benefit: "Mijozlar ongida aniq bir o'rin egallaysiz (masalan, 'eng tez', 'eng sifatli', 'eng innovatsion')." },
+            { feature: "Brend arxitekturasi", benefit: "Kelajakda yangi mahsulotlar qo'shilganda brendingiz yaxlitligini saqlab qolish tizimiga ega bo'lasiz." }
+        ],
+        benefits: ["Biznesingiz uchun aniq rivojlanish xaritasini oling", "Marketing xarajatlaringizni optimallashtiring", "Bozorda mustahkam o'rin egallang"] 
+    },
+    commStrategy: { 
+        label: "Kommunikatsion strategiya", 
+        description: "Mijozlar bilan muloqot strategiyasi: ohang, asosiy xabarlar, kanallar.", 
+        price: basePricesUSD.commStrategy, 
+        note: null, 
+        features: [
+            { feature: "Maqsadli auditoriya segmentatsiyasi", benefit: "Har bir mijoz guruhiga uning tilida gapirib, sotuv samaradorligini oshirasiz." },
+            { feature: "Brend ovozi (Tone of Voice)", benefit: "Brendingiz odamdek gapira boshlaydi, bu esa mijozlar bilan hissiy aloqani kuchaytiradi." },
+            { feature: "Asosiy xabarlar (Key Messages)", benefit: "Barcha reklama va kontentingizda yagona, kuchli g'oyani ilgari surasiz." },
+            { feature: "Kommunikatsiya kanallari rejasi", benefit: "Marketing byudjetingizni eng samarali kanallarga yo'naltirib, ortiqcha xarajatlardan qutulasiz." }
+        ],
+        benefits: ["Mijozlaringiz bilan to'g'ri til topishing", "Sotuvlaringizni oshiruvchi muloqot tizimini yarating", "Brendingizga sodiqlikni oshiring"] 
+    },
+    namingStandard: { 
+        label: "Naming Standard", 
+        description: "Kichik biznes uchun ideal.", 
+        price: basePricesUSD.namingStandard, 
+        note: null, 
+        features: [
+            { feature: "3 ta nom varianti ishlab chiqiladi", benefit: "Sizda bir nechta kuchli variantlardan tanlash imkoniyati bo'ladi." },
+            { feature: "Domen va ijtimoiy tarmoqlarda bo'shlik tekshiriladi", benefit: "Tanlagan nomingiz raqamli muhitda band bo'lmaydi, marketingda to'siqsiz ishlaysiz." },
+            { feature: "Patent bo‘yicha 1 klass auditi qilinadi", benefit: "Kelajakdagi katta huquqiy muammolarning oldini olasiz." },
+            { feature: "Har bir variant fonetik jihatdan tekshiriladi", benefit: "Nomingiz oson talaffuz qilinadi va esda qoladi." }
+        ], 
+        benefits: ["Tez va hamyonbop nomga ega bo'ling", "Biznesingizga professional start bering"], 
+        timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" 
+    },
+    namingPremium: { 
+        label: "Naming Premium", 
+        description: "O'rta va rivojlanayotgan biznes uchun.", 
+        price: basePricesUSD.namingPremium, 
+        note: null, 
+        features: [
+            { feature: "5+ nom varianti ishlab chiqiladi", benefit: "Strategiyangizga mos bir nechta kuchli yo'nalishdan eng yaxshisini tanlab olasiz." },
+            { feature: "6 tilda semantik va fonetik tekshiruv", benefit: "Xalqaro bozorga chiqqanda nomingiz salbiy ma'no bermaydi va oson talaffuz qilinadi." },
+            { feature: "Patent bo‘yicha 2 klass auditi va huquqiy xulosa", benefit: "Brend nomingizni huquqiy jihatdan himoya qilish uchun to'liq asosga ega bo'lasiz." },
+            { feature: "5 yilga domen band qilib beriladi", benefit: "Eng muhim onlayn aktivingiz 5 yil davomida himoyada bo'ladi." }
+        ], 
+        benefits: ["Brendingiz uchun strategik jihatdan kuchli nom oling", "Xalqaro bozorga chiqish imkoniyatini yarating", "Huquqiy jihatdan himoyalangan nomga ega bo'ling"], 
+        recommended: true, 
+        timeline: "Birinchi konsepsiyalar 14–20 ish kuni ichida taqdim etiladi" 
+    },
+    namingVIP: { 
+        label: "Naming VIP", 
+        description: "Katta va xalqaro bozorga mo'ljallangan loyihalar uchun.", 
+        price: basePricesUSD.namingVIP, 
+        note: null, 
+        features: [
+            { feature: "Shaxsan Baxtiyorjon Gaziyev ishtiroki va nazorati", benefit: "Sizga top darajadagi mutaxassisning bevosita e’tibori tushadi — nomingiz tasodifga emas, tajribaga tayangan bo‘ladi." },
+            { feature: "10+ keng konsepsiyali nom variantlari", benefit: "Sizda tanlov keng bo‘ladi — bir nechta kuchli yo‘nalishdan sizga eng ko‘p foyda keltiradiganini tanlaysiz." },
+            { feature: "10 yilga domen band qilib beriladi", benefit: "Onlayn makoningiz 10 yil davomida xavfsiz. Raqobatchilar domeningizni olib qo‘yolmaydi." },
+            { feature: "Har bir nom uchun storytelling asosida tushuntirish", benefit: "Siz brend nomini chiroyli va ishonchli tarzda asoslay olasiz. Investor, hamkor yoki mijoz eshitishi bilanoq nimaga bu nom tanlanganini tushunadi." },
+            { feature: "3 oygacha post-delivery huquqiy maslahat va kuzatuv", benefit: "Nom ishga tushgandan keyin ham yolg'iz qolmaysiz. Patent, domen, huquqiy masalalar bo'yicha qo'llab-quvvatlov davom etadi." }
+        ], 
+        benefits: ["Bozorda mutlaq yetakchilikka da'vogar nomga ega bo'ling", "Maksimal darajada himoyalangan va puxta o'ylangan brend nomi", "Shaxsiy ekspert nazorati va qo'llab-quvvatlash"], 
+        timeline: "Birinchi konsepsiyalar 20–25 ish kuni ichida taqdim etiladi" 
+    },
+    logoStandard: { 
+        label: "Logotip Standard", 
+        description: "Startaplar uchun tezkor yechim.", 
+        price: basePricesUSD.logoStandard, 
+        note: null, 
+        features: [
+            { feature: "Kompaniya brifi asosida 3 ta logotip konsepsiyasi", benefit: "Biznesingizga mos bir nechta variantdan birini tanlab olish imkoniyatiga ega bo'lasiz." },
+            { feature: "5 ta touchpoint vizualizatsiya", benefit: "Logotipingiz real hayotda (vizitka, post, web) qanday ko'rinishini oldindan ko'rasiz." },
+            { feature: "Logotip vektor fayllari (AI, EPS, PNG, JPG, PDF)", benefit: "Logotipni istalgan o'lchamda, istalgan joyda sifatini yo'qotmasdan ishlata olasiz." }
+        ], 
+        benefits: ["Biznesingiz uchun professional vizual asos yarating", "Tez va sifatli logotipga ega bo'ling"], 
+        timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi" 
+    },
+    logoPremium: { 
+        label: "Logo va firma uslubi", 
+        description: "O'z brendini jiddiy rivojlantirish niyatidagilar uchun.", 
+        price: basePricesUSD.logoPremium, 
+        note: null, 
+        features: [
+            { feature: "5 ta strategiyaga mos logotip konsepsiyasi", benefit: "Logotipingiz shunchaki chiroyli emas, balki biznes maqsadingizga xizmat qiladigan bo'ladi." },
+            { feature: "Firma uslubi (asosiy ranglar, shriftlar, qoidalar)", benefit: "Barcha marketing materiallaringiz bir xil, professional ko'rinishda bo'ladi, bu esa brendingizni mustahkamlaydi." },
+            { feature: "15+ touchpoint vizualizatsiya", benefit: "Brendingiz turli vaziyatlarda (reklama, qadoq, ijtimoiy tarmoq) qanday ishlashini aniq ko'rasiz." },
+            { feature: "10 ta Telegram stiker", benefit: "Mijozlar bilan muloqotda brendingizni norasmiy va qiziqarli tarzda namoyon qilasiz." }
+        ], 
+        benefits: ["Brendingiz uchun to'liq va tizimli vizual yechimga ega bo'ling", "Mijozlar ongida mustahkam va yagona obraz yarating", "Marketing materiallaringizda professional ko'rinishga erishing"], 
+        recommended: true, 
+        timeline: "Birinchi konsepsiyalar 14–20 ish kuni ichida taqdim etiladi" 
+    },
+    logoVIP: { 
+        label: "Logo + Firma uslubi + Brandbook", 
+        description: "Kengaytirilgan identifikatsiya va to'liq qo'llab-quvvatlash.", 
+        price: basePricesUSD.logoVIP, 
+        note: null, 
+        features: [
+            { feature: "Shaxsan Baxtiyorjon Gaziyev ishtiroki", benefit: "Loyihangiz sohaning eng tajribali mutaxassislaridan biri tomonidan shaxsan nazorat qilinadi." },
+            { feature: "8+ strategiyaga asoslangan logotip konsepsiyasi", benefit: "Brendingiz uchun eng mukammal yechimni topish uchun maksimal darajada keng tanlovga ega bo'lasiz." },
+            { feature: "Vizual Brandbook va Logobook", benefit: "Brendingizni boshqarish uchun 'konstitutsiya'ga ega bo'lasiz, bu kelajakda dizayn xarajatlaringizni tejaydi." },
+            { feature: "Logotip animatsiyasi (premium sifatli)", benefit: "Raqamli platformalarda brendingiz jonlanadi va raqobatchilardan keskin ajralib turadi." },
+            { feature: "3 oygacha post-delivery qo‘llab-quvvatlash", benefit: "Loyiha tugaganidan keyin ham dizaynni amaliyotga tatbiq etishda yolg'iz qolmaysiz." }
+        ], 
+        benefits: ["Brendingiz uchun 'kalit taslim' yechim oling", "Bozorda premium segmentga da'vo qiling", "Brendingizni boshqarish uchun to'liq qo'llanma va vositalarga ega bo'ling"], 
+        timeline: "Birinchi konsepsiyalar 20–30 ish kuni ichida taqdim etiladi" 
+    },
+    packaging: { 
+        label: "Qadoq dizayni", 
+        description: "3 SKU uchun qadoq ishlab chiqish, chop etishga tayyorlash.", 
+        price: basePricesUSD.packaging, 
+        note: null, 
+        features: [
+            { feature: "Bozor tahlili va konsepsiya", benefit: "Qadog'ingiz shunchaki chiroyli emas, balki bozor talablariga javob beradigan va sotadigan bo'ladi." },
+            { feature: "3 SKU uchun dizayn", benefit: "Bir nechta mahsulotingiz uchun yagona, tizimli dizayn liniyasiga ega bo'lasiz." },
+            { feature: "Chop etishga tayyorlash (pre-press)", benefit: "Dizaynni bosmaxonaga topshirishda texnik muammolar va ortiqcha xarajatlardan qutulasiz." },
+            { feature: "3D vizualizatsiya", benefit: "Qadoqni ishlab chiqarishdan oldin uning real hayotda qanday ko'rinishini bilib olasiz." }
+        ], 
+        benefits: ["Mahsulotingizni javonda ajralib turadigan qiling", "Xaridorlarda birinchi qarashdayoq ishonch uyg'oting"] 
+    },
+    smm: { 
+        label: "Ijtimoiy tarmoqlar uchun stil", 
+        description: "Postlar va storislarni firma uslubida bezash.", 
+        price: basePricesUSD.smm, 
+        note: null, 
+        features: [
+            { feature: "6 ta post va 6 ta storis uchun shablon", benefit: "Har kuni noldan dizayn yaratishga vaqt sarflamasdan, professional ko'rinishdagi kontent yarata olasiz." },
+            { feature: "Profil avatar va cover rasmi", benefit: "Profilingizga kirgan har bir kishida birinchi soniyadanoq ijobiy va professional taassurot qoldirasiz." },
+            { feature: "Aktual storislar uchun ikonikalar", benefit: "Profilingiz tartibli va estetik ko'rinadi, bu esa foydalanuvchilar uchun qulaylik yaratadi." }
+        ], 
+        benefits: ["Ijtimoiy tarmoqlarda professional va yagona obraz yarating", "Obunachilarning e'tiborini torting va saqlab qoling"] 
+    },
+    merch: { 
+        label: "Brendli merch va nositellar", 
+        description: "Kiyim, aksessuarlar, POSM materiallari dizayni.", 
+        price: 0, 
+        note: "Individual", 
+        features: [
+            { feature: "Futbolka, kepka dizayni", benefit: "Xodimlaringiz va mijozlaringiz brendingizning 'yuruvchi reklamasi'ga aylanadi." },
+            { feature: "Bloknot, ruchka, sumka dizayni", benefit: "Brendingiz kundalik hayotning bir qismiga aylanib, doimiy eslatma bo'lib turadi." },
+            { feature: "Mijoz talabiga ko'ra boshqalar", benefit: "Har qanday nostandart g'oyalaringizni professional dizayn bilan hayotga tatbiq etasiz." }
+        ], 
+        benefits: ["Brendingizni oflayn hayotga olib chiqing", "Mijozlar va xodimlar uchun esda qolarli sovg'alar yarating"] 
+    },
+    illustrations: { 
+        label: "Illustratsiyalar va animatsiya", 
+        description: "Firma grafikasi, infografika va animatsiyalar yaratish.", 
+        price: 0, 
+        note: "Individual", 
+        features: [
+            { feature: "Brend personajini yaratish", benefit: "Brendingiz yanada jonli va hissiy bo'ladi, bu esa auditoriya bilan aloqani kuchaytiradi." },
+            { feature: "Sayt yoki reklama uchun illustratsiyalar", benefit: "Zerikarli matnlar o'rniga, murakkab ma'lumotlarni qiziqarli va tushunarli tarzda yetkaza olasiz." },
+            { feature: "Logo animatsiyasi", benefit: "Raqamli platformalarda brendingiz raqobatchilardan keskin ajralib turadi." }
+        ], 
+        benefits: ["Brendingizga o'ziga xos va jonli ko'rinish bering", "Murakkab ma'lumotlarni oson va qiziqarli tarzda yetkazing"] 
+    },
+    urgency: { 
+        label: "Shoshilinch loyiha (+50%)", 
+        description: "Loyiha navbatsiz, qisqa muddatda (2-3 kun) tayyorlanadi.", 
+        price: 0, 
+        note: "+50%", 
+        features: [
+            { feature: "Navbatdan tashqari ishlash", benefit: "Loyiha natijalarini bir necha hafta emas, bir necha kun ichida olasiz." },
+            { feature: "Tezlashtirilgan tahlil va dizayn", benefit: "Bozorga tezda kirib borish va raqobatchilardan oldin harakat qilish imkoniyatiga ega bo'lasiz." },
+            { feature: "Birinchi natija 48 soatda", benefit: "G'oyalaringizni tezda vizual ko'rinishda ko'rib, qaror qabul qilishingiz osonlashadi." }
+        ], 
+        benefits: ["Loyiha natijalarini tezroq oling", "Bozorga tezda kirib borish imkoniyati"] 
+    },
+    nda: { 
+        label: "Maxfiylik shartnomasi (NDA) (+50%)", 
+        description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi.", 
+        price: 0, 
+        note: "+50%", 
+        features: [
+            { feature: "Yuridik hujjat tayyorlash", benefit: "G'oyalaringiz va biznes sirlaringiz qonuniy himoya ostida bo'ladi." },
+            { feature: "To'liq maxfiylik kafolati", benefit: "Loyiha ma'lumotlari uchinchi shaxslarga oshkor etilmasligiga to'liq ishonch hosil qilasiz." },
+            { feature: "Loyiha ma'lumotlarini himoya qilish", benefit: "Raqobatchilar sizning rejalaringizdan bexabar qoladi, bu esa sizga bozor ustunligini beradi." }
+        ], 
+        benefits: ["Loyiha g'oyalaringiz va ma'lumotlaringiz xavfsizligini ta'minlang", "Tijoriy sirlaringizni himoya qiling"] 
+    }
 };
 
 const ruServiceDetails = {
-    audit: { ...uzServiceDetails.audit, label: "Аудит логотипа", description: "Анализ существующего логотипа и рекомендации по улучшению.", features: ["Сильные и слабые стороны логотипа", "Анализ относительно конкурентов", "Конкретные рекомендации по улучшению"], benefits: ["Получите четкое руководство по усилению вашего бренда", "Поймите, как выделиться на фоне конкурентов"], oldPrice: 118, discount: 0.5 },
-    namingCheck: { ...uzServiceDetails.namingCheck, label: "Проверка нейминга", description: "Проверка доступности имени бренда в базах данных Узбекистана и международных базах.", features: ["Проверка по базе Узбекистана", "Проверка по международной базе WIPO", "Проверка доступности домена", "Юридическая консультация"], benefits: ["Избегите будущих юридических проблем", "Создайте прочный фундамент для вашего бренда"], oldPrice: 158, discount: 0.5 },
-    consultation: { ...uzServiceDetails.consultation, label: "30-минутная консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга.", features: ["Выявление бизнес-проблем", "Ответы на вопросы по брендингу", "Рекомендации по следующим шагам"], benefits: ["Быстро определите правильное направление для вашего бизнеса", "Сэкономьте драгоценное время и деньги"] },
-    strategy: { ...uzServiceDetails.strategy, label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.", features: ["Анализ рынка и конкурентов", "Платформа бренда (миссия, ценности)", "Стратегия позиционирования", "Архитектура бренда"], benefits: ["Получите четкую карту развития вашего бизнеса", "Оптимизируйте свои маркетинговые расходы", "Займите прочную позицию на рынке"] },
-    commStrategy: { ...uzServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: ["Сегментация целевой аудитории", "Голос бренда (Tone of Voice)", "Ключевые сообщения (Key Messages)", "План коммуникационных каналов"], benefits: ["Найдите общий язык с вашими клиентами", "Создайте систему коммуникации, которая увеличит ваши продажи", "Повысьте лояльность к вашему бренду"] },
-    namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса.", features: ["Краткое изучение компании и сферы", "Общий обзор конкурентов", "Сбор пожеланий клиента", "Разработка 3 вариантов имени", "Проверка доступности домена и в соцсетях", "Аудит 1 класса по патенту", "Фонетическая проверка каждого варианта"], benefits: ["Получите быстрое и доступное имя", "Дайте вашему бизнесу профессиональный старт"], timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
-    namingPremium: { ...uzServiceDetails.namingPremium, label: "Нейминг Premium", description: "Для среднего и развивающегося бизнеса.", features: ["Более глубокое изучение компании и сферы", "Анализ конкурентов и рынка", "Разработка 5+ вариантов имени", "Проверка доступности домена и в соцсетях", "Семантическая и фонетическая проверка на 6 языках (Английский, Русский, Турецкий, Испанский, Итальянский, Французский)", "Аудит 2 классов по патенту и юридическое заключение", "Бронирование домена на 5 лет", "Варианты имени представляются в виде краткой презентации"], benefits: ["Получите стратегически сильное имя для вашего бренда", "Создайте возможность выхода на международный рынок", "Получите юридически защищенное имя"], timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
-    namingVIP: { ...uzServiceDetails.namingVIP, label: "Нейминг VIP", description: "Для крупных и международных проектов.", features: ["Личное участие и контроль Бахтиёржона Газиева", "Глубокий анализ компании, сферы и аудитории", "Всесторонний анализ конкурентов и рынка", "Разработка 10+ вариантов имени с широкими концепциями", "Проверка доступности домена и в соцсетях", "Семантическая + фонетическая + юридическая проверка на 6 языках", "Ускоренная подача патента (пошлина отдельно)", "Бронирование домена на 10 лет", "Объяснение каждого имени на основе сторителлинга", "Представление в формате профессиональной презентации", "До 3 месяцев юридических консультаций и сопровождения после сдачи"], benefits: ["Получите имя, претендующее на абсолютное лидерство на рынке", "Максимально защищенное и продуманное имя бренда", "Личный экспертный контроль и поддержка"], timeline: "Первые концепции предоставляются в течение 20–25 рабочих дней" },
-    logoStandard: { ...uzServiceDetails.logoStandard, label: "Логотип Standard", description: "Быстрое решение для стартапов.", features: ["Разработка 3 концепций логотипа на основе брифа компании", "Анализ логотипов конкурентов", "Визуализация на 5 носителях (визитка, пост, веб, упаковка, вывеска)", "Предоставление векторных файлов логотипа (AI, EPS, PNG, JPG, PDF)", "Проверка каждой концепции на технические и визуальные стандарты"], benefits: ["Создайте профессиональную визуальную основу для вашего бизнеса", "Получите быстрый и качественный логотип"], timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
-    logoPremium: { ...uzServiceDetails.logoPremium, label: "Логотип и фирменный стиль", description: "Для тех, кто серьезно настроен развивать свой бренд.", features: ["Разработка 5 концепций логотипа в соответствии с ценностями и стратегией компании", "Изучение визуальной идентификации конкурентов и рынка", "15+ визуализаций на носителях (визитка, упаковка, реклама, веб, пост в соцсетях)", "Разработка фирменного стиля (основные цвета, шрифты, правила использования логотипа)", "Подготовка 10 Telegram-стикеров", "Представление с профессиональными макетами"], benefits: ["Получите полное и системное визуальное решение для вашего бренда", "Создайте прочный и единый образ в сознании клиентов", "Добейтесь профессионального вида в ваших маркетинговых материалах"], timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
-    logoVIP: { ...uzServiceDetails.logoVIP, label: "Логотип + Фирменный стиль + Брендбук", description: "Расширенная айдентика и полная поддержка.", features: ["Личное участие и контроль Бахтиёржона Газиева", "Разработка 8+ концепций логотипа на основе бренд-стратегии", "Широкий визуальный анализ конкурентов и отрасли", "25+ дизайнов носителей (офлайн и онлайн)", "Визуальный брендбук: цвета, шрифты, правила использования логотипа, сетка, минимальное руководство", "Логобук (PDF + pre-press)", "30 Telegram-стикеров + 20 иконок", "Анимация логотипа (премиум-качество)", "Сопровождение при подаче патента (пошлина отдельно)", "До 3 месяцев поддержки после сдачи"], benefits: ["Получите решение 'под ключ' для вашего бренда", "Претендуйте на премиум-сегмент на рынке", "Получите полное руководство и инструменты для управления вашим брендом"], timeline: "Первые концепции предоставляются в течение 20–30 рабочих дней" },
-    packaging: { ...uzServiceDetails.packaging, label: "Дизайн упаковки", description: "Разработка упаковки для 3 SKU, подготовка к печати.", features: ["Анализ рынка и концепция", "Дизайн для 3 SKU", "Подготовка к печати (pre-press)", "3D-визуализация"], benefits: ["Выделите ваш продукт на полке", "Вызовите доверие у покупателей с первого взгляда"] },
-    smm: { ...uzServiceDetails.smm, label: "Стиль для социальных сетей", description: "Оформление постов и сторис в фирменном стиле.", features: ["6 шаблонов для постов", "6 шаблонов для сторис", "Аватар и обложка профиля", "Иконки для актуальных сторис"], benefits: ["Создайте профессиональный и единый образ в социальных сетях", "Привлекайте и удерживайте внимание подписчиков"] },
-    merch: { ...uzServiceDetails.merch, label: "Брендированный мерч и носители", description: "Дизайн одежды, аксессуаров, POSM-материалов.", features: ["Дизайн футболки, кепки", "Дизайн блокнота, ручки", "Дизайн сумки, пакета", "Другое по требованию клиента"], benefits: ["Перенесите ваш бренд в офлайн-жизнь", "Создайте запоминающиеся подарки для клиентов и сотрудников"] },
-    illustrations: { ...uzServiceDetails.illustrations, label: "Иллюстрации и анимация", description: "Создание фирменной графики, инфографики и анимаций.", features: ["Создание бренд-персонажа", "Иллюстрации для сайта или рекламы", "Анимация логотипа", "2D/3D анимационные ролики"], benefits: ["Придайте вашему бренду уникальный и живой вид", "Легко и интересно доносите сложную информацию"] },
-    urgency: { ...uzServiceDetails.urgency, label: "Срочный проект (+50%)", description: "Проект выполняется вне очереди, в короткие сроки (2-3 дня).", features: ["Работа вне очереди", "Ускоренный анализ и дизайн", "Первый результат через 48 часов", "Надбавка 50% к стандартной цене"], benefits: ["Быстрее получите результаты проекта", "Возможность быстрого выхода на рынок"] },
-    nda: { ...uzServiceDetails.nda, label: "Договор о неразглашении (NDA) (+50%)", description: "Договор о неразглашении информации о проекте.", features: ["Подготовка юридического документа", "Полная гарантия конфиденциальности", "Защита информации о проекте", "Надбавка 50% к стандартной цене"], benefits: ["Обеспечьте безопасность ваших проектных идей и данных", "Защитите ваши коммерческие тайны"] }
+    audit: { ...uzServiceDetails.audit, label: "Аудит логотипа", description: "Анализ существующего логотипа и рекомендации по улучшению.", features: uzServiceDetails.audit.features.map(f => ({...f})), benefits: uzServiceDetails.audit.benefits.map(b => b), oldPrice: 118, discount: 0.5 },
+    namingCheck: { ...uzServiceDetails.namingCheck, label: "Проверка нейминга", description: "Проверка доступности имени бренда в базах данных Узбекистана и международных базах.", features: uzServiceDetails.namingCheck.features.map(f => ({...f})), benefits: uzServiceDetails.namingCheck.benefits.map(b => b), oldPrice: 158, discount: 0.5 },
+    consultation: { ...uzServiceDetails.consultation, label: "30-минутная консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга.", features: uzServiceDetails.consultation.features.map(f => ({...f})), benefits: uzServiceDetails.consultation.benefits.map(b => b) },
+    strategy: { ...uzServiceDetails.strategy, label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.", features: uzServiceDetails.strategy.features.map(f => ({...f})), benefits: uzServiceDetails.strategy.benefits.map(b => b) },
+    commStrategy: { ...uzServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
+    namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса.", features: uzServiceDetails.namingStandard.features.map(f => ({...f})), benefits: uzServiceDetails.namingStandard.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
+    namingPremium: { ...uzServiceDetails.namingPremium, label: "Нейминг Premium", description: "Для среднего и развивающегося бизнеса.", features: uzServiceDetails.namingPremium.features.map(f => ({...f})), benefits: uzServiceDetails.namingPremium.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
+    namingVIP: { ...uzServiceDetails.namingVIP, label: "Нейминг VIP", description: "Для крупных и международных проектов.", features: uzServiceDetails.namingVIP.features.map(f => ({...f})), benefits: uzServiceDetails.namingVIP.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 20–25 рабочих дней" },
+    logoStandard: { ...uzServiceDetails.logoStandard, label: "Логотип Standard", description: "Быстрое решение для стартапов.", features: uzServiceDetails.logoStandard.features.map(f => ({...f})), benefits: uzServiceDetails.logoStandard.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
+    logoPremium: { ...uzServiceDetails.logoPremium, label: "Логотип и фирменный стиль", description: "Для тех, кто серьезно настроен развивать свой бренд.", features: uzServiceDetails.logoPremium.features.map(f => ({...f})), benefits: uzServiceDetails.logoPremium.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
+    logoVIP: { ...uzServiceDetails.logoVIP, label: "Логотип + Фирменный стиль + Брендбук", description: "Расширенная айдентика и полная поддержка.", features: uzServiceDetails.logoVIP.features.map(f => ({...f})), benefits: uzServiceDetails.logoVIP.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 20–30 рабочих дней" },
+    packaging: { ...uzServiceDetails.packaging, label: "Дизайн упаковки", description: "Разработка упаковки для 3 SKU, подготовка к печати.", features: uzServiceDetails.packaging.features.map(f => ({...f})), benefits: uzServiceDetails.packaging.benefits.map(b => b) },
+    smm: { ...uzServiceDetails.smm, label: "Стиль для социальных сетей", description: "Оформление постов и сторис в фирменном стиле.", features: uzServiceDetails.smm.features.map(f => ({...f})), benefits: uzServiceDetails.smm.benefits.map(b => b) },
+    merch: { ...uzServiceDetails.merch, label: "Брендированный мерч и носители", description: "Дизайн одежды, аксессуаров, POSM-материалов.", features: uzServiceDetails.merch.features.map(f => ({...f})), benefits: uzServiceDetails.merch.benefits.map(b => b) },
+    illustrations: { ...uzServiceDetails.illustrations, label: "Иллюстрации и анимация", description: "Создание фирменной графики, инфографики и анимаций.", features: uzServiceDetails.illustrations.features.map(f => ({...f})), benefits: uzServiceDetails.illustrations.benefits.map(b => b) },
+    urgency: { ...uzServiceDetails.urgency, label: "Срочный проект (+50%)", description: "Проект выполняется вне очереди, в короткие сроки (2-3 дня).", features: uzServiceDetails.urgency.features.map(f => ({...f})), benefits: uzServiceDetails.urgency.benefits.map(b => b) },
+    nda: { ...uzServiceDetails.nda, label: "Договор о неразглашении (NDA) (+50%)", description: "Договор о неразглашении информации о проекте.", features: uzServiceDetails.nda.features.map(f => ({...f})), benefits: uzServiceDetails.nda.benefits.map(b => b) }
 };
 
 const enServiceDetails = {
-    audit: { ...uzServiceDetails.audit, label: "Logo Audit", description: "Analysis of the existing logo and recommendations for improvement.", features: ["Logo's strengths and weaknesses", "Analysis against competitors", "Specific recommendations for improvement"], benefits: ["Get clear guidance on strengthening your brand", "Understand how to stand out from competitors"], oldPrice: 118, discount: 0.5 },
-    namingCheck: { ...uzServiceDetails.namingCheck, label: "Naming Check", description: "Checking the availability of the brand name in Uzbekistan and international databases.", features: ["Check in Uzbekistan database", "Check in international WIPO database", "Domain availability check", "Legal advice"], benefits: ["Avoid future legal issues", "Create a solid foundation for your brand"], oldPrice: 158, discount: 0.5 },
-    consultation: { ...uzServiceDetails.consultation, label: "30-minute consultation", description: "Quick guidance and professional advice on any branding question.", features: ["Identifying business problems", "Answering branding questions", "Recommendations for next steps"], benefits: ["Quickly identify the right direction for your business", "Save valuable time and money"] },
-    strategy: { ...uzServiceDetails.strategy, label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.", features: ["Market and competitor analysis", "Brand platform (mission, values)", "Positioning strategy", "Brand architecture"], benefits: ["Get a clear development map for your business", "Optimize your marketing expenses", "Establish a strong market position"] },
-    commStrategy: { ...uzServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: ["Target audience segmentation", "Brand Tone of Voice", "Key Messages", "Communication channels plan"], benefits: ["Find the right language with your customers", "Create a communication system that increases your sales", "Increase loyalty to your brand"] },
-    namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses.", features: ["Brief study of the company and industry", "General overview of competitors", "Collection of client's wishes", "Development of 3 name variants", "Domain and social media availability check", "Patent audit for 1 class", "Phonetic check of each variant"], benefits: ["Get a fast and affordable name", "Give your business a professional start"], timeline: "First concepts are presented within 7–10 working days" },
-    namingPremium: { ...uzServiceDetails.namingPremium, label: "Naming Premium", description: "For medium and growing businesses.", features: ["Deeper study of the company and industry", "Analysis of competitors and market", "Development of 5+ name variants", "Domain and social media availability check", "Semantic and phonetic check in 6 languages (English, Russian, Turkish, Spanish, Italian, French)", "Patent audit for 2 classes and legal opinion", "5-year domain reservation", "Name variants are presented in a short presentation format"], benefits: ["Get a strategically strong name for your brand", "Create an opportunity to enter the international market", "Get a legally protected name"], timeline: "First concepts are presented within 14–20 working days" },
-    namingVIP: { ...uzServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects.", features: ["Personal involvement and supervision by Bakhtiyorjon Gaziyev", "In-depth analysis of the company, industry, and audience", "Comprehensive analysis of competitors and market", "Development of 10+ name variants with broad concepts", "Domain and social media availability check", "Semantic + phonetic + legal check in 6 languages", "Expedited patent filing (fee separate)", "10-year domain reservation", "Storytelling-based explanation for each name", "Presentation in a professional format", "Up to 3 months of post-delivery legal advice and monitoring"], benefits: ["Get a name that claims absolute market leadership", "A maximally protected and well-thought-out brand name", "Personal expert control and support"], timeline: "First concepts are presented within 20–25 working days" },
-    logoStandard: { ...uzServiceDetails.logoStandard, label: "Logo Standard", description: "A quick solution for startups.", features: ["Development of 3 logo concepts based on the company brief", "Analysis of competitors' logos", "5 touchpoint visualizations (business card, post, web, packaging, signage)", "Provision of logo vector files (AI, EPS, PNG, JPG, PDF)", "Check of each concept for technical and visual standards"], benefits: ["Create a professional visual foundation for your business", "Get a fast and high-quality logo"], timeline: "First concepts are presented within 7–10 working days" },
-    logoPremium: { ...uzServiceDetails.logoPremium, label: "Logo & Corporate Identity", description: "For those serious about developing their brand.", features: ["Development of 5 logo concepts matching the company's values and strategy", "Study of competitors' and market's visual identity", "15+ touchpoint visualizations (business card, packaging, advertising, web, social post)", "Development of corporate identity (main colors, fonts, logo usage rules)", "Creation of 10 Telegram stickers", "Presentation with professional mockups"], benefits: ["Get a complete and systematic visual solution for your brand", "Create a strong and unified image in the minds of customers", "Achieve a professional look in your marketing materials"], timeline: "First concepts are presented within 14–20 working days" },
-    logoVIP: { ...uzServiceDetails.logoVIP, label: "Logo + Corporate Identity + Brandbook", description: "Expanded identity and full support.", features: ["Personal involvement and supervision by Bakhtiyorjon Gaziyev", "Development of 8+ logo concepts based on brand strategy", "Broad visual analysis of competitors and industry", "25+ touchpoint designs (offline and online)", "Visual Brandbook: colors, fonts, logo usage rules, grid, mini-guide", "Logobook (PDF + print-ready)", "30 Telegram stickers + 20 icons", "Logo animation (premium quality)", "Assistance with patent filing (fee separate)", "Up to 3 months of post-delivery support"], benefits: ["Get a 'turnkey' solution for your brand", "Claim the premium segment in the market", "Get a complete guide and tools to manage your brand"], timeline: "First concepts are presented within 20–30 working days" },
-    packaging: { ...uzServiceDetails.packaging, label: "Packaging Design", description: "Packaging development for 3 SKUs, preparation for printing.", features: ["Market analysis and concept", "Design for 3 SKUs", "Preparation for printing (pre-press)", "3D visualization"], benefits: ["Make your product stand out on the shelf", "Inspire trust in customers at first glance"] },
-    smm: { ...uzServiceDetails.smm, label: "Style for Social Networks", description: "Design of posts and stories in corporate style.", features: ["6 post templates", "6 story templates", "Profile avatar and cover image", "Icons for highlight stories"], benefits: ["Create a professional and unified image on social networks", "Attract and retain the attention of subscribers"] },
-    merch: { ...uzServiceDetails.merch, label: "Branded Merch and Carriers", description: "Design of clothing, accessories, POSM materials.", features: ["T-shirt, cap design", "Notebook, pen design", "Bag, package design", "Other upon client's request"], benefits: ["Bring your brand into offline life", "Create memorable gifts for customers and employees"] },
-    illustrations: { ...uzServiceDetails.illustrations, label: "Illustrations and Animation", description: "Creation of corporate graphics, infographics and animations.", features: ["Creating a brand character", "Illustrations for website or advertising", "Logo animation", "2D/3D animated videos"], benefits: ["Give your brand a unique and lively look", "Easily and interestingly convey complex information"] },
-    urgency: { ...uzServiceDetails.urgency, label: "Urgent Project (+50%)", description: "The project is carried out out of turn, in a short time (2-3 days).", features: ["Out-of-turn work", "Accelerated analysis and design", "First result in 48 hours", "50% surcharge on standard price"], benefits: ["Get project results faster", "Opportunity for quick market entry"] },
-    nda: { ...uzServiceDetails.nda, label: "Non-Disclosure Agreement (NDA) (+50%)", description: "Agreement on non-disclosure of project information.", features: ["Preparation of a legal document", "Full confidentiality guarantee", "Project information protection", "50% surcharge on standard price"], benefits: ["Ensure the security of your project ideas and data", "Protect your trade secrets"] }
+    audit: { ...uzServiceDetails.audit, label: "Logo Audit", description: "Analysis of the existing logo and recommendations for improvement.", features: uzServiceDetails.audit.features.map(f => ({...f})), benefits: uzServiceDetails.audit.benefits.map(b => b), oldPrice: 118, discount: 0.5 },
+    namingCheck: { ...uzServiceDetails.namingCheck, label: "Naming Check", description: "Checking the availability of the brand name in Uzbekistan and international databases.", features: uzServiceDetails.namingCheck.features.map(f => ({...f})), benefits: uzServiceDetails.namingCheck.benefits.map(b => b), oldPrice: 158, discount: 0.5 },
+    consultation: { ...uzServiceDetails.consultation, label: "30-minute consultation", description: "Quick guidance and professional advice on any branding question.", features: uzServiceDetails.consultation.features.map(f => ({...f})), benefits: uzServiceDetails.consultation.benefits.map(b => b) },
+    strategy: { ...uzServiceDetails.strategy, label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.", features: uzServiceDetails.strategy.features.map(f => ({...f})), benefits: uzServiceDetails.strategy.benefits.map(b => b) },
+    commStrategy: { ...uzServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
+    namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses.", features: uzServiceDetails.namingStandard.features.map(f => ({...f})), benefits: uzServiceDetails.namingStandard.benefits.map(b => b), timeline: "First concepts are presented within 7–10 working days" },
+    namingPremium: { ...uzServiceDetails.namingPremium, label: "Naming Premium", description: "For medium and growing businesses.", features: uzServiceDetails.namingPremium.features.map(f => ({...f})), benefits: uzServiceDetails.namingPremium.benefits.map(b => b), timeline: "First concepts are presented within 14–20 working days" },
+    namingVIP: { ...uzServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects.", features: uzServiceDetails.namingVIP.features.map(f => ({...f})), benefits: uzServiceDetails.namingVIP.benefits.map(b => b), timeline: "First concepts are presented within 20–25 working days" },
+    logoStandard: { ...uzServiceDetails.logoStandard, label: "Logo Standard", description: "A quick solution for startups.", features: uzServiceDetails.logoStandard.features.map(f => ({...f})), benefits: uzServiceDetails.logoStandard.benefits.map(b => b), timeline: "First concepts are presented within 7–10 working days" },
+    logoPremium: { ...uzServiceDetails.logoPremium, label: "Logo & Corporate Identity", description: "For those serious about developing their brand.", features: uzServiceDetails.logoPremium.features.map(f => ({...f})), benefits: uzServiceDetails.logoPremium.benefits.map(b => b), timeline: "First concepts are presented within 14–20 working days" },
+    logoVIP: { ...uzServiceDetails.logoVIP, label: "Logo + Corporate Identity + Brandbook", description: "Expanded identity and full support.", features: uzServiceDetails.logoVIP.features.map(f => ({...f})), benefits: uzServiceDetails.logoVIP.benefits.map(b => b), timeline: "First concepts are presented within 20–30 working days" },
+    packaging: { ...uzServiceDetails.packaging, label: "Packaging Design", description: "Packaging development for 3 SKUs, preparation for printing.", features: uzServiceDetails.packaging.features.map(f => ({...f})), benefits: uzServiceDetails.packaging.benefits.map(b => b) },
+    smm: { ...uzServiceDetails.smm, label: "Style for Social Networks", description: "Design of posts and stories in corporate style.", features: uzServiceDetails.smm.features.map(f => ({...f})), benefits: uzServiceDetails.smm.benefits.map(b => b) },
+    merch: { ...uzServiceDetails.merch, label: "Branded Merch and Carriers", description: "Design of clothing, accessories, POSM materials.", features: uzServiceDetails.merch.features.map(f => ({...f})), benefits: uzServiceDetails.merch.benefits.map(b => b) },
+    illustrations: { ...uzServiceDetails.illustrations, label: "Illustrations and Animation", description: "Creation of corporate graphics, infographics and animations.", features: uzServiceDetails.illustrations.features.map(f => ({...f})), benefits: uzServiceDetails.illustrations.benefits.map(b => b) },
+    urgency: { ...uzServiceDetails.urgency, label: "Urgent Project (+50%)", description: "The project is carried out out of turn, in a short time (2-3 days).", features: uzServiceDetails.urgency.features.map(f => ({...f})), benefits: uzServiceDetails.urgency.benefits.map(b => b) },
+    nda: { ...uzServiceDetails.nda, label: "Non-Disclosure Agreement (NDA) (+50%)", description: "Agreement on non-disclosure of project information.", features: uzServiceDetails.nda.features.map(f => ({...f})), benefits: uzServiceDetails.nda.benefits.map(b => b) }
 };
 
 const zhServiceDetails = {
-    audit: { ...uzServiceDetails.audit, label: "标志审核", description: "对现有标志进行分析并提供改进建议。", features: ["标志的优缺点", "与竞争对手的对比分析", "具体的改进建议"], benefits: ["获得加强品牌的明确指导", "了解如何从竞争对手中脱颖而出"], oldPrice: 118, discount: 0.5 },
-    namingCheck: { ...uzServiceDetails.namingCheck, label: "名称检查", description: "检查品牌名称在乌兹别克斯坦和国际数据库中的可用性。", features: ["在乌兹别克斯坦数据库中检查", "在国际WIPO数据库中检查", "域名可用性检查", "法律咨询"], benefits: ["避免未来的法律问题", "为您的品牌创建坚实的基础"], oldPrice: 158, discount: 0.5 },
-    consultation: { ...uzServiceDetails.consultation, label: "30分钟咨询", description: "为任何品牌问题提供快速指导和专业建议。", features: ["识别业务问题", "回答品牌问题", "后续步骤建议"], benefits: ["快速确定您业务的正确方向", "节省宝贵的时间和金钱"] },
-    strategy: { ...uzServiceDetails.strategy, label: "品牌策略与平台", description: "市场分析、品牌审核、定位和价值主张开发。", features: ["市场与竞争对手分析", "品牌平台（使命、价值观）", "定位策略", "品牌架构"], benefits: ["为您的业务获得清晰的发展蓝图", "优化您的营销开支", "建立稳固的市场地位"] },
-    commStrategy: { ...uzServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", features: ["目标受众细分", "品牌语调（Tone of Voice）", "关键信息（Key Messages）", "传播渠道计划"], benefits: ["与您的客户找到共同语言", "创建一个能增加您销售额的传播系统", "提高对您品牌的忠诚度"] },
-    namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业。", features: ["公司和行业简要研究", "竞争对手概览", "收集客户意愿", "开发3个名称方案", "域名和社交媒体可用性检查", "1个类别的专利审核", "每个方案的语音检查"], benefits: ["获得一个快速且经济实惠的名称", "为您的业务提供专业的起点"], timeline: "初步概念在7-10个工作日内提交" },
-    namingPremium: { ...uzServiceDetails.namingPremium, label: "高级命名", description: "适合中型和成长型企业。", features: ["公司和行业深入研究", "竞争对手和市场分析", "开发5个以上名称方案", "域名和社交媒体可用性检查", "6种语言的语义和语音检查（英语、俄语、土耳其语、西班牙语、意大利语、法语）", "2个类别的专利审核和法律意见", "5年域名预留", "以简短演示文稿形式呈现名称方案"], benefits: ["为您的品牌获得一个战略性强的名称", "创造进入国际市场的机会", "获得受法律保护的名称"], timeline: "初步概念在14-20个工作日内提交" },
-    namingVIP: { ...uzServiceDetails.namingVIP, label: "VIP命名", description: "适合大型和国际项目。", features: ["巴赫蒂约尔洪·加济耶夫亲自参与和监督", "公司、行业和受众的深入分析", "竞争对手和市场的全面分析", "开发10个以上具有广泛概念的名称方案", "域名和社交媒体可用性检查", "6种语言的语义+语音+法律检查", "加急专利申请（费用另计）", "10年域名预留", "为每个名称提供基于故事的解释", "以专业格式进行演示", "交付后长达3个月的法律咨询和监控"], benefits: ["获得一个声称绝对市场领导地位的名称", "一个受到最大限度保护且经过深思熟虑的品牌名称", "个人专家控制和支持"], timeline: "初步概念在20-25个工作日内提交" },
-    logoStandard: { ...uzServiceDetails.logoStandard, label: "标准标志", description: "为初创公司提供的快速解决方案。", features: ["根据公司简介开发3个标志概念", "竞争对手标志分析", "5个接触点可视化（名片、帖子、网站、包装、标牌）", "提供标志矢量文件（AI, EPS, PNG, JPG, PDF）", "检查每个概念的技术和视觉标准"], benefits: ["为您的业务创建专业的视觉基础", "获得一个快速且高质量的标志"], timeline: "初步概念在7-10个工作日内提交" },
-    logoPremium: { ...uzServiceDetails.logoPremium, label: "标志与企业形象", description: "为那些认真发展品牌的企业。", features: ["开发5个符合公司价值观和战略的标志概念", "研究竞争对手和市场的视觉识别", "15个以上接触点可视化（名片、包装、广告、网站、社交帖子）", "开发企业形象（主色、字体、标志使用规则）", "制作10个Telegram贴纸", "使用专业模型进行演示"], benefits: ["为您的品牌获得一个完整和系统的视觉解决方案", "在客户心目中创建一个强大而统一的形象", "在您的营销材料中实现专业外观"], timeline: "初步概念在14-20个工作日内提交" },
-    logoVIP: { ...uzServiceDetails.logoVIP, label: "标志 + 企业形象 + 品牌手册", description: "扩展的形象和全面支持。", features: ["巴赫蒂约尔洪·加济耶夫亲自参与和监督", "基于品牌策略开发8个以上标志概念", "竞争对手和行业的广泛视觉分析", "25个以上接触点设计（线下和线上）", "视觉品牌手册：颜色、字体、标志使用规则、网格、迷你指南", "标志手册（PDF + 印刷版）", "30个Telegram贴纸 + 20个图标", "标志动画（高级质量）", "协助专利申请（费用另计）", "交付后长达3个月的支持"], benefits: ["为您的品牌获得一个“交钥匙”解决方案", "在市场上声称高端细分市场", "获得一个完整的指南和工具来管理您的品牌"], timeline: "初步概念在20-30个工作日内提交" },
-    packaging: { ...uzServiceDetails.packaging, label: "包装设计", description: "为3个SKU开发包装，为印刷做准备。", features: ["市场分析与概念", "为3个SKU设计", "为印刷做准备（印前）", "3D可视化"], benefits: ["让您的产品在货架上脱颖而出", "一见钟情，激发客户信任"] },
-    smm: { ...uzServiceDetails.smm, label: "社交网络风格", description: "以企业风格设计帖子和故事。", features: ["6个帖子模板", "6个故事模板", "个人资料头像和封面图片", "亮点故事图标"], benefits: ["在社交网络上创建专业统一的形象", "吸引并留住订阅者的注意力"] },
-    merch: { ...uzServiceDetails.merch, label: "品牌商品和载体", description: "服装、配饰、POSM材料的设计。", features: ["T恤、帽子设计", "笔记本、笔设计", "包、包装袋设计", "根据客户要求提供其他服务"], benefits: ["将您的品牌带入线下生活", "为客户和员工创造难忘的礼物"] },
-    illustrations: { ...uzServiceDetails.illustrations, label: "插图与动画", description: "创建企业图形、信息图和动画。", features: ["创建品牌角色", "网站或广告插图", "标志动画", "2D/3D动画视频"], benefits: ["为您的品牌赋予独特而生动的外观", "轻松有趣地传达复杂信息"] },
-    urgency: { ...uzServiceDetails.urgency, label: "紧急项目（+50%）", description: "该项目将不按顺序在短时间内（2-3天）执行。", features: ["不按顺序工作", "加速分析与设计", "48小时内出第一稿", "标准价格加收50%"], benefits: ["更快地获得项目结果", "快速进入市场的机会"] },
-    nda: { ...uzServiceDetails.nda, label: "保密协议（NDA）（+50%）", description: "关于不披露项目信息的协议。", features: ["准备法律文件", "完全保密保证", "项目信息保护", "标准价格加收50%"], benefits: ["确保您的项目想法和数据的安全", "保护您的商业秘密"] }
+    audit: { ...uzServiceDetails.audit, label: "标志审核", description: "对现有标志进行分析并提供改进建议。", features: uzServiceDetails.audit.features.map(f => ({...f})), benefits: uzServiceDetails.audit.benefits.map(b => b), oldPrice: 118, discount: 0.5 },
+    namingCheck: { ...uzServiceDetails.namingCheck, label: "名称检查", description: "检查品牌名称在乌兹别克斯坦和国际数据库中的可用性。", features: uzServiceDetails.namingCheck.features.map(f => ({...f})), benefits: uzServiceDetails.namingCheck.benefits.map(b => b), oldPrice: 158, discount: 0.5 },
+    consultation: { ...uzServiceDetails.consultation, label: "30分钟咨询", description: "为任何品牌问题提供快速指导和专业建议。", features: uzServiceDetails.consultation.features.map(f => ({...f})), benefits: uzServiceDetails.consultation.benefits.map(b => b) },
+    strategy: { ...uzServiceDetails.strategy, label: "品牌策略与平台", description: "市场分析、品牌审核、定位和价值主张开发。", features: uzServiceDetails.strategy.features.map(f => ({...f})), benefits: uzServiceDetails.strategy.benefits.map(b => b) },
+    commStrategy: { ...uzServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
+    namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业。", features: uzServiceDetails.namingStandard.features.map(f => ({...f})), benefits: uzServiceDetails.namingStandard.benefits.map(b => b), timeline: "初步概念在7-10个工作日内提交" },
+    namingPremium: { ...uzServiceDetails.namingPremium, label: "高级命名", description: "适合中型和成长型企业。", features: uzServiceDetails.namingPremium.features.map(f => ({...f})), benefits: uzServiceDetails.namingPremium.benefits.map(b => b), timeline: "初步概念在14-20个工作日内提交" },
+    namingVIP: { ...uzServiceDetails.namingVIP, label: "VIP命名", description: "适合大型和国际项目。", features: uzServiceDetails.namingVIP.features.map(f => ({...f})), benefits: uzServiceDetails.namingVIP.benefits.map(b => b), timeline: "初步概念在20-25个工作日内提交" },
+    logoStandard: { ...uzServiceDetails.logoStandard, label: "标准标志", description: "为初创公司提供的快速解决方案。", features: uzServiceDetails.logoStandard.features.map(f => ({...f})), benefits: uzServiceDetails.logoStandard.benefits.map(b => b), timeline: "初步概念在7-10个工作日内提交" },
+    logoPremium: { ...uzServiceDetails.logoPremium, label: "标志与企业形象", description: "为那些认真发展品牌的企业。", features: uzServiceDetails.logoPremium.features.map(f => ({...f})), benefits: uzServiceDetails.logoPremium.benefits.map(b => b), timeline: "初步概念在14-20个工作日内提交" },
+    logoVIP: { ...uzServiceDetails.logoVIP, label: "标志 + 企业形象 + 品牌手册", description: "扩展的形象和全面支持。", features: uzServiceDetails.logoVIP.features.map(f => ({...f})), benefits: uzServiceDetails.logoVIP.benefits.map(b => b), timeline: "初步概念在20-30个工作日内提交" },
+    packaging: { ...uzServiceDetails.packaging, label: "包装设计", description: "为3个SKU开发包装，为印刷做准备。", features: uzServiceDetails.packaging.features.map(f => ({...f})), benefits: uzServiceDetails.packaging.benefits.map(b => b) },
+    smm: { ...uzServiceDetails.smm, label: "社交网络风格", description: "以企业风格设计帖子和故事。", features: uzServiceDetails.smm.features.map(f => ({...f})), benefits: uzServiceDetails.smm.benefits.map(b => b) },
+    merch: { ...uzServiceDetails.merch, label: "品牌商品和载体", description: "服装、配饰、POSM材料的设计。", features: uzServiceDetails.merch.features.map(f => ({...f})), benefits: uzServiceDetails.merch.benefits.map(b => b) },
+    illustrations: { ...uzServiceDetails.illustrations, label: "插图与动画", description: "创建企业图形、信息图和动画。", features: uzServiceDetails.illustrations.features.map(f => ({...f})), benefits: uzServiceDetails.illustrations.benefits.map(b => b) },
+    urgency: { ...uzServiceDetails.urgency, label: "紧急项目（+50%）", description: "该项目将不按顺序在短时间内（2-3天）执行。", features: uzServiceDetails.urgency.features.map(f => ({...f})), benefits: uzServiceDetails.urgency.benefits.map(b => b) },
+    nda: { ...uzServiceDetails.nda, label: "保密协议（NDA）（+50%）", description: "关于不披露项目信息的协议。", features: uzServiceDetails.nda.features.map(f => ({...f})), benefits: uzServiceDetails.nda.benefits.map(b => b) }
 };
 
 

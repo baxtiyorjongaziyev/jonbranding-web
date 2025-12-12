@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice, packageDiscountThreshold } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight, Loader2, ChevronsDown, HeartHandshake } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight, Loader2, ChevronsDown, HeartHandshake, ChevronDown } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion, useMotionValue } from 'framer-motion';
@@ -93,12 +93,32 @@ const CurrencyToggle = ({ currency, onCurrencyChange }: { currency: 'uzs' | 'usd
     </div>
 );
 
+const FeatureBenefitAccordion = ({ items, isVip }: { items: { feature: string, benefit: string }[], isVip: boolean }) => (
+    <Accordion type="single" collapsible className="w-full space-y-2">
+        {items.map((item, index) => (
+            <AccordionItem value={`item-${index}`} key={index} className={cn("border-b-0 rounded-lg", isVip ? "bg-white/5" : "bg-gray-50")}>
+                <AccordionTrigger className={cn("text-left text-sm font-medium hover:no-underline p-3", isVip ? "text-gray-200" : "text-gray-700")}>
+                    <div className="flex items-start gap-3">
+                         <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
+                         <span>{item.feature}</span>
+                    </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-3 pb-3 text-sm">
+                   <div className={cn("border-l-2 ml-5 pl-4 py-2", isVip ? "border-amber-400/50 text-amber-200" : "border-primary/50 text-primary-dark")}>
+                     <span className="font-bold">Foyda:</span> {item.benefit}
+                   </div>
+                </AccordionContent>
+            </AccordionItem>
+        ))}
+    </Accordion>
+);
+
 
 const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en' | 'zh', dictionary: any, currency: 'uzs' | 'usd' }) => {
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, features, timeline, benefits } = detail;
+    const { label, description, price, features, timeline } = detail;
 
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium') && !isVip;
@@ -139,28 +159,8 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
                     {features && (
                          <div>
                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                            <ul className="space-y-3">
-                                {features.map((feature: any, index: number) => (
-                                     <li key={index} className="flex items-start gap-3">
-                                        <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
-                                        <span className={cn("text-sm", isVip ? "text-gray-200" : "text-gray-700")}>{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                             <FeatureBenefitAccordion items={features} isVip={isVip} />
                          </div>
-                    )}
-                    {benefits && (
-                        <div>
-                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.benefits}</p>
-                            <ul className="space-y-3">
-                                {benefits.map((benefit: any, index: number) => (
-                                     <li key={index} className="flex items-start gap-3">
-                                        <HeartHandshake className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-sky-400" : "text-sky-500")} />
-                                        <span className={cn("text-sm font-medium", isVip ? "text-gray-100" : "text-gray-800")}>{benefit}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
                     )}
                 </div>
                 {timeline && (
@@ -228,32 +228,12 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     </div>
                 </div>
                 
-                <div className="my-6 space-y-6 flex-grow">
+                 <div className="my-6 space-y-6 flex-grow">
                     {features && features.length > 0 && (
                          <div>
-                            <p className="font-semibold text-sm mb-3">{dictionary.features}</p>
-                            <ul className="space-y-3">
-                                {features?.map((feature: any, index: number) => (
-                                     <li key={index} className="flex items-start gap-3">
-                                        <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                                        <span className="text-sm text-gray-700">{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
+                            <FeatureBenefitAccordion items={features} isVip={false} />
                          </div>
-                    )}
-                    {benefits && benefits.length > 0 && (
-                        <div>
-                            <p className="font-semibold text-sm mb-3">{dictionary.benefits}</p>
-                            <ul className="space-y-3">
-                                {benefits?.map((benefit: any, index: number) => (
-                                     <li key={index} className="flex items-start gap-3">
-                                        <HeartHandshake className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" />
-                                        <span className="text-sm font-medium text-gray-800">{benefit}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
                     )}
                 </div>
 
@@ -733,5 +713,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
-
-    
