@@ -71,18 +71,20 @@ const uzServiceDetails = {
         ],
         benefits: ["Biznesingiz uchun to'g'ri yo'nalishni tezda aniqlang", "Qimmatli vaqt va pulingizni tejang"] 
     },
-    strategy: { 
-        label: "Brend-strategiya va platforma", 
-        description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.", 
-        price: basePricesUSD.strategy, 
-        note: null, 
+    strategy: {
+        label: "Brend-strategiya va platforma",
+        description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.",
+        price: basePricesUSD.strategy,
+        note: null,
         features: [
-            { feature: "Bozor va raqobatchilar tahlili", benefit: "Raqobatchilardan qanday ajralib turishni va bozorning 'bo'sh joylari'ni bilib olasiz." },
-            { feature: "Brend platformasi (missiya, qadriyatlar)", benefit: "Kompaniyangiz shunchaki pul ishlash uchun emas, balki kattaroq maqsadga ega ekanligini his qilasiz va buni mijozlarga yetkaza olasiz." },
-            { feature: "Pozitsiyalash strategiyasi", benefit: "Mijozlar ongida aniq bir o'rin egallaysiz (masalan, 'eng tez', 'eng sifatli', 'eng innovatsion')." },
-            { feature: "Brend arxitekturasi", benefit: "Kelajakda yangi mahsulotlar qo'shilganda brendingiz yaxlitligini saqlab qolish tizimiga ega bo'lasiz." }
+            { feature: "Chuqurlashtirilgan bozor tahlili", benefit: "Siz shunchaki raqobatchilarni o'rganmaysiz, balki bozorning 'yashirin' imkoniyatlarini va xavflarini aniqlaysiz. Bu kelajakdagi qarorlaringiz uchun mustahkam poydevor bo'ladi." },
+            { feature: "Maqsadli auditoriyani segmentlash", benefit: "“Hamma uchun” degan yondashuvdan voz kechib, sizning mahsulotingizni chin dildan sevib xarid qiladigan aniq mijozlar guruhini aniqlaysiz va ularning tilida gapirishni o'rganasiz." },
+            { feature: "Brend platformasini ishlab chiqish (Missiya, Qadriyatlar, Brend ovozi)", benefit: "Brendingiz shunchaki pul ishlash vositasi emas, balki o'z missiyasiga ega bo'lgan 'jonli' organizmga aylanadi. Bu jamoangizni ilhomlantiradi va mijozlarda hissiy bog'liqlikni kuchaytiradi." },
+            { feature: "Unikal savdo taklifi (UST) va pozitsiyalash", benefit: "Mijozlar ongida aniq bir o'rin egallaysiz. 'Nega aynan siz?' degan savolga ular hech ikkilanmay javob bera oladigan bo'lishadi." },
+            { feature: "Brend arxitekturasi", benefit: "Agar bir nechta mahsulotingiz yoki sub-brendingiz bo'lsa, ularning o'zaro munosabatini tartibga solasiz. Bu kelajakdagi chalkashliklarning oldini oladi." },
+            { feature: "Brend hikoyasi (Storytelling)", benefit: "Mijozlar faqat mahsulotni emas, balki uning ortidagi hikoyani sotib olishadi. Biz sizning brendingizga odamlarni o'ziga tortadigan jozibali hikoya yaratamiz." }
         ],
-        benefits: ["Biznesingiz uchun aniq rivojlanish xaritasini oling", "Marketing xarajatlaringizni optimallashtiring", "Bozorda mustahkam o'rin egallang"] 
+        benefits: ["Biznesingiz uchun aniq rivojlanish xaritasini oling", "Marketing xarajatlaringizni optimallashtiring", "Bozorda mustahkam o'rin egallang"]
     },
     commStrategy: { 
         label: "Kommunikatsion strategiya", 
@@ -263,7 +265,17 @@ const ruServiceDetails = {
     audit: { ...uzServiceDetails.audit, label: "Аудит логотипа", description: "Анализ существующего логотипа и рекомендации по улучшению.", features: uzServiceDetails.audit.features.map(f => ({...f})), benefits: uzServiceDetails.audit.benefits.map(b => b), oldPrice: 118, discount: 0.5 },
     namingCheck: { ...uzServiceDetails.namingCheck, label: "Проверка нейминга", description: "Проверка доступности имени бренда в базах данных Узбекистана и международных базах.", features: uzServiceDetails.namingCheck.features.map(f => ({...f})), benefits: uzServiceDetails.namingCheck.benefits.map(b => b), oldPrice: 158, discount: 0.5 },
     consultation: { ...uzServiceDetails.consultation, label: "30-минутная консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга.", features: uzServiceDetails.consultation.features.map(f => ({...f})), benefits: uzServiceDetails.consultation.benefits.map(b => b) },
-    strategy: { ...uzServiceDetails.strategy, label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.", features: uzServiceDetails.strategy.features.map(f => ({...f})), benefits: uzServiceDetails.strategy.benefits.map(b => b) },
+    strategy: { ...uzServiceDetails.strategy, label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.", 
+        features: [
+            { feature: "Углубленный анализ рынка", benefit: "Вы не просто изучаете конкурентов, а выявляете 'скрытые' возможности и угрозы рынка. Это становится прочным фундаментом для ваших будущих решений." },
+            { feature: "Сегментация целевой аудитории", benefit: "Отказавшись от подхода 'для всех', вы определяете конкретную группу клиентов, которые искренне полюбят и будут покупать ваш продукт, и учитесь говорить на их языке." },
+            { feature: "Разработка бренд-платформы (Миссия, Ценности, Голос бренда)", benefit: "Ваш бренд становится не просто инструментом для зарабатывания денег, а 'живым' организмом со своей миссией. Это вдохновляет вашу команду и усиливает эмоциональную связь с клиентами." },
+            { feature: "Уникальное торговое предложение (УТП) и позиционирование", benefit: "Вы занимаете определенное место в сознании клиентов. На вопрос 'Почему именно вы?' они смогут ответить без колебаний." },
+            { feature: "Архитектура бренда", benefit: "Если у вас несколько продуктов или суббрендов, вы упорядочиваете их взаимоотношения. Это предотвращает будущие путаницы." },
+            { feature: "История бренда (Storytelling)", benefit: "Клиенты покупают не только продукт, но и стоящую за ним историю. Мы создаем для вашего бренда увлекательную историю, которая привлекает людей." }
+        ],
+        benefits: ["Получите четкую карту развития для вашего бизнеса", "Оптимизируйте ваши маркетинговые расходы", "Займите прочное место на рынке"]
+    },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса.", features: uzServiceDetails.namingStandard.features.map(f => ({...f})), benefits: uzServiceDetails.namingStandard.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 7–10 рабочих дней" },
     namingPremium: { ...uzServiceDetails.namingPremium, label: "Нейминг Premium", description: "Для среднего и развивающегося бизнеса.", features: uzServiceDetails.namingPremium.features.map(f => ({...f})), benefits: uzServiceDetails.namingPremium.benefits.map(b => b), timeline: "Первые концепции предоставляются в течение 14–20 рабочих дней" },
@@ -283,7 +295,17 @@ const enServiceDetails = {
     audit: { ...uzServiceDetails.audit, label: "Logo Audit", description: "Analysis of the existing logo and recommendations for improvement.", features: uzServiceDetails.audit.features.map(f => ({...f})), benefits: uzServiceDetails.audit.benefits.map(b => b), oldPrice: 118, discount: 0.5 },
     namingCheck: { ...uzServiceDetails.namingCheck, label: "Naming Check", description: "Checking the availability of the brand name in Uzbekistan and international databases.", features: uzServiceDetails.namingCheck.features.map(f => ({...f})), benefits: uzServiceDetails.namingCheck.benefits.map(b => b), oldPrice: 158, discount: 0.5 },
     consultation: { ...uzServiceDetails.consultation, label: "30-minute consultation", description: "Quick guidance and professional advice on any branding question.", features: uzServiceDetails.consultation.features.map(f => ({...f})), benefits: uzServiceDetails.consultation.benefits.map(b => b) },
-    strategy: { ...uzServiceDetails.strategy, label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.", features: uzServiceDetails.strategy.features.map(f => ({...f})), benefits: uzServiceDetails.strategy.benefits.map(b => b) },
+    strategy: { ...uzServiceDetails.strategy, label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.", 
+        features: [
+            { feature: "In-depth market analysis", benefit: "You don't just study competitors, you identify 'hidden' market opportunities and threats. This becomes a solid foundation for your future decisions." },
+            { feature: "Target audience segmentation", benefit: "By abandoning the 'for everyone' approach, you identify a specific group of customers who will genuinely love and buy your product, and you learn to speak their language." },
+            { feature: "Brand platform development (Mission, Values, Brand Voice)", benefit: "Your brand becomes not just a tool for making money, but a 'living' organism with its own mission. This inspires your team and strengthens the emotional connection with customers." },
+            { feature: "Unique Selling Proposition (USP) and positioning", benefit: "You occupy a specific place in the minds of customers. They will be able to answer the question 'Why you?' without hesitation." },
+            { feature: "Brand architecture", benefit: "If you have several products or sub-brands, you regulate their relationship. This prevents future confusion." },
+            { feature: "Brand storytelling", benefit: "Customers buy not just the product, but the story behind it. We create a compelling story for your brand that attracts people." }
+        ],
+        benefits: ["Get a clear development map for your business", "Optimize your marketing expenses", "Establish a strong position in the market"]
+    },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses.", features: uzServiceDetails.namingStandard.features.map(f => ({...f})), benefits: uzServiceDetails.namingStandard.benefits.map(b => b), timeline: "First concepts are presented within 7–10 working days" },
     namingPremium: { ...uzServiceDetails.namingPremium, label: "Naming Premium", description: "For medium and growing businesses.", features: uzServiceDetails.namingPremium.features.map(f => ({...f})), benefits: uzServiceDetails.namingPremium.benefits.map(b => b), timeline: "First concepts are presented within 14–20 working days" },
@@ -303,7 +325,17 @@ const zhServiceDetails = {
     audit: { ...uzServiceDetails.audit, label: "标志审核", description: "对现有标志进行分析并提供改进建议。", features: uzServiceDetails.audit.features.map(f => ({...f})), benefits: uzServiceDetails.audit.benefits.map(b => b), oldPrice: 118, discount: 0.5 },
     namingCheck: { ...uzServiceDetails.namingCheck, label: "名称检查", description: "检查品牌名称在乌兹别克斯坦和国际数据库中的可用性。", features: uzServiceDetails.namingCheck.features.map(f => ({...f})), benefits: uzServiceDetails.namingCheck.benefits.map(b => b), oldPrice: 158, discount: 0.5 },
     consultation: { ...uzServiceDetails.consultation, label: "30分钟咨询", description: "为任何品牌问题提供快速指导和专业建议。", features: uzServiceDetails.consultation.features.map(f => ({...f})), benefits: uzServiceDetails.consultation.benefits.map(b => b) },
-    strategy: { ...uzServiceDetails.strategy, label: "品牌策略与平台", description: "市场分析、品牌审核、定位和价值主张开发。", features: uzServiceDetails.strategy.features.map(f => ({...f})), benefits: uzServiceDetails.strategy.benefits.map(b => b) },
+    strategy: { ...uzServiceDetails.strategy, label: "品牌策略与平台", description: "市场分析、品牌审核、定位和价值主张开发。",
+        features: [
+            { feature: "深入的市场分析", benefit: "您不仅研究竞争对手，还发现市场的“隐藏”机会和威胁。这为您未来的决策奠定了坚实的基础。" },
+            { feature: "目标受众细分", benefit: "通过放弃“为所有人”的方法，您确定了一个特定的客户群体，他们会真正喜爱并购买您的产品，您学会了用他们的语言说话。" },
+            { feature: "品牌平台开发（使命、价值观、品牌声音）", benefit: "您的品牌不仅仅是赚钱的工具，而是一个有自己使命的“活”的有机体。这会激励您的团队并加强与客户的情感联系。" },
+            { feature: "独特的销售主张（USP）和定位", benefit: "您在客户心目中占据了特定的位置。他们将能够毫不犹豫地回答“为什么是您？”这个问题。" },
+            { feature: "品牌架构", benefit: "如果您有多个产品或子品牌，您将规范它们之间的关系。这可以防止未来的混乱。" },
+            { feature: "品牌故事", benefit: "客户购买的不仅仅是产品，还有它背后的故事。我们为您的品牌创造一个吸引人的引人入胜的故事。" }
+        ],
+        benefits: ["为您的业务获得清晰的发展蓝图", "优化您的营销开支", "在市场上建立稳固的地位"]
+    },
     commStrategy: { ...uzServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", features: uzServiceDetails.commStrategy.features.map(f => ({...f})), benefits: uzServiceDetails.commStrategy.benefits.map(b => b) },
     namingStandard: { ...uzServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业。", features: uzServiceDetails.namingStandard.features.map(f => ({...f})), benefits: uzServiceDetails.namingStandard.benefits.map(b => b), timeline: "初步概念在7-10个工作日内提交" },
     namingPremium: { ...uzServiceDetails.namingPremium, label: "高级命名", description: "适合中型和成长型企业。", features: uzServiceDetails.namingPremium.features.map(f => ({...f})), benefits: uzServiceDetails.namingPremium.benefits.map(b => b), timeline: "初步概念在14-20个工作日内提交" },
