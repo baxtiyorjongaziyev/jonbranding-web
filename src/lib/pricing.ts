@@ -192,7 +192,7 @@ const uzServiceDetails = {
             { feature: "3 oygacha post-delivery qo‘llab-quvvatlash", benefit: "Loyiha tugaganidan keyin ham dizaynni amaliyotga tatbiq etishda yolg'iz qolmaysiz." },
             { feature: "100% Mamnuniyat Kafolati", benefit: "Sizga to'liq ma'qul keladigan logotip konsepsiyasini topmagunimizcha ishlaymiz." }
         ], 
-        benefits: ["Brendingiz uchun 'kalit taslim' yechim oling", "Bozorda premium segmentga da'vo qiling", "Brendingizni boshqarish uchun to'liq qo'llanma va vositalarga ega bo'ling"], 
+        benefits: ["Brendingiz uchun noldan boshlab to'liq tayyor yechimga ega bo'ling", "Bozorda premium segmentga da'vo qiling", "Brendingizni boshqarish uchun to'liq qo'llanma va vositalarga ega bo'ling"], 
         timeline: "Birinchi konsepsiyalar 20–30 ish kuni ichida taqdim etiladi" 
     },
     packaging: { 
@@ -459,7 +459,7 @@ const zhServiceDetails = {
         benefits: ["获得一个争夺绝对市场领导地位的名称", "一个受到最大保护且深思熟虑的品牌名称", "个人专家监督和支持"], 
     },
     logoStandard: { ...uzServiceDetails.logoStandard, label: "标准标志", description: "为初创公司提供的快速解决方案。", features: [
-            { feature: "基于公司简报的3个标志概念", benefit: "您将有机会从几个适合您业务的选项中选择一个。" },
+            { feature: "3个基于公司简报的标志概念", benefit: "您将有机会从几个适合您业务的选项中选择一个。" },
             { feature: "在5个接触点上的可视化", benefit: "您将提前看到您的标志在现实生活中的样子（在名片上、在帖子中、在网站上）。" },
             { feature: "矢量标志文件（AI, EPS, PNG, JPG, PDF）", benefit: "您可以在任何尺寸和任何地方使用标志而不会损失质量。" },
             { feature: "100% 满意保证", benefit: "我们将一直工作，直到找到您完全满意的标志概念为止。" }
@@ -793,5 +793,7 @@ ${lang === 'ru' ? 'Бонус' : lang === 'en' ? 'Bonus' : 'Bonus'}: ${bonus}`;
 
 
 
+
+    
 
     
