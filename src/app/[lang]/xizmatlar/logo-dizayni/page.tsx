@@ -1,4 +1,3 @@
-
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -76,13 +75,7 @@ const LogoDesignPage: FC = () => {
                     <div className="lg:order-last">
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
-                            <Image 
-                                src="https://images.unsplash.com/photo-1493421419110-74f4e85ba126?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxsb2dvJTIwZGVzaWdufGVufDB8fHx8MTc1OTM4ODAyOHww&ixlib=rb-4.1.0&q=80&w=1080"
-                                width={800}
-                                height={600}
-                                data-ai-hint="logo design process"
-                                alt="Logo design process sketches"
-                                className="rounded-2xl object-cover"/>
+                            
                             </CardContent>
                         </Card>
                     </div>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -91,6 +90,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
             variant="ghost"
             role="combobox"
             aria-expanded={open}
+            aria-label="Tilni o'zgartirish"
             className={cn(
                 "w-auto justify-start gap-2 font-semibold",
                 scrolled ? "bg-white/20 hover:bg-white/30 text-foreground" : "bg-black/5 hover:bg-black/10 text-foreground"

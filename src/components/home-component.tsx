@@ -1,28 +1,33 @@
-
 'use client';
 
 import type { FC, ReactNode } from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero';
-import TrustedBy from '@/components/sections/trusted-by';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
-import Stats from '@/components/sections/stats';
 import CtaBlock from '@/components/sections/cta-block';
 
 // Dynamically import components that are not immediately visible
+const Stats = dynamic(() => import('@/components/sections/stats'));
 const Founder = dynamic(() => import('@/components/sections/founder'));
 const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'));
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
 const Video = dynamic(() => import('@/components/sections/video'));
 const Process = dynamic(() => import('@/components/sections/process'));
 const TargetAudience = dynamic(() => import('@/components/sections/target-audience'));
-const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
+const Testimonials = dynamic(() => import('@/components/sections/testimonials'), {
+  loading: () => <Skeleton className="h-[500px] w-full" />,
+});
 const Gallery = dynamic(() => import('@/components/sections/gallery'));
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Faq = dynamic(() => import('@/components/sections/faq'));
-const WhyUs = dynamic(() => import('@/components/sections/why-us'));
+const WhyUs = dynamic(() => import('@/components/sections/why-us'), {
+  loading: () => <Skeleton className="h-[400px] w-full" />,
+});
+const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'), {
+  loading: () => <Skeleton className="h-[300px] w-full" />,
+});
 const FeaturedCaseStudy = dynamic(() => import('@/components/sections/featured-case-study'), { ssr: false });
 
 
