@@ -180,7 +180,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                       id="queue-cta"
                       size="lg"
                       onClick={onCtaClick}
-                      className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform text-lg animate-subtle-pulse px-6 sm:px-8 py-6"
+                      className="bg-accent text-white hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform text-lg animate-subtle-pulse px-6 sm:px-8 py-6"
                     >
                       {translations.ctaButton}
                       <ArrowRight className="ml-2 h-5 w-5" />
