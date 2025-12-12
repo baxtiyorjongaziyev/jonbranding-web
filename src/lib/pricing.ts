@@ -73,7 +73,7 @@ const uzServiceDetails = {
     },
     strategy: {
         label: "Brend-strategiya va platforma",
-        description: "Bozor tahlili, brend auditi, pozitsiyalash va qadriyatlar taklifini ishlab chiqish.",
+        description: "Biznesingiz uchun natija keltiradigan poydevor — bozor tahlili, pozitsiyalash va kommunikatsiya.",
         price: basePricesUSD.strategy,
         note: null,
         features: [
@@ -736,3 +736,4 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
 
     return summary;
 }
+
