@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -9,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice, packageDiscountThreshold } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight, Loader2, ChevronsDown } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight, Loader2, ChevronsDown, HeartHandshake } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion, useMotionValue } from 'framer-motion';
@@ -97,7 +98,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, features, timeline } = detail;
+    const { label, description, price, features, timeline, benefits } = detail;
 
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium') && !isVip;
@@ -134,15 +135,33 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
                     <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang, currency)}</p>
                 </div>
                 
-                <div className="mt-6 mb-8 flex-grow">
-                    <ul className="space-y-3">
-                        {features?.map((feature: any, index: number) => (
-                             <li key={index} className="flex items-start gap-3">
-                                <Check className={cn("w-5 h-5  flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
-                                <span className={cn("text-sm", isVip ? "text-gray-200" : "text-gray-700")}>{feature}</span>
-                            </li>
-                        ))}
-                    </ul>
+                 <div className="my-6 space-y-6 flex-grow">
+                    {features && (
+                         <div>
+                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
+                            <ul className="space-y-3">
+                                {features.map((feature: any, index: number) => (
+                                     <li key={index} className="flex items-start gap-3">
+                                        <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
+                                        <span className={cn("text-sm", isVip ? "text-gray-200" : "text-gray-700")}>{feature}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                         </div>
+                    )}
+                    {benefits && (
+                        <div>
+                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.benefits}</p>
+                            <ul className="space-y-3">
+                                {benefits.map((benefit: any, index: number) => (
+                                     <li key={index} className="flex items-start gap-3">
+                                        <HeartHandshake className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-sky-400" : "text-sky-500")} />
+                                        <span className={cn("text-sm font-medium", isVip ? "text-gray-100" : "text-gray-800")}>{benefit}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
                 {timeline && (
                     <div className={cn("text-center text-xs mb-4 flex items-center justify-center gap-2", isVip ? "text-gray-400" : "text-muted-foreground")}>
@@ -187,7 +206,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, note, features, oldPrice, discount } = detail;
+    const { label, description, price, note, features, oldPrice, discount, benefits } = detail;
     const Icon = serviceIcons[id] || Sparkles;
 
     return (
@@ -209,18 +228,35 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     </div>
                 </div>
                 
-                 {features && features.length > 0 && (
-                     <div className="mt-4 mb-6 flex-grow">
-                         <ul className="space-y-3">
-                            {features?.map((feature: any, index: number) => (
-                                 <li key={index} className="flex items-start gap-3">
-                                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                                    <span className="text-sm text-gray-700">{feature}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
+                <div className="my-6 space-y-6 flex-grow">
+                    {features && features.length > 0 && (
+                         <div>
+                            <p className="font-semibold text-sm mb-3">{dictionary.features}</p>
+                            <ul className="space-y-3">
+                                {features?.map((feature: any, index: number) => (
+                                     <li key={index} className="flex items-start gap-3">
+                                        <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                                        <span className="text-sm text-gray-700">{feature}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                         </div>
+                    )}
+                    {benefits && benefits.length > 0 && (
+                        <div>
+                            <p className="font-semibold text-sm mb-3">{dictionary.benefits}</p>
+                            <ul className="space-y-3">
+                                {benefits?.map((benefit: any, index: number) => (
+                                     <li key={index} className="flex items-start gap-3">
+                                        <HeartHandshake className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" />
+                                        <span className="text-sm font-medium text-gray-800">{benefit}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+
                 
                 <div className="mt-auto pt-4">
                      {discount && oldPrice && oldPrice > 0 ? (
