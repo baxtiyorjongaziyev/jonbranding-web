@@ -93,7 +93,7 @@ const CurrencyToggle = ({ currency, onCurrencyChange }: { currency: 'uzs' | 'usd
     </div>
 );
 
-const FeatureBenefitAccordion = ({ items, isVip }: { items: { feature: string; benefit: string }[], isVip: boolean }) => (
+const FeatureBenefitAccordion = ({ items, isVip, dictionary }: { items: { feature: string; benefit: string }[], isVip: boolean, dictionary: any }) => (
     <Accordion type="single" collapsible className="w-full space-y-2">
         {items.map((item, index) => (
             <AccordionItem value={`item-${index}`} key={index} className={cn("border-b-0 rounded-lg", isVip ? "bg-white/5" : "bg-gray-50")}>
@@ -107,7 +107,7 @@ const FeatureBenefitAccordion = ({ items, isVip }: { items: { feature: string; b
                 </AccordionTrigger>
                 <AccordionContent className="px-3 pb-3 text-sm">
                    <div className={cn("border-l-2 ml-5 pl-4 py-2", isVip ? "border-amber-400/50 text-amber-200" : "border-primary/50 text-primary-dark")}>
-                     <span className="font-bold">Foyda:</span> {item.benefit}
+                     <span className="font-bold">{dictionary.benefit_prefix}</span> {item.benefit}
                    </div>
                 </AccordionContent>
             </AccordionItem>
@@ -124,6 +124,9 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
 
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium') && !isVip;
+    
+    const allFeatures = [...(features || []), ...(benefits ? benefits.map(b => ({feature: b, benefit: dictionary.benefits_generic_text})) : [])];
+
 
     return (
         <Card
@@ -158,24 +161,11 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
                 </div>
 
                  <div className="my-6 space-y-6 flex-grow">
-                    {features && (
+                    {allFeatures && allFeatures.length > 0 && (
                          <div>
                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                             <FeatureBenefitAccordion items={features} isVip={isVip} />
+                             <FeatureBenefitAccordion items={allFeatures} isVip={isVip} dictionary={dictionary} />
                          </div>
-                    )}
-                     {benefits && benefits.length > 0 && (
-                        <div className="mt-6">
-                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.benefits}</p>
-                            <ul className="space-y-2">
-                                {benefits.map((benefit: string, index: number) => (
-                                    <li key={index} className="flex items-start gap-3 text-sm">
-                                        <HeartHandshake className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-300" : "text-green-500")} />
-                                        <span className={isVip ? "text-gray-300" : "text-gray-700"}>{benefit}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
                     )}
                 </div>
                 {timeline && (
@@ -223,12 +213,14 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     if (!detail) return null;
     const { label, description, price, note, features, oldPrice, discount, benefits } = detail;
     const Icon = serviceIcons[id] || Sparkles;
+    
+    const allFeatures = [...(features || []), ...(benefits ? benefits.map(b => ({feature: b, benefit: dictionary.benefits_generic_text})) : [])];
 
     return (
         <Card
             onClick={onSelect}
             className={cn(
-                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer",
+                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
                 selected ? 'border-primary ring-4 ring-primary/20 bg-primary/5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
             )}
         >
@@ -242,39 +234,26 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                          <p className="text-sm text-muted-foreground mt-1" dangerouslySetInnerHTML={{ __html: description }}></p>
                     </div>
                 </div>
-
+                
                  <div className="my-6 space-y-6 flex-grow">
-                    {features && features.length > 0 && (
+                    {allFeatures && allFeatures.length > 0 && (
                          <div>
                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                            <FeatureBenefitAccordion items={features} isVip={false} />
+                             <FeatureBenefitAccordion items={allFeatures} isVip={false} dictionary={dictionary} />
                          </div>
-                    )}
-                    {benefits && benefits.length > 0 && (
-                        <div className="mt-6">
-                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.benefits}</p>
-                            <ul className="space-y-2">
-                                {benefits.map((benefit: string, index: number) => (
-                                    <li key={index} className="flex items-start gap-3 text-sm">
-                                        <HeartHandshake className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                                        <span className="text-gray-700" dangerouslySetInnerHTML={{ __html: benefit }}></span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
                     )}
                 </div>
 
 
                 <div className="mt-auto pt-4">
                      {discount && oldPrice && oldPrice > 0 ? (
-                        <div className="my-4 text-left">
+                        <div className="mb-4 text-left">
                             <div className="inline-block bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-md mb-1">-{discount * 100}%</div>
                             <div className="text-3xl font-extrabold text-dark-blue">{formatPrice(price, lang, currency)}</div>
                             <div className="text-base text-gray-400 line-through">{formatPrice(oldPrice, lang, currency)}</div>
                         </div>
                     ) : (
-                        <div className="text-3xl font-extrabold text-dark-blue my-4">
+                        <div className="text-3xl font-extrabold text-dark-blue mb-4">
                             {price > 0 || note ? (
                                 <span>
                                     {note ? note : formatPrice(price, lang, currency)}
@@ -739,3 +718,4 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
