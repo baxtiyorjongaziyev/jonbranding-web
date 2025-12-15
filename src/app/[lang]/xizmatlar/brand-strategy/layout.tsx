@@ -18,6 +18,8 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
     keywords = ["бренд стратегия", "платформа бренда", "брендинговое агентство ташкент", "стратегический брендинг", "стратегия для бизнеса", "упаковка бизнеса"];
   } else if (lang === 'en') {
     keywords = ["brand strategy", "brand platform", "branding agency tashkent", "strategic branding", "strategy for business", "business packaging"];
+  } else if (lang === 'zh') {
+    keywords = ["品牌策略", "品牌平台", "塔什干品牌代理", "战略品牌", "商业策略", "商业包装"];
   }
 
 
@@ -53,6 +55,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
         'uz': 'https://jonbranding.uz/xizmatlar/brand-strategy',
         'ru': 'https://jonbranding.uz/ru/xizmatlar/brand-strategy',
         'en': 'https://jonbranding.uz/en/xizmatlar/brand-strategy',
+        'zh': 'https://jonbranding.uz/zh/xizmatlar/brand-strategy',
       },
     },
   };

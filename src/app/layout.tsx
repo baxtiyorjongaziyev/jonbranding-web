@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
@@ -50,6 +51,12 @@ const KEYWORDS_EN = [
     "Minim", "OQILA", "xspace.uz", "change.uz", "Golden Minds"
 ];
 
+const APP_NAME_ZH = "Jon.Branding | 塔什干的品牌代理机构：品牌策略、命名、标志设计";
+const APP_DESCRIPTION_ZH = "Jon.Branding是乌兹别克斯坦的一家高端品牌代理机构。我们提供品牌策略、命名、标志设计、企业形象、品牌手册创建和商业包装服务。我们创造能为您的业务带来成果的品牌。";
+const KEYWORDS_ZH = [
+    "品牌代理机构 塔什干", "品牌策略", "命名服务", "标志设计", "企业形象创建", "品牌手册开发", "包装设计", "包装设计代理", "品牌创建服务", "品牌设计 塔什干", "高端品牌 乌兹别克斯坦", "乌兹别克斯坦包装设计", "乌兹别克斯坦标志设计代理", "费尔干纳谷创意代理", "jon branding agency", "商业包装"
+];
+
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
 const BASE_URL = 'https://jonbranding.uz';
 
@@ -71,6 +78,11 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
           title = APP_NAME_EN;
           description = APP_DESCRIPTION_EN;
           keywords = KEYWORDS_EN;
+          break;
+      case 'zh':
+          title = APP_NAME_ZH;
+          description = APP_DESCRIPTION_ZH;
+          keywords = KEYWORDS_ZH;
           break;
       default:
           title = APP_NAME_UZ;

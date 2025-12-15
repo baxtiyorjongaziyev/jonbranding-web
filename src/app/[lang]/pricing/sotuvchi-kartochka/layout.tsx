@@ -57,6 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'uz': `https://jonbranding.uz/pricing/sotuvchi-kartochka`,
         'ru': `https://jonbranding.uz/ru/pricing/sotuvchi-kartochka`,
         'en': `https://jonbranding.uz/en/pricing/sotuvchi-kartochka`,
+        'zh': `https://jonbranding.uz/zh/pricing/sotuvchi-kartochka`,
       },
     },
   };

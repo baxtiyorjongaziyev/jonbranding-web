@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -43,6 +44,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
         'uz': 'https://jonbranding.uz/xizmatlar/patent-kalkulyatori',
         'ru': 'https://jonbranding.uz/ru/xizmatlar/patent-kalkulyatori',
         'en': 'https://jonbranding.uz/en/xizmatlar/patent-kalkulyatori',
+        'zh': 'https://jonbranding.uz/zh/xizmatlar/patent-kalkulyatori',
       },
     },
   };
