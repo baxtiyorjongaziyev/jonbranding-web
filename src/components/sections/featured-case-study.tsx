@@ -46,6 +46,19 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                 "Drastic reduction in 'it's expensive' objections",
                 "Increased customer trust in the brand"
             ]
+        },
+        zh: {
+            title: "为什么有些品牌可以高价销售，而你的却不行？",
+            description: "答案很简单：他们不只是销售产品；他们销售的是<strong>体验、声誉和信任</strong>。所有这些都是通过强大的品牌塑造创造的。",
+            case_desc: "以 'Den Aroma' 为例，我们将一家普通的香水店改造成了一家高级精品店。结果，他们现在可以高价销售，而不会有“太贵了”的异议。",
+            buttonText: "了解更多",
+            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
+            ctaButton: "也为我的品牌",
+            results: [
+                "平均客单价增加60%",
+                "“太贵了”的异议大幅减少",
+                "客户对品牌的信任度增加"
+            ]
         }
     };
     const t = caseData[lang as keyof typeof caseData] || caseData.uz;
