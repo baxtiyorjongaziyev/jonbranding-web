@@ -638,7 +638,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 {total.base > 0 && (
                                                     <div className="flex justify-between items-baseline text-sm">
                                                         <span className="text-blue-200">{translations.base_price}</span>
-                                                        <span className="font-mono text-lg line-through">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                        <div className="text-lg line-through text-gray-400 font-mono">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</div>
                                                     </div>
                                                 )}
                                                 {total.surcharges.map(s => (
