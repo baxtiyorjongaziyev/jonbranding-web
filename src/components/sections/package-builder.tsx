@@ -97,8 +97,8 @@ const FeatureBenefitAccordion = ({ items, isVip }: { items: { feature: string; b
     <Accordion type="single" collapsible className="w-full space-y-2">
         {items.map((item, index) => (
             <AccordionItem value={`item-${index}`} key={index} className={cn("border-b-0 rounded-lg", isVip ? "bg-white/5" : "bg-gray-50")}>
-                <AccordionTrigger 
-                    onClick={(e) => e.stopPropagation()} 
+                <AccordionTrigger
+                    onClick={(e) => e.stopPropagation()}
                     className={cn("text-left text-sm font-medium hover:no-underline p-3", isVip ? "text-gray-200" : "text-gray-700")}>
                     <div className="flex items-start gap-3">
                          <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
@@ -124,9 +124,9 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
 
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium') && !isVip;
-    
+
     return (
-        <Card 
+        <Card
             onClick={onSelect}
             className={cn(
                 "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
@@ -156,7 +156,7 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
                     <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
                     <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang, currency)}</p>
                 </div>
-                
+
                  <div className="my-6 space-y-6 flex-grow">
                     {features && (
                          <div>
@@ -184,13 +184,13 @@ const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id
                         <span>{timeline}</span>
                     </div>
                 )}
-                
+
                 <div className="mt-auto">
-                     <Button 
+                     <Button
                         className={cn(
                             "w-full text-base py-3 h-auto transition-all duration-300",
-                            selected 
-                                ? "shadow-lg" 
+                            selected
+                                ? "shadow-lg"
                                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
                              isVip && !selected && "bg-white/10 hover:bg-white/20 text-white",
                              isVip && selected && "bg-amber-400 hover:bg-amber-500 text-black"
@@ -225,7 +225,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const Icon = serviceIcons[id] || Sparkles;
 
     return (
-        <Card 
+        <Card
             onClick={onSelect}
             className={cn(
                 "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer",
@@ -242,7 +242,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                          <p className="text-sm text-muted-foreground mt-1" dangerouslySetInnerHTML={{ __html: description }}></p>
                     </div>
                 </div>
-                
+
                  <div className="my-6 space-y-6 flex-grow">
                     {features && features.length > 0 && (
                          <div>
@@ -265,7 +265,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     )}
                 </div>
 
-                
+
                 <div className="mt-auto pt-4">
                      {discount && oldPrice && oldPrice > 0 ? (
                         <div className="my-4 text-left">
@@ -284,11 +284,11 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                             )}
                         </div>
                     )}
-                     <Button 
+                     <Button
                         className={cn(
                             "w-full text-base py-3 h-auto transition-all duration-300",
-                            selected 
-                                ? "shadow-lg" 
+                            selected
+                                ? "shadow-lg"
                                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                         )}
                         variant={selected ? 'default' : 'secondary'}
@@ -325,9 +325,9 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as 'uz' | 'ru' | 'en' | 'zh');
-    
+
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
-        audit: false, namingCheck: false, consultation: false, 
+        audit: false, namingCheck: false, consultation: false,
         strategy: false, commStrategy: false,
         namingStandard: false, namingPremium: false, namingVIP: false,
         logoStandard: false, logoPremium: false, logoVIP: false,
@@ -409,7 +409,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
              setSelectedServices(prev => ({...prev, [serviceId]: !prev[serviceId]}));
         }
     };
-    
+
     if (!isClient || !translations) {
         return (
             <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
@@ -430,7 +430,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const selectedServiceKeys = Object.entries(selectedServices)
                                 .filter(([, value]) => value)
                                 .map(([key]) => key as keyof SelectedServices);
-    
+
     const serviceGroups = {
         tripwire: { titleKey: "tripwire", services: ['namingCheck', 'audit', 'consultation'], gridCols: "lg:grid-cols-3" },
         strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'], gridCols: "lg:grid-cols-2" },
@@ -439,7 +439,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         addons: { titleKey: "addons", services: ['packaging', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
         options: { titleKey: "options", services: ['urgency', 'nda'], gridCols: "lg:grid-cols-2" }
     };
-    
+
     const handlePopularPackageSelect = () => {
         const isNamingPremiumSelected = selectedServices['namingPremium'];
         const isLogoPremiumSelected = selectedServices['logoPremium'];
@@ -503,7 +503,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <div className="flex justify-center mb-12">
                         <CurrencyToggle currency={currency} onCurrencyChange={setCurrency} />
                     </div>
-                    
+
                     <div className="space-y-16">
                          {['tripwire', 'strategy'].map((groupKey) => {
                              const group = serviceGroups[groupKey as keyof typeof serviceGroups];
@@ -563,7 +563,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                  </React.Fragment>
                              );
                          })}
-                        
+
                          <Accordion type="single" collapsible className="w-full">
                            <AccordionItem value="item-1" className="border-none">
                                <AccordionTrigger className="text-xl font-bold text-dark-blue hover:no-underline justify-center gap-2">
@@ -597,12 +597,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </div>
                 </div>
             </section>
-        
+
             <section className="bg-secondary py-16">
                 <div className="container mx-auto px-4">
                     <Card id="your-package-card" className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                            
+
                             <div className="lg:col-span-2">
                                 <CardHeader className="p-0 text-left mb-6">
                                     <CardTitle className="text-2xl font-bold text-white">{translations.your_package}</CardTitle>
@@ -638,7 +638,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 {total.base > 0 && (
                                                     <div className="flex justify-between items-baseline text-sm">
                                                         <span className="text-blue-200">{translations.base_price}</span>
-                                                        <span className="font-mono line-through">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                        <span className="font-mono text-lg line-through">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                                     </div>
                                                 )}
                                                 {total.surcharges.map(s => (
@@ -653,10 +653,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                         <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                                     </div>
                                                 ))}
-                                                {total.savings > 0 && (
-                                                    <div className="flex justify-between items-baseline text-sm text-green-300 pt-2 border-t border-green-400/20">
-                                                        <span>{translations.total_savings}</span>
-                                                        <span className="font-mono">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                                 {total.savings > 0 && (
+                                                    <div className="mt-4 pt-4 border-t border-green-400/20 bg-green-500/10 p-3 rounded-lg text-center">
+                                                        <div className="text-sm font-semibold text-green-300">{translations.total_savings}</div>
+                                                        <div className="text-2xl font-bold text-white">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</div>
                                                     </div>
                                                 )}
                                             </div>
@@ -665,9 +665,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                        <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
                                            <div className="text-lg font-bold text-white mb-2">{translations.empty_package_title}</div>
                                            <p className="mb-4">{translations.empty_package_desc}</p>
-                                           <Button 
-                                               onClick={handlePopularPackageSelect} 
-                                               variant="secondary" 
+                                           <Button
+                                               onClick={handlePopularPackageSelect}
+                                               variant="secondary"
                                                className="bg-white/10 text-white hover:bg-white/20"
                                            >
                                                <Sparkles className="w-4 h-4 mr-2" />
@@ -701,12 +701,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         )}
                                     </p>
                                 </div>
-                                
+
                                <div className="mt-4 w-full max-w-xs space-y-2">
                                      <Label htmlFor="upfront-payment" className="flex flex-col text-left items-center">
                                         <span className="font-semibold text-white">{translations.upfront_discount_title}</span>
                                         <span className="text-xs text-blue-200 mb-2">{translations.upfront_discount_desc}</span>
-                                         <KnobToggle 
+                                         <KnobToggle
                                             isOn={wantsUpfrontPayment}
                                             onToggle={setWantsUpfrontPayment}
                                         />
@@ -739,7 +739,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
-
-
-
-
