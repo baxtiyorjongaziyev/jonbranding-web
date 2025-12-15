@@ -10,13 +10,12 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice, packageDiscountThreshold } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, FileText, ClipboardSignature, Megaphone, Shirt, PenTool, ClipboardList, Type, Palette, Layers, BookMarked, Box, PercentCircle, Check, Search, BrainCircuit, Paintbrush, Clock, Crown, ArrowRight, ChevronsRight, Loader2, ChevronsDown, HeartHandshake, ChevronDown } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, Clock, Crown, ArrowRight, PercentCircle, Check, ChevronsDown } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion, useMotionValue } from 'framer-motion';
 import PopularPackages from './popular-packages';
 import { event as gtagEvent } from '@/lib/gtag';
-
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -25,17 +24,30 @@ interface PackageBuilderProps {
 }
 
 const serviceIcons: { [key: string]: React.ElementType } = {
-    audit: Search, namingCheck: ClipboardSignature, consultation: Info,
-    strategy: BrainCircuit, commStrategy: Megaphone, smm: PenTool,
-    merch: Shirt, illustrations: Palette, urgency: Flame, nda: ShieldCheck,
-    packaging: Box,
+    audit: require('lucide-react').Search,
+    namingCheck: require('lucide-react').ClipboardSignature,
+    consultation: require('lucide-react').Info,
+    strategy: require('lucide-react').BrainCircuit,
+    commStrategy: require('lucide-react').Megaphone,
+    smm: require('lucide-react').PenTool,
+    merch: require('lucide-react').Shirt,
+    illustrations: require('lucide-react').Palette,
+    urgency: require('lucide-react').Flame,
+    nda: require('lucide-react').ShieldCheck,
+    packaging: require('lucide-react').Box,
+    namingStandard: require('lucide-react').Type,
+    namingPremium: require('lucide-react').Sparkles,
+    namingVIP: require('lucide-react').Crown,
+    logoStandard: require('lucide-react').Layers,
+    logoPremium: require('lucide-react').Palette,
+    logoVIP: require('lucide-react').BookMarked,
 };
 
 const introIcons: { [key: string]: React.ElementType } = {
-    research: Search,
-    strategy: BrainCircuit,
-    identity: Paintbrush,
-    communication: Megaphone
+    research: require('lucide-react').Search,
+    strategy: require('lucide-react').BrainCircuit,
+    identity: require('lucide-react').Paintbrush,
+    communication: require('lucide-react').Megaphone
 };
 
 const KnobToggle = ({ isOn, onToggle }: { isOn: boolean, onToggle: (value: boolean) => void }) => {
@@ -93,116 +105,29 @@ const CurrencyToggle = ({ currency, onCurrencyChange }: { currency: 'uzs' | 'usd
     </div>
 );
 
-const FeatureBenefitAccordion = ({ items, isVip, dictionary }: { items: { feature: string; benefit: string }[], isVip: boolean, dictionary: any }) => (
-    <Accordion type="single" collapsible className="w-full space-y-2">
-        {items.map((item, index) => (
-            <AccordionItem value={`item-${index}`} key={index} className={cn("border-b-0 rounded-lg", isVip ? "bg-white/5" : "bg-gray-50")}>
-                <AccordionTrigger
-                    onClick={(e) => e.stopPropagation()}
-                    className={cn("text-left text-sm font-medium hover:no-underline p-3", isVip ? "text-gray-200" : "text-gray-700")}>
-                    <div className="flex items-start gap-3">
-                         <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
-                         <span>{item.feature}</span>
-                    </div>
-                </AccordionTrigger>
-                <AccordionContent className="px-3 pb-3 text-sm">
-                   <div className={cn("border-l-2 ml-5 pl-4 py-2", isVip ? "border-amber-400/50 text-amber-200" : "border-primary/50 text-primary-dark")}>
-                     <span className="font-bold">{dictionary.benefit_prefix}</span> {item.benefit}
-                   </div>
-                </AccordionContent>
-            </AccordionItem>
-        ))}
-    </Accordion>
-);
-
-
-const TariffCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en' | 'zh', dictionary: any, currency: 'uzs' | 'usd' }) => {
-    const serviceDetails = getServiceDetails(lang);
-    const detail = serviceDetails[id];
-    if (!detail) return null;
-    const { label, description, price, features, timeline, benefits } = detail;
-
-    const isVip = id.toLowerCase().includes('vip');
-    const isPremium = id.toLowerCase().includes('premium') && !isVip;
-    
-    const allFeatures = [...(features || []), ...(benefits ? benefits.map(b => ({feature: b, benefit: dictionary.benefits_generic_text})) : [])];
-
+const FeatureBenefitAccordion = ({ items, isVip, dictionary }: { items: { feature: string; benefit: string }[], isVip: boolean, dictionary: any }) => {
+    if (!items || items.length === 0) return null;
 
     return (
-        <Card
-            onClick={onSelect}
-            className={cn(
-                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
-                selected
-                    ? (isVip ? 'border-amber-400 bg-gray-900 ring-4 ring-amber-400/30' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
-                    : (isVip ? 'bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 border-gray-700 hover:border-amber-400' : (isPremium ? 'bg-white border-primary/30 hover:border-primary' : 'bg-white border-gray-200 hover:border-gray-300')),
-                 isPremium && !isVip && "shadow-lg",
-                 isVip && "shadow-2xl"
-            )}
-        >
-             {isPremium && !selected && (
-                <div className="absolute -top-16 -right-16 w-48 h-48 bg-primary/20 rounded-full blur-3xl z-0" />
-             )}
-            <div className='relative p-6 flex flex-col h-full z-10'>
-                 <div className="text-center mb-4 -mt-2 min-h-[34px]">
-                    {(isPremium || isVip) && (
-                         <div className={cn(
-                             "inline-flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
-                             isVip ? "bg-amber-400 text-black" : "bg-primary text-primary-foreground"
-                        )}>
-                             {isVip ? <><Crown className="w-4 h-4" /> VIP</> : dictionary.recommended}
+        <Accordion type="single" collapsible className="w-full space-y-2">
+            {items.map((item, index) => (
+                <AccordionItem value={`item-${index}`} key={index} className={cn("border-b-0 rounded-lg", isVip ? "bg-white/5" : "bg-gray-50")}>
+                    <AccordionTrigger
+                        onClick={(e) => e.stopPropagation()}
+                        className={cn("text-left text-sm font-medium hover:no-underline p-3", isVip ? "text-gray-200" : "text-gray-700")}>
+                        <div className="flex items-start gap-3">
+                             <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
+                             <span>{item.feature}</span>
                         </div>
-                    )}
-                </div>
-                <div className="text-center">
-                    <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
-                    <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
-                    <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang, currency)}</p>
-                </div>
-
-                 <div className="my-6 space-y-6 flex-grow">
-                    {allFeatures && allFeatures.length > 0 && (
-                         <div>
-                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                             <FeatureBenefitAccordion items={allFeatures} isVip={isVip} dictionary={dictionary} />
-                         </div>
-                    )}
-                </div>
-                {timeline && (
-                    <div className={cn("text-center text-xs mb-4 flex items-center justify-center gap-2", isVip ? "text-gray-400" : "text-muted-foreground")}>
-                        <Clock className="w-4 h-4" />
-                        <span>{timeline}</span>
-                    </div>
-                )}
-
-                <div className="mt-auto">
-                     <Button
-                        className={cn(
-                            "w-full text-base py-3 h-auto transition-all duration-300",
-                            selected
-                                ? "shadow-lg"
-                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-                             isVip && !selected && "bg-white/10 hover:bg-white/20 text-white",
-                             isVip && selected && "bg-amber-400 hover:bg-amber-500 text-black"
-                        )}
-                        variant={selected ? (isVip ? 'default' : 'default') : 'secondary'}
-                        tabIndex={-1}
-                    >
-                         {selected ? (
-                            <>
-                                <CheckCircle className="h-5 w-5 mr-2" />
-                                {dictionary.selected}
-                            </>
-                        ) : (
-                            <>
-                                <ShoppingCart className="h-5 w-5 mr-2" />
-                                {dictionary.select}
-                            </>
-                        )}
-                    </Button>
-                </div>
-            </div>
-        </Card>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-3 pb-3 text-sm" onClick={(e) => e.stopPropagation()}>
+                       <div className={cn("border-l-2 ml-5 pl-4 py-2", isVip ? "border-amber-400/50 text-amber-200" : "border-primary/50 text-primary-dark")}>
+                         <span className="font-bold">{dictionary.benefit_prefix}</span> {item.benefit}
+                       </div>
+                    </AccordionContent>
+                </AccordionItem>
+            ))}
+        </Accordion>
     );
 };
 
@@ -211,19 +136,100 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
     if (!detail) return null;
-    const { label, description, price, note, features, oldPrice, discount, benefits } = detail;
+
+    const { label, description, price, features, timeline, benefits, note, oldPrice, discount, recommended } = detail;
     const Icon = serviceIcons[id] || Sparkles;
-    
+
+    const isTariff = ['naming', 'logo'].some(prefix => id.toLowerCase().startsWith(prefix));
+    const isVip = id.toLowerCase().includes('vip');
+    const isPremium = id.toLowerCase().includes('premium') && !isVip;
+
     const allFeatures = [...(features || []), ...(benefits ? benefits.map(b => ({feature: b, benefit: dictionary.benefits_generic_text})) : [])];
 
-    return (
-        <Card
-            onClick={onSelect}
+    const cardProps = {
+        onClick: onSelect,
+        className: cn(
+            "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
+            selected
+                ? (isVip ? 'border-amber-400 bg-gray-900 ring-4 ring-amber-400/30' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
+                : (isVip ? 'bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 border-gray-700 hover:border-amber-400' : (isPremium ? 'bg-white border-primary/30 hover:border-primary' : 'bg-white border-gray-200 hover:border-gray-300')),
+            (isPremium || recommended) && !isVip && "shadow-lg",
+            isVip && "shadow-2xl"
+        )
+    };
+
+    const selectButton = (
+        <Button
             className={cn(
-                "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
-                selected ? 'border-primary ring-4 ring-primary/20 bg-primary/5' : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
+                "w-full text-base py-3 h-auto transition-all duration-300",
+                selected
+                    ? "shadow-lg"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+                isVip && !selected && "bg-white/10 hover:bg-white/20 text-white",
+                isVip && selected && "bg-amber-400 hover:bg-amber-500 text-black"
             )}
+            variant={selected ? (isVip ? 'default' : 'default') : 'secondary'}
+            onClick={(e) => { e.stopPropagation(); onSelect(); }}
         >
+            {selected ? (
+                <>
+                    <CheckCircle className="h-5 w-5 mr-2" />
+                    {dictionary.selected}
+                </>
+            ) : (
+                <>
+                    <ShoppingCart className="h-5 w-5 mr-2" />
+                    {dictionary.select}
+                </>
+            )}
+        </Button>
+    );
+
+    if (isTariff) {
+        return (
+            <Card {...cardProps}>
+                {(isPremium || isVip) && !selected && (
+                    <div className="absolute -top-16 -right-16 w-48 h-48 bg-primary/20 rounded-full blur-3xl z-0" />
+                )}
+                <div className='relative p-6 flex flex-col h-full z-10'>
+                    <div className="text-center mb-4 -mt-2 min-h-[34px]">
+                        {(isPremium || isVip) && (
+                             <div className={cn(
+                                 "inline-flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
+                                 isVip ? "bg-amber-400 text-black" : "bg-primary text-primary-foreground"
+                            )}>
+                                 {isVip ? <><Crown className="w-4 h-4" /> VIP</> : dictionary.recommended}
+                            </div>
+                        )}
+                    </div>
+                    <div className="text-center">
+                        <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
+                        <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
+                        <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang, currency)}</p>
+                    </div>
+
+                    <div className="my-6 space-y-6 flex-grow">
+                        {allFeatures && allFeatures.length > 0 && (
+                             <div>
+                                <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
+                                 <FeatureBenefitAccordion items={allFeatures} isVip={!!isVip} dictionary={dictionary} />
+                             </div>
+                        )}
+                    </div>
+                    {timeline && (
+                        <div className={cn("text-center text-xs mb-4 flex items-center justify-center gap-2", isVip ? "text-gray-400" : "text-muted-foreground")}>
+                            <Clock className="w-4 h-4" />
+                            <span>{timeline}</span>
+                        </div>
+                    )}
+                    <div className="mt-auto">{selectButton}</div>
+                </div>
+            </Card>
+        );
+    }
+
+    return (
+        <Card {...cardProps}>
             <div className='p-6 flex flex-col h-full'>
                 <div className="flex items-start gap-4 mb-4">
                      <div className={cn("p-3 rounded-full flex-shrink-0", selected ? "bg-primary/10" : "bg-secondary")}>
@@ -235,7 +241,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     </div>
                 </div>
                 
-                 <div className="my-6 space-y-6 flex-grow">
+                <div className="my-6 space-y-6 flex-grow">
                     {allFeatures && allFeatures.length > 0 && (
                          <div>
                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
@@ -243,7 +249,6 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                          </div>
                     )}
                 </div>
-
 
                 <div className="mt-auto pt-4">
                      {discount && oldPrice && oldPrice > 0 ? (
@@ -263,34 +268,12 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                             )}
                         </div>
                     )}
-                     <Button
-                        className={cn(
-                            "w-full text-base py-3 h-auto transition-all duration-300",
-                            selected
-                                ? "shadow-lg"
-                                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                        )}
-                        variant={selected ? 'default' : 'secondary'}
-                        tabIndex={-1}
-                    >
-                        {selected ? (
-                            <>
-                                <CheckCircle className="h-5 w-5 mr-2" />
-                                {dictionary.selected}
-                            </>
-                        ) : (
-                            <>
-                                <ShoppingCart className="h-5 w-5 mr-2" />
-                                {dictionary.select}
-                            </>
-                        )}
-                    </Button>
+                    {selectButton}
                 </div>
             </div>
         </Card>
     );
 };
-
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
     <div className="space-y-6">
@@ -351,26 +334,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 }]
             });
             if (!isSelected) {
-                // Also fire the Google Ads conversion event
                 if (typeof window.gtag === 'function') {
                     window.gtag('event', 'conversion', {'send_to': 'AW-17674872079/Kcy8CN3cvbgbEI_KhOxB'});
                 }
             }
         }
-    };
-
-    const handleTariffSelect = (group: (keyof SelectedServices)[], serviceId: keyof SelectedServices) => {
-        const isCurrentlySelected = selectedServices[serviceId];
-        trackGtagEvent(serviceId, isCurrentlySelected);
-
-        setSelectedServices(prev => {
-            const newState = { ...prev };
-            group.forEach(id => {
-                if (id !== serviceId) newState[id] = false;
-            });
-            newState[serviceId] = !newState[serviceId];
-            return newState;
-        });
     };
 
     const handleServiceToggle = (serviceId: keyof SelectedServices) => {
@@ -380,13 +348,24 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         const namingGroup: (keyof SelectedServices)[] = ['namingStandard', 'namingPremium', 'namingVIP'];
         const logoGroup: (keyof SelectedServices)[] = ['logoStandard', 'logoPremium', 'logoVIP'];
 
-        if (namingGroup.includes(serviceId)) {
-            handleTariffSelect(namingGroup, serviceId);
-        } else if (logoGroup.includes(serviceId)) {
-            handleTariffSelect(logoGroup, serviceId);
-        } else {
-             setSelectedServices(prev => ({...prev, [serviceId]: !prev[serviceId]}));
-        }
+        const isNamingTariff = namingGroup.includes(serviceId);
+        const isLogoTariff = logoGroup.includes(serviceId);
+
+        setSelectedServices(prev => {
+            const newState = { ...prev };
+            if (isNamingTariff) {
+                namingGroup.forEach(id => {
+                    if (id !== serviceId) newState[id] = false;
+                });
+            }
+            if (isLogoTariff) {
+                logoGroup.forEach(id => {
+                    if (id !== serviceId) newState[id] = false;
+                });
+            }
+            newState[serviceId] = !isCurrentlySelected;
+            return newState;
+        });
     };
 
     if (!isClient || !translations) {
@@ -528,7 +507,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                      )}
                                      <ServiceGroup title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
                                          {group.services.map((serviceId) => (
-                                             <TariffCard
+                                             <ServiceCard
                                                  key={serviceId}
                                                  id={serviceId as keyof SelectedServices}
                                                  selected={selectedServices[serviceId as keyof SelectedServices] || false}
@@ -718,4 +697,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
-
