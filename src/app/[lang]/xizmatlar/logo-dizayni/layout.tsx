@@ -45,6 +45,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
         'uz': 'https://jonbranding.uz/xizmatlar/logo-dizayni',
         'ru': 'https://jonbranding.uz/ru/xizmatlar/logo-dizayni',
         'en': 'https://jonbranding.uz/en/xizmatlar/logo-dizayni',
+        'zh': 'https://jonbranding.uz/zh/xizmatlar/logo-dizayni',
       },
     },
   };

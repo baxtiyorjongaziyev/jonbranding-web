@@ -45,6 +45,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
         'uz': 'https://jonbranding.uz/xizmatlar/qadoq-dizayni',
         'ru': 'https://jonbranding.uz/ru/xizmatlar/qadoq-dizayni',
         'en': 'https://jonbranding.uz/en/xizmatlar/qadoq-dizayni',
+        'zh': 'https://jonbranding.uz/zh/xizmatlar/qadoq-dizayni',
       },
     },
   };

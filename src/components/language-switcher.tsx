@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -16,6 +17,7 @@ import type { Locale } from '@/lib/i18n/locale';
 import { UzFlagIcon } from './icons/uz-flag';
 import { RuFlagIcon } from './icons/ru-flag';
 import { GbFlagIcon } from './icons/gb-flag';
+import { CnFlagIcon } from './icons/cn-flag';
 import { ChevronsUpDown } from 'lucide-react';
 
 const useHover = () => {
@@ -51,6 +53,7 @@ const localeIcons: Record<Locale, React.FC<{ className?: string }>> = {
   uz: UzFlagIcon,
   ru: RuFlagIcon,
   en: GbFlagIcon,
+  zh: CnFlagIcon,
 };
 
 interface LanguageSwitcherProps {
