@@ -10,16 +10,17 @@ import { locales, defaultLocale } from '@/lib/i18n/locale';
 const poppins = Poppins({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
+  variable: '--font-poppins',
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 
 const APP_NAME_UZ = "Jon.Branding | Toshkentdagi brending agentligi: Brend strategiyasi, Naming, Logotip dizayn";
 const APP_DESCRIPTION_UZ = "Jon.Branding — O'zbekistondagi premium brending agentligi. Brend strategiyasi, neyming, logotip dizayn, firma uslubi, brandbook tayyorlash va biznes upakovka xizmatlari. Biznesingiz uchun natija keltiradigan brend yaratamiz.";
 const KEYWORDS_UZ = [
-    "branding agentligi toshkent", "brend strategiyasi", "naming xizmatlari", "logotip dizayn", 
-    "firma uslubi yaratish", "brandbook tayyorlash", "qadoqlash dizayni", "qadoq dizayn agentligi", 
-    "brend yaratish xizmati", "brend dizayn toshkent", "premium brending o‘zbekiston", 
-    "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
+    "branding agentligi toshkent", "brend strategiyasi", "naming xizmatlari", "logotip dizayn",
+    "firma uslubi yaratish", "brandbook tayyorlash", "qadoqlash dizayni", "qadoq dizayn agentligi",
+    "brend yaratish xizmati", "brend dizayn toshkent", "premium brending o‘zbekiston",
+    "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley",
     "jon branding agency", "biznes upakovka", "biznesni upakovka qilish",
     "Branding.uz", "Jamal Akbarov", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding",
     "Minim", "OQILA", "xspace.uz", "change.uz", "Golden Minds"
@@ -28,10 +29,10 @@ const KEYWORDS_UZ = [
 const APP_NAME_RU = "Jon.Branding | Брендинговое агентство в Ташкенте: Бренд-стратегия, Нейминг, Дизайн логотипа";
 const APP_DESCRIPTION_RU = "Jon.Branding — премиальное брендинговое агентство в Узбекистане. Услуги по разработке бренд-стратегии, неймингу, дизайну логотипа, фирменному стилю, созданию брендбука и упаковке бизнеса. Создаем бренды, приносящие результат вашему бизнесу.";
 const KEYWORDS_RU = [
-    "брендинговое агентство ташкент", "бренд стратегия", "услуги нейминга", "дизайн логотипа", 
-    "создание фирменного стиля", "разработка брендбука", "дизайн упаковки", "агентство по дизайну упаковки", 
-    "услуги по созданию бренда", "бренд дизайн ташкент", "премиум брендинг узбекистан", 
-    "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
+    "брендинговое агентство ташкент", "бренд стратегия", "услуги нейминга", "дизайн логотипа",
+    "создание фирменного стиля", "разработка брендбука", "дизайн упаковки", "агентство по дизайну упаковки",
+    "услуги по созданию бренда", "бренд дизайн ташкент", "премиум брендинг узбекистан",
+    "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley",
     "jon branding agency", "упаковка бизнеса",
     "Branding.uz", "Джамал Акбаров", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding",
     "Minim", "OQILA", "xspace.uz", "change.uz", "Golden Minds"
@@ -40,10 +41,10 @@ const KEYWORDS_RU = [
 const APP_NAME_EN = "Jon.Branding | Branding Agency in Tashkent: Brand Strategy, Naming, Logo Design";
 const APP_DESCRIPTION_EN = "Jon.Branding is a premium branding agency in Uzbekistan. We offer brand strategy, naming, logo design, corporate identity, brandbook creation, and business packaging services. We create brands that bring results to your business.";
 const KEYWORDS_EN = [
-    "branding agency tashkent", "brand strategy", "naming services", "logo design", 
-    "corporate identity creation", "brandbook development", "packaging design", "packaging design agency", 
-    "brand creation service", "brand design tashkent", "premium branding uzbekistan", 
-    "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley", 
+    "branding agency tashkent", "brand strategy", "naming services", "logo design",
+    "corporate identity creation", "brandbook development", "packaging design", "packaging design agency",
+    "brand creation service", "brand design tashkent", "premium branding uzbekistan",
+    "packaging design uzbekistan", "logo design agency uzbekistan", "creative agency fergana valley",
     "jon branding agency", "business packaging",
     "Branding.uz", "Jamal Akbarov", "MA'NO Branding", "Lokals", "Taboo Branding", "Mountain branding",
     "Minim", "OQILA", "xspace.uz", "change.uz", "Golden Minds"
@@ -53,13 +54,14 @@ const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-94
 const BASE_URL = 'https://jonbranding.uz';
 
 export function generateMetadata({ params: { lang } }: { params: { lang: Locale } }): Metadata {
+  const currentLang = locales.includes(lang) ? lang : defaultLocale;
   const alternates: { [key: string]: string } = {};
   locales.forEach(l => {
     alternates[l] = `${BASE_URL}/${l === defaultLocale ? '' : l}`;
   });
 
   let title, description, keywords;
-  switch (lang) {
+  switch (currentLang) {
       case 'ru':
           title = APP_NAME_RU;
           description = APP_DESCRIPTION_RU;
@@ -81,14 +83,15 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
     title,
     description,
     keywords,
+    metadataBase: new URL(BASE_URL),
     alternates: {
-      canonical: `${BASE_URL}/${lang === defaultLocale ? '' : lang}`,
+      canonical: `${BASE_URL}/${currentLang === defaultLocale ? '' : currentLang}`,
       languages: alternates,
     },
     openGraph: {
       title,
       description,
-      url: `${BASE_URL}/${lang}`,
+      url: `${BASE_URL}/${currentLang}`,
       siteName: 'Jon.Branding',
       images: [
         {
@@ -99,7 +102,7 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
         },
       ],
       type: 'website',
-      locale: lang,
+      locale: currentLang,
     },
     twitter: {
       card: 'summary_large_image',
@@ -131,10 +134,10 @@ const jsonLd = {
 
 
 const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>> = ({ children, params }) => {
-    const lang = params.lang || 'uz';
+    const lang = locales.includes(params.lang) ? params.lang : defaultLocale;
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning className={poppins.variable}>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <Script
@@ -143,7 +146,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Script id="amocrm-widget" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
-        
+
         {/* Google Analytics & Ads */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17674872079" strategy="afterInteractive"></Script>
         <Script
@@ -154,7 +157,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              
+
               gtag('consent', 'default', {
                 'analytics_storage': 'denied',
                 'ad_storage': 'denied',
@@ -188,7 +191,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           }}
       />
       </head>
-      <body className={`${poppins.className} font-body bg-white antialiased`}>
+      <body className={`font-body bg-white antialiased`}>
         <MainLayout>
           {children}
         </MainLayout>
