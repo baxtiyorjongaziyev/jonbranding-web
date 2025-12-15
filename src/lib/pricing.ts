@@ -183,7 +183,7 @@ const uzServiceDetails = {
         note: null,
         features: [
             { feature: "7+ ta premium logotip konsepsiyasi va shaxsiy art-direktor ishtiroki", benefit: "Eng yuqori darajadagi ijodkorlik va individual yondashuvga ega bo'lasiz." },
-            { feature: "To'liq firma uslubi (asosiy ranglar, shriftlar, qoidalar)", benefit: "Brendingiz barcha aloqa nuqtalarida yagona va professional ko'rinishga ega bo'ladi." },
+            { feature: "Firma uslubi (asosiy ranglar, shriftlar, qoidalar)", benefit: "Brendingiz barcha aloqa nuqtalarida yagona va professional ko'rinishga ega bo'ladi." },
             { feature: "To'liq Brendbuk (30-50 sahifa)", benefit: "Brendingizni boshqarish uchun barcha qoidalar va standartlar jamlangan 'konstitutsiya'ga ega bo'lasiz." },
             { feature: "Logotip vektor fayllari (AI, EPS, PNG, JPG, PDF)", benefit: "Logotipni har qanday o'lchamda va istalgan joyda sifatini yo'qotmasdan ishlata olasiz." },
             { feature: "100% Mamnuniyat Kafolati", benefit: "Sizga to'liq ma'qul keladigan logotip yaratmagunimizcha ishlaymiz." }
@@ -196,7 +196,12 @@ const uzServiceDetails = {
         description: "3 SKU uchun qadoq ishlab chiqish, chop etishga tayyorlash.",
         price: basePricesUSD.packaging,
         note: null,
-        features: [],
+        features: [
+             { feature: "Bozor va raqobatchilar tahlili", benefit: "Javonda mahsulotingizni ajralib turishini ta'minlaydigan yechim topasiz." },
+             { feature: "2 ta dizayn konsepsiyasi", benefit: "Brendingiz uchun eng mos uslubni tanlash imkoniga ega bo'lasiz." },
+             { feature: "3 tagacha SKU (mahsuot turi) uchun dizayn adaptatsiyasi", benefit: "Butun mahsulot liniyangiz uchun yagona va izchil dizayn tizimiga ega bo'lasiz." },
+             { feature: "Chop etishga tayyor fayllar", benefit: "Ishlab chiqarishda hech qanday muammosiz, sifatli natijaga erishasiz." }
+        ],
         benefits: ["Mahsulotingizni javonda ajralib turadigan qiling", "Xaridorlarda birinchi qarashdayoq ishonch uyg'oting"]
     },
     smm: {
@@ -204,7 +209,12 @@ const uzServiceDetails = {
         description: "Postlar va storislarni firma uslubida bezash.",
         price: basePricesUSD.smm,
         note: null,
-        features: [],
+        features: [
+            { feature: "6 ta post uchun shablon", benefit: "Turli xil kontent turlari (mahsulot, aksiya, foydali maslahat) uchun tayyor dizayn yechimlariga ega bo'lasiz." },
+            { feature: "6 ta stories uchun shablon", benefit: "Stories formatida ham brendingizning yagona uslubini saqlab qolasiz." },
+            { feature: "Profil uchun avatar va highlight cover'lar", benefit: "Profilingiz professional va jozibador ko'rinishga ega bo'ladi." },
+            { feature: "Instagram uchun qo'llanma", benefit: "Shablonlardan qanday samarali foydalanish haqida aniq ko'rsatmalarga ega bo'lasiz." }
+        ],
         benefits: ["Ijtimoiy tarmoqlarda professional va yagona obraz yarating", "Obunachilarning e'tiborini torting va saqlab qoling"]
     },
     merch: {
@@ -212,7 +222,11 @@ const uzServiceDetails = {
         description: "Kiyim, aksessuarlar, POSM materiallari dizayni.",
         price: 0,
         note: "Individual",
-        features: [],
+        features: [
+            { feature: "Xodimlar uchun futbolka, kepka, xudi dizayni", benefit: "Jamoangizda korporativ ruhni va brendga mansublik hissini kuchaytirasiz." },
+            { feature: "Mijozlar uchun sovg'alar (bloknot, ruchka, stakan)", benefit: "Brendingiz mijozlaringizning kundalik hayotiga kirib boradi va doimiy eslatma bo'lib turadi." },
+            { feature: "POSM materiallari (flayer, banner, stend)", benefit: "Sotuv nuqtalarida va tadbirlarda brendingizni samarali targ'ib qilasiz." }
+        ],
         benefits: ["Brendingizni oflayn hayotga olib chiqing", "Mijozlar va xodimlar uchun esda qolarli sovg'alar yarating"]
     },
     illustrations: {
@@ -220,7 +234,11 @@ const uzServiceDetails = {
         description: "Firma grafikasi, infografika va animatsiyalar yaratish.",
         price: 0,
         note: "Individual",
-        features: [],
+        features: [
+            { feature: "Brend uchun unikal illustratsiyalar to'plami", benefit: "Brendingizga o'ziga xos, raqobatchilarda yo'q vizual tilga ega bo'lasiz." },
+            { feature: "Infografika dizayni", benefit: "Murakkab ma'lumotlarni oson va qiziqarli tarzda auditoriyangizga yetkazasiz." },
+            { feature: "Logotip va elementlar animatsiyasi", benefit: "Raqamli platformalarda (sayt, ijtimoiy tarmoqlar) brendingizni yanada jonli va e'tiborni tortadigan qilasiz." }
+        ],
         benefits: ["Brendingizga o'ziga xos va jonli ko'rinish bering", "Murakkab ma'lumotlarni oson va qiziqarli tarzda yetkazing"]
     },
     urgency: {
@@ -228,7 +246,10 @@ const uzServiceDetails = {
         description: "Loyiha navbatsiz, qisqa muddatda (2-3 kun) tayyorlanadi.",
         price: 0,
         note: "+50%",
-        features: [],
+        features: [
+            { feature: "Navbatdan tashqari ish boshlash", benefit: "Loyiha birinchi prioritetga aylanadi." },
+            { feature: "Qisqartirilgan muddatlar", benefit: "Natijalarni standart muddatlardan ancha oldin olasiz." }
+        ],
         benefits: ["Loyiha natijalarini tezroq oling", "Bozorga tezda kirib borish imkoniyati"]
     },
     nda: {
@@ -236,7 +257,10 @@ const uzServiceDetails = {
         description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi.",
         price: 0,
         note: "+50%",
-        features: [],
+        features: [
+            { feature: "Yuridik kuchga ega hujjat imzolanishi", benefit: "Sizning loyihangiz ma'lumotlari uchinchi tomonga oshkor etilmasligiga qonuniy kafolat olasiz." },
+            { feature: "To'liq maxfiylik", benefit: "Bizning jamoamiz loyiha tafsilotlarini hech qayerda (portfolio, ijtimoiy tarmoqlar) e'lon qilmaydi." }
+        ],
         benefits: ["Loyiha g'oyalaringiz va ma'lumotlaringiz xavfsizligini ta'minlang", "Tijoriy sirlaringizni himoya qiling"]
     }
 };
