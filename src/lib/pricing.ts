@@ -101,7 +101,7 @@ const uzServiceDetails = {
         note: null,
         features: [
             { feature: "3 ta jarangli va esda qolarli nom", benefit: "Brendingiz uchun tez va sifatli start olasiz." },
-            { feature: "Eshitgan odam yoza oladigan va topa oladigan nomlar", benefit: "Mijozlar sizni qidirganda adashib qolishmaydi." },
+            { feature: "Oson eslab qolish va talaffuz qilish", benefit: "Mijozlar sizni qidirganda adashib qolishmaydi." },
             { feature: "Internetda sayt uchun .uz domen bo'shligi tekshiriladi", benefit: "Tanlagan nomingiz raqamli muhitda band bo'lmaydi." },
             { feature: "Ijtimoiy tarmoqlarda (Telegram, Instagram) bo'shligi tekshiriladi", benefit: "Brendingiz uchun muhim ijtimoiy tarmoq nomlarini oldindan band qilasiz." }
         ],
@@ -288,9 +288,9 @@ Object.assign(ruServiceDetails, {
         ] },
     namingStandard: { ...ruServiceDetails.namingStandard, label: "STANDARD", description: "Идеально для малого бизнеса и стартапов.", features: [
             { feature: "3 коротких, звучных и запоминающихся названия", benefit: "Вы получите быстрый и качественный старт для вашего бренда." },
-            { feature: "Имена, которые легко написать и найти на слух", benefit: "Клиенты не ошибутся при поиске вас." },
             { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
-            { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." }
+            { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
+            { feature: "Имена, которые легко написать и найти на слух", benefit: "Клиенты не ошибутся при поиске вас." }
         ] },
     namingPremium: { ...ruServiceDetails.namingPremium, label: "PREMIUM", description: "Для среднего и развивающегося бизнеса.", features: [
             { feature: "5 стратегических вариантов названий", benefit: "Названия будут не просто красивыми, а будут служить целям вашего бизнеса." },
@@ -400,9 +400,9 @@ Object.assign(enServiceDetails, {
         ] },
     namingStandard: { ...enServiceDetails.namingStandard, label: "STANDARD", description: "Ideal for small businesses and startups.", features: [
             { feature: "3 short, catchy and memorable names", benefit: "You will get a quick and quality start for your brand." },
-            { feature: "Names that are easy to write and find by ear", benefit: "Customers will not be mistaken when looking for you." },
             { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
-            { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." }
+            { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." },
+            { feature: "Names that are easy to write and find by ear", benefit: "Customers will not be mistaken when looking for you." }
         ] },
     namingPremium: { ...enServiceDetails.namingPremium, label: "PREMIUM", description: "A strategic approach for medium and growing businesses.", features: [
             { feature: "5 strategic name options", benefit: "The names will not just be beautiful, they will serve your business goals." },
@@ -512,9 +512,9 @@ Object.assign(zhServiceDetails, {
         ] },
     namingStandard: { ...zhServiceDetails.namingStandard, label: "STANDARD", description: "适合小型企业和初创公司。", features: [
             { feature: "3个简短、上口且易记的名称", benefit: "您将为您的品牌获得一个快速而优质的开端。" },
-            { feature: "听得懂、写得出、找得到的名称", benefit: "客户在寻找您时不会出错。" },
             { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
-            { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" }
+            { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" },
+            { feature: "听得懂、写得出、找得到的名称", benefit: "客户在寻找您时不会出错。" }
         ] },
     namingPremium: { ...zhServiceDetails.namingPremium, label: "PREMIUM", description: "适合中型和成长型企业的战略方法。", features: [
             { feature: "5个战略性名称选项", benefit: "这些名称不仅美观，还将服务于您的业务目标。" },
@@ -698,20 +698,22 @@ export const bonusThreshold = 4000;
 interface PackageSelections {
     selectedServices: SelectedServices;
     wantsUpfrontPayment: boolean;
+    isPackageDiscountEnabled: boolean;
 }
 
 export interface PriceDetails {
     base: number;
     final: number;
-    discountApplied: { name: string, value: number }[];
+    discountApplied: { name: string, value: number, isPackageDiscount?: boolean }[];
     savings: number;
     bonus: string | null;
     surcharges: { name: string, value: number }[];
+    canApplyPackageDiscount: boolean;
 }
 
 
 export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz'): PriceDetails => {
-    const { selectedServices, wantsUpfrontPayment } = selections;
+    const { selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled } = selections;
     const sd = getServiceDetails(lang);
 
     let nonVipBasePrice = 0;
@@ -738,7 +740,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
                 vipServicesPrice += servicePrice;
             } else if (!percentageServices.includes(key)) {
                 nonVipBasePrice += servicePrice;
-                if (premiumServices.includes(key)) {
+                if (premiumServices.includes(key) || standardServices.includes(key)) {
                     mainServicesCount++;
                 }
             }
@@ -770,47 +772,50 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         else discountName = 'NDA uchun ustama (+50%)';
         surcharges.push({ name: discountName, value: surchargeAmount });
     }
+    
+    let priceAfterDiscounts = vipServicesPrice > 0 ? vipServicesPrice + (priceAfterSurcharges - totalBasePrice) : priceAfterSurcharges;
 
-    let finalPrice = vipServicesPrice > 0 ? vipServicesPrice + (priceAfterSurcharges - totalBasePrice) : priceAfterSurcharges;
-
-    const discountsApplied: { name: string, value: number }[] = [];
-
-    // Apply package discount only on non-VIP services
+    const discountsApplied: { name: string, value: number, isPackageDiscount?: boolean }[] = [];
+    let canApplyPackageDiscount = false;
     let nonVipPriceAfterDiscount = nonVipBasePrice;
-
-    // Check for standard package discount
-    if (hasNamingStandard && hasLogoStandard) {
-        const standardPackagePrice = sd.namingStandard.price + sd.logoStandard.price;
-        const discountAmount = standardPackagePrice * packageDiscount;
-        nonVipPriceAfterDiscount -= discountAmount;
-        let discountName;
-        if (lang === 'ru') discountName = 'Пакетная скидка (Стандарт) (-20%)';
-        else if (lang === 'en') discountName = 'Package Discount (Standard) (-20%)';
-        else if (lang === 'zh') discountName = '套餐折扣 (标准) (-20%)';
-        else discountName = 'Paketli chegirma (Standard) (-20%)';
-        discountsApplied.push({ name: discountName, value: discountAmount });
-    }
-
-    if (mainServicesCount >= packageDiscountThreshold) {
-        const discountableAmount = nonVipBasePrice - (hasNamingStandard && hasLogoStandard ? (sd.namingStandard.price + sd.logoStandard.price) : 0);
-        const discountAmount = discountableAmount * packageDiscount;
-        if(discountAmount > 0) {
+    
+    const standardPackageSelected = hasNamingStandard && hasLogoStandard;
+    
+    if (isPackageDiscountEnabled) {
+        if (standardPackageSelected) {
+            const standardPackagePrice = sd.namingStandard.price + sd.logoStandard.price;
+            const discountAmount = standardPackagePrice * packageDiscount;
             nonVipPriceAfterDiscount -= discountAmount;
             let discountName;
-            if (lang === 'ru') discountName = 'Пакетная скидка (-20%)';
-            else if (lang === 'en') discountName = 'Package Discount (-20%)';
-            else if (lang === 'zh') discountName = '套餐折扣 (-20%)';
-            else discountName = 'Paketli chegirma (-20%)';
-            discountsApplied.push({ name: discountName, value: discountAmount });
+            if (lang === 'ru') discountName = 'Пакетная скидка (Стандарт) (-20%)';
+            else if (lang === 'en') discountName = 'Package Discount (Standard) (-20%)';
+            else if (lang === 'zh') discountName = '套餐折扣 (标准) (-20%)';
+            else discountName = 'Paketli chegirma (Standard) (-20%)';
+            discountsApplied.push({ name: discountName, value: discountAmount, isPackageDiscount: true });
+        }
+    
+        if (mainServicesCount >= packageDiscountThreshold) {
+            const discountableAmount = nonVipBasePrice - (standardPackageSelected ? (sd.namingStandard.price + sd.logoStandard.price) : 0);
+            const discountAmount = discountableAmount * packageDiscount;
+            if(discountAmount > 0) {
+                nonVipPriceAfterDiscount -= discountAmount;
+                let discountName;
+                if (lang === 'ru') discountName = 'Пакетная скидка (-20%)';
+                else if (lang === 'en') discountName = 'Package Discount (-20%)';
+                else if (lang === 'zh') discountName = '套餐折扣 (-20%)';
+                else discountName = 'Paketli chegirma (-20%)';
+                discountsApplied.push({ name: discountName, value: discountAmount, isPackageDiscount: true });
+            }
         }
     }
+    
+    canApplyPackageDiscount = standardPackageSelected || mainServicesCount >= packageDiscountThreshold;
 
-    // Apply upfront discount on the sum of discounted non-VIP and all VIP services
     let priceBeforeUpfrontDiscount = nonVipPriceAfterDiscount + vipServicesPrice + (priceAfterSurcharges - totalBasePrice);
 
     if (wantsUpfrontPayment) {
         const discountAmount = priceBeforeUpfrontDiscount * upfrontDiscount;
-        finalPrice = priceBeforeUpfrontDiscount - discountAmount;
+        priceAfterDiscounts = priceBeforeUpfrontDiscount - discountAmount;
         let discountName;
         if (lang === 'ru') discountName = 'За предоплату (-10%)';
         else if (lang === 'en') discountName = 'For upfront payment (-10%)';
@@ -818,31 +823,32 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         else discountName = 'Oldindan to\'lov uchun (-10%)';
         discountsApplied.push({ name: discountName, value: discountAmount });
     } else {
-        finalPrice = priceBeforeUpfrontDiscount;
+        priceAfterDiscounts = priceBeforeUpfrontDiscount;
     }
 
-    const savings = priceAfterSurcharges - finalPrice;
+    const savings = priceAfterSurcharges - priceAfterDiscounts;
 
     let bonusDescription;
     if (lang === 'ru') bonusDescription = "Аудит логотипа и 30-минутная консультация в подарок";
     else if (lang === 'en') bonusDescription = "Logo audit and 30-minute consultation as a gift";
     else if (lang === 'zh') bonusDescription = "免费赠送标志审核和30分钟咨询";
     else bonusDescription = "Logotip auditi va 30 daqiqalik konsultatsiya sovg'a tariqasida";
-    const bonus = finalPrice > bonusThreshold ? bonusDescription : null;
+    const bonus = priceAfterDiscounts > bonusThreshold ? bonusDescription : null;
 
     return {
         base: totalBasePrice,
-        final: finalPrice,
+        final: priceAfterDiscounts,
         discountApplied: discountsApplied,
         savings,
         bonus,
         surcharges,
+        canApplyPackageDiscount
     };
 }
 
 
 export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
-    const { selectedServices, wantsUpfrontPayment } = selections;
+    const { selectedServices } = selections;
     const sd = getServiceDetails(lang);
 
     const services = [];
@@ -867,7 +873,7 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
      if (surcharges.some(s => s.name.includes('NDA'))) {
         conditions.push("NDA");
     }
-    if (wantsUpfrontPayment) {
+    if (selections.wantsUpfrontPayment) {
         conditions.push(lang === 'ru' ? "100% предоплата" : lang === 'en' ? '100% upfront payment' : lang === 'zh' ? '100% 预付款' : "100% oldindan to'lov");
     }
 

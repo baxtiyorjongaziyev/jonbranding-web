@@ -312,28 +312,32 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
     const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
+    const [isPackageDiscountEnabled, setIsPackageDiscountEnabled] = useLocalStorage('isPackageDiscountEnabled', true);
     const [currency, setCurrency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
 
-    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: [], savings: 0, bonus: null, surcharges: [] });
+    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: [], savings: 0, bonus: null, surcharges: [], canApplyPackageDiscount: false });
     const [hasDiscountBeenApplied, setHasDiscountBeenApplied] = useState(false);
 
     useEffect(() => {
         if (isClient) {
-            const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment }, lang as 'uz' | 'ru' | 'en' | 'zh');
+            const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled }, lang as 'uz' | 'ru' | 'en' | 'zh');
             setTotal(result);
-            const justAppliedDiscount = result.discountApplied.length > 0 && !hasDiscountBeenApplied;
+            if (!result.canApplyPackageDiscount) {
+                setIsPackageDiscountEnabled(true);
+            }
+            const justAppliedDiscount = result.discountApplied.some(d => d.isPackageDiscount) && !hasDiscountBeenApplied;
             if (justAppliedDiscount) {
                  confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: ['#00C9FD', '#ADFFFE', '#FFFFFF', '#050583'] });
                 setHasDiscountBeenApplied(true);
             }
-            if(result.discountApplied.length === 0 && hasDiscountBeenApplied) {
+            if(!result.discountApplied.some(d => d.isPackageDiscount) && hasDiscountBeenApplied) {
                 setHasDiscountBeenApplied(false);
             }
         }
-    }, [selectedServices, wantsUpfrontPayment, isClient, hasDiscountBeenApplied, lang]);
+    }, [selectedServices, wantsUpfrontPayment, isClient, hasDiscountBeenApplied, lang, isPackageDiscountEnabled, setIsPackageDiscountEnabled]);
 
     const trackGtagEvent = (serviceId: keyof SelectedServices, isSelected: boolean) => {
         const service = serviceDetails[serviceId];
@@ -578,66 +582,33 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             <section className="bg-secondary py-16">
                 <div className="container mx-auto px-4">
                     <Card id="your-package-card" className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-
-                            <div className="lg:col-span-2">
+                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                            {/* Left Column: Selected Services & Discounts */}
+                            <div>
                                 <CardHeader className="p-0 text-left mb-6">
                                     <CardTitle className="text-2xl font-bold text-white">{translations.your_package}</CardTitle>
                                     <p className="text-blue-200 text-sm mt-1">{translations.your_package_desc}</p>
                                 </CardHeader>
                                 <CardContent className="p-0">
                                    {selectedServiceKeys.length > 0 ? (
-                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-                                          <div className="space-y-3 border-b sm:border-b-0 sm:border-r border-white/10 pb-4 sm:pb-0 sm:pr-8">
-                                              <h4 className="font-semibold text-white">{translations.selected_services_title}</h4>
-                                                  {selectedServiceKeys
-                                                      .filter(key => {
-                                                          const service = serviceDetails[key];
-                                                          return service && (service.price > 0 || service.note?.includes('%'));
-                                                      })
-                                                      .map((key) => {
-                                                          const service = serviceDetails[key];
-                                                          return (
-                                                              <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
-                                                                  <span className="text-white flex-1 pr-2">{service.label}</span>
-                                                                  <div className="flex items-center gap-2">
-                                                                      <span className="font-mono text-gray-300">
-                                                                          {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}` : service.note}
-                                                                      </span>
-                                                                  </div>
-                                                              </div>
-                                                          );
-                                                      })}
-                                          </div>
-
-                                          <div className="space-y-3">
-                                                <h4 className="font-semibold text-white">{translations.cost_calculation_title}</h4>
-                                                {total.base > 0 && (
-                                                    <div className="flex justify-between items-baseline text-sm">
-                                                        <span className="text-blue-200">{translations.base_price}</span>
-                                                        <div className="text-lg line-through text-gray-400 font-mono">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</div>
-                                                    </div>
-                                                )}
-                                                {total.surcharges.map(s => (
-                                                    <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
-                                                        <span>{s.name}</span>
-                                                        <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                    </div>
-                                                ))}
-                                                {total.discountApplied.map(d => (
-                                                    <div key={d.name} className="flex justify-between items-center text-sm text-green-300">
-                                                        <span>{d.name}</span>
-                                                        <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                                    </div>
-                                                ))}
-                                                 {total.savings > 0 && (
-                                                    <div className="mt-4 pt-4 border-t border-green-400/20 bg-green-500/10 p-3 rounded-lg text-center">
-                                                        <div className="text-sm font-semibold text-green-300">{translations.total_savings}</div>
-                                                        <div className="text-2xl font-bold text-white">{formatPrice(total.savings, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</div>
-                                                    </div>
-                                                )}
+                                        <div className="space-y-4">
+                                            <h4 className="font-semibold text-white">{translations.selected_services_title}</h4>
+                                            <div className="space-y-2">
+                                                {selectedServiceKeys.map((key) => {
+                                                    const service = serviceDetails[key];
+                                                    return (
+                                                        <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
+                                                            <span className="text-white flex-1 pr-2">{service.label}</span>
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="font-mono text-gray-300">
+                                                                    {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}` : service.note}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
                                             </div>
-                                      </div>
+                                        </div>
                                    ) : (
                                        <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
                                            <div className="text-lg font-bold text-white mb-2">{translations.empty_package_title}</div>
@@ -652,48 +623,66 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                            </Button>
                                        </div>
                                    )}
-
-                                    {total.bonus && (
-                                        <InfoCard
-                                            icon={Gift}
-                                            title={translations.gift_title}
-                                            description={total.bonus}
-                                            className="mt-6 bg-accent/10 border-accent/20 text-accent-light"
-                                        />
-                                    )}
-
                                 </CardContent>
                             </div>
 
-                            <div className="flex flex-col justify-center items-center text-center bg-white/5 rounded-xl p-6 border border-white/10">
-                                <div className='text-center'>
-                                        <p className="text-sm text-blue-200">{translations.final_price}</p>
-                                        <p className="text-4xl sm:text-5xl font-bold text-white tracking-normal">
-                                        {total.final > 0 ? (
-                                            <>
-                                                {formatPrice(total.final, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}
-                                            </>
-                                        ) : (
-                                            translations.agreed_price
-                                        )}
-                                    </p>
+                             {/* Right Column: Cost Calculation & CTA */}
+                             <div className="bg-black/20 p-6 rounded-2xl border border-white/10 space-y-4">
+                                <h4 className="font-semibold text-white text-lg">{translations.cost_calculation_title}</h4>
+                                
+                                {total.base > 0 && (
+                                    <div className="flex justify-between items-baseline text-sm">
+                                        <span className="text-blue-200">{translations.base_price}</span>
+                                        <div className="text-lg font-mono">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</div>
+                                    </div>
+                                )}
+                                {total.surcharges.map(s => (
+                                    <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
+                                        <span>{s.name}</span>
+                                        <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                    </div>
+                                ))}
+                                {total.discountApplied.map((d, i) => (
+                                    <div key={i} className="flex justify-between items-center text-sm text-green-300">
+                                        <span>{d.name}</span>
+                                        <div className="flex items-center gap-2">
+                                            {d.isPackageDiscount && total.canApplyPackageDiscount && (
+                                                <KnobToggle isOn={isPackageDiscountEnabled} onToggle={setIsPackageDiscountEnabled} />
+                                            )}
+                                            <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                        </div>
+                                    </div>
+                                ))}
+
+                                <div className="pt-4 border-t border-white/10">
+                                     <div className="flex justify-between items-baseline text-white">
+                                        <span className="text-sm font-semibold">{translations.final_price}</span>
+                                        <p className="text-3xl sm:text-4xl font-bold tracking-tight">
+                                            {total.final > 0 ? formatPrice(total.final, lang as 'uz' | 'ru' | 'en' | 'zh', currency) : translations.agreed_price}
+                                        </p>
+                                    </div>
                                 </div>
-
-                               <div className="mt-4 w-full max-w-xs space-y-2">
-                                     <Label htmlFor="upfront-payment" className="flex flex-col text-left items-center">
-                                        <span className="font-semibold text-white">{translations.upfront_discount_title}</span>
-                                        <span className="text-xs text-blue-200 mb-2">{translations.upfront_discount_desc}</span>
-                                         <KnobToggle
-                                            isOn={wantsUpfrontPayment}
-                                            onToggle={setWantsUpfrontPayment}
-                                        />
+                                
+                                {total.savings > 0 && (
+                                    <div className="bg-green-500/10 p-2 rounded-lg text-center text-xs font-semibold text-green-300">
+                                        {translations.total_savings}: {formatPrice(total.savings, lang, currency)}
+                                    </div>
+                                )}
+                                
+                                <div className="pt-4 border-t border-white/10">
+                                     <Label htmlFor="upfront-payment" className="flex items-center justify-between text-left">
+                                        <div className="flex-1">
+                                            <span className="font-semibold text-white">{translations.upfront_discount_title}</span>
+                                            <span className="block text-xs text-blue-200 mt-1">{translations.upfront_discount_desc}</span>
+                                        </div>
+                                        <KnobToggle isOn={wantsUpfrontPayment} onToggle={setWantsUpfrontPayment} />
                                    </Label>
-                               </div>
-
-                                <Button id="package-builder-cta" onClick={onOrderNow} variant="default" size="lg" className="w-full mt-6 text-lg py-3" disabled={total.base === 0}>
-                                    {total.discountApplied.length > 0 ? translations.order_with_discount : translations.get_free_consultation}
+                                </div>
+                                
+                                <Button id="package-builder-cta" onClick={onOrderNow} variant="default" size="lg" className="w-full text-lg py-3 mt-4" disabled={total.base === 0}>
+                                    {translations.get_free_consultation}
                                 </Button>
-                            </div>
+                             </div>
                         </div>
                     </Card>
                 </div>
