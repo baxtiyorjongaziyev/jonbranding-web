@@ -794,7 +794,17 @@
             "gift_title": "Sovg'a!",
             "agreed_price": "Kelishiladi",
             "currency": "so'm",
-            "recommended": "Tavsiya etiladi"
+            "recommended": "Tavsiya etiladi",
+            "benefit_prefix": "Foydasi:",
+            "features": "Nimalar kiradi",
+            "namingGuarantee": {
+                "title": "Sizga yoqadigan Neyming yoki pulingizni 100% qaytarib beramiz",
+                "description": "Biz ishimizning sifatiga shunchalik ishonamizki, agar sizga taqdim etilgan dastlabki nom variantlari yoqmasa, biz to'lovni to'liq, hech qanday savollarsiz qaytarib beramiz."
+            },
+            "designGuarantee": {
+                "title": "Sizga yoqadigan Dizayn yoki pulingizni 100% qaytarib beramiz",
+                "description": "Agar siz dastlabki logotip va firma uslubi konsepsiyalaridan mamnun bo'lmasangiz, biz to'lovingizni to'liq qaytarib beramiz. Sizning mamnunligingiz biz uchun eng muhimi."
+            }
         },
         "comparison": {
             "title": "Biz va Raqobatchilar",
