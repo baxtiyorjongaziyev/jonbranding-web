@@ -13,7 +13,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, Clock, Crown, ArrowRight, PercentCircle, Check, ChevronsDown } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { motion, useMotionValue } from 'framer-motion';
+import { motion, useMotionValue, useMotionTemplate } from 'framer-motion';
 import PopularPackages from './popular-packages';
 import { event as gtagEvent } from '@/lib/gtag';
 import KnobToggle from '@/components/ui/KnobToggle';
@@ -116,18 +116,77 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium') && !isVip;
 
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+        const { left, top } = currentTarget.getBoundingClientRect();
+        mouseX.set(clientX - left);
+        mouseY.set(clientY - top);
+    }
+    
+    const cardContent = (
+        <>
+            {(isPremium || isVip) && !selected && (
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-primary/20 rounded-full blur-3xl z-0" />
+            )}
+            <div className='relative p-6 flex flex-col h-full z-10'>
+                <div className="text-center mb-4 -mt-2 min-h-[34px]">
+                    {(isPremium || isVip) && (
+                         <div className={cn(
+                             "inline-flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
+                             isVip ? "bg-amber-400 text-black" : "bg-primary text-primary-foreground"
+                        )}>
+                             {isVip ? <><Crown className="w-4 h-4" /> VIP</> : dictionary.recommended}
+                        </div>
+                    )}
+                </div>
+                <div className="text-center">
+                    <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
+                    <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
+                    <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang, currency)}</p>
+                </div>
+
+                <div className="my-6 space-y-6 flex-grow">
+                    {features && features.length > 0 && (
+                         <div>
+                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
+                             <FeatureBenefitAccordion items={features} isVip={!!isVip} dictionary={dictionary} />
+                         </div>
+                    )}
+                </div>
+                {timeline && (
+                    <div className={cn("text-center text-xs mb-4 flex items-center justify-center gap-2", isVip ? "text-gray-400" : "text-muted-foreground")}>
+                        <Clock className="w-4 h-4" />
+                        <span>{timeline}</span>
+                    </div>
+                )}
+                <div className="mt-auto">{selectButton}</div>
+            </div>
+        </>
+    );
+
     const cardProps = {
         onClick: onSelect,
+        onMouseMove: handleMouseMove,
         className: cn(
-            "relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
+            "group relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
             selected
-                ? (isVip ? 'border-amber-400 bg-gray-900 ring-4 ring-amber-400/30' : 'border-primary ring-4 ring-primary/20 bg-primary/5')
+                ? (isVip ? 'border-amber-400 bg-gray-900' : 'border-primary bg-primary/5')
                 : (isVip ? 'bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 border-gray-700 hover:border-amber-400' : (isPremium ? 'bg-white border-primary/30 hover:border-primary' : 'bg-white border-gray-200 hover:border-gray-300')),
             (isPremium || recommended) && !isVip && "shadow-lg",
             isVip && "shadow-2xl"
         )
     };
-
+    
+    const glowStyle = useMotionTemplate`
+        radial-gradient(
+            350px circle at ${mouseX}px ${mouseY}px,
+            ${isVip ? 'rgba(252, 211, 77, 0.15)' : 'rgba(0, 201, 253, 0.15)'},
+            transparent 80%
+        )
+    `;
+    
     const selectButton = (
         <Button
             className={cn(
@@ -157,49 +216,22 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
 
     if (isTariff) {
         return (
-            <Card {...cardProps}>
-                {(isPremium || isVip) && !selected && (
-                    <div className="absolute -top-16 -right-16 w-48 h-48 bg-primary/20 rounded-full blur-3xl z-0" />
-                )}
-                <div className='relative p-6 flex flex-col h-full z-10'>
-                    <div className="text-center mb-4 -mt-2 min-h-[34px]">
-                        {(isPremium || isVip) && (
-                             <div className={cn(
-                                 "inline-flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
-                                 isVip ? "bg-amber-400 text-black" : "bg-primary text-primary-foreground"
-                            )}>
-                                 {isVip ? <><Crown className="w-4 h-4" /> VIP</> : dictionary.recommended}
-                            </div>
-                        )}
-                    </div>
-                    <div className="text-center">
-                        <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
-                        <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
-                        <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang, currency)}</p>
-                    </div>
-
-                    <div className="my-6 space-y-6 flex-grow">
-                        {features && features.length > 0 && (
-                             <div>
-                                <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                                 <FeatureBenefitAccordion items={features} isVip={!!isVip} dictionary={dictionary} />
-                             </div>
-                        )}
-                    </div>
-                    {timeline && (
-                        <div className={cn("text-center text-xs mb-4 flex items-center justify-center gap-2", isVip ? "text-gray-400" : "text-muted-foreground")}>
-                            <Clock className="w-4 h-4" />
-                            <span>{timeline}</span>
-                        </div>
-                    )}
-                    <div className="mt-auto">{selectButton}</div>
-                </div>
-            </Card>
+            <div {...cardProps}>
+                <motion.div
+                    className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{ background: glowStyle }}
+                />
+                 {cardContent}
+            </div>
         );
     }
-
+    
     return (
-        <Card {...cardProps}>
+        <div {...cardProps}>
+            <motion.div
+                className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={{ background: glowStyle }}
+            />
             <div className='p-6 flex flex-col h-full'>
                 <div className="flex items-start gap-4 mb-4">
                      <div className={cn("p-3 rounded-full flex-shrink-0", selected ? "bg-primary/10" : "bg-secondary")}>
@@ -241,7 +273,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     {selectButton}
                 </div>
             </div>
-        </Card>
+        </div>
     );
 };
 
@@ -677,3 +709,5 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
+    
