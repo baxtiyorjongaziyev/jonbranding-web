@@ -106,7 +106,8 @@ const uzServiceDetails = {
         note: null,
         features: [
             { feature: "3 ta qisqa, jarangli va esda qolarli nom", benefit: "Brendingiz uchun tez va sifatli start olasiz." },
-            { feature: "Domen va ijtimoiy tarmoqlarda bo'shligini tekshirish", benefit: "Tanlagan nomingiz raqamli muhitda band bo'lmaydi." },
+            { feature: "Internetda sayt uchun .uz domen bo'shligi tekshiriladi", benefit: "Tanlagan nomingiz raqamli muhitda band bo'lmaydi." },
+            { feature: "Ijtimoiy tarmoqlarda (Telegram, Instagram) bo'shligi tekshiriladi", benefit: "Brendingiz uchun muhim ijtimoiy tarmoq nomlarini oldindan band qilasiz." },
             { feature: "Eshitgan odam yoza oladigan va topa oladigan nomlar", benefit: "Mijozlar sizni qidirganda adashib qolishmaydi." },
             { feature: "100% Mamnuniyat Kafolati", benefit: "Sizga to'liq ma'qul keladigan nom topmagunimizcha ishlaymiz." }
         ],
@@ -120,9 +121,11 @@ const uzServiceDetails = {
         note: null,
         features: [
             { feature: "5 ta strategik nom variantlari", benefit: "Nomlar shunchaki chiroyli emas, biznes maqsadingizga xizmat qiladi." },
-            { feature: "Domen, ijtimoiy tarmoqlar va 2 ta klass bo'yicha patentga yaroqlilik tekshiruvi", benefit: "Nomning huquqiy va raqamli jihatdan tozaligiga ishonch hosil qilasiz." },
+            { feature: "Internetda sayt uchun .uz domen bo'shligi tekshiriladi", benefit: "Tanlagan nomingiz raqamli muhitda band bo'lmaydi." },
+            { feature: "Ijtimoiy tarmoqlarda (Telegram, Instagram) bo'shligi tekshiriladi", benefit: "Brendingiz uchun muhim ijtimoiy tarmoq nomlarini oldindan band qilasiz." },
+            { feature: "2 ta klass bo'yicha patentga yaroqlilik tekshiruvi", benefit: "Nomning huquqiy jihatdan tozaligiga ishonch hosil qilasiz." },
             { feature: "Bir nechta tilda fonetik va semantik tahlil", benefit: "Xalqaro bozorga chiqsangiz, nomingiz boshqa tillarda salbiy ma'no anglatmasligiga ishonch hosil qilasiz." },
-            { feature: "5 yilga bepul domen (.uz/.com)", benefit: "Eng muhim raqamli aktivingizni qo'lga kiritasiz, qo'shimcha xarajatsiz." },
+            { feature: "5 yilga bepul .uz domen", benefit: "Eng muhim raqamli aktivingizni qo'lga kiritasiz, qo'shimcha xarajatsiz." },
             { feature: "Eshitgan odam yoza oladigan va topa oladigan nomlar", benefit: "Mijozlar sizni qidirganda adashib qolishmaydi." },
             { feature: "100% Mamnuniyat Kafolati", benefit: "Sizga to'liq ma'qul keladigan nom topmagunimizcha ishlaymiz." }
         ],
@@ -138,8 +141,10 @@ const uzServiceDetails = {
         features: [
             { feature: "10+ ta eksklyuziv nom variantlari va shaxsiy art-direktor nazorati", benefit: "Eng yuqori darajadagi ijodiy yondashuv va tajribaga ega bo'lasiz." },
             { feature: "Brendingiz uchun hikoya (storytelling) bilan taqdimot", benefit: "Nom shunchaki so'z emas, balki mijozlarni o'ziga tortadigan hikoyaga aylanadi." },
-            { feature: "Domen, ijtimoiy tarmoqlar va 5 tagacha klass bo'yicha chuqur patent tekshiruvi", benefit: "Maksimal darajada huquqiy himoya va xotirjamlikka erishasiz." },
-            { feature: "10 yilga bepul domen (.uz va .com)", benefit: "Uzoq muddatli raqamli kelajagingizni ta'minlaysiz." },
+            { feature: "Internetda sayt uchun .uz domen bo'shligi tekshiriladi", benefit: "Tanlagan nomingiz raqamli muhitda band bo'lmaydi." },
+            { feature: "Ijtimoiy tarmoqlarda (Telegram, Instagram) bo'shligi tekshiriladi", benefit: "Brendingiz uchun muhim ijtimoiy tarmoq nomlarini oldindan band qilasiz." },
+            { feature: "5 tagacha klass bo'yicha chuqur patent tekshiruvi", benefit: "Maksimal darajada huquqiy himoya va xotirjamlikka erishasiz." },
+            { feature: "10 yilga bepul .uz domen", benefit: "Uzoq muddatli raqamli kelajagingizni ta'minlaysiz." },
             { feature: "Patentga topshirishda yordam (davlat boji alohida)", benefit: "Biz siz uchun barcha murakkab yuridik jarayonlarni osonlashtiramiz." },
             { feature: "Eshitgan odam yoza oladigan va topa oladigan nomlar", benefit: "Mijozlar sizni qidirganda adashib qolishmaydi." },
             { feature: "100% Mamnuniyat Kafolati", benefit: "Sizga to'liq ma'qul keladigan nom topmagunimizcha ishlaymiz." }
@@ -302,23 +307,28 @@ Object.assign(ruServiceDetails, {
         ], benefits: [] },
     namingStandard: { ...ruServiceDetails.namingStandard, label: "Нейминг Standard", description: "Идеально для малого бизнеса и стартапов.", features: [
             { feature: "3 коротких, звучных и запоминающихся названия", benefit: "Вы получите быстрый и качественный старт для вашего бренда." },
-            { feature: "Проверка доступности в доменах и социальных сетях", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
+            { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
+            { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
             { feature: "Имена, которые легко написать и найти на слух", benefit: "Клиенты не ошибутся при поиске вас." },
             { feature: "100% Гарантия Удовлетворенности", benefit: "Мы будем работать, пока не найдем имя, которое вам полностью понравится." }
         ], benefits: [] },
     namingPremium: { ...ruServiceDetails.namingPremium, label: "Нейминг Premium", description: "Для среднего и развивающегося бизнеса.", features: [
             { feature: "5 стратегических вариантов названий", benefit: "Названия будут не просто красивыми, а будут служить целям вашего бизнеса." },
-            { feature: "Проверка пригодности к патентованию по доменам, социальным сетям и 2 классам", benefit: "Вы будете уверены в юридической и цифровой чистоте имени." },
+            { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
+            { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
+            { feature: "Проверка пригодности к патентованию по 2 классам", benefit: "Вы будете уверены в юридической чистоте имени." },
             { feature: "Фонетический и семантический анализ на нескольких языках", benefit: "Вы будете уверены, что ваше имя не будет иметь негативного значения на других языках при выходе на международный рынок." },
-            { feature: "Бесплатный домен на 5 лет (.uz/.com)", benefit: "Вы получите свой самый важный цифровой актив без дополнительных затрат." },
+            { feature: "Бесплатный домен .uz на 5 лет", benefit: "Вы получите свой самый важный цифровой актив без дополнительных затрат." },
             { feature: "Имена, которые легко написать и найти на слух", benefit: "Клиенты не ошибутся при поиске вас." },
             { feature: "100% Гарантия Удовлетворенности", benefit: "Мы будем работать, пока не найдем имя, которое вам полностью понравится." }
         ], benefits: [] },
     namingVIP: { ...ruServiceDetails.namingVIP, label: "Нейминг VIP", description: "Для крупных и международных проектов.", features: [
             { feature: "10+ эксклюзивных вариантов названий и личный контроль арт-директора", benefit: "Вы получите высочайший уровень творческого подхода и опыта." },
             { feature: "Презентация с историей (storytelling) для вашего бренда", benefit: "Имя станет не просто словом, а историей, привлекающей клиентов." },
-            { feature: "Глубокая проверка патентоспособности по доменам, социальным сетям и до 5 классов", benefit: "Вы достигнете максимальной юридической защиты и спокойствия." },
-            { feature: "Бесплатный домен на 10 лет (.uz и .com)", benefit: "Вы обеспечите свое долгосрочное цифровое будущее." },
+            { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
+            { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
+            { feature: "Глубокая проверка патентоспособности до 5 классов", benefit: "Вы достигнете максимальной юридической защиты и спокойствия." },
+            { feature: "Бесплатный домен .uz на 10 лет", benefit: "Вы обеспечите свое долгосрочное цифровое будущее." },
             { feature: "Помощь в подаче заявки на патент (госпошлина оплачивается отдельно)", benefit: "Мы облегчим для вас все сложные юридические процессы." },
             { feature: "Имена, которые легко написать и найти на слух", benefit: "Клиенты не ошибутся при поиске вас." },
             { feature: "100% Гарантия Удовлетворенности", benefit: "Мы будем работать, пока не найдем имя, которое вам полностью понравится." }
@@ -411,23 +421,28 @@ Object.assign(enServiceDetails, {
         ], benefits: [] },
     namingStandard: { ...enServiceDetails.namingStandard, label: "Naming Standard", description: "Ideal for small businesses and startups.", features: [
             { feature: "3 short, catchy and memorable names", benefit: "You will get a quick and quality start for your brand." },
-            { feature: "Check for availability in domains and social networks", benefit: "The name you choose will not be taken in the digital environment." },
+            { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
+            { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." },
             { feature: "Names that are easy to write and find by ear", benefit: "Customers will not be mistaken when looking for you." },
             { feature: "100% Satisfaction Guarantee", benefit: "We will work until we find a name that you are completely satisfied with." }
         ], benefits: [] },
     namingPremium: { ...enServiceDetails.namingPremium, label: "Naming Premium", description: "A strategic approach for medium and growing businesses.", features: [
             { feature: "5 strategic name options", benefit: "The names will not just be beautiful, they will serve your business goals." },
-            { feature: "Patentability check for domains, social networks and 2 classes", benefit: "You will be sure of the legal and digital purity of the name." },
+            { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
+            { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." },
+            { feature: "Patentability check in 2 classes", benefit: "You will be sure of the legal purity of the name." },
             { feature: "Phonetic and semantic analysis in several languages", benefit: "You will be sure that your name will not have a negative meaning in other languages when entering the international market." },
-            { feature: "Free domain for 5 years (.uz/.com)", benefit: "You will get your most important digital asset at no extra cost." },
+            { feature: "Free .uz domain for 5 years", benefit: "You will get your most important digital asset at no extra cost." },
             { feature: "Names that are easy to write and find by ear", benefit: "Customers will not be mistaken when looking for you." },
             { feature: "100% Satisfaction Guarantee", benefit: "We will work until we find a name that you are completely satisfied with." }
         ], benefits: [] },
     namingVIP: { ...enServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects.", features: [
             { feature: "10+ exclusive name options and personal art director supervision", benefit: "You will get the highest level of creative approach and experience." },
             { feature: "Presentation with a story (storytelling) for your brand", benefit: "The name will become not just a word, but a story that attracts customers." },
-            { feature: "In-depth patent check for domains, social networks and up to 5 classes", benefit: "You will achieve maximum legal protection and peace of mind." },
-            { feature: "Free domain for 10 years (.uz and .com)", benefit: "You will secure your long-term digital future." },
+            { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
+            { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." },
+            { feature: "In-depth patent check in up to 5 classes", benefit: "You will achieve maximum legal protection and peace of mind." },
+            { feature: "Free .uz domain for 10 years", benefit: "You will secure your long-term digital future." },
             { feature: "Assistance in filing a patent application (state fee is paid separately)", benefit: "We will facilitate all complex legal processes for you." },
             { feature: "Names that are easy to write and find by ear", benefit: "Customers will not be mistaken when looking for you." },
             { feature: "100% Satisfaction Guarantee", benefit: "We will work until we find a name that you are completely satisfied with." }
@@ -520,23 +535,28 @@ Object.assign(zhServiceDetails, {
         ], benefits: [] },
     namingStandard: { ...zhServiceDetails.namingStandard, label: "标准命名", description: "适合小型企业和初创公司。", features: [
             { feature: "3个简短、上口且易记的名称", benefit: "您将为您的品牌获得一个快速而优质的开端。" },
-            { feature: "检查域名和社交网络中的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
+            { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
+            { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" },
             { feature: "听得懂、写得出、找得到的名称", benefit: "客户在寻找您时不会出错。" },
             { feature: "100% 满意保证", benefit: "我们将一直工作，直到找到您完全满意的名称。" }
         ], benefits: [] },
     namingPremium: { ...zhServiceDetails.namingPremium, label: "高级命名", description: "适合中型和成长型企业的战略方法。", features: [
             { feature: "5个战略性名称选项", benefit: "这些名称不仅美观，还将服务于您的业务目标。" },
-            { feature: "域名、社交网络和2个类别的专利性检查", benefit: "您将确信名称的法律和数字纯洁性。" },
+            { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
+            { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" },
+            { feature: "在2个类别中进行专利性检查", benefit: "您将确信名称的法律纯洁性。" },
             { feature: "多种语言的语音和语义分析", benefit: "您将确信在进入国际市场时，您的名称在其他语言中不会有负面含义。" },
-            { feature: "5年免费域名（.uz/.com）", benefit: "您将无需额外费用即可获得您最重要的数字资产。" },
+            { feature: "5年免费.uz域名", benefit: "您将无需额外费用即可获得您最重要的数字资产。" },
             { feature: "听得懂、写得出、找得到的名称", benefit: "客户在寻找您时不会出错。" },
             { feature: "100% 满意保证", benefit: "我们将一直工作，直到找到您完全满意的名称。" }
         ], benefits: [] },
     namingVIP: { ...zhServiceDetails.namingVIP, label: "VIP命名", description: "适合大型和国际项目。", features: [
             { feature: "10多个独家名称选项和个人艺术总监监督", benefit: "您将获得最高水平的创意方法和经验。" },
             { feature: "为您的品牌提供故事（storytelling）的演示", benefit: "名称将不仅仅是一个词，而是一个吸引客户的故事。" },
-            { feature: "对域名、社交网络和最多5个类别进行深入的专利检查", benefit: "您将获得最大的法律保护和安心。" },
-            { feature: "10年免费域名（.uz和.com）", benefit: "您将确保您的长期数字未来。" },
+            { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
+            { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" },
+            { feature: "在最多5个类别中进行深入的专利检查", benefit: "您将获得最大的法律保护和安心。" },
+            { feature: "10年免费.uz域名", benefit: "您将确保您的长期数字未来。" },
             { feature: "协助提交专利申请（国家规费另付）", benefit: "我们将为您简化所有复杂的法律程序。" },
             { feature: "听得懂、写得出、找得到的名称", benefit: "客户在寻找您时不会出错。" },
             { feature: "100% 满意保证", benefit: "我们将一直工作，直到找到您完全满意的名称。" }
