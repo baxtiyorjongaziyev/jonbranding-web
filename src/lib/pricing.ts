@@ -148,6 +148,7 @@ const uzServiceDetails = {
         note: null,
         features: [
             { feature: "2 ta professional logotip konsepsiyasi", benefit: "Biznesingiz uchun tez va sifatli vizual asosga ega bo'lasiz." },
+            { feature: "5+ real maketlarda namoyish", benefit: "Logotip real hayotda qanday ko'rinishini tasavvur qilasiz." },
             { feature: "Logotipdan foydalanish bo'yicha mini-qo'llanma", benefit: "Logotipni qayerda va qanday ishlatish bo'yicha aniq ko'rsatmalar olasiz." },
             { feature: "Ijtimoiy tarmoqlar uchun tayyor avatar", benefit: "Brendingiz raqamli platformalarda darhol professional ko'rinadi." },
             { feature: "Logotipning barcha kerakli formatlari (AI, EPS, PNG, PDF)", benefit: "Logotipni har qanday joyda sifatini yo'qotmasdan ishlata olasiz." },
@@ -182,6 +183,7 @@ const uzServiceDetails = {
             { feature: "To'liq firma uslubi tizimi", benefit: "Brendingiz barcha aloqa nuqtalarida yagona va professional ko'rinishga ega bo'ladi." },
             { feature: "To'liq Brendbuk (30-50 sahifa)", benefit: "Brendingizni boshqarish uchun barcha qoidalar va standartlar jamlangan 'konstitutsiya'ga ega bo'lasiz." },
             { feature: "Brend uchun shaxsiy illustratsiyalar yoki ikonikalar to'plami", benefit: "Brendingiz raqobatchilarda yo'q, o'ziga xos vizual tilga ega bo'ladi." },
+            { feature: "25+ real maketlarda namoyish", benefit: "Brendingiz qanday ko'rinishini har tomonlama tasavvur qilasiz." },
             { feature: "Ijtimoiy tarmoqlar uchun shablonlar to'plami", benefit: "Marketing jamoangiz brend uslubida mustaqil kontent yarata oladi." },
             { feature: "Barcha kerakli formatdagi fayllar", benefit: "Logotipni har qanday o'lchamda va istalgan joyda sifatini yo'qotmasdan ishlata olasiz." },
             { feature: "100% Mamnuniyat Kafolati", benefit: "Natija sizni to'liq qoniqtirmagunicha ishlaymiz." }
@@ -317,6 +319,7 @@ Object.assign(ruServiceDetails, {
         ] },
     logoStandard: { ...ruServiceDetails.logoStandard, label: "STANDARD", description: "Для стартапов и тех, кому нужно быстрое решение.", features: [
             { feature: "2 профессиональные концепции логотипа", benefit: "Вы получите быструю и качественную визуальную основу для вашего бизнеса." },
+            { feature: "Демонстрация на 5+ реальных макетах", benefit: "Вы представите, как ваш логотип будет выглядеть в реальной жизни." },
             { feature: "Мини-гайд по использованию логотипа", benefit: "Вы получите четкие инструкции по тому, где и как использовать логотип." },
             { feature: "Аватар для социальных сетей", benefit: "Ваш бренд сразу будет выглядеть профессионально на цифровых платформах." },
             { feature: "Все необходимые форматы файлов логотипа (AI, EPS, PNG, PDF)", benefit: "Вы сможете использовать логотип в любом месте без потери качества." },
@@ -336,6 +339,7 @@ Object.assign(ruServiceDetails, {
             { feature: "Полная система фирменного стиля", benefit: "Ваш бренд будет иметь единый и профессиональный вид на всех точках контакта." },
             { feature: "Полный Брендбук (30-50 страниц)", benefit: "Вы получите 'конституцию' для управления вашим брендом, в которой собраны все правила и стандарты." },
             { feature: "Набор персональных иллюстраций или иконок для бренда", benefit: "Ваш бренд получит собственный, не имеющий аналогов у конкурентов визуальный язык." },
+            { feature: "Демонстрация на 25+ реальных макетах", benefit: "Вы всесторонне представите, как будет выглядеть ваш бренд." },
             { feature: "Набор шаблонов для социальных сетей", benefit: "Ваша маркетинговая команда сможет самостоятельно создавать контент в стиле бренда." },
             { feature: "Все необходимые форматы файлов", benefit: "Вы сможете использовать логотип в любом размере и в любом месте без потери качества." },
             { feature: "100% Гарантия Удовлетворенности", benefit: "Мы будем работать, пока результат не удовлетворит вас полностью." }
@@ -433,6 +437,7 @@ Object.assign(enServiceDetails, {
         ] },
     logoStandard: { ...enServiceDetails.logoStandard, label: "STANDARD", description: "For startups and those who need a quick solution.", features: [
             { feature: "2 professional logo concepts", benefit: "You will get a quick and quality visual basis for your business." },
+            { feature: "Demonstration on 5+ real mockups", benefit: "You will imagine how your logo will look in real life." },
             { feature: "Mini-guide for logo usage", benefit: "You will get clear instructions on where and how to use the logo." },
             { feature: "Avatar for social media", benefit: "Your brand will immediately look professional on digital platforms." },
             { feature: "All necessary logo file formats (AI, EPS, PNG, PDF)", benefit: "You can use the logo anywhere without loss of quality." },
@@ -452,6 +457,7 @@ Object.assign(enServiceDetails, {
             { feature: "Full corporate identity system", benefit: "Your brand will have a single and professional look at all points of contact." },
             { feature: "Full Brandbook (30-50 pages)", benefit: "You will get a 'constitution' for managing your brand, which contains all the rules and standards." },
             { feature: "Set of personal illustrations or icons for the brand", benefit: "Your brand will acquire its own visual language, which competitors do not have." },
+            { feature: "Demonstration on 25+ real mockups", benefit: "You will have a comprehensive idea of what your brand will look like." },
             { feature: "Set of templates for social networks", benefit: "Your marketing team will be able to independently create content in the brand's style." },
             { feature: "All necessary file formats", benefit: "You can use the logo in any size and anywhere without loss of quality." },
             { feature: "100% Satisfaction Guarantee", benefit: "We will work until the result completely satisfies you." }
@@ -549,6 +555,7 @@ Object.assign(zhServiceDetails, {
         ] },
     logoStandard: { ...zhServiceDetails.logoStandard, label: "STANDARD", description: "适用于初创公司和需要快速解决方案的公司。", features: [
             { feature: "2个专业标志概念", benefit: "您将为您的业务获得快速而优质的视觉基础。" },
+            { feature: "在5个以上的真实模型上展示", benefit: "您将想象您的标志在现实生活中的样子。" },
             { feature: "标志使用迷你指南", benefit: "您将获得关于在何处以及如何使用标志的明确说明。" },
             { feature: "社交媒体头像", benefit: "您的品牌将立即在数字平台上显得专业。" },
             { feature: "所有必需的标志文件格式（AI, EPS, PNG, PDF）", benefit: "您可以在任何地方使用标志而不会损失质量。" },
@@ -568,6 +575,7 @@ Object.assign(zhServiceDetails, {
             { feature: "完整的企业形象系统", benefit: "您的品牌在所有接触点上都将有一致和专业的外观。" },
             { feature: "完整的品牌手册（30-50页）", benefit: "您将获得一个管理您品牌的“宪法”，其中包含所有规则和标准。" },
             { feature: "一套品牌的个人插图或图标", benefit: "您的品牌将拥有自己独特的、竞争对手没有的视觉语言。" },
+            { feature: "在25个以上的真实模型上展示", benefit: "您将全面了解您的品牌将是什么样子。" },
             { feature: "一套社交网络模板", benefit: "您的营销团队将能够独立地以品牌风格创建内容。" },
             { feature: "所有必需的文件格式", benefit: "您可以在任何尺寸和任何地方使用标志而不会损失质量。" },
             { feature: "100%满意保证", benefit: "我们将一直工作，直到结果完全令您满意。" }
@@ -590,7 +598,7 @@ Object.assign(zhServiceDetails, {
             { feature: "POSM材料（传单、横幅、展台）", benefit: "您将在销售点和活动中有效地推广您的品牌。" }
         ] },
     illustrations: { ...zhServiceDetails.illustrations, label: "插图与动画", description: "创建企业图形、信息图和动画。", features: [
-            { feature: "一套独特的品牌插图", benefit: "您的品牌将获得自己独特的、竞争对手没有的视觉语言。" },
+            { feature: "一套独特的品牌插图", benefit: "您的品牌将拥有自己独特的、竞争对手没有的视觉语言。" },
             { feature: "信息图设计", benefit: "您将以一种简单有趣的方式向您的受众传达复杂的信息。" },
             { feature: "标志和元素的动画", benefit: "您将使您的品牌在数字平台（网站、社交网络）上更加生动和引人注目。" }
         ] },
