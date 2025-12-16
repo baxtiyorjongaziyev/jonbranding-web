@@ -16,6 +16,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { motion, useMotionValue } from 'framer-motion';
 import PopularPackages from './popular-packages';
 import { event as gtagEvent } from '@/lib/gtag';
+import KnobToggle from '@/components/ui/KnobToggle';
+
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -48,36 +50,6 @@ const introIcons: { [key: string]: React.ElementType } = {
     strategy: require('lucide-react').BrainCircuit,
     identity: require('lucide-react').Paintbrush,
     communication: require('lucide-react').Megaphone
-};
-
-const KnobToggle = ({ isOn, onToggle }: { isOn: boolean, onToggle: (value: boolean) => void }) => {
-    const x = useMotionValue(isOn ? 20 : 0);
-
-    useEffect(() => {
-        x.set(isOn ? 20 : 0);
-    }, [isOn, x]);
-
-    return (
-        <motion.div
-            className={cn(
-                "w-12 h-8 flex items-center p-1 rounded-full cursor-pointer transition-colors",
-                isOn ? "bg-accent" : "bg-white/10"
-            )}
-            onClick={() => onToggle(!isOn)}
-        >
-            <motion.div
-                className={cn(
-                    "w-6 h-6 rounded-full flex items-center justify-center bg-white"
-                )}
-                drag="x"
-                dragConstraints={{ left: 0, right: 20 }}
-                style={{ x }}
-                onDragEnd={() => onToggle(x.get() > 10)}
-            >
-                {isOn && <Check className="w-4 h-4 text-accent" />}
-            </motion.div>
-        </motion.div>
-    );
 };
 
 const CurrencyToggle = ({ currency, onCurrencyChange }: { currency: 'uzs' | 'usd', onCurrencyChange: (c: 'uzs' | 'usd') => void }) => (
@@ -670,8 +642,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 )}
                                 
                                 <div className="pt-4 border-t border-white/10">
-                                     <Label htmlFor="upfront-payment" className="flex items-center justify-between text-left">
-                                        <div className="flex-1">
+                                     <Label htmlFor="upfront-payment" className="flex items-center justify-between text-left cursor-pointer">
+                                        <div className="flex-1 pr-4">
                                             <span className="font-semibold text-white">{translations.upfront_discount_title}</span>
                                             <span className="block text-xs text-blue-200 mt-1">{translations.upfront_discount_desc}</span>
                                         </div>
