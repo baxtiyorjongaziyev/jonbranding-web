@@ -95,7 +95,7 @@ const uzServiceDetails = {
         ]
     },
     namingStandard: {
-        label: "STANDARD",
+        label: "Naming STANDART",
         description: "Kichik biznes va startaplar uchun ideal.",
         price: basePricesUSD.namingStandard,
         note: null,
@@ -108,7 +108,7 @@ const uzServiceDetails = {
         timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi"
     },
     namingPremium: {
-        label: "PREMIUM",
+        label: "Naming PREMIUM",
         description: "O'rta va rivojlanayotgan biznes uchun strategik yondashuv.",
         price: basePricesUSD.namingPremium,
         note: null,
@@ -124,7 +124,7 @@ const uzServiceDetails = {
         timeline: "Birinchi konsepsiyalar 14–20 ish kuni ichida taqdim etiladi"
     },
     namingVIP: {
-        label: "VIP",
+        label: "Naming VIP",
         description: "Katta va xalqaro bozorga mo'ljallangan loyihalar uchun.",
         price: basePricesUSD.namingVIP,
         note: null,
@@ -139,7 +139,7 @@ const uzServiceDetails = {
         timeline: "Birinchi konsepsiyalar 20–25 ish kuni ichida taqdim etiladi"
     },
     logoStandard: {
-        label: "STANDARD",
+        label: "Logo STANDART",
         description: "Startaplar va tezkor yechimga muhtojlar uchun.",
         price: basePricesUSD.logoStandard,
         note: null,
@@ -153,7 +153,7 @@ const uzServiceDetails = {
         timeline: "Birinchi konsepsiyalar 7–10 ish kuni ichida taqdim etiladi"
     },
     logoPremium: {
-        label: "PREMIUM",
+        label: "Logo+Firma uslubi PREMIUM",
         description: "Brendini jiddiy rivojlantirishni istagan bizneslar uchun.",
         price: basePricesUSD.logoPremium,
         note: null,
@@ -169,7 +169,7 @@ const uzServiceDetails = {
         timeline: "Birinchi konsepsiyalar 14–20 ish kuni ichida taqdim etiladi"
     },
     logoVIP: {
-        label: "VIP",
+        label: "Logo+Firma uslubi+Brandbook VIP",
         description: "Bozorga to'liq tayyorlik va maksimal ta'sir uchun.",
         price: basePricesUSD.logoVIP,
         note: null,
@@ -286,13 +286,13 @@ Object.assign(ruServiceDetails, {
             { feature: "Планирование и бюджетирование каналов коммуникации", benefit: "Вы направите свой маркетинговый бюджет на каналы, приносящие наибольший результат (социальные сети, PR, реклама)." },
             { feature: "Направления контент-стратегии и рубрики", benefit: "Вы получите четкий план по созданию контента, который привлекает клиентов и превращает их в преданных поклонников." }
         ] },
-    namingStandard: { ...ruServiceDetails.namingStandard, label: "STANDARD", description: "Идеально для малого бизнеса и стартапов.", features: [
+    namingStandard: { ...ruServiceDetails.namingStandard, label: "Нейминг СТАНДАРТ", description: "Идеально для малого бизнеса и стартапов.", features: [
             { feature: "3 коротких, звучных и запоминающихся названия", benefit: "Вы получите быстрый и качественный старт для вашего бренда." },
             { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
             { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
             { feature: "Имена, которые легко написать и найти на слух", benefit: "Клиенты не ошибутся при поиске вас." }
         ] },
-    namingPremium: { ...ruServiceDetails.namingPremium, label: "PREMIUM", description: "Для среднего и развивающегося бизнеса.", features: [
+    namingPremium: { ...ruServiceDetails.namingPremium, label: "Нейминг ПРЕМИУМ", description: "Для среднего и развивающегося бизнеса.", features: [
             { feature: "5 стратегических вариантов названий", benefit: "Названия будут не просто красивыми, а будут служить целям вашего бизнеса." },
             { feature: "Фонетический и семантический анализ на нескольких языках", benefit: "Вы будете уверены, что ваше имя не будет иметь негативного значения на других языках при выходе на международный рынок." },
             { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
@@ -300,7 +300,7 @@ Object.assign(ruServiceDetails, {
             { feature: "Проверка пригодности к патентованию по 2 классам", benefit: "Вы будете уверены в юридической чистоте имени." },
             { feature: "Бесплатный домен .uz на 5 лет", benefit: "Вы получите свой самый важный цифровой актив без дополнительных затрат." }
         ] },
-    namingVIP: { ...ruServiceDetails.namingVIP, label: "VIP", description: "Для крупных и международных проектов.", features: [
+    namingVIP: { ...ruServiceDetails.namingVIP, label: "Нейминг VIP", description: "Для крупных и международных проектов.", features: [
             { feature: "10+ эксклюзивных вариантов названий и личный контроль арт-директора", benefit: "Вы получите высочайший уровень творческого подхода и опыта." },
             { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
             { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
@@ -308,14 +308,14 @@ Object.assign(ruServiceDetails, {
             { feature: "10-летний бесплатный домен .uz", benefit: "Вы обеспечите свое долгосрочное цифровое будущее." },
             { feature: "Помощь в подаче заявки на патент (госпошлина оплачивается отдельно)", benefit: "Мы облегчим для вас все сложные юридические процессы." }
         ] },
-    logoStandard: { ...ruServiceDetails.logoStandard, label: "STANDARD", description: "Для стартапов и тех, кому нужно быстрое решение.", features: [
+    logoStandard: { ...ruServiceDetails.logoStandard, label: "Лого СТАНДАРТ", description: "Для стартапов и тех, кому нужно быстрое решение.", features: [
             { feature: "3 профессиональные концепции логотипа, основанные на стратегии вашего бренда", benefit: "Вы получите быструю и качественную визуальную основу для вашего бизнеса." },
             { feature: "Демонстрация на 5+ реальных макетах", benefit: "Вы представите, как ваш логотип будет выглядеть в реальной жизни." },
             { feature: "Мини-гайд по использованию логотипа", benefit: "Вы получите четкие инструкции по тому, где и как использовать логотип." },
             { feature: "Готовый аватар для социальных сетей", benefit: "Ваш бренд сразу будет выглядеть профессионально на цифровых платформах." },
             { feature: "Все необходимые форматы файлов логотипа (AI, EPS, PNG, PDF)", benefit: "Вы сможете использовать логотип в любом месте без потери качества." }
         ] },
-    logoPremium: { ...ruServiceDetails.logoPremium, label: "PREMIUM", description: "Для бизнесов, серьезно настроенных на развитие своего бренда.", features: [
+    logoPremium: { ...ruServiceDetails.logoPremium, label: "Лого+Фирменный стиль ПРЕМИУМ", description: "Для бизнесов, серьезно настроенных на развитие своего бренда.", features: [
             { feature: "5 стратегических концепций логотипа", benefit: "У вас будет возможность выбрать наиболее совершенное визуальное решение для вашего бренда." },
             { feature: "Визуальная метафора бренда", benefit: "Ваш логотип станет не просто картинкой, а знаком с глубоким смыслом и историей." },
             { feature: "Фирменный стиль (цвета, шрифты)", benefit: "Ваш бренд будет иметь единый и профессиональный вид на всех точках контакта." },
@@ -323,7 +323,7 @@ Object.assign(ruServiceDetails, {
             { feature: "Демонстрация на 15+ реальных макетах", benefit: "Вы точно представите, как ваш логотип и стиль будут выглядеть в реальной жизни." },
             { feature: "Все необходимые форматы файлов", benefit: "Вы сможете использовать логотип в любом размере и в любом месте без потери качества." }
         ] },
-    logoVIP: { ...ruServiceDetails.logoVIP, label: "VIP", description: "Для полного выхода на рынок и максимального эффекта.", features: [
+    logoVIP: { ...ruServiceDetails.logoVIP, label: "Лого+Фирменный стиль+Брендбук VIP", description: "Для полного выхода на рынок и максимального эффекта.", features: [
             { feature: "7+ эксклюзивных концепций логотипа и личное участие арт-директора", benefit: "Вы получите высочайший уровень креативности и индивидуального подхода." },
             { feature: "Полная система фирменного стиля", benefit: "Ваш бренд будет иметь единый и профессиональный вид на всех точках контакта." },
             { feature: "Полный Брендбук (30-50 страниц)", benefit: "Вы получите 'конституцию' для управления вашим брендом, в которой собраны все правила и стандарты." },
@@ -398,13 +398,13 @@ Object.assign(enServiceDetails, {
             { feature: "Planning and budgeting of communication channels", benefit: "You will direct your marketing budget to the channels that bring the most results (social networks, PR, advertising)." },
             { feature: "Content strategy directions and rubrics", benefit: "You will have a clear plan for creating content that attracts customers and turns them into loyal fans." }
         ] },
-    namingStandard: { ...enServiceDetails.namingStandard, label: "STANDARD", description: "Ideal for small businesses and startups.", features: [
+    namingStandard: { ...enServiceDetails.namingStandard, label: "Naming STANDARD", description: "Ideal for small businesses and startups.", features: [
             { feature: "3 short, catchy and memorable names", benefit: "You will get a quick and quality start for your brand." },
             { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
             { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." },
             { feature: "Names that are easy to write and find by ear", benefit: "Customers will not be mistaken when looking for you." }
         ] },
-    namingPremium: { ...enServiceDetails.namingPremium, label: "PREMIUM", description: "A strategic approach for medium and growing businesses.", features: [
+    namingPremium: { ...enServiceDetails.namingPremium, label: "Naming PREMIUM", description: "A strategic approach for medium and growing businesses.", features: [
             { feature: "5 strategic name options", benefit: "The names will not just be beautiful, they will serve your business goals." },
             { feature: "Phonetic and semantic analysis in several languages", benefit: "You will be sure that your name will not have a negative meaning in other languages when entering the international market." },
             { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
@@ -412,7 +412,7 @@ Object.assign(enServiceDetails, {
             { feature: "Patentability check in 2 classes", benefit: "You will be sure of the legal purity of the name." },
             { feature: "Free .uz domain for 5 years", benefit: "You will get your most important digital asset at no extra cost." }
         ] },
-    namingVIP: { ...enServiceDetails.namingVIP, label: "VIP", description: "For large and international projects.", features: [
+    namingVIP: { ...enServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects.", features: [
             { feature: "10+ exclusive name options and personal art director supervision", benefit: "You will get the highest level of creative approach and experience." },
             { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
             { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." },
@@ -420,14 +420,14 @@ Object.assign(enServiceDetails, {
             { feature: "Free .uz domain for 10 years", benefit: "You will secure your long-term digital future." },
             { feature: "Assistance in filing a patent application (state fee is paid separately)", benefit: "We will facilitate all complex legal processes for you." }
         ] },
-    logoStandard: { ...enServiceDetails.logoStandard, label: "STANDARD", description: "For startups and those who need a quick solution.", features: [
+    logoStandard: { ...enServiceDetails.logoStandard, label: "Logo STANDARD", description: "For startups and those who need a quick solution.", features: [
             { feature: "3 professional logo concepts based on your brand strategy", benefit: "You will get a quick and quality visual basis for your business." },
             { feature: "Demonstration on 5+ real mockups", benefit: "You will imagine how your logo will look in real life." },
             { feature: "Mini-guide for logo usage", benefit: "You will get clear instructions on where and how to use the logo." },
             { feature: "Ready-made avatar for social media", benefit: "Your brand will immediately look professional on digital platforms." },
             { feature: "All necessary logo file formats (AI, EPS, PNG, PDF)", benefit: "You can use the logo anywhere without loss of quality." }
         ] },
-    logoPremium: { ...enServiceDetails.logoPremium, label: "PREMIUM", description: "For businesses serious about developing their brand.", features: [
+    logoPremium: { ...enServiceDetails.logoPremium, label: "Logo+Corporate Identity PREMIUM", description: "For businesses serious about developing their brand.", features: [
             { feature: "5 strategic logo concepts", benefit: "You will have the opportunity to choose the most perfect visual solution for your brand." },
             { feature: "Visual metaphor of the brand", benefit: "Your logo will become not just a picture, but a sign with deep meaning and history." },
             { feature: "Corporate identity (colors, fonts)", benefit: "Your brand will have a single and professional look at all points of contact." },
@@ -435,7 +435,7 @@ Object.assign(enServiceDetails, {
             { feature: "Demonstration on 15+ real mockups", benefit: "You will have a clear idea of how your logo and style will look in real life." },
             { feature: "All necessary file formats", benefit: "You can use the logo in any size and anywhere without loss of quality." }
         ] },
-    logoVIP: { ...enServiceDetails.logoVIP, label: "VIP", description: "For a full market launch and maximum impact.", features: [
+    logoVIP: { ...enServiceDetails.logoVIP, label: "Logo+Corporate Identity+Brandbook VIP", description: "For a full market launch and maximum impact.", features: [
             { feature: "7+ exclusive logo concepts and personal art director participation", benefit: "You will get the highest level of creativity and individual approach." },
             { feature: "Full corporate identity system", benefit: "Your brand will have a single and professional look at all points of contact." },
             { feature: "Full Brandbook (30-50 pages)", benefit: "You will get a 'constitution' for managing your brand, which contains all the rules and standards." },
@@ -510,13 +510,13 @@ Object.assign(zhServiceDetails, {
             { feature: "规划和预算传播渠道", benefit: "您将把您的营销预算投向带来最大成果的渠道（社交网络、公关、广告）。" },
             { feature: "内容策略方向和专栏", benefit: "您将有一个清晰的计划来创建吸引客户并将其转变为忠实粉丝的内容。" }
         ] },
-    namingStandard: { ...zhServiceDetails.namingStandard, label: "STANDARD", description: "适合小型企业和初创公司。", features: [
+    namingStandard: { ...zhServiceDetails.namingStandard, label: "命名 标准", description: "适合小型企业和初创公司。", features: [
             { feature: "3个简短、上口且易记的名称", benefit: "您将为您的品牌获得一个快速而优质的开端。" },
             { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
             { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" },
             { feature: "听得懂、写得出、找得到的名称", benefit: "客户在寻找您时不会出错。" }
         ] },
-    namingPremium: { ...zhServiceDetails.namingPremium, label: "PREMIUM", description: "适合中型和成长型企业的战略方法。", features: [
+    namingPremium: { ...zhServiceDetails.namingPremium, label: "命名 高级", description: "适合中型和成长型企业的战略方法。", features: [
             { feature: "5个战略性名称选项", benefit: "这些名称不仅美观，还将服务于您的业务目标。" },
             { feature: "多种语言的语音和语义分析", benefit: "您将确信在进入国际市场时，您的名称在其他语言中不会有负面含义。" },
             { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
@@ -524,7 +524,7 @@ Object.assign(zhServiceDetails, {
             { feature: "在2个类别中进行专利性检查", benefit: "您将确信名称的法律纯洁性。" },
             { feature: "5年免费.uz域名", benefit: "您将无需额外费用即可获得您最重要的数字资产。" }
         ] },
-    namingVIP: { ...zhServiceDetails.namingVIP, label: "VIP", description: "适合大型和国际项目。", features: [
+    namingVIP: { ...zhServiceDetails.namingVIP, label: "命名 VIP", description: "适合大型和国际项目。", features: [
             { feature: "10多个独家名称选项和个人艺术总监监督", benefit: "您将获得最高水平的创意方法和经验。" },
             { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
             { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" },
@@ -532,14 +532,14 @@ Object.assign(zhServiceDetails, {
             { feature: "10年免费.uz域名", benefit: "您将确保您的长期数字未来。" },
             { feature: "协助提交专利申请（国家规费另付）", benefit: "我们将为您简化所有复杂的法律程序。" }
         ] },
-    logoStandard: { ...zhServiceDetails.logoStandard, label: "STANDARD", description: "适用于初创公司和需要快速解决方案的公司。", features: [
+    logoStandard: { ...zhServiceDetails.logoStandard, label: "标志 标准", description: "适用于初创公司和需要快速解决方案的公司。", features: [
             { feature: "基于您品牌策略的3个专业标志概念", benefit: "您将为您的业务获得快速而优质的视觉基础。" },
             { feature: "在5个以上的真实模型上展示", benefit: "您将想象您的标志在现实生活中的样子。" },
             { feature: "标志使用迷你指南", benefit: "您将获得关于在何处以及如何使用标志的明确说明。" },
             { feature: "为社交媒体准备的现成头像", benefit: "您的品牌将立即在数字平台上显得专业。" },
             { feature: "所有必需的标志文件格式（AI, EPS, PNG, PDF）", benefit: "您可以在任何地方使用标志而不会损失质量。" }
         ] },
-    logoPremium: { ...zhServiceDetails.logoPremium, label: "PREMIUM", description: "适用于认真发展其品牌的企业。", features: [
+    logoPremium: { ...zhServiceDetails.logoPremium, label: "标志+企业形象 高级", description: "适用于认真发展其品牌的企业。", features: [
             { feature: "5个战略性标志概念", benefit: "您将有机会为您的品牌选择最完美的视觉解决方案。" },
             { feature: "品牌的视觉隐喻", benefit: "您的标志将不仅仅是一张图片，而是一个具有深刻含义和历史的标志。" },
             { feature: "企业形象（颜色、字体）", benefit: "您的品牌在所有接触点上都将有一致和专业的外观。" },
@@ -547,7 +547,7 @@ Object.assign(zhServiceDetails, {
             { feature: "在15个以上的真实模型上展示", benefit: "您将清楚地了解您的标志和风格在现实生活中的样子。" },
             { feature: "所有必需的文件格式", benefit: "您可以在任何尺寸和任何地方使用标志而不会损失质量。" }
         ] },
-    logoVIP: { ...zhServiceDetails.logoVIP, label: "VIP", description: "为了全面推向市场并获得最大影响。", features: [
+    logoVIP: { ...zhServiceDetails.logoVIP, label: "标志+企业形象+品牌手册 VIP", description: "为了全面推向市场并获得最大影响。", features: [
             { feature: "7个以上的独家标志概念和个人艺术总监参与", benefit: "您将获得最高水平的创造力和个性化方法。" },
             { feature: "完整的企业形象系统", benefit: "您的品牌在所有接触点上都将有一致和专业的外观。" },
             { feature: "完整的品牌手册（30-50页）", benefit: "您将获得一个管理您品牌的“宪法”，其中包含所有规则和标准。" },
@@ -698,7 +698,7 @@ export const bonusThreshold = 4000;
 interface PackageSelections {
     selectedServices: SelectedServices;
     wantsUpfrontPayment: boolean;
-    isPackageDiscountEnabled: boolean;
+    isPackageDiscountEnabled?: boolean;
 }
 
 export interface PriceDetails {
@@ -713,7 +713,7 @@ export interface PriceDetails {
 
 
 export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz'): PriceDetails => {
-    const { selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled } = selections;
+    const { selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled = true } = selections;
     const sd = getServiceDetails(lang);
 
     let nonVipBasePrice = 0;
