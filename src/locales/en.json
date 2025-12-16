@@ -415,11 +415,11 @@
               "title": "Urgent Help Needed!",
               "description": "Your brand has several critical vulnerabilities. This is a great opportunity for growth! We can help you turn these weaknesses into strengths."
             },
-            "good": {
+            {
               "title": "On the Right Track!",
               "description": "You have a good foundation, but there are a few points that can be strengthened to achieve even better results. Let's discuss how we can do this together."
             },
-            "perfect": {
+            {
               "title": "Excellent! Your brand is in great shape!",
               "description": "Congratulations! You have a strong foundation. Now it's time to think about the next step - how to scale and become a market leader. We have ideas for you."
             }
@@ -569,8 +569,8 @@
         "section1_p2": "To consolidate an idea in the audience's mind, it is not enough to just talk about it — it is important to reinforce it with visual elements. A well-designed corporate identity allows you to demonstrate brand values without extra explanations, instantly evoking the necessary emotions and associations.",
         "section2_title": "Corporate identity is a system",
         "section2_p1": "It's not just about beauty, but about efficiency, meaning, and control. To ensure a brand remains multifaceted and consistent in developing its visual image, a set of graphic elements must be created.",
-        "section2_p2": "Such a set is always selected individually, depending on the business's tasks and capabilities. The minimum set includes a logo, colors, fonts, photo style, style of advertising media, and other elements that create a cohesive image.",
-        "section2p3": "When a visual style is built clearly and consistently, it becomes a powerful tool for managing the brand's image and communication. When all its elements are aligned, the brand is perceived as professional, reliable, and recognizable.",
+        "section2_p2": "Such a set is always selected individually for the tasks and capabilities of the business. The minimum set includes a logo, colors, fonts, photo style, style of advertising media, and other elements that create a unified image.",
+        "section2_p3": "When a visual style is built clearly and consistently, it becomes a powerful tool for managing the brand's image and communication. When all its elements are aligned, the brand is perceived as professional, reliable, and recognizable.",
         "process_title": "How do we create a corporate identity?",
         "process_subtitle": "We take a systematic approach to developing a corporate identity so that every detail works for brand recognition and its strategy.",
         "process_steps": [
@@ -795,7 +795,17 @@
             "gift_title": "Gift!",
             "agreed_price": "On Request",
             "currency": "sum",
-            "recommended": "Recommended"
+            "recommended": "Recommended",
+            "benefit_prefix": "Benefit:",
+            "features": "What's included",
+            "namingGuarantee": {
+                "title": "Naming you'll love, or your money back 100%",
+                "description": "We are so confident in the quality of our work that if you don't like the initial name options provided, we will refund your full payment, no questions asked."
+            },
+            "designGuarantee": {
+                "title": "Design you'll love, or your money back 100%",
+                "description": "If you are not satisfied with the initial logo and corporate identity concepts, we will fully refund your payment. Your satisfaction is our top priority."
+            }
         },
         "comparison": {
             "title": "Us vs. Competitors",
