@@ -16,7 +16,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { motion, useMotionValue, useMotionTemplate } from 'framer-motion';
 import PopularPackages from './popular-packages';
 import { event as gtagEvent } from '@/lib/gtag';
-import KnobToggle from '@/components/ui/KnobToggle';
+import DiscountSelector from '@/components/ui/DiscountSelector';
 
 
 interface PackageBuilderProps {
@@ -303,6 +303,8 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
     </div>
 );
 
+type DiscountOption = 'none' | 'package' | 'full';
+
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as 'uz' | 'ru' | 'en' | 'zh');
@@ -315,10 +317,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         packaging: false,
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
-    const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
-    const [isPackageDiscountEnabled, setIsPackageDiscountEnabled] = useLocalStorage('isPackageDiscountEnabled', true);
-    const [currency, setCurrency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
+    
+    const [discountOption, setDiscountOption] = useLocalStorage<DiscountOption>('discountOption', 'package');
     const [isClient, setIsClient] = useState(false);
+    const [currency, setCurrency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
 
     useEffect(() => { setIsClient(true); }, []);
 
@@ -327,21 +329,26 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     useEffect(() => {
         if (isClient) {
+            const wantsUpfrontPayment = discountOption === 'full';
+            const isPackageDiscountEnabled = discountOption === 'package' || discountOption === 'full';
+
             const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled }, lang as 'uz' | 'ru' | 'en' | 'zh');
             setTotal(result);
-            if (!result.canApplyPackageDiscount) {
-                setIsPackageDiscountEnabled(true);
+
+            if (!result.canApplyPackageDiscount && discountOption !== 'none') {
+                setDiscountOption('none');
             }
-            const justAppliedDiscount = result.discountApplied.some(d => d.isPackageDiscount) && !hasDiscountBeenApplied;
+
+            const justAppliedDiscount = result.discountApplied.length > 0 && !hasDiscountBeenApplied;
             if (justAppliedDiscount) {
                  confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: ['#00C9FD', '#ADFFFE', '#FFFFFF', '#050583'] });
                 setHasDiscountBeenApplied(true);
             }
-            if(!result.discountApplied.some(d => d.isPackageDiscount) && hasDiscountBeenApplied) {
+            if(result.discountApplied.length === 0 && hasDiscountBeenApplied) {
                 setHasDiscountBeenApplied(false);
             }
         }
-    }, [selectedServices, wantsUpfrontPayment, isClient, hasDiscountBeenApplied, lang, isPackageDiscountEnabled, setIsPackageDiscountEnabled]);
+    }, [selectedServices, discountOption, isClient, hasDiscountBeenApplied, lang, setDiscountOption]);
 
     const trackGtagEvent = (serviceId: keyof SelectedServices, isSelected: boolean) => {
         const service = serviceDetails[serviceId];
@@ -442,6 +449,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             card.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     };
+    
+    const handleOrder = () => {
+        localStorage.setItem('wantsUpfrontPayment', JSON.stringify(discountOption === 'full'));
+        localStorage.setItem('isPackageDiscountEnabled', JSON.stringify(discountOption === 'package' || discountOption === 'full'));
+        onOrderNow();
+    }
 
     return (
         <>
@@ -646,18 +659,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                     </div>
                                 ))}
-                                {total.discountApplied.map((d, i) => (
-                                    <div key={i} className="flex justify-between items-center text-sm text-green-300">
-                                        <span>{d.name}</span>
-                                        <div className="flex items-center gap-2">
-                                            {d.isPackageDiscount && total.canApplyPackageDiscount && (
-                                                <KnobToggle isOn={isPackageDiscountEnabled} onToggle={setIsPackageDiscountEnabled} />
-                                            )}
-                                            <span className="font-mono">- {formatPrice(d.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
-                                        </div>
-                                    </div>
-                                ))}
-
+                                
                                 <div className="pt-4 border-t border-white/10">
                                      <div className="flex justify-between items-baseline text-white">
                                         <span className="text-sm font-semibold">{translations.final_price}</span>
@@ -674,16 +676,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 )}
                                 
                                 <div className="pt-4 border-t border-white/10">
-                                     <Label htmlFor="upfront-payment" className="flex items-center justify-between text-left cursor-pointer">
-                                        <div className="flex-1 pr-4">
-                                            <span className="font-semibold text-white">{translations.upfront_discount_title}</span>
-                                            <span className="block text-xs text-blue-200 mt-1">{translations.upfront_discount_desc}</span>
-                                        </div>
-                                        <KnobToggle isOn={wantsUpfrontPayment} onToggle={setWantsUpfrontPayment} />
-                                   </Label>
+                                     <DiscountSelector 
+                                         selectedOption={discountOption}
+                                         onSelectOption={setDiscountOption}
+                                         canApplyPackageDiscount={total.canApplyPackageDiscount}
+                                         dictionary={translations.discountSelector}
+                                     />
                                 </div>
                                 
-                                <Button id="package-builder-cta" onClick={onOrderNow} variant="default" size="lg" className="w-full text-lg py-3 mt-4" disabled={total.base === 0}>
+                                <Button id="package-builder-cta" onClick={handleOrder} variant="default" size="lg" className="w-full text-lg py-3 mt-4" disabled={total.base === 0}>
                                     {translations.get_free_consultation}
                                 </Button>
                              </div>
