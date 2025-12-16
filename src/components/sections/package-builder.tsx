@@ -614,7 +614,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 {selectedServiceKeys.map((key) => {
                                                     const service = serviceDetails[key];
                                                     return (
-                                                        <div key={key} className="flex justify-between items-center text-sm animate-fade-in group">
+                                                        <div key={key} className="flex justify-between items-center text-base animate-fade-in group">
                                                             <span className="text-white flex-1 pr-2">{service.label}</span>
                                                             <div className="flex items-center gap-2">
                                                                 <span className="font-mono text-gray-300">
@@ -648,13 +648,13 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 <h4 className="font-semibold text-white text-lg">{translations.cost_calculation_title}</h4>
                                 
                                 {total.base > 0 && (
-                                    <div className="flex justify-between items-baseline text-sm">
+                                    <div className="flex justify-between items-baseline text-base">
                                         <span className="text-blue-200">{translations.base_price}</span>
                                         <div className="text-lg font-mono">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</div>
                                     </div>
                                 )}
                                 {total.surcharges.map(s => (
-                                    <div key={s.name} className="flex justify-between items-center text-sm text-amber-300">
+                                    <div key={s.name} className="flex justify-between items-center text-base text-amber-300">
                                         <span>{s.name}</span>
                                         <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
                                     </div>
@@ -662,15 +662,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 
                                 <div className="pt-4 border-t border-white/10">
                                      <div className="flex justify-between items-baseline text-white">
-                                        <span className="text-sm font-semibold">{translations.final_price}</span>
-                                        <p className="text-3xl sm:text-4xl font-bold tracking-tight">
+                                        <span className="text-lg font-semibold">{translations.final_price}</span>
+                                        <p className="text-4xl sm:text-5xl font-bold tracking-tight">
                                             {total.final > 0 ? formatPrice(total.final, lang as 'uz' | 'ru' | 'en' | 'zh', currency) : translations.agreed_price}
                                         </p>
                                     </div>
                                 </div>
                                 
                                 {total.savings > 0 && (
-                                    <div className="bg-green-500/10 p-2 rounded-lg text-center text-xs font-semibold text-green-300">
+                                    <div className="bg-green-500/10 p-2 rounded-lg text-center text-sm font-semibold text-green-300">
                                         {translations.total_savings}: {formatPrice(total.savings, lang, currency)}
                                     </div>
                                 )}
