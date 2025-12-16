@@ -124,6 +124,33 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
         mouseX.set(clientX - left);
         mouseY.set(clientY - top);
     }
+
+    const selectButton = (
+        <Button
+            className={cn(
+                "w-full text-base py-3 h-auto transition-all duration-300",
+                selected
+                    ? "shadow-lg"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+                isVip && !selected && "bg-white/10 hover:bg-white/20 text-white",
+                isVip && selected && "bg-amber-400 hover:bg-amber-500 text-black"
+            )}
+            variant={selected ? (isVip ? 'default' : 'default') : 'secondary'}
+            onClick={(e) => { e.stopPropagation(); onSelect(); }}
+        >
+            {selected ? (
+                <>
+                    <CheckCircle className="h-5 w-5 mr-2" />
+                    {dictionary.selected}
+                </>
+            ) : (
+                <>
+                    <ShoppingCart className="h-5 w-5 mr-2" />
+                    {dictionary.select}
+                </>
+            )}
+        </Button>
+    );
     
     const cardContent = (
         <>
@@ -187,33 +214,6 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
         )
     `;
     
-    const selectButton = (
-        <Button
-            className={cn(
-                "w-full text-base py-3 h-auto transition-all duration-300",
-                selected
-                    ? "shadow-lg"
-                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-                isVip && !selected && "bg-white/10 hover:bg-white/20 text-white",
-                isVip && selected && "bg-amber-400 hover:bg-amber-500 text-black"
-            )}
-            variant={selected ? (isVip ? 'default' : 'default') : 'secondary'}
-            onClick={(e) => { e.stopPropagation(); onSelect(); }}
-        >
-            {selected ? (
-                <>
-                    <CheckCircle className="h-5 w-5 mr-2" />
-                    {dictionary.selected}
-                </>
-            ) : (
-                <>
-                    <ShoppingCart className="h-5 w-5 mr-2" />
-                    {dictionary.select}
-                </>
-            )}
-        </Button>
-    );
-
     if (isTariff) {
         return (
             <div {...cardProps}>
