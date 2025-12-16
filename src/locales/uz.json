@@ -785,12 +785,6 @@
             "select": "Tanlash",
             "services_total": "Xizmatlar jami:",
             "base_price": "Boshlang'ich narx",
-            "upfront_discount_title": "Oldindan to'lov uchun -10% chegirma",
-            "upfront_discount_desc": "Loyiha uchun 100% oldindan to'lov qiling",
-            "upfront_discount_options": {
-                "yes": "Ha",
-                "no": "Yo'q"
-            },
             "final_price": "Yakuniy narx:",
             "order_with_discount": "Chegirma bilan buyurtma",
             "get_free_consultation": "Bepul konsultatsiya olish",
@@ -804,7 +798,12 @@
             "currency": "so'm",
             "recommended": "Tavsiya etiladi",
             "benefit_prefix": "Foydasi:",
-            "features": "Nimalar kiradi"
+            "features": "Nimalar kiradi",
+            "discountSelector": {
+                "none": "Chegirmasiz",
+                "package": "Paketli (-20%)",
+                "full": "To'liq to'lov (-28%)"
+            }
         },
         "comparison": {
             "title": "Biz va Raqobatchilar",
@@ -860,5 +859,3 @@
         }
     }
 }
-
-    

@@ -785,12 +785,6 @@
             "select": "Выбрать",
             "services_total": "Итого по услугам:",
             "base_price": "Начальная цена",
-            "upfront_discount_title": "Скидка -10% за предоплату",
-            "upfront_discount_desc": "Внесите 100% предоплату за проект",
-            "upfront_discount_options": {
-                "yes": "Да",
-                "no": "Нет"
-            },
             "final_price": "Итоговая цена:",
             "order_with_discount": "Заказ со скидкой",
             "get_free_consultation": "Получить бесплатную консультацию",
@@ -804,7 +798,12 @@
             "currency": "сум",
             "recommended": "Рекомендуемый",
             "benefit_prefix": "Польза:",
-            "features": "Что входит"
+            "features": "Что входит",
+            "discountSelector": {
+                "none": "Без скидки",
+                "package": "Пакет (-20%)",
+                "full": "Полная оплата (-28%)"
+            }
         },
         "comparison": {
             "title": "Мы и Конкуренты",
@@ -860,5 +859,3 @@
         }
     }
 }
-
-    

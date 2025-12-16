@@ -785,12 +785,6 @@
             "select": "选择",
             "services_total": "服务总计：",
             "base_price": "基本价格",
-            "upfront_discount_title": "-10% 预付款折扣",
-            "upfront_discount_desc": "为项目支付100%的预付款",
-            "upfront_discount_options": {
-                "yes": "是",
-                "no": "否"
-            },
             "final_price": "最终价格：",
             "order_with_discount": "折扣订单",
             "get_free_consultation": "获取免费咨询",
@@ -804,7 +798,12 @@
             "currency": "苏姆",
             "recommended": "推荐",
             "benefit_prefix": "好处：",
-            "features": "包含内容"
+            "features": "包含内容",
+            "discountSelector": {
+                "none": "无折扣",
+                "package": "套餐 (-20%)",
+                "full": "全款 (-28%)"
+            }
         },
         "comparison": {
             "title": "我们与竞争对手",
@@ -860,5 +859,3 @@
         }
     }
 }
-
-    

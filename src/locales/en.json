@@ -786,12 +786,6 @@
             "select": "Select",
             "services_total": "Services total:",
             "base_price": "Base price",
-            "upfront_discount_title": "-10% for upfront payment",
-            "upfront_discount_desc": "Make a 100% upfront payment for the project",
-            "upfront_discount_options": {
-                "yes": "Yes",
-                "no": "No"
-            },
             "final_price": "Final price:",
             "order_with_discount": "Order with discount",
             "get_free_consultation": "Get free consultation",
@@ -805,7 +799,12 @@
             "currency": "sum",
             "recommended": "Recommended",
             "benefit_prefix": "Benefit:",
-            "features": "What's included"
+            "features": "What's included",
+            "discountSelector": {
+                "none": "No discount",
+                "package": "Package (-20%)",
+                "full": "Full payment (-28%)"
+            }
         },
         "comparison": {
             "title": "Us vs. Competitors",
@@ -861,5 +860,3 @@
         }
     }
 }
-
-    
