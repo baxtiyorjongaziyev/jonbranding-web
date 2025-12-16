@@ -415,11 +415,11 @@
               "title": "Urgent Help Needed!",
               "description": "Your brand has several critical vulnerabilities. This is a great opportunity for growth! We can help you turn these weaknesses into strengths."
             },
-            {
+            "good": {
               "title": "On the Right Track!",
               "description": "You have a good foundation, but there are a few points that can be strengthened to achieve even better results. Let's discuss how we can do this together."
             },
-            {
+            "perfect": {
               "title": "Excellent! Your brand is in great shape!",
               "description": "Congratulations! You have a strong foundation. Now it's time to think about the next step - how to scale and become a market leader. We have ideas for you."
             }
@@ -764,6 +764,14 @@
             },
             "discount_alert_title": "Package Discount!",
             "discount_alert_desc": "Choose <strong>2 or more</strong> services from this section and get a <strong>-20% discount</strong> on the total amount!",
+            "namingGuarantee": {
+                "title": "Naming you'll love, or your money back 100%",
+                "description": "We are so confident in the quality of our work that if you don't like the initial name options provided, we will refund your full payment, no questions asked."
+            },
+            "designGuarantee": {
+                "title": "Design you'll love, or your money back 100%",
+                "description": "If you are not satisfied with the initial logo and corporate identity concepts, we will fully refund your payment. Your satisfaction is our top priority."
+            },
             "your_package": "Your Package",
             "your_package_desc": "Select the services that suit you.",
             "selected_services_title": "Selected Services",
@@ -797,15 +805,7 @@
             "currency": "sum",
             "recommended": "Recommended",
             "benefit_prefix": "Benefit:",
-            "features": "What's included",
-            "namingGuarantee": {
-                "title": "Naming you'll love, or your money back 100%",
-                "description": "We are so confident in the quality of our work that if you don't like the initial name options provided, we will refund your full payment, no questions asked."
-            },
-            "designGuarantee": {
-                "title": "Design you'll love, or your money back 100%",
-                "description": "If you are not satisfied with the initial logo and corporate identity concepts, we will fully refund your payment. Your satisfaction is our top priority."
-            }
+            "features": "What's included"
         },
         "comparison": {
             "title": "Us vs. Competitors",
