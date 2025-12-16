@@ -137,14 +137,12 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const detail = serviceDetails[id];
     if (!detail) return null;
 
-    const { label, description, price, features, timeline, benefits, note, oldPrice, discount, recommended } = detail;
+    const { label, description, price, features, timeline, note, oldPrice, discount, recommended } = detail;
     const Icon = serviceIcons[id] || Sparkles;
 
     const isTariff = ['naming', 'logo'].some(prefix => id.toLowerCase().startsWith(prefix));
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium') && !isVip;
-
-    const allFeatures = [...(features || []), ...(benefits ? benefits.map(b => ({feature: b, benefit: dictionary.benefits_generic_text})) : [])];
 
     const cardProps = {
         onClick: onSelect,
@@ -209,10 +207,10 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     </div>
 
                     <div className="my-6 space-y-6 flex-grow">
-                        {allFeatures && allFeatures.length > 0 && (
+                        {features && features.length > 0 && (
                              <div>
                                 <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                                 <FeatureBenefitAccordion items={allFeatures} isVip={!!isVip} dictionary={dictionary} />
+                                 <FeatureBenefitAccordion items={features} isVip={!!isVip} dictionary={dictionary} />
                              </div>
                         )}
                     </div>
@@ -242,10 +240,10 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 </div>
                 
                 <div className="my-6 space-y-6 flex-grow">
-                    {allFeatures && allFeatures.length > 0 && (
+                    {features && features.length > 0 && (
                          <div>
                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                             <FeatureBenefitAccordion items={allFeatures} isVip={false} dictionary={dictionary} />
+                             <FeatureBenefitAccordion items={features} isVip={false} dictionary={dictionary} />
                          </div>
                     )}
                 </div>
@@ -274,6 +272,23 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
         </Card>
     );
 };
+
+const GuaranteeBlock = ({ title, description, icon: Icon }: { title: string, description: string, icon: React.ElementType }) => (
+    <div className="mt-12">
+        <Card className="max-w-2xl mx-auto bg-green-50 border-green-200 p-6 rounded-2xl shadow-sm">
+            <div className="flex items-center gap-4">
+                <div className="bg-green-100 p-3 rounded-full">
+                    <Icon className="w-6 h-6 text-green-700" />
+                </div>
+                <div>
+                    <h4 className="font-bold text-green-800">{title}</h4>
+                    <p className="text-green-700">{description}</p>
+                </div>
+            </div>
+        </Card>
+    </div>
+);
+
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
     <div className="space-y-6">
@@ -498,9 +513,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
                         {['naming', 'identity'].map((groupKey) => {
                              const group = serviceGroups[groupKey as keyof typeof serviceGroups];
+                             const isNaming = groupKey === 'naming';
+                             const isIdentity = groupKey === 'identity';
                              return (
                                  <React.Fragment key={groupKey}>
-                                     {groupKey === 'identity' && (
+                                     {isIdentity && (
                                          <div className="py-8">
                                              <PopularPackages lang={lang} onSelectPackage={handlePopularPackageSelect} />
                                          </div>
@@ -518,6 +535,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                              />
                                          ))}
                                      </ServiceGroup>
+                                     {isNaming && <GuaranteeBlock title={translations.namingGuarantee.title} description={translations.namingGuarantee.description} icon={ShieldCheck} />}
+                                     {isIdentity && <GuaranteeBlock title={translations.designGuarantee.title} description={translations.designGuarantee.description} icon={ShieldCheck} />}
                                  </React.Fragment>
                              );
                          })}
