@@ -569,7 +569,7 @@
         "section2_title": "Firma uslubi — bu tizim",
         "section2_p1": "Bu faqat go'zallik haqida emas, balki samaradorlik, ma'no va nazorat haqida. Brend o'zining vizual obrazini rivojlantirishda ko'p qirrali va izchil bo'lib qolishini ta'minlash uchun grafik elementlar to'plamini yaratish kerak.",
         "section2_p2": "Bunday to'plam har doim biznesning vazifalari va imkoniyatlariga qarab individual tanlanadi. Minimal to'plam logotip, ranglar, shriftlar, fotosurat uslubi, reklama tashuvchilarining uslubi va yaxlit obrazni yaratuvchi boshqa elementlarni o'z ichiga oladi.",
-        "section2p3": "Vizual uslub aniq va izchil qurilganida, u brend obrazini va kommunikatsiyasini boshqarish uchun kuchli vositaga aylanadi. Uning barcha elementlari kelishilgan bo'lsa, brend professional, ishonchli va taniladigan sifatida idrok etiladi.",
+        "section2_p3": "Vizual uslub aniq va izchil qurilganida, u brend obrazini va kommunikatsiyasini boshqarish uchun kuchli vositaga aylanadi. Uning barcha elementlari kelishilgan bo'lsa, brend professional, ishonchli va taniladigan sifatida idrok etiladi.",
         "process_title": "Biz firma uslubini qanday yaratamiz?",
         "process_subtitle": "Biz firma uslubini ishlab chiqishga tizimli yondashamiz, shunda har bir detal brendning tanilishi va uning strategiyasi uchun ishlaydi.",
         "process_steps": [
@@ -763,6 +763,14 @@
             },
             "discount_alert_title": "Paketli Chegirma!",
             "discount_alert_desc": "Ushbu bo'limdan <strong>2 yoki undan ortiq</strong> xizmatni tanlang va umumiy summadan <strong>-20% chegirma</strong> oling!",
+            "namingGuarantee": {
+                "title": "Sizga yoqadigan Neyming yoki pulingizni 100% qaytarib beramiz",
+                "description": "Biz ishimizning sifatiga shunchalik ishonamizki, agar sizga taqdim etilgan dastlabki nom variantlari yoqmasa, biz to'lovni to'liq, hech qanday savollarsiz qaytarib beramiz."
+            },
+            "designGuarantee": {
+                "title": "Sizga yoqadigan Dizayn yoki pulingizni 100% qaytarib beramiz",
+                "description": "Agar siz dastlabki logotip va firma uslubi konsepsiyalaridan mamnun bo'lmasangiz, biz to'lovingizni to'liq qaytarib beramiz. Sizning mamnunligingiz biz uchun eng muhimi."
+            },
             "your_package": "Sizning paketingiz",
             "your_package_desc": "O'zingizga mos xizmatlarni tanlang.",
             "selected_services_title": "Tanlangan xizmatlar",
@@ -796,15 +804,7 @@
             "currency": "so'm",
             "recommended": "Tavsiya etiladi",
             "benefit_prefix": "Foydasi:",
-            "features": "Nimalar kiradi",
-            "namingGuarantee": {
-                "title": "Sizga yoqadigan Neyming yoki pulingizni 100% qaytarib beramiz",
-                "description": "Biz ishimizning sifatiga shunchalik ishonamizki, agar sizga taqdim etilgan dastlabki nom variantlari yoqmasa, biz to'lovni to'liq, hech qanday savollarsiz qaytarib beramiz."
-            },
-            "designGuarantee": {
-                "title": "Sizga yoqadigan Dizayn yoki pulingizni 100% qaytarib beramiz",
-                "description": "Agar siz dastlabki logotip va firma uslubi konsepsiyalaridan mamnun bo'lmasangiz, biz to'lovingizni to'liq qaytarib beramiz. Sizning mamnunligingiz biz uchun eng muhimi."
-            }
+            "features": "Nimalar kiradi"
         },
         "comparison": {
             "title": "Biz va Raqobatchilar",

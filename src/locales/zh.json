@@ -763,6 +763,14 @@
             },
             "discount_alert_title": "套餐折扣！",
             "discount_alert_desc": "从此部分选择<strong>2个或更多</strong>服务，即可享受总金额<strong>-20%的折扣</strong>！",
+            "namingGuarantee": {
+                "title": "您会爱上的命名，否则100%退款",
+                "description": "我们对我们的工作质量非常有信心，如果您不喜欢最初提供的名称选项，我们将毫无疑问地全额退款。"
+            },
+            "designGuarantee": {
+                "title": "您会爱上的设计，否则100%退款",
+                "description": "如果您对最初的标志和企业形象概念不满意，我们将全额退款。您的满意是我们的首要任务。"
+            },
             "your_package": "您的套餐",
             "your_package_desc": "选择适合您的服务。",
             "selected_services_title": "已选服务",
@@ -796,15 +804,7 @@
             "currency": "苏姆",
             "recommended": "推荐",
             "benefit_prefix": "好处：",
-            "features": "包含内容",
-            "namingGuarantee": {
-                "title": "您会爱上的命名，否则100%退款",
-                "description": "我们对我们的工作质量非常有信心，如果您不喜欢最初提供的名称选项，我们将毫无疑问地全额退款。"
-            },
-            "designGuarantee": {
-                "title": "您会爱上的设计，否则100%退款",
-                "description": "如果您对最初的标志和企业形象概念不满意，我们将全额退款。您的满意是我们的首要任务。"
-            }
+            "features": "包含内容"
         },
         "comparison": {
             "title": "我们与竞争对手",
