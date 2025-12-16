@@ -61,7 +61,7 @@ const KnobToggle = ({ isOn, onToggle }: { isOn: boolean, onToggle: (value: boole
         <motion.div
             className={cn(
                 "w-12 h-8 flex items-center p-1 rounded-full cursor-pointer transition-colors",
-                isOn ? "bg-primary" : "bg-white/10"
+                isOn ? "bg-accent" : "bg-white/10"
             )}
             onClick={() => onToggle(!isOn)}
         >
@@ -74,7 +74,7 @@ const KnobToggle = ({ isOn, onToggle }: { isOn: boolean, onToggle: (value: boole
                 style={{ x }}
                 onDragEnd={() => onToggle(x.get() > 10)}
             >
-                {isOn && <Check className="w-4 h-4 text-primary" />}
+                {isOn && <Check className="w-4 h-4 text-accent" />}
             </motion.div>
         </motion.div>
     );
