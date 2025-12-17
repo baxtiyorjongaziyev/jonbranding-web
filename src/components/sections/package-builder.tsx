@@ -17,6 +17,7 @@ import { motion, useMotionValue, useMotionTemplate } from 'framer-motion';
 import PopularPackages from './popular-packages';
 import { event as gtagEvent } from '@/lib/gtag';
 import DiscountSelector from '@/components/ui/DiscountSelector';
+import GuaranteeBlock from '../ui/GuaranteeBlock';
 
 
 interface PackageBuilderProps {
@@ -276,22 +277,6 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
         </div>
     );
 };
-
-const GuaranteeBlock = ({ title, description, icon: Icon }: { title: string, description: string, icon: React.ElementType }) => (
-    <div className="mt-12">
-        <Card className="max-w-2xl mx-auto bg-green-50 border-green-200 p-6 rounded-2xl shadow-sm">
-            <div className="flex items-center gap-4">
-                <div className="bg-green-100 p-3 rounded-full">
-                    <Icon className="w-6 h-6 text-green-700" />
-                </div>
-                <div>
-                    <h4 className="font-bold text-green-800">{title}</h4>
-                    <p className="text-green-700">{description}</p>
-                </div>
-            </div>
-        </Card>
-    </div>
-);
 
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
@@ -556,8 +541,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                              />
                                          ))}
                                      </ServiceGroup>
-                                     {isNaming && <GuaranteeBlock title={translations.namingGuarantee.title} description={translations.namingGuarantee.description} icon={ShieldCheck} />}
-                                     {isIdentity && <GuaranteeBlock title={translations.designGuarantee.title} description={translations.designGuarantee.description} icon={ShieldCheck} />}
+                                     {isNaming && <GuaranteeBlock dictionary={translations.namingGuarantee} />}
+                                     {isIdentity && <GuaranteeBlock dictionary={translations.designGuarantee} />}
                                  </React.Fragment>
                              );
                          })}
@@ -603,7 +588,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             {/* Left Column: Selected Services & Discounts */}
                             <div>
                                 <CardHeader className="p-0 text-left mb-6">
-                                    <CardTitle className="text-2xl font-bold text-white">{translations.your_package}</CardTitle>
+                                    <CardTitle className="text-xl font-bold text-white">{translations.your_package}</CardTitle>
                                     <p className="text-blue-200 text-sm mt-1">{translations.your_package_desc}</p>
                                 </CardHeader>
                                 <CardContent className="p-0">
@@ -617,7 +602,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                         <div key={key} className="flex justify-between items-center text-lg animate-fade-in group">
                                                             <span className="text-white flex-1 pr-2">{service.label}</span>
                                                             <div className="flex items-center gap-2">
-                                                                <span className="font-mono text-gray-300 font-semibold">
+                                                                <span className="font-semibold font-mono text-gray-300">
                                                                     {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}` : service.note}
                                                                 </span>
                                                             </div>

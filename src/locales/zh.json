@@ -764,11 +764,11 @@
             "discount_alert_title": "套餐折扣！",
             "discount_alert_desc": "从此部分选择<strong>2个或更多</strong>服务，即可享受总金额<strong>-20%的折扣</strong>！",
             "namingGuarantee": {
-                "title": "您会爱上的命名，否则100%退款",
+                "title": "100% 退款保证",
                 "description": "我们对我们的工作质量非常有信心，如果您不喜欢最初提供的名称选项，我们将毫无疑问地全额退款。"
             },
             "designGuarantee": {
-                "title": "您会爱上的设计，否则100%退款",
+                "title": "100% 退款保证",
                 "description": "如果您对最初的标志和企业形象概念不满意，我们将全额退款。您的满意是我们的首要任务。"
             },
             "your_package": "您的套餐",
