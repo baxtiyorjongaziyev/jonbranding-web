@@ -318,7 +318,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
     
-    const [discountOption, setDiscountOption] = useLocalStorage<DiscountOption>('discountOption', 'package');
+    const [discountOption, setDiscountOption] = useLocalStorage<DiscountOption>('package');
     const [isClient, setIsClient] = useState(false);
     const [currency, setCurrency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
 
@@ -609,15 +609,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 <CardContent className="p-0">
                                    {selectedServiceKeys.length > 0 ? (
                                         <div className="space-y-4">
-                                            <h4 className="font-semibold text-white">{translations.selected_services_title}</h4>
+                                            <h4 className="font-bold text-white text-lg">{translations.selected_services_title}</h4>
                                             <div className="space-y-2">
                                                 {selectedServiceKeys.map((key) => {
                                                     const service = serviceDetails[key];
                                                     return (
-                                                        <div key={key} className="flex justify-between items-center text-base animate-fade-in group">
+                                                        <div key={key} className="flex justify-between items-center text-lg animate-fade-in group">
                                                             <span className="text-white flex-1 pr-2">{service.label}</span>
                                                             <div className="flex items-center gap-2">
-                                                                <span className="font-mono text-gray-300">
+                                                                <span className="font-mono text-gray-300 font-semibold">
                                                                     {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}` : service.note}
                                                                 </span>
                                                             </div>
@@ -711,4 +711,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 
 export default PackageBuilder;
 
-    
