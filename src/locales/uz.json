@@ -535,7 +535,7 @@
         },
         "title": "Brend strategiyasi",
         "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesning o'sishiga yordam beradigan aniq g'oyadir.",
-        "section1_title": "Brend strategiyasi — bu biznes o'sish vositasidir",
+        "section1_title": "Brend strategiyasi — bu biznes o'sish vositasi",
         "section1_p1": "Har bir shuhratparast kompaniyaning o'z maqsadlari bor. Kimdir uchun bu ma'lum bir bozor ulushini egallash bo'lsa, boshqalar uchun bu brend taniluvchanligi, yangi hududlarga kengayish va hokazo.",
         "section1_p2": "Brend strategiyasi — bu kompaniyaga ushbu maqsadlarga erishishda yordam beradigan, shunchaki tovar yoki xizmat emas, balki undan kattaroq narsaga — o'z mijozlari va xaridorlarining hayotining bir qismiga, taniladigan obraz tashuvchisiga aylanishiga yordam beradigan narsadir.",
         "section1_p3": "Eng muhimi, bu marketing xarajatlarini tizimlashtirishga, kompaniyaning pozitsiyasini qo'llab-quvvatlamaydigan va shuning uchun xarajatlarni oqlamaydigan vositalar, kanallar va g'oyalardan voz kechishga imkon beradi.",
@@ -764,11 +764,11 @@
             "discount_alert_title": "Paketli Chegirma!",
             "discount_alert_desc": "Ushbu bo'limdan <strong>2 yoki undan ortiq</strong> xizmatni tanlang va umumiy summadan <strong>-20% chegirma</strong> oling!",
             "namingGuarantee": {
-                "title": "Sizga yoqadigan Neyming yoki pulingizni 100% qaytarib beramiz",
+                "title": "100% TO'LOVNI QAYTARISH KAFOLATI",
                 "description": "Biz ishimizning sifatiga shunchalik ishonamizki, agar sizga taqdim etilgan dastlabki nom variantlari yoqmasa, biz to'lovni to'liq, hech qanday savollarsiz qaytarib beramiz."
             },
             "designGuarantee": {
-                "title": "Sizga yoqadigan Dizayn yoki pulingizni 100% qaytarib beramiz",
+                "title": "100% TO'LOVNI QAYTARISH KAFOLATI",
                 "description": "Agar siz dastlabki logotip va firma uslubi konsepsiyalaridan mamnun bo'lmasangiz, biz to'lovingizni to'liq qaytarib beramiz. Sizning mamnunligingiz biz uchun eng muhimi."
             },
             "your_package": "Sizning paketingiz",
