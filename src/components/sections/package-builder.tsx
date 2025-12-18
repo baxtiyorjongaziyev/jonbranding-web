@@ -15,7 +15,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { motion, useMotionValue, useMotionTemplate } from 'framer-motion';
 import PopularPackages from './popular-packages';
 import { event as gtagEvent } from '@/lib/gtag';
-import DiscountSelector from '@/components/ui/DiscountSelector';
+import DiscountSelector, { type DiscountOption } from '@/components/ui/DiscountSelector';
 import GuaranteeBlock from '../ui/GuaranteeBlock';
 
 
@@ -287,8 +287,6 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
     </div>
 );
 
-type DiscountOption = 'none' | 'package' | 'full';
-
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as 'uz' | 'ru' | 'en' | 'zh');
@@ -302,7 +300,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
     
-    const [discountOption, setDiscountOption] = useLocalStorage<DiscountOption>('package');
+    const [discountOption, setDiscountOption] = useLocalStorage<DiscountOption>('discountOption', 'none');
     const [isClient, setIsClient] = useState(false);
     const [currency, setCurrency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
 
@@ -319,6 +317,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled }, lang as 'uz' | 'ru' | 'en' | 'zh');
             setTotal(result);
             
+            if (!result.canApplyPackageDiscount && discountOption === 'package') {
+                setDiscountOption('none');
+            }
+
             const justAppliedDiscount = result.discountApplied.length > 0 && !hasDiscountBeenApplied;
             if (justAppliedDiscount) {
                  confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: ['#00C9FD', '#ADFFFE', '#FFFFFF', '#050583'] });
@@ -327,11 +329,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             if(result.discountApplied.length === 0 && hasDiscountBeenApplied) {
                 setHasDiscountBeenApplied(false);
             }
-             if (!result.canApplyPackageDiscount && (discountOption === 'package' || discountOption === 'full')) {
-               // setDiscountOption('none');
-            }
         }
-    }, [selectedServices, discountOption, isClient, hasDiscountBeenApplied, lang]);
+    }, [selectedServices, discountOption, isClient, hasDiscountBeenApplied, lang, setDiscountOption]);
 
     const trackGtagEvent = (serviceId: keyof SelectedServices, isSelected: boolean) => {
         const service = serviceDetails[serviceId];
@@ -439,10 +438,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         onOrderNow();
     }
     
-     const discountDictionary = {
-        package: translations.discountSelector.package_desc,
-        full: translations.discountSelector.full_desc,
-    };
+     const discountDictionary = translations.discountSelector;
+     
+     const availableDiscountOptions: DiscountOption[] = ['none', 'full'];
+     if (total.canApplyPackageDiscount) {
+        availableDiscountOptions.splice(1, 0, 'package');
+     }
     
 
     return (
@@ -656,15 +657,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             <span>{d.name}</span>
                                             <span className="font-mono">- {formatPrice(d.value, lang, currency)}</span>
                                         </div>
-                                         {d.isPackageDiscount && discountOption === 'package' && (
-                                            <p className="text-xs text-green-400/80 pl-1">{discountDictionary.package}</p>
-                                        )}
-                                        {d.isPackageDiscount && discountOption === 'full' && (
-                                            <p className="text-xs text-green-400/80 pl-1">{discountDictionary.package}</p>
-                                        )}
-                                        {!d.isPackageDiscount && discountOption === 'full' && (
-                                            <p className="text-xs text-green-400/80 pl-1">{discountDictionary.full}</p>
-                                        )}
                                     </div>
                                 ))}
 
@@ -687,7 +679,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                      <DiscountSelector 
                                          selectedOption={discountOption}
                                          onSelectOption={setDiscountOption}
-                                         canApplyPackageDiscount={total.canApplyPackageDiscount}
+                                         availableOptions={availableDiscountOptions}
                                          dictionary={translations.discountSelector}
                                      />
                                 </div>
