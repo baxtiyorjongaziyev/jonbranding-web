@@ -803,7 +803,10 @@
             "discountSelector": {
                 "none": "No discount",
                 "package": "Package (-20%)",
-                "full": "Full payment (-28%)"
+                "full": "Full payment (-28%)",
+                "none_desc": "No discounts applied. Standard price.",
+                "package_desc": "When 2 or more main services are selected, a -20% discount is applied to the total sum of those services.",
+                "full_desc": "In addition to the package discount, if you pay the full amount upfront, you get an additional -10% discount. Your total savings will be -28%."
             }
         },
         "comparison": {

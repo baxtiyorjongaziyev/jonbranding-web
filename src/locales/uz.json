@@ -802,7 +802,10 @@
             "discountSelector": {
                 "none": "Chegirmasiz",
                 "package": "Paketli (-20%)",
-                "full": "To'liq to'lov (-28%)"
+                "full": "To'liq to'lov (-28%)",
+                "none_desc": "Hech qanday chegirmalar qo'llanilmaydi. Standart narx.",
+                "package_desc": "2 yoki undan ortiq asosiy xizmat tanlaganda, shu xizmatlar umumiy summasiga -20% chegirma beriladi.",
+                "full_desc": "Paketli chegirmaga qo'shimcha ravishda, umumiy summani oldindan to'lasangiz, yana -10% chegirma qo'llaniladi. Umumiy tejamingiz -28% bo'ladi."
             }
         },
         "comparison": {
