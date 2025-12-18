@@ -327,6 +327,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             if(result.discountApplied.length === 0 && hasDiscountBeenApplied) {
                 setHasDiscountBeenApplied(false);
             }
+             if (!result.canApplyPackageDiscount && (discountOption === 'package' || discountOption === 'full')) {
+               // setDiscountOption('none');
+            }
         }
     }, [selectedServices, discountOption, isClient, hasDiscountBeenApplied, lang]);
 
@@ -435,6 +438,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         localStorage.setItem('isPackageDiscountEnabled', JSON.stringify(discountOption === 'package' || discountOption === 'full'));
         onOrderNow();
     }
+    
+     const discountDictionary = {
+        package: translations.discountSelector.package_desc,
+        full: translations.discountSelector.full_desc,
+    };
+    
 
     return (
         <>
@@ -580,7 +589,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 <div className="container mx-auto px-4">
                     <Card id="your-package-card" className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                            {/* Left Column: Selected Services & Discounts */}
+                            {/* Left Column: Selected Services */}
                             <div>
                                 <CardHeader className="p-0 text-left mb-6">
                                     <CardTitle className="text-xl font-bold text-white">{translations.your_package}</CardTitle>
@@ -598,7 +607,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                             <span className="text-white flex-1 pr-2">{service.label}</span>
                                                             <div className="flex items-center gap-2">
                                                                 <span className="font-semibold font-mono text-gray-300">
-                                                                    {service.price > 0 ? `${formatPrice(service.price, lang as 'uz' | 'ru' | 'en' | 'zh', currency, false)}` : service.note}
+                                                                    {service.price > 0 ? `${formatPrice(service.price, lang, currency, false)}` : service.note}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -630,30 +639,49 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 {total.base > 0 && (
                                     <div className="flex justify-between items-baseline text-base">
                                         <span className="text-blue-200">{translations.base_price}</span>
-                                        <div className="text-lg font-mono">{formatPrice(total.base, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</div>
+                                        <div className="text-lg font-mono">{formatPrice(total.base, lang, currency)}</div>
                                     </div>
                                 )}
+
                                 {total.surcharges.map(s => (
                                     <div key={s.name} className="flex justify-between items-center text-base text-amber-300">
                                         <span>{s.name}</span>
-                                        <span className="font-mono">+ {formatPrice(s.value, lang as 'uz' | 'ru' | 'en' | 'zh', currency)}</span>
+                                        <span className="font-mono">+ {formatPrice(s.value, lang, currency)}</span>
                                     </div>
                                 ))}
-                                
+
+                                {total.discountApplied.map(d => (
+                                    <div key={d.name} className="space-y-1">
+                                        <div className="flex justify-between items-baseline text-base text-green-300">
+                                            <span>{d.name}</span>
+                                            <span className="font-mono">- {formatPrice(d.value, lang, currency)}</span>
+                                        </div>
+                                         {d.isPackageDiscount && discountOption === 'package' && (
+                                            <p className="text-xs text-green-400/80 pl-1">{discountDictionary.package}</p>
+                                        )}
+                                        {d.isPackageDiscount && discountOption === 'full' && (
+                                            <p className="text-xs text-green-400/80 pl-1">{discountDictionary.package}</p>
+                                        )}
+                                        {!d.isPackageDiscount && discountOption === 'full' && (
+                                            <p className="text-xs text-green-400/80 pl-1">{discountDictionary.full}</p>
+                                        )}
+                                    </div>
+                                ))}
+
+                                {total.savings > 0 && (
+                                    <div className="bg-green-500/10 p-2 rounded-lg text-center text-sm font-semibold text-green-300 mt-2">
+                                        {translations.total_savings}: {formatPrice(total.savings, lang, currency)}
+                                    </div>
+                                )}
+
                                 <div className="pt-4 border-t border-white/10">
                                      <div className="flex justify-between items-baseline text-white">
                                         <span className="text-lg font-semibold">{translations.final_price}</span>
                                         <p className="text-4xl sm:text-5xl font-bold tracking-tight">
-                                            {total.final > 0 ? formatPrice(total.final, lang as 'uz' | 'ru' | 'en' | 'zh', currency) : translations.agreed_price}
+                                            {total.final > 0 ? formatPrice(total.final, lang, currency) : translations.agreed_price}
                                         </p>
                                     </div>
                                 </div>
-                                
-                                {total.savings > 0 && (
-                                    <div className="bg-green-500/10 p-2 rounded-lg text-center text-sm font-semibold text-green-300">
-                                        {translations.total_savings}: {formatPrice(total.savings, lang, currency)}
-                                    </div>
-                                )}
                                 
                                 <div className="pt-4 border-t border-white/10">
                                      <DiscountSelector 
@@ -690,5 +718,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
-
-    
