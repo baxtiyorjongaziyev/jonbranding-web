@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -125,7 +124,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
         mouseX.set(clientX - left);
         mouseY.set(clientY - top);
     }
-
+    
     const selectButton = (
         <Button
             className={cn(
@@ -152,7 +151,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
             )}
         </Button>
     );
-    
+
     const cardContent = (
         <>
             {(isPremium || isVip) && !selected && (
@@ -319,11 +318,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
             const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled }, lang as 'uz' | 'ru' | 'en' | 'zh');
             setTotal(result);
-
-            if (!result.canApplyPackageDiscount && discountOption !== 'none') {
-                setDiscountOption('none');
-            }
-
+            
             const justAppliedDiscount = result.discountApplied.length > 0 && !hasDiscountBeenApplied;
             if (justAppliedDiscount) {
                  confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: ['#00C9FD', '#ADFFFE', '#FFFFFF', '#050583'] });
@@ -333,7 +328,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 setHasDiscountBeenApplied(false);
             }
         }
-    }, [selectedServices, discountOption, isClient, hasDiscountBeenApplied, lang, setDiscountOption]);
+    }, [selectedServices, discountOption, isClient, hasDiscountBeenApplied, lang]);
 
     const trackGtagEvent = (serviceId: keyof SelectedServices, isSelected: boolean) => {
         const service = serviceDetails[serviceId];
@@ -696,3 +691,4 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 
 export default PackageBuilder;
 
+    
