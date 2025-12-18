@@ -313,13 +313,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         if (isClient) {
             const wantsUpfrontPayment = discountOption === 'full';
             const isPackageDiscountEnabled = discountOption === 'package' || discountOption === 'full';
-
+            
             const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled }, lang as 'uz' | 'ru' | 'en' | 'zh');
             setTotal(result);
-            
-            if (!result.canApplyPackageDiscount && discountOption === 'package') {
-                setDiscountOption('none');
-            }
 
             const justAppliedDiscount = result.discountApplied.length > 0 && !hasDiscountBeenApplied;
             if (justAppliedDiscount) {
@@ -330,7 +326,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 setHasDiscountBeenApplied(false);
             }
         }
-    }, [selectedServices, discountOption, isClient, hasDiscountBeenApplied, lang, setDiscountOption]);
+    }, [selectedServices, discountOption, isClient, lang, hasDiscountBeenApplied]);
 
     const trackGtagEvent = (serviceId: keyof SelectedServices, isSelected: boolean) => {
         const service = serviceDetails[serviceId];
@@ -347,7 +343,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             });
             if (!isSelected) {
                 if (typeof window.gtag === 'function') {
-                    window.gtag('event', 'conversion', {'send_to': 'AW-17674872079/Kcy8CN3cvbgbEI_KhOxB'});
+                    window.gtag('event', 'conversion', {'send_to': 'AW-17674872079/Kcy8CN3cvcvbgbEI_KhOxB'});
                 }
             }
         }
@@ -593,7 +589,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             {/* Left Column: Selected Services */}
                             <div>
                                 <CardHeader className="p-0 text-left mb-6">
-                                    <CardTitle className="text-xl font-bold text-white">{translations.your_package}</CardTitle>
+                                    <CardTitle className="text-2xl font-bold text-white">{translations.your_package}</CardTitle>
                                     <p className="text-blue-200 text-sm mt-1">{translations.your_package_desc}</p>
                                 </CardHeader>
                                 <CardContent className="p-0">
@@ -652,11 +648,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 ))}
 
                                 {total.discountApplied.map(d => (
-                                    <div key={d.name} className="space-y-1">
+                                     <div key={d.name} className="space-y-1">
                                         <div className="flex justify-between items-baseline text-base text-green-300">
                                             <span>{d.name}</span>
                                             <span className="font-mono">- {formatPrice(d.value, lang, currency)}</span>
                                         </div>
+                                         {d.isPackageDiscount && (
+                                            <p className="text-xs text-green-400/80">{translations.discountSelector.package_desc}</p>
+                                        )}
+                                        {d.name.includes('10%') && (
+                                            <p className="text-xs text-green-400/80">{translations.discountSelector.full_desc}</p>
+                                        )}
                                     </div>
                                 ))}
 
@@ -710,3 +712,5 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
+
+    
