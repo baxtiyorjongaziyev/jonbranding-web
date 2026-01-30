@@ -1,4 +1,3 @@
-
 {
     "header": {
         "portfolio": "Portfolio",
@@ -65,7 +64,7 @@
             "keywords": "brandbook, guideline, corporate identity, brand design, logo usage rules, branding agency"
         },
         "title": "Brandbook Development",
-        "subtitle": "A brandbook is not just a document with logos, it is the constitution of your brand, which ensures its consistency and integrity.",
+        "subtitle": "Brandbook is not just a document with logos, it is the constitution of your brand, which ensures its consistency and integrity.",
         "section1_title": "Why does every business need a brandbook?",
         "section1_p1": "A brandbook is a key tool for managing a brand. It clearly defines all the rules for using the visual and ideological elements of your company - from the logo and colors to the tone of communication.",
         "section1_p2": "This document helps to avoid chaos in marketing, ensures brand recognition, and saves time and money when working with designers, marketers, and other contractors.",
@@ -532,7 +531,7 @@
     "brandStrategyPage": {
         "metadata": {
             "title": "Brand Strategy and Platform | Jon.Branding Agency Tashkent",
-            "description": "A brand strategy is a business growth tool. Turn your brand from just beautiful into a working system with our branding agency in Tashkent. We develop brand platforms and strategies."
+            "description": "Brand strategy is a business growth tool. Turn your brand from just beautiful into a working system with our branding agency in Tashkent. We develop brand platforms and strategies."
         },
         "title": "Brand Strategy",
         "subtitle": "A strong brand is a clear idea that inspires, unites, and helps a business grow.",
@@ -585,7 +584,7 @@
     "logoDesignPage": {
         "metadata": {
             "title": "Professional Logo Design Services | Jon.Branding Agency Uzbekistan",
-            "description": "A logo is the face of your business. Our logo design agency in Uzbekistan creates unique, memorable, and strategic logos that reflect the essence of your brand and help you stand out from the competition."
+            "description": "Logo is the face of your business. Our logo design agency in Uzbekistan creates unique, memorable and strategic logos that reflect your brand essence and help you stand out from the competition."
         },
         "title": "Logo Design",
         "subtitle": "A logo is more than just a picture; it's a strategic tool, the face of your business, and the first impression you make.",
@@ -672,6 +671,7 @@
                 { "value": "ha", "label": "Enabled" },
                 { "value": "yoq", "label": "Disabled" }
             ],
+            "expertCheckLabelShort": "Expert+",
             "activityLabel": "Types of Activity (optional)",
             "activityPlaceholder": "e.g., design, construction, clothing production...",
             "activityHelp": "This helps in determining the classes.",
@@ -683,7 +683,6 @@
             "totalCostTitle": "Estimated total cost for a 10-year patent",
             "currency": "sum",
             "classLabel": "class",
-            "expertCheckLabelShort": "Expert+",
             "totalCostNote": "Includes all state fees and service charges",
             "step1Title": "Step 1 (Initial Payment)",
             "ourServiceFee": "Our Team's Service Fee",
@@ -800,6 +799,9 @@
             "recommended": "Recommended",
             "benefit_prefix": "Benefit:",
             "features": "What's included",
+            "promo_code_label": "Promo Code",
+            "promo_code_placeholder": "Enter code",
+            "promo_code_invalid": "Promo code invalid",
             "discountSelector": {
                 "none": "No discount",
                 "package": "Package (-20%)",

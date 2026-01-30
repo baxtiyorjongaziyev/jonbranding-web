@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -8,9 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice, packageDiscountThreshold } from '@/lib/pricing';
+import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, Clock, Crown, ArrowRight, PercentCircle, Check, ChevronsDown, Ticket } from 'lucide-react';
+import { Sparkles, ShoppingCart, CheckCircle, Crown, Check, ChevronsDown, Ticket, Clock, BrainCircuit, Search, Megaphone, PenTool, Shirt, Palette, Box, Type, Layers, BookMarked, ClipboardSignature, Info, Flame, ShieldCheck, PercentCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion, useMotionValue, useMotionTemplate } from 'framer-motion';
@@ -19,7 +18,6 @@ import { event as gtagEvent } from '@/lib/gtag';
 import DiscountSelector, { type DiscountOption } from '@/components/ui/DiscountSelector';
 import GuaranteeBlock from '../ui/GuaranteeBlock';
 
-
 interface PackageBuilderProps {
     onOrderNow: () => void;
     lang: string;
@@ -27,30 +25,30 @@ interface PackageBuilderProps {
 }
 
 const serviceIcons: { [key: string]: React.ElementType } = {
-    audit: require('lucide-react').Search,
-    namingCheck: require('lucide-react').ClipboardSignature,
-    consultation: require('lucide-react').Info,
-    strategy: require('lucide-react').BrainCircuit,
-    commStrategy: require('lucide-react').Megaphone,
-    smm: require('lucide-react').PenTool,
-    merch: require('lucide-react').Shirt,
-    illustrations: require('lucide-react').Palette,
-    urgency: require('lucide-react').Flame,
-    nda: require('lucide-react').ShieldCheck,
-    packaging: require('lucide-react').Box,
-    namingStandard: require('lucide-react').Type,
-    namingPremium: require('lucide-react').Sparkles,
-    namingVIP: require('lucide-react').Crown,
-    logoStandard: require('lucide-react').Layers,
-    logoPremium: require('lucide-react').Palette,
-    logoVIP: require('lucide-react').BookMarked,
+    audit: Search,
+    namingCheck: ClipboardSignature,
+    consultation: Info,
+    strategy: BrainCircuit,
+    commStrategy: Megaphone,
+    smm: PenTool,
+    merch: Shirt,
+    illustrations: Palette,
+    urgency: Flame,
+    nda: ShieldCheck,
+    packaging: Box,
+    namingStandard: Type,
+    namingPremium: Sparkles,
+    namingVIP: Crown,
+    logoStandard: Layers,
+    logoPremium: Palette,
+    logoVIP: BookMarked,
 };
 
 const introIcons: { [key: string]: React.ElementType } = {
-    research: require('lucide-react').Search,
-    strategy: require('lucide-react').BrainCircuit,
-    identity: require('lucide-react').Paintbrush,
-    communication: require('lucide-react').Megaphone
+    research: Search,
+    strategy: BrainCircuit,
+    identity: Palette,
+    communication: Megaphone
 };
 
 const CurrencyToggle = ({ currency, onCurrencyChange }: { currency: 'uzs' | 'usd', onCurrencyChange: (c: 'uzs' | 'usd') => void }) => (
@@ -78,7 +76,7 @@ const CurrencyToggle = ({ currency, onCurrencyChange }: { currency: 'uzs' | 'usd
     </div>
 );
 
-const FeatureBenefitAccordion = ({ items, isVip, dictionary }: { items: { feature: string; benefit: string }[], isVip: boolean, dictionary: any }) => {
+const FeatureBenefitAccordion = ({ items, isVip }: { items: { feature: string; benefit: string }[], isVip: boolean }) => {
     if (!items || items.length === 0) return null;
 
     return (
@@ -95,7 +93,7 @@ const FeatureBenefitAccordion = ({ items, isVip, dictionary }: { items: { featur
                     </AccordionTrigger>
                     <AccordionContent className="px-3 pb-3 text-sm" onClick={(e) => e.stopPropagation()}>
                        <div className={cn("border-l-2 ml-5 pl-4 py-2", isVip ? "border-amber-400/50 text-amber-200" : "border-primary/50 text-primary-dark")}>
-                         <span className="font-bold">{dictionary.benefit_prefix}</span> {item.benefit}
+                         {item.benefit}
                        </div>
                     </AccordionContent>
                 </AccordionItem>
@@ -104,10 +102,12 @@ const FeatureBenefitAccordion = ({ items, isVip, dictionary }: { items: { featur
     );
 };
 
-
 const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en' | 'zh', dictionary: any, currency: 'uzs' | 'usd' }) => {
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
     if (!detail) return null;
 
     const { label, description, price, features, timeline, note, oldPrice, discount, recommended } = detail;
@@ -117,15 +117,12 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium') && !isVip;
 
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-
     function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
         const { left, top } = currentTarget.getBoundingClientRect();
         mouseX.set(clientX - left);
         mouseY.set(clientY - top);
     }
-    
+
     const selectButton = (
         <Button
             className={cn(
@@ -136,7 +133,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 isVip && !selected && "bg-white/10 hover:bg-white/20 text-white",
                 isVip && selected && "bg-amber-400 hover:bg-amber-500 text-black"
             )}
-            variant={selected ? (isVip ? 'default' : 'default') : 'secondary'}
+            variant={selected ? 'default' : 'secondary'}
             onClick={(e) => { e.stopPropagation(); onSelect(); }}
         >
             {selected ? (
@@ -179,7 +176,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     {features && features.length > 0 && (
                          <div>
                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                             <FeatureBenefitAccordion items={features} isVip={!!isVip} dictionary={dictionary} />
+                             <FeatureBenefitAccordion items={features} isVip={!!isVip} />
                          </div>
                     )}
                 </div>
@@ -248,7 +245,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     {features && features.length > 0 && (
                          <div>
                             <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                             <FeatureBenefitAccordion items={features} isVip={false} dictionary={dictionary} />
+                             <FeatureBenefitAccordion items={features} isVip={false} />
                          </div>
                     )}
                 </div>
@@ -277,7 +274,6 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
         </div>
     );
 };
-
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
     <div className="space-y-6">
@@ -336,10 +332,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         }
     }, [selectedServices, discountOption, isClient, lang, hasDiscountBeenApplied, promoCode]);
 
-    const trackGtagEvent = (serviceId: keyof SelectedServices, isSelected: boolean) => {
+    const handleServiceToggle = (serviceId: keyof SelectedServices) => {
+        const isCurrentlySelected = selectedServices[serviceId];
+        
         const service = serviceDetails[serviceId];
         if (service && service.price > 0) {
-            gtagEvent(isSelected ? 'remove_from_cart' : 'add_to_cart', {
+            gtagEvent(isCurrentlySelected ? 'remove_from_cart' : 'add_to_cart', {
                 currency: 'USD',
                 value: service.price,
                 items: [{
@@ -349,17 +347,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     quantity: 1
                 }]
             });
-            if (!isSelected) {
-                if (typeof window.gtag === 'function') {
-                    window.gtag('event', 'conversion', {'send_to': 'AW-17674872079/Kcy8CN3cvcvbgbEI_KhOxB'});
-                }
-            }
         }
-    };
-
-    const handleServiceToggle = (serviceId: keyof SelectedServices) => {
-        const isCurrentlySelected = selectedServices[serviceId];
-        trackGtagEvent(serviceId, isCurrentlySelected);
 
         const namingGroup: (keyof SelectedServices)[] = ['namingStandard', 'namingPremium', 'namingVIP'];
         const logoGroup: (keyof SelectedServices)[] = ['logoStandard', 'logoPremium', 'logoVIP'];
@@ -415,12 +403,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     };
 
     const handlePopularPackageSelect = () => {
-        const isNamingPremiumSelected = selectedServices['namingPremium'];
-        const isLogoPremiumSelected = selectedServices['logoPremium'];
-
-        if (!isNamingPremiumSelected) trackGtagEvent('namingPremium', false);
-        if (!isLogoPremiumSelected) trackGtagEvent('logoPremium', false);
-
         setSelectedServices(prev => ({
             ...prev,
             namingStandard: false,
@@ -443,13 +425,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         onOrderNow();
     }
     
-     const discountDictionary = translations.discountSelector;
-     
      const availableDiscountOptions: DiscountOption[] = ['none', 'full'];
      if (total.canApplyPackageDiscount) {
         availableDiscountOptions.splice(1, 0, 'package');
      }
-    
 
     return (
         <>
@@ -538,7 +517,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                              <PopularPackages lang={lang} onSelectPackage={handlePopularPackageSelect} />
                                          </div>
                                      )}
-                                     <ServiceGroup title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
+                                     <ServiceGroup title={translations.categories[group.titleKey]} gridCols={undefined}>
                                          {group.services.map((serviceId) => (
                                              <ServiceCard
                                                  key={serviceId}
@@ -595,7 +574,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 <div className="container mx-auto px-4">
                     <Card id="your-package-card" className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                            {/* Left Column: Selected Services */}
                             <div>
                                 <CardHeader className="p-0 text-left mb-6">
                                     <CardTitle className="text-2xl font-bold text-white">{translations.your_package}</CardTitle>
@@ -638,7 +616,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </CardContent>
                             </div>
 
-                             {/* Right Column: Cost Calculation & CTA */}
                              <div className="bg-black/20 p-6 rounded-2xl border border-white/10 space-y-4">
                                 <h4 className="font-semibold text-white text-lg">{translations.cost_calculation_title}</h4>
                                 
@@ -731,18 +708,5 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         </>
     );
 };
-
-
-const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.ElementType, title: string, description: string, className?: string }) => (
-    <div className={cn("bg-white/5 p-4 rounded-xl border border-white/10 flex items-start gap-4 text-left", className)}>
-        <div className="flex-shrink-0 text-accent p-2 rounded-lg mt-1">
-            {Icon && <Icon className="w-5 h-5" />}
-        </div>
-        <div className="flex-1">
-            <h5 className="font-semibold text-white">{title}</h5>
-            <p className="text-sm text-blue-200">{description}</p>
-        </div>
-    </div>
-);
 
 export default PackageBuilder;
