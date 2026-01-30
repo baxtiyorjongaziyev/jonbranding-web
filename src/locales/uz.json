@@ -1,4 +1,3 @@
-
 {
     "header": {
         "portfolio": "Portfolio",
@@ -249,7 +248,7 @@
         "services": [
             {
                 "id": "naming",
-                "title": "Neyming",
+                "title": "Naming",
                 "description": "Brend uchun unutilmas va kuchli nom tanlash.",
                 "buttonText": "Ko'proq o'qish"
             },
@@ -358,7 +357,7 @@
         "ctaButton": "Loyihani muhokama qilish"
     },
     "leadMagnet": {
-        "title": "Brendingizni yangi bosqichga olib chiqing",
+        "title": "Brendingingizni yangi bosqichga olib chiqing",
         "subtitle": "Biz bilan ishni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali manbalarni tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.",
         "magnets": [
           { "id": "pdf", "title": "Bepul PDF-Cheklist", "subtitle": "Brendingdagi 7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani qo'lga kiriting.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
@@ -515,7 +514,7 @@
             },
             "medium": {
                 "title": "Yaxshi potensial, lekin bo'shliqlar bor (9-12 ball)",
-                "description": "Sizda yaxshi poydevor bor, lekin brendingiz yanada kuchliroq va samaraliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldirib, biznesingizni yangi bosqichga olib chiqamiz."
+                "description": "Sizda yaxshi poydevor bor, lekin brendingiz yanada kuchliroq va samaraliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldirib, biznesingizni yeni bosqichga olib chiqamiz."
             },
             "good": {
                 "title": "Ajoyib! Brendingiz poydevori mustahkam (13-15 ball)",
@@ -538,7 +537,7 @@
         "section1_title": "Brend strategiyasi — bu biznes o'sish vositasi",
         "section1_p1": "Har bir shuhratparast kompaniyaning o'z maqsadlari bor. Kimdir uchun bu ma'lum bir bozor ulushini egallash bo'lsa, boshqalar uchun bu brend taniluvchanligi, yangi hududlarga kengayish va hokazo.",
         "section1_p2": "Brend strategiyasi — bu kompaniyaga ushbu maqsadlarga erishishda yordam beradigan, shunchaki tovar yoki xizmat emas, balki undan kattaroq narsaga — o'z mijozlari va xaridorlarining hayotining bir qismiga, taniladigan obraz tashuvchisiga aylanishiga yordam beradigan narsadir.",
-        "section1_p3": "Eng muhimi, bu marketing xarajatlarini tizimlashtirishga, kompaniyaning pozitsiyasini qo'llab-quvvatlamaydigan va shuning uchun xarajatlarni oqlamaydigan vositalar, kanallar va g'oyalardan voz kechishga imkon beradi.",
+        "section1_p3": "Most importantly, bu marketing xarajatlarini tizimlashtirishga, kompaniyaning pozitsiyasini qo'llab-quvvatlamaydigan va shuning uchun xarajatlarni oqlamaydigan vositalar, kanallar va g'oyalardan voz kechishga imkon beradi.",
         "section2_title": "Brend strategiyasi har qanday biznes uchun zarur",
         "section2_p1": "Brend strategiyasi ham yangi, ham uzoq vaqtdan beri mavjud bo'lgan kompaniyalar uchun zarur.",
         "section2_p2_bold": "Startaplar uchun,",
@@ -549,7 +548,7 @@
         "process_title": "Brending — bu jarayon",
         "process_subtitle": "Bizning agentligimizda brending shunchaki logotip yaratishdan ko'ra ko'proq narsa ekanligiga aminmiz. Brending — bu bir martalik vazifa emas, balki tsiklik jarayondir. Har bir bosqich o'zining asosiy rolini o'ynaydi va ulardan birini o'tkazib yuborish brendni va uning bozordagi o'rnini zaiflashtirishi mumkin. Ammo agar hamma narsa to'g'ri va izchil bajarilsa, brending biznesning o'sishiga yordam beradi va mahsulot ishlab chiqarishdan tortib marketinggacha bo'lgan ko'plab jarayonlarni boshqarishni osonlashtiradi.",
         "process_steps": [
-            { "title": "Tahlil va tadqiqot", "description": "Bu bozor, raqobatchilar va auditoriya haqidagi ma'lumotlar yig'iladigan birinchi va eng muhim bosqichdir. Busiz brendning o'ziga xosligini aniqlash va uning maqsadli auditoriyasini tushunish mumkin emas." },
+            { "title": "Tahlil va tadqiqot", "description": "Bu bozor, raqobatchilar va auditoriya haqidagi ma'lumotlar yig'iladigan birinchi va eng muhim bosqichdir. Busiz brending o'ziga xosligini aniqlash va uning maqsadli auditoriyasini tushunish mumkin emas." },
             { "title": "Brend platformasini shakllantirish", "description": "Bu yerda brendning missiyasi, qadriyatlari va noyob taklifi tug'iladi — bu uning xarakteri va ovozini belgilaydigan asosdir. Aniq platformasiz barcha keyingi harakatlar tarqoq va ishonchsiz bo'lish xavfi bor." },
             { "title": "Strategiya ishlab chiqish", "description": "Strategiya brendning auditoriya bilan qanday muloqot qilishi va qaysi kanallar orqali aloqa o'rnatishi haqidagi savolga javob beradi. Bu kommunikatsiyani tizimlashtiradi, uni maqsadli va samarali qiladi." },
             { "title": "Vizual identifikatsiya", "description": "Brend ma'nolarini vizual tilga o'tkazish — logotip, ranglar, shriftlar va grafik elementlar. Bu brendni taniladigan va raqobatchilardan farqli qiladi." },
@@ -570,7 +569,7 @@
         "section2_p1": "Bu faqat go'zallik haqida emas, balki samaradorlik, ma'no va nazorat haqida. Brend o'zining vizual obrazini rivojlantirishda ko'p qirrali va izchil bo'lib qolishini ta'minlash uchun grafik elementlar to'plamini yaratish kerak.",
         "section2_p2": "Bunday to'plam har doim biznesning vazifalari va imkoniyatlariga qarab individual tanlanadi. Minimal to'plam logotip, ranglar, shriftlar, fotosurat uslubi, reklama tashuvchilarining uslubi va yaxlit obrazni yaratuvchi boshqa elementlarni o'z ichiga oladi.",
         "section2_p3": "Vizual uslub aniq va izchil qurilganida, u brend obrazini va kommunikatsiyasini boshqarish uchun kuchli vositaga aylanadi. Uning barcha elementlari kelishilgan bo'lsa, brend professional, ishonchli va taniladigan sifatida idrok etiladi.",
-        "process_title": "Biz firma uslubini qanday yaratamiz?",
+        "process_title": "Biz firma uslubi qanday yaratamiz?",
         "process_subtitle": "Biz firma uslubini ishlab chiqishga tizimli yondashamiz, shunda har bir detal brendning tanilishi va uning strategiyasi uchun ishlaydi.",
         "process_steps": [
             { "title": "Tadqiqot va konsepsiya", "description": "Auditoriya, bozor, raqobatchilar va brendning o'rnini tahlil qilamiz. Vizual uslubda aks ettirilishi kerak bo'lgan asosiy ma'nolar va g'oyalarni aniqlaymiz." },
@@ -593,7 +592,7 @@
         "section1_p2": "U mijozlar sizni tanib olishi va eslab qolishiga yordam beradigan asosiy elementdir. Professional logotip ishonch hosil qiladi va hissiy aloqa o'rnatib, bir martalik xaridorlarni sodiq muxlislarga aylantiradi.",
         "values_title": "Yaxshi logotip quyidagicha bo'lishi kerak:",
         "values": [
-            { "title": "Simple and Memorable", "description": "Eng yaxshi logotiplar hatto kichik o'lchamda yoki uzoq masofadan ham oson taniladi va esda qoladi." },
+            { "title": "Oddiy va Esda qolarli", "description": "Eng yaxshi logotiplar hatto kichik o'lchamda yoki uzoq masofadan ham oson taniladi va esda qoladi." },
             { "title": "Noyob va Vaqtga bo'ysunmaydigan", "description": "U sizni raqobatchilardan ajratib turishi va bir necha yildan keyin modadan chiqib ketmasligi kerak." },
             { "title": "Strategik va Ma'noli", "description": "Har bir chiziq, rang va shakl biznesingizning xarakteri va maqsadlarini aks ettirishi kerak." }
         ],
@@ -621,7 +620,7 @@
         "section1_p2": "Biz neymingga brendingning muhim elementi sifatida yondashamiz. Bu tasodifiy g'oyalar to'plami emas, balki har bir so'z ma'noga ega bo'lgan puxta o'ylangan ishdir.",
         "section2_title": "Har bir kuchli nom g'oyadan boshlanadi",
         "section2_p1": "Nom qidirishdan oldin biz asosiy savolni beramiz: bu brend nima haqida? U qanday his-tuyg'ular va obrazlarni uyg'otishi kerak? Shu sababli biz mahsulotni, uning auditoriyasini va muhitini diqqat bilan tahlil qilamiz, ideal nomni topish uchun semantik yo'nalishlarni aniqlaymiz.",
-        "section2_p2": "U hissiyot, metafora, madaniy kod, professional til yoki hatto so'z o'yiniga qurilishi mumkin. Asosiysi, u ishlashi, mohiyatni yetkazishi va brendning esda qolishiga yordam berishi kerak.",
+        "section2_p2": "U hissiyot, metafora, madaniy kod, professional til yoki hatto so'z o'yiniga qurilishi mumkin. Asosiysi, u ishlashi, mohiyatni yetkazishi va brending esda qolishiga yordam berishi kerak.",
         "process_title": "Biz nomni qanday yaratamiz?",
         "process_subtitle": "Bizning agentligimizda neymingni ishlab chiqish har bir bosqichi muhim bo'lgan aniq jarayondir:",
         "process_steps": [
@@ -723,7 +722,7 @@
         "subtitle": "Yuqori raqobat sharoitida qadoq ko'pincha asosiy marketing vositasiga aylanadi. U brendni javonda ajratib turadi, uning tarixini aytib beradi va birinchi qarashdayoq auditoriya bilan aloqa o'rnatadi.",
         "section1_title": "Qadoq — bu brend identifikatsiyasining tashuvchisidan ko'prog'i",
         "section1_p1": "Qadoq — bu sotuv nuqtalarida brend bilan birinchi aloqa, mahsulot haqida bir zumda taassurot yaratadigan vizual murojaat. Ko'p hollarda aynan qadoq odamning sotib olish qarorini belgilaydi.",
-        "section1_p2": "Bizning agentligimizning maqsadi — nafaqat estetik va chiroyli qadoq yaratish, balki biznes vazifalariga javob beradigan va uning o'sishiga hissa qo'shadigan samarali vosita yaratishdir.",
+        "section1_p2": "Bizning agentligimizning maqsadi — nafaqat estetik va chiroyli qadoq yaratish, bali biznes vazifalariga javob beradigan va uning o'sishiga hissa qo'shadigan samarali vosita yaratishdir.",
         "process_title": "Biz qadoqni qanday yaratamiz?",
         "process_subtitle": "Biz qadoqni ishlab chiqishga alohida dizayn sifatida emas, balki biznes uchun ishlashi va auditoriya kutganlariga javob berishi kerak bo'lgan murakkab tizim sifatida yondashamiz. Bizning jarayonimiz bir nechta asosiy bosqichlarni o'z ichiga oladi:",
         "process_steps": [
@@ -800,7 +799,7 @@
             "benefit_prefix": "Foydasi:",
             "features": "Nimalar kiradi",
             "promo_code_label": "Promokod",
-            "promo_code_placeholder": "Kodni kiriting (masalan: PCG)",
+            "promo_code_placeholder": "Kodni kiriting",
             "promo_code_invalid": "Promokod noto'g'ri",
             "discountSelector": {
                 "none": "Chegirmasiz",
