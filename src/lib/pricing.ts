@@ -1,3 +1,4 @@
+'use client';
 
 const USD_TO_UZS_RATE = 12700;
 
@@ -253,338 +254,65 @@ const uzServiceDetails = {
 
 const ruServiceDetails: typeof uzServiceDetails = JSON.parse(JSON.stringify(uzServiceDetails));
 Object.assign(ruServiceDetails, {
-    audit: { ...ruServiceDetails.audit, label: "Аудит логотипа", description: "Анализ существующего логотипа и рекомендации по улучшению.", features: [
-            { feature: "Анализ сильных и слабых сторон логотипа", benefit: "Вы точно узнаете, где нужно усилить ваш брендинг, не тратя деньги на догадки." },
-            { feature: "Анализ по сравнению с конкурентами", benefit: "Вы получите представление о том, как выделиться на рынке." },
-            { feature: "Конкретные рекомендации по улучшению и дорожная карта", benefit: "Ваши следующие шаги будут четкими и понятными, что сэкономит ваше время и ресурсы." }
-        ] },
-    namingCheck: { ...ruServiceDetails.namingCheck, label: "Проверка нейминга", description: "Проверка доступности имени бренда в базах данных Узбекистана и международных базах.", features: [
-            { feature: "Глубокая проверка по базе данных Узбекистана", benefit: "Вы будете уверены в юридической чистоте вашего имени на местном рынке и избежите проблем в будущем." },
-            { feature: "Проверка по международной базе WIPO", benefit: "Вы сохраните возможность расширения на международный уровень и предотвратите потенциальные юридические конфликты." },
-            { feature: "Проверка доступности в доменах и социальных сетях", benefit: "Выбранное вами имя не будет занято в интернете, и вы сможете без препятствий работать в маркетинге." },
-            { feature: "Юридическая консультация и оценка рисков", benefit: "Вы узнаете, на что следует обратить внимание в процессе патентования и минимизируете риски, связанные с вашим именем." }
-        ] },
-    consultation: { ...ruServiceDetails.consultation, label: "30-минутная консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга.", features: [
-            { feature: "Выявление проблем вашего бизнеса", benefit: "Вы выявите свою основную проблему и сможете сосредоточиться на ее решении, правильно распределив ресурсы." },
-            { feature: "Быстрые ответы на вопросы по брендингу", benefit: "Вместо двух-трех недель поиска вы получите четкие ответы за 30 минут, что позволит вам быстрее действовать." },
-            { feature: "Конкретные рекомендации по следующим шагам", benefit: "Вы будете знать, с чего начать свои действия, сэкономите свое время и избежите неверных решений." }
-        ] },
-    strategy: { ...ruServiceDetails.strategy, label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения.",
-        features: [
-            { feature: "Углубленный анализ рынка и конкурентов", benefit: "Вы будете точно знать свое место на рынке и получите четкую стратегию, чтобы выделиться среди конкурентов." },
-            { feature: "Сегментация целевой аудитории и создание психологического портрета", benefit: "Вы направите свой маркетинговый бюджет на конкретных клиентов, резко повысив его эффективность." },
-            { feature: "Платформа бренда (миссия, ценности, философия)", benefit: "Ваш бренд станет не просто продуктом, а идеей, которой клиенты доверяют и следуют." },
-            { feature: "Голос бренда (Tone of Voice) и стиль коммуникации", benefit: "Вы будете говорить с клиентами на их языке, устанавливая с ними прочную эмоциональную связь." },
-            { feature: "Позиционирование и Уникальное Торговое Предложение (УТП)", benefit: "Вы получите четкий и убедительный ответ на вопрос 'Почему именно вы?' в сознании клиентов." },
-            { feature: "Повествование (Storytelling)", benefit: "Связь между историей вашего бренда и вашими продуктами станет привлекательной и запоминающейся для клиентов." }
-        ]
-    },
-    commStrategy: { ...ruServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: [
-            { feature: "Уточнение голоса бренда (Tone of Voice) и создание руководства", benefit: "Ваш бренд будет иметь единый и узнаваемый 'голос' на всех каналах, что повысит доверие." },
-            { feature: "Разработка ключевых сообщений (Key Messages)", benefit: "Вы определите наиболее эффективные сообщения для каждого сегмента аудитории, что повысит конверсию." },
-            { feature: "Планирование и бюджетирование каналов коммуникации", benefit: "Вы направите свой маркетинговый бюджет на каналы, приносящие наибольший результат (социальные сети, PR, реклама)." },
-            { feature: "Направления контент-стратегии и рубрики", benefit: "Вы получите четкий план по созданию контента, который привлекает клиентов и превращает их в преданных поклонников." }
-        ] },
-    namingStandard: { ...ruServiceDetails.namingStandard, label: "Naming СТАНДАРТ", description: "Идеально для малого бизнеса и стартапов.", features: [
-            { feature: "3 коротких, звучных и запоминающихся названия", benefit: "Вы получите быстрый и качественный старт для вашего бренда." },
-            { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
-            { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
-            { feature: "Имена, которые легко написать и найти на слух", benefit: "Клиенты не ошибутся при поиске вас." }
-        ] },
-    namingPremium: { ...ruServiceDetails.namingPremium, label: "Naming ПРЕМИУМ", description: "Для среднего и развивающегося бизнеса.", features: [
-            { feature: "5 стратегических вариантов названий", benefit: "Названия будут не просто красивыми, а будут служить целям вашего бизнеса." },
-            { feature: "Фонетический и семантический анализ на нескольких языках", benefit: "Вы будете уверены, что ваше имя не будет иметь негативного значения на других языках при выходе на международный рынок." },
-            { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
-            { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
-            { feature: "Проверка пригодности к патентованию по 2 классам", benefit: "Вы будете уверены в юридической чистоте имени." },
-            { feature: "Бесплатный домен .uz на 5 лет", benefit: "Вы получите свой самый важный цифровой актив без дополнительных затрат." }
-        ] },
-    namingVIP: { ...ruServiceDetails.namingVIP, label: "Naming VIP", description: "Для крупных и международных проектов.", features: [
-            { feature: "10+ эксклюзивных вариантов названий и личный контроль арт-директора", benefit: "Вы получите высочайший уровень творческого подхода и опыта." },
-            { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
-            { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
-            { feature: "Глубокая проверка патентоспособности до 3 классов", benefit: "Вы достигнете максимальной юридической защиты и спокойствия." },
-            { feature: "10-летний бесплатный домен .uz", benefit: "Вы обеспечите свое долгосрочное цифровое будущее." },
-            { feature: "Помощь в подаче заявки на патент (госпошлина оплачивается отдельно)", benefit: "Мы облегчим для вас все сложные юридические процессы." }
-        ] },
-    logoStandard: { ...ruServiceDetails.logoStandard, label: "Logo СТАНДАРТ", description: "Для стартапов и тех, кому нужно быстрое решение.", features: [
-            { feature: "3 профессиональные концепции логотипа, основанные на стратегии вашего бренда", benefit: "Вы получите быструю и качественную визуальную основу для вашего бизнеса." },
-            { feature: "Демонстрация на 5+ реальных макетах", benefit: "Вы представите, как ваш логотип будет выглядеть в реальной жизни." },
-            { feature: "Мини-гайд по использованию логотипа", benefit: "Вы получите четкие инструкции по тому, где и как использовать логотип." },
-            { feature: "Готовый аватар для социальных сетей", benefit: "Ваш бренд сразу будет выглядеть профессионально на цифровых платформах." },
-            { feature: "Все необходимые форматы файлов логотипа (AI, EPS, PNG, PDF)", benefit: "Вы сможете использовать логотип в любом месте без потери качества." }
-        ] },
-    logoPremium: { ...ruServiceDetails.logoPremium, label: "Logo+Фирменный стиль ПРЕМИУМ", description: "Для бизнесов, серьезно настроенных на развитие своего бренда.", features: [
-            { feature: "5 стратегических концепций логотипа", benefit: "У вас будет возможность выбрать наиболее совершенное визуальное решение для вашего бренда." },
-            { feature: "Визуальная метафора бренда", benefit: "Ваш логотип станет не просто картинкой, а знаком с глубоким смыслом и историей." },
-            { feature: "Фирменный стиль (цвета, шрифты)", benefit: "Ваш бренд будет иметь единый и профессиональный вид на всех точках контакта." },
-            { feature: "Краткое руководство по фирменному стилю (гайдлайн)", benefit: "Вы получите четкие правила по использованию элементов дизайна." },
-            { feature: "Демонстрация на 15+ реальных макетах", benefit: "Вы точно представите, как ваш логотип и стиль будут выглядеть в реальной жизни." },
-            { feature: "Все необходимые форматы файлов", benefit: "Вы сможете использовать логотип в любом размере и в любом месте без потери качества." }
-        ] },
-    logoVIP: { ...ruServiceDetails.logoVIP, label: "Logo+Фирменный стиль+Brandbook VIP", description: "Для полного выхода на рынок и максимального эффекта.", features: [
-            { feature: "7+ эксклюзивных концепций логотипа и личное участие арт-директора", benefit: "Вы получите высочайший уровень креативности и индивидуального подхода." },
-            { feature: "Полная система фирменного стиля", benefit: "Ваш бренд будет иметь единый и профессиональный вид на всех точках контакта." },
-            { feature: "Полный Брендбук (30-50 страниц)", benefit: "Вы получите 'конституцию' для управления вашим брендом, в которой собраны все правила и стандарты." },
-            { feature: "Набор персональных иллюстраций или иконок для бренда", benefit: "Ваш бренд получит собственный, не имеющий аналогов у конкурентов визуальный язык." },
-            { feature: "Демонстрация на 25+ реальных макетах", benefit: "Вы всесторонне представите, как будет выглядеть ваш бренд." },
-            { feature: "Набор шаблонов для социальных сетей", benefit: "Ваша маркетинговая команда сможет самостоятельно создавать контент в стиле бренда." },
-            { feature: "Все необходимые форматы файлов", benefit: "Вы сможете использовать логотип в любом размере и в любом месте без потери качества." }
-        ] },
-    packaging: { ...ruServiceDetails.packaging, label: "Дизайн упаковки", description: "Разработка упаковки для 3 SKU, подготовка к печати.", features: [
-            { feature: "Анализ рынка и конкурентов", benefit: "Вы найдете решение, которое обеспечит вашему продукту выделение на полке." },
-            { feature: "2 концепции дизайна", benefit: "Вы получите возможность выбрать наиболее подходящий стиль для вашего бренда." },
-            { feature: "Адаптация дизайна до 3 SKU (типов продукции)", benefit: "Вы получите единую и последовательную систему дизайна для всей вашей продуктовой линейки." },
-            { feature: "Готовые к печати файлы", benefit: "Вы достигнете качественного результата без каких-либо проблем в производстве." }
-        ] },
-    smm: { ...ruServiceDetails.smm, label: "Стиль для социальных сетей", description: "Оформление постов и сторис в фирменном стиле.", features: [
-            { feature: "6 шаблонов для постов", benefit: "Вы получите готовые дизайнерские решения для различных типов контента (продукт, акция, полезный совет)." },
-            { feature: "6 шаблонов для сторис", benefit: "Вы сохраните единый стиль вашего бренда и в формате сторис." },
-            { feature: "Аватар и обложки для актуального для профиля", benefit: "Ваш профиль приобретет профессиональный и привлекательный вид." },
-            { feature: "Руководство для Instagram", benefit: "Вы получите четкие инструкции по эффективному использованию шаблонов." }
-        ] },
-    merch: { ...ruServiceDetails.merch, label: "Брендированный мерч и носители", description: "Дизайн одежды, аксессуаров, POSM-материалов.", features: [
-            { feature: "Дизайн футболок, кепок, худи для сотрудников", benefit: "Вы укрепите корпоративный дух и чувство принадлежности к бренду в вашей команде." },
-            { feature: "Подарки для клиентов (блокноты, ручки, стаканы)", benefit: "Ваш бренд войдет в повседневную жизнь ваших клиентов и будет служить постоянным напоминанием." },
-            { feature: "POSM-материалы (флаеры, баннеры, стенды)", benefit: "Вы будете эффективно продвигать свой бренд в точках продаж и на мероприятиях." }
-        ] },
-    illustrations: { ...ruServiceDetails.illustrations, label: "Иллюстрации и анимация", description: "Создание фирменной графики, инфографики и анимаций.", features: [
-            { feature: "Набор уникальных иллюстраций для бренда", benefit: "Ваш бренд получит собственный, не имеющий аналогов у конкурентов визуальный язык." },
-            { feature: "Дизайн инфографики", benefit: "Вы будете доносить сложную информацию до вашей аудитории легко и интересно." },
-            { feature: "Анимация логотипа и элементов", benefit: "Вы сделаете свой бренд более живым и привлекающим внимание на цифровых платформах (сайт, социальные сети)." }
-        ] },
-    urgency: { ...ruServiceDetails.urgency, label: "Срочный проект (+50%)", description: "Проект выполняется вне очереди, в короткие сроки (2-3 дня).", features: [
-            { feature: "Начало работы вне очереди", benefit: "Проект становится главным приоритетом." },
-            { feature: "Сокращенные сроки", benefit: "Вы получите результаты значительно раньше стандартных сроков." }
-        ] },
-    nda: { ...ruServiceDetails.nda, label: "Договор о неразглашении (NDA) (+50%)", description: "Договор о неразглашении информации о проекте.", features: [
-            { feature: "Подписание юридически обязывающего документа", benefit: "Вы получите юридическую гарантию того, что информация о вашем проекте не будет раскрыта третьим лицам." },
-            { feature: "Полная конфиденциальность", benefit: "Наша команда не будет публиковать детали проекта нигде (портфолио, социальные сети)." }
-        ] }
+    audit: { ...ruServiceDetails.audit, label: "Аудит логотипа", description: "Анализ существующего логотипа и рекомендации по улучшению." },
+    namingCheck: { ...ruServiceDetails.namingCheck, label: "Проверка нейминга", description: "Проверка доступности имени бренда в базах данных Узбекистана и международных базах." },
+    consultation: { ...ruServiceDetails.consultation, label: "30-минутная консультация", description: "Быстрые рекомендации и профессиональные советы по любому вопросу брендинга." },
+    strategy: { ...ruServiceDetails.strategy, label: "Бренд-стратегия и платформа", description: "Анализ рынка, аудит бренда, разработка позиционирования и ценностного предложения." },
+    commStrategy: { ...ruServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы." },
+    namingStandard: { ...ruServiceDetails.namingStandard, label: "Naming СТАНДАРТ", description: "Идеально для малого бизнеса и стартапов." },
+    namingPremium: { ...ruServiceDetails.namingPremium, label: "Naming ПРЕМИУМ", description: "Для среднего и развивающегося бизнеса." },
+    namingVIP: { ...ruServiceDetails.namingVIP, label: "Naming VIP", description: "Для крупных и международных проектов." },
+    logoStandard: { ...ruServiceDetails.logoStandard, label: "Logo СТАНДАРТ", description: "Для стартапов и тех, кому нужно быстрое решение." },
+    logoPremium: { ...ruServiceDetails.logoPremium, label: "Logo+Фирменный стиль ПРЕМИУМ", description: "Для бизнесов, серьезно настроенных на развитие своего бренда." },
+    logoVIP: { ...ruServiceDetails.logoVIP, label: "Logo+Фирменный стиль+Brandbook VIP", description: "Для полного выхода на рынок и максимального эффекта." },
+    packaging: { ...ruServiceDetails.packaging, label: "Дизайн упаковки", description: "Разработка упаковки для 3 SKU, подготовка к печати." },
+    smm: { ...ruServiceDetails.smm, label: "Стиль для социальных сетей", description: "Оформление постов и сторис в фирменном стиле." },
+    merch: { ...ruServiceDetails.merch, label: "Брендированный мерч и носители", description: "Дизайн одежды, аксессуаров, POSM-материалов." },
+    illustrations: { ...ruServiceDetails.illustrations, label: "Иллюстрации и анимация", description: "Создание фирменной графики, инфографики и анимаций." },
+    urgency: { ...ruServiceDetails.urgency, label: "Срочный проект (+50%)", description: "Проект выполняется вне очереди, в короткие сроки (2-3 дня)." },
+    nda: { ...ruServiceDetails.nda, label: "Договор о неразглашении (NDA) (+50%)", description: "Договор о неразглашении информации о проекте." }
 });
 
 const enServiceDetails: typeof uzServiceDetails = JSON.parse(JSON.stringify(uzServiceDetails));
 Object.assign(enServiceDetails, {
-    audit: { ...enServiceDetails.audit, label: "Logo Audit", description: "Analysis of the existing logo and recommendations for improvement.", features: [
-            { feature: "Analysis of the logo's strengths and weaknesses", benefit: "You will know exactly where to strengthen your branding without spending money on guesswork." },
-            { feature: "Analysis compared to competitors", benefit: "You will get an idea of how to stand out in the market." },
-            { feature: "Specific recommendations for improvement and a roadmap", benefit: "Your next steps will be clear and understandable, which will save you time and resources." }
-        ] },
-    namingCheck: { ...enServiceDetails.namingCheck, label: "Naming Check", description: "Checking the availability of the brand name in Uzbekistan and international databases.", features: [
-            { feature: "In-depth check against Uzbekistan's database", benefit: "You will be sure of the legal purity of your name in the local market and avoid problems in the future." },
-            { feature: "Check against the international WIPO database", benefit: "You will retain the opportunity for international expansion and prevent potential legal conflicts." },
-            { feature: "Check for availability in domains and social networks", benefit: "The name you choose will not be taken on the internet, and you will be able to work in marketing without obstacles." },
-            { feature: "Legal advice and risk assessment", benefit: "You will know what to pay attention to in the patenting process and minimize the risks associated with your name." }
-        ] },
-    consultation: { ...enServiceDetails.consultation, label: "30-minute consultation", description: "Quick guidance and professional advice on any branding question.", features: [
-            { feature: "Identifying your business problems", benefit: "You will identify your main problem and be able to focus on solving it, allocating resources correctly." },
-            { feature: "Quick answers to branding questions", benefit: "Instead of two or three weeks of research, you will get clear answers in 30 minutes, which will allow you to act faster." },
-            { feature: "Specific recommendations for next steps", benefit: "You will know where to start your actions, save your time and avoid wrong decisions." }
-        ] },
-    strategy: { ...enServiceDetails.strategy, label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development.",
-        features: [
-            { feature: "In-depth market and competitor analysis", benefit: "You will know your exact place in the market and have a clear strategy to stand out from competitors." },
-            { feature: "Target audience segmentation and creation of a psychological portrait", benefit: "You will direct your marketing budget to specific customers, dramatically increasing its effectiveness." },
-            { feature: "Brand platform (mission, values, philosophy)", benefit: "Your brand will become not just a product, but an idea that customers trust and follow." },
-            { feature: "Brand Voice (Tone of Voice) and communication style", benefit: "You will speak with customers in their language, establishing a strong emotional connection with them." },
-            { feature: "Positioning and Unique Selling Proposition (USP)", benefit: "You will have a clear and convincing answer to the question 'Why you?' in the minds of customers." },
-            { feature: "Storytelling", benefit: "The connection between your brand's story and your products will be attractive and memorable for customers." }
-        ]
-    },
-    commStrategy: { ...enServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: [
-            { feature: "Clarifying the brand's Tone of Voice and creating a guide", benefit: "Your brand will have a single and recognizable 'voice' on all channels, which will increase trust." },
-            { feature: "Developing Key Messages", benefit: "You will identify the most effective messages for each audience segment, which will increase conversion." },
-            { feature: "Planning and budgeting of communication channels", benefit: "You will direct your marketing budget to the channels that bring the most results (social networks, PR, advertising)." },
-            { feature: "Content strategy directions and rubrics", benefit: "You will have a clear plan for creating content that attracts customers and turns them into loyal fans." }
-        ] },
-    namingStandard: { ...enServiceDetails.namingStandard, label: "Naming STANDARD", description: "Ideal for small businesses and startups.", features: [
-            { feature: "3 short, catchy and memorable names", benefit: "You will get a quick and quality start for your brand." },
-            { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
-            { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." },
-            { feature: "Names that are easy to write and find by ear", benefit: "Customers will not be mistaken when looking for you." }
-        ] },
-    namingPremium: { ...enServiceDetails.namingPremium, label: "Naming PREMIUM", description: "A strategic approach for medium and growing businesses.", features: [
-            { feature: "5 strategic name options", benefit: "The names will not just be beautiful, they will serve your business goals." },
-            { feature: "Phonetic and semantic analysis in several languages", benefit: "You will be sure that your name will not have a negative meaning in other languages when entering the international market." },
-            { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
-            { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." },
-            { feature: "Patentability check in 2 classes", benefit: "You will be sure of the legal purity of the name." },
-            { feature: "Free .uz domain for 5 years", benefit: "You will get your most important digital asset at no extra cost." }
-        ] },
-    namingVIP: { ...enServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects.", features: [
-            { feature: "10+ exclusive name options and personal art director supervision", benefit: "You will get the highest level of creative approach and experience." },
-            { feature: "Check availability of .uz domain for the website on the internet", benefit: "The name you choose will not be taken in the digital environment." },
-            { feature: "Check availability on social networks (Telegram, Instagram)", benefit: "You will pre-book important social media names for your brand." },
-            { feature: "In-depth patent check in up to 3 classes", benefit: "You will achieve maximum legal protection and peace of mind." },
-            { feature: "Free .uz domain for 10 years", benefit: "You will secure your long-term digital future." },
-            { feature: "Assistance in filing a patent application (state fee is paid separately)", benefit: "We will facilitate all complex legal processes for you." }
-        ] },
-    logoStandard: { ...enServiceDetails.logoStandard, label: "Logo STANDARD", description: "For startups and those who need a quick solution.", features: [
-            { feature: "3 professional logo concepts based on your brand strategy", benefit: "You will get a quick and quality visual basis for your business." },
-            { feature: "Demonstration on 5+ real mockups", benefit: "You will imagine how your logo will look in real life." },
-            { feature: "Mini-guide for logo usage", benefit: "You will get clear instructions on where and how to use the logo." },
-            { feature: "Ready-made avatar for social media", benefit: "Your brand will immediately look professional on digital platforms." },
-            { feature: "All necessary logo file formats (AI, EPS, PNG, PDF)", benefit: "You can use the logo anywhere without loss of quality." }
-        ] },
-    logoPremium: { ...enServiceDetails.logoPremium, label: "Logo+Corporate Identity PREMIUM", description: "For businesses serious about developing their brand.", features: [
-            { feature: "5 strategic logo concepts", benefit: "You will have the opportunity to choose the most perfect visual solution for your brand." },
-            { feature: "Visual metaphor of the brand", benefit: "Your logo will become not just a picture, but a sign with deep meaning and history." },
-            { feature: "Corporate identity (colors, fonts)", benefit: "Your brand will have a single and professional look at all points of contact." },
-            { feature: "Brief guide to corporate identity (guideline)", benefit: "You will get clear rules on how to use design elements." },
-            { feature: "Demonstration on 15+ real mockups", benefit: "You will have a clear idea of how your logo and style will look in real life." },
-            { feature: "All necessary file formats", benefit: "You can use the logo in any size and anywhere without loss of quality." }
-        ] },
-    logoVIP: { ...enServiceDetails.logoVIP, label: "Logo+Corporate Identity+Brandbook VIP", description: "For a full market launch and maximum impact.", features: [
-            { feature: "7+ exclusive logo concepts and personal art director participation", benefit: "You will get the highest level of creativity and individual approach." },
-            { feature: "Full corporate identity system", benefit: "Your brand will have a single and professional look at all points of contact." },
-            { feature: "Full Brandbook (30-50 pages)", benefit: "You will get a 'constitution' for managing your brand, which contains all the rules and standards." },
-            { feature: "Set of personal illustrations or icons for the brand", benefit: "Your brand will acquire its own visual language, which competitors do not have." },
-            { feature: "Demonstration on 25+ real mockups", benefit: "You will have a comprehensive idea of what your brand will look like." },
-            { feature: "Set of templates for social networks", benefit: "Your marketing team will be able to independently create content in the brand's style." },
-            { feature: "All necessary file formats", benefit: "You can use the logo in any size and anywhere without loss of quality." }
-        ] },
-    packaging: { ...enServiceDetails.packaging, label: "Packaging Design", description: "Packaging development for 3 SKUs, preparation for printing.", features: [
-            { feature: "Market and competitor analysis", benefit: "You will find a solution that will make your product stand out on the shelf." },
-            { feature: "2 design concepts", benefit: "You will have the opportunity to choose the most suitable style for your brand." },
-            { feature: "Design adaptation for up to 3 SKUs (product types)", benefit: "You will have a single and consistent design system for your entire product line." },
-            { feature: "Ready-to-print files", benefit: "You will achieve a quality result without any problems in production." }
-        ] },
-    smm: { ...enServiceDetails.smm, label: "Style for Social Networks", description: "Design of posts and stories in corporate style.", features: [
-            { feature: "6 post templates", benefit: "You will get ready-made design solutions for different types of content (product, promotion, useful tip)." },
-            { feature: "6 story templates", benefit: "You will maintain a single style for your brand in the story format as well." },
-            { feature: "Avatar and highlight covers for the profile", benefit: "Your profile will acquire a professional and attractive look." },
-            { feature: "Guide for Instagram", benefit: "You will get clear instructions on how to use the templates effectively." }
-        ] },
-    merch: { ...enServiceDetails.merch, label: "Branded Merch and Carriers", description: "Design of clothing, accessories, POSM materials.", features: [
-            { feature: "Design of T-shirts, caps, hoodies for employees", benefit: "You will strengthen the corporate spirit and a sense of belonging to the brand in your team." },
-            { feature: "Gifts for clients (notebooks, pens, cups)", benefit: "Your brand will enter the daily life of your clients and serve as a constant reminder." },
-            { feature: "POSM materials (flyers, banners, stands)", benefit: "You will effectively promote your brand at points of sale and events." }
-        ] },
-    illustrations: { ...enServiceDetails.illustrations, label: "Illustrations and Animation", description: "Creation of corporate graphics, infographics and animations.", features: [
-            { feature: "A set of unique illustrations for the brand", benefit: "Your brand will acquire its own visual language, which competitors do not have." },
-            { feature: "Infographic design", benefit: "You will convey complex information to your audience in an easy and interesting way." },
-            { feature: "Animation of logo and elements", benefit: "You will make your brand more lively and attention-grabbing on digital platforms (website, social networks)." }
-        ] },
-    urgency: { ...enServiceDetails.urgency, label: "Urgent Project (+50%)", description: "The project is carried out out of turn, in a short time (2-3 days).", features: [
-            { feature: "Start of work out of turn", benefit: "The project becomes a top priority." },
-            { feature: "Reduced deadlines", benefit: "You will get results much earlier than standard deadlines." }
-        ] },
-    nda: { ...enServiceDetails.nda, label: "Non-Disclosure Agreement (NDA) (+50%)", description: "Agreement on non-disclosure of project information.", features: [
-            { feature: "Signing a legally binding document", benefit: "You will receive a legal guarantee that information about your project will not be disclosed to third parties." },
-            { feature: "Complete confidentiality", benefit: "Our team will not publish project details anywhere (portfolio, social networks)." }
-        ] }
+    audit: { ...enServiceDetails.audit, label: "Logo Audit", description: "Analysis of the existing logo and recommendations for improvement." },
+    namingCheck: { ...enServiceDetails.namingCheck, label: "Naming Check", description: "Checking the availability of the brand name in Uzbekistan and international databases." },
+    consultation: { ...enServiceDetails.consultation, label: "30-minute consultation", description: "Quick guidance and professional advice on any branding question." },
+    strategy: { ...enServiceDetails.strategy, label: "Brand Strategy and Platform", description: "Market analysis, brand audit, positioning and value proposition development." },
+    commStrategy: { ...enServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels." },
+    namingStandard: { ...enServiceDetails.namingStandard, label: "Naming STANDARD", description: "Ideal for small businesses and startups." },
+    namingPremium: { ...enServiceDetails.namingPremium, label: "Naming PREMIUM", description: "A strategic approach for medium and growing businesses." },
+    namingVIP: { ...enServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects." },
+    logoStandard: { ...enServiceDetails.logoStandard, label: "Logo STANDARD", description: "For startups and those who need a quick solution." },
+    logoPremium: { ...enServiceDetails.logoPremium, label: "Logo+Corporate Identity PREMIUM", description: "For businesses serious about developing their brand." },
+    logoVIP: { ...enServiceDetails.logoVIP, label: "Logo+Corporate Identity+Brandbook VIP", description: "For a full market launch and maximum impact." },
+    packaging: { ...enServiceDetails.packaging, label: "Packaging Design", description: "Packaging development for 3 SKUs, preparation for printing." },
+    smm: { ...enServiceDetails.smm, label: "Style for Social Networks", description: "Design of posts and stories in corporate style." },
+    merch: { ...enServiceDetails.merch, label: "Branded Merch and Carriers", description: "Design of clothing, accessories, POSM materials." },
+    illustrations: { ...enServiceDetails.illustrations, label: "Illustrations and Animation", description: "Creation of corporate graphics, infographics and animations." },
+    urgency: { ...enServiceDetails.urgency, label: "Urgent Project (+50%)", description: "The project is carried out out of turn, in a short time (2-3 days)." },
+    nda: { ...enServiceDetails.nda, label: "Non-Disclosure Agreement (NDA) (+50%)", description: "Agreement on non-disclosure of project information." }
 });
 
 const zhServiceDetails: typeof uzServiceDetails = JSON.parse(JSON.stringify(uzServiceDetails));
 Object.assign(zhServiceDetails, {
-    audit: { ...zhServiceDetails.audit, label: "标志审核", description: "对现有标志进行分析并提供改进建议。", features: [
-            { feature: "标志的优缺点分析", benefit: "您将确切地知道在哪里加强您的品牌，而无需在猜测上花钱。" },
-            { feature: "与竞争对手的比较分析", benefit: "您将了解如何在市场上脱颖而出。" },
-            { feature: "具体的改进建议和路线图", benefit: "您的下一步将清晰明了，这将节省您的时间和资源。" }
-        ] },
-    namingCheck: { ...zhServiceDetails.namingCheck, label: "名称检查", description: "检查品牌名称在乌兹别克斯坦和国际数据库中的可用性。", features: [
-            { feature: "根据乌兹别克斯坦数据库进行深入检查", benefit: "您将确信您的名称在当地市场的法律纯洁性，并避免未来的问题。" },
-            { feature: "根据国际WIPO数据库进行检查", benefit: "您将保留国际扩张的机会，并防止潜在的法律冲突。" },
-            { feature: "检查域名和社交网络中的可用性", benefit: "您选择的名称不会在互联网上被占用，您将能够在营销中无障碍地工作。" },
-            { feature: "法律咨询和风险评估", benefit: "您将知道在专利申请过程中应注意什么，并最大限度地减少与您的名称相关的风险。" }
-        ] },
-    consultation: { ...zhServiceDetails.consultation, label: "30分钟咨询", description: "为任何品牌问题提供快速指导和专业建议。", features: [
-            { feature: "识别您的业务问题", benefit: "您将识别出您的主要问题，并能够专注于解决它，正确分配资源。" },
-            { feature: "快速回答品牌问题", benefit: "您将在30分钟内获得明确的答案，而不是花两三周的时间进行研究，这将使您能够更快地采取行动。" },
-            { feature: "下一步具体建议", benefit: "您将知道从哪里开始行动，节省您的时间并避免错误的决定。" }
-        ] },
-    strategy: { ...zhServiceDetails.strategy, label: "品牌策略与平台", description: "市场分析、品牌审核、定位和价值主张开发。",
-        features: [
-            { feature: "深入的市场和竞争对手分析", benefit: "您将确切地知道您在市场中的位置，并拥有明确的策略以从竞争对手中脱颖而出。" },
-            { feature: "目标受众细分和心理画像创建", benefit: "您将把您的营销预算投向特定的客户，从而显著提高其效率。" },
-            { feature: "品牌平台（使命、价值观、理念）", benefit: "您的品牌将不仅仅是一个产品，而是一个客户信任和追随的理念。" },
-            { feature: "品牌声音（语调）和传播风格", benefit: "您将用客户的语言与他们交谈，与他们建立牢固的情感联系。" },
-            { feature: "定位和独特销售主张（USP）", benefit: "您将在客户心目中对“为什么是您？”这个问题有一个清晰而有说服力的答案。" },
-            { feature: "品牌架构和叙事（Storytelling）", benefit: "您的品牌故事和您的产品之间的联系将对客户具有吸引力和记忆力。" }
-        ]
-    },
-    commStrategy: { ...zhServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。", features: [
-            { feature: "明确品牌的语调并创建指南", benefit: "您的品牌在所有渠道上都将有统一且可识别的“声音”，这将增加信任。" },
-            { feature: "制定关键信息", benefit: "您将为每个受众群体确定最有效的信息，这将提高转化率。" },
-            { feature: "规划和预算传播渠道", benefit: "您将把您的营销预算投向带来最大成果的渠道（社交网络、公关、广告）。" },
-            { feature: "内容策略方向和专栏", benefit: "您将有一个清晰的计划来创建吸引客户并将其转变为忠实粉丝的内容。" }
-        ] },
-    namingStandard: { ...zhServiceDetails.namingStandard, label: "命名 标准", description: "适合小型企业和初创公司。", features: [
-            { feature: "3个简短、上口且易记的名称", benefit: "您将为您的品牌获得一个快速而优质的开端。" },
-            { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
-            { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" },
-            { feature: "听得懂、写得出、找得到的名称", benefit: "客户在寻找您时不会出错。" }
-        ] },
-    namingPremium: { ...zhServiceDetails.namingPremium, label: "命名 高级", description: "适合中型和成长型企业的战略方法。", features: [
-            { feature: "5个战略性名称选项", benefit: "这些名称不仅美观，还将服务于您的业务目标。" },
-            { feature: "多种语言的语音和语义分析", benefit: "您将确信在进入国际市场时，您的名称在其他语言中不会有负面含义。" },
-            { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
-            { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" },
-            { feature: "在2个类别中进行专利性检查", benefit: "您将确信名称的法律纯洁性。" },
-            { feature: "5年免费.uz域名", benefit: "您将无需额外费用即可获得您最重要的数字资产。" }
-        ] },
-    namingVIP: { ...zhServiceDetails.namingVIP, label: "命名 VIP", description: "适合大型和国际项目。", features: [
-            { feature: "10多个独家名称选项和个人艺术总监监督", benefit: "您将获得最高水平的创意方法和经验。" },
-            { feature: "检查网站的.uz域名在互联网上的可用性", benefit: "您选择的名称不会在数字环境中被占用。" },
-            { feature: "检查在社交网络（Telegram, Instagram）上的可用性", benefit: "您将为您的品牌预订重要的社交媒体名称。" },
-            { feature: "在最多3个类别中进行深入的专利检查", benefit: "您将获得最大的法律保护和安心。" },
-            { feature: "10年免费.uz域名", benefit: "您将确保您的长期数字未来。" },
-            { feature: "协助提交专利申请（国家规费另付）", benefit: "我们将为您简化所有复杂的法律程序。" }
-        ] },
-    logoStandard: { ...zhServiceDetails.logoStandard, label: "标志 标准", description: "适用于初创公司和需要快速解决方案的公司。", features: [
-            { feature: "基于您品牌策略的3个专业标志概念", benefit: "您将为您的业务获得快速而优质的视觉基础。" },
-            { feature: "在5个以上的真实模型上展示", benefit: "您将想象您的标志在现实生活中的样子。" },
-            { feature: "标志使用迷你指南", benefit: "您将获得关于在何处以及如何使用标志的明确说明。" },
-            { feature: "为社交媒体准备的现成头像", benefit: "您的品牌将立即在数字平台上显得专业。" },
-            { feature: "所有必需的标志文件格式（AI, EPS, PNG, PDF）", benefit: "您可以在任何地方使用标志而不会损失质量。" }
-        ] },
-    logoPremium: { ...zhServiceDetails.logoPremium, label: "标志+企业形象 高级", description: "适用于认真发展其品牌的企业。", features: [
-            { feature: "5个战略性标志概念", benefit: "您将有机会为您的品牌选择最完美的视觉解决方案。" },
-            { feature: "品牌的视觉隐喻", benefit: "您的标志将不仅仅是一张图片，而是一个具有深刻含义和历史的标志。" },
-            { feature: "企业形象（颜色、字体）", benefit: "您的品牌在所有接触点上都将有一致和专业的外观。" },
-            { feature: "企业形象简要指南", benefit: "您将获得关于如何使用设计元素的明确规则。" },
-            { feature: "在15个以上的真实模型上展示", benefit: "您将清楚地了解您的标志和风格在现实生活中的样子。" },
-            { feature: "所有必需的文件格式", benefit: "您可以在任何尺寸和任何地方使用标志而不会损失质量。" }
-        ] },
-    logoVIP: { ...zhServiceDetails.logoVIP, label: "标志+企业形象+品牌手册 VIP", description: "为了全面推向市场并获得最大影响。", features: [
-            { feature: "7个以上的独家标志概念和个人艺术总监参与", benefit: "您将获得最高水平的创造力和个性化方法。" },
-            { feature: "完整的企业形象系统", benefit: "您的品牌在所有接触点上都将有一致和专业的外观。" },
-            { feature: "完整的品牌手册（30-50页）", benefit: "您将获得一个管理您品牌的“宪法”，其中包含所有规则和标准。" },
-            { feature: "一套品牌的个人插图或图标", benefit: "您的品牌将拥有自己独特的、竞争对手没有的视觉语言。" },
-            { feature: "在25个以上的真实模型上展示", benefit: "您将全面了解您的品牌将是什么样子。" },
-            { feature: "一套社交网络模板", benefit: "您的营销团队将能够独立地以品牌风格创建内容。" },
-            { feature: "所有必需的文件格式", benefit: "您可以在任何尺寸和任何地方使用标志而不会损失质量。" }
-        ] },
-    packaging: { ...zhServiceDetails.packaging, label: "包装设计", description: "为3个SKU开发包装，为印刷做准备。", features: [
-            { feature: "市场和竞争对手分析", benefit: "您将找到一个能让您的产品在货架上脱颖而出的解决方案。" },
-            { feature: "2个设计概念", benefit: "您将有机会为您的品牌选择最合适的风格。" },
-            { feature: "最多3个SKU（产品类型）的设计适配", benefit: "您将为您的整个产品线拥有一个统一且一致的设计系统。" },
-            { feature: "准备好印刷的文件", benefit: "您将在生产中获得高质量的结果，没有任何问题。" }
-        ] },
-    smm: { ...zhServiceDetails.smm, label: "社交网络风格", description: "以企业风格设计帖子和故事。", features: [
-            { feature: "6个帖子模板", benefit: "您将获得针对不同类型内容（产品、促销、有用提示）的现成设计解决方案。" },
-            { feature: "6个故事模板", benefit: "您也将在故事格式中保持品牌的统一风格。" },
-            { feature: "个人资料的头像和亮点封面", benefit: "您的个人资料将获得专业且吸引人的外观。" },
-            { feature: "Instagram指南", benefit: "您将获得关于如何有效使用模板的明确说明。" }
-        ] },
-    merch: { ...zhServiceDetails.merch, label: "品牌商品和载体", description: "服装、配饰、POSM材料的设计。", features: [
-            { feature: "为员工设计T恤、帽子、连帽衫", benefit: "您将加强团队中的企业精神和品牌归属感。" },
-            { feature: "为客户准备的礼物（笔记本、笔、杯子）", benefit: "您的品牌将进入客户的日常生活，并成为一个持续的提醒。" },
-            { feature: "POSM材料（传单、横幅、展台）", benefit: "您将在销售点和活动中有效地推广您的品牌。" }
-        ] },
-    illustrations: { ...zhServiceDetails.illustrations, label: "插图与动画", description: "创建企业图形、信息图和动画。", features: [
-            { feature: "一套独特的品牌插图", benefit: "您的品牌将拥有自己独特的、竞争对手没有的视觉语言。" },
-            { feature: "信息图设计", benefit: "您将以一种简单有趣的方式向您的受众传达复杂的信息。" },
-            { feature: "标志和元素的动画", benefit: "您将使您的品牌在数字平台（网站、社交网络）上更加生动和引人注目。" }
-        ] },
-    urgency: { ...zhServiceDetails.urgency, label: "紧急项目（+50%）", description: "该项目将不按顺序在短时间内（2-3天）执行。", features: [
-            { feature: "不按顺序开始工作", benefit: "项目成为首要任务。" },
-            { feature: "缩短的截止日期", benefit: "您将比标准截止日期早得多地获得结果。" }
-        ] },
-    nda: { ...zhServiceDetails.nda, label: "保密协议（NDA）（+50%）", description: "关于不披露项目信息的协议。", features: [
-            { feature: "签署具有法律约束力的文件", benefit: "您将获得关于您的项目信息不会透露给第三方的法律保证。" },
-            { feature: "完全保密", benefit: "我们的团队不会在任何地方（作品集、社交网络）发布项目细节。" }
-        ] }
+    audit: { ...zhServiceDetails.audit, label: "标志审核", description: "对现有标志进行分析并提供改进建议。" },
+    namingCheck: { ...zhServiceDetails.namingCheck, label: "名称检查", description: "检查品牌名称在乌兹别克斯坦和国际数据库中的可用性。" },
+    consultation: { ...zhServiceDetails.consultation, label: "30分钟咨询", description: "为任何品牌问题提供快速指导和专业建议。" },
+    strategy: { ...zhServiceDetails.strategy, label: "品牌策略与平台", description: "市场分析、品牌审核、定位和价值主张开发。" },
+    commStrategy: { ...zhServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。" },
+    namingStandard: { ...zhServiceDetails.namingStandard, label: "命名 标准", description: "适合小型企业和初创公司。" },
+    namingPremium: { ...zhServiceDetails.namingPremium, label: "命名 高级", description: "适合中型和成长型企业的战略方法。" },
+    namingVIP: { ...zhServiceDetails.namingVIP, label: "命名 VIP", description: "适合大型和国际项目。" },
+    logoStandard: { ...zhServiceDetails.logoStandard, label: "标志 标准", description: "适用于初创公司和需要快速解决方案的公司。" },
+    logoPremium: { ...zhServiceDetails.logoPremium, label: "标志+企业形象 高级", description: "适用于认真发展其品牌的企业。" },
+    logoVIP: { ...zhServiceDetails.logoVIP, label: "标志+企业形象+品牌手册 VIP", description: "为了全面推向市场并获得最大影响。" },
+    packaging: { ...zhServiceDetails.packaging, label: "包装设计", description: "为3个SKU开发包装，为印刷做准备。" },
+    smm: { ...zhServiceDetails.smm, label: "社交网络风格", description: "以企业风格设计帖子和故事。" },
+    merch: { ...zhServiceDetails.merch, label: "品牌商品和载体", description: "服装、配饰、POSM材料的设计。" },
+    illustrations: { ...zhServiceDetails.illustrations, label: "插图与动画", description: "创建企业图形、信息图和动画。" },
+    urgency: { ...zhServiceDetails.urgency, label: "紧急项目（+50%）", description: "该项目将不按顺序在短时间内（2-3天）执行。" },
+    nda: { ...zhServiceDetails.nda, label: "保密协议（NDA）（+50%）", description: "关于不披露项目信息的协议。" }
 });
 
 
@@ -751,108 +479,82 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     }
 
     const totalBasePrice = nonVipBasePrice + vipServicesPrice;
-    let priceAfterSurcharges = totalBasePrice;
+    
+    // Surcharges (always on base)
+    let surchargeAmount = 0;
     const surcharges: { name: string, value: number }[] = [];
 
     if (selectedServices.urgency) {
-        const surchargeAmount = totalBasePrice * urgencySurcharge;
-        priceAfterSurcharges += surchargeAmount;
-        let surchargeName;
-        if (lang === 'ru') surchargeName = 'Надбавка за срочность (+50%)';
-        else if (lang === 'en') surchargeName = 'Urgency Surcharge (+50%)';
-        else if (lang === 'zh') surchargeName = '紧急项目附加费 (+50%)';
-        else surchargeName = 'Shoshilinch uchun ustama (+50%)';
-        surcharges.push({ name: surchargeName, value: surchargeAmount });
+        const val = totalBasePrice * urgencySurcharge;
+        surchargeAmount += val;
+        surcharges.push({ 
+            name: lang === 'ru' ? 'Надбавка за срочность (+50%)' : (lang === 'en' ? 'Urgency Surcharge (+50%)' : (lang === 'zh' ? '紧急项目附加费 (+50%)' : 'Shoshilinch uchun ustama (+50%)')), 
+            value: val 
+        });
     }
 
     if (selectedServices.nda) {
-        const surchargeAmount = totalBasePrice * ndaSurcharge;
-        priceAfterSurcharges += surchargeAmount;
-        let discountName;
-        if (lang === 'ru') discountName = 'Надбавка за NDA (+50%)';
-        else if (lang === 'en') discountName = 'NDA Surcharge (+50%)';
-        else if (lang === 'zh') discountName = '保密协议附加费 (+50%)';
-        else discountName = 'NDA uchun ustama (+50%)';
-        surcharges.push({ name: discountName, value: surchargeAmount });
+        const val = totalBasePrice * ndaSurcharge;
+        surchargeAmount += val;
+        surcharges.push({ 
+            name: lang === 'ru' ? 'Надбавка за NDA (+50%)' : (lang === 'en' ? 'NDA Surcharge (+50%)' : (lang === 'zh' ? '保密协议附加费 (+50%)' : 'NDA uchun ustama (+50%)')), 
+            value: val 
+        });
     }
-    
-    const discountsApplied: { name: string, value: number, isPackageDiscount?: boolean, isPromoDiscount?: boolean }[] = [];
-    let canApplyPackageDiscount = false;
-    let nonVipPriceAfterDiscount = nonVipBasePrice;
-    
-    const standardPackageSelected = hasNamingStandard && hasLogoStandard;
-    
-    if (isPackageDiscountEnabled) {
-        if (standardPackageSelected) {
-            const standardPackagePrice = sd.namingStandard.price + sd.logoStandard.price;
-            const discountAmount = standardPackagePrice * packageDiscount;
-            nonVipPriceAfterDiscount -= discountAmount;
-            let discountName;
-            if (lang === 'ru') discountName = 'Пакетная скидка (Стандарт) (-20%)';
-            else if (lang === 'en') discountName = 'Package Discount (Standard) (-20%)';
-            else if (lang === 'zh') discountName = '套餐折扣 (标准) (-20%)';
-            else discountName = 'Paketli chegirma (Standard) (-20%)';
-            discountsApplied.push({ name: discountName, value: discountAmount, isPackageDiscount: true });
-        }
-    
-        if (mainServicesCount >= packageDiscountThreshold) {
-            const discountableAmount = nonVipBasePrice - (standardPackageSelected ? (sd.namingStandard.price + sd.logoStandard.price) : 0);
-            const discountAmount = discountableAmount * packageDiscount;
-            if(discountAmount > 0) {
-                nonVipPriceAfterDiscount -= discountAmount;
-                let discountName;
-                if (lang === 'ru') discountName = 'Пакетная скидка (-20%)';
-                else if (lang === 'en') discountName = 'Package Discount (-20%)';
-                else if (lang === 'zh') discountName = '套餐折扣 (-20%)';
-                else discountName = 'Paketli chegirma (-20%)';
-                discountsApplied.push({ name: discountName, value: discountAmount, isPackageDiscount: true });
-            }
-        }
-    }
-    
-    canApplyPackageDiscount = (standardPackageSelected || mainServicesCount >= packageDiscountThreshold);
 
-    let currentRunningTotal = nonVipPriceAfterDiscount + vipServicesPrice + (priceAfterSurcharges - totalBasePrice);
-
-    // Apply Promo Code Discount
     const normalizedPromo = promoCode?.trim().toUpperCase();
     const isPromoValid = VALID_PROMO_CODES.some(code => code.toUpperCase() === normalizedPromo);
+
+    const discountsApplied: { name: string, value: number, isPackageDiscount?: boolean, isPromoDiscount?: boolean }[] = [];
+    let finalPrice = totalBasePrice + surchargeAmount;
+
     if (isPromoValid) {
-        const discountAmount = currentRunningTotal * promoDiscountValue;
-        currentRunningTotal -= discountAmount;
-        let discountName;
-        if (lang === 'ru') discountName = `Промокод (${promoCode}) (-50%)`;
-        else if (lang === 'en') discountName = `Promo Code (${promoCode}) (-50%)`;
-        else if (lang === 'zh') discountName = `优惠码 (${promoCode}) (-50%)`;
-        else discountName = `Promokod (${promoCode}) (-50%)`;
-        discountsApplied.push({ name: discountName, value: discountAmount, isPromoDiscount: true });
+        // PROMO CODE active: CANCEL ALL OTHER DISCOUNTS
+        const discountValue = finalPrice * promoDiscountValue;
+        const discountName = lang === 'ru' ? `Промокод (${promoCode}) (-50%)` : (lang === 'en' ? `Promo Code (${promoCode}) (-50%)` : (lang === 'zh' ? `优惠码 (${promoCode}) (-50%)` : `Promokod (${promoCode}) (-50%)`));
+        discountsApplied.push({ name: discountName, value: discountValue, isPromoDiscount: true });
+        finalPrice -= discountValue;
+    } else {
+        // Standard Discount Logic
+        const standardPackageSelected = hasNamingStandard && hasLogoStandard;
+        let packageDiscountAmount = 0;
+
+        if (isPackageDiscountEnabled) {
+            if (standardPackageSelected) {
+                const standardPackagePrice = sd.namingStandard.price + sd.logoStandard.price;
+                packageDiscountAmount = standardPackagePrice * packageDiscount;
+                const discountName = lang === 'ru' ? 'Пакетная скидка (Стандарт) (-20%)' : (lang === 'en' ? 'Package Discount (Standard) (-20%)' : (lang === 'zh' ? '套餐折扣 (标准) (-20%)' : 'Paketli chegirma (Standard) (-20%)'));
+                discountsApplied.push({ name: discountName, value: packageDiscountAmount, isPackageDiscount: true });
+            } else if (mainServicesCount >= packageDiscountThreshold) {
+                packageDiscountAmount = nonVipBasePrice * packageDiscount;
+                const discountName = lang === 'ru' ? 'Пакетная скидка (-20%)' : (lang === 'en' ? 'Package Discount (-20%)' : (lang === 'zh' ? '套餐折扣 (-20%)' : 'Paketli chegirma (-20%)'));
+                discountsApplied.push({ name: discountName, value: packageDiscountAmount, isPackageDiscount: true });
+            }
+        }
+
+        finalPrice -= packageDiscountAmount;
+
+        if (wantsUpfrontPayment) {
+            const upfrontDiscountAmount = finalPrice * upfrontDiscount;
+            const discountName = lang === 'ru' ? 'За предоплату (-10%)' : (lang === 'en' ? 'For upfront payment (-10%)' : (lang === 'zh' ? '预付款折扣 (-10%)' : 'Oldindan to\'lov uchun (-10%)'));
+            discountsApplied.push({ name: discountName, value: upfrontDiscountAmount });
+            finalPrice -= upfrontDiscountAmount;
+        }
     }
 
-    let priceAfterDiscounts = currentRunningTotal;
-
-    if (wantsUpfrontPayment) {
-        const discountAmount = currentRunningTotal * upfrontDiscount;
-        priceAfterDiscounts = currentRunningTotal - discountAmount;
-        let discountName;
-        if (lang === 'ru') discountName = 'За предоплату (-10%)';
-        else if (lang === 'en') discountName = 'For upfront payment (-10%)';
-        else if (lang === 'zh') discountName = '预付款折扣 (-10%)';
-        else discountName = 'Oldindan to\'lov uchun (-10%)';
-        discountsApplied.push({ name: discountName, value: discountAmount });
-    }
-
-    const savings = priceAfterSurcharges - priceAfterDiscounts;
+    const canApplyPackageDiscount = (hasNamingStandard && hasLogoStandard) || mainServicesCount >= packageDiscountThreshold;
+    const savings = (totalBasePrice + surchargeAmount) - finalPrice;
 
     let bonusDescription;
     if (lang === 'ru') bonusDescription = "Аудит логотипа и 30-минутная консультация в подарок";
     else if (lang === 'en') bonusDescription = "Logo audit and 30-minute consultation as a gift";
     else if (lang === 'zh') bonusDescription = "免费赠送标志审核和30分钟咨询";
     else bonusDescription = "Logotip auditi va 30 daqiqalik konsultatsiya sovg'a tariqasida";
-    const bonus = priceAfterDiscounts > bonusThreshold ? bonusDescription : null;
+    const bonus = finalPrice > bonusThreshold ? bonusDescription : null;
 
     return {
         base: totalBasePrice,
-        final: priceAfterDiscounts,
+        final: finalPrice,
         discountApplied: discountsApplied,
         savings,
         bonus,

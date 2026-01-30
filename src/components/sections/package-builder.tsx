@@ -642,9 +642,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                          {d.isPackageDiscount && (
                                             <p className="text-xs text-green-400/80">{translations.discountSelector.package_desc}</p>
                                         )}
-                                        {d.name.includes('10%') && (
+                                        {d.name.includes('10%') || d.name.includes('Oldindan') || d.name.includes('предоплату') || d.name.includes('upfront') || d.name.includes('预付款') ? (
                                             <p className="text-xs text-green-400/80">{translations.discountSelector.full_desc}</p>
-                                        )}
+                                        ) : null}
                                     </div>
                                 ))}
 
@@ -689,12 +689,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                      </div>
 
-                                     <DiscountSelector 
-                                         selectedOption={discountOption}
-                                         onSelectOption={setDiscountOption}
-                                         availableOptions={availableDiscountOptions}
-                                         dictionary={translations.discountSelector}
-                                     />
+                                     <div className={cn("transition-all duration-300", total.isPromoValid ? "opacity-50 pointer-events-none" : "opacity-100")}>
+                                         <DiscountSelector 
+                                             selectedOption={discountOption}
+                                             onSelectOption={setDiscountOption}
+                                             availableOptions={availableDiscountOptions}
+                                             dictionary={translations.discountSelector}
+                                         />
+                                         {total.isPromoValid && (
+                                             <p className="text-[10px] text-accent font-bold mt-2 text-center uppercase tracking-tight">
+                                                 {lang === 'ru' ? 'Скидки не суммируются с промокодом' : (lang === 'en' ? 'Discounts do not stack with promo code' : (lang === 'zh' ? '折扣不与优惠码叠加' : 'Chegirmalar promokod bilan qo\'shilmaydi'))}
+                                             </p>
+                                         )}
+                                     </div>
                                 </div>
                                 
                                 <Button id="package-builder-cta" onClick={handleOrder} variant="default" size="lg" className="w-full text-lg py-3 mt-4" disabled={total.base === 0}>
