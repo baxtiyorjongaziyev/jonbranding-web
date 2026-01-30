@@ -419,7 +419,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     };
     
     const handleOrder = () => {
-        localStorage.setItem('wantsUpfrontPayment', JSON.stringify(discountOption === 'full'));
+        // Promokod bo'lsa yoki oldindan to'lov tanlangan bo'lsa majburiy upfront
+        const isUpfront = total.isPromoValid || discountOption === 'full';
+        localStorage.setItem('wantsUpfrontPayment', JSON.stringify(isUpfront));
         localStorage.setItem('isPackageDiscountEnabled', JSON.stringify(discountOption === 'package' || discountOption === 'full'));
         localStorage.setItem('appliedPromoCode', promoCode);
         onOrderNow();
@@ -527,7 +529,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                  lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
                                                  dictionary={translations}
                                                  currency={currency}
-                                             />
+                                         />
                                          ))}
                                      </ServiceGroup>
                                      {isNaming && <GuaranteeBlock dictionary={translations.namingGuarantee} />}
@@ -642,9 +644,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                          {d.isPackageDiscount && (
                                             <p className="text-xs text-green-400/80">{translations.discountSelector.package_desc}</p>
                                         )}
-                                        {d.name.includes('10%') || d.name.includes('Oldindan') || d.name.includes('предоплату') || d.name.includes('upfront') || d.name.includes('预付款') ? (
+                                        {/* Har bir chegirma turi uchun tushuntirish */}
+                                        {(d.name.includes('10%') || d.name.includes('Oldindan') || d.name.includes('предоплату') || d.name.includes('upfront') || d.name.includes('预付款')) ? (
                                             <p className="text-xs text-green-400/80">{translations.discountSelector.full_desc}</p>
                                         ) : null}
+                                        {d.isPromoDiscount && (
+                                            <p className="text-xs text-amber-300 font-bold mt-1">
+                                                {lang === 'ru' ? '⚠️ Требуется 100% предоплата' : (lang === 'en' ? '⚠️ 100% upfront payment required' : (lang === 'zh' ? '⚠️ 需要 100% 预付款' : '⚠️ 100% oldindan to\'lov talab qilinadi'))}
+                                            </p>
+                                        )}
                                     </div>
                                 ))}
 

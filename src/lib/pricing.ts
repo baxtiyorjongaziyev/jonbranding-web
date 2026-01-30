@@ -581,7 +581,7 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
 
     let summary = `${lang === 'ru' ? 'Выбранные услуги' : lang === 'en' ? 'Selected services' : lang === 'zh' ? '所选服务' : 'Tanlangan xizmatlar'}: ${services.join(', ') || (lang === 'ru' ? 'Нет' : lang === 'en' ? 'None' : lang === 'zh' ? '无' : 'Yo\'q')}`;
 
-    const { discountApplied, bonus, surcharges } = calculatePackagePrice(selections, lang);
+    const { discountApplied, bonus, surcharges, isPromoValid } = calculatePackagePrice(selections, lang);
 
     const conditions = [];
 
@@ -591,7 +591,9 @@ export const generateSummary = (selections: PackageSelections, lang: 'uz' | 'ru'
      if (surcharges.some(s => s.name.includes('NDA'))) {
         conditions.push("NDA");
     }
-    if (selections.wantsUpfrontPayment) {
+    
+    // Promokod bo'lsa yoki oldindan to'lov tanlangan bo'lsa 100% upfront majburiyati
+    if (isPromoValid || selections.wantsUpfrontPayment) {
         conditions.push(lang === 'ru' ? "100% предоплата" : lang === 'en' ? '100% upfront payment' : lang === 'zh' ? '100% 预付款' : "100% oldindan to'lov");
     }
 
