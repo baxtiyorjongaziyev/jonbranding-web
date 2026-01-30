@@ -1,4 +1,3 @@
-
 {
     "header": {
         "portfolio": "Portfolio",
@@ -550,7 +549,7 @@
         "process_subtitle": "Bizning agentligimizda brending shunchaki logotip yaratishdan ko'ra ko'proq narsa ekanligiga aminmiz. Brending — bu bir martalik vazifa emas, balki tsiklik jarayondir. Har bir bosqich o'zining asosiy rolini o'ynaydi va ulardan birini o'tkazib yuborish brendni va uning bozordagi o'rnini zaiflashtirishi mumkin. Ammo agar hamma narsa to'g'ri va izchil bajarilsa, brending biznesning o'sishiga yordam beradi va mahsulot ishlab chiqarishdan tortib marketinggacha bo'lgan ko'plab jarayonlarni boshqarishni osonlashtiradi.",
         "process_steps": [
             { "title": "Tahlil va tadqiqot", "description": "Bu bozor, raqobatchilar va auditoriya haqidagi ma'lumotlar yig'iladigan birinchi va eng muhim bosqichdir. Busiz brending o'ziga xosligini aniqlash va uning maqsadli auditoriyasini tushunish mumkin emas." },
-            { "title": "Brend platformasini shakllantirish", "description": "Bu yerda brendning missiyasi, qadriyatlari va noyob taklifi tug'iladi — bu uning xarakteri va ovozini belgilaydigan asosdir. Aniq platformasiz barcha keyingi harakatlar tarqoq va ishonchsiz bo'lish xavfi bor." },
+            { "title": "Brend platformasini shakllantirish", "description": "Bu yerda brending missiyasi, qadriyatlari va noyob taklifi tug'iladi — bu uning xarakteri va ovozini belgilaydigan asosdir. Aniq platformasiz barcha keyingi harakatlar tarqoq va ishonchsiz bo'lish xavfi bor." },
             { "title": "Strategiya ishlab chiqish", "description": "Strategiya brendning auditoriya bilan qanday muloqot qilishi va qaysi kanallar orqali aloqa o'rnatishi haqidagi savolga javob beradi. Bu kommunikatsiyani tizimlashtiradi, uni maqsadli va samarali qiladi." },
             { "title": "Vizual identifikatsiya", "description": "Brend ma'nolarini vizual tilga o'tkazish — logotip, ranglar, shriftlar va grafik elementlar. Bu brendni taniladigan va raqobatchilardan farqli qiladi." },
             { "title": "Amalga oshirish va integratsiya", "description": "Brend yaratish — bu faqat boshlanishi. Uni kompaniyaga va aloqa nuqtalariga to'g'ri integratsiya qilish muhim, shunda u korporativ madaniyat va mijozlar bilan muloqotning bir qismiga aylanadi." }
@@ -671,6 +670,7 @@
                 { "value": "ha", "label": "Yoqilgan" },
                 { "value": "yoq", "label": "O'chirilgan" }
             ],
+            "expertCheckLabelShort": "Ekspert+",
             "activityLabel": "Faoliyat turlari (ixtiyoriy)",
             "activityPlaceholder": "Masalan: dizayn, qurilish, kiyim-kechak ishlab chiqarish...",
             "activityHelp": "Bu klasslarni aniqlashda yordam beradi.",
@@ -682,7 +682,6 @@
             "totalCostTitle": "10 yillik patent uchun taxminiy umumiy xarajat",
             "currency": "so'm",
             "classLabel": "klass",
-            "expertCheckLabelShort": "Ekspert+",
             "totalCostNote": "Barcha davlat bojlari va xizmat haqini o'z ichiga oladi",
             "step1Title": "1-qadam (Boshlang'ich to'lov)",
             "ourServiceFee": "Jamoamiz xizmat haqi",
