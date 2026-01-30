@@ -1,5 +1,4 @@
 
-
 const USD_TO_UZS_RATE = 12700;
 
 const convertToUzs = (usd: number) => {
@@ -198,7 +197,7 @@ const uzServiceDetails = {
     },
     smm: {
         label: "Ijtimoiy tarmoqlar uchun stil",
-        description: "Postlar va storislarni firma uslubida bezash.",
+        description: "Postlar va storislarni firma uslubi va brendingda bezash.",
         price: basePricesUSD.smm,
         note: null,
         features: [
@@ -277,7 +276,7 @@ Object.assign(ruServiceDetails, {
             { feature: "Платформа бренда (миссия, ценности, философия)", benefit: "Ваш бренд станет не просто продуктом, а идеей, которой клиенты доверяют и следуют." },
             { feature: "Голос бренда (Tone of Voice) и стиль коммуникации", benefit: "Вы будете говорить с клиентами на их языке, устанавливая с ними прочную эмоциональную связь." },
             { feature: "Позиционирование и Уникальное Торговое Предложение (УТП)", benefit: "Вы получите четкий и убедительный ответ на вопрос 'Почему именно вы?' в сознании клиентов." },
-            { feature: "Архитектура бренда и повествование (Storytelling)", benefit: "Связь между историей вашего бренда и вашими продуктами станет привлекательной и запоминающейся для клиентов." }
+            { feature: "Повествование (Storytelling)", benefit: "Связь между историей вашего бренда и вашими продуктами станет привлекательной и запоминающейся для клиентов." }
         ]
     },
     commStrategy: { ...ruServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы.", features: [
@@ -286,13 +285,13 @@ Object.assign(ruServiceDetails, {
             { feature: "Планирование и бюджетирование каналов коммуникации", benefit: "Вы направите свой маркетинговый бюджет на каналы, приносящие наибольший результат (социальные сети, PR, реклама)." },
             { feature: "Направления контент-стратегии и рубрики", benefit: "Вы получите четкий план по созданию контента, который привлекает клиентов и превращает их в преданных поклонников." }
         ] },
-    namingStandard: { ...ruServiceDetails.namingStandard, label: "Нейминг СТАНДАРТ", description: "Идеально для малого бизнеса и стартапов.", features: [
+    namingStandard: { ...ruServiceDetails.namingStandard, label: "Naming СТАНДАРТ", description: "Идеально для малого бизнеса и стартапов.", features: [
             { feature: "3 коротких, звучных и запоминающихся названия", benefit: "Вы получите быстрый и качественный старт для вашего бренда." },
             { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
             { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
             { feature: "Имена, которые легко написать и найти на слух", benefit: "Клиенты не ошибутся при поиске вас." }
         ] },
-    namingPremium: { ...ruServiceDetails.namingPremium, label: "Нейминг ПРЕМИУМ", description: "Для среднего и развивающегося бизнеса.", features: [
+    namingPremium: { ...ruServiceDetails.namingPremium, label: "Naming ПРЕМИУМ", description: "Для среднего и развивающегося бизнеса.", features: [
             { feature: "5 стратегических вариантов названий", benefit: "Названия будут не просто красивыми, а будут служить целям вашего бизнеса." },
             { feature: "Фонетический и семантический анализ на нескольких языках", benefit: "Вы будете уверены, что ваше имя не будет иметь негативного значения на других языках при выходе на международный рынок." },
             { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
@@ -300,7 +299,7 @@ Object.assign(ruServiceDetails, {
             { feature: "Проверка пригодности к патентованию по 2 классам", benefit: "Вы будете уверены в юридической чистоте имени." },
             { feature: "Бесплатный домен .uz на 5 лет", benefit: "Вы получите свой самый важный цифровой актив без дополнительных затрат." }
         ] },
-    namingVIP: { ...ruServiceDetails.namingVIP, label: "Нейминг VIP", description: "Для крупных и международных проектов.", features: [
+    namingVIP: { ...ruServiceDetails.namingVIP, label: "Naming VIP", description: "Для крупных и международных проектов.", features: [
             { feature: "10+ эксклюзивных вариантов названий и личный контроль арт-директора", benefit: "Вы получите высочайший уровень творческого подхода и опыта." },
             { feature: "Проверка доступности домена .uz для сайта в интернете", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
             { feature: "Проверка доступности в социальных сетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные для вашего бренда имена в социальных сетях." },
@@ -308,14 +307,14 @@ Object.assign(ruServiceDetails, {
             { feature: "10-летний бесплатный домен .uz", benefit: "Вы обеспечите свое долгосрочное цифровое будущее." },
             { feature: "Помощь в подаче заявки на патент (госпошлина оплачивается отдельно)", benefit: "Мы облегчим для вас все сложные юридические процессы." }
         ] },
-    logoStandard: { ...ruServiceDetails.logoStandard, label: "Лого СТАНДАРТ", description: "Для стартапов и тех, кому нужно быстрое решение.", features: [
+    logoStandard: { ...ruServiceDetails.logoStandard, label: "Logo СТАНДАРТ", description: "Для стартапов и тех, кому нужно быстрое решение.", features: [
             { feature: "3 профессиональные концепции логотипа, основанные на стратегии вашего бренда", benefit: "Вы получите быструю и качественную визуальную основу для вашего бизнеса." },
             { feature: "Демонстрация на 5+ реальных макетах", benefit: "Вы представите, как ваш логотип будет выглядеть в реальной жизни." },
             { feature: "Мини-гайд по использованию логотипа", benefit: "Вы получите четкие инструкции по тому, где и как использовать логотип." },
             { feature: "Готовый аватар для социальных сетей", benefit: "Ваш бренд сразу будет выглядеть профессионально на цифровых платформах." },
             { feature: "Все необходимые форматы файлов логотипа (AI, EPS, PNG, PDF)", benefit: "Вы сможете использовать логотип в любом месте без потери качества." }
         ] },
-    logoPremium: { ...ruServiceDetails.logoPremium, label: "Лого+Фирменный стиль ПРЕМИУМ", description: "Для бизнесов, серьезно настроенных на развитие своего бренда.", features: [
+    logoPremium: { ...ruServiceDetails.logoPremium, label: "Logo+Фирменный стиль ПРЕМИУМ", description: "Для бизнесов, серьезно настроенных на развитие своего бренда.", features: [
             { feature: "5 стратегических концепций логотипа", benefit: "У вас будет возможность выбрать наиболее совершенное визуальное решение для вашего бренда." },
             { feature: "Визуальная метафора бренда", benefit: "Ваш логотип станет не просто картинкой, а знаком с глубоким смыслом и историей." },
             { feature: "Фирменный стиль (цвета, шрифты)", benefit: "Ваш бренд будет иметь единый и профессиональный вид на всех точках контакта." },
@@ -323,7 +322,7 @@ Object.assign(ruServiceDetails, {
             { feature: "Демонстрация на 15+ реальных макетах", benefit: "Вы точно представите, как ваш логотип и стиль будут выглядеть в реальной жизни." },
             { feature: "Все необходимые форматы файлов", benefit: "Вы сможете использовать логотип в любом размере и в любом месте без потери качества." }
         ] },
-    logoVIP: { ...ruServiceDetails.logoVIP, label: "Лого+Фирменный стиль+Брендбук VIP", description: "Для полного выхода на рынок и максимального эффекта.", features: [
+    logoVIP: { ...ruServiceDetails.logoVIP, label: "Logo+Фирменный стиль+Brandbook VIP", description: "Для полного выхода на рынок и максимального эффекта.", features: [
             { feature: "7+ эксклюзивных концепций логотипа и личное участие арт-директора", benefit: "Вы получите высочайший уровень креативности и индивидуального подхода." },
             { feature: "Полная система фирменного стиля", benefit: "Ваш бренд будет иметь единый и профессиональный вид на всех точках контакта." },
             { feature: "Полный Брендбук (30-50 страниц)", benefit: "Вы получите 'конституцию' для управления вашим брендом, в которой собраны все правила и стандарты." },
@@ -389,7 +388,7 @@ Object.assign(enServiceDetails, {
             { feature: "Brand platform (mission, values, philosophy)", benefit: "Your brand will become not just a product, but an idea that customers trust and follow." },
             { feature: "Brand Voice (Tone of Voice) and communication style", benefit: "You will speak with customers in their language, establishing a strong emotional connection with them." },
             { feature: "Positioning and Unique Selling Proposition (USP)", benefit: "You will have a clear and convincing answer to the question 'Why you?' in the minds of customers." },
-            { feature: "Brand architecture and storytelling", benefit: "The connection between your brand's story and your products will be attractive and memorable for customers." }
+            { feature: "Storytelling", benefit: "The connection between your brand's story and your products will be attractive and memorable for customers." }
         ]
     },
     commStrategy: { ...enServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels.", features: [
@@ -693,27 +692,31 @@ export const upfrontDiscount = 0.10; // 10%
 export const urgencySurcharge = 0.50;
 export const ndaSurcharge = 0.50; // Changed from 0.25 to 0.50
 export const bonusThreshold = 4000;
+export const promoDiscountValue = 0.50; // 50%
 
+const VALID_PROMO_CODES = ['PCG', 'Kursdosh', 'Tez natija'];
 
 interface PackageSelections {
     selectedServices: SelectedServices;
     wantsUpfrontPayment: boolean;
     isPackageDiscountEnabled?: boolean;
+    promoCode?: string;
 }
 
 export interface PriceDetails {
     base: number;
     final: number;
-    discountApplied: { name: string, value: number, isPackageDiscount?: boolean }[];
+    discountApplied: { name: string, value: number, isPackageDiscount?: boolean, isPromoDiscount?: boolean }[];
     savings: number;
     bonus: string | null;
     surcharges: { name: string, value: number }[];
     canApplyPackageDiscount: boolean;
+    isPromoValid?: boolean;
 }
 
 
 export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz'): PriceDetails => {
-    const { selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled = true } = selections;
+    const { selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled = true, promoCode } = selections;
     const sd = getServiceDetails(lang);
 
     let nonVipBasePrice = 0;
@@ -773,9 +776,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         surcharges.push({ name: discountName, value: surchargeAmount });
     }
     
-    let priceAfterDiscounts = vipServicesPrice > 0 ? vipServicesPrice + (priceAfterSurcharges - totalBasePrice) : priceAfterSurcharges;
-
-    const discountsApplied: { name: string, value: number, isPackageDiscount?: boolean }[] = [];
+    const discountsApplied: { name: string, value: number, isPackageDiscount?: boolean, isPromoDiscount?: boolean }[] = [];
     let canApplyPackageDiscount = false;
     let nonVipPriceAfterDiscount = nonVipBasePrice;
     
@@ -809,21 +810,35 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         }
     }
     
-    canApplyPackageDiscount = standardPackageSelected || mainServicesCount >= packageDiscountThreshold;
+    canApplyPackageDiscount = (standardPackageSelected || mainServicesCount >= packageDiscountThreshold);
 
-    let priceBeforeUpfrontDiscount = nonVipPriceAfterDiscount + vipServicesPrice + (priceAfterSurcharges - totalBasePrice);
+    let currentRunningTotal = nonVipPriceAfterDiscount + vipServicesPrice + (priceAfterSurcharges - totalBasePrice);
+
+    // Apply Promo Code Discount
+    const normalizedPromo = promoCode?.trim().toUpperCase();
+    const isPromoValid = VALID_PROMO_CODES.some(code => code.toUpperCase() === normalizedPromo);
+    if (isPromoValid) {
+        const discountAmount = currentRunningTotal * promoDiscountValue;
+        currentRunningTotal -= discountAmount;
+        let discountName;
+        if (lang === 'ru') discountName = `Промокод (${promoCode}) (-50%)`;
+        else if (lang === 'en') discountName = `Promo Code (${promoCode}) (-50%)`;
+        else if (lang === 'zh') discountName = `优惠码 (${promoCode}) (-50%)`;
+        else discountName = `Promokod (${promoCode}) (-50%)`;
+        discountsApplied.push({ name: discountName, value: discountAmount, isPromoDiscount: true });
+    }
+
+    let priceAfterDiscounts = currentRunningTotal;
 
     if (wantsUpfrontPayment) {
-        const discountAmount = priceBeforeUpfrontDiscount * upfrontDiscount;
-        priceAfterDiscounts = priceBeforeUpfrontDiscount - discountAmount;
+        const discountAmount = currentRunningTotal * upfrontDiscount;
+        priceAfterDiscounts = currentRunningTotal - discountAmount;
         let discountName;
         if (lang === 'ru') discountName = 'За предоплату (-10%)';
         else if (lang === 'en') discountName = 'For upfront payment (-10%)';
         else if (lang === 'zh') discountName = '预付款折扣 (-10%)';
         else discountName = 'Oldindan to\'lov uchun (-10%)';
         discountsApplied.push({ name: discountName, value: discountAmount });
-    } else {
-        priceAfterDiscounts = priceBeforeUpfrontDiscount;
     }
 
     const savings = priceAfterSurcharges - priceAfterDiscounts;
@@ -842,7 +857,8 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         savings,
         bonus,
         surcharges,
-        canApplyPackageDiscount
+        canApplyPackageDiscount,
+        isPromoValid
     };
 }
 
