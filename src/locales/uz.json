@@ -1,3 +1,4 @@
+
 {
     "header": {
         "portfolio": "Portfolio",
@@ -217,7 +218,7 @@
     },
     "home": {
        "cta1_title": "Sizning brendingiz ham shunday ko'rinishga ega bo'lishi mumkin.",
-       "cta1_desc": "Professional dizayn orqali biznesingizni yangi cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
+       "cta1_desc": "Professional dizayn orqali biznesingizni yeni cho'qqilarga olib chiqing. Biznesingiz uchun mos yechimni topishga yordam beramiz.",
        "cta1_button": "Mening biznesim uchun ham"
     },
     "urgencyBlock": {
@@ -316,7 +317,7 @@
         "title": "Avval va Hozir",
         "subtitle": "To'g'ri brending biznesingizni qanday o'zgartirishi mumkinligini o'z ko'zingiz bilan ko'ring.",
         "ctaTitle": "Sizning brendingiz ham o'zgarishga tayyormi?",
-        "ctaDesc": "Keling, brendingizni tahlil qilib, uni yangi bosqichga olib chiqish rejasini tuzamiz.",
+        "ctaDesc": "Keling, brendingizni tahlil qilib, uni yeni bosqichga olib chiqish rejasini tuzamiz.",
         "ctaButton": "Mening brendimni ham o'zgartiring"
     },
     "testimonials": {
@@ -357,7 +358,7 @@
         "ctaButton": "Loyihani muhokama qilish"
     },
     "leadMagnet": {
-        "title": "Brendingingizni yangi bosqichga olib chiqing",
+        "title": "Brendingingizni yeni bosqichga olib chiqing",
         "subtitle": "Biz bilan ishni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali manbalarni tayyorladik. Brending olamini o'rganing va birinchi qadamni tashlang.",
         "magnets": [
           { "id": "pdf", "title": "Bepul PDF-Cheklist", "subtitle": "Brendingdagi 7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani qo'lga kiriting.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
@@ -451,7 +452,7 @@
     "blogPost": {
         "author": "Muallif",
         "ctaTitle": "Maqola foydali bo'ldimi?",
-        "ctaDesc": "Endi nazariyadan amaliyotga o'tish vaqti. Brendingizni biz bilan yangi bosqichga olib chiqing.",
+        "ctaDesc": "Endi nazariyadan amaliyotga o'tish vaqti. Brendingizni biz bilan yeni bosqichga olib chiqing.",
         "ctaButton": "Bepul konsultatsiya olish"
     },
     "quiz": {
@@ -535,11 +536,11 @@
         "title": "Brend strategiyasi",
         "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesning o'sishiga yordam beradigan aniq g'oyadir.",
         "section1_title": "Brend strategiyasi — bu biznes o'sish vositasi",
-        "section1_p1": "Har bir shuhratparast kompaniyaning o'z maqsadlari bor. Kimdir uchun bu ma'lum bir bozor ulushini egallash bo'lsa, boshqalar uchun bu brend taniluvchanligi, yangi hududlarga kengayish va hokazo.",
+        "section1_p1": "Har bir shuhratparast kompaniyangizning o'z maqsadlari bor. Kimdir uchun bu ma'lum bir bozor ulushini egallash bo'lsa, boshqalar uchun bu brend taniluvchanligi, yeni hududlarga kengayish va hokazo.",
         "section1_p2": "Brend strategiyasi — bu kompaniyaga ushbu maqsadlarga erishishda yordam beradigan, shunchaki tovar yoki xizmat emas, balki undan kattaroq narsaga — o'z mijozlari va xaridorlarining hayotining bir qismiga, taniladigan obraz tashuvchisiga aylanishiga yordam beradigan narsadir.",
         "section1_p3": "Most importantly, bu marketing xarajatlarini tizimlashtirishga, kompaniyaning pozitsiyasini qo'llab-quvvatlamaydigan va shuning uchun xarajatlarni oqlamaydigan vositalar, kanallar va g'oyalardan voz kechishga imkon beradi.",
         "section2_title": "Brend strategiyasi har qanday biznes uchun zarur",
-        "section2_p1": "Brend strategiyasi ham yangi, ham uzoq vaqtdan beri mavjud bo'lgan kompaniyalar uchun zarur.",
+        "section2_p1": "Brend strategiyasi ham yeni, ham uzoq vaqtdan beri mavjud bo'lgan kompaniyalar uchun zarur.",
         "section2_p2_bold": "Startaplar uchun,",
         "section2_p2_text": "u boshidanoq o'z missiyasi, qadriyatlari va identifikatsiyasini aniqlashga, bozorda to'g'ri o'rin egallashga va mijozlarni jalb qilishga yordam beradi.",
         "section2_p3_bold": "Yirik kompaniyalar uchun,",
@@ -597,7 +598,7 @@
             { "title": "Strategik va Ma'noli", "description": "Har bir chiziq, rang va shakl biznesingizning xarakteri va maqsadlarini aks ettirishi kerak." }
         ],
         "process_title": "Biz logotipni qanday yaratamiz?",
-        "process_subtitle": "Bizning logotip yaratish jarayonimiz shunchaki o'tkinchi ilhomga emas, balki chuqur tahlil va strategik fikrlashga asoslangan.",
+        "process_subtitle": "Biz logotip yaratish jarayonimiz shunchaki o'tkinchi ilhomga emas, balki chuqur tahlil va strategik fikrlashga asoslangan.",
         "process_steps": [
             { "title": "Brif va Tadqiqot", "description": "Biznesingiz, maqsadlaringiz, maqsadli auditoriyangiz va raqobatchilaringizni puxta o'rganamiz." },
             { "title": "Konsepsiya ishlab chiqish", "description": "Brendingiz strategiyasi va xarakterini aks ettiruvchi bir nechta vizual konsepsiyalarni ishlab chiqamiz." },
