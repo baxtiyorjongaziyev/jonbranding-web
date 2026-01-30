@@ -5,11 +5,12 @@ import React, { useState, useEffect, FC } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice, packageDiscountThreshold } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, Clock, Crown, ArrowRight, PercentCircle, Check, ChevronsDown } from 'lucide-react';
+import { Sparkles, Gift, Info, ShoppingCart, CheckCircle, Flame, ShieldCheck, Clock, Crown, ArrowRight, PercentCircle, Check, ChevronsDown, Ticket } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion, useMotionValue, useMotionTemplate } from 'framer-motion';
@@ -301,6 +302,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     });
     
     const [discountOption, setDiscountOption] = useLocalStorage<DiscountOption>('discountOption', 'none');
+    const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
     const [isClient, setIsClient] = useState(false);
     const [currency, setCurrency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
 
@@ -314,19 +316,25 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             const wantsUpfrontPayment = discountOption === 'full';
             const isPackageDiscountEnabled = discountOption === 'package' || discountOption === 'full';
             
-            const result = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, isPackageDiscountEnabled }, lang as 'uz' | 'ru' | 'en' | 'zh');
+            const result = calculatePackagePrice({ 
+                selectedServices, 
+                wantsUpfrontPayment, 
+                isPackageDiscountEnabled,
+                promoCode 
+            }, lang as 'uz' | 'ru' | 'en' | 'zh');
             setTotal(result);
 
-            const justAppliedDiscount = result.discountApplied.length > 0 && !hasDiscountBeenApplied;
+            const hasActiveDiscount = result.discountApplied.length > 0;
+            const justAppliedDiscount = hasActiveDiscount && !hasDiscountBeenApplied;
             if (justAppliedDiscount) {
                  confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: ['#00C9FD', '#ADFFFE', '#FFFFFF', '#050583'] });
                 setHasDiscountBeenApplied(true);
             }
-            if(result.discountApplied.length === 0 && hasDiscountBeenApplied) {
+            if(!hasActiveDiscount && hasDiscountBeenApplied) {
                 setHasDiscountBeenApplied(false);
             }
         }
-    }, [selectedServices, discountOption, isClient, lang, hasDiscountBeenApplied]);
+    }, [selectedServices, discountOption, isClient, lang, hasDiscountBeenApplied, promoCode]);
 
     const trackGtagEvent = (serviceId: keyof SelectedServices, isSelected: boolean) => {
         const service = serviceDetails[serviceId];
@@ -431,6 +439,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const handleOrder = () => {
         localStorage.setItem('wantsUpfrontPayment', JSON.stringify(discountOption === 'full'));
         localStorage.setItem('isPackageDiscountEnabled', JSON.stringify(discountOption === 'package' || discountOption === 'full'));
+        localStorage.setItem('appliedPromoCode', promoCode);
         onOrderNow();
     }
     
@@ -650,7 +659,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 {total.discountApplied.map(d => (
                                      <div key={d.name} className="space-y-1">
                                         <div className="flex justify-between items-baseline text-base text-green-300">
-                                            <span>{d.name}</span>
+                                            <span className={cn(d.isPromoDiscount && "font-bold")}>{d.name}</span>
                                             <span className="font-mono">- {formatPrice(d.value, lang, currency)}</span>
                                         </div>
                                          {d.isPackageDiscount && (
@@ -677,7 +686,32 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                 </div>
                                 
-                                <div className="pt-4 border-t border-white/10">
+                                <div className="pt-4 border-t border-white/10 space-y-4">
+                                     <div className="space-y-2">
+                                        <Label htmlFor="promo-code" className="text-xs text-blue-200 flex items-center gap-2">
+                                            <Ticket className="w-3 h-3" />
+                                            {translations.promo_code_label}
+                                        </Label>
+                                        <div className="relative">
+                                            <Input 
+                                                id="promo-code"
+                                                value={promoCode}
+                                                onChange={(e) => setPromoCode(e.target.value)}
+                                                placeholder={translations.promo_code_placeholder}
+                                                className="bg-white/10 border-white/20 text-white placeholder:text-white/30 h-9 text-sm focus-visible:ring-accent"
+                                            />
+                                            {promoCode && (
+                                                <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                                                    {total.isPromoValid ? (
+                                                        <CheckCircle className="w-4 h-4 text-green-400" />
+                                                    ) : (
+                                                        <span className="text-[10px] text-red-400 font-bold uppercase">{translations.promo_code_invalid}</span>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                     </div>
+
                                      <DiscountSelector 
                                          selectedOption={discountOption}
                                          onSelectOption={setDiscountOption}
@@ -712,5 +746,3 @@ const InfoCard = ({ icon: Icon, title, description, className }: { icon: React.E
 );
 
 export default PackageBuilder;
-
-    

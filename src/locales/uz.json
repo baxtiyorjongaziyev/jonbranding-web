@@ -61,7 +61,7 @@
     "brandbookPage": {
         "metadata": {
             "title": "Brendbuk ishlab chiqish | Jon.Branding Agentligi",
-            "description": "Brendbuk — bu sizning brendingizning konstitutsiyasi. Biz brendingizning yaxlitligini ta'minlaydigan va marketing xarajatlarini tejaydigan keng qamrovli brendbuklar yaratamiz.",
+            "description": "Brendbuk — bu shunchaki logotiplar to'plami emas, bu sizning brendingiz Konstitutsiyasi. Uning biznesingizni tartibga solish va marketing xarajatlarini tejashdagi o'rnini bilib oling.",
             "keywords": "brendbuk, gaydlayn, firma uslubi, brend dizayn, logotipdan foydalanish qoidalari, brending agentligi"
         },
         "title": "Brendbuk Ishlab Chiqish",
@@ -386,7 +386,7 @@
             {
               "title": "3. Raqobatchilardan ko'chirish",
               "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona ko'chirish — bu tubanlikka yo'l. Agar sizning dizayningiz taniqli brendga o'xshasa, sizni doim 'arzonroq alternativa' deb qabul qilishadi.",
-              "solution": "Yechim: O'ziga xos yo'lingizni topish uchun raqobatchilaringizni o'rganing. Boshqacha bo'lishdan qo'rqmang."
+              "solution": "Yechim: O'ziga xos yo'lingizni findish uchun raqobatchilaringizni o'rganing. Boshqacha bo'lishdan qo'rqmang."
             },
             {
               "title": "4. Izchillikning yo'qligi (Inconsistency)",
@@ -437,7 +437,7 @@
            { "question": "Loyiha tugagandan keyin qo'llab-quvvatlash bormi?", "answer": "Ha, loyiha tugagandan so'ng 1 oy davomida biz brend materiallaridan to'g'ri foydalanish bo'yicha bepul maslahat va yordam beramiz." }
         ],
         "ctaTitle": "Shubhalarga o'rin qoldirmang!",
-        "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilib, brendingizni yangi bosqichga olib chiqamiz.",
+        "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilib, brendingizni yeni bosqichga olib chiqamiz.",
         "ctaButton": "Men barcha javoblarni oldim, boshlashga tayyorman!"
     },
     "mobileCtaBar": {
@@ -593,7 +593,7 @@
         "section1_p2": "U mijozlar sizni tanib olishi va eslab qolishiga yordam beradigan asosiy elementdir. Professional logotip ishonch hosil qiladi va hissiy aloqa o'rnatib, bir martalik xaridorlarni sodiq muxlislarga aylantiradi.",
         "values_title": "Yaxshi logotip quyidagicha bo'lishi kerak:",
         "values": [
-            { "title": "Oddiy va Esda qolarli", "description": "Eng yaxshi logotiplar hatto kichik o'lchamda yoki uzoq masofadan ham oson taniladi va esda qoladi." },
+            { "title": "Simple and Memorable", "description": "Eng yaxshi logotiplar hatto kichik o'lchamda yoki uzoq masofadan ham oson taniladi va esda qoladi." },
             { "title": "Noyob va Vaqtga bo'ysunmaydigan", "description": "U sizni raqobatchilardan ajratib turishi va bir necha yildan keyin modadan chiqib ketmasligi kerak." },
             { "title": "Strategik va Ma'noli", "description": "Har bir chiziq, rang va shakl biznesingizning xarakteri va maqsadlarini aks ettirishi kerak." }
         ],
@@ -799,6 +799,9 @@
             "recommended": "Tavsiya etiladi",
             "benefit_prefix": "Foydasi:",
             "features": "Nimalar kiradi",
+            "promo_code_label": "Promokod",
+            "promo_code_placeholder": "Kodni kiriting (masalan: PCG)",
+            "promo_code_invalid": "Promokod noto'g'ri",
             "discountSelector": {
                 "none": "Chegirmasiz",
                 "package": "Paketli (-20%)",
