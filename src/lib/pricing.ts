@@ -420,9 +420,13 @@ export const upfrontDiscount = 0.10; // 10%
 export const urgencySurcharge = 0.50;
 export const ndaSurcharge = 0.50; // Changed from 0.25 to 0.50
 export const bonusThreshold = 4000;
-export const promoDiscountValue = 0.50; // 50%
 
-const VALID_PROMO_CODES = ['PCG', 'Kursdosh', 'Tez natija'];
+const PROMO_CODES: Record<string, number> = {
+    'PCG': 0.50,
+    'KURSDOSH': 0.50,
+    'TEZ NATIJA': 0.50,
+    'PCG3KUN': 0.30
+};
 
 interface PackageSelections {
     selectedServices: SelectedServices;
@@ -503,7 +507,8 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     }
 
     const normalizedPromo = promoCode?.trim().toUpperCase();
-    const isPromoValid = VALID_PROMO_CODES.some(code => code.toUpperCase() === normalizedPromo);
+    const promoDiscountValue = PROMO_CODES[normalizedPromo || ''];
+    const isPromoValid = !!promoDiscountValue;
 
     const discountsApplied: { name: string, value: number, isPackageDiscount?: boolean, isPromoDiscount?: boolean }[] = [];
     let finalPrice = totalBasePrice + surchargeAmount;
@@ -511,7 +516,8 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     if (isPromoValid) {
         // PROMO CODE active: CANCEL ALL OTHER DISCOUNTS
         const discountValue = finalPrice * promoDiscountValue;
-        const discountName = lang === 'ru' ? `Промокод (${promoCode}) (-50%)` : (lang === 'en' ? `Promo Code (${promoCode}) (-50%)` : (lang === 'zh' ? `优惠码 (${promoCode}) (-50%)` : `Promokod (${promoCode}) (-50%)`));
+        const discountPercent = Math.round(promoDiscountValue * 100);
+        const discountName = lang === 'ru' ? `Промокод (${promoCode}) (-${discountPercent}%)` : (lang === 'en' ? `Promo Code (${promoCode}) (-${discountPercent}%)` : (lang === 'zh' ? `优惠码 (${promoCode}) (-${discountPercent}%)` : `Promokod (${promoCode}) (-${discountPercent}%)`));
         discountsApplied.push({ name: discountName, value: discountValue, isPromoDiscount: true });
         finalPrice -= discountValue;
     } else {
