@@ -422,7 +422,6 @@ export const ndaSurcharge = 0.50; // Changed from 0.25 to 0.50
 export const bonusThreshold = 4000;
 
 const PROMO_CODES: Record<string, number> = {
-    'PCG': 0.50,
     'KURSDOSH': 0.50,
     'TEZ NATIJA': 0.50,
     'PCG3KUN': 0.30
