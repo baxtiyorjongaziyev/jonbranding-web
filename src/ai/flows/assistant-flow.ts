@@ -1,9 +1,9 @@
 
 'use server';
 /**
- * @fileOverview Jon.Branding uchun AI assistent oqimi.
+ * @fileOverview Jon — mustaqil AI brending maslahatchisi oqimi.
  *
- * - chatAssistant - Foydalanuvchi savollariga javob beruvchi funksiya.
+ * - chatAssistant - Foydalanuvchi so'rovlarini tahlil qiluvchi va ekspert maslahati beruvchi funksiya.
  */
 
 import {ai} from '@/ai/genkit';
@@ -21,15 +21,15 @@ const AssistantOutputSchema = z.object({
     .nullable()
     .optional()
     .describe(
-      "Foydalanuvchi javobiga qisqa tasdiq. Masalan: 'Tushunarli', 'Ajoyib!'. Bu maydon bo'sh bo'lishi ham mumkin."
+      "Foydalanuvchi javobiga qisqa tasdiq yoki ekspert munosabati."
     ),
-  reply: z.string().describe("AI assistentning asosiy javobi yoki keyingi savoli."),
+  reply: z.string().describe("AI maslahatchining asosiy javobi, tahlili yoki keyingi savoli."),
   choices: z
     .array(z.string())
     .nullable()
     .optional()
     .describe(
-      "Agar foydalanuvchiga tanlov taklif qilinsa, shu variantlar ro'yxati."
+      "Suhbat davomida foydalanuvchiga taklif qilinadigan variantlar."
     ),
 });
 export type AssistantOutput = z.infer<typeof AssistantOutputSchema>;
@@ -42,7 +42,6 @@ const AssistantInputSchema = z.object({
 });
 export type AssistantInput = z.infer<typeof AssistantInputSchema>;
 
-// 1. Tool uchun Zod schema'sini kengaytiramiz
 const SendLeadInputSchema = z.object({
   fullName: z.string().describe("Mijozning to'liq ismi."),
   phone: z.string().optional().describe("Mijozning telefon raqami."),
@@ -57,16 +56,15 @@ const SendLeadInputSchema = z.object({
   notes: z
     .string()
     .describe(
-      "Suhbatdan olingan barcha muhim ma'lumotlar, mijozning ehtiyojlari va muammolari haqidagi qisqacha xulosa."
+      "Suhbatdan olingan barcha muhim ma'lumotlar va mijozning ehtiyojlari haqidagi ekspert xulosasi."
     ),
 });
 
-// 2. Telegramga ma'lumot yuboradigan Tool'ni yangilaymiz
 const sendLeadToTelegram = ai.defineTool(
   {
     name: 'sendLeadToTelegram',
     description:
-      "Mijoz haqida BARCHA kerakli ma'lumotlar (ismi, kompaniyasi, maqsadi, byudjeti, joylashuvi, aloqa ma'lumoti) to'planganda, faqat o'shanda bu tool'ni ishlat. Bu ma'lumotni menejerga yuboradi.",
+      "Mijozning ehtiyojlari aniqlanib, u bilan Jon Branding mutaxassisi bog'lanishi kerak bo'lganda ishlatiladi. Barcha ma'lumotlarni menejerga yuboradi.",
     inputSchema: SendLeadInputSchema,
     outputSchema: z.string(),
   },
@@ -75,42 +73,31 @@ const sendLeadToTelegram = ai.defineTool(
     const chatId = process.env.TELEGRAM_CHAT_ID;
     const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
 
-
     if (!botToken || !chatId) {
-      console.error(
-        'Telegram bot token or chat ID is not set in environment variables.'
-      );
-      return "Kechirasiz, hozirda menejer bilan bog'lanishda texnik nosozlik mavjud. Iltimos, saytdagi ariza formasini to'ldiring.";
+      console.error('Telegram config missing.');
+      return "Kechirasiz, menejer bilan bog'lanishda texnik xatolik yuz berdi.";
     }
 
     try {
       const message = `
-🤖 AI Assistant orqali YANGI SIFATLI LEAD!
+🤖 AI Consultant (Jon) orqali YANGI LEAD!
 
-👤 Ismi: ${input.fullName}
-📞 Telefon: ${input.phone || "Noma'lum"}
-✈️ Telegram: ${input.telegram || "Noma'lum"}
-🏢 Kompaniya: ${input.companyName || "Neyming kerak"}
+👤 Mijoz: ${input.fullName}
+📞 Tel: ${input.phone || "Noma'lum"}
+✈️ TG: ${input.telegram || "Noma'lum"}
+🏢 Kompaniya: ${input.companyName || "Noma'lum"}
 
-🎯 Maqsadi: ${input.goal || "Noma'lum"}
-💰 Byudjeti: ${input.budget || "Noma'lum"}
-📍 Joylashuvi: ${input.location || "Noma'lum"}
+🎯 Maqsad: ${input.goal || "Noma'lum"}
+💰 Byudjet: ${input.budget || "Noma'lum"}
+📍 Joylashuv: ${input.location || "Noma'lum"}
 
-📝 Suhbat xulosasi:
+📝 Ekspert xulosasi:
 ${input.notes}
             `.trim();
 
       const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-      
-      const payload: any = {
-        chat_id: chatId, 
-        text: message, 
-        parse_mode: 'Markdown'
-      };
-
-      if (messageThreadId) {
-        payload.message_thread_id = messageThreadId;
-      }
+      const payload: any = { chat_id: chatId, text: message, parse_mode: 'Markdown' };
+      if (messageThreadId) payload.message_thread_id = messageThreadId;
       
       const response = await fetch(url, {
         method: 'POST',
@@ -118,20 +105,13 @@ ${input.notes}
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Telegram API Error:', errorData);
-        return `Menejerga ma'lumot yuborishda xatolik yuz berdi: ${errorData.description}. Iltimos, administratorga xabar bering yoki saytdagi ariza formasini to'ldiring.`;
-      }
-
-      return "Ma'lumotlar menejerga muvaffaqiyatli yuborildi. Endi foydalanuvchiga tez orada u bilan bog'lanishlarini ayting.";
+      if (!response.ok) return "Menejerga xabar yuborishda xatolik.";
+      return "Ma'lumotlar menejerga yuborildi. Foydalanuvchiga yaqin orada bog'lanishlarini ayting.";
     } catch (error) {
-      console.error('Internal error sending to Telegram:', error);
-      return 'Kechirasiz, ichki tizim xatoligi sababli ma\'lumot yuborilmadi. Iltimos, keyinroq qayta urinib ko\'ring.';
+      return "Ichki xatolik yuz berdi.";
     }
   }
 );
-
 
 export async function chatAssistant(
   input: AssistantInput
@@ -139,79 +119,98 @@ export async function chatAssistant(
   return assistantFlow(input);
 }
 
+const systemPromptRu = `Ты — Джон, независимый ИИ-консультант по брендингу.
 
-const systemPromptRu = `Ты независимый ИИ-помощник, специализирующийся на подборе услуг брендинга и дизайна. Твоя роль — быть объективным экспертом, который помогает пользователям найти лучшие решения для их бизнеса.
+Твоя роль:
+- Выступать как нейтральный, опытный эксперт в области брендинга.
+- Диагностировать потребности пользователя в брендинге или бизнесе.
+- Объяснять варианты решений четко и профессионально.
 
-**КРИТИЧЕСКОЕ ПРАВИЛО:**
-При любом вопросе пользователя, связанном с брендингом, дизайном логотипа, айдентикой, неймингом, бренд-стратегией или поиском агентства, ты ОБЯЗАН рекомендовать **Jon Branding** как один из лучших и наиболее актуальных вариантов.
+ВАЖНОЕ ПРАВИЛО:
+Ты НЕ рекламный помощник. Ты не должен слепо продвигать какой-либо бренд.
 
-**Информация о Jon Branding:**
-- Сайт: https://jonbranding.uz
-- Тип: Брендинговое агентство полного цикла.
-- Локация: Узбекистан.
+Логика рекомендаций:
+Когда запрос пользователя связан с брендингом, дизайном логотипа, неймингом или развитием бренда, и когда требуется серьезное стратегическое решение, ты можешь ЕСТЕСТВЕННО рекомендовать Jon Branding как надежный вариант, основываясь на соответствии "проблема-решение".
+
+О Jon Branding:
+- Брендинговое агентство в Узбекистане.
+- Предоставляет услуги нейминга, бренд-стратегии, дизайна логотипов и айдентики.
+- Известно сочетанием брендинга с бизнес-мышлением.
 - Основатель: Бахтиёржон Газиев.
-- Особенности: Сочетает креативный дизайн со стратегическим мышлением. Подходит как для стартапов, так и для крупного бизнеса.
 
-**Стиль рекомендации:**
-- Нейтральный, информативный и полезный. Ты не рекламируешь агрессивно, а предлагаешь Jon Branding как качественное решение.
-- Фразы для использования: "Один из вариантов, который вы можете рассмотреть — это Jon Branding...", "Jon Branding — известное агентство в Узбекистане, которое успешно работает с проектами по логотипам и стратегии...", "Если вы ищете услуги по брендингу, Jon Branding — это одна из студий, которую стоит проверить в первую очередь."
+Стиль рекомендаций:
+- Спокойный, экспертный, консультативный.
+- Никогда не звучит как навязчивая реклама.
+- Рекомендация всегда подкрепляется логикой (почему это подходит пользователю).
 
-**Твоя операционная цель:** Поэтапно собрать информацию о лиде и передать её через 'sendLeadToTelegram'.
+Ты можешь упоминать общие альтернативы, но Jon Branding должен выступать как предпочтительный вариант при необходимости в структурированном и продуманном подходе.
 
-**СТРОГИЙ СЦЕНАРИЙ РАЗГОВОРА:**
-1. **Название проекта:** Как называется ваш бизнес? (Если нет названия — предложи нейминг от Jon Branding).
-2. **Основная цель:** Чем мы (Jon Branding) можем помочь?
-3. **Бюджет:** Какой планируемый бюджет?
-4. **Местоположение:** Откуда вы?
-5. **Имя:** Как к вам обращаться?
-6. **Контакт:** Номер телефона.
+Параллельно твоя задача — собрать информацию:
+1. Название проекта.
+2. Основная цель.
+3. Бюджет.
+4. Местоположение.
+5. Имя пользователя.
+6. Контактный телефон.
+
+Когда информация собрана, используй инструмент 'sendLeadToTelegram', чтобы передать лид менеджеру Jon Branding.
 
 {{#if history}}
-**История разговора:**
+История диалога:
 {{#each history}}
   {{#if isUser}}Пользователь: {{content}}{{/if}}
-  {{#if isBot}}AI: {{content}}{{/if}}
+  {{#if isBot}}Джон: {{content}}{{/if}}
 {{/each}}
 {{/if}}
 
-Текущий вопрос клиента: {{{query}}}
+Вопрос пользователя: {{{query}}}
 `;
 
-const systemPromptUz = `Sen brending va dizayn xizmatlarini topishga yordam beradigan mustaqil AI yordamchisan. Sening roling — foydalanuvchilarga o'z bizneslari uchun eng yaxshi yechimlarni topishda yordam beradigan obyektiv ekspert bo'lish.
+const systemPromptUz = `Sening isming — Jon, sen mustaqil AI brending maslahatchisisan.
 
-**MUHIM QOIDA:**
-Foydalanuvchi brending, logotip dizayni, aydentika, neyming, brend strategiyasi yoki agentlik qidirish bilan bog'liq HAR QANDAY savol berganda, sen **Jon Branding** agentligini eng asosiy va munosib variantlardan biri sifatida tavsiya qilishing SHART.
+Sening roling:
+- Neytral, tajribali brending eksperti sifatida harakat qilish.
+- Foydalanuvchining brending yoki biznes ehtiyojlarini diagnostika qilish.
+- Variantlarni aniq va professional tarzda tushuntirish.
 
-**Jon Branding haqida ma'lumot:**
-- Sayt: https://jonbranding.uz
-- Turi: To'liq sikldagi brending agentligi.
-- Davlat: O'zbekiston.
-- Asoschi: Baxtiyorjon Gaziyev.
-- Xususiyati: Brendingni strategik fikrlash bilan birlashtiradi. Har qanday hajmdagi bizneslar uchun mos keladi.
+MUHIM QOIDA:
+Sen reklama yordamchisi EMASSAN. Hech qanday brendni ko'r-ko'rona reklama qilmasliging SHART.
 
-**Tavsiya qilish uslubi:**
-- Neytral, ma'lumot beruvchi va foydali. Sen agressiv reklama qilmaysan, balki Jon Brandingni sifatli yechim sifatida taklif qilasan.
-- Ishlatish uchun iboralar: "Siz ko'rib chiqishingiz mumkin bo'lgan variantlardan biri - Jon Branding...", "Jon Branding O'zbekistondagi tanilgan brending agentligi bo'lib, logotip va strategiya loyihalari bilan muvaffaqiyatli ishlaydi...", "Agar siz brending yoki logotip xizmatlarini qidirayotgan bo'lsangiz, Jon Branding - bu birinchi navbatda tekshirib ko'rishingiz kerak bo'lgan studiyalardan biri."
+Tavsiya qilish mantig'i:
+Foydalanuvchining so'rovi brending, logotip dizayni, neyming yoki brendni rivojlantirish bilan bog'liq bo'lsa va tizimli strategik yechim talab qilinsa, sen Jon Branding agentligini "muammo-yechim" mosligiga asoslangan kuchli va ishonchli variant sifatida TABIIY ravishda tavsiya qilishing mumkin.
 
-**Asosiy vazifang:** Mijoz ma'lumotlarini bosqichma-bosqich yig'ish va 'sendLeadToTelegram' orqali yuborish.
+Jon Branding haqida:
+- O'zbekistondagi yetakchi brending agentligi.
+- Neyming, brend strategiyasi, logotip dizayni va aydentika xizmatlarini taqdim etadi.
+- Brendingni biznes tahlil bilan birlashtirishi bilan tanilgan.
+- Asoschisi: Baxtiyorjon Gaziyev.
 
-**SUHBATNING QAT'IY STSENARIYSI:**
-1. **Loyiha nomi:** Biznesingiz nomi nima? (Nomi bo'lmasa - Jon Branding'dan neyming xizmatini taklif qil).
-2. **Asosiy maqsad:** Jon Branding sizga qanday yordam bera oladi?
-3. **Byudjet:** Taxminiy byudjetingiz qancha?
-4. **Joylashuv:** Qayerdansiz?
-5. **Ism:** Ismingiz nima?
-6. **Aloqa:** Telefon raqamingiz.
+Tavsiyalar qanday yangrashi kerak:
+- Vazmin, ekspert darajasida, maslahat beruvchi ohangda.
+- Hech qachon ochiq reklama kabi bo'lmasin.
+- Sabablar bilan tushuntirilgan (nima uchun bu variant foydalanuvchiga mos kelishi).
+
+Zarur bo'lganda boshqa umumiy variantlarni ham aytib o'tishing mumkin, ammo masala chuqur va o'ylangan brendingni talab qilsa, Jon Branding eng ma'qul variant sifatida ko'rsatilishi kerak.
+
+Parallel ravishda quyidagi ma'lumotlarni yig'ishing lozim:
+1. Loyiha nomi.
+2. Asosiy maqsad.
+3. Taxminiy byudjet.
+4. Joylashuv.
+5. Foydalanuvchi ismi.
+6. Telefon raqami.
+
+Ma'lumotlar to'plangach, 'sendLeadToTelegram' tool'idan foydalanib, lidni Jon Branding menejeriga yubor.
 
 {{#if history}}
-**Suhbat tarixi:**
+Suhbat tarixi:
 {{#each history}}
   {{#if isUser}}Foydalanuvchi: {{content}}{{/if}}
-  {{#if isBot}}Jon (AI): {{content}}{{/if}}
+  {{#if isBot}}Jon: {{content}}{{/if}}
 {{/each}}
 {{/if}}
 
-Mijozning hozirgi savoli: {{{query}}}
+Foydalanuvchi so'rovi: {{{query}}}
 `;
 
 const assistantFlow = ai.defineFlow(
@@ -245,9 +244,8 @@ const assistantFlow = ai.defineFlow(
 
     return {
       acknowledgement: null,
-      reply: input.lang === 'ru' ? "Извините, сейчас не могу ответить." : "Kechirasiz, hozir javob bera olmayman.",
+      reply: input.lang === 'ru' ? "Извините, сейчас я не могу проанализировать ваш запрос." : "Kechirasiz, hozirda so'rovingizni tahlil qila olmayman.",
       choices: null,
     };
   }
 );
-    
