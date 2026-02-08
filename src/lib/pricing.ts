@@ -130,6 +130,7 @@ const uzServiceDetails = {
         note: null,
         features: [
             { feature: "10+ ta eksklyuziv nom variantlari va shaxsiy art-direktor nazorati", benefit: "Eng yuqori darajadagi ijodiy yondashuv va tajribaga ega bo'lasiz." },
+            { feature: "6 xil tilda fonetik va semantik tahlil", benefit: "Xalqaro bozorga chiqsangiz, nomingiz boshqa tillarda salbiy ma'no anglatmasligiga ishonch hosil qilasiz." },
             { feature: "Internetda sayt uchun .uz domen bo'shligi tekshiriladi", benefit: "Tanlagan nomingiz raqamli muhitda band bo'lmaydi." },
             { feature: "Ijtimoiy tarmoqlarda (Telegram, Instagram) bo'shligi tekshiriladi", benefit: "Brendingiz uchun muhim ijtimoiy tarmoq nomlarini oldindan band qilasiz." },
             { feature: "3 tagacha klass bo'yicha chuqur patent tekshiruvi", benefit: "Maksimal darajada huquqiy himoya va xotirjamlikka erishasiz." },
@@ -261,7 +262,15 @@ Object.assign(ruServiceDetails, {
     commStrategy: { ...ruServiceDetails.commStrategy, label: "Коммуникационная стратегия", description: "Стратегия общения с клиентами: тон, ключевые сообщения, каналы." },
     namingStandard: { ...ruServiceDetails.namingStandard, label: "Naming СТАНДАРТ", description: "Идеально для малого бизнеса и стартапов." },
     namingPremium: { ...ruServiceDetails.namingPremium, label: "Naming ПРЕМИУМ", description: "Для среднего и развивающегося бизнеса." },
-    namingVIP: { ...ruServiceDetails.namingVIP, label: "Naming VIP", description: "Для крупных и международных проектов." },
+    namingVIP: { ...ruServiceDetails.namingVIP, label: "Naming VIP", description: "Для крупных и международных проектов.", features: [
+        { feature: "10+ эксклюзивных вариантов названий и контроль личного арт-директора", benefit: "Вы получите творческий подход и опыт высочайшего уровня." },
+        { feature: "Фонетический и семантический анализ на 6 языках", benefit: "Вы будете уверены, что при выходе на международный рынок ваше название не имеет негативного значения на других языках." },
+        { feature: "Проверка доступности домена .uz для сайта", benefit: "Выбранное вами имя не будет занято в цифровой среде." },
+        { feature: "Проверка доступности в соцсетях (Telegram, Instagram)", benefit: "Вы заранее забронируете важные названия в соцсетях для своего бренда." },
+        { feature: "Глубокая патентная проверка по 3 классам", benefit: "Вы добьетесь максимальной правовой защиты и спокойствия." },
+        { feature: "Бесплатный домен .uz на 10 лет", benefit: "Вы обеспечите свое долгосрочное цифровое будущее." },
+        { feature: "Помощь в подаче на патент (госпошлина отдельно)", benefit: "Мы упростим для вас все сложные юридические процессы." }
+    ]},
     logoStandard: { ...ruServiceDetails.logoStandard, label: "Logo СТАНДАРТ", description: "Для стартапов и тех, кому нужно быстрое решение." },
     logoPremium: { ...ruServiceDetails.logoPremium, label: "Logo+Фирменный стиль ПРЕМИУМ", description: "Для бизнесов, серьезно настроенных на развитие своего бренда." },
     logoVIP: { ...ruServiceDetails.logoVIP, label: "Logo+Фирменный стиль+Brandbook VIP", description: "Для полного выхода на рынок и максимального эффекта." },
@@ -282,7 +291,15 @@ Object.assign(enServiceDetails, {
     commStrategy: { ...enServiceDetails.commStrategy, label: "Communication Strategy", description: "Customer communication strategy: tone, key messages, channels." },
     namingStandard: { ...enServiceDetails.namingStandard, label: "Naming STANDARD", description: "Ideal for small businesses and startups." },
     namingPremium: { ...enServiceDetails.namingPremium, label: "Naming PREMIUM", description: "A strategic approach for medium and growing businesses." },
-    namingVIP: { ...enServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects." },
+    namingVIP: { ...enServiceDetails.namingVIP, label: "Naming VIP", description: "For large and international projects.", features: [
+        { feature: "10+ exclusive name options and personal art director control", benefit: "You get the highest level of creative approach and experience." },
+        { feature: "Phonetic and semantic analysis in 6 languages", benefit: "When expanding to international markets, you will be sure that your name does not have a negative meaning in other languages." },
+        { feature: "Checking .uz domain availability for website", benefit: "Your chosen name will not be taken in the digital environment." },
+        { feature: "Checking availability on social networks (Telegram, Instagram)", benefit: "You reserve important social network names for your brand in advance." },
+        { feature: "Deep patent check for up to 3 classes", benefit: "You achieve the maximum level of legal protection and peace of mind." },
+        { feature: "Free .uz domain for 10 years", benefit: "You ensure your long-term digital future." },
+        { feature: "Help with patent filing (state fee separate)", benefit: "We simplify all complex legal processes for you." }
+    ]},
     logoStandard: { ...enServiceDetails.logoStandard, label: "Logo STANDARD", description: "For startups and those who need a quick solution." },
     logoPremium: { ...enServiceDetails.logoPremium, label: "Logo+Corporate Identity PREMIUM", description: "For businesses serious about developing their brand." },
     logoVIP: { ...enServiceDetails.logoVIP, label: "Logo+Corporate Identity+Brandbook VIP", description: "For a full market launch and maximum impact." },
@@ -303,7 +320,15 @@ Object.assign(zhServiceDetails, {
     commStrategy: { ...zhServiceDetails.commStrategy, label: "传播策略", description: "客户传播策略：语调、关键信息、渠道。" },
     namingStandard: { ...zhServiceDetails.namingStandard, label: "命名 标准", description: "适合小型企业和初创公司。" },
     namingPremium: { ...zhServiceDetails.namingPremium, label: "命名 高级", description: "适合中型和成长型企业的战略方法。" },
-    namingVIP: { ...zhServiceDetails.namingVIP, label: "命名 VIP", description: "适合大型和国际项目。" },
+    namingVIP: { ...zhServiceDetails.namingVIP, label: "命名 VIP", description: "适合大型和国际项目。", features: [
+        { feature: "10+ 个专属命名方案及艺术总监亲自把关", benefit: "您将获得最高水平的创意和经验。" },
+        { feature: "6 种语言的语音和语义分析", benefit: "当进入国际市场时，您将确保您的名字在其他语言中没有负面含义。" },
+        { feature: "检查网站的 .uz 域名可用性", benefit: "您选择的名字在数字环境中不会被占用。" },
+        { feature: "检查社交网络（Telegram、Instagram）的可用性", benefit: "您提前为您的品牌预订重要的社交网络账号。" },
+        { feature: "多达 3 个类别的深度专利检查", benefit: "您将获得最大程度的法律保护和安心。" },
+        { feature: "10 年免费 .uz 域名", benefit: "您确保了长期的数字化未来。" },
+        { feature: "协助专利申请（规费另计）", benefit: "我们为您简化所有复杂的法律流程。" }
+    ]},
     logoStandard: { ...zhServiceDetails.logoStandard, label: "标志 标准", description: "适用于初创公司和需要快速解决方案的公司。" },
     logoPremium: { ...zhServiceDetails.logoPremium, label: "标志+企业形象 高级", description: "适用于认真发展其品牌的企业。" },
     logoVIP: { ...zhServiceDetails.logoVIP, label: "标志+企业形象+品牌手册 VIP", description: "为了全面推向市场并获得最大影响。" },
