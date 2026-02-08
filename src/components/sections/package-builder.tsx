@@ -113,7 +113,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const { label, description, price, features, timeline, note, oldPrice, discount, recommended } = detail;
     const Icon = serviceIcons[id] || Sparkles;
 
-    const isTariff = ['naming', 'logo'].some(prefix => id.toLowerCase().startsWith(prefix));
+    const isTariff = ['namingStandard', 'namingPremium', 'namingVIP', 'logoStandard', 'logoPremium', 'logoVIP'].includes(id);
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium') && !isVip;
 
@@ -167,6 +167,9 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     )}
                 </div>
                 <div className="text-center">
+                    <div className={cn("mx-auto p-3 rounded-full w-fit mb-4", selected ? "bg-primary/10" : (isVip ? "bg-white/10" : "bg-secondary"))}>
+                        <Icon className={cn("w-8 h-8", selected ? "text-primary" : (isVip ? "text-amber-400" : "text-muted-foreground"))} />
+                    </div>
                     <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
                     <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
                     <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang, currency)}</p>
