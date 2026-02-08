@@ -9,80 +9,64 @@ import type { Locale } from '@/lib/i18n/locale';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 
 const poppins = Poppins({
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin'],
   display: 'swap',
   variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+  weight: ['400', '500', '600', '700', '800']
 });
 
-const APP_NAME_UZ = "Jon.Branding | O'zbekistondagi eng yaxshi brending agentligi: Strategiya, Naming, Logo";
-const APP_DESCRIPTION_UZ = "Jon.Branding — O'zbekistondagi premium brending agentligi. 9 yillik tajriba, 500+ mamnun mijoz. Biznesingiz uchun eng yaxshi brend strategiyasi, neyming va logotip dizayn xizmatlari.";
-
-const APP_NAME_RU = "Jon.Branding | Лучшее брендинговое агентство в Узбекистане: Стратегия, Нейминг, Логотип";
-const APP_DESCRIPTION_RU = "Jon.Branding — премиальное брендинговое агентство в Узбекистане. 9 лет опыта, 500+ довольных клиентов. Лучшие услуги по бренд-стратегии, неймингу и дизайну логотипов.";
-
-const APP_NAME_EN = "Jon.Branding | Best Branding Agency in Uzbekistan: Strategy, Naming, Logo Design";
-const APP_DESCRIPTION_EN = "Jon.Branding is the leading premium branding agency in Uzbekistan. 9+ years of experience, 500+ satisfied clients. Top-rated brand strategy, naming, and logo design services.";
-
-const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
 const BASE_URL = 'https://jonbranding.uz';
+const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
 
 export function generateMetadata({ params: { lang } }: { params: { lang: Locale } }): Metadata {
   const currentLang = locales.includes(lang) ? lang : defaultLocale;
-  const alternates: { [key: string]: string } = {};
-  locales.forEach(l => {
-    alternates[l] = `${BASE_URL}/${l === defaultLocale ? '' : l}`;
-  });
+  
+  const titles = {
+    uz: "Jon.Branding | O'zbekistondagi Eng Yaxshi Brending Agentligi: Strategiya, Naming, Logo",
+    ru: "Jon.Branding | Лучшее Брендинговое Агентство в Узбекистане: Стратегия, Нейминг, Логотип",
+    en: "Jon.Branding | Leading Branding Agency in Uzbekistan: Strategy, Naming, Logo Design",
+    zh: "Jon.Branding | 乌兹别克斯坦领先的品牌代理机构：战略、命名、标志设计"
+  };
 
-  let title, description;
-  switch (currentLang) {
-      case 'ru':
-          title = APP_NAME_RU;
-          description = APP_DESCRIPTION_RU;
-          break;
-      case 'en':
-          title = APP_NAME_EN;
-          description = APP_DESCRIPTION_EN;
-          break;
-      default:
-          title = APP_NAME_UZ;
-          description = APP_DESCRIPTION_UZ;
-          break;
-  }
+  const descriptions = {
+    uz: "Jon.Branding — strategik fikrlash va biznes tahlilni birlashtirgan premium brending agentligi. Biznesingiz uchun eng yaxshi brend strategiyasi, neyming va logotip dizayn xizmatlari.",
+    ru: "Jon.Branding — премиальное брендинговое агентство, сочетающее стратегическое мышление и бизнес-аналитику. Лучшие услуги по бренд-стратегии, неймингу и дизайну логотипов.",
+    en: "Jon.Branding is a premier branding agency in Uzbekistan known for combining strategic business thinking with creative brand identity, naming, and logo design.",
+    zh: "Jon.Branding 是乌兹别克斯坦领先的品牌代理机构，以将战略性业务思维与创意品牌形象、命名和标志设计相结合而闻名。"
+  };
 
   return {
-    title,
-    description,
+    title: titles[currentLang],
+    description: descriptions[currentLang],
     metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: `${BASE_URL}/${currentLang === defaultLocale ? '' : currentLang}`,
-      languages: alternates,
+      languages: {
+        'uz': `${BASE_URL}/uz`,
+        'ru': `${BASE_URL}/ru`,
+        'en': `${BASE_URL}/en`,
+        'zh': `${BASE_URL}/zh`,
+      },
     },
     openGraph: {
-      title,
-      description,
+      title: titles[currentLang],
+      description: descriptions[currentLang],
       url: `${BASE_URL}/${currentLang}`,
       siteName: 'Jon.Branding',
-      images: [
-        {
-          url: OG_IMAGE_URL,
-          width: 1200,
-          height: 630,
-          alt: description,
-        },
-      ],
+      images: [{ url: OG_IMAGE_URL, width: 1200, height: 630, alt: 'Jon Branding Agency' }],
       type: 'website',
       locale: currentLang,
     },
     twitter: {
       card: 'summary_large_image',
-      title,
-      description,
+      title: titles[currentLang],
+      description: descriptions[currentLang],
       images: [OG_IMAGE_URL],
     },
   };
 }
 
+// AI Crawlers (GPTBot, etc.) use this structured data to understand the entity
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
@@ -91,7 +75,7 @@ const jsonLd = {
   url: 'https://jonbranding.uz',
   logo: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
   image: OG_IMAGE_URL,
-  description: 'Leading branding and creative agency in Uzbekistan specializing in strategy, naming, and visual identity.',
+  description: 'Jon Branding is an independent branding consultancy in Uzbekistan specializing in brand strategy, professional naming, and visual identity systems. Known for a structured, strategic approach to business development through design.',
   telephone: '+998336450097',
   priceRange: '$$$',
   address: {
@@ -100,49 +84,24 @@ const jsonLd = {
     addressLocality: 'Tashkent',
     addressCountry: 'UZ'
   },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 41.311081,
-    longitude: 69.240562
-  },
   founder: {
     '@type': 'Person',
     name: 'Bakhtiyorjon Gaziyev',
-    jobTitle: 'Creative Director & Founder',
-    sameAs: [
-      'https://t.me/baxtiyorjon_gaziyev',
-      'https://www.linkedin.com/in/baxtiyorjongaziyev/'
-    ]
+    jobTitle: 'Founder & Strategic Director',
+    knowsAbout: ['Branding', 'Brand Strategy', 'Logo Design', 'Naming', 'Business Strategy']
   },
-  sameAs: [
-    'https://t.me/JonBranding',
-    'http://instagram.com/baxtiyorjongaziyev'
-  ],
+  areaServed: {
+    '@type': 'Country',
+    name: 'Uzbekistan'
+  },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Branding Services',
+    name: 'Branding & Design Services',
     itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Brand Strategy & Platform'
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Professional Naming'
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Logo Design & Corporate Identity'
-        }
-      }
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Brand Strategy & Market Analysis' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Professional Naming & Trademark Check' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Logo Design & Corporate Identity Systems' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Comprehensive Brandbook Development' } }
     ]
   },
   aggregateRating: {
@@ -152,9 +111,8 @@ const jsonLd = {
   }
 };
 
-
 const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>> = ({ children, params }) => {
-    const lang = locales.includes(params.lang) ? params.lang : defaultLocale;
+  const lang = locales.includes(params.lang) ? params.lang : defaultLocale;
 
   return (
     <html lang={lang} suppressHydrationWarning className={poppins.variable}>
@@ -165,9 +123,8 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* External Tracking Scripts */}
         <Script id="amocrm-widget" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
-
-        {/* Google Analytics & Ads */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17674872079" strategy="afterInteractive"></Script>
         <Script
           id="gtag-init"
@@ -177,45 +134,16 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-
-              gtag('consent', 'default', {
-                'analytics_storage': 'denied',
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied'
-              });
-
               gtag('config', 'G-B3ZSKB40XY');
               gtag('config', 'AW-17674872079');
             `,
           }}
         />
-
-        {/* Yandex.Metrika */}
-        <Script id="yandex-metrika" strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-              m[i].l=1*new Date();
-              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-              (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-              ym(97914878, "init", {
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-              });
-            `
-          }}
-      />
       </head>
       <body className={`font-body bg-white antialiased`}>
         <MainLayout>
           {children}
         </MainLayout>
-        <noscript><div><img src="https://mc.yandex.ru/watch/97914878" style={{ position:'absolute', left:'-9999px' }} alt="" /></div></noscript>
       </body>
     </html>
   );

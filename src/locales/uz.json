@@ -72,7 +72,7 @@
         "values_title": "Brendbuk quyidagi muammolarni hal qiladi:",
         "values": [
             { "title": "Izchillik va Taniluvchanlik", "description": "Brendingiz barcha platformalarda — vizitkadan tortib saytgacha — bir xil va professional ko'rinishini ta'minlaydi." },
-            { "title": "Resurslarni Tejash", "description": "Har bir yangi xodim yoki pudratchiga dizayn qoidalarini tushuntirish zaruratini yo'qotib, ish jarayonini tezlashtiradi." },
+            { "title": "Resurslarni Tejash", "description": "Har bir yeni xodim yoki pudratchiga dizayn qoidalarini tushuntirish zaruratini yo'qotib, ish jarayonini tezlashtiradi." },
             { "title": "Brendni Himoya Qilish", "description": "Aydentikangizni noto'g'ri ishlatilishidan himoya qilib, brendingiz yaxlitligi va qiymatini saqlab qoladi." }
         ],
         "process_title": "Brendbuk nimalarni o'z ichiga oladi?",
@@ -395,7 +395,7 @@
             },
             {
               "title": "5. Haddan tashqari murakkab logotip",
-              "description": "Ko'p mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt favikoni yoki ijtimoiy tarmoq avatari) yomon ko'rinadi.",
+              "description": "Ko'p mayda detallar, gradientlar va matnlardan ibotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt favikoni yoki ijtimoiy tarmoq avatari) yomon ko'rinadi.",
               "solution": "Yechim: Oddiylik va minimalizmga intiling. Eng yaxshi logotiplar — bu xotiradan chizish mumkin bo'lganlaridir."
             },
             {
@@ -534,7 +534,7 @@
             "description": "Brend strategiyasi — bu biznesning o'sish vositasidir. Brendingizni shunchaki chiroylidan ishlaydigan tizimga aylantiring. Biz brend platformalari va strategiyalarini ishlab chiqamiz."
         },
         "title": "Brend strategiyasi",
-        "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznes의 o'sishiga yordam beradigan aniq g'oyadir.",
+        "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznes o'sishiga yordam beradigan aniq g'oyadir.",
         "section1_title": "Brend strategiyasi — bu biznes o'sish vositasi",
         "section1_p1": "Har bir shuhratparast kompaniyangizning o'z maqsadlari bor. Kimdir uchun bu ma'lum bir bozor ulushini egallash bo'lsa, boshqalar uchun bu brend taniluvchanligi, yeni hududlarga kengayish va hokazo.",
         "section1_p2": "Brend strategiyasi — bu kompaniyaga ushbu maqsadlarga erishishda yordam beradigan, shunchaki tovar yoki xizmat emas, balki undan kattaroq narsaga — o'z mijozlari va xaridorlarining hayotining bir qismiga, taniladigan obraz tashuvchisiga aylanishiga yordam beradigan narsadir.",
@@ -612,12 +612,12 @@
     "namingPage": {
         "metadata": {
             "title": "Toshkentdagi Neyming Xizmatlari | Jon.Branding Agentligi",
-            "description": "Brend uchun esda qolarli va kuchli nom tanlash. Yaxshi nom nafaqat chiroyli eshitiladi; u mohiyatni yetkazadi, esda qoladi va brendning ajralib turishiga yordam beradi. Bizning neyming xizmatlarimiz sizga mukammal nom topishda yordam beradi."
+            "description": "Brend uchun esda qolarli va kuchli nom tanlash. Yaxshi nom nafaqat chiroyli eshitiladi; u mohiyatni yetkazadi, esda qoladi va brendning ajralib turishiga yordam beradi. Bizning neyming xizmatlarimiz sizga mukammal nom findishda yordam beradi."
         },
         "title": "Neyming — Kuchli Brend Nomi",
         "subtitle": "Brend nomi — bu uning birinchi taassuroti, uning energiyasi, xarakteri va so'zda ifodalangan g'oyasi. Yaxshi nom nafaqat chiroyli eshitiladi, balki mohiyatni yetkazadi, esda qoladi va brendning raqobatchilar orasida ajralib turishiga yordam beradi.",
         "section1_title": "Nom — bu brend strategiyasining bir qismidir",
-        "section1_p1": "Yaxshi nom supports assotsiatsiyalarni, tanilishni va hissiy aloqani qo'llab-quvvatlaydi. Bunday nomni yaratish — bu brendning pozitsiyasi, bozor, maqsadli auditoriya va kompaniyaning uzoq muddatli maqsadlarini hisobga olgan strategik ishdir.",
+        "section1_p1": "Yaxshi nom assotsiatsiyalarni, tanilishni va hissiy aloqani qo'llab-quvvatlaydi. Bunday nomni yaratish — bu brendning pozitsiyasi, bozor, maqsadli auditoriya va kompaniyaning uzoq muddatli maqsadlarini hisobga olgan strategik ishdir.",
         "section1_p2": "Biz neymingga brendingning muhim elementi sifatida yondashamiz. Bu tasodifiy g'oyalar to'plami emas, balki har bir so'z ma'noga ega bo'lgan puxta o'ylangan ishdir.",
         "section2_title": "Har bir kuchli nom g'oyadan boshlanadi",
         "section2_p1": "Nom qidirishdan oldin biz asosiy savolni beramiz: bu brend nima haqida? U qanday his-tuyg'ular va obrazlarni uyg'otishi kerak? Shu sababli biz mahsulotni, uning auditoriyasini va muhitini diqqat bilan tahlil qilamiz, ideal nomni topish uchun semantik yo'nalishlarni aniqlaymiz.",
