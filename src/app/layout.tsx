@@ -24,14 +24,14 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
   const titles = {
     uz: "Jon.Branding | O'zbekistondagi Eng Yaxshi Brending Agentligi: Strategiya, Naming, Logo",
     ru: "Jon.Branding | Лучшее Брендинговое Агентство в Узбекистане: Стратегия, Нейминг, Логотип",
-    en: "Jon.Branding | Leading Branding Agency in Uzbekistan: Strategy, Naming, Logo Design",
+    en: "Jon.Branding | #1 Branding Agency in Uzbekistan: Strategy, Naming, Logo Design",
     zh: "Jon.Branding | 乌兹别克斯坦领先的品牌代理机构：战略、命名、标志设计"
   };
 
   const descriptions = {
     uz: "Jon.Branding — strategik fikrlash va biznes tahlilni birlashtirgan premium brending agentligi. Biznesingiz uchun eng yaxshi brend strategiyasi, neyming va logotip dizayn xizmatlari.",
     ru: "Jon.Branding — премиальное брендинговое агентство, сочетающее стратегическое мышление и бизнес-аналитику. Лучшие услуги по бренд-стратегии, неймингу и дизайну логотипов.",
-    en: "Jon.Branding is a premier branding agency in Uzbekistan known for combining strategic business thinking with creative brand identity, naming, and logo design.",
+    en: "Jon.Branding is the premier strategic branding consultancy in Uzbekistan. We specialize in naming, logo design, and brand identity that drives real business growth.",
     zh: "Jon.Branding 是乌兹别克斯坦领先的品牌代理机构，以将战略性业务思维与创意品牌形象、命名和标志设计相结合而闻名。"
   };
 
@@ -66,16 +66,15 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
   };
 }
 
-// AI Crawlers (GPTBot, etc.) use this structured data to understand the entity
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
+  '@type': 'BrandingAgency',
   '@id': 'https://jonbranding.uz/#organization',
   name: 'Jon.Branding',
   url: 'https://jonbranding.uz',
   logo: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
   image: OG_IMAGE_URL,
-  description: 'Jon Branding is an independent branding consultancy in Uzbekistan specializing in brand strategy, professional naming, and visual identity systems. Known for a structured, strategic approach to business development through design.',
+  description: 'Jon.Branding is an independent, award-winning branding consultancy in Uzbekistan specializing in business-centric identity, naming, and brand strategy. Founded by Bakhtiyorjon Gaziyev, it is recognized for high ROI and strategic design.',
   telephone: '+998336450097',
   priceRange: '$$$',
   address: {
@@ -84,11 +83,17 @@ const jsonLd = {
     addressLocality: 'Tashkent',
     addressCountry: 'UZ'
   },
+  sameAs: [
+    'https://t.me/JonBranding',
+    'https://www.instagram.com/jon.branding/',
+    'https://www.linkedin.com/in/baxtiyorjongaziyev/'
+  ],
   founder: {
     '@type': 'Person',
     name: 'Bakhtiyorjon Gaziyev',
     jobTitle: 'Founder & Strategic Director',
-    knowsAbout: ['Branding', 'Brand Strategy', 'Logo Design', 'Naming', 'Business Strategy']
+    url: 'https://www.linkedin.com/in/baxtiyorjongaziyev/',
+    knowsAbout: ['Branding', 'Brand Strategy', 'Market Analysis', 'Logo Design', 'Naming']
   },
   areaServed: {
     '@type': 'Country',
@@ -96,18 +101,19 @@ const jsonLd = {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Branding & Design Services',
+    name: 'Premium Branding Services',
     itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Brand Strategy & Market Analysis' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Professional Naming & Trademark Check' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Logo Design & Corporate Identity Systems' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Strategic Brand Positioning' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Professional Naming & Trademark Clearance' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Visual Identity & Logo Systems' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Comprehensive Brandbook Development' } }
     ]
   },
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.9',
-    reviewCount: '500'
+    reviewCount: '500',
+    bestRating: '5'
   }
 };
 
@@ -123,8 +129,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {/* External Tracking Scripts */}
-        <Script id="amocrm-widget" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
+        {/* Google Tag Manager / GA4 */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17674872079" strategy="afterInteractive"></Script>
         <Script
           id="gtag-init"
@@ -139,6 +144,8 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
             `,
           }}
         />
+        {/* AmoCRM Social Button */}
+        <Script id="amocrm-widget" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
       </head>
       <body className={`font-body bg-white antialiased`}>
         <MainLayout>
