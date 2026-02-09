@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -52,6 +53,47 @@
     "all_rights_reserved": "Barcha huquqlar himoyalangan.",
     "back_to_top": "Yuqoriga qaytish",
     "patent_calculator": "Patent Kalkulyatori"
+  },
+  "servicesPage": {
+    "metadata": {
+      "title": "Xizmatlar va Narxlar | Jon.Branding",
+      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Narxlarni darhol hisoblang."
+    },
+    "packageBuilder": {
+      "title": "Xizmatlar va Narxlar",
+      "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Narxlarni darhol hisoblang.",
+      "introSubtitle": "Brending ustida ish qanday tuziladi?",
+      "introList": [
+        { "icon": "research", "title": "Tadqiqot", "description": "Bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o'rganish." },
+        { "icon": "strategy", "title": "Strategiya", "description": "Brendning ma'nosini, uning pozitsiyasini va qadriyatlarini aniqlash." },
+        { "icon": "identity", "title": "Identifikatsiyani ishlab chiqish", "description": "Logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish." },
+        { "icon": "communication", "title": "Kommunikatsiya", "description": "Reklama materiallari va kontentni rasmiylashtirish." }
+      ],
+      "categories": {
+        "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
+        "strategy": "Strategik xizmatlar",
+        "naming": "Neyming",
+        "identity": "Vizual Aydentika: Logo, Firma uslubi, Brendbuk",
+        "addons": "Qo'shimcha xizmatlar",
+        "options": "Maxsus shartlar",
+        "more_services": "Qo'shimcha xizmatlar va shartlar"
+      },
+      "your_package": "Sizning paketingiz",
+      "your_package_desc": "O'zingizga mos xizmatlarni tanlang.",
+      "selected": "Tanlandi",
+      "select": "Tanlash",
+      "base_price": "Boshlang'ich narx",
+      "final_price": "Yakuniy narx:",
+      "total_savings": "Sizning umumiy tejamingiz",
+      "get_free_consultation": "Bepul konsultatsiya olish",
+      "recommended": "Tavsiya etiladi",
+      "features": "Nimalar kiradi",
+      "results": "Siz nima olasiz",
+      "promo_code_label": "Promokod",
+      "promo_code_placeholder": "Kodni kiritish",
+      "base_price_label": "Boshlang'ich narx",
+      "empty_package_desc": "Siz hali hech narsa tanlamadingiz."
+    }
   },
   "namingPage": {
     "metadata": {
@@ -112,47 +154,6 @@
     "cta_title": "Ishlaydigan logotip yaratishga tayyormisiz?",
     "cta_description": "Biznesingiz uchun muvaffaqiyat poydevori bo'ladigan kuchli simvol yarataylik.",
     "cta_button": "Bepul konsultatsiya oling"
-  },
-  "servicesPage": {
-    "metadata": {
-      "title": "Xizmatlar va Narxlar | Jon.Branding",
-      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Narxlarni darhol hisoblang."
-    },
-    "packageBuilder": {
-      "title": "Xizmatlar va Narxlar",
-      "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Narxlarni darhol hisoblang.",
-      "introSubtitle": "Brending ustida ish qanday tuziladi?",
-      "introList": [
-        { "icon": "research", "title": "Tadqiqot", "description": "Bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o'rganish." },
-        { "icon": "strategy", "title": "Strategiya", "description": "Brendning ma'nosini, uning pozitsiyasini va qadriyatlarini aniqlash." },
-        { "icon": "identity", "title": "Identifikatsiyani ishlab chiqish", "description": "Logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish." },
-        { "icon": "communication", "title": "Kommunikatsiya", "description": "Reklama materiallari va kontentni rasmiylashtirish." }
-      ],
-      "categories": {
-        "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
-        "strategy": "Strategik xizmatlar",
-        "naming": "Neyming",
-        "identity": "Vizual Aydentika: Logo, Firma uslubi, Brendbuk",
-        "addons": "Qo'shimcha xizmatlar",
-        "options": "Maxsus shartlar",
-        "more_services": "Qo'shimcha xizmatlar va shartlar"
-      },
-      "your_package": "Sizning paketingiz",
-      "your_package_desc": "O'zingizga mos xizmatlarni tanlang.",
-      "selected": "Tanlandi",
-      "select": "Tanlash",
-      "base_price": "Boshlang'ich narx",
-      "final_price": "Yakuniy narx:",
-      "total_savings": "Sizning umumiy tejamingiz",
-      "get_free_consultation": "Bepul konsultatsiya olish",
-      "recommended": "Tavsiya etiladi",
-      "features": "Nimalar kiradi",
-      "results": "Siz nima olasiz",
-      "promo_code_label": "Promokod",
-      "promo_code_placeholder": "Kodni kiritish",
-      "base_price_label": "Boshlang'ich narx",
-      "empty_package_desc": "Siz hali hech narsa tanlamadingiz."
-    }
   },
   "stats": {
     "experience": "Yillik tajriba",
