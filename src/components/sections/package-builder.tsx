@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -9,14 +10,9 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, ShoppingCart, CheckCircle, Crown, Check, ChevronsDown, Ticket, Clock, BrainCircuit, Search, Megaphone, PenTool, Shirt, Palette, Box, Type, Layers, BookMarked, ClipboardSignature, Info, Flame, ShieldCheck, PercentCircle } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { Sparkles, ShoppingCart, CheckCircle, Crown, Check, ChevronsDown, Ticket, Clock, BrainCircuit, Search, Megaphone, PenTool, Shirt, Palette, Box, Type, Layers, BookMarked, ClipboardSignature, Info, Flame, ShieldCheck } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { motion, useMotionValue, useMotionTemplate } from 'framer-motion';
-import PopularPackages from './popular-packages';
-import { event as gtagEvent } from '@/lib/gtag';
-import DiscountSelector, { type DiscountOption } from '@/components/ui/DiscountSelector';
-import GuaranteeBlock from '../ui/GuaranteeBlock';
+import { motion } from 'framer-motion';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -51,236 +47,129 @@ const introIcons: { [key: string]: React.ElementType } = {
     communication: Megaphone
 };
 
-const CurrencyToggle = ({ currency, onCurrencyChange }: { currency: 'uzs' | 'usd', onCurrencyChange: (c: 'uzs' | 'usd') => void }) => (
-    <div className="relative flex w-auto rounded-full bg-secondary p-1">
-        {(['uzs', 'usd'] as const).map(c => (
-            <div key={c} className="relative flex-1">
-                {currency === c && (
-                    <motion.div
-                        layoutId="currency-toggle-bg"
-                        className="absolute inset-0 rounded-full bg-primary shadow-md"
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                )}
-                <button
-                    onClick={() => onCurrencyChange(c)}
-                    className={cn(
-                        "relative w-full rounded-full py-2 px-6 text-center text-sm font-semibold transition-colors",
-                        currency === c ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-                    )}
-                >
-                    {c.toUpperCase()}
-                </button>
-            </div>
-        ))}
-    </div>
-);
-
-const FeatureBenefitAccordion = ({ items, isVip }: { items: { feature: string; benefit: string }[], isVip: boolean }) => {
-    if (!items || items.length === 0) return null;
-
-    return (
-        <Accordion type="single" collapsible className="w-full space-y-2">
-            {items.map((item, index) => (
-                <AccordionItem value={`item-${index}`} key={index} className={cn("border-b-0 rounded-lg", isVip ? "bg-white/5" : "bg-gray-50")}>
-                    <AccordionTrigger
-                        onClick={(e) => e.stopPropagation()}
-                        className={cn("text-left text-sm font-medium hover:no-underline p-3", isVip ? "text-gray-200" : "text-gray-700")}>
-                        <div className="flex items-start gap-3">
-                             <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-green-500")} />
-                             <span>{item.feature}</span>
-                        </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="px-3 pb-3 text-sm" onClick={(e) => e.stopPropagation()}>
-                       <div className={cn("border-l-2 ml-5 pl-4 py-2", isVip ? "border-amber-400/50 text-amber-200" : "border-primary/50 text-primary-dark")}>
-                         {item.benefit}
-                       </div>
-                    </AccordionContent>
-                </AccordionItem>
-            ))}
-        </Accordion>
-    );
-};
-
 const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id: keyof SelectedServices, onSelect: () => void, selected: boolean, lang: 'uz' | 'ru' | 'en' | 'zh', dictionary: any, currency: 'uzs' | 'usd' }) => {
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id];
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
 
     if (!detail) return null;
 
-    const { label, description, price, features, timeline, note, oldPrice, discount, recommended } = detail;
+    const { label, description, price, features, results, timeline, note, recommended } = detail;
     const Icon = serviceIcons[id] || Sparkles;
-
-    const isTariff = ['namingStandard', 'namingPremium', 'namingVIP', 'logoStandard', 'logoPremium', 'logoVIP'].includes(id);
     const isVip = id.toLowerCase().includes('vip');
-    const isPremium = id.toLowerCase().includes('premium') && !isVip;
 
-    function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-        const { left, top } = currentTarget.getBoundingClientRect();
-        mouseX.set(clientX - left);
-        mouseY.set(clientY - top);
-    }
-
-    const selectButton = (
-        <Button
-            className={cn(
-                "w-full text-base py-3 h-auto transition-all duration-300",
-                selected
-                    ? "shadow-lg"
-                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-                isVip && !selected && "bg-white/10 hover:bg-white/20 text-white",
-                isVip && selected && "bg-amber-400 hover:bg-amber-500 text-black"
-            )}
-            variant={selected ? 'default' : 'secondary'}
-            onClick={(e) => { e.stopPropagation(); onSelect(); }}
-        >
-            {selected ? (
-                <>
-                    <CheckCircle className="h-5 w-5 mr-2" />
-                    {dictionary.selected}
-                </>
-            ) : (
-                <>
-                    <ShoppingCart className="h-5 w-5 mr-2" />
-                    {dictionary.select}
-                </>
-            )}
-        </Button>
-    );
-
-    const cardContent = (
-        <>
-            {(isPremium || isVip) && !selected && (
-                <div className="absolute -top-16 -right-16 w-48 h-48 bg-primary/20 rounded-full blur-3xl z-0" />
-            )}
-            <div className='relative p-6 flex flex-col h-full z-10'>
-                <div className="text-center mb-4 -mt-2 min-h-[34px]">
-                    {(isPremium || isVip) && (
-                         <div className={cn(
-                             "inline-flex items-center gap-1.5 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg",
-                             isVip ? "bg-amber-400 text-black" : "bg-primary text-primary-foreground"
-                        )}>
-                             {isVip ? <><Crown className="w-4 h-4" /> VIP</> : dictionary.recommended}
-                        </div>
-                    )}
-                </div>
-                <div className="text-center">
-                    <div className={cn("mx-auto p-3 rounded-full w-fit mb-4", selected ? "bg-primary/10" : (isVip ? "bg-white/10" : "bg-secondary"))}>
-                        <Icon className={cn("w-8 h-8", selected ? "text-primary" : (isVip ? "text-amber-400" : "text-muted-foreground"))} />
-                    </div>
-                    <h3 className={cn("font-bold text-xl", isVip ? "text-white" : "text-dark-blue")}>{label}</h3>
-                    <p className={cn("text-sm mt-1 h-10", isVip ? "text-gray-300" : "text-muted-foreground")}>{description}</p>
-                    <p className={cn("text-4xl font-extrabold mt-4", isVip ? "text-white" : "text-dark-blue")}>{formatPrice(price, lang, currency)}</p>
-                </div>
-
-                <div className="my-6 space-y-6 flex-grow">
-                    {features && features.length > 0 && (
-                         <div>
-                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                             <FeatureBenefitAccordion items={features} isVip={!!isVip} />
-                         </div>
-                    )}
-                </div>
-                {timeline && (
-                    <div className={cn("text-center text-xs mb-4 flex items-center justify-center gap-2", isVip ? "text-gray-400" : "text-muted-foreground")}>
-                        <Clock className="w-4 h-4" />
-                        <span>{timeline}</span>
-                    </div>
-                )}
-                <div className="mt-auto">{selectButton}</div>
-            </div>
-        </>
-    );
-
-    const cardProps = {
-        onClick: onSelect,
-        onMouseMove: handleMouseMove,
-        className: cn(
-            "group relative rounded-2xl h-full border-2 transition-all duration-300 cursor-pointer overflow-hidden",
-            selected
-                ? (isVip ? 'border-amber-400 bg-gray-900' : 'border-primary bg-primary/5')
-                : (isVip ? 'bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 border-gray-700 hover:border-amber-400' : (isPremium ? 'bg-white border-primary/30 hover:border-primary' : 'bg-white border-gray-200 hover:border-gray-300')),
-            (isPremium || recommended) && !isVip && "shadow-lg",
-            isVip && "shadow-2xl"
-        )
-    };
-    
-    const glowStyle = useMotionTemplate`
-        radial-gradient(
-            350px circle at ${mouseX}px ${mouseY}px,
-            ${isVip ? 'rgba(252, 211, 77, 0.15)' : 'rgba(0, 201, 253, 0.15)'},
-            transparent 80%
-        )
-    `;
-    
-    if (isTariff) {
-        return (
-            <div {...cardProps}>
-                <motion.div
-                    className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    style={{ background: glowStyle }}
-                />
-                 {cardContent}
-            </div>
-        );
-    }
-    
     return (
-        <div {...cardProps}>
-            <motion.div
-                className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={{ background: glowStyle }}
-            />
-            <div className='p-6 flex flex-col h-full'>
-                <div className="flex items-start gap-4 mb-4">
-                     <div className={cn("p-3 rounded-full flex-shrink-0", selected ? "bg-primary/10" : "bg-secondary")}>
-                        <Icon className={cn("w-6 h-6", selected ? "text-primary" : "text-muted-foreground")} />
+        <Card
+            onClick={onSelect}
+            className={cn(
+                "group relative h-full transition-all duration-300 cursor-pointer overflow-hidden border-2 flex flex-col",
+                selected
+                    ? (isVip ? 'border-amber-400 bg-blue-950/50 shadow-amber-400/20' : 'border-primary bg-primary/5 shadow-primary/20 shadow-xl')
+                    : (isVip ? 'bg-blue-950/30 border-slate-800 hover:border-amber-400' : 'bg-white border-slate-200 hover:border-primary/50'),
+                (recommended || isVip) && "shadow-lg"
+            )}
+        >
+            <CardHeader className="relative p-6 pb-0">
+                <div className="flex justify-between items-start mb-4">
+                    <div className={cn("p-3 rounded-xl", selected ? "bg-primary text-white" : (isVip ? "bg-amber-400 text-black" : "bg-secondary text-slate-600"))}>
+                        <Icon className="w-6 h-6" />
                     </div>
-                    <div>
-                         <h4 className="text-lg font-bold leading-tight text-dark-blue">{label}</h4>
-                         <p className="text-sm text-muted-foreground mt-1" dangerouslySetInnerHTML={{ __html: description }}></p>
-                    </div>
+                    {recommended && !isVip && (
+                        <div className="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
+                            {dictionary.recommended}
+                        </div>
+                    )}
+                    {isVip && (
+                        <div className="bg-amber-400 text-black text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                            <Crown className="w-3 h-3" /> VIP
+                        </div>
+                    )}
                 </div>
-                
-                <div className="my-6 space-y-6 flex-grow">
+                <div className="space-y-1">
+                    <CardTitle className={cn("text-xl font-bold", isVip && "text-white")}>
+                        {label} <span className="text-primary ml-2">{formatPrice(price, lang, currency)}</span>
+                    </CardTitle>
+                    <p className={cn("text-sm leading-relaxed min-h-[40px]", isVip ? "text-slate-300" : "text-slate-500")}>
+                        {description}
+                    </p>
+                </div>
+            </CardHeader>
+
+            <CardContent className="p-6 flex-grow flex flex-col">
+                <div className="space-y-6 flex-grow">
                     {features && features.length > 0 && (
-                         <div>
-                            <p className="font-semibold text-sm mb-3 text-center text-muted-foreground">{dictionary.features}</p>
-                             <FeatureBenefitAccordion items={features} isVip={false} />
-                         </div>
+                        <div className="space-y-3">
+                            <p className="text-xs font-bold uppercase tracking-widest text-slate-400">{dictionary.features}</p>
+                            <ul className="space-y-2">
+                                {features.map((f: string, i: number) => (
+                                    <li key={i} className="flex items-start gap-2 text-xs">
+                                        <Check className={cn("w-3.5 h-3.5 mt-0.5 shrink-0", isVip ? "text-amber-400" : "text-green-500")} />
+                                        <span className={isVip ? "text-slate-200" : "text-slate-700"}>{f}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
+                    {results && results.length > 0 && (
+                        <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                            <p className="text-xs font-bold uppercase tracking-widest text-primary">{dictionary.results}</p>
+                            <ul className="space-y-2">
+                                {results.map((r: string, i: number) => (
+                                    <li key={i} className="flex items-start gap-2 text-xs font-semibold">
+                                        <CheckCircle className={cn("w-3.5 h-3.5 mt-0.5 shrink-0", isVip ? "text-amber-400" : "text-primary")} />
+                                        <span className={isVip ? "text-white" : "text-slate-900"}>{r}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     )}
                 </div>
 
-                <div className="mt-auto pt-4">
-                     {discount && oldPrice && oldPrice > 0 ? (
-                        <div className="mb-4 text-left">
-                            <div className="inline-block bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-md mb-1">-{discount * 100}%</div>
-                            <div className="text-3xl font-extrabold text-dark-blue">{formatPrice(price, lang, currency)}</div>
-                            <div className="text-base text-gray-400 line-through">{formatPrice(oldPrice, lang, currency)}</div>
-                        </div>
-                    ) : (
-                        <div className="text-3xl font-extrabold text-dark-blue mb-4">
-                            {price > 0 || note ? (
-                                <span>
-                                    {note ? note : formatPrice(price, lang, currency)}
-                                </span>
-                            ) : (
-                                <span className="text-xl">{dictionary.agreed_price}</span>
+                <div className="mt-8 space-y-4">
+                    {(timeline || note) && (
+                        <div className="space-y-2">
+                            {note && (
+                                <p className={cn("text-[11px] italic p-2 rounded bg-slate-50 border-l-2", isVip ? "bg-white/5 border-amber-400 text-slate-300" : "border-primary text-slate-600")}>
+                                    {note}
+                                </p>
+                            )}
+                            {timeline && (
+                                <div className="flex items-center gap-2 text-[10px] font-medium text-slate-400 uppercase tracking-tighter">
+                                    <Clock className="w-3 h-3" />
+                                    <span>{timeline}</span>
+                                </div>
                             )}
                         </div>
                     )}
-                    {selectButton}
+
+                    <Button
+                        className={cn(
+                            "w-full rounded-xl py-6 h-auto text-base font-bold transition-all",
+                            selected
+                                ? "bg-primary text-white shadow-lg"
+                                : (isVip ? "bg-white/10 text-white hover:bg-white/20" : "bg-slate-100 text-slate-900 hover:bg-slate-200")
+                        )}
+                        onClick={(e) => { e.stopPropagation(); onSelect(); }}
+                    >
+                        {selected ? (
+                            <>
+                                <CheckCircle className="w-5 h-5 mr-2 text-white" />
+                                <span className="text-white">{dictionary.selected}</span>
+                            </>
+                        ) : dictionary.select}
+                    </Button>
                 </div>
-            </div>
-        </div>
+            </CardContent>
+        </Card>
     );
 };
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
-    <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-dark-blue">{title}</h3>
+    <div className="space-y-8">
+        <h3 className="text-2xl font-black text-slate-900 flex items-center gap-3">
+            <span className="w-2 h-8 bg-primary rounded-full" />
+            {title}
+        </h3>
         <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>
             {children}
         </div>
@@ -292,438 +181,197 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const serviceDetails = getServiceDetails(lang as 'uz' | 'ru' | 'en' | 'zh');
 
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
-        audit: false, namingCheck: false, consultation: false,
-        strategy: false, commStrategy: false,
-        namingStandard: false, namingPremium: false, namingVIP: false,
-        logoStandard: false, logoPremium: false, logoVIP: false,
-        packaging: false,
-        smm: false, merch: false, illustrations: false, urgency: false, nda: false,
+        audit: false, namingCheck: false, consultation: false, strategy: false, commStrategy: false,
+        namingVIP: false, namingPremium: false, namingStandard: false,
+        logoVIP: false, logoPremium: false, logoStandard: false,
+        packaging: false, smm: false, merch: false, illustrations: false, urgency: false, nda: false,
     });
     
-    const [discountOption, setDiscountOption] = useLocalStorage<DiscountOption>('discountOption', 'none');
-    const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
+    const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage<boolean>('wantsUpfrontPayment', false);
+    const [promoCode, setPromoCode] = useState('');
     const [isClient, setIsClient] = useState(false);
     const [currency, setCurrency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
 
     useEffect(() => { setIsClient(true); }, []);
 
-    const [total, setTotal] = useState<PriceDetails>({ base: 0, final: 0, discountApplied: [], savings: 0, bonus: null, surcharges: [], canApplyPackageDiscount: false });
-    const [hasDiscountBeenApplied, setHasDiscountBeenApplied] = useState(false);
+    if (!isClient || !translations || !translations.introList) {
+        return (
+            <section className="py-20 pt-32 bg-slate-50 min-h-screen">
+                <div className="container mx-auto px-4 space-y-12">
+                    <Skeleton className="h-20 w-3/4 mx-auto" />
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <Skeleton className="h-96 w-full rounded-3xl" />
+                        <Skeleton className="h-96 w-full rounded-3xl" />
+                        <Skeleton className="h-96 w-full rounded-3xl" />
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
-    useEffect(() => {
-        if (isClient) {
-            const wantsUpfrontPayment = discountOption === 'full';
-            const isPackageDiscountEnabled = discountOption === 'package' || discountOption === 'full';
-            
-            const result = calculatePackagePrice({ 
-                selectedServices, 
-                wantsUpfrontPayment, 
-                isPackageDiscountEnabled,
-                promoCode 
-            }, lang as 'uz' | 'ru' | 'en' | 'zh');
-            setTotal(result);
+    const total = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, promoCode }, lang as 'uz' | 'ru' | 'en' | 'zh');
 
-            const hasActiveDiscount = result.discountApplied.length > 0;
-            const justAppliedDiscount = hasActiveDiscount && !hasDiscountBeenApplied;
-            if (justAppliedDiscount) {
-                 confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: ['#00C9FD', '#ADFFFE', '#FFFFFF', '#050583'] });
-                setHasDiscountBeenApplied(true);
-            }
-            if(!hasActiveDiscount && hasDiscountBeenApplied) {
-                setHasDiscountBeenApplied(false);
-            }
-        }
-    }, [selectedServices, discountOption, isClient, lang, hasDiscountBeenApplied, promoCode]);
-
-    const handleServiceToggle = (serviceId: keyof SelectedServices) => {
-        const isCurrentlySelected = selectedServices[serviceId];
-        
-        const service = serviceDetails[serviceId];
-        if (service && service.price > 0) {
-            gtagEvent(isCurrentlySelected ? 'remove_from_cart' : 'add_to_cart', {
-                currency: 'USD',
-                value: service.price,
-                items: [{
-                    item_id: serviceId,
-                    item_name: service.label,
-                    price: service.price,
-                    quantity: 1
-                }]
-            });
-        }
-
-        const namingGroup: (keyof SelectedServices)[] = ['namingStandard', 'namingPremium', 'namingVIP'];
-        const logoGroup: (keyof SelectedServices)[] = ['logoStandard', 'logoPremium', 'logoVIP'];
-
-        const isNamingTariff = namingGroup.includes(serviceId);
-        const isLogoTariff = logoGroup.includes(serviceId);
+    const handleServiceToggle = (id: keyof SelectedServices) => {
+        const namingGroup: (keyof SelectedServices)[] = ['namingVIP', 'namingPremium', 'namingStandard'];
+        const logoGroup: (keyof SelectedServices)[] = ['logoVIP', 'logoPremium', 'logoStandard'];
 
         setSelectedServices(prev => {
             const newState = { ...prev };
-            if (isNamingTariff) {
-                namingGroup.forEach(id => {
-                    if (id !== serviceId) newState[id] = false;
-                });
-            }
-            if (isLogoTariff) {
-                logoGroup.forEach(id => {
-                    if (id !== serviceId) newState[id] = false;
-                });
-            }
-            newState[serviceId] = !isCurrentlySelected;
+            if (namingGroup.includes(id)) namingGroup.forEach(k => { if (k !== id) newState[k] = false; });
+            if (logoGroup.includes(id)) logoGroup.forEach(k => { if (k !== id) newState[k] = false; });
+            newState[id] = !prev[id];
             return newState;
         });
     };
 
-    if (!isClient || !translations) {
-        return (
-            <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
-                <div className="container mx-auto px-4">
-                    <div className="text-center">
-                         <Skeleton className="h-10 w-1/2 mx-auto" />
-                         <Skeleton className="h-6 w-3/4 mx-auto mt-4" />
-                    </div>
-                     <div className="mt-12 space-y-8">
-                        <Skeleton className="h-64 w-full" />
-                        <Skeleton className="h-64 w-full" />
-                     </div>
-                </div>
-            </section>
-        )
-    }
-
-    const selectedServiceKeys = Object.entries(selectedServices)
-                                .filter(([, value]) => value)
-                                .map(([key]) => key as keyof SelectedServices);
-
-    const serviceGroups = {
-        tripwire: { titleKey: "tripwire", services: ['namingCheck', 'audit', 'consultation'], gridCols: "lg:grid-cols-3" },
-        strategy: { titleKey: "strategy", services: ['strategy', 'commStrategy'], gridCols: "lg:grid-cols-2" },
-        naming: { titleKey: "naming", services: ['namingVIP', 'namingPremium', 'namingStandard'], isTariff: true },
-        identity: { titleKey: "identity", services: ['logoVIP', 'logoPremium', 'logoStandard'], isTariff: true },
-        addons: { titleKey: "addons", services: ['packaging', 'smm', 'merch', 'illustrations'], gridCols: "lg:grid-cols-2" },
-        options: { titleKey: "options", services: ['urgency', 'nda'], gridCols: "lg:grid-cols-2" }
-    };
-
-    const handlePopularPackageSelect = () => {
-        setSelectedServices(prev => ({
-            ...prev,
-            namingStandard: false,
-            namingPremium: true,
-            namingVIP: false,
-            logoStandard: false,
-            logoPremium: true,
-            logoVIP: false,
-        }));
-        const card = document.getElementById('your-package-card');
-        if (card) {
-            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    };
-    
-    const handleOrder = () => {
-        // Promokod bo'lsa yoki oldindan to'lov tanlangan bo'lsa majburiy upfront
-        const isUpfront = total.isPromoValid || discountOption === 'full';
-        localStorage.setItem('wantsUpfrontPayment', JSON.stringify(isUpfront));
-        localStorage.setItem('isPackageDiscountEnabled', JSON.stringify(discountOption === 'package' || discountOption === 'full'));
-        localStorage.setItem('appliedPromoCode', promoCode);
-        onOrderNow();
-    }
-    
-     const availableDiscountOptions: DiscountOption[] = ['none', 'full'];
-     if (total.canApplyPackageDiscount) {
-        availableDiscountOptions.splice(1, 0, 'package');
-     }
-
     return (
-        <>
-            <section id="package-builder" className="py-16 sm:py-24 bg-secondary pt-32">
-                <div className="container mx-auto px-4">
-                     <div className="max-w-4xl mx-auto mb-16 grid grid-cols-1 gap-8">
-                        <Card className="p-6 sm:p-8 rounded-2xl shadow-sm">
-                            <h3 className="font-bold text-dark-blue text-xl mb-3">{translations.introTitle}</h3>
-                            <p className="text-muted-foreground">{translations.introP1}</p>
-                            <p className="text-muted-foreground mt-2">{translations.introP2}</p>
-                        </Card>
-                        <Card className="p-6 sm:p-8 rounded-2xl shadow-sm">
-                            <h4 className="font-bold text-dark-blue text-xl mb-4">{translations.introSubtitle}</h4>
-                             <Accordion type="single" collapsible className="w-full">
-                                {translations.introList.map((item: any, index: number) => {
-                                     const Icon = introIcons[item.icon] || Sparkles;
-                                     return (
-                                        <AccordionItem value={`item-${index}`} key={index}>
-                                            <AccordionTrigger className="font-semibold text-lg py-4">
-                                                 <div className="flex items-center gap-4">
-                                                    <Icon className="w-6 h-6 text-primary" />
-                                                    <span>{item.title}</span>
-                                                 </div>
-                                            </AccordionTrigger>
-                                            <AccordionContent className="text-base text-muted-foreground pl-14">
-                                                {item.description}
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                     )
-                                })}
-                            </Accordion>
-                        </Card>
+        <section id="package-builder" className="py-20 sm:py-32 bg-slate-50">
+            <div className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto mb-20 space-y-8">
+                    <div className="text-center space-y-4">
+                        <h2 className="text-4xl font-extrabold text-slate-900">{translations.title}</h2>
+                        <p className="text-lg text-slate-600">{translations.subtitle}</p>
                     </div>
-
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
-                        <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">{translations.subtitle}</p>
-                    </div>
-
-                    <div className="flex justify-center mb-12">
-                        <CurrencyToggle currency={currency} onCurrencyChange={setCurrency} />
-                    </div>
-
-                    <div className="space-y-16">
-                         {['tripwire', 'strategy'].map((groupKey) => {
-                             const group = serviceGroups[groupKey as keyof typeof serviceGroups];
-                             return (
-                                 <ServiceGroup key={groupKey} title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
-                                     {group.services.map((serviceId) => (
-                                         <ServiceCard
-                                             key={serviceId}
-                                             id={serviceId as keyof SelectedServices}
-                                             selected={selectedServices[serviceId as keyof SelectedServices] || false}
-                                             onSelect={() => handleServiceToggle(serviceId as keyof SelectedServices)}
-                                             lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
-                                             dictionary={translations}
-                                             currency={currency}
-                                         />
-                                     ))}
-                                 </ServiceGroup>
-                             );
-                         })}
-
-                        <div className="py-8">
-                            <div className="mb-6 rounded-2xl bg-gradient-to-br from-dark-blue to-primary p-6 text-white shadow-xl">
-                                <div className="flex items-center gap-4">
-                                    <div className="bg-white/10 p-3 rounded-full">
-                                        <PercentCircle className="h-8 w-8 text-accent flex-shrink-0"/>
-                                    </div>
-                                    <div>
-                                        <h4 className="font-extrabold text-lg text-white">{translations.discount_alert_title}</h4>
-                                        <p className="text-blue-200" dangerouslySetInnerHTML={{ __html: translations.discount_alert_desc }}></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {['naming', 'identity'].map((groupKey) => {
-                             const group = serviceGroups[groupKey as keyof typeof serviceGroups];
-                             const isNaming = groupKey === 'naming';
-                             const isIdentity = groupKey === 'identity';
-                             return (
-                                 <React.Fragment key={groupKey}>
-                                     {isIdentity && (
-                                         <div className="py-8">
-                                             <PopularPackages lang={lang} onSelectPackage={handlePopularPackageSelect} />
-                                         </div>
-                                     )}
-                                     <ServiceGroup title={translations.categories[group.titleKey]} gridCols={undefined}>
-                                         {group.services.map((serviceId) => (
-                                             <ServiceCard
-                                                 key={serviceId}
-                                                 id={serviceId as keyof SelectedServices}
-                                                 selected={selectedServices[serviceId as keyof SelectedServices] || false}
-                                                 onSelect={() => handleServiceToggle(serviceId as keyof SelectedServices)}
-                                                 lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
-                                                 dictionary={translations}
-                                                 currency={currency}
-                                         />
-                                         ))}
-                                     </ServiceGroup>
-                                     {isNaming && <GuaranteeBlock dictionary={translations.namingGuarantee} />}
-                                     {isIdentity && <GuaranteeBlock dictionary={translations.designGuarantee} />}
-                                 </React.Fragment>
-                             );
-                         })}
-
-                         <Accordion type="single" collapsible className="w-full">
-                           <AccordionItem value="item-1" className="border-none">
-                               <AccordionTrigger className="text-xl font-bold text-dark-blue hover:no-underline justify-center gap-2">
-                                 {translations.categories.more_services}
-                                 <ChevronsDown className="h-5 w-5 transition-transform duration-300 group-data-[state=open]:rotate-180" />
-                               </AccordionTrigger>
-                               <AccordionContent className="pt-8">
-                                 <div className="space-y-16">
-                                     {['addons', 'options'].map((groupKey) => {
-                                         const group = serviceGroups[groupKey as keyof typeof serviceGroups];
-                                         return (
-                                             <ServiceGroup key={groupKey} title={translations.categories[group.titleKey]} gridCols={group.gridCols}>
-                                                 {group.services.map((serviceId) => (
-                                                     <ServiceCard
-                                                         key={serviceId}
-                                                         id={serviceId as keyof SelectedServices}
-                                                         selected={selectedServices[serviceId as keyof SelectedServices] || false}
-                                                         onSelect={() => handleServiceToggle(serviceId as keyof SelectedServices)}
-                                                         lang={lang as 'uz' | 'ru' | 'en' | 'zh'}
-                                                         dictionary={translations}
-                                                         currency={currency}
-                                                     />
-                                                 ))}
-                                             </ServiceGroup>
-                                         );
-                                     })}
-                                 </div>
-                               </AccordionContent>
-                           </AccordionItem>
-                         </Accordion>
-                    </div>
-                </div>
-            </section>
-
-            <section className="bg-secondary py-16">
-                <div className="container mx-auto px-4">
-                    <Card id="your-package-card" className="p-6 sm:p-8 rounded-2xl shadow-xl bg-gradient-to-br from-dark-blue to-primary text-white">
-                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                            <div>
-                                <CardHeader className="p-0 text-left mb-6">
-                                    <CardTitle className="text-2xl font-bold text-white">{translations.your_package}</CardTitle>
-                                    <p className="text-blue-200 text-sm mt-1">{translations.your_package_desc}</p>
-                                </CardHeader>
-                                <CardContent className="p-0">
-                                   {selectedServiceKeys.length > 0 ? (
-                                        <div className="space-y-4">
-                                            <h4 className="font-bold text-white text-lg">{translations.selected_services_title}</h4>
-                                            <div className="space-y-2">
-                                                {selectedServiceKeys.map((key) => {
-                                                    const service = serviceDetails[key];
-                                                    return (
-                                                        <div key={key} className="flex justify-between items-center text-lg animate-fade-in group">
-                                                            <span className="text-white flex-1 pr-2">{service.label}</span>
-                                                            <div className="flex items-center gap-2">
-                                                                <span className="font-semibold font-mono text-gray-300">
-                                                                    {service.price > 0 ? `${formatPrice(service.price, lang, currency, false)}` : service.note}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
+                    <Card className="p-8 rounded-3xl shadow-sm border-slate-200">
+                        <h4 className="font-bold text-slate-900 text-xl mb-6">{translations.introSubtitle}</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {translations.introList.map((item: any, index: number) => {
+                                const Icon = introIcons[item.icon] || Sparkles;
+                                return (
+                                    <div key={index} className="flex gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                        <div className="bg-white p-3 rounded-xl shadow-sm h-fit">
+                                            <Icon className="w-5 h-5 text-primary" />
                                         </div>
-                                   ) : (
-                                       <div className="text-center text-blue-200 text-sm py-4 flex flex-col items-center gap-2">
-                                           <div className="text-lg font-bold text-white mb-2">{translations.empty_package_title}</div>
-                                           <p className="mb-4">{translations.empty_package_desc}</p>
-                                           <Button
-                                               onClick={handlePopularPackageSelect}
-                                               variant="secondary"
-                                               className="bg-white/10 text-white hover:bg-white/20"
-                                           >
-                                               <Sparkles className="w-4 h-4 mr-2" />
-                                               {translations.empty_package_cta}
-                                           </Button>
-                                       </div>
-                                   )}
-                                </CardContent>
-                            </div>
-
-                             <div className="bg-black/20 p-6 rounded-2xl border border-white/10 space-y-4">
-                                <h4 className="font-semibold text-white text-lg">{translations.cost_calculation_title}</h4>
-                                
-                                {total.base > 0 && (
-                                    <div className="flex justify-between items-baseline text-base">
-                                        <span className="text-blue-200">{translations.base_price}</span>
-                                        <div className="text-lg font-mono">{formatPrice(total.base, lang, currency)}</div>
-                                    </div>
-                                )}
-
-                                {total.surcharges.map(s => (
-                                    <div key={s.name} className="flex justify-between items-center text-base text-amber-300">
-                                        <span>{s.name}</span>
-                                        <span className="font-mono">+ {formatPrice(s.value, lang, currency)}</span>
-                                    </div>
-                                ))}
-
-                                {total.discountApplied.map(d => (
-                                     <div key={d.name} className="space-y-1">
-                                        <div className="flex justify-between items-baseline text-base text-green-300">
-                                            <span className={cn(d.isPromoDiscount && "font-bold")}>{d.name}</span>
-                                            <span className="font-mono">- {formatPrice(d.value, lang, currency)}</span>
+                                        <div className="space-y-1">
+                                            <p className="font-bold text-slate-900">{item.title}</p>
+                                            <p className="text-sm text-slate-500">{item.description}</p>
                                         </div>
-                                         {d.isPackageDiscount && (
-                                            <p className="text-xs text-green-400/80">{translations.discountSelector.package_desc}</p>
-                                        )}
-                                        {/* Har bir chegirma turi uchun tushuntirish */}
-                                        {(d.name.includes('10%') || d.name.includes('Oldindan') || d.name.includes('предоплату') || d.name.includes('upfront') || d.name.includes('预付款')) ? (
-                                            <p className="text-xs text-green-400/80">{translations.discountSelector.full_desc}</p>
-                                        ) : null}
-                                        {d.isPromoDiscount && (
-                                            <p className="text-xs text-amber-300 font-bold mt-1">
-                                                {lang === 'ru' ? '⚠️ Требуется 100% предоплата' : (lang === 'en' ? '⚠️ 100% upfront payment required' : (lang === 'zh' ? '⚠️ 需要 100% 预付款' : '⚠️ 100% oldindan to\'lov talab qilinadi'))}
-                                            </p>
-                                        )}
                                     </div>
-                                ))}
-
-                                {total.savings > 0 && (
-                                    <div className="bg-green-500/10 p-2 rounded-lg text-center text-sm font-semibold text-green-300 mt-2">
-                                        {translations.total_savings}: {formatPrice(total.savings, lang, currency)}
-                                    </div>
-                                )}
-
-                                <div className="pt-4 border-t border-white/10">
-                                     <div className="flex justify-between items-baseline text-white">
-                                        <span className="text-lg font-semibold">{translations.final_price}</span>
-                                        <p className="text-4xl sm:text-5xl font-bold tracking-tight">
-                                            {total.final > 0 ? formatPrice(total.final, lang, currency) : translations.agreed_price}
-                                        </p>
-                                    </div>
-                                </div>
-                                
-                                <div className="pt-4 border-t border-white/10 space-y-4">
-                                     <div className="space-y-2">
-                                        <Label htmlFor="promo-code" className="text-xs text-blue-200 flex items-center gap-2">
-                                            <Ticket className="w-3 h-3" />
-                                            {translations.promo_code_label}
-                                        </Label>
-                                        <div className="relative">
-                                            <Input 
-                                                id="promo-code"
-                                                value={promoCode}
-                                                onChange={(e) => setPromoCode(e.target.value)}
-                                                placeholder={translations.promo_code_placeholder}
-                                                className="bg-white/10 border-white/20 text-white placeholder:text-white/30 h-9 text-sm focus-visible:ring-accent"
-                                            />
-                                            {promoCode && (
-                                                <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                                                    {total.isPromoValid ? (
-                                                        <CheckCircle className="w-4 h-4 text-green-400" />
-                                                    ) : (
-                                                        <span className="text-[10px] text-red-400 font-bold uppercase">{translations.promo_code_invalid}</span>
-                                                    )}
-                                                </div>
-                                            )}
-                                        </div>
-                                     </div>
-
-                                     <div className={cn("transition-all duration-300", total.isPromoValid ? "opacity-50 pointer-events-none" : "opacity-100")}>
-                                         <DiscountSelector 
-                                             selectedOption={discountOption}
-                                             onSelectOption={setDiscountOption}
-                                             availableOptions={availableDiscountOptions}
-                                             dictionary={translations.discountSelector}
-                                         />
-                                         {total.isPromoValid && (
-                                             <p className="text-[10px] text-accent font-bold mt-2 text-center uppercase tracking-tight">
-                                                 {lang === 'ru' ? 'Скидки не суммируются с промокодом' : (lang === 'en' ? 'Discounts do not stack with promo code' : (lang === 'zh' ? '折扣不与优惠码叠加' : 'Chegirmalar promokod bilan qo\'shilmaydi'))}
-                                             </p>
-                                         )}
-                                     </div>
-                                </div>
-                                
-                                <Button id="package-builder-cta" onClick={handleOrder} variant="default" size="lg" className="w-full text-lg py-3 mt-4" disabled={total.base === 0}>
-                                    {translations.get_free_consultation}
-                                </Button>
-                             </div>
+                                );
+                            })}
                         </div>
                     </Card>
                 </div>
-            </section>
-        </>
+
+                <div className="space-y-20">
+                    <ServiceGroup title={translations.categories.tripwire} gridCols="lg:grid-cols-3">
+                        {['namingCheck', 'audit', 'consultation'].map((id) => (
+                            <ServiceCard key={id} id={id as any} selected={selectedServices[id as any]} onSelect={() => handleServiceToggle(id as any)} lang={lang as any} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
+
+                    <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">
+                        {['strategy', 'commStrategy'].map((id) => (
+                            <ServiceCard key={id} id={id as any} selected={selectedServices[id as any]} onSelect={() => handleServiceToggle(id as any)} lang={lang as any} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
+
+                    <ServiceGroup title={translations.categories.naming}>
+                        {['namingVIP', 'namingPremium', 'namingStandard'].map((id) => (
+                            <ServiceCard key={id} id={id as any} selected={selectedServices[id as any]} onSelect={() => handleServiceToggle(id as any)} lang={lang as any} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
+
+                    <ServiceGroup title={translations.categories.identity}>
+                        {['logoVIP', 'logoPremium', 'logoStandard'].map((id) => (
+                            <ServiceCard key={id} id={id as any} selected={selectedServices[id as any]} onSelect={() => handleServiceToggle(id as any)} lang={lang as any} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
+
+                    <Accordion type="single" collapsible className="w-full">
+                        <AccordionItem value="more" className="border-none">
+                            <AccordionTrigger className="text-xl font-bold text-slate-900 justify-center gap-2 hover:no-underline py-10 bg-slate-100 rounded-3xl">
+                                {translations.categories.more_services}
+                                <ChevronsDown className="w-5 h-5" />
+                            </AccordionTrigger>
+                            <AccordionContent className="pt-12 space-y-20">
+                                <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
+                                    {['packaging', 'smm', 'merch', 'illustrations'].map((id) => (
+                                        <ServiceCard key={id} id={id as any} selected={selectedServices[id as any]} onSelect={() => handleServiceToggle(id as any)} lang={lang as any} dictionary={translations} currency={currency} />
+                                    ))}
+                                </ServiceGroup>
+                                <ServiceGroup title={translations.categories.options} gridCols="lg:grid-cols-2">
+                                    {['urgency', 'nda'].map((id) => (
+                                        <ServiceCard key={id} id={id as any} selected={selectedServices[id as any]} onSelect={() => handleServiceToggle(id as any)} lang={lang as any} dictionary={translations} currency={currency} />
+                                    ))}
+                                </ServiceGroup>
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
+                </div>
+
+                <div className="mt-24 max-w-4xl mx-auto">
+                    <Card className="p-8 sm:p-12 rounded-[2.5rem] bg-slate-900 text-white shadow-2xl overflow-hidden relative">
+                        <div className="absolute top-0 right-0 p-12 bg-primary/10 blur-3xl rounded-full" />
+                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                            <div className="space-y-8">
+                                <div className="space-y-2">
+                                    <h3 className="text-3xl font-black">{translations.your_package}</h3>
+                                    <p className="text-slate-400">{translations.your_package_desc}</p>
+                                </div>
+                                <div className="space-y-4">
+                                    {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => (
+                                        <div key={k} className="flex justify-between items-center text-sm font-medium p-3 rounded-xl bg-white/5 border border-white/10">
+                                            <span>{serviceDetails[k as keyof typeof serviceDetails].label}</span>
+                                            <span className="font-mono text-primary">{formatPrice(serviceDetails[k as keyof typeof serviceDetails].price, lang as any, currency)}</span>
+                                        </div>
+                                    ))}
+                                    {Object.values(selectedServices).every(v => !v) && (
+                                        <p className="text-slate-500 italic text-center py-10">{translations.empty_package_desc}</p>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="space-y-8 bg-white/5 p-8 rounded-3xl border border-white/10">
+                                <div className="space-y-4">
+                                    <div className="flex justify-between items-baseline">
+                                        <span className="text-slate-400 text-sm font-bold uppercase tracking-widest">{translations.base_price}</span>
+                                        <span className="text-2xl font-mono">{formatPrice(total.base, lang as any, currency)}</span>
+                                    </div>
+                                    {total.discountApplied.map((d, i) => (
+                                        <div key={i} className="flex justify-between items-center text-green-400 text-sm">
+                                            <span>{d.name}</span>
+                                            <span className="font-mono">-{formatPrice(d.value, lang as any, currency)}</span>
+                                        </div>
+                                    ))}
+                                    <div className="pt-4 border-t border-white/10 space-y-4">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-xl font-black">{translations.final_price}</span>
+                                            <span className="text-4xl font-black text-primary">{formatPrice(total.final, lang as any, currency)}</span>
+                                        </div>
+                                        {total.savings > 0 && (
+                                            <p className="text-xs text-center text-slate-400 bg-white/5 py-2 rounded-lg font-bold">
+                                                {translations.total_savings}: {formatPrice(total.savings, lang as any, currency)}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <div className="flex items-center gap-4 py-2">
+                                        <div className={cn("w-12 h-6 rounded-full relative cursor-pointer transition-colors", wantsUpfrontPayment ? "bg-primary" : "bg-slate-700")} onClick={() => setWantsUpfrontPayment(!wantsUpfrontPayment)}>
+                                            <div className={cn("absolute top-1 w-4 h-4 rounded-full bg-white transition-all", wantsUpfrontPayment ? "left-7" : "left-1")} />
+                                        </div>
+                                        <span className="text-xs font-bold text-slate-300 uppercase tracking-wide">100% Pre-payment (-10%)</span>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label className="text-[10px] uppercase font-black text-slate-500 tracking-widest">{translations.promo_code_label}</Label>
+                                        <div className="relative">
+                                            <Input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="bg-white/5 border-white/10 text-white h-12 rounded-xl" placeholder={translations.promo_code_placeholder} />
+                                            {total.isPromoValid && <CheckCircle className="absolute right-4 top-3.5 w-5 h-5 text-green-400" />}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <Button size="lg" className="w-full py-8 text-xl font-black rounded-2xl shadow-primary/25 shadow-xl" onClick={onOrderNow} disabled={total.base === 0}>
+                                    {translations.get_free_consultation}
+                                </Button>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            </div>
+        </section>
     );
 };
 
