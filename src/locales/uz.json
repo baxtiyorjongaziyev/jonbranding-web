@@ -60,9 +60,8 @@
             "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang."
         },
         "packageBuilder": {
-            "introTitle": "Brending xizmatlarining boshlang'ich narxlari",
-            "introP1": "Ushbu sahifada bizning xizmatlarimiz uchun taxminiy boshlang'ich narxlar ko'rsatilgan. Har bir kompaniya o'ziga xos, shuning uchun yakuniy narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga bog'liq.",
-            "introP2": "Ushbu narxlar brendingiz ustida ishlash qanchaga tushishi mumkinligini tushunishingizga yordam beradi.",
+            "title": "Xizmatlar va Narxlar",
+            "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang.",
             "introSubtitle": "Brending ustida ish qanday tuziladi?",
             "introList": [
                 { "icon": "research", "title": "Tadqiqot", "description": "Bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o'rganish." },
@@ -70,8 +69,6 @@
                 { "icon": "identity", "title": "Identifikatsiyani ishlab chiqish", "description": "Logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish." },
                 { "icon": "communication", "title": "Kommunikatsiya", "description": "Reklama materiallari, brendli tashuvchilar va kontentni rasmiylashtirish." }
             ],
-            "title": "Xizmatlar va Narxlar",
-            "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang.",
             "categories": {
                 "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
                 "strategy": "Strategik xizmatlar",
@@ -83,32 +80,28 @@
             },
             "your_package": "Sizning paketingiz",
             "your_package_desc": "O'zingizga mos xizmatlarni tanlang.",
-            "selected_services_title": "Tanlangan xizmatlar",
-            "cost_calculation_title": "Narxni hisoblash",
-            "empty_package_title": "Sizning mukammal paketingiz shu yerdan boshlanadi",
-            "empty_package_desc": "Xizmatlarni tanlang yoki bizning eng ommabop taklifimizdan boshlang.",
-            "empty_package_cta": "Eng yaxshi taklifni qo'shish",
             "selected": "Tanlandi",
             "select": "Tanlash",
             "base_price": "Boshlang'ich narx",
             "final_price": "Yakuniy narx:",
             "total_savings": "Sizning umumiy tejamingiz",
             "get_free_consultation": "Bepul konsultatsiya olish",
-            "agreed_price": "Kelishiladi",
             "recommended": "Tavsiya etiladi",
             "features": "Nimalar kiradi",
             "results": "Siz nima olasiz",
             "promo_code_label": "Promokod",
             "promo_code_placeholder": "Kodni kiritish",
-            "promo_code_invalid": "Noto'g'ri kod",
-            "discountSelector": {
-                "none": "Chegirmasiz",
-                "package": "Paketli (-20%)",
-                "full": "To'liq to'lov (-28%)",
-                "none_desc": "Hech qanday chegirmalar qo'llanilmaydi. Standart narx.",
-                "package_desc": "2 yoki undan ortiq asosiy xizmat tanlaganda, shu xizmatlar umumiy summasiga -20% chegirma beriladi.",
-                "full_desc": "Paketli chegirmaga qo'shimcha ravishda, umumiy summani oldindan to'lasangiz, yana -10% chegirma qo'llaniladi. Umumiy tejamingiz -28% bo'ladi."
-            }
+            "empty_package_desc": "Siz hali hech narsa tanlamadingiz."
+        },
+        "comparison": {
+            "title": "Biz va Raqobatchilar",
+            "description": "Biz premium sifatni hamyonbop narxlarda taklif qilamiz.",
+            "features": "Xususiyatlar",
+            "whyPremiumTitle": "Nega faqat premium agentliklar?",
+            "whyPremiumDesc": "Biz o'zimizni faqat yuqori darajadagi, strategik yondashuvga ega kompaniyalar bilan solishtiramiz.",
+            "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
+            "ctaDesc": "Sifatli brending uchun ortiqcha pul to'lash shart emas.",
+            "ctaButton": "Menga shunday yondashuv kerak"
         }
     },
     "stats": {
