@@ -76,7 +76,7 @@ const uzServiceDetails = {
             "Eng yuqori darajadagi ijodiy yondashuv"
         ],
         timeline: "20–25 ish kuni",
-        note: "Bu tarifda biz sizga nafaqat nom, balki kelajakdagi brendingiz poydevorini beramiz."
+        note: "Bu tarifda biz sizga nafaqat nom, balik kelajakdagi brendingiz poydevorini beramiz."
     },
     namingPremium: {
         label: "Naming PREMIUM",
@@ -113,22 +113,22 @@ const uzServiceDetails = {
         note: "Muhim: ushbu tarifda patent tekshiruvi va chuqur semantik tahlil o'tkazilmaydi."
     },
     logoVIP: {
-        label: "👑 Logo + Firma uslubi + Brandbook VIP",
-        description: "Katta, o‘sishga yoki xalqaro bozorga yo‘naltirilgan bizneslar uchun.",
+        label: "👑 VIP — Logo + Firma uslubi + Brandbook",
+        description: "Katta, o'sishga yoki xalqaro bozorga yo'naltirilgan bizneslar uchun.",
         price: basePricesUSD.logoVIP,
         features: [
             "Shaxsan Baxtiyorjon Gaziyev ishtiroki va nazorati",
             "Brend strategiyasi asosida 8+ logotip konsepsiyasi",
             "25+ touchpoint dizayn (offline va online)",
-            "To‘liq Vizual Brandbook: qoidalar, grid, ranglar tizimi",
+            "To'liq Vizual Brandbook: qoidalar, grid, ranglar tizimi",
             "Alohida Logobook (PDF + print-ready)",
             "Logotip animatsiyasi (premium sifat)",
-            "3 oy davomida post-delivery qo‘llab-quvvatlash"
+            "3 oy davomida post-delivery qo'llab-quvvatlash"
         ],
         results: [
             "Brendni yillar davomida olib yuradigan mustahkam tizim",
-            "Jamoa va marketing uchun aniq qo‘llanma",
-            "Investorlar oldida ishonchli ko‘rinish",
+            "Jamoa va marketing uchun aniq qo'llanma",
+            "Investorlar oldida ishonchli ko'rinish",
             "Qayta dizayn qilish ehtimoli minimal"
         ],
         timeline: "20–30 ish kuni",
@@ -136,7 +136,7 @@ const uzServiceDetails = {
     },
     logoPremium: {
         label: "Logo + Firma uslubi PREMIUM",
-        description: "O‘z brendini jiddiy rivojlantirishni boshlagan bizneslar uchun.",
+        description: "O'z brendini jiddiy rivojlantirishni boshlagan bizneslar uchun.",
         price: basePricesUSD.logoPremium,
         features: [
             "5 ta strategik logotip konsepsiyasi",
@@ -165,10 +165,10 @@ const uzServiceDetails = {
         ],
         results: [
             "Tez ishga tushirish uchun tayyor logotip",
-            "Raqobatchilar orasida yo‘qolib ketmaydigan belgi"
+            "Raqobatchilar orasida yo'qolib ketmaydigan belgi"
         ],
         timeline: "7–10 ish kuni",
-        note: "Eslatma: bu tarifda to‘liq firma uslubi va brendbook ishlab chiqilmaydi."
+        note: "Eslatma: bu tarifda to'liq firma uslubi va brendbook ishlab chiqilmaydi."
     },
     packaging: {
         label: "Qadoq dizayni",
@@ -217,7 +217,7 @@ const ruServiceDetails = {
         timeline: "7–10 рабочих дней"
     },
     logoVIP: {
-        label: "👑 Лого + Стиль + Брендбук VIP",
+        label: "👑 VIP — Лого + Стиль + Брендбук",
         description: "Для крупного бизнеса.",
         price: basePricesUSD.logoVIP,
         features: ["Личный контроль Б. Газиева", "8+ концепций", "25+ точек контакта", "Полный Брендбук", "Анимация"],
