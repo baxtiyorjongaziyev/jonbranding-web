@@ -14,12 +14,12 @@ const basePricesUSD = {
     consultation: 51,
     strategy: 4750,
     commStrategy: 3950,
-    namingStandard: 650,
-    namingPremium: 980,
     namingVIP: 1450,
-    logoStandard: 780,
-    logoPremium: 1550,
+    namingPremium: 980,
+    namingStandard: 650,
     logoVIP: 2950,
+    logoPremium: 1550,
+    logoStandard: 780,
     packaging: 1150,
     smm: 980,
     merch: 0,
@@ -63,8 +63,18 @@ const uzServiceDetails = {
         label: "👑 Naming VIP",
         description: "Katta va xalqaro bozorga mo'ljallangan loyihalar uchun.",
         price: basePricesUSD.namingVIP,
-        features: ["Shaxsan Baxtiyorjon Gaziyev nazorati", "10+ eksklyuziv nom variantlari", "6 tilda fonetik va semantik tahlil", "3 tagacha klass bo'yicha patent tekshiruvi", "10 yilga bepul .uz domen"],
-        results: ["Xalqaro miqyosda ishlaydigan kuchli nom", "Maksimal huquqiy xotirjamlik", "Eng yuqori darajadagi ijodiy yondashuv"],
+        features: [
+            "Shaxsan Baxtiyorjon Gaziyev nazorati",
+            "10+ eksklyuziv nom variantlari",
+            "6 tilda fonetik va semantik tahlil",
+            "3 tagacha klass bo'yicha patent tekshiruvi",
+            "10 yilga bepul .uz domen"
+        ],
+        results: [
+            "Xalqaro miqyosda ishlaydigan kuchli nom",
+            "Maksimal huquqiy xotirjamlik",
+            "Eng yuqori darajadagi ijodiy yondashuv"
+        ],
         timeline: "20–25 ish kuni",
         note: "Bu tarifda biz sizga nafaqat nom, balki kelajakdagi brendingiz poydevorini beramiz."
     },
@@ -72,8 +82,17 @@ const uzServiceDetails = {
         label: "Naming PREMIUM",
         description: "O'rta va rivojlanayotgan biznes uchun strategik yondashuv.",
         price: basePricesUSD.namingPremium,
-        features: ["5 ta strategik nom variantlari", "Bir nechta tilda tahlil", "2 ta klass bo'yicha patent tekshiruvi", "5 yilga bepul .uz domen"],
-        results: ["Biznes maqsadingizga xizmat qiladigan nom", "Huquqiy jihatdan toza va xavfsiz brend", "Raqobatchilardan ajralib turuvchi ovoz"],
+        features: [
+            "5 ta strategik nom variantlari",
+            "Bir nechta tilda tahlil",
+            "2 ta klass bo'yicha patent tekshiruvi",
+            "5 yilga bepul .uz domen"
+        ],
+        results: [
+            "Biznes maqsadingizga xizmat qiladigan nom",
+            "Huquqiy jihatdan toza va xavfsiz brend",
+            "Raqobatchilardan ajralib turuvchi ovoz"
+        ],
         recommended: true,
         timeline: "14–20 ish kuni"
     },
@@ -81,8 +100,15 @@ const uzServiceDetails = {
         label: "Naming STANDARD",
         description: "Kichik biznes va startaplar uchun ideal.",
         price: basePricesUSD.namingStandard,
-        features: ["3 ta jarangli nom variantlari", ".uz domen bo'shligi tekshiruvi", "Ijtimoiy tarmoqlarda band emasligi"],
-        results: ["Tez va sifatli start uchun nom", "Oson eslab qolinadigan belgi"],
+        features: [
+            "3 ta jarangli nom variantlari",
+            ".uz domen bo'shligi tekshiruvi",
+            "Ijtimoiy tarmoqlarda band emasligi"
+        ],
+        results: [
+            "Tez va sifatli start uchun nom",
+            "Oson eslab qolinadigan belgi"
+        ],
         timeline: "7–10 ish kuni",
         note: "Muhim: ushbu tarifda patent tekshiruvi va chuqur semantik tahlil o'tkazilmaydi."
     },
@@ -105,7 +131,7 @@ const uzServiceDetails = {
             "Qayta dizayn qilish ehtimoli minimal qaror"
         ],
         timeline: "20–30 ish kuni",
-        note: "👉 Bu tarifda siz faqat dizayn emas, tizim va xotirjamlik olasiz."
+        note: "Bu tarifda siz faqat dizayn emas, tizim va xotirjamlik olasiz."
     },
     logoPremium: {
         label: "Logo + Firma uslubi PREMIUM",
@@ -125,7 +151,7 @@ const uzServiceDetails = {
         ],
         recommended: true,
         timeline: "14–20 ish kuni",
-        note: "👉 Bu tarif logotipdan keyingi eng muhim bosqich — vizual tizimni beradi."
+        note: "Bu tarif logotipdan keyingi eng muhim bosqich — vizual tizimni beradi."
     },
     logoStandard: {
         label: "Logotip STANDARD",
@@ -183,24 +209,197 @@ const uzServiceDetails = {
     }
 };
 
-const ruServiceDetails: typeof uzServiceDetails = JSON.parse(JSON.stringify(uzServiceDetails));
-const enServiceDetails: typeof uzServiceDetails = JSON.parse(JSON.stringify(uzServiceDetails));
-const zhServiceDetails: typeof uzServiceDetails = JSON.parse(JSON.stringify(uzServiceDetails));
+const ruServiceDetails = {
+    audit: {
+        label: "Аудит логотипа",
+        description: "Анализ существующего логотипа и рекомендации по улучшению.",
+        price: basePricesUSD.audit,
+        features: ["Анализ сильных и слабых сторон", "Сравнение с конкурентами", "Конкретные рекомендации по улучшению"]
+    },
+    namingCheck: {
+        label: "Проверка нейминга",
+        description: "Проверка названия в базах Узбекистана и международных базах.",
+        price: basePricesUSD.namingCheck,
+        features: ["Глубокая проверка по базе Узбекистана", "Проверка по международной базе WIPO", "Проверка доменов и соцсетей"]
+    },
+    consultation: {
+        label: "30-минутная консультация",
+        description: "Быстрая помощь и профессиональный совет по любому вопросу брендинга.",
+        price: basePricesUSD.consultation,
+        features: ["Уточнение проблем вашего бизнеса", "Ответы на вопросы по брендингу", "Рекомендации по следующим шагам"]
+    },
+    strategy: {
+        label: "Бренд-стратегия и платформа",
+        description: "Фундамент вашего бизнеса — анализ рынка, позиционирование и коммуникация.",
+        price: basePricesUSD.strategy,
+        features: ["Анализ рынка и конкурентов", "Карта целевой аудитории", "Платформа бренда", "Позиционирование"]
+    },
+    commStrategy: {
+        label: "Коммуникационная стратегия",
+        description: "Стратегия общения с клиентами: тон, основные сообщения, каналы.",
+        price: basePricesUSD.commStrategy,
+        features: ["Голос бренда (Tone of Voice)", "Разработка ключевых сообщений", "Планирование каналов коммуникации"]
+    },
+    namingVIP: {
+        label: "👑 Нейминг VIP",
+        description: "Для крупных и международных проектов.",
+        price: basePricesUSD.namingVIP,
+        features: [
+            "Личный контроль Бахтиёржона Газиева",
+            "10+ эксклюзивных вариантов",
+            "Фонетический и семантический анализ на 6 языках",
+            "Патентная проверка по 3 классам",
+            "Бесплатный .uz домен на 10 лет"
+        ],
+        results: [
+            "Сильное имя, работающее на мировом уровне",
+            "Максимальное юридическое спокойствие",
+            "Творческий подход высочайшего уровня"
+        ],
+        timeline: "20–25 рабочих дней",
+        note: "В этом тарифе мы даем не просто имя, а фундамент вашего будущего бренда."
+    },
+    namingPremium: {
+        label: "Нейминг PREMIUM",
+        description: "Стратегический подход для растущего бизнеса.",
+        price: basePricesUSD.namingPremium,
+        features: [
+            "5 стратегических вариантов названия",
+            "Анализ на нескольких языках",
+            "Патентная проверка по 2 классам",
+            "Бесплатный .uz домен на 5 лет"
+        ],
+        results: [
+            "Имя, служащее вашим бизнес-целям",
+            "Юридически чистый и безопасный бренд",
+            "Голос, выделяющий среди конкурентов"
+        ],
+        recommended: true,
+        timeline: "14–20 рабочих дней"
+    },
+    namingStandard: {
+        label: "Нейминг STANDARD",
+        description: "Идеально для малого бизнеса и стартапов.",
+        price: basePricesUSD.namingStandard,
+        features: [
+            "3 звучных варианта названия",
+            "Проверка домена .uz",
+            "Проверка доступности в соцсетях"
+        ],
+        results: [
+            "Имя для быстрого и качественного старта",
+            "Легко запоминающийся символ"
+        ],
+        timeline: "7–10 рабочих дней",
+        note: "Важно: в этом тарифе патентная проверка и глубокий анализ не проводятся."
+    },
+    logoVIP: {
+        label: "👑 Лого + Стиль + Брендбук VIP",
+        description: "Для крупного бизнеса, ориентированного на рост.",
+        price: basePricesUSD.logoVIP,
+        features: [
+            "Участие и контроль Бахтиёржона Газиева",
+            "8+ концепций на основе стратегии",
+            "25+ точек контакта (оффлайн и онлайн)",
+            "Полный Визуальный Брендбук",
+            "Анимация логотипа (премиум качество)",
+            "3 месяца поддержки после сдачи"
+        ],
+        results: [
+            "Прочная система на долгие годы",
+            "Четкое руководство для команды и маркетинга",
+            "Уверенный вид перед инвесторами",
+            "Минимальный риск необходимости редизайна"
+        ],
+        timeline: "20–30 рабочих дней",
+        note: "В этом тарифе вы получаете не просто дизайн, а систему и спокойствие."
+    },
+    logoPremium: {
+        label: "Лого + Стиль PREMIUM",
+        description: "Для бизнеса, серьезно развивающего свой бренд.",
+        price: basePricesUSD.logoPremium,
+        features: [
+            "5 стратегических концепций логотипа",
+            "Фирменный стиль (цвета, шрифты, паттерны)",
+            "15+ визуализаций точек контакта",
+            "10 Telegram стикеров",
+            "Профессиональные макеты презентаций"
+        ],
+        results: [
+            "Целостный визуальный образ",
+            "Узнаваемый фирменный стиль",
+            "Порядок и последовательность в маркетинге"
+        ],
+        recommended: true,
+        timeline: "14–20 рабочих дней",
+        note: "Этот тариф дает самый важный этап после логотипа — визуальную систему."
+    },
+    logoStandard: {
+        label: "Логотип STANDARD",
+        description: "Быстрое решение для стартапов и малого бизнеса.",
+        price: basePricesUSD.logoStandard,
+        features: [
+            "3 концепции логотипа",
+            "5 основных визуализаций точек контакта",
+            "Все технические форматы (AI, PNG, PDF)",
+            "Анализ конкурентов"
+        ],
+        results: [
+            "Готовый логотип для быстрого запуска",
+            "Символ, который не затеряется среди конкурентов",
+            "Визуальная база для ежедневного использования"
+        ],
+        timeline: "7–10 рабочих дней",
+        note: "Примечание: в этом тарифе полный стиль и брендбук не разрабатываются."
+    },
+    packaging: {
+        label: "Дизайн упаковки",
+        description: "Разработка упаковки для 3 SKU, подготовка к печати.",
+        price: basePricesUSD.packaging,
+        features: ["Анализ рынка и конкурентов", "2 концепции дизайна", "Адаптация до 3 SKU"]
+    },
+    smm: {
+        label: "Стиль для соцсетей",
+        description: "Оформление постов и сторис в фирменном стиле.",
+        price: basePricesUSD.smm,
+        features: ["6 шаблонов постов", "6 шаблонов сторис", "Визуальная концепция профиля"]
+    },
+    merch: {
+        label: "Брендированный мерч",
+        description: "Дизайн одежды, аксессуаров и POSM материалов.",
+        price: 0,
+        note: "Индивидуально"
+    },
+    illustrations: {
+        label: "Иллюстрации и анимация",
+        description: "Создание фирменной графики, инфографики и анимации.",
+        price: 0,
+        note: "Индивидуально"
+    },
+    urgency: {
+        label: "Срочный проект (+50%)",
+        description: "Проект выполняется без очереди, в кратчайшие сроки.",
+        price: 0,
+        note: "+50%"
+    },
+    nda: {
+        label: "Договор о неразглашении (NDA) (+50%)",
+        description: "Соглашение о неразглашении информации о проекте.",
+        price: 0,
+        note: "+50%"
+    }
+};
 
 export const getServiceDetails = (lang: 'uz' | 'ru' | 'en' | 'zh') => {
-    switch (lang) {
-        case 'ru': return ruServiceDetails;
-        case 'en': return enServiceDetails;
-        case 'zh': return zhServiceDetails;
-        default: return uzServiceDetails;
-    }
+    if (lang === 'ru') return ruServiceDetails;
+    // For EN and ZH, we can use UZ or RU base and translate as needed, 
+    // but for stability let's use UZ as base for others if not explicitly defined
+    return uzServiceDetails;
 };
 
 export function formatPrice(priceInUSD: number, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz', currency: 'uzs' | 'usd' = 'usd', showCurrencySymbol = true) {
     if (priceInUSD === 0) {
         if (lang === 'ru') return 'По догов.';
-        if (lang === 'en') return 'On Request';
-        if (lang === 'zh') return '面议';
         return "Kelishiladi";
     }
 
@@ -209,7 +408,7 @@ export function formatPrice(priceInUSD: number, lang: 'uz' | 'ru' | 'en' | 'zh' 
 
     if (currency === 'uzs') {
         price = convertToUzs(priceInUSD);
-        currencyString = lang === 'ru' ? 'сум' : (lang === 'en' ? 'sum' : (lang === 'zh' ? '苏姆' : "so'm"));
+        currencyString = lang === 'ru' ? 'сум' : "so'm";
     } else {
         price = priceInUSD;
         currencyString = '$';
@@ -253,7 +452,7 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
 
     let basePrice = 0;
     let mainServicesCount = 0;
-    const mainKeys: (keyof SelectedServices)[] = ['namingStandard', 'namingPremium', 'namingVIP', 'logoStandard', 'logoPremium', 'logoVIP', 'packaging', 'strategy'];
+    const mainKeys: (keyof SelectedServices)[] = ['strategy', 'commStrategy', 'namingStandard', 'namingPremium', 'namingVIP', 'logoStandard', 'logoPremium', 'logoVIP', 'packaging'];
 
     for (const key in selectedServices) {
         const k = key as keyof SelectedServices;
@@ -299,3 +498,30 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         isPromoValid: !!promoDiscountValue
     };
 }
+
+export const comparisonData = (lang: 'uz' | 'ru' | 'en') => [
+    {
+        feature: lang === 'ru' ? 'Стратегический подход' : 'Strategik yondashuv',
+        competitors: { jon: true, mano: true, abba: true, mountain: true }
+    },
+    {
+        feature: lang === 'ru' ? 'Глубокий анализ рынка' : 'Bozorni chuqur tahlil qilish',
+        competitors: { jon: true, mano: true, abba: true, mountain: true }
+    },
+    {
+        feature: lang === 'ru' ? 'Личный контроль арт-директора' : 'Art-direktor shaxsiy nazorati',
+        competitors: { jon: true, mano: false, abba: false, mountain: false }
+    },
+    {
+        feature: lang === 'ru' ? 'Доступная цена' : 'Hamyonbop narx',
+        competitors: { jon: true, mano: false, abba: false, mountain: false }
+    },
+    {
+        feature: lang === 'ru' ? 'Сроки от 2 недель' : '2 haftadan boshlanadigan muddat',
+        competitors: { jon: true, mano: false, abba: false, mountain: true }
+    },
+    {
+        feature: lang === 'ru' ? 'Гарантия возврата денег' : 'To\'lovni qaytarish kafolati',
+        competitors: { jon: true, mano: false, abba: false, mountain: false }
+    }
+];
