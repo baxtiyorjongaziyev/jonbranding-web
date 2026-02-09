@@ -27,8 +27,6 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     urgency: Flame, nda: ShieldCheck
 };
 
-const introIcons: { [key: string]: React.ElementType } = { research: Search, strategy: BrainCircuit, identity: Palette, communication: Megaphone };
-
 const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id: string, onSelect: () => void, selected: boolean, lang: any, dictionary: any, currency: any }) => {
     const serviceDetails = getServiceDetails(lang);
     const detail = serviceDetails[id as keyof typeof serviceDetails];
