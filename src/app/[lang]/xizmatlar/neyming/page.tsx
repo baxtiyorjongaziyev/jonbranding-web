@@ -1,4 +1,3 @@
-
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -24,11 +23,15 @@ const NamingPage: FC = () => {
 
   useEffect(() => {
     if (lang) {
-      getDictionary(lang as Locale).then(dict => setTranslations(dict.namingPage));
+      getDictionary(lang as Locale).then(dict => {
+          if (dict && dict.namingPage) {
+              setTranslations(dict.namingPage);
+          }
+      });
     }
   }, [lang]);
   
-  if (!translations) {
+  if (!translations || !translations.process_steps) {
     return <main className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></main>;
   }
 
@@ -38,7 +41,7 @@ const NamingPage: FC = () => {
       { icon: CheckCircle, ...translations.process_steps[2] },
       { icon: ShieldCheck, ...translations.process_steps[3] }
   ];
-  const checkPoints = translations.check_points;
+  const checkPoints = translations.check_points || [];
 
   return (
     <>
@@ -65,16 +68,14 @@ const NamingPage: FC = () => {
                         </div>
                     </div>
                     <div className="lg:order-last">
-                        <Card className="shadow-xl rounded-2xl">
-                            <CardContent className="p-0">
+                        <Card className="shadow-xl rounded-2xl overflow-hidden">
                             <Image 
                                 src="https://img3.teletype.in/files/ae/08/ae08ba83-e433-45a6-8518-9e9973256316.png"
                                 width={800}
                                 height={600}
                                 data-ai-hint="strategy naming board"
                                 alt="Brainstorming session for a brand name"
-                                className="rounded-2xl object-cover aspect-square"/>
-                            </CardContent>
+                                className="w-full h-auto object-cover aspect-square"/>
                         </Card>
                     </div>
                 </div>
@@ -92,16 +93,14 @@ const NamingPage: FC = () => {
                         </div>
                     </div>
                     <div>
-                        <Card className="shadow-xl rounded-2xl">
-                            <CardContent className="p-0">
+                        <Card className="shadow-xl rounded-2xl overflow-hidden">
                             <Image 
                                 src="https://img4.teletype.in/files/b0/93/b093f7f9-cc7f-49dc-b2d7-88bd2e2fe29b.png"
                                 width={800}
                                 height={600}
                                 data-ai-hint="idea lightbulb"
                                 alt="Lightbulb representing a new idea"
-                                className="rounded-2xl object-cover"/>
-                            </CardContent>
+                                className="w-full h-auto object-cover aspect-video"/>
                         </Card>
                     </div>
                 </div>

@@ -1,4 +1,3 @@
-
 {
   "header": {
     "portfolio": "Portfolio",
@@ -54,20 +53,80 @@
     "back_to_top": "Yuqoriga qaytish",
     "patent_calculator": "Patent Kalkulyatori"
   },
+  "namingPage": {
+    "metadata": {
+      "title": "Neyming Xizmatlari | Jon.Branding Agentligi",
+      "description": "Brendingiz uchun unutilmas va kuchli nom tanlash. Strategik neyming xizmatlari.",
+      "keywords": "neyming, brend nomi, nom tanlash, patent tekshiruvi, professional neyming"
+    },
+    "title": "Neyming — Kuchli Brend Nomi",
+    "subtitle": "Brend nomi — uning birinchi taassuroti, energiyasi va xarakteri.",
+    "section1_title": "Nom — brend strategiyasining bir qismi",
+    "section1_p1": "Yaxshi nom assotsiatsiya, tanilish va hissiy bog'liqlikni qo'llab-quvvatlaydi.",
+    "section1_p2": "Biz neymingga shunchaki so'z o'yini emas, balki brendingning eng muhim elementi sifatida qaraymiz.",
+    "section2_title": "Har bir kuchli nom g'oyadan boshlanadi",
+    "section2_p1": "Nom qidirishdan avval biz asosiy savolga javob beramiz: bu brend nima haqida?",
+    "section2_p2": "U emotsiyaga, metaforaga, madaniy kodga yoki professional tilga asoslangan bo'lishi mumkin.",
+    "process_title": "Nom qanday yaratiladi?",
+    "process_subtitle": "Agentligimizda neyming ishlab chiqish — bu aniq bosqichlarga ega jarayon:",
+    "process_steps": [
+      { "title": "Tadqiqot", "description": "Bozor, auditoriya, raqobatchilar va semantik yo'nalishlarni o'rganish." },
+      { "title": "Konsepsiya", "description": "Nom qidirish uchun mumkin bo'lgan vektorlarni belgilash." },
+      { "title": "G'oyalar generatsiyasi", "description": "Variantlar ro'yxatini tuzish, ularni jarangdorlik va ma'no bo'yicha tekshirish." },
+      { "title": "Tekshiruv va finalizatsiya", "description": "Patent tekshiruvi, domenlar va ijtimoiy tarmoqlardagi bo'shligini tahlil qilish." }
+    ],
+    "check_title": "Tekshiruv yaratishdan kam emas",
+    "check_subtitle": "Hatto dahshatli g'oya ham ro'yxatdan o'tmasa yoki noto'g'ri tushunilsa, ish bermaydi.",
+    "check_points": [
+      { "title": "Huquqiy tozalik", "description": "Tovar belgisi sifatida ro'yxatdan o'tkazish imkoniyatini tahlil qilish." },
+      { "title": "Domenlar va muhit", "description": "Raqamli makonda nomning bo'shligini tekshirish." },
+      { "title": "Ma'no va assotsiatsiya", "description": "O'qilishi, jarangdorligi va brend kategoriyasiga mosligini tekshirish." }
+    ],
+    "calculator_cta_button": "Patent kalkulyatoriga o'tish"
+  },
+  "logoDesignPage": {
+    "metadata": {
+      "title": "Logotip Dizayni | Jon.Branding",
+      "description": "Biznesingiz uchun noyob va esda qolarli logotip yaratish.",
+      "keywords": "logotip dizayn, brend dizayn, logo yasash, professional logotip"
+    },
+    "title": "Logotip Dizayni",
+    "subtitle": "Logotip shunchaki rasm emas; u strategik vosita va biznesingizning yuzi.",
+    "section1_title": "Nega logotip shunchalik muhim?",
+    "section1_p1": "Raqobatli bozorda logotip mijoz ko'zi tushadigan birinchi narsadir.",
+    "section1_p2": "U mijozlarga sizni tanish va eslab qolishga yordam beradigan asosiy elementdir.",
+    "values_title": "Yaxshi logotip qanday bo'lishi kerak?",
+    "values": [
+      { "title": "Oddiy va esda qolarli", "description": "Eng yaxshi logotiplar kichik o'lchamda ham oson taniladi." },
+      { "title": "Noyob va zamon tanlamas", "description": "U sizni raqobatchilardan ajratishi va yillar o'tsa ham eskirmasligi kerak." },
+      { "title": "Strategik va ma'noli", "description": "Har bir chiziq va rang biznesingiz xarakterini aks ettirishi lozim." }
+    ],
+    "process_title": "Logotip qanday yaratiladi?",
+    "process_subtitle": "Bizning logotip yaratish jarayonimiz chuqur tahlilga asoslangan:",
+    "process_steps": [
+      { "title": "Brifing", "description": "Biznesingiz, maqsadlaringiz va auditoriyangizni o'rganamiz." },
+      { "title": "Konsepsiya", "description": "Strategiyaga mos bir nechta vizual yo'nalishlarni ishlab chiqamiz." },
+      { "title": "Dizayn va taqdimot", "description": "Tanlangan konsepsiyani mukammallashtirib, real misollarda ko'rsatamiz." },
+      { "title": "Finalizatsiya", "description": "Barcha texnik formatlarni (vektor, rastr) tayyorlab topshiramiz." }
+    ],
+    "cta_title": "Ishlaydigan logotip yaratishga tayyormisiz?",
+    "cta_description": "Biznesingiz uchun muvaffaqiyat poydevori bo'ladigan kuchli simvol yarataylik.",
+    "cta_button": "Bepul konsultatsiya oling"
+  },
   "servicesPage": {
     "metadata": {
       "title": "Xizmatlar va Narxlar | Jon.Branding",
-      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang."
+      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Narxlarni darhol hisoblang."
     },
     "packageBuilder": {
       "title": "Xizmatlar va Narxlar",
-      "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang.",
+      "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Narxlarni darhol hisoblang.",
       "introSubtitle": "Brending ustida ish qanday tuziladi?",
       "introList": [
         { "icon": "research", "title": "Tadqiqot", "description": "Bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o'rganish." },
         { "icon": "strategy", "title": "Strategiya", "description": "Brendning ma'nosini, uning pozitsiyasini va qadriyatlarini aniqlash." },
         { "icon": "identity", "title": "Identifikatsiyani ishlab chiqish", "description": "Logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish." },
-        { "icon": "communication", "title": "Kommunikatsiya", "description": "Reklama materiallari, brendli tashuvchilar va kontentni rasmiylashtirish." }
+        { "icon": "communication", "title": "Kommunikatsiya", "description": "Reklama materiallari va kontentni rasmiylashtirish." }
       ],
       "categories": {
         "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
@@ -91,50 +150,8 @@
       "results": "Siz nima olasiz",
       "promo_code_label": "Promokod",
       "promo_code_placeholder": "Kodni kiritish",
-      "empty_package_desc": "Siz hali hech narsa tanlamadingiz.",
-      "base_price_label": "Boshlang'ich narx"
-    }
-  },
-  "namingPage": {
-    "metadata": {
-      "title": "Neyming Xizmatlari | Jon.Branding",
-      "description": "Brendingiz uchun unutilmas va kuchli nom tanlash."
-    }
-  },
-  "logoDesignPage": {
-    "metadata": {
-      "title": "Logotip Dizayni | Jon.Branding",
-      "description": "Biznesingiz uchun noyob va esda qolarli logotip yaratish."
-    }
-  },
-  "corporateStylePage": {
-    "metadata": {
-      "title": "Firma Uslubi | Jon.Branding",
-      "description": "Brendingizni taniladigan qiluvchi vizual tizim."
-    }
-  },
-  "brandbookPage": {
-    "metadata": {
-      "title": "Brendbuk Tayyorlash | Jon.Branding",
-      "description": "Brendingizdan foydalanish qoidalari to'plami."
-    }
-  },
-  "packagingPage": {
-    "metadata": {
-      "title": "Qadoq Dizayni | Jon.Branding",
-      "description": "Mahsulotingizni ajratib turuvchi qadoq dizayni."
-    }
-  },
-  "brandStrategyPage": {
-    "metadata": {
-      "title": "Brend Strategiyasi | Jon.Branding",
-      "description": "Biznesingiz uchun strategik poydevor."
-    }
-  },
-  "patentCalculatorPage": {
-    "metadata": {
-      "title": "Patent Kalkulyatori | Jon.Branding",
-      "description": "Tovar belgisini ro'yxatdan o'tkazish xarajatlarini hisoblang."
+      "base_price_label": "Boshlang'ich narx",
+      "empty_package_desc": "Siz hali hech narsa tanlamadingiz."
     }
   },
   "stats": {
