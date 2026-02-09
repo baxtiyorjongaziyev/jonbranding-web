@@ -128,9 +128,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
-    if (!isClient || !dictionary) return <div className="py-20 min-h-screen bg-slate-50"><Skeleton className="h-96 w-full container mx-auto" /></div>;
+    if (!isClient || !dictionary || !dictionary.packageBuilder) return <div className="py-20 min-h-screen bg-slate-50"><Skeleton className="h-96 w-full container mx-auto" /></div>;
 
-    const translations = dictionary;
+    const translations = dictionary.packageBuilder;
     const serviceDetails = getServiceDetails(lang as any);
     const total = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, promoCode }, lang as any);
 
@@ -146,12 +146,47 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         });
     };
 
+    const introIcons: { [key: string]: React.ElementType } = { Search, BrainCircuit, Fingerprint, Megaphone };
+
     return (
         <section id="package-builder" className="py-20 sm:py-32 bg-slate-50">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto mb-20 text-center space-y-4">
                     <h2 className="text-4xl font-extrabold text-slate-900">{translations.title}</h2>
                     <p className="text-lg text-slate-600">{translations.subtitle}</p>
+                </div>
+
+                <div className="max-w-4xl mx-auto mb-20">
+                    <Card className="p-8 rounded-3xl bg-white shadow-xl border-none">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div className="space-y-6">
+                                <h4 className="font-bold text-dark-blue text-xl mb-4">{translations.introSubtitle}</h4>
+                                <Accordion type="single" collapsible className="w-full">
+                                    {translations.introList?.map((item: any, index: number) => {
+                                        const Icon = introIcons[item.icon] || Sparkles;
+                                        return (
+                                            <AccordionItem value={`item-${index}`} key={index}>
+                                                <AccordionTrigger className="hover:no-underline text-left">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="p-2 rounded-lg bg-primary/10 text-primary"><Icon className="w-4 h-4" /></div>
+                                                        <span className="font-bold text-sm">{item.title}</span>
+                                                    </div>
+                                                </AccordionTrigger>
+                                                <AccordionContent className="text-slate-500 text-sm pl-11">{item.description}</AccordionContent>
+                                            </AccordionItem>
+                                        );
+                                    })}
+                                </Accordion>
+                            </div>
+                            <div className="bg-primary/5 p-6 rounded-2xl flex items-center justify-center text-center">
+                                <div>
+                                    <Sparkles className="w-12 h-12 text-primary mx-auto mb-4" />
+                                    <p className="text-dark-blue font-bold text-lg mb-2">{translations.introTitle}</p>
+                                    <p className="text-slate-600 text-sm">{translations.introP1}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
                 </div>
 
                 <div className="space-y-20">

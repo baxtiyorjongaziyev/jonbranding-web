@@ -54,10 +54,62 @@
     "back_to_top": "Yuqoriga qaytish",
     "patent_calculator": "Patent Kalkulyatori"
   },
+  "home": {
+    "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
+    "cta1_desc": "Biznesingizni professional dizayn bilan yangi bosqichga olib chiqing. Biz sizga ideal yechim topishda yordam beramiz.",
+    "cta1_button": "Mening biznesim uchun ham"
+  },
+  "hero": {
+    "headlines": [
+      "Brendingiz |sotmayaptimi?| Biz buni tuzatamiz.",
+      "Raqobatchilardan |ajralib turing|.",
+      "Brendni shunchaki chiroyli emas, |foyda keltiradigan| qiling.",
+      "Mijozlar sizga |oshig' bo'lsin|. Qayta va qayta.",
+      "Kichik biznesdan |kuchli brendgacha|. Bir qadamda."
+    ],
+    "description": "Biz shunchaki logotip chizmaymiz. Biz sizning biznesingiz uchun mijozlar qalbidan joy oladigan, strategiyaga asoslangan <span class='font-bold text-foreground'>natijali</span> brend tizimini quramiz. Toshkentdagi yetakchi brending agentligi sifatida biz biznesingizga yangi nafas beramiz.",
+    "buttonTexts": [
+      "Brendimni tahlil qiling",
+      "Sotuvni oshirishga yordam bering",
+      "Bepul strategik konsultatsiya",
+      "Menga kuchli brend kerak"
+    ],
+    "buttonHint": "Bepul. Majburiyatlarsiz."
+  },
+  "stats": {
+    "experience": "Yillik tajriba",
+    "clients": "Mamnun mijozlar",
+    "projects": "Muvaffaqiyatli loyihalar",
+    "recommend": "Mijozlar tavsiya qilishadi"
+  },
+  "trustedBy": {
+    "title": "Bizga ishonch bildirgan kompaniyalar"
+  },
+  "whyUs": {
+    "title": "Nega aynan biz?",
+    "subtitle": "Biz shunchaki va'dalar bermaymiz. Tizimli yondashuv orqali brendingiz uchun real qiymat yaratamiz.",
+    "values": [
+      {
+        "title": "Strategik yondashuv",
+        "description": "Biz shunchaki chiroyli rasm chizmaymiz. Har bir dizayn elementi sizning sotuvlaringizni oshirishga va brendingizni mustahkamlashga xizmat qiladi."
+      },
+      {
+        "title": "Shaffof jarayon",
+        "description": "Brif → Tahlil → Strategiya → Dizayn → Topshirish. Har bir bosqichda siz bilan yaqindan hamkorlik qilamiz."
+      },
+      {
+        "title": "Natija va Sodiqlik",
+        "description": "50 dan ortiq loyihalar va eng muhimi — 90% mijozlarimiz bizni do'stlariga tavsiya qilishadi."
+      }
+    ],
+    "ctaTitle": "Bizning yondashuv yoqdimi?",
+    "ctaDesc": "Keling, brendingizni bepul tahlil qilamiz, uning kuchli va zaif tomonlarini aniqlaymiz.",
+    "ctaButton": "Brendimni bepul tahlil qiling"
+  },
   "servicesPage": {
     "metadata": {
       "title": "Xizmatlar va Narxlar | Jon.Branding",
-      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Narxlarni darhol hisoblang."
+      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Narxlarni onlayn hisoblang."
     },
     "packageBuilder": {
       "title": "Xizmatlar va Narxlar",
@@ -67,7 +119,7 @@
         { "icon": "Search", "title": "Tadqiqot", "description": "Bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o'rganish." },
         { "icon": "BrainCircuit", "title": "Strategiya", "description": "Brendning ma'nosini, uning pozitsiyasini va qadriyatlarini aniqlash." },
         { "icon": "Fingerprint", "title": "Identifikatsiyani ishlab chiqish", "description": "Logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish." },
-        { "icon": "Megaphone", "title": "Kommunikatsiya", "description": "Reklama materiallari va kontentni rasmiylashtirish." }
+        { "icon": "Megaphone", "title": "Kommunikatsiya", "description": "Reklama materiallari, brendlangan tashuvchilar va kontentni shakllantirish." }
       ],
       "categories": {
         "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
@@ -92,60 +144,119 @@
       "promo_code_label": "Promokod",
       "promo_code_placeholder": "Kodni kiritish",
       "empty_package_desc": "Siz hali hech narsa tanlamadingiz."
+    },
+    "comparison": {
+      "title": "Biz va Raqobatchilar",
+      "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklardan ancha hamyonbop narxda taqdim etamiz.",
+      "features": "Xususiyatlar",
+      "whyPremiumTitle": "Nega faqat premium agentliklar?",
+      "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda berish.",
+      "ctaTitle": "Farqni ko'rdingiz. Endi tanlash vaqti!",
+      "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling.",
+      "ctaButton": "Menga shunday yondashuv kerak"
     }
   },
   "namingPage": {
     "metadata": {
       "title": "Neyming Xizmatlari | Jon.Branding",
-      "description": "Brendingiz uchun unutilmas va kuchli nom tanlash."
+      "description": "Brendingiz uchun unutilmas va kuchli nom tanlash. Yaxshi nom shunchaki chiroyli jaranglamaydi, u mohiyatni yetkazadi."
     },
+    "title": "Neyming — Kuchli Brend Nomi",
+    "subtitle": "Brend nomi — bu uning birinchi taassuroti, uning energiyasi, xarakteri va so'zda ifodalangan g'oyasi.",
+    "process_title": "Neyming qanday yaratiladi?",
+    "process_subtitle": "Agentligimizda neyming ishlab chiqish — bu har bir bosqichi muhim bo'lgan aniq jarayon:",
     "process_steps": [
-      { "title": "Tadqiqot", "description": "Bozor, auditoriya va raqobatchilarni o'rganish." },
-      { "title": "Konsepsiya", "description": "Nom qidirish uchun vektorlarni belgilash." },
-      { "title": "G'oyalar", "description": "Variantlar ro'yxatini tuzish." },
-      { "title": "Tekshiruv", "description": "Patent tekshiruvi o'tkazish." }
-    ]
+      { "title": "Tadqiqot", "description": "Bozor, auditoriya, raqobatchilar va semantik yo'nalishlarni o'rganish." },
+      { "title": "Konsepsiya", "description": "Nom qidirish uchun mumkin bo'lgan vektorlarni belgilash." },
+      { "title": "G'oyalar", "description": "Variantlar ro'yxatini tuzish, ularni jarangdorlik va ma'no bo'yicha tekshirish." },
+      { "title": "Tekshiruv", "description": "Patent tekshiruvi o'tkazish, domenlar va assotsiatsiyalarni ko'rib chiqish." }
+    ],
+    "check_title": "Nomni tekshirish — yaratishdan kam bo'lmagan jarayon",
+    "check_subtitle": "Hatto eng daho g'oya ham, agar u ro'yxatdan o'ta olmasa yoki salbiy assotsiatsiyalarga ega bo'lsa, ishlamaydi.",
+    "check_points": [
+      { "title": "Yuridik tozalik", "description": "Tovar belgisini ro'yxatdan o'tkazish imkoniyatini tahlil qilish." },
+      { "title": "Domenlar", "description": "Raqamli makonda nomning bo'shligini tekshirish." },
+      { "title": "Ma'no", "description": "O'qilishi, jarangi va madaniy qabul qilinishini tekshirish." }
+    ],
+    "calculator_cta_button": "Patent kalkulyatoriga o'tish"
   },
   "logoDesignPage": {
     "metadata": {
       "title": "Logotip Dizayni | Jon.Branding",
-      "description": "Biznesingiz uchun noyob logotip yaratish."
-    }
-  },
-  "stats": {
-    "experience": "Yillik tajriba",
-    "clients": "Mamnun mijozlar",
-    "projects": "Muvaffaqiyatli loyihalar",
-    "recommend": "Mijozlar tavsiya qilishadi"
-  },
-  "trustedBy": {
-    "title": "Bizga ishonch bildirgan kompaniyalar"
-  },
-  "whyUs": {
-    "title": "Nega aynan biz?",
-    "subtitle": "Biz tizimli yondashuv orqali brendingiz uchun real qiymat yaratamiz.",
+      "description": "Biznesingiz uchun noyob logotip yaratish. Logotip shunchaki rasm emas, u strategik vosita."
+    },
+    "title": "Logotip Dizayni",
+    "subtitle": "Logotip — bu biznesingizning yuzi va siz qoldiradigan birinchi taassurot.",
+    "values_title": "Yaxshi logotip qanday bo'lishi kerak?",
     "values": [
-      { "title": "Strategik yondashuv", "description": "Biz shunchaki chiroyli rasm chizmaymiz." },
-      { "title": "Shaffof jarayon", "description": "Brif → Tahlil → Strategiya → Dizayn." },
-      { "title": "Natija", "description": "90% mijozlarimiz tavsiya qilishadi." }
+      { "title": "Sodda va esda qolarli", "description": "Eng yaxshi logotiplar kichik o'lchamda ham oson taniladi." },
+      { "title": "Noyob va zamonsiz", "description": "U sizni raqobatchilardan ajratishi va yillar o'tsa ham eskirmasligi kerak." },
+      { "title": "Strategik", "description": "Har bir chiziq va rang biznesingiz maqsadlarini aks ettirishi lozim." }
     ],
-    "ctaTitle": "Bepul tahlil",
-    "ctaDesc": "Brendingizni bepul tahlil qilamiz.",
-    "ctaButton": "Tahlilni boshlash"
+    "process_title": "Logotipni qanday yaratamiz?",
+    "process_subtitle": "Bizning logotip yaratish jarayonimiz chuqur tahlil va strategik fikrlashga asoslangan.",
+    "process_steps": [
+      { "title": "Brifing", "description": "Biznesingiz, maqsadlaringiz va auditoriyangizni o'rganamiz." },
+      { "title": "Konsepsiya", "description": "Brend strategiyasini aks ettiruvchi bir nechta vizual konsepsiyalarni ishlab chiqamiz." },
+      { "title": "Taqdimot", "description": "Tanlangan konsepsiyani takomillashtiramiz va real maketlarda ko'rsatamiz." },
+      { "title": "Topshirish", "description": "Barcha zarur formatdagi fayllarni va ulardan foydalanish bo'yicha qo'llanmani tayyorlaymiz." }
+    ],
+    "cta_title": "Tayyormisiz?",
+    "cta_description": "Keling, biznesingiz uchun muvaffaqiyat poydevori bo'ladigan kuchli ramz yaratamiz.",
+    "cta_button": "Bepul konsultatsiya oling"
   },
   "testimonials": {
     "title": "Mijozlarimiz biz haqimizda",
-    "subtitle": "Eng katta yutug'imiz - mamnun mijozlar.",
-    "textReviewsTitle": "Matnli fikrlar"
+    "subtitle": "Eng katta yutug'imiz — bu bizning mamnun mijozlarimiz.",
+    "textReviewsTitle": "Matnli fikrlar",
+    "textReviewsSubtitle": "Boshqa qadrli mijozlarimizdan"
   },
   "faq": {
     "title": "Ko'p beriladigan savollar",
-    "subtitle": "Brending jarayoni haqida savollaringiz bormi?",
+    "subtitle": "Brending jarayoni, narxlar va boshqa mavzular bo'yicha javoblar.",
     "faqItems": [
-      { "question": "Nega narxlar o'zgarmas emas?", "answer": "Har bir loyiha individual." }
+      { "question": "Nega narxlar o'zgarmas emas?", "answer": "Har bir loyiha individual. Narx loyiha murakkabligi, ish hajmi va vazifalaringizga qarab belgilanadi." },
+      { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishiladi." }
     ],
     "ctaTitle": "Shubhangiz bormi?",
-    "ctaDesc": "Savollarga javob beramiz.",
+    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni yangi bosqichga olib chiqamiz.",
     "ctaButton": "Boshlashga tayyorman!"
+  },
+  "queueStatus": {
+    "subtitle": "Joylar cheklangan",
+    "title": "Shoshiling! O'z joyingizni band qiling!",
+    "description": "Biz har bir loyihaga yuqori sifatni ta'minlash uchun vaqt ajratamiz. Shuning uchun bir vaqtning o'zida cheklangan miqdordagi loyihalar bilan ishlaymiz.",
+    "queueTitle": "Loyihalar navbati",
+    "booked": "Band",
+    "available": "Bo'sh",
+    "tooltipBooked": "Joy band qilingan",
+    "tooltipAvailable": "Navbatga yozilishingiz mumkin",
+    "remainingSlots": "Qolgan bo'sh joylar",
+    "slotsUnit": "ta",
+    "onlineNow": "Hozir saytda",
+    "peopleUnit": "kishi",
+    "nextProjectStart": "Keyingi loyiha boshlanishi",
+    "ctaButton": "Joyimni band qilish",
+    "ctaSubtitle": "Raqobatchilaringizdan bir qadam oldinda bo'ling!",
+    "timeframes": {
+      "2 weeks": "2 hafta ichida"
+    }
+  },
+  "pickTwoSelector": {
+    "title": "Uchtadan ikkitasini tanlang",
+    "subtitle": "Narx — Sifat — Tezlik: kamdan-kam hollarda uchtasini bir vaqtda olish mumkin.",
+    "ctaText": "Taklif so'rash",
+    "options": {
+      "cheap": "Arzon",
+      "quality": "Sifatli",
+      "fast": "Tez"
+    },
+    "messages": {
+      "cheap_fast": "Sifat beqaror bo'lishi mumkin. Bu variant shoshilinch va byudjetli loyihalar uchun mos.",
+      "cheap_quality": "Natijani uzoqroq kutishga to'g'ri keladi. Biz sifatni ta'minlash uchun navbat bilan ishlaymiz.",
+      "quality_fast": "Narx yuqori bo'ladi. Shoshilinch loyihalar (2-3 kun) uchun qo'shimcha to'lov qo'shiladi.",
+      "default": "Iltimos, siz uchun eng muhim 2 ta ustuvorlikni tanlang."
+    },
+    "tooltip": "Avval birini bekor qiling"
   }
 }

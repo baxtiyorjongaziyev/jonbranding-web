@@ -37,10 +37,10 @@ const NamingPage: FC = () => {
   }
 
   const creationSteps = [
-      { icon: Search, ...(translations.process_steps[0] || {}) },
-      { icon: Lightbulb, ...(translations.process_steps[1] || {}) },
-      { icon: CheckCircle, ...(translations.process_steps[2] || {}) },
-      { icon: ShieldCheck, ...(translations.process_steps[3] || {}) }
+      { icon: Search, ...(translations.process_steps[0] || { title: '', description: '' }) },
+      { icon: Lightbulb, ...(translations.process_steps[1] || { title: '', description: '' }) },
+      { icon: CheckCircle, ...(translations.process_steps[2] || { title: '', description: '' }) },
+      { icon: ShieldCheck, ...(translations.process_steps[3] || { title: '', description: '' }) }
   ];
   const checkPoints = translations.check_points || [];
 
@@ -62,10 +62,10 @@ const NamingPage: FC = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div>
-                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{translations.section1_title}</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Neyming — bu faqat chiroyli jarang emas</h2>
                         <div className="mt-4 space-y-4 text-lg text-gray-700">
-                            <p>{translations.section1_p1}</p>
-                            <p>{translations.section1_p2}</p>
+                            <p>Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va biznesingizning bozordagi o'rnini belgilaydi.</p>
+                            <p>Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz.</p>
                         </div>
                     </div>
                     <div className="lg:order-last">
@@ -76,30 +76,6 @@ const NamingPage: FC = () => {
                                 height={600}
                                 alt="Brainstorming session"
                                 className="w-full h-auto object-cover aspect-square"/>
-                        </Card>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section className="py-16 sm:py-24 bg-white">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    <div className="lg:order-last">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{translations.section2_title}</h2>
-                        <div className="mt-4 space-y-4 text-lg text-gray-700">
-                            <p>{translations.section2_p1}</p>
-                            <p>{translations.section2_p2}</p>
-                        </div>
-                    </div>
-                    <div>
-                        <Card className="shadow-xl rounded-2xl overflow-hidden">
-                            <Image 
-                                src="https://img4.teletype.in/files/b0/93/b093f7f9-cc7f-49dc-b2d7-88bd2e2fe29b.png"
-                                width={800}
-                                height={600}
-                                alt="Idea lightbulb"
-                                className="w-full h-auto object-cover aspect-video"/>
                         </Card>
                     </div>
                 </div>

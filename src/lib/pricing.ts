@@ -129,7 +129,7 @@ const uzServiceDetails = {
             "Brendni yillar davomida olib yuradigan mustahkam tizim",
             "Jamoa va marketing uchun aniq qo'llanma",
             "Investorlar oldida ishonchli ko'rinish",
-            "Qayta dizayn qilish ehtimoli minimal"
+            "Qayta dizayn qilish ehtimoli minimal darajaga tushirilgan qaror"
         ],
         timeline: "20–30 ish kuni",
         note: "Bu tarifda siz faqat dizayn emas, tizim va xotirjamlik olasiz."
@@ -168,7 +168,7 @@ const uzServiceDetails = {
             "Raqobatchilar orasida yo'qolib ketmaydigan belgi"
         ],
         timeline: "7–10 ish kuni",
-        note: "Eslatma: bu tarifda to'liq firma uslubi va brendbook ishlab chiqilmaydi."
+        note: "Muhim: bu tarifda to'liq firma uslubi va brendbook ishlab chiqilmaydi."
     },
     packaging: {
         label: "Qadoq dizayni",
