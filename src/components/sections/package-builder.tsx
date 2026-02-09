@@ -32,7 +32,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const detail = serviceDetails[id as keyof typeof serviceDetails];
     if (!detail) return null;
 
-    const { label, description, price, features, results, timeline, note, recommended } = detail;
+    const { label, description, price, features, results, timeline, recommended } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
 
@@ -94,10 +94,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 </div>
 
                 <div className="mt-auto pt-8 space-y-4">
-                    <div className="space-y-2 text-[11px]">
-                        {note && <p className={cn("italic p-2 rounded bg-slate-50 border-l-2", isVip ? "bg-white/5 border-amber-400 text-slate-300" : "border-primary text-slate-600")}>{note}</p>}
-                        {timeline && <div className="flex items-center gap-2 font-medium text-slate-400 uppercase"><Clock className="w-3 h-3" /><span>{timeline}</span></div>}
-                    </div>
+                    {timeline && <div className="flex items-center gap-2 font-medium text-slate-400 uppercase text-[10px]"><Clock className="w-3 h-3" /><span>{timeline}</span></div>}
                     <Button
                         className={cn(
                             "w-full rounded-xl py-6 h-auto text-base font-bold transition-all",
@@ -156,39 +153,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <p className="text-lg text-slate-600">{translations.subtitle}</p>
                 </div>
 
-                <div className="max-w-4xl mx-auto mb-20">
-                    <Card className="p-8 rounded-3xl bg-white shadow-xl border-none">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                            <div className="space-y-6">
-                                <h4 className="font-bold text-dark-blue text-xl mb-4">{translations.introSubtitle}</h4>
-                                <Accordion type="single" collapsible className="w-full">
-                                    {translations.introList?.map((item: any, index: number) => {
-                                        const Icon = introIcons[item.icon] || Sparkles;
-                                        return (
-                                            <AccordionItem value={`item-${index}`} key={index}>
-                                                <AccordionTrigger className="hover:no-underline text-left">
-                                                    <div className="flex items-center gap-3">
-                                                        <div className="p-2 rounded-lg bg-primary/10 text-primary"><Icon className="w-4 h-4" /></div>
-                                                        <span className="font-bold text-sm">{item.title}</span>
-                                                    </div>
-                                                </AccordionTrigger>
-                                                <AccordionContent className="text-slate-500 text-sm pl-11">{item.description}</AccordionContent>
-                                            </AccordionItem>
-                                        );
-                                    })}
-                                </Accordion>
-                            </div>
-                            <div className="bg-primary/5 p-6 rounded-2xl flex items-center justify-center text-center">
-                                <div>
-                                    <Sparkles className="w-12 h-12 text-primary mx-auto mb-4" />
-                                    <p className="text-dark-blue font-bold text-lg mb-2">{translations.introTitle}</p>
-                                    <p className="text-slate-600 text-sm">{translations.introP1}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>
-                </div>
-
                 <div className="space-y-20">
                     <ServiceGroup title={translations.categories.tripwire}>{['namingCheck', 'audit', 'consultation'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
                     <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">{['strategy', 'commStrategy'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
@@ -213,7 +177,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
 
                 <div className="mt-24 max-w-4xl mx-auto">
-                    <Card id="your-package-card" className="p-8 sm:p-12 rounded-[2.5rem] bg-slate-900 text-white shadow-2xl overflow-hidden relative">
+                    <Card className="p-8 sm:p-12 rounded-[2.5rem] bg-slate-900 text-white shadow-2xl overflow-hidden relative">
                         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
                             <div className="space-y-8">
                                 <h3 className="text-3xl font-black">{translations.your_package}</h3>
