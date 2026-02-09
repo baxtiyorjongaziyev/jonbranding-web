@@ -76,7 +76,7 @@ const uzServiceDetails = {
             "Eng yuqori darajadagi ijodiy yondashuv"
         ],
         timeline: "20–25 ish kuni",
-        note: "Bu tarifda biz sizga nafaqat nom, balik kelajakdagi brendingiz poydevorini beramiz."
+        note: "Bu tarifda biz sizga nafaqat nom, balki kelajakdagi brendingiz poydevorini beramiz."
     },
     namingPremium: {
         label: "Naming PREMIUM",
