@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type PriceDetails, SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, BookMarked, ClipboardSignature, Info, Flame, ShieldCheck } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 interface PackageBuilderProps {
@@ -307,7 +307,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <div className="space-y-8 bg-white/5 p-8 rounded-3xl border border-white/10">
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-baseline">
-                                        <span className="text-slate-400 text-sm font-bold uppercase">{translations.base_price}</span>
+                                        <span className="text-slate-400 text-sm font-bold uppercase">{translations.base_price_label || 'Boshlang\'ich narx'}</span>
                                         <span className="text-2xl font-mono">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
                                     {total.discountApplied.map((d, i) => (
@@ -331,7 +331,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                     <div className="space-y-2">
                                         <Label className="text-[10px] uppercase font-black text-slate-500">{translations.promo_code_label}</Label>
-                                        <Input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="bg-white/5 border-white/10 text-white h-12 rounded-xl" placeholder="Kodni kiriting" />
+                                        <Input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="bg-white/5 border-white/10 text-white h-12 rounded-xl" placeholder={translations.promo_code_placeholder} />
                                     </div>
                                 </div>
 

@@ -120,7 +120,7 @@ const uzServiceDetails = {
             "Shaxsan Baxtiyorjon Gaziyev ishtiroki va nazorati",
             "Brend strategiyasi asosida 8+ logotip konsepsiyasi",
             "25+ touchpoint dizayn (offline va online)",
-            "To‘liq Vizual Brandbook (ranglar, shriftlar, grid)",
+            "To‘liq Vizual Brandbook: ranglar, shriftlar, grid, qo‘llash qoidalari",
             "Logotip animatsiyasi (premium sifat)",
             "3 oy davomida post-delivery qo‘llab-quvvatlash"
         ],
@@ -390,10 +390,8 @@ const ruServiceDetails = {
     }
 };
 
-export const getServiceDetails = (lang: 'uz' | 'ru' | 'en' | 'zh') => {
+export const getServiceDetails = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
     if (lang === 'ru') return ruServiceDetails;
-    // For EN and ZH, we can use UZ or RU base and translate as needed, 
-    // but for stability let's use UZ as base for others if not explicitly defined
     return uzServiceDetails;
 };
 
@@ -465,21 +463,18 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
     const discountsApplied: { name: string, value: number }[] = [];
     let finalPrice = basePrice;
 
-    // Package discount (2 or more)
     if (mainServicesCount >= 2) {
         const packageDiscountValue = basePrice * 0.20;
         discountsApplied.push({ name: lang === 'ru' ? 'Пакетная скидка (-20%)' : 'Paketli chegirma (-20%)', value: packageDiscountValue });
         finalPrice -= packageDiscountValue;
     }
 
-    // Upfront discount
     if (wantsUpfrontPayment) {
         const upfrontDiscountValue = finalPrice * 0.10;
         discountsApplied.push({ name: lang === 'ru' ? 'За предоплату (-10%)' : 'Oldindan to\'lov (-10%)', value: upfrontDiscountValue });
         finalPrice -= upfrontDiscountValue;
     }
 
-    // Promo code
     const normalizedPromo = promoCode?.trim().toUpperCase();
     const promoDiscountValue = PROMO_CODES[normalizedPromo || ''];
     if (promoDiscountValue) {
@@ -497,6 +492,16 @@ export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' 
         savings,
         isPromoValid: !!promoDiscountValue
     };
+}
+
+export function generateSummary(selections: any, lang: string): string {
+    const { selectedServices } = selections;
+    const sd = getServiceDetails(lang as any);
+    const selectedLabels = Object.entries(selectedServices)
+        .filter(([_, v]) => v)
+        .map(([k]) => sd[k as keyof typeof sd]?.label)
+        .join(', ');
+    return selectedLabels || 'Hech narsa tanlanmagan';
 }
 
 export const comparisonData = (lang: 'uz' | 'ru' | 'en') => [

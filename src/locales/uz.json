@@ -91,7 +91,8 @@
             "results": "Siz nima olasiz",
             "promo_code_label": "Promokod",
             "promo_code_placeholder": "Kodni kiritish",
-            "empty_package_desc": "Siz hali hech narsa tanlamadingiz."
+            "empty_package_desc": "Siz hali hech narsa tanlamadingiz.",
+            "base_price_label": "Boshlang'ich narx"
         },
         "comparison": {
             "title": "Biz va Raqobatchilar",
@@ -117,6 +118,6 @@
         "title": "Mijozlarimiz biz haqimizda",
         "subtitle": "Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz.",
         "textReviewsTitle": "Matnli fikrlar",
-        "textReviewsSubtitle": "Boshqa hurmatli mijozlarimizdan"
+        "textReviewsSubtitle": "Boshaq hurmatli mijozlarimizdan"
     }
 }
