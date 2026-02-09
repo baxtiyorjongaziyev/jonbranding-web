@@ -1,123 +1,155 @@
 
 {
-    "header": {
-        "portfolio": "Portfolio",
-        "founder": "Asoschi",
-        "process": "Jarayon",
-        "blog": "Blog",
-        "services": "Xizmatlar",
-        "brand_strategy": "Brend Strategiyasi",
-        "brand_strategy_desc": "Brendingiz uchun poydevor — bozor tahlili, pozitsiyalash va kommunikatsiya.",
+  "header": {
+    "portfolio": "Portfolio",
+    "founder": "Asoschi",
+    "process": "Jarayon",
+    "blog": "Blog",
+    "services": "Xizmatlar",
+    "brand_strategy": "Brend Strategiyasi",
+    "brand_strategy_desc": "Brendingiz uchun poydevor — bozor tahlili, pozitsiyalash va kommunikatsiya.",
+    "naming": "Neyming",
+    "naming_desc": "Brendingiz uchun unutilmas, kuchli va huquqiy jihatdan toza nom tanlash.",
+    "logo_design": "Logotip Dizayni",
+    "logo_design_desc": "Biznesingiz mohiyatini aks ettiruvchi noyob va esda qolarli belgi yaratish.",
+    "brandbook": "Brendbuk",
+    "brandbook_desc": "Brendingiz aydentikasidan foydalanish qoidalarini tavsiflovchi hujjat.",
+    "corporate_style": "Firma Uslubi",
+    "corporate_style_desc": "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
+    "packaging_design": "Qadoq Dizayni",
+    "packaging_design_desc": "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
+    "services_and_prices": "Xizmatlar va Narxlar",
+    "services_and_prices_desc": "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
+    "contact_by_phone": "+998336450097",
+    "contact_by_telegram": "Telegramdan yozaman",
+    "free_consultation": "Bepul konsultatsiya",
+    "open_menu": "Menyuni ochish",
+    "switch_lang": "Tilni o'zgartirish",
+    "lang_ru": "Русский",
+    "lang_uz": "O'zbekcha",
+    "lang_en": "English"
+  },
+  "footer": {
+    "contact": "Biz bilan bog'laning",
+    "by_telegram": "Telegram orqali",
+    "by_phone": "Telefon orqali",
+    "main_page": "Asosiy sahifa",
+    "portfolio": "Portfolio",
+    "founder": "Asoschi",
+    "process": "Jarayon",
+    "faq": "Ko'p beriladigan savollar",
+    "services": "Xizmatlarimiz",
+    "brand_strategy": "Brend Strategiyasi",
+    "naming": "Neyming",
+    "brandbook": "Brendbuk",
+    "logo_design": "Logotip Dizayni",
+    "corporate_style": "Firma Uslubi",
+    "packaging_design": "Qadoq Dizayni",
+    "additional": "Qo'shimcha",
+    "service_prices": "Xizmatlar va Narxlar",
+    "branding_test": "Brending Testi",
+    "blog": "Blog",
+    "sitemap": "Sayt xaritasi",
+    "all_rights_reserved": "Barcha huquqlar himoyalangan.",
+    "back_to_top": "Yuqoriga qaytish",
+    "patent_calculator": "Patent Kalkulyatori"
+  },
+  "servicesPage": {
+    "metadata": {
+      "title": "Xizmatlar va Narxlar | Jon.Branding",
+      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang."
+    },
+    "packageBuilder": {
+      "title": "Xizmatlar va Narxlar",
+      "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang.",
+      "introSubtitle": "Brending ustida ish qanday tuziladi?",
+      "introList": [
+        { "icon": "research", "title": "Tadqiqot", "description": "Bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o'rganish." },
+        { "icon": "strategy", "title": "Strategiya", "description": "Brendning ma'nosini, uning pozitsiyasini va qadriyatlarini aniqlash." },
+        { "icon": "identity", "title": "Identifikatsiyani ishlab chiqish", "description": "Logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish." },
+        { "icon": "communication", "title": "Kommunikatsiya", "description": "Reklama materiallari, brendli tashuvchilar va kontentni rasmiylashtirish." }
+      ],
+      "categories": {
+        "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
+        "strategy": "Strategik xizmatlar",
         "naming": "Neyming",
-        "naming_desc": "Brendingiz uchun unutilmas, kuchli va huquqiy jihatdan toza nom tanlash.",
-        "logo_design": "Logotip Dizayni",
-        "logo_design_desc": "Biznesingiz mohiyatini aks ettiruvchi noyob va esda qolarli belgi yaratish.",
-        "brandbook": "Brendbuk",
-        "brandbook_desc": "Brendingiz aydentikasidan foydalanish qoidalarini tavsiflovchi hujjat.",
-        "corporate_style": "Firma Uslubi",
-        "corporate_style_desc": "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
-        "packaging_design": "Qadoq Dizayni",
-        "packaging_design_desc": "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibador dizayn.",
-        "services_and_prices": "Xizmatlar va Narxlar",
-        "services_and_prices_desc": "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
-        "contact_by_phone": "+998336450097",
-        "contact_by_telegram": "Telegramdan yozaman",
-        "free_consultation": "Bepul konsultatsiya",
-        "open_menu": "Menyuni ochish",
-        "switch_lang": "Tilni o'zgartirish",
-        "lang_ru": "Русский",
-        "lang_uz": "O'zbekcha",
-        "lang_en": "English"
-    },
-    "footer": {
-        "contact": "Biz bilan bog'laning",
-        "by_telegram": "Telegram orqali",
-        "by_phone": "Telefon orqali",
-        "main_page": "Asosiy sahifa",
-        "portfolio": "Portfolio",
-        "founder": "Asoschi",
-        "process": "Jarayon",
-        "faq": "Ko'p beriladigan savollar",
-        "services": "Xizmatlarimiz",
-        "brand_strategy": "Brend Strategiyasi",
-        "naming": "Neyming",
-        "brandbook": "Brendbuk",
-        "logo_design": "Logotip Dizayni",
-        "corporate_style": "Firma Uslubi",
-        "packaging_design": "Qadoq Dizayni",
-        "additional": "Qo'shimcha",
-        "service_prices": "Xizmatlar va Narxlar",
-        "branding_test": "Brending Testi",
-        "blog": "Blog",
-        "sitemap": "Sayt xaritasi",
-        "all_rights_reserved": "Barcha huquqlar himoyalangan.",
-        "back_to_top": "Yuqoriga qaytish",
-        "patent_calculator": "Patent Kalkulyatori"
-    },
-    "servicesPage": {
-        "metadata": {
-            "title": "Xizmatlar va Narxlar | Jon.Branding",
-            "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang."
-        },
-        "packageBuilder": {
-            "title": "Xizmatlar va Narxlar",
-            "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang.",
-            "introSubtitle": "Brending ustida ish qanday tuziladi?",
-            "introList": [
-                { "icon": "research", "title": "Tadqiqot", "description": "Bozor tahlili, raqobatchilar auditi, maqsadli auditoriyani o'rganish." },
-                { "icon": "strategy", "title": "Strategiya", "description": "Brendning ma'nosini, uning pozitsiyasini va qadriyatlarini aniqlash." },
-                { "icon": "identity", "title": "Identifikatsiyani ishlab chiqish", "description": "Logotip, ranglar, shriftlar, grafika va vizual uslubni yaratish." },
-                { "icon": "communication", "title": "Kommunikatsiya", "description": "Reklama materiallari, brendli tashuvchilar va kontentni rasmiylashtirish." }
-            ],
-            "categories": {
-                "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
-                "strategy": "Strategik xizmatlar",
-                "naming": "Neyming",
-                "identity": "Vizual Aydentika: Logo, Firma uslubi, Brendbuk",
-                "addons": "Qo'shimcha xizmatlar",
-                "options": "Maxsus shartlar",
-                "more_services": "Qo'shimcha xizmatlar va shartlar"
-            },
-            "your_package": "Sizning paketingiz",
-            "your_package_desc": "O'zingizga mos xizmatlarni tanlang.",
-            "selected": "Tanlandi",
-            "select": "Tanlash",
-            "base_price": "Boshlang'ich narx",
-            "final_price": "Yakuniy narx:",
-            "total_savings": "Sizning umumiy tejamingiz",
-            "get_free_consultation": "Bepul konsultatsiya olish",
-            "recommended": "Tavsiya etiladi",
-            "features": "Nimalar kiradi",
-            "results": "Siz nima olasiz",
-            "promo_code_label": "Promokod",
-            "promo_code_placeholder": "Kodni kiritish",
-            "empty_package_desc": "Siz hali hech narsa tanlamadingiz.",
-            "base_price_label": "Boshlang'ich narx"
-        },
-        "comparison": {
-            "title": "Biz va Raqobatchilar",
-            "description": "Biz premium sifatni hamyonbop narxlarda taklif qilamiz.",
-            "features": "Xususiyatlar",
-            "whyPremiumTitle": "Nega faqat premium agentliklar?",
-            "whyPremiumDesc": "Biz o'zimizni faqat yuqori darajadagi, strategik yondashuvga ega kompaniyalar bilan solishtiramiz.",
-            "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
-            "ctaDesc": "Sifatli brending uchun ortiqcha pul to'lash shart emas.",
-            "ctaButton": "Menga shunday yondashuv kerak"
-        }
-    },
-    "stats": {
-        "experience": "Yillik tajriba",
-        "clients": "Mamnun mijozlar",
-        "projects": "Muvaffaqiyatli loyiha",
-        "recommend": "Mijozlar tavsiya qilishadi"
-    },
-    "trustedBy": {
-        "title": "Bizga ishonch bildirgan kompaniyalar"
-    },
-    "testimonials": {
-        "title": "Mijozlarimiz biz haqimizda",
-        "subtitle": "Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz.",
-        "textReviewsTitle": "Matnli fikrlar",
-        "textReviewsSubtitle": "Boshaq hurmatli mijozlarimizdan"
+        "identity": "Vizual Aydentika: Logo, Firma uslubi, Brendbuk",
+        "addons": "Qo'shimcha xizmatlar",
+        "options": "Maxsus shartlar",
+        "more_services": "Qo'shimcha xizmatlar va shartlar"
+      },
+      "your_package": "Sizning paketingiz",
+      "your_package_desc": "O'zingizga mos xizmatlarni tanlang.",
+      "selected": "Tanlandi",
+      "select": "Tanlash",
+      "base_price": "Boshlang'ich narx",
+      "final_price": "Yakuniy narx:",
+      "total_savings": "Sizning umumiy tejamingiz",
+      "get_free_consultation": "Bepul konsultatsiya olish",
+      "recommended": "Tavsiya etiladi",
+      "features": "Nimalar kiradi",
+      "results": "Siz nima olasiz",
+      "promo_code_label": "Promokod",
+      "promo_code_placeholder": "Kodni kiritish",
+      "empty_package_desc": "Siz hali hech narsa tanlamadingiz.",
+      "base_price_label": "Boshlang'ich narx"
     }
+  },
+  "namingPage": {
+    "metadata": {
+      "title": "Neyming Xizmatlari | Jon.Branding",
+      "description": "Brendingiz uchun unutilmas va kuchli nom tanlash."
+    }
+  },
+  "logoDesignPage": {
+    "metadata": {
+      "title": "Logotip Dizayni | Jon.Branding",
+      "description": "Biznesingiz uchun noyob va esda qolarli logotip yaratish."
+    }
+  },
+  "corporateStylePage": {
+    "metadata": {
+      "title": "Firma Uslubi | Jon.Branding",
+      "description": "Brendingizni taniladigan qiluvchi vizual tizim."
+    }
+  },
+  "brandbookPage": {
+    "metadata": {
+      "title": "Brendbuk Tayyorlash | Jon.Branding",
+      "description": "Brendingizdan foydalanish qoidalari to'plami."
+    }
+  },
+  "packagingPage": {
+    "metadata": {
+      "title": "Qadoq Dizayni | Jon.Branding",
+      "description": "Mahsulotingizni ajratib turuvchi qadoq dizayni."
+    }
+  },
+  "brandStrategyPage": {
+    "metadata": {
+      "title": "Brend Strategiyasi | Jon.Branding",
+      "description": "Biznesingiz uchun strategik poydevor."
+    }
+  },
+  "patentCalculatorPage": {
+    "metadata": {
+      "title": "Patent Kalkulyatori | Jon.Branding",
+      "description": "Tovar belgisini ro'yxatdan o'tkazish xarajatlarini hisoblang."
+    }
+  },
+  "stats": {
+    "experience": "Yillik tajriba",
+    "clients": "Mamnun mijozlar",
+    "projects": "Muvaffaqiyatli loyiha",
+    "recommend": "Mijozlar tavsiya qilishadi"
+  },
+  "trustedBy": {
+    "title": "Bizga ishonch bildirgan kompaniyalar"
+  },
+  "testimonials": {
+    "title": "Mijozlarimiz biz haqimizda",
+    "subtitle": "Bizning eng katta yutug'imiz - bu mamnun mijozlarimiz.",
+    "textReviewsTitle": "Matnli fikrlar",
+    "textReviewsSubtitle": "Boshqa hurmatli mijozlarimizdan"
+  }
 }
