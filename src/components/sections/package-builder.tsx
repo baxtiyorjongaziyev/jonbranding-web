@@ -83,7 +83,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 <div className="space-y-2">
                     <CardTitle className={cn("text-xl font-bold flex flex-wrap items-baseline gap-2", isVip && "text-white")}>
                         <span>{label}</span>
-                        <span className="text-primary text-lg font-black">{formatPrice(price, lang, currency)}</span>
+                        <span className="text-primary text-2xl font-black">{formatPrice(price, lang, currency)}</span>
                     </CardTitle>
                     <p className={cn("text-sm leading-relaxed", isVip ? "text-slate-300" : "text-slate-500")}>
                         {description}
@@ -122,8 +122,8 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     )}
                 </div>
 
-                <div className="mt-8 space-y-4">
-                    <div className="space-y-2 text-[11px] min-h-[60px] flex flex-col justify-end">
+                <div className="mt-auto pt-8 space-y-4">
+                    <div className="space-y-2 text-[11px]">
                         {note && (
                             <p className={cn("italic p-2 rounded bg-slate-50 border-l-2", isVip ? "bg-white/5 border-amber-400 text-slate-300" : "border-primary text-slate-600")}>
                                 {note}
@@ -186,7 +186,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     useEffect(() => { setIsClient(true); }, []);
 
-    if (!isClient || !dictionary || !dictionary.title) {
+    if (!isClient || !dictionary) {
         return <div className="py-20 min-h-screen bg-slate-50"><Skeleton className="h-96 w-full container mx-auto" /></div>;
     }
 
@@ -307,7 +307,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <div className="space-y-8 bg-white/5 p-8 rounded-3xl border border-white/10">
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-baseline">
-                                        <span className="text-slate-400 text-sm font-bold uppercase">{translations.base_price_label || 'Boshlang\'ich narx'}</span>
+                                        <span className="text-slate-400 text-sm font-bold uppercase">{translations.base_price_label}</span>
                                         <span className="text-2xl font-mono">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
                                     {total.discountApplied.map((d, i) => (

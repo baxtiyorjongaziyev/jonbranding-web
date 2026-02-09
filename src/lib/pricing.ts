@@ -128,7 +128,7 @@ const uzServiceDetails = {
             "Brendni yillar davomida olib yuradigan mustahkam tizim",
             "Jamoa va marketing uchun aniq qo‘llanma",
             "Investorlar oldida ishonchli ko‘rinish",
-            "Qayta dizayn qilish ehtimoli minimal qaror"
+            "Qayta dizayn qilish ehtimoli minimal darajaga tushirilgan qaror"
         ],
         timeline: "20–30 ish kuni",
         note: "Bu tarifda siz faqat dizayn emas, tizim va xotirjamlik olasiz."
