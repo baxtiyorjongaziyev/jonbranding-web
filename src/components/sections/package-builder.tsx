@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -10,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 interface PackageBuilderProps {
@@ -32,7 +31,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const detail = serviceDetails[id as keyof typeof serviceDetails];
     if (!detail) return null;
 
-    const { label, description, price, features, results, timeline, recommended } = detail;
+    const { label, description, price, features, results, timeline, recommended, note } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
 
@@ -55,7 +54,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     {isVip && <div className="bg-amber-400 text-black text-[10px] font-bold px-2 py-1 rounded-full uppercase flex items-center gap-1"><Crown className="w-3 h-3" /> VIP</div>}
                 </div>
                 <div className="space-y-2">
-                    <CardTitle className={cn("text-xl font-bold flex flex-wrap items-baseline gap-2", isVip && "text-white")}>
+                    <CardTitle className={cn("text-xl font-bold flex flex-col gap-1", isVip && "text-white")}>
                         <span>{label}</span>
                         <span className="text-primary text-2xl font-black">{formatPrice(price, lang, currency)}</span>
                     </CardTitle>
@@ -94,6 +93,12 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 </div>
 
                 <div className="mt-auto pt-8 space-y-4">
+                    {note && (
+                        <div className="flex items-start gap-2 text-[10px] text-slate-400 italic">
+                            <AlertCircle className="w-3 h-3 mt-0.5 shrink-0" />
+                            <span>{note}</span>
+                        </div>
+                    )}
                     {timeline && <div className="flex items-center gap-2 font-medium text-slate-400 uppercase text-[10px]"><Clock className="w-3 h-3" /><span>{timeline}</span></div>}
                     <Button
                         className={cn(
@@ -177,7 +182,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
 
                 <div className="mt-24 max-w-4xl mx-auto">
-                    <Card className="p-8 sm:p-12 rounded-[2.5rem] bg-slate-900 text-white shadow-2xl overflow-hidden relative">
+                    <Card id="your-package-card" className="p-8 sm:p-12 rounded-[2.5rem] bg-slate-900 text-white shadow-2xl overflow-hidden relative">
                         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
                             <div className="space-y-8">
                                 <h3 className="text-3xl font-black">{translations.your_package}</h3>
