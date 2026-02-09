@@ -1,4 +1,3 @@
-
 {
   "header": {
     "portfolio": "Portfolio",
@@ -57,6 +56,75 @@
   "cookieConsent": {
     "message": "Saytimizda foydalanuvchi tajribasini yaxshilash uchun cookie fayllardan foydalanamiz. Davom etish orqali siz bunga rozilik bildirasiz.",
     "acceptButton": "Tushunarli"
+  },
+  "contactModal": {
+    "stepTitles": {
+      "contact": "Kontakt ma'lumotlari",
+      "project": "Loyiha haqida",
+      "budget": "Byudjet",
+      "meeting": "Uchrashuv"
+    },
+    "title": "Sifatli konsultatsiya uchun",
+    "description": "Loyihangizni yaxshiroq tushunishimiz uchun bir nechta savollarga javob bering.",
+    "fullName": "Ism va Familiya",
+    "fullNamePlaceholder": "Aziz Rahimov",
+    "phone": "Telefon raqamingiz",
+    "phonePlaceholder": "+998 90 123 45 67",
+    "telegram": "Telegram username (ixtiyoriy)",
+    "telegramPlaceholder": "@username",
+    "companyName": "Kompaniya yoki loyiha nomi",
+    "companyNamePlaceholder": "Jon.Branding",
+    "website": "Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)",
+    "websitePlaceholder": "https://t.me/jonbranding",
+    "goal": "Qaysi maqsad sizga yaqinroq?",
+    "goalOptions": [
+      { "value": "exploring", "label": "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman." },
+      { "value": "has_problem", "label": "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak." },
+      { "value": "ready_to_start", "label": "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." }
+    ],
+    "budget": "Loyiha uchun taxminiy byudjet?",
+    "budgetOptions": [
+      "Hozircha byudjet yo'q / Shunchaki o'rganyapman",
+      "500 $ gacha",
+      "500 $ - 1,500 $",
+      "1,500 $ - 3,000 $",
+      "3,000 $ dan yuqori"
+    ],
+    "location": "Uchrashuv uchun sizning joylashuvingiz",
+    "locationPlaceholder": "Hududni tanlang",
+    "locationOptions": ["Toshkent", "Farg'ona", "Boshqa viloyat"],
+    "meetingPlace": "Qayerda uchrashishni xohlaysiz?",
+    "meetingPlaceOptions": [
+      { "value": "our_office", "label": "Bizning ofisda", "description": "Loyihaga to'liq sho'ng'ish" },
+      { "value": "neutral", "label": "Neytral hududda", "description": "Erkin sharoitda suhbat" },
+      { "value": "client_office", "label": "Sizning ofisda", "description": "Biznesingiz bilan tanishish" }
+    ],
+    "onlineMeetingAlert": "Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.",
+    "backButton": "Orqaga",
+    "nextButton": "Keyingisi",
+    "submitButton": "So'rovni yuborish",
+    "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarim qayta ishlanishiga rozilik beraman.",
+    "formErrors": {
+      "fullName": "To'liq ismingizni kiriting.",
+      "phone": "Telefon raqamingizni to'g'ri kiriting.",
+      "goal": "Asosiy maqsadingizni tanlang.",
+      "budget": "Taxminiy byudjetni tanlang.",
+      "location": "Joylashuvingizni tanlang.",
+      "meetingPlace": "Uchrashuv joyini tanlashingiz kerak.",
+      "privacyPolicy": "Maxfiylik siyosatiga rozilik berishingiz shart."
+    },
+    "successToast": {
+      "title": "Muvaffaqiyatli!",
+      "description": "Sizning so'rovingiz qabul qilindi. Tez orada bog'lanamiz!"
+    },
+    "leadMagnetToast": {
+      "title": "Siz uchun maxsus resurslar!",
+      "description": "So'rovingiz qabul qilindi! Boshlanishiga sizni bepul materiallarimizga yo'naltiramiz."
+    },
+    "errorToast": {
+      "title": "Xatolik!",
+      "description": "So'rovni yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring."
+    }
   },
   "home": {
     "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
@@ -173,7 +241,17 @@
       "select": "Tanlash",
       "recommended": "Tavsiya etiladi",
       "features": "Nimalar kiradi",
-      "results": "Siz nima olasiz"
+      "results": "Siz nima olasiz",
+      "comparison": {
+        "title": "Biz va Raqobatchilar",
+        "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklardan ko'ra ancha arzon narxlarda taqdim etamiz.",
+        "features": "Xususiyatlar",
+        "whyPremiumTitle": "Nega faqat premium agentliklar bilan?",
+        "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz.",
+        "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
+        "ctaDesc": "Sifatli brending uchun ortiqcha pul to'lash shart emas.",
+        "ctaButton": "Menga shunday yondashuv kerak"
+      }
     }
   },
   "namingPage": {
