@@ -1,10 +1,10 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
 
 const convertToUzs = (usd: number) => {
     if (usd === 0) return 0;
-    // Round to nearest 100,000 for cleaner local pricing
     return Math.round(usd * USD_TO_UZS_RATE / 100000) * 100000;
 }
 
@@ -181,30 +181,6 @@ const uzServiceDetails = {
         description: "Postlar va storislarni firma uslubi va brendingda bezash.",
         price: basePricesUSD.smm,
         features: ["6 ta post shabloni", "6 ta stories shabloni", "Profil vizual konsepsiyasi"]
-    },
-    merch: {
-        label: "Brendli merch va nositellar",
-        description: "Kiyim, aksessuarlar, POSM materiallari dizayni.",
-        price: 0,
-        note: "Individual"
-    },
-    illustrations: {
-        label: "Illustratsiyalar va animatsiya",
-        description: "Firma grafikasi, infografika va animatsiyalar yaratish.",
-        price: 0,
-        note: "Individual"
-    },
-    urgency: {
-        label: "Shoshilinch loyiha (+50%)",
-        description: "Loyiha navbatsiz, qisqa muddatda tayyorlanadi.",
-        price: 0,
-        note: "+50%"
-    },
-    nda: {
-        label: "Maxfiylik shartnomasi (NDA) (+50%)",
-        description: "Loyiha ma'lumotlarini oshkor etmaslik shartnomasi.",
-        price: 0,
-        note: "+50%"
     }
 };
 
@@ -213,330 +189,122 @@ const ruServiceDetails = {
         label: "Аудит логотипа",
         description: "Анализ существующего логотипа и рекомендации по улучшению.",
         price: basePricesUSD.audit,
-        features: ["Анализ сильных и слабых сторон", "Сравнение с конкурентами", "Конкретные рекомендации по улучшению"]
-    },
-    namingCheck: {
-        label: "Проверка нейминга",
-        description: "Проверка названия в базах Узбекистана и международных базах.",
-        price: basePricesUSD.namingCheck,
-        features: ["Глубокая проверка по базе Узбекистана", "Проверка по международной базе WIPO", "Проверка доменов и соцсетей"]
-    },
-    consultation: {
-        label: "30-минутная консультация",
-        description: "Быстрая помощь и профессиональный совет по любому вопросу брендинга.",
-        price: basePricesUSD.consultation,
-        features: ["Уточнение проблем вашего бизнеса", "Ответы на вопросы по брендингу", "Рекомендации по следующим шагам"]
-    },
-    strategy: {
-        label: "Бренд-стратегия и платформа",
-        description: "Фундамент вашего бизнеса — анализ рынка, позиционирование и коммуникация.",
-        price: basePricesUSD.strategy,
-        features: ["Анализ рынка и конкурентов", "Карта целевой аудитории", "Платформа бренда", "Позиционирование"]
-    },
-    commStrategy: {
-        label: "Коммуникационная стратегия",
-        description: "Стратегия общения с клиентами: тон, основные сообщения, каналы.",
-        price: basePricesUSD.commStrategy,
-        features: ["Голос бренда (Tone of Voice)", "Разработка ключевых сообщений", "Планирование каналов коммуникации"]
+        features: ["Анализ сильных и слабых сторон", "Сравнение с конкурентами", "Конкретные рекомендации"]
     },
     namingVIP: {
         label: "👑 Нейминг VIP",
         description: "Для крупных и международных проектов.",
         price: basePricesUSD.namingVIP,
-        features: [
-            "Личный контроль Бахтиёржона Газиева",
-            "10+ эксклюзивных вариантов",
-            "Фонетический и семантический анализ на 6 языках",
-            "Патентная проверка по 3 классам",
-            "Бесплатный .uz домен на 10 лет"
-        ],
-        results: [
-            "Сильное имя на мировом уровне",
-            "Максимальное юридическое спокойствие",
-            "Творческий подход высочайшего уровня"
-        ],
-        timeline: "20–25 рабочих дней",
-        note: "В этом тарифе мы даем фундамент вашего будущего бренда."
+        features: ["Личный контроль Б. Газиева", "10+ эксклюзивных вариантов", "Анализ на 6 языках", "Патентная проверка"],
+        results: ["Сильное имя мирового уровня", "Юридическое спокойствие", "Творческий подход"],
+        timeline: "20–25 рабочих дней"
     },
     namingPremium: {
         label: "Нейминг PREMIUM",
         description: "Стратегический подход для растущего бизнеса.",
         price: basePricesUSD.namingPremium,
-        features: [
-            "5 стратегических вариантов названия",
-            "Анализ на нескольких языках",
-            "Патентная проверка по 2 классам",
-            "Бесплатный .uz домен на 5 лет"
-        ],
-        results: [
-            "Имя для ваших бизнес-целей",
-            "Юридически чистый бренд",
-            "Голос, выделяющий среди конкурентов"
-        ],
+        features: ["5 стратегических вариантов", "Анализ на нескольких языках", "Патентная проверка по 2 классам"],
+        results: ["Имя для бизнес-целей", "Юридически чистый бренд"],
         recommended: true,
         timeline: "14–20 рабочих дней"
     },
     namingStandard: {
         label: "Нейминг STANDARD",
-        description: "Идеально для малого бизнеса и стартапов.",
+        description: "Идеально для малого бизнеса.",
         price: basePricesUSD.namingStandard,
-        features: [
-            "3 звучных варианта названия",
-            "Проверка домена .uz",
-            "Проверка доступности в соцсетях"
-        ],
-        results: [
-            "Имя для быстрого и качественного старта",
-            "Легко запоминающийся символ"
-        ],
-        timeline: "7–10 рабочих дней",
-        note: "Важно: патентная проверка не проводится."
+        features: ["3 варианта названия", "Проверка домена .uz"],
+        results: ["Быстрый старт", "Легко запомнить"],
+        timeline: "7–10 рабочих дней"
     },
     logoVIP: {
         label: "👑 Лого + Стиль + Брендбук VIP",
-        description: "Для крупного бизнеса, ориентированного на рост.",
+        description: "Для крупного бизнеса.",
         price: basePricesUSD.logoVIP,
-        features: [
-            "Личный контроль Бахтиёржона Газиева",
-            "8+ концепций на основе стратегии",
-            "25+ точек контакта (оффлайн и онлайн)",
-            "Полный Визуальный Брендбук",
-            "Анимация логотипа (премиум качество)",
-            "3 месяца поддержки после сдачи"
-        ],
-        results: [
-            "Прочная система на долгие годы",
-            "Четкое руководство для команды",
-            "Уверенный вид перед инвесторами",
-            "Минимальный риск редизайна"
-        ],
-        timeline: "20–30 рабочих дней",
-        note: "В этом тарифе вы получаете систему и спокойствие."
+        features: ["Личный контроль Б. Газиева", "8+ концепций", "25+ точек контакта", "Полный Брендбук", "Анимация"],
+        results: ["Прочная система на годы", "Руководство для команды", "Инвестиционная привлекательность"],
+        timeline: "20–30 рабочих дней"
     },
     logoPremium: {
         label: "Лого + Стиль PREMIUM",
-        description: "Для бизнеса, серьезно развивающего свой бренд.",
+        description: "Для серьезного развития бренда.",
         price: basePricesUSD.logoPremium,
-        features: [
-            "5 стратегических концепций логотипа",
-            "Фирменный стиль (цвета, шрифты, паттерны)",
-            "15+ визуализаций точек контакта",
-            "10 Telegram стикеров",
-            "Профессиональные макеты презентаций"
-        ],
-        results: [
-            "Целостный визуальный образ",
-            "Узнаваемый фирменный стиль",
-            "Порядок в маркетинге"
-        ],
+        features: ["5 стратегических концепций", "Фирменный стиль", "15+ точек контакта"],
+        results: ["Целостный образ", "Узнаваемый стиль"],
         recommended: true,
         timeline: "14–20 рабочих дней"
     },
     logoStandard: {
         label: "Логотип STANDARD",
-        description: "Быстрое решение для стартапов и малого бизнеса.",
+        description: "Быстрое решение для стартапов.",
         price: basePricesUSD.logoStandard,
-        features: [
-            "3 концепции логотипа",
-            "5 основных визуализаций",
-            "Все технические форматы (AI, PNG, PDF)",
-            "Анализ конкурентов"
-        ],
-        results: [
-            "Готовый логотип для быстрого запуска",
-            "Символ, который не затеряется"
-        ],
-        timeline: "7–10 рабочих дней",
-        note: "Примечание: полный стиль и брендбук не разрабатываются."
-    },
-    packaging: {
-        label: "Дизайн упаковки",
-        description: "Разработка упаковки для 3 SKU, подготовка к печати.",
-        price: basePricesUSD.packaging,
-        features: ["Анализ рынка и конкурентов", "2 концепции дизайна", "Адаптация до 3 SKU"]
-    },
-    smm: {
-        label: "Стиль для соцсетей",
-        description: "Оформление постов и сторис в фирменном стиле.",
-        price: basePricesUSD.smm,
-        features: ["6 шаблонов постов", "6 шаблонов сторис", "Визуальная концепция профиля"]
-    },
-    merch: {
-        label: "Брендированный мерч",
-        description: "Дизайн одежды, аксессуаров и POSM материалов.",
-        price: 0,
-        note: "Индивидуально"
-    },
-    illustrations: {
-        label: "Иллюстрации и анимация",
-        description: "Создание фирменной графики, инфографики и анимации.",
-        price: 0,
-        note: "Индивидуально"
-    },
-    urgency: {
-        label: "Срочный проект (+50%)",
-        description: "Проект выполняется без очереди, в кратчайшие сроки.",
-        price: 0,
-        note: "+50%"
-    },
-    nda: {
-        label: "Договор о неразглашении (NDA) (+50%)",
-        description: "Соглашение о неразглашении информации о проекте.",
-        price: 0,
-        note: "+50%"
+        features: ["3 концепции логотипа", "5 основных визуализаций"],
+        results: ["Готовый логотип", "Символ, который не затеряется"],
+        timeline: "7–10 рабочих дней"
     }
 };
 
 export const getServiceDetails = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
-    if (lang === 'ru') return ruServiceDetails;
-    // For now, English and Chinese will use Russian as placeholder or we can add more if needed
+    if (lang === 'ru') return { ...uzServiceDetails, ...ruServiceDetails };
     return uzServiceDetails;
 };
 
 export function formatPrice(priceInUSD: number, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz', currency: 'uzs' | 'usd' = 'usd', showCurrencySymbol = true) {
-    if (priceInUSD === 0) {
-        if (lang === 'ru') return 'По догов.';
-        return "Kelishiladi";
-    }
-
-    let price: number;
-    let currencyString: string;
-
-    if (currency === 'uzs') {
-        price = convertToUzs(priceInUSD);
-        currencyString = lang === 'ru' ? 'сум' : "so'm";
-    } else {
-        price = priceInUSD;
-        currencyString = '$';
-    }
-
-    if (currency === 'usd' && showCurrencySymbol) {
-         return `${currencyString}${price.toLocaleString('en-US')}`;
-    }
-
-    if (!showCurrencySymbol) {
-        return price.toLocaleString('fr-FR');
-    }
-
+    if (priceInUSD === 0) return lang === 'ru' ? 'По догов.' : "Kelishiladi";
+    let price = currency === 'uzs' ? convertToUzs(priceInUSD) : priceInUSD;
+    let currencyString = currency === 'uzs' ? (lang === 'ru' ? 'сум' : "so'm") : '$';
+    if (currency === 'usd' && showCurrencySymbol) return `${currencyString}${price.toLocaleString('en-US')}`;
+    if (!showCurrencySymbol) return price.toLocaleString('fr-FR');
     return `${price.toLocaleString('fr-FR')} ${currencyString}`;
 }
 
-export type SelectedServices = Record<keyof typeof basePricesUSD, boolean>;
+export type SelectedServices = Record<string, boolean>;
 
-const PROMO_CODES: Record<string, number> = {
-    'JON2025': 0.05,
-    'BAXTIYOR': 0.05
-};
+const PROMO_CODES: Record<string, number> = { 'JON2025': 0.05, 'BAXTIYOR': 0.05 };
 
-interface PackageSelections {
-    selectedServices: SelectedServices;
-    wantsUpfrontPayment: boolean;
-    promoCode?: string;
-}
-
-export interface PriceDetails {
-    base: number;
-    final: number;
-    discountApplied: { name: string, value: number }[];
-    savings: number;
-    isPromoValid?: boolean;
-}
-
-export const calculatePackagePrice = (selections: PackageSelections, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz'): PriceDetails => {
+export const calculatePackagePrice = (selections: any, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz'): any => {
     const { selectedServices, wantsUpfrontPayment, promoCode } = selections;
     const sd = getServiceDetails(lang);
-
     let basePrice = 0;
     let mainServicesCount = 0;
-    const mainKeys: (keyof SelectedServices)[] = ['strategy', 'commStrategy', 'namingStandard', 'namingPremium', 'namingVIP', 'logoStandard', 'logoPremium', 'logoVIP', 'packaging'];
+    const mainKeys = ['strategy', 'commStrategy', 'namingStandard', 'namingPremium', 'namingVIP', 'logoStandard', 'logoPremium', 'logoVIP', 'packaging'];
 
     for (const key in selectedServices) {
-        const k = key as keyof SelectedServices;
-        if (selectedServices[k] && sd[k]) {
-            basePrice += sd[k].price;
-            if (mainKeys.includes(k)) mainServicesCount++;
+        if (selectedServices[key] && sd[key as keyof typeof sd]) {
+            basePrice += sd[key as keyof typeof sd].price;
+            if (mainKeys.includes(key)) mainServicesCount++;
         }
     }
 
-    const discountsApplied: { name: string, value: number }[] = [];
+    const discountsApplied = [];
     let finalPrice = basePrice;
-
-    // Package discount: -20% if 2 or more main services are chosen
     if (mainServicesCount >= 2) {
-        const packageDiscountValue = basePrice * 0.20;
-        discountsApplied.push({ 
-            name: lang === 'ru' ? 'Пакетная скидка (-20%)' : 'Paketli chegirma (-20%)', 
-            value: packageDiscountValue 
-        });
-        finalPrice -= packageDiscountValue;
+        const val = basePrice * 0.20;
+        discountsApplied.push({ name: lang === 'ru' ? 'Пакетная скидка (-20%)' : 'Paketli chegirma (-20%)', value: val });
+        finalPrice -= val;
     }
-
-    // Upfront payment discount: -10% from the remaining total
     if (wantsUpfrontPayment) {
-        const upfrontDiscountValue = finalPrice * 0.10;
-        discountsApplied.push({ 
-            name: lang === 'ru' ? 'За предоплату (-10%)' : 'Oldindan to\'lov (-10%)', 
-            value: upfrontDiscountValue 
-        });
-        finalPrice -= upfrontDiscountValue;
+        const val = finalPrice * 0.10;
+        discountsApplied.push({ name: lang === 'ru' ? 'За предоплату (-10%)' : 'Oldindan to\'lov (-10%)', value: val });
+        finalPrice -= val;
     }
-
-    // Promo code discount: -5%
     const normalizedPromo = promoCode?.trim().toUpperCase();
-    const promoDiscountValue = PROMO_CODES[normalizedPromo || ''];
-    if (promoDiscountValue) {
-        const val = finalPrice * promoDiscountValue;
-        discountsApplied.push({ 
-            name: `${lang === 'ru' ? 'Промокод' : 'Promokod'} (${normalizedPromo})`, 
-            value: val 
-        });
+    if (PROMO_CODES[normalizedPromo]) {
+        const val = finalPrice * PROMO_CODES[normalizedPromo];
+        discountsApplied.push({ name: `${lang === 'ru' ? 'Промокод' : 'Promokod'} (${normalizedPromo})`, value: val });
         finalPrice -= val;
     }
 
-    const savings = basePrice - finalPrice;
-
-    return {
-        base: basePrice,
-        final: finalPrice,
-        discountApplied: discountsApplied,
-        savings,
-        isPromoValid: !!promoDiscountValue
-    };
+    return { base: basePrice, final: finalPrice, discountApplied: discountsApplied, savings: basePrice - finalPrice };
 }
 
 export function generateSummary(selections: any, lang: string): string {
     const { selectedServices } = selections;
     const sd = getServiceDetails(lang as any);
-    const selectedLabels = Object.entries(selectedServices)
-        .filter(([_, v]) => v)
-        .map(([k]) => sd[k as keyof typeof sd]?.label)
-        .join(', ');
-    return selectedLabels || 'Hech narsa tanlanmagan';
+    return Object.entries(selectedServices).filter(([_, v]) => v).map(([k]) => sd[k as keyof typeof sd]?.label).join(', ') || 'Hech narsa tanlanmagan';
 }
 
 export const comparisonData = (lang: 'uz' | 'ru' | 'en') => [
-    {
-        feature: lang === 'ru' ? 'Стратегический подход' : 'Strategik yondashuv',
-        competitors: { jon: true, mano: true, abba: true, mountain: true }
-    },
-    {
-        feature: lang === 'ru' ? 'Глубокий анализ рынка' : 'Bozorni chuqur tahlil qilish',
-        competitors: { jon: true, mano: true, abba: true, mountain: true }
-    },
-    {
-        feature: lang === 'ru' ? 'Личный контроль арт-директора' : 'Art-direktor shaxsiy nazorati',
-        competitors: { jon: true, mano: false, abba: false, mountain: false }
-    },
-    {
-        feature: lang === 'ru' ? 'Доступная цена' : 'Hamyonbop narx',
-        competitors: { jon: true, mano: false, abba: false, mountain: false }
-    },
-    {
-        feature: lang === 'ru' ? 'Сроки от 2 недель' : '2 haftadan boshlanadigan muddat',
-        competitors: { jon: true, mano: false, abba: false, mountain: true }
-    },
-    {
-        feature: lang === 'ru' ? 'Гарантия возврата денег' : 'To\'lovni qaytarish kafolati',
-        competitors: { jon: true, mano: false, abba: false, mountain: false }
-    }
+    { feature: lang === 'ru' ? 'Стратегический подход' : 'Strategik yondashuv', competitors: { jon: true, mano: true, abba: true, mountain: true } },
+    { feature: lang === 'ru' ? 'Личный контроль арт-директора' : 'Art-direktor shaxsiy nazorati', competitors: { jon: true, mano: false, abba: false, mountain: false } },
+    { feature: lang === 'ru' ? 'Гарантия возврата денег' : 'To\'lovni qaytarish kafolati', competitors: { jon: true, mano: false, abba: false, mountain: false } }
 ];
