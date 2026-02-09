@@ -159,11 +159,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">{['strategy', 'commStrategy'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
                     <ServiceGroup title={translations.categories.naming}>{['namingVIP', 'namingPremium', 'namingStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
                     <ServiceGroup title={translations.categories.identity}>{['logoVIP', 'logoPremium', 'logoStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                    
                     <Accordion type="single" collapsible className="w-full">
                         <AccordionItem value="more" className="border-none">
-                            <AccordionTrigger className="text-xl font-bold text-slate-900 justify-center gap-2 hover:no-underline py-10 bg-slate-100 rounded-3xl">{translations.categories.more_services}<ChevronsDown className="w-5 h-5" /></AccordionTrigger>
+                            <AccordionTrigger className="text-xl font-bold text-slate-900 justify-center gap-2 hover:no-underline py-10 bg-slate-100 rounded-3xl">
+                                {translations.categories.more_services}
+                                <ChevronsDown className="w-5 h-5" />
+                            </AccordionTrigger>
                             <AccordionContent className="pt-12 space-y-20">
-                                <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">{['packaging', 'smm'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                                <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
+                                    {['packaging', 'smm'].map(id => (
+                                        <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                                    ))}
+                                </ServiceGroup>
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>
@@ -186,13 +194,26 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                             <div className="space-y-8 bg-white/5 p-8 rounded-3xl border border-white/10">
                                 <div className="space-y-4">
-                                    <div className="flex justify-between items-baseline"><span className="text-slate-400 text-sm font-bold uppercase">{translations.base_price_label}</span><span className="text-2xl font-mono">{formatPrice(total.base, lang as any, currency)}</span></div>
-                                    {total.discountApplied.map((d: any, i: number) => <div key={i} className="flex justify-between items-center text-green-400 text-sm"><span>{d.name}</span><span className="font-mono">-{formatPrice(d.value, lang as any, currency)}</span></div>)}
-                                    <div className="pt-4 border-t border-white/10 flex justify-between items-center"><span className="text-xl font-black">{translations.final_price}</span><span className="text-4xl font-black text-primary">{formatPrice(total.final, lang as any, currency)}</span></div>
+                                    <div className="flex justify-between items-baseline">
+                                        <span className="text-slate-400 text-sm font-bold uppercase">{translations.base_price_label}</span>
+                                        <span className="text-2xl font-mono">{formatPrice(total.base, lang as any, currency)}</span>
+                                    </div>
+                                    {total.discountApplied.map((d: any, i: number) => (
+                                        <div key={i} className="flex justify-between items-center text-green-400 text-sm">
+                                            <span>{d.name}</span>
+                                            <span className="font-mono">-{formatPrice(d.value, lang as any, currency)}</span>
+                                        </div>
+                                    ))}
+                                    <div className="pt-4 border-t border-white/10 flex justify-between items-center">
+                                        <span className="text-xl font-black">{translations.final_price}</span>
+                                        <span className="text-4xl font-black text-primary">{formatPrice(total.final, lang as any, currency)}</span>
+                                    </div>
                                 </div>
                                 <div className="space-y-4">
-                                    <div className="flex items-center gap-4 py-2" onClick={() => setWantsUpfrontPayment(!wantsUpfrontPayment)}>
-                                        <div className={cn("w-12 h-6 rounded-full relative cursor-pointer transition-colors", wantsUpfrontPayment ? "bg-primary" : "bg-slate-700")}><div className={cn("absolute top-1 w-4 h-4 rounded-full bg-white transition-all", wantsUpfrontPayment ? "left-7" : "left-1")} /></div>
+                                    <div className="flex items-center gap-4 py-2 cursor-pointer" onClick={() => setWantsUpfrontPayment(!wantsUpfrontPayment)}>
+                                        <div className={cn("w-12 h-6 rounded-full relative transition-colors", wantsUpfrontPayment ? "bg-primary" : "bg-slate-700")}>
+                                            <div className={cn("absolute top-1 w-4 h-4 rounded-full bg-white transition-all", wantsUpfrontPayment ? "left-7" : "left-1")} />
+                                        </div>
                                         <span className="text-xs font-bold text-slate-300 uppercase">100% Pre-payment (-10%)</span>
                                     </div>
                                     <div className="space-y-2">
@@ -200,7 +221,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <Input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="bg-white/5 border-white/10 text-white h-12 rounded-xl" placeholder={translations.promo_code_placeholder} />
                                     </div>
                                 </div>
-                                <Button size="lg" className="w-full py-8 text-xl font-black rounded-2xl shadow-primary/25 shadow-xl" onClick={onOrderNow} disabled={total.base === 0}>{translations.get_free_consultation}</Button>
+                                <Button size="lg" className="w-full py-8 text-xl font-black rounded-2xl shadow-primary/25 shadow-xl" onClick={onOrderNow} disabled={total.base === 0}>
+                                    {translations.get_free_consultation}
+                                </Button>
                             </div>
                         </div>
                     </Card>
