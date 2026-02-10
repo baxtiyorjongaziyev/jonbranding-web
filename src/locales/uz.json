@@ -184,7 +184,7 @@
       "progress_text": "Bajarildi: {checkedCount} dan {total}",
       "items": [
         { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash.", "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun?' degan savollarga javob berishdan boshlang." },
-        { "title": "2. Hamma uchun yoqishga harakat qilish", "description": "Hamma uchun bo'lishga harakat qilgan brend oxir-oqibat hech kim uchun bo'lmay qoladi.", "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling." },
+        { "title": "2. Hamma uchun yoqishga harakat qilish", "description": "Hamma uchun bo'lishga harakat qigan brend oxir-oqibat hech kim uchun bo'lmay qoladi.", "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling." },
         { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu hech qayerga olib bormaydigan yo'l.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni toping." },
         { "title": "4. Nomuvofiqlik", "description": "Saytdagi logotipingiz bir xil uslubda, Instagramda boshqacha, qadoqda esa butunlay boshqa ko'rinishda.", "solution": "Yechim: Logotip, ranglar, shriftlardan foydalanish qoidalari yozilgan 'brandbook' yarating." },
         { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin.", "solution": "Yechim: Soddalik va minimalizmga intiling." },
@@ -321,17 +321,124 @@
       "select": "Tanlash",
       "recommended": "Tavsiya etiladi",
       "features": "Nimalar kiradi",
-      "results": "Siz nima olasiz",
-      "comparison": {
-        "title": "Biz va Raqobatchilar",
-        "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklardan ko'ra ancha arzon narxlarda taqdim etamiz.",
-        "features": "Xususiyatlar",
-        "whyPremiumTitle": "Nega faqat premium agentliklar bilan?",
-        "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz.",
-        "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
-        "ctaDesc": "Sifatli brending uchun ortiqcha pul to'lash shart emas.",
-        "ctaButton": "Menga shunday yondashuv kerak"
-      }
+      "results": "Siz nima olasiz"
+    },
+    "comparison": {
+      "title": "Biz va Raqobatchilar",
+      "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklardan ko'ra ancha arzon narxlarda taqdim etamiz.",
+      "features": "Xususiyatlar",
+      "whyPremiumTitle": "Nega faqat premium agentliklar bilan?",
+      "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz.",
+      "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
+      "ctaDesc": "Sifatli brending uchun ortiqcha pul to'lash shart emas.",
+      "ctaButton": "Menga shunday yondashuv kerak"
     }
+  },
+  "namingPage": {
+    "metadata": {
+      "title": "Neyming Xizmatlari | Jon.Branding",
+      "description": "Brendingiz uchun kuchli va huquqiy toza nomlar."
+    },
+    "title": "Neyming — Kuchli brend nomi",
+    "subtitle": "Brend nomi — bu uning birinchi taassuroti.",
+    "process_title": "Qanday qilib nom yaratamiz?",
+    "process_subtitle": "Bizning neyming jarayoni 4 bosqichdan iborat.",
+    "process_steps": [
+      { "title": "Tadqiqot", "description": "Bozor va raqobatchilarni o'rganamiz." },
+      { "title": "G'oya", "description": "Noyob nomlar ro'yxatini tuzamiz." },
+      { "title": "Tekshiruv", "description": "Patent va domenlarni tekshiramiz." },
+      { "title": "Tanlov", "description": "Eng yaxshi variantlarni taqdim etamiz." }
+    ],
+    "check_title": "Tekshiruv muhim!",
+    "check_subtitle": "Biz har bir nomni sinchkovlik bilan tekshiramiz.",
+    "check_points": [
+      { "title": "Patent", "description": "IMA bazasidan tekshiramiz." },
+      { "title": "Domen", "description": ".uz va .com bo'shligini ko'ramiz." },
+      { "title": "Hissiyot", "description": "Mijozga qanday ta'sir qilishini o'ylaymiz." }
+    ],
+    "calculator_cta_button": "Patent kalkulyatoriga o'tish"
+  },
+  "logoDesignPage": {
+    "metadata": {
+      "title": "Logotip Dizayni | Jon.Branding",
+      "description": "Biznesingiz uchun unikal va strategik logotiplar."
+    },
+    "title": "Logotip Dizayni",
+    "subtitle": "Logotip — bu shunchaki rasm emas, bu brendning yuzi.",
+    "section1_title": "Nega logotip muhim?",
+    "section1_p1": "Logotip mijozning siz bilan birinchi vizual aloqasidir.",
+    "section1_p2": "Professional logotip ishonchni oshiradi.",
+    "values_title": "Yaxshi logotip qanday bo'ladi?",
+    "values": [
+      { "title": "Soddalik", "description": "Oson esda qoladigan." },
+      { "title": "Noyoblik", "description": "Boshqalarga o'xshamaydigan." },
+      { "title": "Ma'no", "description": "Strategiyaga asoslangan." }
+    ],
+    "process_title": "Ish jarayoni",
+    "process_subtitle": "Logotip yaratishning bizdagi tartibi.",
+    "process_steps": [
+      { "title": "Brif", "description": "Maqsadlarni aniqlaymiz." },
+      { "title": "Konsept", "description": "G'oyalarni chizamiz." },
+      { "title": "Dizayn", "description": "Tanlangan g'oyani mukammallashtiramiz." },
+      { "title": "Topshirish", "description": "Barcha fayllarni beramiz." }
+    ],
+    "cta_title": "Logotip buyurtma bermoqchimisiz?",
+    "cta_description": "Keling, biznesingiz uchun unikal yechim topamiz.",
+    "cta_button": "Konsultatsiya olish"
+  },
+  "personalOfferBlock": {
+    "title": "SHAXSIY TAKLIF",
+    "subtitle": "Siz nimalarga ega bo'lasiz?",
+    "ctaButton": "Menga shu kerak",
+    "sections": [
+      { "title": "Strategiya", "points": ["Bozor tahlili", "Pozitsiyalash", "Auditoriya xaritasi"] },
+      { "title": "Aydentika", "points": ["Logotip", "Ranglar palitrasi", "Shriftlar"] },
+      { "title": "Hujjatlar", "points": ["Brandbook", "Tayyor fayllar", "Qo'llanma"] }
+    ]
+  },
+  "urgencyBlock": {
+    "title": "DIQQAT!",
+    "subtitle": "Vaqtni boy bermang!",
+    "line1": "Raqobatchilaringiz allaqachon brendini yangilashdi.",
+    "line2": "Mijozlar chiroyli va sifatli upakovkani tanlashadi.",
+    "line3": "Hozir harakat qilish vaqti!"
+  },
+  "queueStatus": {
+    "subtitle": "Navbatni band qiling",
+    "title": "Hozirda bo'sh joylar kam!",
+    "description": "Biz sifatga e'tibor qaratamiz, shuning uchun bir vaqtda ko'p loyiha olmaymiz.",
+    "queueTitle": "Loyihalar navbati",
+    "booked": "Band",
+    "available": "Bo'sh",
+    "tooltipBooked": "Ushbu joy band qilingan",
+    "tooltipAvailable": "Hozir band qilishingiz mumkin",
+    "remainingSlots": "Qolgan bo'sh joylar",
+    "slotsUnit": "ta",
+    "onlineNow": "Hozir saytda",
+    "peopleUnit": "kishi",
+    "nextProjectStart": "Keyingi loyiha boshlanishi",
+    "ctaButton": "Joy band qilish",
+    "ctaSubtitle": "Raqobatchilardan bir qadam oldinda bo'ling!",
+    "timeframes": {
+      "2 weeks": "2 hafta ichida"
+    }
+  },
+  "popularPackages": {
+    "title": "Eng mashhur paketlar",
+    "packageTitle": "Neyming + Logo (Premium)",
+    "packageSubtitle": "Brendni boshlash uchun ideal yechim.",
+    "features": [
+      "Mukammal nom (6 tilda tahlil)",
+      "Professional logotip (5 xil variant)",
+      "To'liq firma uslubi",
+      "15+ real mockup",
+      "Patent auditi",
+      "10 ta brend stikerlar"
+    ],
+    "separate": "Alohida",
+    "packagePrice": "Paketda",
+    "packageDiscount": "(-20% chegirma!)",
+    "upfrontDiscount": "100% oldindan to'lov bilan (-28% umumiy!)",
+    "ctaButton": "Ushbu paketni tanlash"
   }
 }

@@ -27,6 +27,8 @@ const basePricesUSD = {
     logoStandard: 780,
     packaging: 1150,
     smm: 980,
+    urgency: 0,
+    nda: 0
 };
 
 const uzServiceDetails = {

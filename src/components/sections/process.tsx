@@ -77,18 +77,18 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
   });
   const translations = dictionary;
 
-  const x = useTransform(scrollYProgress, [0.1, 0.9], ['0%', '-83.33%']);
+  const x = useTransform(scrollYProgress, [0.15, 0.85], ['0%', '-83.33%']);
   const ctaOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
   const ctaY = useTransform(scrollYProgress, [0.9, 1], ["50px", "0px"]);
 
   if (!translations) return null;
 
   return (
-    <section id="process" className="py-16 sm:py-24 bg-white">
+    <section id="process" className="bg-white">
         {/* Desktop View with Sticky Horizontal Scroll */}
-        <div ref={targetRef} className="relative h-[300vh] hidden lg:block">
-            <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-                <div className="absolute top-24 left-0 right-0">
+        <div ref={targetRef} className="relative h-[400vh] hidden lg:block">
+            <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden pt-20">
+                <div className="w-full mb-12">
                     <div className="container mx-auto px-4 text-center">
                         <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
                             {translations.title}
@@ -99,13 +99,15 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
                     </div>
                 </div>
                 
-                <motion.div style={{ x }} className="flex">
-                    {translations.phases.map((phase: any, index: number) => (
-                        <ProcessCard key={index} {...phase} />
-                    ))}
-                </motion.div>
+                <div className="relative">
+                    <motion.div style={{ x }} className="flex">
+                        {translations.phases.map((phase: any, index: number) => (
+                            <ProcessCard key={index} {...phase} />
+                        ))}
+                    </motion.div>
+                </div>
                 
-                <motion.div style={{ opacity: ctaOpacity, y: ctaY }} className="absolute bottom-0 left-0 right-0 z-10">
+                <motion.div style={{ opacity: ctaOpacity, y: ctaY }} className="absolute bottom-0 left-0 right-0 z-10 bg-white">
                     <div className={cn(scrollYProgress.get() < 0.9 && "pointer-events-none")}>
                         <CtaBlock 
                             title={translations.ctaTitle}
@@ -119,7 +121,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
         </div>
 
         {/* Mobile and Tablet View */}
-        <div className="lg:hidden">
+        <div className="lg:hidden py-16">
             <MobileProcessView phases={translations.phases} title={translations.title} subtitle={translations.subtitle} />
              <CtaBlock 
                 title={translations.ctaTitle}
