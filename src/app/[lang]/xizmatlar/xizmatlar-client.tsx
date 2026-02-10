@@ -1,21 +1,28 @@
-
 'use client';
 
-import { useCallback } from 'react';
-import MobileCtaBar from '@/components/sections/mobile-cta-bar';
-import PackageBuilder from '@/components/sections/package-builder';
-import Comparison from '@/components/sections/comparison';
-import QueueStatus from '@/components/sections/queue-status';
-import ServicesHero from '@/components/sections/services-hero';
-import WhyUs from '@/components/sections/why-us';
-import ServiceSections from '@/components/sections/service-sections';
-import TrustedBy from '@/components/sections/trusted-by';
-import Testimonials from '@/components/sections/testimonials';
-import UrgencyBlock from '@/components/sections/urgency-block';
-import PersonalOfferBlock from '@/components/sections/personal-offer-block';
-import PopularPackages from '@/components/sections/popular-packages';
+import { useCallback, useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'));
+const PackageBuilder = dynamic(() => import('@/components/sections/package-builder'));
+const Comparison = dynamic(() => import('@/components/sections/comparison'));
+const QueueStatus = dynamic(() => import('@/components/sections/queue-status'));
+const ServicesHero = dynamic(() => import('@/components/sections/services-hero'));
+const WhyUs = dynamic(() => import('@/components/sections/why-us'));
+const ServiceSections = dynamic(() => import('@/components/sections/service-sections'));
+const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'));
+const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
+const UrgencyBlock = dynamic(() => import('@/components/sections/urgency-block'));
+const PersonalOfferBlock = dynamic(() => import('@/components/sections/personal-offer-block'));
 
 const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const handleOpenModal = useCallback(() => {
     const event = new CustomEvent('openContactModal');
     window.dispatchEvent(event);
@@ -35,7 +42,13 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       <WhyUs onCtaClick={handleOpenModal} lang={lang} />
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
       <ServiceSections lang={lang} />
-      <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
+      
+      {isClient ? (
+        <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary} />
+      ) : (
+        <div className="py-20 text-center text-gray-400">Ko'rinmayapti hech narsa</div>
+      )}
+
       <UrgencyBlock />
       <PersonalOfferBlock onCtaClick={handleOpenModal} />
       <QueueStatus onCtaClick={handleOpenModal} />
