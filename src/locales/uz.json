@@ -310,6 +310,7 @@
         "more_services": "Qo'shimcha xizmatlar va shartlar"
       },
       "your_package": "Sizning paketingiz",
+      "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
       "empty_package_desc": "Siz hali hech narsa tanlamadingiz.",
       "base_price_label": "Boshlang'ich narx",
       "final_price": "Yakuniy narx:",
@@ -331,95 +332,6 @@
       "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
       "ctaDesc": "Sifatli brending uchun ortiqcha pul to'lash shart emas.",
       "ctaButton": "Menga shunday yondashuv kerak"
-    }
-  },
-  "namingPage": {
-    "metadata": {
-      "title": "Neyming Xizmatlari | Jon.Branding",
-      "description": "Brendingiz uchun kuchli va huquqiy toza nomlar."
-    },
-    "title": "Neyming — Kuchli brend nomi",
-    "subtitle": "Brend nomi — bu uning birinchi taassuroti.",
-    "process_title": "Qanday qilib nom yaratamiz?",
-    "process_subtitle": "Bizning neyming jarayoni 4 bosqichdan iborat.",
-    "process_steps": [
-      { "title": "Tadqiqot", "description": "Bozor va raqobatchilarni o'rganamiz." },
-      { "title": "G'oya", "description": "Noyob nomlar ro'yxatini tuzamiz." },
-      { "title": "Tekshiruv", "description": "Patent va domenlarni tekshiramiz." },
-      { "title": "Tanlov", "description": "Eng yaxshi variantlarni taqdim etamiz." }
-    ],
-    "check_title": "Tekshiruv muhim!",
-    "check_subtitle": "Biz har bir nomni sinchkovlik bilan tekshiramiz.",
-    "check_points": [
-      { "title": "Patent", "description": "IMA bazasidan tekshiramiz." },
-      { "title": "Domen", "description": ".uz va .com bo'shligini ko'ramiz." },
-      { "title": "Hissiyot", "description": "Mijozga qanday ta'sir qilishini o'ylaymiz." }
-    ],
-    "calculator_cta_button": "Patent kalkulyatoriga o'tish"
-  },
-  "logoDesignPage": {
-    "metadata": {
-      "title": "Logotip Dizayni | Jon.Branding",
-      "description": "Biznesingiz uchun unikal va strategik logotiplar."
-    },
-    "title": "Logotip Dizayni",
-    "subtitle": "Logotip — bu shunchaki rasm emas, bu brendning yuzi.",
-    "section1_title": "Nega logotip muhim?",
-    "section1_p1": "Logotip mijozning siz bilan birinchi vizual aloqasidir.",
-    "section1_p2": "Professional logotip ishonchni oshiradi.",
-    "values_title": "Yaxshi logotip qanday bo'ladi?",
-    "values": [
-      { "title": "Soddalik", "description": "Oson esda qoladigan." },
-      { "title": "Noyoblik", "description": "Boshqalarga o'xshamaydigan." },
-      { "title": "Ma'no", "description": "Strategiyaga asoslangan." }
-    ],
-    "process_title": "Ish jarayoni",
-    "process_subtitle": "Logotip yaratishning bizdagi tartibi.",
-    "process_steps": [
-      { "title": "Brif", "description": "Maqsadlarni aniqlaymiz." },
-      { "title": "Konsept", "description": "G'oyalarni chizamiz." },
-      { "title": "Dizayn", "description": "Tanlangan g'oyani mukammallashtiramiz." },
-      { "title": "Topshirish", "description": "Barcha fayllarni beramiz." }
-    ],
-    "cta_title": "Logotip buyurtma bermoqchimisiz?",
-    "cta_description": "Keling, biznesingiz uchun unikal yechim topamiz.",
-    "cta_button": "Konsultatsiya olish"
-  },
-  "personalOfferBlock": {
-    "title": "SHAXSIY TAKLIF",
-    "subtitle": "Siz nimalarga ega bo'lasiz?",
-    "ctaButton": "Menga shu kerak",
-    "sections": [
-      { "title": "Strategiya", "points": ["Bozor tahlili", "Pozitsiyalash", "Auditoriya xaritasi"] },
-      { "title": "Aydentika", "points": ["Logotip", "Ranglar palitrasi", "Shriftlar"] },
-      { "title": "Hujjatlar", "points": ["Brandbook", "Tayyor fayllar", "Qo'llanma"] }
-    ]
-  },
-  "urgencyBlock": {
-    "title": "DIQQAT!",
-    "subtitle": "Vaqtni boy bermang!",
-    "line1": "Raqobatchilaringiz allaqachon brendini yangilashdi.",
-    "line2": "Mijozlar chiroyli va sifatli upakovkani tanlashadi.",
-    "line3": "Hozir harakat qilish vaqti!"
-  },
-  "queueStatus": {
-    "subtitle": "Navbatni band qiling",
-    "title": "Hozirda bo'sh joylar kam!",
-    "description": "Biz sifatga e'tibor qaratamiz, shuning uchun bir vaqtda ko'p loyiha olmaymiz.",
-    "queueTitle": "Loyihalar navbati",
-    "booked": "Band",
-    "available": "Bo'sh",
-    "tooltipBooked": "Ushbu joy band qilingan",
-    "tooltipAvailable": "Hozir band qilishingiz mumkin",
-    "remainingSlots": "Qolgan bo'sh joylar",
-    "slotsUnit": "ta",
-    "onlineNow": "Hozir saytda",
-    "peopleUnit": "kishi",
-    "nextProjectStart": "Keyingi loyiha boshlanishi",
-    "ctaButton": "Joy band qilish",
-    "ctaSubtitle": "Raqobatchilardan bir qadam oldinda bo'ling!",
-    "timeframes": {
-      "2 weeks": "2 hafta ichida"
     }
   }
 }
