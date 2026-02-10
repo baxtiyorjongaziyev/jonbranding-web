@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -26,7 +27,7 @@ const ProcessCard = ({ title, description, tasks, phase }: {title: string, descr
         <p className="mt-1 text-base text-gray-500">{description}</p>
         <div className="mt-6 flex flex-wrap gap-2">
             {tasks.map((task) => (
-                <Badge key={task} variant="secondary" className="bg-gray-100 text-gray-700 hover:bg-gray-200 font-normal px-3 py-1 text-sm">
+                <Badge key={task} variant="secondary" className="bg-gray-100 text-gray-700 hover:bg-gray-200 font-normal px-3 py-1 text-sm rounded-full">
                     {task}
                 </Badge>
             ))}
@@ -58,7 +59,7 @@ const MobileProcessView = ({ phases, title, subtitle }: { phases: any[], title: 
                         <p className="mt-1 text-gray-500">{phase.description}</p>
                         <div className="mt-4 flex flex-wrap gap-2">
                             {phase.tasks.map((task: string) => (
-                                <Badge key={task} variant="secondary">{task}</Badge>
+                                <Badge key={task} variant="secondary" className="rounded-full">{task}</Badge>
                             ))}
                         </div>
                     </div>
@@ -86,9 +87,9 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
     <section id="process" className="bg-white">
         {/* Desktop View with Sticky Horizontal Scroll */}
         <div ref={targetRef} className="relative h-[400vh] hidden lg:block">
-            <div className="sticky top-0 flex h-screen flex-col justify-start overflow-hidden pt-32">
-                <div className="w-full mb-20">
-                    <div className="container mx-auto px-4 text-center">
+            <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+                <div className="w-full mb-16 px-4">
+                    <div className="container mx-auto text-center">
                         <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
                             {translations.title}
                         </h2>
@@ -98,7 +99,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
                     </div>
                 </div>
                 
-                <div className="relative mt-10">
+                <div className="relative">
                     <motion.div style={{ x }} className="flex">
                         {translations.phases.map((phase: any, index: number) => (
                             <ProcessCard key={index} {...phase} />
