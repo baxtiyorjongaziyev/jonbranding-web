@@ -64,7 +64,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <div className={cn(
                         "w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 flex-shrink-0",
                         selected 
-                            ? (isVip ? "bg-amber-400 text-black shadow-[0_0_20px_rgba(251,191,36,0.5)]" : "bg-primary text-white shadow-lg") 
+                            ? (isVip ? "bg-amber-400 text-blue-950 shadow-[0_0_20px_rgba(251,191,36,0.5)]" : "bg-primary text-white shadow-lg") 
                             : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/30" : "bg-secondary text-slate-600")
                     )}>
                         <Icon className="w-6 h-6" />
@@ -135,18 +135,19 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     </div>
 
                     <Button
-                        variant={selected ? "default" : "outline"}
                         className={cn(
-                            "w-full py-5 text-sm font-bold transition-all duration-500 rounded-full",
+                            "w-full py-5 text-sm font-bold transition-all duration-500 rounded-full border-none",
                             selected 
-                                ? (isVip ? "bg-amber-400 text-black hover:bg-amber-500 border-none shadow-[0_10px_30px_rgba(251,191,36,0.4)]" : "text-white shadow-xl") 
-                                : (isVip ? "bg-white/5 border-amber-400/30 text-amber-400 hover:bg-amber-400 hover:text-black" : "border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
+                                ? (isVip 
+                                    ? "bg-amber-400 text-blue-950 hover:bg-amber-500 shadow-[0_10px_30px_rgba(251,191,36,0.4)]" 
+                                    : "bg-primary text-white shadow-xl") 
+                                : (isVip 
+                                    ? "bg-white/5 border border-amber-400/30 text-amber-400 hover:bg-amber-400 hover:text-blue-950" 
+                                    : "bg-white border border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
                         )}
                         onClick={(e) => { e.stopPropagation(); onSelect(); }}
                     >
-                        <span className={cn(selected && "text-white")}>
-                            {selected ? dictionary.selected : dictionary.select}
-                        </span>
+                        {selected ? dictionary.selected : dictionary.select}
                     </Button>
                 </div>
             </CardContent>
@@ -351,7 +352,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 disabled={total.base === 0}
                             >
                                 <span className="flex items-center gap-2">
-                                    {translations.get_free_consultation}
+                                    To'lov qilishga tayyorman
                                     <ChevronsDown className="w-6 h-6 animate-bounce" />
                                 </span>
                             </Button>

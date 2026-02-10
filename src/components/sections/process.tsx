@@ -87,7 +87,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
     <section id="process" className="bg-white">
         {/* Desktop View with Sticky Horizontal Scroll */}
         <div ref={targetRef} className="relative h-[400vh] hidden lg:block">
-            <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden pt-32">
+            <div className="sticky top-0 flex h-screen flex-col justify-start overflow-hidden pt-32">
                 <div className="w-full mb-16 px-4">
                     <div className="container mx-auto text-center">
                         <h2 className="text-4xl sm:text-5xl font-bold text-dark-blue">
@@ -99,7 +99,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
                     </div>
                 </div>
                 
-                <div className="relative">
+                <div className="relative mt-10">
                     <motion.div style={{ x }} className="flex">
                         {translations.phases.map((phase: any, index: number) => (
                             <ProcessCard key={index} {...phase} />
