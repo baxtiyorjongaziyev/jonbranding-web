@@ -131,9 +131,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
-    if (!isClient || !dictionary || !dictionary.packageBuilder) return <div className="py-20 min-h-screen bg-slate-50"><Skeleton className="h-96 w-full container mx-auto" /></div>;
+    if (!isClient || !dictionary || !dictionary.servicesPage?.packageBuilder) return <div className="py-20 min-h-screen bg-slate-50"><Skeleton className="h-96 w-full container mx-auto" /></div>;
 
-    const translations = dictionary.packageBuilder;
+    const translations = dictionary.servicesPage.packageBuilder;
     const serviceDetails = getServiceDetails(lang as any);
     const total = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, promoCode }, lang as any);
 
