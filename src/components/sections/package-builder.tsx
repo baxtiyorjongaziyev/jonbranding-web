@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -144,7 +143,9 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                         )}
                         onClick={(e) => { e.stopPropagation(); onSelect(); }}
                     >
-                        {selected ? dictionary.selected : dictionary.select}
+                        <span className={cn(selected && "text-white")}>
+                            {selected ? dictionary.selected : dictionary.select}
+                        </span>
                     </Button>
                 </div>
             </CardContent>
@@ -225,60 +226,60 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </Accordion>
                 </div>
 
-                {/* MODERNISED SUMMARY CARD - Compact Version */}
+                {/* MODERNISED SUMMARY CARD - Light Design Version */}
                 <div className="mt-24 max-w-5xl mx-auto">
-                    <div id="your-package-card" className="relative group p-1 rounded-[3rem] bg-gradient-to-br from-blue-400 via-primary to-dark-blue shadow-[0_30px_60px_-15px_rgba(5,5,131,0.4)] transition-all duration-700 hover:scale-[1.01]">
-                        <Card className="p-6 sm:p-10 rounded-[2.8rem] bg-[#02024d]/95 backdrop-blur-3xl text-white border-none overflow-hidden relative">
-                            {/* Abstract Glow Elements */}
-                            <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px]" />
-                            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-accent/10 rounded-full blur-[80px]" />
+                    <div id="your-package-card" className="relative group p-1 rounded-[3rem] bg-slate-200 shadow-xl transition-all duration-700 hover:scale-[1.01]">
+                        <Card className="p-6 sm:p-10 rounded-[2.8rem] bg-white text-dark-blue border-slate-200 overflow-hidden relative">
+                            {/* Decorative Background Glows */}
+                            <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-[80px]" />
+                            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-accent/5 rounded-full blur-[80px]" />
                             
                             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-5 gap-10">
                                 {/* Left: Selection Details */}
                                 <div className="lg:col-span-3 space-y-8">
                                     <div className="space-y-3">
                                         <div className="flex items-center gap-3">
-                                            <div className="bg-accent/20 p-2 rounded-xl">
-                                                <Box className="w-5 h-5 text-accent" />
+                                            <div className="bg-primary/10 p-2 rounded-xl">
+                                                <Box className="w-5 h-5 text-primary" />
                                             </div>
-                                            <h3 className="text-3xl font-black tracking-tighter uppercase">{translations.your_package}</h3>
+                                            <h3 className="text-3xl font-black tracking-tighter uppercase text-dark-blue">{translations.your_package}</h3>
                                         </div>
-                                        <p className="text-blue-100/70 font-medium text-base max-w-md">{translations.your_package_desc}</p>
+                                        <p className="text-slate-500 font-medium text-base max-w-md">{translations.your_package_desc}</p>
                                     </div>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
                                         {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => (
-                                            <div key={k} className="group/item flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all">
+                                            <div key={k} className="group/item flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-primary/20 transition-all">
                                                 <div className="flex items-center gap-2">
-                                                    <div className="bg-accent/10 p-1 rounded-full">
-                                                        <Check className="w-3 h-3 text-accent" />
+                                                    <div className="bg-primary/10 p-1 rounded-full">
+                                                        <Check className="w-3 h-3 text-primary" />
                                                     </div>
-                                                    <span className="text-xs font-bold tracking-tight text-white">{serviceDetails[k as keyof typeof serviceDetails]?.label}</span>
+                                                    <span className="text-xs font-bold tracking-tight text-dark-blue">{serviceDetails[k as keyof typeof serviceDetails]?.label}</span>
                                                 </div>
-                                                <span className="text-accent font-black text-[10px]">{formatPrice(serviceDetails[k as keyof typeof serviceDetails]?.price || 0, lang as any, currency)}</span>
+                                                <span className="text-primary font-black text-[10px]">{formatPrice(serviceDetails[k as keyof typeof serviceDetails]?.price || 0, lang as any, currency)}</span>
                                             </div>
                                         ))}
                                         {Object.values(selectedServices).every(v => !v) && (
-                                            <div className="col-span-2 text-center py-16 px-6 rounded-3xl bg-white/5 border-2 border-dashed border-white/10">
-                                                <TrendingUp className="w-10 h-10 mx-auto text-blue-100/20 mb-3" />
-                                                <p className="text-blue-100/40 italic text-lg font-medium">{translations.empty_package_desc}</p>
+                                            <div className="col-span-2 text-center py-16 px-6 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-200">
+                                                <TrendingUp className="w-10 h-10 mx-auto text-slate-300 mb-3" />
+                                                <p className="text-slate-400 italic text-lg font-medium">{translations.empty_package_desc}</p>
                                             </div>
                                         )}
                                     </div>
                                 </div>
 
-                                {/* Right: Calculations & CTA */}
+                                {/* Right: Calculations & CTA - Light UI */}
                                 <div className="lg:col-span-2 space-y-6 flex flex-col">
-                                    <div className="flex-grow space-y-6 bg-gradient-to-b from-white/10 to-transparent p-6 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
+                                    <div className="flex-grow space-y-6 bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
                                         <div className="space-y-4">
-                                            <div className="flex justify-between items-center text-blue-100/60">
+                                            <div className="flex justify-between items-center text-slate-400">
                                                 <span className="text-[9px] font-black uppercase tracking-[0.2em]">{translations.base_price_label}</span>
                                                 <span className="text-lg font-bold line-through opacity-50">{formatPrice(total.base, lang as any, currency)}</span>
                                             </div>
 
                                             <div className="space-y-2">
                                                 {total.discountApplied.map((d: any, i: number) => (
-                                                    <div key={i} className="flex justify-between items-center text-green-400 text-[10px] font-black bg-green-400/10 px-4 py-3 rounded-xl border border-green-400/20">
+                                                    <div key={i} className="flex justify-between items-center text-green-700 text-[10px] font-black bg-green-50 px-4 py-3 rounded-xl border border-green-100">
                                                         <div className="flex items-center gap-2">
                                                             <Zap className="w-3 h-3" />
                                                             {d.name}
@@ -288,13 +289,13 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 ))}
                                             </div>
 
-                                            <div className="pt-6 border-t border-white/10 space-y-1 text-center">
-                                                <span className="text-blue-100/50 text-[9px] font-black uppercase tracking-[0.3em]">{translations.final_price}</span>
+                                            <div className="pt-6 border-t border-slate-200 space-y-1 text-center">
+                                                <span className="text-slate-400 text-[9px] font-black uppercase tracking-[0.3em]">{translations.final_price}</span>
                                                 <div className="flex flex-col items-center">
-                                                    <span className="text-5xl sm:text-6xl font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(0,201,253,0.4)]">
+                                                    <span className="text-5xl sm:text-6xl font-black text-primary tracking-tighter">
                                                         {formatPrice(total.final, lang as any, currency)}
                                                     </span>
-                                                    <div className="mt-3 flex items-center gap-2 text-green-400 font-black text-[10px] bg-green-400/10 px-3 py-1.5 rounded-full border border-green-400/20">
+                                                    <div className="mt-3 flex items-center gap-2 text-green-600 font-black text-[10px] bg-green-50 px-3 py-1.5 rounded-full border border-green-100">
                                                         <Gift className="w-3 h-3" />
                                                         {lang === 'uz' ? 'JAMI TEJALDI:' : 'TOTAL SAVED:'} {formatPrice(total.savings, lang as any, currency)}
                                                     </div>
@@ -303,38 +304,38 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
 
                                         <div className="space-y-4 pt-2">
-                                            {/* Modern Toggle */}
+                                            {/* Modern Toggle - Light Version */}
                                             <div 
-                                                className="group/toggle flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer transition-all hover:bg-white/10 hover:border-accent/50"
+                                                className="group/toggle flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-200 cursor-pointer transition-all hover:border-primary/50 shadow-sm"
                                                 onClick={() => setWantsUpfrontPayment(!wantsUpfrontPayment)}
                                             >
                                                 <div className={cn(
                                                     "w-12 h-6 rounded-full relative transition-all duration-500 p-1",
-                                                    wantsUpfrontPayment ? "bg-accent" : "bg-slate-800"
+                                                    wantsUpfrontPayment ? "bg-primary" : "bg-slate-200"
                                                 )}>
                                                     <div className={cn(
-                                                        "w-4 h-4 rounded-full bg-white transition-all duration-500 shadow-xl flex items-center justify-center",
+                                                        "w-4 h-4 rounded-full bg-white transition-all duration-500 shadow-sm flex items-center justify-center",
                                                         wantsUpfrontPayment ? "translate-x-6" : "translate-x-0"
                                                     )}>
-                                                        {wantsUpfrontPayment && <Check className="w-3 h-3 text-accent" />}
+                                                        {wantsUpfrontPayment && <Check className="w-3 h-3 text-primary" />}
                                                     </div>
                                                 </div>
                                                 <div className="flex flex-col">
-                                                    <span className="text-[10px] font-black text-white uppercase tracking-wider">100% Oldindan to'lov</span>
-                                                    <span className="text-[9px] font-bold text-green-400 uppercase">Ekstra -10% chegirma</span>
+                                                    <span className="text-[10px] font-black text-dark-blue uppercase tracking-wider">100% Oldindan to'lov</span>
+                                                    <span className="text-[9px] font-bold text-green-600 uppercase">Ekstra -10% chegirma</span>
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label className="text-[9px] uppercase font-black text-blue-100/50 tracking-[0.2em] ml-3">{translations.promo_code_label}</Label>
+                                                <Label className="text-[9px] uppercase font-black text-slate-400 tracking-[0.2em] ml-3">{translations.promo_code_label}</Label>
                                                 <div className="relative">
                                                     <Input 
                                                         value={promoCode} 
                                                         onChange={(e) => setPromoCode(e.target.value)} 
-                                                        className="bg-white/5 border-white/10 text-white h-12 rounded-xl focus:border-accent focus:ring-accent transition-all text-sm font-black px-4 placeholder:text-blue-100/20" 
+                                                        className="bg-white border-slate-200 text-dark-blue h-12 rounded-xl focus:border-primary focus:ring-primary transition-all text-sm font-black px-4 placeholder:text-slate-300" 
                                                         placeholder={translations.promo_code_placeholder} 
                                                     />
-                                                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-100/20">
+                                                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-200">
                                                         <Gift className="w-4 h-4" />
                                                     </div>
                                                 </div>
@@ -349,7 +350,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         onClick={onOrderNow} 
                                         disabled={total.base === 0}
                                     >
-                                        <span className="relative z-10 flex items-center gap-2">
+                                        <span className="relative z-10 flex items-center gap-2 text-white">
                                             {translations.get_free_consultation}
                                             <ChevronsDown className="w-5 h-5 animate-bounce" />
                                         </span>
