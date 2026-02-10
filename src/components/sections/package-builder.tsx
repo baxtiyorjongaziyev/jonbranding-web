@@ -40,41 +40,44 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
         <Card
             onClick={onSelect}
             className={cn(
-                "group relative h-full transition-all duration-500 cursor-pointer overflow-hidden border-2 flex flex-col rounded-[2.5rem]",
+                "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border-2 flex flex-col rounded-[2.5rem] mt-4",
                 selected
                     ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_20px_50px_rgba(251,191,36,0.3)] scale-[1.02]' : 'border-primary bg-white shadow-2xl scale-[1.02]')
                     : (isVip ? 'bg-blue-950 border-blue-900 hover:border-amber-400/50 shadow-lg' : 'bg-white border-slate-100 hover:border-primary/30 hover:shadow-lg')
             )}
         >
-            <div className="absolute top-6 right-6 flex flex-col gap-2 items-end z-10">
+            {/* Top Center Badge */}
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
                 {recommended && !isVip && (
-                    <Badge className="bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full border-none uppercase tracking-wider">
+                    <Badge className="bg-primary text-white text-[10px] font-bold px-4 py-1 rounded-full border-none uppercase tracking-wider whitespace-nowrap shadow-md">
                         {dictionary.recommended}
                     </Badge>
                 )}
                 {isVip && (
-                    <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-black text-[10px] font-black px-4 py-1.5 rounded-full border-none uppercase flex items-center gap-1.5 shadow-lg">
+                    <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-black text-[10px] font-black px-5 py-1.5 rounded-full border-none uppercase flex items-center gap-1.5 shadow-xl whitespace-nowrap">
                         <Crown className="w-3.5 h-3.5" /> LUX VIP
                     </Badge>
                 )}
             </div>
 
             <CardHeader className="p-8 pb-6">
-                <div className={cn(
-                    "w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110",
-                    selected 
-                        ? (isVip ? "bg-amber-400 text-black shadow-[0_0_20px_rgba(251,191,36,0.5)]" : "bg-primary text-white shadow-lg") 
-                        : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/30" : "bg-secondary text-slate-600")
-                )}>
-                    <Icon className="w-7 h-7" />
+                <div className="flex items-center gap-4 mb-6">
+                    <div className={cn(
+                        "w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 flex-shrink-0",
+                        selected 
+                            ? (isVip ? "bg-amber-400 text-black shadow-[0_0_20px_rgba(251,191,36,0.5)]" : "bg-primary text-white shadow-lg") 
+                            : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/30" : "bg-secondary text-slate-600")
+                    )}>
+                        <Icon className="w-7 h-7" />
+                    </div>
+                    <CardTitle className={cn("text-2xl font-black leading-tight", isVip ? "text-white" : "text-dark-blue")}>
+                        {label}
+                    </CardTitle>
                 </div>
                 <div className="space-y-3">
-                    <CardTitle className={cn("text-xl font-black flex flex-col gap-1 leading-tight", isVip ? "text-white" : "text-dark-blue")}>
-                        <span>{label}</span>
-                        <span className={cn("text-3xl font-black tracking-tighter", isVip ? "text-amber-400" : "text-primary")}>
-                            {formatPrice(price, lang, currency)}
-                        </span>
-                    </CardTitle>
+                    <span className={cn("text-3xl font-black tracking-tighter block", isVip ? "text-amber-400" : "text-primary")}>
+                        {formatPrice(price, lang, currency)}
+                    </span>
                     <p className={cn("text-sm leading-relaxed font-medium", isVip ? "text-blue-200/80" : "text-slate-500")}>
                         {description}
                     </p>
@@ -137,7 +140,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                         className={cn(
                             "w-full py-6 text-base font-black transition-all duration-500 rounded-full",
                             selected 
-                                ? (isVip ? "bg-amber-400 text-black hover:bg-amber-500 border-none shadow-[0_10px_30px_rgba(251,191,36,0.4)]" : "text-white shadow-xl") 
+                                ? (isVip ? "bg-amber-400 text-black hover:bg-amber-500 border-none shadow-[0_10px_30px_rgba(251,191,36,0.4)] text-black" : "text-white shadow-xl") 
                                 : (isVip ? "bg-white/5 border-amber-400/30 text-amber-400 hover:bg-amber-400 hover:text-black" : "border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
                         )}
                         onClick={(e) => { e.stopPropagation(); onSelect(); }}
@@ -283,7 +286,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <Input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="bg-white/5 border-white/10 text-white h-14 rounded-xl focus:border-accent focus:ring-accent transition-all text-lg font-black px-5 placeholder:text-blue-200/20" placeholder={translations.promo_code_placeholder} />
                                     </div>
                                 </div>
-                                <Button size="lg" variant="default" className="w-full py-8 text-xl font-black rounded-2xl shadow-[0_15px_30px_rgba(0,201,253,0.3)] hover:scale-[1.02] transition-transform" onClick={onOrderNow} disabled={total.base === 0}>
+                                <Button size="lg" variant="default" className="w-full py-8 text-xl font-black rounded-full shadow-[0_15px_30px_rgba(0,201,253,0.3)] hover:scale-[1.02] transition-transform text-white" onClick={onOrderNow} disabled={total.base === 0}>
                                     {translations.get_free_consultation}
                                 </Button>
                             </div>
