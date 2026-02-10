@@ -174,7 +174,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     useEffect(() => { setIsClient(true); }, []);
     
     if (!isClient || !dictionary || !dictionary.servicesPage?.packageBuilder) {
-        return <div className="py-20 min-h-screen bg-white text-center text-gray-400">Ko'rinmayapti hech narsa</div>;
+        return <div className="py-20 min-h-screen bg-white text-center text-gray-400">Yuklanmoqda...</div>;
     }
 
     const translations = dictionary.servicesPage.packageBuilder;
@@ -240,7 +240,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <div className="bg-white/10 p-2 rounded-xl border border-white/10">
                                             <Box className="w-6 h-6 text-sky-blue" />
                                         </div>
-                                        <h3 className="text-3xl font-black tracking-tighter uppercase">Ko'rinmayapti</h3>
+                                        <h3 className="text-3xl font-black tracking-tighter uppercase text-white">Sizning paketingiz</h3>
                                     </div>
                                     <p className="text-blue-200/70 font-medium text-base max-w-md">{translations.your_package_desc}</p>
                                 </div>
@@ -252,7 +252,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 <div className="bg-sky-blue/20 p-1 rounded-full">
                                                     <Check className="w-3 h-3 text-sky-blue" />
                                                 </div>
-                                                <span className="text-sm font-bold tracking-tight">{serviceDetails[k as keyof typeof serviceDetails]?.label}</span>
+                                                <span className="text-sm font-bold tracking-tight text-white">{serviceDetails[k as keyof typeof serviceDetails]?.label}</span>
                                             </div>
                                             <span className="text-sky-blue font-black text-xs">{formatPrice(serviceDetails[k as keyof typeof serviceDetails]?.price || 0, lang as any, currency)}</span>
                                         </div>
