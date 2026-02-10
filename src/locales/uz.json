@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -12,7 +13,7 @@
     "logo_design": "Logotip Dizayni",
     "logo_design_desc": "Biznesingiz mohiyatini aks ettiruvchi noyob va esda qolarli belgi yaratish.",
     "brandbook": "Brendbuk",
-    "brandbook_desc": "Brendingiz aydentikasidan foydalanish qoidalarini tavsiflovchi hujjat.",
+    "brandbook_desc": "Brendingiz aydentikasidan foydalanish qoidalarini belgilovchi hujjat.",
     "corporate_style": "Firma Uslubi",
     "corporate_style_desc": "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
     "packaging_design": "Qadoq Dizayni",
@@ -136,7 +137,7 @@
   },
   "home": {
     "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
-    "cta1_desc": "Biznesingizni professional dizayn bilan yangi bosqichga olib chiqing. Biz sizga ideal yechim find qilishda yordam beramiz.",
+    "cta1_desc": "Biznesingizni professional dizayn bilan yangi bosqichga olib chiqing. Biz sizga ideal yechim topishda yordam beramiz.",
     "cta1_button": "Mening biznesim uchun ham"
   },
   "founder": {
@@ -201,13 +202,15 @@
     "title": "Ko'p beriladigan savollar",
     "subtitle": "Brending jarayoni, narxlar va boshqa mavzulardagi savollarga javoblar.",
     "faqItems": [
-      { "question": "Nega narxlar qat'iy belgilangan emas?", "answer": "Har bir loyiha unikal. Narx loyihaning murakkabligi va vazifangizdan kelib chiqib individual hisoblanadi." },
-      { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya." },
-      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz." },
-      { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% ish topshirilgandan so'ng." }
+      { "question": "Nega narxlar qat'iy belgilangan emas?", "answer": "Har bir loyiha unikal. Narx loyihaning murakkabligi va vazifangizdan kelib chiqib individual hisoblanadi. Biz sizning brendingiz uchun maqbul yechim taklif qilamiz." },
+      { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishiladi va siz jarayonni to'liq nazorat qilasiz." },
+      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz. Bu sizning biznesingiz uchun uzoq muddatli qiymat yaratadi." },
+      { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% ish topshirilgandan so'ng. Shuningdek, sizning qulayligingiz uchun individual shartlarni ham kelishishimiz mumkin." },
+      { "question": "Ish qancha vaqt oladi?", "answer": "Muddatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend strategiyasi — 8 haftadan boshlanadi. Yakuniy muddat loyiha tasdiqlangandan keyin belgilanadi." },
+      { "question": "Loyiha tugagandan keyin qo'llab-quvvatlash bormi?", "answer": "Ha, loyiha topshirilgandan keyin 1 oy davomida brend materiallaridan to'g'ri foydalanish bo'yicha bepul maslahatlar va yordam beramiz." }
     ],
     "ctaTitle": "Shubhalarga o'rin qoldirmang!",
-    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz.",
+    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yangi bosqichga olib chiqamiz.",
     "ctaButton": "Boshlashga tayyorman!"
   },
   "contactModal": {
@@ -256,7 +259,7 @@
     "backButton": "Orqaga",
     "nextButton": "Keyingisi",
     "submitButton": "So'rovni yuborish",
-    "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman.",
+    "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarim qayta ishlanishiga rozilik beraman.",
     "formErrors": {
       "fullName": "Ismingizni kiriting.",
       "phone": "Telefoningizni to'g'ri kiriting.",
@@ -272,11 +275,11 @@
     },
     "leadMagnetToast": {
       "title": "Siz uchun maxsus resurslar!",
-      "description": "Boshlanishiga sizni bepul materiallarimizga yo'naltiramiz."
+      "description": "So'rovingiz qabul qilindi! Boshlanishiga sizni bepul materiallarimizga yo'naltiramiz."
     },
     "errorToast": {
       "title": "Xatolik!",
-      "description": "So'rovni yuborishda xatolik yuz berdi."
+      "description": "So'rovni yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
     }
   },
   "serviceSections": {
@@ -296,7 +299,7 @@
   "servicesPage": {
     "metadata": {
       "title": "Xizmatlar va Narxlar | Jon.Branding",
-      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating."
+      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Online kalkulyator orqali narxlarni darhol hisoblang."
     },
     "packageBuilder": {
       "title": "Xizmatlar va Narxlar",
@@ -311,11 +314,11 @@
       },
       "your_package": "Sizning paketingiz",
       "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
-      "empty_package_desc": "Siz hali hech narsa tanlamadingiz.",
+      "empty_package_desc": "Siz hali hech narsa tanlamadingiz. Xizmatlarni tanlang yoki eng ommabop taklifimizdan boshlang.",
       "base_price_label": "Boshlang'ich narx",
       "final_price": "Yakuniy narx:",
       "promo_code_label": "Promokod",
-      "promo_code_placeholder": "Kodni kiritish",
+      "promo_code_placeholder": "Kodni kiriting",
       "get_free_consultation": "Bepul konsultatsiya olish",
       "selected": "Tanlandi",
       "select": "Tanlash",
@@ -325,13 +328,37 @@
     },
     "comparison": {
       "title": "Biz va Raqobatchilar",
-      "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklardan ko'ra ancha arzon narxlarda taqdim etamiz.",
+      "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklardan ko'ra ancha arzon narxlarda taqdim etamiz. Natija esa siz kutgandan ham yaxshiroq bo'ladi.",
       "features": "Xususiyatlar",
       "whyPremiumTitle": "Nega faqat premium agentliklar bilan?",
-      "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz.",
+      "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Maqsadimiz — arzon bo'lish emas, balki hamyonbop narxda premium sifat berishdir.",
       "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
-      "ctaDesc": "Sifatli brending uchun ortiqcha pul to'lash shart emas.",
+      "ctaDesc": "Sifatli brending uchun ortiqcha pul to'lash shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling.",
       "ctaButton": "Menga shunday yondashuv kerak"
     }
+  },
+  "namingPage": {
+    "metadata": {
+      "title": "Neyming Xizmatlari | Jon.Branding Agentligi",
+      "description": "Brendingiz uchun unutilmas va kuchli nom tanlash. Yaxshi nom shunchaki chiroyli jaranglamaydi, u mohiyatni yetkazadi va esda qoladi."
+    },
+    "title": "Neyming — Kuchli Brend Nomi",
+    "subtitle": "Brend nomi — uning birinchi taassuroti, uning energiyasi va xarakteri.",
+    "process_title": "Nom qanday yaratiladi?",
+    "process_subtitle": "Neyming bizning agentlikda aniq bosqichlardan iborat jarayondir.",
+    "process_steps": [
+      { "title": "Tadqiqot", "description": "Bozor, auditoriya va raqobatchilarni o'rganamiz." },
+      { "title": "Konsepsiya", "description": "Nom qidirish uchun yo'nalishlarni belgilaymiz." },
+      { "title": "G'oyalar", "description": "Yuzlab variantlar yaratamiz va ularni sinaymiz." },
+      { "title": "Tekshiruv", "description": "Patent va domen tozaligini tekshiramiz." }
+    ],
+    "check_title": "Nomni tekshirish",
+    "check_subtitle": "Hatto dahshatli g'oya ham agar u band bo'lsa ish bermaydi.",
+    "check_points": [
+      { "title": "Huquqiy tozalik", "description": "Tovar belgisi sifatida ro'yxatdan o'tish imkonini tahlil qilamiz." },
+      { "title": "Domenlar", "description": "Raqamli muhitda nomning bo'shligini tekshiramiz." },
+      { "title": "Ma'no", "description": "Turli tillarda salbiy ma'no yo'qligini ko'ramiz." }
+    ],
+    "calculator_cta_button": "Patent kalkulyatoriga o'tish"
   }
 }
