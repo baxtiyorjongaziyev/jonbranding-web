@@ -27,10 +27,6 @@ const basePricesUSD = {
     logoStandard: 780,
     packaging: 1150,
     smm: 980,
-    merch: 0,
-    illustrations: 0,
-    urgency: 0,
-    nda: 0,
 };
 
 const uzServiceDetails = {
@@ -102,7 +98,7 @@ const uzServiceDetails = {
             "5 ta strategik nom variantlari",
             "Bir nechta tilda tahlil",
             "2 ta klass bo'yicha patent tekshiruvi",
-            "Sloyan (shior) yaratish"
+            "Slogan (shior) yaratish"
         ],
         results: ["Biznes maqsadga mos nom", "Huquqiy toza brend", "100% to'lov qaytarish kafolati"],
         recommended: true,

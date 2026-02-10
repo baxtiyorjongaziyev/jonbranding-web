@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -147,8 +148,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             return newState;
         });
     };
-
-    const introIcons: { [key: string]: React.ElementType } = { Search, BrainCircuit, Fingerprint, Megaphone };
 
     return (
         <section id="package-builder" className="py-20 sm:py-32 bg-slate-50">
