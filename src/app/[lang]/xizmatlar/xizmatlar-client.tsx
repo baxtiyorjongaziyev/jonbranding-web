@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useCallback, useState, useEffect } from 'react';
@@ -43,7 +44,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
       <ServiceSections lang={lang} />
       
-      {isClient ? (
+      {isClient && dictionary.servicesPage ? (
         <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary} />
       ) : (
         <div className="py-20 text-center text-gray-400">Ko'rinmayapti hech narsa</div>

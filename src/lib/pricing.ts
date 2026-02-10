@@ -1,3 +1,4 @@
+
 'use client';
 
 /**
@@ -376,7 +377,7 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     if (PROMO_CODES[normalizedPromo]) {
         const val = finalPrice * PROMO_CODES[normalizedPromo];
         discountsApplied.push({ 
-            name: `${lang === 'uz' ? 'Promokod' : 'Промокод'} (${normalizedPromo})`, 
+            name: `${lang === 'uz' ? 'Promokod' : 'Промоkod'} (${normalizedPromo})`, 
             value: val 
         });
         finalPrice -= val;
