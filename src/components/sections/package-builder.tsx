@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -226,10 +227,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </Accordion>
                 </div>
 
-                {/* HYBRID SUMMARY CARD - Dark Left / Light Right */}
+                {/* HYBRID SUMMARY CARD */}
                 <div className="mt-24 max-w-6xl mx-auto">
                     <div id="your-package-card" className="rounded-[3rem] bg-white shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-slate-200">
-                        {/* Left Side: Dark-Blue (Selection Details) */}
+                        {/* Left Side: Dark-Blue */}
                         <div className="lg:w-3/5 bg-dark-blue p-8 sm:p-12 text-white relative">
                             <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
                             
@@ -239,7 +240,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <div className="bg-white/10 p-2 rounded-xl border border-white/10">
                                             <Box className="w-6 h-6 text-sky-blue" />
                                         </div>
-                                        <h3 className="text-3xl font-black tracking-tighter uppercase">{translations.your_package}</h3>
+                                        <h3 className="text-3xl font-black tracking-tighter uppercase">Ko'rinmayapti</h3>
                                     </div>
                                     <p className="text-blue-200/70 font-medium text-base max-w-md">{translations.your_package_desc}</p>
                                 </div>
@@ -266,7 +267,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                         </div>
 
-                        {/* Right Side: Light (Calculations & CTA) */}
+                        {/* Right Side: Light */}
                         <div className="lg:w-2/5 bg-slate-50 p-8 sm:p-12 flex flex-col justify-between border-l border-slate-200">
                             <div className="space-y-8">
                                 <div className="space-y-6">
@@ -304,7 +305,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
 
                                 <div className="space-y-4">
-                                    {/* 100% Upfront Toggle - Custom Light UI */}
                                     <div 
                                         className={cn(
                                             "flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all duration-300 border-2",
