@@ -1,4 +1,3 @@
-
 {
   "header": {
     "portfolio": "Portfolio",
@@ -422,23 +421,5 @@
     "timeframes": {
       "2 weeks": "2 hafta ichida"
     }
-  },
-  "popularPackages": {
-    "title": "Eng mashhur paketlar",
-    "packageTitle": "Neyming + Logo (Premium)",
-    "packageSubtitle": "Brendni boshlash uchun ideal yechim.",
-    "features": [
-      "Mukammal nom (6 tilda tahlil)",
-      "Professional logotip (5 xil variant)",
-      "To'liq firma uslubi",
-      "15+ real mockup",
-      "Patent auditi",
-      "10 ta brend stikerlar"
-    ],
-    "separate": "Alohida",
-    "packagePrice": "Paketda",
-    "packageDiscount": "(-20% chegirma!)",
-    "upfrontDiscount": "100% oldindan to'lov bilan (-28% umumiy!)",
-    "ctaButton": "Ushbu paketni tanlash"
   }
 }

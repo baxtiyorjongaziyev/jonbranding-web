@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -131,7 +130,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
-    if (!isClient || !dictionary || !dictionary.servicesPage?.packageBuilder) return <div className="py-20 min-h-screen bg-slate-50"><Skeleton className="h-96 w-full container mx-auto" /></div>;
+    
+    if (!isClient || !dictionary || !dictionary.servicesPage?.packageBuilder) {
+        return <div className="py-20 min-h-screen bg-slate-50 text-center text-gray-400">Ko'rinmayapti hech narsa</div>;
+    }
 
     const translations = dictionary.servicesPage.packageBuilder;
     const serviceDetails = getServiceDetails(lang as any);
