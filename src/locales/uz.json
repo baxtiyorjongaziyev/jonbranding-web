@@ -1,4 +1,3 @@
-
 {
   "header": {
     "portfolio": "Portfolio",
@@ -307,6 +306,45 @@
       "recommended": "Tavsiya etiladi",
       "features": "Nimalar kiradi",
       "results": "Siz nima olasiz"
+    }
+  },
+  "personalOfferBlock": {
+    "title": "💎 MENING TAKLIFIM:",
+    "subtitle": "Siz nimalarga ega bo'lasiz:",
+    "ctaButton": "Menga bu kerak",
+    "sections": [
+      { "title": "1️⃣ STRATEGIYA", "points": ["Brendni pozitsiyalash va raqobatchilar tahlili", "Maqsadli auditoriya xaritasi", "Noyob sotuv taklifi (USP)"] },
+      { "title": "2️⃣ AYDENTIKA", "points": ["Professional logotip (3-5 ta variant)", "Firma ranglari palitrasi", "Tipografika va uslub qo'llanmasi"] },
+      { "title": "3️⃣ HUJJATLASHTIRISH", "points": ["To'liq Brendbuk (30-50 bet)", "Barcha formatdagi fayllar (AI, PNG, PDF, SVG)", "Logotipdan foydalanish yo'riqnomasi"] },
+      { "title": "4️⃣ QONUNIY HIMOYALASH", "points": ["Neyming konsultatsiyasi", "Patent va Tovar belgisini ro'yxatdan o'tkazish jarayoni", "Intellektual mulkni himoya qilish strategiyasi"] },
+      { "title": "5️⃣ QO'LLAB-QUVVATLASH", "points": ["3 oy davomida bepul tuzatishlar", "Telegram orqali doimiy aloqa", "Brendni tatbiq etish bo'yicha maslahatlar"] }
+    ]
+  },
+  "urgencyBlock": {
+    "title": "🔥 BU SAHIFANI YOPISHDAN OLDIN...",
+    "subtitle": "Tasavvur qiling:",
+    "line1": "Ertaga raqobatchingiz professional brend bilan bozorga chiqdi. Logotip hayratlanarli. Qadoq do'konda birinchi bo'lib ko'zga tashlanadi.",
+    "line2": "Mijozlar sizdan emas, aynan UNDAN sotib olishmoqda.",
+    "line3": "Sababi oddiy: U sarmoya kiritdi. Siz esa... o'ylab ko'rdingiz."
+  },
+  "queueStatus": {
+    "subtitle": "Joylar cheklangan",
+    "title": "Shoshiling! O'z joyingizni band qiling!",
+    "description": "Yuqori sifatni ta'minlash uchun har bir loyihaga vaqt ajratamiz. Shuning uchun bir vaqtning o'zida faqat cheklangan miqdordagi loyihalar bilan ishlaymiz.",
+    "queueTitle": "Loyihalar navbati",
+    "booked": "Band",
+    "available": "Bo'sh",
+    "tooltipBooked": "Joy band qilingan",
+    "tooltipAvailable": "Navbatga yozilishingiz mumkin",
+    "remainingSlots": "Qolgan bo'sh joylar",
+    "slotsUnit": "ta",
+    "onlineNow": "Hozir saytda",
+    "peopleUnit": "kishi",
+    "nextProjectStart": "Keyingi loyiha boshlanishi",
+    "ctaButton": "Joyimni band qilish",
+    "ctaSubtitle": "Raqobatchilaringizdan bir qadam oldinda bo'ling!",
+    "timeframes": {
+      "2 weeks": "2 hafta ichida"
     }
   }
 }
