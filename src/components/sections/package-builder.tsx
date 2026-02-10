@@ -45,7 +45,6 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     : (isVip ? 'bg-blue-950 border-blue-900 hover:border-amber-400/50 shadow-lg' : 'bg-white border-slate-100 hover:border-primary/30 hover:shadow-lg')
             )}
         >
-            {/* Badge Markazda */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[10px] font-bold px-5 py-1.5 rounded-full border-none uppercase tracking-wider whitespace-nowrap shadow-xl">
@@ -229,10 +228,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </Accordion>
                 </div>
 
-                {/* HYBRID SUMMARY CARD */}
                 <div className="mt-32 max-w-6xl mx-auto">
                     <div id="your-package-card" className="rounded-[4rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
-                        {/* Left Side: Dark-Blue */}
                         <div className="lg:w-1/2 bg-dark-blue p-10 sm:p-16 text-white relative">
                             <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]" />
                             
@@ -269,7 +266,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                         </div>
 
-                        {/* Right Side: Light */}
                         <div className="lg:w-1/2 bg-slate-50 p-10 sm:p-16 flex flex-col justify-between border-l border-slate-100 relative">
                             <div className="space-y-10">
                                 <div className="space-y-8">
