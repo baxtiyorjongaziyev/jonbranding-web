@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -10,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Gift, Zap } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 interface PackageBuilderProps {
@@ -46,7 +45,6 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     : (isVip ? 'bg-blue-950 border-blue-900 hover:border-amber-400/50 shadow-lg' : 'bg-white border-slate-100 hover:border-primary/30 hover:shadow-lg')
             )}
         >
-            {/* Top Center Badge */}
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[10px] font-bold px-4 py-1 rounded-full border-none uppercase tracking-wider whitespace-nowrap shadow-md">
@@ -193,7 +191,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     };
 
     return (
-        <section id="package-builder" className="py-20 sm:py-32 bg-white">
+        <section id="package-builder" className="py-20 sm:py-32 bg-white overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto mb-24 text-center space-y-6">
                     <Badge className="bg-primary/10 text-primary border-none px-5 py-1.5 rounded-full font-black text-[10px] uppercase tracking-[0.25em]">
@@ -226,72 +224,139 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </Accordion>
                 </div>
 
+                {/* MODERNISED SUMMARY CARD */}
                 <div className="mt-32 max-w-6xl mx-auto">
-                    <Card id="your-package-card" className="p-8 sm:p-16 rounded-[3.5rem] bg-dark-blue text-white shadow-[0_40px_80px_-15px_rgba(5,5,131,0.4)] overflow-hidden relative border-none">
-                        <div className="absolute -bottom-40 -right-40 w-[35rem] h-[35rem] bg-primary/25 rounded-full blur-[100px] pointer-events-none" />
-                        <div className="absolute -top-40 -left-40 w-[35rem] h-[35rem] bg-accent/15 rounded-full blur-[100px] pointer-events-none" />
-                        
-                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-                            <div className="space-y-10">
-                                <div className="space-y-3">
-                                    <h3 className="text-4xl font-black tracking-tighter">{translations.your_package}</h3>
-                                    <p className="text-blue-200/60 font-medium text-sm">{translations.your_package_desc}</p>
-                                </div>
-                                <div className="space-y-3 max-h-[350px] overflow-y-auto pr-3 custom-scrollbar">
-                                    {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => (
-                                        <div key={k} className="flex justify-between items-center text-base font-bold p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all group">
-                                            <span className="flex items-center gap-3"><CheckCircle className="w-4 h-4 text-accent" /> {serviceDetails[k as keyof typeof serviceDetails]?.label}</span>
-                                            <span className="text-accent font-black">{formatPrice(serviceDetails[k as keyof typeof serviceDetails]?.price || 0, lang as any, currency)}</span>
+                    <div id="your-package-card" className="relative group p-1 rounded-[4rem] bg-gradient-to-br from-blue-400 via-primary to-dark-blue shadow-[0_50px_100px_-20px_rgba(5,5,131,0.5)] transition-all duration-700 hover:scale-[1.01]">
+                        <Card className="p-8 sm:p-16 rounded-[3.8rem] bg-[#02024d]/95 backdrop-blur-3xl text-white border-none overflow-hidden relative">
+                            {/* Abstract Glow Elements */}
+                            <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
+                            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-accent/10 rounded-full blur-[120px] animate-pulse" />
+                            
+                            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8">
+                                {/* Left: Selection Details */}
+                                <div className="lg:col-span-3 space-y-12">
+                                    <div className="space-y-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className="bg-accent/20 p-2 rounded-xl">
+                                                <Box className="w-6 h-6 text-accent" />
+                                            </div>
+                                            <h3 className="text-4xl font-black tracking-tighter uppercase">{translations.your_package}</h3>
                                         </div>
-                                    ))}
-                                    {Object.values(selectedServices).every(v => !v) && (
-                                        <div className="text-center py-12 px-6 rounded-[2rem] bg-white/5 border-2 border-dashed border-white/10">
-                                            <TrendingUp className="w-10 h-10 mx-auto text-blue-300/30 mb-3" />
-                                            <p className="text-blue-200/40 italic text-lg font-medium">{translations.empty_package_desc}</p>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="space-y-10 bg-white/5 p-10 sm:p-12 rounded-[3rem] border border-white/10 backdrop-blur-3xl shadow-2xl">
-                                <div className="space-y-6">
-                                    <div className="flex justify-between items-baseline border-b border-white/10 pb-4">
-                                        <span className="text-blue-200 text-[10px] font-black uppercase tracking-[0.2em]">{translations.base_price_label}</span>
-                                        <span className="text-2xl font-black">{formatPrice(total.base, lang as any, currency)}</span>
+                                        <p className="text-blue-200/50 font-medium text-lg max-w-md">{translations.your_package_desc}</p>
                                     </div>
-                                    <div className="space-y-3">
-                                        {total.discountApplied.map((d: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-green-400 text-xs font-black bg-green-400/10 px-4 py-3 rounded-xl border border-green-400/20 animate-fade-in">
-                                                <span className="flex items-center gap-2"><Sparkles className="w-3.5 h-3.5" /> {d.name}</span>
-                                                <span>-{formatPrice(d.value, lang as any, currency)}</span>
+
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[400px] overflow-y-auto pr-4 custom-scrollbar">
+                                        {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => (
+                                            <div key={k} className="group/item flex items-center justify-between p-5 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 hover:border-accent/30 transition-all">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="bg-accent/10 p-1.5 rounded-full group-hover/item:bg-accent/20 transition-colors">
+                                                        <Check className="w-3.5 h-3.5 text-accent" />
+                                                    </div>
+                                                    <span className="text-sm font-bold tracking-tight">{serviceDetails[k as keyof typeof serviceDetails]?.label}</span>
+                                                </div>
+                                                <span className="text-accent/80 font-black text-xs">{formatPrice(serviceDetails[k as keyof typeof serviceDetails]?.price || 0, lang as any, currency)}</span>
                                             </div>
                                         ))}
-                                    </div>
-                                    <div className="pt-6 flex flex-col gap-1">
-                                        <span className="text-blue-200 text-[10px] font-black uppercase tracking-[0.2em] text-center">{translations.final_price}</span>
-                                        <span className="text-6xl font-black text-accent tracking-tighter text-center">{formatPrice(total.final, lang as any, currency)}</span>
-                                    </div>
-                                </div>
-                                <div className="space-y-6">
-                                    <div className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 cursor-pointer group transition-all hover:bg-white/10" onClick={() => setWantsUpfrontPayment(!wantsUpfrontPayment)}>
-                                        <div className={cn("w-14 h-7 rounded-full relative transition-all duration-500", wantsUpfrontPayment ? "bg-accent shadow-[0_0_20px_rgba(0,201,253,0.5)]" : "bg-slate-700")}>
-                                            <div className={cn("absolute top-1 w-5 h-5 rounded-full bg-white transition-all duration-500 shadow-md", wantsUpfrontPayment ? "left-8" : "left-1")} />
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-xs font-black text-white uppercase tracking-wider group-hover:text-accent transition-colors">100% Oldindan to'lov</span>
-                                            <span className="text-[9px] font-bold text-green-400">-10% QO'SHIMCHA CHEGIRMA</span>
-                                        </div>
-                                    </div>
-                                    <div className="space-y-3">
-                                        <Label className="text-[10px] uppercase font-black text-blue-300 tracking-[0.2em] ml-2">{translations.promo_code_label}</Label>
-                                        <Input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="bg-white/5 border-white/10 text-white h-14 rounded-xl focus:border-accent focus:ring-accent transition-all text-lg font-black px-5 placeholder:text-blue-200/20" placeholder={translations.promo_code_placeholder} />
+                                        {Object.values(selectedServices).every(v => !v) && (
+                                            <div className="col-span-2 text-center py-20 px-6 rounded-[3rem] bg-white/5 border-2 border-dashed border-white/10">
+                                                <TrendingUp className="w-12 h-12 mx-auto text-blue-300/20 mb-4" />
+                                                <p className="text-blue-200/30 italic text-xl font-medium">{translations.empty_package_desc}</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
-                                <Button size="lg" variant="default" className="w-full py-8 text-xl font-black rounded-full shadow-[0_15px_30px_rgba(0,201,253,0.3)] hover:scale-[1.02] transition-transform text-white" onClick={onOrderNow} disabled={total.base === 0}>
-                                    {translations.get_free_consultation}
-                                </Button>
+
+                                {/* Right: Calculations & CTA */}
+                                <div className="lg:col-span-2 space-y-8 flex flex-col">
+                                    <div className="flex-grow space-y-8 bg-gradient-to-b from-white/10 to-transparent p-8 sm:p-10 rounded-[3rem] border border-white/10 shadow-2xl relative overflow-hidden">
+                                        <div className="space-y-6">
+                                            <div className="flex justify-between items-center text-blue-200/60">
+                                                <span className="text-[10px] font-black uppercase tracking-[0.3em]">{translations.base_price_label}</span>
+                                                <span className="text-xl font-bold line-through opacity-50">{formatPrice(total.base, lang as any, currency)}</span>
+                                            </div>
+
+                                            <div className="space-y-3">
+                                                {total.discountApplied.map((d: any, i: number) => (
+                                                    <div key={i} className="flex justify-between items-center text-green-400 text-[11px] font-black bg-green-400/10 px-5 py-3.5 rounded-2xl border border-green-400/20 animate-in fade-in slide-in-from-right-4 duration-500">
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="bg-green-400/20 p-1 rounded-md"><Zap className="w-3 h-3" /></div>
+                                                            {d.name}
+                                                        </div>
+                                                        <span className="text-sm">-{formatPrice(d.value, lang as any, currency)}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            <div className="pt-8 border-t border-white/10 space-y-2 text-center">
+                                                <span className="text-blue-200/40 text-[10px] font-black uppercase tracking-[0.4em]">{translations.final_price}</span>
+                                                <div className="flex flex-col items-center">
+                                                    <span className="text-7xl sm:text-8xl font-black text-ocean-blue tracking-tighter drop-shadow-[0_0_30px_rgba(0,201,253,0.4)]">
+                                                        {formatPrice(total.final, lang as any, currency)}
+                                                    </span>
+                                                    <div className="mt-4 flex items-center gap-2 text-green-400 font-black text-xs bg-green-400/10 px-4 py-2 rounded-full border border-green-400/20">
+                                                        <Gift className="w-4 h-4" />
+                                                        {lang === 'uz' ? 'JAMI TEJALDI:' : 'TOTAL SAVED:'} {formatPrice(total.savings, lang as any, currency)}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-6 pt-4">
+                                            {/* Modern Toggle */}
+                                            <div 
+                                                className="group/toggle flex items-center gap-5 p-6 rounded-[2.5rem] bg-white/5 border border-white/10 cursor-pointer transition-all hover:bg-white/10 hover:border-accent/50"
+                                                onClick={() => setWantsUpfrontPayment(!wantsUpfrontPayment)}
+                                            >
+                                                <div className={cn(
+                                                    "w-16 h-8 rounded-full relative transition-all duration-500 p-1",
+                                                    wantsUpfrontPayment ? "bg-accent shadow-[0_0_25px_rgba(0,201,253,0.6)]" : "bg-slate-800"
+                                                )}>
+                                                    <div className={cn(
+                                                        "w-6 h-6 rounded-full bg-white transition-all duration-500 shadow-xl flex items-center justify-center",
+                                                        wantsUpfrontPayment ? "translate-x-8" : "translate-x-0"
+                                                    )}>
+                                                        {wantsUpfrontPayment && <Check className="w-4 h-4 text-accent" />}
+                                                    </div>
+                                                </div>
+                                                <div className="flex flex-col gap-0.5">
+                                                    <span className="text-xs font-black text-white uppercase tracking-widest group-hover/toggle:text-accent transition-colors">100% Oldindan to'lov</span>
+                                                    <span className="text-[10px] font-bold text-green-400 uppercase tracking-tighter">Ekstra -10% chegirma</span>
+                                                </div>
+                                            </div>
+
+                                            <div className="space-y-3">
+                                                <Label className="text-[10px] uppercase font-black text-blue-300/50 tracking-[0.3em] ml-4">{translations.promo_code_label}</Label>
+                                                <div className="relative">
+                                                    <Input 
+                                                        value={promoCode} 
+                                                        onChange={(e) => setPromoCode(e.target.value)} 
+                                                        className="bg-white/5 border-white/10 text-white h-16 rounded-[2rem] focus:border-accent focus:ring-accent transition-all text-xl font-black px-8 placeholder:text-blue-200/10" 
+                                                        placeholder={translations.promo_code_placeholder} 
+                                                    />
+                                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-200/20">
+                                                        <Gift className="w-6 h-6" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <Button 
+                                        size="lg" 
+                                        variant="default" 
+                                        className="w-full py-10 text-2xl font-black rounded-full shadow-[0_20px_40px_-10px_rgba(0,201,253,0.5)] hover:scale-[1.02] active:scale-95 transition-all text-white border-none group" 
+                                        onClick={onOrderNow} 
+                                        disabled={total.base === 0}
+                                    >
+                                        <span className="relative z-10 flex items-center gap-3">
+                                            {translations.get_free_consultation}
+                                            <ChevronsDown className="w-6 h-6 animate-bounce" />
+                                        </span>
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
-                    </Card>
+                        </Card>
+                    </div>
                 </div>
             </div>
         </section>
