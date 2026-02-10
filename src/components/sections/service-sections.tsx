@@ -5,9 +5,8 @@ import { FC, useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, BrainCircuit, ScanText, Package, Paintbrush, Fingerprint, Book } from 'lucide-react';
+import { ArrowRight, ScanText, Package, Paintbrush, Fingerprint, Book } from 'lucide-react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { Skeleton } from '../ui/skeleton';
 
 const serviceIcons: { [key: string]: React.ElementType } = {
     'naming': ScanText,
@@ -27,8 +26,8 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
     if (!translations) {
         return (
             <section className="py-16 sm:py-24 bg-white">
-                <div className="container mx-auto px-4">
-                    <Skeleton className="h-64 w-full" />
+                <div className="container mx-auto px-4 text-center py-12 border-2 border-dashed border-gray-200 rounded-2xl text-gray-400">
+                    Bu blokda nima bor edi?
                 </div>
             </section>
         );
@@ -73,5 +72,3 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
 };
 
 export default ServiceSections;
-
-    
