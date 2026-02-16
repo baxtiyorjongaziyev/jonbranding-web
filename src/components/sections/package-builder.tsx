@@ -32,7 +32,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const detail = serviceDetails[id as keyof typeof serviceDetails];
     if (!detail) return null;
 
-    const { label, description, price, features, results, timeline, recommended, note } = detail;
+    const { label, price, description, features, results, timeline, recommended, note } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
 
@@ -64,7 +64,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <div className={cn(
                         "w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 flex-shrink-0",
                         selected 
-                            ? (isVip ? "bg-amber-400 text-blue-950 shadow-[0_0_25px_rgba(251,191,36,0.6)]" : "bg-primary text-white shadow-xl") 
+                            ? (isVip ? "bg-amber-400 text-blue-950" : "bg-primary text-white shadow-xl") 
                             : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/30" : "bg-secondary text-slate-600")
                     )}>
                         <Icon className="w-7 h-7" />
@@ -102,7 +102,6 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                             </ul>
                         </div>
                     )}
-
                     {features && (
                         <div className={cn("space-y-4 border-t pt-6", isVip ? "border-white/10" : "border-slate-100")}>
                             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{dictionary.features}</p>
@@ -167,21 +166,8 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 );
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
-    // Default pre-select Premium options for higher conversion
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
-        audit: false, 
-        namingCheck: false, 
-        consultation: false, 
-        strategy: false, 
-        commStrategy: false, 
-        namingVIP: false, 
-        namingPremium: true, // Pre-selected
-        namingStandard: false, 
-        logoVIP: false, 
-        logoPremium: true, // Pre-selected
-        logoStandard: false, 
-        packaging: false, 
-        smm: false 
+        namingPremium: true, logoPremium: true
     });
     const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage<boolean>('wantsUpfrontPayment', false);
     const [promoCode, setPromoCode] = useState('');
@@ -189,10 +175,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
-    
-    if (!isClient || !dictionary || !dictionary.servicesPage?.packageBuilder) {
-        return <div className="py-20 min-h-screen bg-white text-center text-gray-400 italic">Yuklanmoqda...</div>;
-    }
+    if (!isClient || !dictionary || !dictionary.servicesPage?.packageBuilder) return null;
 
     const translations = dictionary.servicesPage.packageBuilder;
     const serviceDetails = getServiceDetails(lang as any);
@@ -214,11 +197,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         <section id="package-builder" className="py-20 sm:py-32 bg-white overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto mb-20 text-center space-y-6">
-                    <Badge className="bg-primary/10 text-primary border-none px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-[0.3em] shadow-sm">
+                    <Badge className="bg-primary/10 text-primary border-none px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-[0.3em]">
                         {translations.categories.tripwire}
                     </Badge>
                     <h2 className="text-5xl sm:text-6xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
-                    <p className="text-xl text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed">{translations.subtitle}</p>
+                    <p className="text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
                 </div>
 
                 <div className="space-y-32">
@@ -248,7 +231,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <div id="your-package-card" className="rounded-[4rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
                         <div className="lg:w-1/2 bg-dark-blue p-10 sm:p-16 text-white relative">
                             <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]" />
-                            
                             <div className="relative z-10 space-y-10">
                                 <div className="space-y-4">
                                     <div className="flex items-center gap-4">
@@ -259,7 +241,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                     <p className="text-blue-100/60 font-medium text-lg max-w-sm">{translations.your_package_desc}</p>
                                 </div>
-
                                 <div className="grid grid-cols-1 gap-4 max-h-[450px] overflow-y-auto pr-6 custom-scrollbar">
                                     {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => (
                                         <div key={k} className="flex items-center justify-between p-5 rounded-[1.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group/item shadow-sm">
@@ -289,7 +270,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <span className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">{translations.base_price_label}</span>
                                         <span className="text-2xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
-
                                     <div className="space-y-4">
                                         {total.discountApplied.map((d: any, i: number) => (
                                             <div key={i} className="flex justify-between items-center text-green-700 text-[12px] font-black bg-green-50 px-6 py-4 rounded-[1.5rem] border border-green-100 animate-fade-in shadow-sm">
@@ -301,7 +281,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             </div>
                                         ))}
                                     </div>
-
                                     <div className="pt-10 border-t border-slate-200 text-center space-y-3">
                                         <span className="text-slate-400 text-[11px] font-black uppercase tracking-[0.4em]">{translations.final_price}</span>
                                         <div className="flex flex-col items-center">
@@ -317,7 +296,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                     </div>
                                 </div>
-
                                 <div className="space-y-6">
                                     <div 
                                         className={cn(
@@ -340,30 +318,16 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             <span className="text-[11px] font-bold text-green-600 uppercase tracking-tight">Ekstra -10% chegirma</span>
                                         </div>
                                     </div>
-
                                     <div className="space-y-3">
                                         <Label className="text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">{translations.promo_code_label}</Label>
                                         <div className="relative">
-                                            <Input 
-                                                value={promoCode} 
-                                                onChange={(e) => setPromoCode(e.target.value)} 
-                                                className="bg-white border-slate-200 text-dark-blue h-14 rounded-[1.5rem] focus:border-primary focus:ring-primary transition-all font-black px-6 text-base shadow-sm" 
-                                                placeholder={translations.promo_code_placeholder} 
-                                            />
-                                            <div className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300">
-                                                <Sparkles className="w-5 h-5" />
-                                            </div>
+                                            <Input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="bg-white border-slate-200 text-dark-blue h-14 rounded-[1.5rem] focus:border-primary focus:ring-primary transition-all font-black px-6 text-base shadow-sm" placeholder={translations.promo_code_placeholder} />
+                                            <div className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300"><Sparkles className="w-5 h-5" /></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <Button 
-                                size="lg" 
-                                className="w-full py-10 text-2xl font-black rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.3)] hover:scale-[1.03] active:scale-95 transition-all mt-14 group border-none" 
-                                onClick={onOrderNow} 
-                                disabled={total.base === 0}
-                            >
+                            <Button size="lg" className="w-full py-10 text-2xl font-black rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.3)] hover:scale-[1.03] active:scale-95 transition-all mt-14 group border-none" onClick={onOrderNow} disabled={total.base === 0}>
                                 <span className="flex items-center gap-3">
                                     Loyiha narxini tasdiqlash
                                     <ChevronsDown className="w-8 h-8 animate-bounce" />
