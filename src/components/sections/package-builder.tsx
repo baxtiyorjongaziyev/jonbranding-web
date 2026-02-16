@@ -237,7 +237,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <div className="bg-white/10 p-3 rounded-2xl border border-white/10 shadow-lg">
                                             <Box className="w-8 h-8 text-sky-blue" />
                                         </div>
-                                        <h3 className="text-4xl font-black tracking-tighter uppercase text-white">Sizning paketingiz</h3>
+                                        <h3 className="text-3xl font-black tracking-tighter uppercase text-white">{translations.your_package}</h3>
                                     </div>
                                     <p className="text-blue-100/60 font-medium text-lg max-w-sm">{translations.your_package_desc}</p>
                                 </div>
