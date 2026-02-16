@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Gift, Zap } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 interface PackageBuilderProps {
@@ -290,7 +290,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             {total.savings > 0 && (
                                                 <div className="mt-6 flex items-center gap-3 text-green-600 font-black text-[12px] bg-green-100/50 px-6 py-3 rounded-full border border-green-200 shadow-sm">
                                                     <Gift className="w-5 h-5" />
-                                                    {lang === 'uz' ? 'JAMI TEJALDI:' : 'TOTAL SAVED:'} {formatPrice(total.savings, lang as any, currency)}
+                                                    JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
                                                 </div>
                                             )}
                                         </div>
