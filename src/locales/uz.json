@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -62,7 +63,7 @@
       "Brendingiz |sotmayaptimi?| Biz buni tuzatamiz.",
       "Raqobatchilardan |ajralib turing|.",
       "Brendni shunchaki chiroyli emas, |foyda keltiradigan| qiling.",
-      "Mijozlar sizga |oshig' bo'lsin|. Qayta va qatya.",
+      "Mijozlar sizga |oshig' bo'lsin|. Qayta va qayta.",
       "Kichik biznesdan |kuchli brendgacha|. Bir qadamda."
     ],
     "description": "Biz shunchaki logotip chizmaymiz. Biz sizning biznesingiz uchun mijozlar qalbidan joy oladigan, strategiyaga asoslangan <span class='font-bold text-foreground'>natijali</span> brend tizimini quramiz. Toshkentdagi yetakchi brending agentligi sifatida biz biznesingizga yangi nafas beramiz.",
@@ -111,7 +112,7 @@
   "beforeAfter": {
     "title": "Avval va Keyin",
     "subtitle": "To'g'ri brending biznesni qanchalik o'zgartirishini o'z ko'zingiz bilan ko'ring.",
-    "ctaTitle": "Sizning brendingiz ham o'zgarishga tayyormi?",
+    "ctaTitle": "Sizning brending ham o'zgarishga tayyormi?",
     "ctaDesc": "Keling, brendingizni tahlil qilib, uni yangi bosqichga olib chiqish rejasini tuzamiz.",
     "ctaButton": "Mening brendimni ham o'zgartiring"
   },
@@ -153,7 +154,7 @@
     "ctaButton": "Loyihani muhokama qilish"
   },
   "leadMagnet": {
-    "title": "Brendingizni yeni bosqichga olib chiqing",
+    "title": "Brendingizni yangi bosqichga olib chiqing",
     "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik.",
     "magnets": [
       { "id": "pdf", "title": "Bepul PDF chek-list", "subtitle": "Brendingdagi 7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
