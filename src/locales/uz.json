@@ -324,7 +324,7 @@
     "subtitle": "Siz nimalarga ega bo'lasiz:",
     "ctaButton": "Menga bu kerak",
     "sections": [
-      { "title": "1️⃣ STRATEGIYA", "points": ["Brendni pozitsiyalash va raqobatchilar tahlili", "Maqsadli auditoriya xaritasi", "Noyob sotuv taklifi (USP)"] },
+      { "title": "1️⃣ STRATEGIYA", "points": ["Brendni pozitsiyalash va raqobatchili tahlili", "Maqsadli auditoriya xaritasi", "Noyob sotuv taklifi (USP)"] },
       { "title": "2️⃣ AYDENTIKA", "points": ["Professional logotip (3-5 ta variant)", "Firma ranglari palitrasi", "Tipografika va uslub qo'llanmasi"] },
       { "title": "3️⃣ HUJJATLASHTIRISH", "points": ["To'liq Brendbuk (30-50 bet)", "Barcha formatdagi fayllar (AI, PNG, PDF, SVG)", "Logotipdan foydalanish yo'riqnomasi"] },
       { "title": "4️⃣ QONUNIY HIMOYALASH", "points": ["Neyming konsultatsiyasi", "Patent va Tovar belgisini ro'yxatdan o'tkazish jarayoni", "Intellektual mulkni himoya qilish strategiyasi"] },
@@ -493,7 +493,7 @@
       { "title": "Tekshiruv", "description": "Patent va domenlarni tekshiramiz." }
     ],
     "check_title": "Tekshirish — yaratishdan kam emas",
-    "check_subtitle": "Eng zo'r g'oya ham ro'yxatdan o'ta olmasa, foydasizdir.",
+    "check_subtitle": "Eng g'oya ham ro'yxatdan o'ta olmasa, foydasizdir.",
     "check_points": [
       { "title": "Huquqiy tozalik", "description": "Tovar belgisi sifatida ro'yxatdan o'tish imkoniyati." },
       { "title": "Domenlar", "description": "Raqamli muhitda band emasligi." },
