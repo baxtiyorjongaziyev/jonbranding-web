@@ -249,3 +249,48 @@ export const generateSummary = (selections: any, lang: string = 'uz'): string =>
     const sd = getServiceDetails(lang as any);
     return Object.entries(selectedServices).filter(([_, active]) => active).map(([key]) => sd[key as keyof typeof sd]?.label).filter(Boolean).join(', ');
 }
+
+export const comparisonData = (lang: 'uz' | 'ru' | 'en' = 'uz') => {
+    const t = {
+        uz: {
+            features: [
+                "Strategik yondashuv",
+                "100% to'lov qaytarish kafolati",
+                "Patent tekshiruvi (Neymingda)",
+                "Real maketlarda namoyish",
+                "Doimiy shaxsiy aloqa",
+                "Narx va Sifat mutanosibligi"
+            ]
+        },
+        ru: {
+            features: [
+                "Стратегический подход",
+                "100% гарантия возврата оплаты",
+                "Патентная проверка (в Нейминге)",
+                "Демонстрация на реальных макетах",
+                "Постоянная личная связь",
+                "Соотношение цены и качества"
+            ]
+        },
+        en: {
+            features: [
+                "Strategic approach",
+                "100% money-back guarantee",
+                "Trademark check (in Naming)",
+                "Real-life mockup presentation",
+                "Constant personal communication",
+                "Price-Quality ratio"
+            ]
+        }
+    };
+    const features = t[lang].features;
+    return features.map((f, i) => ({
+        feature: f,
+        competitors: {
+            jon: true,
+            mano: i === 0 || i === 3,
+            abba: i === 0 || i === 4,
+            mountain: i === 0 || i === 5
+        }
+    }));
+};
