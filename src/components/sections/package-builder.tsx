@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -166,7 +167,22 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 );
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
-    const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { audit: false, namingCheck: false, consultation: false, strategy: false, commStrategy: false, namingVIP: false, namingPremium: false, namingStandard: false, logoVIP: false, logoPremium: false, logoStandard: false, packaging: false, smm: false });
+    // Default pre-select Premium options for higher conversion
+    const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
+        audit: false, 
+        namingCheck: false, 
+        consultation: false, 
+        strategy: false, 
+        commStrategy: false, 
+        namingVIP: false, 
+        namingPremium: true, // Pre-selected
+        namingStandard: false, 
+        logoVIP: false, 
+        logoPremium: true, // Pre-selected
+        logoStandard: false, 
+        packaging: false, 
+        smm: false 
+    });
     const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage<boolean>('wantsUpfrontPayment', false);
     const [promoCode, setPromoCode] = useState('');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
@@ -349,7 +365,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 disabled={total.base === 0}
                             >
                                 <span className="flex items-center gap-3">
-                                    To'lov qilishga tayyorman
+                                    Loyiha narxini tasdiqlash
                                     <ChevronsDown className="w-8 h-8 animate-bounce" />
                                 </span>
                             </Button>
