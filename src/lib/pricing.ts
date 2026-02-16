@@ -175,48 +175,21 @@ const uzServiceDetails = {
     }
 };
 
-const ruServiceDetails = {
-    audit: { label: "Аудит Логотипа", price: basePricesUSD.audit },
-    namingCheck: { label: "Проверка Нейминга", price: basePricesUSD.namingCheck },
-    consultation: { label: "30-минутная консультация", price: basePricesUSD.consultation },
-    strategy: { label: "Бренд-стратегия и платформа", price: basePricesUSD.strategy },
-    commStrategy: { label: "Коммуникационная стратегия", price: basePricesUSD.commStrategy },
-    namingVIP: { label: "👑 Naming VIP", price: basePricesUSD.namingVIP },
-    namingPremium: { label: "Naming PREMIUM", price: basePricesUSD.namingPremium },
-    namingStandard: { label: "Naming STANDARD", price: basePricesUSD.namingStandard },
-    logoVIP: { label: "👑 VIP — Лого + Стиль + Брендбук", price: basePricesUSD.logoVIP },
-    logoPremium: { label: "Лого + Фирменный стиль PREMIUM", price: basePricesUSD.logoPremium },
-    logoStandard: { label: "Логотип STANDARD", price: basePricesUSD.logoStandard },
-    packaging: { label: "Дизайн упаковки", price: basePricesUSD.packaging },
-    smm: { label: "Стиль для соцсетей", price: basePricesUSD.smm }
-};
-
-const enServiceDetails = {
-    namingVIP: { label: "👑 Naming VIP", price: basePricesUSD.namingVIP },
-    namingPremium: { label: "Naming PREMIUM", price: basePricesUSD.namingPremium },
-    logoVIP: { label: "👑 VIP — Logo + Style + Brandbook", price: basePricesUSD.logoVIP },
-    logoPremium: { label: "Logo + Corporate Style PREMIUM", price: basePricesUSD.logoPremium }
-};
-
 export const getServiceDetails = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
-    switch (lang) {
-        case 'ru': return { ...uzServiceDetails, ...ruServiceDetails };
-        case 'en': return { ...uzServiceDetails, ...enServiceDetails };
-        default: return uzServiceDetails;
-    }
+    return uzServiceDetails;
 };
 
 export function formatPrice(priceInUSD: number, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz', currency: 'uzs' | 'usd' = 'usd') {
-    if (priceInUSD === 0) return lang === 'uz' ? "Kelishiladi" : "По догов.";
+    if (priceInUSD === 0) return "Kelishiladi";
     let price = currency === 'uzs' ? convertToUzs(priceInUSD) : priceInUSD;
-    let currencyString = currency === 'uzs' ? (lang === 'uz' ? "so'm" : "сум") : '$';
+    let currencyString = currency === 'uzs' ? "so'm" : "$";
     return `${price.toLocaleString('fr-FR')} ${currencyString}`;
 }
 
 export type SelectedServices = { [key: string]: boolean; };
 
 export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any => {
-    const { selectedServices, wantsUpfrontPayment, promoCode } = selections;
+    const { selectedServices, wantsUpfrontPayment } = selections;
     const sd = getServiceDetails(lang as any);
     let basePrice = 0;
     let mainServicesCount = 0;
@@ -233,12 +206,12 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     let finalPrice = basePrice;
     if (mainServicesCount >= 2) {
         const val = basePrice * 0.20;
-        discountsApplied.push({ name: lang === 'uz' ? 'Paketli chegirma (-20%)' : 'Пакетная скидка (-20%)', value: val });
+        discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: val });
         finalPrice -= val;
     }
     if (wantsUpfrontPayment) {
         const val = finalPrice * 0.10;
-        discountsApplied.push({ name: lang === 'uz' ? "Oldindan to'lov (-10%)" : 'Скидка за предоплату (-10%)', value: val });
+        discountsApplied.push({ name: "Oldindan to'lov (-10%)", value: val });
         finalPrice -= val;
     }
     return { base: basePrice, final: finalPrice, discountApplied: discountsApplied, savings: basePrice - finalPrice };
@@ -249,48 +222,3 @@ export const generateSummary = (selections: any, lang: string = 'uz'): string =>
     const sd = getServiceDetails(lang as any);
     return Object.entries(selectedServices).filter(([_, active]) => active).map(([key]) => sd[key as keyof typeof sd]?.label).filter(Boolean).join(', ');
 }
-
-export const comparisonData = (lang: 'uz' | 'ru' | 'en' = 'uz') => {
-    const t = {
-        uz: {
-            features: [
-                "Strategik yondashuv",
-                "100% to'lov qaytarish kafolati",
-                "Patent tekshiruvi (Neymingda)",
-                "Real maketlarda namoyish",
-                "Doimiy shaxsiy aloqa",
-                "Narx va Sifat mutanosibligi"
-            ]
-        },
-        ru: {
-            features: [
-                "Стратегический подход",
-                "100% гарантия возврата оплаты",
-                "Патентная проверка (в Нейминге)",
-                "Демонстрация на реальных макетах",
-                "Постоянная личная связь",
-                "Соотношение цены и качества"
-            ]
-        },
-        en: {
-            features: [
-                "Strategic approach",
-                "100% money-back guarantee",
-                "Trademark check (in Naming)",
-                "Real-life mockup presentation",
-                "Constant personal communication",
-                "Price-Quality ratio"
-            ]
-        }
-    };
-    const features = t[lang].features;
-    return features.map((f, i) => ({
-        feature: f,
-        competitors: {
-            jon: true,
-            mano: i === 0 || i === 3,
-            abba: i === 0 || i === 4,
-            mountain: i === 0 || i === 5
-        }
-    }));
-};
