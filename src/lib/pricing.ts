@@ -166,22 +166,23 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     const discountsApplied = [];
     let finalPrice = basePrice;
 
-    // Ramadan Discount (applied first as requested)
+    // 1. Ramadan Discount (applied first as requested)
     if (isRamadan) {
         const val = finalPrice * 0.50;
         discountsApplied.push({ name: 'Ramazon tuhfasi (-50%)', value: val });
         finalPrice -= val;
     }
 
-    // Package discount (-20%)
+    // 2. Package discount (-20%)
     if (mainServicesCount >= 2) {
         const val = finalPrice * 0.20;
         discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: val });
         finalPrice -= val;
     }
 
-    // Upfront payment discount (-10%)
-    if (wantsUpfrontPayment) {
+    // 3. Upfront payment discount (-10%) 
+    // IMPORTANT: Only applied if Ramadan discount is NOT active
+    if (wantsUpfrontPayment && !isRamadan) {
         const val = finalPrice * 0.10;
         discountsApplied.push({ name: "Oldindan to'lov (-10%)", value: val });
         finalPrice -= val;

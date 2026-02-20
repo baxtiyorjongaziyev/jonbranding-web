@@ -55,7 +55,7 @@
   },
   "home": {
     "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
-    "cta1_desc": "Professional dizayn yordamida biznesingizni yangi bosqichga olib chiqing. Biznesingiz uchun ideal yechimni find qilishga yordam beramiz.",
+    "cta1_desc": "Professional dizayn yordamida biznesingizni yangi bosqichga olib chiqing. Biznesingiz uchun ideal yechimni topishga yordam beramiz.",
     "cta1_button": "Mening biznesim uchun ham"
   },
   "hero": {
@@ -190,7 +190,7 @@
     "faqItems": [
       { "question": "Nega narxlar qat'iy belgilangan emas?", "answer": "Har bir loyiha unikal. Narx loyihaning murakkabligi, ish hajmi va sizning vazifangizdan kelib chiqib individual hisoblanadi. Biz sizning brendingiz uchun optimal yechimni taklif qilamiz." },
       { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishiladi va siz jarayonni to'liq nazorat qilasiz." },
-      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz. Bu sizning biznesingiz uchun uzoq muddatli qiymat yaratadi." },
+      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendingizni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz. Bu sizning biznesingiz uchun uzoq muddatli qiymat yaratadi." },
       { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng. Shuningdek, sizga qulay bo'lishi uchun individual shartlarni ham muhokama qilishimiz mumkin." },
       { "question": "Ish qancha vaqt davom etadi?", "answer": "Muddatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend strategiyasi — 8 haftadan boshlanadi. Yakuniy muddat loyiha tasdiqlangandan so'ng belgilanadi." },
       { "question": "Loyiha tugagandan keyin yordam berasizlarmi?", "answer": "Ha, loyiha yakunlanganidan keyin 1 oy davomida biz bepul maslahatlar beramiz va brend materiallaridan to'g'ri foydalanish bo'yicha yordam ko'rsatamiz." }
@@ -310,7 +310,7 @@
       "recommended": "Tavsiya etiladi",
       "features": "Nimalar kiradi",
       "results": "Siz nima olasiz",
-      "ramadan_discount_label": "Ramazon tuhfasi tuhfasi",
+      "ramadan_discount_label": "Ramazon tuhfasi",
       "ramadan_discount_desc": "Ekstra -50% chegirma!",
       "comparison": {
         "title": "Biz va Raqobatchilar",
