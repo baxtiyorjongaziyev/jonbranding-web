@@ -1,16 +1,16 @@
+
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
 import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap, Gift, Moon } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import DynamicToggle from '@/components/ui/dynamic-toggle';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -165,13 +165,11 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 );
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
-    // Default selection set to Premium options as strategically advised
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
         namingPremium: true, logoPremium: true
     });
-    const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage<boolean>('wantsUpfrontPayment', false);
+    const [discountType, setDiscountType] = useLocalStorage<'none' | 'package' | 'full'>('discountOption', 'none');
     const [isRamadan, setIsRamadan] = useLocalStorage<boolean>('isRamadan', true);
-    const [promoCode, setPromoCode] = useState('');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
 
@@ -180,7 +178,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     const translations = dictionary.servicesPage.packageBuilder;
     const serviceDetails = getServiceDetails(lang as any);
-    const total = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, promoCode, isRamadan }, lang as any);
+    const total = calculatePackagePrice({ selectedServices, discountType, isRamadan }, lang as any);
 
     const handleServiceToggle = (id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
@@ -194,19 +192,19 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         });
     };
 
-    // Strategic mutual exclusion handling
     const handleRamadanToggle = () => {
         const newValue = !isRamadan;
         setIsRamadan(newValue);
         if (newValue) {
-            setWantsUpfrontPayment(false); // Cancel upfront discount if Ramadan is active
+            setDiscountType('none'); // Disable standard discounts if Ramadan is on
         }
     };
 
-    const handleUpfrontToggle = () => {
-        if (isRamadan) return; // Prevent toggling if Ramadan is active
-        setWantsUpfrontPayment(!wantsUpfrontPayment);
-    };
+    const discountOptions = [
+        { value: 'none', label: 'Chegirmasiz' },
+        { value: 'package', label: 'Paketli 20%' },
+        { value: 'full', label: '+10% Upfront' }
+    ];
 
     return (
         <section id="package-builder" className="py-20 sm:py-32 bg-white overflow-hidden">
@@ -312,7 +310,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                 </div>
                                 <div className="space-y-6">
-                                    {/* Ramadan Discount Switch */}
                                     <div 
                                         className={cn(
                                             "flex items-center gap-5 p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border-2",
@@ -337,39 +334,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                     </div>
 
-                                    {/* Upfront Payment Switch */}
-                                    <div 
-                                        className={cn(
-                                            "flex items-center gap-5 p-6 rounded-[2rem] transition-all duration-500 border-2",
-                                            isRamadan 
-                                                ? "bg-slate-100 border-slate-200 opacity-50 cursor-not-allowed" 
-                                                : (wantsUpfrontPayment ? "bg-primary/5 border-primary shadow-lg scale-[1.02] cursor-pointer" : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-md cursor-pointer")
-                                        )}
-                                        onClick={handleUpfrontToggle}
-                                    >
-                                        <div className={cn(
-                                            "w-14 h-7 rounded-full relative transition-all duration-500 p-1",
-                                            wantsUpfrontPayment ? "bg-primary" : "bg-slate-200"
-                                        )}>
-                                            <div className={cn(
-                                                "w-5 h-5 rounded-full bg-white transition-all duration-500 shadow-md",
-                                                wantsUpfrontPayment ? "translate-x-7" : "translate-x-0"
-                                            )} />
+                                    {!isRamadan && (
+                                        <div className="space-y-3">
+                                            <Label className="text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">Chegirmalar</Label>
+                                            <DynamicToggle 
+                                                id="discount-tier"
+                                                options={discountOptions}
+                                                selected={discountType}
+                                                onSelect={(val) => setDiscountType(val as any)}
+                                            />
                                         </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-xs font-black text-dark-blue uppercase tracking-widest">100% Oldindan to'lov</span>
-                                            <span className="text-[11px] font-bold text-green-600 uppercase tracking-tight">
-                                                {isRamadan ? "Ramazon chegirmasi bilan amal qilmaydi" : "Ekstra -10% chegirma"}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="space-y-3">
-                                        <Label className="text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">{translations.promo_code_label}</Label>
-                                        <div className="relative">
-                                            <Input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="bg-white border-slate-200 text-dark-blue h-14 rounded-[1.5rem] focus:border-primary focus:ring-primary transition-all font-black px-6 text-base shadow-sm" placeholder={translations.promo_code_placeholder} />
-                                            <div className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300"><Sparkles className="w-5 h-5" /></div>
-                                        </div>
-                                    </div>
+                                    )}
                                 </div>
                             </div>
                             <Button size="lg" className="w-full py-10 text-2xl font-black rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.3)] hover:scale-[1.03] active:scale-95 transition-all mt-14 group border-none" onClick={onOrderNow} disabled={total.base === 0}>
