@@ -155,25 +155,25 @@
   },
   "leadMagnet": {
     "title": "Brendingizni yangi bosqichga olib chiqing",
-    "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik.",
+    "subtitle": "Don't know where to start working with us? We've prepared several free and useful resources for you.",
     "magnets": [
-      { "id": "pdf", "title": "Bepul PDF chek-list", "subtitle": "Brendingdagi 7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
-      { "id": "quiz", "title": "Mini-test", "subtitle": "Biznesingiz brendingga tayyormi?", "description": "Bir nechta savollarga javob bering va tayyorgarlik darajangizni aniqlang.", "cta": "Testni boshlash", "href": "/{lang}/quiz" },
-      { "id": "video", "title": "Video qo'llanma", "subtitle": "Strategik brending nima o'zi?", "description": "Bizning yondashuv biznesingizga qanday natija keltirishini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
+      { "id": "pdf", "title": "Bepul PDF chek-list", "subtitle": "7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
+      { "id": "quiz", "title": "Mini-test", "subtitle": "Tayyorgarlik darajangiz", "description": "Bir nechta savollarga javob bering va darajangizni aniqlang.", "cta": "Testni boshlash", "href": "/{lang}/quiz" },
+      { "id": "video", "title": "Video qo'llanma", "subtitle": "Strategik brending", "description": "Bizning yondashuv biznesingizga qanday natija keltirishini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
     ],
     "cta": {
       "title": "Chek-list yordam berdimi?",
-      "description": "Endi nazariyadan amaliyotga o'tish vaqti keldi.",
+      "description": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Keling, brendingizni tahlil qilamiz.",
       "button": "Bepul konsultatsiya olish"
     },
     "checklistContent": {
       "progress_text": "Bajarildi: {checkedCount} dan {total}",
       "items": [
-        { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash.", "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun?' degan savollarga javob berishdan boshlang." },
+        { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash.", "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun?' savollaridan boshlang." },
         { "title": "2. Hamma uchun yoqishga harakat qilish", "description": "Hamma uchun bo'lishga harakat qigan brend oxir-oqibat hech kim uchun bo'lmay qoladi.", "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling." },
-        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu hech qayerga olib bormaydigan yo'l.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni find qiling." },
+        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu yo'l emas.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni toping." },
         { "title": "4. Nomuvofiqlik", "description": "Saytdagi logotipingiz bir xil uslubda, Instagramda boshqacha, qadoqda esa butunlay boshqa ko'rinishda.", "solution": "Yechim: Logotip, ranglar, shriftlardan foydalanish qoidalari yozilgan 'brandbook' yarating." },
-        { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detallar, gradientlar va matnlardan iborat logotipni eslab qiyin.", "solution": "Yechim: Soddalik va minimalizmga intiling." },
+        { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin.", "solution": "Yechim: Soddalik va minimalizmga intiling." },
         { "title": "6. Talaffuz qilish qiyin nom", "description": "Agar mijozlaringiz nomingizni aytishga qiynalsa, ular sizni topa olmaydi.", "solution": "Yechim: Oddiy va jarangli nom tanlang." },
         { "title": "7. Brendingni bir martalik ish deb o'ylash", "description": "Bozor, mijozlar talabi, texnologiyalar doim o'zgarib turadi.", "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing." }
       ],
@@ -296,8 +296,8 @@
         "more_services": "Qo'shimcha xizmatlar va shartlar"
       },
       "your_package": "Sizning paketingiz",
-      "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
-      "empty_package_desc": "Siz hali hech narsa tanlamadingiz. Xizmatlarni tanlang yoki eng ommabop taklifimizdan boshlang.",
+      "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi.",
+      "empty_package_desc": "Xizmatlarni tanlang yoki ommabop taklifimizdan boshlang.",
       "base_price_label": "Boshlang'ich narx",
       "final_price": "Yakuniy narx:",
       "promo_code_label": "Promokod",
@@ -306,7 +306,97 @@
       "select": "Tanlash",
       "recommended": "Tavsiya etiladi",
       "features": "Nimalar kiradi",
-      "results": "Siz nima olasiz"
+      "results": "Siz nima olasiz",
+      "comparison": {
+        "title": "Biz va Raqobatchilar",
+        "description": "Biz premium sifatni hamyonbop narxda taqdim etamiz.",
+        "features": "Xususiyatlar",
+        "whyPremiumTitle": "Nega faqat premium?",
+        "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega top kompaniyalar bilan solishtiramiz.",
+        "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
+        "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas.",
+        "ctaButton": "Menga shunday yondashuv kerak"
+      }
+    }
+  },
+  "personalOfferBlock": {
+    "title": "💎 MENING TAKLIFIM:",
+    "subtitle": "Siz nima olasiz:",
+    "ctaButton": "Menga bu kerak",
+    "sections": [
+      { "title": "1️⃣ STRATEGIYA", "points": ["Bozor tahlili", "Pozitsiyalash", "USP yaratish"] },
+      { "title": "2️⃣ AYDENTIKA", "points": ["Professional logo", "Firma ranglari", "Tipografika"] },
+      { "title": "3️⃣ HUJJATLAR", "points": ["To'liq Brandbook", "Barcha fayl formatlari", "Qo'llanma"] }
+    ]
+  },
+  "urgencyBlock": {
+    "title": "🔥 BU SAHIFANI YOPISHDAN OLDIN...",
+    "subtitle": "Tasavvur qiling:",
+    "line1": "Ertaga raqobatchingiz professional brend bilan chiqdi.",
+    "line2": "Mijozlar sizdan emas, ULARDAN sotib olishyapti.",
+    "line3": "Sababi oddiy: Ular sarmoya kiritishdi. Siz esa... o'yladingiz."
+  },
+  "queueStatus": {
+    "subtitle": "Joylar cheklangan",
+    "title": "Shoshiling! Joyingizni band qiling!",
+    "description": "Biz har bir loyihaga sifatli vaqt ajratamiz.",
+    "queueTitle": "Loyihalar navbati",
+    "booked": "Band",
+    "available": "Bo'sh",
+    "tooltipBooked": "Joy band qilingan",
+    "tooltipAvailable": "Navbatga yozilishingiz mumkin",
+    "remainingSlots": "Bo'sh joylar",
+    "slotsUnit": "ta",
+    "onlineNow": "Hozir saytda",
+    "peopleUnit": "kishi",
+    "nextProjectStart": "Keyingi loyiha boshlanishi",
+    "ctaButton": "Joyimni band qilish",
+    "ctaSubtitle": "Raqobatchilardan bir qadam oldinda bo'ling!",
+    "timeframes": { "2 weeks": "2 hafta ichida" }
+  },
+  "popularPackages": {
+    "title": "Eng ommabop to'plamlar",
+    "packageTitle": "Naming + Logo (Premium)",
+    "packageSubtitle": "Kuchli brend boshlash uchun ideal kombinatsiya.",
+    "features": ["Mukammal nom", "5 ta logo konsepsiyasi", "Firma uslubi", "15+ mockup", "Patent auditi"],
+    "separate": "Alohida",
+    "packagePrice": "To'plamda",
+    "packageDiscount": "(-20% chegirma!)",
+    "upfrontDiscount": "100% oldindan to'lov bilan (-28%!)",
+    "ctaButton": "Ushbu to'plamni tanlash"
+  },
+  "pickTwoSelector": {
+    "title": "Uchtadan ikkitasini tanlang",
+    "subtitle": "Arzon — Sifatli — Tez: uchtasini bir vaqtda olish qiyin.",
+    "ctaText": "Taklif so'rash",
+    "options": { "cheap": "Arzon", "quality": "Sifatli", "fast": "Tez" },
+    "messages": {
+      "cheap_fast": "Sifat beqaror bo'lishi mumkin. Shoshilinch loyihalar uchun.",
+      "cheap_quality": "Natijani kutishga to'g'ri keladi. Navbat bilan ishlaymiz.",
+      "quality_fast": "Narx balandroq bo'ladi. Jamoani safarbar qilamiz.",
+      "default": "Siz uchun eng muhim bo'lgan 2 ta ustuvorlikni tanlang."
+    },
+    "tooltip": "Avval bittasini bekor qiling"
+  },
+  "sitemapPage": {
+    "title": "Sayt xaritasi",
+    "subtitle": "Kerakli ma'lumotni tezroq topishingiz uchun barcha sahifalar ro'yxati.",
+    "sections": { "main": "Asosiy bo'limlar", "services": "Xizmatlar", "blog": "Maqolalar" },
+    "links": {
+      "home": "Bosh sahifa",
+      "quiz": "Brending Testi",
+      "portfolio": "Portfolio",
+      "process": "Ish jarayoni",
+      "faq": "FAQ",
+      "services_prices": "Barcha xizmatlar va narxlar",
+      "naming": "Neyming",
+      "logo_design": "Logotip Dizayni",
+      "brand_strategy": "Brend Strategiyasi",
+      "brandbook": "Brendbuk",
+      "corporate_style": "Firma Uslubi",
+      "packaging_design": "Qadoq Dizayni",
+      "patent_calculator": "Patent Kalkulyatori",
+      "marketplace_cover": "Sotuvchi kartochka"
     }
   }
 }

@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap, Gift } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 interface PackageBuilderProps {
@@ -147,7 +147,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                         )}
                         onClick={(e) => { e.stopPropagation(); onSelect(); }}
                     >
-                        {selected ? <span className={isVip ? "text-blue-950" : "text-white"}>{dictionary.selected}</span> : dictionary.select}
+                        {selected ? dictionary.selected : dictionary.select}
                     </Button>
                 </div>
             </CardContent>
