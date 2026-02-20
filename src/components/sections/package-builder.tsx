@@ -165,6 +165,7 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 );
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
+    // Default selection set to Premium options as strategically advised
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
         namingPremium: true, logoPremium: true
     });
@@ -191,6 +192,20 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             newState[id] = !prev[id];
             return newState;
         });
+    };
+
+    // Strategic mutual exclusion handling
+    const handleRamadanToggle = () => {
+        const newValue = !isRamadan;
+        setIsRamadan(newValue);
+        if (newValue) {
+            setWantsUpfrontPayment(false); // Cancel upfront discount if Ramadan is active
+        }
+    };
+
+    const handleUpfrontToggle = () => {
+        if (isRamadan) return; // Prevent toggling if Ramadan is active
+        setWantsUpfrontPayment(!wantsUpfrontPayment);
     };
 
     return (
@@ -303,7 +318,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             "flex items-center gap-5 p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border-2",
                                             isRamadan ? "bg-emerald-50 border-emerald-500 shadow-lg scale-[1.02]" : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-md"
                                         )}
-                                        onClick={() => setIsRamadan(!isRamadan)}
+                                        onClick={handleRamadanToggle}
                                     >
                                         <div className={cn(
                                             "w-14 h-7 rounded-full relative transition-all duration-500 p-1",
@@ -322,12 +337,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                     </div>
 
+                                    {/* Upfront Payment Switch */}
                                     <div 
                                         className={cn(
-                                            "flex items-center gap-5 p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border-2",
-                                            wantsUpfrontPayment ? "bg-primary/5 border-primary shadow-lg scale-[1.02]" : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-md"
+                                            "flex items-center gap-5 p-6 rounded-[2rem] transition-all duration-500 border-2",
+                                            isRamadan 
+                                                ? "bg-slate-100 border-slate-200 opacity-50 cursor-not-allowed" 
+                                                : (wantsUpfrontPayment ? "bg-primary/5 border-primary shadow-lg scale-[1.02] cursor-pointer" : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-md cursor-pointer")
                                         )}
-                                        onClick={() => setWantsUpfrontPayment(!wantsUpfrontPayment)}
+                                        onClick={handleUpfrontToggle}
                                     >
                                         <div className={cn(
                                             "w-14 h-7 rounded-full relative transition-all duration-500 p-1",
@@ -340,7 +358,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                         <div className="flex flex-col">
                                             <span className="text-xs font-black text-dark-blue uppercase tracking-widest">100% Oldindan to'lov</span>
-                                            <span className="text-[11px] font-bold text-green-600 uppercase tracking-tight">Ekstra -10% chegirma</span>
+                                            <span className="text-[11px] font-bold text-green-600 uppercase tracking-tight">
+                                                {isRamadan ? "Ramazon chegirmasi bilan amal qilmaydi" : "Ekstra -10% chegirma"}
+                                            </span>
                                         </div>
                                     </div>
                                     <div className="space-y-3">
