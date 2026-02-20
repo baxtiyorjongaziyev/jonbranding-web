@@ -54,9 +54,10 @@
     "back_to_top": "Yuqoriga qaytish",
     "patent_calculator": "Patent Kalkulyatori"
   },
-  "cookieConsent": {
-    "message": "Saytimizda foydalanuvchi tajribasini yaxshilash uchun cookie fayllardan foydalanamiz. Davom etish orqali siz bunga rozilik bildirasiz.",
-    "acceptButton": "Tushunarli"
+  "home": {
+    "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
+    "cta1_desc": "Professional dizayn yordamida biznesingizni yangi bosqichga olib chiqing. Biznesingiz uchun ideal yechimni topishga yordam beramiz.",
+    "cta1_button": "Mening biznesim uchun ham"
   },
   "hero": {
     "headlines": [
@@ -106,7 +107,7 @@
       { "title": "Natija va Sodiqlik", "description": "50 dan ortiq loyihalar va eng muhimi — 90% mijozlarimiz bizni do'stlariga tavsiya qilishadi." }
     ],
     "ctaTitle": "Bizning yondashuv yoqdimi?",
-    "ctaDesc": "Keling, brendingizni bepul tahlil qilamiz, uning kuchli va zaif tomonlarini aniqlaymiz.",
+    "ctaDesc": "Keling, brendingizni bepul tahlil qilamiz, uning kuchli va zaif tomonlarini aniqlaymiz. Bu sizga hech qanday majburiyat yuklamaydi.",
     "ctaButton": "Brendimni bepul tahlil qiling"
   },
   "beforeAfter": {
@@ -155,46 +156,49 @@
   },
   "leadMagnet": {
     "title": "Brendingizni yangi bosqichga olib chiqing",
-    "subtitle": "Don't know where to start working with us? We've prepared several free and useful resources for you.",
+    "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik. Brending dunyosini o'rganing va birinchi qadamni tashlang.",
     "magnets": [
-      { "id": "pdf", "title": "Bepul PDF chek-list", "subtitle": "7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
-      { "id": "quiz", "title": "Mini-test", "subtitle": "Tayyorgarlik darajangiz", "description": "Bir nechta savollarga javob bering va darajangizni aniqlang.", "cta": "Testni boshlash", "href": "/{lang}/quiz" },
-      { "id": "video", "title": "Video qo'llanma", "subtitle": "Strategik brending", "description": "Bizning yondashuv biznesingizga qanday natija keltirishini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
+      { "id": "pdf", "title": "Bepul PDF chek-list", "subtitle": "7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
+      { "id": "quiz", "title": "Mini-test", "subtitle": "Tayyorgarlik darajangiz", "description": "Bir nechta savollarga javob bering va biznesingiz brendingga qanchalik tayyorligini, uning kuchli va zaif tomonlarini aniqlang.", "cta": "Testni boshlash", "href": "/{lang}/quiz" },
+      { "id": "video", "title": "Video qo'llanma", "subtitle": "Strategik brending nima?", "description": "Nima uchun shunchaki chiroyli logotip yetarli emas? Bizning yondashuv biznesingizga qanday natija keltirishini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
     ],
     "cta": {
       "title": "Chek-list yordam berdimi?",
-      "description": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Keling, brendingizni tahlil qilamiz.",
+      "description": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Keling, brendingizni bepul tahlil qilamiz va o'sish nuqtalarini aniqlaymiz.",
       "button": "Bepul konsultatsiya olish"
     },
     "checklistContent": {
       "progress_text": "Bajarildi: {checkedCount} dan {total}",
       "items": [
-        { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash.", "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun?' savollaridan boshlang." },
-        { "title": "2. Hamma uchun yoqishga harakat qilish", "description": "Hamma uchun bo'lishga harakat qigan brend oxir-oqibat hech kim uchun bo'lmay qoladi.", "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling." },
-        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu yo'l emas.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni toping." },
-        { "title": "4. Nomuvofiqlik", "description": "Saytdagi logotipingiz bir xil uslubda, Instagramda boshqacha, qadoqda esa butunlay boshqa ko'rinishda.", "solution": "Yechim: Logotip, ranglar, shriftlardan foydalanish qoidalari yozilgan 'brandbook' yarating." },
-        { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin.", "solution": "Yechim: Soddalik va minimalizmga intiling." },
-        { "title": "6. Talaffuz qilish qiyin nom", "description": "Agar mijozlaringiz nomingizni aytishga qiynalsa, ular sizni topa olmaydi.", "solution": "Yechim: Oddiy va jarangli nom tanlang." },
-        { "title": "7. Brendingni bir martalik ish deb o'ylash", "description": "Bozor, mijozlar talabi, texnologiyalar doim o'zgarib turadi.", "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing." }
+        { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash. Sizning mijozingiz kim? Raqobatchilardan nima bilan farq qilasiz? Asosiy xabaringiz nima? Bu savollarga javob bermaydigan logotip yoki sayt shunchaki chiroyli rasm, xolos.", "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun?' savollariga javob berishdan boshlang. Bu brendingiz uchun mustahkam poydevor yaratadi." },
+        { "title": "2. Hamma uchun yoqishga harakat qilish", "description": "Hamma uchun bo'lishga harakat qilgan brend oxir-oqibat hech kim uchun bo'lmay qoladi. Aholining barcha qatlamlariga yoqishga urinish brendning xiralashishiga va zaiflashishiga olib keladi.", "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling. 'Ideal mijozingiz' portretini yarating va marketing harakatlaringizni aynan unga qarating." },
+        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu yo'l emas. Agar dizayningiz taniqli brendga o'xshasa, sizni har doim 'arzon muqobil' sifatida qabul qilishadi.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni toping. Boshqacha bo'lishdan qo'rqmang." },
+        { "title": "4. Nomuvofiqlik (Inconsistency)", "description": "Saytdagi logotipingiz bir xil uslubda, Instagramda boshqacha, qadoqda esa butunlay boshqa ko'rinishda. Bu vizual xaos ishonchni so'ndiradi va brendning tanilishiga to'sqinlik qiladi.", "solution": "Yechim: Logotip, ranglar, shriftlardan foydalanish qoidalari yozilgan 'brandbook' (gaydlayn) yarating. Uni hamma joyda bir xilda ishlating." },
+        { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt favikoni yoki ijtimoiy tarmoq avatarida) yomon ko'rinadi.", "solution": "Yechim: Soddalik va minimalizmga intiling. Eng yaxshi logotiplar — xotiradan osongina chizish mumkin bo'lgan logotiplardir." },
+        { "title": "6. Talaffuz qilish qiyin yoki eslab qolish qiyin nom", "description": "Agar mijozlaringiz nomingizni ayta olmasalar yoki uni qidiruvga to'g'ri yoza olmasalar, ular sizni topa olmaydilar va boshqalarga tavsiya qila olmaydilar.", "solution": "Yechim: Oddiy, jarangli va huquqiy jihatdan toza (tovar belgisi band bo'lmagan) nom tanlang." },
+        { "title": "7. Brendingni bir martalik ish deb o'ylash", "description": "Bozor, mijozlar talabi, texnologiyalar doim o'zgarib turadi. Vaqt bilan birga o'zgarmaydigan brend eskirib qoladi.", "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lsa, dizayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir." }
       ],
       "result": {
-        "bad": { "title": "Sizga zudlik bilan yordam kerak!", "description": "Brendingingizda bir nechta jiddiy kamchiliklar bor." },
-        "good": { "title": "To'g'ri yo'ldasiz!", "description": "Sizda yaxshi asos bor, lekin natijani yanada yaxshilash mumkin." },
-        "perfect": { "title": "A'lo darajada! Brendingiz sog'lom!", "description": "Tabriklaymiz! Sizda mustahkam poydevor bor." }
+        "bad": { "title": "Sizga zudlik bilan yordam kerak!", "description": "Brendingingizda bir nechta jiddiy kamchiliklar bor. Bu o'sish uchun ajoyib imkoniyat! Biz ushbu zaif tomonlarni kuchli tomonlarga aylantirishga yordam beramiz." },
+        "good": { "title": "To'g'ri yo'ldasiz!", "description": "Sizda yaxshi asos bor, lekin natijani yanada yaxshilash va kuchaytirish mumkin bo'lgan bir nechta jihatlar mavjud. Keling, buni qanday amalga oshirishni muhokama qilamiz." },
+        "perfect": { "title": "A'lo darajada! Brendingiz sog'lom!", "description": "Tabriklaymiz! Sizda mustahkam poydevor bor. Endi keyingi qadam — qanday qilib kengayish va bozor yetakchisiga aylanish haqida o'ylash vaqti. Bizda siz uchun g'oyalar bor." }
       }
     }
   },
   "faq": {
     "title": "Ko'p beriladigan savollar",
-    "subtitle": "Brending jarayoni, narxlar va boshqa mavzulardagi savollarga javoblar.",
+    "subtitle": "Brending jarayoni, narxlar va boshqa mavzulardagi eng ko'p beriladigan savollarga javoblar.",
     "faqItems": [
-      { "question": "Nega narxlar qat'iy belgilangan emas?", "answer": "Har bir loyiha unikal. Narx loyihaning murakkabligi va vazifangizdan kelib chiqib hisoblanadi." },
-      { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya." },
-      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz." }
+      { "question": "Nega narxlar qat'iy belgilangan emas?", "answer": "Har bir loyiha unikal. Narx loyihaning murakkabligi, ish hajmi va sizning vazifangizdan kelib chiqib individual hisoblanadi. Biz sizning brendingiz uchun optimal yechimni taklif qilamiz." },
+      { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishiladi va siz jarayonni to'liq nazorat qilasiz." },
+      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz. Bu sizning biznesingiz uchun uzoq muddatli qiymat yaratadi." },
+      { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng. Shuningdek, sizga qulay bo'lishi uchun individual shartlarni ham muhokama qilishimiz mumkin." },
+      { "question": "Ish qancha vaqt davom etadi?", "answer": "Muddatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend strategiyasi — 8 haftadan boshlanadi. Yakuniy muddat loyiha tasdiqlangandan so'ng belgilanadi." },
+      { "question": "Loyiha tugagandan keyin yordam berasizlarmi?", "answer": "Ha, loyiha yakunlanganidan keyin 1 oy davomida biz bepul maslahatlar beramiz va brend materiallaridan to'g'ri foydalanish bo'yicha yordam ko'rsatamiz." }
     ],
     "ctaTitle": "Shubhalarga o'rin qoldirmang!",
-    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz.",
-    "ctaButton": "Boshlashga tayyorman!"
+    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yangi bosqichga olib chiqamiz.",
+    "ctaButton": "Barcha savollarga javob oldim, boshlashga tayyorman!"
   },
   "contactModal": {
     "stepTitles": {
@@ -250,7 +254,7 @@
       "budget": "Byudjetni tanlang.",
       "location": "Joylashuvingizni tanlang.",
       "meetingPlace": "Uchrashuv joyini tanlang.",
-      "privacyPolicy": "Rozilik berishingiz shart."
+      "privacyPolicy": "Maxfiylik siyosatiga rozilik berishingiz shart."
     },
     "successToast": {
       "title": "Muvaffaqiyatli!",
@@ -296,7 +300,7 @@
         "more_services": "Qo'shimcha xizmatlar va shartlar"
       },
       "your_package": "Sizning paketingiz",
-      "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi.",
+      "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
       "empty_package_desc": "Xizmatlarni tanlang yoki ommabop taklifimizdan boshlang.",
       "base_price_label": "Boshlang'ich narx",
       "final_price": "Yakuniy narx:",
