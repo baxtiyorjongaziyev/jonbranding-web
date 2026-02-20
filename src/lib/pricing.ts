@@ -151,7 +151,7 @@ export function formatPrice(priceInUSD: number, lang: 'uz' | 'ru' | 'en' | 'zh' 
 export type SelectedServices = { [key: string]: boolean; };
 
 export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any => {
-    const { selectedServices, discountType = 'none', isRamadan } = selections;
+    const { selectedServices, discountType = 'none', promoCode = '' } = selections;
     const sd = getServiceDetails(lang as any);
     let basePrice = 0;
     let mainServicesCount = 0;
@@ -167,19 +167,20 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     const discountsApplied = [];
     let finalPrice = basePrice;
 
-    // 1. Ramadan Discount (-50%) - Stackable or special toggle
-    if (isRamadan) {
+    // RAMAZON Promo Logic (-50%)
+    const isRamadanPromo = promoCode.toUpperCase() === 'RAMAZON';
+
+    if (isRamadanPromo) {
         const val = finalPrice * 0.50;
         discountsApplied.push({ name: 'Ramazon tuhfasi (-50%)', value: val });
         finalPrice -= val;
     } else {
-        // Normal Discount Tiers
+        // Standard Discounts (only if no Ramadan promo)
         if (discountType === 'package' && mainServicesCount >= 2) {
             const val = finalPrice * 0.20;
             discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: val });
             finalPrice -= val;
         } else if (discountType === 'full') {
-            // Full Upfront Payment: 20% (package) + 10% (upfront) = ~28% cumulative
             if (mainServicesCount >= 2) {
                 const packageVal = finalPrice * 0.20;
                 discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: packageVal });
@@ -196,7 +197,13 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
         }
     }
 
-    return { base: basePrice, final: finalPrice, discountApplied: discountsApplied, savings: basePrice - finalPrice };
+    return { 
+        base: basePrice, 
+        final: finalPrice, 
+        discountApplied: discountsApplied, 
+        savings: basePrice - finalPrice,
+        isPromoApplied: isRamadanPromo
+    };
 }
 
 export const generateSummary = (selections: any, lang: string = 'uz'): string => {
