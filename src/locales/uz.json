@@ -404,5 +404,115 @@
       "patent_calculator": "Patent Kalkulyatori",
       "marketplace_cover": "Sotuvchi kartochka"
     }
+  },
+  "brandbookPage": {
+    "metadata": {
+      "title": "Brendbuk ishlab chiqish | Jon.Branding agentligi",
+      "description": "Brendbuk — brendingiz Konstitutsiyasi. Biz brend yaxlitligini ta'minlovchi va marketing xarajatlarini tejovchi brendbuklar yaratamiz.",
+      "keywords": "brendbuk, gaydlayn, firma uslubi, brend dizayn, logotip qoidalari, brending agentligi"
+    },
+    "title": "Brendbuk ishlab chiqish",
+    "subtitle": "Brendbuk — shunchaki logotipli hujjat emas, u brendingizning izchilligi va yaxlitligini ta'minlovchi Konstitutsiyadir.",
+    "section1_title": "Nega har bir biznesga brendbuk kerak?",
+    "section1_p1": "Brendbuk — brendni boshqarish uchun asosiy vosita. U kompaniyangizning vizual va g'oyaviy elementlaridan foydalanishning barcha qoidalarini — logotip va ranglardan tortib, muloqot ohangigacha aniq belgilab beradi.",
+    "section1_p2": "Ushbu hujjat marketingda xaosning oldini olishga yordam beradi, brend taniluvchanligini ta'minlaydi hamda dizaynerlar va sotuvchilar bilan ishlashda vaqt va pulni tejaydi.",
+    "values_title": "Brendbuk quyidagi muammolarni hal qiladi:",
+    "values": [
+      { "title": "Izchillik va Taniluvchanlik", "description": "Brendingiz barcha platformalarda — vizitkadan tortib veb-saytgacha bir xil va professional ko'rinishini kafolatlaydi." },
+      { "title": "Resurslarni Tejash", "description": "Har bir yangi xodim yoki pudratchiga dizayn qoidalarini tushuntirish zaruratini yo'qotib, ish jarayonini tezlashtiradi." },
+      { "title": "Brend Himoyasi", "description": "Aydentikangizni noto'g'ri foydalanishdan himoya qilib, brend yaxlitligi va qadrini saqlab qoladi." }
+    ],
+    "process_title": "Brendbuk nimalarni o'z ichiga oladi?",
+    "process_subtitle": "Bizning brendbuklarimiz brendni samarali boshqarish uchun barcha zarur bo'limlarni o'z ichiga oladi:",
+    "process_steps": [
+      { "title": "Brend Platformasi", "description": "Missiya, qadriyatlar, brend xarakteri va maqsadli auditoriya." },
+      { "title": "Logotip va Aydentika", "description": "Logotip, firma ranglari va shriftlardan foydalanish qoidalari." },
+      { "title": "Vizual Uslub", "description": "Fotosuratlar, illustratsiyalar va grafik elementlardan foydalanish qoidalari." },
+      { "title": "Amaliy Qo'llanilishi", "description": "Real tashuvchilar (vizitka, taqdimot, ijtimoiy tarmoqlar) dizayni namunalari." }
+    ],
+    "cta_title": "Brendingizda tartib o'rnatishga tayyormisiz?",
+    "cta_description": "Professional brendbuk — biznesingizning barqaror kelajagi uchun sarmoyadir. Keling, sizning ishonchli yordamchingizga aylanadigan hujjatni yaratamiz.",
+    "cta_button": "Brendbuk Buyurtma Qilish"
+  },
+  "brandStrategyPage": {
+    "metadata": {
+      "title": "Brend Strategiyasi va Platformasi | Toshkentdagi Brending Agentligi",
+      "description": "Brend strategiyasi — biznes o'sish vositasi. Brendingizni shunchaki chiroylilikdan ishlaydigan tizimga aylantiring. Biz brend platformalari va strategiyalarini ishlab chiqamiz."
+    },
+    "title": "Brend Strategiyasi",
+    "subtitle": "Kuchli brend — ilhomlantiradigan, birlashtiradigan va biznes o'sishiga yordam beradigan aniq g'oyadir.",
+    "section1_title": "Brend strategiyasi — biznes o'sish vositasi",
+    "section1_p1": "Har bir ambitsiyali kompaniyaning o'z maqsadlari bor. Ba'zilar uchun bu ma'lum bozor ulushini egallash, boshqalar uchun - brend taniluvchanligi, yangi hududlarga kengayish va hokazo.",
+    "section1_p2": "Brend strategiyasi kompaniyaga ushbu maqsadlarga erishishda yordam beradigan, unga shunchaki mahsulot yoki xizmatdan ko'ra ko'proq narsa bo'lishiga yordam beradigan narsa — uning mijozlari va xaridorlari hayotining bir qismi, taniladigan obraz tashuvchisi.",
+    "section1_p3": "Eng muhimi, u marketing xarajatlarini tizimlashtirishga, kompaniya pozitsiyasini qo'llab-quvvatlamaydigan va shuning uchun xarajatlarni oqlamaydigan vositalar, kanallar va g'oyalardan voz kechishga imkon beradi.",
+    "section2_title": "Brend strategiyasi har qanday biznes uchun zarur",
+    "section2_p1": "Brend strategiyasi ham yangi, ham uzoq vaqtdan beri mavjud kompaniyalar uchun zarur.",
+    "section2_p2_bold": "Startaplar uchun,",
+    "section2_p2_text": "u boshidanoq o'z missiyasi, qadriyatlari va identifikatsiyasini aniqlashga, bozorda to'g'ri pozitsiyani egallashga va mijozlarni jalb qilishga yordam beradi.",
+    "section2_p3_bold": "Yirik kompaniyalar uchun,",
+    "section2_p3_text": "strategiya — o'sish va obro'-e'tiborni boshqarish vositasi. Bunda u dolzarblikni saqlab qolish, o'zgarishlarga moslashish va auditoriya bilan mustahkam aloqalar o'rnatishga yordam beradi.",
+    "section2_p4": "Biznes hajmidan qat'i nazar, brend strategiyasi asosiy savolga javob beradi: nega mijoz aynan sizni tanlashi kerak?",
+    "process_title": "Brending — bu jarayon",
+    "process_subtitle": "Agentligimizda brending shunchaki logotip yaratishdan ko'proq narsa ekanligiga aminmiz. Brending bir martalik vazifa emas, balki siklik jarayon. Har bir bosqich o'zining asosiy rolini o'ynaydi va ulardan birini o'tkazib yuborish brendni va uning bozordagi pozitsiyasini zaiflashtirishi mumkin. Ammo hamma narsa to'g'ri va izchil bajarilsa, brending biznes o'sishiga yordam beradi va ko'plab jarayonlarni — mahsulot ishlab chiqarishdan marketinggacha boshqarishni osonlashtiradi.",
+    "process_steps": [
+      { "title": "Tahlil va tadqiqot", "description": "Bu bozor, raqobatchilar va auditoriya haqida ma'lumotlar to'planadigan birinchi va eng muhim bosqich. Busiz brendingning o'ziga xosligini aniqlash va maqsadli auditoriyangizni tushunish mumkin emas." },
+      { "title": "Brend platformasini shakllantirish", "description": "Bu yerda missiya, qadriyatlar va brendning noyob taklifi tug'iladi — bu uning xarakteri va ovozini belgilaydigan poydevor. Aniq platformasiz barcha keyingi harakatlar tarqoq va ishonchsiz bo'lish xavfini tug'diradi." },
+      { "title": "Strategiya ishlab chiqish", "description": "Strategiya brend auditoriya bilan qanday muloqot qilishi va qaysi kanallar orqali aloqa o'rnatishi haqidagi savolga javob beradi. Bu kommunikatsiyani tizimlashtiradi, uni maqsadli va samarali qiladi." },
+      { "title": "Vizual identifikatsiya", "description": "Brend ma'nolarini vizual tilga — logotip, ranglar, shriftlar va grafik elementlarga o'tkazish. Bu brendni taniladigan va raqobatchilardan farqli qiladi." },
+      { "title": "Amalga oshirish va integratsiya", "description": "Brend yaratish - bu faqat boshlanishi. Uni kompaniyaga va aloqa nuqtalariga to'g'ri integratsiya qilish muhim, shunda u korporativ madaniyat va mijozlar bilan muloqotning bir qismiga aylanadi." }
+    ]
+  },
+  "corporateStylePage": {
+    "metadata": {
+      "title": "Firma Uslubi va Brendbuk | Toshkentdagi Brending Agentligi",
+      "description": "Biz shunchaki chiroyli rasmlar yaratmaymiz, brendingiz uchun ishlaydigan va natija keltiradigan tizimli vizual uslubni (firma uslubi, brendbuk) ishlab chiqamiz. Logotip, ranglar, shriftlar va boshqa elementlar orqali brendingizni taniladigan va esda qolarli qiling."
+    },
+    "title": "Firma Uslubini Ishlab Chiqish",
+    "subtitle": "Brendning asosiy elementlaridan biri — uning vizual komponenti. Aynan u g'oyalar, ma'nolar va qadriyatlarni ko'rish, his qilish va eslab qolish mumkin bo'lgan obrazlarga aylantiradi.",
+    "section1_title": "Brendni qabul qilish rasm bilan boshlanadi",
+    "section1_p1": "Zamonaviy dunyoda vizual ma'lumot matn yoki so'zlarga qaraganda tezroq qabul qilinadi va o'zlashtiriladi. Biz lahzali taassurotlar davrida yashayapmiz: odamlarga brend haqida taassurot shakllantirish uchun soniyaning bir qismi kerak bo'ladi va ko'pincha bu uning vizual obrazi orqali sodir bo'ladi.",
+    "section1_p2": "G'oya auditoriya ongida o'rnashishi uchun u haqida shunchaki gapirish kifoya emas — uni vizual elementlar bilan mustahkamlash muhimdir. Yaxshi ishlangan firma uslubi ortiqcha tushuntirishlarsiz brend qadriyatlarini namoyish etishga, darhol kerakli hissiyotlar va assotsiatsiyalarni uyg'otishga imkon beradi.",
+    "section2_title": "Firma uslubi — bu tizim",
+    "section2_p1": "Bu nafaqat go'zallik haqida, balki samaradorlik, ma'nolar va nazorat haqida. Brend ko'p qirrali va shu bilan birga o'z vizual obrazini rivojlantirishda izchil bo'lishi uchun grafik elementlar to'plamini yaratish kerak.",
+    "section2_p2": "Bunday to'plam har doim biznes vazifalari va imkoniyatlaridan kelib chiqib individual tanlanadi. Minimal to'plamga logotip, ranglar, shriftlar, foto-uslub, reklama tashuvchilari uslubi va yaxlit obrazni shakllantiruvchi boshqa elementlar kiradi.",
+    "section2_p3": "Vizual uslub aniq va izchil qurilsa, u brend obrazi va uning kommunikatsiyalarini boshqarish uchun kuchli vositaga aylanadi. Agar uning barcha elementlari muvofiqlashtirilgan bo'lsa, brend professional, ishonchli va taniladigan deb qabul qilinadi.",
+    "process_title": "Firma uslubini qanday yaratamiz?",
+    "process_subtitle": "Biz firma uslubini ishlab chiqishga tizimli yondashamiz, shunda har bir detal brend taniluvchanligi va uning strategiyasi uchun xizmat qiladi.",
+    "process_steps": [
+      { "title": "Tadqiqot va konsepsiya", "description": "Auditoriya, bozor, raqobatchilar va brend o'rnini tahlil qilamiz. Vizual uslubda aks etishi kerak bo'lgan asosiy ma'nolar va g'oyalarni aniqlaymiz." },
+      { "title": "Vizual kodni ishlab chiqish", "description": "Logotip, firma ranglari, tipografika, grafika, ikonika, tartib tamoyillari — yaxlit brend obrazini tashkil etuvchi barcha narsalarni yaratamiz." },
+      { "title": "Firma uslubi tizimi", "description": "Barcha formatlarda — qadoqdan tortib raqamli muhitgacha vizual obraz izchilligini saqlashga yordam beradigan moslashuvchan elementlarni ishlab chiqamiz." },
+      { "title": "Yakunlash va gaydlayn", "description": "Uslubdan foydalanish qoidalari bilan gaydlayn (brendbuk) yaratamiz, shunda brend har qanday tashuvchida yagona obrazni saqlab qoladi." }
+    ],
+    "cta_title": "Firma uslubi — o'sish vositasi",
+    "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi, uzoqroq esda qoladi va ko'proq ishonch uyg'otadi. Biz shunchaki vizual uslub emas, balki brendning o'sishiga, izchil va boshqariladigan bo'lishiga yordam beradigan vosita yaratamiz."
+  },
+  "logoDesignPage": {
+    "metadata": {
+      "title": "Professional Logotip Dizayni Xizmatlari | Jon.Branding Agentligi O'zbekiston",
+      "description": "Logotip — biznesingiz yuzi. O'zbekistondagi logotip dizayn agentligimiz biznesingiz mohiyatini aks ettiruvchi va raqobatchilardan ajralib turishga yordam beradigan noyob, esda qolarli va strategik logotiplar yaratadi."
+    },
+    "title": "Logotip Dizayni",
+    "subtitle": "Logotip shunchaki rasm emas; u strategik vosita, biznesingiz yuzi va siz qoldiradigan birinchi taassurotdir.",
+    "section1_title": "Nega logotip juda muhim?",
+    "section1_p1": "Bugungi raqobatbardosh bozorda logotip mijoz ko'ziga tushadigan birinchi narsa. Yaxshi logotip nafaqat chiroyli dizayn, balki biznesingiz qadriyatlari, professionalligi va noyobligini yetkazuvchi ramzdir.",
+    "section1_p2": "Bu mijozlar sizni tanib olishlari va eslab qolishlariga yordam beradigan asosiy element. Professional logotip ishonch uyg'otadi va hissiy aloqa o'rnatadi, bir martalik xaridorlarni sodiq muxlislarga aylantiradi.",
+    "values_title": "Yaxshi logotip shunday bo'lishi kerak:",
+    "values": [
+      { "title": "Sodda va esda qolarli", "description": "Eng yaxshi logotiplar kichik o'lchamda yoki uzoq masofada ham osongina taniladi va esda qoladi." },
+      { "title": "Noyob va abadiy", "description": "U sizni raqobatchilardan ajratib turishi va bir necha yildan keyin modadan qolmasligi kerak." },
+      { "title": "Strategik va mazmunli", "description": "Har bir chiziq, rang va shakl biznesingiz xarakteri va maqsadlarini aks ettirishi kerak." }
+    ],
+    "process_title": "Logotipni qanday yaratamiz?",
+    "process_subtitle": "Bizning logotip yaratish jarayonimiz shunchaki o'tkinchi ilhomga emas, balki chuqur tahlil va strategik fikrlashga asoslangan.",
+    "process_steps": [
+      { "title": "Brifing va tadqiqot", "description": "Biznesingiz, maqsadlaringiz, maqsadli auditoriyangiz va raqobatchilaringizni diqqat bilan o'rganamiz." },
+      { "title": "Konsepsiyani ishlab chiqish", "description": "Brend strategiyangiz va xarakteringizni aks ettiruvchi bir nechta vizual konsepsiyalarni ishlab chiqamiz." },
+      { "title": "Dizayn va taqdimot", "description": "Tanlangan konsepsiyani takomillashtiramiz, uni real misollarda (mokaplarda) ko'rsatamiz va uning ortidagi mantiqni tushuntiramiz." },
+      { "title": "Yakunlash va topshirish", "description": "Har qanday kontekstda foydalanish uchun barcha zarur fayl formatlarini (vektor, rastr) tayyorlaymiz va ulardan foydalanish bo'yicha mini-qo'llanma taqdim etamiz." }
+    ],
+    "cta_title": "Ishlaydigan logotip yaratishga tayyormisiz?",
+    "cta_description": "Shablonli logotip bilan cheklanib qolmang. Keling, biznesingiz uchun muvaffaqiyatingiz poydevoriga aylanadigan noyob va kuchli ramz yaratamiz.",
+    "cta_button": "Bepul konsultatsiya olish"
   }
 }
