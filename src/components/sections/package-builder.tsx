@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -10,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap, Gift } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap, Gift, Moon } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 interface PackageBuilderProps {
@@ -170,6 +169,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         namingPremium: true, logoPremium: true
     });
     const [wantsUpfrontPayment, setWantsUpfrontPayment] = useLocalStorage<boolean>('wantsUpfrontPayment', false);
+    const [isRamadan, setIsRamadan] = useLocalStorage<boolean>('isRamadan', true);
     const [promoCode, setPromoCode] = useState('');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
@@ -179,7 +179,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     const translations = dictionary.servicesPage.packageBuilder;
     const serviceDetails = getServiceDetails(lang as any);
-    const total = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, promoCode }, lang as any);
+    const total = calculatePackagePrice({ selectedServices, wantsUpfrontPayment, promoCode, isRamadan }, lang as any);
 
     const handleServiceToggle = (id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
@@ -297,6 +297,31 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                 </div>
                                 <div className="space-y-6">
+                                    {/* Ramadan Discount Switch */}
+                                    <div 
+                                        className={cn(
+                                            "flex items-center gap-5 p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border-2",
+                                            isRamadan ? "bg-emerald-50 border-emerald-500 shadow-lg scale-[1.02]" : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-md"
+                                        )}
+                                        onClick={() => setIsRamadan(!isRamadan)}
+                                    >
+                                        <div className={cn(
+                                            "w-14 h-7 rounded-full relative transition-all duration-500 p-1",
+                                            isRamadan ? "bg-emerald-500" : "bg-slate-200"
+                                        )}>
+                                            <div className={cn(
+                                                "w-5 h-5 rounded-full bg-white transition-all duration-500 shadow-md flex items-center justify-center",
+                                                isRamadan ? "translate-x-7" : "translate-x-0"
+                                            )}>
+                                                {isRamadan && <Moon className="w-3 h-3 text-emerald-600" />}
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-xs font-black text-emerald-900 uppercase tracking-widest">{translations.ramadan_discount_label}</span>
+                                            <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-tight">{translations.ramadan_discount_desc}</span>
+                                        </div>
+                                    </div>
+
                                     <div 
                                         className={cn(
                                             "flex items-center gap-5 p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border-2",
