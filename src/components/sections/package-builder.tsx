@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
 import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap, Gift, Moon } from 'lucide-react';
@@ -170,7 +171,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         namingPremium: true, logoPremium: true
     });
     const [discountType, setDiscountType] = useLocalStorage<'none' | 'package' | 'full'>('discountOption', 'none');
-    const [isRamadan, setIsRamadan] = useLocalStorage<boolean>('isRamadan', true);
+    const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
 
@@ -179,7 +180,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     const translations = dictionary.servicesPage.packageBuilder;
     const serviceDetails = getServiceDetails(lang as any);
-    const total = calculatePackagePrice({ selectedServices, discountType, isRamadan }, lang as any);
+    const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any);
 
     const handleServiceToggle = (id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
@@ -193,18 +194,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         });
     };
 
-    const handleRamadanToggle = () => {
-        const newValue = !isRamadan;
-        setIsRamadan(newValue);
-        if (newValue) {
-            setDiscountType('none'); // Disable standard discounts if Ramadan is on
-        }
-    };
-
     const discountOptions = [
-        { value: 'none', label: 'Chegirmasiz' },
-        { value: 'package', label: 'Paketli 20%' },
-        { value: 'full', label: '+10% Upfront' }
+        { value: 'none', label: translations.discountSelector.none },
+        { value: 'package', label: translations.discountSelector.package },
+        { value: 'full', label: translations.discountSelector.full }
     ];
 
     return (
@@ -311,31 +304,27 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                 </div>
                                 <div className="space-y-6">
-                                    <div 
-                                        className={cn(
-                                            "flex items-center gap-5 p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border-2",
-                                            isRamadan ? "bg-emerald-50 border-emerald-500 shadow-lg scale-[1.02]" : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-md"
+                                    <div className="space-y-3">
+                                        <Label className="text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">Promokod</Label>
+                                        <div className="relative">
+                                            <Input 
+                                                value={promoCode}
+                                                onChange={(e) => setPromoCode(e.target.value)}
+                                                placeholder={translations.promo_code_placeholder}
+                                                className="rounded-full py-6 px-6 border-slate-200 focus:ring-primary h-14 text-base font-bold uppercase tracking-widest bg-white"
+                                            />
+                                            {total.isPromoApplied && (
+                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500 animate-fade-in">
+                                                    <CheckCircle className="w-6 h-6" />
+                                                </div>
+                                            )}
+                                        </div>
+                                        {promoCode && !total.isPromoApplied && (
+                                            <p className="text-[10px] text-red-400 font-bold ml-4 uppercase tracking-tighter">{translations.promo_code_invalid}</p>
                                         )}
-                                        onClick={handleRamadanToggle}
-                                    >
-                                        <div className={cn(
-                                            "w-14 h-7 rounded-full relative transition-all duration-500 p-1",
-                                            isRamadan ? "bg-emerald-500" : "bg-slate-200"
-                                        )}>
-                                            <div className={cn(
-                                                "w-5 h-5 rounded-full bg-white transition-all duration-500 shadow-md flex items-center justify-center",
-                                                isRamadan ? "translate-x-7" : "translate-x-0"
-                                            )}>
-                                                {isRamadan && <Moon className="w-3 h-3 text-emerald-600" />}
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-xs font-black text-emerald-900 uppercase tracking-widest">{translations.ramadan_discount_label}</span>
-                                            <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-tight">{translations.ramadan_discount_desc}</span>
-                                        </div>
                                     </div>
 
-                                    {!isRamadan && (
+                                    {!total.isPromoApplied && (
                                         <div className="space-y-3">
                                             <Label className="text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">Chegirmalar</Label>
                                             <DynamicToggle 
