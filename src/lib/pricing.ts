@@ -31,8 +31,8 @@ const uzServiceDetails = {
         label: "Logo Auditi",
         description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.",
         price: basePricesUSD.audit,
-        features: ["Logotipning kuchli va zaif tomonlari tahlili", "Raqobatchilarga nisbatan tahlil", "Yaxshilash bo'yicha tavsiyalar"],
-        results: ["Xatoliklar ro'yxati", "Yaxshilash rejasi"],
+        features: ["Kuchli va zaif tomonlar tahlili", "Raqobatchilar bilan solishtirish", "Yaxshilash rejasini tuzish"],
+        results: ["Xatoliklar ro'yxati", "Yaxshilash strategiyasi"],
         timeline: "2-3 ish kuni",
         note: "Faqat mavjud logo uchun."
     },
@@ -40,16 +40,15 @@ const uzServiceDetails = {
         label: "Neyming Tekshiruvi",
         description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.",
         price: basePricesUSD.namingCheck,
-        features: ["O'zbekiston bazasi (IMA)", "Xalqaro WIPO bazasi", "Domen va ijtimoiy tarmoqlar"],
+        features: ["IMA bazasi (O'zbekiston)", "WIPO bazasi (Xalqaro)", "Domen va ijtimoiy tarmoqlar"],
         results: ["Huquqiy tozalik hisoboti", "Xatarlar tahlili"],
-        timeline: "1-2 ish kuni",
-        note: "Bitta nom uchun."
+        timeline: "1-2 ish kuni"
     },
     consultation: {
         label: "30 daqiqalik konsultatsiya",
         description: "Brending bo'yicha Baxtiyorjon Gaziyevdan professional maslahat.",
         price: basePricesUSD.consultation,
-        features: ["Muammoni aniqlashtirish", "Savollarga javoblar", "Strategik tavsiyalar"],
+        features: ["Muammoni aniqlashtirish", "Strategik tavsiyalar", "Savollarga javoblar"],
         results: ["Aniq harakatlar rejasi"],
         timeline: "Kelishilgan vaqtda",
         note: "Onlayn formatda."
@@ -58,16 +57,15 @@ const uzServiceDetails = {
         label: "Brend-strategiya va platforma",
         description: "Biznesingiz uchun natija keltiradigan poydevor.",
         price: basePricesUSD.strategy,
-        features: ["Bozor tahlili", "Maqsadli auditoriya xaritasi", "Brend platformasi", "Pozitsiyalash", "RTB (Ishonch sabablari)"],
+        features: ["Bozor tahlili", "Pozitsiyalash", "Brend platformasi", "Tone of Voice"],
         results: ["Brend platformasi hujjati", "Pozitsiyalash strategiyasi"],
-        timeline: "20-30 ish kuni",
-        note: "Katta loyihalar uchun tavsiya etiladi."
+        timeline: "20-30 ish kuni"
     },
     commStrategy: {
         label: "Kommunikatsion strategiya",
         description: "Mijozlar bilan muloqot strategiyasi va Tone of Voice.",
         price: basePricesUSD.commStrategy,
-        features: ["Brend ovozi (Tone of Voice)", "Asosiy xabarlar", "Kanallarni rejalashtirish", "Content-pillerlar"],
+        features: ["Asosiy xabarlar", "Kanallarni rejalashtirish", "Content-pillerlar"],
         results: ["Muloqot qo'llanmasi"],
         timeline: "15-20 ish kuni"
     },
@@ -75,72 +73,41 @@ const uzServiceDetails = {
         label: "👑 Naming VIP",
         description: "Katta va xalqaro bozorga mo'ljallangan strategik neyming.",
         price: basePricesUSD.namingVIP,
-        features: [
-            "Baxtiyorjon Gaziyev shaxsiy nazorati",
-            "10+ eksklyuziv nom variantlari",
-            "6 tilda fonetik va semantik tahlil",
-            "3 tagacha klass bo'yicha patent tekshiruvi",
-            "Domen va TG-nik tanlash"
-        ],
-        results: ["Xalqaro darajadagi kuchli nom", "Maksimal huquqiy xotirjamlik", "100% to'lov qaytarish kafolati"],
-        recommended: false,
-        timeline: "20–25 ish kuni",
-        note: "Global bozorga chiqayotganlar uchun."
+        features: ["Baxtiyorjon Gaziyev nazorati", "10+ eksklyuziv nomlar", "6 tilda tahlil", "Patent tekshiruvi"],
+        results: ["Xalqaro darajadagi nom", "100% to'lov qaytarish kafolati"],
+        timeline: "20–25 ish kuni"
     },
     namingPremium: {
         label: "Naming PREMIUM",
         description: "O'rta va rivojlanayotgan biznes uchun eng maqbul tanlov.",
         price: basePricesUSD.namingPremium,
-        features: [
-            "5 ta strategik nom variantlari",
-            "Bir nechta tilda tahlil",
-            "2 ta klass bo'yicha patent tekshiruvi",
-            "Slogan (shior) yaratish"
-        ],
-        results: ["Biznes maqsadga mos nom", "Huquqiy toza brend", "100% to'lov qaytarish kafolati"],
+        features: ["5 ta strategik nom", "Bir nechta tilda tahlil", "2 ta klass bo'yicha patent tekshiruvi"],
+        results: ["Biznes maqsadga mos nom", "100% to'lov qaytarish kafolati"],
         recommended: true,
-        timeline: "14–20 ish kuni",
-        note: "Eng mashhur tarifimiz."
+        timeline: "14–20 ish kuni"
     },
     namingStandard: {
         label: "Naming STANDARD",
         description: "Kichik biznes va startaplar uchun tezkor yechim.",
         price: basePricesUSD.namingStandard,
-        features: [
-            "3 ta jarangli nom variantlari",
-            ".uz domen bo'shligi tekshiruvi",
-            "Bitta klass bo'yicha patent tekshiruvi"
-        ],
+        features: ["3 ta jarangli nom", ".uz domen tekshiruvi", "Bitta klass bo'yicha patent tekshiruvi"],
         results: ["Tez start uchun nom", "Eslab qolish oson"],
-        recommended: false,
         timeline: "7–10 ish kuni"
     },
     logoVIP: {
         label: "👑 VIP — Logo + Stil + Brandbook",
         description: "Katta va o'sishga yo'naltirilgan bizneslar uchun to'liq upakovka.",
         price: basePricesUSD.logoVIP,
-        features: [
-            "Baxtiyorjon Gaziyev ishtiroki va nazorati",
-            "Brend strategiyasi asosida 8+ logotip konsepsiyasi",
-            "25+ touchpoint dizayn",
-            "To'liq Vizual Brandbook (50+ bet)",
-            "Logotip animatsiyasi"
-        ],
-        results: ["Mustahkam vizual tizim", "Aniq marketing qo'llanmasi", "100% to'lov qaytarish kafolati"],
-        recommended: false,
+        features: ["Baxtiyorjon Gaziyev nazorati", "8+ logotip konsepsiyasi", "25+ touchpoint dizayn", "To'liq Brandbook"],
+        results: ["Mustahkam vizual tizim", "100% to'lov qaytarish kafolati"],
         timeline: "20–30 ish kuni"
     },
     logoPremium: {
         label: "Logo + Firma uslubi PREMIUM",
         description: "Brendini jiddiy rivojlantirayotganlar uchun vizual tizim.",
         price: basePricesUSD.logoPremium,
-        features: [
-            "5 ta strategik logotip konsepsiyasi",
-            "Firma uslubi (ranglar, shriftlar, patternlar)",
-            "15+ touchpoint vizualizatsiyasi",
-            "Gaydlayn (qo'llanma)"
-        ],
-        results: ["Yaxlit vizual obraz", "Marketingda tartib", "100% to'lov qaytarish kafolati"],
+        features: ["5 ta logotip konsepsiyasi", "Firma uslubi (ranglar, shriftlar)", "15+ touchpoint dizayn"],
+        results: ["Yaxlit vizual obraz", "100% to'lov qaytarish kafolati"],
         recommended: true,
         timeline: "14–20 ish kuni"
     },
@@ -148,20 +115,15 @@ const uzServiceDetails = {
         label: "Logotip STANDARD",
         description: "Startaplar uchun sifatli va tezkor logotip.",
         price: basePricesUSD.logoStandard,
-        features: [
-            "3 ta logotip konsepsiyasi",
-            "5 ta asosiy touchpoint vizualizatsiyasi",
-            "Ranglar va shriftlar kodi"
-        ],
+        features: ["3 ta logotip konsepsiyasi", "5 ta asosiy touchpoint", "Ranglar kodi"],
         results: ["Tayyor logotip", "Raqobatchilardan ajralib turish"],
-        recommended: false,
         timeline: "7–10 ish kuni"
     },
     packaging: {
         label: "Qadoq dizayni",
         description: "3 SKU uchun professional qadoq ishlab chiqish.",
         price: basePricesUSD.packaging,
-        features: ["Bozor tahlili", "2 ta dizayn konsepsiyasi", "3 tagacha SKU adaptatsiyasi", "Chopga tayyor fayllar"],
+        features: ["Bozor tahlili", "2 ta dizayn konsepsiyasi", "Chopga tayyor fayllar"],
         results: ["Sotuvchi qadoq dizayni"],
         timeline: "10-15 ish kuni"
     },
@@ -169,7 +131,7 @@ const uzServiceDetails = {
         label: "Ijtimoiy tarmoqlar uchun stil",
         description: "Postlar va storislarni brendingda bezash tizimi.",
         price: basePricesUSD.smm,
-        features: ["6 ta post shabloni", "6 ta stories shabloni", "Highlight coverlar", "Profil shapkasi dizayni"],
+        features: ["6 ta post shabloni", "6 ta stories shabloni", "Highlight coverlar"],
         results: ["Tayyor dizayn shablonlari"],
         timeline: "5-7 ish kuni"
     }
@@ -222,3 +184,27 @@ export const generateSummary = (selections: any, lang: string = 'uz'): string =>
     const sd = getServiceDetails(lang as any);
     return Object.entries(selectedServices).filter(([_, active]) => active).map(([key]) => sd[key as keyof typeof sd]?.label).filter(Boolean).join(', ');
 }
+
+export const comparisonData = (lang: 'uz' | 'ru' | 'en') => {
+    const t = {
+        uz: [
+            { feature: "Strategik yondashuv", competitors: { jon: true, mano: true, abba: true, mountain: false } },
+            { feature: "100% Pulni qaytarish kafolati", competitors: { jon: true, mano: false, abba: false, mountain: false } },
+            { feature: "Narx va sifat mutanosibligi", competitors: { jon: "Yuqori", mano: "Premium", abba: "Premium", mountain: "O'rta" } },
+            { feature: "Amaliy tajriba (1000+ loyiha)", competitors: { jon: true, mano: true, abba: true, mountain: true } }
+        ],
+        ru: [
+            { feature: "Стратегический подход", competitors: { jon: true, mano: true, abba: true, mountain: false } },
+            { feature: "100% Гарантия возврата", competitors: { jon: true, mano: false, abba: false, mountain: false } },
+            { feature: "Цена и качество", competitors: { jon: "Высокое", mano: "Premium", abba: "Premium", mountain: "Средне" } },
+            { feature: "Опыт (1000+ проектов)", competitors: { jon: true, mano: true, abba: true, mountain: true } }
+        ],
+        en: [
+            { feature: "Strategic approach", competitors: { jon: true, mano: true, abba: true, mountain: false } },
+            { feature: "100% Refund guarantee", competitors: { jon: true, mano: false, abba: false, mountain: false } },
+            { feature: "Value for money", competitors: { jon: "High", mano: "Premium", abba: "Premium", mountain: "Medium" } },
+            { feature: "Experience (1000+ projects)", competitors: { jon: true, mano: true, abba: true, mountain: true } }
+        ]
+    };
+    return t[lang] || t.uz;
+};
