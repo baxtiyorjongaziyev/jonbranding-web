@@ -1,11 +1,9 @@
-
 'use client';
 
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Medal, Globe, Zap, Users, Phone, Send, PlayCircle, type LucideProps, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { useState, type FC } from 'react';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
@@ -21,9 +19,20 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="lg:order-last">
-            <h2 className="text-3xl sm:text-4xl font-bold">
-              {translations.title}
-            </h2>
+            <div className="flex items-center gap-4 mb-4">
+                <h2 className="text-3xl sm:text-4xl font-bold">
+                  {translations.title}
+                </h2>
+                <a 
+                    href="https://www.linkedin.com/in/baxtiyorjongaziyev/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-full bg-white shadow-sm text-[#0077b5] hover:bg-[#0077b5] hover:text-white transition-all duration-300"
+                    title="LinkedIn Profile"
+                >
+                    <Linkedin size={20} />
+                </a>
+            </div>
             <p className="mt-4 text-lg text-gray-700">
               {translations.message}
             </p>
@@ -49,12 +58,6 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                     <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
                         <Send className="mr-2 h-5 w-5" />
                         {translations.telegramButton}
-                    </a>
-                </Button>
-                 <Button size="lg" variant="outline" className="w-full sm:w-auto" asChild>
-                    <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank">
-                        <Linkedin className="mr-2 h-5 w-5" />
-                        LinkedIn
                     </a>
                 </Button>
             </div>
