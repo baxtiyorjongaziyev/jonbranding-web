@@ -1,8 +1,8 @@
-
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import XizmatlarClient from './xizmatlar-client';
 
-const XizmatlarPage = async ({ params: { lang } }: { params: { lang: Locale } }) => {
+const XizmatlarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
+    const { lang } = await props.params;
     const dictionary = await getDictionary(lang);
 
     return (

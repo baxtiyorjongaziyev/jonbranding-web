@@ -1,4 +1,3 @@
-
 {
   "header": {
     "portfolio": "Portfolio",
@@ -316,7 +315,7 @@
       "discountSelector": {
         "none": "Chegirmasiz",
         "package": "Paketli 20%",
-        "full": "+10% (Oldindan to'lov)"
+        "full": "+10% (Prepayment)"
       },
       "empty_package_desc": "Siz hali hech qanday xizmatni tanlamadingiz. Iltimos, xizmatlardan birini tanlang.",
       "recommended": "Tavsiya etiladi",

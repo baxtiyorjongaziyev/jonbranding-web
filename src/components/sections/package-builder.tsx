@@ -64,7 +64,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <div className={cn(
                         "w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 flex-shrink-0",
                         selected 
-                            ? (isVip ? "bg-amber-400 text-blue-950" : "bg-primary text-white shadow-xl") 
+                            ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-xl") 
                             : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/30" : "bg-secondary text-slate-600")
                     )}>
                         <Icon className="w-7 h-7" />
@@ -139,7 +139,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                             "w-full py-6 text-base font-bold transition-all duration-500 rounded-full border-none",
                             selected 
                                 ? (isVip 
-                                    ? "bg-amber-400 text-blue-950 hover:bg-amber-500 shadow-[0_15px_40px_rgba(251,191,36,0.5)]" 
+                                    ? "bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-blue-950 hover:from-amber-500 hover:to-amber-700 shadow-[0_15px_40px_rgba(251,191,36,0.5)]" 
                                     : "bg-primary text-white shadow-2xl") 
                                 : (isVip 
                                     ? "bg-white/5 border border-amber-400/30 text-amber-400 hover:bg-amber-400 hover:text-blue-950" 
@@ -280,7 +280,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                     <div className="space-y-4">
                                         {total.discountApplied.map((d: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-green-700 text-[12px] font-black bg-green-50 px-6 py-4 rounded-[1.5rem] border border-green-100 animate-fade-in shadow-sm">
+                                            <div key={i} className="flex justify-between items-center text-green-700 text-[12px] font-black bg-green-50 px-6 py-4 rounded-[1.5rem] border border-green-100 animate-shine shadow-sm">
                                                 <div className="flex items-center gap-3">
                                                     <div className="bg-green-100 p-1.5 rounded-full"><Zap className="w-4 h-4" /></div>
                                                     {d.name}
