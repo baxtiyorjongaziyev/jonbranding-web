@@ -21,8 +21,8 @@ const basePricesUSD = {
     logoStandard: 780,
     packaging: 1150,
     smm: 980,
-    urgency: 0,
-    nda: 0
+    urgency: 0, // Ustama foizda hisoblanadi
+    nda: 0      // Ustama foizda hisoblanadi
 };
 
 const uzServiceDetails = {
@@ -133,6 +133,24 @@ const uzServiceDetails = {
         features: ["6 ta post shabloni", "6 ta stories shabloni", "Highlight coverlar"],
         results: ["Tayyor dizayn shablonlari"],
         timeline: "5-7 ish kuni"
+    },
+    urgency: {
+        label: "Shoshilinch loyiha (+50%)",
+        description: "Loyihani navbatdan tashqari boshlash va 2 barobar tezroq bitirib berish.",
+        price: 0,
+        features: ["Navbatdan tashqari xizmat", "24/7 jamoa ishtiroki", "Tezkor aloqa"],
+        results: ["Vaqtni tejash", "Bozorga tezroq chiqish"],
+        timeline: "Muddat 50% qisqaradi",
+        note: "Umumiy narxga +50% qo'shiladi."
+    },
+    nda: {
+        label: "NDA — Maxfiylik (+50%)",
+        description: "Loyiha tafsilotlarini sir saqlash va natijalarni portfolioga qo'shmaslik kelishuvi.",
+        price: 0,
+        features: ["Yuridik NDA shartnomasi", "Portfolioga qo'yilmaydi", "To'liq maxfiylik"],
+        results: ["Strategik sirlar himoyasi"],
+        timeline: "Loyiha davomida",
+        note: "Umumiy narxga +50% qo'shiladi."
     }
 };
 
@@ -152,34 +170,59 @@ export type SelectedServices = { [key: string]: boolean; };
 export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any => {
     const { selectedServices, discountType = 'none', promoCode = '' } = selections;
     const sd = getServiceDetails(lang as any);
+    
     let basePrice = 0;
     let mainServicesCount = 0;
     const mainKeys = ['strategy', 'commStrategy', 'namingStandard', 'namingPremium', 'namingVIP', 'logoStandard', 'logoPremium', 'logoVIP', 'packaging'];
+    const surchargeKeys = ['urgency', 'nda'];
 
+    // Bazaviy xizmatlar yig'indisi
     for (const key in selectedServices) {
-        if (selectedServices[key] && sd[key as keyof typeof sd]) {
+        if (selectedServices[key] && sd[key as keyof typeof sd] && !surchargeKeys.includes(key)) {
             basePrice += sd[key as keyof typeof sd].price;
             if (mainKeys.includes(key)) mainServicesCount++;
         }
     }
 
+    // Ustamalarni hisoblash (Surcharges)
+    const surchargesApplied = [];
+    let surchargesTotal = 0;
+
+    if (selectedServices.urgency) {
+        const val = basePrice * 0.5;
+        surchargesTotal += val;
+        surchargesApplied.push({ 
+            name: lang === 'uz' ? 'Shoshilinch loyiha (+50%)' : 'Urgent project (+50%)', 
+            value: val 
+        });
+    }
+    if (selectedServices.nda) {
+        const val = basePrice * 0.5;
+        surchargesTotal += val;
+        surchargesApplied.push({ 
+            name: lang === 'uz' ? 'NDA (Maxfiylik) (+50%)' : 'NDA (+50%)', 
+            value: val 
+        });
+    }
+
+    const totalBeforeDiscounts = basePrice + surchargesTotal;
+    let finalPrice = totalBeforeDiscounts;
     const discountsApplied = [];
-    let finalPrice = basePrice;
 
     const isRamadanPromo = promoCode?.toUpperCase() === 'RAMAZON';
 
     if (isRamadanPromo) {
-        const val = finalPrice * 0.50;
+        const val = totalBeforeDiscounts * 0.50;
         discountsApplied.push({ name: 'Ramazon tuhfasi (-50%)', value: val });
         finalPrice -= val;
     } else {
         if (discountType === 'package' && mainServicesCount >= 2) {
-            const val = finalPrice * 0.20;
+            const val = totalBeforeDiscounts * 0.20;
             discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: val });
             finalPrice -= val;
         } else if (discountType === 'full') {
             if (mainServicesCount >= 2) {
-                const packageVal = finalPrice * 0.20;
+                const packageVal = totalBeforeDiscounts * 0.20;
                 discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: packageVal });
                 finalPrice -= packageVal;
                 
@@ -187,7 +230,7 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
                 discountsApplied.push({ name: "Oldindan to'lov (-10%)", value: upfrontVal });
                 finalPrice -= upfrontVal;
             } else {
-                const upfrontVal = finalPrice * 0.10;
+                const upfrontVal = totalBeforeDiscounts * 0.10;
                 discountsApplied.push({ name: "Oldindan to'lov (-10%)", value: upfrontVal });
                 finalPrice -= upfrontVal;
             }
@@ -196,9 +239,12 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
 
     return { 
         base: basePrice, 
+        surchargesTotal,
+        totalBeforeDiscounts,
         final: finalPrice, 
         discountApplied: discountsApplied, 
-        savings: basePrice - finalPrice,
+        surchargesApplied: surchargesApplied,
+        savings: totalBeforeDiscounts - finalPrice,
         isPromoApplied: isRamadanPromo
     };
 }
@@ -206,7 +252,11 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
 export const generateSummary = (selections: any, lang: string = 'uz'): string => {
     const { selectedServices } = selections;
     const sd = getServiceDetails(lang as any);
-    return Object.entries(selectedServices).filter(([_, active]) => active).map(([key]) => sd[key as keyof typeof sd]?.label).filter(Boolean).join(', ');
+    return Object.entries(selectedServices)
+        .filter(([_, active]) => active)
+        .map(([key]) => sd[key as keyof typeof sd]?.label)
+        .filter(Boolean)
+        .join(', ');
 }
 
 export const comparisonData = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
