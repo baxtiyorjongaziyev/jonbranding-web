@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -74,8 +73,8 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
   return (
     <section id="process" className="bg-white">
         <div ref={targetRef} className="relative h-[450vh] hidden lg:block">
-            <div className="sticky top-0 flex h-screen flex-col justify-start overflow-hidden pt-40">
-                <div className="w-full mb-20 px-4">
+            <div className="sticky top-0 flex h-screen flex-col justify-start overflow-hidden pt-20">
+                <div className="w-full mb-10 px-4">
                     <div className="container mx-auto text-center">
                         <h2 className="text-5xl sm:text-6xl font-black text-dark-blue tracking-tighter">{translations.title}</h2>
                         <p className="mt-6 text-xl max-w-3xl mx-auto text-gray-500 font-medium">{translations.subtitle}</p>
