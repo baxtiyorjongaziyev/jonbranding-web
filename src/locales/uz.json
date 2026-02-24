@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -171,7 +172,7 @@
       "items": [
         { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash. Sizning mijozingiz kim? Raqobatchilardan nima bilan farq qilasiz? Asosiy xabaringiz nima? Bu savollarga javob bermaydigan logotip yoki sayt shunchaki chiroyli rasm, xolos.", "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun?' savollariga javob berishdan boshlang. Bu brendingiz uchun mustahkam poydevor yaratadi." },
         { "title": "2. Hamma uchun yoqishga harakat qilish", "description": "Hamma uchun bo'lishga harakat qilgan brend oxir-oqibat hech kim uchun bo'lmay qoladi. Aholining barcha qatlamlariga yoqishga urinish brendingiz xiralashishiga va zaiflashishiga olib keladi.", "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling. 'Ideal mijozingiz' portretini yarating va marketing harakatlaringizni aynan unga qarating." },
-        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu yo'l emas. Agar dizayningiz taniqli brendga o'xshasa, sizni har doim 'arzon muqobil' sifatida qabul qilishadi.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni toping. Boshqacha bo'lishdan qo'rqmang." },
+        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu yo'l emas. Agar dizayningiz taniqli brendga o'xshasa, sizni har doim 'arzon muqobil' sifatida qabul qilishadi.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni find qiling. Boshqacha bo'lishdan qo'rqmang." },
         { "title": "4. Nomuvofiqlik (Inconsistency)", "description": "Saytdagi logotipingiz bir xil uslubda, Instagramda boshqacha, qadoqda esa butunlay boshqa ko'rinishda. Bu vizual xaos ishonchni so'ndiradi va brendning tanilishiga to'sqinlik qiladi.", "solution": "Yechim: Logotip, ranglar, shriftlardan foydalanish qoidalari yozilgan 'brandbook' (gaydlayn) yarating. Uni hamma joyda bir xilda ishlating." },
         { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt favikoni yoki ijtimoiy tarmoq avatarida) yomon ko'rinadi.", "solution": "Yechim: Soddalik va minimalizmga intiling. Eng yaxshi logotiplar — xotiradan osongina chizish mumkin bo'lgan logotiplardir." },
         { "title": "6. Talaffuz qilish qiyin yoki eslab qolish qiyin nom", "description": "Agar mijozlaringiz nomingizni ayta olmasalar yoki uni qidiruvga to'g'ri yoza olmasalar, ular sizni topa olmaydilar va boshqalarga tavsiya qila olmaydilar.", "solution": "Yechim: Oddiy, jarangli va huquqiy jihatdan toza (tovar belgisi band bo'lmagan) nom tanlang." },
@@ -551,80 +552,5 @@
       { "title": "Ma'no va assotsiatsiyalar", "description": "O'qilishi, jaranglashi, mumkin bo'lgan assotsiatsiyalar qatori, madaniy idrok va brend toifasiga mosligini tekshirish." }
     ],
     "calculator_cta_button": "Patent kalkulyatoriga o'tish"
-  },
-  "patentCalculatorPage": {
-    "metadata": {
-      "title": "Tovar belgisi kalkulyatori | Jon.Branding",
-      "description": "O'zbekistonda tovar belgisini ro'yxatdan o'tkazish bilan bog'liq taxminiy xarajatlarni (davlat bojlari va xizmat narxi) hisoblang."
-    },
-    "title": "Tovar belgisini ro'yxatdan o'tkazish kalkulyatori",
-    "subtitle": "Neyming (nom tanlash) - ijodiy jarayon, patentlash esa - huquqiy. Tovar belgisini ro'yxatdan o'tkazish uchun taxminiy xarajatlarni (davlat bojlari va xizmat narxi) aynan shu yerda bizning jamoamizdagi patent ishonchli vakili yordamida hisoblang.",
-    "trademarkCalculator": {
-      "formTitle": "Ma'lumotlarni kiriting",
-      "brandNameLabel": "Brend nomi",
-      "brandNamePlaceholder": "Masalan: MyBrand",
-      "yourNameLabel": "Ismingiz",
-      "yourNamePlaceholder": "To'liq ismingizni kiriting",
-      "phoneLabel": "Telefon raqamingiz",
-      "phonePlaceholder": "+998901234567",
-      "classCountLabel": "Faoliyat turlari (klasslar) soni",
-      "classCountMax": "Maksimal 45",
-      "personTypeLabel": "Shaxs turi",
-      "personTypeOptions": [
-        { "value": "jismoniy", "label": "Jismoniy shaxs" },
-        { "value": "yuridik", "label": "Yuridik shaxs" }
-      ],
-      "speedLabel": "Ko'rib chiqish tezligi",
-      "speedOptions": [
-        { "value": "oddiy", "label": "Oddiy (7 oy)", "labelShort": "Oddiy" },
-        { "value": "tez", "label": "Tezlashtirilgan (1.5 oy)", "labelShort": "Tez" }
-      ],
-      "expertCheckLabel": "Qo'shimcha ekspert tekshiruvi",
-      "expertCheckOptions": [
-        { "value": "ha", "label": "Yoqilgan" },
-        { "value": "yoq", "label": "O'chirilgan" }
-      ],
-      "activityLabel": "Faoliyat turlari (ixtiyoriy)",
-      "activityPlaceholder": "Masalan: dizayn, qurilish, kiyim ishlab chiqarish...",
-      "activityHelp": "Bu klasslarni aniqlashda yordam beradi.",
-      "submitButton": "Patentlashga buyurtma berish",
-      "submittingButton": "Yuborilmoqda...",
-      "successMessage": "✅ Buyurtma qabul qilindi!",
-      "tryAgainButton": "Qayta hisoblash",
-      "summaryTitle": "Xarajatlar tafsiloti",
-      "totalCostTitle": "10 yilga taxminiy umumiy patent narxi",
-      "currency": "so'm",
-      "classLabel": "klass",
-      "expertCheckLabelShort": "Ekspert+",
-      "totalCostNote": "Barcha davlat bojlari va xizmat narxini o'z ichiga oladi",
-      "step1Title": "1-bosqich (Dastlabki to'lov)",
-      "ourServiceFee": "Jamoamizning xizmat haqi",
-      "applicationFee": "Talabnoma topshirish boji",
-      "step1Total": "1-bosqich uchun jami",
-      "step2Title": "2-bosqich (Guvohnoma olish)",
-      "stateFeeBase": "Davlat boji (asosiy)",
-      "extraClassesFee": "Qo'shimcha klasslar ({count} ta)",
-      "step2Total": "2-bosqich uchun jami",
-      "expediteTitle": "Tezlashtirilgan ko'rib chiqish uchun qo'shimcha to'lov",
-      "expediteBaseFee": "Asosiy (12 BHM + 12% QQS)",
-      "expediteTotal": "Tezlashtirish uchun jami",
-      "expertCheckTitle": "Ekspert tekshiruvi",
-      "expertBaseFee": "Asosiy (2×BHM)",
-      "expertTotal": "Ekspert xizmati uchun jami",
-      "importantNoteTitle": "Muhim eslatma",
-      "importantNoteText": "Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan Bazaviy hisoblash miqdori (BHM)ga bog'liq va o'zgarishi mumkin. Ushbu kalkulyator ommaviy oferta hisoblanmaydi va faqat tanishish uchun mo'ljallangan.",
-      "importantNoteBHM": "Hozirgi BHM {bhm} so'm.",
-      "error_brand": "Iltimos, brend nomini kiriting.",
-      "error_name": "Iltimos, ismingizni kiriting.",
-      "error_phone": "Iltimos, to'g'ri telefon raqami kiriting.",
-      "error_server": "Serverda xatolik yuz berdi.",
-      "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarim qayta ishlanishiga rozilik beraman.",
-      "error_privacy": "Maxfiylik siyosatiga rozilik berishingiz shart.",
-      "success_toast_title": "Muvaffaqiyatli!",
-      "success_toast_desc": "Sizning so'rovingiz qabul qilindi. Tez orada bog'lanamiz!",
-      "error_toast_title": "Xatolik!",
-      "telegramTitle": "Yangi patent arizasi (kalkulyatordan)",
-      "notSpecified": "Ko'rsatilmagan"
-    }
   }
 }
