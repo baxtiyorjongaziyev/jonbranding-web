@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap, Gift } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap, Gift, Plus } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 
@@ -35,6 +35,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const { label, price, description, features, results, timeline, recommended, note } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
+    const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
         <Card
@@ -74,7 +75,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                             {label}
                         </CardTitle>
                         <span className={cn("text-xl font-black mt-1", isVip ? "text-amber-400" : "text-primary")}>
-                            {formatPrice(price, lang, currency)}
+                            {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
                         </span>
                     </div>
                 </div>
@@ -167,7 +168,7 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
-        namingPremium: true, logoPremium: true
+        namingPremium: true, logoPremium: true, urgency: false, nda: false
     });
     const [discountType, setDiscountType] = useLocalStorage<'none' | 'package' | 'full'>('discountOption', 'none');
     const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
@@ -224,7 +225,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </AccordionTrigger>
                             <AccordionContent className="pt-16 space-y-32">
                                 <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
-                                    {['packaging', 'smm'].map(id => (
+                                    {['packaging', 'smm', 'urgency', 'nda'].map(id => (
                                         <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                                     ))}
                                 </ServiceGroup>
@@ -249,17 +250,22 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     <p className="text-blue-100/60 font-medium text-lg max-w-sm">{translations.your_package_desc}</p>
                                 </div>
                                 <div className="grid grid-cols-1 gap-4 overflow-y-auto pr-2 custom-scrollbar flex-grow">
-                                    {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => (
-                                        <div key={k} className="flex items-center justify-between p-5 rounded-[1.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group/item shadow-sm">
-                                            <div className="flex items-center gap-3">
-                                                <div className="bg-sky-blue/20 p-1.5 rounded-full">
-                                                    <Check className="w-4 h-4 text-sky-blue" />
+                                    {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
+                                        const isSurcharge = k === 'urgency' || k === 'nda';
+                                        return (
+                                            <div key={k} className="flex items-center justify-between p-5 rounded-[1.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group/item shadow-sm">
+                                                <div className="flex items-center gap-3">
+                                                    <div className={cn("p-1.5 rounded-full", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
+                                                        {isSurcharge ? <Plus className="w-4 h-4 text-blue-400" /> : <Check className="w-4 h-4 text-sky-blue" />}
+                                                    </div>
+                                                    <span className="text-base font-extrabold tracking-tight text-white">{serviceDetails[k as keyof typeof serviceDetails]?.label}</span>
                                                 </div>
-                                                <span className="text-base font-extrabold tracking-tight text-white">{serviceDetails[k as keyof typeof serviceDetails]?.label}</span>
+                                                <span className={cn("font-black text-sm", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
+                                                    {isSurcharge ? "+50%" : formatPrice(serviceDetails[k as keyof typeof serviceDetails]?.price || 0, lang as any, currency)}
+                                                </span>
                                             </div>
-                                            <span className="text-sky-blue font-black text-sm">{formatPrice(serviceDetails[k as keyof typeof serviceDetails]?.price || 0, lang as any, currency)}</span>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                     {Object.values(selectedServices).every(v => !v) && (
                                         <div className="text-center py-24 px-8 rounded-[3rem] bg-white/5 border-2 border-dashed border-white/10">
                                             <TrendingUp className="w-16 h-16 mx-auto text-blue-300/20 mb-6" />
@@ -278,6 +284,21 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <span className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">{translations.base_price_label}</span>
                                         <span className="text-2xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
+
+                                    {/* Surcharges List */}
+                                    <div className="space-y-4">
+                                        {total.surchargesApplied.map((s: any, i: number) => (
+                                            <div key={i} className="flex justify-between items-center text-blue-700 text-[12px] font-black bg-blue-50 px-6 py-4 rounded-[1.5rem] border border-blue-100 shadow-sm">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="bg-blue-100 p-1.5 rounded-full"><Plus className="w-4 h-4" /></div>
+                                                    {s.name}
+                                                </div>
+                                                <span className="text-base">+{formatPrice(s.value, lang as any, currency)}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Discounts List */}
                                     <div className="space-y-4">
                                         {total.discountApplied.map((d: any, i: number) => (
                                             <div key={i} className="flex justify-between items-center text-green-700 text-[12px] font-black bg-green-50 px-6 py-4 rounded-[1.5rem] border border-green-100 animate-shine shadow-sm">
@@ -289,6 +310,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             </div>
                                         ))}
                                     </div>
+
                                     <div className="pt-10 border-t border-slate-200 text-center space-y-3">
                                         <span className="text-slate-400 text-[11px] font-black uppercase tracking-[0.4em]">{translations.final_price}</span>
                                         <div className="flex flex-col items-center">

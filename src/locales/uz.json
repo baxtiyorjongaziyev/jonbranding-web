@@ -199,94 +199,6 @@
     "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yeni bosqichga olib chiqamiz.",
     "ctaButton": "Barcha savollarga javob oldim, boshlashga tayyorman!"
   },
-  "mobileCtaBar": {
-    "final_price": "Yakuniy narx",
-    "get_offer": "So'rov yuborish"
-  },
-  "blog": {
-    "title": "Bizning Blog",
-    "subtitle": "Brending, marketing va dizayn olamidagi so'nggi yangiliklar, maslahatlar va tahliliy maqolalar. Biznesingizni o'stirishga yordam beramiz.",
-    "readMore": "Batafsil o'qish"
-  },
-  "blogPost": {
-    "author": "Muallif",
-    "ctaTitle": "Maqola foydali bo'ldimi?",
-    "ctaDesc": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Brendingizni biz bilan yangi bosqichga olib chiqing.",
-    "ctaButton": "Bepul konsultatsiya oling"
-  },
-  "quiz": {
-    "metadata": {
-      "title": "Mini-test: Biznesingiz brendingga tayyormi? | Jon.Branding",
-      "description": "Bir nechta oddiy savollarga javob bering va biznesingiz brendingga qanchalik tayyorligini, uning kuchli va zaif tomonlarini aniqlang."
-    },
-    "exampleTitle": "Dunyo brendlarida misol:",
-    "questions": [
-      {
-        "question": "Biznesingizning asosiy g'oyasi yoki missiyasi bir jumlada ifodalanganmi?",
-        "brandExample": "Volvo — xavfsizlik; Nike — dunyodagi har bir sportchiga ilhom va innovatsiya olib kirish.",
-        "options": [
-          { "text": "Ha, aniq va hamma uchun tushunarli", "score": 3 },
-          { "text": "Qisman, lekin hali to'liq emas", "score": 2 },
-          { "text": "Yo'q, bu haqda o'ylab ko'rmaganman", "score": 1 }
-        ]
-      },
-      {
-        "question": "Maqsadli auditoriyangizni (ideal mijozingizni) aniq tasavvur qila olasizmi?",
-        "brandExample": "Apple — kreativ professionallar va texnologiya ishqibozlari; Johnson's Baby — yosh onalar.",
-        "options": [
-          { "text": "Ha, ularning ehtiyojlari va xohishlarini bilaman", "score": 3 },
-          { "text": "Umumiy tasavvurga egaman", "score": 2 },
-          { "text": "Yo'q, hamma uchun sotishga harakat qilyapman", "score": 1 }
-        ]
-      },
-      {
-        "question": "Sizning brendingiz raqobatchilardan qaysi aniq afzalliklari bilan ajralib turadi?",
-        "brandExample": "Tesla — innovatsion elektromobillar va avtopilot; M&M's — 'qo'lingizda emas, og'zingizda eriydigan' shokolad.",
-        "options": [
-          { "text": "Menda kamida 2-3 ta aniq afzallik bor", "score": 3 },
-          { "text": "Faqat narx bilan farq qilaman", "score": 2 },
-          { "text": "Menda yaqqol afzalliklar yo'q", "score": 1 }
-        ]
-      },
-      {
-        "question": "Vizual ko'rinishingiz (logo, ranglar, dizayn) biznesingiz qadriyatlarini aks ettiradimi?",
-        "brandExample": "Coca-Cola qizil — energiya va ehtiros; Tiffany & Co. firuza — hashamat va nafosat.",
-        "options": [
-          { "text": "Ha, to'liq mos keladi", "score": 3 },
-          { "text": "Qisman, ba'zi elementlarni yangilash kerak", "score": 2 },
-          { "text": "Yo'q, bunga e'tibor bermaganman", "score": 1 }
-        ]
-      },
-      {
-        "question": "Mijozlaringiz siz haqingizda yagona va ijobiy fikrdami?",
-        "brandExample": "Starbucks — shunchaki kofe emas, balki 'Uchinchi joy' (Third Place); Zappos — hayratlanarli mijozlarga xizmat ko'rsatish.",
-        "options": [
-          { "text": "Ha, brendimning obro'si mustahkam", "score": 3 },
-          { "text": "Har xil, ba'zan salbiy fikrlar ham bo'ladi", "score": 2 },
-          { "text": "Bilmayman, so'rov o'tkazmaganman", "score": 1 }
-        ]
-      }
-    ],
-    "result": {
-      "bad": {
-        "title": "Sizga yordam kerak (5-8 ball)",
-        "description": "Brendingiz poydevori zaif. Raqobatchilardan ajralib turish va mijozlar mehrini qozonish uchun sizga, shubhasiz, professional yordam kerak. Keling, buni birga tuzatamiz!"
-      },
-      "medium": {
-        "title": "Yaxshi potentsial, lekin bo'shliqlar bor (9-12 ball)",
-        "description": "Sizda yaxshi poydevor bor, lekin brendingiz yanada kuchliroq va samaraliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldiramiz va biznesingizni yeni bosqichga olib chiqamiz."
-      },
-      "good": {
-        "title": "A'lo! Brendingiz poydevori mustahkam (13-15 ball)",
-        "description": "Tabriklaymiz! Siz brending masalalarida to'g'ri yo'ldasiz. Endi bu poydevorni yanada mustahkamlab, bozor yetakchisiga aylanish vaqti keldi. Biz sizga bunda yordam beramiz."
-      },
-      "afterSubmitText": "Yaqin orada mutaxassisimiz siz bilan bog'lanib, test natijalaringizni batafsil tahlil qilish va shaxsiy maslahatlar berish bo'yicha suhbatlashadi.",
-      "backToHome": "Bosh sahifaga qaytish"
-    },
-    "questionLabel": "Savol {step} / {total}",
-    "nextButton": "Keyingisi",
-    "resultButton": "Natijani bilish"
-  },
   "servicesPage": {
     "metadata": {
       "title": "Xizmatlar va Narxlar | Jon.Branding",
@@ -300,8 +212,8 @@
         "strategy": "Strategik xizmatlar",
         "naming": "Neyming",
         "identity": "Vizual aydentika: Logo, Stil, Brendbuk",
-        "addons": "Qo'shimcha xizmatlar",
-        "more_services": "Qo'shimcha xizmatlar va shartlar"
+        "addons": "Qo'shimcha xizmatlar va shartlar",
+        "more_services": "Ko'proq imkoniyatlar"
       },
       "your_package": "Sizning paketingiz",
       "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
@@ -574,7 +486,7 @@
       "keywords": "brendbuk, gaydlayn, firma uslubi, brend dizanyni, logotipdan foydalanish qoidalari, brending agentligi"
     },
     "title": "Brendbuk ishlab chiqish",
-    "subtitle": "Brendbuk — bu shunchaki logotiplar tushirilgan hujjat emas, bu brendingiz izchilligi va yaxlitligini ta'minlaydigan Konstitutsiyadir.",
+    "subtitle": "Brendbuk — bu shunchaki logotiplar tushirilgan hujjat emas, bu brendingiz izchilligi va yaxlitligini ta'minlaydigon Konstitutsiyadir.",
     "section1_title": "Nima uchun har bir biznesga brendbuk kerak?",
     "section1_p1": "Brendbuk brendni boshqarish uchun asosiy vositadir. U kompaniyangizning vizual va g'oyaviy elementlaridan — logotip va ranglardan tortib, muloqot ohangigacha — foydalanishning barcha qoidalarini aniq belgilab beradi.",
     "section1_p2": "Ushbu hujjat marketingdagi tartibsizliklarning oldini olishga yordam beradi, brendning tanilishini ta'minlaydi hamda dizaynerlar, marketologlar va boshqa pudratchilar bilan ishlashda vaqt va pulni tejaydi.",
