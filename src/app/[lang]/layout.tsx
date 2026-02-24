@@ -4,19 +4,17 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
-export default async function LangLayout({
-  children,
-  params,
-}: {
+export default async function LangLayout(props: {
   children: ReactNode;
-  params: { lang: Locale };
+  params: Promise<{ lang: Locale }>;
 }) {
+  const params = await props.params;
   const { lang } = params;
   const dictionary = await getDictionary(lang);
   return (
     <>
       <Header lang={lang} dictionary={dictionary.header} />
-      {children}
+      {props.children}
       <Footer lang={lang} dictionary={dictionary.footer} />
     </>
   );

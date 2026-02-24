@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -274,7 +275,7 @@
       },
       "medium": {
         "title": "Yaxshi potentsial, lekin bo'shliqlar bor (9-12 ball)",
-        "description": "Sizda yaxshi poydevor bor, lekin brendingiz yanada kuchliroq va samaraliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldiramiz va biznesingizni yangi bosqichga olib chiqamiz."
+        "description": "Sizda yaxshi poydevor bor, lekin brendingiz yanada kuchliroq va samaraliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldiramiz va biznesingizni yeni bosqichga olib chiqamiz."
       },
       "good": {
         "title": "A'lo! Brendingiz poydevori mustahkam (13-15 ball)",
@@ -286,6 +287,52 @@
     "questionLabel": "Savol {step} / {total}",
     "nextButton": "Keyingisi",
     "resultButton": "Natijani bilish"
+  },
+  "servicesPage": {
+    "metadata": {
+      "title": "Xizmatlar va Narxlar | Jon.Branding",
+      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyator orqali narxlarni darhol hisoblang."
+    },
+    "packageBuilder": {
+      "title": "Xizmatlar va narxlar",
+      "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyator orqali narxlarni darhol hisoblang.",
+      "categories": {
+        "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
+        "strategy": "Strategik xizmatlar",
+        "naming": "Neyming",
+        "identity": "Vizual aydentika: Logo, Stil, Brendbuk",
+        "addons": "Qo'shimcha xizmatlar",
+        "more_services": "Qo'shimcha xizmatlar va shartlar"
+      },
+      "your_package": "Sizning paketingiz",
+      "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
+      "selected": "Tanlandi",
+      "select": "Tanlash",
+      "base_price_label": "Boshlang'ich narx",
+      "final_price": "Yakuniy narx:",
+      "promo_code_label": "Promokod",
+      "promo_code_placeholder": "KODNI KIRITING",
+      "promo_code_invalid": "Promokod xato kiritildi",
+      "discountSelector": {
+        "none": "Chegirmasiz",
+        "package": "Paketli 20%",
+        "full": "+10% (Oldindan to'lov)"
+      },
+      "empty_package_desc": "Siz hali hech qanday xizmatni tanlamadingiz. Iltimos, xizmatlardan birini tanlang.",
+      "recommended": "Tavsiya etiladi",
+      "features": "Nimalar kiradi",
+      "results": "Natijalar"
+    },
+    "comparison": {
+      "title": "Biz va Raqobatchilar",
+      "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklardan ancha hamyonbop narxda taqdim etamiz. Natija esa siz kutganingizdan ham a'lo bo'ladi.",
+      "features": "Xususiyatlar",
+      "whyPremiumTitle": "Nega faqat premium agentliklar?",
+      "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda berishdir.",
+      "ctaTitle": "Farqni ko'rdingiz. Endi tanlov vaqti!",
+      "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling va biz bilan bog'laning.",
+      "ctaButton": "Menga shunday yondashuv kerak"
+    }
   },
   "brandStrategyPage": {
     "metadata": {
@@ -343,7 +390,7 @@
   "namingPage": {
     "metadata": {
       "title": "Toshkentda Neyming Xizmatlari | Jon.Branding Agentligi",
-      "description": "Brend uchun esda qolarli va kuchli nom tanlash. Bizning neyming xizmatlarimiz sizga mukammal nom topishga yordam beradi."
+      "description": "Brend uchun esda qolarli va kuchli nom tanlash. Bizning neyming xizmatlarimiz sizga mukammal nom find qilishga yordam beradi."
     },
     "title": "Neyming — Brendning kuchli nomi",
     "subtitle": "Brend nomi — uning birinchi taassuroti, uning energiyasi, xarakteri va so'z bilan ifodalangan g'oyasidir.",
@@ -361,7 +408,7 @@
       "description": "O'zbekistonda tovar belgisini ro'yxatdan o'tkazish bilan bog'liq taxminiy xarajatlarni hisoblang."
     },
     "title": "Tovar belgisini ro'yxatdan o'tkazish kalkulyatori",
-    "subtitle": "Tovar belgisini ro'yxatdan o'tkazish bo'yiana davlat bojlari va xizmat narxini shu yerning o'zida hisoblab ko'ring.",
+    "subtitle": "Tovar belgisini ro'yxatdan o'tkazish bo'yicha davlat bojlari va xizmat narxini shu yerning o'zida hisoblab ko'ring.",
     "trademarkCalculator": {
       "formTitle": "Ma'lumotlarni kiriting",
       "brandNameLabel": "Brend nomi",
