@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -154,7 +155,7 @@
     "ctaButton": "Loyihani muhokama qilish"
   },
   "leadMagnet": {
-    "title": "Brendingizni yangi bosqichga olib chiqing",
+    "title": "Brendingingizni yangi bosqichga olib chiqing",
     "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik. Brending dunyosini o'rganing va birinchi qadamni tashlang.",
     "magnets": [
       { "id": "pdf", "title": "Bepul PDF chek-list", "subtitle": "7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
@@ -190,7 +191,7 @@
     "faqItems": [
       { "question": "Nega narxlar qat'iy belgilangan emas?", "answer": "Har bir loyiha unikal. Narx loyihaning murakkabligi, ish hajmi va sizning vazifangizdan kelib chiqib individual hisoblanadi. Biz sizning brendingiz uchun optimal yechimni taklif qilamiz." },
       { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishiladi va siz jarayonni to'liq nazorat qilasiz." },
-      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendingizni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz. Bu sizning biznesingiz uchun uzoq muddatli qiymat yaratadi." },
+      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendingingizni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz. Bu sizning biznesingiz uchun uzoq muddatli qiymat yaratadi." },
       { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng. Shuningdek, sizga qulay bo'lishi uchun individual shartlarni ham muhokama qilishimiz mumkin." },
       { "question": "Ish qancha vaqt davom etadi?", "answer": "Muddatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend strategiyasi — 8 haftadan boshlanadi. Yakuniy muddat loyiha tasdiqlangandan so'ng belgilanadi." },
       { "question": "Loyiha tugagandan keyin yordam berasizlarmi?", "answer": "Ha, loyiha yakunlanganidan keyin 1 oy davomida biz bepul maslahatlar beramiz va brend materiallaridan to'g'ri foydalanish bo'yicha yordam ko'rsatamiz." }
@@ -435,7 +436,7 @@
     "section1_p2": "Brend strategiyasi kompaniyaga ushbu maqsadlarga erishishda yordam beradi, unga shunchaki mahsulot yoki xizmatdan ko'ra ko'proq narsaga — o'z mijozlari hayotining bir qismiga, tanib olinadigan obraz egasiga aylanishiga ko'maklashadi.",
     "section1_p3": "Eng muhimi, u marketing xarajatlarini tizimlashtirishga, kompaniya pozitsiyasini qo'llab-quvvatlamaydigan va shuning uchun xarajatlarni oqlamaydigan vositalar, kanallar va g'oyalardan voz kechishga imkon beradi.",
     "process_title": "Brending — bu jarayon",
-    "process_subtitle": "Agentligimizda biz brending shunchaki logotip yaratishdan ko'proq narsa ekanligiga aminmiz. Brending — bir martalik vazifa emas, balki tsiklik jarayondir.",
+    "process_subtitle": "Agentligimizda biz brending shunchaki logotip yaratishdan ko'proq narsa ekanligiga aminmiz. Brending — bir martalik vazifa emas, balke tsiklik jarayondir.",
     "process_steps": [
       { "title": "Tahlil va tadqiqot", "description": "Bozor, raqobatchilar va auditoriya haqida ma'lumotlar yig'iladigan birinchi va eng muhim bosqich." },
       { "title": "Brend platformasini shakllantirish", "description": "Bu yerda missiya, qadriyatlar va brendning o'ziga xos taklifi tug'iladi — bu uning xarakteri va ovozini belgilaydigan poydevor." },
