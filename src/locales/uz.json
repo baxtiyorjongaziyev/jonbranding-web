@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -128,7 +129,7 @@
   },
   "founder": {
     "title": "Asoschi: Baxtiyorjon Gaziyev",
-    "message": "Assalomu alaykum! Men Baxtiyorjon, Jon.Branding asoschisiman. Men biznes egalariga o'z brendlarini yangi bosqichga olib chiqishda yordam beraman. Maqsadim — shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurishdir. Keling, birgalikda brendingizni tahlil qilamiz va uning 'uxlayotgan' potentsialini uyg'otamiz.",
+    "message": "Assalomu alaykum! Men Baxtiyorjon, Jon.Branding asoschisiman. Men biznes egalariga o'z brendlarini yangi bosqichga olib chiqishda yordam beraman. Maqsadim — shunchaki chiroyli dizayn yaratish emas, bali biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurishdir. Keling, birgalikda brendingizni tahlil qilamiz va uning 'uxlayotgan' potentsialini uyg'otamiz.",
     "points": [
       { "icon": "Medal", "text": "50+ dan ortiq muvaffaqiyatli loyihalar" },
       { "icon": "Globe", "text": "Xalqaro tajriba va yondashuv" },
@@ -583,73 +584,8 @@
     "subtitle": "Biznesingiz uchun kafolatlangan natija va aniq yechimlar",
     "cta": "Narxlarni ko'rish"
   },
-  "contactModal": {
-    "stepTitles": {
-      "contact": "Kontakt ma'lumotlari",
-      "project": "Loyiha haqida",
-      "budget": "Byudjet",
-      "meeting": "Uchrashuv"
-    },
-    "title": "Sifatli konsultatsiya uchun",
-    "description": "Loyihangizni yaxshiroq tushunishimiz uchun bir nechta savollarga javob bering.",
-    "fullName": "Ism va Familiya",
-    "fullNamePlaceholder": "Aziz Rahimov",
-    "phone": "Telefon raqamingiz",
-    "phonePlaceholder": "+998 90 123 45 67",
-    "telegram": "Telegram username (ixtiyoriy)",
-    "telegramPlaceholder": "@username",
-    "companyName": "Kompaniya yoki loyiha nomi",
-    "companyNamePlaceholder": "Jon.Branding",
-    "website": "Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)",
-    "websitePlaceholder": "https://t.me/jonbranding",
-    "goal": "Qaysi maqsad sizga yaqinroq?",
-    "goalOptions": [
-      { "value": "exploring", "label": "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman." },
-      { "value": "has_problem", "label": "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak." },
-      { "value": "ready_to_start", "label": "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." }
-    ],
-    "budget": "Loyiha uchun taxminiy byudjet?",
-    "budgetOptions": [
-      "Hozircha byudjet yo'q / Shunchaki o'rganyapman",
-      "500 $ gacha",
-      "500 $ - 1,500 $",
-      "1,500 $ - 3,000 $",
-      "3,000 $ dan yuqori"
-    ],
-    "location": "Uchrashuv uchun joylashuvingiz",
-    "locationPlaceholder": "Hududni tanlang",
-    "locationOptions": ["Toshkent", "Farg'ona", "Boshqa viloyat"],
-    "meetingPlace": "Qayerda uchrashishni xohlaysiz?",
-    "meetingPlaceOptions": [
-      { "value": "our_office", "label": "Bizning ofisda", "description": "Loyihaga to'liq sho'ng'ish" },
-      { "value": "neutral", "label": "Neytral hududda", "description": "Erkin sharoitda suhbat" },
-      { "value": "client_office", "label": "Sizning ofisda", "description": "Biznesingiz bilan tanishish" }
-    ],
-    "onlineMeetingAlert": "Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.",
-    "backButton": "Orqaga",
-    "nextButton": "Keyingisi",
-    "submitButton": "So'rovni yuborish",
-    "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarim qayta ishlanishiga rozilik beraman.",
-    "formErrors": {
-      "fullName": "Ismingizni kiriting.",
-      "phone": "Telefoningizni to'g'ri kiriting.",
-      "goal": "Maqsadingizni tanlang.",
-      "budget": "Byudjetni tanlang.",
-      "location": "Joylashuvni tanlang.",
-      "meetingPlace": "Uchrashuv joyini tanlang.",
-      "privacyPolicy": "Maxfiylik siyosatiga rozilik berishingiz shart."
-    },
-    "successToast": {
-      "title": "Muvaffaqiyatli!",
-      "description": "Sizning so'rovingiz qabul qilindi. Tez orada bog'lanamiz!"
-    },
-    "leadMagnetToast": {
-      "title": "Siz uchun maxsus resurslar!",
-      "description": "So'rovingiz qabul qilindi! Boshlanishiga sizni bepul materiallarimizga yo'naltiramiz."
-    },
-    "errorToast": {
-      "title": "Xatolik!",
-      "description": "So'rovni yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
-    }
+  "cookieConsent": {
+    "message": "Bizning saytda juda mazali 'kuki'lar bor. Ular bizga sizni eslab qolishga yordam beradi. Agar rozı bo'lsangiz, keling ularni birga baham ko'ramiz.",
+    "acceptButton": "Roziman"
   }
 }
