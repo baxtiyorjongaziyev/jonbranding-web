@@ -176,7 +176,7 @@
         { "title": "4. Nomuvofiqlik (Inconsistency)", "description": "Saytdagi logotipingiz bir xil uslubda, Instagramda boshqacha, qadoqda esa butunlay boshqa ko'rinishda. Bu vizual xaos ishonchni so'ndiradi va brendingning tanilishiga to'sqinlik qiladi.", "solution": "Yechim: Logotip, ranglar, shriftlardan foydalanish qoidalari yozilgan 'brandbook' (gaydlayn) yarating. Uni hamma joyda bir xilda ishlating." },
         { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt favikoni yoki ijtimoiy tarmoq avatarida) yomon ko'rinadi.", "solution": "Yechim: Soddalik va minimalizmga intiling. Eng yaxshi logotiplar — xotiradan osongina chizish mumkin bo'lgan logotiplardir." },
         { "title": "6. Talaffuz qilish qiyin yoki eslab qolish qiyin nom", "description": "Agar mijozlaringiz nomingizni ayta olmasalar yoki uni qidiruvga to'g'ri yoza olmasalar, ular sizni topa olmaydilar va boshqalarga tavsiya qila olmaydilar.", "solution": "Yechim: Oddiy, jarangli va huquqiy jihatdan toza (tovar belgisi band bo'lmagan) nom tanlang." },
-        { "title": "7. Brendingni bir martalik ish deb o'ylash", "description": "Bozor, mijozlar talabi, texnologiyalar doim o'zgarib turadi. Vaqt bilan birga o'zgarmaydigan brend eskirib qoladi.", "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lsa, dizayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir." }
+        { "title": "7. Brendingni bir martalik ish deb o'ylash", "description": "Bozor, mijozlar talabi, texnologiyalar doim o'zgarib turadi. Vaqt bilan birga o'zgarmaydigan brend eskirib qoladi.", "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lssa, dizayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir." }
       ],
       "result": {
         "bad": { "title": "Sizga zudlik bilan yordam kerak!", "description": "Brendingingizda bir nechta jiddiy kamchiliklar bor. Bu o'sish uchun ajoyib imkoniyat! Biz ushbu zaif tomonlarni kuchli tomonlarga aylantirishga yordam beramiz." },
@@ -197,7 +197,7 @@
       { "question": "Loyiha yakunlangach qo'llab-quvvatlash bormi?", "answer": "Ha, loyiha tugagandan keyin 1 oy davomida biz brend materiallaridan to'g'ri foydalanish bo'yicha bepul konsultatsiya va yordam beramiz." }
     ],
     "ctaTitle": "Shubhalarga o'rin qoldirmang!",
-    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yangi bosqichga olib chiqamiz.",
+    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yeni bosqichga olib chiqamiz.",
     "ctaButton": "Barcha savollarga javob oldim, boshlashga tayyorman!"
   },
   "mobileCtaBar": {
@@ -572,7 +572,7 @@
     "metadata": {
       "title": "Brendbuk ishlab chiqish | Jon.Branding Agentligi",
       "description": "Brendbuk — bu sizning brendingiz Konstitutsiyasi. Biz brendingiz izchilligini ta'minlaydigan va marketing xarajatlarini tejaydigan kompleks brendbuklar yaratamiz.",
-      "keywords": "brendbuk, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
+      "keywords": "brendbuk, gaydlayn, firma uslubi, brend dizanyni, logotipdan foydalanish qoidalari, brending agentligi"
     },
     "title": "Brendbuk ishlab chiqish",
     "subtitle": "Brendbuk — bu shunchaki logotiplar tushirilgan hujjat emas, bu brendingiz izchilligi va yaxlitligini ta'minlaydigan Konstitutsiyadir.",
