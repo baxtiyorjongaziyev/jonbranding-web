@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -48,14 +47,15 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                 );
               })}
             </div>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="w-full sm:w-auto" asChild>
+            {/* Flex-wrap qo'shildi, shunda tugmalar div dan chiqib ketmaydi */}
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+                <Button size="lg" className="w-full sm:w-auto min-w-[200px]" asChild>
                     <a href="tel:+998336450097">
                         <Phone className="mr-2 h-5 w-5" />
                         {translations.phoneButton}
                     </a>
                 </Button>
-                 <Button size="lg" variant="default" className="w-full sm:w-auto" asChild>
+                 <Button size="lg" variant="default" className="w-full sm:w-auto min-w-[200px]" asChild>
                     <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
                         <Send className="mr-2 h-5 w-5" />
                         {translations.telegramButton}
@@ -63,7 +63,7 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                 </Button>
             </div>
           </div>
-          <div >
+          <div>
             <Card className="overflow-hidden shadow-xl rounded-2xl w-full">
               <CardContent className="p-0 relative bg-black aspect-[4/5]">
                 {playVideo ? (

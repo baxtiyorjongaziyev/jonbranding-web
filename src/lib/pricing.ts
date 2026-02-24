@@ -1,4 +1,3 @@
-
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -211,27 +210,3 @@ export const generateSummary = (selections: any, lang: string = 'uz'): string =>
     const sd = getServiceDetails(lang as any);
     return Object.entries(selectedServices).filter(([_, active]) => active).map(([key]) => sd[key as keyof typeof sd]?.label).filter(Boolean).join(', ');
 }
-
-export const comparisonData = (lang: 'uz' | 'ru' | 'en') => {
-    const t = {
-        uz: [
-            { feature: "Strategik yondashuv", competitors: { jon: true, mano: true, abba: true, mountain: false } },
-            { feature: "100% Pulni qaytarish kafolati", competitors: { jon: true, mano: false, abba: false, mountain: false } },
-            { feature: "Narx va sifat mutanosibligi", competitors: { jon: "Yuqori", mano: "Premium", abba: "Premium", mountain: "O'rta" } },
-            { feature: "Amaliy tajriba (1000+ loyiha)", competitors: { jon: true, mano: true, abba: true, mountain: true } }
-        ],
-        ru: [
-            { feature: "Стратегический подход", competitors: { jon: true, mano: true, abba: true, mountain: false } },
-            { feature: "100% Гарантия возврата", competitors: { jon: true, mano: false, abba: false, mountain: false } },
-            { feature: "Цена и качество", competitors: { jon: "Высокое", mano: "Premium", abba: "Premium", mountain: "Средне" } },
-            { feature: "Опыт (1000+ проектов)", competitors: { jon: true, mano: true, abba: true, mountain: true } }
-        ],
-        en: [
-            { feature: "Strategic approach", competitors: { jon: true, mano: true, abba: true, mountain: false } },
-            { feature: "100% Refund guarantee", competitors: { jon: true, mano: false, abba: false, mountain: false } },
-            { feature: "Value for money", competitors: { jon: "High", mano: "Premium", abba: "Premium", mountain: "Medium" } },
-            { feature: "Experience (1000+ projects)", competitors: { jon: true, mano: true, abba: true, mountain: true } }
-        ]
-    };
-    return t[lang] || t.uz;
-};
