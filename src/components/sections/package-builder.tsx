@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -235,7 +234,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
 
                 <div className="mt-32 max-w-6xl mx-auto">
-                    <div id="your-package-card" className="rounded-[4rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
+                    <div id="your-package-card" className="rounded-[4rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col lg:row border border-slate-100">
                         <div className="lg:w-1/2 bg-dark-blue p-10 sm:p-16 text-white relative">
                             <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]" />
                             <div className="relative z-10 space-y-10">
