@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -47,7 +48,6 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                 );
               })}
             </div>
-            {/* Flex-wrap qo'shildi, shunda tugmalar div dan chiqib ketmaydi */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Button size="lg" className="w-full sm:w-auto min-w-[200px]" asChild>
                     <a href="tel:+998336450097">
