@@ -210,3 +210,45 @@ export const generateSummary = (selections: any, lang: string = 'uz'): string =>
     const sd = getServiceDetails(lang as any);
     return Object.entries(selectedServices).filter(([_, active]) => active).map(([key]) => sd[key as keyof typeof sd]?.label).filter(Boolean).join(', ');
 }
+
+export const comparisonData = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
+    const t = {
+        uz: [
+            { feature: "Strategik yondashuv", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "Bozor tahlili", competitors: { jon: true, mano: true, abba: true, mountain: false } },
+            { feature: "Neyming (Patent tahlili bilan)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "Logo + Firma uslubi", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Brandbook (to'liq)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "Narx (Premium sifat)", competitors: { jon: "Hamyonbop", mano: "Juda qimmat", abba: "Qimmat", mountain: "O'rtacha" } },
+            { feature: "Muddat", competitors: { jon: "Tezkor", mano: "Uzoq", abba: "O'rtacha", mountain: "Tez" } },
+        ],
+        ru: [
+            { feature: "Стратегический подход", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "Анализ рынка", competitors: { jon: true, mano: true, abba: true, mountain: false } },
+            { feature: "Нейминг (с патентным анализом)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "Лого + Фирменный стиль", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Брендбук (полный)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "Цена (Премиум качество)", competitors: { jon: "Доступно", mano: "Очень дорого", abba: "Дорого", mountain: "Средне" } },
+            { feature: "Сроки", competitors: { jon: "Быстро", mano: "Долго", abba: "Средне", mountain: "Быстро" } },
+        ],
+        en: [
+            { feature: "Strategic approach", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "Market analysis", competitors: { jon: true, mano: true, abba: true, mountain: false } },
+            { feature: "Naming (with patent analysis)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "Logo + Corporate Identity", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Brandbook (full)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "Price (Premium quality)", competitors: { jon: "Affordable", mano: "Very expensive", abba: "Expensive", mountain: "Average" } },
+            { feature: "Timeline", competitors: { jon: "Fast", mano: "Long", abba: "Average", mountain: "Fast" } },
+        ],
+        zh: [
+            { feature: "战略方法", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "市场分析", competitors: { jon: true, mano: true, abba: true, mountain: false } },
+            { feature: "命名（含专利分析）", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "标志 + 企业形象", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "品牌手册（完整）", competitors: { jon: true, mano: true, abba: false, mountain: false } },
+            { feature: "价格（高级品质）", competitors: { jon: "实惠", mano: "非常昂贵", abba: "昂贵", mountain: "中等" } },
+            { feature: "时间线", competitors: { jon: "快", mano: "长", abba: "中等", mountain: "快" } },
+        ]
+    };
+    return t[lang as keyof typeof t] || t.uz;
+};
