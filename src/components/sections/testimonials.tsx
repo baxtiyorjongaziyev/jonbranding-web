@@ -127,7 +127,7 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
     }
 
   return (
-    <section className="py-20 sm:py-32 bg-secondary/30">
+    <section className="pt-20 pb-10 sm:pt-32 sm:pb-16 bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-black text-dark-blue tracking-tighter">{translations.title}</h2>
