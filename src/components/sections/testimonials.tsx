@@ -76,22 +76,22 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
 
 const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     return (
-      <Card className="h-full flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden">
-        <CardContent className="p-6 flex flex-col justify-between flex-grow">
+      <Card className="h-full flex flex-col bg-white shadow-lg rounded-3xl overflow-hidden">
+        <CardContent className="p-8 flex flex-col justify-between flex-grow">
             <div>
                  <div className="flex text-yellow-400 mb-4">
                     {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
                 </div>
-                <p className="text-gray-700">"{testimonial.quote}"</p>
+                <p className="text-gray-700 leading-relaxed italic">"{testimonial.quote}"</p>
             </div>
-            <div className="mt-6 flex items-center gap-4">
-                <Avatar>
+            <div className="mt-8 flex items-center gap-4">
+                <Avatar className="h-12 w-12 ring-2 ring-primary/10">
                     <AvatarImage src={testimonial.image} alt={testimonial.name} />
                     <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                 </Avatar>
                 <div>
                     <p className="font-bold text-dark-blue">{testimonial.name}</p>
-                    <p className="text-sm text-gray-500">{testimonial.company}</p>
+                    <p className="text-xs text-gray-500">{testimonial.company}</p>
                 </div>
             </div>
         </CardContent>
@@ -127,47 +127,55 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
     }
 
   return (
-    <section className="py-16 sm:py-24 bg-secondary">
+    <section className="py-20 sm:py-32 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl font-black text-dark-blue tracking-tighter">{translations.title}</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-600 font-medium">
             {translations.subtitle}
           </p>
         </div>
 
         {videoTestimonials.length > 0 && (
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-24">
                 {videoTestimonials.map((testimonial, index) => (
-                    <VideoTestimonialCard key={`video-${index}`} testimonial={testimonial} />
+                    <div key={`video-${index}`} className="p-2">
+                        <VideoTestimonialCard testimonial={testimonial} />
+                    </div>
                 ))}
             </div>
         )}
         
         {textTestimonials.length > 0 && (
-             <div className="mt-16">
-                <h3 className="text-center text-2xl font-bold text-dark-blue mb-2 flex items-center justify-center gap-2">
-                    <MessageSquare className="w-6 h-6 text-primary" />
-                    {translations.textReviewsTitle}
-                </h3>
-                 <p className="text-center text-muted-foreground mb-12">{translations.textReviewsSubtitle}</p>
+             <div className="mt-24">
+                <div className="text-center mb-12">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-dark-blue mb-2 flex items-center justify-center gap-3">
+                        <MessageSquare className="w-8 h-8 text-primary" />
+                        {translations.textReviewsTitle}
+                    </h3>
+                    <p className="text-muted-foreground text-lg">{translations.textReviewsSubtitle}</p>
+                </div>
+                
                 <Carousel 
                     plugins={[autoplayPlugin.current]}
                     opts={{ align: "start", loop: true }} 
                     onMouseEnter={autoplayPlugin.current.stop}
                     onMouseLeave={autoplayPlugin.current.reset}
-                    className="w-full">
-                    <CarouselContent className="-ml-4">
+                    className="w-full relative px-4"
+                >
+                    <CarouselContent className="-ml-4 pb-12">
                         {textTestimonials.map((testimonial, index) => (
                         <CarouselItem key={`text-${index}`} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                            <div className="p-1 h-full">
+                            <div className="p-4 h-full">
                                 <TextTestimonialCard testimonial={testimonial} />
                             </div>
                         </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious aria-label="Oldingi fikr" className="hidden sm:flex" />
-                    <CarouselNext aria-label="Keyingi fikr" className="hidden sm:flex" />
+                    <div className="hidden sm:block">
+                        <CarouselPrevious className="absolute -left-4 lg:-left-12 h-12 w-12 shadow-lg border-primary/10 hover:bg-primary hover:text-white transition-all" />
+                        <CarouselNext className="absolute -right-4 lg:-right-12 h-12 w-12 shadow-lg border-primary/10 hover:bg-primary hover:text-white transition-all" />
+                    </div>
                 </Carousel>
             </div>
         )}

@@ -1,4 +1,3 @@
-
 {
   "header": {
     "portfolio": "Portfolio",
@@ -189,104 +188,104 @@
     "title": "Ko'p beriladigan savollar",
     "subtitle": "Brending jarayoni, narxlar va boshqa mavzulardagi eng ko'p beriladigan savollarga javoblar.",
     "faqItems": [
-      { "question": "Why are prices not fixed?", "answer": "Each project is unique. The price is calculated individually depending on the complexity of the project, the volume of work and your tasks. We offer an optimal solution for your brand." },
-      { "question": "How is the work process structured?", "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is coordinated with you, and you have full control over the process." },
-      { "question": "Can I order only a logo?", "answer": "We create not just a logo, but a full identification system that makes the brand recognizable and effective. This creates long-term value for your business." },
-      { "question": "What are the payment terms?", "answer": "Standard scheme — 50% upfront payment, 50% after project delivery. We can also discuss individual terms for your convenience." },
-      { "question": "How long does the work take?", "answer": "Deadlines depend on the type of service. For example, creating a logo — 2-4 weeks, brand strategy — from 8 weeks. The final deadline is determined after project approval." },
-      { "question": "Is there support after project completion?", "answer": "Yes, within 1 month after project completion we provide free consultations and assistance on the correct use of brand materials." }
+      { "question": "Nega narxlar qat'iy belgilangan emas?", "answer": "Har bir loyiha unikaldir. Narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga qarab individual hisoblanadi. Biz sizning brendingiz uchun maqbul yechimni taklif qilamiz." },
+      { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, muloqot. Har bir bosqich siz bilan muvofiqlashtiriladi va siz jarayonni to'liq nazorat qilasiz." },
+      { "question": "Faqat logotip buyurtma qilsam bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz. Bu sizning biznesingiz uchun uzoq muddatli qiymat yaratadi." },
+      { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan keyin. Shuningdek, sizga qulay bo'lishi uchun individual shartlarni ham muhokama qilishimiz mumkin." },
+      { "question": "Ish qancha vaqt davom etadi?", "answer": "Muddatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend strategiyasi — 8 haftadan boshlanadi. Yakuniy muddat loyiha tasdiqlangandan keyin belgilanadi." },
+      { "question": "Loyiha yakunlangach qo'llab-quvvatlash bormi?", "answer": "Ha, loyiha tugagandan keyin 1 oy davomida biz brend materiallaridan to'g'ri foydalanish bo'yicha bepul konsultatsiya va yordam beramiz." }
     ],
     "ctaTitle": "Shubhalarga o'rin qoldirmang!",
     "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yangi bosqichga olib chiqamiz.",
     "ctaButton": "Barcha savollarga javob oldim, boshlashga tayyorman!"
   },
   "mobileCtaBar": {
-    "final_price": "Final price",
-    "get_offer": "Submit Request"
+    "final_price": "Yakuniy narx",
+    "get_offer": "So'rov yuborish"
   },
   "blog": {
-    "title": "Our Blog",
-    "subtitle": "Latest news, tips and analytical articles from the world of branding, marketing and design. We help your business grow.",
-    "readMore": "Read more"
+    "title": "Bizning Blog",
+    "subtitle": "Brending, marketing va dizayn olamidagi so'nggi yangiliklar, maslahatlar va tahliliy maqolalar. Biznesingizni o'stirishga yordam beramiz.",
+    "readMore": "Batafsil o'qish"
   },
   "blogPost": {
-    "author": "Author",
-    "ctaTitle": "Was the article useful?",
-    "ctaDesc": "Now it's time to move from theory to practice. Take your brand to a new level with us.",
-    "ctaButton": "Get a free consultation"
+    "author": "Muallif",
+    "ctaTitle": "Maqola foydali bo'ldimi?",
+    "ctaDesc": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Brendingizni biz bilan yangi bosqichga olib chiqing.",
+    "ctaButton": "Bepul konsultatsiya oling"
   },
   "quiz": {
     "metadata": {
-      "title": "Mini-test: Is your business ready for branding? | Jon.Branding",
-      "description": "Answer a few simple questions and find out how ready your business is for branding, its strengths and weaknesses."
+      "title": "Mini-test: Biznesingiz brendingga tayyormi? | Jon.Branding",
+      "description": "Bir nechta oddiy savollarga javob bering va biznesingiz brendingga qanchalik tayyorligini, uning kuchli va zaif tomonlarini aniqlang."
     },
-    "exampleTitle": "Example in world brands:",
+    "exampleTitle": "Dunyo brendlarida misol:",
     "questions": [
       {
-        "question": "Is the core idea or mission of your business expressed in one sentence?",
-        "brandExample": "Volvo — safety; Nike — to bring inspiration and innovation to every athlete in the world.",
+        "question": "Biznesingizning asosiy g'oyasi yoki missiyasi bir jumlada ifodalanganmi?",
+        "brandExample": "Volvo — xavfsizlik; Nike — dunyodagi har bir sportchiga ilhom va innovatsiya olib kirish.",
         "options": [
-          { "text": "Yes, clearly and understandably for everyone", "score": 3 },
-          { "text": "Partially, but not completely yet", "score": 2 },
-          { "text": "No, I haven't thought about it", "score": 1 }
+          { "text": "Ha, aniq va hamma uchun tushunarli", "score": 3 },
+          { "text": "Qisman, lekin hali to'liq emas", "score": 2 },
+          { "text": "Yo'q, bu haqda o'ylab ko'rmaganman", "score": 1 }
         ]
       },
       {
-        "question": "Can you clearly imagine your target audience (ideal client)?",
-        "brandExample": "Apple — creative professionals and tech enthusiasts; Johnson's Baby — young mothers.",
+        "question": "Maqsadli auditoriyangizni (ideal mijozingizni) aniq tasavvur qila olasizmi?",
+        "brandExample": "Apple — kreativ professionallar va texnologiya ishqibozlari; Johnson's Baby — yosh onalar.",
         "options": [
-          { "text": "Yes, I know their needs and desires", "score": 3 },
-          { "text": "I have a general idea", "score": 2 },
-          { "text": "No, I'm trying to sell to everyone", "score": 1 }
+          { "text": "Ha, ularning ehtiyojlari va xohishlarini bilaman", "score": 3 },
+          { "text": "Umumiy tasavvurga egaman", "score": 2 },
+          { "text": "Yo'q, hamma uchun sotishga harakat qilyapman", "score": 1 }
         ]
       },
       {
-        "question": "By what specific advantages does your brand differ from competitors?",
-        "brandExample": "Tesla — innovative electric vehicles and autopilot; M&M's — chocolate that 'melts in your mouth, not in your hands'.",
+        "question": "Sizning brendingiz raqobatchilardan qaysi aniq afzalliklari bilan ajralib turadi?",
+        "brandExample": "Tesla — innovatsion elektromobillar va avtopilot; M&M's — 'qo'lingizda emas, og'zingizda eriydigan' shokolad.",
         "options": [
-          { "text": "I have at least 2-3 specific advantages", "score": 3 },
-          { "text": "I differ only in price", "score": 2 },
-          { "text": "I have no obvious advantages", "score": 1 }
+          { "text": "Menda kamida 2-3 ta aniq afzallik bor", "score": 3 },
+          { "text": "Faqat narx bilan farq qilaman", "score": 2 },
+          { "text": "Menda yaqqol afzalliklar yo'q", "score": 1 }
         ]
       },
       {
-        "question": "Does your visual appearance (logo, colors, design) reflect the values of your business?",
-        "brandExample": "Coca-Cola red — energy and passion; Tiffany & Co. turquoise — luxury and grace.",
+        "question": "Vizual ko'rinishingiz (logo, ranglar, dizayn) biznesingiz qadriyatlarini aks ettiradimi?",
+        "brandExample": "Coca-Cola qizil — energiya va ehtiros; Tiffany & Co. firuza — hashamat va nafosat.",
         "options": [
-          { "text": "Yes, completely matches", "score": 3 },
-          { "text": "Partially, some elements need to be updated", "score": 2 },
-          { "text": "No, I didn't pay attention to this", "score": 1 }
+          { "text": "Ha, to'liq mos keladi", "score": 3 },
+          { "text": "Qisman, ba'zi elementlarni yangilash kerak", "score": 2 },
+          { "text": "Yo'q, bunga e'tibor bermaganman", "score": 1 }
         ]
       },
       {
-        "question": "Do your clients hold a unified and positive opinion of you?",
-        "brandExample": "Starbucks — not just coffee, but the 'Third Place'; Zappos — amazing customer service.",
+        "question": "Mijozlaringiz siz haqingizda yagona va ijobiy fikrdami?",
+        "brandExample": "Starbucks — shunchaki kofe emas, balki 'Uchinchi joy' (Third Place); Zappos — hayratlanarli mijozlarga xizmat ko'rsatish.",
         "options": [
-          { "text": "Yes, my brand's reputation is strong", "score": 3 },
-          { "text": "Varies, sometimes there are negative reviews", "score": 2 },
-          { "text": "I don't know, I haven't conducted a survey", "score": 1 }
+          { "text": "Ha, brendimning obro'si mustahkam", "score": 3 },
+          { "text": "Har xil, ba'zan salbiy fikrlar ham bo'ladi", "score": 2 },
+          { "text": "Bilmayman, so'rov o'tkazmaganman", "score": 1 }
         ]
       }
     ],
     "result": {
       "bad": {
-        "title": "You need help (5-8 points)",
-        "description": "Your brand foundation is weak. To stand out from competitors and win client loyalty, you undoubtedly need professional help. Let's fix this together!"
+        "title": "Sizga yordam kerak (5-8 ball)",
+        "description": "Brendingiz poydevori zaif. Raqobatchilardan ajralib turish va mijozlar mehrini qozonish uchun sizga, shubhasiz, professional yordam kerak. Keling, buni birga tuzatamiz!"
       },
       "medium": {
-        "title": "Good potential, but there are gaps (9-12 points)",
-        "description": "You have a good foundation, but your brand could be even stronger and more effective. Let's fill the existing gaps and take your business to a new level."
+        "title": "Yaxshi potentsial, lekin bo'shliqlar bor (9-12 ball)",
+        "description": "Sizda yaxshi poydevor bor, lekin brendingiz yanada kuchliroq va samaraliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldiramiz va biznesingizni yangi bosqichga olib chiqamiz."
       },
       "good": {
-        "title": "Excellent! Your brand foundation is strong (13-15 points)",
-        "description": "Congratulations! You're on the right track in branding matters. Now it's time to strengthen this foundation and become a market leader. We'll help you with this."
+        "title": "A'lo! Brendingiz poydevori mustahkam (13-15 ball)",
+        "description": "Tabriklaymiz! Siz brending masalalarida to'g'ri yo'ldasiz. Endi bu poydevorni yanada mustahkamlab, bozor yetakchisiga aylanish vaqti keldi. Biz sizga bunda yordam beramiz."
       },
-      "afterSubmitText": "In the near future our specialist will contact you for a detailed analysis of your test results and providing personal recommendations.",
-      "backToHome": "Back to Home"
+      "afterSubmitText": "Yaqin orada mutaxassisimiz siz bilan bog'lanib, test natijalaringizni batafsil tahlil qilish va shaxsiy maslahatlar berish bo'yicha suhbatlashadi.",
+      "backToHome": "Bosh sahifaga qaytish"
     },
-    "questionLabel": "Question {step} / {total}",
-    "nextButton": "Next",
-    "resultButton": "Find out the result"
+    "questionLabel": "Savol {step} / {total}",
+    "nextButton": "Keyingisi",
+    "resultButton": "Natijani bilish"
   },
   "brandStrategyPage": {
     "metadata": {
