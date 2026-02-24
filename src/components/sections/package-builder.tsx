@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -234,11 +235,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
 
                 <div className="mt-32 max-w-6xl mx-auto">
-                    <div id="your-package-card" className="rounded-[4rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col lg:row border border-slate-100">
+                    <div id="your-package-card" className="rounded-[4rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
+                        {/* LEFT SIDE: DARK BLUE - SELECTED SERVICES */}
                         <div className="lg:w-1/2 bg-dark-blue p-10 sm:p-16 text-white relative">
                             <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]" />
-                            <div className="relative z-10 space-y-10">
-                                <div className="space-y-4">
+                            <div className="relative z-10 h-full flex flex-col">
+                                <div className="space-y-4 mb-10">
                                     <div className="flex items-center gap-4">
                                         <div className="bg-white/10 p-3 rounded-2xl border border-white/10 shadow-lg">
                                             <Box className="w-8 h-8 text-sky-blue" />
@@ -247,7 +249,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                     <p className="text-blue-100/60 font-medium text-lg max-w-sm">{translations.your_package_desc}</p>
                                 </div>
-                                <div className="grid grid-cols-1 gap-4 max-h-[450px] overflow-y-auto pr-6 custom-scrollbar">
+                                <div className="grid grid-cols-1 gap-4 overflow-y-auto pr-2 custom-scrollbar flex-grow">
                                     {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => (
                                         <div key={k} className="flex items-center justify-between p-5 rounded-[1.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group/item shadow-sm">
                                             <div className="flex items-center gap-3">
@@ -269,8 +271,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                         </div>
 
-                        <div className="lg:w-1/2 bg-slate-50 p-10 sm:p-16 flex flex-col justify-between border-l border-slate-100 relative">
-                            <div className="space-y-10">
+                        {/* RIGHT SIDE: LIGHT SLATE - CALCULATION & CTA */}
+                        <div className="lg:w-1/2 bg-slate-50 p-10 sm:p-16 flex flex-col border-l border-slate-100 relative">
+                            <div className="space-y-10 flex-grow">
                                 <div className="space-y-8">
                                     <div className="flex justify-between items-center">
                                         <span className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">{translations.base_price_label}</span>
@@ -304,7 +307,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
                                 <div className="space-y-6">
                                     <div className="space-y-3">
-                                        <Label className="text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">Promokod</Label>
+                                        <Label className="text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">{translations.promo_code_label}</Label>
                                         <div className="relative">
                                             <Input 
                                                 value={promoCode}

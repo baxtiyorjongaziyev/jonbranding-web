@@ -1,3 +1,4 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -141,7 +142,7 @@ export const getServiceDetails = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
 };
 
 export function formatPrice(priceInUSD: number, lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz', currency: 'uzs' | 'usd' = 'usd') {
-    if (priceInUSD === 0) return "Kelishiladi";
+    if (priceInUSD === 0) return lang === 'uz' ? "Kelishiladi" : "Agreed";
     let price = currency === 'uzs' ? convertToUzs(priceInUSD) : priceInUSD;
     let currencyString = currency === 'uzs' ? "so'm" : "$";
     return `${price.toLocaleString('fr-FR')} ${currencyString}`;
@@ -166,7 +167,6 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     const discountsApplied = [];
     let finalPrice = basePrice;
 
-    // RAMAZON Promo Logic (-50%)
     const isRamadanPromo = promoCode?.toUpperCase() === 'RAMAZON';
 
     if (isRamadanPromo) {
@@ -174,7 +174,6 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
         discountsApplied.push({ name: 'Ramazon tuhfasi (-50%)', value: val });
         finalPrice -= val;
     } else {
-        // Standard Discounts
         if (discountType === 'package' && mainServicesCount >= 2) {
             const val = finalPrice * 0.20;
             discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: val });
@@ -239,15 +238,6 @@ export const comparisonData = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
             { feature: "Brandbook (full)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
             { feature: "Price (Premium quality)", competitors: { jon: "Affordable", mano: "Very expensive", abba: "Expensive", mountain: "Average" } },
             { feature: "Timeline", competitors: { jon: "Fast", mano: "Long", abba: "Average", mountain: "Fast" } },
-        ],
-        zh: [
-            { feature: "战略方法", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "市场分析", competitors: { jon: true, mano: true, abba: true, mountain: false } },
-            { feature: "命名（含专利分析）", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "标志 + 企业形象", competitors: { jon: true, mano: true, abba: true, mountain: true } },
-            { feature: "品牌手册（完整）", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "价格（高级品质）", competitors: { jon: "实惠", mano: "非常昂贵", abba: "昂贵", mountain: "中等" } },
-            { feature: "时间线", competitors: { jon: "快", mano: "长", abba: "中等", mountain: "快" } },
         ]
     };
     return t[lang as keyof typeof t] || t.uz;
