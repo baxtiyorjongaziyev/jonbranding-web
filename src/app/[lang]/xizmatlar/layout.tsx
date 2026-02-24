@@ -4,12 +4,19 @@ import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
 type Props = {
-  params: { lang: string };
+  children: ReactNode;
+  params: Promise<{ lang: string }>;
 };
 
-export async function generateMetadata({ params: { lang } }: Props): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const { lang } = params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.servicesPage.metadata;
+  
+  const t = dict.servicesPage?.metadata || {
+      title: "Xizmatlar va Narxlar | Jon.Branding",
+      description: "Biznesingiz uchun professional brending xizmatlari va narxlari."
+  };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar`;
 
@@ -50,7 +57,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
   };
 }
 
-const XizmatlarLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
+const XizmatlarLayout: FC<Readonly<Props>> = ({ children }) => {
   return <>{children}</>;
 }
 
