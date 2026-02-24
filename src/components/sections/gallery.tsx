@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
 
-
 const galleryImages: GalleryImage[] = projects.flatMap(p => p.galleryImages);
 
 const MarqueeColumn = ({ images, animationClass }: { images: typeof galleryImages, animationClass: string }) => (
@@ -15,47 +14,49 @@ const MarqueeColumn = ({ images, animationClass }: { images: typeof galleryImage
         <motion.div className={`flex flex-col gap-6 ${animationClass}`}>
             {images.map((image, index) => (
                 <Card key={index} className="overflow-hidden group rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                    <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={600}
-                        height={400}
-                        unoptimized={image.unoptimized}
-                        loading="lazy"
-                        className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
-                        data-ai-hint={image.hint}
-                    />
+                    {image.src && (
+                        <Image
+                            src={image.src}
+                            alt={image.alt || 'Jon Branding project'}
+                            width={600}
+                            height={400}
+                            unoptimized={image.unoptimized}
+                            loading="lazy"
+                            className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                            data-ai-hint={image.hint}
+                        />
+                    )}
                 </Card>
             ))}
         </motion.div>
         <motion.div className={`flex flex-col gap-6 ${animationClass}`} aria-hidden="true">
             {images.map((image, index) => (
                 <Card key={`duplicate-${index}`} className="overflow-hidden group rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
-                    <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={600}
-                        height={400}
-                        unoptimized={image.unoptimized}
-                        loading="lazy"
-                        className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
-                        data-ai-hint={image.hint}
-                    />
+                    {image.src && (
+                        <Image
+                            src={image.src}
+                            alt={image.alt || 'Jon Branding project'}
+                            width={600}
+                            height={400}
+                            unoptimized={image.unoptimized}
+                            loading="lazy"
+                            className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                            data-ai-hint={image.hint}
+                        />
+                    )}
                 </Card>
             ))}
         </motion.div>
     </div>
 );
 
-
 const Gallery: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) => {
   const translations = dictionary;
-  // To make the columns more balanced
+  if (!translations) return null;
+
   const midPoint = Math.ceil(galleryImages.length / 2);
   const firstColumn = galleryImages.slice(0, midPoint);
   const secondColumn = galleryImages.slice(midPoint);
-  
-  if (!translations) return null;
 
   return (
     <section id="portfolio" className="py-16 sm:py-24 bg-secondary">

@@ -32,7 +32,6 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                         </li>
                     ))}
                 </ul>
-                {/* Second list for seamless animation */}
                 <ul className={cn(
                     "flex min-w-full shrink-0 items-center justify-around",
                     direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
@@ -67,7 +66,6 @@ const TrustedBy: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictiona
     const brandsBottomRow = brands.slice(third * 2);
 
     const title = dictionary?.title;
-    
     if (!title) return null;
 
   return (
