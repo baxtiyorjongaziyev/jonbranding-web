@@ -1,3 +1,4 @@
+
 'use client';
 
 import type {FC} from 'react';
@@ -31,13 +32,15 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    if (!dictionary?.headlines) return;
+    
     const headlineInterval = setInterval(() => {
       setIsAnimating(true);
       setTimeout(() => {
         setHeadlineIndex((prevIndex) => (prevIndex + 1) % dictionary.headlines.length);
         setIsAnimating(false);
-      }, 500); // half a second for fade out
-    }, 4000); // 4 seconds per headline
+      }, 500);
+    }, 4000);
 
     const buttonInterval = setInterval(() => {
       setButtonIndex((prevIndex) => (prevIndex + 1) % dictionary.buttonTexts.length);
@@ -48,6 +51,8 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
       clearInterval(buttonInterval);
     };
   }, [dictionary]);
+
+  if (!dictionary) return null;
 
   return (
     <section className="relative bg-background py-20 sm:py-28 lg:py-32 overflow-hidden">
@@ -67,9 +72,9 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                 <p className="mx-auto lg:mx-0 mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground" dangerouslySetInnerHTML={{ __html: dictionary.description }}>
                 </p>
                 <div className="mt-10 flex justify-center lg:justify-start">
-                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-base px-8 py-6 shadow-lg">
+                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-base px-8 py-6 shadow-lg rounded-full">
                         {dictionary.buttonTexts[buttonIndex]}
-                        <ArrowRight className="w-5 h-5"/>
+                        <ArrowRight className="w-5 h-5 ml-2"/>
                     </Button>
                 </div>
                 <div className="mt-6 text-sm text-muted-foreground">
@@ -78,7 +83,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
             </div>
             <div className="flex justify-center items-center mt-10 lg:mt-0">
                 <TiltCard strength={10} className="w-full max-w-[500px] h-auto aspect-square">
-                    <Card className="rounded-2xl shadow-2xl overflow-hidden w-full h-full">
+                    <Card className="rounded-[2.5rem] shadow-2xl overflow-hidden w-full h-full border-none">
                         <Carousel
                             plugins={[Autoplay({ delay: 2500, stopOnInteraction: true })]}
                             className="w-full h-full"
