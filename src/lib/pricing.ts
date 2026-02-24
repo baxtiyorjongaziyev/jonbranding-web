@@ -1,3 +1,4 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -167,14 +168,14 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     let finalPrice = basePrice;
 
     // RAMAZON Promo Logic (-50%)
-    const isRamadanPromo = promoCode.toUpperCase() === 'RAMAZON';
+    const isRamadanPromo = promoCode?.toUpperCase() === 'RAMAZON';
 
     if (isRamadanPromo) {
         const val = finalPrice * 0.50;
         discountsApplied.push({ name: 'Ramazon tuhfasi (-50%)', value: val });
         finalPrice -= val;
     } else {
-        // Standard Discounts (only if no Ramadan promo)
+        // Standard Discounts
         if (discountType === 'package' && mainServicesCount >= 2) {
             const val = finalPrice * 0.20;
             discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: val });

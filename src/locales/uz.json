@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -251,7 +252,7 @@
       "phone": "Telefoningizni to'g'ri kiriting.",
       "goal": "Maqsadingizni tanlang.",
       "budget": "Byudjetni tanlang.",
-      "location": "Joylashuvingizni tanlang.",
+      "location": "Joylashuvni tanlang.",
       "meetingPlace": "Uchrashuv joyini tanlang.",
       "privacyPolicy": "Maxfiylik siyosatiga rozilik berishingiz shart."
     },
@@ -315,17 +316,17 @@
         "none": "Chegirmasiz",
         "package": "Paketli 20%",
         "full": "+10% (Prepayment)"
-      },
-      "comparison": {
-        "title": "Biz va Raqobatchilar",
-        "description": "Biz premium sifatni hamyonbop narxda taqdim etamiz.",
-        "features": "Xususiyatlar",
-        "whyPremiumTitle": "Nega faqat premium?",
-        "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega top kompaniyalar bilan solishtiramiz.",
-        "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
-        "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas.",
-        "ctaButton": "Menga shunday yondashuv kerak"
       }
+    },
+    "comparison": {
+      "title": "Biz va Raqobatchilar",
+      "description": "Biz premium sifatni hamyonbop narxda taqdim etamiz.",
+      "features": "Xususiyatlar",
+      "whyPremiumTitle": "Nega faqat premium?",
+      "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega top kompaniyalar bilan solishtiramiz.",
+      "ctaTitle": "Farqni ko'rdingiz. Tanlash vaqti keldi!",
+      "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas.",
+      "ctaButton": "Menga shunday yondashuv kerak"
     }
   },
   "personalOfferBlock": {

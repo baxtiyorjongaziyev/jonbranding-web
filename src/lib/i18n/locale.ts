@@ -15,13 +15,24 @@ export const localeNames: Record<Locale, string> = {
 };
 
 export function getLocale(request: NextRequest): Locale {
-  // 1. Check for locale in cookie
+  // 1. Cookiedan tilni tekshirish
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
   if (cookieLocale && locales.includes(cookieLocale as Locale)) {
     return cookieLocale as Locale;
   }
 
-  // 2. Use Negotiator and intl-localematcher to find the best-matching locale from browser headers
+  // 2. O'zbekiston hududini IP-headerlar orqali aniqlash
+  // Firebase App Hosting, Vercel va Cloudflare headerlarini tekshiramiz
+  const country = 
+    request.headers.get('x-vercel-ip-country') || 
+    request.headers.get('x-country-code') || 
+    request.headers.get('cf-ipcountry');
+  
+  if (country === 'UZ') {
+    return 'uz';
+  }
+
+  // 3. Brauzer sozlamalarini tekshirish
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
@@ -30,7 +41,6 @@ export function getLocale(request: NextRequest): Locale {
   try {
     return match(languages, [...locales], defaultLocale) as Locale;
   } catch (e) {
-    // Fallback to default if matching fails
     return defaultLocale;
   }
 }
