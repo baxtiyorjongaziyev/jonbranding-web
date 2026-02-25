@@ -1,4 +1,3 @@
-
 'use client';
 
 /**
@@ -76,23 +75,30 @@ const uzServiceDetails = {
         description: "Nom emas — aktiv",
         subDescription: "Jiddiy investitsiya qiladiganlar uchun",
         price: basePricesUSD.namingVIP,
+        timeline: "15 ish kuni",
         features: [
             "15 ta nom varianti tayyorlanadi",
-            "Har bir nom uchun to'liq izoh beriladi",
-            "Talaffuz va jarangdorlik tekshiruvi",
+            "Har bir nom uchun to'liq izoh beriladi — nima uchun bu nom aynan sizning biznesingizga mos ekanligi tushuntiriladi",
+            "Nomning talaffuzi qulay, esda qolishi oson va jaranglashi tekshiriladi",
             "Domen tekshiruvi (.com, .uz)",
-            "Patent tekshiruvi (Uzbekistan + WIPO)",
-            "Raqobatchilar tahlili",
-            "Nom egalik sertifikati",
-            "Cheksiz tuzatish (30 kun)"
+            "Instagram va Telegram uchun username bo'sh-bo'shligini tekshiriladi",
+            "O'zbekistonda va xalqaro bazalarda patent tekshiruvi o'tkaziladi",
+            "Raqobatchilarning nomlari tahlil qilinadi va siz uchun eng farqli pozitsiya aniqlanadi",
+            "Nom boshqa tillarda noqulay ma'no bermasligini tekshiriladi (xalqaro bozor uchun)",
+            "Nomning hissiy ma'nosi yoziladi — mijozlar ko'nglida qanday taassurot qoldirishi",
+            "3 ta qisqa shior varianti tayyorlanadi (kompaniya nomi yoniga yoziladigan 3–6 so'zlik gap. Masalan: Nike — 'Just Do It')",
+            "Font va rang yo'nalishi bo'yicha tavsiya beriladi",
+            "Patent topshirish uchun hujjat tayyorlashda yordam ko'rsatiladi",
+            "Nom rasman sizning mulkingiz ekanligini tasdiqlovchi sertifikat beriladi",
+            "30 daqiqalik shaxsiy strategik konsultatsiya",
+            "Cheksiz tuzatish (30 kun ichida)"
         ],
         benefits: [
-            { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi." },
-            { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent hujjatlari va sertifikat bilan nomingiz rasman himoyalanadi." },
-            { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Investor va sheriklar uchun bu jiddiy signal bo'lib xizmat qiladi." },
-            { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "30 daqiqa shaxsiy suhbatda nomni tanlashda to'g'ri yo'lni belgilaymiz." }
-        ],
-        timeline: "15 ish kuni"
+            { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi, hech qayerda noqulay ma'no bermaydi." },
+            { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent hujjatlari va sertifikat bilan nomingiz rasman himoyalanadi. Hech kim o'g'irlay olmaydi, hech kim taqlid qila olmaydi." },
+            { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Himoyalangan kuchli nom — kompaniya qiymatining bir qismi. Investor va sheriklar uchun bu jiddiy signal." },
+            { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "30 daqiqa shaxsiy suhbatda nomni tanlashda to'g'ri yo'lni birgalikda belgilaymiz. Yolg'iz emas, mutaxassis bilan." }
+        ]
     },
     namingPremium: {
         label: "Naming Premium",
@@ -100,40 +106,45 @@ const uzServiceDetails = {
         subDescription: "O'sishni rejalashtiraganlar uchun",
         price: basePricesUSD.namingPremium,
         recommended: true,
+        timeline: "7 ish kuni",
         features: [
             "10 ta nom varianti tayyorlanadi",
-            "Izoh va strategik tahlil",
-            "Talaffuz tekshiruvi",
-            "O'zbekiston bazasida patent tekshiruvi",
+            "Har bir nom uchun to'liq izoh beriladi — nima uchun bu nom aynan sizning biznesingizga mos ekanligi tushuntiriladi",
+            "Nomning talaffuzi qulay, esda qolishi oson va jaranglashi tekshiriladi",
+            "Domen tekshiruvi (.com, .uz)",
+            "Instagram va Telegram uchun username bo'sh-bo'shligini tekshiriladi",
+            "O'zbekiston bazasida patent tekshiruvi o'tkaziladi",
+            "Raqobatchilarning nomlari tahlil qilinadi",
+            "Nomning hissiy ma'nosi yoziladi — mijozlar ko'nglida qanday taassurot qoldirishi",
             "3 ta tuzatish raundi"
         ],
         benefits: [
-            { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kimdir nomingizni oldin patent qilmaganligini tekshiramiz." },
-            { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, unikal nom topamiz." },
-            { icon: "❤️", title: "Mijozlar yaxshi ko'radi", description: "Nomga his-tuyg'u yuklanadi — mijozlar eslab qoladi." },
-            { icon: "📈", title: "Kuchli boshlanish", description: "Kuchli nom marketing xarajatlarini kamaytirishga xizmat qiladi." }
-        ],
-        timeline: "7 ish kuni"
+            { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kimdir sizning nomingizni oldin patent qilmaganligini tekshiramiz. Kelajakda qimmat muammolardan qutulasiz." },
+            { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, hech kimga o'xshamagan nom find qilamiz. Mijozlar sizni eslab qoladi." },
+            { icon: "❤️", title: "Mijozlar nomingizni yaxshi ko'radi", description: "Nomga his-tuyg'u yuklanadi — mijozlar eslab qoladi va do'stlariga aytib beradi." },
+            { icon: "📈", title: "Brendingiz kuchli boshlanadi", description: "Kuchli nom marketing xarajatlarini kamaytiradi. Nom o'zi ishlaydi — har safar aytilganda brendingiz mustahkamlanadi." }
+        ]
     },
     namingStandard: {
         label: "Naming Standart",
         description: "Tez va ishonchli start",
         subDescription: "Endigina boshlamoqchi bo'lganlar uchun",
         price: basePricesUSD.namingStandard,
+        timeline: "5 ish kuni",
         features: [
             "5 ta nom varianti tayyorlanadi",
-            "Qisqa izoh",
-            "Talaffuz va esda qolarlilik",
-            "Domen va Username tekshiruvi",
+            "Har bir nom uchun qisqa izoh beriladi — nima uchun bu nom sizga mos ekanligi tushuntiriladi",
+            "Nomning talaffuzi qulay va esda qolishi oson ekanligi tekshiriladi",
+            "Domen tekshiruvi (.com, .uz)",
+            "Instagram va Telegram uchun username bo'sh-bo'shligini tekshiriladi",
             "1 ta tuzatish raundi"
         ],
         benefits: [
-            { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Esda qolmaydigan yoki noto'g'ri nomlardan qutulasiz." },
-            { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirmasdan, tahlil qilingan nom olasiz." },
-            { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "Tekshirilgan nom bilan biznesni boshlash osonroq." },
-            { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va ijtimoiy tarmoqlardagi nomlarni band qila olasiz." }
-        ],
-        timeline: "5 ish kuni"
+            { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Esda qolmaydigan yoki noto'g'ri talaffuz qilinadigan nom birinchi mijozlaringizni yo'qotadi. Biz buni oldini olamiz." },
+            { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirish o'rniga, 3 kunda professional tahlil qilingan nom olasiz." },
+            { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "“To'g'ri nom topdimmi?” degan shubha yo'qoladi. Tahlil qilingan, tekshirilgan nom qo'lingizda bo'ladi." },
+            { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va social media username band emasligini bilib olasiz — keyinchalik boshqa nom qidirish muammosi bo'lmaydi." }
+        ]
     },
     logoVIP: {
         label: "👑 VIP — Logo + Stil + Brandbook",
