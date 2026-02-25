@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useState, useEffect } from 'react';
@@ -6,9 +7,10 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, ScanText, Package, Paintbrush, Fingerprint, Book } from 'lucide-react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const serviceIcons: { [key: string]: React.ElementType } = {
-    'naming': ScanText,
+    'neyming': ScanText,
     'logo-dizayni': Fingerprint,
     'firmenniy-stil': Paintbrush,
     'brandbook': Book,
@@ -25,15 +27,19 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
     if (!translations) {
         return (
             <section className="py-16 sm:py-24 bg-white">
-                <div className="container mx-auto px-4 text-center py-12 border-2 border-dashed border-gray-200 rounded-2xl text-gray-400">
-                    Bu blokda nima bor edi?
+                <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[...Array(5)].map((_, i) => (
+                            <Skeleton key={i} className="h-64 w-full rounded-2xl" />
+                        ))}
+                    </div>
                 </div>
             </section>
         );
     }
 
     const orderedServices = [
-        translations.services.find((s: any) => s.id === 'naming'),
+        translations.services.find((s: any) => s.id === 'neyming'),
         translations.services.find((s: any) => s.id === 'logo-dizayni'),
         translations.services.find((s: any) => s.id === 'firmenniy-stil'),
         translations.services.find((s: any) => s.id === 'brandbook'),

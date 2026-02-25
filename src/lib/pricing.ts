@@ -212,7 +212,6 @@ const uzServiceDetails = {
 };
 
 export const getServiceDetails = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
-    // Kelajakda tillar bo'yicha alohida lug'atlar qaytarish mumkin
     return uzServiceDetails;
 };
 
