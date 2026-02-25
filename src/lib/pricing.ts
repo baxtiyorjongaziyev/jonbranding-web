@@ -1,3 +1,4 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -131,7 +132,7 @@ const uzServiceDetails = {
         features: [
             "5 ta nom varianti tayyorlanadi",
             "Har bir nom uchun qisqa izoh beriladi",
-            "Nomning talaffuzi qulay va esda qolishi osonligi tekshiriladi",
+            "Nomning talaffuzi qulay va esda qolishi oson ekanligi tekshiriladi",
             "Domen tekshiruvi (.com, .uz)",
             "Instagram va Telegram uchun username bo'shligini tekshirish",
             "1 ta tuzatish raundi"

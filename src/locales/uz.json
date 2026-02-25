@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -219,12 +220,12 @@
         "included": "Nima kiradi",
         "benefits": "Nima olasiz"
       },
-      "your_package": "Sizning paketingiz",
+      "your_package": "Your package",
       "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
-      "selected": "Tanlandi",
-      "select": "Tanlash",
+      "selected": "Selected",
+      "select": "Select",
       "base_price_label": "Boshlang'ich narx",
-      "final_price": "Yakuniy narx:",
+      "final_price": "Final price:",
       "promo_code_label": "Promokod",
       "promo_code_placeholder": "KODNI KIRITING",
       "promo_code_invalid": "Promokod xato kiritildi",
@@ -234,8 +235,8 @@
         "full": "+10% (Prepayment)"
       },
       "empty_package_desc": "Siz hali hech qanday xizmatni tanlamadingiz. Iltimos, xizmatlardan birini tanlang.",
-      "recommended": "Tavsiya etiladi",
-      "features": "Nimalar kiradi",
+      "recommended": "Recommended",
+      "features": "Features",
       "results": "Natijalar"
     },
     "comparison": {
