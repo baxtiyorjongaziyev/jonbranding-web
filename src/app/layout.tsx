@@ -117,8 +117,9 @@ const jsonLd = {
   }
 };
 
-const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>> = ({ children, params }) => {
-  const lang = locales.includes(params.lang) ? params.lang : defaultLocale;
+const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ children, params }) => {
+  const { lang: rawLang } = await params;
+  const lang = locales.includes(rawLang) ? rawLang : defaultLocale;
 
   return (
     <html lang={lang} suppressHydrationWarning className={poppins.variable}>
@@ -127,25 +128,26 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: { lang: Locale } }>
         <Script
           id="json-ld"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {/* Google Tag Manager / GA4 */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17674872079" strategy="afterInteractive"></Script>
+        {/* Google Tag Manager / GA4 - Optimized with lazyOnload */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17674872079" strategy="lazyOnload"></Script>
         <Script
           id="gtag-init"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-B3ZSKB40XY');
+              gtag('config', 'G-B3ZSKB40XY', { 'page_path': window.location.pathname });
               gtag('config', 'AW-17674872079');
             `,
           }}
         />
-        {/* AmoCRM Social Button */}
-        <Script id="amocrm-widget" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
+        {/* AmoCRM Social Button - Moved to lazyOnload for performance */}
+        <Script id="amocrm-widget" strategy="lazyOnload" dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
       </head>
       <body className={`font-body bg-white antialiased`} suppressHydrationWarning>
         <MainLayout>
