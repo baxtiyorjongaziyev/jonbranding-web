@@ -21,8 +21,8 @@ const basePricesUSD = {
     logoStandard: 780,
     packaging: 1150,
     smm: 980,
-    urgency: 0, // Ustama foizda hisoblanadi
-    nda: 0      // Ustama foizda hisoblanadi
+    urgency: 0,
+    nda: 0
 };
 
 const uzServiceDetails = {
@@ -69,29 +69,80 @@ const uzServiceDetails = {
         timeline: "15-20 ish kuni"
     },
     namingVIP: {
-        label: "👑 Naming VIP",
-        description: "Katta va xalqaro bozorga mo'ljallangan strategik neyming.",
+        label: "Naming VIP",
+        description: "Nom emas — aktiv",
+        subDescription: "Jiddiy investitsiya qiladiganlar uchun",
         price: basePricesUSD.namingVIP,
-        features: ["Baxtiyorjon Gaziyev nazorati", "10+ eksklyuziv nomlar", "6 tilda tahlil", "Patent tekshiruvi"],
-        results: ["Xalqaro darajadagi nom", "100% to'lov qaytarish kafolati"],
-        timeline: "20–25 ish kuni"
+        features: [
+            "15 ta nom varianti tayyorlanadi",
+            "Har bir nom uchun to'liq izoh beriladi",
+            "Nomning talaffuzi qulay, esda qolishi oson va jaranglashi tekshiriladi",
+            "Domen tekshiruvi (.com, .uz)",
+            "Instagram va Telegram uchun username bo'shligini tekshirish",
+            "O'zbekistonda va xalqaro bazalarda patent tekshiruvi",
+            "Raqobatchilarning nomlari tahlili va farqli pozitsiya",
+            "Nom boshqa tillarda noqulay ma'no bermasligi tekshiruvi",
+            "Nomning hissiy ma'nosi va taassuroti",
+            "3 ta qisqa shior varianti",
+            "Font va rang yo'nalishi bo'yicha tavsiya",
+            "Patent topshirish uchun hujjat tayyorlashda yordam",
+            "Nom egalik sertifikati",
+            "30 daqiqalik shaxsiy strategik konsultatsiya",
+            "Cheksiz tuzatish (30 kun ichida)"
+        ],
+        benefits: [
+            { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi." },
+            { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent hujjatlari va sertifikat bilan nomingiz rasman himoyalanadi." },
+            { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Investor va sheriklar uchun bu jiddiy signal bo'lib xizmat qiladi." },
+            { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "30 daqiqa shaxsiy suhbatda nomni tanlashda to'g'ri yo'lni belgilaymiz." }
+        ],
+        timeline: "15 ish kuni"
     },
     namingPremium: {
-        label: "Naming PREMIUM",
-        description: "O'rta va rivojlanayotgan biznes uchun eng maqbul tanlov.",
+        label: "Naming Premium",
+        description: "To'g'ri nom, to'g'ri asos",
+        subDescription: "O'sishni rejalashtiraganlar uchun",
         price: basePricesUSD.namingPremium,
-        features: ["5 ta strategik nom", "Bir nechta tilda tahlil", "2 ta klass bo'yicha patent tekshiruvi"],
-        results: ["Biznes maqsadga mos nom", "100% to'lov qaytarish kafolati"],
         recommended: true,
-        timeline: "14–20 ish kuni"
+        features: [
+            "10 ta nom varianti tayyorlanadi",
+            "Har bir nom uchun to'liq izoh beriladi",
+            "Nomning talaffuzi qulay, esda qolishi oson va jaranglashi tekshiriladi",
+            "Domen tekshiruvi (.com, .uz)",
+            "Instagram va Telegram uchun username bo'shligini tekshirish",
+            "O'zbekiston bazasida patent tekshiruvi",
+            "Raqobatchilarning nomlari tahlil qilinadi",
+            "Nomning hissiy ma'nosi va taassuroti",
+            "3 ta tuzatish raundi"
+        ],
+        benefits: [
+            { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kimdir nomingizni oldin patent qilmaganligini tekshiramiz." },
+            { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, unikal nom topamiz." },
+            { icon: "❤️", title: "Mijozlar yaxshi ko'radi", description: "Nomga his-tuyg'u yuklanadi — mijozlar eslab qoladi." },
+            { icon: "📈", title: "Kuchli boshlanish", description: "Kuchli nom marketing xarajatlarini kamaytirishga xizmat qiladi." }
+        ],
+        timeline: "7 ish kuni"
     },
     namingStandard: {
-        label: "Naming STANDARD",
-        description: "Kichik biznes va startaplar uchun tezkor yechim.",
+        label: "Naming Standart",
+        description: "Tez va ishonchli start",
+        subDescription: "Endigina boshlamoqchi bo'lganlar uchun",
         price: basePricesUSD.namingStandard,
-        features: ["3 ta jarangli nom", ".uz domen tekshiruvi", "Bitta klass bo'yicha patent tekshiruvi"],
-        results: ["Tez start uchun nom", "Eslab qolish oson"],
-        timeline: "7–10 ish kuni"
+        features: [
+            "5 ta nom varianti tayyorlanadi",
+            "Har bir nom uchun qisqa izoh beriladi",
+            "Nomning talaffuzi qulay va esda qolishi osonligi tekshiriladi",
+            "Domen tekshiruvi (.com, .uz)",
+            "Instagram va Telegram uchun username bo'shligini tekshirish",
+            "1 ta tuzatish raundi"
+        ],
+        benefits: [
+            { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Noto'g'ri talaffuz qilinadigan nom mijozlarni yo'qotishiga yo'l qo'ymaymiz." },
+            { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirish o'rniga, professional tahlil qilingan nom olasiz." },
+            { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "\"To'g'ri nom topdimmi?\" degan shubhalar yo'qoladi." },
+            { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va social media username band emasligini bilib olasiz." }
+        ],
+        timeline: "5 ish kuni"
     },
     logoVIP: {
         label: "👑 VIP — Logo + Stil + Brandbook",
@@ -176,7 +227,6 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     const mainKeys = ['strategy', 'commStrategy', 'namingStandard', 'namingPremium', 'namingVIP', 'logoStandard', 'logoPremium', 'logoVIP', 'packaging'];
     const surchargeKeys = ['urgency', 'nda'];
 
-    // Bazaviy xizmatlar yig'indisi
     for (const key in selectedServices) {
         if (selectedServices[key] && sd[key as keyof typeof sd] && !surchargeKeys.includes(key)) {
             basePrice += sd[key as keyof typeof sd].price;
@@ -184,7 +234,6 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
         }
     }
 
-    // Ustamalarni hisoblash (Surcharges)
     const surchargesApplied = [];
     let surchargesTotal = 0;
 
