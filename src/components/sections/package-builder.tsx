@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -9,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, AlertCircle, TrendingUp, Zap, Gift, Plus } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, TrendingUp, Zap, Gift, Plus } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 
@@ -177,12 +178,6 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                             <div className={cn("flex items-center gap-2 text-[10px] font-black uppercase tracking-widest", isVip ? "text-amber-400/50" : "text-slate-400")}>
                                 <Clock className="w-3 h-3" />
                                 <span>{timeline}</span>
-                            </div>
-                        )}
-                        {note && (
-                            <div className={cn("flex items-start gap-2 text-[10px] italic leading-tight", isVip ? "text-blue-300/40" : "text-slate-400")}>
-                                <AlertCircle className="w-3 h-3 shrink-0" />
-                                <span>{note}</span>
                             </div>
                         )}
                     </div>

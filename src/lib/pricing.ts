@@ -1,6 +1,11 @@
 
 'use client';
 
+/**
+ * @fileOverview Narxlar va xizmatlar bazasi.
+ * Bu yerda barcha tariflar, hisoblash mantiqi va chegirmalar jamlangan.
+ */
+
 const USD_TO_UZS_RATE = 12700;
 
 const convertToUzs = (usd: number) => {
@@ -207,6 +212,7 @@ const uzServiceDetails = {
 };
 
 export const getServiceDetails = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
+    // Kelajakda tillar bo'yicha alohida lug'atlar qaytarish mumkin
     return uzServiceDetails;
 };
 
