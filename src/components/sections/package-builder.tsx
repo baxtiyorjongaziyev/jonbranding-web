@@ -34,7 +34,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const detail = serviceDetails[id as keyof typeof serviceDetails];
     if (!detail) return null;
 
-    const { label, price, description, subDescription, features, benefits, results, timeline, recommended, note } = detail;
+    const { label, price, description, subDescription, features, benefits, results, timeline, recommended } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
     const isSurcharge = id === 'urgency' || id === 'nda';
@@ -224,9 +224,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
-    if (!isClient || !dictionary || !dictionary.servicesPage?.packageBuilder) return null;
+    if (!isClient || !dictionary) return null;
 
-    const translations = dictionary.servicesPage.packageBuilder;
+    const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any);
     const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any);
 
