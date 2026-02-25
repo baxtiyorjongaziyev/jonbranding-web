@@ -20,7 +20,6 @@ import Faq from '@/components/sections/faq';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 
-// Dynamically import components that use window or heavy hooks
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
 const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'), { ssr: false });
@@ -28,7 +27,6 @@ const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'), { 
 const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
   useEffect(() => {
     const SESSION_STORAGE_KEY = 'scroll_intent_shown';
-    
     if (typeof window === 'undefined') return;
     if (sessionStorage.getItem(SESSION_STORAGE_KEY)) return;
 
@@ -66,8 +64,10 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     const { tg } = useTelegram();
 
     const handleOpenModal = useCallback(() => {
-        const event = new CustomEvent('openContactModal');
-        window.dispatchEvent(event);
+        if (typeof window !== 'undefined') {
+            const event = new CustomEvent('openContactModal');
+            window.dispatchEvent(event);
+        }
     }, []);
 
     useScrollIntent(handleOpenModal, 0.8);
@@ -100,10 +100,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     return (
         <>
             <main>
-                {/* Hero is rendered immediately for best LCP */}
                 <Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
-                
-                {/* SSR-friendly components (Rendered on server, no mounted check needed) */}
                 <Stats dictionary={dictionary.stats} />
                 <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
                 <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />
@@ -113,7 +110,6 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <Gallery lang={lang} dictionary={dictionary.gallery} />
                 <FeaturedCaseStudy lang={lang} dictionary={dictionary.testimonials} />
                 
-                {/* Components that require hydration guard or use heavy scroll effects */}
                 {mounted ? (
                     <>
                         <Video />

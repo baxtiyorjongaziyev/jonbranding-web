@@ -10,16 +10,18 @@ import { Toaster } from '@/components/ui/toaster';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
 import { getDictionary } from '@/lib/dictionaries';
-import Script from 'next/script';
 
-const ContactModal = dynamic(() => import('@/components/contact-modal'));
+const ContactModal = dynamic(() => import('@/components/contact-modal'), {
+    loading: () => null,
+    ssr: false
+});
 
 function AnalyticsPageviewTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   
   useEffect(() => {
-    const url = pathname + searchParams.toString();
+    const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
     pageview(url);
   }, [pathname, searchParams]);
 
@@ -32,16 +34,14 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
     const [totalPrice, setTotalPrice] = useState(0);
     
     const pathname = usePathname();
-    const lang = pathname.split('/')[1] as 'uz' | 'ru' || 'uz';
-    const [dictionary, setDictionary] = useState<any>(null);
+    const lang = (pathname.split('/')[1] || 'uz') as 'uz' | 'ru' | 'en' | 'zh';
 
-    useEffect(() => {
-        getDictionary(lang).then(setDictionary);
-    }, [lang]);
-    
     const handleOpenModal = useCallback(() => {
+        if (typeof window === 'undefined') return;
+
         const selectionsJSON = localStorage.getItem('selectedServices');
-        const wantsUpfrontPaymentJSON = localStorage.getItem('wantsUpfrontPayment');
+        const discountType = localStorage.getItem('discountOption') || 'none';
+        const promoCode = localStorage.getItem('promoCode') || '';
         
         setPackageSummary('');
         setTotalPrice(0);
@@ -49,8 +49,11 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         if (selectionsJSON) {
             try {
                 const selectedServices = JSON.parse(selectionsJSON);
-                const wantsUpfrontPayment = wantsUpfrontPaymentJSON ? JSON.parse(wantsUpfrontPaymentJSON) : false;
-                const selections = { selectedServices, wantsUpfrontPayment };
+                const selections = { 
+                    selectedServices, 
+                    discountType: discountType.replace(/"/g, ''), 
+                    promoCode: promoCode.replace(/"/g, '') 
+                };
                 
                 const priceDetails = calculatePackagePrice(selections, lang);
                 if (priceDetails.base > 0) {
@@ -58,11 +61,8 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                     setPackageSummary(summary);
                     setTotalPrice(priceDetails.final);
                 }
-
             } catch (e) {
                 console.error("Failed to parse package details from localStorage", e);
-                 setPackageSummary('');
-                 setTotalPrice(0);
             }
         }
         setModalOpen(true);
@@ -72,9 +72,8 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
         setModalOpen(false);
     };
     
-    const reportError = (error: ErrorEvent) => {
+    const reportError = useCallback((error: ErrorEvent) => {
         const { message, filename, lineno, colno, error: errorObj } = error;
-        // Avoid reporting errors from browser extensions or third-party scripts
         if (!message || message.includes('Telegram API Error') || message === 'Script error.' || (filename && !filename.includes(window.location.origin))) return;
 
         fetch('/api/report-error', {
@@ -87,21 +86,18 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 userInfo: navigator.userAgent,
             }),
         }).catch(e => console.error("Failed to report error:", e));
-    };
+    }, []);
 
 
     useEffect(() => {
-        const handleOpen = () => handleOpenModal();
-        window.addEventListener('openContactModal', handleOpen);
+        window.addEventListener('openContactModal', handleOpenModal);
         window.addEventListener('error', reportError);
 
         return () => {
-            window.removeEventListener('openContactModal', handleOpen);
+            window.removeEventListener('openContactModal', handleOpenModal);
             window.removeEventListener('error', reportError);
         };
-    }, [handleOpenModal]);
-    
-    if (!dictionary) return null; // Or a loading spinner
+    }, [handleOpenModal, reportError]);
 
     return (
         <div className="flex min-h-screen flex-col bg-secondary/50">
