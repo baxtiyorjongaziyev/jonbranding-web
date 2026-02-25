@@ -3,7 +3,6 @@
 
 /**
  * @fileOverview Narxlar va xizmatlar bazasi.
- * Bu yerda barcha tariflar, hisoblash mantiqi va chegirmalar jamlangan.
  */
 
 const USD_TO_UZS_RATE = 12700;
@@ -38,8 +37,7 @@ const uzServiceDetails = {
         price: basePricesUSD.audit,
         features: ["Kuchli va zaif tomonlar tahlili", "Raqobatchilar bilan solishtirish", "Yaxshilash rejasini tuzish"],
         results: ["Xatoliklar ro'yxati", "Yaxshilash strategiyasi"],
-        timeline: "2-3 ish kuni",
-        note: "Faqat mavjud logo uchun."
+        timeline: "2-3 ish kuni"
     },
     namingCheck: {
         label: "Neyming Tekshiruvi",
@@ -55,8 +53,7 @@ const uzServiceDetails = {
         price: basePricesUSD.consultation,
         features: ["Muammoni aniqlashtirish", "Strategik tavsiyalar", "Savollarga javoblar"],
         results: ["Aniq harakatlar rejasi"],
-        timeline: "Kelishilgan vaqtda",
-        note: "Onlayn formatda."
+        timeline: "Kelishilgan vaqtda"
     },
     strategy: {
         label: "Brend-strategiya va platforma",
@@ -82,19 +79,12 @@ const uzServiceDetails = {
         features: [
             "15 ta nom varianti tayyorlanadi",
             "Har bir nom uchun to'liq izoh beriladi",
-            "Nomning talaffuzi qulay, esda qolishi oson va jaranglashi tekshiriladi",
+            "Talaffuz va jarangdorlik tekshiruvi",
             "Domen tekshiruvi (.com, .uz)",
-            "Instagram va Telegram uchun username bo'shligini tekshirish",
-            "O'zbekistonda va xalqaro bazalarda patent tekshiruvi",
-            "Raqobatchilarning nomlari tahlili va farqli pozitsiya",
-            "Nom boshqa tillarda noqulay ma'no bermasligi tekshiruvi",
-            "Nomning hissiy ma'nosi va taassuroti",
-            "3 ta qisqa shior varianti",
-            "Font va rang yo'nalishi bo'yicha tavsiya",
-            "Patent topshirish uchun hujjat tayyorlashda yordam",
+            "Patent tekshiruvi (Uzbekistan + WIPO)",
+            "Raqobatchilar tahlili",
             "Nom egalik sertifikati",
-            "30 daqiqalik shaxsiy strategik konsultatsiya",
-            "Cheksiz tuzatish (30 kun ichida)"
+            "Cheksiz tuzatish (30 kun)"
         ],
         benefits: [
             { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi." },
@@ -112,13 +102,9 @@ const uzServiceDetails = {
         recommended: true,
         features: [
             "10 ta nom varianti tayyorlanadi",
-            "Har bir nom uchun to'liq izoh beriladi",
-            "Nomning talaffuzi qulay, esda qolishi oson va jaranglashi tekshiriladi",
-            "Domen tekshiruvi (.com, .uz)",
-            "Instagram va Telegram uchun username bo'shligini tekshirish",
+            "Izoh va strategik tahlil",
+            "Talaffuz tekshiruvi",
             "O'zbekiston bazasida patent tekshiruvi",
-            "Raqobatchilarning nomlari tahlil qilinadi",
-            "Nomning hissiy ma'nosi va taassuroti",
             "3 ta tuzatish raundi"
         ],
         benefits: [
@@ -136,17 +122,16 @@ const uzServiceDetails = {
         price: basePricesUSD.namingStandard,
         features: [
             "5 ta nom varianti tayyorlanadi",
-            "Har bir nom uchun qisqa izoh beriladi",
-            "Nomning talaffuzi qulay va esda qolishi oson ekanligi tekshiriladi",
-            "Domen tekshiruvi (.com, .uz)",
-            "Instagram va Telegram uchun username bo'shligini tekshirish",
+            "Qisqa izoh",
+            "Talaffuz va esda qolarlilik",
+            "Domen va Username tekshiruvi",
             "1 ta tuzatish raundi"
         ],
         benefits: [
-            { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Noto'g'ri talaffuz qilinadigan nom mijozlarni yo'qotishiga yo'l qo'ymaymiz." },
-            { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirish o'rniga, professional tahlil qilingan nom olasiz." },
-            { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "\"To'g'ri nom topdimmi?\" degan shubhalar yo'qoladi." },
-            { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va social media username band emasligini bilib olasiz." }
+            { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Esda qolmaydigan yoki noto'g'ri nomlardan qutulasiz." },
+            { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirmasdan, tahlil qilingan nom olasiz." },
+            { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "Tekshirilgan nom bilan biznesni boshlash osonroq." },
+            { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va ijtimoiy tarmoqlardagi nomlarni band qila olasiz." }
         ],
         timeline: "5 ish kuni"
     },
@@ -197,8 +182,7 @@ const uzServiceDetails = {
         price: 0,
         features: ["Navbatdan tashqari xizmat", "24/7 jamoa ishtiroki", "Tezkor aloqa"],
         results: ["Vaqtni tejash", "Bozorga tezroq chiqish"],
-        timeline: "Muddat 50% qisqaradi",
-        note: "Umumiy narxga +50% qo'shiladi."
+        timeline: "Muddat 50% qisqaradi"
     },
     nda: {
         label: "NDA — Maxfiylik (+50%)",
@@ -206,8 +190,7 @@ const uzServiceDetails = {
         price: 0,
         features: ["Yuridik NDA shartnomasi", "Portfolioga qo'yilmaydi", "To'liq maxfiylik"],
         results: ["Strategik sirlar himoyasi"],
-        timeline: "Loyiha davomida",
-        note: "Umumiy narxga +50% qo'shiladi."
+        timeline: "Loyiha davomida"
     }
 };
 

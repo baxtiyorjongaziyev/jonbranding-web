@@ -36,18 +36,21 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
     }
   }, []);
 
+  if (!dictionary) return <div className="py-20 text-center"><Skeleton className="h-screen w-full" /></div>;
 
   return (
     <>
       <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary.servicesHero} />
       <WhyUs onCtaClick={handleOpenModal} lang={lang} />
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
-      <ServiceSections lang={lang} />
+      <ServiceSections lang={lang} dictionary={dictionary.serviceSections} />
       
       {isClient && dictionary.servicesPage ? (
-        <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary} />
+        <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
       ) : (
-        <div className="py-20 text-center text-gray-400">Ko'rinmayapti hech narsa</div>
+        <div className="py-20 text-center text-gray-400">
+            <Skeleton className="h-96 w-full max-w-6xl mx-auto rounded-3xl" />
+        </div>
       )}
 
       <UrgencyBlock />

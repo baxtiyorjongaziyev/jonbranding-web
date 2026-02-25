@@ -1,12 +1,11 @@
 
 'use client';
 
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, ScanText, Package, Paintbrush, Fingerprint, Book } from 'lucide-react';
-import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const serviceIcons: { [key: string]: React.ElementType } = {
@@ -17,14 +16,13 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     'qadoq-dizayni': Package,
 };
 
-const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
-    const [translations, setTranslations] = useState<any>(null);
+interface ServiceSectionsProps {
+    lang: string;
+    dictionary: any;
+}
 
-    useEffect(() => {
-        getDictionary(lang as Locale).then(dict => setTranslations(dict.serviceSections));
-    }, [lang]);
-
-    if (!translations) {
+const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary }) => {
+    if (!dictionary || !dictionary.services) {
         return (
             <section className="py-16 sm:py-24 bg-white">
                 <div className="container mx-auto px-4">
@@ -39,11 +37,11 @@ const ServiceSections: FC<{ lang: string }> = ({ lang }) => {
     }
 
     const orderedServices = [
-        translations.services.find((s: any) => s.id === 'neyming'),
-        translations.services.find((s: any) => s.id === 'logo-dizayni'),
-        translations.services.find((s: any) => s.id === 'firmenniy-stil'),
-        translations.services.find((s: any) => s.id === 'brandbook'),
-        translations.services.find((s: any) => s.id === 'qadoq-dizayni'),
+        dictionary.services.find((s: any) => s.id === 'neyming'),
+        dictionary.services.find((s: any) => s.id === 'logo-dizayni'),
+        dictionary.services.find((s: any) => s.id === 'firmenniy-stil'),
+        dictionary.services.find((s: any) => s.id === 'brandbook'),
+        dictionary.services.find((s: any) => s.id === 'qadoq-dizayni'),
     ].filter(Boolean);
     
     return (
