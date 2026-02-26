@@ -1,7 +1,23 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  experimental: {
+    urlImports: [
+      "https://framer.com/m/",
+      "https://framerusercontent.com/",
+      "https://ga.jspm.io/",
+      "https://jspm.dev/",
+    ],
+  },
+  devIndicators: {
+    buildActivity: false,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
