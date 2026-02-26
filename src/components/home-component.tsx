@@ -113,12 +113,14 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 {mounted ? (
                     <>
                         <Video />
-                        <CtaBlock 
-                            title={dictionary.home.cta1_title}
-                            description={dictionary.home.cta1_desc}
-                            buttonText={dictionary.home.cta1_button}
-                            onCtaClick={handleOpenModal}
-                        />
+                        {dictionary.home && (
+                            <CtaBlock 
+                                title={dictionary.home.cta1_title}
+                                description={dictionary.home.cta1_desc}
+                                buttonText={dictionary.home.cta1_button}
+                                onCtaClick={handleOpenModal}
+                            />
+                        )}
                         <Founder lang={lang} dictionary={dictionary.founder} />
                         <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />
                         <LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} />

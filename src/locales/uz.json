@@ -54,6 +54,11 @@
     "back_to_top": "Yuqoriga qaytish",
     "patent_calculator": "Patent Kalkulyatori"
   },
+  "home": {
+    "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
+    "cta1_desc": "Biznesingizni professional dizayn bilan yangi bosqichga olib chiqing. Biznesingiz uchun ideal yechimni topishga yordam beramiz.",
+    "cta1_button": "Mening biznesim uchun ham"
+  },
   "hero": {
     "headlines": [
       "Brendingiz |sotmayaptimi?| Biz buni tuzatamiz.",
@@ -266,16 +271,6 @@
       "recommended": "Tavsiya etiladi",
       "features": "Xizmatlar",
       "results": "Natijalar"
-    },
-    "comparison": {
-      "title": "Biz va Raqobatchilar",
-      "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklardan ancha hamyonbop narxda taqdim etamiz. Natija esa siz kutganingizdan ham a'lo bo'ladi.",
-      "features": "Xususiyatlar",
-      "whyPremiumTitle": "Nega faqat premium agentliklar?",
-      "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda berishdir.",
-      "ctaTitle": "Farqni ko'rdingiz. Endi tanlov vaqti!",
-      "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling va biz bilan bog'laning.",
-      "ctaButton": "Menga shunday yondashuv kerak"
     }
   },
   "contactModal": {
