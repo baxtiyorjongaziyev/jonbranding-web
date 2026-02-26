@@ -87,11 +87,9 @@ const uzServiceDetails = {
             "Raqobatchilarning nomlari tahlil qilinadi va siz uchun eng farqli pozitsiya aniqlanadi",
             "Nom boshqa tillarda noqulay ma'no bermasligini tekshiriladi (xalqaro bozor uchun)",
             "Nomning hissiy ma'nosi yoziladi — mijozlar ko'nglida qanday taassurot qoldirishi",
-            "3 ta qisqa shior varianti tayyorlanadi (kompaniya nomi yoniga yoziladigan 3–6 so'zlik gap. Masalan: Nike — 'Just Do It')",
+            "3 ta qisqa shior varianti tayyorlanadi",
             "Font va rang yo'nalishi bo'yicha tavsiya beriladi",
-            "Patent topshirish uchun hujjat tayyorlashda yordam ko'rsatiladi",
-            "Nom rasman sizning mulkingiz ekanligini tasdiqlovchi sertifikat beriladi",
-            "30 daqiqalik shaxsiy strategik konsultatsiya",
+            "Patentga topshirib berish xizmati (Davlat bojlari alohida)",
             "Cheksiz tuzatish (30 kun ichida)"
         ],
         benefits: [
@@ -121,7 +119,7 @@ const uzServiceDetails = {
         ],
         benefits: [
             { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kimdir sizning nomingizni oldin patent qilmaganligini tekshiramiz. Kelajakda qimmat muammolardan qutulasiz." },
-            { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, hech kimga o'xshamagan nom find qilamiz. Mijozlar sizni eslab qoladi." },
+            { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, hech kimga o'xshamagan nom topamiz. Mijozlar sizni eslab qoladi." },
             { icon: "❤️", title: "Mijozlar nomingizni yaxshi ko'radi", description: "Nomga his-tuyg'u yuklanadi — mijozlar eslab qoladi va do'stlariga aytib beradi." },
             { icon: "📈", title: "Brendingiz kuchli boshlanadi", description: "Kuchli nom marketing xarajatlarini kamaytiradi. Nom o'zi ishlaydi — har safar aytilganda brendingiz mustahkamlanadi." }
         ]
