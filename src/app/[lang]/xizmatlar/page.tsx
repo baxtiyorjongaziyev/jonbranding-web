@@ -1,3 +1,4 @@
+
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import XizmatlarClient from './xizmatlar-client';
 
