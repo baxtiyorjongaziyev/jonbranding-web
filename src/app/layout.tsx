@@ -130,9 +130,26 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ 
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {/* Google Tag Manager / GA4 - Optimized with lazyOnload */}
+        
+        {/* Google Consent Mode v2 Initialization */}
+        <Script id="google-consent-mode" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              'ad_storage': 'granted',
+              'ad_user_data': 'granted',
+              'ad_personalization': 'granted',
+              'analytics_storage': 'granted'
+            });
+          `}
+        </Script>
+
+        {/* Google Tag Manager / GA4 / Google Ads */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY" strategy="lazyOnload"></Script>
         <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17674872079" strategy="lazyOnload"></Script>
         <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-389056476" strategy="lazyOnload"></Script>
+        
         <Script
           id="gtag-init"
           strategy="lazyOnload"
@@ -147,7 +164,8 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ 
             `,
           }}
         />
-        {/* AmoCRM Social Button - Moved to lazyOnload for performance */}
+        
+        {/* AmoCRM Social Button */}
         <Script id="amocrm-widget" strategy="lazyOnload" dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
       </head>
       <body className={`font-body bg-white antialiased`} suppressHydrationWarning>

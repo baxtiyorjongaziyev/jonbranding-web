@@ -95,7 +95,7 @@ const uzServiceDetails = {
             { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi, hech qayerda noqulay ma'no bermaydi." },
             { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent hujjatlari va sertifikat bilan nomingiz rasman himoyalanadi. Hech kim o'g'irlay olmaydi, hech kim taqlid qila olmaydi." },
             { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Himoyalangan kuchli nom — kompaniya qiymatining bir qismi. Investor va sheriklar uchun bu jiddiy signal." },
-            { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "30 daqiqa shaxsiy suhbatda nomni tanlashda to'g'ri yo'lni birgalikda belgilaymiz. Yolg'iz emas, mutaxassis bilan." }
+            { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "Biz bilan birgalikda tanlashda to'g'ri yo'lni belgilaymiz. Yolg'iz emas, mutaxassis bilan." }
         ]
     },
     namingPremium: {
@@ -139,7 +139,7 @@ const uzServiceDetails = {
         ],
         benefits: [
             { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Esda qolmaydigan yoki noto'g'ri talaffuz qilinadigan nom birinchi mijozlaringizni yo'qotadi. Biz buni oldini olamiz." },
-            { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirish o'rniga, 3 kunda professional tahlil qilingan nom olasiz." },
+            { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirish o'rniga, professional tahlil qilingan nom olasiz." },
             { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "“To'g'ri nom topdimmi?” degan shubha yo'qoladi. Tahlil qilingan, tekshirilgan nom qo'lingizda bo'ladi." },
             { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va social media username band emasligini bilib olasiz — keyinchalik boshqa nom qidirish muammosi bo'lmaydi." }
         ]
