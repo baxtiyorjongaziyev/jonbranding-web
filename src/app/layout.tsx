@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
@@ -133,6 +132,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ 
         />
         {/* Google Tag Manager / GA4 - Optimized with lazyOnload */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-17674872079" strategy="lazyOnload"></Script>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-389056476" strategy="lazyOnload"></Script>
         <Script
           id="gtag-init"
           strategy="lazyOnload"
@@ -143,6 +143,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ 
               gtag('js', new Date());
               gtag('config', 'G-B3ZSKB40XY', { 'page_path': window.location.pathname });
               gtag('config', 'AW-17674872079');
+              gtag('config', 'AW-389056476');
             `,
           }}
         />
