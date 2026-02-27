@@ -1,4 +1,3 @@
-
 {
   "header": {
     "portfolio": "Portfolio",
@@ -189,11 +188,11 @@
     "title": "Ko'p beriladigan savollar",
     "subtitle": "Brending jarayoni, narxlar va boshqa mavzulardagi eng ko'p beriladigan savollarga javoblar.",
     "faqItems": [
-      { "question": "Why are prices not fixed?", "answer": "Each project is unique. The price is calculated individually depending on the complexity of the project, the volume of work and your tasks. We offer an optimal solution for your brand." },
-      { "question": "How is the work process structured?", "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is coordinated with you, and you have full control over the process." },
-      { "question": "Can I order only a logo?", "answer": "We create not just a logo, but a full identification system that makes the brand recognizable and effective. This creates long-term value for your business." },
-      { "question": "What are the payment terms?", "answer": "Standard scheme — 50% upfront payment, 50% after project delivery. We can also discuss individual terms for your convenience." },
-      { "question": "How long does the work take?", "answer": "Deadlines depend on the type of service. For example, creating a logo — 2-4 weeks, brand strategy — from 8 weeks. The final deadline is determined after project approval." }
+      { "question": "Nega narxlar aniq ko'rsatilmagan?", "answer": "Har bir loyiha individual yondashuvni talab qiladi. Narx loyiha murakkabligi, ish hajmi va sizning vazifalaringizdan kelib chiqib hisoblanadi." },
+      { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishiladi." },
+      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni tanituvchi va samarali qiluvchi to'liq identifikatsiya tizimini yaratamiz." },
+      { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% ish topshirilgandan so'ng. Individual shartlarni ham kelishishimiz mumkin." },
+      { "question": "Ish qancha vaqt davom etadi?", "answer": "Muddatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend strategiyasi — 8 haftadan boshlanadi." }
     ],
     "ctaTitle": "Shubhalarga o'rin qoldirmang!",
     "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yeni bosqichga olib chiqamiz.",
@@ -343,42 +342,42 @@
     }
   },
   "personalOfferBlock": {
-    "title": "💎 MY OFFER:",
-    "subtitle": "What you will get:",
-    "ctaButton": "I Need This",
+    "title": "💎 MENING TAKLIFIM:",
+    "subtitle": "Siz nima olasiz:",
+    "ctaButton": "Menga aynan shu kerak",
     "sections": [
-      { "title": "1️⃣ STRATEGY", "points": ["Brand positioning and competitive analysis", "Target audience map", "Unique Selling Proposition (USP)"] },
-      { "title": "2️⃣ IDENTITY", "points": ["Professional logo (3-5 variants)", "Corporate color palette", "Typography and style guide"] },
-      { "title": "3️⃣ DOCUMENTATION", "points": ["Full Brandbook (30-50 pages)", "Files in all formats (AI, PNG, PDF, SVG)", "Guide: how to use the logo"] },
-      { "title": "4️⃣ LEGAL PROTECTION", "points": ["Naming consultation", "Patent and Trademark registration process", "Intellectual property protection strategy"] },
-      { "title": "5️⃣ SUPPORT", "points": ["3 months of free revisions", "Constant communication via Telegram", "Brand application advice"] }
+      { "title": "1️⃣ STRATEGIYA", "points": ["Brend pozitsiyasi va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Noyob Sotuv Taklifi (USP)"] },
+      { "title": "2️⃣ IDENTIFIKATSIYA", "points": ["Professional logotip (3-5 variant)", "Firma ranglar palitrasi", "Tipografika va uslub qo'llanmasi"] },
+      { "title": "3️⃣ HUJJATLASHTIRISH", "points": ["To'liq Brendbuk (30-50 sahifa)", "Barcha formatdagi fayllar (AI, PNG, PDF, SVG)", "Logotipdan foydalanish yo'riqnomasi"] },
+      { "title": "4️⃣ HUQUQIY HIMOYA", "points": ["Neyming konsultatsiyasi", "Patent va Tovar belgisini ro'yxatdan o'tkazish", "Intellektual mulkni himoya qilish strategiyasi"] },
+      { "title": "5️⃣ QO'LLAB-QUVVATLASH", "points": ["3 oy davomida bepul tuzatishlar", "Telegram orqali doimiy aloqa", "Brendni tatbiq etish bo'yicha maslahatlar"] }
     ]
   },
   "urgencyBlock": {
-    "title": "🔥 ПРЕЖДЕ ЧЕМ ВЫ ЗАКРОЕТЕ ЭТУ СТРАНИЦУ...",
-    "subtitle": "Представьте:",
-    "line1": "Завтра ваш конкурент вышел с профессиональным брендом. Логотип — сногсшибательный. Упаковка — первая бросается в глаза в магазине.",
-    "line2": "Клиенты покупают не у вас, а у НЕГО.",
-    "line3": "Причина проста: Он инвестировал. А вы... думали."
+    "title": "🔥 USHBU SAHIFANI YOPISHDAN OLDIN...",
+    "subtitle": "Tasavvur qiling:",
+    "line1": "Ertaga raqobatchingiz professional brend bilan bozorga chiqdi. Logotipi hayratlanarli. Qadog'i do'konda birinchi bo'lib ko'zga tashlanadi.",
+    "line2": "Mijozlar sizdan emas, balki UNDAN sotib olishmoqda.",
+    "line3": "Sababi oddiy: U sarmoya kiritdi. Siz esa... o'ylab ko'rdingiz."
   },
   "queueStatus": {
-    "subtitle": "Slots are limited",
-    "title": "Hurry! Book your slot!",
-    "description": "We dedicate time to each project to ensure high quality. Therefore, we work simultaneously only with limited number of projects.",
-    "queueTitle": "Project queue",
-    "booked": "Booked",
-    "available": "Available",
-    "tooltipBooked": "Slot is booked",
-    "tooltipAvailable": "You can sign up for queue",
-    "remainingSlots": "Remaining free slots",
-    "slotsUnit": "pcs",
-    "onlineNow": "Online now",
-    "peopleUnit": "people",
-    "nextProjectStart": "Next project start",
-    "ctaButton": "Book my slot",
-    "ctaSubtitle": "Be one step ahead of your competitors!",
+    "subtitle": "Joylar cheklangan",
+    "title": "Shoshiling! O'z joyingizni band qiling!",
+    "description": "Biz har bir loyihaga yuqori sifatni ta'minlash uchun vaqt ajratamiz. Shuning uchun bir vaqtning o'zida faqat cheklangan miqdordagi loyihalar bilan ishlaymiz.",
+    "queueTitle": "Loyihalar navbati",
+    "booked": "Band",
+    "available": "Bo'sh",
+    "tooltipBooked": "Ushbu joy band qilingan",
+    "tooltipAvailable": "Navbatga yozilishingiz mumkin",
+    "remainingSlots": "Qolgan bo'sh joylar",
+    "slotsUnit": "ta",
+    "onlineNow": "Hozir saytda",
+    "peopleUnit": "kishi",
+    "nextProjectStart": "Keyingi loyiha boshlanishi",
+    "ctaButton": "Joyimni band qilish",
+    "ctaSubtitle": "Raqobatchilaringizdan bir qadam oldinda bo'ling!",
     "timeframes": {
-      "2 weeks": "within 2 weeks"
+      "2 weeks": "2 hafta ichida"
     }
   }
 }
