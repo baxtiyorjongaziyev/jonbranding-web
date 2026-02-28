@@ -165,6 +165,33 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ 
             `,
           }}
         />
+
+        {/* Amplitude Script with Session Replay and Autocapture */}
+        <Script src="https://cdn.amplitude.com/script/1c82e6734ed6525393807b4e56f105a5.js" strategy="lazyOnload"></Script>
+        <Script id="amplitude-init" strategy="lazyOnload">
+          {`
+            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+            window.amplitude.init('1c82e6734ed6525393807b4e56f105a5', {
+              "fetchRemoteConfig":true,
+              "autocapture":{
+                "attribution":true,
+                "fileDownloads":true,
+                "formInteractions":true,
+                "pageViews":true,
+                "sessions":true,
+                "elementInteractions":true,
+                "networkTracking":true,
+                "webVitals":true,
+                "frustrationInteractions":{
+                  "thrashedCursor":true,
+                  "errorClicks":true,
+                  "deadClicks":true,
+                  "rageClicks":true
+                }
+              }
+            });
+          `}
+        </Script>
         
         {/* AmoCRM Social Button */}
         <Script id="amocrm-widget" strategy="lazyOnload" dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
