@@ -17,54 +17,14 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'img2.teletype.in',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'img1.teletype.in',
-        port: '',
-        pathname: '/**',
-      },
-       {
-        protocol: 'https',
-        hostname: 'img4.teletype.in',
-        port: '',
-        pathname: '/**',
-      },
-       {
-        protocol: 'https',
-        hostname: 'img3.teletype.in',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.prod.website-files.com',
-        port: '',
-        pathname: '/**',
-      },
-       {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      }
+      { protocol: 'https', hostname: 'placehold.co' },
+      { protocol: 'https', hostname: 'img1.teletype.in' },
+      { protocol: 'https', hostname: 'img2.teletype.in' },
+      { protocol: 'https', hostname: 'img3.teletype.in' },
+      { protocol: 'https', hostname: 'img4.teletype.in' },
+      { protocol: 'https', hostname: 'cdn.prod.website-files.com' },
+      { protocol: 'https', hostname: 'picsum.photos' },
+      { protocol: 'https', hostname: 'images.unsplash.com' }
     ],
   },
 };

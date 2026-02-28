@@ -3,6 +3,7 @@
 
 /**
  * @fileOverview Narxlar va xizmatlar bazasi.
+ * Includes VIP tariffs, RAMAZON promo, and 50% surcharges for Urgency/NDA.
  */
 
 const USD_TO_UZS_RATE = 12700;
@@ -31,15 +32,12 @@ const basePricesUSD = {
 };
 
 export const getServiceDetails = (lang: string = 'uz') => {
-    // We return the same structure but titles/descriptions could be translated if needed via another lookup
-    // For now we use the keys that match the dictionary IDs
     const sd: any = {
         audit: {
             label: "Logo Auditi",
             description: "Mavjud logotipni tahlil qilish va yaxshilash bo'yicha tavsiyalar.",
             price: basePricesUSD.audit,
             features: ["Kuchli va zaif tomonlar tahlili", "Raqobatchilar bilan solishtirish", "Yaxshilash rejasini tuzish"],
-            results: ["Xatoliklar ro'yxati", "Yaxshilash strategiyasi"],
             timeline: "2-3 ish kuni"
         },
         namingCheck: {
@@ -47,7 +45,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: "Brend nomining O'zbekiston va xalqaro bazalarda bo'shligini tekshirish.",
             price: basePricesUSD.namingCheck,
             features: ["IMA bazasi (O'zbekiston)", "WIPO bazasi (Xalqaro)", "Domen va ijtimoiy tarmoqlar"],
-            results: ["Huquqiy tozalik hisoboti", "Xatarlar tahlili"],
             timeline: "1-2 ish kuni"
         },
         consultation: {
@@ -55,7 +52,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: "Brending bo'yicha Baxtiyorjon Gaziyevdan professional maslahat.",
             price: basePricesUSD.consultation,
             features: ["Muammoni aniqlashtirish", "Strategik tavsiyalar", "Savollarga javoblar"],
-            results: ["Aniq harakatlar rejasi"],
             timeline: "Kelishilgan vaqtda"
         },
         strategy: {
@@ -63,7 +59,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: "Biznesingiz uchun natija keltiradigan poydevor.",
             price: basePricesUSD.strategy,
             features: ["Bozor tahlili", "Pozitsiyalash", "Brend platformasi", "Tone of Voice"],
-            results: ["Brend platformasi hujjati", "Pozitsiyalash strategiyasi"],
             timeline: "20-30 ish kuni"
         },
         commStrategy: {
@@ -71,7 +66,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: "Mijozlar bilan muloqot strategiyasi va Tone of Voice.",
             price: basePricesUSD.commStrategy,
             features: ["Asosiy xabarlar", "Kanallarni rejalashtirish", "Content-pillerlar"],
-            results: ["Muloqot qo'llanmasi"],
             timeline: "15-20 ish kuni"
         },
         namingVIP: {
@@ -82,24 +76,23 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: "15 ish kuni",
             features: [
                 "15 ta nom varianti tayyorlanadi",
-                "Har bir nom uchun to'liq izoh beriladi — nima uchun bu nom aynan sizning biznesingizga mos ekanligi tushuntiriladi",
-                "Nomning talaffuzi qulay, esda qolishi oson va jaranglashi tekshiriladi",
-                "Domen tekshiruvi (.com, .uz)",
-                "Instagram va Telegram uchun username bo'sh-bo'shligini tekshiriladi",
-                "O'zbekistonda va xalqaro bazalarda patent tekshiruvi o'tkaziladi",
-                "Raqobatchilarning nomlari tahlil qilinadi va siz uchun eng farqli pozitsiya aniqlanadi",
-                "Nom boshqa tillarda noqulay ma'no bermasligini tekshiriladi (xalqaro bozor uchun)",
-                "Nomning hissiy ma'nosi yoziladi — mijozlar ko'nglida qanday taassurot qoldirishi",
-                "3 ta qisqa shior varianti tayyorlanadi",
-                "Font va rang yo'nalishi bo'yicha tavsiya beriladi",
+                "Har bir nom uchun to'liq izoh beriladi",
+                "Talaffuz, jarang va esda qolishi tekshiriladi",
+                "Domen va Username tekshiruvi (.com, .uz, TG, IG)",
+                "O'zbekiston va xalqaro patent tekshiruvi",
+                "Raqobatchilar tahlili va unikal pozitsiya",
+                "Xalqaro bozor uchun tillararo tekshiruv",
+                "Brendning hissiy ma'nosi va ta'siri",
+                "3 ta qisqa shior varianti",
+                "Font va rang yo'nalishi bo'yicha tavsiya",
                 "Patentga topshirib berish xizmati (Davlat bojlari alohida)",
                 "Cheksiz tuzatish (30 kun ichida)"
             ],
             benefits: [
-                { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi, hech qayerda noqulay ma'no bermaydi." },
-                { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent hujjatlari va sertifikat bilan nomingiz rasman himoyalanadi. Hech kim o'g'irlay olmaydi, hech kim taqlid qila olmaydi." },
-                { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Himoyalangan kuchli nom — kompaniya qiymatining bir qismi. Investor va sheriklar uchun bu jiddiy signal." },
-                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "30 daqiqa shaxsiy suhbatda nomni tanlashda to'g'ri yo'lni birgalikda belgilaymiz. Yolg'iz emas, mutaxassis bilan." }
+                { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz dunyo bo'ylab ishonchli ishlaydi." },
+                { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent orqali rasman himoyalangan nom." },
+                { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Himoyalangan nom — bu real aktiv." },
+                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "Mutaxassis bilan birga to'g'ri yo'lni tanlaysiz." }
             ]
         },
         namingPremium: {
@@ -111,20 +104,19 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: "7 ish kuni",
             features: [
                 "10 ta nom varianti tayyorlanadi",
-                "Har bir nom uchun to'liq izoh beriladi — nima uchun bu nom aynan sizning biznesingizga mos ekanligi tushuntiriladi",
-                "Nomning talaffuzi qulay, esda qolishi oson va jaranglashi tekshiriladi",
-                "Domen tekshiruvi (.com, .uz)",
-                "Instagram va Telegram uchun username bo'sh-bo'shligini tekshiriladi",
-                "O'zbekiston bazasida patent tekshiruvi o'tkaziladi",
-                "Raqobatchilarning nomlari tahlil qilinadi",
-                "Nomning hissiy ma'nosi yoziladi — mijozlar ko'nglida qanday taassurot qoldirishi",
+                "Har bir nom uchun strategik izoh",
+                "Talaffuz va esda qolishi tekshiriladi",
+                "Domen va Username tekshiruvi",
+                "O'zbekiston bazasida patent tekshiruvi",
+                "Raqobatchilarning nomlari tahlili",
+                "Nomning hissiy ma'nosi tavsifi",
                 "3 ta tuzatish raundi"
             ],
             benefits: [
-                { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kimdir sizning nomingizni oldin patent qilmaganligini tekshiramiz. Kelajakda qimmat muammolardan qutulasiz." },
-                { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, hech kimga o'xshamagan nom topamiz. Mijozlar sizni eslab qoladi." },
-                { icon: "❤️", title: "Mijozlar nomingizni yaxshi ko'radi", description: "Nomga his-tuyg'u yuklanadi — mijozlar eslab qoladi va do'stlariga aytib beradi." },
-                { icon: "📈", title: "Brendingiz kuchli boshlanadi", description: "Kuchli nom marketing xarajatlarini kamaytiradi. Nom o'zi ishlaydi — har safar aytilganda brendingiz mustahkamlanadi." }
+                { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kelajakdagi qimmat muammolardan qutulasiz." },
+                { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Mijozlar sizni boshqalardan ajratib taniydi." },
+                { icon: "❤️", title: "Mijozlar yaxshi ko'radi", description: "Nomga his-tuyg'u va sadoqat yuklanadi." },
+                { icon: "📈", title: "Kuchli boshlanish", description: "Marketing xarajatlarini kamaytiruvchi nom." }
             ]
         },
         namingStandard: {
@@ -135,17 +127,16 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: "5 ish kuni",
             features: [
                 "5 ta nom varianti tayyorlanadi",
-                "Har bir nom uchun qisqa izoh beriladi — nima uchun bu nom sizga mos ekanligi tushuntiriladi",
-                "Nomning talaffuzi qulay va esda qolishi oson ekanligi tekshiriladi",
-                "Domen tekshiruvi (.com, .uz)",
-                "Instagram va Telegram uchun username bo'sh-bo'shligini tekshiriladi",
+                "Nomlar uchun qisqa izohlar",
+                "Talaffuz qulayligi tekshiruvi",
+                "Domen va Username tekshiruvi",
                 "1 ta tuzatish raundi"
             ],
             benefits: [
-                { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Esda qolmaydigan yoki noto'g'ri talaffuz qilinadigan nom birinchi mijozlaringizni yo'qotadi. Biz buni oldini olamiz." },
-                { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirish o'rniga, 3 kunda professional tahlil qilingan nom olasiz." },
-                { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "“To'g'ri nom find qildimmi?” degan shubha yo'qoladi. Tahlil qilingan, tekshirilgan nom qo'lingizda bo'ladi." },
-                { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va social media username band emasligini bilib olasiz — keyinchalik boshqa nom qidirish muammosi bo'lmaydi." }
+                { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Noto'g'ri nomdan keladigan zararni oldini olamiz." },
+                { icon: "⚡", "title": "Vaqt tejaysiz", description: "Professional tahlil qilingan nomni tezda olasiz." },
+                { icon: "✅", "title": "Ishonch bilan boshlaysiz", "description": "Tekshirilgan nom bilan xavotirsiz ish boshlang." },
+                { icon: "📱", "title": "Digital tayyor", "description": "Domen va username muammosi bo'lmaydi." }
             ]
         },
         logoVIP: {
@@ -153,7 +144,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: "Katta va o'sishga yo'naltirilgan bizneslar uchun to'liq upakovka.",
             price: basePricesUSD.logoVIP,
             features: ["Baxtiyorjon Gaziyev nazorati", "8+ logotip konsepsiyasi", "25+ touchpoint dizayn", "To'liq Brandbook"],
-            results: ["Mustahkam vizual tizim", "100% to'lov qaytarish kafolati"],
             timeline: "20–30 ish kuni"
         },
         logoPremium: {
@@ -161,7 +151,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: "Brendini jiddiy rivojlantirayotganlar uchun vizual tizim.",
             price: basePricesUSD.logoPremium,
             features: ["5 ta logotip konsepsiyasi", "Firma uslubi (ranglar, shriftlar)", "15+ touchpoint dizayn"],
-            results: ["Yaxlit vizual obraz", "100% to'lov qaytarish kafolati"],
             recommended: true,
             timeline: "14–20 ish kuni"
         },
@@ -170,7 +159,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: "Startaplar uchun sifatli va tezkor logotip.",
             price: basePricesUSD.logoStandard,
             features: ["3 ta logotip konsepsiyasi", "5 ta asosiy touchpoint", "Ranglar kodi"],
-            results: ["Tayyor logotip", "Raqobatchilardan ajralib turish"],
             timeline: "7–10 ish kuni"
         },
         packaging: {
@@ -178,31 +166,25 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: "3 SKU uchun professional qadoq ishlab chiqish.",
             price: basePricesUSD.packaging,
             features: ["Bozor tahlili", "2 ta dizayn konsepsiyasi", "Chopga tayyor fayllar"],
-            results: ["Sotuvchi qadoq dizayni"],
             timeline: "10-15 ish kuni"
         },
         smm: {
             label: "Ijtimoiy tarmoqlar uchun stil",
-            description: "Postlar va storislarni brendingda bezash tizimi.",
+            description: "Postlar va storislarni bezash tizimi.",
             price: basePricesUSD.smm,
             features: ["6 ta post shabloni", "6 ta stories shabloni", "Highlight coverlar"],
-            results: ["Tayyor dizayn shablonlari"],
             timeline: "5-7 ish kuni"
         },
         urgency: {
             label: "Shoshilinch loyiha (+50%)",
-            description: "Loyihani navbatdan tashqari boshlash va 2 barobar tezroq bitirib berish.",
+            description: "2 barobar tezroq bitirib berish.",
             price: 0,
-            features: ["Navbatdan tashqari xizmat", "24/7 jamoa ishtiroki", "Tezkor aloqa"],
-            results: ["Vaqtni tejash", "Bozorga tezroq chiqish"],
             timeline: "Muddat 50% qisqaradi"
         },
         nda: {
             label: "NDA — Maxfiylik (+50%)",
-            description: "Loyiha tafsilotlarini sir saqlash va natijalarni portfolioga qo'shmaslik kelishuvi.",
+            description: "Loyiha natijalarini portfolioga qo'shmaslik.",
             price: 0,
-            features: ["Yuridik NDA shartnomasi", "Portfolioga qo'yilmaydi", "To'liq maxfiylik"],
-            results: ["Strategik sirlar himoyasi"],
             timeline: "Loyiha davomida"
         }
     };
@@ -307,36 +289,3 @@ export const generateSummary = (selections: any, lang: string = 'uz'): string =>
         .filter(Boolean)
         .join(', ');
 }
-
-export const comparisonData = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
-    const t: any = {
-        uz: [
-            { feature: "Strategik yondashuv", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "Bozor tahlili", competitors: { jon: true, mano: true, abba: true, mountain: false } },
-            { feature: "Neyming (Patent tahlili bilan)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "Logo + Firma uslubi", competitors: { jon: true, mano: true, abba: true, mountain: true } },
-            { feature: "Brandbook (to'liq)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "Narx (Premium sifat)", competitors: { jon: "Hamyonbop", mano: "Juda qimmat", abba: "Qimmat", mountain: "O'rtacha" } },
-            { feature: "Muddat", competitors: { jon: "Tezkor", mano: "Uzoq", abba: "O'rtacha", mountain: "Tez" } },
-        ],
-        ru: [
-            { feature: "Стратегический подход", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "Анализ рынка", competitors: { jon: true, mano: true, abba: true, mountain: false } },
-            { feature: "Нейминг (с патентным анализом)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "Лого + Фирменный стиль", competitors: { jon: true, mano: true, abba: true, mountain: true } },
-            { feature: "Брендбук (полный)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "Цена (Премиум качество)", competitors: { jon: "Доступно", mano: "Очень дорого", abba: "Дорого", mountain: "Средне" } },
-            { feature: "Сроки", competitors: { jon: "Быстро", mano: "Долго", abba: "Средне", mountain: "Быстро" } },
-        ],
-        en: [
-            { feature: "Strategic approach", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "Market analysis", competitors: { jon: true, mano: true, abba: true, mountain: false } },
-            { feature: "Naming (with patent analysis)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "Logo + Corporate Identity", competitors: { jon: true, mano: true, abba: true, mountain: true } },
-            { feature: "Brandbook (full)", competitors: { jon: true, mano: true, abba: false, mountain: false } },
-            { feature: "Price (Premium quality)", competitors: { jon: "Affordable", mano: "Very expensive", abba: "Expensive", mountain: "Average" } },
-            { feature: "Timeline", competitors: { jon: "Fast", mano: "Long", abba: "Average", mountain: "Fast" } },
-        ]
-    };
-    return t[lang] || t.uz;
-};
