@@ -9,9 +9,6 @@ const nextConfig = {
       "https://jspm.dev/",
     ],
   },
-  devIndicators: {
-    buildActivity: false,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
