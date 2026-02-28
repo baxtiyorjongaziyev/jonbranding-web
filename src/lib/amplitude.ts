@@ -1,11 +1,17 @@
 
 'use client';
 
-const AMPLITUDE_API_KEY = process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY || '';
+/**
+ * @fileOverview Amplitude tracking configuration.
+ * Uses both Browser and Node SDKs safely for Next.js.
+ */
+
+const AMPLITUDE_API_KEY = '1c82e6734ed6525393807b4e56f105a5';
 
 export const initAmplitude = () => {
   if (typeof window !== 'undefined' && AMPLITUDE_API_KEY) {
     try {
+      // Dynamic import to prevent SSR module issues
       const amplitude = require('@amplitude/analytics-browser');
       amplitude.init(AMPLITUDE_API_KEY, {
         defaultTracking: {
@@ -16,7 +22,7 @@ export const initAmplitude = () => {
         },
       });
     } catch (e) {
-      console.warn('Amplitude initialization failed', e);
+      console.warn('Amplitude Browser SDK initialization failed', e);
     }
   }
 };
