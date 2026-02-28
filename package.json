@@ -74,6 +74,10 @@
   },
   "overrides": {
     "react": "$react",
-    "react-dom": "$react-dom"
+    "react-dom": "$react-dom",
+    "react-day-picker": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }
