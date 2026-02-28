@@ -289,3 +289,36 @@ export const generateSummary = (selections: any, lang: string = 'uz'): string =>
         .filter(Boolean)
         .join(', ');
 }
+
+export const comparisonData = (lang: 'uz' | 'ru' | 'en' = 'uz') => {
+    const data = {
+        uz: [
+            { feature: "Strategik yondashuv", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Bozor tahlili", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Patent tekshiruvi", competitors: { jon: true, mano: "Kelishiladi", abba: false, mountain: false } },
+            { feature: "Premium dizayn sifati", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Narx (o'rtacha)", competitors: { jon: "$1,500+", mano: "$5,000+", abba: "$3,000+", mountain: "$2,500+" } },
+            { feature: "Tezkor aloqa (24/7)", competitors: { jon: true, mano: false, abba: false, mountain: false } },
+            { feature: "Bajarish muddati", competitors: { jon: "2-4 hafta", mano: "2-3 oy", abba: "1-2 oy", mountain: "1-2 oy" } },
+        ],
+        ru: [
+            { feature: "Стратегический подход", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Анализ рынка", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Патентная проверка", competitors: { jon: true, mano: "По догов.", abba: false, mountain: false } },
+            { feature: "Качество дизайна", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Цена (в среднем)", competitors: { jon: "$1,500+", mano: "$5,000+", abba: "$3,000+", mountain: "$2,500+" } },
+            { feature: "Связь 24/7", competitors: { jon: true, mano: false, abba: false, mountain: false } },
+            { feature: "Сроки выполнения", competitors: { jon: "2-4 недели", mano: "2-3 месяца", abba: "1-2 месяца", mountain: "1-2 месяца" } },
+        ],
+        en: [
+            { feature: "Strategic Approach", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Market Analysis", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Patent Check", competitors: { jon: true, mano: "On request", abba: false, mountain: false } },
+            { feature: "Design Quality", competitors: { jon: true, mano: true, abba: true, mountain: true } },
+            { feature: "Price (Avg)", competitors: { jon: "$1,500+", mano: "$5,000+", abba: "$3,000+", mountain: "$2,500+" } },
+            { feature: "24/7 Support", competitors: { jon: true, mano: false, abba: false, mountain: false } },
+            { feature: "Turnaround Time", competitors: { jon: "2-4 weeks", mano: "2-3 months", abba: "1-2 months", mountain: "1-2 months" } },
+        ]
+    };
+    return data[lang] || data.uz;
+};

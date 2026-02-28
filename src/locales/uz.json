@@ -171,7 +171,7 @@
       "items": [
         { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash. Sizning mijozingiz kim? Raqobatchilardan nima bilan farq qilasiz? Asosiq xabaringiz nima? Bu savollarga javob bermaydigan logotip yoki sayt shunchaki chiroyli rasm, xolos.", "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun?' savollariga javob berishdan boshlang. Bu brendingiz uchun mustahkam poydevor yaratadi." },
         { "title": "2. Hamma uchun yoqishga harakat qilish", "description": "Hamma uchun bo'lishga harakat qilgan brend oxir-oqibat hech kim uchun bo'lmay qoladi. Aholining barcha qatlamlariga yoqishga urinish brendingiz xiralashishiga va zaiflashishiga olib keladi.", "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling. 'Ideal mijozingiz' portretini yarating va marketing harakatlaringizni aynan unga qarating." },
-        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu yo'l emas. Agar dizayningiz taniqli brendga o'xshasa, sizni har doim 'arzon muqobil' sifatida qabul qilishadi.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni find qiling. Boshqacha bo'lishdan qo'rqmang." },
+        { "title": "3. Raqobatchilaringizdan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu yo'l emas. Agar dizayningiz taniqli brendga o'xshasa, sizni har doim 'arzon muqobil' sifatida qabul qilishadi.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni find qiling. Boshqacha bo'lishdan qo'rqmang." },
         { "title": "4. Nomuvofiqlik (Inconsistency)", "description": "Saytdagi logotipingiz bir xil uslubda, Instagramda boshqacha, qadoqda esa butunlay boshqa ko'rinishda. Bu vizual xaos ishonchni so'ndiradi va brendingning tanilishiga to'sqinlik qiladi.", "solution": "Yechim: Logotip, ranglar, shriftlardan foydalanish qoidalari yozilgan 'brandbook' (gaydlayn) yarating. Uni hamma joyda bir xilda ishlating." },
         { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detaller, gradientlar va matnlardan iborat logotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt favikoni yoki ijtimoiy tarmoq avatarida) yomon ko'rinidi.", "solution": "Yechim: Soddalik va minimalizmga intiling. En yaxshi logotiplar — xotiradan osongina chizish mumkin bo'lgan logotiplardir." },
         { "title": "6. Talaffuz qilish qiyin yoki eslab qolish qiyin nom", "description": "Agar mijozlaringiz nomingizni ayta olmasalar yoki uni qidiruvga to'g'ri yoza olmasalar, ular sizni topa olmaydilar va boshqalarga tavsiya qila olmaydilar.", "solution": "Yechim: Oddiy, jarangli va huquqiy jihatdan toza (tovar belgisi band bo'lmagan) nom tanlang." },
@@ -323,7 +323,7 @@
     "benefits": [
       { "icon": "🌍", "title": "Xalqaro bozorga tayyor bo'lasiz", "description": "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi, hech qayerda noqulay ma'no bermaydi." },
       { "icon": "🔒", "title": "Nomingiz to'liq sizniki bo'ladi", "description": "Patent hujjatlari va sertifikat bilan nomingiz rasman himoyalanadi. Hech kim o'g'irlay olmaydi, hech kim taqlid qila olmaydi." },
-      { "icon": "💎", "title": "Biznesingizga qiymat qo'shiladi", "description": "Himoyalangan kuchli nom — kompaniya qiymatining bir qismi. Investor va sheriklar uchun bu jiddiy signal." },
+      { "icon": "💎", "title": "Biznesingizga qiymat qo'shiladi", "description": "Himoyalangan kuchli nom — bu real aktiv. Investor va sheriklar uchun bu jiddiy signal." },
       { "icon": "🎯", "title": "To'g'ri qaror qabul qilasiz", "description": "Siz bilan birgalikda nomni tanlashda to'g'ri yo'lni belgilaymiz. Yolg'iz emas, mutaxassis bilan." }
     ]
   },
@@ -335,8 +335,8 @@
     "timeline": "7 ish kuni",
     "features": [
       "10 ta nom varianti tayyorlanadi",
-      "Har bir nom uchun to'liq izoh beriladi — nima uchun bu nom aynan sizning biznesingizga mos ekanligi tushuntiriladi",
-      "Nomning talaffuzi qulay, esda qolishi oson va jaranglashi tekshiriladi",
+      "Har bir nom uchun strategik izoh",
+      "Talaffuz va esda qolishi tekshiriladi",
       "Domen tekshiruvi (.com, .uz)",
       "Instagram va Telegram uchun username bo'sh-bo'shligini tekshiriladi",
       "O'zbekiston bazasida patent tekshiruvi o'tkaziladi",
