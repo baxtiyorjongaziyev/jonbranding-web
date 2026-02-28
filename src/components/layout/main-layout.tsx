@@ -10,19 +10,28 @@ import { Toaster } from '@/components/ui/toaster';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
 import { getDictionary } from '@/lib/dictionaries';
+import { initAmplitude, trackEvent } from '@/lib/amplitude';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'), {
     loading: () => null,
     ssr: false
 });
 
-function AnalyticsPageviewTracker() {
+function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   
   useEffect(() => {
+    // Amplitude initialization
+    initAmplitude();
+  }, []);
+
+  useEffect(() => {
     const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
+    // Google Analytics pageview
     pageview(url);
+    // Amplitude pageview
+    trackEvent('Page View', { url, pathname });
   }, [pathname, searchParams]);
 
   return null;
@@ -65,8 +74,10 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 console.error("Failed to parse package details from localStorage", e);
             }
         }
+        
+        trackEvent('Open Contact Modal', { lang, packageSummary, totalPrice });
         setModalOpen(true);
-    }, [lang]);
+    }, [lang, packageSummary, totalPrice]);
 
     const handleCloseModal = () => {
         setModalOpen(false);
@@ -102,7 +113,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
     return (
         <div className="flex min-h-screen flex-col bg-secondary/50">
             <Suspense fallback={null}>
-                <AnalyticsPageviewTracker />
+                <AnalyticsTracker />
             </Suspense>
             {children}
             <Toaster />

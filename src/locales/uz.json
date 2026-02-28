@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -173,7 +174,7 @@
         { "title": "2. Hamma uchun yoqishga harakat qilish", "description": "Hamma uchun bo'lishga harakat qilgan brend oxir-oqibat hech kim uchun bo'lmay qoladi. Aholining barcha qatlamlariga yoqishga urinish brendingiz xiralashishiga va zaiflashishiga olib keladi.", "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling. 'Ideal mijozingiz' portretini yarating va marketing harakatlaringizni aynan unga qarating." },
         { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Raqobatchilarga qarash muhim, lekin ulardan ko'r-ko'rona nusxa ko'chirish — bu yo'l emas. Agar dizayningiz taniqli brendga o'xshasa, sizni har doim 'arzon muqobil' sifatida qabul qilishadi.", "solution": "Yechim: Raqobatchilarni o'rganing, lekin o'zingizning noyob yo'lingizni find qiling. Boshqacha bo'lishdan qo'rqmang." },
         { "title": "4. Nomuvofiqlik (Inconsistency)", "description": "Saytdagi logotipingiz bir xil uslubda, Instagramda boshqacha, qadoqda esa butunlay boshqa ko'rinishda. Bu vizual xaos ishonchni so'ndiradi va brendingning tanilishiga to'sqinlik qiladi.", "solution": "Yechim: Logotip, ranglar, shriftlardan foydalanish qoidalari yozilgan 'brandbook' (gaydlayn) yarating. Uni hamma joyda bir xilda ishlating." },
-        { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detallar, gradientlar va matnlardan iborat logotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt favikoni yoki ijtimoiy tarmoq avatarida) yomon ko'rinidi.", "solution": "Yechim: Soddalik va minimalizmga intiling. En yaxshi logotiplar — xotiradan osongina chizish mumkin bo'lgan logotiplardir." },
+        { "title": "5. Haddan tashqari murakkab logotip", "description": "Ko'plab mayda detaller, gradientlar va matnlardan iborat logotipni eslab qolish qiyin va u kichik o'lchamlarda (masalan, sayt favikoni yoki ijtimoiy tarmoq avatarida) yomon ko'rinidi.", "solution": "Yechim: Soddalik va minimalizmga intiling. En yaxshi logotiplar — xotiradan osongina chizish mumkin bo'lgan logotiplardir." },
         { "title": "6. Talaffuz qilish qiyin yoki eslab qolish qiyin nom", "description": "Agar mijozlaringiz nomingizni ayta olmasalar yoki uni qidiruvga to'g'ri yoza olmasalar, ular sizni topa olmaydilar va boshqalarga tavsiya qila olmaydilar.", "solution": "Yechim: Oddiy, jarangli va huquqiy jihatdan toza (tovar belgisi band bo'lmagan) nom tanlang." },
         { "title": "7. Brendingni bir martalik ish deb o'ylash", "description": "Bozor, mijozlar talabi, texnologiyalar doim o'zgarib turadi. Vaqt bilan birga o'zgarmaydigan brend eskirib qoladi.", "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lssa, dizayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir." }
       ],
@@ -201,7 +202,7 @@
   "serviceSections": {
     "services": [
       {
-        "id": "neyming",
+        "id": "naming",
         "title": "Neyming",
         "description": "Brendingiz uchun unutilmas va kuchli nom tanlash.",
         "buttonText": "Batafsil"
@@ -280,7 +281,7 @@
       "meeting": "Uchrashuv"
     },
     "title": "Sifatli konsultatsiya uchun",
-    "description": "Loyihajingizni yaxshiroq tushunishimiz uchun bir nechta savollarga javob bering.",
+    "description": "Loyihajingizni yaxxor tushunishimiz uchun bir nechta savollarga javob bering.",
     "fullName": "Ism, Familiya",
     "fullNamePlaceholder": "Alisher Usmonov",
     "phone": "Telefon raqami",
