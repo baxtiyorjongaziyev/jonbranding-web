@@ -89,10 +89,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Cheksiz tuzatish (30 kun ichida)"
             ],
             benefits: [
-                { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz dunyo bo'ylab ishonchli ishlaydi." },
-                { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent orqali rasman himoyalangan nom." },
-                { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Himoyalangan nom — bu real aktiv." },
-                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "Mutaxassis bilan birga to'g'ri yo'lni tanlaysiz." }
+                { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi." },
+                { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent hujjatlari bilan nomingiz rasman himoyalanadi." },
+                { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Himoyalangan kuchli nom — bu real aktiv." },
+                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "Siz bilan birgalikda nomni tanlashda to'g'ri yo'lni belgilaymiz." }
             ]
         },
         namingPremium: {
@@ -134,9 +134,9 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ],
             benefits: [
                 { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Noto'g'ri nomdan keladigan zararni oldini olamiz." },
-                { icon: "⚡", "title": "Vaqt tejaysiz", description: "Professional tahlil qilingan nomni tezda olasiz." },
-                { icon: "✅", "title": "Ishonch bilan boshlaysiz", "description": "Tekshirilgan nom bilan xavotirsiz ish boshlang." },
-                { icon: "📱", "title": "Digital tayyor", "description": "Domen va username muammosi bo'lmaydi." }
+                { icon: "⚡", title: "Vaqt tejaysiz", description: "Professional tahlil qilingan nomni tezda olasiz." },
+                { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "Tekshirilgan nom bilan xavotirsiz ish boshlang." },
+                { icon: "📱", title: "Digital tayyor", description: "Domen va username muammosi bo'lmaydi." }
             ]
         },
         logoVIP: {
@@ -320,5 +320,5 @@ export const comparisonData = (lang: 'uz' | 'ru' | 'en' = 'uz') => {
             { feature: "Turnaround Time", competitors: { jon: "2-4 weeks", mano: "2-3 months", abba: "1-2 months", mountain: "1-2 months" } },
         ]
     };
-    return data[lang] || data.uz;
+    return data[lang as keyof typeof data] || data.uz;
 };
