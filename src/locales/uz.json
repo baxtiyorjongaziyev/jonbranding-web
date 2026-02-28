@@ -189,11 +189,12 @@
     "title": "Ko'p beriladigan savollar",
     "subtitle": "Brending jarayoni, narxlar va boshqa mavzulardagi eng ko'p beriladigan savollarga javoblar.",
     "faqItems": [
-      { "question": "Nega narxlar aniq ko'rsatilmagan?", "answer": "Har bir loyiha individual yondashuvni talab qiladi. Narx loyiha murakkabligi, ish hajmi va sizning vazifalaringizdan kelib chiqib hisoblanadi." },
-      { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishiladi." },
-      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki logotip emas, balki brendni tanituvchi va samarali qiluvchi to'liq identifikatsiya tizimini yaratamiz." },
-      { "question": "To'lov shartlari qanday?", "answer": "Standart sxema — 50% oldindan to'lov, 50% ish topshirilgandan so'ng. Individual shartlarni ham kelishishimiz mumkin." },
-      { "question": "Ish qancha vaqt davom etadi?", "answer": "Muddatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend strategiyasi — 8 haftadan boshlanadi." }
+      { "question": "Why are prices not fixed?", "answer": "Each project is unique. The price is calculated individually depending on the complexity of the project, the volume of work and your tasks. We offer an optimal solution for your brand." },
+      { "question": "How is the work process structured?", "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is coordinated with you, and you have full control over the process." },
+      { "question": "Can I order only a logo?", "answer": "We create not just a logo, but a full identification system that makes the brand recognizable and effective. This creates long-term value for your business." },
+      { "question": "What are the payment terms?", "answer": "Standard scheme — 50% upfront payment, 50% after project delivery. We can also discuss individual terms for your convenience." },
+      { "question": "How long does the work take?", "answer": "Deadlines depend on the type of service. For example, creating a logo — 2-4 weeks, brand strategy — from 8 weeks. The final deadline is determined after project approval." },
+      { "question": "Is there support after project completion?", "answer": "Yes, within 1 month after project completion we provide free consultations and assistance on the correct use of brand materials." }
     ],
     "ctaTitle": "Shubhalarga o'rin qoldirmang!",
     "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yangi bosqichga olib chiqamiz.",
@@ -202,7 +203,7 @@
   "serviceSections": {
     "services": [
       {
-        "id": "naming",
+        "id": "neyming",
         "title": "Neyming",
         "description": "Brendingiz uchun unutilmas va kuchli nom tanlash.",
         "buttonText": "Batafsil"
@@ -281,7 +282,7 @@
       "meeting": "Uchrashuv"
     },
     "title": "Sifatli konsultatsiya uchun",
-    "description": "Loyihajingizni yaxxor tushunishimiz uchun bir nechta savollarga javob bering.",
+    "description": "Loyihajingizni yaxxor tushunishimiz uchun bir nehcta savollarga javob bering.",
     "fullName": "Ism, Familiya",
     "fullNamePlaceholder": "Alisher Usmonov",
     "phone": "Telefon raqami",
