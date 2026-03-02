@@ -166,32 +166,33 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ 
           }}
         />
 
-        {/* Amplitude Script with Session Replay and Autocapture */}
-        <Script src="https://cdn.amplitude.com/script/1c82e6734ed6525393807b4e56f105a5.js" strategy="lazyOnload"></Script>
-        <Script id="amplitude-init" strategy="lazyOnload">
+        {/* Amplitude Session Replay & Autocapture (Official Loader Snippet) */}
+        <Script id="amplitude-loader" strategy="afterInteractive">
           {`
-            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-            window.amplitude.init('1c82e6734ed6525393807b4e56f105a5', {
-              "fetchRemoteConfig":true,
-              "autocapture":{
-                "attribution":true,
-                "fileDownloads":true,
-                "formInteractions":true,
-                "pageViews":true,
-                "sessions":true,
-                "elementInteractions":true,
-                "networkTracking":true,
-                "webVitals":true,
-                "frustrationInteractions":{
-                  "thrashedCursor":true,
-                  "errorClicks":true,
-                  "deadClicks":true,
-                  "rageClicks":true
+            !function(){"use strict";!function(e,t){var n=e.amplitude||{_q:[],_iq:{}};if(n.invoked)e.console&&console.error&&console.error("Amplitude snippet has already been invoked");else{var r=function(e,t){e.prototype[t]=function(){return this._q.push({name:t,args:Array.prototype.slice.call(arguments)}),this}},s=function(e,t,n){return function(r){e._q.push({name:t,args:Array.prototype.slice.call(arguments),resolve:r})}},o=function(e,t,n){e[t]=function(){e._q.push({name:t,args:Array.prototype.slice.call(arguments)})}},i=function(e){for(var t=0;t<m.length;t++)r(e,m[t]);for(var n=0;n<g.length;n++)s(e,g[n])},a=function(e,t){e[t]=function(){var n=Array.prototype.slice.call(arguments);e._q.push({name:t,args:n})}},c=function(e){for(var t=0;t<v.length;t++)a(e,v[t])},u=function(e,t){e.prototype[t]=function(){var n=Array.prototype.slice.call(arguments);return this._q.push({name:t,args:n}),this}},l=function(e){for(var t=0;t<y.length;t++)u(e,y[t])},p=function(e,t,n){e[t]=function(){var r=Array.prototype.slice.call(arguments);e._q.push({name:t,args:r,resolve:n})}},d=function(e){for(var t=0;t<h.length;t++)p(e,h[t],!1);for(var n=0;n<f.length;n++)p(e,f[n],!0)},m=["add","append","clearAll","prepend","set","setOnce","unset","preInsert","postInsert","remove","getUserProperties"],g=["identify","logEvent","setUserProperties"],v=["setProductId","setQuantity","setPrice","setRevenue","setRevenueType","setEventProperties"],y=["setGroup","setGroupProperties"],h=["init","onInit","setOptOut","setUserId","setDeviceId","setSessionId","setVersionName","setAppId","setTransport","setGlobalUserProperties","setGroup","setGroupProperties","setAlias","setLogEvent","setSessionId","reset"],f=["onSessionStart","onSessionEnd","onEvent","onIdentify","onUserProperties","onGroup","onGroupProperties","onRevenue"];i(n.Identify),i(n.Revenue),c(n.Commerce),l(n.Session),d(n),n.init=function(e,t,r,s){n._q.push({name:"init",args:[e,t,r,s]}),r&&r.instanceName&&(n._iq[r.instanceName]=n._iq[r.instanceName]||{_q:[]},d(n._iq[r.instanceName]))},e.amplitude=n}} (window,document)}();
+            
+            amplitude.init('1c82e6734ed6525393807b4e56f105a5', {
+              fetchRemoteConfig: true,
+              autocapture: {
+                attribution: true,
+                fileDownloads: true,
+                formInteractions: true,
+                pageViews: true,
+                sessions: true,
+                elementInteractions: true,
+                networkTracking: true,
+                webVitals: true,
+                frustrationInteractions: {
+                  thrashedCursor: true,
+                  errorClicks: true,
+                  deadClicks: true,
+                  rageClicks: true
                 }
               }
             });
           `}
         </Script>
+        <Script src="https://cdn.amplitude.com/script/1c82e6734ed6525393807b4e56f105a5.js" strategy="afterInteractive" />
         
         {/* AmoCRM Social Button */}
         <Script id="amocrm-widget" strategy="lazyOnload" dangerouslySetInnerHTML={{ __html: `(function(a,m,o,c,r,m){a[m]={id:"436993",hash:"8761545509f209e1154d24b2b1b57dfa1e78de77f34c8085c2297e1dddf2bfec",locale:"ru",inline:true,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)})(window,0,'amoSocialButton',0,0,'amo_social_button');` }} />
