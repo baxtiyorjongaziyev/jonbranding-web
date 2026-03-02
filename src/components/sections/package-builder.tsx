@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -242,9 +243,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     };
 
     const discountOptions = [
-        { value: 'none', label: translations.packageBuilder.discountSelector.none },
-        { value: 'package', label: translations.packageBuilder.discountSelector.package },
-        { value: 'full', label: translations.packageBuilder.discountSelector.full }
+        { value: 'none', label: translations.discountSelector.none },
+        { value: 'package', label: translations.discountSelector.package },
+        { value: 'full', label: translations.discountSelector.full }
     ];
 
     return (
@@ -254,26 +255,26 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <Badge className="bg-primary/10 text-primary border-none px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-[0.3em]">
                         TRIPWIRE XIZMATLAR
                     </Badge>
-                    <h2 className="text-5xl sm:text-6xl font-black text-dark-blue leading-tight tracking-tighter">{translations.packageBuilder.title}</h2>
-                    <p className="text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.packageBuilder.subtitle}</p>
+                    <h2 className="text-5xl sm:text-6xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
+                    <p className="text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
                 </div>
 
                 <div className="space-y-32">
-                    <ServiceGroup title={translations.packageBuilder.categories.tripwire}>{['namingCheck', 'audit', 'consultation'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations.packageBuilder} currency={currency} />)}</ServiceGroup>
-                    <ServiceGroup title={translations.packageBuilder.categories.strategy} gridCols="lg:grid-cols-2">{['strategy', 'commStrategy'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations.packageBuilder} currency={currency} />)}</ServiceGroup>
-                    <ServiceGroup title={translations.packageBuilder.categories.naming}>{['namingVIP', 'namingPremium', 'namingStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations.packageBuilder} currency={currency} />)}</ServiceGroup>
-                    <ServiceGroup title={translations.packageBuilder.categories.identity}>{['logoVIP', 'logoPremium', 'logoStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations.packageBuilder} currency={currency} />)}</ServiceGroup>
+                    <ServiceGroup title={translations.categories.tripwire}>{['namingCheck', 'audit', 'consultation'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                    <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">{['strategy', 'commStrategy'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                    <ServiceGroup title={translations.categories.naming}>{['namingVIP', 'namingPremium', 'namingStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                    <ServiceGroup title={translations.categories.identity}>{['logoVIP', 'logoPremium', 'logoStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
                     
                     <Accordion type="single" collapsible className="w-full">
                         <AccordionItem value="more" className="border-none">
                             <AccordionTrigger className="text-xl font-black text-dark-blue justify-center gap-4 hover:no-underline py-12 bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm">
-                                {translations.packageBuilder.categories.more_services}
+                                {translations.categories.more_services}
                                 <ChevronsDown className="w-6 h-6 text-primary animate-bounce group-hover:text-dark-blue transition-colors" />
                             </AccordionTrigger>
                             <AccordionContent className="pt-16 space-y-32">
-                                <ServiceGroup title={translations.packageBuilder.categories.addons} gridCols="lg:grid-cols-2">
+                                <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
                                     {['packaging', 'smm', 'urgency', 'nda'].map(id => (
-                                        <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations.packageBuilder} currency={currency} />
+                                        <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                                     ))}
                                 </ServiceGroup>
                             </AccordionContent>
@@ -291,9 +292,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <div className="bg-white/10 p-3 rounded-2xl border border-white/10 shadow-lg">
                                             <Box className="w-8 h-8 text-sky-blue" />
                                         </div>
-                                        <h3 className="text-3xl font-black tracking-tighter uppercase text-white">{translations.packageBuilder.your_package}</h3>
+                                        <h3 className="text-3xl font-black tracking-tighter uppercase text-white">{translations.your_package}</h3>
                                     </div>
-                                    <p className="text-blue-100/60 font-medium text-lg max-w-sm">{translations.packageBuilder.your_package_desc}</p>
+                                    <p className="text-blue-100/60 font-medium text-lg max-w-sm">{translations.your_package_desc}</p>
                                 </div>
                                 <div className="grid grid-cols-1 gap-4 overflow-y-auto pr-2 custom-scrollbar flex-grow">
                                     {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
@@ -315,7 +316,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     {Object.values(selectedServices).every(v => !v) && (
                                         <div className="text-center py-24 px-8 rounded-[3rem] bg-white/5 border-2 border-dashed border-white/10">
                                             <TrendingUp className="w-16 h-16 mx-auto text-blue-300/20 mb-6" />
-                                            <p className="text-blue-100/40 italic text-xl font-medium">{translations.packageBuilder.empty_package_desc}</p>
+                                            <p className="text-blue-100/40 italic text-xl font-medium">{translations.empty_package_desc}</p>
                                         </div>
                                     )}
                                 </div>
@@ -326,7 +327,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <div className="space-y-10 flex-grow">
                                 <div className="space-y-8">
                                     <div className="flex justify-between items-center">
-                                        <span className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">{translations.packageBuilder.base_price_label}</span>
+                                        <span className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">{translations.base_price_label}</span>
                                         <span className="text-2xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
 
@@ -355,7 +356,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
 
                                     <div className="pt-10 border-t border-slate-200 text-center space-y-3">
-                                        <span className="text-slate-400 text-[11px] font-black uppercase tracking-[0.4em]">{translations.packageBuilder.final_price}</span>
+                                        <span className="text-slate-400 text-[11px] font-black uppercase tracking-[0.4em]">{translations.final_price}</span>
                                         <div className="flex flex-col items-center">
                                             <span className="text-7xl sm:text-8xl font-black text-primary tracking-tighter drop-shadow-sm">
                                                 {formatPrice(total.final, lang as any, currency)}
@@ -371,12 +372,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
                                 <div className="space-y-6">
                                     <div className="space-y-3">
-                                        <Label className="text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">{translations.packageBuilder.promo_code_label}</Label>
+                                        <Label className="text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">{translations.promo_code_label}</Label>
                                         <div className="relative">
                                             <Input 
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
-                                                placeholder={translations.packageBuilder.promo_code_placeholder}
+                                                placeholder={translations.promo_code_placeholder}
                                                 className="rounded-full py-6 px-6 border-slate-200 focus:ring-primary h-14 text-base font-bold uppercase tracking-widest bg-white"
                                             />
                                             {total.isPromoApplied && (
@@ -386,7 +387,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             )}
                                         </div>
                                         {promoCode && !total.isPromoApplied && (
-                                            <p className="text-[10px] text-red-400 font-bold ml-4 uppercase tracking-tighter">{translations.packageBuilder.promo_code_invalid}</p>
+                                            <p className="text-[10px] text-red-400 font-bold ml-4 uppercase tracking-tighter">{translations.promo_code_invalid}</p>
                                         )}
                                     </div>
 
