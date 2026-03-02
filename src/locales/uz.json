@@ -82,76 +82,6 @@
     "projects": "Muvaffaqiyatli loyihalar",
     "recommend": "Mijozlar tavsiya qilishadi"
   },
-  "namingVIP": {
-    "label": "Naming VIP",
-    "description": "Nom emas — aktiv",
-    "subDescription": "Jiddiy investitsiya qiladiganlar uchun",
-    "price": 1450,
-    "timeline": "15 ish kuni",
-    "features": [
-      "15 ta nom varianti tayyorlanadi",
-      "Har bir nom uchun to'liq izoh beriladi",
-      "Talaffuz, jarang va esda qolishi tekshiriladi",
-      "Domen va Username tekshiruvi (.com, .uz, TG, IG)",
-      "O'zbekiston va xalqaro patent tekshiruvi",
-      "Raqobatchilar tahlili va unikal pozitsiya",
-      "Xalqaro bozor uchun tillararo tekshiruv",
-      "Brendning hissiy ma'nosi va ta'siri",
-      "3 ta qisqa shior varianti tayyorlanadi",
-      "Font va rang yo'nalishi bo'yicha tavsiya",
-      "Patentga topshirib berish xizmati (Davlat bojlari alohida)",
-      "Cheksiz tuzatish (30 kun ichida)"
-    ],
-    "benefits": [
-      { "icon": "🌍", "title": "Xalqaro bozorga tayyor bo'lasiz", "description": "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi." },
-      { "icon": "🔒", "title": "Nomingiz to'liq sizniki bo'ladi", "description": "Patent hujjatlari bilan nomingiz rasman himoyalanadi." },
-      { "icon": "💎", "title": "Biznesingizga qiymat qo'shiladi", "description": "Himoyalangan kuchli nom — bu real aktiv." },
-      { "icon": "🎯", "title": "To'g'ri qaror qabul qilasiz", "description": "Siz bilan birgalikda nomni tanlashda to'g'ri yo'lni belgilaymiz." }
-    ]
-  },
-  "namingPremium": {
-    "label": "Naming Premium",
-    "description": "To'g'ri nom, to'g'ri asos",
-    "subDescription": "O'sishni rejalashtiraganlar uchun",
-    "price": 980,
-    "timeline": "7 ish kuni",
-    "features": [
-      "10 ta nom varianti tayyorlanadi",
-      "Har bir nom uchun strategik izoh",
-      "Talaffuz va esda qolishi tekshiriladi",
-      "Domen va Username tekshiruvi",
-      "O'zbekiston bazasida patent tekshiruvi",
-      "Raqobatchilarning nomlari tahlili",
-      "Nomning hissiy ma'nosi tavsifi",
-      "3 ta tuzatish raundi"
-    ],
-    "benefits": [
-      { "icon": "⚖️", "title": "Huquqiy xavfsizlik", "description": "Kelajakdagi qimmat muammolardan qutulasiz." },
-      { "icon": "🏆", "title": "Raqobatdan ajralib turasiz", "description": "Mijozlar sizni boshqalardan ajratib taniydi." },
-      { "icon": "❤️", "title": "Mijozlar yaxshi ko'radi", "description": "Nomga his-tuyg'u va sadoqat yuklanadi." },
-      { "icon": "📈", "title": "Kuchli boshlanish", "description": "Marketing xarajatlarini kamayturuvchi nom." }
-    ]
-  },
-  "namingStandard": {
-    "label": "Naming Standart",
-    "description": "Tez va ishonchli start",
-    "subDescription": "Endigina boshlamoqchi bo'lganlar uchun",
-    "price": 650,
-    "timeline": "5 ish kuni",
-    "features": [
-      "5 ta nom varianti tayyorlanadi",
-      "Nomlar uchun qisqa izohlar",
-      "Talaffuz qulayligi tekshiruvi",
-      "Domen va Username tekshiruvi",
-      "1 ta tuzatish raundi"
-    ],
-    "benefits": [
-      { "icon": "🛡️", "title": "Xavfli nomdan qutulasiz", "description": "Noto'g'ri nomdan keladigan zararni oldini olamiz." },
-      { "icon": "⚡", "title": "Vaqt tejaysiz", "description": "Professional tahlil qilingan nomni tezda olasiz." },
-      { "icon": "✅", "title": "Ishonch bilan boshlaysiz", "description": "Tekshirilgan nom bilan xavotirsiz ish boshlang." },
-      { "icon": "📱", "title": "Digital tayyor", "description": "Domen va username muammosi bo'lmaydi." }
-    ]
-  },
   "servicesHero": {
     "title": "Xizmatlarimiz va narxlar",
     "subtitle": "Biznesingiz uchun eng to'g'ri va natija keltiradigan brending xizmatlari.",
@@ -227,18 +157,24 @@
     "textReviewsSubtitle": "Hamkorlarimiz fikri"
   },
   "servicesPage": {
+    "metadata": {
+      "title": "Xizmatlar va Narxlar | Jon.Branding",
+      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyator orqali narxlarni darhol hisoblang."
+    },
     "packageBuilder": {
+      "title": "Xizmatlar va narxlar",
+      "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyator orqali narxlarni darhol hisoblang.",
       "categories": {
-        "tripwire": "Birinchi qadam",
+        "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
         "strategy": "Strategik xizmatlar",
         "naming": "Neyming",
-        "identity": "Vizual identifikatsiya",
+        "identity": "Vizual aydentika: Logo, Stil, Brendbuk",
         "addons": "Qo'shimcha xizmatlar",
         "more_services": "Maxsus shartlar"
       },
       "tabs": { "included": "Nima kiradi", "benefits": "Nima olasiz" },
       "your_package": "Sizning paketingiz",
-      "your_package_desc": "Tanlangan xizmatlar xulosasi.",
+      "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
       "selected": "Tanlandi",
       "select": "Tanlash",
       "base_price_label": "Boshlang'ich narx",
@@ -251,9 +187,9 @@
         "package": "Paketli 20%",
         "full": "To'liq to'lov (28%)"
       },
-      "empty_package_desc": "Xizmatlardan birini tanlang.",
+      "empty_package_desc": "Siz hali hech qanday xizmatni tanlamadingiz. Iltimos, xizmatlardan birini tanlang.",
       "recommended": "Tavsiya etiladi",
-      "features": "Xususiyatlar",
+      "features": "Xizmatlar",
       "results": "Natijalar"
     },
     "comparison": {

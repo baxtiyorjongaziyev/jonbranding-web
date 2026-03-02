@@ -1,3 +1,4 @@
+
 'use client';
 
 /**
@@ -145,13 +146,14 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.logoVIP,
             timeline: "⏱ 15–20 ish kuni",
             features: [
-                "3 ta logo varianti tayyorlanadi + har biri uchun chuqur strategik izoh",
-                "Logo 4 xil ko'rinishda: gorizontal, vertikal, qora-oq, belgi alohida",
+                "3 ta logo varianti tayyorlanadi + har biri uchun chuqur strategik izoh beriladi",
+                "Har bir variant uchun izoh beriladi — nima uchun aynan shunday dizayn qilindi",
+                "Logo 4 xil ko'rinishda beriladi: gorizontal (yonma-yon), vertikal (ustma-ust), qora-oq versiyasi (muhrlar va hujjatlar uchun), belgi alohida (faqat ikonka, matnsiz)",
                 "Ijtimoiy tarmoqlar uchun profil rasmi (Instagram, Telegram)",
-                "3 xil fayl formatida: PNG, SVG, AI",
-                "Rasmiy ranglar to'plami — 3–5 ta rang va ularning aniq kodlari",
+                "3 xil fayl formatida topshiriladi: PNG, SVG, AI",
+                "Rasmiy ranglar to'plami — brendingizning 3–5 ta rasmiy rangi va ularning aniq kodi",
                 "Rasmiy shrift — brendingizda ishlatiladigan harflar uslubi",
-                "Brandbook — logoni qo'llash, ranglar, shriftlar va noto'g'ri ishlatish misollari bilan to'liq qo'llanma",
+                "Brandbook — brendingizni qanday ishlatish kerakligi yozilgan to'liq qo'llanma",
                 "25 ta aloqa nuqtasi — to'liq audit va har bir nuqta uchun professional vizuallar",
                 "Cheksiz tuzatish (30 kun ichida)",
                 "Logoning to'liq mulkchilik huquqi sertifikati"
@@ -173,18 +175,18 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: [
                 "3 ta logo varianti tayyorlanadi — uchtalasidan birini tanlaysiz",
                 "Har bir variant uchun izoh beriladi — nima uchun aynan shunday dizayn qilindi",
-                "Logo 4 xil ko'rinishda: gorizontal, vertikal, qora-oq, belgi alohida",
+                "Logo 4 xil ko'rinishda beriladi: gorizontal, vertikal, qora-oq versiyasi, belgi alohida",
                 "Ijtimoiy tarmoqlar uchun profil rasmi (Instagram, Telegram)",
-                "3 xil fayl formatida: PNG, SVG, AI",
+                "3 xil fayl formatida topshiriladi: PNG, SVG, AI",
                 "Rasmiy ranglar to'plami — brendingizning 3–5 ta rasmiy rangi va kodlari",
                 "Rasmiy shrift — brendingizda ishlatiladigan harflar uslubi",
                 "15 ta aloqa nuqtasi — biznesingizni o'rganib, har birida logongiz qanday ko'rinishini vizual ko'rsatamiz",
                 "3 ta tuzatish imkoniyati"
             ],
             benefits: [
-                { icon: "🏆", title: "Har joyda bir xil, professional ko'rinasiz", description: "Saytingiz, Instagramingiz, vizitchangiz — hammasi bir uslubda. Mijoz sizni tanib oladi." },
+                { icon: "🏆", title: "Har joyda bir xil, professional ko'rinasiz", description: "Saytingiz, Instagramingiz, vizitchangiz — hammasi bir uslubda. Mijoz sizni bir marta ko'rib taniydi." },
                 { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq ranglar va shrift bo'lgach, hech kim adashmaydi. Hamma bir yo'nalishda harakat qiladi." },
-                { icon: "📸", title: "Mijozlarga ko'rsatishga tayyor", description: "15 ta aloqa nuqtasida brendingiz qanday ko'rinishini oldindan bilasiz — tasavvur emas, ko'z oldingizda." },
+                { icon: "📸", title: "Mijozlarga ko'rsatishga tayyor", description: "15 ta aloqa nuqtasi uchun brendingiz qanday ko'rinishini oldindan ko'z oldingizda ko'rasiz." },
                 { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznesning belgisi. Mijozlar sizga ko'proq ishonadi." }
             ]
         },
@@ -197,10 +199,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: [
                 "2 ta logo varianti tayyorlanadi — ikkalasidan birini tanlaysiz",
                 "Har bir variant uchun izoh beriladi — nima uchun aynan shunday dizayn qilindi",
-                "Logo 4 xil ko'rinishda: gorizontal, vertikal, qora-oq va belgi alohida",
+                "Logo 4 xil ko'rinishda beriladi: gorizontal, vertikal, qora-oq va belgi alohida",
                 "Ijtimoiy tarmoqlar uchun profil rasmi (Instagram, Telegram)",
-                "3 xil fayl formatida: PNG, SVG, AI",
-                "8 ta aloqa nuqtasida logongiz qanday ko'rinishini vizual ko'rsatib beriladi",
+                "3 xil fayl formatida topshiriladi: PNG, SVG, AI",
+                "8 ta aloqa nuqtasi — logongiz muhim joylarda qanday ko'rinishini vizual ko'rsatib beriladi",
                 "2 ta tuzatish imkoniyati"
             ],
             benefits: [
