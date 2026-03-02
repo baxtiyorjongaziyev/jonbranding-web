@@ -37,6 +37,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const { label, price, description, subDescription, features, benefits, results, timeline, recommended } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
+    const isPremium = id.toLowerCase().includes('premium');
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
@@ -46,7 +47,9 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border-2 flex flex-col rounded-[2.5rem] mt-6",
                 selected
                     ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_25px_60px_rgba(251,191,36,0.3)] scale-[1.02]' : 'border-primary bg-white shadow-2xl scale-[1.02]')
-                    : (isVip ? 'bg-blue-950 border-blue-900 hover:border-amber-400/50 shadow-lg' : 'bg-white border-slate-100 hover:border-primary/30 hover:shadow-lg')
+                    : (isVip ? 'bg-blue-950 border-blue-900 hover:border-amber-400/50 shadow-lg' : 
+                       isPremium ? 'bg-gradient-to-br from-white to-blue-50/50 border-slate-100 hover:border-primary/30' : 
+                       'bg-white border-slate-100 hover:border-primary/30 hover:shadow-lg')
             )}
         >
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
@@ -92,7 +95,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
             </CardHeader>
 
             <CardContent className="px-8 pt-4 pb-8 flex-grow flex flex-col">
-                <div className="flex border-b border-slate-100 dark:border-white/10 mb-6" onClick={(e) => e.stopPropagation()}>
+                <div className="flex border-b border-slate-100 mb-6" onClick={(e) => e.stopPropagation()}>
                     <button 
                         onClick={() => setActiveTab('included')}
                         className={cn(
@@ -183,14 +186,14 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <Button
                         variant={selected ? "default" : "outline"}
                         className={cn(
-                            "w-full py-6 text-base font-bold transition-all duration-500 rounded-full",
+                            "w-full py-6 text-base font-bold transition-all duration-500 rounded-full border-2",
                             selected 
                                 ? (isVip 
-                                    ? "border-none bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-blue-950 hover:from-amber-500 hover:to-amber-700 shadow-[0_15px_40px_rgba(251,191,36,0.5)]" 
+                                    ? "border-none bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-blue-950 hover:from-amber-500 shadow-[0_15px_40px_rgba(251,191,36,0.5)]" 
                                     : "border-none bg-primary text-white shadow-2xl") 
                                 : (isVip 
-                                    ? "bg-white/5 border border-amber-400/30 text-amber-400 hover:bg-amber-400 hover:text-blue-950" 
-                                    : "bg-white border-2 border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
+                                    ? "bg-white/5 border-amber-400/30 text-amber-400 hover:bg-amber-400 hover:text-blue-950" 
+                                    : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
                         )}
                         onClick={(e) => { e.stopPropagation(); onSelect(); }}
                     >
