@@ -30,8 +30,8 @@ const serviceIcons: { [key: string]: React.ElementType } = {
 
 const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id: string, onSelect: () => void, selected: boolean, lang: any, dictionary: any, currency: any }) => {
     const [activeTab, setActiveTab] = useState<'included' | 'benefits'>('included');
-    const serviceDetails = getServiceDetails(lang);
-    const detail = serviceDetails[id as keyof typeof serviceDetails];
+    const serviceDetails = getServiceDetails(lang) as any;
+    const detail = serviceDetails[id];
     if (!detail) return null;
 
     const { label, price, description, subDescription, features, benefits, results, timeline, recommended } = detail;
@@ -122,31 +122,18 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
 
                 {activeTab === 'included' ? (
                     <div className="space-y-8 flex-grow">
-                        {results && (
+                        {(results || features) && (
                             <div className="space-y-4">
                                 <p className={cn("text-[10px] font-black uppercase tracking-[0.2em]", isVip ? "text-amber-400/70" : "text-primary/70")}>
-                                    {dictionary.results}
+                                    {results ? dictionary.results : dictionary.features}
                                 </p>
                                 <ul className="space-y-3">
-                                    {results.map((r: string, i: number) => (
+                                    {(results || features || []).map((r: string, i: number) => (
                                         <li key={i} className="flex items-start gap-3">
                                             <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
                                                 <CheckCircle className={cn("w-4 h-4", isVip ? "text-amber-400" : "text-primary")} />
                                             </div>
                                             <span className={cn("text-base font-bold leading-tight", isVip ? "text-white" : "text-dark-blue")}>{r}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                        {features && (
-                            <div className={cn("space-y-4 border-t pt-6", isVip ? "border-white/10" : "border-slate-100")}>
-                                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{dictionary.features}</p>
-                                <ul className="space-y-2">
-                                    {features.map((f: string, i: number) => (
-                                        <li key={i} className="flex items-start gap-2.5 text-sm">
-                                            <Check className={cn("w-4 h-4 mt-0.5 shrink-0", isVip ? "text-amber-400" : "text-green-500")} />
-                                            <span className={isVip ? "text-slate-300" : "text-slate-600"}>{f}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -228,7 +215,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     if (!isClient || !dictionary) return null;
 
     const translations = dictionary;
-    const serviceDetails = getServiceDetails(lang as any);
+    const serviceDetails = getServiceDetails(lang as any) as any;
     const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any);
 
     const handleServiceToggle = (id: string) => {
@@ -261,10 +248,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
 
                 <div className="space-y-32">
-                    <ServiceGroup title={translations.categories.tripwire}>{['namingCheck', 'audit', 'consultation'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
-                    <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">{['strategy', 'commStrategy'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
-                    <ServiceGroup title={translations.categories.naming}>{['namingVIP', 'namingPremium', 'namingStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
-                    <ServiceGroup title={translations.categories.identity}>{['logoVIP', 'logoPremium', 'logoStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                    <ServiceGroup title={translations.categories.tripwire}>{['namingCheck', 'audit', 'consultation'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                    <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">{['strategy', 'commStrategy'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                    <ServiceGroup title={translations.categories.naming}>{['namingVIP', 'namingPremium', 'namingStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                    <ServiceGroup title={translations.categories.identity}>{['logoVIP', 'logoPremium', 'logoStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
                     
                     <Accordion type="single" collapsible className="w-full">
                         <AccordionItem value="more" className="border-none">
@@ -275,7 +262,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <AccordionContent className="pt-16 space-y-32">
                                 <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
                                     {['packaging', 'smm', 'urgency', 'nda'].map(id => (
-                                        <ServiceCard key={id} id={id} selected={selectedServices[id]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                                        <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                                     ))}
                                 </ServiceGroup>
                             </AccordionContent>
@@ -306,10 +293,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                     <div className={cn("p-1.5 rounded-full", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
                                                         {isSurcharge ? <Plus className="w-4 h-4 text-blue-400" /> : <Check className="w-4 h-4 text-sky-blue" />}
                                                     </div>
-                                                    <span className="text-base font-extrabold tracking-tight text-white">{serviceDetails[k as keyof typeof serviceDetails]?.label}</span>
+                                                    <span className="text-base font-extrabold tracking-tight text-white">{serviceDetails[k]?.label}</span>
                                                 </div>
                                                 <span className={cn("font-black text-sm", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
-                                                    {isSurcharge ? "+50%" : formatPrice(serviceDetails[k as keyof typeof serviceDetails]?.price || 0, lang as any, currency)}
+                                                    {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
                                                 </span>
                                             </div>
                                         );
