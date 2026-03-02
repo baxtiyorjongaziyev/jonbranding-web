@@ -133,7 +133,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "2 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
-                "Logo 4 xil ko'rinishda (Horizontal, Vertical, B&W, Icon)",
+                "Logo 4 xil ko'rinishda (Gorizontal, Vertikal, B&W, Ikonka)",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "8 ta aloqa nuqtasida vizual namoyish",
@@ -149,8 +149,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ],
             benefits: isUz ? [
                 { icon: "🎯", title: "Hujjatlarda ham, ijtimoiy tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor." },
-                { icon: "✅", title: "\"Bu mening brendim\" deyishingiz mumkin", description: "Professional ko'rinish — o'zingiz yasaganga o'xshamaydi." },
-                { icon: "👁️", title: "Real hayotda qanday ko'rinishini bilasiz", description: "8 ta nuqtada logongiz qanday ko'rinishini vizual ko'rasiz." },
+                { icon: "✅", title: "Bu mening brendim deyishingiz mumkin", description: "O'zingiz yasaganga o'xshamaydigan professional ko'rinish." },
+                { icon: "👁️", title: "Real hayotda qanday ko'rinishini bilasiz", description: "8 ta muhim nuqtada logongiz qanday ko'rinishini vizual ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar topshiriladi, keyinchalik foydalanishga qulay." }
             ] : [
                 { icon: "🎯", title: "Works everywhere", description: "Ready for web, social and print." },
@@ -169,7 +169,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "3 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
-                "Logo 4 xil ko'rinishda (H, V, B&W, Icon)",
+                "Logo 4 xil ko'rinishda (H, V, B&W, Ikonka)",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "Rasmiy ranglar to'plami va aniq kodlari",
@@ -207,8 +207,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 15–20 ish kuni" : "⏱ 15–20 business days",
             features: isUz ? [
                 "3 ta logo varianti + har biri uchun chuqur strategik izoh",
-                "Har bir variant uchun izoh beriladi",
-                "Logo 4 xil ko'rinishda (H, V, B&W, Icon)",
+                "Logo 4 xil ko'rinishda (H, V, B&W, Ikonka)",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "Rasmiy ranglar va shriftlar tizimi",
