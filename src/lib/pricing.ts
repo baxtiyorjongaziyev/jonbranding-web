@@ -84,13 +84,13 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "15 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun to'liq strategik izoh",
                 "Talaffuz, jarang va esda qolishi tekshiriladi",
-                "O'zbekiston va xalqaro bazalarda patent tekshiruvi (WIPO) va patentga topshirib berish xizmati (birinchi bosqich to'liq)",
+                "O'zbekiston va xalqaro bazalarda patent tekshiruvi (WIPO) va patentga topshirib berish xizmati",
                 "Domen va Username tekshiruvi",
                 "Cheksiz tuzatish (30 kun ichida)",
                 "Logoning to'liq mulkchilik huquqi sertifikati"
             ],
             benefits: [
-                { icon: "🌍", title: "Xalqaro bozorga tayyorsiz", description: "Nom xalqaro talablar asosida tekshiriladi." },
+                { icon: "🌍", title: "Xalqaro bozorga tayyorsiz", description: "Nom xalqaro talablar (WIPO) asosida tekshiriladi." },
                 { icon: "🔒", title: "Nom to'liq sizniki", description: "Rasmiy patent himoyasi bilan ta'minlanadi." },
                 { icon: "💎", title: "Biznes uchun real aktiv", description: "Himoyalangan nom biznesning qimmatli mulki." },
                 { icon: "🎯", title: "Eng to'g'ri yo'l", description: "Bozorda adashmasligingiz uchun strategik tanlov." }
@@ -121,18 +121,18 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: "⏱ 5 ish kuni",
             features: [
                 "2 ta logo varianti — ikkalasidan birini tanlaysiz",
-                "Har bir variant uchun izoh beriladi",
-                "Logo 4 xil ko'rinishda (hamma formatlar)",
+                "Har bir variant uchun strategik izoh",
+                "Logo 4 xil ko'rinishda (Horizontal, Vertical, B&W, Icon)",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "8 ta aloqa nuqtasida vizual namoyish",
                 "2 ta tuzatish imkoniyati"
             ],
             benefits: [
-                { icon: "🎯", title: "Universal qo'llanilish", description: "Logongiz hamma joyga — sayt, Instagramga tayyor." },
+                { icon: "🎯", title: "Hamma joyga tayyor", description: "Logongiz sayt, Instagram va chop etishga tayyor holda keladi." },
                 { icon: "✅", title: "Professional ko'rinish", description: "Mijozlar birinchi qarashda ishonch his qiladi." },
-                { icon: "👁️", title: "Real ko'rinish", description: "8 ta nuqtada logongiz qandayligini ko'rasiz." },
-                { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar topshiriladi." }
+                { icon: "👁️", title: "Real ko'rinish", description: "8 ta nuqtada logongiz qandayligini vizual ko'rasiz." },
+                { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar (AI formatida) topshiriladi." }
             ]
         },
         logoPremium: {
@@ -144,16 +144,16 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: "⏱ 10 ish kuni",
             features: [
                 "3 ta logo varianti — uchtalasidan birini tanlaysiz",
-                "Rasmiy ranglar to'plami va kodlari",
+                "Rasmiy ranglar to'plami va aniq kodlari",
                 "Rasmiy brend shrifti",
                 "15 ta aloqa nuqtasida vizual namoyish",
                 "3 ta tuzatish imkoniyati"
             ],
             benefits: [
-                { icon: "🏆", title: "Har joyda bir xil ko'rinasiz", description: "Sayt, Instagram, vizitka — hammasi bir uslubda." },
+                { icon: "🏆", title: "Har joyda bir xil ko'rinasiz", description: "Sayt, Instagram, vizitka — hammasi bir uslubda bo'ladi." },
                 { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq ranglar va shrift bo'lgach, hech kim adashmaydi." },
                 { icon: "📸", title: "Mijozlarga ko'rsatishga tayyor", description: "15 ta nuqtada brendingizni vizual ko'rasiz." },
-                { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish professional biznes belgisidir." }
+                { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznesning belgisidir." }
             ]
         },
         logoVIP: {
@@ -163,17 +163,17 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.logoVIP,
             timeline: "⏱ 15–20 ish kuni",
             features: [
-                "3 ta logo varianti + strategik izoh",
+                "3 ta logo varianti + chuqur strategik izoh",
                 "To'liq Brandbook (30-50 sahifa)",
                 "25 ta aloqa nuqtasida professional vizual",
                 "Cheksiz tuzatish (30 kun ichida)",
                 "Logoning to'liq mulkchilik huquqi sertifikati"
             ],
             benefits: [
-                { icon: "📖", title: "Istalgan odamga bera olasiz", description: "Qo'llanma bilan dizayner yoki xodim to'g'ri ishlaydi." },
+                { icon: "📖", title: "Istalgan odamga bera olasiz", description: "Qo'llanma bilan har qanday dizayner to'g'ri ishlaydi." },
                 { icon: "🔒", title: "Brend buzilmaydi", description: "Brendingiz 10 yildan keyin ham kuchli ko'rinadi." },
-                { icon: "🌍", title: "Xalqaro daraja", description: "Investor yoki sheriklar jiddiy kompaniya ekaningizni biladi." },
-                { icon: "💎", title: "Bir marta qilinadigan investitsiya", description: "Har yili qayta dizayn qilish o'rniga, bir marta to'g'ri qiling." }
+                { icon: "🌍", title: "Xalqaro daraja", description: "Investorlar jiddiy kompaniya ekaningizni bilishadi." },
+                { icon: "💎", title: "Bir marta qilinadigan sarmoya", description: "Har yili qayta dizayn qilish o'rniga, bir marta to'g'ri qiling." }
             ]
         },
         packaging: { label: "Qadoq dizayni", price: basePricesUSD.packaging, timeline: "10-15 ish kuni" },
