@@ -92,36 +92,34 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
             </CardHeader>
 
             <CardContent className="px-8 pt-4 pb-8 flex-grow flex flex-col">
-                {benefits && (
-                    <div className="flex border-b border-slate-100 dark:border-white/10 mb-6" onClick={(e) => e.stopPropagation()}>
-                        <button 
-                            onClick={() => setActiveTab('included')}
-                            className={cn(
-                                "flex-1 py-3 text-[10px] font-black uppercase tracking-widest transition-all",
-                                activeTab === 'included' 
-                                    ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
-                                    : "text-slate-400"
-                            )}
-                        >
-                            {dictionary.tabs.included}
-                        </button>
-                        <button 
-                            onClick={() => setActiveTab('benefits')}
-                            className={cn(
-                                "flex-1 py-3 text-[10px] font-black uppercase tracking-widest transition-all",
-                                activeTab === 'benefits' 
-                                    ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
-                                    : "text-slate-400"
-                            )}
-                        >
-                            {dictionary.tabs.benefits}
-                        </button>
-                    </div>
-                )}
+                <div className="flex border-b border-slate-100 dark:border-white/10 mb-6" onClick={(e) => e.stopPropagation()}>
+                    <button 
+                        onClick={() => setActiveTab('included')}
+                        className={cn(
+                            "flex-1 py-3 text-[10px] font-black uppercase tracking-widest transition-all",
+                            activeTab === 'included' 
+                                ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
+                                : "text-slate-400"
+                        )}
+                    >
+                        {dictionary.tabs.included}
+                    </button>
+                    <button 
+                        onClick={() => setActiveTab('benefits')}
+                        className={cn(
+                            "flex-1 py-3 text-[10px] font-black uppercase tracking-widest transition-all",
+                            activeTab === 'benefits' 
+                                ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
+                                : "text-slate-400"
+                        )}
+                    >
+                        {dictionary.tabs.benefits}
+                    </button>
+                </div>
 
                 {activeTab === 'included' ? (
                     <div className="space-y-8 flex-grow">
-                        {results && !benefits && (
+                        {results && (
                             <div className="space-y-4">
                                 <p className={cn("text-[10px] font-black uppercase tracking-[0.2em]", isVip ? "text-amber-400/70" : "text-primary/70")}>
                                     {dictionary.results}
@@ -139,8 +137,8 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                             </div>
                         )}
                         {features && (
-                            <div className={cn("space-y-4", !benefits && "border-t pt-6", isVip ? "border-white/10" : "border-slate-100")}>
-                                {!benefits && <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{dictionary.features}</p>}
+                            <div className={cn("space-y-4 border-t pt-6", isVip ? "border-white/10" : "border-slate-100")}>
+                                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{dictionary.features}</p>
                                 <ul className="space-y-2">
                                     {features.map((f: string, i: number) => (
                                         <li key={i} className="flex items-start gap-2.5 text-sm">
@@ -153,19 +151,19 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                         )}
                     </div>
                 ) : (
-                    <div className="grid grid-cols-2 gap-3 flex-grow animate-fade-in">
+                    <div className="grid grid-cols-1 gap-3 flex-grow animate-fade-in">
                         {benefits && benefits.map((b: any, i: number) => (
                             <div 
                                 key={i} 
                                 className={cn(
-                                    "p-3 rounded-2xl border flex flex-col gap-2 transition-all duration-300",
+                                    "p-4 rounded-2xl border flex flex-col gap-2 transition-all duration-300",
                                     isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100"
                                 )}
                             >
                                 <span className="text-xl">{b.icon}</span>
                                 <div className="space-y-1">
-                                    <p className={cn("text-[11px] font-bold leading-tight", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
-                                    <p className={cn("text-[10px] leading-snug", isVip ? "text-blue-100/50" : "text-slate-500")}>{b.description}</p>
+                                    <p className={cn("text-sm font-bold leading-tight", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
+                                    <p className={cn("text-xs leading-snug", isVip ? "text-blue-100/50" : "text-slate-500")}>{b.description}</p>
                                 </div>
                             </div>
                         ))}
@@ -185,14 +183,14 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <Button
                         variant={selected ? "default" : "outline"}
                         className={cn(
-                            "w-full py-6 text-base font-bold transition-all duration-500 rounded-full border-none",
+                            "w-full py-6 text-base font-bold transition-all duration-500 rounded-full",
                             selected 
                                 ? (isVip 
-                                    ? "bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-blue-950 hover:from-amber-500 hover:to-amber-700 shadow-[0_15px_40px_rgba(251,191,36,0.5)]" 
-                                    : "bg-primary text-white shadow-2xl") 
+                                    ? "border-none bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-blue-950 hover:from-amber-500 hover:to-amber-700 shadow-[0_15px_40px_rgba(251,191,36,0.5)]" 
+                                    : "border-none bg-primary text-white shadow-2xl") 
                                 : (isVip 
                                     ? "bg-white/5 border border-amber-400/30 text-amber-400 hover:bg-amber-400 hover:text-blue-950" 
-                                    : "bg-white border border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
+                                    : "bg-white border-2 border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
                         )}
                         onClick={(e) => { e.stopPropagation(); onSelect(); }}
                     >
