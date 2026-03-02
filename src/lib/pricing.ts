@@ -83,7 +83,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Raqobatchilar tahlili va unikal pozitsiya",
                 "Xalqaro bozor uchun tillararo tekshiruv",
                 "Brendning hissiy ma'nosi va ta'siri",
-                "3 ta qisqa shior varianti",
+                "3 ta qisqa shior varianti tayyorlanadi",
                 "Font va rang yo'nalishi bo'yicha tavsiya",
                 "Patentga topshirib berish xizmati (Davlat bojlari alohida)",
                 "Cheksiz tuzatish (30 kun ichida)"
@@ -116,7 +116,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kelajakdagi qimmat muammolardan qutulasiz." },
                 { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Mijozlar sizni boshqalardan ajratib taniydi." },
                 { icon: "❤️", title: "Mijozlar yaxshi ko'radi", description: "Nomga his-tuyg'u va sadoqat yuklanadi." },
-                { icon: "📈", title: "Kuchli boshlanish", description: "Marketing xarajatlarini kamaytiruvchi nom." }
+                { icon: "📈", title: "Kuchli boshlanish", description: "Marketing xarajatlarini kamayturuvchi nom." }
             ]
         },
         namingStandard: {

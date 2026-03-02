@@ -129,7 +129,7 @@
       { "icon": "⚖️", "title": "Huquqiy xavfsizlik", "description": "Kelajakdagi qimmat muammolardan qutulasiz." },
       { "icon": "🏆", "title": "Raqobatdan ajralib turasiz", "description": "Mijozlar sizni boshqalardan ajratib taniydi." },
       { "icon": "❤️", "title": "Mijozlar yaxshi ko'radi", "description": "Nomga his-tuyg'u va sadoqat yuklanadi." },
-      { "icon": "📈", "title": "Kuchli boshlanish", "description": "Marketing xarajatlarini kamaytiruvchi nom." }
+      { "icon": "📈", "title": "Kuchli boshlanish", "description": "Marketing xarajatlarini kamayturuvchi nom." }
     ]
   },
   "namingStandard": {
@@ -161,12 +161,12 @@
     "title": "Nega aynan biz?",
     "subtitle": "Biz shunchaki va'dalar bermaymiz. Tizimli yondashuv orqali brendingiz uchun real qiymat yaratamiz.",
     "values": [
-      { "title": "Strategik yondashuv", "description": "Biz shunchaki chiroyli rasm chizmaymiz. Har bir dizayn elementi sizning sotuvlaringizni oshirishga xizmat qiladi." },
+      { "title": "Strategik yondashuv", "description": "Biz shunchaki chiroyli rasm chizmaymiz. Har bir dizayn elementi sizning sotuvlaringizni oshirishga va brendingizni mustahkamlashga xizmat qiladi." },
       { "title": "Shaffof jarayon", "description": "Brif → Tahlil → Strategiya → Dizayn → Topshirish. Har bir bosqichda siz bilan yaqindan hamkorlik qilamiz." },
       { "title": "Natija va Sodiqlik", "description": "50 dan ortiq loyihalar va eng muhimi — 90% mijozlarimiz bizni do'stlariga tavsiya qilishadi." }
     ],
     "ctaTitle": "Bizning yondashuv yoqdimi?",
-    "ctaDesc": "Keling, brendingizni bepul tahlil qilamiz, uning kuchli va zaif tomonlarini aniqlaymiz.",
+    "ctaDesc": "Keling, brendingizni bepul tahlil qilamiz, uning kuchli va zaif tomonlarini aniqlaymiz. Bu sizga hech qanday majburiyat yuklamaydi.",
     "ctaButton": "Brendimni bepul tahlil qiling"
   },
   "trustedBy": {
@@ -203,7 +203,7 @@
   "queueStatus": {
     "subtitle": "Joylar cheklangan",
     "title": "Shoshiling! O'z joyingizni band qiling!",
-    "description": "Biz har bir loyihaga yuqori sifatni ta'minlash uchun vaqt ajratamiz.",
+    "description": "Biz har bir loyihaga yuqori sifatni ta'minlash uchun vaqt ajratamiz. Shuning uchun bir vaqtning o'zida faqat cheklangan miqdordagi loyihalar bilan ishlaymiz.",
     "queueTitle": "Loyihalar navbati",
     "booked": "Band",
     "available": "Bo'sh",
@@ -245,7 +245,7 @@
       "final_price": "Yakuniy narx:",
       "promo_code_label": "Promokod",
       "promo_code_placeholder": "KODNI KIRITING",
-      "promo_code_invalid": "Promokod xato",
+      "promo_code_invalid": "Promokod xato kiritildi",
       "discountSelector": {
         "none": "Chegirmasiz",
         "package": "Paketli 20%",
@@ -270,5 +270,74 @@
   "mobileCtaBar": {
     "final_price": "Narx",
     "get_offer": "So'rov yuborish"
+  },
+  "contactModal": {
+    "stepTitles": {
+      "contact": "Aloqa ma'lumotlari",
+      "project": "Loyiha haqida",
+      "budget": "Byudjet",
+      "meeting": "Uchrashuv"
+    },
+    "title": "Sifatli konsultatsiya uchun",
+    "description": "Loyihajingizni yaxxor tushunishimiz uchun bir nehcta savollarga javob bering.",
+    "fullName": "Ism, Familiya",
+    "fullNamePlaceholder": "Alisher Usmonov",
+    "phone": "Telefon raqami",
+    "phonePlaceholder": "+998 90 123 45 67",
+    "telegram": "Telegram nikingiz (ixtiyoriy)",
+    "telegramPlaceholder": "@username",
+    "companyName": "Kompaniya yoki loyiha nomi",
+    "companyNamePlaceholder": "Jon.Branding",
+    "website": "Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)",
+    "websitePlaceholder": "https://t.me/jonbranding",
+    "goal": "Qaysi maqsad sizga yaqinroq?",
+    "goalOptions": [
+      { "value": "exploring", "label": "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman." },
+      { "value": "has_problem", "label": "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak." },
+      { "value": "ready_to_start", "label": "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." }
+    ],
+    "budget": "Loyiha uchun taxminiy byudjet?",
+    "budgetOptions": [
+      "Hozircha byudjet yo'q / Shunchaki o'rganyapman",
+      "500 $ gacha",
+      "500 $ - 1,500 $",
+      "1,500 $ - 3,000 $",
+      "3,000 $ dan yuqori"
+    ],
+    "location": "Uchrashuv uchun joylashuvingiz",
+    "locationPlaceholder": "Viloyatingizni tanlang",
+    "locationOptions": ["Toshkent", "Farg'ona", "Boshqa viloyat"],
+    "meetingPlace": "Qayerda uchrashishni xohlaysiz?",
+    "meetingPlaceOptions": [
+      { "value": "our_office", "label": "Bizning ofisimizda", "description": "Loyihaga to'liq sho'ng'ish" },
+      { "value": "neutral", "label": "Neytral hududda", "description": "Erkin muhitda suhbat" },
+      { "value": "client_office", "label": "Sizning ofisingizda", "description": "Biznesingiz bilan tanishish" }
+    ],
+    "onlineMeetingAlert": "Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.",
+    "backButton": "Orqaga",
+    "nextButton": "Keyingisi",
+    "submitButton": "So'rov yuborish",
+    "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarim qayta ishlanishiga roziman.",
+    "formErrors": {
+      "fullName": "To'liq ismingizni kiriting.",
+      "phone": "Telefon raqamini to'g'ri kiriting.",
+      "goal": "Asosiy maqsadingizni tanlang.",
+      "budget": "Taxminiy byudjetni tanlang.",
+      "location": "Manzilingizni tanlang.",
+      "meetingPlace": "Uchrashuv joyini tanlashingiz kerak.",
+      "privacyPolicy": "Maxfiylik siyosatini qabul qilishingiz shart."
+    },
+    "successToast": {
+      "title": "Muvaffaqiyatli!",
+      "description": "Sizning so'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!"
+    },
+    "leadMagnetToast": {
+      "title": "Siz uchun maxsus resurslar!",
+      "description": "So'rovingiz qabul qilindi! Boshlanishiga sizni bepul materiallarimizga yo'naltiramiz."
+    },
+    "errorToast": {
+      "title": "Xatolik!",
+      "description": "So'rov yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
+    }
   }
 }
