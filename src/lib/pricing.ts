@@ -40,44 +40,45 @@ const basePricesUSD = {
 };
 
 export const getServiceDetails = (lang: string = 'uz') => {
-    const isRu = lang === 'ru';
-    const isEn = lang === 'en';
-
     return {
         audit: {
-            label: isRu ? "Аудит логотипа" : (isEn ? "Logo Audit" : "Logo Auditi"),
-            description: isRu ? "Анализ существующего логотипа и рекомендации." : (isEn ? "Analysis of existing logo." : "Mavjud logotipni tahlil qilish."),
+            label: "Logo Auditi",
+            description: "Mavjud logotipni strategik tahlil qilish va tavsiyalar.",
             price: basePricesUSD.audit,
-            timeline: "2-3 ish kuni"
+            timeline: "⏱ 2-3 ish kuni",
+            features: ["Logoning texnik tahlili", "Bozorga moslik tekshiruvi", "Kamchiliklar ro'yxati", "Yaxshilash bo'yicha tavsiyalar"]
         },
         namingCheck: {
-            label: isRu ? "Проверка нейминга" : (isEn ? "Naming Check" : "Neyming Tekshiruvi"),
-            description: isRu ? "Проверка доступности названия." : (isEn ? "Checking name availability." : "Brend nomining bo'shligini tekshirish."),
+            label: "Neyming Tekshiruvi",
+            description: "Brend nomining bo'shligini huquqiy va raqamli bazalarda tekshirish.",
             price: basePricesUSD.namingCheck,
-            timeline: "1-2 ish kuni"
+            timeline: "⏱ 1-2 ish kuni",
+            features: ["O'zbekiston patent bazasi", "Domenlar tekshiruvi", "Ijtimoiy tarmoqlar (Username)", "Ma'noviy assotsiatsiyalar"]
         },
         consultation: {
-            label: isRu ? "Консультация" : (isEn ? "Consultation" : "Konsultatsiya"),
-            description: isRu ? "Профессиональный совет по брендингу." : (isEn ? "Professional branding advice." : "Brending bo'yicha professional maslahat."),
+            label: "Konsultatsiya",
+            description: "Brending va biznesni 'upakovka' qilish bo'yicha professional maslahat.",
             price: basePricesUSD.consultation,
-            timeline: "Kelishilgan vaqtda"
+            timeline: "⏱ 60 daqiqa",
+            features: ["Muammolarni tahlil qilish", "Brending strategiyasi", "Savollarga javoblar", "Yo'l xaritasi tuzish"]
         },
         strategy: {
-            label: isRu ? "Бренд-стратегия" : (isEn ? "Brand strategy" : "Brend-strategiya va platforma"),
-            description: isRu ? "Фундамент для бизнеса." : (isEn ? "Foundation for business." : "Biznesingiz uchun natija keltiradigan poydevor."),
+            label: "Brend-strategiya",
+            description: "Biznesingiz uchun natija keltiradigan poydevor.",
             price: basePricesUSD.strategy,
-            timeline: "20-30 ish kuni"
+            timeline: "⏱ 20-30 ish kuni",
+            features: ["Bozor va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Brend platformasi", "Pozitsiyalash strategiyasi", "Noyob Sotuv Taklifi (USP)"]
         },
         commStrategy: {
-            label: isRu ? "Комм. стратегия" : (isEn ? "Comm. strategy" : "Kommunikatsion strategiya"),
-            description: isRu ? "Стратегия общения." : (isEn ? "Communication strategy." : "Mijozlar bilan muloqot strategiyasi."),
+            label: "Kommunikatsion strategiya",
+            description: "Mijozlar bilan muloqot va reklama tili.",
             price: basePricesUSD.commStrategy,
-            timeline: "15-20 ish kuni"
+            timeline: "⏱ 15-20 ish kuni",
+            features: ["Brend ovozi (Tone of Voice)", "Asosiy xabarlar tizimi", "Media kanallar tanlovi", "Kontent rejasi tamoyillari"]
         },
         namingVIP: {
             label: "Naming VIP",
-            description: "Nom emas — aktiv",
-            subDescription: "Jiddiy investitsiya qiladiganlar uchun",
+            description: "Nom emas — bu biznes uchun real aktiv.",
             price: basePricesUSD.namingVIP,
             timeline: "⏱ 15 ish kuni",
             features: [
@@ -98,29 +99,26 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         namingPremium: {
             label: "Naming Premium",
-            description: "To'g'ri nom, to'g'ri asos",
+            description: "To'g'ri nom, to'g'ri poydevor.",
             price: basePricesUSD.namingPremium,
             recommended: true,
             timeline: "⏱ 7 ish kuni",
-            results: ["10 ta nom varianti", "O'zbekiston bazasida patent tekshiruvi"],
-            benefits: [{ icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kelajakdagi muammolardan saqlanasiz." }]
+            results: ["10 ta nom varianti", "Har bir nom uchun strategik izoh", "O'zbekiston bazasida patent tekshiruvi", "3 ta tuzatish imkoniyati"]
         },
         namingStandard: {
             label: "Naming Standart",
-            description: "Tez va ishonchli start",
+            description: "Tez va sifatli start uchun.",
             price: basePricesUSD.namingStandard,
             timeline: "⏱ 5 ish kuni",
-            results: ["5 ta nom varianti", "Domen tekshiruvi"],
-            benefits: [{ icon: "⚡", title: "Tejamkorlik", description: "Tekshirilgan nomga tezkor ega bo'lasiz." }]
+            results: ["5 ta nom varianti", "Ma'nosi va izohi bilan", "Domen tekshiruvi", "2 ta tuzatish imkoniyati"]
         },
         logoStandard: {
             label: "Unikal Logo",
-            description: "Endigina boshlamoqchi bo'lganlar uchun",
-            subDescription: "Sifatli start uchun",
+            description: "Endigina boshlamoqchi bo'lganlar uchun.",
             price: basePricesUSD.logoStandard,
             timeline: "⏱ 5 ish kuni",
             features: [
-                "2 ta logo varianti — ikkalasidan birini tanlaysiz",
+                "2 ta logo varianti — bittasini tanlaysiz",
                 "Har bir variant uchun strategik izoh",
                 "Logo 4 xil ko'rinishda (Horizontal, Vertical, B&W, Icon)",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
@@ -131,21 +129,21 @@ export const getServiceDetails = (lang: string = 'uz') => {
             benefits: [
                 { icon: "🎯", title: "Hamma joyga tayyor", description: "Logongiz sayt, Instagram va chop etishga tayyor holda keladi." },
                 { icon: "✅", title: "Professional ko'rinish", description: "Mijozlar birinchi qarashda ishonch his qiladi." },
-                { icon: "👁️", title: "Real ko'rinish", description: "8 ta nuqtada logongiz qandayligini vizual ko'rasiz." },
+                { icon: "👁️", title: "Real hayotda ko'rasiz", description: "8 ta nuqtada logongiz qandayligini vizual ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar (AI formatida) topshiriladi." }
             ]
         },
         logoPremium: {
             label: "Logo + Firma uslubi",
-            description: "O'sishni rejalashtiraganlar uchun",
-            subDescription: "Vizual tizim va tanilish",
+            description: "O'sishni rejalashtiraganlar uchun.",
             price: basePricesUSD.logoPremium,
             recommended: true,
             timeline: "⏱ 10 ish kuni",
             features: [
-                "3 ta logo varianti — uchtalasidan birini tanlaysiz",
+                "3 ta logo varianti — bittasini tanlaysiz",
+                "Logoning 4 xil ko'rinishi va izohi",
                 "Rasmiy ranglar to'plami va aniq kodlari",
-                "Rasmiy brend shrifti",
+                "Rasmiy brend shrifti va qo'llash qoidalari",
                 "15 ta aloqa nuqtasida vizual namoyish",
                 "3 ta tuzatish imkoniyati"
             ],
@@ -153,19 +151,19 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 { icon: "🏆", title: "Har joyda bir xil ko'rinasiz", description: "Sayt, Instagram, vizitka — hammasi bir uslubda bo'ladi." },
                 { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq ranglar va shrift bo'lgach, hech kim adashmaydi." },
                 { icon: "📸", title: "Mijozlarga ko'rsatishga tayyor", description: "15 ta nuqtada brendingizni vizual ko'rasiz." },
-                { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznesning belgisidir." }
+                { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznes belgisidir." }
             ]
         },
         logoVIP: {
             label: "Logo + Stil + Brandbook",
-            description: "Hamma narsani to'g'ri qilmoqchilar uchun",
-            subDescription: "To'liq brend konstitutsiyasi",
+            description: "Hamma narsani bir marta to'g'ri qilmoqchilar uchun.",
             price: basePricesUSD.logoVIP,
             timeline: "⏱ 15–20 ish kuni",
             features: [
                 "3 ta logo varianti + chuqur strategik izoh",
                 "To'liq Brandbook (30-50 sahifa)",
                 "25 ta aloqa nuqtasida professional vizual",
+                "Ranglar, shriftlar va uslub qoidalari",
                 "Cheksiz tuzatish (30 kun ichida)",
                 "Logoning to'liq mulkchilik huquqi sertifikati"
             ],
@@ -173,11 +171,23 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 { icon: "📖", title: "Istalgan odamga bera olasiz", description: "Qo'llanma bilan har qanday dizayner to'g'ri ishlaydi." },
                 { icon: "🔒", title: "Brend buzilmaydi", description: "Brendingiz 10 yildan keyin ham kuchli ko'rinadi." },
                 { icon: "🌍", title: "Xalqaro daraja", description: "Investorlar jiddiy kompaniya ekaningizni bilishadi." },
-                { icon: "💎", title: "Bir marta qilinadigan sarmoya", description: "Har yili qayta dizayn qilish o'rniga, bir marta to'g'ri qiling." }
+                { icon: "💎", title: "Bir marta qilinadigan sarmoya", description: "To'g'ri qilingan brend kamida 10 yil xizmat qiladi." }
             ]
         },
-        packaging: { label: "Qadoq dizayni", price: basePricesUSD.packaging, timeline: "10-15 ish kuni" },
-        smm: { label: "Ijtimoiy tarmoqlar uchun stil", price: basePricesUSD.smm, timeline: "5-7 ish kuni" },
+        packaging: { 
+            label: "Qadoq dizayni", 
+            description: "Mahsulotingizning javondagi asosiy quroli.",
+            price: basePricesUSD.packaging, 
+            timeline: "⏱ 10-15 ish kuni",
+            features: ["Vizual konsepsiya", "Qadoqni 3D namoyish qilish", "Chop etishga tayyor fayllar", "Materiallar bo'yicha tavsiyalar"]
+        },
+        smm: { 
+            label: "Instagram uchun stil", 
+            description: "Sahifangizni tartibli va brendga mos qilish.",
+            price: basePricesUSD.smm, 
+            timeline: "⏱ 5-7 ish kuni",
+            features: ["Profil rasmi va bio dizayni", "9 ta post uchun shablon", "Storislar uchun dizayn tizimi", "Highlight ikonkalari"]
+        },
         urgency: { label: "Shoshilinch loyiha (+50%)", price: 0 },
         nda: { label: "NDA — Maxfiylik (+50%)", price: 0 }
     };
@@ -223,6 +233,7 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     let finalPrice = totalBeforeDiscounts;
     const discountsApplied = [];
 
+    // Promo codes logic (50% off for specified codes)
     const isPromoApplied = ['RAMAZON', 'PCG', 'KURSDOSH', 'TEZ NATIJA'].includes(promoCode?.toUpperCase());
 
     if (isPromoApplied) {
@@ -250,7 +261,15 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
         }
     }
 
-    return { base: basePrice, surchargesTotal, final: finalPrice, discountApplied: discountsApplied, surchargesApplied, savings: totalBeforeDiscounts - finalPrice, isPromoApplied };
+    return { 
+        base: basePrice, 
+        surchargesTotal, 
+        final: finalPrice, 
+        discountApplied: discountsApplied, 
+        surchargesApplied, 
+        savings: totalBeforeDiscounts - finalPrice, 
+        isPromoApplied 
+    };
 }
 
 export const comparisonData = (lang: 'uz' | 'ru' | 'en' = 'uz') => {
