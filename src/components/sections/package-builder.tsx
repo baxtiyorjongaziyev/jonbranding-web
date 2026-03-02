@@ -133,7 +133,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                                             <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
                                                 <CheckCircle className={cn("w-4 h-4", isVip ? "text-amber-400" : "text-primary")} />
                                             </div>
-                                            <span className={cn("text-base font-normal leading-tight", isVip ? "text-white" : "text-dark-blue")}>{r}</span>
+                                            <span className={cn("text-base font-normal leading-tight", isVip ? "text-slate-300" : "text-dark-blue")}>{r}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -153,7 +153,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                                 <span className="text-xl">{b.icon}</span>
                                 <div className="space-y-1">
                                     <p className={cn("text-sm font-bold leading-tight", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
-                                    <p className={cn("text-xs leading-snug", isVip ? "text-blue-100/50" : "text-slate-500")}>{b.description}</p>
+                                    <p className={cn("text-xs leading-snug", isVip ? "text-slate-400" : "text-slate-500")}>{b.description}</p>
                                 </div>
                             </div>
                         ))}

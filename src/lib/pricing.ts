@@ -77,7 +77,13 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: isUz ? "Biznesingiz uchun natija keltiradigan poydevor." : "A foundation that brings results for your business.",
             price: basePricesUSD.strategy,
             timeline: isUz ? "⏱ 20-30 ish kuni" : "⏱ 20-30 business days",
-            features: isUz ? ["Bozor va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Brend platformasi", "Pozitsiyalash strategiyasi", "Noyob Sotuv Taklifi (USP)"] : ["Market & Competitor analysis", "Target audience map", "Brand platform", "Positioning strategy", "USP development"]
+            features: isUz ? [
+                "Bozor va raqobat tahlili",
+                "Maqsadli auditoriya xaritasi",
+                "Brend platformasi",
+                "Pozitsiyalash strategiyasi",
+                "Noyob Sotuv Taklifi (USP)"
+            ] : ["Market & Competitor analysis", "Target audience map", "Brand platform", "Positioning strategy", "USP development"]
         },
         commStrategy: {
             label: isUz ? "Kommunikatsion strategiya" : "Communication Strategy",
@@ -133,7 +139,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "2 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
-                "Logo 4 xil ko'rinishda (Gorizontal, Vertikal, B&W, Ikonka)",
+                "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va faqat belgisi alohida",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "8 ta aloqa nuqtasida vizual namoyish",
@@ -149,7 +155,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ],
             benefits: isUz ? [
                 { icon: "🎯", title: "Hujjatlarda ham, ijtimoiy tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor." },
-                { icon: "✅", title: "Bu mening brendim deyishingiz mumkin", description: "O'zingiz yasaganga o'xshamaydigan professional ko'rinish." },
+                { icon: "✅", title: "\"Bu mening brendim\" deyishingiz mumkin", description: "Professional ko'rinish — o'zingiz yasaganga o'xshamaydigan professional ko'rinish." },
                 { icon: "👁️", title: "Real hayotda qanday ko'rinishini bilasiz", description: "8 ta muhim nuqtada logongiz qanday ko'rinishini vizual ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar topshiriladi, keyinchalik foydalanishga qulay." }
             ] : [
@@ -169,7 +175,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "3 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
-                "Logo 4 xil ko'rinishda (H, V, B&W, Ikonka)",
+                "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va faqat belgisi alohida",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "Rasmiy ranglar to'plami va aniq kodlari",
@@ -188,7 +194,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "3 revisions"
             ],
             benefits: isUz ? [
-                { icon: "🏆", title: "Har joyda bir xil, professional ko'rinasiz", description: "Sayt, Instagram, vizitka — hammasi bir uslubda bo'ladi." },
+                { icon: "🏆", title: "Har joyda bir xil, professional ko'rinasiz", description: "Saytingiz, Instagramingiz, vizitchangiz — hammasi bir uslubda." },
                 { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq qoidalar bo'lgach, hech kim adashmaydi." },
                 { icon: "📸", title: "Mijozlarga ko'rsatishga tayyor", description: "15 ta nuqtada brendingizni vizual ko'rasiz." },
                 { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznes belgisidir." }
@@ -207,7 +213,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 15–20 ish kuni" : "⏱ 15–20 business days",
             features: isUz ? [
                 "3 ta logo varianti + har biri uchun chuqur strategik izoh",
-                "Logo 4 xil ko'rinishda (H, V, B&W, Ikonka)",
+                "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va faqat belgisi alohida",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "Rasmiy ranglar va shriftlar tizimi",
