@@ -1,4 +1,3 @@
-
 'use client';
 
 /**
@@ -140,26 +139,76 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ]
         },
         logoVIP: {
-            label: "👑 VIP — Logo + Stil + Brandbook",
-            description: "Katta va o'sishga yo'naltirilgan bizneslar uchun to'liq upakovka.",
+            label: "Logo + Firma uslubi + Brandbook",
+            description: "Hamma narsani bir marta to'g'ri qilmoqchilar uchun",
+            subDescription: "To'liq brend konstitutsiyasi",
             price: basePricesUSD.logoVIP,
-            features: ["Baxtiyorjon Gaziyev nazorati", "8+ logotip konsepsiyasi", "25+ touchpoint dizayn", "To'liq Brandbook"],
-            timeline: "20–30 ish kuni"
+            timeline: "⏱ 15–20 ish kuni",
+            features: [
+                "3 ta logo varianti tayyorlanadi + har biri uchun chuqur strategik izoh",
+                "Logo 4 xil ko'rinishda: gorizontal, vertikal, qora-oq, belgi alohida",
+                "Ijtimoiy tarmoqlar uchun profil rasmi (Instagram, Telegram)",
+                "3 xil fayl formatida: PNG, SVG, AI",
+                "Rasmiy ranglar to'plami — 3–5 ta rang va ularning aniq kodlari",
+                "Rasmiy shrift — brendingizda ishlatiladigan harflar uslubi",
+                "Brandbook — logoni qo'llash, ranglar, shriftlar va noto'g'ri ishlatish misollari bilan to'liq qo'llanma",
+                "25 ta aloqa nuqtasi — to'liq audit va har bir nuqta uchun professional vizuallar",
+                "Cheksiz tuzatish (30 kun ichida)",
+                "Logoning to'liq mulkchilik huquqi sertifikati"
+            ],
+            benefits: [
+                { icon: "📖", title: "Istalgan odamga berib, to'g'ri natija olasiz", description: "Dizayner, SMM mutaxassis, yangi xodim — qo'llanmani o'qib, brendingizni to'g'ri ishlatadi." },
+                { icon: "🔒", title: "Brend yillar o'tsa ham buzilmaydi", description: "Hamma qoidalar yozilgan — hech kim o'z bilganicha o'zgartira olmaydi." },
+                { icon: "🌍", title: "Xalqaro darajada tayyor ko'rinasiz", description: "Investor, sherik yoki xorijiy mijoz ko'rsa — jiddiy kompaniya ekanligini his qiladi." },
+                { icon: "💎", title: "Bu bir marta qilinadigan investitsiya", description: "To'g'ri qilingan brend 10 yil ishlaydi. Har yili qayta dizayn o'rniga, bir marta to'g'ri qiling." }
+            ]
         },
         logoPremium: {
-            label: "Logo + Firma uslubi PREMIUM",
-            description: "Brendini jiddiy rivojlantirayotganlar uchun vizual tizim.",
+            label: "Logo + Firma uslubi",
+            description: "O'sishni rejalashtiraganlar uchun",
+            subDescription: "Vizual tizim va tanilish",
             price: basePricesUSD.logoPremium,
-            features: ["5 ta logotip konsepsiyasi", "Firma uslubi (ranglar, shriftlar)", "15+ touchpoint dizayn"],
             recommended: true,
-            timeline: "14–20 ish kuni"
+            timeline: "⏱ 10 ish kuni",
+            features: [
+                "3 ta logo varianti tayyorlanadi — uchtalasidan birini tanlaysiz",
+                "Har bir variant uchun izoh beriladi — nima uchun aynan shunday dizayn qilindi",
+                "Logo 4 xil ko'rinishda: gorizontal, vertikal, qora-oq, belgi alohida",
+                "Ijtimoiy tarmoqlar uchun profil rasmi (Instagram, Telegram)",
+                "3 xil fayl formatida: PNG, SVG, AI",
+                "Rasmiy ranglar to'plami — brendingizning 3–5 ta rasmiy rangi va kodlari",
+                "Rasmiy shrift — brendingizda ishlatiladigan harflar uslubi",
+                "15 ta aloqa nuqtasi — biznesingizni o'rganib, har birida logongiz qanday ko'rinishini vizual ko'rsatamiz",
+                "3 ta tuzatish imkoniyati"
+            ],
+            benefits: [
+                { icon: "🏆", title: "Har joyda bir xil, professional ko'rinasiz", description: "Saytingiz, Instagramingiz, vizitchangiz — hammasi bir uslubda. Mijoz sizni tanib oladi." },
+                { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq ranglar va shrift bo'lgach, hech kim adashmaydi. Hamma bir yo'nalishda harakat qiladi." },
+                { icon: "📸", title: "Mijozlarga ko'rsatishga tayyor", description: "15 ta aloqa nuqtasida brendingiz qanday ko'rinishini oldindan bilasiz — tasavvur emas, ko'z oldingizda." },
+                { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznesning belgisi. Mijozlar sizga ko'proq ishonadi." }
+            ]
         },
         logoStandard: {
-            label: "Logotip STANDARD",
-            description: "Startaplar uchun sifatli va tezkor logotip.",
+            label: "Unikal Logo",
+            description: "Endigina boshlamoqchi bo'lganlar uchun",
+            subDescription: "Sifatli start uchun",
             price: basePricesUSD.logoStandard,
-            features: ["3 ta logotip konsepsiyasi", "5 ta asosiy touchpoint", "Ranglar kodi"],
-            timeline: "7–10 ish kuni"
+            timeline: "⏱ 5 ish kuni",
+            features: [
+                "2 ta logo varianti tayyorlanadi — ikkalasidan birini tanlaysiz",
+                "Har bir variant uchun izoh beriladi — nima uchun aynan shunday dizayn qilindi",
+                "Logo 4 xil ko'rinishda: gorizontal, vertikal, qora-oq va belgi alohida",
+                "Ijtimoiy tarmoqlar uchun profil rasmi (Instagram, Telegram)",
+                "3 xil fayl formatida: PNG, SVG, AI",
+                "8 ta aloqa nuqtasida logongiz qanday ko'rinishini vizual ko'rsatib beriladi",
+                "2 ta tuzatish imkoniyati"
+            ],
+            benefits: [
+                { icon: "🎯", title: "Hujjatlarda ham, ijtimoiy tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga tayyor holda keladi — saytga, Instagramga, chop etishga." },
+                { icon: "✅", title: "\"Bu mening brendim\" deyishingiz mumkin bo'ladi", description: "Professional ko'rinish — o'zingiz yasaganga o'xshamaydi. Mijozlar birinchi qarashda ishonch his qiladi." },
+                { icon: "👁️", title: "Real hayotda qanday ko'rinishini oldindan bilasiz", description: "8 ta aloqa nuqtasida logongiz qanday ko'rinishini ko'rasiz — hammasi ko'z oldingizda." },
+                { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha fayllar sizga topshiriladi. Kerak bo'lganda istalgan dizaynerga bera olasiz." }
+            ]
         },
         packaging: {
             label: "Qadoq dizayni",
