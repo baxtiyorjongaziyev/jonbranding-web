@@ -3,10 +3,28 @@
 
 /**
  * @fileOverview Narxlar va xizmatlar bazasi.
- * Includes VIP tariffs, RAMAZON/PCG/KURSDOSH promos, and 50% surcharges.
+ * Includes VIP tariffs, RAMAZON/PCG/KURSDOSH/TEZ NATIJA promos, and 50% surcharges.
  */
 
 const USD_TO_UZS_RATE = 12700;
+
+export type SelectedServices = {
+    audit?: boolean;
+    namingCheck?: boolean;
+    consultation?: boolean;
+    strategy?: boolean;
+    commStrategy?: boolean;
+    namingVIP?: boolean;
+    namingPremium?: boolean;
+    namingStandard?: boolean;
+    logoVIP?: boolean;
+    logoPremium?: boolean;
+    logoStandard?: boolean;
+    packaging?: boolean;
+    smm?: boolean;
+    urgency?: boolean;
+    nda?: boolean;
+};
 
 const basePricesUSD = {
     audit: 59,
@@ -73,19 +91,19 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.namingVIP,
             timeline: isRu ? "15 рабочих дней" : (isEn ? "15 business days" : "15 ish kuni"),
             features: [
-                isRu ? "15 вариантов названий" : (isEn ? "15 name variants" : "15 ta nom varianti tayyorlanadi"),
-                isRu ? "Полное обоснование для каждого имени" : (isEn ? "Full logic for each name" : "Har bir nom uchun to'liq izoh beriladi"),
-                isRu ? "Проверка произношения и звучания" : (isEn ? "Pronunciation & phonetics check" : "Talaffuz, jarang va esda qolishi tekshiriladi"),
-                isRu ? "Проверка домена и Username" : (isEn ? "Domain & Username check" : "Domen va Username tekshiruvi"),
-                isRu ? "Патентная проверка в Узбекистане и мире" : (isEn ? "Patent check (UZ & World)" : "Patentga topshirib berish xizmati (Davlat bojlari alohida)"),
-                isRu ? "Анализ конкурентов" : (isEn ? "Competitor analysis" : "Raqobatchilar tahlili va unikal pozitsiya"),
-                isRu ? "Безлимитные правки (30 дней)" : (isEn ? "Unlimited edits (30 days)" : "Cheksiz tuzatish (30 kun ichida)")
+                "15 ta nom varianti tayyorlanadi — xohlaganingizni tanlaysiz",
+                "Har bir nom uchun to'liq izoh beriladi — nima uchun aynan shu tanlangani haqida",
+                "Talaffuz, jarang va esda qolishi tekshiriladi",
+                "Domen va Username tekshiruvi",
+                "Patentga topshirib berish xizmati (birinchi bosqich to'liq topshiriladi)",
+                "Raqobatchilar tahlili va unikal pozitsiya",
+                "Cheksiz tuzatish (30 kun ichida)"
             ],
             benefits: [
-                { icon: "🌍", title: isRu ? "Готовы к мировому рынку" : "International ready", description: isRu ? "Имя проверено на других языках" : "Nom xalqaro bozorga mos ravishda tekshirilgan" },
-                { icon: "🔒", title: isRu ? "Имя полностью ваше" : "Ownership", description: isRu ? "Официальная защита патентом" : "Rasmiy patent himoyasi bilan ta'minlanadi" },
-                { icon: "💎", title: isRu ? "Ценность для бизнеса" : "Business value", description: isRu ? "Защищенное имя — это реальный актив" : "Himoyalangan nom biznes uchun real aktivdir" },
-                { icon: "🎯", title: isRu ? "Правильное решение" : "Right choice", description: isRu ? "Определяем верный путь вместе" : "Biznesingiz uchun eng to'g'ri yo'lni tanlaymiz" }
+                { icon: "🌍", title: "Xalqaro bozorga tayyorsiz", description: "Nom xalqaro bozorga mos ravishda tekshirilgan." },
+                { icon: "🔒", title: "Nom to'liq sizniki", description: "Rasmiy patent himoyasi bilan ta'minlanadi." },
+                { icon: "💎", title: "Biznes uchun real aktiv", description: "Himoyalangan nom biznes uchun real aktivdir." },
+                { icon: "🎯", title: "Eng to'g'ri yo'l", description: "Biznesingiz uchun eng to'g'ri yo'lni tanlaymiz." }
             ]
         },
         namingPremium: {
@@ -96,17 +114,17 @@ export const getServiceDetails = (lang: string = 'uz') => {
             recommended: true,
             timeline: isRu ? "7 рабочих дней" : (isEn ? "7 business days" : "7 ish kuni"),
             features: [
-                isRu ? "10 вариантов названий" : (isEn ? "10 name variants" : "10 ta nom varianti tayyorlanadi"),
-                isRu ? "Стратегическое обоснование" : (isEn ? "Strategic logic" : "Har bir nom uchun strategik izoh"),
-                isRu ? "Проверка произношения" : (isEn ? "Pronunciation check" : "Talaffuz va esda qolishi tekshiriladi"),
-                isRu ? "Патентная проверка (Узбекистан)" : (isEn ? "Uzbek patent check" : "O'zbekiston bazasida patent tekshiruvi"),
-                isRu ? "3 раунда правок" : (isEn ? "3 edit rounds" : "3 ta tuzatish raundi")
+                "10 ta nom varianti tayyorlanadi",
+                "Har bir nom uchun strategik izoh",
+                "Talaffuz va esda qolishi tekshiriladi",
+                "O'zbekiston bazasida patent tekshiruvi",
+                "3 ta tuzatish raundi"
             ],
             benefits: [
-                { icon: "⚖️", title: isRu ? "Правовая безопасность" : "Legal safety", description: isRu ? "Избежите дорогих проблем" : "Kelajakdagi qimmat muammolardan saqlanasiz" },
-                { icon: "🏆", title: isRu ? "Отличие от конкурентов" : "Stand out", description: isRu ? "Клиенты узнают вас" : "Mijozlar sizni boshqalardan darhol taniydi" },
-                { icon: "❤️", title: isRu ? "Любовь клиентов" : "Customer love", description: isRu ? "Эмоции и лояльность" : "Nomda hissiyot va sadoqat mujassam bo'ladi" },
-                { icon: "📈", title: isRu ? "Сильный старт" : "Strong start", description: isRu ? "Имя, снижающее затраты" : "Marketing xarajatlarini kamaytiradigan nom" }
+                { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kelajakdagi qimmat muammolardan saqlanasiz." },
+                { icon: "🏆", title: "Ajralib turish", description: "Mijozlar sizni boshqalardan darhol taniydi." },
+                { icon: "❤️", title: "Mijozlar mehri", description: "Nomda hissiyot va sadoqat mujassam bo'ladi." },
+                { icon: "📈", title: "Kuchli start", description: "Marketing xarajatlarini kamaytiradigan nom." }
             ]
         },
         namingStandard: {
@@ -116,109 +134,115 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.namingStandard,
             timeline: isRu ? "5 рабочих дней" : (isEn ? "5 business days" : "5 ish kuni"),
             features: [
-                isRu ? "5 вариантов названий" : (isEn ? "5 name variants" : "5 ta nom varianti tayyorlanadi"),
-                isRu ? "Краткие пояснения" : (isEn ? "Short logic" : "Nomlar uchun qisqa izohlar"),
-                isRu ? "Проверка произношения" : (isEn ? "Pronunciation check" : "Talaffuz qulayligi tekshiruvi"),
-                isRu ? "Проверка домена" : (isEn ? "Domain check" : "Domen va Username tekshiruvi"),
-                isRu ? "1 раунд правок" : (isEn ? "1 edit round" : "1 ta tuzatish raundi")
+                "5 ta nom varianti tayyorlanadi",
+                "Nomlar uchun qisqa izohlar",
+                "Talaffuz qulayligi tekshiruvi",
+                "Domen va Username tekshiruvi",
+                "1 ta tuzatish raundi"
             ],
             benefits: [
-                { icon: "🛡️", title: isRu ? "Защита от ошибок" : "Safety", description: isRu ? "Избежите неверного имени" : "Noto'g'ri nom tanlash xavfidan saqlanasiz" },
-                { icon: "⚡", title: isRu ? "Экономия времени" : "Save time", description: isRu ? "Быстрое получение имени" : "Tekshirilgan nomga tezkor ega bo'lasiz" },
-                { icon: "✅", title: isRu ? "Уверенный старт" : "Start with confidence", description: isRu ? "Начните без забот" : "Ishni ortiqcha xavotirsiz boshlaysiz" },
-                { icon: "📱", title: "Digital ready", description: isRu ? "Никаких проблем с доменом" : "Domen va loginlar bilan muammo bo'lmaydi" }
-            ]
-        },
-        logoVIP: {
-            label: isRu ? "Logo + Фирменный стиль + Брендбук" : (isEn ? "Logo + Identity + Brandbook" : "Logo + Firma uslubi + Brandbook"),
-            description: isRu ? "Для тех, кто хочет все правильно" : (isEn ? "For those who want it right" : "Hamma narsani bir marta to'g'ri qilmoqchilar uchun"),
-            subDescription: isRu ? "Полная конституция бренда" : (isEn ? "Full brand constitution" : "To'liq brend konstitutsiyasi"),
-            price: basePricesUSD.logoVIP,
-            timeline: isRu ? "15–20 рабочих дней" : (isEn ? "15-20 business days" : "15–20 ish kuni"),
-            features: [
-                isRu ? "3 варианта логотипа + стратегия" : (isEn ? "3 logo variants + strategy" : "3 ta logo varianti + chuqur strategik izoh"),
-                isRu ? "4 вида логотипа" : (isEn ? "4 logo versions" : "Logo 4 xil ko'rinishda (Horiz, Vert, B&W, Mark)"),
-                isRu ? "Профильное фото (IG, TG)" : (isEn ? "Social profile images" : "Ijtimoiy tarmoqlar uchun profil rasmi"),
-                isRu ? "Файлы: PNG, SVG, AI" : (isEn ? "Formats: PNG, SVG, AI" : "3 xil fayl formatida topshiriladi (AI, SVG, PNG)"),
-                isRu ? "Цвета и Шрифты" : (isEn ? "Colors & Fonts" : "Rasmiy ranglar to'plami va rasmiy shrift"),
-                isRu ? "Брендбук" : (isEn ? "Full Brandbook" : "Brandbook — to'liq foydalanish qo'llanmasi"),
-                isRu ? "25 точек контакта" : (isEn ? "25 touchpoints" : "25 ta aloqa nuqtasi — professional vizuallar"),
-                isRu ? "Сертификат владения" : (isEn ? "Ownership certificate" : "Logoning to'liq mulkchilik huquqi sertifikati")
-            ],
-            benefits: [
-                { icon: "📖", title: "Qo'llanmaga muvofiq natija", description: "Dizayner yoki SMM mutaxassisi qo'llanma orqali brendni to'g'ri ishlatadi." },
-                { icon: "🔒", title: "Brend sifati buzilmaydi", description: "Barcha qoidalar yozilgan, hech kim o'zicha o'zgartira olmaydi." },
-                { icon: "🌍", title: "Xalqaro daraja", description: "Investor yoki sheriklar jiddiy kompaniya ekanligingizni his qiladi." },
-                { icon: "💎", title: "Bir martalik investitsiya", description: "To'g'ri qilingan brend 10 yil ishlaydi, har yili qayta dizaynga hojat qolmaydi." }
-            ]
-        },
-        logoPremium: {
-            label: isRu ? "Лого + Фирменный стиль" : (isEn ? "Logo + Identity" : "Logo + Firma uslubi"),
-            description: isRu ? "Для тех, кто планирует рост" : (isEn ? "For those planning growth" : "O'sishni rejalashtiraganlar uchun"),
-            subDescription: isRu ? "Визуальная система" : (isEn ? "Visual system" : "Vizual tizim va tanilish"),
-            price: basePricesUSD.logoPremium,
-            recommended: true,
-            timeline: isRu ? "10 рабочих дней" : (isEn ? "10 business days" : "10 ish kuni"),
-            features: [
-                isRu ? "3 варианта логотипа" : (isEn ? "3 logo variants" : "3 ta logo varianti tayyorlanadi"),
-                isRu ? "4 вида логотипа" : (isEn ? "4 logo versions" : "Logo 4 xil ko'rinishda (Horiz, Vert, B&W, Mark)"),
-                isRu ? "Файлы: PNG, SVG, AI" : (isEn ? "Formats: PNG, SVG, AI" : "3 xil fayl formatida topshiriladi (AI, SVG, PNG)"),
-                isRu ? "Цвета и Шрифты" : (isEn ? "Colors & Fonts" : "Rasmiy ranglar to'plami va rasmiy shrift"),
-                isRu ? "15 точек контакта" : (isEn ? "15 touchpoints" : "15 ta aloqa nuqtasi — vizual namoyish"),
-                isRu ? "3 раунда правок" : (isEn ? "3 edit rounds" : "3 ta tuzatish imkoniyati")
-            ],
-            benefits: [
-                { icon: "🏆", title: "Professional ko'rinish", description: "Saytingiz va ijtimoiy tarmoqlaringiz bir xil uslubda, professional bo'ladi." },
-                { icon: "💼", title: "Xodimlar adashmaydi", description: "Aniq qoidalar bor joyda hech kim rang yoki shrift tanlashda adashmaydi." },
-                { icon: "📸", title: "Mijozlarga ko'rsatishga tayyor", description: "15 ta nuqtada brendingiz qanday ko'rinishini oldindan bilasiz." },
-                { icon: "📈", title: "Brend qiymati oshadi", description: "Professional ko'rinish mijozlarda ko'proq ishonch uyg'otadi." }
+                { icon: "🛡️", title: "Xatolardan himoya", description: "Noto'g'ri nom tanlash xavfidan saqlanasiz." },
+                { icon: "⚡", title: "Tejamkorlik", description: "Tekshirilgan nomga tezkor ega bo'lasiz." },
+                { icon: "✅", title: "Ishonchli start", description: "Ishni ortiqcha xavotirsiz boshlaysiz." },
+                { icon: "📱", title: "Digital tayyor", description: "Domen va loginlar bilan muammo bo'lmaydi." }
             ]
         },
         logoStandard: {
-            label: isRu ? "Уникальный Логотип" : (isEn ? "Unique Logo" : "Unikal Logo"),
-            description: isRu ? "Для качественного старта" : (isEn ? "For a quality start" : "Endigina boshlamoqchi bo'lganlar uchun"),
-            subDescription: isRu ? "Для начинающих" : (isEn ? "For beginners" : "Sifatli start uchun"),
+            label: "Unikal Logo",
+            description: "Endigina boshlamoqchi bo'lganlar uchun",
+            subDescription: "Sifatli start uchun",
             price: basePricesUSD.logoStandard,
-            timeline: isRu ? "5 рабочих дней" : (isEn ? "5 business days" : "5 ish kuni"),
+            timeline: "⏱ 5 ish kuni",
             features: [
-                isRu ? "2 варианта логотипа" : (isEn ? "2 logo variants" : "2 ta logo varianti tayyorlanadi"),
-                isRu ? "4 вида логотипа" : (isEn ? "4 logo versions" : "Logo 4 xil ko'rinishda (Horiz, Vert, B&W, Mark)"),
-                isRu ? "Файлы: PNG, SVG, AI" : (isEn ? "Formats: PNG, SVG, AI" : "3 xil fayl formatida topshiriladi (AI, SVG, PNG)"),
-                isRu ? "8 точек контакта" : (isEn ? "8 touchpoints" : "8 ta aloqa nuqtasi — logoning vizual ko'rinishi"),
-                isRu ? "2 раунда правок" : (isEn ? "2 edit rounds" : "2 ta tuzatish imkoniyati")
+                "2 ta logo varianti — ikkalasidan birini tanlaysiz",
+                "Har bir variant uchun strategik izoh",
+                "Logo 4 xil ko'rinishda (gorizontal, vertikal, qora-oq, belgi)",
+                "Ijtimoiy tarmoqlar uchun profil rasmi",
+                "3 xil fayl formati (PNG, SVG, AI)",
+                "8 ta aloqa nuqtasida vizual namoyish",
+                "2 ta tuzatish imkoniyati"
             ],
             benefits: [
-                { icon: "🎯", title: "Tayyor yechim", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor bo'ladi." },
-                { icon: "✅", title: "Haqiqiy brend hissi", description: "O'zingiz yasaganga o'xshamaydigan professional ko'rinish." },
-                { icon: "👁️", title: "Oldindan ko'ra olasiz", description: "8 ta muhim nuqtada logongiz qanday ko'rinishini vizual ko'rasiz." },
-                { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar topshiriladi, keyinchalik foydalanishga qulay." }
+                { icon: "🎯", title: "Universal qo'llanilish", description: "Saytga, Instagramga va chop etishga tayyor." },
+                { icon: "✅", title: "Professional ko'rinish", description: "Mijozlar birinchi qarashda ishonch his qiladi." },
+                { icon: "👁️", title: "Realistik vizual", description: "8 ta nuqtada logongiz qanday ko'rinishini bilasiz." },
+                { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar foydalanishga tayyor holda topshiriladi." }
+            ]
+        },
+        logoPremium: {
+            label: "Logo + Firma uslubi",
+            description: "O'sishni rejalashtiraganlar uchun",
+            subDescription: "Vizual tizim va tanilish",
+            price: basePricesUSD.logoPremium,
+            recommended: true,
+            timeline: "⏱ 10 ish kuni",
+            features: [
+                "3 ta logo varianti — uchtalasidan birini tanlaysiz",
+                "Har bir variant uchun chuqur izoh",
+                "Logo 4 xil ko'rinishda (gorizontal, vertikal, qora-oq, belgi)",
+                "Ijtimoiy tarmoqlar uchun profil rasmi",
+                "3 xil fayl formati (PNG, SVG, AI)",
+                "Rasmiy ranglar to'plami va kodlari",
+                "Rasmiy brend shrifti",
+                "15 ta aloqa nuqtasida vizual namoyish",
+                "3 ta tuzatish imkoniyati"
+            ],
+            benefits: [
+                { icon: "🏆", title: "Yagona stil", description: "Sayt va vizitka — hammasi bir xil professional ko'rinadi." },
+                { icon: "💼", title: "Xodimlar uchun oson", description: "Aniq qoidalar bor joyda hech kim xato qilmaydi." },
+                { icon: "📸", title: "Tayyor yechim", description: "15 ta nuqtada brendingiz qanday ko'rinishini ko'rasiz." },
+                { icon: "📈", title: "Brend qiymati", description: "Professional ko'rinish ko'proq ishonch uyg'otadi." }
+            ]
+        },
+        logoVIP: {
+            label: "Logo + Firma uslubi + Brandbook",
+            description: "Hamma narsani bir marta to'g'ri qilmoqchilar uchun",
+            subDescription: "To'liq brend konstitutsiyasi",
+            price: basePricesUSD.logoVIP,
+            timeline: "⏱ 15–20 ish kuni",
+            features: [
+                "3 ta logo varianti + chuqur strategik izoh",
+                "Logo 4 xil ko'rinishda (hamma formatlar)",
+                "Ijtimoiy tarmoqlar uchun profil rasmi",
+                "Barcha manba fayllar (PNG, SVG, AI)",
+                "Rasmiy ranglar va shriftlar to'plami",
+                "To'liq Brandbook (30-50 sahifa)",
+                "25 ta aloqa nuqtasida professional vizual",
+                "Cheksiz tuzatish (30 kun ichida)",
+                "To'liq mulkchilik huquqi sertifikati"
+            ],
+            benefits: [
+                { icon: "📖", title: "Nazorat o'z qo'lingizda", description: "Istalgan dizayner qo'llanma bilan to'g'ri ishlaydi." },
+                { icon: "🔒", title: "Barqaror imidj", description: "Brendingiz 10 yildan keyin ham kuchli ko'rinadi." },
+                { icon: "🌍", title: "Xalqaro daraja", description: "Investorlar jiddiy kompaniya ekaningizni his qiladi." },
+                { icon: "💎", title: "Aqlli investitsiya", description: "Har yili qayta dizayn qilishga hojat qolmaydi." }
             ]
         },
         packaging: {
             label: isRu ? "Дизайн упаковки" : (isEn ? "Packaging Design" : "Qadoq dizayni"),
             description: isRu ? "Профессиональная упаковка." : (isEn ? "Professional packaging." : "Professional qadoq dizayni."),
             price: basePricesUSD.packaging,
-            features: isRu ? ["Анализ рынка", "2 концепции", "Файлы для печати"] : (isEn ? ["Market analysis", "2 concepts", "Print-ready files"] : ["Bozor tahlili", "2 ta dizayn konsepsiyasi", "Chopga tayyor fayllar"]),
-            timeline: isRu ? "10-15 рабочих дней" : (isEn ? "10-15 business days" : "10-15 ish kuni")
+            features: ["Bozor tahlili", "2 ta dizayn konsepsiyasi", "Chopga tayyor fayllar"],
+            timeline: "10-15 ish kuni"
         },
         smm: {
             label: isRu ? "Стиль для соцсетей" : (isEn ? "Social media style" : "Ijtimoiy tarmoqlar uchun stil"),
             description: isRu ? "Система оформления." : (isEn ? "Design system." : "Post va storis bezash tizimi."),
             price: basePricesUSD.smm,
-            features: isRu ? ["6 шаблонов постов", "6 шаблонов сторис"] : (isEn ? ["6 post templates", "6 stories templates"] : ["6 ta post shabloni", "6 ta stories shabloni"]),
-            timeline: isRu ? "5-7 рабочих дней" : (isEn ? "5-7 business days" : "5-7 ish kuni")
+            features: ["6 ta post shabloni", "6 ta stories shabloni"],
+            timeline: "5-7 ish kuni"
         },
         urgency: {
-            label: isRu ? "Срочный проект (+50%)" : (isEn ? "Urgent project (+50%)" : "Shoshilinch loyiha (+50%)"),
-            description: isRu ? "В 2 раза быстрее." : (isEn ? "2x faster." : "2 barobar tezroq bitirib berish."),
+            label: "Shoshilinch loyiha (+50%)",
+            description: "2 barobar tezroq bitirib berish.",
             price: 0,
-            timeline: isRu ? "Срок сокращается на 50%" : (isEn ? "Timeline reduced by 50%" : "Muddat 50% qisqaradi")
+            timeline: "Muddat 50% qisqaradi"
         },
         nda: {
-            label: isRu ? "NDA — Конфиденциальность (+50%)" : (isEn ? "NDA (+50%)" : "NDA — Maxfiylik (+50%)"),
-            description: isRu ? "Без публикации." : (isEn ? "No publication." : "Portfolioga qo'shmaslik."),
+            label: "NDA — Maxfiylik (+50%)",
+            description: "Portfolioga qo'shmaslik.",
             price: 0,
-            timeline: isRu ? "На время проекта" : (isEn ? "Project duration" : "Loyiha davomida")
+            timeline: "Loyiha davomida"
         }
     };
     return sd;
@@ -253,12 +277,12 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     if (selectedServices.urgency) {
         const val = basePrice * 0.5;
         surchargesTotal += val;
-        surchargesApplied.push({ name: lang === 'uz' ? 'Shoshilinch loyiha (+50%)' : 'Urgent project (+50%)', value: val });
+        surchargesApplied.push({ name: 'Shoshilinch loyiha (+50%)', value: val });
     }
     if (selectedServices.nda) {
         const val = basePrice * 0.5;
         surchargesTotal += val;
-        surchargesApplied.push({ name: lang === 'uz' ? 'NDA (Maxfiylik) (+50%)' : 'NDA (+50%)', value: val });
+        surchargesApplied.push({ name: 'NDA (Maxfiylik) (+50%)', value: val });
     }
 
     const totalBeforeDiscounts = basePrice + surchargesTotal;
@@ -269,24 +293,24 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
 
     if (isPromoApplied) {
         const val = totalBeforeDiscounts * 0.50;
-        discountsApplied.push({ name: lang === 'uz' ? 'Maxsus chegirma (-50%)' : 'Special promo (-50%)', value: val });
+        discountsApplied.push({ name: 'Maxsus chegirma (-50%)', value: val });
         finalPrice -= val;
     } else {
         if (discountType === 'package' && mainServicesCount >= 2) {
             const val = totalBeforeDiscounts * 0.20;
-            discountsApplied.push({ name: lang === 'uz' ? 'Paketli chegirma (-20%)' : 'Package discount (-20%)', value: val });
+            discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: val });
             finalPrice -= val;
         } else if (discountType === 'full') {
             if (mainServicesCount >= 2) {
                 const packageVal = totalBeforeDiscounts * 0.20;
-                discountsApplied.push({ name: lang === 'uz' ? 'Paketli chegirma (-20%)' : 'Package discount (-20%)', value: packageVal });
+                discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: packageVal });
                 finalPrice -= packageVal;
                 const upfrontVal = finalPrice * 0.10;
-                discountsApplied.push({ name: lang === 'uz' ? "Oldindan to'lov (-10%)" : "Upfront payment (-10%)", value: upfrontVal });
+                discountsApplied.push({ name: "Oldindan to'lov (-10%)", value: upfrontVal });
                 finalPrice -= upfrontVal;
             } else {
                 const upfrontVal = totalBeforeDiscounts * 0.10;
-                discountsApplied.push({ name: lang === 'uz' ? "Oldindan to'lov (-10%)" : "Upfront payment (-10%)", value: upfrontVal });
+                discountsApplied.push({ name: "Oldindan to'lov (-10%)", value: upfrontVal });
                 finalPrice -= upfrontVal;
             }
         }
