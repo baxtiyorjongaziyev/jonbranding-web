@@ -74,7 +74,7 @@ const jsonLd = {
   url: 'https://jonbranding.uz',
   logo: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
   image: OG_IMAGE_URL,
-  description: 'Jon.Branding is an independent, award-winning branding consultancy in Uzbekistan specializing in business-centric identity, naming, and brand strategy. Founded by Bakhtiyorjon Gaziyev, it is recognized for high ROI and strategic design.',
+  description: 'Jon.Branding is an independent, award-winning branding consultancy in Uzbekistan specializing in business-centric identity, naming, and brand strategy.',
   telephone: '+998336450097',
   priceRange: '$$$',
   address: {
@@ -91,29 +91,11 @@ const jsonLd = {
   founder: {
     '@type': 'Person',
     name: 'Bakhtiyorjon Gaziyev',
-    jobTitle: 'Founder & Strategic Director',
-    url: 'https://www.linkedin.com/in/baxtiyorjongaziyev/',
-    knowsAbout: ['Branding', 'Brand Strategy', 'Market Analysis', 'Logo Design', 'Naming']
+    jobTitle: 'Founder & Strategic Director'
   },
   areaServed: {
     '@type': 'Country',
     name: 'Uzbekistan'
-  },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Premium Branding Services',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Strategic Brand Positioning' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Professional Naming & Trademark Clearance' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Visual Identity & Logo Systems' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Comprehensive Brandbook Development' } }
-    ]
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    reviewCount: '500',
-    bestRating: '5'
   }
 };
 

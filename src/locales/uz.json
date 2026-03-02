@@ -156,14 +156,79 @@
     "textReviewsTitle": "Matnli sharhlar",
     "textReviewsSubtitle": "Hamkorlarimiz fikri"
   },
+  "targetAudience": {
+    "title": "Ushbu muammolar sizga tanishmi?",
+    "subtitle": "Agar quyidagi fikrlar sizni qiynayotgan bo'lsa, demak biz siz uchun to'g'ri yechimmiz.",
+    "problems": [
+      { "text": "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi." },
+      { "text": "Brendim eskirgan, raqobatchilardan ortda qolyapman." },
+      { "text": "Mijozlarim mening qiymatimni tushunishmaydi, faqat narxni so'rashadi." },
+      { "text": "Sotuvlarim bor, lekin ular beqaror. Mijozlar qaytib kelishmaydi." }
+    ],
+    "solutionTitle": "Xushxabar: bu muammolarning barchasini hal qilsa bo'ladi!",
+    "solutionSubtitle": "To'g'ri qurilgan brend strategiyasi bunday muammolarni yo'q qiladi va biznesingizni barqaror o'sish yo'liga soladi.",
+    "solutionButton": "Barcha muammolar yechimini ko'rish"
+  },
+  "beforeAfter": {
+    "title": "Avval va Keyin",
+    "subtitle": "To'g'ri brending biznesni qanchalik o'zgartirishini o'z ko'zingiz bilan ko'ring.",
+    "ctaTitle": "Sizning brending ham o'zgarishga tayyormi?",
+    "ctaDesc": "Keling, brendingizni tahlil qilib, uni yangi bosqichga olib chiqish rejasini tuzamiz.",
+    "ctaButton": "Mening brendimni ham o'zgartiring"
+  },
+  "gallery": {
+    "title": "Ishlarimizdan namunalar",
+    "subtitle": "Biz yaratgan brendlar o'z sohasida qanday ajralib turishini ko'ring."
+  },
+  "process": {
+    "title": "Bizning ish jarayonimiz",
+    "subtitle": "Har bir loyihada biz sinovdan o'tgan, shaffof va samarali jarayondan foydalanamiz.",
+    "phases": [
+      { "phase": "01", "title": "Kashfiyot", "description": "Sayohatning boshlanishi", "tasks": ["Brifing", "Biznes muammolarini aniqlash", "Auditoriya ehtiyojlari", "Bozor va raqobatchilar tahlili", "Ilhom va g'oyalar yig'ish"] },
+      { "phase": "02", "title": "Strategiya", "description": "Yo'l xaritasini tuzish", "tasks": ["Maqsadlarni belgilash", "Auditoriya tahlili", "Brend pozitsiyasi", "Asosiy tamoyillar", "Rejalashtirish", "Brend viziyasi"] },
+      { "phase": "03", "title": "Kreativ Dizayn", "description": "Brendni shakllantirish", "tasks": ["Neyming", "Logotip dizayni", "Vizual konsepsiya", "Qadoq dizayni", "Brendbuk"] },
+      { "phase": "04", "title": "Taqdimot", "description": "G'oyalarni sinash", "tasks": ["Dizayn taqdimoti", "Fidbek asosida adaptatsiya", "Yakuniy iteratsiya"] },
+      { "phase": "05", "title": "Amalga oshirish", "description": "Hayotga tatbiq etish", "tasks": ["Tayyor dizayn fayllari", "Brendbukni topshirish", "Vizual qo'llanmalar"] },
+      { "phase": "06", "title": "O'sish", "description": "Brendni qo'llab-quvvatlash", "tasks": ["Implementatsiya yo'riqnomalari", "Doimiy yordam", "Keyingi qadamlar"] }
+    ],
+    "ctaTitle": "Loyihangizni muhokama qilishga tayyormisiz?",
+    "ctaDesc": "Keling, g'oyalaringizni hayotga tatbiq etishni boshlaymiz.",
+    "ctaButton": "Loyihani muhokama qilish"
+  },
+  "leadMagnet": {
+    "title": "Brendingingizni yangi bosqichga olib chiqing",
+    "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik.",
+    "magnets": [
+      { "id": "pdf", "title": "Bepul PDF chek-list", "subtitle": "7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
+      { "id": "quiz", "title": "Mini-test", "subtitle": "Tayyorgarlik darajangiz", "description": "Biznesingiz brendingga qanchalik tayyorligini aniqlang.", "cta": "Testni boshlash", "href": "/{lang}/quiz" },
+      { "id": "video", "title": "Video qo'llanma", "subtitle": "Strategik brending nima?", "description": "Nima uchun shunchaki logotip yetarli emasligini ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
+    ],
+    "cta": {
+      "title": "Chek-list yordam berdimi?",
+      "description": "Endi nazariyadan amaliyotga o'tish vaqti keldi.",
+      "button": "Bepul konsultatsiya olish"
+    }
+  },
+  "faq": {
+    "title": "Ko'p beriladigan savollar",
+    "subtitle": "Brending jarayoni, narxlar va boshqa mavzulardagi javoblar.",
+    "faqItems": [
+      { "question": "Nega narxlar qat'iy emas?", "answer": "Har bir loyiha unikal. Narx murakkablik va ish hajmiga qarab individual hisoblanadi." },
+      { "question": "Ish jarayoni qanday tuzilgan?", "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya." },
+      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz brendni taniladigan qiladigan to'liq identifikatsiya tizimini yaratamiz." }
+    ],
+    "ctaTitle": "Shubhalarga o'rin qoldirmang!",
+    "ctaDesc": "Barcha savollaringizga javob oldingizmi?",
+    "ctaButton": "Boshlashga tayyorman!"
+  },
   "servicesPage": {
     "metadata": {
       "title": "Xizmatlar va Narxlar | Jon.Branding",
-      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyator orqali narxlarni darhol hisoblang."
+      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating."
     },
     "packageBuilder": {
       "title": "Xizmatlar va narxlar",
-      "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyator orqali narxlarni darhol hisoblang.",
+      "subtitle": "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol hisoblang.",
       "categories": {
         "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
         "strategy": "Strategik xizmatlar",
@@ -174,106 +239,23 @@
       },
       "tabs": { "included": "Nima kiradi", "benefits": "Nima olasiz" },
       "your_package": "Sizning paketingiz",
-      "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
+      "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi.",
       "selected": "Tanlandi",
       "select": "Tanlash",
       "base_price_label": "Boshlang'ich narx",
       "final_price": "Yakuniy narx:",
       "promo_code_label": "Promokod",
       "promo_code_placeholder": "KODNI KIRITING",
-      "promo_code_invalid": "Promokod xato kiritildi",
+      "promo_code_invalid": "Promokod xato",
       "discountSelector": {
         "none": "Chegirmasiz",
         "package": "Paketli 20%",
         "full": "To'liq to'lov (28%)"
       },
-      "empty_package_desc": "Siz hali hech qanday xizmatni tanlamadingiz. Iltimos, xizmatlardan birini tanlang.",
       "recommended": "Tavsiya etiladi",
       "features": "Xizmatlar",
-      "results": "Natijalar"
-    },
-    "comparison": {
-      "title": "Biz va boshqalar",
-      "description": "Strategik yondashuv farqi.",
-      "features": "Xususiyatlari",
-      "whyPremiumTitle": "Nega premium?",
-      "whyPremiumDesc": "Biz faqat yuqori sifatga e'tibor beramiz.",
-      "ctaTitle": "Tanlov sizda!",
-      "ctaDesc": "Sifatli brending biznesingiz kelajagi.",
-      "ctaButton": "Boshlaymiz"
-    }
-  },
-  "mobileCtaBar": {
-    "final_price": "Narx",
-    "get_offer": "So'rov yuborish"
-  },
-  "contactModal": {
-    "stepTitles": {
-      "contact": "Aloqa ma'lumotlari",
-      "project": "Loyiha haqida",
-      "budget": "Byudjet",
-      "meeting": "Uchrashuv"
-    },
-    "title": "Sifatli konsultatsiya uchun",
-    "description": "Loyihajingizni yaxxor tushunishimiz uchun bir nehcta savollarga javob bering.",
-    "fullName": "Ism, Familiya",
-    "fullNamePlaceholder": "Alisher Usmonov",
-    "phone": "Telefon raqami",
-    "phonePlaceholder": "+998 90 123 45 67",
-    "telegram": "Telegram nikingiz (ixtiyoriy)",
-    "telegramPlaceholder": "@username",
-    "companyName": "Kompaniya yoki loyiha nomi",
-    "companyNamePlaceholder": "Jon.Branding",
-    "website": "Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)",
-    "websitePlaceholder": "https://t.me/jonbranding",
-    "goal": "Qaysi maqsad sizga yaqinroq?",
-    "goalOptions": [
-      { "value": "exploring", "label": "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman." },
-      { "value": "has_problem", "label": "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak." },
-      { "value": "ready_to_start", "label": "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." }
-    ],
-    "budget": "Loyiha uchun taxminiy byudjet?",
-    "budgetOptions": [
-      "Hozircha byudjet yo'q / Shunchaki o'rganyapman",
-      "500 $ gacha",
-      "500 $ - 1,500 $",
-      "1,500 $ - 3,000 $",
-      "3,000 $ dan yuqori"
-    ],
-    "location": "Uchrashuv uchun joylashuvingiz",
-    "locationPlaceholder": "Viloyatingizni tanlang",
-    "locationOptions": ["Toshkent", "Farg'ona", "Boshqa viloyat"],
-    "meetingPlace": "Qayerda uchrashishni xohlaysiz?",
-    "meetingPlaceOptions": [
-      { "value": "our_office", "label": "Bizning ofisimizda", "description": "Loyihaga to'liq sho'ng'ish" },
-      { "value": "neutral", "label": "Neytral hududda", "description": "Erkin muhitda suhbat" },
-      { "value": "client_office", "label": "Sizning ofisingizda", "description": "Biznesingiz bilan tanishish" }
-    ],
-    "onlineMeetingAlert": "Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.",
-    "backButton": "Orqaga",
-    "nextButton": "Keyingisi",
-    "submitButton": "So'rov yuborish",
-    "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarim qayta ishlanishiga roziman.",
-    "formErrors": {
-      "fullName": "To'liq ismingizni kiriting.",
-      "phone": "Telefon raqamini to'g'ri kiriting.",
-      "goal": "Asosiy maqsadingizni tanlang.",
-      "budget": "Taxminiy byudjetni tanlang.",
-      "location": "Manzilingizni tanlang.",
-      "meetingPlace": "Uchrashuv joyini tanlashingiz kerak.",
-      "privacyPolicy": "Maxfiylik siyosatini qabul qilishingiz shart."
-    },
-    "successToast": {
-      "title": "Muvaffaqiyatli!",
-      "description": "Sizning so'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!"
-    },
-    "leadMagnetToast": {
-      "title": "Siz uchun maxsus resurslar!",
-      "description": "So'rovingiz qabul qilindi! Boshlanishiga sizni bepul materiallarimizga yo'naltiramiz."
-    },
-    "errorToast": {
-      "title": "Xatolik!",
-      "description": "So'rov yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
+      "results": "Natijalar",
+      "empty_package_desc": "Iltimos, xizmatlardan birini tanlang."
     }
   }
 }
