@@ -40,48 +40,58 @@ const basePricesUSD = {
 };
 
 export const getServiceDetails = (lang: string = 'uz') => {
+    const isUz = lang === 'uz';
+    
     return {
         audit: {
-            label: "Logo Auditi",
-            description: "Mavjud logotipni strategik tahlil qilish va tavsiyalar.",
+            label: isUz ? "Logo Auditi" : "Logo Audit",
+            description: isUz ? "Mavjud logotipni strategik tahlil qilish va tavsiyalar." : "Strategic analysis and recommendations for your existing logo.",
             price: basePricesUSD.audit,
-            timeline: "⏱ 2-3 ish kuni",
-            features: ["Logoning texnik tahlili", "Bozorga moslik tekshiruvi", "Kamchiliklar ro'yxati", "Yaxshilash bo'yicha tavsiyalar"]
+            timeline: isUz ? "⏱ 2-3 ish kuni" : "⏱ 2-3 business days",
+            features: isUz ? ["Logoning texnik tahlili", "Bozorga moslik tekshiruvi", "Kamchiliklar ro'yxati", "Yaxshilash bo'yicha tavsiyalar"] : ["Technical analysis", "Market fit check", "List of weaknesses", "Improvement tips"]
         },
         namingCheck: {
-            label: "Neyming Tekshiruvi",
-            description: "Brend nomining bo'shligini huquqiy va raqamli bazalarda tekshirish.",
+            label: isUz ? "Neyming Tekshiruvi" : "Naming Check",
+            description: isUz ? "Brend nomini huquqiy va raqamli bazalarda tekshirish." : "Checking brand name availability in legal and digital databases.",
             price: basePricesUSD.namingCheck,
-            timeline: "⏱ 1-2 ish kuni",
-            features: ["O'zbekiston patent bazasi", "Domenlar tekshiruvi", "Ijtimoiy tarmoqlar (Username)", "Ma'noviy assotsiatsiyalar"]
+            timeline: isUz ? "⏱ 1-2 ish kuni" : "⏱ 1-2 business days",
+            features: isUz ? [
+                "O'zbekistondan tekshiruv",
+                "Xalqaro bazadan tekshiruv",
+                "Internetda ma'lum mashhur nomlar tekshiruvi"
+            ] : [
+                "Local database check",
+                "International database check",
+                "Global popular names check"
+            ]
         },
         consultation: {
-            label: "Konsultatsiya",
-            description: "Brending va biznesni 'upakovka' qilish bo'yicha professional maslahat.",
+            label: isUz ? "Konsultatsiya" : "Consultation",
+            description: isUz ? "Brending va biznesni upakovka qilish bo'yicha professional maslahat." : "Professional advice on branding and business packaging.",
             price: basePricesUSD.consultation,
-            timeline: "⏱ 60 daqiqa",
-            features: ["Muammolarni tahlil qilish", "Brending strategiyasi", "Savollarga javoblar", "Yo'l xaritasi tuzish"]
+            timeline: isUz ? "⏱ 60 daqiqa" : "⏱ 60 minutes",
+            features: isUz ? ["Muammolarni tahlil qilish", "Brending strategiyasi", "Savollarga javoblar", "Yo'l xaritasi tuzish"] : ["Problem analysis", "Branding strategy", "Q&A session", "Roadmap creation"]
         },
         strategy: {
-            label: "Brend-strategiya",
-            description: "Biznesingiz uchun natija keltiradigan poydevor.",
+            label: isUz ? "Brend-strategiya" : "Brand Strategy",
+            description: isUz ? "Biznesingiz uchun natija keltiradigan poydevor." : "A foundation that brings results for your business.",
             price: basePricesUSD.strategy,
-            timeline: "⏱ 20-30 ish kuni",
-            features: ["Bozor va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Brend platformasi", "Pozitsiyalash strategiyasi", "Noyob Sotuv Taklifi (USP)"]
+            timeline: isUz ? "⏱ 20-30 ish kuni" : "⏱ 20-30 business days",
+            features: isUz ? ["Bozor va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Brend platformasi", "Pozitsiyalash strategiyasi", "Noyob Sotuv Taklifi (USP)"] : ["Market & Competitor analysis", "Target audience map", "Brand platform", "Positioning strategy", "USP development"]
         },
         commStrategy: {
-            label: "Kommunikatsion strategiya",
-            description: "Mijozlar bilan muloqot va reklama tili.",
+            label: isUz ? "Kommunikatsion strategiya" : "Communication Strategy",
+            description: isUz ? "Mijozlar bilan muloqot va reklama tili." : "Communication and advertising language for customers.",
             price: basePricesUSD.commStrategy,
-            timeline: "⏱ 15-20 ish kuni",
-            features: ["Brend ovozi (Tone of Voice)", "Asosiy xabarlar tizimi", "Media kanallar tanlovi", "Kontent rejasi tamoyillari"]
+            timeline: isUz ? "⏱ 15-20 ish kuni" : "⏱ 15-20 business days",
+            features: isUz ? ["Brend ovozi (Tone of Voice)", "Asosiy xabarlar tizimi", "Media kanallar tanlovi", "Kontent rejasi tamoyillari"] : ["Tone of Voice", "Key messaging system", "Media channel selection", "Content plan principles"]
         },
         namingVIP: {
             label: "Naming VIP",
-            description: "Nom emas — bu biznes uchun real aktiv.",
+            description: isUz ? "Nom emas — bu biznes uchun real aktiv." : "Not just a name — a real business asset.",
             price: basePricesUSD.namingVIP,
-            timeline: "⏱ 15 ish kuni",
-            features: [
+            timeline: isUz ? "⏱ 15 ish kuni" : "⏱ 15 business days",
+            features: isUz ? [
                 "15 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun to'liq strategik izoh",
                 "Talaffuz, jarang va esda qolishi tekshiriladi",
@@ -89,107 +99,160 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Domen va Username tekshiruvi",
                 "Cheksiz tuzatish (30 kun ichida)",
                 "Logoning to'liq mulkchilik huquqi sertifikati"
-            ],
-            benefits: [
-                { icon: "🌍", title: "Xalqaro bozorga tayyorsiz", description: "Nom xalqaro talablar (WIPO) asosida tekshiriladi." },
-                { icon: "🔒", title: "Nom to'liq sizniki", description: "Rasmiy patent himoyasi bilan ta'minlanadi." },
-                { icon: "💎", title: "Biznes uchun real aktiv", description: "Himoyalangan nom biznesning qimmatli mulki." },
-                { icon: "🎯", title: "Eng to'g'ri yo'l", description: "Bozorda adashmasligingiz uchun strategik tanlov." }
+            ] : [
+                "15 name variants",
+                "Strategic reasoning for each",
+                "Pronunciation and recall check",
+                "Local & International patent check (WIPO) + Filing service",
+                "Domain & Username check",
+                "Unlimited revisions (30 days)",
+                "Ownership certificate"
             ]
         },
         namingPremium: {
             label: "Naming Premium",
-            description: "To'g'ri nom, to'g'ri poydevor.",
+            description: isUz ? "To'g'ri nom, to'g'ri poydevor." : "Right name, right foundation.",
             price: basePricesUSD.namingPremium,
             recommended: true,
-            timeline: "⏱ 7 ish kuni",
-            results: ["10 ta nom varianti", "Har bir nom uchun strategik izoh", "O'zbekiston bazasida patent tekshiruvi", "3 ta tuzatish imkoniyati"]
+            timeline: isUz ? "⏱ 7 ish kuni" : "⏱ 7 business days",
+            results: isUz ? ["10 ta nom varianti", "Har bir nom uchun strategik izoh", "O'zbekiston bazasida patent tekshiruvi", "3 ta tuzatish imkoniyati"] : ["10 variants", "Strategic reasoning", "Local patent check", "3 revisions"]
         },
         namingStandard: {
             label: "Naming Standart",
-            description: "Tez va sifatli start uchun.",
+            description: isUz ? "Tez va sifatli start uchun." : "For a fast and quality start.",
             price: basePricesUSD.namingStandard,
-            timeline: "⏱ 5 ish kuni",
-            results: ["5 ta nom varianti", "Ma'nosi va izohi bilan", "Domen tekshiruvi", "2 ta tuzatish imkoniyati"]
+            timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
+            results: isUz ? ["5 ta nom varianti", "Ma'nosi va izohi bilan", "Domen tekshiruvi", "2 ta tuzatish imkoniyati"] : ["5 variants", "Meaning & Logic", "Domain check", "2 revisions"]
         },
         logoStandard: {
-            label: "Unikal Logo",
-            description: "Endigina boshlamoqchi bo'lganlar uchun.",
+            label: isUz ? "Unikal Logo" : "Unique Logo",
+            subDescription: isUz ? "Endigina boshlamoqchi bo'lganlar uchun" : "For those just starting out",
+            description: isUz ? "Faqat logotip va uning asosiy ko'rinishlari." : "Just the logo and its main variations.",
             price: basePricesUSD.logoStandard,
-            timeline: "⏱ 5 ish kuni",
-            features: [
-                "2 ta logo varianti — bittasini tanlaysiz",
-                "Har bir variant uchun strategik izoh",
+            timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
+            features: isUz ? [
+                "2 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
+                "Har bir variant uchun izoh beriladi",
                 "Logo 4 xil ko'rinishda (Horizontal, Vertical, B&W, Icon)",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "8 ta aloqa nuqtasida vizual namoyish",
                 "2 ta tuzatish imkoniyati"
+            ] : [
+                "2 concepts - pick one",
+                "Strategic reasoning",
+                "4 lockups (H, V, B&W, Icon)",
+                "Social media profile pics",
+                "3 file formats (PNG, SVG, AI)",
+                "Visuals on 8 touchpoints",
+                "2 revisions"
             ],
-            benefits: [
-                { icon: "🎯", title: "Hamma joyga tayyor", description: "Logongiz sayt, Instagram va chop etishga tayyor holda keladi." },
-                { icon: "✅", title: "Professional ko'rinish", description: "Mijozlar birinchi qarashda ishonch his qiladi." },
-                { icon: "👁️", title: "Real hayotda ko'rasiz", description: "8 ta nuqtada logongiz qandayligini vizual ko'rasiz." },
-                { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar (AI formatida) topshiriladi." }
+            benefits: isUz ? [
+                { icon: "🎯", title: "Hujjatlarda ham, ijtimoiy tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor." },
+                { icon: "✅", title: "\"Bu mening brendim\" deyishingiz mumkin", description: "Professional ko'rinish — o'zingiz yasaganga o'xshamaydi." },
+                { icon: "👁️", title: "Real hayotda qanday ko'rinishini bilasiz", description: "8 ta nuqtada logongiz qanday ko'rinishini vizual ko'rasiz." },
+                { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar topshiriladi, keyinchalik foydalanishga qulay." }
+            ] : [
+                { icon: "🎯", title: "Works everywhere", description: "Ready for web, social and print." },
+                { icon: "✅", title: "Professional look", description: "Confidence in your brand image." },
+                { icon: "👁️", title: "Real world visuals", description: "See it on 8 key touchpoints." },
+                { icon: "🛡️", title: "Full ownership", description: "Source files are yours forever." }
             ]
         },
         logoPremium: {
-            label: "Logo + Firma uslubi",
-            description: "O'sishni rejalashtiraganlar uchun.",
+            label: isUz ? "Logo + Firma uslubi" : "Logo + Visual Identity",
+            subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
+            description: isUz ? "To'liq vizual tizim va qoidalar." : "Complete visual system and rules.",
             price: basePricesUSD.logoPremium,
             recommended: true,
-            timeline: "⏱ 10 ish kuni",
-            features: [
-                "3 ta logo varianti — bittasini tanlaysiz",
-                "Logoning 4 xil ko'rinishi va izohi",
+            timeline: isUz ? "⏱ 10 ish kuni" : "⏱ 10 business days",
+            features: isUz ? [
+                "3 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
+                "Har bir variant uchun izoh beriladi",
+                "Logo 4 xil ko'rinishda (H, V, B&W, Icon)",
+                "Ijtimoiy tarmoqlar uchun profil rasmi",
+                "3 xil fayl formati (PNG, SVG, AI)",
                 "Rasmiy ranglar to'plami va aniq kodlari",
                 "Rasmiy brend shrifti va qo'llash qoidalari",
                 "15 ta aloqa nuqtasida vizual namoyish",
                 "3 ta tuzatish imkoniyati"
+            ] : [
+                "3 concepts - pick one",
+                "Strategic reasoning",
+                "4 lockups",
+                "Social profile pics",
+                "Source files (AI, SVG, PNG)",
+                "Official color palette & codes",
+                "Official brand fonts",
+                "Visuals on 15 touchpoints",
+                "3 revisions"
             ],
-            benefits: [
-                { icon: "🏆", title: "Har joyda bir xil ko'rinasiz", description: "Sayt, Instagram, vizitka — hammasi bir uslubda bo'ladi." },
-                { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq ranglar va shrift bo'lgach, hech kim adashmaydi." },
+            benefits: isUz ? [
+                { icon: "🏆", title: "Har joyda bir xil, professional ko'rinasiz", description: "Sayt, Instagram, vizitka — hammasi bir uslubda bo'ladi." },
+                { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq qoidalar bo'lgach, hech kim adashmaydi." },
                 { icon: "📸", title: "Mijozlarga ko'rsatishga tayyor", description: "15 ta nuqtada brendingizni vizual ko'rasiz." },
                 { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznes belgisidir." }
+            ] : [
+                { icon: "🏆", title: "Consistent look", description: "Website, social and print match." },
+                { icon: "💼", title: "Easy for team", description: "Clear rules for everyone." },
+                { icon: "📸", title: "Ready for clients", description: "Visuals on 15 touchpoints." },
+                { icon: "📈", title: "Brand value up", description: "Consistency is professional." }
             ]
         },
         logoVIP: {
-            label: "Logo + Stil + Brandbook",
-            description: "Hamma narsani bir marta to'g'ri qilmoqchilar uchun.",
+            label: isUz ? "Logo + Stil + Brandbook" : "Logo + Style + Brandbook",
+            subDescription: isUz ? "Hamma narsani bir marta to'g'ri qilmoqchilar uchun" : "For those doing it right once",
+            description: isUz ? "Brendingizning to'liq 'konstitutsiyasi'." : "Full 'constitution' of your brand.",
             price: basePricesUSD.logoVIP,
-            timeline: "⏱ 15–20 ish kuni",
-            features: [
-                "3 ta logo varianti + chuqur strategik izoh",
+            timeline: isUz ? "⏱ 15–20 ish kuni" : "⏱ 15–20 business days",
+            features: isUz ? [
+                "3 ta logo varianti + har biri uchun chuqur strategik izoh",
+                "Har bir variant uchun izoh beriladi",
+                "Logo 4 xil ko'rinishda (H, V, B&W, Icon)",
+                "Ijtimoiy tarmoqlar uchun profil rasmi",
+                "3 xil fayl formati (PNG, SVG, AI)",
+                "Rasmiy ranglar va shriftlar tizimi",
                 "To'liq Brandbook (30-50 sahifa)",
                 "25 ta aloqa nuqtasida professional vizual",
-                "Ranglar, shriftlar va uslub qoidalari",
                 "Cheksiz tuzatish (30 kun ichida)",
                 "Logoning to'liq mulkchilik huquqi sertifikati"
+            ] : [
+                "3 concepts + deep strategic reasoning",
+                "4 lockups + social pics",
+                "Source files + Color/Font systems",
+                "Full Brandbook (30-50 pages)",
+                "Visuals on 25 touchpoints",
+                "Unlimited revisions (30 days)",
+                "Full ownership certificate"
             ],
-            benefits: [
-                { icon: "📖", title: "Istalgan odamga bera olasiz", description: "Qo'llanma bilan har qanday dizayner to'g'ri ishlaydi." },
-                { icon: "🔒", title: "Brend buzilmaydi", description: "Brendingiz 10 yildan keyin ham kuchli ko'rinadi." },
-                { icon: "🌍", title: "Xalqaro daraja", description: "Investorlar jiddiy kompaniya ekaningizni bilishadi." },
-                { icon: "💎", title: "Bir marta qilinadigan sarmoya", description: "To'g'ri qilingan brend kamida 10 yil xizmat qiladi." }
+            benefits: isUz ? [
+                { icon: "📖", title: "Istalgan odamga berib, to'g'ri natija olasiz", description: "Qo'llanma bilan har qanday dizayner to'g'ri ishlaydi." },
+                { icon: "🔒", title: "Brend yillar o'tsa ham buzilmaydi", description: "Brendingiz 10 yildan keyin ham bir xil kuchli ko'rinadi." },
+                { icon: "🌍", title: "Xalqaro darajada tayyor ko'rinasiz", description: "Investorlar jiddiy kompaniya ekaningizni bilishadi." },
+                { icon: "💎", title: "Bu bir marta qilinadigan investitsiya", description: "To'g'ri qilingan brend kamida 10 yil xizmat qiladi." }
+            ] : [
+                { icon: "📖", title: "Easy handover", description: "Hand it to any designer." },
+                { icon: "🔒", title: "Built to last", description: "Stays strong for 10+ years." },
+                { icon: "🌍", title: "Global standard", description: "Investors see a serious company." },
+                { icon: "💎", title: "One-time investment", description: "Done correctly for the long term." }
             ]
         },
         packaging: { 
-            label: "Qadoq dizayni", 
-            description: "Mahsulotingizning javondagi asosiy quroli.",
+            label: isUz ? "Qadoq dizayni" : "Packaging Design", 
+            description: isUz ? "Mahsulotingizning javondagi asosiy quroli." : "Your product's main weapon on the shelf.",
             price: basePricesUSD.packaging, 
-            timeline: "⏱ 10-15 ish kuni",
-            features: ["Vizual konsepsiya", "Qadoqni 3D namoyish qilish", "Chop etishga tayyor fayllar", "Materiallar bo'yicha tavsiyalar"]
+            timeline: isUz ? "⏱ 10-15 ish kuni" : "⏱ 10-15 business days",
+            features: isUz ? ["Vizual konsepsiya", "Qadoqni 3D namoyish qilish", "Chop etishga tayyor fayllar", "Materiallar bo'yicha tavsiyalar"] : ["Visual concept", "3D presentation", "Print-ready files", "Material recommendations"]
         },
         smm: { 
-            label: "Instagram uchun stil", 
-            description: "Sahifangizni tartibli va brendga mos qilish.",
+            label: isUz ? "Instagram uchun stil" : "Social Media Style", 
+            description: isUz ? "Sahifangizni tartibli va brendga mos qilish." : "Make your page organized and brand-consistent.",
             price: basePricesUSD.smm, 
-            timeline: "⏱ 5-7 ish kuni",
-            features: ["Profil rasmi va bio dizayni", "9 ta post uchun shablon", "Storislar uchun dizayn tizimi", "Highlight ikonkalari"]
+            timeline: isUz ? "⏱ 5-7 ish kuni" : "⏱ 5-7 business days",
+            features: isUz ? ["Profil rasmi va bio dizayni", "9 ta post uchun shablon", "Storislar uchun dizayn tizimi", "Highlight ikonkalari"] : ["Bio & profile design", "9 post templates", "Stories design system", "Highlight icons"]
         },
-        urgency: { label: "Shoshilinch loyiha (+50%)", price: 0 },
-        nda: { label: "NDA — Maxfiylik (+50%)", price: 0 }
+        urgency: { label: isUz ? "Shoshilinch loyiha (+50%)" : "Urgent Project (+50%)", price: 0 },
+        nda: { label: isUz ? "NDA — Maxfiylik (+50%)" : "NDA — Confidentiality (+50%)", price: 0 }
     };
 };
 
@@ -233,7 +296,7 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     let finalPrice = totalBeforeDiscounts;
     const discountsApplied = [];
 
-    // Promo codes logic (50% off for specified codes)
+    // Promo codes logic
     const isPromoApplied = ['RAMAZON', 'PCG', 'KURSDOSH', 'TEZ NATIJA'].includes(promoCode?.toUpperCase());
 
     if (isPromoApplied) {
