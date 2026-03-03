@@ -180,6 +180,18 @@
     "title": "Ishlarimizdan namunalar",
     "subtitle": "Biz yaratgan brendlar o'z sohasida qanday ajralib turishini ko'ring."
   },
+  "founder": {
+    "title": "Asoschi: Baxtiyorjon Gaziyev",
+    "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Men biznes egalariga o'z brendlarini yangi bosqichga olib chiqishda yordam beraman. Mening maqsadim shunchaki chiroyli dizayn yaratish emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan va natija keltiradigan brend tizimini qurishdir. Keling, birgalikda brendingizni tahlil qilamiz va uning 'uxlab yotgan' salohiyatini uyg'otamiz.",
+    "points": [
+      { "icon": "Medal", "text": "50 dan ortiq loyihalar" },
+      { "icon": "Globe", "text": "Xalqaro tajriba" },
+      { "icon": "Zap", "text": "Tez va samarali aloqa" },
+      { "icon": "Users", "text": "Aniq va shaffof ish jarayoni" }
+    ],
+    "phoneButton": "Telefon orqali bog'lanish",
+    "telegramButton": "Telegramda yozish"
+  },
   "process": {
     "title": "Bizning ish jarayonimiz",
     "subtitle": "Har bir loyihada biz sinovdan o'tgan, shaffof va samarali jarayondan foydalanamiz.",
@@ -209,56 +221,56 @@
       "button": "Bepul konsultatsiya olish"
     },
     "checklistContent": {
-      "progress_text": "Выполнено: {checkedCount} из {total}",
+      "progress_text": "Bajarildi: {checkedCount} tadan {total}",
       "items": [
         {
-          "title": "1. Работа без стратегии",
-          "description": "Самая большая ошибка — начинать дизайн без четкой стратегии. Кто ваш клиент? Чем вы отличаетесь от конкурентов? Каково ваше основное сообщение? Логотип или сайт, не отвечающие на эти вопросы, — это просто красивая картинка.",
-          "solution": "Решение: Начните с ответов на вопросы 'Кто мы?', 'Для кого?' и 'Почему?'. Это создаст прочный фундамент для вашего бренда."
+          "title": "1. Strategiyasiz ishlash",
+          "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash. Sizning mijozingiz kim? Raqobatchilardan nimangiz bilan ajralib turasiz? Asosiy xabaringiz nima? Ushbu savollarga javob bermaydigan logotip yoki sayt shunchaki chiroyli rasm, xolos.",
+          "solution": "Yechim: Ishni 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun?' degan savollarga javob berishdan boshlang. Bu brendingiz uchun mustahkam poydevor yaratadi."
         },
         {
-          "title": "2. Попытка угодить всем",
-          "description": "Бренд, который пытается быть 'for everyone', в итоге не становится ни для кого. Попытка понравиться всем слоям населения приводит к размытому и слабому бренду.",
-          "solution": "Решение: Четко определите свою целевую аудиторию. Создайте портрет вашего 'идеального клиента' и сосредоточьте свои маркетинговые усилия именно на нем."
+          "title": "2. Hamma uchun yoqishga urinish",
+          "description": "Hamma uchun bo'lishga harakat qilgan brend oxir-oqibat hech kim uchun bo'lmay qoladi. Aholining barcha qatlamlariga birdek yoqishga urinish brendning xiralashishiga va zaiflashishiga olib keladi.",
+          "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling. 'Ideal mijoz'ingiz portretini yarating va marketing harakatlaringizni aynan unga qarating."
         },
         {
-          "title": "3. Копирование конкурентов",
-          "description": "Смотреть на конкурентов важно, но слепо копировать их — это путь в никуда. Если ваш дизайн похож на известный бренд, вас всегда будут воспринимать как 'дешевую альтернативу'.",
-          "solution": "Решение: Изучайте конкурентов, чтобы найти свой уникальный путь. Не бойтесь быть другими."
+          "title": "3. Raqobatchilardan nusxa ko'chirish",
+          "description": "Raqobatchilarga qarash muhim, lekin ularni ko'r-ko'rona nusxalash — bu hech qayerga olib bormaydigan yo'l. Agar dizayningiz mashhur brendga o'xshasa, sizni har doim 'arzon muqobil' sifatida qabul qilishadi.",
+          "solution": "Yechim: O'zingizning noyob yo'lingizni topish uchun raqobatchilarni o'rganing. Boshqacha bo'lishdan qo'rqmang."
         },
         {
-          "title": "4. Непоследовательность (Inconsistency)",
-          "description": "Ваш логотип на сайте в одном стиле, в Instagram — в другом, а на упаковке — совершенно третий. Этот визуальный хаос подрывает доверие и мешает узнаваемости бренда.",
-          "solution": "Решение: Создайте 'бреndbuk' (гайдлайн), в котором будут прописаны правила использования вашего логотипа, цветов, шрифтов. Используйте его последовательно везде."
+          "title": "4. Nomuvofiqlik (Inconsistency)",
+          "description": "Saytingizdagi logotip bir xil, Instagram'da boshqacha, qadoqda esa butunlay boshqa uslubda. Bu vizual tartibsizlik ishonchni so'ndiradi va brendning tanilishiga xalaqit beradi.",
+          "solution": "Yechim: Logotip, ranglar, shriftlardan foydalanish qoidalari yozilgan 'brendbuk' yarating va unga hamma joyda birdek amal qiling."
         },
         {
-          "title": "5. Слишком сложный логотип",
-          "description": "Логотип с множеством мелких деталей, градиентов и текста трудно запомнить и плохо смотрится в малых размерах (например, фавикон сайта или аватар в соцсетях).",
-          "solution": "Решение: Стремитесь к простоте и минимализму. Лучшие логотипы — те, которые можно нарисовать по памяти."
+          "title": "5. Haddan tashqari murakkab logotip",
+          "description": "Ko'plab mayda detallar, gradientlar va matnlarga boy logotipni eslab qolish qiyin va u kichik o'lchamlarda juda xunuk ko'rinadi.",
+          "solution": "Yechim: Soddalik va minimalizmga intiling. Eng yaxshi logotiplar — bu xotirada qoladigan va oson chiziladigan logotiplardir."
         },
         {
-          "title": "6. Имя, которое трудно произнести или запомнить",
-          "description": "Если ваши клиенты не могут произнести ваше имя или правильно написать его, они не смогут вас найти или порекомендовать другим.",
-          "solution": "Решение: Выберите имя, которое простое, звучное и юридически чистое (торговая марка не занята)."
+          "title": "6. Talaffuz qilish yoki eslab qolish qiyin bo'lgan nom",
+          "description": "Agar mijozlaringiz nomingizni ayta olmasa yoki uni qidiruvga to'g'ri yoza olmasa, ular sizni topa olishmaydi va boshqalarga tavsiya qila olishmaydi.",
+          "solution": "Yechim: Sodda, jarangdor va huquqiy jihatdan toza (band bo'lmagan) nom tanlang."
         },
         {
-          "title": "7. Думать, что брендинг — это разовая работа",
-          "description": "Рынки, требования клиентов, технологии постоянно меняются. Бренд, который не меняется вместе со временем, устареет.",
-          "solution": "Решение: Периодически проводите 'аудит бренда'. Не бойтесь при необходимости обновлять свой дизайн (ребрендинг). Это признак роста, а не слабости."
+          "title": "7. Brendingni bir martalik ish deb o'ylash",
+          "description": "Bozor, mijozlar talablari va texnologiyalar doimiy ravishda o'zgarib turadi. Zaman bilan birga o'zgarmaydigan brend tezda eskiradi.",
+          "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lsa dizayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir."
         }
       ],
       "result": {
         "bad": {
-          "title": "Требуется срочная помощь!",
-          "description": "У вашего бренда есть несколько критических уязвимостей. Это отличная возможность для роста! Мы можем помочь вам превратить эти слабые стороны в сильные."
+          "title": "Sizga tezkor yordam kerak!",
+          "description": "Brendingizda bir nechta jiddiy zaif nuqtalar bor. Bu o'sish uchun ajoyib imkoniyat! Biz sizga ushbu zaifliklarni kuchli tomonga aylantirishda yordam bera olamiz."
         },
         "good": {
-          "title": "На правильном пути!",
-          "description": "У вас хорошая основа, но есть несколько моментов, которые можно усилить для достижения еще лучших результатов. Давайте обсудим, как мы можем это сделать вместе."
+          "title": "To'g'ri yo'ldasiz!",
+          "description": "Sizda yaxshi asos bor, lekin natijalarni yanada yaxshilash uchun bir nechta jihatlarni kuchaytirish mumkin. Keling, buni qanday qilishni muhokama qilamiz."
         },
         "perfect": {
-          "title": "Отлично! Ваш бренд в прекрасной форме!",
-          "description": "Поздравляем! У вас крепкий фундамент. Теперь пришло время подумать о следующем шаге - как масштабироваться и стать лидером рынка. У нас есть для вас идеи."
+          "title": "Ajoyib! Brendingiz a'lo holatda!",
+          "description": "Tabriklaymiz! Sizda mustahkam poydevor bor. Endi keyingi qadam — qanday qilib masshtablashish va bozor yetakchisiga aylanish haqida o'ylash vaqti keldi."
         }
       }
     }
@@ -377,5 +389,27 @@
     "successToast": { "title": "Muvaffaqiyatli!", "description": "Sizning so'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!" },
     "leadMagnetToast": { "title": "Siz uchun maxsus resurslar!", "description": "So'rovingiz qabul qilindi! Boshlanishiga sizni bepul materiallarimizga yo'naltiramiz." },
     "errorToast": { "title": "Xatolik!", "description": "So'rov yuborishda xatolik yuz berdi." }
+  },
+  "pickTwoSelector": {
+    "title": "Uchtadan ikkitasini tanlang",
+    "subtitle": "Arzon—Sifatli—Tez: kamdan-kam hollarda uchalasini bir vaqtda olish mumkin.",
+    "ctaText": "Taklif so'rash",
+    "options": {
+      "cheap": "Arzon",
+      "quality": "Sifatli",
+      "fast": "Tez"
+    },
+    "messages": {
+      "cheap_fast": "Sifat beqaror bo'lishi mumkin. Bu variant shoshilinch va byudjetli loyihalar uchun mos.",
+      "cheap_quality": "Natijani uzoqroq kutishga to'g'ri keladi. Biz sizning byudjetingizga moslashamiz va sifatni ta'minlash uchun navbat bo'yicha ishlaymiz.",
+      "quality_fast": "Narx yuqoriroq bo'ladi. Shoshilinch loyihalar uchun (2-3 kun) standart narxga +50% ustama qo'llaniladi. Biz jamoani safarbar qilamiz va sizning muddatingizni ustuvor deb bilamiz.",
+      "default": "Iltimos, siz uchun eng muhim bo'lgan 2 ta ustuvorlikni tanlang."
+    },
+    "tooltip": "Avval bittasini bekor qiling"
+  },
+  "exitIntentModal": {
+    "title": "Ketishga shoshilmang!",
+    "description": "Siz uchun maxsus taklifimiz bor. <br/>Bizda <span class='font-bold text-primary'>turli chegirmalar</span> amal qiladi. Imkoniyatdan foydalanib qoling!",
+    "button": "Chegirmalarni ko'rish"
   }
 }

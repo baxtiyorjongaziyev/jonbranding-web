@@ -105,7 +105,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                                 : "text-slate-400"
                         )}
                     >
-                        {dictionary.tabs.included}
+                        {dictionary.tabs?.included || "Nima kiradi"}
                     </button>
                     <button 
                         onClick={() => setActiveTab('benefits')}
@@ -116,7 +116,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                                 : "text-slate-400"
                         )}
                     >
-                        {dictionary.tabs.benefits}
+                        {dictionary.tabs?.benefits || "Nima olasiz"}
                     </button>
                 </div>
 
@@ -241,7 +241,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto mb-20 text-center space-y-6">
                     <Badge className="bg-primary/10 text-primary border-none px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-[0.3em]">
-                        TRIPWIRE XIZMATLAR
+                        LOYIHA ME'MORI
                     </Badge>
                     <h2 className="text-5xl sm:text-6xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
                     <p className="text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
