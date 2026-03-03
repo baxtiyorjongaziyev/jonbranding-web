@@ -155,7 +155,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ],
             benefits: isUz ? [
                 { icon: "🎯", title: "Hujjatlarda ham, ijtimoiy tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor." },
-                { icon: "✅", title: "Bu mening brendim deyishingiz mumkin", description: "O'zingiz yasaganga o'xshamaydigan professional ko'rinish." },
+                { icon: "✅", title: "Bu mening brendim deyishingiz mumkin", description: "O'zingiz yasaganga o'xshadigan professional ko'rinish." },
                 { icon: "👁️", title: "Real hayotda qanday ko'rinishini bilasiz", description: "8 ta muhim nuqtada logongiz qanday ko'rinishini vizual ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar topshiriladi, keyinchalik foydalanishga qulay." }
             ] : [
@@ -269,6 +269,7 @@ export function formatPrice(priceInUSD: number, lang: string = 'uz', currency: '
 }
 
 export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any => {
+    const isUz = lang === 'uz';
     const { selectedServices, discountType = 'none', promoCode = '' } = selections;
     const sd = getServiceDetails(lang) as any;
     
