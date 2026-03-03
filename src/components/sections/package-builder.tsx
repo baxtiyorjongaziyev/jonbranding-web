@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC } from 'react';
@@ -89,9 +88,11 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                         </span>
                     </div>
                 </div>
-                <p className={cn("text-sm leading-relaxed font-medium", isVip ? "text-blue-100/70" : "text-slate-500")}>
-                    {description}
-                </p>
+                {description && (
+                    <p className={cn("text-sm leading-relaxed font-medium", isVip ? "text-blue-100/70" : "text-slate-500")}>
+                        {description}
+                    </p>
+                )}
             </CardHeader>
 
             <CardContent className="px-8 pt-4 pb-8 flex-grow flex flex-col">
