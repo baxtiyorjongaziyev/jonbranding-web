@@ -25,11 +25,11 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
   useEffect(() => {
     // Progressive staggered loading to prevent blocking the UI thread
     const timers = [
-      setTimeout(() => setStep(1), 100), // Render PackageBuilder
-      setTimeout(() => setStep(2), 400), // Render Comparison
-      setTimeout(() => setStep(3), 700), // Render TrustedBy
-      setTimeout(() => setStep(4), 1000), // Render Testimonials
-      setTimeout(() => setStep(5), 1300), // Render the rest
+      setTimeout(() => setStep(1), 300), // Render PackageBuilder
+      setTimeout(() => setStep(2), 600), // Render Comparison
+      setTimeout(() => setStep(3), 900), // Render TrustedBy
+      setTimeout(() => setStep(4), 1200), // Render Testimonials
+      setTimeout(() => setStep(5), 1500), // Render the rest
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
@@ -49,7 +49,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
   if (!dictionary) return <div className="py-20 text-center"><Skeleton className="h-screen w-full" /></div>;
 
   return (
-    <div suppressHydrationWarning className="flex flex-col gap-0">
+    <div suppressHydrationWarning className="flex flex-col gap-0 overflow-visible">
       {/* 1. Hero - Immediate */}
       <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary.servicesHero} />
       
@@ -61,14 +61,14 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       
       {/* 4. Package Builder - Step 1 */}
       {step >= 1 ? (
-        <Suspense fallback={<div className="py-20 text-center"><Skeleton className="h-[600px] w-full max-w-6xl mx-auto rounded-3xl" /></div>}>
+        <Suspense fallback={<div className="py-20 text-center"><Skeleton className="h-[800px] w-full max-w-6xl mx-auto rounded-3xl" /></div>}>
           <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
         </Suspense>
       ) : <div className="h-20" />}
 
       {/* 5. Comparison - Step 2 */}
       {step >= 2 && (
-        <Suspense fallback={<Skeleton className="h-96 w-full" />}>
+        <Suspense fallback={<div className="py-20"><Skeleton className="h-96 w-full" /></div>}>
           <Comparison onCtaClick={handleOpenModal} lang={lang} />
         </Suspense>
       )}
@@ -79,12 +79,12 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
           <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
           {step >= 4 && <Testimonials lang={lang} dictionary={dictionary.testimonials} />}
           {step >= 5 && (
-            <>
+            <div className="flex flex-col">
               <PersonalOfferBlock onCtaClick={handleOpenModal} />
               <UrgencyBlock />
               <QueueStatus onCtaClick={handleOpenModal} />
               <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
-            </>
+            </div>
           )}
         </>
       )}

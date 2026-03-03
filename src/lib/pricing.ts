@@ -62,10 +62,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: isUz ? "Brend nomini huquqiy va raqamli bazalarda tekshirish." : "Checking brand name availability in legal and digital databases.",
             price: basePricesUSD.namingCheck,
             timeline: isUz ? "⏱ 1-2 ish kuni" : "⏱ 1-2 business days",
-            features: isUz ? ["O'zbekistondan tekshiruv", "Xalqaro bazadan tekshiruv", "Internetda ma'lum mashhur nomlar tekshiruvi"] : ["Local check", "International check", "Famous names check"],
+            features: isUz ? ["O'zbekistondan tekshiruv", "Xalqaro bazadan tekshiruv", "Internetda mashhur nomlar tekshiruvi"] : ["Local check", "International check", "Famous names check"],
             benefits: isUz ? [
                 { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Nomingiz boshqa patent bilan to'qnash kelmasligini bilasiz." },
-                { icon: "✅", title: "Ishonch bilan boshlash", description: "Nomning band emasligiga amin bo'lib, xaridni boshlaysiz." }
+                { icon: "✅", title: "Ishonch bilan boshlash", description: "Nomning band emasligiga amin bo'lib, ishni boshlaysiz." }
             ] : [
                 { icon: "⚖️", title: "Legal Safety", description: "Check availability." },
                 { icon: "✅", title: "Confident Start", description: "Start knowing the name is free." }
@@ -90,7 +90,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: isUz ? "Biznesingiz uchun natija keltiradigan poydevor." : "A foundation that brings results for your business.",
             price: basePricesUSD.strategy,
             timeline: isUz ? "⏱ 20-30 ish kuni" : "⏱ 20-30 business days",
-            features: isUz ? ["Bozor va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Brend platformasi", "Pozitsiyalash strategiyasi", "Noyob Sotuv Taklifi (USP)"] : ["Market/Competitor analysis", "Audience map", "Brand platform", "Positioning", "USP"],
+            features: isUz ? ["Bozor va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Brend platformasi", "Pozitsiyalash strategiyasi", "Noyob Sotuv Taklifi (USP)"] : ["Market analysis", "Audience map", "Brand platform", "Positioning", "USP"],
             benefits: isUz ? [
                 { icon: "📊", title: "Bozorda aniq o'rin", description: "Raqobatchilaringizdan qanday ajralib turishni aniq bilasiz." },
                 { icon: "🚀", title: "Sotuvlar o'sishi", description: "To'g'ri pozitsiyalash mijozlar sonini oshiradi." }
@@ -206,7 +206,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         logoStandard: {
             label: isUz ? "Logo Standart" : "Standard Logo",
             description: isUz ? "Logom tayyor bo'lsin" : "Logo ready to go",
-            subDescription: isUz ? "Tez va ishonchli start" : "Fast and reliable start",
+            subDescription: isUz ? "Endigina boshlamoqchi bo'lganlar uchun" : "For those just starting out",
             price: basePricesUSD.logoStandard,
             timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
             features: isUz ? [
@@ -233,7 +233,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         logoPremium: {
             label: isUz ? "Logo + Firma Uslubi" : "Logo + Visual Identity",
             description: isUz ? "Brendingizga mos firma uslubi vizual aydentika ishlab chiqish" : "Development of visual identity consistent with your brand",
-            subDescription: isUz ? "To'g'ri nom, to'g'ri asos" : "Right name, right foundation",
+            subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
             price: basePricesUSD.logoPremium,
             recommended: true,
             timeline: isUz ? "⏱ 10 ish kuni" : "⏱ 10 business days",
@@ -261,8 +261,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         logoVIP: {
             label: isUz ? "Logo + Stil + Brandbook" : "Logo + Style + Brandbook",
-            description: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
-            subDescription: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
+            description: isUz ? "Hamma narsani bir marta to'g'ri qiling" : "Do everything right once",
+            subDescription: isUz ? "Jiddiy investitsiya qiladiganlar uchun" : "For serious investors",
             price: basePricesUSD.logoVIP,
             timeline: isUz ? "⏱ 15–20 ish kuni" : "⏱ 15–20 business days",
             features: isUz ? [
@@ -432,7 +432,6 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
 export const comparisonData = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
     const isUz = lang === 'uz';
     const isRu = lang === 'ru';
-    const isEn = lang === 'en';
 
     return [
         { 
