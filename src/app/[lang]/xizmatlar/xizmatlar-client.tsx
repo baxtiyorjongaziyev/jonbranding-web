@@ -42,12 +42,16 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
 
   return (
     <div suppressHydrationWarning>
-      {/* Top sections loaded normally for speed */}
+      {/* 1. Hero - Key entry point */}
       <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary.servicesHero} />
+      
+      {/* 2. Why Us - Building trust early */}
       <WhyUs onCtaClick={handleOpenModal} lang={lang} />
+      
+      {/* 3. Service Sections - Explaining WHAT we do */}
       <ServiceSections lang={lang} dictionary={dictionary.serviceSections} />
       
-      {/* Middle and bottom sections loaded dynamically or with condition */}
+      {/* 4. Package Builder - Interactive Pricing (Core value) */}
       {isClient && dictionary.servicesPage ? (
         <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
       ) : (
@@ -58,12 +62,25 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
 
       {isClient && (
         <>
+          {/* 5. Comparison - Why us over others? */}
           <Comparison onCtaClick={handleOpenModal} lang={lang} />
+          
+          {/* 6. Trusted By - Social proof (logos) */}
           <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
+          
+          {/* 7. Testimonials - Social proof (stories) */}
           <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+          
+          {/* 8. Personal Offer - Direct value pitch */}
           <PersonalOfferBlock onCtaClick={handleOpenModal} />
+          
+          {/* 9. Urgency - Why now? */}
           <UrgencyBlock />
+          
+          {/* 10. Queue Status - Scarcity & Social proof */}
           <QueueStatus onCtaClick={handleOpenModal} />
+          
+          {/* Sticky Mobile Call to Action */}
           <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
         </>
       )}
