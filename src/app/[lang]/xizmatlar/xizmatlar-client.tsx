@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -10,7 +10,6 @@ import WhyUs from '@/components/sections/why-us';
 import ServiceSections from '@/components/sections/service-sections';
 
 // Dynamic loading only for non-critical/heavy/below-fold components
-const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const PackageBuilder = dynamic(() => import('@/components/sections/package-builder'), { ssr: false });
 const Comparison = dynamic(() => import('@/components/sections/comparison'), { ssr: false });
 const QueueStatus = dynamic(() => import('@/components/sections/queue-status'), { ssr: false });
@@ -18,12 +17,21 @@ const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'), { ss
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'), { ssr: false });
 const UrgencyBlock = dynamic(() => import('@/components/sections/urgency-block'), { ssr: false });
 const PersonalOfferBlock = dynamic(() => import('@/components/sections/personal-offer-block'), { ssr: false });
+const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 
 const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
-  const [isClient, setIsClient] = useState(false);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
-    setIsClient(true);
+    // Progressive staggered loading to prevent blocking the UI thread
+    const timers = [
+      setTimeout(() => setStep(1), 100), // Render PackageBuilder
+      setTimeout(() => setStep(2), 400), // Render Comparison
+      setTimeout(() => setStep(3), 700), // Render TrustedBy
+      setTimeout(() => setStep(4), 1000), // Render Testimonials
+      setTimeout(() => setStep(5), 1300), // Render the rest
+    ];
+    return () => timers.forEach(clearTimeout);
   }, []);
 
   const handleOpenModal = useCallback(() => {
@@ -41,47 +49,43 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
   if (!dictionary) return <div className="py-20 text-center"><Skeleton className="h-screen w-full" /></div>;
 
   return (
-    <div suppressHydrationWarning>
-      {/* 1. Hero - Key entry point */}
+    <div suppressHydrationWarning className="flex flex-col gap-0">
+      {/* 1. Hero - Immediate */}
       <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary.servicesHero} />
       
-      {/* 2. Why Us - Building trust early */}
+      {/* 2. Why Us - Immediate */}
       <WhyUs onCtaClick={handleOpenModal} lang={lang} />
       
-      {/* 3. Service Sections - Explaining WHAT we do */}
+      {/* 3. Service Sections - Immediate */}
       <ServiceSections lang={lang} dictionary={dictionary.serviceSections} />
       
-      {/* 4. Package Builder - Interactive Pricing (Core value) */}
-      {isClient && dictionary.servicesPage ? (
-        <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
-      ) : (
-        <div className="py-10 text-center px-4">
-            <Skeleton className="h-[600px] w-full max-w-6xl mx-auto rounded-3xl" />
-        </div>
+      {/* 4. Package Builder - Step 1 */}
+      {step >= 1 ? (
+        <Suspense fallback={<div className="py-20 text-center"><Skeleton className="h-[600px] w-full max-w-6xl mx-auto rounded-3xl" /></div>}>
+          <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
+        </Suspense>
+      ) : <div className="h-20" />}
+
+      {/* 5. Comparison - Step 2 */}
+      {step >= 2 && (
+        <Suspense fallback={<Skeleton className="h-96 w-full" />}>
+          <Comparison onCtaClick={handleOpenModal} lang={lang} />
+        </Suspense>
       )}
 
-      {isClient && (
+      {/* 6. Social Proof & Offers - Step 3-5 */}
+      {step >= 3 && (
         <>
-          {/* 5. Comparison - Why us over others? */}
-          <Comparison onCtaClick={handleOpenModal} lang={lang} />
-          
-          {/* 6. Trusted By - Social proof (logos) */}
           <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
-          
-          {/* 7. Testimonials - Social proof (stories) */}
-          <Testimonials lang={lang} dictionary={dictionary.testimonials} />
-          
-          {/* 8. Personal Offer - Direct value pitch */}
-          <PersonalOfferBlock onCtaClick={handleOpenModal} />
-          
-          {/* 9. Urgency - Why now? */}
-          <UrgencyBlock />
-          
-          {/* 10. Queue Status - Scarcity & Social proof */}
-          <QueueStatus onCtaClick={handleOpenModal} />
-          
-          {/* Sticky Mobile Call to Action */}
-          <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
+          {step >= 4 && <Testimonials lang={lang} dictionary={dictionary.testimonials} />}
+          {step >= 5 && (
+            <>
+              <PersonalOfferBlock onCtaClick={handleOpenModal} />
+              <UrgencyBlock />
+              <QueueStatus onCtaClick={handleOpenModal} />
+              <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
+            </>
+          )}
         </>
       )}
     </div>
