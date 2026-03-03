@@ -1,4 +1,3 @@
-
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -211,7 +210,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.logoStandard,
             timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
             features: isUz ? [
-                "3 ta logo varianti — uchtalasidan birini tanlaysiz",
+                "3 ta logo varianti tayyorlanadi — uchtalasidan birini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
                 "Logo 4 xil ko'rinishda (Gorizontal, Vertikal, Oq-qora, Belgi)",
                 "Instagram va Telegram uchun profil rasmi",
@@ -239,7 +238,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             recommended: true,
             timeline: isUz ? "⏱ 10 ish kuni" : "⏱ 10 business days",
             features: isUz ? [
-                "4 ta logo varianti — to'rttasidan birini tanlaysiz",
+                "4 ta logo varianti tayyorlanadi — to'rttasidan birini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
                 "Logo 4 xil ko'rinishda + Profil rasmlari",
                 "3 xil fayl formatida (PNG, SVG, AI)",
