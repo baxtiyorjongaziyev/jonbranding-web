@@ -34,7 +34,7 @@ const containerVariants = {
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.1
+            staggerChildren: 0.15
         }
     }
 };
@@ -61,38 +61,28 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const { label, price, description, subDescription, features, benefits, timeline, recommended } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
-    const isPremium = id.toLowerCase().includes('premium');
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
-        <motion.div variants={itemVariants} className="h-full">
+        <motion.div variants={itemVariants} className="h-full" suppressHydrationWarning>
             <Card
                 onClick={onSelect}
                 className={cn(
-                    "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border flex flex-col rounded-[1.2rem] bg-white",
+                    "group relative h-full transition-all duration-500 cursor-pointer overflow-hidden border flex flex-col rounded-[1.2rem] bg-white",
                     selected
                         ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_40px_rgba(251,191,36,0.4)] scale-[1.02]' : 'border-primary shadow-[0_0_20px_rgba(37,99,235,0.15)] scale-[1.02]')
                         : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : 
                            "border-slate-100 hover:border-primary/20 hover:shadow-md")
                 )}
-                suppressHydrationWarning
             >
                 {isVip && selected && (
-                    <>
-                        <div className="absolute inset-0 rounded-[1.2rem] overflow-hidden pointer-events-none">
-                            <motion.div
-                                animate={{ x: ['-100%', '200%'] }}
-                                transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
-                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
-                            />
-                        </div>
-                        <motion.div 
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: [0.3, 0.6, 0.3] }}
-                            transition={{ repeat: Infinity, duration: 2 }}
-                            className="absolute -inset-1 border-2 border-amber-400/30 rounded-[1.4rem] blur-sm pointer-events-none"
+                    <div className="absolute inset-0 pointer-events-none">
+                        <motion.div
+                            animate={{ x: ['-100%', '200%'] }}
+                            transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
                         />
-                    </>
+                    </div>
                 )}
 
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
@@ -145,7 +135,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         <button 
                             onClick={() => setActiveTab('included')}
                             className={cn(
-                                "flex-1 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all",
+                                "flex-1 py-2 text-[11px] font-black uppercase tracking-widest transition-all",
                                 activeTab === 'included' 
                                     ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
                                     : "text-slate-400"
@@ -156,7 +146,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         <button 
                             onClick={() => setActiveTab('benefits')}
                             className={cn(
-                                "flex-1 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all",
+                                "flex-1 py-2 text-[11px] font-black uppercase tracking-widest transition-all",
                                 activeTab === 'benefits' 
                                     ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
                                     : "text-slate-400"
@@ -166,7 +156,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         </button>
                     </div>
 
-                    <div className="flex-grow min-h-[120px]">
+                    <div className="flex-grow min-h-[140px]">
                         <AnimatePresence mode="wait">
                             {activeTab === 'included' ? (
                                 <motion.div 
@@ -178,11 +168,11 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                                 >
                                     <ul className="space-y-1.5">
                                         {(features || []).map((r: string, i: number) => (
-                                            <li key={i} className="flex items-start gap-2.5">
+                                            <li key={i} className="flex items-start gap-2">
                                                 <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
                                                     <CheckCircle className={cn("w-3.5 h-3.5", isVip ? "text-amber-400" : "text-primary")} />
                                                 </div>
-                                                <span className={cn("text-sm font-medium leading-relaxed", isVip ? "text-slate-300" : "text-slate-700")}>{r}</span>
+                                                <span className={cn("text-sm font-medium leading-snug", isVip ? "text-slate-300" : "text-slate-700")}>{r}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -193,20 +183,20 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                                     initial={{ opacity: 0, x: 10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -10 }}
-                                    className="grid grid-cols-1 gap-3"
+                                    className="space-y-2"
                                 >
                                     {(benefits || []).map((b: any, i: number) => (
                                         <div 
                                             key={i} 
                                             className={cn(
-                                                "p-3 rounded-xl border flex items-center gap-4",
+                                                "p-3 rounded-xl border flex items-center gap-3",
                                                 isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100"
                                             )}
                                         >
                                             <span className="text-xl shrink-0">{b.icon}</span>
-                                            <div className="space-y-0.5 min-w-0">
-                                                <p className={cn("text-sm font-bold leading-tight truncate", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
-                                                <p className={cn("text-xs leading-snug text-slate-500 line-clamp-2", isVip && "text-slate-400")}>{b.description}</p>
+                                            <div className="min-w-0">
+                                                <p className={cn("text-sm font-black leading-tight", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
+                                                <p className={cn("text-xs leading-snug text-slate-500", isVip && "text-slate-400")}>{b.description}</p>
                                             </div>
                                         </div>
                                     ))}
@@ -233,7 +223,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         <Button
                             variant={selected ? "default" : "outline"}
                             className={cn(
-                                "w-full py-4 text-xs font-bold transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest",
+                                "w-full py-4 text-xs font-black transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest",
                                 selected 
                                     ? (isVip 
                                         ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950 shadow-[0_4px_20px_rgba(251,191,36,0.4)]" 

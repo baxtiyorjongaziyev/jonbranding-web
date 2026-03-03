@@ -101,7 +101,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ]
         },
         commStrategy: {
-            label: isUz ? "Kommunikatsion strategiya" : (isRu ? "Коммуникационная стратегия" : "Communication Strategy"),
+            label: isUz ? "Kommunikatsion strategiya" : (isRu ? "Конмуникационная стратегия" : "Communication Strategy"),
             description: isUz ? "Mijozlar bilan muloqot va reklama tili." : "Communication and advertising language for customers.",
             price: basePricesUSD.commStrategy,
             timeline: isUz ? "⏱ 15-20 ish kuni" : "⏱ 15-20 business days",
@@ -207,7 +207,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         logoStandard: {
             label: isUz ? "Logo Standart" : "Standard Logo",
             description: isUz ? "Logom tayyor bo'lsin" : "Logo ready to go",
-            subDescription: isUz ? "Logom tayyor bo'lsin" : "Logo ready to go",
+            subDescription: isUz ? "Tez va ishonchli start" : "Fast and reliable start",
             price: basePricesUSD.logoStandard,
             timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
             features: isUz ? [
@@ -233,8 +233,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         logoPremium: {
             label: isUz ? "Logo + Firma Uslubi" : "Logo + Visual Identity",
-            description: isUz ? "Bir logomas — to'liq vizual tizim" : "Full visual system",
-            subDescription: isUz ? "Bir logomas — to'liq vizual tizim" : "Full visual system",
+            description: isUz ? "Brendingizga mos firma uslubi vizual aydentika ishlab chiqish" : "Development of visual identity consistent with your brand",
+            subDescription: isUz ? "To'g'ri nom, to'g'ri asos" : "Right name, right foundation",
             price: basePricesUSD.logoPremium,
             recommended: true,
             timeline: isUz ? "⏱ 10 ish kuni" : "⏱ 10 business days",
@@ -262,8 +262,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         logoVIP: {
             label: isUz ? "Logo + Stil + Brandbook" : "Logo + Style + Brandbook",
-            description: isUz ? "Hamma narsani bir marta to'g'ri qiling" : "Do it right once",
-            subDescription: isUz ? "Hamma narsani bir marta to'g'ri qiling" : "Do it right once",
+            description: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
+            subDescription: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
             price: basePricesUSD.logoVIP,
             timeline: isUz ? "⏱ 15–20 ish kuni" : "⏱ 15–20 business days",
             features: isUz ? [
@@ -271,7 +271,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Har bir variant uchun chuqur strategik izoh",
                 "Logo 4 xil ko'rinishda + Profil rasmlari",
                 "3 xil fayl formatida (PNG, SVG, AI)",
-                "Rasmiy ranglar to'plami — 3–5 ta rang va aniq kodlar",
+                "Rasmiy ranglar to'plami — 3–5 ta rasmiy rangi va kodi",
                 "Rasmiy shrift — brendingizning maxsus shriftlari",
                 "Brandbook — brenddan foydalanish bo'yicha to'liq qo'llanma",
                 "Logotip animatsiyasi (Motion design)",
