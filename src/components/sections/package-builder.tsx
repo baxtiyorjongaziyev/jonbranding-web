@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC, useMemo } from 'react';
@@ -50,7 +51,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
 
     return (
         <motion.div variants={itemVariants} className="h-full relative pt-14 px-1">
-            {/* High-Impact Badges - Positioned above the card */}
+            {/* High-Impact Badges */}
             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
@@ -68,8 +69,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                 onClick={onSelect}
                 className={cn(
                     "group relative h-full transition-all duration-500 cursor-pointer border flex flex-col rounded-[1.5rem] bg-white",
-                    // Important: overflow-visible ensures glow and badges are not cut off
-                    "overflow-visible",
+                    "overflow-visible", // Important for showing glow and badges
                     selected
                         ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_60px_rgba(251,191,36,0.35)] scale-[1.03]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.03]')
                         : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : "border-slate-100 hover:border-primary/20 shadow-sm")
@@ -414,8 +414,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     )}
                                 </div>
                             </div>
-                            <Button size="lg" className="w-full py-12 text-3xl font-black rounded-full shadow-[0_25px_60px_rgba(37,99,235,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-all mt-20 group" onClick={onOrderNow} disabled={total.base === 0}>
-                                <span className="flex items-center gap-8">LOYIHA NARXINI TASDIQLASH <ChevronsDown className="w-10 h-10 animate-bounce group-hover:scale-110" /></span>
+                            <Button size="lg" className="w-full py-7 text-xl font-black rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.25)] hover:scale-[1.02] active:scale-[0.98] transition-all mt-12 group" onClick={onOrderNow} disabled={total.base === 0}>
+                                <span className="flex items-center gap-4 uppercase tracking-widest">LOYIHA NARXINI TASDIQLASH <ChevronsDown className="w-7 h-7 animate-bounce group-hover:scale-110" /></span>
                             </Button>
                         </div>
                     </div>
