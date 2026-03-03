@@ -49,17 +49,17 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
-        <motion.div variants={itemVariants} className="h-full relative pt-10">
-            {/* High-Impact Badges */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 z-30 scale-125 pointer-events-none">
+        <motion.div variants={itemVariants} className="h-full relative pt-14 px-1">
+            {/* High-Impact Badges - Positioned above the card */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
                 {recommended && !isVip && (
-                    <Badge className="bg-primary text-white text-[12px] font-black px-6 py-1.5 rounded-full border-none uppercase tracking-widest shadow-[0_4px_20px_rgba(37,99,235,0.4)] animate-breathing whitespace-nowrap">
+                    <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
                         {dictionary.recommended}
                     </Badge>
                 )}
                 {isVip && (
-                    <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[12px] font-black px-8 py-1.5 rounded-full border-none uppercase flex items-center gap-2 shadow-[0_4px_25px_rgba(251,191,36,0.6)] whitespace-nowrap">
-                        <Crown className="w-4 h-4" /> VIP
+                    <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[13px] font-black px-10 py-2.5 rounded-full border-none uppercase flex items-center gap-2 shadow-[0_4px_30px_rgba(251,191,36,0.7)] whitespace-nowrap">
+                        <Crown className="w-4 h-4 fill-current" /> VIP
                     </Badge>
                 )}
             </div>
@@ -68,8 +68,10 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                 onClick={onSelect}
                 className={cn(
                     "group relative h-full transition-all duration-500 cursor-pointer border flex flex-col rounded-[1.5rem] bg-white",
+                    // Important: overflow-visible ensures glow and badges are not cut off
+                    "overflow-visible",
                     selected
-                        ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_50px_rgba(251,191,36,0.3)] scale-[1.02]' : 'border-primary shadow-[0_0_30px_rgba(37,99,235,0.1)] scale-[1.02]')
+                        ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_60px_rgba(251,191,36,0.35)] scale-[1.03]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.03]')
                         : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : "border-slate-100 hover:border-primary/20 shadow-sm")
                 )}
             >
@@ -84,12 +86,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                     </div>
                 )}
 
-                <CardHeader className="p-6 pb-4">
+                <CardHeader className="p-6 pb-4 relative z-10">
                     <div className="flex items-center gap-4 mb-4">
                         <div className={cn(
                             "w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 flex-shrink-0",
                             selected 
-                                ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-lg") 
+                                ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950 shadow-xl" : "bg-primary text-white shadow-lg") 
                                 : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/20" : "bg-secondary text-slate-600")
                         )}>
                             <Icon className="w-8 h-8" />
@@ -116,7 +118,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                     </div>
                 </CardHeader>
 
-                <CardContent className="px-6 pt-0 pb-6 flex-grow flex flex-col" suppressHydrationWarning>
+                <CardContent className="px-6 pt-0 pb-6 flex-grow flex flex-col relative z-10" suppressHydrationWarning>
                     <div className="flex border-b border-slate-100 mb-6" onClick={(e) => e.stopPropagation()}>
                         <button 
                             onClick={() => setActiveTab('included')}
@@ -142,7 +144,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         </button>
                     </div>
 
-                    <div className="flex-grow min-h-[200px]">
+                    <div className="flex-grow min-h-[220px]">
                         <AnimatePresence mode="wait">
                             {activeTab === 'included' ? (
                                 <motion.div 
@@ -172,7 +174,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                                     className="grid grid-cols-1 gap-4"
                                 >
                                     {(benefits || []).map((b: any, i: number) => (
-                                        <div key={i} className={cn("p-4 rounded-2xl border flex items-center gap-4", isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100")}>
+                                        <div key={i} className={cn("p-4 rounded-2xl border flex items-center gap-4", isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100 shadow-sm")}>
                                             <span className="text-2xl shrink-0">{b.icon}</span>
                                             <div className="min-w-0">
                                                 <p className={cn("text-sm font-black leading-tight", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
@@ -194,11 +196,11 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         )}
 
                         <Button
-                            variant={selected ? "default" : "outline"}
+                            variant={selected ? (isVip ? "secondary" : "default") : "outline"}
                             className={cn(
-                                "w-full py-5 text-sm font-black transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest",
+                                "w-full py-5 text-sm font-black transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest relative z-20",
                                 selected 
-                                    ? (isVip ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950 shadow-xl" : "border-none bg-primary text-white shadow-lg") 
+                                    ? (isVip ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950 shadow-[0_0_25px_rgba(251,191,36,0.4)] hover:scale-[1.02]" : "border-none bg-primary text-white shadow-lg hover:scale-[1.02]") 
                                     : (isVip ? "bg-white/5 border-amber-400/20 text-amber-400 hover:bg-amber-400 hover:text-blue-950" : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary shadow-sm")
                             )}
                             onClick={(e) => { e.stopPropagation(); onSelect(); }}
@@ -214,12 +216,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
 ServiceCard.displayName = 'ServiceCard';
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
-    <motion.div variants={itemVariants} className="space-y-6">
+    <motion.div variants={itemVariants} className="space-y-10">
         <div className="flex items-center gap-4 px-1">
-            <div className="h-8 w-2.5 bg-primary rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
-            <h3 className="text-lg sm:text-xl font-black text-dark-blue tracking-tight uppercase">{title}</h3>
+            <div className="h-10 w-3 bg-primary rounded-full shadow-[0_0_20px_rgba(37,99,235,0.5)]" />
+            <h3 className="text-xl sm:text-2xl font-black text-dark-blue tracking-tight uppercase">{title}</h3>
         </div>
-        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-8", gridCols)}>{children}</div>
+        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-10", gridCols)}>{children}</div>
     </motion.div>
 );
 
@@ -258,23 +260,23 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     ];
 
     return (
-        <section id="package-builder" className="py-20 bg-white overflow-visible" suppressHydrationWarning>
+        <section id="package-builder" className="py-24 bg-white overflow-visible" suppressHydrationWarning>
             <motion.div 
                 className="container mx-auto px-4 max-w-7xl overflow-visible"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
-                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
             >
-                <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-16 text-center space-y-4">
-                    <Badge className="bg-primary/10 text-primary border-none px-8 py-2 rounded-full font-black text-[12px] uppercase tracking-[0.3em]">
+                <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-20 text-center space-y-6">
+                    <Badge className="bg-primary/10 text-primary border-none px-10 py-2.5 rounded-full font-black text-[13px] uppercase tracking-[0.3em] shadow-sm">
                         LOYIHA ME'MORI
                     </Badge>
-                    <h2 className="text-5xl sm:text-6xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
-                    <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
+                    <h2 className="text-5xl sm:text-7xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
+                    <p className="text-xl sm:text-2xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
                 </motion.div>
 
-                <div className="space-y-24">
+                <div className="space-y-28">
                     <ServiceGroup title={translations.categories.tripwire}>
                         {['namingCheck', 'audit', 'consultation'].map(id => (
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
@@ -302,11 +304,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <motion.div variants={itemVariants} className="w-full">
                         <Accordion type="single" collapsible className="w-full">
                             <AccordionItem value="more" className="border-none">
-                                <AccordionTrigger className="text-lg font-black text-dark-blue justify-center gap-6 hover:no-underline py-8 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group">
+                                <AccordionTrigger className="text-xl font-black text-dark-blue justify-center gap-8 hover:no-underline py-10 bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm">
                                     {translations.categories.more_services}
-                                    <ChevronsDown className="w-6 h-6 text-primary animate-bounce" />
+                                    <ChevronsDown className="w-8 h-8 text-primary animate-bounce" />
                                 </AccordionTrigger>
-                                <AccordionContent className="pt-12">
+                                <AccordionContent className="pt-16">
                                     <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
                                         {['packaging', 'smm', 'urgency', 'nda'].map(id => (
                                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
@@ -318,32 +320,32 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </motion.div>
                 </div>
 
-                <motion.div variants={itemVariants} className="mt-24 max-w-6xl mx-auto">
-                    <div id="your-package-card" className="rounded-[3rem] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
-                        <div className="lg:w-1/2 bg-dark-blue p-12 sm:p-16 text-white relative">
-                            <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px]" />
+                <motion.div variants={itemVariants} className="mt-32 max-w-6xl mx-auto">
+                    <div id="your-package-card" className="rounded-[3.5rem] bg-white shadow-[0_40px_120px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
+                        <div className="lg:w-1/2 bg-dark-blue p-12 sm:p-20 text-white relative">
+                            <div className="absolute top-0 right-0 -mt-24 -mr-24 w-96 h-96 bg-primary/20 rounded-full blur-[140px]" />
                             <div className="relative z-10 h-full flex flex-col">
-                                <div className="space-y-4 mb-12">
-                                    <div className="flex items-center gap-5">
-                                        <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
-                                            <Box className="w-8 h-8 text-sky-blue" />
+                                <div className="space-y-6 mb-16">
+                                    <div className="flex items-center gap-6">
+                                        <div className="bg-white/10 p-5 rounded-2xl border border-white/10 shadow-inner">
+                                            <Box className="w-10 h-10 text-sky-blue" />
                                         </div>
-                                        <h3 className="text-3xl sm:text-4xl font-black tracking-tight uppercase text-white">{translations.your_package}</h3>
+                                        <h3 className="text-4xl sm:text-5xl font-black tracking-tight uppercase text-white">{translations.your_package}</h3>
                                     </div>
-                                    <p className="text-blue-100/80 font-medium text-lg max-w-sm">{translations.your_package_desc}</p>
+                                    <p className="text-blue-100/80 font-medium text-xl max-w-sm leading-relaxed">{translations.your_package_desc}</p>
                                 </div>
-                                <div className="grid grid-cols-1 gap-5 overflow-y-auto pr-4 custom-scrollbar flex-grow max-h-[450px]">
+                                <div className="grid grid-cols-1 gap-6 overflow-y-auto pr-6 custom-scrollbar flex-grow max-h-[500px]">
                                     {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
                                         const isSurcharge = k === 'urgency' || k === 'nda';
                                         return (
-                                            <div key={k} className="flex items-center justify-between p-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300">
-                                                <div className="flex items-center gap-5">
-                                                    <div className={cn("p-2.5 rounded-full", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
-                                                        {isSurcharge ? <Plus className="w-5 h-5 text-blue-400" /> : <Check className="w-5 h-5 text-sky-blue" />}
+                                            <div key={k} className="flex items-center justify-between p-7 rounded-[1.5rem] bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300 shadow-sm group">
+                                                <div className="flex items-center gap-6">
+                                                    <div className={cn("p-3 rounded-full transition-transform group-hover:scale-110", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
+                                                        {isSurcharge ? <Plus className="w-6 h-6 text-blue-400" /> : <Check className="w-6 h-6 text-sky-blue" />}
                                                     </div>
-                                                    <span className="text-lg font-extrabold tracking-tight text-white">{serviceDetails[k]?.label}</span>
+                                                    <span className="text-xl font-extrabold tracking-tight text-white">{serviceDetails[k]?.label}</span>
                                                 </div>
-                                                <span className={cn("font-black text-base sm:text-lg", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
+                                                <span className={cn("font-black text-lg sm:text-xl", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
                                                     {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
                                                 </span>
                                             </div>
@@ -353,67 +355,67 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                         </div>
 
-                        <div className="lg:w-1/2 bg-slate-50 p-12 sm:p-16 flex flex-col border-l border-slate-100 relative">
-                            <div className="space-y-12 flex-grow">
-                                <div className="space-y-8">
-                                    <div className="flex justify-between items-center px-4">
-                                        <span className="text-[14px] font-black uppercase tracking-[0.3em] text-slate-400">{translations.base_price_label}</span>
-                                        <span className="text-3xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
+                        <div className="lg:w-1/2 bg-slate-50 p-12 sm:p-20 flex flex-col border-l border-slate-100 relative">
+                            <div className="space-y-14 flex-grow">
+                                <div className="space-y-10">
+                                    <div className="flex justify-between items-center px-6">
+                                        <span className="text-[15px] font-black uppercase tracking-[0.35em] text-slate-400">{translations.base_price_label}</span>
+                                        <span className="text-4xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
 
-                                    <div className="space-y-4">
+                                    <div className="space-y-5">
                                         {total.surchargesApplied.map((s: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-blue-700 text-[14px] font-black bg-blue-50 px-6 py-4 rounded-2xl border border-blue-100">
-                                                <div className="flex items-center gap-3"><Plus className="w-5 h-5" />{s.name}</div>
-                                                <span className="text-xl">+{formatPrice(s.value, lang as any, currency)}</span>
+                                            <div key={i} className="flex justify-between items-center text-blue-700 text-[15px] font-black bg-blue-50 px-8 py-5 rounded-[1.5rem] border border-blue-100 shadow-sm">
+                                                <div className="flex items-center gap-4"><Plus className="w-6 h-6" />{s.name}</div>
+                                                <span className="text-2xl">+{formatPrice(s.value, lang as any, currency)}</span>
                                             </div>
                                         ))}
                                         {total.discountApplied.map((d: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-green-700 text-[14px] font-black bg-green-50 px-6 py-4 rounded-2xl border border-green-100">
-                                                <div className="flex items-center gap-3"><Zap className="w-5 h-5" />{d.name}</div>
-                                                <span className="text-xl">-{formatPrice(d.value, lang as any, currency)}</span>
+                                            <div key={i} className="flex justify-between items-center text-green-700 text-[15px] font-black bg-green-50 px-8 py-5 rounded-[1.5rem] border border-green-100 shadow-sm">
+                                                <div className="flex items-center gap-4"><Zap className="w-6 h-6" />{d.name}</div>
+                                                <span className="text-2xl">-{formatPrice(d.value, lang as any, currency)}</span>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="pt-10 border-t border-slate-200 text-center space-y-3">
-                                        <span className="text-slate-400 text-[14px] font-black uppercase tracking-[0.4em]">{translations.final_price}</span>
+                                    <div className="pt-12 border-t border-slate-200 text-center space-y-4">
+                                        <span className="text-slate-400 text-[15px] font-black uppercase tracking-[0.45em]">{translations.final_price}</span>
                                         <div className="flex flex-col items-center">
-                                            <span className="text-7xl font-black text-primary tracking-tighter drop-shadow-xl">
+                                            <span className="text-8xl font-black text-primary tracking-tighter drop-shadow-2xl">
                                                 {formatPrice(total.final, lang as any, currency)}
                                             </span>
                                             {total.savings > 0 && (
-                                                <div className="mt-6 flex items-center gap-3 text-green-600 font-black text-[14px] bg-green-100/70 px-8 py-3 rounded-full border border-green-200 uppercase tracking-widest shadow-sm">
-                                                    <Gift className="w-5 h-5" /> JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
+                                                <div className="mt-8 flex items-center gap-4 text-green-600 font-black text-[15px] bg-green-100/70 px-10 py-4 rounded-full border border-green-200 uppercase tracking-widest shadow-md">
+                                                    <Gift className="w-6 h-6" /> JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
                                                 </div>
                                             )}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="space-y-8">
-                                    <div className="space-y-4">
-                                        <Label className="text-[14px] uppercase font-black text-slate-400 tracking-[0.3em] ml-6">{translations.promo_code_label}</Label>
+                                <div className="space-y-10">
+                                    <div className="space-y-5">
+                                        <Label className="text-[15px] uppercase font-black text-slate-400 tracking-[0.35em] ml-8">{translations.promo_code_label}</Label>
                                         <div className="relative">
                                             <Input 
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
                                                 placeholder={translations.promo_code_placeholder}
-                                                className="rounded-full py-5 px-8 border-slate-200 h-16 text-lg font-bold uppercase tracking-[0.2em] bg-white shadow-sm focus:ring-primary focus:border-primary"
+                                                className="rounded-full py-6 px-10 border-slate-200 h-20 text-xl font-bold uppercase tracking-[0.25em] bg-white shadow-inner focus:ring-primary focus:border-primary transition-all"
                                             />
-                                            {total.isPromoApplied && <div className="absolute right-6 top-1/2 -translate-y-1/2 text-emerald-500"><CheckCircle className="w-8 h-8" /></div>}
+                                            {total.isPromoApplied && <div className="absolute right-8 top-1/2 -translate-y-1/2 text-emerald-500"><CheckCircle className="w-10 h-10" /></div>}
                                         </div>
                                     </div>
 
                                     {!total.isPromoApplied && (
-                                        <div className="space-y-4">
-                                            <Label className="text-[14px] uppercase font-black text-slate-400 tracking-[0.3em] ml-6">CHEGIRMALAR</Label>
-                                            <DynamicToggle id="discount-tier" options={discountOptions} selected={discountType} onSelect={(val) => setDiscountType(val as any)} className="h-16" />
+                                        <div className="space-y-5">
+                                            <Label className="text-[15px] uppercase font-black text-slate-400 tracking-[0.35em] ml-8">CHEGIRMALAR</Label>
+                                            <DynamicToggle id="discount-tier" options={discountOptions} selected={discountType} onSelect={(val) => setDiscountType(val as any)} className="h-20" />
                                         </div>
                                     )}
                                 </div>
                             </div>
-                            <Button size="lg" className="w-full py-10 text-2xl font-black rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.3)] hover:scale-[1.02] transition-all mt-16 group" onClick={onOrderNow} disabled={total.base === 0}>
-                                <span className="flex items-center gap-6">LOYIHA NARXINI TASDIQLASH <ChevronsDown className="w-8 h-8 animate-bounce group-hover:scale-110" /></span>
+                            <Button size="lg" className="w-full py-12 text-3xl font-black rounded-full shadow-[0_25px_60px_rgba(37,99,235,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-all mt-20 group" onClick={onOrderNow} disabled={total.base === 0}>
+                                <span className="flex items-center gap-8">LOYIHA NARXINI TASDIQLASH <ChevronsDown className="w-10 h-10 animate-bounce group-hover:scale-110" /></span>
                             </Button>
                         </div>
                     </div>
