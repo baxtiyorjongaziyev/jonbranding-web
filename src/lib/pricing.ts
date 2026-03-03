@@ -1,4 +1,3 @@
-
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -58,11 +57,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 1-2 ish kuni" : "⏱ 1-2 business days",
             features: isUz ? [
                 "O'zbekistondan tekshiruv",
-                "Xalqaro bazadan tekshiruv",
+                "2. Xalqaro bazadan tekshiruv",
                 "Internetda ma'lum mashhur nomlar tekshiruvi"
             ] : [
                 "Local database check",
-                "International database check",
+                "2. International database check",
                 "Global popular names check"
             ]
         },
@@ -95,8 +94,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         namingVIP: {
             label: "Naming VIP",
-            description: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
-            subDescription: isUz ? "Jiddiy investitsiya qiladiganlar uchun" : "For serious investors",
+            description: "",
+            subDescription: isUz ? "Nom emas — aktiv | Jiddiy investitsiya qiladiganlar uchun" : "Not just a name — an asset | For serious investors",
             price: basePricesUSD.namingVIP,
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             features: isUz ? [
@@ -104,13 +103,13 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Har bir nom uchun strategik izoh",
                 "Talaffuz, esda qolish va jaranglash testi",
                 "Domen bo'shligini tekshirish (.com, .uz)",
-                "Instagram va Telegram username tekshiruvi",
-                "O'zbekistonda va xalqaro bazalarda patent tekshiruvi",
+                "Social username bo'shligini tekshirish",
+                "O'zbekiston va xalqaro patent tekshiruvi",
                 "Raqobatchilar tahlili va farqli pozitsiya",
                 "Xalqaro lingvistik tekshiruv",
                 "Nomning mijozga hissiy ta'siri tahlili",
                 "3 ta qisqa shior (slogan) varianti",
-                "Patentga rasman topshirish xizmati",
+                "Patentga topshirish xizmati (davlat bojlari alohida)",
                 "Nom mulkingizni tasdiqlovchi sertifikat",
                 "30 daqiqalik shaxsiy konsultatsiya",
                 "Cheksiz tuzatish (30 kun ichida)"
@@ -125,7 +124,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "International linguistic check",
                 "Emotional impact analysis",
                 "3 slogan variants",
-                "Official patent filing service",
+                "Official patent filing (fees excluded)",
                 "Ownership certificate",
                 "30-min strategy consultation",
                 "Unlimited revisions (30 days)"
@@ -144,8 +143,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         namingPremium: {
             label: "Naming Premium",
-            description: isUz ? "To'g'ri nom, to'g'ri asos" : "Right name, right foundation",
-            subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
+            description: "",
+            subDescription: isUz ? "To'g'ri nom, to'g'ri asos | O'sishni rejalashtiraganlar uchun" : "Right name, right foundation | For those planning growth",
             price: basePricesUSD.namingPremium,
             recommended: true,
             timeline: isUz ? "⏱ 14–20 ish kuni" : "⏱ 14–20 business days",
@@ -154,7 +153,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Har bir nom uchun strategik izoh",
                 "Talaffuz, esda qolish va jaranglash testi",
                 "Domen bo'shligini tekshirish (.com, .uz)",
-                "Instagram va Telegram username tekshiruvi",
+                "Social username bo'shligini tekshirish",
                 "O'zbekiston bazasida patent tekshiruvi",
                 "Raqobatchilar nomlari tahlili",
                 "Nomning mijozga hissiy ta'siri tahlili",
@@ -184,8 +183,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         namingStandard: {
             label: "Naming Standart",
-            description: isUz ? "Tez va ishonchli start" : "Fast and reliable start",
-            subDescription: isUz ? "Endigina boshlamoqchi bo'lganlar uchun" : "For those just starting out",
+            description: "",
+            subDescription: isUz ? "Tez va ishonchli start | Endigina boshlamoqchi bo'lganlar uchun" : "Fast and reliable start | For those just starting out",
             price: basePricesUSD.namingStandard,
             timeline: isUz ? "⏱ 7–10 ish kuni" : "⏱ 7–10 business days",
             features: isUz ? [
@@ -193,7 +192,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Har bir nom uchun qisqa izoh",
                 "Talaffuz qulayligi va esda qolish testi",
                 "Domen bo'shligini tekshirish (.com, .uz)",
-                "Instagram va Telegram username tekshiruvi",
+                "Social username bo'shligini tekshirish",
                 "1 ta tuzatish imkoniyati"
             ] : [
                 "3 name concepts",
@@ -220,23 +219,23 @@ export const getServiceDetails = (lang: string = 'uz') => {
             subDescription: isUz ? "Endigina boshlamoqchi bo'lganlar uchun" : "For those just starting out",
             description: isUz ? "Faqat logotip va uning asosiy ko'rinishlari." : "Just the logo and its main variations.",
             price: basePricesUSD.logoStandard,
-            timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
+            timeline: isUz ? "⏱ 7–10 ish kuni" : "⏱ 7–10 business days",
             features: isUz ? [
-                "2 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
+                "3 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
                 "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va belgisi alohida",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "8 ta aloqa nuqtasida vizual namoyish",
-                "2 ta tuzatish imkoniyati"
+                "1 ta tuzatish imkoniyati"
             ] : [
-                "2 concepts - pick one",
+                "3 concepts - pick one",
                 "Strategic reasoning",
                 "4 lockups (Horizontal, Vertical, B&W, Icon)",
                 "Social media profile pics",
                 "3 file formats (PNG, SVG, AI)",
                 "Visuals on 8 touchpoints",
-                "2 revisions"
+                "1 revision"
             ],
             benefits: isUz ? [
                 { icon: "🎯", title: "Hujjatlarda ham, tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor." },
@@ -256,7 +255,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: isUz ? "To'liq vizual tizim va qoidalar." : "Complete visual system and rules.",
             price: basePricesUSD.logoPremium,
             recommended: true,
-            timeline: isUz ? "⏱ 10 ish kuni" : "⏱ 10 business days",
+            timeline: isUz ? "⏱ 14–20 ish kuni" : "⏱ 14–20 business days",
             features: isUz ? [
                 "3 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
@@ -295,7 +294,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             subDescription: isUz ? "Hamma narsani bir marta to'g'ri qilmoqchilar uchun" : "For those doing it right once",
             description: isUz ? "Brendingizning to'liq 'konstitutsiyasi'." : "Full 'constitution' of your brand.",
             price: basePricesUSD.logoVIP,
-            timeline: isUz ? "⏱ 15–20 ish kuni" : "⏱ 15–20 business days",
+            timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             features: isUz ? [
                 "3 ta logo varianti + har biri uchun chuqur strategik izoh",
                 "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va belgisi alohida",
