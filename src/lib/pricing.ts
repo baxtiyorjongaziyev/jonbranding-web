@@ -130,33 +130,36 @@ export const getServiceDetails = (lang: string = 'uz') => {
         namingVIP: {
             label: "Naming VIP",
             description: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
-            subDescription: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
+            subDescription: isUz ? "Jiddiy investitsiya qiladiganlar uchun" : "For serious investors",
             price: basePricesUSD.namingVIP,
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             features: isUz ? [
                 "10 ta nom varianti tayyorlanadi",
-                "Har bir nom uchun to'liq izoh beriladi",
-                "Talaffuz, esda qolish va jaranglash tekshiruvi",
-                "Domen va Username bo'shligini tekshirish",
-                "O'zbekistonda va xalqaro patent tekshiruvi",
-                "Raqobatchilar tahlili va farqli pozitsiya",
-                "Boshqa tillarda noqulay ma'no bermasligi",
-                "Nomning hissiy ma'nosi va mijozga ta'siri",
-                "3 ta qisqa shior varianti (Just Do It kabi)",
+                "Har bir nom uchun to'liq strategik izoh",
+                "Talaffuz, esda qolish va jaranglashi tekshiruvi",
+                "Domen bo'shligini tekshirish (.com, .uz)",
+                "Instagram va Telegram username bo'shligini tekshirish",
+                "O'zbekistonda va xalqaro bazalarda patent tekshiruvi",
+                "Raqobatchilar tahlili — farqli pozitsiya aniqlanadi",
+                "Nom boshqa tillarda noqulay ma'no bermasligini tekshirish",
+                "Nomning hissiy ma'nosi va mijozga ta'siri yoziladi",
+                "3 ta qisqa shior varianti (Nike — Just Do It kabi)",
                 "Patentga topshirish xizmati (davlat bojlari alohida)",
-                "Nom sizniki ekanini tasdiqlovchi sertifikat",
+                "Nom sizning mulkingiz ekanini tasdiqlovchi sertifikat",
                 "30 daqiqalik shaxsiy strategik konsultatsiya",
                 "Cheksiz tuzatish (30 kun ichida)"
             ] : [
-                "10 name concepts with strategy",
+                "10 name concepts with deep strategy",
                 "Phonetic & Recall testing",
                 "Domain & Social handle check",
                 "Local & International patent check",
                 "Competitor analysis & positioning",
-                "Meaning check in other languages",
+                "Linguistic check for global markets",
+                "Meaning and emotional impact report",
                 "3 slogans & Ownership certificate",
-                "Patent filing service",
-                "Strategy session & Unlimited revisions"
+                "Official patent filing service",
+                "30-min strategy session",
+                "Unlimited revisions (30 days)"
             ],
             benefits: isUz ? [
                 { icon: "🌍", title: "Xalqaro bozorga tayyor", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi." },
@@ -173,18 +176,19 @@ export const getServiceDetails = (lang: string = 'uz') => {
         namingPremium: {
             label: "Naming Premium",
             description: isUz ? "To'g'ri nom, to'g'ri asos" : "Right name, right foundation",
-            subDescription: isUz ? "To'g'ri nom, to'g'ri asos" : "Right name, right foundation",
+            subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
             price: basePricesUSD.namingPremium,
             recommended: true,
             timeline: isUz ? "⏱ 14–20 ish kuni" : "⏱ 14–20 business days",
             features: isUz ? [
                 "6 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun strategik izoh",
-                "Talaffuz, esda qolish va jaranglash tekshiruvi",
-                "Domen va Username bo'shligini tekshirish",
+                "Talaffuz, esda qolish va jaranglashi tekshiruvi",
+                "Domen bo'shligini tekshirish (.com, .uz)",
+                "Instagram va Telegram username bo'shligini tekshirish",
                 "O'zbekiston bazasida patent tekshiruvi",
                 "Raqobatchilar nomlari tahlil qilinadi",
-                "Nomning hissiy ma'nosi va ta'siri",
+                "Nomning hissiy ma'nosi va mijozga ta'siri",
                 "3 ta tuzatish imkoniyati"
             ] : [
                 "6 name concepts with strategy",
@@ -210,14 +214,15 @@ export const getServiceDetails = (lang: string = 'uz') => {
         namingStandard: {
             label: "Naming Standart",
             description: isUz ? "Tez va ishonchli start" : "Fast and reliable start",
-            subDescription: isUz ? "Tez va ishonchli start" : "Fast and reliable start",
+            subDescription: isUz ? "Endigina boshlamoqchi bo'lganlar uchun" : "For those just starting out",
             price: basePricesUSD.namingStandard,
             timeline: isUz ? "⏱ 7–10 ish kuni" : "⏱ 7–10 business days",
             features: isUz ? [
                 "3 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun qisqa izoh",
                 "Talaffuz qulayligi va esda qolishi tekshiruvi",
-                "Domen va Username bo'shligini tekshirish",
+                "Domen bo'shligini tekshirish (.com, .uz)",
+                "Instagram va Telegram username bo'shligini tekshirish",
                 "1 ta tuzatish imkoniyati"
             ] : [
                 "3 name concepts with brief info",
