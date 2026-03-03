@@ -135,29 +135,30 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             features: isUz ? [
                 "10 ta nom varianti tayyorlanadi",
-                "Har bir nom uchun to'liq strategik izoh",
-                "Talaffuz, esda qolish va jaranglashi tekshiruvi",
+                "Har bir nom uchun strategik izoh",
+                "Nomning talaffuzi, esda qolishi va jaranglashi tekshiruvi",
                 "Domen bo'shligini tekshirish (.com, .uz)",
                 "Instagram va Telegram username bo'shligini tekshirish",
                 "O'zbekistonda va xalqaro bazalarda patent tekshiruvi",
-                "Raqobatchilar tahlili — farqli pozitsiya aniqlanadi",
+                "Raqobatchilar nomlari tahlili — eng farqli pozitsiya",
                 "Nom boshqa tillarda noqulay ma'no bermasligini tekshirish",
-                "Nomning hissiy ma'nosi va mijozga ta'siri yoziladi",
+                "Nomning hissiy ma'nosi va mijozga ta'siri",
                 "3 ta qisqa shior varianti (Nike — Just Do It kabi)",
                 "Patentga topshirish xizmati (davlat bojlari alohida)",
                 "Nom sizning mulkingiz ekanini tasdiqlovchi sertifikat",
                 "30 daqiqalik shaxsiy strategik konsultatsiya",
                 "Cheksiz tuzatish (30 kun ichida)"
             ] : [
-                "10 name concepts with deep strategy",
+                "10 name concepts with strategy",
                 "Phonetic & Recall testing",
                 "Domain & Social handle check",
                 "Local & International patent check",
                 "Competitor analysis & positioning",
                 "Linguistic check for global markets",
                 "Meaning and emotional impact report",
-                "3 slogans & Ownership certificate",
+                "3 slogans (e.g. Nike — Just Do It)",
                 "Official patent filing service",
+                "Full ownership certificate",
                 "30-min strategy session",
                 "Unlimited revisions (30 days)"
             ],
@@ -183,7 +184,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "6 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun strategik izoh",
-                "Talaffuz, esda qolish va jaranglashi tekshiruvi",
+                "Nomning talaffuzi, esda qolishi va jaranglashi tekshiruvi",
                 "Domen bo'shligini tekshirish (.com, .uz)",
                 "Instagram va Telegram username bo'shligini tekshirish",
                 "O'zbekiston bazasida patent tekshiruvi",
@@ -220,7 +221,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "3 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun qisqa izoh",
-                "Talaffuz qulayligi va esda qolishi tekshiruvi",
+                "Nomning talaffuzi qulay va esda qolishi tekshiriladi",
                 "Domen bo'shligini tekshirish (.com, .uz)",
                 "Instagram va Telegram username bo'shligini tekshirish",
                 "1 ta tuzatish imkoniyati"
@@ -231,7 +232,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "1 revision round"
             ],
             benefits: isUz ? [
-                { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Noto'g'ri talaffuz qilinadigan nom mijoz yo'qotadi." },
+                { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Esda qolmaydigan yoki noto'g'ri talaffuz nom mijoz yo'qotadi." },
                 { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirmasdan, professional nom olasiz." },
                 { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "Tahlil qilingan, tekshirilgan nom qo'lingizda bo'ladi." },
                 { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va social media username band emasligini bilasiz." }
@@ -243,19 +244,19 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ]
         },
         logoStandard: {
-            label: isUz ? "Unikal Logo" : "Unique Logo",
+            label: isUz ? "Logo Standart" : "Unique Logo",
+            description: isUz ? "Logom tayyor bo'lsin" : "Logo ready to go",
             subDescription: isUz ? "Endigina boshlamoqchi bo'lganlar uchun" : "For those just starting out",
-            description: isUz ? "Faqat logotip va uning asosiy ko'rinishlari." : "Just the logo and its main variations.",
             price: basePricesUSD.logoStandard,
-            timeline: isUz ? "⏱ 7–10 ish kuni" : "⏱ 7–10 business days",
+            timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
             features: isUz ? [
                 "3 ta logo varianti — bittasini tanlaysiz",
                 "Har bir variant uchun strategik izoh",
-                "Logo 4 ko'rinishda: Yotiq, Tik, Qora-oq va faqat belgisi",
-                "Ijtimoiy tarmoqlar uchun profil rasmlari",
-                "Barcha manba fayllar (PNG, SVG, AI)",
+                "Logo 4 xil ko'rinishda: Gorizontal, Vertikal, Qora-oq, Belgi alohida",
+                "Instagram va Telegram uchun profil rasmi",
+                "3 xil fayl formatida topshiriladi: PNG, SVG, AI",
                 "8 ta aloqa nuqtasida vizual namoyish",
-                "1 ta tuzatish imkoniyati"
+                "2 ta tuzatish imkoniyati"
             ] : [
                 "3 concepts - pick one",
                 "Strategic reasoning",
@@ -263,13 +264,13 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Social profile pics",
                 "Source files (AI, SVG, PNG)",
                 "Visuals on 8 touchpoints",
-                "1 revision"
+                "2 revisions"
             ],
             benefits: isUz ? [
-                { icon: "🎯", title: "Hamma joyga mos keladi", description: "Logongiz sayt, Instagram va chop etishga to'liq tayyor bo'ladi." },
-                { icon: "✅", title: "Professional ko'rinish", description: "Mijozlarda brendingizga nisbatan birinchi ko'rishdayoq ishonch uyg'otadi." },
-                { icon: "👁️", title: "Real ko'rinishni bilasiz", description: "8 ta nuqtada logongiz qanday ko'rinishini oldindan vizual ko'rasiz." },
-                { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha original fayllar topshiriladi, kelajakda xohlagancha foydalana olasiz." }
+                { icon: "🎯", title: "Hamma joyga tayyor", description: "Sayt, Instagram, chop etish — logongiz barcha formatda tayyor." },
+                { icon: "✅", title: "Ishonch uyg'otadi", description: "Professional ko'rinish — mijozlar birinchi qarashda ishonch his qiladi." },
+                { icon: "👁️", title: "Real ko'rinish", description: "8 ta joyda logongiz qanday ko'rinishini oldindan vizual ko'rasiz." },
+                { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha fayllar sizga topshiriladi. Hech kimga qarab o'tirmaysiz." }
             ] : [
                 { icon: "🎯", title: "Works everywhere", description: "Ready for web, social and print." },
                 { icon: "✅", title: "Professional look", description: "Confidence from day one." },
@@ -278,24 +279,24 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ]
         },
         logoPremium: {
-            label: isUz ? "Logo + Firma uslubi" : "Logo + Visual Identity",
+            label: isUz ? "Logo + Firma Uslubi" : "Logo + Visual Identity",
+            description: isUz ? "Bir logomas — to'liq vizual tizim" : "Complete visual system",
             subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
-            description: isUz ? "To'liq vizual tizim va qo'llash qoidalari." : "Complete visual system and rules.",
             price: basePricesUSD.logoPremium,
             recommended: true,
-            timeline: isUz ? "⏱ 14–20 ish kuni" : "⏱ 14–20 business days",
+            timeline: isUz ? "⏱ 10 ish kuni" : "⏱ 10 business days",
             features: isUz ? [
-                "3 ta logo varianti — bittasini tanlaysiz",
+                "4 ta logo varianti — to'rttasidan birini tanlaysiz",
                 "Har bir variant uchun strategik izoh",
-                "Logo 4 ko'rinishda: Yotiq, Tik, Qora-oq va faqat belgisi",
-                "Ijtimoiy tarmoqlar uchun profil rasmlari",
-                "Barcha manba fayllar (PNG, SVG, AI)",
-                "Rasmiy ranglar to'plami va aniq kodlari",
-                "Rasmiy brend shriftlari va qo'llash qoidalari",
+                "Logo 4 xil ko'rinishda: Gorizontal, Vertikal, Qora-oq, Belgi alohida",
+                "Instagram va Telegram uchun profil rasmi",
+                "3 xil fayl formatida topshiriladi: PNG, SVG, AI",
+                "Rasmiy ranglar to'plami (rang kodlari bilan)",
+                "Rasmiy shrift — brendingizning yagona uslubi",
                 "15 ta aloqa nuqtasida vizual namoyish",
                 "3 ta tuzatish imkoniyati"
             ] : [
-                "3 concepts - pick one",
+                "4 concepts - pick one",
                 "Strategic reasoning",
                 "4 lockups",
                 "Source files (AI, SVG, PNG)",
@@ -305,10 +306,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "3 revisions"
             ],
             benefits: isUz ? [
-                { icon: "🏆", title: "Har joyda professional qiyofa", description: "Sayt, Instagram va vizitka — hammasi bir xil mukammal uslubda." },
-                { icon: "💼", title: "Xodimlar uchun tushunarli", description: "Aniq vizual qoidalar bo'lgach, jamoangiz brendni to'g'ri qo'llaydi." },
-                { icon: "📸", title: "Tayyor taqdimot", description: "15 ta nuqtada brendingizni vizual ko'rasiz — investorlarga ko'rsatishga tayyor." },
-                { icon: "📈", title: "Brend qiymati oshadi", description: "Yaxlit va izchil ko'rinish professional biznesning asosiy belgisidir." }
+                { icon: "🏆", title: "Professional qiyofa", description: "Sayt, Instagram, vizitka — hammasi bir xil professional uslubda." },
+                { icon: "💼", title: "Tushunarli qoidalar", description: "Aniq ranglar va shrift bo'lgach, xodimlaringiz ham to'g'ri ishlatadi." },
+                { icon: "📸", title: "Vizual kafolat", description: "15 ta muhim joyda brendingiz qanday ko'rinishi oldindan aniq bo'ladi." },
+                { icon: "📈", title: "Brend qiymati", description: "Izchil ko'rinish — professional biznesning belgisi. Mijozlar ko'proq ishonadi." }
             ] : [
                 { icon: "🏆", title: "Consistent look", description: "Website, social and print match." },
                 { icon: "💼", title: "Easy for team", description: "Clear rules for everyone." },
@@ -318,37 +319,39 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         logoVIP: {
             label: isUz ? "Logo + Stil + Brandbook" : "Logo + Style + Brandbook",
-            subDescription: isUz ? "Hamma narsani bir marta to'g'ri qilmoqchilar uchun" : "For those doing it right once",
-            description: isUz ? "Brendingizning to'liq 'konstitutsiyasi'." : "Full 'constitution' of your brand.",
+            description: isUz ? "Hamma narsani bir marta to'g'ri qiling" : "Do it once, do it right",
+            subDescription: isUz ? "Jiddiy investitsiya qiladiganlar uchun" : "For those doing it right once",
             price: basePricesUSD.logoVIP,
-            timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
+            timeline: isUz ? "⏱ 15–20 ish kuni" : "⏱ 15–20 business days",
             features: isUz ? [
-                "3 ta logo varianti + chuqur strategik tahlil",
-                "Logo 4 ko'rinishda: Yotiq, Tik, Qora-oq va faqat belgisi",
-                "Ijtimoiy tarmoqlar uchun profil rasmlari",
-                "Barcha manba fayllar (PNG, SVG, AI)",
+                "5 ta logo varianti — beshtasidan birini tanlaysiz",
+                "Har bir variant uchun chuqur strategik izoh",
+                "Logo 4 xil ko'rinishda + Ijtimoiy tarmoqlar uchun profil rasmi",
+                "3 xil fayl formatida topshiriladi: PNG, SVG, AI",
                 "Rasmiy ranglar va shriftlar tizimi",
-                "To'liq Brandbook (30-50 sahifa)",
-                "25 ta aloqa nuqtasida professional vizual",
-                "Logoning to'liq mulk huquqi sertifikati",
+                "Brandbook — to'liq qo'llanma (qoidalar, fonga qo'yish, o'lchamlar)",
+                "25 ta aloqa nuqtasida professional vizual namoyish",
+                "Logoning to'liq mulkchilik huquqi sertifikati",
                 "Cheksiz tuzatish (30 kun ichida)"
             ] : [
-                "3 concepts + deep strategy",
+                "5 concepts - pick one",
+                "Deep strategic reasoning",
                 "4 lockups + social pics",
-                "Source files + Color/Font systems",
-                "Full Brandbook (30-50 pages)",
+                "Source files (AI, SVG, PNG)",
+                "Official color & font systems",
+                "Full Brandbook (guidelines)",
                 "Visuals on 25 touchpoints",
-                "Unlimited revisions (30 days)",
-                "Full ownership certificate"
+                "Full ownership certificate",
+                "Unlimited revisions (30 days)"
             ],
             benefits: isUz ? [
-                { icon: "📖", title: "Mukammal qo'llanma", description: "Bu kitob bilan istalgan dizayner brendingizni to'g'ri davom ettira oladi." },
-                { icon: "🔒", title: "Yillar o'tsa ham o'zgarmas", description: "Brendingiz 10 yildan keyin ham bugungidek kuchli ko'rinadi." },
-                { icon: "🌍", title: "Xalqaro standart", description: "Investorlar sizni jiddiy, professional kompaniya deb bilishadi." },
-                { icon: "💎", title: "Oqilona sarmoya", description: "Bu biznesingizga yillar davomida foyda keltiradigan investitsiya." }
+                { icon: "📖", title: "Mukammal natija", description: "Istalgan dizayner qo'llanmani o'qib brendingizni to'g'ri ishlatadi." },
+                { icon: "🔒", title: "Abadiy sifat", description: "Hamma qoidalar yozilgan — brendingiz 10 yildan keyin ham bir xil kuchli ko'rinadi." },
+                { icon: "🌍", title: "Xalqaro standart", description: "Investor yoki xorijiy mijoz ko'rsa — jiddiy kompaniya ekanini his qiladi." },
+                { icon: "💎", title: "Oqilona sarmoya", description: "Har yili rebrending qilish o'rniga — bir marta to'g'ri qilingan investitsiya." }
             ] : [
-                { icon: "📖", title: "Perfect guide", description: "Anyone can use it to maintain consistency." },
-                { icon: "🔒", title: "Built to last", description: "Stays strong for 10+ years." },
+                { icon: "📖", title: "Perfect result", description: "Anyone can use it to maintain consistency." },
+                { icon: "🔒", title: "Built to last", description: "Your brand stays strong for 10+ years." },
                 { icon: "🌍", title: "Global standard", description: "Investors see a professional company." },
                 { icon: "💎", title: "One-time investment", description: "Done correctly for the long term." }
             ]

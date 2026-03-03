@@ -229,7 +229,7 @@
         },
         {
           "title": "2. Hamma uchun yoqishga urinish",
-          "description": "Hamma uchun bo'lishga harakat qilgan brend oxir-oqibat hech kim uchun bo'lmay qoladi. Aholining barcha qatlamlariga birdek yoqishga urinish brendingizni zaiflashtiradi.",
+          "description": "Hamma uchun bo'lishga harakat qilgan brend oxir-oqibat hech kim uchun bo'lmay qoladi. Aholining balla qatlamlariga birdek yoqishga urinish brendingizni zaiflashtiradi.",
           "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilab oling. 'Ideal mijoz'ingiz portretini yarating va marketing harakatlaringizni aynan unga qarating."
         },
         {
@@ -283,7 +283,7 @@
         "answer": "Biz har bir logotipni noldan, strategiya va bozor tahlili asosida yaratamiz. $780 lik 'Standart' paketimizga nafaqat logotip, balki uning 4 xil ko'rinishi, barcha manba fayllar va 8 ta aloqa nuqtasida logoning vizual namoyishi kiradi. Bu shunchaki rasm emas, biznes uchun tayyor vizual vositadir."
       },
       {
-        "question": "Patent tekshiruvi qanday amalga oshiriladi?",
+        "question": "Patent tekshiruvi qanday amalga oshirilari?",
         "answer": "Ayniqsa 'Naming VIP' tarifimizda biz nomni nafaqat O'zbekiston, balki xalqaro (WIPO) bazalarda tekshiramiz. Bu sizning kelajakda boshqa brendlar bilan huquqiy muammolarga duch kelmasligingizni kafolatlaydi va nomni patentga topshirish xizmatini ham o'z ichiga oladi."
       },
       {
@@ -530,7 +530,7 @@
     "section1_p2": "Biz neymingga eng muhim brending elementi sifatida yondashamiz. Bu tasodifiy g'oyalar to'plami emas, balki har bir so'z ahamiyatga ega bo'lgan puxta o'ylangan ishdir.",
     "section2_title": "Har bir kuchli nom g'oyadan boshlanadi",
     "section2_p1": "Nom qidirishdan oldin biz asosiy savolni beramiz: bu brend nima haqida? U qanday tuyg'ular va obrazlarni uyg'otishi kerak? Shuning uchun biz mahsulotni, uning auditoriyasini va muhitini diqqat bilan tahlil qilamiz, ideal nomni topish uchun semantik yo'nalishlarni aniqlaymiz.",
-    "section2_p2": "U emotsiya, metafora, madaniy kod, professional til yoki hatto so'z o'yini asosida qurilishi mumkin. Asosiysi — u ishlashi, mohiyatni yetkazishi va brendning esda qolishiga yordam berishi kerak.",
+    "section2_p2": "U emotsiya, metaphor, madaniy kod, professional til yoki hatto so'z o'yini asosida qurilishi mumkin. Asosiysi — u ishlashi, mohiyatni yetkazishi va brendning esda qolishiga yordam berishi kerak.",
     "process_title": "Nomni qanday yaratamiz?",
     "process_subtitle": "Agentligimizda neymingni ishlab chiqish — har bir bosqich muhim bo'lgan aniq jarayon:",
     "process_steps": [
