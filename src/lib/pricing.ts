@@ -1,3 +1,4 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -94,20 +95,22 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         namingVIP: {
             label: "Naming VIP",
-            description: "",
-            subDescription: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
+            description: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
+            subDescription: isUz ? "Jiddiy investitsiya qiladiganlar uchun" : "For serious investors",
             price: basePricesUSD.namingVIP,
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             features: isUz ? [
                 "10 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun to'liq strategik izoh",
                 "Talaffuz, esda qolish va jarang tekshiruvi",
-                "Domen, Instagram va Telegram username tekshiruvi",
+                "Domen bo'shligini tekshirish (.com, .uz)",
+                "Instagram va Telegram username tekshiruvi",
                 "O'zbekistonda va xalqaro bazalarda patent tekshiruvi",
-                "Raqobat tahlili va eng farqli pozitsiya aniqlanadi",
+                "Raqobatchilar tahlili va farqli pozitsiya",
                 "Xalqaro tillarda noqulay ma'no bermaslik testi",
-                "3 ta qisqa shior (Nike — Just Do It kabi)",
-                "Patentga topshirish xizmati (bojlari alohida)",
+                "Nomning hissiy ma'nosi va taassuroti",
+                "3 ta qisqa shior varianti (Nike — Just Do It kabi)",
+                "Patentga topshirish xizmati (davlat bojlari alohida)",
                 "Mulk huquqini tasdiqlovchi sertifikat",
                 "30 daqiqalik shaxsiy konsultatsiya",
                 "Cheksiz tuzatish (30 kun ichida)"
@@ -117,9 +120,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Domain & Social handle check",
                 "Local & International patent check",
                 "Competitor analysis & positioning",
+                "Linguistic check for global markets",
                 "3 slogans & Ownership certificate",
-                "Patent filing & Strategy session",
-                "Unlimited revisions (30 days)"
+                "Patent filing service",
+                "Strategy session & Unlimited revisions"
             ],
             benefits: isUz ? [
                 { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda tekshiriladi — dunyo bo'ylab ishlaydi, hech qayerda noqulay ma'no bermaydi." },
@@ -135,8 +139,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         namingPremium: {
             label: "Naming Premium",
-            description: "",
-            subDescription: isUz ? "To'g'ri nom, to'g'ri asos" : "Right name, right foundation",
+            description: isUz ? "To'g'ri nom, to'g'ri asos" : "Right name, right foundation",
+            subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
             price: basePricesUSD.namingPremium,
             recommended: true,
             timeline: isUz ? "⏱ 14–20 ish kuni" : "⏱ 14–20 business days",
@@ -172,8 +176,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         namingStandard: {
             label: "Naming Standart",
-            description: "",
-            subDescription: isUz ? "Tez va ishonchli start" : "Fast and reliable start",
+            description: isUz ? "Tez va ishonchli start" : "Fast and reliable start",
+            subDescription: isUz ? "Endigina boshlamoqchi bo'lganlar uchun" : "For those just starting out",
             price: basePricesUSD.namingStandard,
             timeline: isUz ? "⏱ 7–10 ish kuni" : "⏱ 7–10 business days",
             features: isUz ? [

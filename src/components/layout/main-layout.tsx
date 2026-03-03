@@ -111,7 +111,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
     }, [handleOpenModal, reportError]);
 
     return (
-        <div className="flex min-h-screen flex-col bg-secondary/50">
+        <div className="flex min-h-screen flex-col bg-secondary/50" suppressHydrationWarning>
             <Suspense fallback={null}>
                 <AnalyticsTracker />
             </Suspense>
