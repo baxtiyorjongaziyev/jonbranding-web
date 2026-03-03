@@ -232,7 +232,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         logoPremium: {
             label: isUz ? "Logo + Firma Uslubi" : "Logo + Visual Identity",
-            description: isUz ? "Brendingizga mos firma uslubi vizual aydentika ishlab chiqish" : "Development of visual identity consistent with your brand",
+            description: isUz ? "Brendingizga mos firma uslubini (Vizual aydentika) ishlab chiqish" : "Development of visual identity consistent with your brand",
             subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
             price: basePricesUSD.logoPremium,
             recommended: true,
@@ -275,7 +275,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Brandbook — brenddan foydalanish bo'yicha to'liq qo'llanma",
                 "Logotip animatsiyasi (Motion design)",
                 "Telegram stikerlar to'plami (10 ta)",
-                "25 ta aloqa nuqtasi (mobil ilova, billbord, merch, ofis dizayni, ko'rgazma stendi va h.k.)",
+                "25 ta aloqa nuqtasi (mobil ilova, billbord, merch, ofis dizayni, ko'rgazma stendi, motion-reklama va h.k.)",
                 "Logoning to'liq mulkchilik huquqi sertifikati",
                 "Cheksiz tuzatish (30 kun ichida)"
             ] : ["5 concepts", "Deep strategy", "4 lockups", "3 formats", "Color palette", "Official fonts", "Full Brandbook", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Unlimited revisions"],
@@ -293,7 +293,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         packaging: { 
             label: isUz ? "Qadoq dizayni" : "Packaging Design", 
-            description: isUz ? "Mahsulotingizning javondagi asosiy quroli." : "Your product's main weapon on the shelf.",
+            description: isUz ? "Mahsulotingizning javondagi asosiy qurali." : "Your product's main weapon on the shelf.",
             price: basePricesUSD.packaging, 
             timeline: isUz ? "⏱ 10-15 ish kuni" : "⏱ 10-15 business days",
             features: isUz ? ["Vizual konsepsiya", "Qadoqni 3D namoyish qilish", "Chop etishga tayyor fayllar", "Materiallar bo'yicha tavsiyalar"] : ["Visual concept", "3D Visualization", "Print files", "Material tips"],

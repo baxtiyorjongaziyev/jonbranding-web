@@ -64,7 +64,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
         <Suspense fallback={<div className="py-20 text-center"><Skeleton className="h-[800px] w-full max-w-6xl mx-auto rounded-3xl" /></div>}>
           <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
         </Suspense>
-      ) : <div className="h-20" />}
+      ) : <div className="h-40" />}
 
       {/* 5. Comparison - Step 2 */}
       {step >= 2 && (
