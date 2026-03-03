@@ -47,10 +47,10 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border flex flex-col rounded-[1.2rem] mt-2",
                 selected
                     ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_40px_rgba(251,191,36,0.4)] scale-[1.02]' : 'border-primary bg-white shadow-[0_0_20px_rgba(37,99,235,0.15)] scale-[1.02]')
-                    : (isVip ? 'bg-blue-950 border-blue-900/50 hover:border-amber-400/50' : 
-                       isPremium ? 'bg-gradient-to-br from-white to-blue-50/20 border-slate-100 hover:border-primary/20' : 
-                       'bg-white border-slate-100 hover:border-primary/20 hover:shadow-md'),
-                isPremium && !selected && "animate-pulse-subtle"
+                    : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : 
+                       isPremium ? "bg-white border-slate-100 hover:border-primary/20" : 
+                       "bg-white border-slate-100 hover:border-primary/20 hover:shadow-md"),
+                isPremium && selected && !isVip && "ring-2 ring-primary/20"
             )}
             suppressHydrationWarning
         >
@@ -112,17 +112,17 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     </div>
                 </div>
                 
-                <div className="flex items-center gap-2 mt-1 flex-wrap">
+                <div className="flex items-center gap-3 mt-1 flex-wrap">
                     <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
                         {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
                     </span>
                     {subDescription && (
-                        <>
-                            <div className={cn("h-6 w-px mx-1", isVip ? "bg-white/20" : "bg-slate-200")} />
+                        <div className="flex items-center gap-3">
+                            <div className={cn("h-6 w-px", isVip ? "bg-white/20" : "bg-slate-200")} />
                             <span className={cn("text-sm font-bold leading-tight", isVip ? "text-slate-300" : "text-slate-500")}>
                                 {subDescription}
                             </span>
-                        </>
+                        </div>
                     )}
                 </div>
             </CardHeader>
