@@ -1,6 +1,7 @@
+
 'use client';
 
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect, FC, useMemo } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,7 +13,7 @@ import { getServiceDetails, calculatePackagePrice, type SelectedServices, format
 import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, TrendingUp, Zap, Gift, Plus } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -28,9 +29,32 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     urgency: Flame, nda: ShieldCheck
 };
 
-const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { id: string, onSelect: () => void, selected: boolean, lang: any, dictionary: any, currency: any }) => {
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            type: 'spring',
+            stiffness: 100,
+            damping: 15
+        }
+    }
+};
+
+const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, currency }: { id: string, onSelect: () => void, selected: boolean, lang: any, dictionary: any, currency: any }) => {
     const [activeTab, setActiveTab] = useState<'included' | 'benefits'>('included');
-    const serviceDetails = getServiceDetails(lang) as any;
+    const serviceDetails = useMemo(() => getServiceDetails(lang) as any, [lang]);
     const detail = serviceDetails[id];
     if (!detail) return null;
 
@@ -41,196 +65,203 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
-        <Card
-            onClick={onSelect}
-            className={cn(
-                "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border flex flex-col rounded-[1.2rem] mt-2",
-                selected
-                    ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_40px_rgba(251,191,36,0.4)] scale-[1.02]' : 'border-primary bg-white shadow-[0_0_20px_rgba(37,99,235,0.15)] scale-[1.02]')
-                    : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : 
-                       isPremium ? "bg-white border-slate-100 hover:border-primary/20" : 
-                       "bg-white border-slate-100 hover:border-primary/20 hover:shadow-md"),
-                isPremium && selected && !isVip && "ring-2 ring-primary/20"
-            )}
-            suppressHydrationWarning
-        >
-            {/* VIP Shimmer & Pulse effects */}
-            {isVip && selected && (
-                <>
-                    <div className="absolute inset-0 rounded-[1.2rem] overflow-hidden pointer-events-none">
-                        <motion.div
-                            animate={{ x: ['-100%', '200%'] }}
-                            transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
-                        />
-                    </div>
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: [0.3, 0.6, 0.3] }}
-                        transition={{ repeat: Infinity, duration: 2 }}
-                        className="absolute -inset-1 border-2 border-amber-400/30 rounded-[1.4rem] blur-sm pointer-events-none"
-                    />
-                </>
-            )}
-
-            {/* Premium Soft Pulse */}
-            {isPremium && selected && !isVip && (
-                <motion.div 
-                    animate={{ boxShadow: ['0 0 0px rgba(37,99,235,0)', '0 0 20px rgba(37,99,235,0.2)', '0 0 0px rgba(37,99,235,0)'] }}
-                    transition={{ repeat: Infinity, duration: 2.5 }}
-                    className="absolute inset-0 rounded-[1.2rem] pointer-events-none"
-                />
-            )}
-
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                {recommended && !isVip && (
-                    <Badge className="bg-primary text-white text-[12px] font-black px-6 py-1.5 rounded-full border-none uppercase tracking-widest shadow-xl animate-breathing">
-                        {dictionary.recommended}
-                    </Badge>
+        <motion.div variants={itemVariants} className="h-full">
+            <Card
+                onClick={onSelect}
+                className={cn(
+                    "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border flex flex-col rounded-[1.2rem] bg-white",
+                    selected
+                        ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_40px_rgba(251,191,36,0.4)] scale-[1.02]' : 'border-primary shadow-[0_0_20px_rgba(37,99,235,0.15)] scale-[1.02]')
+                        : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : 
+                           "border-slate-100 hover:border-primary/20 hover:shadow-md")
                 )}
-                {isVip && (
-                    <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[12px] font-black px-8 py-1.5 rounded-full border-none uppercase flex items-center gap-2 shadow-[0_4px_20px_rgba(251,191,36,0.5)] whitespace-nowrap">
-                        <Crown className="w-4 h-4" /> VIP
-                    </Badge>
-                )}
-            </div>
-
-            <CardHeader className="p-5 pb-3">
-                <div className="flex items-center gap-3 mb-2">
-                    <div className={cn(
-                        "w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 flex-shrink-0",
-                        selected 
-                            ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-md") 
-                            : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/20" : "bg-secondary text-slate-600")
-                    )}>
-                        <Icon className="w-7 h-7" />
-                    </div>
-                    <div className="min-w-0">
-                        <CardTitle className={cn("text-xl font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
-                            {label}
-                        </CardTitle>
-                    </div>
-                </div>
-                
-                <div className="flex items-center gap-3 mt-1 flex-wrap">
-                    <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
-                        {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
-                    </span>
-                    {subDescription && (
-                        <div className="flex items-center gap-3">
-                            <div className={cn("h-6 w-px", isVip ? "bg-white/20" : "bg-slate-200")} />
-                            <span className={cn("text-sm font-bold leading-tight", isVip ? "text-slate-300" : "text-slate-500")}>
-                                {subDescription}
-                            </span>
+                suppressHydrationWarning
+            >
+                {isVip && selected && (
+                    <>
+                        <div className="absolute inset-0 rounded-[1.2rem] overflow-hidden pointer-events-none">
+                            <motion.div
+                                animate={{ x: ['-100%', '200%'] }}
+                                transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
+                            />
                         </div>
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: [0.3, 0.6, 0.3] }}
+                            transition={{ repeat: Infinity, duration: 2 }}
+                            className="absolute -inset-1 border-2 border-amber-400/30 rounded-[1.4rem] blur-sm pointer-events-none"
+                        />
+                    </>
+                )}
+
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+                    {recommended && !isVip && (
+                        <Badge className="bg-primary text-white text-[12px] font-black px-6 py-1.5 rounded-full border-none uppercase tracking-widest shadow-xl animate-breathing">
+                            {dictionary.recommended}
+                        </Badge>
+                    )}
+                    {isVip && (
+                        <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[12px] font-black px-8 py-1.5 rounded-full border-none uppercase flex items-center gap-2 shadow-[0_4px_20px_rgba(251,191,36,0.5)] whitespace-nowrap">
+                            <Crown className="w-4 h-4" /> VIP
+                        </Badge>
                     )}
                 </div>
-            </CardHeader>
 
-            <CardContent className="px-5 pt-0 pb-5 flex-grow flex flex-col">
-                <div className="flex border-b border-slate-100 mb-4" onClick={(e) => e.stopPropagation()}>
-                    <button 
-                        onClick={() => setActiveTab('included')}
-                        className={cn(
-                            "flex-1 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all",
-                            activeTab === 'included' 
-                                ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
-                                : "text-slate-400"
-                        )}
-                    >
-                        {dictionary.tabs?.included || "Nima kiradi"}
-                    </button>
-                    <button 
-                        onClick={() => setActiveTab('benefits')}
-                        className={cn(
-                            "flex-1 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all",
-                            activeTab === 'benefits' 
-                                ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
-                                : "text-slate-400"
-                        )}
-                    >
-                        {dictionary.tabs?.benefits || "Nima olasiz"}
-                    </button>
-                </div>
-
-                {activeTab === 'included' ? (
-                    <div className="space-y-1.5 flex-grow animate-fade-in">
-                        <ul className="space-y-1.5">
-                            {(features || []).map((r: string, i: number) => (
-                                <li key={i} className="flex items-start gap-2.5">
-                                    <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
-                                        <CheckCircle className={cn("w-3.5 h-3.5", isVip ? "text-amber-400" : "text-primary")} />
-                                    </div>
-                                    <span className={cn("text-sm font-medium leading-relaxed", isVip ? "text-slate-300" : "text-slate-700")}>{r}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 gap-3 flex-grow animate-fade-in">
-                        {(benefits || []).map((b: any, i: number) => (
-                            <div 
-                                key={i} 
-                                className={cn(
-                                    "p-3 rounded-xl border flex items-center gap-4",
-                                    isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100"
-                                )}
-                            >
-                                <span className="text-xl shrink-0">{b.icon}</span>
-                                <div className="space-y-0.5 min-w-0">
-                                    <p className={cn("text-sm font-bold leading-tight truncate", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
-                                    <p className={cn("text-xs leading-snug text-slate-500 line-clamp-2", isVip && "text-slate-400")}>{b.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                <div className="mt-5 pt-4 border-t border-slate-100 space-y-4">
-                    <div className="flex items-center justify-between">
-                        {timeline && (
-                            <div className={cn("flex items-center gap-2 text-[11px] font-black uppercase tracking-widest", isVip ? "text-amber-400/60" : "text-slate-400")}>
-                                <Clock className="w-4 h-4" />
-                                <span>{timeline}</span>
-                            </div>
-                        )}
-                        {description && (
-                             <span className={cn("text-[11px] font-bold italic", isVip ? "text-amber-400/40" : "text-slate-400")}>
-                                {description}
-                            </span>
-                        )}
-                    </div>
-
-                    <Button
-                        variant={selected ? "default" : "outline"}
-                        className={cn(
-                            "w-full py-4 text-xs font-bold transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest",
+                <CardHeader className="p-5 pb-3">
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className={cn(
+                            "w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 flex-shrink-0",
                             selected 
-                                ? (isVip 
-                                    ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950 shadow-[0_4px_20px_rgba(251,191,36,0.4)]" 
-                                    : "border-none bg-primary text-white shadow-md") 
-                                : (isVip 
-                                    ? "bg-white/5 border-amber-400/20 text-amber-400 hover:bg-amber-400 hover:text-blue-950" 
-                                    : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
+                                ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-md") 
+                                : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/20" : "bg-secondary text-slate-600")
+                        )}>
+                            <Icon className="w-7 h-7" />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                            <CardTitle className={cn("text-xl font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
+                                {label}
+                            </CardTitle>
+                        </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-3 mt-1 flex-wrap">
+                        <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
+                            {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
+                        </span>
+                        {subDescription && (
+                            <div className="flex items-center gap-3 flex-1">
+                                <div className={cn("h-6 w-px", isVip ? "bg-white/20" : "bg-slate-200")} />
+                                <span className={cn("text-sm font-bold leading-tight", isVip ? "text-slate-300" : "text-slate-500")}>
+                                    {subDescription}
+                                </span>
+                            </div>
                         )}
-                        onClick={(e) => { e.stopPropagation(); onSelect(); }}
-                    >
-                        {selected ? dictionary.selected : dictionary.select}
-                    </Button>
-                </div>
-            </CardContent>
-        </Card>
+                    </div>
+                </CardHeader>
+
+                <CardContent className="px-5 pt-0 pb-5 flex-grow flex flex-col">
+                    <div className="flex border-b border-slate-100 mb-4" onClick={(e) => e.stopPropagation()}>
+                        <button 
+                            onClick={() => setActiveTab('included')}
+                            className={cn(
+                                "flex-1 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all",
+                                activeTab === 'included' 
+                                    ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
+                                    : "text-slate-400"
+                            )}
+                        >
+                            {dictionary.tabs?.included || "Nima kiradi"}
+                        </button>
+                        <button 
+                            onClick={() => setActiveTab('benefits')}
+                            className={cn(
+                                "flex-1 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all",
+                                activeTab === 'benefits' 
+                                    ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
+                                    : "text-slate-400"
+                            )}
+                        >
+                            {dictionary.tabs?.benefits || "Nima olasiz"}
+                        </button>
+                    </div>
+
+                    <div className="flex-grow min-h-[120px]">
+                        <AnimatePresence mode="wait">
+                            {activeTab === 'included' ? (
+                                <motion.div 
+                                    key="included"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
+                                    className="space-y-1.5"
+                                >
+                                    <ul className="space-y-1.5">
+                                        {(features || []).map((r: string, i: number) => (
+                                            <li key={i} className="flex items-start gap-2.5">
+                                                <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
+                                                    <CheckCircle className={cn("w-3.5 h-3.5", isVip ? "text-amber-400" : "text-primary")} />
+                                                </div>
+                                                <span className={cn("text-sm font-medium leading-relaxed", isVip ? "text-slate-300" : "text-slate-700")}>{r}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            ) : (
+                                <motion.div 
+                                    key="benefits"
+                                    initial={{ opacity: 0, x: 10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -10 }}
+                                    className="grid grid-cols-1 gap-3"
+                                >
+                                    {(benefits || []).map((b: any, i: number) => (
+                                        <div 
+                                            key={i} 
+                                            className={cn(
+                                                "p-3 rounded-xl border flex items-center gap-4",
+                                                isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100"
+                                            )}
+                                        >
+                                            <span className="text-xl shrink-0">{b.icon}</span>
+                                            <div className="space-y-0.5 min-w-0">
+                                                <p className={cn("text-sm font-bold leading-tight truncate", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
+                                                <p className={cn("text-xs leading-snug text-slate-500 line-clamp-2", isVip && "text-slate-400")}>{b.description}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    <div className="mt-5 pt-4 border-t border-slate-100 space-y-4">
+                        <div className="flex items-center justify-between">
+                            {timeline && (
+                                <div className={cn("flex items-center gap-2 text-[11px] font-black uppercase tracking-widest", isVip ? "text-amber-400/60" : "text-slate-400")}>
+                                    <Clock className="w-4 h-4" />
+                                    <span>{timeline}</span>
+                                </div>
+                            )}
+                            {description && (
+                                <span className={cn("text-[11px] font-bold italic", isVip ? "text-amber-400/40" : "text-slate-400")}>
+                                    {description}
+                                </span>
+                            )}
+                        </div>
+
+                        <Button
+                            variant={selected ? "default" : "outline"}
+                            className={cn(
+                                "w-full py-4 text-xs font-bold transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest",
+                                selected 
+                                    ? (isVip 
+                                        ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950 shadow-[0_4px_20px_rgba(251,191,36,0.4)]" 
+                                        : "border-none bg-primary text-white shadow-md") 
+                                    : (isVip 
+                                        ? "bg-white/5 border-amber-400/20 text-amber-400 hover:bg-amber-400 hover:text-blue-950" 
+                                        : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
+                            )}
+                            onClick={(e) => { e.stopPropagation(); onSelect(); }}
+                        >
+                            {selected ? dictionary.selected : dictionary.select}
+                        </Button>
+                    </div>
+                </CardContent>
+            </Card>
+        </motion.div>
     );
-};
+});
+ServiceCard.displayName = 'ServiceCard';
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
-    <div className="space-y-6">
+    <motion.div variants={itemVariants} className="space-y-6">
         <div className="flex items-center gap-4 px-1">
             <div className="h-6 w-1.5 bg-primary rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
             <h3 className="text-base sm:text-lg font-black text-dark-blue tracking-tight uppercase">{title}</h3>
         </div>
         <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>{children}</div>
-    </div>
+    </motion.div>
 );
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
@@ -269,39 +300,66 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     return (
         <section id="package-builder" className="py-16 bg-white overflow-hidden" suppressHydrationWarning>
-            <div className="container mx-auto px-4 max-w-7xl">
-                <div className="max-w-4xl mx-auto mb-14 text-center space-y-3">
+            <motion.div 
+                className="container mx-auto px-4 max-w-7xl"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+            >
+                <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-14 text-center space-y-3">
                     <Badge className="bg-primary/10 text-primary border-none px-6 py-1.5 rounded-full font-black text-xs uppercase tracking-[0.3em]">
                         LOYIHA ME'MORI
                     </Badge>
                     <h2 className="text-3xl sm:text-4xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
                     <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
-                </div>
+                </motion.div>
 
                 <div className="space-y-16">
-                    <ServiceGroup title={translations.categories.tripwire}>{['namingCheck', 'audit', 'consultation'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
-                    <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">{['strategy', 'commStrategy'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
-                    <ServiceGroup title={translations.categories.naming}>{['namingVIP', 'namingPremium', 'namingStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
-                    <ServiceGroup title={translations.categories.identity}>{['logoVIP', 'logoPremium', 'logoStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
+                    <ServiceGroup title={translations.categories.tripwire}>
+                        {['namingCheck', 'audit', 'consultation'].map(id => (
+                            <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
+
+                    <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">
+                        {['strategy', 'commStrategy'].map(id => (
+                            <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
+
+                    <ServiceGroup title={translations.categories.naming}>
+                        {['namingVIP', 'namingPremium', 'namingStandard'].map(id => (
+                            <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
+
+                    <ServiceGroup title={translations.categories.identity}>
+                        {['logoVIP', 'logoPremium', 'logoStandard'].map(id => (
+                            <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
                     
-                    <Accordion type="single" collapsible className="w-full">
-                        <AccordionItem value="more" className="border-none">
-                            <AccordionTrigger className="text-sm font-black text-dark-blue justify-center gap-6 hover:no-underline py-6 bg-slate-50 rounded-[2rem] border border-dashed border-slate-200 transition-all hover:bg-slate-100 group">
-                                {translations.categories.more_services}
-                                <ChevronsDown className="w-5 h-5 text-primary animate-bounce" />
-                            </AccordionTrigger>
-                            <AccordionContent className="pt-10 space-y-16">
-                                <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
-                                    {['packaging', 'smm', 'urgency', 'nda'].map(id => (
-                                        <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
-                                    ))}
-                                </ServiceGroup>
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
+                    <motion.div variants={itemVariants} className="w-full">
+                        <Accordion type="single" collapsible className="w-full">
+                            <AccordionItem value="more" className="border-none">
+                                <AccordionTrigger className="text-sm font-black text-dark-blue justify-center gap-6 hover:no-underline py-6 bg-slate-50 rounded-[2rem] border border-dashed border-slate-200 transition-all hover:bg-slate-100 group">
+                                    {translations.categories.more_services}
+                                    <ChevronsDown className="w-5 h-5 text-primary animate-bounce" />
+                                </AccordionTrigger>
+                                <AccordionContent className="pt-10">
+                                    <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
+                                        {['packaging', 'smm', 'urgency', 'nda'].map(id => (
+                                            <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                                        ))}
+                                    </ServiceGroup>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </motion.div>
                 </div>
 
-                <div className="mt-20 max-w-6xl mx-auto">
+                <motion.div variants={itemVariants} className="mt-20 max-w-6xl mx-auto">
                     <div id="your-package-card" className="rounded-[2.5rem] bg-white shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-slate-100">
                         <div className="lg:w-1/2 bg-dark-blue p-10 sm:p-14 text-white relative">
                             <div className="absolute top-0 right-0 -mt-24 -mr-24 w-96 h-96 bg-primary/30 rounded-full blur-[120px]" />
@@ -429,8 +487,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </Button>
                         </div>
                     </div>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 };

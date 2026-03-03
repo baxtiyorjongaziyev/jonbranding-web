@@ -1,3 +1,4 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -269,7 +270,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             benefits: isUz ? [
                 { icon: "🎯", title: "Hamma joyga tayyor", description: "Sayt, Instagram, chop etish — logongiz barcha formatda tayyor." },
                 { icon: "✅", title: "Ishonch uyg'otadi", description: "Professional ko'rinish — mijozlar birinchi qarashda ishonch his qiladi." },
-                { icon: "👁️", title: "Real ko'rinish", description: "8 ta joyda logongiz qanday ko'rinishini vizual ko'rasiz." },
+                { icon: "👁️", title: "Real ko'rinish", description: "8 ta joyda logongiz qanday ko'rinishini ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha fayllar sizga topshiriladi. Hech kimga qarab o'tirmaysiz." }
             ] : [
                 { icon: "🎯", title: "Works everywhere", description: "Ready for web, social and print." },
@@ -308,7 +309,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 { icon: "🏆", title: "Professional qiyofa", description: "Sayt, Instagram, vizitka — hammasi bir xil professional uslubda." },
                 { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq qoidalar bo'lgach, hech kim rang va shriftda adashmaydi." },
                 { icon: "📸", title: "15 ta joyda vizual kafolat", description: "Har bir muhim joyda brendingiz qanday ko'rinishi aniq bo'ladi." },
-                { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznes belgisi. Mijozlar ko'proq ishonadi." }
+                { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznes belgisi." }
             ] : [
                 { icon: "🏆", title: "Consistent look", description: "Website, social and print match." },
                 { icon: "💼", title: "Easy for team", description: "Clear rules for everyone to follow." },
@@ -390,7 +391,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ]
         },
         urgency: { 
-            label: isUz ? "Shoshilinch loyiha (+50%)" : "Urgent Project (+50%)", 
+            label: isUz ? "Shoshilinch loyiha" : "Urgent Project", 
             description: isUz ? "Loyihangizni navbatsiz va tezkor tayyorlab berish." : "Expedited project delivery ahead of queue.",
             price: 0,
             timeline: isUz ? "⏱ 2-3 barobar tezroq" : "⏱ 2-3x faster",
@@ -404,7 +405,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ]
         },
         nda: { 
-            label: isUz ? "NDA — Maxfiylik (+50%)" : "NDA — Confidentiality (+50%)", 
+            label: isUz ? "NDA — Maxfiylik" : "NDA — Confidentiality", 
             description: isUz ? "Loyihangiz ma'lumotlari sir saqlanishini kafolatlash." : "Guaranteed confidentiality of your project data.",
             price: 0,
             timeline: isUz ? "⏱ Darhol kuchga kiradi" : "⏱ Immediate effect",
