@@ -142,9 +142,9 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "O'zbekistonda va xalqaro bazalarda patent tekshiruvi",
                 "Raqobatchilar nomlari tahlili — eng farqli pozitsiya",
                 "Nom boshqa tillarda noqulay ma'no bermasligini tekshirish",
-                "Nomning hissiy ma'nosi va mijozga ta'siri",
+                "Nomning hissiy ma'nosi — mijoz ko'nglidagi taassurot",
                 "3 ta qisqa shior varianti (masalan: Nike — 'Just Do It')",
-                "Patentga rasman topshirish xizmati (bojlar alohida)",
+                "Patentga topshirish xizmati (davlat bojlari alohida)",
                 "Nom sizning mulkingiz ekanligini tasdiqlovchi sertifikat",
                 "30 daqiqalik shaxsiy konsultatsiya",
                 "Cheksiz tuzatish (30 kun ichida)"
@@ -250,16 +250,16 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.logoStandard,
             timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
             features: isUz ? [
-                "3 ta logo varianti — bittasini tanlaysiz",
-                "Har bir variant uchun strategik izoh",
-                "Logo 4 xil ko'rinishda (Grizontal, Vertikal, Qora-oq, Belgi)",
+                "3 ta logo varianti — uchtalasidan birini tanlaysiz",
+                "Har bir variant uchun izoh beriladi",
+                "Logo 4 xil ko'rinishda (Gorizontal, Vertikal, Oq-qora, Belgi)",
                 "Instagram va Telegram uchun profil rasmi",
                 "3 xil fayl formatida (PNG, SVG, AI)",
-                "8 ta aloqa nuqtasi (vizitka, profil rasmi, sayt, qadoq, peshlavha, xodim formasi, banner, email imzo)",
+                "8 ta aloqa nuqtasi (vizitka, profil, sayt, qadoq, peshlavha, forma, banner, email imzo)",
                 "2 ta tuzatish imkoniyati"
             ] : [
                 "3 concepts - pick one",
-                "Strategic reasoning",
+                "Design reasoning",
                 "4 lockups (Horizontal, Vertical, B&W, Icon)",
                 "Social profile pics",
                 "Source files (AI, SVG, PNG)",
@@ -269,7 +269,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             benefits: isUz ? [
                 { icon: "🎯", title: "Hamma joyga tayyor", description: "Sayt, Instagram, chop etish — logongiz barcha formatda tayyor." },
                 { icon: "✅", title: "Ishonch uyg'otadi", description: "Professional ko'rinish — mijozlar birinchi qarashda ishonch his qiladi." },
-                { icon: "👁️", title: "Real ko'rinish", description: "8 ta muhim joyda logongiz qanday ko'rinishini vizual ko'rasiz." },
+                { icon: "👁️", title: "Real ko'rinish", description: "8 ta joyda logongiz qanday ko'rinishini vizual ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha fayllar sizga topshiriladi. Hech kimga qarab o'tirmaysiz." }
             ] : [
                 { icon: "🎯", title: "Works everywhere", description: "Ready for web, social and print." },
@@ -287,7 +287,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 10 ish kuni" : "⏱ 10 business days",
             features: isUz ? [
                 "4 ta logo varianti — to'rttasidan birini tanlaysiz",
-                "Har bir variant uchun strategik izoh",
+                "Har bir variant uchun izoh beriladi",
                 "Logo 4 xil ko'rinishda + Profil rasmlari",
                 "3 xil fayl formatida (PNG, SVG, AI)",
                 "Rasmiy ranglar to'plami (aniq kodlari bilan)",
@@ -327,7 +327,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Har bir variant uchun chuqur strategik izoh",
                 "Logo 4 xil ko'rinishda + Profil rasmlari",
                 "3 xil fayl formatida (PNG, SVG, AI)",
-                "Rasmiy ranglar va shriftlar tizimi",
+                "Rasmiy ranglar to'plami — 3–5 ta rang va aniq kodlar",
+                "Rasmiy shrift — brendingizning maxsus shriftlari",
                 "Brandbook — brenddan foydalanish bo'yicha to'liq qo'llanma",
                 "Logotip animatsiyasi (Motion design)",
                 "Telegram stikerlar to'plami (10 ta)",
@@ -339,7 +340,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Deep strategic reasoning",
                 "4 lockups + social pics",
                 "Source files (AI, SVG, PNG)",
-                "Official color & font systems",
+                "Official color palette & codes",
+                "Official brand fonts",
                 "Full Brandbook (usage guidelines)",
                 "Logo animation (Motion Design)",
                 "Telegram stickers (10 pcs)",
