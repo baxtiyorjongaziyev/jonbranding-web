@@ -68,28 +68,28 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
             <CardHeader className="p-5 pb-3">
                 <div className="flex items-center gap-3 mb-2">
                     <div className={cn(
-                        "w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 flex-shrink-0",
+                        "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 flex-shrink-0",
                         selected 
                             ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-md") 
                             : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/20" : "bg-secondary text-slate-600")
                     )}>
-                        <Icon className="w-5 h-5" />
+                        <Icon className="w-6 h-6" />
                     </div>
                     <div className="min-w-0">
-                        <CardTitle className={cn("text-base font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
+                        <CardTitle className={cn("text-xl font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
                             {label}
                         </CardTitle>
                     </div>
                 </div>
                 
                 <div className="flex items-center gap-2 mt-1">
-                    <span className={cn("text-lg font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
+                    <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
                         {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
                     </span>
                     {description && (
                         <>
-                            <div className={cn("h-4 w-px mx-1", isVip ? "bg-white/20" : "bg-slate-200")} />
-                            <span className={cn("text-xs font-bold leading-tight line-clamp-1", isVip ? "text-slate-400" : "text-slate-500")}>
+                            <div className={cn("h-5 w-px mx-1", isVip ? "bg-white/20" : "bg-slate-300")} />
+                            <span className={cn("text-sm font-bold leading-tight line-clamp-1", isVip ? "text-slate-400" : "text-slate-500")}>
                                 {description}
                             </span>
                         </>
@@ -124,12 +124,12 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 </div>
 
                 {activeTab === 'included' ? (
-                    <div className="space-y-2 flex-grow animate-fade-in">
-                        <ul className="space-y-2">
+                    <div className="space-y-1.5 flex-grow animate-fade-in">
+                        <ul className="space-y-1.5">
                             {(features || []).map((r: string, i: number) => (
                                 <li key={i} className="flex items-start gap-2.5">
                                     <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
-                                        <CheckCircle className={cn("w-3 h-3", isVip ? "text-amber-400" : "text-primary")} />
+                                        <CheckCircle className={cn("w-3.5 h-3.5", isVip ? "text-amber-400" : "text-primary")} />
                                     </div>
                                     <span className={cn("text-sm font-medium leading-relaxed", isVip ? "text-slate-300" : "text-slate-700")}>{r}</span>
                                 </li>
@@ -159,7 +159,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 <div className="mt-5 pt-4 border-t border-slate-100 space-y-4">
                     <div className="flex items-center justify-between">
                         {timeline && (
-                            <div className={cn("flex items-center gap-2 text-xs font-black uppercase tracking-widest", isVip ? "text-amber-400/60" : "text-slate-400")}>
+                            <div className={cn("flex items-center gap-2 text-[11px] font-black uppercase tracking-widest", isVip ? "text-amber-400/60" : "text-slate-400")}>
                                 <Clock className="w-4 h-4" />
                                 <span>{timeline}</span>
                             </div>
