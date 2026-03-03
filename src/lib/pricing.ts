@@ -1,3 +1,4 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -167,7 +168,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ] : ["6 concepts", "Strategy", "Phonetics", "Domain/Social check", "Local patent check", "Competitor analysis", "Emotional impact", "3 revisions"],
             benefits: isUz ? [
                 { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kimdir nomingizni oldin patent qilmaganligini tekshiramiz." },
-                { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, unikal nom topamiz." },
+                { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, unikal nom find qilamiz." },
                 { icon: "❤️", title: "Mijozlar yaxshi ko'radi", description: "Nomga his-tuyg'u yuklanadi — mijozlar eslab qoladi." },
                 { icon: "📈", title: "Brendingiz kuchli boshlanadi", description: "Kuchli nom marketing xarajatlarini sezilarli kamaytiradi." }
             ] : [
@@ -232,7 +233,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         logoPremium: {
             label: isUz ? "Logo + Firma Uslubi" : "Logo + Visual Identity",
-            description: isUz ? "Brendingizga mos firma uslubini (Vizual aydentika) ishlab chiqish" : "Development of visual identity consistent with your brand",
+            description: isUz ? "Brendingizga mos firma uslubini (Vizual aydentika) ishlab chiqish kiradi." : "Development of visual identity consistent with your brand",
             subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
             price: basePricesUSD.logoPremium,
             recommended: true,
@@ -293,7 +294,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         packaging: { 
             label: isUz ? "Qadoq dizayni" : "Packaging Design", 
-            description: isUz ? "Mahsulotingizning javondagi asosiy qurali." : "Your product's main weapon on the shelf.",
+            description: isUz ? "Mahsulotingizning javondagi asosiy quroli." : "Your product's main weapon on the shelf.",
             price: basePricesUSD.packaging, 
             timeline: isUz ? "⏱ 10-15 ish kuni" : "⏱ 10-15 business days",
             features: isUz ? ["Vizual konsepsiya", "Qadoqni 3D namoyish qilish", "Chop etishga tayyor fayllar", "Materiallar bo'yicha tavsiyalar"] : ["Visual concept", "3D Visualization", "Print files", "Material tips"],
