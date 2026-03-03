@@ -1,4 +1,3 @@
-
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -112,7 +111,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Local & International patent check (WIPO) + Filing service",
                 "Domain & Username check",
                 "Unlimited revisions (30 days)",
-                "Ownership certificate"
+                "Full ownership certificate"
             ]
         },
         namingPremium: {
@@ -155,7 +154,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ],
             benefits: isUz ? [
                 { icon: "🎯", title: "Hujjatlarda ham, ijtimoiy tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor." },
-                { icon: "✅", title: "Bu mening brendim deyishingiz mumkin", description: "O'zingiz yasaganga o'xshadigan professional ko'rinish." },
+                { icon: "✅", title: "Professional ko'rinish", description: "O'zingiz yasaganga o'xshamaydigan professional ko'rinish." },
                 { icon: "👁️", title: "Real hayotda qanday ko'rinishini bilasiz", description: "8 ta muhim nuqtada logongiz qanday ko'rinishini vizual ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar topshiriladi, keyinchalik foydalanishga qulay." }
             ] : [
@@ -256,8 +255,32 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 5-7 ish kuni" : "⏱ 5-7 business days",
             features: isUz ? ["Profil rasmi va bio dizayni", "9 ta post uchun shablon", "Storislar uchun dizayn tizimi", "Highlight ikonkalari"] : ["Bio & profile design", "9 post templates", "Stories design system", "Highlight icons"]
         },
-        urgency: { label: isUz ? "Shoshilinch loyiha (+50%)" : "Urgent Project (+50%)", price: 0 },
-        nda: { label: isUz ? "NDA — Maxfiylik (+50%)" : "NDA — Confidentiality (+50%)", price: 0 }
+        urgency: { 
+            label: isUz ? "Shoshilinch loyiha (+50%)" : "Urgent Project (+50%)", 
+            description: isUz ? "Loyihangizni navbatsiz va tezkor tayyorlab berish." : "Expedited project delivery ahead of queue.",
+            price: 0,
+            features: isUz ? ["Ishchi guruhni safarbar qilish", "Dam olish kunlarisiz ishlash", "Muddati 2-3 barobarga qisqaradi"] : ["Mobilizing workforce", "Working through weekends", "2-3x faster delivery"],
+            benefits: isUz ? [
+                { icon: "🚀", title: "Vaqtdan yutasiz", description: "Bozorga tezroq kirib borasiz." },
+                { icon: "🔥", title: "Prioritet", description: "Sizning loyihangiz biz uchun birinchi darajali." }
+            ] : [
+                { icon: "🚀", title: "Save Time", description: "Faster market entry." },
+                { icon: "🔥", title: "Priority", description: "Your project becomes our top priority." }
+            ]
+        },
+        nda: { 
+            label: isUz ? "NDA — Maxfiylik (+50%)" : "NDA — Confidentiality (+50%)", 
+            description: isUz ? "Loyihangiz ma'lumotlari va yakuniy natijalari sir saqlanishini kafolatlash." : "Guaranteed confidentiality of your project data and results.",
+            price: 0,
+            features: isUz ? ["Yuridik shartnoma", "Ma'lumotlar uchinchi shaxsga berilmaydi", "Portfolioga qo'yilmaydi"] : ["Legal agreement", "No third-party data sharing", "Excluded from public portfolio"],
+            benefits: isUz ? [
+                { icon: "🔒", title: "Maxfiylik", description: "Biznes sirlaringiz biz bilan xavfsiz." },
+                { icon: "🛡️", title: "Xavfsizlik", description: "Ma'lumotlar to'liq himoyalangan." }
+            ] : [
+                { icon: "🔒", title: "Privacy", description: "Your business secrets are safe with us." },
+                { icon: "🛡️", title: "Security", description: "Full data protection guaranteed." }
+            ]
+        }
     };
 };
 
