@@ -135,16 +135,17 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             features: isUz ? [
                 "10 ta nom varianti tayyorlanadi",
-                "Har bir nom uchun to'liq strategik izoh",
-                "Nomning talaffuzi, esda qolishi va jaranglashi",
+                "Har bir nom uchun to'liq izoh beriladi",
+                "Talaffuz, esda qolish va jaranglash tekshiruvi",
                 "Domen va Username bo'shligini tekshirish",
                 "O'zbekistonda va xalqaro patent tekshiruvi",
                 "Raqobatchilar tahlili va farqli pozitsiya",
+                "Boshqa tillarda noqulay ma'no bermasligi",
                 "Nomning hissiy ma'nosi va mijozga ta'siri",
-                "3 ta qisqa shior varianti (Nike — Just Do It)",
+                "3 ta qisqa shior varianti (Just Do It kabi)",
                 "Patentga topshirish xizmati (davlat bojlari alohida)",
-                "Nom mulkingiz ekanligini tasdiqlovchi sertifikat",
-                "30 daqiqalik shaxsiy konsultatsiya",
+                "Nom sizniki ekanini tasdiqlovchi sertifikat",
+                "30 daqiqalik shaxsiy strategik konsultatsiya",
                 "Cheksiz tuzatish (30 kun ichida)"
             ] : [
                 "10 name concepts with strategy",
@@ -152,15 +153,16 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Domain & Social handle check",
                 "Local & International patent check",
                 "Competitor analysis & positioning",
+                "Meaning check in other languages",
                 "3 slogans & Ownership certificate",
                 "Patent filing service",
                 "Strategy session & Unlimited revisions"
             ],
             benefits: isUz ? [
-                { icon: "🌍", title: "Xalqaro bozorga tayyor", description: "Nomingiz dunyo bo'ylab ishlaydi, hech qayerda noqulay ma'no bermaydi." },
+                { icon: "🌍", title: "Xalqaro bozorga tayyor", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi." },
                 { icon: "🔒", title: "To'liq sizning mulkingiz", description: "Patent va sertifikat bilan nomingiz rasman himoyalanadi." },
-                { icon: "💎", title: "Biznes qiymati oshadi", description: "Himoyalangan kuchli nom — kompaniya qiymatining bir qismidir." },
-                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "Mutaxassis bilan birgalikda eng to'g'ri yo'lni belgilaymiz." }
+                { icon: "💎", title: "Biznes qiymati oshadi", description: "Himoyalangan kuchli nom — kompaniya qiymatining bir qismi." },
+                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "30 daqiqa shaxsiy suhbatda to'g'ri yo'lni birgalikda belgilaymiz." }
             ] : [
                 { icon: "🌍", title: "Global Market Ready", description: "Linguistic check ensures your name works worldwide." },
                 { icon: "🔒", title: "Full Ownership", description: "Protected by patent and certificate. No one can steal it." },
@@ -178,11 +180,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "6 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun strategik izoh",
-                "Nomning talaffuzi va jaranglashi tekshiruvi",
+                "Talaffuz, esda qolish va jaranglash tekshiruvi",
                 "Domen va Username bo'shligini tekshirish",
                 "O'zbekiston bazasida patent tekshiruvi",
                 "Raqobatchilar nomlari tahlil qilinadi",
-                "Nomning hissiy ma'nosi yoziladi",
+                "Nomning hissiy ma'nosi va ta'siri",
                 "3 ta tuzatish imkoniyati"
             ] : [
                 "6 name concepts with strategy",
@@ -190,13 +192,14 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Domain & Social handle check",
                 "Local patent database check",
                 "Competitor names analysis",
+                "Meaning and emotional impact",
                 "3 revision rounds"
             ],
             benefits: isUz ? [
-                { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kelajakda yuzaga kelishi mumkin bo'lgan qimmat muammolardan qutulasiz." },
-                { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi boshqa nomlardan keskin farq qiladigan nom topamiz." },
-                { icon: "❤️", title: "Mijozlar eslab qoladi", description: "Nomga hissiyot yuklanadi — u mijozlar xotirasida muhrlanadi." },
-                { icon: "📈", title: "Kuchli boshlanish", description: "To'g'ri nom marketing xarajatlarini sezilarli kamaytiradi." }
+                { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kimdir nomingizni oldin patent qilmaganligini tekshiramiz." },
+                { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, unikal nom topamiz." },
+                { icon: "❤️", title: "Mijozlar yaxshi ko'radi", description: "Nomga his-tuyg'u yuklanadi — mijozlar eslab qoladi." },
+                { icon: "📈", title: "Brend kuchli boshlanadi", description: "Kuchli nom marketing xarajatlarini sezilarli kamaytiradi." }
             ] : [
                 { icon: "⚖️", title: "Legal Safety", description: "Avoid future trademark conflicts and expensive legal issues." },
                 { icon: "🏆", title: "Stand Out", description: "We find a unique identity that customers will remember." },
@@ -213,9 +216,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "3 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun qisqa izoh",
-                "Talaffuz qulayligi va esda qolishi",
-                "Domen bo'shligini tekshirish",
-                "Instagram va Telegram username tekshiruvi",
+                "Talaffuz qulayligi va esda qolishi tekshiruvi",
+                "Domen va Username bo'shligini tekshirish",
                 "1 ta tuzatish imkoniyati"
             ] : [
                 "3 name concepts with brief info",
@@ -224,10 +226,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "1 revision round"
             ],
             benefits: isUz ? [
-                { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Esda qolmaydigan yoki noto'g'ri nomlar bilan mijoz yo'qotmaysiz." },
-                { icon: "⚡", title: "Vaqt tejaysiz", description: "Haftalab o'ylab o'tirmasdan, professional yechimga ega bo'lasiz." },
-                { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "Tahlil qilingan va tekshirilgan nom bilan biznesni yo'lga qo'yasiz." },
-                { icon: "📱", title: "Digital tayyor", description: "Domen va ijtimoiy tarmoqlar uchun band bo'lmagan nom olasiz." }
+                { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Noto'g'ri talaffuz qilinadigan nom mijoz yo'qotadi." },
+                { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirmasdan, professional nom olasiz." },
+                { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "Tahlil qilingan, tekshirilgan nom qo'lingizda bo'ladi." },
+                { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va social media username band emasligini bilasiz." }
             ] : [
                 { icon: "🛡️", title: "Avoid Risks", description: "Prevent losing customers due to hard-to-pronounce names." },
                 { icon: "⚡", title: "Save Time", description: "Get professional results in a few days instead of weeks." },
@@ -378,9 +380,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
             label: isUz ? "Shoshilinch loyiha (+50%)" : "Urgent Project (+50%)", 
             description: isUz ? "Loyihangizni navbatsiz va tezkor tayyorlab berish." : "Expedited project delivery ahead of queue.",
             price: 0,
-            features: isUz ? ["Ishchi guruhni safarbar qilish", "Dam olish kunlarisiz ishlash", "Muddati 2-3 barobarga qisqaradi"] : ["Mobilizing workforce", "Working through weekends", "2-3x faster delivery"],
+            timeline: isUz ? "⏱ 2-3 barobar tezroq" : "⏱ 2-3x faster",
+            features: isUz ? ["Ishchi guruhni safarbar qilish", "Dam olish kunlarisiz ishlash", "Muddati 2-3 barobarga qisqaradi", "Loyiha birinchi darajali ustuvorlikda bo'ladi"] : ["Mobilizing workforce", "Working through weekends", "2-3x faster delivery", "Top project priority"],
             benefits: isUz ? [
-                { icon: "🚀", title: "Vaqtdan yutasiz", description: "Bozorga tezroq kirib borasiz." },
+                { icon: "🚀", title: "Vaqtdan yutasiz", description: "Bozorga raqobatchilardan tezroq kirib borasiz." },
                 { icon: "🔥", title: "Prioritet", description: "Sizning loyihangiz biz uchun birinchi darajali." }
             ] : [
                 { icon: "🚀", title: "Save Time", description: "Faster market entry." },
@@ -391,7 +394,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
             label: isUz ? "NDA — Maxfiylik (+50%)" : "NDA — Confidentiality (+50%)", 
             description: isUz ? "Loyihangiz ma'lumotlari sir saqlanishini kafolatlash." : "Guaranteed confidentiality of your project data.",
             price: 0,
-            features: isUz ? ["Yuridik shartnoma", "Ma'lumotlar uchinchi shaxsga berilmaydi", "Portfolioga qo'yilmaydi"] : ["Legal agreement", "No third-party data sharing", "Excluded from public portfolio"],
+            timeline: isUz ? "⏱ Darhol kuchga kiradi" : "⏱ Immediate effect",
+            features: isUz ? ["Yuridik shartnoma (NDA)", "Ma'lumotlar uchinchi shaxsga berilmaydi", "Portfolioga qo'yilmaydi", "Barcha qidiruv bazalaridan maxfiylik"] : ["Legal agreement (NDA)", "No third-party data sharing", "Excluded from public portfolio", "Full privacy in search databases"],
             benefits: isUz ? [
                 { icon: "🔒", title: "Maxfiylik", description: "Biznes sirlaringiz biz bilan xavfsiz." },
                 { icon: "🛡️", title: "Xavfsizlik", description: "Ma'lumotlar to'liq himoyalangan." }
