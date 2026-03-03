@@ -155,7 +155,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ],
             benefits: isUz ? [
                 { icon: "🎯", title: "Hujjatlarda ham, ijtimoiy tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor." },
-                { icon: "✅", title: "\"Bu mening brendim\" deyishingiz mumkin", description: "Professional ko'rinish — o'zingiz yasaganga o'xshamaydigan professional ko'rinish." },
+                { icon: "✅", title: "Bu mening brendim deyishingiz mumkin", description: "O'zingiz yasaganga o'xshamaydigan professional ko'rinish." },
                 { icon: "👁️", title: "Real hayotda qanday ko'rinishini bilasiz", description: "8 ta muhim nuqtada logongiz qanday ko'rinishini vizual ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar topshiriladi, keyinchalik foydalanishga qulay." }
             ] : [
@@ -289,41 +289,40 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     if (selectedServices.urgency) {
         const val = basePrice * 0.5;
         surchargesTotal += val;
-        surchargesApplied.push({ name: 'Shoshilinch loyiha (+50%)', value: val });
+        surchargesApplied.push({ name: isUz ? 'Shoshilinch loyiha (+50%)' : 'Urgent Project (+50%)', value: val });
     }
     if (selectedServices.nda) {
         const val = basePrice * 0.5;
         surchargesTotal += val;
-        surchargesApplied.push({ name: 'NDA (Maxfiylik) (+50%)', value: val });
+        surchargesApplied.push({ name: isUz ? 'NDA (Maxfiylik) (+50%)' : 'NDA (Confidentiality) (+50%)', value: val });
     }
 
     const totalBeforeDiscounts = basePrice + surchargesTotal;
     let finalPrice = totalBeforeDiscounts;
     const discountsApplied = [];
 
-    // Promo codes logic
     const isPromoApplied = ['RAMAZON', 'PCG', 'KURSDOSH', 'TEZ NATIJA'].includes(promoCode?.toUpperCase());
 
     if (isPromoApplied) {
         const val = totalBeforeDiscounts * 0.50;
-        discountsApplied.push({ name: 'Maxsus chegirma (-50%)', value: val });
+        discountsApplied.push({ name: lang === 'uz' ? 'Maxsus chegirma (-50%)' : 'Special Discount (-50%)', value: val });
         finalPrice -= val;
     } else {
         if (discountType === 'package' && mainServicesCount >= 2) {
             const val = totalBeforeDiscounts * 0.20;
-            discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: val });
+            discountsApplied.push({ name: lang === 'uz' ? 'Paketli chegirma (-20%)' : 'Package Discount (-20%)', value: val });
             finalPrice -= val;
         } else if (discountType === 'full') {
             if (mainServicesCount >= 2) {
                 const packageVal = totalBeforeDiscounts * 0.20;
-                discountsApplied.push({ name: 'Paketli chegirma (-20%)', value: packageVal });
+                discountsApplied.push({ name: lang === 'uz' ? 'Paketli chegirma (-20%)' : 'Package Discount (-20%)', value: packageVal });
                 finalPrice -= packageVal;
                 const upfrontVal = finalPrice * 0.10;
-                discountsApplied.push({ name: "Oldindan to'lov (-10%)", value: upfrontVal });
+                discountsApplied.push({ name: lang === 'uz' ? "Oldindan to'lov (-10%)" : "Upfront Payment (-10%)", value: upfrontVal });
                 finalPrice -= upfrontVal;
             } else {
                 const upfrontVal = totalBeforeDiscounts * 0.10;
-                discountsApplied.push({ name: "Oldindan to'lov (-10%)", value: upfrontVal });
+                discountsApplied.push({ name: lang === 'uz' ? "Oldindan to'lov (-10%)" : "Upfront Payment (-10%)", value: upfrontVal });
                 finalPrice -= upfrontVal;
             }
         }
