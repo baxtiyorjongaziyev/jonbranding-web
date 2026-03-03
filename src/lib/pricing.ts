@@ -1,3 +1,4 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -40,17 +41,18 @@ const basePricesUSD = {
 
 export const getServiceDetails = (lang: string = 'uz') => {
     const isUz = lang === 'uz';
+    const isRu = lang === 'ru';
     
     return {
         audit: {
-            label: isUz ? "Logo Auditi" : "Logo Audit",
+            label: isUz ? "Logo Auditi" : (isRu ? "Аудит логотипа" : "Logo Audit"),
             description: isUz ? "Mavjud logotipni strategik tahlil qilish va tavsiyalar." : "Strategic analysis and recommendations for your existing logo.",
             price: basePricesUSD.audit,
             timeline: isUz ? "⏱ 2-3 ish kuni" : "⏱ 2-3 business days",
             features: isUz ? ["Logoning texnik tahlili", "Bozorga moslik tekshiruvi", "Kamchiliklar ro'yxati", "Yaxshilash bo'yicha tavsiyalar"] : ["Technical analysis", "Market fit check", "List of weaknesses", "Improvement tips"]
         },
         namingCheck: {
-            label: isUz ? "Neyming Tekshiruvi" : "Naming Check",
+            label: isUz ? "Neyming Tekshiruvi" : (isRu ? "Проверка нейминга" : "Naming Check"),
             description: isUz ? "Brend nomini huquqiy va raqamli bazalarda tekshirish." : "Checking brand name availability in legal and digital databases.",
             price: basePricesUSD.namingCheck,
             timeline: isUz ? "⏱ 1-2 ish kuni" : "⏱ 1-2 business days",
@@ -65,14 +67,14 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ]
         },
         consultation: {
-            label: isUz ? "Konsultatsiya" : "Consultation",
+            label: isUz ? "Konsultatsiya" : (isRu ? "Консультация" : "Consultation"),
             description: isUz ? "Brending va biznesni upakovka qilish bo'yicha professional maslahat." : "Professional advice on branding and business packaging.",
             price: basePricesUSD.consultation,
             timeline: isUz ? "⏱ 60 daqiqa" : "⏱ 60 minutes",
             features: isUz ? ["Muammolarni tahlil qilish", "Brending strategiyasi", "Savollarga javoblar", "Yo'l xaritasi tuzish"] : ["Problem analysis", "Branding strategy", "Q&A session", "Roadmap creation"]
         },
         strategy: {
-            label: isUz ? "Brend-strategiya" : "Brand Strategy",
+            label: isUz ? "Brend-strategiya" : (isRu ? "Бренд-стратегия" : "Brand Strategy"),
             description: isUz ? "Biznesingiz uchun natija keltiradigan poydevor." : "A foundation that brings results for your business.",
             price: basePricesUSD.strategy,
             timeline: isUz ? "⏱ 20-30 ish kuni" : "⏱ 20-30 business days",
@@ -85,7 +87,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ] : ["Market & Competitor analysis", "Target audience map", "Brand platform", "Positioning strategy", "USP development"]
         },
         commStrategy: {
-            label: isUz ? "Kommunikatsion strategiya" : "Communication Strategy",
+            label: isUz ? "Kommunikatsion strategiya" : (isRu ? "Коммуникационная стратегия" : "Communication Strategy"),
             description: isUz ? "Mijozlar bilan muloqot va reklama tili." : "Communication and advertising language for customers.",
             price: basePricesUSD.commStrategy,
             timeline: isUz ? "⏱ 15-20 ish kuni" : "⏱ 15-20 business days",
@@ -96,40 +98,48 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: isUz ? "Nom emas — aktiv" : "Not just a name — an asset",
             subDescription: isUz ? "Jiddiy investitsiya qiladiganlar uchun" : "For serious investors",
             price: basePricesUSD.namingVIP,
-            timeline: isUz ? "⏱ 7–10 ish kuni" : "⏱ 7–10 business days",
+            timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             features: isUz ? [
                 "10 ta nom varianti tayyorlanadi",
-                "Strategik izoh va asoslash",
-                "Talaffuz va esda qolish testi",
-                "Domen va ijtimoiy tarmoqlar (Username)",
-                "O'zbekiston va xalqaro patent tekshiruvi (WIPO)",
-                "Raqobat tahlili va farqli pozitsiya",
-                "Lingvistik tekshiruv (xalqaro bozor)",
-                "3 ta shior (slogan) varianti",
-                "Patent topshirish xizmati",
-                "Cheksiz tuzatish (30 kun)"
+                "Har bir nom uchun strategik izoh",
+                "Talaffuz, esda qolish va jaranglash testi",
+                "Domen bo'shligini tekshirish (.com, .uz)",
+                "Instagram va Telegram username tekshiruvi",
+                "O'zbekistonda va xalqaro bazalarda patent tekshiruvi",
+                "Raqobatchilar tahlili va farqli pozitsiya",
+                "Xalqaro lingvistik tekshiruv",
+                "Nomning mijozga hissiy ta'siri tahlili",
+                "3 ta qisqa shior (slogan) varianti",
+                "Patentga rasman topshirish xizmati",
+                "Nom mulkingizni tasdiqlovchi sertifikat",
+                "30 daqiqalik shaxsiy konsultatsiya",
+                "Cheksiz tuzatish (30 kun ichida)"
             ] : [
                 "10 name concepts",
-                "Full strategic reasoning",
-                "Phonetics & recall testing",
-                "Domain & Social handles check",
-                "Local & International (WIPO) patent check",
+                "Strategic reasoning for each",
+                "Phonetics, recall & ring testing",
+                "Domain check (.com, .uz)",
+                "Social handles availability",
+                "Local & International patent check",
                 "Competitor analysis & positioning",
                 "International linguistic check",
+                "Emotional impact analysis",
                 "3 slogan variants",
-                "Patent filing service",
+                "Official patent filing service",
+                "Ownership certificate",
+                "30-min strategy consultation",
                 "Unlimited revisions (30 days)"
             ],
             benefits: isUz ? [
-                { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi, hech qayerda noqulay ma'no bermaydi." },
-                { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent hujjatlari va sertifikat bilan nomingiz rasman himoyalanadi. Hech kim o'g'irlay olmaydi, hech kim taqlid qila olmaydi." },
-                { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Himoyalangan kuchli nom — kompaniya qiymatining bir qismi. Investor va sheriklar uchun bu jiddiy signal." },
-                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "30 daqiqa shaxsiy suhbatda nomni tanlashda to'g'ri yo'lni birgalikda belgilaymiz. Yolg'iz emas, mutaxassis bilan." }
+                { icon: "🌍", title: "Xalqaro bozorga tayyor bo'lasiz", description: "Nomingiz boshqa tillarda tekshiriladi — dunyo bo'ylab ishlaydi, hech qayerda noqulay ma'no bermaydi." },
+                { icon: "🔒", title: "Nomingiz to'liq sizniki bo'ladi", description: "Patent va sertifikat bilan nomingiz rasman himoyalanadi. Hech kim o'g'irlay olmaydi." },
+                { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Himoyalangan kuchli nom — kompaniya qiymatining bir qismi. Investorlar uchun jiddiy signal." },
+                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "30 daqiqa shaxsiy suhbatda to'g'ri yo'lni birgalikda belgilaymiz. Yolg'iz emas, mutaxassis bilan." }
             ] : [
                 { icon: "🌍", title: "Global Market Ready", description: "Linguistic check ensures your name works worldwide without negative meanings." },
-                { icon: "🔒", title: "Full Ownership", description: "Officially protected by patent documents. No one can steal or copy your identity." },
+                { icon: "🔒", title: "Full Ownership", description: "Protected by patent and certificate. No one can steal or copy your identity." },
                 { icon: "💎", title: "Business Value Up", description: "A protected strong name is a tangible asset for investors and partners." },
-                { icon: "🎯", title: "Expert Guidance", description: "30-minute strategy call to ensure you make the right choice together with an expert." }
+                { icon: "🎯", title: "Expert Guidance", description: "30-minute strategy call to ensure you make the right choice with an expert." }
             ]
         },
         namingPremium: {
@@ -138,32 +148,38 @@ export const getServiceDetails = (lang: string = 'uz') => {
             subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
             price: basePricesUSD.namingPremium,
             recommended: true,
-            timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
+            timeline: isUz ? "⏱ 14–20 ish kuni" : "⏱ 14–20 business days",
             features: isUz ? [
                 "6 ta nom varianti tayyorlanadi",
-                "Har bir nom uchun strategik asoslash",
-                "Talaffuz va esda qolish testi",
-                "Domen va ijtimoiy tarmoqlar (Username)",
-                "O'zbekiston patent bazasi tekshiruvi",
-                "3 ta tuzatish raundi"
+                "Har bir nom uchun strategik izoh",
+                "Talaffuz, esda qolish va jaranglash testi",
+                "Domen bo'shligini tekshirish (.com, .uz)",
+                "Instagram va Telegram username tekshiruvi",
+                "O'zbekiston bazasida patent tekshiruvi",
+                "Raqobatchilar nomlari tahlili",
+                "Nomning mijozga hissiy ta'siri tahlili",
+                "3 ta tuzatish imkoniyati"
             ] : [
                 "6 name concepts",
-                "Full strategic reasoning",
-                "Phonetics & recall testing",
-                "Domain & Social handles check",
-                "Local patent database check",
+                "Strategic reasoning for each",
+                "Phonetics, recall & ring testing",
+                "Domain check (.com, .uz)",
+                "Social handles availability",
+                "Local patent check",
+                "Competitor analysis",
+                "Emotional impact analysis",
                 "3 revision rounds"
             ],
             benefits: isUz ? [
                 { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Kimdir sizning nomingizni oldin patent qilmaganligini tekshiramiz. Kelajakda qimmat muammolardan qutulasiz." },
                 { icon: "🏆", title: "Raqobatdan ajralib turasiz", description: "Bozordagi o'xshash nomlarni tahlil qilib, hech kimga o'xshamagan nom topamiz. Mijozlar sizni eslab qoladi." },
                 { icon: "❤️", title: "Mijozlar nomingizni yaxshi ko'radi", description: "Nomga his-tuyg'u yuklanadi — mijozlar eslab qoladi va do'stlariga aytib beradi." },
-                { icon: "📈", title: "Brendingiz kuchli boshlanadi", description: "Kuchli nom marketing xarajatlarini kamaytiradi. Nom o'zi ishlaydi — har safar aytilganda brendingiz mustahkamlanadi." }
+                { icon: "📈", title: "Brendingiz kuchli boshlanadi", description: "Kuchli nom marketing xarajatlarini kamaytiradi. Nom o'zi ishlaydi va brendingizni mustahkamlaydi." }
             ] : [
                 { icon: "⚖️", title: "Legal Safety", description: "We ensure no one else has patented the name, saving you from future legal costs." },
-                { icon: "🏆", title: "Stand Out", description: "We analyze market names to find a unique identity that customers will remember." },
+                { icon: "🏆", title: "Stand Out", description: "We find a unique identity that customers will remember above competitors." },
                 { icon: "❤️", title: "Emotional Connection", description: "We inject feelings into the name that build long-term customer loyalty." },
-                { icon: "📈", title: "Strong Start", description: "A great name reduces marketing costs by working for you every time it's spoken." }
+                { icon: "📈", title: "Strong Start", description: "A great name reduces marketing costs by working for you consistently." }
             ]
         },
         namingStandard: {
@@ -171,30 +187,32 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: isUz ? "Tez va ishonchli start" : "Fast and reliable start",
             subDescription: isUz ? "Endigina boshlamoqchi bo'lganlar uchun" : "For those just starting out",
             price: basePricesUSD.namingStandard,
-            timeline: isUz ? "⏱ 3 ish kuni" : "⏱ 3 business days",
+            timeline: isUz ? "⏱ 7–10 ish kuni" : "⏱ 7–10 business days",
             features: isUz ? [
                 "3 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun qisqa izoh",
-                "Talaffuz va esda qolish testi",
-                "Domen va ijtimoiy tarmoqlar (Username)",
-                "1 ta tuzatish raundi"
+                "Talaffuz qulayligi va esda qolish testi",
+                "Domen bo'shligini tekshirish (.com, .uz)",
+                "Instagram va Telegram username tekshiruvi",
+                "1 ta tuzatish imkoniyati"
             ] : [
                 "3 name concepts",
                 "Brief explanation for each",
                 "Phonetics & recall testing",
-                "Domain & Social handles check",
+                "Domain check (.com, .uz)",
+                "Social handles availability",
                 "1 revision round"
             ],
             benefits: isUz ? [
-                { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Esda qolmaydigan yoki noto'g'ri talaffuz qilinadigan nom birinchi mijozlaringizni yo'qotadi. Biz buni oldini olamiz." },
-                { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirish o'rniga, 3 kunda professional tahlil qilingan nom olasiz." },
+                { icon: "🛡️", title: "Xavfli nomdan qutulasiz", description: "Esda qolmaydigan yoki noto'g'ri talaffuz qilinadigan nom mijozlaringizni yo'qotadi. Biz buni oldini olamiz." },
+                { icon: "⚡", title: "Vaqt tejaysiz", description: "Yuzlab nom o'ylab o'tirish o'rniga, 7–10 kunda professional tahlil qilingan nom olasiz." },
                 { icon: "✅", title: "Ishonch bilan boshlaysiz", description: "\"To'g'ri nom topdimmi?\" degan shubha yo'qoladi. Tahlil qilingan, tekshirilgan nom qo'lingizda bo'ladi." },
-                { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va social media username band emasligini bilib olasiz — keyinchalik boshqa nom qidirish muammosi bo'lmaydi." }
+                { icon: "📱", title: "Digital tayyor bo'lasiz", description: "Domen va username band emasligini bilib olasiz — keyinchalik muammo bo'lmaydi." }
             ] : [
-                { icon: "🛡️", title: "Avoid Risks", description: "Prevent losing first customers due to hard-to-pronounce or forgettable names." },
-                { icon: "⚡", title: "Save Time", description: "Get professional names in 3 days instead of spending weeks brainstorming." },
+                { icon: "🛡️", title: "Avoid Risks", description: "Prevent losing customers due to hard-to-pronounce or forgettable names." },
+                { icon: "⚡", title: "Save Time", description: "Get professional names in 7-10 days instead of weeks of brainstorming." },
                 { icon: "✅", title: "Confident Launch", description: "Remove doubts with a professionally analyzed and verified name." },
-                { icon: "📱", title: "Digital Ready", description: "Verify that domains and social handles are free before you start." }
+                { icon: "📱", title: "Digital Ready", description: "Verify domains and social handles are free before you start." }
             ]
         },
         logoStandard: {
@@ -206,7 +224,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "2 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
-                "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va faqat belgisi alohida",
+                "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va belgisi alohida",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "8 ta aloqa nuqtasida vizual namoyish",
@@ -221,7 +239,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "2 revisions"
             ],
             benefits: isUz ? [
-                { icon: "🎯", title: "Hujjatlarda ham, ijtimoiy tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor." },
+                { icon: "🎯", title: "Hujjatlarda ham, tarmoqlarda ham ishlaydi", description: "Logongiz hamma joyga — sayt, Instagram va chop etishga tayyor." },
                 { icon: "✅", title: "Professional ko'rinish", description: "O'zingiz yasaganga o'xshamaydigan professional ko'rinish." },
                 { icon: "👁️", title: "Real hayotda qanday ko'rinishini bilasiz", description: "8 ta muhim nuqtada logongiz qanday ko'rinishini vizual ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha manba fayllar topshiriladi, keyinchalik foydalanishga qulay." }
@@ -242,7 +260,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "3 ta logo varianti tayyorlanadi — bittasini tanlaysiz",
                 "Har bir variant uchun izoh beriladi",
-                "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va faqat belgisi alohida",
+                "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va belgisi alohida",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "Rasmiy ranglar to'plami va aniq kodlari",
@@ -280,7 +298,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 15–20 ish kuni" : "⏱ 15–20 business days",
             features: isUz ? [
                 "3 ta logo varianti + har biri uchun chuqur strategik izoh",
-                "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va faqat belgisi alohida",
+                "Logo 4 xil ko'rinishda: Yotiq, Tik, Qora-oq va belgisi alohida",
                 "Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formati (PNG, SVG, AI)",
                 "Rasmiy ranglar va shriftlar tizimi",
@@ -338,7 +356,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         nda: { 
             label: isUz ? "NDA — Maxfiylik (+50%)" : "NDA — Confidentiality (+50%)", 
-            description: isUz ? "Loyihangiz ma'lumotlari va yakuniy natijalari sir saqlanishini kafolatlash." : "Guaranteed confidentiality of your project data and results.",
+            description: isUz ? "Loyihangiz ma'lumotlari sir saqlanishini kafolatlash." : "Guaranteed confidentiality of your project data.",
             price: 0,
             features: isUz ? ["Yuridik shartnoma", "Ma'lumotlar uchinchi shaxsga berilmaydi", "Portfolioga qo'yilmaydi"] : ["Legal agreement", "No third-party data sharing", "Excluded from public portfolio"],
             benefits: isUz ? [

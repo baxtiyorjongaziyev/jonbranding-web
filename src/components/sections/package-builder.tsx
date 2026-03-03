@@ -60,7 +60,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 )}
                 {isVip && (
                     <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-blue-950 text-[10px] font-black px-6 py-2 rounded-full border-none uppercase flex items-center gap-1.5 shadow-2xl whitespace-nowrap">
-                        <Crown className="w-4 h-4" /> LUX VIP
+                        VIP
                     </Badge>
                 )}
             </div>
