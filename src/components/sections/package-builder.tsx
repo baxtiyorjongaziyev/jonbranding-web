@@ -43,64 +43,64 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
         <Card
             onClick={onSelect}
             className={cn(
-                "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border-2 flex flex-col rounded-[2.5rem] mt-6",
+                "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border-2 flex flex-col rounded-[2rem] mt-4",
                 selected
-                    ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_25px_60px_rgba(251,191,36,0.3)] scale-[1.02]' : 'border-primary bg-white shadow-2xl scale-[1.02]')
-                    : (isVip ? 'bg-blue-950 border-blue-900 hover:border-amber-400/50 shadow-lg' : 
+                    ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_20px_50px_rgba(251,191,36,0.25)] scale-[1.01]' : 'border-primary bg-white shadow-xl scale-[1.01]')
+                    : (isVip ? 'bg-blue-950 border-blue-900 hover:border-amber-400/50 shadow-md' : 
                        isPremium ? 'bg-gradient-to-br from-white to-blue-50/50 border-slate-100 hover:border-primary/30' : 
-                       'bg-white border-slate-100 hover:border-primary/30 hover:shadow-lg')
+                       'bg-white border-slate-100 hover:border-primary/30 hover:shadow-md')
             )}
         >
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
                 {recommended && !isVip && (
-                    <Badge className="bg-primary text-white text-[10px] font-bold px-5 py-1.5 rounded-full border-none uppercase tracking-wider whitespace-nowrap shadow-xl">
+                    <Badge className="bg-primary text-white text-[9px] font-bold px-4 py-1 rounded-full border-none uppercase tracking-wider whitespace-nowrap shadow-lg">
                         {dictionary.recommended}
                     </Badge>
                 )}
                 {isVip && (
-                    <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-blue-950 text-[10px] font-black px-6 py-2 rounded-full border-none uppercase flex items-center gap-1.5 shadow-2xl whitespace-nowrap">
+                    <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-blue-950 text-[9px] font-black px-5 py-1.5 rounded-full border-none uppercase flex items-center gap-1 shadow-xl whitespace-nowrap">
                         VIP
                     </Badge>
                 )}
             </div>
 
-            <CardHeader className="p-6 pb-2 sm:p-8 sm:pb-4">
-                <div className="flex items-center gap-4 mb-4 sm:mb-6">
+            <CardHeader className="p-4 pb-1 sm:p-5 sm:pb-2">
+                <div className="flex items-center gap-3 mb-2 sm:mb-3">
                     <div className={cn(
-                        "w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 flex-shrink-0",
+                        "w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 flex-shrink-0",
                         selected 
-                            ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-xl") 
+                            ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-lg") 
                             : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/30" : "bg-secondary text-slate-600")
                     )}>
-                        <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <div className="flex flex-col">
-                        <CardTitle className={cn("text-xl sm:text-2xl font-black leading-tight tracking-tighter", isVip ? "text-white" : "text-dark-blue")}>
+                        <CardTitle className={cn("text-lg sm:text-xl font-black leading-none tracking-tighter", isVip ? "text-white" : "text-dark-blue")}>
                             {label}
                         </CardTitle>
                         {subDescription && (
-                            <span className={cn("text-[9px] sm:text-[10px] font-bold uppercase tracking-wider mt-0.5 sm:mt-1", isVip ? "text-amber-400/60" : "text-primary/60")}>
+                            <span className={cn("text-[8px] sm:text-[9px] font-bold uppercase tracking-wider mt-0.5", isVip ? "text-amber-400/60" : "text-primary/60")}>
                                 {subDescription}
                             </span>
                         )}
-                        <span className={cn("text-lg sm:text-xl font-black mt-0.5 sm:mt-1", isVip ? "text-amber-400" : "text-primary")}>
+                        <span className={cn("text-base sm:text-lg font-black mt-0.5", isVip ? "text-amber-400" : "text-primary")}>
                             {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
                         </span>
                     </div>
                 </div>
                 {description && (
-                    <p className={cn("text-xs sm:text-sm leading-relaxed font-medium", isVip ? "text-blue-100/70" : "text-slate-500")}>
+                    <p className={cn("text-[11px] sm:text-xs leading-tight font-medium", isVip ? "text-blue-100/70" : "text-slate-500")}>
                         {description}
                     </p>
                 )}
             </CardHeader>
 
-            <CardContent className="px-6 pt-2 pb-6 sm:px-8 sm:pt-4 sm:pb-8 flex-grow flex flex-col">
-                <div className="flex border-b border-slate-100 mb-4 sm:mb-6" onClick={(e) => e.stopPropagation()}>
+            <CardContent className="px-4 pt-1 pb-4 sm:px-5 sm:pt-2 sm:pb-5 flex-grow flex flex-col">
+                <div className="flex border-b border-slate-100 mb-2 sm:mb-3" onClick={(e) => e.stopPropagation()}>
                     <button 
                         onClick={() => setActiveTab('included')}
                         className={cn(
-                            "flex-1 py-2 sm:py-3 text-[9px] sm:text-[10px] font-black uppercase tracking-widest transition-all",
+                            "flex-1 py-1.5 sm:py-2 text-[8px] sm:text-[9px] font-black uppercase tracking-widest transition-all",
                             activeTab === 'included' 
                                 ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
                                 : "text-slate-400"
@@ -111,7 +111,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <button 
                         onClick={() => setActiveTab('benefits')}
                         className={cn(
-                            "flex-1 py-2 sm:py-3 text-[9px] sm:text-[10px] font-black uppercase tracking-widest transition-all",
+                            "flex-1 py-1.5 sm:py-2 text-[8px] sm:text-[9px] font-black uppercase tracking-widest transition-all",
                             activeTab === 'benefits' 
                                 ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
                                 : "text-slate-400"
@@ -122,16 +122,16 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 </div>
 
                 {activeTab === 'included' ? (
-                    <div className="space-y-4 sm:space-y-6 flex-grow">
+                    <div className="space-y-2 sm:space-y-3 flex-grow">
                         {(results || features) && (
-                            <div className="space-y-3 sm:space-y-4">
-                                <ul className="space-y-2 sm:space-y-3">
+                            <div className="space-y-1.5 sm:space-y-2">
+                                <ul className="space-y-1 sm:space-y-1.5">
                                     {(results || features || []).map((r: string, i: number) => (
-                                        <li key={i} className="flex items-start gap-2 sm:gap-3">
-                                            <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
-                                                <CheckCircle className={cn("w-3.5 h-3.5 sm:w-4 sm:h-4", isVip ? "text-amber-400" : "text-primary")} />
+                                        <li key={i} className="flex items-start gap-1.5 sm:gap-2">
+                                            <div className={cn("mt-0.5 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
+                                                <CheckCircle className={cn("w-3 h-3 sm:w-3.5 sm:h-3.5", isVip ? "text-amber-400" : "text-primary")} />
                                             </div>
-                                            <span className={cn("text-sm sm:text-base font-normal leading-snug sm:leading-tight", isVip ? "text-slate-300" : "text-dark-blue")}>{r}</span>
+                                            <span className={cn("text-[12px] sm:text-[13px] font-normal leading-tight", isVip ? "text-slate-300" : "text-dark-blue")}>{r}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -139,30 +139,30 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                         )}
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 gap-2 sm:gap-3 flex-grow animate-fade-in">
+                    <div className="grid grid-cols-1 gap-1.5 sm:gap-2 flex-grow animate-fade-in">
                         {benefits && benefits.map((b: any, i: number) => (
                             <div 
                                 key={i} 
                                 className={cn(
-                                    "p-3 sm:p-4 rounded-2xl border flex flex-col gap-1 sm:gap-2 transition-all duration-300",
+                                    "p-2 sm:p-3 rounded-xl border flex flex-col gap-0.5 transition-all duration-300",
                                     isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100"
                                 )}
                             >
-                                <span className="text-lg sm:text-xl">{b.icon}</span>
-                                <div className="space-y-0.5">
-                                    <p className={cn("text-xs sm:text-sm font-bold leading-tight", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
-                                    <p className={cn("text-[10px] sm:text-xs leading-snug", isVip ? "text-slate-400" : "text-slate-500")}>{b.description}</p>
+                                <span className="text-sm sm:text-base">{b.icon}</span>
+                                <div className="space-y-0">
+                                    <p className={cn("text-[11px] sm:text-xs font-bold leading-tight", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
+                                    <p className={cn("text-[9px] sm:text-[10px] leading-tight", isVip ? "text-slate-400" : "text-slate-500")}>{b.description}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
                 )}
 
-                <div className="mt-6 pt-4 sm:mt-8 sm:pt-6 space-y-4 sm:space-y-5">
-                    <div className="space-y-2">
+                <div className="mt-3 pt-2 sm:mt-4 sm:pt-3 space-y-3">
+                    <div className="space-y-1">
                         {timeline && (
-                            <div className={cn("flex items-center gap-2 text-[9px] sm:text-[10px] font-black uppercase tracking-widest", isVip ? "text-amber-400/50" : "text-slate-400")}>
-                                <Clock className="w-3 h-3" />
+                            <div className={cn("flex items-center gap-1.5 text-[8px] sm:text-[9px] font-black uppercase tracking-widest", isVip ? "text-amber-400/50" : "text-slate-400")}>
+                                <Clock className="w-2.5 h-2.5" />
                                 <span>{timeline}</span>
                             </div>
                         )}
@@ -171,11 +171,11 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <Button
                         variant={selected ? "default" : "outline"}
                         className={cn(
-                            "w-full py-5 sm:py-6 text-sm sm:text-base font-bold transition-all duration-500 rounded-full border-2",
+                            "w-full py-4 sm:py-5 text-xs sm:text-sm font-bold transition-all duration-500 rounded-full border-2 h-auto",
                             selected 
                                 ? (isVip 
-                                    ? "border-none bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-blue-950 hover:from-amber-500 shadow-[0_15px_40px_rgba(251,191,36,0.5)]" 
-                                    : "border-none bg-primary text-white shadow-2xl") 
+                                    ? "border-none bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 text-blue-950 hover:from-amber-500 shadow-lg" 
+                                    : "border-none bg-primary text-white shadow-xl") 
                                 : (isVip 
                                     ? "bg-white/5 border-amber-400/30 text-amber-400 hover:bg-amber-400 hover:text-blue-950" 
                                     : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary")
@@ -191,12 +191,12 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
 };
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
-    <div className="space-y-6 sm:space-y-8">
-        <div className="flex items-center gap-4">
-            <div className="h-8 sm:h-10 w-1.5 bg-primary rounded-full shadow-[0_0_15px_rgba(37,99,235,0.4)]" />
-            <h3 className="text-2xl sm:text-3xl font-black text-dark-blue tracking-tight uppercase">{title}</h3>
+    <div className="space-y-4 sm:space-y-6">
+        <div className="flex items-center gap-3">
+            <div className="h-6 sm:h-8 w-1 bg-primary rounded-full shadow-[0_0_10px_rgba(37,99,235,0.4)]" />
+            <h3 className="text-xl sm:text-2xl font-black text-dark-blue tracking-tight uppercase">{title}</h3>
         </div>
-        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8", gridCols)}>{children}</div>
+        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6", gridCols)}>{children}</div>
     </div>
 );
 
@@ -235,17 +235,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     ];
 
     return (
-        <section id="package-builder" className="py-16 sm:py-32 bg-white overflow-hidden">
+        <section id="package-builder" className="py-12 sm:py-24 bg-white overflow-hidden">
             <div className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto mb-16 sm:mb-20 text-center space-y-4 sm:space-y-6">
-                    <Badge className="bg-primary/10 text-primary border-none px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-[0.3em]">
+                <div className="max-w-4xl mx-auto mb-12 sm:mb-16 text-center space-y-3 sm:space-y-4">
+                    <Badge className="bg-primary/10 text-primary border-none px-5 py-1.5 rounded-full font-black text-[9px] uppercase tracking-[0.25em]">
                         LOYIHA ME'MORI
                     </Badge>
-                    <h2 className="text-4xl sm:text-6xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
-                    <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
+                    <h2 className="text-3xl sm:text-5xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
+                    <p className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
                 </div>
 
-                <div className="space-y-24 sm:space-y-32">
+                <div className="space-y-16 sm:space-y-24">
                     <ServiceGroup title={translations.categories.tripwire}>{['namingCheck', 'audit', 'consultation'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
                     <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">{['strategy', 'commStrategy'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
                     <ServiceGroup title={translations.categories.naming}>{['namingVIP', 'namingPremium', 'namingStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
@@ -253,11 +253,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     
                     <Accordion type="single" collapsible className="w-full">
                         <AccordionItem value="more" className="border-none">
-                            <AccordionTrigger className="text-xl font-black text-dark-blue justify-center gap-4 hover:no-underline py-10 sm:py-12 bg-slate-50 rounded-[2.5rem] sm:rounded-[3rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm">
+                            <AccordionTrigger className="text-lg font-black text-dark-blue justify-center gap-3 hover:no-underline py-8 sm:py-10 bg-slate-50 rounded-[2rem] sm:rounded-[2.5rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm">
                                 {translations.categories.more_services}
-                                <ChevronsDown className="w-6 h-6 text-primary animate-bounce group-hover:text-dark-blue transition-colors" />
+                                <ChevronsDown className="w-5 h-5 text-primary animate-bounce group-hover:text-dark-blue transition-colors" />
                             </AccordionTrigger>
-                            <AccordionContent className="pt-12 sm:pt-16 space-y-24 sm:space-y-32">
+                            <AccordionContent className="pt-10 sm:pt-12 space-y-16 sm:space-y-24">
                                 <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
                                     {['packaging', 'smm', 'urgency', 'nda'].map(id => (
                                         <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
@@ -268,118 +268,118 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </Accordion>
                 </div>
 
-                <div className="mt-24 sm:mt-32 max-w-6xl mx-auto">
-                    <div id="your-package-card" className="rounded-[3rem] sm:rounded-[4rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
-                        <div className="lg:w-1/2 bg-dark-blue p-8 sm:p-16 text-white relative">
-                            <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]" />
+                <div className="mt-16 sm:mt-24 max-w-6xl mx-auto">
+                    <div id="your-package-card" className="rounded-[2.5rem] sm:rounded-[3rem] bg-white shadow-[0_40px_80px_-15px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
+                        <div className="lg:w-1/2 bg-dark-blue p-6 sm:p-12 text-white relative">
+                            <div className="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-primary/20 rounded-full blur-[80px]" />
                             <div className="relative z-10 h-full flex flex-col">
-                                <div className="space-y-4 mb-8 sm:mb-10">
-                                    <div className="flex items-center gap-4">
-                                        <div className="bg-white/10 p-3 rounded-2xl border border-white/10 shadow-lg">
-                                            <Box className="w-8 h-8 text-sky-blue" />
+                                <div className="space-y-3 mb-6 sm:mb-8">
+                                    <div className="flex items-center gap-3">
+                                        <div className="bg-white/10 p-2.5 rounded-xl border border-white/10 shadow-lg">
+                                            <Box className="w-6 h-6 text-sky-blue" />
                                         </div>
-                                        <h3 className="text-2xl sm:text-3xl font-black tracking-tighter uppercase text-white">{translations.your_package}</h3>
+                                        <h3 className="text-xl sm:text-2xl font-black tracking-tighter uppercase text-white">{translations.your_package}</h3>
                                     </div>
-                                    <p className="text-blue-100/60 font-medium text-base sm:text-lg max-w-sm">{translations.your_package_desc}</p>
+                                    <p className="text-blue-100/60 font-medium text-sm sm:text-base max-w-xs">{translations.your_package_desc}</p>
                                 </div>
-                                <div className="grid grid-cols-1 gap-3 sm:gap-4 overflow-y-auto pr-2 custom-scrollbar flex-grow">
+                                <div className="grid grid-cols-1 gap-2.5 sm:gap-3 overflow-y-auto pr-2 custom-scrollbar flex-grow">
                                     {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
                                         const isSurcharge = k === 'urgency' || k === 'nda';
                                         return (
-                                            <div key={k} className="flex items-center justify-between p-4 sm:p-5 rounded-[1.25rem] sm:rounded-[1.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group/item shadow-sm">
-                                                <div className="flex items-center gap-3">
-                                                    <div className={cn("p-1.5 rounded-full", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
-                                                        {isSurcharge ? <Plus className="w-4 h-4 text-blue-400" /> : <Check className="w-4 h-4 text-sky-blue" />}
+                                            <div key={k} className="flex items-center justify-between p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group/item shadow-sm">
+                                                <div className="flex items-center gap-2.5">
+                                                    <div className={cn("p-1 rounded-full", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
+                                                        {isSurcharge ? <Plus className="w-3.5 h-3.5 text-blue-400" /> : <Check className="w-3.5 h-3.5 text-sky-blue" />}
                                                     </div>
-                                                    <span className="text-sm sm:text-base font-extrabold tracking-tight text-white">{serviceDetails[k]?.label}</span>
+                                                    <span className="text-xs sm:text-sm font-extrabold tracking-tight text-white">{serviceDetails[k]?.label}</span>
                                                 </div>
-                                                <span className={cn("font-black text-xs sm:text-sm", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
+                                                <span className={cn("font-black text-[10px] sm:text-xs", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
                                                     {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
                                                 </span>
                                             </div>
                                         );
                                     })}
                                     {Object.values(selectedServices).every(v => !v) && (
-                                        <div className="text-center py-16 sm:py-24 px-8 rounded-[2.5rem] sm:rounded-[3rem] bg-white/5 border-2 border-dashed border-white/10">
-                                            <TrendingUp className="w-12 h-12 sm:w-16 h-16 mx-auto text-blue-300/20 mb-6" />
-                                            <p className="text-blue-100/40 italic text-lg sm:text-xl font-medium">{translations.empty_package_desc}</p>
+                                        <div className="text-center py-12 sm:py-20 px-6 rounded-[2rem] sm:rounded-[2.5rem] bg-white/5 border-2 border-dashed border-white/10">
+                                            <TrendingUp className="w-10 h-10 sm:w-14 h-14 mx-auto text-blue-300/20 mb-4" />
+                                            <p className="text-blue-100/40 italic text-base sm:text-lg font-medium">{translations.empty_package_desc}</p>
                                         </div>
                                     )}
                                 </div>
                             </div>
                         </div>
 
-                        <div className="lg:w-1/2 bg-slate-50 p-8 sm:p-16 flex flex-col border-l border-slate-100 relative">
-                            <div className="space-y-8 sm:space-y-10 flex-grow">
-                                <div className="space-y-6 sm:space-y-8">
+                        <div className="lg:w-1/2 bg-slate-50 p-6 sm:p-12 flex flex-col border-l border-slate-100 relative">
+                            <div className="space-y-6 sm:space-y-8 flex-grow">
+                                <div className="space-y-4 sm:space-y-6">
                                     <div className="flex justify-between items-center">
-                                        <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">{translations.base_price_label}</span>
-                                        <span className="text-xl sm:text-2xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
+                                        <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">{translations.base_price_label}</span>
+                                        <span className="text-lg sm:text-xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
 
-                                    <div className="space-y-3 sm:space-y-4">
+                                    <div className="space-y-2 sm:space-y-3">
                                         {total.surchargesApplied.map((s: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-blue-700 text-[11px] sm:text-[12px] font-black bg-blue-50 px-5 sm:px-6 py-3 sm:py-4 rounded-[1.25rem] sm:rounded-[1.5rem] border border-blue-100 shadow-sm">
-                                                <div className="flex items-center gap-2 sm:gap-3">
-                                                    <div className="bg-blue-100 p-1 rounded-full"><Plus className="w-3.5 h-3.5" /></div>
+                                            <div key={i} className="flex justify-between items-center text-blue-700 text-[10px] sm:text-[11px] font-black bg-blue-50 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl border border-blue-100 shadow-sm">
+                                                <div className="flex items-center gap-2 sm:gap-2.5">
+                                                    <div className="bg-blue-100 p-1 rounded-full"><Plus className="w-3 h-3" /></div>
                                                     {s.name}
                                                 </div>
-                                                <span className="text-sm sm:text-base">+{formatPrice(s.value, lang as any, currency)}</span>
+                                                <span className="text-xs sm:text-sm">+{formatPrice(s.value, lang as any, currency)}</span>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="space-y-3 sm:space-y-4">
+                                    <div className="space-y-2 sm:space-y-3">
                                         {total.discountApplied.map((d: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-green-700 text-[11px] sm:text-[12px] font-black bg-green-50 px-5 sm:px-6 py-3 sm:py-4 rounded-[1.25rem] sm:rounded-[1.5rem] border border-green-100 animate-shine shadow-sm">
-                                                <div className="flex items-center gap-2 sm:gap-3">
-                                                    <div className="bg-green-100 p-1 rounded-full"><Zap className="w-3.5 h-3.5" /></div>
+                                            <div key={i} className="flex justify-between items-center text-green-700 text-[10px] sm:text-[11px] font-black bg-green-50 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl border border-green-100 animate-shine shadow-sm">
+                                                <div className="flex items-center gap-2 sm:gap-2.5">
+                                                    <div className="bg-green-100 p-1 rounded-full"><Zap className="w-3 h-3" /></div>
                                                     {d.name}
                                                 </div>
-                                                <span className="text-sm sm:text-base">-{formatPrice(d.value, lang as any, currency)}</span>
+                                                <span className="text-xs sm:text-sm">-{formatPrice(d.value, lang as any, currency)}</span>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="pt-8 sm:pt-10 border-t border-slate-200 text-center space-y-2 sm:space-y-3">
-                                        <span className="text-slate-400 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.4em]">{translations.final_price}</span>
+                                    <div className="pt-6 sm:pt-8 border-t border-slate-200 text-center space-y-1.5 sm:space-y-2">
+                                        <span className="text-slate-400 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.35em]">{translations.final_price}</span>
                                         <div className="flex flex-col items-center">
-                                            <span className="text-5xl sm:text-8xl font-black text-primary tracking-tighter drop-shadow-sm">
+                                            <span className="text-4xl sm:text-7xl font-black text-primary tracking-tighter drop-shadow-sm">
                                                 {formatPrice(total.final, lang as any, currency)}
                                             </span>
                                             {total.savings > 0 && (
-                                                <div className="mt-4 sm:mt-6 flex items-center gap-2 sm:gap-3 text-green-600 font-black text-[11px] sm:text-[12px] bg-green-100/50 px-5 sm:px-6 py-2 sm:py-3 rounded-full border border-green-200 shadow-sm">
-                                                    <Gift className="w-4 h-4 sm:w-5 h-5" />
+                                                <div className="mt-3 sm:mt-4 flex items-center gap-2 text-green-600 font-black text-[10px] sm:text-[11px] bg-green-100/50 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border border-green-200 shadow-sm">
+                                                    <Gift className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                                     JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
                                                 </div>
                                             )}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="space-y-5 sm:space-y-6">
-                                    <div className="space-y-2 sm:space-y-3">
-                                        <Label className="text-[10px] sm:text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">{translations.promo_code_label}</Label>
+                                <div className="space-y-4 sm:space-y-5">
+                                    <div className="space-y-1.5 sm:space-y-2">
+                                        <Label className="text-[9px] sm:text-[10px] uppercase font-black text-slate-400 tracking-[0.25em] ml-3">{translations.promo_code_label}</Label>
                                         <div className="relative">
                                             <Input 
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
                                                 placeholder={translations.promo_code_placeholder}
-                                                className="rounded-full py-5 sm:py-6 px-6 border-slate-200 focus:ring-primary h-12 sm:h-14 text-sm sm:text-base font-bold uppercase tracking-widest bg-white"
+                                                className="rounded-full py-4 sm:py-5 px-5 border-slate-200 focus:ring-primary h-10 sm:h-12 text-xs sm:text-sm font-bold uppercase tracking-widest bg-white"
                                             />
                                             {total.isPromoApplied && (
-                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500 animate-fade-in">
-                                                    <CheckCircle className="w-5 h-5 sm:w-6 h-6" />
+                                                <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500 animate-fade-in">
+                                                    <CheckCircle className="w-4 h-4 sm:w-5 h-5" />
                                                 </div>
                                             )}
                                         </div>
                                         {promoCode && !total.isPromoApplied && (
-                                            <p className="text-[9px] sm:text-[10px] text-red-400 font-bold ml-4 uppercase tracking-tighter">{translations.promo_code_invalid}</p>
+                                            <p className="text-[8px] sm:text-[9px] text-red-400 font-bold ml-3 uppercase tracking-tighter">{translations.promo_code_invalid}</p>
                                         )}
                                     </div>
 
                                     {!total.isPromoApplied && (
-                                        <div className="space-y-2 sm:space-y-3">
-                                            <Label className="text-[10px] sm:text-[11px] uppercase font-black text-slate-400 tracking-[0.3em] ml-4">Chegirmalar</Label>
+                                        <div className="space-y-1.5 sm:space-y-2">
+                                            <Label className="text-[9px] sm:text-[10px] uppercase font-black text-slate-400 tracking-[0.25em] ml-3">Chegirmalar</Label>
                                             <DynamicToggle 
                                                 id="discount-tier"
                                                 options={discountOptions}
@@ -390,10 +390,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     )}
                                 </div>
                             </div>
-                            <Button size="lg" className="w-full py-8 sm:py-10 text-xl sm:text-2xl font-black rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.3)] hover:scale-[1.03] active:scale-95 transition-all mt-10 sm:mt-14 group border-none" onClick={onOrderNow} disabled={total.base === 0}>
-                                <span className="flex items-center gap-3">
+                            <Button size="lg" className="w-full py-6 sm:py-8 text-lg sm:text-xl font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-95 transition-all mt-8 sm:mt-10 group border-none" onClick={onOrderNow} disabled={total.base === 0}>
+                                <span className="flex items-center gap-2.5">
                                     Loyiha narxini tasdiqlash
-                                    <ChevronsDown className="w-6 h-6 sm:w-8 h-8 animate-bounce" />
+                                    <ChevronsDown className="w-5 h-5 sm:w-6 h-6 animate-bounce" />
                                 </span>
                             </Button>
                         </div>
