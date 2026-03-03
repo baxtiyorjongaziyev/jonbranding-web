@@ -244,7 +244,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ]
         },
         logoStandard: {
-            label: isUz ? "Logo Standart" : "Unique Logo",
+            label: isUz ? "Logo Standart" : "Standard Logo",
             description: isUz ? "Logom tayyor bo'lsin" : "Logo ready to go",
             subDescription: isUz ? "Endigina boshlamoqchi bo'lganlar uchun" : "For those just starting out",
             price: basePricesUSD.logoStandard,
@@ -329,7 +329,9 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Logo 4 xil ko'rinishda + Ijtimoiy tarmoqlar uchun profil rasmi",
                 "3 xil fayl formatida topshiriladi: PNG, SVG, AI",
                 "Rasmiy ranglar va shriftlar tizimi",
-                "Brandbook — to'liq qo'llanma (qoidalar, fonga qo'yish, o'lchamlar)",
+                "Brandbook — to'liq qo'llanma",
+                "Logotip animatsiyasi (Motion design / MP4)",
+                "Brendlangan Telegram stikerlar to'plami (10 ta)",
                 "25 ta aloqa nuqtasida professional vizual namoyish",
                 "Logoning to'liq mulkchilik huquqi sertifikati",
                 "Cheksiz tuzatish (30 kun ichida)"
@@ -340,6 +342,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Source files (AI, SVG, PNG)",
                 "Official color & font systems",
                 "Full Brandbook (guidelines)",
+                "Logo animation (Motion Design)",
+                "Branded Telegram stickers (10 pcs)",
                 "Visuals on 25 touchpoints",
                 "Full ownership certificate",
                 "Unlimited revisions (30 days)"
