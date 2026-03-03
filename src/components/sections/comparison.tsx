@@ -9,8 +9,7 @@ import { cn } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useEffect, useState } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { Button } from '../ui/button';
-import { ArrowRight } from 'lucide-react';
+import CtaBlock from './cta-block';
 
 const competitors = [
     { id: 'jon', name: 'Jon.Branding', isPrimary: true },
@@ -133,29 +132,12 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang }) => {
         </div>
       </div>
       
-       <section className="bg-white py-16">
-          <div className="container mx-auto px-4">
-            <div className="rounded-[2.5rem] bg-gradient-to-br from-dark-blue to-primary p-10 sm:p-16 text-center text-white shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-              <div className="relative z-10">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tighter">{translations.ctaTitle}</h2>
-                <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-blue-100/90 font-medium">
-                    {translations.ctaDesc}
-                </p>
-                <div className="mt-10">
-                    <Button
-                    onClick={onCtaClick}
-                    size="lg"
-                    className="bg-white text-primary hover:bg-blue-50 shadow-2xl text-lg font-black h-auto py-5 px-10 rounded-full group"
-                    >
-                    {translations.ctaButton}
-                    <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <CtaBlock 
+        title={translations.ctaTitle}
+        description={translations.ctaDesc}
+        buttonText={translations.ctaButton}
+        onCtaClick={onCtaClick}
+      />
     </section>
   );
 };
