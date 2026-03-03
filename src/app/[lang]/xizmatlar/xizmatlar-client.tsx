@@ -39,10 +39,9 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
   if (!dictionary) return <div className="py-20 text-center"><Skeleton className="h-screen w-full" /></div>;
 
   return (
-    <>
+    <div suppressHydrationWarning>
       <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary.servicesHero} />
       <WhyUs onCtaClick={handleOpenModal} lang={lang} />
-      <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
       <ServiceSections lang={lang} dictionary={dictionary.serviceSections} />
       
       {isClient && dictionary.servicesPage ? (
@@ -53,13 +52,14 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
         </div>
       )}
 
-      <UrgencyBlock />
-      <PersonalOfferBlock onCtaClick={handleOpenModal} />
-      <QueueStatus onCtaClick={handleOpenModal} />
-      <Testimonials lang={lang} dictionary={dictionary.testimonials} />
       <Comparison onCtaClick={handleOpenModal} lang={lang} />
+      <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
+      <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+      <PersonalOfferBlock onCtaClick={handleOpenModal} />
+      <UrgencyBlock />
+      <QueueStatus onCtaClick={handleOpenModal} />
       <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
-    </>
+    </div>
   );
 };
 
