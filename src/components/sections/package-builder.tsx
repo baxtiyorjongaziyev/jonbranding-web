@@ -46,33 +46,51 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
             className={cn(
                 "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border flex flex-col rounded-[1.2rem] mt-2",
                 selected
-                    ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_30px_rgba(251,191,36,0.3)] scale-[1.02]' : 'border-primary bg-white shadow-[0_0_20px_rgba(37,99,235,0.15)] scale-[1.02]')
+                    ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_40px_rgba(251,191,36,0.4)] scale-[1.02]' : 'border-primary bg-white shadow-[0_0_20px_rgba(37,99,235,0.15)] scale-[1.02]')
                     : (isVip ? 'bg-blue-950 border-blue-900/50 hover:border-amber-400/50' : 
                        isPremium ? 'bg-gradient-to-br from-white to-blue-50/20 border-slate-100 hover:border-primary/20' : 
-                       'bg-white border-slate-100 hover:border-primary/20 hover:shadow-md')
+                       'bg-white border-slate-100 hover:border-primary/20 hover:shadow-md'),
+                isPremium && !selected && "animate-pulse-subtle"
             )}
             suppressHydrationWarning
         >
-            {/* Ultra-Premium Shimmer effect for VIP */}
+            {/* VIP Shimmer & Pulse effects */}
             {isVip && selected && (
-                <div className="absolute inset-0 rounded-[1.2rem] overflow-hidden pointer-events-none">
-                    <motion.div
-                        animate={{ x: ['-100%', '200%'] }}
-                        transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
+                <>
+                    <div className="absolute inset-0 rounded-[1.2rem] overflow-hidden pointer-events-none">
+                        <motion.div
+                            animate={{ x: ['-100%', '200%'] }}
+                            transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
+                        />
+                    </div>
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0.3, 0.6, 0.3] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                        className="absolute -inset-1 border-2 border-amber-400/30 rounded-[1.4rem] blur-sm pointer-events-none"
                     />
-                </div>
+                </>
             )}
 
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
+            {/* Premium Soft Pulse */}
+            {isPremium && selected && !isVip && (
+                <motion.div 
+                    animate={{ boxShadow: ['0 0 0px rgba(37,99,235,0)', '0 0 20px rgba(37,99,235,0.2)', '0 0 0px rgba(37,99,235,0)'] }}
+                    transition={{ repeat: Infinity, duration: 2.5 }}
+                    className="absolute inset-0 rounded-[1.2rem] pointer-events-none"
+                />
+            )}
+
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
                 {recommended && !isVip && (
-                    <Badge className="bg-primary text-white text-[11px] font-black px-5 py-1 rounded-full border-none uppercase tracking-widest shadow-lg animate-pulse">
+                    <Badge className="bg-primary text-white text-[12px] font-black px-6 py-1.5 rounded-full border-none uppercase tracking-widest shadow-xl animate-breathing">
                         {dictionary.recommended}
                     </Badge>
                 )}
                 {isVip && (
-                    <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[11px] font-black px-6 py-1 rounded-full border-none uppercase flex items-center gap-1.5 shadow-[0_4px_15px_rgba(251,191,36,0.4)] whitespace-nowrap">
-                        <Crown className="w-3.5 h-3.5" /> VIP
+                    <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[12px] font-black px-8 py-1.5 rounded-full border-none uppercase flex items-center gap-2 shadow-[0_4px_20px_rgba(251,191,36,0.5)] whitespace-nowrap">
+                        <Crown className="w-4 h-4" /> VIP
                     </Badge>
                 )}
             </div>
@@ -80,29 +98,29 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
             <CardHeader className="p-5 pb-3">
                 <div className="flex items-center gap-3 mb-2">
                     <div className={cn(
-                        "w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 flex-shrink-0",
+                        "w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 flex-shrink-0",
                         selected 
                             ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-md") 
                             : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/20" : "bg-secondary text-slate-600")
                     )}>
-                        <Icon className="w-6 h-6" />
+                        <Icon className="w-7 h-7" />
                     </div>
                     <div className="min-w-0">
-                        <CardTitle className={cn("text-xl sm:text-2xl font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
+                        <CardTitle className={cn("text-xl font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
                             {label}
                         </CardTitle>
                     </div>
                 </div>
                 
-                <div className="flex items-center gap-3 mt-1 flex-wrap">
-                    <span className={cn("text-2xl sm:text-3xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
+                <div className="flex items-center gap-2 mt-1 flex-wrap">
+                    <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
                         {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
                     </span>
-                    {description && (
+                    {subDescription && (
                         <>
                             <div className={cn("h-6 w-px mx-1", isVip ? "bg-white/20" : "bg-slate-200")} />
-                            <span className={cn("text-sm sm:text-base font-bold leading-tight", isVip ? "text-slate-300" : "text-slate-500")}>
-                                {description}
+                            <span className={cn("text-sm font-bold leading-tight", isVip ? "text-slate-300" : "text-slate-500")}>
+                                {subDescription}
                             </span>
                         </>
                     )}
@@ -114,7 +132,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <button 
                         onClick={() => setActiveTab('included')}
                         className={cn(
-                            "flex-1 py-2 text-[11px] font-black uppercase tracking-widest transition-all",
+                            "flex-1 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all",
                             activeTab === 'included' 
                                 ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
                                 : "text-slate-400"
@@ -125,7 +143,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <button 
                         onClick={() => setActiveTab('benefits')}
                         className={cn(
-                            "flex-1 py-2 text-[11px] font-black uppercase tracking-widest transition-all",
+                            "flex-1 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all",
                             activeTab === 'benefits' 
                                 ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
                                 : "text-slate-400"
@@ -176,9 +194,9 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                                 <span>{timeline}</span>
                             </div>
                         )}
-                        {subDescription && (
+                        {description && (
                              <span className={cn("text-[11px] font-bold italic", isVip ? "text-amber-400/40" : "text-slate-400")}>
-                                {subDescription}
+                                {description}
                             </span>
                         )}
                     </div>
