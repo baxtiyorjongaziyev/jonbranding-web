@@ -235,7 +235,7 @@
         {
           "title": "3. Raqobatchilardan nusxa ko'chirish",
           "description": "Raqobatchilarga qarash muhim, lekin ularni ko'r-ko'rona nusxalash — bu hech qayerga olib bormaydigan yo'l. Agar dizayningiz mashhur brendga o'xshasa, sizni har doim 'arzon muqobil' sifatida ko'rishadi.",
-          "solution": "Yechim: O'zingizning noyob yo'lingizni topish uchun raqobatchilarni o'rganing. Boshqacha bo'lishdan qo'rqmang."
+          "solution": "Yechim: O'zingizning noyob yo'lingizni find qilish uchun raqobatchilarni o'rganing. Boshqacha bo'lishdan qo'rqmang."
         },
         {
           "title": "4. Nomuvofiqlik (Inconsistency)",
@@ -338,6 +338,16 @@
       "recommended": "Tavsiya etiladi",
       "features": "Xizmatlar",
       "results": "Natijalar"
+    },
+    "comparison": {
+      "title": "Biz va raqobatchilar",
+      "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklarga qaraganda ancha arzonroq narxlarda taqdim etamiz. Va natija siz kutgandan ham yaxshiroq bo'ladi.",
+      "features": "Xususiyatlari",
+      "whyPremiumTitle": "Nega faqat premium agentliklar bilan solishtiramiz?",
+      "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki hamyonbop narxda premium sifatni taqdim etishdir. Sifati va strategiyasi bizning darajamizga mos kelmaydigan agentliklar bilan solishtirish mijoz uchun ham, biz uchun ham noto'g'ri bo'lar edi.",
+      "ctaTitle": "Farqni ko'rdingiz. Endi tanlash vaqti keldi!",
+      "ctaDesc": "Sifatli brending uchun ortiqcha pul to'lash shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling va biz bilan bog'laning.",
+      "ctaButton": "Menga shunday yondashuv kerak"
     }
   },
   "contactModal": {
@@ -410,5 +420,228 @@
     "title": "Ketishga shoshilmang!",
     "description": "Siz uchun maxsus taklifimiz bor. <br/>Bizda <span class='font-bold text-primary'>turli chegirmalar</span> amal qiladi. Imkoniyatdan foydalanib qoling!",
     "button": "Chegirmalarni ko'rish"
-  }
+  },
+  "cookieConsent": {
+    "message": "Saytimizda mazali 'cookie'lar bor. Ular bizga sizni eslab qolishga yordam beradi. Agar rozi bo'lsangiz, keling ularni birga baham ko'ramiz.",
+    "acceptButton": "Yeyman ularni"
+  },
+  "blog": {
+    "title": "Bizning Blog",
+    "subtitle": "Brending, marketing va dizayn olamidagi so'nggi yangiliklar, maslahatlar va tahliliy maqolalar. Biznesingizni o'stirishga yordam beramiz.",
+    "readMore": "Batafsil o'qish"
+  },
+  "blogPost": {
+    "author": "Muallif",
+    "ctaTitle": "Maqola foydali bo'ldimi?",
+    "ctaDesc": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Brendingizni biz bilan yangi bosqichga olib chiqing.",
+    "ctaButton": "Bepul konsultatsiya olish"
+  },
+  "brandbookPage": {
+    "metadata": {
+      "title": "Brendbuk ishlab chiqish | Jon.Branding Agentligi",
+      "description": "Brendbuk — bu sizning brendingiz konstitutsiyasi. Biz brendingiz izchilligini ta'minlovchi va marketing xarajatlarini tejaydigan kompleks brendbuklar yaratamiz.",
+      "keywords": "brendbuk, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
+    },
+    "title": "Brendbuk Ishlab Chiqish",
+    "subtitle": "Brendbuk — bu shunchaki logotiplar to'plami emas, bu brendingizning izchilligi va yaxlitligini ta'minlovchi konstitutsiyasidir.",
+    "section1_title": "Nima uchun har bir biznesga brendbuk kerak?",
+    "section1_p1": "Brendbuk — bu brendni boshqarish uchun asosiy vositadir. U kompaniyangizning vizual va g'oyaviy elementlaridan foydalanish bo'yicha barcha qoidalarni — logotip va ranglardan tortib muloqot ohangigacha aniq belgilab beradi.",
+    "section1_p2": "Ushbu hujjat marketingdagi tartibsizliklarning oldini olishga yordam beradi, brendning taniluvchanligini ta'minlaydi hamda dizaynerlar, marketologlar va boshqa pudratchilar bilan ishlashda vaqt va pulni tejaydi.",
+    "values_title": "Brendbuk ushbu muammolarni hal qiladi:",
+    "values": [
+      { "title": "Izchillik va Tanilish", "description": "Brendingiz barcha platformalarda — vizitkadan tortib veb-saytgacha bir xil va professional ko'rinishini ta'minlaydi." },
+      { "title": "Resurslarni Tejash", "description": "Har bir yangi xodim yoki pudratchiga dizayn qoidalarini tushuntirish zaruriyatini yo'q qiladi, ish jarayonini tezlashtiradi." },
+      { "title": "Brendni Himoya Qilish", "description": "Aydentikangizni noto'g'ri foydalanishdan himoya qiladi, brendingiz yaxlitligi va qiymatini saqlab qoladi." }
+    ],
+    "process_title": "Brendbuk nimalarni o'z ichiga oladi?",
+    "process_subtitle": "Bizning brendbuklarimiz brendni samarali boshqarish uchun barcha zarur bo'limlarni o'z ichiga oladi:",
+    "process_steps": [
+      { "title": "Brend Platformasi", "description": "Missiya, qadriyatlar, brend xarakteri va maqsadli auditoriya." },
+      { "title": "Logotip va Aydentika", "description": "Logotip, firma ranglari va shriftlaridan foydalanish qoidalari." },
+      { "title": "Vizual Uslub", "description": "Fotosuratlar, illustratsiyalar va grafik elementlardan foydalanish qoidalari." },
+      { "title": "Amaliy Tatbiq", "description": "Real tashuvchilar (vizitka, taqdimot, ijtimoiy tarmoqlar) uchun dizayn namunalari." }
+    ],
+    "cta_title": "Brendingizda tartib o'rnatishga tayyormisiz?",
+    "cta_description": "Professional brendbuk — bu biznesingizning barqaror kelajagi uchun investitsiyadir. Keling, sizning ishonchli yordamchingizga aylanadigan hujjatni yaratamiz.",
+    "cta_button": "Brendbuk Buyurtma Qilish"
+  },
+  "corporateStylePage": {
+    "metadata": {
+      "title": "Firma uslubi va Brendbuk yaratish | Toshkentdagi brending agentligi",
+      "description": "Biz shunchaki chiroyli rasm chizmaymiz, biz brendingiz uchun ishlaydigan va natija keltiradigan tizimli vizual uslubni (firma uslubi, brendbuk) ishlab chiqamiz. Logotip, ranglar, shriftlar va boshqa elementlar orqali brendingizni taniladigan va esda qolarli qiling."
+    },
+    "title": "Firma Uslubini Ishlab Chiqish",
+    "subtitle": "Brendning asosiy elementlaridan biri — uning vizual komponentidir. Aynan u g'oyalar, ma'nolar va qadriyatlarni ko'rish, his qilish va eslab qolish mumkin bo'lgan tasvirlarga aylantiradi.",
+    "section1_title": "Brendni idrok etish rasmdan boshlanadi",
+    "section1_p1": "Zamonaviy dunyoda vizual ma'lumot matn yoki so'zlarga qaraganda tezroq qabul qilinadi va o'zlashtiriladi. Biz lahzalik taassurotlar davrida yashayapmiz: odamlarga brend haqida taassurot shakllantirish uchun soniyaning bir qismi kifoya qiladi va bu ko'pincha uning vizual qiyofasi orqali sodir bo'ladi.",
+    "section1_p2": "G'oya auditoriya ongida mustahkam o'rnashib olishi uchun shunchaki u haqida gapirish yetarli emas — uni vizual elementlar bilan mustahkamlash muhimdir. Yaxshi ishlangan firma uslubi brend qadriyatlarini ortiqcha tushuntirishlarsiz namoyish etish imkonini beradi, bir zumda kerakli hissiyotlar va assotsiatsiyalarni chaqiradi.",
+    "section2_title": "Firma uslubi — bu tizim",
+    "section2_p1": "Bu nafaqat go'zallik haqida, balki samaradorlik, ma'nolar va nazorat haqida. Brend ko'p qirrali va shu bilan birga o'z vizual qiyofasini rivojlantirishda izchil qolishi uchun grafik elementlar to'plamini yaratish zarur.",
+    "section2_p2": "Bunday to'plam har doim biznes vazifalari va imkoniyatlaridan kelib chiqqan holda individual ravishda tanlanadi. Minimal to'plam logotip, ranglar, shriftlar, fotosuratlar uslubi, reklama tashuvchilar uslubi va yaxlit obrazni shakllantiruvchi boshqa elementlarni o'z ichiga oladi.",
+    "section2_p3": "Vizual uslub aniq va izchil qurilganda, u brend imidjini va uning kommunikatsiyalarini boshqarish uchun kuchli vositaga aylanadi. Agar uning barcha elementlari muvofiqlashtirilgan bo'lsa, brend professional, ishonchli va taniladigan sifatida qabul qilinadi.",
+    "process_title": "Firma uslubini qanday yaratamiz?",
+    "process_subtitle": "Har bir detal brendning tanilishi va uning strategiyasi uchun ishlashi uchun biz firma uslubini ishlab chiqishga tizimli yondashamiz.",
+    "process_steps": [
+      { "title": "Tadqiqot va konsepsiya", "description": "Auditoriya, bozor, raqobatchilar va brend o'rnini tahlil qilamiz. Vizual uslubda aks etishi kerak bo'lgan asosiy ma'nolar va g'oyalarni aniqlaymiz." },
+      { "title": "Vizual kodni ishlab chiqish", "description": "Logotip, firma ranglari, tipografika, grafika, ikonika, layout tamoyillari — yaxlit brend qiyofasini shakllantiruvchi barcha elementlarni yaratamiz." },
+      { "title": "Firma uslubi tizimi", "description": "Barcha formatlarda — qadoqdan tortib raqamli muhitgacha vizual obrazning izchilligini saqlashga yordam beradigan moslashuvchan elementlarni ishlab chiqamiz." },
+      { "title": "Yakunlash va gaydlayn", "description": "Uslubdan foydalanish qoidalari ko'rsatilgan gaydlayn (brendbuk) yaratamiz, shunda brend har qanday tashuvchida yagona qiyofasini saqlab qoladi." }
+    ],
+    "cta_title": "Firma uslubi — o'sish vositasi",
+    "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi, uzoqroq esda qoladi va ko'proq ishonch uyg'otadi. Biz shunchaki vizual uslub emas, balki brendga o'sishga, izchil va boshqariladigan bo'lishga yordam beradigan vosita yaratamiz."
+  },
+  "logoDesignPage": {
+    "metadata": {
+      "title": "Professional logotip dizayni xizmatlari | Jon.Branding Agentligi O'zbekiston",
+      "description": "Logotip — bu biznesingizning yuzi. O'zbekistondagi logotip dizayn agentligimiz biznesingiz mohiyatini aks ettiruvchi va raqobatchilardan ajralib turishga yordam beradigan noyob, esda qolarli va strategik logotiplar yaratadi."
+    },
+    "title": "Logotip Dizayni",
+    "subtitle": "Logotip — bu shunchaki rasm emas; bu strategik vosita, biznesingizning yuzi va siz qoldiradigan birinchi taassurotdir.",
+    "section1_title": "Nega logotip shunchalik muhim?",
+    "section1_p1": "Bugungi raqobatbardosh bozorda logotip mijozning e'tiborini tortadigan birinchi narsadir. Yaxshi logotip nafaqat chiroyli dizayn, balki biznesingizning qadriyatlari, professionalligi va noyobligini yetkazuvchi ramzdir.",
+    "section1_p2": "Bu mijozlar sizni tanib olishi va eslab qolishiga yordam beruvchi asosiy elementdir. Professional logotip ishonch uyg'otadi va hissiy aloqa o'rnatadi, bir martalik xaridorlarni sodiq muxlislarga aylantiradi.",
+    "values_title": "Yaxshi logotip quyidagicha bo'lishi kerak:",
+    "values": [
+      { "title": "Sodda va esda qolarli", "description": "Eng yaxshi logotiplar kichik o'lchamda yoki uzoq masofadan ham oson taniladi va esda qoladi." },
+      { "title": "Noyob va abadiy", "description": "U sizni raqobatchilardan ajratib turishi va bir necha yildan keyin modadan qolmasligi kerak." },
+      { "title": "Strategik va mazmunli", "description": "Har bir chiziq, rang va shakl biznesingizning xarakteri va maqsadlarini aks ettirishi kerak." }
+    ],
+    "process_title": "Logotipni qanday yaratamiz?",
+    "process_subtitle": "Bizning logotip yaratish jarayonimiz shunchaki lahzalik ilhomga emas, balki chuqur tahlil va strategik fikrlashga asoslangan.",
+    "process_steps": [
+      { "title": "Brifing va tadqiqot", "description": "Biznesingizni, maqsadlaringizni, maqsadli auditoriyangizni va raqobatchilaringizni diqqat bilan o'rganamiz." },
+      { "title": "Konsepsiya ishlab chiqish", "description": "Brend strategiyangiz va xarakteringizni aks ettiruvchi bir nechta vizual konsepsiyalarni ishlab chiqamiz." },
+      { "title": "Dizayn va taqdimot", "description": "Tanlangan konsepsiyani takomillashtiramiz, uni real misollarda (mockups) ko'rsatamiz va uning ortidagi mantiqni tushuntiramiz." },
+      { "title": "Yakunlash va topshirish", "description": "Har qanday vaziyatda foydalanish uchun barcha zaruriy fayl formatlarini tayyorlaymiz va ulardan foydalanish bo'yicha mini-qo'llanma beramiz." }
+    ],
+    "cta_title": "Ishlaydigan logotip yaratishga tayyormisiz?",
+    "cta_description": "Shunchaki shablon logotip bilan cheklanib qolmang. Keling, biznesingiz uchun muvaffaqiyatingiz poydevoriga aylanadigan noyob va kuchli ramz yaratamiz.",
+    "cta_button": "Bepul konsultatsiya olish"
+  },
+  "namingPage": {
+    "metadata": {
+      "title": "Toshkentda neyming xizmatlari | Jon.Branding Agentligi",
+      "description": "Brend uchun unutilmas va kuchli nom tanlash. Yaxshi nom shunchaki chiroyli jaranglamaydi; u mohiyatni yetkazadi, esda qoladi va brendning ajralib turishiga yordam beradi. Bizning neyming xizmatlarimiz sizga ideal nom topishda yordam beradi."
+    },
+    "title": "Neyming — Kuchli Brend Nomi",
+    "subtitle": "Brend nomi — uning birinchi taassuroti, uning energiyasi, xarakteri va so'z bilan ifodalangan g'oyasidir. Yaxshi nom shunchaki chiroyli jaranglamaydi, balki mohiyatni yetkazadi, esda qoladi va raqobatchilar orasida brendning ajralib turishiga yordam beradi.",
+    "section1_title": "Nom — brend strategiyasining bir qismi",
+    "section1_p1": "Yaxshi nom assotsiatsiyalar, taniluvchanlik va hissiy aloqani qo'llab-quvvatlaydi. Bunday nomni yaratish — brend pozitsiyasi, bozor, maqsadli auditoriya va kompaniyaning uzoq muddatli maqsadlarini hisobga oladigan strategik ishdir.",
+    "section1_p2": "Biz neymingga eng muhim brending elementi sifatida yondashamiz. Bu tasodifiy g'oyalar to'plami emas, balki har bir so'z ahamiyatga ega bo'lgan puxta o'ylangan ishdir.",
+    "section2_title": "Har bir kuchli nom g'oyadan boshlanadi",
+    "section2_p1": "Nom qidirishdan oldin biz asosiy savolni beramiz: bu brend nima haqida? U qanday tuyg'ular va obrazlarni uyg'otishi kerak? Shuning uchun biz mahsulotni, uning auditoriyasini va muhitini diqqat bilan tahlil qilamiz, ideal nomni topish uchun semantik yo'nalishlarni aniqlaymiz.",
+    "section2_p2": "U emotsiya, metafora, madaniy kod, professional til yoki hatto so'z o'yini asosida qurilishi mumkin. Asosiysi — u ishlashi, mohiyatni yetkazishi va brendning esda qolishiga yordam berishi kerak.",
+    "process_title": "Nomni qanday yaratamiz?",
+    "process_subtitle": "Agentligimizda neymingni ishlab chiqish — har bir bosqich muhim bo'lgan aniq jarayon:",
+    "process_steps": [
+      { "title": "Tadqiqot", "description": "Bozor, auditoriya, raqobatchilar va semantik yo'nalishlarni o'rganamiz." },
+      { "title": "Konsepsiyani shakllantirish", "description": "Nom qidirish uchun mumkin bo'lgan vektorlarni aniqlaymiz." },
+      { "title": "G'oyalar generatsiyasi va test", "description": "Variantlar ro'yxatini yaratamiz, ularni jaranglashi, ma'nosi va salohiyati bo'yicha tekshiramiz." },
+      { "title": "Tekshirish va yakunlash", "description": "Ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz, domenlar va assotsiatsiyalarni tekshiramiz, eng yaxshilarini tanlaymiz." }
+    ],
+    "check_title": "Nomni tekshirish uni yaratishdan kam ahamiyatli emas",
+    "check_subtitle": "Agar dahshatli g'oyani ro'yxatdan o'tkazib bo'lmasa yoki u istalmagan assotsiatsiyalarni keltirib chiqarsa, u ishlamaydi. Biz nomlarni bir nechta asosiy parametrlar bo'yicha tekshiramiz:",
+    "check_points": [
+      { "title": "Huquqiy tozalik", "description": "Tovar belgisini ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz." },
+      { "title": "Domenlar va raqamli muhit", "description": "Raqamli makonda nomlarning bo'shligini tekshiramiz." },
+      { "title": "Ma'no va assotsiatsiyalar", "description": "O'qilishi, jaranglashi, mumkin bo'lgan assotsiativ qator, madaniy idrok va brend toifasiga mosligini tekshiramiz." }
+    ],
+    "calculator_cta_button": "Patent kalkulyatoriga o'tish"
+  },
+  "patentCalculatorPage": {
+    "metadata": {
+      "title": "Tovar belgisi kalkulyatori | Jon.Branding",
+      "description": "O'zbekistonda tovar belgisini ro'yxatdan o'tkazish bilan bog'liq taxminiy xarajatlarni (davlat bojlari va xizmat narxi) hisoblang."
+    },
+    "title": "Tovar belgisini ro'yxatdan o'tkazish kalkulyatori",
+    "subtitle": "Neyming (nom tanlash) — ijodiy jarayon, patentlash esa — huquqiy jarayon. Tovar belgisini ro'yxatdan o'tkazish uchun taxminiy xarajatlarni (davlat bojlari va xizmat narxi) bizning jamoamizdagi patent ishonchli vakili yordamida aynan shu yerda hisoblang.",
+    "trademarkCalculator": {
+      "formTitle": "Ma'lumotlarni kiriting",
+      "brandNameLabel": "Brend nomi",
+      "brandNamePlaceholder": "Masalan: MyBrand",
+      "yourNameLabel": "Ismingiz",
+      "yourNamePlaceholder": "To'liq ismingizni kiriting",
+      "phoneLabel": "Telefon raqamingiz",
+      "phonePlaceholder": "+998901234567",
+      "classCountLabel": "Faoliyat turlari (klass) soni",
+      "classCountMax": "Maks. 45",
+      "personTypeLabel": "Shaxs turi",
+      "personTypeOptions": [
+        { "value": "jismoniy", "label": "Jismoniy shaxs" },
+        { "value": "yuridik", "label": "Yuridik shaxs" }
+      ],
+      "speedLabel": "Ko'rib chiqish tezligi",
+      "speedOptions": [
+        { "value": "oddiy", "label": "Oddiy (7 oy)", "labelShort": "Oddiy" },
+        { "value": "tez", "label": "Tezlashtirilgan (1.5 oy)", "labelShort": "Tezkor" }
+      ],
+      "expertCheckLabel": "Qo'shimcha ekspert tekshiruvi",
+      "expertCheckOptions": [
+        { "value": "ha", "label": "Yoqilgan" },
+        { "value": "yoq", "label": "O'chirilgan" }
+      ],
+      "activityLabel": "Faoliyat turlari (ixtiyoriy)",
+      "activityPlaceholder": "Masalan: dizayn, qurilish, kiyim ishlab chiqarish...",
+      "activityHelp": "Bu klasslarni aniqlashda yordam beradi.",
+      "submitButton": "Patentlashga buyurtma berish",
+      "submittingButton": "Yuborilmoqda...",
+      "successMessage": "✅ Buyurtma qabul qilindi!",
+      "tryAgainButton": "Qayta hisoblash",
+      "summaryTitle": "Xarajatlar tafsiloti",
+      "totalCostTitle": "10 yilga patentning taxminiy umumiy qiymati",
+      "currency": "so'm",
+      "classLabel": "klass",
+      "expertCheckLabelShort": "Ekspert+",
+      "totalCostNote": "Barcha davlat bojlari va xizmat narxini o'z ichiga oladi",
+      "step1Title": "1-bosqich (Dastlabki to'lov)",
+      "ourServiceFee": "Jamoamiz xizmat haqi",
+      "applicationFee": "Talabnoma topshirish boji",
+      "step1Total": "1-bosqich uchun jami",
+      "step2Title": "2-bosqich (Guvohnoma olish)",
+      "stateFeeBase": "Davlat boji (asosiy)",
+      "extraClassesFee": "Qo'shimcha klasslar ({count} ta)",
+      "step2Total": "2-bosqich uchun jami",
+      "expediteTitle": "Tezlashtirilgan ko'rib chiqish uchun qo'shimcha to'lov",
+      "expediteBaseFee": "Asosiy (12 BHM + 12% QQS)",
+      "expediteTotal": "Tezlashtirish uchun jami",
+      "expertCheckTitle": "Ekspert tekshiruvi",
+      "expertBaseFee": "Asosiy (2×BHM)",
+      "expertTotal": "Ekspert xizmati uchun jami",
+      "importantNoteTitle": "Muhim eslatma",
+      "importantNoteText": "Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan Bazaviy Hisoblash Miqdoriga (BHM) bog'liq bo'lib, o'zgarishi mumkin. Ushbu kalkulyator ommaviy oferta emas va faqat ma'lumot berish uchun mo'ljallangan.",
+      "importantNoteBHM": "Hozirgi BHM miqdori {bhm} so'm.",
+      "error_brand": "Iltimos, brend nomini kiriting.",
+      "error_name": "Iltimos, ismingizni kiriting.",
+      "error_phone": "Iltimos, telefon raqamini to'g'ri kiriting.",
+      "error_server": "Serverda xatolik yuz berdi.",
+      "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarimga ishlov berilishiga roziman.",
+      "error_privacy": "Maxfiylik siyosatini qabul qilishingiz shart.",
+      "success_toast_title": "Muvaffaqiyatli!",
+      "success_toast_desc": "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
+      "error_toast_title": "Xatolik!",
+      "telegramTitle": "Yangi patent arizasi (kalkulyatordan)",
+      "notSpecified": "Ko'rsatilmagan"
+    }
+  },
+  "packagingPage": {
+    "metadata": {
+      "title": "O'zbekistonda qadoq dizayni xizmatlari | Jon.Branding",
+      "description": "Biz shunchaki chiroyli qadoq yaratmaymiz; biz mahsulotingizni sotadigan kuchli marketing vositasini yaratamiz. O'zbekistondagi qadoq dizayni agentligimiz brendingizni raqobatchilardan ajralib turishiga va xaridorlar mehrini qozonishiga yordam beradi."
+    },
+    "title": "Qadoq Dizaynini Ishlab Chiqish",
+    "subtitle": "Yuqori raqobat sharoitida qadoq ko'pincha asosiy marketing vositasiga aylanadi. U brendni javonda ajratib turadi, uning tarixini so'zlab beradi va auditoriya bilan birinchi ko'rishdayoq aloqa o'rnatadi.",
+    "section1_title": "Qadoq — brend identifikatsiyasi tashuvchisidan ko'proq narsa",
+    "section1_p1": "Qadoq — brendning savdo nuqtalaridagi birinchi aloqasi, mahsulot haqida bir zumda taassurot yaratadigan vizual murojaatdir. Ko'p hollarda aynan qadoq insonning sotib olish qarorini belgilaydi.",
+    "section1_p2": "Agentligimizning maqsadi — nafaqat estetik va chiroyli qadoq yaratish, balki biznes vazifalariga javob beradigan va uning o'sishiga hissa qo'shadigan samarali vosita yaratishdir.",
+    "process_title": "Qadoqni qanday yaratamiz?",
+    "process_subtitle": "Biz qadoqni ishlab chiqishga alohida dizayn sifatida emas, balki biznes uchun ishlashi va auditoriya kutganlariga javob berishi kerak bo'lgan murakkab tizim sifatida yondashamiz. Jarayonimiz bir necha asosiy bosqichlarni o'z ichiga oladi:",
+    "process_steps": [
+      { "title": "Tahlil va strategiya", "description": "Mahsulotingizni, auditoriyani, raqobatchilarni va qadoq ishlatiladigan muhitni o'rganamiz. Toifa vizual kodini tahlil qilamiz." },
+      { "title": "Konsepsiya va dizayn", "description": "To'plangan ma'lumotlar asosida mahsulot mohiyatini aks ettiruvchi vizual g'oyalarni ishlab chiqamiz: rang, grafika, tipografika va h.k." },
+      { "title": "Yakunlash va tayyorlash", "description": "Tanlangan konsepsiyaning barcha texnik jihatlarini (turli formatlarga adaptatsiya, chop etishga tayyorlash) sinchkovlik bilan ishlab chiqamiz." }
+    ],
+    "cta_title": "Qadoq nafaqat e'tiborni tortadi, u sotadi",
+    "cta_description": "Yaxshi qadoq dizayni — bu shunchaki chiroyli bezak emas, balki biznes uchun ishlaydigan vositadir. Biz funktsional, strategik o'ylangan dizaynni ishlab chiqamiz, unda qadoq to'liq huquqli sotuv vositasi bo'lib xizmat qiladi."
+  },
+  "sitemap": "Sayt xaritasi"
 }

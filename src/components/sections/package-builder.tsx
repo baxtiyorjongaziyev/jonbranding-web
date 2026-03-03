@@ -33,7 +33,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
     const detail = serviceDetails[id];
     if (!detail) return null;
 
-    const { label, price, subDescription, features, benefits, timeline, recommended } = detail;
+    const { label, price, description, subDescription, features, benefits, timeline, recommended } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
     const isPremium = id.toLowerCase().includes('premium');
@@ -50,56 +50,59 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                        isPremium ? 'bg-gradient-to-br from-white to-blue-50/20 border-slate-100 hover:border-primary/20' : 
                        'bg-white border-slate-100 hover:border-primary/20 hover:shadow-md')
             )}
+            suppressHydrationWarning
         >
             <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20">
                 {recommended && !isVip && (
-                    <Badge className="bg-primary text-white text-[7px] font-bold px-3 py-0.5 rounded-full border-none uppercase tracking-wider whitespace-nowrap shadow-md">
+                    <Badge className="bg-primary text-white text-[10px] font-bold px-3 py-0.5 rounded-full border-none uppercase tracking-wider whitespace-nowrap shadow-md">
                         {dictionary.recommended}
                     </Badge>
                 )}
                 {isVip && (
-                    <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-blue-950 text-[7px] font-black px-4 py-0.5 rounded-full border-none uppercase flex items-center gap-1 shadow-md whitespace-nowrap">
+                    <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-blue-950 text-[10px] font-black px-4 py-0.5 rounded-full border-none uppercase flex items-center gap-1 shadow-md whitespace-nowrap">
                         VIP
                     </Badge>
                 )}
             </div>
 
-            <CardHeader className="p-4 pb-2">
-                <div className="flex items-center gap-2 mb-2">
+            <CardHeader className="p-5 pb-3">
+                <div className="flex items-center gap-3 mb-2">
                     <div className={cn(
-                        "w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 flex-shrink-0",
+                        "w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 flex-shrink-0",
                         selected 
                             ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-md") 
                             : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/20" : "bg-secondary text-slate-600")
                     )}>
-                        <Icon className="w-4 h-4" />
+                        <Icon className="w-5 h-5" />
                     </div>
-                    <CardTitle className={cn("text-sm font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
-                        {label}
-                    </CardTitle>
+                    <div className="min-w-0">
+                        <CardTitle className={cn("text-base font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
+                            {label}
+                        </CardTitle>
+                    </div>
                 </div>
                 
                 <div className="flex items-center gap-2 mt-1">
-                    <span className={cn("text-xs font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
+                    <span className={cn("text-lg font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
                         {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
                     </span>
-                    {subDescription && (
+                    {description && (
                         <>
-                            <div className={cn("h-3 w-px mx-1", isVip ? "bg-white/20" : "bg-slate-200")} />
-                            <span className={cn("text-[9px] font-bold leading-tight line-clamp-1", isVip ? "text-slate-400" : "text-slate-500")}>
-                                {subDescription}
+                            <div className={cn("h-4 w-px mx-1", isVip ? "bg-white/20" : "bg-slate-200")} />
+                            <span className={cn("text-xs font-bold leading-tight line-clamp-1", isVip ? "text-slate-400" : "text-slate-500")}>
+                                {description}
                             </span>
                         </>
                     )}
                 </div>
             </CardHeader>
 
-            <CardContent className="px-4 pt-0 pb-4 flex-grow flex flex-col" suppressHydrationWarning>
-                <div className="flex border-b border-slate-100 mb-3" onClick={(e) => e.stopPropagation()}>
+            <CardContent className="px-5 pt-0 pb-5 flex-grow flex flex-col">
+                <div className="flex border-b border-slate-100 mb-4" onClick={(e) => e.stopPropagation()}>
                     <button 
                         onClick={() => setActiveTab('included')}
                         className={cn(
-                            "flex-1 py-2 text-[8px] font-black uppercase tracking-widest transition-all",
+                            "flex-1 py-2 text-[11px] font-black uppercase tracking-widest transition-all",
                             activeTab === 'included' 
                                 ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
                                 : "text-slate-400"
@@ -110,7 +113,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                     <button 
                         onClick={() => setActiveTab('benefits')}
                         className={cn(
-                            "flex-1 py-2 text-[8px] font-black uppercase tracking-widest transition-all",
+                            "flex-1 py-2 text-[11px] font-black uppercase tracking-widest transition-all",
                             activeTab === 'benefits' 
                                 ? (isVip ? "text-amber-400 border-b-2 border-amber-400" : "text-primary border-b-2 border-primary")
                                 : "text-slate-400"
@@ -121,50 +124,57 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                 </div>
 
                 {activeTab === 'included' ? (
-                    <div className="space-y-1.5 flex-grow animate-fade-in">
-                        <ul className="space-y-1.5">
+                    <div className="space-y-2 flex-grow animate-fade-in">
+                        <ul className="space-y-2">
                             {(features || []).map((r: string, i: number) => (
-                                <li key={i} className="flex items-start gap-2">
+                                <li key={i} className="flex items-start gap-2.5">
                                     <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
-                                        <CheckCircle className={cn("w-2 h-2", isVip ? "text-amber-400" : "text-primary")} />
+                                        <CheckCircle className={cn("w-3 h-3", isVip ? "text-amber-400" : "text-primary")} />
                                     </div>
-                                    <span className={cn("text-[10px] font-normal leading-tight", isVip ? "text-slate-300" : "text-dark-blue")}>{r}</span>
+                                    <span className={cn("text-sm font-medium leading-relaxed", isVip ? "text-slate-300" : "text-slate-700")}>{r}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 gap-2 flex-grow animate-fade-in">
+                    <div className="grid grid-cols-1 gap-3 flex-grow animate-fade-in">
                         {(benefits || []).map((b: any, i: number) => (
                             <div 
                                 key={i} 
                                 className={cn(
-                                    "p-2 rounded-xl border flex items-center gap-3",
+                                    "p-3 rounded-xl border flex items-center gap-4",
                                     isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100"
                                 )}
                             >
-                                <span className="text-sm shrink-0">{b.icon}</span>
-                                <div className="space-y-0 min-w-0">
-                                    <p className={cn("text-[9px] font-bold leading-tight truncate", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
-                                    <p className={cn("text-[8px] leading-tight text-slate-500 line-clamp-1", isVip && "text-slate-400")}>{b.description}</p>
+                                <span className="text-xl shrink-0">{b.icon}</span>
+                                <div className="space-y-0.5 min-w-0">
+                                    <p className={cn("text-sm font-bold leading-tight truncate", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
+                                    <p className={cn("text-xs leading-snug text-slate-500 line-clamp-2", isVip && "text-slate-400")}>{b.description}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
                 )}
 
-                <div className="mt-4 pt-3 border-t border-slate-100 space-y-3">
-                    {timeline && (
-                        <div className={cn("flex items-center gap-1.5 text-[8px] font-black uppercase tracking-widest", isVip ? "text-amber-400/50" : "text-slate-400")}>
-                            <Clock className="w-3 h-3" />
-                            <span>{timeline}</span>
-                        </div>
-                    )}
+                <div className="mt-5 pt-4 border-t border-slate-100 space-y-4">
+                    <div className="flex items-center justify-between">
+                        {timeline && (
+                            <div className={cn("flex items-center gap-2 text-xs font-black uppercase tracking-widest", isVip ? "text-amber-400/60" : "text-slate-400")}>
+                                <Clock className="w-4 h-4" />
+                                <span>{timeline}</span>
+                            </div>
+                        )}
+                        {subDescription && (
+                             <span className={cn("text-[11px] font-bold italic", isVip ? "text-amber-400/40" : "text-slate-400")}>
+                                {subDescription}
+                            </span>
+                        )}
+                    </div>
 
                     <Button
                         variant={selected ? "default" : "outline"}
                         className={cn(
-                            "w-full py-3 text-[9px] font-bold transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-wider",
+                            "w-full py-4 text-xs font-bold transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest",
                             selected 
                                 ? (isVip 
                                     ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950" 
@@ -184,12 +194,12 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
 };
 
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
-    <div className="space-y-4">
-        <div className="flex items-center gap-3 px-1">
-            <div className="h-5 w-1 bg-primary rounded-full shadow-[0_0_10px_rgba(37,99,235,0.4)]" />
-            <h3 className="text-sm sm:text-base font-black text-dark-blue tracking-tight uppercase">{title}</h3>
+    <div className="space-y-6">
+        <div className="flex items-center gap-4 px-1">
+            <div className="h-6 w-1.5 bg-primary rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
+            <h3 className="text-base sm:text-lg font-black text-dark-blue tracking-tight uppercase">{title}</h3>
         </div>
-        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-4", gridCols)}>{children}</div>
+        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>{children}</div>
     </div>
 );
 
@@ -228,17 +238,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     ];
 
     return (
-        <section id="package-builder" className="py-12 bg-white overflow-hidden" suppressHydrationWarning>
+        <section id="package-builder" className="py-16 bg-white overflow-hidden" suppressHydrationWarning>
             <div className="container mx-auto px-4 max-w-7xl">
-                <div className="max-w-4xl mx-auto mb-10 text-center space-y-2">
-                    <Badge className="bg-primary/10 text-primary border-none px-5 py-1 rounded-full font-black text-[8px] uppercase tracking-[0.25em]">
+                <div className="max-w-4xl mx-auto mb-14 text-center space-y-3">
+                    <Badge className="bg-primary/10 text-primary border-none px-6 py-1.5 rounded-full font-black text-xs uppercase tracking-[0.3em]">
                         LOYIHA ME'MORI
                     </Badge>
-                    <h2 className="text-2xl sm:text-3xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
-                    <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto font-medium">{translations.subtitle}</p>
+                    <h2 className="text-3xl sm:text-4xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
+                    <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
                 </div>
 
-                <div className="space-y-12">
+                <div className="space-y-16">
                     <ServiceGroup title={translations.categories.tripwire}>{['namingCheck', 'audit', 'consultation'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
                     <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">{['strategy', 'commStrategy'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
                     <ServiceGroup title={translations.categories.naming}>{['namingVIP', 'namingPremium', 'namingStandard'].map(id => <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />)}</ServiceGroup>
@@ -246,11 +256,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     
                     <Accordion type="single" collapsible className="w-full">
                         <AccordionItem value="more" className="border-none">
-                            <AccordionTrigger className="text-[11px] font-black text-dark-blue justify-center gap-4 hover:no-underline py-4 bg-slate-50 rounded-[1.5rem] border border-dashed border-slate-200 transition-all hover:bg-slate-100 group">
+                            <AccordionTrigger className="text-sm font-black text-dark-blue justify-center gap-6 hover:no-underline py-6 bg-slate-50 rounded-[2rem] border border-dashed border-slate-200 transition-all hover:bg-slate-100 group">
                                 {translations.categories.more_services}
-                                <ChevronsDown className="w-4 h-4 text-primary animate-bounce" />
+                                <ChevronsDown className="w-5 h-5 text-primary animate-bounce" />
                             </AccordionTrigger>
-                            <AccordionContent className="pt-8 space-y-12">
+                            <AccordionContent className="pt-10 space-y-16">
                                 <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
                                     {['packaging', 'smm', 'urgency', 'nda'].map(id => (
                                         <ServiceCard key={id} id={id} selected={selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
@@ -261,130 +271,130 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     </Accordion>
                 </div>
 
-                <div className="mt-16 max-w-6xl mx-auto">
-                    <div id="your-package-card" className="rounded-[2rem] bg-white shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-slate-100">
-                        <div className="lg:w-1/2 bg-dark-blue p-8 sm:p-10 text-white relative">
-                            <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-84 bg-primary/25 rounded-full blur-[100px]" />
+                <div className="mt-20 max-w-6xl mx-auto">
+                    <div id="your-package-card" className="rounded-[2.5rem] bg-white shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-slate-100">
+                        <div className="lg:w-1/2 bg-dark-blue p-10 sm:p-14 text-white relative">
+                            <div className="absolute top-0 right-0 -mt-24 -mr-24 w-96 h-96 bg-primary/30 rounded-full blur-[120px]" />
                             <div className="relative z-10 h-full flex flex-col">
-                                <div className="space-y-2 mb-6 sm:mb-8">
-                                    <div className="flex items-center gap-3">
-                                        <div className="bg-white/10 p-2 rounded-xl border border-white/10">
-                                            <Box className="w-5 h-5 text-sky-blue" />
+                                <div className="space-y-3 mb-10">
+                                    <div className="flex items-center gap-4">
+                                        <div className="bg-white/10 p-3 rounded-2xl border border-white/10">
+                                            <Box className="w-6 h-6 text-sky-blue" />
                                         </div>
-                                        <h3 className="text-lg sm:text-xl font-black tracking-tight uppercase text-white">{translations.your_package}</h3>
+                                        <h3 className="text-xl sm:text-2xl font-black tracking-tight uppercase text-white">{translations.your_package}</h3>
                                     </div>
-                                    <p className="text-blue-100/70 font-medium text-xs sm:text-sm max-w-xs">{translations.your_package_desc}</p>
+                                    <p className="text-blue-100/80 font-medium text-sm sm:text-base max-w-sm">{translations.your_package_desc}</p>
                                 </div>
-                                <div className="grid grid-cols-1 gap-2.5 overflow-y-auto pr-3 custom-scrollbar flex-grow max-h-[300px]">
+                                <div className="grid grid-cols-1 gap-3.5 overflow-y-auto pr-4 custom-scrollbar flex-grow max-h-[350px]">
                                     {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
                                         const isSurcharge = k === 'urgency' || k === 'nda';
                                         return (
-                                            <div key={k} className="flex items-center justify-between p-3.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300">
-                                                <div className="flex items-center gap-3">
-                                                    <div className={cn("p-1.5 rounded-full", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
-                                                        {isSurcharge ? <Plus className="w-3 h-3 text-blue-400" /> : <Check className="w-3 h-3 text-sky-blue" />}
+                                            <div key={k} className="flex items-center justify-between p-4.5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300">
+                                                <div className="flex items-center gap-4">
+                                                    <div className={cn("p-2 rounded-full", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
+                                                        {isSurcharge ? <Plus className="w-4 h-4 text-blue-400" /> : <Check className="w-4 h-4 text-sky-blue" />}
                                                     </div>
-                                                    <span className="text-xs sm:text-sm font-extrabold tracking-tight text-white">{serviceDetails[k]?.label}</span>
+                                                    <span className="text-sm sm:text-base font-extrabold tracking-tight text-white">{serviceDetails[k]?.label}</span>
                                                 </div>
-                                                <span className={cn("font-black text-[10px] sm:text-[11px]", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
+                                                <span className={cn("font-black text-xs sm:text-sm", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
                                                     {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
                                                 </span>
                                             </div>
                                         );
                                     })}
                                     {Object.values(selectedServices).every(v => !v) && (
-                                        <div className="text-center py-12 px-6 rounded-[1.5rem] bg-white/5 border-2 border-dashed border-white/10">
-                                            <TrendingUp className="w-10 h-10 mx-auto text-blue-300/25 mb-3" />
-                                            <p className="text-blue-100/50 italic text-sm font-medium">{translations.empty_package_desc}</p>
+                                        <div className="text-center py-16 px-8 rounded-[2rem] bg-white/5 border-2 border-dashed border-white/10">
+                                            <TrendingUp className="w-12 h-12 mx-auto text-blue-300/30 mb-4" />
+                                            <p className="text-blue-100/60 italic text-base font-medium">{translations.empty_package_desc}</p>
                                         </div>
                                     )}
                                 </div>
                             </div>
                         </div>
 
-                        <div className="lg:w-1/2 bg-slate-50 p-8 sm:p-10 flex flex-col border-l border-slate-100 relative">
-                            <div className="space-y-6 sm:space-y-8 flex-grow">
-                                <div className="space-y-4">
+                        <div className="lg:w-1/2 bg-slate-50 p-10 sm:p-14 flex flex-col border-l border-slate-100 relative">
+                            <div className="space-y-10 flex-grow">
+                                <div className="space-y-6">
                                     <div className="flex justify-between items-center px-2">
-                                        <span className="text-[8px] font-black uppercase tracking-[0.25em] text-slate-400">{translations.base_price_label}</span>
-                                        <span className="text-base sm:text-lg font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
+                                        <span className="text-xs font-black uppercase tracking-[0.3em] text-slate-400">{translations.base_price_label}</span>
+                                        <span className="text-xl sm:text-2xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
 
-                                    <div className="space-y-2">
+                                    <div className="space-y-3">
                                         {total.surchargesApplied.map((s: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-blue-700 text-[10px] font-black bg-blue-50 px-4 py-2.5 rounded-xl border border-blue-100">
-                                                <div className="flex items-center gap-2">
-                                                    <div className="bg-blue-100 p-1 rounded-full"><Plus className="w-2.5 h-2.5" /></div>
+                                            <div key={i} className="flex justify-between items-center text-blue-700 text-xs font-black bg-blue-50 px-5 py-3 rounded-2xl border border-blue-100">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="bg-blue-100 p-1.5 rounded-full"><Plus className="w-3 h-3" /></div>
                                                     {s.name}
                                                 </div>
-                                                <span className="text-sm">+{formatPrice(s.value, lang as any, currency)}</span>
+                                                <span className="text-base">+{formatPrice(s.value, lang as any, currency)}</span>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="space-y-2">
+                                    <div className="space-y-3">
                                         {total.discountApplied.map((d: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-green-700 text-[10px] font-black bg-green-50 px-4 py-2.5 rounded-xl border border-green-100">
-                                                <div className="flex items-center gap-2">
-                                                    <div className="bg-green-100 p-1 rounded-full"><Zap className="w-2.5 h-2.5" /></div>
+                                            <div key={i} className="flex justify-between items-center text-green-700 text-xs font-black bg-green-50 px-5 py-3 rounded-2xl border border-green-100">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="bg-green-100 p-1.5 rounded-full"><Zap className="w-3 h-3" /></div>
                                                     {d.name}
                                                 </div>
-                                                <span className="text-sm">-{formatPrice(d.value, lang as any, currency)}</span>
+                                                <span className="text-base">-{formatPrice(d.value, lang as any, currency)}</span>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="pt-5 border-t border-slate-200 text-center space-y-1">
-                                        <span className="text-slate-400 text-[8px] font-black uppercase tracking-[0.35em]">{translations.final_price}</span>
+                                    <div className="pt-8 border-t border-slate-200 text-center space-y-2">
+                                        <span className="text-slate-400 text-xs font-black uppercase tracking-[0.4em]">{translations.final_price}</span>
                                         <div className="flex flex-col items-center">
-                                            <span className="text-4xl sm:text-5xl font-black text-primary tracking-tighter drop-shadow-md">
+                                            <span className="text-5xl sm:text-6xl font-black text-primary tracking-tighter drop-shadow-lg">
                                                 {formatPrice(total.final, lang as any, currency)}
                                             </span>
                                             {total.savings > 0 && (
-                                                <div className="mt-3 flex items-center gap-1.5 text-green-600 font-black text-[9px] bg-green-100/60 px-4 py-1 rounded-full border border-green-200">
-                                                    <Gift className="w-3 h-3" />
+                                                <div className="mt-4 flex items-center gap-2.5 text-green-600 font-black text-xs bg-green-100/70 px-6 py-2 rounded-full border border-green-200">
+                                                    <Gift className="w-4 h-4" />
                                                     JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
                                                 </div>
                                             )}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="space-y-4">
-                                    <div className="space-y-2">
-                                        <Label className="text-[8px] uppercase font-black text-slate-400 tracking-[0.25em] ml-3">{translations.promo_code_label}</Label>
+                                <div className="space-y-6">
+                                    <div className="space-y-3">
+                                        <Label className="text-xs uppercase font-black text-slate-400 tracking-[0.3em] ml-4">{translations.promo_code_label}</Label>
                                         <div className="relative">
                                             <Input 
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
                                                 placeholder={translations.promo_code_placeholder}
-                                                className="rounded-full py-2.5 px-5 border-slate-200 h-11 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest bg-white focus:ring-primary shadow-sm"
+                                                className="rounded-full py-4 px-6 border-slate-200 h-14 text-sm font-bold uppercase tracking-widest bg-white focus:ring-primary shadow-sm"
                                             />
                                             {total.isPromoApplied && (
-                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500">
-                                                    <CheckCircle className="w-4 h-4" />
+                                                <div className="absolute right-5 top-1/2 -translate-y-1/2 text-emerald-500">
+                                                    <CheckCircle className="w-6 h-6" />
                                                 </div>
                                             )}
                                         </div>
                                     </div>
 
                                     {!total.isPromoApplied && (
-                                        <div className="space-y-2">
-                                            <Label className="text-[8px] uppercase font-black text-slate-400 tracking-[0.25em] ml-3">Chegirmalar</Label>
+                                        <div className="space-y-3">
+                                            <Label className="text-xs uppercase font-black text-slate-400 tracking-[0.3em] ml-4">Chegirmalar</Label>
                                             <DynamicToggle 
                                                 id="discount-tier"
                                                 options={discountOptions}
                                                 selected={discountType}
                                                 onSelect={(val) => setDiscountType(val as any)}
-                                                className="h-11"
+                                                className="h-14"
                                             />
                                         </div>
                                     )}
                                 </div>
                             </div>
-                            <Button size="lg" className="w-full py-5 text-base sm:text-lg font-black rounded-full shadow-xl hover:scale-[1.02] active:scale-95 transition-all mt-8 border-none" onClick={onOrderNow} disabled={total.base === 0}>
-                                <span className="flex items-center gap-3">
+                            <Button size="lg" className="w-full py-7 text-lg sm:text-xl font-black rounded-full shadow-2xl hover:scale-[1.02] active:scale-95 transition-all mt-12 border-none" onClick={onOrderNow} disabled={total.base === 0}>
+                                <span className="flex items-center gap-4">
                                     Loyiha narxini tasdiqlash
-                                    <ChevronsDown className="w-4 h-4 animate-bounce" />
+                                    <ChevronsDown className="w-5 h-5 animate-bounce" />
                                 </span>
                             </Button>
                         </div>
