@@ -12,6 +12,7 @@ import { getServiceDetails, calculatePackagePrice, type SelectedServices, format
 import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, TrendingUp, Zap, Gift, Plus } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
+import { motion } from 'framer-motion';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -43,24 +44,35 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
         <Card
             onClick={onSelect}
             className={cn(
-                "group relative h-full transition-all duration-300 cursor-pointer overflow-visible border flex flex-col rounded-[1.2rem] mt-2",
+                "group relative h-full transition-all duration-500 cursor-pointer overflow-visible border flex flex-col rounded-[1.2rem] mt-2",
                 selected
-                    ? (isVip ? 'border-amber-400 bg-blue-950 shadow-xl scale-[1.01]' : 'border-primary bg-white shadow-lg scale-[1.01]')
+                    ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_30px_rgba(251,191,36,0.3)] scale-[1.02]' : 'border-primary bg-white shadow-[0_0_20px_rgba(37,99,235,0.15)] scale-[1.02]')
                     : (isVip ? 'bg-blue-950 border-blue-900/50 hover:border-amber-400/50' : 
                        isPremium ? 'bg-gradient-to-br from-white to-blue-50/20 border-slate-100 hover:border-primary/20' : 
                        'bg-white border-slate-100 hover:border-primary/20 hover:shadow-md')
             )}
             suppressHydrationWarning
         >
-            <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20">
+            {/* Ultra-Premium Shimmer effect for VIP */}
+            {isVip && selected && (
+                <div className="absolute inset-0 rounded-[1.2rem] overflow-hidden pointer-events-none">
+                    <motion.div
+                        animate={{ x: ['-100%', '200%'] }}
+                        transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
+                    />
+                </div>
+            )}
+
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
                 {recommended && !isVip && (
-                    <Badge className="bg-primary text-white text-[10px] font-bold px-3 py-0.5 rounded-full border-none uppercase tracking-wider whitespace-nowrap shadow-md">
+                    <Badge className="bg-primary text-white text-[11px] font-black px-5 py-1 rounded-full border-none uppercase tracking-widest shadow-lg animate-pulse">
                         {dictionary.recommended}
                     </Badge>
                 )}
                 {isVip && (
-                    <Badge className="bg-gradient-to-r from-amber-400 to-amber-600 text-blue-950 text-[10px] font-black px-4 py-0.5 rounded-full border-none uppercase flex items-center gap-1 shadow-md whitespace-nowrap">
-                        VIP
+                    <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[11px] font-black px-6 py-1 rounded-full border-none uppercase flex items-center gap-1.5 shadow-[0_4px_15px_rgba(251,191,36,0.4)] whitespace-nowrap">
+                        <Crown className="w-3.5 h-3.5" /> VIP
                     </Badge>
                 )}
             </div>
@@ -68,7 +80,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
             <CardHeader className="p-5 pb-3">
                 <div className="flex items-center gap-3 mb-2">
                     <div className={cn(
-                        "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 flex-shrink-0",
+                        "w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 flex-shrink-0",
                         selected 
                             ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950" : "bg-primary text-white shadow-md") 
                             : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/20" : "bg-secondary text-slate-600")
@@ -76,20 +88,20 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                         <Icon className="w-6 h-6" />
                     </div>
                     <div className="min-w-0">
-                        <CardTitle className={cn("text-xl font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
+                        <CardTitle className={cn("text-xl sm:text-2xl font-black leading-tight tracking-tight truncate", isVip ? "text-white" : "text-dark-blue")}>
                             {label}
                         </CardTitle>
                     </div>
                 </div>
                 
-                <div className="flex items-center gap-2 mt-1">
-                    <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
+                <div className="flex items-center gap-3 mt-1 flex-wrap">
+                    <span className={cn("text-2xl sm:text-3xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
                         {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
                     </span>
                     {description && (
                         <>
-                            <div className={cn("h-5 w-px mx-1", isVip ? "bg-white/20" : "bg-slate-300")} />
-                            <span className={cn("text-sm font-bold leading-tight line-clamp-1", isVip ? "text-slate-400" : "text-slate-500")}>
+                            <div className={cn("h-6 w-px mx-1", isVip ? "bg-white/20" : "bg-slate-200")} />
+                            <span className={cn("text-sm sm:text-base font-bold leading-tight", isVip ? "text-slate-300" : "text-slate-500")}>
                                 {description}
                             </span>
                         </>
@@ -177,7 +189,7 @@ const ServiceCard = ({ id, onSelect, selected, lang, dictionary, currency }: { i
                             "w-full py-4 text-xs font-bold transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest",
                             selected 
                                 ? (isVip 
-                                    ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950" 
+                                    ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950 shadow-[0_4px_20px_rgba(251,191,36,0.4)]" 
                                     : "border-none bg-primary text-white shadow-md") 
                                 : (isVip 
                                     ? "bg-white/5 border-amber-400/20 text-amber-400 hover:bg-amber-400 hover:text-blue-950" 
