@@ -51,7 +51,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
 
     return (
         <motion.div variants={itemVariants} className="h-full relative pt-14 px-1">
-            {/* High-Impact Badges */}
+            {/* High-Impact Badges - Floating outside Card */}
             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
@@ -321,30 +321,30 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
                 <motion.div variants={itemVariants} className="mt-32 max-w-6xl mx-auto">
                     <div id="your-package-card" className="rounded-[3.5rem] bg-white shadow-[0_40px_120px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
-                        <div className="lg:w-1/2 bg-dark-blue p-12 sm:p-20 text-white relative">
+                        <div className="lg:w-1/2 bg-dark-blue p-10 sm:p-16 text-white relative">
                             <div className="absolute top-0 right-0 -mt-24 -mr-24 w-96 h-96 bg-primary/20 rounded-full blur-[140px]" />
                             <div className="relative z-10 h-full flex flex-col">
-                                <div className="space-y-6 mb-16">
-                                    <div className="flex items-center gap-6">
-                                        <div className="bg-white/10 p-5 rounded-2xl border border-white/10 shadow-inner">
-                                            <Box className="w-10 h-10 text-sky-blue" />
+                                <div className="space-y-4 mb-12">
+                                    <div className="flex items-center gap-5">
+                                        <div className="bg-white/10 p-4 rounded-2xl border border-white/10 shadow-inner">
+                                            <Box className="w-8 h-8 text-sky-blue" />
                                         </div>
-                                        <h3 className="text-4xl sm:text-5xl font-black tracking-tight uppercase text-white">{translations.your_package}</h3>
+                                        <h3 className="text-3xl sm:text-4xl font-black tracking-tight uppercase text-white">{translations.your_package}</h3>
                                     </div>
-                                    <p className="text-blue-100/80 font-medium text-xl max-w-sm leading-relaxed">{translations.your_package_desc}</p>
+                                    <p className="text-blue-100/80 font-medium text-lg max-w-sm leading-relaxed">{translations.your_package_desc}</p>
                                 </div>
-                                <div className="grid grid-cols-1 gap-6 overflow-y-auto pr-6 custom-scrollbar flex-grow max-h-[500px]">
+                                <div className="grid grid-cols-1 gap-4 overflow-y-auto pr-4 custom-scrollbar flex-grow max-h-[450px]">
                                     {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
                                         const isSurcharge = k === 'urgency' || k === 'nda';
                                         return (
-                                            <div key={k} className="flex items-center justify-between p-7 rounded-[1.5rem] bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300 shadow-sm group">
-                                                <div className="flex items-center gap-6">
-                                                    <div className={cn("p-3 rounded-full transition-transform group-hover:scale-110", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
-                                                        {isSurcharge ? <Plus className="w-6 h-6 text-blue-400" /> : <Check className="w-6 h-6 text-sky-blue" />}
+                                            <div key={k} className="flex items-center justify-between p-5 rounded-[1.25rem] bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300 shadow-sm group">
+                                                <div className="flex items-center gap-4">
+                                                    <div className={cn("p-2 rounded-full transition-transform group-hover:scale-110", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
+                                                        {isSurcharge ? <Plus className="w-5 h-5 text-blue-400" /> : <Check className="w-5 h-5 text-sky-blue" />}
                                                     </div>
-                                                    <span className="text-xl font-extrabold tracking-tight text-white">{serviceDetails[k]?.label}</span>
+                                                    <span className="text-lg font-bold tracking-tight text-white">{serviceDetails[k]?.label}</span>
                                                 </div>
-                                                <span className={cn("font-black text-lg sm:text-xl", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
+                                                <span className={cn("font-black text-base", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
                                                     {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
                                                 </span>
                                             </div>
@@ -354,66 +354,66 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                         </div>
 
-                        <div className="lg:w-1/2 bg-slate-50 p-12 sm:p-20 flex flex-col border-l border-slate-100 relative">
-                            <div className="space-y-14 flex-grow">
-                                <div className="space-y-10">
-                                    <div className="flex justify-between items-center px-6">
-                                        <span className="text-[15px] font-black uppercase tracking-[0.35em] text-slate-400">{translations.base_price_label}</span>
-                                        <span className="text-4xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
+                        <div className="lg:w-1/2 bg-slate-50 p-8 sm:p-14 flex flex-col border-l border-slate-100 relative">
+                            <div className="space-y-10 flex-grow">
+                                <div className="space-y-8">
+                                    <div className="flex justify-between items-center px-4">
+                                        <span className="text-[12px] font-bold uppercase tracking-wider text-slate-400">{translations.base_price_label}</span>
+                                        <span className="text-2xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
 
-                                    <div className="space-y-5">
+                                    <div className="space-y-3">
                                         {total.surchargesApplied.map((s: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-blue-700 text-[15px] font-black bg-blue-50 px-8 py-5 rounded-[1.5rem] border border-blue-100 shadow-sm">
-                                                <div className="flex items-center gap-4"><Plus className="w-6 h-6" />{s.name}</div>
-                                                <span className="text-2xl">+{formatPrice(s.value, lang as any, currency)}</span>
+                                            <div key={i} className="flex justify-between items-center text-blue-700 text-[13px] font-bold bg-blue-50 px-6 py-4 rounded-2xl border border-blue-100 shadow-sm">
+                                                <div className="flex items-center gap-3"><Plus className="w-5 h-5" />{s.name}</div>
+                                                <span className="text-lg">+{formatPrice(s.value, lang as any, currency)}</span>
                                             </div>
                                         ))}
                                         {total.discountApplied.map((d: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-green-700 text-[15px] font-black bg-green-50 px-8 py-5 rounded-[1.5rem] border border-green-100 shadow-sm">
-                                                <div className="flex items-center gap-4"><Zap className="w-6 h-6" />{d.name}</div>
-                                                <span className="text-2xl">-{formatPrice(d.value, lang as any, currency)}</span>
+                                            <div key={i} className="flex justify-between items-center text-green-700 text-[13px] font-bold bg-green-50 px-6 py-4 rounded-2xl border border-green-100 shadow-sm">
+                                                <div className="flex items-center gap-3"><Zap className="w-5 h-5" />{d.name}</div>
+                                                <span className="text-lg">-{formatPrice(d.value, lang as any, currency)}</span>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="pt-12 border-t border-slate-200 text-center space-y-4">
-                                        <span className="text-slate-400 text-[15px] font-black uppercase tracking-[0.45em]">{translations.final_price}</span>
+                                    <div className="pt-8 border-t border-slate-200 text-center space-y-3">
+                                        <span className="text-slate-400 text-[12px] font-bold uppercase tracking-widest">{translations.final_price}</span>
                                         <div className="flex flex-col items-center">
-                                            <span className="text-8xl font-black text-primary tracking-tighter drop-shadow-2xl">
+                                            <span className="text-6xl font-bold text-primary tracking-tighter">
                                                 {formatPrice(total.final, lang as any, currency)}
                                             </span>
                                             {total.savings > 0 && (
-                                                <div className="mt-8 flex items-center gap-4 text-green-600 font-black text-[15px] bg-green-100/70 px-10 py-4 rounded-full border border-green-200 uppercase tracking-widest shadow-md">
-                                                    <Gift className="w-6 h-6" /> JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
+                                                <div className="mt-6 flex items-center gap-3 text-green-600 font-bold text-[13px] bg-green-100/70 px-8 py-3 rounded-full border border-green-200 uppercase tracking-widest shadow-sm">
+                                                    <Gift className="w-5 h-5" /> JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
                                                 </div>
                                             )}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="space-y-10">
-                                    <div className="space-y-5">
-                                        <Label className="text-[15px] uppercase font-black text-slate-400 tracking-[0.35em] ml-8">{translations.promo_code_label}</Label>
+                                <div className="space-y-8">
+                                    <div className="space-y-3">
+                                        <Label className="text-[12px] uppercase font-bold text-slate-400 tracking-widest ml-6">{translations.promo_code_label}</Label>
                                         <div className="relative">
                                             <Input 
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
                                                 placeholder={translations.promo_code_placeholder}
-                                                className="rounded-full py-6 px-10 border-slate-200 h-20 text-xl font-bold uppercase tracking-[0.25em] bg-white shadow-inner focus:ring-primary focus:border-primary transition-all"
+                                                className="rounded-full py-4 px-8 border-slate-200 h-16 text-lg font-bold uppercase tracking-widest bg-white shadow-inner focus:ring-primary focus:border-primary transition-all"
                                             />
-                                            {total.isPromoApplied && <div className="absolute right-8 top-1/2 -translate-y-1/2 text-emerald-500"><CheckCircle className="w-10 h-10" /></div>}
+                                            {total.isPromoApplied && <div className="absolute right-6 top-1/2 -translate-y-1/2 text-emerald-500"><CheckCircle className="w-8 h-8" /></div>}
                                         </div>
                                     </div>
 
                                     {!total.isPromoApplied && (
-                                        <div className="space-y-5">
-                                            <Label className="text-[15px] uppercase font-black text-slate-400 tracking-[0.35em] ml-8">CHEGIRMALAR</Label>
-                                            <DynamicToggle id="discount-tier" options={discountOptions} selected={discountType} onSelect={(val) => setDiscountType(val as any)} className="h-20" />
+                                        <div className="space-y-3">
+                                            <Label className="text-[12px] uppercase font-bold text-slate-400 tracking-widest ml-6">CHEGIRMALAR</Label>
+                                            <DynamicToggle id="discount-tier" options={discountOptions} selected={discountType} onSelect={(val) => setDiscountType(val as any)} className="h-16" />
                                         </div>
                                     )}
                                 </div>
                             </div>
-                            <Button size="lg" className="w-full py-7 text-xl font-black rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.25)] hover:scale-[1.02] active:scale-[0.98] transition-all mt-12 group" onClick={onOrderNow} disabled={total.base === 0}>
+                            <Button size="lg" className="w-full py-7 text-xl font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-10 group" onClick={onOrderNow} disabled={total.base === 0}>
                                 <span className="flex items-center gap-4 uppercase tracking-widest">LOYIHA NARXINI TASDIQLASH <ChevronsDown className="w-7 h-7 animate-bounce group-hover:scale-110" /></span>
                             </Button>
                         </div>
