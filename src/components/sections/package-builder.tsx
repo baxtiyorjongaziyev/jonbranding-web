@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC, useMemo } from 'react';
@@ -58,7 +57,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                     </Badge>
                 )}
                 {isVip && (
-                    <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[13px] font-black px-10 py-2.5 rounded-full border-none uppercase flex items-center gap-2 shadow-[0_4px_30px_rgba(251,191,36,0.7)] whitespace-nowrap">
+                    <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[13px] font-black px-10 py-2.5 rounded-full border-none uppercase flex items-center gap-2 shadow-[0_4px_30px_rgba(251,191,36,0.7)] animate-subtle-pulse whitespace-nowrap">
                         <Crown className="w-4 h-4 fill-current" /> VIP
                     </Badge>
                 )}
@@ -411,8 +410,16 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     )}
                                 </div>
                             </div>
-                            <Button size="lg" className="w-full py-7 text-xl font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-10 group" onClick={onOrderNow} disabled={total.base === 0}>
-                                <span className="flex items-center gap-4 uppercase tracking-widest">LOYIHA NARXINI TASDIQLASH <ChevronsDown className="w-7 h-7 animate-bounce group-hover:scale-110" /></span>
+                            <Button 
+                                size="lg" 
+                                className="w-full py-7 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-10 group" 
+                                onClick={onOrderNow} 
+                                disabled={total.base === 0}
+                            >
+                                <span className="flex items-center justify-center gap-3 uppercase tracking-wider">
+                                    LOYIHA NARXINI TASDIQLASH 
+                                    <ChevronsDown className="w-5 h-5 sm:w-6 sm:h-6 animate-bounce group-hover:scale-110 shrink-0" />
+                                </span>
                             </Button>
                         </div>
                     </div>
