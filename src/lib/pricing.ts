@@ -132,14 +132,13 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "3 ta qisqa shior varianti (masalan: Nike — 'Just Do It')",
                 "Patentga topshirish xizmati (davlat bojlari alohida)",
                 "Nom sizning mulkingiz ekanligini tasdiqlovchi sertifikat",
-                "30 daqiqalik shaxsiy konsultatsiya",
                 "Cheksiz tuzatish (30 kun ichida)"
-            ] : ["10 concepts", "Strategy", "Phonetics", "Domain check", "Social check", "Patent check", "Competitor analysis", "Linguistics", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Consultation", "Unlimited revisions"],
+            ] : ["10 concepts", "Strategy", "Phonetics", "Domain check", "Social check", "Patent check", "Competitor analysis", "Linguistics", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Unlimited revisions"],
             benefits: isUz ? [
                 { icon: "🌍", title: "Xalqaro bozorga tayyor", description: "Nomingiz boshqa tillarda ham tekshiriladi — dunyo bo'ylab ishlaydi." },
                 { icon: "🔒", title: "To'liq sizning mulkingiz", description: "Patent va sertifikat bilan nomingiz rasman himoyalanadi." },
                 { icon: "💎", title: "Biznesingizga qiymat qo'shiladi", description: "Himoyalangan kuchli nom — kompaniya qiymatining bir qismi." },
-                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "30 daqiqa shaxsiy suhbatda to'g'ri yo'lni birgalikda belgilaymiz." }
+                { icon: "🎯", title: "To'g'ri qaror qabul qilasiz", description: "Strategik tahlil asosida to'g'ri yo'lni belgilaymiz." }
             ] : [
                 { icon: "🌍", title: "Global Ready", description: "Check in 6 languages." },
                 { icon: "🔒", title: "Full Ownership", description: "Protected by patent." },
@@ -279,9 +278,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "25 ta aloqa nuqtasi (mobil ilova, billbord, merch, ofis dizayni, ko'rgazma stendi, motion-reklama va h.k.)",
                 "Logoning to'liq mulkchilik huquqi sertifikati",
                 "Patent topshirish xizmati",
-                "30 daqiqalik shaxsiy konsultatsiya",
                 "Cheksiz tuzatish (30 kun ichida)"
-            ] : ["5 concepts", "Deep strategy", "4 lockups", "3 formats", "Color palette", "Official fonts", "Full Brandbook", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "Consultation", "Unlimited revisions"],
+            ] : ["5 concepts", "Deep strategy", "4 lockups", "3 formats", "Color palette", "Official fonts", "Full Brandbook", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "Unlimited revisions"],
             benefits: isUz ? [
                 { icon: "📖", title: "Istalgan odamga topshiring", description: "Dizayner yoki SMMchi qo'llanmani o'qib to'g'ri ishlatadi." },
                 { icon: "🔒", title: "Abadiy sifat", description: "Hamma qoidalar yozilgan — brendingiz 10 yildan keyin ham kuchli qoladi." },
