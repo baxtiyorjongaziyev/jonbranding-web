@@ -1,3 +1,4 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -87,7 +88,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         strategy: {
             label: isUz ? "Brend-strategiya" : (isRu ? "Бренд-стратегия" : "Brand Strategy"),
-            description: isUz ? "Biznesingiz uchun natija keltiradigan poydevor." : "A foundation that brings results for your business.",
+            description: isUz ? "Biznesingiz uchun poydevor." : "A foundation for your business.",
             price: basePricesUSD.strategy,
             timeline: isUz ? "⏱ 20-30 ish kuni" : "⏱ 20-30 business days",
             features: isUz ? ["Bozor va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Brend platformasi", "Pozitsiyalash strategiyasi", "Noyob Sotuv Taklifi (USP)"] : ["Market analysis", "Audience map", "Brand platform", "Positioning", "USP"],
@@ -220,7 +221,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ] : ["3 concepts", "Reasoning", "4 lockups", "Social pics", "3 formats", "8 touchpoints", "2 revisions"],
             benefits: isUz ? [
                 { icon: "🎯", title: "Hamma joyga tayyor", description: "Sayt, Instagram, chop etish — logongiz barcha formatda tayyor." },
-                { icon: "✅", title: "Ishonch uyg'otadi", description: "Professional ko'rinish — mijozlar birinchi qarashda ishonch his qiladi." },
+                { icon: "✅", title: "Ishonch uyg'otadi", description: "Professional ko'rinish — o'zingiz yasaganga o'xshamaydi." },
                 { icon: "👁️", title: "Real ko'rinish", description: "8 ta joyda logongiz qanday ko'rinishini ko'rasiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha fayllar sizga topshiriladi." }
             ] : [
@@ -244,13 +245,14 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "3 xil fayl formatida (PNG, SVG, AI)",
                 "Rasmiy ranglar to'plami (aniq kodlari bilan)",
                 "Rasmiy shrift — brendingizning yagona uslubi",
+                "O'ziga xos firma uslubini ishlab chiqish",
                 "15 ta aloqa nuqtasi (SMM postlar, storislar, prezentatsiya, konvert, sumka, avto-brendlash va h.k.)",
                 "3 ta tuzatish imkoniyati"
-            ] : ["4 concepts", "Reasoning", "4 lockups", "3 formats", "Color palette", "Official fonts", "15 touchpoints", "3 revisions"],
+            ] : ["4 concepts", "Reasoning", "4 lockups", "3 formats", "Color palette", "Official fonts", "Unique style development", "15 touchpoints", "3 revisions"],
             benefits: isUz ? [
                 { icon: "🏆", title: "Professional qiyofa", description: "Sayt, Instagram, vizitka — hammasi bir xil professional uslubda." },
-                { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq qoidalar bo'lgach, hech kim rang va shriftda adashmaydi." },
-                { icon: "📸", title: "15 ta joyda vizual kafolat", description: "Har bir muhim joyda brendingiz qanday ko'rinishi aniq bo'ladi." },
+                { icon: "💼", title: "Xodimlaringiz ham to'g'ri ishlatadi", description: "Aniq qoidalar bo'lgach, hech kim adashmaydi." },
+                { icon: "📸", title: "15 ta joyda vizual kafolat", description: "Har bir joyda brendingiz qanday ko'rinishi aniq bo'ladi." },
                 { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznes belgisi." }
             ] : [
                 { icon: "🏆", title: "Consistent", description: "Uniform style." },
@@ -270,20 +272,22 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Har bir variant uchun chuqur strategik izoh",
                 "Logo 4 xil ko'rinishda + Profil rasmlari",
                 "3 xil fayl formatida (PNG, SVG, AI)",
-                "Rasmiy ranglar to'plami — 3–5 ta rasmiy rangi va kodi",
-                "Rasmiy shrift — brendingizning maxsus shriftlari",
-                "Brandbook — brenddan foydalanish bo'yicha to'liq qo'llanma",
+                "Rasmiy ranglar to'plami — brendingizning 3–5 ta rasmiy rangi va ularning aniq kodi",
+                "Rasmiy shrift — brendingizda ishlatiladigan harflar uslubi",
+                "Brandbook — brenddan foydalanish bo'yicha to'liq qo'llanma (30-50 bet)",
                 "Logotip animatsiyasi (Motion design)",
                 "Telegram stikerlar to'plami (10 ta)",
                 "25 ta aloqa nuqtasi (mobil ilova, billbord, merch, ofis dizayni, ko'rgazma stendi, motion-reklama va h.k.)",
                 "Logoning to'liq mulkchilik huquqi sertifikati",
+                "Patent topshirish xizmati",
+                "30 daqiqalik shaxsiy konsultatsiya",
                 "Cheksiz tuzatish (30 kun ichida)"
-            ] : ["5 concepts", "Deep strategy", "4 lockups", "3 formats", "Color palette", "Official fonts", "Full Brandbook", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Unlimited revisions"],
+            ] : ["5 concepts", "Deep strategy", "4 lockups", "3 formats", "Color palette", "Official fonts", "Full Brandbook", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "Consultation", "Unlimited revisions"],
             benefits: isUz ? [
-                { icon: "📖", title: "Istalgan odamga topshiring", description: "Dizayner yoki SMMchi qo'llanmani o'qib brendni to'g'ri ishlatadi." },
+                { icon: "📖", title: "Istalgan odamga topshiring", description: "Dizayner yoki SMMchi qo'llanmani o'qib to'g'ri ishlatadi." },
                 { icon: "🔒", title: "Abadiy sifat", description: "Hamma qoidalar yozilgan — brendingiz 10 yildan keyin ham kuchli qoladi." },
-                { icon: "🌍", title: "Xalqaro standart", description: "Investor yoki xorijiy hamkor ko'rsa — jiddiy kompaniya ekanini his qiladi." },
-                { icon: "💎", title: "Oqilona sarmoya", description: "Har yili rebranding o'rniga — bir marta to'g'ri qilingan investitsiya." }
+                { icon: "🌍", title: "Xalqaro standart", description: "Investor yoki hamkor ko'rsa — jiddiy kompaniya ekanini his qiladi." },
+                { icon: "💎", title: "Oqilona sarmoya", description: "Har yili rebranding o'rniga — bir marta to'g'ri investitsiya." }
             ] : [
                 { icon: "📖", title: "Transferable", description: "Easy handover." },
                 { icon: "🔒", title: "Lasting", description: "10+ years value." },
