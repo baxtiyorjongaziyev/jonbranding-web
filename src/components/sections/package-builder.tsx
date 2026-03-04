@@ -69,7 +69,6 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                 onClick={onSelect}
                 className={cn(
                     "group relative h-full transition-all duration-500 cursor-pointer border flex flex-col rounded-[1.5rem] bg-white",
-                    "overflow-visible", // Important for showing glow and badges
                     selected
                         ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_60px_rgba(251,191,36,0.35)] scale-[1.03]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.03]')
                         : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : "border-slate-100 hover:border-primary/20 shadow-sm")
@@ -200,7 +199,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                             className={cn(
                                 "w-full py-5 text-sm font-black transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest relative z-20",
                                 selected 
-                                    ? (isVip ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950 shadow-[0_0_25px_rgba(251,191,36,0.4)] hover:scale-[1.02]" : "border-none bg-primary text-white shadow-lg hover:scale-[1.02]") 
+                                    ? (isVip ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950 shadow-[0_0_25px_rgba(251,191,36,0.4)]" : "border-none bg-primary text-white shadow-lg") 
                                     : (isVip ? "bg-white/5 border-amber-400/20 text-amber-400 hover:bg-amber-400 hover:text-blue-950" : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary shadow-sm")
                             )}
                             onClick={(e) => { e.stopPropagation(); onSelect(); }}
