@@ -51,7 +51,6 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
 
     return (
         <motion.div variants={itemVariants} className="h-full relative pt-14 px-1">
-            {/* High-Impact Badges - Floating outside Card */}
             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
@@ -74,7 +73,6 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : "border-slate-100 hover:border-primary/20 shadow-sm")
                 )}
             >
-                {/* Shimmer Effect for VIP */}
                 {isVip && selected && (
                     <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[1.5rem]">
                         <motion.div

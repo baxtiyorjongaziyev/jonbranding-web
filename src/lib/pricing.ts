@@ -154,7 +154,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             subDescription: isUz ? "To'g'ri nom, to'g'ri asos" : "Right name, right foundation",
             price: basePricesUSD.namingPremium,
             recommended: true,
-            timeline: isUz ? "⏱ 14–20 ish kuni" : "⏱ 14–20 business days",
+            timeline: isUz ? "14–20 ish kuni" : "14–20 business days",
             features: isUz ? [
                 "6 ta nom varianti tayyorlanadi",
                 "Har bir nom uchun strategik izoh",
@@ -339,7 +339,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         nda: { 
             label: isUz ? "NDA — Maxfiylik" : "NDA — Confidentiality", 
-            description: isUz ? "Loyihangiz ma'lumotlari sir saqlanishini kafolatlash." : "Guaranteed confidentiality.",
+            description: isUz ? "Loyihangiz ma'lumotlari sir saqlanishini kafolatlash." : "Confidentiality guaranteed.",
             price: 0,
             timeline: isUz ? "⏱ Darhol kuchga kiradi" : "⏱ Immediate",
             features: isUz ? ["Yuridik shartnoma (NDA)", "Ma'lumotlar uchinchi shaxsga berilmaydi", "Portfolioga qo'yilmaydi", "Barcha qidiruv bazalaridan maxfiylik"] : ["Legal agreement", "No sharing", "No portfolio", "Private"],
