@@ -1,4 +1,3 @@
-
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -234,7 +233,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         logoPremium: {
             label: isUz ? "Logo + Firma Uslubi" : "Logo + Visual Identity",
             description: isUz ? "Brendingizga mos firma uslubini (Vizual aydentika) ishlab chiqish kiradi." : "Development of visual identity consistent with your brand",
-            subDescription: isUz ? "O'sishni rejalashtiraganlar uchun" : "For those planning growth",
+            subDescription: isUz ? "Brendingizga mos firma uslubini (Vizual aydentika) ishlab chiqish kiradi." : "For those planning growth",
             price: basePricesUSD.logoPremium,
             recommended: true,
             timeline: isUz ? "⏱ 10 ish kuni" : "⏱ 10 business days",
