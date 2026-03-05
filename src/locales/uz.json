@@ -124,7 +124,7 @@
     "ctaButton": "Menga aynan shu kerak",
     "sections": [
       { "title": "1️⃣ STRATEGIYA", "points": ["Brend pozitsiyasi va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Noyob Sotuv Taklifi (USP)"] },
-      { "title": "2️⃣ IDENTIFIKATSIYA", "points": ["Professional logotip (3-5 variant)", "Firma ranglar palitrasi", "Tipografika va uslub qo'llanmasi"] },
+      { "title": "2️⃣ IDENTIFIKATSISIYA", "points": ["Professional logotip (3-5 variant)", "Firma ranglar palitrasi", "Tipografika va uslub qo'llanmasi"] },
       { "title": "3️⃣ HUJJATLASHTIRISH", "points": ["To'liq Brendbuk (30-50 sahifa)", "Barcha formatdagi fayllar (AI, PNG, PDF, SVG)", "Logotipdan foydalanish yo'riqnomasi"] },
       { "title": "4️⃣ HUQUQIY HIMOYA", "points": ["Neyming konsultatsiyasi", "Patent va Tovar belgisini ro'yxatdan o'tkazish", "Intellektual mulkni himoya qilish strategiyasi"] },
       { "title": "5️⃣ QO'LLAB-QUVVATLASH", "points": ["3 oy davomida bepul tuzatishlar", "Telegram orqali doimiy aloqa", "Brendni tatbiq etish bo'yicha maslahatlar"] }
@@ -281,7 +281,7 @@
     "faqItems": [
       {
         "question": "Nega narxlar aynan $780 dan boshlanadi?",
-        "answer": "Biz har bir logotipni noldan, strategiya va bozor tahlili asosida yaratamiz. $780 lik 'Standart' paketimizga nafaqat logotip, balki uning 4 xil ko'rinishi, balla manba fayllar va 8 ta aloqa nuqtasida logoning vizual namoyishi kiradi. Bu shunchaki rasm emas, biznes uchun tayyor vizual vositadir."
+        "answer": "Biz har bir logotipni noldan, strategiya va bozor tahlili asosida yaratamiz. $780 lik 'Standart' paketimizga nafaqat logotip, balki uning 4 xil ko'rinishi, balla manba fayllar va 8 ta aloqa nuqtashida logoning vizual namoyishi kiradi. Bu shunchaki rasm emas, biznes uchun tayyor vizual vositadir."
       },
       {
         "question": "Patent tekshiruvi qanday amalga oshiriladi?",
@@ -301,7 +301,7 @@
       }
     ],
     "ctaTitle": "Shubhalarga o'rin qoldirmang!",
-    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yangi bosqichga olib chiqamiz.",
+    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yeni bosqichga olib chiqamiz.",
     "ctaButton": "Boshlashga tayyorman!"
   },
   "servicesPage": {
@@ -541,7 +541,7 @@
       { "title": "Tekshirish va yakunlash", "description": "Ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz, domenlar va assotsiatsiyalarni tekshiramiz, eng yaxshilarini tanlaymiz." }
     ],
     "check_title": "Nomni tekshirish uni yaratishdan kam ahamiyatli emas",
-    "check_subtitle": "Even a brilliant idea won't work if it can't be registered or if it carries undesirable associations. We check names by several key parameters:",
+    "check_subtitle": "Hatto yorqin g'oya ham ro'yxatdan o'ta olmasa yoki salbiy assotsiatsiyalar keltirib chiqarsa, ish bermaydi. Biz nomlarni bir nechta asosiy parametrlar bo'yicha tekshiramiz:",
     "check_points": [
       { "title": "Huquqiy tozalik", "description": "Tovar belgisini ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz." },
       { "title": "Domenlar va raqamli muhit", "description": "Raqamli makonda nomlarning bo'shligini tekshiramiz." },
