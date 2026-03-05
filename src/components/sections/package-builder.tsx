@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState, useEffect, FC, useMemo } from 'react';
+import React, { useState, useEffect, FC, useMemo, useCallback } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -51,7 +51,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
-        <div className="h-full relative pt-12 px-1">
+        <div className="h-full relative pt-12">
             <div className="absolute top-[38px] left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
@@ -203,8 +203,8 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
 });
 ServiceCard.displayName = 'ServiceCard';
 
-const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3", noAnimation = false }: { title: string, children: React.ReactNode, gridCols?: string, noAnimation?: boolean }) => {
-    const content = (
+const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => {
+    return (
         <div className="space-y-8">
             <div className="flex items-center gap-4 px-1">
                 <div className="h-8 w-2.5 bg-primary rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
@@ -212,14 +212,6 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3", noAnimatio
             </div>
             <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>{children}</div>
         </div>
-    );
-
-    if (noAnimation) return content;
-
-    return (
-        <motion.div variants={itemVariants}>
-            {content}
-        </motion.div>
     );
 };
 
@@ -253,9 +245,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         }
     }, [total.isPromoApplied, hasCelebrated]);
 
-    if (!isClient || !dictionary) return null;
-
-    const handleServiceToggle = (id: string) => {
+    const handleServiceToggle = useCallback((id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
         const logoGroup = ['logoVIP', 'logoPremium', 'logoStandard'];
         setSelectedServices(prev => {
@@ -265,7 +255,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             newState[id as keyof SelectedServices] = !prev[id as keyof SelectedServices];
             return newState;
         });
-    };
+    }, [setSelectedServices]);
+
+    if (!isClient || !dictionary) return null;
 
     const discountOptions = [
         { value: 'none', label: translations.discountSelector.none },
@@ -275,20 +267,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     return (
         <section id="package-builder" className="py-20 bg-white" suppressHydrationWarning>
-            <motion.div 
-                className="container mx-auto px-4 max-w-7xl"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
-            >
-                <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-16 text-center space-y-4">
+            <div className="container mx-auto px-4 max-w-7xl">
+                <div className="max-w-4xl mx-auto mb-16 text-center space-y-4">
                     <Badge className="bg-primary/10 text-primary border-none px-8 py-2 rounded-full font-black text-[12px] uppercase tracking-[0.2em] shadow-sm">
                         LOYIHA ME'MORI
                     </Badge>
                     <h2 className="text-4xl sm:text-6xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
                     <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
-                </motion.div>
+                </div>
 
                 <div className="space-y-20">
                     <ServiceGroup title={translations.categories.tripwire}>
@@ -315,7 +301,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                         ))}
                     </ServiceGroup>
                     
-                    <motion.div variants={itemVariants} className="w-full">
+                    <div className="w-full">
                         <Accordion type="single" collapsible className="w-full">
                             <AccordionItem value="more" className="border-none">
                                 <AccordionTrigger className="text-xl font-black text-dark-blue justify-center gap-6 hover:no-underline py-8 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm">
@@ -323,7 +309,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     <ChevronsDown className="w-6 h-6 text-primary animate-bounce" />
                                 </AccordionTrigger>
                                 <AccordionContent className="pt-12">
-                                    <ServiceGroup title={translations.categories.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2" noAnimation={true}>
+                                    <ServiceGroup title={translations.categories.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
                                         {['packaging', 'smm', 'urgency', 'nda'].map(id => (
                                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                                         ))}
@@ -331,10 +317,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
-                    </motion.div>
+                    </div>
                 </div>
 
-                <motion.div variants={itemVariants} className="mt-24 max-w-6xl mx-auto">
+                <div className="mt-24 max-w-6xl mx-auto">
                     <div id="your-package-card" className={cn("rounded-[3rem] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border border-slate-100 transition-all duration-500", total.isPromoApplied && "ring-4 ring-emerald-500/30 scale-[1.01]")}>
                         <div className="lg:w-1/2 bg-dark-blue p-8 sm:p-14 text-white relative">
                             <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-[120px]" />
@@ -474,8 +460,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </Button>
                         </div>
                     </div>
-                </motion.div>
-            </motion.div>
+                </div>
+            </div>
         </section>
     );
 };

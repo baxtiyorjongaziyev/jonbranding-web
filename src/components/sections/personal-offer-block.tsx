@@ -38,24 +38,26 @@ const PersonalOfferBlock: FC<PersonalOfferBlockProps> = ({ onCtaClick }) => {
     return (
         <section className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4">
-                <Card className="max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl p-8 sm:p-12 text-center relative overflow-hidden">
+                <Card className="max-w-4xl mx-auto bg-dark-blue text-white rounded-[2.5rem] shadow-2xl p-8 sm:p-14 text-center relative overflow-hidden border-none">
                     <div className="absolute -bottom-20 -right-20 w-64 h-64 opacity-10">
                         <Logo isWhite={true} />
                     </div>
                     <div className="relative z-10">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-white">
+                        <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
                            {translations.title}
                         </h2>
-                        <p className="mt-2 text-xl text-blue-200">{translations.subtitle}</p>
+                        <p className="mt-4 text-xl text-blue-200 font-medium opacity-90">{translations.subtitle}</p>
                         
-                        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+                        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                             {translations.sections.map((section: any, index: number) => (
-                                <div key={index} className="bg-white/5 p-4 rounded-xl border border-white/10">
-                                    <h3 className="font-bold text-base text-accent mb-2">{section.title}</h3>
-                                    <ul className="space-y-1">
+                                <div key={index} className="bg-white/5 p-5 rounded-2xl border border-white/10 shadow-inner backdrop-blur-sm">
+                                    <h3 className="font-black text-sm text-sky-blue mb-3 uppercase tracking-widest">{section.title}</h3>
+                                    <ul className="space-y-2">
                                         {section.points.map((point: string, pIndex: number) => (
-                                            <li key={pIndex} className="flex items-start gap-2 text-sm text-blue-100">
-                                                <ArrowRight className="h-4 w-4 text-green-400 flex-shrink-0 mt-1" />
+                                            <li key={pIndex} className="flex items-start gap-2.5 text-sm text-blue-100 font-medium leading-tight">
+                                                <div className="mt-1 shrink-0 bg-sky-blue/20 rounded-full p-0.5">
+                                                    <ArrowRight className="h-3 w-3 text-sky-blue" />
+                                                </div>
                                                 <span>{point}</span>
                                             </li>
                                         ))}
@@ -64,15 +66,15 @@ const PersonalOfferBlock: FC<PersonalOfferBlockProps> = ({ onCtaClick }) => {
                             ))}
                         </div>
 
-                        <div className="mt-10">
+                        <div className="mt-12">
                              <Button
-                                variant="outline"
+                                variant="secondary"
                                 size="lg"
                                 onClick={onCtaClick}
-                                className="bg-white text-dark-blue hover:bg-slate-100 border-none shadow-xl transform hover:scale-105 transition-all text-lg px-10 py-6 font-bold rounded-full"
+                                className="shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 font-black tracking-widest uppercase px-12 h-16 rounded-full"
                                 >
                                 {translations.ctaButton}
-                                <ArrowRight className="ml-2 h-5 w-5" />
+                                <ArrowRight className="ml-3 h-5 w-5" />
                             </Button>
                         </div>
                     </div>

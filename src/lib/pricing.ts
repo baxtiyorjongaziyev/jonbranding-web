@@ -255,7 +255,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 { icon: "📈", title: "Brend qiymati oshadi", description: "Izchil ko'rinish — professional biznes belgisi." }
             ] : [
                 { icon: "🏆", title: "Consistent", description: "Uniform style." },
-                { icon: "💼", title: "Team Ready", description: "Clear rules." },
+                { icon: "💼", title: "Team Ready", description: "Clear bureaucratic rules." },
                 { icon: "📸", title: "Verified", description: "15 touchpoints." },
                 { icon: "📈", title: "Valuation", description: "Business asset." }
             ]
