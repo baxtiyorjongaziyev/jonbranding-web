@@ -255,7 +255,7 @@
         },
         {
           "title": "7. Brendingni bir martalik ish deb o'ylash",
-          "description": "Bozor, mijozlar talablari va texnologiyalar doimiy ravishda o'zgarib turadi. Zaman bilan birga o'zgarmaydigan brend tezda eskiradi.",
+          "description": "Bozor, mijozlar talablari va texnomaglar doimiy ravishda o'zgarib turadi. Zaman bilan birga o'zgarmaydigan brend tezda eskiradi.",
           "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lsa dizayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir."
         }
       ],
@@ -281,10 +281,10 @@
     "faqItems": [
       {
         "question": "Nega narxlar aynan $780 dan boshlanadi?",
-        "answer": "Biz har bir logotipni noldan, strategiya va bozor tahlili asosida yaratamiz. $780 lik 'Standart' paketimizga nafaqat logotip, balki uning 4 xil ko'rinishi, barcha manba fayllar va 8 ta aloqa nuqtasida logoning vizual namoyishi kiradi. Bu shunchaki rasm emas, biznes uchun tayyor vizual vositadir."
+        "answer": "Biz har bir logotipni noldan, strategiya va bozor tahlili asosida yaratamiz. $780 lik 'Standart' paketimizga nafaqat logotip, balki uning 4 xil ko'rinishi, balla manba fayllar va 8 ta aloqa nuqtasida logoning vizual namoyishi kiradi. Bu shunchaki rasm emas, biznes uchun tayyor vizual vositadir."
       },
       {
-        "question": "Patent tekshiruvi qanday amalga oshirilari?",
+        "question": "Patent tekshiruvi qanday amalga oshiriladi?",
         "answer": "Ayniqsa 'Naming VIP' tarifimizda biz nomni nafaqat O'zbekiston, balki xalqaro (WIPO) bazalarda tekshiramiz. Bu sizning kelajakda boshqa brendlar bilan huquqiy muammolarga duch kelmasligingizni kafolatlaydi va nomni patentga topshirish xizmatini ham o'z ichiga oladi."
       },
       {
@@ -541,7 +541,7 @@
       { "title": "Tekshirish va yakunlash", "description": "Ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz, domenlar va assotsiatsiyalarni tekshiramiz, eng yaxshilarini tanlaymiz." }
     ],
     "check_title": "Nomni tekshirish uni yaratishdan kam ahamiyatli emas",
-    "check_subtitle": "Agar dahshatli g'oyani ro'yxatdan o'tkazib bo'lmasa yoki u istalmagan assotsiatsiyalarni keltirib chiqarsa, u ishlamaydi. Biz nomlarni bir nechta asosiy parametrlar bo'yicha tekshiramiz:",
+    "check_subtitle": "Even a brilliant idea won't work if it can't be registered or if it carries undesirable associations. We check names by several key parameters:",
     "check_points": [
       { "title": "Huquqiy tozalik", "description": "Tovar belgisini ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz." },
       { "title": "Domenlar va raqamli muhit", "description": "Raqamli makonda nomlarning bo'shligini tekshiramiz." },
