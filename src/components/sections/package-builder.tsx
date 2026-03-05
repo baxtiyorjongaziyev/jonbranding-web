@@ -14,6 +14,7 @@ import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit,
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
+import confetti from 'canvas-confetti';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -230,13 +231,29 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
+    const [hasCelebrated, setHasCelebrated] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
-    if (!isClient || !dictionary) return null;
-
+    
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
     const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any);
+
+    useEffect(() => {
+        if (total.isPromoApplied && !hasCelebrated) {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#050583', '#00C9FD', '#ADFFFE', '#fbbf24']
+            });
+            setHasCelebrated(true);
+        } else if (!total.isPromoApplied && hasCelebrated) {
+            setHasCelebrated(false);
+        }
+    }, [total.isPromoApplied, hasCelebrated]);
+
+    if (!isClient || !dictionary) return null;
 
     const handleServiceToggle = (id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
@@ -318,7 +335,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
 
                 <motion.div variants={itemVariants} className="mt-24 max-w-6xl mx-auto">
-                    <div id="your-package-card" className="rounded-[3rem] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border border-slate-100">
+                    <div id="your-package-card" className={cn("rounded-[3rem] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border border-slate-100 transition-all duration-500", total.isPromoApplied && "ring-4 ring-emerald-500/30 scale-[1.01]")}>
                         <div className="lg:w-1/2 bg-dark-blue p-8 sm:p-14 text-white relative">
                             <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-[120px]" />
                             <div className="relative z-10 h-full flex flex-col">
@@ -368,23 +385,39 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             </div>
                                         ))}
                                         {total.discountApplied.map((d: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-green-700 text-[12px] font-bold bg-green-50 px-5 py-3 rounded-xl border border-green-100 shadow-sm">
+                                            <motion.div 
+                                                key={i} 
+                                                initial={{ x: -20, opacity: 0 }}
+                                                animate={{ x: 0, opacity: 1 }}
+                                                className="flex justify-between items-center text-green-700 text-[12px] font-bold bg-green-50 px-5 py-3 rounded-xl border border-green-100 shadow-sm"
+                                            >
                                                 <div className="flex items-center gap-2"><Zap className="w-4 h-4" />{d.name}</div>
                                                 <span className="text-base">-{formatPrice(d.value, lang as any, currency)}</span>
-                                            </div>
+                                            </motion.div>
                                         ))}
                                     </div>
 
                                     <div className="pt-6 border-t border-slate-200 text-center space-y-2">
                                         <span className="text-slate-400 text-[11px] font-bold uppercase tracking-widest">{translations.final_price}</span>
                                         <div className="flex flex-col items-center">
-                                            <span className="text-6xl font-bold text-primary tracking-tighter">
-                                                {formatPrice(total.final, lang as any, currency)}
-                                            </span>
+                                            <AnimatePresence mode="wait">
+                                                <motion.span 
+                                                    key={total.final}
+                                                    initial={{ scale: 0.9, opacity: 0 }}
+                                                    animate={{ scale: 1, opacity: 1 }}
+                                                    className={cn("text-6xl font-bold tracking-tighter transition-colors", total.isPromoApplied ? "text-emerald-600" : "text-primary")}
+                                                >
+                                                    {formatPrice(total.final, lang as any, currency)}
+                                                </motion.span>
+                                            </AnimatePresence>
                                             {total.savings > 0 && (
-                                                <div className="mt-4 flex items-center gap-2 text-green-600 font-bold text-[12px] bg-green-100/70 px-6 py-2 rounded-full border border-green-200 uppercase tracking-widest shadow-sm">
+                                                <motion.div 
+                                                    initial={{ y: 10, opacity: 0 }}
+                                                    animate={{ y: 0, opacity: 1 }}
+                                                    className="mt-4 flex items-center gap-2 text-green-600 font-bold text-[12px] bg-green-100/70 px-6 py-2 rounded-full border border-green-200 uppercase tracking-widest shadow-sm"
+                                                >
                                                     <Gift className="w-4 h-4" /> JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
-                                                </div>
+                                                </motion.div>
                                             )}
                                         </div>
                                     </div>
@@ -397,10 +430,27 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
                                                 placeholder={translations.promo_code_placeholder}
-                                                className="rounded-full py-3 px-6 border-slate-200 h-14 text-base font-bold uppercase tracking-widest bg-white shadow-inner focus:ring-primary focus:border-primary transition-all"
+                                                className={cn("rounded-full py-3 px-6 border-slate-200 h-14 text-base font-bold uppercase tracking-widest bg-white shadow-inner focus:ring-primary focus:border-primary transition-all", total.isPromoApplied && "border-emerald-500 ring-2 ring-emerald-500/20")}
                                             />
-                                            {total.isPromoApplied && <div className="absolute right-5 top-1/2 -translate-y-1/2 text-emerald-500"><CheckCircle className="w-6 h-6" /></div>}
+                                            {total.isPromoApplied && (
+                                                <motion.div 
+                                                    initial={{ scale: 0 }}
+                                                    animate={{ scale: 1 }}
+                                                    className="absolute right-5 top-1/2 -translate-y-1/2 text-emerald-500"
+                                                >
+                                                    <CheckCircle className="w-6 h-6" />
+                                                </motion.div>
+                                            )}
                                         </div>
+                                        {total.isPromoApplied && (
+                                            <motion.div 
+                                                initial={{ y: -10, opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                className="mt-2 flex items-center gap-2 text-emerald-600 font-bold text-[10px] bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100 shadow-sm w-fit mx-auto"
+                                            >
+                                                <Sparkles className="w-3.5 h-3.5" /> TABRIKLAYMIZ! PROMOKOD QABUL QILINDI
+                                            </motion.div>
+                                        )}
                                     </div>
 
                                     {!total.isPromoApplied && (
