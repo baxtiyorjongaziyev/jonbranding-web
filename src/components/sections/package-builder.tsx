@@ -50,7 +50,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
-        <motion.div variants={itemVariants} className="h-full relative pt-12 px-1">
+        <div className="h-full relative pt-12 px-1">
             <div className="absolute top-[38px] left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
@@ -67,22 +67,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             <Card
                 onClick={onSelect}
                 className={cn(
-                    "group relative h-full transition-all duration-500 cursor-pointer border flex flex-col rounded-[1.5rem] bg-white overflow-visible",
+                    "group relative h-full transition-all duration-500 cursor-pointer border flex flex-col rounded-[1.5rem] bg-white",
                     selected
                         ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_60px_rgba(251,191,36,0.35)] scale-[1.03]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.03]')
                         : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : "border-slate-100 hover:border-primary/20 shadow-sm")
                 )}
             >
-                {isVip && selected && (
-                    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[1.5rem]">
-                        <motion.div
-                            animate={{ x: ['-100%', '200%'] }}
-                            transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
-                        />
-                    </div>
-                )}
-
                 <CardHeader className="p-5 pb-3 relative z-10">
                     <div className="flex items-center gap-3 mb-3">
                         <div className={cn(
@@ -207,20 +197,30 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                     </div>
                 </CardContent>
             </Card>
-        </motion.div>
+        </div>
     );
 });
 ServiceCard.displayName = 'ServiceCard';
 
-const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => (
-    <motion.div variants={itemVariants} className="space-y-8">
-        <div className="flex items-center gap-4 px-1">
-            <div className="h-8 w-2.5 bg-primary rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
-            <h3 className="text-xl sm:text-2xl font-black text-dark-blue tracking-tight uppercase">{title}</h3>
+const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3", noAnimation = false }: { title: string, children: React.ReactNode, gridCols?: string, noAnimation?: boolean }) => {
+    const content = (
+        <div className="space-y-8">
+            <div className="flex items-center gap-4 px-1">
+                <div className="h-8 w-2.5 bg-primary rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
+                <h3 className="text-xl sm:text-2xl font-black text-dark-blue tracking-tight uppercase">{title}</h3>
+            </div>
+            <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>{children}</div>
         </div>
-        <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>{children}</div>
-    </motion.div>
-);
+    );
+
+    if (noAnimation) return content;
+
+    return (
+        <motion.div variants={itemVariants}>
+            {content}
+        </motion.div>
+    );
+};
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
@@ -257,9 +257,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     ];
 
     return (
-        <section id="package-builder" className="py-20 bg-white overflow-visible" suppressHydrationWarning>
+        <section id="package-builder" className="py-20 bg-white" suppressHydrationWarning>
             <motion.div 
-                className="container mx-auto px-4 max-w-7xl overflow-visible"
+                className="container mx-auto px-4 max-w-7xl"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
@@ -302,11 +302,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                         <Accordion type="single" collapsible className="w-full">
                             <AccordionItem value="more" className="border-none">
                                 <AccordionTrigger className="text-xl font-black text-dark-blue justify-center gap-6 hover:no-underline py-8 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm">
-                                    {translations.categories.more_services}
+                                    {translations.categories.more_services || "Qo'shimcha xizmatlar va maxsus shartlar"}
                                     <ChevronsDown className="w-6 h-6 text-primary animate-bounce" />
                                 </AccordionTrigger>
                                 <AccordionContent className="pt-12">
-                                    <ServiceGroup title={translations.categories.addons} gridCols="lg:grid-cols-2">
+                                    <ServiceGroup title={translations.categories.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2" noAnimation={true}>
                                         {['packaging', 'smm', 'urgency', 'nda'].map(id => (
                                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                                         ))}
