@@ -184,7 +184,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         )}
 
                         <Button
-                            variant={selected ? (isVip ? "secondary" : "default") : "outline"}
+                            variant={selected ? (isVip ? "outline" : "default") : "outline"}
                             className={cn(
                                 "w-full py-4 text-xs font-black transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest relative z-20",
                                 selected 
