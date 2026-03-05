@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -317,7 +318,7 @@
         "naming": "Neyming",
         "identity": "Vizual aydentika: Logo, Stil, Brendbuk",
         "addons": "Qo'shimcha xizmatlar",
-        "more_services": "Maxsus shartlar"
+        "more_services": "Qo'shimcha xizmatlar va maxsus shartlar"
       },
       "tabs": { "included": "Nima kiradi", "benefits": "Nima olasiz" },
       "your_package": "Sizning paketingiz",
@@ -511,7 +512,7 @@
     "process_steps": [
       { "title": "Brifing va tadqiqot", "description": "Biznesingizni, maqsadlaringizni, maqsadli auditoriyangizni va raqobatchilaringizni diqqat bilan o'rganamiz." },
       { "title": "Konsepsiya ishlab chiqish", "description": "Brend strategiyangiz va xarakteringizni aks ettiruvchi bir nechta vizual konsepsiyalarni ishlab chiqamiz." },
-      { "title": "Dizayn va taqdimot", "description": "Tanlangan konsepsiyani takomillashtiramiz, uni real misollarda (mockups) ko'rsatamiz va uning ortidagi mantiqni tushuntiramiz." },
+      { "title": "Design va taqdimot", "description": "Tanlangan konsepsiyani takomillashtiramiz, uni real misollarda (mockups) ko'rsatamiz va uning ortidagi mantiqni tushuntiramiz." },
       { "title": "Yakunlash va topshirish", "description": "Har qanday vaziyatda foydalanish uchun barcha zaruriy fayl formatlarini tayyorlaymiz va ulardan foydalanish bo'yicha mini-qo'llanma beramiz." }
     ],
     "cta_title": "Ishlaydigan logotip yaratishga tayyormisiz?",

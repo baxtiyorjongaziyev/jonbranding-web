@@ -1,3 +1,4 @@
+
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -276,7 +277,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Logotip animatsiyasi (Motion design)",
                 "Telegram stikerlar to'plami (10 ta)",
                 "25 ta aloqa nuqtasi (mobil ilova, billbord, merch, ofis dizayni, ko'rgazma stendi, motion-reklama va h.k.)",
-                "Logoning to'liq mulkchilik huquqi sertifikati",
+                "Logoning to'liq mulkchilik huquqi sertifikat",
                 "Patent topshirish xizmati",
                 "Cheksiz tuzatish (30 kun ichida)"
             ] : ["5 concepts", "Deep strategy", "4 lockups", "3 formats", "Color palette", "Official fonts", "Full Brandbook", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "Unlimited revisions"],
@@ -339,7 +340,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             description: isUz ? "Loyihangiz ma'lumotlari sir saqlanishini kafolatlash." : "Confidentiality guaranteed.",
             price: 0,
             timeline: isUz ? "⏱ Darhol kuchga kiradi" : "⏱ Immediate",
-            features: isUz ? ["Yuridik shartnoma (NDA)", "Ma'lumotlar uchinchi shaxsga berilmaydi", "Portfolioga qo'yilmaydi", "Barcha qidiruv bazalaridan maxfiylik"] : ["Legal agreement", "No sharing", "No portfolio", "Private"],
+            features: isUz ? ["Yuridik shartnoma (NDA)", "Ma'luotlar uchinchi shaxsga berilmaydi", "Portfolioga qo'yilmaydi", "Barcha qidiruv bazalaridan maxfiylik"] : ["Legal agreement", "No sharing", "No portfolio", "Private"],
             benefits: isUz ? [
                 { icon: "🔒", title: "Maxfiylik", description: "Biznes sirlaringiz biz bilan xavfsiz." },
                 { icon: "🛡️", title: "Xavfsizlik", description: "Ma'lumotlar to'liq himoyalangan." }

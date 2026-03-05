@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC, useMemo } from 'react';
@@ -50,7 +51,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
 
     return (
         <motion.div variants={itemVariants} className="h-full relative pt-12 px-1">
-            <div className="absolute top-[34px] left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
+            <div className="absolute top-[38px] left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
                         {dictionary.recommended}
@@ -93,20 +94,20 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                             <Icon className="w-7 h-7" />
                         </div>
                         <div className="min-w-0 flex-1">
-                            <CardTitle className={cn("text-lg font-black leading-tight tracking-tight", isVip ? "text-white" : "text-dark-blue")}>
+                            <CardTitle className={cn("text-xl font-black leading-tight tracking-tight", isVip ? "text-white" : "text-dark-blue")}>
                                 {label}
                             </CardTitle>
                         </div>
                     </div>
                     
                     <div className="flex items-center gap-3 mt-1">
-                        <span className={cn("text-xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
+                        <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
                             {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
                         </span>
                         {subDescription && (
                             <div className="flex items-center gap-2 flex-1">
                                 <div className={cn("h-6 w-px", isVip ? "bg-white/20" : "bg-slate-200")} />
-                                <span className={cn("text-[13px] font-bold leading-tight", isVip ? "text-slate-300" : "text-slate-500")}>
+                                <span className={cn("text-sm font-bold leading-tight", isVip ? "text-slate-300" : "text-slate-500")}>
                                     {subDescription}
                                 </span>
                             </div>
@@ -356,7 +357,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 <div className="space-y-6">
                                     <div className="flex justify-between items-center px-2">
                                         <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{translations.base_price_label}</span>
-                                        <span className="text-xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
+                                        <span className="text-2xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
 
                                     <div className="space-y-2">
@@ -377,7 +378,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     <div className="pt-6 border-t border-slate-200 text-center space-y-2">
                                         <span className="text-slate-400 text-[11px] font-bold uppercase tracking-widest">{translations.final_price}</span>
                                         <div className="flex flex-col items-center">
-                                            <span className="text-5xl font-bold text-primary tracking-tighter">
+                                            <span className="text-6xl font-bold text-primary tracking-tighter">
                                                 {formatPrice(total.final, lang as any, currency)}
                                             </span>
                                             {total.savings > 0 && (
@@ -412,7 +413,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                             <Button 
                                 size="lg" 
-                                className="w-full py-6 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group" 
+                                className="w-full py-7 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group" 
                                 onClick={onOrderNow} 
                                 disabled={total.base === 0}
                             >
