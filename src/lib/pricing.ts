@@ -221,7 +221,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             benefits: isUz ? [
                 { icon: "🎯", title: "Hamma joyga tayyor", description: "Sayt, Instagram, chop etish — logongiz barcha formatda tayyor." },
                 { icon: "✅", title: "Ishonch uyg'otadi", description: "Professional ko'rinish — o'zingiz yasaganga o'xshamaydi." },
-                { icon: "👁️", title: "Real ko'rinish", description: "8 ta joyda logongiz qanday ko'rinishini ko'rasiz." },
+                { icon: "👁️", title: "Real ko'rinish", description: "8 ta joyda logongiz qanday ko'rinishini ko'razsiz." },
                 { icon: "🛡️", title: "Fayllar to'liq sizniki", description: "Barcha fayllar sizga topshiriladi." }
             ] : [
                 { icon: "🎯", title: "Ready everywhere", description: "Print & Web." },
@@ -393,11 +393,18 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     let finalPrice = totalBeforeDiscounts;
     const discountsApplied = [];
 
-    const isPromoApplied = ['RAMAZON', 'PCG', 'KURSDOSH', 'TEZ NATIJA'].includes(promoCode?.toUpperCase());
+    const normalizedPromo = promoCode?.toUpperCase();
+    const isRamazonPromo = normalizedPromo === 'RAMAZON';
+    const isSpecialPromo = ['PCG', 'KURSDOSH', 'TEZ NATIJA'].includes(normalizedPromo);
+    const isPromoApplied = isRamazonPromo || isSpecialPromo;
 
-    if (isPromoApplied) {
+    if (isRamazonPromo) {
+        const val = totalBeforeDiscounts * 0.30;
+        discountsApplied.push({ name: isUz ? 'Ramazon chegirmasi (-30%)' : 'Ramazon discount (-30%)', value: val });
+        finalPrice -= val;
+    } else if (isSpecialPromo) {
         const val = totalBeforeDiscounts * 0.50;
-        discountsApplied.push({ name: lang === 'uz' ? 'Maxsus chegirma (-50%)' : 'Special (-50%)', value: val });
+        discountsApplied.push({ name: isUz ? 'Maxsus chegirma (-50%)' : 'Special (-50%)', value: val });
         finalPrice -= val;
     } else {
         if (discountType === 'package' && mainServicesCount >= 2) {
