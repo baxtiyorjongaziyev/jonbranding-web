@@ -66,9 +66,10 @@ const PersonalOfferBlock: FC<PersonalOfferBlockProps> = ({ onCtaClick }) => {
 
                         <div className="mt-10">
                              <Button
+                                variant="outline"
                                 size="lg"
                                 onClick={onCtaClick}
-                                className="bg-white text-primary hover:bg-gray-200 shadow-lg transform hover:scale-105 transition-transform text-lg px-8 py-6"
+                                className="bg-white text-dark-blue hover:bg-slate-100 border-none shadow-xl transform hover:scale-105 transition-all text-lg px-10 py-6 font-bold rounded-full"
                                 >
                                 {translations.ctaButton}
                                 <ArrowRight className="ml-2 h-5 w-5" />

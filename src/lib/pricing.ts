@@ -295,7 +295,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
         },
         packaging: { 
             label: isUz ? "Qadoq dizayni" : "Packaging Design", 
-            description: isUz ? "Mahsulotingizning javondagi asosiy quroli." : "Your product's main weapon on the shelf.",
+            description: isUz ? "Mahsulotingizning javondagi asosiy qurboni." : "Your product's main weapon on the shelf.",
             price: basePricesUSD.packaging, 
             timeline: isUz ? "⏱ 10-15 ish kuni" : "⏱ 10-15 business days",
             features: isUz ? ["Vizual konsepsiya", "Qadoqni 3D namoyish qilish", "Chop etishga tayyor fayllar", "Materiallar bo'yicha tavsiyalar"] : ["Visual concept", "3D Visualization", "Print files", "Material tips"],
