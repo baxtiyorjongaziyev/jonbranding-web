@@ -11,7 +11,11 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.packagingPage?.metadata || { title: "Packaging Design", description: "Strategic packaging design" };
+  const t = dict.packagingPage?.metadata || { 
+    title: "Packaging Design", 
+    description: "Strategic packaging design",
+    keywords: "packaging design, product packaging"
+  };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/qadoq-dizayni`;
 
@@ -19,7 +23,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords: ["qadoq dizayn", "packaging", "etiketka dizayn", "brending uz", "ma'no branding", "abba", "mountain", "minim"],
+    keywords: t.keywords,
     openGraph: {
       title: t.title,
       description: t.description,

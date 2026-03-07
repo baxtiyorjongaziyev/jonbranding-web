@@ -11,22 +11,19 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.corporateStylePage?.metadata || { title: "Corporate Style", description: "" };
+  const t = dict.corporateStylePage?.metadata || { 
+    title: "Corporate Style", 
+    description: "Visual identity system",
+    keywords: "corporate identity, branding"
+  };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/firmenniy-stil`;
-
-  let keywords = ["firma uslubi yaratish", "brend dizayn toshkent", "korporativ aydentika", "brandbook tayyorlash", "vizual uslub", "biznes upakovka"];
-  if (lang === 'ru') {
-    keywords = ["создание фирменного стиля", "бренд дизайн ташкент", "корпоративная айдентика", "разработка брендбука", "визуальный стиль", "упаковка бизнеса"];
-  } else if (lang === 'en') {
-    keywords = ["corporate identity creation", "brand design tashkent", "corporate identity", "brandbook development", "visual style", "business packaging"];
-  }
 
   return {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords,
+    keywords: t.keywords,
     openGraph: {
       title: t.title,
       description: t.description,

@@ -8,14 +8,14 @@ type Props = {
   params: Promise<{ lang: string }>;
 };
 
-export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
-  const params = await props.params;
-  const { lang } = params;
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
   
   const t = dict.servicesPage?.metadata || {
       title: "Xizmatlar va Narxlar | Jon.Branding",
-      description: "Biznesingiz uchun professional brending xizmatlari va narxlari."
+      description: "Biznesingiz uchun professional brending xizmatlari va narxlari.",
+      keywords: "branding services, pricing"
   };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar`;
@@ -24,6 +24,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
+    keywords: t.keywords,
     openGraph: {
       title: t.title,
       description: t.description,
