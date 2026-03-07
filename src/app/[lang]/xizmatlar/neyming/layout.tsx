@@ -11,7 +11,7 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.namingPage?.metadata || { title: "Naming", description: "Brand name selection" };
+  const t = dict.namingPage?.metadata || { title: "Naming Services", description: "Professional naming for your brand" };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/neyming`;
 
@@ -19,6 +19,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
+    keywords: ["neyming", "naming", "nom berish", "ma'no branding", "branding uz", "mountain branding", "abba marketing", "minim", "redfox"],
     openGraph: {
       title: t.title,
       description: t.description,

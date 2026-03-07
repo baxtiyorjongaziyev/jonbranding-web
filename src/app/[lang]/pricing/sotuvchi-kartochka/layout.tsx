@@ -4,29 +4,35 @@ import { FC, ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { lang } = params;
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { lang } = await props.params;
   const isRu = lang === 'ru';
   const isEn = lang === 'en';
+  const isZh = lang === 'zh';
   
   let t;
   if (isRu) {
     t = {
       title: 'Продающий дизайн карточек для Uzum, Yandex Market, WB и Ozon | Jon Branding',
-      description: 'Профессиональный дизайн карточек товаров, который увеличивает продажи. Ознакомьтесь и закажите тарифы START, PRO и PREMIUM для маркетплейсов.',
+      description: 'Профессиональный дизайн карточек товаров, который увеличивает продажи. Закажите тарифы START, PRO и PREMIUM для маркетплейсов.',
     }
   } else if (isEn) {
     t = {
       title: 'Sales-Driven Card Design for Uzum, Yandex Market, WB & Ozon | Jon Branding',
       description: 'Professional product card design that increases sales. Explore and order START, PRO, and PREMIUM plans for marketplaces.',
     }
+  } else if (isZh) {
+    t = {
+      title: 'Uzum, Yandex Market, WB 和 Ozon 的销售卡设计 | Jon Branding',
+      description: '提高销量的专业产品卡设计。探索并订购适用于在线市场的 START、PRO 和 PREMIUM 计划。',
+    }
   } else {
     t = {
       title: 'Uzum, Yandex Market, WB va Ozon uchun sotuvchi kartochka dizayni | Jon Branding',
-      description: 'Sotuvlarni oshiradigan professional mahsulot kartochkasi dizayni. Marketplace uchun START, PRO va PREMIUM tariflar bilan tanishing va buyurtma bering.',
+      description: 'Sotuvlarni oshiradigan professional mahsulot kartochkasi dizayni. Marketplace uchun START, PRO va PREMIUM tariflar bilan tanishing.',
     }
   }
 
@@ -36,6 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
+    keywords: ["sotuvchi rasm", "uzum kartochka dizayn", "wildberries dizayn", "marketpleyslar uchun dizayn", "branding uz", "logo", "neyming"],
     openGraph: {
       title: t.title,
       description: t.description,
