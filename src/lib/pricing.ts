@@ -152,17 +152,17 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Social media username tekshiruvi",
                 "O'zbekistonda patent tekshiruvi",
                 "Raqobatchilar tahlili",
-                "Linguistik tahlil (6 til)",
+                "Linguistik tahlil (6 tilda)",
                 "Hissiy ma'no tahlili",
                 "3 ta shior varianti",
                 "Patentga topshirish xizmati",
                 "Mulkchilik sertifikati",
                 "Cheksiz tahrirlash imkoniyati (30 kun)"
             ] : (isRu ? [
-                "10 вариантов названий", "Стратегическое обоснование", "Проверка произношения", "Проверка доменов", "Проверка соцсетей", "Патентная проверка", "Анализ конкурентов", "Лингвистический анализ (6 языков)", "Анализ эмоций", "3 варианта слоганов", "Подача на патент", "Сертификат владения", "Безлимитные правки"
+                "10 вариантов названий", "Стратегическое обоснование", "Проверка произношения", "Проверка доменов", "Проверка соцсетей", "Патентная проверка", "Анализ конкурентов", "Лингвистический анализ (6 языков)", "Анализ эмоций", "3 варианта слоганов", "Подача на патент", "Сертификат владения", "Безлимитные правки (30 дней)"
             ] : (isZh ? [
                 "10个方案", "战略说明", "发音检查", "域名检查", "社交账号检查", "专利检查", "竞争分析", "语言分析", "情感分析", "3个口号", "专利服务", "证书", "30天无限修改"
-            ] : ["10 concepts", "Strategy", "Phonetics", "Domain check", "Social check", "Patent check", "Competitor analysis", "Linguistics", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Unlimited revisions"])),
+            ] : ["10 concepts", "Strategy", "Phonetics", "Domain check", "Social check", "Patent check", "Competitor analysis", "Linguistics (6 lang)", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Unlimited revisions (30 days)"])),
             benefits: isUz ? [
                 { icon: "🌍", title: "Global tayyor", description: "Nomingiz dunyo bo'ylab ishlaydi." },
                 { icon: "🔒", title: "To'liq himoya", description: "Patent va sertifikat bilan nomingiz faqat sizniki." }
@@ -287,10 +287,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Bir yillik brending nazorati (support)",
                 "Tashqi reklama (banner) dizayni"
             ] : (isRu ? [
-                "5 вариантов", "Анализ", "Брендбук (30-50 стр)", "Анимация", "10 стикеров", "25 точек контакта", "Сертификат", "Патент", "Безлимитные правки", "9 шаблонов для соцсетей", "Визитки и бланки", "Годовая поддержка", "Дизайн баннеров"
+                "5 вариантов логотипа", "Стратегический анализ", "Брендбук (30-50 стр)", "Анимация логотипа", "10 стикеров", "25 точек контакта", "Сертификат владения", "Подача на патент", "Безлимитные правки (30 дней)", "9 шаблонов для соцсетей", "Дизайн визиток и бланков", "Годовая поддержка", "Дизайн наружной рекламы"
             ] : (isZh ? [
                 "5个方案", "战略分析", "品牌手册 (30-50页)", "标志动画", "10个社交贴纸", "25个接触点", "所有权证书", "专利服务", "无限修改", "9个社交媒体模板", "名片和信头", "一年的品牌支持", "户外广告设计"
-            ] : ["5 concepts", "Analysis", "Brandbook (30-50 pages)", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "Unlimited revisions", "9 social templates", "Business cards & letterheads", "1-year support", "Banner design"])),
+            ] : ["5 concepts", "Strategic analysis", "Brandbook (30-50 pages)", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "Unlimited revisions (30 days)", "9 social templates", "Business cards & letterheads", "1-year support", "Outdoor ads design"])),
             benefits: isUz ? [
                 { icon: "📖", title: "Qo'llanma", description: "Istalgan dizayner to'g'ri ishlatadi." },
                 { icon: "💎", title: "Sarmoya", description: "Bir marta to'g'ri investitsiya." }

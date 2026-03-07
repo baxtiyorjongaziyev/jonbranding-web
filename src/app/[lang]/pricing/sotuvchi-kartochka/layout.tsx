@@ -17,12 +17,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   if (isRu) {
     t = {
       title: 'Продающий дизайн карточек для Uzum, Yandex Market, WB и Ozon | Jon Branding',
-      description: 'Профессиональный дизайн карточек товаров, который увеличивает продажи. Закажите тарифы START, PRO и PREMIUM для маркетплейсов.',
+      description: 'Профессиональный дизайн карточек товаров на уровне Ma\'no и Mountain. Тарифы START, PRO и PREMIUM для маркетплейсов.',
     }
   } else if (isEn) {
     t = {
       title: 'Sales-Driven Card Design for Uzum, Yandex Market, WB & Ozon | Jon Branding',
-      description: 'Professional product card design that increases sales. Explore and order START, PRO, and PREMIUM plans for marketplaces.',
+      description: 'Professional product card design that increases sales. Explore our START, PRO, and PREMIUM plans.',
     }
   } else if (isZh) {
     t = {
@@ -32,7 +32,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   } else {
     t = {
       title: 'Uzum, Yandex Market, WB va Ozon uchun sotuvchi kartochka dizayni | Jon Branding',
-      description: 'Sotuvlarni oshiradigan professional mahsulot kartochkasi dizayni. Marketplace uchun START, PRO va PREMIUM tariflar bilan tanishing.',
+      description: 'Sotuvlarni oshiradigan professional mahsulot kartochkasi dizayni. Ma\'no va Mountain darajasidagi sifat.',
     }
   }
 
@@ -42,7 +42,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords: ["sotuvchi rasm", "uzum kartochka dizayn", "wildberries dizayn", "marketpleyslar uchun dizayn", "branding uz", "logo", "neyming"],
+    keywords: ["sotuvchi rasm", "uzum kartochka dizayn", "wildberries dizayn", "marketpleyslar uchun dizayn", "branding uz", "logo", "neyming", "Ma'no", "Abba", "Mountain"],
     openGraph: {
       title: t.title,
       description: t.description,
@@ -70,7 +70,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-const SotuvchiKartochkaLayout: FC<Readonly<Props>> = ({ children }) => {
+const SotuvchiKartochkaLayout: FC<Readonly<Props>> = async ({ children }) => {
   return <>{children}</>;
 }
 

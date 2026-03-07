@@ -53,7 +53,7 @@
   },
   "home": {
     "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
-    "cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing. Biznesingiz uchun ideal yechimni topishga yordam beramiz.",
+    "cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing. Ma'no, Mountain darajasidagi sifat.",
     "cta1_button": "Mening biznesim uchun ham"
   },
   "hero": {
@@ -64,7 +64,7 @@
       "Mijozlar sizga |oshig' bo'lsin|. Qayta va qayta.",
       "Kichik biznesdan |kuchli brendgacha|. Bir qadamda."
     ],
-    "description": "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span class='font-bold text-foreground'>natijali</span> brend tizimini quramiz. Toshkentda Ma'no, Mountain, Abba, Minim, RedFox darajasidagi premium yechimlar.",
+    "description": "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span class='font-bold text-foreground'>natijali</span> brend tizimini quramiz. Ma'no, Mountain, Abba darajasidagi premium yondashuv.",
     "buttonTexts": [
       "Brendimni tahlil qiling",
       "Sotuvni oshirishga yordam berish",
@@ -90,14 +90,14 @@
   },
   "whyUs": {
     "title": "Nega aynan bizni tanlashadi?",
-    "subtitle": "Biz shunchaki va'da bermaymiz. Biz tizimli yondashuv orqali brendingiz uchun real qiymat yaratamiz.",
+    "subtitle": "Biz shunchaki va'da bermaymiz. Ma'no va Mountain darajasidagi tizimli yondashuv orqali qiymat yaratamiz.",
     "values": [
-      { "title": "Strategik yondashuv", "description": "Biz shunchaki chiroyli rasm chizmaymiz. Har bir dizayn elementi sotuvlaringizni oshirishga va brendingizni mustahkamlashga xizmat qiladi." },
-      { "title": "Shaffof jarayon", "description": "Brif → Tahlil → Strategiya → Dizayn → Topshirish. Har bir bosqichda siz bilan yaqindan ishlaymiz va jarayon to'liq nazoratingizda bo'ladi." },
-      { "title": "Natija va Sadoqat", "description": "1000 dan ortiq loyihalar va eng muhimi — 90% mijozlarimiz bizni o'z do'stlariga tavsiya etishadi. Bu bizning eng katta yutug'imiz." }
+      { "title": "Strategik yondashuv", "description": "Biz shunchaki chiroyli rasm chizmaymiz. Har bir dizayn elementi sotuvlaringizni oshirishga xizmat qiladi." },
+      { "title": "Shaffof jarayon", "description": "Brif → Tahlil → Strategiya → Dizayn → Topshirish. Har bir bosqich siz bilan yaqindan ishlaymiz." },
+      { "title": "Natija va Sadoqat", "description": "1000 dan ortiq loyihalar va eng muhimi — 90% mijozlarimiz bizni tavsiya etishadi." }
     ],
     "ctaTitle": "Bizning yondashuv yoqdimi?",
-    "ctaDesc": "Keling, brendingizni bepul tahlil qilamiz, uning kuchli va zaif tomonlarini aniqlaymiz. Bu sizga hech qanday majburiyat yuklamaydi.",
+    "ctaDesc": "Keling, brendingizni bepul tahlil qilamiz. Bu sizga hech qanday majburiyat yuklamaydi.",
     "ctaButton": "Brendimni bepul tahlil qiling"
   },
   "process": {
@@ -132,139 +132,11 @@
   "namingPage": {
     "metadata": {
       "title": "Neyming Xizmati — Brend uchun kuchli nom yaratish | Jon.Branding",
-      "description": "Professional neyming xizmatlari. Biznesingiz uchun unutilmas, strategik va huquqiy toza nom tanlaymiz. Ma'no, Mountain darajasidagi sifat.",
+      "description": "Ma'no, Mountain darajasidagi professional neyming xizmatlari. Biznesingiz uchun unutilmas, strategik va huquqiy toza nom tanlaymiz.",
       "keywords": "neyming, naming, nom berish, branding uz, ma'no branding, mountain, abba marketing, minim, redfox"
-    },
-    "title": "Neyming — Kuchli brend nomi",
-    "subtitle": "Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va bozordagi o'rningizni belgilaydi.",
-    "process_title": "Neyming qanday yaratiladi?",
-    "process_subtitle": "Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz.",
-    "process_steps": [
-      { "title": "Tadqiqot", "description": "Bozor, auditoriya va semantik yo'nalishlarni o'rganamiz." },
-      { "title": "G'oya", "description": "Brend xarakterini aks ettiruvchi yuzlab nomlar generatsiya qilamiz." },
-      { "title": "Tekshiruv", "description": "Nomlarni jarangdorlik va ma'no bo'yicha saralaymiz." },
-      { "title": "Patent audit", "description": "Tanlangan nomni huquqiy tozaligini tekshiramiz." }
-    ],
-    "check_title": "Tekshiruv yaratishdan ko'ra muhimroq",
-    "check_subtitle": "Hatto eng zo'r g'oya ham ro'yxatdan o'ta olmasa yoki noto'g'ri assotsiatsiya bersa, u ishlamaydi.",
-    "check_points": [
-      { "title": "Huquqiy tozalik", "description": "Tovar belgisini ro'yxatdan o'tkazish imkoniyatini tahlil qilamiz." },
-      { "title": "Domen va Social", "description": "Raqamli muhitda nomning bo'shligini tekshiramiz." },
-      { "title": "Ma'no va Ohang", "description": "Nomning 6 tildagi ma'nosi va jarangini test qilamiz." }
-    ],
-    "calculator_cta_button": "Patent kalkulyatoriga o'tish"
-  },
-  "logoDesignPage": {
-    "metadata": {
-      "title": "Professional Logotip Dizayni — Biznes uchun Yuz | Jon.Branding",
-      "description": "Logotip shunchaki rasm emas, bu strategik vosita. Biznesingiz mohiyatini aks ettiruvchi unikal logotiplar chizamiz. Abba, Minim, Mountain darajasi.",
-      "keywords": "logo dizayn, logotip chizish, brending toshkent, ma'no branding, abba, minim, mountain, redfox"
-    },
-    "title": "Logotip Dizayni",
-    "subtitle": "Logotip shunchaki rasm emas; bu strategik vosita, biznesingizning yuzi va mijozda qoldiradigan birinchi taassurotdir.",
-    "section1_title": "Logotip nega muhim?",
-    "section1_p1": "Bugungi raqobatli bozorda logotip mijoz e'tiborini tortadigan birinchi narsadir.",
-    "section1_p2": "Professional logotip ishonch uyg'otadi va hissiy bog'liqlikni o'rnatadi.",
-    "values_title": "Yaxshi logotip qanday bo'lishi kerak?",
-    "values": [
-      { "title": "Oddiy va Esda qolarli", "description": "Har qanday o'lchamda oson tanilishi kerak." },
-      { "title": "Noyob va Zamonaviy", "description": "Raqobatchilardan ajralib turishi va yillar o'tsa ham eskirmasligi lozim." },
-      { "title": "Strategik", "description": "Har bir chiziq va rang biznesingiz maqsadiga xizmat qilishi kerak." }
-    ],
-    "process_title": "Biz logotipni qanday chizamiz?",
-    "process_subtitle": "Bizning jarayon chuqur tahlil va strategik fikrlashga asoslangan.",
-    "process_steps": [
-      { "title": "Brifing", "description": "Biznesingiz maqsadlari va auditoriyangizni o'rganamiz." },
-      { "title": "Konsepsiya", "description": "Brend strategiyasini aks ettiruvchi bir nechta yo'nalishlarni yaratamiz." },
-      { "title": "Dizayn", "description": "Tanlangan yo'nalishni mukammal holatga keltiramiz." },
-      { "title": "Taqdimot", "description": "Logotipni hayotiy misollarda (mockup) ko'rsatamiz." }
-    ],
-    "cta_title": "Ishlaydigan logotip yaratishga tayyormisiz?",
-    "cta_description": "Shablonlardan voz keching. Keling, muvaffaqiyatingiz uchun unikal belgi yaratamiz.",
-    "cta_button": "Bepul konsultatsiya olish"
-  },
-  "corporateStylePage": {
-    "metadata": {
-      "title": "Firma Uslubi va Aydentika Yaratish | Jon.Branding",
-      "description": "Brendingizni taniladigan qiluvchi yaxlit vizual tizim. Firma uslubi, ranglar, shriftlar va grafik elementlar tizimi. Ma'no, Mountain, Abba darajasi.",
-      "keywords": "firma uslubi, aydentika, brend dizayn, corporate identity, ma'no, mountain, abba, minim, redfox"
-    },
-    "title": "Firma Uslubini Yaratish",
-    "subtitle": "Brendning vizual qiyofasi — bu g'oyalar va qadriyatlarni odamlar ko'ra oladigan obrazlarga aylantirishdir.",
-    "section1_title": "Brendni qabul qilish rasmdan boshlanadi",
-    "section1_p1": "Zamonaviy dunyoda vizual ma'lumot matnga qaraganda tezroq qabul qilinadi.",
-    "section1_p2": "Puxta o'ylangan firma uslubi brend qadriyatlarini so'zlarsiz tushuntirib beradi.",
-    "section2_title": "Firma uslubi — bu tizim",
-    "section2_p1": "Bu shunchaki go'zallik emas, balki samaradorlik va nazoratdir.",
-    "section2_p2": "Minimal to'plam logotip, ranglar, shriftlar va foto uslubini o'z ichiga oladi.",
-    "section2_p3": "Vizual uslub aniq bo'lsa, brend ishonchli va professional ko'rinadi.",
-    "process_title": "Biz firma uslubini qanday yaratamiz?",
-    "process_subtitle": "Har bir detal brend taniluvchanligi uchun ishlashini ta'minlaymiz.",
-    "process_steps": [
-      { "title": "Tadqiqot", "description": "Auditoriya va raqobatchilarning vizual kodini tahlil qilamiz." },
-      { "title": "Vizual kod", "description": "Logotip, ranglar palitrasi va tipografiyani ishlab chiqamiz." },
-      { "title": "Tizimlashtirish", "description": "Barcha platformalar uchun moslashuvchan elementlarni yaratamiz." },
-      { "title": "Qo'llanma", "description": "Uslubdan foydalanish qoidalarini belgilovchi hujjat tayyorlaymiz." }
-    ],
-    "cta_title": "Firma uslubi — bu o'sish vositasi",
-    "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi va ko'proq ishonch uyg'otadi."
-  },
-  "brandbookPage": {
-    "metadata": {
-      "title": "Brendbuk va Gaydlayn Ishlab Chiqish | Jon.Branding",
-      "description": "Brendbuk — bu brendingiz Konstitutsiyasi. Brendingiz izchilligini ta'minlovchi va marketing xarajatlarini tejovchi rasmiy qo'llanma.",
-      "keywords": "brendbuk, brandbook, gaydlayn, brend qoidalari, ma'no, mountain, abba, minim, redfox"
-    },
-    "title": "Brendbuk Yaratish",
-    "subtitle": "Brendbuk — shunchaki logotiplar to'plami emas, bu brendingizning Konstitutsiyasidir.",
-    "section1_title": "Nega har bir biznesga brendbuk kerak?",
-    "section1_p1": "Brendbuk brendni boshqarish uchun asosiy vositadir. U barcha qoidalarni belgilab beradi.",
-    "section1_p2": "Bu hujjat marketingda xaotik holatlarning oldini oladi va vaqtni tejaydi.",
-    "values_title": "Brendbuk quyidagi muammolarni hal qiladi:",
-    "values": [
-      { "title": "Izchillik", "description": "Brend hamma joyda bir xil va professional ko'rinishini ta'minlaydi." },
-      { "title": "Resurslarni tejash", "description": "Yangi xodimlarga dizayn qoidalarini qaytadan tushuntirishga hojat qolmaydi." },
-      { "title": "Brend himoyasi", "description": "Aydentikani noto'g'ri foydalanishdan asraydi." }
-    ],
-    "process_title": "Brendbuk tarkibiga nimalar kiradi?",
-    "process_subtitle": "Bizning brendbuklar brendni samarali boshqarish uchun barcha bo'limlarni o'z ichiga oladi.",
-    "process_steps": [
-      { "title": "Brend platformasi", "description": "Missiya, qadriyatlar va brend xarakteri." },
-      { "title": "Logotip qoidalari", "description": "Ranglar, o'lchamlar va foydalanish me'yorlari." },
-      { "title": "Vizual uslub", "description": "Foto, illustratsiya va grafik elementlar qoidasi." },
-      { "title": "Amaliyot", "description": "Real tashuvchilarda (vizitka, ijtimoiy tarmoq) qo'llanish namunalari." }
-    ],
-    "cta_title": "Tartib o'rnatishga tayyormisiz?",
-    "cta_description": "Professional brendbuk — biznesingiz barqaror kelajagi uchun sarmoyadir.",
-    "cta_button": "Brendbuk buyurtma qilish"
-  },
-  "packagingPage": {
-    "metadata": {
-      "title": "Qadoq Dizayni — Sotuvlarni Oshiruvchi Vosita | Jon.Branding",
-      "description": "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibali qadoq dizayni. Strategik yondashuv va joziba. Ma'no, Minim, Mountain darajasi.",
-      "keywords": "qadoq dizayn, packaging, etiketka, brending uz, ma'no, mountain, abba, minim, redfox"
-    },
-    "title": "Qadoq Dizaynini Ishlab Chiqish",
-    "subtitle": "Qadoq — brendning javondagi birinchi va eng muhim marketing vositasidir.",
-    "section1_title": "Qadoq — identifikatsiya tashuvchisidan ko'prog'i",
-    "section1_p1": "Ko'p hollarda aynan qadoq xaridorning sotib olish qarorini belgilaydi.",
-    "section1_p2": "Bizning maqsadimiz — shunchaki go'zal emas, balki sotadigan vosita yaratishdir.",
-    "process_title": "Biz qadoqni qanday yaratamiz?",
-    "process_subtitle": "Qadoqni biznes va auditoriya kutganlariga javob beradigan murakkab tizim deb bilamiz.",
-    "process_steps": [
-      { "title": "Tadqiqot", "description": "Mahsulot, auditoriya va raqobat muhitini o'rganamiz." },
-      { "title": "Konsepsiya", "description": "Rang, grafika va tipografiya orqali vizual g'oyalar yaratamiz." },
-      { "title": "Yakunlash", "description": "Chop etishga tayyorlash va turli formatlarga moslashtirish." }
-    ],
-    "cta_title": "Qadoq — bu sizning ovozsiz sotuvchingiz",
-    "cta_description": "Yaxshi dizayn — bu biznes uchun vositadir. Biz funktsional va strategik dizayn ishlab chiqamiz."
+    }
   },
   "servicesPage": {
-    "metadata": {
-      "title": "Brending Xizmatlari va Narxlari | Jon.Branding Agentligi",
-      "description": "Biznesingiz uchun professional brending xizmatlari va narxlari. Paket quruvchi orqali narxni darhol hisoblang. Ma'no, Mountain, Abba darajasidagi sifat.",
-      "keywords": "brending xizmatlari, narxlar, logotip narxi, neyming narxi, ma'no, mountain, abba, minim, redfox"
-    },
     "packageBuilder": {
       "title": "Xizmatlar va narxlar kalkulyatori",
       "subtitle": "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
@@ -291,6 +163,13 @@
         "package": "Paketli (-20%)",
         "full": "To'liq (-28%)"
       }
+    }
+  },
+  "sitemapPage": {
+    "sections": {
+      "main": "Asosiy bo'limlar",
+      "services": "Xizmatlar",
+      "blog": "Blog maqolalari"
     }
   }
 }
