@@ -24,41 +24,6 @@ const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
 const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'), { ssr: false });
 
-const useScrollIntent = (onScrollIntent: () => void, scrollThreshold = 0.8) => {
-  useEffect(() => {
-    const SESSION_STORAGE_KEY = 'scroll_intent_shown';
-    if (typeof window === 'undefined') return;
-    if (sessionStorage.getItem(SESSION_STORAGE_KEY)) return;
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrolledPercentage = (scrollPosition + windowHeight) / documentHeight;
-
-      if (scrolledPercentage >= scrollThreshold) {
-        trigger();
-      }
-    };
-
-    const trigger = () => {
-        if (!sessionStorage.getItem(SESSION_STORAGE_KEY)) {
-            onScrollIntent();
-            sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
-            removeListeners();
-        }
-    };
-
-    const removeListeners = () => {
-        window.removeEventListener('scroll', handleScroll);
-    }
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => removeListeners();
-  }, [onScrollIntent, scrollThreshold]);
-};
-
-
 const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) => {
     const [mounted, setMounted] = useState(false);
     const { tg } = useTelegram();
@@ -69,8 +34,6 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
             window.dispatchEvent(event);
         }
     }, []);
-
-    useScrollIntent(handleOpenModal, 0.8);
     
     useEffect(() => {
         setMounted(true);
@@ -99,7 +62,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
 
     return (
         <>
-            <main>
+            <main suppressHydrationWarning>
                 <Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
                 <Stats dictionary={dictionary.stats} />
                 <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
@@ -113,14 +76,12 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 {mounted ? (
                     <>
                         <Video />
-                        {dictionary.home && (
-                            <CtaBlock 
-                                title={dictionary.home.cta1_title}
-                                description={dictionary.home.cta1_desc}
-                                buttonText={dictionary.home.cta1_button}
-                                onCtaClick={handleOpenModal}
-                            />
-                        )}
+                        <CtaBlock 
+                            title={dictionary.home.cta1_title}
+                            description={dictionary.home.cta1_desc}
+                            buttonText={dictionary.home.cta1_button}
+                            onCtaClick={handleOpenModal}
+                        />
                         <Founder lang={lang} dictionary={dictionary.founder} />
                         <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />
                         <LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} />
