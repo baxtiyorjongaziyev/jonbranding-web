@@ -11,7 +11,11 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.logoDesignPage?.metadata || { title: "Logo Design", description: "Strategic logo design for business" };
+  const t = dict.logoDesignPage?.metadata || { 
+    title: "Logo Design", 
+    description: "Strategic logo design for business",
+    keywords: "logo design, brand identity"
+  };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/logo-dizayni`;
 
@@ -19,7 +23,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords: ["logo dizayn", "logotip yaratish", "brending uz", "ma'no branding", "toshkentda logo", "professional logo", "mountain", "abba", "minim"],
+    keywords: t.keywords,
     openGraph: {
       title: t.title,
       description: t.description,
