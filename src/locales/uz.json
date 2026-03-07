@@ -208,7 +208,7 @@
     "ctaButton": "Loyihani muhokama qilish"
   },
   "leadMagnet": {
-    "title": "Brendingingizni yangi bosqichga olib chiqing",
+    "title": "Brendingingizni yeni bosqichga olib chiqing",
     "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Siz uchun bir nechta bepul va foydali resurslar tayyorladik.",
     "magnets": [
       { "id": "pdf", "title": "Bepul PDF chek-list", "subtitle": "7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling va brendingizni tahlil qilish uchun amaliy qo'llanmani oling.", "cta": "Chek-listni ko'rish", "href": "/{lang}/checklist" },
@@ -256,7 +256,7 @@
         {
           "title": "7. Brendingni bir martalik ish deb o'ylash",
           "description": "Bozor, mijozlar talablari va texnomaglar doimiy ravishda o'zgarib turadi. Zaman bilan birga o'zgarmaydigan brend tezda eskiradi.",
-          "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lsa dizayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir."
+          "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lsadesayningizni yangilashdan (rebrending) qo'rqmang. Bu zaiflik emas, o'sish belgisidir."
         }
       ],
       "result": {
@@ -280,28 +280,28 @@
     "subtitle": "Brending jarayoni, narxlar va kafolatlar haqida bizning saytdagi real ma'lumotlarga asoslangan javoblar.",
     "faqItems": [
       {
-        "question": "Why are prices not fixed?",
-        "answer": "Each project is unique. The price is calculated individually depending on the complexity of the project, the volume of work and your tasks. We offer an optimal solution for your brand."
+        "question": "Nega narxlar qat'iy belgilanmagan?",
+        "answer": "Har bir loyiha unikal. Narx loyihaning murakkabligi, ish hajmi va sizning vazifalaringizga qarab individual hisoblanadi. Biz brendingiz uchun optimal yechimni taklif qilamiz."
       },
       {
-        "question": "How is the work process structured?",
-        "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is coordinated with you, and you have full control over the process."
+        "question": "Ish jarayoni qanday tuzilgan?",
+        "answer": "Jarayon bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub, kommunikatsiya. Har bir bosqich siz bilan kelishiladi va siz jarayonni to'liq nazorat qilasiz."
       },
       {
-        "question": "Can I order only a logo?",
-        "answer": "We create not just a logo, but a full identification system that makes the brand recognizable and effective. This creates long-term value for your business."
+        "question": "Faqat logotip buyurtma qilsa bo'ladimi?",
+        "answer": "Biz shunchaki logotip emas, balki brendni taniladigan va samarali qiladigan to'liq identifikatsiya tizimini yaratamiz. Bu biznesingiz uchun uzoq muddatli qiymat yaratadi."
       },
       {
-        "question": "What are the payment terms?",
-        "answer": "Standard scheme — 50% upfront payment, 50% after project delivery. We can also discuss individual terms for your convenience."
+        "question": "To'lov shartlari qanday?",
+        "answer": "Standart sxema — 50% oldindan to'lov, 50% loyiha topshirilgandan keyin. Shuningdek, sizning qulayligingiz uchun individual shartlarni ham muhokama qilishimiz mumkin."
       },
       {
-        "question": "How long does the work take?",
-        "answer": "Deadlines depend on the type of service. For example, creating a logo — 2-4 weeks, brand strategy — from 8 weeks. The final deadline is determined after project approval."
+        "question": "Ish qancha vaqt davom etadi?",
+        "answer": "Muddatlar xizmat turiga bog'liq. Masalan, logotip yaratish — 2-4 hafta, brend strategiyasi — 8 haftadan boshlanadi. Yakuniy muddat loyiha tasdiqlangandan keyin belgilanadi."
       },
       {
-        "question": "Is there support after project completion?",
-        "answer": "Yes, within 1 month after project completion we provide free consultations and assistance on the correct use of brand materials."
+        "question": "Loyiha yakunlangach qo'llab-quvvatlash bormi?",
+        "answer": "Ha, loyiha tugagandan keyin 1 oy davomida brend materiallaridan to'g'ri foydalanish bo'yicha bepul konsultatsiya va yordam beramiz."
       }
     ],
     "ctaTitle": "Shubhalarga o'rin qoldirmang!",
@@ -310,8 +310,9 @@
   },
   "servicesPage": {
     "metadata": {
-      "title": "Xizmatlar va Narxlar | Jon.Branding",
-      "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyator orqali narxlarni darhol hisoblang."
+      "title": "Branding, Ma'no Branding, Logo, Neyming, Qadoq dizayn, Brandbook | Jon.Branding",
+      "description": "Barcha xizmatlarimiz: Branding, Naming, Logo dizayn, Qadoq dizayni, Brandbook. Mountain, Abba, Minim kabi agentliklardan premium yondashuv bilan farqlanamiz.",
+      "keywords": "branding, ma'no branding, brending uz, logo dizayn, neyming, naming, qadoq dizayn, brandbook, brendbuk, mountain branding, abba marketing, minim, redfox"
     },
     "packageBuilder": {
       "title": "Xizmatlar va narxlar",
@@ -441,14 +442,14 @@
   "blogPost": {
     "author": "Muallif",
     "ctaTitle": "Maqola foydali bo'ldimi?",
-    "ctaDesc": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Brendingizni biz bilan yangi bosqichga olib chiqing.",
+    "ctaDesc": "Endi nazariyadan amaliyotga o'tish vaqti keldi. Brendingizni biz bilan yeni bosqichga olib chiqing.",
     "ctaButton": "Bepul konsultatsiya olish"
   },
   "brandbookPage": {
     "metadata": {
-      "title": "Brendbuk ishlab chiqish | Jon.Branding Agentligi",
-      "description": "Brendbuk — bu sizning brendingiz konstitutsiyasi. Biz brendingiz izchilligini ta'minlovchi va marketing xarajatlarini tejaydigan kompleks brendbuklar yaratamiz.",
-      "keywords": "brendbuk, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
+      "title": "Brandbook, Brandbuk, brendbuk ishlab chiqish | Jon.Branding",
+      "description": "Professional brendbuk yaratish. Raqobatchilarimiz (Mountain, Abba) kabi xizmatlarni premium sifatda taqdim etamiz.",
+      "keywords": "brandbook, brendbuk, firma uslubi, brandbuk yasash, aydentika, mountain, abba, minim"
     },
     "title": "Brendbuk Ishlab Chiqish",
     "subtitle": "Brendbuk — bu shunchaki logotiplar to'plami emas, bu brendingizning izchilligi va yaxlitligini ta'minlovchi konstitutsiyasidir.",
@@ -490,7 +491,7 @@
     "process_title": "Firma uslubini qanday yaratamiz?",
     "process_subtitle": "Har bir detal brendning tanilishi va uning strategiyasi uchun ishlashi uchun biz firma uslubini ishlab chiqishga tizimli yondashamiz.",
     "process_steps": [
-      { "title": "Tadqiqot va konsepsiya", "description": "Auditoriya, bozor, raqobatchilar va brend o'rnini tahlil qilamiz. Vizual uslubda aks etishi kerak bo'lgan asosiy ma'nolar va g'oyalarni aniqlaymiz." },
+      { "title": "Tadqiqot va konsepsiya", "description": "Analiz qilamiz auditoriya, bozor, raqobatchilar va brend o'rnini. Vizual uslubda aks etishi kerak bo'lgan asosiy ma'nolar va g'oyalarni aniqlaymiz." },
       { "title": "Vizual kodni ishlab chiqish", "description": "Logotip, firma ranglari, tipografika, grafika, ikonika, layout tamoyillari — yaxlit brend qiyofasini shakllantiruvchi barcha elementlarni yaratamiz." },
       { "title": "Firma uslubi tizimi", "description": "Barcha formatlarda — qadoqdan tortib raqamli muhitgacha vizual obrazning izchilligini saqlashga yordam beradigan moslashuvchan elementlarni ishlab chiqamiz." },
       { "title": "Yakunlash va gaydlayn", "description": "Uslubdan foydalanish qoidalari ko'rsatilgan gaydlayn (brendbuk) yaratamiz, shunda brend har qanday tashuvchida yagona qiyofasini saqlab qoladi." }
@@ -500,8 +501,9 @@
   },
   "logoDesignPage": {
     "metadata": {
-      "title": "Professional logotip dizayni xizmatlari | Jon.Branding Agentligi O'zbekiston",
-      "description": "Logotip — bu biznesingizning yuzi. O'zbekistondagi logotip dizayn agentligimiz biznesingiz mohiyatini aks ettiruvchi va raqobatchilardan ajralib turishga yordam beradigan noyob, esda qolarli va strategik logotiplar yaratadi."
+      "title": "Logo dizayn, Logotip yaratish | Jon.Branding O'zbekiston",
+      "description": "Professional logo dizayn xizmati. Biznesingiz yuzini Mountain yoki Abba kabi raqobatchilardan yaxshiroq shakllantiramiz.",
+      "keywords": "logo dizayn, logotip, logo yasash, brend logo, minim logo, abba logo, mountain logo"
     },
     "title": "Logotip Dizayni",
     "subtitle": "Logotip — bu shunchaki rasm emas; bu strategik vosita, biznesingizning yuzi va siz qoldiradigan birinchi taassurotdir.",
@@ -528,8 +530,9 @@
   },
   "namingPage": {
     "metadata": {
-      "title": "Toshkentda neyming xizmatlari | Jon.Branding Agentligi",
-      "description": "Brend uchun unutilmas va kuchli nom tanlash. Yaxshi nom shunchaki chiroyli jaranglamaydi; u mohiyatni yetkazadi, esda qoladi va brendning ajralib turishiga yordam beradi. Bizning neyming xizmatlarimiz sizga ideal nom topishda yordam beradi."
+      "title": "Neyming, Nom tanlash, Naming xizmatlari | Jon.Branding",
+      "description": "Unutilmas va kuchli brend nomi tanlash. Biznesingiz uchun eng yaxshi nomni (Neyming) biz bilan toping. Minim va Ma'no Branding bilan solishtiring.",
+      "keywords": "neyming, naming, nom tanlash, brend nomi, brending agentligi, minim, ma'no branding"
     },
     "title": "Neyming — Kuchli Brend Nomi",
     "subtitle": "Brend nomi — uning birinchi taassuroti, uning energiyasi, xarakteri va so'z bilan ifodalangan g'oyasidir. Yaxshi nom shunchaki chiroyli jaranglamaydi, balki mohiyatni yetkazadi, esda qoladi va raqobatchilar orasida brendning ajralib turishiga yordam beradi.",
@@ -556,85 +559,11 @@
     ],
     "calculator_cta_button": "Patent kalkulyatoriga o'tish"
   },
-  "patentCalculatorPage": {
-    "metadata": {
-      "title": "Tovar belgisi kalkulyatori | Jon.Branding",
-      "description": "O'zbekistonda tovar belgisini ro'yxatdan o'tkazish bilan bog'liq taxminiy xarajatlarni (davlat bojlari va xizmat narxi) hisoblang."
-    },
-    "title": "Tovar belgisini ro'yxatdan o'tkazish kalkulyatori",
-    "subtitle": "Neyming (nom tanlash) — ijodiy jarayon, patentlash esa — huquqiy jarayon. Tovar belgisini ro'yxatdan o'tkazish uchun taxminiy xarajatlarni (davlat bojlari va xizmat narxi) bizning jamoamizdagi patent ishonchli vakili yordamida aynan shu yerda hisoblang.",
-    "trademarkCalculator": {
-      "formTitle": "Ma'lumotlarni kiriting",
-      "brandNameLabel": "Brend nomi",
-      "brandNamePlaceholder": "Masalan: MyBrand",
-      "yourNameLabel": "Ismingiz",
-      "yourNamePlaceholder": "To'liq ismingizni kiriting",
-      "phoneLabel": "Telefon raqamingiz",
-      "phonePlaceholder": "+998901234567",
-      "classCountLabel": "Faoliyat turlari (klass) soni",
-      "classCountMax": "Maks. 45",
-      "personTypeLabel": "Shaxs turi",
-      "personTypeOptions": [
-        { "value": "jismoniy", "label": "Jismoniy shaxs" },
-        { "value": "yuridik", "label": "Yuridik shaxs" }
-      ],
-      "speedLabel": "Ko'rib chiqish tezligi",
-      "speedOptions": [
-        { "value": "oddiy", "label": "Oddiy (7 oy)", "labelShort": "Oddiy" },
-        { "value": "tez", "label": "Tezlashtirilgan (1.5 oy)", "labelShort": "Tezkor" }
-      ],
-      "expertCheckLabel": "Qo'shimcha ekspert tekshiruvi",
-      "expertCheckOptions": [
-        { "value": "ha", "label": "Yoqilgan" },
-        { "value": "yoq", "label": "O'chirilgan" }
-      ],
-      "activityLabel": "Faoliyat turlari (ixtiyoriy)",
-      "activityPlaceholder": "Masalan: dizayn, qurilish, kiyim ishlab chiqarish...",
-      "activityHelp": "Bu klasslarni aniqlashda yordam beradi.",
-      "submitButton": "Patentlashga buyurtma berish",
-      "submittingButton": "Yuborilmoqda...",
-      "successMessage": "✅ Buyurtma qabul qilindi!",
-      "tryAgainButton": "Qayta hisoblash",
-      "summaryTitle": "Xarajatlar tafsiloti",
-      "totalCostTitle": "10 yilga patentning taxminiy umumiy qiymati",
-      "currency": "so'm",
-      "classLabel": "klass",
-      "expertCheckLabelShort": "Ekspert+",
-      "totalCostNote": "Barcha davlat bojlari va xizmat narxini o'z ichiga oladi",
-      "step1Title": "1-bosqich (Dastlabki to'lov)",
-      "ourServiceFee": "Jamoamiz xizmat haqi",
-      "applicationFee": "Talabnoma topshirish boji",
-      "step1Total": "1-bosqich uchun jami",
-      "step2Title": "2-bosqich (Guvohnoma olish)",
-      "stateFeeBase": "Davlat boji (asosiy)",
-      "extraClassesFee": "Qo'shimcha klasslar ({count} ta)",
-      "step2Total": "2-bosqich uchun jami",
-      "expediteTitle": "Tezlashtirilgan ko'rib chiqish uchun qo'shimcha to'lov",
-      "expediteBaseFee": "Asosiy (12 BHM + 12% QQS)",
-      "expediteTotal": "Tezlashtirish uchun jami",
-      "expertCheckTitle": "Ekspert tekshiruvi",
-      "expertBaseFee": "Asosiy (2×BHM)",
-      "expertTotal": "Ekspert xizmati uchun jami",
-      "importantNoteTitle": "Muhim eslatma",
-      "importantNoteText": "Barcha narxlar O'zbekiston Respublikasi Adliya vazirligi tomonidan belgilangan Bazaviy Hisoblash Miqdoriga (BHM) bog'liq bo'lib, o'zgarishi mumkin. Ushbu kalkulyator ommaviy oferta emas va faqat ma'lumot berish uchun mo'ljallangan.",
-      "importantNoteBHM": "Hozirgi BHM miqdori {bhm} so'm.",
-      "error_brand": "Iltimos, brend nomini kiriting.",
-      "error_name": "Iltimos, ismingizni kiriting.",
-      "error_phone": "Iltimos, telefon raqamini to'g'ri kiriting.",
-      "error_server": "Serverda xatolik yuz berdi.",
-      "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarimga ishlov berilishiga roziman.",
-      "error_privacy": "Maxfiylik siyosatini qabul qilishingiz shart.",
-      "success_toast_title": "Muvaffaqiyatli!",
-      "success_toast_desc": "So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!",
-      "error_toast_title": "Xatolik!",
-      "telegramTitle": "Yangi patent arizasi (kalkulyatordan)",
-      "notSpecified": "Ko'rsatilmagan"
-    }
-  },
   "packagingPage": {
     "metadata": {
-      "title": "O'zbekistonda qadoq dizayni xizmatlari | Jon.Branding",
-      "description": "Biz shunchaki chiroyli qadoq yaratmaymiz; biz mahsulotingizni sotadigan kuchli marketing vositasini yaratamiz. O'zbekistondagi qadoq dizayni agentligimiz brendingizni raqobatchilardan ajralib turishiga va xaridorlar mehrini qozonishiga yordam beradi."
+      "title": "Qadoq dizayn, Packaging Design Uzbekistan | Jon.Branding",
+      "description": "Mahsulotingiz uchun sotuvchi qadoq dizayni. Toshkentda eng yaxshi qadoq dizayn agentligi. Raqobatchilarimiz (Mountain, Minim) kabi yuqori darajada.",
+      "keywords": "qadoq dizayn, packaging, qadoqlash, mahsulot dizayni, mountain, minim, abba"
     },
     "title": "Qadoq Dizaynini Ishlab Chiqish",
     "subtitle": "Yuqori raqobat sharoitida qadoq ko'pincha asosiy marketing vositasiga aylanadi. U brendni javonda ajratib turadi, uning tarixini so'zlab beradi va auditoriya bilan birinchi ko'rishdayoq aloqa o'rnatadi.",

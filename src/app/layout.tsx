@@ -35,9 +35,17 @@ export function generateMetadata({ params: { lang } }: { params: { lang: Locale 
     zh: "Jon.Branding 是乌兹别克斯坦领先的品牌代理机构，以将战略性业务思维与创意品牌形象、命名和标志设计相结合而闻名。"
   };
 
+  const keywords = {
+    uz: "brending, branding uz, ma'no branding, logo dizayn, neyming, naming, qadoq dizayn, brandbook, brendbuk, mountain branding, abba marketing, minim, redfox",
+    ru: "брендинг, branding uz, ma'no branding, логотип, нейминг, дизайн упаковки, брендбук, брендинговое агентство ташкент",
+    en: "branding, branding uz, ma'no branding, logo design, naming, packaging design, brandbook, branding agency tashkent",
+    zh: "品牌, 标志设计, 命名, 包装设计, 品牌手册, 品牌代理机构"
+  };
+
   return {
     title: titles[currentLang],
     description: descriptions[currentLang],
+    keywords: keywords[currentLang],
     metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: `${BASE_URL}/${currentLang === defaultLocale ? '' : currentLang}`,
