@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, type FC } from 'react';
@@ -77,7 +76,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
   const nextAvailable = translations.timeframes[nextAvailableKey] || nextAvailableKey;
 
   return (
-    <section className="py-16 sm:py-24 bg-white">
+    <section className="py-16 sm:py-24 bg-white" suppressHydrationWarning>
       <div className="container mx-auto px-4">
         <Card className="relative overflow-hidden max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl p-6 sm:p-10">
             <div className="absolute inset-0 z-0 opacity-40">

@@ -1,8 +1,7 @@
-
 import { cn } from '@/lib/utils';
 
 export const Logo = ({ isWhite = false, className }: { isWhite?: boolean, className?: string }) => (
-    <div className={cn("flex items-center", className)}>
+    <div className={cn("flex items-center", className)} suppressHydrationWarning>
         <div className="flex flex-col items-center">
             <span className={cn("text-xl font-bold tracking-tighter leading-none", isWhite ? "text-white" : "text-dark-blue")}>
                 Jon<span className={cn(isWhite ? "text-sky-blue" : "text-accent")}>.</span>Branding

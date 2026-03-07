@@ -1,4 +1,3 @@
-
 'use client';
 
 import { FC, useState, useEffect } from 'react';
@@ -63,13 +62,6 @@ type Dictionary = {
     lang_uz: string;
     lang_en: string;
 }
-
-const localeIcons: Record<Locale, React.FC<{ className?: string }>> = {
-  uz: UzFlagIcon,
-  ru: RuFlagIcon,
-  en: GbFlagIcon,
-  zh: CnFlagIcon,
-};
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -173,16 +165,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     setMobileMenuOpen(false);
   };
   
-  const handleLanguageChange = (newLocale: Locale) => {
-    setLocaleCookie(newLocale);
-    
-    const currentPathWithoutLocale = pathname.startsWith(`/${lang}`) ? pathname.substring(`/${lang}`.length) : pathname;
-    const newPath = `/${newLocale}${currentPathWithoutLocale || '/'}`;
-    
-    router.push(newPath);
-    setMobileMenuOpen(false);
-  };
-
   const navItems = [
     { href: `/${lang}/#portfolio`, label: dictionary.portfolio },
     { href: `/${lang}/#founder`, label: dictionary.founder },
@@ -203,6 +185,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     <motion.header 
       className="fixed top-0 left-0 right-0 z-50"
       style={{ top }}
+      suppressHydrationWarning
     >
       <motion.div
         className={cn(
@@ -215,6 +198,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           borderColor: useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(255,255,255,0.3)']),
           boxShadow: useTransform(scrollY, [0, 80], ['none', '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'])
         }}
+        suppressHydrationWarning
       >
         <Link href={`/${lang}`} className="flex items-center" aria-label="Bosh sahifa">
           <Logo />
