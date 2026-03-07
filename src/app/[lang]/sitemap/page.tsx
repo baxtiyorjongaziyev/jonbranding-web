@@ -41,33 +41,33 @@ const SitemapPage = async (props: Props) => {
 
   const sections = [
     {
-      title: t.sections.main,
+      title: t.sections?.main || 'Asosiy bo\'limlar',
       icon: Home,
       links: [
-        { href: '/', label: t.links.home },
-        { href: '/quiz', label: t.links.quiz },
-        { href: '/#portfolio', label: t.links.portfolio },
-        { href: '/#process', label: t.links.process },
-        { href: '/#faq', label: t.links.faq },
+        { href: '/', label: t.links?.home || 'Bosh sahifa' },
+        { href: '/quiz', label: t.links?.quiz || 'Brending testi' },
+        { href: '/#portfolio', label: t.links?.portfolio || 'Portfolio' },
+        { href: '/#process', label: t.links?.process || 'Ishlash tartibi' },
+        { href: '/#faq', label: t.links?.faq || 'Savol-javoblar' },
       ],
     },
     {
-      title: t.sections.services,
+      title: t.sections?.services || 'Xizmatlar',
       icon: Settings,
       links: [
-        { href: '/xizmatlar/neyming', label: t.links.naming, icon: ScanText },
-        { href: '/xizmatlar/logo-dizayni', label: t.links.logo_design, icon: Fingerprint },
-        { href: '/xizmatlar/firmenniy-stil', label: t.links.corporate_style, icon: Paintbrush },
-        { href: '/xizmatlar/brandbook', label: t.links.brandbook, icon: Book },
-        { href: '/xizmatlar/qadoq-dizayni', label: t.links.packaging_design, icon: Package },
-        { href: '/xizmatlar', label: t.links.services_prices, icon: List },
-        { href: '/xizmatlar/brand-strategy', label: t.links.brand_strategy, icon: BrainCircuit },
-        { href: '/xizmatlar/patent-kalkulyatori', label: t.links.patent_calculator, icon: PenSquare },
-        { href: '/pricing/sotuvchi-kartochka', label: t.links.marketplace_cover, icon: ImageIcon },
+        { href: '/xizmatlar/neyming', label: t.links?.naming || 'Neyming', icon: ScanText },
+        { href: '/xizmatlar/logo-dizayni', label: t.links?.logo_design || 'Logotip dizayni', icon: Fingerprint },
+        { href: '/xizmatlar/firmenniy-stil', label: t.links?.corporate_style || 'Firma uslubi', icon: Paintbrush },
+        { href: '/xizmatlar/brandbook', label: t.links?.brandbook || 'Brendbuk', icon: Book },
+        { href: '/xizmatlar/qadoq-dizayni', label: t.links?.packaging_design || 'Qadoq dizayni', icon: Package },
+        { href: '/xizmatlar', label: t.links?.services_prices || 'Xizmatlar va narxlar', icon: List },
+        { href: '/xizmatlar/brand-strategy', label: t.links?.brand_strategy || 'Brend strategiyasi', icon: BrainCircuit },
+        { href: '/xizmatlar/patent-kalkulyatori', label: t.links?.patent_calculator || 'Patent kalkulyatori', icon: PenSquare },
+        { href: '/pricing/sotuvchi-kartochka', label: t.links?.marketplace_cover || 'Sotuvchi kartochka dizayni', icon: ImageIcon },
       ],
     },
     {
-      title: t.sections.blog,
+      title: t.sections?.blog || 'Blog maqolalari',
       icon: Rss,
       links: sortedPosts.map(post => ({ href: `/blog/${post.slug}`, label: post.title })),
     },
@@ -79,10 +79,10 @@ const SitemapPage = async (props: Props) => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
-              {t.title}
+              {t.title || 'Sayt xaritasi'}
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
-              {t.subtitle}
+              {t.subtitle || 'Barcha sahifalar haqida umumiy ma\'lumot.'}
             </p>
           </div>
 
