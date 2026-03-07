@@ -78,9 +78,9 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                     <>
                         <Video />
                         <CtaBlock 
-                            title={dictionary.home?.cta1_title || "Your brand could look this good too."}
-                            description={dictionary.home?.cta1_desc || "Take your business to the next level."}
-                            buttonText={dictionary.home?.cta1_button || "Start Now"}
+                            title={dictionary.home?.cta1_title || "Sizning brendingiz ham shunday ko'rinishi mumkin."}
+                            description={dictionary.home?.cta1_desc || "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing."}
+                            buttonText={dictionary.home?.cta1_button || "Mening biznesim uchun ham"}
                             onCtaClick={handleOpenModal}
                         />
                         <Founder lang={lang} dictionary={dictionary.founder} />
@@ -90,7 +90,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                     </>
                 ) : (
                     <div className="space-y-20 py-20">
-                        <Skeleton className="h-96 w-full" />
+                        <Skeleton className="h-96 w-full container" />
                     </div>
                 )}
             </main>
