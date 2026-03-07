@@ -47,7 +47,7 @@ const NamingPage: FC = () => {
   return (
     <>
         <main className="flex-grow pt-20">
-            <section className="py-20 sm:py-28 bg-white">
+            <section className="py-20 sm:py-28 bg-white" suppressHydrationWarning>
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
                 {translations.title}
@@ -62,10 +62,10 @@ const NamingPage: FC = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div>
-                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">Neyming — bu faqat chiroyli jarang emas</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{lang === 'uz' ? 'Neyming — bu faqat chiroyli jarang emas' : 'Naming is more than just a beautiful sound'}</h2>
                         <div className="mt-4 space-y-4 text-lg text-gray-700">
-                            <p>Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va biznesingizning bozordagi o'rnini belgilaydi.</p>
-                            <p>Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz.</p>
+                            <p>{lang === 'uz' ? "Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va biznesingizning bozordagi o'rnini belgilaydi." : "A good name conveys the essence of the brand, firmly takes root in the minds of customers, and defines your business's place in the market."}</p>
+                            <p>{lang === 'uz' ? "Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz." : "We see naming not just as a creative process, but as an integral part of brand strategy."}</p>
                         </div>
                     </div>
                     <div className="lg:order-last">
@@ -75,7 +75,10 @@ const NamingPage: FC = () => {
                                 width={800}
                                 height={600}
                                 alt="Brainstorming session"
-                                className="w-full h-auto object-cover aspect-square"/>
+                                className="w-full h-auto object-cover"
+                                data-ai-hint="naming brainstorming"
+                                priority
+                            />
                         </Card>
                     </div>
                 </div>

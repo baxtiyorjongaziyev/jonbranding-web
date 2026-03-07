@@ -39,7 +39,7 @@ const QadoqDizayniPage: FC = () => {
   return (
     <>
         <main className="flex-grow pt-20">
-            <section className="py-20 sm:py-28 bg-white">
+            <section className="py-20 sm:py-28 bg-white" suppressHydrationWarning>
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
                 {translations.title}
@@ -61,7 +61,7 @@ const QadoqDizayniPage: FC = () => {
                         </div>
                     </div>
                     <div className="lg:order-last">
-                        <Card className="shadow-xl rounded-2xl">
+                        <Card className="shadow-xl rounded-2xl overflow-hidden">
                             <CardContent className="p-0">
                             <Image 
                                 src="https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png"
@@ -69,7 +69,9 @@ const QadoqDizayniPage: FC = () => {
                                 height={600}
                                 data-ai-hint="product packaging shelf"
                                 alt="Products on a store shelf"
-                                className="rounded-2xl object-cover"/>
+                                className="w-full h-auto object-cover"
+                                priority
+                            />
                             </CardContent>
                         </Card>
                     </div>

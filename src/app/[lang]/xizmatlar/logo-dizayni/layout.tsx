@@ -7,7 +7,7 @@ type Props = {
   params: Promise<{ lang: string }>;
 };
 
-export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
   const t = dict.logoDesignPage?.metadata || { title: "Logo Design", description: "" };
@@ -52,7 +52,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
   };
 }
 
-const LogoDesignLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: string }> }>> = ({ children }) => {
+const LogoDesignLayout: FC<Readonly<Props>> = ({ children }) => {
   return <>{children}</>;
 }
 
