@@ -1,4 +1,3 @@
-
 'use client';
 
 import type {FC} from 'react';
@@ -55,7 +54,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
   if (!dictionary) return null;
 
   return (
-    <section className="relative bg-background py-20 sm:py-28 lg:py-32 overflow-hidden">
+    <section className="relative bg-background py-20 sm:py-28 lg:py-32 overflow-hidden" suppressHydrationWarning>
       <div aria-hidden="true" className="absolute inset-0 z-0">
           <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[40rem] h-[40rem] bg-accent/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[50rem] h-[50rem] bg-primary/5 rounded-full blur-3xl"></div>

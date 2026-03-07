@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -28,7 +27,7 @@ type Dictionary = {
     service_prices: string;
     branding_test: string;
     blog: string;
-    sitemap: string; // Added sitemap
+    sitemap: string;
     all_rights_reserved: string;
     back_to_top: string;
     patent_calculator: string;
@@ -60,11 +59,11 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
       { href: `/${lang}/quiz`, label: dictionary.branding_test },
       { href: `/${lang}/blog`, label: dictionary.blog },
       { href: `/${lang}/xizmatlar/patent-kalkulyatori`, label: dictionary.patent_calculator },
-      { href: `/${lang}/sitemap`, label: dictionary.sitemap }, // Added sitemap link
+      { href: `/${lang}/sitemap`, label: dictionary.sitemap },
   ];
 
   return (
-    <footer className="bg-black text-gray-300 pt-16 sm:pt-24 pb-8">
+    <footer className="bg-black text-gray-300 pt-16 sm:pt-24 pb-8" suppressHydrationWarning>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Section */}
@@ -124,7 +123,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               onHoverEnd={() => setIsHovered(false)}
               className="relative flex items-center text-sm text-gray-400 order-2 sm:order-1 cursor-pointer"
             >
-              <p>&copy; {new Date().getFullYear()} Jon.Branding.</p>
+              <p suppressHydrationWarning>&copy; {new Date().getFullYear()} Jon.Branding.</p>
               <AnimatePresence>
                 {isHovered && (
                   <motion.div
