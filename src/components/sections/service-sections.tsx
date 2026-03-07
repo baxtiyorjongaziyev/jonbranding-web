@@ -54,12 +54,12 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary }) => {
                              <Card key={service.id} className="group relative flex flex-col text-center shadow-lg rounded-2xl bg-secondary/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 max-w-sm mx-auto">
                                 <CardContent className="p-8 flex flex-col items-center flex-grow">
                                     <div className="bg-primary/10 p-4 rounded-full mb-4">
-                                        <Icon className="w-8 h-8 text-primary" />
+                                        <Icon className="w-8 h-8 text-primary" aria-hidden="true" />
                                     </div>
                                     <h3 className="text-xl font-bold text-dark-blue">{service.title}</h3>
                                     <p className="text-gray-600 mt-2 flex-grow">{service.description}</p>
                                     <Button asChild variant="ghost" className="mt-6 text-primary hover:text-primary">
-                                        <Link href={`/${lang}/xizmatlar/${service.id}`}>
+                                        <Link href={`/${lang}/xizmatlar/${service.id}`} aria-label={`${service.title} xizmati haqida batafsil ma'lumot`}>
                                             {service.buttonText}
                                             <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                                         </Link>

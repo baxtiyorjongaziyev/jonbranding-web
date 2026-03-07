@@ -1,10 +1,11 @@
+
 'use client';
 
 import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
-import { Menu, Phone, Send, Languages, ChevronsUpDown } from 'lucide-react';
+import { Menu, Phone, Send } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -24,14 +25,8 @@ import {
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { usePathname, useRouter } from 'next/navigation';
 import { ScrollArea } from '../ui/scroll-area';
 import LanguageSwitcher from '../language-switcher';
-import { Locale, locales, localeNames, setLocaleCookie } from '@/lib/i18n/locale';
-import { UzFlagIcon } from '../icons/uz-flag';
-import { RuFlagIcon } from '../icons/ru-flag';
-import { GbFlagIcon } from '../icons/gb-flag';
-import { CnFlagIcon } from '../icons/cn-flag';
 
 type Dictionary = {
     portfolio: string;
@@ -58,9 +53,6 @@ type Dictionary = {
     free_consultation: string;
     open_menu: string;
     switch_lang: string;
-    lang_ru: string;
-    lang_uz: string;
-    lang_en: string;
 }
 
 const ListItem = React.forwardRef<
@@ -90,17 +82,18 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem"
 
-
 const ExpandingButton = ({ 
   href, 
   target, 
   icon, 
-  text 
+  text,
+  ariaLabel
 }: { 
   href: string; 
   target?: string; 
   icon: React.ReactNode; 
   text: string;
+  ariaLabel: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -109,6 +102,7 @@ const ExpandingButton = ({
       href={href}
       target={target}
       rel="noopener noreferrer"
+      aria-label={ariaLabel}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       animate={{ width: isHovered ? 'auto' : 40 }}
@@ -130,13 +124,9 @@ const ExpandingButton = ({
   );
 };
 
-
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
-  const pathname = usePathname();
-  const router = useRouter();
-
 
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
@@ -200,10 +190,10 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         }}
         suppressHydrationWarning
       >
-        <Link href={`/${lang}`} className="flex items-center" aria-label="Bosh sahifa">
+        <Link href={`/${lang}`} className="flex items-center" aria-label="Jon Branding - Bosh sahifa">
           <Logo />
         </Link>
-        <NavigationMenu className="hidden lg:flex">
+        <NavigationMenu className="hidden lg:flex" aria-label="Asosiy navigatsiya">
            <NavigationMenuList>
              <NavigationMenuItem>
               <NavigationMenuTrigger className={cn("bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
@@ -236,10 +226,11 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </NavigationMenu>
 
         <div className="hidden items-center space-x-2 lg:flex">
-          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en' | 'zh'} />
+          <LanguageSwitcher lang={lang as any} />
            
             <ExpandingButton 
               href="tel:+998336450097"
+              ariaLabel={dictionary.contact_by_phone}
               icon={<Phone className="h-5 w-5" />}
               text={dictionary.contact_by_phone}
             />
@@ -247,6 +238,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <ExpandingButton 
               href="https://t.me/baxtiyorjon_gaziyev"
               target="_blank"
+              ariaLabel={dictionary.contact_by_telegram}
               icon={<Send className="h-5 w-5" />}
               text={dictionary.contact_by_telegram}
             />
@@ -254,15 +246,16 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           <Button 
             onClick={handleContactClick} 
             className="shadow-ocean"
+            aria-label={dictionary.free_consultation}
           >
              {dictionary.free_consultation}
           </Button>
         </div>
         <div className="flex items-center gap-2 lg:hidden">
-          <LanguageSwitcher lang={lang as 'uz' | 'ru' | 'en' | 'zh'} />
+          <LanguageSwitcher lang={lang as any} />
           <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className={cn("text-foreground border-border/50", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
+              <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn("text-foreground border-border/50", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">{dictionary.open_menu}</span>
               </Button>
