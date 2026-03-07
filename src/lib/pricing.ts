@@ -157,7 +157,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "3 ta shior varianti",
                 "Patentga topshirish xizmati",
                 "Mulkchilik sertifikati",
-                "Cheksiz tuzatish (30 kun)"
+                "Cheksiz tahrirlash imkoniyati (30 kun)"
             ] : (isRu ? [
                 "10 вариантов названий",
                 "Стратегическое обоснование",
@@ -177,7 +177,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ] : ["10 concepts", "Strategy", "Phonetics", "Domain check", "Social check", "Patent check", "Competitor analysis", "Linguistics", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Unlimited revisions"])),
             benefits: isUz ? [
                 { icon: "🌍", title: "Global tayyor", description: "Nomingiz dunyo bo'ylab ishlaydi." },
-                { icon: "🔒", title: "To'liq himoya", description: "Patent va sertifikat bilan nomingiz sizniki." }
+                { icon: "🔒", title: "To'liq himoya", description: "Patent va sertifikat bilan nomingiz faqat sizniki." }
             ] : (isRu ? [
                 { icon: "🌍", title: "Готов к миру", description: "Ваше имя работает глобально." },
                 { icon: "🔒", title: "Полная защита", description: "Имя защищено патентом." }
@@ -201,7 +201,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "O'zbekiston bazasida patent tekshiruvi",
                 "Raqobatchilar tahlili",
                 "Nomning hissiy ma'nosi",
-                "3 ta tuzatish imkoniyati"
+                "3 ta tahrirlash imkoniyati"
             ] : (isRu ? [
                 "6 вариантов названий",
                 "Стратегические обоснования",
@@ -215,7 +215,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ] : ["6 concepts", "Strategy", "Digital check", "Local patent check", "Competitor analysis", "Emotional impact", "3 revisions"])),
             benefits: isUz ? [
                 { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Patent to'qnashuvidan qutulasiz." },
-                { icon: "🏆", title: "Noyoblik", description: "Raqobatchilaringizdan ajralib turasiz." }
+                { icon: "🏆", title: "Noyoblik", description: "Raqobatchilardan ajralib turasiz." }
             ] : (isRu ? [
                 { icon: "⚖️", title: "Юр. безопасность", description: "Избежите патентных споров." },
                 { icon: "🏆", title: "Уникальность", description: "Выделитесь среди конкурентов." }
@@ -231,10 +231,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
             label: "Naming Standart",
             price: basePricesUSD.namingStandard,
             timeline: isUz ? "⏱ 7–10 ish kuni" : (isRu ? "⏱ 7–10 рабочих дней" : (isZh ? "⏱ 7–10 个工作日" : "⏱ 7–10 business days")),
-            features: isUz ? ["3 ta nom varianti", "Qisqa izoh", "Domen tekshiruvi", "1 ta tuzatish"] : (isRu ? ["3 варианта", "Краткое обоснование", "Проверка домена", "1 правка"] : (isZh ? ["3个方案", "简要说明", "域名检查", "1次修改"] : ["3 concepts", "Brief info", "Domain check", "1 revision"])),
+            features: isUz ? ["3 ta nom varianti", "Qisqa izoh", "Domen tekshiruvi", "1 ta tahrir"] : (isRu ? ["3 варианта", "Краткое обоснование", "Проверка домена", "1 правка"] : (isZh ? ["3个方案", "简要说明", "域名检查", "1次修改"] : ["3 concepts", "Brief info", "Domain check", "1 revision"])),
             benefits: isUz ? [
                 { icon: "⚡", title: "Tezkorlik", description: "Vaqt tejaysiz." },
-                { icon: "✅", title: "Professional", description: "Tahlil qilingan nom." }
+                { icon: "✅", title: "Professional", description: "Tahlil qilingan nom olasiz." }
             ] : (isRu ? [
                 { icon: "⚡", title: "Скорость", description: "Экономия времени." },
                 { icon: "✅", title: "Профи", description: "Проанализированное имя." }
@@ -250,7 +250,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             label: isUz ? "Logo Standart" : (isRu ? "Логотип Стандарт" : (isZh ? "标准标志" : "Standard Logo")),
             price: basePricesUSD.logoStandard,
             timeline: isUz ? "⏱ 5 ish kuni" : (isRu ? "⏱ 5 рабочих дней" : (isZh ? "⏱ 5 个工作日" : "⏱ 5 business days")),
-            features: isUz ? ["3 ta logo varianti", "Logo 4 xil ko'rinishda", "3 xil format (PNG, SVG, AI)", "8 ta aloqa nuqtasi", "2 ta tuzatish"] : (isRu ? ["3 варианта", "4 вида логотипа", "3 формата (PNG, SVG, AI)", "8 точек контакта", "2 правки"] : (isZh ? ["3个方案", "4种样式", "3种格式", "8个接触点", "2次修改"] : ["3 concepts", "4 lockups", "3 formats", "8 touchpoints", "2 revisions"])),
+            features: isUz ? ["3 ta logo varianti", "Logo 4 xil ko'rinishda", "3 xil format (PNG, SVG, AI)", "8 ta aloqa nuqtasi", "2 ta tahrirlash"] : (isRu ? ["3 варианта", "4 вида логотипа", "3 формата (PNG, SVG, AI)", "8 точек контакта", "2 правки"] : (isZh ? ["3个方案", "4种样式", "3种格式", "8个接触点", "2次修改"] : ["3 concepts", "4 lockups", "3 formats", "8 touchpoints", "2 revisions"])),
             benefits: isUz ? [
                 { icon: "🎯", title: "Tayyor", description: "Hamma joyda ishlatish mumkin." },
                 { icon: "🛡️", title: "Mulk", description: "Fayllar to'liq sizniki." }
@@ -271,7 +271,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.logoPremium,
             recommended: true,
             timeline: isUz ? "⏱ 10 ish kuni" : (isRu ? "⏱ 10 рабочих дней" : (isZh ? "⏱ 10 个工作日" : "⏱ 10 business days")),
-            features: isUz ? ["4 ta logo varianti", "O'ziga xos firma uslubini ishlab chiqish", "3 xil format", "Rasmiy ranglar va shriftlar", "15 ta aloqa nuqtasi", "3 ta tuzatish"] : (isRu ? ["4 варианта", "Разработка уникального стиля", "3 формата", "Цвета и шрифты", "15 точек контакта", "3 правки"] : (isZh ? ["4个方案", "独特形象开发", "3种格式", "标准色和字体", "15个接触点", "3次修改"] : ["4 concepts", "Unique style development", "3 formats", "Colors & fonts", "15 touchpoints", "3 revisions"])),
+            features: isUz ? ["4 ta logo varianti", "O'ziga xos firma uslubini ishlab chiqish", "3 xil format", "Rasmiy ranglar va shriftlar", "15 ta aloqa nuqtasi", "3 ta tahrirlash"] : (isRu ? ["4 варианта", "Разработка уникального стиля", "3 формата", "Цвета и шрифты", "15 точек контакта", "3 правки"] : (isZh ? ["4个方案", "独特形象开发", "3种格式", "标准色和字体", "15个接触点", "3次修改"] : ["4 concepts", "Unique style development", "3 formats", "Colors & fonts", "15 touchpoints", "3 revisions"])),
             benefits: isUz ? [
                 { icon: "🏆", title: "Professional", description: "Barcha joyda bir xil uslub." },
                 { icon: "📈", title: "Qiymat", description: "Brend obro'si oshadi." }
@@ -299,7 +299,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "25 ta aloqa nuqtasi",
                 "Mulkchilik sertifikati",
                 "Patent topshirish xizmati",
-                "Cheksiz tuzatish (30 kun)"
+                "Cheksiz tahrirlash imkoniyati (30 kun)"
             ] : (isRu ? [
                 "5 вариантов",
                 "Стратегический анализ",

@@ -21,15 +21,15 @@
     "services_and_prices": "Xizmatlar va Narxlar",
     "services_and_prices_desc": "Xizmatlar to'plamini yig'ing va narxni darhol hisoblang.",
     "contact_by_phone": "Qo'ng'iroq qilish",
-    "contact_by_telegram": "Telegram: @baxtiyorjon_gaziyev",
+    "contact_by_telegram": "Telegram",
     "free_consultation": "Bepul konsultatsiya",
-    "open_menu": "Asosiy menyuni ochish",
-    "switch_lang": "Sayt tilini o'zgartirish"
+    "open_menu": "Menyuni ochish",
+    "switch_lang": "Tilni o'zgartirish"
   },
   "footer": {
     "contact": "Aloqa",
-    "by_telegram": "Telegram orqali bog'lanish",
-    "by_phone": "Telefon orqali bog'lanish",
+    "by_telegram": "Telegram orqali",
+    "by_phone": "Telefon orqali",
     "main_page": "Asosiy sahifalar",
     "portfolio": "Bizning ishlar",
     "founder": "Asoschi haqida",
@@ -103,11 +103,6 @@
     "ctaButton": "Men tayyorman, boshlaymiz!"
   },
   "servicesPage": {
-    "metadata": {
-      "title": "Xizmatlar va Narxlar | Jon.Branding",
-      "description": "Barcha xizmatlarimiz va narxlar bilan tanishing. Branding, Logo, Naming bo'yicha eng yaxshi takliflar.",
-      "keywords": "branding, ma'no branding, logo dizayn, neyming, qadoq dizayn, brandbook, mountain, abba, minim, redfox"
-    },
     "packageBuilder": {
       "title": "Xizmatlar va narxlar kalkulyatori",
       "subtitle": "Xizmatlar to'plamini o'zingiz yig'ing va narxni darhol bilib oling.",
@@ -134,71 +129,6 @@
         "package": "Paketli (-20%)",
         "full": "To'liq (-28%)"
       }
-    },
-    "comparison": {
-      "title": "Bizning premium yondashuvimiz",
-      "description": "Biz premium sifatni hamyonbop narxda taqdim etamiz.",
-      "features": "Xususiyatlari",
-      "whyPremiumTitle": "Nega premium agentliklar?",
-      "whyPremiumDesc": "Biz o'z darajamizni faqat eng yaxshilar bilan solishtiramiz. Maqsadimiz — sifatni hamyonbop qilish.",
-      "ctaTitle": "To'g'ri qaror qabul qiling!",
-      "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas.",
-      "ctaButton": "Menga shunday yondashuv kerak"
     }
-  },
-  "popularPackages": {
-    "title": "Eng ommabop paketlar",
-    "packageTitle": "Neyming + Logotip (Premium)",
-    "packageSubtitle": "Kuchli brendni boshlash uchun mukammal kombinatsiya.",
-    "features": [
-      "Brendingiz uchun ideal nom (6 tilda tekshirilgan)",
-      "Professional logotip (5 ta konsepsiya)",
-      "To'liq firma uslubi (ranglar, shriftlar)",
-      "15+ real mockupda namoyish",
-      "Patent auditi va konsultatsiya",
-      "10 ta brendlangan stiker"
-    ],
-    "separate": "Alohida olinsa",
-    "packagePrice": "Paket narxi",
-    "packageDiscount": "(-20% chegirma!)",
-    "upfrontDiscount": "100% oldindan to'lovda (-28% jami!)",
-    "ctaButton": "Ushbu paketni tanlash"
-  },
-  "personalOfferBlock": {
-    "title": "💎 MENING TAKLIFIM:",
-    "subtitle": "Siz nimalarga ega bo'lasiz:",
-    "ctaButton": "Menga aynan shu kerak",
-    "sections": [
-      { "title": "1️⃣ STRATEGIYA", "points": ["Pozitsiyalash va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Noyob Sotuv Taklifi (USP)"] },
-      { "title": "2️⃣ IDENTIFIKATSIYA", "points": ["Professional logo (3-5 variant)", "Firma ranglari palitrasi", "Tipografiya va stil-gayd"] },
-      { "title": "3️⃣ HUJJATLASHTIRISH", "points": ["To'liq Brandbook (30-50 bet)", "Barcha formatdagi fayllar", "Logodan foydalanish qo'llanmasi"] },
-      { "title": "4️⃣ HUQUQIY HIMOYA", "points": ["Neyming bo'yicha maslahat", "Patentlash jarayoni tushuntiruvi", "Intellectual mulk himoyasi"] },
-      { "title": "5️⃣ QO'LLAB-QUVVATLASH", "points": ["3 oy bepul tahrirlar", "Telegram orqali doimiy aloqa", "Brendni tatbiq etish maslahatlari"] }
-    ]
-  },
-  "whyUs": {
-    "title": "Nega aynan biz?",
-    "subtitle": "Biz shunchaki va'da bermaymiz. Biz tizimli yondashuv orqali brendingiz uchun haqiqiy qiymat yaratamiz.",
-    "values": [
-      { "title": "Strategik yondashuv", "description": "Biz shunchaki chiroyli rasmlar chizmaymiz. Har bir dizayn elementi sizning sotuvlaringizni oshirishga va brendingizni mustahkamlashga xizmat qiladi." },
-      { "title": "Shaffof jarayon", "description": "Brif → Tahlil → Strategiya → Dizayn → Topshirish. Har bir bosqichda biz siz bilan yaqindan hamkorlik qilamiz va siz jarayonni to'liq nazorat qilasiz." },
-      { "title": "Natija va Sadoqat", "description": "50 dan ortiq loyihalar va eng muhimi - mijozlarimizning 90 foizi bizni do'stlariga tavsiya qilishadi. Bu biz uchun eng katta yutuqdir." }
-    ],
-    "ctaTitle": "Bizning yondashuvimiz yoqdimi?",
-    "ctaDesc": "Keling, brendingizni bepul tahlil qilaylik, uning kuchli va zaif tomonlarini aniqlaylik. Bu sizga hech qanday majburiyat yuklamaydi.",
-    "ctaButton": "Brendimni bepul tahlil qiling"
-  },
-  "targetAudience": {
-    "title": "Ushbu muammolar sizga tanishmi?",
-    "subtitle": "Agar quyidagi fikrlar sizni qiynayotgan bo'lsa, demak biz siz uchun to'g'ri yechimmiz.",
-    "problems": [
-      { "text": "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi." },
-      { "text": "Brendim eskirgan, raqobatchilardan ortda qolyapman." },
-      { "text": "Mijozlarim mening qiymatimni tushunishmaydi, faqat narxni so'rashadi." },
-      { "text": "Sotuvlarim bor, lekin ular barqaror emas. Mijozlar qaytib kelishmaydi." }
-    ],
-    "solutionTitle": "Xushxabar: bularning barchasini hal qilish mumkin!",
-    "solutionSubtitle": "To'g'ri qurilgan brend strategiyasi bunday muammolarni bartaraf etadi va biznesingizni barqaror o'sish yo'liga olib chiqadi.",
-    "solutionButton": "Barcha muammolar yechimini ko'rish"
   }
 }
