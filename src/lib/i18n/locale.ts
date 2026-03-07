@@ -15,24 +15,26 @@ export const localeNames: Record<Locale, string> = {
 };
 
 export function getLocale(request: NextRequest): Locale {
-  // 1. Cookiedan tilni tekshirish
+  // 1. Cookiedan tilni tekshirish (Foydalanuvchi tanlovi ustuvor)
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
   if (cookieLocale && locales.includes(cookieLocale as Locale)) {
     return cookieLocale as Locale;
   }
 
   // 2. O'zbekiston hududini IP-headerlar orqali aniqlash
-  // Firebase App Hosting, Vercel va Cloudflare headerlarini tekshiramiz
+  // Firebase App Hosting va boshqa CDNlar uchun x-country-code yoki cf-ipcountry tekshiramiz
   const country = 
     request.headers.get('x-vercel-ip-country') || 
     request.headers.get('x-country-code') || 
-    request.headers.get('cf-ipcountry');
+    request.headers.get('cf-ipcountry') ||
+    request.headers.get('x-appengine-country');
   
+  // O'zbekistondan kirsa doim birinchi uz tili
   if (country === 'UZ') {
     return 'uz';
   }
 
-  // 3. Brauzer sozlamalarini tekshirish
+  // 3. Brauzer sozlamalarini (device language) tekshirish
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
