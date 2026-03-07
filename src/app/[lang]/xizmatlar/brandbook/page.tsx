@@ -74,15 +74,17 @@ const BrandbookPage: FC = () => {
                         </div>
                     </div>
                     <div className="lg:order-last">
-                        <Card className="shadow-xl rounded-2xl">
+                        <Card className="shadow-xl rounded-2xl border-none overflow-hidden">
                             <CardContent className="p-0">
                             <Image 
                                 src="https://images.unsplash.com/photo-1581080247486-57989c1f14ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsb2dvJTIwZ3VpZGVsaW5lc3xlbnwwfHx8fDE3NjU0NTA2NTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
                                 width={800}
                                 height={600}
                                 data-ai-hint="brandbook guide document"
-                                alt="Brandbook guide document"
-                                className="rounded-2xl object-cover"/>
+                                alt="Professional brendbuk va gaydlayn qo'llanmasi"
+                                className="rounded-2xl object-cover"
+                                priority
+                            />
                             </CardContent>
                         </Card>
                     </div>
@@ -97,9 +99,9 @@ const BrandbookPage: FC = () => {
                 </div>
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
                     {values.map((value, index) => (
-                        <Card key={index} className="text-center p-8 shadow-lg rounded-2xl bg-secondary/50 transform hover:-translate-y-2 transition-transform duration-300">
+                        <Card key={index} className="text-center p-8 shadow-lg rounded-2xl bg-secondary/50 transform hover:-translate-y-2 transition-transform duration-300 border-none">
                            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-6">
-                                <value.icon className="h-8 w-8 text-primary" />
+                                <value.icon className="h-8 w-8 text-primary" aria-hidden="true" />
                             </div>
                             <h3 className="text-xl font-bold text-dark-blue">{value.title}</h3>
                             <p className="mt-2 text-gray-600">{value.description}</p>
@@ -119,10 +121,10 @@ const BrandbookPage: FC = () => {
                 </div>
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {processSteps.map((step, index) => (
-                    <Card key={index} className="text-center shadow-lg rounded-2xl bg-white transform hover:-translate-y-2 transition-transform duration-300">
+                    <Card key={index} className="text-center shadow-lg rounded-2xl bg-white transform hover:-translate-y-2 transition-transform duration-300 border-none">
                         <CardContent className="p-8">
                             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-6">
-                                <step.icon className="h-8 w-8 text-primary" />
+                                <step.icon className="h-8 w-8 text-primary" aria-hidden="true" />
                             </div>
                             <h3 className="text-xl font-bold text-dark-blue">{step.title}</h3>
                             <p className="mt-2 text-gray-600">{step.description}</p>

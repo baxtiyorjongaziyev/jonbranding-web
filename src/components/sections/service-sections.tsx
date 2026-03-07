@@ -1,12 +1,13 @@
 
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, ScanText, Package, Paintbrush, Fingerprint, Book } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { getDictionary, Locale } from '@/lib/dictionaries';
 
 const serviceIcons: { [key: string]: React.ElementType } = {
     'neyming': ScanText,
@@ -18,11 +19,23 @@ const serviceIcons: { [key: string]: React.ElementType } = {
 
 interface ServiceSectionsProps {
     lang: string;
-    dictionary: any;
+    dictionary?: any;
 }
 
-const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary }) => {
-    if (!dictionary || !dictionary.services) {
+const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDictionary }) => {
+    const [dictionary, setDictionary] = useState<any>(initialDictionary);
+
+    useEffect(() => {
+        if (!initialDictionary && lang) {
+            getDictionary(lang as Locale).then(dict => {
+                setDictionary(dict.serviceSections || dict);
+            });
+        } else if (initialDictionary) {
+            setDictionary(initialDictionary);
+        }
+    }, [lang, initialDictionary]);
+
+    if (!dictionary || (!dictionary.services && !dictionary.serviceSections?.services)) {
         return (
             <section className="py-16 sm:py-24 bg-white">
                 <div className="container mx-auto px-4">
@@ -36,29 +49,31 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary }) => {
         );
     }
 
+    const services = dictionary.services || dictionary.serviceSections?.services || [];
+
     const orderedServices = [
-        dictionary.services.find((s: any) => s.id === 'neyming'),
-        dictionary.services.find((s: any) => s.id === 'logo-dizayni'),
-        dictionary.services.find((s: any) => s.id === 'firmenniy-stil'),
-        dictionary.services.find((s: any) => s.id === 'brandbook'),
-        dictionary.services.find((s: any) => s.id === 'qadoq-dizayni'),
+        services.find((s: any) => s.id === 'neyming'),
+        services.find((s: any) => s.id === 'logo-dizayni'),
+        services.find((s: any) => s.id === 'firmenniy-stil'),
+        services.find((s: any) => s.id === 'brandbook'),
+        services.find((s: any) => s.id === 'qadoq-dizayni'),
     ].filter(Boolean);
     
     return (
-        <section className="py-16 sm:py-24 bg-white">
+        <section className="py-16 sm:py-24 bg-white" aria-label="Xizmatlar bo'limi">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
                     {orderedServices.map((service: any) => {
                         const Icon = serviceIcons[service.id] || Paintbrush;
                         return (
-                             <Card key={service.id} className="group relative flex flex-col text-center shadow-lg rounded-2xl bg-secondary/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 max-w-sm mx-auto">
+                             <Card key={service.id} className="group relative flex flex-col text-center shadow-lg rounded-2xl bg-secondary/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 max-w-sm mx-auto border-none">
                                 <CardContent className="p-8 flex flex-col items-center flex-grow">
                                     <div className="bg-primary/10 p-4 rounded-full mb-4">
                                         <Icon className="w-8 h-8 text-primary" aria-hidden="true" />
                                     </div>
                                     <h3 className="text-xl font-bold text-dark-blue">{service.title}</h3>
                                     <p className="text-gray-600 mt-2 flex-grow">{service.description}</p>
-                                    <Button asChild variant="ghost" className="mt-6 text-primary hover:text-primary">
+                                    <Button asChild variant="ghost" className="mt-6 text-primary hover:text-primary hover:bg-primary/5">
                                         <Link href={`/${lang}/xizmatlar/${service.id}`} aria-label={`${service.title} xizmati haqida batafsil ma'lumot`}>
                                             {service.buttonText}
                                             <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
