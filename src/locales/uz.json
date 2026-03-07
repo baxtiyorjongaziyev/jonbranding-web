@@ -154,12 +154,12 @@
     "title": "Biz qanday ishlaymiz?",
     "subtitle": "Har bir loyihada biz sinovdan o'tgan, shaffof va samarali jarayonni qo'llaymiz.",
     "phases": [
-      { "phase": "01", "title": "Discovery", "description": "Biznes muammolarini aniqlash va bozor tahlili.", "tasks": ["Brifing", "Tahlil", "Research"] },
-      { "phase": "02", "title": "Strategy", "description": "Brend pozitsiyasi va yo'l xaritasini tuzish.", "tasks": ["Pozitsiyalash", "Strategiya"] },
-      { "phase": "03", "title": "Creative", "description": "Neyming, Logo va vizual konsepsiya yaratish.", "tasks": ["Neyming", "Logo", "Style"] },
-      { "phase": "04", "title": "Presentation", "description": "G'oyalarni ko'rsatish va fidbek asosida adaptatsiya.", "tasks": ["Taqdimot", "Refinement"] },
-      { "phase": "05", "title": "Delivery", "description": "Tayyor dizayn fayllari va brendbukni topshirish.", "tasks": ["Fayllar", "Guidelines"] },
-      { "phase": "06", "title": "Growth", "description": "Brendni hayotga tatbiq etishda doimiy yordam.", "tasks": ["Support", "Consulting"] }
+      { "phase": "01", "title": "Discovery (Tadqiqot)", "description": "Loyiha boshlanishi va poydevor qo'yish.", "tasks": ["Brifing", "Biznes muammolarini aniqlash", "Bozor va raqobat tahlili", "Auditoriya ehtiyojlari", "G'oyalar to'plash"] },
+      { "phase": "02", "title": "Strategy (Strategiya)", "description": "Brendning yo'l xaritasini belgilash.", "tasks": ["Maqsadlarni belgilash", "Brend pozitsiyasi", "Brend platformasi", "Asosiy tamoyillar", "Rejalashtirish"] },
+      { "phase": "03", "title": "Creative Design (Kreativ)", "description": "Brendning vizual qiyofasini yaratish.", "tasks": ["Neyming", "Logotip dizayni", "Vizual konsepsiya", "Qadoq dizayni", "Brendbuk"] },
+      { "phase": "04", "title": "Presentation (Taqdimot)", "description": "G'oyalarni hayotiy misollarda ko'rsatish.", "tasks": ["Dizayn taqdimoti", "Fidbek asosida tahrirlar", "Yakuniy iteratsiya", "Mockup namoyishi"] },
+      { "phase": "05", "title": "Implementation (Amalga oshirish)", "description": "Brendni hayotga tatbiq etish.", "tasks": ["Tayyor dizayn fayllari", "Brendbukni topshirish", "Vizual qo'llanmalar", "Chop etishga tayyorlash"] },
+      { "phase": "06", "title": "Growth (O'sish)", "description": "Brendni rivojlantirishda yordam.", "tasks": ["Tatbiq etish bo'yicha yo'riqlar", "Doimiy qo'llab-quvvatlash", "Keyingi qadamlar maslahati"] }
     ],
     "ctaTitle": "Loyihangizni boshlashga tayyormisiz?",
     "ctaDesc": "Keling, g'oyalaringizni birgalikda hayotga tatbiq etishni boshlaymiz.",
@@ -170,7 +170,7 @@
     "subtitle": "Biznesingiz uchun foydali bo'lgan bepul materiallar va testlardan foydalaning.",
     "magnets": [
       { "id": "pdf", "title": "Bepul PDF chek-list", "subtitle": "7 ta eng katta xato", "description": "Biznesingizda qanday xatolardan qochish kerakligini bilib oling.", "cta": "Chek-listni yuklab olish", "href": "/{lang}/checklist" },
-      { "id": "quiz", "title": "Brending testi", "subtitle": "Tayyorgarlik darajangiz", "description": "Biznesingiz brendingga qanchalik tayyorligini 2 daqiqada aniqlang.", "cta": "Testdan o'tish", "href": "/{lang}/quiz" },
+      { "id": "quiz", "title": "Mini-test", "subtitle": "Tayyorgarlik darajangiz", "description": "Biznesingiz brendingga qanchalik tayyorligini 2 daqiqada aniqlang.", "cta": "Testdan o'tish", "href": "/{lang}/quiz" },
       { "id": "video", "title": "Video qo'llanma", "subtitle": "Strategik brending", "description": "Nima uchun shunchaki rasm yetarli emasligini videoda ko'ring.", "cta": "Videoni ko'rish", "href": "#video" }
     ],
     "cta": {
@@ -183,8 +183,11 @@
     "title": "Ko'p beriladigan savollar",
     "subtitle": "Brending jarayoni, narxlar va xizmatlar haqida tezkor javoblar.",
     "faqItems": [
-      { "question": "Nega narxlar individual hisoblanadi?", "answer": "Har bir biznesning vazifasi va ish hajmi turlicha. Biz sizning byudjetingizga mos optimal yechimni taklif qilamiz." },
-      { "question": "Ish qancha vaqt davom etadi?", "answer": "Logotip yaratish 2 hafta, to'liq brend strategiyasi esa 8 haftadan boshlanadi." }
+      { "question": "Nega narxlar individual hisoblanadi?", "answer": "Har bir biznesning vazifasi, bozordagi o'rni va ish hajmi turlicha. Biz sizning byudjetingiz va maqsadlaringizga mos keladigan eng optimal yechimni taklif qilamiz." },
+      { "question": "Ish qancha vaqt davom etadi?", "answer": "Logotip yaratish o'rtacha 2-4 hafta, to'liq brend strategiyasi va firma uslubi esa 8-12 haftadan boshlanadi. Muddat loyiha murakkabligiga qarab aniqlanadi." },
+      { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki rasm emas, balki ishlaydigan vizual tizim yaratamiz. Shuning uchun kamida 'Logo + Firma Uslubi' paketini tavsiya etamiz, chunki faqat logotip brendni to'liq aks ettira olmaydi." },
+      { "question": "To'lov tartibi qanday?", "answer": "Odatda 50% oldindan to'lov va qolgan 50% ish yakunlangandan keyin amalga oshiriladi. 100% oldindan to'lov qilinganda esa maxsus chegirmalarimiz mavjud." },
+      { "question": "Kafolat bormi?", "answer": "Bizda '100% Mamnuniyat Kafolati' bor. Agar sizga dastlabki g'oyalar mutlaqo yoqmasa, biz to'lovingizni qaytarib berishga tayyormiz. Biz uchun sizning natijangiz muhim." }
     ],
     "ctaTitle": "Yana savollaringiz bormi?",
     "ctaDesc": "Biz doimo muloqotga tayyormiz. Savollaringizga batafsil javob berishimiz mumkin.",

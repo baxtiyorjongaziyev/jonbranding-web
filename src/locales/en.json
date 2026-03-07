@@ -20,8 +20,8 @@
         "packaging_design_desc": "Attractive design that will make your product stand out on the shelf.",
         "services_and_prices": "Services & Prices",
         "services_and_prices_desc": "Build your own service package and get an instant price.",
-        "contact_by_phone": "+998336450097",
-        "contact_by_telegram": "Contact via Telegram",
+        "contact_by_phone": "Call",
+        "contact_by_telegram": "Telegram",
         "free_consultation": "Free Consultation",
         "open_menu": "Open Menu",
         "switch_lang": "Switch Language",
@@ -407,7 +407,7 @@
             "budget": "Please select an approximate budget.",
             "location": "Please select your location.",
             "meetingPlace": "You need to choose a meeting place.",
-            "privacyPolicy": "You must accept the privacy policy."
+            "privacyPolicy": "You need to accept the policy."
         },
         "successToast": {
             "title": "Success!",
@@ -552,12 +552,12 @@
         "title": "Our work process",
         "subtitle": "In each project we use a proven, transparent and efficient process.",
         "phases": [
-            { "phase": "01", "title": "Discovery", "description": "The beginning of the journey", "tasks": ["Briefing", "Identifying business problems", "Audience needs", "Market and competitor analysis", "Gathering inspiration and ideas"] },
-            { "phase": "02", "title": "Strategy", "description": "Setting the path", "tasks": ["Goal setting", "Audience analysis", "Brand positioning", "Core principles", "Planning", "Brand vision"] },
-            { "phase": "03", "title": "Creative Design", "description": "Brand formation", "tasks": ["Naming", "Logo design", "Visual concept", "Packaging design", "Brandbook"] },
-            { "phase": "04", "title": "Presentation", "description": "Testing ideas", "tasks": ["Design presentation", "Adaptation based on feedback", "Final iteration"] },
-            { "phase": "05", "title": "Implementation", "description": "Bringing the brand to life", "tasks": ["Ready design files", "Handover of the brandbook", "Visual guides"] },
-            { "phase": "06", "title": "Growth", "description": "Brand support", "tasks": ["Implementation instructions", "Constant support", "Next steps"] }
+            { "phase": "01", "title": "Discovery", "description": "The beginning of the journey", "tasks": ["Briefing", "Identifying business problems", "Audience needs", "Market and competitor analysis", "Gathering ideas"] },
+            { "phase": "02", "title": "Strategy", "description": "Setting the brand path", "tasks": ["Goal setting", "Brand positioning", "Brand platform", "Core principles", "Planning"] },
+            { "phase": "03", "title": "Creative Design", "description": "Forming the visual identity", "tasks": ["Naming", "Logo design", "Visual concept", "Packaging design", "Brandbook"] },
+            { "phase": "04", "title": "Presentation", "description": "Testing ideas with real cases", "tasks": ["Design presentation", "Revisions based on feedback", "Final iteration", "Mockup demonstration"] },
+            { "phase": "05", "title": "Implementation", "description": "Bringing the brand to life", "tasks": ["Final design files", "Brandbook handover", "Visual guides", "Print preparation"] },
+            { "phase": "06", "title": "Growth", "description": "Ongoing brand support", "tasks": ["Implementation guidelines", "Constant support", "Consulting on next steps"] }
         ],
         "ctaTitle": "Ready to discuss your project?",
         "ctaDesc": "Let's start bringing your ideas to life.",
@@ -635,12 +635,11 @@
         "title": "Frequently Asked Questions",
         "subtitle": "Answers to the most common questions about the branding process, prices and other topics.",
         "faqItems": [
-            { "question": "Why are prices not fixed?", "answer": "Each project is unique. The price is calculated individually depending on the complexity of the project, the volume of work and your tasks. We offer an optimal solution for your brand." },
+            { "question": "Why are prices not fixed?", "answer": "Each project is unique. The price is calculated individually depending on the project goals, volume of work, and your business targets. We offer an optimal solution for your budget." },
             { "question": "How is the work process structured?", "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is coordinated with you, and you have full control over the process." },
-            { "question": "Can I order only a logo?", "answer": "We create not just a logo, but a full identification system that makes the brand recognizable and effective. This creates long-term value for your business." },
-            { "question": "What are the payment terms?", "answer": "Standard scheme — 50% upfront payment, 50% after project delivery. We can also discuss individual terms for your convenience." },
-            { "question": "How long does the work take?", "answer": "Deadlines depend on the type of service. For example, creating a logo — 2-4 weeks, brand strategy — from 8 weeks. The final deadline is determined after project approval." },
-            { "question": "Is there support after project completion?", "answer": "Yes, within 1 month after project completion we provide free consultations and assistance on the correct use of brand materials." }
+            { "question": "Can I order only a logo?", "answer": "We create not just a logo, but a full identification system. Therefore, we recommend the 'Logo + Corporate Identity' package, as a single logo cannot fully convey the brand's value." },
+            { "question": "What are the payment terms?", "answer": "Standard scheme — 50% upfront payment, 50% after project delivery. Special discounts apply for 100% upfront payment." },
+            { "question": "Are there any guarantees?", "answer": "Yes, we have a '100% Satisfaction Guarantee'. If you absolutely don't like the initial concepts, we are ready to refund your payment. Your result is our priority." }
         ],
         "ctaTitle": "Don't leave room for doubt!",
         "ctaDesc": "Got answers to all your questions? Let's discuss your project and take your brand to a new level.",
@@ -681,9 +680,7 @@
                 "full": "Full payment (-28%)"
             },
             "empty_package_desc": "You haven't selected any services yet. Please select one of the services.",
-            "recommended": "Recommended",
-            "features": "Services",
-            "results": "Results"
+            "recommended": "Recommended"
         },
         "comparison": {
             "title": "Us and Competitors",
@@ -737,93 +734,5 @@
         "timeframes": {
             "2 weeks": "within 2 weeks"
         }
-    },
-    "mobileCtaBar": {
-        "final_price": "Final Price",
-        "get_offer": "Get Offer"
-    },
-    "blog": {
-        "title": "Our Blog",
-        "subtitle": "Latest news, tips and analytical articles from the world of branding, marketing and design. We help your business grow.",
-        "readMore": "Read more"
-    },
-    "blogPost": {
-        "author": "Author",
-        "ctaTitle": "Was this article helpful?",
-        "ctaDesc": "Now it's time to move from theory to practice. Take your brand to a new level with us.",
-        "ctaButton": "Get a free consultation"
-    },
-    "quiz": {
-        "metadata": {
-            "title": "Quiz: Is your business ready for branding? | Jon.Branding",
-            "description": "Answer a few simple questions and find out how ready your business is for branding."
-        },
-        "exampleTitle": "World brand examples:",
-        "questions": [
-            {
-                "question": "Is the core idea or mission of your business expressed in one sentence?",
-                "brandExample": "Volvo — safety; Nike — inspiration and innovation to every athlete in the world.",
-                "options": [
-                    { "text": "Yes, clear and understandable for everyone", "score": 3 },
-                    { "text": "Partially, but not yet fully", "score": 2 },
-                    { "text": "No, I haven't thought about it", "score": 1 }
-                ]
-            },
-            {
-                "question": "Can you clearly visualize your target audience (ideal client)?",
-                "brandExample": "Apple — creative professionals and tech enthusiasts; Johnson's Baby — young mothers.",
-                "options": [
-                    { "text": "Yes, I know their needs and desires", "score": 3 },
-                    { "text": "I have a general idea", "score": 2 },
-                    { "text": "No, I'm trying to sell to everyone", "score": 1 }
-                ]
-            },
-            {
-                "question": "What specific advantages differentiate your brand from competitors?",
-                "brandExample": "Tesla — innovative electric cars and autopilot; M&M's — chocolate that 'melts in your mouth, not in your hands'.",
-                "options": [
-                    { "text": "I have at least 2-3 specific advantages", "score": 3 },
-                    { "text": "I only differ in price", "score": 2 },
-                    { "text": "I have no clear advantages", "score": 1 }
-                ]
-            },
-            {
-                "question": "Does your visual look (logo, colors, design) reflect your business values?",
-                "brandExample": "Coca-Cola Red — energy and passion; Tiffany Blue — luxury and elegance.",
-                "options": [
-                    { "text": "Yes, completely consistent", "score": 3 },
-                    { "text": "Partially, some elements need updating", "score": 2 },
-                    { "text": "No, I didn't pay attention to it", "score": 1 }
-                ]
-            },
-            {
-                "question": "Do your customers have a consistent and positive opinion about you?",
-                "brandExample": "Starbucks — not just coffee, but the 'Third Place'; Zappos — amazing customer service.",
-                "options": [
-                    { "text": "Yes, my brand reputation is strong", "score": 3 },
-                    { "text": "It varies, sometimes there are negative reviews", "score": 2 },
-                    { "text": "I don't know, I haven't conducted a survey", "score": 1 }
-                ]
-            }
-        ],
-        "result": {
-            "bad": {
-                "title": "You need help (5-8 points)",
-                "description": "Your brand foundation is weak. To stand out and win loyalty, you undoubtedly need professional help. Let's fix this together!"
-            },
-            "medium": {
-                "title": "Good potential, but there are gaps (9-12 points)",
-                "description": "You have a good foundation, but your brand can be even stronger. Let's fill the existing gaps and take your business to a new level."
-            },
-            "good": {
-                "title": "Excellent! Your brand foundation is solid (13-15 points)",
-                "description": "Congratulations! You are on the right track in branding. Now it's time to strengthen this foundation and become a market leader."
-            },
-            "afterSubmitText": "Our specialist will contact you shortly for a detailed analysis of your test results and personal recommendations.",
-            "backToHome": "Back to Home"
-        },
-        "questionLabel": "Question {step} / {total}",
-        "nextButton": "Next",
-        "resultButton": "Get Results"
     }
 }
