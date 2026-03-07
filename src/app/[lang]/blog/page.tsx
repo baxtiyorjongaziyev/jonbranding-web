@@ -8,7 +8,8 @@ import { format, parseISO } from 'date-fns';
 import { uz, ru, enUS } from 'date-fns/locale';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
-const BlogPage = async ({ params: { lang } }: { params: { lang: string } }) => {
+const BlogPage = async (props: { params: Promise<{ lang: string }> }) => {
+  const { lang } = await props.params;
   const sortedPosts = getSortedPostsData(lang);
   const dictionary = await getDictionary(lang as Locale);
   const translations = dictionary.blog;
@@ -20,11 +21,11 @@ const BlogPage = async ({ params: { lang } }: { params: { lang: string } }) => {
       <section className="py-20 sm:py-28">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
-              {translations.title}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue" suppressHydrationWarning>
+              {translations?.title}
             </h1>
-            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
-              {translations.subtitle}
+            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700" suppressHydrationWarning>
+              {translations?.subtitle}
             </p>
           </div>
 
@@ -58,7 +59,7 @@ const BlogPage = async ({ params: { lang } }: { params: { lang: string } }) => {
                     </CardContent>
                     <div className="p-6 pt-0 mt-auto">
                        <span className="font-semibold text-primary flex items-center transition-all duration-300">
-                          {translations.readMore} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                          {translations?.readMore} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                        </span>
                     </div>
                   </div>
