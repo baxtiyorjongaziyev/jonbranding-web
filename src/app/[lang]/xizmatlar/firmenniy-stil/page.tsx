@@ -1,6 +1,7 @@
+
 'use client';
 
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Layers, Palette, PenTool, ClipboardCheck } from 'lucide-react';
 import Image from 'next/image';
@@ -48,7 +49,7 @@ const FirmenniyStilPage: FC = () => {
   return (
     <>
         <main className="flex-grow pt-20">
-            <section className="py-20 sm:py-28 bg-white">
+            <section className="py-20 sm:py-28 bg-white" suppressHydrationWarning>
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
                 {translations.title}
@@ -70,9 +71,17 @@ const FirmenniyStilPage: FC = () => {
                         </div>
                     </div>
                     <div className="lg:order-last">
-                        <Card className="shadow-xl rounded-2xl">
+                        <Card className="shadow-xl rounded-2xl overflow-hidden">
                             <CardContent className="p-0">
-                           
+                                <Image 
+                                    src="https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg"
+                                    alt="Brandbook guidelines presentation"
+                                    width={800}
+                                    height={600}
+                                    className="w-full h-auto object-cover"
+                                    data-ai-hint="brandbook design"
+                                    priority
+                                />
                             </CardContent>
                         </Card>
                     </div>
@@ -94,9 +103,16 @@ const FirmenniyStilPage: FC = () => {
                         </div>
                     </div>
                     <div>
-                        <Card className="shadow-xl rounded-2xl">
+                        <Card className="shadow-xl rounded-2xl overflow-hidden">
                             <CardContent className="p-0">
-                           
+                                <Image 
+                                    src="https://img1.teletype.in/files/88/92/8892f18d-a298-485d-8fe5-7d0444defd89.png"
+                                    alt="Corporate identity identity system"
+                                    width={800}
+                                    height={600}
+                                    className="w-full h-auto object-cover"
+                                    data-ai-hint="corporate identity"
+                                />
                             </CardContent>
                         </Card>
                     </div>

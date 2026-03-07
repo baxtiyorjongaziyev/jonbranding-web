@@ -4,10 +4,11 @@ import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
 type Props = {
+  children: ReactNode;
   params: Promise<{ lang: string }>;
 };
 
-export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
   const t = dict.namingPage?.metadata || { title: "Naming", description: "Brand name selection" };
@@ -51,7 +52,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
   };
 }
 
-const NamingLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: string }> }>> = ({ children }) => {
+const NamingLayout: FC<Readonly<Props>> = ({ children }) => {
   return <>{children}</>;
 }
 

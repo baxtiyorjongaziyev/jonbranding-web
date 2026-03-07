@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -51,7 +52,7 @@ const LogoDesignPage: FC = () => {
   return (
     <>
         <main className="flex-grow pt-20">
-            <section className="py-20 sm:py-28 bg-white">
+            <section className="py-20 sm:py-28 bg-white" suppressHydrationWarning>
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
                 {translations.title}
@@ -73,9 +74,17 @@ const LogoDesignPage: FC = () => {
                         </div>
                     </div>
                     <div className="lg:order-last">
-                        <Card className="shadow-xl rounded-2xl">
+                        <Card className="shadow-xl rounded-2xl overflow-hidden">
                             <CardContent className="p-0">
-                            
+                                <Image 
+                                    src="https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png"
+                                    alt="Logo design process and concepts"
+                                    width={800}
+                                    height={600}
+                                    className="w-full h-auto object-cover"
+                                    data-ai-hint="logo design"
+                                    priority
+                                />
                             </CardContent>
                         </Card>
                     </div>
