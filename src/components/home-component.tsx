@@ -37,7 +37,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     
     useEffect(() => {
         setMounted(true);
-        if (tg) {
+        if (tg?.BackButton) {
             tg.BackButton.show();
         }
     }, [tg]);
@@ -62,8 +62,8 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     }
 
     return (
-        <>
-            <main suppressHydrationWarning>
+        <div suppressHydrationWarning>
+            <main>
                 <Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
                 <Stats dictionary={dictionary.stats} />
                 <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
@@ -72,7 +72,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
                 <Testimonials lang={lang} dictionary={dictionary.testimonials} />
                 <Gallery lang={lang} dictionary={dictionary.gallery} />
-                <FeaturedCaseStudy lang={lang} dictionary={dictionary.testimonials} />
+                <FeaturedCaseStudy lang={lang} dictionary={dictionary.featuredCaseStudy || {}} />
                 
                 {mounted ? (
                     <>
@@ -90,12 +90,12 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                     </>
                 ) : (
                     <div className="space-y-20 py-20">
-                        <div className="h-96 w-full animate-pulse bg-white" />
+                        <Skeleton className="h-96 w-full" />
                     </div>
                 )}
             </main>
             {mounted && <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />}
-        </>
+        </div>
     )
 };
 
