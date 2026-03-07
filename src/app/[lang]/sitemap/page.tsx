@@ -4,10 +4,40 @@ import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon } from 'lucide-react';
 
-const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) => {
+type Props = {
+  params: Promise<{ lang: string }>;
+};
+
+const SitemapPage = async (props: Props) => {
+  const { lang } = await props.params;
   const sortedPosts = getSortedPostsData(lang);
   const dictionary = await getDictionary(lang as Locale);
-  const t = dictionary.sitemapPage;
+  
+  const t = dictionary.sitemapPage || {
+    title: 'Sayt xaritasi',
+    subtitle: 'Barcha sahifalar haqida umumiy ma\'lumot.',
+    sections: {
+        main: 'Asosiy bo\'limlar',
+        services: 'Xizmatlar',
+        blog: 'Blog maqolalari'
+    },
+    links: {
+        home: 'Bosh sahifa',
+        quiz: 'Brending testi',
+        portfolio: 'Portfolio',
+        process: 'Ishlash tartibi',
+        faq: 'Savol-javoblar',
+        naming: 'Neyming',
+        logo_design: 'Logotip dizayni',
+        corporate_style: 'Firma uslubi',
+        brandbook: 'Brendbuk',
+        packaging_design: 'Qadoq dizayni',
+        services_prices: 'Xizmatlar va narxlar',
+        brand_strategy: 'Brend strategiyasi',
+        patent_calculator: 'Patent kalkulyatori',
+        marketplace_cover: 'Sotuvchi kartochka dizayni'
+    }
+  };
 
   const sections = [
     {
@@ -44,7 +74,7 @@ const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) =
   ];
 
   return (
-    <main className="flex-grow bg-white">
+    <main className="flex-grow bg-white" suppressHydrationWarning>
       <section className="py-20 sm:py-28">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -58,16 +88,20 @@ const SitemapPage = async ({ params: { lang } }: { params: { lang: string } }) =
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {sections.map((section, index) => (
-              <div key={index} className="bg-secondary/50 p-8 rounded-2xl">
+              <div key={index} className="bg-secondary/50 p-8 rounded-2xl shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
-                    <section.icon className="h-6 w-6 text-primary" />
+                    <section.icon className="h-6 w-6 text-primary" aria-hidden="true" />
                     <h2 className="text-2xl font-bold text-dark-blue">{section.title}</h2>
                 </div>
                 <ul className="space-y-3">
                   {section.links.map((link, linkIndex) => (
                     <li key={linkIndex}>
-                      <Link href={`/${lang}${link.href}`} className="group flex items-start gap-2 text-gray-700 hover:text-primary transition-colors">
-                        {link.icon && <link.icon className="h-5 w-5 mt-0.5 text-gray-400 group-hover:text-primary transition-colors flex-shrink-0" />}
+                      <Link 
+                        href={`/${lang}${link.href}`} 
+                        className="group flex items-start gap-2 text-gray-700 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm"
+                        aria-label={link.label}
+                      >
+                        {link.icon && <link.icon className="h-5 w-5 mt-0.5 text-gray-400 group-hover:text-primary transition-colors flex-shrink-0" aria-hidden="true" />}
                         <span className="flex-grow">{link.label}</span>
                       </Link>
                     </li>
