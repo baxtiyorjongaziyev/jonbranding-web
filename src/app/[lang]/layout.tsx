@@ -10,6 +10,7 @@ export default async function LangLayout(props: {
 }) {
   const { lang } = await props.params;
   const dictionary = await getDictionary(lang);
+  
   return (
     <>
       <Header lang={lang} dictionary={dictionary.header} />

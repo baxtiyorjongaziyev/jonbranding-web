@@ -35,7 +35,7 @@ const useHover = () => {
   const handleClose = useCallback(() => {
     timeoutRef.current = setTimeout(() => {
       setOpen(false);
-    }, 100); // 100ms delay to allow moving mouse from trigger to content
+    }, 100);
   }, []);
 
   const handleContentMouseEnter = () => {
@@ -47,7 +47,6 @@ const useHover = () => {
 
   return { open, handleOpen, handleClose, handleContentMouseEnter, setOpen };
 };
-
 
 const localeIcons: Record<Locale, React.FC<{ className?: string }>> = {
   uz: UzFlagIcon,
@@ -67,10 +66,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
 
   const handleLanguageChange = (newLocale: Locale) => {
     setLocaleCookie(newLocale);
-    
     const currentPathWithoutLocale = pathname.startsWith(`/${lang}`) ? pathname.substring(`/${lang}`.length) : pathname;
     const newPath = `/${newLocale}${currentPathWithoutLocale || '/'}`;
-    
     router.push(newPath);
     setOpen(false);
   };
@@ -93,7 +90,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
             variant="ghost"
             role="combobox"
             aria-expanded={open}
-            aria-label="Tilni o'zgartirish"
+            aria-label="Tilni o'zgartirish / Change language"
             className={cn(
                 "w-auto justify-start gap-2 font-semibold",
                 scrolled ? "bg-white/20 hover:bg-white/30 text-foreground" : "bg-black/5 hover:bg-black/10 text-foreground"

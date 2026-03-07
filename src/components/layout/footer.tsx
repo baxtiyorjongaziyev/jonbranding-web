@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -65,18 +66,16 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   return (
     <footer className="bg-black text-gray-300 pt-16 sm:pt-24 pb-8" suppressHydrationWarning>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Contact */}
           <div>
             <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.contact}</h3>
             <div className="mt-4 space-y-4">
-               <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="block group">
+               <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="block group" aria-label="Jon Branding Telegram Profil">
                   <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">@baxtiyorjon_gaziyev</p>
                   <p className="text-xs text-gray-400">{dictionary.by_telegram}</p>
                </a>
-               <a href="tel:+998336450097" className="block group">
+               <a href="tel:+998336450097" className="block group" aria-label="Jon Branding Telefon raqami">
                   <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">+998 33 645 00 97</p>
                   <p className="text-xs text-gray-400">{dictionary.by_phone}</p>
                </a>
@@ -116,7 +115,6 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
         <Separator className="my-12 bg-gray-700" />
         
-        {/* Bottom Section */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
            <motion.div
               onHoverStart={() => setIsHovered(true)}
@@ -140,23 +138,26 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             </motion.div>
            
            <div className="flex items-center gap-6 order-1 sm:order-2">
-             <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+             <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Jon Branding Instagram sahifasi">
                <Instagram size={20} />
              </a>
-             <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+             <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Jon Branding Telegram kanali">
                <Send size={20} />
+             </a>
+             <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Jon Branding LinkedIn profili">
+               <Linkedin size={20} />
              </a>
            </div>
 
            <div className="hidden lg:flex order-3">
-              <button onClick={handleScrollTop} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
+              <button onClick={handleScrollTop} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors" aria-label="Yuqoriga qaytish">
                 {dictionary.back_to_top} <ArrowUp size={16} />
               </button>
            </div>
         </div>
 
         <div className="mt-16 text-center">
-             <Link href={`/${lang}`}>
+             <Link href={`/${lang}`} aria-label="Bosh sahifaga qaytish">
                 <Logo isWhite />
              </Link>
         </div>
