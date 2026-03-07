@@ -58,7 +58,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     };
     
     if (!dictionary || !dictionary.hero) {
-        return <Skeleton className="h-screen w-full" />;
+        return <div className="py-20 text-center"><Skeleton className="h-screen w-full" /></div>;
     }
 
     return (
@@ -89,8 +89,8 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                         <Faq lang={lang} dictionary={dictionary.faq} />
                     </>
                 ) : (
-                    <div className="space-y-20 py-20">
-                        <Skeleton className="h-96 w-full container" />
+                    <div className="space-y-20 py-20 container mx-auto">
+                        <Skeleton className="h-96 w-full rounded-3xl" />
                     </div>
                 )}
             </main>

@@ -39,7 +39,7 @@ const QadoqDizayniPage: FC = () => {
   return (
     <>
         <main className="flex-grow pt-20">
-            <section className="py-20 sm:py-28 bg-white" suppressHydrationWarning>
+            <section className="py-20 sm:py-28 bg-white">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
                 {translations.title}
@@ -61,14 +61,14 @@ const QadoqDizayniPage: FC = () => {
                         </div>
                     </div>
                     <div className="lg:order-last">
-                        <Card className="shadow-xl rounded-2xl overflow-hidden">
+                        <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                             <CardContent className="p-0">
                             <Image 
                                 src="https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png"
                                 width={800}
                                 height={600}
                                 data-ai-hint="product packaging shelf"
-                                alt="Products on a store shelf"
+                                alt="Mahsulot qadoq dizayni va javondagi ko'rinishi"
                                 className="w-full h-auto object-cover"
                                 priority
                             />
@@ -89,10 +89,10 @@ const QadoqDizayniPage: FC = () => {
                 </div>
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
                     {processSteps.map((step, index) => (
-                    <Card key={index} className="text-center shadow-lg rounded-2xl bg-secondary/50 transform hover:-translate-y-2 transition-transform duration-300">
+                    <Card key={index} className="text-center shadow-lg rounded-2xl bg-secondary/50 transform hover:-translate-y-2 transition-transform duration-300 border-none">
                         <CardContent className="p-8">
                             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-6">
-                                <step.icon className="h-8 w-8 text-primary" />
+                                <step.icon className="h-8 w-8 text-primary" aria-hidden="true" />
                             </div>
                             <h3 className="text-xl font-bold text-dark-blue">{step.title}</h3>
                             <p className="mt-2 text-gray-600">{step.description}</p>

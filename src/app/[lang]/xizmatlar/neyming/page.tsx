@@ -47,7 +47,7 @@ const NamingPage: FC = () => {
   return (
     <>
         <main className="flex-grow pt-20">
-            <section className="py-20 sm:py-28 bg-white" suppressHydrationWarning>
+            <section className="py-20 sm:py-28 bg-white">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
                 {translations.title}
@@ -69,14 +69,14 @@ const NamingPage: FC = () => {
                         </div>
                     </div>
                     <div className="lg:order-last">
-                        <Card className="shadow-xl rounded-2xl overflow-hidden">
+                        <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                             <Image 
                                 src="https://img3.teletype.in/files/ae/08/ae08ba83-e433-45a6-8518-9e9973256316.png"
                                 width={800}
                                 height={600}
-                                alt="Brainstorming session"
+                                alt="Neyming jarayoni va g'oyalar to'plash"
                                 className="w-full h-auto object-cover"
-                                data-ai-hint="naming brainstorming"
+                                data-ai-hint="naming brainstorm"
                                 priority
                             />
                         </Card>
@@ -95,10 +95,10 @@ const NamingPage: FC = () => {
                 </div>
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {creationSteps.map((step, index) => (
-                    <Card key={index} className="text-center shadow-lg rounded-2xl bg-white transform hover:-translate-y-2 transition-transform duration-300">
+                    <Card key={index} className="text-center shadow-lg rounded-2xl bg-white transform hover:-translate-y-2 transition-transform duration-300 border-none">
                         <CardContent className="p-8">
                             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-6">
-                                <step.icon className="h-8 w-8 text-primary" />
+                                <step.icon className="h-8 w-8 text-primary" aria-hidden="true" />
                             </div>
                             <h3 className="text-xl font-bold text-dark-blue">{step.title}</h3>
                             <p className="mt-2 text-gray-600">{step.description}</p>
@@ -119,17 +119,17 @@ const NamingPage: FC = () => {
                 </div>
                 <div className="mt-8 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                     {checkPoints.map((point: any, index: number) => (
-                        <Card key={index} className="bg-secondary/50 p-6 rounded-xl">
+                        <Card key={index} className="bg-secondary/50 p-6 rounded-xl border-none">
                             <h4 className="font-bold">{point.title}</h4>
                             <p className="text-gray-600 mt-1">{point.description}</p>
                         </Card>
                     ))}
                 </div>
                  <div className="mt-12 text-center">
-                    <Button asChild size="lg">
-                        <Link href={`/${lang}/xizmatlar/patent-kalkulyatori`}>
+                    <Button asChild size="lg" className="rounded-full shadow-lg">
+                        <Link href={`/${lang}/xizmatlar/patent-kalkulyatori`} aria-label="Patent kalkulyatoriga o'tish">
                             {translations.calculator_cta_button}
-                            <ArrowRight className="ml-2 h-5 w-5"/>
+                            <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true"/>
                         </Link>
                     </Button>
                 </div>

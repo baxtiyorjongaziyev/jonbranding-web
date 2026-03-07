@@ -197,7 +197,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ] : ["6 concepts", "Strategy", "Digital check", "Local patent check", "Competitor analysis", "Emotional impact", "3 revisions"])),
             benefits: isUz ? [
                 { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Patent to'qnashuvidan qutulasiz." },
-                { icon: "🏆", title: "Noyoblik", description: "Raqobatchilardan ajralib turasiz." }
+                { icon: "🏆", title: "Noyoblik", description: "Raqobatchilaringizdan ajralib turasiz." }
             ] : (isRu ? [
                 { icon: "⚖️", title: "Юр. безопасность", description: "Избежите патентных споров." },
                 { icon: "🏆", title: "Уникальность", description: "Выделитесь среди конкурентов." }
