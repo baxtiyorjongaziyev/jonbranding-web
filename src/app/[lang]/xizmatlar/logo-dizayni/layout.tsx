@@ -4,13 +4,14 @@ import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
 type Props = {
+  children: ReactNode;
   params: Promise<{ lang: string }>;
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.logoDesignPage?.metadata || { title: "Logo Design", description: "" };
+  const t = dict.logoDesignPage?.metadata || { title: "Logo Design", description: "Strategic logo design for business" };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/logo-dizayni`;
 
@@ -18,7 +19,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords: ["logotip dizayn", "logo design agency uzbekistan", "toshkentda logotip yasash", "brend dizayn", "professional logotip"],
+    keywords: ["logo dizayn", "logotip yaratish", "brending uz", "ma'no branding", "toshkentda logo", "professional logo", "mountain", "abba", "minim"],
     openGraph: {
       title: t.title,
       description: t.description,

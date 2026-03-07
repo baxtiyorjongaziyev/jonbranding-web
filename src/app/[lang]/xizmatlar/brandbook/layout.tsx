@@ -4,13 +4,14 @@ import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
 type Props = {
+  children: ReactNode;
   params: Promise<{ lang: string }>;
 };
 
-export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.brandbookPage?.metadata || { title: "Brandbook", description: "" };
+  const t = dict.brandbookPage?.metadata || { title: "Brandbook Development", description: "Rules for your brand identity" };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/brandbook`;
 
@@ -18,7 +19,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords: t.keywords,
+    keywords: ["brandbook", "brandbuk", "brendbuk", "aydentika", "firma uslubi", "ma'no", "mountain", "abba marketing", "branding uz"],
     openGraph: {
       title: t.title,
       description: t.description,
@@ -46,12 +47,13 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
         'uz': 'https://jonbranding.uz/xizmatlar/brandbook',
         'ru': 'https://jonbranding.uz/ru/xizmatlar/brandbook',
         'en': 'https://jonbranding.uz/en/xizmatlar/brandbook',
+        'zh': 'https://jonbranding.uz/zh/xizmatlar/brandbook',
       },
     },
   };
 }
 
-const BrandbookLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: string }> }>> = ({ children }) => {
+const BrandbookLayout: FC<Readonly<Props>> = ({ children }) => {
   return <>{children}</>;
 }
 
