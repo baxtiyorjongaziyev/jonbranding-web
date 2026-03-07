@@ -18,13 +18,14 @@ const poppins = Poppins({
 const BASE_URL = 'https://jonbranding.uz';
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
 
-export function generateMetadata({ params: { lang } }: { params: { lang: Locale } }): Metadata {
-  const currentLang = locales.includes(lang) ? lang : defaultLocale;
+export async function generateMetadata(props: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
+  const { lang: rawLang } = await props.params;
+  const currentLang = locales.includes(rawLang) ? rawLang : defaultLocale;
   
   const titles = {
-    uz: "Jon.Branding | Toshkentdagi Professional Brending Agentligi",
+    uz: "Jon.Branding | Toshkentdagi Professional Brending Agentligi: Logo va Neyming",
     ru: "Jon.Branding | Брендинговое Агентство в Ташкенте: Дизайн и Стратегия",
-    en: "Jon.Branding | Premier Branding Agency in Uzbekistan",
+    en: "Jon.Branding | Premier Branding Agency in Uzbekistan: Logo & Naming",
     zh: "Jon.Branding | 乌兹别克斯坦领先的品牌代理机构"
   };
 
@@ -90,24 +91,10 @@ const jsonLd = {
     streetAddress: 'Tashkent City',
     addressLocality: 'Tashkent',
     addressCountry: 'UZ'
-  },
-  sameAs: [
-    'https://t.me/JonBranding',
-    'https://www.instagram.com/jon.branding/',
-    'https://www.linkedin.com/in/baxtiyorjongaziyev/'
-  ],
-  founder: {
-    '@type': 'Person',
-    name: 'Bakhtiyorjon Gaziyev',
-    jobTitle: 'Founder & Strategic Director'
-  },
-  areaServed: {
-    '@type': 'Country',
-    name: 'Uzbekistan'
   }
 };
 
-const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ children, params }) => {
+const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Locale }> }>> = async ({ children, params }) => {
   const { lang: rawLang } = await params;
   const lang = locales.includes(rawLang) ? rawLang : defaultLocale;
 
@@ -122,8 +109,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ 
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        
-        {/* Google Consent Mode v2 */}
         <Script id="google-consent-mode" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -136,8 +121,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: any }>> = async ({ 
             });
           `}
         </Script>
-
-        {/* Google Analytics & Ads */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY" strategy="lazyOnload"></Script>
         <Script
           id="gtag-init"
