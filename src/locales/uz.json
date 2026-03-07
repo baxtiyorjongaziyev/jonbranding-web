@@ -70,7 +70,7 @@
     "description": "Biz shunchaki logotip chizmaymiz. Biz sizning biznesingiz uchun mijozlar qalbidan joy oladigan, strategiyaga asoslangan <span class='font-bold text-foreground'>natijali</span> brend tizimini quramiz. Toshkentdagi yetakchi brending agentligi sifatida biz biznesingizga yangi nafas beramiz.",
     "buttonTexts": [
       "Brendimni tahlil qiling",
-      "Sotuvni oshirishga yordam bering",
+      "Sotuvni oshirishga yordam berish",
       "Bepul strategik konsultatsiya",
       "Menga kuchli brend kerak"
     ],
@@ -280,24 +280,28 @@
     "subtitle": "Brending jarayoni, narxlar va kafolatlar haqida bizning saytdagi real ma'lumotlarga asoslangan javoblar.",
     "faqItems": [
       {
-        "question": "Nega narxlar aynan $780 dan boshlanadi?",
-        "answer": "Biz har bir logotipni noldan, strategiya va bozor tahlili asosida yaratamiz. $780 lik 'Standart' paketimizga nafaqat logotip, balki uning 4 xil ko'rinishi, balla manba fayllar va 8 ta aloqa nuqtashida logoning vizual namoyishi kiradi. Bu shunchaki rasm emas, biznes uchun tayyor vizual vositadir."
+        "question": "Why are prices not fixed?",
+        "answer": "Each project is unique. The price is calculated individually depending on the complexity of the project, the volume of work and your tasks. We offer an optimal solution for your brand."
       },
       {
-        "question": "Patent tekshiruvi qanday amalga oshiriladi?",
-        "answer": "Ayniqsa 'Naming VIP' tarifimizda biz nomni nafaqat O'zbekiston, balki xalqaro (WIPO) bazalarda tekshiramiz. Bu sizning kelajakda boshqa brendlar bilan huquqiy muammolarga duch kelmasligingizni kafolatlaydi va nomni patentga topshirish xizmatini ham o'z ichiga oladi."
+        "question": "How is the work process structured?",
+        "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is coordinated with you, and you have full control over the process."
       },
       {
-        "question": "100% pul qaytarish kafolati qanday ishlaydi?",
-        "answer": "Biz o'z ishimiz sifatiga ishonamiz. Agar taqdim etilgan dastlabki konsepsiyalarning hech biri sizga yoqmasa, biz to'langan mablag'ni 100% qaytarib berishni kafolatlaymiz. Bu bizning 'Professional start' tamoyilimizning bir qismidir."
+        "question": "Can I order only a logo?",
+        "answer": "We create not just a logo, but a full identification system that makes the brand recognizable and effective. This creates long-term value for your business."
       },
       {
-        "question": "Loyiha shoshilinch bo'lsa, qancha ustama to'lanadi?",
-        "answer": "Agar sizga loyiha standart muddatdan tezroq (masalan, 2-3 kunda) kerak bo'lsa, bizning narxlarimizga +50% shoshilinchlik ustamasi qo'shiladi. Bu jamoamizni aynan sizning loyihangizga to'liq va ustuvor ravishda safarbar qilish imkonini beradi."
+        "question": "What are the payment terms?",
+        "answer": "Standard scheme — 50% upfront payment, 50% after project delivery. We can also discuss individual terms for your convenience."
       },
       {
-        "question": "Logo tariflari o'rtasidagi asosiy farq nima?",
-        "answer": "'Standart' ($780) — sifatli start uchun. 'Premium' ($1550) — to'liq vizual uslub, ranglar va shriftlar tizimi bilan. 'VIP' ($2950) — brendingizning 'konstitutsiyasi' bo'lgan to'liq Brandbook (30-50 sahifa) va 25 ta aloqa nuqtasida vizual yechimlar bilan taqdim etiladi."
+        "question": "How long does the work take?",
+        "answer": "Deadlines depend on the type of service. For example, creating a logo — 2-4 weeks, brand strategy — from 8 weeks. The final deadline is determined after project approval."
+      },
+      {
+        "question": "Is there support after project completion?",
+        "answer": "Yes, within 1 month after project completion we provide free consultations and assistance on the correct use of brand materials."
       }
     ],
     "ctaTitle": "Shubhalarga o'rin qoldirmang!",
@@ -320,7 +324,10 @@
         "addons": "Qo'shimcha xizmatlar",
         "more_services": "Qo'shimcha xizmatlar va maxsus shartlar"
       },
-      "tabs": { "included": "Nima kiradi", "benefits": "Nima olasiz" },
+      "tabs": {
+        "included": "Nima kiradi",
+        "benefits": "Nima olasiz"
+      },
       "your_package": "Sizning paketingiz",
       "your_package_desc": "Siz tanlagan barcha xizmatlar shu yerda jamlanadi va umumiy chegirmalar hisoblanadi.",
       "selected": "Tanlandi",
@@ -450,7 +457,7 @@
     "section1_p2": "Ushbu hujjat marketingdagi tartibsizliklarning oldini olishga yordam beradi, brendning taniluvchanligini ta'minlaydi hamda dizaynerlar, marketologlar va boshqa pudratchilar bilan ishlashda vaqt va pulni tejaydi.",
     "values_title": "Brendbuk ushbu muammolarni hal qiladi:",
     "values": [
-      { "title": "Izchillik va Tanilish", "description": "Brendingiz barcha platformalarda — vizitkadan tortib veb-saytgacha bir xil va professional ko'rinishini ta'minlaydi." },
+      { "title": "Izchillik va Tanilish", "description": "Brendingiz ballar platformalarda — vizitkadan tortib veb-saytgacha bir xil va professional ko'rinishini ta'minlaydi." },
       { "title": "Resurslarni Tejash", "description": "Har bir yangi xodim yoki pudratchiga dizayn qoidalarini tushuntirish zaruriyatini yo'q qiladi, ish jarayonini tezlashtiradi." },
       { "title": "Brendni Himoya Qilish", "description": "Aydentikangizni noto'g'ri foydalanishdan himoya qiladi, brendingiz yaxlitligi va qiymatini saqlab qoladi." }
     ],
