@@ -30,15 +30,6 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     urgency: Flame, nda: ShieldCheck
 };
 
-const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-        y: 0,
-        opacity: 1,
-        transition: { type: 'spring', stiffness: 100, damping: 15 }
-    }
-};
-
 const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, currency }: { id: string, onSelect: () => void, selected: boolean, lang: any, dictionary: any, currency: any }) => {
     const [activeTab, setActiveTab] = useState<'included' | 'benefits'>('included');
     const serviceDetails = useMemo(() => getServiceDetails(lang) as any, [lang]);
@@ -55,7 +46,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             <div className="absolute top-[38px] left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
-                        {dictionary.recommended}
+                        {dictionary.recommended || "TAVSIYA ETILADI"}
                     </Badge>
                 )}
                 {isVip && (
@@ -193,7 +184,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                             )}
                             onClick={(e) => { e.stopPropagation(); onSelect(); }}
                         >
-                            {selected ? dictionary.selected : dictionary.select}
+                            {selected ? (dictionary.selected || "TANLANDI") : (dictionary.select || "TANLASH")}
                         </Button>
                     </div>
                 </CardContent>
@@ -260,9 +251,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     if (!isClient || !dictionary) return null;
 
     const discountOptions = [
-        { value: 'none', label: translations.discountSelector.none },
-        { value: 'package', label: translations.discountSelector.package },
-        { value: 'full', label: translations.discountSelector.full }
+        { value: 'none', label: translations.discountSelector?.none || "CHEGIRMASIZ" },
+        { value: 'package', label: translations.discountSelector?.package || "PAKETLI (-20%)" },
+        { value: 'full', label: translations.discountSelector?.full || "TO'LIQ (-28%)" }
     ];
 
     return (
@@ -277,25 +268,25 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
 
                 <div className="space-y-20">
-                    <ServiceGroup title={translations.categories.tripwire}>
+                    <ServiceGroup title={translations.categories?.tripwire || "Tezkor xizmatlar"}>
                         {['namingCheck', 'audit', 'consultation'].map(id => (
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                         ))}
                     </ServiceGroup>
 
-                    <ServiceGroup title={translations.categories.strategy} gridCols="lg:grid-cols-2">
+                    <ServiceGroup title={translations.categories?.strategy || "Strategik xizmatlar"} gridCols="lg:grid-cols-2">
                         {['strategy', 'commStrategy'].map(id => (
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                         ))}
                     </ServiceGroup>
 
-                    <ServiceGroup title={translations.categories.naming}>
+                    <ServiceGroup title={translations.categories?.naming || "Neyming"}>
                         {['namingVIP', 'namingPremium', 'namingStandard'].map(id => (
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                         ))}
                     </ServiceGroup>
 
-                    <ServiceGroup title={translations.categories.identity}>
+                    <ServiceGroup title={translations.categories?.identity || "Visual Identity"}>
                         {['logoVIP', 'logoPremium', 'logoStandard'].map(id => (
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                         ))}
@@ -304,12 +295,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <div className="w-full">
                         <Accordion type="single" collapsible className="w-full">
                             <AccordionItem value="more" className="border-none">
-                                <AccordionTrigger className="text-xl font-black text-dark-blue justify-center gap-6 hover:no-underline py-8 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm">
-                                    {translations.categories.more_services || "Qo'shimcha xizmatlar va maxsus shartlar"}
+                                <AccordionTrigger className="text-xl font-black text-dark-blue justify-center gap-6 hover:no-underline py-8 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm" aria-label={translations.categories?.more_services}>
+                                    {translations.categories?.more_services || "Qo'shimcha xizmatlar va maxsus shartlar"}
                                     <ChevronsDown className="w-6 h-6 text-primary animate-bounce" />
                                 </AccordionTrigger>
                                 <AccordionContent className="pt-12">
-                                    <ServiceGroup title={translations.categories.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
+                                    <ServiceGroup title={translations.categories?.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
                                         {['packaging', 'smm', 'urgency', 'nda'].map(id => (
                                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                                         ))}
@@ -330,9 +321,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <div className="bg-white/10 p-3 rounded-xl border border-white/10 shadow-inner">
                                             <Box className="w-7 h-7 text-sky-blue" />
                                         </div>
-                                        <h3 className="text-2xl sm:text-3xl font-black tracking-tight uppercase text-white">{translations.your_package}</h3>
+                                        <h3 className="text-2xl sm:text-3xl font-black tracking-tight uppercase text-white">{translations.your_package || "Sizning paketingiz"}</h3>
                                     </div>
-                                    <p className="text-blue-100/80 font-medium text-base max-w-sm leading-relaxed">{translations.your_package_desc}</p>
+                                    <p className="text-blue-100/80 font-medium text-base max-w-sm leading-relaxed">{translations.your_package_desc || "Tanlangan xizmatlar ro'yxati."}</p>
                                 </div>
                                 <div className="grid grid-cols-1 gap-3 overflow-y-auto pr-3 custom-scrollbar flex-grow max-h-[400px]">
                                     {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
@@ -359,7 +350,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <div className="space-y-8 flex-grow">
                                 <div className="space-y-6">
                                     <div className="flex justify-between items-center px-2">
-                                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{translations.base_price_label}</span>
+                                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{translations.base_price_label || "Boshlang'ich narx"}</span>
                                         <span className="text-2xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
 
@@ -384,7 +375,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
 
                                     <div className="pt-6 border-t border-slate-200 text-center space-y-2">
-                                        <span className="text-slate-400 text-[11px] font-bold uppercase tracking-widest">{translations.final_price}</span>
+                                        <span className="text-slate-400 text-[11px] font-bold uppercase tracking-widest">{translations.final_price || "Yakuniy narx:"}</span>
                                         <div className="flex flex-col items-center">
                                             <AnimatePresence mode="wait">
                                                 <motion.span 
@@ -410,12 +401,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
                                 <div className="space-y-6">
                                     <div className="space-y-2">
-                                        <Label className="text-[11px] uppercase font-bold text-slate-400 tracking-widest ml-4">{translations.promo_code_label}</Label>
+                                        <Label className="text-[11px] uppercase font-bold text-slate-400 tracking-widest ml-4">{translations.promo_code_label || "Promokod"}</Label>
                                         <div className="relative">
                                             <Input 
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
-                                                placeholder={translations.promo_code_placeholder}
+                                                placeholder={translations.promo_code_placeholder || "KODNI KIRITING"}
                                                 className={cn("rounded-full py-3 px-6 border-slate-200 h-14 text-base font-bold uppercase tracking-widest bg-white shadow-inner focus:ring-primary focus:border-primary transition-all", total.isPromoApplied && "border-emerald-500 ring-2 ring-emerald-500/20")}
                                             />
                                             {total.isPromoApplied && (
@@ -441,7 +432,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
                                     {!total.isPromoApplied && (
                                         <div className="space-y-2">
-                                            <Label className="text-[11px] uppercase font-bold text-slate-400 tracking-widest ml-4">CHEGIRMALAR</Label>
+                                            <Label className="text-[11px] uppercase font-bold text-slate-400 tracking-widest ml-4">CHEGIRMARAR</Label>
                                             <DynamicToggle id="discount-tier" options={discountOptions} selected={discountType} onSelect={(val) => setDiscountType(val as any)} className="h-14" />
                                         </div>
                                     )}
@@ -452,6 +443,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 className="w-full py-7 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group" 
                                 onClick={onOrderNow} 
                                 disabled={total.base === 0}
+                                aria-label="Loyiha narxini tasdiqlash"
                             >
                                 <span className="flex items-center justify-center gap-3 uppercase tracking-wider">
                                     LOYIHA NARXINI TASDIQLASH 

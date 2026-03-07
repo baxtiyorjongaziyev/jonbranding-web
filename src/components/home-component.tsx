@@ -43,6 +43,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     }, [tg]);
 
     const renderHeadline = (headline: string) => {
+        if (!headline) return '';
         const parts = headline.split('|');
         if (parts.length === 3) {
             return (
@@ -77,9 +78,9 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                     <>
                         <Video />
                         <CtaBlock 
-                            title={dictionary.home.cta1_title}
-                            description={dictionary.home.cta1_desc}
-                            buttonText={dictionary.home.cta1_button}
+                            title={dictionary.home?.cta1_title || "Your brand could look this good too."}
+                            description={dictionary.home?.cta1_desc || "Take your business to the next level."}
+                            buttonText={dictionary.home?.cta1_button || "Start Now"}
                             onCtaClick={handleOpenModal}
                         />
                         <Founder lang={lang} dictionary={dictionary.founder} />
