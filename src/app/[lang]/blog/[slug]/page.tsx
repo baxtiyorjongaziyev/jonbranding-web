@@ -5,12 +5,14 @@ import { Metadata } from 'next';
 import BlogPostClient from '@/components/blog-post-client';
 import Script from 'next/script';
 import { BlogPost } from '@/lib/types';
+import { Locale } from '@/lib/dictionaries';
 
 type Props = {
-  params: { slug: string; lang: string };
+  params: Promise<{ slug: string; lang: string }>;
 };
 
-export async function generateMetadata({ params: { slug, lang } }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { slug, lang } = await props.params;
   const post = await getPostData(lang, slug);
 
   if (!post) {
@@ -30,6 +32,7 @@ export async function generateMetadata({ params: { slug, lang } }: Props): Promi
       languages: {
         'uz': `https://jonbranding.uz/blog/${post.slug}`,
         'ru': `https://jonbranding.uz/ru/blog/${post.slug}`,
+        'en': `https://jonbranding.uz/en/blog/${post.slug}`,
       },
     },
     openGraph: {
@@ -80,7 +83,8 @@ const generateJsonLd = (post: BlogPost) => {
   };
 };
 
-const BlogPostPage = async ({ params: { lang, slug } }: { params: { lang: string, slug: string } }) => {
+const BlogPostPage = async (props: { params: Promise<{ lang: string, slug: string }> }) => {
+  const { lang, slug } = await props.params;
   const post = await getPostData(lang, slug);
 
   if (!post) {

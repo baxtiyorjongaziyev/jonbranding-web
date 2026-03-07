@@ -4,12 +4,13 @@ import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
 type Props = {
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 };
 
-export async function generateMetadata({ params: { lang } }: Props): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.logoDesignPage.metadata;
+  const t = dict.logoDesignPage?.metadata || { title: "Logo Design", description: "" };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/logo-dizayni`;
 
@@ -51,9 +52,8 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
   };
 }
 
-const LogoDesignLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
+const LogoDesignLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: string }> }>> = ({ children }) => {
   return <>{children}</>;
 }
 
 export default LogoDesignLayout;
-    

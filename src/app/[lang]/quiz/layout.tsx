@@ -5,12 +5,13 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 
 type Props = {
   children: ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 };
 
-export async function generateMetadata({ params: { lang } }: Props): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.quiz.metadata;
+  const t = dict.quiz?.metadata || { title: "Branding Quiz", description: "Test your business for branding readiness." };
 
   const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}quiz`;
 
@@ -52,7 +53,7 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
 }
 
 
-const QuizLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
+const QuizLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: string }> }>> = ({ children }) => {
   return <>{children}</>;
 }
 
