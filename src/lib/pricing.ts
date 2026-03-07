@@ -159,7 +159,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Mulkchilik sertifikati",
                 "Cheksiz tahrirlash imkoniyati (30 kun)"
             ] : (isRu ? [
-                "10 вариантов названий", "Стратегическое обоснование", "Проверка произношения", "Проверка доменов (.uz, .com)", "Проверка соцсетей", "Патентная проверка в Узбекистане", "Анализ конкурентов", "Лингвистический анализ (6 языков)", "Анализ эмоций", "3 варианта слоганов", "Подача на патент", "Сертификат владения", "Безлимитные правки (30 дней)"
+                "10 вариантов названий", "Стратегическое обоснование", "Проверка произношения", "Проверка доменов", "Проверка соцсетей", "Патентная проверка", "Анализ конкурентов", "Лингвистический анализ (6 языков)", "Анализ эмоций", "3 варианта слоганов", "Подача на патент", "Сертификат владения", "Безлимитные правки"
             ] : (isZh ? [
                 "10个方案", "战略说明", "发音检查", "域名检查", "社交账号检查", "专利检查", "竞争分析", "语言分析", "情感分析", "3个口号", "专利服务", "证书", "30天无限修改"
             ] : ["10 concepts", "Strategy", "Phonetics", "Domain check", "Social check", "Patent check", "Competitor analysis", "Linguistics", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Unlimited revisions"])),
@@ -191,7 +191,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Nomning hissiy ma'nosi",
                 "3 ta tahrirlash imkoniyati"
             ] : (isRu ? [
-                "6 вариантов названий", "Стратегические обоснования", "Проверка доменов и соцсетей", "Патентная проверка по РУз", "Анализ конкурентов", "Эмоциональный смысл", "3 правки"
+                "6 вариантов названий", "Стратегические обоснования", "Проверка доменов и соцсетей", "Патентная проверка", "Анализ конкурентов", "Эмоциональный смысл", "3 правки"
             ] : (isZh ? [
                 "6个方案", "战略说明", "域名和社交账号检查", "本地专利检查", "竞争分析", "情感意义", "3次修改"
             ] : ["6 concepts", "Strategy", "Digital check", "Local patent check", "Competitor analysis", "Emotional impact", "3 revisions"])),
@@ -232,7 +232,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             label: isUz ? "Logo Standart" : (isRu ? "Логотип Стандарт" : (isZh ? "标准标志" : "Standard Logo")),
             price: basePricesUSD.logoStandard,
             timeline: isUz ? "⏱ 5 ish kuni" : (isRu ? "⏱ 5 рабочих дней" : (isZh ? "⏱ 5 个工作日" : "⏱ 5 business days")),
-            features: isUz ? ["3 ta logo varianti", "Logo 4 xil ko'rinishda", "3 xil format (PNG, SVG, AI)", "8 ta aloqa nuqtasi", "2 ta tahrirlash"] : (isRu ? ["3 варианта", "4 вида логотипа", "3 формата (PNG, SVG, AI)", "8 точек контакта", "2 правки"] : (isZh ? ["3个方案", "4种样式", "3种格式", "8个接触点", "2次修改"] : ["3 concepts", "4 lockups", "3 formats", "8 touchpoints", "2 revisions"])),
+            features: isUz ? ["3 ta logo varianti", "Logo 4 xil ko'rinishda", "3 xil format (PNG, SVG, AI)", "8 ta aloqa nuqtasi", "2 ta tahrirlash"] : (isRu ? ["3 варианта", "4 вида логотипа", "3 формата", "8 точек контакта", "2 правки"] : (isZh ? ["3个方案", "4种样式", "3种格式", "8个接触点", "2次修改"] : ["3 concepts", "4 lockups", "3 formats", "8 touchpoints", "2 revisions"])),
             benefits: isUz ? [
                 { icon: "🎯", title: "Tayyor", description: "Hamma joyda ishlatish mumkin." },
                 { icon: "🛡️", title: "Mulk", description: "Fayllar to'liq sizniki." }
@@ -253,7 +253,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.logoPremium,
             recommended: true,
             timeline: isUz ? "⏱ 10 ish kuni" : (isRu ? "⏱ 10 рабочих дней" : (isZh ? "⏱ 10 个工作日" : "⏱ 10 business days")),
-            features: isUz ? ["4 ta logo varianti", "O'ziga xos firma uslubini ishlab chiqish", "3 xil format", "Rasmiy ranglar va shriftlar", "15 ta aloqa nuqtasi", "3 ta tahrirlash"] : (isRu ? ["4 варианта", "Разработка уникального стиля", "3 формата", "Цвета и шрифты", "15 точек контакта", "3 правки"] : (isZh ? ["4个方案", "独特形象开发", "3种格式", "标准色和字体", "15个接触点", "3次修改"] : ["4 concepts", "Unique style development", "3 formats", "Colors & fonts", "15 touchpoints", "3 revisions"])),
+            features: isUz ? ["4 ta logo varianti", "O'ziga xos firma uslubini ishlab chiqish", "3 xil format", "Rasmiy ranglar va shriftlar", "15 ta aloqa nuqtasi", "3 ta tahrirlash"] : (isRu ? ["4 варианта", "Разработка стиля", "3 формата", "Цвета и шрифты", "15 точек контакта", "3 правки"] : (isZh ? ["4个方案", "独特形象开发", "3种格式", "标准色和字体", "15个接触点", "3次修改"] : ["4 concepts", "Unique style development", "3 formats", "Colors & fonts", "15 touchpoints", "3 revisions"])),
             benefits: isUz ? [
                 { icon: "🏆", title: "Professional", description: "Barcha joyda bir xil uslub." },
                 { icon: "📈", title: "Qiymat", description: "Brend obro'si oshadi." }
@@ -281,12 +281,16 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "25 ta aloqa nuqtasi",
                 "Mulkchilik sertifikati",
                 "Patent topshirish xizmati",
-                "Cheksiz tahrirlash imkoniyati (30 kun)"
+                "Cheksiz tahrirlash imkoniyati (30 kun)",
+                "Ijtimoiy tarmoqlar uchun dizayn (9 ta shablon)",
+                "Vizitka va korporativ blanklar dizayni",
+                "Bir yillik brending nazorati (support)",
+                "Tashqi reklama (banner) dizayni"
             ] : (isRu ? [
-                "5 вариантов", "Стратегический анализ", "Брендбук (30-50 стр)", "Анимация лого (Motion)", "Стикерпак для TG (10 шт)", "25 точек контакта", "Сертификат владения", "Подача на патент", "Безлимитные правки"
+                "5 вариантов", "Анализ", "Брендбук (30-50 стр)", "Анимация", "10 стикеров", "25 точек контакта", "Сертификат", "Патент", "Безлимитные правки", "9 шаблонов для соцсетей", "Визитки и бланки", "Годовая поддержка", "Дизайн баннеров"
             ] : (isZh ? [
-                "5个方案", "战略分析", "品牌手册 (30-50页)", "标志动画", "10个社交贴纸", "25个接触点", "所有权证书", "专利服务", "无限修改"
-            ] : ["5 concepts", "Strategic analysis", "Full Brandbook", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "Unlimited revisions"])),
+                "5个方案", "战略分析", "品牌手册 (30-50页)", "标志动画", "10个社交贴纸", "25个接触点", "所有权证书", "专利服务", "无限修改", "9个社交媒体模板", "名片和信头", "一年的品牌支持", "户外广告设计"
+            ] : ["5 concepts", "Analysis", "Brandbook (30-50 pages)", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "Unlimited revisions", "9 social templates", "Business cards & letterheads", "1-year support", "Banner design"])),
             benefits: isUz ? [
                 { icon: "📖", title: "Qo'llanma", description: "Istalgan dizayner to'g'ri ishlatadi." },
                 { icon: "💎", title: "Sarmoya", description: "Bir marta to'g'ri investitsiya." }
