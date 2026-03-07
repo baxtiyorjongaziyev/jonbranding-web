@@ -26,6 +26,7 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDi
     const [dictionary, setDictionary] = useState<any>(initialDictionary);
 
     useEffect(() => {
+        // Fix for "frozen" block: If dictionary isn't provided, fetch it.
         if (!initialDictionary && lang) {
             getDictionary(lang as Locale).then(dict => {
                 setDictionary(dict.serviceSections || dict);
@@ -65,6 +66,7 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDi
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
                     {orderedServices.map((service: any) => {
                         const Icon = serviceIcons[service.id] || Paintbrush;
+                        const accessibilityLabel = `${service.title} xizmati haqida batafsil ma'lumot`;
                         return (
                              <Card key={service.id} className="group relative flex flex-col text-center shadow-lg rounded-2xl bg-secondary/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 max-w-sm mx-auto border-none">
                                 <CardContent className="p-8 flex flex-col items-center flex-grow">
@@ -74,8 +76,8 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDi
                                     <h3 className="text-xl font-bold text-dark-blue">{service.title}</h3>
                                     <p className="text-gray-600 mt-2 flex-grow">{service.description}</p>
                                     <Button asChild variant="ghost" className="mt-6 text-primary hover:text-primary hover:bg-primary/5">
-                                        <Link href={`/${lang}/xizmatlar/${service.id}`} aria-label={`${service.title} xizmati haqida batafsil ma'lumot`}>
-                                            {service.buttonText}
+                                        <Link href={`/${lang}/xizmatlar/${service.id}`} aria-label={accessibilityLabel}>
+                                            {service.buttonText || "Batafsil"}
                                             <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                                         </Link>
                                     </Button>
