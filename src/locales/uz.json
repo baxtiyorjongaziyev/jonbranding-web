@@ -51,6 +51,11 @@
     "back_to_top": "Yuqoriga qaytish",
     "patent_calculator": "Patent kalkulyatori"
   },
+  "home": {
+    "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
+    "cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing. Biznesingiz uchun ideal yechimni topishga yordam beramiz.",
+    "cta1_button": "Mening biznesim uchun ham"
+  },
   "hero": {
     "headlines": [
       "Brendingiz |sotmayaptimi?| Biz buni tuzatamiz.",
@@ -93,9 +98,9 @@
       { "question": "To'lov tartibi qanday?", "answer": "Odatda 50% oldindan to'lov va 50% ish yakunlangach. 100% oldindan to'lovda maxsus chegirmalarimiz bor." },
       { "question": "Kafolat bormi?", "answer": "Ha, '100% Mamnuniyat Kafolati' bor. Agar g'oyalar mutlaqo yoqmasa, to'lovingizni qaytarib beramiz." }
     ],
-    "ctaTitle": "Don't leave room for doubt!",
-    "ctaDesc": "Got answers to all your questions? Let's discuss your project and take your brand to a new level.",
-    "ctaButton": "I've got all the answers, ready to start!"
+    "ctaTitle": "Shubhalarga o'rin qoldirmang!",
+    "ctaDesc": "Savollaringizga javob oldingizmi? Loyihangizni muhokama qilaylik va brendingizni yangi bosqichga olib chiqaylik.",
+    "ctaButton": "Men tayyorman, boshlaymiz!"
   },
   "servicesPage": {
     "metadata": {
@@ -170,5 +175,30 @@
       { "title": "4️⃣ HUQUQIY HIMOYA", "points": ["Neyming bo'yicha maslahat", "Patentlash jarayoni tushuntiruvi", "Intellectual mulk himoyasi"] },
       { "title": "5️⃣ QO'LLAB-QUVVATLASH", "points": ["3 oy bepul tahrirlar", "Telegram orqali doimiy aloqa", "Brendni tatbiq etish maslahatlari"] }
     ]
+  },
+  "whyUs": {
+    "title": "Nega aynan biz?",
+    "subtitle": "Biz shunchaki va'da bermaymiz. Biz tizimli yondashuv orqali brendingiz uchun haqiqiy qiymat yaratamiz.",
+    "values": [
+      { "title": "Strategik yondashuv", "description": "Biz shunchaki chiroyli rasmlar chizmaymiz. Har bir dizayn elementi sizning sotuvlaringizni oshirishga va brendingizni mustahkamlashga xizmat qiladi." },
+      { "title": "Shaffof jarayon", "description": "Brif → Tahlil → Strategiya → Dizayn → Topshirish. Har bir bosqichda biz siz bilan yaqindan hamkorlik qilamiz va siz jarayonni to'liq nazorat qilasiz." },
+      { "title": "Natija va Sadoqat", "description": "50 dan ortiq loyihalar va eng muhimi - mijozlarimizning 90 foizi bizni do'stlariga tavsiya qilishadi. Bu biz uchun eng katta yutuqdir." }
+    ],
+    "ctaTitle": "Bizning yondashuvimiz yoqdimi?",
+    "ctaDesc": "Keling, brendingizni bepul tahlil qilaylik, uning kuchli va zaif tomonlarini aniqlaylik. Bu sizga hech qanday majburiyat yuklamaydi.",
+    "ctaButton": "Brendimni bepul tahlil qiling"
+  },
+  "targetAudience": {
+    "title": "Ushbu muammolar sizga tanishmi?",
+    "subtitle": "Agar quyidagi fikrlar sizni qiynayotgan bo'lsa, demak biz siz uchun to'g'ri yechimmiz.",
+    "problems": [
+      { "text": "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi." },
+      { "text": "Brendim eskirgan, raqobatchilardan ortda qolyapman." },
+      { "text": "Mijozlarim mening qiymatimni tushunishmaydi, faqat narxni so'rashadi." },
+      { "text": "Sotuvlarim bor, lekin ular barqaror emas. Mijozlar qaytib kelishmaydi." }
+    ],
+    "solutionTitle": "Xushxabar: bularning barchasini hal qilish mumkin!",
+    "solutionSubtitle": "To'g'ri qurilgan brend strategiyasi bunday muammolarni bartaraf etadi va biznesingizni barqaror o'sish yo'liga olib chiqadi.",
+    "solutionButton": "Barcha muammolar yechimini ko'rish"
   }
 }
