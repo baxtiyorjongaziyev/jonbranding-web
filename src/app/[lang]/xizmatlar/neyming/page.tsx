@@ -62,10 +62,12 @@ const NamingPage: FC = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div>
-                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{lang === 'uz' ? 'Neyming — bu faqat chiroyli jarang emas' : 'Naming is more than just a beautiful sound'}</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">
+                            {translations.section1_title || (lang === 'uz' ? 'Neyming — bu faqat chiroyli jarang emas' : 'Naming is more than just a beautiful sound')}
+                        </h2>
                         <div className="mt-4 space-y-4 text-lg text-gray-700">
-                            <p>{lang === 'uz' ? "Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va biznesingizning bozordagi o'rnini belgilaydi." : "A good name conveys the essence of the brand, firmly takes root in the minds of customers, and defines your business's place in the market."}</p>
-                            <p>{lang === 'uz' ? "Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz." : "We see naming not just as a creative process, but as an integral part of brand strategy."}</p>
+                            <p>{translations.section1_p1 || (lang === 'uz' ? "Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va biznesingizning bozordagi o'rnini belgilaydi." : "A good name conveys the essence of the brand, firmly takes root in the minds of customers, and defines your business's place in the market.")}</p>
+                            <p>{translations.section1_p2 || (lang === 'uz' ? "Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz." : "We see naming not just as a creative process, but as an integral part of brand strategy.")}</p>
                         </div>
                     </div>
                     <div className="lg:order-last">
@@ -98,7 +100,7 @@ const NamingPage: FC = () => {
                     <Card key={index} className="text-center shadow-lg rounded-2xl bg-white transform hover:-translate-y-2 transition-transform duration-300 border-none">
                         <CardContent className="p-8">
                             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-6">
-                                <step.icon className="h-8 w-8 text-primary" aria-hidden="true" />
+                                <step.icon className="h-8 w-8 text-primary" />
                             </div>
                             <h3 className="text-xl font-bold text-dark-blue">{step.title}</h3>
                             <p className="mt-2 text-gray-600">{step.description}</p>
