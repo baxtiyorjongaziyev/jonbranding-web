@@ -185,14 +185,16 @@
     "ctaDesc": "Biz doimo yordamga tayyormiz. Bepul konsultatsiya uchun ariza qoldiring.",
     "ctaButton": "Menga aynan shu kerak",
     "faqItems": [
-      { "question": "Nega narxlar aniq emas?", "answer": "Har bir loyiha unikal. Narx proyektning murakkabligi va sizning biznes maqsadlaringizdan kelib chiqib hisoblanadi." },
-      { "question": "Logotip necha kunda tayyor bo'ladi?", "answer": "O'rtacha 5-10 ish kuni. Bu tanlangan tarifga bog'liq." },
-      { "question": "Kafolat bormi?", "answer": "Ha, bizda '100% Mamnuniyat Kafolati' mavjud. Agar dizayn yoqmasa, pulingizni qaytarib beramiz." }
+      { "question": "Nega narxlar aniq emas?", "answer": "Har bir loyiha unikal. Narx proyektning murakkabligi, kerakli xizmatlar hajmi va sizning biznes maqsadlaringizdan kelib chiqib individual hisoblanadi." },
+      { "question": "Logotip necha kunda tayyor bo'ladi?", "answer": "Tanlangan tarifga qarab logotip dizayni o'rtacha 5-10 ish kuni ichida tayyor bo'ladi. VIP tariflarda bu jarayon strategik tahlil sababli ko'proq vaqt olishi mumkin." },
+      { "question": "Faqatgina logotipga buyurtma bersa bo'ladimi?", "answer": "Biz shunchaki rasm emas, brend tizimini quramiz. Shuning uchun kamida 'Logo + Firma uslubi' paketini tavsiya etamiz, chunki faqat logotip brend qiymatini to'liq ochib berolmaydi." },
+      { "question": "To'lov tartibi qanday?", "answer": "Odatda 50% oldindan to'lov va 50% ish topshirilgandan so'ng amalga oshiriladi. 100% oldindan to'lov qilinganda maxsus chegirmalarimiz mavjud." },
+      { "question": "Kafolat bormi?", "answer": "Ha, bizda '100% Mamnuniyat Kafolati' mavjud. Agar dastlabki konsepsiyalar sizga mutlaqo yoqmasa, biz to'lovni qaytarib berishga tayyormiz. Sizning natijangiz — bizning ustuvorligimiz." }
     ]
   },
   "mobileCtaBar": {
     "final_price": "Yakuniy narx",
-    "get_offer": "Ariza qoldirish"
+    "get_offer": "Ariza qoldiring"
   },
   "sitemapPage": {
     "title": "Sayt xaritasi",

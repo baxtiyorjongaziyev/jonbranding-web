@@ -129,7 +129,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
 
-  // Move hooks to top level to avoid order issues
+  // Move hooks to top level to avoid Hook Order errors
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
@@ -211,37 +211,39 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           <Logo />
         </Link>
 
-        <NavigationMenu className="hidden lg:flex" aria-label="Asosiy navigatsiya">
-           <NavigationMenuList>
-             <NavigationMenuItem>
-              <NavigationMenuTrigger className={cn("bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
-                {dictionary.services}
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                  {services.map((component) => (
-                    <ListItem
-                      key={component.title}
-                      title={component.title}
-                      href={component.href}
-                    >
-                      {component.description}
-                    </ListItem>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            {navItems.map((item) => (
-              <NavigationMenuItem key={item.label}>
-                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
-                  <Link href={item.href}>
-                    {item.label}
-                  </Link>
-                </NavigationMenuLink>
+        {mounted && (
+          <NavigationMenu className="hidden lg:flex" aria-label="Asosiy navigatsiya">
+             <NavigationMenuList>
+               <NavigationMenuItem>
+                <NavigationMenuTrigger className={cn("bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
+                  {dictionary.services}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                    {services.map((component) => (
+                      <ListItem
+                        key={component.title}
+                        title={component.title}
+                        href={component.href}
+                      >
+                        {component.description}
+                      </ListItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
               </NavigationMenuItem>
-            ))}
-          </NavigationMenuList>
-        </NavigationMenu>
+              {navItems.map((item) => (
+                <NavigationMenuItem key={item.label}>
+                  <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
+                    <Link href={item.href}>
+                      {item.label}
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+        )}
 
         <div className="hidden items-center space-x-2 lg:flex">
           <LanguageSwitcher lang={lang as any} />

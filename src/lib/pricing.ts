@@ -157,10 +157,13 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ] : (isRu ? [
                 { icon: "⚖️", title: "Юр. безопасность", description: "Избежите патентных споров." },
                 { icon: "🏆", title: "Уникальность", description: "Выделитесь среди конкурентов." }
+            ] : (isZh ? [
+                { icon: "⚖️", title: "法律安全", description: "避免专利冲突。" },
+                { icon: "🏆", title: "独特性", description: "从竞争对手中脱颖而出。" }
             ] : [
                 { icon: "⚖️", title: "Legal Safety", description: "No conflicts." },
                 { icon: "🏆", title: "Uniqueness", description: "Stand out." }
-            ])
+            ]))
         },
         namingStandard: {
             label: "Naming Standart",
