@@ -129,7 +129,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
 
-  // Move hooks to top level to avoid Hook Order errors
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
@@ -176,17 +175,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     { title: dictionary.packaging_design, href: `/${lang}/xizmatlar/qadoq-dizayni`, description: dictionary.packaging_design_desc },
     { title: dictionary.services_and_prices, href: `/${lang}/xizmatlar`, description: dictionary.services_and_prices_desc },
   ];
-  
-  if (!mounted) {
-    return (
-      <header className="fixed top-0 left-0 right-0 z-50 h-20 bg-transparent">
-        <div className="container mx-auto flex h-full items-center justify-between px-4">
-          <Logo />
-          <div className="w-10 h-10 rounded-full bg-secondary/50 animate-pulse" />
-        </div>
-      </header>
-    );
-  }
 
   return (
     <motion.header 
@@ -211,39 +199,41 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           <Logo />
         </Link>
 
-        {mounted && (
-          <NavigationMenu className="hidden lg:flex" aria-label="Asosiy navigatsiya">
-             <NavigationMenuList>
-               <NavigationMenuItem>
-                <NavigationMenuTrigger className={cn("bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
-                  {dictionary.services}
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                    {services.map((component) => (
-                      <ListItem
-                        key={component.title}
-                        title={component.title}
-                        href={component.href}
-                      >
-                        {component.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              {navItems.map((item) => (
-                <NavigationMenuItem key={item.label}>
-                  <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
-                    <Link href={item.href}>
-                      {item.label}
-                    </Link>
-                  </NavigationMenuLink>
+        <div className="hidden lg:flex">
+          {mounted && (
+            <NavigationMenu aria-label="Asosiy navigatsiya">
+               <NavigationMenuList>
+                 <NavigationMenuItem>
+                  <NavigationMenuTrigger className={cn("bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
+                    {dictionary.services}
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                      {services.map((component) => (
+                        <ListItem
+                          key={component.title}
+                          title={component.title}
+                          href={component.href}
+                        >
+                          {component.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
                 </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        )}
+                {navItems.map((item) => (
+                  <NavigationMenuItem key={item.label}>
+                    <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
+                      <Link href={item.href}>
+                        {item.label}
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          )}
+        </div>
 
         <div className="hidden items-center space-x-2 lg:flex">
           <LanguageSwitcher lang={lang as any} />
@@ -274,56 +264,58 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         
         <div className="flex items-center gap-2 lg:hidden">
           <LanguageSwitcher lang={lang as any} />
-          <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn("text-foreground border-border/50", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">{dictionary.open_menu}</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <SheetHeader>
-                  <SheetTitle className="sr-only">Menyu</SheetTitle>
-              </SheetHeader>
-               <ScrollArea className="h-full">
-                <nav className="flex flex-col gap-6 pt-10 pr-6">
-                    <div className="text-xl font-medium text-foreground">{dictionary.services}</div>
-                    <ul className="pl-4 space-y-4">
-                        {services.map((service) => (
-                        <li key={service.title}>
-                            <Link href={service.href} onClick={handleLinkClick} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
-                        </li>
-                        ))}
-                    </ul>
-                    {navItems.map((item) => (
-                    <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={handleLinkClick}
-                        className="text-xl font-medium text-foreground transition-colors hover:text-accent"
-                    >
-                        {item.label}
-                    </Link>
-                    ))}
-                    <div className="border-t pt-6 mt-4 space-y-4">
-                        <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
-                        <Phone size={20} />
-                        +998 33 645 00 97
-                        </a>
-                        <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
-                        <Send size={20} />
-                        {dictionary.contact_by_telegram}
-                        </a>
-                    </div>
-                    <div className="pt-6">
-                        <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 py-6 text-lg">
-                        {dictionary.free_consultation}
-                        </Button>
-                    </div>
-                </nav>
-               </ScrollArea>
-            </SheetContent>
-          </Sheet>
+          {mounted && (
+            <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn("text-foreground border-border/50", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">{dictionary.open_menu}</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <SheetHeader>
+                    <SheetTitle className="sr-only">Menyu</SheetTitle>
+                </SheetHeader>
+                 <ScrollArea className="h-full">
+                  <nav className="flex flex-col gap-6 pt-10 pr-6">
+                      <div className="text-xl font-medium text-foreground">{dictionary.services}</div>
+                      <ul className="pl-4 space-y-4">
+                          {services.map((service) => (
+                          <li key={service.title}>
+                              <Link href={service.href} onClick={handleLinkClick} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
+                          </li>
+                          ))}
+                      </ul>
+                      {navItems.map((item) => (
+                      <Link
+                          key={item.label}
+                          href={item.href}
+                          onClick={handleLinkClick}
+                          className="text-xl font-medium text-foreground transition-colors hover:text-accent"
+                      >
+                          {item.label}
+                      </Link>
+                      ))}
+                      <div className="border-t pt-6 mt-4 space-y-4">
+                          <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
+                          <Phone size={20} />
+                          +998 33 645 00 97
+                          </a>
+                          <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
+                          <Send size={20} />
+                          {dictionary.contact_by_telegram}
+                          </a>
+                      </div>
+                      <div className="pt-6">
+                          <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 py-6 text-lg">
+                          {dictionary.free_consultation}
+                          </Button>
+                      </div>
+                  </nav>
+                 </ScrollArea>
+              </SheetContent>
+            </Sheet>
+          )}
         </div>
       </motion.div>
     </motion.header>

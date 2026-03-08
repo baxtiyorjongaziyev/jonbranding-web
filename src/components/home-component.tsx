@@ -63,7 +63,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
 
     return (
         <div suppressHydrationWarning>
-            {/* Hidden Keywords for SEO - including Ma'no, Mountain, Abba, Minim, RedFox */}
+            {/* Hidden Keywords for SEO */}
             <div className="sr-only">
                 Ma'no Branding, Mountain Branding, Abba Marketing, Minim, RedFox Branding, Branding uz, Logo dizayn Tashkent, Neyming xizmati, Strategik brending.
             </div>
