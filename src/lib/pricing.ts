@@ -116,19 +116,19 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             features: isUz ? [
                 "10 ta nom varianti tayyorlanadi",
-                "Strategik izoh",
-                "Nomning talaffuzi tekshiruvi",
+                "Har bir nom uchun strategik izoh",
+                "Nomning fonetik va talaffuz tahlili",
                 "Domen bo'shligini tekshirish (.uz, .com)",
                 "Social media username tekshiruvi",
-                "O'zbekistonda patent tekshiruvi",
+                "O'zbekiston bazasida patent tekshiruvi",
                 "Raqobatchilar tahlili",
                 "Linguistik tahlil (6 tilda)",
-                "Hissiy ma'no tahlili",
+                "Nomning hissiy ta'siri tahlili",
                 "3 ta shior varianti",
                 "Patentga topshirish xizmati",
                 "Mulkchilik sertifikati",
                 "30 kunlik cheksiz tahrirlar"
-            ] : ["10 concepts", "Strategy", "Phonetics", "Domain check", "Social check", "Patent check", "Competitor analysis", "Linguistics (6 lang)", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Unlimited revisions (30 days)"],
+            ] : ["10 concepts", "Strategy", "Phonetics", "Domain check", "Social check", "Local patent check", "Competitor analysis", "Linguistics (6 lang)", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Unlimited revisions (30 days)"],
             benefits: isUz ? [
                 { icon: "🌍", title: "Global tayyor", description: "Nomingiz dunyo bo'ylab ishlaydi." },
                 { icon: "🔒", title: "To'liq himoya", description: "Patent va sertifikat bilan nomingiz faqat sizniki." }
@@ -154,10 +154,13 @@ export const getServiceDetails = (lang: string = 'uz') => {
             benefits: isUz ? [
                 { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Patent to'qnashuvidan qutulasiz." },
                 { icon: "🏆", title: "Noyoblik", description: "Raqobatchilaringizdan ajralib turasiz." }
+            ] : (isRu ? [
+                { icon: "⚖️", title: "Юр. безопасность", description: "Избежите патентных споров." },
+                { icon: "🏆", title: "Уникальность", description: "Выделитесь среди конкурентов." }
             ] : [
                 { icon: "⚖️", title: "Legal Safety", description: "No conflicts." },
                 { icon: "🏆", title: "Uniqueness", description: "Stand out." }
-            ]
+            ])
         },
         namingStandard: {
             label: "Naming Standart",
@@ -207,18 +210,18 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? [
                 "5 ta logo varianti",
                 "Strategik tahlil",
-                "Brandbook (30-50 bet)",
+                "To'liq Brandbook (30-50 bet)",
                 "Logo animatsiyasi (Motion)",
                 "Telegram stiker paketi (10 ta)",
                 "25 ta aloqa nuqtasi",
                 "Mulkchilik sertifikati",
                 "Patent topshirish xizmati",
-                "Cheksiz tahrirlash imkoniyati (30 kun)",
+                "30 kunlik cheksiz tahrirlar",
                 "Ijtimoiy tarmoqlar uchun dizayn (9 ta shablon)",
                 "Vizitka va korporativ blanklar dizayni",
                 "Bir yillik brending nazorati (support)",
                 "Tashqi reklama dizayni"
-            ] : ["5 concepts", "Strategic analysis", "Brandbook (30-50 pages)", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "Unlimited revisions (30 days)", "9 social templates", "Business cards & letterheads", "1-year support", "Outdoor ads design"],
+            ] : ["5 concepts", "Strategic analysis", "Full Brandbook (30-50 pages)", "Logo animation", "10 stickers", "25 touchpoints", "Ownership cert", "Patent filing", "30 days unlimited revisions", "9 social templates", "Business cards & letterheads", "1-year support", "Outdoor ads design"],
             benefits: isUz ? [
                 { icon: "📖", title: "Qo'llanma", description: "Istalgan dizayner to'g'ri ishlatadi." },
                 { icon: "💎", title: "Sarmoya", description: "Bir marta to'g'ri investitsiya." }

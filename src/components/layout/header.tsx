@@ -129,6 +129,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
 
+  // Move hooks to top level to avoid order issues
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(

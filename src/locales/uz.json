@@ -53,7 +53,7 @@
   },
   "home": {
     "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
-    "cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing. Ma'no, Mountain darajasidagi sifat.",
+    "cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing. Strategik yondashuv va natijaga yo'naltirilgan sifat.",
     "cta1_button": "Mening biznesim uchun ham"
   },
   "hero": {
@@ -64,7 +64,7 @@
       "Mijozlar sizga |oshig' bo'lsin|. Qayta va qayta.",
       "Kichik biznesdan |kuchli brendgacha|. Bir qadamda."
     ],
-    "description": "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span class='font-bold text-foreground'>natijali</span> brend tizimini quramiz. Ma'no, Mountain, Abba darajasidagi premium yondashuv.",
+    "description": "Biz shunchaki logotip chizmaymiz. Biz biznesingiz uchun <span class='font-bold text-foreground'>natijali</span> brend tizimini quramiz. Premium sifatli strategiya va dizayn yechimlari.",
     "buttonTexts": [
       "Brendimni tahlil qiling",
       "Sotuvni oshirishga yordam berish",
@@ -97,7 +97,7 @@
   },
   "whyUs": {
     "title": "Nega aynan bizni tanlashadi?",
-    "subtitle": "Biz shunchaki va'da bermaymiz. Ma'no va Mountain darajasidagi tizimli yondashuv orqali qiymat yaratamiz.",
+    "subtitle": "Biz shunchaki va'da bermaymiz. Tizimli yondashuv orqali biznesingiz uchun haqiqiy qiymat yaratamiz.",
     "values": [
       { "title": "Strategik yondashuv", "description": "Biz shunchaki chiroyli rasm chizmaymiz. Har bir dizayn elementi sotuvlaringizni oshirishga xizmat qiladi." },
       { "title": "Shaffof jarayon", "description": "Brif → Tahlil → Strategiya → Dizayn → Topshirish. Har bir bosqich siz bilan yaqindan ishlaymiz." },
@@ -169,7 +169,7 @@
       "items": [
         { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash.", "solution": "Yechim: 'Biz kimmiz?', 'Kim uchun?' va 'Nega?' degan savollarga javobdan boshlang." },
         { "title": "2. Hamma uchun yoqishga urinish", "description": "Hamma uchun bo'lishga uringan brend hech kimga kerak emas.", "solution": "Yechim: Maqsadli auditoriyani aniq belgilang." },
-        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Nusxa ko'chirish — hech qayerga olib bormaydigan yo'l.", "solution": "Yechim: O'zligingizni topish uchun raqobatchilarni o'rganing." }
+        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Nusxa ko'chirish — hech qayerga olib bormaydigan yo'l.", "solution": "Yechim: O'zligingizni find qilish uchun raqobatchilarni o'rganing." }
       ],
       "result": {
         "bad": { "title": "Tezkor yordam kerak!", "description": "Brendingizda bir qancha zaif nuqtalar bor." },
@@ -245,27 +245,16 @@
         "package": "PAKETLI (-20%)",
         "full": "TO'LIQ (-28%)"
       }
+    },
+    "comparison": {
+      "title": "Biz va Raqobatchilar",
+      "description": "Biz premium agentliklardan ancha hamyonbop narxlarda yuqori sifatli xizmatlarni taqdim etamiz.",
+      "features": "Xususiyatlar",
+      "whyPremiumTitle": "Nega faqat premium agentliklar?",
+      "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Maqsadimiz — arzon bo'lish emas, balki hamyonbop narxda premium sifat berish.",
+      "ctaTitle": "Farqni ko'rdingiz. Endi tanlov vaqti!",
+      "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling.",
+      "ctaButton": "Menga shunday yondashuv kerak"
     }
-  },
-  "namingPage": {
-    "metadata": { "title": "Neyming xizmati | Jon.Branding", "description": "Brendingiz uchun kuchli nom tanlash." },
-    "title": "Neyming — Kuchli brend nomi",
-    "subtitle": "Brend nomi — bu uning birinchi taassuroti.",
-    "process_title": "Biz nomni qanday yaratamiz?",
-    "process_subtitle": "Aniq va samarali jarayon.",
-    "process_steps": [
-      { "title": "Tadqiqot", "description": "Bozor va auditoriyani o'rganish." },
-      { "title": "Konsepsiya", "description": "Yo'nalishlarni belgilash." },
-      { "title": "G'oyalar", "description": "Variantlar yaratish." },
-      { "title": "Tekshiruv", "description": "Huquqiy va raqamli tekshiruv." }
-    ],
-    "check_title": "Tekshiruv ahamiyati",
-    "check_subtitle": "Xavfsiz boshlanish.",
-    "check_points": [
-      { "title": "Huquqiy tozalik", "description": "Patent tekshiruvi." },
-      { "title": "Domenlar", "description": "Bo'shligini tekshirish." },
-      { "title": "Ma'no", "description": "Jarangdorligi." }
-    ],
-    "calculator_cta_button": "Kalkulyatorga o'tish"
   }
 }
