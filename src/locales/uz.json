@@ -169,7 +169,7 @@
       "items": [
         { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash.", "solution": "Yechim: 'Biz kimmiz?', 'Kim uchun?' va 'Nega?' degan savollarga javobdan boshlang." },
         { "title": "2. Hamma uchun yoqishga urinish", "description": "Hamma uchun bo'lishga uringan brend hech kimga kerak emas.", "solution": "Yechim: Maqsadli auditoriyani aniq belgilang." },
-        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Nusxa ko'chirish — hech qayerga olib bormaydigan yo'l.", "solution": "Yechim: O'zligingizni find qilish uchun raqobatchilarni o'rganing." }
+        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Nusxa ko'chirish — hech qayerga olib bormaydigan yo'l.", "solution": "Yechim: O'zligingizni topish uchun raqobatchilarni o'rganing." }
       ],
       "result": {
         "bad": { "title": "Tezkor yordam kerak!", "description": "Brendingizda bir qancha zaif nuqtalar bor." },
@@ -258,5 +258,128 @@
       "ctaDesc": "Sifatli brending uchun ortiqcha to'lash shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling.",
       "ctaButton": "Menga shunday yondashuv kerak"
     }
+  },
+  "namingPage": {
+    "title": "Neyming — Kuchli brend nomi",
+    "subtitle": "Brend nomi — bu birinchi taassurot, energiya va xarakter.",
+    "process_title": "Neyming qanday yaratiladi?",
+    "process_subtitle": "Biz nomni shunchaki chiroyli so'z deb emas, balki strategik qurol deb bilamiz.",
+    "process_steps": [
+      { "title": "Tadqiqot", "description": "Bozor va raqobatchilarni o'rganamiz." },
+      { "title": "Konsepsiya", "description": "Nomning asosiy yo'nalishlarini belgilaymiz." },
+      { "title": "Generatsiya", "description": "Yuzlab variantlarni yaratamiz." },
+      { "title": "Tekshiruv", "description": "Patent va domen tozaligini tekshiramiz." }
+    ],
+    "check_title": "Tekshiruv bosqichlari",
+    "check_subtitle": "Har bir nom quyidagi filtrdan o'tadi:",
+    "check_points": [
+      { "title": "Patent", "description": "O'zbekiston patent bazasidan tekshiruv." },
+      { "title": "Domen", ".uz va .com domenlari bo'shligini tekshirish": "" },
+      { "title": "Ma'no", "Hissiy va madaniy tahlil": "" }
+    ],
+    "calculator_cta_button": "Patent kalkulyatori"
+  },
+  "logoDesignPage": {
+    "title": "Logotip dizayni",
+    "subtitle": "Logotip — bu biznesingizning yuzi va asosiy belgisi.",
+    "values_title": "Yaxshi logotip qanday bo'lishi kerak?",
+    "values": [
+      { "title": "Soddalik", "description": "Oson eslab qolinadigan shakllar." },
+      { "title": "Unikallik", "description": "Raqobatchilardan ajralib turish." },
+      { "title": "Ma'no", "description": "Brend falsafasini aks ettirish." }
+    ],
+    "process_title": "Ishlash tartibi",
+    "process_subtitle": "Har bir logotip chuqur tahlil asosida yaratiladi.",
+    "process_steps": [
+      { "title": "Analiz", "description": "Biznes maqsadlarini o'rganish." },
+      { "title": "Eskizlar", "description": "G'oyalarni qog'ozga tushirish." },
+      { "title": "Dizayn", "description": "Vektorli ko'rinishga keltirish." },
+      { "title": "Taqdimot", "description": "Real misollarda ko'rsatish." }
+    ],
+    "cta_title": "Sizga ham logotip kerakmi?",
+    "cta_description": "Keling, biznesingiz uchun unutilmas belgi yaratamiz.",
+    "cta_button": "Bepul konsultatsiya"
+  },
+  "corporateStylePage": {
+    "title": "Firma uslubi yaratish",
+    "subtitle": "Vizual aydentika — brendingizning yaxlit ko'rinishi.",
+    "section1_title": "Nega firma uslubi muhim?",
+    "section1_p1": "Mijozlar brendni uning ranglari va shakllari orqali taniydi.",
+    "section1_p2": "Yaxlit uslub biznesga bo'lgan ishonchni oshiradi.",
+    "section2_title": "Uslub tizimi",
+    "section2_p1": "Bu nafaqat ranglar, balki umumiy falsafa.",
+    "section2_p2": "Har bir detal brend xarakterini ko'rsatadi.",
+    "section2_p3": "Biznesingizni tartibga soladi.",
+    "process_title": "Jarayon",
+    "process_subtitle": "Tizimli yondashuv orqali aydentika quramiz.",
+    "process_steps": [
+      { "title": "Ranglar", "description": "Brendga mos palitra tanlash." },
+      { "title": "Shriftlar", "description": "Tipografik tizim yaratish." },
+      { "title": "Pattern", "description": "Brend naqshlarini ishlab chiqish." },
+      { "title": "Gid", "description": "Foydalanish bo'yicha qo'llanma." }
+    ]
+  },
+  "brandbookPage": {
+    "title": "Brendbuk yaratish",
+    "subtitle": "Brendingiz uchun rasmiy qoidalar to'plami.",
+    "section1_title": "Brendbuk nima beradi?",
+    "section1_p1": "Dizaynerlar va marketing xodimlari uchun aniq yo'riqnoma.",
+    "section1_p2": "Xatolardan himoya qiladi va vaqtni tejaydi.",
+    "values_title": "Asosiy afzalliklar",
+    "values": [
+      { "title": "Standart", "description": "Hamma joyda bir xil sifat." },
+      { "title": "Tejamkorlik", "description": "Dizayn xarajatlarini kamaytiradi." },
+      { "title": "Nazorat", "description": "Brend imidjini boshqarish oson." }
+    ],
+    "process_title": "Tarkibi",
+    "process_subtitle": "Professional brendbuk nimalarni o'z ichiga oladi?",
+    "process_steps": [
+      { "title": "Platforma", "description": "Missiya va qadriyatlar." },
+      { "title": "Logo", "description": "Foydalanish qoidalari." },
+      { "title": "Uslub", "description": "Ranglar va shriftlar." },
+      { "title": "Amaliyot", "description": "Reklama maketlari namunalari." }
+    ],
+    "cta_title": "Brendingizni tartibga soling",
+    "cta_description": "To'liq brendbuk loyihasi uchun murojaat qiling.",
+    "cta_button": "Buyurtma berish"
+  },
+  "packagingPage": {
+    "title": "Qadoq dizayni",
+    "subtitle": "Mahsulotingizni javonda sotadigan kiyim.",
+    "section1_title": "Sotuvchi qadoq sirlari",
+    "section1_p1": "Qadoq — bu mijoz bilan birinchi jismoniy aloqa.",
+    "section1_p2": "U mahsulot qiymatini va sifatini ko'rsatishi kerak.",
+    "process_title": "Qanday yaratamiz?",
+    "process_subtitle": "Konstruksiya va dizaynning mukammal uyg'unligi.",
+    "process_steps": [
+      { "title": "G'oya", "description": "Kreativ yondashuvni belgilash." },
+      { "title": "Dizayn", "description": "Grafik ko'rinish berish." },
+      { "title": "3D", "description": "Mahsulotni hajmli ko'rish." }
+    ],
+    "cta_title": "Mahsulotingizni jozibador qiling",
+    "cta_description": "Professional qadoq dizayni sotuvlarni oshiradi.",
+    "cta_button": "Konsultatsiya"
+  },
+  "brandStrategyPage": {
+    "title": "Brend strategiyasi",
+    "subtitle": "Biznesingizning kelajakdagi yo'l xaritasi.",
+    "section1_title": "Strategiya nega kerak?",
+    "section1_p1": "Bozordagi o'rningizni aniq belgilash uchun.",
+    "section1_p2": "Maqsadli auditoriya bilan bog'lanish uchun.",
+    "section1_p3": "Raqobatchilardan ustunlik topish.",
+    "section2_title": "Strategik bosqichlar",
+    "section2_p1": "Biznesingizni ichkaridan o'rganamiz.",
+    "section2_p2_bold": "Tahlil:", "Bozor va auditoriya tahlili.": "",
+    "section2_p3_bold": "Platforma:", "Brend qadriyatlarini shakllantirish.": "",
+    "section2_p4": "Kelajakdagi o'sish poydevori.",
+    "process_title": "Jarayon",
+    "process_subtitle": "Ilmiy va tahliliy yondashuv.",
+    "process_steps": [
+      { "title": "Audit", "description": "Mavjud holatni tekshirish." },
+      { "title": "Tahlil", "description": "Raqobatchilar tahlili." },
+      { "title": "Strategiya", "description": "Pozitsiyalash rejasi." },
+      { "title": "Ovoz", "description": "Brend ovozi va ohangi." },
+      { "title": "Amal", "description": "Tatbiq etish rejasi." }
+    ]
   }
 }

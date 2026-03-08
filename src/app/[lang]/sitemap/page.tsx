@@ -24,7 +24,16 @@ const SitemapPage = async (props: Props) => {
         quiz: 'Brending testi',
         portfolio: 'Portfolio',
         process: 'Ishlash tartibi',
-        faq: 'Savol-javoblar'
+        faq: 'Savol-javoblar',
+        naming: 'Neyming',
+        logo_design: 'Logotip dizayni',
+        corporate_style: 'Firma uslubi',
+        brandbook: 'Brendbuk',
+        packaging_design: 'Qadoq dizayni',
+        services_prices: 'Xizmatlar va narxlar',
+        brand_strategy: 'Brend strategiyasi',
+        patent_calculator: 'Patent kalkulyatori',
+        marketplace_cover: 'Sotuvchi kartochka dizayni'
     }
   };
 

@@ -115,7 +115,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.namingVIP,
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             features: isUz ? [
-                "10 ta nom varianti tayyorlanadi",
+                "10 ta nom varianti",
                 "Har bir nom uchun strategik izoh",
                 "Nomning fonetik va talaffuz tahlili",
                 "Domen bo'shligini tekshirish (.uz, .com)",
@@ -128,7 +128,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Patentga topshirish xizmati",
                 "Mulkchilik sertifikati",
                 "30 kunlik cheksiz tahrirlar"
-            ] : ["10 concepts", "Strategy", "Phonetics", "Domain check", "Social check", "Local patent check", "Competitor analysis", "Linguistics (6 lang)", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Unlimited revisions (30 days)"],
+            ] : ["10 concepts", "Strategic explanation", "Phonetics", "Domain check", "Social check", "Local patent check", "Competitor analysis", "Linguistics (6 lang)", "Emotional impact", "3 slogans", "Patent filing", "Certificate", "Unlimited revisions (30 days)"],
             benefits: isUz ? [
                 { icon: "🌍", title: "Global tayyor", description: "Nomingiz dunyo bo'ylab ishlaydi." },
                 { icon: "🔒", title: "To'liq himoya", description: "Patent va sertifikat bilan nomingiz faqat sizniki." }
@@ -154,16 +154,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
             benefits: isUz ? [
                 { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Patent to'qnashuvidan qutulasiz." },
                 { icon: "🏆", title: "Noyoblik", description: "Raqobatchilaringizdan ajralib turasiz." }
-            ] : (isRu ? [
-                { icon: "⚖️", title: "Юр. безопасность", description: "Избежите патентных споров." },
-                { icon: "🏆", title: "Уникальность", description: "Выделитесь среди конкурентов." }
-            ] : (isZh ? [
-                { icon: "⚖️", title: "法律安全", description: "避免专利冲突。" },
-                { icon: "🏆", title: "独特性", description: "从竞争对手中脱颖而出。" }
             ] : [
                 { icon: "⚖️", title: "Legal Safety", description: "No conflicts." },
                 { icon: "🏆", title: "Uniqueness", description: "Stand out." }
-            ]))
+            ]
         },
         namingStandard: {
             label: "Naming Standart",
@@ -278,8 +272,6 @@ export function formatPrice(priceInUSD: number, lang: string = 'uz', currency: '
 
 export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any => {
     const isUz = lang === 'uz';
-    const isRu = lang === 'ru';
-    const isZh = lang === 'zh';
     const { selectedServices, discountType = 'none', promoCode = '' } = selections;
     const sd = getServiceDetails(lang) as any;
     
@@ -368,9 +360,6 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
 
 export const comparisonData = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
     const isUz = lang === 'uz';
-    const isRu = lang === 'ru';
-    const isZh = lang === 'zh';
-
     return [
         { 
             feature: isUz ? "Naming Premium" : "Naming Premium", 
