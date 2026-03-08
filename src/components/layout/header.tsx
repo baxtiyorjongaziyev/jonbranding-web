@@ -125,10 +125,7 @@ const ExpandingButton = ({
 };
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
-
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
@@ -139,6 +136,8 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const borderColor = useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(255,255,255,0.3)']);
   const boxShadow = useTransform(scrollY, [0, 80], ['none', '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)']);
 
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {

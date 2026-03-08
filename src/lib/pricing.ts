@@ -241,7 +241,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             ]
         },
         smm: { 
-            label: isUz ? "Instagram uchun stil" : (isRu ? "Стиль для Instagram" : (isZh ? "社交媒体风格" : "Social Media Style")), 
+            label: isUz ? "Instagram uchun stil" : (isRu ? "Стиль для Instagram" : (isZh ? "社交媒体风格" : "社交媒体风格")), 
             price: basePricesUSD.smm, 
             timeline: isUz ? "⏱ 5-7 ish kuni" : "⏱ 5-7 business days",
             features: isUz ? ["Bio dizayn", "9 ta post shabloni", "Story tizimi"] : ["Bio design", "9 post templates", "Story system"],
