@@ -49,7 +49,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             label: isUz ? "Logo Auditi" : (isRu ? "Аудит логотипа" : (isZh ? "标志审计" : "Logo Audit")),
             price: basePricesUSD.audit,
             timeline: isUz ? "⏱ 2-3 ish kuni" : (isRu ? "⏱ 2-3 рабочих дня" : (isZh ? "⏱ 2-3 个工作日" : "⏱ 2-3 business days")),
-            features: isUz ? ["Logoning texnik tahlili", "Bozorga moslik tekshiruvi", "Kamchiliklar ro'yxati", "Yaxshilash bo'yicha tavsiyalar"] : ["Technical analysis", "Market fit check", "List of weaknesses", "Improvement tips"],
+            features: isUz ? ["Logoning texnik tahlili", "Bozorga moslik tekshiruvi", "Kamchiliklar ro'yxati", "Yaxshilash bo'yicha tavsiyalar"] : (isRu ? ["Технический анализ", "Проверка на соответствие рынку", "Список недостатков", "Рекомендации по улучшению"] : ["Technical analysis", "Market fit check", "List of weaknesses", "Improvement tips"]),
             benefits: isUz ? [
                 { icon: "🔍", title: "Kamchiliklarni bilasiz", description: "Logotipingizdagi barcha xato va kamchiliklar aniqlanadi." },
                 { icon: "💡", title: "Yaxshilash yo'li", description: "Logotipni qanday qilib zamonaviy qilish bo'yicha aniq yo'l xaritasi olasiz." }
