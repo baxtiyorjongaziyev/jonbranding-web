@@ -81,7 +81,7 @@
   },
   "serviceSections": {
     "services": [
-      { "id": "neyming", "title": "Neyming", "description": "Brend uchun unutilmas va strategik nom tanlash.", "buttonText": "Neyming haqida batafsil" },
+      { "id": "neyming", "title": "Neyming", "description": "Brend uchun unutilmas va strategik nom tanlash.", "buttonText": "Neyming xizmati haqida batafsil" },
       { "id": "logo-dizayni", "title": "Logotip Dizayni", "description": "Biznes mohiyatini aks ettiruvchi unikal belgilar yaratish.", "buttonText": "Logotip dizayni haqida batafsil" },
       { "id": "firmenniy-stil", "title": "Firma Uslubi", "description": "Brendni taniladigan qiluvchi yaxlit vizual tizim.", "buttonText": "Firma uslubi haqida batafsil" },
       { "id": "brandbook", "title": "Brendbuk", "description": "Aydentikadan foydalanish qoidalarini belgilovchi qo'llanma.", "buttonText": "Brendbuk haqida batafsil" },
@@ -170,6 +170,13 @@
       "main": "Asosiy bo'limlar",
       "services": "Xizmatlar",
       "blog": "Blog maqolalari"
+    },
+    "links": {
+        "home": "Bosh sahifa",
+        "quiz": "Brending testi",
+        "portfolio": "Portfolio",
+        "process": "Ishlash tartibi",
+        "faq": "Savol-javoblar"
     }
   }
 }

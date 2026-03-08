@@ -63,6 +63,11 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
   const { open, handleOpen, handleClose, handleContentMouseEnter, setOpen } = useHover();
   const pathname = usePathname();
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLanguageChange = (newLocale: Locale) => {
     setLocaleCookie(newLocale);
@@ -82,6 +87,22 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
   }, []);
 
   const CurrentLangIcon = localeIcons[lang];
+
+  if (!mounted) {
+    return (
+      <Button
+        variant="ghost"
+        className={cn(
+            "w-auto justify-start gap-2 font-semibold",
+            scrolled ? "bg-white/20 text-foreground" : "bg-black/5 text-foreground"
+        )}
+      >
+        <UzFlagIcon />
+        <span className="hidden sm:inline">O‘zbekcha</span>
+        <ChevronsUpDown className="ml-1 h-4 w-4 shrink-0 opacity-50" />
+      </Button>
+    );
+  }
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
