@@ -51,6 +51,10 @@
     "back_to_top": "Yuqoriga qaytish",
     "patent_calculator": "Patent kalkulyatori"
   },
+  "cookieConsent": {
+    "message": "Bizning saytimizda mazali 'cookie'lar bor. Ular bizga sizni eslab qolishga yordam beradi. Agar roziligingizni bersangiz, ularni birga baham ko'ramiz.",
+    "acceptButton": "Men ularni yeyman"
+  },
   "home": {
     "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
     "cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing. Strategik yondashuv va natijaga yo'naltirilgan sifat.",
@@ -126,7 +130,7 @@
   },
   "founder": {
     "title": "Asoschi: Baxtiyorjon Gaziyev",
-    "message": "Assalomu alaykum! Men Baxtiyorjonman, Jon.Branding asoschisi. Men biznes egalariga o'z brendlarini yangi bosqichga olib chiqishga yordam beraman. Maqsadim shunchaki chiroyli dizayn emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan natijali brend tizimini qurishdir. Keling, brendingizni birga tahlil qilib, uning 'uxlab yotgan' potentsialini uyg'otamiz.",
+    "message": "Assalomu alaykum! Men Baxtiyorjonman, Jon.Branding asoschisi. Men biznes egalariga o'z brendlarini yeni bosqichga olib chiqishga yordam beraman. Maqsadim shunchaki chiroyli dizayn emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan natijali brend tizimini qurishdir. Keling, brendingizni birga tahlil qilib, uning 'uxlab yotgan' potentsialini uyg'otamiz.",
     "points": [
       { "icon": "Medal", "text": "1000 dan ortiq loyihalar" },
       { "icon": "Globe", "text": "Xalqaro tajriba" },
@@ -259,6 +263,106 @@
       "ctaButton": "Menga shunday yondashuv kerak"
     }
   },
+  "servicesHero": {
+    "title": "Brendingizni kuchaytiradigan xizmatlar",
+    "subtitle": "Kafolatlangan natija va biznesingiz uchun aniq yechim",
+    "cta": "Narxlarni ko'rish"
+  },
+  "serviceSections": {
+    "services": [
+      {
+        "id": "neyming",
+        "title": "Neyming",
+        "description": "Brend uchun unutilmas va kuchli nom tanlash.",
+        "buttonText": "Batafsil ma'lumot"
+      },
+      {
+        "id": "logo-dizayni",
+        "title": "Logotip Dizayni",
+        "description": "Biznesingiz mohiyatini aks ettiruvchi noyob belgi yaratish.",
+        "buttonText": "Batafsil ma'lumot"
+      },
+      {
+        "id": "firmenniy-stil",
+        "title": "Firma Uslubi",
+        "description": "Brendingizni taniladigan qiluvchi logotip, ranglar va shriftlar tizimi.",
+        "buttonText": "Batafsil ma'lumot"
+      },
+      {
+        "id": "brandbook",
+        "title": "Brendbuk",
+        "description": "Brendingiz aydentikasidan foydalanish qoidalarini belgilovchi hujjat.",
+        "buttonText": "Batafsil ma'lumot"
+      },
+      {
+        "id": "qadoq-dizayni",
+        "title": "Qadoq Dizayni",
+        "description": "Mahsulotingizni javonda ajralib turadigan qiluvchi jozibali dizayn.",
+        "buttonText": "Batafsil ma'lumot"
+      }
+    ]
+  },
+  "personalOfferBlock": {
+    "title": "💎 MENING TAKLIFIM:",
+    "subtitle": "Siz nimalarga ega bo'lasiz:",
+    "ctaButton": "Menga shu kerak",
+    "sections": [
+      { "title": "1️⃣ STRATEGIYA", "points": ["Brendni pozitsiyalash va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Noyob sotuv taklifi (USP)"] },
+      { "title": "2️⃣ AYDENTIKA", "points": ["Professional logotip (3-5 xil variant)", "Korporativ ranglar palitrasi", "Tipografika va uslub bo'yicha qo'llanma"] },
+      { "title": "3️⃣ HUJJATLASHTIRISH", "points": ["To'liq Brandbook (30-50 bet)", "Barcha formatdagi fayllar (AI, PNG, PDF, SVG)", "Gid: logotipdan qanday foydalanish"] },
+      { "title": "4️⃣ HUQUQIY HIMOYA", "points": ["Neyming bo'yicha konsultatsiya", "Patent va Tovar belgisini ro'yxatdan o'tkazish jarayoni", "Intellektual mulkni himoya qilish strategiyasi"] },
+      { "title": "5️⃣ QO'LLAB-QUVVATLASH", "points": ["3 oy davomida bepul tahrirlar", "Telegram orqali doimiy aloqa", "Brendni qo'llash bo'yicha maslahatlar"] }
+    ]
+  },
+  "urgencyBlock": {
+    "title": "🔥 USHBU SAHIFANI YOPISHDAN OLDIN...",
+    "subtitle": "Tasavvur qiling:",
+    "line1": "Ertaga raqobatchingiz professional brend bilan bozorga chiqdi. Logotip — dahshat. Qadoq — do'konda birinchi bo'lib ko'zga tashlanadi.",
+    "line2": "Mijozlar sizdan emas, BALKI ULARDAN sotib olishmoqda.",
+    "line3": "Sababi oddiy: Ular sarmoya kiritishdi. Siz esa... o'yladingiz."
+  },
+  "queueStatus": {
+    "subtitle": "Joylar cheklangan",
+    "title": "Shoshiling! O'z joyingizni band qiling!",
+    "description": "Biz yuqori sifatni ta'minlash uchun har bir loyihaga vaqt ajratamiz. Shuning uchun bir vaqtning o'zida faqat cheklangan miqdordagi loyihalar bilan ishlaymiz.",
+    "queueTitle": "Loyihalar navbati",
+    "booked": "Band",
+    "available": "Bo'sh",
+    "tooltipBooked": "Joy band qilingan",
+    "tooltipAvailable": "Navbatga yozilishingiz mumkin",
+    "remainingSlots": "Qolgan bo'sh joylar",
+    "slotsUnit": "ta",
+    "onlineNow": "Hozir saytda",
+    "peopleUnit": "kishi",
+    "nextProjectStart": "Keyingi loyiha boshlanishi",
+    "ctaButton": "Joyimni band qilish",
+    "ctaSubtitle": "Raqobatchilaringizdan bir qadam oldinda bo'ling!",
+    "timeframes": {
+      "2 weeks": "2 hafta ichida"
+    }
+  },
+  "pickTwoSelector": {
+    "title": "Uchtadan ikkitasini tanlang",
+    "subtitle": "Narx—Sifat—Tezlik: uchtasiga bir vaqtda erishish qiyin.",
+    "ctaText": "Taklif so'rash",
+    "options": {
+      "cheap": "Arzon",
+      "quality": "Sifatli",
+      "fast": "Tez"
+    },
+    "messages": {
+      "cheap_fast": "Sifat barqaror bo'lmasligi mumkin. Bu variant shoshilinch va kam byudjetli loyihalar uchun mos keladi.",
+      "cheap_quality": "Natijani uzoqroq kutishga to'g'ri keladi. Biz sizning byudjetingizga moslashamiz va sifatni ta'minlash uchun navbat asosida ishlaymiz.",
+      "quality_fast": "Narxi balandroq bo'ladi. Shoshilinch loyihalar (2-3 kun) uchun standart narxga +50% ustama qo'shiladi. Biz jamoani safarbar qilamiz va sizning muddatigizga ustuvorlik beramiz.",
+      "default": "Iltimos, siz uchun eng muhim bo'lgan 2 ta ustuvorlikni tanlang."
+    },
+    "tooltip": "Avval bittasini bekor qiling"
+  },
+  "exitIntentModal": {
+    "title": "Hali ketmang!",
+    "description": "Bizda siz uchun maxsus taklif bor. <br/>Bizda <span class='font-bold text-primary'>turli xil chegirmalar</span> mavjud. Imkoniyatdan foydanaling!",
+    "button": "Chegirmalarni ko'rish"
+  },
   "namingPage": {
     "title": "Neyming — Kuchli brend nomi",
     "subtitle": "Brend nomi — bu birinchi taassurot, energiya va xarakter.",
@@ -306,10 +410,6 @@
     "section1_title": "Nega firma uslubi muhim?",
     "section1_p1": "Mijozlar brendni uning ranglari va shakllari orqali taniydi.",
     "section1_p2": "Yaxlit uslub biznesga bo'lgan ishonchni oshiradi.",
-    "section2_title": "Uslub tizimi",
-    "section2_p1": "Bu nafaqat ranglar, balki umumiy falsafa.",
-    "section2_p2": "Har bir detal brend xarakterini ko'rsatadi.",
-    "section2_p3": "Biznesingizni tartibga soladi.",
     "process_title": "Jarayon",
     "process_subtitle": "Tizimli yondashuv orqali aydentika quramiz.",
     "process_steps": [
@@ -359,6 +459,37 @@
     "cta_title": "Mahsulotingizni jozibador qiling",
     "cta_description": "Professional qadoq dizayni sotuvlarni oshiradi.",
     "cta_button": "Konsultatsiya"
+  },
+  "popularPackages": {
+    "title": "Eng ommabop paketlar",
+    "packageTitle": "Neyming + Logotip (Premium)",
+    "packageSubtitle": "Kuchli brendni boshlash uchun mukammal kombinatsiya.",
+    "features": [
+      "Brendingiz uchun mukammal nom (6 tilda tekshiruv)",
+      "Professional logotip (5 ta konsepsiya)",
+      "To'liq firma uslubi (ranglar, shriftlar)",
+      "15+ ta real maketlarda namoyish",
+      "Patent auditi va konsultatsiya",
+      "10 ta brendli stikerlar"
+    ],
+    "separate": "Alohida olganda",
+    "packagePrice": "Paket narxi",
+    "packageDiscount": "(-20% chegirma!)",
+    "upfrontDiscount": "100% oldindan to'lov bilan (jami -28%!)",
+    "ctaButton": "Ushbu paketni tanlash"
+  },
+  "featuredCaseStudy": {
+    "title": "Nega ba'zi brendlar qimmat sota oladi, sizniki esa yo'q?",
+    "description": "Javob oddiy: ular shunchaki mahsulot sotmaydi, ular <strong>tajriba, obro' va ishonch</strong> sotadi. Bularning barchasi kuchli brending orqali yaratiladi.",
+    "case_desc": "'Den Aroma' misolida biz oddiy atir do'konini premium boutique'ga aylantirdik. Natijada ular endi yuqori narxda sota oladi, 'qimmat' degan e'tirozlarsiz.",
+    "buttonText": "Batafsil ma'lumot",
+    "videoUrl": "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
+    "ctaButton": "Mening brendim uchun ham",
+    "results": [
+      "O'rtacha chekning 60% ga oshishi",
+      "“Qimmat” e'tirozlarining keskin kamayishi",
+      "Mijozlar ishonchining ortishi"
+    ]
   },
   "brandStrategyPage": {
     "title": "Brend strategiyasi",
