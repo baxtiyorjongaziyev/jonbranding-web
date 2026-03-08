@@ -366,6 +366,9 @@
   "namingPage": {
     "title": "Neyming — Kuchli brend nomi",
     "subtitle": "Brend nomi — bu birinchi taassurot, energiya va xarakter.",
+    "section1_title": "Neyming — bu faqat chiroyli jarang emas",
+    "section1_p1": "Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va biznesingizning bozordagi o'rnini belgilaydi.",
+    "section1_p2": "Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz.",
     "process_title": "Neyming qanday yaratiladi?",
     "process_subtitle": "Biz nomni shunchaki chiroyli so'z deb emas, balki strategik qurol deb bilamiz.",
     "process_steps": [
@@ -386,6 +389,9 @@
   "logoDesignPage": {
     "title": "Logotip dizayni",
     "subtitle": "Logotip — bu biznesingizning yuzi va asosiy belgisi.",
+    "section1_title": "Nega logotip shunchalik muhim?",
+    "section1_p1": "Bugungi raqobatbardosh bozorda logotip mijozning ko'ziga tashlanadigan birinchi narsadir. Yaxshi logotip nafaqat chiroyli dizayn, balki biznesingiz qadriyatlarini yetkazuvchi ramzdir.",
+    "section1_p2": "Bu mijozlar sizni tanib olishi va eslab qolishiga yordam beruvchi asosiy element. Professional logotip ishonch uyg'otadi va hissiy aloqa o'rnatadi.",
     "values_title": "Yaxshi logotip qanday bo'lishi kerak?",
     "values": [
       { "title": "Soddalik", "description": "Oson eslab qolinadigan shakllar." },
@@ -407,9 +413,13 @@
   "corporateStylePage": {
     "title": "Firma uslubi yaratish",
     "subtitle": "Vizual aydentika — brendingizning yaxlit ko'rinishi.",
-    "section1_title": "Nega firma uslubi muhim?",
-    "section1_p1": "Mijozlar brendni uning ranglari va shakllari orqali taniydi.",
-    "section1_p2": "Yaxlit uslub biznesga bo'lgan ishonchni oshiradi.",
+    "section1_title": "Brend idroki rasmdan boshlanadi",
+    "section1_p1": "Bugungi dunyoda vizual ma'lumot matnga qaraganda tezroq qabul qilinadi. Biz lahzali taassurotlar davrida yashayapmiz.",
+    "section1_p2": "G'oyani auditoriya ongiga singdirish uchun uni vizual elementlar bilan mustahkamlash kerak. Puxta o'ylangan aydentika qadriyatlaringizni tushuntirishsiz yetkazadi.",
+    "section2_title": "Firma uslubi — bu tizim",
+    "section2_p1": "Bu nafaqat go'zallik, balki samaradorlik va nazorat haqida. Brend izchil bo'lishi uchun sizga grafik elementlar to'plami kerak.",
+    "section2_p2": "Bu to'plam har doim biznesingizga moslashtiriladi. Minimal to'plamga logotip, ranglar, shriftlar va boshqa elementlar kiradi.",
+    "section2_p3": "Vizual uslub aniq qurilgan bo'lsa, u brend imidji va kommunikatsiyasini boshqarish uchun kuchli vositaga aylanadi.",
     "process_title": "Jarayon",
     "process_subtitle": "Tizimli yondashuv orqali aydentika quramiz.",
     "process_steps": [
@@ -422,9 +432,9 @@
   "brandbookPage": {
     "title": "Brendbuk yaratish",
     "subtitle": "Brendingiz uchun rasmiy qoidalar to'plami.",
-    "section1_title": "Brendbuk nima beradi?",
-    "section1_p1": "Dizaynerlar va marketing xodimlari uchun aniq yo'riqnoma.",
-    "section1_p2": "Xatolardan himoya qiladi va vaqtni tejaydi.",
+    "section1_title": "Nega har bir biznesga brendbuk kerak?",
+    "section1_p1": "Brendbuk — brendni boshqarish uchun asosiy vositadir. U kompaniyangizning barcha vizual va g'oyaviy elementlaridan foydalanish qoidalarini belgilaydi.",
+    "section1_p2": "Bu hujjat marketingdagi xaotik holatlardan qochishga, brend tanilishini ta'minlashga va dizaynerlar bilan ishlashda vaqtni tejashga yordam beradi.",
     "values_title": "Asosiy afzalliklar",
     "values": [
       { "title": "Standart", "description": "Hamma joyda bir xil sifat." },
@@ -446,9 +456,9 @@
   "packagingPage": {
     "title": "Qadoq dizayni",
     "subtitle": "Mahsulotingizni javonda sotadigan kiyim.",
-    "section1_title": "Sotuvchi qadoq sirlari",
-    "section1_p1": "Qadoq — bu mijoz bilan birinchi jismoniy aloqa.",
-    "section1_p2": "U mahsulot qiymatini va sifatini ko'rsatishi kerak.",
+    "section1_title": "Qadoq — brend identifikatsiyasidan ko'ra ko'proq narsa",
+    "section1_p1": "Qadoq — bu sotuv nuqtasida brend bilan birinchi aloqa, lahzali taassurot yaratuvchi vizual murojaatdir.",
+    "section1_p2": "Bizning maqsadimiz — nafaqat estetik, balki biznes vazifalariga javob beradigan va o'sishga xizmat qiladigan samarali vosita yaratishdir.",
     "process_title": "Qanday yaratamiz?",
     "process_subtitle": "Konstruksiya va dizaynning mukammal uyg'unligi.",
     "process_steps": [
@@ -460,51 +470,20 @@
     "cta_description": "Professional qadoq dizayni sotuvlarni oshiradi.",
     "cta_button": "Konsultatsiya"
   },
-  "popularPackages": {
-    "title": "Eng ommabop paketlar",
-    "packageTitle": "Neyming + Logotip (Premium)",
-    "packageSubtitle": "Kuchli brendni boshlash uchun mukammal kombinatsiya.",
-    "features": [
-      "Brendingiz uchun mukammal nom (6 tilda tekshiruv)",
-      "Professional logotip (5 ta konsepsiya)",
-      "To'liq firma uslubi (ranglar, shriftlar)",
-      "15+ ta real maketlarda namoyish",
-      "Patent auditi va konsultatsiya",
-      "10 ta brendli stikerlar"
-    ],
-    "separate": "Alohida olganda",
-    "packagePrice": "Paket narxi",
-    "packageDiscount": "(-20% chegirma!)",
-    "upfrontDiscount": "100% oldindan to'lov bilan (jami -28%!)",
-    "ctaButton": "Ushbu paketni tanlash"
-  },
-  "featuredCaseStudy": {
-    "title": "Nega ba'zi brendlar qimmat sota oladi, sizniki esa yo'q?",
-    "description": "Javob oddiy: ular shunchaki mahsulot sotmaydi, ular <strong>tajriba, obro' va ishonch</strong> sotadi. Bularning barchasi kuchli brending orqali yaratiladi.",
-    "case_desc": "'Den Aroma' misolida biz oddiy atir do'konini premium boutique'ga aylantirdik. Natijada ular endi yuqori narxda sota oladi, 'qimmat' degan e'tirozlarsiz.",
-    "buttonText": "Batafsil ma'lumot",
-    "videoUrl": "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
-    "ctaButton": "Mening brendim uchun ham",
-    "results": [
-      "O'rtacha chekning 60% ga oshishi",
-      "“Qimmat” e'tirozlarining keskin kamayishi",
-      "Mijozlar ishonchining ortishi"
-    ]
-  },
   "brandStrategyPage": {
     "title": "Brend strategiyasi",
     "subtitle": "Biznesingizning kelajakdagi yo'l xaritasi.",
-    "section1_title": "Strategiya nega kerak?",
-    "section1_p1": "Bozordagi o'rningizni aniq belgilash uchun.",
-    "section1_p2": "Maqsadli auditoriya bilan bog'lanish uchun.",
-    "section1_p3": "Raqobatchilardan ustunlik topish.",
-    "section2_title": "Strategik bosqichlar",
-    "section2_p1": "Biznesingizni ichkaridan o'rganamiz.",
-    "section2_p2_bold": "Tahlil:",
-    "section2_p2_text": "Bozor va auditoriya tahlili.",
-    "section2_p3_bold": "Platforma:",
-    "section2_p3_text": "Brend qadriyatlarini shakllantirish.",
-    "section2_p4": "Kelajakdagi o'sish poydevori.",
+    "section1_title": "Brend strategiyasi — biznes o'sishi uchun vosita",
+    "section1_p1": "Har bir ambitsiyali kompaniyaning o'z maqsadlari bor. Strategiya esa ushbu maqsadlarga erishishda ko'prik bo'lib xizmat qiladi.",
+    "section1_p2": "U sizning brendingizni shunchaki tovar yoki xizmatdan ko'ra ko'proq narsaga — taniladigan obrazga aylantiradi.",
+    "section1_p3": "Strategiya marketing xarajatlarini tizimlashtiradi va samarasiz vositalardan voz kechishga yordam beradi.",
+    "section2_title": "Strategiya har qanday biznesga zarur",
+    "section2_p1": "U ham startaplar, ham uzoq vaqtdan beri faoliyat yuritayotgan kompaniyalar uchun birdek zarurdir.",
+    "section2_p2_bold": "Startaplar uchun:",
+    "section2_p2_text": "U missiya, qadriyatlar va identifikatsiyani boshidanoq to'g'ri belgilashga yordam beradi.",
+    "section2_p3_bold": "Yirik kompaniyalar uchun:",
+    "section2_p3_text": "Bu o'sish va obro'ni boshqarish vositasi bo'lib, bozor o'zgarishlariga moslashishga yordam beradi.",
+    "section2_p4": "Strategiya asosiy savolga javob beradi: nega mijoz aynan sizni tanlashi kerak?",
     "process_title": "Jarayon",
     "process_subtitle": "Ilmiy va tahliliy yondashuv.",
     "process_steps": [
