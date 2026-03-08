@@ -136,8 +136,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     [0, 80],
     ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.2)']
   );
-  
-  // Fixing Hook Order: Move all hooks to top level
   const borderColor = useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(255,255,255,0.3)']);
   const boxShadow = useTransform(scrollY, [0, 80], ['none', '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)']);
 
