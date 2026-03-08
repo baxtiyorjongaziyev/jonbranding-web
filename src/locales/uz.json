@@ -274,8 +274,8 @@
     "check_subtitle": "Har bir nom quyidagi filtrdan o'tadi:",
     "check_points": [
       { "title": "Patent", "description": "O'zbekiston patent bazasidan tekshiruv." },
-      { "title": "Domen", ".uz va .com domenlari bo'shligini tekshirish": "" },
-      { "title": "Ma'no", "Hissiy va madaniy tahlil": "" }
+      { "title": "Domen", "description": ".uz va .com domenlari bo'shligini tekshirish" },
+      { "title": "Ma'no", "description": "Hissiy va madaniy tahlil" }
     ],
     "calculator_cta_button": "Patent kalkulyatori"
   },
@@ -369,8 +369,10 @@
     "section1_p3": "Raqobatchilardan ustunlik topish.",
     "section2_title": "Strategik bosqichlar",
     "section2_p1": "Biznesingizni ichkaridan o'rganamiz.",
-    "section2_p2_bold": "Tahlil:", "Bozor va auditoriya tahlili.": "",
-    "section2_p3_bold": "Platforma:", "Brend qadriyatlarini shakllantirish.": "",
+    "section2_p2_bold": "Tahlil:",
+    "section2_p2_text": "Bozor va auditoriya tahlili.",
+    "section2_p3_bold": "Platforma:",
+    "section2_p3_text": "Brend qadriyatlarini shakllantirish.",
     "section2_p4": "Kelajakdagi o'sish poydevori.",
     "process_title": "Jarayon",
     "process_subtitle": "Ilmiy va tahliliy yondashuv.",
