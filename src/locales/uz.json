@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -96,20 +97,21 @@
   "faq": {
     "title": "Ko'p beriladigan savollar",
     "subtitle": "Brending jarayoni, narxlar va xizmatlar haqida tezkor javoblar.",
+    "ctaTitle": "Savollaringiz qoldimi?",
+    "ctaDesc": "Biz doimo yordamga tayyormiz. Bepul konsultatsiya uchun ariza qoldiring.",
+    "ctaButton": "Menga aynan shu kerak",
     "faqItems": [
-      { "question": "Why are prices not fixed?", "answer": "Each project is unique. The price is calculated individually depending on the project goals, volume of work, and your business targets. We offer an optimal solution for your budget." },
-      { "question": "How is the work process structured?", "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is coordinated with you, and you have full control over the process." },
-      { "question": "Can I order only a logo?", "answer": "We create not just a logo, but a full identification system. Therefore, we recommend the 'Logo + Corporate Identity' package, as a single logo cannot fully convey the brand's value." },
-      { "question": "What are the payment terms?", "answer": "Standard scheme — 50% upfront payment, 50% after project delivery. Special discounts apply for 100% upfront payment." },
-      { "question": "Are there any guarantees?", "answer": "Yes, we have a '100% Satisfaction Guarantee'. If you absolutely don't like the initial concepts, we are ready to refund your payment. Your result is our priority." }
-    ],
-    "ctaTitle": "Don't leave room for doubt!",
-    "ctaDesc": "Got answers to all your questions? Let's discuss your project and take your brand to a new level.",
-    "ctaButton": "I've got all the answers, ready to start!"
+      { "question": "Nega narxlar aniq emas?", "answer": "Har bir loyiha unikal. Narx proyektning murakkabligi, muddatlari va sizning biznes maqsadlaringizdan kelib chiqib hisoblanadi." },
+      { "question": "Logotip necha kunda tayyor bo'ladi?", "answer": "Logotip tayyorlash o'rtacha 5-10 ish kuni vaqt oladi. Bu muddat tanlangan tarifga bog'liq." },
+      { "question": "Kafolat bormi?", "answer": "Ha, bizda '100% Mamnuniyat Kafolati' mavjud. Agar dizayn yoqmasa, pulingizni qaytarib beramiz." }
+    ]
   },
   "process": {
     "title": "Biz qanday ishlaymiz?",
     "subtitle": "Har bir loyihada biz sinovdan o'tgan, shaffof va samarali 6 bosqichli jarayonni qo'llaymiz.",
+    "ctaTitle": "Loyihangizni boshlashga tayyormisiz?",
+    "ctaDesc": "Keling, g'oyalaringizni birgalikda hayotga tatbiq etishni boshlaymiz.",
+    "ctaButton": "Loyihani muhokama qilish",
     "phases": [
       { "phase": "01", "title": "Tadqiqot (Discovery)", "description": "Loyiha boshlanishi va poydevor qo'yish.", "tasks": ["Brifing", "Biznes muammolari", "Bozor tahlili", "G'oyalar to'plash"] },
       { "phase": "02", "title": "Strategiya (Strategy)", "description": "Brendning yo'l xaritasini belgilash.", "tasks": ["Pozitsiyalash", "Brend platformasi", "Asosiy tamoyillar", "Rejalashtirish"] },
@@ -117,10 +119,7 @@
       { "phase": "04", "title": "Taqdimot (Presentation)", "description": "G'oyalarni hayotiy misollarda ko'rsatish.", "tasks": ["Dizayn taqdimoti", "Fidbek asosida tahrirlar", "Mockup namoyishi"] },
       { "phase": "05", "title": "Amalga oshirish (Implementation)", "description": "Brendni hayotga tatbiq etish.", "tasks": ["Tayyor dizayn fayllari", "Vizual qo'llanmalar", "Chop etishga tayyorlash"] },
       { "phase": "06", "title": "O'sish (Growth)", "description": "Brendni rivojlantirishda yordam.", "tasks": ["Doimiy qo'llab-quvvatlash", "Keyingi qadamlar maslahati"] }
-    ],
-    "ctaTitle": "Loyihangizni boshlashga tayyormisiz?",
-    "ctaDesc": "Keling, g'oyalaringizni birgalikda hayotga tatbiq etishni boshlaymiz.",
-    "ctaButton": "Loyihani muhokama qilish"
+    ]
   },
   "sitemapPage": {
     "title": "Sayt xaritasi",

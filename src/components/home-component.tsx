@@ -100,5 +100,3 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
 };
 
 export default HomeComponent;
-
-    

@@ -1,3 +1,4 @@
+
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -13,8 +14,6 @@ const SitemapPage = async (props: Props) => {
   const dictionary = await getDictionary(lang as Locale);
   
   const t = dictionary.sitemapPage || {
-    title: 'Sayt xaritasi',
-    subtitle: 'Barcha sahifalar haqida umumiy ma\'lumot.',
     sections: {
         main: 'Asosiy bo\'limlar',
         services: 'Xizmatlar',
@@ -25,16 +24,7 @@ const SitemapPage = async (props: Props) => {
         quiz: 'Brending testi',
         portfolio: 'Portfolio',
         process: 'Ishlash tartibi',
-        faq: 'Savol-javoblar',
-        naming: 'Neyming',
-        logo_design: 'Logotip dizayni',
-        corporate_style: 'Firma uslubi',
-        brandbook: 'Brendbuk',
-        packaging_design: 'Qadoq dizayni',
-        services_prices: 'Xizmatlar va narxlar',
-        brand_strategy: 'Brend strategiyasi',
-        patent_calculator: 'Patent kalkulyatori',
-        marketplace_cover: 'Sotuvchi kartochka dizayni'
+        faq: 'Savol-javoblar'
     }
   };
 
@@ -78,10 +68,10 @@ const SitemapPage = async (props: Props) => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
-              {t.title}
+              {t.title || 'Sayt xaritasi'}
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
-              {t.subtitle}
+              {t.subtitle || 'Barcha sahifalar haqida umumiy ma\'lumot.'}
             </p>
           </div>
 
