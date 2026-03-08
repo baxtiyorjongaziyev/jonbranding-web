@@ -146,8 +146,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 20–25 ish kuni" : (isRu ? "⏱ 20–25 рабочих дней" : (isZh ? "⏱ 20–25 个工作日" : "⏱ 20–25 business days")),
             features: isUz ? [
                 "10 ta nom varianti tayyorlanadi",
-                "Har bir nom uchun strategik izoh",
-                "Nomning talaffuzi va esda qolishi tekshiruvi",
+                "Strategik izoh",
+                "Nomning talaffuzi tekshiruvi",
                 "Domen bo'shligini tekshirish (.uz, .com)",
                 "Social media username tekshiruvi",
                 "O'zbekistonda patent tekshiruvi",
@@ -157,7 +157,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "3 ta shior varianti",
                 "Patentga topshirish xizmati",
                 "Mulkchilik sertifikati",
-                "Cheksiz tahrirlash imkoniyati (30 kun)"
+                "30 kunlik cheksiz tahrirlar"
             ] : (isRu ? [
                 "10 вариантов названий", "Стратегическое обоснование", "Проверка произношения", "Проверка доменов", "Проверка соцсетей", "Патентная проверка", "Анализ конкурентов", "Лингвистический анализ (6 языков)", "Анализ эмоций", "3 варианта слоганов", "Подача на патент", "Сертификат владения", "Безлимитные правки (30 дней)"
             ] : (isZh ? [
@@ -285,7 +285,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Ijtimoiy tarmoqlar uchun dizayn (9 ta shablon)",
                 "Vizitka va korporativ blanklar dizayni",
                 "Bir yillik brending nazorati (support)",
-                "Tashqi reklama (banner) dizayni"
+                "Tashqi reklama dizayni"
             ] : (isRu ? [
                 "5 вариантов логотипа", "Стратегический анализ", "Брендбук (30-50 стр)", "Анимация логотипа", "10 стикеров", "25 точек контакта", "Сертификат владения", "Подача на патент", "Безлимитные правки (30 дней)", "9 шаблонов для соцсетей", "Дизайн визиток и бланков", "Годовая поддержка", "Дизайн наружной рекламы"
             ] : (isZh ? [
@@ -510,3 +510,5 @@ export const generateSummary = (selections: any, lang: string = 'uz'): string =>
     
     return summary;
 };
+
+    
