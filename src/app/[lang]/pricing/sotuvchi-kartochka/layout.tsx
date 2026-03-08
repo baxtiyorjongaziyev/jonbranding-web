@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 
@@ -42,7 +41,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     metadataBase: new URL('https://jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords: ["sotuvchi rasm", "uzum kartochka dizayn", "wildberries dizayn", "marketpleyslar uchun dizayn", "branding uz", "logo", "neyming", "Ma'no", "Abba", "Mountain"],
+    keywords: ["sotuvchi rasm", "uzum kartochka dizayn", "wildberries dizayn", "marketpleyslar uchun dizayn", "branding uz", "logo", "neyming", "Ma'no", "Abba", "Mountain", "Minim", "Redfox"],
     openGraph: {
       title: t.title,
       description: t.description,

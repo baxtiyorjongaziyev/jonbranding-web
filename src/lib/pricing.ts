@@ -1,4 +1,3 @@
-
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -510,5 +509,3 @@ export const generateSummary = (selections: any, lang: string = 'uz'): string =>
     
     return summary;
 };
-
-    

@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -9,8 +8,9 @@ type Props = {
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { lang } = await props.params;
-  const dict = await getDictionary(lang as Locale);
+  const { lang: rawLang } = await props.params;
+  const lang = rawLang as Locale;
+  const dict = await getDictionary(lang);
   const t = dict.namingPage?.metadata || { 
     title: "Naming Services", 
     description: "Professional naming for your brand",
