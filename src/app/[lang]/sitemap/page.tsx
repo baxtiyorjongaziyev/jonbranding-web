@@ -1,4 +1,3 @@
-
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -79,10 +78,10 @@ const SitemapPage = async (props: Props) => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
-              {t.title || 'Sayt xaritasi'}
+              {t.title}
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
-              {t.subtitle || 'Barcha sahifalar haqida umumiy ma\'lumot.'}
+              {t.subtitle}
             </p>
           </div>
 

@@ -1,4 +1,3 @@
-
 import HomeComponent from '@/components/home-component';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
@@ -13,5 +12,3 @@ const Page = async (props: Props) => {
 };
 
 export default Page;
-
-    
