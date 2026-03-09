@@ -130,7 +130,7 @@
   },
   "founder": {
     "title": "Asoschi: Baxtiyorjon Gaziyev",
-    "message": "Assalomu alaykum! Men Baxtiyorjonman, Jon.Branding asoschisi. Men biznes egalariga o'z brendlarini yeni bosqichga olib chiqishga yordam beraman. Maqsadim shunchaki chiroyli dizayn emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan natijali brend tizimini qurishdir. Keling, brendingizni birga tahlil qilib, uning 'uxlab yotgan' potentsialini uyg'otamiz.",
+    "message": "Assalomu alaykum! Men Baxtiyorjonman, Jon.Branding asoschisi. Men biznes egalariga o'z brendlarini yangi bosqichga olib chiqishga yordam beraman. Maqsadim shunchaki chiroyli dizayn emas, balki biznesingiz uchun ishlaydigan, strategiyaga asoslangan natijali brend tizimini qurishdir. Keling, brendingizni birga tahlil qilib, uning 'uxlab yotgan' potentsialini uyg'otamiz.",
     "points": [
       { "icon": "Medal", "text": "1000 dan ortiq loyihalar" },
       { "icon": "Globe", "text": "Xalqaro tajriba" },
@@ -173,7 +173,11 @@
       "items": [
         { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — dizaynni aniq strategiyasiz boshlash.", "solution": "Yechim: 'Biz kimmiz?', 'Kim uchun?' va 'Nega?' degan savollarga javobdan boshlang." },
         { "title": "2. Hamma uchun yoqishga urinish", "description": "Hamma uchun bo'lishga uringan brend hech kimga kerak emas.", "solution": "Yechim: Maqsadli auditoriyani aniq belgilang." },
-        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Nusxa ko'chirish — hech qayerga olib bormaydigan yo'l.", "solution": "Yechim: O'zligingizni topish uchun raqobatchilarni o'rganing." }
+        { "title": "3. Raqobatchilardan nusxa ko'chirish", "description": "Nusxa ko'chirish — hech qayerga olib bormaydigan yo'l.", "solution": "Yechim: O'zligingizni topish uchun raqobatchilarni o'rganing." },
+        { "title": "4. Inconsistency (Nomuvofiqlik)", "description": "Logotipingiz saytda bir xil, Instagramda boshqacha ko'rinishi.", "solution": "Yechim: Yagona 'Brendbuk' yarating." },
+        { "title": "5. Murakkab logotip", "description": "Haddan tashqari ko'p detallar logotipni eslab qolishni qiyinlashtiradi.", "solution": "Yechim: Minimalizmga intiling." },
+        { "title": "6. Qiyin nom (Neyming)", "description": "Mijozlar ismingizni talaffuz qila olmasalar, topa olmaydilar.", "solution": "Yechim: Sodda va jarangdor nom tanlang." },
+        { "title": "7. Brendingni bir martalik deb o'ylash", "description": "Bozor o'zgargani sari brend ham yangilanib turishi kerak.", "solution": "Yechim: Davriy brend-audit o'tkazib turing." }
       ],
       "result": {
         "bad": { "title": "Tezkor yordam kerak!", "description": "Brendingizda bir qancha zaif nuqtalar bor." },
