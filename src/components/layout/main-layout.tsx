@@ -94,11 +94,13 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 
 
     useEffect(() => {
-        window.addEventListener('openContactModal', handleOpenModal);
+        // Use a wrapper to ensure we always have the current handleOpenModal reference
+        const listener = () => handleOpenModal();
+        window.addEventListener('openContactModal', listener);
         window.addEventListener('error', reportError);
 
         return () => {
-            window.removeEventListener('openContactModal', handleOpenModal);
+            window.removeEventListener('openContactModal', listener);
             window.removeEventListener('error', reportError);
         };
     }, [handleOpenModal, reportError]);
