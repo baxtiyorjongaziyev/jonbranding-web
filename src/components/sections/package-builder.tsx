@@ -36,7 +36,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const detail = serviceDetails[id];
     if (!detail) return null;
 
-    const { label, price, subDescription, features, benefits, timeline, recommended } = detail;
+    const { label, price, subDescription, features, benefits, timeline, recommended, cta } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
     const isSurcharge = id === 'urgency' || id === 'nda';
@@ -190,7 +190,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                             )}
                             onClick={(e) => { e.stopPropagation(); onSelect(); }}
                         >
-                            {selected ? (dictionary.selected || "TANLANDI") : (dictionary.select || "TANLASH")}
+                            {selected ? (dictionary.selected || "TANLANDI") : (cta || dictionary.select || "TANLASH")}
                         </Button>
                     </div>
                 </CardContent>
@@ -296,6 +296,31 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                         ))}
                     </ServiceGroup>
+                    
+                    {lang === 'uz' && (
+                        <motion.div 
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="mt-8 mb-16 max-w-4xl mx-auto"
+                        >
+                            <Card className="bg-emerald-50 border-emerald-100 rounded-[2.5rem] p-8 shadow-sm border-2 border-dashed relative overflow-hidden group hover:bg-emerald-100/50 transition-colors duration-500">
+                                <div className="absolute -right-8 -bottom-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                                    <CheckCircle className="w-40 h-40 text-emerald-600" />
+                                </div>
+                                <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+                                    <div className="flex-shrink-0 bg-emerald-500 text-white p-4 rounded-2xl shadow-lg transform group-hover:scale-110 transition-transform duration-500">
+                                        <CheckCircle className="w-8 h-8" />
+                                    </div>
+                                    <div>
+                                        <p className="text-emerald-900 font-black text-lg sm:text-xl leading-relaxed tracking-tight">
+                                            Agar taqdim etilgan nomlardan hech biri sizga mos kelmasa — to'liq pul qaytaramiz. Xavfsiz sinab ko'ring.
+                                        </p>
+                                    </div>
+                                </div>
+                            </Card>
+                        </motion.div>
+                    )}
 
                     <ServiceGroup title={translations.categories?.identity || "Visual Identity"}>
                         {['logoVIP', 'logoPremium', 'logoStandard'].map(id => (
