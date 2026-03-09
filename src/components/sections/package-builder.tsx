@@ -132,7 +132,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
 
                         {/* Benefits Section */}
                         {benefits && benefits.length > 0 && (
-                            <div className="space-y-3 pt-4 border-t border-slate-100/10">
+                            <div className={cn("space-y-3 pt-4 border-t", isVip ? "border-white/5" : "border-slate-100/10")}>
                                 <p className={cn("text-[10px] font-black uppercase tracking-[0.15em]", isVip ? "text-amber-400/60" : "text-slate-400")}>
                                     {dictionary.tabs?.benefits || "Nima olasiz"}
                                 </p>
@@ -153,7 +153,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         )}
                     </div>
 
-                    <div className="mt-auto pt-6 border-t border-slate-100 space-y-4">
+                    <div className={cn("mt-auto pt-6 border-t space-y-4", isVip ? "border-white/10" : "border-slate-100")}>
                         {timeline && (
                             <div className={cn("flex items-center gap-2 text-[11px] font-black uppercase tracking-widest", isVip ? "text-amber-400/60" : "text-slate-400")}>
                                 <Clock className="w-3.5 h-3.5" />
