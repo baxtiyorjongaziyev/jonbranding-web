@@ -9,7 +9,6 @@ import { pageview } from '@/lib/gtag';
 import { Toaster } from '@/components/ui/toaster';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
-import { getDictionary } from '@/lib/dictionaries';
 import { initAmplitude, trackEvent } from '@/lib/amplitude';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'), {
@@ -22,15 +21,12 @@ function AnalyticsTracker() {
   const searchParams = useSearchParams();
   
   useEffect(() => {
-    // Amplitude initialization
     initAmplitude();
   }, []);
 
   useEffect(() => {
     const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
-    // Google Analytics pageview
     pageview(url);
-    // Amplitude pageview
     trackEvent('Page View', { url, pathname });
   }, [pathname, searchParams]);
 
@@ -43,45 +39,42 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
     const [totalPrice, setTotalPrice] = useState(0);
     
     const pathname = usePathname();
-    const lang = (pathname.split('/')[1] || 'uz') as 'uz' | 'ru' | 'en' | 'zh';
+    const lang = (pathname.split('/')[1] || 'uz') as any;
 
     const handleOpenModal = useCallback(() => {
         if (typeof window === 'undefined') return;
 
-        const selectionsJSON = localStorage.getItem('selectedServices');
-        const discountType = localStorage.getItem('discountOption') || 'none';
-        const promoCode = localStorage.getItem('promoCode') || '';
-        
-        setPackageSummary('');
-        setTotalPrice(0);
+        let summary = '';
+        let finalPrice = 0;
 
-        if (selectionsJSON) {
-            try {
+        try {
+            const selectionsJSON = localStorage.getItem('selectedServices');
+            const discountType = (localStorage.getItem('discountOption') || 'none').replace(/"/g, '');
+            const promoCode = (localStorage.getItem('promoCode') || '').replace(/"/g, '');
+            
+            if (selectionsJSON) {
                 const selectedServices = JSON.parse(selectionsJSON);
-                const selections = { 
-                    selectedServices, 
-                    discountType: discountType.replace(/"/g, ''), 
-                    promoCode: promoCode.replace(/"/g, '') 
-                };
-                
+                const selections = { selectedServices, discountType, promoCode };
                 const priceDetails = calculatePackagePrice(selections, lang);
+                
                 if (priceDetails.base > 0) {
-                    const summary = generateSummary(selections, lang);
-                    setPackageSummary(summary);
-                    setTotalPrice(priceDetails.final);
+                    summary = generateSummary(selections, lang);
+                    finalPrice = priceDetails.final;
                 }
-            } catch (e) {
-                console.error("Failed to parse package details from localStorage", e);
             }
+        } catch (e) {
+            console.error("Failed to parse package details from localStorage", e);
         }
         
-        trackEvent('Open Contact Modal', { lang, packageSummary, totalPrice });
+        setPackageSummary(summary);
+        setTotalPrice(finalPrice);
+        trackEvent('Open Contact Modal', { lang, packageSummary: summary, totalPrice: finalPrice });
         setModalOpen(true);
-    }, [lang, packageSummary, totalPrice]);
+    }, [lang]);
 
-    const handleCloseModal = () => {
+    const handleCloseModal = useCallback(() => {
         setModalOpen(false);
-    };
+    }, []);
     
     const reportError = useCallback((error: ErrorEvent) => {
         const { message, filename, lineno, colno, error: errorObj } = error;
