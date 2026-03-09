@@ -9,6 +9,8 @@ import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
 import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
