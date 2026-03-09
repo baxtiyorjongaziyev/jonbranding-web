@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, FC, useMemo, useCallback } from 'react';
@@ -7,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -27,6 +28,16 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     namingVIP: Crown, namingPremium: Sparkles, namingStandard: Type,
     logoVIP: Crown, logoPremium: Palette, logoStandard: Layers,
     urgency: Flame, nda: ShieldCheck
+};
+
+const BenefitIcon = ({ name, className }: { name: string, className?: string }) => {
+    const icons: Record<string, React.ElementType> = {
+        Search, Lightbulb, ShieldCheck, CheckCircle, MessageSquare, Target, 
+        BarChart, Rocket, Megaphone, Link, Gem, Globe, Lock, Award, Zap, 
+        TrendingUp, BookOpen, Gift, Building2, Smartphone, Sparkles, Scale
+    };
+    const Icon = icons[name] || Sparkles;
+    return <Icon className={className} />;
 };
 
 const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, currency }: { id: string, onSelect: () => void, selected: boolean, lang: any, dictionary: any, currency: any }) => {
@@ -129,7 +140,9 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                                 <div className="grid grid-cols-1 gap-2">
                                     {(benefits || []).map((b: any, i: number) => (
                                         <div key={i} className={cn("p-2.5 rounded-xl border flex items-center gap-3", isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100 shadow-sm")}>
-                                            <span className="text-lg shrink-0">{b.icon}</span>
+                                            <div className={cn("shrink-0", isVip ? "text-amber-400" : "text-primary")}>
+                                                <BenefitIcon name={b.icon} className="w-5 h-5" />
+                                            </div>
                                             <div className="min-w-0">
                                                 <p className={cn("text-xs font-black leading-tight", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
                                                 <p className={cn("text-[10px] leading-snug text-slate-500", isVip && "text-slate-400")}>{b.description}</p>

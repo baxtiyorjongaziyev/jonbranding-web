@@ -51,11 +51,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 2-3 ish kuni" : "⏱ 2-3 business days",
             features: isUz ? ["Logoning texnik tahlili", "Bozorga moslik tekshiruvi", "Kamchiliklar ro'yxati", "Yaxshilash bo'yicha tavsiyalar"] : ["Technical analysis", "Market fit check", "Weaknesses list", "Improvement tips"],
             benefits: isUz ? [
-                { icon: "🔍", title: "Kamchiliklarni bilasiz", description: "Logotipingizdagi barcha xato va kamchiliklar aniqlanadi." },
-                { icon: "💡", title: "Yaxshilash yo'li", description: "Logotipni qanday qilib zamonaviy qilish bo'yicha aniq yo'l xaritasi olasiz." }
+                { icon: "Search", title: "Kamchiliklarni bilasiz", description: "Logotipingizdagi barcha xato va kamchiliklar aniqlanadi." },
+                { icon: "Lightbulb", title: "Yaxshilash yo'li", description: "Logotipni qanday qilib zamonaviy qilish bo'yicha aniq yo'l xaritasi olasiz." }
             ] : [
-                { icon: "🔍", title: "Identify flaws", description: "Find all errors in your current logo." },
-                { icon: "💡", title: "Improvement path", description: "Get a clear roadmap for modernization." }
+                { icon: "Search", title: "Identify flaws", description: "Find all errors in your current logo." },
+                { icon: "Lightbulb", title: "Improvement path", description: "Get a clear roadmap for modernization." }
             ]
         },
         namingCheck: {
@@ -64,11 +64,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 1-2 ish kuni" : "⏱ 1-2 business days",
             features: isUz ? ["O'zbekiston bazasidan tekshiruv", "Xalqaro bazadan tekshiruv", "Internetda mashhur nomlar tekshiruvi"] : ["Local check", "International check", "Famous names check"],
             benefits: isUz ? [
-                { icon: "⚖️", title: "Huquqiy xavfsizlik", description: "Nomingiz boshqa patent bilan to'qnash kelmasligini bilasiz." },
-                { icon: "✅", title: "Ishonch bilan boshlash", description: "Nomning band emasligiga amin bo'lib, ishni boshlaysiz." }
+                { icon: "Scale", title: "Huquqiy xavfsizlik", description: "Nomingiz boshqa patent bilan to'qnash kelmasligini bilasiz." },
+                { icon: "CheckCircle", title: "Ishonch bilan boshlash", description: "Nomning band emasligiga amin bo'lib, ishni boshlaysiz." }
             ] : [
-                { icon: "⚖️", title: "Legal Safety", description: "Avoid patent conflicts." },
-                { icon: "✅", title: "Confident Start", description: "Know your name is unique." }
+                { icon: "Scale", title: "Legal Safety", description: "Avoid patent conflicts." },
+                { icon: "CheckCircle", title: "Confident Start", description: "Know your name is unique." }
             ]
         },
         consultation: {
@@ -77,11 +77,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 60 daqiqa" : "⏱ 60 minutes",
             features: isUz ? ["Muammolarni tahlil qilish", "Brending strategiyasi", "Savollarga javoblar", "Yo'l xaritasi tuzish"] : ["Problem analysis", "Branding strategy", "Q&A", "Roadmap"],
             benefits: isUz ? [
-                { icon: "💬", title: "Ekspert fikri", description: "9 yillik tajribaga ega mutaxassisdan shaxsiy maslahat." },
-                { icon: "🎯", title: "Aniq maqsad", description: "Biznesingiz uchun qaysi brending bosqichi kerakligini aniqlaysiz." }
+                { icon: "MessageSquare", title: "Ekspert fikri", description: "9 yillik tajribaga ega mutaxassisdan shaxsiy maslahat." },
+                { icon: "Target", title: "Aniq maqsad", description: "Biznesingiz uchun qaysi brending bosqichi kerakligini aniqlaysiz." }
             ] : [
-                { icon: "💬", title: "Expert opinion", description: "9 years of field experience." },
-                { icon: "🎯", title: "Clear Goal", description: "Define your next branding steps." }
+                { icon: "MessageSquare", title: "Expert opinion", description: "9 years of field experience." },
+                { icon: "Target", title: "Clear Goal", description: "Define your next branding steps." }
             ]
         },
         strategy: {
@@ -90,11 +90,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 20-30 ish kuni" : "⏱ 20-30 business days",
             features: isUz ? ["Bozor va raqobat tahlili", "Maqsadli auditoriya xaritasi", "Brend platformasi", "Pozitsiyalash strategiyasi", "USP"] : ["Market analysis", "Audience map", "Brand platform", "Positioning", "USP"],
             benefits: isUz ? [
-                { icon: "📊", title: "Bozorda aniq o'rin", description: "Raqobatchilaringizdan qanday ajralib turishni aniq bilasiz." },
-                { icon: "🚀", title: "Sotuvlar o'sishi", description: "To'g'ri pozitsiyalash mijozlar sonini oshiradi." }
+                { icon: "BarChart", title: "Bozorda aniq o'rin", description: "Raqobatchilaringizdan qanday ajralib turishni aniq bilasiz." },
+                { icon: "Rocket", title: "Sotuvlar o'sishi", description: "To'g'ri pozitsiyalash mijozlar sonini oshiradi." }
             ] : [
-                { icon: "📊", title: "Market Position", description: "Stand out from competitors." },
-                { icon: "🚀", title: "Sales Growth", description: "Correct positioning drives conversions." }
+                { icon: "BarChart", title: "Market Position", description: "Stand out from competitors." },
+                { icon: "Rocket", title: "Sales Growth", description: "Correct positioning drives conversions." }
             ]
         },
         commStrategy: {
@@ -103,11 +103,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 15-20 ish kuni" : "⏱ 15-20 business days",
             features: isUz ? ["Brend ovozi (Tone of Voice)", "Asosiy xabarlar tizimi", "Media kanallar tanlovi", "Kontent rejasi tamoyillari"] : ["Tone of Voice", "Messaging", "Media channels", "Content plan"],
             benefits: isUz ? [
-                { icon: "📢", title: "Mijoz bilan til topishish", description: "Auditoriya bilan qaysi tilda gaplashishni belgilaysiz." },
-                { icon: "🔗", title: "Yaxlit muloqot", description: "Barcha kanallarda brendingiz bir xil va kuchli yangraydi." }
+                { icon: "Megaphone", title: "Mijoz bilan til topishish", description: "Auditoriya bilan qaysi tilda gaplashishni belgilaysiz." },
+                { icon: "Link", title: "Yaxlit muloqot", description: "Barcha kanallarda brendingiz bir xil va kuchli yangraydi." }
             ] : [
-                { icon: "📢", title: "Connection", description: "Speak your customer's language." },
-                { icon: "🔗", title: "Unified Voice", description: "Sound consistent across all channels." }
+                { icon: "Megaphone", title: "Connection", description: "Speak your customer's language." },
+                { icon: "Link", title: "Unified Voice", description: "Sound consistent across all channels." }
             ]
         },
         namingVIP: {
@@ -131,10 +131,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "30 kunlik cheksiz tahrir"
             ] : ["10 options", "Strategic notes", "Phonetics", "Domain check", "Social check", "Local patent check", "Competitor analysis", "Linguistics (6 lang)", "Emotional impact", "3 slogans", "Patent filing", "Ownership certificate", "30 days revisions"],
             benefits: isUz ? [
-                { icon: "💎", title: "Nima olasiz?", description: "Patent qilingan, 6 tilda tekshirilgan, hissiy ta'sir qiladigan nom + shior." }
+                { icon: "Gem", title: "Nima olasiz?", description: "Patent qilingan, 6 tilda tekshirilgan, hissiy ta'sir qiladigan nom + shior." }
             ] : [
-                { icon: "🌍", title: "Global Ready", description: "Checked in 6 languages." },
-                { icon: "🔒", title: "Full Ownership", description: "100% legally yours with certificate." }
+                { icon: "Globe", title: "Global Ready", description: "Checked in 6 languages." },
+                { icon: "Lock", title: "Full Ownership", description: "100% legally yours with certificate." }
             ]
         },
         namingPremium: {
@@ -155,10 +155,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "3 ta bepul tahrir"
             ] : ["6 options", "Strategy notes", "Digital check", "Patent check", "Competitor analysis", "Emotional impact", "3 revisions"],
             benefits: isUz ? [
-                { icon: "🛡️", title: "Nima olasiz?", description: "Patent tekshirilgan, raqobatchilaringizdan farqli, hissiy ta'sir qiladigan nom — xavfsiz va ishonchli boshlash uchun." }
+                { icon: "ShieldCheck", title: "Nima olasiz?", description: "Patent tekshirilgan, raqobatchilaringizdan farqli, hissiy ta'sir qiladigan nom — xavfsiz va ishonchli boshlash uchun." }
             ] : [
-                { icon: "⚖️", title: "Legal Safety", description: "No patent conflicts." },
-                { icon: "🏆", title: "Uniqueness", description: "Differentiate from market." }
+                { icon: "Scale", title: "Legal Safety", description: "No patent conflicts." },
+                { icon: "Award", title: "Uniqueness", description: "Differentiate from market." }
             ]
         },
         namingStandard: {
@@ -175,10 +175,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "1 ta bepul tahrir"
             ] : ["3 options", "Short notes", "Domain check", "1 revision"],
             benefits: isUz ? [
-                { icon: "✅", title: "Nima olasiz?", description: "Biznesingiz uchun ishlatishga tayyor, platformalarda band qinger, professional nom — 7-10 ish kunida." }
+                { icon: "CheckCircle", title: "Nima olasiz?", description: "Biznesingiz uchun ishlatishga tayyor, platformalarda band qilingan, professional nom — 7-10 ish kunida." }
             ] : [
-                { icon: "⚡", title: "Speed", description: "Save development time." },
-                { icon: "✅", title: "Professional", description: "Get an analyzed name." }
+                { icon: "Zap", title: "Speed", description: "Save development time." },
+                { icon: "CheckCircle", title: "Professional", description: "Get an analyzed name." }
             ]
         },
         logoStandard: {
@@ -187,11 +187,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 5 ish kuni" : "⏱ 5 business days",
             features: isUz ? ["3 ta logo varianti", "Logo 4 xil ko'rinishda", "3 xil format (PNG, SVG, AI)", "8 ta aloqa nuqtasi", "2 ta tahrirlash"] : ["3 concepts", "4 lockups", "3 formats", "8 touchpoints", "2 revisions"],
             benefits: isUz ? [
-                { icon: "🎯", title: "Tayyor", description: "Hamma joyda ishlatish mumkin." },
-                { icon: "🛡️", title: "Mulk", description: "Fayllar to'liq sizniki." }
+                { icon: "Target", title: "Tayyor", description: "Hamma joyda ishlatish mumkin." },
+                { icon: "ShieldCheck", title: "Mulk", description: "Fayllar to'liq sizniki." }
             ] : [
-                { icon: "🎯", title: "Ready", description: "Ready for use." },
-                { icon: "🛡️", title: "Ownership", description: "Files are yours." }
+                { icon: "Target", title: "Ready", description: "Ready for use." },
+                { icon: "ShieldCheck", title: "Ownership", description: "Files are yours." }
             ]
         },
         logoPremium: {
@@ -202,11 +202,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 10 ish kuni" : "⏱ 10 business days",
             features: isUz ? ["4 ta logo varianti", "O'ziga xos firma uslubini ishlab chiqish", "3 xil format", "Rasmiy ranglar va shriftlar", "15 ta aloqa nuqtasi", "3 ta tahrirlash"] : ["4 concepts", "Style development", "3 formats", "Colors & fonts", "15 touchpoints", "3 revisions"],
             benefits: isUz ? [
-                { icon: "🏆", title: "Professional", description: "Barcha joyda bir xil uslub." },
-                { icon: "📈", title: "Qiymat", description: "Brend obro'si oshagi." }
+                { icon: "Award", title: "Professional", description: "Barcha joyda bir xil uslub." },
+                { icon: "TrendingUp", title: "Qiymat", description: "Brend obro'si oshadi." }
             ] : [
-                { icon: "🏆", title: "Professional", description: "Consistent image." },
-                { icon: "📈", title: "Prestige", description: "Increase brand value." }
+                { icon: "Award", title: "Professional", description: "Consistent image." },
+                { icon: "TrendingUp", title: "Prestige", description: "Increase brand value." }
             ]
         },
         logoVIP: {
@@ -229,11 +229,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Tashqi reklama dizayni"
             ] : ["5 concepts", "Strategic analysis", "Full Brandbook", "Motion logo", "10 stickers", "25 touchpoints", "Certificate", "Patent filing", "30 days revisions", "9 social templates", "Stationery design", "1-year support", "Outdoor ads"],
             benefits: isUz ? [
-                { icon: "📖", title: "Qo'llanma", description: "Istalgan dizayner to'g'ri ishlatadi." },
-                { icon: "💎", title: "Sarmoya", description: "Bir marta to'g'ri investitsiya." }
+                { icon: "BookOpen", title: "Qo'llanma", description: "Istalgan dizayner to'g'ri ishlatadi." },
+                { icon: "Gem", title: "Sarmoya", description: "Bir marta to'g'ri investitsiya." }
             ] : [
-                { icon: "📖", title: "Manual", description: "Easy implementation guide." },
-                { icon: "💎", title: "Investment", description: "Solid business asset." }
+                { icon: "BookOpen", title: "Manual", description: "Easy implementation guide." },
+                { icon: "Gem", title: "Investment", description: "Solid business asset." }
             ]
         },
         packaging: { 
@@ -242,11 +242,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 10-15 ish kuni" : "⏱ 10-15 business days",
             features: isUz ? ["Vizual konsepsiya", "3D namoyish", "Chop etish fayllari"] : ["Visual concept", "3D Visualization", "Print files"],
             benefits: isUz ? [
-                { icon: "🎁", title: "Joziba", description: "Mijoz sotib olgisi keladi." },
-                { icon: "🏢", title: "Farqlanish", description: "Javonda ajralib turasiz." }
+                { icon: "Gift", title: "Joziba", description: "Mijoz sotib olgisi keladi." },
+                { icon: "Building2", title: "Farqlanish", description: "Javonda ajralib turasiz." }
             ] : [
-                { icon: "🎁", title: "Attractive", description: "Customer magnet." },
-                { icon: "🏢", title: "Difference", description: "Shelf standout." }
+                { icon: "Gift", title: "Attractive", description: "Customer magnet." },
+                { icon: "Building2", title: "Difference", description: "Shelf standout." }
             ]
         },
         smm: { 
@@ -255,11 +255,11 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 5-7 ish kuni" : "⏱ 5-7 business days",
             features: isUz ? ["Bio dizayn", "9 ta post shabloni", "Story tizimi"] : ["Bio design", "9 post templates", "Story system"],
             benefits: isUz ? [
-                { icon: "📱", title: "Tartib", description: "Professional sahifa." },
-                { icon: "✨", title: "Oson", description: "Post tayyorlash tezlashadi." }
+                { icon: "Smartphone", title: "Tartib", description: "Professional sahifa." },
+                { icon: "Sparkles", title: "Oson", description: "Post tayyorlash tezlashadi." }
             ] : [
-                { icon: "📱", title: "Organized", description: "Professional feed." },
-                { icon: "✨", title: "Easy", description: "Fast content creation." }
+                { icon: "Smartphone", title: "Organized", description: "Professional feed." },
+                { icon: "Sparkles", title: "Easy", description: "Fast content creation." }
             ]
         },
         urgency: { 
@@ -271,8 +271,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Navbatsiz ishga tushirish"
             ] : ["2-3x speed", "Team mobilization", "Priority queue"],
             benefits: isUz ? [
-                { icon: "⚡", title: "Vaqt tejash", description: "Bozorga tezroq chiqasiz." }
-            ] : [{ icon: "⚡", title: "Time saving", description: "Faster market entry." }]
+                { icon: "Zap", title: "Vaqt tejash", description: "Bozorga tezroq chiqasiz." }
+            ] : [{ icon: "Zap", title: "Time saving", description: "Faster market entry." }]
         },
         nda: { 
             label: isUz ? "NDA — Maxfiylik" : (isRu ? "NDA — Конфиденциальность" : (isZh ? "NDA — 保密协议" : "NDA — Confidentiality")), 
@@ -283,8 +283,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "Portfolioga qo'shmaslik (ixtiyoriy)"
             ] : ["Sign NDA contract", "Keep project secret", "Exclude from portfolio"],
             benefits: isUz ? [
-                { icon: "🔒", title: "Xavfsizlik", description: "G'oyangiz sir saqlanadi." }
-            ] : [{ icon: "🔒", title: "Security", description: "Your idea is safe." }]
+                { icon: "Lock", title: "Xavfsizlik", description: "G'oyangiz sir saqlanadi." }
+            ] : [{ icon: "Lock", title: "Security", description: "Your idea is safe." }]
         }
     };
 };
