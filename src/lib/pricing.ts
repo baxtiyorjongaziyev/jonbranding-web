@@ -117,7 +117,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
             cta: isUz ? "Brendim 10 yil ishlashini xohlayman →" : null,
             features: isUz ? [
-                "Bu faqat nom emas — bu biznesingizning birinchi taassurot. Mijozlar nomingizni eshitganda 'bu jiddiy kompaniya' deyishi uchun hamma narsa o'ylab chiqiladi.",
                 "10 ta nom varianti",
                 "Har bir nom uchun to'liq strategik izoh",
                 "Domen tekshiruvi (.uz, .com)",
@@ -146,7 +145,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 14–20 ish kuni" : "⏱ 14–20 business days",
             cta: isUz ? "Xavfsiz va kuchli nom tanlashni boshlayman →" : null,
             features: isUz ? [
-                "Noto'g'ri nom tanlash — bu keyinchalik patent muammosi, rebrend xarajati demak. Biz buni oldini olamiz: 6 ta variant, O'zbekiston bazasida patent tekshiruvi, raqobatchilar tahlili va nomingizning hissiy ta'sirini o'lchaymiz.",
                 "6 ta nom varianti",
                 "Har bir nom uchun to'liq strategik izoh",
                 "Domen tekshiruvi (.uz, .com)",
@@ -170,7 +168,6 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 7–10 ish kuni" : "⏱ 7–10 business days",
             cta: isUz ? "7 kun ichida nomim tayyor bo'lsin →" : null,
             features: isUz ? [
-                "Siz biznes quryapsiz — nom izlashga vaqt yo'q. Biz 3 ta kuchli variant tayyorlaymiz, barcha platformalarda bo'shligini tekshiramiz, va siz faqat tanlab qolasiz.",
                 "3 ta professional nom varianti — har biri biznesingiz mohiyatini aks ettiradi",
                 "Har bir nom uchun qisqa strategik izoh",
                 "Domen tekshiruvi (.uz, .com)",
