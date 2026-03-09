@@ -115,7 +115,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.namingVIP,
             subDescription: isUz ? "Bir marta to'g'ri qiling — brendingiz 10 yil ishlaydi" : "Premium naming solution",
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
-            cta: isUz ? "Brendim 10 yil ishlashini xohlayman →" : null,
+            cta: isUz ? "BRENDIM 10 YIL ISHLASHINI XOHLAYMAN" : null,
             features: isUz ? [
                 "10 ta nom varianti",
                 "Har bir nom uchun to'liq strategik izoh",
@@ -143,7 +143,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             recommended: true,
             subDescription: isUz ? "Raqobatchilaringizdan ajralib turadigan nom + patent tekshiruvi — xavfsiz va kuchli" : "Professional naming & analysis",
             timeline: isUz ? "⏱ 14–20 ish kuni" : "⏱ 14–20 business days",
-            cta: isUz ? "Xavfsiz va kuchli nom tanlashni boshlayman →" : null,
+            cta: isUz ? "XAVFSIZ VA KUCHLI NOM TANLAYMAN" : null,
             features: isUz ? [
                 "6 ta nom varianti",
                 "Har bir nom uchun to'liq strategik izoh",
@@ -166,7 +166,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             price: basePricesUSD.namingStandard,
             subDescription: isUz ? "Biznesingizga mos, bo'sh va ishlatishga tayyor nom — 7-10 kun ichida" : "Standard naming solution",
             timeline: isUz ? "⏱ 7–10 ish kuni" : "⏱ 7–10 business days",
-            cta: isUz ? "7 kun ichida nomim tayyor bo'lsin →" : null,
+            cta: isUz ? "7 KUN ICHIDA NOMIM TAYYOR BO'LSIN" : null,
             features: isUz ? [
                 "3 ta professional nom varianti — har biri biznesingiz mohiyatini aks ettiradi",
                 "Har bir nom uchun qisqa strategik izoh",
