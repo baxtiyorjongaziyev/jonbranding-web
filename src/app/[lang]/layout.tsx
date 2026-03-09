@@ -10,6 +10,7 @@ const BASE_URL = 'https://jonbranding.uz';
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
 
 export async function generateMetadata(props: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
+  // NEXT 15: await params
   const { lang: rawLang } = await props.params;
   const currentLang = locales.includes(rawLang) ? rawLang : defaultLocale;
   
@@ -70,6 +71,7 @@ export default async function LangLayout(props: {
   children: ReactNode;
   params: Promise<{ lang: Locale }>;
 }) {
+  // NEXT 15: await params
   const { lang: rawLang } = await props.params;
   const lang = locales.includes(rawLang) ? rawLang : defaultLocale;
   const dictionary = await getDictionary(lang);

@@ -126,6 +126,8 @@ const ExpandingButton = ({
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const { scrollY } = useScroll();
+  
+  // FIX: Move Hooks above any conditional logic
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
