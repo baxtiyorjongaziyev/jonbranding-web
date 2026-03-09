@@ -42,7 +42,13 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
-        <div className="h-full relative pt-12">
+        <motion.div 
+            layout
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ y: -5 }}
+            className="h-full relative pt-12"
+        >
             <div className="absolute top-[38px] left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
@@ -189,7 +195,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                     </div>
                 </CardContent>
             </Card>
-        </div>
+        </motion.div>
     );
 });
 ServiceCard.displayName = 'ServiceCard';
@@ -197,10 +203,15 @@ ServiceCard.displayName = 'ServiceCard';
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => {
     return (
         <div className="space-y-8">
-            <div className="flex items-center gap-4 px-1">
+            <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-4 px-1"
+            >
                 <div className="h-8 w-2.5 bg-primary rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
                 <h3 className="text-xl sm:text-2xl font-black text-dark-blue tracking-tight uppercase">{title}</h3>
-            </div>
+            </motion.div>
             <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>{children}</div>
         </div>
     );
@@ -326,22 +337,31 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     <p className="text-blue-100/80 font-medium text-base max-w-sm leading-relaxed">{translations.your_package_desc || "Tanlangan xizmatlar ro'yxati."}</p>
                                 </div>
                                 <div className="grid grid-cols-1 gap-3 overflow-y-auto pr-3 custom-scrollbar flex-grow max-h-[400px]">
-                                    {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
-                                        const isSurcharge = k === 'urgency' || k === 'nda';
-                                        return (
-                                            <div key={k} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300 shadow-sm group">
-                                                <div className="flex items-center gap-3">
-                                                    <div className={cn("p-1.5 rounded-full transition-transform group-hover:scale-110", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
-                                                        {isSurcharge ? <Plus className="w-4 h-4 text-blue-400" /> : <Check className="w-4 h-4 text-sky-blue" />}
+                                    <AnimatePresence mode="popLayout">
+                                        {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
+                                            const isSurcharge = k === 'urgency' || k === 'nda';
+                                            return (
+                                                <motion.div 
+                                                    key={k} 
+                                                    layout
+                                                    initial={{ opacity: 0, x: -20 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    exit={{ opacity: 0, x: 20 }}
+                                                    className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300 shadow-sm group"
+                                                >
+                                                    <div className="flex items-center gap-3">
+                                                        <div className={cn("p-1.5 rounded-full transition-transform group-hover:scale-110", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
+                                                            {isSurcharge ? <Plus className="w-4 h-4 text-blue-400" /> : <Check className="w-4 h-4 text-sky-blue" />}
+                                                        </div>
+                                                        <span className="text-base font-bold tracking-tight text-white">{serviceDetails[k]?.label}</span>
                                                     </div>
-                                                    <span className="text-base font-bold tracking-tight text-white">{serviceDetails[k]?.label}</span>
-                                                </div>
-                                                <span className={cn("font-black text-sm", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
-                                                    {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
-                                                </span>
-                                            </div>
-                                        );
-                                    })}
+                                                    <span className={cn("font-black text-sm", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
+                                                        {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
+                                                    </span>
+                                                </motion.div>
+                                            );
+                                        })}
+                                    </AnimatePresence>
                                 </div>
                             </div>
                         </div>
@@ -355,23 +375,32 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
 
                                     <div className="space-y-2">
-                                        {total.surchargesApplied.map((s: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-blue-700 text-[12px] font-bold bg-blue-50 px-5 py-3 rounded-xl border border-blue-100 shadow-sm">
-                                                <div className="flex items-center gap-2"><Plus className="w-4 h-4" />{s.name}</div>
-                                                <span className="text-base">+{formatPrice(s.value, lang as any, currency)}</span>
-                                            </div>
-                                        ))}
-                                        {total.discountApplied.map((d: any, i: number) => (
-                                            <motion.div 
-                                                key={i} 
-                                                initial={{ x: -20, opacity: 0 }}
-                                                animate={{ x: 0, opacity: 1 }}
-                                                className="flex justify-between items-center text-green-700 text-[12px] font-bold bg-green-50 px-5 py-3 rounded-xl border border-green-100 shadow-sm"
-                                            >
-                                                <div className="flex items-center gap-2"><Zap className="w-4 h-4" />{d.name}</div>
-                                                <span className="text-base">-{formatPrice(d.value, lang as any, currency)}</span>
-                                            </motion.div>
-                                        ))}
+                                        <AnimatePresence>
+                                            {total.surchargesApplied.map((s: any, i: number) => (
+                                                <motion.div 
+                                                    key={i} 
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    className="flex justify-between items-center text-blue-700 text-[12px] font-bold bg-blue-50 px-5 py-3 rounded-xl border border-blue-100 shadow-sm"
+                                                >
+                                                    <div className="flex items-center gap-2"><Plus className="w-4 h-4" />{s.name}</div>
+                                                    <span className="text-base">+{formatPrice(s.value, lang as any, currency)}</span>
+                                                </motion.div>
+                                            ))}
+                                            {total.discountApplied.map((d: any, i: number) => (
+                                                <motion.div 
+                                                    key={i} 
+                                                    initial={{ x: -20, opacity: 0 }}
+                                                    animate={{ x: 0, opacity: 1 }}
+                                                    exit={{ x: 20, opacity: 0 }}
+                                                    className="flex justify-between items-center text-green-700 text-[12px] font-bold bg-green-50 px-5 py-3 rounded-xl border border-green-100 shadow-sm"
+                                                >
+                                                    <div className="flex items-center gap-2"><Zap className="w-4 h-4" />{d.name}</div>
+                                                    <span className="text-base">-{formatPrice(d.value, lang as any, currency)}</span>
+                                                </motion.div>
+                                            ))}
+                                        </AnimatePresence>
                                     </div>
 
                                     <div className="pt-6 border-t border-slate-200 text-center space-y-2">

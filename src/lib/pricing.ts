@@ -194,7 +194,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             features: isUz ? ["4 ta logo varianti", "O'ziga xos firma uslubini ishlab chiqish", "3 xil format", "Rasmiy ranglar va shriftlar", "15 ta aloqa nuqtasi", "3 ta tahrirlash"] : ["4 concepts", "Style development", "3 formats", "Colors & fonts", "15 touchpoints", "3 revisions"],
             benefits: isUz ? [
                 { icon: "🏆", title: "Professional", description: "Barcha joyda bir xil uslub." },
-                { icon: "📈", title: "Qiymat", description: "Brend obro'si oshadi." }
+                { icon: "📈", title: "Qiymat", description: "Brend obro'si oshagi." }
             ] : [
                 { icon: "🏆", title: "Professional", description: "Consistent image." },
                 { icon: "📈", title: "Prestige", description: "Increase brand value." }

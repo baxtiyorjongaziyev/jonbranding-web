@@ -4,6 +4,7 @@
 import type { FC } from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 import Hero from '@/components/sections/hero';
 import Stats from '@/components/sections/stats';
 import TrustedBy from '@/components/sections/trusted-by';
@@ -23,6 +24,15 @@ import { useTelegram } from '@/hooks/use-telegram';
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
 const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'), { ssr: false });
+
+const fadeInVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
 
 const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) => {
     const [mounted, setMounted] = useState(false);
@@ -70,14 +80,36 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
             
             <main>
                 <Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
-                <Stats dictionary={dictionary.stats} />
-                <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
-                <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />
-                <WhyUs onCtaClick={handleOpenModal} lang={lang} />
-                <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
-                <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+                
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                    <Stats dictionary={dictionary.stats} />
+                </motion.div>
+
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                    <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
+                </motion.div>
+
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                    <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />
+                </motion.div>
+
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                    <WhyUs onCtaClick={handleOpenModal} lang={lang} />
+                </motion.div>
+
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                    <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
+                </motion.div>
+
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                    <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+                </motion.div>
+
                 <Gallery lang={lang} dictionary={dictionary.gallery} />
-                <FeaturedCaseStudy lang={lang} dictionary={dictionary.featuredCaseStudy || {}} />
+                
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                    <FeaturedCaseStudy lang={lang} dictionary={dictionary.featuredCaseStudy || {}} />
+                </motion.div>
                 
                 {mounted ? (
                     <>
