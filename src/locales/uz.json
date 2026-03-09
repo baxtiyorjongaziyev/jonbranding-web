@@ -289,6 +289,148 @@
       "ctaButton": "Menga shunday yondashuv kerak"
     }
   },
+  "contactModal": {
+    "stepTitles": {
+      "contact": "Aloqa ma'lumotlari",
+      "project": "Loyiha haqida",
+      "budget": "Byudjet",
+      "meeting": "Uchrashuv"
+    },
+    "title": "Sifatli konsultatsiya uchun",
+    "description": "Loyihangizni yaxshiroq tushunishimiz uchun bir nechta savollarga javob bering.",
+    "fullName": "Ism va Familiya",
+    "fullNamePlaceholder": "Ali Valiyer",
+    "phone": "Telefon raqami",
+    "phonePlaceholder": "+998 90 123 45 67",
+    "telegram": "Telegram foydalanuvchi nomi (ixtiyoriy)",
+    "telegramPlaceholder": "@username",
+    "companyName": "Kompaniya yoki loyiha nomi",
+    "companyNamePlaceholder": "Jon.Branding",
+    "website": "Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)",
+    "websitePlaceholder": "https://t.me/jonbranding",
+    "goal": "Sizga qaysi maqsad yaqinroq?",
+    "goalOptions": [
+      { "value": "exploring", "label": "Brending haqida ma'lumotga ega emasman, lekin biznesim uchun kerak deb o'ylayman." },
+      { "value": "has_problem", "label": "Brendim bor, lekin u o'z samarasini bermayapti, tahlil va maslahat kerak." },
+      { "value": "ready_to_start", "label": "Brending kuchini tushunaman va aniq maqsad bilan murojaat qilyapman." }
+    ],
+    "budget": "Loyiha uchun taxminiy byudjet?",
+    "budgetOptions": [
+      "Hali byudjet yo'q / Shunchaki o'rganyapman",
+      "$500 gacha",
+      "$500 - $1,500",
+      "$1,500 - $3,000",
+      "$3,000 dan yuqori"
+    ],
+    "location": "Uchrashuv uchun joylashuvingiz",
+    "locationPlaceholder": "Viloyatni tanlang",
+    "locationOptions": ["Toshkent", "Farg'ona", "Boshqa viloyat"],
+    "meetingPlace": "Qayerda uchrashishni xohlaysiz?",
+    "meetingPlaceOptions": [
+      { "value": "our_office", "label": "Bizning ofisda", "description": "Loyihaga to'liq sho'ng'ish" },
+      { "value": "neutral", "label": "Neytral hududda", "description": "Erkin muhitda suhbat" },
+      { "value": "client_office", "label": "Sizning ofisingizda", "description": "Biznesingiz bilan tanishish" }
+    ],
+    "onlineMeetingAlert": "Tushunarli. Siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.",
+    "backButton": "Orqaga",
+    "nextButton": "Keyingisi",
+    "submitButton": "So'rovni yuborish",
+    "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarim qayta ishlanishiga rozilik beraman.",
+    "formErrors": {
+      "fullName": "Iltimos, to'liq ismingizni kiriting.",
+      "phone": "Iltimos, to'g'ri telefon raqamini kiriting.",
+      "goal": "Iltimos, asosiy maqsadingizni tanlang.",
+      "budget": "Iltimos, taxminiy byudjetni tanlang.",
+      "location": "Iltimos, joylashuvingizni tanlang.",
+      "meetingPlace": "Uchrashuv joyini tanlashingiz kerak.",
+      "privacyPolicy": "Siz siyosatni qabul qilishingiz kerak."
+    },
+    "successToast": {
+      "title": "Muvaffaqiyatli!",
+      "description": "Sizning so'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!"
+    },
+    "leadMagnetToast": {
+      "title": "Siz uchun maxsus manbalar!",
+      "description": "So'rovingiz qabul qilindi! Boshlanishiga sizni bepul materiallarimizga yo'naltirmoqdamiz."
+    },
+    "errorToast": {
+      "title": "Xatolik!",
+      "description": "So'rovni yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
+    }
+  },
+  "quiz": {
+    "metadata": {
+      "title": "Mini-test: Biznesingiz brendingga tayyormi? | Jon.Branding",
+      "description": "Bir nechta savollarga javob bering va biznesingiz brendingga qanchalik tayyorligini bilib oling."
+    },
+    "exampleTitle": "Dunyo brendlaridan misol:",
+    "questions": [
+      {
+        "question": "Biznesingizning asosiy g'oyasi yoki missiyasi bir jumla bilan ifodalanganmi?",
+        "brandExample": "Volvo — xavfsizlik; Nike — dunyodagi har bir sportchini ilhomlantirish.",
+        "options": [
+          { "text": "Ha, hamma uchun tushunarli va aniq", "score": 3 },
+          { "text": "Qisman, lekin hali to'liq emas", "score": 2 },
+          { "text": "Yo'q, bu haqda o'ylab ko'rmaganman", "score": 1 }
+        ]
+      },
+      {
+        "question": "Maqsadli auditoriyangizni (ideal mijozingizni) aniq tasavvur qila olasizmi?",
+        "brandExample": "Apple — ijodkor professionallar va texnologiya ishqibozlari; Johnson's Baby — yosh onalar.",
+        "options": [
+          { "text": "Ha, ularning ehtiyojlari va istaklarini bilaman", "score": 3 },
+          { "text": "Umumiy tasavvurga egaman", "score": 2 },
+          { "text": "Yo'q, men hamma uchun sotishga harakat qilyapman", "score": 1 }
+        ]
+      },
+      {
+        "question": "Brendingiz raqobatchilardan qaysi aniq afzalliklari bilan ajralib turadi?",
+        "brandExample": "Tesla — innovatsion elektromobillar; M&M's — 'qo'lda emas, og'izda eriydigan' shokolad.",
+        "options": [
+          { "text": "Kamida 2-3 ta aniq ustunligim bor", "score": 3 },
+          { "text": "Faqat narx bilan ajralib turaman", "score": 2 },
+          { "text": "Aniq bir ustunligim yo'q", "score": 1 }
+        ]
+      },
+      {
+        "question": "Vizual qiyofangiz (logo, ranglar, dizayn) biznesingiz qadriyatlarini aks ettiradimi?",
+        "brandExample": "Coca-Cola qizili — energiya; Tiffany & Co. havorangi — hashamat va nafosat.",
+        "options": [
+          { "text": "Ha, to'liq mos keladi", "score": 3 },
+          { "text": "Qisman, ba'zi elementlarni yangilash kerak", "score": 2 },
+          { "text": "Yo'q, bunga e'tibor bermaganman", "score": 1 }
+        ]
+      },
+      {
+        "question": "Mijozlaringiz siz haqigizda yagona va ijobiy fikrga egami?",
+        "brandExample": "Starbucks — shunchaki kofe emas, uchinchi makon; Zappos — ajoyib mijozlar servisi.",
+        "options": [
+          { "text": "Ha, brendimning obro'si mustahkam", "score": 3 },
+          { "text": "Har xil, ba'zan salbiy fikrlar ham bo'ladi", "score": 2 },
+          { "text": "Bilmayman, so'rov o'tkazmaganman", "score": 1 }
+        ]
+      }
+    ],
+    "result": {
+      "bad": {
+        "title": "Sizga yordam kerak (5-8 ball)",
+        "description": "Brendingiz poydevori zaif. Raqobatchilardan ajralib turish uchun sizga professional yordam zarur."
+      },
+      "medium": {
+        "title": "Yaxshi potentsial bor, lekin bo'shliqlar mavjud (9-12 ball)",
+        "description": "Brendingiz yanada kuchliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldiramiz."
+      },
+      "good": {
+        "title": "A'lo! Brendingiz poydevori mustahkam (13-15 ball)",
+        "description": "Siz to'g'ri yo'ldasiz. Endi bu poydevorni yanada mustahkamlab, bozor yetakchisiga aylanish vaqti keldi."
+      },
+      "afterSubmitText": "Yaqin orada mutaxassisimiz siz bilan bog'lanib, shaxsiy tavsiyalarini beradi.",
+      "backToHome": "Bosh sahifaga qaytish"
+    },
+    "questionLabel": "Savol {step} / {total}",
+    "nextButton": "Keyingisi",
+    "resultButton": "Natijani bilish"
+  },
   "namingPage": {
     "title": "Neyming — Kuchli brend nomi",
     "subtitle": "Brend nomi — bu birinchi taassurot, energiya va xarakter.",
