@@ -1,4 +1,3 @@
-
 'use client';
 
 import { FC, useState, useEffect, useMemo } from 'react';
@@ -206,20 +205,23 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md rounded-2xl">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold text-dark-blue">
+            {translations ? translations.title : "Bog'lanish"}
+          </DialogTitle>
+          {translations && <DialogDescription>{translations.description}</DialogDescription>}
+        </DialogHeader>
+
         {!translations ? (
-          <div className="flex flex-col items-center justify-center p-8 gap-4">
+          <div className="flex flex-col items-center justify-center p-8 gap-4 min-h-[300px]">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
             <p className="text-sm text-muted-foreground animate-pulse">Yuklanmoqda...</p>
           </div>
         ) : (
           <>
-            <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-dark-blue">{translations.title}</DialogTitle>
-              <DialogDescription>{translations.description}</DialogDescription>
-            </DialogHeader>
             <Progress value={(step / STEPS.length) * 100} className="h-2" />
             <Form {...form}>
-              <form className="space-y-4">
+              <form className="space-y-4 mt-4">
                 {step === 1 && (
                     <div className="space-y-4 animate-fade-in">
                         <FormField control={form.control} name="fullName" render={({ field }) => (
