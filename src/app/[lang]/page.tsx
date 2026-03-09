@@ -8,6 +8,7 @@ type Props = {
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
+  // NEXT 15: await params
   const { lang } = await props.params;
   const titles = {
     uz: "Jon.Branding | Toshkentdagi Professional Brending Agentligi: Logo va Neyming",
@@ -31,6 +32,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 const Page = async (props: Props) => {
+  // NEXT 15: await params
   const { lang } = await props.params;
   const dictionary = await getDictionary(lang);
   return <HomeComponent lang={lang} dictionary={dictionary} />;
