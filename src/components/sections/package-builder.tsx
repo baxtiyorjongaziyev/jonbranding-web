@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, FC, useMemo, useCallback } from 'react';
@@ -6,12 +5,12 @@ import { useLocalStorage } from '@/hooks/use-local-storage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
 import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
@@ -137,10 +136,10 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                                 <p className={cn("text-[10px] font-black uppercase tracking-[0.15em]", isVip ? "text-amber-400/60" : "text-slate-400")}>
                                     {dictionary.tabs?.benefits || "Nima olasiz"}
                                 </p>
-                                <div className="grid grid-cols-1 gap-2">
+                                <div className="grid grid-cols-1 gap-4">
                                     {(benefits || []).map((b: any, i: number) => (
-                                        <div key={i} className={cn("p-2.5 rounded-xl border flex items-center gap-3", isVip ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100 shadow-sm")}>
-                                            <div className={cn("shrink-0", isVip ? "text-amber-400" : "text-primary")}>
+                                        <div key={i} className="flex items-start gap-3">
+                                            <div className={cn("shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-primary")}>
                                                 <BenefitIcon name={b.icon} className="w-5 h-5" />
                                             </div>
                                             <div className="min-w-0">
