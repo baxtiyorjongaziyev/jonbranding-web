@@ -203,150 +203,154 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     }
   }, [isOpen, form, user]);
 
-  if (!isOpen || !translations) return null;
-
-  const progress = (step / STEPS.length) * 100;
-  const isFinalStep = step === STEPS.length;
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md rounded-2xl">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-dark-blue">{translations.title}</DialogTitle>
-          <DialogDescription>{translations.description}</DialogDescription>
-        </DialogHeader>
-        <Progress value={progress} className="h-2" />
-        <Form {...form}>
-          <form className="space-y-4">
-            {step === 1 && (
-                <div className="space-y-4 animate-fade-in">
-                    <FormField control={form.control} name="fullName" render={({ field }) => (
-                        <FormItem><FormLabel>{translations.fullName}</FormLabel><FormControl><Input placeholder={translations.fullNamePlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
-                    )} />
-                    <FormField control={form.control} name="phone" render={({ field }) => (
-                        <FormItem><FormLabel>{translations.phone}</FormLabel><FormControl><Input placeholder={translations.phonePlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
-                    )} />
-                    <FormField control={form.control} name="telegram" render={({ field }) => (
-                        <FormItem><FormLabel>{translations.telegram}</FormLabel><FormControl><Input placeholder={translations.telegramPlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
-                    )} />
-                </div>
-            )}
-            
-            {step === 2 && (
-                <div className="space-y-4 animate-fade-in">
-                     <FormField control={form.control} name="companyName" render={({ field }) => (
-                        <FormItem><FormLabel>{translations.companyName}</FormLabel><FormControl><Input placeholder={translations.companyNamePlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
-                    )} />
-                    <FormField control={form.control} name="website" render={({ field }) => (
-                        <FormItem><FormLabel>{translations.website}</FormLabel><FormControl><Input placeholder={translations.websitePlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
-                    )} />
-                    <FormField control={form.control} name="goal" render={({ field }) => (
-                        <FormItem className="space-y-3">
-                            <FormLabel>{translations.goal}</FormLabel>
-                            <FormControl>
-                                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-2">
-                                    {(translations.goalOptions || []).map((option: any, index: number) => (
-                                        <Label key={option.value} htmlFor={`goal-${index}`} className="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
-                                            <RadioGroupItem value={option.value} id={`goal-${index}`} />
-                                            <span className="font-medium text-sm text-gray-800">{option.label}</span>
-                                        </Label>
-                                    ))}
-                                </RadioGroup>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )} />
-                </div>
-            )}
-
-            {step === 3 && (
-                 <div className="space-y-4 animate-fade-in">
-                    <FormField control={form.control} name="budget" render={({ field }) => (
-                         <FormItem className="space-y-3">
-                            <FormLabel>{translations.budget}</FormLabel>
-                            <FormControl>
-                                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-1">
-                                    {(translations.budgetOptions || []).map((option: string, index: number) => (
-                                        <Label key={option} htmlFor={`budget-${index}`} className="flex items-center gap-4 p-3 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
-                                            <RadioGroupItem value={option} id={`budget-${index}`} />
-                                            <span className="font-medium text-sm text-gray-800">{option}</span>
-                                        </Label>
-                                    ))}
-                                </RadioGroup>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )} />
-                 </div>
-            )}
-
-            {step === 4 && (
-                 <div className="space-y-6 animate-fade-in">
-                    <FormField control={form.control} name="location" render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{translations.location}</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl><SelectTrigger><SelectValue placeholder={translations.locationPlaceholder} /></SelectTrigger></FormControl>
-                                <SelectContent>
-                                    {(translations.locationOptions || []).map((loc: string) => (
-                                        <SelectItem key={loc} value={loc}>{loc}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )} />
-                    {(locationValue === translations.locationOptions[0] || locationValue === translations.locationOptions[1]) &&
-                        <FormField control={form.control} name="meetingPlace" render={({ field }) => (
+        {!translations ? (
+          <div className="flex flex-col items-center justify-center p-8 gap-4">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-sm text-muted-foreground animate-pulse">Yuklanmoqda...</p>
+          </div>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold text-dark-blue">{translations.title}</DialogTitle>
+              <DialogDescription>{translations.description}</DialogDescription>
+            </DialogHeader>
+            <Progress value={(step / STEPS.length) * 100} className="h-2" />
+            <Form {...form}>
+              <form className="space-y-4">
+                {step === 1 && (
+                    <div className="space-y-4 animate-fade-in">
+                        <FormField control={form.control} name="fullName" render={({ field }) => (
+                            <FormItem><FormLabel>{translations.fullName}</FormLabel><FormControl><Input placeholder={translations.fullNamePlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                        <FormField control={form.control} name="phone" render={({ field }) => (
+                            <FormItem><FormLabel>{translations.phone}</FormLabel><FormControl><Input placeholder={translations.phonePlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                        <FormField control={form.control} name="telegram" render={({ field }) => (
+                            <FormItem><FormLabel>{translations.telegram}</FormLabel><FormControl><Input placeholder={translations.telegramPlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                    </div>
+                )}
+                
+                {step === 2 && (
+                    <div className="space-y-4 animate-fade-in">
+                         <FormField control={form.control} name="companyName" render={({ field }) => (
+                            <FormItem><FormLabel>{translations.companyName}</FormLabel><FormControl><Input placeholder={translations.companyNamePlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                        <FormField control={form.control} name="website" render={({ field }) => (
+                            <FormItem><FormLabel>{translations.website}</FormLabel><FormControl><Input placeholder={translations.websitePlaceholder} {...field} /></FormControl><FormMessage /></FormItem>
+                        )} />
+                        <FormField control={form.control} name="goal" render={({ field }) => (
                             <FormItem className="space-y-3">
-                                <FormLabel>{translations.meetingPlace}</FormLabel>
-                                <div className="space-y-2">
-                                    {(translations.meetingPlaceOptions || []).map((option: any) => (
-                                        <LiveLocationCard
-                                            key={option.value}
-                                            icon={option.value === 'our_office' ? Briefcase : option.value === 'neutral' ? Coffee : Building2}
-                                            title={option.label}
-                                            description={option.description}
-                                            isSelected={field.value === option.value}
-                                            onClick={() => field.onChange(option.value)}
-                                        />
-                                    ))}
-                                </div>
+                                <FormLabel>{translations.goal}</FormLabel>
+                                <FormControl>
+                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-2">
+                                        {(translations.goalOptions || []).map((option: any, index: number) => (
+                                            <Label key={option.value} htmlFor={`goal-${index}`} className="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
+                                                <RadioGroupItem value={option.value} id={`goal-${index}`} />
+                                                <span className="font-medium text-sm text-gray-800">{option.label}</span>
+                                            </Label>
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )} />
-                    }
-                    {locationValue === translations.locationOptions[2] &&
-                         <Alert variant="default" className="bg-sky-blue/30 border-primary/20">
-                           <div className="flex items-start gap-3">
-                            <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-0.5"/><AlertDescription>{translations.onlineMeetingAlert}</AlertDescription>
-                           </div>
-                        </Alert>
-                    }
-                 </div>
-            )}
-            
-            {isFinalStep && (
-                 <FormField control={form.control} name="privacyPolicy" render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 mt-6">
-                        <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} /></FormControl>
-                        <div className="space-y-1 leading-none"><FormLabel className="text-xs">{translations.privacyPolicyText}</FormLabel><FormMessage className="text-xs" /></div>
-                    </FormItem>
-                )} />
-            )}
-            
-            <div className="flex justify-between items-center pt-4">
-                <Button type="button" variant="ghost" onClick={handlePrev} disabled={step === 1 || isSubmitting}>
-                    <ArrowLeft className="mr-2 h-4 w-4" />{translations.backButton}
-                </Button>
-                <Button type="button" onClick={handleNext} disabled={isSubmitting} className="shadow-ocean bg-ocean-blue hover:bg-ocean-blue/90">
-                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {isFinalStep ? translations.submitButton : translations.nextButton}
-                    {!isFinalStep && <ArrowRight className="ml-2 h-4 w-4" />}
-                </Button>
-            </div>
-          </form>
-        </Form>
+                    </div>
+                )}
+
+                {step === 3 && (
+                     <div className="space-y-4 animate-fade-in">
+                        <FormField control={form.control} name="budget" render={({ field }) => (
+                             <FormItem className="space-y-3">
+                                <FormLabel>{translations.budget}</FormLabel>
+                                <FormControl>
+                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-1">
+                                        {(translations.budgetOptions || []).map((option: string, index: number) => (
+                                            <Label key={option} htmlFor={`budget-${index}`} className="flex items-center gap-4 p-3 border rounded-xl cursor-pointer hover:bg-secondary transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
+                                                <RadioGroupItem value={option} id={`budget-${index}`} />
+                                                <span className="font-medium text-sm text-gray-800">{option}</span>
+                                            </Label>
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )} />
+                     </div>
+                )}
+
+                {step === 4 && (
+                     <div className="space-y-6 animate-fade-in">
+                        <FormField control={form.control} name="location" render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>{translations.location}</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl><SelectTrigger><SelectValue placeholder={translations.locationPlaceholder} /></SelectTrigger></FormControl>
+                                    <SelectContent>
+                                        {(translations.locationOptions || []).map((loc: string) => (
+                                            <SelectItem key={loc} value={loc}>{loc}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )} />
+                        {(locationValue === translations.locationOptions[0] || locationValue === translations.locationOptions[1]) &&
+                            <FormField control={form.control} name="meetingPlace" render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                    <FormLabel>{translations.meetingPlace}</FormLabel>
+                                    <div className="space-y-2">
+                                        {(translations.meetingPlaceOptions || []).map((option: any) => (
+                                            <LiveLocationCard
+                                                key={option.value}
+                                                icon={option.value === 'our_office' ? Briefcase : option.value === 'neutral' ? Coffee : Building2}
+                                                title={option.label}
+                                                description={option.description}
+                                                isSelected={field.value === option.value}
+                                                onClick={() => field.onChange(option.value)}
+                                            />
+                                        ))}
+                                    </div>
+                                    <FormMessage />
+                                </FormItem>
+                            )} />
+                        }
+                        {locationValue === translations.locationOptions[2] &&
+                             <Alert variant="default" className="bg-sky-blue/30 border-primary/20">
+                               <div className="flex items-start gap-3">
+                                <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-0.5"/><AlertDescription>{translations.onlineMeetingAlert}</AlertDescription>
+                               </div>
+                            </Alert>
+                        }
+                     </div>
+                )}
+                
+                {step === STEPS.length && (
+                     <FormField control={form.control} name="privacyPolicy" render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 mt-6">
+                            <FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} /></FormControl>
+                            <div className="space-y-1 leading-none"><FormLabel className="text-xs">{translations.privacyPolicyText}</FormLabel><FormMessage className="text-xs" /></div>
+                        </FormItem>
+                    )} />
+                )}
+                
+                <div className="flex justify-between items-center pt-4">
+                    <Button type="button" variant="ghost" onClick={handlePrev} disabled={step === 1 || isSubmitting}>
+                        <ArrowLeft className="mr-2 h-4 w-4" />{translations.backButton}
+                    </Button>
+                    <Button type="button" onClick={handleNext} disabled={isSubmitting} className="shadow-ocean bg-ocean-blue hover:bg-ocean-blue/90">
+                        {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        {step === STEPS.length ? translations.submitButton : translations.nextButton}
+                        {step !== STEPS.length && <ArrowRight className="ml-2 h-4 w-4" />}
+                    </Button>
+                </div>
+              </form>
+            </Form>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );
