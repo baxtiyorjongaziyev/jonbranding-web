@@ -52,7 +52,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
     openGraph: {
       title: titles[currentLang],
       description: descriptions[currentLang],
-      url: `${BASE_URL}/${currentLang}`,
+      url:`${BASE_URL}/${currentLang}`,
       siteName: 'Jon.Branding',
       images: [{ url: OG_IMAGE_URL, width: 1200, height: 630, alt: 'Jon Branding Agency' }],
       type: 'website',
