@@ -1,3 +1,4 @@
+
 {
   "header": {
     "portfolio": "Portfolio",
@@ -354,5 +355,29 @@
     "questionLabel": "Savol {step} / {total}",
     "nextButton": "Keyingisi",
     "resultButton": "Natijani bilish"
+  },
+  "brandStrategyPage": {
+    "title": "Brend Strategiyasi",
+    "subtitle": "Brend strategiyasi - bu sizning biznesingiz uchun muvaffaqiyat yo'li.",
+    "section1_title": "Strategiya nima uchun kerak?",
+    "section1_p1": "Aniq strategiyasiz har qanday dizayn shunchaki chiroyli rasm bo'lib qoladi.",
+    "section1_p2": "Biz sizning auditoriyangizni, raqobatchilaringizni o'rganamiz va sizni bozorda ajralib turishingizni ta'minlaymiz.",
+    "section1_p3": "Strategiya - bu uzoq muddatli investitsiya.",
+    "section2_title": "Bizning yondashuvimiz",
+    "section2_p1": "Biz chuqur tahlilga tayanamiz.",
+    "section2_p2_bold": "Tadqiqot:",
+    "section2_p2_text": "Bozordagi o'rningizni aniqlash.",
+    "section2_p3_bold": "Pozitsiyalash:",
+    "section2_p3_text": "Mijozlar qalbidan joy olish.",
+    "section2_p4": "Natija - o'sib boruvchi biznes.",
+    "process_title": "Ishlash tartibimiz",
+    "process_subtitle": "Quyidagi bosqichlar orqali brendingizni quramiz:",
+    "process_steps": [
+      { "title": "Tahlil", "description": "Bozor va raqobatchilarni o'rganamiz." },
+      { "title": "Maqsad", "description": "Brendingizning asosiy vazifasini belgilaymiz." },
+      { "title": "Platforma", "description": "Missiya va qadriyatlarni shakllantiramiz." },
+      { "title": "Pozitsiyalash", "description": "Bozordagi noyob o'rningizni topamiz." },
+      { "title": "Topshirish", "description": "Tayyor strategiyani taqdim etamiz." }
+    ]
   }
 }
