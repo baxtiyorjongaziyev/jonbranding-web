@@ -1,4 +1,3 @@
-
 'use client';
 
 import { FC, useState, useEffect } from 'react';
@@ -127,7 +126,6 @@ const ExpandingButton = ({
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const { scrollY } = useScroll();
   
-  // FIX: Move Hooks above any conditional logic
   const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
@@ -169,6 +167,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   ];
 
   const services = [
+    { title: dictionary.brand_strategy, href: `/${lang}/xizmatlar/brand-strategiyasi`, description: dictionary.brand_strategy_desc },
     { title: dictionary.naming, href: `/${lang}/xizmatlar/neyming`, description: dictionary.naming_desc },
     { title: dictionary.logo_design, href: `/${lang}/xizmatlar/logo-dizayni`, description: dictionary.logo_design_desc },
     { title: dictionary.corporate_style, href: `/${lang}/xizmatlar/firmenniy-stil`, description: dictionary.corporate_style_desc },
