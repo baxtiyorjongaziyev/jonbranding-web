@@ -1,4 +1,3 @@
-
 'use server';
 
 import { FC } from 'react';
@@ -24,14 +23,10 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
   }
 
   const icons = [Search, Target, FileText, Pencil, Send];
-  const processSteps = translations.process_steps.map((step: any, index: number) => ({
+  const processSteps = (translations.process_steps || []).map((step: any, index: number) => ({
     ...step,
     icon: icons[index] || Search
   }));
-
-  const handleOpenModal = () => {
-    // This is a server component, we rely on the custom event logic in WhyUs
-  };
 
   return (
     <main className="flex-grow pt-20">
@@ -124,10 +119,6 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
         </div>
       </section>
       
-      {/* 
-        The WhyUs and ServiceSections components are client-side components 
-        that handle their own dictionary fetching or use the passed props.
-      */}
       <WhyUs onCtaClick={() => {}} lang={lang} />
       <ServiceSections lang={lang} />
     </main>
