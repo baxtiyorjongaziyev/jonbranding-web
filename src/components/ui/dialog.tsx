@@ -61,6 +61,13 @@ const DialogContent = React.forwardRef<
       )}
       {...props}
     >
+      {/* 
+        Radix DialogContent requires a DialogTitle for accessibility. 
+        If the children don't provide one, we provide a visually hidden one here.
+      */}
+      <DialogPrimitive.Title className="sr-only">
+        Contact Form Modal
+      </DialogPrimitive.Title>
       {children}
        <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary hidden sm:block">
         <X className="h-4 w-4" />
@@ -124,7 +131,8 @@ const DialogDescription = React.forwardRef<
     {...props}
   />
 ))
-DialogDescription.displayName = DialogPrimitive.Description.displayName
+DialogDescription.displayName =
+  DialogPrimitive.Description.displayName
 
 export {
   Dialog,
