@@ -1,13 +1,13 @@
+
 'use server';
 
-import { FC } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { FileText, Search, Target, Pencil, Send } from 'lucide-react';
-import Image from 'next/image';
-import React from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import WhyUs from '@/components/sections/why-us';
 import ServiceSections from '@/components/sections/service-sections';
+import { Search, Target, FileText, Pencil, Send } from 'lucide-react';
+import Image from 'next/image';
+import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface BrandStrategyPageProps {
   params: Promise<{ lang: string }>;
@@ -19,7 +19,7 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
   const translations = dictionary.brandStrategyPage;
 
   if (!translations) {
-    return <main className="flex-grow pt-20 text-center">Translation missing.</main>;
+    return <main className="flex-grow pt-20 text-center">Tarjima ma'lumotlari topilmadi.</main>;
   }
 
   const icons = [Search, Target, FileText, Pencil, Send];
