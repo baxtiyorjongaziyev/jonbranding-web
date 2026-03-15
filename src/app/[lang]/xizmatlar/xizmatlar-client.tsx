@@ -51,18 +51,18 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
   return (
     <div suppressHydrationWarning className="flex flex-col gap-0 overflow-visible">
       {/* 1. Hero - Immediate */}
-      <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary.servicesHero} />
+      <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary?.servicesHero} />
       
       {/* 2. Why Us - Immediate */}
-      <WhyUs onCtaClick={handleOpenModal} lang={lang} />
+      <WhyUs lang={lang} />
       
       {/* 3. Service Sections - Immediate */}
-      <ServiceSections lang={lang} dictionary={dictionary.serviceSections} />
+      <ServiceSections lang={lang} dictionary={dictionary?.serviceSections} />
       
       {/* 4. Package Builder - Step 1 */}
       {step >= 1 ? (
         <Suspense fallback={<div className="py-20 text-center"><Skeleton className="h-[800px] w-full max-w-6xl mx-auto rounded-3xl" /></div>}>
-          <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
+          <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary?.servicesPage?.packageBuilder} />
         </Suspense>
       ) : <div className="h-40" />}
 
@@ -76,14 +76,14 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       {/* 6. Social Proof & Offers - Step 3-5 */}
       {step >= 3 && (
         <>
-          <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
-          {step >= 4 && <Testimonials lang={lang} dictionary={dictionary.testimonials} />}
+          <TrustedBy lang={lang} dictionary={dictionary?.trustedBy} />
+          {step >= 4 && <Testimonials lang={lang} dictionary={dictionary?.testimonials} />}
           {step >= 5 && (
             <div className="flex flex-col">
               <PersonalOfferBlock onCtaClick={handleOpenModal} />
               <UrgencyBlock />
               <QueueStatus onCtaClick={handleOpenModal} />
-              <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
+              <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary?.mobileCtaBar} />
             </div>
           )}
         </>

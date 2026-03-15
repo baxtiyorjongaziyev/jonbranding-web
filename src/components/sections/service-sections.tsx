@@ -1,4 +1,3 @@
-
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -69,7 +68,7 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDi
         );
     }
 
-    const services = dictionary.services || dictionary.serviceSections?.services || [];
+    const services = dictionary?.services || dictionary?.serviceSections?.services || [];
 
     const orderedServices = [
         services.find((s: any) => s.id === 'neyming'),
