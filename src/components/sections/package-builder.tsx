@@ -130,9 +130,9 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                             </ul>
                         </div>
 
-                        {/* Benefits Section */}
+                        {/* Benefits Section - No Toggles, No Boxes, Just Pure Icons and Text */}
                         {benefits && benefits.length > 0 && (
-                            <div className={cn("space-y-3 pt-4 border-t", isVip ? "border-white/5" : "border-slate-100/10")}>
+                            <div className={cn("space-y-3 pt-4 border-t", isVip ? "border-white/10" : "border-slate-100")}>
                                 <p className={cn("text-[10px] font-black uppercase tracking-[0.15em]", isVip ? "text-amber-400/60" : "text-slate-400")}>
                                     {dictionary.tabs?.benefits || "Nima olasiz"}
                                 </p>

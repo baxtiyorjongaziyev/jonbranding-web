@@ -1,4 +1,3 @@
-
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
@@ -131,7 +130,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "30 kunlik cheksiz tahrir"
             ] : ["10 options", "Strategic notes", "Phonetics", "Domain check", "Social check", "Local patent check", "Competitor analysis", "Linguistics (6 lang)", "Emotional impact", "3 slogans", "Patent filing", "Ownership certificate", "30 days revisions"],
             benefits: isUz ? [
-                { icon: "Gem", title: "Nima olasiz?", description: "Patent qilingan, 6 tilda tekshirilgan, hissiy ta'sir qiladigan nom + shior." }
+                { icon: "Gem", title: "Patent qilingan", description: "6 tilda tekshirilgan, hissiy ta'sir qiladigan nom + shior." }
             ] : [
                 { icon: "Globe", title: "Global Ready", description: "Checked in 6 languages." },
                 { icon: "Lock", title: "Full Ownership", description: "100% legally yours with certificate." }
@@ -155,7 +154,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "3 ta bepul tahrir"
             ] : ["6 options", "Strategy notes", "Digital check", "Patent check", "Competitor analysis", "Emotional impact", "3 revisions"],
             benefits: isUz ? [
-                { icon: "ShieldCheck", title: "Nima olasiz?", description: "Patent tekshirilgan, raqobatchilaringizdan farqli, hissiy ta'sir qiladigan nom — xavfsiz va ishonchli boshlash uchun." }
+                { icon: "ShieldCheck", title: "Patent tekshirilgan", description: "Raqobatchilaringizdan farqli, hissiy ta'sir qiladigan nom — xavfsiz va ishonchli boshlash uchun." }
             ] : [
                 { icon: "Scale", title: "Legal Safety", description: "No patent conflicts." },
                 { icon: "Award", title: "Uniqueness", description: "Differentiate from market." }
@@ -175,7 +174,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "1 ta bepul tahrir"
             ] : ["3 options", "Short notes", "Domain check", "1 revision"],
             benefits: isUz ? [
-                { icon: "CheckCircle", title: "Nima olasiz?", description: "Biznesingiz uchun ishlatishga tayyor, platformalarda band qilingan, professional nom — 7-10 ish kunida." }
+                { icon: "CheckCircle", title: "Ishlatishga tayyor", description: "Biznesingiz uchun professional nom — 7-10 ish kunida." }
             ] : [
                 { icon: "Zap", title: "Speed", description: "Save development time." },
                 { icon: "CheckCircle", title: "Professional", description: "Get an analyzed name." }
