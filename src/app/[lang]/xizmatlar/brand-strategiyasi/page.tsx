@@ -1,4 +1,3 @@
-
 'use server';
 
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -119,7 +118,7 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
         </div>
       </section>
       
-      <WhyUs onCtaClick={() => {}} lang={lang} />
+      <WhyUs lang={lang} />
       <ServiceSections lang={lang} />
     </main>
   );
