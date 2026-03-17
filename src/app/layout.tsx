@@ -23,30 +23,22 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
   const currentLang = locales.includes(rawLang) ? rawLang : defaultLocale;
   
   const titles = {
-    uz: "Jon.Branding | Toshkentdagi Professional Brending Agentligi: Logo va Neyming",
-    ru: "Jon.Branding | Брендинговое Агентство в Ташкенте: Дизайн и Стратегия",
-    en: "Jon.Branding | Premier Branding Agency in Uzbekistan: Logo & Naming",
+    uz: "Jon.Branding | Toshkentdagi Professional Brending Agentligi",
+    ru: "Jon.Branding | Брендинговое Агентство в Ташкенте",
+    en: "Jon.Branding | Premier Branding Agency in Uzbekistan",
     zh: "Jon.Branding | 乌兹别克斯坦领先的品牌代理机构"
   };
 
   const descriptions = {
-    uz: "Biznesingiz uchun natijali brend strategiyasi, neyming va logotip dizayni. Toshkentda Ma'no, Mountain, Abba va Minim darajasidagi premium xizmatlar.",
-    ru: "Стратегический брендинг, нейминг и дизайн логотипов в Ташкенте. Премиальное качество от экспертов с 9-летним опытом.",
-    en: "Strategic branding, naming, and logo design in Tashkent. Elevate your business with results-driven identity solutions.",
-    zh: "在塔什干提供战略品牌、命名和标志设计。通过以结果为导向的身份解决方案提升您的业务。"
-  };
-
-  const keywords = {
-    uz: "branding, ma'no branding, brending uz, logo dizayn, neyming, naming, qadoq dizayn, brandbook, mountain branding, abba marketing, minim, redfox",
-    ru: "брендинг, логотип, нейминг, дизайн упаковки, брендбук, брендинговое агентство ташкент, abba, mountain, ma'no",
-    en: "branding agency uzbekistan, logo design tashkent, naming services, brandbook development, mountain branding, abba marketing",
-    zh: "品牌代理, 标志设计, 命名服务, 包装设计, 品牌手册"
+    uz: "Biznesingiz uchun natijali brend strategiyasi, neyming va logotip dizayni.",
+    ru: "Стратегический брендинг, нейминг и дизайн логотипов в Ташкенте.",
+    en: "Strategic branding, naming, and logo design in Tashkent.",
+    zh: "在塔什干提供战略品牌、命名和标志设计。"
   };
 
   return {
     title: titles[currentLang],
     description: descriptions[currentLang],
-    keywords: keywords[currentLang],
     metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: `${BASE_URL}/${currentLang === defaultLocale ? '' : currentLang}`,
@@ -75,25 +67,6 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
   };
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BrandingAgency',
-  '@id': 'https://jonbranding.uz/#organization',
-  name: 'Jon.Branding',
-  url: 'https://jonbranding.uz',
-  logo: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
-  image: OG_IMAGE_URL,
-  description: 'Jon.Branding is a premier strategic branding consultancy in Uzbekistan specializing in business-centric identity, naming, and brand strategy.',
-  telephone: '+998336450097',
-  priceRange: '$$$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Tashkent City',
-    addressLocality: 'Tashkent',
-    addressCountry: 'UZ'
-  }
-};
-
 const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Locale }> }>> = async ({ children, params }) => {
   const { lang: rawLang } = await params;
   const lang = locales.includes(rawLang) ? rawLang : defaultLocale;
@@ -103,12 +76,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Loc
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <Script
-          id="json-ld"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <Script id="google-consent-mode" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -121,16 +88,16 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Loc
             });
           `}
         </Script>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY" strategy="lazyOnload"></Script>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY" strategy="afterInteractive"></Script>
         <Script
           id="gtag-init"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-B3ZSKB40XY');
+              gtag('config', 'G-B3ZSKB40XY', { page_path: window.location.pathname });
               gtag('config', 'AW-17674872079');
             `,
           }}
