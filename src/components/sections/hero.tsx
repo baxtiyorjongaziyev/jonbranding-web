@@ -1,3 +1,4 @@
+
 'use client';
 
 import type {FC} from 'react';
@@ -71,9 +72,9 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                 <p className="mx-auto lg:mx-0 mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground" dangerouslySetInnerHTML={{ __html: dictionary.description }}>
                 </p>
                 <div className="mt-10 flex justify-center lg:justify-start">
-                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-base px-8 py-6 shadow-lg rounded-full">
+                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-base px-8 py-6 shadow-lg rounded-full" aria-label={dictionary.buttonTexts[buttonIndex]}>
                         {dictionary.buttonTexts[buttonIndex]}
-                        <ArrowRight className="w-5 h-5 ml-2"/>
+                        <ArrowRight className="w-5 h-5 ml-2" aria-hidden="true" />
                     </Button>
                 </div>
                 <div className="mt-6 text-sm text-muted-foreground">
@@ -93,11 +94,12 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                                         <div className="w-full h-full relative aspect-square">
                                             <Image 
                                                 src={image.src}
-                                                alt={image.alt}
+                                                alt={image.alt || 'Jon Branding Portfolio Image'}
                                                 fill
                                                 priority={index === 0}
+                                                fetchPriority={index === 0 ? "high" : "auto"}
                                                 loading={index === 0 ? "eager" : "lazy"}
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
                                                 className="object-cover bg-white"
                                             />
                                         </div>

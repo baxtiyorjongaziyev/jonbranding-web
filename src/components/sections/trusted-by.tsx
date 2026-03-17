@@ -11,19 +11,20 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
 
     return (
         <div className="flex w-full overflow-hidden">
-            <div className="flex-grow flex w-full overflow-hidden">
+            <div className="flex-grow flex w-full overflow-hidden select-none">
                 <ul className={cn(
                     "flex min-w-full shrink-0 items-center justify-around",
                     direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
                 )}>
                     {brands.map((brand, index) => (
                         <li key={index} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-16 w-40 flex items-center justify-center mx-4">
-                            <div className="flex items-center justify-center p-2 h-full w-full transition-all duration-300">
+                            <div className="flex items-center justify-center p-2 h-full w-full">
                                 {brand.logo ? (
                                     <img
                                         src={brand.logo}
-                                        alt={brand.name}
-                                        className="object-contain max-w-full max-h-full"
+                                        alt={`${brand.name} logo`}
+                                        loading="lazy"
+                                        className="object-contain max-w-full max-h-full opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
                                     />
                                 ) : (
                                     <p className="font-semibold text-gray-500 text-base text-center whitespace-nowrap">{brand.name}</p>
@@ -37,16 +38,17 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                     direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
                 )} aria-hidden="true">
                     {brands.map((brand, index) => (
-                        <li key={index + brands.length} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-16 w-40 flex items-center justify-center mx-4">
-                            <div className="flex items-center justify-center p-2 h-full w-full transition-all duration-300">
+                        <li key={`dup-${index}`} className="flex-shrink-0 h-16 w-40 flex items-center justify-center mx-4">
+                            <div className="flex items-center justify-center p-2 h-full w-full">
                                 {brand.logo ? (
                                     <img
                                         src={brand.logo}
-                                        alt={brand.name}
-                                        className="object-contain max-w-full max-h-full"
+                                        alt={`${brand.name} logo`}
+                                        loading="lazy"
+                                        className="object-contain max-w-full max-h-full opacity-70 grayscale"
                                     />
                                 ) : (
-                                    <p className="font-semibold text-gray-500 text-base text-center whitespace-nowrap">{brand.name}</p>
+                                    <p className="font-semibold text-gray-500 text-base text-center">{brand.name}</p>
                                 )}
                             </div>
                         </li>
@@ -69,9 +71,9 @@ const TrustedBy: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictiona
     if (!title) return null;
 
   return (
-    <section className="py-16 sm:py-24 bg-white overflow-hidden">
+    <section className="py-16 sm:py-24 bg-white overflow-hidden" aria-labelledby="trusted-by-title">
       <div className="container mx-auto px-4">
-        <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h2 id="trusted-by-title" className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           {title}
         </h2>
       </div>

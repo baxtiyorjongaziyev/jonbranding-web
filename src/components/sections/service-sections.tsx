@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -79,8 +80,9 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDi
     ].filter(Boolean);
     
     return (
-        <section className="py-16 sm:py-24 bg-white" aria-label="Xizmatlar bo'limi">
+        <section className="py-16 sm:py-24 bg-white" aria-labelledby="services-heading">
             <div className="container mx-auto px-4">
+                <h2 id="services-heading" className="sr-only">Xizmatlarimiz</h2>
                 <motion.div 
                     variants={containerVariants}
                     initial="hidden"
@@ -92,7 +94,7 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDi
                         const Icon = serviceIcons[service.id] || Paintbrush;
                         const accessibilityLabel = `${service.title} xizmati haqida batafsil ma'lumot`;
                         return (
-                             <motion.div key={service.id} variants={itemVariants}>
+                             <motion.article key={service.id} variants={itemVariants}>
                                  <Card className="group relative flex flex-col text-center shadow-lg rounded-2xl bg-secondary/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 max-w-sm mx-auto border-none h-full">
                                     <CardContent className="p-8 flex flex-col items-center flex-grow">
                                         <div className="bg-primary/10 p-4 rounded-full mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
@@ -103,12 +105,12 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDi
                                         <Button asChild variant="ghost" className="mt-6 text-primary hover:text-primary hover:bg-primary/5">
                                             <Link href={`/${lang}/xizmatlar/${service.id}`} aria-label={accessibilityLabel}>
                                                 {service.buttonText || "Batafsil"}
-                                                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                                             </Link>
                                         </Button>
                                     </CardContent>
                                 </Card>
-                             </motion.div>
+                             </motion.article>
                         );
                     })}
                 </motion.div>
