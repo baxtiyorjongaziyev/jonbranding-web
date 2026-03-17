@@ -1,16 +1,23 @@
-
-import { ReactNode } from 'react';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
-import { getDictionary, Locale } from '@/lib/dictionaries';
+import type { Metadata } from 'next';
+import Script from 'next/script';
+import '../globals.css';
+import type { FC, ReactNode } from 'react';
+import { Poppins } from 'next/font/google';
+import MainLayout from '@/components/layout/main-layout';
+import type { Locale } from '@/lib/i18n/locale';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
-import { Metadata } from 'next';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+  weight: ['400', '500', '600', '700', '800']
+});
 
 const BASE_URL = 'https://jonbranding.uz';
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
 
 export async function generateMetadata(props: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
-  // NEXT 15: await params
   const { lang: rawLang } = await props.params;
   const currentLang = locales.includes(rawLang) ? rawLang : defaultLocale;
   
@@ -22,17 +29,17 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
   };
 
   const descriptions = {
-    uz: "Ma'no, Mountain, Abba darajasidagi premium brend strategiyasi, neyming va logotip dizayni. Toshkentda natijali aydentika va brandbook yaratish.",
-    ru: "Стратегический брендинг, нейминг и дизайн логотипов в Ташкенте. Премиальное качество на уровне Ma'no, Mountain, Abba.",
-    en: "Strategic branding, naming, and logo design in Tashkent. Premium quality on par with Ma'no, Mountain, Abba.",
-    zh: "在塔什干提供战略品牌、命名和标志设计。高端品牌代理服务。"
+    uz: "Biznesingiz uchun natijali brend strategiyasi, neyming va logotip dizayni. Toshkentda Ma'no, Mountain, Abba va Minim darajasidagi premium xizmatlar.",
+    ru: "Стратегический брендинг, нейминг и дизайн логотипов в Ташкенте. Премиальное качество от экспертов с 9-летним опытом.",
+    en: "Strategic branding, naming, and logo design in Tashkent. Elevate your business with results-driven identity solutions.",
+    zh: "在塔什干提供战略品牌、命名和标志设计。通过以结果为导向的身份解决方案提升您的业务。"
   };
 
   const keywords = {
-    uz: "branding, ma'no branding, brending uz, logo dizayn, neyming, naming, qadoq dizayn, brandbook, brandbuk, brendbuk, mountain branding, abba marketing, minim, redfox",
-    ru: "брендинг, логотип, нейминг, дизайн упаковки, брендбук, брендинговое агентство ташкент, abba, mountain, ma'no, minim, redfox",
-    en: "branding agency uzbekistan, logo design tashkent, naming services, brandbook development, mountain branding, abba marketing, minim, redfox",
-    zh: "品牌代理, 标志设计, 命名服务, 包装设计, 品牌手册, Ma'no, Mountain, Abba"
+    uz: "branding, logo dizayn, neyming, brandbook, tashkent branding, brending agentligi, vizual aydentika",
+    ru: "брендинг, логотип, нейминг, дизайн упаковки, брендбук, брендинговое агентство ташкент",
+    en: "branding agency uzbekistan, logo design tashkent, naming services, brandbook development",
+    zh: "品牌代理, 标志设计, 命名服务, 包装设计, 品牌手册"
   };
 
   return {
@@ -52,7 +59,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
     openGraph: {
       title: titles[currentLang],
       description: descriptions[currentLang],
-      url:`${BASE_URL}/${currentLang}`,
+      url: `${BASE_URL}/${currentLang}`,
       siteName: 'Jon.Branding',
       images: [{ url: OG_IMAGE_URL, width: 1200, height: 630, alt: 'Jon Branding Agency' }],
       type: 'website',
@@ -67,20 +74,78 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
   };
 }
 
-export default async function LangLayout(props: {
-  children: ReactNode;
-  params: Promise<{ lang: Locale }>;
-}) {
-  // NEXT 15: await params
-  const { lang: rawLang } = await props.params;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BrandingAgency',
+  '@id': 'https://jonbranding.uz/#organization',
+  name: 'Jon.Branding',
+  url: 'https://jonbranding.uz',
+  logo: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
+  image: OG_IMAGE_URL,
+  description: 'Jon.Branding is a premier strategic branding consultancy in Uzbekistan specializing in business-centric identity, naming, and brand strategy.',
+  telephone: '+998336450097',
+  priceRange: '$$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Tashkent City',
+    addressLocality: 'Tashkent',
+    addressCountry: 'UZ'
+  }
+};
+
+const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Locale }> }>> = async ({ children, params }) => {
+  const { lang: rawLang } = await params;
   const lang = locales.includes(rawLang) ? rawLang : defaultLocale;
-  const dictionary = await getDictionary(lang);
-  
+
   return (
-    <>
-      <Header lang={lang} dictionary={dictionary.header} />
-      {props.children}
-      <Footer lang={lang} dictionary={dictionary.footer} />
-    </>
+    <html lang={lang} suppressHydrationWarning className={poppins.variable}>
+      <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="theme-color" content="#050583" />
+        <link rel="preconnect" href="https://img1.teletype.in" />
+        <link rel="preconnect" href="https://img2.teletype.in" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <Script
+          id="json-ld"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <Script id="google-consent-mode" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              'ad_storage': 'granted',
+              'ad_user_data': 'granted',
+              'ad_personalization': 'granted',
+              'analytics_storage': 'granted'
+            });
+          `}
+        </Script>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY" strategy="lazyOnload"></Script>
+        <Script
+          id="gtag-init"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-B3ZSKB40XY', { page_path: window.location.pathname });
+              gtag('config', 'AW-17674872079');
+            `,
+          }}
+        />
+      </head>
+      <body className={`font-body bg-white antialiased`} suppressHydrationWarning>
+        <MainLayout>
+          {children}
+        </MainLayout>
+      </body>
+    </html>
   );
 }
+
+export default RootLayout;

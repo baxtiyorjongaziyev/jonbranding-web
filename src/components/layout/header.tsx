@@ -1,3 +1,4 @@
+
 'use client';
 
 import { FC, useState, useEffect } from 'react';
@@ -100,7 +101,7 @@ const ExpandingButton = ({
     <motion.a
       href={href}
       target={target}
-      rel="noopener noreferrer"
+      rel={target === '_blank' ? 'noopener noreferrer' : undefined}
       aria-label={ariaLabel}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
@@ -109,7 +110,7 @@ const ExpandingButton = ({
       className="relative flex h-10 items-center justify-start rounded-full border border-black/10 bg-white/50 text-foreground shadow-md backdrop-blur-sm transition-colors duration-300 hover:border-white/20 hover:bg-white/20 overflow-hidden px-2.5"
     >
       <div className="flex items-center gap-2">
-        <div className="flex-shrink-0 h-5 w-5">{icon}</div>
+        <div className="flex-shrink-0 h-5 w-5" aria-hidden="true">{icon}</div>
         <motion.span 
           className="whitespace-nowrap text-sm font-medium"
           initial={{ opacity: 0, x: -10 }}
@@ -268,13 +269,13 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn("text-foreground border-border/50", scrolled && "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground")}>
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-5 w-5" aria-hidden="true" />
                   <span className="sr-only">{dictionary.open_menu}</span>
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
                 <SheetHeader>
-                    <SheetTitle className="sr-only">Menyu</SheetTitle>
+                    <SheetTitle className="text-xl font-bold">Menyu</SheetTitle>
                 </SheetHeader>
                  <ScrollArea className="h-full">
                   <nav className="flex flex-col gap-6 pt-10 pr-6">
@@ -298,16 +299,16 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                       ))}
                       <div className="border-t pt-6 mt-4 space-y-4">
                           <a href="tel:+998336450097" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
-                          <Phone size={20} />
+                          <Phone size={20} aria-hidden="true" />
                           +998 33 645 00 97
                           </a>
                           <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
-                          <Send size={20} />
+                          <Send size={20} aria-hidden="true" />
                           {dictionary.contact_by_telegram}
                           </a>
                       </div>
                       <div className="pt-6">
-                          <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 py-6 text-lg">
+                          <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 py-6 text-lg" aria-label={dictionary.free_consultation}>
                           {dictionary.free_consultation}
                           </Button>
                       </div>
