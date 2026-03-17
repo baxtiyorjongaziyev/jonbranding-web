@@ -54,8 +54,8 @@
     "title": "Brend strategiyasi",
     "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesni o'stirishga yordam beradigan aniq g'oyadir.",
     "section1_title": "Brend strategiyasi — biznes o'sishining vositasi",
-    "section1_p1": "Har bir ambitsiyali kompaniyaning o'z maqsadlari bor. Kimdir uchun bu bozordagi ma'lum ulushni egallash, boshqasi uchun brend tanilishi va h.k.",
-    "section1_p2": "Brend strategiyasi kompaniyaga ushbu maqsadlarga erishishda yordam beradi, unga shunchaki mahsulot emas, balki mijozlar hayotining bir qismiga aylanishiga imkon beradi.",
+    "section1_p1": "Ushbu maqsadlarga erishishda brend strategiyasi kompaniyaga shunchaki mahsulot emas, balki mijozlar hayotining bir qismiga aylanishiga imkon beradi.",
+    "section1_p2": "Har bir ambitsiyali kompaniyaning o'z maqsadlari bor. Kimdir uchun bu bozordagi ma'lum ulushni egallash, boshqasi uchun brend tanilishi va h.k.",
     "section1_p3": "Eng muhimi, bu marketing xarajatlarini tizimlashtirishga va samarasiz kanallardan voz kechishga yordam beradi.",
     "section2_title": "Strategiya har qanday biznes uchun zarur",
     "section2_p1": "Strategiya ham yangi, ham uzoq vaqtdan beri mavjud kompaniyalar uchun zarurdir.",
@@ -133,31 +133,6 @@
     "successToast": {
       "title": "Muvaffaqiyatli!",
       "description": "Sizning so'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!"
-    },
-    "leadMagnetToast": {
-      "title": "Siz uchun maxsus resurslar!",
-      "description": "So'rovingiz qabul qilindi! Boshlanishiga sizni bepul materiallarimizga yo'naltiramiz."
-    },
-    "errorToast": {
-      "title": "Xatolik!",
-      "description": "So'rov yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
     }
-  },
-  "hero": {
-    "headlines": [
-      "Brendingiz |sotmayaptimi?| Biz buni to'g'rilaymiz.",
-      "Raqobatchilardan |ajralib turing|.",
-      "Brendingizni shunchaki chiroyli emas, |foydali| qiling.",
-      "Mijozlarni o'zingizga |oshiq qiling|. Qayta va qayta.",
-      "Kichik biznesdan |kuchli brendga|. Bir qadamda."
-    ],
-    "description": "Biz shunchaki logotiplar chizmaymiz. Biz Toshkentdagi yetakchi brending agentligi sifatida, biznesingiz uchun mijozlar qalbini zabt etadigan <span class='font-bold text-foreground'>natijaga yo'naltirilgan</span> brend tizimini quramiz.",
-    "buttonTexts": [
-      "Brendimni tahlil qiling",
-      "Sotuvlarni oshirishga yordam bering",
-      "Bepul strategik sessiya",
-      "Menga kuchli brend kerak"
-    ],
-    "buttonHint": "Bepul. Majburiyatlarsiz."
   }
 }
