@@ -7,30 +7,33 @@
     "blog": "Blog",
     "services": "Services",
     "brand_strategy": "Brand Strategy",
-    "brand_strategy_desc": "Foundation for your brand — market analysis, positioning, and communication.",
+    "brand_strategy_desc": "Foundation for your brand — analysis and positioning.",
     "naming": "Naming",
-    "naming_desc": "Choosing a memorable, strong, and legally clear name for your brand.",
+    "naming_desc": "Choosing a strong and memorable name for your brand.",
     "logo_design": "Logo Design",
-    "logo_design_desc": "Creating a unique and memorable sign that reflects your business essence.",
+    "logo_design_desc": "Creating a unique mark reflecting your business.",
     "brandbook": "Brandbook",
-    "brandbook_desc": "A document describing the rules for using your brand identity.",
+    "brandbook_desc": "Rules for using your brand identity.",
     "corporate_style": "Corporate Style",
-    "corporate_style_desc": "A system of logos, colors, and fonts that make your brand recognizable.",
+    "corporate_style_desc": "System of logos, colors, and fonts.",
     "packaging_design": "Packaging Design",
-    "packaging_design_desc": "Attractive design that makes your product stand out on the shelf.",
+    "packaging_design_desc": "Attractive design making you stand out.",
     "services_and_prices": "Services & Prices",
-    "services_and_prices_desc": "Build your own package and get an instant price.",
+    "services_and_prices_desc": "Build your package and get a price instantly.",
     "contact_by_phone": "Call",
     "contact_by_telegram": "Telegram",
     "free_consultation": "Free Consultation",
     "open_menu": "Open Menu",
-    "switch_lang": "Change Language"
+    "switch_lang": "Change Language",
+    "lang_ru": "Russian",
+    "lang_uz": "Uzbek",
+    "lang_en": "English"
   },
   "footer": {
     "contact": "Contact Us",
     "by_telegram": "Via Telegram",
     "by_phone": "By Phone",
-    "main_page": "Main Sections",
+    "main_page": "Main Page",
     "portfolio": "Portfolio",
     "founder": "Founder",
     "process": "Process",
@@ -51,32 +54,83 @@
     "back_to_top": "Back to top",
     "patent_calculator": "Patent Calculator"
   },
-  "brandStrategyPage": {
+  "cookieConsent": {
+    "message": "We use cookies to improve your experience.",
+    "acceptButton": "Accept"
+  },
+  "brandbookPage": {
     "metadata": {
-      "title": "Brand Strategy & Platform | Branding Agency in Tashkent",
-      "description": "Brand strategy is a business growth tool. Transform your brand from just a picture into a working system. We develop brand platforms."
+      "title": "Brandbook Development | Jon.Branding",
+      "description": "Rules for your brand identity system.",
+      "keywords": "brandbook, guideline, design"
     },
-    "title": "Brand Strategy",
-    "subtitle": "A strong brand is a clear idea that inspires, unites, and helps the business grow.",
-    "section1_title": "Brand Strategy — Business Growth Tool",
-    "section1_p1": "Every ambitious company has its goals. For some, it's gaining a market share, for others — brand awareness.",
-    "section1_p2": "Brand strategy helps achieve these goals, allowing the company to become a part of its customers' lives.",
-    "section1_p3": "Most importantly, it helps systematize marketing costs and avoid ineffective channels.",
-    "section2_title": "Strategy is Essential for Any Business",
-    "section2_p1": "Brand strategy is necessary for both new and long-existing companies.",
-    "section2_p2_bold": "For startups,",
-    "section2_p2_text": "it helps define mission, values, and identity from the very beginning.",
-    "section2_p3_bold": "For large companies,",
-    "section2_p3_text": "strategy is a tool for managing growth and reputation. It helps adapt to changes.",
-    "section2_p4": "Regardless of business size, strategy answers the main question: why should the customer choose you?",
-    "process_title": "Branding is a Process",
-    "process_subtitle": "At our agency, we believe branding is more than just creating a logo.",
-    "process_steps": [
-      { "title": "Analysis & Research", "description": "Market, competitors, and audience data is collected. This is the first and most important step." },
-      { "title": "Brand Platform", "description": "Mission, values, and unique offer are developed — this defines the brand voice." },
-      { "title": "Strategy Development", "description": "How and through which channels the brand will communicate is determined." },
-      { "title": "Visual Identity", "description": "Brand meanings are translated into visual language — logo and colors." },
-      { "title": "Implementation", "description": "The brand is integrated into company culture and customer touchpoints." }
+    "title": "Brandbook Development",
+    "subtitle": "Not just a document, but your brand's constitution.",
+    "cta_button": "Order Brandbook"
+  },
+  "popularPackages": {
+    "title": "Most Popular Packages",
+    "packageTitle": "Naming + Logo (Premium)",
+    "packagePrice": "In package",
+    "ctaButton": "Select this package"
+  },
+  "hero": {
+    "headlines": [
+      "Is your branding |not selling?|",
+      "Stand out from |competitors|.",
+      "Small business to |strong brand|."
+    ],
+    "description": "We build results-driven brand systems.",
+    "buttonTexts": [
+      "Analyze my brand",
+      "Get free consultation"
+    ],
+    "buttonHint": "Free. No obligations."
+  },
+  "contactModal": {
+    "title": "For Quality Consultation",
+    "description": "Answer a few questions so we can understand your project.",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "submitButton": "Send Request",
+    "successToast": { "title": "Success!", "description": "We'll contact you soon!" }
+  },
+  "urgencyBlock": {
+    "title": "🔥 BEFORE YOU CLOSE...",
+    "subtitle": "Imagine:",
+    "line3": "He invested. You... thought."
+  },
+  "servicesHero": {
+    "title": "Services to Strengthen Your Brand",
+    "subtitle": "Guaranteed results for your business",
+    "cta": "View Prices"
+  },
+  "serviceSections": {
+    "services": [
+      { "id": "neyming", "title": "Naming", "description": "Strong name selection.", "buttonText": "Learn more" },
+      { "id": "logo-dizayni", "title": "Logo Design", "description": "Reflecting your essence.", "buttonText": "Learn more" }
     ]
-  }
+  },
+  "stats": {
+    "experience": "Years experience",
+    "clients": "Happy clients"
+  },
+  "trustedBy": { "title": "Companies That Trust Us" },
+  "whyUs": {
+    "title": "Why Choose Us?",
+    "ctaButton": "Analyze my brand for free"
+  },
+  "targetAudience": { "title": "Know These Problems?" },
+  "testimonials": { "title": "Client Feedback" },
+  "gallery": { "title": "Portfolio Examples" },
+  "process": { "title": "Our Process", "ctaButton": "Discuss project" },
+  "leadMagnet": { "title": "Scale Your Brand", "cta": { "button": "Get consultation" } },
+  "faq": { "title": "FAQ", "ctaButton": "Ready to start!" },
+  "mobileCtaBar": { "get_offer": "Send request" },
+  "blog": { "title": "Blog", "readMore": "Read more" },
+  "quiz": { "resultButton": "View result" },
+  "brandStrategyPage": { "title": "Brand Strategy" },
+  "patentCalculatorPage": { "title": "Patent Calculator" },
+  "servicesPage": { "packageBuilder": { "title": "Services & Prices" } },
+  "queueStatus": { "title": "Book Your Slot!", "ctaButton": "Book now" }
 }

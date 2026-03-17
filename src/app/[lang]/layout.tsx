@@ -83,32 +83,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Loc
         <link rel="preconnect" href="https://img1.teletype.in" />
         <link rel="preconnect" href="https://img2.teletype.in" />
         <link rel="preconnect" href="https://images.unsplash.com" />
-        <Script id="google-consent-mode" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('consent', 'default', {
-              'ad_storage': 'granted',
-              'ad_user_data': 'granted',
-              'ad_personalization': 'granted',
-              'analytics_storage': 'granted'
-            });
-          `}
-        </Script>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY" strategy="lazyOnload"></Script>
-        <Script
-          id="gtag-init"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-B3ZSKB40XY', { page_path: window.location.pathname });
-              gtag('config', 'AW-17674872079');
-            `,
-          }}
-        />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
       </head>
       <body className={`font-body bg-white antialiased`} suppressHydrationWarning>
         <MainLayout>
