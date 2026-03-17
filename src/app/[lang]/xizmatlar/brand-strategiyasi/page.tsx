@@ -59,7 +59,9 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
                     alt="Business growth strategy chart"
                     width={800}
                     height={600}
-                    className="w-full h-auto object-cover"/>
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
                 </CardContent>
               </Card>
             </div>
@@ -87,7 +89,8 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
                   width={800}
                   height={600}
                   data-ai-hint="startup team meeting"
-                  className="w-full h-auto object-cover aspect-square"/>
+                  className="w-full h-auto object-cover aspect-square"
+                />
               </Card>
             </div>
           </div>
@@ -118,7 +121,7 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
         </div>
       </section>
       
-      <WhyUs lang={lang} />
+      <WhyUs lang={lang} onCtaClick={() => {}} />
       <ServiceSections lang={lang} />
     </main>
   );
