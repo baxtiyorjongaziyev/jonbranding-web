@@ -2,7 +2,7 @@
   "header": {
     "portfolio": "Portfolio",
     "founder": "Asoschi",
-    "process": "Jarayon",
+    "process": "Ishlash tartibi",
     "blog": "Blog",
     "services": "Xizmatlar",
     "brand_strategy": "Brend-strategiya",
@@ -29,11 +29,11 @@
     "contact": "Biz bilan bog'laning",
     "by_telegram": "Telegram orqali",
     "by_phone": "Telefon orqali",
-    "main_page": "Bosh sahifa",
+    "main_page": "Asosiy bo'limlar",
     "portfolio": "Portfolio",
     "founder": "Asoschi",
-    "process": "Jarayon",
-    "faq": "FAQ",
+    "process": "Ishlash tartibi",
+    "faq": "Savol-javoblar",
     "services": "Xizmatlarimiz",
     "brand_strategy": "Brend-strategiya",
     "naming": "Neyming",
@@ -49,6 +49,30 @@
     "all_rights_reserved": "Barcha huquqlar himoyalangan.",
     "back_to_top": "Yuqoriga qaytish",
     "patent_calculator": "Patent kalkulyatori"
+  },
+  "brandStrategyPage": {
+    "title": "Brend strategiyasi",
+    "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesni o'stirishga yordam beradigan aniq g'oyadir.",
+    "section1_title": "Brend strategiyasi — biznes o'sishining vositasi",
+    "section1_p1": "Har bir ambitsiyali kompaniyaning o'z maqsadlari bor. Kimdir uchun bu bozordagi ma'lum ulushni egallash, boshqasi uchun brend tanilishi va h.k.",
+    "section1_p2": "Brend strategiyasi kompaniyaga ushbu maqsadlarga erishishda yordam beradi, unga shunchaki mahsulot emas, balki mijozlar hayotining bir qismiga aylanishiga imkon beradi.",
+    "section1_p3": "Eng muhimi, bu marketing xarajatlarini tizimlashtirishga va samarasiz kanallardan voz kechishga yordam beradi.",
+    "section2_title": "Strategiya har qanday biznes uchun zarur",
+    "section2_p1": "Strategiya ham yangi, ham uzoq vaqtdan beri mavjud kompaniyalar uchun zarurdir.",
+    "section2_p2_bold": "Startaplar uchun,",
+    "section2_p2_text": "u boshidanoq missiya, qadriyatlar va identifikatsiyani aniqlashga yordam beradi.",
+    "section2_p3_bold": "Yirik kompaniyalar uchun,",
+    "section2_p3_text": "strategiya o'sish va obro'ni boshqarish vositasidir.",
+    "section2_p4": "Biznes hajmidan qat'i nazar, strategiya asosiy savolga javob beradi: nega mijoz aynan sizni tanlashi kerak?",
+    "process_title": "Brending — bu jarayon",
+    "process_subtitle": "Biz brending shunchaki logotip yaratishdan ko'proq narsa ekanligiga ishonamiz.",
+    "process_steps": [
+      { "title": "Tahlil va tadqiqot", "description": "Bozor, raqobatchilar va auditoriya haqida ma'lumotlar yig'iladi." },
+      { "title": "Brend platformasini shakllantirish", "description": "Missiya, qadriyatlar va noyob taklif ishlab chiqiladi." },
+      { "title": "Strategiya ishlab chiqish", "description": "Brend qanday va qaysi kanallar orqali muloqot qilishi belgilanadi." },
+      { "title": "Vizual identifikatsiya", "description": "Brend ma'nolari vizual tilga — logotip va ranglarga ko'chiriladi." },
+      { "title": "Tatbiq etish va integratsiya", "description": "Brend xodimlar va mijozlar hayotiga singdiriladi." }
+    ]
   },
   "contactModal": {
     "stepTitles": {
@@ -119,54 +143,12 @@
       "description": "So'rov yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
     }
   },
-  "brandStrategyPage": {
-    "title": "Brend-strategiya",
-    "subtitle": "Kuchli brend — bu ilhomlantiradigan, birlashtiradigan va biznesni o'stirishga yordam beradigan aniq g'oyadir.",
-    "section1_title": "Brend-strategiya — biznes o'sishining vositasi",
-    "section1_p1": "Har bir ambitsiyali kompaniyaning o'z maqsadlari bor. Kimdir uchun bu bozordagi ma'lum ulushni egallash, boshqasi uchun brend tanilishi va h.k.",
-    "section1_p2": "Brend-strategiya kompaniyaga ushbu maqsadlarga erishishda yordam beradi, unga shunchaki mahsulot emas, balki mijozlar hayotining bir qismiga aylanishiga imkon beradi.",
-    "section1_p3": "Eng muhimi, bu marketing xarajatlarini tizimlashtirishga va samarasiz kanallardan voz kechishga yordam beradi.",
-    "section2_title": "Strategiya har qanday biznes uchun zarur",
-    "section2_p1": "Strategiya ham yangi, ham uzoq vaqtdan beri mavjud kompaniyalar uchun zarurdir.",
-    "section2_p2_bold": "Startaplar uchun,",
-    "section2_p2_text": "u boshidanoq missiya, qadriyatlar va identifikatsiyani aniqlashga yordam beradi.",
-    "section2_p3_bold": "Yirik kompaniyalar uchun,",
-    "section2_p3_text": "strategiya o'sish va obro'ni boshqarish vositasidir.",
-    "section2_p4": "Biznes hajmidan qat'i nazar, strategiya asosiy savolga javob beradi: nega mijoz aynan sizni tanlashi kerak?",
-    "process_title": "Brending — bu jarayon",
-    "process_subtitle": "Biz brending shunchaki logotip yaratishdan ko'proq narsa ekanligiga ishonamiz.",
-    "process_steps": [
-      { "title": "Tahlil va tadqiqot", "description": "Bozor, raqobatchilar va auditoriya haqida ma'lumotlar yig'iladi." },
-      { "title": "Brend platformasini shakllantirish", "description": "Missiya, qadriyatlar va noyob taklif ishlab chiqiladi." },
-      { "title": "Strategiya ishlab chiqish", "description": "Brend qanday va qaysi kanallar orqali muloqot qilishi belgilanadi." },
-      { "title": "Vizual identifikatsiya", "description": "Brend ma'nolari vizual tilga — logotip va ranglarga ko'chiriladi." },
-      { "title": "Tatbiq etish va integratsiya", "description": "Brend xodimlar va mijozlar hayotiga singdiriladi." }
-    ]
-  },
-  "popularPackages": {
-    "title": "Eng ommabop paketlar",
-    "packageTitle": "Neyming + Logotip (Premium)",
-    "packageSubtitle": "Kuchli brendni boshlash uchun mukammal kombinatsiya.",
-    "features": [
-      "Brendingiz uchun mukammal nom (6 tilda tekshirilgan)",
-      "Professional logotip (5 ta konsepsiya)",
-      "To'liq firma uslubi (ranglar, shriftlar)",
-      "15+ real maketlarda namoyish",
-      "Patent auditi va konsultatsiya",
-      "10 ta brendlangan stiker"
-    ],
-    "separate": "Alohida",
-    "packagePrice": "Paketda",
-    "packageDiscount": "(-20% chegirma!)",
-    "upfrontDiscount": "100% oldindan to'lovda (-28% jami!)",
-    "ctaButton": "Ushbu paketni tanlash"
-  },
   "hero": {
     "headlines": [
       "Brendingiz |sotmayaptimi?| Biz buni to'g'rilaymiz.",
       "Raqobatchilardan |ajralib turing|.",
       "Brendingizni shunchaki chiroyli emas, |foydali| qiling.",
-      "Mijozlarni o'zingizga |oshiq qiling|. Qayta va qarta.",
+      "Mijozlarni o'zingizga |oshiq qiling|. Qayta va qayta.",
       "Kichik biznesdan |kuchli brendga|. Bir qadamda."
     ],
     "description": "Biz shunchaki logotiplar chizmaymiz. Biz Toshkentdagi yetakchi brending agentligi sifatida, biznesingiz uchun mijozlar qalbini zabt etadigan <span class='font-bold text-foreground'>natijaga yo'naltirilgan</span> brend tizimini quramiz.",
@@ -177,103 +159,5 @@
       "Menga kuchli brend kerak"
     ],
     "buttonHint": "Bepul. Majburiyatlarsiz."
-  },
-  "whyUs": {
-    "title": "Nega aynan biz?",
-    "subtitle": "Biz shunchaki va'dalar bermaymiz. Biz tizimli yondashuv orqali brendingiz uchun real qiymat yaratamiz.",
-    "values": [
-      { "title": "Strategik yondashuv", "description": "Har bir dizayn elementi sizning sotuvlaringizni oshirish va brendingizni mustahkamlashga xizmat qiladi." },
-      { "title": "Shaffof jarayon", "description": "Har bir bosqich siz bilan kelishiladi va siz jarayonni to'liq nazorat qilasiz." },
-      { "title": "Natija va Sadoqat", "description": "90% mijozlarimiz bizni o'z tanishlariga tavsiya qilishadi. Bu biz uchun eng katta yutuq." }
-    ],
-    "ctaTitle": "Yondashuvimiz ma'qulmi?",
-    "ctaDesc": "Keling, brendingizni bepul tahlil qilamiz va uning kuchli hamda zaif tomonlarini aniqlaymiz.",
-    "ctaButton": "Bepul tahlilni boshlash"
-  },
-  "faq": {
-    "title": "Ko'p beriladigan savollar",
-    "subtitle": "Brending jarayoni, narxlar va boshqa mavzular bo'yicha javoblar.",
-    "faqItems": [
-      { "question": "Nega narxlar qat'iy belgilanmagan?", "answer": "Har bir loyiha unikal. Narx ish hajmi va biznes maqsadlaringizdan kelib chiqib individual hisoblanadi." },
-      { "question": "To'lov shartlari qanday?", "answer": "Standart tartib — 50% oldindan, 50% ish topshirilgach. 100% to'lov uchun maxsus chegirmalar bor." },
-      { "question": "Kafolatlar bormi?", "answer": "Ha, bizda '100% Mamnuniyat Kafolati' mavjud. Agar konsepsiyalar ma'qul kelmasa, mablag'ni qaytaramiz." }
-    ],
-    "ctaTitle": "Shubhalarga o'rin qoldirmang!",
-    "ctaDesc": "Barcha savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz.",
-    "ctaButton": "Boshlashga tayyorman!"
-  },
-  "mobileCtaBar": {
-    "final_price": "Yakuniy narx",
-    "get_offer": "So'rov yuborish"
-  },
-  "quiz": {
-    "metadata": {
-      "title": "Mini-test: Is sizning biznesingiz brendingga tayyormi? | Jon.Branding",
-      "description": "Bir necha oddiy savollarga javob bering va biznesingiz brendingga qanchalik tayyorligini, uning kuchli va zaif tomonlarini bilib oling."
-    },
-    "exampleTitle": "Dunyo brendlari misolida:",
-    "questions": [
-      {
-        "question": "Biznesingizning asosiy g'oyasi yoki missiyasi bitta gap bilan ifodalanganmi?",
-        "brandExample": "Volvo — xavfsizlik; Nike — dunyodagi har bir sportchiga ilhom va innovatsiya olib kirish.",
-        "options": [
-          { "text": "Ha, aniq va hamma uchun tushunarli", "score": 3 },
-          { "text": "Qisman, lekin hali to'liq emas", "score": 2 },
-          { "text": "Yo'q, bu haqda o'ylab ko'rmaganman", "score": 1 }
-        ]
-      },
-      {
-        "question": "Siz maqsadli auditoriyangizni (ideal mijozingizni) aniq tasavvur qila olasizmi?",
-        "brandExample": "Apple — ijodiy mutaxassislar va texnologiya ixlosmandlari; Johnson's Baby — yosh onalar.",
-        "options": [
-          { "text": "Ha, ularning ehtiyojlari va istaklarini bilaman", "score": 3 },
-          { "text": "Umumiy tasavvurga egaman", "score": 2 },
-          { "text": "Yo'q, hammaga sotishga harakat qilyapman", "score": 1 }
-        ]
-      },
-      {
-        "question": "Brendingiz raqobatchilardan qaysi aniq afzalliklari bilan ajralib turadi?",
-        "brandExample": "Tesla — innovatsion elektromobillar; M&M's — 'og'izda eriydi, qo'lda emas'.",
-        "options": [
-          { "text": "Kamida 2-3 ta aniq afzalligim bor", "score": 3 },
-          { "text": "Faqat narxim bilan farqlanaman", "score": 2 },
-          { "text": "Aniq afzalliklarim yo'q", "score": 1 }
-        ]
-      },
-      {
-        "question": "Sizning vizual ko'rinishingiz (logotip, ranglar, dizayn) biznesingiz qadriyatlarini aks ettiradimi?",
-        "brandExample": "Coca-Cola qizil rangi — energiya va ehtiros; Tiffany & Co. feruza rangi — hashamat va nafosat.",
-        "options": [
-          { "text": "Ha, to'liq mos keladi", "score": 3 },
-          { "text": "Qisman, ba'zi elementlarni yangilash kerak", "score": 2 },
-          { "text": "Yo'q, bunga e'tibor bermaganman", "score": 1 }
-        ]
-      },
-      {
-        "question": "Mijozlaringiz siz haqingizda yagona va ijobiy fikrdami?",
-        "brandExample": "Starbucks — shunchaki qahva emas, 'uchinchi joy'; Zappos — ajoyib mijozlarga xizmat ko'rsatish.",
-        "options": [
-          { "text": "Ha, brendim obro'si mustahkam", "score": 3 },
-          { "text": "Har xil, ba'zan salbiy fikrlar ham bo'ladi", "score": 2 },
-          { "text": "Bilmayman, so'rovnoma o'tkazmaganman", "score": 1 }
-        ]
-      }
-    ],
-    "result": {
-      "bad": {
-        "title": "Sizga yordam kerak (5-8 ball)",
-        "description": "Brendingiz poydevori zaif. Raqobatchilardan ajralib turish va mijozlar mehrini qozonish uchun sizga albatta professional yordam kerak."
-      },
-      "medium": {
-        "title": "Yaxshi potentsial, lekin bo'shliqlar bor (9-12 ball)",
-        "description": "Sizda yaxshi poydevor bor, lekin brendingizni yanada kuchliroq va samaraliroq qilish mumkin. Mavjud bo'shliqlarni to'ldirish kerak."
-      },
-      "good": {
-        "title": "A'lo! Brendingiz poydevori mustahkam (13-15 ball)",
-        "description": "Tabriklaymiz! Siz brending masalalarida to'g'ri yo'ldasiz. Endi bu poydevorni yanada mustahkamlab, bozor yetakchisiga aylanish vaqti keldi."
-      },
-      "afterSubmitText": "Yaqin orada mutaxassisimiz siz bilan bog'lanadi, test natijalaringizni batafsil tahlil qilish va shaxsiy tavsiyalar berish bo'yicha suhbatlashadi.",
-      "backToHome": "Bosh sahifaga qaytish"
-    }
   }
 }
