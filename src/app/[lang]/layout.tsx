@@ -4,7 +4,9 @@ import '../globals.css';
 import type { FC, ReactNode } from 'react';
 import { Poppins } from 'next/font/google';
 import MainLayout from '@/components/layout/main-layout';
-import type { Locale } from '@/lib/i18n/locale';
+import Header from '@/components/layout/header';
+import Footer from '@/components/layout/footer';
+import { getDictionary, Locale } from '@/lib/dictionaries';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 
 const poppins = Poppins({
@@ -35,17 +37,9 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
     zh: "在塔什干提供战略品牌、命名和标志设计。通过以结果为导向的身份解决方案提升您的业务。"
   };
 
-  const keywords = {
-    uz: "branding, logo dizayn, neyming, brandbook, tashkent branding, brending agentligi, vizual aydentika",
-    ru: "брендинг, логотип, нейминг, дизайн упаковки, брендбук, брендинговое агентство ташкент",
-    en: "branding agency uzbekistan, logo design tashkent, naming services, brandbook development",
-    zh: "品牌代理, 标志设计, 命名服务, 包装设计, 品牌手册"
-  };
-
   return {
     title: titles[currentLang],
     description: descriptions[currentLang],
-    keywords: keywords[currentLang],
     metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: `${BASE_URL}/${currentLang === defaultLocale ? '' : currentLang}`,
@@ -74,28 +68,10 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
   };
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BrandingAgency',
-  '@id': 'https://jonbranding.uz/#organization',
-  name: 'Jon.Branding',
-  url: 'https://jonbranding.uz',
-  logo: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
-  image: OG_IMAGE_URL,
-  description: 'Jon.Branding is a premier strategic branding consultancy in Uzbekistan specializing in business-centric identity, naming, and brand strategy.',
-  telephone: '+998336450097',
-  priceRange: '$$$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Tashkent City',
-    addressLocality: 'Tashkent',
-    addressCountry: 'UZ'
-  }
-};
-
 const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Locale }> }>> = async ({ children, params }) => {
   const { lang: rawLang } = await params;
   const lang = locales.includes(rawLang) ? rawLang : defaultLocale;
+  const dictionary = await getDictionary(lang);
 
   return (
     <html lang={lang} suppressHydrationWarning className={poppins.variable}>
@@ -106,12 +82,6 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Loc
         <link rel="preconnect" href="https://img1.teletype.in" />
         <link rel="preconnect" href="https://img2.teletype.in" />
         <link rel="preconnect" href="https://images.unsplash.com" />
-        <Script
-          id="json-ld"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <Script id="google-consent-mode" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -141,7 +111,9 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Loc
       </head>
       <body className={`font-body bg-white antialiased`} suppressHydrationWarning>
         <MainLayout>
+          <Header lang={lang} dictionary={dictionary.header} />
           {children}
+          <Footer lang={lang} dictionary={dictionary.footer} />
         </MainLayout>
       </body>
     </html>
