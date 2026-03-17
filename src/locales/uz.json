@@ -1,4 +1,3 @@
-
 {
   "header": {
     "portfolio": "Portfolio",
@@ -273,7 +272,7 @@
         "title": "A'lo! Brendingiz poydevori mustahkam (13-15 ball)",
         "description": "Tabriklaymiz! Siz brending masalalarida to'g'ri yo'ldasiz. Endi bu poydevorni yanada mustahkamlab, bozor yetakchisiga aylanish vaqti keldi."
       },
-      "afterSubmitText": "Yaqin orada mutaxassisimiz siz bilan bog'lanib, test natijalaringizni batafsil tahlil qilish va shaxsiy tavsiyalar berish bo'yicha suhbatlashadi.",
+      "afterSubmitText": "Yaqin orada mutaxassisimiz siz bilan bog'ling, test natijalaringizni batafsil tahlil qilish va shaxsiy tavsiyalar berish bo'yicha suhbatlashadi.",
       "backToHome": "Bosh sahifaga qaytish"
     }
   }
