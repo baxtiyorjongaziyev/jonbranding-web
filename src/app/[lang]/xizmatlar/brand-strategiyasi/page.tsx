@@ -1,3 +1,4 @@
+
 'use server';
 
 import { getDictionary, Locale } from '@/lib/dictionaries';
