@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Card } from '@/components/ui/card';
@@ -15,7 +14,7 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
   
   const translations = dictionary;
 
-  if (!translations) return null;
+  if (!translations || !translations.problems) return null;
 
   const icons = [Ghost, TrendingDown, Tag, BarChart];
   const problems = translations.problems || [];

@@ -1,4 +1,3 @@
-
 import type { FC, ReactNode } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
@@ -18,7 +17,9 @@ const LocalizedLayout: FC<Props> = async ({ children, params }) => {
   return (
     <>
       <Header lang={lang} dictionary={dictionary.header} />
-      {children}
+      <div className="flex-grow">
+        {children}
+      </div>
       <Footer lang={lang} dictionary={dictionary.footer} />
     </>
   );
