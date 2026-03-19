@@ -9,7 +9,7 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 
 
 interface WhyUsProps {
-  onCtaClick: () => void;
+  onCtaClick?: () => void;
   lang: string;
 }
 
@@ -22,9 +22,17 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang }) => {
   }, [lang]);
   
   if (!translations) {
-    // You can return a loading skeleton here if you want
     return null;
   }
+
+  const handleCta = () => {
+    if (onCtaClick) {
+      onCtaClick();
+    } else {
+      const event = new CustomEvent('openContactModal');
+      window.dispatchEvent(event);
+    }
+  };
   
   const values = [
       { icon: Target, ...translations.values[0] },
@@ -65,7 +73,7 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang }) => {
         title={translations.ctaTitle}
         description={translations.ctaDesc}
         buttonText={translations.ctaButton}
-        onCtaClick={onCtaClick}
+        onCtaClick={handleCta}
       />
     </>
   );
