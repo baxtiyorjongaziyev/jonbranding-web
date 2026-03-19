@@ -1,4 +1,3 @@
-
 'use client';
 import {
   Accordion,
@@ -16,7 +15,7 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
     window.dispatchEvent(event);
   }
   
-  if (!translations) return null;
+  if (!translations || !translations.faqItems) return null;
 
   return (
     <section id="faq" className="py-16 sm:py-24 bg-background">

@@ -1,4 +1,3 @@
-
 {
     "header": {
         "portfolio": "Portfolio",
@@ -208,7 +207,12 @@
     "whyUs": {
         "title": "Why Choose Us?",
         "subtitle": "We create real value through a systematic approach.",
-        "ctaButton": "Analyze my brand for free"
+        "ctaButton": "Analyze my brand for free",
+        "values": [
+            { "title": "Strategic", "description": "Every element serves sales." },
+            { "title": "Transparent", "description": "Full control over the process." },
+            { "title": "Results", "description": "90% client recommendation rate." }
+        ]
     },
     "targetAudience": {
         "title": "Know These Problems?",
@@ -220,16 +224,44 @@
         "solutionTitle": "Good news: all solvable!",
         "solutionButton": "See solution"
     },
-    "testimonials": { "title": "Client Feedback" },
-    "gallery": { "title": "Portfolio Examples" },
-    "process": { "title": "Our Process", "ctaButton": "Discuss project" },
-    "leadMagnet": { "title": "Scale Your Brand", "cta": { "button": "Get consultation" } },
-    "faq": { "title": "FAQ", "ctaButton": "Ready to start!" },
-    "mobileCtaBar": { "get_offer": "Send request" },
+    "beforeAfter": {
+        "title": "Before & After",
+        "subtitle": "See the transformation.",
+        "ctaTitle": "Ready for change?",
+        "ctaDesc": "Let's analyze your brand.",
+        "ctaButton": "Change my brand too"
+    },
+    "testimonials": { "title": "Client Feedback", "subtitle": "Our greatest achievement." },
+    "gallery": { "title": "Portfolio Examples", "subtitle": "Standout brands." },
+    "process": { "title": "Our Process", "subtitle": "Proven and transparent.", "ctaButton": "Discuss project" },
+    "leadMagnet": { "title": "Scale Your Brand", "subtitle": "Free resources for you.", "cta": { "button": "Get consultation" }, "magnets": [] },
+    "faq": {
+        "title": "FAQ",
+        "subtitle": "Answers to common questions.",
+        "faqItems": [
+            { "question": "Why prices vary?", "answer": "Every project is unique." },
+            { "question": "Is there a guarantee?", "answer": "100% satisfaction guarantee." }
+        ],
+        "ctaButton": "Ready to start!",
+        "ctaTitle": "No doubts!",
+        "ctaDesc": "Let's begin."
+    },
+    "mobileCtaBar": { "get_offer": "Send request", "final_price": "Final Price" },
     "blog": { "title": "Blog", "readMore": "Read more" },
-    "quiz": { "resultButton": "View result" },
-    "brandStrategyPage": { "title": "Brand Strategy" },
+    "quiz": { "resultButton": "View result", "questions": [], "result": { "bad": {"title": "Help"}, "medium": {"title": "Potential"}, "good": {"title": "Great"}} },
+    "brandStrategyPage": { "title": "Brand Strategy", "subtitle": "Clear idea." },
     "patentCalculatorPage": { "title": "Patent Calculator" },
-    "servicesPage": { "packageBuilder": { "title": "Services & Prices" } },
-    "queueStatus": { "title": "Book Your Slot!", "ctaButton": "Book now" }
+    "servicesPage": { "packageBuilder": { "title": "Services & Prices" }, "comparison": {"title": "Vs Competitors"} },
+    "pickTwoSelector": {
+      "title": "Pick Two",
+      "subtitle": "Price—Quality—Speed.",
+      "ctaText": "Request Offer",
+      "options": { "cheap": "Cheap", "quality": "Quality", "fast": "Fast" },
+      "messages": { "default": "Pick 2." }
+    },
+    "exitIntentModal": {
+        "title": "Don't leave!",
+        "button": "View discounts"
+    },
+    "queueStatus": { "title": "Book Your Slot!", "ctaButton": "Book now", "subtitle": "Limited slots", "timeframes": {"2 weeks": "in 2 weeks"} }
 }
