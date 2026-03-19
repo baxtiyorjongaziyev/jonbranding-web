@@ -117,7 +117,7 @@
             "home": "Bosh sahifa",
             "quiz": "Brending testi",
             "portfolio": "Portfolio",
-            "process": "Ishlash tartibi",
+            "process": "Ish tartibi",
             "faq": "FAQ",
             "services_prices": "Barcha xizmatlar va narxlar",
             "brand_strategy": "Brend-strategiya",
@@ -348,38 +348,8 @@
           "items": [
             {
               "title": "1. Strategiyasiz ishlash",
-              "description": "Eng katta xato — aniq strategiyasiz dizaynni boshlash. Mijozingiz kim? Raqobatchilardan nima bilan farq qilasiz? Asosiy xabaringiz nima? Bu savollarga javob bermaydigan logo — shunchaki rasm.",
+              "description": "Eng katta xato — aniq strategiyasiz dizaynni boshlash. Mijozingiz kim? Raqobatchilardan nima bilan farq qilasiz? Asosiy xabaringiz nima? Logo yoki sayt, bu savollarga javob bermaydigan — shunchaki rasm.",
               "solution": "Yechim: 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nega?' savollariga javob topishdan boshlang."
-            },
-            {
-              "title": "2. Hammaga yoqishga urinish",
-              "description": "'Hamma uchun' bo'lishga harakat qilgan brend oxir-oqibat hech kimga kerak bo'lmay qoladi. Auditoriyani aniq belgilamaslik brendni kuchsizlantiradi.",
-              "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilang. 'Ideal mijoz' portretini chizing."
-            },
-            {
-              "title": "3. Raqobatchilarni ko'chirish",
-              "description": "Raqobatchilarga qarash kerak, lekin ularni ko'r-ko'rona nusxalash — bu xato. Agar dizayningiz boshqaga o'xshasa, sizni har doim 'arzon alternativ' deb bilishadi.",
-              "solution": "Yechim: O'z yo'lingizni topish uchun raqobatchilarni o'rganing. Boshqacha bo'lishdan qo'rqmang."
-            },
-            {
-              "title": "4. Izchillik yo'qligi (Inconsistency)",
-              "description": "Logo saytda bir xil, Instagramda boshqa, qadoqda esa uchinchi xil. Bu vizual tartibsizlik brendga bo'lgan ishonchni pasaytiradi.",
-              "solution": "Yechim: 'Brendbuk' (gaydlayn) yarating va unga hamma joyda amal qiling."
-            },
-            {
-              "title": "5. Haddan tashqari murakkab logotip",
-              "description": "Logo ko'p detallar, gradientlar va matnlardan iborat logo kichik o'lchamlarda (masalan, favicon yoki profil rasmida) juda xunuk ko'rinadi.",
-              "solution": "Yechim: Soddalik va minimalizmga intiling. Eng yaxshi logolar — xotiradan osongina chizish mumkin bo'lganlar."
-            },
-            {
-              "title": "6. Talaffuzi qiyin yoki esda qolmaydigan nom",
-              "description": "Agar mijozlar ismingizni ayta olmasa yoki to'g'ri yoza olmasa, ular sizni topa olishmaydi va tavsiya qilishmaydi.",
-              "solution": "Yechim: Sodda, jarangdor va yuridik jihatdan toza nom tanlang."
-            },
-            {
-              "title": "7. Brendingni bir martalik ish deb o'ylash",
-              "description": "Bozor, texnologiya va mijozlar talablari doimiy o'zgaradi. O'zgarmaydigan brend tezda eskiradi.",
-              "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing va kerak bo'lsa uni yangilang (rebrending)."
             }
           ],
           "result": {
@@ -441,42 +411,6 @@
                     { "text": "Ha, hamma uchun aniq va tushunarli", "score": 3 },
                     { "text": "Qisman, lekin hali to'liq emas", "score": 2 },
                     { "text": "Yo'q, bu haqda o'ylamaganman", "score": 1 }
-                ]
-            },
-            {
-                "question": "Maqsadli auditoriyangizni (ideal mijozni) aniq tasavvur qila olasizmi?",
-                "brandExample": "Apple — ijodkor mutaxassislar va texnologiya ixlosmandlari.",
-                "options": [
-                    { "text": "Ha, ularning ehtiyojlarini bilaman", "score": 3 },
-                    { "text": "Umumiy tasavvurim bor", "score": 2 },
-                    { "text": "Yo'q, hamma uchun sotishga harakat qilyapman", "score": 1 }
-                ]
-            },
-            {
-                "question": "Brending raqobatchilardan qanday aniq afzalliklari bilan ajralib turadi?",
-                "brandExample": "Tesla — innovatsion elektromobillar; M&M's — 'qo'lda emas, og'izda eriydigan' shokolad.",
-                "options": [
-                    { "text": "Kamida 2-3 ta aniq afzalligim bor", "score": 3 },
-                    { "text": "Faqat narx bilan farqlanaman", "score": 2 },
-                    { "text": "Aniq afzalliklarim yo'q", "score": 1 }
-                ]
-            },
-            {
-                "question": "Vizual qiyofangiz (logo, ranglar) biznesingiz qadriyatlarini aks ettiradimi?",
-                "brandExample": "Coca-Cola qizil rangi — energiya va ehtiros; Tiffany & Co. feruza rangi — hashamat.",
-                "options": [
-                    { "text": "Ha, to'liq mos keladi", "score": 3 },
-                    { "text": "Qisman, ba'zi elementlarni yangilash kerak", "score": 2 },
-                    { "text": "Yo'q, bunga e'tibor bermaganman", "score": 1 }
-                ]
-            },
-            {
-                "question": "Mijozlaringiz siz haqingizda yagona va ijobiy fikrdami?",
-                "brandExample": "Starbucks — shunchaki kofe emas, 'uchinchi joy' (Third Place).",
-                "options": [
-                    { "text": "Ha, brendim obro'si mustahkam", "score": 3 },
-                    { "text": "Har xil, ba'zan salbiy fikrlar ham bo'ladi", "score": 2 },
-                    { "text": "Bilmayman, so'rov o'tkazmaganman", "score": 1 }
                 ]
             }
         ],
