@@ -1,3 +1,4 @@
+
 'use client';
 
 import type {FC} from 'react';
@@ -14,8 +15,7 @@ import TiltCard from '../ui/tilt-card';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
 
-
-const portfolioImages: GalleryImage[] = projects.flatMap(p => p.galleryImages);
+const portfolioImages: GalleryImage[] = projects.flatMap(p => p.galleryImages || []);
 
 interface HeroProps {
     onPrimaryClick: () => void;
@@ -23,7 +23,6 @@ interface HeroProps {
     dictionary: any;
     renderHeadline: (headline: string) => React.ReactNode;
 }
-
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline }) => {
   const [headlineIndex, setHeadlineIndex] = useState(0);
@@ -81,23 +80,21 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                 </div>
             </div>
             <div className="flex justify-center items-center mt-10 lg:mt-0">
-                <TiltCard strength={10} className="w-full max-w-[500px] h-auto aspect-square">
-                    <Card className="rounded-[2.5rem] shadow-2xl overflow-hidden w-full h-full border-none">
+                <TiltCard strength={10} className="w-full max-w-[500px]">
+                    <Card className="rounded-[2.5rem] shadow-2xl overflow-hidden w-full aspect-square border-none bg-white">
                         <Carousel
                             plugins={[Autoplay({ delay: 2500, stopOnInteraction: true })]}
                             className="w-full h-full"
                         >
-                            <CarouselContent>
+                            <CarouselContent className="h-full">
                                 {portfolioImages.map((image, index) => (
-                                    <CarouselItem key={index}>
+                                    <CarouselItem key={index} className="h-full">
                                         <div className="w-full h-full relative aspect-square">
                                             <Image 
                                                 src={image.src}
-                                                alt={image.alt || 'Jon Branding Portfolio Image'}
+                                                alt={image.alt || 'Jon Branding Portfolio'}
                                                 fill
                                                 priority={index === 0}
-                                                fetchPriority={index === 0 ? "high" : "auto"}
-                                                loading={index === 0 ? "eager" : "lazy"}
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
                                                 className="object-cover bg-white"
                                             />
