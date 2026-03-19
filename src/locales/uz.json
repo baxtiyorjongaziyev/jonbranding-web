@@ -1,3 +1,4 @@
+
 {
     "header": {
         "portfolio": "Portfolio",
@@ -235,7 +236,7 @@
             { "title": "1️⃣ STRATEGIYA", "points": ["Brend pozitsiyalash", "Auditoriya xaritasi", "Noyob taklif (USP)"] },
             { "title": "2️⃣ AYDENTIKA", "points": ["Professional logo", "Firma ranglari", "Tipografika"] },
             { "title": "3️⃣ HUJJATLAR", "points": ["To'liq brendbuk", "Barcha formatdagi fayllar", "Qo'llanma"] },
-            { "title": "4️⃣ HUQUQIY HIMOYA", "points": ["Neyming konsultatsiyasi", "Patent topshirish", "Himoya strategiyasi"] },
+            { "title": "4️⃣ HUQUQIY HIMOYA", "points": ["Neyming konsultatsiyasi", "Patent topshirish jarayoni", "Himoya strategiyasi"] },
             { "title": "5️⃣ QO'LLAB-QUVVATLASH", "points": ["3 oy bepul tahrirlar", "Telegram orqali aloqa", "Maslahatlar"] }
         ]
     },
@@ -394,10 +395,7 @@
         "section1_title": "Strategiya — o'sish vositasi",
         "section1_p1": "Har bir kompaniyaning o'z maqsadi bor.",
         "process_title": "Jarayon",
-        "process_steps": [
-            { "title": "Tahlil", "description": "Bozorni o'rganish." },
-            { "title": "Platforma", "description": "Qadriyatlarni belgilash." }
-        ]
+        "process_steps": [{ "title": "Tahlil", "description": "Bozorni o'rganish." }, { "title": "Platforma", "description": "Qadriyatlarni belgilash." }]
     },
     "corporateStylePage": {
         "metadata": { "title": "Firma uslubi", "description": "Vizual tizim." },
