@@ -1,0 +1,136 @@
+
+{
+  "header": {
+    "portfolio": "Portfolio",
+    "founder": "Founder",
+    "process": "Process",
+    "blog": "Blog",
+    "services": "Services",
+    "brand_strategy": "Brand Strategy",
+    "brand_strategy_desc": "Foundation for your brand — analysis and positioning.",
+    "naming": "Naming",
+    "naming_desc": "Choosing a strong and memorable name for your brand.",
+    "logo_design": "Logo Design",
+    "logo_design_desc": "Creating a unique mark reflecting your business.",
+    "brandbook": "Brandbook",
+    "brandbook_desc": "Rules for using your brand identity.",
+    "corporate_style": "Corporate Style",
+    "corporate_style_desc": "System of logos, colors, and fonts.",
+    "packaging_design": "Packaging Design",
+    "packaging_design_desc": "Attractive design making you stand out.",
+    "services_and_prices": "Services & Prices",
+    "services_and_prices_desc": "Build your package and get a price instantly.",
+    "contact_by_phone": "Call",
+    "contact_by_telegram": "Telegram",
+    "free_consultation": "Free Consultation",
+    "open_menu": "Open Menu",
+    "switch_lang": "Change Language",
+    "lang_ru": "Russian",
+    "lang_uz": "Uzbek",
+    "lang_en": "English"
+  },
+  "footer": {
+    "contact": "Contact Us",
+    "by_telegram": "Via Telegram",
+    "by_phone": "By Phone",
+    "main_page": "Main Page",
+    "portfolio": "Portfolio",
+    "founder": "Founder",
+    "process": "Process",
+    "faq": "FAQ",
+    "services": "Our Services",
+    "brand_strategy": "Brand Strategy",
+    "naming": "Naming",
+    "brandbook": "Brandbook",
+    "logo_design": "Logo Design",
+    "corporate_style": "Corporate Style",
+    "packaging_design": "Packaging Design",
+    "additional": "Additional",
+    "service_prices": "Services & Prices",
+    "branding_test": "Branding Quiz",
+    "blog": "Blog",
+    "sitemap": "Sitemap",
+    "all_rights_reserved": "All rights reserved.",
+    "back_to_top": "Back to top",
+    "patent_calculator": "Patent Calculator"
+  },
+  "cookieConsent": {
+    "message": "We use cookies to improve your experience.",
+    "acceptButton": "Accept"
+  },
+  "brandbookPage": {
+    "metadata": {
+      "title": "Brandbook Development | Jon.Branding",
+      "description": "Rules for your brand identity system.",
+      "keywords": "brandbook, guideline, design"
+    },
+    "title": "Brandbook Development",
+    "subtitle": "Not just a document, but your brand's constitution.",
+    "cta_button": "Order Brandbook"
+  },
+  "popularPackages": {
+    "title": "Most Popular Packages",
+    "packageTitle": "Naming + Logo (Premium)",
+    "packagePrice": "In package",
+    "ctaButton": "Select this package"
+  },
+  "hero": {
+    "headlines": [
+      "Is your branding |not selling?|",
+      "Stand out from |competitors|.",
+      "Small business to |strong brand|."
+    ],
+    "description": "We build results-driven brand systems.",
+    "buttonTexts": [
+      "Analyze my brand",
+      "Get free consultation"
+    ],
+    "buttonHint": "Free. No obligations."
+  },
+  "contactModal": {
+    "title": "For Quality Consultation",
+    "description": "Answer a few questions so we can understand your project.",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "submitButton": "Send Request",
+    "successToast": { "title": "Success!", "description": "We'll contact you soon!" }
+  },
+  "urgencyBlock": {
+    "title": "🔥 BEFORE YOU CLOSE...",
+    "subtitle": "Imagine:",
+    "line3": "He invested. You... thought."
+  },
+  "servicesHero": {
+    "title": "Services to Strengthen Your Brand",
+    "subtitle": "Guaranteed results for your business",
+    "cta": "View Prices"
+  },
+  "serviceSections": {
+    "services": [
+      { "id": "neyming", "title": "Naming", "description": "Strong name selection.", "buttonText": "Learn more" },
+      { "id": "logo-dizayni", "title": "Logo Design", "description": "Reflecting your essence.", "buttonText": "Learn more" }
+    ]
+  },
+  "stats": {
+    "experience": "Years experience",
+    "clients": "Happy clients"
+  },
+  "trustedBy": { "title": "Companies That Trust Us" },
+  "whyUs": {
+    "title": "Why Choose Us?",
+    "ctaButton": "Analyze my brand for free"
+  },
+  "targetAudience": { "title": "Know These Problems?" },
+  "testimonials": { "title": "Client Feedback" },
+  "gallery": { "title": "Portfolio Examples" },
+  "process": { "title": "Our Process", "ctaButton": "Discuss project" },
+  "leadMagnet": { "title": "Scale Your Brand", "cta": { "button": "Get consultation" } },
+  "faq": { "title": "FAQ", "ctaButton": "Ready to start!" },
+  "mobileCtaBar": { "get_offer": "Send request" },
+  "blog": { "title": "Blog", "readMore": "Read more" },
+  "quiz": { "resultButton": "View result" },
+  "brandStrategyPage": { "title": "Brand Strategy" },
+  "patentCalculatorPage": { "title": "Patent Calculator" },
+  "servicesPage": { "packageBuilder": { "title": "Services & Prices" } },
+  "queueStatus": { "title": "Book Your Slot!", "ctaButton": "Book now" }
+}

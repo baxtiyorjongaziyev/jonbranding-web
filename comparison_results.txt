@@ -1,0 +1,15 @@
+UZ missing: [ 'sitemapPage', 'home' ]
+EN missing: [
+  'sitemapPage',
+  'home',
+  'personalOfferBlock',
+  'beforeAfter',
+  'founder',
+  'blogPost',
+  'corporateStylePage',
+  'logoDesignPage',
+  'namingPage',
+  'packagingPage',
+  'pickTwoSelector',
+  'exitIntentModal'
+]

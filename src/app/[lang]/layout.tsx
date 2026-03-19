@@ -84,6 +84,8 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Loc
         <link rel="preconnect" href="https://img2.teletype.in" />
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body className={`font-body bg-white antialiased`} suppressHydrationWarning>
         <MainLayout>
