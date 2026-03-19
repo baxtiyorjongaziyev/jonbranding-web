@@ -3,16 +3,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
 import type { FC, ReactNode } from 'react';
-import { Poppins } from 'next/font/google';
 import MainLayout from '@/components/layout/main-layout';
-import { locales, defaultLocale } from '@/lib/i18n/locale';
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['400', '500', '600', '700', '800']
-});
 
 const BASE_URL = 'https://jonbranding.uz';
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
@@ -39,7 +30,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
   return (
-    <html lang="uz" suppressHydrationWarning className={poppins.variable}>
+    <>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
@@ -72,13 +63,26 @@ const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
             `,
           }}
         />
+        {/* Meta Pixel Code */}
+        <Script id="fb-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1134785364752294');
+            fbq('track', 'PageView');
+          `}
+        </Script>
       </head>
-      <body className="font-body bg-white antialiased" suppressHydrationWarning>
-        <MainLayout>
-          {children}
-        </MainLayout>
-      </body>
-    </html>
+      <MainLayout>
+        {children}
+      </MainLayout>
+    </>
   );
 }
 
