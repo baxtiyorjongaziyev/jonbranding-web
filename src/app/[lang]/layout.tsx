@@ -1,21 +1,15 @@
 
 import type { Metadata } from 'next';
-import Script from 'next/script';
-import '../globals.css';
 import type { FC, ReactNode } from 'react';
-import { Poppins } from 'next/font/google';
-import MainLayout from '@/components/layout/main-layout';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['400', '500', '600', '700', '800']
-});
+type Props = {
+  children: ReactNode;
+  params: Promise<{ lang: Locale }>;
+};
 
 const BASE_URL = 'https://jonbranding.uz';
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
@@ -41,7 +35,6 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
   return {
     title: titles[currentLang],
     description: descriptions[currentLang],
-    metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: `${BASE_URL}/${currentLang === defaultLocale ? '' : currentLang}`,
       languages: {
@@ -69,33 +62,18 @@ export async function generateMetadata(props: { params: Promise<{ lang: Locale }
   };
 }
 
-const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Locale }> }>> = async ({ children, params }) => {
+const LocalizedLayout: FC<Props> = async ({ children, params }) => {
   const { lang: rawLang } = await params;
   const lang = locales.includes(rawLang) ? rawLang : defaultLocale;
   const dictionary = await getDictionary(lang);
 
   return (
-    <html lang={lang} suppressHydrationWarning className={poppins.variable}>
-      <head>
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="theme-color" content="#050583" />
-        <link rel="preconnect" href="https://img1.teletype.in" />
-        <link rel="preconnect" href="https://img2.teletype.in" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-      </head>
-      <body className={`font-body bg-white antialiased`} suppressHydrationWarning>
-        <MainLayout>
-          <Header lang={lang} dictionary={dictionary.header} />
-          {children}
-          <Footer lang={lang} dictionary={dictionary.footer} />
-        </MainLayout>
-      </body>
-    </html>
+    <>
+      <Header lang={lang} dictionary={dictionary.header} />
+      {children}
+      <Footer lang={lang} dictionary={dictionary.footer} />
+    </>
   );
 }
 
-export default RootLayout;
+export default LocalizedLayout;
