@@ -5,7 +5,6 @@ import './globals.css';
 import type { FC, ReactNode } from 'react';
 import { Poppins } from 'next/font/google';
 import MainLayout from '@/components/layout/main-layout';
-import type { Locale } from '@/lib/i18n/locale';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 
 const poppins = Poppins({
@@ -18,64 +17,35 @@ const poppins = Poppins({
 const BASE_URL = 'https://jonbranding.uz';
 const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
 
-export async function generateMetadata(props: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
-  const { lang: rawLang } = await props.params;
-  const currentLang = locales.includes(rawLang) ? rawLang : defaultLocale;
-  
-  const titles = {
-    uz: "Jon.Branding | Toshkentdagi Professional Brending Agentligi",
-    ru: "Jon.Branding | Брендинговое Агентство в Ташкенте",
-    en: "Jon.Branding | Premier Branding Agency in Uzbekistan",
-    zh: "Jon.Branding | 乌兹别克斯坦领先的品牌代理机构"
-  };
+export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Jon.Branding | Toshkentdagi Professional Brending Agentligi",
+    template: "%s | Jon.Branding"
+  },
+  description: "Biznesingiz uchun natijali brend strategiyasi, neyming va logotip dizayni.",
+  openGraph: {
+    type: 'website',
+    locale: 'uz_UZ',
+    url: BASE_URL,
+    siteName: 'Jon.Branding',
+    images: [{ url: OG_IMAGE_URL, width: 1200, height: 630, alt: 'Jon Branding Agency' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [OG_IMAGE_URL],
+  },
+};
 
-  const descriptions = {
-    uz: "Biznesingiz uchun natijali brend strategiyasi, neyming va logotip dizayni.",
-    ru: "Стратегический брендинг, нейминг и дизайн логотипов в Ташкенте.",
-    en: "Strategic branding, naming, and logo design in Tashkent.",
-    zh: "在塔什干提供战略品牌、命名和标志设计。"
-  };
-
-  return {
-    title: titles[currentLang],
-    description: descriptions[currentLang],
-    metadataBase: new URL(BASE_URL),
-    alternates: {
-      canonical: `${BASE_URL}/${currentLang === defaultLocale ? '' : currentLang}`,
-      languages: {
-        'uz': `${BASE_URL}/uz`,
-        'ru': `${BASE_URL}/ru`,
-        'en': `${BASE_URL}/en`,
-        'zh': `${BASE_URL}/zh`,
-      },
-    },
-    openGraph: {
-      title: titles[currentLang],
-      description: descriptions[currentLang],
-      url: `${BASE_URL}/${currentLang}`,
-      siteName: 'Jon.Branding',
-      images: [{ url: OG_IMAGE_URL, width: 1200, height: 630, alt: 'Jon Branding Agency' }],
-      type: 'website',
-      locale: currentLang,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: titles[currentLang],
-      description: descriptions[currentLang],
-      images: [OG_IMAGE_URL],
-    },
-  };
-}
-
-const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Locale }> }>> = async ({ children, params }) => {
-  const { lang: rawLang } = await params;
-  const lang = locales.includes(rawLang) ? rawLang : defaultLocale;
-
+const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
   return (
-    <html lang={lang} suppressHydrationWarning className={poppins.variable}>
+    <html lang="uz" suppressHydrationWarning className={poppins.variable}>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <Script id="google-consent-mode" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -103,7 +73,7 @@ const RootLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: Loc
           }}
         />
       </head>
-      <body className={`font-body bg-white antialiased`} suppressHydrationWarning>
+      <body className="font-body bg-white antialiased" suppressHydrationWarning>
         <MainLayout>
           {children}
         </MainLayout>

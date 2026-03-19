@@ -1,15 +1,16 @@
 
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { ArrowRight, Ghost, TrendingDown, Tag, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 
 const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const handleOpenModal = () => {
-    const contactEvent = new CustomEvent('openContactModal');
-    window.dispatchEvent(contactEvent);
+    if (typeof window !== 'undefined') {
+      const contactEvent = new CustomEvent('openContactModal');
+      window.dispatchEvent(contactEvent);
+    }
   };
   
   const translations = dictionary;
@@ -55,6 +56,7 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
                         onClick={handleOpenModal} 
                         size="lg" 
                         variant="default"
+                        className="rounded-full shadow-lg"
                         aria-label={translations.solutionButton}
                     >
                         {translations.solutionButton} <ArrowRight className="w-5 h-5 ml-2" />

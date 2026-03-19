@@ -199,7 +199,7 @@
             "phone": "To'g'ri telefon raqamini kiriting.",
             "goal": "Asosiy maqsadingizni tanlang.",
             "budget": "Taxminiy byudjetni tanlang.",
-            "location": "Joylashuvingizni tanlang.",
+            "location": "Joylashuvni tanlang.",
             "meetingPlace": "Uchrashuv joyini tanlashingiz kerak.",
             "privacyPolicy": "Maxfiylik siyosatini qabul qilishingiz shart."
         },
@@ -249,9 +249,9 @@
         "services": [
             { "id": "neyming", "title": "Neyming", "description": "Esda qolarli va kuchli brend nomi tanlash.", "buttonText": "Batafsil" },
             { "id": "logo-dizayni", "title": "Logotip dizayni", "description": "Biznes mohiyatini aks ettiruvchi unikal belgi yaratish.", "buttonText": "Batafsil" },
-            { "id": "firmenniy-stil", "title": "Firma uslubi", "description": "Brendni tanitadigan logotiplar, ranglar va shriftlar tizimi.", "buttonText": "Batafsil" },
-            { "id": "brandbook", "title": "Brendbuk", "description": "Aydentikadan foydalanish qoidalarini tavsiflovchi hujjat.", "buttonText": "Batafsil" },
-            { "id": "qadoq-dizayni", "title": "Qadoq dizayni", "description": "Mahsulotni javonda ajratib turadigan jozibali dizayn.", "buttonText": "Batafsil" }
+            { "id": "firmenniy-stil", "title": "Firma uslubi", "description": "Brendni tanitadigan vizual tizim.", "buttonText": "Batafsil" },
+            { "id": "brandbook", "title": "Brendbuk", "description": "Aydentika qoidalari tavsiflangan hujjat.", "buttonText": "Batafsil" },
+            { "id": "qadoq-dizayni", "title": "Qadoq dizayni", "description": "Mahsulotni javonda ajratib turadigan dizayn.", "buttonText": "Batafsil" }
         ]
     },
     "stats": {
@@ -323,8 +323,8 @@
             { "phase": "02", "title": "Strategy (Strategiya)", "description": "Brend yo'lini belgilash.", "tasks": ["Maqsadlar qo'yish", "Brend pozitsiyalash", "Brend platformasi", "Asosiy tamoyillar", "Rejalashtirish"] },
             { "phase": "03", "title": "Creative Design (Kreativ)", "description": "Vizual qiyofani shakllantirish.", "tasks": ["Neyming", "Logotip dizayni", "Vizual konsepsiya", "Qadoq dizayni", "Brendbuk"] },
             { "phase": "04", "title": "Presentation (Taqdimot)", "description": "G'oyalarni misollarda sinash.", "tasks": ["Dizayn namoyishi", "Tahrirlar", "Yakuniy iteratsiya", "Maketlarda ko'rsatish"] },
-            { "phase": "05", "title": "Implementation (Tatbiq)", "description": "Brendni hayotga qaytarish.", "tasks": ["Tayyor dizayn fayllari", "Brendbukni topshirish", "Vizual qo'llanmalar", "Chop etishga tayyorlash"] },
-            { "phase": "06", "title": "Growth (O'sish)", "description": "Brendni qo'llab-quvvatlash.", "tasks": ["Tatbiq qilish bo'yicha ko'rsatmalar", "Doimiy aloqa", "Keyingi qadamlar bo'yicha maslahatlar"] }
+            { "phase": "05", "title": "Implementation (Tatbiq)", "description": "Brendni hayotga tatbiq etish.", "tasks": ["Tayyor dizayn fayllari", "Brendbukni topshirish", "Vizual qo'llanmalar", "Chop etishga tayyorlash"] },
+            { "phase": "06", "title": "Growth (O'sish)", "description": "Brendni qo'llab-quvvatlash.", "tasks": ["Tatbiq qilish bo'yicha ko'rsatmalar", "Doimiy aloqa", "Keyingi qadamlar bo'yunda maslahatlar"] }
         ],
         "ctaTitle": "Loyihani muhokama qilishga tayyormisiz?",
         "ctaDesc": "G'oyalaringizni hayotga tatbiq etishni boshlaymiz.",
@@ -368,7 +368,7 @@
             },
             {
               "title": "5. Haddan tashqari murakkab logotip",
-              "description": "Ko'p detallar, gradientlar va matnlardan iborat logo kichik o'lchamlarda (masalan, favicon yoki profil rasmida) juda xunuk ko'rinadi.",
+              "description": "Logo ko'p detallar, gradientlar va matnlardan iborat logo kichik o'lchamlarda (masalan, favicon yoki profil rasmida) juda xunuk ko'rinadi.",
               "solution": "Yechim: Soddalik va minimalizmga intiling. Eng yaxshi logolar — xotiradan osongina chizish mumkin bo'lganlar."
             },
             {
@@ -453,7 +453,7 @@
                 ]
             },
             {
-                "question": "Brendingiz raqobatchilardan qanday aniq afzalliklari bilan ajralib turadi?",
+                "question": "Brending raqobatchilardan qanday aniq afzalliklari bilan ajralib turadi?",
                 "brandExample": "Tesla — innovatsion elektromobillar; M&M's — 'qo'lda emas, og'izda eriydigan' shokolad.",
                 "options": [
                     { "text": "Kamida 2-3 ta aniq afzalligim bor", "score": 3 },
@@ -543,15 +543,15 @@
         "section2_p2": "To'plam har doim individual tanlanadi. Minimal to'plam: logo, rang, shrift, suratlar uslubi va reklama tashuvchilar dizayni.",
         "section2_p3": "Vizual uslub aniq bo'lsa, brend professional, ishonchli va taniladigan bo'lib qabul qilinadi.",
         "process_title": "Qanday yaratamiz?",
-        "process_subtitle": "Biz har bir detal brend strategiyasi uchun ishlashi uchun tizimli yondashamiz.",
+        "process_subtitle": "Biz har bir detal brend strategiyasi uchun ishlashi uchun tizimli yondashuv orqali vizual uslubni ishlab chiqamiz.",
         "process_steps": [
-            { "title": "Tadqiqot va konsepsiya", "description": "Auditoriya va bozorni tahlil qilib, vizual uslubda aks etishi kerak bo'lgan asosiy ma'nolarni aniqlaymiz." },
-            { "title": "Vizual kodni ishlab chiqish", "description": "Logo, ranglar, tipografika va grafik elementlarni yaratamiz." },
-            { "title": "Firma uslubi tizimi", "description": "Barcha formatlarda — qadoqdan tortib raqamli muhitgacha bir xillikni saqlaydigan elementlarni ishlab chiqamiz." },
-            { "title": "Gaydlayn", "description": "Brend har qanday tashuvchida yagona obrazni saqlab qolishi uchun foydalanish qoidalarini yaratamiz." }
+            { "title": "Tadqiqot va konsepsiya", "description": "Auditoriya, bozor, raqobatchilar va brend o'rnini tahlil qilamiz. Vizual uslubda aks etishi kerak bo'lgan asosiy ma'nolarni aniqlaymiz." },
+            { "title": "Vizual kodni ishlab chiqish", "description": "Logo, firma ranglari, tipografika, grafika, ikonika va sahifalash tamoyillari — brendning yaxlit obrazini shakllantiruvchi barcha narsa." },
+            { "title": "Firma uslubi tizimi", "description": "Barcha formatlarda — qadoqdan tortib raqamli muhitgacha vizual obrazning izchilligini saqlashga yordam beradigan elementlarni ishlab chiqamiz." },
+            { "title": "Yakunlash va gaydlayn", "description": "Brend har qanday tashuvchida yagona obrazni saqlab qolishi uchun foydalanish qoidalari bilan birga gaydlayn (brendbuk) yaratamiz." }
         ],
         "cta_title": "Firma uslubi — o'sish vositasi",
-        "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi va ko'proq ishonch uyg'otadi. Biz brend o'sishiga yordam beradigan vosita yaratamiz."
+        "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi, uzoqroq esda qoladi va ko'proq ishonch uyg'otadi. Biz brend o'sishiga yordam beradigan vosita yaratamiz."
     },
     "logoDesignPage": {
         "metadata": {
@@ -570,11 +570,11 @@
             { "title": "Strategik va ma'noli", "description": "Har bir chiziq va rang biznesingiz xarakteriga mos kelishi shart." }
         ],
         "process_title": "Qanday yaratamiz?",
-        "process_subtitle": "Logotip yaratish jarayoni tahlil va strategik fikrlashga asoslangan.",
+        "process_subtitle": "Logotip yaratish jarayoni shunchaki tasodifiy g'oyaga emas, balki chuqur tahlil va strategik fikrlashga asoslangan.",
         "process_steps": [
-            { "title": "Brifing va tadqiqot", "description": "Biznesingiz, maqsadlaringiz va raqobatchilaringizni o'rganamiz." },
-            { "title": "Konsepsiya ishlab chiqish", "description": "Brend xarakterini aks ettiruvchi bir nechta vizual g'oyalarni tayyorlaymiz." },
-            { "title": "Dizayn va taqdimot", "description": "Tanlangan g'oyani mukammallashtirib, real misollarda ko'rsatamiz." },
+            { "title": "Brifing va tadqiqot", "description": "Biznesingiz, maqsadlaringiz, auditoriya va raqobatchilaringizni diqqat bilan o'rganamiz." },
+            { "title": "Konsepsiya ishlab chiqish", "description": "Brendingiz strategiyasi va xarakterini aks ettiruvchi bir nechta vizual konsepsiyalarni tayyorlaymiz." },
+            { "title": "Dizayn va taqdimot", "description": "Tanlangan konsepsiyani mukammallashtirib, uni real misollarda (maketalarda) ko'rsatamiz." },
             { "title": "Topshirish", "description": "Barcha kerakli formatdagi fayllar va foydalanish bo'yicha mini-qo'llanmani beramiz." }
         ],
         "cta_title": "Ishlaydigan logotipga tayyormisiz?",
@@ -587,7 +587,7 @@
             "description": "Kuchli brend nomi tanlash. Yaxshi nom brend mohiyatini yetkazadi va ajralib turishga yordam beradi."
         },
         "title": "Neyming — Kuchli brend nomi",
-        "subtitle": "Brend nomi — bu uning energiyasi va xarakteri. Yaxshi nom esda qoladi va raqobatchilardan ajratib turadi.",
+        "subtitle": "Brend nomi — bu uning birinchi taassuroti, energiyasi va so'z bilan ifodalangan g'oyasi. Yaxshi nom esda qoladi va raqobatchilardan ajratadi.",
         "section1_title": "Nom — strategiyaning bir qismi",
         "section1_p1": "Yaxshi nom tanish va hissiy bog'liqlikni ta'minlaydi. Bu tasodifiy g'oyalar emas, puxta o'ylangan strategik ishdir.",
         "section1_p2": "Biz neymingga brendingning eng muhim elementi sifatida qaraymiz. Har bir so'z ahamiyatga ega.",
@@ -595,10 +595,10 @@
         "section2_p1": "Ism qidirishdan oldin biz savol beramiz: bu brend nima haqida? U qanday hissiyotlarni uyg'otishi kerak?",
         "section2_p2": "U emotsiya, madaniy kod yoki hatto so'z o'yini asosida bo'lishi mumkin. Muhimi — u mohiyatni yetkazishi kerak.",
         "process_title": "Qanday yaratamiz?",
-        "process_subtitle": "Agentligimizda neyming ishlab chiqish aniq bosqichlardan iborat:",
+        "process_subtitle": "Agentligimizda neyming ishlab chiqish aniq bosqichlardan iborat bo'lib, har bir bosqich muhim ahamiyatga ega:",
         "process_steps": [
-            { "title": "Tadqiqot", "description": "Bozor, auditoriya va raqobatchilarni o'rganamiz." },
-            { "title": "Konsepsiya", "description": "Nom qidirish uchun yo'nalishlarni belgilaymiz." },
+            { "title": "Tadqiqot", "description": "Bozor, auditoriya, raqobatchilar va semantik yo'nalishlarni o'rganamiz." },
+            { "title": "Konsepsiya", "description": "Nom qidirish uchun ehtimoliy vektorlarni belgilaymiz." },
             { "title": "G'oyalar va test", "description": "Variantlar ro'yxatini tuzib, ularni jarangdorligi va ma'nosini tekshiramiz." },
             { "title": "Tekshiruv va yakun", "description": "Ro'yxatdan o'tkazish imkoniyati, domen va assotsiatsiyalarni tanlaymiz." }
         ],
