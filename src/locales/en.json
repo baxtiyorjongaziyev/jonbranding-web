@@ -1,4 +1,3 @@
-
 {
     "header": {
         "portfolio": "Portfolio",
@@ -7,11 +6,11 @@
         "blog": "Blog",
         "services": "Services",
         "brand_strategy": "Brand Strategy",
-        "brand_strategy_desc": "Foundation for your brand — analysis and positioning.",
+        "brand_strategy_desc": "Foundation for your brand — market analysis, positioning, and communication.",
         "naming": "Naming",
-        "naming_desc": "Strong and memorable name for your brand.",
+        "naming_desc": "Choosing a strong, memorable, and legally clear name for your brand.",
         "logo_design": "Logo Design",
-        "logo_design_desc": "Unique mark reflecting your business essence.",
+        "logo_design_desc": "Creating a unique mark reflecting your business essence.",
         "brandbook": "Brandbook",
         "brandbook_desc": "Rules for using your brand identity.",
         "corporate_style": "Corporate Style",
@@ -161,7 +160,7 @@
     },
     "home": {
       "cta1_title": "Your brand can look just as good.",
-      "cta1_desc": "Take your business to the next level with professional design.",
+      "cta1_desc": "Take your business to the next level with professional design. We help you find the ideal solution.",
       "cta1_button": "For my business too"
     },
     "urgencyBlock": { "title": "🔥 BEFORE YOU CLOSE...", "subtitle": "Imagine:", "line1": "Tomorrow your competitor is ahead.", "line2": "Customers buy from HIM.", "line3": "He invested. You... thought." },

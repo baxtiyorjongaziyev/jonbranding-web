@@ -1,4 +1,3 @@
-
 import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import type { FC, ReactNode } from 'react';

@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import './globals.css';
 import type { FC, ReactNode } from 'react';
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
   // This root layout is a pass-through to localized layouts to avoid duplicate html/body tags
-  return children;
+  return <>{children}</>;
 }
 
 export default RootLayout;
