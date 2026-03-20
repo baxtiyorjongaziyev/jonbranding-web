@@ -1,3 +1,4 @@
+
 {
     "header": {
         "portfolio": "Portfolio",
@@ -362,11 +363,9 @@
         "title": "Ko'p beriladigan savollar",
         "subtitle": "Brending jarayoni, narxlar va boshqa mavzular bo'yicha javoblar.",
         "faqItems": [
-            { "question": "Nega narxlar turlicha va qat'iy emas?", "answer": "Har bir loyiha o'ziga xos va individual yondashuvni talab qiladi. Narx vazifaning murakkabligi, ish hajmi va sizning biznes maqsadlaringizdan kelib chiqib hisoblanadi. Biz sizning byudjetingiz uchun eng maqbul va samarali yechimni taklif qilamiz." },
-            { "question": "Ish jarayoni qanday bosqichlardan iborat?", "answer": "Jarayon aniq bosqichlarga bo'lingan: tadqiqot, strategiya, vizual uslub va kommunikatsiya. Har bir bosqich siz bilan kelishiladi va siz jarayonni to'liq nazorat qilasiz, biz esa sifatni ta'minlaymiz." },
-            { "question": "Faqat logotip buyurtma qilsa bo'ladimi?", "answer": "Biz shunchaki belgi emas, balki yaxlit identifikatsiya tizimini quramiz. Shuning uchun 'Logo + Firma uslubi' paketini tavsiya etamiz, chunki bitta logotip brend qiymatini to'liq ochib bera olmaydi." },
-            { "question": "To'lov shartlari va tartibi qanday?", "answer": "Standart tartib — 50% oldindan to'lov, 50% loyiha topshirilgandan so'ng. Agar siz 100% oldindan to'lovni amalga oshirsangiz, bizda maxsus chegirmalar amal qiladi." },
-            { "question": "Natijaga kafolat bormi?", "answer": "Ha, bizda '100% Mamnuniyat kafolati' mavjud. Agar dastlabki konsepsiyalar sizga mutlaqo ma'qul kelmasa, biz to'lovni qaytaramiz. Sizning natijangiz — bizning obro'yimiz." }
+            { "question": "Nega narxlar turlicha?", "answer": "Har bir loyiha unikal. Murakkablikka qarab hisoblanadi." },
+            { "question": "Kafolat bormi?", "answer": "Ha, 100% mamnuniyat kafolati mavjud." },
+            { "question": "Yuqori konversiyali sayt bo'lishi uchun kimlar kerak bo'ladi?", "answer": "Yuqori konversiyali va natijaga ishlaydigan sayt yaratish uchun butun boshli mutaxassislar jamoasi talab etiladi. Bunga: brending bo'yicha strateg, UX/UI dizayner, professional kopirayter, frontend dasturchi va marketing tahlilchisi kiradi. Jon Branding'da biz ushbu barcha bosqichlarni o'z ichiga olgan kompleks yondashuvni taqdim etamiz." }
         ],
         "ctaTitle": "Shubhalarga o'rin yo'q!",
         "ctaDesc": "Loyihangizni boshlash vaqti keldi.",
@@ -391,7 +390,7 @@
         "metadata": { "title": "Mini-test | Jon.Branding", "description": "Tayyorgarlik darajasini aniqlang." },
         "exampleTitle": "Misol:",
         "questions": [
-            { "question": "Missiyangiz bormi?", "brandExample": "Nike — ilhom berish.", "options": [{ "text": "Ha", "score": 3 }, { "text": "Yo'q", "score": 1 }] }
+            { "question": "Missiyangiz bormi?", "brandExample": "Nike — ilhom berish.", "options": [{ "text": "Ha", "score": 3 }] }
         ],
         "result": {
             "bad": { "title": "Yordam kerak", "description": "Poydevor zaif." },
@@ -434,14 +433,45 @@
         "metadata": { "title": "Patent Kalkulyatori", "description": "Xarajatlarni hisoblang." },
         "title": "Patent Kalkulyatori",
         "subtitle": "Xarajatlarni aniqlash.",
-        "trademarkCalculator": { "currency": "so'm", "submitButton": "Buyurtma berish", "totalCostTitle": "Umumiy xarajat" }
+        "trademarkCalculator": {
+            "currency": "so'm",
+            "submitButton": "Buyurtma berish",
+            "totalCostTitle": "Umumiy xarajat"
+        }
     },
-    "packagingPage": { "metadata": { "title": "Qadoq dizayni", "description": "Sotuvchi qadoq." }, "title": "Qadoq dizayni", "subtitle": "Marketing vositasi." },
+    "packagingPage": {
+        "metadata": { "title": "Qadoq dizayni", "description": "Sotuvchi qadoq." },
+        "title": "Qadoq dizayni",
+        "subtitle": "Marketing vositasi."
+    },
     "servicesPage": {
-        "packageBuilder": { "title": "Xizmatlar va narxlar", "subtitle": "O'z paketingizni yarating.", "final_price": "Yakuniy narx:", "recommended": "Tavsiya etiladi" },
-        "comparison": { "title": "Biz va raqobatchilar", "ctaButton": "Menga shunday yondashuv kerak" }
+        "packageBuilder": {
+            "title": "Xizmatlar va narxlar",
+            "subtitle": "O'z paketingizni yarating.",
+            "final_price": "Yakuniy narx:",
+            "recommended": "Tavsiya etiladi"
+        },
+        "comparison": {
+            "title": "Biz va raqobatchilar",
+            "ctaButton": "Menga shunday yondashuv kerak"
+        }
     },
-    "pickTwoSelector": { "title": "Uchtadan ikkitasini tanlang", "subtitle": "Narx—Sifat—Tezlik.", "options": { "cheap": "Arzon", "quality": "Sifatli", "fast": "Tez" }, "messages": { "default": "2 tasini tanlang." } },
-    "exitIntentModal": { "title": "Ketmang!", "description": "Siz uchun chegirmalarimiz bor.", "button": "Ko'rish" },
-    "queueStatus": { "title": "Navbatingizni band qiling!", "booked": "Band", "available": "Bo'sh", "ctaButton": "Band qilish", "timeframes": { "2 weeks": "2 haftada" } }
+    "pickTwoSelector": {
+        "title": "Uchtadan ikkitasini tanlang",
+        "subtitle": "Narx—Sifat—Tezlik.",
+        "options": { "cheap": "Arzon", "quality": "Sifatli", "fast": "Tez" },
+        "messages": { "default": "2 tasini tanlang." }
+    },
+    "exitIntentModal": {
+        "title": "Ketmang!",
+        "description": "Siz uchun chegirmalarimiz bor.",
+        "button": "Ko'rish"
+    },
+    "queueStatus": {
+        "title": "Navbatingizni band qiling!",
+        "booked": "Band",
+        "available": "Bo'sh",
+        "ctaButton": "Band qilish",
+        "timeframes": { "2 weeks": "2 haftada" }
+    }
 }

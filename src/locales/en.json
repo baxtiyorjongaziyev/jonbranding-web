@@ -1,3 +1,4 @@
+
 {
     "header": {
         "portfolio": "Portfolio",
@@ -235,7 +236,8 @@
             { "question": "What is your workflow?", "answer": "The process is divided into clear stages: research, strategy, visual style, and communication. Each stage is coordinated with you, ensuring full control and premium quality." },
             { "question": "Can I order just a logo?", "answer": "We don't just build icons; we build identity systems. We recommend the 'Logo + Corporate Style' package because a single logo cannot fully reveal or protect your brand's true value." },
             { "question": "What are the payment terms?", "answer": "Standard terms are a 50% down payment and 50% upon project completion. For 100% upfront payments, we offer special discounts." },
-            { "question": "Are there any guarantees?", "answer": "Yes, we have a '100% Satisfaction Guarantee'. If you absolutely don't like the initial concepts, we will refund your payment. Your result is our reputation." }
+            { "question": "Are there any guarantees?", "answer": "Yes, we have a '100% Satisfaction Guarantee'. If you absolutely don't like the initial concepts, we will refund your payment. Your result is our reputation." },
+            { "question": "Who is needed to create a high-converting website?", "answer": "A high-converting site requires a team: brand strategist, UX/UI designer, professional copywriter, frontend developer, and marketing analyst. At Jon Branding, we integrate all these specialists for a holistic, results-driven approach." }
         ],
         "ctaButton": "Ready to start!"
     },
