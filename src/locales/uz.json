@@ -55,7 +55,7 @@
         "patent_calculator": "Patent kalkulyatori"
     },
     "cookieConsent": {
-        "message": "Saytimizda shirin 'cookie'lar bor. Ular bizga sizni eslab qolishga yordam beradi. Agar rozilik bersangiz, ularni birga baham ko'ramiz.",
+        "message": "Saytimizda shirin 'cookie'lar bor. Ular bizga sizni eslab qolishga yordam beradi.",
         "acceptButton": "Tushunarlilar"
     },
     "brandbookPage": {
@@ -107,7 +107,7 @@
     },
     "sitemapPage": {
         "title": "Sayt xaritasi",
-        "subtitle": "Barcha sahifalar haqida umumiy ma'lumot.",
+        "subtitle": "Barcha sahifalar haqida umumiy ma'lumot, kerakli axborotni tezda topishingizga yordam beradi.",
         "sections": {
             "main": "Asosiy bo'limlar",
             "services": "Xizmatlar",
@@ -235,7 +235,7 @@
         "sections": [
             { "title": "1️⃣ STRATEGIYA", "points": ["Brend pozitsiyalash", "Auditoriya xaritasi", "Noyob taklif (USP)"] },
             { "title": "2️⃣ AYDENTIKA", "points": ["Professional logo", "Firma ranglari", "Tipografika"] },
-            { "title": "3️⃣ HUJJATLAR", "points": ["To'liq brendbuk", "Barcha formatdagi fayllar", "Qo'llanma"] },
+            { "title": "3️⃣ HUJJATLAR", "points": ["To'liq brendbuk (30-50 bet)", "Barcha formatdagi fayllar", "Qo'llanma"] },
             { "title": "4️⃣ HUQUQIY HIMOYA", "points": ["Neyming konsultatsiyasi", "Patent topshirish jarayoni", "Himoya strategiyasi"] },
             { "title": "5️⃣ QO'LLAB-QUVVATLASH", "points": ["3 oy bepul tahrirlar", "Telegram orqali aloqa", "Maslahatlar"] }
         ]
@@ -342,6 +342,17 @@
             "title": "Yordam kerakmi?",
             "description": "Amaliyotga o'tamiz. Bepul konsultatsiya oling.",
             "button": "Konsultatsiya olish"
+        },
+        "checklistContent": {
+            "progress_text": "Bajarildi: {checkedCount} / {total}",
+            "items": [
+                { "title": "Strategiyasiz ishlash", "description": "Eng katta xato — rejasiz boshlash.", "solution": "Yechim: Missiya va maqsadni belgilang." }
+            ],
+            "result": {
+                "bad": { "title": "Yordam zarur!", "description": "Brendingiz poydevori zaif." },
+                "good": { "title": "To'g'ri yo'ldasiz!", "description": "Asos yaxshi, lekin kuchaytirish kerak." },
+                "perfect": { "title": "A'lo!", "description": "Mustahkam poydevor." }
+            }
         }
     },
     "faq": {

@@ -107,7 +107,7 @@
     },
     "sitemapPage": {
         "title": "Sitemap",
-        "subtitle": "Overview of all pages on our site.",
+        "subtitle": "Overview of all pages on our site to help you find what you need.",
         "sections": { "main": "Main", "services": "Services", "blog": "Blog" },
         "links": { "home": "Home", "quiz": "Quiz", "portfolio": "Portfolio" }
     },
@@ -168,7 +168,7 @@
     },
     "home": {
       "cta1_title": "Your brand can look just as good.",
-      "cta1_desc": "Take your business to the next level.",
+      "cta1_desc": "Take your business to the next level with professional design.",
       "cta1_button": "For my business too"
     },
     "urgencyBlock": {
@@ -183,8 +183,11 @@
         "subtitle": "What you get:",
         "ctaButton": "I need this",
         "sections": [
-            { "title": "STRATEGY", "points": ["Positioning", "Audience map"] },
-            { "title": "IDENTITY", "points": ["Logo design", "Color palette"] }
+            { "title": "1️⃣ STRATEGY", "points": ["Positioning", "Audience map", "USP"] },
+            { "title": "2️⃣ IDENTITY", "points": ["Logo design", "Color palette", "Typography"] },
+            { "title": "3️⃣ DOCUMENTATION", "points": ["Full Brandbook", "All formats", "Guide"] },
+            { "title": "4️⃣ LEGAL PROTECTION", "points": ["Naming consult", "Patent process", "IP strategy"] },
+            { "title": "5️⃣ SUPPORT", "points": ["3 months edits", "Telegram chat", "Expert advice"] }
         ]
     },
     "servicesHero": {
@@ -219,10 +222,13 @@
         "title": "Know These Problems?",
         "subtitle": "If these thoughts bother you, we are the right solution.",
         "problems": [
-            { "text": "I have a business but no brand." },
-            { "text": "My brand is outdated." }
+            { "text": "I have a business but no brand. Nobody knows me." },
+            { "text": "My brand is outdated, competitors are ahead." },
+            { "text": "Clients don't see value, only ask for price." },
+            { "text": "Sales are unstable, clients don't return." }
         ],
         "solutionTitle": "Good news: all solvable!",
+        "solutionSubtitle": "Proper brand strategy fixes these issues.",
         "solutionButton": "See solution"
     },
     "beforeAfter": {
@@ -238,9 +244,9 @@
     "leadMagnet": { "title": "Scale Your Brand", "subtitle": "Free resources for you.", "cta": { "button": "Get consultation" }, "magnets": [] },
     "faq": {
         "title": "FAQ",
-        "subtitle": "Answers to common questions.",
+        "subtitle": "Answers to common questions about branding.",
         "faqItems": [
-            { "question": "Why prices vary?", "answer": "Every project is unique." },
+            { "question": "Why prices vary?", "answer": "Every project is unique based on complexity." },
             { "question": "Is there a guarantee?", "answer": "100% satisfaction guarantee." }
         ],
         "ctaButton": "Ready to start!",
@@ -249,19 +255,34 @@
     },
     "mobileCtaBar": { "get_offer": "Send request", "final_price": "Final Price" },
     "blog": { "title": "Blog", "readMore": "Read more" },
-    "quiz": { "resultButton": "View result", "questions": [], "result": { "bad": {"title": "Help"}, "medium": {"title": "Potential"}, "good": {"title": "Great"}} },
+    "blogPost": {
+        "author": "Author",
+        "ctaTitle": "Helpful article?",
+        "ctaDesc": "Get a professional solution for your business.",
+        "ctaButton": "Free consultation"
+    },
+    "quiz": { 
+        "metadata": { "title": "Brand Test | Jon.Branding", "description": "Check your readiness." },
+        "resultButton": "View result", 
+        "questions": [], 
+        "result": { "bad": {"title": "Help"}, "medium": {"title": "Potential"}, "good": {"title": "Great"}} 
+    },
     "brandStrategyPage": { "title": "Brand Strategy", "subtitle": "Clear idea." },
     "patentCalculatorPage": { "title": "Patent Calculator" },
-    "servicesPage": { "packageBuilder": { "title": "Services & Prices" }, "comparison": {"title": "Vs Competitors"} },
+    "servicesPage": { 
+        "packageBuilder": { "title": "Services & Prices", "subtitle": "Build your package.", "final_price": "Final Price:" }, 
+        "comparison": {"title": "Vs Competitors"} 
+    },
     "pickTwoSelector": {
       "title": "Pick Two",
       "subtitle": "Price—Quality—Speed.",
       "ctaText": "Request Offer",
       "options": { "cheap": "Cheap", "quality": "Quality", "fast": "Fast" },
-      "messages": { "default": "Pick 2." }
+      "messages": { "default": "Pick 2 priorities." }
     },
     "exitIntentModal": {
         "title": "Don't leave!",
+        "description": "We have special discounts for you.",
         "button": "View discounts"
     },
     "queueStatus": { "title": "Book Your Slot!", "ctaButton": "Book now", "subtitle": "Limited slots", "timeframes": {"2 weeks": "in 2 weeks"} }
