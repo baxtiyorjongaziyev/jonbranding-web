@@ -1,4 +1,3 @@
-
 {
     "header": {
         "portfolio": "Portfolio",
@@ -56,7 +55,7 @@
     },
     "cookieConsent": {
         "message": "Saytimizda shirin 'cookie'lar bor. Ular bizga sizni eslab qolishga yordam beradi.",
-        "acceptButton": "Tushunarlilar"
+        "acceptButton": "Tushunarli"
     },
     "brandbookPage": {
         "metadata": {
@@ -209,7 +208,7 @@
     },
     "home": {
       "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
-      "cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing.",
+      "cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing. Biznesingiz uchun ideal yechimni topishga yordam beramiz.",
       "cta1_button": "Mening biznesim uchun ham"
     },
     "urgencyBlock": {
@@ -325,7 +324,7 @@
         "checklistContent": {
             "progress_text": "Bajarildi: {checkedCount} / {total}",
             "items": [
-                { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — rejasiz dizaynni boshlash.", "solution": "Yechim: 'Biz kimmiz?' va 'Kim uchun?' savollariga javob bering." },
+                { "title": "1. Strategiyasiz ishlash", "description": "Eng katta xato — rejasiz dizaynni boshlash.", "solution": "Yechim: Missiya va maqsadni belgilang." },
                 { "title": "2. Hamma uchun yoqishga urinish", "description": "Hamma uchun bo'lgan brend — hech kim uchun emas.", "solution": "Yechim: Maqsadli auditoriyani aniqlang." }
             ],
             "result": {
@@ -337,7 +336,7 @@
     },
     "faq": {
         "title": "Ko'p beriladigan savollar",
-        "subtitle": "Brending jarayoni, narxlar va boshqa mavzular bo'yicha javoblar.",
+        "subtitle": "Brending jarayoni va narxlar bo'yicha javoblar.",
         "faqItems": [
             { "question": "Nega narxlar turlicha?", "answer": "Har bir loyiha unikal. Murakkablikka qarab hisoblanadi." },
             { "question": "Ish tartibi qanday?", "answer": "Tadqiqot, strategiya, vizual uslub bosqichlaridan iborat." },
@@ -352,7 +351,7 @@
         "metadata": { "title": "Mini-test | Jon.Branding", "description": "Tayyorgarlik darajasini aniqlang." },
         "exampleTitle": "Misol:",
         "questions": [
-            { "question": "Missiyangiz bormi?", "brandExample": "Nike — ilhom berish.", "options": [{ "text": "Ha, tushunarli", "score": 3 }, { "text": "Yo'q", "score": 1 }] }
+            { "question": "Missiyangiz bormi?", "brandExample": "Nike — ilhom berish.", "options": [{ "text": "Ha", "score": 3 }, { "text": "Yo'q", "score": 1 }] }
         ],
         "result": {
             "bad": { "title": "Yordam kerak", "description": "Poydevor zaif." },
