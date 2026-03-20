@@ -7,11 +7,11 @@
         "blog": "Blog",
         "services": "Services",
         "brand_strategy": "Brand Strategy",
-        "brand_strategy_desc": "The foundation of your brand — analysis and positioning.",
+        "brand_strategy_desc": "Foundation for your brand — analysis and positioning.",
         "naming": "Naming",
-        "naming_desc": "Choosing a strong and memorable name for your brand.",
+        "naming_desc": "Strong and memorable name for your brand.",
         "logo_design": "Logo Design",
-        "logo_design_desc": "Creating a unique mark reflecting your business.",
+        "logo_design_desc": "Unique mark reflecting your business essence.",
         "brandbook": "Brandbook",
         "brandbook_desc": "Rules for using your brand identity.",
         "corporate_style": "Corporate Style",
@@ -19,7 +19,7 @@
         "packaging_design": "Packaging Design",
         "packaging_design_desc": "Attractive design making you stand out.",
         "services_and_prices": "Services & Prices",
-        "services_and_prices_desc": "Build your package and get a price instantly.",
+        "services_and_prices_desc": "Build your package and get price instantly.",
         "contact_by_phone": "Call",
         "contact_by_telegram": "Telegram",
         "free_consultation": "Free Consultation",
@@ -55,42 +55,38 @@
         "patent_calculator": "Patent Calculator"
     },
     "cookieConsent": {
-        "message": "We use cookies to improve your experience. They help us remember you.",
+        "message": "We use cookies to improve your experience.",
         "acceptButton": "Accept"
     },
     "brandbookPage": {
         "metadata": {
             "title": "Brandbook Development | Jon.Branding",
-            "description": "Rules for your brand identity system.",
+            "description": "Brandbook is your brand's constitution. We create complex guidelines.",
             "keywords": "brandbook, guideline, design"
         },
         "title": "Brandbook Development",
-        "subtitle": "Not just a document, but your brand's constitution.",
+        "subtitle": "Not just logos, but your brand's constitution.",
         "section1_title": "Why every business needs a brandbook?",
-        "section1_p1": "A brandbook is a key tool for brand management.",
-        "section1_p2": "This document helps avoid marketing chaos and ensures brand recognition.",
+        "section1_p1": "Brandbook is a key tool for management.",
         "values_title": "Brandbook solves these problems:",
         "values": [
-            { "title": "Consistency", "description": "Ensures your brand looks professional across all platforms." },
-            { "title": "Resource Saving", "description": "Speeds up the design and marketing workflow." },
-            { "title": "Protection", "description": "Protects your identity from incorrect use." }
+            { "title": "Consistency", "description": "Professional look across all platforms." },
+            { "title": "Saving Resources", "description": "No need to explain rules to every new designer." },
+            { "title": "Brand Protection", "description": "Protects your identity from incorrect use." }
         ],
-        "process_title": "What's included?",
-        "process_subtitle": "Our brandbooks contain all necessary sections for management:",
+        "process_title": "What's inside?",
         "process_steps": [
             { "title": "Brand Platform", "description": "Mission, values, and character." },
-            { "title": "Identity", "description": "Logo, colors, and typography rules." },
-            { "title": "Visual Style", "description": "Guidelines for imagery and graphics." },
-            { "title": "Application", "description": "Examples for business cards and social media." }
+            { "title": "Logo & Identity", "description": "Rules for colors and fonts." },
+            { "title": "Visual Style", "description": "Photo and graphic guidelines." },
+            { "title": "Application", "description": "Real world usage examples." }
         ],
-        "cta_title": "Ready to bring order?",
-        "cta_description": "A professional brandbook is a solid investment.",
         "cta_button": "Order Brandbook"
     },
     "popularPackages": {
-        "title": "Most Popular Packages",
+        "title": "Popular Packages",
         "packageTitle": "Naming + Logo (Premium)",
-        "packageSubtitle": "The perfect combo to start a strong brand.",
+        "packageSubtitle": "Ideal combination for a strong start.",
         "features": [
             "Perfect brand name (6 lang check)",
             "Professional logo (5 concepts)",
@@ -102,14 +98,7 @@
         "separate": "Separate",
         "packagePrice": "In package",
         "packageDiscount": "(-20% discount!)",
-        "upfrontDiscount": "with 100% upfront (-28% total!)",
         "ctaButton": "Select this package"
-    },
-    "sitemapPage": {
-        "title": "Sitemap",
-        "subtitle": "Overview of all pages on our site to help you find what you need.",
-        "sections": { "main": "Main", "services": "Services", "blog": "Blog" },
-        "links": { "home": "Home", "quiz": "Quiz", "portfolio": "Portfolio" }
     },
     "hero": {
         "headlines": [
@@ -127,57 +116,29 @@
         "buttonHint": "Free. No obligations."
     },
     "contactModal": {
-        "stepTitles": {
-            "contact": "Contact",
-            "project": "Project",
-            "budget": "Budget",
-            "meeting": "Meeting"
-        },
+        "stepTitles": { "contact": "Contact", "project": "Project", "budget": "Budget", "meeting": "Meeting" },
         "title": "For Quality Consultation",
         "description": "Answer a few questions so we can understand your project.",
         "fullName": "Full Name",
         "phone": "Phone Number",
-        "telegram": "Telegram (optional)",
         "goal": "Which goal is closer?",
         "goalOptions": [
-            { "value": "exploring", "label": "I'm exploring branding options." },
+            { "value": "exploring", "label": "Exploring branding options." },
             { "value": "has_problem", "label": "I have an ineffective brand." },
-            { "value": "ready_to_start", "label": "I'm ready to start a project." }
+            { "value": "ready_to_start", "label": "I'm ready to start." }
         ],
-        "budget": "Estimated budget?",
-        "budgetOptions": ["No budget yet", "Up to $500", "$500 - $1,500", "$1,500 - $3,000", "Above $3,000"],
-        "location": "Your location",
+        "budgetOptions": ["No budget", "Up to $500", "$500 - $1,500", "$1,500 - $3,000", "Above $3,000"],
         "locationOptions": ["Tashkent", "Fergana", "Other"],
-        "meetingPlace": "Where to meet?",
-        "backButton": "Back",
-        "nextButton": "Next",
-        "submitButton": "Send Request",
-        "privacyPolicyText": "I accept the privacy policy.",
-        "formErrors": {
-            "fullName": "Enter full name.",
-            "phone": "Enter valid phone.",
-            "goal": "Select a goal.",
-            "budget": "Select budget.",
-            "location": "Select location.",
-            "meetingPlace": "Select meeting place.",
-            "privacyPolicy": "Accept policy."
-        },
+        "formErrors": { "fullName": "Enter name.", "phone": "Enter phone.", "goal": "Select goal.", "privacyPolicy": "Accept policy." },
         "successToast": { "title": "Success!", "description": "We'll contact you soon!" },
-        "leadMagnetToast": { "title": "Special resources!", "description": "Sending you free materials." },
-        "errorToast": { "title": "Error!", "description": "Please try again." }
+        "leadMagnetToast": { "title": "Resources!", "description": "Sending you free materials." }
     },
     "home": {
       "cta1_title": "Your brand can look just as good.",
       "cta1_desc": "Take your business to the next level with professional design.",
       "cta1_button": "For my business too"
     },
-    "urgencyBlock": {
-        "title": "🔥 BEFORE YOU CLOSE...",
-        "subtitle": "Imagine:",
-        "line1": "Tomorrow your competitor has a professional brand.",
-        "line2": "Customers buy from HIM.",
-        "line3": "He invested. You... thought."
-    },
+    "urgencyBlock": { "title": "🔥 BEFORE YOU CLOSE...", "subtitle": "Imagine:", "line1": "Tomorrow your competitor is ahead.", "line2": "Customers buy from HIM.", "line3": "He invested. You... thought." },
     "personalOfferBlock": {
         "title": "💎 MY OFFER:",
         "subtitle": "What you get:",
@@ -186,104 +147,58 @@
             { "title": "1️⃣ STRATEGY", "points": ["Positioning", "Audience map", "USP"] },
             { "title": "2️⃣ IDENTITY", "points": ["Logo design", "Color palette", "Typography"] },
             { "title": "3️⃣ DOCUMENTATION", "points": ["Full Brandbook", "All formats", "Guide"] },
-            { "title": "4️⃣ LEGAL PROTECTION", "points": ["Naming consult", "Patent process", "IP strategy"] },
-            { "title": "5️⃣ SUPPORT", "points": ["3 months edits", "Telegram chat", "Expert advice"] }
+            { "title": "4️⃣ LEGAL", "points": ["Naming consult", "Patent process"] },
+            { "title": "5️⃣ SUPPORT", "points": ["3 months edits", "Telegram chat"] }
         ]
     },
-    "servicesHero": {
-        "title": "Services to Strengthen Your Brand",
-        "subtitle": "Guaranteed results for your business",
-        "cta": "View Prices"
-    },
+    "servicesHero": { "title": "Services to Strengthen Your Brand", "subtitle": "Guaranteed results for your business", "cta": "View Prices" },
     "serviceSections": {
         "services": [
             { "id": "neyming", "title": "Naming", "description": "Strong name selection.", "buttonText": "Read more" },
             { "id": "logo-dizayni", "title": "Logo Design", "description": "Reflecting your essence.", "buttonText": "Read more" }
         ]
     },
-    "stats": {
-        "experience": "Years experience",
-        "clients": "Happy clients",
-        "projects": "Successful projects",
-        "recommend": "Recommend us"
-    },
+    "stats": { "experience": "Years experience", "clients": "Happy clients", "projects": "Successful projects", "recommend": "Recommend us" },
     "trustedBy": { "title": "Companies That Trust Us" },
     "whyUs": {
         "title": "Why Choose Us?",
         "subtitle": "We create real value through a systematic approach.",
-        "ctaButton": "Analyze my brand for free",
         "values": [
             { "title": "Strategic", "description": "Every element serves sales." },
             { "title": "Transparent", "description": "Full control over the process." },
-            { "title": "Results", "description": "90% client recommendation rate." }
-        ]
+            { "title": "Results", "description": "90% recommendation rate." }
+        ],
+        "ctaButton": "Analyze my brand for free"
     },
     "targetAudience": {
         "title": "Know These Problems?",
         "subtitle": "If these thoughts bother you, we are the right solution.",
         "problems": [
-            { "text": "I have a business but no brand. Nobody knows me." },
-            { "text": "My brand is outdated, competitors are ahead." },
-            { "text": "Clients don't see value, only ask for price." },
-            { "text": "Sales are unstable, clients don't return." }
+            { "text": "I have a business but no brand." },
+            { "text": "My brand is outdated." },
+            { "text": "Clients only ask for price." },
+            { "text": "Sales are unstable." }
         ],
-        "solutionTitle": "Good news: all solvable!",
-        "solutionSubtitle": "Proper brand strategy fixes these issues.",
-        "solutionButton": "See solution"
+        "solutionTitle": "Good news: all solvable!", "solutionButton": "See solution"
     },
-    "beforeAfter": {
-        "title": "Before & After",
-        "subtitle": "See the transformation.",
-        "ctaTitle": "Ready for change?",
-        "ctaDesc": "Let's analyze your brand.",
-        "ctaButton": "Change my brand too"
-    },
+    "beforeAfter": { "title": "Before & After", "subtitle": "See the transformation.", "ctaButton": "Change my brand too" },
     "testimonials": { "title": "Client Feedback", "subtitle": "Our greatest achievement." },
     "gallery": { "title": "Portfolio Examples", "subtitle": "Standout brands." },
-    "process": { "title": "Our Process", "subtitle": "Proven and transparent.", "ctaButton": "Discuss project" },
-    "leadMagnet": { "title": "Scale Your Brand", "subtitle": "Free resources for you.", "cta": { "button": "Get consultation" }, "magnets": [] },
-    "faq": {
-        "title": "FAQ",
-        "subtitle": "Answers to common questions about branding.",
-        "faqItems": [
-            { "question": "Why prices vary?", "answer": "Every project is unique based on complexity." },
-            { "question": "Is there a guarantee?", "answer": "100% satisfaction guarantee." }
-        ],
-        "ctaButton": "Ready to start!",
-        "ctaTitle": "No doubts!",
-        "ctaDesc": "Let's begin."
-    },
+    "process": { "title": "Our Process", "phases": [{ "phase": "01", "title": "Discovery" }, { "phase": "02", "title": "Strategy" }], "ctaButton": "Discuss project" },
+    "leadMagnet": { "title": "Scale Your Brand", "magnets": [{ "id": "pdf", "title": "PDF Checklist" }, { "id": "quiz", "title": "Mini Quiz" }] },
+    "faq": { "title": "FAQ", "faqItems": [{ "question": "Why prices vary?", "answer": "Every project is unique." }], "ctaButton": "Ready to start!" },
     "mobileCtaBar": { "get_offer": "Send request", "final_price": "Final Price" },
     "blog": { "title": "Blog", "readMore": "Read more" },
-    "blogPost": {
-        "author": "Author",
-        "ctaTitle": "Helpful article?",
-        "ctaDesc": "Get a professional solution for your business.",
-        "ctaButton": "Free consultation"
-    },
-    "quiz": { 
-        "metadata": { "title": "Brand Test | Jon.Branding", "description": "Check your readiness." },
-        "resultButton": "View result", 
-        "questions": [], 
-        "result": { "bad": {"title": "Help"}, "medium": {"title": "Potential"}, "good": {"title": "Great"}} 
-    },
-    "brandStrategyPage": { "title": "Brand Strategy", "subtitle": "Clear idea." },
-    "patentCalculatorPage": { "title": "Patent Calculator" },
-    "servicesPage": { 
-        "packageBuilder": { "title": "Services & Prices", "subtitle": "Build your package.", "final_price": "Final Price:" }, 
-        "comparison": {"title": "Vs Competitors"} 
-    },
-    "pickTwoSelector": {
-      "title": "Pick Two",
-      "subtitle": "Price—Quality—Speed.",
-      "ctaText": "Request Offer",
-      "options": { "cheap": "Cheap", "quality": "Quality", "fast": "Fast" },
-      "messages": { "default": "Pick 2 priorities." }
-    },
-    "exitIntentModal": {
-        "title": "Don't leave!",
-        "description": "We have special discounts for you.",
-        "button": "View discounts"
-    },
-    "queueStatus": { "title": "Book Your Slot!", "ctaButton": "Book now", "subtitle": "Limited slots", "timeframes": {"2 weeks": "in 2 weeks"} }
+    "blogPost": { "ctaTitle": "Helpful article?", "ctaButton": "Free consultation" },
+    "quiz": { "metadata": { "title": "Brand Test" }, "result": { "bad": { "title": "Need Help" } }, "nextButton": "Next" },
+    "brandStrategyPage": { "title": "Brand Strategy", "process_steps": [{ "title": "Analysis" }] },
+    "corporateStylePage": { "title": "Corporate Style", "process_steps": [{ "title": "Concept" }] },
+    "logoDesignPage": { "title": "Logo Design" },
+    "namingPage": { "title": "Naming", "calculator_cta_button": "To Calculator" },
+    "patentCalculatorPage": { "title": "Patent Calculator", "trademarkCalculator": { "currency": "$", "submitButton": "Order Now" } },
+    "packagingPage": { "title": "Packaging Design" },
+    "servicesPage": { "packageBuilder": { "title": "Services & Prices" } },
+    "pickTwoSelector": { "title": "Pick Two", "ctaText": "Request Offer", "options": { "cheap": "Cheap", "quality": "Quality", "fast": "Fast" } },
+    "exitIntentModal": { "title": "Don't leave!", "button": "View discounts" },
+    "queueStatus": { "title": "Book Your Slot!", "booked": "Booked", "available": "Free", "ctaButton": "Book Now" }
 }
