@@ -98,7 +98,33 @@
         "separate": "Separate",
         "packagePrice": "In package",
         "packageDiscount": "(-20% discount!)",
+        "upfrontDiscount": "at 100% pre-payment (-28% total!)",
         "ctaButton": "Select this package"
+    },
+    "sitemapPage": {
+        "title": "Sitemap",
+        "subtitle": "Overview of all pages to help you find information quickly.",
+        "sections": {
+            "main": "Main Sections",
+            "services": "Services",
+            "blog": "Blog Articles"
+        },
+        "links": {
+            "home": "Home",
+            "quiz": "Branding Quiz",
+            "portfolio": "Portfolio",
+            "process": "Workflow",
+            "faq": "FAQ",
+            "services_prices": "All Services & Prices",
+            "brand_strategy": "Brand Strategy",
+            "naming": "Naming",
+            "brandbook": "Brandbook",
+            "corporate_style": "Corporate Style",
+            "packaging_design": "Packaging Design",
+            "logo_design": "Logo Design",
+            "patent_calculator": "Patent Calculator",
+            "marketplace_cover": "Marketplace Cover Design"
+        }
     },
     "hero": {
         "headlines": [
@@ -184,7 +210,21 @@
     "beforeAfter": { "title": "Before & After", "subtitle": "See the transformation.", "ctaButton": "Change my brand too" },
     "testimonials": { "title": "Client Feedback", "subtitle": "Our greatest achievement." },
     "gallery": { "title": "Portfolio Examples", "subtitle": "Standout brands." },
-    "process": { "title": "Our Process", "phases": [{ "phase": "01", "title": "Discovery" }, { "phase": "02", "title": "Strategy" }], "ctaButton": "Discuss project" },
+    "process": { 
+        "title": "Our Process", 
+        "subtitle": "A transparent and effective workflow for every project.",
+        "phases": [
+            { "phase": "01", "title": "Discovery", "description": "Laying the foundation.", "tasks": ["Briefing", "Problem ID", "Market Analysis"] },
+            { "phase": "02", "title": "Strategy", "description": "Defining the path.", "tasks": ["Goals", "Positioning", "Platform"] },
+            { "phase": "03", "title": "Creative", "description": "Visual creation.", "tasks": ["Naming", "Logo", "Style"] },
+            { "phase": "04", "title": "Presentation", "description": "Testing ideas.", "tasks": ["Showcase", "Edits", "Iterate"] },
+            { "phase": "05", "title": "Implementation", "description": "Go live.", "tasks": ["Files", "Brandbook", "Guides"] },
+            { "phase": "06", "title": "Growth", "description": "Continuous support.", "tasks": ["Instructions", "Consult"] }
+        ],
+        "ctaButton": "Discuss project",
+        "ctaTitle": "Ready to start?",
+        "ctaDesc": "Let's bring your ideas to life."
+    },
     "leadMagnet": { "title": "Scale Your Brand", "magnets": [{ "id": "pdf", "title": "PDF Checklist" }, { "id": "quiz", "title": "Mini Quiz" }] },
     "faq": { "title": "FAQ", "faqItems": [{ "question": "Why prices vary?", "answer": "Every project is unique." }], "ctaButton": "Ready to start!" },
     "mobileCtaBar": { "get_offer": "Send request", "final_price": "Final Price" },
