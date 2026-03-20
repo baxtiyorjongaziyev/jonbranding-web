@@ -1,4 +1,4 @@
-'use server';
+'use client';
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -37,8 +37,6 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
     target: targetRef,
   });
 
-  // Animating the horizontal list x property from 0% to -100% as requested.
-  // Note: Depending on content length, -100% might move items completely off-screen.
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"]);
 
   if (!translations || !translations.phases) return null;

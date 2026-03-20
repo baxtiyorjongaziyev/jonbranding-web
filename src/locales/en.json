@@ -54,44 +54,44 @@
         "patent_calculator": "Patent Calculator"
     },
     "cookieConsent": {
-        "message": "We use cookies to improve your experience.",
+        "message": "We use cookies to improve your experience. If you agree, let's share them together.",
         "acceptButton": "Accept"
     },
     "brandbookPage": {
         "metadata": {
             "title": "Brandbook Development | Jon.Branding",
-            "description": "Brandbook is your brand's constitution. We create complex guidelines.",
-            "keywords": "brandbook, guideline, design"
+            "description": "Brandbook is your brand's constitution. We create complex guidelines that save marketing costs.",
+            "keywords": "brandbook, guideline, design, brand identity"
         },
         "title": "Brandbook Development",
-        "subtitle": "Not just logos, but your brand's constitution.",
+        "subtitle": "Not just logos, but your brand's constitution ensuring consistency.",
         "section1_title": "Why every business needs a brandbook?",
-        "section1_p1": "Brandbook is a key tool for management.",
+        "section1_p1": "Brandbook is a key tool for management. It defines all rules for visual and ideological elements.",
         "values_title": "Brandbook solves these problems:",
         "values": [
-            { "title": "Consistency", "description": "Professional look across all platforms." },
-            { "title": "Saving Resources", "description": "No need to explain rules to every new designer." },
-            { "title": "Brand Protection", "description": "Protects your identity from incorrect use." }
+            { "title": "Consistency", "description": "Professional look across all platforms — from business card to website." },
+            { "title": "Saving Resources", "description": "No need to explain rules to every new designer or agency." },
+            { "title": "Brand Protection", "description": "Protects your identity from incorrect use, preserving value." }
         ],
         "process_title": "What's inside?",
         "process_steps": [
-            { "title": "Brand Platform", "description": "Mission, values, and character." },
-            { "title": "Logo & Identity", "description": "Rules for colors and fonts." },
+            { "title": "Brand Platform", "description": "Mission, values, and brand character." },
+            { "title": "Logo & Identity", "description": "Rules for logo usage, colors and fonts." },
             { "title": "Visual Style", "description": "Photo and graphic guidelines." },
-            { "title": "Application", "description": "Real world usage examples." }
+            { "title": "Application", "description": "Real world usage examples and mockups." }
         ],
         "cta_button": "Order Brandbook"
     },
     "popularPackages": {
         "title": "Popular Packages",
         "packageTitle": "Naming + Logo (Premium)",
-        "packageSubtitle": "Ideal combination for a strong start.",
+        "packageSubtitle": "Ideal combination for a strong brand start.",
         "features": [
             "Perfect brand name (6 lang check)",
             "Professional logo (5 concepts)",
-            "Full corporate style",
+            "Full corporate style (colors, fonts)",
             "15+ real mockups",
-            "Patent audit",
+            "Patent audit and consultation",
             "10 branded stickers"
         ],
         "separate": "Separate",
@@ -133,10 +133,12 @@
             "Let customers |fall in love|.",
             "Small business to |strong brand|."
         ],
-        "description": "We build results-driven brand systems.",
+        "description": "We build results-driven brand systems. As a leading agency in Tashkent, we create strategy-based identities.",
         "buttonTexts": [
             "Analyze my brand",
-            "Get free consultation"
+            "Get free consultation",
+            "Help me grow sales",
+            "I need a strong brand"
         ],
         "buttonHint": "Free. No obligations."
     },
@@ -225,7 +227,18 @@
         "ctaDesc": "Let's bring your ideas to life."
     },
     "leadMagnet": { "title": "Scale Your Brand", "magnets": [{ "id": "pdf", "title": "PDF Checklist" }, { "id": "quiz", "title": "Mini Quiz" }] },
-    "faq": { "title": "FAQ", "faqItems": [{ "question": "Why prices vary?", "answer": "Every project is unique." }], "ctaButton": "Ready to start!" },
+    "faq": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Answers to common questions about our process, pricing, and more.",
+        "faqItems": [
+            { "question": "Why aren't prices fixed?", "answer": "Every project is unique. The price is calculated individually based on the complexity of the task, the scope of work, and your specific business goals. We provide the most effective solution for your budget." },
+            { "question": "What is your workflow?", "answer": "The process is divided into clear stages: research, strategy, visual style, and communication. Each stage is coordinated with you, ensuring full control and premium quality." },
+            { "question": "Can I order just a logo?", "answer": "We don't just build icons; we build identity systems. We recommend the 'Logo + Corporate Style' package because a single logo cannot fully reveal or protect your brand's true value." },
+            { "question": "What are the payment terms?", "answer": "Standard terms are a 50% down payment and 50% upon project completion. For 100% upfront payments, we offer special discounts." },
+            { "question": "Are there any guarantees?", "answer": "Yes, we have a '100% Satisfaction Guarantee'. If you absolutely don't like the initial concepts, we will refund your payment. Your result is our reputation." }
+        ],
+        "ctaButton": "Ready to start!"
+    },
     "mobileCtaBar": { "get_offer": "Send request", "final_price": "Final Price" },
     "blog": { "title": "Blog", "readMore": "Read more" },
     "blogPost": { "ctaTitle": "Helpful article?", "ctaButton": "Free consultation" },
