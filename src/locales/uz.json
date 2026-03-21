@@ -402,37 +402,99 @@
         "resultButton": "Natija"
     },
     "brandStrategyPage": {
-        "metadata": { "title": "Brend-strategiya", "description": "Biznes o'sish vositasi." },
+        "metadata": { "title": "Brend-strategiya | Jon.Branding", "description": "Kuchli brend — aniq strategiya va maqsadli yondashuv bilan boshlanadi." },
         "title": "Brend-strategiya",
-        "subtitle": "Kuchli brend — aniq g'oya.",
-        "section1_title": "Strategiya — o'sish vositasi",
-        "section1_p1": "Har bir kompaniyaning o'z maqsadi bor.",
-        "process_title": "Jarayon",
-        "process_steps": [{ "title": "Tahlil", "description": "Bozorni o'rganish." }]
+        "subtitle": "Biznesingizning bozordagi o'rnini aniqlaydigan va uzoq muddatli o'sishni ta'minlaydigan asosiy vosita.",
+        "section1_title": "Strategiya — o'sish va daromadning poydevori",
+        "section1_p1": "Ko'p tadbirkorlar shunchaki chiroyli logotip yoki sayt yaratib, muvaffaqiyatga erishamiz deb o'ylashadi. Aslida, bozorda ajralib turish uchun chuqur strategiya kerak.",
+        "section1_p2": "Biz brendingizni bozor tahlili, raqobat tadqiqoti va maqsadli auditoriya xaritalash asosida quramiz. Bu sizga nafaqat tanilish, balki haqiqiy sotuvlar beradi.",
+        "section1_p3": "Har bir qaror ma'lumotlarga va biznes maqsadlaringizga asoslanadi.",
+        "section2_title": "Brend strategiyasi nimalar qamradi?",
+        "section2_p1": "Brend strategiyasi — bu brendingizning kim ekanligi, nima uchun mavjudligi va qanday gapirishi haqidagi aniq hujjat.",
+        "section2_p2_bold": "Pozitsiyalash: ",
+        "section2_p2_text": "Bozorda qayerda turasiz va nima uchun mijozlar sizni tanlashi kerak.",
+        "section2_p3_bold": "Kommunikatsiya: ",
+        "section2_p3_text": "Brendingiz ovozi, toni va xabarlarining yagona tizimi.",
+        "section2_p4": "Natijada siz aniq yo'nalishga ega bo'lgan va har bir qarorni osongina qabul qiladigan brendga ega bo'lasiz.",
+        "process_title": "Bizning ish jarayonimiz",
+        "process_subtitle": "Har bir qadamda siz bilan birgamiz va natijaga kafolat beramiz.",
+        "process_steps": [
+            { "title": "Discovery (Tadqiqot)", "description": "Biznesingiz, raqobatchilar va bozorni chuqur o'rganamiz." },
+            { "title": "Maqsadli auditoriya", "description": "Ideal mijozingizning portretini yaratamiz va ularning ehtiyojlarini aniqlaymiz." },
+            { "title": "Pozitsiyalash", "description": "Brendingizning bozordagi noyob o'rnini belgilaymiz." },
+            { "title": "Hujjatlashtirish", "description": "Barcha strategik qarorlarni aniq va amaliy hujjat sifatida tayyorlaymiz." },
+            { "title": "Tatbiq etish", "description": "Strategiyani amalda qo'llash bo'yicha qo'llanma va qo'llab-quvvatlash." }
+        ]
     },
     "corporateStylePage": {
-        "metadata": { "title": "Firma uslubi", "description": "Vizual tizim." },
-        "title": "Firma uslubi",
-        "subtitle": "Vizual obraz qadri.",
-        "process_title": "Qanday yaratamiz?",
-        "process_steps": [{ "title": "Konsept", "description": "G'oya ishlab chiqish." }]
+        "metadata": { "title": "Firma uslubi | Jon.Branding", "description": "Brendingizni barcha platformalarda yagona va professional ko'rsatadigan vizual tizim." },
+        "title": "Firma uslubi (Korporativ uslub)",
+        "subtitle": "Har bir element brendingizni mustahkamlaydigan va mijozlar ongida qoladigan yagona vizual tizim.",
+        "section1_title": "Firma uslubi nima va nega kerak?",
+        "section1_p1": "Firma uslubi — bu brendingizning vizual 'tili'. Logotip, ranglar, shriftlar, ikonalar — bularning barchasi birgalikda ish qilib, brendingizni darhol tanilishini ta'minlaydi.",
+        "section1_p2": "Yaxlit firma uslubisiz brendingiz har xil platformalarda har xil ko'rinadi va professionalligi yo'qoladi.",
+        "process_title": "Firma uslubini qanday yaratamiz?",
+        "process_subtitle": "Ijodkorlik va strategiyani birlashtirgan 4 bosqichli jarayon.",
+        "process_steps": [
+            { "title": "Tahlil va konsept", "description": "Brendingiz qadriyatlari va auditoriyasini o'rganib, vizual yo'nalishni belgilaymiz." },
+            { "title": "Ranglar va shriftlar", "description": "Brendingiz uchun maxsus tanlangan rang palitrasini va tipografika tizimini yaratamiz." },
+            { "title": "Elementlar tizimi", "description": "Ikonalar, grafik elementlar va pattern — barcha vizual qismlarni quramiz." },
+            { "title": "Amaliy namoyish", "description": "Barcha elementlarni real tashuvchilarda (vizitka, paket, banner) ko'rsatamiz." }
+        ]
     },
     "logoDesignPage": {
-        "metadata": { "title": "Logo dizayn", "description": "Biznes yuzi." },
+        "metadata": { "title": "Logotip dizayni | Jon.Branding", "description": "Biznesingiz mohiyatini aks ettiruvchi, strategik va esda qolarli logotip." },
         "title": "Logotip dizayni",
-        "subtitle": "Strategik vosita.",
-        "process_steps": [{ "title": "Brifing", "description": "O'rganish." }]
+        "subtitle": "Shunchaki chiroyli rasm emas — brendingizning yuzini belgilaydigan strategik belgi.",
+        "section1_title": "Yaxshi logotip — brendning eng kuchli qurolı",
+        "section1_p1": "Logotip mijozning brendingiz bilan birinchi uchrashuvi. U bir zumda ishonch hosil qilishi yoki aksincha, shubha uyg'otishi mumkin.",
+        "section1_p2": "Biz har bir logotipni strategiyadan boshlaymiz: brendingizning qadriyatlari, auditoriyasi va bozordagi o'rni asosida yaratamiz.",
+        "values_title": "Nima uchun bizning logotiplar ishlaydi?",
+        "values": [
+            { "title": "Strategik yondashuv", "description": "Har bir dizayn elementi brendingizning maqsadli auditoriyasi va qadriyatlaridan kelib chiqadi." },
+            { "title": "Esda Qoladi", "description": "Soddaligi va noyob konsepsiyasi bilan logotipingiz raqobatchilardan xotirada qoladi." },
+            { "title": "Har yerda ishlaydi", "description": "Vizitka, veb-sayt, billborad yoki mahsulot — logotipingiz hamma joyda professional ko'rinadi." }
+        ],
+        "process_title": "Logotip yaratish jarayonimiz",
+        "process_subtitle": "Siz har bir bosqichda jarayonni ko'rasiz va ishtirok etasiz.",
+        "process_steps": [
+            { "title": "Brifing va Tahlil", "description": "Biznesingiz, raqobatchilar va maqsadli auditoriyani chuqur o'rganamiz." },
+            { "title": "Vizual Yo'nalish", "description": "3-5 ta turli konsepsiya taqdim etamiz, siz eng yaxshisini tanlaymiz." },
+            { "title": "Ishlab Chiqish", "description": "Tanlangan konsepsiyani mukammallikka yetkazamiz." },
+            { "title": "Topshirish", "description": "Barcha formatdagi fayllar (AI, SVG, PNG, PDF) va foydalanish qo'llanmasi beramiz." }
+        ],
+        "cta_title": "Brendingiz yangi logotipga tayyor",
+        "cta_description": "Bepul konsultatsiyada brendingiz uchun ideal vizual yechimni muhokama qilamiz.",
+        "cta_button": "Logotip buyurtma qilish"
     },
     "namingPage": {
-        "metadata": { "title": "Neyming", "description": "Kuchli nom." },
+        "metadata": { "title": "Neyming | Jon.Branding", "description": "Brendingiz uchun esda qolarli, kuchli va yuridik toza nom tanlash." },
         "title": "Neyming",
-        "subtitle": "Birinchi taassurot.",
-        "calculator_cta_button": "Kalkulyatorga o'tish"
+        "subtitle": "Brend nomi — bu mijozlar bilan birinchi aloqa. U to'g'ri bo'lsa, qolgan hamma narsa osonlashadi.",
+        "section1_title": "Neyming — bu faqat chiroyli jarang emas",
+        "section1_p1": "Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va biznesingizning bozordagi o'rnini belgilaydi.",
+        "section1_p2": "Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz.",
+        "process_title": "Neyming yaratish jarayoni",
+        "process_subtitle": "4 bosqichda brendingiz uchun ideal nomni topamiz.",
+        "process_steps": [
+            { "title": "Tadqiqot", "description": "Biznesingiz, bozor va raqobatchilarni chuqur tahlil qilamiz." },
+            { "title": "G'oyalar to'plash", "description": "Yuzlab nom variantlarini yaratamiz va eng kuchlilarin tanlaymiz." },
+            { "title": "Tekshirish", "description": "Nomning 6 tilda talaffuzi, ma'nosi va patentga tayyorligini tekshiramiz." },
+            { "title": "Topshirish", "description": "Eng yaxshi 3-5 ta nom variantini taqdimot sifatida yetkazamiz." }
+        ],
+        "check_title": "Yaxshi nom uchta sinovdan o'tishi kerak",
+        "check_subtitle": "Biz har bir nomni quyidagi mezonlar bo'yicha tekshiramiz.",
+        "check_points": [
+            { "title": "Tillar bo'yicha", "description": "O'zbek, rus, ingliz va boshqa tillarda noto'g'ri ma'no bermaydi." },
+            { "title": "Patent bo'yicha", "description": "Hukumat reestri va raqobatchilar bazasida bunday nom yo'q." },
+            { "title": "Brend bo'yicha", "description": "Esda qoladi, talaffuz oson va brendingizga mos keladi." }
+        ],
+        "calculator_cta_button": "Patent kalkulyatoriga o'tish"
     },
     "patentCalculatorPage": {
-        "metadata": { "title": "Patent Kalkulyatori", "description": "Xarajatlarni hisoblang." },
+        "metadata": { "title": "Patent Kalkulyatori | Jon.Branding", "description": "Tovar belgisini ro'yxatdan o'tkazish xarajatlarini hisoblang." },
         "title": "Patent Kalkulyatori",
-        "subtitle": "Xarajatlarni aniqlash.",
+        "subtitle": "Brendingizni yuridik himoya qilish xarajatlarini darhol hisoblang.",
         "trademarkCalculator": {
             "currency": "so'm",
             "submitButton": "Buyurtma berish",
@@ -440,9 +502,20 @@
         }
     },
     "packagingPage": {
-        "metadata": { "title": "Qadoq dizayni", "description": "Sotuvchi qadoq." },
+        "metadata": { "title": "Qadoq dizayni | Jon.Branding", "description": "Mahsulotni javonda ajratib turadigan, sotuvchi qadoq dizayni." },
         "title": "Qadoq dizayni",
-        "subtitle": "Marketing vositasi."
+        "subtitle": "Yaxshi qadoq — sotuvchidir. U mahsulotingizni javonda darhol ajratib turadi va xarid qilishga undaydi.",
+        "section1_title": "Qadoq — silent seller (jim sotuvchi)",
+        "section1_p1": "Tadqiqotlar ko'rsatishicha, xaridorlarning 70% qadoq dizayni asosida qaror qabul qiladi.",
+        "section1_p2": "Biz qadoq dizaynini brendingiz strategiyasi bilan uyg'unlashtiramiz — natijada faqat chiroyli emas, balki haqiqatda sotadigan qadoq yaratamiz.",
+        "process_title": "Qadoq dizayni jarayoni",
+        "process_subtitle": "Brifingdan tayyor faylgacha — har bir bosqich siz bilan birgalikda.",
+        "process_steps": [
+            { "title": "Brifing va Tahlil", "description": "Mahsulotingiz, auditoriyangiz va raqobatchilarning qadoqlarini o'rganamiz." },
+            { "title": "Konsept Yaratish", "description": "Brendingiz qadriyatlariga mos 2-3 ta vizual yo'nalish taklif qilamiz." },
+            { "title": "Ishlab Chiqish", "description": "Tanlangan konsepsiyani to'liq qadoq dizayniga aylantirish." },
+            { "title": "Topshirish", "description": "Bosma uchun tayyor fayllar va texnik spesifikatsiyalar." }
+        ]
     },
     "servicesPage": {
         "packageBuilder": {
