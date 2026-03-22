@@ -17,7 +17,7 @@ const AnimatedNumber = ({ value, suffix }: AnimatedNumberProps) => {
     useEffect(() => {
         if (isInView) {
             animate(0, value, {
-                duration: 2,
+                duration: 1.5,
                 ease: "easeOut",
                 onUpdate: (latest) => {
                     if(scope.current) {

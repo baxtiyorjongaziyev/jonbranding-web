@@ -6,6 +6,8 @@ import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
+import StickyCTA from '@/components/ui/sticky-cta';
+import LeadMagnetPopup from '@/components/ui/lead-magnet-popup';
 import { Poppins } from 'next/font/google';
 
 const poppins = Poppins({
@@ -30,10 +32,35 @@ const LocalizedLayout: FC<Props> = async (props) => {
     <html lang={lang} suppressHydrationWarning className={poppins.variable}>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="alternate" hrefLang="uz-UZ" href="https://jonbranding.uz/uz" />
+        <link rel="alternate" hrefLang="ru-RU" href="https://jonbranding.uz/ru" />
+        <link rel="alternate" hrefLang="en-US" href="https://jonbranding.uz/en" />
+        <link rel="alternate" hrefLang="x-default" href="https://jonbranding.uz/uz" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <Script
+          id="json-ld-local-business"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Jon.Branding",
+              "image": "https://jonbranding.uz/icon.svg",
+              "url": "https://jonbranding.uz",
+              "telephone": "+99890XXXXXXX",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Tashkent, Uzbekistan",
+                "addressLocality": "Tashkent",
+                "addressCountry": "UZ"
+              },
+              "description": "Professional branding agency providing naming, strategy, and logo design services."
+            })
+          }}
+        />
       </head>
       <body className="font-body bg-white antialiased" suppressHydrationWarning>
         <GoogleTagManager gtmId="GTM-5GRQBW84" />
@@ -84,6 +111,8 @@ const LocalizedLayout: FC<Props> = async (props) => {
             {children}
           </div>
           <Footer lang={lang} dictionary={dictionary.footer} />
+          <StickyCTA />
+          <LeadMagnetPopup dictionary={(dictionary as any).leadMagnetPopup} />
         </MainLayout>
       </body>
     </html>

@@ -11,6 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { useParams } from 'next/navigation';
 import WhyUs from '@/components/sections/why-us';
+import ServiceProcessHorizontal from '@/components/sections/service-process-horizontal';
 
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
@@ -37,11 +38,11 @@ const BrandStrategyPage: FC = () => {
   }
 
   const processSteps = [
-    { icon: Search, ...translations.process_steps[0] },
-    { icon: Target, ...translations.process_steps[1] },
-    { icon: FileText, ...translations.process_steps[2] },
-    { icon: Pencil, ...translations.process_steps[3] },
-    { icon: Send, ...translations.process_steps[4] }
+    { iconName: 'Search', ...translations.process_steps[0] },
+    { iconName: 'Target', ...translations.process_steps[1] },
+    { iconName: 'FileText', ...translations.process_steps[2] },
+    { iconName: 'Pencil', ...translations.process_steps[3] },
+    { iconName: 'Send', ...translations.process_steps[4] }
   ];
 
   return (
@@ -112,29 +113,11 @@ const BrandStrategyPage: FC = () => {
             </div>
         </section>
 
-        <section className="py-16 sm:py-24">
-            <div className="container mx-auto px-4">
-                <div className="text-center">
-                    <h2 className="text-3xl sm:text-4xl font-bold">{translations.process_title}</h2>
-                    <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
-                        {translations.process_subtitle}
-                    </p>
-                </div>
-                <div className="mt-16 flex flex-wrap justify-center gap-8">
-                    {processSteps.map((step, index) => (
-                    <Card key={index} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] text-center shadow-lg rounded-2xl bg-white transform hover:-translate-y-2 transition-transform duration-300">
-                        <CardContent className="p-8">
-                            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-6">
-                                <step.icon className="h-8 w-8 text-primary" />
-                            </div>
-                            <h3 className="text-xl font-bold text-dark-blue">{step.title}</h3>
-                            <p className="mt-2 text-gray-600">{step.description}</p>
-                        </CardContent>
-                    </Card>
-                    ))}
-                </div>
-            </div>
-        </section>
+        <ServiceProcessHorizontal
+            title={translations.process_title}
+            subtitle={translations.process_subtitle}
+            steps={processSteps}
+        />
         <WhyUs onCtaClick={handleOpenModal} lang={lang} />
         <ServiceSections lang={lang} />
         </main>
