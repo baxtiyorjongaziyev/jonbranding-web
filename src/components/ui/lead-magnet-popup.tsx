@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Gift, Download, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { trackEvent } from '@/lib/analytics';
 
 interface LeadMagnetPopupProps {
   dictionary: {
@@ -55,6 +56,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
 
   const handleCTA = () => {
     // Logic for CTA (e.g., open contact modal with prefilled data or just download)
+    trackEvent({ action: 'lead_magnet_click', category: 'Conversion', label: dictionary.title });
     const event = new CustomEvent('openContactModal', { detail: { source: 'lead_magnet' } });
     window.dispatchEvent(event);
     localStorage.setItem('lead_magnet_status', 'converted');

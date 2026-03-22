@@ -17,7 +17,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useTelegram } from '@/hooks/use-telegram';
-import { event as gtagEvent } from '@/lib/gtag';
+import { trackLead } from '@/lib/analytics';
 import LiveLocationCard from './live-location-card';
 import { getDictionary } from '@/lib/dictionaries';
 import { Checkbox } from './ui/checkbox';
@@ -152,7 +152,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || 'Server error');
       
-      gtagEvent('form_submit', { 'event_category': 'Contact', 'event_label': 'Main Contact Form', 'value': totalPrice });
+      trackLead({ source: 'main_contact_form', value: totalPrice, summary: packageSummary });
       sendToAmoCRM(data);
       confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
       
