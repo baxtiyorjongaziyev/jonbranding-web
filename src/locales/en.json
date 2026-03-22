@@ -1,603 +1,466 @@
-
 {
-    "header": {
-        "portfolio": "Portfolio",
-        "founder": "Founder",
-        "process": "Process",
-        "blog": "Blog",
-        "services": "Services",
-        "brand_strategy": "Brand Strategy",
-        "brand_strategy_desc": "Foundation for your brand — market analysis, positioning, and communication.",
-        "naming": "Naming",
-        "naming_desc": "Choosing a strong, memorable, and legally clear name for your brand.",
-        "logo_design": "Logo Design",
-        "logo_design_desc": "Creating a unique mark reflecting your business essence.",
-        "brandbook": "Brandbook",
-        "brandbook_desc": "Rules for using your brand identity.",
-        "corporate_style": "Corporate Style",
-        "corporate_style_desc": "System of logos, colors, and fonts.",
-        "packaging_design": "Packaging Design",
-        "packaging_design_desc": "Attractive design making you stand out.",
-        "services_and_prices": "Services & Prices",
-        "services_and_prices_desc": "Build your package and get price instantly.",
-        "contact_by_phone": "Call",
-        "contact_by_telegram": "Telegram",
-        "free_consultation": "Free Consultation",
-        "open_menu": "Open Menu",
-        "switch_lang": "Change Language",
-        "lang_ru": "Russian",
-        "lang_uz": "Uzbek",
-        "lang_en": "English"
+  "header": {
+    "portfolio": "Portfolio",
+    "founder": "Founder",
+    "process": "Process",
+    "blog": "Blog",
+    "services": "Services",
+    "brand_strategy": "Brand Strategy",
+    "brand_strategy_desc": "Foundation for your brand — analysis and positioning.",
+    "naming": "Naming",
+    "naming_desc": "Choosing a strong and memorable name for your brand.",
+    "logo_design": "Logo Design",
+    "logo_design_desc": "Creating a unique mark reflecting your business.",
+    "brandbook": "Brandbook",
+    "brandbook_desc": "Rules for using your brand identity.",
+    "corporate_style": "Corporate Style",
+    "corporate_style_desc": "System of logos, colors, and fonts.",
+    "packaging_design": "Packaging Design",
+    "packaging_design_desc": "Attractive design making you stand out.",
+    "services_and_prices": "Services & Prices",
+    "services_and_prices_desc": "Build your package and get a price instantly.",
+    "contact_by_phone": "Call",
+    "contact_by_telegram": "Telegram",
+    "free_consultation": "Free Consultation",
+    "open_menu": "Open Menu",
+    "switch_lang": "Change Language",
+    "lang_ru": "Russian",
+    "lang_uz": "Uzbek",
+    "lang_en": "English"
+  },
+  "footer": {
+    "contact": "Contact Us",
+    "by_telegram": "Via Telegram",
+    "by_phone": "By Phone",
+    "main_page": "Main Page",
+    "portfolio": "Portfolio",
+    "founder": "Founder",
+    "process": "Process",
+    "faq": "FAQ",
+    "services": "Our Services",
+    "brand_strategy": "Brand Strategy",
+    "naming": "Naming",
+    "brandbook": "Brandbook",
+    "logo_design": "Logo Design",
+    "corporate_style": "Corporate Style",
+    "packaging_design": "Packaging Design",
+    "additional": "Additional",
+    "service_prices": "Services & Prices",
+    "branding_test": "Branding Quiz",
+    "blog": "Blog",
+    "sitemap": "Sitemap",
+    "all_rights_reserved": "All rights reserved.",
+    "back_to_top": "Back to top",
+    "patent_calculator": "Patent Calculator"
+  },
+  "cookieConsent": {
+    "message": "We use cookies to improve your experience.",
+    "acceptButton": "Accept"
+  },
+  "logoDesignPage": {
+    "metadata": {
+      "title": "Professional Logo Design Services | Jon.Branding Uzbekistan",
+      "description": "A logo is the face of your business. Our logo design agency in Uzbekistan creates unique, memorable, and strategic logos that reflect your brand essence."
     },
-    "footer": {
-        "contact": "Contact Us",
-        "by_telegram": "Via Telegram",
-        "by_phone": "By Phone",
-        "main_page": "Main Page",
-        "portfolio": "Portfolio",
-        "founder": "Founder",
-        "process": "Process",
-        "faq": "FAQ",
-        "services": "Our Services",
-        "brand_strategy": "Brand Strategy",
-        "naming": "Naming",
-        "brandbook": "Brandbook",
-        "logo_design": "Logo Design",
-        "corporate_style": "Corporate Style",
-        "packaging_design": "Packaging Design",
-        "additional": "Additional",
-        "service_prices": "Services & Prices",
-        "branding_test": "Branding Quiz",
-        "blog": "Blog",
-        "sitemap": "Sitemap",
-        "all_rights_reserved": "All rights reserved.",
-        "back_to_top": "Back to top",
-        "patent_calculator": "Patent Calculator"
+    "title": "Logo Design",
+    "subtitle": "A logo is not just a picture; it's a strategic tool, the face of your business, and the first impression you make.",
+    "section1_title": "Why is a Logo So Important?",
+    "section1_p1": "In today's competitive market, a logo is the first thing a client notices. A good logo is not just a beautiful design, but a symbol conveying your values and professionalism.",
+    "section1_p2": "It's a key element helping customers recognize and remember you. A professional logo builds trust and emotional connection, turning one-time buyers into loyal fans.",
+    "values_title": "A Good Logo Should Be:",
+    "values": [
+      { "title": "Simple and Memorable", "description": "The best logos are easily recognized and remembered even in small sizes or from a distance." },
+      { "title": "Unique and Timeless", "description": "It should distinguish you from competitors and not go out of style in a few years." },
+      { "title": "Strategic and Meaningful", "description": "Every line, color, and shape should reflect the character and goals of your business." }
+    ],
+    "process_title": "How We Create a Logo?",
+    "process_subtitle": "Our logo creation process is based not just on fleeting inspiration, but on deep analysis and strategic thinking.",
+    "process_steps": [
+      { "title": "Briefing and Research", "description": "We carefully study your business, goals, target audience, and competitors." },
+      { "title": "Concept Development", "description": "We develop several visual concepts reflecting your brand strategy and character." },
+      { "title": "Design and Presentation", "description": "We refine the chosen concept, show it on real examples (mockups), and explain the logic behind it." },
+      { "title": "Finalization and Handover", "description": "We prepare all necessary file formats (vector, raster) for use in any context and provide a mini-guide." }
+    ],
+    "cta_title": "Ready to Create a Working Logo?",
+    "cta_description": "Don't settle for a template logo. Let's create a unique and strong symbol for your business that will become the foundation of your success.",
+    "cta_button": "Get Free Consultation"
+  },
+  "brandStrategyPage": {
+    "metadata": {
+      "title": "Brand Strategy and Platform | Branding Agency in Tashkent",
+      "description": "Brand strategy is a business growth tool. Turn your brand from just pretty to a working system. We develop brand platforms and strategies."
     },
-    "cookieConsent": {
-        "message": "We use cookies to improve your experience. If you agree, let's share them together.",
-        "acceptButton": "Accept"
+    "title": "Brand Strategy",
+    "subtitle": "A strong brand is a clear idea that inspires, unites, and helps the business grow.",
+    "section1_title": "Brand Strategy is a Tool for Business Growth",
+    "section1_p1": "Every ambitious company has its goals. For some, it's conquering a market share; for others, brand awareness or expansion into new territories.",
+    "section1_p2": "Brand strategy helps achieve these goals by becoming more than just a product or service — a part of customers' lives and a recognizable image carrier.",
+    "section1_p3": "Most importantly, it allows systematizing marketing costs, discarding tools and channels that don't support positioning and thus don't justify the cost.",
+    "process_title": "Branding is a Process",
+    "process_subtitle": "At our agency, we believe branding is more than just creating a logo. It's a cyclical process where every stage plays a key role.",
+    "process_steps": [
+      { "title": "Analysis and Research", "description": "The first and most important stage where market, competitor, and audience data is gathered." },
+      { "title": "Brand Platform Formation", "description": "Here mission, values, and USP are born — the foundation defining its character." },
+      { "title": "Strategy Development", "description": "Strategy answers how the brand will communicate with the audience and through which channels." },
+      { "title": "Visual Identification", "description": "Translating brand meanings into visual language — logo, colors, fonts, and graphics." },
+      { "title": "Implementation and Integration", "description": "Moving beyond creation to integrating the brand into all contact points and culture." }
+    ]
+  },
+  "corporateStylePage": {
+    "metadata": {
+      "title": "Corporate Style and Brandbook | Branding Agency in Tashkent",
+      "description": "We don't just create pretty pictures; we develop a systemic visual style that works for your brand and brings results."
     },
-    "brandbookPage": {
-        "metadata": {
-            "title": "Brandbook Development | Jon.Branding",
-            "description": "Brandbook is your brand's constitution. We create complex guidelines that save marketing costs.",
-            "keywords": "brandbook, guideline, design, brand identity"
-        },
-        "title": "Brandbook Development",
-        "subtitle": "Not just logos, but your brand's constitution ensuring consistency.",
-        "section1_title": "Why every business needs a brandbook?",
-        "section1_p1": "Brandbook is a key tool for management. It defines all rules for visual and ideological elements.",
-        "values_title": "Brandbook solves these problems:",
-        "values": [
-            { "title": "Consistency", "description": "Professional look across all platforms — from business card to website." },
-            { "title": "Saving Resources", "description": "No need to explain rules to every new designer or agency." },
-            { "title": "Brand Protection", "description": "Protects your identity from incorrect use, preserving value." }
-        ],
-        "process_title": "What's inside?",
-        "process_steps": [
-            { "title": "Brand Platform", "description": "Mission, values, and brand character." },
-            { "title": "Logo & Identity", "description": "Rules for logo usage, colors and fonts." },
-            { "title": "Visual Style", "description": "Photo and graphic guidelines." },
-            { "title": "Application", "description": "Real world usage examples and mockups." }
-        ],
-        "cta_button": "Protect your brand"
+    "title": "Corporate Style Development",
+    "subtitle": "One of the main elements of a brand is its visual component, translating ideas and values into images.",
+    "section1_title": "Brand Perception Starts with an Image",
+    "section1_p1": "In today's world, visual information is processed faster than text. People take a split second to form a brand impression.",
+    "section1_p2": "To fix an idea in the audience's mind, it's important to back it with visual elements. A well-crafted style demonstrates values instantly.",
+    "process_title": "How We Create Corporate Style?",
+    "process_subtitle": "We approach development systematically so every detail works for brand recognition and strategy.",
+    "process_steps": [
+      { "title": "Research and Concept", "description": "Analyzing audience, market, and competitors to define key meanings." },
+      { "title": "Visual Code Development", "description": "Creating logo, colors, typography, and graphics — the cohesive brand image." },
+      { "title": "Corporate Style System", "description": "Developing flexible elements to maintain consistency across all formats." },
+      { "title": "Finalization and Guideline", "description": "Creating a brandbook with usage rules to maintain a unified image on any medium." }
+    ],
+    "cta_title": "Corporate Style — A Growth Tool",
+    "cta_description": "Brands with strong identity are recognized faster and trusted more. We create a tool that helps the brand grow.",
+    "cta_button": "Order Corporate Style"
+  },
+  "popularPackages": {
+    "title": "Most Popular Packages",
+    "packageTitle": "Naming + Logo (Premium)",
+    "packagePrice": "In package",
+    "ctaButton": "Select this package"
+  },
+  "hero": {
+    "headlines": [
+      "Is your branding |not selling?|",
+      "Stand out from |competitors|.",
+      "Small business to |strong brand|."
+    ],
+    "description": "We build results-driven brand systems.",
+    "buttonTexts": [
+      "Analyze my brand",
+      "Get free consultation"
+    ],
+    "buttonHint": "Free. No obligations."
+  },
+  "contactModal": {
+    "title": "For Quality Consultation",
+    "description": "Answer a few questions so we can understand your project.",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "submitButton": "Send Request",
+    "successToast": { "title": "Success!", "description": "We'll contact you soon!" }
+  },
+  "urgencyBlock": {
+    "title": "🔥 BEFORE YOU CLOSE...",
+    "subtitle": "Imagine:",
+    "line3": "He invested. You... thought."
+  },
+  "servicesHero": {
+    "title": "Services to Strengthen Your Brand",
+    "subtitle": "Guaranteed results for your business",
+    "cta": "View Prices"
+  },
+  "serviceSections": {
+    "services": [
+      { "id": "neyming", "title": "Naming", "description": "Strong name selection.", "buttonText": "Learn more" },
+      { "id": "logo-dizayni", "title": "Logo Design", "description": "Reflecting your essence.", "buttonText": "Learn more" }
+    ]
+  },
+  "stats": {
+    "experience": "Years experience",
+    "clients": "Happy clients"
+  },
+  "trustedBy": { "title": "Companies That Trust Us" },
+  "personalOfferBlock": {
+    "title": "💎 MY OFFER:",
+    "subtitle": "What you get:",
+    "ctaButton": "I need this",
+    "sections": [
+      { "title": "1️⃣ STRATEGY", "points": ["Brand positioning and competitor analysis", "Target audience map", "Unique Selling Proposition (USP)"] },
+      { "title": "2️⃣ IDENTITY", "points": ["Professional logo (3-5 options)", "Brand color palette", "Typography and style guide"] },
+      { "title": "3️⃣ DOCUMENTATION", "points": ["Full brandbook (30-50 pages)", "Files in all formats (AI, PNG, PDF, SVG)", "Guide: how to use the logo"] },
+      { "title": "4️⃣ LEGAL PROTECTION", "points": ["Naming consultation", "Patent and trademark registration process", "Intellectual property strategy"] },
+      { "title": "5️⃣ SUPPORT", "points": ["3 months of free edits", "Continuous contact via Telegram", "Brand application consultations"] }
+    ]
+  },
+  "whyUs": {
+    "title": "Why Choose Us?",
+    "subtitle": "We don't just give promises. We create real value for your brand through a systemic approach.",
+    "values": [
+      { "title": "Strategic Approach", "description": "We don't just draw pretty pictures. Every design element serves to increase your sales and strengthen your brand." },
+      { "title": "Transparent Process", "description": "Briefing → Analysis → Strategy → Design → Handover. We work closely with you at every stage." },
+      { "title": "Result and Loyalty", "description": "Over 50 projects, and most importantly - 90% of our clients recommend us. That's our biggest achievement." }
+    ],
+    "ctaButton": "Analyze my brand for free"
+  },
+  "targetAudience": {
+    "title": "Know These Problems?",
+    "subtitle": "If these thoughts worry you, we are the right solution.",
+    "problems": [
+      { "text": "I have a business, but no brand. Nobody knows me." },
+      { "text": "My brand is outdated, I'm falling behind competitors." },
+      { "text": "My clients don't understand my value; they only ask for the price." },
+      { "text": "I have sales, but they are unstable. Clients don't return." }
+    ],
+    "solutionTitle": "Good News: All these problems can be solved!",
+    "solutionButton": "See the solution"
+  },
+  "beforeAfter": {
+    "title": "Before and After",
+    "subtitle": "See for yourself how the right branding can transform your business.",
+    "ctaButton": "Change my brand too"
+  },
+  "testimonials": {
+    "title": "What Clients Say",
+    "subtitle": "Our greatest achievement is our satisfied clients."
+  },
+  "gallery": {
+    "title": "Portfolio Examples",
+    "subtitle": "See how our created brands stand out in their niche."
+  },
+  "founder": {
+    "title": "Founder: Bahtiyorjon Gaziyev",
+    "message": "Hi! I'm Bahtiyorjon, founder of Jon.Branding. I help business owners take their brands to the next level. My goal is not just beautiful design, but a working, strategy-based brand system. Let's awaken your brand's 'sleeping' potential.",
+    "points": [
+      { "icon": "Medal", "text": "Over 50+ projects" },
+      { "icon": "Globe", "text": "International experience" },
+      { "icon": "Zap", "text": "Fast and effective communication" },
+      { "icon": "Users", "text": "Clear and transparent workflow" }
+    ],
+    "phoneButton": "Contact by phone",
+    "telegramButton": "Write on Telegram"
+  },
+  "process": {
+    "title": "Our Process",
+    "subtitle": "In every project, we use a proven, transparent, and effective process.",
+    "phases": [
+      { "phase": "01", "title": "Discovery", "description": "Journey beginning and foundation laying.", "tasks": ["Briefing", "Problem identification", "Market & competitor analysis", "Audience needs", "Idea gathering"] },
+      { "phase": "02", "title": "Strategy", "description": "Plotting the brand path.", "tasks": ["Goal setting", "Brand positioning", "Brand platform", "Core principles", "Planning"] },
+      { "phase": "03", "title": "Creative Design", "description": "Shaping the visual look.", "tasks": ["Naming", "Logo design", "Visual concept", "Packaging design", "Brandbook"] },
+      { "phase": "04", "title": "Presentation", "description": "Testing ideas on examples.", "tasks": ["Design presentation", "Edits based on feedback", "Final iteration", "Mockup demonstration"] },
+      { "phase": "05", "title": "Implementation", "description": "Bringing the brand to life.", "tasks": ["Ready design files", "Brandbook handover", "Visual guides", "Print preparation"] },
+      { "phase": "06", "title": "Growth", "description": "Brand support and accompaniment.", "tasks": ["Implementation instructions", "Ongoing support", "Next steps consultation"] }
+    ],
+    "ctaButton": "Discuss project"
+  },
+  "leadMagnet": { 
+    "title": "Scale Your Brand", 
+    "subtitle": "Not sure where to start? We've prepared several free resources to help you explore the world of branding.",
+    "magnets": [
+      { "id": "pdf", "title": "Free PDF Checklist", "subtitle": "7 biggest branding mistakes", "description": "Learn which mistakes to avoid and get a practical guide to analyzing your brand.", "cta": "View Checklist" },
+      { "id": "quiz", "title": "Mini-Quiz", "subtitle": "Is your business ready for branding?", "description": "Answer a few questions and find out how ready your business is.", "cta": "Start Quiz" }
+    ],
+    "cta": { "title": "Checklist helped?", "description": "Now it's time to move from theory to practice.", "button": "Get consultation" } 
+  },
+  "faq": { 
+    "title": "FAQ", 
+    "subtitle": "Answers to the most common questions about branding, prices, and process.",
+    "faqItems": [
+      { "question": "Why aren't prices fixed?", "answer": "Every project is unique. Price is calculated individually based on complexity and goals." },
+      { "question": "What is the workflow?", "answer": "The process is divided into stages: research, strategy, visual style, communication. Each stage is approved by you." },
+      { "question": "Can I order just a logo?", "answer": "We create identity systems. We recommend the 'Logo + Corporate Style' package for full value." },
+      { "question": "What are payment terms?", "answer": "Standard: 50% prepay, 50% after handover. Special discounts for 100% prepay." },
+      { "question": "Are there guarantees?", "answer": "Yes, we have a satisfaction guarantee. If initial concepts fail, we refund." }
+    ],
+    "ctaButton": "Ready to start!" 
+  },
+  "mobileCtaBar": { "get_offer": "Send request" },
+  "blog": { "title": "Blog", "readMore": "Read more" },
+  "quiz": {
+    "metadata": {
+      "title": "Mini-Quiz: Is Your Business Ready for Branding? | Jon.Branding",
+      "description": "Answer a few simple questions and find out how ready your business is for branding."
     },
-    "popularPackages": {
-        "title": "Popular Packages",
-        "packageTitle": "Naming + Logo (Premium)",
-        "packageSubtitle": "Ideal combination for a strong brand start.",
-        "features": [
-            "Perfect brand name (6 lang check)",
-            "Professional logo (5 concepts)",
-            "Full corporate style (colors, fonts)",
-            "15+ real mockups",
-            "Patent audit and consultation",
-            "10 branded stickers"
-        ],
-        "separate": "Separate",
-        "packagePrice": "In package",
-        "packageDiscount": "(-20% discount!)",
-        "upfrontDiscount": "at 100% pre-payment (-28% total!)",
-        "ctaButton": "Book this package"
-    },
-    "sitemapPage": {
-        "title": "Sitemap",
-        "subtitle": "Overview of all pages to help you find information quickly.",
-        "sections": {
-            "main": "Main Sections",
-            "services": "Services",
-            "blog": "Blog Articles"
-        },
-        "links": {
-            "home": "Home",
-            "quiz": "Branding Quiz",
-            "portfolio": "Portfolio",
-            "process": "Workflow",
-            "faq": "FAQ",
-            "services_prices": "All Services & Prices",
-            "brand_strategy": "Brand Strategy",
-            "naming": "Naming",
-            "brandbook": "Brandbook",
-            "corporate_style": "Corporate Style",
-            "packaging_design": "Packaging Design",
-            "logo_design": "Logo Design",
-            "patent_calculator": "Patent Calculator",
-            "marketplace_cover": "Marketplace Cover Design"
-        }
-    },
-    "hero": {
-        "headlines": [
-            "Is your branding |not selling?| We'll fix it.",
-            "Stand out from |competitors|.",
-            "Make your brand not just beautiful, but |profitable|.",
-            "Let customers |fall in love| with you. Again and again.",
-            "From small business to |strong brand|. In one step."
-        ],
-        "description": "We don't just draw logos. As a leading branding agency in Tashkent, we build a <span class='font-bold text-foreground'>results-driven</span>, strategy-based brand system for your business. We offer naming, brand strategy, and logo design services.",
-        "buttonTexts": [
-            "Analyze my brand",
-            "Help me grow sales",
-            "Free consultation",
-            "I need a strong brand"
-        ],
-        "buttonHint": "Free. No obligations."
-    },
-        "results": {
-            "title": "Client Results",
-            "subtitle": "We create strategic solutions that drive business growth, not just beautiful designs.",
-            "items": [
-                { "title": "Den Aroma", "impact": "+60%", "desc": "Increase in average check", "label": "Sales Growth" },
-                { "title": "Bexruz Market", "impact": "+40%", "desc": "Increased customer flow", "label": "Visits" },
-                { "title": "Zamin Qurilish", "impact": "3x", "desc": "Increased brand awareness", "label": "Reputation" }
-            ]
-        },
-        "contactModal": {
-        "stepTitles": { "contact": "Contact", "project": "Project", "budget": "Budget", "meeting": "Meeting" },
-        "title": "For Quality Consultation",
-        "description": "Answer a few questions so we can understand your project.",
-        "fullName": "Full Name",
-        "phone": "Phone Number",
-        "goal": "Which goal is closer?",
-        "goalOptions": [
-            { "value": "exploring", "label": "Exploring branding options." },
-            { "value": "has_problem", "label": "I have an ineffective brand." },
-            { "value": "ready_to_start", "label": "I'm ready to start." }
-        ],
-        "budgetOptions": ["No budget", "Up to $500", "$500 - $1,500", "$1,500 - $3,000", "Above $3,000"],
-        "locationOptions": ["Tashkent", "Fergana", "Other"],
-        "formErrors": { "fullName": "Enter name.", "phone": "Enter phone.", "goal": "Select goal.", "privacyPolicy": "Accept policy." },
-        "successToast": { "title": "Success!", "description": "We'll contact you soon!" },
-        "leadMagnetToast": { "title": "Resources!", "description": "Sending you free materials." }
-    },
-    "home": {
-      "cta1_title": "Your brand can look just as good.",
-      "cta1_desc": "Take your business to the next level with professional design. We help you find the ideal solution.",
-      "cta1_button": "For my business too"
-    },
-    "urgencyBlock": { "title": "🔥 BEFORE YOU CLOSE...", "subtitle": "Imagine:", "line1": "Tomorrow your competitor is ahead.", "line2": "Customers buy from HIM.", "line3": "He invested. You... thought." },
-    "personalOfferBlock": {
-        "title": "💎 MY OFFER:",
-        "subtitle": "What you get:",
-        "ctaButton": "I need this",
-        "sections": [
-            { "title": "1️⃣ STRATEGY", "points": ["Positioning", "Audience map", "USP"] },
-            { "title": "2️⃣ IDENTITY", "points": ["Logo design", "Color palette", "Typography"] },
-            { "title": "3️⃣ DOCUMENTATION", "points": ["Full Brandbook", "All formats", "Guide"] },
-            { "title": "4️⃣ LEGAL", "points": ["Naming consult", "Patent process"] },
-            { "title": "5️⃣ SUPPORT", "points": ["3 months edits", "Telegram chat"] }
+    "exampleTitle": "Example from world brands:",
+    "questions": [
+      {
+        "question": "Is your core business idea or mission expressed in one sentence?",
+        "brandExample": "Volvo — safety; Nike — inspiring every athlete in the world.",
+        "options": [
+          { "text": "Yes, clear for everyone", "score": 3 },
+          { "text": "Partially, but not fully", "score": 2 },
+          { "text": "No, haven't thought about it", "score": 1 }
         ]
-    },
-    "servicesHero": {
-        "title": "Services to Strengthen Your Brand",
-        "subtitle": "Guaranteed results and clear solutions for your business",
-        "cta": "View Prices"
-    },
-    "serviceSections": {
-        "services": [
-            { "id": "neyming", "title": "Naming", "description": "Choosing a strong and memorable name for your brand.", "buttonText": "Details" },
-            { "id": "logo-dizayni", "title": "Logo Design", "description": "A unique mark reflecting the essence of your business.", "buttonText": "Details" },
-            { "id": "firmenniy-stil", "title": "Corporate Style", "description": "A visual system that makes your brand recognizable.", "buttonText": "Details" },
-            { "id": "brandbook", "title": "Brandbook", "description": "A document describing the rules of your brand identity.", "buttonText": "Details" },
-            { "id": "qadoq-dizayni", "title": "Packaging Design", "description": "Attractive design that står out on the shelf.", "buttonText": "Details" }
+      },
+      {
+        "question": "Can you clearly imagine your target audience (ideal customer)?",
+        "brandExample": "Apple — creative professionals; Johnson's Baby — young mothers.",
+        "options": [
+          { "text": "Yes, I know their needs", "score": 3 },
+          { "text": "I have a general idea", "score": 2 },
+          { "text": "No, I try to sell to everyone", "score": 1 }
         ]
+      }
+    ],
+    "result": {
+      "bad": { "title": "You need help (5-8 points)", "description": "Your brand foundation is weak. Let's fix it together!" },
+      "medium": { "title": "Good potential (9-12 points)", "description": "You have a good base, but we can make it even stronger." },
+      "good": { "title": "Excellent! (13-15 points)", "description": "You're on the right track. Let's become a market leader." },
+      "afterSubmitText": "Our specialist will contact you soon for a detailed analysis.",
+      "backToHome": "Back to Home"
     },
-    "stats": { "experience": "Years experience", "clients": "Happy clients", "projects": "Successful projects", "recommend": "Recommend us" },
-    "trustedBy": { "title": "Companies That Trust Us" },
-    "whyUs": {
-        "title": "Why Choose Us?",
-        "subtitle": "We don't just make promises. We create value for your business through a systematic approach.",
-        "values": [
-            { "title": "Strategic Approach", "description": "We don't just draw pretty pictures. Every element serves to increase sales and strengthen the brand." },
-            { "title": "Transparent Process", "description": "Brief → Analysis → Strategy → Design. Every stage is agreed with you, and you have full control." },
-            { "title": "Results and Loyalty", "description": "Over 50 projects, and most importantly — 90% of our clients recommend us to their acquaintances." }
-        ],
-        "ctaTitle": "Like our approach?",
-        "ctaDesc": "Let's analyze your brand for free to identify its strengths and weaknesses. No obligations.",
-        "ctaButton": "Analyze my brand for free"
+    "resultButton": "View result"
+  },
+  "namingPage": {
+    "metadata": {
+      "title": "Naming Services in Tashkent | Jon.Branding Agency",
+      "description": "Choosing a memorable and strong name for your brand. A good name conveys essence and stands out."
     },
-    "targetAudience": {
-        "title": "Do You Know These Problems?",
-        "subtitle": "If these thoughts bother you, we are the correct solution for your business.",
-        "problems": [
-            { "text": "I have a business, but no brand. Nobody knows me." },
-            { "text": "My brand is outdated, I'm falling behind competitors." },
-            { "text": "Clients don't understand the value, they only ask for the price." },
-            { "text": "There are sales, but they are unstable. Customers don't return." }
-        ],
-        "solutionTitle": "Good news: all of this can be solved!",
-        "solutionSubtitle": "A correctly built brand strategy eliminates these problems and puts your business on a path of stable growth.",
-        "solutionButton": "See Solutions"
+    "title": "Naming — A Strong Brand Name",
+    "subtitle": "A brand name is its first impression, its energy, character, and idea expressed in a word.",
+    "section1_title": "Name as Part of Brand Strategy",
+    "section1_p1": "A good name supports association, recognition, and emotional connection. It is strategic work considering positioning and market.",
+    "section1_p2": "We approach naming as a vital element where every word matters.",
+    "process_title": "How We Create a Name?",
+    "process_subtitle": "Our naming development is a clear process where every stage is important:",
+    "process_steps": [
+      { "title": "Research", "description": "Studying market, audience, competitors, and semantic directions." },
+      { "title": "Concept Formation", "description": "Defining possible vectors for the name search." },
+      { "title": "Generation and Testing", "description": "Creating a list of options and testing them for sound, meaning, and potential." },
+      { "title": "Check and Finalization", "description": "Analyzing registration potential, checking domains, and choosing the best." }
+    ],
+    "check_title": "Checking the Name is Just as Important",
+    "check_subtitle": "Even a genius idea fails if it can't be registered or carries negative associations.",
+    "check_points": [
+      { "title": "Legal Purity", "description": "Analyzing the possibility of trademark registration." },
+      { "title": "Domains and Digital", "description": "Checking name availability in the digital space." },
+      { "title": "Meaning and Associations", "description": "Checking readability, sound, associations, and cultural perception." }
+    ],
+    "calculator_cta_button": "Go to Patent Calculator"
+  },
+  "patentCalculatorPage": {
+    "metadata": {
+      "title": "Trademark Calculator | Jon.Branding",
+      "description": "Calculate estimated costs (state fees and services) for trademark registration in Uzbekistan."
     },
-    "beforeAfter": {
-        "title": "Before and After",
-        "subtitle": "See with your own eyes how branding can transform a business.",
-        "ctaTitle": "Is your brand ready for a change?",
-        "ctaDesc": "Let's create a plan to take it to the next level.",
-        "ctaButton": "Change my brand too"
-    },
-    "testimonials": {
-        "title": "What Our Clients Say",
-        "subtitle": "Our greatest achievement is our satisfied clients.",
-        "textReviewsTitle": "Text Reviews",
-        "textReviewsSubtitle": "From our other esteemed clients"
-    },
-    "gallery": {
-        "title": "Examples of Our Work",
-        "subtitle": "See how the brands we've created stand out in their field."
-    },
-    "founder": {
-        "title": "Founder: Bakhtiyorjon Gaziyev",
-        "message": "Hello! I'm Bakhtiyorjon, the founder of Jon.Branding. I help business owners take their brands to a new level. My goal is not just design, but building a brand system that delivers business results.",
-        "points": [
-            { "icon": "Medal", "text": "More than 50 projects" },
-            { "icon": "Globe", "text": "International experience" },
-            { "icon": "Zap", "text": "Fast and effective communication" },
-            { "icon": "Users", "text": "Transparent workflow" }
-        ],
-        "phoneButton": "Contact by phone",
-        "telegramButton": "Write on Telegram"
-    },
-    "process": { 
-        "title": "Our Process", 
-        "subtitle": "A transparent and effective workflow for every project.",
-        "phases": [
-            { "phase": "01", "title": "Discovery", "description": "Laying the foundation.", "tasks": ["Briefing", "Problem ID", "Market Analysis"] },
-            { "phase": "02", "title": "Strategy", "description": "Defining the path.", "tasks": ["Goals", "Positioning", "Platform"] },
-            { "phase": "03", "title": "Creative", "description": "Visual creation.", "tasks": ["Naming", "Logo", "Style"] },
-            { "phase": "04", "title": "Presentation", "description": "Testing ideas.", "tasks": ["Showcase", "Edits", "Iterate"] },
-            { "phase": "05", "title": "Implementation", "description": "Go live.", "tasks": ["Files", "Brandbook", "Guides"] },
-            { "phase": "06", "title": "Growth", "description": "Continuous support.", "tasks": ["Instructions", "Consult"] }
-        ],
-        "ctaButton": "Discuss project",
-        "ctaTitle": "Ready to start?",
-        "ctaDesc": "Let's bring your ideas to life."
-    },
-    "leadMagnet": {
-        "title": "Take Your Brand to the Next Level",
-        "subtitle": "Don't know where to start? Use our free resources to figure it out.",
-        "magnets": [
-          { "id": "pdf", "title": "Free PDF Checklist", "subtitle": "7 Biggest Mistakes", "description": "Learn what mistakes to avoid in your business.", "cta": "View", "href": "/{lang}/checklist" },
-          { "id": "quiz", "title": "Mini Quiz", "subtitle": "Readiness Level", "description": "Is your business ready for branding?", "cta": "Start", "href": "/{lang}/quiz" },
-          { "id": "video", "title": "Video Guide", "subtitle": "Strategic Branding", "description": "Why a logo is not enough?", "cta": "View", "href": "#video" }
-        ],
-        "cta": {
-          "title": "Did the checklist help?",
-          "description": "Let's move to practice. Get a free consultation.",
-          "button": "Get Consultation"
-        },
-        "checklistContent": {
-          "progress_text": "Completed: {checkedCount} / {total}",
-          "items": [
-            {
-              "title": "1. Working without a strategy",
-              "description": "The biggest mistake is starting a design without a plan. Who is your customer? What is your message?",
-              "solution": "Solution: Define mission and goals."
-            }
-          ],
-          "result": {
-            "bad": { "title": "Help Needed!", "description": "Your brand foundation is weak." },
-            "good": { "title": "On the Right Track!", "description": "The foundation is good, but needs strengthening." },
-            "perfect": { "title": "Excellent!", "description": "Solid foundation." }
-          }
-        }
-    },
-    "mobileCtaBar": { "get_offer": "Send request", "final_price": "Final Price" },
-    "blog": { "title": "Blog", "readMore": "Read more" },
-    "blogPost": { "ctaTitle": "Helpful article?", "ctaButton": "Free consultation" },
-    "quiz": { "metadata": { "title": "Brand Test" }, "result": { "bad": { "title": "Need Help" } }, "nextButton": "Next" },
-    "brandStrategyPage": {
-        "metadata": {
-            "title": "Brand Strategy & Platform | Branding Agency in Tashkent",
-            "description": "Brand strategy is a business growth tool. Turn your brand from just beautiful into a working system. We develop brand platforms and strategies."
-        },
-        "title": "Brand Strategy",
-        "subtitle": "A strong brand is a clear idea that inspires, unites, and helps the business grow.",
-        "section1_title": "Brand strategy is a business growth tool",
-        "section1_p1": "Every ambitious company has its goals. For some, it's gaining a certain market share; for others, it's brand awareness, expansion to new territories, and so on.",
-        "section1_p2": "Brand strategy is what helps a company achieve these goals, helping it become something more than just a product or service — a part of its customers' lives, a bearer of a recognizable image.",
-        "section1_p3": "Most importantly, it allows systematizing marketing costs, abandoning tools, channels, and ideas that do not support the company's positioning and, therefore, do not justify the costs.",
-        "section2_title": "Brand strategy is necessary for any business",
-        "section2_p1": "Brand strategy is necessary for both new and long-established companies.",
-        "section2_p2_bold": "For startups,",
-        "section2_p2_text": "it helps from the very beginning to define its mission, values, and identity, correctly position itself on the market and attract customers.",
-        "section2_p3_bold": "For large companies,",
-        "section2_p3_text": "strategy is a tool for managing growth and reputation. In this case, it helps to stay relevant, adapt to changes and build strong connections with the audience.",
-        "section2_p4": "Regardless of the size of the business, brand strategy answers the main question: why should the customer choose you?",
-        "process_title": "Branding is a process",
-        "process_subtitle": "At our agency, we are convinced that branding is more than just creating a logo. Branding is not a one-time task, but a cyclic process. Each stage plays its key role, and skipping one of them can weaken the brand and its market position. But if everything is done correctly and consistently, branding helps business grow and simplifies the management of many processes — from product production to marketing.",
-        "process_steps": [
-            { "title": "Analysis and Research", "description": "This is the first and most important stage, where data on the market, competitors and audience are collected. Without this, it is impossible to define the uniqueness of branding and understand your target audience." },
-            { "title": "Brand Platform Formulation", "description": "Here mission, values and unique brand offer are born — this is the foundation defining its character and voice. Without a clear platform, all subsequent actions risk being fragmented and unconvincing." },
-            { "title": "Strategy Development", "description": "The strategy answers the question of how the brand will communicate with the audience and through which channels to build a connection. This systematizes communication, makes it targeted and effective." },
-            { "title": "Visual Identification", "description": "Translation of brand meanings into visual language — logo, colors, fonts and graphic elements. This makes the brand recognizable and distinct from competitors." },
-            { "title": "Implementation and Integration", "description": "Creating a brand is just the beginning. It is important to correctly integrate it into the company and contact points so that it becomes part of the corporate culture and communication with customers." }
-        ]
-    },
-    "corporateStylePage": {
-        "metadata": {
-            "title": "Corporate Style & Brandbook | Branding Agency in Tashkent",
-            "description": "We don't just create beautiful pictures, we develop a systemic visual style (corporate style, brandbook) that works for your brand and brings results. Make your brand recognizable and memorable with logo, colors, fonts and other elements."
-        },
-        "title": "Corporate Style Development",
-        "subtitle": "One of the main elements of a brand is its visual component. It translates ideas, meanings and values into images that can be seen, felt and remembered.",
-        "section1_title": "Brand perception begins with a picture",
-        "section1_p1": "In today's world, visual information is perceived and absorbed faster than text or words. We live in an era of instant impressions: it takes people a fraction of a second to form an idea about a brand, and most often this happens through its visual image.",
-        "section1_p2": "To fix an idea in the minds of the audience, it is not enough to just talk about it — it is important to reinforce it with visual elements. A well-developed corporate style allows you to demonstrate brand values without extra explanations, instantly evoking the right emotions and associations.",
-        "section2_title": "Corporate style is a system",
-        "section2_p1": "This is not only about beauty, but also about efficiency, meanings and control. To keep the brand multifaceted and yet consistent in the development of its visual image, it is necessary to create a set of graphic elements.",
-        "section2_p2": "Such a set is always selected individually depending on the tasks and capabilities of the business. The minimum set includes a logo, colors, fonts, photo style, style of advertising carriers and other elements forming a holistic image.",
-        "section2_p3": "When the visual style is built clearly and consistently, it becomes a powerful tool for managing the brand image and its communications. If all its elements are coordinated, the brand is perceived as professional, reliable and recognizable.",
-        "process_title": "How do we create corporate style?",
-        "process_subtitle": "We approach the development of corporate style systematically so that every detail works on brand recognition and its strategy.",
-        "process_steps": [
-            { "title": "Research and Concept", "description": "Analyze audience, market, competitors and brand place. Define key meanings and ideas that should be reflected in the visual style." },
-            { "title": "Visual Code Development", "description": "Create logo, corporate colors, typography, graphics, iconography, layout principles — everything that forms a holistic brand image." },
-            { "title": "Corporate Style System", "description": "Develop flexible elements that help maintain the consistency of the visual image in all formats — from packaging to the digital environment." },
-            { "title": "Finalization and Guideline", "description": "Create a guideline (brandbook) with rules for using the style so that the brand maintains a unified image on any carrier." }
-        ],
-        "cta_title": "Corporate style is a growth tool",
-        "cta_description": "Brands with strong identity are recognized faster, remembered longer and inspire more trust. We create not just a visual style, but a tool that helps the brand grow, be consistent and manageable."
-    },
-    "logoDesignPage": {
-        "metadata": {
-            "title": "Professional Logo Design Services | Jon.Branding Agency Uzbekistan",
-            "description": "Logo is the face of your business. Our logo design agency in Uzbekistan creates unique, memorable and strategic logos that reflect the essence of your brand and help you stand out from competitors."
-        },
-        "title": "Logo Design",
-        "subtitle": "Logo is not just a picture; it is a strategic tool, the face of your business and the first impression you make.",
-        "section1_title": "Why is a logo so important?",
-        "section1_p1": "In today's competitive market, a logo is the first thing that catches a customer's eye. A good logo is not only a beautiful design, but also a symbol conveying the values, professionalism and uniqueness of your business.",
-        "section1_p2": "It is a key element that helps customers recognize and remember you. A professional logo inspires trust and establishes an emotional connection, turning one-time buyers into loyal fans.",
-        "values_title": "A good logo should be:",
-        "values": [
-            { "title": "Simple and Memorable", "description": "Best logos are easily recognized and remembered even in small sizes or from a great distance." },
-            { "title": "Unique and Timeless", "description": "It should distinguish you from competitors and not go out of fashion in a few years." },
-            { "title": "Strategic and Meaningful", "description": "Every line, color and shape should reflect the character and goals of your business." }
-        ],
-        "process_title": "How do we create a logo?",
-        "process_subtitle": "Our logo creation process is based not just on fleeting inspiration, but on deep analysis and strategic thinking.",
-        "process_steps": [
-            { "title": "Briefing and Research", "description": "We carefully study your business, goals, target audience and competitors." },
-            { "title": "Concept Development", "description": "We develop several visual concepts reflecting the strategy and character of your brand." },
-            { "title": "Design and Presentation", "description": "We refine the chosen concept, show it on real examples (mockups) and explain the logic behind it." },
-            { "title": "Finalization and Delivery", "description": "We prepare all necessary file formats (vector, raster) for use in any context and provide a mini-guide for their use." }
-        ],
-        "cta_title": "Ready to create a working logo?",
-        "cta_description": "Don't settle for a template logo. Let's create a unique and strong symbol for your business that will become the foundation of your success.",
-        "cta_button": "Get free consultation"
-    },
-    "namingPage": {
-        "metadata": {
-            "title": "Naming Services in Tashkent | Jon.Branding Agency",
-            "description": "Choosing a memorable and strong brand name. A good name not only sounds beautiful; it conveys the essence, is remembered and helps the brand stand out. Our naming services will help you find the perfect title."
-        },
-        "title": "Naming — Strong Brand Name",
-        "subtitle": "Brand name is its first impression, its energy, character and idea expressed in a word. A good name not only sounds beautiful, but also conveys the essence, is remembered and helps the brand stand out among competitors.",
-        "section1_title": "Name is part of the brand strategy",
-        "section1_p1": "A good name supports associations, recognition and emotional connection. Creating such a name is a strategic work, taking into account brand positioning, market, target audience and long-term company goals.",
-        "section1_p2": "We approach naming as an essential element of branding. It's not a random set of ideas, but a carefully thought-out work where every word matters.",
-        "section2_title": "Every strong name begins with an idea",
-        "section2_p1": "Before looking for a name, we ask the main question: what is this brand about? What feelings and images should it evoke? Therefore, we carefully analyze the product, its audience and environment, define semantic directions to find the perfect name.",
-        "section2_p2": "It can be built on an emotion, metaphor, cultural code, professional language or even a play on words. The main thing is that it works, conveys the essence and helps the brand be remembered.",
-        "process_title": "How do we create a name?",
-        "process_subtitle": "Naming development in our agency is a clear process where every stage is important:",
-        "process_steps": [
-            { "title": "Research", "description": "Study market, audience, competitors and semantic directions." },
-            { "title": "Concept Formulation", "description": "Define possible vectors to search for a name." },
-            { "title": "Idea Generation and Testing", "description": "Create a list of variants, check them for sound, meaning and potential." },
-            { "title": "Verification and Finalization", "description": "Analyze the possibility of registration, check domains and associations, choose the best." }
-        ],
-        "check_title": "Name check is no less important than creation",
-        "check_subtitle": "Even a brilliant idea won't work if it cannot be registered or if it carries undesirable associations. We check names by several key parameters:",
-        "check_points": [
-            { "title": "Legal Purity", "description": "Analyze the possibility of trademark registration." },
-            { "title": "Domains and Digital Environment", "description": "Check availability of names in digital space." },
-            { "title": "Meaning and Associations", "description": "Check readability, sound, possible associative range, cultural perception and compliance with the brand category." }
-        ],
-        "calculator_cta_button": "Go to Patent Calculator"
-    },
-    "patentCalculatorPage": {
-        "metadata": {
-            "title": "Trademark Calculator | Jon.Branding",
-            "description": "Calculate approximate expenses (state fees and service costs) associated with trademark registration in Uzbekistan."
-        },
-        "title": "Trademark Registration Calculator",
-        "subtitle": "Naming (picking a name) is a creative process, and patenting is a legal one. Calculate approximate expenses for trademark registration (state fees and service costs) right here with the help of a patent attorney in our team.",
-        "trademarkCalculator": {
-            "formTitle": "Enter data",
-            "brandNameLabel": "Brand Name",
-            "brandNamePlaceholder": "Example: MyBrand",
-            "yourNameLabel": "Your Name",
-            "yourNamePlaceholder": "Enter your full name",
-            "phoneLabel": "Your Phone Number",
-            "phonePlaceholder": "+998901234567",
-            "classCountLabel": "Number of activity classes",
-            "classCountMax": "Max. 45",
-            "personTypeLabel": "Entity Type",
-            "personTypeOptions": [
-                { "value": "jismoniy", "label": "Physical Person" },
-                { "value": "yuridik", "label": "Legal Entity" }
-            ],
-            "speedLabel": "Consideration Speed",
-            "speedOptions": [
-                { "value": "oddiy", "label": "Standard (7 months)", "labelShort": "Standard" },
-                { "value": "tez", "label": "Accelerated (1.5 months)", "labelShort": "Accelerated" }
-            ],
-            "expertCheckLabel": "Additional Expert Check",
-            "expertCheckOptions": [
-                { "value": "ha", "label": "Included" },
-                { "value": "yoq", "label": "Excluded" }
-            ],
-            "activityLabel": "Types of activity (optional)",
-            "activityPlaceholder": "Example: design, construction, clothing production...",
-            "activityHelp": "This helps in determining classes.",
-            "submitButton": "Order Patenting",
-            "submittingButton": "Sending...",
-            "successMessage": "✅ Order accepted!",
-            "tryAgainButton": "Recalculate",
-            "summaryTitle": "Expense Breakdown",
-            "totalCostTitle": "Approximate total cost for 10 years",
-            "currency": "UZS",
-            "classLabel": "class",
-            "expertCheckLabelShort": "Expert+",
-            "totalCostNote": "Includes all state fees and service costs",
-            "step1Title": "Stage 1 (Initial Payment)",
-            "ourServiceFee": "Our team's service fee",
-            "applicationFee": "Application filing fee",
-            "step1Total": "Total for stage 1",
-            "step2Title": "Stage 2 (Certificate Acquisition)",
-            "stateFeeBase": "State fee (basic)",
-            "extraClassesFee": "Additional classes ({count} items)",
-            "step2Total": "Total for stage 2",
-            "expediteTitle": "Surcharge for accelerated consideration",
-            "expediteBaseFee": "Basic (12 BCA + 12% VAT)",
-            "expediteTotal": "Total for acceleration",
-            "expertCheckTitle": "Expert Check",
-            "expertBaseFee": "Basic (2×BCA)",
-            "expertTotal": "Total for expert service",
-            "importantNoteTitle": "Important Note",
-            "importantNoteText": "All prices depend on the Basic Calculating Amount (BCA) established by the Ministry of Justice of the Republic of Uzbekistan and may change. This calculator is not a public offer and is for informational purposes only.",
-            "importantNoteBHM": "Current BCA is {bhm} UZS.",
-            "error_brand": "Please enter brand name.",
-            "error_name": "Please enter your name.",
-            "error_phone": "Please enter a valid phone number.",
-            "error_server": "Server error occurred.",
-            "privacyPolicyText": "I accept Privacy Policy terms and consent to personal data processing.",
-            "error_privacy": "You must accept the privacy policy.",
-            "success_toast_title": "Success!",
-            "success_toast_desc": "Your request received. We'll contact you soon!",
-            "error_toast_title": "Error!",
-            "telegramTitle": "New patent request (from calculator)",
-            "notSpecified": "Not specified"
-        }
-    },
-    "packagingPage": {
-        "metadata": {
-            "title": "Packaging Design Services in Uzbekistan | Jon.Branding",
-            "description": "We don't just create beautiful packaging; we create a powerful marketing tool that sells your product. Our packaging design agency in Uzbekistan will help your brand stand out among competitors and win customers' love."
-        },
-        "title": "Packaging Design Development",
-        "subtitle": "In a highly competitive environment, packaging often becomes the main marketing tool. It highlights the brand on the shelf, tells its story and builds a connection with the audience at first glance.",
-        "section1_title": "Packaging is more than a brand identification carrier",
-        "section1_p1": "Packaging is the first contact with the brand at points of sale, a visual appeal that creates an instant impression of the product. In many cases, it is the packaging that determines a person's purchase decision.",
-        "section1_p2": "The goal of our agency is to create not only aesthetic and beautiful packaging, but also an effective tool that meets business tasks and contributes to its growth.",
-        "process_title": "How do we create packaging?",
-        "process_subtitle": "We approach packaging development not as a separate design, but as a complex system that must work on the business and meet audience expectations. Our process includes several key stages:",
-        "process_steps": [
-            { "title": "Analysis and Strategy", "description": "Study your product, audience, competitors and environment in which the packaging will be used. Analyze visual code of the category." },
-            { "title": "Concept and Design", "description": "Based on collected data, develop visual ideas reflecting the essence of the product: color, graphics, typography, etc." },
-            { "title": "Finalization and Preparation", "description": "Carefully work out all technical aspects of the chosen concept (adaptation to different formats, preparation for printing)." }
-        ],
-        "cta_title": "Packaging not only attracts attention, it sells",
-        "cta_description": "Good packaging design is not just a beautiful decoration, but a tool working on the business. We develop functional, strategically thought-out design in which packaging serves as a full-fledged sales tool."
-    },
-    "servicesPage": {
-        "metadata": {
-            "title": "Services and Prices | Jon.Branding",
-            "description": "Check out all our services and create a branding package that suits you. Calculate prices instantly with our online calculator."
-        },
-        "packageBuilder": {
-            "title": "Services and Prices",
-            "subtitle": "Create your own package.",
-            "categories": {
-                "tripwire": "First Step (Quick Services)",
-                "strategy": "Strategic Services",
-                "naming": "Naming",
-                "identity": "Visual Identity",
-                "addons": "Additional Services"
-            },
-            "final_price": "Final Price:",
-            "recommended": "Recommended",
-            "select": "Select",
-            "selected": "Selected"
-        },
-        "comparison": {
-            "title": "Us vs Competitors",
-            "ctaButton": "I need this approach"
-        }
-    },
-    "faq": {
-        "title": "Frequently Asked Questions",
-        "subtitle": "Answers to common questions about branding process, pricing, and other topics.",
-        "faqItems": [
-            { "question": "What is the difference between good branding and just a beautiful logo?", "answer": "A logo is just a visual sign. At Jon Branding, we see branding as the foundation of your business. We analyze the strategy, positioning, and the brand's place in the customer's mind. As a result, your business becomes not just a 'beautiful' brand, but a 'revenue-generating' one." },
-            { "question": "Who is involved in the branding process?", "answer": "One person is not enough to create a high-converting website and brand. We have a brand strategist, UX/UI designer, professional copywriter, and marketing analyst working together. This integrated approach ensures that every element (color, text, structure) works for the result." },
-            { "question": "Why is the price of your services higher than the market average?", "answer": "We sell investment, not expenses. We offer not just design, but technical and psychological solutions that increase sales. By working with Jon Branding, you get a perfect system that will serve for years and reduce marketing costs." },
-            { "question": "How long does a project take to complete?", "answer": "On average, 4 to 8 weeks. This time is necessary for deep analysis, concept creation, and bringing every detail to perfection. We focus on quality, which is why our results stand out in the market." },
-            { "question": "What changes will I see in my business after branding?", "answer": "Firstly, customer trust in the brand will increase. Secondly, you will have the opportunity not just to avoid competition, but to surpass it. Most importantly, it's not the price of your product that will come first, but its value." }
-        ],
-        "ctaTitle": "Don't leave room for doubt!",
-        "ctaDesc": "Got answers to all your questions? Let's discuss your project and take your brand to the next level.",
-        "ctaButton": "I'm ready to start!"
-    },
-    "pickTwoSelector": {
-        "title": "Pick Two Out of Three",
-        "subtitle": "Cheap—Quality—Fast: it's hard to achieve all three at once.",
-        "ctaText": "Request Offer",
-        "options": {
-            "cheap": "Cheap",
-            "quality": "Quality",
-            "fast": "Fast"
-        },
-        "messages": {
-            "cheap_fast": "Quality may be variable. This option is suitable for urgent and low-budget projects.",
-            "cheap_quality": "You'll have to wait longer for results. We'll adapt to your budget and work in order of priority to ensure quality.",
-            "quality_fast": "The price will be higher. For urgent projects (2-3 days), a +50% surcharge to the standard price applies. We'll mobilize the team and prioritize your deadline.",
-            "default": "Please pick 2 priorities that are most important to you."
-        },
-        "tooltip": "First deselect one to pick another"
-    },
-    "exitIntentModal": {
-        "title": "Don't leave!",
-        "description": "We have a special offer for you. <br/>We currently have <span class='font-bold text-primary'>various discounts</span>. Take this opportunity!",
-        "button": "View discounts"
-    },
-    "queueStatus": {
-        "subtitle": "Limited slots",
-        "title": "Hurry! Book your slot!",
-        "description": "We dedicate time to every project to ensure high quality. Therefore, we work with only a limited number of projects at a time.",
-        "queueTitle": "Project Queue",
-        "booked": "Booked",
-        "available": "Free",
-        "tooltipBooked": "Slot is booked",
-        "tooltipAvailable": "You can join the queue",
-        "remainingSlots": "Remaining free slots",
-        "slotsUnit": "pcs",
-        "onlineNow": "Now on site",
-        "peopleUnit": "pers",
-        "nextProjectStart": "Next project start",
-        "ctaButton": "Book Slot",
-        "ctaSubtitle": "Be one step ahead of your competitors!",
-        "timeframes": {
-            "2 weeks": "within 2 weeks"
-        }
-    },
-    "leadMagnetPopup": {
-        "title": "Free Gift for You!",
-        "subtitle": "Check your brand strength on a 10-point scale.",
-        "description": "Download our expert <b>'Branding Checklist'</b> absolutely free.",
-        "cta": "Get Checklist",
-        "closeText": "No thanks"
+    "title": "Trademark Registration Calculator",
+    "subtitle": "Naming is creative, patenting is legal. Calculate estimated registration costs here.",
+    "trademarkCalculator": {
+      "formTitle": "Enter Data",
+      "brandNameLabel": "Brand Name",
+      "brandNamePlaceholder": "Example: MyBrand",
+      "yourNameLabel": "Your Name",
+      "yourNamePlaceholder": "Enter your full name",
+      "phoneLabel": "Phone Number",
+      "phonePlaceholder": "+998901234567",
+      "classCountLabel": "Number of Activity Classes",
+      "classCountMax": "Max 45",
+      "personTypeLabel": "Entity Type",
+      "personTypeOptions": [
+        { "value": "jismoniy", "label": "Individual" },
+        { "value": "yuridik", "label": "Legal Entity" }
+      ],
+      "speedLabel": "Processing Speed",
+      "speedOptions": [
+        { "value": "oddiy", "label": "Standard (7 months)", "labelShort": "Standard" },
+        { "value": "tez", "label": "Expedited (1.5 months)", "labelShort": "Expedited" }
+      ],
+      "expertCheckLabel": "Extra Expert Check",
+      "expertCheckOptions": [
+        { "value": "ha", "label": "Enabled" },
+        { "value": "yoq", "label": "Disabled" }
+      ],
+      "activityLabel": "Activity Types (Optional)",
+      "activityPlaceholder": "Example: design, construction, clothing...",
+      "submitButton": "Order Patenting",
+      "submittingButton": "Sending...",
+      "successMessage": "✅ Order Accepted!",
+      "tryAgainButton": "Calculate Again",
+      "summaryTitle": "Cost Breakdown",
+      "totalCostTitle": "Estimated Total Patent Cost for 10 Years",
+      "currency": "UZS",
+      "totalCostNote": "Includes all state fees and service costs",
+      "step1Title": "Step 1 (Initial Payment)",
+      "ourServiceFee": "Our Team Service Fee",
+      "applicationFee": "Application Fee",
+      "step1Total": "Total for Step 1",
+      "step2Title": "Step 2 (Certificate Issuance)",
+      "stateFeeBase": "State Fee (Basic)",
+      "extraClassesFee": "Extra Classes ({count} units)",
+      "step2Total": "Total for Step 2",
+      "expediteTitle": "Expedited Surcharge",
+      "expediteBaseFee": "Basic (12 BHM + 12% VAT)",
+      "expertCheckTitle": "Expert Check",
+      "expertBaseFee": "Basic (2×BHM)",
+      "importantNoteTitle": "Important Note",
+      "importantNoteText": "All prices depend on the Basic Calculation Unit (BHM) and may change.",
+      "importantNoteBHM": "Current BHM is {bhm} UZS.",
+      "error_brand": "Please enter brand name.",
+      "error_name": "Please enter your name.",
+      "error_phone": "Please enter a valid phone number.",
+      "privacyPolicyText": "I accept the Privacy Policy terms.",
+      "error_privacy": "You must accept the privacy policy.",
+      "success_toast_title": "Success!",
+      "success_toast_desc": "Request accepted. We will contact you soon!",
+      "error_toast_title": "Error!"
     }
+  },
+  "packagingPage": {
+    "metadata": {
+      "title": "Packaging Design Services in Uzbekistan | Jon.Branding",
+      "description": "We don't just create pretty packaging; we create a marketing tool that sells."
+    },
+    "title": "Packaging Design Development",
+    "subtitle": "In high competition, packaging is often the main marketing tool.",
+    "section1_title": "Packaging — More Than a Brand Identity Carrier",
+    "section1_p1": "Packaging is the first contact at points of sale, an instant impression. Often it determines the purchase decision.",
+    "section1_p2": "Our goal is effective tools meeting business goals and growth.",
+    "process_title": "How We Create Packaging?",
+    "process_subtitle": "We approach it as a system working for business and audience expectations.",
+    "process_steps": [
+      { "title": "Analysis and Strategy", "description": "Studying product, audience, and competitors." },
+      { "title": "Concept and Design", "description": "Developing visual ideas: color, graphics, typography." },
+      { "title": "Finalization and Prep", "description": "Handling technical aspects and print preparation." }
+    ],
+    "cta_title": "Packaging Doesn't Just Attract, It Sells",
+    "cta_description": "Functional, strategic design where packaging serves as a sales tool.",
+    "cta_button": "Order Packaging Design"
+  },
+  "servicesPage": {
+    "metadata": {
+      "title": "Services and Prices | Jon.Branding",
+      "description": "Explore our services and build your package."
+    },
+    "packageBuilder": {
+      "title": "Services & Prices",
+      "subtitle": "Build your package and get an instant price.",
+      "categories": {
+        "tripwire": "First Step (Quick Services)",
+        "strategy": "Strategic Services",
+        "naming": "Naming",
+        "identity": "Visual Identity",
+        "addons": "Additional Services"
+      },
+      "tabs": { "included": "Included", "benefits": "Benefits" },
+      "your_package": "Your Package",
+      "selected": "Selected",
+      "select": "Select",
+      "final_price": "Total Price:",
+      "promo_code_label": "Promo Code",
+      "discountSelector": { "none": "No discount", "package": "Package (-20%)", "full": "Full prepay (-28%)" }
+    },
+    "comparison": {
+      "title": "Us vs Competitors",
+      "description": "High-quality branding at accessible prices compared to premium agencies.",
+      "features": "Features",
+      "ctaButton": "I want this approach"
+    }
+  },
+  "pickTwoSelector": {
+    "title": "Pick Two of Three",
+    "subtitle": "Price—Quality—Speed: you rarely get all three at once.",
+    "ctaText": "Request Offer",
+    "options": { "cheap": "Cheap", "quality": "Quality", "fast": "Fast" },
+    "messages": {
+      "cheap_fast": "Quality might be unstable. Good for urgent, budget projects.",
+      "cheap_quality": "Result will take longer. We queue based on budget for quality.",
+      "quality_fast": "Price will be higher. Urgent projects (+50% fee) get priority.",
+      "default": "Please pick your 2 most important priorities."
+    }
+  }
 }
