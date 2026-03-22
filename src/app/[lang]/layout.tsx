@@ -1,6 +1,6 @@
 import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -22,11 +22,10 @@ type Props = {
   params: Promise<{ lang: Locale }>;
 };
 
-const LocalizedLayout: FC<Props> = async (props) => {
-  const { lang: rawLang } = await props.params;
+export default async function LocalizedLayout({ children, params }: Props) {
+  const { lang: rawLang } = await params;
   const lang = locales.includes(rawLang as Locale) ? (rawLang as Locale) : defaultLocale;
   const dictionary = await getDictionary(lang);
-  const { children } = props;
 
   return (
     <html lang={lang} suppressHydrationWarning className={poppins.variable}>
@@ -50,7 +49,7 @@ const LocalizedLayout: FC<Props> = async (props) => {
               "name": "Jon.Branding",
               "image": "https://jonbranding.uz/icon.svg",
               "url": "https://jonbranding.uz",
-              "telephone": "+99890XXXXXXX",
+              "telephone": "+998336450097",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Tashkent, Uzbekistan",
@@ -117,6 +116,5 @@ const LocalizedLayout: FC<Props> = async (props) => {
       </body>
     </html>
   );
-};
-
-export default LocalizedLayout;
+}
+

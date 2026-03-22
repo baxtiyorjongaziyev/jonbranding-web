@@ -11,15 +11,12 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 interface WhyUsProps {
   onCtaClick?: () => void;
   lang: string;
+  dictionary: any;
 }
 
 
-const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang }) => {
-  const [translations, setTranslations] = useState<any>(null);
-
-  useEffect(() => {
-    getDictionary(lang as Locale).then(dict => setTranslations(dict.whyUs));
-  }, [lang]);
+const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
+  const translations = dictionary;
   
   if (!translations) {
     return null;
