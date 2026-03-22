@@ -14,19 +14,25 @@ type OptionKey = 'cheap' | 'quality' | 'fast';
 interface PickTwoSelectorProps {
   onCtaClick?: () => void;
   lang: string;
+  dictionary?: any;
 }
 
 const PickTwoSelector: FC<PickTwoSelectorProps> = ({
   onCtaClick,
   lang,
+  dictionary: initialDictionary,
 }) => {
   const [selected, setSelected] = useState<OptionKey[]>([]);
   const [isClient, setIsClient] = useState(false);
-  const [translations, setTranslations] = useState<any>(null);
+  const [translations, setTranslations] = useState<any>(initialDictionary || null);
 
   useEffect(() => {
-    getDictionary(lang as Locale).then(dict => setTranslations(dict.pickTwoSelector));
-  }, [lang]);
+    if (!initialDictionary) {
+      getDictionary(lang as Locale).then(dict => setTranslations(dict.pickTwoSelector));
+    } else {
+      setTranslations(initialDictionary);
+    }
+  }, [lang, initialDictionary]);
 
   useEffect(() => {
     setIsClient(true);

@@ -4,7 +4,8 @@
 import type {FC} from 'react';
 import { useState, useEffect } from 'react';
 import {Button} from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { Card } from '../ui/card';
@@ -69,15 +70,37 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                 </h1>
                 <p className="mx-auto lg:mx-0 mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground" dangerouslySetInnerHTML={{ __html: dictionary.description }}>
                 </p>
-                <div className="mt-10 flex justify-center lg:justify-start">
-                    <Button onClick={() => onPrimaryClick()} size="lg" variant="default" className="w-full sm:w-auto text-base px-8 py-6 shadow-lg rounded-full" aria-label={dictionary.buttonTexts[buttonIndex]}>
-                        {dictionary.buttonTexts[buttonIndex]}
-                        <ArrowRight className="w-5 h-5 ml-2" aria-hidden="true" />
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                    className="mt-10 flex justify-center lg:justify-start"
+                >
+                    <Button 
+                        onClick={() => onPrimaryClick()} 
+                        size="lg" 
+                        variant="default" 
+                        className="w-full sm:w-auto text-base px-8 py-6 shadow-xl rounded-full relative group overflow-hidden bg-primary hover:bg-primary/95 transition-all duration-300" 
+                        aria-label={dictionary.buttonTexts[buttonIndex]}
+                    >
+                        <span className="relative z-10 flex items-center">
+                            {dictionary.buttonTexts[buttonIndex]}
+                            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                        </span>
+                        <motion.div 
+                            className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+                        />
                     </Button>
-                </div>
-                <div className="mt-6 text-sm text-muted-foreground">
+                </motion.div>
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                    className="mt-6 text-sm text-muted-foreground flex items-center justify-center lg:justify-start gap-2"
+                >
+                    <Sparkles className="w-4 h-4 text-accent animate-pulse" />
                     {dictionary.buttonHint}
-                </div>
+                </motion.div>
             </div>
             <div className="flex justify-center items-center mt-10 lg:mt-0">
                 <TiltCard strength={10} className="w-full max-w-[500px]">

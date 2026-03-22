@@ -10,27 +10,49 @@ import Stats from '@/components/sections/stats';
 import TrustedBy from '@/components/sections/trusted-by';
 import TargetAudience from '@/components/sections/target-audience';
 import WhyUs from '@/components/sections/why-us';
-import BeforeAfter from '@/components/sections/before-after';
-import Testimonials from '@/components/sections/testimonials';
-import Gallery from '@/components/sections/gallery';
-import FeaturedCaseStudy from '@/components/sections/featured-case-study';
-import Video from '@/components/sections/video';
-import CtaBlock from '@/components/sections/cta-block';
-import Founder from '@/components/sections/founder';
-import Faq from '@/components/sections/faq';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
+
+const BeforeAfter = dynamic(() => import('@/components/sections/before-after'), { 
+    loading: () => <Skeleton className="h-96 w-full rounded-3xl" /> 
+});
+const Testimonials = dynamic(() => import('@/components/sections/testimonials'), { 
+    loading: () => <Skeleton className="h-64 w-full rounded-2xl" /> 
+});
+const Gallery = dynamic(() => import('@/components/sections/gallery'), { 
+    loading: () => <Skeleton className="h-screen w-full" /> 
+});
+const FeaturedCaseStudy = dynamic(() => import('@/components/sections/featured-case-study'), { 
+    loading: () => <Skeleton className="h-[500px] w-full rounded-3xl" /> 
+});
+const Founder = dynamic(() => import('@/components/sections/founder'), { 
+    loading: () => <Skeleton className="h-96 w-full" /> 
+});
+const Faq = dynamic(() => import('@/components/sections/faq'), { 
+    loading: () => <Skeleton className="h-64 w-full" /> 
+});
+const ResultsGrid = dynamic(() => import('@/components/sections/results-grid'), { 
+    loading: () => <Skeleton className="h-96 w-full" /> 
+});
 
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
 const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'), { ssr: false });
+const PickTwoSelector = dynamic(() => import('@/components/sections/pick-two-selector'), { 
+    loading: () => <Skeleton className="h-96 w-full" /> 
+});
+const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'), { ssr: false });
+const CtaBlock = dynamic(() => import('@/components/sections/cta-block'), { 
+    loading: () => <Skeleton className="h-48 w-full rounded-2xl" /> 
+});
+const Video = dynamic(() => import('@/components/sections/video'), { ssr: false });
 
 const fadeInVariant = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
+    transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }
   }
 };
 
@@ -96,6 +118,12 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
                     <WhyUs onCtaClick={handleOpenModal} lang={lang} />
                 </motion.div>
+
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                    <PickTwoSelector onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.pickTwoSelector} />
+                </motion.div>
+
+                <ResultsGrid dictionary={dictionary.results} />
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
                     <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />

@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { useParams } from 'next/navigation';
+import ServiceProcessHorizontal from '@/components/sections/service-process-horizontal';
 
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
     loading: () => <Skeleton className="h-96 w-full mt-4" />,
@@ -31,9 +32,9 @@ const QadoqDizayniPage: FC = () => {
   }
 
   const processSteps = [
-      { icon: Search, ...translations.process_steps[0] },
-      { icon: Palette, ...translations.process_steps[1] },
-      { icon: Box, ...translations.process_steps[2] }
+      { iconName: 'Search', ...translations.process_steps[0] },
+      { iconName: 'Palette', ...translations.process_steps[1] },
+      { iconName: 'Box', ...translations.process_steps[2] }
   ];
 
   return (
@@ -79,29 +80,11 @@ const QadoqDizayniPage: FC = () => {
             </div>
         </section>
 
-        <section className="py-16 sm:py-24 bg-white">
-            <div className="container mx-auto px-4">
-                <div className="text-center">
-                    <h2 className="text-3xl sm:text-4xl font-bold">{translations.process_title}</h2>
-                    <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-700">
-                        {translations.process_subtitle}
-                    </p>
-                </div>
-                <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {processSteps.map((step, index) => (
-                    <Card key={index} className="text-center shadow-lg rounded-2xl bg-secondary/50 transform hover:-translate-y-2 transition-transform duration-300 border-none">
-                        <CardContent className="p-8">
-                            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-6">
-                                <step.icon className="h-8 w-8 text-primary" aria-hidden="true" />
-                            </div>
-                            <h3 className="text-xl font-bold text-dark-blue">{step.title}</h3>
-                            <p className="mt-2 text-gray-600">{step.description}</p>
-                        </CardContent>
-                    </Card>
-                    ))}
-                </div>
-            </div>
-        </section>
+        <ServiceProcessHorizontal
+            title={translations.process_title}
+            subtitle={translations.process_subtitle}
+            steps={processSteps}
+        />
 
         <section className="py-16 sm:py-24">
             <div className="container mx-auto px-4 text-center">

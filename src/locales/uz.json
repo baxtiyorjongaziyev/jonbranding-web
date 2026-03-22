@@ -1,4 +1,3 @@
-
 {
     "header": {
         "portfolio": "Portfolio",
@@ -81,11 +80,11 @@
             { "title": "Brend Platformasi", "description": "Missiya, qadriyatlar, brend xarakteri va maqsadli auditoriya." },
             { "title": "Logotip va Aydentika", "description": "Logotip, firma ranglari va shriftlardan foydalanish qoidalari." },
             { "title": "Vizual Uslub", "description": "Suratlar, illustratsiyalar va grafik elementlardan foydalanish qoidalari." },
-            { "title": "Amaliy Qo'llanilishi", "description": "Real tashuvchilar (vizitka, taqdimotlar, ijtimoiy tarmoqlar) uchun dizayn namunalari." }
+            { "title": "Amaliy Qo'llanilishi", "description": "Real tashuvchilarda (vizitka, taqdimotlar, ijtimoiy tarmoqlar) uchun dizayn namunalari." }
         ],
         "cta_title": "Brendingizni tartibga solishga tayyormisiz?",
         "cta_description": "Professional brendbuk — biznesingiz barqaror kelajagiga sarmoya. Keling, sizga ishonchli yordamchi bo'ladigan hujjatni yaratamiz.",
-        "cta_button": "Brendbuk buyurtma qilish"
+        "cta_button": "Brending tartibini yaratish"
     },
     "popularPackages": {
         "title": "Eng ommabop paketlar",
@@ -103,16 +102,11 @@
         "packagePrice": "Paketda",
         "packageDiscount": "(-20% chegirma!)",
         "upfrontDiscount": "100% to'lovda (-28% jami!)",
-        "ctaButton": "Ushbu paketni tanlash"
+        "ctaButton": "Paketni band qilish"
     },
     "sitemapPage": {
         "title": "Sayt xaritasi",
         "subtitle": "Kerakli ma'lumotni tezda topishingiz uchun saytimizning barcha sahifalari haqida umumiy ma'lumot.",
-        "sections": {
-            "main": "Asosiy bo'limlar",
-            "services": "Xizmatlar",
-            "blog": "Blog maqolalari"
-        },
         "links": {
             "home": "Bosh sahifa",
             "quiz": "Brending testi",
@@ -147,7 +141,16 @@
         ],
         "buttonHint": "Bepul. Majburiyatlarsiz."
     },
-    "contactModal": {
+        "results": {
+            "title": "Mijozlarimizning natijalari",
+            "subtitle": "Biz nafaqat chiroyli dizayn, balki biznesingiz rivojiga hissa qo'shadigan strategik yechimlar yaratamiz.",
+            "items": [
+                { "title": "Den Aroma", "impact": "+60%", "desc": "O'rtacha chekning oshishi", "label": "Savdo o'sishi" },
+                { "title": "Bexruz Market", "impact": "+40%", "desc": "Mijozlar oqimining ko'payishi", "label": "Tashriflar" },
+                { "title": "Zamin Qurilish", "impact": "3 barobar", "desc": "Brend tanilish darajasi oshdi", "label": "Obro'" }
+            ]
+        },
+        "contactModal": {
         "stepTitles": {
             "contact": "Aloqa ma'lumotlari",
             "project": "Loyiha haqida",
@@ -363,9 +366,11 @@
         "title": "Ko'p beriladigan savollar",
         "subtitle": "Brending jarayoni, narxlar va boshqa mavzular bo'yicha javoblar.",
         "faqItems": [
-            { "question": "Nega narxlar turlicha?", "answer": "Har bir loyiha unikal. Murakkablikka qarab hisoblanadi." },
-            { "question": "Kafolat bormi?", "answer": "Ha, 100% mamnuniyat kafolati mavjud." },
-            { "question": "Yuqori konversiyali sayt bo'lishi uchun kimlar kerak bo'ladi?", "answer": "Yuqori konversiyali va natijaga ishlaydigan sayt yaratish uchun butun boshli mutaxassislar jamoasi talab etiladi. Bunga: brending bo'yicha strateg, UX/UI dizayner, professional kopirayter, frontend dasturchi va marketing tahlilchisi kiradi. Jon Branding'da biz ushbu barcha bosqichlarni o'z ichiga olgan kompleks yondashuvni taqdim etamiz." }
+            { "question": "Yaxshi brending va shunchaki chiroyli logotipning farqi nimada?", "answer": "Shunchaki logotip vizual belgi xolos. Jon Branding'da biz brendingni biznesingizning poydevori sifatida ko'ramiz. Biz brendning strategiyasi, pozitsiyalashi va mijoz ongidagi o'rnini tahlil qilamiz. Natijada biznesingiz shunchaki 'chiroyli' emas, balki 'daromad keltiruvchi' brendga aylanadi." },
+            { "question": "Brending jarayonida kimlar ishtirok etadi?", "answer": "Yuqori konversiyali sayt va brend yaratish uchun bir kishi yetarli emas. Bizda brending strateg, UX/UI dizayner, professional kopirayter va marketing tahlilchisi birga ishlaydi. Bu kompleks yondashuv har bir elementning natija uchun ishlashini ta'minlaydi." },
+            { "question": "Xizmatlaringiz narxi nima uchun soha o'rtachasidan yuqoriroq?", "answer": "Biz xarajatni emas, investitsiyani sotamiz. Shunchaki dizayn emas, balki savdoni oshiruvchi texnik va psixologik yechimlarni taqdim etamiz. Jon Branding bilan ishlash orqali siz yillar davomida xizmat qiladigan va marketing xarajatlarini kamaytiradigan mukammal tizimga ega bo'lasiz." },
+            { "question": "Loyiha qancha muddatda tayyor bo'ladi?", "answer": "O'rtacha 4 dan 8 haftagacha. Bu vaqt chuqur tahlil, kontseptsiya yaratish va har bir detalni ideal holatga keltirish uchun zarur. Biz sifatga e'tibor qaratamiz, shuning uchun ham natijalarimiz bozorda ajralib turadi." },
+            { "question": "Brendingdan keyin biznesimda qanday o'zgarishlarni sezaman?", "answer": "Birinchidan, mijozlarning brendga bo'lgan ishonchi ortadi. Ikkinchidan, raqobatdan qochish emas, balki ulardan ustun bo'lish imkoniyati tug'iladi. Eng muhimi — sizning mahsulotingiz narxi emas, uning qiymati birinchi o'ringa chiqadi." }
         ],
         "ctaTitle": "Shubhalarga o'rin yo'q!",
         "ctaDesc": "Loyihangizni boshlash vaqti keldi.",
@@ -433,14 +438,20 @@
         "section1_title": "Firma uslubi nima va nega kerak?",
         "section1_p1": "Firma uslubi — bu brendingizning vizual 'tili'. Logotip, ranglar, shriftlar, ikonalar — bularning barchasi birgalikda ish qilib, brendingizni darhol tanilishini ta'minlaydi.",
         "section1_p2": "Yaxlit firma uslubisiz brendingiz har xil platformalarda har xil ko'rinadi va professionalligi yo'qoladi.",
+        "section2_title": "Firma uslubi — bu tizim",
+        "section2_p1": "Bu nafaqat go'zallik, balki samaradorlik, ma'no va nazorat haqida. Brendning ko'p qirrali bo'lishi va shu bilan birga vizual qiyofasini rivojlantirishda izchil bo'lishi uchun grafik elementlar to'plamini yaratish kerak.",
+        "section2_p2": "Bunday to'plam biznesning vazifalari va imkoniyatlariga qarab har doim alohida tanlanadi. Minimal to'plam logotip, ranglar, shriftlar, fotosuratlar uslubi, reklama tashuvchilarining uslubi va yaxlit tasvirni shakllantiruvchi boshqa elementlarni o'z ichiga oladi.",
+        "section2_p3": "Vizual uslub aniq va izchil qurilganda, u brend qiyofasini va uning muloqotini boshqarishning kuchli vositasiga aylanadi. Agar uning barcha elementlari muvofiqlashtirilgan bo'lsa, brend professional, ishonchli va taniqli sifatida qabul qilinadi.",
         "process_title": "Firma uslubini qanday yaratamiz?",
         "process_subtitle": "Ijodkorlik va strategiyani birlashtirgan 4 bosqichli jarayon.",
         "process_steps": [
             { "title": "Tahlil va konsept", "description": "Brendingiz qadriyatlari va auditoriyasini o'rganib, vizual yo'nalishni belgilaymiz." },
             { "title": "Ranglar va shriftlar", "description": "Brendingiz uchun maxsus tanlangan rang palitrasini va tipografika tizimini yaratamiz." },
-            { "title": "Elementlar tizimi", "description": "Ikonalar, grafik elementlar va pattern — barcha vizual qismlarni quramiz." },
+            { "title": "Elementlar tizimi", "description": "Ikonalar, grafik elementlar va pattern — bularning barchasi vizual qismlarni quramiz." },
             { "title": "Amaliy namoyish", "description": "Barcha elementlarni real tashuvchilarda (vizitka, paket, banner) ko'rsatamiz." }
-        ]
+        ],
+        "cta_title": "Firma uslubi — o'sish vositasi",
+        "cta_description": "Kuchli aydentikaga ega brendlar tezroq taniladi, uzoqroq esda qoladi va ko'proq ishonch uyg'otadi. Biz nafaqat vizual uslubni, balki brendingizning o'sishiga, izchil va boshqariladigan bo'lishiga yordam beradigan vositani yaratamiz."
     },
     "logoDesignPage": {
         "metadata": { "title": "Logotip dizayni | Jon.Branding", "description": "Biznesingiz mohiyatini aks ettiruvchi, strategik va esda qolarli logotip." },
@@ -451,7 +462,7 @@
         "section1_p2": "Biz har bir logotipni strategiyadan boshlaymiz: brendingizning qadriyatlari, auditoriyasi va bozordagi o'rni asosida yaratamiz.",
         "values_title": "Nima uchun bizning logotiplar ishlaydi?",
         "values": [
-            { "title": "Strategik yondashuv", "description": "Har bir dizayn elementi brendingizning maqsadli auditoriyasi va qadriyatlaridan kelib chiqadi." },
+            { "title": "Strategik yondashuv", "description": "Har bir dizayn elementi brendingizning maqsadli auditoriyasi va qadriyatlariidan kelib chiqadi." },
             { "title": "Esda Qoladi", "description": "Soddaligi va noyob konsepsiyasi bilan logotipingiz raqobatchilardan xotirada qoladi." },
             { "title": "Har yerda ishlaydi", "description": "Vizitka, veb-sayt, billborad yoki mahsulot — logotipingiz hamma joyda professional ko'rinadi." }
         ],
@@ -465,7 +476,7 @@
         ],
         "cta_title": "Brendingiz yangi logotipga tayyor",
         "cta_description": "Bepul konsultatsiyada brendingiz uchun ideal vizual yechimni muhokama qilamiz.",
-        "cta_button": "Logotip buyurtma qilish"
+        "cta_button": "Logotip yaratishni boshlash"
     },
     "namingPage": {
         "metadata": { "title": "Neyming | Jon.Branding", "description": "Brendingiz uchun esda qolarli, kuchli va yuridik toza nom tanlash." },
@@ -531,20 +542,51 @@
     },
     "pickTwoSelector": {
         "title": "Uchtadan ikkitasini tanlang",
-        "subtitle": "Narx—Sifat—Tezlik.",
-        "options": { "cheap": "Arzon", "quality": "Sifatli", "fast": "Tez" },
-        "messages": { "default": "2 tasini tanlang." }
+        "subtitle": "Narx—Sifat—Tezlik: bir vaqtning o'zida uchtasiga erishish mushkul.",
+        "ctaText": "Taklif so'rash",
+        "options": {
+            "cheap": "Arzon",
+            "quality": "Sifatli",
+            "fast": "Tez"
+        },
+        "messages": {
+            "cheap_fast": "Sifat o'zgaruvchan bo'lishi mumkin. Bu variant shoshilinch va budjeti past loyihalar uchun mos.",
+            "cheap_quality": "Natijani odatdagidan uzoqroq kutishga to'g'ri keladi. Budjetingizga moslashib, sifatni ta'minlash uchun navbat asosida ishlaymiz.",
+            "quality_fast": "Narx yuqoriroq bo'ladi. Shoshilinch (2-3 kun) loyihalar uchun standart narxga +50% ustama qo'llaniladi. Jamoani safarbar qilib, sizning muddatingizga ustuvorlik beramiz.",
+            "default": "Iltimos, siz uchun eng muhim bo'lgan 2 ta ustuvorlikni tanlang."
+        },
+        "tooltip": "Avval bittasini bekor qiling"
     },
     "exitIntentModal": {
         "title": "Ketmang!",
-        "description": "Siz uchun chegirmalarimiz bor.",
-        "button": "Ko'rish"
+        "description": "Siz uchun maxsus taklifimiz bor. <br/>Hozirda bizda <span class='font-bold text-primary'>turli chegirmalar</span> amal qilmoqda. Imkoniyatdan foydalanib qoling!",
+        "button": "Chegirmalarni ko'rish"
     },
     "queueStatus": {
-        "title": "Navbatingizni band qiling!",
+        "subtitle": "Joylar cheklangan",
+        "title": "Shoshiling! O'z joyingizni band qiling!",
+        "description": "Biz yuqori sifatni ta'minlash uchun har bir loyihaga vaqt ajratamiz. Shu sababli bir vaqtning o'zida faqat cheklangan miqdordagi loyihalar bilan ishlaymiz.",
+        "queueTitle": "Loyihalar navbati",
         "booked": "Band",
         "available": "Bo'sh",
-        "ctaButton": "Band qilish",
-        "timeframes": { "2 weeks": "2 haftada" }
+        "tooltipBooked": "Joy band qilingan",
+        "tooltipAvailable": "Navbatga yozilishingiz mumkin",
+        "remainingSlots": "Qolgan bo'sh joylar",
+        "slotsUnit": "ta",
+        "onlineNow": "Hozir saytda",
+        "peopleUnit": "kishi",
+        "nextProjectStart": "Keyingi loyiha boshlanishi",
+        "ctaButton": "Joyni band qilish",
+        "ctaSubtitle": "Raqobatchilaringizdan bir qadam oldinda bo'ling!",
+        "timeframes": {
+            "2 weeks": "2 hafta ichida"
+        }
+    },
+    "leadMagnetPopup": {
+        "title": "Siz uchun bepul sovg'a!",
+        "subtitle": "Brendingizni 10 ballik shkala bo'yicha mustaqil tekshirib ko'ring.",
+        "description": "Bizning mutaxassislarimiz tomonidan tayyorlangan <b>'Brending Cheklisti'</b>ni mutlaqo bepul yuklab oling.",
+        "cta": "Cheklistni olish",
+        "closeText": "Rahmat, kerak emas"
     }
 }
