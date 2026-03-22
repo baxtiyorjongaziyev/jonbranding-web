@@ -7,6 +7,7 @@ import { ArrowUp, Instagram, Linkedin, Send } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, FC } from 'react';
+import { trackContactClick, trackEvent } from '@/lib/analytics';
 
 type Dictionary = {
     contact: string;
@@ -71,11 +72,23 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           <div>
             <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.contact}</h3>
             <div className="mt-4 space-y-4">
-               <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="block group" aria-label="Jon Branding Telegram Profil">
+               <a 
+                 href="https://t.me/baxtiyorjon_gaziyev" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 className="block group" 
+                 aria-label="Jon Branding Telegram Profil"
+                 onClick={() => trackContactClick('telegram')}
+               >
                   <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">@baxtiyorjon_gaziyev</p>
                   <p className="text-xs text-gray-400">{dictionary.by_telegram}</p>
                </a>
-               <a href="tel:+998336450097" className="block group" aria-label="Jon Branding Telefon raqami">
+               <a 
+                 href="tel:+998336450097" 
+                 className="block group" 
+                 aria-label="Jon Branding Telefon raqami"
+                 onClick={() => trackContactClick('phone')}
+               >
                   <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">+998 33 645 00 97</p>
                   <p className="text-xs text-gray-400">{dictionary.by_phone}</p>
                </a>
