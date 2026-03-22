@@ -20,11 +20,11 @@
         "packaging_design_desc": "吸引人的设计，使您的产品在货架上脱颖而出。",
         "services_and_prices": "服务与价格",
         "services_and_prices_desc": "构建您自己的服务包并立即获取价格。",
-        "contact_by_phone": "通话",
-        "contact_by_telegram": "Telegram",
-        "free_consultation": "免费咨询",
-        "open_menu": "打开菜单",
-        "switch_lang": "切换语言",
+        "contact_by_phone": "联系电话",
+        "contact_by_telegram": "Telegram 联系",
+        "free_consultation": "获取免费方案",
+        "open_menu": "菜单",
+        "switch_lang": "语言",
         "lang_ru": "Русский",
         "lang_uz": "O‘zbekcha",
         "lang_en": "English"
@@ -60,9 +60,9 @@
     },
     "brandbookPage": {
         "metadata": {
-            "title": "品牌手册开发 | Jon.Branding 代理机构",
-            "description": "品牌手册是您品牌的宪法。我们创建全面的品牌手册，确保您品牌的一致性并节省营销成本。",
-            "keywords": "品牌手册, 指南, 企业形象, 品牌设计, 标志使用规则, 品牌代理机构"
+            "title": "专业品牌手册开发 | 乌兹别克斯坦品牌设计代理机构 | Jon.Branding",
+            "description": "品牌手册是您企业的视觉宪法。我们在塔什干为您创建全面的品牌规范，确保品牌在乌兹别克斯坦市场的一致性并节省营销成本。",
+            "keywords": "乌兹别克斯坦品牌手册, 塔什干品牌设计, 企业形象识别系统, 品牌指南开发, 中乌贸易品牌咨询"
         },
         "title": "品牌手册开发",
         "subtitle": "品牌手册不仅仅是一份带有标志的文件，它是您品牌的宪法，确保其一致性和完整性。",
@@ -138,7 +138,7 @@
             "让顾客|爱上您|。一次又一次。",
             "从小企业到|强大品牌|。一步之遥。"
         ],
-        "description": "我们不只是画标志。作为塔什干领先的品牌代理机构，我们为您的业务构建一个<span class='font-bold text-foreground'>以结果为导向</span>、以策略为基础的品牌系统，赢得您客户的心。我们提供品牌策略、命名和标志设计服务。",
+        "description": "作为乌兹别克斯坦领先的品牌代理机构，我们不只是设计网站或 LOGO。我们为您的企业构建<span class='font-bold text-foreground'>以结果为导向</span>的品牌系统。通过专业的市场策略和视觉设计，助您的品牌在塔什干乃至中亚市场脱颖而出。",
         "buttonTexts": [
             "分析我的品牌",
             "帮助我增加销售额",
@@ -735,50 +735,50 @@
     },
     "servicesPage": {
         "metadata": {
-            "title": "服务与价格 | Jon.Branding",
-            "description": "了解我们所有的服务，并创建一个适合您的品牌塑造套餐. 使用我们的在线计算器即时计算价格。"
+            "title": "品牌服务与价格 | 塔什干专业品牌设计机构 | Jon.Branding",
+            "description": "了解我们的全方位品牌服务：从 LOGO 设计到品牌策略. 使用在线计算器，即时获取乌兹别克斯坦市场最具竞争力的品牌全案报价."
         },
         "packageBuilder": {
-            "title": "Services and prices",
-            "subtitle": "Get acquainted with all our services and create a branding package suitable for you. Instantly calculate prices with our online calculator.",
+            "title": "服务与价格",
+            "subtitle": "了解我们的全方位服务，为您的企业定制专属品牌方案. 使用在线计算器即时获取精准报价。",
             "categories": {
-                "tripwire": "First step (Quick services)",
-                "strategy": "Strategic services",
-                "naming": "Naming",
-                "identity": "Visual identity: Logo, Style, Brandbook",
-                "addons": "Additional services",
-                "more_services": "Additional services and conditions"
+                "tripwire": "快速启动 (低成本服务)",
+                "strategy": "战略咨询服务",
+                "naming": "品牌命名",
+                "identity": "视觉识别：LOGO、画册、品牌手册",
+                "addons": "附加服务",
+                "more_services": "其他条款与服务"
             },
             "tabs": {
-                "included": "What's included",
-                "benefits": "What you get"
+                "included": "服务内容",
+                "benefits": "您将获得"
             },
-            "your_package": "Your package",
-            "your_package_desc": "Select suitable services for you.",
-            "selected": "Selected",
-            "select": "Select",
-            "base_price_label": "Starting price",
-            "final_price": "Final price:",
-            "promo_code_label": "Promo Code",
-            "promo_code_placeholder": "Enter code",
-            "promo_code_invalid": "Invalid promo code",
+            "your_package": "您的方案",
+            "your_package_desc": "请选择适合您业务需求的项。",
+            "selected": "已选择",
+            "select": "选择",
+            "base_price_label": "起始价格",
+            "final_price": "最终报价：",
+            "promo_code_label": "优惠码",
+            "promo_code_placeholder": "输入优惠码",
+            "promo_code_invalid": "优惠码无效",
             "discountSelector": {
-                "none": "No discount",
-                "package": "Package 20%",
-                "full": "Full payment (28%)"
+                "none": "无折扣",
+                "package": "套餐优惠 20%",
+                "full": "全额预付 (28% 折扣)"
             },
-            "empty_package_desc": "You haven't selected any services yet. Please select one of the services.",
-            "recommended": "Recommended"
+            "empty_package_desc": "您尚未选择任何服务。请至少选择一项服务。",
+            "recommended": "专家推荐"
         },
         "comparison": {
-            "title": "Us and Competitors",
-            "description": "We provide high-quality branding services at much more affordable prices than premium agencies. And the result will be even better than you expect.",
-            "features": "Features",
-            "whyPremiumTitle": "Why only premium agencies?",
-            "whyPremiumDesc": "We compare ourselves only with high-level companies with strategic approach. Our goal — not just being cheaper, but providing premium quality at affordable price. Comparison with agencies not meeting our level by quality and strategy would be wrong both for client and us.",
-            "ctaTitle": "You saw the difference. Now time to choose!",
-            "ctaDesc": "For quality branding no need to overpay. Make right decision for your business and contact us.",
-            "ctaButton": "I need such approach"
+            "title": "我们与竞争对手",
+            "description": "我们不仅提供比高端机构更具性价比的价格，更确保提交的品牌成果超越您的期望。",
+            "features": "服务特性",
+            "whyPremiumTitle": "为什么只跟高端机构比？",
+            "whyPremiumDesc": "我们只与具备战略思维的顶级公司对标。我们的目标并非单纯的低价，而是在确保顶级品质的同时，回归合理的商业价格。与不具备战略高度的小作坊进行对比，是对客户和我们专业度的不负责任。",
+            "ctaTitle": "差异显而易见。现在，做出您的明智选择！",
+            "ctaDesc": "卓越的品牌建设无需支付溢价。请为您的业务做出正确的决定，立即联系我们。",
+            "ctaButton": "我需要这种专业方案"
         }
     },
     "pickTwoSelector": {
