@@ -116,7 +116,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 </motion.div>
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-                    <WhyUs onCtaClick={handleOpenModal} lang={lang} />
+                    <WhyUs onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.whyUs} />
                 </motion.div>
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>

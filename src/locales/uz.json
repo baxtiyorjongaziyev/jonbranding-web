@@ -351,14 +351,44 @@
           "items": [
             {
               "title": "1. Strategiyasiz ishlash",
-              "description": "Eng katta xato — rejasiz dizaynni boshlash. Mijozingiz kim? Xabaringiz nima?",
-              "solution": "Yechim: Missiya va maqsadni belgilang."
+              "description": "Eng katta xato — rejasiz dizaynni boshlash. Mijozingiz kim? Raqobatchilardan nimangiz bilan ajralib turasiz? Asosiy xabaringiz nima? Ushbu savollarga javob bermaydigan logotip yoki sayt — shunchaki chiroyli rasm xolos.",
+              "solution": "Yechim: 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun tanlashlari kerak?' savollariga javob toping. Bu brendingiz uchun mustahkam poydevor yaratadi."
+            },
+            {
+              "title": "2. Hamma uchun yoqishga urinish",
+              "description": "Hamma uchun bo'lishga harakat qilgan brend, oxir-oqibat hech kim uchun bo'lmay qoladi. Jamiyatning barcha qatlami uchun ideal bo'lishga urinish brendni kuchsiz va tushunarsiz qiladi.",
+              "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilang. 'Ideal mijoz' portretini yarating va barcha harakatlaringizni aynan o'sha toifaga qarating."
+            },
+            {
+              "title": "3. Raqobatchilardan nusxa olish",
+              "description": "Raqobatchilarni kuzatish muhim, lekin ulardan nusxa olish — mag'lubiyat yo'li. Agar dizayningiz boshqa mashhur brendga o'xshab qolsa, sizni har doim 'arzon muqobil' sifatida qabul qilishadi.",
+              "solution": "Yechim: O'z yo'lingizni va noyobligingizni topish uchun raqobatni o'rganing. Boshqacha bo'lishdan qo'rqmang."
+            },
+            {
+              "title": "4. Izchillikning yo'qligi (Inconsistency)",
+              "description": "Logotip saytda bir xil, Instagram'da boshqacha, qadoqda esa butunlay boshqa uslubda bo'lishi xaridorda shubha uyg'otadi va brendning tanilish darajasini pasaytiradi.",
+              "solution": "Yechim: Logotip, ranglar va shriftlardan foydalanish qoidalari yozilgan 'brendbuk' yarating va unga hamma joyda amal qiling."
+            },
+            {
+              "title": "5. Haddan tashqari murakkab logotip",
+              "description": "Ko'p mayda detallar, gradkiyentlar va uzun matnli logotiplarni eslab qolish qiyin. Ular kichik o'lchamlarda (sayt belgisi yoki ijtimoiy tarmoq avatari) juda yomon ko'rinadi.",
+              "solution": "Yechim: Soddalik va minimalizmga intiling. Eng yaxshi logotip — xotirada oson tiklanadigan logotipdir."
+            },
+            {
+              "title": "6. Talaffuzga qiyin yoki esda qolmaydigan nom",
+              "description": "Agar mijozlaringiz brendingiz nomini ayta olmasa yoki to'g'ri yoza olmasa, ular sizni topa olmaydi va boshqalarga tavsiya qila olmaydi.",
+              "solution": "Yechim: Soddacha, jarangdor va yuridik jihatdan toza (patentlanmagan) nom tanlang."
+            },
+            {
+              "title": "7. Brendingni bir marta qilinadigan ish deb o'ylash",
+              "description": "Bozor, mijoz talablari va texnologiya doim o'zgaradi. Zamonga moslashmagan brend juda tez eskiradi.",
+              "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lsa, dizayningizni yangilashdan (rebrending) qo'rqmang. Bu o'sish belgisidir."
             }
           ],
           "result": {
-            "bad": { "title": "Yordam zarur!", "description": "Brendingiz poydevori zaif." },
-            "good": { "title": "To'g'ri yo'ldasiz!", "description": "Asos yaxshi, lekin kuchaytirish kerak." },
-            "perfect": { "title": "A'lo!", "description": "Mustahkam poydevor." }
+            "bad": { "title": "Tezkor yordam zarur!", "description": "Brendingizda bir nechta jiddiy zaifliklar bor. Bu o'sish uchun katta imkoniyat! Biz bu kamchiliklarni kuchli jihatlarga aylantirish qandayligini bilamiz." },
+            "good": { "title": "To'g'ri yo'ldasiz!", "description": "Asos yaxshi, lekin uni yanada kuchaytirish mumkin. Mukammallikka intilishda davom eting." },
+            "perfect": { "title": "A'lo natija!", "description": "Brendingiz poydevori mustahkam. Endi uni amalda qanday ishlatish va rivojlantirish haqida o'ylash kerak." }
           }
         }
     },
@@ -366,15 +396,38 @@
         "title": "Ko'p beriladigan savollar",
         "subtitle": "Brending jarayoni, narxlar va boshqa mavzular bo'yicha javoblar.",
         "faqItems": [
-            { "question": "Yaxshi brending va shunchaki chiroyli logotipning farqi nimada?", "answer": "Shunchaki logotip vizual belgi xolos. Jon Branding'da biz brendingni biznesingizning poydevori sifatida ko'ramiz. Biz brendning strategiyasi, pozitsiyalashi va mijoz ongidagi o'rnini tahlil qilamiz. Natijada biznesingiz shunchaki 'chiroyli' emas, balki 'daromad keltiruvchi' brendga aylanadi." },
-            { "question": "Brending jarayonida kimlar ishtirok etadi?", "answer": "Yuqori konversiyali sayt va brend yaratish uchun bir kishi yetarli emas. Bizda brending strateg, UX/UI dizayner, professional kopirayter va marketing tahlilchisi birga ishlaydi. Bu kompleks yondashuv har bir elementning natija uchun ishlashini ta'minlaydi." },
-            { "question": "Xizmatlaringiz narxi nima uchun soha o'rtachasidan yuqoriroq?", "answer": "Biz xarajatni emas, investitsiyani sotamiz. Shunchaki dizayn emas, balki savdoni oshiruvchi texnik va psixologik yechimlarni taqdim etamiz. Jon Branding bilan ishlash orqali siz yillar davomida xizmat qiladigan va marketing xarajatlarini kamaytiradigan mukammal tizimga ega bo'lasiz." },
-            { "question": "Loyiha qancha muddatda tayyor bo'ladi?", "answer": "O'rtacha 4 dan 8 haftagacha. Bu vaqt chuqur tahlil, kontseptsiya yaratish va har bir detalni ideal holatga keltirish uchun zarur. Biz sifatga e'tibor qaratamiz, shuning uchun ham natijalarimiz bozorda ajralib turadi." },
-            { "question": "Brendingdan keyin biznesimda qanday o'zgarishlarni sezaman?", "answer": "Birinchidan, mijozlarning brendga bo'lgan ishonchi ortadi. Ikkinchidan, raqobatdan qochish emas, balki ulardan ustun bo'lish imkoniyati tug'iladi. Eng muhimi — sizning mahsulotingiz narxi emas, uning qiymati birinchi o'ringa chiqadi." }
+            { 
+                "question": "Yaxshi brending va shunchaki chiroyli logotipning farqi nimada?", 
+                "answer": "Shunchaki logotip — bu vizual belgi. Jon.Branding'da biz brendingni biznesingiz poydevori deb bilamiz. Biz strategiya, bozordagi o'rin va mijozlar ruhiyatini tahlil qilamiz. Natijada biznesingiz shunchaki 'chiroyli' emas, balki 'daromad keltiruvchi' brendga aylanadi." 
+            },
+            { 
+                "question": "Brending jarayonida kimlar ishtirok etadi?", 
+                "answer": "Yuqori konversiyali brend yaratish uchun bir kishi yetarli emas. Bizda brend-strateg, UX/UI dizayner, professional kopirayter va marketing tahlilchisi jamoa bo'lib ishlaydi. Bu kompleks yondashuv har bir detalning natija uchun ishlashini kafolatlaydi." 
+            },
+            { 
+                "question": "Nega xizmatlaringiz narxi bozor o'rtachasidan yuqori?", 
+                "answer": "Biz xarajatni emas, investitsiyani sotamiz. Biz taqdim etadigan yechimlar savdoni oshirishga va marketing xarajatlarini kamaytirishga qaratilgan. Jon.Branding bilan ishlash — bu yillar davomida xizmat qiladigan va bir necha barobar foyda keltiradigan tizimga sarmoyadir." 
+            },
+            { 
+                "question": "Loyiha qancha muddatda tayyor bo'ladi?", 
+                "answer": "O'rtacha 4 haftadan 8 haftagacha. Bu vaqt chuqur tahlil, noyob konsepsiya yaratish va har bir detalni ideal holatga keltirish uchun zarur. Biz sifatga e'tibor qaratamiz, shuning uchun natijalarimiz bozorda ajralib turadi." 
+            },
+            { 
+                "question": "To'lov shartlari qanday?", 
+                "answer": "Standart shartlar: 50% oldindan to'lov va 50% loyiha topshirilgandan so'ng. Agar 100% oldindan to'lov amalga oshirilsa, maxsus chegirmalar taqdim etiladi." 
+            },
+            { 
+                "question": "Natijaga kafolat bormi?", 
+                "answer": "Albatta. Biz mijozlarimizning mamnuniyatini birinchi o'ringa qo'yamiz. Agar dastlabki konsepsiyalar sizning talablaringizga (brifga muvofiq) umuman mos kelmasa, biz loyihani qayta ishlaymiz yoki kelishilgan qaytarish shartlarini bajaramiz." 
+            },
+            { 
+                "question": "Faqatgina logotip buyurtma qilsa bo'ladimi?", 
+                "answer": "Biz butun aydentika tizimini yaratishni tavsiya qilamiz, chunki faqat logotip brend yaxlitligini ta'minlamaydi. Biroq, kichik loyihalar uchun bizda 'Logo + Minimal firma uslubi' paketlari mavjud." 
+            }
         ],
         "ctaTitle": "Shubhalarga o'rin yo'q!",
-        "ctaDesc": "Loyihangizni boshlash vaqti keldi.",
-        "ctaButton": "Boshlashga tayyorman!"
+        "ctaDesc": "Savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yangi bosqichga olib chiqamiz.",
+        "ctaButton": "Barcha javoblarni oldim, boshlashga tayyorman!"
     },
     "mobileCtaBar": {
         "final_price": "Yakuniy narx",
@@ -529,14 +582,50 @@
         ]
     },
     "servicesPage": {
+        "metadata": {
+            "title": "Xizmatlar va narxlar | Jon.Branding",
+            "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang."
+        },
         "packageBuilder": {
             "title": "Xizmatlar va narxlar",
-            "subtitle": "O'z paketingizni yarating.",
+            "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang.",
+            "categories": {
+                "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
+                "strategy": "Strategik xizmatlar",
+                "naming": "Neyming",
+                "identity": "Vizual aydentika: Logo, Firma uslubi, Brendbuk",
+                "addons": "Qo'shimcha xizmatlar",
+                "more_services": "Qo'shimcha xizmatlar va shartlar"
+            },
+            "tabs": {
+                "included": "Nimalar kiradi",
+                "benefits": "Nimalar olasiz"
+            },
+            "your_package": "Sizning paketingiz",
+            "your_package_desc": "Quyidan kerakli xizmatlarni tanlang.",
+            "selected": "Tanlandi",
+            "select": "Tanlash",
+            "base_price_label": "Boshlang'ich narx",
             "final_price": "Yakuniy narx:",
+            "promo_code_label": "Promokod",
+            "promo_code_placeholder": "KODNI KIRITING",
+            "promo_code_invalid": "Noto'g'ri promokod",
+            "discountSelector": {
+                "none": "Chegirmasiz",
+                "package": "Paket uchun (-20%)",
+                "full": "To'liq to'lov uchun (-28%)"
+            },
+            "empty_package_desc": "Xizmatlar tanlanmagan. Iltimos, mos xizmatlarni tanlang.",
             "recommended": "Tavsiya etiladi"
         },
         "comparison": {
             "title": "Biz va raqobatchilar",
+            "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklarga qaraganda ancha hamyonbop narxlarda taqdim etamiz. Natija esa siz kutganingizdan ham a'lo bo'ladi.",
+            "features": "Xususiyatlari",
+            "whyPremiumTitle": "Nega faqat premium agentliklar bilan?",
+            "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda taqdim etishdir. Sifat va strategiya bo'yicha bizning darajamizga mos kelmaydigan agentliklar bilan solishtirish mijoz uchun ham, biz uchun ham noto'g'ri bo'lar edi.",
+            "ctaTitle": "Siz farqni ko'rdingiz. Endi tanlash vaqti keldi!",
+            "ctaDesc": "Sifatli brending uchun ortiqcha to'lov qilish shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling va biz bilan bog'laning.",
             "ctaButton": "Menga shunday yondashuv kerak"
         }
     },

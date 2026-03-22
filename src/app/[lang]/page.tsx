@@ -31,11 +31,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-const Page = async (props: Props) => {
+export default async function Page(props: Props) {
   // NEXT 15: await params
   const { lang } = await props.params;
   const dictionary = await getDictionary(lang);
   return <HomeComponent lang={lang} dictionary={dictionary} />;
-};
-
-export default Page;
+}
