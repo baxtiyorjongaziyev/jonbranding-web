@@ -822,5 +822,12 @@
         "timeframes": {
             "2 weeks": "在 2 周内"
         }
+    },
+    "leadMagnetPopup": {
+        "title": "送给您的免费礼物！",
+        "subtitle": "自主按10分制检查您的品牌。",
+        "description": "完全免费下载由我们专家编写的<b>《品牌检查清单》</b>。",
+        "cta": "获取检查清单",
+        "closeText": "不，谢谢"
     }
 }
