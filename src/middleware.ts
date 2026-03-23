@@ -17,7 +17,9 @@ export async function middleware(request: NextRequest) {
   const locale = await getLocale(request);
   
   // Update pathname with detected locale
-  request.nextUrl.pathname = `/${locale}${pathname}`
+  // Ensure we don't have double slashes and handle root correctly
+  const newPathname = pathname === '/' ? `/${locale}` : `/${locale}${pathname}`;
+  request.nextUrl.pathname = newPathname;
 
   // For the root path, we perform a hard redirect to the locale version.
   if (pathname === '/') {

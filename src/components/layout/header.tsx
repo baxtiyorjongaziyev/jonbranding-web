@@ -290,7 +290,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                       <ul className="pl-4 space-y-4">
                           {services.map((service) => (
                           <li key={service.title}>
-                              <Link href={service.href} onClick={handleLinkClick} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
+                              <Link href={service.href} onClick={() => handleLinkClick(service.title)} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
                           </li>
                           ))}
                       </ul>
