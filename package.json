@@ -1,7 +1,6 @@
-
 {
-  "name": "nextn",
-  "version": "0.1.0",
+  "name": "jonbranding-web-prod",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 9002 -H 0.0.0.0",
