@@ -462,5 +462,37 @@
       "quality_fast": "Price will be higher. Urgent projects (+50% fee) get priority.",
       "default": "Please pick your 2 most important priorities."
     }
+  },
+  "exitIntentModal": {
+    "title": "Don't leave!",
+    "description": "We have a special offer for you. <br/>Currently we have <span class='font-bold text-primary'>various discounts</span> active. Take advantage of this opportunity!",
+    "button": "View Discounts"
+  },
+  "queueStatus": {
+    "subtitle": "Limited slots",
+    "title": "Hurry! Secure your spot!",
+    "description": "We dedicate time to every project to ensure high quality. Therefore, we only work with a limited number of projects at a time.",
+    "queueTitle": "Project Queue",
+    "booked": "Booked",
+    "available": "Available",
+    "tooltipBooked": "Slot occupied",
+    "tooltipAvailable": "You can join the queue",
+    "remainingSlots": "Slots remaining",
+    "slotsUnit": "slots",
+    "onlineNow": "Online now",
+    "peopleUnit": "people",
+    "nextProjectStart": "Next project start",
+    "ctaButton": "Secure a slot",
+    "ctaSubtitle": "Stay one step ahead of your competitors!",
+    "timeframes": {
+      "2 weeks": "within 2 weeks"
+    }
+  },
+  "leadMagnetPopup": {
+    "title": "Free gift for you!",
+    "subtitle": "Independently check your brand on a 10-point scale.",
+    "description": "Download our <b>'Branding Checklist'</b> prepared by our experts absolutely for free.",
+    "cta": "Get Checklist",
+    "closeText": "No thanks, I'm good"
   }
 }
