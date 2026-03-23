@@ -1,20 +1,17 @@
+import uz from '@/locales/uz.json';
+import ru from '@/locales/ru.json';
+import en from '@/locales/en.json';
+import zh from '@/locales/zh.json';
 
-const dictionaries = {
-  uz: () => import('@/locales/uz.json').then((module) => module.default),
-  ru: () => import('@/locales/ru.json').then((module) => module.default),
-  en: () => import('@/locales/en.json').then((module) => module.default),
-  zh: () => import('@/locales/zh.json').then((module) => module.default),
-}
+const dictionaries: any = {
+  uz,
+  ru,
+  en,
+  zh,
+};
 
-export type Locale = keyof typeof dictionaries;
+export type Locale = 'uz' | 'ru' | 'en' | 'zh';
 
 export const getDictionary = async (locale: Locale) => {
-  try {
-    const loader = dictionaries[locale] || dictionaries.uz;
-    return await loader();
-  } catch (error) {
-    console.error(`Failed to load dictionary for ${locale}:`, error);
-    // Hard fallback to UZ if everything fails
-    return dictionaries.uz();
-  }
+  return dictionaries[locale] || dictionaries.uz;
 };
