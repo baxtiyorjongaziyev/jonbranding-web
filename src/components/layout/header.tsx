@@ -87,7 +87,8 @@ const ExpandingButton = ({
   target, 
   icon, 
   text,
-  ariaLabel
+  ariaLabel,
+  onClick
 }: { 
   href: string; 
   target?: string; 
