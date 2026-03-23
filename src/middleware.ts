@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getLocale, locales } from './lib/i18n/locale';
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Check if the pathname already has a supported locale prefix
@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
   if (pathnameHasLocale) return
 
   // Get the best-matching locale from the request headers, cookie or geo
-  const locale = getLocale(request);
+  const locale = await getLocale(request);
   
   // Update pathname with detected locale
   request.nextUrl.pathname = `/${locale}${pathname}`
