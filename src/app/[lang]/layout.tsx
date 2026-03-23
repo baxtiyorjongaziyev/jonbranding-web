@@ -19,11 +19,11 @@ const poppins = Poppins({
 
 type Props = {
   children: ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: { lang: Locale };
 };
 
 export default async function LocalizedLayout({ children, params }: Props) {
-  const { lang: rawLang } = await params;
+  const { lang: rawLang } = params;
   const lang = locales.includes(rawLang as Locale) ? (rawLang as Locale) : defaultLocale;
   let dictionary;
   try {
