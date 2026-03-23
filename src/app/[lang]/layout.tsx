@@ -25,7 +25,14 @@ type Props = {
 export default async function LocalizedLayout({ children, params }: Props) {
   const { lang: rawLang } = await params;
   const lang = locales.includes(rawLang as Locale) ? (rawLang as Locale) : defaultLocale;
-  const dictionary = await getDictionary(lang);
+  let dictionary;
+  try {
+    dictionary = await getDictionary(lang as Locale);
+  } catch (e) {
+    console.error("Layout dictionary load error:", e);
+    // Provide a minimum shape to prevent crash
+    dictionary = await getDictionary('uz');
+  }
 
   return (
     <html lang={lang} suppressHydrationWarning className={poppins.variable}>

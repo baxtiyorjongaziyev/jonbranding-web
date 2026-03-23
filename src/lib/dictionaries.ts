@@ -9,6 +9,12 @@ const dictionaries = {
 export type Locale = keyof typeof dictionaries;
 
 export const getDictionary = async (locale: Locale) => {
+  try {
     const loader = dictionaries[locale] || dictionaries.uz;
-    return loader();
-}
+    return await loader();
+  } catch (error) {
+    console.error(`Failed to load dictionary for ${locale}:`, error);
+    // Hard fallback to UZ if everything fails
+    return dictionaries.uz();
+  }
+};

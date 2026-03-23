@@ -34,6 +34,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
   // NEXT 15: await params
   const { lang } = await props.params;
-  const dictionary = await getDictionary(lang);
+  
+  let dictionary;
+  try {
+    dictionary = await getDictionary(lang);
+  } catch (e) {
+    console.error("Page dictionary load error, falling back to 'uz':", e);
+    dictionary = await getDictionary('uz');
+  }
+  
   return <HomeComponent lang={lang} dictionary={dictionary} />;
 }
