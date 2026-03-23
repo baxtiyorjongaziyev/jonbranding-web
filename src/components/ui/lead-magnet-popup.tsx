@@ -18,6 +18,7 @@ interface LeadMagnetPopupProps {
 }
 
 const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
+  if (!dictionary) return null;
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 

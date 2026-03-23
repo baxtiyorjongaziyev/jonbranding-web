@@ -128,6 +128,7 @@ const ExpandingButton = ({
 };
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
+  if (!dictionary) return null;
   const { scrollY } = useScroll();
   
   const top = useTransform(scrollY, [0, 80], [0, 16]);
