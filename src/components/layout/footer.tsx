@@ -36,6 +36,7 @@ type Dictionary = {
 }
 
 const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
+  if (!dictionary) return null;
   const [isHovered, setIsHovered] = useState(false);
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
