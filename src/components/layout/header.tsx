@@ -131,15 +131,16 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   if (!dictionary) return null;
   const { scrollY } = useScroll();
   
-  const top = useTransform(scrollY, [0, 80], [0, 12]);
+  const top = useTransform(scrollY, [0, 80], [0, 16]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
     scrollY,
     [0, 80],
-    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.7)']
+    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.65)']
   );
-  const borderColor = useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(0,0,0,0.05)']);
-  const boxShadow = useTransform(scrollY, [0, 80], ['none', '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)']);
+  const borderColor = useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(255, 255, 255, 0.25)']);
+  const backdropBlur = useTransform(scrollY, [0, 80], ['blur(0px)', 'blur(24px)']);
+  const boxShadow = useTransform(scrollY, [0, 80], ['none', '0 8px 32px 0 rgba(31, 38, 135, 0.15)']);
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -190,13 +191,14 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     >
       <motion.div
         className={cn(
-          "container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
-          "backdrop-blur-xl border border-white/10 shadow-lg",
-          scrolled ? "max-w-[95%] lg:max-w-7xl" : "max-w-full lg:max-w-screen-2xl"
+          "container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-500",
+          "border border-white/20 shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] ring-1 ring-white/10",
+          scrolled ? "max-w-[92%] lg:max-w-6xl py-2" : "max-w-full lg:max-w-screen-2xl"
         )}
         style={{ 
           borderRadius,
           backgroundColor,
+          backdropFilter: backdropBlur,
           borderColor,
           boxShadow
         }}
