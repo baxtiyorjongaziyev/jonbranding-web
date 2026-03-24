@@ -131,14 +131,14 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   if (!dictionary) return null;
   const { scrollY } = useScroll();
   
-  const top = useTransform(scrollY, [0, 80], [0, 16]);
-  const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
+  const top = useTransform(scrollY, [0, 80], [0, 8]);
+  const borderRadius = useTransform(scrollY, [0, 80], [0, 24]);
   const backgroundColor = useTransform(
     scrollY,
     [0, 80],
-    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.2)']
+    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.7)']
   );
-  const borderColor = useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(255,255,255,0.3)']);
+  const borderColor = useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(0,0,0,0.05)']);
   const boxShadow = useTransform(scrollY, [0, 80], ['none', '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)']);
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -190,8 +190,9 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     >
       <motion.div
         className={cn(
-          "container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
-          "backdrop-blur-lg border border-transparent"
+          "container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
+          "backdrop-blur-xl border border-white/10 shadow-lg",
+          "max-w-full lg:max-w-screen-2xl"
         )}
         style={{ 
           borderRadius,
