@@ -131,8 +131,8 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   if (!dictionary) return null;
   const { scrollY } = useScroll();
   
-  const top = useTransform(scrollY, [0, 80], [0, 8]);
-  const borderRadius = useTransform(scrollY, [0, 80], [0, 24]);
+  const top = useTransform(scrollY, [0, 80], [0, 12]);
+  const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
     scrollY,
     [0, 80],
@@ -192,7 +192,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         className={cn(
           "container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
           "backdrop-blur-xl border border-white/10 shadow-lg",
-          "max-w-full lg:max-w-screen-2xl"
+          scrolled ? "max-w-[95%] lg:max-w-7xl" : "max-w-full lg:max-w-screen-2xl"
         )}
         style={{ 
           borderRadius,
