@@ -204,74 +204,76 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         }}
         suppressHydrationWarning
       >
-        <Link href={`/${lang}`} className="flex items-center" aria-label="Jon Branding - Bosh sahifa">
+        <Link href={`/${lang}`} className="flex items-center shrink-0" aria-label="Jon Branding - Bosh sahifa">
           <Logo />
         </Link>
 
-        <div className="hidden lg:flex">
-          {mounted && (
-            <NavigationMenu aria-label="Asosiy navigatsiya">
-               <NavigationMenuList>
-                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={cn("bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
-                    {dictionary.services}
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                      {services.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                {navItems.map((item) => (
-                  <NavigationMenuItem key={item.label}>
-                    <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
-                      <Link href={item.href}>
-                        {item.label}
-                      </Link>
-                    </NavigationMenuLink>
+        {mounted && (
+          <div className={cn(
+            "hidden lg:flex items-center transition-all duration-500 flex-1",
+            scrolled ? "lg:ml-32" : "lg:ml-8"
+          )}>
+            <div className="flex items-center justify-between w-full">
+              <NavigationMenu aria-label="Asosiy navigatsiya">
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className={cn("bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
+                      {dictionary.services}
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                        {services.map((component) => (
+                          <ListItem
+                            key={component.title}
+                            title={component.title}
+                            href={component.href}
+                          >
+                            {component.description}
+                          </ListItem>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
                   </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-          )}
-        </div>
+                  {navItems.map((item) => (
+                    <NavigationMenuItem key={item.label}>
+                      <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
+                        <Link href={item.href}>
+                          {item.label}
+                        </Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
 
-        <div className="hidden items-center space-x-2 lg:flex">
-          <LanguageSwitcher lang={lang as any} />
-           
-            <ExpandingButton 
-              href="tel:+998336450097"
-              ariaLabel={dictionary.contact_by_phone}
-              icon={<Phone className="h-5 w-5" />}
-              text={dictionary.contact_by_phone}
-              onClick={() => trackContactClick('phone')}
-            />
-            
-            <ExpandingButton 
-              href="https://t.me/baxtiyorjon_gaziyev"
-              target="_blank"
-              ariaLabel={dictionary.contact_by_telegram}
-              icon={<Send className="h-5 w-5" />}
-              text={dictionary.contact_by_telegram}
-              onClick={() => trackContactClick('telegram')}
-            />
-
-          <Button 
-            onClick={handleContactClick} 
-            className="shadow-ocean"
-            aria-label={dictionary.free_consultation}
-          >
-             {dictionary.free_consultation}
-          </Button>
-        </div>
+              <div className="flex items-center space-x-2">
+                <LanguageSwitcher lang={lang as any} />
+                <ExpandingButton 
+                  href="tel:+998336450097"
+                  ariaLabel={dictionary.contact_by_phone}
+                  icon={<Phone className="h-5 w-5" />}
+                  text={dictionary.contact_by_phone}
+                  onClick={() => trackContactClick('phone')}
+                />
+                <ExpandingButton 
+                  href="https://t.me/baxtiyorjon_gaziyev"
+                  target="_blank"
+                  ariaLabel={dictionary.contact_by_telegram}
+                  icon={<Send className="h-5 w-5" />}
+                  text={dictionary.contact_by_telegram}
+                  onClick={() => trackContactClick('telegram')}
+                />
+                <Button 
+                  onClick={handleContactClick} 
+                  className="shadow-ocean"
+                  aria-label={dictionary.free_consultation}
+                >
+                  {dictionary.free_consultation}
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
         
         <div className="flex items-center gap-2 lg:hidden">
           <LanguageSwitcher lang={lang as any} />
