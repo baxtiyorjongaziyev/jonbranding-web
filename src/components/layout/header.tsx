@@ -26,6 +26,7 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ScrollArea } from '../ui/scroll-area';
 import LanguageSwitcher from '../language-switcher';
+import Magnetic from '../ui/magnetic';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
 
 type Dictionary = {
@@ -88,7 +89,8 @@ const ExpandingButton = ({
   icon, 
   text,
   ariaLabel,
-  onClick
+  onClick,
+  isHovered: externalIsHovered
 }: { 
   href: string; 
   target?: string; 
@@ -96,8 +98,10 @@ const ExpandingButton = ({
   text: string;
   ariaLabel: string;
   onClick?: () => void;
+  isHovered?: boolean;
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [internalIsHovered, setInternalIsHovered] = useState(false);
+  const isHovered = externalIsHovered ?? internalIsHovered;
 
   return (
     <motion.a
@@ -105,20 +109,31 @@ const ExpandingButton = ({
       target={target}
       rel={target === '_blank' ? 'noopener noreferrer' : undefined}
       aria-label={ariaLabel}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      onHoverStart={() => setInternalIsHovered(true)}
+      onHoverEnd={() => setInternalIsHovered(false)}
       onClick={onClick}
-      animate={{ width: isHovered ? 'auto' : 40 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="relative flex h-10 items-center justify-start rounded-full border border-black/10 bg-white/50 text-foreground shadow-md backdrop-blur-sm transition-colors duration-300 hover:border-white/20 hover:bg-white/20 overflow-hidden px-2.5"
+      // Fixed width expansion prevent layout 'jitter' compared to 'auto'
+      animate={{ width: isHovered ? 160 : 44 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      className={cn(
+        "relative flex h-11 items-center justify-start rounded-full bg-white/40 text-foreground backdrop-blur-md transition-colors duration-300 hover:bg-white/60 overflow-hidden !ring-0 !ring-offset-0 !outline-none group",
+        // Invisible hit area extension to make it easier to "catch" the button
+        "before:absolute before:-inset-2 before:content-['']"
+      )}
     >
-      <div className="flex items-center gap-2">
-        <div className="flex-shrink-0 h-5 w-5" aria-hidden="true">{icon}</div>
+      <div className="flex items-center px-3 w-full">
+        <div className="flex-shrink-0 h-5 w-5 flex items-center justify-center" aria-hidden="true">
+          {icon}
+        </div>
         <motion.span 
-          className="whitespace-nowrap text-sm font-medium"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-          transition={{ duration: 0.2, delay: isHovered ? 0.1 : 0 }}
+          className="whitespace-nowrap text-sm font-medium ml-3 overflow-hidden"
+          initial={{ opacity: 0, width: 0 }}
+          animate={{ 
+            opacity: isHovered ? 1 : 0, 
+            width: isHovered ? 'auto' : 0,
+            x: isHovered ? 0 : -5
+          }}
+          transition={{ duration: 0.2 }}
         >
           {text}
         </motion.span>
@@ -191,9 +206,12 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     >
       <motion.div
         className={cn(
-          "container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-500",
+          "mx-auto flex h-16 items-center justify-between transition-all duration-500 w-full",
+          scrolled ? "px-6 lg:px-10" : "px-4 sm:px-6 lg:px-8",
           "border border-white/20 shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] ring-1 ring-white/10",
-          scrolled ? "max-w-[92%] lg:max-w-6xl py-2" : "max-w-full lg:max-w-screen-2xl"
+          scrolled 
+            ? "max-w-[95%] lg:max-w-7xl py-2"
+            : "max-w-full lg:max-w-screen-2xl"
         )}
         style={{ 
           borderRadius,
@@ -211,7 +229,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         {mounted && (
           <div className={cn(
             "hidden lg:flex items-center transition-all duration-500 flex-1",
-            scrolled ? "lg:ml-32" : "lg:ml-8"
+            scrolled ? "lg:ml-12 lg:mr-8" : "lg:ml-8"
           )}>
             <div className="flex items-center justify-between w-full">
               <NavigationMenu aria-label="Asosiy navigatsiya">
@@ -246,26 +264,28 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 </NavigationMenuList>
               </NavigationMenu>
 
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 h-11">
                 <LanguageSwitcher lang={lang as any} />
-                <ExpandingButton 
-                  href="tel:+998336450097"
-                  ariaLabel={dictionary.contact_by_phone}
-                  icon={<Phone className="h-5 w-5" />}
-                  text={dictionary.contact_by_phone}
-                  onClick={() => trackContactClick('phone')}
-                />
-                <ExpandingButton 
-                  href="https://t.me/baxtiyorjon_gaziyev"
-                  target="_blank"
-                  ariaLabel={dictionary.contact_by_telegram}
-                  icon={<Send className="h-5 w-5" />}
-                  text={dictionary.contact_by_telegram}
-                  onClick={() => trackContactClick('telegram')}
-                />
+                <div className="flex items-center gap-1.5">
+                  <ExpandingButton 
+                    href="tel:+998336450097"
+                    ariaLabel={dictionary.contact_by_phone}
+                    icon={<Phone className="h-4.5 w-4.5" />}
+                    text={dictionary.contact_by_phone}
+                    onClick={() => trackContactClick('phone')}
+                  />
+                  <ExpandingButton 
+                    href="https://t.me/baxtiyorjon_gaziyev"
+                    target="_blank"
+                    ariaLabel={dictionary.contact_by_telegram}
+                    icon={<Send className="h-4.5 w-4.5" />}
+                    text={dictionary.contact_by_telegram}
+                    onClick={() => trackContactClick('telegram')}
+                  />
+                </div>
                 <Button 
                   onClick={handleContactClick} 
-                  className="shadow-ocean"
+                  className="shadow-ocean h-11 px-6 rounded-full"
                   aria-label={dictionary.free_consultation}
                 >
                   {dictionary.free_consultation}

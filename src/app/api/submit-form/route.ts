@@ -130,6 +130,30 @@ async function sendGAConversionEvent(data: any) {
         console.error('Error sending Google Analytics event:', error);
     }
 }
+async function sendToN8n(data: any) {
+    const n8nWebhookUrl = 'https://n8n-automation-agent-982617914297.us-central1.run.app/webhook/lead-capture';
+    
+    try {
+        const response = await fetch(n8nWebhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ...data,
+                source: 'website_contact_form',
+                timestamp: new Date().toISOString()
+            }),
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Failed to send to n8n:', response.status, errorText);
+        } else {
+            console.log("Data successfully forwarded to n8n webhook.");
+        }
+    } catch (error) {
+        console.error('Error sending to n8n webhook:', error);
+    }
+}
 
 
 export async function POST(request: Request) {
@@ -294,6 +318,11 @@ ${packageInfo}
         // Send to Google Analytics (don't wait for it to finish)
         sendGAConversionEvent(body).catch(e => {
             console.error("Failed to send GA event in background:", e);
+        });
+
+        // Send to n8n (AmoCRM headless integration)
+        sendToN8n(body).catch((e: any) => {
+            console.error("Failed to send to n8n in background:", e);
         });
 
 
