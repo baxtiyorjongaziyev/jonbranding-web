@@ -7,8 +7,8 @@ import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ImageComparisonSliderProps {
-  beforeImage: Omit<ImageProps, 'fill' | 'className'>;
-  afterImage: Omit<ImageProps, 'fill' | 'className'>;
+  beforeImage: Omit<ImageProps, 'fill' | 'className'> & { [key: string]: any };
+  afterImage: Omit<ImageProps, 'fill' | 'className'> & { [key: string]: any };
   className?: string;
   lang: string;
 }

@@ -105,8 +105,8 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
             steps={processSteps}
       />
       
-      <WhyUs lang={lang} />
-      <ServiceSections lang={lang} />
+      <WhyUs lang={lang} dictionary={dictionary.whyUs} />
+      <ServiceSections lang={lang} dictionary={dictionary.serviceSections} />
     </main>
   );
 };

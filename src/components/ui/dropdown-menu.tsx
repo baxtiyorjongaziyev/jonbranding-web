@@ -18,7 +18,7 @@ const DropdownMenuSub = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Sub>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Sub>
 >(({ ...props }, ref) => (
-  <DropdownMenuPrimitive.Sub data-slot="dropdown-sub" {...props} ref={ref} />
+  <DropdownMenuPrimitive.Sub {...props} />
 ));
 DropdownMenuSub.displayName = DropdownMenuPrimitive.Sub.displayName;
 

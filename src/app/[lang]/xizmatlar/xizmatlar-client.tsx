@@ -54,7 +54,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary?.servicesHero} />
       
       {/* 2. Why Us - Immediate */}
-      <WhyUs lang={lang} />
+      <WhyUs lang={lang} dictionary={dictionary?.whyUs} />
       
       {/* 3. Service Sections - Immediate */}
       <ServiceSections lang={lang} dictionary={dictionary?.serviceSections} />
@@ -69,7 +69,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       {/* 5. Comparison - Step 2 */}
       {step >= 2 && (
         <Suspense fallback={<div className="py-20"><Skeleton className="h-96 w-full" /></div>}>
-          <Comparison onCtaClick={handleOpenModal} lang={lang} />
+          <Comparison onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary?.comparison} />
         </Suspense>
       )}
 

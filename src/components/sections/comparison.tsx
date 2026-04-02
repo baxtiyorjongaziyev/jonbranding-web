@@ -31,14 +31,11 @@ const renderCompetitorValue = (value: string | boolean | null) => {
 interface ComparisonProps {
   onCtaClick: () => void;
   lang: string;
+  dictionary: any;
 }
 
-const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang }) => {
-    const [translations, setTranslations] = useState<any>(null);
-
-    useEffect(() => {
-        getDictionary(lang as Locale).then(dict => setTranslations(dict.servicesPage.comparison));
-    }, [lang]);
+const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang, dictionary }) => {
+    const translations = dictionary;
 
   if (!translations) {
       return null;
