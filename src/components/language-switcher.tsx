@@ -93,9 +93,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
       <Button
         variant="ghost"
         className={cn(
-            "w-auto justify-start gap-2 font-semibold",
+            "w-auto justify-start gap-2 font-semibold !ring-0 !ring-offset-0 !outline-none !shadow-none",
             scrolled ? "bg-white/20 text-foreground" : "bg-black/5 text-foreground"
         )}
+        style={{ border: 'none', boxShadow: 'none' }}
       >
         <UzFlagIcon />
         <span className="hidden sm:inline">O‘zbekcha</span>
@@ -113,9 +114,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
             aria-expanded={open}
             aria-label="Tilni o'zgartirish / Change language"
             className={cn(
-                "w-auto justify-start gap-2 font-semibold",
+                "w-auto justify-start gap-2 font-semibold !ring-0 !ring-offset-0 !outline-none !shadow-none focus:!ring-0 focus-visible:!ring-0 focus:!outline-none focus-visible:!outline-none focus-visible:!ring-offset-0",
                 scrolled ? "bg-white/20 hover:bg-white/30 text-foreground" : "bg-black/5 hover:bg-black/10 text-foreground"
             )}
+            style={{ border: 'none', boxShadow: 'none' }}
             onMouseEnter={handleOpen}
             onMouseLeave={handleClose}
           >

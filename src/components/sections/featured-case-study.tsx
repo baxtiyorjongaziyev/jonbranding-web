@@ -5,6 +5,7 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '../ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
+import Magnetic from '../ui/magnetic';
 
 const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any}) => {
     const caseData = {
@@ -91,10 +92,12 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                                 ))}
                             </ul>
 
-                            <Button onClick={handleCtaClick} className="mt-8 bg-accent text-white hover:bg-accent/90">
-                                {t.ctaButton}
-                                <ArrowRight className="ml-2 h-4 w-4" />
-                            </Button>
+                            <Magnetic>
+                                <Button onClick={handleCtaClick} className="mt-8 bg-accent text-white hover:bg-accent/90">
+                                    {t.ctaButton}
+                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                </Button>
+                            </Magnetic>
                         </div>
                         <div className="w-full max-w-sm mx-auto">
                             <div className="bg-black/20 p-2 rounded-2xl">

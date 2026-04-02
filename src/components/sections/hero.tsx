@@ -11,8 +11,8 @@ import Image from 'next/image';
 import { Card } from '../ui/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
-import React from 'react';
 import TiltCard from '../ui/tilt-card';
+import Magnetic from '../ui/magnetic';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
 
@@ -76,21 +76,23 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                     transition={{ delay: 0.4, duration: 0.6 }}
                     className="mt-10 flex justify-center lg:justify-start"
                 >
-                    <Button 
-                        onClick={() => onPrimaryClick()} 
-                        size="lg" 
-                        variant="default" 
-                        className="w-full sm:w-auto text-base px-8 py-6 shadow-xl rounded-full relative group overflow-hidden bg-primary hover:bg-primary/95 transition-all duration-300" 
-                        aria-label={dictionary.buttonTexts[buttonIndex]}
-                    >
-                        <span className="relative z-10 flex items-center">
-                            {dictionary.buttonTexts[buttonIndex]}
-                            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                        </span>
-                        <motion.div 
-                            className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                        />
-                    </Button>
+                    <Magnetic>
+                        <Button 
+                            onClick={() => onPrimaryClick()} 
+                            size="lg" 
+                            variant="default" 
+                            className="w-full sm:w-auto text-base px-8 py-6 shadow-xl rounded-full relative group overflow-hidden bg-primary hover:bg-primary/95 transition-all duration-300" 
+                            aria-label={dictionary.buttonTexts[buttonIndex]}
+                        >
+                            <span className="relative z-10 flex items-center">
+                                {dictionary.buttonTexts[buttonIndex]}
+                                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                            </span>
+                            <motion.div 
+                                className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+                            />
+                        </Button>
+                    </Magnetic>
                 </motion.div>
                 <motion.div 
                     initial={{ opacity: 0 }}

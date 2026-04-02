@@ -22,16 +22,19 @@ FROM node:20-alpine AS runner
 
 WORKDIR /app
 
-# Set the environment to production
+# Set the environment to production and disable telemetry
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED 1
 
-# Copy the built app from the builder stage
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
-
-# Expose the port the app runs on
+# Expose the port the app runs on (Cloud Run / Firebase App Hosting standard)
+ENV PORT 8080
 EXPOSE 8080
 
-# The command to run the application
-CMD ["npm", "start"]
+# Copy necessary files from builder stage
+# Automatically leverages output: 'standalone' from next.config.js
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+# The command to run the application using the standalone server
+CMD ["node", "server.js"]

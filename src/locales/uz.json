@@ -126,13 +126,13 @@
     },
     "hero": {
         "headlines": [
+            "Brending agentligi |Toshkentda|: Jon.Branding.",
+            "Logotip yaratish |natija uchun|.",
             "Brendingiz |sotmayaptimi?| Uni tuzatamiz.",
             "Raqobatchilardan |ajralib turing|.",
-            "Brendingizni nafaqat chiroyli, balki |daromadli| qiling.",
-            "Mijozlarni o'zingizga |oshiq qiling|. Qayta-qayta.",
-            "Kichik biznesdan |kuchli brendgacha|. Bir qadamda."
+            "Brendingizni nafaqat chiroyli, balki |daromadli| qiling."
         ],
-        "description": "Biz shunchaki logotip chizmaymiz. Toshkentdagi yetakchi brending agentligi sifatida biz biznesingiz uchun <span class='font-bold text-foreground'>natijaga yo'naltirilgan</span>, strategiyaga asoslangan brend tizimini quramiz. Neyming, brend strategiyasi va logotip dizayni xizmatlarini taklif etamiz.",
+        "description": "Biz shunchaki logotip chizmaymiz. Toshkentdagi yetakchi <span class='font-bold text-foreground underline decoration-primary/30'>brending agentligi</span> sifatida biz biznesingiz uchun <span class='font-bold text-foreground'>natijaga yo'naltirilgan</span> strategiya quramiz. Neyming va professional logotip dizayni.",
         "buttonTexts": [
             "Brendimni tahlil qilish",
             "Sotuvlarni oshirishga yordam",
@@ -308,14 +308,14 @@
     },
     "founder": {
         "title": "Asoschi: Baxtiyorjon Gaziyev",
-        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biznes egalariga o'z brendlarini yangi bosqichga olib chiqishda yordam beraman. Maqsadim — shunchaki dizayn emas, balki biznes natijasini beradigan brend tizimini qurish.",
+        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biznes egalariga shunchaki logotip emas, balki yillar davomida xizmat qiladigan <span class='text-primary font-bold'>kuchli brend ekotizimini</span> qurishda yordam beraman. Bizning yondashuvimiz — vizual go'zallikni strategik tahlil bilan birlashtirish va har bir mijoz uchun o'sish zanjirini yaratishdir.",
         "points": [
-            { "icon": "Medal", "text": "50 dan ortiq loyihalar" },
-            { "icon": "Globe", "text": "Xalqaro tajriba" },
-            { "icon": "Zap", "text": "Tezkor va samarali aloqa" },
-            { "icon": "Users", "text": "Shaffof ish jarayoni" }
+            { "icon": "Medal", "text": "50+ muvaffaqiyatli brendlar" },
+            { "icon": "Globe", "text": "Xalqaro standartdagi portfolio" },
+            { "icon": "Zap", "text": "Natijaga yo'naltirilgan aloqa" },
+            { "icon": "Users", "text": "Shaxsan nazorat va kafolat" }
         ],
-        "phoneButton": "Telefon orqali bog'lanish",
+        "phoneButton": "Shaxsan bog'lanish",
         "telegramButton": "Telegramda yozish"
     },
     "process": {
