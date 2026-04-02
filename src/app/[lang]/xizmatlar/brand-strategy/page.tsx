@@ -21,10 +21,14 @@ const BrandStrategyPage: FC = () => {
   const params = useParams();
   const lang = params.lang as string;
   const [translations, setTranslations] = useState<any>(null);
+  const [fullDictionary, setFullDictionary] = useState<any>(null);
 
   useEffect(() => {
     if (lang) {
-      getDictionary(lang as Locale).then(dict => setTranslations(dict.brandStrategyPage));
+      getDictionary(lang as Locale).then(dict => {
+        setFullDictionary(dict);
+        setTranslations(dict.brandStrategyPage);
+      });
     }
   }, [lang]);
 
@@ -118,8 +122,8 @@ const BrandStrategyPage: FC = () => {
             subtitle={translations.process_subtitle}
             steps={processSteps}
         />
-        <WhyUs onCtaClick={handleOpenModal} lang={lang} />
-        <ServiceSections lang={lang} />
+        <WhyUs onCtaClick={handleOpenModal} lang={lang} dictionary={fullDictionary?.whyUs} />
+        <ServiceSections lang={lang} dictionary={fullDictionary?.serviceSections} />
         </main>
     </>
   );

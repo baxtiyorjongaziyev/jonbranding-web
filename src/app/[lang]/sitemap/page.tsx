@@ -99,7 +99,9 @@ const SitemapPage = async (props: Props) => {
                         className="group flex items-start gap-2 text-gray-700 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm"
                         aria-label={link.label}
                       >
-                        {link.icon && <link.icon className="h-5 w-5 mt-0.5 text-gray-400 group-hover:text-primary transition-colors flex-shrink-0" aria-hidden="true" />}
+                        {link && 'icon' in link && link.icon && (
+                          <link.icon className="h-5 w-5 mt-0.5 text-gray-400 group-hover:text-primary transition-colors flex-shrink-0" aria-hidden="true" />
+                        )}
                         <span className="flex-grow">{link.label}</span>
                       </Link>
                     </li>

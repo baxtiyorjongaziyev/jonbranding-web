@@ -111,7 +111,7 @@ const AiAssistant: FC<{lang: 'uz' | 'ru', dictionary: any}> = ({ lang, dictionar
 
     try {
       const apiHistory = updatedMessages.slice(1).map(msg => ({ 
-          role: msg.sender === 'user' ? 'user' : 'bot',
+          role: msg.sender as 'user' | 'bot',
           content: msg.text
       }));
       

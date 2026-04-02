@@ -35,15 +35,15 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
   return (
     <>
       <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary.servicesHero} />
-      <WhyUs onCtaClick={handleOpenModal} lang={lang} />
+      <WhyUs onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.whyUs} />
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
-      <ServiceSections lang={lang} />
+      <ServiceSections lang={lang} dictionary={dictionary.serviceSections} />
       <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary.servicesPage.packageBuilder} />
       <UrgencyBlock />
       <PersonalOfferBlock onCtaClick={handleOpenModal} />
       <QueueStatus onCtaClick={handleOpenModal} />
       <Testimonials lang={lang} dictionary={dictionary.testimonials} />
-      <Comparison onCtaClick={handleOpenModal} lang={lang} />
+      <Comparison onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.comparison} />
       <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
     </>
   );

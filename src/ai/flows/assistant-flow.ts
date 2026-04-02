@@ -68,7 +68,7 @@ const sendLeadToTelegram = ai.defineTool(
     inputSchema: SendLeadInputSchema,
     outputSchema: z.string(),
   },
-  async input => {
+  async (input: z.infer<typeof SendLeadInputSchema>) => {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
     const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
@@ -219,18 +219,23 @@ const assistantFlow = ai.defineFlow(
     inputSchema: AssistantInputSchema,
     outputSchema: AssistantOutputSchema,
   },
-  async input => {
-    const history = (input.history || []).map(message => ({
-      role: message.role as 'user' | 'bot' | 'tool',
-      content: message.content,
+  async (input: AssistantInput) => {
+    const messages: any[] = (input.history || []).map(message => ({
+      role: message.role === 'bot' ? 'model' : 'user',
+      content: [{ text: message.content }],
     }));
+    
+    // Add the current query as the latest user message
+    messages.push({
+      role: 'user',
+      content: [{ text: input.query }]
+    });
 
     const systemPrompt = input.lang === 'ru' ? systemPromptRu : systemPromptUz;
 
     const response = await ai.generate({
       system: systemPrompt,
-      prompt: input.query,
-      history,
+      messages,
       tools: [sendLeadToTelegram],
       output: {
         schema: AssistantOutputSchema,
