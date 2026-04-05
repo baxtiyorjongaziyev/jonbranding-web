@@ -41,6 +41,10 @@ const STEP2_EXTRA_LEGAL = 4 * BHM;
 const EXPERT_BASE = 2 * BHM;
 const EXPERT_EXTRA = 1 * BHM;
 
+// Agency Service Fees (Flat rate)
+const AGENCY_FEE_REGULAR = 5000000;
+const AGENCY_FEE_FAST = 7000000;
+
 const clampClassCount = (n: number) => {
   const x = Number(n);
   if (!Number.isFinite(x)) return 1;
@@ -84,11 +88,11 @@ export function calculateFees({
   const step2Extra = (cc - 1) * (isYuridik ? STEP2_EXTRA_LEGAL : STEP2_EXTRA_INDIVIDUAL); 
   const step2Total = step2Base + step2Extra;
 
-  // Agent Service Fee - Davlat bojlariga teng, tezkorning esa yarmi
-  const agentBase = step1StateBase + step2Base;
-  const agentExtra = step1StateExtra + step2Extra;
-  const agentSpeedPrem = speed === 'tez' ? Math.round(expediteTotal / 2) : 0;
-  const agentTotal = agentBase + agentExtra + agentSpeedPrem;
+  // Agent Service Fee - Fixed flat rate as per latest request
+  const agentTotal = speed === 'tez' ? AGENCY_FEE_FAST : AGENCY_FEE_REGULAR;
+  const agentBase = agentTotal; // For compatibility
+  const agentExtra = 0;
+  const agentSpeedPrem = 0;
 
   const total = ekspertTotal + agentTotal + step1StateTotal + expediteTotal + step2Total;
 
@@ -111,7 +115,7 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
 }) => {
     return (
         <div className="relative flex w-full rounded-full bg-secondary p-1">
-            {options?.map(option => (
+            {Array.isArray(options) && options.length > 0 ? options.map(option => (
                 <div key={option.value} className="relative flex-1">
                     {selected === option.value && (
                         <motion.div
@@ -121,6 +125,7 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
                         />
                     )}
                     <button
+                        type="button"
                         onClick={() => onSelect(option.value)}
                         className={cn(
                             "relative w-full rounded-full py-2 px-4 text-center text-sm font-semibold transition-colors",
@@ -130,7 +135,7 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
                         {option.label}
                     </button>
                 </div>
-            ))}
+            )) : null}
         </div>
     );
 };
@@ -196,10 +201,10 @@ export default function TrademarkCalculator({ translations }: { translations: an
       `Brend: ${data.brand}`,
       `${translations?.activityLabel ?? 'Faoliyat'}: ${data.activity || (translations?.notSpecified ?? '-')}`,
       '---',
-      `${translations?.personTypeLabel ?? 'Shaxs'}: ${data.isYuridik ? (translations?.personTypeOptions?.[1]?.label ?? 'Yuridik') : (translations?.personTypeOptions?.[0]?.label ?? 'Jismoniy')}`,
+      `${translations?.personTypeLabel ?? 'Shaxs'}: ${data.isYuridik ? ((translations?.personTypeOptions && translations.personTypeOptions[1]?.label) || 'Yuridik') : ((translations?.personTypeOptions && translations.personTypeOptions[0]?.label) || 'Jismoniy')}`,
       `${translations?.classCountLabel ?? 'Klasslar'}: ${fees?.classCount ?? 1}`,
-      `${translations?.speedLabel ?? 'Speed'}: ${data.speed === 'tez' ? (translations?.speedOptions?.[1]?.label ?? 'Tez') : (translations?.speedOptions?.[0]?.label ?? 'Oddiy')}`,
-      `${translations?.expertCheckLabel ?? 'Ekspert'}: ${data.hasEkspert ? (translations?.expertCheckOptions?.[0]?.label ?? 'Ha') : (translations?.expertCheckOptions?.[1]?.label ?? 'Yoq')}`,
+      `${translations?.speedLabel ?? 'Speed'}: ${data.speed === 'tez' ? ((translations?.speedOptions && translations.speedOptions[1]?.label) || 'Tez') : ((translations?.speedOptions && translations.speedOptions[0]?.label) || 'Oddiy')}`,
+      `${translations?.expertCheckLabel ?? 'Ekspert'}: ${data.hasEkspert ? ((translations?.expertCheckOptions && translations.expertCheckOptions[0]?.label) || 'Ha') : ((translations?.expertCheckOptions && translations.expertCheckOptions[1]?.label) || 'Yoq')}`,
       '---',
       `${(translations?.totalCostTitle ?? 'Jami').toUpperCase()}: ${formatPrice(fees?.total ?? 0, translations?.currency ?? 'UZS')}`,
     ].join('\n');
@@ -274,10 +279,10 @@ export default function TrademarkCalculator({ translations }: { translations: an
                                 <Minus className="h-4 w-4"/>
                             </IconButton>
                             <Slider
-                                value={[field.value]}
-                                onValueChange={(value) => field.onChange(value[0])}
+                                value={[field.value || 1]}
+                                onValueChange={(value) => field.onChange(value && value.length > 0 ? value[0] : 1)}
                                 min={1} max={45} step={1} className="flex-1"
-                                aria-label={translations.classCountLabel}
+                                aria-label={translations?.classCountLabel}
                             />
                             <IconButton onClick={() => form.setValue('classCount', clampClassCount(field.value + 1))} disabled={field.value >= 45}>
                                 <Plus className="h-4 w-4"/>
@@ -368,9 +373,19 @@ export default function TrademarkCalculator({ translations }: { translations: an
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Pill>{fees?.classCount ?? 1} {translations?.classLabel}</Pill>
-            <Pill>{watchFields.isYuridik ? (translations?.personTypeOptions?.[1]?.label ?? 'Yuridik') : (translations?.personTypeOptions?.[0]?.label ?? 'Jismoniy')}</Pill>
-            <Pill>{watchFields.speed==='tez' ? (translations?.speedOptions?.[1]?.labelShort ?? 'Tez') : (translations?.speedOptions?.[0]?.labelShort ?? 'Oddiy')}</Pill>
-            {watchFields.hasEkspert && <Pill>{translations?.expertCheckLabelShort ?? 'Ekspert+'}</Pill>}
+            <Pill>
+                {watchFields.isYuridik 
+                    ? ((translations?.personTypeOptions && translations.personTypeOptions[1]?.label) || 'Yuridik') 
+                    : ((translations?.personTypeOptions && translations.personTypeOptions[0]?.label) || 'Jismoniy')}
+            </Pill>
+            <Pill>
+                {watchFields.speed === 'tez' 
+                    ? ((translations?.speedOptions && translations.speedOptions[1]?.labelShort) || 'Tez') 
+                    : ((translations?.speedOptions && translations.speedOptions[0]?.labelShort) || 'Oddiy')}
+            </Pill>
+            {watchFields.hasEkspert && (
+                <Pill>{translations?.expertCheckLabelShort || 'Ekspert+'}</Pill>
+            )}
           </div>
           <div className="mt-1 text-xs leading-5 opacity-90">{translations?.totalCostNote}</div>
         </Card>
