@@ -128,11 +128,12 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           </div>
         </div>
 
-        {/* Bottom Section: Massive Logo */}
-        <div className="relative mt-10 select-none pointer-events-none">
-          <h2 className="text-[14vw] sm:text-[18vw] font-bold leading-none text-white tracking-tighter text-center opacity-90 transition-all">
-            Jon.Branding
-          </h2>
+        <div className="relative mt-4 select-none pointer-events-none flex justify-center">
+          <img 
+            src="/assets/logos/logo-white.svg" 
+            alt="Jon Branding Agency"
+            className="w-full max-w-[90vw] h-auto opacity-90 transition-all filter drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+          />
           {/* Subtle Glow behind the logo */}
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-32 bg-blue-600/20 blur-[120px] rounded-full -z-10" />
         </div>
