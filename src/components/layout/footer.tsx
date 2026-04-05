@@ -32,6 +32,14 @@ type Dictionary = {
     all_rights_reserved: string;
     back_to_top: string;
     patent_calculator: string;
+    solutions: string;
+    resources: string;
+    agency: string;
+    contact_us: string;
+    explore_work: string;
+    read_blogs: string;
+    privacy_policy_link: string;
+    terms_of_use_link: string;
 }
 
 const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
@@ -61,7 +69,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           {/* Solutions / Packaging */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Yechimlar</h3>
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.solutions}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={`/${lang}/xizmatlar/qadoq-dizayni`} className="hover:text-white transition-colors">{dictionary.packaging_design}</Link></li>
               <li><Link href={`/${lang}/xizmatlar/brand-strategiyasi`} className="hover:text-white transition-colors">{dictionary.brand_strategy}</Link></li>
@@ -71,7 +79,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           {/* Resources */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Resurslar</h3>
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.resources}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={`/${lang}/blog`} className="hover:text-white transition-colors">{dictionary.blog}</Link></li>
               <li><Link href={`/${lang}/quiz`} className="hover:text-white transition-colors">{dictionary.branding_test}</Link></li>
@@ -82,7 +90,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           {/* Agency */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Agentlik</h3>
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.agency}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={`/${lang}/#portfolio`} className="hover:text-white transition-colors">{dictionary.portfolio}</Link></li>
               <li><Link href={`/${lang}/#founder`} className="hover:text-white transition-colors">{dictionary.founder}</Link></li>
@@ -94,7 +102,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           {/* Hire Us Section */}
           <div className="space-y-8 lg:col-span-1">
             <div className="space-y-4">
-              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Bog'lanish</h3>
+              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.contact_us}</h3>
               <div className="space-y-4">
                 <a 
                   href="tel:+998336450097"
@@ -120,13 +128,13 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 href={`/${lang}/portfolio`}
                 className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
-                Explore our work →
+                {dictionary.explore_work}
               </Link>
               <Link 
                 href={`/${lang}/blog`}
                 className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
-                Read latest blogs →
+                {dictionary.read_blogs}
               </Link>
             </div>
           </div>
@@ -136,8 +144,8 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div className="flex flex-col lg:flex-row justify-between items-center gap-8 py-8 border-t border-white/5">
           <div className="flex flex-wrap justify-center lg:justify-start items-center gap-x-8 gap-y-4 text-xs text-gray-500 uppercase tracking-wider">
             <p suppressHydrationWarning>© {new Date().getFullYear()} Jon.Branding Agency.</p>
-            <Link href={`/${lang}/privacy`} className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href={`/${lang}/terms`} className="hover:text-white transition-colors">Terms of Use</Link>
+            <Link href={`/${lang}/privacy`} className="hover:text-white transition-colors">{dictionary.privacy_policy_link}</Link>
+            <Link href={`/${lang}/terms`} className="hover:text-white transition-colors">{dictionary.terms_of_use_link}</Link>
           </div>
 
           <div className="flex items-center gap-8">
@@ -167,11 +175,11 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
         {/* Massive Brand Footer (Finch Style) */}
         <div className="relative select-none pointer-events-none pt-10 pb-16">
-          <h2 className="text-[13vw] font-light leading-[0.8] text-white/90 tracking-[-0.06em] text-center transition-all drop-shadow-[0_0_30px_rgba(37,99,235,0.2)] whitespace-nowrap">
+          <h2 className="text-[11vw] font-light leading-[0.8] text-white/90 tracking-[-0.06em] text-center transition-all drop-shadow-[0_0_30px_rgba(37,99,235,0.4)] whitespace-nowrap">
             Jon.Branding Agency
           </h2>
           {/* Finch-style Vibrant Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-60 bg-blue-600/20 blur-[150px] rounded-full -z-10 animate-pulse transition-opacity duration-1000" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-80 bg-blue-500/40 blur-[120px] rounded-full -z-10 animate-pulse transition-opacity duration-1000" />
         </div>
       </div>
     </footer>
