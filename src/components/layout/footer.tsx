@@ -1,13 +1,12 @@
-
 'use client';
 
 import Link from 'next/link';
-import { Logo } from '@/components/icons/logo';
 import { ArrowUp, Instagram, Linkedin, Send } from 'lucide-react';
 import { Separator } from '../ui/separator';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState, FC } from 'react';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
+import { cn } from '@/lib/utils';
 
 type Dictionary = {
     contact: string;
@@ -37,143 +36,105 @@ type Dictionary = {
 
 const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   if (!dictionary) return null;
-  const [isHovered, setIsHovered] = useState(false);
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const mainPageLinks = [
-      { href: `/${lang}/#portfolio`, label: dictionary.portfolio },
-      { href: `/${lang}/#founder`, label: dictionary.founder },
-      { href: `/${lang}/#process`, label: dictionary.process },
-      { href: `/${lang}/#faq`, label: dictionary.faq },
-  ];
-
-  const serviceLinks = [
-      { href: `/${lang}/xizmatlar/neyming`, label: dictionary.naming },
-      { href: `/${lang}/xizmatlar/logo-dizayni`, label: dictionary.logo_design },
-      { href: `/${lang}/xizmatlar/firmenniy-stil`, label: dictionary.corporate_style },
-      { href: `/${lang}/xizmatlar/brandbook`, label: dictionary.brandbook },
-      { href: `/${lang}/xizmatlar/qadoq-dizayni`, label: dictionary.packaging_design },
-  ];
-  
-  const additionalLinks = [
-      { href: `/${lang}/xizmatlar`, label: dictionary.service_prices },
-      { href: `/${lang}/quiz`, label: dictionary.branding_test },
-      { href: `/${lang}/blog`, label: dictionary.blog },
-      { href: `/${lang}/xizmatlar/patent-kalkulyatori`, label: dictionary.patent_calculator },
-      { href: `/${lang}/sitemap`, label: dictionary.sitemap },
-  ];
-
   return (
-    <footer className="bg-black text-gray-300 pt-16 sm:pt-24 pb-8" suppressHydrationWarning>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Contact */}
-          <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.contact}</h3>
-            <div className="mt-4 space-y-4">
-               <a 
-                 href="https://t.me/baxtiyorjon_gaziyev" 
-                 target="_blank" 
-                 rel="noopener noreferrer" 
-                 className="block group" 
-                 aria-label="Jon Branding Telegram Profil"
-                 onClick={() => trackContactClick('telegram')}
-               >
-                  <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">@baxtiyorjon_gaziyev</p>
-                  <p className="text-xs text-gray-400">{dictionary.by_telegram}</p>
-               </a>
-               <a 
-                 href="tel:+998336450097" 
-                 className="block group" 
-                 aria-label="Jon Branding Telefon raqami"
-                 onClick={() => trackContactClick('phone')}
-               >
-                  <p className="font-semibold text-white group-hover:text-accent transition-colors text-lg">+998 33 645 00 97</p>
-                  <p className="text-xs text-gray-400">{dictionary.by_phone}</p>
-               </a>
+    <footer className="relative bg-black text-white pt-24 pb-0 overflow-hidden" suppressHydrationWarning>
+      {/* Background Gradient Effect */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-[#0a0a20] pointer-events-none opacity-50" />
+      
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Section: Contact Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-20 text-center lg:text-left">
+          {/* Email */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-medium text-blue-500 uppercase tracking-[0.2em]">Email</h3>
+            <div className="space-y-2">
+              <a 
+                href="mailto:baxtiyorjon.gaziyev@gmail.com" 
+                className="text-xl sm:text-2xl font-semibold hover:text-blue-400 transition-colors block"
+              >
+                baxtiyorjon.gaziyev@gmail.com
+              </a>
+              <p className="text-sm text-gray-500">(For Business Inquiries)</p>
             </div>
           </div>
-          
-          {/* Main Page Links */}
-          <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.main_page}</h3>
-            <ul className="mt-4 space-y-2">
-              {mainPageLinks.map(link => (
-                  <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
-              ))}
-            </ul>
+
+          {/* Call */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-medium text-blue-500 uppercase tracking-[0.2em]">Call</h3>
+            <div className="space-y-2">
+              <a 
+                href="tel:+998336450097" 
+                onClick={() => trackContactClick('phone')}
+                className="text-xl sm:text-2xl font-semibold hover:text-blue-400 transition-colors block"
+              >
+                +998 33 645 00 97
+              </a>
+              <p className="text-sm text-gray-500">(Direct Line)</p>
+            </div>
           </div>
 
-          {/* Services */}
-          <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.services}</h3>
-            <ul className="mt-4 space-y-2">
-              {serviceLinks.map(link => (
-                  <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Additional Links */}
-          <div>
-            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{dictionary.additional}</h3>
-             <ul className="mt-4 space-y-2">
-                {additionalLinks.map(link => (
-                    <li key={link.href}><Link href={link.href} className="text-gray-300 hover:text-white transition-colors">{link.label}</Link></li>
-                ))}
-            </ul>
+          {/* Socials/Telegram */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-medium text-blue-500 uppercase tracking-[0.2em]">Telegram</h3>
+            <div className="space-y-2">
+              <a 
+                href="https://t.me/baxtiyorjon_gaziyev" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={() => trackContactClick('telegram')}
+                className="text-xl sm:text-2xl font-semibold hover:text-blue-400 transition-colors block"
+              >
+                @baxtiyorjon_gaziyev
+              </a>
+              <p className="text-sm text-gray-500">(Shadow Advisor)</p>
+            </div>
           </div>
         </div>
 
-        <Separator className="my-12 bg-gray-700" />
-        
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-           <motion.div
-              onHoverStart={() => setIsHovered(true)}
-              onHoverEnd={() => setIsHovered(false)}
-              className="relative flex items-center text-sm text-gray-400 order-2 sm:order-1 cursor-pointer"
+        {/* Middle Section: Meta Links & Secondary Navigation */}
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 py-10 border-t border-white/10 mt-10">
+          <div className="flex flex-wrap justify-center lg:justify-start items-center gap-x-8 gap-y-4 text-sm text-gray-400">
+            <p suppressHydrationWarning>© {new Date().getFullYear()} Jon.Branding Agency.</p>
+            <Link href={`/${lang}/privacy`} className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href={`/${lang}/terms`} className="hover:text-white transition-colors">Terms of Use</Link>
+          </div>
+
+          <div className="flex items-center gap-8 order-1 lg:order-2">
+            <div className="flex items-center gap-6">
+              <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all transform hover:scale-110" aria-label="Instagram">
+                <Instagram size={20} />
+              </a>
+              <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all transform hover:scale-110" aria-label="Telegram Channel">
+                <Send size={20} />
+              </a>
+              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all transform hover:scale-110" aria-label="LinkedIn">
+                <Linkedin size={20} />
+              </a>
+            </div>
+            
+            <Separator orientation="vertical" className="h-6 bg-white/20 hidden sm:block" />
+
+            <button 
+              onClick={handleScrollTop} 
+              className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
             >
-              <p suppressHydrationWarning>&copy; {new Date().getFullYear()} Jon.Branding.</p>
-              <AnimatePresence>
-                {isHovered && (
-                  <motion.div
-                    initial={{ opacity: 0, width: 0, marginLeft: 0 }}
-                    animate={{ opacity: 1, width: 'auto', marginLeft: '0.25rem' }}
-                    exit={{ opacity: 0, width: 0, marginLeft: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden whitespace-nowrap"
-                  >
-                    <span>{dictionary.all_rights_reserved}</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-           
-           <div className="flex items-center gap-6 order-1 sm:order-2">
-             <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Jon Branding Instagram sahifasi">
-               <Instagram size={20} />
-             </a>
-             <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Jon Branding Telegram kanali">
-               <Send size={20} />
-             </a>
-             <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Jon Branding LinkedIn profili">
-               <Linkedin size={20} />
-             </a>
-           </div>
-
-           <div className="hidden lg:flex order-3">
-              <button onClick={handleScrollTop} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors" aria-label="Yuqoriga qaytish">
-                {dictionary.back_to_top} <ArrowUp size={16} />
-              </button>
-           </div>
+              {dictionary.back_to_top} 
+              <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
+            </button>
+          </div>
         </div>
 
-        <div className="mt-16 text-center">
-             <Link href={`/${lang}`} aria-label="Bosh sahifaga qaytish">
-                <Logo isWhite />
-             </Link>
+        {/* Bottom Section: Massive Logo */}
+        <div className="relative mt-10 select-none pointer-events-none">
+          <h2 className="text-[14vw] sm:text-[18vw] font-bold leading-none text-white tracking-tighter text-center opacity-90 transition-all">
+            Jon.Branding
+          </h2>
+          {/* Subtle Glow behind the logo */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-32 bg-blue-600/20 blur-[120px] rounded-full -z-10" />
         </div>
       </div>
     </footer>
