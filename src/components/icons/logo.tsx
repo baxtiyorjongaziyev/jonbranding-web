@@ -1,14 +1,15 @@
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export const Logo = ({ isWhite = false, className }: { isWhite?: boolean, className?: string }) => (
     <div className={cn("flex items-center", className)} suppressHydrationWarning>
-        <div className="flex flex-col items-center">
-            <span className={cn("text-xl font-bold tracking-tighter leading-none", isWhite ? "text-white" : "text-dark-blue")}>
-                Jon<span className={cn(isWhite ? "text-sky-blue" : "text-accent")}>.</span>Branding
-            </span>
-            <span className={cn("text-xs font-medium tracking-widest uppercase w-full text-center", isWhite ? "text-white/80" : "text-muted-foreground")}>
-                Agency
-            </span>
-        </div>
+        <Image 
+            src={isWhite ? "/logos/logo-white.svg" : "/logos/logo-black.svg"}
+            alt="Jon Branding Agency"
+            width={180}
+            height={40}
+            className="h-10 w-auto object-contain"
+            priority
+        />
     </div>
 );
