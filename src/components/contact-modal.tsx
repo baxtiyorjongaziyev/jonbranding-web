@@ -182,7 +182,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-lg rounded-3xl p-0 gap-0 flex flex-col max-h-[92dvh] overflow-hidden">
+      <DialogContent className="sm:max-w-lg rounded-3xl p-0 gap-0 flex flex-col max-h-[90dvh]">
         {/* Header gradient */}
         <div className="bg-gradient-to-br from-primary/10 via-sky-blue/20 to-primary/5 px-6 pt-6 pb-4">
           <DialogHeader>
@@ -231,7 +231,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
           )}
         </div>
 
-        <div className="px-6 pb-6 pt-4 overflow-y-auto flex-1 overscroll-contain">
+        <div className="px-6 pb-6 pt-4 overflow-y-auto flex-1 min-h-0 overscroll-contain">
         {!translations ? (
           <div className="flex flex-col items-center justify-center p-8 gap-4 min-h-[300px]">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -382,7 +382,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     )} />
                 )}
 
-                <div className="flex justify-between items-center pt-4 border-t border-border/50 sticky bottom-0 bg-background z-10">
+                <div className="flex justify-between items-center pt-4 mt-2 border-t border-border/50">
                     <Button type="button" variant="ghost" onClick={handlePrev} disabled={step === 1 || isSubmitting} className="rounded-xl gap-2">
                         <ArrowLeft className="h-4 w-4" />{translations.backButton}
                     </Button>
