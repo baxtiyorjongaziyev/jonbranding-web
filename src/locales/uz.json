@@ -51,7 +51,15 @@
         "sitemap": "Sayt xaritasi",
         "all_rights_reserved": "Barcha huquqlar himoyalangan.",
         "back_to_top": "Yuqoriga qaytish",
-        "patent_calculator": "Patent kalkulyatori"
+        "patent_calculator": "Patent kalkulyatori",
+        "solutions": "Yechimlar",
+        "resources": "Resurslar",
+        "agency": "Agentlik",
+        "contact_us": "Bog'lanish",
+        "explore_work": "Portfolio ko'rish →",
+        "read_blogs": "Blogni o'qish →",
+        "privacy_policy_link": "Maxfiylik siyosati",
+        "terms_of_use_link": "Foydalanish shartlari"
     },
     "cookieConsent": {
         "message": "Saytimizda shirin 'cookie'lar bor. Ular bizga sizni eslab qolishga yordam beradi. Agar rozilik bersangiz, ularni birga baham ko'ramiz.",

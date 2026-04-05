@@ -51,7 +51,15 @@
     "sitemap": "Sitemap",
     "all_rights_reserved": "All rights reserved.",
     "back_to_top": "Back to top",
-    "patent_calculator": "Patent Calculator"
+    "patent_calculator": "Patent Calculator",
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "agency": "Agency",
+    "contact_us": "Contact",
+    "explore_work": "Explore our work →",
+    "read_blogs": "Read latest blogs →",
+    "privacy_policy_link": "Privacy Policy",
+    "terms_of_use_link": "Terms of Use"
   },
   "cookieConsent": {
     "message": "We use cookies to improve your experience.",

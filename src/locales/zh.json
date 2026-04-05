@@ -51,7 +51,15 @@
     "sitemap": "网站地图",
     "all_rights_reserved": "版权所有。",
     "back_to_top": "返回顶部",
-    "patent_calculator": "专利计算器"
+    "patent_calculator": "专利计算器",
+    "solutions": "解决方案",
+    "resources": "资源",
+    "agency": "机构",
+    "contact_us": "联系我们",
+    "explore_work": "探索我们的作品 →",
+    "read_blogs": "阅读最新博客 →",
+    "privacy_policy_link": "隐私政策",
+    "terms_of_use_link": "使用条款"
   },
   "cookieConsent": {
     "message": "我们的网站使用美味的Cookie。它们帮助我们记住您。如果您同意，让我们一起分享它们。",
