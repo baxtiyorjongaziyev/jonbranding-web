@@ -1,6 +1,8 @@
 import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import '../globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -9,6 +11,29 @@ import MainLayout from '@/components/layout/main-layout';
 import StickyCTA from '@/components/ui/sticky-cta';
 import LeadMagnetPopup from '@/components/ui/lead-magnet-popup';
 import { Poppins } from 'next/font/google';
+
+const BASE_URL = 'https://jonbranding.uz';
+const OG_IMAGE_URL = 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Jon.Branding | Professional Brending Agentligi",
+    template: "%s | Jon.Branding"
+  },
+  description: "Biznesingiz uchun natijali brend strategiyasi, neyming va logotip dizayni.",
+  openGraph: {
+    type: 'website',
+    locale: 'uz_UZ',
+    url: BASE_URL,
+    siteName: 'Jon.Branding',
+    images: [{ url: OG_IMAGE_URL, width: 1200, height: 630, alt: 'Jon Branding Agency' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [OG_IMAGE_URL],
+  },
+};
 
 const poppins = Poppins({
   subsets: ['latin'],
