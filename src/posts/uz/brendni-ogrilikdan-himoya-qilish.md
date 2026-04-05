@@ -3,7 +3,7 @@ title: "Brendingizni o'g'ri(lik)dan qanday himoya qilish kerak? (2026)"
 date: "2026-04-07"
 author: "Jon Branding"
 description: "Raqobatchilar sizning brend nomingizni va logotipingizni o'g'irlashidan charchadingizmi? Legal patentlash va himoya qilish bo'yicha amaliy maslahatlar."
-image: "/blog/brand-protection.webp"
+image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1080&q=80"
 imageHint: "Brendni qonuniy himoya qilish sirlari"
 ---
 

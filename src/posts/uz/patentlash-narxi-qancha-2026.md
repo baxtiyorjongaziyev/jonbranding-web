@@ -3,7 +3,7 @@ title: "Patentlash narxi qancha? 2026-yilda davlat bojlari va xizmat haqi"
 date: "2026-04-06"
 author: "Jon Branding"
 description: "O'zbekistonda brendni patentlash uchun qancha mablag' talab etiladi? Davlat bojlari, ekspertiza xarajatlari va professional agentlik xizmati haqida batafsil tushuncha."
-image: "/blog/patent-cost-analysis.webp"
+image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1080&q=80"
 imageHint: "2026-yilda patentlash xarajatlari tahlili"
 ---
 

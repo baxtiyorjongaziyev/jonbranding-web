@@ -3,7 +3,7 @@ title: "O'zbekistonda Tovar belgisini ro'yxatdan o'tkazish: To'liq qo'llanma (20
 date: "2026-04-05"
 author: "Jon Branding"
 description: "O'zbekistonda biznesingizni va logotipingizni qanday qilib qonuniy himoya qilish mumkin? Tovar belgisini ro'yxatdan o'tkazish bosqichlari, narxlari va muddati haqida batafsil ma'lumot (2026)."
-image: "/blog/patent-guide-hero.webp"
+image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1080&q=80"
 imageHint: "O'zbekistonda tovar belgisini ro'yxatdan o'tkazish bo'yicha to'liq qo'llanma"
 ---
 

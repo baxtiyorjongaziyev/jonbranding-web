@@ -3,7 +3,7 @@ title: "How Much Does a Patent Cost in Uzbekistan? Fees & Agency Services (2026)
 date: "2026-04-06"
 author: "Jon Branding"
 description: "How much does it cost to patent a brand in Uzbekistan? A transparent analysis of government fees, examination costs, and professional agency services (BRV 2026)."
-image: "/blog/patent-cost-analysis.webp"
+image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1080&q=80"
 imageHint: "Patent cost analysis for Uzbekistan 2026"
 ---
 
