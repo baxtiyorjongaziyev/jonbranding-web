@@ -46,81 +46,132 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-[#0a0a20] pointer-events-none opacity-50" />
       
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Section: Contact Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 text-center max-w-4xl mx-auto">
-          {/* Call */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-medium text-blue-500 uppercase tracking-[0.2em]">Call</h3>
-            <div className="space-y-2">
-              <a 
-                href="tel:+998336450097" 
-                onClick={() => trackContactClick('phone')}
-                className="text-xl sm:text-3xl font-semibold hover:text-blue-400 transition-colors block"
-              >
-                +998 33 645 00 97
-              </a>
-              <p className="text-sm text-gray-500">(Direct Line)</p>
-            </div>
+        {/* Top Section: Multi-Column Grid (Finch.design style) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 mb-20">
+          {/* Services */}
+          <div className="space-y-6">
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.services}</h3>
+            <ul className="space-y-4 text-sm text-gray-400">
+              <li><Link href={`/${lang}/xizmatlar/neyming`} className="hover:text-white transition-colors">{dictionary.naming}</Link></li>
+              <li><Link href={`/${lang}/xizmatlar/logo-dizayni`} className="hover:text-white transition-colors">{dictionary.logo_design}</Link></li>
+              <li><Link href={`/${lang}/xizmatlar/firmenniy-stil`} className="hover:text-white transition-colors">{dictionary.corporate_style}</Link></li>
+              <li><Link href={`/${lang}/xizmatlar/brandbook`} className="hover:text-white transition-colors">{dictionary.brandbook}</Link></li>
+            </ul>
           </div>
 
-          {/* Socials/Telegram */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-medium text-blue-500 uppercase tracking-[0.2em]">Telegram</h3>
-            <div className="space-y-2">
-              <a 
-                href="https://t.me/baxtiyorjon_gaziyev" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                onClick={() => trackContactClick('telegram')}
-                className="text-xl sm:text-3xl font-semibold hover:text-blue-400 transition-colors block"
+          {/* Solutions / Packaging */}
+          <div className="space-y-6">
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Yechimlar</h3>
+            <ul className="space-y-4 text-sm text-gray-400">
+              <li><Link href={`/${lang}/xizmatlar/qadoq-dizayni`} className="hover:text-white transition-colors">{dictionary.packaging_design}</Link></li>
+              <li><Link href={`/${lang}/xizmatlar/brand-strategiyasi`} className="hover:text-white transition-colors">{dictionary.brand_strategy}</Link></li>
+              <li><Link href={`/${lang}/xizmatlar`} className="hover:text-white transition-colors">{dictionary.service_prices}</Link></li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div className="space-y-6">
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Resurslar</h3>
+            <ul className="space-y-4 text-sm text-gray-400">
+              <li><Link href={`/${lang}/blog`} className="hover:text-white transition-colors">{dictionary.blog}</Link></li>
+              <li><Link href={`/${lang}/quiz`} className="hover:text-white transition-colors">{dictionary.branding_test}</Link></li>
+              <li><Link href={`/${lang}/patent-calculator`} className="hover:text-white transition-colors">{dictionary.patent_calculator}</Link></li>
+              <li><Link href={`/${lang}/sitemap`} className="hover:text-white transition-colors">{dictionary.sitemap}</Link></li>
+            </ul>
+          </div>
+
+          {/* Agency */}
+          <div className="space-y-6">
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Agentlik</h3>
+            <ul className="space-y-4 text-sm text-gray-400">
+              <li><Link href={`/${lang}/#portfolio`} className="hover:text-white transition-colors">{dictionary.portfolio}</Link></li>
+              <li><Link href={`/${lang}/#founder`} className="hover:text-white transition-colors">{dictionary.founder}</Link></li>
+              <li><Link href={`/${lang}/#process`} className="hover:text-white transition-colors">{dictionary.process}</Link></li>
+              <li><Link href={`/${lang}/#faq`} className="hover:text-white transition-colors">{dictionary.faq}</Link></li>
+            </ul>
+          </div>
+
+          {/* Hire Us Section */}
+          <div className="space-y-8 lg:col-span-1">
+            <div className="space-y-4">
+              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Bog'lanish</h3>
+              <div className="space-y-4">
+                <a 
+                  href="tel:+998336450097"
+                  onClick={() => trackContactClick('phone')}
+                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-black transition-all duration-300 w-full"
+                >
+                  +998 33 645 00 97
+                </a>
+                <a 
+                  href="https://t.me/baxtiyorjon_gaziyev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackContactClick('telegram')}
+                  className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 rounded-full text-sm font-medium hover:bg-blue-700 transition-all duration-300 w-full gap-2"
+                >
+                  <Send size={16} /> Telegram
+                </a>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <Link 
+                href={`/${lang}/portfolio`}
+                className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
-                @baxtiyorjon_gaziyev
-              </a>
-              <p className="text-sm text-gray-500">(Shadow Advisor)</p>
+                Explore our work →
+              </Link>
+              <Link 
+                href={`/${lang}/blog`}
+                className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
+              >
+                Read latest blogs →
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* Middle Section: Meta Links & Secondary Navigation */}
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 py-10 border-t border-white/10 mt-10">
-          <div className="flex flex-wrap justify-center lg:justify-start items-center gap-x-8 gap-y-4 text-sm text-gray-400">
+        {/* Bottom Section: Meta Links */}
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 py-8 border-t border-white/5">
+          <div className="flex flex-wrap justify-center lg:justify-start items-center gap-x-8 gap-y-4 text-xs text-gray-500 uppercase tracking-wider">
             <p suppressHydrationWarning>© {new Date().getFullYear()} Jon.Branding Agency.</p>
             <Link href={`/${lang}/privacy`} className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href={`/${lang}/terms`} className="hover:text-white transition-colors">Terms of Use</Link>
           </div>
 
-          <div className="flex items-center gap-8 order-1 lg:order-2">
+          <div className="flex items-center gap-8">
             <div className="flex items-center gap-6">
-              <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all transform hover:scale-110" aria-label="Instagram">
-                <Instagram size={20} />
+              <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110" aria-label="Instagram">
+                <Instagram size={18} />
               </a>
-              <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all transform hover:scale-110" aria-label="Telegram Channel">
-                <Send size={20} />
+              <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110" aria-label="Telegram Channel">
+                <Send size={18} />
               </a>
-              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all transform hover:scale-110" aria-label="LinkedIn">
-                <Linkedin size={20} />
+              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110" aria-label="LinkedIn">
+                <Linkedin size={18} />
               </a>
             </div>
             
-            <Separator orientation="vertical" className="h-6 bg-white/20 hidden sm:block" />
+            <Separator orientation="vertical" className="h-4 bg-white/10 hidden sm:block" />
 
             <button 
               onClick={handleScrollTop} 
-              className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+              className="group flex items-center gap-2 text-xs text-gray-500 hover:text-white transition-colors uppercase tracking-widest"
             >
               {dictionary.back_to_top} 
-              <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
+              <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
             </button>
           </div>
         </div>
 
-        <div className="relative mt-8 select-none pointer-events-none pb-12">
-          <h2 className="text-[12vw] sm:text-[14vw] lg:text-[12.5vw] font-black leading-none text-white tracking-[-0.06em] text-center opacity-95 transition-all drop-shadow-2xl whitespace-nowrap">
+        {/* Massive Brand Footer (Finch Style) */}
+        <div className="relative select-none pointer-events-none pt-10 pb-16">
+          <h2 className="text-[13vw] font-light leading-[0.8] text-white/90 tracking-[-0.06em] text-center transition-all drop-shadow-[0_0_30px_rgba(37,99,235,0.2)] whitespace-nowrap">
             Jon.Branding Agency
           </h2>
           {/* Finch-style Vibrant Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-80 bg-blue-600/30 blur-[180px] rounded-full -z-10 animate-pulse transition-opacity duration-1000" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-40 bg-indigo-500/25 blur-[140px] rounded-full -z-10" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-60 bg-blue-600/20 blur-[150px] rounded-full -z-10 animate-pulse transition-opacity duration-1000" />
         </div>
       </div>
     </footer>
