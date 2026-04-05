@@ -14,7 +14,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             description: "Javob oddiy: ular shunchaki mahsulot sotmaydi, ular <strong>tajriba, obro' va ishonch</strong> sotadi. Bularning barchasi kuchli brending orqali yaratiladi.",
             case_desc: "'Den Aroma' misolida biz oddiy atir do'konini premium boutique'ga aylantirdik. Natijada ular endi yuqori narxda sota oladi, 'qimmat' degan e'tirozlarsiz.",
             buttonText: "Batafsil ma'lumot",
-            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
+            videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa",
             ctaButton: "Mening brendim uchun ham",
             results: [
                 "O'rtacha chekning 60% ga oshishi",
@@ -27,7 +27,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             description: "Ответ прост: они продают не просто продукт, они продают <strong>опыт, репутацию и доверие</strong>. Все это создается через сильный брендинг.",
             case_desc: "На примере 'Den Aroma' мы превратили обычный парфюмерный магазин в премиальный бутик. В результате они теперь могут продавать по высокой цене, без возражений 'дорого'.",
             buttonText: "Подробнее",
-            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
+            videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa",
             ctaButton: "И для моего бренда",
             results: [
                 "Увеличение среднего чека на 60%",
@@ -40,7 +40,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             description: "The answer is simple: they don't just sell a product; they sell an <strong>experience, reputation, and trust</strong>. All of this is created through strong branding.",
             case_desc: "Using 'Den Aroma' as an example, we transformed an ordinary perfume shop into a premium boutique. As a result, they can now sell at a high price without 'it's expensive' objections.",
             buttonText: "Learn More",
-            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
+            videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa",
             ctaButton: "For my brand too",
             results: [
                 "60% increase in average check",
@@ -53,7 +53,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             description: "答案很简单：他们不只是销售产品；他们销售的是<strong>体验、声誉和信任</strong>。所有这些都是通过强大的品牌塑造创造的。",
             case_desc: "以 'Den Aroma' 为例，我们将一家普通的香水店改造成了一家高级精品店。结果，他们现在可以高价销售，而不会有“太贵了”的异议。",
             buttonText: "了解更多",
-            videoUrl: "https://player.vimeo.com/video/1145610708?badge=0&autopause=0&player_id=0&app_id=58479",
+            videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa",
             ctaButton: "也为我的品牌",
             results: [
                 "平均客单价增加60%",
