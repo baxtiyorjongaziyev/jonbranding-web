@@ -3,7 +3,7 @@ title: "乌兹别克斯坦商标注册完整指南（2026年）"
 date: "2026-04-05"
 author: "Jon Branding"
 description: "如何在乌兹别克斯坦合法保护您的企业和标志？2026年商标注册流程、费用和时间表的完整说明。"
-image: "/blog/patent-guide-hero.webp"
+image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1080&q=80"
 imageHint: "2026年乌兹别克斯坦商标注册完整指南"
 ---
 

@@ -3,7 +3,7 @@ title: "如何保护您的品牌免遭盗用？（乌兹别克斯坦2026年）"
 date: "2026-04-07"
 author: "Jon Branding"
 description: "厌倦了竞争对手盗用您的品牌名称和标志？在乌兹别克斯坦进行合法专利注册和品牌保护的实用建议。"
-image: "/blog/brand-protection.webp"
+image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1080&q=80"
 imageHint: "乌兹别克斯坦品牌保护的秘诀"
 ---
 

@@ -3,7 +3,7 @@ title: "How to Register a Trademark in Uzbekistan: Complete Guide (2026)"
 date: "2026-04-05"
 author: "Jon Branding"
 description: "How can you legally protect your business and logo in Uzbekistan? A full breakdown of the trademark registration process, costs, and timelines in 2026."
-image: "/blog/patent-guide-hero.webp"
+image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1080&q=80"
 imageHint: "Complete guide to trademark registration in Uzbekistan 2026"
 ---
 

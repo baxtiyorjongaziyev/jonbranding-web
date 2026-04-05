@@ -3,7 +3,7 @@ title: "How to Protect Your Brand from Theft? (Uzbekistan 2026)"
 date: "2026-04-07"
 author: "Jon Branding"
 description: "Tired of competitors stealing your brand name and logo? Practical advice on legal patenting and brand protection in Uzbekistan."
-image: "/blog/brand-protection.webp"
+image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1080&q=80"
 imageHint: "Secrets of legal brand protection in Uzbekistan"
 ---
 
