@@ -94,7 +94,7 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
 }) => {
     return (
         <div className="relative flex w-full rounded-full bg-secondary p-1">
-            {options.map(option => (
+            {options?.map(option => (
                 <div key={option.value} className="relative flex-1">
                     {selected === option.value && (
                         <motion.div
@@ -124,10 +124,10 @@ export default function TrademarkCalculator({ translations }: { translations: an
   if (!translations) return null;
 
   const formSchema = z.object({
-    brand: z.string().min(1, { message: translations.error_brand }),
-    name: z.string().min(2, { message: translations.error_name }),
+    brand: z.string().min(1, { message: translations?.error_brand }),
+    name: z.string().min(2, { message: translations?.error_name }),
     phone: z.string().refine(phone => phone.startsWith('+998') && phone.length === 13, {
-      message: translations.error_phone,
+      message: translations?.error_phone,
     }),
     activity: z.string().optional(),
     classCount: z.number().min(1).max(45),
@@ -135,7 +135,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
     speed: z.enum(['oddiy', 'tez']),
     hasEkspert: z.boolean(),
     privacyPolicy: z.boolean().refine(val => val === true, {
-        message: translations.error_privacy,
+        message: translations?.error_privacy,
     }),
   });
 
@@ -156,6 +156,19 @@ export default function TrademarkCalculator({ translations }: { translations: an
     }
   });
   
+  const [selectedCategory, setSelectedCategory] = useState<string>(translations?.categories?.[0]?.id || '');
+  const currentCategory = translations?.categories?.find((c: any) => c.id === selectedCategory);
+  
+  if (!translations || !translations.categories) {
+    return (
+      <div className="p-8 text-center bg-white rounded-2xl shadow-sm border border-orange-100">
+        <h3 className="text-xl font-bold text-dark-blue mb-2">Ma'lumotlar yuklanmoqda...</h3>
+        <p className="text-gray-500 italic">Kalkulyator lug'ati yangilanmoqda. Iltimos, birozdan so'ng qayta urinib ko'ring.</p>
+      </div>
+    );
+  }
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -165,21 +178,30 @@ export default function TrademarkCalculator({ translations }: { translations: an
     [watchFields.isYuridik, watchFields.classCount, watchFields.speed, watchFields.hasEkspert]
   );
   
+  const [answers, setAnswers] = useState<Record<string, string>>(() => {
+    const initial: Record<string, string> = {};
+    translations?.questions?.forEach((q: any) => {
+      if (q.options?.length > 0) {
+        initial[q.id] = q.options[0].id;
+      }
+    });
+    return initial;
+  });
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
 
     const telegramMessage = [
-      `🧾 ${translations.telegramTitle}`,
+      `🧾 ${translations?.telegramTitle}`,
       `Brend: ${data.brand}`,
-      `${translations.activityLabel}: ${data.activity || translations.notSpecified}`,
+      `${translations?.activityLabel}: ${data.activity || translations?.notSpecified}`,
       '---',
-      `${translations.personTypeLabel}: ${data.isYuridik ? translations.personTypeOptions[1].label : translations.personTypeOptions[0].label}`,
-      `${translations.classCountLabel}: ${fees.classCount}`,
-      `${translations.speedLabel}: ${data.speed === 'tez' ? translations.speedOptions[1].label : translations.speedOptions[0].label}`,
-      `${translations.expertCheckLabel}: ${data.hasEkspert ? translations.expertCheckOptions[0].label : translations.expertCheckOptions[1].label}`,
+      `${translations?.personTypeLabel}: ${data.isYuridik ? translations?.personTypeOptions?.[1]?.label : translations?.personTypeOptions?.[0]?.label}`,
+      `${translations?.classCountLabel}: ${fees.classCount}`,
+      `${translations?.speedLabel}: ${data.speed === 'tez' ? translations?.speedOptions?.[1]?.label : translations?.speedOptions?.[0]?.label}`,
+      `${translations?.expertCheckLabel}: ${data.hasEkspert ? translations?.expertCheckOptions?.[0]?.label : translations?.expertCheckOptions?.[1]?.label}`,
       '---',
-      `${translations.totalCostTitle.toUpperCase()}: ${formatPrice(fees.total, translations.currency)}`,
+      `${translations?.totalCostTitle?.toUpperCase()}: ${formatPrice(fees.total, translations?.currency)}`,
     ].join('\n');
 
     try {
@@ -196,7 +218,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
 
       if (!response.ok) {
           const result = await response.json();
-          throw new Error(result.error || translations.error_server);
+          throw new Error(result.error || translations?.error_server);
       }
 
       gtagEvent('form_submit', {
@@ -206,15 +228,15 @@ export default function TrademarkCalculator({ translations }: { translations: an
       });
 
       toast({
-        title: translations.success_toast_title,
-        description: translations.success_toast_desc,
+        title: translations?.success_toast_title,
+        description: translations?.success_toast_desc,
         variant: 'default',
       });
       setSuccess(true);
     } catch (e: any) {
        toast({
-        title: translations.error_toast_title,
-        description: e.message || translations.error_server,
+        title: translations?.error_toast_title,
+        description: e.message || translations?.error_server,
         variant: 'destructive',
       });
     } finally {
@@ -229,16 +251,15 @@ export default function TrademarkCalculator({ translations }: { translations: an
   
   const getExtraClassesFeeLabel = () => {
     const count = fees.classCount - 1;
-    return translations.extraClassesFee.replace('{count}', count.toString());
+    return translations?.extraClassesFee?.replace('{count}', count.toString());
   };
 
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       <Card className="p-6">
-        <h3 className="text-xl font-bold text-dark-blue mb-4">{translations.formTitle}</h3>
+        <h3 className="text-xl font-bold text-dark-blue mb-4">{translations?.formTitle}</h3>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField control={form.control} name="brand" render={({ field }) => ( <FormItem><FormLabel>{translations.brandNameLabel}</FormLabel><FormControl><Input placeholder={translations.brandNamePlaceholder} {...field} /></FormControl><FormMessage /></FormItem> )} />
                 <FormField control={form.control} name="name" render={({ field }) => ( <FormItem><FormLabel>{translations.yourNameLabel}</FormLabel><FormControl><Input placeholder={translations.yourNamePlaceholder} {...field} /></FormControl><FormMessage /></FormItem> )} />
                 <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>{translations.phoneLabel}</FormLabel><FormControl><Input placeholder={translations.phonePlaceholder} {...field} /></FormControl><FormMessage /></FormItem> )} />
 
@@ -302,7 +323,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
                             <Textarea className="mt-1" rows={3} placeholder={translations.activityPlaceholder} {...field} aria-describedby={!fieldState.error ? 'activity-desc' : undefined} />
                         </FormControl>
                         <FormDescription id="activity-desc">
-                           {translations.activityHelp}
+                           {translations?.categories?.map((cat: any) => cat.name)}
                         </FormDescription>
                         <FormMessage />
                     </FormItem>
@@ -320,7 +341,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
                             </FormControl>
                             <div className="space-y-1 leading-none">
                                 <FormLabel className="text-xs">
-                                     {translations.privacyPolicyText}
+                                     {translations?.services?.map((service: any) => service.name)}
                                 </FormLabel>
                                 <FormMessage className="text-xs" />
                             </div>
