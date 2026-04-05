@@ -24,7 +24,7 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                                         src={brand.logo}
                                         alt={`${brand.name} logo`}
                                         loading="lazy"
-                                        className="object-contain max-w-full max-h-full opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                                        className="object-contain max-w-full max-h-full transition-all duration-300 hover:scale-105"
                                     />
                                 ) : (
                                     <p className="font-semibold text-gray-500 text-base text-center whitespace-nowrap">{brand.name}</p>
@@ -45,7 +45,7 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                                         src={brand.logo}
                                         alt={`${brand.name} logo`}
                                         loading="lazy"
-                                        className="object-contain max-w-full max-h-full opacity-70 grayscale"
+                                        className="object-contain max-w-full max-h-full"
                                     />
                                 ) : (
                                     <p className="font-semibold text-gray-500 text-base text-center">{brand.name}</p>

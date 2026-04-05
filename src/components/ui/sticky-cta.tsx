@@ -35,7 +35,9 @@ export default function StickyCTA() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.9 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-6 right-6 z-50 flex items-center"
+          // On mobile: bottom-20 so it sits ABOVE the sticky pricing bar (which is ~56px tall)
+          // On desktop (md+): bottom-6 since there's no sticky pricing bar
+          className="fixed bottom-20 right-4 z-50 flex items-center md:bottom-6 md:right-6"
         >
           <Button
             onClick={handleOpenModal}
