@@ -1,833 +1,1209 @@
-
 {
-    "header": {
-        "portfolio": "作品集",
-        "founder": "创始人",
-        "process": "流程",
-        "blog": "博客",
-        "services": "服务",
-        "brand_strategy": "品牌策略",
-        "brand_strategy_desc": "您品牌的基础 — 市场分析、定位和传播。",
-        "naming": "命名",
-        "naming_desc": "为您的品牌选择一个难忘、强大且法律上清晰的名称。",
-        "logo_design": "标志设计",
-        "logo_design_desc": "创建一个独特且令人难忘的标志，以反映您业务的精髓。",
-        "brandbook": "品牌手册",
-        "brandbook_desc": "一份描述您品牌形象使用规则的文件。",
-        "corporate_style": "企业形象",
-        "corporate_style_desc": "一个使您的品牌易于识别的标志、颜色和字体系统。",
-        "packaging_design": "包装设计",
-        "packaging_design_desc": "吸引人的设计，使您的产品在货架上脱颖而出。",
-        "services_and_prices": "服务与价格",
-        "services_and_prices_desc": "构建您自己的服务包并立即获取价格。",
-        "contact_by_phone": "联系电话",
-        "contact_by_telegram": "Telegram 联系",
-        "free_consultation": "获取免费方案",
-        "open_menu": "菜单",
-        "switch_lang": "语言",
-        "lang_ru": "Русский",
-        "lang_uz": "O‘zbekcha",
-        "lang_en": "English"
+  "header": {
+    "portfolio": "作品集",
+    "founder": "创始人",
+    "process": "流程",
+    "blog": "博客",
+    "services": "服务",
+    "brand_strategy": "品牌策略",
+    "brand_strategy_desc": "您品牌的基础 — 市场分析、定位和传播。",
+    "naming": "命名",
+    "naming_desc": "为您的品牌选择一个难忘、强大且法律上清晰的名称。",
+    "logo_design": "标志设计",
+    "logo_design_desc": "创建一个独特且令人难忘的标志，以反映您业务的精髓。",
+    "brandbook": "品牌手册",
+    "brandbook_desc": "一份描述您品牌形象使用规则的文件。",
+    "corporate_style": "企业形象",
+    "corporate_style_desc": "一个使您的品牌易于识别的标志、颜色和字体系统。",
+    "packaging_design": "包装设计",
+    "packaging_design_desc": "吸引人的设计，使您的产品在货架上脱颖而出。",
+    "services_and_prices": "服务与价格",
+    "services_and_prices_desc": "构建您自己的服务包并立即获取价格。",
+    "contact_by_phone": "联系电话",
+    "contact_by_telegram": "Telegram 联系",
+    "free_consultation": "获取免费方案",
+    "open_menu": "菜单",
+    "switch_lang": "语言",
+    "lang_ru": "Русский",
+    "lang_uz": "O‘zbekcha",
+    "lang_en": "English"
+  },
+  "footer": {
+    "contact": "联系我们",
+    "by_telegram": "通过Telegram",
+    "by_phone": "通过电话",
+    "main_page": "主页",
+    "portfolio": "作品集",
+    "founder": "创始人",
+    "process": "流程",
+    "faq": "常见问题",
+    "services": "我们的服务",
+    "brand_strategy": "品牌策略",
+    "naming": "命名",
+    "brandbook": "品牌手册",
+    "logo_design": "标志设计",
+    "corporate_style": "企业形象",
+    "packaging_design": "包装设计",
+    "additional": "附加",
+    "service_prices": "服务与价格",
+    "branding_test": "品牌测试",
+    "blog": "博客",
+    "sitemap": "网站地图",
+    "all_rights_reserved": "版权所有。",
+    "back_to_top": "返回顶部",
+    "patent_calculator": "专利计算器"
+  },
+  "cookieConsent": {
+    "message": "我们的网站使用美味的Cookie。它们帮助我们记住您。如果您同意，让我们一起分享它们。",
+    "acceptButton": "我会吃掉它们"
+  },
+  "brandbookPage": {
+    "metadata": {
+      "title": "专业品牌手册开发 | 乌兹别克斯坦品牌设计代理机构 | Jon.Branding",
+      "description": "品牌手册是您企业的视觉宪法。我们在塔什干为您创建全面的品牌规范，确保品牌在乌兹别克斯坦市场的一致性并节省营销成本。",
+      "keywords": "乌兹别克斯坦品牌手册, 塔什干品牌设计, 企业形象识别系统, 品牌指南开发, 中乌贸易品牌咨询"
     },
-    "footer": {
-        "contact": "联系我们",
-        "by_telegram": "通过Telegram",
-        "by_phone": "通过电话",
-        "main_page": "主页",
-        "portfolio": "作品集",
-        "founder": "创始人",
-        "process": "流程",
-        "faq": "常见问题",
-        "services": "我们的服务",
-        "brand_strategy": "品牌策略",
-        "naming": "命名",
-        "brandbook": "品牌手册",
-        "logo_design": "标志设计",
-        "corporate_style": "企业形象",
-        "packaging_design": "包装设计",
-        "additional": "附加",
-        "service_prices": "服务与价格",
-        "branding_test": "品牌测试",
-        "blog": "博客",
-        "sitemap": "网站地图",
-        "all_rights_reserved": "版权所有。",
-        "back_to_top": "返回顶部",
-        "patent_calculator": "专利计算器"
-    },
-    "cookieConsent": {
-        "message": "我们的网站使用美味的Cookie。它们帮助我们记住您。如果您同意，让我们一起分享它们。",
-        "acceptButton": "我会吃掉它们"
-    },
-    "brandbookPage": {
-        "metadata": {
-            "title": "专业品牌手册开发 | 乌兹别克斯坦品牌设计代理机构 | Jon.Branding",
-            "description": "品牌手册是您企业的视觉宪法。我们在塔什干为您创建全面的品牌规范，确保品牌在乌兹别克斯坦市场的一致性并节省营销成本。",
-            "keywords": "乌兹别克斯坦品牌手册, 塔什干品牌设计, 企业形象识别系统, 品牌指南开发, 中乌贸易品牌咨询"
-        },
-        "title": "品牌手册开发",
-        "subtitle": "品牌手册不仅仅是一份带有标志的文件，它是您品牌的宪法，确保其一致性和完整性。",
-        "section1_title": "为什么每个企业都需要品牌手册？",
-        "section1_p1": "品牌手册是管理品牌的关键工具。它明确定义了使用您公司视觉和思想元素的所有规则——从标志和颜色到沟通语调。",
-        "section1_p2": "这份文件有助于避免营销中的混乱，确保品牌认知度，并在与设计师、营销人员和其他承包商合作时节省时间和金钱。",
-        "values_title": "品牌手册解决了这些问题：",
-        "values": [
-            { "title": "一致性与认知度", "description": "确保您的品牌在所有平台——从名片到网站——看起来都一样且专业。" },
-            { "title": "节省资源", "description": "无需向每个新员工或承包商解释设计规则，从而加快工作流程。" },
-            { "title": "品牌保护", "description": "保护您的形象免遭不当使用，维护您品牌的完整性和价值。" }
-        ],
-        "process_title": "品牌手册包括哪些内容？",
-        "process_subtitle": "我们的品牌手册包含有效品牌管理所需的所有必要部分：",
-        "process_steps": [
-            { "title": "品牌平台", "description": "使命、价值观、品牌特性和目标受众。" },
-            { "title": "标志与形象", "description": "使用标志、企业颜色和字体的规则。" },
-            { "title": "视觉风格", "description": "使用照片、插图和图形元素的规则。" },
-            { "title": "实际应用", "description": "真实媒体（名片、演示文稿、社交媒体）的设计示例。" }
-        ],
-        "cta_title": "准备好为您的品牌带来秩序了吗？",
-        "cta_description": "专业的品牌手册是对您业务稳定未来的投资。让我们创建一个将成为您可靠助手的文档。",
-        "cta_button": "订购品牌手册"
-    },
-    "popularPackages": {
-        "title": "最受欢迎的套餐",
-        "packageTitle": "命名 + 标志 (高级)",
-        "packageSubtitle": "开启强大品牌的完美组合。",
-        "features": [
-            "为您的品牌取一个完美的名字（6种语言检查）",
-            "专业标志（5个概念）",
-            "完整的企业形象（颜色、字体）",
-            "在15个以上的真实模型上展示",
-            "专利审计和咨询",
-            "10个品牌贴纸"
-        ],
-        "separate": "分开",
-        "packagePrice": "套餐价",
-        "packageDiscount": "(-20% 折扣!)",
-        "upfrontDiscount": "100%预付款 (-28% 总折扣!)",
-        "ctaButton": "选择此套餐"
-    },
-    "sitemapPage": {
-        "title": "网站地图",
-        "subtitle": "我们网站上所有页面的概览，以帮助您快速找到所需的信息。",
-        "sections": {
-            "main": "主要部分",
-            "services": "服务",
-            "blog": "博客文章"
-        },
-        "links": {
-            "home": "主页",
-            "quiz": "品牌测试",
-            "portfolio": "作品集",
-            "process": "工作流程",
-            "faq": "常见问题",
-            "services_prices": "所有服务和价格",
-            "brand_strategy": "品牌策略",
-            "naming": "命名",
-            "brandbook": "品牌手册",
-            "corporate_style": "企业形象",
-            "packaging_design": "包装设计",
-            "logo_design": "标志设计",
-            "patent_calculator": "专利计算器",
-            "marketplace_cover": "销售卡设计"
-        }
-    },
-    "hero": {
-        "headlines": [
-            "您的品牌|卖不出去？|我们来解决。",
-            "从竞争中|脱颖而出|。",
-            "让您的品牌不仅“漂亮”，而且|盈利|。",
-            "让顾客|爱上您|。一次又一次。",
-            "从小企业到|强大品牌|。一步之遥。"
-        ],
-        "description": "作为乌兹别克斯坦领先的品牌代理机构，我们不只是设计网站或 LOGO。我们为您的企业构建<span class='font-bold text-foreground'>以结果为导向</span>的品牌系统。通过专业的市场策略和视觉设计，助您的品牌在塔什干乃至中亚市场脱颖而出。",
-        "buttonTexts": [
-            "分析我的品牌",
-            "帮助我增加销售额",
-            "免费策略会议",
-            "我需要一个强大的品牌"
-        ],
-        "buttonHint": "免费。无任何附加条件。"
-    },
-    "contactModal": {
-        "stepTitles": {
-            "contact": "联系方式",
-            "project": "关于项目",
-            "budget": "预算",
-            "meeting": "会议"
-        },
-        "title": "为了高质量的咨询",
-        "description": "回答几个问题，以便我们更好地了解您的项目。",
-        "fullName": "全名",
-        "fullNamePlaceholder": "张三",
-        "phone": "电话号码",
-        "phonePlaceholder": "+998 90 123 45 67",
-        "telegram": "Telegram用户名（可选）",
-        "telegramPlaceholder": "@username",
-        "companyName": "公司或项目名称",
-        "companyNamePlaceholder": "Jon.Branding",
-        "website": "网站或社交媒体（可选）",
-        "websitePlaceholder": "https://t.me/jonbranding",
-        "goal": "哪个目标最接近您？",
-        "goalOptions": [
-            { "value": "exploring", "label": "我对品牌不熟悉，但我认为我的业务需要它。" },
-            { "value": "has_problem", "label": "我有一个品牌，但效果不佳；我需要分析和咨询。" },
-            { "value": "ready_to_start", "label": "我了解品牌的力量，并有具体的目标。" }
-        ],
-        "budget": "项目的大概预算？",
-        "budgetOptions": [
-            "还没有预算 / 只是在探索",
-            "最高500美元",
-            "500 - 1,500美元",
-            "1,500 - 3,000美元",
-            "3,000美元以上"
-        ],
-        "location": "您的会议地点",
-        "locationPlaceholder": "选择您所在的地区",
-        "locationOptions": ["塔什干", "费尔干纳", "其他地区"],
-        "meetingPlace": "您想在哪里见面？",
-        "meetingPlaceOptions": [
-            { "value": "our_office", "label": "在我们的办公室", "description": "完全沉浸在项目中" },
-            { "value": "neutral", "label": "在中立地区", "description": "在轻松的氛围中讨论" },
-            { "value": "client_office", "label": "在您的办公室", "description": "了解您的业务" }
-        ],
-        "onlineMeetingAlert": "明白了。我们将与您安排一个方便的时间进行在线会议。",
-        "backButton": "返回",
-        "nextButton": "下一步",
-        "submitButton": "发送请求",
-        "privacyPolicyText": "我接受隐私政策的条款并同意处理个人数据。",
-        "formErrors": {
-            "fullName": "请输入您的全名。",
-            "phone": "请输入有效的电话号码。",
-            "goal": "请选择您的主要目标。",
-            "budget": "请选择大概的预算。",
-            "location": "请选择您的位置。",
-            "meetingPlace": "您需要选择一个会议地点。",
-            "privacyPolicy": "您必须接受隐私政策。"
-        },
-        "successToast": {
-            "title": "成功！",
-            "description": "您的请求已收到。我们将很快与您联系！"
-        },
-        "leadMagnetToast": {
-            "title": "为您准备的特别资源！",
-            "description": "您的请求已接受！首先，我们将您引向我们的免费资料。"
-        },
-        "errorToast": {
-            "title": "错误！",
-            "description": "提交您的请求时出错。请重试。"
-        }
-    },
-    "home": {
-      "cta1_title": "您的品牌也可以如此出色。",
-      "cta1_desc": "通过专业的设计将您的业务提升到一个新的水平。我们将帮助您为您的业务找到完美的解决方案。",
-      "cta1_button": "也为我的业务"
-    },
-    "urgencyBlock": {
-        "title": "🔥 在您关闭此页面之前...",
-        "subtitle": "想象一下：",
-        "line1": "明天您的竞争对手推出了一个专业品牌。标志令人惊叹。包装在商店里第一眼就吸引人。",
-        "line2": "顾客不从您这里购买，而是从他们那里购买。",
-        "line3": "原因很简单：他们投资了。而您...在考虑。"
-    },
-    "personalOfferBlock": {
-        "title": "💎 我的建议：",
-        "subtitle": "您将获得：",
-        "ctaButton": "我需要这个",
-        "sections": [
-            { "title": "1️⃣ 策略", "points": ["品牌定位和竞争分析", "目标受众地图", "独特销售主张 (USP)"] },
-            { "title": "2️⃣ 形象识别", "points": ["专业标志（3-5 个方案）", "企业配色方案", "排版和风格指南"] },
-            { "title": "3️⃣ 文档", "points": ["完整的品牌手册（30-50 页）", "所有格式的文件 (AI, PNG, PDF, SVG)", "指南：如何使用标志"] },
-            { "title": "4️⃣ 法律保护", "points": ["命名咨询", "专利和商标注册流程", "知识产权保护策略"] },
-            { "title": "5️⃣ 支持", "points": ["3 个月免费修改", "通过 Telegram 持续沟通", "品牌应用建议"] }
-        ]
-    },
-    "servicesHero": {
-        "title": "加强品牌塑造的服务",
-        "subtitle": "为您的业务提供有保证的结果和清晰的解决方案",
-        "cta": "查看价格"
-    },
-    "serviceSections": {
-        "services": [
-            {
-                "id": "naming",
-                "title": "命名",
-                "description": "为品牌选择一个难忘且强大的名称。",
-                "buttonText": "阅读更多"
-            },
-            {
-                "id": "logo-dizayni",
-                "title": "标志设计",
-                "description": "创建一个独特且令人难忘的标志，以反映您业务的精髓。",
-                "buttonText": "阅读更多"
-            },
-            {
-                "id": "firmenniy-stil",
-                "title": "企业形象",
-                "description": "一个使您的品牌易于识别的标志、颜色和字体系统。",
-                "buttonText": "阅读更多"
-            },
-            {
-                "id": "brandbook",
-                "title": "品牌手册",
-                "description": "描述您品牌形象使用规则的文件。",
-                "buttonText": "阅读更多"
-            },
-            {
-                "id": "qadoq-dizayni",
-                "title": "包装设计",
-                "description": "吸引人的设计，使您的产品在货架上脱颖而出。",
-                "buttonText": "阅读更多"
-            }
-        ]
-    },
-    "stats": {
-        "experience": "年经验",
-        "clients": "满意的客户",
-        "projects": "成功的项目",
-        "recommend": "客户推荐我们"
-    },
-    "trustedBy": {
-        "title": "信任我们的公司"
-    },
-    "whyUs": {
-        "title": "为什么选择我们？",
-        "subtitle": "我们不只是做出承诺。我们通过系统的方法为您的品牌创造真正的价值。",
-        "values": [
-            { "title": "战略方法", "description": "我们不只是画漂亮的图片。每一个设计元素都旨在增加您的销售额并加强您的品牌。" },
-            { "title": "透明的流程", "description": "简报 → 分析 → 策略 → 设计 → 交付。在每个阶段，我们都与您紧密合作，您拥有对流程的完全控制权。" },
-            { "title": "结果与忠诚度", "description": "超过 50 个项目，最重要的是 - 90% 的客户向他们的朋友推荐我们。这是我们最大的成就。" }
-        ],
-        "ctaTitle": "你喜欢我们的方法吗？",
-        "ctaDesc": "让我们免费分析您的品牌，确定其优势和劣势。这不会给您带来任何义务。",
-        "ctaButton": "免费分析我的品牌"
-    },
-    "targetAudience": {
-        "title": "您熟悉这些问题吗？",
-        "subtitle": "如果以下想法困扰着您，那么我们就是您的正确解决方案。",
-        "problems": [
-            { "text": "我有一个业务，但没有品牌。没有人认识我。" },
-            { "text": "我的品牌过时了，我落后于竞争对手。" },
-            { "text": "我的客户不理解我的价值，他们只问价格。" },
-            { "text": "我有销售，但它们不稳定。客户不会回来。" }
-        ],
-        "solutionTitle": "好消息：所有这些问题都可以解决！",
-        "solutionSubtitle": "适当建立的品牌战略可以消除此类问题，并使您的业务走上稳定增长的道路。",
-        "solutionButton": "查看所有问题的解决方案"
-    },
-    "beforeAfter": {
-        "title": "在此之前和之后",
-        "subtitle": "亲眼看看正确的品牌塑造如何改变您的业务。",
-        "ctaTitle": "您的品牌准备好改变了吗？",
-        "ctaDesc": "让我们分析您的品牌并制定计划将其提升到一个新的水平。",
-        "ctaButton": "也改变我的品牌"
-    },
-    "testimonials": {
-        "title": "我们的客户对我们的评价",
-        "subtitle": "我们最大的成就就是满意的客户。",
-        "textReviewsTitle": "文字评论",
-        "textReviewsSubtitle": "来自我们其他尊贵客户的评价"
-    },
-    "gallery": {
-        "title": "我们的作品示例",
-        "subtitle": "看看我们创建的品牌如何在他们的利基市场中脱颖而出。"
-    },
-    "founder": {
-        "title": "创始人：巴赫蒂约尔洪·加济耶夫",
-        "message": "你好！我是 Jon.Branding 的创始人巴赫蒂约尔洪。我帮助企业主将他们的品牌提升到一个新的水平。我的目标不仅仅是创建一个漂亮的设计，而是为您的业务建立一个工作的、基于策略的、以结果为导向的品牌系统。让我们一起分析您的品牌，唤醒其“休眠”的潜力。",
-        "points": [
-            { "icon": "Medal", "text": "超过 50 个项目" },
-            { "icon": "Globe", "text": "国际经验" },
-            { "icon": "Zap", "text": "快速高效的沟通" },
-            { "icon": "Users", "text": "清晰透明的工作流程" }
-        ],
-        "phoneButton": "通过电话联系",
-        "telegramButton": "在 Telegram 上写信"
-    },
-    "process": {
-        "title": "我们的工作流程",
-        "subtitle": "在每个项目中，我们都使用经过验证、透明且高效的流程。",
-        "phases": [
-            { "phase": "01", "title": "Discovery (发现)", "description": "旅程的开始和奠定基础。", "tasks": ["简报", "识别业务问题", "市场和竞争对手分析", "受众需求", "收集想法"] },
-            { "phase": "02", "title": "Strategy (策略)", "description": "规划品牌路径。", "tasks": ["目标设定", "品牌定位", "品牌平台", "核心原则", "规划"] },
-            { "phase": "03", "title": "Creative Design (创意设计)", "description": "品牌视觉形象形成。", "tasks": ["命名", "标志设计", "视觉概念", "包装设计", "品牌手册"] },
-            { "phase": "04", "title": "Presentation (演示)", "description": "通过真实案例测试想法。", "tasks": ["设计演示", "基于反馈的调整", "最终迭代", "模型展示"] },
-            { "phase": "05", "title": "Implementation (实施)", "description": "将品牌变为现实。", "tasks": ["最终设计文件", "移交品牌手册", "视觉指南", "印刷准备"] },
-            { "phase": "06", "title": "Growth (增长)", "description": "持续的品牌支持。", "tasks": ["实施说明", "持续支持", "后续步骤咨询"] }
-        ],
-        "ctaTitle": "准备好讨论您的项目了吗？",
-        "ctaDesc": "让我们开始将您的想法变为现实。",
-        "ctaButton": "讨论项目"
-    },
-    "leadMagnet": {
-        "title": "将您的品牌提升到一个新的水平",
-        "subtitle": "不知道从哪里开始与我们合作？我们为您准备了几个免费且有用的资源。研究品牌塑造的世界并迈出第一步。",
-        "magnets": [
-          { "id": "pdf", "title": "免费 PDF 清单", "subtitle": "品牌塑造中的 7 个最大错误", "description": "了解在您的业务中应避免哪些错误，并获得分析您的品牌的实用指南。", "cta": "查看清单", "href": "/{lang}/checklist" },
-          { "id": "quiz", "title": "迷你测试", "subtitle": "您的业务准备好进行品牌塑造了吗？", "description": "回答几个问题，了解您的业务对品牌塑造的准备程度及其优势和劣势。", "cta": "开始测试", "href": "/{lang}/quiz" },
-          { "id": "video", "title": "视频指南", "subtitle": "什么是战略品牌塑造？", "description": "为什么仅仅一个漂亮的标志是不够的？在视频中看看我们的方法会给您的业务带来什么结果。", "cta": "观看视频", "href": "#video" }
-        ],
-        "cta": {
-          "title": "清单有帮助吗？",
-          "description": "现在是时候从理论转向实践了。让我们免费分析您的品牌并确定增长点。",
-          "button": "获得免费咨询"
-        },
-        "checklistContent": {
-          "progress_text": "已完成：{checkedCount} / {total}",
-          "items": [
-            {
-              "title": "1. 在没有策略的情况下工作",
-              "description": "最大的错误是在没有明确策略的情况下开始设计. 谁是你的客户? 你如何与竞争对手区分开来? 你的核心信息是什么? 不回答这些问题的标志或网站只是一张漂亮的图片。",
-              "solution": "解决方案: 从回答“我们是谁?”、“为谁服务?”以及“为什么?”开始。这将为你的品牌创建一个坚实的基础。"
-            },
-            {
-              "title": "2. 试图取悦每个人",
-              "description": "试图“为每个人服务”的品牌最终不会为任何人服务。试图取悦所有人群会导致品牌模糊和薄弱。",
-              "solution": "解决方案: 明确定义你的目标受众。描绘你的“理想客户”画像，并将你的营销工作专门集中在他们身上。"
-            },
-            {
-              "title": "3. 抄袭竞争对手",
-              "description": "关注竞争对手很重要，但盲目抄袭是死路一条。如果你的设计类似于一个知名品牌，你将永远被视为“廉价的替代品”。",
-              "solution": "解决方案: 研究竞争对手，找到你自己独特的道路。不要害怕与众不同。"
-            },
-            {
-              "title": "4. 不一致",
-              "description": "你的标志在网站上是一个风格，在 Instagram 上是另一个风格，在包装上又是第三个。这种视觉混乱会破坏信任并阻碍品牌认知度。",
-              "solution": "解决方案: 创建一个“品牌手册”（指南），规定使用你的标志、颜色、字体的规则。在所有地方一致地使用它。"
-            },
-            {
-              "title": "5. 过度复杂的标志",
-              "description": "一个有很多小细节、渐变和文字的标志很难被记住，而且在小尺寸（例如，网站图标或社交媒体头像）下看起来很差。",
-              "solution": "解决方案: 追求简单和极简。最好的标志是那些凭记忆就能画出来的标志。"
-            },
-            {
-              "title": "6. 难以发音或记忆的名称",
-              "description": "如果你的客户不能发音你的名字或不能正确书写，他们将无法找到你或向他人推荐你。",
-              "solution": "解决方案: 选择一个简单、响亮且在法律上清晰（商标未被占用）的名称。"
-            },
-            {
-              "title": "7. 认为品牌塑造是一次性的工作",
-              "description": "市场、客户要求、技术都在不断变化。一个不随时代变化的品牌将会过时。",
-              "solution": "解决方案: 定期进行“品牌审计”。如果需要，不要害怕更新你的设计（重塑品牌）。这是增长的标志，而不是虚弱的标志。"
-            }
-          ],
-          "result": {
-            "bad": {
-              "title": "需要紧急帮助！",
-              "description": "您的品牌有几个关键漏洞。这是一个绝佳的增长机会！我们可以帮助您将这些弱点转化为优势。"
-            },
-            "good": {
-              "title": "在正确的轨道上！",
-              "description": "您有一个良好的基础，但有一些点可以加强以获得更好的结果. 让我们一起讨论我们该如何做。"
-            },
-            "perfect": {
-              "title": "太棒了！您的品牌状况良好！",
-              "description": "恭喜! 您有一个坚实的基础。现在是时候考虑下一步了——如何扩大规模并成为市场领导者。我们为您提供了一些想法。"
-            }
-          }
-        }
-    },
-    "faq": {
-        "title": "常见问题",
-        "subtitle": "有关品牌塑造过程、价格和其他主题的最常见问题的解答。",
-        "faqItems": [
-            { "question": "为什么价格不固定？", "answer": "每个项目都是独特的。价格根据项目的复杂性、工作量和您的业务目标单独计算。我们为您提供最适合您预算的解决方案。" },
-            { "question": "工作流程是如何构建的？", "answer": "过程分为几个阶段：研究、策略、视觉风格、沟通。每个阶段都与您协调，您拥有对流程的完全控制权。" },
-            { "question": "我可以只订购标志吗？", "answer": "我们不只是创建一个标志，而是一个完整的识别系统。因此，我们建议选择“标志 + 企业形象”套餐，因为单一的标志无法完整传达品牌的价值。" },
-            { "question": "付款条件是什么？", "answer": "标准方案是 50% 预付款，50% 在项目完成后支付。100% 预付款可享受特殊折扣。" },
-            { "question": "有任何保证吗？", "answer": "是的，我们有“100% 满意保证”。如果您完全不喜欢初始概念，我们准备退还您的款项。您的结果是我们的首要任务。" }
-        ],
-        "ctaTitle": "不要留下疑虑的空间！",
-        "ctaDesc": "得到所有问题的答案了吗？让我们讨论您的项目，并将您的品牌提升到一个新的水平。",
-        "ctaButton": "我已经得到了所有的答案，准备好开始了！"
-    },
-    "mobileCtaBar": {
-        "final_price": "最终价格",
-        "get_offer": "提交申请"
-    },
-    "blog": {
-        "title": "我们的博客",
-        "subtitle": "来自品牌塑造、市场营销和设计世界的最新消息、技巧和分析文章。我们帮助您的业务成长。",
-        "readMore": "阅读更多"
-    },
-    "blogPost": {
-        "author": "作者",
-        "ctaTitle": "这篇文章有用吗？",
-        "ctaDesc": "现在是时候从理论转向实践了。与我们一起将您的品牌提升到一个新的水平。",
-        "ctaButton": "获得免费咨询"
-    },
-    "quiz": {
-        "metadata": {
-            "title": "迷你测试：您的业务准备好进行品牌塑造了吗？ | Jon.Branding",
-            "description": "回答几个简单的问题，了解您的业务对品牌塑造的准备程度及其优势和劣势。"
-        },
-        "exampleTitle": "世界品牌示例：",
-        "questions": [
-            {
-                "question": "您业务的核心理念或使命是否用一句话表达出来？",
-                "brandExample": "沃尔沃 — 安全; 耐克 — 为世界上的每一位运动员带来灵感和创新。",
-                "options": [
-                    { "text": "是的，对每个人来说都清晰易懂", "score": 3 },
-                    { "text": "部分，但还不完全", "score": 2 },
-                    { "text": "不，我还没想过", "score": 1 }
-                ]
-            },
-            {
-                "question": "您能清晰地想象您的目标受众（理想客户）吗？",
-                "brandExample": "苹果 — 创意专业人士和科技爱好者; 强生婴儿 — 年轻妈妈。",
-                "options": [
-                    { "text": "是的，我知道他们的需求和愿望", "score": 3 },
-                    { "text": "我有一个大概的想法", "score": 2 },
-                    { "text": "不，我正试图向所有人推销", "score": 1 }
-                ]
-            },
-            {
-                "question": "您的品牌通过哪些具体的优势与竞争对手区分开来？",
-                "brandExample": "特斯拉 — 创新的电动汽车和自动驾驶; M&M's — “只溶在口，不溶在手”的巧克力。",
-                "options": [
-                    { "text": "我至少有 2-3 个具体优势", "score": 3 },
-                    { "text": "我只在价格上有所不同", "score": 2 },
-                    { "text": "我没有明显的优势", "score": 1 }
-                ]
-            },
-            {
-                "question": "您的视觉外观（标志、颜色、设计）是否反映了您业务的价值？",
-                "brandExample": "可口可乐红 — 活力和激情; 蒂芙尼蓝 — 奢华和优雅。",
-                "options": [
-                    { "text": "是的，完全匹配", "score": 3 },
-                    { "text": "部分，有些元素需要更新", "score": 2 },
-                    { "text": "不，我没注意到这一点", "score": 1 }
-                ]
-            },
-            {
-                "question": "您的客户对您的评价是否统一且正面？",
-                "brandExample": "星巴克 — 不仅仅是咖啡，而是“第三空间”; Zappos — 令人惊叹的客户服务。",
-                "options": [
-                    { "text": "是的，我的品牌声誉很强", "score": 3 },
-                    { "text": "因人而异，有时会有负面评论", "score": 2 },
-                    { "text": "我不知道，我还没有进行过调查", "score": 1 }
-                ]
-            }
-        ],
-        "result": {
-            "bad": {
-                "title": "您需要帮助（5-8 分）",
-                "description": "您的品牌基础很薄弱。为了从竞争对手中脱颖而出并赢得客户忠诚度，您无疑需要专业的帮助. 让我们一起解决这个问题！"
-            },
-            "medium": {
-                "title": "潜力巨大，但仍有差距（9-12 分）",
-                "description": "您有一个良好的基础，但您的品牌可以更强大、更有效. 让我们填补现有的差距，将您的业务提升到一个新的水平。"
-            },
-            "good": {
-                "title": "太棒了！您的品牌基础很牢固（13-15 分）",
-                "description": "恭喜! 您在品牌塑造方面走在了正确的道路上。现在是时候加强这个基础并成为市场领导者了. 我们将为此提供帮助。"
-            },
-            "afterSubmitText": "在不久的将来，我们的专家将与您联系，详细分析您的测试结果并提供个人建议。",
-            "backToHome": "返回主页"
-        },
-        "questionLabel": "问题 {step} / {total}",
-        "nextButton": "下一步",
-        "resultButton": "了解结果"
-    },
-    "brandStrategyPage": {
-        "metadata": {
-            "title": "品牌策略与平台 | 塔什干品牌代理公司",
-            "description": "品牌策略是业务增长工具. 将您的品牌从仅仅漂亮转变为一个工作的系统. 我们开发品牌平台和策略。"
-        },
-        "title": "品牌策略",
-        "subtitle": "一个强大的品牌是一个清晰的想法，它能激励、团结并帮助业务增长。",
-        "section1_title": "品牌策略是业务增长工具",
-        "section1_p1": "每个雄心勃勃的公司都有自己的目标. 对于一些公司来说，是获得一定的市场份额，对于其他公司来说是品牌知名度、向新领域的扩张等等。",
-        "section1_p2": "品牌策略是帮助公司实现这些目标的东西，帮助它成为比仅仅一个产品 or 服务更多的东西——客户和顾客生活的一部分，一个易于识别的形象的载体。",
-        "section1_p3": "最重要的是，它允许系统化营销成本，放弃那些不支持公司定位、因此不合理的工具、渠道 and 想法。",
-        "section2_title": "品牌策略对任何业务都是必要的",
-        "section2_p1": "品牌策略对于新公司和长期存在的公司都是必要的。",
-        "section2_p2_bold": "对于初创公司,",
-        "section2_p2_text": "它从一开始就帮助定义其使命、价值观和身份，在市场中正确定位并吸引客户。",
-        "section2_p3_bold": "对于大公司,",
-        "section2_p3_text": "策略是管理增长和声誉的工具. 在这种情况下，它有助于保持相关性，适应变化并与受众建立牢固的联系。",
-        "section2_p4": "无论业务规模如何，品牌策略都回答了主要问题：为什么客户应该选择你？",
-        "process_title": "品牌塑造是一个过程",
-        "process_subtitle": "在我们的代理公司中，我们坚信品牌塑造不仅仅是创建一个标志. 品牌塑造不是一项一次性的任务，而是一个循环的过程. 每个阶段都起着关键作用，跳过其中任何一个都会削弱品牌及其在市场中的地位. 但如果一切都正确且一致地完成，品牌塑造将有助于业务增长，并促进管理许多过程——从产品生产到市场营销。",
-        "process_steps": [
-            { "title": "分析与研究", "description": "这是第一阶段，也是最重要的阶段，在此阶段收集有关市场、竞争对手和受众的数据. 没有这个，就不可能定义品牌塑造的独特性并了解您的目标受众。" },
-            { "title": "形成品牌平台", "description": "在这里，品牌使命、价值观和独特的品牌主常诞生了——这是决定其特征和声音的基础. 没有一个清晰的平台，所有后续行动都有可能变得支离破碎且缺乏说服力。" },
-            { "title": "策略开发", "description": "策略回答了品牌将如何与受众沟通以及通过哪些渠道建立联系的问题. 这使沟通系统化，使其具有针对性且有效。" },
-            { "title": "视觉识别", "description": "将品牌含义转化为视觉语言——标志、颜色、字体和图形元素. 这使品牌易于识别且与竞争对手不同。" },
-            { "title": "实施与整合", "description": "创建一个品牌只是开始. 正确地将其整合到公司和接触点中非常重要，这样它就能成为企业文化和与客户沟通的一部分。" }
-        ]
-    },
-    "corporateStylePage": {
-        "metadata": {
-            "title": "企业形象和品牌手册 | 塔什干品牌代理公司",
-            "description": "我们不只是创建漂亮的图片，我们还开发一个系统的视觉风格（企业形象、品牌手册），为您的品牌服务并带来结果. 通过标志、颜色、字体和其他元素使您的品牌易于识别且令人难忘。"
-        },
-        "title": "企业形象开发",
-        "subtitle": "品牌的主要元素之一——其视觉组件. 正是它将想法、含义和价值观转化为可以被看到、感受到和记住的形象。",
-        "section1_title": "品牌感知始于图片",
-        "section1_p1": "在现代世界中，视觉信息的感知和同化比文本或文字更快. 我们生活在一个瞬间印象的时代：人们需要几分之一秒的时间来形成对品牌的第一印象，而这通常是通过其视觉形象来实现的。",
-        "section1_p2": "要让一个想法在受众脑海中扎根，仅仅谈论它是不够的——用视觉元素来加强它非常重要. 精心设计的企业形象允许在没有不必要解释的情况下展示品牌价值，立即唤起正确的情绪和联想。",
-        "section2_title": "企业形象是一个系统",
-        "section2_p1": "这不仅关乎美感，还关乎效率、含义和控制. 为了使品牌保持多面性，同时在发展其视觉形象方面保持一致，必须创建一套图形元素。",
-        "section2_p2": "这套元素总是根据业务任务和能力单独选择的. 最小的套装包括标志、颜色、字体、照片风格、广告载体风格以及形成整体形象的其他元素。",
-        "section2_p3": "当视觉风格建立得清晰且一致时，它就成为管理品牌形象及其沟通的强大工具. 如果其所有元素都是协调的，品牌就会被感知为专业的、可靠的且易于识别的。",
-        "process_title": "我们如何创建企业形象？",
-        "process_subtitle": "我们系统地进行企业形象开发，以便每一个细节都能服务于品牌认知度及其策略。",
-        "process_steps": [
-            { "title": "研究与概念", "description": "我们分析受众、市场、竞争对手和品牌地位. 我们定义应该反映在视觉风格中的关键含义 and 想法。" },
-            { "title": "视觉代码开发", "description": "我们创建标志、企业颜色、排版、图形、图标、排版原则——所有这些构成了整体品牌形象。" },
-            { "title": "企业形象系统", "description": "我们开发灵活的元素，帮助在所有格式中保持视觉形象的一致性——从包装到数字环境。" },
-            { "title": "定稿与指南", "description": "我们创建一个指南（品牌手册），其中包含使用该风格的规则，以便品牌在任何载体上都能保持单一的形象。" }
-        ],
-        "cta_title": "企业形象 — 增长工具",
-        "cta_description": "具有强大身份的品牌被识别得更快，被记住的时间更长，并能唤起更多的信任. 我们不只是创建一个视觉风格，而是一个帮助品牌成长、保持一致且可管理的工具。"
-    },
-    "logoDesignPage": {
-        "metadata": {
-            "title": "专业标志设计服务 | Jon.Branding 代理公司乌兹别克斯坦",
-            "description": "标志是您业务的脸面. 我们在乌兹别克斯坦的标志设计机构创建独特、令人难忘且具有战略意义的标志，反映您品牌的精髓并帮助您从竞争对手中脱颖而出。"
-        },
-        "title": "标志设计",
-        "subtitle": "标志不只是一张图片; 它是一个战略工具，是您业务的脸面，也是您留下的第一印象。",
-        "section1_title": "为什么标志如此重要？",
-        "section1_p1": "在当今竞争激烈的市场中，标志是第一件吸引客户眼球的东西. 一个好的标志不仅是一个漂亮的设计，更是一个传达价值、专业精神和业务独特性的象征。",
-        "section1_p2": "它是帮助客户识别并记住您的关键元素. 专业的标志能灌输信任并建立情感联系，将一次性买家转变为忠实粉丝。",
-        "values_title": "一个好的标志应该是：",
-        "values": [
-            { "title": "简单且令人难忘", "description": "最好的标志即使在小尺寸或远距离也容易被识别和记住。" },
-            { "title": "独特且永恒", "description": "它应该将您与竞争对手区分开来，并且在几年内不会过时。" },
-            { "title": "具有战略意义且有意义", "description": "每一条线、颜色和形状都应该反映您业务的特征和目标。" }
-        ],
-        "process_title": "我们如何创建标志？",
-        "process_subtitle": "我们的标志创建过程不仅基于转瞬即逝的灵感，还基于深度的分析和战略思维。",
-        "process_steps": [
-            { "title": "简报与研究", "description": "我们仔细研究您的业务、目标、目标受众和竞争对手。" },
-            { "title": "概念开发", "description": "我们开发几个反映您品牌策略和特征的视觉概念。" },
-            { "title": "设计与演示", "description": "我们完善所选的概念，将其展示在真实的例子（实物模型）上，并解释其背后的逻辑。" },
-            { "title": "定稿与移交", "description": "我们准备所有必要的文件格式（矢量、位图），以便在任何情况下使用，并提供一份关于其使用的迷你指南。" }
-        ],
-        "cta_title": "准备好创建一个工作的标志了吗？",
-        "cta_description": "不要满足于模板标志. 让我们为您的业务创建一个独特且强大的符号，成为您成功的基础。",
-        "cta_button": "获得免费咨询"
-    },
-    "namingPage": {
-        "metadata": {
-            "title": "塔什干命名服务 | Jon.Branding 代理公司",
-            "description": "为品牌选择一个难忘且强大的名称. 一个好的名字不仅仅听起来好听; 它能传达精髓，被记住并帮助品牌脱颖而出. 我们的命名服务将帮助您找到完美的名称。"
-        },
-        "title": "命名 — 强大的品牌名称",
-        "subtitle": "品牌名称 — 它的第一印象，它的能量，特征和用一个词表达的想法. 一个好的名字不仅听起来好听，而且能传达精髓，被记住并帮助品牌在竞争对手中脱颖而出。",
-        "section1_title": "名称 — brand策略的一部分",
-        "section1_p1": "一个好的名字支持联想、认知和情感联系. 创建一个这样的名字是一项考虑品牌定位、市场、目标受众和长期公司目标的战略工作。",
-        "section1_p2": "我们将命名视为最重要的品牌塑造元素. 它不是一组随机的想法，而是经过精心考虑的工作，其中每个词都至关重要。",
-        "section2_title": "每一个强大的名字都始于一个想法",
-        "section2_p1": "在寻找名字之前，我们会问主要的问题：这个品牌是关于什么的？它应该唤起什么样的感受和形象？因此，我们仔细分析产品、其受众和环境，定义寻找理想名字的语义方向。",
-        "section2_p2": "它可以建立在一种情感、隐喻、文化密码、专业语言甚至双关语之上. 最重要的是它能发挥作用，传达精髓并帮助品牌被记住。",
-        "process_title": "我们如何创建名字？",
-        "process_subtitle": "我们机构的命名开发 — 一个明确的过程，在这个过程中每一个阶段都非常重要：",
-        "process_steps": [
-            { "title": "研究", "description": "研究市场、受众、竞争对手和语义方向。" },
-            { "title": "形成概念", "description": "定义可能的名称搜索向量。" },
-            { "title": "想法产生与测试", "description": "创建一个候选名单，检查它们的声音、含义 and 潜力。" },
-            { "title": "检查与定稿", "description": "分析注册可能性，检查域名和联想，选择最好的。" }
-        ],
-        "check_title": "检查名字与创建同样重要",
-        "check_subtitle": "如果一个绝妙的想法无法注册，或者它带有不良的联想，它就不会奏效. 我们通过几个关键参数检查名字：",
-        "check_points": [
-            { "title": "法律纯洁性", "description": "分析商标注册的可能性。" },
-            { "title": "域名与数字环境", "description": "检查名字在数字空间的可用性。" },
-            { "title": "含义与联想", "description": "检查可读性、发音、可能的联想范围、文化感知和品牌类别匹配度。" }
-        ],
-        "calculator_cta_button": "前往专利计算器"
-    },
-    "patentCalculatorPage": {
-        "metadata": {
-            "title": "商标计算器 | Jon.Branding",
-            "description": "计算与乌兹别克斯坦商标注册相关的概算成本（国家规费和服务费）。"
-        },
-        "title": "商标注册计算器",
-        "subtitle": "命名（取名字） — 一个创造性的过程，而专利申请 — 一个法律过程. 在我们团队的专利代理人的帮助下，在这里计算商标注册的概算成本（国家规费和服务费）。",
-        "trademarkCalculator": {
-            "formTitle": "输入数据",
-            "brandNameLabel": "品牌名称",
-            "brandNamePlaceholder": "例如：MyBrand",
-            "yourNameLabel": "您的姓名",
-            "yourNamePlaceholder": "输入您的全名",
-            "phoneLabel": "您的电话号码",
-            "phonePlaceholder": "+998901234567",
-            "classCountLabel": "活动类别数量",
-            "classCountMax": "最大 45",
-            "personTypeLabel": "人员类型",
-            "personTypeOptions": [
-                { "value": "jismoniy", "label": "自然人" },
-                { "value": "yuridik", "label": "法人" }
-            ],
-            "speedLabel": "审理速度",
-            "speedOptions": [
-                { "value": "oddiy", "label": "正常（7个月）", "labelShort": "正常" },
-                { "value": "tez", "label": "加急（1.5个月）", "labelShort": "加急" }
-            ],
-            "expertCheckLabel": "额外的专家检查",
-            "expertCheckOptions": [
-                { "value": "ha", "label": "启用" },
-                { "value": "yoq", "label": "禁用" }
-            ],
-            "activityLabel": "活动类型（可选）",
-            "activityPlaceholder": "例如：设计、建筑、服装生产...",
-            "activityHelp": "这将有助于定义类别。",
-            "submitButton": "订购专利申请",
-            "submittingButton": "正在发送...",
-            "successMessage": "✅ 订单已接受！",
-            "tryAgainButton": "重新计算",
-            "summaryTitle": "费用明细",
-            "totalCostTitle": "10 年期专利大概总成本",
-            "currency": "苏姆",
-            "classLabel": "类别",
-            "expertCheckLabelShort": "专家+",
-            "totalCostNote": "包括所有的国家规费和服务费",
-            "step1Title": "第一步（首付款）",
-            "ourServiceFee": "我们团队的服务费",
-            "applicationFee": "申请提交费",
-            "step1Total": "第一步总计",
-            "step2Title": "第二步（领取证书）",
-            "stateFeeBase": "国家规费（基础）",
-            "extraClassesFee": "额外类别（{count} 个）",
-            "step2Total": "第二步总计",
-            "expediteTitle": "加急审理的额外费用",
-            "expediteBaseFee": "基础（12 BRV + 12% 增值税）",
-            "expediteTotal": "加急总计",
-            "expertCheckTitle": "专家检查",
-            "expertBaseFee": "基础（2×BRV）",
-            "expertTotal": "专家服务总计",
-            "importantNoteTitle": "重要提示",
-            "importantNoteText": "所有价格都取决于乌兹别克斯坦共和国司法部设定的基本基准值（BRV），并可能发生变化. 此计算器不是公开要约，仅供参考。",
-            "importantNoteBHM": "当前的 BRV 为 {bhm} 苏姆。",
-            "error_brand": "请输入品牌名称。",
-            "error_name": "请输入您的姓名。",
-            "error_phone": "请输入有效的电话号码。",
-            "error_server": "发生服务器错误。",
-            "privacyPolicyText": "我接受隐私政策条款并同意处理个人数据。",
-            "error_privacy": "您必须接受隐私政策。",
-            "success_toast_title": "成功！",
-            "success_toast_desc": "您的请求已收到. 我们将很快与您联系！",
-            "error_toast_title": "错误！",
-            "telegramTitle": "新的专利申请（来自计算器）",
-            "notSpecified": "未指定"
-        }
-    },
-    "packagingPage": {
-        "metadata": {
-            "title": "乌兹别克斯坦包装设计服务 | Jon.Branding",
-            "description": "我们不仅仅是创造漂亮的包装; 我们还创造一个强大的营销工具来销售您的产品. 我们在乌兹别克斯坦的包装设计机构将帮助您的品牌从竞争对手中脱颖而出并赢得买家的喜爱。"
-        },
-        "title": "包装设计开发",
-        "subtitle": "在激烈的竞争条件下，包装通常成为主要的营销工具. 它能让品牌在货架上与众不同，讲述它的故事，并从第一眼起就与受众建立联系。",
-        "section1_title": "包装 — 不仅仅是品牌识别的载体",
-        "section1_p1": "包装 — 在销售点与品牌的第一次接触，这种视觉吸引力能瞬间建立产品印象. 在许多情况下，包装决定了一个人是否购买。",
-        "section1_p2": "我们的目标 — 不仅仅是创造审美 and 漂亮的包装，更是一个高效的工具，满足业务任务 and 促进其增长。",
-        "process_title": "我们如何创建包装？",
-        "process_subtitle": "我们对待包装开发不只是作为一个单独的设计，而是一个应该为业务服务的复杂系统，并满足受众的期望. 我们的过程包括几个关键阶段：",
-        "process_steps": [
-            { "title": "分析与策略", "description": "研究您的产品、受众、竞争对手以及包装将被使用的环境. 分析品类的视觉代码。" },
-            { "title": "概念与设计", "description": "基于收集到的数据开发反映产品本质的视觉想法：颜色、图形、排版等。" },
-            { "title": "定稿与准备", "description": "仔细制定所选概念的所有技术方面（针对不同格式的调整，印刷准备）。" }
-        ],
-        "cta_title": "包装不仅吸引注意力，它还能销售",
-        "cta_description": "好的包装设计 — 不只是漂亮的装饰，而是为业务服务的工具. 我们开发功能性的、经过战略深思熟虑的设计，使包装成为一个成熟的销售工具。"
-    },
-    "servicesPage": {
-        "metadata": {
-            "title": "品牌服务与价格 | 塔什干专业品牌设计机构 | Jon.Branding",
-            "description": "了解我们的全方位品牌服务：从 LOGO 设计到品牌策略. 使用在线计算器，即时获取乌兹别克斯坦市场最具竞争力的品牌全案报价."
-        },
-        "packageBuilder": {
-            "title": "服务与价格",
-            "subtitle": "了解我们的全方位服务，为您的企业定制专属品牌方案. 使用在线计算器即时获取精准报价。",
-            "categories": {
-                "tripwire": "快速启动 (低成本服务)",
-                "strategy": "战略咨询服务",
-                "naming": "品牌命名",
-                "identity": "视觉识别：LOGO、画册、品牌手册",
-                "addons": "附加服务",
-                "more_services": "其他条款与服务"
-            },
-            "tabs": {
-                "included": "服务内容",
-                "benefits": "您将获得"
-            },
-            "your_package": "您的方案",
-            "your_package_desc": "请选择适合您业务需求的项。",
-            "selected": "已选择",
-            "select": "选择",
-            "base_price_label": "起始价格",
-            "final_price": "最终报价：",
-            "promo_code_label": "优惠码",
-            "promo_code_placeholder": "输入优惠码",
-            "promo_code_invalid": "优惠码无效",
-            "discountSelector": {
-                "none": "无折扣",
-                "package": "套餐优惠 20%",
-                "full": "全额预付 (28% 折扣)"
-            },
-            "empty_package_desc": "您尚未选择任何服务。请至少选择一项服务。",
-            "recommended": "专家推荐"
-        },
-        "comparison": {
-            "title": "我们与竞争对手",
-            "description": "我们不仅提供比高端机构更具性价比的价格，更确保提交的品牌成果超越您的期望。",
-            "features": "服务特性",
-            "whyPremiumTitle": "为什么只跟高端机构比？",
-            "whyPremiumDesc": "我们只与具备战略思维的顶级公司对标。我们的目标并非单纯的低价，而是在确保顶级品质的同时，回归合理的商业价格。与不具备战略高度的小作坊进行对比，是对客户和我们专业度的不负责任。",
-            "ctaTitle": "差异显而易见。现在，做出您的明智选择！",
-            "ctaDesc": "卓越的品牌建设无需支付溢价。请为您的业务做出正确的决定，立即联系我们。",
-            "ctaButton": "我需要这种专业方案"
-        }
-    },
-    "pickTwoSelector": {
-      "title": "三选二",
-      "subtitle": "价格—质量—速度：很少能同时获得这三者。",
-      "ctaText": "索取方案",
-      "options": {
-        "cheap": "便宜",
-        "quality": "高质量",
-        "fast": "快速"
+    "title": "品牌手册开发",
+    "subtitle": "品牌手册不仅仅是一份带有标志的文件，它是您品牌的宪法，确保其一致性和完整性。",
+    "section1_title": "为什么每个企业都需要品牌手册？",
+    "section1_p1": "品牌手册是管理品牌的关键工具。它明确定义了使用您公司视觉和思想元素的所有规则——从标志和颜色到沟通语调。",
+    "section1_p2": "这份文件有助于避免营销中的混乱，确保品牌认知度，并在与设计师、营销人员和其他承包商合作时节省时间和金钱。",
+    "values_title": "品牌手册解决了这些问题：",
+    "values": [
+      {
+        "title": "一致性与认知度",
+        "description": "确保您的品牌在所有平台——从名片到网站——看起来都一样且专业。"
       },
-      "messages": {
-        "cheap_fast": "质量可能不稳定. 此方案适用于紧急和低预算项目。",
-        "cheap_quality": "需要等待更长时间才能得到结果. 我们将根据您的预算进行调整，并按排队顺序工作以确保质量。",
-        "quality_fast": "价格会更高. 对于紧急项目（2-3 天），标准价格会额外加收 50% 的费用. 我们将动员团队，优先考虑您的截止日期。",
-        "default": "请选择您认为最重要的 2 个优先事项。"
+      {
+        "title": "节省资源",
+        "description": "无需向每个新员工或承包商解释设计规则，从而加快工作流程。"
       },
-      "tooltip": "先取消一个"
+      {
+        "title": "品牌保护",
+        "description": "保护您的形象免遭不当使用，维护您品牌的完整性和价值。"
+      }
+    ],
+    "process_title": "品牌手册包括哪些内容？",
+    "process_subtitle": "我们的品牌手册包含有效品牌管理所需的所有必要部分：",
+    "process_steps": [
+      {
+        "title": "品牌平台",
+        "description": "使命、价值观、品牌特性和目标受众。"
+      },
+      {
+        "title": "标志与形象",
+        "description": "使用标志、企业颜色和字体的规则。"
+      },
+      {
+        "title": "视觉风格",
+        "description": "使用照片、插图和图形元素的规则。"
+      },
+      {
+        "title": "实际应用",
+        "description": "真实媒体（名片、演示文稿、社交媒体）的设计示例。"
+      }
+    ],
+    "cta_title": "准备好为您的品牌带来秩序了吗？",
+    "cta_description": "专业的品牌手册是对您业务稳定未来的投资。让我们创建一个将成为您可靠助手的文档。",
+    "cta_button": "订购品牌手册"
+  },
+  "popularPackages": {
+    "title": "最受欢迎的套餐",
+    "packageTitle": "命名 + 标志 (高级)",
+    "packageSubtitle": "开启强大品牌的完美组合。",
+    "features": [
+      "为您的品牌取一个完美的名字（6种语言检查）",
+      "专业标志（5个概念）",
+      "完整的企业形象（颜色、字体）",
+      "在15个以上的真实模型上展示",
+      "专利审计和咨询",
+      "10个品牌贴纸"
+    ],
+    "separate": "分开",
+    "packagePrice": "套餐价",
+    "packageDiscount": "(-20% 折扣!)",
+    "upfrontDiscount": "100%预付款 (-28% 总折扣!)",
+    "ctaButton": "选择此套餐"
+  },
+  "sitemapPage": {
+    "title": "网站地图",
+    "subtitle": "我们网站上所有页面的概览，以帮助您快速找到所需的信息。",
+    "sections": {
+      "main": "主要部分",
+      "services": "服务",
+      "blog": "博客文章"
     },
-    "exitIntentModal": {
-        "title": "别走！",
-        "description": "我们为您准备了特别优惠。<br/>我们提供<span class='font-bold text-primary'>各种折扣</span>。抓住机会！",
-        "button": "查看折扣"
-    },
-    "queueStatus": {
-        "subtitle": "名额有限",
-        "title": "赶快！预订您的名额！",
-        "description": "我们为每个项目投入时间以确保高质量. 因此，我们同时只处理有限数量的项目。",
-        "queueTitle": "项目队列",
-        "booked": "已预订",
-        "available": "有空位",
-        "tooltipBooked": "此名额已预订",
-        "tooltipAvailable": "您可以登记排队",
-        "remainingSlots": "剩余空位",
-        "slotsUnit": "个",
-        "onlineNow": "目前在线人数",
-        "peopleUnit": "人",
-        "nextProjectStart": "下一个项目开始时间",
-        "ctaButton": "预订我的名额",
-        "ctaSubtitle": "领先竞争对手一步！",
-        "timeframes": {
-            "2 weeks": "在 2 周内"
-        }
-    },
-    "leadMagnetPopup": {
-        "title": "送给您的免费礼物！",
-        "subtitle": "自主按10分制检查您的品牌。",
-        "description": "完全免费下载由我们专家编写的<b>《品牌检查清单》</b>。",
-        "cta": "获取检查清单",
-        "closeText": "不，谢谢"
+    "links": {
+      "home": "主页",
+      "quiz": "品牌测试",
+      "portfolio": "作品集",
+      "process": "工作流程",
+      "faq": "常见问题",
+      "services_prices": "所有服务和价格",
+      "brand_strategy": "品牌策略",
+      "naming": "命名",
+      "brandbook": "品牌手册",
+      "corporate_style": "企业形象",
+      "packaging_design": "包装设计",
+      "logo_design": "标志设计",
+      "patent_calculator": "专利计算器",
+      "marketplace_cover": "销售卡设计"
     }
+  },
+  "hero": {
+    "headlines": [
+      "您的品牌|卖不出去？|我们来解决。",
+      "从竞争中|脱颖而出|。",
+      "让您的品牌不仅“漂亮”，而且|盈利|。",
+      "让顾客|爱上您|。一次又一次。",
+      "从小企业到|强大品牌|。一步之遥。"
+    ],
+    "description": "作为乌兹别克斯坦领先的品牌代理机构，我们不只是设计网站或 LOGO。我们为您的企业构建<span class='font-bold text-foreground'>以结果为导向</span>的品牌系统。通过专业的市场策略和视觉设计，助您的品牌在塔什干乃至中亚市场脱颖而出。",
+    "buttonTexts": [
+      "分析我的品牌",
+      "帮助我增加销售额",
+      "免费策略会议",
+      "我需要一个强大的品牌"
+    ],
+    "buttonHint": "免费。无任何附加条件。"
+  },
+  "contactModal": {
+    "stepTitles": {
+      "contact": "联系方式",
+      "project": "关于项目",
+      "budget": "预算",
+      "meeting": "会议"
+    },
+    "title": "为了高质量的咨询",
+    "description": "回答几个问题，以便我们更好地了解您的项目。",
+    "fullName": "全名",
+    "fullNamePlaceholder": "张三",
+    "phone": "电话号码",
+    "phonePlaceholder": "+998 90 123 45 67",
+    "telegram": "Telegram用户名（可选）",
+    "telegramPlaceholder": "@username",
+    "companyName": "公司或项目名称",
+    "companyNamePlaceholder": "Jon.Branding",
+    "website": "网站或社交媒体（可选）",
+    "websitePlaceholder": "https://t.me/jonbranding",
+    "goal": "哪个目标最接近您？",
+    "goalOptions": [
+      {
+        "value": "exploring",
+        "label": "我对品牌不熟悉，但我认为我的业务需要它。"
+      },
+      {
+        "value": "has_problem",
+        "label": "我有一个品牌，但效果不佳；我需要分析和咨询。"
+      },
+      {
+        "value": "ready_to_start",
+        "label": "我了解品牌的力量，并有具体的目标。"
+      }
+    ],
+    "budget": "项目的大概预算？",
+    "budgetOptions": [
+      "还没有预算 / 只是在探索",
+      "最高500美元",
+      "500 - 1,500美元",
+      "1,500 - 3,000美元",
+      "3,000美元以上"
+    ],
+    "location": "您的会议地点",
+    "locationPlaceholder": "选择您所在的地区",
+    "locationOptions": [
+      "塔什干",
+      "费尔干纳",
+      "其他地区"
+    ],
+    "meetingPlace": "您想在哪里见面？",
+    "meetingPlaceOptions": [
+      {
+        "value": "our_office",
+        "label": "在我们的办公室",
+        "description": "完全沉浸在项目中"
+      },
+      {
+        "value": "neutral",
+        "label": "在中立地区",
+        "description": "在轻松的氛围中讨论"
+      },
+      {
+        "value": "client_office",
+        "label": "在您的办公室",
+        "description": "了解您的业务"
+      }
+    ],
+    "onlineMeetingAlert": "明白了。我们将与您安排一个方便的时间进行在线会议。",
+    "backButton": "返回",
+    "nextButton": "下一步",
+    "submitButton": "发送请求",
+    "privacyPolicyText": "我接受隐私政策的条款并同意处理个人数据。",
+    "formErrors": {
+      "fullName": "请输入您的全名。",
+      "phone": "请输入有效的电话号码。",
+      "goal": "请选择您的主要目标。",
+      "budget": "请选择大概的预算。",
+      "location": "请选择您的位置。",
+      "meetingPlace": "您需要选择一个会议地点。",
+      "privacyPolicy": "您必须接受隐私政策。"
+    },
+    "successToast": {
+      "title": "成功！",
+      "description": "您的请求已收到。我们将很快与您联系！"
+    },
+    "leadMagnetToast": {
+      "title": "为您准备的特别资源！",
+      "description": "您的请求已接受！首先，我们将您引向我们的免费资料。"
+    },
+    "errorToast": {
+      "title": "错误！",
+      "description": "提交您的请求时出错。请重试。"
+    }
+  },
+  "home": {
+    "cta1_title": "您的品牌也可以如此出色。",
+    "cta1_desc": "通过专业的设计将您的业务提升到一个新的水平。我们将帮助您为您的业务找到完美的解决方案。",
+    "cta1_button": "也为我的业务"
+  },
+  "urgencyBlock": {
+    "title": "🔥 在您关闭此页面之前...",
+    "subtitle": "想象一下：",
+    "line1": "明天您的竞争对手推出了一个专业品牌。标志令人惊叹。包装在商店里第一眼就吸引人。",
+    "line2": "顾客不从您这里购买，而是从他们那里购买。",
+    "line3": "原因很简单：他们投资了。而您...在考虑。"
+  },
+  "personalOfferBlock": {
+    "title": "💎 我的建议：",
+    "subtitle": "您将获得：",
+    "ctaButton": "我需要这个",
+    "sections": [
+      {
+        "title": "1️⃣ 策略",
+        "points": [
+          "品牌定位和竞争分析",
+          "目标受众地图",
+          "独特销售主张 (USP)"
+        ]
+      },
+      {
+        "title": "2️⃣ 形象识别",
+        "points": [
+          "专业标志（3-5 个方案）",
+          "企业配色方案",
+          "排版和风格指南"
+        ]
+      },
+      {
+        "title": "3️⃣ 文档",
+        "points": [
+          "完整的品牌手册（30-50 页）",
+          "所有格式的文件 (AI, PNG, PDF, SVG)",
+          "指南：如何使用标志"
+        ]
+      },
+      {
+        "title": "4️⃣ 法律保护",
+        "points": [
+          "命名咨询",
+          "专利和商标注册流程",
+          "知识产权保护策略"
+        ]
+      },
+      {
+        "title": "5️⃣ 支持",
+        "points": [
+          "3 个月免费修改",
+          "通过 Telegram 持续沟通",
+          "品牌应用建议"
+        ]
+      }
+    ]
+  },
+  "servicesHero": {
+    "title": "加强品牌塑造的服务",
+    "subtitle": "为您的业务提供有保证的结果和清晰的解决方案",
+    "cta": "查看价格"
+  },
+  "serviceSections": {
+    "services": [
+      {
+        "id": "naming",
+        "title": "命名",
+        "description": "为品牌选择一个难忘且强大的名称。",
+        "buttonText": "阅读更多"
+      },
+      {
+        "id": "logo-dizayni",
+        "title": "标志设计",
+        "description": "创建一个独特且令人难忘的标志，以反映您业务的精髓。",
+        "buttonText": "阅读更多"
+      },
+      {
+        "id": "firmenniy-stil",
+        "title": "企业形象",
+        "description": "一个使您的品牌易于识别的标志、颜色和字体系统。",
+        "buttonText": "阅读更多"
+      },
+      {
+        "id": "brandbook",
+        "title": "品牌手册",
+        "description": "描述您品牌形象使用规则的文件。",
+        "buttonText": "阅读更多"
+      },
+      {
+        "id": "qadoq-dizayni",
+        "title": "包装设计",
+        "description": "吸引人的设计，使您的产品在货架上脱颖而出。",
+        "buttonText": "阅读更多"
+      }
+    ]
+  },
+  "stats": {
+    "experience": "年经验",
+    "clients": "满意的客户",
+    "projects": "成功的项目",
+    "recommend": "客户推荐我们"
+  },
+  "trustedBy": {
+    "title": "信任我们的公司"
+  },
+  "whyUs": {
+    "title": "为什么选择我们？",
+    "subtitle": "我们不只是做出承诺。我们通过系统的方法为您的品牌创造真正的价值。",
+    "values": [
+      {
+        "title": "战略方法",
+        "description": "我们不只是画漂亮的图片。每一个设计元素都旨在增加您的销售额并加强您的品牌。"
+      },
+      {
+        "title": "透明的流程",
+        "description": "简报 → 分析 → 策略 → 设计 → 交付。在每个阶段，我们都与您紧密合作，您拥有对流程的完全控制权。"
+      },
+      {
+        "title": "结果与忠诚度",
+        "description": "超过 50 个项目，最重要的是 - 90% 的客户向他们的朋友推荐我们。这是我们最大的成就。"
+      }
+    ],
+    "ctaTitle": "你喜欢我们的方法吗？",
+    "ctaDesc": "让我们免费分析您的品牌，确定其优势和劣势。这不会给您带来任何义务。",
+    "ctaButton": "免费分析我的品牌"
+  },
+  "targetAudience": {
+    "title": "您熟悉这些问题吗？",
+    "subtitle": "如果以下想法困扰着您，那么我们就是您的正确解决方案。",
+    "problems": [
+      {
+        "text": "我有一个业务，但没有品牌。没有人认识我。"
+      },
+      {
+        "text": "我的品牌过时了，我落后于竞争对手。"
+      },
+      {
+        "text": "我的客户不理解我的价值，他们只问价格。"
+      },
+      {
+        "text": "我有销售，但它们不稳定。客户不会回来。"
+      }
+    ],
+    "solutionTitle": "好消息：所有这些问题都可以解决！",
+    "solutionSubtitle": "适当建立的品牌战略可以消除此类问题，并使您的业务走上稳定增长的道路。",
+    "solutionButton": "查看所有问题的解决方案"
+  },
+  "beforeAfter": {
+    "title": "在此之前和之后",
+    "subtitle": "亲眼看看正确的品牌塑造如何改变您的业务。",
+    "ctaTitle": "您的品牌准备好改变了吗？",
+    "ctaDesc": "让我们分析您的品牌并制定计划将其提升到一个新的水平。",
+    "ctaButton": "也改变我的品牌"
+  },
+  "testimonials": {
+    "title": "我们的客户对我们的评价",
+    "subtitle": "我们最大的成就就是满意的客户。",
+    "textReviewsTitle": "文字评论",
+    "textReviewsSubtitle": "来自我们其他尊贵客户的评价"
+  },
+  "gallery": {
+    "title": "我们的作品示例",
+    "subtitle": "看看我们创建的品牌如何在他们的利基市场中脱颖而出。"
+  },
+  "founder": {
+    "title": "创始人：巴赫蒂约尔洪·加济耶夫",
+    "message": "你好！我是 Jon.Branding 的创始人巴赫蒂约尔洪。我帮助企业主将他们的品牌提升到一个新的水平。我的目标不仅仅是创建一个漂亮的设计，而是为您的业务建立一个工作的、基于策略的、以结果为导向的品牌系统。让我们一起分析您的品牌，唤醒其“休眠”的潜力。",
+    "points": [
+      {
+        "icon": "Medal",
+        "text": "超过 50 个项目"
+      },
+      {
+        "icon": "Globe",
+        "text": "国际经验"
+      },
+      {
+        "icon": "Zap",
+        "text": "快速高效的沟通"
+      },
+      {
+        "icon": "Users",
+        "text": "清晰透明的工作流程"
+      }
+    ],
+    "phoneButton": "通过电话联系",
+    "telegramButton": "在 Telegram 上写信"
+  },
+  "process": {
+    "title": "我们的工作流程",
+    "subtitle": "在每个项目中，我们都使用经过验证、透明且高效的流程。",
+    "phases": [
+      {
+        "phase": "01",
+        "title": "Discovery (发现)",
+        "description": "旅程的开始和奠定基础。",
+        "tasks": [
+          "简报",
+          "识别业务问题",
+          "市场和竞争对手分析",
+          "受众需求",
+          "收集想法"
+        ]
+      },
+      {
+        "phase": "02",
+        "title": "Strategy (策略)",
+        "description": "规划品牌路径。",
+        "tasks": [
+          "目标设定",
+          "品牌定位",
+          "品牌平台",
+          "核心原则",
+          "规划"
+        ]
+      },
+      {
+        "phase": "03",
+        "title": "Creative Design (创意设计)",
+        "description": "品牌视觉形象形成。",
+        "tasks": [
+          "命名",
+          "标志设计",
+          "视觉概念",
+          "包装设计",
+          "品牌手册"
+        ]
+      },
+      {
+        "phase": "04",
+        "title": "Presentation (演示)",
+        "description": "通过真实案例测试想法。",
+        "tasks": [
+          "设计演示",
+          "基于反馈的调整",
+          "最终迭代",
+          "模型展示"
+        ]
+      },
+      {
+        "phase": "05",
+        "title": "Implementation (实施)",
+        "description": "将品牌变为现实。",
+        "tasks": [
+          "最终设计文件",
+          "移交品牌手册",
+          "视觉指南",
+          "印刷准备"
+        ]
+      },
+      {
+        "phase": "06",
+        "title": "Growth (增长)",
+        "description": "持续的品牌支持。",
+        "tasks": [
+          "实施说明",
+          "持续支持",
+          "后续步骤咨询"
+        ]
+      }
+    ],
+    "ctaTitle": "准备好讨论您的项目了吗？",
+    "ctaDesc": "让我们开始将您的想法变为现实。",
+    "ctaButton": "讨论项目"
+  },
+  "leadMagnet": {
+    "title": "将您的品牌提升到一个新的水平",
+    "subtitle": "不知道从哪里开始与我们合作？我们为您准备了几个免费且有用的资源。研究品牌塑造的世界并迈出第一步。",
+    "magnets": [
+      {
+        "id": "pdf",
+        "title": "免费 PDF 清单",
+        "subtitle": "品牌塑造中的 7 个最大错误",
+        "description": "了解在您的业务中应避免哪些错误，并获得分析您的品牌的实用指南。",
+        "cta": "查看清单",
+        "href": "/{lang}/checklist"
+      },
+      {
+        "id": "quiz",
+        "title": "迷你测试",
+        "subtitle": "您的业务准备好进行品牌塑造了吗？",
+        "description": "回答几个问题，了解您的业务对品牌塑造的准备程度及其优势和劣势。",
+        "cta": "开始测试",
+        "href": "/{lang}/quiz"
+      },
+      {
+        "id": "video",
+        "title": "视频指南",
+        "subtitle": "什么是战略品牌塑造？",
+        "description": "为什么仅仅一个漂亮的标志是不够的？在视频中看看我们的方法会给您的业务带来什么结果。",
+        "cta": "观看视频",
+        "href": "#video"
+      }
+    ],
+    "cta": {
+      "title": "清单有帮助吗？",
+      "description": "现在是时候从理论转向实践了。让我们免费分析您的品牌并确定增长点。",
+      "button": "获得免费咨询"
+    },
+    "checklistContent": {
+      "progress_text": "已完成：{checkedCount} / {total}",
+      "items": [
+        {
+          "title": "1. 在没有策略的情况下工作",
+          "description": "最大的错误是在没有明确策略的情况下开始设计. 谁是你的客户? 你如何与竞争对手区分开来? 你的核心信息是什么? 不回答这些问题的标志或网站只是一张漂亮的图片。",
+          "solution": "解决方案: 从回答“我们是谁?”、“为谁服务?”以及“为什么?”开始。这将为你的品牌创建一个坚实的基础。"
+        },
+        {
+          "title": "2. 试图取悦每个人",
+          "description": "试图“为每个人服务”的品牌最终不会为任何人服务。试图取悦所有人群会导致品牌模糊和薄弱。",
+          "solution": "解决方案: 明确定义你的目标受众。描绘你的“理想客户”画像，并将你的营销工作专门集中在他们身上。"
+        },
+        {
+          "title": "3. 抄袭竞争对手",
+          "description": "关注竞争对手很重要，但盲目抄袭是死路一条。如果你的设计类似于一个知名品牌，你将永远被视为“廉价的替代品”。",
+          "solution": "解决方案: 研究竞争对手，找到你自己独特的道路。不要害怕与众不同。"
+        },
+        {
+          "title": "4. 不一致",
+          "description": "你的标志在网站上是一个风格，在 Instagram 上是另一个风格，在包装上又是第三个。这种视觉混乱会破坏信任并阻碍品牌认知度。",
+          "solution": "解决方案: 创建一个“品牌手册”（指南），规定使用你的标志、颜色、字体的规则。在所有地方一致地使用它。"
+        },
+        {
+          "title": "5. 过度复杂的标志",
+          "description": "一个有很多小细节、渐变和文字的标志很难被记住，而且在小尺寸（例如，网站图标或社交媒体头像）下看起来很差。",
+          "solution": "解决方案: 追求简单和极简。最好的标志是那些凭记忆就能画出来的标志。"
+        },
+        {
+          "title": "6. 难以发音或记忆的名称",
+          "description": "如果你的客户不能发音你的名字或不能正确书写，他们将无法找到你或向他人推荐你。",
+          "solution": "解决方案: 选择一个简单、响亮且在法律上清晰（商标未被占用）的名称。"
+        },
+        {
+          "title": "7. 认为品牌塑造是一次性的工作",
+          "description": "市场、客户要求、技术都在不断变化。一个不随时代变化的品牌将会过时。",
+          "solution": "解决方案: 定期进行“品牌审计”。如果需要，不要害怕更新你的设计（重塑品牌）。这是增长的标志，而不是虚弱的标志。"
+        }
+      ],
+      "result": {
+        "bad": {
+          "title": "需要紧急帮助！",
+          "description": "您的品牌有几个关键漏洞。这是一个绝佳的增长机会！我们可以帮助您将这些弱点转化为优势。"
+        },
+        "good": {
+          "title": "在正确的轨道上！",
+          "description": "您有一个良好的基础，但有一些点可以加强以获得更好的结果. 让我们一起讨论我们该如何做。"
+        },
+        "perfect": {
+          "title": "太棒了！您的品牌状况良好！",
+          "description": "恭喜! 您有一个坚实的基础。现在是时候考虑下一步了——如何扩大规模并成为市场领导者。我们为您提供了一些想法。"
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "有关品牌塑造过程、价格和其他主题的最常见问题的解答。",
+    "faqItems": [
+      {
+        "question": "为什么价格不固定？",
+        "answer": "每个项目都是独特的。价格根据项目的复杂性、工作量和您的业务目标单独计算。我们为您提供最适合您预算的解决方案。"
+      },
+      {
+        "question": "工作流程是如何构建的？",
+        "answer": "过程分为几个阶段：研究、策略、视觉风格、沟通。每个阶段都与您协调，您拥有对流程的完全控制权。"
+      },
+      {
+        "question": "我可以只订购标志吗？",
+        "answer": "我们不只是创建一个标志，而是一个完整的识别系统。因此，我们建议选择“标志 + 企业形象”套餐，因为单一的标志无法完整传达品牌的价值。"
+      },
+      {
+        "question": "付款条件是什么？",
+        "answer": "标准方案是 50% 预付款，50% 在项目完成后支付。100% 预付款可享受特殊折扣。"
+      },
+      {
+        "question": "有任何保证吗？",
+        "answer": "是的，我们有“100% 满意保证”。如果您完全不喜欢初始概念，我们准备退还您的款项。您的结果是我们的首要任务。"
+      }
+    ],
+    "ctaTitle": "不要留下疑虑的空间！",
+    "ctaDesc": "得到所有问题的答案了吗？让我们讨论您的项目，并将您的品牌提升到一个新的水平。",
+    "ctaButton": "我已经得到了所有的答案，准备好开始了！"
+  },
+  "mobileCtaBar": {
+    "final_price": "最终价格",
+    "get_offer": "提交申请"
+  },
+  "blog": {
+    "title": "我们的博客",
+    "subtitle": "来自品牌塑造、市场营销和设计世界的最新消息、技巧和分析文章。我们帮助您的业务成长。",
+    "readMore": "阅读更多"
+  },
+  "blogPost": {
+    "author": "作者",
+    "ctaTitle": "这篇文章有用吗？",
+    "ctaDesc": "现在是时候从理论转向实践了。与我们一起将您的品牌提升到一个新的水平。",
+    "ctaButton": "获得免费咨询"
+  },
+  "quiz": {
+    "metadata": {
+      "title": "迷你测试：您的业务准备好进行品牌塑造了吗？ | Jon.Branding",
+      "description": "回答几个简单的问题，了解您的业务对品牌塑造的准备程度及其优势和劣势。"
+    },
+    "exampleTitle": "世界品牌示例：",
+    "questions": [
+      {
+        "question": "您业务的核心理念或使命是否用一句话表达出来？",
+        "brandExample": "沃尔沃 — 安全; 耐克 — 为世界上的每一位运动员带来灵感和创新。",
+        "options": [
+          {
+            "text": "是的，对每个人来说都清晰易懂",
+            "score": 3
+          },
+          {
+            "text": "部分，但还不完全",
+            "score": 2
+          },
+          {
+            "text": "不，我还没想过",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question": "您能清晰地想象您的目标受众（理想客户）吗？",
+        "brandExample": "苹果 — 创意专业人士和科技爱好者; 强生婴儿 — 年轻妈妈。",
+        "options": [
+          {
+            "text": "是的，我知道他们的需求和愿望",
+            "score": 3
+          },
+          {
+            "text": "我有一个大概的想法",
+            "score": 2
+          },
+          {
+            "text": "不，我正试图向所有人推销",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question": "您的品牌通过哪些具体的优势与竞争对手区分开来？",
+        "brandExample": "特斯拉 — 创新的电动汽车和自动驾驶; M&M's — “只溶在口，不溶在手”的巧克力。",
+        "options": [
+          {
+            "text": "我至少有 2-3 个具体优势",
+            "score": 3
+          },
+          {
+            "text": "我只在价格上有所不同",
+            "score": 2
+          },
+          {
+            "text": "我没有明显的优势",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question": "您的视觉外观（标志、颜色、设计）是否反映了您业务的价值？",
+        "brandExample": "可口可乐红 — 活力和激情; 蒂芙尼蓝 — 奢华和优雅。",
+        "options": [
+          {
+            "text": "是的，完全匹配",
+            "score": 3
+          },
+          {
+            "text": "部分，有些元素需要更新",
+            "score": 2
+          },
+          {
+            "text": "不，我没注意到这一点",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "question": "您的客户对您的评价是否统一且正面？",
+        "brandExample": "星巴克 — 不仅仅是咖啡，而是“第三空间”; Zappos — 令人惊叹的客户服务。",
+        "options": [
+          {
+            "text": "是的，我的品牌声誉很强",
+            "score": 3
+          },
+          {
+            "text": "因人而异，有时会有负面评论",
+            "score": 2
+          },
+          {
+            "text": "我不知道，我还没有进行过调查",
+            "score": 1
+          }
+        ]
+      }
+    ],
+    "result": {
+      "bad": {
+        "title": "您需要帮助（5-8 分）",
+        "description": "您的品牌基础很薄弱。为了从竞争对手中脱颖而出并赢得客户忠诚度，您无疑需要专业的帮助. 让我们一起解决这个问题！"
+      },
+      "medium": {
+        "title": "潜力巨大，但仍有差距（9-12 分）",
+        "description": "您有一个良好的基础，但您的品牌可以更强大、更有效. 让我们填补现有的差距，将您的业务提升到一个新的水平。"
+      },
+      "good": {
+        "title": "太棒了！您的品牌基础很牢固（13-15 分）",
+        "description": "恭喜! 您在品牌塑造方面走在了正确的道路上。现在是时候加强这个基础并成为市场领导者了. 我们将为此提供帮助。"
+      },
+      "afterSubmitText": "在不久的将来，我们的专家将与您联系，详细分析您的测试结果并提供个人建议。",
+      "backToHome": "返回主页"
+    },
+    "questionLabel": "问题 {step} / {total}",
+    "nextButton": "下一步",
+    "resultButton": "了解结果"
+  },
+  "brandStrategyPage": {
+    "metadata": {
+      "title": "品牌策略与平台 | 塔什干品牌代理公司",
+      "description": "品牌策略是业务增长工具. 将您的品牌从仅仅漂亮转变为一个工作的系统. 我们开发品牌平台和策略。"
+    },
+    "title": "品牌策略",
+    "subtitle": "一个强大的品牌是一个清晰的想法，它能激励、团结并帮助业务增长。",
+    "section1_title": "品牌策略是业务增长工具",
+    "section1_p1": "每个雄心勃勃的公司都有自己的目标. 对于一些公司来说，是获得一定的市场份额，对于其他公司来说是品牌知名度、向新领域的扩张等等。",
+    "section1_p2": "品牌策略是帮助公司实现这些目标的东西，帮助它成为比仅仅一个产品 or 服务更多的东西——客户和顾客生活的一部分，一个易于识别的形象的载体。",
+    "section1_p3": "最重要的是，它允许系统化营销成本，放弃那些不支持公司定位、因此不合理的工具、渠道 and 想法。",
+    "section2_title": "品牌策略对任何业务都是必要的",
+    "section2_p1": "品牌策略对于新公司和长期存在的公司都是必要的。",
+    "section2_p2_bold": "对于初创公司,",
+    "section2_p2_text": "它从一开始就帮助定义其使命、价值观和身份，在市场中正确定位并吸引客户。",
+    "section2_p3_bold": "对于大公司,",
+    "section2_p3_text": "策略是管理增长和声誉的工具. 在这种情况下，它有助于保持相关性，适应变化并与受众建立牢固的联系。",
+    "section2_p4": "无论业务规模如何，品牌策略都回答了主要问题：为什么客户应该选择你？",
+    "process_title": "品牌塑造是一个过程",
+    "process_subtitle": "在我们的代理公司中，我们坚信品牌塑造不仅仅是创建一个标志. 品牌塑造不是一项一次性的任务，而是一个循环的过程. 每个阶段都起着关键作用，跳过其中任何一个都会削弱品牌及其在市场中的地位. 但如果一切都正确且一致地完成，品牌塑造将有助于业务增长，并促进管理许多过程——从产品生产到市场营销。",
+    "process_steps": [
+      {
+        "title": "分析与研究",
+        "description": "这是第一阶段，也是最重要的阶段，在此阶段收集有关市场、竞争对手和受众的数据. 没有这个，就不可能定义品牌塑造的独特性并了解您的目标受众。"
+      },
+      {
+        "title": "形成品牌平台",
+        "description": "在这里，品牌使命、价值观和独特的品牌主常诞生了——这是决定其特征和声音的基础. 没有一个清晰的平台，所有后续行动都有可能变得支离破碎且缺乏说服力。"
+      },
+      {
+        "title": "策略开发",
+        "description": "策略回答了品牌将如何与受众沟通以及通过哪些渠道建立联系的问题. 这使沟通系统化，使其具有针对性且有效。"
+      },
+      {
+        "title": "视觉识别",
+        "description": "将品牌含义转化为视觉语言——标志、颜色、字体和图形元素. 这使品牌易于识别且与竞争对手不同。"
+      },
+      {
+        "title": "实施与整合",
+        "description": "创建一个品牌只是开始. 正确地将其整合到公司和接触点中非常重要，这样它就能成为企业文化和与客户沟通的一部分。"
+      }
+    ]
+  },
+  "corporateStylePage": {
+    "metadata": {
+      "title": "企业形象和品牌手册 | 塔什干品牌代理公司",
+      "description": "我们不只是创建漂亮的图片，我们还开发一个系统的视觉风格（企业形象、品牌手册），为您的品牌服务并带来结果. 通过标志、颜色、字体和其他元素使您的品牌易于识别且令人难忘。"
+    },
+    "title": "企业形象开发",
+    "subtitle": "品牌的主要元素之一——其视觉组件. 正是它将想法、含义和价值观转化为可以被看到、感受到和记住的形象。",
+    "section1_title": "品牌感知始于图片",
+    "section1_p1": "在现代世界中，视觉信息的感知和同化比文本或文字更快. 我们生活在一个瞬间印象的时代：人们需要几分之一秒的时间来形成对品牌的第一印象，而这通常是通过其视觉形象来实现的。",
+    "section1_p2": "要让一个想法在受众脑海中扎根，仅仅谈论它是不够的——用视觉元素来加强它非常重要. 精心设计的企业形象允许在没有不必要解释的情况下展示品牌价值，立即唤起正确的情绪和联想。",
+    "section2_title": "企业形象是一个系统",
+    "section2_p1": "这不仅关乎美感，还关乎效率、含义和控制. 为了使品牌保持多面性，同时在发展其视觉形象方面保持一致，必须创建一套图形元素。",
+    "section2_p2": "这套元素总是根据业务任务和能力单独选择的. 最小的套装包括标志、颜色、字体、照片风格、广告载体风格以及形成整体形象的其他元素。",
+    "section2_p3": "当视觉风格建立得清晰且一致时，它就成为管理品牌形象及其沟通的强大工具. 如果其所有元素都是协调的，品牌就会被感知为专业的、可靠的且易于识别的。",
+    "process_title": "我们如何创建企业形象？",
+    "process_subtitle": "我们系统地进行企业形象开发，以便每一个细节都能服务于品牌认知度及其策略。",
+    "process_steps": [
+      {
+        "title": "研究与概念",
+        "description": "我们分析受众、市场、竞争对手和品牌地位. 我们定义应该反映在视觉风格中的关键含义 and 想法。"
+      },
+      {
+        "title": "视觉代码开发",
+        "description": "我们创建标志、企业颜色、排版、图形、图标、排版原则——所有这些构成了整体品牌形象。"
+      },
+      {
+        "title": "企业形象系统",
+        "description": "我们开发灵活的元素，帮助在所有格式中保持视觉形象的一致性——从包装到数字环境。"
+      },
+      {
+        "title": "定稿与指南",
+        "description": "我们创建一个指南（品牌手册），其中包含使用该风格的规则，以便品牌在任何载体上都能保持单一的形象。"
+      }
+    ],
+    "cta_title": "企业形象 — 增长工具",
+    "cta_description": "具有强大身份的品牌被识别得更快，被记住的时间更长，并能唤起更多的信任. 我们不只是创建一个视觉风格，而是一个帮助品牌成长、保持一致且可管理的工具。"
+  },
+  "logoDesignPage": {
+    "metadata": {
+      "title": "专业标志设计服务 | Jon.Branding 代理公司乌兹别克斯坦",
+      "description": "标志是您业务的脸面. 我们在乌兹别克斯坦的标志设计机构创建独特、令人难忘且具有战略意义的标志，反映您品牌的精髓并帮助您从竞争对手中脱颖而出。"
+    },
+    "title": "标志设计",
+    "subtitle": "标志不只是一张图片; 它是一个战略工具，是您业务的脸面，也是您留下的第一印象。",
+    "section1_title": "为什么标志如此重要？",
+    "section1_p1": "在当今竞争激烈的市场中，标志是第一件吸引客户眼球的东西. 一个好的标志不仅是一个漂亮的设计，更是一个传达价值、专业精神和业务独特性的象征。",
+    "section1_p2": "它是帮助客户识别并记住您的关键元素. 专业的标志能灌输信任并建立情感联系，将一次性买家转变为忠实粉丝。",
+    "values_title": "一个好的标志应该是：",
+    "values": [
+      {
+        "title": "简单且令人难忘",
+        "description": "最好的标志即使在小尺寸或远距离也容易被识别和记住。"
+      },
+      {
+        "title": "独特且永恒",
+        "description": "它应该将您与竞争对手区分开来，并且在几年内不会过时。"
+      },
+      {
+        "title": "具有战略意义且有意义",
+        "description": "每一条线、颜色和形状都应该反映您业务的特征和目标。"
+      }
+    ],
+    "process_title": "我们如何创建标志？",
+    "process_subtitle": "我们的标志创建过程不仅基于转瞬即逝的灵感，还基于深度的分析和战略思维。",
+    "process_steps": [
+      {
+        "title": "简报与研究",
+        "description": "我们仔细研究您的业务、目标、目标受众和竞争对手。"
+      },
+      {
+        "title": "概念开发",
+        "description": "我们开发几个反映您品牌策略和特征的视觉概念。"
+      },
+      {
+        "title": "设计与演示",
+        "description": "我们完善所选的概念，将其展示在真实的例子（实物模型）上，并解释其背后的逻辑。"
+      },
+      {
+        "title": "定稿与移交",
+        "description": "我们准备所有必要的文件格式（矢量、位图），以便在任何情况下使用，并提供一份关于其使用的迷你指南。"
+      }
+    ],
+    "cta_title": "准备好创建一个工作的标志了吗？",
+    "cta_description": "不要满足于模板标志. 让我们为您的业务创建一个独特且强大的符号，成为您成功的基础。",
+    "cta_button": "获得免费咨询"
+  },
+  "namingPage": {
+    "metadata": {
+      "title": "塔什干命名服务 | Jon.Branding 代理公司",
+      "description": "为品牌选择一个难忘且强大的名称. 一个好的名字不仅仅听起来好听; 它能传达精髓，被记住并帮助品牌脱颖而出. 我们的命名服务将帮助您找到完美的名称。"
+    },
+    "title": "命名 — 强大的品牌名称",
+    "subtitle": "品牌名称 — 它的第一印象，它的能量，特征和用一个词表达的想法. 一个好的名字不仅听起来好听，而且能传达精髓，被记住并帮助品牌在竞争对手中脱颖而出。",
+    "section1_title": "名称 — brand策略的一部分",
+    "section1_p1": "一个好的名字支持联想、认知和情感联系. 创建一个这样的名字是一项考虑品牌定位、市场、目标受众和长期公司目标的战略工作。",
+    "section1_p2": "我们将命名视为最重要的品牌塑造元素. 它不是一组随机的想法，而是经过精心考虑的工作，其中每个词都至关重要。",
+    "section2_title": "每一个强大的名字都始于一个想法",
+    "section2_p1": "在寻找名字之前，我们会问主要的问题：这个品牌是关于什么的？它应该唤起什么样的感受和形象？因此，我们仔细分析产品、其受众和环境，定义寻找理想名字的语义方向。",
+    "section2_p2": "它可以建立在一种情感、隐喻、文化密码、专业语言甚至双关语之上. 最重要的是它能发挥作用，传达精髓并帮助品牌被记住。",
+    "process_title": "我们如何创建名字？",
+    "process_subtitle": "我们机构的命名开发 — 一个明确的过程，在这个过程中每一个阶段都非常重要：",
+    "process_steps": [
+      {
+        "title": "研究",
+        "description": "研究市场、受众、竞争对手和语义方向。"
+      },
+      {
+        "title": "形成概念",
+        "description": "定义可能的名称搜索向量。"
+      },
+      {
+        "title": "想法产生与测试",
+        "description": "创建一个候选名单，检查它们的声音、含义 and 潜力。"
+      },
+      {
+        "title": "检查与定稿",
+        "description": "分析注册可能性，检查域名和联想，选择最好的。"
+      }
+    ],
+    "check_title": "检查名字与创建同样重要",
+    "check_subtitle": "如果一个绝妙的想法无法注册，或者它带有不良的联想，它就不会奏效. 我们通过几个关键参数检查名字：",
+    "check_points": [
+      {
+        "title": "法律纯洁性",
+        "description": "分析商标注册的可能性。"
+      },
+      {
+        "title": "域名与数字环境",
+        "description": "检查名字在数字空间的可用性。"
+      },
+      {
+        "title": "含义与联想",
+        "description": "检查可读性、发音、可能的联想范围、文化感知和品牌类别匹配度。"
+      }
+    ],
+    "calculator_cta_button": "前往专利计算器"
+  },
+  "patentCalculatorPage": {
+    "metadata": {
+      "title": "商标注册计算器 | Jon.Branding",
+      "description": "计算与乌兹别克斯坦商标注册相关的概算成本（国家规费和服务费）。"
+    },
+    "title": "商标注册计算器",
+    "subtitle": "命名（取名字） — 一个创造性的过程，而专利申请 — 一个法律过程. 在我们团队的专利代理人的帮助下，在这里计算商标注册的概算成本（国家规费和服务费）。",
+    "trademarkCalculator": {
+      "formTitle": "输入数据",
+      "brandNameLabel": "品牌名称",
+      "brandNamePlaceholder": "例如: MyBrand",
+      "yourNameLabel": "您的姓名",
+      "yourNamePlaceholder": "请输入您的全名",
+      "phoneLabel": "您的联系电话",
+      "phonePlaceholder": "+998901234567",
+      "classCountLabel": "活动类别（类）数量",
+      "classCountMax": "最高 45 类",
+      "personTypeLabel": "主体类型",
+      "personTypeOptions": [
+        {
+          "value": "jismoniy",
+          "label": "个人"
+        },
+        {
+          "value": "yuridik",
+          "label": "法律实体（公司）"
+        }
+      ],
+      "speedLabel": "审查速度",
+      "speedOptions": [
+        {
+          "value": "oddiy",
+          "label": "常规（7个月）",
+          "labelShort": "常规"
+        },
+        {
+          "value": "tez",
+          "label": "加急（1.5个月）",
+          "labelShort": "加急"
+        }
+      ],
+      "expertCheckLabel": "额外专家审查",
+      "expertCheckOptions": [
+        {
+          "value": "ha",
+          "label": "开启"
+        },
+        {
+          "value": "yoq",
+          "label": "关闭"
+        }
+      ],
+      "activityLabel": "活动类型（可选）",
+      "activityPlaceholder": "例如：设计、建筑、服装制造...",
+      "activityHelp": "这有助于确定商标类别。",
+      "submitButton": "订购专利服务",
+      "submittingButton": "正在发送...",
+      "successMessage": "✅ 订单已被接受！",
+      "tryAgainButton": "重新计算",
+      "summaryTitle": "费用详情",
+      "totalCostTitle": "10年专利预估总费用",
+      "currency": "苏姆",
+      "classLabel": "类",
+      "expertCheckLabelShort": "专家+",
+      "totalCostNote": "包括所有政府规费和本机构服务费",
+      "step1Title": "第1阶段（提交申请）",
+      "ourServiceFee": "代理服务费",
+      "applicationFee": "国家规费 (申请)",
+      "step1Total": "第1阶段总计",
+      "step2Title": "第2阶段（领取证书）",
+      "stateFeeBase": "国家规费 (证书)",
+      "extraClassesFee": "额外类别（{count}类）",
+      "step2Total": "第2阶段总计",
+      "expediteTitle": "加速审查",
+      "expediteBaseFee": "加速费",
+      "expediteTotal": "加速总计",
+      "step0Title": "第0阶段 (专家查询)",
+      "step0Total": "第0阶段总计",
+      "expertCheckTitle": "专家检查",
+      "expertBaseFee": "初次查询 (1个类别)",
+      "expertTotal": "专家服务总计",
+      "importantNoteTitle": "重要提示",
+      "importantNoteText": "所有价格均取决于乌兹别克斯坦司法部规定的基础计算值 (BHM)，并可能发生变化。此计算器不构成公开要约，仅供参考。",
+      "importantNoteBHM": "当前 BHM 为 {bhm} 苏姆。",
+      "error_brand": "请输入品牌名称。",
+      "error_name": "请输入您的姓名。",
+      "error_phone": "请输入有效的电话号码。",
+      "error_server": "服务器发生错误。",
+      "privacyPolicyText": "我接受隐私政策条款，并同意处理个人数据。",
+      "error_privacy": "您必须接受隐私政策。",
+      "success_toast_title": "成功！",
+      "success_toast_desc": "您的请求已收到。我们将尽快与您联系！",
+      "error_toast_title": "错误！",
+      "telegramTitle": "新的专利申请（来自计算器）",
+      "notSpecified": "未指定"
+    }
+  },
+  "packagingPage": {
+    "metadata": {
+      "title": "乌兹别克斯坦包装设计服务 | Jon.Branding",
+      "description": "我们不仅仅是创造漂亮的包装; 我们还创造一个强大的营销工具来销售您的产品. 我们在乌兹别克斯坦的包装设计机构将帮助您的品牌从竞争对手中脱颖而出并赢得买家的喜爱。"
+    },
+    "title": "包装设计开发",
+    "subtitle": "在激烈的竞争条件下，包装通常成为主要的营销工具. 它能让品牌在货架上与众不同，讲述它的故事，并从第一眼起就与受众建立联系。",
+    "section1_title": "包装 — 不仅仅是品牌识别的载体",
+    "section1_p1": "包装 — 在销售点与品牌的第一次接触，这种视觉吸引力能瞬间建立产品印象. 在许多情况下，包装决定了一个人是否购买。",
+    "section1_p2": "我们的目标 — 不仅仅是创造审美 and 漂亮的包装，更是一个高效的工具，满足业务任务 and 促进其增长。",
+    "process_title": "我们如何创建包装？",
+    "process_subtitle": "我们对待包装开发不只是作为一个单独的设计，而是一个应该为业务服务的复杂系统，并满足受众的期望. 我们的过程包括几个关键阶段：",
+    "process_steps": [
+      {
+        "title": "分析与策略",
+        "description": "研究您的产品、受众、竞争对手以及包装将被使用的环境. 分析品类的视觉代码。"
+      },
+      {
+        "title": "概念与设计",
+        "description": "基于收集到的数据开发反映产品本质的视觉想法：颜色、图形、排版等。"
+      },
+      {
+        "title": "定稿与准备",
+        "description": "仔细制定所选概念的所有技术方面（针对不同格式的调整，印刷准备）。"
+      }
+    ],
+    "cta_title": "包装不仅吸引注意力，它还能销售",
+    "cta_description": "好的包装设计 — 不只是漂亮的装饰，而是为业务服务的工具. 我们开发功能性的、经过战略深思熟虑的设计，使包装成为一个成熟的销售工具。"
+  },
+  "servicesPage": {
+    "metadata": {
+      "title": "品牌服务与价格 | 塔什干专业品牌设计机构 | Jon.Branding",
+      "description": "了解我们的全方位品牌服务：从 LOGO 设计到品牌策略. 使用在线计算器，即时获取乌兹别克斯坦市场最具竞争力的品牌全案报价."
+    },
+    "packageBuilder": {
+      "title": "服务与价格",
+      "subtitle": "了解我们的全方位服务，为您的企业定制专属品牌方案. 使用在线计算器即时获取精准报价。",
+      "categories": {
+        "tripwire": "快速启动 (低成本服务)",
+        "strategy": "战略咨询服务",
+        "naming": "品牌命名",
+        "identity": "视觉识别：LOGO、画册、品牌手册",
+        "addons": "附加服务",
+        "more_services": "其他条款与服务"
+      },
+      "tabs": {
+        "included": "服务内容",
+        "benefits": "您将获得"
+      },
+      "your_package": "您的方案",
+      "your_package_desc": "请选择适合您业务需求的项。",
+      "selected": "已选择",
+      "select": "选择",
+      "base_price_label": "起始价格",
+      "final_price": "最终报价：",
+      "promo_code_label": "优惠码",
+      "promo_code_placeholder": "输入优惠码",
+      "promo_code_invalid": "优惠码无效",
+      "discountSelector": {
+        "none": "无折扣",
+        "package": "套餐优惠 20%",
+        "full": "全额预付 (28% 折扣)"
+      },
+      "empty_package_desc": "您尚未选择任何服务。请至少选择一项服务。",
+      "recommended": "专家推荐"
+    },
+    "comparison": {
+      "title": "我们与竞争对手",
+      "description": "我们不仅提供比高端机构更具性价比的价格，更确保提交的品牌成果超越您的期望。",
+      "features": "服务特性",
+      "whyPremiumTitle": "为什么只跟高端机构比？",
+      "whyPremiumDesc": "我们只与具备战略思维的顶级公司对标。我们的目标并非单纯的低价，而是在确保顶级品质的同时，回归合理的商业价格。与不具备战略高度的小作坊进行对比，是对客户和我们专业度的不负责任。",
+      "ctaTitle": "差异显而易见。现在，做出您的明智选择！",
+      "ctaDesc": "卓越的品牌建设无需支付溢价。请为您的业务做出正确的决定，立即联系我们。",
+      "ctaButton": "我需要这种专业方案"
+    }
+  },
+  "pickTwoSelector": {
+    "title": "三选二",
+    "subtitle": "价格—质量—速度：很少能同时获得这三者。",
+    "ctaText": "索取方案",
+    "options": {
+      "cheap": "便宜",
+      "quality": "高质量",
+      "fast": "快速"
+    },
+    "messages": {
+      "cheap_fast": "质量可能不稳定. 此方案适用于紧急和低预算项目。",
+      "cheap_quality": "需要等待更长时间才能得到结果. 我们将根据您的预算进行调整，并按排队顺序工作以确保质量。",
+      "quality_fast": "价格会更高. 对于紧急项目（2-3 天），标准价格会额外加收 50% 的费用. 我们将动员团队，优先考虑您的截止日期。",
+      "default": "请选择您认为最重要的 2 个优先事项。"
+    },
+    "tooltip": "先取消一个"
+  },
+  "exitIntentModal": {
+    "title": "别走！",
+    "description": "我们为您准备了特别优惠。<br/>我们提供<span class='font-bold text-primary'>各种折扣</span>。抓住机会！",
+    "button": "查看折扣"
+  },
+  "queueStatus": {
+    "subtitle": "名额有限",
+    "title": "赶快！预订您的名额！",
+    "description": "我们为每个项目投入时间以确保高质量. 因此，我们同时只处理有限数量的项目。",
+    "queueTitle": "项目队列",
+    "booked": "已预订",
+    "available": "有空位",
+    "tooltipBooked": "此名额已预订",
+    "tooltipAvailable": "您可以登记排队",
+    "remainingSlots": "剩余空位",
+    "slotsUnit": "个",
+    "onlineNow": "目前在线人数",
+    "peopleUnit": "人",
+    "nextProjectStart": "下一个项目开始时间",
+    "ctaButton": "预订我的名额",
+    "ctaSubtitle": "领先竞争对手一步！",
+    "timeframes": {
+      "2 weeks": "在 2 周内"
+    }
+  },
+  "leadMagnetPopup": {
+    "title": "送给您的免费礼物！",
+    "subtitle": "自主按10分制检查您的品牌。",
+    "description": "完全免费下载由我们专家编写的<b>《品牌检查清单》</b>。",
+    "cta": "获取检查清单",
+    "closeText": "不，谢谢"
+  },
+  "results": {
+    "title": "客户成果",
+    "subtitle": "我们不仅创造美观的设计，还创造有助于业务发展的战略解决方案。",
+    "items": [
+      {
+        "title": "Den Aroma",
+        "impact": "+60%",
+        "desc": "平均订单金额增加",
+        "label": "销售增长"
+      },
+      {
+        "title": "Bexruz Market",
+        "impact": "+40%",
+        "desc": "客户流量增加",
+        "label": "访问量"
+      },
+      {
+        "title": "Zamin Qurilish",
+        "impact": "3 倍",
+        "desc": "品牌知名度提高",
+        "label": "声誉"
+      }
+    ]
+  }
 }
