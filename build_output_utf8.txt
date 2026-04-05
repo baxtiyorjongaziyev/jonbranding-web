@@ -1,0 +1,219 @@
+﻿
+> jonbranding-veb-sayti@1.1.0 build
+> next build
+
+  Γû▓ Next.js 14.2.15
+
+   Creating an optimized production build ...
+node.exe : Failed to compi
+le.
+At line:1 char:1
++ & "C:\Program Files\node
+js/node.exe" "C:\Program F
+iles\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (F  
+  ailed to compile.:Str   
+ ing) [], RemoteExcept    
+ion
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+
+./src/locales/zh.json
+Module parse failed: Canno
+t parse JSON: Unexpected n
+on-whitespace character af
+ter JSON at position 32851
+ (line 773 column 5) while
+ parsing '
+{
+    "header": {
+        "portfolio'
+You may need an appropriat
+e loader to handle this fi
+le type, currently no load
+ers are configured to proc
+ess this file. See https:/
+/webpack.js.org/concepts#l
+oaders
+Error: Cannot parse JSON: 
+Unexpected non-whitespace 
+character after JSON at po
+sition 32851 (line 773 col
+umn 5) while parsing '
+{
+    "header": {
+        "portfolio'
+    at JsonParser.parse (C
+:\Users\baxti\.gemini\anti
+gravity\playground\jonbran
+ding-veb-sayti\node_module
+s\next\dist\compiled\webpa
+ck\bundle5.js:28:1005313)
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\webpack\bundle5.js:28:4
+05457
+    at processResult (C:\U
+sers\baxti\.gemini\antigra
+vity\playground\jonbrandin
+g-veb-sayti\node_modules\n
+ext\dist\compiled\webpack\
+bundle5.js:28:401241)
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\webpack\bundle5.js:28:4
+02302
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\loader-runner\LoaderRun
+ner.js:1:8727
+    at iterateNormalLoader
+s (C:\Users\baxti\.gemini\
+antigravity\playground\jon
+branding-veb-sayti\node_mo
+dules\next\dist\compiled\l
+oader-runner\LoaderRunner.
+js:1:5565)
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\loader-runner\LoaderRun
+ner.js:1:5426
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\webpack\bundle5.js:28:4
+01777
+    at eval (eval at creat
+e (C:\Users\baxti\.gemini\
+antigravity\playground\jon
+branding-veb-sayti\node_mo
+dules\next\dist\compiled\w
+ebpack\bundle5.js:13:28858
+), <anonymous>:14:1)
+    at Array.<anonymous> (
+C:\Users\baxti\.gemini\ant
+igravity\playground\jonbra
+nding-veb-sayti\node_modul
+es\next\dist\build\webpack
+\plugins\profiling-plugin.
+js:179:29)
+
+Import trace for requested
+ module:
+./src/locales/zh.json
+./src/lib/dictionaries.ts
+./src/app/[lang]/page.tsx
+
+./src/locales/zh.json
+Module parse failed: Canno
+t parse JSON: Unexpected n
+on-whitespace character af
+ter JSON at position 32851
+ (line 773 column 5) while
+ parsing '
+{
+    "header": {
+        "portfolio'
+You may need an appropriat
+e loader to handle this fi
+le type, currently no load
+ers are configured to proc
+ess this file. See https:/
+/webpack.js.org/concepts#l
+oaders
+Error: Cannot parse JSON: 
+Unexpected non-whitespace 
+character after JSON at po
+sition 32851 (line 773 col
+umn 5) while parsing '
+{
+    "header": {
+        "portfolio'
+    at JsonParser.parse (C
+:\Users\baxti\.gemini\anti
+gravity\playground\jonbran
+ding-veb-sayti\node_module
+s\next\dist\compiled\webpa
+ck\bundle5.js:28:1005313)
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\webpack\bundle5.js:28:4
+05457
+    at processResult (C:\U
+sers\baxti\.gemini\antigra
+vity\playground\jonbrandin
+g-veb-sayti\node_modules\n
+ext\dist\compiled\webpack\
+bundle5.js:28:401241)
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\webpack\bundle5.js:28:4
+02302
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\loader-runner\LoaderRun
+ner.js:1:8727
+    at iterateNormalLoader
+s (C:\Users\baxti\.gemini\
+antigravity\playground\jon
+branding-veb-sayti\node_mo
+dules\next\dist\compiled\l
+oader-runner\LoaderRunner.
+js:1:5565)
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\loader-runner\LoaderRun
+ner.js:1:5426
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\compil
+ed\webpack\bundle5.js:28:4
+01777
+    at eval (eval at creat
+e (C:\Users\baxti\.gemini\
+antigravity\playground\jon
+branding-veb-sayti\node_mo
+dules\next\dist\compiled\w
+ebpack\bundle5.js:13:28858
+), <anonymous>:14:1)
+    at C:\Users\baxti\.gem
+ini\antigravity\playground
+\jonbranding-veb-sayti\nod
+e_modules\next\dist\build\
+webpack\plugins\profiling-
+plugin.js:179:29
+
+Import trace for requested
+ module:
+./src/locales/zh.json
+./src/lib/dictionaries.ts
+./src/app/[lang]/quiz/page
+.tsx
+
+
+> Build failed because of 
+webpack errors
