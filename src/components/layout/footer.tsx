@@ -47,21 +47,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
       
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Section: Contact Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-20 text-center lg:text-left">
-          {/* Email */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-medium text-blue-500 uppercase tracking-[0.2em]">Email</h3>
-            <div className="space-y-2">
-              <a 
-                href="mailto:baxtiyorjon.gaziyev@gmail.com" 
-                className="text-xl sm:text-2xl font-semibold hover:text-blue-400 transition-colors block"
-              >
-                baxtiyorjon.gaziyev@gmail.com
-              </a>
-              <p className="text-sm text-gray-500">(For Business Inquiries)</p>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 text-center max-w-4xl mx-auto">
           {/* Call */}
           <div className="space-y-4">
             <h3 className="text-sm font-medium text-blue-500 uppercase tracking-[0.2em]">Call</h3>
@@ -69,7 +55,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               <a 
                 href="tel:+998336450097" 
                 onClick={() => trackContactClick('phone')}
-                className="text-xl sm:text-2xl font-semibold hover:text-blue-400 transition-colors block"
+                className="text-xl sm:text-3xl font-semibold hover:text-blue-400 transition-colors block"
               >
                 +998 33 645 00 97
               </a>
@@ -86,7 +72,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 target="_blank" 
                 rel="noopener noreferrer" 
                 onClick={() => trackContactClick('telegram')}
-                className="text-xl sm:text-2xl font-semibold hover:text-blue-400 transition-colors block"
+                className="text-xl sm:text-3xl font-semibold hover:text-blue-400 transition-colors block"
               >
                 @baxtiyorjon_gaziyev
               </a>
@@ -128,14 +114,13 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           </div>
         </div>
 
-        <div className="relative mt-4 select-none pointer-events-none flex justify-center">
-          <img 
-            src="/assets/logos/logo-white.svg" 
-            alt="Jon Branding Agency"
-            className="w-full max-w-[90vw] h-auto opacity-90 transition-all filter drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]"
-          />
-          {/* Subtle Glow behind the logo */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-32 bg-blue-600/20 blur-[120px] rounded-full -z-10" />
+        <div className="relative mt-8 select-none pointer-events-none pb-12">
+          <h2 className="text-[12vw] sm:text-[14vw] lg:text-[12.5vw] font-black leading-none text-white tracking-[-0.06em] text-center opacity-95 transition-all drop-shadow-2xl whitespace-nowrap">
+            Jon.Branding Agency
+          </h2>
+          {/* Finch-style Vibrant Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-80 bg-blue-600/30 blur-[180px] rounded-full -z-10 animate-pulse transition-opacity duration-1000" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-40 bg-indigo-500/25 blur-[140px] rounded-full -z-10" />
         </div>
       </div>
     </footer>
