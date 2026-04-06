@@ -175,7 +175,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
         {/* Massive Brand Footer (Finch Style) */}
         <div className="relative select-none pointer-events-none pt-10 pb-16">
-          <h2 className="text-[11vw] font-light leading-[0.8] text-white/90 tracking-[-0.06em] text-center transition-all drop-shadow-[0_0_30px_rgba(37,99,235,0.4)] whitespace-nowrap">
+          <h2 className="text-[9vw] font-light leading-[0.8] text-white/90 tracking-[-0.06em] text-center transition-all drop-shadow-[0_0_30px_rgba(37,99,235,0.4)] whitespace-nowrap">
             Jon.Branding Agency
           </h2>
           {/* Finch-style Vibrant Glow */}
