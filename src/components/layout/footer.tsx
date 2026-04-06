@@ -178,8 +178,8 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           <h2 className="text-[9vw] font-light leading-[0.8] text-white/90 tracking-[-0.06em] text-center transition-all drop-shadow-[0_0_30px_rgba(37,99,235,0.4)] whitespace-nowrap">
             Jon.Branding Agency
           </h2>
-          {/* Finch-style Vibrant Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-80 bg-blue-500/40 blur-[120px] rounded-full -z-10 transition-opacity duration-1000" />
+          {/* Finch-style Vibrant Glow - Moved to Bottom Left */}
+          <div className="absolute -bottom-24 -left-24 w-[800px] h-[800px] bg-blue-600/50 blur-[150px] rounded-full -z-10 transition-opacity duration-1000" />
         </div>
       </div>
     </footer>
