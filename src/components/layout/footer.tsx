@@ -83,7 +83,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={`/${lang}/blog`} className="hover:text-white transition-colors">{dictionary.blog}</Link></li>
               <li><Link href={`/${lang}/quiz`} className="hover:text-white transition-colors">{dictionary.branding_test}</Link></li>
-              <li><Link href={`/${lang}/patent-calculator`} className="hover:text-white transition-colors">{dictionary.patent_calculator}</Link></li>
+              <li><Link href={`/${lang}/xizmatlar/patent-kalkulyatori`} className="hover:text-white transition-colors">{dictionary.patent_calculator}</Link></li>
               <li><Link href={`/${lang}/sitemap`} className="hover:text-white transition-colors">{dictionary.sitemap}</Link></li>
             </ul>
           </div>
@@ -179,7 +179,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             Jon.Branding Agency
           </h2>
           {/* Finch-style Vibrant Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-80 bg-blue-500/40 blur-[120px] rounded-full -z-10 animate-pulse transition-opacity duration-1000" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-80 bg-blue-500/40 blur-[120px] rounded-full -z-10 transition-opacity duration-1000" />
         </div>
       </div>
     </footer>
