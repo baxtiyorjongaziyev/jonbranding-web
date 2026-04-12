@@ -34,6 +34,7 @@ export const trackEvent = (eventName: string, eventProperties?: Record<string, a
   if (typeof window !== 'undefined' && window.amplitude) {
     try {
       window.amplitude.track(eventName, eventProperties);
+      console.log(`[Amplitude] Event: ${eventName}`, eventProperties);
     } catch (e) {
       console.warn('Amplitude track event failed', e);
     }

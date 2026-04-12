@@ -10,6 +10,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
 import { initAmplitude, trackEvent } from '@/lib/amplitude';
+import ScrollDepthTrigger from '@/components/scroll-depth-trigger';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'), {
     loading: () => null,
@@ -111,6 +112,11 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 <AnalyticsTracker />
             </Suspense>
             {children}
+            <ScrollDepthTrigger 
+                onTrigger={handleOpenModal}
+                threshold={0.88}
+                sessionKey="contact_modal_auto_popup_v1"
+            />
             <Toaster />
             <ContactModal
                 isOpen={isModalOpen}

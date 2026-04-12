@@ -60,7 +60,7 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
 };
 
 const TrustedBy: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) => {
-    const brands = staticBrands;
+    const brands = staticBrands.filter(b => !b.hiddenInHero);
     const numBrands = brands.length;
     const third = Math.ceil(numBrands / 3);
     const brandsTopRow = brands.slice(0, third);

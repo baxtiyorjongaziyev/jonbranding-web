@@ -16,12 +16,12 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
   if (!translations) return null;
 
   return (
-    <section id="founder" className="py-16 sm:py-24 bg-secondary">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="lg:order-last">
+    <section id="founder" className="relative py-24 bg-black overflow-hidden border-t border-white/5">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="flex flex-col gap-8 order-2 md:order-1">
             <div className="flex items-center gap-4 mb-4">
-                <h2 className="text-3xl sm:text-4xl font-bold">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white">
                   {translations.title}
                 </h2>
                 <a 
@@ -34,7 +34,7 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                     <Linkedin size={20} />
                 </a>
             </div>
-            <p className="mt-4 text-lg text-gray-700">
+            <p className="mt-4 text-lg text-gray-300">
               {translations.message}
             </p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -43,7 +43,7 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                 return (
                     <div key={index} className="flex items-center gap-3">
                         {Icon && <Icon className="w-6 h-6 text-primary flex-shrink-0" />}
-                        <span className="text-gray-800 font-medium">{point.text}</span>
+                        <span className="text-gray-200 font-medium">{point.text}</span>
                     </div>
                 );
               })}
@@ -55,7 +55,7 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                         {translations.phoneButton}
                     </a>
                 </Button>
-                 <Button size="lg" variant="default" className="w-full sm:w-auto min-w-[200px]" asChild>
+                 <Button size="lg" variant="outline" className="w-full sm:w-auto min-w-[200px] text-white border-white/20 hover:bg-[#0088cc] hover:border-[#0088cc] hover:text-white bg-white/5 transition-all duration-300" asChild>
                     <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
                         <Send className="mr-2 h-5 w-5" />
                         {translations.telegramButton}
@@ -63,7 +63,7 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                 </Button>
             </div>
           </div>
-          <div>
+          <div className="flex flex-col items-center justify-center relative order-1 md:order-2">
             <Card className="overflow-hidden shadow-xl rounded-2xl w-full">
               <CardContent className="p-0 relative bg-black aspect-[4/5]">
                 {playVideo ? (
@@ -79,10 +79,11 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                 ) : (
                   <>
                     <Image
-                      src="https://img1.teletype.in/files/06/12/06122643-c462-4c8d-aa63-55a8ca1dca38.jpeg"
+                      src="/images/cms/founder-portrait.jpeg"
                       alt="Baxtiyorjon Gaziyev"
                       fill
-                      className="object-cover opacity-80"
+                      unoptimized
+                      className="object-cover"
                       data-ai-hint="founder portrait"
                     />
                     <div className="absolute inset-0 flex items-center justify-center z-10">

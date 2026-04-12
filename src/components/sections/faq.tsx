@@ -32,7 +32,10 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
             <Accordion type="single" collapsible defaultValue="item-0" className="w-full space-y-4">
                 {translations.faqItems.map((item: any, index: number) => (
                 <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left text-lg font-semibold text-foreground">
+                    <AccordionTrigger 
+                      className="text-left text-lg font-semibold text-foreground"
+                      aria-label={lang === 'uz' ? `${item.question} savoliga javobni ko'rish` : lang === 'ru' ? `Посмотреть ответ на вопрос: ${item.question}` : `View answer for: ${item.question}`}
+                    >
                     {item.question}
                     </AccordionTrigger>
                     <AccordionContent className="text-muted-foreground pt-2 text-base">

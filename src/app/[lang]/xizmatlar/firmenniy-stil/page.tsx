@@ -1,136 +1,26 @@
-
-'use client';
-
-import { FC, useEffect, useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Layers, Palette, PenTool, ClipboardCheck } from 'lucide-react';
-import Image from 'next/image';
-import React from 'react';
-import dynamic from 'next/dynamic';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { useParams } from 'next/navigation';
-import ServiceProcessHorizontal from '@/components/sections/service-process-horizontal';
+import CorporateClient from './corporate-client';
 
-const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
-    loading: () => <Skeleton className="h-96 w-full mt-4" />,
-});
-
-const PickTwoSelector = dynamic(() => import('@/components/sections/pick-two-selector'), {
-    loading: () => <Skeleton className="h-96 w-full mt-4" />,
-});
-
-const FirmenniyStilPage: FC = () => {
-  const params = useParams();
-  const lang = params.lang as string;
-  const [translations, setTranslations] = useState<any>(null);
-
-  useEffect(() => {
-    if (lang) {
-      getDictionary(lang as Locale).then(dict => setTranslations(dict.corporateStylePage));
-    }
-  }, [lang]);
-
-  const handleOpenModal = () => {
-    const contactEvent = new CustomEvent('openContactModal');
-    window.dispatchEvent(contactEvent);
-  };
-  
-  if (!translations) {
-    return <main className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></main>;
-  }
-
-  const processSteps = [
-      { iconName: 'Layers', ...translations.process_steps[0] },
-      { iconName: 'Palette', ...translations.process_steps[1] },
-      { iconName: 'PenTool', ...translations.process_steps[2] },
-      { iconName: 'ClipboardCheck', ...translations.process_steps[3] }
-  ];
-
-  return (
-    <>
-        <main className="flex-grow pt-20">
-            <section className="py-20 sm:py-28 bg-white">
-            <div className="container mx-auto px-4 text-center">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
-                {translations.title}
-                </h1>
-                <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
-                {translations.subtitle}
-                </p>
-            </div>
-            </section>
-
-        <section className="py-16 sm:py-24">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    <div>
-                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{translations.section1_title}</h2>
-                        <div className="mt-4 space-y-4 text-lg text-gray-700">
-                            <p>{translations.section1_p1}</p>
-                            <p>{translations.section1_p2}</p>
-                        </div>
-                    </div>
-                    <div className="lg:order-last">
-                        <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
-                            <CardContent className="p-0">
-                                <Image 
-                                    src="https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg"
-                                    alt="Brendning yaxlit vizual aydentikasi"
-                                    width={800}
-                                    height={600}
-                                    className="w-full h-auto object-cover"
-                                    data-ai-hint="brandbook design"
-                                    priority
-                                />
-                            </CardContent>
-                        </Card>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <PickTwoSelector onCtaClick={handleOpenModal} lang={lang} />
-
-        <section className="py-16 sm:py-24 bg-white">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    <div className="lg:order-last">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-dark-blue">{translations.section2_title}</h2>
-                        <div className="mt-4 space-y-4 text-lg text-gray-700">
-                            <p>{translations.section2_p1}</p>
-                            <p>{translations.section2_p2}</p>
-                            <p className="font-bold text-dark-blue">{translations.section2_p3}</p>
-                        </div>
-                    </div>
-                    <div>
-                        <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
-                            <CardContent className="p-0">
-                                <Image 
-                                    src="https://img1.teletype.in/files/88/92/8892f18d-a298-485d-8fe5-7d0444defd89.png"
-                                    alt="Firma uslubi va korporativ aydentika tizimi"
-                                    width={800}
-                                    height={600}
-                                    className="w-full h-auto object-cover"
-                                    data-ai-hint="corporate identity"
-                                />
-                            </CardContent>
-                        </Card>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <ServiceProcessHorizontal
-            title={translations.process_title}
-            subtitle={translations.process_subtitle}
-            steps={processSteps}
-        />
-
-        <ServiceSections lang={lang} />
-        </main>
-    </>
-  );
+type Props = {
+  params: { lang: Locale };
 };
 
-export default FirmenniyStilPage;
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { lang } = props.params;
+  const dictionary = await getDictionary(lang);
+  const metadata = dictionary.corporateStylePage?.metadata;
+
+  return {
+    title: metadata?.title || "Firma Uslubi Yaratish | Korporativ Aydentika | Jon.Branding",
+    description: metadata?.description || "Brendingizni tanitadigan yaxlit korporativ uslub va vizual tizim yaratamiz.",
+    keywords: metadata?.keywords || "firma uslubi, korporativ aydentika, brend uslubi, korporativ dizayn",
+  };
+}
+
+export default async function Page(props: Props) {
+  const { lang } = props.params;
+  const dictionary = await getDictionary(lang);
+  
+  return <CorporateClient lang={lang} translations={dictionary.corporateStylePage} />;
+}

@@ -71,9 +71,16 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
 
   const handleLanguageChange = (newLocale: Locale) => {
     setLocaleCookie(newLocale);
-    const currentPathWithoutLocale = pathname.startsWith(`/${lang}`) ? pathname.substring(`/${lang}`.length) : pathname;
-    const newPath = `/${newLocale}${currentPathWithoutLocale || '/'}`;
-    router.push(newPath);
+    const currentPathWithoutLocale = pathname.startsWith(`/${lang}/`) 
+      ? pathname.substring(`/${lang}`.length) 
+      : (pathname === `/${lang}` ? '/' : pathname);
+    
+    // For Uzbek, we want prefix-less root
+    const newPath = newLocale === 'uz' 
+      ? (currentPathWithoutLocale || '/')
+      : `/${newLocale}${currentPathWithoutLocale === '/' ? '' : currentPathWithoutLocale}`;
+      
+    router.push(newPath || '/');
     setOpen(false);
   };
   

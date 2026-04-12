@@ -16,7 +16,9 @@ import Magnetic from '../ui/magnetic';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
 
-const portfolioImages: GalleryImage[] = projects.flatMap(p => p.galleryImages || []);
+const portfolioImages: GalleryImage[] = projects
+  .filter(p => !p.hiddenInHero)
+  .flatMap(p => p.galleryImages || []);
 
 interface HeroProps {
     onPrimaryClick: () => void;
@@ -26,31 +28,6 @@ interface HeroProps {
 }
 
 const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline }) => {
-  const [headlineIndex, setHeadlineIndex] = useState(0);
-  const [buttonIndex, setButtonIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  useEffect(() => {
-    if (!dictionary?.headlines) return;
-    
-    const headlineInterval = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setHeadlineIndex((prevIndex) => (prevIndex + 1) % dictionary.headlines.length);
-        setIsAnimating(false);
-      }, 500);
-    }, 4000);
-
-    const buttonInterval = setInterval(() => {
-      setButtonIndex((prevIndex) => (prevIndex + 1) % dictionary.buttonTexts.length);
-    }, 4000);
-
-    return () => {
-      clearInterval(headlineInterval);
-      clearInterval(buttonInterval);
-    };
-  }, [dictionary]);
-
   if (!dictionary) return null;
 
   return (
@@ -60,75 +37,85 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
           <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[50rem] h-[50rem] bg-primary/5 rounded-full blur-3xl"></div>
       </div>
       <div className="relative z-10 container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="max-w-2xl text-center lg:text-left">
-                <h1 data-testid="hero-title" className={cn(
-                "text-4xl leading-tight sm:text-5xl md:text-6xl font-extrabold text-foreground transition-opacity duration-500",
-                isAnimating ? 'animate-text-fade-out' : 'animate-text-fade-in'
-                )}>
-                  {renderHeadline(dictionary.headlines[headlineIndex])}
-                </h1>
-                <p className="mx-auto lg:mx-0 mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground" dangerouslySetInnerHTML={{ __html: dictionary.description }}>
-                </p>
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.6 }}
-                    className="mt-10 flex justify-center lg:justify-start"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            <div className="max-w-2xl text-center lg:text-left pt-6 lg:pt-10">
+                <motion.h1 
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                  data-testid="hero-title" 
+                  className="text-4xl leading-[1.1] sm:text-5xl md:text-6xl font-extrabold text-foreground tracking-tight"
                 >
+                  {renderHeadline(dictionary.title || dictionary.headlines?.[0] || '')}
+                </motion.h1>
+                
+                <motion.p 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+                  className="mx-auto lg:mx-0 mt-6 lg:mt-8 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed" 
+                  dangerouslySetInnerHTML={{ __html: dictionary.description }}
+                >
+                </motion.p>
+                <div className="mt-8 lg:mt-10 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
                     <Magnetic>
-                        <Button 
-                            onClick={() => onPrimaryClick()} 
-                            size="lg" 
-                            variant="default" 
-                            className="w-full sm:w-auto text-base px-8 py-6 shadow-xl rounded-full relative group overflow-hidden bg-primary hover:bg-primary/95 transition-all duration-300" 
-                            aria-label={dictionary.buttonTexts[buttonIndex]}
+                        <motion.div 
+                            className="w-full sm:w-auto"
                         >
-                            <span className="relative z-10 flex items-center">
-                                {dictionary.buttonTexts[buttonIndex]}
-                                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                            </span>
-                            <motion.div 
-                                className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                            />
-                        </Button>
+                            <Button 
+                                onClick={() => onPrimaryClick()} 
+                                size="lg" 
+                                variant="default" 
+                                className="w-full sm:w-auto text-base px-8 py-7 shadow-xl rounded-full relative group overflow-hidden bg-primary hover:bg-primary/95 transition-all duration-300 hover:shadow-ocean hover:scale-105 active:scale-95" 
+                                aria-label={dictionary.cta || dictionary.buttonTexts?.[0]}
+                            >
+                                <span className="relative z-10 flex items-center font-bold">
+                                    {dictionary.cta || dictionary.buttonTexts?.[0]}
+                                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                                </span>
+                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
+                            </Button>
+                        </motion.div>
                     </Magnetic>
-                </motion.div>
-                <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                    className="mt-6 text-sm text-muted-foreground flex items-center justify-center lg:justify-start gap-2"
-                >
+                </div>
+                <div className="mt-6 text-sm text-muted-foreground flex items-center justify-center lg:justify-start gap-2 italic opacity-80">
                     <Sparkles className="w-4 h-4 text-accent animate-pulse" />
                     {dictionary.buttonHint}
-                </motion.div>
+                </div>
             </div>
-            <div className="flex justify-center items-center mt-10 lg:mt-0">
-                <TiltCard strength={10} className="w-full max-w-[500px]">
-                    <Card className="rounded-[2.5rem] shadow-2xl overflow-hidden w-full aspect-square border-none bg-white">
+            <div className="flex justify-center items-start mt-10 lg:mt-0 px-8 lg:px-16 h-full">
+                <TiltCard strength={5} className="w-full max-w-[800px] h-fit">
+                    <div className="relative group perspective-1000 h-fit">
                         <Carousel
-                            plugins={[Autoplay({ delay: 2500, stopOnInteraction: true })]}
-                            className="w-full h-full"
+                            plugins={[Autoplay({ delay: 3000, stopOnInteraction: true })]}
+                            className="w-full transition-all duration-700 h-auto -m-20 p-20"
                         >
-                            <CarouselContent className="h-full">
+                            <CarouselContent className="items-start h-auto">
                                 {portfolioImages.map((image, index) => (
-                                    <CarouselItem key={index} className="h-full">
-                                        <div className="w-full h-full relative aspect-square">
+                                    <CarouselItem key={index} className="flex justify-center h-full py-6">
+                                        <motion.div 
+                                            initial={{ opacity: 0, scale: 0.98 }}
+                                            whileInView={{ opacity: 1, scale: 1 }}
+                                            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+                                            className="relative w-full h-auto flex items-center justify-center p-4"
+                                        >
                                             <Image 
                                                 src={image.src}
                                                 alt={image.alt || 'Jon Branding Portfolio'}
-                                                fill
-                                                priority={index === 0}
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
-                                                className="object-cover bg-white"
+                                                width={1000}
+                                                height={667}
+                                                className="w-full h-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
                                             />
-                                        </div>
+                                        </motion.div>
                                     </CarouselItem>
                                 ))}
                             </CarouselContent>
                         </Carousel>
-                    </Card>
+                        
+                        {/* Dynamic background glow that follows the card */}
+                        <div className="absolute -inset-6 bg-primary/5 blur-3xl rounded-[3rem] -z-10 opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
+                        <div className="absolute -inset-10 bg-accent/5 blur-[100px] rounded-full -z-20 animate-pulse" />
+                    </div>
                 </TiltCard>
             </div>
         </div>

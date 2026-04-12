@@ -1,4 +1,4 @@
-
+import { Metadata } from 'next';
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,9 +8,24 @@ import { format, parseISO } from 'date-fns';
 import { uz, ru, enUS } from 'date-fns/locale';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
-const BlogPage = async (props: { params: Promise<{ lang: string }> }) => {
-  const { lang } = await props.params;
-  const sortedPosts = getSortedPostsData(lang);
+type Props = {
+  params: { lang: Locale };
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { lang } = props.params;
+  const dictionary = await getDictionary(lang);
+  const metadata = dictionary.blog?.metadata;
+
+  return {
+    title: metadata?.title || "Jon.Branding Blog | Branding, Dizayn va Marketing",
+    description: metadata?.description || "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
+  };
+}
+
+const BlogPage = async (props: Props) => {
+  const { lang } = props.params;
+  const sortedPosts = getSortedPostsData(lang as Locale);
   const dictionary = await getDictionary(lang as Locale);
   const translations = dictionary.blog;
   
