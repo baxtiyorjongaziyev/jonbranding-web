@@ -1,4 +1,5 @@
 'use client';
+import { trackEvent as trackAmplitudeEvent } from './amplitude';
 
 // Tracking IDs
 const GA_TRACKING_ID = "G-B3ZSKB40XY";
@@ -20,27 +21,47 @@ export type AnalyticsEvent = {
 export const trackEvent = ({ action, category, label, value, ...rest }: AnalyticsEvent) => {
   if (typeof window === 'undefined') return;
 
-  // 1. Google Analytics (GA4)
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', action, {
-      event_category: category,
-      event_label: label,
-      value: value,
-      ...rest,
-    });
+  try {
+    // 1. Google Analytics (GA4)
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', action, {
+        event_category: category,
+        event_label: label,
+        value: value,
+        ...rest,
+      });
+    }
+  } catch (e) {
+    console.warn('[Unified Analytics] GA Error:', e);
   }
 
-  // 2. Facebook Pixel
-  if (typeof window.fbq === 'function') {
-    window.fbq('trackCustom', action, {
-      content_category: category,
-      content_name: label,
-      value: value,
+  try {
+    // 2. Facebook Pixel (Meta)
+    if (typeof window.fbq === 'function') {
+      window.fbq('trackCustom', action, {
+        content_category: category,
+        content_name: label,
+        value: value,
+        ...rest,
+      });
+    }
+  } catch (e) {
+    console.warn('[Unified Analytics] Meta Error:', e);
+  }
+
+  try {
+    // 3. Amplitude
+    trackAmplitudeEvent(action, {
+      category,
+      label,
+      value,
       ...rest,
     });
+  } catch (e) {
+    console.warn('[Unified Analytics] Amplitude Error:', e);
   }
   
-  console.log(`[Analytics] Event tracked: ${action}`, { category, label, value, ...rest });
+  console.log(`[Unified Analytics] Event: ${action}`, { category, label, value, ...rest });
 };
 
 /**
@@ -48,35 +69,49 @@ export const trackEvent = ({ action, category, label, value, ...rest }: Analytic
  */
 export const trackLead = (data: { source: string; value?: number; [key: string]: any }) => {
   if (typeof window === 'undefined') return;
+  const { source, value, ...extraData } = data;
 
-  // 1. Google Analytics
-  trackEvent({
-    action: 'generate_lead',
-    category: 'Lead',
-    label: data.source,
-    value: data.value,
-    ...data
-  });
-
-  // 2. Facebook Pixel (Standard Lead Event)
-  if (typeof window.fbq === 'function') {
-    window.fbq('track', 'Lead', {
-      content_name: data.source,
-      value: data.value,
-      currency: 'UZS'
+  try {
+    // 1. Google Analytics
+    trackEvent({
+      action: 'generate_lead',
+      category: 'Lead',
+      label: source,
+      value: value,
+      ...extraData
     });
-  }
 
-  // 3. Google Ads Conversion
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', 'conversion', {
-      'send_to': `${ADS_CONVERSION_ID}/zVvKCJ_A5-YZEK_f8to-`, // Example conversion label if known, or just use the ID
-      'value': data.value || 1.0,
-      'currency': 'UZS'
+    // 2. Facebook Pixel (Meta Standard Lead Event)
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'Lead', {
+        content_name: source,
+        value: value,
+        currency: 'UZS',
+        ...extraData
+      });
+    }
+
+    // 3. Google Ads Conversion
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        'send_to': `${ADS_CONVERSION_ID}/zVvKCJ_A5-YZEK_f8to-`,
+        'value': value || 1.0,
+        'currency': 'UZS',
+        ...extraData
+      });
+    }
+
+    // 4. Amplitude (Rich Lead Event)
+    trackAmplitudeEvent('Lead Generated', {
+      source,
+      value,
+      ...extraData
     });
+  } catch (e) {
+    console.error('[Unified Analytics] Lead Tracking failed but form submission should continue:', e);
   }
   
-  console.log(`[Analytics] LEAD tracked from: ${data.source}`);
+  console.log(`[Unified Analytics] LEAD tracked from: ${source}`, extraData);
 };
 
 /**

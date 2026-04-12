@@ -62,7 +62,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
 
   const result = useMemo(() => {
     if (!translations) {
-      return { key: 'default', message: 'Loading...' };
+      return { key: 'default', message: translations?.loading || '...' };
     }
     const messages = translations.messages;
     if (selected.length < 2) {
@@ -73,7 +73,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
   }, [selected, translations]);
 
   if (!translations) {
-    return <section className="py-16 sm:py-24 bg-white"><div className="container">Loading...</div></section>;
+    return <section className="py-16 sm:py-24 bg-white"><div className="container">{translations?.loading || '...'}</div></section>;
   }
 
   const optionDetails: Record<OptionKey, { label: string, icon: LucideIcon }> = {
@@ -121,20 +121,30 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
 
                 const card = (
                   <Card
+                    role="button"
+                    tabIndex={isDisabled ? -1 : 0}
+                    aria-pressed={isSelected}
+                    aria-label={`${optionDetails[key].label}${isDisabled ? ' (limit reached)' : ''}`}
+                    onKeyDown={(e) => {
+                      if (!isDisabled && (e.key === 'Enter' || e.key === ' ')) {
+                        e.preventDefault();
+                        handleSelect(key);
+                      }
+                    }}
                     onClick={() => !isDisabled && handleSelect(key)}
                     className={cn(
-                      "text-center p-8 rounded-2xl shadow-sm transition-all duration-300 relative cursor-pointer transform hover:-translate-y-1",
+                      "text-center p-8 rounded-2xl shadow-sm transition-all duration-300 relative cursor-pointer transform hover:-translate-y-1 outline-none focus:ring-2 focus:ring-primary/40",
                       isSelected ? 'bg-primary text-primary-foreground ring-2 ring-primary/50 shadow-lg' : 'bg-secondary hover:shadow-md',
-                      isDisabled && 'opacity-50 cursor-not-allowed bg-gray-100 hover:translate-y-0'
+                      isDisabled && 'opacity-50 cursor-not-allowed bg-gray-100 hover:translate-y-0 focus:ring-0'
                     )}
                   >
                      {isSelected && (
-                        <div className="absolute top-4 right-4 bg-white/20 text-white rounded-full p-1">
+                        <div className="absolute top-4 right-4 bg-white/20 text-white rounded-full p-1" aria-hidden="true">
                             <CheckCircle className="h-5 w-5" />
                         </div>
                     )}
                     <CardContent className="p-0 flex flex-col items-center justify-center gap-4">
-                       <Icon className="w-12 h-12" />
+                       <Icon className="w-12 h-12" aria-hidden="true" />
                       <p className="text-2xl font-bold">{optionDetails[key].label}</p>
                     </CardContent>
                   </Card>

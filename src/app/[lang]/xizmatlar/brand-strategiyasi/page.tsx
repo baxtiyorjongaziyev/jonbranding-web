@@ -1,7 +1,5 @@
-'use server';
-
+import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { useParams } from 'next/navigation';
 import WhyUs from '@/components/sections/why-us';
 import ServiceProcessHorizontal from '@/components/sections/service-process-horizontal';
 import ServiceSections from '@/components/sections/service-sections';
@@ -10,13 +8,25 @@ import Image from 'next/image';
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 
-interface BrandStrategyPageProps {
-  params: Promise<{ lang: string }>;
+type Props = {
+  params: { lang: Locale };
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { lang } = props.params;
+  const dictionary = await getDictionary(lang);
+  const metadata = dictionary.brandStrategyPage?.metadata;
+
+  return {
+    title: metadata?.title || "Brend Strategiyasi | Jon.Branding",
+    description: metadata?.description || "Biznesingiz poydevori uchun professional brend strategiyasi.",
+    keywords: metadata?.keywords || "brend strategiya, pozitsiyalash, bozor tahlili, branding",
+  };
 }
 
-const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
-  const { lang } = await props.params;
-  const dictionary = await getDictionary(lang as Locale);
+const BrandStrategyPage = async (props: Props) => {
+  const { lang } = props.params;
+  const dictionary = await getDictionary(lang);
   const translations = dictionary.brandStrategyPage;
 
   if (!translations) {
@@ -57,7 +67,7 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
               <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                 <CardContent className="p-0">
                   <Image 
-                    src="https://img2.teletype.in/files/d3/40/d3406311-28bc-4c55-bf19-19aa3f17e306.png"
+                    src="/images/cms/brand-strategy-chart.png"
                     alt="Business growth strategy chart"
                     width={800}
                     height={600}
@@ -86,7 +96,7 @@ const BrandStrategyPage = async (props: BrandStrategyPageProps) => {
             <div>
               <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                 <Image 
-                  src="https://img4.teletype.in/files/bd/d7/bdd7f837-5be9-47eb-9a9e-43dafefe5a17.png"
+                  src="/images/cms/brand-strategy-team.png"
                   alt="Startup team brainstorming brand strategy"
                   width={800}
                   height={600}

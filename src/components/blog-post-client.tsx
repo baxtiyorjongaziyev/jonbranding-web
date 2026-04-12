@@ -52,7 +52,7 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
         <div className="container mx-auto px-4 -mt-16 z-10 relative">
           <div className="w-full rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src="https://img1.teletype.in/files/81/55/8155bf93-39f5-45b3-b996-55115f926e79.jpeg"
+              src="/images/cms/blog-post-hero.jpeg"
               alt={post.title}
               data-ai-hint={post.imageHint}
               width={1200}

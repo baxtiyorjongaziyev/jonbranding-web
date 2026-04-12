@@ -31,6 +31,16 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.75rem;
+
+    /* Animation Tokens - Apple-style Snappy Physics */
+    --ease-liquid: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+    
+    /* Spring Presets for Framer Motion (documented for reference) */
+    /* Snappy: stiffness: 400, damping: 30 */
+    /* Gentle: stiffness: 200, damping: 25 */
+    
+    --transition-premium: 450ms var(--ease-liquid);
   }
 
   .dark {
@@ -87,6 +97,7 @@
 @layer utilities {
   .shadow-ocean {
     box-shadow: 0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2);
+    transition: box-shadow var(--transition-medium), transform var(--transition-medium);
   }
 
   .animate-subtle-pulse {
@@ -101,10 +112,31 @@
   }
 
   .gradient {
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-image: linear-gradient(to right, hsl(var(--accent)), hsl(var(--primary)));
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--accent)) 50%, 
+      #60a5fa 100%
+    );
+    background-size: 200% auto;
+    animation: gradient-flow 5s linear infinite;
+  }
+
+  @keyframes gradient-flow {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+  }
+
+  .animate-text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    animation: text-glow 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes text-glow {
+    from { text-shadow: 0 0 10px hsl(var(--primary) / 0.2); }
+    to { text-shadow: 0 0 25px hsl(var(--accent) / 0.5), 0 0 40px hsl(var(--primary) / 0.2); }
   }
 
   @keyframes gradient-rotate {
@@ -119,15 +151,13 @@
   .btn-animated-border {
     position: relative;
     z-index: 1;
+    isolation: isolate; /* Create new stacking context */
   }
-
+  
   .btn-animated-border::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: -1px; /* Slightly larger to cover edges */
     z-index: -1;
     border-radius: inherit;
     padding: 2px;
@@ -137,6 +167,14 @@
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    pointer-events: none;
+  }
+  
+  /* Prevent white flash/box on hover or state change */
+  button, .btn {
+    -webkit-tap-highlight-color: transparent;
+    backface-visibility: hidden;
+    transform: translateZ(0); /* Force GPU rendering to prevent rounding artifacts */
   }
   
   @keyframes text-fade-in {
@@ -170,18 +208,106 @@
     max-width: calc(100% - 2rem) !important;
   }
 
-  .animate-breathing {
-    animation: breathing 2.5s infinite;
+  .glass-card-premium {
+    @apply bg-white/15 dark:bg-slate-900/60 backdrop-blur-[40px] border border-white/20 dark:border-white/10;
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+      0 10px 40px -10px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-premium);
   }
-  @keyframes breathing {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 10px 20px -5px hsl(var(--accent) / 0.2);
+
+  .noise-texture {
+    pointer-events: none;
+    position: absolute;
+    inset: -200%;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+  }
+
+  .spotlight {
+    @apply absolute pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 80%);
+    transform: translate(-50%, -50%);
+  }
+
+  .mesh-gradient-bg {
+    background: radial-gradient(at 0% 0%, hsla(210,100%,50%,0.1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(190,100%,50%,0.1) 0, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(210,100%,50%,0.1) 0, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(190,100%,50%,0.1) 0, transparent 50%);
+    transition: opacity var(--transition-slow);
+  }
+
+  .bento-background-image {
+    @apply absolute inset-0 z-0 overflow-hidden;
+    &::after {
+      content: '';
+      @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10;
     }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 20px 30px -10px hsl(var(--accent) / 0.3);
-    }
+  }
+
+  .bento-image-layer {
+    @apply absolute inset-0 w-full h-full object-cover scale-110 opacity-40;
+    transition: transform 1500ms cubic-bezier(0.16, 1, 0.3, 1), opacity 1500ms cubic-bezier(0.16, 1, 0.3, 1);
+    filter: saturate(0.8) contrast(1.1);
+  }
+
+  .glass-shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+    transition: all 0.8s ease-in-out;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .group:hover .glass-shimmer {
+    left: 200%;
+  }
+
+  .portrait-mask {
+    mask-image: linear-gradient(to top, transparent 2%, black 35%);
+    -webkit-mask-image: linear-gradient(to top, transparent 2%, black 35%);
+  }
+
+  .group:hover .bento-image-layer {
+    @apply scale-105 opacity-60;
+  }
+
+  @keyframes scroll-x {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .animate-scroll-x {
+    display: flex;
+    width: max-content;
+    animation: scroll-x 30s linear infinite;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary/20 rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/40;
   }
 }
 
@@ -194,3 +320,4 @@ section {
 section:first-of-type {
   content-visibility: visible;
 }
+

@@ -8,11 +8,11 @@ import { BlogPost } from '@/lib/types';
 import { Locale } from '@/lib/dictionaries';
 
 type Props = {
-  params: Promise<{ slug: string; lang: string }>;
+  params: { slug: string; lang: string };
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { slug, lang } = await props.params;
+  const { slug, lang } = props.params;
   const post = await getPostData(lang, slug);
 
   if (!post) {

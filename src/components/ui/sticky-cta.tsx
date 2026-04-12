@@ -4,9 +4,21 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { getDictionary } from '@/lib/dictionaries';
 
-export default function StickyCTA() {
+export default function StickyCTA({ lang }: { lang?: string }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [ariaLabel, setAriaLabel] = useState("Contact us");
+
+  useEffect(() => {
+    if (lang) {
+      getDictionary(lang as any).then(dict => {
+        if (dict?.common?.contactUs) {
+          setAriaLabel(dict.common.contactUs);
+        }
+      });
+    }
+  }, [lang]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +55,7 @@ export default function StickyCTA() {
             onClick={handleOpenModal}
             size="lg"
             className="rounded-full shadow-2xl h-14 w-14 p-0 bg-primary hover:bg-primary/90 hover:scale-105 transition-all text-dark-blue flex items-center justify-center animate-pulse"
-            aria-label="Contact us"
+            aria-label={ariaLabel}
           >
             <MessageCircle className="h-6 w-6" />
           </Button>

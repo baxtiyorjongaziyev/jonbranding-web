@@ -6,7 +6,7 @@ import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Hero from '@/components/sections/hero';
-import Stats from '@/components/sections/stats';
+import BentoResultsStats from '@/components/sections/bento-results-stats';
 import TrustedBy from '@/components/sections/trusted-by';
 import TargetAudience from '@/components/sections/target-audience';
 import WhyUs from '@/components/sections/why-us';
@@ -31,9 +31,6 @@ const Founder = dynamic(() => import('@/components/sections/founder'), {
 const Faq = dynamic(() => import('@/components/sections/faq'), { 
     loading: () => <Skeleton className="h-64 w-full" /> 
 });
-const ResultsGrid = dynamic(() => import('@/components/sections/results-grid'), { 
-    loading: () => <Skeleton className="h-96 w-full" /> 
-});
 
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
@@ -46,6 +43,21 @@ const CtaBlock = dynamic(() => import('@/components/sections/cta-block'), {
     loading: () => <Skeleton className="h-48 w-full rounded-2xl" /> 
 });
 const Video = dynamic(() => import('@/components/sections/video'), { ssr: false });
+const Comparison = dynamic(() => import('@/components/sections/comparison'), { 
+    loading: () => <Skeleton className="h-96 w-full" /> 
+});
+const Guarantee = dynamic(() => import('@/components/sections/guarantee'), { 
+    loading: () => <Skeleton className="h-64 w-full" /> 
+});
+const UrgencyBlock = dynamic(() => import('@/components/sections/urgency-block'), { 
+    loading: () => <Skeleton className="h-48 w-full" /> 
+});
+const QueueStatus = dynamic(() => import('@/components/sections/queue-status'), { 
+    loading: () => <Skeleton className="h-64 w-full" /> 
+});
+const PersonalOfferBlock = dynamic(() => import('@/components/sections/personal-offer-block'), { 
+    loading: () => <Skeleton className="h-[500px] w-full" /> 
+});
 
 const fadeInVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -76,17 +88,24 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
 
     const renderHeadline = (headline: string) => {
         if (!headline) return '';
-        const parts = headline.split('|');
-        if (parts.length === 3) {
-            return (
-                <>
-                    {parts[0]}
-                    <span className="gradient">{parts[1]}</span>
-                    {parts[2]}
-                </>
-            );
-        }
-        return headline.replace(/\|/g, '');
+        
+        // Handle both | and ** markers for backward compatibility and flexibility
+        const segments = headline.split(/(\*\*.*?\*\*|\|.*?\|)/g);
+        
+        return segments.map((segment, i) => {
+            const isDoubleStar = segment.startsWith('**') && segment.endsWith('**');
+            const isPipe = segment.startsWith('|') && segment.endsWith('|');
+            
+            if (isDoubleStar || isPipe) {
+                const text = isDoubleStar ? segment.slice(2, -2) : segment.slice(1, -1);
+                return (
+                    <span key={i} className="gradient inline-block animate-text-glow">
+                        {text}
+                    </span>
+                );
+            }
+            return segment;
+        });
     };
     
     if (!dictionary || !dictionary.hero) {
@@ -97,7 +116,9 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
         <div suppressHydrationWarning>
             {/* SEO Keywords - Hidden from UI but visible to search engines */}
             <div className="sr-only">
-                Ma'no Branding, Mountain Branding, Abba Marketing, Minim, RedFox Branding, Branding uz, Logo dizayn Tashkent, Neyming xizmati, Strategik brending.
+                {lang === 'uz' ? "Ma'no Branding, Mountain Branding, Abba Marketing, Minim, RedFox Branding, Branding uz, Logo dizayn Tashkent, Neyming xizmati, Strategik brending." : 
+                 lang === 'ru' ? "Брендинговое агентство Ташкент, дизайн логотипа, нейминг, брендинг в Узбекистане." :
+                 "Branding Agency Tashkent, logo design Uzbekistan, naming services, brand strategy."}
             </div>
             
             <main>
@@ -105,10 +126,6 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
                     <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
-                </motion.div>
-
-                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-                    <Stats dictionary={dictionary.stats} />
                 </motion.div>
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
@@ -123,7 +140,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                     <PickTwoSelector onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.pickTwoSelector} />
                 </motion.div>
 
-                <ResultsGrid dictionary={dictionary.results} />
+                <BentoResultsStats dictionary={dictionary} />
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
                     <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
@@ -138,16 +155,25 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
                     <FeaturedCaseStudy lang={lang} dictionary={dictionary.featuredCaseStudy || {}} />
                 </motion.div>
-                
+
+                {mounted && (
+                    <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                        <Guarantee dictionary={dictionary.guaranteeBlock} />
+                    </motion.div>
+                )}
                 {mounted ? (
                     <>
+                        <QueueStatus onCtaClick={handleOpenModal} />
+
                         <Video />
+                        
                         <CtaBlock 
-                            title={dictionary.home?.cta1_title || "Sizning brendingiz ham shunday ko'rinishi mumkin."}
-                            description={dictionary.home?.cta1_desc || "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing."}
-                            buttonText={dictionary.home?.cta1_button || "Mening biznesim uchun ham"}
+                            title={dictionary.home?.cta1_title}
+                            description={dictionary.home?.cta1_desc}
+                            buttonText={dictionary.home?.cta1_button}
                             onCtaClick={handleOpenModal}
                         />
+
                         <Founder lang={lang} dictionary={dictionary.founder} />
                         <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />
                         <LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} />

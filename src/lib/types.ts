@@ -17,6 +17,7 @@ export interface Testimonial {
 export interface Brand {
     name: string;
     logo: string | null;
+    hiddenInHero?: boolean;
 }
 
 export interface BlogPost {
@@ -44,4 +45,5 @@ export interface Project {
     oldHint: string;
     newHint: string;
     galleryImages: GalleryImage[];
+    hiddenInHero?: boolean;
 }

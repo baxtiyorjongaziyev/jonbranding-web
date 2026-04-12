@@ -11,7 +11,7 @@ export const staticBrands: Brand[] = [
     { name: 'Den Aroma', logo: 'https://img3.teletype.in/files/e2/90/e290fd28-87f2-4175-bc39-f15f945ac215.png' }, 
     { name: 'Velzo', logo: 'https://img1.teletype.in/files/c1/85/c185f779-620e-4ec7-bfe1-1580a000d80a.png' }, 
     { name: 'Bodomchi', logo: 'https://img4.teletype.in/files/ff/50/ff50be41-df24-49fa-95e7-7d50a7840f3e.png' },
-    { name: 'Fidda by Sevara', logo: 'https://img4.teletype.in/files/36/31/36315fc2-fcda-4133-86a4-85362a8197ce.png' }, 
+    { name: 'Fidda by Sevara', logo: 'https://img4.teletype.in/files/36/31/36315fc2-fcda-4133-86a4-85362a8197ce.png', hiddenInHero: true }, 
     { name: 'Boyarin', logo: 'https://img1.teletype.in/files/c1/05/c105eef2-f611-4004-8cab-aa96752fb767.png' }, 
     { name: 'Viton', logo: 'https://img2.teletype.in/files/9c/fc/9cfc9326-cfdc-4a0f-8262-9a69bdd6f0a2.png' }, 
     { name: 'Ravza Mebel', logo: 'https://img3.teletype.in/files/25/47/2547cc84-f669-43f0-b0a6-93421a65a68a.png' }, 
@@ -46,7 +46,7 @@ export const staticTestimonials: Testimonial[] = [
     image: "https://img1.teletype.in/files/4e/d7/4ed7845f-6eeb-4528-894b-07b985d1a0d1.jpeg",
     imageHint: "male founder portrait",
     quote: "",
-    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
+    videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5"
   },
   {
     name: "Sherzod Beknazarov",
@@ -61,7 +61,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Sevara Xolmanova",
     company: "Fidda by Sevara asoschisi",
     avatar: "SX",
-    image: "https://img2.teletype.in/files/a2/e5/a2e5d953-b090-482a-a957-c46b5d92120b.jpeg",
+    image: "https://img4.teletype.in/files/36/31/36315fc2-fcda-4133-86a4-85362a8197ce.png",
     imageHint: "female entrepreneur portrait",
     quote: "Men bu jamoa bn ishlab ko'rdim menga juda yoqdi samarali va natijasi siz kutgandanda A'lo bo'larkan brendlashni xam stikerlash va patenlashni xam berganman 7 oyda aniq boladi Hudo xohlasa Halol ishlarkansilar Allox rozi bo'lsin silardan juda xursand bo'ldim ishilarga rivoj Rahmat."
   },
@@ -91,7 +91,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     image: "https://img1.teletype.in/files/4e/d7/4ed7845f-6eeb-4528-894b-07b985d1a0d1.jpeg",
     imageHint: "male founder portrait",
     quote: "",
-    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
+    videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5"
   },
   {
     name: "Шерзод Бекназаров",
@@ -106,7 +106,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Севара Холманова",
     company: "Основательница Fidda by Sevara",
     avatar: "СХ",
-    image: "https://img2.teletype.in/files/a2/e5/a2e5d953-b090-482a-a957-c46b5d92120b.jpeg",
+    image: "https://img4.teletype.in/files/36/31/36315fc2-fcda-4133-86a4-85362a8197ce.png",
     imageHint: "female entrepreneur portrait",
     quote: "Я работала с этой командой, мне очень понравилось. Эффективно, и результат превзошел все ожидания. Я заказывала и брендинг, и стикеры, и патентование. Через 7 месяцев, даст Бог, все будет готово. Вы работаете честно, да будет доволен вами Аллах. Я очень рада, успехов в вашей работе. Спасибо."
   },
@@ -136,7 +136,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     image: "https://img1.teletype.in/files/4e/d7/4ed7845f-6eeb-4528-894b-07b985d1a0d1.jpeg",
     imageHint: "male founder portrait",
     quote: "",
-    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
+    videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5"
   },
   {
     name: "Sherzod Beknazarov",
@@ -151,7 +151,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Sevara Kholmanova",
     company: "Founder of Fidda by Sevara",
     avatar: "SK",
-    image: "https://img2.teletype.in/files/a2/e5/a2e5d953-b090-482a-a957-c46b5d92120b.jpeg",
+    image: "https://img4.teletype.in/files/36/31/36315fc2-fcda-4133-86a4-85362a8197ce.png",
     imageHint: "female entrepreneur portrait",
     quote: "I worked with this team and I really liked it, it was effective and the result was even better than I expected. I ordered branding, stickers, and patenting. In 7 months, God willing, it will be ready. You work honestly, may Allah be pleased with you. I am very happy, success to your work. Thank you."
   },
@@ -175,16 +175,6 @@ export const staticTestimonialsEn: Testimonial[] = [
 
 
 export const projects: Project[] = [
-    { 
-        brand: "Fidda", 
-        oldImg: "https://img2.teletype.in/files/9c/66/9c66a85f-486c-4f54-9682-fb4838061ab2.jpeg", 
-        newImg: "https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png", 
-        oldHint: "old logo design", 
-        newHint: "modern new logo",
-        galleryImages: [
-            { src: 'https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png', alt: 'Fidda Logotipi', hint: 'modern minimalist logo', unoptimized: false }
-        ]
-    },
     { 
         brand: "Incontrol", 
         oldImg: "https://img1.teletype.in/files/83/47/83479180-eeb6-4e39-9169-c4f4fb22e375.jpeg", 
@@ -221,11 +211,21 @@ export const projects: Project[] = [
         galleryImages: [
             { src: 'https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png', alt: 'Loyiha 4', hint: 'corporate style', unoptimized: false },
             { src: 'https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg', alt: 'Loyiha 5', hint: 'brandbook example', unoptimized: false },
+            { src: 'https://img1.teletype.in/files/81/55/8155bf93-39f5-45b3-b996-55115f926e79.jpeg', alt: 'ESVIRO 3D Mockup', hint: '3D product branding', unoptimized: false },
+            { src: 'https://img2.teletype.in/files/dd/c6/ddc6f06a-bc2b-4a67-b184-3380067a038e.jpeg', alt: 'Boyarin Premium', hint: 'premium product identity', unoptimized: false },
             { src: 'https://img1.teletype.in/files/88/92/8892f18d-a298-485d-8fe5-7d0444defd89.png', alt: 'Loyiha 3', hint: 'branding identity', unoptimized: false },
             { src: 'https://img2.teletype.in/files/19/49/1949747d-4381-489d-87bf-753a9fac573a.jpeg', alt: 'Loyiha 7', hint: 'website branding', unoptimized: false },
             { src: 'https://img1.teletype.in/files/83/c2/83c2c300-af89-482e-8052-15189ac22aff.jpeg', alt: 'Loyiha 6', hint: 'logo concept', unoptimized: false },
-            { src: 'https://img2.teletype.in/files/51/45/5145b60e-aca5-4225-8564-a4d601a148a7.jpeg', alt: 'Loyiha 8', hint: 'minimalist logo', unoptimized: false },
         ]
+    },
+    { 
+        brand: "Fidda by Sevara", 
+        oldImg: "https://img2.teletype.in/files/9c/66/9c66a85f-486c-4f54-9682-fb4838061ab2.jpeg", 
+        newImg: "https://img1.teletype.in/files/c1/27/c1276cf1-3338-47ab-a744-193da4049b4d.png", 
+        newHint: "modern premium branding", 
+        oldHint: "basic branding",
+        galleryImages: [],
+        hiddenInHero: true
     }
 ];
 

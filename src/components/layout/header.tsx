@@ -181,21 +181,32 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     trackEvent({ action: 'nav_click', category: 'Navigation', label });
   };
   
+  const getLocalizedPath = (path: string) => {
+    // If it's already an absolute URL, return it
+    if (path.startsWith('http') || path.startsWith('tel:') || path.startsWith('mailto:')) return path;
+    
+    // Ensure path starts with /
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    
+    if (lang === 'uz') return cleanPath;
+    return `/${lang}${cleanPath === '/' ? '' : cleanPath}`;
+  };
+
   const navItems = [
-    { href: `/${lang}/#portfolio`, label: dictionary.portfolio },
-    { href: `/${lang}/#founder`, label: dictionary.founder },
-    { href: `/${lang}/#process`, label: dictionary.process },
-    { href: `/${lang}/blog`, label: dictionary.blog },
+    { href: getLocalizedPath('/#portfolio'), label: dictionary.portfolio },
+    { href: getLocalizedPath('/#founder'), label: dictionary.founder },
+    { href: getLocalizedPath('/#process'), label: dictionary.process },
+    { href: getLocalizedPath('/blog'), label: dictionary.blog },
   ];
 
   const services = [
-    { title: dictionary.brand_strategy, href: `/${lang}/xizmatlar/brand-strategiyasi`, description: dictionary.brand_strategy_desc },
-    { title: dictionary.naming, href: `/${lang}/xizmatlar/neyming`, description: dictionary.naming_desc },
-    { title: dictionary.logo_design, href: `/${lang}/xizmatlar/logo-dizayni`, description: dictionary.logo_design_desc },
-    { title: dictionary.corporate_style, href: `/${lang}/xizmatlar/firmenniy-stil`, description: dictionary.corporate_style_desc },
-    { title: dictionary.brandbook, href: `/${lang}/xizmatlar/brandbook`, description: dictionary.brandbook_desc },
-    { title: dictionary.packaging_design, href: `/${lang}/xizmatlar/qadoq-dizayni`, description: dictionary.packaging_design_desc },
-    { title: dictionary.services_and_prices, href: `/${lang}/xizmatlar`, description: dictionary.services_and_prices_desc },
+    { title: dictionary.brand_strategy, href: getLocalizedPath('/xizmatlar/brand-strategiyasi'), description: dictionary.brand_strategy_desc },
+    { title: dictionary.naming, href: getLocalizedPath('/xizmatlar/neyming'), description: dictionary.naming_desc },
+    { title: dictionary.logo_design, href: getLocalizedPath('/xizmatlar/logo-dizayni'), description: dictionary.logo_design_desc },
+    { title: dictionary.corporate_style, href: getLocalizedPath('/xizmatlar/firmenniy-stil'), description: dictionary.corporate_style_desc },
+    { title: dictionary.brandbook, href: getLocalizedPath('/xizmatlar/brandbook'), description: dictionary.brandbook_desc },
+    { title: dictionary.packaging_design, href: getLocalizedPath('/xizmatlar/qadoq-dizayni'), description: dictionary.packaging_design_desc },
+    { title: dictionary.services_and_prices, href: getLocalizedPath('/xizmatlar'), description: dictionary.services_and_prices_desc },
   ];
 
   return (
@@ -222,7 +233,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         }}
         suppressHydrationWarning
       >
-        <Link href={`/${lang}`} className="flex items-center shrink-0" aria-label="Jon Branding - Bosh sahifa">
+        <Link href={getLocalizedPath('/')} className="flex items-center shrink-0" aria-label="Jon Branding - Bosh sahifa">
           <Logo />
         </Link>
 
@@ -283,13 +294,25 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                     onClick={() => trackContactClick('telegram')}
                   />
                 </div>
-                <Button 
-                  onClick={handleContactClick} 
-                  className="shadow-ocean h-11 px-6 rounded-full"
-                  aria-label={dictionary.free_consultation}
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.05, 1],
+                    boxShadow: ["0 0 0 0 rgba(37, 99, 235, 0)", "0 0 20px 5px rgba(37, 99, 235, 0.3)", "0 0 0 0 rgba(37, 99, 235, 0)"]
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
                 >
-                  {dictionary.free_consultation}
-                </Button>
+                  <Button 
+                    onClick={handleContactClick} 
+                    className="shadow-ocean h-11 px-6 rounded-full bg-primary hover:bg-primary/90 text-white font-bold"
+                    aria-label={dictionary.free_consultation}
+                  >
+                    {dictionary.free_consultation}
+                  </Button>
+                </motion.div>
               </div>
             </div>
           </div>

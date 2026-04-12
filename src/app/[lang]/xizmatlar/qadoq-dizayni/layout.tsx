@@ -31,7 +31,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       siteName: 'Jon.Branding',
       images: [
         {
-          url: 'https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2',
+          url: '/images/cms/og-image.jpeg',
           width: 1200,
           height: 630,
           alt: t.description,
@@ -43,7 +43,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: t.title,
       description: t.description,
-      images: ['https://img1.teletype.in/files/48/fb/48fbe9e5-c83d-46da-9425-aa8b8b18d501.jpeg?v=2'],
+      images: ['/images/cms/og-image.jpeg'],
     },
     alternates: {
       canonical: canonicalUrl,
