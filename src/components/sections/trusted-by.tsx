@@ -71,7 +71,7 @@ const TrustedBy: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictiona
     if (!title) return null;
 
   return (
-    <section className="py-16 sm:py-24 bg-white overflow-hidden" aria-labelledby="trusted-by-title">
+    <section className="snap-section py-0 bg-white" aria-labelledby="trusted-by-title">
       <div className="container mx-auto px-4">
         <h2 id="trusted-by-title" className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           {title}

@@ -2,13 +2,10 @@
 'use client';
 
 import type {FC} from 'react';
-import { useState, useEffect } from 'react';
 import {Button} from '@/components/ui/button';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { ArrowRight, Shield, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Card } from '../ui/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import TiltCard from '../ui/tilt-card';
@@ -30,94 +27,184 @@ interface HeroProps {
 const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline }) => {
   if (!dictionary) return null;
 
+  const stats: { value: string; label: string }[] = dictionary.stats || [
+    { value: '150+', label: "brend yaratilgan" },
+    { value: '2-3x', label: "sotuv o'sishi" },
+    { value: '98%', label: "mijozlar mamnun" },
+  ];
+
+  const guarantees: string[] = dictionary.guarantees || [
+    '100% natija kafolati',
+    '30 kun ichida tayyor',
+    '150+ muvaffaqiyatli loyiha',
+  ];
+
   return (
-    <section className="relative bg-background py-20 sm:py-28 lg:py-32 overflow-hidden" suppressHydrationWarning>
-      <div aria-hidden="true" className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[40rem] h-[40rem] bg-accent/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[50rem] h-[50rem] bg-primary/5 rounded-full blur-3xl"></div>
+    <section
+      className="relative bg-background overflow-hidden min-h-[100svh] flex flex-col justify-center"
+      style={{ paddingTop: '72px' }}
+      suppressHydrationWarning
+    >
+      {/* Background glows */}
+      <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[35rem] h-[35rem] bg-accent/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 -translate-x-1/4 w-[50rem] h-[50rem] bg-primary/5 rounded-full blur-[100px]" />
       </div>
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-            <div className="max-w-2xl text-center lg:text-left pt-6 lg:pt-10">
-                <motion.h1 
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-                  data-testid="hero-title" 
-                  className="text-4xl leading-[1.1] sm:text-5xl md:text-6xl font-extrabold text-foreground tracking-tight"
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-[1400px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+
+          {/* ── LEFT: Copy ── */}
+          <div className="text-center lg:text-left">
+
+
+            {/* Audience tag */}
+            {dictionary.audienceTag && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.05 }}
+                className="text-sm font-bold text-muted-foreground mb-3 tracking-wide"
+              >
+                {dictionary.audienceTag}
+              </motion.div>
+            )}
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              data-testid="hero-title"
+              className="text-[32px] leading-[1.15] sm:text-[42px] lg:text-[54px] xl:text-[62px] font-black text-foreground tracking-[-0.03em] mb-6"
+            >
+              {renderHeadline(dictionary.title || '')}
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mx-auto lg:mx-0 max-w-xl text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8"
+              dangerouslySetInnerHTML={{ __html: dictionary.description }}
+            />
+
+            {/* Guarantees — horizontal row */}
+            {guarantees.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+                className="flex flex-wrap justify-center lg:justify-start gap-1.5 mb-4"
+              >
+                {guarantees.map((g: string, i: number) => (
+                  <span key={i} className="inline-flex items-center gap-1 text-xs font-bold text-green-700 bg-green-50 border border-green-200 px-3 py-1 rounded-full">
+                    <Shield className="w-2.5 h-2.5" />
+                    {g}
+                  </span>
+                ))}
+              </motion.div>
+            )}
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-2.5 mb-2"
+            >
+              <Magnetic>
+                <Button
+                  onClick={() => onPrimaryClick()}
+                  size="lg"
+                  variant="default"
+                  className="w-full sm:w-auto text-base px-8 py-4 shadow-xl rounded-xl relative group overflow-hidden bg-primary hover:bg-primary/95 transition-all duration-300 hover:scale-105 active:scale-95 btn-premium"
+                  aria-label={dictionary.cta}
                 >
-                  {renderHeadline(dictionary.title || dictionary.headlines?.[0] || '')}
-                </motion.h1>
-                
-                <motion.p 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-                  className="mx-auto lg:mx-0 mt-6 lg:mt-8 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed" 
-                  dangerouslySetInnerHTML={{ __html: dictionary.description }}
+                  <span className="relative z-10 flex items-center font-black text-base uppercase tracking-tight">
+                    {dictionary.cta}
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </span>
+                  <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                </Button>
+              </Magnetic>
+
+              {dictionary.ctaSecondary && (
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="w-full sm:w-auto text-base px-6 py-4 rounded-xl font-bold text-primary hover:bg-primary/5 border border-primary/20"
+                  onClick={() => {
+                    const el = document.getElementById('results');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
-                </motion.p>
-                <div className="mt-8 lg:mt-10 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-                    <Magnetic>
-                        <motion.div 
-                            className="w-full sm:w-auto"
-                        >
-                            <Button 
-                                onClick={() => onPrimaryClick()} 
-                                size="lg" 
-                                variant="default" 
-                                className="w-full sm:w-auto text-base px-8 py-7 shadow-xl rounded-full relative group overflow-hidden bg-primary hover:bg-primary/95 transition-all duration-300 hover:shadow-ocean hover:scale-105 active:scale-95" 
-                                aria-label={dictionary.cta || dictionary.buttonTexts?.[0]}
-                            >
-                                <span className="relative z-10 flex items-center font-bold">
-                                    {dictionary.cta || dictionary.buttonTexts?.[0]}
-                                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                                </span>
-                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
-                            </Button>
-                        </motion.div>
-                    </Magnetic>
-                </div>
-                <div className="mt-6 text-sm text-muted-foreground flex items-center justify-center lg:justify-start gap-2 italic opacity-80">
-                    <Sparkles className="w-4 h-4 text-accent animate-pulse" />
-                    {dictionary.buttonHint}
-                </div>
-            </div>
-            <div className="flex justify-center items-start mt-10 lg:mt-0 px-8 lg:px-16 h-full">
-                <TiltCard strength={5} className="w-full max-w-[800px] h-fit">
-                    <div className="relative group perspective-1000 h-fit">
-                        <Carousel
-                            plugins={[Autoplay({ delay: 3000, stopOnInteraction: true })]}
-                            className="w-full transition-all duration-700 h-auto -m-20 p-20"
-                        >
-                            <CarouselContent className="items-start h-auto">
-                                {portfolioImages.map((image, index) => (
-                                    <CarouselItem key={index} className="flex justify-center h-full py-6">
-                                        <motion.div 
-                                            initial={{ opacity: 0, scale: 0.98 }}
-                                            whileInView={{ opacity: 1, scale: 1 }}
-                                            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                                            className="relative w-full h-auto flex items-center justify-center p-4"
-                                        >
-                                            <Image 
-                                                src={image.src}
-                                                alt={image.alt || 'Jon Branding Portfolio'}
-                                                width={1000}
-                                                height={667}
-                                                className="w-full h-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-                                            />
-                                        </motion.div>
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                        </Carousel>
-                        
-                        {/* Dynamic background glow that follows the card */}
-                        <div className="absolute -inset-6 bg-primary/5 blur-3xl rounded-[3rem] -z-10 opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
-                        <div className="absolute -inset-10 bg-accent/5 blur-[100px] rounded-full -z-20 animate-pulse" />
-                    </div>
-                </TiltCard>
-            </div>
+                  {dictionary.ctaSecondary}
+                  <ChevronRight className="w-5 h-5 ml-1.5" />
+                </Button>
+              )}
+            </motion.div>
+
+            {/* Trust line */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="text-[10px] text-muted-foreground text-center lg:text-left mb-4"
+            >
+              {dictionary.buttonHint}
+            </motion.p>
+
+          </div>
+
+          {/* ── RIGHT: Image + Stats below ── */}
+          <div className="hidden lg:flex flex-col gap-4 self-center p-8">
+            <TiltCard strength={5} className="w-full">
+              <div className="relative group">
+                <Carousel
+                  plugins={[Autoplay({ delay: 3500, stopOnInteraction: true })]}
+                  className="w-full relative z-10"
+                >
+                  <CarouselContent>
+                    {portfolioImages.map((image, index) => (
+                      <CarouselItem key={index}>
+                        <div className="relative w-full rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+                          <Image
+                            src={image.src}
+                            alt={image.alt || 'Jon Branding Portfolio'}
+                            width={800}
+                            height={600}
+                            className="w-full h-auto object-cover"
+                            priority={index === 0}
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </Carousel>
+                <div className="absolute -inset-8 bg-primary/10 blur-[80px] rounded-full -z-10 opacity-25 group-hover:opacity-50 transition-opacity duration-1000" />
+              </div>
+            </TiltCard>
+
+            {/* Stats below image */}
+            {stats.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="flex justify-around border border-border/50 rounded-2xl bg-white/60 backdrop-blur-sm px-4 py-3"
+              >
+                {stats.map((s, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-xl font-black text-foreground tracking-tighter">{s.value}</div>
+                    <div className="text-[10px] text-muted-foreground font-semibold uppercase tracking-widest leading-tight mt-0.5">{s.label}</div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </div>
+
         </div>
       </div>
     </section>

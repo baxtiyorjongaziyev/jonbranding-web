@@ -69,7 +69,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Nodirbek",
     company: "Barakah Restoran asoschisi",
     avatar: "N",
-    image: "https://img1.teletype.in/files/e9/87/e987c32e-5036-41f2-b88a-2c8153c3933c.jpeg",
+    image: "https://placehold.co/400x400/0057ff/ffffff?text=Barakah+Nodirbek",
     imageHint: "restaurant manager portrait",
     quote: "Esingizda bo'lsa, 3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Sizlarga katta rahmat, ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka! 🤝🏻😊"
   },
@@ -77,7 +77,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Javohir Haqberdiyev",
     company: "Perfona asoschisi",
     avatar: "JH",
-    image: "https://img2.teletype.in/files/06/ab/06abe383-29a3-4877-90c7-e31b143493e9.jpeg",
+    image: "https://placehold.co/400x400/0057ff/ffffff?text=Perfona+Javohir",
     imageHint: "tech startup founder",
     quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!"
   },
@@ -114,7 +114,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Нодирбек",
     company: "Основатель ресторана Barakah",
     avatar: "Н",
-    image: "https://img1.teletype.in/files/e9/87/e987c32e-5036-41f2-b88a-2c8153c3933c.jpeg",
+    image: "https://placehold.co/400x400/0057ff/ffffff?text=Barakah+Nodirbek",
     imageHint: "restaurant manager portrait",
     quote: "Если помните, 3 года назад вы разработали логотип для этого бренда. Огромное вам спасибо, получилось великолепно, действительно все хвалят. Большое спасибо, Бахтиёр ака! 🤝🏻😊"
   },
@@ -122,7 +122,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Джавохир Хакбердиев",
     company: "Основатель Perfona",
     avatar: "ДХ",
-    image: "https://img2.teletype.in/files/06/ab/06abe383-29a3-4877-90c7-e31b143493e9.jpeg",
+    image: "https://placehold.co/400x400/0057ff/ffffff?text=Perfona+Javohir",
     imageHint: "tech startup founder",
     quote: "Получилось даже лучше, чем я ожидал. Сейчас смотрю на логотип и сам наслаждаюсь. Что мне понравилось — это доверие. И то, что сдали раньше срока, было здорово. Отлично, что быстро поделились результатами. Большое спасибо, ака!"
   },
@@ -159,7 +159,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Nodirbek",
     company: "Founder of Barakah Restaurant",
     avatar: "N",
-    image: "https://img1.teletype.in/files/e9/87/e987c32e-5036-41f2-b88a-2c8153c3933c.jpeg",
+    image: "https://placehold.co/400x400/0057ff/ffffff?text=Barakah+Nodirbek",
     imageHint: "restaurant manager portrait",
     quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! 🤝🏻😊"
   },
@@ -167,7 +167,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Javohir Haqberdiyev",
     company: "Founder of Perfona",
     avatar: "JH",
-    image: "https://img2.teletype.in/files/06/ab/06abe383-29a3-4877-90c7-e31b143493e9.jpeg",
+    image: "https://placehold.co/400x400/0057ff/ffffff?text=Perfona+Javohir",
     imageHint: "tech startup founder",
     quote: "It turned out even better than I expected. I'm looking at the logo now and I'm enjoying it myself. What I liked was the trust. And the fact that it was delivered ahead of schedule was great. It's great that you shared the results quickly. Thanks a lot, aka!"
   },
@@ -212,8 +212,6 @@ export const projects: Project[] = [
             { src: 'https://img1.teletype.in/files/84/db/84dbe512-edc1-4386-a986-29114e8d8be2.png', alt: 'Loyiha 4', hint: 'corporate style', unoptimized: false },
             { src: 'https://img1.teletype.in/files/84/76/8476f287-2ba0-4164-898a-d2d7c353a27e.jpeg', alt: 'Loyiha 5', hint: 'brandbook example', unoptimized: false },
             { src: 'https://img1.teletype.in/files/81/55/8155bf93-39f5-45b3-b996-55115f926e79.jpeg', alt: 'ESVIRO 3D Mockup', hint: '3D product branding', unoptimized: false },
-            { src: 'https://img2.teletype.in/files/dd/c6/ddc6f06a-bc2b-4a67-b184-3380067a038e.jpeg', alt: 'Boyarin Premium', hint: 'premium product identity', unoptimized: false },
-            { src: 'https://img1.teletype.in/files/88/92/8892f18d-a298-485d-8fe5-7d0444defd89.png', alt: 'Loyiha 3', hint: 'branding identity', unoptimized: false },
             { src: 'https://img2.teletype.in/files/19/49/1949747d-4381-489d-87bf-753a9fac573a.jpeg', alt: 'Loyiha 7', hint: 'website branding', unoptimized: false },
             { src: 'https://img1.teletype.in/files/83/c2/83c2c300-af89-482e-8052-15189ac22aff.jpeg', alt: 'Loyiha 6', hint: 'logo concept', unoptimized: false },
         ]

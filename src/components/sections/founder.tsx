@@ -16,7 +16,7 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
   if (!translations) return null;
 
   return (
-    <section id="founder" className="relative py-24 bg-black overflow-hidden border-t border-white/5">
+    <section id="founder" className="snap-section py-0 relative bg-black overflow-hidden border-t border-white/5">
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col gap-8 order-2 md:order-1">

@@ -146,27 +146,26 @@
         }
     },
     "hero": {
-        "headlines": [
-            "Brending agentligi |Toshkentda|: Jon.Branding.",
-            "Logotip yaratish |natija uchun|.",
-            "Brendingiz |sotmayaptimi?| Uni tuzatamiz.",
-            "Raqobatchilardan |ajralib turing|.",
-            "Brendingizni nafaqat chiroyli, balki |daromadli| qiling."
+        "title": "Kuchli brend bilan sotuvingizni **2-3 karra oshiring** \u2014 30 kun ichida",
+        "description": "Raqobatchilar professional ko'rinadi, siz esa hali ham eski logotip bilan yurasizmi? Mijozlar sizni tanlashdan oldin raqobatchini tanlayapti \u2014 chunki ularning brendi <span class='font-bold text-foreground'>ishonch uyg\u2019otadi</span>.",
+        "cta": "Bepul Brend Audit Olish",
+        "ctaSecondary": "Natijalarimizni Ko\u02bcring",
+        "buttonHint": "\u2713 Hech qanday majburiyat yo\u02bcq  \u00b7  \u2713 15 daqiqalik bepul tahlil  \u00b7  \u2713 Agar natija bo\u02bcmasa \u2014 pulingiz qaytariladi",
+        "urgencyBadge": "\u26a1 Bu oy faqat 3 ta bepul konsultatsiya qoldi \u2014 o\u02bcringizni band qiling",
+        "audienceTag": "\ud83c\udfaf Biznes egalariga murojaat",
+        "guarantees": ["100% natija kafolati", "30 kun ichida tayyor", "150+ muvaffaqiyatli loyiha"],
+        "stats": [
+            { "value": "150+", "label": "brend yaratilgan" },
+            { "value": "2-3x", "label": "o\u02bcrtacha sotuv o\u02bcsishi" },
+            { "value": "98%", "label": "mijozlar mamnun" }
         ],
-        "description": "Biz shunchaki logotip chizmaymiz. Toshkentdagi yetakchi <span class='font-bold text-foreground underline decoration-primary/30'>brending agentligi</span> sifatida biz biznesingiz uchun <span class='font-bold text-foreground'>natijaga yo'naltirilgan</span> strategiya quramiz. Neyming va professional logotip dizayni.",
-        "buttonTexts": [
-            "Brendimni tahlil qilish",
-            "Sotuvlarni oshirishga yordam",
-            "Bepul konsultatsiya",
-            "Menga kuchli brend kerak"
-        ],
-        "buttonHint": "Bepul. Majburiyatlarsiz.",
-        "title": "Brending agentligi |Toshkentda|: Jon.Branding.",
-        "description": "Biz shunchaki logotip chizmaymiz. Toshkentdagi yetakchi <span class='font-bold text-foreground underline decoration-primary/30'>brending agentligi</span> sifatida biz biznesingiz uchun <span class='font-bold text-foreground'>natijaga yo'naltirilgan</span> strategiya quramiz. Neyming va professional logotip dizayni.",
-        "cta": "Brendimni tahlil qilish"
+        "leadMagnetTitle": "Brendingizni tahlil qilish uchun bepul chek-listni yuklab oling",
+        "leadMagnetCta": "Chek-listni yuklash"
     },
+
     "results": {
         "badge": "MIJOZ NATIJASI",
+        "statsBadge": "JON.BRANDING STAT",
         "title": "Mijozlarimizning natijalari",
         "subtitle": "Biz nafaqat chiroyli dizayn, balki biznesingiz rivojiga hissa qo'shadigan strategik yechimlar yaratamiz.",
         "items": [
@@ -181,6 +180,12 @@
                 "desc": "Mijozlar oqimining ko'payishi"
             }
         ],
+        "stats": {
+            "projects": "Muvaffaqiyatli loyihalar",
+            "experience": "Yillik tajriba",
+            "clients": "Mamnun mijozlar",
+            "recommend": "Tavsiya qilishadi"
+        },
         "detail": "Har bir loyiha biz uchun shunchaki dizayn emas, balki biznes o'sishi uchun vositadir."
     },
     "contactModal": {
@@ -1085,6 +1090,37 @@
             "default": "Iltimos, siz uchun eng muhim bo'lgan 2 ta ustuvorlikni tanlang."
         },
         "tooltip": "Avval bittasini bekor qiling"
+    },
+    "results": {
+        "badge": "MIJOZ NATIJASI",
+        "title": "Mijozlarimizning natijalari",
+        "subtitle": "Biz nafaqat chiroyli dizayn, balki biznesingiz rivojiga hissa qo'shadigan strategik yechimlar yaratamiz.",
+        "detail": "Har bir loyiha biz uchun shunchaki dizayn emas, balki biznes o'sishi uchun vositadir.",
+        "items": [
+            {
+                "impact": "60%+",
+                "title": "Den Aroma",
+                "desc": "O'rtacha chekning oshishi"
+            },
+            {
+                "impact": "40%+",
+                "title": "Bexruz Market",
+                "desc": "Mijozlar oqimining ko'payishi"
+            }
+        ]
+    },
+    "stats": {
+        "badge": "JON.BRANDING STAT",
+        "projects": "Muvaffaqiyatli loyihalar",
+        "experience": "Yillik tajriba",
+        "clients": "Mamnun mijozlar",
+        "recommend": "Tavsiya qilishadi",
+        "items": [
+            { "value": "1000+", "label_key": "projects" },
+            { "value": "9+", "label_key": "experience" },
+            { "value": "500+", "label_key": "clients" },
+            { "value": "90%", "label_key": "recommend" }
+        ]
     },
     "exitIntentModal": {
         "title": "Ketmang!",

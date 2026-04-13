@@ -153,26 +153,26 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
   if (!dictionary) return null;
 
   const resultsItems = dictionary.results?.items || [];
-  const statsBadge = dictionary.stats?.badge || "STATISTIKA";
+  const statsBadge = dictionary.results?.statsBadge || dictionary.stats?.badge || "STATISTIKA";
   const resultsBadge = dictionary.results?.badge || "NATIJALAR";
 
   const statsList = [
-    { icon: Award, value: "1000+", label: dictionary.stats?.projects || "Loyihalar", color: "text-primary" },
-    { icon: Medal, value: "9+", label: dictionary.stats?.experience || "Yil", color: "text-accent" },
-    { icon: Users, value: "500+", label: dictionary.stats?.clients || "Mijozlar", color: "text-blue-400" },
-    { icon: Star, value: "90%", label: dictionary.stats?.recommend || "Tavsiya", color: "text-yellow-400" }
+    { icon: Award, value: "1000+", label: dictionary.results?.stats?.projects || dictionary.stats?.projects || "Loyihalar", color: "text-primary" },
+    { icon: Medal, value: "9+", label: dictionary.results?.stats?.experience || dictionary.stats?.experience || "Yil", color: "text-accent" },
+    { icon: Users, value: "500+", label: dictionary.results?.stats?.clients || dictionary.stats?.clients || "Mijozlar", color: "text-blue-400" },
+    { icon: Star, value: "90%", label: dictionary.results?.stats?.recommend || dictionary.stats?.recommend || "Tavsiya", color: "text-yellow-400" }
   ];
 
   return (
-    <section id="results" className="py-24 sm:py-32 bg-background perspective-1000 overflow-hidden relative">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mb-16">
+    <section id="results" className="py-8 lg:py-12 bg-background perspective-1000 overflow-hidden relative">
+      <div className="container mx-auto px-4 relative z-10 w-full">
+        <div className="max-w-5xl mb-6 lg:mb-8">
           <motion.h2 
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-            className="text-4xl md:text-7xl font-black text-foreground mb-6 tracking-tight leading-[1.1]"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-3 tracking-tighter leading-[1.1] uppercase whitespace-normal lg:whitespace-nowrap"
           >
             {dictionary.results?.title || "Natijalar"}
           </motion.h2>
@@ -181,7 +181,7 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-            className="text-lg md:text-2xl text-muted-foreground font-medium max-w-2xl leading-relaxed"
+            className="text-base md:text-lg text-muted-foreground font-bold max-w-3xl leading-snug tracking-tight italic border-l-4 border-primary pl-4"
           >
             {dictionary.results?.subtitle || "Strategik muvaffaqiyat ko'rsatkichlari."}
           </motion.p>
@@ -200,7 +200,7 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
               }
             }
           }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5"
         >
           
           {/* Block 1: Client Results */}
@@ -211,20 +211,25 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
             onLeave={() => {}}
             badge={resultsBadge}
             badgeColor="primary"
+            className="h-auto md:h-[280px] lg:h-[320px]"
           >
-            <div className="space-y-10 md:space-y-16 mt-6 md:mt-12">
+            <div className="grid grid-cols-2 gap-4 md:gap-8 mt-5 md:mt-7 relative z-10">
               {resultsItems.slice(0, 2).map((item: any, idx: number) => (
-                <div key={idx} className="group/item">
-                  <div className="flex items-baseline gap-4">
-                    <CountUp 
-                      value={item.impact} 
-                      className="text-5xl sm:text-6xl md:text-7xl font-black text-primary tracking-tighter leading-none"
-                    />
+                <div key={idx} className="group/item flex flex-col justify-between h-full">
+                  <div className="space-y-2">
+                    <div className="flex items-baseline gap-1">
+                      <CountUp 
+                        value={item.impact} 
+                        className="text-3xl sm:text-4xl md:text-5xl font-black text-primary tracking-tighter leading-none"
+                      />
+                    </div>
+                    <div className="mt-1">
+                      <h4 className="text-xs sm:text-sm md:text-base lg:text-lg font-black text-foreground mb-0.5 leading-tight uppercase tracking-tight">{item.title}</h4>
+                      <p className="text-[9px] sm:text-[10px] md:text-xs text-muted-foreground font-bold leading-tight uppercase tracking-wider opacity-70 group-hover/item:opacity-100 transition-opacity">{item.desc}</p>
+                    </div>
                   </div>
-                  <div className="mt-2 md:mt-4">
-                    <h4 className="text-xl md:text-3xl font-bold text-foreground mb-1">{item.title}</h4>
-                    <p className="text-muted-foreground text-sm md:text-base font-medium">{item.desc}</p>
-                  </div>
+                  
+                  {/* Subtle divider for mobile if needed, but grid handles it */}
                 </div>
               ))}
             </div>
@@ -238,16 +243,17 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
             onLeave={() => {}}
             badge={statsBadge}
             badgeColor="accent"
+            className="h-auto md:h-[280px] lg:h-[320px]"
           >
-            <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:gap-x-12 md:gap-y-16 mt-6 md:mt-12">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-4 md:gap-x-8 md:gap-y-5 mt-5 md:mt-7">
               {statsList.map((stat, idx) => (
                 <motion.div 
                   key={idx}
                   whileHover={{ y: -5 }}
-                  className="space-y-2 md:space-y-4"
+                  className="space-y-1 md:space-y-2"
                 >
-                  <stat.icon className={cn("w-6 h-6 md:w-10 md:h-10 mb-2 text-primary/60", stat.color)} />
-                  <div className="text-3xl sm:text-4xl md:text-5xl font-black text-foreground tracking-tighter leading-none">
+                  <stat.icon className={cn("w-6 h-6 md:w-8 md:h-8 mb-1 text-primary/60", stat.color)} />
+                  <div className="text-3xl sm:text-4xl font-black text-foreground tracking-tighter leading-none">
                     <CountUp value={stat.value} />
                   </div>
                   <div className="text-muted-foreground/60 font-bold uppercase tracking-widest text-[8px] md:text-[9px]">
@@ -258,21 +264,21 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
             </div>
           </BentoCard>
 
-          {/* Block 3: The Quote (Combined & Static) */}
+          {/* Block 3: The Quote (Combined & Static) - Now more compact */}
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 }
             }}
-            className="lg:col-span-2 p-8 md:p-12 rounded-[2.5rem] glass-card-premium border border-white/10 backdrop-blur-3xl relative overflow-hidden group"
+            className="lg:col-span-2 p-5 md:p-6 lg:p-7 rounded-[2.5rem] glass-card-premium border border-white/10 backdrop-blur-3xl relative overflow-hidden group"
           >
             <div className="noise-texture" />
-            <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-12">
-              <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                <Medal className="w-8 h-8 text-primary" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-10">
+              <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                <Medal className="w-6 h-6 md:w-8 md:h-8 text-primary" />
               </div>
-              <p className="text-foreground text-xl md:text-3xl leading-snug font-bold italic text-center md:text-left tracking-tight">
-                &ldquo;{dictionary.stats?.detail || dictionary.results?.detail}&rdquo;
+              <p className="text-foreground text-base md:text-xl lg:text-2xl leading-snug font-bold italic text-center md:text-left tracking-tight">
+                &ldquo;{dictionary.results?.detail || dictionary.stats?.detail}&rdquo;
               </p>
             </div>
             <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-1000 bg-gradient-to-r from-primary/30 via-accent/30 to-transparent" />
@@ -281,10 +287,10 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
         </motion.div>
       </div>
 
-      {/* Ambient background decoration */}
+      {/* Ambient background decoration - Subtler for small screens */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
-        <div className="absolute top-[20%] left-[10%] w-96 h-96 bg-primary blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[20%] right-[10%] w-96 h-96 bg-accent blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary blur-[100px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[10%] right-[5%] w-64 h-64 bg-accent blur-[100px] rounded-full animate-pulse" />
       </div>
     </section>
   );

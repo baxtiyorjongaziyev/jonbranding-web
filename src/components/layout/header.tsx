@@ -157,6 +157,8 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const backdropBlur = useTransform(scrollY, [0, 80], ['blur(0px)', 'blur(24px)']);
   const boxShadow = useTransform(scrollY, [0, 80], ['none', '0 8px 32px 0 rgba(31, 38, 135, 0.15)']);
 
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -164,11 +166,33 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      const scrollDiff = Math.abs(currentScrollY - lastScrollY);
+      
+      // Scrolled state for visual styling (background, border)
+      setScrolled(currentScrollY > 20);
+
+      // Visibility logic: hide on scroll down, show on scroll up
+      // 1. Never hide if mobile menu is open
+      // 2. Only hide if scrolling down significantly (> 10px diff) or past a certain point
+      // 3. Always show at the top
+      if (isMobileMenuOpen) {
+        setVisible(true);
+      } else if (currentScrollY <= 80) {
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY && scrollDiff > 10) {
+        // Significant scroll down
+        setVisible(false);
+      } else if (currentScrollY < lastScrollY && scrollDiff > 5) {
+        // Significant scroll up
+        setVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY, isMobileMenuOpen]);
 
   const handleContactClick = () => {
     setMobileMenuOpen(false);
@@ -211,7 +235,10 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-50"
+      className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center"
+      initial={{ y: 0 }}
+      animate={{ y: visible ? 0 : -100 }}
+      transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
       style={{ top }}
       suppressHydrationWarning
     >
@@ -295,6 +322,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   />
                 </div>
                 <motion.div
+                  className="rounded-full bg-transparent"
                   animate={{ 
                     scale: [1, 1.05, 1],
                     boxShadow: ["0 0 0 0 rgba(37, 99, 235, 0)", "0 0 20px 5px rgba(37, 99, 235, 0.3)", "0 0 0 0 rgba(37, 99, 235, 0)"]
@@ -374,6 +402,19 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           )}
         </div>
       </motion.div>
+
+      {/* ── Urgency Announcement Bar (Inline Ribbon) ── */}
+      {dictionary.urgencyBadge && (
+        <div className="w-full bg-[#0a0c10] text-white py-2 text-center border-t border-white/5 shadow-2xl mt-1 relative overflow-hidden group">
+          <div className="flex items-center justify-center gap-2">
+            <span className="flex h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
+            <p className="text-[9px] sm:text-[11px] font-bold tracking-[0.15em] uppercase text-white/90 group-hover:text-white transition-colors">
+              {dictionary.urgencyBadge}
+            </p>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+        </div>
+      )}
     </motion.header>
   );
 };

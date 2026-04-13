@@ -25,7 +25,7 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
     return (
         <Card className="h-full flex flex-col bg-white shadow-xl rounded-2xl overflow-hidden group">
             <CardContent className="p-0">
-                <div className="relative w-full aspect-[9/16] bg-black cursor-pointer" onClick={handlePlayVideo}>
+                <div className="relative w-full aspect-[4/3] bg-black cursor-pointer" onClick={handlePlayVideo}>
                     {playVideo ? (
                         <div className="absolute inset-0 w-full h-full z-10">
                             <iframe
@@ -127,56 +127,45 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
     }
 
   return (
-    <section className="pt-20 pb-10 sm:pt-32 sm:pb-16 bg-secondary/30">
+    <section className="snap-section py-0 bg-secondary/30 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h2 className="text-4xl sm:text-5xl font-black text-dark-blue tracking-tighter">{translations.title}</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-600 font-medium">
+          <p className="mt-3 max-w-2xl mx-auto text-lg text-gray-600 font-medium">
             {translations.subtitle}
           </p>
         </div>
 
         {videoTestimonials.length > 0 && (
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-24">
-                {videoTestimonials.map((testimonial, index) => (
-                    <div key={`video-${index}`} className="p-2">
+            <div className="max-w-5xl mx-auto">
+              <Carousel
+                plugins={[autoplayPlugin.current]}
+                opts={{ align: "start", loop: true }}
+                onMouseEnter={autoplayPlugin.current.stop}
+                onMouseLeave={autoplayPlugin.current.reset}
+                className="w-full relative"
+              >
+                <CarouselContent className="-ml-4">
+                  {videoTestimonials.map((testimonial, index) => (
+                    <CarouselItem key={`video-${index}`} className="pl-4 basis-full md:basis-1/2">
+                      <div className="p-2 h-full">
                         <VideoTestimonialCard testimonial={testimonial} />
-                    </div>
-                ))}
-            </div>
-        )}
-        
-        {textTestimonials.length > 0 && (
-             <div className="mt-24">
-                <div className="text-center mb-12">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-dark-blue mb-2 flex items-center justify-center gap-3">
-                        <MessageSquare className="w-8 h-8 text-primary" />
-                        {translations.textReviewsTitle}
-                    </h3>
-                    <p className="text-muted-foreground text-lg">{translations.textReviewsSubtitle}</p>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                  {textTestimonials.map((testimonial, index) => (
+                    <CarouselItem key={`text-${index}`} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                      <div className="p-4 h-full">
+                        <TextTestimonialCard testimonial={testimonial} />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="hidden sm:block">
+                  <CarouselPrevious className="absolute -left-4 lg:-left-12 h-12 w-12 shadow-lg border-primary/10 hover:bg-primary hover:text-white transition-all" />
+                  <CarouselNext className="absolute -right-4 lg:-right-12 h-12 w-12 shadow-lg border-primary/10 hover:bg-primary hover:text-white transition-all" />
                 </div>
-                
-                <Carousel 
-                    plugins={[autoplayPlugin.current]}
-                    opts={{ align: "start", loop: true }} 
-                    onMouseEnter={autoplayPlugin.current.stop}
-                    onMouseLeave={autoplayPlugin.current.reset}
-                    className="w-full relative px-4"
-                >
-                    <CarouselContent className="-ml-4 pb-12">
-                        {textTestimonials.map((testimonial, index) => (
-                        <CarouselItem key={`text-${index}`} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                            <div className="p-4 h-full">
-                                <TextTestimonialCard testimonial={testimonial} />
-                            </div>
-                        </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <div className="hidden sm:block">
-                        <CarouselPrevious className="absolute -left-4 lg:-left-12 h-12 w-12 shadow-lg border-primary/10 hover:bg-primary hover:text-white transition-all" />
-                        <CarouselNext className="absolute -right-4 lg:-right-12 h-12 w-12 shadow-lg border-primary/10 hover:bg-primary hover:text-white transition-all" />
-                    </div>
-                </Carousel>
+              </Carousel>
             </div>
         )}
       </div>
