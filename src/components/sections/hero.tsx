@@ -159,7 +159,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
           </div>
 
           {/* ── RIGHT: Image + Stats below ── */}
-          <div className="hidden lg:flex flex-col gap-4 self-center p-8">
+          <div className="flex flex-col gap-4 self-center p-4 lg:p-8 mt-12 lg:mt-0">
             <TiltCard strength={5} className="w-full">
               <div className="relative group">
                 <Carousel
