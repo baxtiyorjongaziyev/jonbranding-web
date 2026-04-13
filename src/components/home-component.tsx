@@ -89,23 +89,65 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     const renderHeadline = (headline: string) => {
         if (!headline) return '';
         
-        // Handle both | and ** markers for backward compatibility and flexibility
+        // Split by both | and ** markers and whitespace to handle individual words
+        // First handle markers to get chunks, then split chunks into words
         const segments = headline.split(/(\*\*.*?\*\*|\|.*?\|)/g);
         
-        return segments.map((segment, i) => {
-            const isDoubleStar = segment.startsWith('**') && segment.endsWith('**');
-            const isPipe = segment.startsWith('|') && segment.endsWith('|');
-            
-            if (isDoubleStar || isPipe) {
-                const text = isDoubleStar ? segment.slice(2, -2) : segment.slice(1, -1);
-                return (
-                    <span key={i} className="gradient inline-block animate-text-glow">
-                        {text}
-                    </span>
-                );
-            }
-            return segment;
-        });
+        let wordCount = 0;
+
+        return (
+          <motion.span 
+            initial="hidden" 
+            animate="visible" 
+            className="inline-block"
+          >
+            {segments.map((segment, i) => {
+                const isDoubleStar = segment.startsWith('**') && segment.endsWith('**');
+                const isPipe = segment.startsWith('|') && segment.endsWith('|');
+                
+                if (isDoubleStar || isPipe) {
+                    const text = isDoubleStar ? segment.slice(2, -2) : segment.slice(1, -1);
+                    return (
+                        <motion.span 
+                          key={i} 
+                          variants={{
+                            hidden: { opacity: 0, y: 10 },
+                            visible: { 
+                              opacity: 1, 
+                              y: 0,
+                              transition: { duration: 0.5, delay: wordCount++ * 0.05 }
+                            }
+                          }}
+                          className="gradient inline-block animate-text-glow font-black"
+                        >
+                            {text}
+                        </motion.span>
+                    );
+                }
+                
+                // For regular text, split into words for staggered reveal
+                return segment.split(' ').map((word, j) => {
+                  if (!word) return ' ';
+                  return (
+                    <motion.span
+                      key={`${i}-${j}`}
+                      variants={{
+                        hidden: { opacity: 0, y: 10 },
+                        visible: { 
+                          opacity: 1, 
+                          y: 0,
+                          transition: { duration: 0.5, delay: wordCount++ * 0.05 }
+                        }
+                      }}
+                      className="inline-block mr-[0.25em]"
+                    >
+                      {word}
+                    </motion.span>
+                  );
+                });
+            })}
+          </motion.span>
+        );
     };
     
     if (!dictionary || !dictionary.hero) {

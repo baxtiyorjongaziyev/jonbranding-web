@@ -249,7 +249,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     ];
 
     return (
-        <section id="package-builder" className="py-20 bg-white" suppressHydrationWarning>
+        <section id="package-builder" className="section-padding bg-white" suppressHydrationWarning>
             <div className="container mx-auto px-4 max-w-7xl">
                 <div className="max-w-4xl mx-auto mb-16 text-center space-y-4">
                     <Badge className="bg-primary/10 text-primary border-none px-8 py-2 rounded-full font-black text-[12px] uppercase tracking-[0.2em] shadow-sm">
@@ -335,14 +335,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <div className="relative z-10 h-full flex flex-col">
                                 <div className="space-y-3 mb-10">
                                     <div className="flex items-center gap-4">
-                                        <div className="bg-white/10 p-3 rounded-xl border border-white/10 shadow-inner">
-                                            <Box className="w-7 h-7 text-sky-blue" />
+                                        <div className="bg-white/10 p-3 rounded-xl border border-white/10 shadow-inner group/icon">
+                                            <Box className="w-7 h-7 text-sky-blue group-hover/icon:scale-110 transition-transform" />
                                         </div>
                                         <h3 className="text-2xl sm:text-3xl font-black tracking-tight uppercase text-white">{translations.your_package || "Sizning paketingiz"}</h3>
                                     </div>
                                     <p className="text-blue-100/80 font-medium text-base max-w-sm leading-relaxed">{translations.your_package_desc || "Tanlangan xizmatlar ro'yxati."}</p>
                                 </div>
-                                <div className="grid grid-cols-1 gap-3 overflow-y-auto pr-3 custom-scrollbar flex-grow max-h-[400px]">
+                                <div className="grid grid-cols-1 gap-3 overflow-y-auto pr-3 custom-scrollbar flex-grow max-h-[300px] lg:max-h-[400px]">
                                     <AnimatePresence mode="popLayout">
                                         {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
                                             const isSurcharge = k === 'urgency' || k === 'nda';
@@ -372,7 +372,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                         </div>
 
-                        <div className="lg:w-1/2 bg-slate-50 p-8 sm:p-14 flex flex-col border-l border-slate-100 relative">
+                        <div className="lg:w-1/2 bg-slate-50 p-6 sm:p-14 flex flex-col lg:border-l border-slate-100 relative">
                             <div className="space-y-8 flex-grow">
                                 <div className="space-y-6">
                                     <div className="flex justify-between items-center px-2">
@@ -475,14 +475,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                             <Button 
                                 size="lg" 
-                                className="w-full py-7 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group" 
+                                className="w-full py-8 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group btn-premium bg-primary text-white" 
                                 onClick={onOrderNow} 
                                 disabled={total.base === 0}
                                 aria-label="Loyiha narxini tasdiqlash"
                             >
                                 <span className="flex items-center justify-center gap-3 uppercase tracking-wider">
                                     LOYIHA NARXINI TASDIQLASH 
-                                    <ChevronsDown className="w-5 h-5 sm:w-6 sm:h-6 animate-bounce group-hover:scale-110 shrink-0" />
+                                    <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform shrink-0" />
                                 </span>
                             </Button>
                         </div>

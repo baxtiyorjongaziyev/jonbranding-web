@@ -11,13 +11,15 @@ import MainLayout from '@/components/layout/main-layout';
 import StickyCTA from '@/components/ui/sticky-cta';
 import MobileNavBar from '@/components/layout/mobile-nav-bar';
 import LeadMagnetPopup from '@/components/ui/lead-magnet-popup';
-import { Poppins } from 'next/font/google';
+import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import TabNotification from '@/components/layout/tab-notification';
 import OishaWidget from '@/components/oisha-widget';
+import { cn } from '@/lib/utils';
 
 
 const BASE_URL = 'https://jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
+const ICON_URL = '/icon.svg';
 
 export async function generateMetadata({ params: { lang } }: Props): Promise<Metadata> {
   const dictionary = await getDictionary(lang as Locale);
@@ -28,6 +30,15 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
       template: "%s | Jon.Branding"
     },
     description: dictionary.meta?.description || "Biznesingiz uchun natijali brend strategiyasi, neyming va logotip dizayni.",
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/icon.svg', type: 'image/svg+xml' },
+      ],
+      apple: [
+        { url: '/icon.svg', type: 'image/svg+xml' },
+      ],
+    },
     openGraph: {
       type: 'website',
       locale: lang === 'uz' ? 'uz_UZ' : lang === 'ru' ? 'ru_RU' : 'en_US',
@@ -50,11 +61,18 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
   };
 }
 
-const poppins = Poppins({
-  subsets: ['latin'],
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-poppins',
+  variable: '--font-jakarta',
   weight: ['400', '500', '600', '700', '800']
+});
+
+const inter = Inter({
+  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
+  display: 'swap',
+  variable: '--font-inter',
+  weight: ['400', '500', '600', '700', '800', '900']
 });
 
 type Props = {
@@ -75,12 +93,8 @@ export default async function LocalizedLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={lang} suppressHydrationWarning className={poppins.variable}>
+    <html lang={lang} suppressHydrationWarning className={cn(plusJakartaSans.variable, inter.variable)}>
       <head>
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="alternate" hrefLang="uz-UZ" href="https://jonbranding.uz/uz" />
-        <link rel="alternate" hrefLang="ru-RU" href="https://jonbranding.uz/ru" />
-        <link rel="alternate" hrefLang="en-US" href="https://jonbranding.uz/en" />
         <link rel="alternate" hrefLang="x-default" href="https://jonbranding.uz/uz" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         <link rel="manifest" href="/manifest.json" />
@@ -88,7 +102,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="JonBranding" />
-        <link rel="apple-touch-icon" href="/icon.svg" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://player.vimeo.com" />
@@ -237,10 +250,11 @@ export default async function LocalizedLayout({ children, params }: Props) {
         
         <MainLayout>
           <Header lang={lang} dictionary={dictionary.header} />
+          
           <div className="flex-grow">
             {children}
           </div>
-          <Footer lang={lang} dictionary={dictionary.footer} />
+        <Footer lang={lang} dictionary={dictionary.footer} />
           <StickyCTA lang={lang} />
           <MobileNavBar lang={lang} dictionary={dictionary.common} />
           <OishaWidget lang={lang as 'uz' | 'ru'} />

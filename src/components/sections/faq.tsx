@@ -18,7 +18,7 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   if (!translations || !translations.faqItems) return null;
 
   return (
-    <section id="faq" className="py-16 sm:py-24 bg-background">
+    <section id="faq" className="snap-section py-0 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground">

@@ -24,15 +24,15 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
   }
   
   return (
-    <section className="py-16 sm:py-24 bg-white">
+    <section className="snap-section py-0 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
+          <p className="mt-2 max-w-2xl mx-auto text-base text-gray-700">
             {translations.subtitle}
           </p>
         </div>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {comparisons.map((item, index) => (
             <Card key={index} className="overflow-hidden shadow-lg rounded-2xl transform hover:-translate-y-2 transition-transform duration-300">
               <CardContent className="p-0">
@@ -46,12 +46,6 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
           ))}
         </div>
       </div>
-      <CtaBlock 
-        title={translations.ctaTitle}
-        description={translations.ctaDesc}
-        buttonText={translations.ctaButton}
-        onCtaClick={onCtaClick}
-      />
     </section>
   );
 };

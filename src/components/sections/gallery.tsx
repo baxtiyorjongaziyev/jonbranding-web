@@ -59,7 +59,7 @@ const Gallery: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
   const secondColumn = galleryImages.slice(midPoint);
 
   return (
-    <section id="portfolio" className="py-16 sm:py-24 bg-secondary">
+    <section id="portfolio" className="snap-section py-0 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
@@ -68,7 +68,7 @@ const Gallery: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
           </p>
         </div>
       </div>
-      <div className="mt-12 relative h-[800px] overflow-hidden">
+      <div className="mt-6 relative h-[calc(100svh-260px)] overflow-hidden">
          <div className="absolute inset-0 grid grid-cols-2 gap-6 w-full max-w-5xl mx-auto px-4">
             <MarqueeColumn images={firstColumn} animationClass="animate-marquee-down" />
             <MarqueeColumn images={secondColumn} animationClass="animate-marquee-up" />

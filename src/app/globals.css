@@ -29,8 +29,10 @@
     --info-foreground: 215.9 91.7% 95.3%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
     --radius: 0.75rem;
+
+    --section-gap: 5rem;
+    --section-gap-mobile: 3rem;
 
     /* Animation Tokens - Apple-style Snappy Physics */
     --ease-liquid: cubic-bezier(0.23, 1, 0.32, 1);
@@ -83,7 +85,7 @@
     -webkit-font-smoothing: antialiased;
   }
   h1,h2,h3,h4,h5,h6 {
-    @apply text-foreground;
+    @apply text-foreground font-headline;
     font-display: swap;
   }
 }
@@ -116,27 +118,40 @@
     background-image: linear-gradient(
       135deg, 
       hsl(var(--primary)) 0%, 
-      hsl(var(--accent)) 50%, 
-      #60a5fa 100%
+      hsl(var(--accent)) 25%, 
+      #60a5fa 50%,
+      hsl(var(--accent)) 75%,
+      hsl(var(--primary)) 100%
     );
     background-size: 200% auto;
-    animation: gradient-flow 5s linear infinite;
+    animation: gradient-flow 4s linear infinite;
   }
 
   @keyframes gradient-flow {
     0% { background-position: 0% center; }
-    50% { background-position: 100% center; }
-    100% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .text-reveal-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .text-reveal-word.active {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .animate-text-glow {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    text-shadow: 0 0 15px hsl(var(--primary) / 0.2);
     animation: text-glow 3s ease-in-out infinite alternate;
   }
 
   @keyframes text-glow {
-    from { text-shadow: 0 0 10px hsl(var(--primary) / 0.2); }
-    to { text-shadow: 0 0 25px hsl(var(--accent) / 0.5), 0 0 40px hsl(var(--primary) / 0.2); }
+    from { text-shadow: 0 0 10px hsl(var(--primary) / 0.15); }
+    to { text-shadow: 0 0 30px hsl(var(--accent) / 0.4), 0 0 10px hsl(var(--primary) / 0.2); }
   }
 
   @keyframes gradient-rotate {
@@ -193,6 +208,52 @@
     }
     50% {
       box-shadow: 0 20px 25px -5px hsl(var(--accent) / 0.3), 0 8px 10px -6px hsl(var(--accent) / 0.3);
+    }
+  }
+
+  /* Premium Design System Utilities */
+  .btn-premium {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+  
+  .btn-premium::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full skew-x-[-20deg] pointer-events-none;
+  }
+  
+  .btn-premium:hover::after {
+    @apply translate-x-[200%] transition-transform duration-1000 ease-in-out;
+  }
+
+  .premium-card {
+    @apply bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 rounded-[2rem] overflow-hidden;
+  }
+
+  .section-padding {
+    padding-top: var(--section-gap);
+    padding-bottom: var(--section-gap);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Shorthand for sections that should fill the viewport without scroll */
+  /* Apply to section elements found in home-component that have py-16 sm:py-24 */
+  .snap-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: var(--section-gap);
+    padding-bottom: var(--section-gap);
+  }
+
+  @media (max-width: 768px) {
+    .section-padding,
+    .snap-section {
+      padding-top: var(--section-gap-mobile);
+      padding-bottom: var(--section-gap-mobile);
     }
   }
 
@@ -319,5 +380,17 @@ section {
 
 section:first-of-type {
   content-visibility: visible;
+}
+
+/* ── Urgency Banner Marquee ── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+  display: flex;
+  width: max-content;
 }
 
