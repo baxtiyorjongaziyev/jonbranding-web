@@ -234,14 +234,30 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   ];
 
   return (
-    <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center"
-      initial={{ y: 0 }}
-      animate={{ y: visible ? 0 : -100 }}
-      transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-      style={{ top }}
-      suppressHydrationWarning
-    >
+    <>
+      {/* ── Urgency Announcement Bar (Top Ribbon) ── */}
+      {dictionary.urgencyBadge && (
+        <div className="w-full bg-[#0a0c10] text-white py-2.5 text-center border-b border-white/5 relative overflow-hidden group z-[60]">
+          <div className="flex items-center justify-center gap-2">
+            <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.9)]" />
+            <p className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] uppercase text-white/95 group-hover:text-white transition-all duration-300">
+              {dictionary.urgencyBadge}
+            </p>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+        </div>
+      )}
+
+      <motion.header 
+        className="fixed left-0 right-0 z-50 flex flex-col items-center"
+        initial={{ y: 0 }}
+        animate={{ y: visible ? 0 : -100 }}
+        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+        style={{ 
+          top: dictionary.urgencyBadge ? useTransform(scrollY, [0, 40], [40, 0]) : 0,
+        }}
+        suppressHydrationWarning
+      >
       <motion.div
         className={cn(
           "mx-auto flex h-16 items-center justify-between transition-all duration-500 w-full",
@@ -402,20 +418,8 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           )}
         </div>
       </motion.div>
-
-      {/* ── Urgency Announcement Bar (Inline Ribbon) ── */}
-      {dictionary.urgencyBadge && (
-        <div className="w-full bg-[#0a0c10] text-white py-2 text-center border-t border-white/5 shadow-2xl mt-1 relative overflow-hidden group">
-          <div className="flex items-center justify-center gap-2">
-            <span className="flex h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
-            <p className="text-[9px] sm:text-[11px] font-bold tracking-[0.15em] uppercase text-white/90 group-hover:text-white transition-colors">
-              {dictionary.urgencyBadge}
-            </p>
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-        </div>
-      )}
     </motion.header>
+    </>
   );
 };
 
