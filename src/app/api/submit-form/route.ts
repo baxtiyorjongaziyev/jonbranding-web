@@ -128,7 +128,7 @@ ${packageSummary.replace('Brend:', `🏢 Brend:`).replace('Faoliyat turlari:', `
         } else {
             telegramMessage = `
 🔥 <b>Yangi Kvalifikatsiyalangan Lead!</b>
-🌍 Til: #${lang?.toUpperCase() || 'UZ'} | 🚀 Manba: #${source || 'website'}
+🌍 Til: #${lang?.toUpperCase() || 'UZ'} | 🚀 Manba: #${source || 'website'} ${source?.includes('lead_magnet') ? '#LeadMagnet' : ''}
 
 👤 <b>MIJOZ MA'LUMOTLARI:</b>
 ├ 📛 Ism: ${fullName}

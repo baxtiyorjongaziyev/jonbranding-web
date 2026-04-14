@@ -35,7 +35,7 @@ const Faq = dynamic(() => import('@/components/sections/faq'), {
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
 const LeadMagnet = dynamic(() => import('@/components/sections/lead-magnet'), { ssr: false });
-const PickTwoSelector = dynamic(() => import('@/components/sections/pick-two-selector'), { 
+const OpportunityCostCalculator = dynamic(() => import('@/components/sections/opportunity-cost-calculator'), { 
     loading: () => <Skeleton className="h-96 w-full" /> 
 });
 const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'), { ssr: false });
@@ -183,7 +183,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 </motion.div>
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
-                    <PickTwoSelector onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.pickTwoSelector} />
+                    <OpportunityCostCalculator onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.opportunityCalculator} />
                 </motion.div>
 
                 <BentoResultsStats dictionary={dictionary} />

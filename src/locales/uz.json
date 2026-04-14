@@ -63,8 +63,9 @@
             "description": "Brendbuk — bu brendingiz konstitutsiyasi. Biz brend yaxlitligini ta'minlaydigan kompleks brendbuklar yaratamiz, marketing xarajatlarini tejaymiz.",
             "keywords": "brandbook, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
         },
-        "title": "Brendbuk ishlab chiqish",
-        "subtitle": "Brendbuk shunchaki logotiplar to'plami emas, bu brendingiz izchilligini ta'minlaydigan konstitutsiyadir.",
+        "title": "Asoschi bilan tanishuv",
+        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biznes egalariga shunchaki logotip emas, balki yillar davomida xizmat qiladigan <span class='text-primary font-bold'>kuchli brend ekotizimini</span> qurishda yordam beraman. Bizning yondashuvimiz — vizual go'zallikni strategik tahlil bilan birlashtirish va har bir mijoz uchun o'sish zanjirini yaratishdir.",
+        "phoneButton": "Bog'lanish",
         "section1_title": "Nega har bir biznesga brendbuk kerak?",
         "section1_p1": "Brendbuk — brendni boshqarish uchun asosiy vositadir. U vizual va g'oyaviy elementlardan foydalanish qoidalarini aniq belgilab beradi — logotipdan tortib muloqot ohangigacha.",
         "section1_p2": "Ushbu hujjat marketingdagi tartibsizlikdan qochishga, vaqtni va pulni dizaynerlar va marketologlar bilan ishlashda tejashga yordam beradi.",
@@ -1130,6 +1131,30 @@
             { "value": "90%", "label_key": "recommend" }
         ]
     },
+    "opportunityCalculator": {
+        "title": "Sizning brendingiz 'Teshik Chelak' emasmi?",
+        "subtitle": "Nega ko'p reklama qilsangiz ham, pulingiz oqib ketyapti? Hisoblab ko'ring.",
+        "labels": {
+            "traffic": "Saytingizga kirgan odamlar soni",
+            "conversion": "Sizdan sotib olayotganlar ulushi (%)",
+            "aov": "O'rtacha bitta xarid narxi ($)"
+        },
+        "analogy": {
+            "title": "Nega bu sodir bo'lyapti?",
+            "bucket": "Chelak = Sizning Brendingiz",
+            "water": "Suv = Reklamadan kelgan mijozlar",
+            "leak": "Teshiklar = Yomon dizayn va ishonchsiz logo",
+            "description": "Siz qanchalik ko'p 'suv' quymang, agar brendingizda 'teshiklar' bo'lsa, foyda oqib ketaveradi. Biz ana shu teshiklarni yamaymiz."
+        },
+        "results": {
+            "title": "Sizning imkoniyatingiz",
+            "potential": "Brendingdan keyingi oylik foyda",
+            "loss": "Har oy boy berayotgan pulingiz",
+            "lossNote": "Siz har oy shuncha pulni 'stolda' qoldiryapsiz.",
+            "roiNote": "Atigi 1-2% ko'proq ishonch daromadingizni 2-3 baravarga oshirishi mumkin."
+        },
+        "cta": "Bepul Strategik Audit Olish"
+    },
     "exitIntentModal": {
         "title": "Ketmang!",
         "description": "Siz uchun maxsus taklifimiz bor. <br/>Hozirda bizda <span class='font-bold text-primary'>turli chegirmalar</span> amal qilmoqda. Imkoniyatdan foydalanib qoling!",
@@ -1160,6 +1185,11 @@
         "subtitle": "Brendingizni 10 ballik shkala bo'yicha mustaqil tekshirib ko'ring.",
         "description": "Bizning mutaxassislarimiz tomonidan tayyorlangan <b>'Brending Cheklisti'</b>ni mutlaqo bepul yuklab oling.",
         "cta": "Cheklistni olish",
-        "closeText": "Rahmat, kerak emas"
+        "closeText": "Rahmat, kerak emas",
+        "success": {
+            "title": "Muvaffaqiyatli!",
+            "description": "Materialingiz yuklab olish uchun tayyor. Bizning jamoamiz tez orada siz bilan bog'lanishi mumkin.",
+            "downloadCta": "Cheklistni yuklab olish (PDF)"
+        }
     }
 }

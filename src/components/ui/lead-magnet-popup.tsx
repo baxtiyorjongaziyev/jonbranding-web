@@ -323,9 +323,19 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                     <CheckCircle2 className="w-12 h-12 text-green-500" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-2xl font-bold">Muvaffaqiyatli!</h3>
-                    <p className="text-gray-400">Material yuklab olish uchun tayyor. Rahmat!</p>
+                    <h3 className="text-2xl font-bold">{dictionary.success.title}</h3>
+                    <p className="text-gray-400 text-sm">{dictionary.success.description}</p>
                   </div>
+                  
+                  <Button 
+                    asChild
+                    className="w-full h-14 bg-green-600 hover:bg-green-700 text-white font-bold text-lg rounded-2xl group transition-all shadow-xl shadow-green-900/20"
+                  >
+                    <a href="/downloads/jonbranding-checklist.pdf" download="JonBranding-Checklist.pdf">
+                      <Download className="w-5 h-5 mr-3" />
+                      {dictionary.success.downloadCta}
+                    </a>
+                  </Button>
                 </motion.div>
               )}
             </AnimatePresence>

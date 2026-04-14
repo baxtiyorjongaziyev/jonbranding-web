@@ -43,6 +43,13 @@
     /* Gentle: stiffness: 200, damping: 25 */
     
     --transition-premium: 450ms var(--ease-liquid);
+
+    /* Liquid Glass Tokens */
+    --liquid-glass-bg: rgba(255, 255, 255, 0.45);
+    --liquid-glass-border: rgba(255, 255, 255, 0.5);
+    --liquid-glass-blur: 24px;
+    --liquid-glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.15) 100%);
+    --liquid-glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
   }
 
   .dark {
@@ -369,6 +376,43 @@
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-primary/40;
+  }
+
+  /* Liquid Glass Utility Classes */
+  .liquid-glass {
+    background: var(--liquid-glass-bg);
+    backdrop-filter: blur(var(--liquid-glass-blur));
+    -webkit-backdrop-filter: blur(var(--liquid-glass-blur));
+    border: 1px solid var(--liquid-glass-border);
+    box-shadow: var(--liquid-glass-shadow);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .liquid-glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--liquid-glass-highlight);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  .liquid-glass-hover {
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .liquid-glass-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.55);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 25px 50px -12px rgba(31, 38, 135, 0.15);
+  }
+
+  .liquid-glass-interactive {
+    @apply cursor-pointer active:scale-95 transition-transform duration-200;
   }
 }
 

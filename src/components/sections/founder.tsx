@@ -34,9 +34,10 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                     <Linkedin size={20} />
                 </a>
             </div>
-            <p className="mt-4 text-lg text-gray-300">
-              {translations.message}
-            </p>
+            <p 
+              className="mt-4 text-lg text-gray-300"
+              dangerouslySetInnerHTML={{ __html: translations.message }}
+            />
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {translations.points.map((point: any, index: number) => {
                 const Icon = icons[point.icon];
