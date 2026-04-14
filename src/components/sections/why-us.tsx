@@ -6,6 +6,17 @@ import CtaBlock from './cta-block';
 import TiltCard from '@/components/ui/tilt-card';
 import { FC, useEffect, useState } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { motion } from 'framer-motion';
+
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.95, y: 30 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] }
+  }
+};
 
 
 interface WhyUsProps {
@@ -47,23 +58,33 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
             {translations.subtitle}
           </p>
         </div>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }}
+          className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {values.map((value, index) => (
-             <TiltCard key={index} strength={10}>
-                <Card className="bg-secondary/50 shadow-lg hover:shadow-xl transition-shadow rounded-2xl h-full">
-                  <CardHeader className="items-center text-center">
-                    <div className="bg-primary/10 p-4 rounded-full">
-                      <value.icon className="w-8 h-8 text-primary" />
-                    </div>
-                    <CardTitle className="!mt-4 text-xl">{value.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <p className="text-gray-600">{value.description}</p>
-                  </CardContent>
-                </Card>
-            </TiltCard>
+             <motion.div key={index} variants={itemVariants} className="h-full">
+               <TiltCard strength={10} className="h-full">
+                  <Card className="bg-secondary/50 shadow-lg hover:shadow-xl transition-shadow rounded-2xl h-full border-none">
+                    <CardHeader className="items-center text-center">
+                      <div className="bg-primary/10 p-4 rounded-full">
+                        <value.icon className="w-8 h-8 text-primary" />
+                      </div>
+                      <CardTitle className="!mt-4 text-xl">{value.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-center">
+                      <p className="text-gray-600">{value.description}</p>
+                    </CardContent>
+                  </Card>
+              </TiltCard>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
     <CtaBlock 
