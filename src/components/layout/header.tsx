@@ -261,7 +261,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
       <motion.div
         className={cn(
           "mx-auto flex h-16 items-center justify-between transition-all duration-500 w-full",
-          scrolled ? "px-6 lg:px-10" : "px-4 sm:px-6 lg:px-8",
+          scrolled ? "px-6 lg:px-10" : "px-6 lg:px-8",
           "border border-white/20 shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] ring-1 ring-white/10",
           scrolled 
             ? "max-w-[95%] lg:max-w-7xl py-2"

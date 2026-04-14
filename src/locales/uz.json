@@ -189,98 +189,104 @@
         "detail": "Har bir loyiha biz uchun shunchaki dizayn emas, balki biznes o'sishi uchun vositadir."
     },
     "contactModal": {
-        "stepTitles": {
-            "contact": "Aloqa ma'lumotlari",
-            "project": "Loyiha haqida",
-            "budget": "Byudjet",
-            "meeting": "Uchrashuv"
+        "sidebarTitle": "Strategik suhbat",
+        "sidebarSubtitle": "Ekspertlarimiz bilan daromadli brending tizimini quring.",
+        "header": "Strategik seans",
+        "description": "Loyiha strategiyasini ishlab chiqish va brending tizimini qurish.",
+        "steps": {
+            "step1": {
+                "title": "Tanishtiruv",
+                "subtitle": "Sizga maksimal foyda berishimiz uchun loyihangiz holatini tushunishimiz kerak."
+            },
+            "step2": {
+                "title": "Maqsadlar",
+                "subtitle": "Natijaga erishish uchun asosiy to'siqlarni aniqlaymiz."
+            },
+            "step3": {
+                "title": "Investitsiya",
+                "subtitle": "Sizning maqsadlaringizga mos keladigan byudjet darajasini tanlang."
+            },
+            "step4": {
+                "title": "Aloqa",
+                "subtitle": "Strategimiz siz bilan bog'lanishi uchun ma'lumotlaringizni qoldiring."
+            }
         },
-        "title": "Sifatli konsultatsiya uchun",
-        "description": "Loyihangizni tushunishimiz uchun bir nechta savolga javob bering.",
-        "fullName": "Ism, Familiya",
-        "fullNamePlaceholder": "Murad Nazarov",
-        "phone": "Telefon raqami",
-        "phonePlaceholder": "+998 90 123 45 67",
-        "telegram": "Telegram foydalanuvchi nomi (ixtiyoriy)",
-        "telegramPlaceholder": "@username",
-        "companyName": "Kompaniya yoki loyiha nomi",
-        "companyNamePlaceholder": "Jon.Branding",
-        "website": "Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)",
-        "websitePlaceholder": "https://t.me/jonbranding",
-        "goal": "Maqsadingiz nima?",
-        "goalOptions": [
-            {
-                "value": "exploring",
-                "label": "Brending nimaligini bilmayman, lekin kerak deb o'ylayman."
+        "fields": {
+            "role": {
+                "label": "Sizning rolingiz",
+                "options": [
+                    { "v": "owner", "l": "Biznes egasi" },
+                    { "v": "marketing", "l": "Marketing direktori" },
+                    { "v": "startup", "l": "Startap asoschisi" }
+                ]
             },
-            {
-                "value": "has_problem",
-                "label": "Brendim bor, lekin u samarasiz, tahlil kerak."
+            "revenue": {
+                "label": "Yillik aylanma (tahminiy)",
+                "options": [
+                    "Hali boshlanmagan",
+                    "100 mln so'mgacha",
+                    "100 - 500 mln so'm",
+                    "500 mln - 1 mlrd so'm",
+                    "1 mlrd+ so'm"
+                ]
             },
-            {
-                "value": "ready_to_start",
-                "label": "Brending kuchini tushunaman va aniq maqsadim bor."
+            "ambition": {
+                "label": "Keyingi 12 oy ichidagi asosiy maqsadingiz?",
+                "placeholder": "Masalan: Bozorda yetakchiga aylanish va sotuvni 2 barobar oshirish..."
+            },
+            "pain": {
+                "label": "Hozirgi eng katta muammo?",
+                "options": [
+                    { "v": "unrecognized", "l": "Bozorda tanilmaslik (brand awareness)" },
+                    { "v": "low_conversion", "l": "Sotuv conversioni pastligi" },
+                    { "v": "chaos", "l": "Marketing va brendingda tartibsizlik" }
+                ]
+            },
+            "budget": {
+                "label": "Loyiha uchun ajratilgan sarmoya?",
+                "options": [
+                    "$1,000 - $3,000",
+                    "$3,000 - $7,000",
+                    "$7,000 - $15,000",
+                    "$15,000+"
+                ]
+            },
+            "name": {
+                "label": "Ismingiz",
+                "placeholder": "Aziz Abduhakimov"
+            },
+            "phone": {
+                "label": "Telefon raqamingiz",
+                "placeholder": "+998 (__) ___-__-__"
             }
-        ],
-        "budget": "Taxminiy byudjet?",
-        "budgetOptions": [
-            "Hozircha byudjet yo'q",
-            "500$ gacha",
-            "500$ - 1,500$",
-            "1,500$ - 3,000$",
-            "3,000$ dan yuqori"
-        ],
-        "location": "Joylashuvingiz",
-        "locationPlaceholder": "Viloyatni tanlang",
-        "locationOptions": [
-            "Toshkent",
-            "Farg'ona",
-            "Boshqa"
-        ],
-        "meetingPlace": "Qayerda uchrashamiz?",
-        "meetingPlaceOptions": [
-            {
-                "value": "our_office",
-                "label": "Bizning ofisda",
-                "description": "Loyihaga sho'ng'ish"
-            },
-            {
-                "value": "neutral",
-                "label": "Neytral hududda",
-                "description": "Erkin suhbat"
-            },
-            {
-                "value": "client_office",
-                "label": "Sizning ofisda",
-                "description": "Biznes bilan tanishish"
-            }
-        ],
-        "onlineMeetingAlert": "Tushunarli. Biz siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.",
-        "backButton": "Orqaga",
-        "nextButton": "Keyingisi",
-        "submitButton": "So'rov yuborish",
-        "privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarimga ishlov berilishiga roziman.",
+        },
+        "buttons": {
+            "next": "Keyingi qadam",
+            "back": "Orqaga",
+            "submit": "Strategiyani olish",
+            "close": "Oynani yopish"
+        },
         "formErrors": {
-            "fullName": "Ismingizni to'liq kiriting.",
-            "phone": "To'g'ri telefon raqamini kiriting.",
-            "goal": "Maqsadingizni tanlang.",
-            "budget": "Taxminiy byudjetni tanlang.",
-            "location": "Joylashuvingizni tanlang.",
-            "meetingPlace": "Uchrashuv joyini tanlashingiz kerak.",
-            "privacyPolicy": "Siyosatni qabul qilishingiz kerak."
-        },
-        "successToast": {
-            "title": "Muvaffaqiyatli!",
-            "description": "So'rovingiz qabul qilindi. Tez orada bog'lanamiz!"
-        },
-        "leadMagnetToast": {
-            "title": "Maxsus resurslar!",
-            "description": "So'rovingiz qabul qilindi! Dastlab sizni bepul materiallarimizga yo'naltiramiz."
+            "role": "Tanlang",
+            "revenue": "Tanlang",
+            "ambition": "Maqsad kiritilishi shart",
+            "pain": "To'siqni tanlang",
+            "budget": "Byudjetni tanlang",
+            "fullName": "Ism kiritilishi shart",
+            "phone": "To'liq telefon raqamini kiriting"
         },
         "errorToast": {
             "title": "Xatolik!",
             "description": "So'rov yuborishda xato yuz berdi. Qayta urinib ko'ring."
-        }
+        },
+        "successStep": {
+            "title": "Ajoyib! Biz boshladik 🚀",
+            "description": "Ma'lumotlaringiz muvaffaqiyatli qabul qilindi. Tez orada bizning strategimiz siz bilan bog'lanadi va loyihangizni tahlil qilishni boshlaymiz.",
+            "nextSteps": "Suhbatgacha nima qilish mumkin?",
+            "telegramButton": "Telegram kanalimizga obuna bo'lish",
+            "telegramDesc": "Brending va marketing bo'yicha foydali materiallarni o'tkazib yubormang."
+        },
+        "trustBadge": "Ma'lumotlaringiz 100% himoyalangan va faqat Jon.Branding tomonidan ishlatiladi."
     },
     "home": {
         "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
