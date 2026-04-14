@@ -42,10 +42,14 @@ const ResultCard = ({ item, index }: { item: ResultItem, index: number }) => {
     return (
         <motion.div
             ref={cardRef}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ 
+                delay: index * 0.15, 
+                duration: 1.2, 
+                ease: [0.23, 1, 0.32, 1] 
+            }}
             onMouseMove={handleMouseMove}
             className={cn(
                 "group relative overflow-hidden rounded-[2.5rem] p-10 glass-card-premium transition-all duration-500 hover:border-primary/30",
