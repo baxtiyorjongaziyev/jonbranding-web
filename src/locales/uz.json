@@ -148,10 +148,10 @@
     "hero": {
         "title": "Kuchli brend bilan sotuvingizni **2-3 karra oshiring** \u2014 30 kun ichida",
         "description": "Raqobatchilar professional ko'rinadi, siz esa hali ham eski logotip bilan yurasizmi? Mijozlar sizni tanlashdan oldin raqobatchini tanlayapti \u2014 chunki ularning brendi <span class='font-bold text-foreground'>ishonch uyg\u2019otadi</span>.",
-        "cta": "Bepul Brend Audit Olish",
+        "cta": "Bepul Strategik Audit Olish",
         "ctaSecondary": "Natijalarimizni Ko\u02bcring",
         "buttonHint": "\u2713 Hech qanday majburiyat yo\u02bcq  \u00b7  \u2713 15 daqiqalik bepul tahlil  \u00b7  \u2713 Agar natija bo\u02bcmasa \u2014 pulingiz qaytariladi",
-        "urgencyBadge": "\u26a1 Bu oy faqat 3 ta bepul konsultatsiya qoldi \u2014 o\u02bcringizni band qiling",
+        "urgencyBadge": "\u26a1 Bu oy faqat 3 ta bepul strategik audit qoldi \u2014 o\u02bcringizni band qiling",
         "audienceTag": "\ud83c\udfaf Biznes egalariga murojaat",
         "guarantees": ["100% natija kafolati", "30 kun ichida tayyor", "150+ muvaffaqiyatli loyiha"],
         "stats": [
@@ -172,12 +172,14 @@
             {
                 "impact": "60%+",
                 "title": "Den Aroma",
-                "desc": "O'rtacha chekning oshishi"
+                "desc": "O'rtacha chekning oshishi. Eski 'oddiy' aydentikadan premium brendga o'tilgani hisobiga mijozlar qimmatroq to'lashga tayyor бўлишди.",
+                "label": "BRENDING"
             },
             {
                 "impact": "40%+",
                 "title": "Bexruz Market",
-                "desc": "Mijozlar oqimining ko'payishi"
+                "desc": "Mijozlar oqimining ko'payishi. Bozordagi tartibsizlikdan ajralib chiqganimiz hisobiga yangi auditoriya jalb qilindi.",
+                "label": "REBRENDING"
             }
         ],
         "stats": {
@@ -427,7 +429,7 @@
         "subtitle": "Agar quyidagi fikrlar sizni qiynasa, biz to'g'ri yechimmiz.",
         "problems": [
             {
-                "text": "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi."
+                "text": "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi, raqobatchilarim bozorning qaymog'ini yeyapti."
             },
             {
                 "text": "Brendim eskirgan, raqobatchilardan orqadaman."

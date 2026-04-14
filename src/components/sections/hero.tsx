@@ -177,6 +177,7 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                             height={600}
                             className="w-full h-auto object-cover"
                             priority={index === 0}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
                           />
                         </div>
                       </CarouselItem>

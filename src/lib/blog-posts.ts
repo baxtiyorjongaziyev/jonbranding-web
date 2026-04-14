@@ -1,10 +1,22 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { marked } from 'marked';
+import { Marked } from 'marked';
 import { type BlogPost } from '@/lib/types';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
+const safeMarked = new Marked({
+  async: true,
+});
+
+safeMarked.use({
+  renderer: {
+    // Drop any raw HTML embedded inside markdown to avoid stored XSS.
+    html() {
+      return '';
+    },
+  },
+});
 
 export function getSortedPostsData(lang: string = 'en'): Omit<BlogPost, 'content' | 'htmlContent'>[] {
   const langDirectory = path.join(postsDirectory, lang);
@@ -63,7 +75,7 @@ export async function getPostData(lang: string, slug: string): Promise<BlogPost 
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
   
-  const processedContent = await marked(matterResult.content);
+  const processedContent = await safeMarked.parse(matterResult.content);
 
   return {
     slug,
