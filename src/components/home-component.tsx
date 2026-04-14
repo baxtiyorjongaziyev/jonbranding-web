@@ -60,11 +60,15 @@ const PersonalOfferBlock = dynamic(() => import('@/components/sections/personal-
 });
 
 const fadeInVariant = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 40 },
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }
+    transition: { 
+      duration: 1.2, 
+      ease: [0.23, 1, 0.32, 1], // Premium cubic-bezier
+      staggerChildren: 0.15 
+    }
   }
 };
 
@@ -166,19 +170,19 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
             <main>
                 <Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
                 
-                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
                     <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
                 </motion.div>
 
-                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
                     <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />
                 </motion.div>
 
-                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
                     <WhyUs onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.whyUs} />
                 </motion.div>
 
-                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
                     <PickTwoSelector onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.pickTwoSelector} />
                 </motion.div>
 
