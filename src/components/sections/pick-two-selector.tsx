@@ -8,6 +8,16 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { cn } from '@/lib/utils';
 import { Lightbulb, CheckCircle, Gem, Rocket, Tags, type LucideIcon } from 'lucide-react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { motion } from 'framer-motion';
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] }
+  }
+};
 
 type OptionKey = 'cheap' | 'quality' | 'fast';
 
@@ -111,50 +121,60 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">{translations.subtitle}</p>
         </div>
 
-        <div className="mt-12 max-w-4xl mx-auto">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }}
+          className="mt-12 max-w-4xl mx-auto"
+        >
           <TooltipProvider>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {(Object.keys(optionDetails) as OptionKey[]).map(key => {
                 const isSelected = selected.includes(key);
                 const isDisabled = !isSelected && selected.length >= 2;
                 const Icon = optionDetails[key].icon;
-
+ 
                 const card = (
-                  <Card
-                    role="button"
-                    tabIndex={isDisabled ? -1 : 0}
-                    aria-pressed={isSelected}
-                    aria-label={`${optionDetails[key].label}${isDisabled ? ' (limit reached)' : ''}`}
-                    onKeyDown={(e) => {
-                      if (!isDisabled && (e.key === 'Enter' || e.key === ' ')) {
-                        e.preventDefault();
-                        handleSelect(key);
-                      }
-                    }}
-                    onClick={() => !isDisabled && handleSelect(key)}
-                    className={cn(
-                      "text-center p-8 rounded-2xl shadow-sm transition-all duration-300 relative cursor-pointer transform hover:-translate-y-1 outline-none focus:ring-2 focus:ring-primary/40",
-                      isSelected ? 'bg-primary text-primary-foreground ring-2 ring-primary/50 shadow-lg' : 'bg-secondary hover:shadow-md',
-                      isDisabled && 'opacity-50 cursor-not-allowed bg-gray-100 hover:translate-y-0 focus:ring-0'
-                    )}
-                  >
-                     {isSelected && (
-                        <div className="absolute top-4 right-4 bg-white/20 text-white rounded-full p-1" aria-hidden="true">
-                            <CheckCircle className="h-5 w-5" />
-                        </div>
-                    )}
-                    <CardContent className="p-0 flex flex-col items-center justify-center gap-4">
-                       <Icon className="w-12 h-12" aria-hidden="true" />
-                      <p className="text-2xl font-bold">{optionDetails[key].label}</p>
-                    </CardContent>
-                  </Card>
+                  <motion.div variants={itemVariants} className="h-full">
+                    <Card
+                      role="button"
+                      tabIndex={isDisabled ? -1 : 0}
+                      aria-pressed={isSelected}
+                      aria-label={`${optionDetails[key].label}${isDisabled ? ' (limit reached)' : ''}`}
+                      onKeyDown={(e) => {
+                        if (!isDisabled && (e.key === 'Enter' || e.key === ' ')) {
+                          e.preventDefault();
+                          handleSelect(key);
+                        }
+                      }}
+                      onClick={() => !isDisabled && handleSelect(key)}
+                      className={cn(
+                        "text-center p-8 rounded-2xl shadow-sm transition-all duration-300 relative cursor-pointer outline-none focus:ring-2 focus:ring-primary/40 h-full flex flex-col items-center justify-center",
+                        isSelected ? 'bg-primary text-primary-foreground ring-2 ring-primary/50 shadow-lg scale-105' : 'bg-secondary hover:shadow-md hover:-translate-y-1',
+                        isDisabled && 'opacity-50 cursor-not-allowed bg-gray-100 hover:translate-y-0 focus:ring-0'
+                      )}
+                    >
+                       {isSelected && (
+                          <div className="absolute top-4 right-4 bg-white/20 text-white rounded-full p-1" aria-hidden="true">
+                              <CheckCircle className="h-5 w-5" />
+                          </div>
+                      )}
+                      <CardContent className="p-0 flex flex-col items-center justify-center gap-4">
+                         <Icon className="w-12 h-12" aria-hidden="true" />
+                        <p className="text-2xl font-bold">{optionDetails[key].label}</p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 );
 
                 if (isDisabled) {
                   return (
                     <Tooltip key={key}>
                       <TooltipTrigger asChild>
-                        <div>{card}</div>
+                        <div className="h-full">{card}</div>
                       </TooltipTrigger>
                       <TooltipContent>
                         <p>{translations.tooltip}</p>
@@ -163,10 +183,11 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
                   );
                 }
 
-                return <div key={key}>{card}</div>;
+                return <div key={key} className="h-full">{card}</div>;
               })}
             </div>
           </TooltipProvider>
+        </motion.div>
 
           <Card className="mt-8 bg-sky-blue/30 border-primary/20 rounded-2xl p-6 shadow-sm">
             <div className="flex items-start gap-4">
