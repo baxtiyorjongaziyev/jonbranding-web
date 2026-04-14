@@ -40,6 +40,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip all internal paths (_next) and static files.
-    '/((?!api|_next/static|_next/image|assets|images|videos|logos|favicon.ico|sw.js|icon.svg|apple-icon.png|manifest.json).*)',
+    '/((?!api|admin|_next/static|_next/image|assets|images|videos|logos|favicon.ico|sw.js|icon.svg|apple-icon.png|manifest.json).*)',
   ],
 }

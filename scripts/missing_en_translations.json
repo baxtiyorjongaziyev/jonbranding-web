@@ -1,0 +1,266 @@
+{
+  "beforeAfter.ctaDesc": "Keling, uni yangi bosqichga olib chiqish rejasini tuzamiz.",
+  "beforeAfter.ctaTitle": "Brendingiz o'zgarishga tayyormi?",
+  "blog.subtitle": "Brending va marketing olamidagi yangiliklar.",
+  "blogPost.author": "Muallif",
+  "blogPost.ctaButton": "Bepul konsultatsiya",
+  "blogPost.ctaDesc": "Biznesingiz uchun professional yechim oling.",
+  "blogPost.ctaTitle": "Maqola yoqdimi?",
+  "brandStrategyPage.section2_p1": "Brend strategiyasi — bu brendingizning kim ekanligi, nima uchun mavjudligi va qanday gapirishi haqidagi aniq hujjat.",
+  "brandStrategyPage.section2_p2_bold": "Pozitsiyalash: ",
+  "brandStrategyPage.section2_p2_text": "Bozorda qayerda turasiz va nima uchun mijozlar sizni tanlashi kerak.",
+  "brandStrategyPage.section2_p3_bold": "Kommunikatsiya: ",
+  "brandStrategyPage.section2_p3_text": "Brendingiz ovozi, toni va xabarlarining yagona tizimi.",
+  "brandStrategyPage.section2_p4": "Natijada siz aniq yo'nalishga ega bo'lgan va har bir qarorni osongina qabul qiladigan brendga ega bo'lasiz.",
+  "brandStrategyPage.section2_title": "Brend strategiyasi nimalar qamradi?",
+  "brandbookPage.cta_button": "Brending tartibini yaratish",
+  "brandbookPage.cta_description": "Professional brendbuk — biznesingiz barqaror kelajagiga sarmoya. Keling, sizga ishonchli yordamchi bo'ladigan hujjatni yaratamiz.",
+  "brandbookPage.cta_title": "Brendingizni tartibga solishga tayyormisiz?",
+  "brandbookPage.metadata.description": "Brendbuk — bu brendingiz konstitutsiyasi. Biz brend yaxlitligini ta'minlaydigan kompleks brendbuklar yaratamiz, marketing xarajatlarini tejaymiz.",
+  "brandbookPage.metadata.keywords": "brandbook, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi",
+  "brandbookPage.metadata.title": "Brendbuk yaratish | Jon.Branding Agentligi",
+  "brandbookPage.process_steps": [
+    {
+      "title": "Brend Platformasi",
+      "description": "Missiya, qadriyatlar, brend xarakteri va maqsadli auditoriya."
+    },
+    {
+      "title": "Logotip va Aydentika",
+      "description": "Logotip, firma ranglari va shriftlardan foydalanish qoidalari."
+    },
+    {
+      "title": "Vizual Uslub",
+      "description": "Suratlar, illustratsiyalar va grafik elementlardan foydalanish qoidalari."
+    },
+    {
+      "title": "Amaliy Qo'llanilishi",
+      "description": "Real tashuvchilarda (vizitka, taqdimotlar, ijtimoiy tarmoqlar) uchun dizayn namunalari."
+    }
+  ],
+  "brandbookPage.process_subtitle": "Bizning brendbuklarimiz brendni samarali boshqarish uchun barcha bo'limlarni o'z ichiga oladi:",
+  "brandbookPage.process_title": "Brendbuk nimalarni o'z ichiga oladi?",
+  "brandbookPage.section1_p1": "Brendbuk — brendni boshqarish uchun asosiy vositadir. U vizual va g'oyaviy elementlardan foydalanish qoidalarini aniq belgilab beradi — logotipdan tortib muloqot ohangigacha.",
+  "brandbookPage.section1_p2": "Ushbu hujjat marketingdagi tartibsizlikdan qochishga, vaqtni va pulni dizaynerlar va marketologlar bilan ishlashda tejashga yordam beradi.",
+  "brandbookPage.section1_title": "Nega har bir biznesga brendbuk kerak?",
+  "brandbookPage.subtitle": "Brendbuk shunchaki logotiplar to'plami emas, bu brendingiz izchilligini ta'minlaydigan konstitutsiyadir.",
+  "brandbookPage.title": "Brendbuk ishlab chiqish",
+  "brandbookPage.values": [
+    {
+      "title": "Izchillik va Tanilish",
+      "description": "Brendingiz barcha platformalarda — vizitkadan tortib veb-saytgacha bir xil va professional ko'rinishini ta'minlaydi."
+    },
+    {
+      "title": "Resurslarni Tejash",
+      "description": "Har bir yangi xodimga yoki dizaynerga qoidalarni qayta tushuntirishga hojat qolmaydi, ish jarayoni tezlashadi."
+    },
+    {
+      "title": "Brend Himoyasi",
+      "description": "Aydentikani noto'g'ri foydalanishdan himoya qiladi, brendingiz qiymatini saqlab qoladi."
+    }
+  ],
+  "brandbookPage.values_title": "Brendbuk quyidagi muammolarni hal qiladi:",
+  "contactModal.backButton": "Orqaga",
+  "contactModal.budget": "Taxminiy byudjet?",
+  "contactModal.budgetOptions": [
+    "Hozircha byudjet yo'q",
+    "500$ gacha",
+    "500$ - 1,500$",
+    "1,500$ - 3,000$",
+    "3,000$ dan yuqori"
+  ],
+  "contactModal.companyName": "Kompaniya yoki loyiha nomi",
+  "contactModal.companyNamePlaceholder": "Jon.Branding",
+  "contactModal.errorToast.description": "So'rov yuborishda xato yuz berdi. Qayta urinib ko'ring.",
+  "contactModal.errorToast.title": "Xatolik!",
+  "contactModal.formErrors.budget": "Taxminiy byudjetni tanlang.",
+  "contactModal.formErrors.fullName": "Ismingizni to'liq kiriting.",
+  "contactModal.formErrors.goal": "Maqsadingizni tanlang.",
+  "contactModal.formErrors.location": "Joylashuvingizni tanlang.",
+  "contactModal.formErrors.meetingPlace": "Uchrashuv joyini tanlashingiz kerak.",
+  "contactModal.formErrors.phone": "To'g'ri telefon raqamini kiriting.",
+  "contactModal.formErrors.privacyPolicy": "Siyosatni qabul qilishingiz kerak.",
+  "contactModal.fullNamePlaceholder": "Murad Nazarov",
+  "contactModal.goal": "Maqsadingiz nima?",
+  "contactModal.goalOptions": [
+    {
+      "value": "exploring",
+      "label": "Brending nimaligini bilmayman, lekin kerak deb o'ylayman."
+    },
+    {
+      "value": "has_problem",
+      "label": "Brendim bor, lekin u samarasiz, tahlil kerak."
+    },
+    {
+      "value": "ready_to_start",
+      "label": "Brending kuchini tushunaman va aniq maqsadim bor."
+    }
+  ],
+  "contactModal.leadMagnetToast.description": "So'rovingiz qabul qilindi! Dastlab sizni bepul materiallarimizga yo'naltiramiz.",
+  "contactModal.leadMagnetToast.title": "Maxsus resurslar!",
+  "contactModal.location": "Joylashuvingiz",
+  "contactModal.locationOptions": [
+    "Toshkent",
+    "Farg'ona",
+    "Boshqa"
+  ],
+  "contactModal.locationPlaceholder": "Viloyatni tanlang",
+  "contactModal.meetingPlace": "Qayerda uchrashamiz?",
+  "contactModal.meetingPlaceOptions": [
+    {
+      "value": "our_office",
+      "label": "Bizning ofisda",
+      "description": "Loyihaga sho'ng'ish"
+    },
+    {
+      "value": "neutral",
+      "label": "Neytral hududda",
+      "description": "Erkin suhbat"
+    },
+    {
+      "value": "client_office",
+      "label": "Sizning ofisda",
+      "description": "Biznes bilan tanishish"
+    }
+  ],
+  "contactModal.nextButton": "Keyingisi",
+  "contactModal.onlineMeetingAlert": "Tushunarli. Biz siz bilan qulay vaqtni kelishib, onlayn uchrashuv o'tkazamiz.",
+  "contactModal.phonePlaceholder": "+998 90 123 45 67",
+  "contactModal.privacyPolicyText": "Maxfiylik siyosati shartlarini qabul qilaman va shaxsiy ma'lumotlarimga ishlov berilishiga roziman.",
+  "contactModal.stepTitles.budget": "Byudjet",
+  "contactModal.stepTitles.contact": "Aloqa ma'lumotlari",
+  "contactModal.stepTitles.meeting": "Uchrashuv",
+  "contactModal.stepTitles.project": "Loyiha haqida",
+  "contactModal.telegram": "Telegram foydalanuvchi nomi (ixtiyoriy)",
+  "contactModal.telegramPlaceholder": "@username",
+  "contactModal.website": "Veb-sayt yoki ijtimoiy tarmoq (ixtiyoriy)",
+  "contactModal.websitePlaceholder": "https://t.me/jonbranding",
+  "corporateStylePage.section2_p1": "Bu nafaqat go'zallik, balki samaradorlik, ma'no va nazorat haqida. Brendning ko'p qirrali bo'lishi va shu bilan birga vizual qiyofasini rivojlantirishda izchil bo'lishi uchun grafik elementlar to'plamini yaratish kerak.",
+  "corporateStylePage.section2_p2": "Bunday to'plam biznesning vazifalari va imkoniyatlariga qarab har doim alohida tanlanadi. Minimal to'plam logotip, ranglar, shriftlar, fotosuratlar uslubi, reklama tashuvchilarining uslubi va yaxlit tasvirni shakllantiruvchi boshqa elementlarni o'z ichiga oladi.",
+  "corporateStylePage.section2_p3": "Vizual uslub aniq va izchil qurilganda, u brend qiyofasini va uning muloqotini boshqarishning kuchli vositasiga aylanadi. Agar uning barcha elementlari muvofiqlashtirilgan bo'lsa, brend professional, ishonchli va taniqli sifatida qabul qilinadi.",
+  "corporateStylePage.section2_title": "Firma uslubi — bu tizim",
+  "faq.ctaDesc": "Savollaringizga javob oldingizmi? Keling, loyihangizni muhokama qilamiz va brendingizni yangi bosqichga olib chiqamiz.",
+  "faq.ctaTitle": "Shubhalarga o'rin yo'q!",
+  "home.cta1_button": "Mening biznesim uchun ham",
+  "home.cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing. Biznesingiz uchun ideal yechimni topishga yordam beramiz.",
+  "home.cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
+  "leadMagnet.checklistContent.items": [
+    {
+      "title": "1. Strategiyasiz ishlash",
+      "description": "Eng katta xato — rejasiz dizaynni boshlash. Mijozingiz kim? Raqobatchilardan nimangiz bilan ajralib turasiz? Asosiy xabaringiz nima? Ushbu savollarga javob bermaydigan logotip yoki sayt — shunchaki chiroyli rasm xolos.",
+      "solution": "Yechim: 'Biz kimmiz?', 'Kim uchunmiz?' va 'Nima uchun tanlashlari kerak?' savollariga javob toping. Bu brendingiz uchun mustahkam poydevor yaratadi."
+    },
+    {
+      "title": "2. Hamma uchun yoqishga urinish",
+      "description": "Hamma uchun bo'lishga harakat qilgan brend, oxir-oqibat hech kim uchun bo'lmay qoladi. Jamiyatning barcha qatlami uchun ideal bo'lishga urinish brendni kuchsiz va tushunarsiz qiladi.",
+      "solution": "Yechim: Maqsadli auditoriyangizni aniq belgilang. 'Ideal mijoz' portretini yarating va barcha harakatlaringizni aynan o'sha toifaga qarating."
+    },
+    {
+      "title": "3. Raqobatchilardan nusxa olish",
+      "description": "Raqobatchilarni kuzatish muhim, lekin ulardan nusxa olish — mag'lubiyat yo'li. Agar dizayningiz boshqa mashhur brendga o'xshab qolsa, sizni har doim 'arzon muqobil' sifatida qabul qilishadi.",
+      "solution": "Yechim: O'z yo'lingizni va noyobligingizni topish uchun raqobatni o'rganing. Boshqacha bo'lishdan qo'rqmang."
+    },
+    {
+      "title": "4. Izchillikning yo'qligi (Inconsistency)",
+      "description": "Logotip saytda bir xil, Instagram'da boshqacha, qadoqda esa butunlay boshqa uslubda bo'lishi xaridorda shubha uyg'otadi va brendning tanilish darajasini pasaytiradi.",
+      "solution": "Yechim: Logotip, ranglar va shriftlardan foydalanish qoidalari yozilgan 'brendbuk' yarating va unga hamma joyda amal qiling."
+    },
+    {
+      "title": "5. Haddan tashqari murakkab logotip",
+      "description": "Ko'p mayda detallar, gradkiyentlar va uzun matnli logotiplarni eslab qolish qiyin. Ular kichik o'lchamlarda (sayt belgisi yoki ijtimoiy tarmoq avatari) juda yomon ko'rinadi.",
+      "solution": "Yechim: Soddalik va minimalizmga intiling. Eng yaxshi logotip — xotirada oson tiklanadigan logotipdir."
+    },
+    {
+      "title": "6. Talaffuzga qiyin yoki esda qolmaydigan nom",
+      "description": "Agar mijozlaringiz brendingiz nomini ayta olmasa yoki to'g'ri yoza olmasa, ular sizni topa olmaydi va boshqalarga tavsiya qila olmaydi.",
+      "solution": "Yechim: Soddacha, jarangdor va yuridik jihatdan toza (patentlanmagan) nom tanlang."
+    },
+    {
+      "title": "7. Brendingni bir marta qilinadigan ish deb o'ylash",
+      "description": "Bozor, mijoz talablari va texnologiya doim o'zgaradi. Zamonga moslashmagan brend juda tez eskiradi.",
+      "solution": "Yechim: Vaqti-vaqti bilan 'brend audit' o'tkazing. Zarur bo'lsa, dizayningizni yangilashdan (rebrending) qo'rqmang. Bu o'sish belgisidir."
+    }
+  ],
+  "leadMagnet.checklistContent.progress_text": "Bajarildi: {checkedCount} / {total}",
+  "leadMagnet.checklistContent.result.bad.description": "Brendingizda bir nechta jiddiy zaifliklar bor. Bu o'sish uchun katta imkoniyat! Biz bu kamchiliklarni kuchli jihatlarga aylantirish qandayligini bilamiz.",
+  "leadMagnet.checklistContent.result.bad.title": "Tezkor yordam zarur!",
+  "leadMagnet.checklistContent.result.good.description": "Asos yaxshi, lekin uni yanada kuchaytirish mumkin. Mukammallikka intilishda davom eting.",
+  "leadMagnet.checklistContent.result.good.title": "To'g'ri yo'ldasiz!",
+  "leadMagnet.checklistContent.result.perfect.description": "Brendingiz poydevori mustahkam. Endi uni amalda qanday ishlatish va rivojlantirish haqida o'ylash kerak.",
+  "leadMagnet.checklistContent.result.perfect.title": "A'lo natija!",
+  "mobileCtaBar.final_price": "Yakuniy narx",
+  "pickTwoSelector.tooltip": "Avval bittasini bekor qiling",
+  "popularPackages.features": [
+    "Ideal brend nomi (6 tilda tekshirilgan)",
+    "Professional logotip (5 ta konsepsiya)",
+    "To'liq firma uslubi (ranglar, shriftlar)",
+    "15+ real maketda namoyish",
+    "Patent auditi va konsultatsiyasi",
+    "10 ta brendlangan stiker"
+  ],
+  "popularPackages.packageDiscount": "(-20% chegirma!)",
+  "popularPackages.packageSubtitle": "Kuchli brendni boshlash uchun ideal kombinatsiya.",
+  "popularPackages.separate": "Alohida",
+  "popularPackages.upfrontDiscount": "100% to'lovda (-28% jami!)",
+  "process.ctaDesc": "G'oyalaringizni hayotga tatbiq etishni boshlaymiz.",
+  "process.ctaTitle": "Loyihani muhokama qilishga tayyormisiz?",
+  "quiz.nextButton": "Keyingisi",
+  "quiz.questionLabel": "Savol {step} / {total}",
+  "results.items": [
+    {
+      "title": "Den Aroma",
+      "impact": "+60%",
+      "desc": "O'rtacha chekning oshishi",
+      "label": "Savdo o'sishi"
+    },
+    {
+      "title": "Bexruz Market",
+      "impact": "+40%",
+      "desc": "Mijozlar oqimining ko'payishi",
+      "label": "Tashriflar"
+    },
+    {
+      "title": "Zamin Qurilish",
+      "impact": "3 barobar",
+      "desc": "Brend tanilish darajasi oshdi",
+      "label": "Obro'"
+    }
+  ],
+  "results.subtitle": "Biz nafaqat chiroyli dizayn, balki biznesingiz rivojiga hissa qo'shadigan strategik yechimlar yaratamiz.",
+  "results.title": "Mijozlarimizning natijalari",
+  "servicesPage.comparison.ctaDesc": "Sifatli brending uchun ortiqcha to'lov qilish shart emas. Biznesingiz uchun to'g'ri qaror qabul qiling va biz bilan bog'laning.",
+  "servicesPage.comparison.ctaTitle": "Siz farqni ko'rdingiz. Endi tanlash vaqti keldi!",
+  "servicesPage.comparison.whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda taqdim etishdir. Sifat va strategiya bo'yicha bizning darajamizga mos kelmaydigan agentliklar bilan solishtirish mijoz uchun ham, biz uchun ham noto'g'ri bo'lar edi.",
+  "servicesPage.comparison.whyPremiumTitle": "Nega faqat premium agentliklar bilan?",
+  "servicesPage.packageBuilder.base_price_label": "Boshlang'ich narx",
+  "servicesPage.packageBuilder.categories.more_services": "Qo'shimcha xizmatlar va shartlar",
+  "servicesPage.packageBuilder.empty_package_desc": "Xizmatlar tanlanmagan. Iltimos, mos xizmatlarni tanlang.",
+  "servicesPage.packageBuilder.promo_code_invalid": "Noto'g'ri promokod",
+  "servicesPage.packageBuilder.promo_code_placeholder": "KODNI KIRITING",
+  "servicesPage.packageBuilder.recommended": "Tavsiya etiladi",
+  "servicesPage.packageBuilder.your_package_desc": "Quyidan kerakli xizmatlarni tanlang.",
+  "sitemapPage.links.brand_strategy": "Brend strategiyasi",
+  "sitemapPage.links.brandbook": "Brendbuk",
+  "sitemapPage.links.corporate_style": "Firma uslubi",
+  "sitemapPage.links.faq": "Savol-javoblar",
+  "sitemapPage.links.home": "Bosh sahifa",
+  "sitemapPage.links.logo_design": "Logotip dizayni",
+  "sitemapPage.links.marketplace_cover": "Sotuvchi kartochka dizayni",
+  "sitemapPage.links.naming": "Neyming",
+  "sitemapPage.links.packaging_design": "Qadoq dizayni",
+  "sitemapPage.links.patent_calculator": "Patent kalkulyatori",
+  "sitemapPage.links.portfolio": "Portfolio",
+  "sitemapPage.links.process": "Ish jarayoni",
+  "sitemapPage.links.quiz": "Brending testi",
+  "sitemapPage.links.services_prices": "Barcha xizmatlar va narxlar",
+  "sitemapPage.subtitle": "Kerakli ma'lumotni tezda topishingiz uchun saytimizning barcha sahifalari haqida umumiy ma'lumot.",
+  "sitemapPage.title": "Sayt xaritasi",
+  "stats.projects": "Muvaffaqiyatli loyihalar",
+  "stats.recommend": "Tavsiya qilishadi",
+  "targetAudience.solutionSubtitle": "To'g'ri brend-strategiya ushbu muammolarni bartaraf etadi va biznesingizni barqaror o'sish yo'liga olib chiqadi.",
+  "testimonials.textReviewsSubtitle": "Boshqa hurmatli mijozlarimizdan",
+  "testimonials.textReviewsTitle": "Matnli sharhlar",
+  "urgencyBlock.line1": "Ertaga raqobatchingiz professional brend bilan chiqdi. Logotipi ajoyib, qadog'i darhol ko'zga tashlanadi.",
+  "urgencyBlock.line2": "Mijozlar sizdan emas, UNDAN sotib olishadi.",
+  "whyUs.ctaDesc": "Keling, brendingizni bepul tahlil qilib, uning kuchli va zaif tomonlarini aniqlaymiz. Bu majburiyat yuklamaydi.",
+  "whyUs.ctaTitle": "Yondashuvimiz yoqdimi?"
+}
