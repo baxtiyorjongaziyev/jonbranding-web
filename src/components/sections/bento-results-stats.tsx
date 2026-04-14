@@ -16,20 +16,25 @@ const CountUp = ({ value, className }: { value: string, className?: string }) =>
   const suffix = value.replace(/[0-9]/g, '');
 
   useEffect(() => {
-    let start = 0;
-    const duration = 1000;
-    const increment = target / (duration / 16);
-    
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= target) {
-        setDisplayValue(target);
-        clearInterval(timer);
-      } else {
-        setDisplayValue(Math.floor(start));
+    let startTimestamp: number | null = null;
+    const duration = 1200;
+    let animationFrameId: number;
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      
+      // Power3 out easing for smoother finish
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.floor(easeProgress * target));
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(step);
       }
-    }, 16);
-    return () => clearInterval(timer);
+    };
+
+    animationFrameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animationFrameId);
   }, [target]);
 
   return (
@@ -61,8 +66,8 @@ const BentoCard = ({
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), { stiffness: 400, damping: 30 });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 400, damping: 30 });
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), { stiffness: 200, damping: 20 });
 
   function onMouseMove(event: React.MouseEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -102,13 +107,12 @@ const BentoCard = ({
         visible: { opacity: 1, y: 0 }
       }}
       animate={{ 
-        flex: isFocused ? 2 : 1,
-        scale: isFocused ? 1.02 : 1,
-        z: isFocused ? 20 : 0
+        scale: isFocused ? 1.01 : 1,
+        z: isFocused ? 10 : 0
       }}
       className={cn(
-        "group relative overflow-hidden rounded-[2.5rem] p-6 md:p-12 glass-card-premium h-full flex flex-col justify-between cursor-pointer",
-        isFocused ? "shadow-2xl ring-1 ring-white/20" : "opacity-80 grayscale-[0.2]",
+        "group relative overflow-hidden rounded-[2.5rem] p-6 md:p-12 glass-card-premium h-full flex flex-col justify-between cursor-pointer transform-gpu transition-shadow duration-500",
+        isFocused ? "shadow-2xl ring-1 ring-white/10" : "opacity-80 grayscale-[0.1]",
         className
       )}
     >
@@ -126,7 +130,7 @@ const BentoCard = ({
         <motion.span 
           layout
           className={cn(
-            "px-4 py-1.5 rounded-full text-[10px] font-black tracking-[0.2em] text-white border border-white/10 backdrop-blur-xl uppercase",
+            "px-4 py-1.5 rounded-full text-[10px] font-black tracking-[0.2em] text-white border border-white/10 backdrop-blur-lg uppercase",
             badgeColor === "primary" ? "bg-primary/20" : "bg-accent/20"
           )}
         >
@@ -287,10 +291,10 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
         </motion.div>
       </div>
 
-      {/* Ambient background decoration - Subtler for small screens */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
-        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary blur-[100px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[10%] right-[5%] w-64 h-64 bg-accent blur-[100px] rounded-full animate-pulse" />
+      {/* Ambient background decoration - Optimized for performance */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10 md:opacity-20 z-0">
+        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary blur-[120px] rounded-full animate-pulse will-change-transform" />
+        <div className="absolute bottom-[10%] right-[5%] w-64 h-64 bg-accent blur-[120px] rounded-full animate-pulse will-change-transform" />
       </div>
     </section>
   );

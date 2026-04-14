@@ -159,7 +159,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
     <>
       {/* Floating Button */}
       <div className={cn(
-        "fixed bottom-6 right-6 z-50 transition-all duration-500",
+        "fixed bottom-24 right-6 z-50 transition-all duration-500 md:bottom-6",
         isOpen ? "scale-0 opacity-0 pointer-events-none" : "scale-100 opacity-100"
       )}>
         <button
@@ -177,7 +177,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
-            className="fixed bottom-6 right-6 z-[60] w-[calc(100%-3rem)] sm:w-[400px] h-[600px] max-h-[80vh]"
+            className="fixed bottom-24 right-6 z-[60] w-[calc(100%-3rem)] sm:bottom-6 sm:w-[400px] h-[600px] max-h-[80vh]"
           >
             <Card className="h-full flex flex-col shadow-2xl rounded-3xl overflow-hidden border-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl ring-1 ring-black/5 dark:ring-white/5">
               <CardHeader className="p-4 border-b flex flex-row items-center justify-between bg-blue-600 text-white">

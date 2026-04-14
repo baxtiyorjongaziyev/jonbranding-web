@@ -189,6 +189,10 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <BentoResultsStats dictionary={dictionary} />
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                    <LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} />
+                </motion.div>
+
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
                     <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
                 </motion.div>
 
@@ -222,7 +226,6 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
 
                         <Founder lang={lang} dictionary={dictionary.founder} />
                         <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />
-                        <LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} />
                         <Faq lang={lang} dictionary={dictionary.faq} />
                     </>
                 ) : (
