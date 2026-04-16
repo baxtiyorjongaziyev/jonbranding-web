@@ -84,6 +84,61 @@ async function sendToN8n(data: any) {
     }
 }
 
+async function sendToAmoCRM(data: any) {
+    const oishaUrl = process.env.NEXT_PUBLIC_OISHA_API_URL || 'http://localhost:8080';
+    const oishaSecret = process.env.OISHA_SECRET_KEY;
+    
+    if (!oishaSecret) {
+        console.error('AmoCRM integration skipped: OISHA_SECRET_KEY missing');
+        return;
+    }
+
+    const { 
+        fullName, phone, telegram, 
+        role, revenue, ambition, pain, budget, 
+        source, lang, packageSummary, totalPrice 
+    } = data;
+
+    const note = `
+🎯 Strategic Session Form Result:
+
+👤 MIJOZ:
+- Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Noma\'lum'}
+
+🏢 BIZNES SNAPSHOT:
+- Rol: ${role || 'Kiritilmagan'}
+- Oborot: ${revenue || 'Kiritilmagan'}
+- Maqsad: ${ambition || 'Kiritilmagan'}
+- To'siq: ${pain || 'Kiritilmagan'}
+
+💸 INVESTITSIYA:
+- Byudjet: ${budget || 'Kiritilmagan'}
+
+${packageSummary ? `--- \n📦 Paket: ${packageSummary} \n💰 Narx: ${totalPrice?.toLocaleString('fr-FR')} so'm` : ''}
+
+🌍 Til: ${lang?.toUpperCase() || 'UZ'}
+🚀 Manba: ${source || 'website'}
+    `.trim();
+
+    try {
+        const response = await fetch(`${oishaUrl}/api/leads`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: fullName,
+                phone: phone,
+                note: note,
+                secret_key: oishaSecret
+            }),
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Failed to sync with AmoCRM');
+        console.log('✅ Lead synced to AmoCRM:', result.lead_id);
+    } catch (e) {
+        console.error('❌ AmoCRM sync error:', e);
+    }
+}
+
 export async function POST(request: Request) {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -166,6 +221,7 @@ ${packageSummary ? `--- \n📦 Paket: ${packageSummary} \n💰 Narx: ${totalPric
         sendMetaConversionEvent(body).catch(() => {});
         sendGAConversionEvent(body).catch(() => {});
         sendToN8n(body).catch(() => {});
+        sendToAmoCRM(body).catch(() => {});
 
         return NextResponse.json({ ok: true });
 

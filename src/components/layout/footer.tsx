@@ -155,7 +155,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
             <div className="space-y-3">
               <Link 
-                href={getLocalizedPath('/portfolio')}
+                href={getLocalizedPath('/#portfolio')}
                 className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
                 {dictionary.explore_work}

@@ -77,7 +77,7 @@ const generateJsonLd = (post: BlogPost) => {
       name: 'Jon.Branding',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://img2.teletype.in/files/92/3c/923cd394-a437-47e1-86a1-51e1a2a3eb38.png',
+        url: 'https://cdn.sanity.io/images/h6ymmj0v/production/72162c1dda9eef2ea1d02ef7c5e14bc45659eafe-741x174.png',
       },
     },
   };

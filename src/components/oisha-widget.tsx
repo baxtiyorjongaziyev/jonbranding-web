@@ -90,6 +90,12 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
     }
   }, [messages, isLoading]);
 
+  useEffect(() => {
+    const handleToggle = () => setIsOpen(prev => !prev);
+    window.addEventListener('toggleOisha', handleToggle);
+    return () => window.removeEventListener('toggleOisha', handleToggle);
+  }, []);
+
   const fetchHistory = async (uid: string) => {
     try {
       const res = await fetch(`${OISHA_API_URL}/api/chat/history/${uid}?secret_key=${OISHA_SECRET}`);
@@ -159,7 +165,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
     <>
       {/* Floating Button */}
       <div className={cn(
-        "fixed bottom-24 right-6 z-50 transition-all duration-500 md:bottom-6",
+        "fixed bottom-24 right-6 z-50 transition-all duration-500 md:bottom-6 hidden md:block",
         isOpen ? "scale-0 opacity-0 pointer-events-none" : "scale-100 opacity-100"
       )}>
         <button

@@ -21,6 +21,33 @@ interface BeforeAfterProps {
   dictionary: any;
 }
 
+const DEFAULT_COMPARISONS: SanityComparison[] = [
+  {
+    brand: "Den Aroma",
+    oldImg: "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=800&auto=format&fit=crop", // Generic perfume
+    newImg: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=800&auto=format&fit=crop", // Premium boutique
+    oldHint: "Oddiy ko'rinish",
+    newHint: "Premium butik",
+    order: 1
+  },
+  {
+    brand: "Food Logistics",
+    oldImg: "https://images.unsplash.com/photo-1586528116311-ad86d7c7ce80?q=80&w=800&auto=format&fit=crop", // Generic warehouse
+    newImg: "https://images.unsplash.com/photo-1519055214515-ecba3542247b?q=80&w=800&auto=format&fit=crop", // High-tech logistics
+    oldHint: "Eski logistika",
+    newHint: "Zamonaviy ECO-tizim",
+    order: 2
+  },
+  {
+    brand: "Fashion House",
+    oldImg: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop", // Generic shop
+    newImg: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e12?q=80&w=800&auto=format&fit=crop", // Visual identity
+    oldHint: "Tizimsiz brend",
+    newHint: "Yaxlit vizual uslub",
+    order: 3
+  }
+];
+
 const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary }) => {
   const [items, setItems] = useState<SanityComparison[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +58,9 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
       try {
         const query = `*[_type == "comparison"] | order(order asc)`;
         const data = await client.fetch(query);
-        setItems(data);
+        if (data && data.length > 0) {
+          setItems(data);
+        }
       } catch (error) {
         console.error('Error fetching Sanity comparisons:', error);
       } finally {
@@ -40,6 +69,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
     };
     fetchComparisons();
   }, []);
+
+  const displayItems = items.length > 0 ? items : (loading ? [] : DEFAULT_COMPARISONS);
 
   if (!translations) return null;
   
@@ -59,36 +90,36 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {loading ? (
-            // Skeleton loader or empty state
             Array(3).fill(0).map((_, i) => (
               <div key={i} className="h-[400px] rounded-[2.5rem] bg-secondary/20 animate-pulse" />
             ))
-          ) : items.length > 0 ? (
-            items.map((item, index) => (
-              <div 
-                key={index} 
-                className="liquid-glass liquid-glass-hover rounded-[2.5rem] overflow-hidden"
-              >
-                <ImageComparisonSlider 
-                  beforeImage={{
-                    src: urlFor(item.oldImg).url(), 
-                    alt: `${item.brand} old`, 
-                    'data-ai-hint': item.oldHint
-                  }}
-                  afterImage={{
-                    src: urlFor(item.newImg).url(), 
-                    alt: `${item.brand} new`, 
-                    'data-ai-hint': item.newHint
-                  }}
-                  lang={lang}
-                />
-              </div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-20 bg-secondary/10 rounded-[2.5rem] border-2 border-dashed border-muted">
-              <p className="text-muted-foreground">Hozircha loyihalar yuklanmagan. Sanity Studio orqali loyiha qo'shing.</p>
-            </div>
-          )}
+          ) : displayItems.length > 0 ? (
+            displayItems.map((item, index) => {
+              const beforeSrc = typeof item.oldImg === 'string' ? item.oldImg : urlFor(item.oldImg).url();
+              const afterSrc = typeof item.newImg === 'string' ? item.newImg : urlFor(item.newImg).url();
+              
+              return (
+                <div 
+                  key={index} 
+                  className="liquid-glass liquid-glass-hover rounded-[2.5rem] overflow-hidden"
+                >
+                  <ImageComparisonSlider 
+                    beforeImage={{
+                      src: beforeSrc, 
+                      alt: `${item.brand} old`, 
+                      'data-ai-hint': item.oldHint
+                    }}
+                    afterImage={{
+                      src: afterSrc, 
+                      alt: `${item.brand} new`, 
+                      'data-ai-hint': item.newHint
+                    }}
+                    lang={lang}
+                  />
+                </div>
+              );
+            })
+          ) : null}
         </div>
       </div>
     </section>
