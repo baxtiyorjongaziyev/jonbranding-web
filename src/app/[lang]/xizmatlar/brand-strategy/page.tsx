@@ -78,7 +78,7 @@ const BrandStrategyPage: FC = () => {
                         <Card className="shadow-xl rounded-2xl">
                             <CardContent className="p-0">
                             <Image 
-                                src="https://img2.teletype.in/files/d3/40/d3406311-28bc-4c55-bf19-19aa3f17e306.png"
+                                src="https://cdn.sanity.io/images/h6ymmj0v/production/81bfd0ca7c7a238fdb51a71a478360420463415d-1024x1024.png"
                                 alt="Business growth strategy chart"
                                 width={800}
                                 height={600}
@@ -105,7 +105,7 @@ const BrandStrategyPage: FC = () => {
                     <div>
                         <Card className="shadow-xl rounded-2xl overflow-hidden">
                            <Image 
-                                src="https://img4.teletype.in/files/bd/d7/bdd7f837-5be9-47eb-9a9e-43dafefe5a17.png"
+                                src="https://cdn.sanity.io/images/h6ymmj0v/production/bd7684a1d7c4b2a28d65ca19812e38295e0097ed-1024x1024.png"
                                 alt="Startup team brainstorming brand strategy"
                                 width={800}
                                 height={600}

@@ -3,6 +3,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const VideoSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -57,12 +58,20 @@ const VideoSection = () => {
           {/* Main video */}
           <div className="relative w-full h-full z-10">
              <div className="absolute inset-0 w-full h-full">
+               {/* Fallback Poster Image */}
+               <Image
+                 src="/showreel_fallback_poster_1776265352809.png"
+                 alt="Jon.Branding Showreel Fallback"
+                 fill
+                 className="object-cover transition-opacity duration-1000"
+                 style={{ zIndex: -1 }}
+               />
               {videoUrl && (
                 <iframe
                   src={videoUrl}
                   frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture"
-                  className="w-full h-full"
+                  className="w-full h-full relative z-10"
                   title="Jon.Branding Showreel"
                   allowFullScreen
                 ></iframe>

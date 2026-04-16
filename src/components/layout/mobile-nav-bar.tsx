@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, MessageSquare, Send } from 'lucide-react';
+import { Phone, MessageSquare, Send, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -22,7 +22,8 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   const labels = {
     call: dictionary?.call || (lang === 'ru' ? 'Звонок' : lang === 'en' ? 'Call' : lang === 'zh' ? '拨打' : 'Qo\'ng\'iroq'),
     telegram: dictionary?.telegram || 'Telegram',
-    consultation: dictionary?.consultation || (lang === 'ru' ? 'Консультация' : lang === 'en' ? 'Consultation' : lang === 'zh' ? '咨询' : 'Konsultatsiya')
+    consultation: dictionary?.consultation || (lang === 'ru' ? 'Консультация' : lang === 'en' ? 'Consultation' : lang === 'zh' ? '咨询' : 'Konsultatsiya'),
+    ai: lang === 'ru' ? 'ИИ Помощник' : lang === 'en' ? 'AI Assistant' : lang === 'zh' ? 'AI助手' : 'AI Yordamchi'
   };
 
   useEffect(() => {
@@ -41,6 +42,11 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
 
   const handleOpenConsultation = () => {
     const event = new CustomEvent('openContactModal');
+    window.dispatchEvent(event);
+  };
+
+  const handleToggleOisha = () => {
+    const event = new CustomEvent('toggleOisha');
     window.dispatchEvent(event);
   };
 
@@ -75,6 +81,15 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
               <Send className="w-5 h-5" />
               <span className="text-[10px] mt-1 font-medium">{labels.telegram}</span>
             </a>
+
+            {/* AI Assistant Action */}
+            <button 
+              onClick={handleToggleOisha}
+              className="flex-1 flex flex-col items-center justify-center py-2 text-foreground/70 hover:text-blue-600 transition-colors active:scale-95 duration-200"
+            >
+              <Sparkles className="w-5 h-5 text-blue-500" />
+              <span className="text-[10px] mt-1 font-medium">{labels.ai}</span>
+            </button>
 
             {/* Primary Consultation Button */}
             <button 
