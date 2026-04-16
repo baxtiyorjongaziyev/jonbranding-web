@@ -85,11 +85,11 @@ async function sendToN8n(data: any) {
 }
 
 async function sendToAmoCRM(data: any) {
-    const oishaUrl = process.env.NEXT_PUBLIC_OISHA_API_URL || 'http://localhost:8080';
-    const oishaSecret = process.env.OISHA_SECRET_KEY;
+    const domain = process.env.AMOCRM_DOMAIN;
+    const accessToken = process.env.AMOCRM_ACCESS_TOKEN;
     
-    if (!oishaSecret) {
-        console.error('AmoCRM integration skipped: OISHA_SECRET_KEY missing');
+    if (!domain || !accessToken) {
+        console.error('AmoCRM integration skipped: AMOCRM_DOMAIN or AMOCRM_ACCESS_TOKEN missing');
         return;
     }
 
@@ -103,6 +103,7 @@ async function sendToAmoCRM(data: any) {
 🎯 Strategic Session Form Result:
 
 👤 MIJOZ:
+- Telefon: ${phone || 'Noma\'lum'}
 - Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Noma\'lum'}
 
 🏢 BIZNES SNAPSHOT:
@@ -121,19 +122,55 @@ ${packageSummary ? `--- \n📦 Paket: ${packageSummary} \n💰 Narx: ${totalPric
     `.trim();
 
     try {
-        const response = await fetch(`${oishaUrl}/api/leads`, {
+        // Step 1: Create Lead + Contact using /leads/complex
+        const createResponse = await fetch(`https://${domain}.amocrm.ru/api/v4/leads/complex`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: fullName,
-                phone: phone,
-                note: note,
-                secret_key: oishaSecret
-            }),
+            headers: { 
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify([
+                {
+                    name: `Yangi So'rov: ${fullName} (${source || 'website'})`,
+                    price: totalPrice || 0,
+                    _embedded: {
+                        contacts: [
+                            {
+                                first_name: fullName
+                            }
+                        ]
+                    }
+                }
+            ]),
         });
-        const result = await response.json();
-        if (!response.ok) throw new Error(result.error || 'Failed to sync with AmoCRM');
-        console.log('✅ Lead synced to AmoCRM:', result.lead_id);
+
+        const createResult = await createResponse.json();
+        
+        if (!createResponse.ok) {
+             throw new Error(JSON.stringify(createResult));
+        }
+
+        const leadId = createResult?.[0]?.id;
+        
+        if (leadId) {
+             // Step 2: Add Note to Lead
+             await fetch(`https://${domain}.amocrm.ru/api/v4/leads/${leadId}/notes`, {
+                 method: 'POST',
+                 headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json' 
+                 },
+                 body: JSON.stringify([
+                     {
+                         note_type: 'common',
+                         params: {
+                             text: note
+                         }
+                     }
+                 ])
+             });
+             console.log('✅ Lead and Note synced to AmoCRM natively, Lead ID:', leadId);
+        }
     } catch (e) {
         console.error('❌ AmoCRM sync error:', e);
     }

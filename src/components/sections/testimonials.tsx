@@ -25,7 +25,7 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
     return (
         <Card className="h-full flex flex-col bg-white shadow-xl rounded-2xl overflow-hidden group">
             <CardContent className="p-0">
-                <div className="relative w-full aspect-[4/3] bg-black cursor-pointer" onClick={handlePlayVideo}>
+                <div className="relative w-full aspect-[9/16] bg-black cursor-pointer rounded-t-2xl overflow-hidden" onClick={handlePlayVideo}>
                     {playVideo ? (
                         <div className="absolute inset-0 w-full h-full z-10">
                             <iframe
@@ -147,14 +147,14 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
               >
                 <CarouselContent className="-ml-4">
                   {videoTestimonials.map((testimonial, index) => (
-                    <CarouselItem key={`video-${index}`} className="pl-4 basis-full md:basis-1/2">
+                    <CarouselItem key={`video-${index}`} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                       <div className="p-2 h-full">
                         <VideoTestimonialCard testimonial={testimonial} />
                       </div>
                     </CarouselItem>
                   ))}
                   {textTestimonials.map((testimonial, index) => (
-                    <CarouselItem key={`text-${index}`} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                    <CarouselItem key={`text-${index}`} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                       <div className="p-4 h-full">
                         <TextTestimonialCard testimonial={testimonial} />
                       </div>
