@@ -1151,5 +1151,29 @@
             "back": "BACK",
             "submit": "BOOK STRATEGIC SESSION"
         }
+    },
+    "opportunityCalculator": {
+        "title": "Why is your business 'leaving money on the table'?",
+        "subtitle": "Why are you losing money despite heavy advertising? Let's calculate.",
+        "labels": {
+            "traffic": "Number of website visitors",
+            "conversion": "Conversion rate (%)",
+            "aov": "Average Order Value ($)"
+        },
+        "analogy": {
+            "title": "Why is this happening?",
+            "bucket": "Bucket = Your Brand",
+            "water": "Water = Customers from ads",
+            "leak": "Leaks = Bad design and unreliable appearance",
+            "description": "No matter how much 'water' you pour, if your brand has 'leaks', the profit will continue to flow out. We patch these leaks."
+        },
+        "results": {
+            "title": "Your opportunity",
+            "potential": "Monthly profit after branding",
+            "loss": "Money you are losing every month",
+            "lossNote": "You are leaving this much money 'on the table' every month.",
+            "roiNote": "Just a 1-2% increase in trust can multiply your income by 2-3 times."
+        },
+        "cta": "Get a Free Strategic Audit"
     }
 }
