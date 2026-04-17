@@ -46,3 +46,13 @@ firestore-debug.log
 
 # drive upload
 .tmp.driveupload/
+
+# audit and logs
+all_matches.txt
+dev_server.log
+image_audit.txt
+sections_with_image.txt
+tmp/
+scratch/
+autodeploy.log
+autodeploy.pid
