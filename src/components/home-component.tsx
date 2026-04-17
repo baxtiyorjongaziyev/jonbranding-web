@@ -12,6 +12,7 @@ import TargetAudience from '@/components/sections/target-audience';
 import WhyUs from '@/components/sections/why-us';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
+import { cn } from '@/lib/utils';
 
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'), { 
     loading: () => <Skeleton className="h-96 w-full rounded-3xl" /> 
@@ -93,17 +94,16 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     const renderHeadline = (headline: string) => {
         if (!headline) return '';
         
-        // Split by both | and ** markers and whitespace to handle individual words
-        // First handle markers to get chunks, then split chunks into words
+        // Split by both | and ** markers
         const segments = headline.split(/(\*\*.*?\*\*|\|.*?\|)/g);
         
-        let wordCount = 0;
+        let segmentCount = 0;
 
         return (
           <motion.span 
             initial="hidden" 
             animate="visible" 
-            className="inline-block"
+            className="inline"
           >
             {segments.map((segment, i) => {
                 const isDoubleStar = segment.startsWith('**') && segment.endsWith('**');
@@ -119,17 +119,20 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                             visible: { 
                               opacity: 1, 
                               y: 0,
-                              transition: { duration: 0.5, delay: wordCount++ * 0.05 }
+                              transition: { duration: 0.6, delay: segmentCount++ * 0.1, ease: [0.23, 1, 0.32, 1] }
                             }
                           }}
-                          className="gradient inline-block animate-text-glow font-black"
+                          className={cn(
+                            "inline font-black",
+                            isPipe && "gradient animate-text-glow"
+                          )}
                         >
                             {text}
                         </motion.span>
                     );
                 }
                 
-                // For regular text, split into words for staggered reveal
+                // For regular text, split into words for staggered reveal but keep inline flow
                 return segment.split(' ').map((word, j) => {
                   if (!word) return ' ';
                   return (
@@ -140,10 +143,10 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                         visible: { 
                           opacity: 1, 
                           y: 0,
-                          transition: { duration: 0.5, delay: wordCount++ * 0.05 }
+                          transition: { duration: 0.6, delay: segmentCount++ * 0.05, ease: [0.23, 1, 0.32, 1] }
                         }
                       }}
-                      className="inline-block mr-[0.25em]"
+                      className="inline mr-[0.25em]"
                     >
                       {word}
                     </motion.span>
@@ -159,7 +162,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     }
 
     return (
-        <div suppressHydrationWarning>
+        <div className="relative pb-24 md:pb-0">
             {/* SEO Keywords - Hidden from UI but visible to search engines */}
             <div className="sr-only">
                 {lang === 'uz' ? "Ma'no Branding, Mountain Branding, Abba Marketing, Minim, RedFox Branding, Branding uz, Logo dizayn Tashkent, Neyming xizmati, Strategik brending." : 
@@ -171,11 +174,13 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
                 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
-                    <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
+                    <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />
                 </motion.div>
 
+                <BentoResultsStats dictionary={dictionary} />
+
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
-                    <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />
+                    <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
                 </motion.div>
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
@@ -185,8 +190,6 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
                     <OpportunityCostCalculator onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.opportunityCalculator} />
                 </motion.div>
-
-                <BentoResultsStats dictionary={dictionary} />
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
                     <LeadMagnet onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.leadMagnet} />

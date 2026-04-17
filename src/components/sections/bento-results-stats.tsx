@@ -221,10 +221,10 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
               {resultsItems.slice(0, 2).map((item: any, idx: number) => (
                 <div key={idx} className="group/item flex flex-col justify-between h-full">
                   <div className="space-y-2">
-                    <div className="flex items-baseline gap-1">
+                    <div className="flex items-baseline gap-1 whitespace-nowrap">
                       <CountUp 
                         value={item.impact} 
-                        className="text-3xl sm:text-4xl md:text-5xl font-black text-primary tracking-tighter leading-none"
+                        className="text-3xl sm:text-4xl md:text-5xl font-black text-primary tracking-tighter leading-none whitespace-nowrap"
                       />
                     </div>
                     <div className="mt-1">

@@ -20,19 +20,21 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col gap-8 order-2 md:order-1">
-            <div className="flex items-center gap-4 mb-4">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white">
-                  {translations.title}
-                </h2>
-                <a 
-                    href="https://www.linkedin.com/in/baxtiyorjongaziyev/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full bg-white shadow-sm text-[#0077b5] hover:bg-[#0077b5] hover:text-white transition-all duration-300"
-                    title="LinkedIn Profile"
-                >
-                    <Linkedin size={20} />
-                </a>
+            <div className="flex flex-col gap-2 mb-4">
+                <div className="flex items-center gap-4">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+                    {translations.title}
+                  </h2>
+                  <a 
+                      href="https://www.linkedin.com/in/baxtiyorjongaziyev/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-full bg-white/10 text-white hover:bg-white hover:text-black transition-all duration-300 flex-shrink-0"
+                      title="LinkedIn Profile"
+                  >
+                      <Linkedin size={20} />
+                  </a>
+                </div>
             </div>
             <p 
               className="mt-4 text-lg text-gray-300"
