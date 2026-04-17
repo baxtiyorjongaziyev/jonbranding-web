@@ -1,4 +1,0 @@
-Version: 1.0.1-stability-fix
-Build Time: 2026-03-23T11:08:00+05:00
-Status: Next.js 14 Downgrade Active
-Metrika: Enabled

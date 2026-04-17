@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -23,12 +21,23 @@
 # misc
 .DS_Store
 *.pem
+*.swp
+*.swo
 
-# debug
+# debug & logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
+*.txt
+!README.md
+!package.json
+!components.json
+!tsconfig.json
+!next.config.js
+!tailwind.config.ts
+!postcss.config.mjs
 
 # vercel
 .vercel
@@ -37,22 +46,25 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.genkit/*
-.env*
-
 # firebase
 firebase-debug.log
 firestore-debug.log
+.firebaserc
+apphosting.yaml
 
-# drive upload
+# Environment
+.env*
+!.env.example
+
+# Temporary & Storage
 .tmp.driveupload/
-
-# audit and logs
-all_matches.txt
-dev_server.log
-image_audit.txt
-sections_with_image.txt
+.tmp.drivedownload/
 tmp/
 scratch/
+migration-mapping.json
+
+# Audit
+audit/
+logs/
 autodeploy.log
 autodeploy.pid
