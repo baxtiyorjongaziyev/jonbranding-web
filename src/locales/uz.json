@@ -21,7 +21,7 @@
         "services_and_prices_desc": "O'z paketingizni yig'ing va narxni darhol biling.",
         "contact_by_phone": "Qo'ng'iroq",
         "contact_by_telegram": "Telegram",
-        "free_consultation": "Bepul konsultatsiya",
+        "free_consultation": "Strategik Tahlil Olish",
         "open_menu": "Menyuni ochish",
         "switch_lang": "Tilni o'zgartirish",
         "lang_ru": "Русский",
@@ -63,9 +63,9 @@
             "description": "Brendbuk — bu brendingiz konstitutsiyasi. Biz brend yaxlitligini ta'minlaydigan kompleks brendbuklar yaratamiz, marketing xarajatlarini tejaymiz.",
             "keywords": "brandbook, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
         },
-        "title": "Asoschi bilan tanishuv",
-        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biznes egalariga shunchaki logotip emas, balki yillar davomida xizmat qiladigan <span class='text-primary font-bold'>kuchli brend ekotizimini</span> qurishda yordam beraman. Bizning yondashuvimiz — vizual go'zallikni strategik tahlil bilan birlashtirish va har bir mijoz uchun o'sish zanjirini yaratishdir.",
-        "phoneButton": "Bog'lanish",
+        "title": "Nega 90% bizneslar brendingda xato qilib, millionlab so'm yo'qotadi?",
+        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biznesingiz shunchaki rasm emas, balki **sotuv mashinasi** bo'lishi kerak. Bizning vazifamiz — dizaynni strategiya bilan bitta zanjirga bog'lab, sizning bozorda 'G'olib' bo'lishingizni ta'minlashdir. Men sizga shunchaki logotip emas, balki yillar davomida sizga pul keltiradigan tizim qurib beraman.",
+        "phoneButton": "Maslahat Olish",
         "section1_title": "Nega har bir biznesga brendbuk kerak?",
         "section1_p1": "Brendbuk — brendni boshqarish uchun asosiy vositadir. U vizual va g'oyaviy elementlardan foydalanish qoidalarini aniq belgilab beradi — logotipdan tortib muloqot ohangigacha.",
         "section1_p2": "Ushbu hujjat marketingdagi tartibsizlikdan qochishga, vaqtni va pulni dizaynerlar va marketologlar bilan ishlashda tejashga yordam beradi.",
@@ -104,9 +104,9 @@
                 "description": "Real tashuvchilarda (vizitka, taqdimotlar, ijtimoiy tarmoqlar) uchun dizayn namunalari."
             }
         ],
-        "cta_title": "Brendingizni tartibga solishga tayyormisiz?",
-        "cta_description": "Professional brendbuk — biznesingiz barqaror kelajagiga sarmoya. Keling, sizga ishonchli yordamchi bo'ladigan hujjatni yaratamiz.",
-        "cta_button": "Brending tartibini yaratish"
+        "cta_title": "Brendingizni 'Sotuv Mashinasi'ga aylantirishga tayyormisiz?",
+        "cta_description": "Professional brending — bu sarmoya, xarajat emas. Keling, sizga ishonchli va daromadli brend qurib beramiz.",
+        "cta_button": "Mening brendimni quring"
     },
     "popularPackages": {
         "title": "Eng ommabop paketlar",
@@ -124,7 +124,7 @@
         "packagePrice": "Paketda",
         "packageDiscount": "(-20% chegirma!)",
         "upfrontDiscount": "100% to'lovda (-28% jami!)",
-        "ctaButton": "Paketni band qilish"
+        "ctaButton": "Sotuvni Oshirishni Boshlash"
     },
     "sitemapPage": {
         "title": "Sayt xaritasi",
@@ -147,49 +147,49 @@
         }
     },
     "hero": {
-        "title": "Kuchli brend bilan sotuvingizni **2-3 karra oshiring** \u2014 30 kun ichida",
-        "description": "Raqobatchilar professional ko'rinadi, siz esa hali ham eski logotip bilan yurasizmi? Mijozlar sizni tanlashdan oldin raqobatchini tanlayapti \u2014 chunki ularning brendi <span class='font-bold text-foreground'>ishonch uyg\u2019otadi</span>.",
-        "cta": "Bepul Strategik Audit Olish",
-        "ctaSecondary": "Natijalarimizni Ko\u02bcring",
-        "buttonHint": "\u2713 Hech qanday majburiyat yo\u02bcq  \u00b7  \u2713 15 daqiqalik bepul tahlil  \u00b7  \u2713 Agar natija bo\u02bcmasa \u2014 pulingiz qaytariladi",
-        "urgencyBadge": "\u26a1 Bu oy faqat 3 ta bepul strategik audit qoldi \u2014 o\u02bcringizni band qiling",
-        "audienceTag": "\ud83c\udfaf Biznes egalariga murojaat",
-        "guarantees": ["100% natija kafolati", "30 kun ichida tayyor", "150+ muvaffaqiyatli loyiha"],
+        "title": "Sotuv bera olmaydigan brenddan charchadingizmi? **Sotuvingizni 30 kun ichida 2-3 baravarga oshiring**",
+        "description": "Raqobatchilar professional ko'rinish bilan mijozlaringizni o'ziniki qilib olyapti. Biznesingizni **ishonch va barqaror daromad manbaiga** aylantirish vaqti keldi.",
+        "cta": "Mening Bepul Strategik Planimni Qurish",
+        "ctaSecondary": "Real Natijalarni Ko\u02bcring",
+        "buttonHint": "\u2713 100% Risk-free  \u00b7  \u2713 15 daqiqalik professional tahlil  \u00b7  \u2713 Natija bo'lmasa \u2014 pulingiz qaytariladi",
+        "urgencyBadge": "\u26a1 Diqqat: Bu oy faqat 3 ta bepul strategik audit o'rni qoldi",
+        "audienceTag": "\ud83c\udfaf Faqat natija istaydigan biznes egalari uchun",
+        "guarantees": ["100% Natija Kafolati", "30 Kunda To'liq Tayyor", "Bozorda 150+ G'olib Brendlar"],
         "stats": [
-            { "value": "150+", "label": "brend yaratilgan" },
-            { "value": "2-3x", "label": "o\u02bcrtacha sotuv o\u02bcsishi" },
-            { "value": "98%", "label": "mijozlar mamnun" }
+            { "value": "150+", "label": "loyiha o'sishga erishdi" },
+            { "value": "245%", "label": "o'rtacha ROI o'sishi" },
+            { "value": "100%", "label": "mas'uliyat" }
         ],
-        "leadMagnetTitle": "Brendingizni tahlil qilish uchun bepul chek-listni yuklab oling",
-        "leadMagnetCta": "Chek-listni yuklash"
+        "leadMagnetTitle": "Raqobatchilarni ortda qoldirish bo'yicha bepul 'Check-list'ni yuklang",
+        "leadMagnetCta": "Check-listni Hozir Yuklash"
     },
 
     "results": {
-        "badge": "MIJOZ NATIJASI",
-        "statsBadge": "JON.BRANDING STAT",
-        "title": "Mijozlarimizning natijalari",
-        "subtitle": "Biz nafaqat chiroyli dizayn, balki biznesingiz rivojiga hissa qo'shadigan strategik yechimlar yaratamiz.",
+        "badge": "BOZORDA QILINGAN NATIJA",
+        "statsBadge": "RAQAMLARDA JON.BRANDING",
+        "title": "Mijozlarimiz qanday natijalarga erishmoqda?",
+        "subtitle": "Biz shunchaki rasm chizmaymiz — biz sizga bozorda 'mutloq g'olib' bo'lishingizni ta'minlaydigan strategik tizimni taqdim etamiz.",
         "items": [
             {
-                "impact": "60%+",
+                "impact": "68%+",
                 "title": "Den Aroma",
-                "desc": "O'rtacha chekning oshishi. Eski 'oddiy' aydentikadan premium brendga o'tilgani hisobiga mijozlar qimmatroq to'lashga tayyor бўлишди.",
-                "label": "BRENDING"
+                "desc": "O'rtacha chekning keskin oshishi. Mijozlar endi 'qimmat' mahsulotni ishonch bilan xarid qila boshlashdi.",
+                "label": "PROFITS UP"
             },
             {
-                "impact": "40%+",
+                "impact": "42%+",
                 "title": "Bexruz Market",
-                "desc": "Mijozlar oqimining ko'payishi. Bozordagi tartibsizlikdan ajralib chiqganimiz hisobiga yangi auditoriya jalb qilindi.",
-                "label": "REBRENDING"
+                "desc": "Mijozlar oqimi 2 baravarga ko'paydi. Brend taniluvchanligi hisobiga reklamaga xarajatlar 30% ga kamaydi.",
+                "label": "MARKET SHARE"
             }
         ],
         "stats": {
-            "projects": "Muvaffaqiyatli loyihalar",
-            "experience": "Yillik tajriba",
-            "clients": "Mamnun mijozlar",
-            "recommend": "Tavsiya qilishadi"
+            "projects": "Sotuvga yo'naltirilgan loyihalar",
+            "experience": "Bozordagi tajriba",
+            "clients": "Baxtli va boy mijozlar",
+            "recommend": "Tavsiya darajasi"
         },
-        "detail": "Har bir loyiha biz uchun shunchaki dizayn emas, balki biznes o'sishi uchun vositadir."
+        "detail": "Har bir loyiha — bu sizning biznesingiz uchun yangi daromad darajasi."
     },
     "contactModal": {
         "sidebarTitle": "Strategik suhbat",
@@ -464,8 +464,8 @@
         "subtitle": "Biz yaratgan brendlar o'z sohasida qanday ajralib turishini ko'ring."
     },
     "founder": {
-        "title": "Asoschi: Baxtiyorjon Gaziyev",
-        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biznes egalariga shunchaki logotip emas, balki yillar davomida xizmat qiladigan <span class='text-primary font-bold'>kuchli brend ekotizimini</span> qurishda yordam beraman. Bizning yondashuvimiz — vizual go'zallikni strategik tahlil bilan birlashtirish va har bir mijoz uchun o'sish zanjirini yaratishdir.",
+        "title": "Nega 90% bizneslar brendingda xato qilib, millionlab so'm yo'qotadi?",
+        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biznesingiz shunchaki rasm emas, balki **sotuv mashinasi** bo'lishi kerak. Bizning vazifamiz — dizaynni strategiya bilan bitta zanjirga bog'lab, sizning bozorda 'G'olib' bo'lishingizni ta'minlashdir. Men sizga shunchaki logotip emas, balki yillar davomida sizga pul keltiradigan tizim qurib beraman.",
         "points": [
             {
                 "icon": "Medal",
@@ -1099,24 +1099,6 @@
             "default": "Iltimos, siz uchun eng muhim bo'lgan 2 ta ustuvorlikni tanlang."
         },
         "tooltip": "Avval bittasini bekor qiling"
-    },
-    "results": {
-        "badge": "MIJOZ NATIJASI",
-        "title": "Mijozlarimizning natijalari",
-        "subtitle": "Biz nafaqat chiroyli dizayn, balki biznesingiz rivojiga hissa qo'shadigan strategik yechimlar yaratamiz.",
-        "detail": "Har bir loyiha biz uchun shunchaki dizayn emas, balki biznes o'sishi uchun vositadir.",
-        "items": [
-            {
-                "impact": "60%+",
-                "title": "Den Aroma",
-                "desc": "O'rtacha chekning oshishi"
-            },
-            {
-                "impact": "40%+",
-                "title": "Bexruz Market",
-                "desc": "Mijozlar oqimining ko'payishi"
-            }
-        ]
     },
     "stats": {
         "badge": "JON.BRANDING STAT",

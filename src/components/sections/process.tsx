@@ -13,7 +13,7 @@ interface ProcessProps {
 }
 
 const ProcessCard = ({ title, description, tasks, phase }: { title: string, description: string, tasks: string[], phase: string }) => (
-    <div className="w-[320px] md:w-[450px] flex-shrink-0 bg-secondary/30 p-8 rounded-3xl border border-primary/5 shadow-sm hover:shadow-md transition-all mx-4">
+    <div className="w-[85vw] md:w-[450px] flex-shrink-0 bg-secondary/30 p-6 md:p-8 rounded-3xl border border-primary/5 shadow-sm hover:shadow-md transition-all mx-3 md:mx-4">
         <div className="flex items-center gap-4 mb-6">
           <span className="text-sm font-black text-primary bg-primary/10 px-3 py-1 rounded-full">{phase}</span>
           <div className="h-px flex-grow bg-primary/10"></div>

@@ -59,13 +59,13 @@ const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string, dictionary: any 
 
 
   return (
-    <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]" suppressHydrationWarning>
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-sm">
-            <p className="font-bold text-primary text-lg">{price > 0 ? formatPrice(price, lang as 'uz' | 'ru' | 'en' | 'zh', currency) : agreedPriceText}</p>
-            <p className="text-xs text-muted-foreground">{translations.final_price}</p>
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-md md:hidden rounded-2xl bg-background/80 backdrop-blur-xl border border-white/20 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.3)] ring-1 ring-black/5" suppressHydrationWarning>
+      <div className="flex justify-between items-center gap-4">
+        <div className="text-left text-sm">
+            <p className="font-black text-primary text-xl tracking-tighter leading-none">{price > 0 ? formatPrice(price, lang as 'uz' | 'ru' | 'en' | 'zh', currency) : agreedPriceText}</p>
+            <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1 opacity-70">{translations.final_price}</p>
         </div>
-        <Button onClick={onOpenModal} className="shadow-ocean animate-subtle-pulse">
+        <Button onClick={onOpenModal} size="lg" className="flex-grow shadow-2xl rounded-xl font-black uppercase tracking-tight text-sm bg-primary hover:bg-primary/90 transition-all active:scale-95">
           {translations.get_offer}
         </Button>
       </div>
