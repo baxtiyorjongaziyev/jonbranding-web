@@ -85,26 +85,20 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
               </motion.div>
             )}
 
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            {/* Headline — plain h1 for immediate LCP; CSS handles fade-in */}
+            <h1
               data-testid="hero-title"
-              className="text-[34px] leading-[1.0] sm:text-[52px] lg:text-[72px] xl:text-[88px] font-black text-foreground tracking-[-0.05em] mb-8 max-w-[1200px] mx-auto relative px-2"
+              className="text-[34px] leading-[1.0] sm:text-[52px] lg:text-[72px] xl:text-[88px] font-black text-foreground tracking-[-0.05em] mb-8 max-w-[1200px] mx-auto relative px-2 animate-fade-in-up"
             >
               {renderHeadline(dictionary.title || '')}
-            </motion.h1>
+            </h1>
 
             {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-              className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-medium mb-12 max-w-3xl mx-auto leading-relaxed"
+            <p
+              className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-medium mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:100ms]"
             >
               {renderHeadline ? renderHeadline(dictionary.description || '') : dictionary.description}
-            </motion.p>
+            </p>
 
             {/* Guarantees — horizontal row */}
             {guarantees.length > 0 && (

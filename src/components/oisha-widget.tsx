@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useRef, useEffect, FC, Fragment } from 'react';
-import { Button } from '@/components/ui/card'; // We might use components/ui/button or card
+import { Button } from '@/components/ui/button';
 import { MessageSquare, Send, X, Bot, User, Loader2, Sparkles } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -18,8 +18,7 @@ interface OishaMessage {
   timestamp: string;
 }
 
-const OISHA_API_URL = process.env.NEXT_PUBLIC_OISHA_API_URL || 'http://localhost:8080';
-const OISHA_SECRET = 'oisha_safe_123'; // User can override later
+const OISHA_PROXY = '/api/oisha';
 
 const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -98,7 +97,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
 
   const fetchHistory = async (uid: string) => {
     try {
-      const res = await fetch(`${OISHA_API_URL}/api/chat/history/${uid}?secret_key=${OISHA_SECRET}`);
+      const res = await fetch(`${OISHA_PROXY}?user_id=${uid}`);
       const data = await res.json();
       if (data.history) {
         setMessages(data.history.map((m: any, idx: number) => ({
@@ -129,17 +128,10 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
     setIsLoading(true);
 
     try {
-      const res = await fetch(`${OISHA_API_URL}/api/chat/send`, {
+      const res = await fetch(OISHA_PROXY, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          user_id: userId, // The API expects int or string depending on version, let's see. 
-          // api_server.py SendMessageRequest expected int but my random string might fail.
-          // Actually, looking at script.js: parseInt(userId). 
-          // If we use string, I should change the ID generation to something numeric.
-          text: userText,
-          secret_key: OISHA_SECRET
-        })
+        body: JSON.stringify({ user_id: userId, text: userText })
       });
 
       if (!res.ok) throw new Error("API Error");

@@ -17,7 +17,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Loader2, ArrowRight, ArrowLeft, MessageCircle, Mail, Phone, Instagram, Send, X, Globe, User, CheckCircle2, Linkedin, PhoneCall, Building2, Wallet, MapPin, Target, ShieldCheck, ExternalLink, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useTelegram } from '@/hooks/use-telegram';
-import { trackLead } from '@/lib/analytics';
+import { trackLead, trackEvent } from '@/lib/analytics';
 import { getDictionary } from '@/lib/dictionaries';
 import Magnetic from '@/components/ui/magnetic';
 
@@ -140,7 +140,12 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     if (step === 4) fields = ['fullName', 'phone'];
 
     const isValid = await form.trigger(fields as any);
-    if (isValid) setStep(prev => prev + 1);
+    if (isValid) {
+      trackEvent({ action: 'form_step_completed', category: 'Contact Form', label: `Step ${step}`, value: step });
+      setStep(prev => prev + 1);
+    } else {
+      trackEvent({ action: 'form_step_failed', category: 'Contact Form', label: `Step ${step}` });
+    }
   }, [step, form]);
 
   const prevStep = () => setStep(prev => prev - 1);
@@ -157,6 +162,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       setStep(1);
       setSubmitted(false);
       if (user) form.setValue('fullName', `${user.first_name || ''} ${user.last_name || ''}`.trim());
+      trackEvent({ action: 'form_opened', category: 'Contact Form', label: 'Strategic Session' });
     }
   }, [isOpen, form, user]);
 

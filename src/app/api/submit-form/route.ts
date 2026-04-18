@@ -1,10 +1,27 @@
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
+import { rateLimit, getClientIp } from '@/lib/rate-limit';
+
+const leadSchema = z.object({
+    fullName: z.string().min(2).max(100),
+    phone: z.string().min(7).max(20).regex(/^[+\d\s\-()]+$/),
+    telegram: z.string().max(50).optional(),
+    role: z.string().max(100).optional(),
+    revenue: z.string().max(100).optional(),
+    ambition: z.string().max(500).optional(),
+    pain: z.string().max(500).optional(),
+    budget: z.string().max(100).optional(),
+    source: z.string().max(100).optional(),
+    lang: z.enum(['uz', 'ru', 'en', 'zh']).optional(),
+    packageSummary: z.string().max(2000).optional(),
+    totalPrice: z.number().nonnegative().optional(),
+});
 
 const UZS_TO_USD_RATE = 1 / 12700;
 
 async function sendMetaConversionEvent(data: any) {
     const accessToken = process.env.META_API_ACCESS_TOKEN;
-    const pixelId = '1134785364752294';
+    const pixelId = process.env.META_PIXEL_ID;
     if (!accessToken || !pixelId) return;
 
     const url = `https://graph.facebook.com/v20.0/${pixelId}/events`;
@@ -41,8 +58,8 @@ async function sendMetaConversionEvent(data: any) {
 
 async function sendGAConversionEvent(data: any) {
     const gaApiSecret = process.env.GA_API_SECRET;
-    const gaMeasurementId = 'G-B3ZSKB40XY';
-    if (!gaApiSecret) return;
+    const gaMeasurementId = process.env.GA_MEASUREMENT_ID;
+    if (!gaApiSecret || !gaMeasurementId) return;
 
     const url = `https://www.google-analytics.com/mp/collect?measurement_id=${gaMeasurementId}&api_secret=${gaApiSecret}`;
     const payload = {
@@ -68,7 +85,8 @@ async function sendGAConversionEvent(data: any) {
 }
 
 async function sendToN8n(data: any) {
-    const n8nWebhookUrl = 'https://n8n-automation-agent-982617914297.us-central1.run.app/webhook/lead-capture';
+    const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
+    if (!n8nWebhookUrl) return;
     try {
         await fetch(n8nWebhookUrl, {
             method: 'POST',
@@ -147,36 +165,51 @@ ${packageSummary ? `--- \n📦 Paket: ${packageSummary} \n💰 Narx: ${totalPric
         const createResult = await createResponse.json();
         
         if (!createResponse.ok) {
-             throw new Error(JSON.stringify(createResult));
+            const isAuthError = createResponse.status === 401;
+            if (isAuthError) {
+                await notifyAmoCRMTokenExpired(domain);
+            }
+            throw new Error(JSON.stringify(createResult));
         }
 
         const leadId = createResult?.[0]?.id;
-        
+
         if (leadId) {
-             // Step 2: Add Note to Lead
-             await fetch(`https://${domain}.amocrm.ru/api/v4/leads/${leadId}/notes`, {
-                 method: 'POST',
-                 headers: {
+            await fetch(`https://${domain}.amocrm.ru/api/v4/leads/${leadId}/notes`, {
+                method: 'POST',
+                headers: {
                     'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json' 
-                 },
-                 body: JSON.stringify([
-                     {
-                         note_type: 'common',
-                         params: {
-                             text: note
-                         }
-                     }
-                 ])
-             });
-             console.log('✅ Lead and Note synced to AmoCRM natively, Lead ID:', leadId);
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify([{ note_type: 'common', params: { text: note } }])
+            });
         }
-    } catch (e) {
+    } catch (e: any) {
         console.error('❌ AmoCRM sync error:', e);
     }
 }
 
+async function notifyAmoCRMTokenExpired(domain: string) {
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
+    if (!botToken || !chatId) return;
+    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: `🚨 AmoCRM TOKEN ESKIRDI!\n\nDomen: ${domain}.amocrm.ru\n\nLead saqlanmadi! Token'ni yangilang: https://${domain}.amocrm.ru/oauth`,
+            parse_mode: 'HTML',
+        }),
+    }).catch(() => {});
+}
+
 export async function POST(request: Request) {
+    const ip = getClientIp(request);
+    if (!rateLimit(ip, 5, 60_000)) {
+        return NextResponse.json({ ok: false, error: 'Too many requests' }, { status: 429 });
+    }
+
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
     const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
@@ -186,16 +219,12 @@ export async function POST(request: Request) {
     }
 
     try {
-        const body = await request.json();
-        const { 
-            fullName, phone, telegram, 
-            role, revenue, ambition, pain, budget, 
-            source, lang, packageSummary, totalPrice 
-        } = body;
-
-        if (!fullName || !phone) {
-            return NextResponse.json({ ok: false, error: "Required fields missing" }, { status: 400 });
+        const raw = await request.json();
+        const parsed = leadSchema.safeParse(raw);
+        if (!parsed.success) {
+            return NextResponse.json({ ok: false, error: 'Invalid input', details: parsed.error.flatten() }, { status: 400 });
         }
+        const { fullName, phone, telegram, role, revenue, ambition, pain, budget, source, lang, packageSummary, totalPrice } = parsed.data;
         
         let telegramMessage = '';
 
@@ -255,10 +284,10 @@ ${packageSummary ? `--- \n📦 Paket: ${packageSummary} \n💰 Narx: ${totalPric
             body: JSON.stringify(telegramPayload),
         });
 
-        sendMetaConversionEvent(body).catch(() => {});
-        sendGAConversionEvent(body).catch(() => {});
-        sendToN8n(body).catch(() => {});
-        sendToAmoCRM(body).catch(() => {});
+        sendMetaConversionEvent(parsed.data).catch(() => {});
+        sendGAConversionEvent(parsed.data).catch(() => {});
+        sendToN8n(parsed.data).catch(() => {});
+        sendToAmoCRM(parsed.data).catch(() => {});
 
         return NextResponse.json({ ok: true });
 

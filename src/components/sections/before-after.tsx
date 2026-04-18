@@ -95,8 +95,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
             ))
           ) : displayItems.length > 0 ? (
             displayItems.map((item, index) => {
-              const beforeSrc = typeof item.oldImg === 'string' ? item.oldImg : urlFor(item.oldImg).url();
-              const afterSrc = typeof item.newImg === 'string' ? item.newImg : urlFor(item.newImg).url();
+              const beforeSrc = typeof item.oldImg === 'string' ? item.oldImg : (item.oldImg ? urlFor(item.oldImg).url() : '');
+              const afterSrc = typeof item.newImg === 'string' ? item.newImg : (item.newImg ? urlFor(item.newImg).url() : '');
               
               return (
                 <div 
