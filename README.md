@@ -22,9 +22,11 @@ Premium web platform for Jon Branding agency, built with Next.js and Firebase.
 
 1. Clone the repository
 2. Install dependencies:
+
    ```bash
    npm install
    ```
+
 3. Set up environment variables:
    - Copy `.env.example` to `.env.local`
    - Fill in Sanity and Firebase credentials.
@@ -32,6 +34,7 @@ Premium web platform for Jon Branding agency, built with Next.js and Firebase.
 ### Development
 
 Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -39,11 +42,13 @@ npm run dev
 ### Deployment
 
 Deploy to Firebase:
+
 ```bash
 firebase deploy
 ```
 
 For automatic watcher and deploy on save (Windows):
+
 ```powershell
 ./scripts/start_autodeploy.ps1
 ```
