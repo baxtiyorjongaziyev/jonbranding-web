@@ -1,0 +1,63 @@
+name: Jon Branding — Deploy to Firebase
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set environment variables
+        run: |
+          echo "NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_SANITY_DATASET=production" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_OISHA_API_URL=${{ secrets.NEXT_PUBLIC_OISHA_API_URL }}" >> $GITHUB_ENV
+
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: production
+          NEXT_PUBLIC_OISHA_API_URL: ${{ secrets.NEXT_PUBLIC_OISHA_API_URL }}
+
+      - name: Deploy to Firebase App Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: brandboost-landing
+          channelId: live
+
+      - name: Notify success via Telegram
+        if: success()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.OISHA_BOT_TOKEN }}/sendMessage" \
+            -d "chat_id=150074828" \
+            -d "text=✅ jonbranding.uz deployed!%0ACommit: ${{ github.sha }}%0ABranch: ${{ github.ref_name }}" || true
+
+      - name: Notify failure via Telegram
+        if: failure()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.OISHA_BOT_TOKEN }}/sendMessage" \
+            -d "chat_id=150074828" \
+            -d "text=❌ jonbranding.uz deploy FAILED!%0ACommit: ${{ github.sha }}" || true
