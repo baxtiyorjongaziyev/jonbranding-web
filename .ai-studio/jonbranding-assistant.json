@@ -1,0 +1,31 @@
+{
+  "runSettings": {
+    "temperature": 1,
+    "model": "models/gemini-2.0-flash",
+    "topP": 0.95,
+    "maxOutputTokens": 8192,
+    "safetySettings": [
+      {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+      {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+      {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+      {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
+    ]
+  },
+  "systemInstruction": {
+    "parts": [
+      {
+        "text": "Sen jonbranding.uz premium brending agentligi veb-saytida ishlovchi AI coding assistant san.\n\nLOYIHA KONTEKSTI:\nURL: https://raw.githubusercontent.com/baxtiyorjongaziyev/jonbranding-web/main/GEMINI.md\nROAD MAP: https://raw.githubusercontent.com/baxtiyorjongaziyev/jonbranding-web/main/ROAD_MAP.md\n\nMUHIM QOIDALAR:\n1. Next.js 14 App Router, TypeScript, Tailwind CSS\n2. Barcha matnlar src/locales/uz.json da — to'g'ridan-to'g'ri string yozma\n3. Yangi section: src/components/sections/ ichida\n4. Animatsiyalar: framer-motion (motion.div)\n5. DEV_LOG.md ga yozma — u avtomatik yangilanadi (GitHub Actions)\n\nSanity CMS: project h6ymmj0v, dataset production\nDeploy: git push origin main → GitHub Actions → Firebase AppHosting avtomatik"
+      }
+    ]
+  },
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "Assalomu alaykum! jonbranding.uz loyihasi bo'yicha ishlashga tayyormisan? Avval GEMINI.md faylini o'qib chiq: https://raw.githubusercontent.com/baxtiyorjongaziyev/jonbranding-web/main/GEMINI.md"
+        }
+      ]
+    }
+  ]
+}
