@@ -13,6 +13,8 @@ jobs:
   build-and-deploy:
     name: Build & Deploy
     runs-on: ubuntu-latest
+    outputs:
+      deploy_status: ${{ steps.deploy_result.outputs.status }}
 
     steps:
       - name: Checkout
@@ -27,12 +29,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Set environment variables
-        run: |
-          echo "NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_SANITY_DATASET=production" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_OISHA_API_URL=${{ secrets.NEXT_PUBLIC_OISHA_API_URL }}" >> $GITHUB_ENV
-
       - name: Build Next.js app
         run: npm run build
         env:
@@ -41,12 +37,23 @@ jobs:
           NEXT_PUBLIC_OISHA_API_URL: ${{ secrets.NEXT_PUBLIC_OISHA_API_URL }}
 
       - name: Deploy to Firebase App Hosting
+        id: firebase_deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           projectId: brandboost-landing
           channelId: live
+
+      - name: Set deploy result
+        id: deploy_result
+        if: always()
+        run: |
+          if [[ "${{ steps.firebase_deploy.outcome }}" == "success" ]]; then
+            echo "status=success" >> $GITHUB_OUTPUT
+          else
+            echo "status=failure" >> $GITHUB_OUTPUT
+          fi
 
       - name: Notify success via Telegram
         if: success()
@@ -61,3 +68,57 @@ jobs:
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.OISHA_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=150074828" \
             -d "text=❌ jonbranding.uz deploy FAILED!%0ACommit: ${{ github.sha }}" || true
+
+  update-devlog:
+    name: Auto-update DEV_LOG.md
+    needs: build-and-deploy
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Build and prepend log entry
+        shell: bash
+        run: |
+          DATE=$(date -u '+%Y-%m-%d %H:%M UTC')
+          SHA="${GITHUB_SHA::7}"
+          ACTOR="${GITHUB_ACTOR}"
+          COMMIT_MSG=$(git log -1 --pretty=%s)
+
+          DEPLOY_STATUS="${{ needs.build-and-deploy.outputs.deploy_status }}"
+
+          if [[ "${DEPLOY_STATUS}" == "success" ]]; then
+            STATUS_ICON="✅"
+            STATUS_LINE="jonbranding.uz muvaffaqiyatli deploy qilindi"
+          else
+            STATUS_ICON="⚠️"
+            STATUS_LINE="Deploy muvaffaqiyatsiz yoki o'tkazib yuborildi"
+          fi
+
+          NEW_ENTRY="## ${DATE} | ${STATUS_ICON} \`${SHA}\`
+
+**Commit**: ${COMMIT_MSG}
+**Actor**: @${ACTOR}
+**Status**: ${STATUS_LINE}
+
+---
+
+"
+
+          HEADER=$(head -6 DEV_LOG.md)
+          BODY=$(tail -n +7 DEV_LOG.md)
+          printf '%s\n\n%s\n%s' "$HEADER" "$NEW_ENTRY" "$BODY" > DEV_LOG.md
+
+      - name: Commit updated DEV_LOG.md
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add DEV_LOG.md
+          git diff --staged --quiet || git commit -m "chore(auto): update DEV_LOG — $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
