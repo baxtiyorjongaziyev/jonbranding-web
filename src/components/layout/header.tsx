@@ -54,6 +54,7 @@ type Dictionary = {
     free_consultation: string;
     open_menu: string;
     switch_lang: string;
+    urgencyBadge?: string;
 }
 
 const ListItem = React.forwardRef<

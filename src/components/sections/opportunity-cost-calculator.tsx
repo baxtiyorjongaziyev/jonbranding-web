@@ -20,7 +20,7 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
 }) => {
   const [traffic, setTraffic] = useState(5000);
   const [conversion, setConversion] = useState(1);
-  const [aov, setAov] = useState(50);
+  const [aov, setAov] = useState(500_000);
 
   const t = dictionary;
 
@@ -42,11 +42,9 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
   }, [potentialRevenue, currentRevenue]);
 
   const formatCurrency = (val: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+    return new Intl.NumberFormat('uz-UZ', {
       maximumFractionDigits: 0,
-    }).format(val);
+    }).format(val) + " so'm";
   };
 
   return (
@@ -128,9 +126,9 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                     <Slider
                       value={[aov]}
                       onValueChange={(v) => setAov(v[0])}
-                      min={5}
-                      max={1000}
-                      step={5}
+                      min={50_000}
+                      max={10_000_000}
+                      step={50_000}
                       className="cursor-pointer"
                     />
                   </div>

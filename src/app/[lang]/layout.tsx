@@ -51,11 +51,13 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
       images: [OG_IMAGE_URL],
     },
     alternates: {
-      canonical: `${BASE_URL}/${lang}`,
+      canonical: lang === 'uz' ? BASE_URL : `${BASE_URL}/${lang}`,
       languages: {
-        'uz': `${BASE_URL}/uz`,
+        'uz': BASE_URL,
         'ru': `${BASE_URL}/ru`,
         'en': `${BASE_URL}/en`,
+        'zh': `${BASE_URL}/zh`,
+        'x-default': BASE_URL,
       },
     },
   };
@@ -184,11 +186,18 @@ export default async function LocalizedLayout({ children, params }: Props) {
             '(1) Yangi xabar! | Jon Branding'
           } 
         />
-        <GoogleTagManager gtmId="GTM-5GRQBW84" />
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-5GRQBW84'} />
         {/* Optimized Analytics Loading Strategy */}
         <Script id="analytics-delayed-load" strategy="afterInteractive">
           {`
             (function() {
+              var GA_ID   = "${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-B3ZSKB40XY'}";
+              var ADS_ID  = "${process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-17674872079'}";
+              var FB_ID   = "${process.env.NEXT_PUBLIC_FB_PIXEL_ID || '1134785364752294'}";
+              var CLR_ID  = "${process.env.NEXT_PUBLIC_CLARITY_ID || 'w7knsud9mg'}";
+              var HJ_ID   = ${process.env.NEXT_PUBLIC_HOTJAR_ID || '6527829'};
+              var YM_ID   = ${process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || '91628105'};
+
               const loadAnalytics = () => {
                 if (window.analyticsLoaded) return;
                 window.analyticsLoaded = true;
@@ -196,14 +205,14 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 // 1. Google Analytics
                 const ga = document.createElement('script');
                 ga.async = true;
-                ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY';
+                ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
                 document.head.appendChild(ga);
                 ga.onload = () => {
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', 'G-B3ZSKB40XY');
-                  gtag('config', 'AW-17674872079');
+                  gtag('config', GA_ID);
+                  gtag('config', ADS_ID);
                 };
 
                 // 2. Microsoft Clarity
@@ -211,29 +220,31 @@ export default async function LocalizedLayout({ children, params }: Props) {
                   c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                   t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
                   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "w7knsud9mg");
+                })(window, document, "clarity", "script", CLR_ID);
 
                 // 3. Hotjar
                 (function(h,o,t,j,a,r){
                   h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                  h._hjSettings={hjid:6527829,hjsv:6};
+                  h._hjSettings={hjid:HJ_ID,hjsv:6};
                   a=o.getElementsByTagName('head')[0];
                   r=o.createElement('script');r.async=1;
                   r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
                   a.appendChild(r);
                 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 
-                // 4. FB Pixel
-                !function(f,b,e,v,n,t,s)
-                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)}(window, document,'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '1134785364752294');
-                fbq('track', 'PageView');
+                // 4. FB Pixel (client-side PageView only — Lead events via server CAPI)
+                if (FB_ID) {
+                  !function(f,b,e,v,n,t,s)
+                  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                  n.queue=[];t=b.createElement(e);t.async=!0;
+                  t.src=v;s=b.getElementsByTagName(e)[0];
+                  s.parentNode.insertBefore(t,s)}(window, document,'script',
+                  'https://connect.facebook.net/en_US/fbevents.js');
+                  fbq('init', FB_ID);
+                  fbq('track', 'PageView');
+                }
               };
 
               // Events to trigger loading
@@ -261,6 +272,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">
           {`
+            var YM_ID = ${process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || '91628105'};
             (function(m,e,t,r,i,k,a){
                 m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                 m[i].l=1*new Date();
@@ -268,7 +280,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
             })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-            ym(91628105, 'init', {webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+            ym(YM_ID, 'init', {webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
           `}
         </Script>
         <noscript>

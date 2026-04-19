@@ -1,12 +1,7 @@
 
 'use client';
 
-/**
- * @fileOverview Amplitude tracking configuration.
- * Uses Browser SDK safely for Next.js.
- */
-
-const AMPLITUDE_API_KEY = '1c82e6734ed6525393807b4e56f105a5';
+const AMPLITUDE_API_KEY = process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY || '';
 
 export const initAmplitude = () => {
   if (typeof window !== 'undefined' && AMPLITUDE_API_KEY) {
@@ -34,7 +29,6 @@ export const trackEvent = (eventName: string, eventProperties?: Record<string, a
   if (typeof window !== 'undefined' && window.amplitude) {
     try {
       window.amplitude.track(eventName, eventProperties);
-      console.log(`[Amplitude] Event: ${eventName}`, eventProperties);
     } catch (e) {
       console.warn('Amplitude track event failed', e);
     }

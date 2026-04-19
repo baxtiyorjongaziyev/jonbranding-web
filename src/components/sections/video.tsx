@@ -60,7 +60,7 @@ const VideoSection = () => {
              <div className="absolute inset-0 w-full h-full">
                {/* Fallback Poster Image */}
                <Image
-                 src="/showreel_fallback_poster_1776265352809.png"
+                 src="/showreel_fallback_poster_1776265352809.webp"
                  alt="Jon.Branding Showreel Fallback"
                  fill
                  className="object-cover transition-opacity duration-1000"
