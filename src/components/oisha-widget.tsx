@@ -2,7 +2,6 @@
 'use client';
 
 import { useState, useRef, useEffect, FC, Fragment } from 'react';
-import { Button } from '@/components/ui/card'; // We might use components/ui/button or card
 import { MessageSquare, Send, X, Bot, User, Loader2, Sparkles } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
