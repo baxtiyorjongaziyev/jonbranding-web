@@ -54,6 +54,7 @@ type Dictionary = {
     free_consultation: string;
     open_menu: string;
     switch_lang: string;
+    urgencyBadge?: string;
 }
 
 const ListItem = React.forwardRef<
@@ -147,6 +148,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const { scrollY } = useScroll();
   
   const top = useTransform(scrollY, [0, 80], [0, 16]);
+  const announcementTop = useTransform(scrollY, [0, 40], [40, 0]);
   const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
   const backgroundColor = useTransform(
     scrollY,
@@ -254,7 +256,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         animate={{ y: visible ? 0 : -100 }}
         transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
         style={{ 
-          top: dictionary.urgencyBadge ? useTransform(scrollY, [0, 40], [40, 0]) : 0,
+          top: dictionary.urgencyBadge ? announcementTop : 0,
         }}
         suppressHydrationWarning
       >
