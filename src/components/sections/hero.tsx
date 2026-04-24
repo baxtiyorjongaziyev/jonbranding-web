@@ -57,19 +57,30 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
           {/* ── LEFT: Copy ── */}
           <div className="text-center lg:text-left">
 
+            {/* Audience Call-out (Sabri Suby Step 1) */}
+            {dictionary.preHeadline && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-primary text-[12px] sm:text-sm font-black uppercase tracking-[0.3em] mb-4 drop-shadow-sm flex items-center justify-center lg:justify-start gap-2"
+              >
+                <span className="w-8 h-[2px] bg-primary hidden sm:block" />
+                {dictionary.preHeadline}
+              </motion.div>
+            )}
 
             {/* Urgency Badge */}
             {dictionary.urgencyBadge && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/20 backdrop-blur-xl text-red-500 text-[11px] font-black uppercase tracking-[0.25em] mb-8 shadow-[0_0_40px_-10px_rgba(239,68,68,0.3)] relative group overflow-hidden"
+                transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1], delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-500/10 border border-red-500/20 backdrop-blur-xl text-red-500 text-[11px] font-black uppercase tracking-[0.25em] mb-8 shadow-[0_0_40px_-10px_rgba(239,68,68,0.2)] relative group overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-red-500/10 opacity-30 group-hover:opacity-100 transition-opacity duration-1000" />
                 <Zap className="w-3.5 h-3.5 fill-red-500 text-red-500 relative z-10 animate-pulse" />
                 <span className="relative z-10 drop-shadow-sm">{dictionary.urgencyBadge}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500" />
               </motion.div>
             )}
 
@@ -78,8 +89,8 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.05 }}
-                className="text-sm font-bold text-muted-foreground mb-3 tracking-wide"
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="text-sm font-bold text-muted-foreground/80 mb-3 tracking-wide"
               >
                 {dictionary.audienceTag}
               </motion.div>

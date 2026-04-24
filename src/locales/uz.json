@@ -147,21 +147,22 @@
         }
     },
     "hero": {
-        "title": "Sotuv bera olmaydigan brenddan charchadingizmi? **Sotuvingizni 30 kun ichida 2-3 baravarga oshiring**",
-        "description": "Raqobatchilar professional ko'rinish bilan mijozlaringizni o'ziniki qilib olyapti. Biznesingizni **ishonch va barqaror daromad manbaiga** aylantirish vaqti keldi.",
-        "cta": "Mening Bepul Strategik Planimni Qurish",
-        "ctaSecondary": "Real Natijalarni Ko\u02bcring",
-        "buttonHint": "\u2713 100% Risk-free  \u00b7  \u2713 15 daqiqalik professional tahlil  \u00b7  \u2713 Natija bo'lmasa \u2014 pulingiz qaytariladi",
-        "urgencyBadge": "\u26a1 Diqqat: Bu oy faqat 3 ta bepul strategik audit o'rni qoldi",
-        "audienceTag": "\ud83c\udfaf Faqat natija istaydigan biznes egalari uchun",
-        "guarantees": ["100% Natija Kafolati", "30 Kunda To'liq Tayyor", "Bozorda 150+ G'olib Brendlar"],
+        "preHeadline": "DIQQAT: O'ZBEKISTONDAGI BIZNES EGALARI VA TADBIRKORLAR UCHUN",
+        "title": "Sizning brendingiz mijozlarni jalb qilyaptimi yoki **pullaringizni havoga sovuryaptimi?**",
+        "description": "Raqobatchilar professional ko'rinish bilan bozorning qaymog'ini yeb bo'lishdi. Biznesingizni 'shunchaki nom' emas, balki **har kuni foyda keltiradigan 'Sotuv Mashinasi'ga** aylantirish vaqti keldi.",
+        "cta": "Mening 30 Kunlik O'sish Strategiyamni Olish",
+        "ctaSecondary": "Real Natijalar (Keyslar)",
+        "buttonHint": "✓ 100% Bepul  ·  ✓ 15 daqiqalik 'Surgical' Audit  ·  ✓ Natija bo'lmasa — 100% Refund Kafolati",
+        "urgencyBadge": "⚡ Shoshiling: Ushbu haftada faqat 2 ta bepul 'Godfather' strategik audit o'rni qoldi",
+        "audienceTag": "🎯 Faqat 12 oy ichida 3-5x o'sishni istaganlar uchun",
+        "guarantees": ["Mutloq Natija Kafolati", "30 Kunda Bozorda G'oliblik", "150+ Muvaffaqiyatli Keyslar"],
         "stats": [
-            { "value": "150+", "label": "loyiha o'sishga erishdi" },
+            { "value": "150+", "label": "loyiha bozorni egalladi" },
             { "value": "245%", "label": "o'rtacha ROI o'sishi" },
-            { "value": "100%", "label": "mas'uliyat" }
+            { "value": "100%", "label": "shaffoflik" }
         ],
-        "leadMagnetTitle": "Raqobatchilarni ortda qoldirish bo'yicha bepul 'Check-list'ni yuklang",
-        "leadMagnetCta": "Check-listni Hozir Yuklash"
+        "leadMagnetTitle": "Raqobatchilarni 'nokaut' qilish bo'yicha maxsus 'Secret Blueprint'ni yuklang",
+        "leadMagnetCta": "Blueprintni Hozir Yuklash"
     },
 
     "results": {
@@ -350,6 +351,29 @@
             }
         ]
     },
+    "guaranteeBlock": {
+        "title": "BIZNING 'SHAFQATSIZ' KAFOLATIMIZ",
+        "subtitle": "Siz tavakkal qilmaysiz — biz javob beramiz. Agar natija bo'lmasa, bizga to'lamaysiz.",
+        "items": [
+            {
+                "title": "Natija Kafolati",
+                "description": "Agar taklif qilingan konsepsiyalar brifingga mos kelmasa, biz loyihani ideal holatga kelguniga qadar BEPUL qayta ishlaymiz."
+            },
+            {
+                "title": "Huquqiy Himoya",
+                "description": "Biz taklif qilayotgan har bir neyming (nom) patent-toza ekanligiga 100% kafolat beramiz."
+            },
+            {
+                "title": "Muddat Kafolati",
+                "description": "Agar loyiha muddatidan bir kun kechiksa, biz har bir kun uchun kompensatsiya to'laymiz."
+            },
+            {
+                "title": "Mulk Huquqi",
+                "description": "Loyiha yakunlangach, barcha mualliflik huquqlari va original fayllar to'liqligicha sizning mulkingizga aylanadi."
+            }
+        ],
+        "badge": "100% ISHONCH"
+    },
     "servicesHero": {
         "title": "Brendingizni kuchaytiradigan xizmatlar",
         "subtitle": "Biznesingiz uchun kafolatlangan natija va aniq yechim",
@@ -426,25 +450,17 @@
         "ctaButton": "Brendimni bepul tahlil qilish"
     },
     "targetAudience": {
-        "title": "Ushbu muammolar tanishmi?",
-        "subtitle": "Agar quyidagi fikrlar sizni qiynasa, biz to'g'ri yechimmiz.",
+        "title": "Nega sizning biznesingiz bozorda 'ko'rinmas' bo'lib qolyapti?",
+        "subtitle": "Brending — bu shunchaki chiroyli rasm emas, bu sizning mijozlaringiz bilan bog'lanadigan yagona 'ko'prik'. Agar ko'prik chirigan bo'lsa, mijozlar o'tmaydi.",
         "problems": [
-            {
-                "text": "Biznesim bor, lekin brendim yo'q. Meni hech kim tanimaydi, raqobatchilarim bozorning qaymog'ini yeyapti."
-            },
-            {
-                "text": "Brendim eskirgan, raqobatchilardan orqadaman."
-            },
-            {
-                "text": "Mijozlar qiymatni tushunmaydi, faqat narx so'rashadi."
-            },
-            {
-                "text": "Sotuvlar bor, lekin beqaror. Mijozlar qaytmaydi."
-            }
+            { "text": "Mijozlar sizni tanlashmayapti, chunki brendingiz ishonch uyg'otmaydi." },
+            { "text": "Sizning mahsulotingiz yaxshi, lekin 'ko'rinishingiz' arzon va sifatsiz." },
+            { "text": "Raqobatchilaringiz sifatsiz bo'lsa ham, kuchli brend bilan bozorning 80% qismini egallab olishgan." },
+            { "text": "Marketingga pul sarflayapsiz, lekin brendingiz 'teshik chelak' kabi barcha lendlarni yo'qotyapti." }
         ],
-        "solutionTitle": "Xushxabar: barchasini hal qilsa bo'ladi!",
-        "solutionSubtitle": "To'g'ri brend-strategiya ushbu muammolarni bartaraf etadi va biznesingizni barqaror o'sish yo'liga olib chiqadi.",
-        "solutionButton": "Yechimlarni ko'rish"
+        "solutionTitle": "Keling, ushbu 'teshik chelak'ni butunlay yopamiz!",
+        "solutionSubtitle": "Men sizga shunchaki logo emas, balki raqobatchilaringizni 'o'yindan chiqaradigan' strategik qurol yasab beraman.",
+        "solutionButton": "Sotuv Mashinasini Qurishni Boshlash"
     },
     "beforeAfter": {
         "title": "Avval va Hozir",
@@ -464,127 +480,127 @@
         "subtitle": "Biz yaratgan brendlar o'z sohasida qanday ajralib turishini ko'ring."
     },
     "founder": {
-        "title": "Nega 90% bizneslar brendingda xato qilib, millionlab so'm yo'qotadi?",
-        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biznesingiz shunchaki rasm emas, balki **sotuv mashinasi** bo'lishi kerak. Bizning vazifamiz — dizaynni strategiya bilan bitta zanjirga bog'lab, sizning bozorda 'G'olib' bo'lishingizni ta'minlashdir. Men sizga shunchaki logotip emas, balki yillar davomida sizga pul keltiradigan tizim qurib beraman.",
+        "title": "Nega men 'oddiy dizayn'dan voz kechib, 'Sotuv Mashinalari' qurishga o'tdim?",
+        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Ko'p dizaynerlar sizga 'chiroyli rasm' beradi va pulingizni olib ketadi. Men esa biznesingizni **Surgical** aniqlik bilan tahlil qilaman. Bizning vazifamiz — dizaynni strategiya bilan bitta zanjirga bog'lab, sizni bozorda **'Mutloq Dominant'** qilishdir. Men sizga shunchaki logotip emas, balki raqobatchilaringizni uyaltiradigan va sizga millionlab foyda keltiradigan tizim qurib beraman. Bu mening shaxsiy va'dam.",
         "points": [
             {
                 "icon": "Medal",
-                "text": "50+ muvaffaqiyatli brendlar"
+                "text": "150+ Bozorni 'zabt etgan' loyihalar"
             },
             {
                 "icon": "Globe",
-                "text": "Xalqaro standartdagi portfolio"
+                "text": "Surgical Precision — Xalqaro tajriba"
             },
             {
                 "icon": "Zap",
-                "text": "Natijaga yo'naltirilgan aloqa"
+                "text": "Natijaga yo'naltirilgan 'Godfather' yondashuv"
             },
             {
                 "icon": "Users",
-                "text": "Shaxsan nazorat va kafolat"
+                "text": "Har bir so'mingiz uchun 100% javobgarlik"
             }
         ],
         "phoneButton": "Shaxsan bog'lanish",
         "telegramButton": "Telegramda yozish"
     },
     "process": {
-        "title": "Ishlash tartibimiz",
-        "subtitle": "Har bir loyihada sinovdan o'tgan, shaffof va samarali jarayonni qo'llaymiz.",
+        "title": "Sizning brendingizni 'G'olib'ga aylantirish yo'li",
+        "subtitle": "Biz shunchaki rasm chizmaymiz — biz bozorni 'zabt etadigan' tizim quramiz.",
         "phases": [
             {
                 "phase": "01",
-                "title": "Discovery (Tadqiqot)",
-                "description": "Sayohat boshlanishi va poydevor qo'yish.",
+                "title": "Anatomik Tadqiqot",
+                "description": "Bozordagi raqobatchilaringizning zaif nuqtalarini topish.",
                 "tasks": [
-                    "Brifing",
-                    "Muammolarni aniqlash",
-                    "Bozor tahlili",
-                    "G'oyalar to'plash"
+                    "Deep-Dive Brifing",
+                    "Raqobatni 'Rentgen' qilish",
+                    "Auditoriya psixologiyasi",
+                    "Imkoniyatlar xaritasi"
                 ]
             },
             {
                 "phase": "02",
-                "title": "Strategy (Strategiya)",
-                "description": "Brend yo'lini belgilash.",
+                "title": "Bozorni Egallash Strategiyasi",
+                "description": "Sizning 'Noyob G'alaba' nuqtangizni belgilash.",
                 "tasks": [
-                    "Maqsadlar",
-                    "Brend platformasi",
-                    "Pozitsiyalash",
-                    "Rejalashtirish"
+                    "Pozitsiyalash (USP)",
+                    "Brend Arxitekturasi",
+                    "Sotuv Voronkasi tahlili",
+                    "Kommunikatsiya Tili"
                 ]
             },
             {
                 "phase": "03",
-                "title": "Creative Design (Kreativ)",
-                "description": "Vizual qiyofani shakllantirish.",
+                "title": "Qurol Yasash (Dizayn)",
+                "description": "Bozorda 'Nokaut' qiladigan vizual tizim yaratish.",
                 "tasks": [
-                    "Neyming",
-                    "Logo",
-                    "Qadoq",
-                    "Brendbuk"
+                    "Sotuvchi Neyming",
+                    "Strategik Logotip",
+                    "Psixologik Ranglar",
+                    "Premium Aydentika"
                 ]
             },
             {
                 "phase": "04",
-                "title": "Presentation (Taqdimot)",
-                "description": "G'oyalarni namunalar orqali sinovdan o'tkazish.",
+                "title": "Jangovar Sinov (Taqdimot)",
+                "description": "G'oyalarni real bozor sharoitida tekshirish.",
                 "tasks": [
-                    "Dizayn namoyishi",
-                    "Tahrirlar",
-                    "Maketlar"
+                    "3D Maketlar",
+                    "Real Keyslarda sinash",
+                    "Tahrirlar va jilolash"
                 ]
             },
             {
                 "phase": "05",
-                "title": "Implementation (Tatbiq)",
-                "description": "Brendni hayotga qaytarish.",
+                "title": "Hujum (Tatbiq)",
+                "description": "Barcha qurollarni ishga tushirish.",
                 "tasks": [
-                    "Tayyor fayllar",
-                    "Brendbukni topshirish",
-                    "Qo'llanmalar"
+                    "Eksport Fayllar",
+                    "Brendbuk (Konstitutsiya)",
+                    "Foydalanish Masterclass"
                 ]
             },
             {
                 "phase": "06",
-                "title": "Growth (O'sish)",
-                "description": "Brendni doimiy qo'llab-quvvatlash.",
+                "title": "Dominatsiya (O'sish)",
+                "description": "Bozorda yetakchilikni saqlab qolish.",
                 "tasks": [
-                    "Tatbiq ko'rsatmalari",
-                    "Support",
-                    "Keyingi qadamlar"
+                    "3 oylik Support",
+                    "Kengayish rejasi",
+                    "Yangi marralar"
                 ]
             }
         ],
-        "ctaTitle": "Loyihani muhokama qilishga tayyormisiz?",
-        "ctaDesc": "G'oyalaringizni hayotga tatbiq etishni boshlaymiz.",
-        "ctaButton": "Loyihani muhokama qilish"
+        "ctaTitle": "Bozorni egallashga tayyormisiz?",
+        "ctaDesc": "Keling, bugun sizning 'G'alaba Strategiyangiz'ni tuzamiz.",
+        "ctaButton": "Sotuv Mashinasini Qurishni Boshlash"
     },
     "leadMagnet": {
-        "title": "Brendingizni yangi bosqichga olib chiqing",
-        "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Buni aniqlash uchun bepul resurslarimizdan foydalaning.",
+        "title": "Brendingizni 'Sotuv Mashinasi'ga aylantirish vaqti keldi",
+        "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Quyidagi maxsus resurslarimiz sizga bozorda qanday qilib 'G'olib' bo'lishni o'rgatadi.",
         "magnets": [
             {
                 "id": "pdf",
-                "title": "Bepul PDF-chek-list",
-                "subtitle": "7 ta eng katta xato",
-                "description": "Biznesingizda qanday xatolardan qochish kerakligini biling.",
-                "cta": "Ko'rish",
+                "title": "Secret Blueprint (PDF)",
+                "subtitle": "Raqobatchilarni 'Nokaut' qilish",
+                "description": "Bozordagi 90% bizneslar yo'l qo'yadigan va millionlab so'm zarar keltiradigan 7 ta shafqatsiz xato.",
+                "cta": "Blueprintni Yuklash",
                 "href": "/{lang}/checklist"
             },
             {
                 "id": "quiz",
-                "title": "Mini-test",
-                "subtitle": "Tayyorgarlik darajasi",
-                "description": "Biznesingiz brendingga tayyormi?",
-                "cta": "Boshlash",
+                "title": "Branding ROI Test",
+                "subtitle": "Sotuv Potensialini Aniqlash",
+                "description": "Sizning brendingiz hozirda necha foiz foydani 'stolda' qoldiryapti? 2 daqiqada hisoblab ko'ring.",
+                "cta": "Testni Boshlash",
                 "href": "/{lang}/quiz"
             },
             {
                 "id": "video",
-                "title": "Video-qo'llanma",
-                "subtitle": "Strategik brending",
-                "description": "Nega logo yetarli emas?",
-                "cta": "Ko'rish",
+                "title": "Video-Masterclass",
+                "subtitle": "Godfather Offer sirlari",
+                "description": "Nega logotip sizga pul keltirmaydi va nima uchun sizga 'Sotuv Tizimi' kerak?",
+                "cta": "Masterclassni Ko'rish",
                 "href": "#video"
             }
         ],
@@ -1114,28 +1130,28 @@
         ]
     },
     "opportunityCalculator": {
-        "title": "Sizning brendingiz 'Teshik Chelak' emasmi?",
-        "subtitle": "Nega ko'p reklama qilsangiz ham, pulingiz oqib ketyapti? Hisoblab ko'ring.",
+        "title": "Brendingiz 'Teshik Chelak' bo'lib, pulingizni havoga sovuryaptimi?",
+        "subtitle": "Nega reklama qilsangiz ham foyda kam? Har oy qancha pulni raqobatchilaringizga 'sovg'a' qilayotganingizni hisoblang.",
         "labels": {
-            "traffic": "Saytingizga kirgan odamlar soni",
-            "conversion": "Sizdan sotib olayotganlar ulushi (%)",
-            "aov": "O'rtacha bitta xarid narxi ($)"
+            "traffic": "Saytingizga kirayotgan potentsial mijozlar",
+            "conversion": "Hozirgi sotuv konversiyasi (%)",
+            "aov": "Bitta mijozdan keladigan o'rtacha foyda ($)"
         },
         "analogy": {
-            "title": "Nega bu sodir bo'lyapti?",
-            "bucket": "Chelak = Sizning Brendingiz",
-            "water": "Suv = Reklamadan kelgan mijozlar",
-            "leak": "Teshiklar = Yomon dizayn va ishonchsiz logo",
-            "description": "Siz qanchalik ko'p 'suv' quymang, agar brendingizda 'teshiklar' bo'lsa, foyda oqib ketaveradi. Biz ana shu teshiklarni yamaymiz."
+            "title": "Shafqatsiz haqiqat:",
+            "bucket": "Chelak = Sizning 'Eskirgan' Brendingiz",
+            "water": "Suv = Reklamaga tikkan millionlaringiz",
+            "leak": "Teshiklar = Ishonchsiz logo va arzon dizayn",
+            "description": "Siz qanchalik ko'p reklama quymang, agar brendingizda 'teshiklar' bo'lsa, foyda raqobatchilaringizga oqib ketaveradi. Biz ana shu teshiklarni 'Surgical' aniqlik bilan yamaymiz."
         },
         "results": {
-            "title": "Sizning imkoniyatingiz",
-            "potential": "Brendingdan keyingi oylik foyda",
-            "loss": "Har oy boy berayotgan pulingiz",
-            "lossNote": "Siz har oy shuncha pulni 'stolda' qoldiryapsiz.",
-            "roiNote": "Atigi 1-2% ko'proq ishonch daromadingizni 2-3 baravarga oshirishi mumkin."
+            "title": "Siz boy berayotgan imkoniyat:",
+            "potential": "Brendingdan keyingi oylik real foyda",
+            "loss": "Har oy 'stolda' qoldirayotgan pulingiz",
+            "lossNote": "Siz har oy shuncha pulni shunchaki boy beryapsiz!",
+            "roiNote": "Atigi 2% ishonch darajasi oshishi daromadingizni 3-4 baravarga ko'tarishi mumkin."
         },
-        "cta": "Bepul Strategik Audit Olish"
+        "cta": "Teshiklarni Yamashni Boshlash"
     },
     "exitIntentModal": {
         "title": "Ketmang!",
