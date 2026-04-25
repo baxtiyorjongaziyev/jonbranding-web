@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import Image, { type ImageProps } from 'next/image';
-import { useRef, useCallback, useState, useEffect } from 'react';
+import { useRef, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -13,20 +13,16 @@ interface ImageComparisonSliderProps {
   lang: string;
 }
 
+const translationMap: Record<string, { before: string; after: string }> = {
+  uz: { before: "AVVAL", after: "HOZIR" },
+  ru: { before: "ДО", after: "ПОСЛЕ" },
+  zh: { before: "之前", after: "之后" },
+};
+
 const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: ImageComparisonSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0.5); // Represents position from 0 to 1
-  const [translations, setTranslations] = useState<{ before: string, after: string } | null>(null);
-
-  useEffect(() => {
-    if (lang === 'uz') {
-      setTranslations({ before: "AVVAL", after: "HOZIR" });
-    } else if (lang === 'ru') {
-      setTranslations({ before: "ДО", after: "ПОСЛЕ" });
-    } else {
-      setTranslations({ before: "BEFORE", after: "AFTER" });
-    }
-  }, [lang]);
+  const x = useMotionValue(0.5);
+  const translations = translationMap[lang] || { before: "BEFORE", after: "AFTER" };
 
   const handlePan = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
       if (!containerRef.current) return;
@@ -37,10 +33,6 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
   
   const clipPath = useTransform(x, val => `inset(0 ${100 - (val * 100)}% 0 0)`);
   const handleX = useTransform(x, val => `${val * 100}%`);
-
-  if (!translations) {
-    return <div className={cn("relative w-full aspect-[4/3] bg-muted animate-pulse rounded-xl", className)}></div>
-  }
 
   return (
     <motion.div 
