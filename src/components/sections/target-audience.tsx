@@ -30,7 +30,7 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
   const problems = translations.problems || [];
 
   return (
-    <section id="target-audience" className="snap-section py-0 bg-secondary">
+    <section id="target-audience" className="py-20 sm:py-28 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">{translations.title}</h2>
