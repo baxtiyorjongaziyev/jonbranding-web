@@ -70,12 +70,12 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
     fetchComparisons();
   }, []);
 
-  const displayItems = items.length > 0 ? items : (loading ? [] : DEFAULT_COMPARISONS);
+  const displayItems = items.length > 0 ? items : DEFAULT_COMPARISONS;
 
   if (!translations) return null;
   
   return (
-    <section className="snap-section py-24 bg-white overflow-hidden relative">
+    <section className="py-24 bg-white overflow-hidden relative">
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] -z-10" />
       
       <div className="container mx-auto px-4">
@@ -89,37 +89,22 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {loading ? (
-            Array(3).fill(0).map((_, i) => (
-              <div key={i} className="h-[400px] rounded-[2.5rem] bg-secondary/20 animate-pulse" />
-            ))
-          ) : displayItems.length > 0 ? (
-            displayItems.map((item, index) => {
-              const beforeSrc = typeof item.oldImg === 'string' ? item.oldImg : urlFor(item.oldImg).url();
-              const afterSrc = typeof item.newImg === 'string' ? item.newImg : urlFor(item.newImg).url();
-              
-              return (
-                <div 
-                  key={index} 
-                  className="liquid-glass liquid-glass-hover rounded-[2.5rem] overflow-hidden"
-                >
-                  <ImageComparisonSlider 
-                    beforeImage={{
-                      src: beforeSrc, 
-                      alt: `${item.brand} old`, 
-                      'data-ai-hint': item.oldHint
-                    }}
-                    afterImage={{
-                      src: afterSrc, 
-                      alt: `${item.brand} new`, 
-                      'data-ai-hint': item.newHint
-                    }}
-                    lang={lang}
-                  />
-                </div>
-              );
-            })
-          ) : null}
+          {displayItems.map((item, index) => {
+            const beforeSrc = typeof item.oldImg === 'string' ? item.oldImg : urlFor(item.oldImg).url();
+            const afterSrc = typeof item.newImg === 'string' ? item.newImg : urlFor(item.newImg).url();
+            return (
+              <div
+                key={index}
+                className="liquid-glass liquid-glass-hover rounded-[2.5rem] overflow-hidden"
+              >
+                <ImageComparisonSlider
+                  beforeImage={{ src: beforeSrc, alt: `${item.brand} old`, 'data-ai-hint': item.oldHint }}
+                  afterImage={{ src: afterSrc, alt: `${item.brand} new`, 'data-ai-hint': item.newHint }}
+                  lang={lang}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

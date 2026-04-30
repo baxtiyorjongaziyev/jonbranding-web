@@ -136,7 +136,17 @@ ${packageSummary ? `--- \n📦 Paket: ${packageSummary} \n💰 Narx: ${totalPric
                     _embedded: {
                         contacts: [
                             {
-                                first_name: fullName
+                                first_name: fullName,
+                                custom_fields_values: [
+                                    ...(phone ? [{
+                                        field_code: 'PHONE',
+                                        values: [{ value: phone, enum_code: 'WORK' }]
+                                    }] : []),
+                                    ...(telegram ? [{
+                                        field_code: 'IM',
+                                        values: [{ value: telegram.replace('@', ''), enum_code: 'TELEGRAM' }]
+                                    }] : []),
+                                ]
                             }
                         ]
                     }

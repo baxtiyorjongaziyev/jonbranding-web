@@ -50,7 +50,7 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
   };
 
   return (
-    <section className="snap-section py-24 bg-white overflow-hidden relative">
+    <section className="py-24 bg-white overflow-hidden relative">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-blue/10 rounded-full blur-[100px] -z-10 -translate-x-1/2 translate-y-1/2" />
 

@@ -127,7 +127,7 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
     }
 
   return (
-    <section className="snap-section py-0 bg-secondary/30 overflow-hidden">
+    <section className="py-20 sm:py-28 bg-secondary/30 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-4xl sm:text-5xl font-black text-dark-blue tracking-tighter">{translations.title}</h2>
