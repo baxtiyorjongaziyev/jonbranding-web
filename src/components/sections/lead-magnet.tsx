@@ -39,7 +39,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
 
   return (
     <>
-    <section id="lead-magnet" className="snap-section py-0 bg-white">
+    <section id="lead-magnet" className="py-20 sm:py-28 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold">

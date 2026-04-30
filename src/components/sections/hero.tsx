@@ -138,9 +138,9 @@ const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline 
                   className="w-full sm:w-auto text-base px-8 py-4 shadow-xl rounded-xl relative group overflow-hidden bg-primary hover:bg-primary/95 transition-all duration-300 hover:scale-105 active:scale-95 btn-premium"
                   aria-label={dictionary.cta}
                 >
-                  <span className="relative z-10 flex items-center font-black text-base uppercase tracking-tight">
-                    {dictionary.cta}
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  <span className="relative z-10 flex flex-wrap justify-center items-center gap-x-2 font-black text-sm sm:text-base uppercase tracking-tight leading-tight">
+                    <span>{dictionary.cta}</span>
+                    <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </span>
                   <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 </Button>
