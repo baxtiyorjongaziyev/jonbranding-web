@@ -1,9 +1,32 @@
-# Settings to manage and configure a Firebase App Hosting backend.
-# https://firebase.google.com/docs/app-hosting/configure
-run:
-  command: npm start
-  env:
-    - name: PORT
-      value: "8080"
-build:
-  runtime: nodejs20
+# Firebase App Hosting configuration for Jon Branding.
+# Sensitive values are stored in Google Cloud Secret Manager and referenced here.
+runConfig:
+  minInstances: 0
+  maxInstances: 20
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+env:
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: jonbranding-85662071-ea38e
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: TELEGRAM_BOT_TOKEN
+    secret: TELEGRAM_BOT_TOKEN
+  - variable: TELEGRAM_CHAT_ID
+    secret: TELEGRAM_CHAT_ID
+  - variable: TELEGRAM_MESSAGE_THREAD_ID
+    secret: TELEGRAM_MESSAGE_THREAD_ID
+
+  - variable: AMOCRM_DOMAIN
+    secret: AMOCRM_DOMAIN
+  - variable: AMOCRM_SUBDOMAIN
+    secret: AMOCRM_SUBDOMAIN
+  - variable: AMOCRM_ACCESS_TOKEN
+    secret: AMOCRM_ACCESS_TOKEN
+
+  - variable: N8N_WEBHOOK_URL
+    secret: N8N_WEBHOOK_URL
