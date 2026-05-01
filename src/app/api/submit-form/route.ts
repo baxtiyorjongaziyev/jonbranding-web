@@ -68,7 +68,13 @@ async function sendGAConversionEvent(data: any) {
 }
 
 async function sendToN8n(data: any) {
-    const n8nWebhookUrl = 'https://n8n-automation-agent-982617914297.us-central1.run.app/webhook/lead-capture';
+    const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
+
+    if (!n8nWebhookUrl) {
+        console.warn('n8n integration skipped: N8N_WEBHOOK_URL is missing');
+        return;
+    }
+
     try {
         await fetch(n8nWebhookUrl, {
             method: 'POST',
