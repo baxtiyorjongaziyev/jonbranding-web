@@ -69,7 +69,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Nodirbek",
     company: "Barakah Restoran asoschisi",
     avatar: "N",
-    image: "https://placehold.co/400x400/0057ff/ffffff?text=Barakah+Nodirbek",
+    image: "",
     imageHint: "restaurant manager portrait",
     quote: "Esingizda bo'lsa, 3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Sizlarga katta rahmat, ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka! 🤝🏻😊"
   },
@@ -77,7 +77,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Javohir Haqberdiyev",
     company: "Perfona asoschisi",
     avatar: "JH",
-    image: "https://placehold.co/400x400/0057ff/ffffff?text=Perfona+Javohir",
+    image: "",
     imageHint: "tech startup founder",
     quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!"
   },
@@ -114,7 +114,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Нодирбек",
     company: "Основатель ресторана Barakah",
     avatar: "Н",
-    image: "https://placehold.co/400x400/0057ff/ffffff?text=Barakah+Nodirbek",
+    image: "",
     imageHint: "restaurant manager portrait",
     quote: "Если помните, 3 года назад вы разработали логотип для этого бренда. Огромное вам спасибо, получилось великолепно, действительно все хвалят. Большое спасибо, Бахтиёр ака! 🤝🏻😊"
   },
@@ -122,7 +122,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Джавохир Хакбердиев",
     company: "Основатель Perfona",
     avatar: "ДХ",
-    image: "https://placehold.co/400x400/0057ff/ffffff?text=Perfona+Javohir",
+    image: "",
     imageHint: "tech startup founder",
     quote: "Получилось даже лучше, чем я ожидал. Сейчас смотрю на логотип и сам наслаждаюсь. Что мне понравилось — это доверие. И то, что сдали раньше срока, было здорово. Отлично, что быстро поделились результатами. Большое спасибо, ака!"
   },
@@ -159,7 +159,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Nodirbek",
     company: "Founder of Barakah Restaurant",
     avatar: "N",
-    image: "https://placehold.co/400x400/0057ff/ffffff?text=Barakah+Nodirbek",
+    image: "",
     imageHint: "restaurant manager portrait",
     quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! 🤝🏻😊"
   },
@@ -167,7 +167,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Javohir Haqberdiyev",
     company: "Founder of Perfona",
     avatar: "JH",
-    image: "https://placehold.co/400x400/0057ff/ffffff?text=Perfona+Javohir",
+    image: "",
     imageHint: "tech startup founder",
     quote: "It turned out even better than I expected. I'm looking at the logo now and I'm enjoying it myself. What I liked was the trust. And the fact that it was delivered ahead of schedule was great. It's great that you shared the results quickly. Thanks a lot, aka!"
   },
