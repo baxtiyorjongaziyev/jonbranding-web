@@ -2,9 +2,7 @@
 import { trackEvent as trackAmplitudeEvent } from './amplitude';
 
 // Tracking IDs
-const GA_TRACKING_ID = "G-B3ZSKB40XY";
-const ADS_CONVERSION_ID = "AW-17674872079";
-const FB_PIXEL_ID = "1134785364752294";
+const ADS_CONVERSION_ID = process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "AW-17674872079";
 
 // Types for analytics
 export type AnalyticsEvent = {
@@ -61,7 +59,6 @@ export const trackEvent = ({ action, category, label, value, ...rest }: Analytic
     console.warn('[Unified Analytics] Amplitude Error:', e);
   }
   
-  console.log(`[Unified Analytics] Event: ${action}`, { category, label, value, ...rest });
 };
 
 /**
@@ -81,15 +78,8 @@ export const trackLead = (data: { source: string; value?: number; [key: string]:
       ...extraData
     });
 
-    // 2. Facebook Pixel (Meta Standard Lead Event)
-    if (typeof window.fbq === 'function') {
-      window.fbq('track', 'Lead', {
-        content_name: source,
-        value: value,
-        currency: 'UZS',
-        ...extraData
-      });
-    }
+    // 2. Facebook Pixel — Lead event is sent via server-side CAPI in /api/submit-form
+    // to avoid duplicate counting. Client-side only fires PageView (see layout.tsx).
 
     // 3. Google Ads Conversion
     if (typeof window.gtag === 'function') {
@@ -111,7 +101,6 @@ export const trackLead = (data: { source: string; value?: number; [key: string]:
     console.error('[Unified Analytics] Lead Tracking failed but form submission should continue:', e);
   }
   
-  console.log(`[Unified Analytics] LEAD tracked from: ${source}`, extraData);
 };
 
 /**

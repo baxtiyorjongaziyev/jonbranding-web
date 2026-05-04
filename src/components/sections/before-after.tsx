@@ -90,9 +90,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayItems.map((item, index) => {
-            if (!item.oldImg || !item.newImg) return null;
-            const beforeSrc = typeof item.oldImg === 'string' ? item.oldImg : urlFor(item.oldImg).url();
-            const afterSrc = typeof item.newImg === 'string' ? item.newImg : urlFor(item.newImg).url();
+            const beforeSrc = typeof item.oldImg === 'string' ? item.oldImg : (item.oldImg ? urlFor(item.oldImg).url() : '');
+            const afterSrc = typeof item.newImg === 'string' ? item.newImg : (item.newImg ? urlFor(item.newImg).url() : '');
             return (
               <div
                 key={index}

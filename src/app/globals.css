@@ -438,3 +438,13 @@ section:first-of-type {
   width: max-content;
 }
 
+
+/* ── Hero LCP — CSS-driven fade, no JS required ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
