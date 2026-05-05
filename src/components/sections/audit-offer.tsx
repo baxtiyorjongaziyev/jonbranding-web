@@ -1,59 +1,86 @@
 'use client';
 
 import type { FC } from 'react';
-import { ArrowRight, CheckCircle2, Clock, FileSearch, Route, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BadgeCheck, CheckCircle2, FileSearch, Layers3, Route, ShieldCheck, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
+import { BrandCard, BrandSection } from '@/components/ui/design-system';
 
 const copy = {
   uz: {
-    eyebrow: 'Bepul audit ichida',
-    title: '15 daqiqada brendingizdagi 3 ta eng qimmat xatoni topamiz.',
+    eyebrow: 'Bepul Brand Audit ichida',
+    title: "Biznesingiz nega ishonch yo'qotayotganini ko'rasiz.",
     description:
-      'Bu shunchaki “konsultatsiya” emas. Siz biznesingiz nega ishonch, narx yoki tanilishda yutqazayotganini aniqroq ko‘rasiz.',
-    cta: 'Auditga yozilish',
+      "Bu oddiy maslahat emas. Jon.Branding sizning nom, logo, qadoq, sayt va kommunikatsiyangizni mijoz ko'zi bilan tekshiradi va birinchi tuzatish kerak bo'lgan joylarni aniq beradi.",
+    cta: 'Bepul auditga yozilish',
+    promise: "Agar auditdan keyin foyda ko'rmasangiz, davom ettirish majburiyati yo'q.",
     items: [
-      { title: '3 ta xato', desc: 'Logo, nom, qadoq yoki sayt mijoz ishonchiga qayerda zarar berayotganini aytamiz.', icon: FileSearch },
-      { title: '3 ta imkoniyat', desc: 'Qaysi joyni tuzatsangiz, brendingiz tezroq professional ko‘rinishini ko‘rsatamiz.', icon: CheckCircle2 },
-      { title: '1 ta yo‘l xarita', desc: 'Sizga hozir logo, naming, brandbook yoki to‘liq branding kerakligini ajratamiz.', icon: Route },
-      { title: 'Risk yo‘q', desc: 'Majburiyat yo‘q. Agar foyda ko‘rmasangiz, davom ettirmaysiz.', icon: ShieldCheck },
+      {
+        title: "5 ta ishonch yo'qotadigan nuqta",
+        desc: "Mijoz sizga qaraganda nimadan shubhalanishi, qaysi detal arzon yoki noaniq ko'rinishini aytamiz.",
+        icon: FileSearch,
+      },
+      {
+        title: "Raqobatchi ko'zgusi",
+        desc: "Siz bozorda kuchliroq, qimmatroq yoki ishonchliroq ko'rinishingiz uchun farq nuqtalarini topamiz.",
+        icon: Target,
+      },
+      {
+        title: "Qaysi xizmat kerak, qaysisi shart emas",
+        desc: "Logo, naming, brandbook, qadoq yoki strategy orasidan hozir eng katta ta'sir beradigan yo'lni ajratamiz.",
+        icon: Layers3,
+      },
+      {
+        title: 'Keyingi qadam xaritasi',
+        desc: "Auditdan keyin brendingizni tartibga keltirish uchun oddiy, tushunarli ustuvorliklar olasiz.",
+        icon: Route,
+      },
     ],
+    proof: ['Majburiyatsiz', 'Sotuv bosimisiz', 'Tadbirkor tilida tushuntiramiz'],
   },
   ru: {
-    eyebrow: 'Что внутри аудита',
-    title: 'За 15 минут найдем 3 самые дорогие ошибки вашего бренда.',
-    description: 'Это не просто консультация. Вы увидите, где бренд теряет доверие, цену и узнаваемость.',
-    cta: 'Записаться на аудит',
+    eyebrow: 'Inside the free audit',
+    title: 'See where your brand loses trust.',
+    description:
+      'We review your name, logo, packaging, website, and message through the eyes of a buyer and show what should be fixed first.',
+    cta: 'Book the free audit',
+    promise: 'No obligation if the audit is not useful.',
     items: [
-      { title: '3 ошибки', desc: 'Покажем, где логотип, имя, упаковка или сайт мешают доверию.', icon: FileSearch },
-      { title: '3 возможности', desc: 'Покажем, что исправить первым, чтобы бренд выглядел профессиональнее.', icon: CheckCircle2 },
-      { title: '1 карта действий', desc: 'Определим, что нужно сейчас: логотип, нейминг, брендбук или полный брендинг.', icon: Route },
-      { title: 'Без риска', desc: 'Без обязательств. Если не видите ценности, не продолжаете.', icon: ShieldCheck },
+      { title: '5 trust gaps', desc: 'Where the brand looks cheap, unclear, or unreliable.', icon: FileSearch },
+      { title: 'Competitor mirror', desc: 'How to look stronger and more valuable in your category.', icon: Target },
+      { title: 'What you need now', desc: 'Logo, naming, brandbook, packaging, or strategy - ranked by impact.', icon: Layers3 },
+      { title: 'Next-step roadmap', desc: 'Simple priorities for improving the brand.', icon: Route },
     ],
+    proof: ['No obligation', 'No pressure', 'Plain language'],
   },
   en: {
     eyebrow: 'Inside the free audit',
-    title: 'In 15 minutes, we find the 3 most expensive brand mistakes.',
-    description: 'Not a generic call. You see where trust, pricing, and recognition are leaking.',
-    cta: 'Book the audit',
+    title: 'See where your brand loses trust.',
+    description:
+      'We review your name, logo, packaging, website, and message through the eyes of a buyer and show what should be fixed first.',
+    cta: 'Book the free audit',
+    promise: 'No obligation if the audit is not useful.',
     items: [
-      { title: '3 issues', desc: 'We show where logo, name, packaging, or site hurts trust.', icon: FileSearch },
-      { title: '3 opportunities', desc: 'We show what to fix first for a more professional brand.', icon: CheckCircle2 },
-      { title: '1 roadmap', desc: 'We clarify whether you need logo, naming, brandbook, or full branding.', icon: Route },
-      { title: 'No risk', desc: 'No obligation. If there is no value, you do not continue.', icon: ShieldCheck },
+      { title: '5 trust gaps', desc: 'Where the brand looks cheap, unclear, or unreliable.', icon: FileSearch },
+      { title: 'Competitor mirror', desc: 'How to look stronger and more valuable in your category.', icon: Target },
+      { title: 'What you need now', desc: 'Logo, naming, brandbook, packaging, or strategy - ranked by impact.', icon: Layers3 },
+      { title: 'Next-step roadmap', desc: 'Simple priorities for improving the brand.', icon: Route },
     ],
+    proof: ['No obligation', 'No pressure', 'Plain language'],
   },
   zh: {
-    eyebrow: '免费审计包含',
-    title: '15 分钟找出品牌中最昂贵的 3 个问题。',
-    description: '不是普通咨询，而是明确看到信任、价格和识别度在哪里流失。',
-    cta: '预约审计',
+    eyebrow: 'Inside the free audit',
+    title: 'See where your brand loses trust.',
+    description:
+      'We review your name, logo, packaging, website, and message through the eyes of a buyer and show what should be fixed first.',
+    cta: 'Book the free audit',
+    promise: 'No obligation if the audit is not useful.',
     items: [
-      { title: '3 个问题', desc: '指出 Logo、名称、包装或网站哪里影响信任。', icon: FileSearch },
-      { title: '3 个机会', desc: '说明首先修复哪里能让品牌更专业。', icon: CheckCircle2 },
-      { title: '1 个路线图', desc: '明确现在需要 Logo、命名、品牌手册还是完整品牌。', icon: Route },
-      { title: '无风险', desc: '没有义务。如果没有价值，可以不继续。', icon: ShieldCheck },
+      { title: '5 trust gaps', desc: 'Where the brand looks cheap, unclear, or unreliable.', icon: FileSearch },
+      { title: 'Competitor mirror', desc: 'How to look stronger and more valuable in your category.', icon: Target },
+      { title: 'What you need now', desc: 'Logo, naming, brandbook, packaging, or strategy - ranked by impact.', icon: Layers3 },
+      { title: 'Next-step roadmap', desc: 'Simple priorities for improving the brand.', icon: Route },
     ],
+    proof: ['No obligation', 'No pressure', 'Plain language'],
   },
 };
 
@@ -61,27 +88,50 @@ const AuditOffer: FC<{ lang: string; onCtaClick: () => void }> = ({ lang, onCtaC
   const t = copy[(lang as keyof typeof copy) || 'uz'] || copy.uz;
 
   return (
-    <BrandSection tone="dark" className="min-h-0">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(58,225,255,0.2),transparent_34rem)]" />
+    <BrandSection id="audit-offer" tone="light" className="min-h-0 bg-[#f7f4ee] py-20 sm:py-28">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(37,99,235,0.1),transparent_32rem),radial-gradient(circle_at_90%_10%,rgba(58,225,255,0.1),transparent_30rem)]" />
       <div className="container relative z-10 mx-auto px-4">
-        <SectionIntro eyebrow={t.eyebrow} title={t.title} description={t.description} className="[&_h2]:text-white [&_p]:text-white/72" />
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {t.items.map((item) => (
-            <BrandCard key={item.title} className="border-white/10 bg-white/8 p-6 text-white">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-brand-cyan ring-1 ring-white/10">
-                <item.icon className="h-6 w-6" />
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+          <div>
+            <div className="mb-5 inline-flex rounded-full border border-brand-line bg-white/80 px-4 py-2 text-[11px] font-black uppercase tracking-[0.24em] text-brand-blue shadow-sm">
+              {t.eyebrow}
+            </div>
+            <h2 className="text-balance text-4xl font-black tracking-[-0.055em] text-brand-ink sm:text-6xl">
+              {t.title}
+            </h2>
+            <p className="mt-6 text-pretty text-lg leading-8 text-brand-slate">{t.description}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button onClick={onCtaClick} size="lg" className="h-14 rounded-2xl bg-brand-ink px-7 text-base font-black text-white hover:bg-brand-blue">
+                {t.cta}
+                <ArrowRight className="h-5 w-5" />
+              </Button>
+              <div className="flex items-center gap-2 rounded-2xl border border-brand-line bg-white/70 px-4 py-3 text-sm font-bold text-brand-slate">
+                <ShieldCheck className="h-5 w-5 text-brand-blue" />
+                {t.promise}
               </div>
-              <h3 className="text-xl font-black tracking-[-0.03em] text-white">{item.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-white/68">{item.desc}</p>
-            </BrandCard>
-          ))}
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {t.items.map((item) => (
+              <BrandCard key={item.title} className="group p-6 transition-transform duration-300 hover:-translate-y-1">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue ring-1 ring-brand-blue/15">
+                  <item.icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-black tracking-[-0.03em] text-brand-ink">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-brand-slate">{item.desc}</p>
+              </BrandCard>
+            ))}
+          </div>
         </div>
-        <div className="mt-10 flex justify-center">
-          <Button onClick={onCtaClick} size="lg" className="rounded-2xl bg-white text-brand-ink hover:bg-brand-lime">
-            <Clock className="h-5 w-5" />
-            {t.cta}
-            <ArrowRight className="h-5 w-5" />
-          </Button>
+
+        <div className="mx-auto mt-8 flex max-w-6xl flex-wrap justify-center gap-3 lg:justify-end">
+          {t.proof.map((proof) => (
+            <div key={proof} className="inline-flex items-center gap-2 rounded-full border border-brand-line bg-white/75 px-4 py-2 text-sm font-black text-brand-ink">
+              <CheckCircle2 className="h-4 w-4 text-brand-blue" />
+              {proof}
+            </div>
+          ))}
         </div>
       </div>
     </BrandSection>

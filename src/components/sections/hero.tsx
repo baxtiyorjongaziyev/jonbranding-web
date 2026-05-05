@@ -3,7 +3,7 @@
 import type { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowRight, BadgeCheck, CheckCircle2, FileSearch, ShieldCheck, Sparkles, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { projects } from '@/lib/static-data';
@@ -22,86 +22,127 @@ interface HeroProps {
   renderHeadline: (headline: string, className?: string) => React.ReactNode;
 }
 
-function localizedPath(lang: string, path: string) {
-  return lang === 'uz' ? path : `/${lang}${path}`;
-}
+const heroCopyByLang = {
+  uz: {
+    preHeadline: 'Bepul Brand Audit',
+    title: "Brendingiz **arzon ko'rinmasin**.",
+    description:
+      "Nom, logo, qadoq, sayt va kommunikatsiyangiz mijozda ishonch uyg'otyaptimi yoki sotuvni sekinlashtiryaptimi - aniq ko'rsatib beramiz.",
+    cta: 'Bepul Brand Audit olish',
+    ctaSecondary: "Auditda nima olaman?",
+    proofItems: ["5 ta ishonch yo'qotadigan nuqta", "Raqobatchiga nisbatan ko'rinish", "Qaysi xizmat hozir kerakligini bilasiz"],
+    reportTitle: 'Brand Audit Snapshot',
+    reportSubtitle: "Mijoz ko'zidagi ishonch diagnostikasi",
+    scoreLabel: 'Ishonch signali',
+    score: '68%',
+    issues: [
+      'Premiumlik signali sust',
+      'Vaada bir qarashda tushunarsiz',
+      "Farq qiladigan sabab ko'rinmaydi",
+    ],
+  },
+  ru: {
+    preHeadline: 'Free Brand Audit',
+    title: 'Your brand should not look cheap.',
+    description: 'We show where your name, logo, packaging, website, and message lose trust or slow down the buying decision.',
+    cta: 'Get the free brand audit',
+    ctaSecondary: 'What is inside?',
+    proofItems: ['5 trust gaps', 'Competitor view', 'Clear next step'],
+    reportTitle: 'Brand Audit Snapshot',
+    reportSubtitle: 'Trust diagnosis',
+    scoreLabel: 'Trust signal',
+    score: '68%',
+    issues: ['Premium signal is weak', 'Promise is unclear', 'Differentiation is not visible'],
+  },
+  en: {
+    preHeadline: 'Free Brand Audit',
+    title: 'Your brand should not look cheap.',
+    description: 'We show where your name, logo, packaging, website, and message lose trust or slow down the buying decision.',
+    cta: 'Get the free brand audit',
+    ctaSecondary: 'What is inside?',
+    proofItems: ['5 trust gaps', 'Competitor view', 'Clear next step'],
+    reportTitle: 'Brand Audit Snapshot',
+    reportSubtitle: 'Trust diagnosis',
+    scoreLabel: 'Trust signal',
+    score: '68%',
+    issues: ['Premium signal is weak', 'Promise is unclear', 'Differentiation is not visible'],
+  },
+  zh: {
+    preHeadline: 'Free Brand Audit',
+    title: 'Your brand should not look cheap.',
+    description: 'We show where your name, logo, packaging, website, and message lose trust or slow down the buying decision.',
+    cta: 'Get the free brand audit',
+    ctaSecondary: 'What is inside?',
+    proofItems: ['5 trust gaps', 'Competitor view', 'Clear next step'],
+    reportTitle: 'Brand Audit Snapshot',
+    reportSubtitle: 'Trust diagnosis',
+    scoreLabel: 'Trust signal',
+    score: '68%',
+    issues: ['Premium signal is weak', 'Promise is unclear', 'Differentiation is not visible'],
+  },
+};
+
+const diagnosticBadges = [
+  { label: 'Diagnostika', icon: FileSearch },
+  { label: 'Aniq ustuvorlik', icon: BadgeCheck },
+  { label: 'Majburiyatsiz', icon: ShieldCheck },
+];
 
 const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }) => {
   if (!dictionary) return null;
 
-  const heroCopy =
-    lang === 'uz'
-      ? {
-          preHeadline: "O'zbekiston bizneslari uchun branding agentligi",
-          title: "Biznesingiz **ishonchli ko'rinib**, qimmatroq sotilsin.",
-          description:
-            "Jon.Branding nom, logo, qadoq, brand strategy va brandbook orqali biznesingizni mijoz ko'zida aniq, esda qolarli va professional qiladi.",
-          cta: 'Bepul brand audit olish',
-          ctaSecondary: "Ishlarni ko'rish",
-          proofItems: ['15 daqiqada 3 ta aniq xato', 'Qaysi xizmat kerakligini aytamiz', 'Bosimsiz, majburiyatsiz suhbat'],
-          visualProofTitle: 'Audit natijasi',
-          visualProofText:
-            "Logo, nom, qadoq va kommunikatsiyadagi ishonchni pasaytirayotgan nuqtalarni aniq ko'rsatamiz.",
-        }
-      : dictionary;
-
-  const proofItems: string[] = heroCopy.proofItems || [
-    'Auditda 3 ta aniq muammo',
-    'Qaysi xizmat kerakligini aytamiz',
-    'Sotuvsiz bosim yoq',
-  ];
+  const heroCopy = heroCopyByLang[(lang as keyof typeof heroCopyByLang) || 'uz'] || heroCopyByLang.uz;
 
   return (
-    <section className="relative isolate max-w-[100vw] overflow-hidden bg-[#f6f1e8] pt-24 sm:pt-28 lg:pt-32">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(37,99,235,0.13),transparent_28rem),radial-gradient(circle_at_88%_12%,rgba(14,165,233,0.12),transparent_24rem),linear-gradient(180deg,#fbf7ef_0%,#eef5ff_100%)]" />
-      <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-white/90 to-transparent" />
+    <section className="relative isolate max-w-[100vw] overflow-hidden bg-[#080b14] pt-20 text-white sm:pt-24 lg:pt-28">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(37,99,235,0.35),transparent_30rem),radial-gradient(circle_at_86%_12%,rgba(58,225,255,0.18),transparent_28rem),linear-gradient(135deg,#070a13_0%,#0b1020_45%,#111827_100%)]" />
+      <div className="absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-white/10 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 -z-10 h-44 bg-gradient-to-t from-[#f7f4ee] to-transparent" />
 
-      <div className="container mx-auto max-w-[1320px] overflow-hidden px-4 sm:px-6 lg:px-8">
-        <div className="grid min-h-[calc(100svh-7rem)] items-center gap-10 py-12 lg:grid-cols-[0.94fr_1.06fr] lg:gap-14 lg:py-16">
+      <div className="container mx-auto max-w-[1360px] overflow-hidden px-4 sm:px-6 lg:px-8">
+        <div className="grid min-h-[calc(100svh-6rem)] items-center gap-10 py-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14 lg:py-14">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto w-full max-w-[300px] text-center sm:max-w-3xl lg:mx-0 lg:w-full lg:text-left"
+            className="mx-auto w-full max-w-[280px] text-center sm:max-w-3xl lg:mx-0 lg:w-full lg:text-left"
           >
-            <div className="mb-5 inline-flex w-full max-w-[300px] items-center justify-center gap-2 rounded-full border border-slate-900/10 bg-white/70 px-4 py-2 text-center text-[8px] font-black uppercase tracking-[0.04em] text-slate-700 shadow-sm backdrop-blur sm:w-auto sm:max-w-full sm:text-[11px] sm:tracking-[0.22em]">
-              <Sparkles className="h-4 w-4 text-blue-600" />
-              <span className="min-w-0 text-balance">{heroCopy.preHeadline || 'Brendingni tushunarli qilamiz'}</span>
+            <div className="mb-5 inline-flex w-full max-w-[280px] items-center justify-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2.5 text-center text-[10px] font-black uppercase tracking-[0.12em] text-blue-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur sm:w-auto sm:max-w-full sm:text-[11px] sm:tracking-[0.24em]">
+              <Sparkles className="h-4 w-4 text-brand-cyan" />
+              <span className="min-w-0 text-balance">{heroCopy.preHeadline}</span>
             </div>
 
-            <h1 className="mx-auto max-w-[300px] text-balance text-[34px] font-black leading-[0.94] tracking-[-0.045em] text-slate-950 sm:max-w-none sm:text-[64px] sm:tracking-[-0.07em] lg:mx-0 lg:text-[78px] xl:text-[88px]">
-              {renderHeadline(heroCopy.title || '', 'text-slate-950')}
+            <h1 className="mx-auto max-w-[280px] text-balance text-[35px] font-black leading-[0.94] tracking-[-0.05em] text-white sm:max-w-none sm:text-[72px] sm:tracking-[-0.075em] lg:mx-0 lg:text-[88px] xl:text-[104px]">
+              {renderHeadline(heroCopy.title, 'text-white')}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[300px] text-pretty text-base leading-8 text-slate-600 sm:max-w-2xl sm:text-xl lg:mx-0">
+            <p className="mx-auto mt-6 max-w-[280px] text-pretty text-base leading-8 text-slate-300 sm:max-w-2xl sm:text-xl lg:mx-0">
               {heroCopy.description}
             </p>
 
-            <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+            <div className="mx-auto mt-8 flex w-full max-w-[280px] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mx-0 lg:justify-start">
               <Button
                 onClick={onOpenContact}
                 size="lg"
-                className="h-14 w-full rounded-2xl bg-slate-950 px-5 text-base font-black text-white shadow-[0_22px_60px_-28px_rgba(15,23,42,0.9)] hover:bg-blue-700 sm:h-16 sm:w-auto sm:px-9"
+                className="h-14 w-full rounded-2xl !bg-blue-700 px-5 text-base font-black !text-white shadow-[0_25px_70px_-32px_rgba(37,99,235,0.95)] hover:!bg-brand-cyan hover:!text-slate-950 sm:h-16 sm:w-auto sm:px-9"
               >
-                {heroCopy.cta || 'Bepul audit olish'}
+                {heroCopy.cta}
                 <ArrowRight className="h-5 w-5" />
               </Button>
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="h-14 w-full rounded-2xl border-slate-200 bg-white/75 px-5 text-base font-black text-slate-900 shadow-none hover:bg-white sm:h-16 sm:w-auto sm:px-7"
+                className="h-14 w-full rounded-2xl border-white/14 bg-white/8 px-5 text-base font-black text-white shadow-none hover:bg-white/14 sm:h-16 sm:w-auto sm:px-7"
               >
-                <Link href={localizedPath(lang, '/portfolio')}>
-                  {heroCopy.ctaSecondary || 'Ishlarni ko‘rish'}
-                </Link>
+                <Link href="#audit-offer">{heroCopy.ctaSecondary}</Link>
               </Button>
             </div>
 
-            <div className="mt-6 grid gap-2 sm:grid-cols-3">
-              {proofItems.map((item) => (
-                <div key={item} className="flex items-center justify-center gap-2 rounded-2xl border border-white/70 bg-white/62 px-3 py-3 text-sm font-bold text-slate-700 shadow-sm backdrop-blur lg:justify-start">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-blue-600" />
+            <div className="mx-auto mt-6 grid w-full max-w-[280px] gap-2 sm:max-w-none sm:grid-cols-3">
+              {heroCopy.proofItems.map((item) => (
+                <div key={item} className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/7 px-3 py-3 text-sm font-bold text-slate-200 shadow-sm backdrop-blur lg:justify-start">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-cyan" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -112,45 +153,50 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-            className="relative mx-auto w-full max-w-2xl lg:max-w-none"
+            className="relative mx-auto w-full max-w-[330px] sm:max-w-2xl lg:max-w-none"
           >
-            <div className="relative rounded-[2.25rem] border border-white/80 bg-white/62 p-3 shadow-[0_35px_100px_-55px_rgba(15,23,42,0.85)] backdrop-blur-xl sm:p-4">
-              <div className="grid min-h-[360px] gap-3 sm:min-h-[520px] sm:grid-cols-2">
-                {portfolioImages.length > 0 ? (
-                  portfolioImages.map((image, index) => (
-                    <div
-                      key={`${image.src}-${index}`}
-                      className={[
-                        'relative overflow-hidden rounded-[1.65rem] bg-slate-100 ring-1 ring-slate-900/5',
-                        index === 0 ? 'sm:row-span-2' : '',
-                      ].join(' ')}
-                    >
-                      <Image
-                        src={image.src}
-                        alt={image.alt || 'Jon.Branding portfolio namunasi'}
-                        fill
-                        priority={index < 2}
-                        sizes="(max-width: 768px) 92vw, 48vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <div className="col-span-full flex items-center justify-center rounded-[1.65rem] bg-slate-100 p-10 text-center text-sm font-bold text-slate-500">
-                    Portfolio namunalarini yuklash uchun Sanity media tekshiriladi.
+            <div className="relative rounded-[2rem] border border-white/12 bg-white/8 p-3 shadow-[0_35px_100px_-55px_rgba(0,0,0,0.95)] backdrop-blur-xl sm:rounded-[2.4rem] sm:p-4">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <PortfolioTile image={portfolioImages[0]} className="h-[250px] sm:h-[520px] sm:row-span-2" priority />
+                <PortfolioTile image={portfolioImages[1]} className="hidden h-[250px] sm:block" priority />
+                <PortfolioTile image={portfolioImages[2]} className="hidden h-[250px] sm:block" />
+                <div className="rounded-[1.45rem] border border-white/12 bg-slate-950/95 p-4 text-white shadow-[0_24px_70px_-35px_rgba(0,0,0,0.95)] sm:col-span-2 sm:p-5">
+                  <div className="mb-3 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.18em] text-brand-cyan">
+                    <ShieldCheck className="h-4 w-4" />
+                    Siz oladigan natija
                   </div>
-                )}
-              </div>
-
-              <div className="absolute -bottom-6 left-5 right-5 rounded-3xl border border-slate-900/10 bg-slate-950 p-5 text-white shadow-[0_24px_70px_-35px_rgba(15,23,42,0.95)] sm:left-8 sm:right-auto sm:max-w-sm">
-                <div className="mb-2 flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-blue-200">
-                  <ShieldCheck className="h-4 w-4" />
-                  {heroCopy.visualProofTitle || 'Audit natijasi'}
+                  <div className="grid gap-4 sm:grid-cols-[0.7fr_1.3fr] sm:items-center">
+                    <div>
+                      <p className="text-base font-black text-white">{heroCopy.reportTitle}</p>
+                      <p className="mt-1 text-xs leading-5 text-white/55">{heroCopy.reportSubtitle}</p>
+                      <div className="mt-4 inline-flex rounded-full bg-brand-lime px-3 py-1 text-xs font-black text-slate-950">{heroCopy.score}</div>
+                      <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/45">{heroCopy.scoreLabel}</p>
+                    </div>
+                    <div>
+                      <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                        <div className="h-full w-[68%] rounded-full bg-gradient-to-r from-brand-cyan to-brand-lime" />
+                      </div>
+                      <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                        {heroCopy.issues.map((issue) => (
+                          <div key={issue} className="flex gap-2 rounded-2xl bg-white/7 p-3 text-xs leading-5 text-white/72">
+                            <Target className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-cyan" />
+                            <span>{issue}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-sm leading-6 text-white/78">
-                  {heroCopy.visualProofText || 'Logo, nom, qadoq va kommunikatsiyadagi ishonchni pasaytirayotgan nuqtalarni aniq ko‘rsatamiz.'}
-                </p>
               </div>
+            </div>
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-3 lg:mt-6">
+              {diagnosticBadges.map((item) => (
+                <div key={item.label} className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/7 px-3 py-3 text-xs font-black uppercase tracking-[0.12em] text-white/70">
+                  <item.icon className="h-4 w-4 text-brand-cyan" />
+                  {item.label}
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -158,5 +204,29 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
     </section>
   );
 };
+
+function PortfolioTile({ image, className, priority = false }: { image?: GalleryImage; className: string; priority?: boolean }) {
+  if (!image) {
+    return (
+      <div className={`${className} flex items-center justify-center rounded-[1.45rem] bg-white/8 p-8 text-center text-sm font-bold text-white/50`}>
+        Portfolio namunasi
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative overflow-hidden rounded-[1.45rem] bg-slate-100 ring-1 ring-white/10 sm:rounded-[1.65rem] ${className}`}>
+      <Image
+        src={image.src}
+        alt={image.alt || 'Jon.Branding portfolio namunasi'}
+        fill
+        priority={priority}
+        sizes="(max-width: 768px) 92vw, 48vw"
+        className="object-cover saturate-[0.92]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/28 via-transparent to-transparent" />
+    </div>
+  );
+}
 
 export default Hero;
