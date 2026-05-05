@@ -41,6 +41,17 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
               className="mt-4 text-lg leading-8 text-white/72"
               dangerouslySetInnerHTML={{ __html: translations.message }}
             />
+            <BrandCard className="brand-card-dark grid gap-3 p-4 sm:grid-cols-3">
+              {[
+                lang === 'uz' ? 'Strategiya bilan boshlaymiz' : lang === 'ru' ? 'Начинаем со стратегии' : lang === 'zh' ? '从策略开始' : 'Strategy first',
+                lang === 'uz' ? 'Tadbirkor tilida tushuntiramiz' : lang === 'ru' ? 'Объясняем языком бизнеса' : lang === 'zh' ? '用商业语言解释' : 'Business-language clarity',
+                lang === 'uz' ? 'Natija: ishonch va premiumlik' : lang === 'ru' ? 'Результат: доверие и премиальность' : lang === 'zh' ? '结果：信任与高级感' : 'Trust and premium feel',
+              ].map((item) => (
+                <div key={item} className="rounded-2xl bg-white/8 px-3 py-3 text-sm font-black leading-5 text-white">
+                  {item}
+                </div>
+              ))}
+            </BrandCard>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {translations.points.map((point: any, index: number) => {
                 const Icon = icons[point.icon];
@@ -68,7 +79,7 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
             </div>
           </div>
           <div className="flex flex-col items-center justify-center relative order-1 md:order-2">
-            <BrandCard className="overflow-hidden shadow-xl rounded-[2rem] w-full p-0 bg-black/40 border-white/10">
+            <BrandCard className="brand-card-dark overflow-hidden shadow-xl rounded-[2rem] w-full p-0">
               <div className="p-0 relative bg-black aspect-[4/5]">
                 {playVideo ? (
                      <div className="absolute inset-0 w-full h-full">

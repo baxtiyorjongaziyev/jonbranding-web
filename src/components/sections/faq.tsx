@@ -18,10 +18,26 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   
   if (!translations || !translations.faqItems) return null;
 
+  const objectionLabels =
+    lang === 'uz'
+      ? ['Narx', 'Muddat', 'Natija', 'Ishonch', 'Jarayon']
+      : lang === 'ru'
+        ? ['Цена', 'Срок', 'Результат', 'Доверие', 'Процесс']
+        : lang === 'zh'
+          ? ['价格', '周期', '结果', '信任', '流程']
+          : ['Price', 'Timeline', 'Outcome', 'Trust', 'Process'];
+
   return (
     <BrandSection id="faq" tone="soft">
       <div className="container mx-auto px-4">
         <SectionIntro eyebrow="Objections handled" title={translations.title} description={translations.subtitle} />
+        <div className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-3">
+          {objectionLabels.map((label) => (
+            <span key={label} className="brand-badge">
+              {label}
+            </span>
+          ))}
+        </div>
         <div className="max-w-3xl mx-auto mt-12">
             <Accordion type="single" collapsible defaultValue="item-0" className="w-full space-y-4">
                 {translations.faqItems.map((item: any, index: number) => (

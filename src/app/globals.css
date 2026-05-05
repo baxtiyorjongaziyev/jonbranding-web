@@ -30,6 +30,16 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --radius: 0.75rem;
+    --brand-ink: 222 68% 7%;
+    --brand-paper: 42 40% 97%;
+    --brand-mist: 214 58% 95%;
+    --brand-blue: 231 78% 48%;
+    --brand-cyan: 190 88% 54%;
+    --brand-lime: 86 72% 50%;
+    --brand-slate: 220 17% 42%;
+    --brand-line: 220 25% 88%;
+    --font-inter: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-jakarta: "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
 
     --section-gap: 8rem;
     --section-gap-mobile: 4rem;
@@ -240,6 +250,30 @@
 
   .premium-card {
     @apply bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)] transition-all duration-700 rounded-[2.5rem] overflow-hidden;
+  }
+
+  .brand-section {
+    padding-top: var(--section-gap);
+    padding-bottom: var(--section-gap);
+  }
+
+  .brand-card {
+    @apply rounded-[2rem] border border-brand-line bg-white/85 p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur transition-all duration-500;
+  }
+
+  .brand-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 32px 90px rgba(15, 23, 42, 0.12);
+  }
+
+  .brand-card-dark {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+  }
+
+  .brand-badge {
+    @apply inline-flex items-center rounded-full border border-brand-line bg-white/80 px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-brand-blue;
   }
 
   .section-padding {
