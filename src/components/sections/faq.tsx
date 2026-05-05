@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import CtaBlock from './cta-block';
+import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const translations = dictionary;
@@ -18,28 +19,25 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   if (!translations || !translations.faqItems) return null;
 
   return (
-    <section id="faq" className="py-20 sm:py-28 bg-background">
+    <BrandSection id="faq" tone="soft">
       <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h2 className="section-title">{translations.title}</h2>
-          <p className="section-subtitle">
-              {translations.subtitle}
-          </p>
-        </div>
+        <SectionIntro eyebrow="Objections handled" title={translations.title} description={translations.subtitle} />
         <div className="max-w-3xl mx-auto mt-12">
             <Accordion type="single" collapsible defaultValue="item-0" className="w-full space-y-4">
                 {translations.faqItems.map((item: any, index: number) => (
-                <AccordionItem key={index} value={`item-${index}`}>
+                <BrandCard key={index} className="px-5">
+                <AccordionItem value={`item-${index}`} className="border-none">
                     <AccordionTrigger 
-                      className="text-left text-lg font-semibold text-foreground"
+                      className="text-left text-lg font-black text-brand-ink hover:no-underline"
                       aria-label={lang === 'uz' ? `${item.question} savoliga javobni ko'rish` : lang === 'ru' ? `Посмотреть ответ на вопрос: ${item.question}` : `View answer for: ${item.question}`}
                     >
                     {item.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground pt-2 text-base">
+                    <AccordionContent className="text-brand-slate pt-2 text-base leading-7">
                     {item.answer}
                     </AccordionContent>
                 </AccordionItem>
+                </BrandCard>
                 ))}
             </Accordion>
         </div>
@@ -50,7 +48,7 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
         buttonText={translations.ctaButton}
         onCtaClick={handleOpenModal}
       />
-    </section>
+    </BrandSection>
   )
 }
 

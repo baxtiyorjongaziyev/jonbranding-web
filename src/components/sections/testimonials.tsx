@@ -1,17 +1,16 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
-import { Star, PlayCircle, MessageSquare, ArrowRight, CaseUpper } from 'lucide-react';
+import { Star, PlayCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { type Testimonial } from '@/lib/types';
 import Autoplay from "embla-carousel-autoplay";
 import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn, staticTestimonialsZh } from '@/lib/static-data';
-import { Button } from '../ui/button';
-import Link from 'next/link';
+import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     const [playVideo, setPlayVideo] = useState(false);
@@ -23,7 +22,7 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
     };
     
     return (
-        <Card className="h-full flex flex-col bg-white shadow-xl rounded-2xl overflow-hidden group">
+        <BrandCard className="h-full flex flex-col overflow-hidden group p-0">
             <CardContent className="p-0">
                 <div className="relative w-full aspect-[9/16] bg-black cursor-pointer rounded-t-2xl overflow-hidden" onClick={handlePlayVideo}>
                     {playVideo ? (
@@ -58,8 +57,8 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
                             <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                         </Avatar>
                         <div>
-                            <p className="font-bold text-dark-blue">{testimonial.name}</p>
-                            <p className="text-sm text-gray-500">{testimonial.company}</p>
+                            <p className="font-bold text-brand-ink">{testimonial.name}</p>
+                            <p className="text-sm text-brand-slate">{testimonial.company}</p>
                         </div>
                     </div>
                      {testimonial.quote && (
@@ -69,20 +68,20 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
                      )}
                 </div>
             </CardContent>
-        </Card>
+        </BrandCard>
     );
 };
 
 
 const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     return (
-      <Card className="h-full flex flex-col bg-white shadow-lg rounded-3xl overflow-hidden">
-        <CardContent className="p-8 flex flex-col justify-between flex-grow">
+      <BrandCard className="h-full flex flex-col overflow-hidden">
+        <div className="p-8 flex flex-col justify-between flex-grow">
             <div>
                  <div className="flex text-yellow-400 mb-4">
                     {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
                 </div>
-                <p className="text-gray-700 leading-relaxed italic">"{testimonial.quote}"</p>
+                <p className="text-brand-slate leading-relaxed italic">"{testimonial.quote}"</p>
             </div>
             <div className="mt-8 flex items-center gap-4">
                 <Avatar className="h-12 w-12 ring-2 ring-primary/10">
@@ -90,12 +89,12 @@ const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
                     <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                 </Avatar>
                 <div>
-                    <p className="font-bold text-dark-blue">{testimonial.name}</p>
-                    <p className="text-xs text-gray-500">{testimonial.company}</p>
+                    <p className="font-bold text-brand-ink">{testimonial.name}</p>
+                    <p className="text-xs text-brand-slate">{testimonial.company}</p>
                 </div>
             </div>
-        </CardContent>
-      </Card>
+        </div>
+      </BrandCard>
     );
 };
 
@@ -127,12 +126,9 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
     }
 
   return (
-    <section className="py-20 sm:py-28 bg-secondary/30 overflow-hidden">
+    <BrandSection tone="soft" className="overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="section-title">{translations.title}</h2>
-          <p className="section-subtitle">{translations.subtitle}</p>
-        </div>
+        <SectionIntro eyebrow="Client voice" title={translations.title} description={translations.subtitle} className="mb-10" />
 
         {videoTestimonials.length > 0 && (
             <div className="max-w-5xl mx-auto">
@@ -160,14 +156,14 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
                   ))}
                 </CarouselContent>
                 <div className="hidden sm:block">
-                  <CarouselPrevious className="absolute -left-4 lg:-left-12 h-12 w-12 shadow-lg border-primary/10 hover:bg-primary hover:text-white transition-all" />
-                  <CarouselNext className="absolute -right-4 lg:-right-12 h-12 w-12 shadow-lg border-primary/10 hover:bg-primary hover:text-white transition-all" />
+                  <CarouselPrevious className="absolute -left-4 lg:-left-12 h-12 w-12 shadow-lg border-brand-line hover:bg-brand-ink hover:text-white transition-all" />
+                  <CarouselNext className="absolute -right-4 lg:-right-12 h-12 w-12 shadow-lg border-brand-line hover:bg-brand-ink hover:text-white transition-all" />
                 </div>
               </Carousel>
             </div>
         )}
       </div>
-    </section>
+    </BrandSection>
   )
 }
 

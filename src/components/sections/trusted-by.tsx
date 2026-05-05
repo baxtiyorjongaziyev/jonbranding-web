@@ -5,6 +5,7 @@ import React from 'react';
 import { type Brand } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { staticBrands } from '@/lib/static-data';
+import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => {
     if (!brands || brands.length === 0) return null;
@@ -17,8 +18,8 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                     direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
                 )}>
                     {brands.map((brand, index) => (
-                        <li key={index} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-16 w-40 flex items-center justify-center mx-4">
-                            <div className="flex items-center justify-center p-2 h-full w-full">
+                        <li key={index} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-20 w-44 flex items-center justify-center mx-3">
+                            <div className="brand-card flex items-center justify-center p-4 h-full w-full grayscale hover:grayscale-0 transition-all duration-300">
                                 {brand.logo ? (
                                     <img
                                         src={brand.logo}
@@ -38,8 +39,8 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                     direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
                 )} aria-hidden="true">
                     {brands.map((brand, index) => (
-                        <li key={`dup-${index}`} className="flex-shrink-0 h-16 w-40 flex items-center justify-center mx-4">
-                            <div className="flex items-center justify-center p-2 h-full w-full">
+                        <li key={`dup-${index}`} className="flex-shrink-0 h-20 w-44 flex items-center justify-center mx-3">
+                            <div className="brand-card flex items-center justify-center p-4 h-full w-full grayscale">
                                 {brand.logo ? (
                                     <img
                                         src={brand.logo}
@@ -71,18 +72,16 @@ const TrustedBy: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictiona
     if (!title) return null;
 
   return (
-    <section className="py-16 sm:py-20 bg-white" aria-labelledby="trusted-by-title">
+    <BrandSection tone="light" aria-labelledby="trusted-by-title">
       <div className="container mx-auto px-4">
-        <h2 id="trusted-by-title" className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          {title}
-        </h2>
+        <SectionIntro eyebrow="Proof wall" title={<span id="trusted-by-title">{title}</span>} />
       </div>
        <div className="mt-10 flex flex-col gap-4">
             <Marquee brands={brandsTopRow} direction="forward" />
             <Marquee brands={brandsMiddleRow} direction="backward" />
             <Marquee brands={brandsBottomRow} direction="forward" />
         </div>
-    </section>
+    </BrandSection>
   );
 };
 

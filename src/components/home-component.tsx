@@ -10,6 +10,8 @@ import BentoResultsStats from '@/components/sections/bento-results-stats';
 import TrustedBy from '@/components/sections/trusted-by';
 import TargetAudience from '@/components/sections/target-audience';
 import WhyUs from '@/components/sections/why-us';
+import BrandClarity from '@/components/sections/brand-clarity';
+import AuditOffer from '@/components/sections/audit-offer';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import { cn } from '@/lib/utils';
@@ -180,11 +182,19 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <BentoResultsStats dictionary={dictionary} />
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
-                    <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
+                    <BrandClarity lang={lang} onCtaClick={handleOpenModal} />
+                </motion.div>
+
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
+                    <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />
                 </motion.div>
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
                     <WhyUs onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.whyUs} />
+                </motion.div>
+
+                <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
+                    <AuditOffer lang={lang} onCtaClick={handleOpenModal} />
                 </motion.div>
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>

@@ -1,9 +1,9 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
 import { ArrowRight, Ghost, TrendingDown, Tag, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -30,12 +30,13 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
   const problems = translations.problems || [];
 
   return (
-    <section id="target-audience" className="py-20 sm:py-28 bg-secondary">
+    <BrandSection id="target-audience" tone="soft">
       <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h2 className="section-title">{translations.title}</h2>
-          <p className="section-subtitle">{translations.subtitle}</p>
-        </div>
+        <SectionIntro
+          eyebrow="Brand diagnosis"
+          title={translations.title}
+          description={translations.subtitle}
+        />
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -43,19 +44,21 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
           variants={{
             visible: { transition: { staggerChildren: 0.1 } }
           }}
-          className="mt-12 max-w-4xl mx-auto"
+          className="mt-12 max-w-5xl mx-auto"
         >
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {problems.map((problem: any, index: number) => {
                     const Icon = icons[index] || Ghost;
                     return (
                         <motion.div key={index} variants={itemVariants}>
-                          <Card className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow border-none h-full">
+                          <BrandCard className="p-6 h-full transition-transform duration-300 hover:-translate-y-1">
                                <div className="flex items-start gap-4">
-                                  <Icon className="h-8 w-8 text-red-500 flex-shrink-0 mt-1" aria-hidden="true" />
-                                  <p className="text-base font-medium text-gray-800">{problem.text}</p>
+                                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-red-50 text-red-500 ring-1 ring-red-100">
+                                    <Icon className="h-6 w-6" aria-hidden="true" />
+                                  </div>
+                                  <p className="text-base font-semibold leading-7 text-brand-ink">{problem.text}</p>
                               </div>
-                          </Card>
+                          </BrandCard>
                         </motion.div>
                     )
                 })}
@@ -68,10 +71,11 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
            viewport={{ once: true }}
            transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <Card className="max-w-4xl mx-auto mt-8 bg-gradient-to-br from-primary to-dark-blue text-white p-8 rounded-2xl shadow-xl overflow-hidden relative text-center border-none">
+          <div className="max-w-5xl mx-auto mt-8 bg-brand-ink text-white p-8 sm:p-10 rounded-[2rem] shadow-2xl overflow-hidden relative text-center border border-white/10">
+               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(58,225,255,0.24),transparent_32rem)]" />
                <div className="relative z-10">
                   <h3 className="text-3xl lg:text-4xl font-bold leading-tight text-white">{translations.solutionTitle}</h3>
-                  <p className="mt-4 text-blue-200 text-lg max-w-2xl mx-auto">
+                  <p className="mt-4 text-white/70 text-lg max-w-2xl mx-auto">
                      {translations.solutionSubtitle}
                   </p>
                    <div className="mt-8 flex justify-center">
@@ -79,17 +83,17 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
                           onClick={handleOpenModal} 
                           size="lg" 
                           variant="default"
-                          className="rounded-full shadow-lg"
+                          className="rounded-2xl shadow-lg bg-white text-brand-ink hover:bg-brand-lime"
                           aria-label={translations.solutionButton}
                       >
                           {translations.solutionButton} <ArrowRight className="w-5 h-5 ml-2" />
                       </Button>
                   </div>
                </div>
-          </Card>
+          </div>
         </motion.div>
       </div>
-    </section>
+    </BrandSection>
   );
 };
 
