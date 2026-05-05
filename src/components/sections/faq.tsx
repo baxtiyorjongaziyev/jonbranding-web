@@ -21,10 +21,8 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
     <section id="faq" className="py-20 sm:py-28 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
-              {translations.title}
-          </h2>
-          <p className="mt-4 text-lg max-w-2xl mx-auto text-muted-foreground">
+          <h2 className="section-title">{translations.title}</h2>
+          <p className="section-subtitle">
               {translations.subtitle}
           </p>
         </div>

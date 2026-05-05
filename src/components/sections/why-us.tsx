@@ -53,10 +53,8 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
     <section className="py-20 sm:py-28 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold">{translations.title}</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
-            {translations.subtitle}
-          </p>
+          <h2 className="section-title">{translations.title}</h2>
+          <p className="section-subtitle">{translations.subtitle}</p>
         </div>
         <motion.div 
           initial="hidden"

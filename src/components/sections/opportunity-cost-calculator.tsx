@@ -64,12 +64,8 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
               <ShieldAlert className="w-4 h-4" />
               SOTUV ANALIZI
             </motion.div>
-            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tight mb-6">
-              {t.title}
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t.subtitle}
-            </p>
+            <h2 className="section-title mb-6">{t.title}</h2>
+            <p className="section-subtitle">{t.subtitle}</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

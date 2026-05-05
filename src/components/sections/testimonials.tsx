@@ -130,10 +130,8 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
     <section className="py-20 sm:py-28 bg-secondary/30 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
-          <h2 className="text-4xl sm:text-5xl font-black text-dark-blue tracking-tighter">{translations.title}</h2>
-          <p className="mt-3 max-w-2xl mx-auto text-lg text-gray-600 font-medium">
-            {translations.subtitle}
-          </p>
+          <h2 className="section-title">{translations.title}</h2>
+          <p className="section-subtitle">{translations.subtitle}</p>
         </div>
 
         {videoTestimonials.length > 0 && (
