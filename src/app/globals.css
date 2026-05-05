@@ -5,8 +5,8 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 213 45% 97%;
+    --foreground: 222 68% 7%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
@@ -30,6 +30,16 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --radius: 0.75rem;
+    --brand-ink: 222 68% 7%;
+    --brand-paper: 42 40% 97%;
+    --brand-mist: 214 58% 95%;
+    --brand-blue: 231 78% 48%;
+    --brand-cyan: 190 88% 54%;
+    --brand-lime: 86 72% 50%;
+    --brand-slate: 220 17% 42%;
+    --brand-line: 220 25% 88%;
+    --font-inter: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-jakarta: "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
 
     --section-gap: 5rem;
     --section-gap-mobile: 3rem;
@@ -86,10 +96,14 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-muted-foreground;
+    @apply bg-brand-paper text-brand-slate;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at top left, hsl(var(--brand-cyan) / 0.16), transparent 34rem),
+      radial-gradient(circle at 85% 5%, hsl(var(--brand-lime) / 0.14), transparent 28rem),
+      linear-gradient(180deg, hsl(var(--brand-paper)), hsl(var(--brand-mist)));
   }
   h1,h2,h3,h4,h5,h6 {
     @apply text-foreground font-headline;
@@ -234,6 +248,40 @@
 
   .premium-card {
     @apply bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 rounded-[2rem] overflow-hidden;
+  }
+
+  .brand-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: clamp(4rem, 9vw, 7rem);
+  }
+
+  .brand-card {
+    border: 1px solid hsl(var(--brand-line) / 0.9);
+    border-radius: clamp(1.5rem, 3vw, 2.25rem);
+    background:
+      linear-gradient(145deg, rgba(255,255,255,0.92), rgba(255,255,255,0.66)),
+      radial-gradient(circle at top right, hsl(var(--brand-cyan) / 0.12), transparent 18rem);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.9) inset,
+      0 24px 80px -48px rgba(8, 15, 35, 0.55);
+  }
+
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 999px;
+    border: 1px solid hsl(var(--brand-line));
+    background: rgba(255,255,255,0.76);
+    padding: 0.45rem 0.75rem;
+    color: hsl(var(--brand-ink));
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 12px 34px -26px rgba(8, 15, 35, 0.65);
   }
 
   .section-padding {
@@ -431,15 +479,4 @@
   animation: marquee 20s linear infinite;
   display: flex;
   width: max-content;
-}
-
-
-/* ── Hero LCP — CSS-driven fade, no JS required ── */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
 }

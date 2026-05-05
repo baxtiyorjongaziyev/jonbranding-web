@@ -2,10 +2,10 @@
 'use client';
 
 import type { FC } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { FileText, ListChecks, Film, Download, ArrowRight } from 'lucide-react';
+import { FileText, ListChecks, Film, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 interface LeadMagnetProps {
     onCtaClick: () => void;
@@ -39,12 +39,9 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
 
   return (
     <>
-    <section id="lead-magnet" className="py-20 sm:py-28 bg-white">
+    <BrandSection id="lead-magnet" tone="soft">
       <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h2 className="section-title">{translations.title}</h2>
-          <p className="section-subtitle">{translations.subtitle}</p>
-        </div>
+        <SectionIntro eyebrow="Free resources" title={translations.title} description={translations.subtitle} />
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {translations.magnets.map((magnet: any) => {
             const Icon = getIcon(magnet.id);
@@ -58,34 +55,34 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
             );
 
             return (
-              <Card key={magnet.id} className="group relative flex flex-col text-center shadow-lg rounded-2xl bg-secondary/50 overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                <CardHeader className="items-center pb-4">
-                  <div className="bg-primary/10 p-4 rounded-full">
-                    <Icon className="w-8 h-8 text-primary" />
+              <BrandCard key={magnet.id} className="group relative flex flex-col text-center overflow-hidden p-6 transform hover:-translate-y-1 transition-transform duration-300">
+                <div className="flex flex-col items-center pb-4">
+                  <div className="bg-brand-blue/10 p-4 rounded-2xl ring-1 ring-brand-blue/15">
+                    <Icon className="w-8 h-8 text-brand-blue" />
                   </div>
-                  <CardTitle className="!mt-4 text-xl">{magnet.title}</CardTitle>
-                  <CardDescription className="font-bold text-primary !mt-1 px-4">{magnet.subtitle}</CardDescription>
-                </CardHeader>
-                <CardContent className="flex-grow flex flex-col justify-between px-6 pb-6">
-                  <p className="text-gray-600 mb-6">{magnet.description}</p>
+                  <h3 className="mt-5 text-xl font-black tracking-[-0.03em] text-brand-ink">{magnet.title}</h3>
+                  <p className="mt-2 px-4 font-bold text-brand-blue">{magnet.subtitle}</p>
+                </div>
+                <div className="flex-grow flex flex-col justify-between">
+                  <p className="text-brand-slate mb-6 leading-7">{magnet.description}</p>
                   {isLink ? (
                       <Link href={magnet.href.replace('{lang}', lang)} passHref>
-                          <Button asChild className="w-full shadow-md hover:shadow-lg transition-shadow">
+                          <Button asChild className="w-full rounded-2xl bg-brand-ink hover:bg-brand-blue shadow-none">
                             <span>{buttonContent}</span>
                           </Button>
                       </Link>
                   ) : (
-                      <Button onClick={() => handleClick(magnet)} className="w-full shadow-md hover:shadow-lg transition-shadow">
+                      <Button onClick={() => handleClick(magnet)} className="w-full rounded-2xl bg-brand-ink hover:bg-brand-blue shadow-none">
                           {buttonContent}
                       </Button>
                   )}
-                </CardContent>
-              </Card>
+                </div>
+              </BrandCard>
             )
           })}
         </div>
       </div>
-    </section>
+    </BrandSection>
     </>
   );
 };

@@ -2,10 +2,10 @@
 'use client';
 
 import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
 import { Medal, Globe, Zap, Users, Phone, Send, PlayCircle, type LucideProps, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, type FC } from 'react';
+import { BrandCard, BrandSection } from '@/components/ui/design-system';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
@@ -16,7 +16,8 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
   if (!translations) return null;
 
   return (
-    <section id="founder" className="py-20 sm:py-28 relative bg-black overflow-hidden border-t border-white/5">
+    <BrandSection id="founder" tone="dark" className="relative overflow-hidden border-t border-white/5">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(58,225,255,0.16),transparent_34rem)]" />
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col gap-8 order-2 md:order-1">
@@ -37,7 +38,7 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                 </div>
             </div>
             <p 
-              className="mt-4 text-lg text-gray-300"
+              className="mt-4 text-lg leading-8 text-white/72"
               dangerouslySetInnerHTML={{ __html: translations.message }}
             />
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -45,20 +46,20 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                 const Icon = icons[point.icon];
                 return (
                     <div key={index} className="flex items-center gap-3">
-                        {Icon && <Icon className="w-6 h-6 text-primary flex-shrink-0" />}
-                        <span className="text-gray-200 font-medium">{point.text}</span>
+                        {Icon && <Icon className="w-6 h-6 text-brand-cyan flex-shrink-0" />}
+                        <span className="text-white/82 font-medium">{point.text}</span>
                     </div>
                 );
               })}
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Button size="lg" className="w-full sm:w-auto min-w-[200px]" asChild>
+                <Button size="lg" className="w-full sm:w-auto min-w-[200px] rounded-2xl bg-white text-brand-ink hover:bg-brand-lime" asChild>
                     <a href="tel:+998336450097">
                         <Phone className="mr-2 h-5 w-5" />
                         {translations.phoneButton}
                     </a>
                 </Button>
-                 <Button size="lg" variant="outline" className="w-full sm:w-auto min-w-[200px] text-white border-white/20 hover:bg-[#0088cc] hover:border-[#0088cc] hover:text-white bg-white/5 transition-all duration-300" asChild>
+                 <Button size="lg" variant="outline" className="w-full sm:w-auto min-w-[200px] rounded-2xl text-white border-white/20 hover:bg-[#0088cc] hover:border-[#0088cc] hover:text-white bg-white/5 transition-all duration-300" asChild>
                     <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank">
                         <Send className="mr-2 h-5 w-5" />
                         {translations.telegramButton}
@@ -67,8 +68,8 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
             </div>
           </div>
           <div className="flex flex-col items-center justify-center relative order-1 md:order-2">
-            <Card className="overflow-hidden shadow-xl rounded-2xl w-full">
-              <CardContent className="p-0 relative bg-black aspect-[4/5]">
+            <BrandCard className="overflow-hidden shadow-xl rounded-[2rem] w-full p-0 bg-black/40 border-white/10">
+              <div className="p-0 relative bg-black aspect-[4/5]">
                 {playVideo ? (
                      <div className="absolute inset-0 w-full h-full">
                         <iframe 
@@ -102,12 +103,12 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
                     </div>
                   </>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </BrandCard>
           </div>
         </div>
       </div>
-    </section>
+    </BrandSection>
   );
 };
 

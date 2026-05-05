@@ -2,10 +2,10 @@
 'use client';
 
 import React from 'react';
-import { Card } from '@/components/ui/card';
 import { Button } from '../ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import Magnetic from '../ui/magnetic';
+import { BrandSection } from '@/components/ui/design-system';
 
 const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any}) => {
     const caseData = {
@@ -74,18 +74,20 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
     }
 
     return (
-        <section className="py-16 sm:py-24 bg-white">
+        <BrandSection tone="light" className="min-h-0">
             <div className="container mx-auto px-4">
-                <Card className="max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl overflow-hidden p-8 lg:p-12">
+                <div className="max-w-5xl mx-auto bg-brand-ink text-white rounded-[2.5rem] shadow-2xl overflow-hidden p-8 lg:p-12 relative border border-white/10">
+                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(58,225,255,0.22),transparent_34rem)]" />
+                     <div className="relative z-10">
                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         <div className="text-center lg:text-left">
-                            <div className="flex items-center justify-center lg:justify-start gap-3 text-sm font-semibold text-accent uppercase tracking-wider mb-4">
+                            <div className="flex items-center justify-center lg:justify-start gap-3 text-sm font-semibold text-brand-cyan uppercase tracking-wider mb-4">
                                <img src="/images/cms/logo-denaroma.png" alt="Den Aroma Logo" className="h-6 w-auto" />
-                               <span className="border-l border-accent/50 pl-3">{t.caseStudyLabel}</span>
+                               <span className="border-l border-brand-cyan/50 pl-3">{t.caseStudyLabel}</span>
                             </div>
                             <h2 className="text-3xl lg:text-4xl font-extrabold text-white">{t.title}</h2>
-                            <p className="mt-4 text-blue-200" dangerouslySetInnerHTML={{ __html: t.description }} />
-                            <p className="mt-4 text-blue-200">{t.case_desc}</p>
+                            <p className="mt-4 text-white/72" dangerouslySetInnerHTML={{ __html: t.description }} />
+                            <p className="mt-4 text-white/72">{t.case_desc}</p>
                             
                             <ul className="mt-6 space-y-2 text-left max-w-md mx-auto lg:mx-0">
                                 {t.results.map((result: string, index: number) => (
@@ -97,7 +99,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                             </ul>
 
                             <Magnetic>
-                                <Button onClick={handleCtaClick} className="mt-8 bg-accent text-white hover:bg-accent/90">
+                                <Button onClick={handleCtaClick} className="mt-8 rounded-2xl bg-white text-brand-ink hover:bg-brand-lime">
                                     {t.ctaButton}
                                     <ArrowRight className="ml-2 h-4 w-4" />
                                 </Button>
@@ -117,9 +119,10 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                             </div>
                         </div>
                     </div>
-                </Card>
+                    </div>
+                </div>
             </div>
-        </section>
+        </BrandSection>
     )
 }
 
