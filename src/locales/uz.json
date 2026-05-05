@@ -103,7 +103,7 @@
                 "description": "Real tashuvchilarda (vizitka, taqdimotlar, ijtimoiy tarmoqlar) uchun dizayn namunalari."
             }
         ],
-        "cta_title": "Brendingizni 'Sotuv Mashinasi'ga aylantirishga tayyormisiz?",
+        "cta_title": "Brendingizni tartibli va ishonchli tizimga aylantirishga tayyormisiz?",
         "cta_description": "Professional brending — bu sarmoya, xarajat emas. Keling, sizga ishonchli va daromadli brend qurib beramiz.",
         "cta_button": "Mening brendimni quring"
     },
@@ -158,21 +158,21 @@
             "Пусть клиенты |влюбятся в вас|. Снова и снова.",
             "От малого бизнеса до |сильного бренда|. За один шаг."
         ],
-        "description": "Raqobatchilar professional ko'rinish bilan bozorning qaymog'ini yeb bo'lishdi. Biznesingizni 'shunchaki nom' emas, balki **har kuni foyda keltiradigan 'Sotuv Mashinasi'ga** aylantirish vaqti keldi.",
+        "description": "Biznesingiz nomi, logosi, qadoqi va kommunikatsiyasi mijozda ishonch uyg'otishi kerak. Biz buni strategiya va aniq vizual tizim orqali quramiz.",
         "buttonTexts": [
             "Проанализировать мой бренд",
             "Помогите увеличить продажи",
             "Бесплатный Стратегический Аудит",
             "Мне нужен сильный бренд"
         ],
-        "buttonHint": "✓ 100% Bepul  ·  ✓ 15 daqiqalik 'Surgical' Audit  ·  ✓ Natija bo'lmasa — 100% Refund Kafolati",
-        "title": "Sizning brendingiz mijozlarni jalb qilyaptimi yoki **pullaringizni havoga sovuryaptimi?**",
-        "cta": "Mening 30 Kunlik O'sish Strategiyamni Olish"
+        "buttonHint": "✓ Bepul  ·  ✓ 15 daqiqalik audit  ·  ✓ Majburiyatsiz tavsiya",
+        "title": "Biznesingiz **ishonchli ko'rinib**, qimmatroq sotilsin.",
+        "cta": "Bepul brand audit olish"
     },
     "results": {
         "badge": "BOZORDA QILINGAN NATIJA",
         "title": "Mijozlarimiz qanday natijalarga erishmoqda?",
-        "subtitle": "Biz shunchaki rasm chizmaymiz — biz sizga bozorda 'mutloq g'olib' bo'lishingizni ta'minlaydigan strategik tizimni taqdim etamiz.",
+        "subtitle": "Biz shunchaki rasm chizmaymiz — nom, logo, qadoq va kommunikatsiyani biznes maqsadingizga bog'laymiz.",
         "items": [
             {
                 "impact": "68%+",
@@ -313,7 +313,7 @@
         "cta1_button": "Mening biznesim uchun ham"
     },
     "urgencyBlock": {
-        "title": "🔥 SAHIFANI YOPISHDAN OLDIN...",
+        "title": "Qaror qilishdan oldin bir narsani tekshiring",
         "subtitle": "Tasavvur qiling:",
         "line1": "Ertaga raqobatchingiz professional brend bilan chiqdi. Logotipi ajoyib, qadog'i darhol ko'zga tashlanadi.",
         "line2": "Mijozlar sizdan emas, UNDAN sotib olishadi.",
@@ -455,12 +455,12 @@
                 "text": "Raqobatchilaringiz sifatsiz bo'lsa ham, kuchli brend bilan bozorning 80% qismini egallab olishgan."
             },
             {
-                "text": "Marketingga pul sarflayapsiz, lekin brendingiz 'teshik chelak' kabi barcha lendlarni yo'qotyapti."
+                "text": "Marketingga pul sarflayapsiz, lekin brendingiz mijozda yetarli ishonch uyg'otmayotgan bo'lishi mumkin."
             }
         ],
-        "solutionTitle": "Keling, ushbu 'teshik chelak'ni butunlay yopamiz!",
+        "solutionTitle": "Keling, brendingizdagi asosiy ishonch muammolarini aniqlaymiz.",
         "solutionSubtitle": "Men sizga shunchaki logo emas, balki raqobatchilaringizni 'o'yindan chiqaradigan' strategik qurol yasab beraman.",
-        "solutionButton": "Sotuv Mashinasini Qurishni Boshlash"
+        "solutionButton": "Bepul auditga yozilish"
     },
     "beforeAfter": {
         "title": "Avval va Hozir",
@@ -481,7 +481,7 @@
     },
     "founder": {
         "title": "Nega men 'oddiy dizayn'dan voz kechib, 'Sotuv Mashinalari' qurishga o'tdim?",
-        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Ko'p dizaynerlar sizga 'chiroyli rasm' beradi va pulingizni olib ketadi. Men esa biznesingizni **Surgical** aniqlik bilan tahlil qilaman. Bizning vazifamiz — dizaynni strategiya bilan bitta zanjirga bog'lab, sizni bozorda **'Mutloq Dominant'** qilishdir. Men sizga shunchaki logotip emas, balki raqobatchilaringizni uyaltiradigan va sizga millionlab foyda keltiradigan tizim qurib beraman. Bu mening shaxsiy va'dam.",
+        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biz biznes egalariga shunchaki chiroyli logo emas, balki nom, strategiya, aydentika, qadoq va brandbookdan iborat tushunarli brend tizimini qurishga yordam beramiz. Maqsadimiz — mijoz sizni ko'rganda tezroq tushunsin, eslab qolsin va ishonch bilan tanlasin.",
         "points": [
             {
                 "icon": "Medal",
@@ -489,7 +489,7 @@
             },
             {
                 "icon": "Globe",
-                "text": "Surgical Precision — Xalqaro tajriba"
+                "text": "Strategik aniqlik — xalqaro tajriba"
             },
             {
                 "icon": "Zap",
@@ -573,10 +573,10 @@
         ],
         "ctaTitle": "Bozorni egallashga tayyormisiz?",
         "ctaDesc": "Keling, bugun sizning 'G'alaba Strategiyangiz'ni tuzamiz.",
-        "ctaButton": "Sotuv Mashinasini Qurishni Boshlash"
+        "ctaButton": "Bepul auditga yozilish"
     },
     "leadMagnet": {
-        "title": "Brendingizni 'Sotuv Mashinasi'ga aylantirish vaqti keldi",
+        "title": "Brendingizni ishonchli tizimga aylantirish vaqti keldi",
         "subtitle": "Biz bilan ishlashni nimadan boshlashni bilmayapsizmi? Quyidagi maxsus resurslarimiz sizga bozorda qanday qilib 'G'olib' bo'lishni o'rgatadi.",
         "magnets": [
             {
@@ -1130,7 +1130,7 @@
         "tooltip": "Avval bittasini bekor qiling"
     },
     "opportunityCalculator": {
-        "title": "Brendingiz 'Teshik Chelak' bo'lib, pulingizni havoga sovuryaptimi?",
+        "title": "Brendingiz reklama natijasini pasaytirayotgan bo'lishi mumkinmi?",
         "subtitle": "Nega reklama qilsangiz ham foyda kam? Har oy qancha pulni raqobatchilaringizga 'sovg'a' qilayotganingizni hisoblang.",
         "labels": {
             "traffic": "Saytingizga kirayotgan potentsial mijozlar",
@@ -1141,8 +1141,8 @@
             "title": "Shafqatsiz haqiqat:",
             "bucket": "Chelak = Sizning 'Eskirgan' Brendingiz",
             "water": "Suv = Reklamaga tikkan millionlaringiz",
-            "leak": "Teshiklar = Ishonchsiz logo va arzon dizayn",
-            "description": "Siz qanchalik ko'p reklama quymang, agar brendingizda 'teshiklar' bo'lsa, foyda raqobatchilaringizga oqib ketaveradi. Biz ana shu teshiklarni 'Surgical' aniqlik bilan yamaymiz."
+            "leak": "Muammolar = Ishonchsiz logo, noaniq xabar va tartibsiz vizual",
+            "description": "Reklama natija berishi uchun brendingiz mijozga aniq, ishonchli va esda qolarli ko'rinishi kerak. Biz avval qaysi nuqtalar qarorga to'sqinlik qilayotganini aniqlaymiz."
         },
         "results": {
             "title": "Siz boy berayotgan imkoniyat:",
@@ -1151,7 +1151,7 @@
             "lossNote": "Siz har oy shuncha pulni shunchaki boy beryapsiz!",
             "roiNote": "Atigi 2% ishonch darajasi oshishi daromadingizni 3-4 baravarga ko'tarishi mumkin."
         },
-        "cta": "Teshiklarni Yamashni Boshlash"
+        "cta": "Bepul auditga yozilish"
     },
     "exitIntentModal": {
         "title": "Ketmang!",

@@ -1,31 +1,19 @@
-
 'use client';
 
 import type { FC } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, Zap } from 'lucide-react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import Autoplay from "embla-carousel-autoplay";
-import TiltCard from '../ui/tilt-card';
-import Magnetic from '../ui/magnetic';
+import Link from 'next/link';
+import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
 
 const portfolioImages: GalleryImage[] = projects
-  .filter(p => !p.hiddenInHero)
-  .flatMap(p => p.galleryImages || [])
-  .sort((a, b) => {
-    // Put GIFs first
-    const isAGif = a.src.toLowerCase().endsWith('.gif');
-    const isBGif = b.src.toLowerCase().endsWith('.gif');
-    if (isAGif && !isBGif) return -1;
-    if (!isAGif && isBGif) return 1;
-    return 0;
-  });
+  .filter((project) => !project.hiddenInHero)
+  .flatMap((project) => project.galleryImages || [])
+  .filter((image) => !image.src.toLowerCase().endsWith('.gif'))
+  .slice(0, 4);
 
 interface HeroProps {
   onOpenContact: () => void;
@@ -34,178 +22,141 @@ interface HeroProps {
   renderHeadline: (headline: string, className?: string) => React.ReactNode;
 }
 
+function localizedPath(lang: string, path: string) {
+  return lang === 'uz' ? path : `/${lang}${path}`;
+}
+
 const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }) => {
   if (!dictionary) return null;
 
+  const heroCopy =
+    lang === 'uz'
+      ? {
+          preHeadline: "O'zbekiston bizneslari uchun branding agentligi",
+          title: "Biznesingiz **ishonchli ko'rinib**, qimmatroq sotilsin.",
+          description:
+            "Jon.Branding nom, logo, qadoq, brand strategy va brandbook orqali biznesingizni mijoz ko'zida aniq, esda qolarli va professional qiladi.",
+          cta: 'Bepul brand audit olish',
+          ctaSecondary: "Ishlarni ko'rish",
+          proofItems: ['15 daqiqada 3 ta aniq xato', 'Qaysi xizmat kerakligini aytamiz', 'Bosimsiz, majburiyatsiz suhbat'],
+          visualProofTitle: 'Audit natijasi',
+          visualProofText:
+            "Logo, nom, qadoq va kommunikatsiyadagi ishonchni pasaytirayotgan nuqtalarni aniq ko'rsatamiz.",
+        }
+      : dictionary;
+
+  const proofItems: string[] = heroCopy.proofItems || [
+    'Auditda 3 ta aniq muammo',
+    'Qaysi xizmat kerakligini aytamiz',
+    'Sotuvsiz bosim yoq',
+  ];
+
   return (
-    <section
-      className="relative bg-white overflow-hidden min-h-[100svh] flex flex-col justify-center"
-      style={{ paddingTop: '110px' }}
-      suppressHydrationWarning
-    >
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-400/10 blur-[120px] rounded-full animate-pulse [animation-delay:2s]" />
-      </div>
+    <section className="relative isolate max-w-[100vw] overflow-hidden bg-[#f6f1e8] pt-24 sm:pt-28 lg:pt-32">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(37,99,235,0.13),transparent_28rem),radial-gradient(circle_at_88%_12%,rgba(14,165,233,0.12),transparent_24rem),linear-gradient(180deg,#fbf7ef_0%,#eef5ff_100%)]" />
+      <div className="absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-white/90 to-transparent" />
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
-          {/* Left Content: Text & CTAs */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col space-y-8 lg:space-y-10"
+      <div className="container mx-auto max-w-[1320px] overflow-hidden px-4 sm:px-6 lg:px-8">
+        <div className="grid min-h-[calc(100svh-7rem)] items-center gap-10 py-12 lg:grid-cols-[0.94fr_1.06fr] lg:gap-14 lg:py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto w-full max-w-[300px] text-center sm:max-w-3xl lg:mx-0 lg:w-full lg:text-left"
           >
-            {/* Urgency Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/10 rounded-full w-fit backdrop-blur-sm group hover:bg-primary/10 transition-colors">
-              <Zap className="w-4 h-4 text-primary animate-pulse" />
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-primary">
-                {dictionary.urgencyBadge}
-              </span>
+            <div className="mb-5 inline-flex w-full max-w-[300px] items-center justify-center gap-2 rounded-full border border-slate-900/10 bg-white/70 px-4 py-2 text-center text-[8px] font-black uppercase tracking-[0.04em] text-slate-700 shadow-sm backdrop-blur sm:w-auto sm:max-w-full sm:text-[11px] sm:tracking-[0.22em]">
+              <Sparkles className="h-4 w-4 text-blue-600" />
+              <span className="min-w-0 text-balance">{heroCopy.preHeadline || 'Brendingni tushunarli qilamiz'}</span>
             </div>
 
-            {/* Main Headline */}
-            <div className="space-y-6">
-              <p className="text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] text-primary/60 mb-2">
-                {dictionary.preHeadline}
-              </p>
-              <div className="relative">
-                {renderHeadline(dictionary.title, "text-slate-900 drop-shadow-sm leading-[1.1] tracking-tight")}
-              </div>
-              <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
-                {dictionary.description}
-              </p>
-            </div>
+            <h1 className="mx-auto max-w-[300px] text-balance text-[34px] font-black leading-[0.94] tracking-[-0.045em] text-slate-950 sm:max-w-none sm:text-[64px] sm:tracking-[-0.07em] lg:mx-0 lg:text-[78px] xl:text-[88px]">
+              {renderHeadline(heroCopy.title || '', 'text-slate-950')}
+            </h1>
 
-            {/* Mobile Visual (appears between text and buttons on mobile) */}
-            <div className="lg:hidden">
-               <HeroCarousel images={portfolioImages} />
-            </div>
+            <p className="mx-auto mt-6 max-w-[300px] text-pretty text-base leading-8 text-slate-600 sm:max-w-2xl sm:text-xl lg:mx-0">
+              {heroCopy.description}
+            </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
-              <Magnetic>
-                <Button 
-                  size="lg" 
-                  className="bg-primary hover:bg-primary/90 text-white rounded-2xl px-8 h-14 md:h-16 text-base md:text-lg font-bold shadow-2xl shadow-primary/30 group relative overflow-hidden"
-                  onClick={onOpenContact}
-                >
-                  <span className="relative z-10 flex items-center gap-2">
-                    {dictionary.cta}
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Button>
-              </Magnetic>
-
-              <Button 
-                variant="outline" 
-                size="lg" 
-                asChild
-                className="rounded-2xl px-8 h-14 md:h-16 text-base font-bold border-slate-200 hover:bg-slate-50 transition-all text-slate-700"
+            <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+              <Button
+                onClick={onOpenContact}
+                size="lg"
+                className="h-14 w-full rounded-2xl bg-slate-950 px-5 text-base font-black text-white shadow-[0_22px_60px_-28px_rgba(15,23,42,0.9)] hover:bg-blue-700 sm:h-16 sm:w-auto sm:px-9"
               >
-                <Link href={`/${lang}/portfolio`}>
-                  {dictionary.ctaSecondary}
+                {heroCopy.cta || 'Bepul audit olish'}
+                <ArrowRight className="h-5 w-5" />
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="h-14 w-full rounded-2xl border-slate-200 bg-white/75 px-5 text-base font-black text-slate-900 shadow-none hover:bg-white sm:h-16 sm:w-auto sm:px-7"
+              >
+                <Link href={localizedPath(lang, '/portfolio')}>
+                  {heroCopy.ctaSecondary || 'Ishlarni ko‘rish'}
                 </Link>
               </Button>
             </div>
 
-            {/* Trust Indicators / Stats */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100">
-              {dictionary.stats?.map((stat: any, i: number) => (
-                <div key={i} className="space-y-1">
-                  <div className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">{stat.value}</div>
-                  <div className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wide leading-tight">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Guarantees */}
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
-              {dictionary.guarantees?.map((g: string, i: number) => (
-                <div key={i} className="flex items-center gap-2">
-                  <Shield className="w-3.5 h-3.5 text-green-500" />
-                  <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wide">{g}</span>
+            <div className="mt-6 grid gap-2 sm:grid-cols-3">
+              {proofItems.map((item) => (
+                <div key={item} className="flex items-center justify-center gap-2 rounded-2xl border border-white/70 bg-white/62 px-3 py-3 text-sm font-bold text-slate-700 shadow-sm backdrop-blur lg:justify-start">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-blue-600" />
+                  <span>{item}</span>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Right Content: Portfolio Carousel (Desktop Only) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="relative hidden lg:block"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            className="relative mx-auto w-full max-w-2xl lg:max-w-none"
           >
-            <TiltCard strength={5}>
-              <HeroCarousel images={portfolioImages} />
-            </TiltCard>
-
-            {/* Floating Trust Badge */}
-            <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-6 -left-12 bg-white p-6 rounded-3xl shadow-2xl border border-slate-100 z-20 hidden xl:block max-w-[220px]"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-primary" />
-                </div>
-                <div className="text-xs font-black text-slate-900 uppercase">Surgical Results</div>
+            <div className="relative rounded-[2.25rem] border border-white/80 bg-white/62 p-3 shadow-[0_35px_100px_-55px_rgba(15,23,42,0.85)] backdrop-blur-xl sm:p-4">
+              <div className="grid min-h-[360px] gap-3 sm:min-h-[520px] sm:grid-cols-2">
+                {portfolioImages.length > 0 ? (
+                  portfolioImages.map((image, index) => (
+                    <div
+                      key={`${image.src}-${index}`}
+                      className={[
+                        'relative overflow-hidden rounded-[1.65rem] bg-slate-100 ring-1 ring-slate-900/5',
+                        index === 0 ? 'sm:row-span-2' : '',
+                      ].join(' ')}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt || 'Jon.Branding portfolio namunasi'}
+                        fill
+                        priority={index < 2}
+                        sizes="(max-width: 768px) 92vw, 48vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-full flex items-center justify-center rounded-[1.65rem] bg-slate-100 p-10 text-center text-sm font-bold text-slate-500">
+                    Portfolio namunalarini yuklash uchun Sanity media tekshiriladi.
+                  </div>
+                )}
               </div>
-              <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
-                Biznesingizni strategik 'skalpel' bilan tahlil qilamiz va natijani kafolatlaymiz.
-              </p>
-            </motion.div>
-          </motion.div>
 
+              <div className="absolute -bottom-6 left-5 right-5 rounded-3xl border border-slate-900/10 bg-slate-950 p-5 text-white shadow-[0_24px_70px_-35px_rgba(15,23,42,0.95)] sm:left-8 sm:right-auto sm:max-w-sm">
+                <div className="mb-2 flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-blue-200">
+                  <ShieldCheck className="h-4 w-4" />
+                  {heroCopy.visualProofTitle || 'Audit natijasi'}
+                </div>
+                <p className="text-sm leading-6 text-white/78">
+                  {heroCopy.visualProofText || 'Logo, nom, qadoq va kommunikatsiyadagi ishonchni pasaytirayotgan nuqtalarni aniq ko‘rsatamiz.'}
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 };
-
-const HeroCarousel = ({ images }: { images: GalleryImage[] }) => (
-  <div className="relative group w-full flex justify-center">
-    <div className="relative w-full max-w-[500px] h-[350px] sm:h-[450px] lg:h-[550px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/20 bg-slate-100 flex items-center justify-center">
-      <Carousel
-        plugins={[Autoplay({ delay: 4000, stopOnInteraction: false })]}
-        className="w-full h-full"
-      >
-        <CarouselContent className="h-full ml-0">
-          {images.length > 0 ? (
-            images.map((image, index) => (
-              <CarouselItem key={index} className="h-full pl-0 relative min-h-full w-full">
-                <div className="relative w-full h-full">
-                  <Image
-                    src={image.src}
-                    alt={image.alt || 'Jon Branding Portfolio'}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
-                    quality={85}
-                  />
-                </div>
-              </CarouselItem>
-            ))
-          ) : (
-            <CarouselItem className="h-full pl-0 relative flex items-center justify-center bg-slate-200 w-full">
-               <span className="text-muted-foreground font-bold italic text-sm">Portfolio rasmlari yuklanmoqda...</span>
-            </CarouselItem>
-          )}
-        </CarouselContent>
-      </Carousel>
-      {/* Decorative Glow */}
-      <div className="absolute -inset-4 bg-primary/20 blur-[100px] rounded-full -z-10 opacity-30 animate-pulse" />
-    </div>
-  </div>
-);
 
 export default Hero;
