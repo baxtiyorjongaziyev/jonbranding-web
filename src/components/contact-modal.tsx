@@ -34,7 +34,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const { toast } = useToast();
   const [isSubmitting, setSubmitting] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
   const { user } = useTelegram();
   const [translations, setTranslations] = useState<any>(null);
   const quickContactLabel =
@@ -72,6 +72,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   useEffect(() => {
     if (isOpen) {
+      setStep(4);
       getDictionary(lang as any).then(dict => {
         if (dict && dict.contactModal) {
           setTranslations(dict.contactModal);
@@ -82,11 +83,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const formSchema = useMemo(() => {
     return z.object({
-      role: z.string().min(1, { message: translations?.formErrors?.role || 'Tanlang' }),
-      revenue: z.string().min(1, { message: translations?.formErrors?.revenue || 'Tanlang' }),
-      ambition: z.string().min(3, { message: translations?.formErrors?.ambition || 'Maqsad kiritilishi shart' }),
-      pain: z.string().min(1, { message: translations?.formErrors?.pain || 'To\'siqni tanlang' }),
-      budget: z.string().min(1, { message: translations?.formErrors?.budget || 'Byudjetni tanlang' }),
+      role: z.string().optional(),
+      revenue: z.string().optional(),
+      ambition: z.string().optional(),
+      pain: z.string().optional(),
+      budget: z.string().optional(),
       fullName: z.string().min(2, { message: translations?.formErrors?.fullName || 'Ism kiritilishi shart' }),
       phone: z.string().min(12, { message: translations?.formErrors?.phone || 'To\'liq telefon raqamini kiriting' }),
       telegram: z.string().optional(),

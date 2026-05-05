@@ -3,51 +3,65 @@ import fs from 'fs';
 import path from 'path';
 
 const BASE_URL = 'https://jonbranding.uz';
-const locales = ['uz', 'ru', 'en', 'zh'];
+const locales = ['uz', 'ru', 'en', 'zh'] as const;
+type Locale = (typeof locales)[number];
+
+const staticRoutes = [
+  '',
+  '/blog',
+  '/checklist',
+  '/pricing',
+  '/privacy',
+  '/quiz',
+  '/sitemap',
+  '/terms',
+  '/xizmatlar',
+  '/xizmatlar/neyming',
+  '/xizmatlar/logo-dizayni',
+  '/xizmatlar/brand-strategiyasi',
+  '/xizmatlar/firmenniy-stil',
+  '/xizmatlar/qadoq-dizayni',
+  '/xizmatlar/brandbook',
+  '/xizmatlar/patent-kalkulyatori',
+];
+
+function localizedUrl(lang: Locale, route: string) {
+  if (lang === 'uz') {
+    return `${BASE_URL}${route || '/'}`;
+  }
+
+  return `${BASE_URL}/${lang}${route}`;
+}
+
+function getMarkdownBlogEntries(): MetadataRoute.Sitemap {
+  const postsDirectory = path.join(process.cwd(), 'src/posts');
+  if (!fs.existsSync(postsDirectory)) return [];
+
+  return locales.flatMap((lang) => {
+    const langDirectory = path.join(postsDirectory, lang);
+    if (!fs.existsSync(langDirectory)) return [];
+
+    return fs
+      .readdirSync(langDirectory)
+      .filter((fileName) => fileName.endsWith('.md'))
+      .map((fileName) => ({
+        url: localizedUrl(lang, `/blog/${fileName.replace(/\.md$/, '')}`),
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+      }));
+  });
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ['', '/checklist', '/blog', '/pricing', '/privacy', '/quiz', '/sitemap', '/terms'];
-  const services = [
-    '/xizmatlar/neyming',
-    '/xizmatlar/logo-dizayni',
-    '/xizmatlar/brand-strategiyasi',
-    '/xizmatlar/firmenniy-stil',
-    '/xizmatlar/qadoq-dizayni',
-    '/xizmatlar/brandbook',
-    '/xizmatlar/patent-kalkulyatori'
-  ];
-
-  const allRoutes = [...routes, ...services];
-  
-  // 1. Generate static localized pages
-  const staticPages = locales.flatMap((lang) => 
-    allRoutes.map((route) => ({
-      url: `${BASE_URL}/${lang}${route}`,
+  const staticPages = locales.flatMap((lang) =>
+    staticRoutes.map((route) => ({
+      url: localizedUrl(lang, route),
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: route === '' ? 1.0 : 0.8,
     }))
   );
 
-  // 2. Generate blog post pages dynamically
-  const blogPosts: any[] = [];
-  locales.forEach((lang) => {
-    const postsDir = path.join(process.cwd(), 'src/posts', lang);
-    if (fs.existsSync(postsDir)) {
-      const files = fs.readdirSync(postsDir);
-      files.forEach((file) => {
-        if (file.endsWith('.md')) {
-          const slug = file.replace('.md', '');
-          blogPosts.push({
-            url: `${BASE_URL}/${lang}/blog/${slug}`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly' as const,
-            priority: 0.6,
-          });
-        }
-      });
-    }
-  });
-
-  return [...staticPages, ...blogPosts];
+  return [...staticPages, ...getMarkdownBlogEntries()];
 }

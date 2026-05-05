@@ -139,7 +139,7 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                   </div>
                   <div className="p-5 rounded-2xl bg-red-50 border border-red-100">
                     <div className="font-bold text-red-700 mb-2">{t.analogy.leak}</div>
-                    <p className="text-sm text-red-600/80">Yomon dizayn va ishonchsiz ko'rinish — bu chelakdagi teshiklar. Pul oqib ketyapti!</p>
+                    <p className="text-sm text-red-600/80">Ishonchsiz ko'rinish reklama natijasini pasaytiradi va mijoz qarorini sekinlashtiradi.</p>
                   </div>
                 </div>
 
@@ -202,7 +202,7 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
               >
                 <div className="flex flex-col items-center">
                    <span>{t.cta}</span>
-                   <span className="text-[10px] opacity-60 font-normal uppercase mt-1">Audit o'tkazish va teshiklarni yamash</span>
+                   <span className="text-[10px] opacity-60 font-normal uppercase mt-1">Audit o'tkazish va ustuvor muammolarni aniqlash</span>
                 </div>
                 <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
               </Button>
