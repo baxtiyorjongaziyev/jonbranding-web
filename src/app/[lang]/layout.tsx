@@ -21,8 +21,23 @@ const BASE_URL = 'https://jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
 const ICON_URL = '/icon.svg';
 
+const localeUrls = {
+  uz: BASE_URL,
+  ru: `${BASE_URL}/ru`,
+  en: `${BASE_URL}/en`,
+  zh: `${BASE_URL}/zh`,
+} satisfies Record<Locale, string>;
+
+const ogLocales = {
+  uz: 'uz_UZ',
+  ru: 'ru_RU',
+  en: 'en_US',
+  zh: 'zh_CN',
+} satisfies Record<Locale, string>;
+
 export async function generateMetadata({ params: { lang } }: Props): Promise<Metadata> {
-  const dictionary = await getDictionary(lang as Locale);
+  const safeLang = locales.includes(lang as Locale) ? (lang as Locale) : defaultLocale;
+  const dictionary = await getDictionary(safeLang);
   return {
     metadataBase: new URL(BASE_URL),
     title: {
@@ -41,8 +56,8 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
     },
     openGraph: {
       type: 'website',
-      locale: lang === 'uz' ? 'uz_UZ' : lang === 'ru' ? 'ru_RU' : lang === 'zh' ? 'zh_CN' : 'en_US',
-      url: BASE_URL,
+      locale: ogLocales[safeLang],
+      url: localeUrls[safeLang],
       siteName: 'Jon.Branding',
       images: [{ url: OG_IMAGE_URL, width: 1200, height: 630, alt: 'Jon Branding Agency' }],
     },
@@ -51,12 +66,10 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
       images: [OG_IMAGE_URL],
     },
     alternates: {
-      canonical: `${BASE_URL}/${lang}`,
+      canonical: localeUrls[safeLang],
       languages: {
-        'uz': `${BASE_URL}/uz`,
-        'ru': `${BASE_URL}/ru`,
-        'en': `${BASE_URL}/en`,
-        'zh': `${BASE_URL}/zh`,
+        ...localeUrls,
+        'x-default': BASE_URL,
       },
     },
   };
@@ -96,7 +109,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
   return (
     <html lang={lang} suppressHydrationWarning className={cn(plusJakartaSans.variable, inter.variable)}>
       <head>
-        <link rel="alternate" hrefLang="x-default" href="https://jonbranding.uz/uz" />
+        <link rel="alternate" hrefLang="x-default" href="https://jonbranding.uz" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2563EB" />
@@ -241,13 +254,10 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 fbq('track', 'PageView');
               };
 
-              // Events to trigger loading
-              ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-                window.addEventListener(event, loadAnalytics, { once: true, passive: true });
-              });
-              
-              // Fallback for bots or slow interactions
-              setTimeout(loadAnalytics, 5000);
+              window.addEventListener('cookie-consent-accepted', loadAnalytics);
+              if (document.cookie.includes('cookie_consent_accepted=true')) {
+                loadAnalytics();
+              }
             })();
           `}
         </Script>
@@ -266,6 +276,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">
           {`
+            if (document.cookie.includes('cookie_consent_accepted=true')) {
             (function(m,e,t,r,i,k,a){
                 m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                 m[i].l=1*new Date();
@@ -274,6 +285,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
             })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
 
             ym(91628105, 'init', {webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+            }
           `}
         </Script>
         <noscript>
