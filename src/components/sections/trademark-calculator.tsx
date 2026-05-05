@@ -142,8 +142,6 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
 
 export default function TrademarkCalculator({ translations }: { translations: any }) {
   const { toast } = useToast();
-  
-  if (!translations) return null;
 
   const formSchema = z.object({
     brand: z.string().min(1, { message: translations?.error_brand }),
@@ -258,6 +256,8 @@ export default function TrademarkCalculator({ translations }: { translations: an
     const count = (fees?.classCount ?? 1) - 1;
     return translations?.extraClassesFee?.replace('{count}', count.toString()) ?? `Extra classes (${count})`;
   };
+
+  if (!translations) return null;
 
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
