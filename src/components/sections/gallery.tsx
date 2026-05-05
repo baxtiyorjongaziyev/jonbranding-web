@@ -57,11 +57,26 @@ const Gallery: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
   const midPoint = Math.ceil(galleryImages.length / 2);
   const firstColumn = galleryImages.slice(0, midPoint);
   const secondColumn = galleryImages.slice(midPoint);
+  const proofLabels =
+    lang === 'uz'
+      ? ['Logo', 'Qadoq', 'Brandbook', 'Sotuvchi vizual tizim']
+      : lang === 'ru'
+        ? ['Логотип', 'Упаковка', 'Брендбук', 'Продающая визуальная система']
+        : lang === 'zh'
+          ? ['标志', '包装', '品牌手册', '销售型视觉系统']
+          : ['Logo', 'Packaging', 'Brandbook', 'Sales-ready identity'];
 
   return (
     <BrandSection id="portfolio" tone="soft" className="overflow-hidden">
       <div className="container mx-auto px-4">
         <SectionIntro eyebrow="Portfolio wall" title={translations.title} description={translations.subtitle} />
+        <div className="mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-3">
+          {proofLabels.map((label) => (
+            <span key={label} className="brand-badge bg-white/75">
+              {label}
+            </span>
+          ))}
+        </div>
       </div>
       <div className="mt-6 relative h-[calc(100svh-260px)] overflow-hidden">
          <div className="absolute inset-0 grid grid-cols-2 gap-6 w-full max-w-5xl mx-auto px-4">

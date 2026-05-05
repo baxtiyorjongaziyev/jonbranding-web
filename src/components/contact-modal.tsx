@@ -45,6 +45,30 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         : lang === 'zh'
           ? '快速联系'
           : 'Quick contact';
+  const offerStack =
+    lang === 'uz'
+      ? ['15 daqiqada 3 ta brend xatosi', 'Qaysi xizmat kerakligini aniqlaymiz', 'Majburiy sotuv yoq - avval foyda']
+      : lang === 'ru'
+        ? ['3 ошибки бренда за 15 минут', 'Поймем, какая услуга нужна именно вам', 'Без давления - сначала польза']
+        : lang === 'zh'
+          ? ['15 分钟内找出 3 个品牌问题', '明确您真正需要的服务', '不强卖，先给价值']
+          : ['3 brand leaks in 15 minutes', 'Clear service recommendation', 'No pressure - value first'];
+  const objectionCopy =
+    lang === 'uz'
+      ? 'Hali tayyor bolmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.'
+      : lang === 'ru'
+        ? 'Даже если вы еще не готовы покупать: после аудита станет понятно, что делать дальше.'
+        : lang === 'zh'
+          ? '即使还没准备购买：审核后您会清楚下一步该做什么。'
+          : 'Even if you are not ready to buy, the audit gives you a clear next step.';
+  const riskCopy =
+    lang === 'uz'
+      ? 'Telefon qoldirish - shartnoma degani emas. Avval muammo va imkoniyatni korsatamiz.'
+      : lang === 'ru'
+        ? 'Оставить телефон - не значит подписать договор. Сначала покажем проблему и возможность.'
+        : lang === 'zh'
+          ? '留下电话不等于签约。我们先说明问题和机会。'
+          : 'Leaving your phone is not a contract. First we show the problem and opportunity.';
 
   useEffect(() => {
     if (isOpen) {
@@ -189,6 +213,17 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
               <p className="text-gray-300/80 text-xs md:text-base leading-relaxed mb-4 md:mb-8 max-w-[280px]">
                 {translations?.sidebarSubtitle || 'Build your high-profit branding system with our experts.'}
               </p>
+              <div className="grid gap-2 rounded-3xl border border-white/10 bg-white/5 p-3 md:p-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-cyan">
+                  Free audit gives
+                </div>
+                {offerStack.map((item) => (
+                  <div key={item} className="flex items-start gap-2 text-xs font-bold leading-5 text-white/90">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-lime" />
+                    {item}
+                  </div>
+                ))}
+              </div>
               
               <div className="space-y-6 mt-12 hidden md:block">
                 {[
@@ -386,7 +421,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                 <div className="p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 flex gap-3 items-center">
                                   <Sparkles className="w-4 h-4 text-blue-600 shrink-0 animate-pulse" />
                                   <p className="text-[10px] text-blue-800/80 italic font-medium">
-                                    {translations?.description}
+                                    {translations?.description || objectionCopy}
                                   </p>
                                 </div>
                               </motion.div>
@@ -476,6 +511,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                           <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-gray-400 font-medium tracking-tight">
                             <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
                             {translations?.trustBadge || 'Data is 100% encrypted and confidential.'}
+                          </div>
+                          <div className="mx-auto mt-2 max-w-md text-center text-[10px] font-semibold leading-4 text-gray-400">
+                            {riskCopy}
                           </div>
                         </div>
                       </form>

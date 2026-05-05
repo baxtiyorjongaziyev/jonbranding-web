@@ -89,7 +89,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
             <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
               <Magnetic>
                 <Button 
-                  size="xl" 
+                  size="lg" 
                   className="bg-primary hover:bg-primary/90 text-white rounded-2xl px-8 h-14 md:h-16 text-base md:text-lg font-bold shadow-2xl shadow-primary/30 group relative overflow-hidden"
                   onClick={onOpenContact}
                 >
@@ -102,7 +102,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
 
               <Button 
                 variant="outline" 
-                size="xl" 
+                size="lg" 
                 asChild
                 className="rounded-2xl px-8 h-14 md:h-16 text-base font-bold border-slate-200 hover:bg-slate-50 transition-all text-slate-700"
               >

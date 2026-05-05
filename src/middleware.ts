@@ -7,6 +7,10 @@ const defaultLocale = 'uz';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  if (request.nextUrl.searchParams.get('__rewrite') === '1') {
+    return NextResponse.next();
+  }
+
   // 1. Handle explicitly prefixed '/uz' routes by redirecting to root (SEO)
   if (pathname === '/uz' || pathname.startsWith('/uz/')) {
     const newPath = pathname === '/uz' ? '/' : pathname.replace('/uz/', '/');
@@ -33,7 +37,8 @@ export function middleware(request: NextRequest) {
 
   // 5. For default locale (uz), rewrite internally to /[lang] path without visible prefix
   const url = request.nextUrl.clone();
-  url.pathname = `/${defaultLocale}${pathname}`;
+  url.pathname = `/${defaultLocale}${pathname === '/' ? '' : pathname}`;
+  url.searchParams.set('__rewrite', '1');
   return NextResponse.rewrite(url);
 }
 
