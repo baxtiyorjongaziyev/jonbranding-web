@@ -125,10 +125,43 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
       return null;
     }
 
+  const proofStats =
+    lang === 'uz'
+      ? [
+          ['Video dalil', 'mijoz ovozi va yuzini ko‘rasiz'],
+          ['Real bizneslar', 'agentlik emas, tadbirkor gapiryapti'],
+          ['Qaror osonlashadi', 'natija faqat chiroyli rasm emas'],
+        ]
+      : lang === 'ru'
+        ? [
+            ['Видео-доказательство', 'видно лицо и голос клиента'],
+            ['Реальный бизнес', 'говорит предприниматель, не агентство'],
+            ['Легче принять решение', 'результат не просто красивая картинка'],
+          ]
+        : lang === 'zh'
+          ? [
+              ['视频证明', '看到客户的声音和面孔'],
+              ['真实企业', '由企业主本人说明'],
+              ['决策更容易', '结果不只是漂亮图片'],
+            ]
+          : [
+              ['Video proof', 'see the client voice and face'],
+              ['Real businesses', 'owners speak, not the agency'],
+              ['Decision clarity', 'outcome beyond pretty visuals'],
+            ];
+
   return (
     <BrandSection tone="soft" className="overflow-hidden">
       <div className="container mx-auto px-4">
         <SectionIntro eyebrow="Client voice" title={translations.title} description={translations.subtitle} className="mb-10" />
+        <div className="mx-auto mb-10 grid max-w-5xl gap-3 md:grid-cols-3">
+          {proofStats.map(([title, desc]) => (
+            <BrandCard key={title} className="p-4">
+              <div className="text-sm font-black text-brand-ink">{title}</div>
+              <div className="mt-1 text-xs font-medium leading-5 text-brand-slate">{desc}</div>
+            </BrandCard>
+          ))}
+        </div>
 
         {videoTestimonials.length > 0 && (
             <div className="max-w-5xl mx-auto">

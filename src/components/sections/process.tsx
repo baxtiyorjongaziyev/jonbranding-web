@@ -43,12 +43,29 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
 
   if (!translations || !translations.phases) return null;
 
+  const processProof =
+    lang === 'uz'
+      ? ['Avval diagnostika', 'Keyin strategiya', 'So‘ng vizual tizim', 'Oxirida qo‘llash yo‘riqnomasi']
+      : lang === 'ru'
+        ? ['Сначала диагностика', 'Потом стратегия', 'Затем визуальная система', 'В конце инструкция внедрения']
+        : lang === 'zh'
+          ? ['先诊断', '再策略', '再视觉系统', '最后交付使用指南']
+          : ['Diagnose first', 'Strategy next', 'Visual system after', 'Usage guide at the end'];
+
   return (
     <BrandSection id="process" tone="light" className="relative overflow-visible p-0" suppressHydrationWarning>
       <div ref={targetRef} className="h-[300vh]">
         <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
           <div className="container mx-auto px-4 mb-16">
             <SectionIntro eyebrow="Process OS" title={translations.title} description={translations.subtitle} />
+            <BrandCard className="mx-auto mt-8 grid max-w-5xl gap-2 p-3 sm:grid-cols-4">
+              {processProof.map((item, index) => (
+                <div key={item} className="rounded-2xl bg-white/70 px-4 py-3 text-center">
+                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue">0{index + 1}</div>
+                  <div className="mt-1 text-sm font-black text-brand-ink">{item}</div>
+                </div>
+              ))}
+            </BrandCard>
           </div>
 
           <div className="flex items-center w-full">
