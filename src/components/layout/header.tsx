@@ -144,7 +144,6 @@ const ExpandingButton = ({
 };
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
-  if (!dictionary) return null;
   const { scrollY } = useScroll();
   
   const top = useTransform(scrollY, [0, 80], [0, 16]);
@@ -217,6 +216,8 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     if (lang === 'uz') return cleanPath;
     return `/${lang}${cleanPath === '/' ? '' : cleanPath}`;
   };
+
+  if (!dictionary) return null;
 
   const navItems = [
     { href: getLocalizedPath('/#portfolio'), label: dictionary.portfolio },
