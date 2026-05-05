@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import CtaBlock from './cta-block';
+import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 interface ProcessProps {
   onCtaClick: () => void;
@@ -13,21 +14,21 @@ interface ProcessProps {
 }
 
 const ProcessCard = ({ title, description, tasks, phase }: { title: string, description: string, tasks: string[], phase: string }) => (
-    <div className="w-[85vw] md:w-[450px] flex-shrink-0 bg-secondary/30 p-6 md:p-8 rounded-3xl border border-primary/5 shadow-sm hover:shadow-md transition-all mx-3 md:mx-4">
+    <BrandCard className="w-[320px] md:w-[450px] flex-shrink-0 p-8 transition-all mx-4">
         <div className="flex items-center gap-4 mb-6">
-          <span className="text-sm font-black text-primary bg-primary/10 px-3 py-1 rounded-full">{phase}</span>
-          <div className="h-px flex-grow bg-primary/10"></div>
+          <span className="text-sm font-black text-brand-blue bg-brand-blue/10 px-3 py-1 rounded-full">{phase}</span>
+          <div className="h-px flex-grow bg-brand-line"></div>
         </div>
-        <h3 className="text-2xl font-bold text-dark-blue mb-3">{title}</h3>
-        <p className="text-base text-gray-600 leading-relaxed mb-6">{description}</p>
+        <h3 className="text-2xl font-black text-brand-ink mb-3 tracking-[-0.03em]">{title}</h3>
+        <p className="text-base text-brand-slate leading-relaxed mb-6">{description}</p>
         <div className="mt-auto flex flex-wrap gap-2">
             {tasks?.map((task) => (
-                <Badge key={task} variant="secondary" className="bg-white/50 text-gray-700 hover:bg-gray-200 font-medium px-3 py-1 text-xs rounded-full border-none">
+                <Badge key={task} variant="secondary" className="bg-white/70 text-brand-slate hover:bg-white font-medium px-3 py-1 text-xs rounded-full border border-brand-line">
                     {task}
                 </Badge>
             ))}
         </div>
-    </div>
+    </BrandCard>
 );
 
 const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
@@ -43,16 +44,11 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
   if (!translations || !translations.phases) return null;
 
   return (
-    <section id="process" className="relative bg-white overflow-visible" suppressHydrationWarning>
+    <BrandSection id="process" tone="light" className="relative overflow-visible p-0" suppressHydrationWarning>
       <div ref={targetRef} className="h-[300vh]">
         <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-          <div className="container mx-auto px-4 mb-16 text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark-blue tracking-tighter">
-              {translations.title}
-            </h2>
-            <p className="mt-4 max-w-3xl mx-auto text-lg md:text-xl text-gray-500 font-medium">
-              {translations.subtitle}
-            </p>
+          <div className="container mx-auto px-4 mb-16">
+            <SectionIntro eyebrow="Process OS" title={translations.title} description={translations.subtitle} />
           </div>
 
           <div className="flex items-center w-full">
@@ -71,7 +67,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
         buttonText={translations.ctaButton} 
         onCtaClick={onCtaClick} 
       />
-    </section>
+    </BrandSection>
   );
 };
 

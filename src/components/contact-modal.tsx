@@ -37,6 +37,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const [step, setStep] = useState(1);
   const { user } = useTelegram();
   const [translations, setTranslations] = useState<any>(null);
+  const quickContactLabel =
+    lang === 'uz'
+      ? 'Tez aloqa'
+      : lang === 'ru'
+        ? 'Быстрая связь'
+        : lang === 'zh'
+          ? '快速联系'
+          : 'Quick contact';
 
   useEffect(() => {
     if (isOpen) {
@@ -230,10 +238,37 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         <Target className="w-3.5 h-3.5 text-blue-500" />
                         <span className="text-[10px] font-bold uppercase tracking-wider">{translations?.header || 'Strategic Session'}</span>
                       </div>
-                      <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded">
-                        Step {step} / 4
+                      <div className="flex items-center gap-2">
+                        {step < 4 && (
+                          <button
+                            type="button"
+                            onClick={() => setStep(4)}
+                            className="rounded-full bg-gray-900 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-white transition-colors hover:bg-blue-600"
+                          >
+                            {quickContactLabel}
+                          </button>
+                        )}
+                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded">
+                          Step {step} / 4
+                        </div>
                       </div>
                     </div>
+
+                    {step === 1 && (
+                      <div className="mb-5 grid grid-cols-1 gap-2 rounded-2xl border border-blue-100 bg-blue-50/70 p-3 sm:grid-cols-3">
+                        <a href="tel:+998336450097" className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-black text-gray-900 shadow-sm transition-colors hover:text-blue-600">
+                          <PhoneCall className="h-4 w-4 text-blue-600" />
+                          +998 33 645 00 97
+                        </a>
+                        <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-black text-gray-900 shadow-sm transition-colors hover:text-blue-600">
+                          <MessageCircle className="h-4 w-4 text-blue-600" />
+                          Telegram
+                        </a>
+                        <button type="button" onClick={() => setStep(4)} className="flex items-center justify-center rounded-xl bg-gray-900 px-3 py-2 text-xs font-black text-white shadow-sm transition-colors hover:bg-blue-600">
+                          {quickContactLabel}
+                        </button>
+                      </div>
+                    )}
 
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 flex flex-col">

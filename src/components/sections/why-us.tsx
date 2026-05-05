@@ -1,12 +1,11 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Target, ListChecks, Star } from 'lucide-react';
 import CtaBlock from './cta-block';
 import TiltCard from '@/components/ui/tilt-card';
-import { FC, useEffect, useState } from 'react';
-import { getDictionary, Locale } from '@/lib/dictionaries';
+import { FC } from 'react';
 import { motion } from 'framer-motion';
+import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const itemVariants = {
   hidden: { opacity: 0, scale: 0.95, y: 30 },
@@ -50,12 +49,13 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
   
   return (
     <>
-    <section className="py-20 sm:py-28 bg-white">
+    <BrandSection tone="light">
       <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h2 className="section-title">{translations.title}</h2>
-          <p className="section-subtitle">{translations.subtitle}</p>
-        </div>
+        <SectionIntro
+          eyebrow="Jon.Branding system"
+          title={translations.title}
+          description={translations.subtitle}
+        />
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -68,23 +68,21 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
           {values.map((value, index) => (
              <motion.div key={index} variants={itemVariants} className="h-full">
                <TiltCard strength={10} className="h-full">
-                  <Card className="bg-secondary/50 shadow-lg hover:shadow-xl transition-shadow rounded-2xl h-full border-none">
-                    <CardHeader className="items-center text-center">
-                      <div className="bg-primary/10 p-4 rounded-full">
-                        <value.icon className="w-8 h-8 text-primary" />
+                  <BrandCard className="h-full p-7 text-center transition-transform duration-300 hover:-translate-y-1">
+                    <div className="flex flex-col items-center">
+                      <div className="bg-brand-blue/10 p-4 rounded-2xl ring-1 ring-brand-blue/15">
+                        <value.icon className="w-8 h-8 text-brand-blue" />
                       </div>
-                      <CardTitle className="!mt-4 text-xl">{value.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-center">
-                      <p className="text-gray-600">{value.description}</p>
-                    </CardContent>
-                  </Card>
+                      <h3 className="mt-5 text-xl font-black tracking-[-0.02em] text-brand-ink">{value.title}</h3>
+                      <p className="mt-3 text-brand-slate leading-7">{value.description}</p>
+                    </div>
+                  </BrandCard>
               </TiltCard>
             </motion.div>
           ))}
         </motion.div>
       </div>
-    </section>
+    </BrandSection>
     <CtaBlock 
         title={translations.ctaTitle}
         description={translations.ctaDesc}

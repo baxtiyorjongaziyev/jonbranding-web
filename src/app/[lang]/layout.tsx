@@ -11,10 +11,8 @@ import MainLayout from '@/components/layout/main-layout';
 import StickyCTA from '@/components/ui/sticky-cta';
 import MobileNavBar from '@/components/layout/mobile-nav-bar';
 import LeadMagnetPopup from '@/components/ui/lead-magnet-popup';
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import TabNotification from '@/components/layout/tab-notification';
 import OishaWidget from '@/components/oisha-widget';
-import { cn } from '@/lib/utils';
 
 
 const BASE_URL = 'https://jonbranding.uz';
@@ -63,20 +61,6 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
   };
 }
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin', 'latin-ext'],
-  display: 'swap',
-  variable: '--font-jakarta',
-  weight: ['400', '500', '600', '700', '800']
-});
-
-const inter = Inter({
-  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
-  display: 'swap',
-  variable: '--font-inter',
-  weight: ['400', '500', '600', '700', '800', '900']
-});
-
 type Props = {
   children: ReactNode;
   params: { lang: Locale };
@@ -95,7 +79,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={lang} suppressHydrationWarning className={cn(plusJakartaSans.variable, inter.variable)}>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <link rel="alternate" hrefLang="x-default" href="https://jonbranding.uz/uz" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
@@ -278,9 +262,8 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 m[i].l=1*new Date();
                 for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
                 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+                m[i](91628105, 'init', {webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
             })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
-
-            ym(YM_ID, 'init', {webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
           `}
         </Script>
         <noscript>

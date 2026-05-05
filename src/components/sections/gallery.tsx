@@ -2,10 +2,10 @@
 'use client';
 
 import Image from 'next/image';
-import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
+import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const galleryImages: GalleryImage[] = projects.flatMap(p => p.galleryImages);
 
@@ -13,7 +13,7 @@ const MarqueeColumn = ({ images, animationClass }: { images: typeof galleryImage
     <div className="flex flex-col gap-6">
         <motion.div className={`flex flex-col gap-6 ${animationClass}`}>
             {images.map((image, index) => (
-                <Card key={index} className="overflow-hidden group rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                <BrandCard key={index} className="overflow-hidden group rounded-2xl p-0 transition-all duration-300">
                     {image.src && (
                         <Image
                             src={image.src}
@@ -26,12 +26,12 @@ const MarqueeColumn = ({ images, animationClass }: { images: typeof galleryImage
                             data-ai-hint={image.hint}
                         />
                     )}
-                </Card>
+                </BrandCard>
             ))}
         </motion.div>
         <motion.div className={`flex flex-col gap-6 ${animationClass}`} aria-hidden="true">
             {images.map((image, index) => (
-                <Card key={`duplicate-${index}`} className="overflow-hidden group rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                <BrandCard key={`duplicate-${index}`} className="overflow-hidden group rounded-2xl p-0 transition-all duration-300">
                     {image.src && (
                         <Image
                             src={image.src}
@@ -44,7 +44,7 @@ const MarqueeColumn = ({ images, animationClass }: { images: typeof galleryImage
                             data-ai-hint={image.hint}
                         />
                     )}
-                </Card>
+                </BrandCard>
             ))}
         </motion.div>
     </div>
@@ -59,24 +59,19 @@ const Gallery: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
   const secondColumn = galleryImages.slice(midPoint);
 
   return (
-    <section id="portfolio" className="py-20 sm:py-28 bg-secondary">
+    <BrandSection id="portfolio" tone="soft" className="overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h2 className="section-title">{translations.title}</h2>
-          <p className="section-subtitle">
-            {translations.subtitle}
-          </p>
-        </div>
+        <SectionIntro eyebrow="Portfolio wall" title={translations.title} description={translations.subtitle} />
       </div>
       <div className="mt-6 relative h-[calc(100svh-260px)] overflow-hidden">
          <div className="absolute inset-0 grid grid-cols-2 gap-6 w-full max-w-5xl mx-auto px-4">
             <MarqueeColumn images={firstColumn} animationClass="animate-marquee-down" />
             <MarqueeColumn images={secondColumn} animationClass="animate-marquee-up" />
          </div>
-         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-secondary to-transparent z-10" />
-         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-secondary to-transparent z-10" />
+         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand-mist to-transparent z-10" />
+         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-brand-mist to-transparent z-10" />
       </div>
-    </section>
+    </BrandSection>
   );
 };
 

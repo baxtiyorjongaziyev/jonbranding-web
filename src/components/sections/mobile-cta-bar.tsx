@@ -1,72 +1,44 @@
 'use client';
 
-import { FC, useState, useEffect } from 'react';
-import { calculatePackagePrice, formatPrice } from '@/lib/pricing';
-import { useLocalStorage } from '@/hooks/use-local-storage';
+import type { FC } from 'react';
+import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
-const MobileCtaBar: FC<{ onOpenModal: () => void, lang: string, dictionary: any }> = ({ onOpenModal, lang, dictionary }) => {
-  const [selectedServices] = useLocalStorage('selectedServices', {
-    strategy: false,
-    commStrategy: false,
-    naming: false,
-    logo: true,
-    designSystem: false,
-    brandbook: false,
-    packaging: false,
-    smm: false,
-    merch: false,
-    illustrations: false,
-    audit: false,
-    namingCheck: false,
-    consultation: false,
-    urgency: false,
-    nda: false,
-  });
-  const [wantsUpfrontPayment] = useLocalStorage('wantsUpfrontPayment', false);
-  const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
-  const [price, setPrice] = useState(0);
-  const [isClient, setIsClient] = useState(false);
-  const translations = dictionary;
+const copy = {
+  uz: { cta: 'Bepul audit', hint: '15 daqiqada 3 ta xato' },
+  ru: { cta: 'Бесплатный аудит', hint: '3 ошибки за 15 минут' },
+  en: { cta: 'Free audit', hint: '3 issues in 15 minutes' },
+  zh: { cta: '免费审计', hint: '15 分钟找出 3 个问题' },
+};
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+const MobileCtaBar: FC<{ onOpenModal: () => void; lang: string; dictionary: any }> = ({ onOpenModal, lang, dictionary }) => {
+  const t = copy[(lang as keyof typeof copy) || 'uz'] || copy.uz;
 
-  useEffect(() => {
-    if (isClient) {
-      const priceDetails = calculatePackagePrice({ selectedServices, wantsUpfrontPayment }, lang as 'uz' | 'ru' | 'en' | 'zh');
-      setPrice(priceDetails.final);
-    }
-  }, [selectedServices, wantsUpfrontPayment, isClient, lang]);
-
-  if (!isClient || !translations) {
+  if (!dictionary) {
     return (
-        <div className="sticky bottom-0 z-50 md:hidden bg-background/80 backdrop-blur-sm border-t p-3 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
-            <div className="container mx-auto flex justify-between items-center">
-                <div className="text-sm space-y-1">
-                    <Skeleton className="h-6 w-16" />
-                    <Skeleton className="h-3 w-20" />
-                </div>
-                <Skeleton className="h-10 w-40" />
-            </div>
+      <div className="sticky bottom-0 z-50 border-t border-brand-line bg-white/88 p-3 shadow-[0_-18px_50px_-30px_rgba(8,15,35,0.45)] backdrop-blur-xl md:hidden">
+        <div className="container mx-auto flex items-center justify-between gap-3">
+          <div className="space-y-1">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-3 w-32" />
+          </div>
+          <Skeleton className="h-12 w-32 rounded-2xl" />
         </div>
+      </div>
     );
   }
-  
-  const agreedPriceText = lang === 'uz' ? 'Kelishiladi' : lang === 'ru' ? 'По догов.' : lang === 'en' ? 'Agreed' : '面议';
-
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-md md:hidden rounded-2xl bg-background/80 backdrop-blur-xl border border-white/20 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.3)] ring-1 ring-black/5" suppressHydrationWarning>
-      <div className="flex justify-between items-center gap-4">
-        <div className="text-left text-sm">
-            <p className="font-black text-primary text-xl tracking-tighter leading-none">{price > 0 ? formatPrice(price, lang as 'uz' | 'ru' | 'en' | 'zh', currency) : agreedPriceText}</p>
-            <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1 opacity-70">{translations.final_price}</p>
+    <div className="sticky bottom-0 z-50 border-t border-brand-line bg-white/88 p-3 shadow-[0_-18px_50px_-30px_rgba(8,15,35,0.45)] backdrop-blur-xl md:hidden" suppressHydrationWarning>
+      <div className="container mx-auto flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <p className="truncate text-[13px] font-black text-brand-ink">{t.cta}</p>
+          <p className="truncate text-[11px] font-semibold text-brand-slate">{t.hint}</p>
         </div>
-        <Button onClick={onOpenModal} size="lg" className="flex-grow shadow-2xl rounded-xl font-black uppercase tracking-tight text-sm bg-primary hover:bg-primary/90 transition-all active:scale-95">
-          {translations.get_offer}
+        <Button onClick={onOpenModal} className="h-12 rounded-2xl bg-brand-ink px-5 shadow-none hover:bg-brand-blue">
+          <MessageCircle className="h-4 w-4" />
+          {t.cta}
         </Button>
       </div>
     </div>
