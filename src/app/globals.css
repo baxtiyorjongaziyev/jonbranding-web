@@ -239,19 +239,9 @@
   .section-padding {
     padding-top: var(--section-gap);
     padding-bottom: var(--section-gap);
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
 
-  /* Shorthand for sections that should fill the viewport without scroll */
-  /* Apply to section elements found in home-component that have py-16 sm:py-24 */
   .snap-section {
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     padding-top: var(--section-gap);
     padding-bottom: var(--section-gap);
   }
@@ -262,6 +252,19 @@
       padding-top: var(--section-gap-mobile);
       padding-bottom: var(--section-gap-mobile);
     }
+  }
+
+  /* ── Unified Design System Utilities ── */
+  .section-title {
+    @apply text-4xl sm:text-5xl font-black text-foreground tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-muted-foreground max-w-2xl mx-auto mt-4;
+  }
+
+  .section-label {
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-4 py-2 rounded-full mb-4;
   }
 
   .animate-marquee-up {
@@ -416,15 +419,7 @@
   }
 }
 
-/* Optimization for rendering */
-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 500px;
-}
-
-section:first-of-type {
-  content-visibility: visible;
-}
+/* Removed content-visibility: auto — causes CLS/LCP regressions */
 
 /* ── Urgency Banner Marquee ── */
 @keyframes marquee {

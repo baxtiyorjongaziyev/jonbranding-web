@@ -80,10 +80,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
       
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tight mb-6">
-            {translations.title}
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="section-title mb-6">{translations.title}</h2>
+          <p className="section-subtitle">
             {translations.subtitle}
           </p>
         </div>

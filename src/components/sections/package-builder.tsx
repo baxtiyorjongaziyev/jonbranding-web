@@ -249,7 +249,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     ];
 
     return (
-        <section id="package-builder" className="section-padding bg-white" suppressHydrationWarning>
+        <section id="package-builder" className="py-20 sm:py-28 bg-white" suppressHydrationWarning>
             <div className="container mx-auto px-4 max-w-7xl">
                 <div className="max-w-4xl mx-auto mb-16 text-center space-y-4">
                     <Badge className="bg-primary/10 text-primary border-none px-8 py-2 rounded-full font-black text-[12px] uppercase tracking-[0.2em] shadow-sm">
