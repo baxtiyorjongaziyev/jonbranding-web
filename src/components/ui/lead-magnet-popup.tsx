@@ -16,8 +16,6 @@ interface LeadMagnetPopupProps {
 type FlowStep = 'intro' | 'qualification' | 'registration' | 'blocked' | 'success';
 
 const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
-  if (!dictionary || !dictionary.roleSelection) return null;
-  
   const { toast } = useToast();
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
@@ -110,7 +108,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
     }
   };
 
-  if (isDismissed || !isVisible) return null;
+  if (!dictionary || !dictionary.roleSelection || isDismissed || !isVisible) return null;
 
   return (
     <AnimatePresence>
