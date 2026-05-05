@@ -273,7 +273,6 @@ ${totalPrice ? `\n<b>Narx:</b> ${escapeTelegramHtml(totalPrice.toLocaleString('f
 export async function POST(request: Request) {
   const botToken = cleanSecret(process.env.TELEGRAM_BOT_TOKEN);
   const chatId = cleanSecret(process.env.TELEGRAM_CHAT_ID);
-  const messageThreadId = cleanSecret(process.env.TELEGRAM_MESSAGE_THREAD_ID);
 
   if (!botToken || !chatId) {
     return NextResponse.json({ ok: false, error: 'Server configuration error' }, { status: 500 });
@@ -293,7 +292,6 @@ export async function POST(request: Request) {
       parse_mode: 'HTML',
       disable_web_page_preview: true,
     };
-    if (messageThreadId) telegramPayload.message_thread_id = messageThreadId;
 
     await sendTelegramMessage(botToken, telegramPayload);
 
