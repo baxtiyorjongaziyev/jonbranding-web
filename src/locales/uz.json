@@ -64,8 +64,7 @@
             "keywords": "brandbook, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
         },
         "title": "Nega 90% bizneslar brendingda xato qilib, millionlab so'm yo'qotadi?",
-        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biznesingiz shunchaki rasm emas, balki **sotuv mashinasi** bo'lishi kerak. Bizning vazifamiz — dizaynni strategiya bilan bitta zanjirga bog'lab, sizning bozorda 'G'olib' bo'lishingizni ta'minlashdir. Men sizga shunchaki logotip emas, balki yillar davomida sizga pul keltiradigan tizim qurib beraman.",
-        "phoneButton": "Maslahat Olish",
+        "subtitle": "Брендбук — это не просто документ с логотипами, это конституция вашего бренда, которая обеспечивает его последовательность и целостность.",
         "section1_title": "Nega har bir biznesga brendbuk kerak?",
         "section1_p1": "Brendbuk — brendni boshqarish uchun asosiy vositadir. U vizual va g'oyaviy elementlardan foydalanish qoidalarini aniq belgilab beradi — logotipdan tortib muloqot ohangigacha.",
         "section1_p2": "Ushbu hujjat marketingdagi tartibsizlikdan qochishga, vaqtni va pulni dizaynerlar va marketologlar bilan ishlashda tejashga yordam beradi.",
@@ -129,6 +128,11 @@
     "sitemapPage": {
         "title": "Sayt xaritasi",
         "subtitle": "Kerakli ma'lumotni tezda topishingiz uchun saytimizning barcha sahifalari haqida umumiy ma'lumot.",
+        "sections": {
+            "main": "Основные разделы",
+            "services": "Услуги",
+            "blog": "Статьи блога"
+        },
         "links": {
             "home": "Bosh sahifa",
             "quiz": "Brending testi",
@@ -147,27 +151,26 @@
         }
     },
     "hero": {
-        "preHeadline": "DIQQAT: O'ZBEKISTONDAGI BIZNES EGALARI VA TADBIRKORLAR UCHUN",
-        "title": "Sizning brendingiz mijozlarni jalb qilyaptimi yoki **pullaringizni havoga sovuryaptimi?**",
-        "description": "Raqobatchilar professional ko'rinish bilan bozorning qaymog'ini yeb bo'lishdi. Biznesingizni 'shunchaki nom' emas, balki **har kuni foyda keltiradigan 'Sotuv Mashinasi'ga** aylantirish vaqti keldi.",
-        "cta": "Mening 30 Kunlik O'sish Strategiyamni Olish",
-        "ctaSecondary": "Real Natijalar (Keyslar)",
-        "buttonHint": "✓ 100% Bepul  ·  ✓ 15 daqiqalik 'Surgical' Audit  ·  ✓ Natija bo'lmasa — 100% Refund Kafolati",
-        "urgencyBadge": "⚡ Shoshiling: Ushbu haftada faqat 2 ta bepul 'Godfather' strategik audit o'rni qoldi",
-        "audienceTag": "🎯 Faqat 12 oy ichida 3-5x o'sishni istaganlar uchun",
-        "guarantees": ["Mutloq Natija Kafolati", "30 Kunda Bozorda G'oliblik", "150+ Muvaffaqiyatli Keyslar"],
-        "stats": [
-            { "value": "150+", "label": "loyiha bozorni egalladi" },
-            { "value": "245%", "label": "o'rtacha ROI o'sishi" },
-            { "value": "100%", "label": "shaffoflik" }
+        "headlines": [
+            "Ваш брендинг |не продает?| Мы это исправим.",
+            "Выделитесь |на фоне конкурентов|.",
+            "Сделайте ваш бренд не просто \"красивым\", а |прибыльным|.",
+            "Пусть клиенты |влюбятся в вас|. Снова и снова.",
+            "От малого бизнеса до |сильного бренда|. За один шаг."
         ],
-        "leadMagnetTitle": "Raqobatchilarni 'nokaut' qilish bo'yicha maxsus 'Secret Blueprint'ni yuklang",
-        "leadMagnetCta": "Blueprintni Hozir Yuklash"
+        "description": "Raqobatchilar professional ko'rinish bilan bozorning qaymog'ini yeb bo'lishdi. Biznesingizni 'shunchaki nom' emas, balki **har kuni foyda keltiradigan 'Sotuv Mashinasi'ga** aylantirish vaqti keldi.",
+        "buttonTexts": [
+            "Проанализировать мой бренд",
+            "Помогите увеличить продажи",
+            "Бесплатный Стратегический Аудит",
+            "Мне нужен сильный бренд"
+        ],
+        "buttonHint": "✓ 100% Bepul  ·  ✓ 15 daqiqalik 'Surgical' Audit  ·  ✓ Natija bo'lmasa — 100% Refund Kafolati",
+        "title": "Sizning brendingiz mijozlarni jalb qilyaptimi yoki **pullaringizni havoga sovuryaptimi?**",
+        "cta": "Mening 30 Kunlik O'sish Strategiyamni Olish"
     },
-
     "results": {
         "badge": "BOZORDA QILINGAN NATIJA",
-        "statsBadge": "RAQAMLARDA JON.BRANDING",
         "title": "Mijozlarimiz qanday natijalarga erishmoqda?",
         "subtitle": "Biz shunchaki rasm chizmaymiz — biz sizga bozorda 'mutloq g'olib' bo'lishingizni ta'minlaydigan strategik tizimni taqdim etamiz.",
         "items": [
@@ -184,12 +187,6 @@
                 "label": "MARKET SHARE"
             }
         ],
-        "stats": {
-            "projects": "Sotuvga yo'naltirilgan loyihalar",
-            "experience": "Bozordagi tajriba",
-            "clients": "Baxtli va boy mijozlar",
-            "recommend": "Tavsiya darajasi"
-        },
         "detail": "Har bir loyiha — bu sizning biznesingiz uchun yangi daromad darajasi."
     },
     "contactModal": {
@@ -219,9 +216,18 @@
             "role": {
                 "label": "Sizning rolingiz",
                 "options": [
-                    { "v": "owner", "l": "Biznes egasi" },
-                    { "v": "marketing", "l": "Marketing direktori" },
-                    { "v": "startup", "l": "Startap asoschisi" }
+                    {
+                        "v": "owner",
+                        "l": "Biznes egasi"
+                    },
+                    {
+                        "v": "marketing",
+                        "l": "Marketing direktori"
+                    },
+                    {
+                        "v": "startup",
+                        "l": "Startap asoschisi"
+                    }
                 ]
             },
             "revenue": {
@@ -241,9 +247,18 @@
             "pain": {
                 "label": "Hozirgi eng katta muammo?",
                 "options": [
-                    { "v": "unrecognized", "l": "Bozorda tanilmaslik (brand awareness)" },
-                    { "v": "low_conversion", "l": "Sotuv conversioni pastligi" },
-                    { "v": "chaos", "l": "Marketing va brendingda tartibsizlik" }
+                    {
+                        "v": "unrecognized",
+                        "l": "Bozorda tanilmaslik (brand awareness)"
+                    },
+                    {
+                        "v": "low_conversion",
+                        "l": "Sotuv conversioni pastligi"
+                    },
+                    {
+                        "v": "chaos",
+                        "l": "Marketing va brendingda tartibsizlik"
+                    }
                 ]
             },
             "budget": {
@@ -351,29 +366,6 @@
             }
         ]
     },
-    "guaranteeBlock": {
-        "title": "BIZNING 'SHAFQATSIZ' KAFOLATIMIZ",
-        "subtitle": "Siz tavakkal qilmaysiz — biz javob beramiz. Agar natija bo'lmasa, bizga to'lamaysiz.",
-        "items": [
-            {
-                "title": "Natija Kafolati",
-                "description": "Agar taklif qilingan konsepsiyalar brifingga mos kelmasa, biz loyihani ideal holatga kelguniga qadar BEPUL qayta ishlaymiz."
-            },
-            {
-                "title": "Huquqiy Himoya",
-                "description": "Biz taklif qilayotgan har bir neyming (nom) patent-toza ekanligiga 100% kafolat beramiz."
-            },
-            {
-                "title": "Muddat Kafolati",
-                "description": "Agar loyiha muddatidan bir kun kechiksa, biz har bir kun uchun kompensatsiya to'laymiz."
-            },
-            {
-                "title": "Mulk Huquqi",
-                "description": "Loyiha yakunlangach, barcha mualliflik huquqlari va original fayllar to'liqligicha sizning mulkingizga aylanadi."
-            }
-        ],
-        "badge": "100% ISHONCH"
-    },
     "servicesHero": {
         "title": "Brendingizni kuchaytiradigan xizmatlar",
         "subtitle": "Biznesingiz uchun kafolatlangan natija va aniq yechim",
@@ -419,7 +411,7 @@
         "experience": "Yillik tajriba",
         "clients": "Mamnun mijozlar",
         "recommend": "Tavsiya qilishadi",
-        "detail": "Har bir loyiha biz uchun shunchaki dizayn emas, balki biznes o'sishi uchun vositadir.",
+        "detail": "Каждый проект для нас — это не просто дизайн, а инструмент для роста бизнеса.",
         "projects_val": "1000+",
         "experience_val": "9+",
         "clients_val": "500+",
@@ -453,10 +445,18 @@
         "title": "Nega sizning biznesingiz bozorda 'ko'rinmas' bo'lib qolyapti?",
         "subtitle": "Brending — bu shunchaki chiroyli rasm emas, bu sizning mijozlaringiz bilan bog'lanadigan yagona 'ko'prik'. Agar ko'prik chirigan bo'lsa, mijozlar o'tmaydi.",
         "problems": [
-            { "text": "Mijozlar sizni tanlashmayapti, chunki brendingiz ishonch uyg'otmaydi." },
-            { "text": "Sizning mahsulotingiz yaxshi, lekin 'ko'rinishingiz' arzon va sifatsiz." },
-            { "text": "Raqobatchilaringiz sifatsiz bo'lsa ham, kuchli brend bilan bozorning 80% qismini egallab olishgan." },
-            { "text": "Marketingga pul sarflayapsiz, lekin brendingiz 'teshik chelak' kabi barcha lendlarni yo'qotyapti." }
+            {
+                "text": "Mijozlar sizni tanlashmayapti, chunki brendingiz ishonch uyg'otmaydi."
+            },
+            {
+                "text": "Sizning mahsulotingiz yaxshi, lekin 'ko'rinishingiz' arzon va sifatsiz."
+            },
+            {
+                "text": "Raqobatchilaringiz sifatsiz bo'lsa ham, kuchli brend bilan bozorning 80% qismini egallab olishgan."
+            },
+            {
+                "text": "Marketingga pul sarflayapsiz, lekin brendingiz 'teshik chelak' kabi barcha lendlarni yo'qotyapti."
+            }
         ],
         "solutionTitle": "Keling, ushbu 'teshik chelak'ni butunlay yopamiz!",
         "solutionSubtitle": "Men sizga shunchaki logo emas, balki raqobatchilaringizni 'o'yindan chiqaradigan' strategik qurol yasab beraman.",
@@ -739,6 +739,14 @@
                 "title": "Yordam kerak",
                 "description": "Poydevor zaif."
             },
+            "medium": {
+                "title": "Хороший потенциал, но есть пробелы (9-12 баллов)",
+                "description": "У вас хороший фундамент, но ваш бренд может быть еще сильнее и эффективнее. Давайте заполним существующие пробелы и выведем ваш бизнес на новый уровень."
+            },
+            "good": {
+                "title": "Отлично! Фундамент вашего бренда прочен (13-15 баллов)",
+                "description": "Поздравляем! Вы на правильном пути в вопросах брендинга. Теперь пришло время укрепить этот фундамент и стать лидером рынка. Мы поможем вам в этом."
+            },
             "afterSubmitText": "Mutaxassisimiz bog'lanadi.",
             "backToHome": "Bosh sahifaga"
         },
@@ -885,6 +893,9 @@
         "section1_title": "Neyming — bu faqat chiroyli jarang emas",
         "section1_p1": "Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va biznesingizning bozordagi o'rnini belgilaydi.",
         "section1_p2": "Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz.",
+        "section2_title": "Каждое сильное имя начинается с идеи",
+        "section2_p1": "Прежде чем искать имя, мы задаем главный вопрос: о чем этот бренд? Какие чувства и образы он должен вызывать? Поэтому мы внимательно анализируем продукт, его аудиторию и среду, определяем семантические направления для поиска идеального имени.",
+        "section2_p2": "Оно может быть построено на эмоции, метафоре, культурном коде, профессиональном языке или даже игре слов. Главное, чтобы оно работало, передавало суть и помогало бренду запомниться.",
         "process_title": "Neyming yaratish jarayoni",
         "process_subtitle": "4 bosqichda brendingiz uchun ideal nomni topamiz.",
         "process_steps": [
@@ -1049,7 +1060,9 @@
                 "title": "Topshirish",
                 "description": "Bosma uchun tayyor fayllar va texnik spesifikatsiyalar."
             }
-        ]
+        ],
+        "cta_title": "Упаковка не только привлекает внимание, она продает",
+        "cta_description": "Хороший дизайн упаковки — это не просто красивое украшение, а инструмент, работающий на бизнес. Мы разрабатываем функциональный, стратегически продуманный дизайн, в котором упаковка служит полноценным инструментом продаж."
     },
     "servicesPage": {
         "metadata": {
@@ -1115,19 +1128,6 @@
             "default": "Iltimos, siz uchun eng muhim bo'lgan 2 ta ustuvorlikni tanlang."
         },
         "tooltip": "Avval bittasini bekor qiling"
-    },
-    "stats": {
-        "badge": "JON.BRANDING STAT",
-        "projects": "Muvaffaqiyatli loyihalar",
-        "experience": "Yillik tajriba",
-        "clients": "Mamnun mijozlar",
-        "recommend": "Tavsiya qilishadi",
-        "items": [
-            { "value": "1000+", "label_key": "projects" },
-            { "value": "9+", "label_key": "experience" },
-            { "value": "500+", "label_key": "clients" },
-            { "value": "90%", "label_key": "recommend" }
-        ]
     },
     "opportunityCalculator": {
         "title": "Brendingiz 'Teshik Chelak' bo'lib, pulingizni havoga sovuryaptimi?",

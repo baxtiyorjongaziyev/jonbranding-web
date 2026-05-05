@@ -153,149 +153,112 @@ const BentoCard = ({
 };
 
 const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => {
-  const [hoveredBlock, setHoveredBlock] = useState<number | null>(null);
-
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   if (!dictionary) return null;
 
   const resultsItems = dictionary.results?.items || [];
-  const statsBadge = dictionary.results?.statsBadge || dictionary.stats?.badge || "STATISTIKA";
-  const resultsBadge = dictionary.results?.badge || "NATIJALAR";
-
   const statsList = [
-    { icon: Award, value: "1000+", label: dictionary.results?.stats?.projects || dictionary.stats?.projects || "Loyihalar", color: "text-primary" },
-    { icon: Medal, value: "9+", label: dictionary.results?.stats?.experience || dictionary.stats?.experience || "Yil", color: "text-accent" },
-    { icon: Users, value: "500+", label: dictionary.results?.stats?.clients || dictionary.stats?.clients || "Mijozlar", color: "text-blue-400" },
-    { icon: Star, value: "90%", label: dictionary.results?.stats?.recommend || dictionary.stats?.recommend || "Tavsiya", color: "text-yellow-400" }
+    { icon: Award, value: "1000+", label: dictionary.results?.stats?.projects || "Loyihalar" },
+    { icon: Medal, value: "9+", label: dictionary.results?.stats?.experience || "Yil" },
+    { icon: Users, value: "500+", label: dictionary.results?.stats?.clients || "Mijozlar" },
+    { icon: Star, value: "90%", label: dictionary.results?.stats?.recommend || "Tavsiya" }
   ];
 
   return (
-    <section id="results" className="py-8 lg:py-12 bg-background perspective-1000 overflow-hidden relative">
-      <div className="container mx-auto px-4 relative z-10 w-full">
-        <div className="max-w-5xl mb-6 lg:mb-8">
+    <section id="results" className="py-24 bg-white overflow-hidden relative">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mb-16">
           <motion.h2 
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-3 tracking-tighter leading-[1.1] uppercase whitespace-normal lg:whitespace-nowrap"
+            className="text-4xl md:text-5xl font-black mb-6"
           >
             {dictionary.results?.title || "Natijalar"}
           </motion.h2>
           <motion.p 
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-            className="text-base md:text-lg text-muted-foreground font-bold max-w-3xl leading-snug tracking-tight italic border-l-4 border-primary pl-4"
+            transition={{ delay: 0.1 }}
+            className="text-xl text-muted-foreground border-l-4 border-primary pl-6 font-medium italic"
           >
-            {dictionary.results?.subtitle || "Strategik muvaffaqiyat ko'rsatkichlari."}
+            {dictionary.results?.subtitle}
           </motion.p>
         </div>
 
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.1
-              }
-            }
-          }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5"
-        >
-          
-          {/* Block 1: Client Results */}
-          <BentoCard
-            index={0}
-            isFocused={true}
-            onHover={() => {}}
-            onLeave={() => {}}
-            badge={resultsBadge}
-            badgeColor="primary"
-            className="h-auto md:h-[280px] lg:h-[320px]"
-          >
-            <div className="grid grid-cols-2 gap-4 md:gap-8 mt-5 md:mt-7 relative z-10">
-              {resultsItems.slice(0, 2).map((item: any, idx: number) => (
-                <div key={idx} className="group/item flex flex-col justify-between h-full">
-                  <div className="space-y-2">
-                    <div className="flex items-baseline gap-1 whitespace-nowrap">
-                      <CountUp 
-                        value={item.impact} 
-                        className="text-3xl sm:text-4xl md:text-5xl font-black text-primary tracking-tighter leading-none whitespace-nowrap"
-                      />
-                    </div>
-                    <div className="mt-1">
-                      <h4 className="text-xs sm:text-sm md:text-base lg:text-lg font-black text-foreground mb-0.5 leading-tight uppercase tracking-tight">{item.title}</h4>
-                      <p className="text-[9px] sm:text-[10px] md:text-xs text-muted-foreground font-bold leading-tight uppercase tracking-wider opacity-70 group-hover/item:opacity-100 transition-opacity">{item.desc}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Main Results Card */}
+          <div className="lg:col-span-7">
+            <BentoCard 
+              index={0} 
+              badge="Case Studies" 
+              isFocused={focusedIndex === 0}
+              onHover={() => setFocusedIndex(0)}
+              onLeave={() => setFocusedIndex(null)}
+              className="bg-slate-50/50"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 p-4">
+                {resultsItems.slice(0, 2).map((item: any, idx: number) => (
+                  <div key={idx} className="space-y-4">
+                    <CountUp 
+                      value={item.impact} 
+                      className="text-5xl md:text-6xl font-black text-primary tracking-tighter"
+                    />
+                    <div>
+                      <h4 className="text-xl font-bold mb-2 uppercase tracking-tight">{item.title}</h4>
+                      <p className="text-muted-foreground font-medium">{item.desc}</p>
                     </div>
                   </div>
-                  
-                  {/* Subtle divider for mobile if needed, but grid handles it */}
-                </div>
-              ))}
-            </div>
-          </BentoCard>
-
-          {/* Block 2: Agency Stats */}
-          <BentoCard
-            index={1}
-            isFocused={true}
-            onHover={() => {}}
-            onLeave={() => {}}
-            badge={statsBadge}
-            badgeColor="accent"
-            className="h-auto md:h-[280px] lg:h-[320px]"
-          >
-            <div className="grid grid-cols-2 gap-x-6 gap-y-4 md:gap-x-8 md:gap-y-5 mt-5 md:mt-7">
-              {statsList.map((stat, idx) => (
-                <motion.div 
-                  key={idx}
-                  whileHover={{ y: -5 }}
-                  className="space-y-1 md:space-y-2"
-                >
-                  <stat.icon className={cn("w-6 h-6 md:w-8 md:h-8 mb-1 text-primary/60", stat.color)} />
-                  <div className="text-3xl sm:text-4xl font-black text-foreground tracking-tighter leading-none">
-                    <CountUp value={stat.value} />
-                  </div>
-                  <div className="text-muted-foreground/60 font-bold uppercase tracking-widest text-[8px] md:text-[9px]">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </BentoCard>
-
-          {/* Block 3: The Quote (Combined & Static) - Now more compact */}
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
-            }}
-            className="lg:col-span-2 p-5 md:p-6 lg:p-7 rounded-[2.5rem] glass-card-premium border border-white/10 backdrop-blur-3xl relative overflow-hidden group"
-          >
-            <div className="noise-texture" />
-            <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-10">
-              <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                <Medal className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+                ))}
               </div>
-              <p className="text-foreground text-base md:text-xl lg:text-2xl leading-snug font-bold italic text-center md:text-left tracking-tight">
-                &ldquo;{dictionary.results?.detail || dictionary.stats?.detail}&rdquo;
-              </p>
-            </div>
-            <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-1000 bg-gradient-to-r from-primary/30 via-accent/30 to-transparent" />
-          </motion.div>
+            </BentoCard>
+          </div>
 
-        </motion.div>
-      </div>
+          {/* Stats Grid */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-6">
+            {statsList.map((stat, idx) => (
+              <BentoCard 
+                key={idx}
+                index={idx + 1}
+                badge={stat.label}
+                isFocused={focusedIndex === idx + 1}
+                onHover={() => setFocusedIndex(idx + 1)}
+                onLeave={() => setFocusedIndex(null)}
+                className="text-center"
+              >
+                <div className="flex flex-col items-center justify-center py-6">
+                  <stat.icon className="w-8 h-8 mb-4 text-primary/40 group-hover:text-primary transition-colors duration-500" />
+                  <div className="text-3xl font-black text-foreground tracking-tighter">
+                     <CountUp value={stat.value} />
+                  </div>
+                </div>
+              </BentoCard>
+            ))}
+          </div>
 
-      {/* Ambient background decoration - Optimized for performance */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10 md:opacity-20 z-0">
-        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary blur-[120px] rounded-full animate-pulse will-change-transform" />
-        <div className="absolute bottom-[10%] right-[5%] w-64 h-64 bg-accent blur-[120px] rounded-full animate-pulse will-change-transform" />
+          {/* Quote/Detail Block */}
+          <div className="lg:col-span-12">
+            <BentoCard
+              index={5}
+              badge="Success"
+              badgeColor="accent"
+              isFocused={focusedIndex === 5}
+              onHover={() => setFocusedIndex(5)}
+              onLeave={() => setFocusedIndex(null)}
+              className="bg-primary text-white"
+            >
+              <div className="flex flex-col md:flex-row items-center gap-8 py-4">
+                <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <Medal className="w-8 h-8" />
+                </div>
+                <p className="text-xl md:text-2xl font-bold italic leading-relaxed text-center md:text-left">
+                  &ldquo;{dictionary.results?.detail || dictionary.stats?.detail}&rdquo;
+                </p>
+              </div>
+            </BentoCard>
+          </div>
+        </div>
       </div>
     </section>
   );

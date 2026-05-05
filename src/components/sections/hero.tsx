@@ -1,9 +1,9 @@
 
 'use client';
 
-import type {FC} from 'react';
-import {Button} from '@/components/ui/button';
-import { ArrowRight, Shield, ChevronRight, Zap } from 'lucide-react';
+import type { FC } from 'react';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, Shield, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
@@ -12,241 +12,200 @@ import TiltCard from '../ui/tilt-card';
 import Magnetic from '../ui/magnetic';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
-import { BrandBadge, BrandCard } from '@/components/ui/design-system';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 const portfolioImages: GalleryImage[] = projects
   .filter(p => !p.hiddenInHero)
-  .flatMap(p => p.galleryImages || []);
+  .flatMap(p => p.galleryImages || [])
+  .sort((a, b) => {
+    // Put GIFs first
+    const isAGif = a.src.toLowerCase().endsWith('.gif');
+    const isBGif = b.src.toLowerCase().endsWith('.gif');
+    if (isAGif && !isBGif) return -1;
+    if (!isAGif && isBGif) return 1;
+    return 0;
+  });
 
 interface HeroProps {
-    onPrimaryClick: () => void;
-    lang: string;
-    dictionary: any;
-    renderHeadline: (headline: string) => React.ReactNode;
+  onOpenContact: () => void;
+  lang: string;
+  dictionary: any;
+  renderHeadline: (headline: string, className?: string) => React.ReactNode;
 }
 
-const Hero: FC<HeroProps> = ({ onPrimaryClick, lang, dictionary, renderHeadline }) => {
+const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }) => {
   if (!dictionary) return null;
-
-  const stats: { value: string; label: string }[] = dictionary.stats || [
-    { value: '150+', label: "brend yaratilgan" },
-    { value: '2-3x', label: "sotuv o'sishi" },
-    { value: '98%', label: "mijozlar mamnun" },
-  ];
-
-  const guarantees: string[] = dictionary.guarantees || [
-    '100% natija kafolati',
-    '30 kun ichida tayyor',
-    '150+ muvaffaqiyatli loyiha',
-  ];
-  const primaryCta =
-    lang === 'uz'
-      ? 'Brendimni bepul tahlil qildirish'
-      : lang === 'ru'
-        ? 'Получить бесплатный аудит бренда'
-        : lang === 'zh'
-          ? '免费分析我的品牌'
-          : 'Get my free brand audit';
-  const secondaryCta =
-    lang === 'uz'
-      ? 'Natijalarni ko‘rish'
-      : dictionary.ctaSecondary;
 
   return (
     <section
-      className="relative overflow-hidden min-h-[100svh] flex flex-col justify-center bg-brand-paper"
-      style={{ paddingTop: '72px' }}
+      className="relative bg-white overflow-hidden min-h-[100svh] flex flex-col justify-center"
+      style={{ paddingTop: '110px' }}
       suppressHydrationWarning
     >
-      {/* Background glows */}
-      <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute -top-32 right-[-12rem] h-[42rem] w-[42rem] rounded-full bg-brand-cyan/20 blur-3xl" />
-        <div className="absolute bottom-12 left-[-16rem] h-[46rem] w-[46rem] rounded-full bg-brand-blue/10 blur-[110px]" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white/70 to-transparent" />
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-400/10 blur-[120px] rounded-full animate-pulse [animation-delay:2s]" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-[1400px]">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.98fr_1.02fr] gap-8 lg:gap-14 items-center">
-
-          {/* ── LEFT: Copy ── */}
-          <div className="text-center lg:text-left">
-
-            {/* Audience Call-out (Sabri Suby Step 1) */}
-            {dictionary.preHeadline && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-primary text-[12px] sm:text-sm font-black uppercase tracking-[0.3em] mb-4 drop-shadow-sm flex items-center justify-center lg:justify-start gap-2"
-              >
-                <span className="w-8 h-[2px] bg-primary hidden sm:block" />
-                {dictionary.preHeadline}
-              </motion.div>
-            )}
-
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          
+          {/* Left Content: Text & CTAs */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col space-y-8 lg:space-y-10"
+          >
             {/* Urgency Badge */}
-            {dictionary.urgencyBadge && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1], delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-500/10 border border-red-500/20 backdrop-blur-xl text-red-500 text-[11px] font-black uppercase tracking-[0.25em] mb-8 shadow-[0_0_40px_-10px_rgba(239,68,68,0.2)] relative group overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-red-500/10 opacity-30 group-hover:opacity-100 transition-opacity duration-1000" />
-                <Zap className="w-3.5 h-3.5 fill-red-500 text-red-500 relative z-10 animate-pulse" />
-                <span className="relative z-10 drop-shadow-sm">{dictionary.urgencyBadge}</span>
-              </motion.div>
-            )}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/10 rounded-full w-fit backdrop-blur-sm group hover:bg-primary/10 transition-colors">
+              <Zap className="w-4 h-4 text-primary animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-primary">
+                {dictionary.urgencyBadge}
+              </span>
+            </div>
 
-            {/* Audience tag */}
-            {dictionary.audienceTag && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.05 }}
-                className="mb-4 inline-flex rounded-full border border-brand-line bg-white/70 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-blue shadow-sm"
-              >
-                {dictionary.audienceTag}
-              </motion.div>
-            )}
+            {/* Main Headline */}
+            <div className="space-y-6">
+              <p className="text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] text-primary/60 mb-2">
+                {dictionary.preHeadline}
+              </p>
+              <div className="relative">
+                {renderHeadline(dictionary.title, "text-slate-900 drop-shadow-sm leading-[1.1] tracking-tight")}
+              </div>
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
+                {dictionary.description}
+              </p>
+            </div>
 
-            {/* Headline — plain h1 for immediate LCP; CSS handles fade-in */}
-            <h1
-              data-testid="hero-title"
-              className="text-balance text-[36px] leading-[0.98] sm:text-[54px] lg:text-[68px] xl:text-[78px] font-black text-brand-ink tracking-[-0.07em] mb-6"
-            >
-              {renderHeadline(dictionary.title || '')}
-            </h1>
+            {/* Mobile Visual (appears between text and buttons on mobile) */}
+            <div className="lg:hidden">
+               <HeroCarousel images={portfolioImages} />
+            </div>
 
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mx-auto lg:mx-0 max-w-2xl text-lg sm:text-xl text-brand-slate leading-8 mb-8"
-              dangerouslySetInnerHTML={{ __html: dictionary.description }}
-            />
-
-            {/* Guarantees — horizontal row */}
-            {guarantees.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.15 }}
-                className="flex flex-wrap justify-center lg:justify-start gap-2 mb-5"
-              >
-                {guarantees.map((g: string, i: number) => (
-                  <BrandBadge key={i} className="text-green-800">
-                    <Shield className="w-3 h-3 text-green-600" />
-                    {g}
-                  </BrandBadge>
-                ))}
-              </motion.div>
-            )}
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-2.5 mb-2"
-            >
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
               <Magnetic>
-                <Button
-                  onClick={() => onPrimaryClick()}
-                  size="lg"
-                  variant="default"
-                  className="w-full sm:w-auto min-h-14 text-base px-8 py-4 shadow-xl rounded-2xl relative group overflow-hidden bg-brand-ink hover:bg-brand-blue transition-all duration-300 hover:scale-[1.02] active:scale-95 btn-premium"
-                  aria-label={primaryCta}
+                <Button 
+                  size="xl" 
+                  className="bg-primary hover:bg-primary/90 text-white rounded-2xl px-8 h-14 md:h-16 text-base md:text-lg font-bold shadow-2xl shadow-primary/30 group relative overflow-hidden"
+                  onClick={onOpenContact}
                 >
-                  <span className="relative z-10 flex items-center font-black text-base uppercase tracking-tight">
-                    {primaryCta}
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  <span className="relative z-10 flex items-center gap-2">
+                    {dictionary.cta}
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </span>
-                  <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 </Button>
               </Magnetic>
 
-              {secondaryCta && (
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  className="w-full sm:w-auto text-base px-6 py-4 rounded-2xl font-bold text-brand-ink hover:bg-white border border-brand-line bg-white/65"
-                  onClick={() => {
-                    const el = document.getElementById('results');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  {secondaryCta}
-                  <ChevronRight className="w-5 h-5 ml-1.5" />
-                </Button>
-              )}
-            </motion.div>
+              <Button 
+                variant="outline" 
+                size="xl" 
+                asChild
+                className="rounded-2xl px-8 h-14 md:h-16 text-base font-bold border-slate-200 hover:bg-slate-50 transition-all text-slate-700"
+              >
+                <Link href={`/${lang}/portfolio`}>
+                  {dictionary.ctaSecondary}
+                </Link>
+              </Button>
+            </div>
 
-            {/* Trust line */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.25 }}
-              className="text-[11px] text-brand-slate text-center lg:text-left mb-4"
-            >
-              {dictionary.buttonHint}
-            </motion.p>
+            {/* Trust Indicators / Stats */}
+            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100">
+              {dictionary.stats?.map((stat: any, i: number) => (
+                <div key={i} className="space-y-1">
+                  <div className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">{stat.value}</div>
+                  <div className="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wide leading-tight">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          </div>
+            {/* Guarantees */}
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              {dictionary.guarantees?.map((g: string, i: number) => (
+                <div key={i} className="flex items-center gap-2">
+                  <Shield className="w-3.5 h-3.5 text-green-500" />
+                  <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wide">{g}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
-          {/* ── RIGHT: Image + Stats below ── */}
-          <div className="flex flex-col gap-4 self-center mt-12 lg:mt-0">
-            <TiltCard strength={5} className="w-full">
-              <BrandCard className="relative group overflow-hidden p-2 sm:p-3">
-                <Carousel
-                  plugins={[Autoplay({ delay: 3500, stopOnInteraction: true })]}
-                  className="w-full relative z-10"
-                >
-                  <CarouselContent>
-                    {portfolioImages.map((image, index) => (
-                      <CarouselItem key={index}>
-                        <div className="relative w-full rounded-[1.65rem] overflow-hidden shadow-2xl border border-white/70">
-                          <Image
-                            src={image.src}
-                            alt={image.alt || 'Jon Branding Portfolio'}
-                            width={800}
-                            height={600}
-                            className="w-full h-auto object-cover"
-                            priority={index === 0}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
-                          />
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                </Carousel>
-                <div className="absolute -inset-8 bg-brand-blue/10 blur-[80px] rounded-full -z-10 opacity-25 group-hover:opacity-50 transition-opacity duration-1000" />
-              </BrandCard>
+          {/* Right Content: Portfolio Carousel (Desktop Only) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            className="relative hidden lg:block"
+          >
+            <TiltCard strength={5}>
+              <HeroCarousel images={portfolioImages} />
             </TiltCard>
 
-            {/* Stats below image */}
-            {stats.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="brand-card grid grid-cols-3 gap-2 px-4 py-4"
-              >
-                {stats.map((s, i) => (
-                  <div key={i} className="text-center">
-                    <div className="text-2xl font-black text-brand-ink tracking-tighter">{s.value}</div>
-                    <div className="text-[10px] text-brand-slate font-semibold uppercase tracking-widest leading-tight mt-0.5">{s.label}</div>
-                  </div>
-                ))}
-              </motion.div>
-            )}
-          </div>
+            {/* Floating Trust Badge */}
+            <motion.div 
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-6 -left-12 bg-white p-6 rounded-3xl shadow-2xl border border-slate-100 z-20 hidden xl:block max-w-[220px]"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-primary" />
+                </div>
+                <div className="text-xs font-black text-slate-900 uppercase">Surgical Results</div>
+              </div>
+              <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
+                Biznesingizni strategik 'skalpel' bilan tahlil qilamiz va natijani kafolatlaymiz.
+              </p>
+            </motion.div>
+          </motion.div>
 
         </div>
       </div>
     </section>
   );
 };
+
+const HeroCarousel = ({ images }: { images: GalleryImage[] }) => (
+  <div className="relative group w-full flex justify-center">
+    <div className="relative w-full max-w-[500px] h-[350px] sm:h-[450px] lg:h-[550px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/20 bg-slate-100 flex items-center justify-center">
+      <Carousel
+        plugins={[Autoplay({ delay: 4000, stopOnInteraction: false })]}
+        className="w-full h-full"
+      >
+        <CarouselContent className="h-full ml-0">
+          {images.length > 0 ? (
+            images.map((image, index) => (
+              <CarouselItem key={index} className="h-full pl-0 relative min-h-full w-full">
+                <div className="relative w-full h-full">
+                  <Image
+                    src={image.src}
+                    alt={image.alt || 'Jon Branding Portfolio'}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+                    quality={85}
+                  />
+                </div>
+              </CarouselItem>
+            ))
+          ) : (
+            <CarouselItem className="h-full pl-0 relative flex items-center justify-center bg-slate-200 w-full">
+               <span className="text-muted-foreground font-bold italic text-sm">Portfolio rasmlari yuklanmoqda...</span>
+            </CarouselItem>
+          )}
+        </CarouselContent>
+      </Carousel>
+      {/* Decorative Glow */}
+      <div className="absolute -inset-4 bg-primary/20 blur-[100px] rounded-full -z-10 opacity-30 animate-pulse" />
+    </div>
+  </div>
+);
 
 export default Hero;

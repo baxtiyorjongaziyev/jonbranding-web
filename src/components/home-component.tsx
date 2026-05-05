@@ -96,18 +96,13 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
     const renderHeadline = (headline: string) => {
         if (!headline) return '';
         
-        // Split by both | and ** markers
         const segments = headline.split(/(\*\*.*?\*\*|\|.*?\|)/g);
         
-        let segmentCount = 0;
-
         return (
-          <motion.span 
-            initial="hidden" 
-            animate="visible" 
-            className="inline"
-          >
+          <span className="inline-block">
             {segments.map((segment, i) => {
+                if (!segment) return null;
+
                 const isDoubleStar = segment.startsWith('**') && segment.endsWith('**');
                 const isPipe = segment.startsWith('|') && segment.endsWith('|');
                 
@@ -115,42 +110,29 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                     const text = isDoubleStar ? segment.slice(2, -2) : segment.slice(1, -1);
                     return (
                         <motion.span 
-                          key={i} 
-                          variants={{
-                            hidden: { opacity: 0, y: 10 },
-                            visible: { 
-                              opacity: 1, 
-                              y: 0,
-                              transition: { duration: 0.6, delay: segmentCount++ * 0.1, ease: [0.23, 1, 0.32, 1] }
-                            }
-                          }}
-                          className={cn(
-                            "inline font-black",
-                            isPipe && "gradient animate-text-glow"
-                          )}
+                            key={i}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 + (i * 0.1) }}
+                            className={cn(
+                                "inline-block font-black",
+                                isPipe && "gradient animate-text-glow",
+                                isDoubleStar && "text-primary"
+                            )}
                         >
                             {text}
                         </motion.span>
                     );
                 }
                 
-                // For regular text, split into words for staggered reveal but keep inline flow
-                return segment.split(' ').map((word, j) => {
-                  if (!word) return ' ';
-                  return (
+                return (
                     <motion.span
-                      key={`${i}-${j}`}
-                      variants={{
-                        hidden: { opacity: 0, y: 10 },
-                        visible: { 
-                          opacity: 1, 
-                          y: 0,
-                          transition: { duration: 0.6, delay: segmentCount++ * 0.05, ease: [0.23, 1, 0.32, 1] }
-                        }
-                      }}
-                      className="inline mr-[0.25em]"
+                        key={i}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: i * 0.1 }}
                     >
-                      {word}
+                        {segment}
                     </motion.span>
                   );
                 });
@@ -173,7 +155,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
             </div>
             
             <main>
-                <Hero onPrimaryClick={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
+                <Hero onOpenContact={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
                 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
                     <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />

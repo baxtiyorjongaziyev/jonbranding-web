@@ -73,8 +73,8 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none text-foreground">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <div className="text-base font-semibold leading-none text-foreground">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
             {children}
           </p>
         </Link>
@@ -266,8 +266,8 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           "mx-auto flex h-16 items-center justify-between transition-all duration-700 w-full",
           scrolled ? "px-6 lg:px-10" : "px-6 lg:px-8",
           scrolled 
-            ? "max-w-[95%] lg:max-w-7xl py-2 liquid-glass rounded-full"
-            : "max-w-full lg:max-w-screen-2xl bg-white/20 border-b border-white/10"
+            ? "max-w-[95%] lg:max-w-6xl py-2 liquid-glass rounded-full px-8"
+            : "max-w-full lg:max-w-screen-2xl bg-white/20 border-b border-white/10 px-8"
         )}
         style={{ 
           top: top,
@@ -307,7 +307,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   </NavigationMenuItem>
                   {navItems.map((item) => (
                     <NavigationMenuItem key={item.label}>
-                      <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
+                      <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent text-base font-semibold", scrolled ? "text-foreground hover:bg-black/10" : "text-foreground hover:bg-white/10")}>
                         <Link href={item.href}>
                           {item.label}
                         </Link>

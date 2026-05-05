@@ -476,7 +476,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <Button 
                                 size="lg" 
                                 className="w-full py-8 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group btn-premium bg-primary text-white" 
-                                onClick={onOrderNow} 
+                                onClick={(e) => {
+                                    if (typeof window !== 'undefined') {
+                                        if ((window as any).fbq) {
+                                            (window as any).fbq('track', 'InitiateCheckout', { value: total.final, currency: 'UZS' });
+                                        }
+                                        if ((window as any).gtag) {
+                                            (window as any).gtag('event', 'begin_checkout', { value: total.final, currency: 'UZS' });
+                                        }
+                                    }
+                                    onOrderNow();
+                                }} 
                                 disabled={total.base === 0}
                                 aria-label="Loyiha narxini tasdiqlash"
                             >

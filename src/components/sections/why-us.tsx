@@ -1,11 +1,12 @@
 'use client';
 
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Target, ListChecks, Star } from 'lucide-react';
 import CtaBlock from './cta-block';
 import TiltCard from '@/components/ui/tilt-card';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { getDictionary, Locale } from '@/lib/dictionaries';
 import { motion } from 'framer-motion';
-import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const itemVariants = {
   hidden: { opacity: 0, scale: 0.95, y: 30 },
@@ -28,16 +29,13 @@ interface WhyUsProps {
 const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
   const translations = dictionary;
   
-  if (!translations) {
-    return null;
-  }
+  if (!translations) return null;
 
   const handleCta = () => {
     if (onCtaClick) {
       onCtaClick();
     } else {
-      const event = new CustomEvent('openContactModal');
-      window.dispatchEvent(event);
+      window.dispatchEvent(new CustomEvent('openContactModal'));
     }
   };
   
@@ -49,40 +47,58 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
   
   return (
     <>
-    <BrandSection tone="light">
+    <section className="py-24 sm:py-32 bg-slate-50/30 overflow-hidden relative">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10" />
+      
       <div className="container mx-auto px-4">
-        <SectionIntro
-          eyebrow="Jon.Branding system"
-          title={translations.title}
-          description={translations.subtitle}
-        />
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            visible: { transition: { staggerChildren: 0.1 } }
-          }}
-          className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="text-center mb-16 sm:mb-24">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight"
+          >
+            {translations.title}
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mt-6 max-w-2xl mx-auto text-xl text-muted-foreground font-medium"
+          >
+            {translations.subtitle}
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {values.map((value, index) => (
-             <motion.div key={index} variants={itemVariants} className="h-full">
-               <TiltCard strength={10} className="h-full">
-                  <BrandCard className="h-full p-7 text-center transition-transform duration-300 hover:-translate-y-1">
-                    <div className="flex flex-col items-center">
-                      <div className="bg-brand-blue/10 p-4 rounded-2xl ring-1 ring-brand-blue/15">
-                        <value.icon className="w-8 h-8 text-brand-blue" />
-                      </div>
-                      <h3 className="mt-5 text-xl font-black tracking-[-0.02em] text-brand-ink">{value.title}</h3>
-                      <p className="mt-3 text-brand-slate leading-7">{value.description}</p>
-                    </div>
-                  </BrandCard>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <TiltCard strength={5} className="h-full">
+                <div className="premium-card h-full p-10 flex flex-col items-center text-center group">
+                  <div className="w-20 h-20 rounded-3xl bg-primary/5 flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500 transform group-hover:rotate-6 shadow-sm">
+                    <value.icon className="w-10 h-10" />
+                  </div>
+                  <h3 className="text-2xl font-black mb-6 group-hover:text-primary transition-colors">
+                    {value.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-lg font-medium">
+                    {value.description}
+                  </p>
+                </div>
               </TiltCard>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
-    </BrandSection>
+    </section>
+
     <CtaBlock 
         title={translations.ctaTitle}
         description={translations.ctaDesc}

@@ -6,28 +6,26 @@ const BASE_URL = 'https://jonbranding.uz';
 const locales = ['uz', 'ru', 'en', 'zh'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ['', '/blog', '/quiz', '/privacy', '/terms'];
+  const routes = ['', '/checklist', '/blog', '/pricing', '/privacy', '/quiz', '/sitemap', '/terms'];
   const services = [
-    '/xizmatlar',
     '/xizmatlar/neyming',
     '/xizmatlar/logo-dizayni',
     '/xizmatlar/brand-strategiyasi',
     '/xizmatlar/firmenniy-stil',
     '/xizmatlar/qadoq-dizayni',
     '/xizmatlar/brandbook',
-    '/xizmatlar/patent-kalkulyatori',
+    '/xizmatlar/patent-kalkulyatori'
   ];
-  const pricing = ['/pricing/sotuvchi-kartochka'];
 
-  const allRoutes = [...routes, ...services, ...pricing];
-
+  const allRoutes = [...routes, ...services];
+  
   // 1. Generate static localized pages
-  const staticPages = locales.flatMap((lang) =>
+  const staticPages = locales.flatMap((lang) => 
     allRoutes.map((route) => ({
-      url: lang === 'uz' ? `${BASE_URL}${route || '/'}` : `${BASE_URL}/${lang}${route}`,
+      url: `${BASE_URL}/${lang}${route}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
-      priority: route === '' ? 1.0 : route.startsWith('/xizmatlar') ? 0.9 : 0.8,
+      priority: route === '' ? 1.0 : 0.8,
     }))
   );
 
