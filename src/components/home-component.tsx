@@ -5,8 +5,6 @@ import { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Hero from '@/components/sections/hero';
-import BentoResultsStats from '@/components/sections/bento-results-stats';
-import TargetAudience from '@/components/sections/target-audience';
 import WhyUs from '@/components/sections/why-us';
 import BrandClarity from '@/components/sections/brand-clarity';
 import AuditOffer from '@/components/sections/audit-offer';
@@ -34,9 +32,6 @@ const Faq = dynamic(() => import('@/components/sections/faq'), {
 });
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
-const OpportunityCostCalculator = dynamic(() => import('@/components/sections/opportunity-cost-calculator'), {
-  loading: () => <Skeleton className="h-96 w-full" />,
-});
 const CtaBlock = dynamic(() => import('@/components/sections/cta-block'), {
   loading: () => <Skeleton className="h-48 w-full rounded-2xl" />,
 });
@@ -90,7 +85,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any }> = ({ lang, dictionary
           if (isDoubleStar || isPipe) {
             const text = isDoubleStar ? segment.slice(2, -2) : segment.slice(1, -1);
             return (
-              <span key={i} className="text-blue-700">
+              <span key={i} className="text-brand-cyan">
                 {text}
               </span>
             );
@@ -115,29 +110,15 @@ const HomeComponent: FC<{ lang: string; dictionary: any }> = ({ lang, dictionary
       <main>
         <Hero onOpenContact={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
 
-        <BentoResultsStats dictionary={dictionary} />
+        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
+          <AuditOffer lang={lang} onCtaClick={handleOpenModal} />
+        </motion.div>
 
         <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
           <BrandClarity lang={lang} onCtaClick={handleOpenModal} />
         </motion.div>
 
         <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
-          <TargetAudience lang={lang} dictionary={dictionary.targetAudience} />
-        </motion.div>
-
-        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
-          <WhyUs onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.whyUs} />
-        </motion.div>
-
-        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
-          <AuditOffer lang={lang} onCtaClick={handleOpenModal} />
-        </motion.div>
-
-        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
-          <OpportunityCostCalculator onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.opportunityCalculator} />
-        </motion.div>
-
-        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
           <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
         </motion.div>
 
@@ -146,6 +127,10 @@ const HomeComponent: FC<{ lang: string; dictionary: any }> = ({ lang, dictionary
         </motion.div>
 
         <Gallery lang={lang} dictionary={dictionary.gallery} />
+
+        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
+          <WhyUs onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.whyUs} />
+        </motion.div>
 
         <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
           <FeaturedCaseStudy lang={lang} dictionary={dictionary.featuredCaseStudy || {}} />
@@ -157,18 +142,29 @@ const HomeComponent: FC<{ lang: string; dictionary: any }> = ({ lang, dictionary
           </motion.div>
         )}
 
+        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
+          <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />
+        </motion.div>
+
+        <CtaBlock
+          title={lang === 'uz' ? "Brendingiz sotuvga yordam beryaptimi yoki halaqit qilyaptimi?" : dictionary.home?.cta1_title}
+          description={
+            lang === 'uz'
+              ? "Bepul Brand Audit orqali mijoz ishonchini pasaytirayotgan joylarni aniqlaymiz va qaysi tuzatish birinchi bo'lishi kerakligini aytamiz."
+              : dictionary.home?.cta1_desc
+          }
+          buttonText={lang === 'uz' ? 'Bepul Brand Audit olish' : dictionary.home?.cta1_button}
+          onCtaClick={handleOpenModal}
+        />
+
+        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
+          <Faq lang={lang} dictionary={dictionary.faq} />
+        </motion.div>
+
         {mounted ? (
-          <>
-            <CtaBlock
-              title={dictionary.home?.cta1_title}
-              description={dictionary.home?.cta1_desc}
-              buttonText={dictionary.home?.cta1_button}
-              onCtaClick={handleOpenModal}
-            />
+          <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
             <Founder lang={lang} dictionary={dictionary.founder} />
-            <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />
-            <Faq lang={lang} dictionary={dictionary.faq} />
-          </>
+          </motion.div>
         ) : (
           <div className="container mx-auto space-y-20 py-20">
             <Skeleton className="h-96 w-full rounded-3xl" />
