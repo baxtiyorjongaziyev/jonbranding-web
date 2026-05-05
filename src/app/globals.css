@@ -5,8 +5,8 @@
 
 @layer base {
   :root {
-    --background: 213 45% 97%;
-    --foreground: 222 68% 7%;
+    --background: 210 20% 98%;
+    --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
@@ -16,7 +16,7 @@
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 215.4 16.3% 35%;
     --accent: 198.8 95.3% 54.9%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
@@ -30,19 +30,9 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --radius: 0.75rem;
-    --brand-ink: 222 68% 7%;
-    --brand-paper: 42 40% 97%;
-    --brand-mist: 214 58% 95%;
-    --brand-blue: 231 78% 48%;
-    --brand-cyan: 190 88% 54%;
-    --brand-lime: 86 72% 50%;
-    --brand-slate: 220 17% 42%;
-    --brand-line: 220 25% 88%;
-    --font-inter: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    --font-jakarta: "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
 
-    --section-gap: 5rem;
-    --section-gap-mobile: 3rem;
+    --section-gap: 8rem;
+    --section-gap-mobile: 4rem;
 
     /* Animation Tokens - Apple-style Snappy Physics */
     --ease-liquid: cubic-bezier(0.23, 1, 0.32, 1);
@@ -96,19 +86,21 @@
     @apply border-border;
   }
   body {
-    @apply bg-brand-paper text-brand-slate;
+    @apply bg-background text-muted-foreground overflow-x-hidden;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    background-image:
-      radial-gradient(circle at top left, hsl(var(--brand-cyan) / 0.16), transparent 34rem),
-      radial-gradient(circle at 85% 5%, hsl(var(--brand-lime) / 0.14), transparent 28rem),
-      linear-gradient(180deg, hsl(var(--brand-paper)), hsl(var(--brand-mist)));
   }
   h1,h2,h3,h4,h5,h6 {
-    @apply text-foreground font-headline;
+    @apply text-foreground font-headline leading-tight tracking-tight;
     font-display: swap;
   }
+  
+  h1 { 
+    @apply text-[1.75rem] sm:text-[2.5rem] md:text-[3.25rem] lg:text-[3.75rem] xl:text-[4.25rem] font-black leading-[1.1] tracking-tight; 
+  }
+  h2 { @apply text-[1.5rem] sm:text-[2rem] lg:text-[2.75rem] font-black leading-tight; }
+  h3 { @apply text-[1.25rem] sm:text-[1.5rem] lg:text-[2rem] font-bold; }
 }
 
 @property --gradient-angle {
@@ -247,49 +239,25 @@
   }
 
   .premium-card {
-    @apply bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 rounded-[2rem] overflow-hidden;
-  }
-
-  .brand-section {
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-block: clamp(4rem, 9vw, 7rem);
-  }
-
-  .brand-card {
-    border: 1px solid hsl(var(--brand-line) / 0.9);
-    border-radius: clamp(1.5rem, 3vw, 2.25rem);
-    background:
-      linear-gradient(145deg, rgba(255,255,255,0.92), rgba(255,255,255,0.66)),
-      radial-gradient(circle at top right, hsl(var(--brand-cyan) / 0.12), transparent 18rem);
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.9) inset,
-      0 24px 80px -48px rgba(8, 15, 35, 0.55);
-  }
-
-  .brand-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    border-radius: 999px;
-    border: 1px solid hsl(var(--brand-line));
-    background: rgba(255,255,255,0.76);
-    padding: 0.45rem 0.75rem;
-    color: hsl(var(--brand-ink));
-    font-size: 0.75rem;
-    font-weight: 800;
-    line-height: 1;
-    box-shadow: 0 12px 34px -26px rgba(8, 15, 35, 0.65);
+    @apply bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)] transition-all duration-700 rounded-[2.5rem] overflow-hidden;
   }
 
   .section-padding {
     padding-top: var(--section-gap);
     padding-bottom: var(--section-gap);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
+  /* Shorthand for sections that should fill the viewport without scroll */
+  /* Apply to section elements found in home-component that have py-16 sm:py-24 */
   .snap-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding-top: var(--section-gap);
     padding-bottom: var(--section-gap);
   }
@@ -300,19 +268,6 @@
       padding-top: var(--section-gap-mobile);
       padding-bottom: var(--section-gap-mobile);
     }
-  }
-
-  /* ── Unified Design System Utilities ── */
-  .section-title {
-    @apply text-4xl sm:text-5xl font-black text-foreground tracking-tight;
-  }
-
-  .section-subtitle {
-    @apply text-lg text-muted-foreground max-w-2xl mx-auto mt-4;
-  }
-
-  .section-label {
-    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-4 py-2 rounded-full mb-4;
   }
 
   .animate-marquee-up {
@@ -467,7 +422,15 @@
   }
 }
 
-/* Removed content-visibility: auto — causes CLS/LCP regressions */
+/* Optimization for rendering */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+}
+
+section:first-of-type {
+  content-visibility: visible;
+}
 
 /* ── Urgency Banner Marquee ── */
 @keyframes marquee {
@@ -480,3 +443,4 @@
   display: flex;
   width: max-content;
 }
+

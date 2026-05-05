@@ -1,27 +1,10 @@
 import { NextResponse } from 'next/server';
-import { z } from 'zod';
-import { rateLimit, getClientIp } from '@/lib/rate-limit';
-
-const leadSchema = z.object({
-    fullName: z.string().min(2).max(100),
-    phone: z.string().min(7).max(20).regex(/^[+\d\s\-()]+$/),
-    telegram: z.string().max(50).optional(),
-    role: z.string().max(100).optional(),
-    revenue: z.string().max(100).optional(),
-    ambition: z.string().max(500).optional(),
-    pain: z.string().max(500).optional(),
-    budget: z.string().max(100).optional(),
-    source: z.string().max(100).optional(),
-    lang: z.enum(['uz', 'ru', 'en', 'zh']).optional(),
-    packageSummary: z.string().max(2000).optional(),
-    totalPrice: z.number().nonnegative().optional(),
-});
 
 const UZS_TO_USD_RATE = 1 / 12700;
 
 async function sendMetaConversionEvent(data: any) {
     const accessToken = process.env.META_API_ACCESS_TOKEN;
-    const pixelId = process.env.META_PIXEL_ID;
+    const pixelId = '1134785364752294';
     if (!accessToken || !pixelId) return;
 
     const url = `https://graph.facebook.com/v20.0/${pixelId}/events`;
@@ -58,8 +41,8 @@ async function sendMetaConversionEvent(data: any) {
 
 async function sendGAConversionEvent(data: any) {
     const gaApiSecret = process.env.GA_API_SECRET;
-    const gaMeasurementId = process.env.GA_MEASUREMENT_ID;
-    if (!gaApiSecret || !gaMeasurementId) return;
+    const gaMeasurementId = 'G-B3ZSKB40XY';
+    if (!gaApiSecret) return;
 
     const url = `https://www.google-analytics.com/mp/collect?measurement_id=${gaMeasurementId}&api_secret=${gaApiSecret}`;
     const payload = {
@@ -84,22 +67,16 @@ async function sendGAConversionEvent(data: any) {
     }
 }
 
-async function sendToN8n(data: any) {
-    const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
-    if (!n8nWebhookUrl) return;
-    try {
-        await fetch(n8nWebhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                ...data,
-                source: data.source || 'website_contact_form',
-                timestamp: new Date().toISOString()
-            }),
-        });
-    } catch (e) {
-        console.error('n8n error:', e);
-    }
+
+
+function escapeHtml(unsafe: string) {
+    if (!unsafe) return '';
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
 }
 
 async function sendToAmoCRM(data: any) {
@@ -121,6 +98,7 @@ async function sendToAmoCRM(data: any) {
 🎯 Strategic Session Form Result:
 
 👤 MIJOZ:
+- Ism: ${fullName || 'Noma\'lum'}
 - Telefon: ${phone || 'Noma\'lum'}
 - Telegram: ${telegram ? '@' + telegram.replace('@', '') : 'Noma\'lum'}
 
@@ -140,121 +118,137 @@ ${packageSummary ? `--- \n📦 Paket: ${packageSummary} \n💰 Narx: ${totalPric
     `.trim();
 
     try {
-        // Step 1: Create Lead + Contact using /leads/complex
+        const payload = [
+            {
+                name: `🔥 Lead: ${fullName || 'Noma\'lum'} [${source || 'web'}]`,
+                price: Number(totalPrice) || 0,
+                custom_fields_values: [
+                    {
+                        field_code: 'SOURCE',
+                        values: [{ value: source || 'website' }]
+                    }
+                ],
+                _embedded: {
+                    contacts: [
+                        {
+                            first_name: fullName || 'Noma\'lum',
+                            custom_fields_values: [
+                                ...(phone ? [{
+                                    field_code: 'PHONE',
+                                    values: [{ value: phone, enum_code: 'WORK' }]
+                                }] : []),
+                                ...(telegram ? [{
+                                    field_code: 'IM',
+                                    values: [{ value: telegram.replace('@', ''), enum_code: 'TELEGRAM' }]
+                                }] : []),
+                            ]
+                        }
+                    ]
+                }
+            }
+        ];
+
+        console.log('📤 Sending to AmoCRM:', JSON.stringify(payload));
+
         const createResponse = await fetch(`https://${domain}.amocrm.ru/api/v4/leads/complex`, {
             method: 'POST',
             headers: { 
                 'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json' 
             },
-            body: JSON.stringify([
-                {
-                    name: `Yangi So'rov: ${fullName} (${source || 'website'})`,
-                    price: totalPrice || 0,
-                    _embedded: {
-                        contacts: [
-                            {
-                                first_name: fullName,
-                                custom_fields_values: [
-                                    ...(phone ? [{
-                                        field_code: 'PHONE',
-                                        values: [{ value: phone, enum_code: 'WORK' }]
-                                    }] : []),
-                                    ...(telegram ? [{
-                                        field_code: 'IM',
-                                        values: [{ value: telegram.replace('@', ''), enum_code: 'TELEGRAM' }]
-                                    }] : []),
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]),
+            body: JSON.stringify(payload),
         });
 
         const createResult = await createResponse.json();
         
         if (!createResponse.ok) {
-            const isAuthError = createResponse.status === 401;
-            if (isAuthError) {
-                await notifyAmoCRMTokenExpired(domain);
-            }
-            throw new Error(JSON.stringify(createResult));
+             console.error('❌ AmoCRM Lead Creation Error Status:', createResponse.status);
+             console.error('❌ AmoCRM Lead Creation Error Body:', JSON.stringify(createResult));
+             return;
         }
 
         const leadId = createResult?.[0]?.id;
-
+        
         if (leadId) {
-            await fetch(`https://${domain}.amocrm.ru/api/v4/leads/${leadId}/notes`, {
-                method: 'POST',
-                headers: {
+             const noteResponse = await fetch(`https://${domain}.amocrm.ru/api/v4/leads/${leadId}/notes`, {
+                 method: 'POST',
+                 headers: {
                     'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify([{ note_type: 'common', params: { text: note } }])
-            });
+                    'Content-Type': 'application/json' 
+                 },
+                 body: JSON.stringify([
+                     {
+                         note_type: 'common',
+                         params: {
+                             text: note
+                         }
+                     }
+                 ])
+             });
+             
+             if (noteResponse.ok) {
+                console.log('✅ Lead and Note synced to AmoCRM, Lead ID:', leadId);
+             } else {
+                console.warn('⚠️ Lead created but Note failed to sync. Lead ID:', leadId);
+             }
         }
-    } catch (e: any) {
-        console.error('❌ AmoCRM sync error:', e);
+    } catch (e) {
+        console.error('❌ AmoCRM sync exception:', e);
     }
-}
-
-async function notifyAmoCRMTokenExpired(domain: string) {
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
-    if (!botToken || !chatId) return;
-    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: `🚨 AmoCRM TOKEN ESKIRDI!\n\nDomen: ${domain}.amocrm.ru\n\nLead saqlanmadi! Token'ni yangilang: https://${domain}.amocrm.ru/oauth`,
-            parse_mode: 'HTML',
-        }),
-    }).catch(() => {});
 }
 
 export async function POST(request: Request) {
-    const ip = getClientIp(request);
-    if (!rateLimit(ip, 5, 60_000)) {
-        return NextResponse.json({ ok: false, error: 'Too many requests' }, { status: 429 });
-    }
-
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
     const messageThreadId = process.env.TELEGRAM_MESSAGE_THREAD_ID;
 
     if (!botToken || !chatId) {
+        console.error("Missing Telegram configuration");
         return NextResponse.json({ ok: false, error: "Server configuration error" }, { status: 500 });
     }
 
     try {
-        const raw = await request.json();
-        const parsed = leadSchema.safeParse(raw);
-        if (!parsed.success) {
-            return NextResponse.json({ ok: false, error: 'Invalid input', details: parsed.error.flatten() }, { status: 400 });
+        const body = await request.json();
+        const { 
+            fullName, phone, telegram, 
+            role, revenue, ambition, pain, budget, 
+            source, lang, packageSummary, totalPrice 
+        } = body;
+
+        if (!fullName || !phone) {
+            return NextResponse.json({ ok: false, error: "Required fields missing" }, { status: 400 });
         }
-        const { fullName, phone, telegram, role, revenue, ambition, pain, budget, source, lang, packageSummary, totalPrice } = parsed.data;
         
+        // Escape fields for Telegram HTML
+        const eName = escapeHtml(fullName);
+        const ePhone = escapeHtml(phone);
+        const eTg = telegram ? escapeHtml(telegram.replace('@', '')) : '';
+        const eRole = escapeHtml(role);
+        const eRev = escapeHtml(revenue);
+        const eAmb = escapeHtml(ambition);
+        const ePain = escapeHtml(pain);
+        const eBud = escapeHtml(budget);
+        const eSummary = escapeHtml(packageSummary);
+
         let telegramMessage = '';
 
         if (packageSummary && packageSummary.includes("Yangi patent arizasi")) {
             telegramMessage = `
 <b>🔔 Yangi patent arizasi (Jon.Branding)</b>
 
-${packageSummary.replace('Brend:', `🏢 Brend:`).replace('Faoliyat turlari:', `📄 Faoliyat turlari:`)}
+${eSummary.replace('Brend:', `🏢 Brend:`).replace('Faoliyat turlari:', `📄 Faoliyat turlari:`)}
 
-👤 <b>Ism:</b> ${fullName}
-📞 <b>Telefon:</b> ${phone}
+👤 <b>Ism:</b> ${eName}
+📞 <b>Telefon:</b> ${ePhone}
             `.trim();
 
         } else if (packageSummary && packageSummary.includes("Brending-test natijasi")) {
             telegramMessage = `
 <b>📝 Yangi Quiz Natijasi (Jon.Branding)</b>
 
-<b>Mijoz:</b> ${fullName}
-<b>Telefon:</b> ${phone}
-<b>Natija:</b> ${packageSummary}
+<b>Mijoz:</b> ${eName}
+<b>Telefon:</b> ${ePhone}
+<b>Natija:</b> ${eSummary}
 `.trim();
         } else {
             telegramMessage = `
@@ -262,46 +256,73 @@ ${packageSummary.replace('Brend:', `🏢 Brend:`).replace('Faoliyat turlari:', `
 🌍 Til: #${lang?.toUpperCase() || 'UZ'} | 🚀 Manba: #${source || 'website'} ${source?.includes('lead_magnet') ? '#LeadMagnet' : ''}
 
 👤 <b>MIJOZ MA'LUMOTLARI:</b>
-├ 📛 Ism: ${fullName}
-├ 📞 Tel: ${phone}
-└ ✈️ TG: ${telegram ? '@' + telegram.replace('@', '') : 'Noma\'lum'}
+├ 📛 Ism: ${eName}
+├ 📞 Tel: ${ePhone}
+└ ✈️ TG: ${eTg ? '@' + eTg : 'Noma\'lum'}
 
 🏢 <b>BIZNES SNAPSHOT:</b>
-├ 🎭 Rol: ${role || 'Kiritilmagan'}
-├ 💰 Oborot: ${revenue || 'Kiritilmagan'}
-├ 🎯 Maqsad: ${ambition || 'Kiritilmagan'}
-└ ⚠️ To'siq: ${pain || 'Kiritilmagan'}
+├ 🎭 Rol: ${eRole || 'Kiritilmagan'}
+├ 💰 Oborot: ${eRev || 'Kiritilmagan'}
+├ 🎯 Maqsad: ${eAmb || 'Kiritilmagan'}
+└ ⚠️ To'siq: ${ePain || 'Kiritilmagan'}
 
 💸 <b>INVESTITSIYA:</b>
-└ 💴 Byudjet: ${budget || 'Kiritilmagan'}
+└ 💴 Byudjet: ${eBud || 'Kiritilmagan'}
 
-${packageSummary ? `--- \n📦 Paket: ${packageSummary} \n💰 Narx: ${totalPrice?.toLocaleString('fr-FR')} so'm` : ''}
+${eSummary ? `--- \n📦 Paket: ${eSummary} \n💰 Narx: ${totalPrice?.toLocaleString('fr-FR')} so'm` : ''}
 
 #LeadQuality #StrategicSession
             `.trim();
         }
 
-        const telegramPayload: any = { 
-            chat_id: chatId, 
-            text: telegramMessage,
-            parse_mode: 'HTML'
-        };
-        if (messageThreadId) telegramPayload.message_thread_id = messageThreadId;
-        
-        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(telegramPayload),
-        });
+        // Prepare all integration tasks
+        const integrationTasks = [
+            // 1. Telegram Notification (Most immediate feedback)
+            (async () => {
+                try {
+                    const telegramPayload: any = { 
+                        chat_id: chatId, 
+                        text: telegramMessage,
+                        parse_mode: 'HTML',
+                        disable_web_page_preview: true
+                    };
+                    if (messageThreadId) telegramPayload.message_thread_id = messageThreadId;
+                    
+                    const tgRes = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(telegramPayload),
+                    });
 
-        sendMetaConversionEvent(parsed.data).catch(() => {});
-        sendGAConversionEvent(parsed.data).catch(() => {});
-        sendToN8n(parsed.data).catch(() => {});
-        sendToAmoCRM(parsed.data).catch(() => {});
+                    if (!tgRes.ok) {
+                        const tgErr = await tgRes.json();
+                        console.error('❌ Telegram Notification Failed:', tgErr);
+                    } else {
+                        console.log('✅ Telegram Notification Sent');
+                    }
+                } catch (e) {
+                    console.error('❌ Telegram Exception:', e);
+                }
+            })(),
+
+            // 2. AmoCRM Integration
+            sendToAmoCRM(body),
+
+            // 3. Analytics & Marketing
+            sendMetaConversionEvent(body),
+            sendGAConversionEvent(body)
+        ];
+
+        // Run all integrations in parallel without blocking the main response
+        // We use allSettled to ensure that even if one fails, others finish
+        // We also don't 'await' the whole block if we want ultra-fast response, 
+        // but for lead reliability, we await them to ensure they at least started.
+        await Promise.allSettled(integrationTasks);
 
         return NextResponse.json({ ok: true });
 
     } catch (error: any) {
+        console.error('❌ POST handler error:', error);
         return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
     }
 }

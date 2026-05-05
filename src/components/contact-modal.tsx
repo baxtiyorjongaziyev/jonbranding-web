@@ -95,11 +95,6 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     return formatted;
   };
 
-  const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatPhoneNumber(e.target.value);
-    form.setValue('phone', formatted, { shouldValidate: true });
-  };
-
   const onSubmit: SubmitHandler<any> = async (data) => {
     setSubmitting(true);
     try {
@@ -120,7 +115,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         colors: ['#2563eb', '#3b82f6', '#ffffff', '#000000']
       });
 
-      if (onFormSubmitSuccess) onFormSubmitSuccess();
+      // Remove instant closure to show success screen
+      // if (onFormSubmitSuccess) onFormSubmitSuccess();
 
       setTimeout(() => {
         try {
@@ -425,8 +421,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                         <Input 
                                           placeholder={translations?.fields?.phone?.placeholder} 
                                           className="pl-12 border-gray-200 rounded-xl h-12 bg-gray-50/50 focus:bg-white font-mono" 
-                                          {...field}
-                                          onChange={onPhoneChange}
+                                          value={field.value}
+                                          onChange={(e) => {
+                                            const formatted = formatPhoneNumber(e.target.value);
+                                            field.onChange(formatted);
+                                          }}
                                         />
                                       </div>
                                     </FormControl>
