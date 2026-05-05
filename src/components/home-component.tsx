@@ -135,9 +135,8 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                         {segment}
                     </motion.span>
                   );
-                });
             })}
-          </motion.span>
+          </span>
         );
     };
     

@@ -1,12 +1,10 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Target, ListChecks, Star } from 'lucide-react';
+import { Target, ListChecks, Star, ShieldCheck } from 'lucide-react';
 import CtaBlock from './cta-block';
-import TiltCard from '@/components/ui/tilt-card';
-import { FC, useEffect, useState } from 'react';
-import { getDictionary, Locale } from '@/lib/dictionaries';
+import { FC } from 'react';
 import { motion } from 'framer-motion';
+import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const itemVariants = {
   hidden: { opacity: 0, scale: 0.95, y: 30 },
@@ -44,34 +42,25 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
       { icon: ListChecks, ...translations.values[1] },
       { icon: Star, ...translations.values[2] }
   ];
+
+  const proofPoints =
+    lang === 'uz'
+      ? ['Strategiyasiz logo chizmaymiz', 'Har qaror biznes maqsadga boglanadi', 'Bepul auditda sotishga tosqinlik qilayotgan 3 nuqtani aytamiz']
+      : lang === 'ru'
+        ? ['Не рисуем логотип без стратегии', 'Каждое решение связано с бизнес-целью', 'На бесплатном аудите покажем 3 точки, которые мешают продажам']
+        : lang === 'zh'
+          ? ['不脱离策略做标志', '每个设计决策都连接业务目标', '免费审核指出阻碍销售的 3 个问题']
+          : ['No logo without strategy', 'Every decision connects to a business goal', 'Free audit reveals 3 sales blockers'];
   
   return (
     <>
-    <section className="py-24 sm:py-32 bg-slate-50/30 overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10" />
+    <BrandSection tone="light" className="relative overflow-hidden">
+      <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-brand-blue/5 blur-[120px]" />
       
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16 sm:mb-24">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight"
-          >
-            {translations.title}
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mt-6 max-w-2xl mx-auto text-xl text-muted-foreground font-medium"
-          >
-            {translations.subtitle}
-          </motion.p>
-        </div>
+      <div className="container relative z-10 mx-auto px-4">
+        <SectionIntro eyebrow="Why Jon.Branding" title={translations.title} description={translations.subtitle} />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
           {values.map((value, index) => (
             <motion.div
               key={index}
@@ -80,24 +69,31 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
             >
-              <TiltCard strength={5} className="h-full">
-                <div className="premium-card h-full p-10 flex flex-col items-center text-center group">
-                  <div className="w-20 h-20 rounded-3xl bg-primary/5 flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500 transform group-hover:rotate-6 shadow-sm">
-                    <value.icon className="w-10 h-10" />
+              <BrandCard className="group h-full p-8 text-center">
+                  <div className="mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue transition-all duration-500 group-hover:rotate-3 group-hover:bg-brand-blue group-hover:text-white">
+                    <value.icon className="h-8 w-8" />
                   </div>
-                  <h3 className="text-2xl font-black mb-6 group-hover:text-primary transition-colors">
+                  <h3 className="mb-4 text-2xl font-black tracking-[-0.03em] text-brand-ink">
                     {value.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed text-lg font-medium">
+                  <p className="text-base font-medium leading-7 text-brand-slate">
                     {value.description}
                   </p>
-                </div>
-              </TiltCard>
+              </BrandCard>
             </motion.div>
           ))}
         </div>
+
+        <BrandCard className="mx-auto mt-8 grid max-w-5xl gap-3 p-4 md:grid-cols-3">
+          {proofPoints.map((point) => (
+            <div key={point} className="flex items-center gap-3 rounded-2xl bg-brand-mist/70 px-4 py-3">
+              <ShieldCheck className="h-5 w-5 shrink-0 text-brand-blue" />
+              <span className="text-sm font-bold leading-5 text-brand-ink">{point}</span>
+            </div>
+          ))}
+        </BrandCard>
       </div>
-    </section>
+    </BrandSection>
 
     <CtaBlock 
         title={translations.ctaTitle}
