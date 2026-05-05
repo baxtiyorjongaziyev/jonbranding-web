@@ -11,14 +11,15 @@ interface BentoResultsStatsProps {
 }
 
 const CountUp = ({ value, className }: { value: string, className?: string }) => {
-  const [displayValue, setDisplayValue] = useState(0);
   const target = parseInt(value.replace(/[^0-9]/g, '')) || 0;
   const suffix = value.replace(/[0-9]/g, '');
+  const [displayValue, setDisplayValue] = useState(target);
 
   useEffect(() => {
     let startTimestamp: number | null = null;
     const duration = 1200;
     let animationFrameId: number;
+    setDisplayValue(0);
 
     const step = (timestamp: number) => {
       if (!startTimestamp) startTimestamp = timestamp;
