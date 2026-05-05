@@ -45,14 +45,10 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         : lang === 'zh'
           ? '快速联系'
           : 'Quick contact';
-  const offerStack =
+  const auditOfferStack =
     lang === 'uz'
-      ? ['15 daqiqada 3 ta brend xatosi', 'Qaysi xizmat kerakligini aniqlaymiz', 'Majburiy sotuv yoq - avval foyda']
-      : lang === 'ru'
-        ? ['3 ошибки бренда за 15 минут', 'Поймем, какая услуга нужна именно вам', 'Без давления - сначала польза']
-        : lang === 'zh'
-          ? ['15 分钟内找出 3 个品牌问题', '明确您真正需要的服务', '不强卖，先给价值']
-          : ['3 brand leaks in 15 minutes', 'Clear service recommendation', 'No pressure - value first'];
+      ? ["Brendingizdagi 5 ta ishonch yo'qotadigan nuqta", 'Qaysi xizmat hozir kerakligini aniqlaymiz', "Majburiy sotuv yo'q - avval foyda"]
+      : ['5 trust gaps in your brand', 'Clear service recommendation', 'No pressure - value first'];
   const objectionCopy =
     lang === 'uz'
       ? 'Hali tayyor bolmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.'
@@ -218,7 +214,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-cyan">
                   Free audit gives
                 </div>
-                {offerStack.map((item) => (
+                {auditOfferStack.map((item) => (
                   <div key={item} className="flex items-start gap-2 text-xs font-bold leading-5 text-white/90">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-lime" />
                     {item}
