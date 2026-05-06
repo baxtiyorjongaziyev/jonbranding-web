@@ -90,7 +90,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                             <Icon className="w-7 h-7" />
                         </div>
                         <div className="min-w-0 flex-1">
-                            <CardTitle className={cn("text-xl font-black leading-tight tracking-tight", isVip ? "text-white" : "text-dark-blue")}>
+                            <CardTitle className={cn("text-xl font-black leading-tight tracking-tight", isVip ? "text-white" : "text-foreground")}>
                                 {label}
                             </CardTitle>
                         </div>
@@ -143,7 +143,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                                                 <BenefitIcon name={b.icon} className="w-5 h-5" />
                                             </div>
                                             <div className="min-w-0">
-                                                <p className={cn("text-xs font-black leading-tight", isVip ? "text-white" : "text-dark-blue")}>{b.title}</p>
+                                                <p className={cn("text-xs font-black leading-tight", isVip ? "text-white" : "text-foreground")}>{b.title}</p>
                                                 <p className={cn("text-[10px] leading-snug text-slate-500", isVip && "text-slate-400")}>{b.description}</p>
                                             </div>
                                         </div>
@@ -191,7 +191,7 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
                 className="flex items-center gap-4 px-1"
             >
                 <div className="h-8 w-2.5 bg-primary rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
-                <h3 className="text-xl sm:text-2xl font-black text-dark-blue tracking-tight uppercase">{title}</h3>
+                <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight uppercase">{title}</h3>
             </motion.div>
             <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", gridCols)}>{children}</div>
         </div>
@@ -255,7 +255,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <Badge className="bg-primary/10 text-primary border-none px-8 py-2 rounded-full font-black text-[12px] uppercase tracking-[0.2em] shadow-sm">
                         LOYIHA ME'MORI
                     </Badge>
-                    <h2 className="text-4xl sm:text-6xl font-black text-dark-blue leading-tight tracking-tighter">{translations.title}</h2>
+                    <h2 className="text-4xl sm:text-6xl font-black text-foreground leading-tight tracking-tighter">{translations.title}</h2>
                     <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
                 </div>
 
@@ -312,7 +312,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <div className="w-full">
                         <Accordion type="single" collapsible className="w-full">
                             <AccordionItem value="more" className="border-none">
-                                <AccordionTrigger className="text-xl font-black text-dark-blue justify-center gap-6 hover:no-underline py-8 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm" aria-label={translations.categories?.more_services}>
+                                <AccordionTrigger className="text-xl font-black text-foreground justify-center gap-6 hover:no-underline py-8 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm" aria-label={translations.categories?.more_services}>
                                     {translations.categories?.more_services || "Qo'shimcha xizmatlar va maxsus shartlar"}
                                     <ChevronsDown className="w-6 h-6 text-primary animate-bounce" />
                                 </AccordionTrigger>

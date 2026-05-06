@@ -262,7 +262,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       <Card className="p-6">
-        <h3 className="text-xl font-bold text-dark-blue mb-4">{translations?.formTitle}</h3>
+        <h3 className="text-xl font-bold text-foreground mb-4">{translations?.formTitle}</h3>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField control={form.control} name="name" render={({ field }) => ( <FormItem><FormLabel>{translations?.yourNameLabel ?? 'Ismingiz'}</FormLabel><FormControl><Input placeholder={translations?.yourNamePlaceholder ?? ''} {...field} /></FormControl><FormMessage /></FormItem> )} />
@@ -391,7 +391,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
         </Card>
 
         <Card className="p-5">
-          <h3 className="font-bold text-dark-blue mb-3">{translations?.summaryTitle}</h3>
+          <h3 className="font-bold text-foreground mb-3">{translations?.summaryTitle}</h3>
           <div className="space-y-4">
             {watchFields.hasEkspert && (
               <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
