@@ -58,7 +58,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
            animate={{ y: 0, opacity: 1 }}
            exit={{ y: 100, opacity: 0 }}
            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-           className="fixed bottom-6 left-0 right-0 z-50 px-4 md:hidden"
+           className="fixed bottom-[80px] left-0 right-0 z-50 px-4 md:hidden"
         >
           <div className="mx-auto max-w-md bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-3xl p-2 flex items-center justify-between gap-2 overflow-hidden">
             
