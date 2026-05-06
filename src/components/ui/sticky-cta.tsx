@@ -54,7 +54,7 @@ export default function StickyCTA({ lang }: { lang?: string }) {
           <Button
             onClick={handleOpenModal}
             size="lg"
-            className="rounded-full shadow-2xl h-14 w-14 p-0 bg-primary hover:bg-primary/90 hover:scale-105 transition-all text-dark-blue flex items-center justify-center animate-pulse"
+            className="rounded-full shadow-2xl h-14 w-14 p-0 bg-primary hover:bg-primary/90 hover:scale-105 transition-all text-white flex items-center justify-center animate-pulse"
             aria-label={ariaLabel}
           >
             <MessageCircle className="h-6 w-6" />

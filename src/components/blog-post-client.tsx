@@ -38,7 +38,7 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
       <article>
         <header className="py-16 sm:py-24 bg-secondary/70">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-dark-blue leading-tight">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight">
               {post.title}
             </h1>
             <p className="mt-6 text-lg text-gray-600">

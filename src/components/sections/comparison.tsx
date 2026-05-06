@@ -46,7 +46,7 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang, dictionary })
     <section className="py-16 sm:py-24 bg-white" suppressHydrationWarning>
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-black text-dark-blue tracking-tight">{translations.title}</h2>
+            <h2 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">{translations.title}</h2>
             <p className="mt-4 text-lg text-slate-600 font-medium">
                 {translations.description}
             </p>
@@ -56,11 +56,11 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang, dictionary })
         <div className="hidden lg:block">
           <div className="rounded-[2rem] border border-slate-100 shadow-xl overflow-hidden bg-white">
             <div className="grid grid-cols-[1.2fr_1fr_1fr_1fr_1fr] bg-slate-50/50 border-b border-slate-100">
-              <div className="p-6 font-black text-lg text-dark-blue flex items-center">{translations.features}</div>
+              <div className="p-6 font-black text-lg text-foreground flex items-center">{translations.features}</div>
               {competitors.map(c => (
                  <div key={c.id} className={cn(
                     "p-6 text-center font-black text-lg flex items-center justify-center",
-                    c.isPrimary ? "text-primary bg-blue-50/30" : "text-dark-blue"
+                    c.isPrimary ? "text-primary bg-blue-50/30" : "text-foreground"
                  )}>
                    {c.id === 'jon' ? (
                      <div className="flex flex-col items-center">
@@ -94,7 +94,7 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang, dictionary })
             <Accordion type="single" collapsible defaultValue='item-0' className="space-y-4">
                 {competitors.map((competitor, index) => (
                      <AccordionItem key={competitor.id} value={`item-${index}`} className="border rounded-[1.5rem] shadow-sm bg-slate-50/50 px-6 hover:bg-white transition-all duration-300 data-[state=open]:bg-white data-[state=open]:shadow-xl border-slate-100">
-                        <AccordionTrigger className={cn("text-left font-black text-dark-blue hover:no-underline text-lg py-6", competitor.isPrimary && "text-primary")}>
+                        <AccordionTrigger className={cn("text-left font-black text-foreground hover:no-underline text-lg py-6", competitor.isPrimary && "text-primary")}>
                             {competitor.id === 'jon' ? <Logo /> : competitor.name}
                         </AccordionTrigger>
                         <AccordionContent className="pt-2 pb-6">
@@ -119,7 +119,7 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang, dictionary })
                         <Info className="h-6 w-6" />
                     </div>
                     <div>
-                         <h4 className="font-black text-dark-blue text-lg mb-1">{translations.whyPremiumTitle}</h4>
+                         <h4 className="font-black text-foreground text-lg mb-1">{translations.whyPremiumTitle}</h4>
                          <p className="text-base text-slate-600 font-medium">
                              {translations.whyPremiumDesc}
                          </p>

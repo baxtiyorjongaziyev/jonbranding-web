@@ -171,7 +171,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
                 <Lightbulb className="h-6 w-6" />
               </div>
               <div>
-                <p className="text-base text-dark-blue font-medium">{result.message}</p>
+                <p className="text-base text-foreground font-medium">{result.message}</p>
               </div>
             </div>
           </Card>
