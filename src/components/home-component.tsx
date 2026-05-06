@@ -58,7 +58,8 @@ const HomeComponent: FC<{ lang: string; dictionary: any }> = ({ lang, dictionary
 
   const handleOpenModal = useCallback(() => {
     if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('openContactModal'));
+      const event = new CustomEvent('openContactModal');
+      window.dispatchEvent(event);
     }
   }, []);
 

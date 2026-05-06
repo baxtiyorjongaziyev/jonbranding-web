@@ -11,7 +11,7 @@ const client = createClient({
   apiVersion: '2024-04-14',
 });
 
-const targetDir = 'G:\\My Drive\\JonBranding\\Mijozlar\\Avval Hozir';
+const targetDir = path.join(process.cwd(), 'tmp', 'assets', 'avval-hozir');
 
 async function uploadAsset(filePath) {
   console.log(`Uploading asset: ${filePath}`);

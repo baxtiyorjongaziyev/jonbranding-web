@@ -2,7 +2,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const targetDir = 'G:\\My Drive\\JonBranding\\Mijozlar\\Avval Hozir';
+const targetDir = path.join(process.cwd(), 'tmp', 'assets', 'avval-hozir');
 
 const images = [
     { name: 'Fidda_Avval.jpeg', url: 'https://img2.teletype.in/files/9c/66/9c66a85f-486c-4f54-9682-fb4838061ab2.jpeg' },
