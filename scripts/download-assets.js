@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const projectRoot = 'C:\\Users\\baxti\\.gemini\\antigravity\\playground\\jonbranding-veb-sayti';
+const projectRoot = path.join(__dirname, '..');
 const publicDir = path.join(projectRoot, 'public', 'images', 'cms');
 
 if (!fs.existsSync(publicDir)) {

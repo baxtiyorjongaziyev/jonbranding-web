@@ -29,7 +29,6 @@ function localizedUrl(lang: Locale, route: string) {
   if (lang === 'uz') {
     return `${BASE_URL}${route || '/'}`;
   }
-
   return `${BASE_URL}/${lang}${route}`;
 }
 
@@ -49,17 +48,28 @@ function getMarkdownBlogEntries(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.6,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((l) => [l, localizedUrl(l, `/blog/${fileName.replace(/\.md$/, '')}`)])
+          ),
+        },
       }));
   });
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = locales.flatMap((lang) =>
-    staticRoutes.map((route) => ({
+  // Generate static localized pages with alternates
+  const staticPages = staticRoutes.flatMap((route) => 
+    locales.map((lang) => ({
       url: localizedUrl(lang, route),
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: route === '' ? 1.0 : 0.8,
+      alternates: {
+        languages: Object.fromEntries(
+          locales.map((l) => [l, localizedUrl(l, route)])
+        ),
+      },
     }))
   );
 

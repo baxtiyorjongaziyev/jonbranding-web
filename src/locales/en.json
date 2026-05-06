@@ -129,9 +129,9 @@
         "title": "Sitemap",
         "subtitle": "Overview of all pages of our site so you can find the necessary information quickly.",
         "sections": {
-            "main": "Основные разделы",
-            "services": "Услуги",
-            "blog": "Статьи блога"
+            "main": "Main Sections",
+            "services": "Services",
+            "blog": "Blog Posts"
         },
         "links": {
             "home": "Home",
@@ -152,16 +152,18 @@
     },
     "hero": {
         "headlines": [
-            "Ваш брендинг |не продает?| Мы это исправим.",
-            "Выделитесь |на фоне конкурентов|.",
-            "Сделайте ваш бренд не просто \"красивым\", а |прибыльным|.",
-            "Пусть клиенты |влюбятся в вас|. Снова и снова.",
-            "От малого бизнеса до |сильного бренда|. За один шаг."
+            "Your branding |not selling?| We'll fix it.",
+            "Stand out |from the competition|.",
+            "Make your brand |profitable|, not just 'pretty'.",
+            "Make customers |fall in love with you|. Again and again.",
+            "From small business |to a strong brand|. In one step."
         ],
         "description": "We don’t just draw logos. As a leading branding agency in Tashkent, we build a <span class='font-bold text-foreground font-black'>result-oriented strategy</span> for your business. Naming and professional logo design.",
         "buttonTexts": [
             "Analyze my brand",
-            "Get free consultation"
+            "Help me increase sales",
+            "Free Strategic Audit",
+            "I need a strong brand"
         ],
         "buttonHint": "Free. No obligations.",
         "title": "Transforming unbranded businesses into **market leaders**",
@@ -186,8 +188,8 @@
         "detail": "Every project for us is more than just design; it is a tool for business growth."
     },
     "contactModal": {
-        "sidebarTitle": "Стратегическая сессия",
-        "sidebarSubtitle": "Постройте прибыльную систему брендинга с нашими экспертами.",
+        "sidebarTitle": "Strategic Session",
+        "sidebarSubtitle": "Build a profitable branding system with our experts.",
         "header": "Free Strategic Session",
         "description": "Expert advice on transforming your business into a leader and building a branding system.",
         "steps": {
@@ -231,7 +233,9 @@
                 "options": [
                     "$0 - $5,000",
                     "$5,000 - $20,000",
-                    "$20,000+"
+                    "$20,000+",
+                    "500 млн - 1 млрд сум",
+                    "1 млрд+ сум"
                 ]
             },
             "ambition": {
@@ -277,27 +281,28 @@
             "next": "CONTINUE",
             "back": "BACK",
             "submit": "BOOK STRATEGIC SESSION",
-            "close": "Закрыть окно"
+            "close": "Close window"
         },
         "formErrors": {
-            "role": "Выберите",
-            "revenue": "Выберите",
-            "ambition": "Введите цель",
-            "pain": "Выберите проблему",
-            "budget": "Выберите бюджет",
-            "fullName": "Введите имя",
-            "phone": "Введите полный номер телефона"
+            "role": "Select",
+            "revenue": "Select",
+            "ambition": "Enter goal",
+            "pain": "Select problem",
+            "budget": "Select budget",
+            "fullName": "Enter name",
+            "phone": "Enter full phone number"
         },
         "errorToast": {
-            "title": "Ошибка!",
-            "description": "Произошла ошибка при отправке запроса. Пожалуйста, попробуйте снова."
+            "title": "Error!",
+            "description": "An error occurred while sending the request. Please try again."
         },
         "successStep": {
-            "title": "Отлично! Мы начали 🚀",
-            "description": "Ваши данные успешно приняты. Скоро наш стратег свяжется с вами, и мы приступим к анализу вашего проекта.",
-            "nextSteps": "Что можно сделать до созвона?",
-            "telegramButton": "Подписаться на наш Telegram канал",
-            "telegramDesc": "Не пропустите полезные материалы по брендингу и маркетингу."
+            "title": "Great! We've started 🚀",
+            "description": "Your data has been successfully received. Our strategist will contact you soon to begin analyzing your project.",
+            "nextSteps": "What can you do before the call?",
+            "submit": "Subscribe to our Telegram channel",
+            "telegramButton": "Subscribe to our Telegram channel",
+            "telegramDesc": "Don't miss useful materials on branding and marketing."
         },
         "trustBadge": "Ваши данные на 100% защищены и используются только Jon.Branding."
     },
@@ -378,6 +383,24 @@
                 "title": "Logo Design",
                 "description": "Reflecting your essence.",
                 "buttonText": "Learn more"
+            },
+            {
+                "id": "firmenniy-stil",
+                "title": "Фирменный стиль",
+                "description": "Система логотипов, цветов и шрифтов, делающая ваш бренд узнаваемым.",
+                "buttonText": "Читать далее"
+            },
+            {
+                "id": "brandbook",
+                "title": "Брендбук",
+                "description": "Документ, описывающий правила использования айдентики вашего бренда.",
+                "buttonText": "Читать далее"
+            },
+            {
+                "id": "qadoq-dizayni",
+                "title": "Дизайн упаковки",
+                "description": "Привлекательный дизайн, который выделит ваш продукт на полке.",
+                "buttonText": "Читать далее"
             }
         ]
     },
@@ -565,14 +588,24 @@
                 "title": "Free PDF Checklist",
                 "subtitle": "7 biggest branding mistakes",
                 "description": "Learn which mistakes to avoid and get a practical guide to analyzing your brand.",
-                "cta": "View Checklist"
+                "cta": "View Checklist",
+                "href": "/{lang}/checklist"
             },
             {
                 "id": "quiz",
                 "title": "Mini-Quiz",
                 "subtitle": "Is your business ready for branding?",
                 "description": "Answer a few questions and find out how ready your business is.",
-                "cta": "Start Quiz"
+                "cta": "Start Quiz",
+                "href": "/{lang}/quiz"
+            },
+            {
+                "id": "video",
+                "title": "Video Guide",
+                "subtitle": "What is Strategic Branding?",
+                "description": "Why is just a pretty logo not enough? Watch the video to see what result our approach will bring to your business.",
+                "cta": "Watch Video",
+                "href": "#video"
             }
         ],
         "cta": {
@@ -718,6 +751,60 @@
                     },
                     {
                         "text": "No, I try to sell to everyone",
+                        "score": 1
+                    }
+                ]
+            },
+            {
+                "question": "What specific advantages distinguish your brand from competitors?",
+                "brandExample": "Tesla — innovative electric vehicles and autopilot; M&M's — chocolate that 'melts in your mouth, not in your hands'.",
+                "options": [
+                    {
+                        "text": "I have at least 2-3 specific advantages",
+                        "score": 3
+                    },
+                    {
+                        "text": "I only differ in price",
+                        "score": 2
+                    },
+                    {
+                        "text": "I have no clear advantages",
+                        "score": 1
+                    }
+                ]
+            },
+            {
+                "question": "Does your visual identity (logo, colors, design) reflect your business values?",
+                "brandExample": "Coca-Cola's red — energy and passion; Tiffany & Co.'s turquoise — luxury and elegance.",
+                "options": [
+                    {
+                        "text": "Yes, fully consistent",
+                        "score": 3
+                    },
+                    {
+                        "text": "Partially, some elements need updating",
+                        "score": 2
+                    },
+                    {
+                        "text": "No, I haven't paid attention to this",
+                        "score": 1
+                    }
+                ]
+            },
+            {
+                "question": "Do your customers hold a unified and positive opinion of you?",
+                "brandExample": "Starbucks — not just coffee, but the 'Third Place'; Zappos — amazing customer service.",
+                "options": [
+                    {
+                        "text": "Yes, my brand's reputation is solid",
+                        "score": 3
+                    },
+                    {
+                        "text": "It varies, sometimes there are negative reviews",
+                        "score": 2
+                    },
+                    {
+                        "text": "I don't know, I haven't conducted a survey",
                         "score": 1
                     }
                 ]
@@ -882,9 +969,9 @@
         "section1_title": "Name as Part of Brand Strategy",
         "section1_p1": "A good name supports association, recognition, and emotional connection. It is strategic work considering positioning and market.",
         "section1_p2": "We approach naming as a vital element where every word matters.",
-        "section2_title": "Каждое сильное имя начинается с идеи",
-        "section2_p1": "Прежде чем искать имя, мы задаем главный вопрос: о чем этот бренд? Какие чувства и образы он должен вызывать? Поэтому мы внимательно анализируем продукт, его аудиторию и среду, определяем семантические направления для поиска идеального имени.",
-        "section2_p2": "Оно может быть построено на эмоции, метафоре, культурном коде, профессиональном языке или даже игре слов. Главное, чтобы оно работало, передавало суть и помогало бренду запомниться.",
+        "section2_title": "Every Strong Name Starts with an Idea",
+        "section2_p1": "Before searching for a name, we ask the main question: what is this brand about? What feelings and images should it evoke? Therefore, we carefully analyze the product, its audience, and the environment to identify semantic directions for finding the ideal name.",
+        "section2_p2": "It can be built on emotion, metaphor, cultural code, professional language, or even wordplay. The main thing is that it works, conveys essence, and helps the brand be remembered.",
         "process_title": "How We Create a Name?",
         "process_subtitle": "Our naming development is a clear process where every stage is important:",
         "process_steps": [
@@ -1170,9 +1257,9 @@
         "cta": "Get Checklist",
         "closeText": "No thanks, I'm good",
         "success": {
-            "title": "Успешно!",
-            "description": "Ваш материал готов к скачиванию. Наша команда может связаться с вами в ближайшее время.",
-            "downloadCta": "Скачать Чек-лист (PDF)"
+            "title": "Success!",
+            "description": "Your material is ready for download. Our team may contact you soon.",
+            "downloadCta": "Download Checklist (PDF)"
         }
     }
 }

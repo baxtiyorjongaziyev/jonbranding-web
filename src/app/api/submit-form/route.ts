@@ -1,4 +1,20 @@
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
+
+const formSchema = z.object({
+    fullName: z.string().min(2, 'Name is too short').max(100),
+    phone: z.string().min(7, 'Phone is too short').max(30),
+    telegram: z.string().optional(),
+    role: z.string().optional(),
+    revenue: z.string().optional(),
+    ambition: z.string().optional(),
+    pain: z.string().optional(),
+    budget: z.string().optional(),
+    source: z.string().optional(),
+    lang: z.string().optional(),
+    packageSummary: z.string().optional(),
+    totalPrice: z.number().optional(),
+});
 
 const UZS_TO_USD_RATE = 1 / 12700;
 
@@ -113,7 +129,7 @@ async function sendMetaConversionEvent(data: any) {
 
 async function sendGAConversionEvent(data: any) {
   const gaApiSecret = cleanSecret(process.env.GA_API_SECRET);
-  const gaMeasurementId = 'G-B3ZSKB40XY';
+  const gaMeasurementId = cleanSecret(process.env.NEXT_PUBLIC_GA_ID) || 'G-B3ZSKB40XY';
   if (!gaApiSecret) return;
 
   try {
@@ -280,22 +296,28 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { fullName, phone } = body;
-
-    if (!fullName || !phone) {
-      return NextResponse.json({ ok: false, error: 'Required fields missing' }, { status: 400 });
+    
+    // Validate input using Zod
+    const validatedData = formSchema.safeParse(body);
+    if (!validatedData.success) {
+        return NextResponse.json(
+            { ok: false, error: "Invalid input data", details: validatedData.error.format() }, 
+            { status: 400 }
+        );
     }
+
+    const { fullName, phone } = validatedData.data;
 
     const telegramPayload: any = {
       chat_id: chatId,
-      text: buildTelegramMessage(body),
+      text: buildTelegramMessage(validatedData.data),
       parse_mode: 'HTML',
       disable_web_page_preview: true,
     };
 
     await sendTelegramMessage(botToken, telegramPayload);
 
-    const amoCrmResult = await sendToAmoCrm(body).catch(async (error) => {
+    const amoCrmResult = await sendToAmoCrm(validatedData.data).catch(async (error) => {
       console.error('AmoCRM lead error:', error);
       await sendTelegramMessage(botToken, {
         ...telegramPayload,
@@ -310,9 +332,9 @@ export async function POST(request: Request) {
       return { ok: false, error: error?.message || String(error) };
     });
 
-    sendMetaConversionEvent(body).catch(() => {});
-    sendGAConversionEvent(body).catch(() => {});
-    sendToN8n(body).catch(() => {});
+    sendMetaConversionEvent(validatedData.data).catch(() => {});
+    sendGAConversionEvent(validatedData.data).catch(() => {});
+    sendToN8n(validatedData.data).catch(() => {});
 
     return NextResponse.json({
       ok: true,

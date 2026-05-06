@@ -228,4 +228,47 @@ export const projects: Project[] = [
 ];
 
 // Empty array for Chinese testimonials, can be populated later
-export const staticTestimonialsZh: Testimonial[] = [];
+export const staticTestimonialsZh: Testimonial[] = [
+  {
+    name: "Ibrohimjon Mahammadjonov",
+    company: "Den Aroma 创始人",
+    avatar: "IM",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/a7036b241bf2b285df4b970561d47b0f5bc41b4f-1074x1909.jpg",
+    imageHint: "male founder portrait",
+    quote: "",
+    videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5"
+  },
+  {
+    name: "Sherzod Beknazarov",
+    company: "Incontrol Consulting 创始人",
+    avatar: "SB",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/1cb59ff629f31dd2721b4a978bd2cde4bccf2621-640x640.png",
+    imageHint: "male business owner",
+    quote: "",
+    videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
+  },
+  {
+    name: "Sevara Xolmanova",
+    company: "Fidda by Sevara 创始人",
+    avatar: "SX",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png",
+    imageHint: "female entrepreneur portrait",
+    quote: "我与这个团队合作过，我非常喜欢。非常高效，结果超出了我的预期。我订购了品牌设计、贴纸和专利申请。在7个月内，上帝保佑，一切都会准备就绪。你们诚信经营，愿安拉保佑你们。我非常开心，祝你们工作成功。谢谢。"
+  },
+  {
+    name: "Nodirbek",
+    company: "Barakah 餐厅创始人",
+    avatar: "N",
+    image: "",
+    imageHint: "restaurant manager portrait",
+    quote: "如果你还记得的话，3年前你们为这个品牌设计了标志。非常感谢，效果非常好，真的每个人都称赞它。非常感谢，巴赫蒂约尔兄弟！🤝🏻😊"
+  },
+  {
+    name: "Javohir Haqberdiyev",
+    company: "Perfona 创始人",
+    avatar: "JH",
+    image: "",
+    imageHint: "tech startup founder",
+    quote: "结果比我预想的还要好。我现在看着标志，自己也很享受。我喜欢的是那份信任。而且提前交付真的很棒。很高兴你们能这么快分享结果。多谢，大哥！"
+  },
+];

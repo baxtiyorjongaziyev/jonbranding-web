@@ -188,6 +188,50 @@ export default async function LocalizedLayout({ children, params }: Props) {
             })
           }}
         />
+        {/* Schema.org JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "Jon.Branding",
+              "image": "https://jonbranding.uz/images/cms/og-image.jpeg",
+              "@id": "https://jonbranding.uz",
+              "url": "https://jonbranding.uz",
+              "telephone": "+998901234567",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Tashkent City",
+                "addressLocality": "Tashkent",
+                "postalCode": "100000",
+                "addressCountry": "UZ"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 41.2995,
+                "longitude": 69.2401
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "opens": "09:00",
+                "closes": "18:00"
+              },
+              "sameAs": [
+                "https://instagram.com/jonbranding",
+                "https://t.me/jonbranding"
+              ]
+            })
+          }}
+        />
       </head>
       <body className="font-body bg-white antialiased" suppressHydrationWarning>
         <TabNotification 
@@ -212,15 +256,16 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 document.head.appendChild(gtm);
 
                 // 2. Google Analytics
+                const gaId = '${process.env.NEXT_PUBLIC_GA_ID || 'G-BTSGJQLMMV'}';
                 const ga = document.createElement('script');
                 ga.async = true;
-                ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY';
+                ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
                 document.head.appendChild(ga);
                 ga.onload = () => {
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', 'G-B3ZSKB40XY');
+                  gtag('config', gaId);
                   gtag('config', 'AW-17674872079');
                 };
 

@@ -129,9 +129,9 @@
         "title": "Sayt xaritasi",
         "subtitle": "Kerakli ma'lumotni tezda topishingiz uchun saytimizning barcha sahifalari haqida umumiy ma'lumot.",
         "sections": {
-            "main": "Основные разделы",
-            "services": "Услуги",
-            "blog": "Статьи блога"
+            "main": "Asosiy bo'limlar",
+            "services": "Xizmatlar",
+            "blog": "Blog maqolalari"
         },
         "links": {
             "home": "Bosh sahifa",
@@ -152,18 +152,18 @@
     },
     "hero": {
         "headlines": [
-            "Ваш брендинг |не продает?| Мы это исправим.",
-            "Выделитесь |на фоне конкурентов|.",
-            "Сделайте ваш бренд не просто \"красивым\", а |прибыльным|.",
-            "Пусть клиенты |влюбятся в вас|. Снова и снова.",
-            "От малого бизнеса до |сильного бренда|. За один шаг."
+            "Brendingiz |sotmayaptimi?| Biz buni tuzatamiz.",
+            "Raqobatchilardan |ajralib turing|.",
+            "Brendingizni shunchaki \"chiroyli\" emas, balki |daromadli| qiling.",
+            "Mijozlar sizni |yana va yana sevib qolishsin|.",
+            "Kichik biznesdan |kuchli brendgacha|. Bir qadamda."
         ],
         "description": "Biznesingiz nomi, logosi, qadoqi va kommunikatsiyasi mijozda ishonch uyg'otishi kerak. Biz buni strategiya va aniq vizual tizim orqali quramiz.",
         "buttonTexts": [
-            "Проанализировать мой бренд",
-            "Помогите увеличить продажи",
-            "Бесплатный Стратегический Аудит",
-            "Мне нужен сильный бренд"
+            "Brendimni tahlil qilish",
+            "Sotuvlarni oshirishga yordam bering",
+            "Bepul Strategik Audit",
+            "Menga kuchli brend kerak"
         ],
         "buttonHint": "Bepul Brand Audit  ·  Ishonch diagnostikasi  ·  Majburiyatsiz tavsiya",
         "title": "Brendingiz mijoz ko'zida **arzon ko'rinmasin**.",
@@ -411,7 +411,7 @@
         "experience": "Yillik tajriba",
         "clients": "Mamnun mijozlar",
         "recommend": "Tavsiya qilishadi",
-        "detail": "Каждый проект для нас — это не просто дизайн, а инструмент для роста бизнеса.",
+        "detail": "Har bir loyiha biz uchun shunchaki dizayn emas, balki biznes o'sishi uchun quroldir.",
         "projects_val": "1000+",
         "experience_val": "9+",
         "clients_val": "500+",
@@ -515,7 +515,8 @@
                     "Deep-Dive Brifing",
                     "Raqobatni 'Rentgen' qilish",
                     "Auditoriya psixologiyasi",
-                    "Imkoniyatlar xaritasi"
+                    "Imkoniyatlar xaritasi",
+                    "Сбор идей"
                 ]
             },
             {
@@ -526,7 +527,8 @@
                     "Pozitsiyalash (USP)",
                     "Brend Arxitekturasi",
                     "Sotuv Voronkasi tahlili",
-                    "Kommunikatsiya Tili"
+                    "Kommunikatsiya Tili",
+                    "Планирование"
                 ]
             },
             {
@@ -537,7 +539,8 @@
                     "Sotuvchi Neyming",
                     "Strategik Logotip",
                     "Psixologik Ranglar",
-                    "Premium Aydentika"
+                    "Premium Aydentika",
+                    "Брендбук"
                 ]
             },
             {
@@ -547,7 +550,8 @@
                 "tasks": [
                     "3D Maketlar",
                     "Real Keyslarda sinash",
-                    "Tahrirlar va jilolash"
+                    "Tahrirlar va jilolash",
+                    "Демонстрация мокапов"
                 ]
             },
             {
@@ -557,7 +561,8 @@
                 "tasks": [
                     "Eksport Fayllar",
                     "Brendbuk (Konstitutsiya)",
-                    "Foydalanish Masterclass"
+                    "Foydalanish Masterclass",
+                    "Подготовка к печати"
                 ]
             },
             {
@@ -730,6 +735,86 @@
                     {
                         "text": "Ha",
                         "score": 3
+                    },
+                    {
+                        "text": "Частично, но еще не полностью",
+                        "score": 2
+                    },
+                    {
+                        "text": "Нет, не задумывался об этом",
+                        "score": 1
+                    }
+                ]
+            },
+            {
+                "question": "Можете ли вы четко представить свою целевую аудиторию (идеального клиента)?",
+                "brandExample": "Apple — творческие профессионалы и энтузиасты технологий; Johnson's Baby — молодые мамы.",
+                "options": [
+                    {
+                        "text": "Да, я знаю их потребности и желания",
+                        "score": 3
+                    },
+                    {
+                        "text": "У меня есть общее представление",
+                        "score": 2
+                    },
+                    {
+                        "text": "Нет, я пытаюсь продавать всем",
+                        "score": 1
+                    }
+                ]
+            },
+            {
+                "question": "Какими конкретными преимуществами ваш бренд отличается от конкурентов?",
+                "brandExample": "Tesla — инновационные электромобили и автопилот; M&M's — шоколад, который 'не тает в руках'.",
+                "options": [
+                    {
+                        "text": "У меня есть как минимум 2-3 конкретных преимущества",
+                        "score": 3
+                    },
+                    {
+                        "text": "Я отличаюсь только ценой",
+                        "score": 2
+                    },
+                    {
+                        "text": "У меня нет явных преимуществ",
+                        "score": 1
+                    }
+                ]
+            },
+            {
+                "question": "Отражает ли ваш визуальный облик (логотип, цвета, дизайн) ценности вашего бизнеса?",
+                "brandExample": "Красный цвет Coca-Cola — энергия и страсть; бирюзовый цвет Tiffany & Co. — роскошь и изящество.",
+                "options": [
+                    {
+                        "text": "Да, полностью соответствует",
+                        "score": 3
+                    },
+                    {
+                        "text": "Частично, некоторые элементы нужно обновить",
+                        "score": 2
+                    },
+                    {
+                        "text": "Нет, я не обращал на это внимания",
+                        "score": 1
+                    }
+                ]
+            },
+            {
+                "question": "Mijozlaringiz siz haqingizda yagona va ijobiy fikrdami?",
+                "brandExample": "Starbucks — shunchaki kofe emas, balki 'uchinchi joy'; Zappos — ajoyib mijozlarga xizmat ko'rsatish.",
+                "options": [
+                    {
+                        "text": "Ha, brendimning obro'si mustahkam",
+                        "score": 3
+                    },
+                    {
+                        "text": "Har xil, ba'zan salbiy sharhlar ham bo'ladi",
+                        "score": 2
+                    },
+                    {
+                        "text": "Bilmayman, so'rov o'tkazmaganman",
+                        "score": 1
                     }
                 ]
             }
@@ -740,12 +825,12 @@
                 "description": "Poydevor zaif."
             },
             "medium": {
-                "title": "Хороший потенциал, но есть пробелы (9-12 баллов)",
-                "description": "У вас хороший фундамент, но ваш бренд может быть еще сильнее и эффективнее. Давайте заполним существующие пробелы и выведем ваш бизнес на новый уровень."
+                "title": "Yaxshi potensial, lekin kamchiliklar bor (9-12 ball)",
+                "description": "Sizda yaxshi poydevor bor, lekin brendingiz yanada kuchliroq va samaraliroq bo'lishi mumkin. Keling, mavjud bo'shliqlarni to'ldiramiz va biznesingizni yangi bosqichga olib chiqamiz."
             },
             "good": {
-                "title": "Отлично! Фундамент вашего бренда прочен (13-15 баллов)",
-                "description": "Поздравляем! Вы на правильном пути в вопросах брендинга. Теперь пришло время укрепить этот фундамент и стать лидером рынка. Мы поможем вам в этом."
+                "title": "A'lo! Brendingiz poydevori mustahkam (13-15 ball)",
+                "description": "Tabriklaymiz! Siz brending masalalarida to'g'ri yo'ldasiz. Endi bu poydevorni mustahkamlash va bozor yetakchisiga aylanish vaqti keldi. Biz sizga bunga yordam beramiz."
             },
             "afterSubmitText": "Mutaxassisimiz bog'lanadi.",
             "backToHome": "Bosh sahifaga"
@@ -893,9 +978,9 @@
         "section1_title": "Neyming — bu faqat chiroyli jarang emas",
         "section1_p1": "Yaxshi nom brendning mohiyatini yetkazadi, mijozlar ongida mustahkam o'rnashib oladi va biznesingizning bozordagi o'rnini belgilaydi.",
         "section1_p2": "Biz neymingni shunchaki ijodiy jarayon deb emas, balki brend strategiyasining ajralmas qismi deb bilamiz.",
-        "section2_title": "Каждое сильное имя начинается с идеи",
-        "section2_p1": "Прежде чем искать имя, мы задаем главный вопрос: о чем этот бренд? Какие чувства и образы он должен вызывать? Поэтому мы внимательно анализируем продукт, его аудиторию и среду, определяем семантические направления для поиска идеального имени.",
-        "section2_p2": "Оно может быть построено на эмоции, метафоре, культурном коде, профессиональном языке или даже игре слов. Главное, чтобы оно работало, передавало суть и помогало бренду запомниться.",
+        "section2_title": "Har bir kuchli nom g'oyadan boshlanadi",
+        "section2_p1": "Nom qidirishdan oldin biz asosiy savolni beramiz: bu brend nima haqida? U qanday tuyg'ular va tasvirlarni uyg'otishi kerak? Shuning uchun biz mahsulotni, uning auditoriyasini va muhitini diqqat bilan tahlil qilamiz, ideal nomni topish uchun semantik yo'nalishlarni aniqlaymiz.",
+        "section2_p2": "U emotsiya, metafora, madaniy kod, professional til yoki hatto so'z o'yini asosida qurilishi mumkin. Asosiysi, u ishlashi, mohiyatni yetkazishi va brendning esda qolishiga yordam berishi kerak.",
         "process_title": "Neyming yaratish jarayoni",
         "process_subtitle": "4 bosqichda brendingiz uchun ideal nomni topamiz.",
         "process_steps": [
@@ -1061,8 +1146,8 @@
                 "description": "Bosma uchun tayyor fayllar va texnik spesifikatsiyalar."
             }
         ],
-        "cta_title": "Упаковка не только привлекает внимание, она продает",
-        "cta_description": "Хороший дизайн упаковки — это не просто красивое украшение, а инструмент, работающий на бизнес. Мы разрабатываем функциональный, стратегически продуманный дизайн, в котором упаковка служит полноценным инструментом продаж."
+        "cta_title": "Qadoq nafaqat e'tiborni tortadi, balki sotadi",
+        "cta_description": "Yaxshi qadoq dizayni — shunchaki chiroyli bezak emas, balki biznes uchun ishlaydigan vositadir. Biz funktsional, strategik o'ylangan dizaynni ishlab chiqamiz, unda qadoq to'laqonli sotuv vositasi bo'lib xizmat qiladi."
     },
     "servicesPage": {
         "metadata": {
