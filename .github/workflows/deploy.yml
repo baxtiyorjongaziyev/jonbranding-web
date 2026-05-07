@@ -43,10 +43,10 @@ jobs:
 
       - name: Prepare Firebase credentials
         shell: bash
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
-          cat > "$RUNNER_TEMP/firebase-service-account.json" <<'JSON'
-          ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          JSON
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/firebase-service-account.json"
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/firebase-service-account.json" >> "$GITHUB_ENV"
 
       - name: Install Firebase CLI
@@ -88,7 +88,7 @@ jobs:
   update-devlog:
     name: Auto-update DEV_LOG.md
     needs: build-and-deploy
-    if: always() && github.actor != 'github-actions[bot]'
+    if: ${{ always() && github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
