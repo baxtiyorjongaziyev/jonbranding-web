@@ -1,0 +1,54 @@
+# Firebase App Hosting configuration for Jon Branding.
+# Sensitive values are stored in Google Cloud Secret Manager and referenced here.
+runConfig:
+  minInstances: 0
+  maxInstances: 20
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+env:
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: jonbranding-85662071-ea38e
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_SANITY_PROJECT_ID
+    value: h6ymmj0v
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_SANITY_DATASET
+    value: production
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: TELEGRAM_BOT_TOKEN
+    secret: TELEGRAM_BOT_TOKEN
+  - variable: TELEGRAM_CHAT_ID
+    secret: TELEGRAM_CHAT_ID
+  - variable: TELEGRAM_MESSAGE_THREAD_ID
+    secret: TELEGRAM_MESSAGE_THREAD_ID
+
+  - variable: AMOCRM_DOMAIN
+    secret: AMOCRM_DOMAIN
+  - variable: AMOCRM_SUBDOMAIN
+    secret: AMOCRM_SUBDOMAIN
+  - variable: AMOCRM_ACCESS_TOKEN
+    secret: AMOCRM_ACCESS_TOKEN
+
+  - variable: AMOCRM_CLIENT_ID
+    secret: AMOCRM_CLIENT_ID
+  - variable: AMOCRM_CLIENT_SECRET
+    secret: AMOCRM_CLIENT_SECRET
+  - variable: AMOCRM_REFRESH_TOKEN
+    secret: AMOCRM_REFRESH_TOKEN
+  - variable: AMOCRM_REDIRECT_URI
+    secret: AMOCRM_REDIRECT_URI
+  - variable: AMOCRM_CRON_SECRET
+    secret: AMOCRM_CRON_SECRET
+
+  - variable: N8N_WEBHOOK_URL
+    secret: N8N_WEBHOOK_URL

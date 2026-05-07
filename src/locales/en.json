@@ -1158,7 +1158,10 @@
         "labels": {
             "traffic": "Number of website visitors",
             "conversion": "Conversion rate (%)",
-            "aov": "Average Order Value ($)"
+            "aov": "Average Order Value ($)",
+            "traffic_unit": "people",
+            "conversion_unit": "(trust)",
+            "currency_suffix": " UZS"
         },
         "analogy": {
             "title": "Why is this happening?",

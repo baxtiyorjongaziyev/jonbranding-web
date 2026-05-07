@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getValidAccessToken, forceRefresh } from '@/lib/amocrm-token';
 
 const UZS_TO_USD_RATE = 1 / 12700;
 
@@ -85,11 +86,17 @@ async function sendToN8n(data: any) {
 }
 
 async function sendToAmoCRM(data: any) {
-    const domain = process.env.AMOCRM_DOMAIN;
-    const accessToken = process.env.AMOCRM_ACCESS_TOKEN;
-    
+    const domain = (process.env.AMOCRM_SUBDOMAIN || process.env.AMOCRM_DOMAIN || '').replace(/^https?:\/\//, '').replace(/\..+$/, '');
+
+    let accessToken: string;
+    try {
+        accessToken = await getValidAccessToken();
+    } catch {
+        accessToken = (process.env.AMOCRM_ACCESS_TOKEN || '').trim();
+    }
+
     if (!domain || !accessToken) {
-        console.error('AmoCRM integration skipped: AMOCRM_DOMAIN or AMOCRM_ACCESS_TOKEN missing');
+        console.error('AmoCRM integration skipped: domain or access token missing');
         return;
     }
 
@@ -122,40 +129,52 @@ ${packageSummary ? `--- \n📦 Paket: ${packageSummary} \n💰 Narx: ${totalPric
     `.trim();
 
     try {
-        // Step 1: Create Lead + Contact using /leads/complex
-        const createResponse = await fetch(`https://${domain}.amocrm.ru/api/v4/leads/complex`, {
-            method: 'POST',
-            headers: { 
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json' 
-            },
-            body: JSON.stringify([
-                {
-                    name: `Yangi So'rov: ${fullName} (${source || 'website'})`,
-                    price: totalPrice || 0,
-                    _embedded: {
-                        contacts: [
-                            {
-                                first_name: fullName,
-                                custom_fields_values: [
-                                    ...(phone ? [{
-                                        field_code: 'PHONE',
-                                        values: [{ value: phone, enum_code: 'WORK' }]
-                                    }] : []),
-                                    ...(telegram ? [{
-                                        field_code: 'IM',
-                                        values: [{ value: telegram.replace('@', ''), enum_code: 'TELEGRAM' }]
-                                    }] : []),
-                                ]
-                            }
-                        ]
-                    }
+        const leadBody = JSON.stringify([
+            {
+                name: `Yangi So'rov: ${fullName} (${source || 'website'})`,
+                price: totalPrice || 0,
+                _embedded: {
+                    contacts: [
+                        {
+                            first_name: fullName,
+                            custom_fields_values: [
+                                ...(phone ? [{
+                                    field_code: 'PHONE',
+                                    values: [{ value: phone, enum_code: 'WORK' }]
+                                }] : []),
+                                ...(telegram ? [{
+                                    field_code: 'IM',
+                                    values: [{ value: telegram.replace('@', ''), enum_code: 'TELEGRAM' }]
+                                }] : []),
+                            ]
+                        }
+                    ]
                 }
-            ]),
+            }
+        ]);
+
+        // Step 1: Create Lead + Contact using /leads/complex
+        let createResponse = await fetch(`https://${domain}.amocrm.ru/api/v4/leads/complex`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+            body: leadBody,
         });
 
+        // Retry once with a fresh token if stale
+        if (createResponse.status === 401) {
+            try {
+                const refreshed = await forceRefresh();
+                accessToken = refreshed.access_token;
+                createResponse = await fetch(`https://${domain}.amocrm.ru/api/v4/leads/complex`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+                    body: leadBody,
+                });
+            } catch { /* fall through */ }
+        }
+
         const createResult = await createResponse.json();
-        
+
         if (!createResponse.ok) {
              throw new Error(JSON.stringify(createResult));
         }

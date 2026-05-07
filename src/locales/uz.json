@@ -1119,7 +1119,10 @@
         "labels": {
             "traffic": "Saytingizga kirgan odamlar soni",
             "conversion": "Sizdan sotib olayotganlar ulushi (%)",
-            "aov": "O'rtacha bitta xarid narxi ($)"
+            "aov": "O'rtacha bitta xarid narxi ($)",
+            "traffic_unit": "ta odam",
+            "conversion_unit": "(ishonch)",
+            "currency_suffix": " so'm"
         },
         "analogy": {
             "title": "Nega bu sodir bo'lyapti?",

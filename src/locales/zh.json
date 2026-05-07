@@ -1085,6 +1085,33 @@
         },
         "tooltip": "先取消一个"
     },
+    "opportunityCalculator": {
+        "title": "您的品牌是'漏水桶'吗？",
+        "subtitle": "为什么广告投入越多，利润却越少？用数字来计算。",
+        "labels": {
+            "traffic": "访问网站的人数",
+            "conversion": "购买转化率 (%)",
+            "aov": "平均订单价值 ($)",
+            "traffic_unit": "人",
+            "conversion_unit": "(信任)",
+            "currency_suffix": " 索姆"
+        },
+        "analogy": {
+            "title": "为什么会这样？",
+            "bucket": "桶 = 您的品牌",
+            "water": "水 = 广告带来的客户",
+            "leak": "漏洞 = 糟糕的设计和缺乏信任",
+            "description": "无论您倒入多少'水'，如果品牌存在'漏洞'，利润就会不断流失。我们帮您补上这些漏洞。"
+        },
+        "results": {
+            "title": "您的机会",
+            "potential": "品牌升级后的月利润",
+            "loss": "每月损失的金额",
+            "lossNote": "您每月都在白白损失这些钱！",
+            "roiNote": "信任度提升1-2%就能让您的收入增加2-3倍。"
+        },
+        "cta": "免费获取品牌审计"
+    },
     "exitIntentModal": {
         "title": "需要更多信息吗？",
         "description": "我们为您提供<span class='font-bold text-primary'>多种灵活的方案</span>，以满足您的业务需求。欢迎查看我们的详细报价。",

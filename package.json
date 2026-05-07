@@ -51,6 +51,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-autoplay": "^8.1.7",
     "embla-carousel-react": "^8.1.7",
+    "firebase-admin": "^13.8.0",
     "framer-motion": "^11.3.17",
     "genkit": "^1.31.0",
     "gray-matter": "^4.0.3",
