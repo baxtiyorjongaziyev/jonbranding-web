@@ -13,7 +13,7 @@ const portfolioImages: GalleryImage[] = projects
   .filter((project) => !project.hiddenInHero)
   .flatMap((project) => project.galleryImages || [])
   .filter((image) => !image.src.toLowerCase().endsWith('.gif'))
-  .slice(0, 4);
+  .slice(0, 10);
 
 interface HeroProps {
   onOpenContact: () => void;
@@ -100,27 +100,27 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
       <div className="absolute bottom-0 left-0 right-0 -z-10 h-44 bg-gradient-to-t from-[#f7f4ee] to-transparent" />
 
       <div className="container mx-auto max-w-[1360px] overflow-hidden px-4 sm:px-6 lg:px-8">
-        <div className="grid min-h-[calc(100svh-6rem)] items-center gap-10 py-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14 lg:py-14">
+        <div className="grid min-h-[calc(100svh-6rem)] place-items-center gap-10 py-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14 lg:py-14">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto w-full max-w-[280px] text-center sm:max-w-3xl lg:mx-0 lg:w-full lg:text-left"
+            className="mx-auto w-full max-w-[292px] text-center sm:max-w-3xl lg:mx-0 lg:w-full lg:text-left"
           >
-            <div className="mb-5 inline-flex w-full max-w-[280px] items-center justify-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2.5 text-center text-[10px] font-black uppercase tracking-[0.12em] text-blue-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur sm:w-auto sm:max-w-full sm:text-[11px] sm:tracking-[0.24em]">
+            <div className="mb-5 inline-flex w-full max-w-[292px] items-center justify-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2.5 text-center text-[10px] font-black uppercase tracking-[0.12em] text-blue-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur sm:w-auto sm:max-w-full sm:text-[11px] sm:tracking-[0.24em]">
               <Sparkles className="h-4 w-4 text-brand-cyan" />
               <span className="min-w-0 text-balance">{heroCopy.preHeadline}</span>
             </div>
 
-            <h1 className="mx-auto max-w-[280px] text-balance text-[35px] font-black leading-[0.94] tracking-[-0.05em] text-white sm:max-w-none sm:text-[72px] sm:tracking-[-0.075em] lg:mx-0 lg:text-[88px] xl:text-[104px]">
+            <h1 className="mx-auto max-w-[292px] text-balance text-[35px] font-black leading-[0.94] tracking-[-0.05em] text-white sm:max-w-none sm:text-[72px] sm:tracking-[-0.075em] lg:mx-0 lg:text-[88px] xl:text-[104px]">
               {renderHeadline(heroCopy.title, 'text-white')}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[280px] text-pretty text-base leading-8 text-slate-300 sm:max-w-2xl sm:text-xl lg:mx-0">
+            <p className="mx-auto mt-6 max-w-[292px] text-pretty text-base leading-8 text-slate-300 sm:max-w-2xl sm:text-xl lg:mx-0">
               {heroCopy.description}
             </p>
 
-            <div className="mx-auto mt-8 flex w-full max-w-[280px] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mx-0 lg:justify-start">
+            <div className="mx-auto mt-8 flex w-full max-w-[292px] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mx-0 lg:justify-start">
               <Button
                 onClick={onOpenContact}
                 size="lg"
@@ -139,7 +139,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
               </Button>
             </div>
 
-            <div className="mx-auto mt-6 grid w-full max-w-[280px] gap-2 sm:max-w-none sm:grid-cols-3">
+            <div className="mx-auto mt-6 grid w-full max-w-[292px] gap-2 sm:max-w-none sm:grid-cols-3">
               {heroCopy.proofItems.map((item) => (
                 <div key={item} className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/7 px-3 py-3 text-sm font-bold text-slate-200 shadow-sm backdrop-blur lg:justify-start">
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-cyan" />
@@ -153,13 +153,11 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-            className="relative mx-auto w-full max-w-[330px] sm:max-w-2xl lg:max-w-none"
+            className="relative mx-auto w-full max-w-[292px] sm:max-w-2xl lg:max-w-none"
           >
             <div className="relative rounded-[2rem] border border-white/12 bg-white/8 p-3 shadow-[0_35px_100px_-55px_rgba(0,0,0,0.95)] backdrop-blur-xl sm:rounded-[2.4rem] sm:p-4">
               <div className="grid gap-3 sm:grid-cols-2">
-                <PortfolioTile image={portfolioImages[0]} className="h-[250px] sm:h-[520px] sm:row-span-2" priority />
-                <PortfolioTile image={portfolioImages[1]} className="hidden h-[250px] sm:block" priority />
-                <PortfolioTile image={portfolioImages[2]} className="hidden h-[250px] sm:block" />
+                <CaseWall images={portfolioImages} />
                 <div className="rounded-[1.45rem] border border-white/12 bg-slate-950/95 p-4 text-white shadow-[0_24px_70px_-35px_rgba(0,0,0,0.95)] sm:col-span-2 sm:p-5">
                   <div className="mb-3 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.18em] text-brand-cyan">
                     <ShieldCheck className="h-4 w-4" />
@@ -205,26 +203,73 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
   );
 };
 
-function PortfolioTile({ image, className, priority = false }: { image?: GalleryImage; className: string; priority?: boolean }) {
+function CaseWall({ images }: { images: GalleryImage[] }) {
+  const firstColumn = images.filter((_, index) => index % 2 === 0);
+  const secondColumn = images.filter((_, index) => index % 2 === 1);
+
+  return (
+    <div className="col-span-full grid h-[250px] gap-3 overflow-hidden rounded-[1.65rem] sm:h-[520px] sm:grid-cols-2">
+      <CaseColumn images={firstColumn} duration={28} priority />
+      <CaseColumn images={secondColumn.length ? secondColumn : firstColumn} duration={34} reverse className="hidden sm:block" />
+    </div>
+  );
+}
+
+function CaseColumn({
+  images,
+  duration,
+  reverse = false,
+  priority = false,
+  className = '',
+}: {
+  images: GalleryImage[];
+  duration: number;
+  reverse?: boolean;
+  priority?: boolean;
+  className?: string;
+}) {
+  const loopImages = [...images, ...images];
+
+  return (
+    <div className={`relative h-full overflow-hidden ${className}`}>
+      <motion.div
+        className="flex flex-col gap-3"
+        animate={{ y: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
+        transition={{ duration, ease: 'linear', repeat: Infinity }}
+      >
+        {loopImages.map((image, index) => (
+          <PortfolioTile
+            key={`${image?.src || 'fallback'}-${index}`}
+            image={image}
+            priority={priority && index < 2}
+            ratioClass={index % 3 === 0 ? 'aspect-[4/3]' : index % 3 === 1 ? 'aspect-[16/10]' : 'aspect-[5/4]'}
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+function PortfolioTile({ image, ratioClass, priority = false }: { image?: GalleryImage; ratioClass: string; priority?: boolean }) {
   if (!image) {
     return (
-      <div className={`${className} flex items-center justify-center rounded-[1.45rem] bg-white/8 p-8 text-center text-sm font-bold text-white/50`}>
+      <div className={`${ratioClass} flex items-center justify-center rounded-[1.45rem] bg-white/8 p-8 text-center text-sm font-bold text-white/50`}>
         Portfolio namunasi
       </div>
     );
   }
 
   return (
-    <div className={`relative overflow-hidden rounded-[1.45rem] bg-slate-100 ring-1 ring-white/10 sm:rounded-[1.65rem] ${className}`}>
+    <div className={`relative overflow-hidden rounded-[1.45rem] bg-white p-3 ring-1 ring-white/10 sm:rounded-[1.65rem] ${ratioClass}`}>
       <Image
         src={image.src}
         alt={image.alt || 'Jon.Branding portfolio namunasi'}
         fill
         priority={priority}
         sizes="(max-width: 768px) 92vw, 48vw"
-        className="object-cover saturate-[0.92]"
+        className="object-contain p-2 saturate-[0.96]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/28 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-t from-slate-950/8 via-transparent to-white/10" />
     </div>
   );
 }
