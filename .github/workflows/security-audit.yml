@@ -29,7 +29,7 @@ jobs:
           node -e "const fs=require('fs'); const audit=JSON.parse(fs.readFileSync('npm-audit.json','utf8')); const m=audit.metadata?.vulnerabilities || {}; const total=Object.values(m).reduce((a,b)=>typeof b==='number'?a+b:a,0); fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## npm audit report\\n\\n' + Object.entries(m).map(([k,v])=>'- '+k+': '+v).join('\\n') + '\\n\\nTotal: '+total+'\\n'); if ((m.critical||0)>0 || (m.high||0)>0) console.log('Security advisories found. Review npm-audit.json and Dependabot alerts.');"
 
       - name: Upload audit report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: npm-audit-report
           path: npm-audit.json
