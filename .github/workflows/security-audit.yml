@@ -1,0 +1,35 @@
+name: Security Audit
+
+on:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+jobs:
+  npm-audit:
+    name: npm audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit production dependencies
+        run: |
+          npm audit --audit-level=high --omit=dev --json > npm-audit.json || true
+          node -e "const fs=require('fs'); const audit=JSON.parse(fs.readFileSync('npm-audit.json','utf8')); const m=audit.metadata?.vulnerabilities || {}; const total=Object.values(m).reduce((a,b)=>typeof b==='number'?a+b:a,0); fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## npm audit report\\n\\n' + Object.entries(m).map(([k,v])=>'- '+k+': '+v).join('\\n') + '\\n\\nTotal: '+total+'\\n'); if ((m.critical||0)>0 || (m.high||0)>0) console.log('Security advisories found. Review npm-audit.json and Dependabot alerts.');"
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: npm-audit.json

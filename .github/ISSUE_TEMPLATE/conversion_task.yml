@@ -1,0 +1,39 @@
+name: Conversion task
+description: Improve offer, funnel, copy, CTA, proof, or lead capture.
+title: "CRO: "
+labels:
+  - conversion
+body:
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+      description: What change should increase trust, clarity, or leads?
+      placeholder: "If we make the Free Brand Audit outcome clearer above the fold, more visitors will open the contact modal."
+    validations:
+      required: true
+  - type: textarea
+    id: area
+    attributes:
+      label: Page / section
+      placeholder: "Hero, proof wall, FAQ, contact modal, service cards..."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: "- Mobile and desktop screenshots attached\n- CTA path tested\n- Copy is understandable for Uzbek entrepreneurs"
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 - blocks revenue
+        - P1 - high conversion impact
+        - P2 - medium impact
+        - P3 - nice to have
+    validations:
+      required: true

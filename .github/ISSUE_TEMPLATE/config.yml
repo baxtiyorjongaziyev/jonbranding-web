@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Production website
+    url: https://jonbranding.uz/
+    about: Check the live production website.
+  - name: GitHub Actions
+    url: https://github.com/baxtiyorjongaziyev/jonbranding-web/actions
+    about: Review CI and deployment runs.
