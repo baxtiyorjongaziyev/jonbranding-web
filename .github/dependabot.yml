@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: Asia/Tashkent
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - security
+    groups:
+      nextjs:
+        patterns:
+          - next
+          - "@next/*"
+      sanity:
+        patterns:
+          - sanity
+          - "@sanity/*"
+          - next-sanity
+      testing:
+        patterns:
+          - vitest
+          - "@testing-library/*"
+          - jsdom
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:20"
+      timezone: Asia/Tashkent
+    labels:
+      - dependencies
+      - ci-cd

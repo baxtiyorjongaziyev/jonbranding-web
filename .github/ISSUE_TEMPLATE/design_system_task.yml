@@ -1,0 +1,25 @@
+name: Design system task
+description: Improve UI kit, tokens, spacing, typography, components, or motion.
+title: "Design system: "
+labels:
+  - design-system
+body:
+  - type: textarea
+    id: inconsistency
+    attributes:
+      label: What feels inconsistent?
+      placeholder: "Cards use different radii, buttons have mixed shadows, mobile spacing is uneven..."
+    validations:
+      required: true
+  - type: textarea
+    id: target
+    attributes:
+      label: Target standard
+      placeholder: "Define the desired rule, token, or component behavior."
+    validations:
+      required: true
+  - type: textarea
+    id: proof
+    attributes:
+      label: Visual proof
+      description: Add screenshots or links if available.
