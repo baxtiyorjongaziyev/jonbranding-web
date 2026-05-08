@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a broken flow, visual bug, or production issue.
+title: "Bug: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is broken?
+      description: Explain what happened and where.
+      placeholder: "Example: Contact modal does not submit on mobile Safari."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      placeholder: "Example: User can submit the audit request and sees a success state."
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      placeholder: "https://jonbranding.uz/"
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshot / console / logs
+      description: Add screenshots, errors, or steps to reproduce.
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 - production is broken
+        - P1 - conversion or critical flow is broken
+        - P2 - important but not blocking
+        - P3 - polish
+    validations:
+      required: true
