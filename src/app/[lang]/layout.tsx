@@ -35,7 +35,8 @@ const ogLocales = {
   zh: 'zh_CN',
 } satisfies Record<Locale, string>;
 
-export async function generateMetadata({ params: { lang } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
   const safeLang = locales.includes(lang as Locale) ? (lang as Locale) : defaultLocale;
   const dictionary = await getDictionary(safeLang);
   return {
@@ -91,11 +92,11 @@ const inter = Inter({
 
 type Props = {
   children: ReactNode;
-  params: { lang: Locale };
+  params: Promise<{ lang: Locale }>;
 };
 
 export default async function LocalizedLayout({ children, params }: Props) {
-  const { lang: rawLang } = params;
+  const { lang: rawLang } = await params;
   const lang = locales.includes(rawLang as Locale) ? (rawLang as Locale) : defaultLocale;
   let dictionary;
   try {

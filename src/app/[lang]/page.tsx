@@ -4,11 +4,11 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
 
 type Props = {
-  params: { lang: Locale };
+  params: Promise<{ lang: Locale }>;
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { lang } = props.params;
+  const { lang } = await props.params;
   const titles = {
     uz: "Jon.Branding | Toshkentdagi Professional Brending Agentligi: Logo va Neyming",
     ru: "Jon.Branding | Брендинговое Агентство в Ташкенте: Дизайн и Стратегия",
@@ -31,7 +31,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function Page(props: Props) {
-  const { lang } = props.params;
+  const { lang } = await props.params;
   
   let dictionary;
   try {

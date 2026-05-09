@@ -2,13 +2,13 @@ import { FC } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
 interface TermsPageProps {
-  params: {
+  params: Promise<{
     lang: string;
-  };
+  }>;
 }
 
-const TermsPage: FC<TermsPageProps> = async ({ params }) => {
-  const { lang } = params;
+const TermsPage = async ({ params }: TermsPageProps) => {
+  const { lang } = await params;
   const dictionary = await getDictionary(lang as Locale);
 
   const content = {

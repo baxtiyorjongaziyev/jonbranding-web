@@ -3,11 +3,11 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import CorporateClient from './corporate-client';
 
 type Props = {
-  params: { lang: Locale };
+  params: Promise<{ lang: Locale }>;
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { lang } = props.params;
+  const { lang } = await props.params;
   const dictionary = await getDictionary(lang);
   const metadata = dictionary.corporateStylePage?.metadata;
 
@@ -19,7 +19,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function Page(props: Props) {
-  const { lang } = props.params;
+  const { lang } = await props.params;
   const dictionary = await getDictionary(lang);
   
   return <CorporateClient lang={lang} translations={dictionary.corporateStylePage} />;
