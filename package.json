@@ -68,7 +68,7 @@
     "react-dom": "18.3.1",
     "react-hook-form": "^7.52.1",
     "recharts": "^2.12.7",
-    "sanity": "^3.55.0",
+    "sanity": "^3.99.0",
     "sharp": "^0.34.5",
     "styled-components": "^6.4.0",
     "tailwind-merge": "^2.4.0",
