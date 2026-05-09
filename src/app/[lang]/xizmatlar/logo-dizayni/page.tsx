@@ -3,12 +3,12 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import LogoClient from './logo-client';
 
 type Props = {
-  params: { lang: Locale };
+  params: Promise<{ lang: string }>;
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { lang } = props.params;
-  const dictionary = await getDictionary(lang);
+  const { lang } = await props.params;
+  const dictionary = await getDictionary(lang as Locale);
   const metadata = dictionary.logoDesignPage?.metadata;
 
   return {
@@ -19,8 +19,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function Page(props: Props) {
-  const { lang } = props.params;
-  const dictionary = await getDictionary(lang);
+  const { lang } = await props.params;
+  const dictionary = await getDictionary(lang as Locale);
   
-  return <LogoClient lang={lang} translations={dictionary.logoDesignPage} />;
+  return <LogoClient lang={lang as Locale} translations={dictionary.logoDesignPage} />;
 }

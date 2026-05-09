@@ -1,14 +1,13 @@
-import { FC } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
 interface PrivacyPageProps {
-  params: {
+  params: Promise<{
     lang: string;
-  };
+  }>;
 }
 
-const PrivacyPage: FC<PrivacyPageProps> = async ({ params }) => {
-  const { lang } = params;
+const PrivacyPage = async ({ params }: PrivacyPageProps) => {
+  const { lang } = await params;
   const dictionary = await getDictionary(lang as Locale);
 
   const content = {

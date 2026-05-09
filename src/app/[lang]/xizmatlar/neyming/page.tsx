@@ -3,12 +3,12 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import NamingClient from './naming-client';
 
 type Props = {
-  params: { lang: Locale };
+  params: Promise<{ lang: string }>;
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { lang } = props.params;
-  const dictionary = await getDictionary(lang);
+  const { lang } = await props.params;
+  const dictionary = await getDictionary(lang as Locale);
   const metadata = dictionary.namingPage?.metadata;
 
   return {
@@ -19,8 +19,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function Page(props: Props) {
-  const { lang } = props.params;
-  const dictionary = await getDictionary(lang);
+  const { lang } = await props.params;
+  const dictionary = await getDictionary(lang as Locale);
   
-  return <NamingClient lang={lang} translations={dictionary.namingPage} />;
+  return <NamingClient lang={lang as Locale} translations={dictionary.namingPage} />;
 }
