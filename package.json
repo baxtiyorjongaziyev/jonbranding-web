@@ -59,7 +59,7 @@
     "lucide-react": "^0.417.0",
     "marked": "^13.0.2",
     "negotiator": "^0.6.3",
-    "next": "^14.2.35",
+    "next": "^15.5.15",
     "next-sanity": "^9.8.4",
     "outstatic": "^2.1.5",
     "patch-package": "^8.0.1",
