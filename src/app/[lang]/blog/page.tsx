@@ -9,12 +9,12 @@ import { uz, ru, enUS } from 'date-fns/locale';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 
 type Props = {
-  params: { lang: Locale };
+  params: Promise<{ lang: string }>;
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { lang } = props.params;
-  const dictionary = await getDictionary(lang);
+  const { lang } = await props.params;
+  const dictionary = await getDictionary(lang as Locale);
   const metadata = dictionary.blog?.metadata;
 
   return {
@@ -24,7 +24,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 const BlogPage = async (props: Props) => {
-  const { lang } = props.params;
+  const { lang } = await props.params;
   const sortedPosts = getSortedPostsData(lang as Locale);
   const dictionary = await getDictionary(lang as Locale);
   const translations = dictionary.blog;

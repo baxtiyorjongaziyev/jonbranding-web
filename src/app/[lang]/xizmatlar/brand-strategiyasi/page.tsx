@@ -9,12 +9,12 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 
 type Props = {
-  params: { lang: Locale };
+  params: Promise<{ lang: string }>;
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { lang } = props.params;
-  const dictionary = await getDictionary(lang);
+  const { lang } = await props.params;
+  const dictionary = await getDictionary(lang as Locale);
   const metadata = dictionary.brandStrategyPage?.metadata;
 
   return {
@@ -25,8 +25,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 const BrandStrategyPage = async (props: Props) => {
-  const { lang } = props.params;
-  const dictionary = await getDictionary(lang);
+  const { lang } = await props.params;
+  const dictionary = await getDictionary(lang as Locale);
   const translations = dictionary.brandStrategyPage;
 
   if (!translations) {
@@ -115,8 +115,8 @@ const BrandStrategyPage = async (props: Props) => {
             steps={processSteps}
       />
       
-      <WhyUs lang={lang} dictionary={dictionary.whyUs} />
-      <ServiceSections lang={lang} dictionary={dictionary.serviceSections} />
+      <WhyUs lang={lang as Locale} dictionary={dictionary.whyUs} />
+      <ServiceSections lang={lang as Locale} dictionary={dictionary.serviceSections} />
     </main>
   );
 };

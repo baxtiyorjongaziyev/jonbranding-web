@@ -3,6 +3,13 @@
 const nextConfig = {
   output: 'standalone',
   experimental: {},
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'hls.js': require.resolve('hls.js'),
+    };
+    return config;
+  },
   images: {
     remotePatterns: [
       {
