@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 9002 -H 0.0.0.0",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "node .next/standalone/server.js",
-    "lint": "next lint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "prepare": "husky"
@@ -18,12 +18,8 @@
     "@amplitude/analytics-browser": "^2.11.1",
     "@amplitude/analytics-node": "^1.3.1",
     "@formatjs/intl-localematcher": "^0.5.4",
-    "@genkit-ai/ai": "^1.31.0",
-    "@genkit-ai/core": "^1.31.0",
-    "@genkit-ai/google-genai": "^1.31.0",
-    "@genkit-ai/googleai": "^1.28.0",
     "@hookform/resolvers": "^3.9.0",
-    "@next/third-parties": "^14.2.35",
+    "@next/third-parties": "^16.2.6",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-avatar": "^1.1.0",
@@ -46,7 +42,7 @@
     "@radix-ui/react-tabs": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-tooltip": "^1.1.2",
-    "@sanity/vision": "3.60.0",
+    "@sanity/vision": "5.24.0",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -54,21 +50,20 @@
     "embla-carousel-autoplay": "^8.1.7",
     "embla-carousel-react": "^8.1.7",
     "framer-motion": "^11.3.17",
-    "genkit": "^1.31.0",
     "gray-matter": "^4.0.3",
+    "hls.js": "^1.6.16",
     "lucide-react": "^0.417.0",
     "marked": "^13.0.2",
     "negotiator": "^0.6.3",
-    "next": "^14.2.35",
-    "next-sanity": "^9.8.4",
-    "outstatic": "^2.1.5",
+    "next": "^16.2.6",
+    "next-sanity": "^12.4.5",
     "patch-package": "^8.0.1",
-    "react": "18.3.1",
+    "react": "19.2.6",
     "react-day-picker": "^8.10.1",
-    "react-dom": "18.3.1",
+    "react-dom": "19.2.6",
     "react-hook-form": "^7.52.1",
     "recharts": "^2.12.7",
-    "sanity": "^3.99.0",
+    "sanity": "^5.24.0",
     "sharp": "^0.34.5",
     "styled-components": "^6.4.0",
     "tailwind-merge": "^3.5.0",
@@ -76,7 +71,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@sanity/client": "^7.21.0",
+    "@sanity/client": "^7.22.0",
     "@tailwindcss/typography": "^0.5.13",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -84,20 +79,20 @@
     "@types/canvas-confetti": "^1.6.4",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.35",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.2.6",
+    "husky": "^9.0.0",
     "jsdom": "^29.1.1",
-    "postcss": "^8",
+    "lint-staged": "^15.0.0",
+    "postcss": "^8.5.14",
     "sharp": "^0.34.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
     "vite": "^8.0.10",
-    "vitest": "^4.1.5",
-    "husky": "^9.0.0",
-    "lint-staged": "^15.0.0"
+    "vitest": "^4.1.5"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -107,5 +102,9 @@
     "*.{json,md,css}": [
       "prettier --write"
     ]
+  },
+  "overrides": {
+    "js-yaml": "^4.1.1",
+    "postcss": "$postcss"
   }
 }

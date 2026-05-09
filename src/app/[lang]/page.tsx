@@ -4,11 +4,12 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
 
 type Props = {
-  params: { lang: Locale };
+  params: Promise<{ lang: string }>;
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { lang } = props.params;
+  const { lang: rawLang } = await props.params;
+  const lang = (['uz', 'ru', 'en', 'zh'].includes(rawLang) ? rawLang : 'uz') as Locale;
   const titles = {
     uz: "Jon.Branding | Toshkentdagi Professional Brending Agentligi: Logo va Neyming",
     ru: "Jon.Branding | Брендинговое Агентство в Ташкенте: Дизайн и Стратегия",
@@ -31,15 +32,15 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function Page(props: Props) {
-  const { lang } = props.params;
+  const { lang } = await props.params;
   
   let dictionary;
   try {
-    dictionary = await getDictionary(lang);
+    dictionary = await getDictionary(lang as Locale);
   } catch (e) {
     console.error("Page dictionary load error, falling back to 'uz':", e);
     dictionary = await getDictionary('uz');
   }
   
-  return <HomeComponent lang={lang} dictionary={dictionary} />;
+  return <HomeComponent lang={lang as Locale} dictionary={dictionary} />;
 }
