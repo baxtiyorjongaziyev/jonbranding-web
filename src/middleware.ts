@@ -10,7 +10,11 @@ const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const MAX_REQUESTS = 5; // 5 requests per window per IP
 
 export function middleware(request: NextRequest) {
-  const ip = request.ip || 'anonymous';
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  const ip =
+    forwardedFor?.split(',')[0]?.trim() ||
+    request.headers.get('x-real-ip') ||
+    'anonymous';
   const { pathname } = request.nextUrl;
 
   // 1. Rate Limiting for API routes
