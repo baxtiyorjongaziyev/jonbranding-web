@@ -37,6 +37,10 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
+    ".next",
+    ".netlify",
+    ".open-next",
+    ".wrangler",
     "node_modules"
   ]
 }
