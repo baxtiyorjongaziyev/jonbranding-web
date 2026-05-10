@@ -10,9 +10,9 @@ export const client = createClient({
   useCdn: false, // In production, this should be true for faster delivery
 })
 
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
 export function urlFor(source: any) {
   return builder.image(source)

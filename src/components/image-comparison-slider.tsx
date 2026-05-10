@@ -47,6 +47,7 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
       <div className="absolute inset-0 bg-neutral-900">
         <Image 
             {...beforeImage}
+            alt={beforeImage.alt ?? translations.before}
             fill 
             className="object-cover pointer-events-none transition-transform duration-700 group-hover:scale-[1.02]"
             priority
@@ -66,6 +67,7 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
         <div className="absolute inset-0 bg-neutral-900">
           <Image 
               {...afterImage}
+              alt={afterImage.alt ?? translations.after}
               fill
               className="object-cover pointer-events-none transition-transform duration-700 group-hover:scale-[1.02]"
               priority
