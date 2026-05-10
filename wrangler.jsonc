@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jonbranding-web",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-05-10",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "jonbranding-web"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
