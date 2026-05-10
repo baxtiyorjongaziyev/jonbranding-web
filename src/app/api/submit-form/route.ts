@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
 const formSchema = z.object({
     fullName: z.string().min(2, 'Name is too short').max(100),
@@ -287,6 +288,14 @@ ${totalPrice ? `\n<b>Narx:</b> ${escapeTelegramHtml(totalPrice.toLocaleString('f
 }
 
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  if (!rateLimit(`submit-form:${ip}`, 5, 60_000)) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many requests. Please try again later.' },
+      { status: 429 },
+    );
+  }
+
   const botToken = cleanSecret(process.env.TELEGRAM_BOT_TOKEN);
   const chatId = cleanSecret(process.env.TELEGRAM_CHAT_ID);
 
