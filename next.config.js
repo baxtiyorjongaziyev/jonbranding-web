@@ -1,5 +1,14 @@
 
 /** @type {import('next').NextConfig} */
+if (process.env.NODE_ENV === 'development') {
+  try {
+    const { initOpenNextCloudflareForDev } = require('@opennextjs/cloudflare');
+    initOpenNextCloudflareForDev();
+  } catch {
+    // The adapter is optional for local Node.js development.
+  }
+}
+
 const nextConfig = {
   output: 'standalone',
   experimental: {},

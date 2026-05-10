@@ -1,11 +1,6 @@
 name: Firebase App Hosting Deploy
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - DEV_LOG.md
   workflow_dispatch:
 
 env:
