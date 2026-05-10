@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    ".next",
+    ".netlify",
+    ".open-next",
+    ".wrangler",
+    "node_modules"
+  ]
+}

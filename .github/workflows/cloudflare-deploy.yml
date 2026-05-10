@@ -1,12 +1,6 @@
 name: Cloudflare Deploy
 
 on:
-  pull_request:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - DEV_LOG.md
   workflow_dispatch:
 
 env:
