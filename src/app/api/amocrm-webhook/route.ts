@@ -1,23 +1,58 @@
 import { NextResponse } from 'next/server';
+import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
 const botToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_CHAT_ID;
 
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-};
+const ALLOWED_ORIGINS = new Set([
+  'https://jonbranding.uz',
+  'https://www.jonbranding.uz',
+  'https://jonbranding-web--jonbranding-85662071-ea38e.us-central1.hosted.app',
+]);
+
+function getCorsHeaders(request: Request) {
+  const origin = request.headers.get('origin') || '';
+  return {
+    'Access-Control-Allow-Origin': ALLOWED_ORIGINS.has(origin) ? origin : 'https://jonbranding.uz',
+    'Vary': 'Origin',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, X-JonBranding-Webhook-Secret',
+  };
+}
+
+function isAuthorizedWebhook(request: Request) {
+  const expectedSecret = process.env.AMOCRM_WEBHOOK_SECRET?.trim();
+  if (!expectedSecret) return true;
+
+  return request.headers.get('x-jonbranding-webhook-secret') === expectedSecret;
+}
 
 // Handle preflight requests for CORS
-export async function OPTIONS() {
+export async function OPTIONS(request: Request) {
   return new NextResponse(null, {
     status: 204,
-    headers: CORS_HEADERS,
+    headers: getCorsHeaders(request),
   });
 }
 
 export async function POST(request: Request) {
+    const corsHeaders = getCorsHeaders(request);
+    const ip = getClientIp(request);
+
+    if (!rateLimit(`amocrm:${ip}`, 20, 60_000)) {
+        return NextResponse.json(
+            { ok: false, error: 'Too many requests' },
+            { status: 429, headers: corsHeaders },
+        );
+    }
+
+    if (!isAuthorizedWebhook(request)) {
+        return NextResponse.json(
+            { ok: false, error: 'Unauthorized webhook' },
+            { status: 401, headers: corsHeaders },
+        );
+    }
+
     if (!botToken || !chatId) {
         console.error("Server Configuration Error: Telegram token or chat ID is missing in the environment variables for amoCRM webhook.");
         // Even on server error, return a CORS-friendly response
@@ -25,7 +60,7 @@ export async function POST(request: Request) {
             { ok: false, error: "Serverda Telegram sozlamalari mavjud emas." },
             { 
                 status: 500,
-                headers: CORS_HEADERS,
+                headers: corsHeaders,
             }
         );
     }
@@ -42,7 +77,7 @@ export async function POST(request: Request) {
             // We'll just return a success response.
              return NextResponse.json(
                 { ok: true, message: "Webhook received, but no lead data to process." },
-                { headers: CORS_HEADERS }
+                { headers: corsHeaders }
             );
         }
 
@@ -81,7 +116,7 @@ Narxi: ${price}
         // IMPORTANT: AmoCRM requires a 2xx response with a valid JSON body.
         return NextResponse.json(
             { ok: true, message: "Webhook processed successfully." },
-            { headers: CORS_HEADERS }
+            { headers: corsHeaders }
         );
 
     } catch (error: any) {
@@ -90,7 +125,7 @@ Narxi: ${price}
             { ok: false, error: "Webhook'ni qayta ishlashda ichki xatolik." }, 
             { 
                 status: 500,
-                headers: CORS_HEADERS,
+                headers: corsHeaders,
             }
         );
     }

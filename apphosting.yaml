@@ -2,7 +2,7 @@
 # Sensitive values are stored in Google Cloud Secret Manager and referenced here.
 runConfig:
   minInstances: 0
-  maxInstances: 20
+  maxInstances: 5
   concurrency: 80
   cpu: 1
   memoryMiB: 512
@@ -38,6 +38,8 @@ env:
     secret: AMOCRM_SUBDOMAIN
   - variable: AMOCRM_ACCESS_TOKEN
     secret: AMOCRM_ACCESS_TOKEN
+  - variable: AMOCRM_WEBHOOK_SECRET
+    secret: AMOCRM_WEBHOOK_SECRET
 
   - variable: N8N_WEBHOOK_URL
     secret: N8N_WEBHOOK_URL

@@ -1,7 +1,13 @@
 
 import { NextResponse } from 'next/server';
+import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
 export async function POST(request: Request) {
+    const ip = getClientIp(request);
+    if (!rateLimit(`report-error:${ip}`, 10, 60_000)) {
+        return NextResponse.json({ ok: false, error: 'Too many requests' }, { status: 429 });
+    }
+
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
 
