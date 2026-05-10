@@ -61,8 +61,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
         if (data && data.length > 0) {
           setItems(data);
         }
-      } catch (error) {
-        console.error('Error fetching Sanity comparisons:', error);
+      } catch {
+        // The local fallback keeps this conversion section usable if Sanity is unavailable.
       } finally {
         setLoading(false);
       }

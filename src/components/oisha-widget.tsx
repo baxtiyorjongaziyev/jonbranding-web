@@ -69,14 +69,12 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
     setUserId(storedId);
 
     // Initial welcome message if no history
-    if (messages.length === 0) {
-        setMessages([{
+    setMessages(prev => prev.length > 0 ? prev : [{
             id: 'welcome',
             text: translations.welcome,
             role: 'model',
             timestamp: new Date().toISOString()
         }]);
-    }
   }, [lang, translations.welcome]);
 
   // Handle scrolling to bottom

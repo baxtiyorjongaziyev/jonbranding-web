@@ -14,7 +14,7 @@ import { motion } from 'framer-motion';
 import { Slider } from '@/components/ui/slider';
 import { Checkbox } from '../ui/checkbox';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '../ui/form';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
@@ -179,7 +179,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const watchFields = form.watch();
+  const watchFields = useWatch({ control: form.control });
   const fees = useMemo(
     () => calculateFees({ 
       isYuridik: !!watchFields.isYuridik, 
