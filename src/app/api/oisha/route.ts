@@ -10,15 +10,25 @@ const unavailableResponse = () =>
         { status: 503 }
     );
 
+const normalizeUserId = (value: string | null) => {
+    if (!value || !/^[a-zA-Z0-9_-]{3,80}$/.test(value)) {
+        return null;
+    }
+    return encodeURIComponent(value);
+};
+
+const isValidUserId = (value: unknown): value is string =>
+    typeof value === 'string' && /^[a-zA-Z0-9_-]{3,80}$/.test(value);
+
 export async function GET(request: Request) {
     const ip = getClientIp(request);
     if (!rateLimit(ip, 30, 60_000)) {
         return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
     const { searchParams } = new URL(request.url);
-    const userId = searchParams.get('user_id');
+    const userId = normalizeUserId(searchParams.get('user_id'));
     if (!userId) {
-        return NextResponse.json({ error: 'user_id required' }, { status: 400 });
+        return NextResponse.json({ error: 'valid user_id required' }, { status: 400 });
     }
     if (!OISHA_API_URL || !OISHA_SECRET) {
         return unavailableResponse();
@@ -41,8 +51,8 @@ export async function POST(request: Request) {
     }
     const body = await request.json();
     const { user_id, text } = body;
-    if (!user_id || !text) {
-        return NextResponse.json({ error: 'user_id and text required' }, { status: 400 });
+    if (!isValidUserId(user_id) || typeof text !== 'string' || !text.trim()) {
+        return NextResponse.json({ error: 'valid user_id and text required' }, { status: 400 });
     }
     if (!OISHA_API_URL || !OISHA_SECRET) {
         return unavailableResponse();
