@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const nextConfig = {
-  output: 'standalone',
+  output: process.env.NETLIFY ? undefined : 'standalone',
   experimental: {},
   webpack: (config) => {
     config.resolve.alias = {
