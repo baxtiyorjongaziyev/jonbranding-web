@@ -1,15 +1,13 @@
 
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
 import { useEffect, useState } from 'react';
-import { client, urlFor } from '@/sanity/lib/client';
 
 interface SanityComparison {
   brand: string;
-  oldImg: any;
-  newImg: any;
+  oldImg: string;
+  newImg: string;
   oldHint: string;
   newHint: string;
   order: number;
@@ -50,21 +48,25 @@ const DEFAULT_COMPARISONS: SanityComparison[] = [
 
 const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary }) => {
   const [items, setItems] = useState<SanityComparison[]>([]);
-  const [loading, setLoading] = useState(true);
   const translations = dictionary;
   
   useEffect(() => {
     const fetchComparisons = async () => {
       try {
-        const query = `*[_type == "comparison"] | order(order asc)`;
-        const data = await client.fetch(query);
-        if (data && data.length > 0) {
-          setItems(data);
+        const response = await fetch('/api/comparisons');
+        if (!response.ok) return;
+
+        const data = await response.json();
+        const comparisons = Array.isArray(data.comparisons) ? data.comparisons : [];
+        const validComparisons = comparisons.filter(
+          (item: SanityComparison) => typeof item.oldImg === 'string' && typeof item.newImg === 'string'
+        );
+
+        if (validComparisons.length > 0) {
+          setItems(validComparisons);
         }
       } catch {
         // The local fallback keeps this conversion section usable if Sanity is unavailable.
-      } finally {
-        setLoading(false);
       }
     };
     fetchComparisons();
@@ -90,26 +92,14 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayItems.map((item, index) => {
-            const isValidSanityImage = (img: any) => img && (typeof img === 'string' || img.asset);
-            if (!isValidSanityImage(item.oldImg) || !isValidSanityImage(item.newImg)) return null;
-            
-            let beforeSrc = '';
-            let afterSrc = '';
-            try {
-              beforeSrc = typeof item.oldImg === 'string' ? item.oldImg : urlFor(item.oldImg).url();
-              afterSrc = typeof item.newImg === 'string' ? item.newImg : urlFor(item.newImg).url();
-            } catch (e) {
-              console.error('Invalid image source in before-after', e);
-              return null;
-            }
             return (
               <div
                 key={index}
                 className="liquid-glass liquid-glass-hover rounded-[2.5rem] overflow-hidden"
               >
                 <ImageComparisonSlider
-                  beforeImage={{ src: beforeSrc, alt: `${item.brand} old`, 'data-ai-hint': item.oldHint, unoptimized: true }}
-                  afterImage={{ src: afterSrc, alt: `${item.brand} new`, 'data-ai-hint': item.newHint, unoptimized: true }}
+                  beforeImage={{ src: item.oldImg, alt: `${item.brand} old`, 'data-ai-hint': item.oldHint, unoptimized: true }}
+                  afterImage={{ src: item.newImg, alt: `${item.brand} new`, 'data-ai-hint': item.newHint, unoptimized: true }}
                   lang={lang}
                 />
               </div>
