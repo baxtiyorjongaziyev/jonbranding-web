@@ -63,7 +63,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
   useEffect(() => {
     let storedId = localStorage.getItem('oisha_user_id');
     if (!storedId) {
-      storedId = 'web_' + Math.random().toString(36).substring(2, 15);
+      storedId = 'web_' + crypto.randomUUID();
       localStorage.setItem('oisha_user_id', storedId);
     }
     setUserId(storedId);
