@@ -32,23 +32,42 @@ export function getSortedPostsData(lang: string = 'en'): Omit<BlogPost, 'content
   return processFiles(fileNames, langDirectory);
 }
 
+function sanitizeText(value: unknown): string {
+  if (typeof value !== 'string') return '';
+  return value.replace(/[<>"'&]/g, (ch) => {
+    switch (ch) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#x27;';
+      case '&': return '&amp;';
+      default: return ch;
+    }
+  });
+}
+
+function sanitizeUrl(value: unknown): string {
+  if (typeof value !== 'string') return '';
+  if (/^https?:\/\//.test(value) || value.startsWith('/')) return value;
+  return '';
+}
+
 function processFiles(fileNames: string[], directory: string) {
     const allPostsData = fileNames.map((fileName) => {
         const slug = fileName.replace(/\.md$/, '');
         const fullPath = path.join(directory, fileName);
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const matterResult = matter(fileContents);
+        const data = matterResult.data as Record<string, unknown>;
 
         return {
         slug,
-        ...(matterResult.data as {
-            title: string;
-            date: string;
-            author: string;
-            description: string;
-            image: string;
-            imageHint: string;
-        }),
+        title: sanitizeText(data.title),
+        date: sanitizeText(data.date),
+        author: sanitizeText(data.author),
+        description: sanitizeText(data.description),
+        image: sanitizeUrl(data.image),
+        imageHint: sanitizeText(data.imageHint),
         };
     });
 
@@ -74,20 +93,19 @@ export async function getPostData(lang: string, slug: string): Promise<BlogPost 
   
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
-  
+  const data = matterResult.data as Record<string, unknown>;
+
   const processedContent = await safeMarked.parse(matterResult.content);
 
   return {
     slug,
     htmlContent: processedContent,
-    ...(matterResult.data as {
-      title: string;
-      date: string;
-      author: string;
-      description: string;
-      image: string;
-      imageHint: string;
-    }),
+    title: sanitizeText(data.title),
+    date: sanitizeText(data.date),
+    author: sanitizeText(data.author),
+    description: sanitizeText(data.description),
+    image: sanitizeUrl(data.image),
+    imageHint: sanitizeText(data.imageHint),
   };
 }
 

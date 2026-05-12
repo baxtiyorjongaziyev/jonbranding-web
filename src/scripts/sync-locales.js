@@ -105,6 +105,7 @@ const uzFallback = {
 
 function deepMerge(target, source) {
     for (const key in source) {
+        if (!Object.hasOwn(source, key) || key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
         if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
             if (!target[key]) target[key] = {};
             deepMerge(target[key], source[key]);
@@ -130,20 +131,19 @@ function sync() {
 
         function syncBranch(masterObj, currentObj, syncedObj, lang, fallbackObj) {
             for (const key in masterObj) {
+                if (!Object.hasOwn(masterObj, key) || key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
                 if (typeof masterObj[key] === 'object' && !Array.isArray(masterObj[key])) {
                     syncedObj[key] = {};
                     syncBranch(
-                        masterObj[key], 
-                        currentObj[key] || {}, 
-                        syncedObj[key], 
+                        masterObj[key],
+                        currentObj[key] || {},
+                        syncedObj[key],
                         lang,
                         fallbackObj ? fallbackObj[key] : null
                     );
                 } else if (Array.isArray(masterObj[key])) {
-                    // For arrays, if current exists, use it, otherwise use master (at least structure remains)
                     syncedObj[key] = currentObj[key] || masterObj[key];
                 } else {
-                    // Use current if exists, otherwise fallback, otherwise master
                     syncedObj[key] = currentObj[key] || (fallbackObj ? fallbackObj[key] : null) || masterObj[key];
                 }
             }
