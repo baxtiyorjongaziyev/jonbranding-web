@@ -2,6 +2,7 @@
 import HomeComponent from '@/components/home-component';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
+import { client } from '@/sanity/lib/client';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -33,7 +34,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const { lang } = await props.params;
-  
+
   let dictionary;
   try {
     dictionary = await getDictionary(lang as Locale);
@@ -41,6 +42,11 @@ export default async function Page(props: Props) {
     console.error("Page dictionary load error, falling back to 'uz':", e);
     dictionary = await getDictionary('uz');
   }
-  
-  return <HomeComponent lang={lang as Locale} dictionary={dictionary} />;
+
+  let comparisons: any[] = [];
+  try {
+    comparisons = await client.fetch(`*[_type == "comparison"] | order(order asc)`);
+  } catch {}
+
+  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={comparisons} />;
 }
