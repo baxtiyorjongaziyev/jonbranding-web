@@ -3,6 +3,9 @@ name: Firebase App Hosting Deploy
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   NODE_VERSION: '20'
   FIREBASE_PROJECT_ID: jonbranding-85662071-ea38e
