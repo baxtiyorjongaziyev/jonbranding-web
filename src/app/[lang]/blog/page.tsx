@@ -28,6 +28,14 @@ const BlogPage = async (props: Props) => {
   const sortedPosts = getSortedPostsData(lang as Locale);
   const dictionary = await getDictionary(lang as Locale);
   const translations = dictionary.blog;
+  const blogCardImages = [
+    '/images/cms/blog-post-hero.jpeg',
+    '/images/cms/brandbook-guide.jpeg',
+    '/images/cms/corporate-identity.jpeg',
+    '/images/cms/packaging-shelf.webp',
+    '/images/cms/naming-process.webp',
+    '/images/cms/brand-strategy-team.webp',
+  ];
   
   const locale = lang === 'ru' ? ru : (lang === 'en' ? enUS : uz);
 
@@ -45,12 +53,12 @@ const BlogPage = async (props: Props) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sortedPosts.map((post) => (
-              <Link key={post.slug} href={`/${lang}/blog/${post.slug}`} className="block group">
+            {sortedPosts.map((post, index) => (
+              <Link key={post.slug} href={`/${lang}/blog/${encodeURIComponent(post.slug)}`} className="block group">
                 <Card className="h-full flex flex-col overflow-hidden shadow-lg rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                   <div className="relative w-full h-56 flex-shrink-0 overflow-hidden">
                     <Image
-                      src={post.image}
+                      src={blogCardImages[index % blogCardImages.length]}
                       alt={post.title}
                       data-ai-hint={post.imageHint}
                       fill
