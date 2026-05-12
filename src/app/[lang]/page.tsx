@@ -45,7 +45,18 @@ export default async function Page(props: Props) {
 
   let comparisons: any[] = [];
   try {
-    comparisons = await client.fetch(`*[_type == "comparison"] | order(order asc)`);
+    comparisons = await client.fetch(`
+      *[_type == "comparison" && defined(oldImg.asset) && defined(newImg.asset)]
+        | order(coalesce(order, 999) asc, _createdAt asc) {
+          _id,
+          "brand": coalesce(brand, "Brand case"),
+          "oldImg": oldImg.asset->url,
+          "newImg": newImg.asset->url,
+          "oldHint": coalesce(oldHint, "Before"),
+          "newHint": coalesce(newHint, "After"),
+          "order": coalesce(order, 999)
+        }
+    `);
   } catch {}
 
   return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={comparisons} />;

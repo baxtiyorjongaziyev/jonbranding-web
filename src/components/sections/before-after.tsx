@@ -2,18 +2,14 @@
 'use client';
 
 import ImageComparisonSlider from '@/components/image-comparison-slider';
-import { urlFor } from '@/sanity/lib/client';
 
 interface SanityComparison {
-  brand?: string;
-  title?: string;
-  oldImg?: any;
-  newImg?: any;
-  beforeImage?: any;
-  afterImage?: any;
-  oldHint?: string;
-  newHint?: string;
-  order?: number;
+  brand: string;
+  oldImg: string;
+  newImg: string;
+  oldHint: string;
+  newHint: string;
+  order: number;
 }
 
 interface BeforeAfterProps {
@@ -72,29 +68,16 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayItems.map((item, index) => {
-            const oldImage = item.oldImg || item.beforeImage;
-            const newImage = item.newImg || item.afterImage;
-            const brandName = item.brand || item.title || '';
+            if (typeof item.oldImg !== 'string' || typeof item.newImg !== 'string') return null;
 
-            const isValidImage = (img: any) => img && (typeof img === 'string' || img.asset);
-            if (!isValidImage(oldImage) || !isValidImage(newImage)) return null;
-
-            let beforeSrc = '';
-            let afterSrc = '';
-            try {
-              beforeSrc = typeof oldImage === 'string' ? oldImage : urlFor(oldImage).url();
-              afterSrc = typeof newImage === 'string' ? newImage : urlFor(newImage).url();
-            } catch {
-              return null;
-            }
             return (
               <div
                 key={index}
                 className="liquid-glass liquid-glass-hover rounded-[2.5rem] overflow-hidden"
               >
                 <ImageComparisonSlider
-                  beforeImage={{ src: beforeSrc, alt: `${brandName} old`, 'data-ai-hint': item.oldHint || '', unoptimized: true }}
-                  afterImage={{ src: afterSrc, alt: `${brandName} new`, 'data-ai-hint': item.newHint || '', unoptimized: true }}
+                  beforeImage={{ src: item.oldImg, alt: `${item.brand} old`, 'data-ai-hint': item.oldHint || '', unoptimized: true }}
+                  afterImage={{ src: item.newImg, alt: `${item.brand} new`, 'data-ai-hint': item.newHint || '', unoptimized: true }}
                   lang={lang}
                 />
               </div>
