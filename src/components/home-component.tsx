@@ -24,7 +24,7 @@ const Founder = dynamic(() => import('@/components/sections/founder'), {
 const Faq = dynamic(() => import('@/components/sections/faq'), {
   loading: () => <Skeleton className="h-64 w-full" />,
 });
-const FinalCta = dynamic(() => import('@/components/sections/final-cta'), {
+const CtaBlock = dynamic(() => import('@/components/sections/cta-block'), {
   loading: () => <Skeleton className="h-48 w-full rounded-2xl" />,
 });
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
@@ -108,7 +108,16 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
         <Faq lang={lang} dictionary={dictionary.faq} />
 
         {/* 8. Final CTA — repeat hero offer */}
-        <FinalCta onCtaClick={handleOpenModal} lang={lang} />
+        <CtaBlock
+          title={lang === 'uz' ? "Brendingiz sotuvga yordam beryaptimi yoki halaqit qilyaptimi?" : dictionary.home?.cta1_title}
+          description={
+            lang === 'uz'
+              ? "Bepul Brand Audit orqali mijoz ishonchini pasaytirayotgan joylarni aniqlaymiz va qaysi tuzatish birinchi bo'lishi kerakligini aytamiz."
+              : dictionary.home?.cta1_desc
+          }
+          buttonText={lang === 'uz' ? 'Bepul Brand Audit olish' : dictionary.home?.cta1_button}
+          onCtaClick={handleOpenModal}
+        />
       </main>
       {mounted && <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />}
     </div>
