@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
+import { load as loadYaml } from 'js-yaml';
 import { Marked } from 'marked';
 import { type BlogPost } from '@/lib/types';
 
@@ -33,6 +33,7 @@ export function getSortedPostsData(lang: string = 'en'): Omit<BlogPost, 'content
 }
 
 function sanitizeText(value: unknown): string {
+  if (value instanceof Date) return value.toISOString();
   if (typeof value !== 'string') return '';
   return value.replace(/[<>"'&]/g, (ch) => {
     switch (ch) {
@@ -52,13 +53,33 @@ function sanitizeUrl(value: unknown): string {
   return '';
 }
 
+function parseMarkdownFile(fileContents: string): { data: Record<string, unknown>; content: string } {
+  if (!fileContents.startsWith('---')) {
+    return { data: {}, content: fileContents };
+  }
+
+  const endIndex = fileContents.indexOf('\n---', 3);
+  if (endIndex === -1) {
+    return { data: {}, content: fileContents };
+  }
+
+  const frontmatter = fileContents.slice(3, endIndex);
+  const parsed = loadYaml(frontmatter);
+  const data =
+    parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+      ? (parsed as Record<string, unknown>)
+      : {};
+  const content = fileContents.slice(endIndex).replace(/^\n---\r?\n?/, '');
+
+  return { data, content };
+}
+
 function processFiles(fileNames: string[], directory: string) {
     const allPostsData = fileNames.map((fileName) => {
         const slug = fileName.replace(/\.md$/, '');
         const fullPath = path.join(directory, fileName);
         const fileContents = fs.readFileSync(fullPath, 'utf8');
-        const matterResult = matter(fileContents);
-        const data = matterResult.data as Record<string, unknown>;
+        const { data } = parseMarkdownFile(fileContents);
 
         return {
         slug,
@@ -92,10 +113,9 @@ export async function getPostData(lang: string, slug: string): Promise<BlogPost 
   }
   
   const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const matterResult = matter(fileContents);
-  const data = matterResult.data as Record<string, unknown>;
+  const { data, content } = parseMarkdownFile(fileContents);
 
-  const processedContent = await safeMarked.parse(matterResult.content);
+  const processedContent = await safeMarked.parse(content);
 
   return {
     slug,
