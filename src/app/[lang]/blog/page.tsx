@@ -12,6 +12,8 @@ type Props = {
   params: Promise<{ lang: string }>;
 };
 
+const isSafePathSegment = (value: string) => /^[a-z0-9-]+$/i.test(value);
+
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dictionary = await getDictionary(lang as Locale);
@@ -25,8 +27,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 const BlogPage = async (props: Props) => {
   const { lang } = await props.params;
-  const sortedPosts = getSortedPostsData(lang as Locale);
-  const dictionary = await getDictionary(lang as Locale);
+  const safeLang = isSafePathSegment(lang) ? lang : 'uz';
+  const sortedPosts = getSortedPostsData(safeLang as Locale);
+  const dictionary = await getDictionary(safeLang as Locale);
   const translations = dictionary.blog;
   const blogCardImages = [
     '/images/cms/blog-post-hero.jpeg',
@@ -37,7 +40,7 @@ const BlogPage = async (props: Props) => {
     '/images/cms/brand-strategy-team.webp',
   ];
   
-  const locale = lang === 'ru' ? ru : (lang === 'en' ? enUS : uz);
+  const locale = safeLang === 'ru' ? ru : (safeLang === 'en' ? enUS : uz);
 
   return (
     <main className="flex-grow bg-secondary/50">
@@ -53,42 +56,48 @@ const BlogPage = async (props: Props) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sortedPosts.map((post, index) => (
-              <Link key={post.slug} href={`/${lang}/blog/${encodeURIComponent(post.slug)}`} className="block group">
-                <Card className="h-full flex flex-col overflow-hidden shadow-lg rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
-                  <div className="relative w-full h-56 flex-shrink-0 overflow-hidden">
-                    <Image
-                      src={blogCardImages[index % blogCardImages.length]}
-                      alt={post.title}
-                      data-ai-hint={post.imageHint}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
-                  </div>
-                  <div className="flex flex-col flex-grow">
-                    <CardHeader>
-                      <CardDescription className="text-sm text-gray-500 pt-1">
-                        <span>{format(parseISO(post.date), 'MMMM d, yyyy', { locale })}</span>
-                        {' '} &bull; {' '}
-                        <span>{post.author}</span>
-                      </CardDescription>
-                      <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
-                        {post.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                      <p className="text-gray-600 line-clamp-3">{post.description}</p>
-                    </CardContent>
-                    <div className="p-6 pt-0 mt-auto">
-                       <span className="font-semibold text-primary flex items-center transition-all duration-300">
-                          {translations?.readMore} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                       </span>
+            {sortedPosts.map((post, index) => {
+              if (!isSafePathSegment(post.slug)) return null;
+
+              const postHref = `/${safeLang}/blog/${post.slug}`;
+
+              return (
+                <Link key={post.slug} href={postHref} className="block group">
+                  <Card className="h-full flex flex-col overflow-hidden shadow-lg rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
+                    <div className="relative w-full h-56 flex-shrink-0 overflow-hidden">
+                      <Image
+                        src={blogCardImages[index % blogCardImages.length]}
+                        alt={post.title}
+                        data-ai-hint={post.imageHint}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
                     </div>
-                  </div>
-                </Card>
-              </Link>
-            ))}
+                    <div className="flex flex-col flex-grow">
+                      <CardHeader>
+                        <CardDescription className="text-sm text-gray-500 pt-1">
+                          <span>{format(parseISO(post.date), 'MMMM d, yyyy', { locale })}</span>
+                          {' '} &bull; {' '}
+                          <span>{post.author}</span>
+                        </CardDescription>
+                        <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
+                          {post.title}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex-grow">
+                        <p className="text-gray-600 line-clamp-3">{post.description}</p>
+                      </CardContent>
+                      <div className="p-6 pt-0 mt-auto">
+                         <span className="font-semibold text-primary flex items-center transition-all duration-300">
+                            {translations?.readMore} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                         </span>
+                      </div>
+                    </div>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
