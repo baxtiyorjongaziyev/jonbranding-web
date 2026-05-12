@@ -7,12 +7,15 @@ import { useEffect, useState } from 'react';
 import { client, urlFor } from '@/sanity/lib/client';
 
 interface SanityComparison {
-  brand: string;
-  oldImg: any;
-  newImg: any;
-  oldHint: string;
-  newHint: string;
-  order: number;
+  brand?: string;
+  title?: string;
+  oldImg?: any;
+  newImg?: any;
+  beforeImage?: any;
+  afterImage?: any;
+  oldHint?: string;
+  newHint?: string;
+  order?: number;
 }
 
 interface BeforeAfterProps {
@@ -90,14 +93,18 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayItems.map((item, index) => {
+            const oldImage = item.oldImg || item.beforeImage;
+            const newImage = item.newImg || item.afterImage;
+            const brandName = item.brand || item.title || '';
+
             const isValidSanityImage = (img: any) => img && (typeof img === 'string' || img.asset);
-            if (!isValidSanityImage(item.oldImg) || !isValidSanityImage(item.newImg)) return null;
-            
+            if (!isValidSanityImage(oldImage) || !isValidSanityImage(newImage)) return null;
+
             let beforeSrc = '';
             let afterSrc = '';
             try {
-              beforeSrc = typeof item.oldImg === 'string' ? item.oldImg : urlFor(item.oldImg).url();
-              afterSrc = typeof item.newImg === 'string' ? item.newImg : urlFor(item.newImg).url();
+              beforeSrc = typeof oldImage === 'string' ? oldImage : urlFor(oldImage).url();
+              afterSrc = typeof newImage === 'string' ? newImage : urlFor(newImage).url();
             } catch (e) {
               console.error('Invalid image source in before-after', e);
               return null;
@@ -108,8 +115,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary 
                 className="liquid-glass liquid-glass-hover rounded-[2.5rem] overflow-hidden"
               >
                 <ImageComparisonSlider
-                  beforeImage={{ src: beforeSrc, alt: `${item.brand} old`, 'data-ai-hint': item.oldHint, unoptimized: true }}
-                  afterImage={{ src: afterSrc, alt: `${item.brand} new`, 'data-ai-hint': item.newHint, unoptimized: true }}
+                  beforeImage={{ src: beforeSrc, alt: `${brandName} old`, 'data-ai-hint': item.oldHint || '', unoptimized: true }}
+                  afterImage={{ src: afterSrc, alt: `${brandName} new`, 'data-ai-hint': item.newHint || '', unoptimized: true }}
                   lang={lang}
                 />
               </div>
