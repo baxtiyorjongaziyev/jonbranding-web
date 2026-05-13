@@ -26,7 +26,7 @@ const Guarantee: FC<GuaranteeProps> = ({ dictionary }) => {
     if (!dictionary) return null;
 
     return (
-        <section className="py-20 sm:py-32 bg-slate-50 relative overflow-hidden">
+        <section className="py-16 sm:py-20 lg:min-h-screen lg:flex lg:flex-col lg:justify-center bg-slate-50 relative overflow-hidden">
             {/* Background elements */}
             <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />

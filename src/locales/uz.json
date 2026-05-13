@@ -165,9 +165,9 @@
             "Bepul Strategik Audit",
             "Menga kuchli brend kerak"
         ],
-        "buttonHint": "Bepul Brand Audit  ·  Ishonch diagnostikasi  ·  Majburiyatsiz tavsiya",
+        "buttonHint": "Bepul Brend Tahlil  ·  Ishonch diagnostikasi  ·  Majburiyatsiz tavsiya",
         "title": "Brendingiz mijoz ko'zida **arzon ko'rinmasin**.",
-        "cta": "Bepul Brand Audit olish"
+        "cta": "Bepul Brend Tahlil olish"
     },
     "results": {
         "badge": "BOZORDA QILINGAN NATIJA",
@@ -460,7 +460,7 @@
         ],
         "solutionTitle": "Keling, brendingizdagi asosiy ishonch muammolarini aniqlaymiz.",
         "solutionSubtitle": "Men sizga shunchaki logo emas, balki raqobatchilaringizni 'o'yindan chiqaradigan' strategik qurol yasab beraman.",
-        "solutionButton": "Bepul auditga yozilish"
+        "solutionButton": "Bepul tahlilga yozilish"
     },
     "beforeAfter": {
         "title": "Avval va Hozir",
@@ -470,8 +470,8 @@
         "ctaButton": "Mening brendimni ham o'zgartiring"
     },
     "testimonials": {
-        "title": "Mijozlarimiz biz haqimizda",
-        "subtitle": "Bizning eng katta yutug'imiz — bu bizning mamnun mijozlarimizdir.",
+        "title": "Natijani mijozlar o'zi aytadi",
+        "subtitle": "Biz gapirmaymiz — ular gapirishadi. Video va yozma sharhlarni ko'ring.",
         "textReviewsTitle": "Matnli sharhlar",
         "textReviewsSubtitle": "Boshqa hurmatli mijozlarimizdan"
     },
@@ -485,7 +485,7 @@
         "points": [
             {
                 "icon": "Medal",
-                "text": "150+ Bozorni 'zabt etgan' loyihalar"
+                "text": "Har bir loyiha — sotuvga yo'naltirilgan tizim"
             },
             {
                 "icon": "Globe",
@@ -578,7 +578,7 @@
         ],
         "ctaTitle": "Bozorni egallashga tayyormisiz?",
         "ctaDesc": "Keling, bugun sizning 'G'alaba Strategiyangiz'ni tuzamiz.",
-        "ctaButton": "Bepul auditga yozilish"
+        "ctaButton": "Bepul tahlilga yozilish"
     },
     "leadMagnet": {
         "title": "Brendingizni ishonchli tizimga aylantirish vaqti keldi",
@@ -1236,7 +1236,7 @@
             "lossNote": "Siz har oy shuncha pulni shunchaki boy beryapsiz!",
             "roiNote": "Atigi 2% ishonch darajasi oshishi daromadingizni 3-4 baravarga ko'tarishi mumkin."
         },
-        "cta": "Bepul auditga yozilish"
+        "cta": "Bepul tahlilga yozilish"
     },
     "exitIntentModal": {
         "title": "Ketmang!",

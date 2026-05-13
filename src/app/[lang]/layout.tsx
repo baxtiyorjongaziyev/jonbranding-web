@@ -92,7 +92,7 @@ const inter = Inter({
 
 type Props = {
   children: ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 };
 
 export default async function LocalizedLayout({ children, params }: Props) {

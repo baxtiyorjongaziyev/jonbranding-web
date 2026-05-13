@@ -11,6 +11,8 @@ import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
 import { initAmplitude, trackEvent } from '@/lib/amplitude';
 import ScrollDepthTrigger from '@/components/scroll-depth-trigger';
+import CountdownBanner from '@/components/countdown-banner';
+// SocialProofPopup olib tashlandi — haqiqiy ma'lumotlar bilan qayta qo'shiladi
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'), {
     loading: () => null,
@@ -108,6 +110,7 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 
     return (
         <div className="flex min-h-screen flex-col bg-secondary/50" suppressHydrationWarning>
+            <CountdownBanner lang={lang} />
             <Suspense fallback={null}>
                 <AnalyticsTracker />
             </Suspense>

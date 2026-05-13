@@ -10,7 +10,7 @@ export function BrandSection({
   return (
     <section
       className={cn(
-        'brand-section relative overflow-hidden',
+        'brand-section relative overflow-hidden py-16 sm:py-20 lg:min-h-screen lg:flex lg:flex-col lg:justify-center',
         tone === 'light' && 'bg-brand-paper',
         tone === 'soft' && 'bg-brand-mist',
         tone === 'dark' && 'bg-brand-ink text-white',

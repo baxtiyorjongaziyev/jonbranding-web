@@ -4,7 +4,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
-import CtaBlock from './cta-block';
 import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 interface ProcessProps {
@@ -78,12 +77,6 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
         </div>
       </div>
 
-      <CtaBlock 
-        title={translations.ctaTitle} 
-        description={translations.ctaDesc} 
-        buttonText={translations.ctaButton} 
-        onCtaClick={onCtaClick} 
-      />
     </BrandSection>
   );
 };

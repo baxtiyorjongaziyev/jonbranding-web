@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import Hero from '@/components/sections/hero';
 import WhyUs from '@/components/sections/why-us';
-import BrandClarity from '@/components/sections/brand-clarity';
 import AuditOffer from '@/components/sections/audit-offer';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
@@ -37,6 +36,9 @@ const CtaBlock = dynamic(() => import('@/components/sections/cta-block'), {
 });
 const Guarantee = dynamic(() => import('@/components/sections/guarantee'), {
   loading: () => <Skeleton className="h-64 w-full" />,
+});
+const ProcessVideo = dynamic(() => import('@/components/sections/process-video'), {
+  loading: () => <Skeleton className="h-96 w-full rounded-3xl" />,
 });
 
 const fadeInVariant = {
@@ -109,59 +111,71 @@ const HomeComponent: FC<{ lang: string; dictionary: any }> = ({ lang, dictionary
   return (
     <div className="relative pb-24 md:pb-0">
       <main>
+        {/* 1. HEADLINE — og'riqni chaqir, va'da ber */}
         <Hero onOpenContact={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
 
-        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
-          <AuditOffer lang={lang} onCtaClick={handleOpenModal} />
-        </motion.div>
-
-        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
-          <BrandClarity lang={lang} onCtaClick={handleOpenModal} />
-        </motion.div>
-
-        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
-          <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
-        </motion.div>
-
+        {/* 2. SOCIAL PROOF — ishonch qur (Sabri: "proof early") */}
         <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
           <Testimonials lang={lang} dictionary={dictionary.testimonials} />
         </motion.div>
 
-        <Gallery lang={lang} dictionary={dictionary.gallery} />
-
+        {/* 3. GODFATHER OFFER — rad eta olmaydigan taklif */}
         <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
-          <WhyUs onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.whyUs} />
+          <AuditOffer lang={lang} onCtaClick={handleOpenModal} />
         </motion.div>
 
+        {/* 4. BEFORE/AFTER — transformatsiya ko'rsat */}
+        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
+          <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} />
+        </motion.div>
+
+        {/* 4.5. PROCESS VIDEO — jarayonni ko'rsat (Vimeo) */}
+        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
+          <ProcessVideo lang={lang} />
+        </motion.div>
+
+        {/* 5. CASE STUDY + GALLERY — visual natija (proof stacking) */}
         <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
           <FeaturedCaseStudy lang={lang} dictionary={dictionary.featuredCaseStudy || {}} />
         </motion.div>
 
+        <Gallery lang={lang} dictionary={dictionary.gallery} />
+
+        {/* 6. WHY US — differentiator (nega biz, raqobatchidan farq) */}
+        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-120px' }}>
+          <WhyUs onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.whyUs} />
+        </motion.div>
+
+        {/* 7. PROCESS — qanday ishlaydi (3-4 qadam, oddiy) */}
+        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
+          <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />
+        </motion.div>
+
+        {/* 8. GUARANTEE — risk yo'q qil */}
         {mounted && (
           <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
             <Guarantee dictionary={dictionary.guaranteeBlock} />
           </motion.div>
         )}
 
-        <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
-          <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />
-        </motion.div>
-
-        <CtaBlock
-          title={lang === 'uz' ? "Brendingiz sotuvga yordam beryaptimi yoki halaqit qilyaptimi?" : dictionary.home?.cta1_title}
-          description={
-            lang === 'uz'
-              ? "Bepul Brand Audit orqali mijoz ishonchini pasaytirayotgan joylarni aniqlaymiz va qaysi tuzatish birinchi bo'lishi kerakligini aytamiz."
-              : dictionary.home?.cta1_desc
-          }
-          buttonText={lang === 'uz' ? 'Bepul Brand Audit olish' : dictionary.home?.cta1_button}
-          onCtaClick={handleOpenModal}
-        />
-
+        {/* 9. FAQ — e'tirozlarni yoq qil */}
         <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
           <Faq lang={lang} dictionary={dictionary.faq} />
         </motion.div>
 
+        {/* 10. FINAL CTA — oxirgi harakat (e'tirozlar yoqilgandan KEYIN) */}
+        <CtaBlock
+          title={lang === 'uz' ? "Hali ham brendingiz arzon ko'rinyaptimi?" : dictionary.home?.cta1_title}
+          description={
+            lang === 'uz'
+              ? "5 daqiqalik bepul tahlil + shaxsiy video sharh olasiz. Hech narsa to'lamaysiz. Agar foydali bo'lmasa — davom ettirish shart emas."
+              : dictionary.home?.cta1_desc
+          }
+          buttonText={lang === 'uz' ? 'Bepul Tahlil + Video Sharh olish' : dictionary.home?.cta1_button}
+          onCtaClick={handleOpenModal}
+        />
+
+        {/* 11. FOUNDER — authority, yuz ko'rsat */}
         {mounted ? (
           <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
             <Founder lang={lang} dictionary={dictionary.founder} />

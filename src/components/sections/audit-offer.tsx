@@ -7,43 +7,43 @@ import { BrandCard, BrandSection } from '@/components/ui/design-system';
 
 const copy = {
   uz: {
-    eyebrow: 'Bepul Brand Audit ichida',
-    title: "Biznesingiz nega ishonch yo'qotayotganini ko'rasiz.",
+    eyebrow: 'Bepul Brend Tahlil: Siz nima olasiz',
+    title: "5 daqiqada brendingiz nega sotmayotganini ko'rasiz.",
     description:
-      "Bu oddiy maslahat emas. Jon.Branding sizning nom, logo, qadoq, sayt va kommunikatsiyangizni mijoz ko'zi bilan tekshiradi va birinchi tuzatish kerak bo'lgan joylarni aniq beradi.",
-    cta: 'Bepul auditga yozilish',
-    promise: "Agar auditdan keyin foyda ko'rmasangiz, davom ettirish majburiyati yo'q.",
+      "Siz shunchaki maslahat emas — aniq PDF hisobot + shaxsiy video sharh olasiz. Qayerda pul yo'qotayotganingiz va birinchi nima tuzatish kerakligini 72 soat ichida ko'rsatamiz.",
+    cta: 'Bepul Tahlil + Video Sharh olish',
+    promise: "Agar foydali bo'lmasa — hech narsa to'lamaysiz, hech narsa majburiy emas.",
     items: [
       {
-        title: "5 ta ishonch yo'qotadigan nuqta",
-        desc: "Mijoz sizga qaraganda nimadan shubhalanishi, qaysi detal arzon yoki noaniq ko'rinishini aytamiz.",
+        title: "PDF: 5 ta ishonch yo'qotadigan nuqta",
+        desc: "Mijoz sizga qaraganda nimadan shubhalanishi — har biri screenshot + tushuntirish bilan.",
         icon: FileSearch,
       },
       {
-        title: "Raqobatchi ko'zgusi",
-        desc: "Siz bozorda kuchliroq, qimmatroq yoki ishonchliroq ko'rinishingiz uchun farq nuqtalarini topamiz.",
+        title: "Video: Shaxsiy 3-5 daqiqalik sharh",
+        desc: "Jon.Branding asoschisi brendingizni ekranda ko'rsatib, og'zaki tushuntiradi.",
         icon: Target,
       },
       {
-        title: "Qaysi xizmat kerak, qaysisi shart emas",
-        desc: "Logo, naming, brandbook, qadoq yoki strategy orasidan hozir eng katta ta'sir beradigan yo'lni ajratamiz.",
+        title: "Raqobatchi taqqoslash",
+        desc: "Sizning brend vs raqobatchingiz — qayerda yutayapsiz va qayerda yutqazayapsiz.",
         icon: Layers3,
       },
       {
-        title: 'Keyingi qadam xaritasi',
-        desc: "Auditdan keyin brendingizni tartibga keltirish uchun oddiy, tushunarli ustuvorliklar olasiz.",
+        title: "1 ta birinchi qadam",
+        desc: "100 ta ish emas — faqat 1 ta eng katta ta'sir beradigan harakatni aytamiz.",
         icon: Route,
       },
     ],
-    proof: ['Majburiyatsiz', 'Sotuv bosimisiz', 'Tadbirkor tilida tushuntiramiz'],
+    proof: ['72 soat ichida javob', 'Majburiyatsiz', 'Sotuv bosimisiz'],
   },
   ru: {
-    eyebrow: 'Inside the free audit',
-    title: 'See where your brand loses trust.',
+    eyebrow: 'Внутри бесплатного анализа',
+    title: 'Узнайте, где ваш бренд теряет доверие.',
     description:
-      'We review your name, logo, packaging, website, and message through the eyes of a buyer and show what should be fixed first.',
-    cta: 'Book the free audit',
-    promise: 'No obligation if the audit is not useful.',
+      'Мы проверяем ваше имя, лого, упаковку, сайт и коммуникацию глазами покупателя и показываем, что нужно исправить в первую очередь.',
+    cta: 'Записаться на анализ',
+    promise: 'Никаких обязательств, если анализ не будет полезен.',
     items: [
       { title: '5 trust gaps', desc: 'Where the brand looks cheap, unclear, or unreliable.', icon: FileSearch },
       { title: 'Competitor mirror', desc: 'How to look stronger and more valuable in your category.', icon: Target },
@@ -53,12 +53,12 @@ const copy = {
     proof: ['No obligation', 'No pressure', 'Plain language'],
   },
   en: {
-    eyebrow: 'Inside the free audit',
+    eyebrow: 'Inside the free brand analysis',
     title: 'See where your brand loses trust.',
     description:
       'We review your name, logo, packaging, website, and message through the eyes of a buyer and show what should be fixed first.',
-    cta: 'Book the free audit',
-    promise: 'No obligation if the audit is not useful.',
+    cta: 'Book the free analysis',
+    promise: 'No obligation if the analysis is not useful.',
     items: [
       { title: '5 trust gaps', desc: 'Where the brand looks cheap, unclear, or unreliable.', icon: FileSearch },
       { title: 'Competitor mirror', desc: 'How to look stronger and more valuable in your category.', icon: Target },
@@ -68,12 +68,12 @@ const copy = {
     proof: ['No obligation', 'No pressure', 'Plain language'],
   },
   zh: {
-    eyebrow: 'Inside the free audit',
-    title: 'See where your brand loses trust.',
+    eyebrow: '免费品牌分析内容',
+    title: '看看您的品牌在哪里失去信任。',
     description:
-      'We review your name, logo, packaging, website, and message through the eyes of a buyer and show what should be fixed first.',
-    cta: 'Book the free audit',
-    promise: 'No obligation if the audit is not useful.',
+      '我们从买家的视角审查您的名称、标志、包装、网站和信息，并展示应该首先修复什么。',
+    cta: '预约免费分析',
+    promise: '如果分析没有帮助，无任何义务。',
     items: [
       { title: '5 trust gaps', desc: 'Where the brand looks cheap, unclear, or unreliable.', icon: FileSearch },
       { title: 'Competitor mirror', desc: 'How to look stronger and more valuable in your category.', icon: Target },

@@ -1,7 +1,6 @@
 'use client';
 
 import { Target, ListChecks, Star, ShieldCheck } from 'lucide-react';
-import CtaBlock from './cta-block';
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
@@ -45,15 +44,14 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
 
   const proofPoints =
     lang === 'uz'
-      ? ['Strategiyasiz logo chizmaymiz', 'Har qaror biznes maqsadga boglanadi', 'Bepul auditda sotishga tosqinlik qilayotgan 3 nuqtani aytamiz']
+      ? ['Strategiyasiz logo chizmaymiz', 'Har qaror biznes maqsadga boglanadi', 'Bepul tahlilda sotishga tosqinlik qilayotgan 3 nuqtani aytamiz']
       : lang === 'ru'
-        ? ['Не рисуем логотип без стратегии', 'Каждое решение связано с бизнес-целью', 'На бесплатном аудите покажем 3 точки, которые мешают продажам']
+        ? ['Не рисуем логотип без стратегии', 'Каждое решение связано с бизнес-целью', 'На бесплатном анализе покажем 3 точки, которые мешают продажам']
         : lang === 'zh'
-          ? ['不脱离策略做标志', '每个设计决策都连接业务目标', '免费审核指出阻碍销售的 3 个问题']
-          : ['No logo without strategy', 'Every decision connects to a business goal', 'Free audit reveals 3 sales blockers'];
+          ? ['不脱离策略做标志', '每个设计决策都连接业务目标', '免费分析指出阻碍销售的 3 个问题']
+          : ['No logo without strategy', 'Every decision connects to a business goal', 'Free brand analysis reveals 3 sales blockers'];
   
   return (
-    <>
     <BrandSection tone="light" className="relative overflow-hidden">
       <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-brand-blue/5 blur-[120px]" />
       
@@ -94,14 +92,6 @@ const WhyUs: FC<WhyUsProps> = ({ onCtaClick, lang, dictionary }) => {
         </BrandCard>
       </div>
     </BrandSection>
-
-    <CtaBlock 
-        title={translations.ctaTitle}
-        description={translations.ctaDesc}
-        buttonText={translations.ctaButton}
-        onCtaClick={handleCta}
-      />
-    </>
   );
 };
 

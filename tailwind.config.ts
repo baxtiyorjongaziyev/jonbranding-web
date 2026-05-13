@@ -128,6 +128,23 @@ const config: Config = {
           "0%": { "--gradient-angle": "0deg" },
           "100%": { "--gradient-angle": "360deg" },
         },
+        "pulse-glow": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(37,99,235,0.7)" },
+          "50%": { boxShadow: "0 0 0 12px rgba(37,99,235,0)" },
+        },
+        "slide-in-up": {
+          from: { opacity: "0", transform: "translateY(16px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "slide-out-up": {
+          from: { opacity: "1", transform: "translateY(0)" },
+          to: { opacity: "0", transform: "translateY(-16px)" },
+        },
+        "countdown-tick": {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.08)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -140,6 +157,10 @@ const config: Config = {
         "marquee-forward": "marquee-forward 60s linear infinite",
         "marquee-backward": "marquee-backward 60s linear infinite",
         "gradient-rotate": "gradient-rotate 4s linear infinite",
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "slide-in-up": "slide-in-up 0.4s ease-out",
+        "slide-out-up": "slide-out-up 0.3s ease-in",
+        "countdown-tick": "countdown-tick 1s ease-in-out",
       },
     },
   },

@@ -23,10 +23,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ScrollArea } from '../ui/scroll-area';
 import LanguageSwitcher from '../language-switcher';
-import Magnetic from '../ui/magnetic';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
 
 type Dictionary = {
@@ -144,20 +143,6 @@ const ExpandingButton = ({
 };
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
-  const { scrollY } = useScroll();
-  
-  const top = useTransform(scrollY, [0, 80], [0, 16]);
-  const announcementTop = useTransform(scrollY, [0, 40], [40, 0]);
-  const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 80],
-    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.65)']
-  );
-  const borderColor = useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(255, 255, 255, 0.25)']);
-  const backdropBlur = useTransform(scrollY, [0, 80], ['blur(0px)', 'blur(24px)']);
-  const boxShadow = useTransform(scrollY, [0, 80], ['none', '0 8px 32px 0 rgba(31, 38, 135, 0.15)']);
-
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -169,23 +154,16 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const scrollDiff = Math.abs(currentScrollY - lastScrollY);
-      
-      // Scrolled state for visual styling (background, border)
+
       setScrolled(currentScrollY > 20);
 
-      // Visibility logic: hide on scroll down, show on scroll up
-      // 1. Never hide if mobile menu is open
-      // 2. Only hide if scrolling down significantly (> 10px diff) or past a certain point
-      // 3. Always show at the top
       if (isMobileMenuOpen) {
         setVisible(true);
       } else if (currentScrollY <= 80) {
         setVisible(true);
       } else if (currentScrollY > lastScrollY && scrollDiff > 10) {
-        // Significant scroll down
         setVisible(false);
       } else if (currentScrollY < lastScrollY && scrollDiff > 5) {
-        // Significant scroll up
         setVisible(true);
       }
 
@@ -238,42 +216,19 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   return (
     <>
-      {/* ── Urgency Announcement Bar (Top Ribbon) ── */}
-      {dictionary.urgencyBadge && (
-        <div className="w-full bg-[#0a0c10] text-white py-2.5 text-center border-b border-white/5 relative overflow-hidden group z-[60]">
-          <div className="flex items-center justify-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.9)]" />
-            <p className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] uppercase text-white/95 group-hover:text-white transition-all duration-300">
-              {dictionary.urgencyBadge}
-            </p>
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-        </div>
-      )}
-
-      <motion.header 
-        className="fixed left-0 right-0 z-50 flex flex-col items-center"
+      <motion.header
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center px-4"
         initial={{ y: 0 }}
-        animate={{ y: visible ? 0 : -100 }}
-        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-        style={{ 
-          top: dictionary.urgencyBadge ? announcementTop : 0,
-        }}
-        suppressHydrationWarning
+        animate={{ y: visible ? 0 : -80 }}
+        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
       >
-      <motion.div
+      <div
         className={cn(
-          "mx-auto flex h-16 items-center justify-between transition-all duration-700 w-full",
-          scrolled ? "px-6 lg:px-10" : "px-6 lg:px-8",
-          scrolled 
-            ? "max-w-[95%] lg:max-w-6xl py-2 liquid-glass rounded-full px-8"
-            : "max-w-full lg:max-w-screen-2xl bg-white/20 border-b border-white/10 px-8"
+          "mx-auto flex h-14 items-center justify-between transition-all duration-500 w-full mt-2",
+          scrolled
+            ? "max-w-[95%] lg:max-w-6xl rounded-full px-6 lg:px-8 bg-white/70 backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_rgba(31,38,135,0.12)]"
+            : "max-w-full lg:max-w-screen-2xl px-6 lg:px-8 bg-transparent"
         )}
-        style={{ 
-          top: top,
-          boxShadow
-        }}
-        suppressHydrationWarning
       >
         <Link href={getLocalizedPath('/')} className="flex items-center shrink-0" aria-label="Jon Branding - Bosh sahifa">
           <Logo isWhite={!scrolled} />
@@ -416,7 +371,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             </Sheet>
           )}
         </div>
-      </motion.div>
+      </div>
     </motion.header>
     </>
   );

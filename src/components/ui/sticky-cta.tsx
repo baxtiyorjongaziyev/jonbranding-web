@@ -47,14 +47,15 @@ export default function StickyCTA({ lang }: { lang?: string }) {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.9 }}
           transition={{ duration: 0.3 }}
-          // On mobile: bottom-20 so it sits ABOVE the sticky pricing bar (which is ~56px tall)
-          // On desktop (md+): bottom-6 since there's no sticky pricing bar
-          className="fixed bottom-20 right-4 z-50 hidden items-center md:bottom-6 md:right-6 md:flex"
+          className="fixed bottom-20 right-4 z-50 hidden items-center gap-3 md:bottom-6 md:right-6 md:flex"
         >
+          <div className="rounded-2xl border border-slate-200 bg-white/95 px-4 py-2 text-sm font-bold text-slate-700 shadow-lg backdrop-blur">
+            Bepul Brend Tahlil
+          </div>
           <Button
             onClick={handleOpenModal}
             size="lg"
-            className="rounded-full shadow-2xl h-14 w-14 p-0 bg-primary hover:bg-primary/90 hover:scale-105 transition-all text-white flex items-center justify-center animate-pulse"
+            className="h-14 w-14 rounded-full bg-blue-700 p-0 shadow-2xl transition-all hover:scale-105 hover:bg-blue-800 animate-pulse-glow flex items-center justify-center text-white"
             aria-label={ariaLabel}
           >
             <MessageCircle className="h-6 w-6" />

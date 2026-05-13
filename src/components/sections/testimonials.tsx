@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
-import { Star, PlayCircle } from 'lucide-react';
+import { Star, PlayCircle, Pause, Play, Volume2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { type Testimonial } from '@/lib/types';
@@ -24,7 +24,7 @@ const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
     return (
         <BrandCard className="h-full flex flex-col overflow-hidden group p-0">
             <CardContent className="p-0">
-                <div className="relative w-full aspect-[9/16] bg-black cursor-pointer rounded-t-2xl overflow-hidden" onClick={handlePlayVideo}>
+                <div className="relative w-full aspect-[3/4] sm:aspect-[9/16] bg-black cursor-pointer rounded-t-2xl overflow-hidden" onClick={handlePlayVideo}>
                     {playVideo ? (
                         <div className="absolute inset-0 w-full h-full z-10">
                             <iframe
@@ -98,6 +98,125 @@ const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     );
 };
 
+interface AudioTestimonial {
+  name: string;
+  company: string;
+  avatar: string;
+  quote: string;
+  audioSrc: string;
+  image?: string;
+}
+
+const audioTestimonials: AudioTestimonial[] = [
+  {
+    name: 'Javohir Haqberdiyev',
+    company: 'Perfona asoschisi',
+    avatar: 'JH',
+    quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!",
+    audioSrc: '/audio/javohir-haqberdiyev.ogg',
+    image: '',
+  },
+  {
+    name: 'Sevara Xolmanova',
+    company: 'Fidda by Sevara asoschisi',
+    avatar: 'SX',
+    quote: "Men bu jamoa bn ishlab ko'rdim menga juda yoqdi samarali va natijasi siz kutgandanda A'lo bo'larkan brendlashni xam stikerlash va patenlashni xam berganman 7 oyda aniq boladi Hudo xohlasa Halol ishlarkansilar Allox rozi bo'lsin silardan juda xursand bo'ldim ishilarga rivoj Rahmat.",
+    audioSrc: '/audio/sevara-holmanova.ogg',
+    image: 'https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png',
+  },
+];
+
+const AudioTestimonialCard = ({ testimonial }: { testimonial: AudioTestimonial }) => {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleTimeUpdate = () => {
+    if (!audioRef.current) return;
+    const pct = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+    setProgress(pct);
+  };
+
+  const handleLoadedMetadata = () => {
+    if (audioRef.current) setDuration(audioRef.current.duration);
+  };
+
+  const handleEnded = () => setIsPlaying(false);
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!audioRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    audioRef.current.currentTime = pct * audioRef.current.duration;
+  };
+
+  const formatTime = (s: number) => {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  };
+
+  return (
+    <BrandCard className="h-full flex flex-col overflow-hidden">
+      <div className="p-6 flex flex-col gap-4">
+        <div className="flex items-center gap-3 rounded-2xl bg-brand-mist/70 p-4">
+          <button
+            onClick={togglePlay}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white hover:bg-brand-blue/90 transition-colors"
+          >
+            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4 ml-0.5" />}
+          </button>
+          <div className="flex-1">
+            <div className="h-2 cursor-pointer rounded-full bg-brand-line" onClick={handleSeek}>
+              <div className="h-full rounded-full bg-brand-blue transition-all" style={{ width: `${progress}%` }} />
+            </div>
+            <div className="mt-1 flex justify-between text-[10px] text-brand-slate">
+              <span>{audioRef.current ? formatTime(audioRef.current.currentTime) : '0:00'}</span>
+              <span>{duration ? formatTime(duration) : '--:--'}</span>
+            </div>
+          </div>
+          <Volume2 className="h-4 w-4 text-brand-slate" />
+        </div>
+
+        {testimonial.quote && (
+          <p className="text-sm text-brand-slate leading-relaxed italic">"{testimonial.quote}"</p>
+        )}
+
+        <div className="flex items-center gap-4 pt-2 border-t border-brand-line/50">
+          <Avatar className="h-12 w-12 ring-2 ring-primary/10">
+            {testimonial.image && <AvatarImage src={testimonial.image} alt={testimonial.name} />}
+            <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="font-bold text-brand-ink">{testimonial.name}</p>
+            <p className="text-xs text-brand-slate">{testimonial.company}</p>
+          </div>
+        </div>
+
+        <audio
+          ref={audioRef}
+          src={testimonial.audioSrc}
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={handleLoadedMetadata}
+          onEnded={handleEnded}
+          preload="metadata"
+        />
+      </div>
+    </BrandCard>
+  );
+};
+
 const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: Testimonial[], dictionary: any, lang: string }) => {
     const autoplayPlugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
     const translations = dictionary;
@@ -106,8 +225,9 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
     const [textTestimonials, setTextTestimonials] = useState<Testimonial[]>([]);
 
     useEffect(() => {
+        const audioNames = audioTestimonials.map(a => a.name.toLowerCase());
         const video = testimonials.filter(t => t.videoUrl);
-        const text = testimonials.filter(t => !t.videoUrl);
+        const text = testimonials.filter(t => !t.videoUrl && !audioNames.includes(t.name.toLowerCase()));
         
         const prioritizedVideos = video.sort((a, b) => {
             if (a.name.includes('Sherzod Beknazarov')) return -1;
@@ -128,62 +248,58 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
   const proofStats =
     lang === 'uz'
       ? [
-          ['Video dalil', 'mijoz ovozi va yuzini ko‘rasiz'],
-          ['Real bizneslar', 'agentlik emas, tadbirkor gapiryapti'],
-          ['Qaror osonlashadi', 'natija faqat chiroyli rasm emas'],
+          ['Video sharh', 'Mijozning yuzini va ovozini ko\'rasiz — montajsiz'],
+          ['Haqiqiy tadbirkorlar', 'Agentlik emas, biznes egasi gapiryapti'],
+          ['Aniq natija', 'Oldin/keyin farqini o\'zlari aytishadi'],
         ]
       : lang === 'ru'
         ? [
-            ['Видео-доказательство', 'видно лицо и голос клиента'],
-            ['Реальный бизнес', 'говорит предприниматель, не агентство'],
-            ['Легче принять решение', 'результат не просто красивая картинка'],
+            ['Видео-отзыв', 'Лицо и голос клиента — без монтажа'],
+            ['Настоящие предприниматели', 'Говорит владелец бизнеса, не агентство'],
+            ['Конкретный результат', 'Разницу до/после клиенты озвучивают сами'],
           ]
         : lang === 'zh'
           ? [
-              ['视频证明', '看到客户的声音和面孔'],
-              ['真实企业', '由企业主本人说明'],
-              ['决策更容易', '结果不只是漂亮图片'],
+              ['视频评价', '看到客户真实面孔和声音'],
+              ['真实企业主', '不是代理商，是老板本人在说'],
+              ['具体结果', '前后差异由客户自己描述'],
             ]
           : [
-              ['Video proof', 'see the client voice and face'],
-              ['Real businesses', 'owners speak, not the agency'],
-              ['Decision clarity', 'outcome beyond pretty visuals'],
+              ['Video review', 'See the client face and voice — unedited'],
+              ['Real business owners', 'The owner speaks, not the agency'],
+              ['Specific outcomes', 'Before/after difference in their own words'],
             ];
 
   return (
     <BrandSection tone="soft" className="overflow-hidden">
       <div className="container mx-auto px-4">
-        <SectionIntro eyebrow="Client voice" title={translations.title} description={translations.subtitle} className="mb-10" />
-        <div className="mx-auto mb-10 grid max-w-5xl gap-3 md:grid-cols-3">
+        <SectionIntro eyebrow={lang === 'uz' ? "Ishonch dalili" : "Proof"} title={translations.title} description={translations.subtitle} className="mb-8" />
+        <div className="mx-auto mb-8 grid max-w-4xl gap-3 grid-cols-3">
           {proofStats.map(([title, desc]) => (
-            <BrandCard key={title} className="p-4">
-              <div className="text-sm font-black text-brand-ink">{title}</div>
-              <div className="mt-1 text-xs font-medium leading-5 text-brand-slate">{desc}</div>
+            <BrandCard key={title} className="p-3 sm:p-5">
+              <div className="text-xs sm:text-base font-black text-brand-ink">{title}</div>
+              <div className="mt-1 text-[11px] sm:text-sm leading-5 sm:leading-6 text-brand-slate">{desc}</div>
             </BrandCard>
           ))}
         </div>
 
         {videoTestimonials.length > 0 && (
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-6xl mx-auto">
+              <h3 className="mb-4 text-lg font-black text-brand-ink sm:text-xl">
+                {lang === 'uz' ? 'Video izohlar' : lang === 'ru' ? 'Видео-отзывы' : lang === 'zh' ? '视频评价' : 'Video reviews'}
+              </h3>
               <Carousel
                 plugins={[autoplayPlugin.current]}
-                opts={{ align: "start", loop: true }}
+                opts={{ align: "center", loop: true }}
                 onMouseEnter={autoplayPlugin.current.stop}
                 onMouseLeave={autoplayPlugin.current.reset}
                 className="w-full relative"
               >
                 <CarouselContent className="-ml-4">
                   {videoTestimonials.map((testimonial, index) => (
-                    <CarouselItem key={`video-${index}`} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                      <div className="p-2 h-full">
+                    <CarouselItem key={`video-${index}`} className="pl-4 basis-[72%] sm:basis-1/2 lg:basis-1/3">
+                      <div className="h-full">
                         <VideoTestimonialCard testimonial={testimonial} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                  {textTestimonials.map((testimonial, index) => (
-                    <CarouselItem key={`text-${index}`} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                      <div className="p-4 h-full">
-                        <TextTestimonialCard testimonial={testimonial} />
                       </div>
                     </CarouselItem>
                   ))}
@@ -193,6 +309,22 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
                   <CarouselNext className="absolute -right-4 lg:-right-12 h-12 w-12 shadow-lg border-brand-line hover:bg-brand-ink hover:text-white transition-all" />
                 </div>
               </Carousel>
+            </div>
+        )}
+
+        {(audioTestimonials.length > 0 || textTestimonials.length > 0) && (
+            <div className="max-w-6xl mx-auto mt-12">
+              <h3 className="mb-4 text-lg font-black text-brand-ink sm:text-xl">
+                {lang === 'uz' ? 'Audio va yozma izohlar' : lang === 'ru' ? 'Аудио и письменные отзывы' : lang === 'zh' ? '音频与文字评价' : 'Audio & written reviews'}
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {audioTestimonials.map((testimonial, index) => (
+                  <AudioTestimonialCard key={`audio-${index}`} testimonial={testimonial} />
+                ))}
+                {textTestimonials.map((testimonial, index) => (
+                  <TextTestimonialCard key={`text-${index}`} testimonial={testimonial} />
+                ))}
+              </div>
             </div>
         )}
       </div>

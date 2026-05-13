@@ -5,17 +5,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import CtaBlock from './cta-block';
 import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const translations = dictionary;
-  
-  const handleOpenModal = () => {
-    const event = new CustomEvent('openContactModal');
-    window.dispatchEvent(event);
-  }
-  
+
   if (!translations || !translations.faqItems) return null;
 
   const objectionLabels =
@@ -43,7 +37,7 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
                 {translations.faqItems.map((item: any, index: number) => (
                 <BrandCard key={index} className="px-5">
                 <AccordionItem value={`item-${index}`} className="border-none">
-                    <AccordionTrigger 
+                    <AccordionTrigger
                       className="text-left text-lg font-black text-brand-ink hover:no-underline"
                       aria-label={lang === 'uz' ? `${item.question} savoliga javobni ko'rish` : lang === 'ru' ? `Посмотреть ответ на вопрос: ${item.question}` : `View answer for: ${item.question}`}
                     >
@@ -58,12 +52,6 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
             </Accordion>
         </div>
       </div>
-      <CtaBlock 
-        title={translations.ctaTitle}
-        description={translations.ctaDesc}
-        buttonText={translations.ctaButton}
-        onCtaClick={handleOpenModal}
-      />
     </BrandSection>
   )
 }
