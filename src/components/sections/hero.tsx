@@ -81,12 +81,11 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
               <Sparkles className="h-3.5 w-3.5 text-brand-lime" />
               <span className="text-[11px] font-black uppercase tracking-[0.22em] text-blue-100">{heroCopy.preHeadline}</span>
             </div>
-
-            <h1 className="mx-auto max-w-3xl text-balance text-[clamp(2.35rem,5.9vw,6.25rem)] font-black leading-[0.94] tracking-tight text-white sm:text-[clamp(2.65rem,6.2vw,6.25rem)] lg:mx-0">
+            <h1 className="mx-auto max-w-[292px] sm:max-w-3xl text-balance text-[clamp(2.35rem,5.9vw,6.25rem)] font-black leading-[0.94] tracking-tight text-white drop-shadow-md sm:drop-shadow-none sm:text-[clamp(2.65rem,6.2vw,6.25rem)] lg:mx-0">
               {renderHeadline(heroCopy.title, 'text-white')}
             </h1>
 
-            <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-7 text-blue-100/78 sm:mt-6 sm:text-lg sm:leading-8 lg:mx-0">
+            <p className="mx-auto mt-5 max-w-[292px] sm:max-w-xl text-pretty text-base leading-7 text-blue-100/78 sm:mt-6 sm:text-lg sm:leading-8 lg:mx-0 drop-shadow-sm sm:drop-shadow-none">
               {heroCopy.description}
             </p>
 
