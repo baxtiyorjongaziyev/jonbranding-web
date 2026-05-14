@@ -3,197 +3,173 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
-import { Star, PlayCircle } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Star, Volume2, VolumeX } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
 import { type Testimonial } from '@/lib/types';
 import Autoplay from "embla-carousel-autoplay";
 import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn, staticTestimonialsZh } from '@/lib/static-data';
-import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
+import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
-    const [playVideo, setPlayVideo] = useState(false);
+  const [unmuted, setUnmuted] = useState(false);
 
-    const handlePlayVideo = (e: React.MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setPlayVideo(true);
-    };
-    
-    return (
-        <BrandCard className="h-full flex flex-col overflow-hidden group p-0">
-            <CardContent className="p-0">
-                <div className="relative w-full aspect-[9/16] bg-black cursor-pointer rounded-t-2xl overflow-hidden" onClick={handlePlayVideo}>
-                    {playVideo ? (
-                        <div className="absolute inset-0 w-full h-full z-10">
-                            <iframe
-                                src={`${testimonial.videoUrl}&autoplay=1`}
-                                frameBorder="0"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                                className="w-full h-full"
-                                title={testimonial.name + " - testimonial"}
-                            ></iframe>
-                        </div>
-                    ) : (
-                        <>
-                            <Image 
-                                src={testimonial.image!} 
-                                alt={testimonial.name} 
-                                data-ai-hint={testimonial.imageHint} 
-                                fill
-                                className={cn("object-cover", testimonial.name === 'Javohir Haqberdiyev' ? 'object-top' : 'object-center', "transition-transform duration-500 group-hover:scale-105")}
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-10 transition-opacity opacity-70 group-hover:opacity-100">
-                                <PlayCircle className="w-20 h-20 text-white/80" />
-                            </div>
-                        </>
-                    )}
-                </div>
-                <div className="p-6">
-                    <div className="flex items-center gap-4">
-                        <Avatar>
-                            <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                            <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                            <p className="font-bold text-brand-ink">{testimonial.name}</p>
-                            <p className="text-sm text-brand-slate">{testimonial.company}</p>
-                        </div>
-                    </div>
-                     {testimonial.quote && (
-                        <blockquote className="mt-4 border-l-4 border-primary/20 pl-4 text-gray-600 italic">
-                            "{testimonial.quote}"
-                        </blockquote>
-                     )}
-                </div>
-            </CardContent>
-        </BrandCard>
-    );
+  return (
+    <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
+      <CardContent className="p-0">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-t-2xl bg-black">
+          <iframe
+            src={`${testimonial.videoUrl}&autoplay=1&muted=${unmuted ? '0' : '1'}&loop=1${unmuted ? '' : '&background=1'}`}
+            frameBorder="0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+            className="absolute inset-0 h-full w-full"
+            title={testimonial.name + " - testimonial"}
+          />
+          <button
+            onClick={() => setUnmuted(!unmuted)}
+            className="absolute bottom-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all duration-200 hover:bg-black/70 active:scale-95"
+            aria-label={unmuted ? "Mute" : "Unmute"}
+          >
+            {unmuted ? (
+              <Volume2 className="h-4 w-4" />
+            ) : (
+              <VolumeX className="h-4 w-4" />
+            )}
+          </button>
+        </div>
+        <div className="p-5">
+          <div className="flex items-center gap-3">
+            <Avatar className="h-10 w-10 ring-2 ring-brand-line">
+              <AvatarImage src={testimonial.image} alt={testimonial.name} />
+              <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm font-bold text-brand-ink">{testimonial.name}</p>
+              <p className="text-xs text-brand-slate">{testimonial.company}</p>
+            </div>
+          </div>
+          {testimonial.quote && (
+            <p className="mt-3 text-sm italic leading-relaxed text-brand-slate">
+              &ldquo;{testimonial.quote}&rdquo;
+            </p>
+          )}
+        </div>
+      </CardContent>
+    </div>
+  );
 };
 
-
 const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
-    return (
-      <BrandCard className="h-full flex flex-col overflow-hidden">
-        <div className="p-8 flex flex-col justify-between flex-grow">
-            <div>
-                 <div className="flex text-yellow-400 mb-4">
-                    {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
-                </div>
-                <p className="text-brand-slate leading-relaxed italic">"{testimonial.quote}"</p>
-            </div>
-            <div className="mt-8 flex items-center gap-4">
-                <Avatar className="h-12 w-12 ring-2 ring-primary/10">
-                    <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                    <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                </Avatar>
-                <div>
-                    <p className="font-bold text-brand-ink">{testimonial.name}</p>
-                    <p className="text-xs text-brand-slate">{testimonial.company}</p>
-                </div>
-            </div>
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleAudio = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  return (
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
+      <div className="flex flex-grow flex-col justify-between">
+        <div>
+          <div className="flex gap-0.5 text-amber-400">
+            {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="h-4 w-4" />)}
+          </div>
+          <p className="mt-4 text-sm italic leading-relaxed text-brand-slate">&ldquo;{testimonial.quote}&rdquo;</p>
+          {testimonial.audioUrl && (
+            <button
+              onClick={toggleAudio}
+              className={cn("mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-colors", isPlaying ? "bg-brand-blue text-white" : "bg-brand-mist text-brand-slate hover:bg-brand-blue/10")}
+            >
+              <Volume2 className="h-3.5 w-3.5" />
+              {isPlaying ? "To'xtatish" : "Ovozli izoh"}
+              <audio ref={audioRef} src={testimonial.audioUrl} onEnded={() => setIsPlaying(false)} />
+            </button>
+          )}
         </div>
-      </BrandCard>
-    );
+        <div className="mt-6 flex items-center gap-3">
+          <Avatar className="h-10 w-10 ring-2 ring-brand-line">
+            <AvatarImage src={testimonial.image} alt={testimonial.name} />
+            <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="text-sm font-bold text-brand-ink">{testimonial.name}</p>
+            <p className="text-xs text-brand-slate">{testimonial.company}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: Testimonial[], dictionary: any, lang: string }) => {
-    const autoplayPlugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
-    const translations = dictionary;
-    
-    const [videoTestimonials, setVideoTestimonials] = useState<Testimonial[]>([]);
-    const [textTestimonials, setTextTestimonials] = useState<Testimonial[]>([]);
+  const autoplayPlugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+  const translations = dictionary;
 
-    useEffect(() => {
-        const video = testimonials.filter(t => t.videoUrl);
-        const text = testimonials.filter(t => !t.videoUrl);
-        
-        const prioritizedVideos = video.sort((a, b) => {
-            if (a.name.includes('Sherzod Beknazarov')) return -1;
-            if (b.name.includes('Sherzod Beknazarov')) return 1;
-            if (a.name.includes('Ibrohimjon Mahammadjonov')) return -1;
-            if (b.name.includes('Ibrohimjon Mahammadjonov')) return 1;
-            return 0;
-        });
+  const [videoTestimonials, setVideoTestimonials] = useState<Testimonial[]>([]);
+  const [textTestimonials, setTextTestimonials] = useState<Testimonial[]>([]);
 
-        setVideoTestimonials(prioritizedVideos);
-        setTextTestimonials(text);
-    }, [testimonials]);
-    
-    if (!testimonials || testimonials.length === 0 || !translations) {
-      return null;
-    }
+  useEffect(() => {
+    const video = testimonials.filter(t => t.videoUrl);
+    const text = testimonials.filter(t => !t.videoUrl);
 
-  const proofStats =
-    lang === 'uz'
-      ? [
-          ['Video dalil', 'mijoz ovozi va yuzini ko‘rasiz'],
-          ['Real bizneslar', 'agentlik emas, tadbirkor gapiryapti'],
-          ['Qaror osonlashadi', 'natija faqat chiroyli rasm emas'],
-        ]
-      : lang === 'ru'
-        ? [
-            ['Видео-доказательство', 'видно лицо и голос клиента'],
-            ['Реальный бизнес', 'говорит предприниматель, не агентство'],
-            ['Легче принять решение', 'результат не просто красивая картинка'],
-          ]
-        : lang === 'zh'
-          ? [
-              ['视频证明', '看到客户的声音和面孔'],
-              ['真实企业', '由企业主本人说明'],
-              ['决策更容易', '结果不只是漂亮图片'],
-            ]
-          : [
-              ['Video proof', 'see the client voice and face'],
-              ['Real businesses', 'owners speak, not the agency'],
-              ['Decision clarity', 'outcome beyond pretty visuals'],
-            ];
+    const prioritizedVideos = video.sort((a, b) => {
+      if (a.name.includes('Sherzod Beknazarov')) return -1;
+      if (b.name.includes('Sherzod Beknazarov')) return 1;
+      if (a.name.includes('Ibrohimjon Mahammadjonov')) return -1;
+      if (b.name.includes('Ibrohimjon Mahammadjonov')) return 1;
+      return 0;
+    });
+
+    setVideoTestimonials(prioritizedVideos);
+    setTextTestimonials(text);
+  }, [testimonials]);
+
+  if (!testimonials || testimonials.length === 0 || !translations) {
+    return null;
+  }
 
   return (
     <BrandSection tone="soft" className="overflow-hidden">
       <div className="container mx-auto px-4">
-        <SectionIntro eyebrow="Client voice" title={translations.title} description={translations.subtitle} className="mb-10" />
-        <div className="mx-auto mb-10 grid max-w-5xl gap-3 md:grid-cols-3">
-          {proofStats.map(([title, desc]) => (
-            <BrandCard key={title} className="p-4">
-              <div className="text-sm font-black text-brand-ink">{title}</div>
-              <div className="mt-1 text-xs font-medium leading-5 text-brand-slate">{desc}</div>
-            </BrandCard>
-          ))}
-        </div>
+        <SectionIntro eyebrow="Client voice" title={translations.title} description={translations.subtitle} className="mb-12" />
 
         {videoTestimonials.length > 0 && (
-            <div className="max-w-5xl mx-auto">
-              <Carousel
-                plugins={[autoplayPlugin.current]}
-                opts={{ align: "start", loop: true }}
-                onMouseEnter={autoplayPlugin.current.stop}
-                onMouseLeave={autoplayPlugin.current.reset}
-                className="w-full relative"
-              >
-                <CarouselContent className="-ml-4">
-                  {videoTestimonials.map((testimonial, index) => (
-                    <CarouselItem key={`video-${index}`} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                      <div className="p-2 h-full">
-                        <VideoTestimonialCard testimonial={testimonial} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                  {textTestimonials.map((testimonial, index) => (
-                    <CarouselItem key={`text-${index}`} className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                      <div className="p-4 h-full">
-                        <TextTestimonialCard testimonial={testimonial} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <div className="hidden sm:block">
-                  <CarouselPrevious className="absolute -left-4 lg:-left-12 h-12 w-12 shadow-lg border-brand-line hover:bg-brand-ink hover:text-white transition-all" />
-                  <CarouselNext className="absolute -right-4 lg:-right-12 h-12 w-12 shadow-lg border-brand-line hover:bg-brand-ink hover:text-white transition-all" />
-                </div>
-              </Carousel>
-            </div>
+          <div className="mx-auto max-w-6xl">
+            <Carousel
+              plugins={[autoplayPlugin.current]}
+              opts={{ align: "start", loop: true }}
+              onMouseEnter={autoplayPlugin.current.stop}
+              onMouseLeave={autoplayPlugin.current.reset}
+              className="relative w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {videoTestimonials.map((testimonial, index) => (
+                  <CarouselItem key={`video-${index}`} className="basis-[80%] pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <div className="h-full py-2">
+                      <VideoTestimonialCard testimonial={testimonial} />
+                    </div>
+                  </CarouselItem>
+                ))}
+                {textTestimonials.map((testimonial, index) => (
+                  <CarouselItem key={`text-${index}`} className="basis-[80%] pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <div className="h-full py-2">
+                      <TextTestimonialCard testimonial={testimonial} />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="hidden sm:block">
+                <CarouselPrevious className="absolute -left-4 h-11 w-11 border-brand-line shadow-md transition-all duration-200 hover:bg-brand-ink hover:text-white lg:-left-12" />
+                <CarouselNext className="absolute -right-4 h-11 w-11 border-brand-line shadow-md transition-all duration-200 hover:bg-brand-ink hover:text-white lg:-right-12" />
+              </div>
+            </Carousel>
+          </div>
         )}
       </div>
     </BrandSection>
@@ -201,21 +177,21 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
 }
 
 const Testimonials = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
-    let testimonials;
-    switch (lang) {
-        case 'ru':
-            testimonials = staticTestimonialsRu;
-            break;
-        case 'en':
-            testimonials = staticTestimonialsEn;
-            break;
-        case 'zh':
-            testimonials = staticTestimonialsZh;
-            break;
-        default:
-            testimonials = staticTestimonials;
-    }
-    return <TestimonialsClient testimonials={testimonials} dictionary={dictionary} lang={lang} />
+  let testimonials;
+  switch (lang) {
+    case 'ru':
+      testimonials = staticTestimonialsRu;
+      break;
+    case 'en':
+      testimonials = staticTestimonialsEn;
+      break;
+    case 'zh':
+      testimonials = staticTestimonialsZh;
+      break;
+    default:
+      testimonials = staticTestimonials;
+  }
+  return <TestimonialsClient testimonials={testimonials} dictionary={dictionary} lang={lang} />
 };
 
 export default Testimonials;
