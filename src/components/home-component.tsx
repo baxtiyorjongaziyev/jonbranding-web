@@ -18,6 +18,7 @@ const Testimonials = dynamic(() => import('@/components/sections/testimonials'),
   loading: () => <Skeleton className="h-64 w-full rounded-2xl" />,
 });
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
+const ProcessVideo = dynamic(() => import('@/components/sections/process-video'), { ssr: false });
 const Founder = dynamic(() => import('@/components/sections/founder'), {
   loading: () => <Skeleton className="h-96 w-full" />,
 });
@@ -100,6 +101,9 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
 
         {/* 5. Process — 3 simple steps */}
         {mounted && <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />}
+
+        {/* 5.5. Process Video */}
+        {mounted && <ProcessVideo lang={lang} />}
 
         {/* 6. Founder — trust through personality */}
         {mounted && <Founder lang={lang} dictionary={dictionary.founder} />}

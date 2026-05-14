@@ -12,6 +12,7 @@ export interface Testimonial {
     imageHint: string;
     quote: string;
     videoUrl?: string;
+    audioUrl?: string;
 }
 
 export interface Brand {
