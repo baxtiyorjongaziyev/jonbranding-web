@@ -49,7 +49,7 @@ export default async function Page(props: Props) {
       *[_type == "comparison" && defined(oldImg.asset) && defined(newImg.asset)]
         | order(coalesce(order, 999) asc, _createdAt asc) {
           _id,
-          "brand": coalesce(brand, "Brand case"),
+          "brand": coalesce(brand, name, title, "Loyiha"),
           "oldImg": oldImg.asset->url,
           "newImg": newImg.asset->url,
           "oldHint": coalesce(oldHint, "Before"),
