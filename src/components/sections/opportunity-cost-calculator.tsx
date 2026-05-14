@@ -6,6 +6,7 @@ import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { TrendingUp, ArrowRight, Droplets, ShieldAlert, CheckCircle2 } from 'lucide-react';
 import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface OpportunityCostCalculatorProps {
   onCtaClick?: () => void;
@@ -146,7 +147,7 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                 <div className="mt-8 p-6 rounded-2xl bg-brand-blue/5 border-l-4 border-brand-blue">
                   <p 
                     className="text-lg font-medium text-brand-ink italic"
-                    dangerouslySetInnerHTML={{ __html: `"${t.analogy.description}"` }}
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(`"${t.analogy.description}"`) }}
                   />
                 </div>
               </BrandCard>
