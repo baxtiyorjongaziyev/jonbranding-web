@@ -164,7 +164,7 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
           <div className="mx-auto max-w-6xl">
             <Carousel
               plugins={[videoAutoplay.current]}
-              opts={{ align: "start", loop: true }}
+              opts={{ align: "center", loop: true }}
               onMouseEnter={videoAutoplay.current.stop}
               onMouseLeave={videoAutoplay.current.reset}
               className="relative w-full"
