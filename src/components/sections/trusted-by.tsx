@@ -19,7 +19,7 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                 )}>
                     {brands.map((brand, index) => (
                         <li key={index} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-20 w-44 flex items-center justify-center mx-3">
-                            <div className="brand-card flex items-center justify-center p-4 h-full w-full grayscale hover:grayscale-0 transition-all duration-300">
+                            <div className="flex items-center justify-center p-4 h-full w-full grayscale hover:grayscale-0 transition-all duration-300">
                                 {brand.logo ? (
                                     <img
                                         src={brand.logo}
@@ -40,7 +40,7 @@ const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction
                 )} aria-hidden="true">
                     {brands.map((brand, index) => (
                         <li key={`dup-${index}`} className="flex-shrink-0 h-20 w-44 flex items-center justify-center mx-3">
-                            <div className="brand-card flex items-center justify-center p-4 h-full w-full grayscale">
+                            <div className="flex items-center justify-center p-4 h-full w-full grayscale">
                                 {brand.logo ? (
                                     <img
                                         src={brand.logo}
