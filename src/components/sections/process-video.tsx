@@ -1,6 +1,8 @@
 'use client';
 
 import type { FC } from 'react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const copy = {
   uz: {
@@ -27,9 +29,18 @@ const copy = {
 
 const ProcessVideo: FC<{ lang: string }> = ({ lang }) => {
   const t = copy[(lang as keyof typeof copy) || 'uz'] || copy.uz;
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "center center"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
+  const borderRadius = useTransform(scrollYProgress, [0, 1], [40, 24]);
 
   return (
-    <section className="bg-[#f7f4ee] py-16 sm:py-20 lg:flex lg:min-h-screen lg:flex-col lg:justify-center">
+    <section ref={sectionRef} className="bg-[#f7f4ee] py-16 sm:py-20 lg:flex lg:min-h-screen lg:flex-col lg:justify-center">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl text-center">
           <div className="mb-4 inline-flex rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-[11px] font-black uppercase tracking-[0.24em] text-slate-600">
@@ -41,7 +52,10 @@ const ProcessVideo: FC<{ lang: string }> = ({ lang }) => {
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">{t.description}</p>
         </div>
 
-        <div className="mx-auto mt-10 max-w-4xl">
+        <motion.div
+          className="mx-auto mt-10 max-w-4xl"
+          style={{ scale, borderRadius }}
+        >
           <div className="relative overflow-hidden rounded-3xl bg-slate-900 shadow-2xl">
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
               <iframe
@@ -54,7 +68,7 @@ const ProcessVideo: FC<{ lang: string }> = ({ lang }) => {
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
