@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { ScrollArea } from '../ui/scroll-area';
 import LanguageSwitcher from '../language-switcher';
 import Magnetic from '../ui/magnetic';
@@ -159,41 +159,39 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const boxShadow = useTransform(scrollY, [0, 80], ['none', '0 8px 32px 0 rgba(31, 38, 135, 0.15)']);
 
   const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const scrollDiff = Math.abs(currentScrollY - lastScrollY);
-      
-      // Scrolled state for visual styling (background, border)
-      setScrolled(currentScrollY > 20);
+  }, []);
 
-      // Visibility logic: hide on scroll down, show on scroll up
-      // 1. Never hide if mobile menu is open
-      // 2. Only hide if scrolling down significantly (> 10px diff) or past a certain point
-      // 3. Always show at the top
-      if (isMobileMenuOpen) {
-        setVisible(true);
-      } else if (currentScrollY <= 80) {
-        setVisible(true);
-      } else if (currentScrollY > lastScrollY && scrollDiff > 10) {
-        // Significant scroll down
-        setVisible(false);
-      } else if (currentScrollY < lastScrollY && scrollDiff > 5) {
-        // Significant scroll up
-        setVisible(true);
-      }
+  // ⚡ Bolt Performance Optimization:
+  // Replaced native window.addEventListener('scroll') with Framer Motion's useMotionValueEvent and removed the lastScrollY state entirely.
+  // Why: Native scroll listeners combined with state updates on every frame cause excessive React re-renders and layout thrashing.
+  // Impact: useMotionValueEvent runs on Framer Motion's optimized loop. By using scrollY.getPrevious() instead of state for scroll direction, we avoid triggering re-renders purely to store the last scroll position, reducing rendering overhead significantly.
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const currentScrollY = latest;
+    const previousScrollY = scrollY.getPrevious() || 0;
+    const scrollDiff = Math.abs(currentScrollY - previousScrollY);
 
-      setLastScrollY(currentScrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, isMobileMenuOpen]);
+    // Scrolled state for visual styling (background, border)
+    setScrolled(currentScrollY > 20);
+
+    // Visibility logic: hide on scroll down, show on scroll up
+    if (isMobileMenuOpen) {
+      setVisible(true);
+    } else if (currentScrollY <= 80) {
+      setVisible(true);
+    } else if (currentScrollY > previousScrollY && scrollDiff > 10) {
+      // Significant scroll down
+      setVisible(false);
+    } else if (currentScrollY < previousScrollY && scrollDiff > 5) {
+      // Significant scroll up
+      setVisible(true);
+    }
+  });
 
   const handleContactClick = () => {
     setMobileMenuOpen(false);
