@@ -6,6 +6,7 @@ import { Medal, Globe, Zap, Users, Phone, Send, PlayCircle, type LucideProps, Li
 import { Button } from '@/components/ui/button';
 import { useState, type FC } from 'react';
 import { BrandCard, BrandSection } from '@/components/ui/design-system';
+import DOMPurify from 'isomorphic-dompurify';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
@@ -39,7 +40,7 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) =>
             </div>
             <p 
               className="mt-4 text-lg leading-8 text-white/72"
-              dangerouslySetInnerHTML={{ __html: translations.message }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(translations.message) }}
             />
             <BrandCard className="brand-card-dark grid gap-3 p-4 sm:grid-cols-3">
               {[
