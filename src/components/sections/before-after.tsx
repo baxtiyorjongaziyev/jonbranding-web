@@ -61,7 +61,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
           description={translations.subtitle}
         />
 
-        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2">
           {displayItems.map((item, index) => {
             if (typeof item.oldImg !== 'string' || typeof item.newImg !== 'string') return null;
 
