@@ -63,25 +63,25 @@ const AudioTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
 
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
-      <audio ref={audioRef} src={testimonial.audioUrl} preload="metadata" onEnded={() => setIsPlaying(false)} />
+      <audio ref={audioRef} src={testimonial.audioUrl} preload="auto" onEnded={() => setIsPlaying(false)} />
       <div className="flex flex-grow flex-col justify-between">
         <div>
-          <div className="flex items-center justify-between">
-            <div className="flex gap-0.5 text-amber-400">
-              {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="h-4 w-4" />)}
-            </div>
-            <button
-              onClick={toggleAudio}
-              className={cn(
-                "flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200",
-                isPlaying ? "bg-brand-blue text-white shadow-md" : "bg-brand-mist text-brand-slate hover:bg-brand-blue/10"
-              )}
-              aria-label={isPlaying ? "To'xtatish" : "Ovozli izoh tinglash"}
-            >
-              {isPlaying ? <Pause className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-            </button>
+          <div className="flex gap-0.5 text-amber-400">
+            {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="h-4 w-4" />)}
           </div>
           <p className="mt-4 text-sm italic leading-relaxed text-brand-slate">&ldquo;{testimonial.quote}&rdquo;</p>
+          <button
+            onClick={toggleAudio}
+            className={cn(
+              "mt-4 flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200",
+              isPlaying
+                ? "bg-brand-blue text-white shadow-lg shadow-brand-blue/25"
+                : "bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white hover:shadow-lg hover:shadow-brand-blue/25"
+            )}
+          >
+            {isPlaying ? <Pause className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+            {isPlaying ? "To'xtatish" : "🎧 Ovozli izohni tinglash"}
+          </button>
         </div>
         <div className="mt-6 flex items-center gap-3">
           <Avatar className="h-10 w-10 ring-2 ring-brand-line">
