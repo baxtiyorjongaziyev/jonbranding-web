@@ -68,3 +68,6 @@ audit/
 logs/
 autodeploy.log
 autodeploy.pid
+
+# Claude AI local settings (secrets)
+.claude/
