@@ -72,5 +72,7 @@ migration-mapping.json
 # Audit
 audit/
 logs/
+DESIGN_AUDIT/
+cloud-backups/
 autodeploy.log
 autodeploy.pid
