@@ -1,8 +1,6 @@
 'use client';
 
 import type { FC } from 'react';
-import { Play } from 'lucide-react';
-import { useState } from 'react';
 
 const copy = {
   uz: {
@@ -28,7 +26,6 @@ const copy = {
 };
 
 const ProcessVideo: FC<{ lang: string }> = ({ lang }) => {
-  const [playing, setPlaying] = useState(false);
   const t = copy[(lang as keyof typeof copy) || 'uz'] || copy.uz;
 
   return (
@@ -46,36 +43,16 @@ const ProcessVideo: FC<{ lang: string }> = ({ lang }) => {
 
         <div className="mx-auto mt-10 max-w-4xl">
           <div className="relative overflow-hidden rounded-3xl bg-slate-900 shadow-2xl">
-            {playing ? (
-              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                <iframe
-                  src="https://player.vimeo.com/video/1109613592?h=6e85b42502&autoplay=1"
-                  className="absolute inset-0 h-full w-full"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                  allowFullScreen
-                  title="Jon.Branding jarayon video"
-                />
-              </div>
-            ) : (
-              <button
-                onClick={() => setPlaying(true)}
-                className="group relative block w-full"
-                aria-label="Videoni boshlash"
-              >
-                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/10 backdrop-blur transition-transform group-hover:scale-110">
-                      <Play className="h-8 w-8 text-white" fill="white" />
-                    </div>
-                    <span className="text-sm font-bold text-white/70">
-                      {lang === 'uz' ? "Ko'rish uchun bosing" : 'Click to play'}
-                    </span>
-                  </div>
-                </div>
-              </button>
-            )}
+            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+              <iframe
+                src="https://player.vimeo.com/video/1109613592?h=6e85b42502&autoplay=1&muted=1&loop=1&background=1"
+                className="absolute inset-0 h-full w-full"
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                allowFullScreen
+                title="Jon.Branding jarayon video"
+              />
+            </div>
           </div>
         </div>
       </div>
