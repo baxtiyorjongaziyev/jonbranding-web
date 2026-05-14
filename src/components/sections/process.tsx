@@ -1,11 +1,10 @@
-
 'use client';
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import CtaBlock from './cta-block';
-import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
+import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 interface ProcessProps {
   onCtaClick: () => void;
@@ -14,21 +13,21 @@ interface ProcessProps {
 }
 
 const ProcessCard = ({ title, description, tasks, phase }: { title: string, description: string, tasks: string[], phase: string }) => (
-    <BrandCard className="w-[320px] md:w-[450px] flex-shrink-0 p-8 transition-all mx-4">
-        <div className="flex items-center gap-4 mb-6">
-          <span className="text-sm font-black text-brand-blue bg-brand-blue/10 px-3 py-1 rounded-full">{phase}</span>
-          <div className="h-px flex-grow bg-brand-line"></div>
-        </div>
-        <h3 className="text-2xl font-black text-brand-ink mb-3 tracking-[-0.03em]">{title}</h3>
-        <p className="text-base text-brand-slate leading-relaxed mb-6">{description}</p>
-        <div className="mt-auto flex flex-wrap gap-2">
-            {tasks?.map((task) => (
-                <Badge key={task} variant="secondary" className="bg-white/70 text-brand-slate hover:bg-white font-medium px-3 py-1 text-xs rounded-full border border-brand-line">
-                    {task}
-                </Badge>
-            ))}
-        </div>
-    </BrandCard>
+  <div className="mx-3 w-[300px] flex-shrink-0 rounded-3xl border border-brand-line bg-white p-7 shadow-[0_8px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(15,23,42,0.08)] md:w-[420px] md:p-8">
+    <div className="mb-5 flex items-center gap-3">
+      <span className="rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-bold text-brand-blue">{phase}</span>
+      <div className="h-px flex-grow bg-brand-line" />
+    </div>
+    <h3 className="text-xl font-black tracking-tight text-brand-ink md:text-2xl">{title}</h3>
+    <p className="mt-3 text-sm leading-relaxed text-brand-slate">{description}</p>
+    <div className="mt-6 flex flex-wrap gap-2">
+      {tasks?.map((task) => (
+        <Badge key={task} variant="secondary" className="rounded-full border border-brand-line bg-brand-mist px-3 py-1 text-xs font-medium text-brand-slate">
+          {task}
+        </Badge>
+      ))}
+    </div>
+  </div>
 );
 
 const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
@@ -45,7 +44,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
 
   const processProof =
     lang === 'uz'
-      ? ['Avval diagnostika', 'Keyin strategiya', 'So‘ng vizual tizim', 'Oxirida qo‘llash yo‘riqnomasi']
+      ? ['Avval diagnostika', 'Keyin strategiya', 'So\'ng vizual tizim', 'Oxirida qo\'llash yo\'riqnomasi']
       : lang === 'ru'
         ? ['Сначала диагностика', 'Потом стратегия', 'Затем визуальная система', 'В конце инструкция внедрения']
         : lang === 'zh'
@@ -55,20 +54,20 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
   return (
     <BrandSection id="process" tone="light" className="relative overflow-visible p-0" suppressHydrationWarning>
       <div ref={targetRef} className="h-[300vh]">
-        <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-          <div className="container mx-auto px-4 mb-16">
-            <SectionIntro eyebrow="Process OS" title={translations.title} description={translations.subtitle} />
-            <BrandCard className="mx-auto mt-8 grid max-w-5xl gap-2 p-3 sm:grid-cols-4">
+        <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+          <div className="container mx-auto mb-12 px-4">
+            <SectionIntro eyebrow="Process" title={translations.title} description={translations.subtitle} />
+            <div className="mx-auto mt-8 grid max-w-4xl gap-2 rounded-2xl border border-brand-line bg-white/80 p-3 shadow-sm backdrop-blur-sm sm:grid-cols-4">
               {processProof.map((item, index) => (
-                <div key={item} className="rounded-2xl bg-white/70 px-4 py-3 text-center">
-                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue">0{index + 1}</div>
-                  <div className="mt-1 text-sm font-black text-brand-ink">{item}</div>
+                <div key={item} className="rounded-xl bg-brand-mist/60 px-3 py-3 text-center">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-blue">0{index + 1}</div>
+                  <div className="mt-1 text-xs font-bold text-brand-ink">{item}</div>
                 </div>
               ))}
-            </BrandCard>
+            </div>
           </div>
 
-          <div className="flex items-center w-full">
+          <div className="flex w-full items-center">
             <motion.div style={{ x }} className="flex px-[10vw]">
               {translations.phases.map((phase: any, index: number) => (
                 <ProcessCard key={index} {...phase} />
@@ -78,11 +77,11 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
         </div>
       </div>
 
-      <CtaBlock 
-        title={translations.ctaTitle} 
-        description={translations.ctaDesc} 
-        buttonText={translations.ctaButton} 
-        onCtaClick={onCtaClick} 
+      <CtaBlock
+        title={translations.ctaTitle}
+        description={translations.ctaDesc}
+        buttonText={translations.ctaButton}
+        onCtaClick={onCtaClick}
       />
     </BrandSection>
   );

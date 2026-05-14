@@ -17,7 +17,7 @@
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 35%;
-    --accent: 198.8 95.3% 54.9%;
+    --accent: 190 88% 54%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -31,28 +31,38 @@
     --input: 214.3 31.8% 91.4%;
     --radius: 0.75rem;
     --brand-ink: 222 68% 7%;
-    --brand-paper: 42 40% 97%;
-    --brand-mist: 214 58% 95%;
+    --brand-paper: 40 33% 98%;
+    --brand-mist: 214 58% 96%;
     --brand-blue: 231 78% 48%;
     --brand-cyan: 190 88% 54%;
     --brand-lime: 86 72% 50%;
     --brand-slate: 220 17% 42%;
-    --brand-line: 220 25% 88%;
+    --brand-line: 220 20% 90%;
     --font-inter: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     --font-jakarta: "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
 
-    --section-gap: 8rem;
-    --section-gap-mobile: 4rem;
+    --section-gap: 7rem;
+    --section-gap-mobile: 3.5rem;
 
-    /* Animation Tokens - Apple-style Snappy Physics */
+    /* Animation — Emil Kowalski principles */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --ease-liquid: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
-    
-    /* Spring Presets for Framer Motion (documented for reference) */
-    /* Snappy: stiffness: 400, damping: 30 */
-    /* Gentle: stiffness: 200, damping: 25 */
-    
-    --transition-premium: 450ms var(--ease-liquid);
+
+    --duration-fast: 160ms;
+    --duration-normal: 250ms;
+    --duration-slow: 450ms;
+
+    --transition-fast: var(--duration-fast) var(--ease-out);
+    --transition-normal: var(--duration-normal) var(--ease-out);
+    --transition-premium: var(--duration-slow) var(--ease-liquid);
+
+    /* Glass Tokens */
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.7);
+    --glass-blur: 20px;
+    --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
 
     /* Liquid Glass Tokens */
     --liquid-glass-bg: rgba(255, 255, 255, 0.45);

@@ -3,7 +3,7 @@
 import type { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, BadgeCheck, CheckCircle2, FileSearch, ShieldCheck, Sparkles, Target } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { projects } from '@/lib/static-data';
@@ -31,15 +31,6 @@ const heroCopyByLang = {
     cta: 'Bepul Brand Audit olish',
     ctaSecondary: "Auditda nima olaman?",
     proofItems: ["5 ta ishonch yo'qotadigan nuqta", "Raqobatchiga nisbatan ko'rinish", "Qaysi xizmat hozir kerakligini bilasiz"],
-    reportTitle: 'Brand Audit Snapshot',
-    reportSubtitle: "Mijoz ko'zidagi ishonch diagnostikasi",
-    scoreLabel: 'Ishonch signali',
-    score: '68%',
-    issues: [
-      'Premiumlik signali sust',
-      'Vaada bir qarashda tushunarsiz',
-      "Farq qiladigan sabab ko'rinmaydi",
-    ],
   },
   ru: {
     preHeadline: 'Free Brand Audit',
@@ -48,11 +39,6 @@ const heroCopyByLang = {
     cta: 'Get the free brand audit',
     ctaSecondary: 'What is inside?',
     proofItems: ['5 trust gaps', 'Competitor view', 'Clear next step'],
-    reportTitle: 'Brand Audit Snapshot',
-    reportSubtitle: 'Trust diagnosis',
-    scoreLabel: 'Trust signal',
-    score: '68%',
-    issues: ['Premium signal is weak', 'Promise is unclear', 'Differentiation is not visible'],
   },
   en: {
     preHeadline: 'Free Brand Audit',
@@ -61,11 +47,6 @@ const heroCopyByLang = {
     cta: 'Get the free brand audit',
     ctaSecondary: 'What is inside?',
     proofItems: ['5 trust gaps', 'Competitor view', 'Clear next step'],
-    reportTitle: 'Brand Audit Snapshot',
-    reportSubtitle: 'Trust diagnosis',
-    scoreLabel: 'Trust signal',
-    score: '68%',
-    issues: ['Premium signal is weak', 'Promise is unclear', 'Differentiation is not visible'],
   },
   zh: {
     preHeadline: 'Free Brand Audit',
@@ -74,19 +55,8 @@ const heroCopyByLang = {
     cta: 'Get the free brand audit',
     ctaSecondary: 'What is inside?',
     proofItems: ['5 trust gaps', 'Competitor view', 'Clear next step'],
-    reportTitle: 'Brand Audit Snapshot',
-    reportSubtitle: 'Trust diagnosis',
-    scoreLabel: 'Trust signal',
-    score: '68%',
-    issues: ['Premium signal is weak', 'Promise is unclear', 'Differentiation is not visible'],
   },
 };
-
-const diagnosticBadges = [
-  { label: 'Diagnostika', icon: FileSearch },
-  { label: 'Aniq ustuvorlik', icon: BadgeCheck },
-  { label: 'Majburiyatsiz', icon: ShieldCheck },
-];
 
 const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }) => {
   if (!dictionary) return null;
@@ -94,107 +64,76 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
   const heroCopy = heroCopyByLang[(lang as keyof typeof heroCopyByLang) || 'uz'] || heroCopyByLang.uz;
 
   return (
-    <section className="relative isolate max-w-[100vw] overflow-hidden bg-[#080b14] pt-20 text-white sm:pt-24 lg:pt-28">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(37,99,235,0.35),transparent_30rem),radial-gradient(circle_at_86%_12%,rgba(58,225,255,0.18),transparent_28rem),linear-gradient(135deg,#070a13_0%,#0b1020_45%,#111827_100%)]" />
-      <div className="absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-white/10 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 -z-10 h-44 bg-gradient-to-t from-[#f7f4ee] to-transparent" />
+    <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#060a16]">
+      {/* Ambient gradients */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[10%] top-[5%] h-[600px] w-[600px] rounded-full bg-blue-600/20 blur-[120px]" />
+        <div className="absolute right-[15%] top-[15%] h-[500px] w-[500px] rounded-full bg-cyan-400/10 blur-[100px]" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[hsl(var(--brand-paper))] to-transparent" />
+      </div>
 
-      <div className="container mx-auto max-w-[1360px] overflow-hidden px-4 sm:px-6 lg:px-8">
-        <div className="grid min-h-[calc(100svh-6rem)] place-items-center gap-10 py-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14 lg:py-14">
+      <div className="container mx-auto flex min-h-[100svh] max-w-[1360px] items-center px-4 pt-20 sm:px-6 lg:px-8">
+        <div className="grid w-full gap-12 py-12 lg:grid-cols-2 lg:gap-16 lg:py-0">
+          {/* Left — Copy */}
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto w-full max-w-[292px] text-center sm:max-w-3xl lg:mx-0 lg:w-full lg:text-left"
+            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+            className="flex flex-col justify-center text-center lg:text-left"
           >
-            <div className="mb-5 inline-flex w-full max-w-[292px] items-center justify-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2.5 text-center text-[10px] font-black uppercase tracking-[0.12em] text-blue-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur sm:w-auto sm:max-w-full sm:text-[11px] sm:tracking-[0.24em]">
-              <Sparkles className="h-4 w-4 text-brand-cyan" />
-              <span className="min-w-0 text-balance">{heroCopy.preHeadline}</span>
+            <div className="mb-6 inline-flex items-center justify-center gap-2 self-center rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 backdrop-blur-sm lg:self-start">
+              <Sparkles className="h-3.5 w-3.5 text-brand-cyan" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-blue-200">{heroCopy.preHeadline}</span>
             </div>
 
-            <h1 className="mx-auto max-w-[292px] text-balance text-[35px] font-black leading-[0.94] tracking-[-0.05em] text-white sm:max-w-none sm:text-[72px] sm:tracking-[-0.075em] lg:mx-0 lg:text-[88px] xl:text-[104px]">
+            <h1 className="text-balance text-[clamp(2.2rem,6vw,6.5rem)] font-black leading-[0.92] tracking-[-0.04em] text-white">
               {renderHeadline(heroCopy.title, 'text-white')}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[292px] text-pretty text-base leading-8 text-slate-300 sm:max-w-2xl sm:text-xl lg:mx-0">
+            <p className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-relaxed text-slate-400 lg:mx-0">
               {heroCopy.description}
             </p>
 
-            <div className="mx-auto mt-8 flex w-full max-w-[292px] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mx-0 lg:justify-start">
+            {/* CTA */}
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Button
                 onClick={onOpenContact}
                 size="lg"
-                className="h-14 w-full rounded-2xl !bg-blue-700 px-5 text-base font-black !text-white shadow-[0_25px_70px_-32px_rgba(37,99,235,0.95)] hover:!bg-brand-cyan hover:!text-slate-950 sm:h-16 sm:w-auto sm:px-9"
+                className="group h-14 rounded-2xl bg-blue-600 px-8 text-base font-bold text-white shadow-[0_20px_60px_-20px_rgba(37,99,235,0.7)] transition-all duration-200 hover:bg-brand-cyan hover:text-slate-950 hover:shadow-[0_20px_60px_-20px_rgba(58,225,255,0.5)] active:scale-[0.97] sm:h-16"
               >
                 {heroCopy.cta}
-                <ArrowRight className="h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
               </Button>
               <Button
                 asChild
-                variant="outline"
+                variant="ghost"
                 size="lg"
-                className="h-14 w-full rounded-2xl border-white/14 bg-white/8 px-5 text-base font-black text-white shadow-none hover:bg-white/14 sm:h-16 sm:w-auto sm:px-7"
+                className="h-14 rounded-2xl border border-white/10 px-6 text-base font-bold text-white/80 transition-all duration-200 hover:bg-white/10 sm:h-16"
               >
                 <Link href="#audit-offer">{heroCopy.ctaSecondary}</Link>
               </Button>
             </div>
 
-            <div className="mx-auto mt-6 grid w-full max-w-[292px] gap-2 sm:max-w-none sm:grid-cols-3">
+            {/* Proof chips */}
+            <div className="mt-8 flex flex-wrap justify-center gap-2 lg:justify-start">
               {heroCopy.proofItems.map((item) => (
-                <div key={item} className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/7 px-3 py-3 text-sm font-bold text-slate-200 shadow-sm backdrop-blur lg:justify-start">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-cyan" />
+                <div key={item} className="flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.04] px-4 py-2 text-sm font-medium text-slate-300 backdrop-blur-sm">
+                  <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
                   <span>{item}</span>
                 </div>
               ))}
             </div>
           </motion.div>
 
+          {/* Right — Portfolio showcase */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-            className="relative mx-auto w-full max-w-[292px] sm:max-w-2xl lg:max-w-none"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1], delay: 0.1 }}
+            className="relative flex items-center justify-center"
           >
-            <div className="relative rounded-[2rem] border border-white/12 bg-white/8 p-3 shadow-[0_35px_100px_-55px_rgba(0,0,0,0.95)] backdrop-blur-xl sm:rounded-[2.4rem] sm:p-4">
-              <div className="grid gap-3 sm:grid-cols-2">
-                <CaseWall images={portfolioImages} />
-                <div className="rounded-[1.45rem] border border-white/12 bg-slate-950/95 p-4 text-white shadow-[0_24px_70px_-35px_rgba(0,0,0,0.95)] sm:col-span-2 sm:p-5">
-                  <div className="mb-3 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.18em] text-brand-cyan">
-                    <ShieldCheck className="h-4 w-4" />
-                    Siz oladigan natija
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-[0.7fr_1.3fr] sm:items-center">
-                    <div>
-                      <p className="text-base font-black text-white">{heroCopy.reportTitle}</p>
-                      <p className="mt-1 text-xs leading-5 text-white/55">{heroCopy.reportSubtitle}</p>
-                      <div className="mt-4 inline-flex rounded-full bg-brand-lime px-3 py-1 text-xs font-black text-slate-950">{heroCopy.score}</div>
-                      <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/45">{heroCopy.scoreLabel}</p>
-                    </div>
-                    <div>
-                      <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                        <div className="h-full w-[68%] rounded-full bg-gradient-to-r from-brand-cyan to-brand-lime" />
-                      </div>
-                      <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                        {heroCopy.issues.map((issue) => (
-                          <div key={issue} className="flex gap-2 rounded-2xl bg-white/7 p-3 text-xs leading-5 text-white/72">
-                            <Target className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-cyan" />
-                            <span>{issue}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 grid gap-3 sm:grid-cols-3 lg:mt-6">
-              {diagnosticBadges.map((item) => (
-                <div key={item.label} className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/7 px-3 py-3 text-xs font-black uppercase tracking-[0.12em] text-white/70">
-                  <item.icon className="h-4 w-4 text-brand-cyan" />
-                  {item.label}
-                </div>
-              ))}
+            <div className="relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] backdrop-blur-xl lg:max-w-none">
+              <CaseWall images={portfolioImages} />
             </div>
           </motion.div>
         </div>
@@ -208,7 +147,7 @@ function CaseWall({ images }: { images: GalleryImage[] }) {
   const secondColumn = images.filter((_, index) => index % 2 === 1);
 
   return (
-    <div className="col-span-full grid h-[250px] gap-3 overflow-hidden rounded-[1.65rem] sm:h-[520px] sm:grid-cols-2">
+    <div className="grid h-[300px] gap-2 overflow-hidden rounded-[1.5rem] sm:h-[520px] sm:grid-cols-2">
       <CaseColumn images={firstColumn} duration={28} priority />
       <CaseColumn images={secondColumn.length ? secondColumn : firstColumn} duration={34} reverse className="hidden sm:block" />
     </div>
@@ -233,7 +172,7 @@ function CaseColumn({
   return (
     <div className={`relative h-full overflow-hidden ${className}`}>
       <motion.div
-        className="flex flex-col gap-3"
+        className="flex flex-col gap-2"
         animate={{ y: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
         transition={{ duration, ease: 'linear', repeat: Infinity }}
       >
@@ -253,23 +192,22 @@ function CaseColumn({
 function PortfolioTile({ image, ratioClass, priority = false }: { image?: GalleryImage; ratioClass: string; priority?: boolean }) {
   if (!image) {
     return (
-      <div className={`${ratioClass} flex items-center justify-center rounded-[1.45rem] bg-white/8 p-8 text-center text-sm font-bold text-white/50`}>
-        Portfolio namunasi
+      <div className={`${ratioClass} flex items-center justify-center rounded-xl bg-white/5 p-8 text-center text-sm font-medium text-white/40`}>
+        Portfolio
       </div>
     );
   }
 
   return (
-    <div className={`relative overflow-hidden rounded-[1.45rem] bg-white p-3 ring-1 ring-white/10 sm:rounded-[1.65rem] ${ratioClass}`}>
+    <div className={`relative overflow-hidden rounded-xl bg-white ring-1 ring-white/10 ${ratioClass}`}>
       <Image
         src={image.src}
-        alt={image.alt || 'Jon.Branding portfolio namunasi'}
+        alt={image.alt || 'Jon.Branding portfolio'}
         fill
         priority={priority}
         sizes="(max-width: 768px) 92vw, 48vw"
-        className="object-contain p-2 saturate-[0.96]"
+        className="object-contain p-2"
       />
-      <div className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-t from-slate-950/8 via-transparent to-white/10" />
     </div>
   );
 }

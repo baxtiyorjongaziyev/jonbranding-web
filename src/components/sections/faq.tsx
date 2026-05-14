@@ -6,16 +6,16 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import CtaBlock from './cta-block';
-import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
+import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const translations = dictionary;
-  
+
   const handleOpenModal = () => {
     const event = new CustomEvent('openContactModal');
     window.dispatchEvent(event);
   }
-  
+
   if (!translations || !translations.faqItems) return null;
 
   const objectionLabels =
@@ -30,35 +30,38 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   return (
     <BrandSection id="faq" tone="soft">
       <div className="container mx-auto px-4">
-        <SectionIntro eyebrow="Objections handled" title={translations.title} description={translations.subtitle} />
-        <div className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-3">
+        <SectionIntro eyebrow="FAQ" title={translations.title} description={translations.subtitle} />
+
+        <div className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-2">
           {objectionLabels.map((label) => (
-            <span key={label} className="brand-badge">
+            <span key={label} className="rounded-full border border-brand-line bg-white/80 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-blue shadow-sm">
               {label}
             </span>
           ))}
         </div>
-        <div className="max-w-3xl mx-auto mt-12">
-            <Accordion type="single" collapsible defaultValue="item-0" className="w-full space-y-4">
-                {translations.faqItems.map((item: any, index: number) => (
-                <BrandCard key={index} className="px-5">
+
+        <div className="mx-auto mt-12 max-w-3xl space-y-3">
+          <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
+            {translations.faqItems.map((item: any, index: number) => (
+              <div key={index} className="overflow-hidden rounded-2xl border border-brand-line bg-white/90 px-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md">
                 <AccordionItem value={`item-${index}`} className="border-none">
-                    <AccordionTrigger 
-                      className="text-left text-lg font-black text-brand-ink hover:no-underline"
-                      aria-label={lang === 'uz' ? `${item.question} savoliga javobni ko'rish` : lang === 'ru' ? `Посмотреть ответ на вопрос: ${item.question}` : `View answer for: ${item.question}`}
-                    >
+                  <AccordionTrigger
+                    className="py-5 text-left text-base font-bold text-brand-ink hover:no-underline sm:text-lg"
+                    aria-label={item.question}
+                  >
                     {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-brand-slate pt-2 text-base leading-7">
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-5 text-base leading-7 text-brand-slate">
                     {item.answer}
-                    </AccordionContent>
+                  </AccordionContent>
                 </AccordionItem>
-                </BrandCard>
-                ))}
-            </Accordion>
+              </div>
+            ))}
+          </Accordion>
         </div>
       </div>
-      <CtaBlock 
+
+      <CtaBlock
         title={translations.ctaTitle}
         description={translations.ctaDesc}
         buttonText={translations.ctaButton}
