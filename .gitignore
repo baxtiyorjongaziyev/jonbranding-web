@@ -76,3 +76,4 @@ DESIGN_AUDIT/
 cloud-backups/
 autodeploy.log
 autodeploy.pid
+.claude/settings.local.json
