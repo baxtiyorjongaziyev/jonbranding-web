@@ -112,11 +112,11 @@ const Hero: FC<HeroProps> = ({ onOpenContact, lang, dictionary, renderHeadline }
               <span className="min-w-0 text-balance">{heroCopy.preHeadline}</span>
             </div>
 
-            <h1 className="mx-auto max-w-[292px] text-balance text-[35px] font-black leading-[0.94] tracking-[-0.05em] text-white drop-shadow-md sm:drop-shadow-none sm:max-w-none sm:text-[72px] sm:tracking-[-0.075em] lg:mx-0 lg:text-[88px] xl:text-[104px]">
+            <h1 className="mx-auto max-w-[292px] text-balance text-[35px] font-black leading-[0.94] tracking-[-0.05em] text-white sm:max-w-none sm:text-[72px] sm:tracking-[-0.075em] lg:mx-0 lg:text-[88px] xl:text-[104px]">
               {renderHeadline(heroCopy.title, 'text-white')}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[292px] text-pretty text-base leading-8 text-slate-300 drop-shadow-sm sm:drop-shadow-none sm:max-w-2xl sm:text-xl lg:mx-0">
+            <p className="mx-auto mt-6 max-w-[292px] text-pretty text-base leading-8 text-slate-300 sm:max-w-2xl sm:text-xl lg:mx-0">
               {heroCopy.description}
             </p>
 

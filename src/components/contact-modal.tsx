@@ -431,25 +431,20 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                   <p className="text-gray-500 text-xs">{translations?.steps?.step4?.subtitle}</p>
                                 </div>
 
-                                <FormField control={form.control} name="fullName" render={({ field, fieldState }) => (
+                                <FormField control={form.control} name="fullName" render={({ field }) => (
                                   <FormItem className="space-y-1">
                                     <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.name?.label}</FormLabel>
                                     <FormControl>
                                       <div className="relative">
                                         <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-                                        <Input
-                                            placeholder={translations?.fields?.name?.placeholder}
-                                            className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
-                                            aria-invalid={fieldState.invalid ? "true" : "false"}
-                                            {...field}
-                                        />
+                                        <Input placeholder={translations?.fields?.name?.placeholder} className="pl-12 border-gray-200 rounded-xl h-12 bg-gray-50/50 focus:bg-white" {...field} />
                                       </div>
                                     </FormControl>
                                     <FormMessage />
                                   </FormItem>
                                 )} />
 
-                                <FormField control={form.control} name="phone" render={({ field, fieldState }) => (
+                                <FormField control={form.control} name="phone" render={({ field }) => (
                                   <FormItem className="space-y-1">
                                     <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.phone?.label}</FormLabel>
                                     <FormControl>
@@ -457,9 +452,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                         <PhoneCall className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                                         <Input 
                                           placeholder={translations?.fields?.phone?.placeholder} 
-                                          className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white font-mono ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
+                                          className="pl-12 border-gray-200 rounded-xl h-12 bg-gray-50/50 focus:bg-white font-mono"
                                           value={field.value}
-                                          aria-invalid={fieldState.invalid ? "true" : "false"}
                                           onChange={(e) => {
                                             const formatted = formatPhoneNumber(e.target.value);
                                             field.onChange(formatted);
