@@ -161,6 +161,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
         <button
           onClick={() => setIsOpen(true)}
           className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-all ring-4 ring-white/20"
+          aria-label="Open Oisha Intelligence"
         >
           <Sparkles className="w-8 h-8 animate-pulse" />
         </button>
@@ -186,7 +187,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
                     <p className="text-[10px] opacity-80 uppercase tracking-widest">{translations.subtitle}</p>
                   </div>
                 </div>
-                <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-white/10 rounded-full transition-colors">
+                <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-white/10 rounded-full transition-colors" aria-label="Close chat window">
                   <X className="w-5 h-5" />
                 </button>
               </CardHeader>
@@ -229,6 +230,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputValue.trim()}
                     className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                    aria-label="Send message"
                   >
                     <Send className="w-5 h-5" />
                   </button>
