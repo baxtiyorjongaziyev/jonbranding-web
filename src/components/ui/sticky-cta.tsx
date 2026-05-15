@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getDictionary } from '@/lib/dictionaries';
@@ -20,19 +20,15 @@ export default function StickyCTA({ lang }: { lang?: string }) {
     }
   }, [lang]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Show CTA only after scrolling down 400px
-      if (window.scrollY > 400) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    // Show CTA only after scrolling down 400px
+    if (latest > 400) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  });
 
   const handleOpenModal = () => {
     const contactEvent = new CustomEvent('openContactModal');

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 
 interface ScrollDepthTriggerProps {
   onTrigger: () => void;
@@ -23,26 +24,19 @@ export const ScrollDepthTrigger: React.FC<ScrollDepthTriggerProps> = ({
       return;
     }
 
-    const handleScroll = () => {
-      if (hasTriggered) return;
+  }, [sessionKey]);
 
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      
-      const scrollPercentage = (scrollTop + windowHeight) / documentHeight;
+  const { scrollYProgress } = useScroll();
 
-      if (scrollPercentage >= threshold) {
-        setHasTriggered(true);
-        sessionStorage.setItem(sessionKey, 'true');
-        onTrigger();
-        window.removeEventListener('scroll', handleScroll);
-      }
-    };
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (hasTriggered) return;
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [onTrigger, threshold, sessionKey, hasTriggered]);
+    if (latest >= threshold) {
+      setHasTriggered(true);
+      sessionStorage.setItem(sessionKey, 'true');
+      onTrigger();
+    }
+  });
 
   return null;
 };
