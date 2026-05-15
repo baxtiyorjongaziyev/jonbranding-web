@@ -50,8 +50,9 @@ const DiscountSelector: FC<DiscountSelectorProps> = ({
                                 )}
                                 <button
                                     onClick={() => onSelectOption(option.id)}
+                                    aria-pressed={selectedOption === option.id}
                                     className={cn(
-                                        "relative w-full rounded-full py-2 px-2 text-center text-xs font-semibold transition-colors duration-300",
+                                        "relative w-full rounded-full py-2 px-2 text-center text-xs font-semibold transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-black/20",
                                         selectedOption === option.id ? "text-white" : "text-gray-300 hover:text-white"
                                     )}
                                 >

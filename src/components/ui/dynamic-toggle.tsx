@@ -34,8 +34,9 @@ const DynamicToggle: FC<DynamicToggleProps> = ({
                         )}
                         <button
                             onClick={() => onSelect(option.value)}
+                            aria-pressed={selected === option.value}
                             className={cn(
-                                "relative w-full h-full rounded-full px-2 flex items-center justify-center text-center text-sm font-bold transition-colors duration-300 z-10 outline-none",
+                                "relative w-full h-full rounded-full px-2 flex items-center justify-center text-center text-sm font-bold transition-colors duration-300 z-10 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
                                 selected === option.value ? "text-white" : "text-slate-500 hover:text-primary"
                             )}
                         >
