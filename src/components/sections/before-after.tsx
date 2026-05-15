@@ -1,7 +1,7 @@
-
 'use client';
 
 import ImageComparisonSlider from '@/components/image-comparison-slider';
+import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 interface SanityComparison {
   brand: string;
@@ -53,39 +53,39 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
   if (!translations) return null;
 
   return (
-    <section className="py-24 bg-white overflow-hidden relative">
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] -z-10" />
-
+    <BrandSection tone="light" className="relative">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tight mb-6">
-            {translations.title}
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {translations.subtitle}
-          </p>
-        </div>
+        <SectionIntro
+          eyebrow="Proof"
+          title={translations.title}
+          description={translations.subtitle}
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2">
           {displayItems.map((item, index) => {
             if (typeof item.oldImg !== 'string' || typeof item.newImg !== 'string') return null;
 
             return (
               <div
                 key={index}
-                className="liquid-glass liquid-glass-hover rounded-[2.5rem] overflow-hidden"
+                className="group relative overflow-hidden rounded-3xl border border-brand-line bg-white shadow-[0_8px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(15,23,42,0.08)]"
               >
-                <ImageComparisonSlider
-                  beforeImage={{ src: item.oldImg, alt: `${item.brand} old`, 'data-ai-hint': item.oldHint || '', unoptimized: true }}
-                  afterImage={{ src: item.newImg, alt: `${item.brand} new`, 'data-ai-hint': item.newHint || '', unoptimized: true }}
-                  lang={lang}
-                />
+                <div className="p-1.5">
+                  <ImageComparisonSlider
+                    beforeImage={{ src: item.oldImg, alt: `${item.brand} old`, 'data-ai-hint': item.oldHint || '', unoptimized: true }}
+                    afterImage={{ src: item.newImg, alt: `${item.brand} new`, 'data-ai-hint': item.newHint || '', unoptimized: true }}
+                    lang={lang}
+                  />
+                </div>
+                <div className="px-5 pb-5 pt-3">
+                  <p className="text-sm font-black text-brand-ink">{item.brand}</p>
+                </div>
               </div>
             );
           })}
         </div>
       </div>
-    </section>
+    </BrandSection>
   );
 };
 
