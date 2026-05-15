@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { X, Gift, Download, CheckCircle2, Phone, ArrowRight, ShieldAlert, Building2, User, Wallet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -39,18 +39,15 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
     }
 
     const timer = setTimeout(() => setIsVisible(true), 15000);
-    const handleScroll = () => {
-      if (window.scrollY > document.documentElement.scrollHeight / 2 && !isVisible) {
-        setIsVisible(true);
-      }
-    };
+    return () => clearTimeout(timer);
+  }, [isDismissed]);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isVisible]);
+  const { scrollYProgress } = useScroll();
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (!isVisible && !isDismissed && latest > 0.5) {
+      setIsVisible(true);
+    }
+  });
 
   const handleClose = () => {
     setIsVisible(false);

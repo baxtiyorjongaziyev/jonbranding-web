@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Phone, MessageSquare, Send, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -26,19 +26,15 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
     ai: lang === 'ru' ? 'ИИ Помощник' : lang === 'en' ? 'AI Assistant' : lang === 'zh' ? 'AI助手' : 'AI Yordamchi'
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Show after scrolling 400px
-      if (window.scrollY > 400) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    // Show after scrolling 400px
+    if (latest > 400) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  });
 
   const handleOpenConsultation = () => {
     const event = new CustomEvent('openContactModal');
