@@ -16,6 +16,16 @@ export function rateLimit(ip: string, maxRequests: number, windowMs: number): bo
 }
 
 export function getClientIp(request: Request): string {
-    const forwarded = (request as any).headers?.get?.('x-forwarded-for');
+    const headers = (request as any).headers;
+    if (!headers || typeof headers.get !== 'function') return 'unknown';
+
+    // Prioritize headers injected by trusted proxies (e.g., Cloudflare) to prevent IP spoofing
+    const cfConnectingIp = headers.get('cf-connecting-ip');
+    if (cfConnectingIp) return cfConnectingIp.trim();
+
+    const xRealIp = headers.get('x-real-ip');
+    if (xRealIp) return xRealIp.trim();
+
+    const forwarded = headers.get('x-forwarded-for');
     return forwarded ? forwarded.split(',')[0].trim() : 'unknown';
 }
