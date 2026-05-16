@@ -21,7 +21,7 @@
         "services_and_prices_desc": "Build your package and get a price instantly.",
         "contact_by_phone": "Call",
         "contact_by_telegram": "Telegram",
-        "free_consultation": "Free Consultation",
+        "free_consultation": "Free Brand Audit",
         "open_menu": "Open Menu",
         "switch_lang": "Change Language",
         "lang_ru": "Russian",
@@ -166,8 +166,30 @@
             "I need a strong brand"
         ],
         "buttonHint": "Free. No obligations.",
-        "title": "Transforming unbranded businesses into **market leaders**",
-        "cta": "Free brand audit"
+        "title": "Your brand should build trust and **make buying easier**.",
+        "descriptionPlain": "In the free Brand Audit, we review your name, logo, packaging, website, and messaging through the eyes of a buyer. You leave knowing which change can improve trust first.",
+        "preHeadline": "Free Brand Audit",
+        "cta": "Get the free Brand Audit",
+        "ctaSecondary": "What is checked?",
+        "proofItems": [
+            "15-minute audit call",
+            "5 trust signals reviewed",
+            "Clear next-step list"
+        ],
+        "auditTitle": "What will the audit reveal?",
+        "auditSubtitle": "Not design opinions. Business priorities that affect trust and sales.",
+        "auditScore": "15m",
+        "auditScoreLabel": "Brand Audit",
+        "auditSignals": [
+            "What makes you look less premium",
+            "What message is unclear",
+            "What should be fixed first"
+        ],
+        "showcaseTags": [
+            "Trust",
+            "Premium feel",
+            "Sales"
+        ]
     },
     "results": {
         "badge": "CLIENT RESULTS",
@@ -188,128 +210,74 @@
         "detail": "Every project for us is more than just design; it is a tool for business growth."
     },
     "contactModal": {
-        "sidebarTitle": "Strategic Session",
-        "sidebarSubtitle": "Build a profitable branding system with our experts.",
-        "header": "Free Strategic Session",
-        "description": "Expert advice on transforming your business into a leader and building a branding system.",
+        "sidebarTitle": "Free Brand Audit",
+        "sidebarSubtitle": "In 15 minutes, we show where your brand loses buyer trust.",
+        "header": "Brand Audit",
+        "description": "You leave knowing which change can affect trust and sales first.",
         "steps": {
-            "step1": {
-                "title": "Your Role?",
-                "subtitle": "To determine your business level"
-            },
-            "step2": {
-                "title": "Goals & Barriers",
-                "subtitle": "What is stopping you right now?"
-            },
-            "step3": {
-                "title": "Session Investment",
-                "subtitle": "Select the allocated budget for the project"
-            },
             "step4": {
-                "title": "Contact",
-                "subtitle": "Where should we send the information?"
+                "title": "Book the audit",
+                "subtitle": "Leave your contact details so our strategist can reach you."
             }
         },
         "fields": {
-            "role": {
-                "label": "What is your primary area of responsibility in the company?",
-                "options": [
-                    {
-                        "v": "owner",
-                        "l": "Business Owner / CEO"
-                    },
-                    {
-                        "v": "marketing",
-                        "l": "Marketer"
-                    },
-                    {
-                        "v": "starter",
-                        "l": "Startuper"
-                    }
-                ]
-            },
-            "revenue": {
-                "label": "What is your company's average monthly revenue at this stage?",
-                "options": [
-                    "$0 - $5,000",
-                    "$5,000 - $20,000",
-                    "$20,000+",
-                    "500 млн - 1 млрд сум",
-                    "1 млрд+ сум"
-                ]
-            },
-            "ambition": {
-                "label": "At what scale do you want to see your business in the next 12 months?",
-                "placeholder": "Market leader, export..."
-            },
-            "pain": {
-                "label": "What do you believe is the single biggest obstacle currently holding you back from this goal?",
-                "options": [
-                    {
-                        "v": "trust",
-                        "l": "Low customer trust"
-                    },
-                    {
-                        "v": "design",
-                        "l": "Outdated design"
-                    },
-                    {
-                        "v": "sales",
-                        "l": "Stagnant sales"
-                    }
-                ]
-            },
-            "budget": {
-                "label": "How much investment are you ready to put into this project to achieve these goals?",
-                "options": [
-                    "$1,000 - $3,000",
-                    "$3,000 - $10,000",
-                    "$10,000 - $25,000",
-                    "$25,000+"
-                ]
-            },
             "name": {
                 "label": "Full name",
-                "placeholder": "John Doe..."
+                "placeholder": "John Doe"
             },
             "phone": {
                 "label": "Phone number",
                 "placeholder": "+..."
+            },
+            "telegram": {
+                "label": "Telegram / WhatsApp (optional)",
+                "placeholder": "@username"
             }
         },
         "buttons": {
-            "next": "CONTINUE",
-            "back": "BACK",
-            "submit": "BOOK STRATEGIC SESSION",
-            "close": "Close window"
+            "submit": "Book free audit",
+            "close": "Close window",
+            "back": "Back",
+            "next": "Next step"
         },
         "formErrors": {
-            "role": "Select",
-            "revenue": "Select",
-            "ambition": "Enter goal",
-            "pain": "Select problem",
-            "budget": "Select budget",
-            "fullName": "Enter name",
+            "fullName": "Enter your name",
             "phone": "Enter full phone number"
         },
         "errorToast": {
-            "title": "Error!",
-            "description": "An error occurred while sending the request. Please try again."
+            "title": "Error",
+            "description": "Something went wrong. Please try again."
         },
         "successStep": {
-            "title": "Great! We've started 🚀",
-            "description": "Your data has been successfully received. Our strategist will contact you soon to begin analyzing your project.",
-            "nextSteps": "What can you do before the call?",
-            "submit": "Subscribe to our Telegram channel",
-            "telegramButton": "Subscribe to our Telegram channel",
-            "telegramDesc": "Don't miss useful materials on branding and marketing."
+            "title": "Request received",
+            "description": "Our strategist will contact you soon and start the brand audit.",
+            "nextSteps": "Before the call",
+            "telegramButton": "Open Telegram channel",
+            "telegramDesc": "Useful branding materials."
         },
-        "trustBadge": "Ваши данные на 100% защищены и используются только Jon.Branding."
+        "trustBadge": "Your data is confidential and used only by Jon.Branding.",
+        "contactBadge": "15 minutes",
+        "quickContactLabel": "Quick contact",
+        "auditGivesLabel": "You get",
+        "auditOfferStack": [
+            "5 trust gaps",
+            "Clear service recommendation",
+            "No-pressure advice"
+        ],
+        "auditTimeLabel": "Format",
+        "auditFormat": [
+            "Phone or Telegram",
+            "15-minute diagnosis",
+            "Written next step"
+        ],
+        "objectionCopy": "Even if you are not ready to start, the audit gives you clarity.",
+        "riskCopy": "Leaving your phone is not a contract. We show the problem first.",
+        "footerCopyright": "Jon.Branding Agency"
     },
     "home": {
-        "cta1_title": "Your brand could look like this too.",
-        "cta1_desc": "Take your business to the next level with professional design. We help find the ideal solution for your business.",
-        "cta1_button": "For my business too"
+        "cta1_title": "Does your brand help buyers trust you? Let?s check.",
+        "cta1_desc": "The free Brand Audit shows what makes your brand feel cheap, unclear, or untrustworthy and what to fix first.",
+        "cta1_button": "Get the free Brand Audit"
     },
     "urgencyBlock": {
         "title": "BUILD THE FUTURE OF YOUR BRAND TODAY",
@@ -417,7 +385,27 @@
         "recommend_val": "90%"
     },
     "trustedBy": {
-        "title": "Companies That Trust Us"
+        "eyebrow": "Selected clients",
+        "title": "Businesses trust us with credibility, not decoration.",
+        "subtitle": "We help brands look more valuable, clearer, and easier to choose.",
+        "metrics": [
+            {
+                "value": "150+",
+                "label": "Projects"
+            },
+            {
+                "value": "9 yrs",
+                "label": "Experience"
+            },
+            {
+                "value": "30+",
+                "label": "Categories"
+            },
+            {
+                "value": "4 langs",
+                "label": "Markets"
+            }
+        ]
     },
     "whyUs": {
         "title": "Why Choose Us?",
@@ -462,122 +450,129 @@
         "solutionButton": "See the solution"
     },
     "beforeAfter": {
-        "title": "Before and After",
-        "subtitle": "See for yourself how the right branding can transform your business.",
-        "ctaTitle": "Is your brand ready for a change?",
-        "ctaDesc": "Let's create a plan to take it to the next level.",
-        "ctaButton": "Change my brand too"
+        "eyebrow": "Proof",
+        "title": "Branding proves value before the sales call.",
+        "subtitle": "The audit answers one practical question: does the buyer understand, trust, and have a reason to choose you?",
+        "ctaTitle": "Ready to clarify your brand?",
+        "ctaDesc": "We start with a brand audit and identify the change with the highest impact.",
+        "ctaButton": "Get the free Brand Audit",
+        "cta": "Get the free Brand Audit",
+        "caseLabel": "Before / After",
+        "proofCards": [
+            {
+                "value": "Real",
+                "label": "client work"
+            },
+            {
+                "value": "Audit",
+                "label": "diagnosis first"
+            }
+        ]
     },
     "testimonials": {
-        "title": "What Clients Say",
-        "subtitle": "Our greatest achievement is our satisfied clients.",
-        "textReviewsTitle": "Text Reviews",
-        "textReviewsSubtitle": "From our other esteemed clients"
+        "title": "Client trust",
+        "subtitle": "Portfolio can look nice. What matters is whether business owners feel the result.",
+        "textReviewsTitle": "Text reviews",
+        "textReviewsSubtitle": "From entrepreneurs we worked with"
     },
     "gallery": {
         "title": "Portfolio Examples",
         "subtitle": "See how our created brands stand out in their niche."
     },
     "founder": {
-        "title": "Founder: Bahtiyorjon Gaziyev",
-        "message": "Hi! I'm Bahtiyorjon, founder of Jon.Branding. I help business owners take their brands to the next level. My goal is not just beautiful design, but a working, strategy-based brand system. Let's awaken your brand's 'sleeping' potential.",
+        "title": "I build trust systems for business, not decoration.",
+        "message": "Hi, I am Bahtiyorjon, founder of Jon.Branding. We help business owners build brand systems through naming, strategy, identity, packaging, and brandbooks so buyers understand, remember, and choose them with confidence.",
         "points": [
             {
                 "icon": "Medal",
-                "text": "Over 50+ projects"
+                "text": "150+ brand and visual projects"
             },
             {
                 "icon": "Globe",
-                "text": "International experience"
+                "text": "Local market understanding with global standards"
             },
             {
                 "icon": "Zap",
-                "text": "Fast and effective communication"
+                "text": "A process built for correct decisions"
             },
             {
                 "icon": "Users",
-                "text": "Clear and transparent workflow"
+                "text": "Clear communication at every stage"
             }
         ],
-        "phoneButton": "Contact by phone",
-        "telegramButton": "Write on Telegram"
+        "phoneButton": "Call directly",
+        "telegramButton": "Write on Telegram",
+        "principles": [
+            "Strategy first",
+            "Business-language clarity",
+            "Result: trust and premium feel"
+        ]
     },
     "process": {
-        "title": "Our Process",
-        "subtitle": "In every project, we use a proven, transparent, and effective process.",
+        "title": "From free audit to a premium brand system.",
+        "subtitle": "The audit gives the first diagnosis. If we continue, the work becomes strategy, visual system, and rollout.",
         "phases": [
             {
                 "phase": "01",
-                "title": "Discovery",
-                "description": "Journey beginning and foundation laying.",
+                "title": "Brand Audit",
+                "description": "We review trust, premium feel, and clarity through a buyer?s eyes.",
                 "tasks": [
-                    "Briefing",
-                    "Problem identification",
-                    "Market & competitor analysis",
-                    "Audience needs",
-                    "Idea gathering"
+                    "First impression",
+                    "Trust gap",
+                    "Competitor mirror"
                 ]
             },
             {
                 "phase": "02",
                 "title": "Strategy",
-                "description": "Plotting the brand path.",
+                "description": "We define who you are for, why you are different, and why buyers should choose you.",
                 "tasks": [
-                    "Goal setting",
-                    "Brand positioning",
-                    "Brand platform",
-                    "Core principles",
-                    "Planning"
+                    "Positioning",
+                    "Audience",
+                    "Core message"
                 ]
             },
             {
                 "phase": "03",
-                "title": "Creative Design",
-                "description": "Shaping the visual look.",
+                "title": "Visual system",
+                "description": "We align name, logo, colors, typography, packaging, and website into one system.",
                 "tasks": [
-                    "Naming",
-                    "Logo design",
-                    "Visual concept",
-                    "Packaging design",
+                    "Logo",
+                    "Identity",
                     "Brandbook"
                 ]
             },
             {
                 "phase": "04",
-                "title": "Presentation",
-                "description": "Testing ideas on examples.",
+                "title": "Rollout",
+                "description": "We show the brand in real touchpoints: packaging, social, website, and sales materials.",
                 "tasks": [
-                    "Design presentation",
-                    "Edits based on feedback",
-                    "Final iteration",
-                    "Mockup demonstration"
+                    "Mockups",
+                    "Rollout",
+                    "Content direction"
                 ]
             },
             {
                 "phase": "05",
-                "title": "Implementation",
-                "description": "Bringing the brand to life.",
+                "title": "Usage control",
+                "description": "Your team receives rules and files to use the brand consistently.",
                 "tasks": [
-                    "Ready design files",
-                    "Brandbook handover",
-                    "Visual guides",
-                    "Print preparation"
-                ]
-            },
-            {
-                "phase": "06",
-                "title": "Growth",
-                "description": "Brand support and accompaniment.",
-                "tasks": [
-                    "Implementation instructions",
-                    "Ongoing support",
-                    "Next steps consultation"
+                    "Files",
+                    "Rules",
+                    "Support"
                 ]
             }
         ],
-        "ctaTitle": "Ready to discuss the project?",
-        "ctaDesc": "Let's start bringing your ideas to life.",
-        "ctaButton": "Discuss project"
+        "ctaTitle": "Start with a free Brand Audit.",
+        "ctaDesc": "We find what lowers trust and tell you the most important first step.",
+        "ctaButton": "Book the free audit",
+        "eyebrow": "After audit",
+        "proofItems": [
+            "Diagnosis",
+            "Strategy",
+            "Visual system",
+            "Implementation guide"
+        ]
     },
     "leadMagnet": {
         "title": "Scale Your Brand",
@@ -699,7 +694,9 @@
     },
     "mobileCtaBar": {
         "final_price": "Final price",
-        "get_offer": "Send request"
+        "get_offer": "Get audit",
+        "cta": "Get the free Brand Audit",
+        "hint": "We check the trust signals in your brand"
     },
     "blog": {
         "title": "Blog",
@@ -1263,5 +1260,53 @@
             "description": "Your material is ready for download. Our team may contact you soon.",
             "downloadCta": "Download Checklist (PDF)"
         }
+    },
+    "auditOffer": {
+        "eyebrow": "Inside the free audit",
+        "title": "Is your brand helping sales or slowing them down?",
+        "description": "Before selling design, we show where your brand loses trust in the buyer?s eyes. You leave knowing what you need now and what can wait.",
+        "cta": "Book the free audit",
+        "promise": "No pressure. We show the problem and opportunity first.",
+        "outcomes": [
+            {
+                "value": "15m",
+                "label": "audit call"
+            },
+            {
+                "value": "5",
+                "label": "trust signals"
+            },
+            {
+                "value": "1",
+                "label": "priority plan"
+            },
+            {
+                "value": "Free",
+                "label": "initial audit"
+            }
+        ],
+        "items": [
+            {
+                "title": "First-impression diagnosis",
+                "desc": "We review whether your site, logo, packaging, or social presence feels premium and trustworthy."
+            },
+            {
+                "title": "Trust-gap map",
+                "desc": "We name the weak points that slow buyer confidence."
+            },
+            {
+                "title": "Competitor position",
+                "desc": "We show who looks stronger and where your brand can win visually."
+            },
+            {
+                "title": "Next steps",
+                "desc": "We rank whether strategy, naming, identity, packaging, or website should come first."
+            }
+        ],
+        "proof": [
+            "No obligation",
+            "Business language",
+            "Sales-focused plan"
+        ]
     }
 }

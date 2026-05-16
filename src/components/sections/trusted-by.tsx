@@ -1,86 +1,75 @@
-
 'use client';
 
 import React from 'react';
-import { type Brand } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import Image from 'next/image';
 import { staticBrands } from '@/lib/static-data';
-import { BrandSection, SectionIntro } from '@/components/ui/design-system';
+import { BrandSection } from '@/components/ui/design-system';
 
-const Marquee = ({ brands, direction = 'forward' }: { brands: Brand[], direction?: 'forward' | 'backward' }) => {
-    if (!brands || brands.length === 0) return null;
-
-    return (
-        <div className="flex w-full overflow-hidden">
-            <div className="flex-grow flex w-full overflow-hidden select-none">
-                <ul className={cn(
-                    "flex min-w-full shrink-0 items-center justify-around",
-                    direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
-                )}>
-                    {brands.map((brand, index) => (
-                        <li key={index} id={brand.name === 'Savod' ? 'savod-logo-li' : undefined} className="flex-shrink-0 h-20 w-44 flex items-center justify-center mx-3">
-                            <div className="flex items-center justify-center p-4 h-full w-full grayscale hover:grayscale-0 transition-all duration-300">
-                                {brand.logo ? (
-                                    <img
-                                        src={brand.logo}
-                                        alt={`${brand.name} logo`}
-                                        loading="lazy"
-                                        className="object-contain max-w-full max-h-full transition-all duration-300 hover:scale-105"
-                                    />
-                                ) : (
-                                    <p className="font-semibold text-gray-500 text-base text-center whitespace-nowrap">{brand.name}</p>
-                                )}
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-                <ul className={cn(
-                    "flex min-w-full shrink-0 items-center justify-around",
-                    direction === 'forward' ? 'animate-marquee-forward' : 'animate-marquee-backward'
-                )} aria-hidden="true">
-                    {brands.map((brand, index) => (
-                        <li key={`dup-${index}`} className="flex-shrink-0 h-20 w-44 flex items-center justify-center mx-3">
-                            <div className="flex items-center justify-center p-4 h-full w-full grayscale">
-                                {brand.logo ? (
-                                    <img
-                                        src={brand.logo}
-                                        alt={`${brand.name} logo`}
-                                        loading="lazy"
-                                        className="object-contain max-w-full max-h-full"
-                                    />
-                                ) : (
-                                    <p className="font-semibold text-gray-500 text-base text-center">{brand.name}</p>
-                                )}
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
+type TrustedByDictionary = {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  metrics?: Array<{ value: string; label: string }>;
 };
 
-const TrustedBy: React.FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) => {
-    const brands = staticBrands.filter(b => !b.hiddenInHero);
-    const numBrands = brands.length;
-    const third = Math.ceil(numBrands / 3);
-    const brandsTopRow = brands.slice(0, third);
-    const brandsMiddleRow = brands.slice(third, third * 2);
-    const brandsBottomRow = brands.slice(third * 2);
+const defaultMetrics = [
+  { value: '150+', label: 'Loyihalar' },
+  { value: '9 yil', label: 'Tajriba' },
+  { value: '30+', label: 'Soha' },
+  { value: '4 til', label: 'Bozor tili' },
+];
 
-    const title = dictionary?.title;
-    if (!title) return null;
+const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = ({ dictionary }) => {
+  const brands = staticBrands.filter((brand) => !brand.hiddenInHero).slice(0, 18);
+  const metrics = dictionary?.metrics?.length ? dictionary.metrics : defaultMetrics;
+
+  if (!dictionary?.title) return null;
 
   return (
-    <BrandSection tone="light" aria-labelledby="trusted-by-title">
+    <BrandSection tone="light" className="border-y border-brand-line/80 bg-[#fbfaf7] py-16 sm:py-20" aria-labelledby="trusted-by-title">
       <div className="container mx-auto px-4">
-        <SectionIntro eyebrow="Proof wall" title={<span id="trusted-by-title">{title}</span>} />
-      </div>
-       <div className="mt-10 flex flex-col gap-4">
-            <Marquee brands={brandsTopRow} direction="forward" />
-            <Marquee brands={brandsMiddleRow} direction="backward" />
-            <Marquee brands={brandsBottomRow} direction="forward" />
+        <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+          <div>
+            {dictionary.eyebrow && (
+              <div className="mb-4 inline-flex rounded-full border border-brand-line bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-blue shadow-sm">
+                {dictionary.eyebrow}
+              </div>
+            )}
+            <h2 id="trusted-by-title" className="max-w-xl text-balance text-3xl font-black tracking-tight text-brand-ink sm:text-5xl">
+              {dictionary.title}
+            </h2>
+            {dictionary.subtitle && <p className="mt-5 max-w-xl text-base leading-8 text-brand-slate sm:text-lg">{dictionary.subtitle}</p>}
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {metrics.map((metric) => (
+              <div key={metric.label} className="rounded-[8px] border border-brand-line bg-white px-4 py-5 shadow-[0_20px_50px_rgba(15,23,42,0.04)]">
+                <div className="text-2xl font-black tracking-tight text-brand-ink sm:text-3xl">{metric.value}</div>
+                <div className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-brand-slate">{metric.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
+
+        <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[8px] border border-brand-line bg-brand-line sm:grid-cols-3 lg:grid-cols-6">
+          {brands.map((brand) => (
+            <div key={brand.name} className="flex h-24 items-center justify-center bg-white px-5 py-4 transition-colors duration-200 hover:bg-brand-mist/70">
+              {brand.logo ? (
+                <Image
+                  src={brand.logo}
+                  alt={`${brand.name} logo`}
+                  width={180}
+                  height={72}
+                  loading="lazy"
+                  className="max-h-12 max-w-full object-contain grayscale transition-all duration-200 hover:grayscale-0"
+                />
+              ) : (
+                <span className="text-center text-sm font-black text-brand-slate">{brand.name}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
     </BrandSection>
   );
 };

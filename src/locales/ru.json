@@ -21,7 +21,7 @@
         "services_and_prices_desc": "Соберите свой пакет услуг и узнайте цену прямо сейчас.",
         "contact_by_phone": "Звонок",
         "contact_by_telegram": "Telegram",
-        "free_consultation": "Бесплатная консультация",
+        "free_consultation": "Brand Audit",
         "open_menu": "Открыть меню",
         "switch_lang": "Сменить язык",
         "lang_ru": "Русский",
@@ -152,22 +152,44 @@
     },
     "hero": {
         "headlines": [
-            "Ваш брендинг |не продает?| Мы это исправим.",
-            "Выделитесь |на фоне конкурентов|.",
-            "Сделайте ваш бренд не просто \"красивым\", а |прибыльным|.",
-            "Пусть клиенты |влюбятся в вас|. Снова и снова.",
-            "От малого бизнеса до |сильного бренда|. За один шаг."
+            "Your branding |not selling?| We'll fix it.",
+            "Stand out |from the competition|.",
+            "Make your brand |profitable|, not just 'pretty'.",
+            "Make customers |fall in love with you|. Again and again.",
+            "From small business |to a strong brand|. In one step."
         ],
-        "description": "Ваши конкуренты выглядят профессионально, а вы все еще со старым логотипом? Клиенты выбирают их раньше вас — потому что их бренд <span class='font-bold text-foreground'>внушает доверие</span>.",
+        "description": "We don’t just draw logos. As a leading branding agency in Tashkent, we build a <span class='font-bold text-foreground font-black'>result-oriented strategy</span> for your business. Naming and professional logo design.",
         "buttonTexts": [
-            "Проанализировать мой бренд",
-            "Помогите увеличить продажи",
-            "Бесплатный Стратегический Аудит",
-            "Мне нужен сильный бренд"
+            "Analyze my brand",
+            "Help me increase sales",
+            "Free Strategic Audit",
+            "I need a strong brand"
         ],
-        "buttonHint": "Бесплатно. Без обязательств.",
-        "title": "Увеличьте продажи в **2-3 раза** с помощью сильного брендинга — за 30 дней",
-        "cta": "Получить Бесплатный Стратегический Аудит"
+        "buttonHint": "Free. No obligations.",
+        "title": "Your brand should build trust and **make buying easier**.",
+        "descriptionPlain": "In the free Brand Audit, we review your name, logo, packaging, website, and messaging through the eyes of a buyer. You leave knowing which change can improve trust first.",
+        "preHeadline": "Free Brand Audit",
+        "cta": "Get the free Brand Audit",
+        "ctaSecondary": "What is checked?",
+        "proofItems": [
+            "15-minute audit call",
+            "5 trust signals reviewed",
+            "Clear next-step list"
+        ],
+        "auditTitle": "What will the audit reveal?",
+        "auditSubtitle": "Not design opinions. Business priorities that affect trust and sales.",
+        "auditScore": "15m",
+        "auditScoreLabel": "Brand Audit",
+        "auditSignals": [
+            "What makes you look less premium",
+            "What message is unclear",
+            "What should be fixed first"
+        ],
+        "showcaseTags": [
+            "Trust",
+            "Premium feel",
+            "Sales"
+        ]
     },
     "results": {
         "badge": "РЕЗУЛЬТАТ КЛИЕНТА",
@@ -188,127 +210,74 @@
         "detail": "Каждый проект для нас — это не просто дизайн, а инструмент для роста бизнеса."
     },
     "contactModal": {
-        "sidebarTitle": "Стратегическая сессия",
-        "sidebarSubtitle": "Постройте прибыльную систему брендинга с нашими экспертами.",
-        "header": "Стратегическая сессия",
-        "description": "Разработка стратегии проекта и построение системы брендинга.",
+        "sidebarTitle": "Free Brand Audit",
+        "sidebarSubtitle": "In 15 minutes, we show where your brand loses buyer trust.",
+        "header": "Brand Audit",
+        "description": "You leave knowing which change can affect trust and sales first.",
         "steps": {
-            "step1": {
-                "title": "Анализ",
-                "subtitle": "Нам нужно понять состояние вашего проекта, чтобы принести максимальную пользу."
-            },
-            "step2": {
-                "title": "Цели",
-                "subtitle": "Определяем основные препятствия для достижения результата."
-            },
-            "step3": {
-                "title": "Инвестиции",
-                "subtitle": "Выберите уровень бюджета, который соответствует вашим целям."
-            },
             "step4": {
-                "title": "Контакт",
-                "subtitle": "Оставьте свои данные, чтобы наш стратег мог связаться с вами."
+                "title": "Book the audit",
+                "subtitle": "Leave your contact details so our strategist can reach you."
             }
         },
         "fields": {
-            "role": {
-                "label": "Ваша роль",
-                "options": [
-                    {
-                        "v": "owner",
-                        "l": "Владелец бизнеса"
-                    },
-                    {
-                        "v": "marketing",
-                        "l": "Маркетинг-директор"
-                    },
-                    {
-                        "v": "startup",
-                        "l": "Основатель стартапа"
-                    }
-                ]
-            },
-            "revenue": {
-                "label": "Годовой оборот (примерно)",
-                "options": [
-                    "Еще не запущен",
-                    "До 100 млн сум",
-                    "100 - 500 млн сум",
-                    "500 млн - 1 млрд сум",
-                    "1 млрд+ сум"
-                ]
-            },
-            "ambition": {
-                "label": "Ваша главная цель на ближайшие 12 месяцев?",
-                "placeholder": "Например: Стать лидером рынка и увеличить продажи в 2 раза..."
-            },
-            "pain": {
-                "label": "Самая большая проблема сейчас?",
-                "options": [
-                    {
-                        "v": "unrecognized",
-                        "l": "Узнаваемость на рынке (brand awareness)"
-                    },
-                    {
-                        "v": "low_conversion",
-                        "l": "Низкая конверсия в продажи"
-                    },
-                    {
-                        "v": "chaos",
-                        "l": "Хаос в маркетинге и брендинге"
-                    }
-                ]
-            },
-            "budget": {
-                "label": "Инвестиции, выделенные на проект?",
-                "options": [
-                    "$1,000 - $3,000",
-                    "$3,000 - $7,000",
-                    "$7,000 - $15,000",
-                    "$15,000+"
-                ]
-            },
             "name": {
-                "label": "Ваше имя",
-                "placeholder": "Азиз Абдухакимов"
+                "label": "Full name",
+                "placeholder": "John Doe"
             },
             "phone": {
-                "label": "Ваш номер телефона",
-                "placeholder": "+998 (__) ___-__-__"
+                "label": "Phone number",
+                "placeholder": "+..."
+            },
+            "telegram": {
+                "label": "Telegram / WhatsApp (optional)",
+                "placeholder": "@username"
             }
         },
         "buttons": {
-            "next": "Следующий шаг",
-            "back": "Назад",
-            "submit": "Получить стратегию",
-            "close": "Закрыть окно"
+            "submit": "Book free audit",
+            "close": "Close window",
+            "back": "Back",
+            "next": "Next step"
         },
         "formErrors": {
-            "role": "Выберите",
-            "revenue": "Выберите",
-            "ambition": "Введите цель",
-            "pain": "Выберите проблему",
-            "budget": "Выберите бюджет",
-            "fullName": "Введите имя",
-            "phone": "Введите полный номер телефона"
+            "fullName": "Enter your name",
+            "phone": "Enter full phone number"
         },
         "errorToast": {
-            "title": "Ошибка!",
-            "description": "Произошла ошибка при отправке запроса. Пожалуйста, попробуйте снова."
+            "title": "Error",
+            "description": "Something went wrong. Please try again."
         },
         "successStep": {
-            "title": "Отлично! Мы начали 🚀",
-            "description": "Ваши данные успешно приняты. Скоро наш стратег свяжется с вами, и мы приступим к анализу вашего проекта.",
-            "nextSteps": "Что можно сделать до созвона?",
-            "telegramButton": "Подписаться на наш Telegram канал",
-            "telegramDesc": "Не пропустите полезные материалы по брендингу и маркетингу."
+            "title": "Request received",
+            "description": "Our strategist will contact you soon and start the brand audit.",
+            "nextSteps": "Before the call",
+            "telegramButton": "Open Telegram channel",
+            "telegramDesc": "Useful branding materials."
         },
-        "trustBadge": "Ваши данные на 100% защищены и используются только Jon.Branding."
+        "trustBadge": "Your data is confidential and used only by Jon.Branding.",
+        "contactBadge": "15 minutes",
+        "quickContactLabel": "Quick contact",
+        "auditGivesLabel": "You get",
+        "auditOfferStack": [
+            "5 trust gaps",
+            "Clear service recommendation",
+            "No-pressure advice"
+        ],
+        "auditTimeLabel": "Format",
+        "auditFormat": [
+            "Phone or Telegram",
+            "15-minute diagnosis",
+            "Written next step"
+        ],
+        "objectionCopy": "Even if you are not ready to start, the audit gives you clarity.",
+        "riskCopy": "Leaving your phone is not a contract. We show the problem first.",
+        "footerCopyright": "Jon.Branding Agency"
     },
     "home": {
-        "cta1_title": "Ваш бренд может выглядеть так же.",
-        "cta1_desc": "Выведите свой бизнес на новый уровень с помощью профессионального дизайна. Мы поможем найти идеальное решение для вашего бизнеса.",
-        "cta1_button": "И для моего бизнеса тоже"
+        "cta1_title": "Does your brand help buyers trust you? Let?s check.",
+        "cta1_desc": "The free Brand Audit shows what makes your brand feel cheap, unclear, or untrustworthy and what to fix first.",
+        "cta1_button": "Get the free Brand Audit"
     },
     "urgencyBlock": {
         "title": "🔥 ПРЕЖДЕ ЧЕМ ВЫ ЗАКРОЕТЕ ЭТУ СТРАНИЦУ...",
@@ -416,7 +385,27 @@
         "recommend_val": "90%"
     },
     "trustedBy": {
-        "title": "Компании, которые нам доверяют"
+        "eyebrow": "Selected clients",
+        "title": "Businesses trust us with credibility, not decoration.",
+        "subtitle": "We help brands look more valuable, clearer, and easier to choose.",
+        "metrics": [
+            {
+                "value": "150+",
+                "label": "Projects"
+            },
+            {
+                "value": "9 yrs",
+                "label": "Experience"
+            },
+            {
+                "value": "30+",
+                "label": "Categories"
+            },
+            {
+                "value": "4 langs",
+                "label": "Markets"
+            }
+        ]
     },
     "whyUs": {
         "title": "Почему именно мы?",
@@ -461,122 +450,129 @@
         "solutionButton": "Увидеть решение всех проблем"
     },
     "beforeAfter": {
-        "title": "До и После",
-        "subtitle": "Убедитесь сами, как правильный брендинг может преобразить ваш бизнес.",
-        "ctaTitle": "Ваш бренд тоже готов к переменам?",
-        "ctaDesc": "Давайте проанализируем ваш бренд и составим план по его выводу на новый уровень.",
-        "ctaButton": "Измените и мой бренд тоже"
+        "eyebrow": "Proof",
+        "title": "Branding proves value before the sales call.",
+        "subtitle": "The audit answers one practical question: does the buyer understand, trust, and have a reason to choose you?",
+        "ctaTitle": "Ready to clarify your brand?",
+        "ctaDesc": "We start with a brand audit and identify the change with the highest impact.",
+        "ctaButton": "Get the free Brand Audit",
+        "cta": "Get the free Brand Audit",
+        "caseLabel": "Before / After",
+        "proofCards": [
+            {
+                "value": "Real",
+                "label": "client work"
+            },
+            {
+                "value": "Audit",
+                "label": "diagnosis first"
+            }
+        ]
     },
     "testimonials": {
-        "title": "Что о нас говорят клиенты",
-        "subtitle": "Наше самое большое достижение — это наши довольные клиенты.",
-        "textReviewsTitle": "Текстовые отзывы",
-        "textReviewsSubtitle": "От других наших уважаемых клиентов"
+        "title": "Client trust",
+        "subtitle": "Portfolio can look nice. What matters is whether business owners feel the result.",
+        "textReviewsTitle": "Text reviews",
+        "textReviewsSubtitle": "From entrepreneurs we worked with"
     },
     "gallery": {
         "title": "Примеры наших работ",
         "subtitle": "Посмотрите, как созданные нами бренды выделяются в своей нише."
     },
     "founder": {
-        "title": "Основатель: Бахтиёржон Газиев",
-        "message": "Привет! Я Бахтиёржон, основатель Jon.Branding. Я помогаю владельцам бизнеса строить не просто логотипы, а <span class='text-primary font-bold'>мощные бренд-экосистемы</span>, которые служат годами. Наш подход — объединение визуальной эстетики со стратегическим анализом и создание цепочки роста для каждого клиента.",
+        "title": "I build trust systems for business, not decoration.",
+        "message": "Hi, I am Bahtiyorjon, founder of Jon.Branding. We help business owners build brand systems through naming, strategy, identity, packaging, and brandbooks so buyers understand, remember, and choose them with confidence.",
         "points": [
             {
                 "icon": "Medal",
-                "text": "Более 50+ проектов"
+                "text": "150+ brand and visual projects"
             },
             {
                 "icon": "Globe",
-                "text": "Международный опыт"
+                "text": "Local market understanding with global standards"
             },
             {
                 "icon": "Zap",
-                "text": "Быстрая и эффективная связь"
+                "text": "A process built for correct decisions"
             },
             {
                 "icon": "Users",
-                "text": "Четкий и прозрачный рабочий процесс"
+                "text": "Clear communication at every stage"
             }
         ],
-        "phoneButton": "Связаться по телефону",
-        "telegramButton": "Написать в Telegram"
+        "phoneButton": "Call directly",
+        "telegramButton": "Write on Telegram",
+        "principles": [
+            "Strategy first",
+            "Business-language clarity",
+            "Result: trust and premium feel"
+        ]
     },
     "process": {
-        "title": "Наш рабочий процесс",
-        "subtitle": "В каждом проекте мы используем проверенный, прозрачный и эффективный процесс.",
+        "title": "From free audit to a premium brand system.",
+        "subtitle": "The audit gives the first diagnosis. If we continue, the work becomes strategy, visual system, and rollout.",
         "phases": [
             {
                 "phase": "01",
-                "title": "Discovery (Исследование)",
-                "description": "Начало путешествия и закладка фундамента.",
+                "title": "Brand Audit",
+                "description": "We review trust, premium feel, and clarity through a buyer?s eyes.",
                 "tasks": [
-                    "Брифинг",
-                    "Выявление бизнес-проблем",
-                    "Анализ рынка и конкурентов",
-                    "Потребности аудитории",
-                    "Сбор идей"
+                    "First impression",
+                    "Trust gap",
+                    "Competitor mirror"
                 ]
             },
             {
                 "phase": "02",
-                "title": "Strategy (Стратегия)",
-                "description": "Прокладывание пути бренда.",
+                "title": "Strategy",
+                "description": "We define who you are for, why you are different, and why buyers should choose you.",
                 "tasks": [
-                    "Постановка целей",
-                    "Позиционирование бренда",
-                    "Платформа бренда",
-                    "Основные принципы",
-                    "Планирование"
+                    "Positioning",
+                    "Audience",
+                    "Core message"
                 ]
             },
             {
                 "phase": "03",
-                "title": "Creative Design (Креатив)",
-                "description": "Формирование визуального облика.",
+                "title": "Visual system",
+                "description": "We align name, logo, colors, typography, packaging, and website into one system.",
                 "tasks": [
-                    "Нейминг",
-                    "Дизайн логотипа",
-                    "Визуальная концепция",
-                    "Дизайн упаковки",
-                    "Брендбук"
+                    "Logo",
+                    "Identity",
+                    "Brandbook"
                 ]
             },
             {
                 "phase": "04",
-                "title": "Presentation (Презентация)",
-                "description": "Тестирование идей на примерах.",
+                "title": "Rollout",
+                "description": "We show the brand in real touchpoints: packaging, social, website, and sales materials.",
                 "tasks": [
-                    "Презентация дизайна",
-                    "Правки на основе отзывов",
-                    "Финальная итерация",
-                    "Демонстрация мокапов"
+                    "Mockups",
+                    "Rollout",
+                    "Content direction"
                 ]
             },
             {
                 "phase": "05",
-                "title": "Implementation (Внедрение)",
-                "description": "Воплощение бренда в жизнь.",
+                "title": "Usage control",
+                "description": "Your team receives rules and files to use the brand consistently.",
                 "tasks": [
-                    "Готовые файлы дизайна",
-                    "Передача брендбука",
-                    "Визуальные руководства",
-                    "Подготовка к печати"
-                ]
-            },
-            {
-                "phase": "06",
-                "title": "Growth (Развитие)",
-                "description": "Поддержка и сопровождение бренда.",
-                "tasks": [
-                    "Инструкции по внедрению",
-                    "Постоянная поддержка",
-                    "Консультации по следующим шагам"
+                    "Files",
+                    "Rules",
+                    "Support"
                 ]
             }
         ],
-        "ctaTitle": "Готовы обсудить ваш проект?",
-        "ctaDesc": "Давайте начнем воплощать ваши идеи в жизнь.",
-        "ctaButton": "Обсудить проект"
+        "ctaTitle": "Start with a free Brand Audit.",
+        "ctaDesc": "We find what lowers trust and tell you the most important first step.",
+        "ctaButton": "Book the free audit",
+        "eyebrow": "After audit",
+        "proofItems": [
+            "Diagnosis",
+            "Strategy",
+            "Visual system",
+            "Implementation guide"
+        ]
     },
     "leadMagnet": {
         "title": "Выведите свой бренд на новый уровень",
@@ -697,8 +693,10 @@
         "ctaButton": "Я получил все ответы, готов начать!"
     },
     "mobileCtaBar": {
-        "final_price": "Итоговая цена",
-        "get_offer": "Оставить заявку"
+        "final_price": "Final price",
+        "get_offer": "Get audit",
+        "cta": "Get the free Brand Audit",
+        "hint": "We check the trust signals in your brand"
     },
     "blog": {
         "title": "Наш Блог",
@@ -1262,5 +1260,53 @@
             "description": "Ваш материал готов к скачиванию. Наша команда может связаться с вами в ближайшее время.",
             "downloadCta": "Скачать Чек-лист (PDF)"
         }
+    },
+    "auditOffer": {
+        "eyebrow": "Inside the free audit",
+        "title": "Is your brand helping sales or slowing them down?",
+        "description": "Before selling design, we show where your brand loses trust in the buyer?s eyes. You leave knowing what you need now and what can wait.",
+        "cta": "Book the free audit",
+        "promise": "No pressure. We show the problem and opportunity first.",
+        "outcomes": [
+            {
+                "value": "15m",
+                "label": "audit call"
+            },
+            {
+                "value": "5",
+                "label": "trust signals"
+            },
+            {
+                "value": "1",
+                "label": "priority plan"
+            },
+            {
+                "value": "Free",
+                "label": "initial audit"
+            }
+        ],
+        "items": [
+            {
+                "title": "First-impression diagnosis",
+                "desc": "We review whether your site, logo, packaging, or social presence feels premium and trustworthy."
+            },
+            {
+                "title": "Trust-gap map",
+                "desc": "We name the weak points that slow buyer confidence."
+            },
+            {
+                "title": "Competitor position",
+                "desc": "We show who looks stronger and where your brand can win visually."
+            },
+            {
+                "title": "Next steps",
+                "desc": "We rank whether strategy, naming, identity, packaging, or website should come first."
+            }
+        ],
+        "proof": [
+            "No obligation",
+            "Business language",
+            "Sales-focused plan"
+        ]
     }
 }

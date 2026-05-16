@@ -466,16 +466,6 @@
   }
 }
 
-/* Optimization for rendering */
-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 500px;
-}
-
-section:first-of-type {
-  content-visibility: visible;
-}
-
 /* ── Urgency Banner Marquee ── */
 @keyframes marquee {
   0%   { transform: translateX(0); }

@@ -21,7 +21,7 @@
         "services_and_prices_desc": "O'z paketingizni yig'ing va narxni darhol biling.",
         "contact_by_phone": "Qo'ng'iroq",
         "contact_by_telegram": "Telegram",
-        "free_consultation": "Strategik Tahlil Olish",
+        "free_consultation": "Bepul Brand Audit",
         "open_menu": "Menyuni ochish",
         "switch_lang": "Tilni o'zgartirish",
         "lang_ru": "Русский",
@@ -166,8 +166,30 @@
             "Menga kuchli brend kerak"
         ],
         "buttonHint": "Bepul Brand Audit  ·  Ishonch diagnostikasi  ·  Majburiyatsiz tavsiya",
-        "title": "Brendingiz mijoz ko'zida **arzon ko'rinmasin**.",
-        "cta": "Bepul Brand Audit olish"
+        "title": "Brendingiz mijozga ishonch beradi. **Sotuvni yengillashtiradi.**",
+        "descriptionPlain": "Bepul Brand Auditda nom, logo, qadoq, sayt va kommunikatsiyangiz xaridor ko'zida qanchalik ishonchli ko'rinishini tekshiramiz. Yakunda qaysi o'zgarish sotuvga eng tez ta'sir qilishini bilasiz.",
+        "preHeadline": "Bepul Brand Audit",
+        "cta": "Bepul Brand Audit olish",
+        "ctaSecondary": "Nima tekshiriladi?",
+        "proofItems": [
+            "15 daqiqalik audit qo'ng'irog'i",
+            "5 ta ishonch signali bo'yicha diagnostika",
+            "Aniq keyingi qadamlar ro'yxati"
+        ],
+        "auditTitle": "Audit natijasi qanday ko'rinadi?",
+        "auditSubtitle": "Sizga chiroyli fikr emas, sotuvga ta'sir qiladigan ustuvorliklar kerak.",
+        "auditScore": "15m",
+        "auditScoreLabel": "Brand Audit",
+        "auditSignals": [
+            "Qaysi detal arzon ko'rsatmoqda",
+            "Qaysi xabar mijozga noaniq",
+            "Qaysi tuzatish birinchi bo'lishi kerak"
+        ],
+        "showcaseTags": [
+            "Ishonch",
+            "Premiumlik",
+            "Sotuv"
+        ]
     },
     "results": {
         "badge": "BOZORDA QILINGAN NATIJA",
@@ -190,86 +212,17 @@
         "detail": "Har bir loyiha — bu sizning biznesingiz uchun yangi daromad darajasi."
     },
     "contactModal": {
-        "sidebarTitle": "Strategik suhbat",
-        "sidebarSubtitle": "Ekspertlarimiz bilan daromadli brending tizimini quring.",
-        "header": "Strategik seans",
-        "description": "Loyiha strategiyasini ishlab chiqish va brending tizimini qurish.",
+        "sidebarTitle": "Bepul Brand Audit",
+        "sidebarSubtitle": "15 daqiqada brendingiz mijoz ko'zida qayerda ishonch yo'qotayotganini ko'rsatamiz.",
+        "header": "Brand Audit",
+        "description": "Auditdan keyin qaysi o'zgarish sotuvga eng tez ta'sir qilishini bilasiz.",
         "steps": {
-            "step1": {
-                "title": "Tanishtiruv",
-                "subtitle": "Sizga maksimal foyda berishimiz uchun loyihangiz holatini tushunishimiz kerak."
-            },
-            "step2": {
-                "title": "Maqsadlar",
-                "subtitle": "Natijaga erishish uchun asosiy to'siqlarni aniqlaymiz."
-            },
-            "step3": {
-                "title": "Investitsiya",
-                "subtitle": "Sizning maqsadlaringizga mos keladigan byudjet darajasini tanlang."
-            },
             "step4": {
-                "title": "Aloqa",
-                "subtitle": "Strategimiz siz bilan bog'lanishi uchun ma'lumotlaringizni qoldiring."
+                "title": "Auditga yozilish",
+                "subtitle": "Strategimiz bog'lanishi uchun aloqa ma'lumotlaringizni qoldiring."
             }
         },
         "fields": {
-            "role": {
-                "label": "Sizning rolingiz",
-                "options": [
-                    {
-                        "v": "owner",
-                        "l": "Biznes egasi"
-                    },
-                    {
-                        "v": "marketing",
-                        "l": "Marketing direktori"
-                    },
-                    {
-                        "v": "startup",
-                        "l": "Startap asoschisi"
-                    }
-                ]
-            },
-            "revenue": {
-                "label": "Yillik aylanma (tahminiy)",
-                "options": [
-                    "Hali boshlanmagan",
-                    "100 mln so'mgacha",
-                    "100 - 500 mln so'm",
-                    "500 mln - 1 mlrd so'm",
-                    "1 mlrd+ so'm"
-                ]
-            },
-            "ambition": {
-                "label": "Keyingi 12 oy ichidagi asosiy maqsadingiz?",
-                "placeholder": "Masalan: Bozorda yetakchiga aylanish va sotuvni 2 barobar oshirish..."
-            },
-            "pain": {
-                "label": "Hozirgi eng katta muammo?",
-                "options": [
-                    {
-                        "v": "unrecognized",
-                        "l": "Bozorda tanilmaslik (brand awareness)"
-                    },
-                    {
-                        "v": "low_conversion",
-                        "l": "Sotuv conversioni pastligi"
-                    },
-                    {
-                        "v": "chaos",
-                        "l": "Marketing va brendingda tartibsizlik"
-                    }
-                ]
-            },
-            "budget": {
-                "label": "Loyiha uchun ajratilgan sarmoya?",
-                "options": [
-                    "$1,000 - $3,000",
-                    "$3,000 - $7,000",
-                    "$7,000 - $15,000",
-                    "$15,000+"
-                ]
-            },
             "name": {
                 "label": "Ismingiz",
                 "placeholder": "Aziz Abduhakimov"
@@ -277,20 +230,19 @@
             "phone": {
                 "label": "Telefon raqamingiz",
                 "placeholder": "+998 (__) ___-__-__"
+            },
+            "telegram": {
+                "label": "Telegram / WhatsApp (ixtiyoriy)",
+                "placeholder": "@username"
             }
         },
         "buttons": {
-            "next": "Keyingi qadam",
+            "submit": "Bepul auditga yozilish",
+            "close": "Oynani yopish",
             "back": "Orqaga",
-            "submit": "Strategiyani olish",
-            "close": "Oynani yopish"
+            "next": "Keyingi qadam"
         },
         "formErrors": {
-            "role": "Tanlang",
-            "revenue": "Tanlang",
-            "ambition": "Maqsad kiritilishi shart",
-            "pain": "To'siqni tanlang",
-            "budget": "Byudjetni tanlang",
             "fullName": "Ism kiritilishi shart",
             "phone": "To'liq telefon raqamini kiriting"
         },
@@ -299,18 +251,35 @@
             "description": "So'rov yuborishda xato yuz berdi. Qayta urinib ko'ring."
         },
         "successStep": {
-            "title": "Ajoyib! Biz boshladik 🚀",
-            "description": "Ma'lumotlaringiz muvaffaqiyatli qabul qilindi. Tez orada bizning strategimiz siz bilan bog'lanadi va loyihangizni tahlil qilishni boshlaymiz.",
-            "nextSteps": "Suhbatgacha nima qilish mumkin?",
-            "telegramButton": "Telegram kanalimizga obuna bo'lish",
-            "telegramDesc": "Brending va marketing bo'yicha foydali materiallarni o'tkazib yubormang."
+            "title": "So'rov qabul qilindi",
+            "description": "Strategimiz tez orada bog'lanadi va brendingizni audit qilishni boshlaydi.",
+            "nextSteps": "Suhbatgacha",
+            "telegramButton": "Telegram kanalga o'tish",
+            "telegramDesc": "Brending bo'yicha foydali materiallar."
         },
-        "trustBadge": "Ma'lumotlaringiz 100% himoyalangan va faqat Jon.Branding tomonidan ishlatiladi."
+        "trustBadge": "Ma'lumotlaringiz maxfiy saqlanadi va faqat Jon.Branding tomonidan ishlatiladi.",
+        "contactBadge": "15 daqiqa",
+        "quickContactLabel": "Tez aloqa",
+        "auditGivesLabel": "Auditda olasiz",
+        "auditOfferStack": [
+            "5 ta ishonch yo'qotadigan nuqta",
+            "Qaysi xizmat hozir kerakligini aniqlash",
+            "Majburiy sotuvsiz aniq tavsiya"
+        ],
+        "auditTimeLabel": "Format",
+        "auditFormat": [
+            "Telefon yoki Telegram orqali",
+            "15 daqiqalik diagnostika",
+            "Keyingi qadam yozib beriladi"
+        ],
+        "objectionCopy": "Hali loyiha boshlashga tayyor bo'lmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.",
+        "riskCopy": "Telefon qoldirish - shartnoma degani emas. Avval muammo va imkoniyatni ko'rsatamiz.",
+        "footerCopyright": "Jon.Branding Agency"
     },
     "home": {
-        "cta1_title": "Sizning brendingiz ham shunday ko'rinishi mumkin.",
-        "cta1_desc": "Professional dizayn bilan biznesingizni yangi bosqichga olib chiqing. Biznesingiz uchun ideal yechimni topishga yordam beramiz.",
-        "cta1_button": "Mening biznesim uchun ham"
+        "cta1_title": "Brendingiz mijozni ishontiryaptimi? Keling, tekshiramiz.",
+        "cta1_desc": "Bepul Brand Audit orqali qaysi detal sizni arzon, noaniq yoki ishonchsiz ko'rsatayotganini aniqlaymiz. Keyin eng muhim birinchi qadamni aytamiz.",
+        "cta1_button": "Bepul Brand Audit olish"
     },
     "urgencyBlock": {
         "title": "Qaror qilishdan oldin bir narsani tekshiring",
@@ -418,7 +387,27 @@
         "recommend_val": "90%"
     },
     "trustedBy": {
-        "title": "Bizga ishonch bildirgan kompaniyalar"
+        "eyebrow": "Tanlangan mijozlar",
+        "title": "Bizneslar bizga ko'rinish emas, ishonch tizimini topshirishadi.",
+        "subtitle": "Mahalliy brendlar Jon.Branding bilan bozorda qimmatroq, tushunarliroq va tanlashga osonroq ko'rinish uchun ishlaydi.",
+        "metrics": [
+            {
+                "value": "150+",
+                "label": "Loyiha"
+            },
+            {
+                "value": "9 yil",
+                "label": "Tajriba"
+            },
+            {
+                "value": "30+",
+                "label": "Soha"
+            },
+            {
+                "value": "4 til",
+                "label": "Bozor tili"
+            }
+        ]
     },
     "whyUs": {
         "title": "Nega aynan biz?",
@@ -463,122 +452,129 @@
         "solutionButton": "Bepul auditga yozilish"
     },
     "beforeAfter": {
-        "title": "Avval va Hozir",
-        "subtitle": "Brending biznesni qanday o'zgartirishini o'z ko'zingiz bilan ko'ring.",
+        "eyebrow": "Isbot",
+        "title": "Brend qimmatroq ko'rinishni isbotlaydi.",
+        "subtitle": "Auditda aynan shunday savolga javob beramiz: mijoz sizni ko'rganda ishonadimi, tushunadimi va tanlashga sabab topadimi?",
         "ctaTitle": "Brendingiz o'zgarishga tayyormi?",
-        "ctaDesc": "Keling, uni yangi bosqichga olib chiqish rejasini tuzamiz.",
-        "ctaButton": "Mening brendimni ham o'zgartiring"
+        "ctaDesc": "Avval brend auditdan boshlaymiz va qaysi o'zgarish eng katta ta'sir berishini aniqlaymiz.",
+        "ctaButton": "Bepul Brand Audit olish",
+        "cta": "Bepul Brand Audit olish",
+        "caseLabel": "Before / After",
+        "proofCards": [
+            {
+                "value": "Real",
+                "label": "mijoz keyslari"
+            },
+            {
+                "value": "Audit",
+                "label": "oldin diagnostika"
+            }
+        ]
     },
     "testimonials": {
-        "title": "Mijozlarimiz biz haqimizda",
-        "subtitle": "Bizning eng katta yutug'imiz — bu bizning mamnun mijozlarimizdir.",
+        "title": "Mijozlar ishonchi",
+        "subtitle": "Portfolio chiroyli ko'rinishi mumkin. Biz uchun muhimrog'i - biznes egasi natijani his qilishi.",
         "textReviewsTitle": "Matnli sharhlar",
-        "textReviewsSubtitle": "Boshqa hurmatli mijozlarimizdan"
+        "textReviewsSubtitle": "Biz bilan ishlagan tadbirkorlar fikri"
     },
     "gallery": {
         "title": "Ishlarimizdan namunalar",
         "subtitle": "Biz yaratgan brendlar o'z sohasida qanday ajralib turishini ko'ring."
     },
     "founder": {
-        "title": "Nega men 'oddiy dizayn'dan voz kechib, 'Sotuv Mashinalari' qurishga o'tdim?",
-        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biz biznes egalariga shunchaki chiroyli logo emas, balki nom, strategiya, aydentika, qadoq va brandbookdan iborat tushunarli brend tizimini qurishga yordam beramiz. Maqsadimiz — mijoz sizni ko'rganda tezroq tushunsin, eslab qolsin va ishonch bilan tanlasin.",
+        "title": "Men dizaynni emas, biznes uchun ishonch tizimini quraman.",
+        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biz biznes egalariga nom, strategiya, aydentika, qadoq va brandbook orqali xaridor tezroq tushunadigan, eslab qoladigan va ishonch bilan tanlaydigan brend tizimini qurishga yordam beramiz.",
         "points": [
             {
                 "icon": "Medal",
-                "text": "150+ Bozorni 'zabt etgan' loyihalar"
+                "text": "150+ brend tizimi va vizual loyiha"
             },
             {
                 "icon": "Globe",
-                "text": "Strategik aniqlik — xalqaro tajriba"
+                "text": "Mahalliy bozorni tushunadigan xalqaro yondashuv"
             },
             {
                 "icon": "Zap",
-                "text": "Natijaga yo'naltirilgan 'Godfather' yondashuv"
+                "text": "Tez emas, to'g'ri qaror chiqaradigan jarayon"
             },
             {
                 "icon": "Users",
-                "text": "Har bir so'mingiz uchun 100% javobgarlik"
+                "text": "Har bosqichda shaffof aloqa"
             }
         ],
         "phoneButton": "Shaxsan bog'lanish",
-        "telegramButton": "Telegramda yozish"
+        "telegramButton": "Telegramda yozish",
+        "principles": [
+            "Strategiya bilan boshlaymiz",
+            "Tadbirkor tilida tushuntiramiz",
+            "Natija: ishonch va premiumlik"
+        ]
     },
     "process": {
-        "title": "Sizning brendingizni 'G'olib'ga aylantirish yo'li",
-        "subtitle": "Biz shunchaki rasm chizmaymiz — biz bozorni 'zabt etadigan' tizim quramiz.",
+        "title": "Auditdan to premium brend tizimigacha bo'lgan yo'l.",
+        "subtitle": "Bepul audit sizga birinchi tashxisni beradi. Agar davom etsak, jarayon strategiya, vizual tizim va tatbiq rejasiga aylanadi.",
         "phases": [
             {
                 "phase": "01",
-                "title": "Anatomik Tadqiqot",
-                "description": "Bozordagi raqobatchilaringizning zaif nuqtalarini topish.",
+                "title": "Brand Audit",
+                "description": "Mijoz ko'zidagi ishonch, premiumlik va tushunarlilik nuqtalarini tekshiramiz.",
                 "tasks": [
-                    "Deep-Dive Brifing",
-                    "Raqobatni 'Rentgen' qilish",
-                    "Auditoriya psixologiyasi",
-                    "Imkoniyatlar xaritasi",
-                    "Сбор идей"
+                    "Birinchi taassurot",
+                    "Trust gap",
+                    "Raqobatchi ko'zgusi"
                 ]
             },
             {
                 "phase": "02",
-                "title": "Bozorni Egallash Strategiyasi",
-                "description": "Sizning 'Noyob G'alaba' nuqtangizni belgilash.",
+                "title": "Strategiya",
+                "description": "Kim uchun, nima bilan farq qilasiz va nima uchun sizni tanlashlari kerakligini aniqlaymiz.",
                 "tasks": [
-                    "Pozitsiyalash (USP)",
-                    "Brend Arxitekturasi",
-                    "Sotuv Voronkasi tahlili",
-                    "Kommunikatsiya Tili",
-                    "Планирование"
+                    "Pozitsiyalash",
+                    "Auditoriya",
+                    "Asosiy xabar"
                 ]
             },
             {
                 "phase": "03",
-                "title": "Qurol Yasash (Dizayn)",
-                "description": "Bozorda 'Nokaut' qiladigan vizual tizim yaratish.",
+                "title": "Vizual tizim",
+                "description": "Nom, logo, rang, shrift, qadoq va sayt ko'rinishini bitta tartibli tizimga keltiramiz.",
                 "tasks": [
-                    "Sotuvchi Neyming",
-                    "Strategik Logotip",
-                    "Psixologik Ranglar",
-                    "Premium Aydentika",
-                    "Брендбук"
+                    "Logo",
+                    "Aydentika",
+                    "Brandbook"
                 ]
             },
             {
                 "phase": "04",
-                "title": "Jangovar Sinov (Taqdimot)",
-                "description": "G'oyalarni real bozor sharoitida tekshirish.",
+                "title": "Bozorga chiqarish",
+                "description": "Brend real nuqtalarda qanday ishlashini ko'rsatamiz: qadoq, social, sayt, savdo materiallari.",
                 "tasks": [
-                    "3D Maketlar",
-                    "Real Keyslarda sinash",
-                    "Tahrirlar va jilolash",
-                    "Демонстрация мокапов"
+                    "Mockup",
+                    "Rollout",
+                    "Kontent yo'nalishi"
                 ]
             },
             {
                 "phase": "05",
-                "title": "Hujum (Tatbiq)",
-                "description": "Barcha qurollarni ishga tushirish.",
+                "title": "Qo'llash va nazorat",
+                "description": "Jamoangiz brenddan bir xil, tartibli va premium foydalanishi uchun yo'riqnoma oladi.",
                 "tasks": [
-                    "Eksport Fayllar",
-                    "Brendbuk (Konstitutsiya)",
-                    "Foydalanish Masterclass",
-                    "Подготовка к печати"
-                ]
-            },
-            {
-                "phase": "06",
-                "title": "Dominatsiya (O'sish)",
-                "description": "Bozorda yetakchilikni saqlab qolish.",
-                "tasks": [
-                    "3 oylik Support",
-                    "Kengayish rejasi",
-                    "Yangi marralar"
+                    "Fayllar",
+                    "Qoida",
+                    "Support"
                 ]
             }
         ],
-        "ctaTitle": "Bozorni egallashga tayyormisiz?",
-        "ctaDesc": "Keling, bugun sizning 'G'alaba Strategiyangiz'ni tuzamiz.",
-        "ctaButton": "Bepul auditga yozilish"
+        "ctaTitle": "Avval bepul Brand Auditdan boshlaymiz.",
+        "ctaDesc": "Brendingizning qaysi joyi ishonchni pasaytirayotganini ko'ramiz va eng muhim birinchi qadamni aytamiz.",
+        "ctaButton": "Bepul auditga yozilish",
+        "eyebrow": "Auditdan keyin",
+        "proofItems": [
+            "Diagnostika",
+            "Strategiya",
+            "Vizual tizim",
+            "Tatbiq yo'riqnomasi"
+        ]
     },
     "leadMagnet": {
         "title": "Brendingizni ishonchli tizimga aylantirish vaqti keldi",
@@ -708,7 +704,9 @@
     },
     "mobileCtaBar": {
         "final_price": "Yakuniy narx",
-        "get_offer": "So'rov qoldirish"
+        "get_offer": "Audit olish",
+        "cta": "Bepul Brand Audit olish",
+        "hint": "Brendingizdagi ishonch signallarini tekshiramiz"
     },
     "blog": {
         "title": "Blog",
@@ -1276,5 +1274,53 @@
             "description": "Materialingiz yuklab olish uchun tayyor. Bizning jamoamiz tez orada siz bilan bog'lanishi mumkin.",
             "downloadCta": "Cheklistni yuklab olish (PDF)"
         }
+    },
+    "auditOffer": {
+        "eyebrow": "Bepul audit ichida",
+        "title": "Brendingiz sotuvga yordam beryaptimi yoki halaqit qilyaptimi?",
+        "description": "Biz sizga dizayn sotishdan oldin brendingiz xaridor ko'zida qayerda ishonch yo'qotayotganini ko'rsatamiz. Auditdan keyin qaysi xizmat kerak, qaysisi shart emas - aniq bilasiz.",
+        "cta": "Bepul auditga yozilish",
+        "promise": "Majburiy sotuv yo'q. Avval muammo va imkoniyatni ko'rsatamiz.",
+        "outcomes": [
+            {
+                "value": "15m",
+                "label": "audit suhbat"
+            },
+            {
+                "value": "5",
+                "label": "ishonch signali"
+            },
+            {
+                "value": "1",
+                "label": "ustuvor reja"
+            },
+            {
+                "value": "Free",
+                "label": "boshlang'ich audit"
+            }
+        ],
+        "items": [
+            {
+                "title": "Birinchi taassurot diagnostikasi",
+                "desc": "Sayt, logo, qadoq yoki Instagramni ko'rgan mijoz sizni qanchalik premium va ishonchli qabul qilishini tekshiramiz."
+            },
+            {
+                "title": "Trust gap xaritasi",
+                "desc": "Mijoz qarorini sekinlashtiradigan noaniq va kuchsiz joylarni aniq nomlaymiz."
+            },
+            {
+                "title": "Raqobatchi pozitsiyasi",
+                "desc": "Bozorda kim qimmatroq ko'rinyapti, nima uchun va siz qayerdan kuchli chiqishingiz mumkinligini ko'rsatamiz."
+            },
+            {
+                "title": "Keyingi qadamlar",
+                "desc": "Logo, naming, qadoq, sayt yoki strategiyadan qaysi biri birinchi bo'lishi kerakligini tartiblaymiz."
+            }
+        ],
+        "proof": [
+            "Majburiyatsiz",
+            "Tadbirkor tilida",
+            "Sotuvga ta'sir qiladigan reja"
+        ]
     }
 }

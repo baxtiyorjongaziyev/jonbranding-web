@@ -11,6 +11,9 @@ import { cn } from '@/lib/utils';
 const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'), {
   loading: () => <Skeleton className="h-32 w-full" />,
 });
+const AuditOffer = dynamic(() => import('@/components/sections/audit-offer'), {
+  loading: () => <Skeleton className="h-96 w-full" />,
+});
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'), {
   loading: () => <Skeleton className="h-96 w-full rounded-3xl" />,
 });
@@ -18,7 +21,6 @@ const Testimonials = dynamic(() => import('@/components/sections/testimonials'),
   loading: () => <Skeleton className="h-64 w-full rounded-2xl" />,
 });
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
-const ProcessVideo = dynamic(() => import('@/components/sections/process-video'), { ssr: false });
 const Founder = dynamic(() => import('@/components/sections/founder'), {
   loading: () => <Skeleton className="h-96 w-full" />,
 });
@@ -87,39 +89,36 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
   return (
     <div className="relative pb-24 md:pb-0">
       <main>
-        {/* 1. Hero — bold headline + 1 CTA */}
+        {/* 1. Hero: premium positioning + audit CTA */}
         <Hero onOpenContact={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
 
-        {/* 2. Trust bar — client logos */}
+
+        {/* 2. Trust: selected clients and credibility signals */}
         <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
 
-        {/* 3. Before/After — proof of transformation */}
+        {/* 3. Proof: visible transformation before the offer */}
         <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
 
-        {/* 4. Testimonials — real voices */}
+        {/* 4. Offer: sell the free Brand Audit */}
+        <AuditOffer lang={lang} dictionary={dictionary.auditOffer} onCtaClick={handleOpenModal} />
+
+        {/* 5. Testimonials: real client voices */}
         <Testimonials lang={lang} dictionary={dictionary.testimonials} />
 
-        {/* 5. Process — 3 simple steps */}
+        {/* 6. Process: what happens after the audit */}
         {mounted && <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />}
 
-        {/* 5.5. Process Video */}
-        {mounted && <ProcessVideo lang={lang} />}
-
-        {/* 6. Founder — trust through personality */}
+        {/* 7. Founder: trust through personality */}
         {mounted && <Founder lang={lang} dictionary={dictionary.founder} />}
 
-        {/* 7. FAQ — objection handling */}
+        {/* 8. FAQ: objection handling */}
         <Faq lang={lang} dictionary={dictionary.faq} />
 
-        {/* 8. Final CTA — repeat hero offer */}
+        {/* 9. Final CTA: repeat the audit offer */}
         <CtaBlock
-          title={lang === 'uz' ? "Brendingiz sotuvga yordam beryaptimi yoki halaqit qilyaptimi?" : dictionary.home?.cta1_title}
-          description={
-            lang === 'uz'
-              ? "Bepul Brand Audit orqali mijoz ishonchini pasaytirayotgan joylarni aniqlaymiz va qaysi tuzatish birinchi bo'lishi kerakligini aytamiz."
-              : dictionary.home?.cta1_desc
-          }
-          buttonText={lang === 'uz' ? 'Bepul Brand Audit olish' : dictionary.home?.cta1_button}
+          title={dictionary.home?.cta1_title}
+          description={dictionary.home?.cta1_desc}
+          buttonText={dictionary.home?.cta1_button}
           onCtaClick={handleOpenModal}
         />
       </main>
