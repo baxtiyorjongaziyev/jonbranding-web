@@ -1027,6 +1027,8 @@
             "phonePlaceholder": "+998901234567",
             "classCountLabel": "Number of Activity Classes",
             "classCountMax": "Max 45",
+            "decreaseClassCount": "Decrease number of classes",
+            "increaseClassCount": "Increase number of classes",
             "personTypeLabel": "Entity Type",
             "personTypeOptions": [
                 {
