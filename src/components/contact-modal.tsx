@@ -37,34 +37,10 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const [step, setStep] = useState(4);
   const { user } = useTelegram();
   const [translations, setTranslations] = useState<any>(null);
-  const quickContactLabel =
-    lang === 'uz'
-      ? 'Tez aloqa'
-      : lang === 'ru'
-        ? 'Быстрая связь'
-        : lang === 'zh'
-          ? '快速联系'
-          : 'Quick contact';
-  const auditOfferStack =
-    lang === 'uz'
-      ? ["Brendingizdagi 5 ta ishonch yo'qotadigan nuqta", 'Qaysi xizmat hozir kerakligini aniqlaymiz', "Majburiy sotuv yo'q - avval foyda"]
-      : ['5 trust gaps in your brand', 'Clear service recommendation', 'No pressure - value first'];
-  const objectionCopy =
-    lang === 'uz'
-      ? 'Hali tayyor bolmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.'
-      : lang === 'ru'
-        ? 'Даже если вы еще не готовы покупать: после аудита станет понятно, что делать дальше.'
-        : lang === 'zh'
-          ? '即使还没准备购买：审核后您会清楚下一步该做什么。'
-          : 'Even if you are not ready to buy, the audit gives you a clear next step.';
-  const riskCopy =
-    lang === 'uz'
-      ? 'Telefon qoldirish - shartnoma degani emas. Avval muammo va imkoniyatni korsatamiz.'
-      : lang === 'ru'
-        ? 'Оставить телефон - не значит подписать договор. Сначала покажем проблему и возможность.'
-        : lang === 'zh'
-          ? '留下电话不等于签约。我们先说明问题和机会。'
-          : 'Leaving your phone is not a contract. First we show the problem and opportunity.';
+  const quickContactLabel = translations?.quickContactLabel || 'Quick contact';
+  const auditOfferStack: string[] = translations?.auditOfferStack || ['5 trust gaps in your brand', 'Clear service recommendation', 'No pressure'];
+  const objectionCopy = translations?.objectionCopy || 'Even if you are not ready to buy, the audit gives you a clear next step.';
+  const riskCopy = translations?.riskCopy || 'Leaving your phone is not a contract. First we show the problem and opportunity.';
 
   useEffect(() => {
     if (isOpen) {
@@ -122,7 +98,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       const response = await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, packageSummary, totalPrice, source: 'king_kong_lite_funnel', lang }),
+        body: JSON.stringify({ ...data, packageSummary, totalPrice, source: 'brand_audit_offer', lang }),
       });
 
       const result = await response.json();
@@ -142,7 +118,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       setTimeout(() => {
         try {
           trackLead({ 
-            source: 'king_kong_lite_funnel', 
+            source: 'brand_audit_offer', 
             value: totalPrice, 
             summary: packageSummary,
             lead_details: data
@@ -184,35 +160,31 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   useEffect(() => {
     if (isOpen) {
-      setStep(1);
+      setStep(4);
       setSubmitted(false);
       if (user) form.setValue('fullName', `${user.first_name || ''} ${user.last_name || ''}`.trim());
-      trackEvent({ action: 'form_opened', category: 'Contact Form', label: 'Strategic Session' });
+      trackEvent({ action: 'form_opened', category: 'Contact Form', label: 'Brand Audit' });
     }
   }, [isOpen, form, user]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[1000px] p-0 rounded-3xl border-none bg-transparent shadow-none w-[95vw] md:w-full">
-        <div className="flex flex-col md:flex-row h-auto min-h-fit md:h-[620px] bg-white rounded-3xl relative shadow-2xl overflow-hidden" onKeyDown={handleKeyDown}>
+      <DialogContent className="max-w-[1000px] p-0 rounded-[8px] border-none bg-transparent shadow-none w-[95vw] md:w-full">
+        <div className="flex flex-col md:flex-row h-auto min-h-fit md:h-[620px] bg-white rounded-[8px] relative shadow-2xl overflow-hidden" onKeyDown={handleKeyDown}>
           
-          <div className="absolute top-0 left-0 w-full h-1 bg-gray-100 z-50 md:hidden">
-            <motion.div className="h-full bg-blue-600" animate={{ width: `${(step / 4) * 100}%` }} />
-          </div>
-
           <div className="w-full md:w-[40%] bg-[#0A0A0A] relative flex flex-col justify-between p-6 md:p-12 text-white overflow-hidden shrink-0">
-            <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(ellipse_100%_100%_at_0%_100%,rgba(37,99,235,0.4)_0%,rgba(0,0,0,0)_70%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(37,99,235,0.26),transparent_55%,rgba(58,225,255,0.14))] pointer-events-none" />
             
             <div className="relative z-10 w-full">
               <h2 className="text-2xl md:text-5xl font-extrabold leading-tight mb-2 md:mb-4 text-white drop-shadow-sm">
-                {translations?.sidebarTitle || 'Strategic Session'}
+                {translations?.sidebarTitle || 'Brand Audit'}
               </h2>
               <p className="text-gray-300/80 text-xs md:text-base leading-relaxed mb-4 md:mb-8 max-w-[280px]">
                 {translations?.sidebarSubtitle || 'Build your high-profit branding system with our experts.'}
               </p>
-              <div className="grid gap-2 rounded-3xl border border-white/10 bg-white/5 p-3 md:p-4">
+              <div className="grid gap-2 rounded-[8px] border border-white/10 bg-white/5 p-3 md:p-4">
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-cyan">
-                  Free audit gives
+                  {translations?.auditGivesLabel || 'Free audit gives'}
                 </div>
                 {auditOfferStack.map((item) => (
                   <div key={item} className="flex items-start gap-2 text-xs font-bold leading-5 text-white/90">
@@ -222,20 +194,17 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                 ))}
               </div>
               
-              <div className="space-y-6 mt-12 hidden md:block">
-                {[
-                  { s: 1, label: translations?.steps?.step1?.title || 'Qualification' },
-                  { s: 2, label: translations?.steps?.step2?.title || 'Insight' },
-                  { s: 3, label: translations?.steps?.step3?.title || 'Investment' },
-                  { s: 4, label: translations?.steps?.step4?.title || 'Contact' },
-                ].map((item) => (
-                  <div key={item.s} className={`flex items-center gap-4 transition-all duration-500 ${step === item.s ? 'translate-x-2' : ''}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300 ${step === item.s ? 'bg-blue-600 border-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.6)]' : step > item.s ? 'bg-green-500/20 border-green-500 text-green-500' : 'border-white/20 text-white/20'} font-bold text-sm`}>
-                      {step > item.s ? <CheckCircle2 className="w-5 h-5" /> : item.s}
+              <div className="mt-10 hidden rounded-[8px] border border-white/10 bg-white/[0.04] p-4 md:block">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-white/38">
+                  {translations?.auditTimeLabel || 'Audit format'}
+                </div>
+                <div className="mt-3 grid gap-2">
+                  {(translations?.auditFormat || []).map((item: string) => (
+                    <div key={item} className="rounded-[8px] bg-white/[0.06] px-3 py-2 text-xs font-bold leading-5 text-white/86">
+                      {item}
                     </div>
-                    <span className={`text-[11px] font-bold uppercase tracking-widest transition-colors duration-300 ${step === item.s ? 'text-white' : 'text-white/30'}`}>{item.label}</span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -245,11 +214,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                   <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
-              <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">© 2026 Jon.Branding Agency</p>
+              <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">{translations?.footerCopyright || 'Jon.Branding Agency'}</p>
             </div>
           </div>
 
-          <div className="w-full md:w-[60%] p-6 md:p-8 lg:p-10 flex flex-col relative bg-white rounded-r-3xl overflow-hidden flex-1">
+          <div className="w-full md:w-[60%] p-6 md:p-8 lg:p-10 flex flex-col relative bg-white md:rounded-r-[8px] overflow-hidden flex-1">
 
 
             <div className="flex-1 flex flex-col h-full py-4 md:py-6">
@@ -264,7 +233,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     <div className="mb-6 flex items-center justify-between shrink-0">
                       <div className="flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full border border-blue-100 shadow-sm animate-pulse-subtle">
                         <Target className="w-3.5 h-3.5 text-blue-500" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">{translations?.header || 'Strategic Session'}</span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider">{translations?.header || 'Brand Audit'}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         {step < 4 && (
@@ -277,7 +246,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                           </button>
                         )}
                         <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded">
-                          Step {step} / 4
+                          {translations?.contactBadge || quickContactLabel}
                         </div>
                       </div>
                     </div>
@@ -437,7 +406,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                     <FormControl>
                                       <div className="relative">
                                         <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-                                        <Input placeholder={translations?.fields?.name?.placeholder} className="pl-12 border-gray-200 rounded-xl h-12 bg-gray-50/50 focus:bg-white" {...field} />
+                                        <Input placeholder={translations?.fields?.name?.placeholder} className="pl-12 border-gray-200 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white" {...field} />
                                       </div>
                                     </FormControl>
                                     <FormMessage />
@@ -452,7 +421,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                         <PhoneCall className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                                         <Input 
                                           placeholder={translations?.fields?.phone?.placeholder} 
-                                          className="pl-12 border-gray-200 rounded-xl h-12 bg-gray-50/50 focus:bg-white font-mono" 
+                                          className="pl-12 border-gray-200 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white font-mono" 
                                           value={field.value}
                                           onChange={(e) => {
                                             const formatted = formatPhoneNumber(e.target.value);
@@ -467,11 +436,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="telegram" render={({ field }) => (
                                   <FormItem className="space-y-1">
-                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Telegram / WhatsApp (opt)</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.telegram?.label}</FormLabel>
                                     <FormControl>
                                       <div className="relative">
                                         <MessageCircle className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-                                        <Input placeholder="@username" className="pl-12 border-gray-200 rounded-xl h-12 bg-gray-50/50 focus:bg-white" {...field} />
+                                        <Input placeholder={translations?.fields?.telegram?.placeholder || '@username'} className="pl-12 border-gray-200 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white" {...field} />
                                       </div>
                                     </FormControl>
                                   </FormItem>
@@ -483,19 +452,19 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                         <div className="pt-4 md:pt-4 border-t border-gray-50 mt-auto bg-white z-10 shrink-0">
                           <div className="flex gap-4">
-                            {step > 1 && (
-                              <Button type="button" variant="ghost" onClick={prevStep} className="flex-1 h-11 md:h-12 rounded-2xl text-gray-500 font-bold hover:bg-gray-50">
+                            {step > 1 && step < 4 && (
+                              <Button type="button" variant="ghost" onClick={prevStep} className="flex-1 h-11 md:h-12 rounded-[8px] text-gray-500 font-bold hover:bg-gray-50">
                                 {translations?.buttons?.back || 'Back'}
                               </Button>
                             )}
                             
                             {step < 4 ? (
-                              <Button type="button" onClick={nextStep} className="flex-[2] h-11 md:h-12 bg-gray-900 hover:bg-black text-white rounded-2xl font-bold group shadow-xl shadow-gray-200/50">
+                              <Button type="button" onClick={nextStep} className="flex-[2] h-11 md:h-12 bg-gray-900 hover:bg-black text-white rounded-[8px] font-bold group shadow-xl shadow-gray-200/50">
                                 {translations?.buttons?.next || 'Next Step'}
                                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                               </Button>
                             ) : (
-                              <Button type="submit" disabled={isSubmitting} className="flex-[2] h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold shadow-xl shadow-blue-100 flex items-center justify-center gap-2 group transition-all">
+                              <Button type="submit" disabled={isSubmitting} className="flex-[2] h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-[8px] font-bold shadow-xl shadow-blue-100 flex items-center justify-center gap-2 group transition-all">
                                 {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                                   <>
                                     {translations?.buttons?.submit || 'Get Strategy'}
@@ -507,7 +476,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                           </div>
                           <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-gray-400 font-medium tracking-tight">
                             <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
-                            {translations?.trustBadge || 'Data is 100% encrypted and confidential.'}
+                            {translations?.trustBadge || 'Data is confidential.'}
                           </div>
                           <div className="mx-auto mt-2 max-w-md text-center text-[10px] font-semibold leading-4 text-gray-400">
                             {riskCopy}

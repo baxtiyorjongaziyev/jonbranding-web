@@ -1,7 +1,10 @@
 'use client';
 
+import { ArrowRight, BadgeCheck } from 'lucide-react';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
-import { BrandSection, SectionIntro } from '@/components/ui/design-system';
+import { Button } from '@/components/ui/button';
+import { BrandSection } from '@/components/ui/design-system';
+import { projects } from '@/lib/static-data';
 
 interface SanityComparison {
   brand: string;
@@ -15,74 +18,99 @@ interface SanityComparison {
 interface BeforeAfterProps {
   onCtaClick: () => void;
   lang: string;
-  dictionary: any;
+  dictionary: {
+    eyebrow?: string;
+    title?: string;
+    subtitle?: string;
+    cta?: string;
+    ctaButton?: string;
+    caseLabel?: string;
+    proofCards?: Array<{ value: string; label: string }>;
+  };
   comparisons?: SanityComparison[];
 }
 
-const DEFAULT_COMPARISONS: SanityComparison[] = [
-  {
-    brand: "Den Aroma",
-    oldImg: "https://images.unsplash.com/photo-1583522676223-93740e630d74?q=80&w=800",
-    newImg: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800",
-    oldHint: "Oddiy ko'rinish",
-    newHint: "Premium butik",
-    order: 1
-  },
-  {
-    brand: "Food Logistics",
-    oldImg: "https://images.unsplash.com/photo-1586528116311-ad86d7c7ce80?q=80&w=800",
-    newImg: "https://images.unsplash.com/photo-1566576721346-d4a3b4ea353a?q=80&w=800",
-    oldHint: "Eski logistika",
-    newHint: "Zamonaviy ECO-tizim",
-    order: 2
-  },
-  {
-    brand: "Fashion House",
-    oldImg: "https://images.unsplash.com/photo-1513506490281-05251d30717f?q=80&w=800",
-    newImg: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800",
-    oldHint: "Tizimsiz brend",
-    newHint: "Yaxlit vizual uslub",
-    order: 3
-  }
-];
+const DEFAULT_COMPARISONS: SanityComparison[] = projects
+  .filter((project) => project.oldImg && project.newImg)
+  .map((project, index) => ({
+    brand: project.brand,
+    oldImg: project.oldImg,
+    newImg: project.newImg,
+    oldHint: project.oldHint || '',
+    newHint: project.newHint || '',
+    order: index + 1,
+  }));
 
 const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary, comparisons }) => {
   const translations = dictionary;
   const displayItems = comparisons && comparisons.length > 0 ? comparisons : DEFAULT_COMPARISONS;
+  const featuredItem = displayItems.find((item) => typeof item.oldImg === 'string' && typeof item.newImg === 'string');
+  const sideItems = displayItems.filter((item) => item !== featuredItem).slice(0, 2);
 
-  if (!translations) return null;
+  if (!translations || !featuredItem) return null;
 
   return (
-    <BrandSection tone="light" className="relative">
-      <div className="container mx-auto px-4">
-        <SectionIntro
-          eyebrow="Proof"
-          title={translations.title}
-          description={translations.subtitle}
-        />
+    <BrandSection tone="dark" className="relative bg-[#070b12] py-20 text-white sm:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(37,99,235,0.18),transparent_42%,rgba(58,225,255,0.12))]" />
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+          <div>
+            {translations.eyebrow && (
+              <div className="mb-4 inline-flex rounded-full border border-white/12 bg-white/[0.06] px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-cyan">
+                {translations.eyebrow}
+              </div>
+            )}
+            <h2 className="max-w-xl text-balance text-4xl font-black tracking-tight text-white sm:text-6xl">{translations.title}</h2>
+            {translations.subtitle && <p className="mt-5 max-w-xl text-lg leading-8 text-white/68">{translations.subtitle}</p>}
+            {translations.proofCards?.length ? (
+              <div className="mt-6 grid max-w-xl grid-cols-2 gap-3">
+                {translations.proofCards.map((card) => (
+                  <div key={card.label} className="rounded-[8px] border border-white/10 bg-white/[0.055] p-4">
+                    <div className="text-2xl font-black tracking-tight text-white">{card.value}</div>
+                    <div className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-white/48">{card.label}</div>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+            <Button
+              onClick={onCtaClick}
+              size="lg"
+              className="mt-8 h-14 rounded-[8px] bg-white px-7 text-base font-black text-brand-ink hover:bg-brand-lime"
+            >
+              {translations.cta || translations.ctaButton}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
 
-        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2">
-          {displayItems.map((item, index) => {
-            if (typeof item.oldImg !== 'string' || typeof item.newImg !== 'string') return null;
+          <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="overflow-hidden rounded-[8px] border border-white/12 bg-white/[0.06] p-2 shadow-[0_40px_100px_-50px_rgba(0,0,0,0.8)]">
+              <ImageComparisonSlider
+                beforeImage={{ src: featuredItem.oldImg, alt: `${featuredItem.brand} old`, 'data-ai-hint': featuredItem.oldHint || '', unoptimized: true }}
+                afterImage={{ src: featuredItem.newImg, alt: `${featuredItem.brand} new`, 'data-ai-hint': featuredItem.newHint || '', unoptimized: true }}
+                lang={lang}
+              />
+              <div className="flex items-center justify-between px-3 py-4">
+                <div>
+                  <p className="text-lg font-black text-white">{featuredItem.brand}</p>
+                  {translations.caseLabel && <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-white/45">{translations.caseLabel}</p>}
+                </div>
+                <BadgeCheck className="h-6 w-6 text-brand-lime" />
+              </div>
+            </div>
 
-            return (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-3xl border border-brand-line bg-white shadow-[0_8px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(15,23,42,0.08)]"
-              >
-                <div className="p-1.5">
+            <div className="grid gap-4">
+              {sideItems.map((item) => (
+                <div key={item.brand} className="overflow-hidden rounded-[8px] border border-white/10 bg-white/[0.055] p-2">
                   <ImageComparisonSlider
                     beforeImage={{ src: item.oldImg, alt: `${item.brand} old`, 'data-ai-hint': item.oldHint || '', unoptimized: true }}
                     afterImage={{ src: item.newImg, alt: `${item.brand} new`, 'data-ai-hint': item.newHint || '', unoptimized: true }}
                     lang={lang}
                   />
+                  <p className="px-2 py-3 text-sm font-black text-white">{item.brand}</p>
                 </div>
-                <div className="px-5 pb-5 pt-3">
-                  <p className="text-sm font-black text-brand-ink">{item.brand}</p>
-                </div>
-              </div>
-            );
-          })}
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </BrandSection>

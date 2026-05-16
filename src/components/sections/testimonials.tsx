@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Star, Volume2, Pause } from 'lucide-react';
+import { Star, Volume2, Pause, PlayCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { type Testimonial } from '@/lib/types';
 import Autoplay from "embla-carousel-autoplay";
@@ -13,17 +13,23 @@ import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   return (
-    <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
+    <div className="group flex h-full flex-col overflow-hidden rounded-[8px] border border-brand-line bg-white shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.1)]">
       <CardContent className="p-0">
-        <div className="relative aspect-[9/16] overflow-hidden rounded-t-2xl bg-black">
-          <iframe
-            src={`${testimonial.videoUrl}&autoplay=1&loop=1&background=1`}
-            frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-            className="absolute inset-0 h-full w-full"
-            title={testimonial.name + " - testimonial"}
-          />
-        </div>
+        <a href={testimonial.videoUrl} target="_blank" rel="noopener noreferrer" className="relative block aspect-[9/16] overflow-hidden bg-brand-ink">
+          {testimonial.image ? (
+            <img src={testimonial.image} alt={testimonial.name} loading="lazy" className="h-full w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" />
+          ) : (
+            <div className="h-full w-full bg-[linear-gradient(135deg,#070b12,#122055_55%,#07323a)]" />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+            <div>
+              <p className="text-sm font-black text-white">{testimonial.name}</p>
+              <p className="mt-1 text-xs font-bold text-white/65">{testimonial.company}</p>
+            </div>
+            <PlayCircle className="h-10 w-10 shrink-0 text-white drop-shadow-lg" />
+          </div>
+        </a>
         <div className="p-5">
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10 ring-2 ring-brand-line">
@@ -62,7 +68,7 @@ const AudioTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
   };
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
+    <div className="flex h-full flex-col overflow-hidden rounded-[8px] border border-brand-line bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)]">
       <audio ref={audioRef} src={testimonial.audioUrl} preload="auto" onEnded={() => setIsPlaying(false)} />
       <div className="flex flex-grow flex-col justify-between">
         <div>
@@ -100,7 +106,7 @@ const AudioTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => 
 
 const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
+    <div className="flex h-full flex-col overflow-hidden rounded-[8px] border border-brand-line bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)]">
       <div className="flex flex-grow flex-col justify-between">
         <div>
           <div className="flex gap-0.5 text-amber-400">

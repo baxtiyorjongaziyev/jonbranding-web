@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import CtaBlock from './cta-block';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
@@ -12,69 +11,67 @@ interface ProcessProps {
   dictionary: any;
 }
 
-const ProcessCard = ({ title, description, tasks, phase }: { title: string, description: string, tasks: string[], phase: string }) => (
-  <div className="mx-3 w-[300px] flex-shrink-0 rounded-3xl border border-brand-line bg-white p-7 shadow-[0_8px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(15,23,42,0.08)] md:w-[420px] md:p-8">
-    <div className="mb-5 flex items-center gap-3">
-      <span className="rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-bold text-brand-blue">{phase}</span>
-      <div className="h-px flex-grow bg-brand-line" />
-    </div>
-    <h3 className="text-xl font-black tracking-tight text-brand-ink md:text-2xl">{title}</h3>
-    <p className="mt-3 text-sm leading-relaxed text-brand-slate">{description}</p>
-    <div className="mt-6 flex flex-wrap gap-2">
-      {tasks?.map((task) => (
-        <Badge key={task} variant="secondary" className="rounded-full border border-brand-line bg-brand-mist px-3 py-1 text-xs font-medium text-brand-slate">
-          {task}
-        </Badge>
-      ))}
-    </div>
-  </div>
-);
-
-const Process: React.FC<ProcessProps> = ({ onCtaClick, lang, dictionary }) => {
+const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
   const translations = dictionary;
-  const targetRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"]);
 
   if (!translations || !translations.phases) return null;
 
-  const processProof =
-    lang === 'uz'
-      ? ['Avval diagnostika', 'Keyin strategiya', 'So\'ng vizual tizim', 'Oxirida qo\'llash yo\'riqnomasi']
-      : lang === 'ru'
-        ? ['Сначала диагностика', 'Потом стратегия', 'Затем визуальная система', 'В конце инструкция внедрения']
-        : lang === 'zh'
-          ? ['先诊断', '再策略', '再视觉系统', '最后交付使用指南']
-          : ['Diagnose first', 'Strategy next', 'Visual system after', 'Usage guide at the end'];
+  const processProof = translations.proofItems || [];
 
   return (
-    <BrandSection id="process" tone="light" className="relative overflow-visible p-0" suppressHydrationWarning>
-      <div ref={targetRef} className="h-[300vh]">
-        <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-          <div className="container mx-auto mb-12 px-4">
-            <SectionIntro eyebrow="Process" title={translations.title} description={translations.subtitle} />
-            <div className="mx-auto mt-8 grid max-w-4xl gap-2 rounded-2xl border border-brand-line bg-white/80 p-3 shadow-sm backdrop-blur-sm sm:grid-cols-4">
-              {processProof.map((item, index) => (
-                <div key={item} className="rounded-xl bg-brand-mist/60 px-3 py-3 text-center">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-blue">0{index + 1}</div>
-                  <div className="mt-1 text-xs font-bold text-brand-ink">{item}</div>
-                </div>
-              ))}
-            </div>
+    <BrandSection id="process" tone="light" className="bg-[#fbfaf7] py-20 sm:py-28" suppressHydrationWarning>
+      <div className="container mx-auto px-4">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <SectionIntro eyebrow={translations.eyebrow} title={translations.title} description={translations.subtitle} align="left" />
+            {processProof.length > 0 && (
+              <div className="mt-8 grid grid-cols-2 gap-2">
+                {processProof.map((item: string, index: number) => (
+                  <div key={item} className="rounded-[8px] border border-brand-line bg-white px-4 py-3 shadow-sm">
+                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue">0{index + 1}</div>
+                    <div className="mt-1 text-sm font-black text-brand-ink">{item}</div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className="flex w-full items-center">
-            <motion.div style={{ x }} className="flex px-[10vw]">
-              {translations.phases.map((phase: any, index: number) => (
-                <ProcessCard key={index} {...phase} />
-              ))}
-            </motion.div>
+          <div className="grid gap-4">
+            {translations.phases.map((phase: any, index: number) => (
+              <div key={phase.title || index} className="group grid gap-5 rounded-[8px] border border-brand-line bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)] sm:grid-cols-[120px_1fr_auto] sm:items-start sm:p-6">
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-[8px] bg-brand-ink text-sm font-black text-white">
+                    0{index + 1}
+                  </div>
+                  <div className="mt-3 text-xs font-black uppercase tracking-[0.18em] text-brand-blue">{phase.phase}</div>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black tracking-tight text-brand-ink">{phase.title}</h3>
+                  <p className="mt-3 max-w-2xl text-base leading-8 text-brand-slate">{phase.description}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {phase.tasks?.map((task: string) => (
+                      <Badge key={task} variant="secondary" className="rounded-full border border-brand-line bg-brand-mist px-3 py-1 text-xs font-bold text-brand-slate">
+                        {task}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                <ArrowRight className="hidden h-5 w-5 text-brand-slate/35 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-brand-blue sm:block" />
+              </div>
+            ))}
           </div>
         </div>
+
+        {processProof.length > 0 && (
+          <div className="mt-10 grid gap-3 rounded-[8px] border border-brand-line bg-white p-4 sm:grid-cols-4">
+            {processProof.map((item: string) => (
+              <div key={item} className="flex items-center gap-2 text-sm font-black text-brand-ink">
+                <CheckCircle2 className="h-4 w-4 text-brand-blue" />
+                {item}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <CtaBlock

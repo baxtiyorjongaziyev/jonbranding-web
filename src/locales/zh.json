@@ -21,7 +21,7 @@
         "services_and_prices_desc": "构建您自己的服务包并立即获取价格。",
         "contact_by_phone": "联系电话",
         "contact_by_telegram": "Telegram 联系",
-        "free_consultation": "获取免费方案",
+        "free_consultation": "Brand Audit",
         "open_menu": "菜单",
         "switch_lang": "语言",
         "lang_ru": "Русский",
@@ -152,22 +152,44 @@
     },
     "hero": {
         "headlines": [
-            "您的品牌 |不产生销售？| 我们来修复它。",
-            "让您 |脱颖而出|。",
-            "让您的品牌不仅是“美观”，更是 |盈利的|。",
-            "让客户 |爱上您|。一次又一次。",
-            "从小型企业到 |强大的品牌|。只需一步。"
+            "Your branding |not selling?| We'll fix it.",
+            "Stand out |from the competition|.",
+            "Make your brand |profitable|, not just 'pretty'.",
+            "Make customers |fall in love with you|. Again and again.",
+            "From small business |to a strong brand|. In one step."
         ],
-        "description": "塔什干领先的<span class='font-bold text-foreground underline decoration-primary/30'>品牌代理机构</span> — 我们不仅设计标志，还为您的业务构建<span class='font-bold text-foreground font-black'>战略增长基石</span>。",
+        "description": "We don’t just draw logos. As a leading branding agency in Tashkent, we build a <span class='font-bold text-foreground font-black'>result-oriented strategy</span> for your business. Naming and professional logo design.",
         "buttonTexts": [
-            "分析我的品牌",
-            "帮助我增加销售额",
-            "免费策略会议",
-            "我需要一个强大的品牌"
+            "Analyze my brand",
+            "Help me increase sales",
+            "Free Strategic Audit",
+            "I need a strong brand"
         ],
-        "buttonHint": "免费。无任何附加条件。",
-        "title": "有业务但还没有品牌吗？我们将按照世界领先水平为您打造品牌！",
-        "cta": "免费品牌审计"
+        "buttonHint": "Free. No obligations.",
+        "title": "Your brand should build trust and **make buying easier**.",
+        "descriptionPlain": "In the free Brand Audit, we review your name, logo, packaging, website, and messaging through the eyes of a buyer. You leave knowing which change can improve trust first.",
+        "preHeadline": "Free Brand Audit",
+        "cta": "Get the free Brand Audit",
+        "ctaSecondary": "What is checked?",
+        "proofItems": [
+            "15-minute audit call",
+            "5 trust signals reviewed",
+            "Clear next-step list"
+        ],
+        "auditTitle": "What will the audit reveal?",
+        "auditSubtitle": "Not design opinions. Business priorities that affect trust and sales.",
+        "auditScore": "15m",
+        "auditScoreLabel": "Brand Audit",
+        "auditSignals": [
+            "What makes you look less premium",
+            "What message is unclear",
+            "What should be fixed first"
+        ],
+        "showcaseTags": [
+            "Trust",
+            "Premium feel",
+            "Sales"
+        ]
     },
     "results": {
         "badge": "客户成果",
@@ -196,127 +218,74 @@
         "detail": "企业获得的不仅仅是一个标志。我们分析市场并建立具有**战略性**的品牌视觉，让您在竞争中脱颖而出。这通常会使客户信任度和销量平均增长 40%。"
     },
     "contactModal": {
-        "sidebarTitle": "策略会议",
-        "sidebarSubtitle": "与我们的专家一起构建盈利的品牌系统。",
-        "header": "免费战略会议",
-        "description": "关于如何将您的业务转化为行业领导者并构建品牌体系的专家建议。",
+        "sidebarTitle": "Free Brand Audit",
+        "sidebarSubtitle": "In 15 minutes, we show where your brand loses buyer trust.",
+        "header": "Brand Audit",
+        "description": "You leave knowing which change can affect trust and sales first.",
         "steps": {
-            "step1": {
-                "title": "您的角色？",
-                "subtitle": "用于确定您的业务层级"
-            },
-            "step2": {
-                "title": "目标与障碍",
-                "subtitle": "目前是什么在阻碍您的发展？"
-            },
-            "step3": {
-                "title": "会议投资",
-                "subtitle": "选择为该项目分配的预算范围"
-            },
             "step4": {
-                "title": "联系方式",
-                "subtitle": "我们该把相关信息发送到哪里？"
+                "title": "Book the audit",
+                "subtitle": "Leave your contact details so our strategist can reach you."
             }
         },
         "fields": {
-            "role": {
-                "label": "您在公司中的主要职责范围是什么？",
-                "options": [
-                    {
-                        "v": "owner",
-                        "l": "企业主 / CEO"
-                    },
-                    {
-                        "v": "marketing",
-                        "l": "营销人员"
-                    },
-                    {
-                        "v": "starter",
-                        "l": "创业者"
-                    }
-                ]
-            },
-            "revenue": {
-                "label": "目前阶段，您公司的平均月收入是多少？",
-                "options": [
-                    "$0 - $5,000",
-                    "$5,000 - $20,000",
-                    "$20,000+",
-                    "5亿 - 10亿 苏姆",
-                    "10亿+ 苏姆"
-                ]
-            },
-            "ambition": {
-                "label": "在接下来的 12 个月中，您希望看到您的业务达到什么规模？",
-                "placeholder": "市场领导者，出口..."
-            },
-            "pain": {
-                "label": "您认为目前阻碍您实现这一目标的最大障碍是什么？",
-                "options": [
-                    {
-                        "v": "trust",
-                        "l": "客户信任度低"
-                    },
-                    {
-                        "v": "design",
-                        "l": "设计陈旧"
-                    },
-                    {
-                        "v": "sales",
-                        "l": "销售停滞不前"
-                    }
-                ]
-            },
-            "budget": {
-                "label": "为了实现这些战略目标，您准备在品牌建设上投入多少资金？",
-                "options": [
-                    "$1,000 - $3,000",
-                    "$3,000 - $10,000",
-                    "$10,000 - $25,000",
-                    "$25,000+"
-                ]
-            },
             "name": {
-                "label": "全名",
-                "placeholder": "姓名..."
+                "label": "Full name",
+                "placeholder": "John Doe"
             },
             "phone": {
-                "label": "电话号码",
+                "label": "Phone number",
                 "placeholder": "+..."
+            },
+            "telegram": {
+                "label": "Telegram / WhatsApp (optional)",
+                "placeholder": "@username"
             }
         },
         "buttons": {
-            "next": "继续",
-            "back": "返回",
-            "submit": "预订战略咨询",
-            "close": "关闭窗口"
+            "submit": "Book free audit",
+            "close": "Close window",
+            "back": "Back",
+            "next": "Next step"
         },
         "formErrors": {
-            "role": "请选择",
-            "revenue": "请选择",
-            "ambition": "请输入目标",
-            "pain": "请选择问题",
-            "budget": "请选择预算",
-            "fullName": "请输入姓名",
-            "phone": "请输入完整的电话号码"
+            "fullName": "Enter your name",
+            "phone": "Enter full phone number"
         },
         "errorToast": {
-            "title": "错误！",
-            "description": "发送请求时出错。请重试。"
+            "title": "Error",
+            "description": "Something went wrong. Please try again."
         },
         "successStep": {
-            "title": "太棒了！我们已经开始了 🚀",
-            "description": "您的数据已成功接收。很快我们的策略师会与您联系，我们将开始分析您的项目。",
-            "nextSteps": "通话前可以做什么？",
-            "telegramButton": "关注我们的 Telegram 频道",
-            "telegramDesc": "不要错过有关品牌和营销的有用材料。"
+            "title": "Request received",
+            "description": "Our strategist will contact you soon and start the brand audit.",
+            "nextSteps": "Before the call",
+            "telegramButton": "Open Telegram channel",
+            "telegramDesc": "Useful branding materials."
         },
-        "trustBadge": "您的数据受到 100% 保护，仅供 Jon.Branding 使用。"
+        "trustBadge": "Your data is confidential and used only by Jon.Branding.",
+        "contactBadge": "15 minutes",
+        "quickContactLabel": "Quick contact",
+        "auditGivesLabel": "You get",
+        "auditOfferStack": [
+            "5 trust gaps",
+            "Clear service recommendation",
+            "No-pressure advice"
+        ],
+        "auditTimeLabel": "Format",
+        "auditFormat": [
+            "Phone or Telegram",
+            "15-minute diagnosis",
+            "Written next step"
+        ],
+        "objectionCopy": "Even if you are not ready to start, the audit gives you clarity.",
+        "riskCopy": "Leaving your phone is not a contract. We show the problem first.",
+        "footerCopyright": "Jon.Branding Agency"
     },
     "home": {
-        "cta1_title": "您的品牌也可以如此出色。",
-        "cta1_desc": "通过专业的设计将您的业务提升到一个新的水平。我们将帮助您为您的业务找到完美的解决方案。",
-        "cta1_button": "也为我的业务"
+        "cta1_title": "Does your brand help buyers trust you? Let?s check.",
+        "cta1_desc": "The free Brand Audit shows what makes your brand feel cheap, unclear, or untrustworthy and what to fix first.",
+        "cta1_button": "Get the free Brand Audit"
     },
     "urgencyBlock": {
         "title": "今天就开始构建您品牌的未来",
@@ -424,7 +393,27 @@
         "recommend_val": "90%"
     },
     "trustedBy": {
-        "title": "信任我们的公司"
+        "eyebrow": "Selected clients",
+        "title": "Businesses trust us with credibility, not decoration.",
+        "subtitle": "We help brands look more valuable, clearer, and easier to choose.",
+        "metrics": [
+            {
+                "value": "150+",
+                "label": "Projects"
+            },
+            {
+                "value": "9 yrs",
+                "label": "Experience"
+            },
+            {
+                "value": "30+",
+                "label": "Categories"
+            },
+            {
+                "value": "4 langs",
+                "label": "Markets"
+            }
+        ]
     },
     "whyUs": {
         "title": "为什么选择我们？",
@@ -469,122 +458,129 @@
         "solutionButton": "查看所有问题的解决方案"
     },
     "beforeAfter": {
-        "title": "在此之前和之后",
-        "subtitle": "亲眼看看正确的品牌塑造如何改变您的业务。",
-        "ctaTitle": "您的品牌准备好改变了吗？",
-        "ctaDesc": "让我们分析您的品牌并制定计划将其提升到一个新的水平。",
-        "ctaButton": "也改变我的品牌"
+        "eyebrow": "Proof",
+        "title": "Branding proves value before the sales call.",
+        "subtitle": "The audit answers one practical question: does the buyer understand, trust, and have a reason to choose you?",
+        "ctaTitle": "Ready to clarify your brand?",
+        "ctaDesc": "We start with a brand audit and identify the change with the highest impact.",
+        "ctaButton": "Get the free Brand Audit",
+        "cta": "Get the free Brand Audit",
+        "caseLabel": "Before / After",
+        "proofCards": [
+            {
+                "value": "Real",
+                "label": "client work"
+            },
+            {
+                "value": "Audit",
+                "label": "diagnosis first"
+            }
+        ]
     },
     "testimonials": {
-        "title": "有业务但还没有品牌吗？我们从零开始，按精英市场标准为您打造优质品牌！",
-        "subtitle": "我们以专业水准设计并为您在国际市场上全方位打造品牌。",
-        "textReviewsTitle": "文字评论",
-        "textReviewsSubtitle": "来自我们其他尊贵客户的评价"
+        "title": "Client trust",
+        "subtitle": "Portfolio can look nice. What matters is whether business owners feel the result.",
+        "textReviewsTitle": "Text reviews",
+        "textReviewsSubtitle": "From entrepreneurs we worked with"
     },
     "gallery": {
         "title": "我们的作品示例",
         "subtitle": "看看我们创建的品牌如何在他们的利基市场中脱颖而出。"
     },
     "founder": {
-        "title": "创始人：巴赫蒂约尔洪·加济耶夫",
-        "message": "你好！我是 Jon.Branding 的创始人巴赫蒂约尔洪。我帮助企业主将他们的品牌提升到一个新的水平。我的目标不仅仅是创建一个漂亮的设计，而是为您的业务建立一个工作的、基于策略的、以结果为导向的品牌系统。让我们一起分析您的品牌，唤醒其“休眠”的潜力。",
+        "title": "I build trust systems for business, not decoration.",
+        "message": "Hi, I am Bahtiyorjon, founder of Jon.Branding. We help business owners build brand systems through naming, strategy, identity, packaging, and brandbooks so buyers understand, remember, and choose them with confidence.",
         "points": [
             {
                 "icon": "Medal",
-                "text": "超过 50 个项目"
+                "text": "150+ brand and visual projects"
             },
             {
                 "icon": "Globe",
-                "text": "国际经验"
+                "text": "Local market understanding with global standards"
             },
             {
                 "icon": "Zap",
-                "text": "快速高效的沟通"
+                "text": "A process built for correct decisions"
             },
             {
                 "icon": "Users",
-                "text": "清晰透明的工作流程"
+                "text": "Clear communication at every stage"
             }
         ],
-        "phoneButton": "通过电话联系",
-        "telegramButton": "在 Telegram 上写信"
+        "phoneButton": "Call directly",
+        "telegramButton": "Write on Telegram",
+        "principles": [
+            "Strategy first",
+            "Business-language clarity",
+            "Result: trust and premium feel"
+        ]
     },
     "process": {
-        "title": "我们的工作流程",
-        "subtitle": "在每个项目中，我们都使用经过验证、透明且高效的流程。",
+        "title": "From free audit to a premium brand system.",
+        "subtitle": "The audit gives the first diagnosis. If we continue, the work becomes strategy, visual system, and rollout.",
         "phases": [
             {
                 "phase": "01",
-                "title": "Discovery (发现)",
-                "description": "旅程的开始和奠定基础。",
+                "title": "Brand Audit",
+                "description": "We review trust, premium feel, and clarity through a buyer?s eyes.",
                 "tasks": [
-                    "简报",
-                    "识别业务问题",
-                    "市场和竞争对手分析",
-                    "受众需求",
-                    "收集想法"
+                    "First impression",
+                    "Trust gap",
+                    "Competitor mirror"
                 ]
             },
             {
                 "phase": "02",
-                "title": "Strategy (策略)",
-                "description": "规划品牌路径。",
+                "title": "Strategy",
+                "description": "We define who you are for, why you are different, and why buyers should choose you.",
                 "tasks": [
-                    "目标设定",
-                    "品牌定位",
-                    "品牌平台",
-                    "核心原则",
-                    "规划"
+                    "Positioning",
+                    "Audience",
+                    "Core message"
                 ]
             },
             {
                 "phase": "03",
-                "title": "Creative Design (创意设计)",
-                "description": "品牌视觉形象形成。",
+                "title": "Visual system",
+                "description": "We align name, logo, colors, typography, packaging, and website into one system.",
                 "tasks": [
-                    "命名",
-                    "标志设计",
-                    "视觉概念",
-                    "包装设计",
-                    "品牌手册"
+                    "Logo",
+                    "Identity",
+                    "Brandbook"
                 ]
             },
             {
                 "phase": "04",
-                "title": "Presentation (演示)",
-                "description": "通过真实案例测试想法。",
+                "title": "Rollout",
+                "description": "We show the brand in real touchpoints: packaging, social, website, and sales materials.",
                 "tasks": [
-                    "设计演示",
-                    "基于反馈的调整",
-                    "最终迭代",
-                    "模型展示"
+                    "Mockups",
+                    "Rollout",
+                    "Content direction"
                 ]
             },
             {
                 "phase": "05",
-                "title": "Implementation (实施)",
-                "description": "将品牌变为现实。",
+                "title": "Usage control",
+                "description": "Your team receives rules and files to use the brand consistently.",
                 "tasks": [
-                    "最终设计文件",
-                    "移交品牌手册",
-                    "视觉指南",
-                    "印刷准备"
-                ]
-            },
-            {
-                "phase": "06",
-                "title": "Growth (增长)",
-                "description": "持续的品牌支持。",
-                "tasks": [
-                    "实施说明",
-                    "持续支持",
-                    "后续步骤咨询"
+                    "Files",
+                    "Rules",
+                    "Support"
                 ]
             }
         ],
-        "ctaTitle": "准备好讨论您的项目了吗？",
-        "ctaDesc": "让我们开始将您的想法变为现实。",
-        "ctaButton": "讨论项目"
+        "ctaTitle": "Start with a free Brand Audit.",
+        "ctaDesc": "We find what lowers trust and tell you the most important first step.",
+        "ctaButton": "Book the free audit",
+        "eyebrow": "After audit",
+        "proofItems": [
+            "Diagnosis",
+            "Strategy",
+            "Visual system",
+            "Implementation guide"
+        ]
     },
     "leadMagnet": {
         "title": "将您的品牌提升到一个新的水平",
@@ -705,8 +701,10 @@
         "ctaButton": "我已经得到了所有的答案，准备好开始了！"
     },
     "mobileCtaBar": {
-        "final_price": "最终价格",
-        "get_offer": "提交申请"
+        "final_price": "Final price",
+        "get_offer": "Get audit",
+        "cta": "Get the free Brand Audit",
+        "hint": "We check the trust signals in your brand"
     },
     "blog": {
         "title": "我们的博客",
@@ -1270,5 +1268,53 @@
             "description": "您的材料已准备好下载。我们的团队可能会很快与您联系。",
             "downloadCta": "下载检查清单 (PDF)"
         }
+    },
+    "auditOffer": {
+        "eyebrow": "Inside the free audit",
+        "title": "Is your brand helping sales or slowing them down?",
+        "description": "Before selling design, we show where your brand loses trust in the buyer?s eyes. You leave knowing what you need now and what can wait.",
+        "cta": "Book the free audit",
+        "promise": "No pressure. We show the problem and opportunity first.",
+        "outcomes": [
+            {
+                "value": "15m",
+                "label": "audit call"
+            },
+            {
+                "value": "5",
+                "label": "trust signals"
+            },
+            {
+                "value": "1",
+                "label": "priority plan"
+            },
+            {
+                "value": "Free",
+                "label": "initial audit"
+            }
+        ],
+        "items": [
+            {
+                "title": "First-impression diagnosis",
+                "desc": "We review whether your site, logo, packaging, or social presence feels premium and trustworthy."
+            },
+            {
+                "title": "Trust-gap map",
+                "desc": "We name the weak points that slow buyer confidence."
+            },
+            {
+                "title": "Competitor position",
+                "desc": "We show who looks stronger and where your brand can win visually."
+            },
+            {
+                "title": "Next steps",
+                "desc": "We rank whether strategy, naming, identity, packaging, or website should come first."
+            }
+        ],
+        "proof": [
+            "No obligation",
+            "Business language",
+            "Sales-focused plan"
+        ]
     }
 }
