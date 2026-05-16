@@ -22,9 +22,19 @@ function getCorsHeaders(request: Request) {
 
 function isAuthorizedWebhook(request: Request) {
   const expectedSecret = process.env.AMOCRM_WEBHOOK_SECRET?.trim();
-  if (!expectedSecret) return true;
+  if (!expectedSecret) {
+    console.error("CRITICAL: AMOCRM_WEBHOOK_SECRET is not set. Rejecting webhook for security.");
+    return false;
+  }
 
-  return request.headers.get('x-jonbranding-webhook-secret') === expectedSecret;
+  const providedSecret = request.headers.get('x-jonbranding-webhook-secret');
+  if (!providedSecret || providedSecret.length !== expectedSecret.length) return false;
+
+  let mismatch = 0;
+  for (let i = 0; i < expectedSecret.length; i++) {
+    mismatch |= expectedSecret.charCodeAt(i) ^ providedSecret.charCodeAt(i);
+  }
+  return mismatch === 0;
 }
 
 // Handle preflight requests for CORS
