@@ -275,7 +275,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
                             <span className="text-xs text-slate-500">{translations?.classCountMax ?? 'Maks. 45'}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <IconButton onClick={() => form.setValue('classCount', clampClassCount(field.value - 1))} disabled={field.value <= 1}>
+                            <IconButton onClick={() => form.setValue('classCount', clampClassCount(field.value - 1))} disabled={field.value <= 1} aria-label={translations?.decreaseClassCount || 'Klasslar sonini kamaytirish'}>
                                 <Minus className="h-4 w-4"/>
                             </IconButton>
                             <Slider
@@ -284,7 +284,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
                                 min={1} max={45} step={1} className="flex-1"
                                 aria-label={translations?.classCountLabel}
                             />
-                            <IconButton onClick={() => form.setValue('classCount', clampClassCount(field.value + 1))} disabled={field.value >= 45}>
+                            <IconButton onClick={() => form.setValue('classCount', clampClassCount(field.value + 1))} disabled={field.value >= 45} aria-label={translations?.increaseClassCount || "Klasslar sonini ko'paytirish"}>
                                 <Plus className="h-4 w-4"/>
                             </IconButton>
                             <div className="flex items-center justify-center w-16 h-10 rounded-md border bg-secondary font-bold text-primary text-lg">
