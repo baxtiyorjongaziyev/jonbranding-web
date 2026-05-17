@@ -298,6 +298,7 @@ export async function POST(request: Request) {
 
   const botToken = cleanSecret(process.env.TELEGRAM_BOT_TOKEN);
   const chatId = cleanSecret(process.env.TELEGRAM_CHAT_ID);
+  const threadId = cleanSecret(process.env.TELEGRAM_MESSAGE_THREAD_ID);
 
   if (!botToken || !chatId) {
     return NextResponse.json({ ok: false, error: 'Server configuration error' }, { status: 500 });
@@ -323,6 +324,10 @@ export async function POST(request: Request) {
       parse_mode: 'HTML',
       disable_web_page_preview: true,
     };
+
+    if (threadId) {
+      telegramPayload.message_thread_id = threadId;
+    }
 
     await sendTelegramMessage(botToken, telegramPayload);
 
