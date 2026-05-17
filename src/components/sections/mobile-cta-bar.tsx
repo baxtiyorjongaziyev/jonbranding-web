@@ -1,23 +1,27 @@
 'use client';
 
-import { useEffect, useState, type FC } from 'react';
+import { useState, useEffect, type FC } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 
 const MobileCtaBar: FC<{ onOpenModal: () => void; lang: string; dictionary: any }> = ({ onOpenModal, dictionary }) => {
   const t = dictionary;
+  const { scrollY } = useScroll();
   const [isVisible, setIsVisible] = useState(false);
 
+  // Initialize visibility state in useEffect to match initial scroll position on page load.
   useEffect(() => {
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > 520);
-    };
+      setIsVisible(scrollY.get() > 520);
+  }, [scrollY]);
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // ⚡ Bolt Performance Optimization:
+  // Replaced native window.addEventListener('scroll') with Framer Motion's useMotionValueEvent.
+  // Why: Native scroll listeners trigger excessive re-renders and layout thrashing because they fire synchronously on the main thread.
+  // Impact: useMotionValueEvent runs on Framer Motion's optimized loop, batching updates and significantly reducing rendering overhead.
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsVisible(latest > 520);
+  });
 
   if (!isVisible) return null;
 
