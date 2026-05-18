@@ -37,10 +37,60 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const [step, setStep] = useState(4);
   const { user } = useTelegram();
   const [translations, setTranslations] = useState<any>(null);
-  const quickContactLabel = translations?.quickContactLabel || 'Quick contact';
-  const auditOfferStack: string[] = translations?.auditOfferStack || ['5 trust gaps in your brand', 'Clear service recommendation', 'No pressure'];
-  const objectionCopy = translations?.objectionCopy || 'Even if you are not ready to buy, the audit gives you a clear next step.';
-  const riskCopy = translations?.riskCopy || 'Leaving your phone is not a contract. First we show the problem and opportunity.';
+  const fallback = useMemo(() => {
+    const defaultFallbacks: Record<string, any> = {
+      uz: {
+        quickContactLabel: "Tez aloqa",
+        auditGivesLabel: "Auditda olasiz",
+        auditOfferStack: [
+          "5 ta ishonch yo'qotadigan nuqta",
+          "Qaysi xizmat hozir kerakligini aniqlash",
+          "Majburiy sotuvsiz aniq tavsiya"
+        ],
+        objectionCopy: "Hali loyiha boshlashga tayyor bo'lmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.",
+        riskCopy: "Telefon qoldirish - shartnoma degani emas. Avval muammo va imkoniyatni ko'rsatamiz."
+      },
+      ru: {
+        quickContactLabel: "Быстрая связь",
+        auditGivesLabel: "Что дает аудит",
+        auditOfferStack: [
+          "5 слабых мест вашего бренда",
+          "Четкая рекомендация по услугам",
+          "Никакого давления"
+        ],
+        objectionCopy: "Даже если вы не готовы к покупке, аудит даст вам четкий следующий шаг.",
+        riskCopy: "Оставить телефон — это не контракт. Сначала мы покажем вам проблему и возможность."
+      },
+      en: {
+        quickContactLabel: "Quick contact",
+        auditGivesLabel: "Free audit gives",
+        auditOfferStack: [
+          "5 trust gaps in your brand",
+          "Clear service recommendation",
+          "No pressure"
+        ],
+        objectionCopy: "Even if you are not ready to buy, the audit gives you a clear next step.",
+        riskCopy: "Leaving your phone is not a contract. First we show the problem and opportunity."
+      },
+      zh: {
+        quickContactLabel: "快速联系",
+        auditGivesLabel: "免费审计提供",
+        auditOfferStack: [
+          "您品牌的 5 个信任漏洞",
+          "明确的服务建议",
+          "没有任何压力"
+        ],
+        objectionCopy: "即使您还没有准备好购买，审计也会给您一个明确的下一步。",
+        riskCopy: "留下您的电话不是合同。首先我们会向您展示问题และ机会。"
+      }
+    };
+    return defaultFallbacks[lang] || defaultFallbacks.uz;
+  }, [lang]);
+
+  const quickContactLabel = translations?.quickContactLabel || fallback.quickContactLabel;
+  const auditOfferStack: string[] = translations?.auditOfferStack || fallback.auditOfferStack;
+  const objectionCopy = translations?.objectionCopy || fallback.objectionCopy;
+  const riskCopy = translations?.riskCopy || fallback.riskCopy;
 
   useEffect(() => {
     if (isOpen) {
@@ -168,11 +218,21 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   }, [isOpen, form, user]);
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[1000px] p-0 rounded-[8px] border-none bg-transparent shadow-none w-[95vw] md:w-full">
-        <div className="flex flex-col md:flex-row h-auto min-h-fit md:h-[620px] bg-white rounded-[8px] relative shadow-2xl overflow-hidden" onKeyDown={handleKeyDown}>
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
+      <DialogContent className="max-h-[calc(100dvh-1rem)] w-[95vw] max-w-[1000px] overflow-hidden rounded-[18px] border-none bg-transparent p-0 shadow-none md:w-full [&>button:last-child]:hidden relative">
+        {/* Safe, permanent close button that never scrolls away */}
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label={translations?.buttons?.close || 'Oynani yopish'}
+          className="absolute right-4 top-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/80 bg-white/95 text-slate-900 shadow-[0_18px_45px_-24px_rgba(15,23,42,0.9)] transition-[background-color,transform,color] duration-200 hover:bg-slate-950 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 active:scale-[0.96]"
+        >
+          <X className="h-5 w-5" aria-hidden="true" />
+        </button>
+
+        <div className="relative flex max-h-[calc(100dvh-1rem)] flex-col overflow-y-auto overscroll-contain rounded-[18px] bg-white shadow-2xl md:h-[620px] md:flex-row md:overflow-hidden" onKeyDown={handleKeyDown}>
           
-          <div className="w-full md:w-[40%] bg-[#0A0A0A] relative flex flex-col justify-between p-6 md:p-12 text-white overflow-hidden shrink-0">
+          <div className="relative flex w-full shrink-0 flex-col justify-between overflow-hidden bg-[#050912] p-6 pr-16 text-white md:w-[40%] md:p-12 md:pr-12">
             <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(37,99,235,0.26),transparent_55%,rgba(58,225,255,0.14))] pointer-events-none" />
             
             <div className="relative z-10 w-full">
@@ -218,7 +278,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
             </div>
           </div>
 
-          <div className="w-full md:w-[60%] p-6 md:p-8 lg:p-10 flex flex-col relative bg-white md:rounded-r-[8px] overflow-hidden flex-1">
+          <div className="relative flex w-full flex-1 flex-col overflow-hidden bg-white p-6 md:w-[60%] md:rounded-r-[18px] md:p-8 lg:p-10">
 
 
             <div className="flex-1 flex flex-col h-full py-4 md:py-6">
@@ -269,7 +329,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 flex flex-col">
-                        <div className="flex-1 pr-1 py-2">
+                        <div className="flex-1 py-2 pr-1">
                           <AnimatePresence mode="wait">
                             {step === 1 && (
                               <motion.div key="step1" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-4">
@@ -414,6 +474,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                             placeholder={translations?.fields?.name?.placeholder}
                                             className={`pl-12 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                             aria-invalid={fieldState.invalid ? "true" : "false"}
+                                            autoComplete="name"
                                             {...field}
                                         />
                                       </motion.div>
@@ -437,6 +498,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                           className={`pl-12 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white font-mono ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                           value={field.value}
                                           aria-invalid={fieldState.invalid ? "true" : "false"}
+                                          autoComplete="tel"
+                                          inputMode="tel"
                                           onChange={(e) => {
                                             const formatted = formatPhoneNumber(e.target.value);
                                             field.onChange(formatted);
@@ -454,7 +517,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                     <FormControl>
                                       <div className="relative">
                                         <MessageCircle className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-                                        <Input placeholder={translations?.fields?.telegram?.placeholder || '@username'} className="pl-12 border-gray-200 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white" {...field} />
+                                        <Input placeholder={translations?.fields?.telegram?.placeholder || '@username'} className="pl-12 border-gray-200 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white" autoComplete="off" {...field} />
                                       </div>
                                     </FormControl>
                                   </FormItem>
@@ -464,7 +527,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                           </AnimatePresence>
                         </div>
 
-                        <div className="pt-4 md:pt-4 border-t border-gray-50 mt-auto bg-white z-10 shrink-0">
+                        <div className="z-10 mt-auto shrink-0 border-t border-gray-50 bg-white pt-4 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] md:pb-0 md:pt-4">
                           <div className="flex gap-4">
                             {step > 1 && step < 4 && (
                               <Button type="button" variant="ghost" onClick={prevStep} className="flex-1 h-11 md:h-12 rounded-[8px] text-gray-500 font-bold hover:bg-gray-50 active:scale-[0.97] transition-transform duration-150">
@@ -473,7 +536,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                             )}
                             
                             {step < 4 ? (
-                              <Button type="button" onClick={nextStep} className="flex-[2] h-11 md:h-12 bg-gray-900 hover:bg-black text-white rounded-[8px] font-bold group shadow-xl shadow-gray-200/50 active:scale-[0.97] transition-transform duration-150">
+                              <Button type="button" onClick={nextStep} className="flex-[2] h-11 md:h-12 bg-gray-900 hover:bg-slate-950 text-white rounded-[8px] font-bold group shadow-xl shadow-gray-200/50 active:scale-[0.97] transition-transform duration-150">
                                 {translations?.buttons?.next || 'Next Step'}
                                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                               </Button>

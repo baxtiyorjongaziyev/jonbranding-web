@@ -101,7 +101,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
             {translations.proofCards?.length ? (
               <div className="mt-6 grid max-w-xl grid-cols-2 gap-3">
                 {translations.proofCards.map((card) => (
-                  <div key={card.label} className="rounded-[8px] border border-white/10 bg-white/[0.055] p-4 transition-all duration-300 hover:border-white/20">
+                  <div key={card.label} className="rounded-[8px] border border-white/10 bg-white/[0.055] p-4 transition-[border-color,transform] duration-300 hover:border-white/20">
                     <div className="text-2xl font-black tracking-tight text-white">{card.value}</div>
                     <div className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-white/48">{card.label}</div>
                   </div>
@@ -121,7 +121,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
           <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
             <motion.div 
               variants={itemVariants} 
-              className="overflow-hidden rounded-[8px] border border-white/12 bg-white/[0.06] p-2 shadow-[0_40px_100px_-50px_rgba(0,0,0,0.8)] transition-all duration-300 hover:border-white/20"
+              className="overflow-hidden rounded-[8px] border border-white/12 bg-white/[0.06] p-2 shadow-[0_40px_100px_-50px_rgba(0,0,0,0.8)] transition-[border-color,transform] duration-300 hover:border-white/20"
             >
               <ImageComparisonSlider
                 beforeImage={{ src: featuredItem.oldImg, alt: `${featuredItem.brand} old`, 'data-ai-hint': featuredItem.oldHint || '', unoptimized: true }}
@@ -139,7 +139,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
 
             <motion.div variants={itemVariants} className="grid gap-4">
               {sideItems.map((item) => (
-                <div key={item.brand} className="overflow-hidden rounded-[8px] border border-white/10 bg-white/[0.055] p-2 transition-all duration-300 hover:border-white/20">
+                <div key={item.brand} className="overflow-hidden rounded-[8px] border border-white/10 bg-white/[0.055] p-2 transition-[border-color,transform] duration-300 hover:border-white/20">
                   <ImageComparisonSlider
                     beforeImage={{ src: item.oldImg, alt: `${item.brand} old`, 'data-ai-hint': item.oldHint || '', unoptimized: true }}
                     afterImage={{ src: item.newImg, alt: `${item.brand} new`, 'data-ai-hint': item.newHint || '', unoptimized: true }}

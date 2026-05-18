@@ -71,7 +71,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
               <motion.div 
                 key={phase.title || index} 
                 variants={itemVariants}
-                className="group grid gap-5 rounded-[8px] border border-brand-line bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)] sm:grid-cols-[120px_1fr_auto] sm:items-start sm:p-6"
+                className="group grid gap-5 rounded-[8px] border border-brand-line bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)] sm:grid-cols-[120px_1fr_auto] sm:items-start sm:p-6"
               >
                 <div>
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-[8px] bg-brand-ink text-sm font-black text-white">

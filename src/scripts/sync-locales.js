@@ -14,7 +14,7 @@ const uzFallback = {
         "yourNameLabel": "Ismingiz",
         "yourNamePlaceholder": "Ismingizni kiriting",
         "phoneLabel": "Telefon raqamingiz",
-        "phonePlaceholder": "+998901234567",
+        "phonePlaceholder": "+998 (__) ___-__-__",
         "entityTypeLabel": "Shaxs turi",
         "entityOptions": [
             { "value": "fiz", "label": "Jismoniy shaxs", "labelShort": "Jismoniy" },

@@ -17,7 +17,6 @@ const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'), { ss
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'), { ssr: false });
 const UrgencyBlock = dynamic(() => import('@/components/sections/urgency-block'), { ssr: false });
 const PersonalOfferBlock = dynamic(() => import('@/components/sections/personal-offer-block'), { ssr: false });
-const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 
 const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const [step, setStep] = useState(0);
@@ -83,7 +82,6 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
               <PersonalOfferBlock onCtaClick={handleOpenModal} />
               <UrgencyBlock />
               <QueueStatus onCtaClick={handleOpenModal} />
-              <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary?.mobileCtaBar} />
             </div>
           )}
         </>

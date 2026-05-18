@@ -478,8 +478,11 @@
         ]
     },
     "testimonials": {
+        "eyebrow": "Client voice",
         "title": "Client trust",
         "subtitle": "Portfolio can look nice. What matters is whether business owners feel the result.",
+        "playAudio": "Play voice note",
+        "pauseAudio": "Pause",
         "textReviewsTitle": "Text reviews",
         "textReviewsSubtitle": "From entrepreneurs we worked with"
     },
@@ -510,6 +513,8 @@
         ],
         "phoneButton": "Call directly",
         "telegramButton": "Write on Telegram",
+        "videoButton": "45 seconds from founder",
+        "videoAlt": "Bahtiyorjon Gaziyev, founder of Jon.Branding",
         "principles": [
             "Strategy first",
             "Business-language clarity",
@@ -1029,7 +1034,7 @@
             "yourNameLabel": "您的姓名",
             "yourNamePlaceholder": "请输入您的全名",
             "phoneLabel": "您的联系电话",
-            "phonePlaceholder": "+998901234567",
+            "phonePlaceholder": "+998 (__) ___-__-__",
             "classCountLabel": "活动类别（类）数量",
             "classCountMax": "最高 45 类",
             "decreaseClassCount": "减少类别数量",

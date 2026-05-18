@@ -6,6 +6,11 @@ declare global {
       NEXT_PUBLIC_GA_ID?: string;
     };
     gtag?: (...args: any[]) => void;
+    fbq?: (...args: any[]) => void;
+    amplitude?: {
+      track: (eventName: string, eventProperties?: Record<string, any>) => void;
+      setUserId: (userId: string) => void;
+    };
     bus?: {
       emit: (...args: any[]) => void;
       on: (...args: any[]) => void;

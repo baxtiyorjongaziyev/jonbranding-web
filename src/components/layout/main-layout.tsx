@@ -75,6 +75,9 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
 
     const handleCloseModal = useCallback(() => {
         setModalOpen(false);
+        if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('closeContactModal'));
+        }
     }, []);
     
     const reportError = useCallback((error: ErrorEvent) => {
