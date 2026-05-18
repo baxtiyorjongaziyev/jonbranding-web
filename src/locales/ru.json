@@ -1026,8 +1026,6 @@
             "phonePlaceholder": "+998901234567",
             "classCountLabel": "Количество классов деятельности",
             "classCountMax": "Макс. 45",
-            "decreaseClassCount": "Уменьшить количество классов",
-            "increaseClassCount": "Увеличить количество классов",
             "personTypeLabel": "Тип лица",
             "personTypeOptions": [
                 {

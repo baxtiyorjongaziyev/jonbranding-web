@@ -1034,8 +1034,6 @@
             "phonePlaceholder": "+998901234567",
             "classCountLabel": "活动类别（类）数量",
             "classCountMax": "最高 45 类",
-            "decreaseClassCount": "减少类别数量",
-            "increaseClassCount": "增加类别数量",
             "personTypeLabel": "主体类型",
             "personTypeOptions": [
                 {

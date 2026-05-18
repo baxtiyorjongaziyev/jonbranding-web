@@ -1036,8 +1036,6 @@
             "phonePlaceholder": "+998901234567",
             "classCountLabel": "Faoliyat turlari (klasslar) soni",
             "classCountMax": "Maks. 45",
-            "decreaseClassCount": "Klasslar sonini kamaytirish",
-            "increaseClassCount": "Klasslar sonini ko'paytirish",
             "personTypeLabel": "Shaxs turi",
             "personTypeOptions": [
                 {
