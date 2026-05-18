@@ -75,9 +75,9 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
 
   return (
     <BrandSection tone="dark" className="relative bg-[#070b12] py-20 text-white sm:py-28 overflow-hidden">
-      {/* 1. Seamless transitions: Light -> Dark top fade & Dark -> Light bottom fade */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#fbfaf7] to-transparent pointer-events-none z-10" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f7f4ee] to-transparent pointer-events-none z-10" />
+
+
+
       
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(37,99,235,0.18),transparent_42%,rgba(58,225,255,0.12))]" />
       
