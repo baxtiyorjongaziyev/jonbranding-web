@@ -35,11 +35,11 @@ export default function TelegramBanner({ lang }: { lang: string }) {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -100, opacity: 0 }}
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
           transition={{ type: 'spring', damping: 20, stiffness: 100 }}
-          className="fixed top-0 left-0 right-0 z-[100] bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-md"
+          className="sticky top-0 left-0 right-0 z-[60] bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-md overflow-hidden"
         >
           <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 flex-1 min-w-0">
