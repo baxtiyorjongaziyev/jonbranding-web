@@ -404,7 +404,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                   <FormItem className="space-y-1">
                                     <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.name?.label}</FormLabel>
                                     <FormControl>
-                                      <div className="relative">
+                                      <motion.div 
+                                        animate={fieldState.invalid ? { x: [0, -6, 6, -6, 6, 0] } : {}}
+                                        transition={{ duration: 0.4 }}
+                                        className="relative"
+                                      >
                                         <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                                         <Input
                                             placeholder={translations?.fields?.name?.placeholder}
@@ -412,7 +416,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                             aria-invalid={fieldState.invalid ? "true" : "false"}
                                             {...field}
                                         />
-                                      </div>
+                                      </motion.div>
                                     </FormControl>
                                     <FormMessage />
                                   </FormItem>
@@ -422,7 +426,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                   <FormItem className="space-y-1">
                                     <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.phone?.label}</FormLabel>
                                     <FormControl>
-                                      <div className="relative">
+                                      <motion.div 
+                                        animate={fieldState.invalid ? { x: [0, -6, 6, -6, 6, 0] } : {}}
+                                        transition={{ duration: 0.4 }}
+                                        className="relative"
+                                      >
                                         <PhoneCall className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                                         <Input 
                                           placeholder={translations?.fields?.phone?.placeholder} 
@@ -434,7 +442,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                             field.onChange(formatted);
                                           }}
                                         />
-                                      </div>
+                                      </motion.div>
                                     </FormControl>
                                     <FormMessage />
                                   </FormItem>
@@ -459,18 +467,18 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         <div className="pt-4 md:pt-4 border-t border-gray-50 mt-auto bg-white z-10 shrink-0">
                           <div className="flex gap-4">
                             {step > 1 && step < 4 && (
-                              <Button type="button" variant="ghost" onClick={prevStep} className="flex-1 h-11 md:h-12 rounded-[8px] text-gray-500 font-bold hover:bg-gray-50">
+                              <Button type="button" variant="ghost" onClick={prevStep} className="flex-1 h-11 md:h-12 rounded-[8px] text-gray-500 font-bold hover:bg-gray-50 active:scale-[0.97] transition-transform duration-150">
                                 {translations?.buttons?.back || 'Back'}
                               </Button>
                             )}
                             
                             {step < 4 ? (
-                              <Button type="button" onClick={nextStep} className="flex-[2] h-11 md:h-12 bg-gray-900 hover:bg-black text-white rounded-[8px] font-bold group shadow-xl shadow-gray-200/50">
+                              <Button type="button" onClick={nextStep} className="flex-[2] h-11 md:h-12 bg-gray-900 hover:bg-black text-white rounded-[8px] font-bold group shadow-xl shadow-gray-200/50 active:scale-[0.97] transition-transform duration-150">
                                 {translations?.buttons?.next || 'Next Step'}
                                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                               </Button>
                             ) : (
-                              <Button type="submit" disabled={isSubmitting} className="flex-[2] h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-[8px] font-bold shadow-xl shadow-blue-100 flex items-center justify-center gap-2 group transition-all">
+                              <Button type="submit" disabled={isSubmitting} className="flex-[2] h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-[8px] font-bold shadow-xl shadow-blue-100 flex items-center justify-center gap-2 group transition-all active:scale-[0.97] duration-150">
                                 {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                                   <>
                                     {translations?.buttons?.submit || 'Get Strategy'}
@@ -492,7 +500,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     </Form>
                   </motion.div>
                 ) : (
-                  <motion.div key="success-container" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center text-center py-12 px-4">
+                  <motion.div key="success-container" initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', damping: 20, stiffness: 200 }} className="flex flex-col items-center text-center py-12 px-4">
                     <div className="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-8 relative">
                       <motion.div initial={{ scale: 0 }} animate={{ scale: 1.2 }} transition={{ type: 'spring', delay: 0.2 }} className="absolute inset-0 bg-blue-100 rounded-full opacity-50" />
                       <CheckCircle2 className="w-12 h-12 text-blue-600 relative z-10" />
