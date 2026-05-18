@@ -108,12 +108,12 @@ const BentoCard = ({
         visible: { opacity: 1, y: 0 }
       }}
       animate={{ 
-        scale: isFocused ? 1.01 : 1,
-        z: isFocused ? 10 : 0
+        scale: isFocused ? 1.015 : 1,
+        z: isFocused ? 15 : 0
       }}
       className={cn(
-        "group relative overflow-hidden rounded-[2.5rem] p-6 md:p-12 glass-card-premium h-full flex flex-col justify-between cursor-pointer transform-gpu transition-shadow duration-500",
-        isFocused ? "shadow-2xl ring-1 ring-white/10" : "opacity-80 grayscale-[0.1]",
+        "group relative overflow-hidden rounded-[2rem] p-6 md:p-12 border border-slate-100/80 dark:border-slate-800/40 bg-slate-50/60 dark:bg-slate-900/40 h-full flex flex-col justify-between cursor-pointer transform-gpu transition-all duration-300",
+        isFocused ? "shadow-2xl border-blue-500/25 ring-1 ring-blue-500/10" : "hover:border-slate-200/80 dark:hover:border-slate-700/60",
         className
       )}
     >

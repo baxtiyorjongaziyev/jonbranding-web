@@ -7,6 +7,7 @@ import { ArrowRight, BarChart3, CheckCircle2, ShieldCheck, Sparkles } from 'luci
 import { Button } from '@/components/ui/button';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
+import { motion } from 'framer-motion';
 
 const portfolioImages: GalleryImage[] = projects
   .filter((project) => !project.hiddenInHero)
@@ -54,6 +55,45 @@ function getHeroCopy(dictionary: HeroDictionary) {
   };
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 18,
+    },
+  },
+};
+
+const rightColumnVariants = {
+  hidden: { opacity: 0, x: 30, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 80,
+      damping: 16,
+      delay: 0.3,
+    },
+  },
+};
+
 const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
   if (!dictionary) return null;
 
@@ -68,22 +108,39 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white via-white/30 to-transparent pointer-events-none" />
       </div>
 
-      <div className="container mx-auto flex min-h-[100svh] max-w-[1400px] items-center px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-16 lg:pt-28">
+      <motion.div 
+        className="container mx-auto flex min-h-[100svh] max-w-[1400px] items-center px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-16 lg:pt-28"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         <div className="grid w-full items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div className="flex flex-col justify-center text-center lg:text-left">
-            <div className="mb-6 inline-flex items-center justify-center gap-2 self-center rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md lg:self-start">
+            <motion.div 
+              variants={itemVariants}
+              className="mb-6 inline-flex items-center justify-center gap-2 self-center rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md lg:self-start"
+            >
               <Sparkles className="h-3.5 w-3.5 text-brand-lime" />
               <span className="text-[11px] font-black uppercase tracking-[0.22em] text-blue-100">{heroCopy.preHeadline}</span>
-            </div>
-            <h1 className="mx-auto max-w-[292px] sm:max-w-3xl text-balance text-[clamp(2.35rem,5.9vw,6.25rem)] font-black leading-[0.94] tracking-tight text-white drop-shadow-md sm:drop-shadow-none sm:text-[clamp(2.65rem,6.2vw,6.25rem)] lg:mx-0">
+            </motion.div>
+            <motion.h1 
+              variants={itemVariants}
+              className="mx-auto max-w-[292px] sm:max-w-3xl text-balance text-[clamp(2.35rem,5.9vw,6.25rem)] font-black leading-[0.94] tracking-tight text-white drop-shadow-md sm:drop-shadow-none sm:text-[clamp(2.65rem,6.2vw,6.25rem)] lg:mx-0"
+            >
               {renderHeadline(heroCopy.title, 'text-white')}
-            </h1>
+            </motion.h1>
 
-            <p className="mx-auto mt-5 max-w-[292px] sm:max-w-xl text-pretty text-base leading-7 text-blue-100/78 sm:mt-6 sm:text-lg sm:leading-8 lg:mx-0 drop-shadow-sm sm:drop-shadow-none">
+            <motion.p 
+              variants={itemVariants}
+              className="mx-auto mt-5 max-w-[292px] sm:max-w-xl text-pretty text-base leading-7 text-blue-100/78 sm:mt-6 sm:text-lg sm:leading-8 lg:mx-0 drop-shadow-sm sm:drop-shadow-none"
+            >
               {heroCopy.description}
-            </p>
+            </motion.p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:justify-center lg:justify-start">
+            <motion.div 
+              variants={itemVariants}
+              className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:justify-center lg:justify-start"
+            >
               <Button
                 onClick={onOpenContact}
                 size="lg"
@@ -100,9 +157,12 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
               >
                 <Link href="#audit-offer">{heroCopy.ctaSecondary}</Link>
               </Button>
-            </div>
+            </motion.div>
 
-            <div className="mt-6 grid max-w-xl grid-cols-1 gap-2 self-center sm:mt-8 sm:grid-cols-3 lg:self-start">
+            <motion.div 
+              variants={itemVariants}
+              className="mt-6 grid max-w-xl grid-cols-1 gap-2 self-center sm:mt-8 sm:grid-cols-3 lg:self-start"
+            >
               {heroCopy.proofItems.map((item) => (
                 <div
                   key={item}
@@ -112,10 +172,13 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
                   <span className="min-w-0">{item}</span>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
-          <div className="relative flex items-center justify-center">
+          <motion.div 
+            variants={rightColumnVariants}
+            className="relative flex items-center justify-center"
+          >
             <div className="relative w-full max-w-xl overflow-hidden rounded-xl border border-white/15 bg-white/[0.055] p-2 shadow-[0_40px_120px_-50px_rgba(0,0,0,0.95)] backdrop-blur-xl lg:max-w-none">
               <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10" />
               <CaseWall images={portfolioImages} />
@@ -132,9 +195,9 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
