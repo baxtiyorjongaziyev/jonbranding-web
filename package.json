@@ -105,7 +105,7 @@
     "typescript": "^5",
     "vite": "^8.0.10",
     "vitest": "^4.1.5",
-    "wrangler": "^4.90.0"
+    "wrangler": "^4.92.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
