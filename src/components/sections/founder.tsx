@@ -54,8 +54,8 @@ const Founder: FC<{ lang: string; dictionary: any }> = ({ dictionary }) => {
 
   return (
     <BrandSection id="founder" tone="dark" className="relative overflow-hidden py-24 sm:py-32">
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-brand-paper to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-brand-mist to-transparent" />
+
+
 
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(37,99,235,0.16),transparent_44%,rgba(58,225,255,0.1))]" />

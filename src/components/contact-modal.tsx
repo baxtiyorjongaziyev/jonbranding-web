@@ -219,7 +219,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="max-h-[calc(100dvh-1rem)] w-[95vw] max-w-[1000px] overflow-hidden rounded-[18px] border-none bg-transparent p-0 shadow-none md:w-full [&>button:last-child]:hidden relative">
+      <DialogContent className="max-h-[calc(100dvh-1rem)] w-[95vw] max-w-[1000px] overflow-hidden rounded-[18px] border-none bg-transparent p-0 shadow-none md:w-full [&>button:last-child]:hidden">
         {/* Safe, permanent close button that never scrolls away */}
         <button
           type="button"
