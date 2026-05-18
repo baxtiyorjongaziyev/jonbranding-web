@@ -66,7 +66,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
         <div className="absolute inset-0 bg-[linear-gradient(115deg,#070b12_0%,#101735_52%,#06252b_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] opacity-35" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,11,18,0.95)_0%,rgba(7,11,18,0.72)_43%,rgba(7,11,18,0.3)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[hsl(var(--brand-paper))] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white via-white/30 to-transparent pointer-events-none" />
       </div>
 
       <div className="container mx-auto flex min-h-[100svh] max-w-[1400px] items-center px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-16 lg:pt-28">
