@@ -14,11 +14,20 @@ const KnobToggle = ({ isOn, onToggle }: { isOn: boolean; onToggle: (value: boole
 
   return (
     <motion.div
+      role="switch"
+      aria-checked={isOn}
+      tabIndex={0}
       className={cn(
-        "w-12 h-8 flex items-center p-1 rounded-full cursor-pointer transition-colors",
+        "w-12 h-8 flex items-center p-1 rounded-full cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         isOn ? "bg-accent justify-end" : "bg-white/10 justify-start"
       )}
       onClick={() => onToggle(!isOn)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onToggle(!isOn);
+        }
+      }}
     >
       <motion.div
         className={cn(

@@ -134,12 +134,27 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
 
       if (!res.ok) throw new Error("API Error");
 
-      // Oisha API server sends successfully, then processes asynchronously via Telegram queue.
-      // For real-time feedback on the site, we might need a separate 'poll' or a different endpoint.
-      // Based on api_server.py, there is NO immediate reply in send_chat_message.
-      // So we wait a bit and fetch history again or keep polling.
-      
-      setTimeout(() => fetchHistory(userId), 2000); // Simple poll for now
+      // Show an immediate fallback message indicating the query is received if real-time polling isn't instantaneous
+      setTimeout(() => {
+        setMessages(prev => {
+           // check if there is already a response from the model since we asked
+           const lastMsg = prev[prev.length - 1];
+           if (lastMsg && lastMsg.role === 'user') {
+              return [...prev, {
+                id: 'system-ack-' + Date.now(),
+                text: lang === 'ru'
+                        ? 'Ваше сообщение отправлено нашим стратегам. Они скоро свяжутся с вами в этом чате.'
+                        : 'Xabaringiz strateglarga yuborildi. Ular tez orada shu yerda javob berishadi.',
+                role: 'model',
+                timestamp: new Date().toISOString()
+              }];
+           }
+           return prev;
+        });
+      }, 3000);
+
+      // Poll once to see if an immediate AI response came back
+      setTimeout(() => fetchHistory(userId), 2000);
 
     } catch (error) {
       toast({
