@@ -9,11 +9,8 @@ import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 import StickyCTA from '@/components/ui/sticky-cta';
 import MobileNavBar from '@/components/layout/mobile-nav-bar';
-import dynamic from 'next/dynamic';
 import { Lexend } from 'next/font/google';
 import TabNotification from '@/components/layout/tab-notification';
-const OishaWidget = dynamic(() => import('@/components/oisha-widget'), { ssr: false });
-const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'), { ssr: false });
 import { cn } from '@/lib/utils';
 
 
@@ -265,7 +262,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
         </Script>
 
         
-        <MainLayout>
+        <MainLayout leadMagnetDictionary={(dictionary as any).leadMagnetPopup}>
           <Header lang={lang} dictionary={dictionary.header} />
           
           <div className="flex-grow">
@@ -274,7 +271,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <Footer lang={lang} dictionary={dictionary.footer} />
           <StickyCTA lang={lang} />
           <MobileNavBar lang={lang} dictionary={dictionary.header} />
-          <OishaWidget lang={lang as 'uz' | 'ru'} />
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">
           {`
@@ -295,8 +291,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
             <img src="https://mc.yandex.ru/watch/91628105" style={{ position: 'absolute', left: '-9999px' }} alt="" />
           </div>
         </noscript>
-        
-          <LeadMagnetPopup dictionary={(dictionary as any).leadMagnetPopup} />
         </MainLayout>
       </body>
     </html>
