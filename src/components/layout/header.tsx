@@ -2,6 +2,7 @@
 
 import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
 import { Menu, Phone, Send } from 'lucide-react';
@@ -144,6 +145,7 @@ const ExpandingButton = ({
 };
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
+  const pathname = usePathname();
   const { scrollY } = useScroll();
   
   const top = useTransform(scrollY, [0, 80], [0, 16]);
@@ -217,6 +219,22 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   if (!dictionary) return null;
 
+  const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
+  const lightSurfaceRoutes = [
+    '/blog',
+    '/checklist',
+    '/pricing',
+    '/privacy',
+    '/quiz',
+    '/sitemap',
+    '/terms',
+    '/xizmatlar',
+  ];
+  const startsOnLightSurface = lightSurfaceRoutes.some(
+    (route) => pathnameWithoutLocale === route || pathnameWithoutLocale.startsWith(`${route}/`)
+  );
+  const useDarkHeaderText = scrolled || startsOnLightSurface;
+
   const navItems = [
     { href: getLocalizedPath('/#portfolio'), label: dictionary.portfolio },
     { href: getLocalizedPath('/#founder'), label: dictionary.founder },
@@ -265,7 +283,9 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           scrolled ? "px-6 lg:px-10" : "px-6 lg:px-8",
           scrolled 
             ? "max-w-[95%] lg:max-w-6xl py-2 liquid-glass rounded-full px-8"
-            : "max-w-full lg:max-w-screen-2xl bg-white/20 border-b border-white/10 px-8"
+            : startsOnLightSurface
+              ? "max-w-full lg:max-w-screen-2xl bg-white/80 border-b border-black/10 px-8 backdrop-blur-xl"
+              : "max-w-full lg:max-w-screen-2xl bg-white/20 border-b border-white/10 px-8"
         )}
         style={{ 
           top: top,
@@ -274,7 +294,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         suppressHydrationWarning
       >
         <Link href={getLocalizedPath('/')} className="flex items-center shrink-0" aria-label="Jon Branding - Bosh sahifa">
-          <Logo isWhite={!scrolled} />
+          <Logo isWhite={!useDarkHeaderText} />
         </Link>
 
         {mounted && (
@@ -286,7 +306,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               <NavigationMenu aria-label="Asosiy navigatsiya">
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className={cn("bg-transparent", scrolled ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
+                    <NavigationMenuTrigger className={cn("bg-transparent", useDarkHeaderText ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
                       {dictionary.services}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -305,7 +325,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   </NavigationMenuItem>
                   {navItems.map((item) => (
                     <NavigationMenuItem key={item.label}>
-                      <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent text-base font-semibold", scrolled ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
+                      <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent text-base font-semibold", useDarkHeaderText ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
                         <Link href={item.href}>
                           {item.label}
                         </Link>
@@ -364,7 +384,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           {mounted && (
             <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn(scrolled ? "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground" : "border-white/20 bg-white/10 text-white hover:bg-white/15 hover:text-white")}>
+                <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn(useDarkHeaderText ? "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground" : "border-white/20 bg-white/10 text-white hover:bg-white/15 hover:text-white")}>
                   <Menu className="h-5 w-5" aria-hidden="true" />
                   <span className="sr-only">{dictionary.open_menu}</span>
                 </Button>

@@ -64,7 +64,7 @@
             "keywords": "brandbook, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
         },
         "title": "Nega 90% bizneslar brendingda xato qilib, millionlab so'm yo'qotadi?",
-        "subtitle": "Брендбук — это не просто документ с логотипами, это конституция вашего бренда, которая обеспечивает его последовательность и целостность.",
+        "subtitle": "Brendbuk - bu faqat logotiplar hujjati emas, balki brendingiz izchilligi va yaxlitligini saqlaydigan konstitutsiya.",
         "section1_title": "Nega har bir biznesga brendbuk kerak?",
         "section1_p1": "Brendbuk — brendni boshqarish uchun asosiy vositadir. U vizual va g'oyaviy elementlardan foydalanish qoidalarini aniq belgilab beradi — logotipdan tortib muloqot ohangigacha.",
         "section1_p2": "Ushbu hujjat marketingdagi tartibsizlikdan qochishga, vaqtni va pulni dizaynerlar va marketologlar bilan ishlashda tejashga yordam beradi.",
@@ -735,65 +735,65 @@
                         "score": 3
                     },
                     {
-                        "text": "Частично, но еще не полностью",
+                        "text": "Qisman, lekin hali to'liq emas",
                         "score": 2
                     },
                     {
-                        "text": "Нет, не задумывался об этом",
+                        "text": "Yo'q, bu haqda o'ylab ko'rmaganman",
                         "score": 1
                     }
                 ]
             },
             {
-                "question": "Можете ли вы четко представить свою целевую аудиторию (идеального клиента)?",
-                "brandExample": "Apple — творческие профессионалы и энтузиасты технологий; Johnson's Baby — молодые мамы.",
+                "question": "Maqsadli auditoriyangizni (ideal mijozingizni) aniq tasavvur qila olasizmi?",
+                "brandExample": "Apple - ijodiy professionallar va texnologiya ixlosmandlari; Johnson's Baby - yosh onalar.",
                 "options": [
                     {
-                        "text": "Да, я знаю их потребности и желания",
+                        "text": "Ha, ularning ehtiyoj va istaklarini bilaman",
                         "score": 3
                     },
                     {
-                        "text": "У меня есть общее представление",
+                        "text": "Umumiy tasavvurim bor",
                         "score": 2
                     },
                     {
-                        "text": "Нет, я пытаюсь продавать всем",
+                        "text": "Yo'q, hammaga sotishga harakat qilaman",
                         "score": 1
                     }
                 ]
             },
             {
-                "question": "Какими конкретными преимуществами ваш бренд отличается от конкурентов?",
-                "brandExample": "Tesla — инновационные электромобили и автопилот; M&M's — шоколад, который 'не тает в руках'.",
+                "question": "Brendingiz raqobatchilardan qaysi aniq ustunliklari bilan farq qiladi?",
+                "brandExample": "Tesla - innovatsion elektromobillar va avtopilot; M&M's - qo'lda erimaydigan shokolad.",
                 "options": [
                     {
-                        "text": "У меня есть как минимум 2-3 конкретных преимущества",
+                        "text": "Kamida 2-3 ta aniq ustunligim bor",
                         "score": 3
                     },
                     {
-                        "text": "Я отличаюсь только ценой",
+                        "text": "Faqat narx bilan farqlanaman",
                         "score": 2
                     },
                     {
-                        "text": "У меня нет явных преимуществ",
+                        "text": "Aniq ustunligim yo'q",
                         "score": 1
                     }
                 ]
             },
             {
-                "question": "Отражает ли ваш визуальный облик (логотип, цвета, дизайн) ценности вашего бизнеса?",
-                "brandExample": "Красный цвет Coca-Cola — энергия и страсть; бирюзовый цвет Tiffany & Co. — роскошь и изящество.",
+                "question": "Vizual ko'rinishingiz (logotip, ranglar, dizayn) biznesingiz qadriyatlarini aks ettiradimi?",
+                "brandExample": "Coca-Cola qizil rangi - energiya va ishtiyoq; Tiffany & Co. havorang identikasi - hashamat va nafislik.",
                 "options": [
                     {
-                        "text": "Да, полностью соответствует",
+                        "text": "Ha, to'liq mos keladi",
                         "score": 3
                     },
                     {
-                        "text": "Частично, некоторые элементы нужно обновить",
+                        "text": "Qisman, ayrim elementlarni yangilash kerak",
                         "score": 2
                     },
                     {
-                        "text": "Нет, я не обращал на это внимания",
+                        "text": "Yo'q, bunga e'tibor bermaganman",
                         "score": 1
                     }
                 ]
