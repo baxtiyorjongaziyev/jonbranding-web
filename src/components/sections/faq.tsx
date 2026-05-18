@@ -8,7 +8,7 @@ import {
 import CtaBlock from './cta-block';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 
-const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
+const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: any, hideCta?: boolean }) => {
   const translations = dictionary;
 
   const handleOpenModal = () => {
@@ -61,12 +61,14 @@ const Faq = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
         </div>
       </div>
 
-      <CtaBlock
-        title={translations.ctaTitle}
-        description={translations.ctaDesc}
-        buttonText={translations.ctaButton}
-        onCtaClick={handleOpenModal}
-      />
+      {!hideCta && (
+        <CtaBlock
+          title={translations.ctaTitle}
+          description={translations.ctaDesc}
+          buttonText={translations.ctaButton}
+          onCtaClick={handleOpenModal}
+        />
+      )}
     </BrandSection>
   )
 }
