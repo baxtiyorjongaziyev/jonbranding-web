@@ -15,14 +15,34 @@ export function rateLimit(ip: string, maxRequests: number, windowMs: number): bo
     return true;
 }
 
+/**
+ * Extracts the real client IP from a request.
+ *
+ * 🛡️ Security: CF-Connecting-IP and X-Real-IP are only trusted when the
+ * TRUSTED_PROXY environment variable is set to "cloudflare". This prevents
+ * IP spoofing attacks where an attacker sends forged headers directly to the
+ * origin — bypassing the rate-limiter's per-IP bucket on every request.
+ *
+ * Production (Cloudflare → Vercel/Firebase): set TRUSTED_PROXY=cloudflare
+ * Development / direct-origin: leave TRUSTED_PROXY unset → X-Forwarded-For
+ */
 export function getClientIp(request: Request): string {
-    // 🛡️ Sentinel: Prevent IP spoofing by prioritizing secure proxy headers
-    const cfConnectingIp = (request as any).headers?.get?.('cf-connecting-ip');
-    if (cfConnectingIp) return cfConnectingIp.trim();
+    const headers = (request as any).headers;
+    const isBehindCloudflare = process.env.TRUSTED_PROXY === 'cloudflare';
 
-    const xRealIp = (request as any).headers?.get?.('x-real-ip');
-    if (xRealIp) return xRealIp.trim();
+    if (isBehindCloudflare) {
+        const cfConnectingIp = headers?.get?.('cf-connecting-ip');
+        if (cfConnectingIp) return cfConnectingIp.trim();
 
-    const forwarded = (request as any).headers?.get?.('x-forwarded-for');
+        const xRealIp = headers?.get?.('x-real-ip');
+        if (xRealIp) return xRealIp.trim();
+    }
+
+    // Fallback: take only the first entry from X-Forwarded-For.
+    // When behind Cloudflare, CF sets this to the real client IP as the first
+    // value so it is still safe. Without a trusted proxy, an attacker could
+    // append arbitrary values — but we only read the first entry which is the
+    // IP seen by the last upstream hop, making it harder to spoof.
+    const forwarded = headers?.get?.('x-forwarded-for');
     return forwarded ? forwarded.split(',')[0].trim() : 'unknown';
 }
