@@ -9,10 +9,11 @@ import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 import StickyCTA from '@/components/ui/sticky-cta';
 import MobileNavBar from '@/components/layout/mobile-nav-bar';
-import LeadMagnetPopup from '@/components/ui/lead-magnet-popup';
+import dynamic from 'next/dynamic';
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import TabNotification from '@/components/layout/tab-notification';
-import OishaWidget from '@/components/oisha-widget';
+const OishaWidget = dynamic(() => import('@/components/oisha-widget'), { ssr: false });
+const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'), { ssr: false });
 import { cn } from '@/lib/utils';
 
 
@@ -125,9 +126,11 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://player.vimeo.com" />
         <link rel="preconnect" href="https://vimeo.com" />
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://vimeo.com" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <Script
           id="json-ld-professional-service"
           type="application/ld+json"
