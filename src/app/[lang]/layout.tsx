@@ -10,7 +10,7 @@ import MainLayout from '@/components/layout/main-layout';
 import StickyCTA from '@/components/ui/sticky-cta';
 import MobileNavBar from '@/components/layout/mobile-nav-bar';
 import dynamic from 'next/dynamic';
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
+import { Lexend } from 'next/font/google';
 import TabNotification from '@/components/layout/tab-notification';
 const OishaWidget = dynamic(() => import('@/components/oisha-widget'), { ssr: false });
 const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'), { ssr: false });
@@ -83,18 +83,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const lexend = Lexend({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-jakarta',
-  weight: ['400', '500', '600', '700', '800']
-});
-
-const inter = Inter({
-  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
-  display: 'swap',
-  variable: '--font-inter',
-  weight: ['400', '500', '600', '700', '800', '900']
+  variable: '--font-lexend',
+  weight: ['300', '400', '500', '600', '700', '800', '900']
 });
 
 type Props = {
@@ -115,7 +108,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={lang} suppressHydrationWarning className={cn(plusJakartaSans.variable, inter.variable)}>
+    <html lang={lang} suppressHydrationWarning className={lexend.variable}>
       <head>
         <link rel="alternate" hrefLang="x-default" href="https://jonbranding.uz" />
         <link rel="manifest" href="/manifest.json" />
@@ -197,7 +190,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           }}
         />
       </head>
-      <body className="font-body bg-white antialiased" suppressHydrationWarning>
+      <body className="font-body bg-background antialiased" suppressHydrationWarning>
         <TabNotification 
           message={
             lang === 'ru' ? '(1) Новое сообщение! | Jon Branding' :

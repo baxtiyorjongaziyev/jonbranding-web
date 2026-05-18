@@ -5,20 +5,20 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221 100% 50%;
+    --background: 217 73% 7%;
+    --foreground: 210 40% 98%;
+    --card: 210 33% 9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 210 33% 9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 219 100% 50%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 35%;
-    --accent: 190 88% 54%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217 19% 13%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 19% 13%;
+    --muted-foreground: 218 20% 65%;
+    --accent: 5 100% 59%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --success: 142.1 76.2% 36.3%;
@@ -27,19 +27,19 @@
     --warning-foreground: 47.9 95.8% 5.1%;
     --info: 215.9 91.7% 55.3%;
     --info-foreground: 215.9 91.7% 95.3%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --radius: 0.75rem;
-    --brand-ink: 222 68% 7%;
-    --brand-paper: 40 33% 98%;
-    --brand-mist: 214 58% 96%;
-    --brand-blue: 231 78% 48%;
+    --border: 217 32% 12%;
+    --input: 217 32% 12%;
+    --radius: 1.5rem;
+    --brand-ink: 217 73% 7%;
+    --brand-paper: 210 40% 98%;
+    --brand-mist: 217 19% 13%;
+    --brand-blue: 219 100% 50%;
     --brand-cyan: 190 88% 54%;
-    --brand-lime: 86 72% 50%;
-    --brand-slate: 220 17% 42%;
-    --brand-line: 220 20% 90%;
-    --font-inter: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    --font-jakarta: "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
+    --brand-lime: 5 100% 59%;
+    --brand-slate: 218 20% 65%;
+    --brand-line: 217 32% 12%;
+    --font-inter: var(--font-lexend), sans-serif;
+    --font-jakarta: var(--font-lexend), sans-serif;
 
     --section-gap: 7rem;
     --section-gap-mobile: 3.5rem;
@@ -70,23 +70,23 @@
     --liquid-glass-blur: 24px;
     --liquid-glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.15) 100%);
     --liquid-glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
-  }
+}
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 217 73% 7%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 210 33% 9%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 210 33% 9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
+    --primary: 219 100% 50%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 19% 13%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 198.8 95.3% 54.9%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 217 19% 13%;
+    --muted-foreground: 218 20% 65%;
+    --accent: 5 100% 59%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --success: 142.1 76.2% 26.3%;
@@ -95,10 +95,10 @@
     --warning-foreground: 47.9 95.8% 5.1%;
     --info: 215.9 91.7% 45.3%;
     --info-foreground: 215.9 91.7% 95.3%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
+    --border: 217 32% 12%;
+    --input: 217 32% 12%;
+    --ring: 219 100% 50%;
+}
 }
 
 @layer base {
