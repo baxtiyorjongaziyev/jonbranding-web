@@ -67,7 +67,7 @@
     "next-sanity": "^12.4.5",
     "patch-package": "^8.0.1",
     "react": "19.2.6",
-    "react-day-picker": "^8.10.1",
+    "react-day-picker": "^10.0.1",
     "react-dom": "19.2.6",
     "react-hook-form": "^7.52.1",
     "recharts": "^2.12.7",
