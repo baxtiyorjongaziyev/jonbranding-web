@@ -58,9 +58,10 @@ const localeIcons: Record<Locale, React.FC<{ className?: string }>> = {
 
 interface LanguageSwitcherProps {
   lang: Locale;
+  isInverted?: boolean;
 }
 
-const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
+const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang, isInverted = false }) => {
   const { open, handleOpen, handleClose, handleContentMouseEnter, setOpen } = useHover();
   const pathname = usePathname();
   const router = useRouter();
@@ -97,6 +98,12 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
   });
 
   const CurrentLangIcon = localeIcons[lang];
+  const useInvertedTone = isInverted && !scrolled;
+  const triggerTone = useInvertedTone
+    ? "bg-white/10 text-white hover:bg-white/15 hover:text-white"
+    : scrolled
+      ? "bg-white/20 text-foreground hover:bg-white/30"
+      : "bg-black/5 text-foreground hover:bg-black/10";
 
   if (!mounted) {
     return (
@@ -104,7 +111,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
         variant="ghost"
         className={cn(
             "w-auto justify-start gap-2 font-semibold !ring-0 !ring-offset-0 !outline-none !shadow-none",
-            scrolled ? "bg-white/20 text-foreground" : "bg-black/5 text-foreground"
+            triggerTone
         )}
         style={{ border: 'none', boxShadow: 'none' }}
       >
@@ -125,7 +132,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang }) => {
             aria-label="Tilni o'zgartirish / Change language"
             className={cn(
                 "w-auto justify-start gap-2 font-semibold !ring-0 !ring-offset-0 !outline-none !shadow-none focus:!ring-0 focus-visible:!ring-0 focus:!outline-none focus-visible:!outline-none focus-visible:!ring-offset-0",
-                scrolled ? "bg-white/20 hover:bg-white/30 text-foreground" : "bg-black/5 hover:bg-black/10 text-foreground"
+                triggerTone
             )}
             style={{ border: 'none', boxShadow: 'none' }}
             onMouseEnter={handleOpen}

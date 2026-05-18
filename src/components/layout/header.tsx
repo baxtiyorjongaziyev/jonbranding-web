@@ -279,13 +279,12 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
       >
       <motion.div
         className={cn(
-          "mx-auto flex h-16 items-center justify-between transition-all duration-700 w-full",
-          scrolled ? "px-6 lg:px-10" : "px-6 lg:px-8",
+          "flex h-16 w-full items-center justify-between transition-all duration-700",
           scrolled 
-            ? "max-w-[95%] lg:max-w-6xl py-2 liquid-glass rounded-full px-8"
+            ? "mx-auto max-w-[95%] rounded-full px-6 py-2 liquid-glass lg:max-w-6xl lg:px-8"
             : startsOnLightSurface
-              ? "max-w-full lg:max-w-screen-2xl bg-white/80 border-b border-black/10 px-8 backdrop-blur-xl"
-              : "max-w-full lg:max-w-screen-2xl bg-white/20 border-b border-white/10 px-8"
+              ? "max-w-none border-b border-black/10 bg-white/85 px-6 backdrop-blur-xl lg:px-8"
+              : "max-w-none border-b border-transparent bg-transparent px-6 lg:px-8"
         )}
         style={{ 
           top: top,
@@ -336,7 +335,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               </NavigationMenu>
 
               <div className="flex items-center space-x-2 h-11">
-                <LanguageSwitcher lang={lang as any} />
+                <LanguageSwitcher lang={lang as any} isInverted={!useDarkHeaderText} />
                 <div className="flex items-center gap-1.5">
                   <ExpandingButton 
                     href="tel:+998336450097"
@@ -380,7 +379,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         )}
         
         <div className="flex items-center gap-2 lg:hidden">
-          <LanguageSwitcher lang={lang as any} />
+          <LanguageSwitcher lang={lang as any} isInverted={!useDarkHeaderText} />
           {mounted && (
             <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
