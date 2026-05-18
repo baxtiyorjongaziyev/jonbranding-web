@@ -3,10 +3,34 @@
 import { Medal, Globe, Zap, Users, Phone, Send, Volume2, VolumeX, type LucideProps, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, type FC } from 'react';
+import { motion } from 'framer-motion';
 import { BrandSection } from '@/components/ui/design-system';
 import DOMPurify from 'isomorphic-dompurify';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      damping: 25,
+      stiffness: 140,
+    },
+  },
+};
 
 const Founder: FC<{ lang: string, dictionary: any }> = ({ dictionary }) => {
   const [unmuted, setUnmuted] = useState(false);
@@ -15,15 +39,25 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ dictionary }) => {
   if (!translations) return null;
 
   return (
-    <BrandSection id="founder" tone="dark" className="relative overflow-hidden">
+    <BrandSection id="founder" tone="dark" className="relative overflow-hidden py-24 sm:py-32">
+      {/* Seamless transition gradients using exact design system tokens */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-brand-paper to-transparent pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-mist to-transparent pointer-events-none z-10" />
+
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(37,99,235,0.16),transparent_44%,rgba(58,225,255,0.1))]" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        className="container relative z-10 mx-auto px-4"
+      >
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-20">
           {/* Text */}
-          <div className="order-2 flex flex-col gap-6 md:order-1">
+          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-6 md:order-1">
             <div className="flex items-center gap-4">
               <h2 className="text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
                 {translations.title}
@@ -78,10 +112,10 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ dictionary }) => {
                 </a>
               </Button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Video — autoplay muted */}
-          <div className="order-1 flex items-center justify-center md:order-2">
+          <motion.div variants={itemVariants} className="order-1 flex items-center justify-center md:order-2">
             <div className="relative w-full overflow-hidden rounded-[8px] border border-white/8 bg-black shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]">
               <div className="relative aspect-[4/5]">
                 <iframe
@@ -105,9 +139,9 @@ const Founder: FC<{ lang: string, dictionary: any }> = ({ dictionary }) => {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </BrandSection>
   );
 };
