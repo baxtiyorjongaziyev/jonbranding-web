@@ -472,7 +472,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                         <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                                         <Input
                                             placeholder={translations?.fields?.name?.placeholder}
-                                            className={`pl-12 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
+                                            className={`pl-12 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                             aria-invalid={fieldState.invalid ? "true" : "false"}
                                             autoComplete="name"
                                             {...field}
@@ -495,7 +495,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                         <PhoneCall className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                                         <Input 
                                           placeholder={translations?.fields?.phone?.placeholder} 
-                                          className={`pl-12 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white font-mono ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
+                                          className={`pl-12 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white font-mono transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                           value={field.value}
                                           aria-invalid={fieldState.invalid ? "true" : "false"}
                                           autoComplete="tel"
@@ -517,7 +517,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                     <FormControl>
                                       <div className="relative">
                                         <MessageCircle className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-                                        <Input placeholder={translations?.fields?.telegram?.placeholder || '@username'} className="pl-12 border-gray-200 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white" autoComplete="off" {...field} />
+                                        <Input placeholder={translations?.fields?.telegram?.placeholder || '@username'} className="pl-12 border-gray-200 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600" autoComplete="off" {...field} />
                                       </div>
                                     </FormControl>
                                   </FormItem>
