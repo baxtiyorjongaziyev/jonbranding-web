@@ -17,6 +17,14 @@ const ContactModal = dynamic(() => import('@/components/contact-modal'), {
     ssr: false
 });
 
+const OishaWidget = dynamic(() => import('@/components/oisha-widget'), {
+    ssr: false
+});
+
+const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'), {
+    ssr: false
+});
+
 function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -34,7 +42,12 @@ function AnalyticsTracker() {
   return null;
 }
 
-const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
+interface MainLayoutProps {
+    children: ReactNode;
+    leadMagnetDictionary?: any;
+}
+
+const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [packageSummary, setPackageSummary] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
@@ -130,6 +143,8 @@ const MainLayout: FC<Readonly<{ children: ReactNode }>> = ({ children }) => {
                 lang={lang}
             />
             <CookieConsentBanner />
+            <OishaWidget lang={lang as 'uz' | 'ru'} />
+            {leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
         </div>
     );
 }
