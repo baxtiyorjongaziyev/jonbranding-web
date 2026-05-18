@@ -8,27 +8,131 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import { cn } from '@/lib/utils';
 
+// Custom Premium Skeletons to completely eliminate CLS (Cumulative Layout Shift)
+// and deliver S-Tier visual progression (matching dark/light blocks perfectly)
+const TrustedBySkeleton = () => (
+  <div className="bg-[#fbfaf7] py-16 sm:py-20 border-y border-brand-line/80 animate-pulse">
+    <div className="container mx-auto px-4 grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+      <div className="space-y-4">
+        <div className="h-6 w-24 bg-gray-200/80 rounded-full" />
+        <div className="h-10 w-3/4 bg-gray-200/80 rounded-lg" />
+        <div className="h-5 w-1/2 bg-gray-200/80 rounded-lg" />
+      </div>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="h-24 bg-white border border-brand-line rounded-[8px]" />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const BeforeAfterSkeleton = () => (
+  <div className="bg-[#070b12] py-20 sm:py-28 animate-pulse relative overflow-hidden min-h-[600px]">
+    <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#fbfaf7] to-transparent pointer-events-none" />
+    <div className="container mx-auto px-4 grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+      <div className="space-y-4">
+        <div className="h-6 w-28 bg-white/8 rounded-full" />
+        <div className="h-12 w-3/4 bg-white/8 rounded-lg" />
+        <div className="h-28 bg-white/8 rounded-lg" />
+      </div>
+      <div className="h-96 bg-white/8 rounded-lg" />
+    </div>
+  </div>
+);
+
+const AuditOfferSkeleton = () => (
+  <div className="bg-[#f7f4ee] py-16 sm:py-24 animate-pulse min-h-[550px]">
+    <div className="container mx-auto px-4 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+      <div className="space-y-4">
+        <div className="h-6 w-24 bg-gray-200/80 rounded-full" />
+        <div className="h-12 w-3/4 bg-gray-200/80 rounded-lg" />
+        <div className="h-20 bg-gray-200/80 rounded-lg" />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="h-44 bg-white border border-brand-line rounded-[8px]" />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const TestimonialsSkeleton = () => (
+  <div className="bg-brand-mist py-16 sm:py-20 animate-pulse min-h-[500px]">
+    <div className="container mx-auto px-4">
+      <div className="flex flex-col items-center space-y-4 mb-12">
+        <div className="h-6 w-28 bg-gray-200/80 rounded-full" />
+        <div className="h-10 w-2/3 bg-gray-200/80 rounded-lg" />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="h-[420px] bg-white border border-brand-line rounded-[8px]" />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const FounderSkeleton = () => (
+  <div className="bg-[#070b12] py-24 sm:py-32 animate-pulse relative overflow-hidden min-h-[550px]">
+    <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-brand-paper to-transparent pointer-events-none" />
+    <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="space-y-6">
+        <div className="h-10 w-2/3 bg-white/8 rounded-lg" />
+        <div className="h-32 bg-white/8 rounded-lg" />
+        <div className="h-12 w-1/3 bg-white/8 rounded-lg" />
+      </div>
+      <div className="aspect-[4/5] bg-white/8 rounded-lg" />
+    </div>
+  </div>
+);
+
+const FaqSkeleton = () => (
+  <div className="bg-[#fbfaf7] py-16 sm:py-20 animate-pulse">
+    <div className="container mx-auto px-4 max-w-3xl">
+      <div className="flex flex-col items-center space-y-4 mb-10">
+        <div className="h-6 w-20 bg-gray-200/80 rounded-full" />
+        <div className="h-10 w-2/3 bg-gray-200/80 rounded-lg" />
+      </div>
+      <div className="space-y-3">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="h-16 bg-white border border-brand-line rounded-2xl" />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const CtaBlockSkeleton = () => (
+  <div className="bg-[#fbfaf7] py-16 animate-pulse">
+    <div className="container mx-auto px-4">
+      <div className="h-44 bg-[#070b12]/10 rounded-[8px] border border-brand-line/40" />
+    </div>
+  </div>
+);
+
 const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'), {
-  loading: () => <Skeleton className="h-32 w-full" />,
+  loading: () => <TrustedBySkeleton />,
 });
 const AuditOffer = dynamic(() => import('@/components/sections/audit-offer'), {
-  loading: () => <Skeleton className="h-96 w-full" />,
+  loading: () => <AuditOfferSkeleton />,
 });
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'), {
-  loading: () => <Skeleton className="h-96 w-full rounded-3xl" />,
+  loading: () => <BeforeAfterSkeleton />,
 });
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'), {
-  loading: () => <Skeleton className="h-64 w-full rounded-2xl" />,
+  loading: () => <TestimonialsSkeleton />,
 });
 const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
 const Founder = dynamic(() => import('@/components/sections/founder'), {
-  loading: () => <Skeleton className="h-96 w-full" />,
+  loading: () => <FounderSkeleton />,
 });
 const Faq = dynamic(() => import('@/components/sections/faq'), {
-  loading: () => <Skeleton className="h-64 w-full" />,
+  loading: () => <FaqSkeleton />,
 });
 const CtaBlock = dynamic(() => import('@/components/sections/cta-block'), {
-  loading: () => <Skeleton className="h-48 w-full rounded-2xl" />,
+  loading: () => <CtaBlockSkeleton />,
 });
 const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 

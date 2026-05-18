@@ -1,6 +1,7 @@
 'use client';
 
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import CtaBlock from './cta-block';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
@@ -11,6 +12,29 @@ interface ProcessProps {
   dictionary: any;
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      damping: 24,
+      stiffness: 160,
+    },
+  },
+};
+
 const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
   const translations = dictionary;
 
@@ -19,10 +43,16 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
   const processProof = translations.proofItems || [];
 
   return (
-    <BrandSection id="process" tone="light" className="bg-[#fbfaf7] py-20 sm:py-28" suppressHydrationWarning>
-      <div className="container mx-auto px-4">
+    <BrandSection id="process" tone="light" className="bg-[#fbfaf7] py-20 sm:py-28 overflow-hidden" suppressHydrationWarning>
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        className="container mx-auto px-4"
+      >
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div className="lg:sticky lg:top-28">
+          <motion.div variants={itemVariants} className="lg:sticky lg:top-28">
             <SectionIntro eyebrow={translations.eyebrow} title={translations.title} description={translations.subtitle} align="left" />
             {processProof.length > 0 && (
               <div className="mt-8 grid grid-cols-2 gap-2">
@@ -34,11 +64,15 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
                 ))}
               </div>
             )}
-          </div>
+          </motion.div>
 
           <div className="grid gap-4">
             {translations.phases.map((phase: any, index: number) => (
-              <div key={phase.title || index} className="group grid gap-5 rounded-[8px] border border-brand-line bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)] sm:grid-cols-[120px_1fr_auto] sm:items-start sm:p-6">
+              <motion.div 
+                key={phase.title || index} 
+                variants={itemVariants}
+                className="group grid gap-5 rounded-[8px] border border-brand-line bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)] sm:grid-cols-[120px_1fr_auto] sm:items-start sm:p-6"
+              >
                 <div>
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-[8px] bg-brand-ink text-sm font-black text-white">
                     0{index + 1}
@@ -57,7 +91,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
                   </div>
                 </div>
                 <ArrowRight className="hidden h-5 w-5 text-brand-slate/35 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-brand-blue sm:block" />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -72,7 +106,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
             ))}
           </div>
         )}
-      </div>
+      </motion.div>
 
       <CtaBlock
         title={translations.ctaTitle}
