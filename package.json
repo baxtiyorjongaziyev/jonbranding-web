@@ -90,7 +90,7 @@
     "@types/dompurify": "^3.0.5",
     "@types/js-yaml": "^4.0.9",
     "@types/negotiator": "^0.6.3",
-    "@types/node": "^20",
+    "@types/node": "^25",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
