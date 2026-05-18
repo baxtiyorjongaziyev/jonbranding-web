@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Check, Send } from 'lucide-react';
 import Script from 'next/script';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
 
@@ -272,6 +272,20 @@ export default function SotuvchiKartochkaPricingPage() {
   // @ts-ignore
   const t = translations[lang] || translations.uz;
 
+  const [selectedTier, setSelectedTier] = useState<number>(pricingData[1].price); // Default to PRO
+  const [abTest, setAbTest] = useState(false);
+  const [fastTrack, setFastTrack] = useState(false);
+  const [sourceFiles, setSourceFiles] = useState(false);
+
+  const calculateTotal = () => {
+      let total = selectedTier;
+      if (abTest) total += selectedTier * 0.3;
+      if (fastTrack) total += selectedTier * 0.5;
+      if (sourceFiles) total += selectedTier * 1.0;
+      return total;
+  };
+
+
   return (
     <>
       <Script
@@ -314,7 +328,17 @@ export default function SotuvchiKartochkaPricingPage() {
                 <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
                     {pricingData.map((tier) => (
-                    <PricingCard key={tier.name} tier={tier} />
+                    <div key={tier.name} className="relative cursor-pointer transition-transform hover:-translate-y-1" onClick={() => setSelectedTier(tier.price)}>
+                        {selectedTier === tier.price && (
+                           <div className="absolute -inset-2 rounded-[1.5rem] border-2 border-blue-600 bg-blue-500/5 -z-10" />
+                        )}
+                        <PricingCard tier={tier} />
+                        <div className="mt-4 flex justify-center">
+                            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${selectedTier === tier.price ? 'border-blue-600 bg-blue-600' : 'border-slate-300'}`}>
+                                {selectedTier === tier.price && <Check className="w-4 h-4 text-white" />}
+                            </div>
+                        </div>
+                    </div>
                     ))}
                 </div>
                 </div>
@@ -326,33 +350,61 @@ export default function SotuvchiKartochkaPricingPage() {
                 className="pb-20"
             >
                 <div className="container mx-auto px-6">
-                <div className="max-w-2xl mx-auto bg-white dark:bg-slate-950 rounded-2xl shadow-lg p-8">
+                <div className="max-w-2xl mx-auto bg-white dark:bg-slate-950 rounded-2xl shadow-lg p-8 relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
                     <h2 id="additional-services-title" className="text-2xl font-bold text-center text-blue-950 dark:text-white">
-                    Qo‘shimcha xizmatlar
+                    Qo‘shimcha xizmatlar kalkulyatori
                     </h2>
-                    <ul className="mt-6 space-y-4 text-slate-600 dark:text-slate-300">
-                    <li className="flex justify-between items-center gap-4">
-                        <div>
-                            <span className="font-medium text-slate-700 dark:text-slate-200">1 ta mahsulot uchun 2 xil dizayn varianti (A/B test uchun)</span>
-                            <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +30% qo'shiladi</p>
+                    <div className="mt-6 space-y-4">
+                    <label className="flex justify-between items-center gap-4 cursor-pointer p-4 rounded-xl border border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition-colors">
+                        <div className="flex items-start gap-3">
+                            <div className="mt-1">
+                                <input type="checkbox" checked={abTest} onChange={(e) => setAbTest(e.target.checked)} className="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500" />
+                            </div>
+                            <div>
+                                <span className="font-medium text-slate-700 dark:text-slate-200">1 ta mahsulot uchun 2 xil dizayn varianti (A/B test uchun)</span>
+                                <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +30% qo'shiladi</p>
+                            </div>
                         </div>
                         <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+30 %</span>
-                    </li>
-                    <li className="flex justify-between items-center gap-4">
-                         <div>
-                            <span className="font-medium text-slate-700 dark:text-slate-200">24 soatda tezkor tayyorlash</span>
-                             <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +50% qo'shiladi</p>
+                    </label>
+                    <label className="flex justify-between items-center gap-4 cursor-pointer p-4 rounded-xl border border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition-colors">
+                        <div className="flex items-start gap-3">
+                            <div className="mt-1">
+                                <input type="checkbox" checked={fastTrack} onChange={(e) => setFastTrack(e.target.checked)} className="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500" />
+                            </div>
+                            <div>
+                                <span className="font-medium text-slate-700 dark:text-slate-200">24 soatda tezkor tayyorlash</span>
+                                 <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +50% qo'shiladi</p>
+                            </div>
                         </div>
                         <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+50 %</span>
-                    </li>
-                    <li className="flex justify-between items-center gap-4">
-                         <div>
-                            <span className="font-medium text-slate-700 dark:text-slate-200">Manba fayllar (PSD/AI)</span>
-                             <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +100% qo'shiladi</p>
+                    </label>
+                    <label className="flex justify-between items-center gap-4 cursor-pointer p-4 rounded-xl border border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition-colors">
+                        <div className="flex items-start gap-3">
+                            <div className="mt-1">
+                                <input type="checkbox" checked={sourceFiles} onChange={(e) => setSourceFiles(e.target.checked)} className="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500" />
+                            </div>
+                            <div>
+                                <span className="font-medium text-slate-700 dark:text-slate-200">Manba fayllar (PSD/AI)</span>
+                                 <p className="text-xs text-slate-500 dark:text-slate-400">Tanlangan paket narxiga +100% qo'shiladi</p>
+                            </div>
                         </div>
                         <span className="font-semibold text-slate-800 dark:text-white whitespace-nowrap">+100 %</span>
-                    </li>
-                    </ul>
+                    </label>
+                    </div>
+
+                    <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
+                        <div className="flex justify-between items-end">
+                            <div>
+                                <p className="text-sm text-slate-500 font-medium mb-1">Umumiy hisob:</p>
+                                <p className="text-3xl font-black text-blue-600">{calculateTotal().toLocaleString()} UZS</p>
+                            </div>
+                            <Button size="lg" className="rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg px-8">
+                                Buyurtma berish
+                            </Button>
+                        </div>
+                    </div>
                 </div>
                 </div>
             </section>

@@ -112,7 +112,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
         {mounted && <Founder lang={lang} dictionary={dictionary.founder} />}
 
         {/* 8. FAQ: objection handling */}
-        <Faq lang={lang} dictionary={dictionary.faq} />
+        <Faq lang={lang} dictionary={dictionary.faq} hideCta={true} />
 
         {/* 9. Final CTA: repeat the audit offer */}
         <CtaBlock

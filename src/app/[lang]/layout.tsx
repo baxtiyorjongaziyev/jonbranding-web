@@ -11,6 +11,7 @@ import MainLayout from '@/components/layout/main-layout';
 import StickyCTA from '@/components/ui/sticky-cta';
 import MobileNavBar from '@/components/layout/mobile-nav-bar';
 import LeadMagnetPopup from '@/components/ui/lead-magnet-popup';
+import TelegramBanner from '@/components/layout/telegram-banner';
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import TabNotification from '@/components/layout/tab-notification';
 import OishaWidget from '@/components/oisha-widget';
@@ -310,6 +311,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
 
         
         <MainLayout>
+          <TelegramBanner lang={lang} />
           <Header lang={lang} dictionary={dictionary.header} />
           
           <div className="flex-grow">
