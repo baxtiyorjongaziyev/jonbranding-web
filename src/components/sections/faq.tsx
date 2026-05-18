@@ -40,18 +40,18 @@ const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: 
           ))}
         </div>
 
-        <div className="mx-auto mt-12 max-w-3xl space-y-3">
+        <div className="mx-auto mt-12 max-w-3xl space-y-4">
           <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
             {translations.faqItems.map((item: any, index: number) => (
-              <div key={index} className="overflow-hidden rounded-2xl border border-brand-line bg-white/90 px-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md">
+              <div key={index} className="overflow-hidden rounded-2xl border border-brand-line bg-white/90 px-5 sm:px-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md">
                 <AccordionItem value={`item-${index}`} className="border-none">
                   <AccordionTrigger
-                    className="py-5 text-left text-base font-bold text-brand-ink hover:no-underline sm:text-lg"
+                    className="py-5 sm:py-6 text-left text-base font-bold leading-snug text-brand-ink hover:no-underline sm:text-lg sm:leading-normal"
                     aria-label={item.question}
                   >
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="pb-5 text-base leading-7 text-brand-slate">
+                  <AccordionContent className="pb-6 text-sm sm:text-base leading-relaxed text-brand-slate">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>

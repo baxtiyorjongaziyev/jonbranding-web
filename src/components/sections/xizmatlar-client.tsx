@@ -4,7 +4,6 @@
 import { useCallback } from 'react';
 import dynamic from 'next/dynamic';
 
-const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'));
 const PackageBuilder = dynamic(() => import('@/components/sections/package-builder'));
 const Comparison = dynamic(() => import('@/components/sections/comparison'));
 const QueueStatus = dynamic(() => import('@/components/sections/queue-status'));
@@ -44,7 +43,6 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       <QueueStatus onCtaClick={handleOpenModal} />
       <Testimonials lang={lang} dictionary={dictionary.testimonials} />
       <Comparison onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.comparison} />
-      <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />
     </>
   );
 };

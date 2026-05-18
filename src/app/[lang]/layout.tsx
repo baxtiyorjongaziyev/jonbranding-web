@@ -1,7 +1,6 @@
-import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import '../globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
@@ -19,7 +18,14 @@ import { cn } from '@/lib/utils';
 
 const BASE_URL = 'https://jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
-const ICON_URL = '/icon.svg';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
+  themeColor: '#2563EB',
+};
 
 const localeUrls = {
   uz: BASE_URL,
@@ -111,9 +117,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
     <html lang={lang} suppressHydrationWarning className={cn(plusJakartaSans.variable, inter.variable)}>
       <head>
         <link rel="alternate" hrefLang="x-default" href="https://jonbranding.uz" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#2563EB" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="JonBranding" />
@@ -185,50 +189,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
                   "name": "Brend Strategiyasi (Branding Strategy)",
                   "description": "Comprehensive market analysis and strategy."
                 }
-              ]
-            })
-          }}
-        />
-        {/* Schema.org JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": "Jon.Branding",
-              "image": "https://jonbranding.uz/images/cms/og-image.jpeg",
-              "@id": "https://jonbranding.uz",
-              "url": "https://jonbranding.uz",
-              "telephone": "+998901234567",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Tashkent City",
-                "addressLocality": "Tashkent",
-                "postalCode": "100000",
-                "addressCountry": "UZ"
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": 41.2995,
-                "longitude": 69.2401
-              },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday"
-                ],
-                "opens": "09:00",
-                "closes": "18:00"
-              },
-              "sameAs": [
-                "https://instagram.com/jonbranding",
-                "https://t.me/jonbranding"
               ]
             })
           }}
@@ -317,7 +277,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           </div>
         <Footer lang={lang} dictionary={dictionary.footer} />
           <StickyCTA lang={lang} />
-          <MobileNavBar lang={lang} dictionary={dictionary.common} />
+          <MobileNavBar lang={lang} dictionary={dictionary.header} />
           <OishaWidget lang={lang as 'uz' | 'ru'} />
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">

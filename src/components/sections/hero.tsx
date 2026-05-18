@@ -4,7 +4,6 @@ import type { FC, ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, BarChart3, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
@@ -71,12 +70,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
 
       <div className="container mx-auto flex min-h-[100svh] max-w-[1400px] items-center px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-16 lg:pt-28">
         <div className="grid w-full items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-            className="flex flex-col justify-center text-center lg:text-left"
-          >
+          <div className="flex flex-col justify-center text-center lg:text-left">
             <div className="mb-6 inline-flex items-center justify-center gap-2 self-center rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md lg:self-start">
               <Sparkles className="h-3.5 w-3.5 text-brand-lime" />
               <span className="text-[11px] font-black uppercase tracking-[0.22em] text-blue-100">{heroCopy.preHeadline}</span>
@@ -119,14 +113,9 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1], delay: 0.1 }}
-            className="relative flex items-center justify-center"
-          >
+          <div className="relative flex items-center justify-center">
             <div className="relative w-full max-w-xl overflow-hidden rounded-xl border border-white/15 bg-white/[0.055] p-2 shadow-[0_40px_120px_-50px_rgba(0,0,0,0.95)] backdrop-blur-xl lg:max-w-none">
               <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10" />
               <CaseWall images={portfolioImages} />
@@ -143,7 +132,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

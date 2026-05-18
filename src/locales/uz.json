@@ -459,21 +459,24 @@
         "ctaDesc": "Avval brend auditdan boshlaymiz va qaysi o'zgarish eng katta ta'sir berishini aniqlaymiz.",
         "ctaButton": "Bepul Brand Audit olish",
         "cta": "Bepul Brand Audit olish",
-        "caseLabel": "Before / After",
+        "caseLabel": "Oldin / Keyin",
         "proofCards": [
             {
-                "value": "Real",
-                "label": "mijoz keyslari"
+                "value": "5 signal",
+                "label": "ishonch diagnostikasi"
             },
             {
-                "value": "Audit",
-                "label": "oldin diagnostika"
+                "value": "1 reja",
+                "label": "sotuvga yaqin tuzatish"
             }
         ]
     },
     "testimonials": {
+        "eyebrow": "Mijozlar ovozi",
         "title": "Mijozlar ishonchi",
         "subtitle": "Portfolio chiroyli ko'rinishi mumkin. Biz uchun muhimrog'i - biznes egasi natijani his qilishi.",
+        "playAudio": "Ovozli izohni tinglash",
+        "pauseAudio": "To'xtatish",
         "textReviewsTitle": "Matnli sharhlar",
         "textReviewsSubtitle": "Biz bilan ishlagan tadbirkorlar fikri"
     },
@@ -504,6 +507,8 @@
         ],
         "phoneButton": "Shaxsan bog'lanish",
         "telegramButton": "Telegramda yozish",
+        "videoButton": "Asoschidan 45 soniya",
+        "videoAlt": "Baxtiyorjon Gaziyev, Jon.Branding asoschisi",
         "principles": [
             "Strategiya bilan boshlaymiz",
             "Tadbirkor tilida tushuntiramiz",
@@ -511,7 +516,7 @@
         ]
     },
     "process": {
-        "title": "Auditdan to premium brend tizimigacha bo'lgan yo'l.",
+        "title": "Auditdan premium brend tizimigacha bo'lgan yo'l.",
         "subtitle": "Bepul audit sizga birinchi tashxisni beradi. Agar davom etsak, jarayon strategiya, vizual tizim va tatbiq rejasiga aylanadi.",
         "phases": [
             {
@@ -520,7 +525,7 @@
                 "description": "Mijoz ko'zidagi ishonch, premiumlik va tushunarlilik nuqtalarini tekshiramiz.",
                 "tasks": [
                     "Birinchi taassurot",
-                    "Trust gap",
+                    "Ishonch bo'shlig'i",
                     "Raqobatchi ko'zgusi"
                 ]
             },
@@ -1031,7 +1036,7 @@
             "yourNameLabel": "Ismingiz",
             "yourNamePlaceholder": "To'liq ismingizni kiriting",
             "phoneLabel": "Telefon raqamingiz",
-            "phonePlaceholder": "+998901234567",
+            "phonePlaceholder": "+998 (__) ___-__-__",
             "classCountLabel": "Faoliyat turlari (klasslar) soni",
             "classCountMax": "Maks. 45",
             "decreaseClassCount": "Klasslar sonini kamaytirish",
@@ -1279,7 +1284,7 @@
         "eyebrow": "Bepul audit ichida",
         "title": "Brendingiz sotuvga yordam beryaptimi yoki halaqit qilyaptimi?",
         "description": "Biz sizga dizayn sotishdan oldin brendingiz xaridor ko'zida qayerda ishonch yo'qotayotganini ko'rsatamiz. Auditdan keyin qaysi xizmat kerak, qaysisi shart emas - aniq bilasiz.",
-        "cta": "Bepul auditga yozilish",
+        "cta": "Bepul Brand Audit olish",
         "promise": "Majburiy sotuv yo'q. Avval muammo va imkoniyatni ko'rsatamiz.",
         "outcomes": [
             {
@@ -1295,7 +1300,7 @@
                 "label": "ustuvor reja"
             },
             {
-                "value": "Free",
+                "value": "Bepul",
                 "label": "boshlang'ich audit"
             }
         ],
@@ -1305,7 +1310,7 @@
                 "desc": "Sayt, logo, qadoq yoki Instagramni ko'rgan mijoz sizni qanchalik premium va ishonchli qabul qilishini tekshiramiz."
             },
             {
-                "title": "Trust gap xaritasi",
+                "title": "Ishonch bo'shliqlari xaritasi",
                 "desc": "Mijoz qarorini sekinlashtiradigan noaniq va kuchsiz joylarni aniq nomlaymiz."
             },
             {

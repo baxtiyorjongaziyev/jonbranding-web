@@ -268,7 +268,9 @@
   }
 
   .brand-card {
-    @apply rounded-[2rem] border border-brand-line bg-white/92 p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur transition-all duration-500;
+    @apply rounded-[2rem] border border-brand-line p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur duration-500;
+    background-color: rgb(255 255 255 / 0.92);
+    transition-property: box-shadow, transform, border-color, background-color;
   }
 
   .brand-card:hover {

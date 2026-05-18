@@ -134,7 +134,6 @@ const Faq = dynamic(() => import('@/components/sections/faq'), {
 const CtaBlock = dynamic(() => import('@/components/sections/cta-block'), {
   loading: () => <CtaBlockSkeleton />,
 });
-const MobileCtaBar = dynamic(() => import('@/components/sections/mobile-cta-bar'), { ssr: false });
 
 const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> = ({ lang, dictionary, comparisons }) => {
   const [mounted, setMounted] = useState(false);
@@ -191,7 +190,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
   }
 
   return (
-    <div className="relative pb-24 md:pb-0">
+    <div className="relative pb-28 md:pb-0">
       <main>
         {/* 1. Hero: premium positioning + audit CTA */}
         <Hero onOpenContact={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
@@ -200,11 +199,11 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
         {/* 2. Trust: selected clients and credibility signals */}
         <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
 
-        {/* 3. Proof: visible transformation before the offer */}
-        <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
-
-        {/* 4. Offer: sell the free Brand Audit */}
+        {/* 3. Offer: sell the free Brand Audit */}
         <AuditOffer lang={lang} dictionary={dictionary.auditOffer} onCtaClick={handleOpenModal} />
+
+        {/* 4. Proof: visible transformation after the offer */}
+        <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
 
         {/* 5. Testimonials: real client voices */}
         <Testimonials lang={lang} dictionary={dictionary.testimonials} />
@@ -226,7 +225,6 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
           onCtaClick={handleOpenModal}
         />
       </main>
-      {mounted && <MobileCtaBar onOpenModal={handleOpenModal} lang={lang} dictionary={dictionary.mobileCtaBar} />}
     </div>
   );
 };
