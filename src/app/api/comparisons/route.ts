@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { client } from '@/sanity/lib/client';
+import { withFallbackComparisons } from '@/lib/comparison-fallbacks';
 
 export const revalidate = 60;
 
@@ -18,8 +19,8 @@ export async function GET() {
         }
     `);
 
-    return NextResponse.json({ comparisons });
+    return NextResponse.json({ comparisons: withFallbackComparisons(comparisons) });
   } catch {
-    return NextResponse.json({ comparisons: [] }, { status: 200 });
+    return NextResponse.json({ comparisons: withFallbackComparisons([]) }, { status: 200 });
   }
 }
