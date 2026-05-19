@@ -3,6 +3,7 @@ import HomeComponent from '@/components/home-component';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
 import { client } from '@/sanity/lib/client';
+import { withFallbackComparisons } from '@/lib/comparison-fallbacks';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -59,5 +60,5 @@ export default async function Page(props: Props) {
     `);
   } catch {}
 
-  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={comparisons} />;
+  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={withFallbackComparisons(comparisons)} />;
 }
