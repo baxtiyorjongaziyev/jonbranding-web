@@ -45,8 +45,8 @@ export const staticTestimonials: Testimonial[] = [
     avatar: "IM",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/a7036b241bf2b285df4b970561d47b0f5bc41b4f-1074x1909.jpg",
     imageHint: "male founder portrait",
-    quote: "",
-    videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5"
+    quote: "Den Aroma jamoasi bilan ishlaganimizdan keyin ular o'z brendini qanday his qilishini eshiting.",
+    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
     name: "Sherzod Beknazarov",
@@ -93,7 +93,7 @@ export const staticTestimonialsRu: Testimonial[] = [
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/a7036b241bf2b285df4b970561d47b0f5bc41b4f-1074x1909.jpg",
     imageHint: "male founder portrait",
     quote: "",
-    videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5"
+    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
     name: "Шерзод Бекназаров",
@@ -137,8 +137,8 @@ export const staticTestimonialsEn: Testimonial[] = [
     avatar: "IM",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/a7036b241bf2b285df4b970561d47b0f5bc41b4f-1074x1909.jpg",
     imageHint: "male founder portrait",
-    quote: "",
-    videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5"
+    quote: "Hear how the Den Aroma team feels about their brand after working with us.",
+    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
     name: "Sherzod Beknazarov",
@@ -238,7 +238,7 @@ export const staticTestimonialsZh: Testimonial[] = [
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/a7036b241bf2b285df4b970561d47b0f5bc41b4f-1074x1909.jpg",
     imageHint: "male founder portrait",
     quote: "",
-    videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5"
+    videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
     name: "Sherzod Beknazarov",

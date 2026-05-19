@@ -214,10 +214,10 @@ const TestimonialsClient = ({ testimonials, dictionary }: { testimonials: Testim
     const text = testimonials.filter((testimonial) => !testimonial.videoUrl && !testimonial.audioUrl && testimonial.quote?.trim());
 
     const prioritizedVideos = video.sort((a, b) => {
-      if (a.name.includes('Sherzod Beknazarov')) return -1;
-      if (b.name.includes('Sherzod Beknazarov')) return 1;
       if (a.name.includes('Ibrohimjon Mahammadjonov')) return -1;
       if (b.name.includes('Ibrohimjon Mahammadjonov')) return 1;
+      if (a.name.includes('Sherzod Beknazarov')) return -1;
+      if (b.name.includes('Sherzod Beknazarov')) return 1;
       return 0;
     });
 
