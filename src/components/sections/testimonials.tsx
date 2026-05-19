@@ -11,6 +11,13 @@ import { cn } from '@/lib/utils';
 import { staticTestimonials, staticTestimonialsEn, staticTestimonialsRu, staticTestimonialsZh } from '@/lib/static-data';
 import { type Testimonial } from '@/lib/types';
 
+const CASE_STUDY_VIDEO_IDS = ['1145610708'];
+
+const isCaseStudyVideo = (testimonial: Testimonial) => {
+  if (!testimonial.videoUrl) return false;
+  return CASE_STUDY_VIDEO_IDS.some((videoId) => testimonial.videoUrl?.includes(videoId));
+};
+
 const getVimeoEmbedUrl = (url?: string, autoplay = false) => {
   if (!url) return '';
 
@@ -202,9 +209,9 @@ const TestimonialsClient = ({ testimonials, dictionary }: { testimonials: Testim
   const [textTestimonials, setTextTestimonials] = useState<Testimonial[]>([]);
 
   useEffect(() => {
-    const video = testimonials.filter((testimonial) => testimonial.videoUrl);
+    const video = testimonials.filter((testimonial) => testimonial.videoUrl && !isCaseStudyVideo(testimonial));
     const audio = testimonials.filter((testimonial) => !testimonial.videoUrl && testimonial.audioUrl);
-    const text = testimonials.filter((testimonial) => !testimonial.videoUrl && !testimonial.audioUrl);
+    const text = testimonials.filter((testimonial) => !testimonial.videoUrl && !testimonial.audioUrl && testimonial.quote?.trim());
 
     const prioritizedVideos = video.sort((a, b) => {
       if (a.name.includes('Sherzod Beknazarov')) return -1;
