@@ -11,3 +11,7 @@
 ## 2026-05-17 - Enhancing custom animated toggle components with proper ARIA attributes and keyboard support
 **Learning:** Custom interactive components like `KnobToggle` often lack essential accessibility features when built using `motion.div`. They fail to convey their role, state, and are not navigable via keyboard.
 **Action:** When building custom toggle components (e.g. `KnobToggle`), always include `role="switch"`, `aria-checked={isOn}`, `tabIndex={0}`, keyboard handlers (for 'Enter' and 'Space'), and `focus-visible` styles to ensure full accessibility and usability.
+
+## 2026-05-18 - Adding `aria-pressed` and `focus-visible` to DynamicToggle component
+**Learning:** The `DynamicToggle` component in `src/components/sections/trademark-calculator.tsx` visually indicated selected states but lacked semantic meaning for screen readers. It also failed to show keyboard focus properly due to the absence of `focus-visible` utility classes, degrading the keyboard navigation experience.
+**Action:** Always add `aria-pressed` to custom toggle buttons to convey state and include standard `focus-visible` Tailwind utilities to guarantee accessible keyboard interactions.
