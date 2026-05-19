@@ -11,25 +11,81 @@ import { cn } from '@/lib/utils';
 import { staticTestimonials, staticTestimonialsEn, staticTestimonialsRu, staticTestimonialsZh } from '@/lib/static-data';
 import { type Testimonial } from '@/lib/types';
 
-const VideoTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
+const getVimeoEmbedUrl = (url?: string, autoplay = false) => {
+  if (!url) return '';
+
+  try {
+    const parsed = new URL(url);
+    const isVimeo = parsed.hostname.includes('vimeo.com');
+
+    if (isVimeo && parsed.hostname !== 'player.vimeo.com') {
+      const videoId = parsed.pathname.split('/').filter(Boolean).pop();
+      if (videoId) {
+        parsed.hostname = 'player.vimeo.com';
+        parsed.pathname = `/video/${videoId}`;
+      }
+    }
+
+    parsed.searchParams.set('badge', '0');
+    parsed.searchParams.set('autopause', '0');
+    parsed.searchParams.set('dnt', '1');
+    parsed.searchParams.set('title', '0');
+    parsed.searchParams.set('byline', '0');
+    parsed.searchParams.set('portrait', '0');
+
+    if (autoplay) {
+      parsed.searchParams.set('autoplay', '1');
+    }
+
+    return parsed.toString();
+  } catch {
+    return url;
+  }
+};
+
+const VideoTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonial; labels: { play: string } }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const embedUrl = getVimeoEmbedUrl(testimonial.videoUrl, isPlaying);
+
   return (
     <div className="group flex h-full flex-col overflow-hidden rounded-[8px] border border-brand-line bg-white shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.1)]">
       <CardContent className="p-0">
-        <a href={testimonial.videoUrl} target="_blank" rel="noopener noreferrer" className="relative block aspect-[9/16] overflow-hidden bg-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue">
-          {testimonial.image ? (
-            <img src={testimonial.image} alt={testimonial.name} loading="lazy" className="h-full w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" />
+        <div className="relative aspect-[9/16] overflow-hidden bg-brand-ink">
+          {isPlaying ? (
+            <iframe
+              src={embedUrl}
+              title={`${testimonial.name} video testimonial`}
+              className="absolute inset-0 h-full w-full"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
           ) : (
-            <div className="h-full w-full bg-[linear-gradient(135deg,#070b12,#122055_55%,#07323a)]" />
+            <button
+              type="button"
+              onClick={() => setIsPlaying(true)}
+              aria-label={labels.play}
+              className="relative block h-full w-full overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-blue"
+            >
+              {testimonial.image ? (
+                <img src={testimonial.image} alt={testimonial.name} loading="lazy" className="h-full w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" />
+              ) : (
+                <div className="h-full w-full bg-[linear-gradient(135deg,#070b12,#122055_55%,#07323a)]" />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/15 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-black text-white">{testimonial.name}</p>
+                  <p className="mt-1 truncate text-xs font-bold text-white/65">{testimonial.company}</p>
+                </div>
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/95 text-brand-ink shadow-[0_14px_35px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:scale-105">
+                  <PlayCircle className="h-6 w-6" aria-hidden="true" />
+                </span>
+              </div>
+              <span className="sr-only">{labels.play}</span>
+            </button>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/15 to-transparent" />
-          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4">
-            <div className="min-w-0">
-              <p className="truncate text-sm font-black text-white">{testimonial.name}</p>
-              <p className="mt-1 truncate text-xs font-bold text-white/65">{testimonial.company}</p>
-            </div>
-            <PlayCircle className="h-10 w-10 shrink-0 text-white drop-shadow-lg" aria-hidden="true" />
-          </div>
-        </a>
+        </div>
         <div className="p-5">
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10 ring-2 ring-brand-line">
@@ -171,6 +227,9 @@ const TestimonialsClient = ({ testimonials, dictionary }: { testimonials: Testim
     play: translations.playAudio || 'Ovozli izohni tinglash',
     pause: translations.pauseAudio || "To'xtatish",
   };
+  const videoLabels = {
+    play: translations.playVideo || "Videoni shu yerda ko'rish",
+  };
 
   return (
     <BrandSection tone="soft" className="overflow-hidden">
@@ -190,7 +249,7 @@ const TestimonialsClient = ({ testimonials, dictionary }: { testimonials: Testim
                 {videoTestimonials.map((testimonial, index) => (
                   <CarouselItem key={`video-${index}`} className="basis-[80%] pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                     <div className="h-full py-2">
-                      <VideoTestimonialCard testimonial={testimonial} />
+                      <VideoTestimonialCard testimonial={testimonial} labels={videoLabels} />
                     </div>
                   </CarouselItem>
                 ))}
