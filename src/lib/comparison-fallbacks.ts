@@ -4,8 +4,8 @@ export const FALLBACK_COMPARISONS = [
     brand: 'Den Aroma',
     oldImg: '/images/cms/denaroma-avval.png',
     newImg: '/images/cms/denaroma-hozir.png',
-    oldHint: '3 Atirchi old perfume identity',
-    newHint: 'Den Aroma premium brand identity',
+    oldHint: '3 Atirchi (Eski brending)',
+    newHint: 'Den Aroma (Yangi brending)',
     order: 1,
   },
 ];
