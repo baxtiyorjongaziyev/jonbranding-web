@@ -7,3 +7,8 @@
 **Vulnerability:** The rate limiting logic relied primarily on the `x-forwarded-for` header for client IP identification, which is easily spoofed by malicious actors.
 **Learning:** Relying on spoofable headers like `x-forwarded-for` can lead to IP spoofing attacks, rendering rate limiting ineffective. Secure proxy headers should be prioritized.
 **Prevention:** Prioritize secure proxy headers like `cf-connecting-ip` and `x-real-ip` over `x-forwarded-for` for client IP identification.
+
+## 2026-05-19 - Internal Error Information Leakage
+**Vulnerability:** The `submit-form` API endpoint directly returned internal error messages (e.g., `error.message`) to the client when a 500 Internal Server Error occurred.
+**Learning:** Returning raw error messages can unintentionally expose sensitive backend details, such as third-party API constraints, stack trace segments, or authentication errors, aiding attackers in reconnaissance.
+**Prevention:** Always follow the "Fail securely" principle. Log detailed errors on the server side and return sanitized, generic error messages to the client.

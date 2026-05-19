@@ -353,6 +353,8 @@ export async function POST(request: Request) {
       },
     });
   } catch (error: any) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('Submit form internal error:', error);
+    // 🛡️ Sentinel: Prevent internal error details from leaking to the client
+    return NextResponse.json({ ok: false, error: 'Internal server error occurred. Please try again later.' }, { status: 500 });
   }
 }
