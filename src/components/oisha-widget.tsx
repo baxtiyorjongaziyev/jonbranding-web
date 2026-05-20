@@ -175,8 +175,10 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
       )}>
         <button
           onClick={() => setIsOpen(true)}
-          className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-all ring-4 ring-white/20"
+          className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-all ring-4 ring-white/20 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none focus-visible:ring-blue-600 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900"
           aria-label="Open Oisha Intelligence"
+          aria-expanded={isOpen}
+          aria-controls="oisha-chat-window"
         >
           <Sparkles className="w-8 h-8 animate-pulse" />
         </button>
@@ -186,6 +188,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="oisha-chat-window"
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -202,7 +205,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
                     <p className="text-[10px] opacity-80 uppercase tracking-widest">{translations.subtitle}</p>
                   </div>
                 </div>
-                <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-white/10 rounded-full transition-colors" aria-label="Close chat window">
+                <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-white/10 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none focus-visible:ring-white focus-visible:ring-offset-blue-600" aria-label="Close chat window">
                   <X className="w-5 h-5" />
                 </button>
               </CardHeader>

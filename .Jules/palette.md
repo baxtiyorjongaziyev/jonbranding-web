@@ -11,3 +11,7 @@
 ## 2026-05-17 - Enhancing custom animated toggle components with proper ARIA attributes and keyboard support
 **Learning:** Custom interactive components like `KnobToggle` often lack essential accessibility features when built using `motion.div`. They fail to convey their role, state, and are not navigable via keyboard.
 **Action:** When building custom toggle components (e.g. `KnobToggle`), always include `role="switch"`, `aria-checked={isOn}`, `tabIndex={0}`, keyboard handlers (for 'Enter' and 'Space'), and `focus-visible` styles to ensure full accessibility and usability.
+
+## 2026-05-18 - Adding missing keyboard focus states to dynamic chat toggle and close buttons
+**Learning:** Floating action buttons and internal close buttons for floating widget components (like `OishaWidget`) often lack visible focus indicators. Sighted keyboard users can easily lose track of where their focus is when navigating floating elements. Also, the relationship between a toggle button and its respective chat window was not conveyed to screen readers.
+**Action:** When adding or modifying interactive dynamic widgets, ensure floating toggle buttons and their internal close buttons include `focus-visible:ring-2` (and relevant offset styles) for clear keyboard navigation. Additionally, apply `aria-expanded` and `aria-controls` to the toggle button, with a corresponding `id` on the target container, to semantically link the elements.
