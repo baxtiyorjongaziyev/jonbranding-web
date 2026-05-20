@@ -17,8 +17,6 @@
         "corporate_style_desc": "Brendni tanitadigan logotiplar, ranglar va shriftlar tizimi.",
         "packaging_design": "Qadoq dizayni",
         "packaging_design_desc": "Mahsulotni javonda ajratib turadigan jozibali dizayn.",
-        "car_wrap_design": "Car wrap design",
-        "car_wrap_design_desc": "Mashina reklamasini professional brend ko‘rinishiga aylantirish.",
         "services_and_prices": "Xizmatlar va narxlar",
         "services_and_prices_desc": "O'z paketingizni yig'ing va narxni darhol biling.",
         "contact_by_phone": "Qo'ng'iroq",
@@ -373,12 +371,6 @@
                 "id": "qadoq-dizayni",
                 "title": "Qadoq dizayni",
                 "description": "Mahsulotni javonda ajratib turadigan jozibali dizayn.",
-                "buttonText": "Batafsil"
-            },
-            {
-                "id": "car-wrap-design",
-                "title": "Creative Car Wrap Design",
-                "description": "Mashina reklamasini ko‘chada yuradigan professional brend ko‘rinishiga aylantirish.",
                 "buttonText": "Batafsil"
             }
         ]
