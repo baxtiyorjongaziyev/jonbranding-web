@@ -2,7 +2,7 @@
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon } from 'lucide-react';
+import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon, Truck } from 'lucide-react';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -30,6 +30,7 @@ const SitemapPage = async (props: Props) => {
         corporate_style: 'Firma uslubi',
         brandbook: 'Brendbuk',
         packaging_design: 'Qadoq dizayni',
+        car_wrap_design: 'Creative Car Wrap Design',
         services_prices: 'Xizmatlar va narxlar',
         brand_strategy: 'Brend strategiyasi',
         patent_calculator: 'Patent kalkulyatori',
@@ -58,6 +59,7 @@ const SitemapPage = async (props: Props) => {
         { href: '/xizmatlar/firmenniy-stil', label: t.links?.corporate_style || 'Firma uslubi', icon: Paintbrush },
         { href: '/xizmatlar/brandbook', label: t.links?.brandbook || 'Brendbuk', icon: Book },
         { href: '/xizmatlar/qadoq-dizayni', label: t.links?.packaging_design || 'Qadoq dizayni', icon: Package },
+        { href: '/xizmatlar/car-wrap-design', label: t.links?.car_wrap_design || 'Creative Car Wrap Design', icon: Truck },
         { href: '/xizmatlar', label: t.links?.services_prices || 'Xizmatlar va narxlar', icon: List },
         { href: '/xizmatlar/brand-strategy', label: t.links?.brand_strategy || 'Brend strategiyasi', icon: BrainCircuit },
         { href: '/xizmatlar/patent-kalkulyatori', label: t.links?.patent_calculator || 'Patent kalkulyatori', icon: PenSquare },

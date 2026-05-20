@@ -17,6 +17,8 @@
         "corporate_style_desc": "Brendni tanitadigan logotiplar, ranglar va shriftlar tizimi.",
         "packaging_design": "Qadoq dizayni",
         "packaging_design_desc": "Mahsulotni javonda ajratib turadigan jozibali dizayn.",
+        "car_wrap_design": "Car wrap design",
+        "car_wrap_design_desc": "Mashina reklamasini professional brend ko‘rinishiga aylantirish.",
         "services_and_prices": "Xizmatlar va narxlar",
         "services_and_prices_desc": "O'z paketingizni yig'ing va narxni darhol biling.",
         "contact_by_phone": "Qo'ng'iroq",
@@ -145,6 +147,7 @@
             "brandbook": "Brendbuk",
             "corporate_style": "Firma uslubi",
             "packaging_design": "Qadoq dizayni",
+            "car_wrap_design": "Creative Car Wrap Design",
             "logo_design": "Logotip dizayni",
             "patent_calculator": "Patent kalkulyatori",
             "marketplace_cover": "Sotuvchi kartochka dizayni"
@@ -370,6 +373,12 @@
                 "id": "qadoq-dizayni",
                 "title": "Qadoq dizayni",
                 "description": "Mahsulotni javonda ajratib turadigan jozibali dizayn.",
+                "buttonText": "Batafsil"
+            },
+            {
+                "id": "car-wrap-design",
+                "title": "Creative Car Wrap Design",
+                "description": "Mashina reklamasini ko‘chada yuradigan professional brend ko‘rinishiga aylantirish.",
                 "buttonText": "Batafsil"
             }
         ]
@@ -1120,6 +1129,175 @@
             "error_toast_title": "Xatolik!",
             "telegramTitle": "Yangi patent arizasi (kalkulyatordan)",
             "notSpecified": "Ko'rsatilmagan"
+        }
+    },
+    "carWrapPage": {
+        "metadata": {
+            "title": "Creative Car Wrap Design xizmati | Jon Branding",
+            "description": "Biznes mashinalari uchun professional car wrap design: logo, slogan, kontaktlar va brend uslubiga mos kreativ reklama dizayni.",
+            "keywords": [
+                "car wrap design",
+                "mashina reklama dizayni",
+                "avto reklama dizayn",
+                "branding design",
+                "Jon Branding",
+                "mashina brending",
+                "reklama dizayni"
+            ]
+        },
+        "hero": {
+            "eyebrow": "Mashina reklama dizayni",
+            "title": "Creative Car Wrap Design",
+            "subtitle": "Brendingizni ko‘chada yuradigan reklamaga aylantiring.",
+            "description": "Mashina ustidagi reklama shunchaki logo yopishtirish emas. To‘g‘ri ishlangan car wrap dizayni biznesingizni yo‘lda ham ko‘zga tashlanadigan, esda qoladigan va ishonchli brendga aylantiradi.",
+            "primaryCta": "Dizayn buyurtma qilish",
+            "secondaryCta": "Tariflarni ko‘rish"
+        },
+        "visual": {
+            "label": "Wrap kompozitsiya",
+            "brand": "Jon.Branding",
+            "sloganUz": "Brendingiz ko‘chada ishlasin",
+            "sloganRu": "Реклама, которую замечают",
+            "phone": "+998 33 645 00 97",
+            "side": "Yon qism",
+            "rear": "Orqa qism",
+            "front": "Old qism",
+            "notes": [
+                "Logo va slogan o‘qiladigan joyda",
+                "Kontaktlar tez esda qoladigan formatda",
+                "Brend ranglari mashina formasiga mos"
+            ]
+        },
+        "problem": {
+            "title": "Oddiy yopishtirilgan reklama brendni kuchsiz ko‘rsatadi",
+            "description": "Ko‘p bizneslar mashinaga logo, telefon raqam va xizmat nomlarini tartibsiz joylashtirib qo‘yadi. Natijada reklama ko‘zga tashlanmaydi, o‘qilishi qiyin bo‘ladi va brend professional ko‘rinmaydi."
+        },
+        "solution": {
+            "title": "Biz mashinangizni kuchli reklama kanaliga aylantiramiz",
+            "description": "Jon Branding jamoasi mashina formasi, brend rangi, logo, slogan, xizmatlar va kontaktlarni yagona kompozitsiyaga joylashtirib, ko‘chada e’tibor tortadigan professional car wrap design ishlab beradi."
+        },
+        "included": {
+            "eyebrow": "Xizmat ichida",
+            "title": "Car wrap design ichiga nimalar kiradi?",
+            "items": [
+                "Brendga mos kreativ dizayn konsepti",
+                "Mashina modeli va shakliga mos kompozitsiya",
+                "Logo, slogan va kontaktlar joylashuvi",
+                "O‘zbekcha va ruscha matnlarni balansli joylashtirish",
+                "Mashinaning yon, orqa va old qismlari uchun dizayn",
+                "Realistic mockup ko‘rinish",
+                "Chop etishga tayyor final fayllar",
+                "Bosmaxona yoki sticker ustaga topshirish uchun texnik tayyorlov"
+            ]
+        },
+        "benefits": {
+            "title": "Bu xizmat sizga nima beradi?",
+            "items": [
+                "Brendingiz ko‘chada ko‘proq ko‘rinadi",
+                "Mashina reklamangiz professional va ishonchli ko‘rinadi",
+                "Odamlar biznesingizni tezroq eslab qoladi",
+                "Oddiy transport vositasi reklama kanaliga aylanadi",
+                "Slogan, xizmat va kontaktlar tartibli ko‘rinadi",
+                "Brend imiji kuchayadi",
+                "Raqobatchilardan ajralib turasiz",
+                "Offline reklama doimiy ishlaydi"
+            ]
+        },
+        "audience": {
+            "title": "Kimlar uchun mos?",
+            "items": [
+                "Yetkazib berish xizmatlari",
+                "Mebel va qurilish kompaniyalari",
+                "Klining xizmatlari",
+                "Konditsioner, texnika va servis xizmatlari",
+                "Oziq-ovqat va ichimlik brendlari",
+                "Kafe, bakery va restoranlar",
+                "Do‘konlar va savdo tarmoqlari",
+                "Ko‘chada tez-tez harakatlanadigan xizmat bizneslari"
+            ]
+        },
+        "process": {
+            "title": "Biz qanday ishlaymiz?",
+            "steps": [
+                "Brend va mashina modeli bilan tanishamiz",
+                "Logo, ranglar, slogan va kerakli ma’lumotlarni olamiz",
+                "Car wrap uchun kreativ yo‘nalish ishlab chiqamiz",
+                "Dizaynni mashina maketiga joylashtiramiz",
+                "Tuzatishlardan keyin final fayllarni tayyorlab beramiz"
+            ]
+        },
+        "pricing": {
+            "eyebrow": "Tariflar",
+            "title": "Loyihangiz hajmiga mos tarifni tanlang",
+            "tiers": [
+                {
+                    "name": "START",
+                    "price": "1 500 000 so‘m",
+                    "features": [
+                        "1 ta kreativ yo‘nalish",
+                        "Mashinaning 2 yon tomoni dizayni",
+                        "O‘zbekcha va ruscha slogan joylashuvi",
+                        "1 marta tuzatish",
+                        "Chop etishga tayyor fayl"
+                    ]
+                },
+                {
+                    "name": "PRO",
+                    "price": "2 500 000 so‘m",
+                    "features": [
+                        "2 ta dizayn varianti",
+                        "Mashinaning ikki yoni va orqa qismi",
+                        "Brend ranglari va uslubiga mos kompozitsiya",
+                        "Ikki tilda slogan joylashuvi",
+                        "2 marta tuzatish",
+                        "Chop etishga tayyor fayl"
+                    ]
+                },
+                {
+                    "name": "PREMIUM",
+                    "price": "4 000 000 so‘m",
+                    "features": [
+                        "3 ta kreativ dizayn yo‘nalishi",
+                        "Mashinaning 4 tomoni: chap, o‘ng, old, orqa",
+                        "Slogan, xizmatlar va kontaktlar joylashuvi",
+                        "Brendga mos reklama konsepti",
+                        "Realistic mockup ko‘rinish",
+                        "3 marta tuzatish",
+                        "Chop etishga tayyor final fayllar"
+                    ]
+                }
+            ]
+        },
+        "cta": {
+            "brandLabel": "Jon.Branding",
+            "title": "Mashinangiz brendingiz uchun ishlasin",
+            "description": "Agar biznesingiz mashinasi ko‘chada yursa, u shunchaki transport emas — reklama maydoni. Biz uni professional brend ko‘rinishiga olib kelamiz.",
+            "button": "Car wrap design buyurtma qilish"
+        },
+        "faq": {
+            "title": "Ko‘p beriladigan savollar",
+            "items": [
+                {
+                    "question": "Dizayn chop etishga tayyor bo‘ladimi?",
+                    "answer": "Ha, yakunda bosmaxona yoki sticker ustaga berishga tayyor fayllar topshiriladi."
+                },
+                {
+                    "question": "Mashina modeli kerak bo‘ladimi?",
+                    "answer": "Ha, dizayn mashina modeli va o‘lchamiga moslab tayyorlanadi."
+                },
+                {
+                    "question": "Ikki tilda slogan joylashtirish mumkinmi?",
+                    "answer": "Ha, masalan bir tomoniga o‘zbekcha, ikkinchi tomoniga ruscha slogan joylashtirish mumkin."
+                },
+                {
+                    "question": "Dizaynni ko‘rinishda ko‘rsatib berasizlarmi?",
+                    "answer": "Ha, tarifga qarab realistic mockup ko‘rinish ham tayyorlanadi."
+                },
+                {
+                    "question": "Faqat dizayn qilasizlarmi yoki yopishtirish ham bormi?",
+                    "answer": "Asosiy xizmat — dizayn va chop etishga tayyor fayl. Yopishtirish bo‘yicha alohida hamkor ustalar bilan yo‘naltirish mumkin."
+                }
+            ]
         }
     },
     "packagingPage": {

@@ -21,6 +21,7 @@ const staticRoutes = [
   '/xizmatlar/brand-strategiyasi',
   '/xizmatlar/firmenniy-stil',
   '/xizmatlar/qadoq-dizayni',
+  '/xizmatlar/car-wrap-design',
   '/xizmatlar/brandbook',
   '/xizmatlar/patent-kalkulyatori',
 ];
