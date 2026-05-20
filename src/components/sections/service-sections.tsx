@@ -5,7 +5,7 @@ import { FC, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, ScanText, Package, Paintbrush, Fingerprint, Book, CheckCircle2, Truck } from 'lucide-react';
+import { ArrowRight, ScanText, Package, Paintbrush, Fingerprint, Book, CheckCircle2 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
@@ -16,7 +16,6 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     'firmenniy-stil': Paintbrush,
     'brandbook': Book,
     'qadoq-dizayni': Package,
-    'car-wrap-design': Truck,
 };
 
 const containerVariants = {
@@ -81,7 +80,6 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDi
         services.find((s: any) => s.id === 'firmenniy-stil'),
         services.find((s: any) => s.id === 'brandbook'),
         services.find((s: any) => s.id === 'qadoq-dizayni'),
-        services.find((s: any) => s.id === 'car-wrap-design'),
     ].filter(Boolean);
     
     const servicePromise =
