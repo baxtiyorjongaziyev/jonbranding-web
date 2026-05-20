@@ -144,7 +144,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
               <Button
                 onClick={onOpenContact}
                 size="lg"
-                className="group h-14 rounded-[8px] bg-white px-8 text-base font-black text-brand-ink shadow-[0_24px_70px_-24px_rgba(255,255,255,0.75)] transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime hover:text-brand-ink hover:shadow-[0_24px_70px_-24px_rgba(245,184,46,0.75)] active:scale-[0.98] sm:h-16"
+                className="group h-14 rounded-[8px] bg-white px-8 text-base font-black text-brand-ink shadow-[0_24px_70px_-24px_rgba(255,255,255,0.75)] transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime hover:text-brand-ink hover:shadow-[0_24px_70px_-24px_rgba(84,213,233,0.72)] active:scale-[0.98] sm:h-16"
               >
                 {heroCopy.cta}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -255,7 +255,7 @@ function AuditPanel({ copy }: { copy: ReturnType<typeof getHeroCopy> }) {
           <p className="mt-1 text-sm leading-6 text-white/60">{copy.auditSubtitle}</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex h-14 w-14 items-center justify-center rounded-[8px] bg-brand-lime text-sm font-black text-brand-ink shadow-[0_16px_40px_-18px_rgba(245,184,46,0.9)]">
+          <div className="flex h-14 w-14 items-center justify-center rounded-[8px] bg-brand-lime text-sm font-black text-brand-ink shadow-[0_16px_40px_-18px_rgba(84,213,233,0.8)]">
             {copy.auditScore}
           </div>
           <BarChart3 className="hidden h-7 w-7 text-brand-lime sm:block" />

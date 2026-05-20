@@ -27,7 +27,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary; onCtaCli
 
   return (
     <BrandSection id="audit-offer" tone="light" className="min-h-0 scroll-mt-24 bg-brand-mist py-16 sm:py-24">
-      <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(245,184,46,0.14),transparent_34%,rgba(24,78,78,0.08))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(84,213,233,0.12),transparent_34%,rgba(24,78,78,0.08))]" />
       <div className="container relative z-10 mx-auto px-4">
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
