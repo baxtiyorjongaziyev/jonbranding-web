@@ -26,16 +26,16 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
   if (!dictionary?.title) return null;
 
   return (
-    <BrandSection tone="light" className="border-y border-brand-line/80 bg-[#fbfaf7] py-16 sm:py-20" aria-labelledby="trusted-by-title">
+    <BrandSection tone="light" className="border-y border-brand-line/80 bg-brand-paper py-16 sm:py-20" aria-labelledby="trusted-by-title">
       <div className="container mx-auto px-4">
         <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
           <div>
             {dictionary.eyebrow && (
-              <div className="mb-4 inline-flex rounded-full border border-brand-line bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-blue shadow-sm">
+              <div className="jb-eyebrow mb-4">
                 {dictionary.eyebrow}
               </div>
             )}
-            <h2 id="trusted-by-title" className="max-w-xl text-balance text-3xl font-black tracking-tight text-brand-ink sm:text-5xl">
+            <h2 id="trusted-by-title" className="max-w-xl text-balance text-3xl font-black tracking-normal text-brand-ink sm:text-5xl">
               {dictionary.title}
             </h2>
             {dictionary.subtitle && <p className="mt-5 max-w-xl text-base leading-8 text-brand-slate sm:text-lg">{dictionary.subtitle}</p>}
@@ -43,15 +43,15 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {metrics.map((metric) => (
-              <div key={metric.label} className="rounded-[8px] border border-brand-line bg-white px-4 py-5 shadow-[0_20px_50px_rgba(15,23,42,0.04)]">
-                <div className="text-2xl font-black tracking-tight text-brand-ink sm:text-3xl">{metric.value}</div>
-                <div className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-brand-slate">{metric.label}</div>
+              <div key={metric.label} className="jb-warm-panel px-4 py-5">
+                <div className="text-2xl font-black tracking-normal text-brand-ink sm:text-3xl">{metric.value}</div>
+                <div className="mt-1 text-xs font-bold uppercase tracking-normal text-brand-slate">{metric.label}</div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[8px] border border-brand-line bg-brand-line sm:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[8px] border border-brand-line bg-brand-line shadow-[0_24px_80px_rgba(15,23,42,0.06)] sm:grid-cols-3 lg:grid-cols-6">
           {brands.map((brand) => (
             <div key={brand.name} className="flex h-24 items-center justify-center bg-white px-5 py-4 transition-colors duration-200 hover:bg-brand-mist/70">
               {brand.logo ? (
@@ -62,6 +62,7 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
                   height={72}
                   loading="lazy"
                   className="max-h-12 max-w-full object-contain grayscale transition-all duration-200 hover:grayscale-0"
+                  style={{ width: 'auto', height: 'auto' }}
                 />
               ) : (
                 <span className="text-center text-sm font-black text-brand-slate">{brand.name}</span>

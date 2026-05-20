@@ -10,7 +10,7 @@ export function BrandSection({
   return (
     <section
       className={cn(
-        'brand-section relative overflow-hidden',
+        'brand-section relative isolate overflow-hidden',
         tone === 'light' && 'bg-brand-paper',
         tone === 'soft' && 'bg-brand-mist',
         tone === 'dark' && 'bg-brand-ink text-white',
@@ -39,11 +39,11 @@ export function SectionIntro({
   return (
     <div className={cn('max-w-3xl', align === 'center' ? 'mx-auto text-center' : 'text-left', className)}>
       {eyebrow && (
-        <div className="mb-4 inline-flex rounded-full border border-brand-line bg-white/70 px-4 py-2 text-[11px] font-black uppercase tracking-[0.24em] text-brand-blue shadow-sm">
+        <div className="jb-eyebrow mb-4">
           {eyebrow}
         </div>
       )}
-      <h2 className="text-balance text-3xl font-black tracking-[-0.04em] text-brand-ink sm:text-5xl">
+      <h2 className="text-balance text-3xl font-black tracking-normal text-brand-ink sm:text-5xl">
         {title}
       </h2>
       {description && (
