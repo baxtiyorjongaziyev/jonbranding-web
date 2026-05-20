@@ -353,6 +353,8 @@ export async function POST(request: Request) {
       },
     });
   } catch (error: any) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    // 🛡️ Security: Log the actual error internally, but don't leak it to the client
+    console.error("Internal form submission error:", error);
+    return NextResponse.json({ ok: false, error: "Internal server error" }, { status: 500 });
   }
 }
