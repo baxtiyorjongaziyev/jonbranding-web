@@ -48,6 +48,8 @@ type Dictionary = {
     corporate_style_desc: string;
     packaging_design: string;
     packaging_design_desc: string;
+    car_wrap_design?: string;
+    car_wrap_design_desc?: string;
     services_and_prices: string;
     services_and_prices_desc: string;
     contact_by_phone: string;
@@ -249,8 +251,9 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     { title: dictionary.corporate_style, href: getLocalizedPath('/xizmatlar/firmenniy-stil'), description: dictionary.corporate_style_desc },
     { title: dictionary.brandbook, href: getLocalizedPath('/xizmatlar/brandbook'), description: dictionary.brandbook_desc },
     { title: dictionary.packaging_design, href: getLocalizedPath('/xizmatlar/qadoq-dizayni'), description: dictionary.packaging_design_desc },
+    dictionary.car_wrap_design ? { title: dictionary.car_wrap_design, href: getLocalizedPath('/xizmatlar/car-wrap-design'), description: dictionary.car_wrap_design_desc || '' } : null,
     { title: dictionary.services_and_prices, href: getLocalizedPath('/xizmatlar'), description: dictionary.services_and_prices_desc },
-  ];
+  ].filter(Boolean) as Array<{ title: string; href: string; description: string }>;
 
   return (
     <>
