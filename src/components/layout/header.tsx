@@ -279,11 +279,11 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
       >
       <motion.div
         className={cn(
-          "flex h-16 w-full items-center justify-between transition-all duration-700",
+          "flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500",
           scrolled 
-            ? "mx-auto max-w-[95%] rounded-full px-6 py-2 liquid-glass lg:max-w-6xl lg:px-8"
+            ? "mx-auto max-w-[95%] rounded-[8px] border border-brand-line/70 bg-brand-paper/[0.82] px-6 py-2 shadow-[0_18px_55px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:max-w-6xl lg:px-8"
             : startsOnLightSurface
-              ? "max-w-none border-b border-black/10 bg-white/85 px-6 backdrop-blur-xl lg:px-8"
+              ? "max-w-none border-b border-transparent bg-transparent px-6 lg:px-8"
               : "max-w-none border-b border-transparent bg-transparent px-6 lg:px-8"
         )}
         style={{ 
@@ -354,7 +354,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   />
                 </div>
                 <motion.div
-                  className="rounded-full bg-transparent"
+                  className="rounded-[8px] bg-transparent"
                   animate={{ 
                     scale: [1, 1.05, 1],
                     boxShadow: ["0 0 0 0 rgba(37, 99, 235, 0)", "0 0 20px 5px rgba(37, 99, 235, 0.3)", "0 0 0 0 rgba(37, 99, 235, 0)"]
@@ -367,7 +367,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 >
                   <Button 
                     onClick={handleContactClick} 
-                    className="shadow-ocean h-11 px-6 rounded-full bg-primary hover:bg-primary/90 text-white font-bold"
+                    className="h-11 rounded-[8px] bg-brand-ink px-6 font-bold text-white shadow-[0_18px_42px_-24px_rgba(15,23,42,0.85)] hover:bg-brand-blue"
                     aria-label={dictionary.free_consultation}
                   >
                     {dictionary.free_consultation}

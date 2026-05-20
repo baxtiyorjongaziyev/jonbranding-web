@@ -100,12 +100,12 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
   const heroCopy = getHeroCopy(dictionary);
 
   return (
-    <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#070b12] text-white">
+    <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#06080d] text-white">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(115deg,#070b12_0%,#101735_52%,#06252b_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] opacity-35" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,11,18,0.95)_0%,rgba(7,11,18,0.72)_43%,rgba(7,11,18,0.3)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white via-white/30 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,#06080d_0%,#11151f_58%,#132016_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:86px_86px] opacity-28" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,8,13,0.96)_0%,rgba(6,8,13,0.75)_48%,rgba(6,8,13,0.28)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-brand-paper via-brand-paper/[0.35] to-transparent pointer-events-none" />
       </div>
 
       <motion.div 
@@ -121,18 +121,18 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
               className="mb-6 inline-flex items-center justify-center gap-2 self-center rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md lg:self-start"
             >
               <Sparkles className="h-3.5 w-3.5 text-brand-lime" />
-              <span className="text-[11px] font-black uppercase tracking-[0.22em] text-blue-100">{heroCopy.preHeadline}</span>
+              <span className="text-[11px] font-black uppercase tracking-normal text-white/78">{heroCopy.preHeadline}</span>
             </motion.div>
             <motion.h1 
               variants={itemVariants}
-              className="mx-auto max-w-[292px] sm:max-w-3xl text-balance text-[clamp(2.35rem,5.9vw,6.25rem)] font-black leading-[0.94] tracking-tight text-white drop-shadow-md sm:drop-shadow-none sm:text-[clamp(2.65rem,6.2vw,6.25rem)] lg:mx-0"
+              className="mx-auto max-w-[292px] text-balance text-4xl font-black leading-[0.96] tracking-normal text-white drop-shadow-md sm:max-w-3xl sm:text-6xl sm:drop-shadow-none lg:mx-0 xl:text-7xl"
             >
               {renderHeadline(heroCopy.title, 'text-white')}
             </motion.h1>
 
             <motion.p 
               variants={itemVariants}
-              className="mx-auto mt-5 max-w-[292px] sm:max-w-xl text-pretty text-base leading-7 text-blue-100/78 sm:mt-6 sm:text-lg sm:leading-8 lg:mx-0 drop-shadow-sm sm:drop-shadow-none"
+              className="mx-auto mt-5 max-w-[292px] text-pretty text-base leading-7 text-white/70 drop-shadow-sm sm:mt-6 sm:max-w-xl sm:text-lg sm:leading-8 sm:drop-shadow-none lg:mx-0"
             >
               {heroCopy.description}
             </motion.p>
@@ -144,7 +144,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
               <Button
                 onClick={onOpenContact}
                 size="lg"
-                className="group h-14 rounded-lg bg-brand-blue px-8 text-base font-black text-white shadow-[0_22px_70px_-24px_rgba(37,99,235,0.95)] transition-all duration-200 hover:bg-brand-cyan hover:text-brand-ink hover:shadow-[0_22px_70px_-24px_rgba(58,225,255,0.65)] active:scale-[0.98] sm:h-16"
+                className="group h-14 rounded-[8px] bg-white px-8 text-base font-black text-brand-ink shadow-[0_24px_70px_-24px_rgba(255,255,255,0.75)] transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime hover:text-brand-ink hover:shadow-[0_24px_70px_-24px_rgba(245,184,46,0.75)] active:scale-[0.98] sm:h-16"
               >
                 {heroCopy.cta}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -153,7 +153,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
                 asChild
                 variant="ghost"
                 size="lg"
-                className="h-14 rounded-lg border border-white/15 bg-white/[0.03] px-6 text-base font-black text-white/85 transition-all duration-200 hover:bg-white/10 hover:text-white sm:h-16"
+                className="h-14 rounded-[8px] border border-white/15 bg-white/[0.03] px-6 text-base font-black text-white/85 transition-[background-color,color,border-color] duration-200 hover:bg-white/10 hover:text-white sm:h-16"
               >
                 <Link href="#audit-offer">{heroCopy.ctaSecondary}</Link>
               </Button>
@@ -166,9 +166,9 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
               {heroCopy.proofItems.map((item) => (
                 <div
                   key={item}
-                  className="flex min-h-11 items-center gap-2 rounded-lg border border-white/[0.09] bg-white/[0.055] px-3 py-2 text-left text-xs font-bold leading-5 text-blue-50/86 backdrop-blur-md sm:min-h-14 sm:px-4 sm:py-3 sm:text-sm"
+                  className="flex min-h-11 items-center gap-2 rounded-[8px] border border-white/[0.09] bg-white/[0.055] px-3 py-2 text-left text-xs font-bold leading-5 text-white/80 backdrop-blur-md sm:min-h-14 sm:px-4 sm:py-3 sm:text-sm"
                 >
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-cyan" />
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-lime" />
                   <span className="min-w-0">{item}</span>
                 </div>
               ))}
@@ -179,17 +179,17 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
             variants={rightColumnVariants}
             className="relative flex items-center justify-center"
           >
-            <div className="relative w-full max-w-xl overflow-hidden rounded-xl border border-white/15 bg-white/[0.055] p-2 shadow-[0_40px_120px_-50px_rgba(0,0,0,0.95)] backdrop-blur-xl lg:max-w-none">
-              <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10" />
+            <div className="jb-dark-panel relative w-full max-w-xl overflow-hidden p-2 backdrop-blur-xl lg:max-w-none">
+              <div className="pointer-events-none absolute inset-0 rounded-[8px] ring-1 ring-inset ring-white/10" />
               <CaseWall images={portfolioImages} />
               <AuditPanel copy={heroCopy} />
               <div className="mt-3 hidden grid-cols-3 gap-3 lg:grid">
                 {heroCopy.showcaseTags.map((tag) => (
                   <div
                     key={tag}
-                    className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.1] bg-white/[0.055] px-4 py-3 text-[11px] font-black uppercase tracking-[0.18em] text-white/80"
+                    className="flex items-center justify-center gap-2 rounded-[8px] border border-white/[0.1] bg-white/[0.055] px-4 py-3 text-[11px] font-black uppercase tracking-normal text-white/80"
                   >
-                    <ShieldCheck className="h-3.5 w-3.5 text-brand-cyan" />
+                    <ShieldCheck className="h-3.5 w-3.5 text-brand-lime" />
                     <span className="truncate">{tag}</span>
                   </div>
                 ))}
@@ -206,7 +206,7 @@ function CaseWall({ images }: { images: GalleryImage[] }) {
   const visibleImages = images.slice(0, 6);
 
   return (
-    <div className="grid h-[300px] gap-2 overflow-hidden rounded-lg sm:h-[440px] sm:grid-cols-2 sm:grid-rows-3 lg:h-[470px]">
+    <div className="grid h-[300px] gap-2 overflow-hidden rounded-[8px] sm:h-[440px] sm:grid-cols-2 sm:grid-rows-3 lg:h-[470px]">
       {visibleImages.map((image, index) => (
         <PortfolioTile
           key={`${image?.src || 'fallback'}-${index}`}
@@ -222,14 +222,14 @@ function CaseWall({ images }: { images: GalleryImage[] }) {
 function PortfolioTile({ image, priority = false, className = '' }: { image?: GalleryImage; priority?: boolean; className?: string }) {
   if (!image) {
     return (
-      <div className={`flex h-full min-h-[180px] items-center justify-center rounded-lg bg-white/5 p-8 text-center text-sm font-medium text-white/40 ${className}`}>
+      <div className={`flex h-full min-h-[180px] items-center justify-center rounded-[8px] bg-white/5 p-8 text-center text-sm font-medium text-white/40 ${className}`}>
         Portfolio
       </div>
     );
   }
 
   return (
-    <div className={`relative h-full min-h-[180px] overflow-hidden rounded-lg bg-white ring-1 ring-white/10 ${className}`}>
+    <div className={`relative h-full min-h-[180px] overflow-hidden rounded-[8px] bg-white ring-1 ring-white/10 ${className}`}>
       <Image
         src={image.src}
         alt={image.alt || 'Jon.Branding portfolio'}
@@ -244,28 +244,28 @@ function PortfolioTile({ image, priority = false, className = '' }: { image?: Ga
 
 function AuditPanel({ copy }: { copy: ReturnType<typeof getHeroCopy> }) {
   return (
-    <div className="mt-2 rounded-lg border border-white/15 bg-[#070b12]/82 p-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-5">
+    <div className="mt-2 rounded-[8px] border border-white/15 bg-[#06080d]/86 p-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="mb-3 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-brand-cyan">
+          <div className="mb-3 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-normal text-brand-lime">
             <ShieldCheck className="h-4 w-4" />
             <span>{copy.auditScoreLabel}</span>
           </div>
-          <h2 className="text-lg font-black tracking-tight text-white sm:text-xl">{copy.auditTitle}</h2>
+          <h2 className="text-lg font-black tracking-normal text-white sm:text-xl">{copy.auditTitle}</h2>
           <p className="mt-1 text-sm leading-6 text-white/60">{copy.auditSubtitle}</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-brand-lime text-sm font-black text-brand-ink shadow-[0_16px_40px_-18px_rgba(163,230,53,0.9)]">
+          <div className="flex h-14 w-14 items-center justify-center rounded-[8px] bg-brand-lime text-sm font-black text-brand-ink shadow-[0_16px_40px_-18px_rgba(245,184,46,0.9)]">
             {copy.auditScore}
           </div>
-          <BarChart3 className="hidden h-7 w-7 text-brand-cyan sm:block" />
+          <BarChart3 className="hidden h-7 w-7 text-brand-lime sm:block" />
         </div>
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         {copy.auditSignals.map((signal) => (
-          <div key={signal} className="flex items-start gap-2 text-xs font-bold leading-5 text-white/78">
-            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-cyan" />
+          <div key={signal} className="flex items-start gap-2 text-xs font-bold leading-5 text-white/80">
+            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-lime" />
             <span>{signal}</span>
           </div>
         ))}

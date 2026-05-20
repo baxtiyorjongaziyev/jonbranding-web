@@ -5,19 +5,19 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
+    --background: 42 38% 97%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221 100% 50%;
+    --primary: 226 62% 42%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 35%;
-    --accent: 190 88% 54%;
+    --accent: 184 60% 42%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -30,15 +30,15 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --radius: 0.75rem;
-    --brand-ink: 222 68% 7%;
-    --brand-paper: 40 33% 98%;
-    --brand-mist: 214 58% 96%;
-    --brand-blue: 231 78% 48%;
-    --brand-cyan: 190 88% 54%;
-    --brand-lime: 86 72% 50%;
-    --brand-slate: 220 17% 42%;
-    --brand-line: 220 20% 90%;
-    --font-inter: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --brand-ink: 222 48% 6%;
+    --brand-paper: 42 38% 97%;
+    --brand-mist: 38 28% 94%;
+    --brand-blue: 226 62% 42%;
+    --brand-cyan: 184 60% 42%;
+    --brand-lime: 43 86% 57%;
+    --brand-slate: 222 12% 38%;
+    --brand-line: 38 18% 84%;
+    --font-inter: var(--font-jakarta), "Aptos", "Segoe UI", sans-serif;
     --font-jakarta: "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
 
     --section-gap: 7rem;
@@ -106,18 +106,18 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-muted-foreground overflow-x-hidden;
+    @apply bg-brand-paper text-muted-foreground overflow-x-hidden;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
   h1,h2,h3,h4,h5,h6 {
-    @apply text-foreground font-headline leading-tight tracking-tight;
+    @apply text-foreground font-headline leading-tight tracking-normal;
     font-display: swap;
   }
   
   h1 { 
-    @apply text-[1.75rem] sm:text-[2.5rem] md:text-[3.25rem] lg:text-[3.75rem] xl:text-[4.25rem] font-black leading-[1.1] tracking-tight; 
+    @apply text-[1.75rem] sm:text-[2.5rem] md:text-[3.25rem] lg:text-[3.75rem] xl:text-[4.25rem] font-black leading-[1.1] tracking-normal;
   }
   h2 { @apply text-[1.5rem] sm:text-[2rem] lg:text-[2.75rem] font-black leading-tight; }
   h3 { @apply text-[1.25rem] sm:text-[1.5rem] lg:text-[2rem] font-bold; }
@@ -132,7 +132,7 @@
 @layer utilities {
   .shadow-ocean {
     box-shadow: 0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2);
-    transition: box-shadow var(--transition-medium), transform var(--transition-medium);
+    transition: box-shadow var(--transition-normal), transform var(--transition-normal);
   }
 
   .animate-subtle-pulse {
@@ -169,7 +169,7 @@
     display: inline-block;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .text-reveal-word.active {
@@ -246,7 +246,7 @@
 
   /* Premium Design System Utilities */
   .btn-premium {
-    @apply relative overflow-hidden transition-all duration-300;
+    @apply relative overflow-hidden transition-[background-color,color,box-shadow,transform,border-color] duration-300;
   }
   
   .btn-premium::after {
@@ -259,23 +259,25 @@
   }
 
   .premium-card {
-    @apply bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)] transition-all duration-700 rounded-[2.5rem] overflow-hidden;
+    @apply overflow-hidden rounded-[8px] border border-brand-line/80 bg-white shadow-[0_18px_55px_rgba(15,23,42,0.06)] transition-[box-shadow,transform,border-color] duration-500 hover:shadow-[0_30px_70px_rgba(15,23,42,0.1)];
   }
 
   .brand-section {
+    position: relative;
     padding-top: var(--section-gap);
     padding-bottom: var(--section-gap);
   }
 
   .brand-card {
-    @apply rounded-[2rem] border border-brand-line p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur duration-500;
-    background-color: rgb(255 255 255 / 0.92);
+    @apply rounded-[8px] border border-brand-line/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] duration-300;
+    background-color: rgb(255 255 255 / 0.9);
     transition-property: box-shadow, transform, border-color, background-color;
   }
 
   .brand-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 32px 90px rgba(15, 23, 42, 0.12);
+    transform: translateY(-3px);
+    border-color: hsl(var(--brand-ink) / 0.16);
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.1);
   }
 
   .brand-card-dark {
@@ -285,7 +287,19 @@
   }
 
   .brand-badge {
-    @apply inline-flex items-center rounded-full border border-brand-line bg-white/80 px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-brand-blue;
+    @apply inline-flex items-center rounded-full border border-brand-line/80 bg-white/80 px-3 py-1 text-[11px] font-black uppercase tracking-normal text-brand-blue;
+  }
+
+  .jb-eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-line/80 bg-white/80 px-4 py-2 text-[11px] font-black uppercase tracking-normal text-brand-blue shadow-sm;
+  }
+
+  .jb-dark-panel {
+    @apply rounded-[8px] border border-white/10 bg-white/[0.06] shadow-[0_40px_120px_-55px_rgba(0,0,0,0.9)];
+  }
+
+  .jb-warm-panel {
+    @apply rounded-[8px] border border-brand-line/80 bg-white/90 shadow-[0_24px_70px_rgba(15,23,42,0.07)];
   }
 
   .section-padding {
@@ -333,7 +347,7 @@
     box-shadow: 
       0 0 0 1px rgba(255, 255, 255, 0.1) inset,
       0 10px 40px -10px rgba(0, 0, 0, 0.2);
-    transition: all var(--transition-premium);
+    transition: box-shadow var(--transition-premium), transform var(--transition-premium), border-color var(--transition-premium), background-color var(--transition-premium);
   }
 
   .noise-texture {
@@ -359,7 +373,7 @@
                 radial-gradient(at 100% 0%, hsla(190,100%,50%,0.1) 0, transparent 50%),
                 radial-gradient(at 100% 100%, hsla(210,100%,50%,0.1) 0, transparent 50%),
                 radial-gradient(at 0% 100%, hsla(190,100%,50%,0.1) 0, transparent 50%);
-    transition: opacity var(--transition-slow);
+    transition: opacity var(--transition-premium);
   }
 
   .bento-background-image {
@@ -388,7 +402,7 @@
       rgba(255, 255, 255, 0.08),
       transparent
     );
-    transition: all 0.8s ease-in-out;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
     pointer-events: none;
     z-index: 5;
   }
@@ -453,7 +467,7 @@
   }
 
   .liquid-glass-hover {
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.6s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .liquid-glass-hover:hover {

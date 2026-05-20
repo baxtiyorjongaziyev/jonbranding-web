@@ -169,7 +169,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
           if (isDoubleStar || isPipe) {
             const text = isDoubleStar ? segment.slice(2, -2) : segment.slice(1, -1);
             return (
-              <span key={i} className="text-brand-cyan">
+              <span key={i} className="text-brand-lime">
                 {text}
               </span>
             );
