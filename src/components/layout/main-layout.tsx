@@ -9,7 +9,8 @@ import { pageview } from '@/lib/gtag';
 import { Toaster } from '@/components/ui/toaster';
 import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
-import { initAmplitude, trackEvent } from '@/lib/amplitude';
+import { initAmplitude } from '@/lib/amplitude';
+import { trackCtaClick, trackEvent } from '@/lib/analytics';
 import ScrollDepthTrigger from '@/components/scroll-depth-trigger';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'), {
@@ -36,7 +37,13 @@ function AnalyticsTracker() {
   useEffect(() => {
     const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
     pageview(url);
-    trackEvent('Page View', { url, pathname });
+    trackEvent({
+      action: 'page_viewed',
+      category: 'Page',
+      label: pathname,
+      page_path: pathname,
+      page_location: url,
+    });
   }, [pathname, searchParams]);
 
   return null;
@@ -55,7 +62,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
     const pathname = usePathname();
     const lang = (pathname.split('/')[1] || 'uz') as any;
 
-    const handleOpenModal = useCallback(() => {
+    const handleOpenModal = useCallback((detail?: { section?: string; ctaText?: string; source?: string }) => {
         if (typeof window === 'undefined') return;
 
         let summary = '';
@@ -82,7 +89,20 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
         
         setPackageSummary(summary);
         setTotalPrice(finalPrice);
-        trackEvent('Open Contact Modal', { lang, packageSummary: summary, totalPrice: finalPrice });
+        trackCtaClick({
+            ctaText: detail?.ctaText || 'Bepul Brand Audit olish',
+            section: detail?.section || 'unknown',
+            source: detail?.source || 'open_contact_modal',
+        });
+        trackEvent({
+            action: 'contact_modal_requested',
+            category: 'Lead Form',
+            label: 'Brand Audit',
+            lang,
+            packageSummary: summary,
+            totalPrice: finalPrice,
+            section: detail?.section || 'unknown',
+        });
         setModalOpen(true);
     }, [lang]);
 
@@ -112,7 +132,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
 
     useEffect(() => {
         // Use a wrapper to ensure we always have the current handleOpenModal reference
-        const listener = () => handleOpenModal();
+        const listener = (event: Event) => handleOpenModal((event as CustomEvent).detail || {});
         window.addEventListener('openContactModal', listener);
         window.addEventListener('error', reportError);
 
@@ -143,7 +163,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
                 lang={lang}
             />
             <CookieConsentBanner />
-            <OishaWidget lang={lang as 'uz' | 'ru'} />
+            <OishaWidget lang={lang} />
             {leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
         </div>
     );

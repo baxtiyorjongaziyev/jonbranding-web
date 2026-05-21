@@ -26,7 +26,9 @@
         "switch_lang": "Tilni o'zgartirish",
         "lang_ru": "Русский",
         "lang_uz": "O'zbekcha",
-        "lang_en": "English"
+        "lang_en": "English",
+        "ai": "AI Yordamchi",
+        "consultation_short": "Audit olish"
     },
     "footer": {
         "contact": "Biz bilan bog'laning",
@@ -238,7 +240,7 @@
             }
         },
         "buttons": {
-            "submit": "Bepul auditga yozilish",
+            "submit": "Bepul Brand Audit olish",
             "close": "Oynani yopish",
             "back": "Orqaga",
             "next": "Keyingi qadam"
@@ -258,7 +260,7 @@
             "telegramButton": "Telegram kanalga o'tish",
             "telegramDesc": "Brending bo'yicha foydali materiallar."
         },
-        "trustBadge": "Ma'lumotlaringiz maxfiy saqlanadi va faqat Jon.Branding tomonidan ishlatiladi.",
+        "trustBadge": "Ma'lumotlaringiz maxfiy saqlanadi. Strategimiz bugun siz bilan bog'lanadi.",
         "contactBadge": "15 daqiqa",
         "quickContactLabel": "Tez aloqa",
         "auditGivesLabel": "Auditda olasiz",
@@ -274,7 +276,7 @@
             "Keyingi qadam yozib beriladi"
         ],
         "objectionCopy": "Hali loyiha boshlashga tayyor bo'lmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.",
-        "riskCopy": "Telefon qoldirish - shartnoma degani emas. Avval muammo va imkoniyatni ko'rsatamiz.",
+        "riskCopy": "Telefon qoldirish shartnoma degani emas. Avval brendingizdagi muammo, imkoniyat va eng foydali keyingi qadamni ko'rsatamiz.",
         "footerCopyright": "Jon.Branding Agency"
     },
     "home": {
@@ -574,7 +576,7 @@
         ],
         "ctaTitle": "Avval bepul Brand Auditdan boshlaymiz.",
         "ctaDesc": "Brendingizning qaysi joyi ishonchni pasaytirayotganini ko'ramiz va eng muhim birinchi qadamni aytamiz.",
-        "ctaButton": "Bepul auditga yozilish",
+        "ctaButton": "Bepul Brand Audit olish",
         "eyebrow": "Auditdan keyin",
         "proofItems": [
             "Diagnostika",

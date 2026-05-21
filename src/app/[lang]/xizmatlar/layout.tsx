@@ -1,4 +1,4 @@
-
+﻿
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -18,10 +18,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       keywords: "branding services, pricing"
   };
 
-  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar`;
+  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar`;
 
   return {
-    metadataBase: new URL('https://jonbranding.uz'),
+    metadataBase: new URL('https://www.jonbranding.uz'),
     title: t.title,
     description: t.description,
     keywords: t.keywords,
@@ -49,10 +49,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'uz': 'https://jonbranding.uz/xizmatlar',
-        'ru': 'https://jonbranding.uz/ru/xizmatlar',
-        'en': 'https://jonbranding.uz/en/xizmatlar',
-        'zh': 'https://jonbranding.uz/zh/xizmatlar',
+        'uz': 'https://www.jonbranding.uz/xizmatlar',
+        'ru': 'https://www.jonbranding.uz/ru/xizmatlar',
+        'en': 'https://www.jonbranding.uz/en/xizmatlar',
+        'zh': 'https://www.jonbranding.uz/zh/xizmatlar',
       },
     },
   };

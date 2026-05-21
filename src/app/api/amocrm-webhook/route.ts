@@ -1,19 +1,19 @@
-import { NextResponse } from 'next/server';
+﻿import { NextResponse } from 'next/server';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
 const botToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_CHAT_ID;
 
 const ALLOWED_ORIGINS = new Set([
-  'https://jonbranding.uz',
   'https://www.jonbranding.uz',
+  'https://jonbranding.uz',
   'https://jonbranding-web--jonbranding-85662071-ea38e.us-central1.hosted.app',
 ]);
 
 function getCorsHeaders(request: Request) {
   const origin = request.headers.get('origin') || '';
   return {
-    'Access-Control-Allow-Origin': ALLOWED_ORIGINS.has(origin) ? origin : 'https://jonbranding.uz',
+    'Access-Control-Allow-Origin': ALLOWED_ORIGINS.has(origin) ? origin : 'https://www.jonbranding.uz',
     'Vary': 'Origin',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, X-JonBranding-Webhook-Secret',
@@ -101,13 +101,13 @@ export async function POST(request: Request) {
 
 
         const telegramMessage = `
-📢 Yangi voqea (AmoCRM Webhook)
+ðŸ“¢ Yangi voqea (AmoCRM Webhook)
 
 Sdelka: "${leadName}"
 Status: ${status}
 Narxi: ${price}
 
-🔗 Sdelkani ko'rish: ${leadUrl}
+ðŸ”— Sdelkani ko'rish: ${leadUrl}
         `.trim();
         
         const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;

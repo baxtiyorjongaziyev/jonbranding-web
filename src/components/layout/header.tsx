@@ -118,7 +118,7 @@ const ExpandingButton = ({
       animate={{ width: isHovered ? 160 : 44 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className={cn(
-        "relative flex h-11 items-center justify-start rounded-full bg-white/40 text-foreground backdrop-blur-md transition-colors duration-300 hover:bg-white/60 overflow-hidden !ring-0 !ring-offset-0 !outline-none group",
+        "relative flex h-11 items-center justify-start overflow-hidden rounded-full bg-white/40 text-foreground backdrop-blur-md transition-[background-color,box-shadow,width] duration-300 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 group",
         // Invisible hit area extension to make it easier to "catch" the button
         "before:absolute before:-inset-2 before:content-['']"
       )}
@@ -197,7 +197,13 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   const handleContactClick = () => {
     setMobileMenuOpen(false);
-    const contactEvent = new CustomEvent('openContactModal');
+    const contactEvent = new CustomEvent('openContactModal', {
+      detail: {
+        section: 'header',
+        ctaText: dictionary.free_consultation,
+        source: 'header',
+      },
+    });
     window.dispatchEvent(contactEvent);
   };
 
@@ -342,7 +348,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                     ariaLabel={dictionary.contact_by_phone}
                     icon={<Phone className="h-4.5 w-4.5" />}
                     text={dictionary.contact_by_phone}
-                    onClick={() => trackContactClick('phone')}
+                    onClick={() => trackContactClick('phone', 'header')}
                   />
                   <ExpandingButton 
                     href="https://t.me/baxtiyorjon_gaziyev"
@@ -350,7 +356,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                     ariaLabel={dictionary.contact_by_telegram}
                     icon={<Send className="h-4.5 w-4.5" />}
                     text={dictionary.contact_by_telegram}
-                    onClick={() => trackContactClick('telegram')}
+                    onClick={() => trackContactClick('telegram', 'header')}
                   />
                 </div>
                 <motion.div
@@ -413,11 +419,11 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                       </Link>
                       ))}
                       <div className="border-t pt-6 mt-4 space-y-4">
-                          <a href="tel:+998336450097" onClick={() => trackContactClick('phone')} className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
+                          <a href="tel:+998336450097" onClick={() => trackContactClick('phone', 'mobile_menu')} className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
                           <Phone size={20} aria-hidden="true" />
                           +998 33 645 00 97
                           </a>
-                          <a href="https://t.me/baxtiyorjon_gaziyev" onClick={() => trackContactClick('telegram')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
+                          <a href="https://t.me/baxtiyorjon_gaziyev" onClick={() => trackContactClick('telegram', 'mobile_menu')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
                           <Send size={20} aria-hidden="true" />
                           {dictionary.contact_by_telegram}
                           </a>

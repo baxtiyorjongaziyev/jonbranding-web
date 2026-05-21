@@ -139,9 +139,15 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
   const [mounted, setMounted] = useState(false);
   const { tg } = useTelegram();
 
-  const handleOpenModal = useCallback(() => {
+  const handleOpenModal = useCallback((section = 'homepage', ctaText = 'Bepul Brand Audit olish') => {
     if (typeof window !== 'undefined') {
-      const event = new CustomEvent('openContactModal');
+      const event = new CustomEvent('openContactModal', {
+        detail: {
+          section,
+          ctaText,
+          source: 'homepage',
+        },
+      });
       window.dispatchEvent(event);
     }
   }, []);
@@ -193,23 +199,23 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
     <div className="relative pb-28 md:pb-0">
       <main>
         {/* 1. Hero: premium positioning + audit CTA */}
-        <Hero onOpenContact={handleOpenModal} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
+        <Hero onOpenContact={() => handleOpenModal('hero', dictionary.hero?.cta)} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
 
 
         {/* 2. Trust: selected clients and credibility signals */}
         <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
 
         {/* 3. Offer: sell the free Brand Audit */}
-        <AuditOffer lang={lang} dictionary={dictionary.auditOffer} onCtaClick={handleOpenModal} />
+        <AuditOffer lang={lang} dictionary={dictionary.auditOffer} onCtaClick={() => handleOpenModal('audit_offer', dictionary.auditOffer?.cta)} />
 
         {/* 4. Proof: visible transformation after the offer */}
-        <BeforeAfter onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
+        <BeforeAfter onCtaClick={() => handleOpenModal('before_after', dictionary.beforeAfter?.cta || dictionary.beforeAfter?.ctaButton)} lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
 
         {/* 5. Testimonials: real client voices */}
         <Testimonials lang={lang} dictionary={dictionary.testimonials} />
 
         {/* 6. Process: what happens after the audit */}
-        {mounted && <Process onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary.process} />}
+        {mounted && <Process onCtaClick={() => handleOpenModal('process', dictionary.process?.ctaButton)} lang={lang} dictionary={dictionary.process} />}
 
         {/* 7. Founder: trust through personality */}
         {mounted && <Founder lang={lang} dictionary={dictionary.founder} />}
@@ -222,7 +228,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
           title={dictionary.home?.cta1_title}
           description={dictionary.home?.cta1_desc}
           buttonText={dictionary.home?.cta1_button}
-          onCtaClick={handleOpenModal}
+          onCtaClick={() => handleOpenModal('final_cta', dictionary.home?.cta1_button)}
         />
       </main>
     </div>

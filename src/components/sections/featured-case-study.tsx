@@ -70,7 +70,13 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
     const t = caseData[lang as keyof typeof caseData] || caseData.uz;
     
     const handleCtaClick = () => {
-        const event = new CustomEvent('openContactModal');
+        const event = new CustomEvent('openContactModal', {
+            detail: {
+                section: 'featured_case_study',
+                ctaText: t.ctaButton,
+                source: 'featured_case_study',
+            },
+        });
         window.dispatchEvent(event);
     }
 
@@ -83,7 +89,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         <div className="text-center lg:text-left">
                             <div className="flex items-center justify-center lg:justify-start gap-3 text-sm font-semibold text-brand-cyan uppercase tracking-wider mb-4">
-                               <img src="/images/cms/logo-denaroma.png" alt="Den Aroma Logo" className="h-6 w-auto" />
+                               <img src="/images/cms/logo-denaroma.png" alt="Den Aroma Logo" width={128} height={32} className="h-6 w-auto" />
                                <span className="border-l border-brand-cyan/50 pl-3">{t.caseStudyLabel}</span>
                             </div>
                             <h2 className="text-3xl lg:text-4xl font-extrabold text-white">{t.title}</h2>

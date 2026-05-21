@@ -1,12 +1,10 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
-import { ArrowUp, Instagram, Linkedin, Send } from 'lucide-react';
+import { Instagram, Linkedin, Send } from 'lucide-react';
 import { Separator } from '../ui/separator';
-import { motion } from 'framer-motion';
-import { useState, FC } from 'react';
-import { trackContactClick, trackEvent } from '@/lib/analytics';
-import { cn } from '@/lib/utils';
+import { FC } from 'react';
+import { trackContactClick } from '@/lib/analytics';
 
 type Dictionary = {
     contact: string;
@@ -32,23 +30,30 @@ type Dictionary = {
     all_rights_reserved: string;
     back_to_top: string;
     patent_calculator: string;
-    solutions: string;
-    resources: string;
-    agency: string;
-    contact_us: string;
-    explore_work: string;
-    read_blogs: string;
-    privacy_policy_link: string;
-    terms_of_use_link: string;
+    solutions?: string;
+    resources?: string;
+    agency?: string;
+    contact_us?: string;
+    explore_work?: string;
+    read_blogs?: string;
+    privacy_policy_link?: string;
+    terms_of_use_link?: string;
 }
 
 const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const currentYear = new Date().getFullYear();
   if (!dictionary) return null;
-  const handleScrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const copy = {
+    solutions: lang === 'uz' ? 'Yechimlar' : 'Solutions',
+    resources: lang === 'uz' ? 'Resurslar' : 'Resources',
+    agency: lang === 'uz' ? 'Agentlik' : 'Agency',
+    contact_us: lang === 'uz' ? 'Bog\'lanish' : 'Contact',
+    explore_work: lang === 'uz' ? 'Ishlarni ko\'rish' : 'Explore Work',
+    read_blogs: lang === 'uz' ? 'Blogni o\'qish' : 'Read Blog',
+    privacy_policy_link: lang === 'uz' ? 'Maxfiylik siyosati' : 'Privacy Policy',
+    terms_of_use_link: lang === 'uz' ? 'Foydalanish shartlari' : 'Terms',
+    ...dictionary,
   };
-
   const getLocalizedPath = (path: string) => {
     if (path.startsWith('http') || path.startsWith('tel:') || path.startsWith('mailto:')) return path;
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
@@ -88,55 +93,55 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 mb-16">
           {/* Services */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.services}</h3>
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.services}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li><Link href={getLocalizedPath('/xizmatlar/neyming')} className="hover:text-white transition-colors">{dictionary.naming}</Link></li>
-              <li><Link href={getLocalizedPath('/xizmatlar/logo-dizayni')} className="hover:text-white transition-colors">{dictionary.logo_design}</Link></li>
-              <li><Link href={getLocalizedPath('/xizmatlar/firmenniy-stil')} className="hover:text-white transition-colors">{dictionary.corporate_style}</Link></li>
-              <li><Link href={getLocalizedPath('/xizmatlar/brandbook')} className="hover:text-white transition-colors">{dictionary.brandbook}</Link></li>
+              <li><Link href={getLocalizedPath('/xizmatlar/neyming')} className="hover:text-white transition-colors">{copy.naming}</Link></li>
+              <li><Link href={getLocalizedPath('/xizmatlar/logo-dizayni')} className="hover:text-white transition-colors">{copy.logo_design}</Link></li>
+              <li><Link href={getLocalizedPath('/xizmatlar/firmenniy-stil')} className="hover:text-white transition-colors">{copy.corporate_style}</Link></li>
+              <li><Link href={getLocalizedPath('/xizmatlar/brandbook')} className="hover:text-white transition-colors">{copy.brandbook}</Link></li>
             </ul>
           </div>
 
           {/* Solutions / Packaging */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.solutions}</h3>
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.solutions}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li><Link href={getLocalizedPath('/xizmatlar/qadoq-dizayni')} className="hover:text-white transition-colors">{dictionary.packaging_design}</Link></li>
-              <li><Link href={getLocalizedPath('/xizmatlar/brand-strategiyasi')} className="hover:text-white transition-colors">{dictionary.brand_strategy}</Link></li>
-              <li><Link href={getLocalizedPath('/xizmatlar')} className="hover:text-white transition-colors">{dictionary.service_prices}</Link></li>
+              <li><Link href={getLocalizedPath('/xizmatlar/qadoq-dizayni')} className="hover:text-white transition-colors">{copy.packaging_design}</Link></li>
+              <li><Link href={getLocalizedPath('/xizmatlar/brand-strategiyasi')} className="hover:text-white transition-colors">{copy.brand_strategy}</Link></li>
+              <li><Link href={getLocalizedPath('/xizmatlar')} className="hover:text-white transition-colors">{copy.service_prices}</Link></li>
             </ul>
           </div>
 
           {/* Resources */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.resources}</h3>
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.resources}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li><Link href={getLocalizedPath('/blog')} className="hover:text-white transition-colors">{dictionary.blog}</Link></li>
-              <li><Link href={getLocalizedPath('/quiz')} className="hover:text-white transition-colors">{dictionary.branding_test}</Link></li>
-              <li><Link href={getLocalizedPath('/xizmatlar/patent-kalkulyatori')} className="hover:text-white transition-colors">{dictionary.patent_calculator}</Link></li>
-              <li><Link href={getLocalizedPath('/sitemap')} className="hover:text-white transition-colors">{dictionary.sitemap}</Link></li>
+              <li><Link href={getLocalizedPath('/blog')} className="hover:text-white transition-colors">{copy.blog}</Link></li>
+              <li><Link href={getLocalizedPath('/quiz')} className="hover:text-white transition-colors">{copy.branding_test}</Link></li>
+              <li><Link href={getLocalizedPath('/xizmatlar/patent-kalkulyatori')} className="hover:text-white transition-colors">{copy.patent_calculator}</Link></li>
+              <li><Link href={getLocalizedPath('/sitemap')} className="hover:text-white transition-colors">{copy.sitemap}</Link></li>
             </ul>
           </div>
 
           {/* Agency */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.agency}</h3>
+            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.agency}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li><Link href={getLocalizedPath('/#portfolio')} className="hover:text-white transition-colors">{dictionary.portfolio}</Link></li>
-              <li><Link href={getLocalizedPath('/#founder')} className="hover:text-white transition-colors">{dictionary.founder}</Link></li>
-              <li><Link href={getLocalizedPath('/#process')} className="hover:text-white transition-colors">{dictionary.process}</Link></li>
-              <li><Link href={getLocalizedPath('/#faq')} className="hover:text-white transition-colors">{dictionary.faq}</Link></li>
+              <li><Link href={getLocalizedPath('/#portfolio')} className="hover:text-white transition-colors">{copy.portfolio}</Link></li>
+              <li><Link href={getLocalizedPath('/#founder')} className="hover:text-white transition-colors">{copy.founder}</Link></li>
+              <li><Link href={getLocalizedPath('/#process')} className="hover:text-white transition-colors">{copy.process}</Link></li>
+              <li><Link href={getLocalizedPath('/#faq')} className="hover:text-white transition-colors">{copy.faq}</Link></li>
             </ul>
           </div>
 
           {/* Hire Us Section */}
           <div className="space-y-8 lg:col-span-1">
             <div className="space-y-4">
-              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{dictionary.contact_us}</h3>
+              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.contact_us}</h3>
               <div className="space-y-4">
                 <a 
                   href="tel:+998336450097"
-                  onClick={() => trackContactClick('phone')}
+                  onClick={() => trackContactClick('phone', 'footer')}
                   className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-black transition-all duration-300 w-full"
                 >
                   +998 33 645 00 97
@@ -145,7 +150,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   href="https://t.me/baxtiyorjon_gaziyev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackContactClick('telegram')}
+                  onClick={() => trackContactClick('telegram', 'footer')}
                   className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 rounded-full text-sm font-medium hover:bg-blue-700 transition-all duration-300 w-full gap-2"
                 >
                   <Send size={16} /> Telegram
@@ -158,13 +163,13 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 href={getLocalizedPath('/#portfolio')}
                 className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
-                {dictionary.explore_work}
+                {copy.explore_work}
               </Link>
               <Link 
                 href={getLocalizedPath('/blog')}
                 className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
-                {dictionary.read_blogs}
+                {copy.read_blogs}
               </Link>
             </div>
           </div>
@@ -173,14 +178,14 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         {/* Bottom Bar: Copyright & Links */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 py-10 border-t border-white/10 mt-6 relative z-10">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-[11px] text-gray-500 uppercase tracking-tight font-medium">
-            <span>&copy; {currentYear} Jon.Branding Agency. {dictionary.all_rights_reserved}</span>
+            <span>&copy; {currentYear} Jon.Branding Agency. {copy.all_rights_reserved}</span>
             <span className="text-white/10 px-1">/</span>
             <Link href={getLocalizedPath('/privacy')} className="hover:text-white transition-colors">
-              {dictionary.privacy_policy_link}
+              {copy.privacy_policy_link}
             </Link>
             <span className="text-white/10 px-1">/</span>
             <Link href={getLocalizedPath('/terms')} className="hover:text-white transition-colors">
-              {dictionary.terms_of_use_link}
+              {copy.terms_of_use_link}
             </Link>
           </div>
 

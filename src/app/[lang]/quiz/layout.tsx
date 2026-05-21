@@ -1,4 +1,4 @@
-
+﻿
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -13,10 +13,10 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
   const dict = await getDictionary(lang as Locale);
   const t = dict.quiz?.metadata || { title: "Branding Quiz", description: "Test your business for branding readiness." };
 
-  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}quiz`;
+  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}quiz`;
 
   return {
-    metadataBase: new URL('https://jonbranding.uz'),
+    metadataBase: new URL('https://www.jonbranding.uz'),
     title: t.title,
     description: t.description,
     openGraph: {
@@ -43,10 +43,10 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'uz': 'https://jonbranding.uz/quiz',
-        'ru': 'https://jonbranding.uz/ru/quiz',
-        'en': 'https://jonbranding.uz/en/quiz',
-        'zh': 'https://jonbranding.uz/zh/quiz',
+        'uz': 'https://www.jonbranding.uz/quiz',
+        'ru': 'https://www.jonbranding.uz/ru/quiz',
+        'en': 'https://www.jonbranding.uz/en/quiz',
+        'zh': 'https://www.jonbranding.uz/zh/quiz',
       },
     },
   };

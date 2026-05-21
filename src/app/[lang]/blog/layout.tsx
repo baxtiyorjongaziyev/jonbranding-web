@@ -1,4 +1,4 @@
-
+﻿
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 
@@ -16,8 +16,8 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
       description: "Brending, marketing va dizayn olamidagi so'nggi yangiliklar, maslahatlar va tahliliy maqolalar. Biznesingizni o'stirishga yordam beramiz."
     },
     ru: {
-      title: "Блог | Jon.Branding",
-      description: "Последние новости, советы и аналитические статьи из мира брендинга, маркетинга и дизайна. Помогаем вашему бизнесу расти."
+      title: "Ð‘Ð»Ð¾Ð³ | Jon.Branding",
+      description: "ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ Ð½Ð¾Ð²Ð¾ÑÑ‚Ð¸, ÑÐ¾Ð²ÐµÑ‚Ñ‹ Ð¸ Ð°Ð½Ð°Ð»Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸ Ð¸Ð· Ð¼Ð¸Ñ€Ð° Ð±Ñ€ÐµÐ½Ð´Ð¸Ð½Ð³Ð°, Ð¼Ð°Ñ€ÐºÐµÑ‚Ð¸Ð½Ð³Ð° Ð¸ Ð´Ð¸Ð·Ð°Ð¹Ð½Ð°. ÐŸÐ¾Ð¼Ð¾Ð³Ð°ÐµÐ¼ Ð²Ð°ÑˆÐµÐ¼Ñƒ Ð±Ð¸Ð·Ð½ÐµÑÑƒ Ñ€Ð°ÑÑ‚Ð¸."
     },
     en: {
       title: "Blog | Jon.Branding",
@@ -26,10 +26,10 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
   };
   // @ts-ignore
   const translations = t[lang as keyof typeof t] || t.uz;
-  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}blog`;
+  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}blog`;
 
   return {
-    metadataBase: new URL('https://jonbranding.uz'),
+    metadataBase: new URL('https://www.jonbranding.uz'),
     title: translations.title,
     description: translations.description,
     openGraph: {
@@ -56,9 +56,9 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'uz': 'https://jonbranding.uz/blog',
-        'ru': 'https://jonbranding.uz/ru/blog',
-        'en': 'https://jonbranding.uz/en/blog',
+        'uz': 'https://www.jonbranding.uz/blog',
+        'ru': 'https://www.jonbranding.uz/ru/blog',
+        'en': 'https://www.jonbranding.uz/en/blog',
       },
     },
   };

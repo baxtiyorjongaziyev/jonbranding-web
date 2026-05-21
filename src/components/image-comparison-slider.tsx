@@ -50,7 +50,6 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
             alt={beforeImage.alt ?? translations.before}
             fill 
             className="object-cover pointer-events-none transition-transform duration-700 group-hover:scale-[1.02]"
-            priority
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-1 rounded-md text-[10px] font-bold tracking-[0.2em] backdrop-blur-md border border-white/10 z-0">
@@ -70,7 +69,6 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
               alt={afterImage.alt ?? translations.after}
               fill
               className="object-cover pointer-events-none transition-transform duration-700 group-hover:scale-[1.02]"
-              priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute top-4 left-4 bg-primary/90 text-white px-3 py-1 rounded-md text-[10px] font-bold tracking-[0.2em] backdrop-blur-md border border-white/20">

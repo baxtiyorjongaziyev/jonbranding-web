@@ -10,7 +10,7 @@ const QueueStatus = dynamic(() => import('@/components/sections/queue-status'));
 const ServicesHero = dynamic(() => import('@/components/sections/services-hero'));
 const WhyUs = dynamic(() => import('@/components/sections/why-us'));
 const ServiceSections = dynamic(() => import('@/components/sections/service-sections'), {
-    loading: () => <div className="py-20 text-center text-gray-400">Bu blokda nima bor edi?</div>
+    loading: () => <div className="py-20 text-center text-sm font-semibold text-brand-slate">Xizmatlar yuklanmoqda…</div>
 });
 const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'));
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
@@ -19,7 +19,13 @@ const PersonalOfferBlock = dynamic(() => import('@/components/sections/personal-
 
 const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
   const handleOpenModal = useCallback(() => {
-    const event = new CustomEvent('openContactModal');
+    const event = new CustomEvent('openContactModal', {
+      detail: {
+        section: 'services_page',
+        ctaText: 'Bepul Brand Audit olish',
+        source: 'services_page',
+      },
+    });
     window.dispatchEvent(event);
   }, []);
 

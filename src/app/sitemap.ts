@@ -2,17 +2,18 @@ import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
 
-const BASE_URL = 'https://jonbranding.uz';
+const BASE_URL = 'https://www.jonbranding.uz';
 const locales = ['uz', 'ru', 'en', 'zh'] as const;
 type Locale = (typeof locales)[number];
+const defaultLocale: Locale = 'uz';
 
 const staticRoutes = [
   '',
   '/blog',
   '/checklist',
-  '/pricing',
   '/privacy',
   '/quiz',
+  '/pricing/sotuvchi-kartochka',
   '/sitemap',
   '/terms',
   '/xizmatlar',
@@ -50,10 +51,13 @@ function getMarkdownBlogEntries(): MetadataRoute.Sitemap {
         changeFrequency: 'monthly' as const,
         priority: 0.6,
         alternates: {
-          languages: Object.fromEntries(
-            locales.map((l) => [l, localizedUrl(l, `/blog/${fileName.replace(/\.md$/, '')}`)])
-          ),
-        },
+        languages: Object.fromEntries(
+          [
+            ...locales.map((l) => [l, localizedUrl(l, `/blog/${fileName.replace(/\.md$/, '')}`)]),
+            ['x-default', localizedUrl(defaultLocale, `/blog/${fileName.replace(/\.md$/, '')}`)],
+          ]
+        ),
+      },
       }));
   });
 }
@@ -68,7 +72,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route === '' ? 1.0 : 0.8,
       alternates: {
         languages: Object.fromEntries(
-          locales.map((l) => [l, localizedUrl(l, route)])
+          [
+            ...locales.map((l) => [l, localizedUrl(l, route)]),
+            ['x-default', localizedUrl(defaultLocale, route)],
+          ]
         ),
       },
     }))

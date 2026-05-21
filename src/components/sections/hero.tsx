@@ -211,7 +211,7 @@ function CaseWall({ images }: { images: GalleryImage[] }) {
         <PortfolioTile
           key={`${image?.src || 'fallback'}-${index}`}
           image={image}
-          priority={index < 2}
+          priority={index === 0}
           className={index > 0 ? 'hidden sm:block' : ''}
         />
       ))}
