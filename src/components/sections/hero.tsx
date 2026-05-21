@@ -7,7 +7,6 @@ import { ArrowRight, BarChart3, CheckCircle2, ShieldCheck, Sparkles } from 'luci
 import { Button } from '@/components/ui/button';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
-import { motion } from 'framer-motion';
 
 const portfolioImages: GalleryImage[] = projects
   .filter((project) => !project.hiddenInHero)
@@ -55,45 +54,6 @@ function getHeroCopy(dictionary: HeroDictionary) {
   };
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.05,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 18,
-    },
-  },
-};
-
-const rightColumnVariants = {
-  hidden: { opacity: 0, x: 30, scale: 0.98 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 80,
-      damping: 16,
-      delay: 0.3,
-    },
-  },
-};
-
 const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
   if (!dictionary) return null;
 
@@ -108,37 +68,30 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-brand-paper via-brand-paper/[0.35] to-transparent pointer-events-none" />
       </div>
 
-      <motion.div 
+      <div 
         className="container mx-auto flex min-h-[100svh] max-w-[1400px] items-center px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-16 lg:pt-28"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
       >
         <div className="grid w-full items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div className="flex flex-col justify-center text-center lg:text-left">
-            <motion.div 
-              variants={itemVariants}
+            <div
               className="mb-6 inline-flex items-center justify-center gap-2 self-center rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md lg:self-start"
             >
               <Sparkles className="h-3.5 w-3.5 text-brand-lime" />
               <span className="text-[11px] font-black uppercase tracking-normal text-white/78">{heroCopy.preHeadline}</span>
-            </motion.div>
-            <motion.h1 
-              variants={itemVariants}
+            </div>
+            <h1
               className="mx-auto max-w-[292px] text-balance text-4xl font-black leading-[0.96] tracking-normal text-white drop-shadow-md sm:max-w-3xl sm:text-6xl sm:drop-shadow-none lg:mx-0 xl:text-7xl"
             >
               {renderHeadline(heroCopy.title, 'text-white')}
-            </motion.h1>
+            </h1>
 
-            <motion.p 
-              variants={itemVariants}
+            <p
               className="mx-auto mt-5 max-w-[292px] text-pretty text-base leading-7 text-white/70 drop-shadow-sm sm:mt-6 sm:max-w-xl sm:text-lg sm:leading-8 sm:drop-shadow-none lg:mx-0"
             >
               {heroCopy.description}
-            </motion.p>
+            </p>
 
-            <motion.div 
-              variants={itemVariants}
+            <div
               className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:justify-center lg:justify-start"
             >
               <Button
@@ -157,10 +110,9 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
               >
                 <Link href="#audit-offer">{heroCopy.ctaSecondary}</Link>
               </Button>
-            </motion.div>
+            </div>
 
-            <motion.div 
-              variants={itemVariants}
+            <div
               className="mt-6 grid max-w-xl grid-cols-1 gap-2 self-center sm:mt-8 sm:grid-cols-3 lg:self-start"
             >
               {heroCopy.proofItems.map((item) => (
@@ -172,11 +124,10 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
                   <span className="min-w-0">{item}</span>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div 
-            variants={rightColumnVariants}
+          <div
             className="relative flex items-center justify-center"
           >
             <div className="jb-dark-panel relative w-full max-w-xl overflow-hidden p-2 backdrop-blur-xl lg:max-w-none">
@@ -195,9 +146,9 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

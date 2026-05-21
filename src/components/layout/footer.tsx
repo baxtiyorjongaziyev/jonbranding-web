@@ -93,7 +93,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 mb-16">
           {/* Services */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.services}</h3>
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.services}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/xizmatlar/neyming')} className="hover:text-white transition-colors">{copy.naming}</Link></li>
               <li><Link href={getLocalizedPath('/xizmatlar/logo-dizayni')} className="hover:text-white transition-colors">{copy.logo_design}</Link></li>
@@ -104,7 +104,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           {/* Solutions / Packaging */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.solutions}</h3>
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.solutions}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/xizmatlar/qadoq-dizayni')} className="hover:text-white transition-colors">{copy.packaging_design}</Link></li>
               <li><Link href={getLocalizedPath('/xizmatlar/brand-strategiyasi')} className="hover:text-white transition-colors">{copy.brand_strategy}</Link></li>
@@ -114,7 +114,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           {/* Resources */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.resources}</h3>
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.resources}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/blog')} className="hover:text-white transition-colors">{copy.blog}</Link></li>
               <li><Link href={getLocalizedPath('/quiz')} className="hover:text-white transition-colors">{copy.branding_test}</Link></li>
@@ -125,7 +125,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           {/* Agency */}
           <div className="space-y-6">
-            <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.agency}</h3>
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.agency}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/#portfolio')} className="hover:text-white transition-colors">{copy.portfolio}</Link></li>
               <li><Link href={getLocalizedPath('/#founder')} className="hover:text-white transition-colors">{copy.founder}</Link></li>
@@ -137,7 +137,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           {/* Hire Us Section */}
           <div className="space-y-8 lg:col-span-1">
             <div className="space-y-4">
-              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{copy.contact_us}</h3>
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.contact_us}</h3>
               <div className="space-y-4">
                 <a 
                   href="tel:+998336450097"
