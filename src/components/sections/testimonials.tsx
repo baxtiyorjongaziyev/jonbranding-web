@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type MouseEvent } from 'react';
+import { useEffect, useRef, useState, useMemo, type MouseEvent } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Pause, PlayCircle, Star, Volume2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -204,11 +204,7 @@ const TestimonialsClient = ({ testimonials, dictionary }: { testimonials: Testim
   const textAutoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   const translations = dictionary;
 
-  const [videoTestimonials, setVideoTestimonials] = useState<Testimonial[]>([]);
-  const [audioTestimonials, setAudioTestimonials] = useState<Testimonial[]>([]);
-  const [textTestimonials, setTextTestimonials] = useState<Testimonial[]>([]);
-
-  useEffect(() => {
+  const { videoTestimonials, audioTestimonials, textTestimonials } = useMemo(() => {
     const video = testimonials.filter((testimonial) => testimonial.videoUrl && !isCaseStudyVideo(testimonial));
     const audio = testimonials.filter((testimonial) => !testimonial.videoUrl && testimonial.audioUrl);
     const text = testimonials.filter((testimonial) => !testimonial.videoUrl && !testimonial.audioUrl && testimonial.quote?.trim());
@@ -221,9 +217,11 @@ const TestimonialsClient = ({ testimonials, dictionary }: { testimonials: Testim
       return 0;
     });
 
-    setVideoTestimonials(prioritizedVideos);
-    setAudioTestimonials(audio);
-    setTextTestimonials(text);
+    return {
+      videoTestimonials: prioritizedVideos,
+      audioTestimonials: audio,
+      textTestimonials: text,
+    };
   }, [testimonials]);
 
   if (!testimonials || testimonials.length === 0 || !translations) {
