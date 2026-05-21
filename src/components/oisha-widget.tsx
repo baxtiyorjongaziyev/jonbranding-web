@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useRef, useEffect, FC, Fragment } from 'react';
@@ -31,32 +30,35 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
 
   const translations = {
     uz: {
-      title: "Oisha Intelligence",
-      subtitle: "Avtonom Biznes-Konsyerj",
-      placeholder: "Xabar yozing...",
-      error: "Ulanishda xatolik yuz berdi.",
-      welcome: "Assalomu alaykum! Men Oisha — Jon Branding agentligining intellektual yordamchisiman. Sizga qanday ko'mak bera olaman?"
+      title: 'Oisha Intelligence',
+      subtitle: 'Avtonom Biznes-Konsyerj',
+      placeholder: 'Xabar yozing...',
+      error: 'Ulanishda xatolik yuz berdi.',
+      welcome:
+        "Assalomu alaykum! Men Oisha — Jon Branding agentligining intellektual yordamchisiman. Sizga qanday ko'mak bera olaman?",
     },
     ru: {
-      title: "Oisha Intelligence",
-      subtitle: "Автономный Бизнес-Консьерж",
-      placeholder: "Напишите сообщение...",
-      error: "Ошибка подключения.",
-      welcome: "Здравствуйте! Я Оиша — интеллектуальный помощник Jon Branding. Чем я могу вам помочь?"
+      title: 'Oisha Intelligence',
+      subtitle: 'Автономный Бизнес-Консьерж',
+      placeholder: 'Напишите сообщение...',
+      error: 'Ошибка подключения.',
+      welcome:
+        'Здравствуйте! Я Оиша — интеллектуальный помощник Jon Branding. Чем я могу вам помочь?',
     },
     en: {
-      title: "Oisha Intelligence",
-      subtitle: "Autonomous Business Concierge",
-      placeholder: "Write a message...",
-      error: "Connection error.",
-      welcome: "Welcome! I am Oisha — the intellectual assistant for Jon Branding. How can I help you today?"
-    }
+      title: 'Oisha Intelligence',
+      subtitle: 'Autonomous Business Concierge',
+      placeholder: 'Write a message...',
+      error: 'Connection error.',
+      welcome:
+        'Welcome! I am Oisha — the intellectual assistant for Jon Branding. How can I help you today?',
+    },
   }[lang] || {
-    title: "Oisha Intelligence",
-    subtitle: "Autonomous Assistant",
-    placeholder: "Message...",
-    error: "Error.",
-    welcome: "Hello, how can I help?"
+    title: 'Oisha Intelligence',
+    subtitle: 'Autonomous Assistant',
+    placeholder: 'Message...',
+    error: 'Error.',
+    welcome: 'Hello, how can I help?',
   };
 
   // Initialize User ID and Fetch History
@@ -69,12 +71,18 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
     setUserId(storedId);
 
     // Initial welcome message if no history
-    setMessages(prev => prev.length > 0 ? prev : [{
-            id: 'welcome',
-            text: translations.welcome,
-            role: 'model',
-            timestamp: new Date().toISOString()
-        }]);
+    setMessages((prev) =>
+      prev.length > 0
+        ? prev
+        : [
+            {
+              id: 'welcome',
+              text: translations.welcome,
+              role: 'model',
+              timestamp: new Date().toISOString(),
+            },
+          ]
+    );
   }, [lang, translations.welcome]);
 
   // Handle scrolling to bottom
@@ -88,7 +96,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
   }, [messages, isLoading]);
 
   useEffect(() => {
-    const handleToggle = () => setIsOpen(prev => !prev);
+    const handleToggle = () => setIsOpen((prev) => !prev);
     window.addEventListener('toggleOisha', handleToggle);
     return () => window.removeEventListener('toggleOisha', handleToggle);
   }, []);
@@ -98,15 +106,17 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
       const res = await fetch(`${OISHA_PROXY}?user_id=${uid}`);
       const data = await res.json();
       if (data.history) {
-        setMessages(data.history.map((m: any, idx: number) => ({
+        setMessages(
+          data.history.map((m: any, idx: number) => ({
             id: `hist-${idx}`,
             text: m.parts[0].text,
             role: m.role,
-            timestamp: new Date().toISOString() // API doesn't seem to return time in history yet
-        })));
+            timestamp: new Date().toISOString(), // API doesn't seem to return time in history yet
+          }))
+        );
       }
     } catch (e) {
-      console.error("Oisha History Error:", e);
+      console.error('Oisha History Error:', e);
     }
   };
 
@@ -118,10 +128,10 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
       id: Date.now().toString(),
       text: userText,
       role: 'user',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
-    setMessages(prev => [...prev, newUserMsg]);
+    setMessages((prev) => [...prev, newUserMsg]);
     setInputValue('');
     setIsLoading(true);
 
@@ -129,37 +139,40 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
       const res = await fetch(OISHA_PROXY, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId, text: userText })
+        body: JSON.stringify({ user_id: userId, text: userText }),
       });
 
-      if (!res.ok) throw new Error("API Error");
+      if (!res.ok) throw new Error('API Error');
 
       // Show an immediate fallback message indicating the query is received if real-time polling isn't instantaneous
       setTimeout(() => {
-        setMessages(prev => {
-           // check if there is already a response from the model since we asked
-           const lastMsg = prev[prev.length - 1];
-           if (lastMsg && lastMsg.role === 'user') {
-              return [...prev, {
+        setMessages((prev) => {
+          // check if there is already a response from the model since we asked
+          const lastMsg = prev[prev.length - 1];
+          if (lastMsg && lastMsg.role === 'user') {
+            return [
+              ...prev,
+              {
                 id: 'system-ack-' + Date.now(),
-                text: lang === 'ru'
-                        ? 'Ваше сообщение отправлено нашим стратегам. Они скоро свяжутся с вами в этом чате.'
-                        : 'Xabaringiz strateglarga yuborildi. Ular tez orada shu yerda javob berishadi.',
+                text:
+                  lang === 'ru'
+                    ? 'Ваше сообщение отправлено нашим стратегам. Они скоро свяжутся с вами в этом чате.'
+                    : 'Xabaringiz strateglarga yuborildi. Ular tez orada shu yerda javob berishadi.',
                 role: 'model',
-                timestamp: new Date().toISOString()
-              }];
-           }
-           return prev;
+                timestamp: new Date().toISOString(),
+              },
+            ];
+          }
+          return prev;
         });
       }, 3000);
 
       // Poll once to see if an immediate AI response came back
       setTimeout(() => fetchHistory(userId), 2000);
-
     } catch (error) {
       toast({
         title: translations.error,
-        variant: 'destructive'
+        variant: 'destructive',
       });
     } finally {
       setIsLoading(false);
@@ -169,14 +182,18 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
   return (
     <>
       {/* Floating Button */}
-      <div className={cn(
-        "fixed bottom-24 right-6 z-50 transition-all duration-500 md:bottom-6 hidden md:block",
-        isOpen ? "scale-0 opacity-0 pointer-events-none" : "scale-100 opacity-100"
-      )}>
+      <div
+        className={cn(
+          'fixed bottom-24 right-6 z-50 transition-all duration-500 md:bottom-6 hidden md:block',
+          isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'
+        )}
+      >
         <button
           onClick={() => setIsOpen(true)}
-          className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-all ring-4 ring-white/20"
+          className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-all ring-4 ring-white/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           aria-label="Open Oisha Intelligence"
+          aria-expanded={isOpen}
+          aria-controls="oisha-chat-window"
         >
           <Sparkles className="w-8 h-8 animate-pulse" />
         </button>
@@ -186,6 +203,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="oisha-chat-window"
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -199,10 +217,18 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
                   </div>
                   <div>
                     <CardTitle className="text-sm font-bold">{translations.title}</CardTitle>
-                    <p className="text-[10px] opacity-80 uppercase tracking-widest">{translations.subtitle}</p>
+                    <p className="text-[10px] opacity-80 uppercase tracking-widest">
+                      {translations.subtitle}
+                    </p>
                   </div>
                 </div>
-                <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-white/10 rounded-full transition-colors" aria-label="Close chat window">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-1 hover:bg-white/10 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-blue-600"
+                  aria-label="Close chat window"
+                  aria-expanded={isOpen}
+                  aria-controls="oisha-chat-window"
+                >
                   <X className="w-5 h-5" />
                 </button>
               </CardHeader>
@@ -211,22 +237,30 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
                 <ScrollArea className="h-full p-4" ref={scrollAreaRef}>
                   <div className="space-y-4">
                     {messages.map((msg) => (
-                      <div key={msg.id} className={cn("flex flex-col gap-1", msg.role === 'model' ? "items-start" : "items-end")}>
-                        <div className={cn(
-                          "max-w-[85%] p-3 rounded-2xl text-sm shadow-sm",
-                          msg.role === 'model' 
-                            ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-tl-none" 
-                            : "bg-blue-600 text-white rounded-tr-none"
-                        )}>
+                      <div
+                        key={msg.id}
+                        className={cn(
+                          'flex flex-col gap-1',
+                          msg.role === 'model' ? 'items-start' : 'items-end'
+                        )}
+                      >
+                        <div
+                          className={cn(
+                            'max-w-[85%] p-3 rounded-2xl text-sm shadow-sm',
+                            msg.role === 'model'
+                              ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-tl-none'
+                              : 'bg-blue-600 text-white rounded-tr-none'
+                          )}
+                        >
                           {msg.text}
                         </div>
                       </div>
                     ))}
                     {isLoading && (
-                       <div className="flex items-center gap-2 text-zinc-400 text-xs italic ml-2">
+                      <div className="flex items-center gap-2 text-zinc-400 text-xs italic ml-2">
                         <Loader2 className="w-3 h-3 animate-spin" />
                         Oisha o'ylamoqda...
-                       </div>
+                      </div>
                     )}
                   </div>
                 </ScrollArea>
@@ -244,7 +278,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
                   <button
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputValue.trim()}
-                    className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                    className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1"
                     aria-label="Send message"
                   >
                     <Send className="w-5 h-5" />
