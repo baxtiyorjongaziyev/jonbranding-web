@@ -1,7 +1,7 @@
 'use client';
 
-import type { FC } from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import type { FC, ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -135,6 +135,36 @@ const CtaBlock = dynamic(() => import('@/components/sections/cta-block'), {
   loading: () => <CtaBlockSkeleton />,
 });
 
+const DeferredSection: FC<{ fallback: ReactNode; children: ReactNode }> = ({ fallback, children }) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (isReady) return;
+
+    const element = ref.current;
+    if (!element || typeof IntersectionObserver === 'undefined') {
+      setIsReady(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsReady(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '900px 0px' },
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [isReady]);
+
+  return <div ref={ref}>{isReady ? children : fallback}</div>;
+};
+
 const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> = ({ lang, dictionary, comparisons }) => {
   const [mounted, setMounted] = useState(false);
   const { tg } = useTelegram();
@@ -209,16 +239,24 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
         <AuditOffer lang={lang} dictionary={dictionary.auditOffer} onCtaClick={() => handleOpenModal('audit_offer', dictionary.auditOffer?.cta)} />
 
         {/* 4. Proof: visible transformation after the offer */}
-        <BeforeAfter onCtaClick={() => handleOpenModal('before_after', dictionary.beforeAfter?.cta || dictionary.beforeAfter?.ctaButton)} lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
+        <DeferredSection fallback={<BeforeAfterSkeleton />}>
+          <BeforeAfter onCtaClick={() => handleOpenModal('before_after', dictionary.beforeAfter?.cta || dictionary.beforeAfter?.ctaButton)} lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
+        </DeferredSection>
 
         {/* 5. Testimonials: real client voices */}
-        <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+        <DeferredSection fallback={<TestimonialsSkeleton />}>
+          <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+        </DeferredSection>
 
         {/* 6. Process: what happens after the audit */}
-        {mounted && <Process onCtaClick={() => handleOpenModal('process', dictionary.process?.ctaButton)} lang={lang} dictionary={dictionary.process} />}
+        <DeferredSection fallback={<CtaBlockSkeleton />}>
+          {mounted && <Process onCtaClick={() => handleOpenModal('process', dictionary.process?.ctaButton)} lang={lang} dictionary={dictionary.process} />}
+        </DeferredSection>
 
         {/* 7. Founder: trust through personality */}
-        {mounted && <Founder lang={lang} dictionary={dictionary.founder} />}
+        <DeferredSection fallback={<FounderSkeleton />}>
+          {mounted && <Founder lang={lang} dictionary={dictionary.founder} />}
+        </DeferredSection>
 
         {/* 8. FAQ: objection handling */}
         <Faq lang={lang} dictionary={dictionary.faq} hideCta={true} />
