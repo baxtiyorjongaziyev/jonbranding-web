@@ -115,7 +115,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
         <button
           type="button"
           onClick={handleToggleOisha}
-          aria-label="AI assistant"
+          aria-label={labels.ai}
           className="flex min-w-0 flex-1 flex-col items-center justify-center rounded-[12px] px-2 py-2 text-slate-400 transition-[color,background-color,transform] duration-200 hover:bg-white/5 hover:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 active:scale-[0.96]"
         >
           <Sparkles className="h-5 w-5 text-blue-400" aria-hidden="true" />
@@ -125,7 +125,6 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
         <button
           type="button"
           onClick={handleOpenConsultation}
-          aria-label={labels.consultation}
           className={cn(
             'group relative flex min-w-[136px] flex-[1.85] items-center justify-center gap-2 overflow-hidden rounded-[12px]',
             'bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-3 text-white shadow-[0_4px_20px_rgba(37,99,235,0.3)]',

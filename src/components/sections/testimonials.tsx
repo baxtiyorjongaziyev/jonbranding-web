@@ -53,6 +53,13 @@ const getVimeoEmbedUrl = (url?: string, autoplay = false) => {
   }
 };
 
+const getAvatarImageUrl = (url?: string) => {
+  if (!url || !url.includes('cdn.sanity.io/images/')) return url;
+
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}w=96&h=96&fit=crop&auto=format&q=75`;
+};
+
 const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Testimonial; labels: { play: string }; onPlay: () => void }) => {
   return (
     <div className="group flex h-full flex-col overflow-hidden rounded-[8px] border border-brand-line bg-white shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.1)]">
@@ -61,7 +68,6 @@ const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Te
           <button
             type="button"
             onClick={onPlay}
-            aria-label={labels.play}
             className="relative block h-full w-full overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-blue"
           >
             {testimonial.image ? (
@@ -92,7 +98,7 @@ const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Te
         <div className="p-5">
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10 ring-2 ring-brand-line">
-              <AvatarImage src={testimonial.image} alt={testimonial.name} />
+              <AvatarImage src={getAvatarImageUrl(testimonial.image)} alt={testimonial.name} />
               <AvatarFallback>{testimonial.avatar}</AvatarFallback>
             </Avatar>
             <div className="min-w-0">
@@ -112,7 +118,7 @@ const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Te
 };
 
 const Stars = () => (
-  <div className="flex gap-0.5 text-amber-400" aria-label="5 star testimonial">
+  <div className="flex gap-0.5 text-amber-400" role="img" aria-label="5 star testimonial">
     {[...Array(5)].map((_, i) => (
       <Star key={i} fill="currentColor" className="h-4 w-4" aria-hidden="true" />
     ))}
@@ -159,7 +165,7 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
         </div>
         <div className="mt-6 flex items-center gap-3">
           <Avatar className="h-10 w-10 ring-2 ring-brand-line">
-            <AvatarImage src={testimonial.image} alt={testimonial.name} />
+            <AvatarImage src={getAvatarImageUrl(testimonial.image)} alt={testimonial.name} />
             <AvatarFallback>{testimonial.avatar}</AvatarFallback>
           </Avatar>
           <div className="min-w-0">
@@ -182,7 +188,7 @@ const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
         </div>
         <div className="mt-6 flex items-center gap-3">
           <Avatar className="h-10 w-10 ring-2 ring-brand-line">
-            <AvatarImage src={testimonial.image} alt={testimonial.name} />
+            <AvatarImage src={getAvatarImageUrl(testimonial.image)} alt={testimonial.name} />
             <AvatarFallback>{testimonial.avatar}</AvatarFallback>
           </Avatar>
           <div className="min-w-0">
@@ -371,7 +377,7 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
               {/* Gradient overlay on bottom of the video */}
               <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-6 pt-16 flex items-center gap-4">
                 <Avatar className="h-12 w-12 ring-2 ring-white/15">
-                  <AvatarImage src={activeVideo.image} alt={activeVideo.name} />
+                  <AvatarImage src={getAvatarImageUrl(activeVideo.image)} alt={activeVideo.name} />
                   <AvatarFallback>{activeVideo.avatar}</AvatarFallback>
                 </Avatar>
                 <div className="min-w-0 text-white">
