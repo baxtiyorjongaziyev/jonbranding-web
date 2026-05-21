@@ -189,7 +189,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
       </head>
       <body className="font-body bg-brand-paper antialiased" suppressHydrationWarning>
         <a href="#main-content" className="skip-link">
-          {lang === 'uz' ? 'Asosiy kontentga o‘tish' : 'Skip to main content'}
+          {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
         </a>
         <TabNotification 
           message={
