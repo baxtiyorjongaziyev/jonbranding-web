@@ -127,8 +127,9 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
                     <button
                         type="button"
                         onClick={() => onSelect(option.value)}
+                        aria-pressed={selected === option.value}
                         className={cn(
-                            "relative w-full rounded-full py-2 px-4 text-center text-sm font-semibold transition-colors",
+                            "relative w-full rounded-full py-2 px-4 text-center text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
                             selected === option.value ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
                         )}
                     >
