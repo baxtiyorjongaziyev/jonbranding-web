@@ -147,14 +147,9 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
     }, [handleOpenModal, reportError]);
 
     useEffect(() => {
-        const fallback = window.setTimeout(() => setEnhancementsReady(true), 2600);
-        const idleId = window.requestIdleCallback?.(() => setEnhancementsReady(true), { timeout: 3200 });
-
+        const fallback = window.setTimeout(() => setEnhancementsReady(true), 6000);
         return () => {
             window.clearTimeout(fallback);
-            if (idleId && window.cancelIdleCallback) {
-                window.cancelIdleCallback(idleId);
-            }
         };
     }, []);
 
