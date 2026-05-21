@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { BrandSection } from '@/components/ui/design-system';
 import { projects } from '@/lib/static-data';
 import { cn } from '@/lib/utils';
+import { trackEvent } from '@/lib/analytics';
 
 interface SanityComparison {
   brand: string;
@@ -85,6 +86,16 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
 
   const activeItem = displayItems.find((item) => item.brand === activeBrand) || displayItems[0];
 
+  const handleBrandSelect = (brand: string) => {
+    setActiveBrand(brand);
+    trackEvent({
+      action: 'proof_tab_changed',
+      category: 'Proof',
+      label: brand,
+      section: 'before_after',
+    });
+  };
+
   if (!translations || !activeItem) return null;
 
   return (
@@ -125,7 +136,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
                 <button
                   key={item.brand}
                   type="button"
-                  onClick={() => setActiveBrand(item.brand)}
+                  onClick={() => handleBrandSelect(item.brand)}
                   className={cn(
                     "px-4 py-2.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 border flex items-center gap-2 active:scale-[0.98]",
                     activeBrand === item.brand
@@ -151,7 +162,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
                     className="rounded-2xl border border-white/8 bg-white/[0.04] p-4 transition-all duration-300 hover:border-white/15"
                   >
                     <div className="text-2xl font-black tracking-tight text-white">{card.value}</div>
-                    <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/40">{card.label}</div>
+                    <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60">{card.label}</div>
                   </div>
                 ))}
               </div>
@@ -203,7 +214,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
                     <div>
                       <p className="text-xl font-extrabold text-white tracking-tight">{activeItem.brand}</p>
                       {translations.caseLabel && (
-                        <p className="mt-1 text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
+                        <p className="mt-1 text-[9px] font-black uppercase tracking-[0.2em] text-white/60">
                           {translations.caseLabel}
                         </p>
                       )}

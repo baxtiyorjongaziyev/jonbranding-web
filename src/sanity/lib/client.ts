@@ -7,7 +7,7 @@ export const client = createClient({
   projectId: sanityProjectId,
   dataset: sanityDataset,
   apiVersion: '2024-04-14',
-  useCdn: false, // In production, this should be true for faster delivery
+  useCdn: process.env.NODE_ENV === 'production', // In production, this should be true for faster delivery
 })
 
 import { createImageUrlBuilder } from '@sanity/image-url'

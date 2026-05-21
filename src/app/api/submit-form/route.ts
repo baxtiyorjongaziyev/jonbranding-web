@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { createHash } from 'crypto';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
 const formSchema = z.object({
@@ -15,9 +16,14 @@ const formSchema = z.object({
     lang: z.string().optional(),
     packageSummary: z.string().optional(),
     totalPrice: z.number().optional(),
+    eventId: z.string().optional(),
+    gaClientId: z.string().optional(),
+    pageLocation: z.string().optional(),
+    ctaSource: z.string().optional(),
 });
 
 const UZS_TO_USD_RATE = 1 / 12700;
+const DEFAULT_GA_MEASUREMENT_ID = 'G-BTSGJQLMMV';
 
 function escapeTelegramHtml(value: unknown) {
   return String(value ?? '')
@@ -32,6 +38,12 @@ function cleanSecret(value: string | undefined) {
 
 function normalizePhone(phone: unknown) {
   return String(phone || '').replace(/[^\d+]/g, '');
+}
+
+function sha256(value: unknown) {
+  const normalized = String(value || '').trim().toLowerCase();
+  if (!normalized) return '';
+  return createHash('sha256').update(normalized).digest('hex');
 }
 
 function parseAmoCrmAccessToken(rawToken: string | undefined) {
@@ -110,14 +122,17 @@ async function sendMetaConversionEvent(data: any) {
         data: [{
           event_name: 'Lead',
           event_time: Math.floor(Date.now() / 1000),
+          event_id: data.eventId,
           action_source: 'website',
+          event_source_url: data.pageLocation,
           user_data: {
-            ph: data.phone ? [data.phone] : [],
-            fn: data.fullName ? [data.fullName] : [],
+            ph: data.phone ? [sha256(normalizePhone(data.phone))] : [],
+            fn: data.fullName ? [sha256(data.fullName)] : [],
           },
           custom_data: {
             value: valueInUsd,
             currency: 'USD',
+            content_name: data.source || 'website_contact_form',
           },
         }],
         access_token: accessToken,
@@ -130,7 +145,7 @@ async function sendMetaConversionEvent(data: any) {
 
 async function sendGAConversionEvent(data: any) {
   const gaApiSecret = cleanSecret(process.env.GA_API_SECRET);
-  const gaMeasurementId = cleanSecret(process.env.NEXT_PUBLIC_GA_ID) || 'G-B3ZSKB40XY';
+  const gaMeasurementId = cleanSecret(process.env.NEXT_PUBLIC_GA_ID) || DEFAULT_GA_MEASUREMENT_ID;
   if (!gaApiSecret) return;
 
   try {
@@ -138,12 +153,16 @@ async function sendGAConversionEvent(data: any) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        client_id: data.phone || data.fullName || 'unknown',
+        client_id: data.gaClientId || data.eventId || '555.555',
         events: [{
           name: 'generate_lead',
           params: {
+            event_id: data.eventId,
             value: data.totalPrice || 0,
             currency: 'UZS',
+            source: data.source || 'website_contact_form',
+            cta_source: data.ctaSource,
+            page_location: data.pageLocation,
           },
         }],
       }),
@@ -282,6 +301,8 @@ function buildTelegramMessage(data: any) {
 
 <b>Til:</b> ${escapeTelegramHtml(String(data.lang || 'uz').toUpperCase())}
 <b>Manba:</b> ${escapeTelegramHtml(data.source || 'website')}
+${data.ctaSource ? `<b>CTA:</b> ${escapeTelegramHtml(data.ctaSource)}\n` : ''}
+${data.eventId ? `<b>Event ID:</b> ${escapeTelegramHtml(data.eventId)}\n` : ''}
 ${packageSummary ? `\n<b>Paket:</b> ${packageSummary}` : ''}
 ${totalPrice ? `\n<b>Narx:</b> ${escapeTelegramHtml(totalPrice.toLocaleString('fr-FR'))} som` : ''}
   `.trim();
@@ -315,18 +336,23 @@ export async function POST(request: Request) {
         );
     }
 
-    const { fullName, phone } = validatedData.data;
+    const leadData = {
+      ...validatedData.data,
+      eventId: validatedData.data.eventId || `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+    };
+
+    const { fullName, phone } = leadData;
 
     const telegramPayload: any = {
       chat_id: chatId,
-      text: buildTelegramMessage(validatedData.data),
+      text: buildTelegramMessage(leadData),
       parse_mode: 'HTML',
       disable_web_page_preview: true,
     };
 
     await sendTelegramMessage(botToken, telegramPayload);
 
-    const amoCrmResult = await sendToAmoCrm(validatedData.data).catch(async (error) => {
+    const amoCrmResult = await sendToAmoCrm(leadData).catch(async (error) => {
       console.error('AmoCRM lead error:', error);
       await sendTelegramMessage(botToken, {
         ...telegramPayload,
@@ -341,15 +367,17 @@ export async function POST(request: Request) {
       return { ok: false, error: error?.message || String(error) };
     });
 
-    sendMetaConversionEvent(validatedData.data).catch(() => {});
-    sendGAConversionEvent(validatedData.data).catch(() => {});
-    sendToN8n(validatedData.data).catch(() => {});
+    sendMetaConversionEvent(leadData).catch(() => {});
+    sendGAConversionEvent(leadData).catch(() => {});
+    sendToN8n(leadData).catch(() => {});
 
     return NextResponse.json({
       ok: true,
+      eventId: leadData.eventId,
       integrations: {
         telegram: true,
         amoCrm: amoCrmResult.ok === true,
+        analytics: true,
       },
     });
   } catch (error: any) {

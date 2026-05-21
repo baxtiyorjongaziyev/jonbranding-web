@@ -11,6 +11,35 @@ if (process.env.NODE_ENV === 'development') {
 
 const nextConfig = {
   output: process.env.NETLIFY ? undefined : 'standalone',
+  async redirects() {
+    return [
+      {
+        source: '/xizmatlar/brand-strategy',
+        destination: '/uz/xizmatlar/brand-strategiyasi',
+        permanent: true,
+      },
+      {
+        source: '/uz/xizmatlar/brand-strategy',
+        destination: '/uz/xizmatlar/brand-strategiyasi',
+        permanent: true,
+      },
+      {
+        source: '/ru/xizmatlar/brand-strategy',
+        destination: '/ru/xizmatlar/brand-strategiyasi',
+        permanent: true,
+      },
+      {
+        source: '/en/xizmatlar/brand-strategy',
+        destination: '/en/xizmatlar/brand-strategiyasi',
+        permanent: true,
+      },
+      {
+        source: '/zh/xizmatlar/brand-strategy',
+        destination: '/zh/xizmatlar/brand-strategiyasi',
+        permanent: true,
+      },
+    ];
+  },
   experimental: {},
   webpack: (config) => {
     config.resolve.alias = {

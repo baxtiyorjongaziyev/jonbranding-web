@@ -26,7 +26,9 @@
         "switch_lang": "Change Language",
         "lang_ru": "Russian",
         "lang_uz": "Uzbek",
-        "lang_en": "English"
+        "lang_en": "English",
+        "ai": "AI Assistant",
+        "consultation_short": "Get Audit"
     },
     "footer": {
         "contact": "Contact Us",

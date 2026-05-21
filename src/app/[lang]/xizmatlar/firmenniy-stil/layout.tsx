@@ -1,4 +1,4 @@
-
+﻿
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -17,10 +17,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     keywords: "corporate identity, branding"
   };
 
-  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/firmenniy-stil`;
+  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/firmenniy-stil`;
 
   return {
-    metadataBase: new URL('https://jonbranding.uz'),
+    metadataBase: new URL('https://www.jonbranding.uz'),
     title: t.title,
     description: t.description,
     keywords: t.keywords,
@@ -48,9 +48,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'uz': 'https://jonbranding.uz/xizmatlar/firmenniy-stil',
-        'ru': 'https://jonbranding.uz/ru/xizmatlar/firmenniy-stil',
-        'en': 'https://jonbranding.uz/en/xizmatlar/firmenniy-stil',
+        'uz': 'https://www.jonbranding.uz/xizmatlar/firmenniy-stil',
+        'ru': 'https://www.jonbranding.uz/ru/xizmatlar/firmenniy-stil',
+        'en': 'https://www.jonbranding.uz/en/xizmatlar/firmenniy-stil',
       },
     },
   };

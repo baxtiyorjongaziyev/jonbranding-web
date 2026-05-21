@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import CarWrapDesignClient from './car-wrap-design-client';
 
@@ -20,8 +20,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const metadata = translations.metadata;
   const canonicalUrl =
     lang === 'uz'
-      ? 'https://jonbranding.uz/xizmatlar/car-wrap-design'
-      : `https://jonbranding.uz/${lang}/xizmatlar/car-wrap-design`;
+      ? 'https://www.jonbranding.uz/xizmatlar/car-wrap-design'
+      : `https://www.jonbranding.uz/${lang}/xizmatlar/car-wrap-design`;
 
   return {
     title: metadata.title,

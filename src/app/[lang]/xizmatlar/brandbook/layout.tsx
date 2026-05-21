@@ -1,4 +1,4 @@
-
+﻿
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -17,10 +17,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     keywords: "brandbook, guideline"
   };
 
-  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/brandbook`;
+  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/brandbook`;
 
   return {
-    metadataBase: new URL('https://jonbranding.uz'),
+    metadataBase: new URL('https://www.jonbranding.uz'),
     title: t.title,
     description: t.description,
     keywords: t.keywords,
@@ -48,10 +48,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'uz': 'https://jonbranding.uz/xizmatlar/brandbook',
-        'ru': 'https://jonbranding.uz/ru/xizmatlar/brandbook',
-        'en': 'https://jonbranding.uz/en/xizmatlar/brandbook',
-        'zh': 'https://jonbranding.uz/zh/xizmatlar/brandbook',
+        'uz': 'https://www.jonbranding.uz/xizmatlar/brandbook',
+        'ru': 'https://www.jonbranding.uz/ru/xizmatlar/brandbook',
+        'en': 'https://www.jonbranding.uz/en/xizmatlar/brandbook',
+        'zh': 'https://www.jonbranding.uz/zh/xizmatlar/brandbook',
       },
     },
   };

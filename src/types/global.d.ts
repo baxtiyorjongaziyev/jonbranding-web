@@ -7,6 +7,7 @@ declare global {
     };
     gtag?: (...args: any[]) => void;
     fbq?: (...args: any[]) => void;
+    dataLayer?: any[];
     amplitude?: {
       track: (eventName: string, eventProperties?: Record<string, any>) => void;
       setUserId: (userId: string) => void;

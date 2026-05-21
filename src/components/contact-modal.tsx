@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, useEffect, useMemo, useCallback } from 'react';
+import { FC, useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -17,7 +17,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Loader2, ArrowRight, ArrowLeft, MessageCircle, Mail, Phone, Instagram, Send, X, Globe, User, CheckCircle2, Linkedin, PhoneCall, Building2, Wallet, MapPin, Target, ShieldCheck, ExternalLink, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useTelegram } from '@/hooks/use-telegram';
-import { trackLead, trackEvent } from '@/lib/analytics';
+import { generateEventId, getGaClientId, trackLead, trackEvent } from '@/lib/analytics';
 import { getDictionary } from '@/lib/dictionaries';
 import Magnetic from '@/components/ui/magnetic';
 
@@ -35,6 +35,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const [isSubmitting, setSubmitting] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
   const [step, setStep] = useState(4);
+  const hasStartedRef = useRef(false);
   const { user } = useTelegram();
   const [translations, setTranslations] = useState<any>(null);
   const fallback = useMemo(() => {
@@ -48,7 +49,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
           "Majburiy sotuvsiz aniq tavsiya"
         ],
         objectionCopy: "Hali loyiha boshlashga tayyor bo'lmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.",
-        riskCopy: "Telefon qoldirish - shartnoma degani emas. Avval muammo va imkoniyatni ko'rsatamiz."
+        riskCopy: "Telefon qoldirish shartnoma degani emas. Avval brendingizdagi muammo, imkoniyat va eng foydali keyingi qadamni ko'rsatamiz."
       },
       ru: {
         quickContactLabel: "Быстрая связь",
@@ -144,11 +145,36 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const onSubmit: SubmitHandler<any> = async (data) => {
     setSubmitting(true);
+    const eventId = generateEventId('lead');
+    const gaClientId = getGaClientId();
+    const pageLocation = typeof window !== 'undefined' ? window.location.href : undefined;
+    const ctaSource = packageSummary ? 'package_builder' : 'brand_audit_modal';
+
+    trackEvent({
+      action: 'lead_form_submitted',
+      category: 'Lead Form',
+      label: 'Brand Audit',
+      event_id: eventId,
+      form_name: 'brand_audit',
+      cta_source: ctaSource,
+      page_location: pageLocation,
+    });
+
     try {
       const response = await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, packageSummary, totalPrice, source: 'brand_audit_offer', lang }),
+        body: JSON.stringify({
+          ...data,
+          packageSummary,
+          totalPrice,
+          source: 'brand_audit_offer',
+          lang,
+          eventId,
+          gaClientId,
+          pageLocation,
+          ctaSource,
+        }),
       });
 
       const result = await response.json();
@@ -170,17 +196,40 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
           trackLead({ 
             source: 'brand_audit_offer', 
             value: totalPrice, 
+            eventId: result.eventId || eventId,
+            serverTracked: true,
+            gaClientId,
             summary: packageSummary,
-            lead_details: data
+            form_name: 'brand_audit',
+            cta_source: ctaSource,
+            has_telegram: Boolean(data.telegram),
           });
         } catch (e) {}
       }, 100);
 
     } catch (error: any) {
+      trackEvent({
+        action: 'lead_form_error',
+        category: 'Lead Form',
+        label: 'Brand Audit',
+        event_id: eventId,
+        error_message: error.message,
+      });
       toast({ title: translations?.errorToast?.title || 'Xato', description: error.message, variant: 'destructive' });
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleFormStart = () => {
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
+    trackEvent({
+      action: 'lead_form_started',
+      category: 'Lead Form',
+      label: 'Brand Audit',
+      form_name: 'brand_audit',
+    });
   };
 
   const nextStep = useCallback(async () => {
@@ -212,14 +261,23 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     if (isOpen) {
       setStep(4);
       setSubmitted(false);
+      hasStartedRef.current = false;
       if (user) form.setValue('fullName', `${user.first_name || ''} ${user.last_name || ''}`.trim());
-      trackEvent({ action: 'form_opened', category: 'Contact Form', label: 'Brand Audit' });
+      trackEvent({
+        action: 'modal_opened',
+        category: 'Lead Form',
+        label: 'Brand Audit',
+        form_name: 'brand_audit',
+      });
     }
   }, [isOpen, form, user]);
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DialogContent className="max-h-[calc(100dvh-1rem)] w-[95vw] max-w-[1000px] overflow-hidden rounded-[18px] border-none bg-transparent p-0 shadow-none md:w-full [&>button:last-child]:hidden">
+        <DialogDescription className="sr-only">
+          Bepul Brand Audit uchun ism, telefon va ixtiyoriy Telegram kontaktini qoldirish formasi.
+        </DialogDescription>
         {/* Safe, permanent close button that never scrolls away */}
         <button
           type="button"
@@ -255,7 +313,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
               </div>
               
               <div className="mt-10 hidden rounded-[8px] border border-white/10 bg-white/[0.04] p-4 md:block">
-                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-white/38">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-white/60">
                   {translations?.auditTimeLabel || 'Audit format'}
                 </div>
                 <div className="mt-3 grid gap-2">
@@ -328,7 +386,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     )}
 
                     <Form {...form}>
-                      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 flex flex-col">
+                      <form onSubmit={form.handleSubmit(onSubmit)} onFocus={handleFormStart} className="flex-1 flex flex-col">
                         <div className="flex-1 py-2 pr-1">
                           <AnimatePresence mode="wait">
                             {step === 1 && (

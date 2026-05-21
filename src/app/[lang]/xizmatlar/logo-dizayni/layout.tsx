@@ -1,4 +1,4 @@
-
+﻿
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -17,10 +17,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     keywords: "logo design, brand identity"
   };
 
-  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/logo-dizayni`;
+  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/logo-dizayni`;
 
   return {
-    metadataBase: new URL('https://jonbranding.uz'),
+    metadataBase: new URL('https://www.jonbranding.uz'),
     title: t.title,
     description: t.description,
     keywords: t.keywords,
@@ -48,10 +48,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'uz': 'https://jonbranding.uz/xizmatlar/logo-dizayni',
-        'ru': 'https://jonbranding.uz/ru/xizmatlar/logo-dizayni',
-        'en': 'https://jonbranding.uz/en/xizmatlar/logo-dizayni',
-        'zh': 'https://jonbranding.uz/zh/xizmatlar/logo-dizayni',
+        'uz': 'https://www.jonbranding.uz/xizmatlar/logo-dizayni',
+        'ru': 'https://www.jonbranding.uz/ru/xizmatlar/logo-dizayni',
+        'en': 'https://www.jonbranding.uz/en/xizmatlar/logo-dizayni',
+        'zh': 'https://www.jonbranding.uz/zh/xizmatlar/logo-dizayni',
       },
     },
   };

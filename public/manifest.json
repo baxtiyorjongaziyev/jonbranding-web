@@ -4,8 +4,8 @@
   "description": "Professional Branding & Naming Agency in Tashkent",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0A0A0A",
-  "theme_color": "#2563EB",
+  "background_color": "#070b12",
+  "theme_color": "#070b12",
   "orientation": "portrait",
   "icons": [
     {

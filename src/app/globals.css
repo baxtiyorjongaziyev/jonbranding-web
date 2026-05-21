@@ -111,6 +111,9 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
+  .skip-link {
+    @apply fixed left-4 top-4 z-[9999] -translate-y-16 rounded-[8px] bg-brand-ink px-4 py-3 text-sm font-bold text-white shadow-xl transition-transform duration-200 focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan;
+  }
   h1,h2,h3,h4,h5,h6 {
     @apply text-foreground font-headline leading-tight tracking-normal;
     font-display: swap;

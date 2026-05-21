@@ -1,10 +1,10 @@
 'use client';
+
 import { trackEvent as trackAmplitudeEvent } from './amplitude';
 
-// Tracking IDs
-const ADS_CONVERSION_ID = process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "AW-17674872079";
+const ADS_CONVERSION_ID = process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-17674872079';
+export const DEFAULT_GA_ID = 'G-BTSGJQLMMV';
 
-// Types for analytics
 export type AnalyticsEvent = {
   action: string;
   category?: string;
@@ -13,33 +13,67 @@ export type AnalyticsEvent = {
   [key: string]: any;
 };
 
-/**
- * Universal event tracking function
- */
+export const generateEventId = (prefix = 'event') => {
+  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+    return `${prefix}_${crypto.randomUUID()}`;
+  }
+
+  return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+};
+
+export const getGaClientId = () => {
+  if (typeof document === 'undefined') return undefined;
+
+  const gaCookie = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('_ga='))
+    ?.split('=')[1];
+
+  if (!gaCookie) return undefined;
+  const parts = gaCookie.split('.');
+  if (parts.length < 4) return undefined;
+
+  return `${parts[parts.length - 2]}.${parts[parts.length - 1]}`;
+};
+
 export const trackEvent = ({ action, category, label, value, ...rest }: AnalyticsEvent) => {
   if (typeof window === 'undefined') return;
 
+  const eventPayload = {
+    event_category: category,
+    event_label: label,
+    value,
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+    ...rest,
+  };
+
   try {
-    // 1. Google Analytics (GA4)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: action,
+      category,
+      label,
+      ...eventPayload,
+    });
+  } catch (e) {
+    console.warn('[Unified Analytics] dataLayer Error:', e);
+  }
+
+  try {
     if (typeof window.gtag === 'function') {
-      window.gtag('event', action, {
-        event_category: category,
-        event_label: label,
-        value: value,
-        ...rest,
-      });
+      window.gtag('event', action, eventPayload);
     }
   } catch (e) {
     console.warn('[Unified Analytics] GA Error:', e);
   }
 
   try {
-    // 2. Facebook Pixel (Meta)
     if (typeof window.fbq === 'function') {
       window.fbq('trackCustom', action, {
         content_category: category,
         content_name: label,
-        value: value,
+        value,
         ...rest,
       });
     }
@@ -48,7 +82,6 @@ export const trackEvent = ({ action, category, label, value, ...rest }: Analytic
   }
 
   try {
-    // 3. Amplitude
     trackAmplitudeEvent(action, {
       category,
       label,
@@ -58,58 +91,73 @@ export const trackEvent = ({ action, category, label, value, ...rest }: Analytic
   } catch (e) {
     console.warn('[Unified Analytics] Amplitude Error:', e);
   }
-  
 };
 
-/**
- * Specifically for Lead conversions (Forms, Signups)
- */
-export const trackLead = (data: { source: string; value?: number; [key: string]: any }) => {
+export const trackLead = (data: {
+  source: string;
+  value?: number;
+  eventId?: string;
+  serverTracked?: boolean;
+  [key: string]: any;
+}) => {
   if (typeof window === 'undefined') return;
-  const { source, value, ...extraData } = data;
+
+  const { source, value, eventId, serverTracked, ...extraData } = data;
+  const leadEventId = eventId || generateEventId('lead');
+  const gaClientId = extraData.gaClientId || getGaClientId();
+  const leadPayload = {
+    source,
+    event_id: leadEventId,
+    ga_client_id: gaClientId,
+    ...extraData,
+  };
 
   try {
-    // 1. Google Analytics
     trackEvent({
-      action: 'generate_lead',
+      action: serverTracked ? 'lead_confirmed' : 'generate_lead',
       category: 'Lead',
       label: source,
-      value: value,
-      ...extraData
+      value,
+      ...leadPayload,
     });
 
-    // 2. Facebook Pixel — Lead event is sent via server-side CAPI in /api/submit-form
-    // to avoid duplicate counting. Client-side only fires PageView (see layout.tsx).
-
-    // 3. Google Ads Conversion
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'conversion', {
-        'send_to': `${ADS_CONVERSION_ID}/zVvKCJ_A5-YZEK_f8to-`,
-        'value': value || 1.0,
-        'currency': 'UZS',
-        ...extraData
+        send_to: `${ADS_CONVERSION_ID}/zVvKCJ_A5-YZEK_f8to-`,
+        value: value || 1.0,
+        currency: 'UZS',
+        event_id: leadEventId,
+        ...extraData,
       });
     }
 
-    // 4. Amplitude (Rich Lead Event)
     trackAmplitudeEvent('Lead Generated', {
-      source,
-      value,
-      ...extraData
+      ...leadPayload,
+      server_tracked: Boolean(serverTracked),
     });
   } catch (e) {
     console.error('[Unified Analytics] Lead Tracking failed but form submission should continue:', e);
   }
-  
 };
 
-/**
- * Track clicks on social/contact buttons
- */
-export const trackContactClick = (type: 'whatsapp' | 'telegram' | 'phone' | 'email') => {
+export const trackContactClick = (type: 'whatsapp' | 'telegram' | 'phone' | 'email', location = 'unknown') => {
   trackEvent({
     action: 'contact_click',
     category: 'Engagement',
     label: type,
+    contact_type: type,
+    location,
+  });
+};
+
+export const trackCtaClick = (data: { ctaText: string; section: string; page?: string; source?: string }) => {
+  trackEvent({
+    action: 'cta_clicked',
+    category: 'CTA',
+    label: data.ctaText,
+    cta_text: data.ctaText,
+    section: data.section,
+    page: data.page,
+    source: data.source || 'website',
   });
 };

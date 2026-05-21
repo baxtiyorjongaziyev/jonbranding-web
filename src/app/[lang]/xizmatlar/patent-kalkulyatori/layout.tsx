@@ -1,4 +1,4 @@
-
+﻿
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -12,10 +12,10 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
   const dict = await getDictionary(lang as Locale);
   const t = dict.patentCalculatorPage?.metadata || { title: "Patent Calculator", description: "" };
 
-  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/patent-kalkulyatori`;
+  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/patent-kalkulyatori`;
 
   return {
-    metadataBase: new URL('https://jonbranding.uz'),
+    metadataBase: new URL('https://www.jonbranding.uz'),
     title: t.title,
     description: t.description,
     openGraph: {
@@ -42,10 +42,10 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'uz': 'https://jonbranding.uz/xizmatlar/patent-kalkulyatori',
-        'ru': 'https://jonbranding.uz/ru/xizmatlar/patent-kalkulyatori',
-        'en': 'https://jonbranding.uz/en/xizmatlar/patent-kalkulyatori',
-        'zh': 'https://jonbranding.uz/zh/xizmatlar/patent-kalkulyatori',
+        'uz': 'https://www.jonbranding.uz/xizmatlar/patent-kalkulyatori',
+        'ru': 'https://www.jonbranding.uz/ru/xizmatlar/patent-kalkulyatori',
+        'en': 'https://www.jonbranding.uz/en/xizmatlar/patent-kalkulyatori',
+        'zh': 'https://www.jonbranding.uz/zh/xizmatlar/patent-kalkulyatori',
       },
     },
   };

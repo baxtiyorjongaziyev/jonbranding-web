@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Phone, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getDictionary } from '@/lib/dictionaries';
 
@@ -31,7 +31,13 @@ export default function StickyCTA({ lang }: { lang?: string }) {
   });
 
   const handleOpenModal = () => {
-    const contactEvent = new CustomEvent('openContactModal');
+    const contactEvent = new CustomEvent('openContactModal', {
+      detail: {
+        section: 'floating_sticky_cta',
+        ctaText: ariaLabel,
+        source: 'sticky_cta',
+      },
+    });
     window.dispatchEvent(contactEvent);
   };
 
@@ -50,10 +56,10 @@ export default function StickyCTA({ lang }: { lang?: string }) {
           <Button
             onClick={handleOpenModal}
             size="lg"
-            className="rounded-full shadow-2xl h-14 w-14 p-0 bg-primary hover:bg-primary/90 hover:scale-105 transition-all text-white flex items-center justify-center animate-pulse"
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-primary p-0 text-white shadow-2xl transition-[background-color,transform] hover:scale-105 hover:bg-primary/90"
             aria-label={ariaLabel}
           >
-            <MessageCircle className="h-6 w-6" />
+            <MessageCircle className="h-6 w-6" aria-hidden="true" />
           </Button>
         </motion.div>
       )}

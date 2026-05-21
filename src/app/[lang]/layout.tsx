@@ -1,4 +1,4 @@
-import Script from 'next/script';
+﻿import Script from 'next/script';
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
@@ -14,7 +14,7 @@ import TabNotification from '@/components/layout/tab-notification';
 import { cn } from '@/lib/utils';
 
 
-const BASE_URL = 'https://jonbranding.uz';
+const BASE_URL = 'https://www.jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
 
 export const viewport: Viewport = {
@@ -107,7 +107,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
   return (
     <html lang={lang} suppressHydrationWarning className={cn(plusJakartaSans.variable)}>
       <head>
-        <link rel="alternate" hrefLang="x-default" href="https://jonbranding.uz" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -130,9 +130,9 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "@type": "ProfessionalService",
               "name": "Jon.Branding",
               "alternateName": "JonBranding Agency",
-              "image": "https://jonbranding.uz/icon.svg",
-              "logo": "https://jonbranding.uz/icon.svg",
-              "url": "https://jonbranding.uz",
+              "image": "https://www.jonbranding.uz/icon.svg",
+              "logo": "https://www.jonbranding.uz/icon.svg",
+              "url": "https://www.jonbranding.uz",
               "telephone": "+998336450097",
               "priceRange": "$$$",
               "address": {
@@ -188,11 +188,14 @@ export default async function LocalizedLayout({ children, params }: Props) {
         />
       </head>
       <body className="font-body bg-brand-paper antialiased" suppressHydrationWarning>
+        <a href="#main-content" className="skip-link">
+          {lang === 'uz' ? 'Asosiy kontentga o‘tish' : 'Skip to main content'}
+        </a>
         <TabNotification 
           message={
-            lang === 'ru' ? '(1) Новое сообщение! | Jon Branding' :
+            lang === 'ru' ? '(1) ÐÐ¾Ð²Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ! | Jon Branding' :
             lang === 'en' ? '(1) New message! | Jon Branding' :
-            lang === 'zh' ? '(1) 新消息！ | Jon Branding' :
+            lang === 'zh' ? '(1) æ–°æ¶ˆæ¯ï¼ | Jon Branding' :
             '(1) Yangi xabar! | Jon Branding'
           } 
         />
@@ -265,7 +268,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <MainLayout leadMagnetDictionary={(dictionary as any).leadMagnetPopup}>
           <Header lang={lang} dictionary={dictionary.header} />
           
-          <div className="flex-grow">
+          <div id="main-content" className="flex-grow">
             {children}
           </div>
         <Footer lang={lang} dictionary={dictionary.footer} />

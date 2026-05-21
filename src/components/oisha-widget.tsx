@@ -19,7 +19,7 @@ interface OishaMessage {
 
 const OISHA_PROXY = '/api/oisha';
 
-const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
+const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<OishaMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -34,31 +34,45 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
       subtitle: 'Avtonom Biznes-Konsyerj',
       placeholder: 'Xabar yozing...',
       error: 'Ulanishda xatolik yuz berdi.',
-      welcome:
-        "Assalomu alaykum! Men Oisha — Jon Branding agentligining intellektual yordamchisiman. Sizga qanday ko'mak bera olaman?",
+      welcome: "Assalomu alaykum! Men Oisha — Jon Branding agentligining intellektual yordamchisiman. Sizga qanday ko'mak bera olaman?",
+      ack: "Xabaringiz strateglarga yuborildi. Ular tez orada shu yerda javob berishadi.",
+      thinking: "Oisha o'ylamoqda...",
     },
     ru: {
       title: 'Oisha Intelligence',
       subtitle: 'Автономный Бизнес-Консьерж',
       placeholder: 'Напишите сообщение...',
       error: 'Ошибка подключения.',
-      welcome:
-        'Здравствуйте! Я Оиша — интеллектуальный помощник Jon Branding. Чем я могу вам помочь?',
+      welcome: 'Здравствуйте! Я Оиша — интеллектуальный помощник Jon Branding. Чем я могу вам помочь?',
+      ack: "Ваше сообщение отправлено нашим стратегам. Они скоро свяжутся с вами в этом чате.",
+      thinking: "Оиша думает...",
     },
     en: {
       title: 'Oisha Intelligence',
       subtitle: 'Autonomous Business Concierge',
       placeholder: 'Write a message...',
       error: 'Connection error.',
-      welcome:
-        'Welcome! I am Oisha — the intellectual assistant for Jon Branding. How can I help you today?',
+      welcome: 'Welcome! I am Oisha — the intellectual assistant for Jon Branding. How can I help you today?',
+      ack: "Your message has been sent to our strategists. They will respond here shortly.",
+      thinking: "Oisha is thinking...",
     },
-  }[lang] || {
+    zh: {
+      title: 'Oisha Intelligence',
+      subtitle: '智能业务助理',
+      placeholder: '写一条信息...',
+      error: '连接错误。',
+      welcome: '您好！我是 Oisha — Jon Branding 的智能助理。今天我能为您做些什么？',
+      ack: "您的消息已发送给我们的规划师。他们将很快在这里回复您。",
+      thinking: "Oisha 正在思考...",
+    },
+  }[lang as 'uz' | 'ru' | 'en' | 'zh'] || {
     title: 'Oisha Intelligence',
     subtitle: 'Autonomous Assistant',
     placeholder: 'Message...',
     error: 'Error.',
     welcome: 'Hello, how can I help?',
+    ack: "Message sent to strategists. They will respond shortly.",
+    thinking: "Oisha is thinking...",
   };
 
   // Initialize User ID and Fetch History
@@ -154,10 +168,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
               ...prev,
               {
                 id: 'system-ack-' + Date.now(),
-                text:
-                  lang === 'ru'
-                    ? 'Ваше сообщение отправлено нашим стратегам. Они скоро свяжутся с вами в этом чате.'
-                    : 'Xabaringiz strateglarga yuborildi. Ular tez orada shu yerda javob berishadi.',
+                text: translations.ack,
                 role: 'model',
                 timestamp: new Date().toISOString(),
               },
@@ -259,7 +270,7 @@ const OishaWidget: FC<{ lang: 'uz' | 'ru' }> = ({ lang }) => {
                     {isLoading && (
                       <div className="flex items-center gap-2 text-zinc-400 text-xs italic ml-2">
                         <Loader2 className="w-3 h-3 animate-spin" />
-                        Oisha o'ylamoqda...
+                        {translations.thinking}
                       </div>
                     )}
                   </div>

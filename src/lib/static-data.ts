@@ -1,4 +1,4 @@
-
+﻿
 import { type Brand, type Project, type Testimonial } from '@/lib/types';
 
 export const staticBrands: Brand[] = [
@@ -45,7 +45,7 @@ export const staticTestimonials: Testimonial[] = [
     avatar: "IM",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/a7036b241bf2b285df4b970561d47b0f5bc41b4f-1074x1909.jpg",
     imageHint: "male founder portrait",
-    quote: "Den Aroma jamoasi bilan ishlaganimizdan keyin ular o'z brendini qanday his qilishini eshiting.",
+    quote: "Den Aroma asoschisi brend yangilanishidan keyingi ishonch va natija haqida fikr bildirdi.",
     videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
@@ -72,7 +72,7 @@ export const staticTestimonials: Testimonial[] = [
     avatar: "N",
     image: "",
     imageHint: "restaurant manager portrait",
-    quote: "Esingizda bo'lsa, 3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Sizlarga katta rahmat, ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka! 🤝🏻😊"
+    quote: "3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka."
   },
   {
     name: "Javohir Haqberdiyev",
@@ -87,46 +87,46 @@ export const staticTestimonials: Testimonial[] = [
 
 export const staticTestimonialsRu: Testimonial[] = [
   {
-    name: "Иброхимжон Махаммаджонов",
-    company: "Основатель Den Aroma",
-    avatar: "ИМ",
+    name: "Ð˜Ð±Ñ€Ð¾Ñ…Ð¸Ð¼Ð¶Ð¾Ð½ ÐœÐ°Ñ…Ð°Ð¼Ð¼Ð°Ð´Ð¶Ð¾Ð½Ð¾Ð²",
+    company: "ÐžÑÐ½Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Den Aroma",
+    avatar: "Ð˜Ðœ",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/a7036b241bf2b285df4b970561d47b0f5bc41b4f-1074x1909.jpg",
     imageHint: "male founder portrait",
     quote: "",
     videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
-    name: "Шерзод Бекназаров",
-    company: "Основатель Incontrol Consulting",
-    avatar: "ШБ",
+    name: "Ð¨ÐµÑ€Ð·Ð¾Ð´ Ð‘ÐµÐºÐ½Ð°Ð·Ð°Ñ€Ð¾Ð²",
+    company: "ÐžÑÐ½Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Incontrol Consulting",
+    avatar: "Ð¨Ð‘",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/1cb59ff629f31dd2721b4a978bd2cde4bccf2621-640x640.png",
     imageHint: "male business owner",
     quote: "",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
   },
   {
-    name: "Севара Холманова",
-    company: "Основательница Fidda by Sevara",
-    avatar: "СХ",
+    name: "Ð¡ÐµÐ²Ð°Ñ€Ð° Ð¥Ð¾Ð»Ð¼Ð°Ð½Ð¾Ð²Ð°",
+    company: "ÐžÑÐ½Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¸Ñ†Ð° Fidda by Sevara",
+    avatar: "Ð¡Ð¥",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png",
     imageHint: "female entrepreneur portrait",
-    quote: "Я работала с этой командой, мне очень понравилось. Эффективно, и результат превзошел все ожидания. Я заказывала и брендинг, и стикеры, и патентование. Через 7 месяцев, даст Бог, все будет готово. Вы работаете честно, да будет доволен вами Аллах. Я очень рада, успехов в вашей работе. Спасибо."
+    quote: "Ð¯ Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð»Ð° Ñ ÑÑ‚Ð¾Ð¹ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð¾Ð¹, Ð¼Ð½Ðµ Ð¾Ñ‡ÐµÐ½ÑŒ Ð¿Ð¾Ð½Ñ€Ð°Ð²Ð¸Ð»Ð¾ÑÑŒ. Ð­Ñ„Ñ„ÐµÐºÑ‚Ð¸Ð²Ð½Ð¾, Ð¸ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚ Ð¿Ñ€ÐµÐ²Ð·Ð¾ÑˆÐµÐ» Ð²ÑÐµ Ð¾Ð¶Ð¸Ð´Ð°Ð½Ð¸Ñ. Ð¯ Ð·Ð°ÐºÐ°Ð·Ñ‹Ð²Ð°Ð»Ð° Ð¸ Ð±Ñ€ÐµÐ½Ð´Ð¸Ð½Ð³, Ð¸ ÑÑ‚Ð¸ÐºÐµÑ€Ñ‹, Ð¸ Ð¿Ð°Ñ‚ÐµÐ½Ñ‚Ð¾Ð²Ð°Ð½Ð¸Ðµ. Ð§ÐµÑ€ÐµÐ· 7 Ð¼ÐµÑÑÑ†ÐµÐ², Ð´Ð°ÑÑ‚ Ð‘Ð¾Ð³, Ð²ÑÐµ Ð±ÑƒÐ´ÐµÑ‚ Ð³Ð¾Ñ‚Ð¾Ð²Ð¾. Ð’Ñ‹ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚Ðµ Ñ‡ÐµÑÑ‚Ð½Ð¾, Ð´Ð° Ð±ÑƒÐ´ÐµÑ‚ Ð´Ð¾Ð²Ð¾Ð»ÐµÐ½ Ð²Ð°Ð¼Ð¸ ÐÐ»Ð»Ð°Ñ…. Ð¯ Ð¾Ñ‡ÐµÐ½ÑŒ Ñ€Ð°Ð´Ð°, ÑƒÑÐ¿ÐµÑ…Ð¾Ð² Ð² Ð²Ð°ÑˆÐµÐ¹ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ. Ð¡Ð¿Ð°ÑÐ¸Ð±Ð¾."
   },
   {
-    name: "Нодирбек",
-    company: "Основатель ресторана Barakah",
-    avatar: "Н",
+    name: "ÐÐ¾Ð´Ð¸Ñ€Ð±ÐµÐº",
+    company: "ÐžÑÐ½Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ñ€ÐµÑÑ‚Ð¾Ñ€Ð°Ð½Ð° Barakah",
+    avatar: "Ð",
     image: "",
     imageHint: "restaurant manager portrait",
-    quote: "Если помните, 3 года назад вы разработали логотип для этого бренда. Огромное вам спасибо, получилось великолепно, действительно все хвалят. Большое спасибо, Бахтиёр ака! 🤝🏻😊"
+    quote: "Ð•ÑÐ»Ð¸ Ð¿Ð¾Ð¼Ð½Ð¸Ñ‚Ðµ, 3 Ð³Ð¾Ð´Ð° Ð½Ð°Ð·Ð°Ð´ Ð²Ñ‹ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð»Ð¸ Ð»Ð¾Ð³Ð¾Ñ‚Ð¸Ð¿ Ð´Ð»Ñ ÑÑ‚Ð¾Ð³Ð¾ Ð±Ñ€ÐµÐ½Ð´Ð°. ÐžÐ³Ñ€Ð¾Ð¼Ð½Ð¾Ðµ Ð²Ð°Ð¼ ÑÐ¿Ð°ÑÐ¸Ð±Ð¾, Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð»Ð¾ÑÑŒ Ð²ÐµÐ»Ð¸ÐºÐ¾Ð»ÐµÐ¿Ð½Ð¾, Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð²ÑÐµ Ñ…Ð²Ð°Ð»ÑÑ‚. Ð‘Ð¾Ð»ÑŒÑˆÐ¾Ðµ ÑÐ¿Ð°ÑÐ¸Ð±Ð¾, Ð‘Ð°Ñ…Ñ‚Ð¸Ñ‘Ñ€ Ð°ÐºÐ°! ðŸ¤ðŸ»ðŸ˜Š"
   },
   {
-    name: "Джавохир Хакбердиев",
-    company: "Основатель Perfona",
-    avatar: "ДХ",
+    name: "Ð”Ð¶Ð°Ð²Ð¾Ñ…Ð¸Ñ€ Ð¥Ð°ÐºÐ±ÐµÑ€Ð´Ð¸ÐµÐ²",
+    company: "ÐžÑÐ½Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Perfona",
+    avatar: "Ð”Ð¥",
     image: "",
     imageHint: "tech startup founder",
-    quote: "Получилось даже лучше, чем я ожидал. Сейчас смотрю на логотип и сам наслаждаюсь. Что мне понравилось — это доверие. И то, что сдали раньше срока, было здорово. Отлично, что быстро поделились результатами. Большое спасибо, ака!"
+    quote: "ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ð»Ð¾ÑÑŒ Ð´Ð°Ð¶Ðµ Ð»ÑƒÑ‡ÑˆÐµ, Ñ‡ÐµÐ¼ Ñ Ð¾Ð¶Ð¸Ð´Ð°Ð». Ð¡ÐµÐ¹Ñ‡Ð°Ñ ÑÐ¼Ð¾Ñ‚Ñ€ÑŽ Ð½Ð° Ð»Ð¾Ð³Ð¾Ñ‚Ð¸Ð¿ Ð¸ ÑÐ°Ð¼ Ð½Ð°ÑÐ»Ð°Ð¶Ð´Ð°ÑŽÑÑŒ. Ð§Ñ‚Ð¾ Ð¼Ð½Ðµ Ð¿Ð¾Ð½Ñ€Ð°Ð²Ð¸Ð»Ð¾ÑÑŒ â€” ÑÑ‚Ð¾ Ð´Ð¾Ð²ÐµÑ€Ð¸Ðµ. Ð˜ Ñ‚Ð¾, Ñ‡Ñ‚Ð¾ ÑÐ´Ð°Ð»Ð¸ Ñ€Ð°Ð½ÑŒÑˆÐµ ÑÑ€Ð¾ÐºÐ°, Ð±Ñ‹Ð»Ð¾ Ð·Ð´Ð¾Ñ€Ð¾Ð²Ð¾. ÐžÑ‚Ð»Ð¸Ñ‡Ð½Ð¾, Ñ‡Ñ‚Ð¾ Ð±Ñ‹ÑÑ‚Ñ€Ð¾ Ð¿Ð¾Ð´ÐµÐ»Ð¸Ð»Ð¸ÑÑŒ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°Ð¼Ð¸. Ð‘Ð¾Ð»ÑŒÑˆÐ¾Ðµ ÑÐ¿Ð°ÑÐ¸Ð±Ð¾, Ð°ÐºÐ°!"
   },
 ];
 
@@ -163,7 +163,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     avatar: "N",
     image: "",
     imageHint: "restaurant manager portrait",
-    quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! 🤝🏻😊"
+    quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! ðŸ¤ðŸ»ðŸ˜Š"
   },
   {
     name: "Javohir Haqberdiyev",
@@ -211,11 +211,11 @@ export const projects: Project[] = [
         oldHint: "",
         newHint: "",
         galleryImages: [
-            { src: 'https://cdn.sanity.io/images/h6ymmj0v/production/ad4e5b4a2b5e1044accc01c93ab3b837a7b6c408-2570x1729.png', alt: 'Loyiha 4', hint: 'corporate style', unoptimized: false },
-            { src: 'https://cdn.sanity.io/images/h6ymmj0v/production/743c9388832fe183504b77f6af795e5416fbce04-2560x1440.jpg', alt: 'Loyiha 5', hint: 'brandbook example', unoptimized: false },
+            { src: 'https://cdn.sanity.io/images/h6ymmj0v/production/ad4e5b4a2b5e1044accc01c93ab3b837a7b6c408-2570x1729.png', alt: 'Premium brend aydentikasi mockupi', hint: 'corporate style', unoptimized: false },
+            { src: 'https://cdn.sanity.io/images/h6ymmj0v/production/743c9388832fe183504b77f6af795e5416fbce04-2560x1440.jpg', alt: 'Brandbook sahifalari va vizual qoida namunasi', hint: 'brandbook example', unoptimized: false },
             { src: 'https://cdn.sanity.io/images/h6ymmj0v/production/9a8ad66f616f90f1bab30c9eddf48b9fdb482f25-1280x720.jpg', alt: 'ESVIRO 3D Mockup', hint: '3D product branding', unoptimized: false },
-            { src: 'https://cdn.sanity.io/images/h6ymmj0v/production/f4763a990390239063c4cb13fa0f3d4b1446b9e0-2560x1440.jpg', alt: 'Loyiha 7', hint: 'website branding', unoptimized: false },
-            { src: 'https://cdn.sanity.io/images/h6ymmj0v/production/34f1114b5b4383f1070b740c4994983fcae671ca-3840x2160.jpg', alt: 'Loyiha 6', hint: 'logo concept', unoptimized: false },
+            { src: 'https://cdn.sanity.io/images/h6ymmj0v/production/f4763a990390239063c4cb13fa0f3d4b1446b9e0-2560x1440.jpg', alt: 'Sayt va raqamli brend ko‘rinishi', hint: 'website branding', unoptimized: false },
+            { src: 'https://cdn.sanity.io/images/h6ymmj0v/production/34f1114b5b4383f1070b740c4994983fcae671ca-3840x2160.jpg', alt: 'Logotip konsepti va premium mockup', hint: 'logo concept', unoptimized: false },
         ]
     },
     { 
@@ -233,7 +233,7 @@ export const projects: Project[] = [
 export const staticTestimonialsZh: Testimonial[] = [
   {
     name: "Ibrohimjon Mahammadjonov",
-    company: "Den Aroma 创始人",
+    company: "Den Aroma åˆ›å§‹äºº",
     avatar: "IM",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/a7036b241bf2b285df4b970561d47b0f5bc41b4f-1074x1909.jpg",
     imageHint: "male founder portrait",
@@ -242,7 +242,7 @@ export const staticTestimonialsZh: Testimonial[] = [
   },
   {
     name: "Sherzod Beknazarov",
-    company: "Incontrol Consulting 创始人",
+    company: "Incontrol Consulting åˆ›å§‹äºº",
     avatar: "SB",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/1cb59ff629f31dd2721b4a978bd2cde4bccf2621-640x640.png",
     imageHint: "male business owner",
@@ -251,26 +251,26 @@ export const staticTestimonialsZh: Testimonial[] = [
   },
   {
     name: "Sevara Xolmanova",
-    company: "Fidda by Sevara 创始人",
+    company: "Fidda by Sevara åˆ›å§‹äºº",
     avatar: "SX",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png",
     imageHint: "female entrepreneur portrait",
-    quote: "我与这个团队合作过，我非常喜欢。非常高效，结果超出了我的预期。我订购了品牌设计、贴纸和专利申请。在7个月内，上帝保佑，一切都会准备就绪。你们诚信经营，愿安拉保佑你们。我非常开心，祝你们工作成功。谢谢。"
+    quote: "æˆ‘ä¸Žè¿™ä¸ªå›¢é˜Ÿåˆä½œè¿‡ï¼Œæˆ‘éžå¸¸å–œæ¬¢ã€‚éžå¸¸é«˜æ•ˆï¼Œç»“æžœè¶…å‡ºäº†æˆ‘çš„é¢„æœŸã€‚æˆ‘è®¢è´­äº†å“ç‰Œè®¾è®¡ã€è´´çº¸å’Œä¸“åˆ©ç”³è¯·ã€‚åœ¨7ä¸ªæœˆå†…ï¼Œä¸Šå¸ä¿ä½‘ï¼Œä¸€åˆ‡éƒ½ä¼šå‡†å¤‡å°±ç»ªã€‚ä½ ä»¬è¯šä¿¡ç»è¥ï¼Œæ„¿å®‰æ‹‰ä¿ä½‘ä½ ä»¬ã€‚æˆ‘éžå¸¸å¼€å¿ƒï¼Œç¥ä½ ä»¬å·¥ä½œæˆåŠŸã€‚è°¢è°¢ã€‚"
   },
   {
     name: "Nodirbek",
-    company: "Barakah 餐厅创始人",
+    company: "Barakah é¤åŽ…åˆ›å§‹äºº",
     avatar: "N",
     image: "",
     imageHint: "restaurant manager portrait",
-    quote: "如果你还记得的话，3年前你们为这个品牌设计了标志。非常感谢，效果非常好，真的每个人都称赞它。非常感谢，巴赫蒂约尔兄弟！🤝🏻😊"
+    quote: "å¦‚æžœä½ è¿˜è®°å¾—çš„è¯ï¼Œ3å¹´å‰ä½ ä»¬ä¸ºè¿™ä¸ªå“ç‰Œè®¾è®¡äº†æ ‡å¿—ã€‚éžå¸¸æ„Ÿè°¢ï¼Œæ•ˆæžœéžå¸¸å¥½ï¼ŒçœŸçš„æ¯ä¸ªäººéƒ½ç§°èµžå®ƒã€‚éžå¸¸æ„Ÿè°¢ï¼Œå·´èµ«è’‚çº¦å°”å…„å¼Ÿï¼ðŸ¤ðŸ»ðŸ˜Š"
   },
   {
     name: "Javohir Haqberdiyev",
-    company: "Perfona 创始人",
+    company: "Perfona åˆ›å§‹äºº",
     avatar: "JH",
     image: "",
     imageHint: "tech startup founder",
-    quote: "结果比我预想的还要好。我现在看着标志，自己也很享受。我喜欢的是那份信任。而且提前交付真的很棒。很高兴你们能这么快分享结果。多谢，大哥！"
+    quote: "ç»“æžœæ¯”æˆ‘é¢„æƒ³çš„è¿˜è¦å¥½ã€‚æˆ‘çŽ°åœ¨çœ‹ç€æ ‡å¿—ï¼Œè‡ªå·±ä¹Ÿå¾ˆäº«å—ã€‚æˆ‘å–œæ¬¢çš„æ˜¯é‚£ä»½ä¿¡ä»»ã€‚è€Œä¸”æå‰äº¤ä»˜çœŸçš„å¾ˆæ£’ã€‚å¾ˆé«˜å…´ä½ ä»¬èƒ½è¿™ä¹ˆå¿«åˆ†äº«ç»“æžœã€‚å¤šè°¢ï¼Œå¤§å“¥ï¼"
   },
 ];

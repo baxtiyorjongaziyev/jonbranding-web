@@ -1,4 +1,4 @@
-
+﻿
 import { getPostData, getAllPostSlugs } from '@/lib/blog-posts';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
@@ -21,7 +21,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     };
   }
   
-  const canonicalUrl = `https://jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}blog/${post.slug}`;
+  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}blog/${post.slug}`;
 
 
   return {
@@ -30,9 +30,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
      alternates: {
       canonical: canonicalUrl,
       languages: {
-        'uz': `https://jonbranding.uz/blog/${post.slug}`,
-        'ru': `https://jonbranding.uz/ru/blog/${post.slug}`,
-        'en': `https://jonbranding.uz/en/blog/${post.slug}`,
+        'uz': `https://www.jonbranding.uz/blog/${post.slug}`,
+        'ru': `https://www.jonbranding.uz/ru/blog/${post.slug}`,
+        'en': `https://www.jonbranding.uz/en/blog/${post.slug}`,
       },
     },
     openGraph: {

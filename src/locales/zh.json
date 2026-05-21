@@ -26,7 +26,9 @@
         "switch_lang": "语言",
         "lang_ru": "Русский",
         "lang_uz": "O‘zbekcha",
-        "lang_en": "English"
+        "lang_en": "English",
+        "ai": "人工智能",
+        "consultation_short": "获取审计"
     },
     "footer": {
         "contact": "联系我们",
@@ -152,43 +154,43 @@
     },
     "hero": {
         "headlines": [
-            "Your branding |not selling?| We'll fix it.",
-            "Stand out |from the competition|.",
-            "Make your brand |profitable|, not just 'pretty'.",
-            "Make customers |fall in love with you|. Again and again.",
-            "From small business |to a strong brand|. In one step."
+            "您的品牌 |不卖货？| 我们来解决。",
+            "在竞争中 |脱颖而出|。",
+            "让您的品牌 |盈利|，而不仅仅是“好看”。",
+            "让客户 |爱上您|。一次又一次。",
+            "一步到位，|从初创企业|到强大品牌。"
         ],
-        "description": "We don’t just draw logos. As a leading branding agency in Tashkent, we build a <span class='font-bold text-foreground font-black'>result-oriented strategy</span> for your business. Naming and professional logo design.",
+        "description": "我们不只是画标志。作为塔什干领先的品牌代理机构，我们为您的业务构建<span class='font-bold text-foreground font-black'>以结果为导向的策略</span>。包括命名和专业的标志设计。",
         "buttonTexts": [
-            "Analyze my brand",
-            "Help me increase sales",
-            "Free Strategic Audit",
-            "I need a strong brand"
+            "分析我的品牌",
+            "帮我提高销量",
+            "免费战略审计",
+            "我需要一个强大的品牌"
         ],
-        "buttonHint": "Free. No obligations.",
-        "title": "Your brand should build trust and **make buying easier**.",
-        "descriptionPlain": "In the free Brand Audit, we review your name, logo, packaging, website, and messaging through the eyes of a buyer. You leave knowing which change can improve trust first.",
-        "preHeadline": "Free Brand Audit",
-        "cta": "Get the free Brand Audit",
-        "ctaSecondary": "What is checked?",
+        "buttonHint": "免费品牌审计 · 信任诊断 · 无任何义务",
+        "title": "您的品牌应该建立信任，并**让购买变得更简单**。",
+        "descriptionPlain": "在免费品牌审计中，我们将站在买家的角度审视您的名称、标志、包装、网站和信息传递。您将清楚地了解到哪项改变能最快提升信任度。",
+        "preHeadline": "免费品牌审计",
+        "cta": "获取免费品牌审计",
+        "ctaSecondary": "检查哪些内容？",
         "proofItems": [
-            "15-minute audit call",
-            "5 trust signals reviewed",
-            "Clear next-step list"
+            "15分钟审计沟通",
+            "诊断5大信任信号",
+            "清晰的下一步行动清单"
         ],
-        "auditTitle": "What will the audit reveal?",
-        "auditSubtitle": "Not design opinions. Business priorities that affect trust and sales.",
-        "auditScore": "15m",
-        "auditScoreLabel": "Brand Audit",
+        "auditTitle": "审计将揭示什么？",
+        "auditSubtitle": "不谈设计主观意见。专注于影响信任和销量的业务优先事项。",
+        "auditScore": "15分钟",
+        "auditScoreLabel": "品牌审计",
         "auditSignals": [
-            "What makes you look less premium",
-            "What message is unclear",
-            "What should be fixed first"
+            "是什么让您显得不够高端",
+            "哪些信息传递不够明确",
+            "哪些问题需要最先解决"
         ],
         "showcaseTags": [
-            "Trust",
-            "Premium feel",
-            "Sales"
+            "信任",
+            "高端感",
+            "销售额"
         ]
     },
     "results": {
@@ -218,74 +220,74 @@
         "detail": "企业获得的不仅仅是一个标志。我们分析市场并建立具有**战略性**的品牌视觉，让您在竞争中脱颖而出。这通常会使客户信任度和销量平均增长 40%。"
     },
     "contactModal": {
-        "sidebarTitle": "Free Brand Audit",
-        "sidebarSubtitle": "In 15 minutes, we show where your brand loses buyer trust.",
-        "header": "Brand Audit",
-        "description": "You leave knowing which change can affect trust and sales first.",
+        "sidebarTitle": "免费品牌审计",
+        "sidebarSubtitle": "我们将在15分钟内，为您指出品牌在哪里流失了买家的信任。",
+        "header": "品牌审计",
+        "description": "审计结束后，您将知道哪项改变能最先影响信任和销量。",
         "steps": {
             "step4": {
-                "title": "Book the audit",
-                "subtitle": "Leave your contact details so our strategist can reach you."
+                "title": "预约品牌审计",
+                "subtitle": "留下您的联系方式，我们的品牌策略师将与您联系。"
             }
         },
         "fields": {
             "name": {
-                "label": "Full name",
-                "placeholder": "John Doe"
+                "label": "您的姓名",
+                "placeholder": "张伟"
             },
             "phone": {
-                "label": "Phone number",
+                "label": "您的电话号码",
                 "placeholder": "+..."
             },
             "telegram": {
-                "label": "Telegram / WhatsApp (optional)",
-                "placeholder": "@username"
+                "label": "Telegram / WhatsApp (选填)",
+                "placeholder": "@用户名"
             }
         },
         "buttons": {
-            "submit": "Book free audit",
-            "close": "Close window",
-            "back": "Back",
-            "next": "Next step"
+            "submit": "预约免费审计",
+            "close": "关闭窗口",
+            "back": "返回",
+            "next": "下一步"
         },
         "formErrors": {
-            "fullName": "Enter your name",
-            "phone": "Enter full phone number"
+            "fullName": "请输入您的姓名",
+            "phone": "请输入完整的电话号码"
         },
         "errorToast": {
-            "title": "Error",
-            "description": "Something went wrong. Please try again."
+            "title": "错误！",
+            "description": "发送请求时出错。请重试。"
         },
         "successStep": {
-            "title": "Request received",
-            "description": "Our strategist will contact you soon and start the brand audit.",
-            "nextSteps": "Before the call",
-            "telegramButton": "Open Telegram channel",
-            "telegramDesc": "Useful branding materials."
+            "title": "请求已受理",
+            "description": "我们的策略师会尽快与您联系，开始您的品牌审计。",
+            "nextSteps": "通话开始前",
+            "telegramButton": "打开 Telegram 频道",
+            "telegramDesc": "获取实用的品牌建设资料。"
         },
-        "trustBadge": "Your data is confidential and used only by Jon.Branding.",
-        "contactBadge": "15 minutes",
-        "quickContactLabel": "Quick contact",
-        "auditGivesLabel": "You get",
+        "trustBadge": "您的数据将被严格保密，且仅由 Jon.Branding 使用。",
+        "contactBadge": "15分钟",
+        "quickContactLabel": "快速联系",
+        "auditGivesLabel": "您将获得",
         "auditOfferStack": [
-            "5 trust gaps",
-            "Clear service recommendation",
-            "No-pressure advice"
+            "诊断5大信任漏洞",
+            "明确的服务建议",
+            "无任何压力的客观建议"
         ],
-        "auditTimeLabel": "Format",
+        "auditTimeLabel": "审计形式",
         "auditFormat": [
-            "Phone or Telegram",
-            "15-minute diagnosis",
-            "Written next step"
+            "电话或 Telegram",
+            "15分钟诊断",
+            "书面下一步建议"
         ],
-        "objectionCopy": "Even if you are not ready to start, the audit gives you clarity.",
-        "riskCopy": "Leaving your phone is not a contract. We show the problem first.",
-        "footerCopyright": "Jon.Branding Agency"
+        "objectionCopy": "即使您尚未准备好开始项目，审计也会让您的下一步清晰明了。",
+        "riskCopy": "留下您的电话并不意味着签署合同。我们会先指出问题和机会。",
+        "footerCopyright": "Jon.Branding 品牌代理机构"
     },
     "home": {
-        "cta1_title": "Does your brand help buyers trust you? Let?s check.",
-        "cta1_desc": "The free Brand Audit shows what makes your brand feel cheap, unclear, or untrustworthy and what to fix first.",
-        "cta1_button": "Get the free Brand Audit"
+        "cta1_title": "您的品牌能否让买家信任您？让我们来检测一下。",
+        "cta1_desc": "免费的品牌审计将指出是什么让您的品牌显得廉价、模糊或不可信，以及哪些应该优先修复。",
+        "cta1_button": "获取免费品牌审计"
     },
     "urgencyBlock": {
         "title": "今天就开始构建您品牌的未来",
