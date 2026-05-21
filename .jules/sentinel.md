@@ -7,3 +7,8 @@
 **Vulnerability:** The rate limiting logic relied primarily on the `x-forwarded-for` header for client IP identification, which is easily spoofed by malicious actors.
 **Learning:** Relying on spoofable headers like `x-forwarded-for` can lead to IP spoofing attacks, rendering rate limiting ineffective. Secure proxy headers should be prioritized.
 **Prevention:** Prioritize secure proxy headers like `cf-connecting-ip` and `x-real-ip` over `x-forwarded-for` for client IP identification.
+
+## 2026-05-21 - Error information leakage on API 500 responses
+**Vulnerability:** API endpoints were returning internal error details directly to the client (e.g., `error.message` in `src/app/api/submit-form/route.ts`). This can expose sensitive architectural information or stack traces.
+**Learning:** Returning unhandled exception messages or internal states in error responses compromises security. Even simple error messages might give away too much context about the backend infrastructure or internal states.
+**Prevention:** API routes must fail securely by logging exact error details internally (e.g., using `console.error`) and returning generic, safe error messages to clients on 500 errors.
