@@ -1,4 +1,3 @@
-
 import { match } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
 import type { NextRequest } from 'next/server';
@@ -9,37 +8,35 @@ export const defaultLocale: Locale = 'uz';
 
 export const localeNames: Record<Locale, string> = {
   en: 'English',
-  ru: 'Русский',
-  uz: 'O‘zbekcha',
-  zh: '中文',
+  ru: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439',
+  uz: "O'zbekcha",
+  zh: '\u4e2d\u6587',
 };
 
 export function getLocale(request: NextRequest): Locale {
-  // 1. Cookiedan tilni tekshirish (Foydalanuvchi tanlovi ustuvor)
+  // 1. Cookie orqali foydalanuvchi tanlagan tilni tekshiramiz.
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
   if (cookieLocale && locales.includes(cookieLocale as Locale)) {
     return cookieLocale as Locale;
   }
 
-  // 2. O'zbekiston hududini IP-headerlar orqali aniqlash
-  // Firebase App Hosting va boshqa CDNlar uchun x-country-code yoki cf-ipcountry tekshiramiz
-  const country = 
-    request.headers.get('x-vercel-ip-country') || 
-    request.headers.get('x-country-code') || 
+  // 2. O'zbekiston hududini IP-headerlar orqali aniqlaymiz.
+  const country =
+    request.headers.get('x-vercel-ip-country') ||
+    request.headers.get('x-country-code') ||
     request.headers.get('cf-ipcountry') ||
     request.headers.get('x-appengine-country');
-  
-  // O'zbekistondan kirsa doim birinchi uz tili
+
   if (country === 'UZ') {
     return 'uz';
   }
 
-  // 3. Brauzer sozlamalarini (device language) tekshirish
+  // 3. Brauzer til sozlamalaridan eng mos locale tanlanadi.
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-  
+
   try {
     return match(languages, [...locales], defaultLocale) as Locale;
   } catch (e) {
@@ -48,5 +45,5 @@ export function getLocale(request: NextRequest): Locale {
 }
 
 export function setLocaleCookie(locale: Locale) {
-    document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
+  document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
 }
