@@ -11,7 +11,6 @@ import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
 import { initAmplitude } from '@/lib/amplitude';
 import { trackCtaClick, trackEvent } from '@/lib/analytics';
-import ScrollDepthTrigger from '@/components/scroll-depth-trigger';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'), {
     loading: () => null,
@@ -23,6 +22,10 @@ const OishaWidget = dynamic(() => import('@/components/oisha-widget'), {
 });
 
 const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'), {
+    ssr: false
+});
+
+const ScrollDepthTrigger = dynamic(() => import('@/components/scroll-depth-trigger'), {
     ssr: false
 });
 
@@ -58,6 +61,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
     const [isModalOpen, setModalOpen] = useState(false);
     const [packageSummary, setPackageSummary] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
+    const [enhancementsReady, setEnhancementsReady] = useState(false);
     
     const pathname = usePathname();
     const lang = (pathname.split('/')[1] || 'uz') as any;
@@ -142,29 +146,45 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
         };
     }, [handleOpenModal, reportError]);
 
+    useEffect(() => {
+        const fallback = window.setTimeout(() => setEnhancementsReady(true), 2600);
+        const idleId = window.requestIdleCallback?.(() => setEnhancementsReady(true), { timeout: 3200 });
+
+        return () => {
+            window.clearTimeout(fallback);
+            if (idleId && window.cancelIdleCallback) {
+                window.cancelIdleCallback(idleId);
+            }
+        };
+    }, []);
+
     return (
         <div className="flex min-h-screen flex-col bg-secondary/50" suppressHydrationWarning>
             <Suspense fallback={null}>
                 <AnalyticsTracker />
             </Suspense>
             {children}
-            <ScrollDepthTrigger 
-                onTrigger={handleOpenModal}
-                threshold={0.88}
-                sessionKey="contact_modal_auto_popup_v1"
-            />
+            {enhancementsReady && (
+                <ScrollDepthTrigger 
+                    onTrigger={handleOpenModal}
+                    threshold={0.88}
+                    sessionKey="contact_modal_auto_popup_v1"
+                />
+            )}
             <Toaster />
-            <ContactModal
-                isOpen={isModalOpen}
-                onClose={handleCloseModal}
-                packageSummary={packageSummary}
-                totalPrice={totalPrice}
-                onFormSubmitSuccess={handleCloseModal}
-                lang={lang}
-            />
-            <CookieConsentBanner />
-            <OishaWidget lang={lang} />
-            {leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
+            {isModalOpen && (
+                <ContactModal
+                    isOpen={isModalOpen}
+                    onClose={handleCloseModal}
+                    packageSummary={packageSummary}
+                    totalPrice={totalPrice}
+                    onFormSubmitSuccess={handleCloseModal}
+                    lang={lang}
+                />
+            )}
+            {enhancementsReady && <CookieConsentBanner />}
+            {enhancementsReady && <OishaWidget lang={lang} />}
+            {enhancementsReady && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
         </div>
     );
 }

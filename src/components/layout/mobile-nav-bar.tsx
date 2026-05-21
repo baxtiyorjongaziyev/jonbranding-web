@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageSquare, Phone, Send, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useScroll, useMotionValueEvent, motion } from 'framer-motion';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
 
 interface MobileNavBarProps {
@@ -22,31 +21,40 @@ interface MobileNavBarProps {
 
 export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   const [isVisible, setIsVisible] = useState(true);
-  const { scrollY } = useScroll();
   const lastScrollY = useRef(0);
 
   // ⚡ High-Performance passive scroll visibility triggers
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    const diff = latest - lastScrollY.current;
-    
-    // Page bottom check (always show at the bottom of the page)
-    const isAtBottom = typeof window !== 'undefined' && 
-      window.innerHeight + latest >= document.documentElement.scrollHeight - 60;
-    
-    if (isAtBottom) {
-      setIsVisible(true);
-    } else if (latest < 80) {
-      setIsVisible(true);
-    } else if (diff > 8) {
-      // Hide on scroll down
-      setIsVisible(false);
-    } else if (diff < -8) {
-      // Show on scroll up
-      setIsVisible(true);
-    }
-    
-    lastScrollY.current = latest;
-  });
+  useEffect(() => {
+    let ticking = false;
+
+    const update = () => {
+      const latest = window.scrollY;
+      const diff = latest - lastScrollY.current;
+      const isAtBottom = window.innerHeight + latest >= document.documentElement.scrollHeight - 60;
+
+      if (isAtBottom || latest < 80) {
+        setIsVisible(true);
+      } else if (diff > 8) {
+        setIsVisible(false);
+      } else if (diff < -8) {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = latest;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const labels = {
     call: dictionary?.call || dictionary?.contact_by_phone || (lang === 'en' ? 'Call' : "Qo'ng'iroq"),
@@ -77,11 +85,11 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   };
 
   return (
-    <motion.div
-      initial={{ y: 0 }}
-      animate={{ y: isVisible ? 0 : 100 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] md:hidden"
+    <div
+      className={cn(
+        "fixed inset-x-0 bottom-0 z-40 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] transition-transform duration-300 ease-in-out md:hidden",
+        isVisible ? "translate-y-0" : "translate-y-28"
+      )}
     >
       <nav
         aria-label="Mobile quick actions"
@@ -136,6 +144,6 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
           <span className="absolute inset-x-3 bottom-0 h-px bg-white/35 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </button>
       </nav>
-    </motion.div>
+    </div>
   );
 }
