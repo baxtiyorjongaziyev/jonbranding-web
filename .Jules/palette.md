@@ -11,3 +11,7 @@
 ## 2026-05-17 - Enhancing custom animated toggle components with proper ARIA attributes and keyboard support
 **Learning:** Custom interactive components like `KnobToggle` often lack essential accessibility features when built using `motion.div`. They fail to convey their role, state, and are not navigable via keyboard.
 **Action:** When building custom toggle components (e.g. `KnobToggle`), always include `role="switch"`, `aria-checked={isOn}`, `tabIndex={0}`, keyboard handlers (for 'Enter' and 'Space'), and `focus-visible` styles to ensure full accessibility and usability.
+
+## 2026-05-18 - Adding ARIA expanded states and keyboard focus to interactive widgets
+**Learning:** When building floating widgets or interactive modals (like `OishaWidget`), it's crucial to semantically link the toggle button to the expanding container using `aria-controls` and `aria-expanded`. Without these attributes, screen readers may not understand the relationship between the button and the content it reveals. Furthermore, custom interactive buttons lack default focus outlines when styled extensively, hindering keyboard accessibility.
+**Action:** Always include `aria-expanded` and `aria-controls` on the toggle button (linking it to the container's `id`), and ensure all interactive elements within the widget have explicit `focus-visible` Tailwind classes (like `focus-visible:ring-2`) to provide clear visual feedback during keyboard navigation.
