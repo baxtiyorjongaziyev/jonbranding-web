@@ -24,10 +24,8 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from '@/lib/utils';
 import React from 'react';
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { ScrollArea } from '../ui/scroll-area';
 import LanguageSwitcher from '../language-switcher';
-import Magnetic from '../ui/magnetic';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
 
 type Dictionary = {
@@ -106,17 +104,17 @@ const ExpandingButton = ({
   const isHovered = externalIsHovered ?? internalIsHovered;
 
   return (
-    <motion.a
+    <a
       href={href}
       target={target}
       rel={target === '_blank' ? 'noopener noreferrer' : undefined}
       aria-label={ariaLabel}
-      onHoverStart={() => setInternalIsHovered(true)}
-      onHoverEnd={() => setInternalIsHovered(false)}
+      onMouseEnter={() => setInternalIsHovered(true)}
+      onMouseLeave={() => setInternalIsHovered(false)}
+      onFocus={() => setInternalIsHovered(true)}
+      onBlur={() => setInternalIsHovered(false)}
       onClick={onClick}
-      // Fixed width expansion prevent layout 'jitter' compared to 'auto'
-      animate={{ width: isHovered ? 160 : 44 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      style={{ width: isHovered ? 160 : 44 }}
       className={cn(
         "relative flex h-11 items-center justify-start overflow-hidden rounded-full bg-white/40 text-foreground backdrop-blur-md transition-[background-color,box-shadow,width] duration-300 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 group",
         // Invisible hit area extension to make it easier to "catch" the button
@@ -127,73 +125,67 @@ const ExpandingButton = ({
         <div className="flex-shrink-0 h-5 w-5 flex items-center justify-center" aria-hidden="true">
           {icon}
         </div>
-        <motion.span 
-          className="whitespace-nowrap text-sm font-medium ml-3 overflow-hidden"
-          initial={{ opacity: 0, width: 0 }}
-          animate={{ 
-            opacity: isHovered ? 1 : 0, 
-            width: isHovered ? 'auto' : 0,
-            x: isHovered ? 0 : -5
+        <span
+          className="whitespace-nowrap text-sm font-medium ml-3 overflow-hidden transition-[max-width,opacity,transform] duration-200"
+          style={{
+            maxWidth: isHovered ? 108 : 0,
+            opacity: isHovered ? 1 : 0,
+            transform: isHovered ? 'translateX(0)' : 'translateX(-5px)',
           }}
-          transition={{ duration: 0.2 }}
         >
           {text}
-        </motion.span>
+        </span>
       </div>
-    </motion.a>
+    </a>
   );
 };
 
 const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const pathname = usePathname();
-  const { scrollY } = useScroll();
-  
-  const top = useTransform(scrollY, [0, 80], [0, 16]);
-  const announcementTop = useTransform(scrollY, [0, 40], [40, 0]);
-  const borderRadius = useTransform(scrollY, [0, 80], [0, 9999]);
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 80],
-    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.65)']
-  );
-  const borderColor = useTransform(scrollY, [0, 80], ['rgba(255,255,255,0)', 'rgba(255, 255, 255, 0.25)']);
-  const backdropBlur = useTransform(scrollY, [0, 80], ['blur(0px)', 'blur(24px)']);
-  const boxShadow = useTransform(scrollY, [0, 80], ['none', '0 8px 32px 0 rgba(31, 38, 135, 0.15)']);
-
   const [visible, setVisible] = useState(true);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const lastScrollY = React.useRef(0);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   // ⚡ Bolt Performance Optimization:
-  // Replaced native window.addEventListener('scroll') with Framer Motion's useMotionValueEvent and removed the lastScrollY state entirely.
-  // Why: Native scroll listeners combined with state updates on every frame cause excessive React re-renders and layout thrashing.
-  // Impact: useMotionValueEvent runs on Framer Motion's optimized loop. By using scrollY.getPrevious() instead of state for scroll direction, we avoid triggering re-renders purely to store the last scroll position, reducing rendering overhead significantly.
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const currentScrollY = latest;
-    const previousScrollY = scrollY.getPrevious() || 0;
-    const scrollDiff = Math.abs(currentScrollY - previousScrollY);
+  useEffect(() => {
+    let ticking = false;
 
-    // Scrolled state for visual styling (background, border)
-    setScrolled(currentScrollY > 20);
+    const updateHeaderState = () => {
+      const currentScrollY = window.scrollY;
+      const previousScrollY = lastScrollY.current;
+      const scrollDiff = Math.abs(currentScrollY - previousScrollY);
 
-    // Visibility logic: hide on scroll down, show on scroll up
-    if (isMobileMenuOpen) {
-      setVisible(true);
-    } else if (currentScrollY <= 80) {
-      setVisible(true);
-    } else if (currentScrollY > previousScrollY && scrollDiff > 10) {
-      // Significant scroll down
-      setVisible(false);
-    } else if (currentScrollY < previousScrollY && scrollDiff > 5) {
-      // Significant scroll up
-      setVisible(true);
-    }
-  });
+      setScrolled(currentScrollY > 20);
+
+      if (isMobileMenuOpen || currentScrollY <= 80) {
+        setVisible(true);
+      } else if (currentScrollY > previousScrollY && scrollDiff > 10) {
+        setVisible(false);
+      } else if (currentScrollY < previousScrollY && scrollDiff > 5) {
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeaderState);
+        ticking = true;
+      }
+    };
+
+    updateHeaderState();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isMobileMenuOpen]);
 
   const handleContactClick = () => {
     setMobileMenuOpen(false);
@@ -273,17 +265,15 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </div>
       )}
 
-      <motion.header 
-        className="fixed left-0 right-0 z-50 flex flex-col items-center"
-        initial={{ y: 0 }}
-        animate={{ y: visible ? 0 : -100 }}
-        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-        style={{ 
-          top: dictionary.urgencyBadge ? announcementTop : 0,
-        }}
+      <header 
+        className={cn(
+          "fixed left-0 right-0 z-50 flex flex-col items-center transition-[transform,top] duration-300 ease-out",
+          visible ? "translate-y-0" : "-translate-y-full"
+        )}
+        style={{ top: dictionary.urgencyBadge && !scrolled ? 40 : 0 }}
         suppressHydrationWarning
       >
-      <motion.div
+      <div
         className={cn(
           "flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500",
           scrolled 
@@ -292,10 +282,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               ? "max-w-none border-b border-transparent bg-transparent px-6 lg:px-8"
               : "max-w-none border-b border-transparent bg-transparent px-6 lg:px-8"
         )}
-        style={{ 
-          top: top,
-          boxShadow
-        }}
         suppressHydrationWarning
       >
         <Link href={getLocalizedPath('/')} className="flex items-center shrink-0" aria-label="Jon Branding - Bosh sahifa">
@@ -359,18 +345,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                     onClick={() => trackContactClick('telegram', 'header')}
                   />
                 </div>
-                <motion.div
-                  className="rounded-[8px] bg-transparent"
-                  animate={{ 
-                    scale: [1, 1.05, 1],
-                    boxShadow: ["0 0 0 0 rgba(37, 99, 235, 0)", "0 0 20px 5px rgba(37, 99, 235, 0.3)", "0 0 0 0 rgba(37, 99, 235, 0)"]
-                  }}
-                  transition={{ 
-                    duration: 3, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
-                  }}
-                >
+                <div className="rounded-[8px] bg-transparent">
                   <Button 
                     onClick={handleContactClick} 
                     className="h-11 rounded-[8px] bg-brand-ink px-6 font-bold text-white shadow-[0_18px_42px_-24px_rgba(15,23,42,0.85)] hover:bg-brand-blue"
@@ -378,7 +353,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   >
                     {dictionary.free_consultation}
                   </Button>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -439,8 +414,8 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             </Sheet>
           )}
         </div>
-      </motion.div>
-    </motion.header>
+      </div>
+    </header>
     </>
   );
 };

@@ -4,7 +4,6 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -87,15 +86,27 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang, isInverted = 
   };
   
   const [scrolled, setScrolled] = useState(false);
-  const { scrollY } = useScroll();
 
   // ⚡ Bolt Performance Optimization:
-  // Replaced native window scroll event listener with Framer Motion's useMotionValueEvent.
-  // Why: Native scroll listeners run synchronously and can trigger excessive re-renders/layout thrashing.
-  // Impact: useMotionValueEvent runs efficiently outside the main render cycle, reducing unnecessary state updates by batching changes and leveraging requestAnimationFrame.
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 20);
-  });
+  useEffect(() => {
+    let ticking = false;
+
+    const update = () => {
+      setScrolled(window.scrollY > 20);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const CurrentLangIcon = localeIcons[lang];
   const useInvertedTone = isInverted && !scrolled;
