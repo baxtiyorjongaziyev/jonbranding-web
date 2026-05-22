@@ -120,7 +120,7 @@ function HeroSection({ t }: { t: CarWrapPageTranslations }) {
             type="button"
             size="lg"
             onClick={openContactModal}
-            className="group h-14 rounded-[8px] bg-blue-950 px-7 text-base font-black text-white shadow-[0_18px_46px_-22px_rgba(15,23,42,0.85)] hover:bg-brand-blue sm:h-16"
+            className="group h-14 rounded-full bg-blue-950 px-7 text-base font-black text-white shadow-[0_18px_46px_-22px_rgba(15,23,42,0.85)] hover:bg-brand-blue sm:h-16"
           >
             {t.hero.primaryCta}
             <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
@@ -129,7 +129,7 @@ function HeroSection({ t }: { t: CarWrapPageTranslations }) {
             asChild
             variant="outline"
             size="lg"
-            className="h-14 rounded-[8px] border-slate-200 bg-white px-7 text-base font-black text-blue-950 hover:bg-slate-100 sm:h-16"
+            className="h-14 rounded-full border-slate-200 bg-white px-7 text-base font-black text-blue-950 hover:bg-slate-100 sm:h-16"
           >
             <Link href="#car-wrap-tariffs">{t.hero.secondaryCta}</Link>
           </Button>
@@ -153,7 +153,7 @@ function PricingSection({ pricing, primaryCta }: { pricing: CarWrapPageTranslati
           {pricing.tiers.map((tier, index) => (
             <article
               key={tier.name}
-              className={`flex min-h-[520px] flex-col rounded-[8px] p-7 shadow-lg ${index === 1 ? 'bg-blue-950 text-white ring-4 ring-brand-cyan/70' : 'border border-slate-200 bg-white text-slate-900'}`}
+              className={`flex min-h-[520px] flex-col rounded-2xl p-7 shadow-lg ${index === 1 ? 'bg-blue-950 text-white ring-4 ring-brand-cyan/70' : 'border border-slate-200 bg-white text-slate-900'}`}
             >
               {index === 1 && (
                 <div className="mb-4 text-center">
@@ -177,7 +177,7 @@ function PricingSection({ pricing, primaryCta }: { pricing: CarWrapPageTranslati
               <Button
                 type="button"
                 onClick={openContactModal}
-                className={index === 1 ? 'mt-8 h-12 rounded-[8px] bg-white text-blue-950 hover:bg-brand-lime' : 'mt-8 h-12 rounded-[8px] bg-blue-950 text-white hover:bg-brand-blue'}
+                className={index === 1 ? 'mt-8 h-12 rounded-full bg-white text-blue-950 hover:bg-brand-lime' : 'mt-8 h-12 rounded-full bg-blue-950 text-white hover:bg-brand-blue'}
               >
                 {primaryCta}
               </Button>
@@ -202,7 +202,7 @@ function ProblemSolutionSection({ problem, solution }: { problem: TextItem; solu
 
 function ArticlePanel({ title, description, tone }: { title: string; description?: string; tone: 'light' | 'dark' }) {
   return (
-    <article className={tone === 'dark' ? 'rounded-[8px] bg-blue-950 p-7 text-white shadow-lg' : 'rounded-[8px] border border-slate-200 bg-slate-50 p-7 text-slate-900'}>
+    <article className={tone === 'dark' ? 'rounded-2xl bg-blue-950 p-7 text-white shadow-lg' : 'rounded-2xl border border-slate-200 bg-slate-50 p-7 text-slate-900'}>
       <h2 className={tone === 'dark' ? 'text-2xl font-black text-white sm:text-3xl' : 'text-2xl font-black text-blue-950 sm:text-3xl'}>{title}</h2>
       <p className={tone === 'dark' ? 'mt-4 text-base leading-8 text-blue-100' : 'mt-4 text-base leading-8 text-slate-600'}>{description}</p>
     </article>
@@ -223,8 +223,8 @@ function IncludedSection({ included }: { included: CarWrapPageTranslations['incl
           {included.items.map((item, index) => {
             const Icon = includedIcons[index % includedIcons.length];
             return (
-              <article key={item} className="rounded-[8px] border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-[8px] bg-brand-cyan/10 text-brand-cyan">
+              <article key={item} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-cyan/10 text-brand-cyan">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <h3 className="text-pretty text-base font-black leading-6 text-blue-950">{item}</h3>
@@ -253,7 +253,7 @@ function BenefitsAudienceSection({
             {benefits.items.map((item, index) => {
               const Icon = benefitIcons[index % benefitIcons.length];
               return (
-                <div key={item} className="flex items-start gap-3 rounded-[8px] border border-slate-200 bg-slate-50 p-4">
+                <div key={item} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
                   <Icon className="mt-1 h-5 w-5 shrink-0 text-brand-cyan" aria-hidden="true" />
                   <p className="text-sm font-bold leading-6 text-slate-700">{item}</p>
                 </div>
@@ -262,7 +262,7 @@ function BenefitsAudienceSection({
           </div>
         </div>
 
-        <aside className="rounded-[8px] border border-slate-200 bg-slate-50 p-7 shadow-sm">
+        <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-7 shadow-sm">
           <h2 className="text-balance text-3xl font-black tracking-normal text-blue-950">{audience.title}</h2>
           <div className="mt-6 grid gap-2">
             {audience.items.map((item) => (
@@ -285,7 +285,7 @@ function ProcessSection({ process }: { process: CarWrapPageTranslations['process
         <h2 className="text-balance text-3xl font-black tracking-normal text-white sm:text-5xl">{process.title}</h2>
         <div className="mt-10 grid gap-3">
           {process.steps.map((step, index) => (
-            <article key={step} className="grid gap-4 rounded-[8px] border border-white/10 bg-white/[0.055] p-5 sm:grid-cols-[100px_1fr] sm:items-center">
+            <article key={step} className="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.055] p-5 sm:grid-cols-[100px_1fr] sm:items-center">
               <div className="font-mono text-sm font-black text-brand-lime">{String(index + 1).padStart(2, '0')}</div>
               <p className="text-base font-bold leading-7 text-blue-100 sm:text-lg">{step}</p>
             </article>
@@ -300,7 +300,7 @@ function FinalCta({ cta }: { cta: CarWrapPageTranslations['cta'] }) {
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
-        <div className="rounded-[8px] bg-blue-950 px-6 py-12 text-white shadow-[0_30px_90px_-45px_rgba(15,23,42,0.8)] sm:px-10">
+        <div className="rounded-3xl bg-blue-950 px-6 py-12 text-white shadow-[0_30px_90px_-45px_rgba(15,23,42,0.8)] sm:px-10">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-4 py-2 text-[11px] font-black uppercase tracking-normal text-brand-lime">
@@ -310,7 +310,7 @@ function FinalCta({ cta }: { cta: CarWrapPageTranslations['cta'] }) {
               <h2 className="max-w-4xl text-balance text-3xl font-black tracking-normal text-white sm:text-5xl">{cta.title}</h2>
               <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-blue-100 sm:text-lg">{cta.description}</p>
             </div>
-            <Button type="button" size="lg" onClick={openContactModal} className="group h-14 rounded-[8px] bg-white px-8 text-base font-black text-blue-950 hover:bg-brand-lime sm:h-16">
+            <Button type="button" size="lg" onClick={openContactModal} className="group h-14 rounded-full bg-white px-8 text-base font-black text-blue-950 hover:bg-brand-lime sm:h-16">
               {cta.button}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </Button>
@@ -328,7 +328,7 @@ function FaqSection({ faq }: { faq: CarWrapPageTranslations['faq'] }) {
         <h2 className="text-balance text-center text-3xl font-black tracking-normal text-blue-950 sm:text-4xl">{faq.title}</h2>
         <Accordion type="single" collapsible defaultValue="item-0" className="mt-8 space-y-3">
           {faq.items.map((item, index) => (
-            <AccordionItem key={item.question} value={`item-${index}`} className="rounded-[8px] border border-slate-200 bg-white px-5 shadow-sm">
+            <AccordionItem key={item.question} value={`item-${index}`} className="rounded-xl border border-slate-200 bg-white px-5 shadow-sm">
               <AccordionTrigger className="text-left text-base font-black text-blue-950 hover:no-underline">
                 {item.question}
               </AccordionTrigger>

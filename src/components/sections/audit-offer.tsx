@@ -46,7 +46,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
                 </ContactTriggerButton>
               )}
               {dictionary.promise && (
-                <div className="flex items-center gap-2 rounded-[8px] border border-brand-line bg-white/70 px-4 py-3 text-sm font-bold text-brand-slate">
+                <div className="flex items-center gap-2 rounded-full border border-brand-line bg-white/70 px-4 py-3 text-sm font-bold text-brand-slate">
                   <ShieldCheck className="h-5 w-5 shrink-0 text-brand-blue" />
                   {dictionary.promise}
                 </div>
@@ -56,7 +56,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
             {outcomes.length > 0 && (
               <div className="mt-7 grid grid-cols-2 gap-3">
                 {outcomes.map((outcome) => (
-                  <div key={outcome.label} className="rounded-[8px] border border-brand-line bg-white px-4 py-4 shadow-sm">
+                  <div key={outcome.label} className="rounded-2xl border border-brand-line bg-white px-4 py-4 shadow-sm">
                     <div className="text-2xl font-black tracking-normal text-brand-ink">{outcome.value}</div>
                     <div className="mt-1 text-xs font-bold uppercase tracking-normal text-brand-slate">{outcome.label}</div>
                   </div>
@@ -71,7 +71,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
 
               return (
                 <BrandCard key={item.title} className="group p-6 transition-[box-shadow,transform,border-color] duration-300 hover:-translate-y-1">
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-[8px] bg-brand-lime/[0.18] text-brand-ink ring-1 ring-brand-lime/[0.35]">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-lime/[0.18] text-brand-ink ring-1 ring-brand-lime/[0.35]">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-black tracking-normal text-brand-ink">{item.title}</h3>

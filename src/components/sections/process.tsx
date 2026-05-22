@@ -57,7 +57,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
             {processProof.length > 0 && (
               <div className="mt-8 grid grid-cols-2 gap-2">
                 {processProof.map((item: string, index: number) => (
-                  <div key={item} className="rounded-[8px] border border-brand-line bg-white px-4 py-3 shadow-sm">
+                  <div key={item} className="rounded-xl border border-brand-line bg-white px-4 py-3 shadow-sm">
                     <div className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue">0{index + 1}</div>
                     <div className="mt-1 text-sm font-black text-brand-ink">{item}</div>
                   </div>
@@ -71,10 +71,10 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
               <motion.div 
                 key={phase.title || index} 
                 variants={itemVariants}
-                className="group grid gap-5 rounded-[8px] border border-brand-line bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)] sm:grid-cols-[120px_1fr_auto] sm:items-start sm:p-6"
+                className="group grid gap-5 rounded-2xl border border-brand-line bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)] sm:grid-cols-[120px_1fr_auto] sm:items-start sm:p-6"
               >
                 <div>
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-[8px] bg-brand-ink text-sm font-black text-white">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-ink text-sm font-black text-white">
                     0{index + 1}
                   </div>
                   <div className="mt-3 text-xs font-black uppercase tracking-[0.18em] text-brand-blue">{phase.phase}</div>
@@ -97,7 +97,7 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
         </div>
 
         {processProof.length > 0 && (
-          <div className="mt-10 grid gap-3 rounded-[8px] border border-brand-line bg-white p-4 sm:grid-cols-4">
+          <div className="mt-10 grid gap-3 rounded-2xl border border-brand-line bg-white p-4 sm:grid-cols-4">
             {processProof.map((item: string) => (
               <div key={item} className="flex items-center gap-2 text-sm font-black text-brand-ink">
                 <CheckCircle2 className="h-4 w-4 text-brand-blue" />

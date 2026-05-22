@@ -32,7 +32,7 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
   return (
     <section className="bg-brand-paper py-16">
       <div className="container mx-auto px-4">
-        <div className="relative isolate overflow-hidden rounded-[8px] border border-white/10 bg-[#070b12] px-6 py-12 shadow-[0_40px_100px_-45px_rgba(15,23,42,0.7)] sm:px-10 sm:py-16">
+        <div className="relative isolate overflow-hidden rounded-3xl border border-white/10 bg-[#070b12] px-6 py-12 shadow-[0_40px_100px_-45px_rgba(15,23,42,0.7)] sm:px-10 sm:py-16">
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(120deg,#06080d_0%,#121722_58%,#1b1a11_100%)]" />
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>

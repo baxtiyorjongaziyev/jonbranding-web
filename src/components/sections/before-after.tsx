@@ -118,7 +118,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
               <Button
                 onClick={handleCtaClick}
                 size="lg"
-                className="h-14 rounded-2xl bg-white px-8 text-sm font-black text-brand-ink transition-transform hover:bg-brand-lime active:scale-[0.98] duration-150 shadow-lg shadow-white/5"
+                className="h-14 rounded-full bg-white px-8 text-sm font-black text-brand-ink transition-transform hover:bg-brand-lime active:scale-[0.98] duration-150 shadow-lg shadow-white/5"
               >
                 {translations.cta || translations.ctaButton}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
