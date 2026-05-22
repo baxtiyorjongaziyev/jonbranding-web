@@ -28,6 +28,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
             founder: dictionary.founder,
             faq: dictionary.faq,
             home: dictionary.home,
+            blog: dictionary.blog,
           }}
         />
       </main>
