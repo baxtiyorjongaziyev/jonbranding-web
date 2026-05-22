@@ -196,9 +196,11 @@ async function sendToAmoCrm(data: any) {
   let accessToken: string;
   try {
     accessToken = await getValidAccessToken();
-  } catch {
+  } catch (error) {
+    console.error('Firestore token fetch failed, falling back to static env token:', error);
     accessToken = parseAmoCrmAccessToken(process.env.AMOCRM_ACCESS_TOKEN);
   }
+
   const baseUrl = getAmoCrmBaseUrl(accessToken);
 
   if (!accessToken || !baseUrl) {
@@ -261,9 +263,11 @@ async function sendToAmoCrm(data: any) {
   // Retry once with a fresh token if the current one is stale
   if (createResponse.status === 401) {
     try {
+      console.log('AmoCRM returned 401. Triggering force token refresh...');
       const refreshed = await forceRefresh();
       accessToken = refreshed.access_token;
-      createResponse = await fetch(`${baseUrl}/api/v4/leads/complex`, {
+      const newBaseUrl = getAmoCrmBaseUrl(accessToken) || baseUrl;
+      createResponse = await fetch(`${newBaseUrl}/api/v4/leads/complex`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -271,7 +275,9 @@ async function sendToAmoCrm(data: any) {
         },
         body: leadBody,
       });
-    } catch { /* fall through */ }
+    } catch (refreshError) {
+      console.error('Failed to refresh AmoCRM token on 401:', refreshError);
+    }
   }
 
   const createResult: any = await createResponse.json().catch(() => null);
