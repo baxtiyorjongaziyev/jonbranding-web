@@ -328,7 +328,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
             <div className="relative z-10 mt-6 md:mt-12 flex flex-col gap-4 md:gap-6 hidden md:flex">
               <div className="flex gap-4">
-                <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
+                <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
                   <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
@@ -363,7 +363,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                             {quickContactLabel}
                           </button>
                         )}
-                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded">
+                        <div className="text-[10px] font-bold text-gray-600 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded">
                           {translations?.contactBadge || quickContactLabel}
                         </div>
                       </div>
@@ -398,7 +398,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="role" render={({ field }) => (
                                   <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.role?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.role?.label}</FormLabel>
                                     <FormControl>
                                       <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-2">
                                         {translations?.fields?.role?.options?.map((opt: any) => (
@@ -417,7 +417,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="revenue" render={({ field }) => (
                                   <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.revenue?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.revenue?.label}</FormLabel>
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                       <FormControl><SelectTrigger className="border-gray-200 rounded-xl h-11 bg-gray-50/50"><SelectValue placeholder="..." /></SelectTrigger></FormControl>
                                       <SelectContent className="rounded-xl border-gray-100">
@@ -441,7 +441,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="ambition" render={({ field }) => (
                                   <FormItem className="space-y-2">
-                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.ambition?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.ambition?.label}</FormLabel>
                                     <FormControl>
                                       <Textarea placeholder={translations?.fields?.ambition?.placeholder} className="min-h-[80px] md:min-h-[100px] border-gray-200 rounded-xl bg-gray-50/50 focus:bg-white transition-all resize-none text-sm" {...field} />
                                     </FormControl>
@@ -451,7 +451,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="pain" render={({ field }) => (
                                   <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.pain?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.pain?.label}</FormLabel>
                                     <FormControl>
                                       <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-2">
                                         {translations?.fields?.pain?.options?.map((opt: any) => (
@@ -479,7 +479,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="budget" render={({ field }) => (
                                   <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.budget?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.budget?.label}</FormLabel>
                                     <FormControl>
                                       <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-2">
                                         {translations?.fields?.budget?.options?.map((opt: string) => (
@@ -520,14 +520,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="fullName" render={({ field, fieldState }) => (
                                   <FormItem className="space-y-1">
-                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.name?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.name?.label}</FormLabel>
                                     <FormControl>
                                       <motion.div 
                                         animate={fieldState.invalid ? { x: [0, -6, 6, -6, 6, 0] } : {}}
                                         transition={{ duration: 0.4 }}
                                         className="relative"
                                       >
-                                        <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
+                                        <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
                                         <Input
                                             placeholder={translations?.fields?.name?.placeholder}
                                             className={`pl-12 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
@@ -543,14 +543,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="phone" render={({ field, fieldState }) => (
                                   <FormItem className="space-y-1">
-                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.phone?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.phone?.label}</FormLabel>
                                     <FormControl>
                                       <motion.div 
                                         animate={fieldState.invalid ? { x: [0, -6, 6, -6, 6, 0] } : {}}
                                         transition={{ duration: 0.4 }}
                                         className="relative"
                                       >
-                                        <PhoneCall className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
+                                        <PhoneCall className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
                                         <Input 
                                           placeholder={translations?.fields?.phone?.placeholder} 
                                           className={`pl-12 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white font-mono transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
@@ -571,10 +571,10 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="telegram" render={({ field }) => (
                                   <FormItem className="space-y-1">
-                                    <FormLabel className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{translations?.fields?.telegram?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.telegram?.label}</FormLabel>
                                     <FormControl>
                                       <div className="relative">
-                                        <MessageCircle className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
+                                        <MessageCircle className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
                                         <Input placeholder={translations?.fields?.telegram?.placeholder || '@username'} className="pl-12 border-gray-200 rounded-[8px] h-12 bg-gray-50/50 focus:bg-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600" autoComplete="off" {...field} />
                                       </div>
                                     </FormControl>
@@ -609,11 +609,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                               </Button>
                             )}
                           </div>
-                          <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-gray-400 font-medium tracking-tight">
+                          <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-gray-600 font-medium tracking-tight">
                             <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
                             {translations?.trustBadge || 'Data is confidential.'}
                           </div>
-                          <div className="mx-auto mt-2 max-w-md text-center text-[10px] font-semibold leading-4 text-gray-400">
+                          <div className="mx-auto mt-2 max-w-md text-center text-[10px] font-semibold leading-4 text-gray-600">
                             {riskCopy}
                           </div>
                         </div>
@@ -634,7 +634,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     </p>
                     
                     <div className="w-full max-w-sm p-6 bg-gray-50 rounded-3xl border border-gray-100 text-left space-y-4 mb-10">
-                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{translations?.successStep?.nextSteps || 'Next Steps'}</p>
+                      <p className="text-xs font-bold text-gray-600 uppercase tracking-widest">{translations?.successStep?.nextSteps || 'Next Steps'}</p>
                       <div className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-xl bg-white border border-gray-100 flex items-center justify-center shrink-0 shadow-sm">
                           <MessageCircle className="w-5 h-5 text-blue-600" />
@@ -653,7 +653,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                           <ExternalLink className="ml-2 w-4 h-4 opacity-70 group-hover:opacity-100" />
                         </a>
                       </Button>
-                      <Button variant="ghost" onClick={onClose} className="h-12 rounded-xl text-gray-400 font-bold">
+                      <Button variant="ghost" onClick={onClose} className="h-12 rounded-xl text-gray-600 font-bold">
                         {translations?.buttons?.close || 'Close Window'}
                       </Button>
                     </div>

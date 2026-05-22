@@ -46,7 +46,7 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
             <Button
               onClick={handleCtaClick}
               size="lg"
-              className="group h-14 rounded-[8px] bg-white px-8 text-base font-black text-brand-ink shadow-lg transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime active:scale-[0.98] sm:h-16 sm:px-10 sm:text-lg"
+              className="group h-14 rounded-full bg-white px-8 text-base font-black text-brand-ink shadow-lg transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime active:scale-[0.98] sm:h-16 sm:px-10 sm:text-lg"
             >
               {buttonText}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
