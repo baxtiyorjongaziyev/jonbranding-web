@@ -11,6 +11,10 @@ type Props = {
   params: Promise<{ lang: string }>;
 };
 
+export function generateStaticParams() {
+  return ['uz', 'ru', 'en', 'zh'].map((lang) => ({ lang }));
+}
+
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang: rawLang } = await props.params;
   const lang = (['uz', 'ru', 'en', 'zh'].includes(rawLang) ? rawLang : 'uz') as Locale;
