@@ -4,8 +4,8 @@
 
 **jonbranding.uz** — Markaziy Osiyo brend-agentligi uchun premium "Sales Machine" veb-sayt.
 
-- **Deploy**: Firebase App Hosting (`brandboost-landing`) — `git push origin main` qilganda avtomatik
-- **Stack**: Next.js 14 (App Router), TypeScript, Tailwind CSS, Sanity CMS, Firebase
+- **Deploy**: Vercel — `git push origin main` qilganda avtomatik (yoki Vercel CLI)
+- **Stack**: Next.js 14 (App Router), TypeScript, Tailwind CSS, Sanity CMS, Vercel
 - **GitHub**: `baxtiyorjongaziyev/jonbranding-web`
 
 ## Buyruqlar
@@ -13,7 +13,7 @@
 ```bash
 npm run dev        # localhost:9002
 npm run build      # Build tekshirish
-git push origin main  # Deploy (GitHub Actions → Firebase)
+git push origin main  # Deploy (Vercel Integration orqali)
 ```
 
 ## Stack
@@ -22,7 +22,7 @@ git push origin main  # Deploy (GitHub Actions → Firebase)
 Framework:  Next.js 14 (App Router)
 Styling:    Tailwind CSS + ShadCN UI
 CMS:        Sanity (project: h6ymmj0v, dataset: production)
-Deploy:     Firebase App Hosting via GitHub Actions
+Deploy:     Vercel (Git Integration)
 i18n:       4 til: uz, ru, en, zh — src/locales/
 Animations: Framer Motion
 ```
