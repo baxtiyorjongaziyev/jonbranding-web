@@ -101,6 +101,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
+        <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#06080d}' }} />
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
