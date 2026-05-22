@@ -1,11 +1,13 @@
+import dynamic from 'next/dynamic';
 import TrustedBy from '@/components/sections/trusted-by';
 import AuditOffer from '@/components/sections/audit-offer';
-import BeforeAfter from '@/components/sections/before-after';
-import Testimonials from '@/components/sections/testimonials';
-import Process from '@/components/sections/process';
-import Founder from '@/components/sections/founder';
-import Faq from '@/components/sections/faq';
-import CtaBlock from '@/components/sections/cta-block';
+
+const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
+const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
+const Process = dynamic(() => import('@/components/sections/process'));
+const Founder = dynamic(() => import('@/components/sections/founder'));
+const Faq = dynamic(() => import('@/components/sections/faq'));
+const CtaBlock = dynamic(() => import('@/components/sections/cta-block'));
 
 type DeferredDictionary = {
   trustedBy?: any;
