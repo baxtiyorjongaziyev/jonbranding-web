@@ -1,10 +1,8 @@
-'use client';
-
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, BarChart3, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { BarChart3, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+import ContactTriggerButton from '@/components/contact-trigger-button';
 import { projects } from '@/lib/static-data';
 import type { GalleryImage } from '@/lib/types';
 
@@ -31,10 +29,8 @@ type HeroDictionary = {
 };
 
 interface HeroProps {
-  onOpenContact: () => void;
   lang: string;
   dictionary: HeroDictionary;
-  renderHeadline: (headline: string, className?: string) => ReactNode;
 }
 
 function getHeroCopy(dictionary: HeroDictionary) {
@@ -54,7 +50,35 @@ function getHeroCopy(dictionary: HeroDictionary) {
   };
 }
 
-const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
+function renderHeadline(headline: string, className?: string) {
+  if (!headline) return '';
+
+  const segments = headline.split(/(\*\*.*?\*\*|\|.*?\|)/g);
+
+  return (
+    <span className={className ? `inline ${className}` : 'inline'}>
+      {segments.map((segment, i) => {
+        if (!segment) return null;
+
+        const isDoubleStar = segment.startsWith('**') && segment.endsWith('**');
+        const isPipe = segment.startsWith('|') && segment.endsWith('|');
+
+        if (isDoubleStar || isPipe) {
+          const text = isDoubleStar ? segment.slice(2, -2) : segment.slice(1, -1);
+          return (
+            <span key={i} className="text-brand-lime">
+              {text}
+            </span>
+          );
+        }
+
+        return <span key={i}>{segment}</span>;
+      })}
+    </span>
+  );
+}
+
+const Hero: FC<HeroProps> = ({ dictionary }) => {
   if (!dictionary) return null;
 
   const heroCopy = getHeroCopy(dictionary);
@@ -94,22 +118,20 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
             <div
               className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:justify-center lg:justify-start"
             >
-              <Button
-                onClick={onOpenContact}
+              <ContactTriggerButton
+                section="hero"
+                ctaText={heroCopy.cta}
                 size="lg"
                 className="group h-14 rounded-[8px] bg-white px-8 text-base font-black text-brand-ink shadow-[0_24px_70px_-24px_rgba(255,255,255,0.75)] transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime hover:text-brand-ink hover:shadow-[0_24px_70px_-24px_rgba(84,213,233,0.72)] active:scale-[0.98] sm:h-16"
               >
                 {heroCopy.cta}
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                size="lg"
-                className="h-14 rounded-[8px] border border-white/15 bg-white/[0.03] px-6 text-base font-black text-white/85 transition-[background-color,color,border-color] duration-200 hover:bg-white/10 hover:text-white sm:h-16"
+              </ContactTriggerButton>
+              <Link
+                href="#audit-offer"
+                className="inline-flex h-14 items-center justify-center rounded-[8px] border border-white/15 bg-white/[0.03] px-6 text-base font-black text-white/85 transition-[background-color,color,border-color] duration-200 hover:bg-white/10 hover:text-white sm:h-16"
               >
-                <Link href="#audit-offer">{heroCopy.ctaSecondary}</Link>
-              </Button>
+                {heroCopy.ctaSecondary}
+              </Link>
             </div>
 
             <div
@@ -128,7 +150,7 @@ const Hero: FC<HeroProps> = ({ onOpenContact, dictionary, renderHeadline }) => {
           </div>
 
           <div
-            className="relative flex items-center justify-center"
+            className="relative hidden items-center justify-center lg:flex"
           >
             <div className="jb-dark-panel relative w-full max-w-xl overflow-hidden p-2 backdrop-blur-xl lg:max-w-none">
               <div className="pointer-events-none absolute inset-0 rounded-[8px] ring-1 ring-inset ring-white/10" />

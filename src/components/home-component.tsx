@@ -1,12 +1,8 @@
-'use client';
-
-import type { FC, ReactNode } from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import type { FC } from 'react';
 import dynamic from 'next/dynamic';
+import DeferredSection from '@/components/deferred-section';
 import Hero from '@/components/sections/hero';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useTelegram } from '@/hooks/use-telegram';
-import { cn } from '@/lib/utils';
 
 // Custom Premium Skeletons to completely eliminate CLS (Cumulative Layout Shift)
 // and deliver S-Tier visual progression (matching dark/light blocks perfectly)
@@ -124,7 +120,7 @@ const BeforeAfter = dynamic(() => import('@/components/sections/before-after'), 
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'), {
   loading: () => <TestimonialsSkeleton />,
 });
-const Process = dynamic(() => import('@/components/sections/process'), { ssr: false });
+const Process = dynamic(() => import('@/components/sections/process'));
 const Founder = dynamic(() => import('@/components/sections/founder'), {
   loading: () => <FounderSkeleton />,
 });
@@ -135,88 +131,7 @@ const CtaBlock = dynamic(() => import('@/components/sections/cta-block'), {
   loading: () => <CtaBlockSkeleton />,
 });
 
-const DeferredSection: FC<{ fallback: ReactNode; children: ReactNode }> = ({ fallback, children }) => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    if (isReady) return;
-
-    const element = ref.current;
-    if (!element || typeof IntersectionObserver === 'undefined') {
-      setIsReady(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsReady(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '900px 0px' },
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [isReady]);
-
-  return <div ref={ref}>{isReady ? children : fallback}</div>;
-};
-
 const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> = ({ lang, dictionary, comparisons }) => {
-  const [mounted, setMounted] = useState(false);
-  const { tg } = useTelegram();
-
-  const handleOpenModal = useCallback((section = 'homepage', ctaText = 'Bepul Brand Audit olish') => {
-    if (typeof window !== 'undefined') {
-      const event = new CustomEvent('openContactModal', {
-        detail: {
-          section,
-          ctaText,
-          source: 'homepage',
-        },
-      });
-      window.dispatchEvent(event);
-    }
-  }, []);
-
-  useEffect(() => {
-    setMounted(true);
-    if (tg?.BackButton) {
-      tg.BackButton.show();
-    }
-  }, [tg]);
-
-  const renderHeadline = (headline: string, className?: string) => {
-    if (!headline) return '';
-
-    const segments = headline.split(/(\*\*.*?\*\*|\|.*?\|)/g);
-
-    return (
-      <span className={cn('inline', className)}>
-        {segments.map((segment, i) => {
-          if (!segment) return null;
-
-          const isDoubleStar = segment.startsWith('**') && segment.endsWith('**');
-          const isPipe = segment.startsWith('|') && segment.endsWith('|');
-
-          if (isDoubleStar || isPipe) {
-            const text = isDoubleStar ? segment.slice(2, -2) : segment.slice(1, -1);
-            return (
-              <span key={i} className="text-brand-lime">
-                {text}
-              </span>
-            );
-          }
-
-          return <span key={i}>{segment}</span>;
-        })}
-      </span>
-    );
-  };
-
   if (!dictionary?.hero) {
     return (
       <div className="py-20 text-center">
@@ -229,18 +144,18 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
     <div className="relative pb-28 md:pb-0">
       <main>
         {/* 1. Hero: premium positioning + audit CTA */}
-        <Hero onOpenContact={() => handleOpenModal('hero', dictionary.hero?.cta)} lang={lang} dictionary={dictionary.hero} renderHeadline={renderHeadline} />
+        <Hero lang={lang} dictionary={dictionary.hero} />
 
 
         {/* 2. Trust: selected clients and credibility signals */}
         <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
 
         {/* 3. Offer: sell the free Brand Audit */}
-        <AuditOffer lang={lang} dictionary={dictionary.auditOffer} onCtaClick={() => handleOpenModal('audit_offer', dictionary.auditOffer?.cta)} />
+        <AuditOffer lang={lang} dictionary={dictionary.auditOffer} />
 
         {/* 4. Proof: visible transformation after the offer */}
         <DeferredSection fallback={<BeforeAfterSkeleton />}>
-          <BeforeAfter onCtaClick={() => handleOpenModal('before_after', dictionary.beforeAfter?.cta || dictionary.beforeAfter?.ctaButton)} lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
+          <BeforeAfter lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
         </DeferredSection>
 
         {/* 5. Testimonials: real client voices */}
@@ -250,12 +165,12 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
 
         {/* 6. Process: what happens after the audit */}
         <DeferredSection fallback={<CtaBlockSkeleton />}>
-          {mounted && <Process onCtaClick={() => handleOpenModal('process', dictionary.process?.ctaButton)} lang={lang} dictionary={dictionary.process} />}
+          <Process lang={lang} dictionary={dictionary.process} />
         </DeferredSection>
 
         {/* 7. Founder: trust through personality */}
         <DeferredSection fallback={<FounderSkeleton />}>
-          {mounted && <Founder lang={lang} dictionary={dictionary.founder} />}
+          <Founder lang={lang} dictionary={dictionary.founder} />
         </DeferredSection>
 
         {/* 8. FAQ: objection handling */}
@@ -266,7 +181,8 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
           title={dictionary.home?.cta1_title}
           description={dictionary.home?.cta1_desc}
           buttonText={dictionary.home?.cta1_button}
-          onCtaClick={() => handleOpenModal('final_cta', dictionary.home?.cta1_button)}
+          ctaSection="final_cta"
+          ctaSource="homepage"
         />
       </main>
     </div>

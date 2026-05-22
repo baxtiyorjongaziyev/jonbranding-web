@@ -20,7 +20,6 @@ interface SanityComparison {
 }
 
 interface BeforeAfterProps {
-  onCtaClick: () => void;
   lang: string;
   dictionary: {
     eyebrow?: string;
@@ -68,7 +67,7 @@ const itemVariants = {
   },
 };
 
-const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary, comparisons }) => {
+const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons }) => {
   const translations = dictionary;
   const displayItems = comparisons && comparisons.length > 0 ? comparisons : DEFAULT_COMPARISONS;
   
@@ -94,6 +93,16 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
       label: brand,
       section: 'before_after',
     });
+  };
+
+  const handleCtaClick = () => {
+    window.dispatchEvent(new CustomEvent('openContactModal', {
+      detail: {
+        section: 'before_after',
+        ctaText: translations.cta || translations.ctaButton,
+        source: 'homepage',
+      },
+    }));
   };
 
   if (!translations || !activeItem) return null;
@@ -170,7 +179,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ onCtaClick, lang, dictionary,
 
             <div className="pt-2">
               <Button
-                onClick={onCtaClick}
+                onClick={handleCtaClick}
                 size="lg"
                 className="h-14 rounded-2xl bg-white px-8 text-sm font-black text-brand-ink transition-transform hover:bg-brand-lime active:scale-[0.98] duration-150 shadow-lg shadow-white/5"
               >
