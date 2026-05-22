@@ -112,7 +112,7 @@
     -webkit-font-smoothing: antialiased;
   }
   .skip-link {
-    @apply fixed left-4 top-4 z-[9999] -translate-y-16 rounded-[8px] bg-brand-ink px-4 py-3 text-sm font-bold text-white shadow-xl transition-transform duration-200 focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan;
+    @apply fixed left-4 top-4 z-[9999] -translate-y-16 rounded-full bg-brand-ink px-4 py-3 text-sm font-bold text-white shadow-xl transition-transform duration-200 focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan;
   }
   h1,h2,h3,h4,h5,h6 {
     @apply text-foreground font-headline leading-tight tracking-normal;
@@ -262,7 +262,7 @@
   }
 
   .premium-card {
-    @apply overflow-hidden rounded-[8px] border border-brand-line/80 bg-white shadow-[0_18px_55px_rgba(15,23,42,0.06)] transition-[box-shadow,transform,border-color] duration-500 hover:shadow-[0_30px_70px_rgba(15,23,42,0.1)];
+    @apply overflow-hidden rounded-2xl border border-brand-line/80 bg-white shadow-[0_18px_55px_rgba(15,23,42,0.06)] transition-[box-shadow,transform,border-color] duration-500 hover:shadow-[0_30px_70px_rgba(15,23,42,0.1)];
   }
 
   .brand-section {
@@ -272,7 +272,7 @@
   }
 
   .brand-card {
-    @apply rounded-[8px] border border-brand-line/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] duration-300;
+    @apply rounded-2xl border border-brand-line/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] duration-300;
     background-color: rgb(255 255 255 / 0.9);
     transition-property: box-shadow, transform, border-color, background-color;
   }
@@ -298,11 +298,11 @@
   }
 
   .jb-dark-panel {
-    @apply rounded-[8px] border border-white/10 bg-white/[0.06] shadow-[0_40px_120px_-55px_rgba(0,0,0,0.9)];
+    @apply rounded-3xl border border-white/10 bg-white/[0.06] shadow-[0_40px_120px_-55px_rgba(0,0,0,0.9)];
   }
 
   .jb-warm-panel {
-    @apply rounded-[8px] border border-brand-line/80 bg-white/90 shadow-[0_24px_70px_rgba(15,23,42,0.07)];
+    @apply rounded-3xl border border-brand-line/80 bg-white/90 shadow-[0_24px_70px_rgba(15,23,42,0.07)];
   }
 
   .section-padding {

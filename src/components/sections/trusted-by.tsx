@@ -49,7 +49,7 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[8px] border border-brand-line bg-brand-line shadow-[0_24px_80px_rgba(15,23,42,0.06)] sm:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-brand-line bg-brand-line shadow-[0_24px_80px_rgba(15,23,42,0.06)] sm:grid-cols-3 lg:grid-cols-6">
           {brands.map((brand) => (
             <div key={brand.name} className="flex h-24 items-center justify-center bg-white px-5 py-4 transition-colors duration-200 hover:bg-brand-mist/70">
               {brand.logo ? (

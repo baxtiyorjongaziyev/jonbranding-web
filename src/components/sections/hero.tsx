@@ -142,7 +142,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
               {heroCopy.proofItems.map((item) => (
                 <div
                   key={item}
-                  className="flex min-h-11 items-center gap-2 rounded-[8px] border border-white/[0.09] bg-white/[0.055] px-3 py-2 text-left text-xs font-bold leading-5 text-white/80 backdrop-blur-md sm:min-h-14 sm:px-4 sm:py-3 sm:text-sm"
+                  className="flex min-h-11 items-center gap-2 rounded-xl border border-white/[0.09] bg-white/[0.055] px-3 py-2 text-left text-xs font-bold leading-5 text-white/80 backdrop-blur-md sm:min-h-14 sm:px-4 sm:py-3 sm:text-sm"
                 >
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-lime" />
                   <span className="min-w-0">{item}</span>
@@ -155,12 +155,12 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
             className="relative hidden items-center justify-center lg:flex"
           >
             <div className="jb-dark-panel relative w-full max-w-xl overflow-hidden p-5 backdrop-blur-xl lg:max-w-none">
-              <div className="pointer-events-none absolute inset-0 rounded-[8px] ring-1 ring-inset ring-white/10" />
+              <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
               <AuditPanel copy={heroCopy} />
               <div className="mt-4 grid gap-3">
                 {heroCopy.auditSignals.map((signal, index) => (
-                  <div key={signal} className="grid grid-cols-[44px_1fr] items-center gap-3 rounded-[8px] border border-white/[0.1] bg-white/[0.055] p-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-[8px] bg-brand-lime text-sm font-black text-brand-ink">
+                  <div key={signal} className="grid grid-cols-[44px_1fr] items-center gap-3 rounded-2xl border border-white/[0.1] bg-white/[0.055] p-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-lime text-sm font-black text-brand-ink">
                       0{index + 1}
                     </div>
                     <div>
@@ -174,7 +174,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
                 {heroCopy.showcaseTags.map((tag) => (
                   <div
                     key={tag}
-                    className="flex items-center justify-center gap-2 rounded-[8px] border border-white/[0.1] bg-white/[0.055] px-4 py-3 text-[11px] font-black uppercase tracking-normal text-white/80"
+                    className="flex items-center justify-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.055] px-4 py-3 text-[11px] font-black uppercase tracking-normal text-white/80"
                   >
                     <ShieldCheck className="h-3.5 w-3.5 text-brand-lime" />
                     <span className="truncate">{tag}</span>
@@ -191,7 +191,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
 
 function AuditPanel({ copy }: { copy: ReturnType<typeof getHeroCopy> }) {
   return (
-    <div className="mt-2 rounded-[8px] border border-white/15 bg-[#06080d]/86 p-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-5">
+    <div className="mt-2 rounded-2xl border border-white/15 bg-[#06080d]/86 p-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="mb-3 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-normal text-brand-lime">
@@ -202,7 +202,7 @@ function AuditPanel({ copy }: { copy: ReturnType<typeof getHeroCopy> }) {
           <p className="mt-1 text-sm leading-6 text-white/60">{copy.auditSubtitle}</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex h-14 w-14 items-center justify-center rounded-[8px] bg-brand-lime text-sm font-black text-brand-ink shadow-[0_16px_40px_-18px_rgba(84,213,233,0.8)]">
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-lime text-sm font-black text-brand-ink shadow-[0_16px_40px_-18px_rgba(84,213,233,0.8)]">
             {copy.auditScore}
           </div>
           <BarChart3 className="hidden h-7 w-7 text-brand-lime sm:block" />

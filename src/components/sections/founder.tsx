@@ -90,9 +90,9 @@ const Founder: FC<{ lang: string; dictionary: any }> = ({ dictionary }) => {
             />
 
             {translations.principles?.length > 0 && (
-              <div className="grid gap-2 rounded-[8px] border border-white/8 bg-white/[0.04] p-3 sm:grid-cols-3">
+              <div className="grid gap-2 rounded-2xl border border-white/8 bg-white/[0.04] p-3 sm:grid-cols-3">
                 {translations.principles.map((item: string) => (
-                  <div key={item} className="rounded-[8px] bg-white/[0.06] px-4 py-3 text-sm font-bold text-white/90">
+                  <div key={item} className="rounded-xl bg-white/[0.06] px-4 py-3 text-sm font-bold text-white/90">
                     {item}
                   </div>
                 ))}
@@ -128,7 +128,7 @@ const Founder: FC<{ lang: string; dictionary: any }> = ({ dictionary }) => {
           </motion.div>
 
           <motion.div variants={itemVariants} className="order-1 flex items-center justify-center md:order-2">
-            <div className="relative w-full overflow-hidden rounded-[8px] border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]">
+            <div className="relative w-full overflow-hidden rounded-3xl border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]">
               <div className="relative aspect-[4/5]">
                 {!showVideo ? (
                   <>
