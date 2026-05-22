@@ -343,8 +343,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         
         <div className="flex items-center gap-2 lg:hidden">
           <LanguageSwitcher lang={lang as any} isInverted={!useDarkHeaderText} />
-          {mounted && (
-            <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn("rounded-full", useDarkHeaderText ? "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground" : "border-white/20 bg-white/10 text-white hover:bg-white/15 hover:text-white")}>
                   <Menu className="h-5 w-5" aria-hidden="true" />
@@ -394,7 +393,6 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                  </ScrollArea>
               </SheetContent>
             </Sheet>
-          )}
         </div>
       </div>
     </header>
