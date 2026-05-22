@@ -1,31 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function StickyCTA({ ariaLabel = 'Contact us' }: { ariaLabel?: string }) {
   const [isVisible, setIsVisible] = useState(false);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    let ticking = false;
-
-    const update = () => {
-      setIsVisible(window.scrollY > 400);
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsVisible(latest > 400);
+  });
 
   const handleOpenModal = () => {
     const contactEvent = new CustomEvent('openContactModal', {
