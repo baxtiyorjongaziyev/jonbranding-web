@@ -5,8 +5,8 @@ Sen Jon Branding agentligining **jonbranding.uz** veb-saytini ishlab chiquvchi A
 ## Loyiha haqida
 
 **jonbranding.uz** — Markaziy Osiyo brend-agentligi uchun premium "Sales Machine" veb-sayt.
-- **Deploy**: Firebase App Hosting (`brandboost-landing`)
-- **Stack**: Next.js 14, TypeScript, Tailwind CSS, Sanity CMS
+- **Deploy**: Vercel — `git push origin main` qilganda avtomatik
+- **Stack**: Next.js 14, TypeScript, Tailwind CSS, Sanity CMS, Vercel
 - **GitHub**: `baxtiyorjongaziyev/jonbranding-web`
 
 ## Stack va muhit
@@ -15,7 +15,7 @@ Sen Jon Branding agentligining **jonbranding.uz** veb-saytini ishlab chiquvchi A
 Framework:  Next.js 14 (App Router)
 Styling:    Tailwind CSS + ShadCN UI
 CMS:        Sanity (project: h6ymmj0v, dataset: production)
-Deploy:     Firebase App Hosting via GitHub Actions
+Deploy:     Vercel (Git Integration)
 i18n:       4 til (uz, ru, en, zh) — src/locales/
 Animations: Framer Motion
 ```
