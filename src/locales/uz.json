@@ -1399,7 +1399,10 @@
         "labels": {
             "traffic": "Saytingizga kirayotgan potentsial mijozlar",
             "conversion": "Hozirgi sotuv konversiyasi (%)",
-            "aov": "Bitta mijozdan keladigan o'rtacha foyda ($)"
+            "aov": "Bitta mijozdan keladigan o'rtacha foyda ($)",
+            "traffic_unit": "ta odam",
+            "conversion_unit": "(ishonch)",
+            "currency_suffix": " so'm"
         },
         "analogy": {
             "title": "Shafqatsiz haqiqat:",

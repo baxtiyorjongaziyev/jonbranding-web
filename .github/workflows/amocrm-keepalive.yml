@@ -1,0 +1,16 @@
+name: AmoCRM token keepalive
+
+on:
+  schedule:
+    - cron: '0 3 1,15 * *'  # Har oyning 1 va 15 sanasi 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refresh AmoCRM token
+        run: |
+          curl -fsS -X POST https://jonbranding.uz/api/amocrm-refresh \
+            -H "Authorization: Bearer ${{ secrets.AMOCRM_CRON_SECRET }}" \
+            --max-time 30

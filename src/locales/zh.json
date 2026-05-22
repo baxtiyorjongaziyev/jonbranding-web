@@ -1223,7 +1223,10 @@
         "labels": {
             "traffic": "网站访问量",
             "conversion": "购买转化率 (%)",
-            "aov": "平均客单价 ($)"
+            "aov": "平均客单价 ($)",
+            "traffic_unit": "人",
+            "conversion_unit": "(信任)",
+            "currency_suffix": " 索姆"
         },
         "analogy": {
             "title": "为什么会这样？",
