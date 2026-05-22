@@ -1,8 +1,6 @@
-'use client';
-
 import type { FC } from 'react';
-import { ArrowRight, CheckCircle2, FileSearch, Layers3, Route, ShieldCheck, Target } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { CheckCircle2, FileSearch, Layers3, Route, ShieldCheck, Target } from 'lucide-react';
+import ContactTriggerButton from '@/components/contact-trigger-button';
 import { BrandCard, BrandSection } from '@/components/ui/design-system';
 
 type AuditOfferDictionary = {
@@ -18,7 +16,7 @@ type AuditOfferDictionary = {
 
 const auditIcons = [FileSearch, Target, Layers3, Route];
 
-const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary; onCtaClick: () => void }> = ({ dictionary, onCtaClick }) => {
+const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ dictionary }) => {
   if (!dictionary) return null;
 
   const items = dictionary.items || [];
@@ -43,10 +41,9 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary; onCtaCli
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               {dictionary.cta && (
-                <Button onClick={onCtaClick} size="lg" className="group h-14 min-w-[220px] rounded-[8px] bg-brand-ink px-7 text-base font-black text-white hover:bg-brand-blue">
+                <ContactTriggerButton section="audit_offer" ctaText={dictionary.cta} size="lg" className="group h-14 min-w-[220px] rounded-[8px] bg-brand-ink px-7 text-base font-black text-white hover:bg-brand-blue">
                   {dictionary.cta}
-                  <ArrowRight className="ml-2 h-5 w-5 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
-                </Button>
+                </ContactTriggerButton>
               )}
               {dictionary.promise && (
                 <div className="flex items-center gap-2 rounded-[8px] border border-brand-line bg-white/70 px-4 py-3 text-sm font-bold text-brand-slate">

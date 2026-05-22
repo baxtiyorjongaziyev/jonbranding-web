@@ -7,7 +7,7 @@ import CtaBlock from './cta-block';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 interface ProcessProps {
-  onCtaClick: () => void;
+  onCtaClick?: () => void;
   lang: string;
   dictionary: any;
 }
@@ -113,6 +113,8 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
         description={translations.ctaDesc}
         buttonText={translations.ctaButton}
         onCtaClick={onCtaClick}
+        ctaSection="process"
+        ctaSource="homepage"
       />
     </BrandSection>
   );

@@ -1,3 +1,5 @@
+'use client';
+
 import type { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
@@ -6,10 +8,27 @@ interface CtaBlockProps {
   title: string;
   description: string;
   buttonText: string;
-  onCtaClick: () => void;
+  onCtaClick?: () => void;
+  ctaSection?: string;
+  ctaSource?: string;
 }
 
-const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClick }) => {
+const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClick, ctaSection = 'cta_block', ctaSource = 'homepage' }) => {
+  const handleCtaClick = () => {
+    if (onCtaClick) {
+      onCtaClick();
+      return;
+    }
+
+    window.dispatchEvent(new CustomEvent('openContactModal', {
+      detail: {
+        section: ctaSection,
+        ctaText: buttonText,
+        source: ctaSource,
+      },
+    }));
+  };
+
   return (
     <section className="bg-brand-paper py-16">
       <div className="container mx-auto px-4">
@@ -25,7 +44,7 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
               <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-white/65 sm:text-lg">{description}</p>
             </div>
             <Button
-              onClick={onCtaClick}
+              onClick={handleCtaClick}
               size="lg"
               className="group h-14 rounded-[8px] bg-white px-8 text-base font-black text-brand-ink shadow-lg transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime active:scale-[0.98] sm:h-16 sm:px-10 sm:text-lg"
             >
