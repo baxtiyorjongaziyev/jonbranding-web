@@ -142,7 +142,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 <a 
                   href="tel:+998336450097"
                   onClick={() => trackContactClick('phone', 'footer')}
-                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-black transition-all duration-300 w-full"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-black transition-all duration-300 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   +998 33 645 00 97
                 </a>
@@ -151,7 +151,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackContactClick('telegram', 'footer')}
-                  className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 rounded-full text-sm font-medium hover:bg-blue-700 transition-all duration-300 w-full gap-2"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 rounded-full text-sm font-medium hover:bg-blue-700 transition-all duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Send size={16} /> Telegram
                 </a>
@@ -192,13 +192,13 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-5">
-              <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110" aria-label="Instagram">
+              <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110" aria-label="Telegram Channel">
+              <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Telegram Channel">
                 <Send size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
             </div>

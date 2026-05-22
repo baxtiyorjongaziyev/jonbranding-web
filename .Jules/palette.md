@@ -15,3 +15,7 @@
 ## 2026-05-18 - Adding ARIA expanded states and keyboard focus to interactive widgets
 **Learning:** When building floating widgets or interactive modals (like `OishaWidget`), it's crucial to semantically link the toggle button to the expanding container using `aria-controls` and `aria-expanded`. Without these attributes, screen readers may not understand the relationship between the button and the content it reveals. Furthermore, custom interactive buttons lack default focus outlines when styled extensively, hindering keyboard accessibility.
 **Action:** Always include `aria-expanded` and `aria-controls` on the toggle button (linking it to the container's `id`), and ensure all interactive elements within the widget have explicit `focus-visible` Tailwind classes (like `focus-visible:ring-2`) to provide clear visual feedback during keyboard navigation.
+
+## 2026-05-22 - Using existing design tokens for focus states
+**Learning:** When adding focus styles to interactive elements for keyboard accessibility, it's crucial to use the established Tailwind design tokens in the codebase (e.g., `focus-visible:ring-primary`, `focus-visible:ring-offset-background`) rather than generic colors like `blue-500` or `black`. This ensures consistency with the site's overall theme, including light/dark modes.
+**Action:** Always check existing components for focus state patterns before applying new ones, and strictly adhere to using semantic design tokens from the Tailwind configuration.
