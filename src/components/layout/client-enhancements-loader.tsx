@@ -20,13 +20,14 @@ export default function ClientEnhancementsLoader(props: ClientEnhancementsLoader
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if ('requestIdleCallback' in window) {
-      const id = window.requestIdleCallback(() => setReady(true), { timeout: 2500 });
-      return () => window.cancelIdleCallback(id);
-    }
+    const loadEnhancements = () => setReady(true);
+    window.addEventListener('openContactModal', loadEnhancements);
 
-    const id = globalThis.setTimeout(() => setReady(true), 2200);
-    return () => globalThis.clearTimeout(id);
+    const id = globalThis.setTimeout(loadEnhancements, 6000);
+    return () => {
+      window.removeEventListener('openContactModal', loadEnhancements);
+      globalThis.clearTimeout(id);
+    };
   }, []);
 
   if (!ready) return null;
