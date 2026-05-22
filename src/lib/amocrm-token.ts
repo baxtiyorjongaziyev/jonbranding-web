@@ -1,6 +1,6 @@
 import { getDb } from './firebase-admin';
 
-const TOKENS_DOC = 'amocrm/tokens';
+const TOKENS_DOC = 'amocrm/website_tokens';
 const REFRESH_BUFFER_MS = 5 * 60 * 1000; // 5 minutes before expiry
 
 interface TokenData {
