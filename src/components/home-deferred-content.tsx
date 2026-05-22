@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import TrustedBy from '@/components/sections/trusted-by';
 import AuditOffer from '@/components/sections/audit-offer';
+import BlogPreview from '@/components/sections/blog-preview';
 
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
@@ -18,6 +19,7 @@ type DeferredDictionary = {
   founder?: any;
   faq?: any;
   home?: any;
+  blog?: any;
 };
 
 export default function HomeDeferredContent({
@@ -38,6 +40,7 @@ export default function HomeDeferredContent({
       <Testimonials lang={lang} dictionary={dictionary.testimonials} />
       <Process lang={lang} dictionary={dictionary.process} />
       <Founder lang={lang} dictionary={dictionary.founder} />
+      <BlogPreview lang={lang} dictionary={dictionary.blog} />
       <Faq lang={lang} dictionary={dictionary.faq} hideCta={true} />
       <CtaBlock
         title={dictionary.home?.cta1_title}

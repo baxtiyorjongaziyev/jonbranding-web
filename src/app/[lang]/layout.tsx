@@ -1,4 +1,4 @@
-﻿import Script from 'next/script';
+import Script from 'next/script';
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
@@ -168,6 +168,124 @@ export default async function LocalizedLayout({ children, params }: Props) {
                   "description": "Comprehensive market analysis and strategy."
                 }
               ]
+            })
+          }}
+        />
+        <Script
+          id="json-ld-faq"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Чем хороший брендинг отличается от простого логотипа?"
+                    : lang === 'en'
+                    ? "What is the difference between good branding and just a logo?"
+                    : "Yaxshi brending va shunchaki chiroyli logotipning farqi nimada?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "Логотип — это визуальный знак. В Jon.Branding мы рассматриваем брендинг как фундамент бизнеса: анализ стратегии, рынка и психологии клиентов. Результат — не просто 'красивый', а приносящий доход бренд."
+                      : lang === 'en'
+                      ? "A logo is just a visual mark. At Jon.Branding we treat branding as the foundation of your business: market positioning, strategy, and customer psychology. The result is not just 'beautiful' — it generates revenue."
+                      : "Shunchaki logotip — bu vizual belgi. Jon.Branding'da biz brendingni biznesingiz poydevori deb bilamiz. Strategiya, bozordagi o'rin va mijozlar ruhiyatini tahlil qilamiz — natijada daromad keltiruvchi brend yaratamiz."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Сколько времени занимает создание бренда?"
+                    : lang === 'en'
+                    ? "How long does a branding project take?"
+                    : "Loyiha qancha muddatda tayyor bo'ladi?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "В среднем 4–8 недель. Это время необходимо для глубокого анализа, создания уникальной концепции и доработки каждой детали. Мы ставим качество на первое место."
+                      : lang === 'en'
+                      ? "On average 4–8 weeks. This time is required for deep analysis, unique concept creation, and perfecting every detail. We prioritise quality."
+                      : "O'rtacha 4 haftadan 8 haftagacha. Bu vaqt chuqur tahlil, noyob konsepsiya yaratish va har bir detalni ideal holatga keltirish uchun zarur."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Почему ваши услуги дороже среднего?"
+                    : lang === 'en'
+                    ? "Why are your services priced above average?"
+                    : "Nega xizmatlaringiz narxi bozor o'rtachasidan yuqori?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "Мы продаём не расходы, а инвестиции. Наши решения направлены на рост продаж и снижение маркетинговых затрат. Работа с Jon.Branding — это система, которая окупается многократно."
+                      : lang === 'en'
+                      ? "We sell investment, not expense. Our solutions are designed to increase sales and reduce marketing costs. Working with Jon.Branding is a system that pays back many times over."
+                      : "Biz xarajatni emas, investitsiyani sotamiz. Bizning yechimlarimiz savdoni oshirishga va marketing xarajatlarini kamaytirishga qaratilgan — bir necha barobar foyda keltiradigan tizim."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Есть ли гарантия результата?"
+                    : lang === 'en'
+                    ? "Is there a result guarantee?"
+                    : "Natijaga kafolat bormi?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "Да. Если начальные концепции не соответствуют вашим требованиям по брифу, мы доработаем проект или выполним согласованные условия возврата."
+                      : lang === 'en'
+                      ? "Yes. If the initial concepts do not match your brief requirements, we will revise the project or fulfil the agreed refund terms."
+                      : "Albatta. Agar dastlabki konsepsiyalar sizning talablaringizga mos kelmasa, biz loyihani qayta ishlaymiz yoki kelishilgan qaytarish shartlarini bajaramiz."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Можно ли заказать только логотип?"
+                    : lang === 'en'
+                    ? "Can I order just a logo?"
+                    : "Faqatgina logotip buyurtma qilsa bo'ladimi?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "Мы рекомендуем создавать полную систему айдентики, так как только логотип не обеспечивает целостность бренда. Однако для небольших проектов у нас есть пакеты 'Логотип + Минимальный фирменный стиль'."
+                      : lang === 'en'
+                      ? "We recommend building a full identity system, as a logo alone cannot ensure brand integrity. However, for smaller projects we have 'Logo + Minimal Corporate Style' packages."
+                      : "Biz butun aydentika tizimini yaratishni tavsiya qilamiz, chunki faqat logotip brend yaxlitligini ta'minlamaydi. Biroq, kichik loyihalar uchun 'Logo + Minimal firma uslubi' paketlari mavjud."
+                  }
+                }
+              ]
+            })
+          }}
+        />
+        <Script
+          id="json-ld-aggregate-rating"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Jon.Branding",
+              "url": "https://www.jonbranding.uz",
+              "telephone": "+998336450097",
+              "priceRange": "$$$",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Tashkent",
+                "addressLocality": "Tashkent",
+                "addressCountry": "UZ"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "47",
+                "bestRating": "5"
+              }
             })
           }}
         />
