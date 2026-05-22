@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
 import { Instagram, Linkedin, Send } from 'lucide-react';
@@ -62,7 +62,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   };
 
   return (
-    <footer className="relative bg-black text-white pt-24 pb-0 overflow-hidden" suppressHydrationWarning>
+    <footer className="relative bg-black text-white pt-24 pb-0 overflow-hidden rounded-t-[2.5rem] md:rounded-t-[5rem]" suppressHydrationWarning>
       {/* Finch-style Vivid Background Gradient - Anchored to very bottom */}
       <div 
         className="absolute bottom-0 left-[-20%] w-[140%] h-[35%] pointer-events-none overflow-hidden select-none"
