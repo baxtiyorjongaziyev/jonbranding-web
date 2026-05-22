@@ -70,30 +70,6 @@ const itemVariants = {
 const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons }) => {
   const translations = dictionary;
   const displayItems = comparisons && comparisons.length > 0 ? comparisons : DEFAULT_COMPARISONS;
-  
-  // Dynamic brand selection state
-  const [activeBrand, setActiveBrand] = useState<string>('');
-
-  useEffect(() => {
-    if (displayItems && displayItems.length > 0) {
-      // Prioritize Den Aroma or Savod on startup, otherwise show the first item
-      const preferred = displayItems.find(x => x.brand.toLowerCase().includes('den aroma') || x.brand.toLowerCase().includes('denaroma')) 
-                     || displayItems[0];
-      setActiveBrand(preferred.brand);
-    }
-  }, [displayItems]);
-
-  const activeItem = displayItems.find((item) => item.brand === activeBrand) || displayItems[0];
-
-  const handleBrandSelect = (brand: string) => {
-    setActiveBrand(brand);
-    trackEvent({
-      action: 'proof_tab_changed',
-      category: 'Proof',
-      label: brand,
-      section: 'before_after',
-    });
-  };
 
   const handleCtaClick = () => {
     window.dispatchEvent(new CustomEvent('openContactModal', {
@@ -105,7 +81,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
     }));
   };
 
-  if (!translations || !activeItem) return null;
+  if (!translations || !displayItems || displayItems.length === 0) return null;
 
   return (
     <BrandSection tone="dark" className="relative bg-[#070b12] py-20 text-white sm:py-28 overflow-hidden">
@@ -119,9 +95,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
         viewport={{ once: true, margin: "-80px" }}
         className="container relative z-10 mx-auto px-4"
       >
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-          
-          {/* Left Column: Context, proof and active brand tabs */}
+        {/* Top Section: Headline, Subtitle, CTA and Stats */}
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end mb-16">
           <motion.div variants={itemVariants} className="space-y-6">
             {translations.eyebrow && (
               <div className="inline-flex rounded-full border border-white/12 bg-white/[0.06] px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-brand-cyan">
@@ -129,7 +104,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
               </div>
             )}
             
-            <h2 className="max-w-xl text-balance text-4xl font-black tracking-tight text-white sm:text-6xl leading-[1.1]">
+            <h2 className="max-w-2xl text-balance text-4xl font-black tracking-tight text-white sm:text-6xl leading-[1.1]">
               {translations.title}
             </h2>
             
@@ -138,44 +113,6 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
                 {translations.subtitle}
               </p>
             )}
-
-            {/* Clickable Brand Tabs - Sleek premium pills */}
-            <div className="flex flex-wrap gap-2 py-2">
-              {displayItems.map((item) => (
-                <button
-                  key={item.brand}
-                  type="button"
-                  onClick={() => handleBrandSelect(item.brand)}
-                  className={cn(
-                    "px-4 py-2.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 border flex items-center gap-2 active:scale-[0.98]",
-                    activeBrand === item.brand
-                      ? "bg-white text-slate-950 border-white shadow-xl shadow-white/5 scale-[1.03]"
-                      : "bg-white/[0.04] text-white/60 border-white/10 hover:bg-white/[0.08] hover:text-white"
-                  )}
-                >
-                  <span className={cn(
-                    "w-1.5 h-1.5 rounded-full transition-colors",
-                    activeBrand === item.brand ? "bg-blue-600 animate-pulse" : "bg-white/30"
-                  )} />
-                  {item.brand}
-                </button>
-              ))}
-            </div>
-
-            {/* Client Proof Cards */}
-            {translations.proofCards?.length ? (
-              <div className="grid max-w-xl grid-cols-2 gap-3 pt-2">
-                {translations.proofCards.map((card) => (
-                  <div 
-                    key={card.label} 
-                    className="rounded-2xl border border-white/8 bg-white/[0.04] p-4 transition-all duration-300 hover:border-white/15"
-                  >
-                    <div className="text-2xl font-black tracking-tight text-white">{card.value}</div>
-                    <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60">{card.label}</div>
-                  </div>
-                ))}
-              </div>
-            ) : null}
 
             <div className="pt-2">
               <Button
@@ -189,57 +126,72 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
             </div>
           </motion.div>
 
-          {/* Right Column: Unified image comparison viewer */}
-          <motion.div variants={itemVariants} className="relative">
-            {/* Ambient background glow sphere */}
-            <div className="absolute -inset-6 bg-blue-500/10 rounded-full blur-3xl opacity-40 pointer-events-none" />
-            
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-[#0a0f1d]/80 backdrop-blur-md p-3 shadow-[0_50px_100px_-40px_rgba(0,0,0,0.9)] transition-all duration-300 hover:border-white/20">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeBrand}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                >
-                  <ImageComparisonSlider
-                    beforeImage={{ 
-                      src: activeItem.oldImg, 
-                      alt: `${activeItem.brand} old`, 
-                      'data-ai-hint': activeItem.oldHint || '', 
-                      unoptimized: true 
-                    }}
-                    afterImage={{ 
-                      src: activeItem.newImg, 
-                      alt: `${activeItem.brand} new`, 
-                      'data-ai-hint': activeItem.newHint || '', 
-                      unoptimized: true 
-                    }}
-                    lang={lang}
-                  />
-                  
-                  <div className="flex items-center justify-between px-3.5 py-4 mt-2">
-                    <div>
-                      <p className="text-xl font-extrabold text-white tracking-tight">{activeItem.brand}</p>
-                      {translations.caseLabel && (
-                        <p className="mt-1 text-[9px] font-black uppercase tracking-[0.2em] text-white/60">
-                          {translations.caseLabel}
-                        </p>
-                      )}
-                    </div>
-                    
-                    <div className="flex items-center gap-2 rounded-full bg-brand-lime/10 px-3.5 py-2 border border-brand-lime/20 text-brand-lime">
-                      <BadgeCheck className="h-4.5 w-4.5 shrink-0" />
-                      <span className="text-[9px] font-black uppercase tracking-wider">Premium transform</span>
-                    </div>
+          <motion.div variants={itemVariants} className="space-y-6">
+            {/* Client Proof Cards */}
+            {translations.proofCards?.length ? (
+              <div className="grid grid-cols-2 gap-4">
+                {translations.proofCards.map((card) => (
+                  <div 
+                    key={card.label} 
+                    className="rounded-2xl border border-white/8 bg-white/[0.04] p-5 backdrop-blur-sm transition-all duration-300 hover:border-white/15"
+                  >
+                    <div className="text-3xl font-black tracking-tight text-white">{card.value}</div>
+                    <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60">{card.label}</div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                ))}
+              </div>
+            ) : null}
           </motion.div>
-
         </div>
+
+        {/* Bottom Section: 2x2 Grid for all 4 dynamic comparison sliders */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          {displayItems.map((item, idx) => (
+            <motion.div 
+              key={item.brand || idx}
+              variants={itemVariants}
+              className="relative overflow-hidden rounded-[2.5rem] border border-white/12 bg-[#0a0f1d]/80 backdrop-blur-md p-3.5 shadow-[0_50px_100px_-40px_rgba(0,0,0,0.9)] transition-all duration-300 hover:border-white/20"
+            >
+              {/* Subtle ambient light for each card */}
+              <div className="absolute -inset-6 bg-blue-500/5 rounded-full blur-3xl opacity-35 pointer-events-none" />
+              
+              <div className="relative z-10">
+                <ImageComparisonSlider
+                  beforeImage={{ 
+                    src: item.oldImg, 
+                    alt: `${item.brand} old`, 
+                    'data-ai-hint': item.oldHint || '', 
+                    unoptimized: true 
+                  }}
+                  afterImage={{ 
+                    src: item.newImg, 
+                    alt: `${item.brand} new`, 
+                    'data-ai-hint': item.newHint || '', 
+                    unoptimized: true 
+                  }}
+                  lang={lang}
+                />
+                
+                <div className="flex items-center justify-between px-3.5 py-4 mt-2">
+                  <div>
+                    <p className="text-xl font-extrabold text-white tracking-tight">{item.brand}</p>
+                    {translations.caseLabel && (
+                      <p className="mt-1 text-[9px] font-black uppercase tracking-[0.2em] text-white/60">
+                        {translations.caseLabel}
+                      </p>
+                    )}
+                  </div>
+                  
+                  <div className="flex items-center gap-2 rounded-full bg-brand-lime/10 px-3.5 py-2 border border-brand-lime/20 text-brand-lime">
+                    <BadgeCheck className="h-4.5 w-4.5 shrink-0" />
+                    <span className="text-[9px] font-black uppercase tracking-wider">Premium transform</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
       </motion.div>
     </BrandSection>
   );

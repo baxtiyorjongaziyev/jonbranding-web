@@ -7,12 +7,12 @@ export const revalidate = 60;
 export async function GET() {
   try {
     const comparisons = await client.fetch(`
-      *[_type == "comparison" && defined(oldImg.asset) && defined(newImg.asset)]
+      *[_type == "comparison"]
         | order(coalesce(order, 999) asc, _createdAt asc) {
           _id,
-          "brand": coalesce(brand, "Brand case"),
-          "oldImg": oldImg.asset->url,
-          "newImg": newImg.asset->url,
+          "brand": coalesce(brand, name, title, "Loyiha"),
+          "oldImg": coalesce(oldImg.asset->url, beforeImage.asset->url),
+          "newImg": coalesce(newImg.asset->url, afterImage.asset->url),
           "oldHint": coalesce(oldHint, "Before"),
           "newHint": coalesce(newHint, "After"),
           "order": coalesce(order, 999)
