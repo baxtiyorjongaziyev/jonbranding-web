@@ -7,9 +7,6 @@ import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
-import StickyCTA from '@/components/ui/sticky-cta';
-import MobileNavBar from '@/components/layout/mobile-nav-bar';
-import TabNotification from '@/components/layout/tab-notification';
 
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -95,6 +92,12 @@ export default async function LocalizedLayout({ children, params }: Props) {
     dictionary = await getDictionary('uz');
   }
 
+  const tabNotificationMessage =
+    lang === 'ru' ? '(1) Novoe soobshchenie! | Jon Branding' :
+    lang === 'en' ? '(1) New message! | Jon Branding' :
+    lang === 'zh' ? '(1) New message! | Jon Branding' :
+    '(1) Yangi xabar! | Jon Branding';
+
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
@@ -175,14 +178,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <a href="#main-content" className="skip-link">
           {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
         </a>
-        <TabNotification 
-          message={
-            lang === 'ru' ? '(1) ÐÐ¾Ð²Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ! | Jon Branding' :
-            lang === 'en' ? '(1) New message! | Jon Branding' :
-            lang === 'zh' ? '(1) æ–°æ¶ˆæ¯ï¼ | Jon Branding' :
-            '(1) Yangi xabar! | Jon Branding'
-          } 
-        />
         <Script id="analytics-delayed-load" strategy="afterInteractive">
           {`
             (function() {
@@ -249,15 +244,19 @@ export default async function LocalizedLayout({ children, params }: Props) {
         </Script>
 
         
-        <MainLayout leadMagnetDictionary={(dictionary as any).leadMagnetPopup}>
+        <MainLayout
+          leadMagnetDictionary={(dictionary as any).leadMagnetPopup}
+          headerDictionary={dictionary.header}
+          lang={lang}
+          stickyCtaLabel={dictionary.header?.free_consultation || 'Contact us'}
+          tabNotificationMessage={tabNotificationMessage}
+        >
           <Header lang={lang} dictionary={dictionary.header} />
           
           <div id="main-content" className="flex-grow">
             {children}
           </div>
         <Footer lang={lang} dictionary={dictionary.footer} />
-          <StickyCTA ariaLabel={dictionary.header?.free_consultation || 'Contact us'} />
-          <MobileNavBar lang={lang} dictionary={dictionary.header} />
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">
           {`

@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { pageview } from '@/lib/gtag';
 import { Toaster } from '@/components/ui/toaster';
-import CookieConsentBanner from '@/components/cookie-consent-banner';
 import { trackCtaClick, trackEvent } from '@/lib/analytics';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'), {
@@ -22,6 +21,25 @@ const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'
 });
 
 const ScrollDepthTrigger = dynamic(() => import('@/components/scroll-depth-trigger'), {
+  ssr: false,
+});
+
+const CookieConsentBanner = dynamic(() => import('@/components/cookie-consent-banner'), {
+  ssr: false,
+});
+
+const StickyCTA = dynamic(() => import('@/components/ui/sticky-cta'), {
+  loading: () => null,
+  ssr: false,
+});
+
+const MobileNavBar = dynamic(() => import('@/components/layout/mobile-nav-bar'), {
+  loading: () => null,
+  ssr: false,
+});
+
+const TabNotification = dynamic(() => import('@/components/layout/tab-notification'), {
+  loading: () => null,
   ssr: false,
 });
 
@@ -54,14 +72,29 @@ function AnalyticsTracker() {
   return null;
 }
 
-export default function ClientEnhancements({ leadMagnetDictionary }: { leadMagnetDictionary?: any }) {
+type ClientEnhancementsProps = {
+  leadMagnetDictionary?: any;
+  headerDictionary?: any;
+  lang?: string;
+  stickyCtaLabel?: string;
+  tabNotificationMessage?: string;
+};
+
+export default function ClientEnhancements({
+  leadMagnetDictionary,
+  headerDictionary,
+  lang: langProp,
+  stickyCtaLabel,
+  tabNotificationMessage,
+}: ClientEnhancementsProps) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [packageSummary, setPackageSummary] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
   const [enhancementsReady, setEnhancementsReady] = useState(false);
+  const [quickActionsReady, setQuickActionsReady] = useState(false);
 
   const pathname = usePathname();
-  const lang = (pathname.split('/')[1] || 'uz') as any;
+  const lang = (langProp || pathname.split('/')[1] || 'uz') as any;
 
   const handleOpenModal = useCallback(async (detail?: { section?: string; ctaText?: string; source?: string }) => {
     if (typeof window === 'undefined') return;
@@ -145,8 +178,10 @@ export default function ClientEnhancements({ leadMagnetDictionary }: { leadMagne
   }, [handleOpenModal, reportError]);
 
   useEffect(() => {
+    const quickActions = window.setTimeout(() => setQuickActionsReady(true), 3500);
     const fallback = window.setTimeout(() => setEnhancementsReady(true), 6000);
     return () => {
+      window.clearTimeout(quickActions);
       window.clearTimeout(fallback);
     };
   }, []);
@@ -174,6 +209,9 @@ export default function ClientEnhancements({ leadMagnetDictionary }: { leadMagne
           lang={lang}
         />
       )}
+      {quickActionsReady && tabNotificationMessage && <TabNotification message={tabNotificationMessage} />}
+      {quickActionsReady && <StickyCTA ariaLabel={stickyCtaLabel || 'Contact us'} />}
+      {quickActionsReady && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
       {enhancementsReady && <CookieConsentBanner />}
       {enhancementsReady && <OishaWidget lang={lang} />}
       {enhancementsReady && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
