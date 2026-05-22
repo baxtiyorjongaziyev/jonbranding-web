@@ -9,9 +9,7 @@ import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 import StickyCTA from '@/components/ui/sticky-cta';
 import MobileNavBar from '@/components/layout/mobile-nav-bar';
-import { Plus_Jakarta_Sans } from 'next/font/google';
 import TabNotification from '@/components/layout/tab-notification';
-import { cn } from '@/lib/utils';
 
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -80,13 +78,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin', 'latin-ext'],
-  display: 'swap',
-  variable: '--font-jakarta',
-  weight: ['400', '500', '600', '700', '800']
-});
-
 type Props = {
   children: ReactNode;
   params: Promise<{ lang: string }>;
@@ -105,7 +96,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={lang} suppressHydrationWarning className={cn(plusJakartaSans.variable)}>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <link rel="manifest" href="/manifest.json" />
