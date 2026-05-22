@@ -40,7 +40,9 @@ const nextConfig = {
       },
     ];
   },
-  experimental: {},
+  experimental: {
+    optimizeCss: true,
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,

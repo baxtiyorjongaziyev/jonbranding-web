@@ -102,12 +102,9 @@ export default async function LocalizedLayout({ children, params }: Props) {
     <html lang={lang} suppressHydrationWarning>
       <head>
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
-        <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="JonBranding" />
-        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <Script
           id="json-ld-professional-service"
           type="application/ld+json"
@@ -178,7 +175,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <a href="#main-content" className="skip-link">
           {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
         </a>
-        <Script id="analytics-delayed-load" strategy="afterInteractive">
+        <Script id="analytics-delayed-load" strategy="lazyOnload">
           {`
             (function() {
               const loadAnalytics = () => {
