@@ -7,9 +7,7 @@ import dynamic from 'next/dynamic';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { pageview } from '@/lib/gtag';
 import { Toaster } from '@/components/ui/toaster';
-import { calculatePackagePrice, generateSummary } from '@/lib/pricing';
 import CookieConsentBanner from '@/components/cookie-consent-banner';
-import { initAmplitude } from '@/lib/amplitude';
 import { trackCtaClick, trackEvent } from '@/lib/analytics';
 
 const ContactModal = dynamic(() => import('@/components/contact-modal'), {
@@ -32,10 +30,6 @@ const ScrollDepthTrigger = dynamic(() => import('@/components/scroll-depth-trigg
 function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  
-  useEffect(() => {
-    initAmplitude();
-  }, []);
 
   useEffect(() => {
     const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
@@ -66,7 +60,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
     const pathname = usePathname();
     const lang = (pathname.split('/')[1] || 'uz') as any;
 
-    const handleOpenModal = useCallback((detail?: { section?: string; ctaText?: string; source?: string }) => {
+    const handleOpenModal = useCallback(async (detail?: { section?: string; ctaText?: string; source?: string }) => {
         if (typeof window === 'undefined') return;
 
         let summary = '';
@@ -78,6 +72,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
             const promoCode = (localStorage.getItem('promoCode') || '').replace(/"/g, '');
             
             if (selectionsJSON) {
+                const { calculatePackagePrice, generateSummary } = await import('@/lib/pricing');
                 const selectedServices = JSON.parse(selectionsJSON);
                 const selections = { selectedServices, discountType, promoCode };
                 const priceDetails = calculatePackagePrice(selections, lang);
@@ -136,7 +131,9 @@ const MainLayout: FC<MainLayoutProps> = ({ children, leadMagnetDictionary }) => 
 
     useEffect(() => {
         // Use a wrapper to ensure we always have the current handleOpenModal reference
-        const listener = (event: Event) => handleOpenModal((event as CustomEvent).detail || {});
+        const listener = (event: Event) => {
+            void handleOpenModal((event as CustomEvent).detail || {});
+        };
         window.addEventListener('openContactModal', listener);
         window.addEventListener('error', reportError);
 

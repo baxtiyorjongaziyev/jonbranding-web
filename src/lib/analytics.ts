@@ -1,7 +1,5 @@
 'use client';
 
-import { trackEvent as trackAmplitudeEvent } from './amplitude';
-
 const ADS_CONVERSION_ID = process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-17674872079';
 export const DEFAULT_GA_ID = 'G-BTSGJQLMMV';
 
@@ -34,6 +32,16 @@ export const getGaClientId = () => {
   if (parts.length < 4) return undefined;
 
   return `${parts[parts.length - 2]}.${parts[parts.length - 1]}`;
+};
+
+const trackAmplitudeEvent = (eventName: string, eventProperties?: Record<string, any>) => {
+  if (typeof window === 'undefined' || !window.amplitude) return;
+
+  try {
+    window.amplitude.track(eventName, eventProperties);
+  } catch (e) {
+    console.warn('Amplitude track event failed', e);
+  }
 };
 
 export const trackEvent = ({ action, category, label, value, ...rest }: AnalyticsEvent) => {
