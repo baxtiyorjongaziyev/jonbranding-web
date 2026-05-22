@@ -63,9 +63,8 @@ const Founder: FC<{ lang: string; dictionary: any }> = ({ dictionary }) => {
 
       <motion.div
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-60px' }}
+        initial="visible"
+        animate="visible"
         className="container relative z-10 mx-auto px-4"
       >
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-20">

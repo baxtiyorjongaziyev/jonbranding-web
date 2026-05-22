@@ -90,9 +90,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
       
       <motion.div 
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
+        initial="visible"
+        animate="visible"
         className="container relative z-10 mx-auto px-4"
       >
         {/* Top Section: Headline, Subtitle, CTA and Stats */}
