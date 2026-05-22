@@ -166,10 +166,17 @@ export default function ClientEnhancements({
 
   useEffect(() => {
     const listener = (event: Event) => {
+      delete (window as any).__pendingContactModal;
       void handleOpenModal((event as CustomEvent).detail || {});
     };
     window.addEventListener('openContactModal', listener);
     window.addEventListener('error', reportError);
+
+    const pendingContactModal = (window as any).__pendingContactModal;
+    if (pendingContactModal) {
+      delete (window as any).__pendingContactModal;
+      void handleOpenModal(pendingContactModal);
+    }
 
     return () => {
       window.removeEventListener('openContactModal', listener);

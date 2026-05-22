@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react';
-import ClientEnhancements from '@/components/layout/client-enhancements';
+import ClientEnhancementsLoader from '@/components/layout/client-enhancements-loader';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -20,7 +20,7 @@ const MainLayout: FC<MainLayoutProps> = ({
 }) => (
   <div className="flex min-h-screen flex-col bg-secondary/50" suppressHydrationWarning>
     {children}
-    <ClientEnhancements
+    <ClientEnhancementsLoader
       leadMagnetDictionary={leadMagnetDictionary}
       headerDictionary={headerDictionary}
       lang={lang}

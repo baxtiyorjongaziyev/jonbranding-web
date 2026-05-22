@@ -24,12 +24,15 @@ const ContactTriggerButton: FC<ContactTriggerButtonProps> = ({
   variant,
 }) => {
   const handleClick = () => {
+    const detail = {
+      section,
+      ctaText,
+      source,
+    };
+
+    (window as any).__pendingContactModal = detail;
     window.dispatchEvent(new CustomEvent('openContactModal', {
-      detail: {
-        section,
-        ctaText,
-        source,
-      },
+      detail,
     }));
   };
 
