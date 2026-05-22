@@ -3,6 +3,7 @@
 import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
 import { Menu, Phone, Send } from 'lucide-react';
@@ -146,46 +147,27 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const lastScrollY = React.useRef(0);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // ⚡ Bolt Performance Optimization:
-  useEffect(() => {
-    let ticking = false;
+  const { scrollY } = useScroll();
 
-    const updateHeaderState = () => {
-      const currentScrollY = window.scrollY;
-      const previousScrollY = lastScrollY.current;
-      const scrollDiff = Math.abs(currentScrollY - previousScrollY);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 20);
 
-      setScrolled(currentScrollY > 20);
+    const previous = scrollY.getPrevious() || 0;
+    const diff = Math.abs(latest - previous);
 
-      if (isMobileMenuOpen || currentScrollY <= 80) {
-        setVisible(true);
-      } else if (currentScrollY > previousScrollY && scrollDiff > 10) {
-        setVisible(false);
-      } else if (currentScrollY < previousScrollY && scrollDiff > 5) {
-        setVisible(true);
-      }
-
-      lastScrollY.current = currentScrollY;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateHeaderState);
-        ticking = true;
-      }
-    };
-
-    updateHeaderState();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [isMobileMenuOpen]);
+    if (isMobileMenuOpen || latest <= 80) {
+      setVisible(true);
+    } else if (latest > previous && diff > 10) {
+      setVisible(false);
+    } else if (latest < previous && diff > 5) {
+      setVisible(true);
+    }
+  });
 
   const handleContactClick = () => {
     setMobileMenuOpen(false);

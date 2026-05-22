@@ -4,6 +4,7 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -86,27 +87,11 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang, isInverted = 
   };
   
   const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
 
-  // ⚡ Bolt Performance Optimization:
-  useEffect(() => {
-    let ticking = false;
-
-    const update = () => {
-      setScrolled(window.scrollY > 20);
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 20);
+  });
 
   const CurrentLangIcon = localeIcons[lang];
   const useInvertedTone = isInverted && !scrolled;

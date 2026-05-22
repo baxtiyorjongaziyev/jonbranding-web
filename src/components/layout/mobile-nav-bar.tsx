@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { MessageSquare, Phone, Send, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
@@ -21,40 +22,21 @@ interface MobileNavBarProps {
 
 export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   const [isVisible, setIsVisible] = useState(true);
-  const lastScrollY = useRef(0);
+  const { scrollY } = useScroll();
 
-  // ⚡ High-Performance passive scroll visibility triggers
-  useEffect(() => {
-    let ticking = false;
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() || 0;
+    const diff = latest - previous;
+    const isAtBottom = window.innerHeight + latest >= document.documentElement.scrollHeight - 60;
 
-    const update = () => {
-      const latest = window.scrollY;
-      const diff = latest - lastScrollY.current;
-      const isAtBottom = window.innerHeight + latest >= document.documentElement.scrollHeight - 60;
-
-      if (isAtBottom || latest < 80) {
-        setIsVisible(true);
-      } else if (diff > 8) {
-        setIsVisible(false);
-      } else if (diff < -8) {
-        setIsVisible(true);
-      }
-
-      lastScrollY.current = latest;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    if (isAtBottom || latest < 80) {
+      setIsVisible(true);
+    } else if (diff > 8) {
+      setIsVisible(false);
+    } else if (diff < -8) {
+      setIsVisible(true);
+    }
+  });
 
   const labels = {
     call: dictionary?.call || dictionary?.contact_by_phone || (lang === 'en' ? 'Call' : "Qo'ng'iroq"),
