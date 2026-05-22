@@ -80,7 +80,6 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
         <div className="absolute inset-0 bg-[linear-gradient(120deg,#06080d_0%,#11151f_58%,#132016_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:86px_86px] opacity-28" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,8,13,0.96)_0%,rgba(6,8,13,0.75)_48%,rgba(6,8,13,0.28)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-brand-paper via-brand-paper/[0.35] to-transparent pointer-events-none" />
       </div>
 
       <div 
