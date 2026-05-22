@@ -23,7 +23,7 @@ const DeferredSection: FC<{ fallback: ReactNode; children: ReactNode }> = ({ fal
           observer.disconnect();
         }
       },
-      { rootMargin: '900px 0px' },
+      { rootMargin: '250px 0px' },
     );
 
     observer.observe(element);
