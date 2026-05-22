@@ -5,6 +5,8 @@ import { Metadata } from 'next';
 import { client } from '@/sanity/lib/client';
 import { withFallbackComparisons } from '@/lib/comparison-fallbacks';
 
+export const revalidate = 60;
+
 type Props = {
   params: Promise<{ lang: string }>;
 };
@@ -47,12 +49,12 @@ export default async function Page(props: Props) {
   let comparisons: any[] = [];
   try {
     comparisons = await client.fetch(`
-      *[_type == "comparison" && defined(oldImg.asset) && defined(newImg.asset)]
+      *[_type == "comparison"]
         | order(coalesce(order, 999) asc, _createdAt asc) {
           _id,
           "brand": coalesce(brand, name, title, "Loyiha"),
-          "oldImg": oldImg.asset->url,
-          "newImg": newImg.asset->url,
+          "oldImg": coalesce(oldImg.asset->url, beforeImage.asset->url),
+          "newImg": coalesce(newImg.asset->url, afterImage.asset->url),
           "oldHint": coalesce(oldHint, "Before"),
           "newHint": coalesce(newHint, "After"),
           "order": coalesce(order, 999)
