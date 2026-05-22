@@ -1,4 +1,4 @@
-import { db } from './firebase-admin';
+import { getDb } from './firebase-admin';
 
 const TOKENS_DOC = 'amocrm/tokens';
 const REFRESH_BUFFER_MS = 5 * 60 * 1000; // 5 minutes before expiry
@@ -13,13 +13,13 @@ interface TokenData {
 let refreshInFlight: Promise<TokenData> | null = null;
 
 async function readTokensFromFirestore(): Promise<TokenData | null> {
-  const snap = await db.doc(TOKENS_DOC).get();
+  const snap = await getDb().doc(TOKENS_DOC).get();
   if (!snap.exists) return null;
   return snap.data() as TokenData;
 }
 
 async function writeTokensToFirestore(data: TokenData): Promise<void> {
-  await db.doc(TOKENS_DOC).set(data);
+  await getDb().doc(TOKENS_DOC).set(data);
 }
 
 async function exchangeRefreshToken(refreshToken: string): Promise<TokenData> {
