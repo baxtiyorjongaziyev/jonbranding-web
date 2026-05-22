@@ -116,7 +116,7 @@ const ExpandingButton = ({
       onClick={onClick}
       style={{ width: isHovered ? 160 : 44 }}
       className={cn(
-        "relative flex h-11 items-center justify-start overflow-hidden rounded-full bg-white/40 text-foreground backdrop-blur-md transition-[background-color,box-shadow,width] duration-300 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 group",
+        "relative flex h-11 items-center justify-start overflow-hidden rounded-full bg-white/40 text-foreground backdrop-blur-md transition-[background-color,box-shadow,width] duration-300 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 group shrink-0",
         // Invisible hit area extension to make it easier to "catch" the button
         "before:absolute before:-inset-2 before:content-['']"
       )}
@@ -291,13 +291,13 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         {mounted && (
           <div className={cn(
             "hidden lg:flex items-center transition-all duration-500 flex-1",
-            scrolled ? "lg:ml-12 lg:mr-8" : "lg:ml-8"
+            scrolled ? "lg:ml-4 lg:mr-2 xl:ml-12 xl:mr-8" : "lg:ml-8"
           )}>
             <div className="flex items-center justify-between w-full">
-              <NavigationMenu aria-label="Asosiy navigatsiya">
+              <NavigationMenu aria-label="Asosiy navigatsiya" className="shrink-0">
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className={cn("bg-transparent", useDarkHeaderText ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
+                    <NavigationMenuTrigger className={cn("bg-transparent px-2.5 xl:px-4 text-xs xl:text-sm font-semibold", useDarkHeaderText ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
                       {dictionary.services}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -316,7 +316,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   </NavigationMenuItem>
                   {navItems.map((item) => (
                     <NavigationMenuItem key={item.label}>
-                      <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent text-base font-semibold", useDarkHeaderText ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
+                      <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent px-2.5 xl:px-4 text-xs xl:text-sm font-semibold whitespace-nowrap", useDarkHeaderText ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
                         <Link href={item.href}>
                           {item.label}
                         </Link>
@@ -326,9 +326,9 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 </NavigationMenuList>
               </NavigationMenu>
 
-              <div className="flex items-center space-x-2 h-11">
+              <div className="flex items-center space-x-1.5 xl:space-x-2 h-11 shrink-0">
                 <LanguageSwitcher lang={lang as any} isInverted={!useDarkHeaderText} />
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
                   <ExpandingButton 
                     href="tel:+998336450097"
                     ariaLabel={dictionary.contact_by_phone}
@@ -345,10 +345,10 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                     onClick={() => trackContactClick('telegram', 'header')}
                   />
                 </div>
-                <div className="rounded-[8px] bg-transparent">
+                <div className="rounded-[8px] bg-transparent shrink-0">
                   <Button 
                     onClick={handleContactClick} 
-                    className="h-11 rounded-[8px] bg-brand-ink px-6 font-bold text-white shadow-[0_18px_42px_-24px_rgba(15,23,42,0.85)] hover:bg-brand-blue"
+                    className="h-11 rounded-[8px] bg-brand-ink px-3 xl:px-6 text-xs xl:text-sm font-bold text-white shadow-[0_18px_42px_-24px_rgba(15,23,42,0.85)] hover:bg-brand-blue shrink-0 whitespace-nowrap"
                     aria-label={dictionary.free_consultation}
                   >
                     {dictionary.free_consultation}
