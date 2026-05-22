@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Instagram, Linkedin, Send } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import { FC } from 'react';
@@ -41,6 +42,10 @@ type Dictionary = {
 }
 
 const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
+  const pathname = usePathname();
+  const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
+  if (pathnameWithoutLocale === '/pro-preview') return null;
+
   const currentYear = new Date().getFullYear();
   if (!dictionary) return null;
   const copy = {

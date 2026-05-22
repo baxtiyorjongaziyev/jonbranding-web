@@ -200,6 +200,8 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   if (!dictionary) return null;
 
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
+  if (pathnameWithoutLocale === '/pro-preview') return null;
+
   const lightSurfaceRoutes = [
     '/blog',
     '/checklist',
