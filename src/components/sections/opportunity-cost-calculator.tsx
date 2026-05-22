@@ -23,6 +23,8 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
   const [aov, setAov] = useState(500_000);
 
   const t = dictionary;
+  const trafficUnit = t?.labels?.traffic_unit ?? 'ta odam';
+  const conversionUnit = t?.labels?.conversion_unit ?? '(ishonch)';
 
   const currentRevenue = useMemo(() => {
     return (traffic * (conversion / 100) * aov);
@@ -70,7 +72,7 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                         {t.labels.traffic}
                       </label>
                       <span className="text-2xl font-black text-brand-blue">
-                        {traffic.toLocaleString()} ta odam
+                        {traffic.toLocaleString()} {trafficUnit}
                       </span>
                     </div>
                     <Slider
@@ -88,7 +90,7 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                         {t.labels.conversion}
                       </label>
                       <span className="text-2xl font-black text-brand-blue">
-                        {conversion}% (ishonch)
+                        {conversion}% {conversionUnit}
                       </span>
                     </div>
                     <Slider
