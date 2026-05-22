@@ -3,21 +3,9 @@
 import { useState, useEffect } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getDictionary } from '@/lib/dictionaries';
 
-export default function StickyCTA({ lang }: { lang?: string }) {
+export default function StickyCTA({ ariaLabel = 'Contact us' }: { ariaLabel?: string }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [ariaLabel, setAriaLabel] = useState("Contact us");
-
-  useEffect(() => {
-    if (lang) {
-      getDictionary(lang as any).then(dict => {
-        if (dict?.common?.contactUs) {
-          setAriaLabel(dict.common.contactUs);
-        }
-      });
-    }
-  }, [lang]);
 
   useEffect(() => {
     let ticking = false;

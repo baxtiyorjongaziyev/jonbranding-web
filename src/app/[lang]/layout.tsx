@@ -265,7 +265,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
             {children}
           </div>
         <Footer lang={lang} dictionary={dictionary.footer} />
-          <StickyCTA lang={lang} />
+          <StickyCTA ariaLabel={dictionary.header?.free_consultation || 'Contact us'} />
           <MobileNavBar lang={lang} dictionary={dictionary.header} />
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">

@@ -184,7 +184,6 @@ function CaseWall({ images }: { images: GalleryImage[] }) {
         <PortfolioTile
           key={`${image?.src || 'fallback'}-${index}`}
           image={image}
-          priority={index === 0}
           className={index > 0 ? 'hidden sm:block' : ''}
         />
       ))}
@@ -192,7 +191,7 @@ function CaseWall({ images }: { images: GalleryImage[] }) {
   );
 }
 
-function PortfolioTile({ image, priority = false, className = '' }: { image?: GalleryImage; priority?: boolean; className?: string }) {
+function PortfolioTile({ image, className = '' }: { image?: GalleryImage; className?: string }) {
   if (!image) {
     return (
       <div className={`flex h-full min-h-[180px] items-center justify-center rounded-[8px] bg-white/5 p-8 text-center text-sm font-medium text-white/40 ${className}`}>
@@ -207,7 +206,6 @@ function PortfolioTile({ image, priority = false, className = '' }: { image?: Ga
         src={image.src}
         alt={image.alt || 'Jon.Branding portfolio'}
         fill
-        priority={priority}
         sizes="(max-width: 768px) 92vw, 48vw"
         className="object-contain p-2.5"
       />
