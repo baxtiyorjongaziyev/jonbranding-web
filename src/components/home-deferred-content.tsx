@@ -2,40 +2,8 @@
 
 import dynamic from 'next/dynamic';
 import DeferredSection from '@/components/deferred-section';
-
-const TrustedBySkeleton = () => (
-  <div className="bg-[#fbfaf7] py-16 sm:py-20 border-y border-brand-line/80 animate-pulse">
-    <div className="container mx-auto px-4 grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-      <div className="space-y-4">
-        <div className="h-6 w-24 bg-gray-200/80 rounded-full" />
-        <div className="h-10 w-3/4 bg-gray-200/80 rounded-lg" />
-        <div className="h-5 w-1/2 bg-gray-200/80 rounded-lg" />
-      </div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="h-24 bg-white border border-brand-line rounded-[8px]" />
-        ))}
-      </div>
-    </div>
-  </div>
-);
-
-const AuditOfferSkeleton = () => (
-  <div className="bg-[#f7f4ee] py-16 sm:py-24 animate-pulse min-h-[550px]">
-    <div className="container mx-auto px-4 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-      <div className="space-y-4">
-        <div className="h-6 w-24 bg-gray-200/80 rounded-full" />
-        <div className="h-12 w-3/4 bg-gray-200/80 rounded-lg" />
-        <div className="h-20 bg-gray-200/80 rounded-lg" />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="h-44 bg-white border border-brand-line rounded-[8px]" />
-        ))}
-      </div>
-    </div>
-  </div>
-);
+import TrustedBy from '@/components/sections/trusted-by';
+import AuditOffer from '@/components/sections/audit-offer';
 
 const BeforeAfterSkeleton = () => (
   <div className="bg-[#070b12] py-20 sm:py-28 animate-pulse relative overflow-hidden min-h-[600px]">
@@ -105,14 +73,6 @@ const CtaBlockSkeleton = () => (
   </div>
 );
 
-const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'), {
-  ssr: false,
-  loading: () => <TrustedBySkeleton />,
-});
-const AuditOffer = dynamic(() => import('@/components/sections/audit-offer'), {
-  ssr: false,
-  loading: () => <AuditOfferSkeleton />,
-});
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'), {
   ssr: false,
   loading: () => <BeforeAfterSkeleton />,
@@ -160,13 +120,8 @@ export default function HomeDeferredContent({
 }) {
   return (
     <>
-      <DeferredSection fallback={<TrustedBySkeleton />}>
-        <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
-      </DeferredSection>
-
-      <DeferredSection fallback={<AuditOfferSkeleton />}>
-        <AuditOffer lang={lang} dictionary={dictionary.auditOffer} />
-      </DeferredSection>
+      <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
+      <AuditOffer lang={lang} dictionary={dictionary.auditOffer} />
 
       <DeferredSection fallback={<BeforeAfterSkeleton />}>
         <BeforeAfter lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />

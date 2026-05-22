@@ -4,6 +4,7 @@ import { BarChart3, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
 import ContactTriggerButton from '@/components/contact-trigger-button';
 
 type HeroDictionary = {
+  agencyTagline?: string;
   preHeadline?: string;
   title?: string;
   descriptionPlain?: string;
@@ -26,6 +27,7 @@ interface HeroProps {
 
 function getHeroCopy(dictionary: HeroDictionary) {
   return {
+    agencyTagline: dictionary.agencyTagline || '',
     preHeadline: dictionary.preHeadline || '',
     title: dictionary.title || '',
     description: dictionary.descriptionPlain || dictionary.description || '',
@@ -75,7 +77,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
   const heroCopy = getHeroCopy(dictionary);
 
   return (
-    <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#06080d] text-white">
+    <section className="relative isolate min-h-[760px] overflow-hidden bg-[#06080d] text-white sm:min-h-[780px] lg:min-h-[820px]">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(120deg,#06080d_0%,#11151f_58%,#132016_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:86px_86px] opacity-28" />
@@ -83,7 +85,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
       </div>
 
       <div 
-        className="container mx-auto flex min-h-[100svh] max-w-[1400px] items-center px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-16 lg:pt-28"
+        className="container mx-auto flex min-h-[760px] max-w-[1400px] items-center px-4 pb-16 pt-24 sm:min-h-[780px] sm:px-6 sm:pb-20 lg:min-h-[820px] lg:px-8 lg:pb-20 lg:pt-28"
       >
         <div className="grid w-full items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div className="flex flex-col justify-center text-center lg:text-left">
@@ -93,6 +95,16 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
               <Sparkles className="h-3.5 w-3.5 text-brand-lime" />
               <span className="text-[11px] font-black uppercase tracking-normal text-white/78">{heroCopy.preHeadline}</span>
             </div>
+
+            {heroCopy.agencyTagline && (
+              <div className="mb-4 flex items-center justify-center gap-2 self-center lg:self-start text-[11px] font-black uppercase tracking-widest text-brand-lime">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-lime opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-lime"></span>
+                </span>
+                {heroCopy.agencyTagline}
+              </div>
+            )}
             <h1
               className="mx-auto max-w-[292px] text-balance text-4xl font-black leading-[0.96] tracking-normal text-white drop-shadow-md sm:max-w-3xl sm:text-6xl sm:drop-shadow-none lg:mx-0 xl:text-7xl"
             >
@@ -112,13 +124,13 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
                 section="hero"
                 ctaText={heroCopy.cta}
                 size="lg"
-                className="group h-14 rounded-[8px] bg-white px-8 text-base font-black text-brand-ink shadow-[0_24px_70px_-24px_rgba(255,255,255,0.75)] transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime hover:text-brand-ink hover:shadow-[0_24px_70px_-24px_rgba(84,213,233,0.72)] active:scale-[0.98] sm:h-16"
+                className="group h-14 rounded-full bg-white px-8 text-base font-black text-brand-ink shadow-[0_24px_70px_-24px_rgba(255,255,255,0.75)] transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime hover:text-brand-ink hover:shadow-[0_24px_70px_-24px_rgba(84,213,233,0.72)] active:scale-[0.98] sm:h-16"
               >
                 {heroCopy.cta}
               </ContactTriggerButton>
               <Link
                 href="#audit-offer"
-                className="inline-flex h-14 items-center justify-center rounded-[8px] border border-white/15 bg-white/[0.03] px-6 text-base font-black text-white/85 transition-[background-color,color,border-color] duration-200 hover:bg-white/10 hover:text-white sm:h-16"
+                className="inline-flex h-14 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-6 text-base font-black text-white/85 transition-[background-color,color,border-color] duration-200 hover:bg-white/10 hover:text-white sm:h-16"
               >
                 {heroCopy.ctaSecondary}
               </Link>

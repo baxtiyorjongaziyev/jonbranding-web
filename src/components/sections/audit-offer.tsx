@@ -41,7 +41,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               {dictionary.cta && (
-                <ContactTriggerButton section="audit_offer" ctaText={dictionary.cta} size="lg" className="group h-14 min-w-[220px] rounded-[8px] bg-brand-ink px-7 text-base font-black text-white hover:bg-brand-blue">
+                <ContactTriggerButton section="audit_offer" ctaText={dictionary.cta} size="lg" className="group h-14 min-w-[220px] rounded-full bg-brand-ink px-7 text-base font-black text-white hover:bg-brand-blue">
                   {dictionary.cta}
                 </ContactTriggerButton>
               )}
