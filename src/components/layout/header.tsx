@@ -277,7 +277,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         className={cn(
           "flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500",
           scrolled 
-            ? "mx-auto max-w-[95%] rounded-[8px] border border-brand-line/70 bg-brand-paper/[0.82] px-6 py-2 shadow-[0_18px_55px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:max-w-6xl lg:px-8"
+            ? "mx-auto max-w-[95%] rounded-full border border-brand-line/70 bg-brand-paper/[0.82] px-6 py-2 shadow-[0_18px_55px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:max-w-6xl lg:px-8"
             : startsOnLightSurface
               ? "max-w-none border-b border-transparent bg-transparent px-6 lg:px-8"
               : "max-w-none border-b border-transparent bg-transparent px-6 lg:px-8"
@@ -345,10 +345,10 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                     onClick={() => trackContactClick('telegram', 'header')}
                   />
                 </div>
-                <div className="rounded-[8px] bg-transparent shrink-0">
+                <div className="rounded-full bg-transparent shrink-0">
                   <Button 
                     onClick={handleContactClick} 
-                    className="h-11 rounded-[8px] bg-brand-ink px-3 xl:px-6 text-xs xl:text-sm font-bold text-white shadow-[0_18px_42px_-24px_rgba(15,23,42,0.85)] hover:bg-brand-blue shrink-0 whitespace-nowrap"
+                    className="h-11 rounded-full bg-brand-ink px-3 xl:px-6 text-xs xl:text-sm font-bold text-white shadow-[0_18px_42px_-24px_rgba(15,23,42,0.85)] hover:bg-brand-blue shrink-0 whitespace-nowrap"
                     aria-label={dictionary.free_consultation}
                   >
                     {dictionary.free_consultation}
@@ -364,7 +364,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           {mounted && (
             <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn(useDarkHeaderText ? "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground" : "border-white/20 bg-white/10 text-white hover:bg-white/15 hover:text-white")}>
+                <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn("rounded-full", useDarkHeaderText ? "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground" : "border-white/20 bg-white/10 text-white hover:bg-white/15 hover:text-white")}>
                   <Menu className="h-5 w-5" aria-hidden="true" />
                   <span className="sr-only">{dictionary.open_menu}</span>
                 </Button>
@@ -404,7 +404,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                           </a>
                       </div>
                       <div className="pt-6">
-                          <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 py-6 text-lg" aria-label={dictionary.free_consultation}>
+                          <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 py-6 text-lg rounded-full" aria-label={dictionary.free_consultation}>
                           {dictionary.free_consultation}
                           </Button>
                       </div>
