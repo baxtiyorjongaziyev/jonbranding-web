@@ -1,16 +1,7 @@
 import type { FC } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { BarChart3, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
 import ContactTriggerButton from '@/components/contact-trigger-button';
-import { projects } from '@/lib/static-data';
-import type { GalleryImage } from '@/lib/types';
-
-const portfolioImages: GalleryImage[] = projects
-  .filter((project) => !project.hiddenInHero)
-  .flatMap((project) => project.galleryImages || [])
-  .filter((image) => !image.src.toLowerCase().endsWith('.gif'))
-  .slice(0, 10);
 
 type HeroDictionary = {
   preHeadline?: string;
@@ -152,10 +143,22 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
           <div
             className="relative hidden items-center justify-center lg:flex"
           >
-            <div className="jb-dark-panel relative w-full max-w-xl overflow-hidden p-2 backdrop-blur-xl lg:max-w-none">
+            <div className="jb-dark-panel relative w-full max-w-xl overflow-hidden p-5 backdrop-blur-xl lg:max-w-none">
               <div className="pointer-events-none absolute inset-0 rounded-[8px] ring-1 ring-inset ring-white/10" />
-              <CaseWall images={portfolioImages} />
               <AuditPanel copy={heroCopy} />
+              <div className="mt-4 grid gap-3">
+                {heroCopy.auditSignals.map((signal, index) => (
+                  <div key={signal} className="grid grid-cols-[44px_1fr] items-center gap-3 rounded-[8px] border border-white/[0.1] bg-white/[0.055] p-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-[8px] bg-brand-lime text-sm font-black text-brand-ink">
+                      0{index + 1}
+                    </div>
+                    <div>
+                      <div className="text-[11px] font-black uppercase tracking-normal text-brand-lime">Audit signal</div>
+                      <div className="mt-0.5 text-sm font-bold leading-5 text-white/82">{signal}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
               <div className="mt-3 hidden grid-cols-3 gap-3 lg:grid">
                 {heroCopy.showcaseTags.map((tag) => (
                   <div
@@ -174,44 +177,6 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
     </section>
   );
 };
-
-function CaseWall({ images }: { images: GalleryImage[] }) {
-  const visibleImages = images.slice(0, 6);
-
-  return (
-    <div className="grid h-[300px] gap-2 overflow-hidden rounded-[8px] sm:h-[440px] sm:grid-cols-2 sm:grid-rows-3 lg:h-[470px]">
-      {visibleImages.map((image, index) => (
-        <PortfolioTile
-          key={`${image?.src || 'fallback'}-${index}`}
-          image={image}
-          className={index > 0 ? 'hidden sm:block' : ''}
-        />
-      ))}
-    </div>
-  );
-}
-
-function PortfolioTile({ image, className = '' }: { image?: GalleryImage; className?: string }) {
-  if (!image) {
-    return (
-      <div className={`flex h-full min-h-[180px] items-center justify-center rounded-[8px] bg-white/5 p-8 text-center text-sm font-medium text-white/40 ${className}`}>
-        Portfolio
-      </div>
-    );
-  }
-
-  return (
-    <div className={`relative h-full min-h-[180px] overflow-hidden rounded-[8px] bg-white ring-1 ring-white/10 ${className}`}>
-      <Image
-        src={image.src}
-        alt={image.alt || 'Jon.Branding portfolio'}
-        fill
-        sizes="(max-width: 768px) 92vw, 48vw"
-        className="object-contain p-2.5"
-      />
-    </div>
-  );
-}
 
 function AuditPanel({ copy }: { copy: ReturnType<typeof getHeroCopy> }) {
   return (
@@ -233,14 +198,6 @@ function AuditPanel({ copy }: { copy: ReturnType<typeof getHeroCopy> }) {
         </div>
       </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        {copy.auditSignals.map((signal) => (
-          <div key={signal} className="flex items-start gap-2 text-xs font-bold leading-5 text-white/80">
-            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-lime" />
-            <span>{signal}</span>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
