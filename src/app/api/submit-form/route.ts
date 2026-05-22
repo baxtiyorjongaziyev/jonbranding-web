@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createHash } from 'crypto';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
+import { getValidAccessToken, forceRefresh } from '@/lib/amocrm-token';
 
 const formSchema = z.object({
     fullName: z.string().min(2, 'Name is too short').max(100),
@@ -192,7 +193,12 @@ async function sendToN8n(data: any) {
 }
 
 async function sendToAmoCrm(data: any) {
-  const accessToken = parseAmoCrmAccessToken(process.env.AMOCRM_ACCESS_TOKEN);
+  let accessToken: string;
+  try {
+    accessToken = await getValidAccessToken();
+  } catch {
+    accessToken = parseAmoCrmAccessToken(process.env.AMOCRM_ACCESS_TOKEN);
+  }
   const baseUrl = getAmoCrmBaseUrl(accessToken);
 
   if (!accessToken || !baseUrl) {
@@ -227,28 +233,47 @@ async function sendToAmoCrm(data: any) {
     });
   }
 
-  const createResponse = await fetch(`${baseUrl}/api/v4/leads/complex`, {
+  const leadBody = JSON.stringify([{
+    name: `Jon.Branding site: ${fullName}`,
+    price,
+    tags_to_add: [
+      { name: 'jonbranding.uz' },
+      { name: 'website' },
+      { name: String(source) },
+    ],
+    _embedded: {
+      contacts: [{
+        first_name: fullName,
+        ...(contactFields.length ? { custom_fields_values: contactFields } : {}),
+      }],
+    },
+  }]);
+
+  let createResponse = await fetch(`${baseUrl}/api/v4/leads/complex`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify([{
-      name: `Jon.Branding site: ${fullName}`,
-      price,
-      tags_to_add: [
-        { name: 'jonbranding.uz' },
-        { name: 'website' },
-        { name: String(source) },
-      ],
-      _embedded: {
-        contacts: [{
-          first_name: fullName,
-          ...(contactFields.length ? { custom_fields_values: contactFields } : {}),
-        }],
-      },
-    }]),
+    body: leadBody,
   });
+
+  // Retry once with a fresh token if the current one is stale
+  if (createResponse.status === 401) {
+    try {
+      const refreshed = await forceRefresh();
+      accessToken = refreshed.access_token;
+      createResponse = await fetch(`${baseUrl}/api/v4/leads/complex`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: leadBody,
+      });
+    } catch { /* fall through */ }
+  }
+
   const createResult: any = await createResponse.json().catch(() => null);
 
   if (!createResponse.ok) {
