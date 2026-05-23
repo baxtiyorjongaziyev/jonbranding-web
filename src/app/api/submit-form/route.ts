@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { createHash } from 'crypto';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { getValidAccessToken, forceRefresh } from '@/lib/amocrm-token';
+import { getDb } from '@/lib/firebase-admin';
 
 const formSchema = z.object({
     fullName: z.string().min(2, 'Name is too short').max(100),
@@ -25,6 +26,7 @@ const formSchema = z.object({
 
 const UZS_TO_USD_RATE = 1 / 12700;
 const DEFAULT_GA_MEASUREMENT_ID = 'G-BTSGJQLMMV';
+const AMOCRM_FAILED_LEADS_COLLECTION = 'amocrm_failed_leads';
 
 function escapeTelegramHtml(value: unknown) {
   return String(value ?? '')
@@ -45,6 +47,18 @@ function sha256(value: unknown) {
   const normalized = String(value || '').trim().toLowerCase();
   if (!normalized) return '';
   return createHash('sha256').update(normalized).digest('hex');
+}
+
+function stripUndefined(value: any): any {
+  if (Array.isArray(value)) return value.map(stripUndefined);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value)
+        .filter(([, item]) => item !== undefined)
+        .map(([key, item]) => [key, stripUndefined(item)]),
+    );
+  }
+  return value;
 }
 
 function parseAmoCrmAccessToken(rawToken: string | undefined) {
@@ -199,6 +213,40 @@ async function sendToN8n(data: any) {
   }
 }
 
+function describeAmoCrmError(error: any) {
+  const status = Number(error?.status || 0);
+  const message = String(error?.message || error || 'Unknown error');
+
+  if (status === 402 || /payment required/i.test(message)) {
+    return "Payment Required: AmoCRM akkaunti yoki API access to'lanmagan";
+  }
+
+  return message;
+}
+
+async function queueFailedAmoCrmLead(data: any, error: any) {
+  try {
+    const eventId = String(data.eventId || `lead_${Date.now()}`);
+    await getDb().collection(AMOCRM_FAILED_LEADS_COLLECTION).doc(eventId).set(stripUndefined({
+      lead: data,
+      status: 'pending',
+      integration: 'amocrm',
+      error: {
+        message: String(error?.message || error || 'Unknown error'),
+        status: Number(error?.status || 0) || null,
+        detail: error?.detail || null,
+        type: error?.type || null,
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }), { merge: true });
+    return true;
+  } catch (queueError) {
+    console.error('AmoCRM failed lead queue error:', queueError);
+    return false;
+  }
+}
+
 async function sendToAmoCrm(data: any) {
   let accessToken: string;
   try {
@@ -291,7 +339,11 @@ async function sendToAmoCrm(data: any) {
 
   if (!createResponse.ok) {
     const message = createResult?.title || createResult?.detail || createResult?.message || `AmoCRM HTTP ${createResponse.status}`;
-    throw new Error(message);
+    const error: any = new Error(message);
+    error.status = createResponse.status;
+    error.detail = createResult?.detail;
+    error.type = createResult?.type;
+    throw error;
   }
 
   const leadId = Array.isArray(createResult)
@@ -390,19 +442,22 @@ export async function POST(request: Request) {
 
     await sendTelegramMessage(botToken, telegramPayload);
 
-    const amoCrmResult = await sendToAmoCrm(leadData).catch(async (error) => {
+    const amoCrmResult: any = await sendToAmoCrm(leadData).catch(async (error) => {
       console.error('AmoCRM lead error:', error);
+      const queued = await queueFailedAmoCrmLead(leadData, error);
+      const reason = describeAmoCrmError(error);
       await sendTelegramMessage(botToken, {
         ...telegramPayload,
         text: [
           '<b>AmoCRMga lead tushmadi</b>',
           '',
-          `Sabab: ${escapeTelegramHtml(error?.message || error)}`,
+          `Sabab: ${escapeTelegramHtml(reason)}`,
+          `Backup: ${queued ? 'Firestore queue saqlandi' : 'Firestore queue xato'}`,
           `Mijoz: ${escapeTelegramHtml(fullName)}`,
           `Telefon: ${escapeTelegramHtml(phone)}`,
         ].join('\n'),
       }).catch((telegramError) => console.error('AmoCRM failure Telegram alert error:', telegramError));
-      return { ok: false, error: error?.message || String(error) };
+      return { ok: false, queued, error: error?.message || String(error) };
     });
 
     sendMetaConversionEvent(leadData).catch(() => {});
@@ -415,6 +470,7 @@ export async function POST(request: Request) {
       integrations: {
         telegram: true,
         amoCrm: amoCrmResult.ok === true,
+        amoCrmQueued: amoCrmResult.queued === true,
         analytics: true,
       },
     });
