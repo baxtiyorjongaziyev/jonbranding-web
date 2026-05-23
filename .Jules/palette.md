@@ -19,3 +19,7 @@
 ## 2026-05-22 - Using existing design tokens for focus states
 **Learning:** When adding focus styles to interactive elements for keyboard accessibility, it's crucial to use the established Tailwind design tokens in the codebase (e.g., `focus-visible:ring-primary`, `focus-visible:ring-offset-background`) rather than generic colors like `blue-500` or `black`. This ensures consistency with the site's overall theme, including light/dark modes.
 **Action:** Always check existing components for focus state patterns before applying new ones, and strictly adhere to using semantic design tokens from the Tailwind configuration.
+
+## 2026-05-23 - Enhancing LeadMagnetPopup accessibility
+**Learning:** The Lead Magnet popup contained form inputs that weren't properly linked to their visual labels using `id` and `htmlFor` attributes. Additionally, custom role selection buttons lacked `focus-visible` styling for keyboard users, and the close button lacked an `aria-label`. This made the popup difficult to navigate via keyboard and screen reader.
+**Action:** Ensure all form `<label>` elements use `htmlFor` matching the `<Input>` `id`. Always include `focus-visible` styles with appropriate theme tokens (e.g., `focus-visible:ring-primary focus-visible:ring-offset-background`) on interactive `<button>` elements that might not be inheriting them from standard UI components.

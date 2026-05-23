@@ -125,6 +125,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
             size="icon"
             onClick={handleClose}
             className="absolute top-3 right-3 text-white/40 hover:text-white hover:bg-white/10 z-50 rounded-full"
+            aria-label="Close popup"
           >
             <X className="w-5 h-5" />
           </Button>
@@ -184,7 +185,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                       <button
                         key={key}
                         onClick={() => handleRoleSelect(key)}
-                        className="w-full h-14 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-600 text-gray-300 hover:text-white font-semibold transition-all duration-300 text-left flex items-center justify-between group"
+                        className="w-full h-14 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-600 text-gray-300 hover:text-white font-semibold transition-all duration-300 text-left flex items-center justify-between group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                       >
                         <span>{label}</span>
                         <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
@@ -210,10 +211,11 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                   
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-1.5">
-                      <label className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.businessLabel}</label>
+                      <label htmlFor="businessType" className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.businessLabel}</label>
                       <div className="relative">
                         <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                         <Input 
+                          id="businessType"
                           placeholder={dictionary.registration.businessPlaceholder}
                           className="h-12 pl-12 bg-white/5 border-white/10 rounded-xl focus:ring-blue-600 focus:border-blue-600"
                           value={formData.businessType}
@@ -222,10 +224,11 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                       </div>
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.nameLabel}</label>
+                      <label htmlFor="name" className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.nameLabel}</label>
                       <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                         <Input 
+                          id="name"
                           placeholder={dictionary.registration.namePlaceholder}
                           className="h-12 pl-12 bg-white/5 border-white/10 rounded-xl focus:ring-blue-600 focus:border-blue-600"
                           value={formData.name}
@@ -234,10 +237,11 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                       </div>
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.phoneLabel}</label>
+                      <label htmlFor="phone" className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.phoneLabel}</label>
                       <div className="relative">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                         <Input 
+                          id="phone"
                           placeholder={dictionary.registration.phonePlaceholder}
                           className="h-12 pl-12 bg-white/5 border-white/10 rounded-xl focus:ring-blue-600 focus:border-blue-600"
                           value={formData.phone}
