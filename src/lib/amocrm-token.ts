@@ -26,7 +26,7 @@ async function exchangeRefreshToken(refreshToken: string): Promise<TokenData> {
   const subdomain = (process.env.AMOCRM_SUBDOMAIN || process.env.AMOCRM_DOMAIN || '').replace(/^https?:\/\//, '').replace(/\..+$/, '');
   const clientId = process.env.AMOCRM_CLIENT_ID;
   const clientSecret = process.env.AMOCRM_CLIENT_SECRET;
-  const redirectUri = process.env.AMOCRM_REDIRECT_URI;
+  const redirectUri = process.env.AMOCRM_REDIRECT_URI || process.env.AMOCRM_REDIRECT_URL;
 
   if (!subdomain || !clientId || !clientSecret || !redirectUri) {
     throw new Error('AmoCRM OAuth credentials not configured');

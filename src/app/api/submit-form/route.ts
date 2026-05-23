@@ -76,10 +76,7 @@ function getAmoCrmApiDomain(accessToken: string) {
   }
 }
 
-function getAmoCrmBaseUrl(accessToken: string) {
-  const tokenApiDomain = getAmoCrmApiDomain(accessToken);
-  if (tokenApiDomain) return `https://${tokenApiDomain}`;
-
+function getConfiguredAmoCrmHost() {
   const rawDomain = cleanSecret(process.env.AMOCRM_DOMAIN || process.env.AMOCRM_SUBDOMAIN);
   if (!rawDomain) return null;
 
@@ -89,7 +86,17 @@ function getAmoCrmBaseUrl(accessToken: string) {
     .trim();
 
   if (!cleanDomain) return null;
-  return `https://${cleanDomain.includes('.') ? cleanDomain : `${cleanDomain}.amocrm.ru`}`;
+  return cleanDomain.includes('.') ? cleanDomain : `${cleanDomain}.amocrm.ru`;
+}
+
+function getAmoCrmBaseUrl(accessToken: string) {
+  const configuredHost = getConfiguredAmoCrmHost();
+  if (configuredHost) return `https://${configuredHost}`;
+
+  const tokenApiDomain = getAmoCrmApiDomain(accessToken);
+  if (tokenApiDomain) return `https://${tokenApiDomain}`;
+
+  return null;
 }
 
 async function sendTelegramMessage(botToken: string, payload: Record<string, unknown>) {
@@ -201,7 +208,7 @@ async function sendToAmoCrm(data: any) {
     accessToken = parseAmoCrmAccessToken(process.env.AMOCRM_ACCESS_TOKEN);
   }
 
-  const baseUrl = getAmoCrmBaseUrl(accessToken);
+  let baseUrl = getAmoCrmBaseUrl(accessToken);
 
   if (!accessToken || !baseUrl) {
     return { ok: false, skipped: true, error: 'AmoCRM configuration is missing' };
@@ -266,8 +273,8 @@ async function sendToAmoCrm(data: any) {
       console.log('AmoCRM returned 401. Triggering force token refresh...');
       const refreshed = await forceRefresh();
       accessToken = refreshed.access_token;
-      const newBaseUrl = getAmoCrmBaseUrl(accessToken) || baseUrl;
-      createResponse = await fetch(`${newBaseUrl}/api/v4/leads/complex`, {
+      baseUrl = getAmoCrmBaseUrl(accessToken) || baseUrl;
+      createResponse = await fetch(`${baseUrl}/api/v4/leads/complex`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${accessToken}`,
