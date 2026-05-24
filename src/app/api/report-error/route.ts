@@ -1,6 +1,14 @@
 
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
+
+const errorReportSchema = z.object({
+    message: z.string().max(1000),
+    stack: z.string().max(2000).optional(),
+    pathname: z.string().max(500).optional(),
+    userInfo: z.string().max(500).optional(),
+});
 
 export async function POST(request: Request) {
     const ip = getClientIp(request);
@@ -18,11 +26,17 @@ export async function POST(request: Request) {
 
     try {
         const body = await request.json();
-        const { message, stack, pathname, userInfo } = body;
 
-        if (!message) {
-            return NextResponse.json({ ok: false, error: "Xatolik matni mavjud emas" }, { status: 400 });
+        // Validate input using Zod
+        const validatedData = errorReportSchema.safeParse(body);
+        if (!validatedData.success) {
+            return NextResponse.json(
+                { ok: false, error: "Xatolik matni mavjud emas yoxud juda uzun" },
+                { status: 400 }
+            );
         }
+
+        const { message, stack, pathname, userInfo } = validatedData.data;
 
         const telegramMessage = `
 🆘 Jon.Branding Saytida Xatolik!
