@@ -235,7 +235,7 @@ async function downloadAudio(url) {
   const buffer = Buffer.from(await response.arrayBuffer());
   if (!buffer.length) throw new Error('Audio download returned empty file');
   if (buffer.length > MAX_INLINE_AUDIO_BYTES) {
-    throw new Error(`Audio file too large for inline Gemini request: ${buffer.length} bytes`);
+    throw new Error(`Audio file too large for this audit script: ${buffer.length} bytes`);
   }
   return { buffer, contentType };
 }
@@ -524,6 +524,7 @@ function googleBatchTranscriptFromOperation(operation, gcsUri) {
 async function transcribeWithGoogleBatch(buffer, contentType) {
   const uploaded = await uploadGoogleSttAudio(buffer, contentType);
   try {
+    console.log(`  Google STT batch: ${uploaded.gcsUri}`);
     const operation = await googleSpeechPost(`${googleRecognizer()}:batchRecognize`, {
       config: googleRecognitionConfig(),
       configMask: '*',
@@ -531,6 +532,7 @@ async function transcribeWithGoogleBatch(buffer, contentType) {
       recognitionOutputConfig: { inlineResponseConfig: {} },
     });
     if (!operation?.name) throw new Error('Google STT batch did not return operation name');
+    console.log(`  Google STT operation: ${operation.name}`);
     const completed = await waitGoogleOperation(operation.name);
     return googleBatchTranscriptFromOperation(completed, uploaded.gcsUri);
   } finally {
