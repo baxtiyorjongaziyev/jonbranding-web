@@ -545,23 +545,6 @@ async function transcribeWithGoogle(buffer, contentType, call) {
 
   return transcribeWithGoogleBatch(buffer, contentType);
 }
-    body: JSON.stringify({
-      config: googleRecognitionConfig(),
-      configMask: '*',
-      content: buffer.toString('base64'),
-    }),
-  });
-
-  const data = await response.json().catch(() => null);
-  if (!response.ok) {
-    const message = data?.error?.message || JSON.stringify(data);
-    throw new Error(`Google STT ${response.status}: ${message}`);
-  }
-
-  const transcript = googleTranscriptFromResults(data);
-  if (!transcript.text) throw new Error('Google STT returned empty transcript');
-  return transcript;
-}
 
 async function analyzeAudio(call, lead) {
   const { buffer, contentType } = await downloadAudio(call.link);
@@ -577,7 +560,7 @@ async function analyzeAudio(call, lead) {
   }
 
   if (STT_PROVIDER === 'google') {
-    const transcript = await transcribeWithGoogle(buffer, call);
+    const transcript = await transcribeWithGoogle(buffer, contentType, call);
     const analysis = await analyzeTranscriptWithOpenRouter(transcript.text, call, lead);
     return {
       ...analysis,
