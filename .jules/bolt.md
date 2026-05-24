@@ -7,3 +7,7 @@
 ## 2024-05-21 - Derived State with useMemo
 **Learning:** Found an instance in `src/components/sections/testimonials.tsx` where derived state (filtering and sorting testimonials) was managed using `useEffect` and multiple `useState` calls. This causes unnecessary secondary re-renders (mount -> render empty -> useEffect -> update state -> re-render with items).
 **Action:** Replaced the `useEffect` and `useState` pattern with a single `useMemo` block that derives the required values directly from props. This prevents the flash of empty content and eliminates the extra render cycle. Always look for opportunities to derive state synchronously with `useMemo` instead of async with `useEffect`!
+
+## 2024-05-24 - Pausing background intervals with useInView
+**Learning:** Discovered that global `setInterval` for UI updates (like fake online users counters) runs continuously, causing unnecessary React re-renders even when the component is not visible on screen, draining CPU and battery.
+**Action:** Use Framer Motion's `useInView` to pause/resume intervals based on component visibility. This ensures we only pay the cost of rendering when the user is actually looking at it.

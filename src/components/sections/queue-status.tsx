@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, type FC } from 'react';
+import { useState, useEffect, useRef, type FC } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { User, ArrowRight, Sparkles, UserCheck, Users } from 'lucide-react';
@@ -12,7 +12,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { useParams } from 'next/navigation';
 
@@ -47,6 +47,10 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
 
   const [onlineUsers, setOnlineUsers] = useState(0);
 
+  // ⚡ Bolt Optimization: Use a ref and useInView to only run the interval when visible
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "0px" });
+
   useEffect(() => {
     getDictionary(lang).then(dict => setTranslations(dict.queueStatus));
   }, [lang]);
@@ -54,6 +58,12 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
   useEffect(() => {
     // Set initial random number between 12 and 25
     setOnlineUsers(Math.floor(Math.random() * (25 - 12 + 1)) + 12);
+  }, []);
+
+  useEffect(() => {
+    // ⚡ Bolt Optimization: Only start the interval if the component is actually visible
+    // This prevents unnecessary React re-renders in the background, saving CPU and battery.
+    if (!isInView) return;
 
     const interval = setInterval(() => {
       setOnlineUsers(prev => {
@@ -65,18 +75,17 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
     }, 2500); // Update every 2.5 seconds
 
     return () => clearInterval(interval);
-  }, []);
-
-  if (!translations) {
-    return null; // Or a loading skeleton
-  }
+  }, [isInView]);
 
   const slots = Array.from({ length: totalSlots });
   const remainingSlots = totalSlots - currentProjects;
-  const nextAvailable = translations.timeframes[nextAvailableKey] || nextAvailableKey;
+  const nextAvailable = translations?.timeframes[nextAvailableKey] || nextAvailableKey;
 
   return (
-    <section className="py-16 sm:py-24 bg-white" suppressHydrationWarning>
+    <section ref={sectionRef} className="py-16 sm:py-24 bg-white" suppressHydrationWarning>
+      {!translations ? (
+         <div className="container mx-auto px-4"><div className="h-[500px] w-full max-w-4xl mx-auto animate-pulse bg-slate-100 rounded-3xl" /></div>
+      ) : (
       <div className="container mx-auto px-4">
         <Card className="relative overflow-hidden max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl p-6 sm:p-10">
             <div className="absolute inset-0 z-0 opacity-40">
@@ -192,6 +201,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
           </div>
         </Card>
       </div>
+      )}
     </section>
   );
 };
