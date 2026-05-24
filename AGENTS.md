@@ -5,7 +5,7 @@
 **jonbranding.uz** — Markaziy Osiyo brend-agentligi uchun premium "Sales Machine" veb-sayt.
 
 - **Deploy**: Vercel — `git push origin main` qilganda avtomatik (yoki Vercel CLI)
-- **Stack**: Next.js 14 (App Router), TypeScript, Tailwind CSS, Sanity CMS, Vercel
+- **Stack**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS, Sanity CMS, Vercel
 - **GitHub**: `baxtiyorjongaziyev/jonbranding-web`
 
 ## Buyruqlar
@@ -19,7 +19,8 @@ git push origin main  # Deploy (Vercel Integration orqali)
 ## Stack
 
 ```
-Framework:  Next.js 14 (App Router)
+Framework:  Next.js 16 (App Router)
+Runtime:    React 19
 Styling:    Tailwind CSS + ShadCN UI
 CMS:        Sanity (project: h6ymmj0v, dataset: production)
 Deploy:     Vercel (Git Integration)
