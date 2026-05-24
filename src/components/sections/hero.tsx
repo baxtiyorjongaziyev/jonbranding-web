@@ -1,4 +1,6 @@
-import type { FC } from 'react';
+'use client';
+
+import { type FC, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { BarChart3, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
 import ContactTriggerButton from '@/components/contact-trigger-button';
@@ -72,20 +74,34 @@ function renderHeadline(headline: string, className?: string) {
 }
 
 const Hero: FC<HeroProps> = ({ dictionary }) => {
+  const spotlightRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    if (!spotlightRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    spotlightRef.current.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(132,213,180,0.07), transparent 70%)`;
+  }, []);
+
   if (!dictionary) return null;
 
   const heroCopy = getHeroCopy(dictionary);
 
   return (
-    <section className="relative isolate min-h-[760px] overflow-hidden bg-[#06080d] text-white sm:min-h-[780px] lg:min-h-[820px]">
+    <section
+      className="relative isolate min-h-[760px] overflow-hidden bg-[#06080d] text-white sm:min-h-[780px] lg:min-h-[820px]"
+      onMouseMove={handleMouseMove}
+    >
+      <div ref={spotlightRef} className="pointer-events-none absolute inset-0 z-0 transition-[background] duration-300" />
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(120deg,#06080d_0%,#11151f_58%,#132016_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:86px_86px] opacity-28" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,8,13,0.96)_0%,rgba(6,8,13,0.75)_48%,rgba(6,8,13,0.28)_100%)]" />
       </div>
 
-      <div 
-        className="container mx-auto flex min-h-[760px] max-w-[1400px] items-center px-4 pb-16 pt-24 sm:min-h-[780px] sm:px-6 sm:pb-20 lg:min-h-[820px] lg:px-8 lg:pb-20 lg:pt-28"
+      <div
+        className="container relative z-10 mx-auto flex min-h-[760px] max-w-[1400px] items-center px-4 pb-16 pt-24 sm:min-h-[780px] sm:px-6 sm:pb-20 lg:min-h-[820px] lg:px-8 lg:pb-20 lg:pt-28"
       >
         <div className="grid w-full items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div className="flex flex-col justify-center text-center lg:text-left">

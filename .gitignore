@@ -33,6 +33,7 @@ yarn-error.log*
 *.log
 *.txt
 !README.md
+!public/llms.txt
 !package.json
 !components.json
 !tsconfig.json
@@ -80,4 +81,3 @@ autodeploy.pid
 
 # Codex config
 .codex/
-
