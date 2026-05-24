@@ -17,6 +17,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, expires_at: result.expires_at });
   } catch (error: any) {
     console.error('AmoCRM refresh endpoint error:', error);
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: false, error: 'Internal server error' }, { status: 500 });
   }
 }
