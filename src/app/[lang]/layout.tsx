@@ -171,6 +171,103 @@ export default async function LocalizedLayout({ children, params }: Props) {
             })
           }}
         />
+        <Script
+          id="json-ld-faq"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Yaxshi brending va shunchaki chiroyli logotipning farqi nimada?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Shunchaki logotip — bu vizual belgi. Jon.Branding'da biz brendingni biznesingiz poydevori deb bilamiz. Biz strategiya, bozordagi o'rin va mijozlar ruhiyatini hisobga olgan holda brend yaratamiz."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Loyiha qancha muddatda tayyor bo'ladi?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O'rtacha 4 haftadan 8 haftagacha. Bu vaqt chuqur tahlil, noyob konsepsiya yaratish va har bir detalni ideal holatga keltirish uchun zarur."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Nega xizmatlaringiz narxi bozor o'rtachasidan yuqori?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Biz xarajatni emas, investitsiyani sotamiz. Biz taqdim etadigan yechimlar savdoni oshirishga va marketing xarajatlarini kamaytirishga qaratilgan."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "To'lov shartlari qanday?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Standart shartlar: 50% oldindan to'lov va 50% loyiha topshirilgandan so'ng. Agar 100% oldindan to'lov amalga oshirilsa, maxsus chegirmalar taqdim etiladi."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Siz yaratgan brendni keyinchalik o'zgartirishim mumkinmi?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ha, brend tirik organizmga o'xshaydi va vaqt o'tishi bilan rivojlanishi kerak. Biz keyingi bosqichlarda ham hamkorlik qilishga tayyormiz."
+                  }
+                }
+              ]
+            })
+          }}
+        />
+        <Script
+          id="json-ld-reviews"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Jon.Branding",
+              "url": "https://www.jonbranding.uz",
+              "telephone": "+998336450097",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Tashkent",
+                "addressCountry": "UZ"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5",
+                "reviewCount": "150",
+                "bestRating": "5",
+                "worstRating": "1"
+              },
+              "review": [
+                {
+                  "@type": "Review",
+                  "author": { "@type": "Person", "name": "Sevara Xolmanova" },
+                  "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+                  "reviewBody": "Juda samarali va natijasi siz kutgandanda A'lo bo'larkan. Brendlashni ham stikerlash va patentlashni ham berganman. Halol ishlaydilar, juda xursand bo'ldim."
+                },
+                {
+                  "@type": "Review",
+                  "author": { "@type": "Person", "name": "Javohir Haqberdiyev" },
+                  "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+                  "reviewBody": "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Ishonch va muddatdan oldin topshirilgani juda zo'r bo'ldi."
+                },
+                {
+                  "@type": "Review",
+                  "author": { "@type": "Person", "name": "Nodirbek" },
+                  "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+                  "reviewBody": "3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka."
+                }
+              ]
+            })
+          }}
+        />
       </head>
       <body className="font-body bg-brand-paper antialiased" suppressHydrationWarning>
         <a href="#main-content" className="skip-link">

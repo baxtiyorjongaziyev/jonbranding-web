@@ -44,10 +44,11 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
 
   return (
     <BrandSection id="process" tone="light" className="bg-[#fbfaf7] py-20 sm:py-28 overflow-hidden" suppressHydrationWarning>
-      <motion.div 
+      <motion.div
         variants={containerVariants}
-        initial="visible"
-        animate="visible"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
         className="container mx-auto px-4"
       >
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
