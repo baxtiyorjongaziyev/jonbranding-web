@@ -8,12 +8,11 @@ export default function TelegramBanner({ lang }: { lang: string }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Only show the banner occasionally to avoid annoyance
     const hasSeenBanner = sessionStorage.getItem('telegram_banner_seen');
     if (!hasSeenBanner) {
       const timer = setTimeout(() => {
         setIsVisible(true);
-      }, 15000); // show after 15 seconds
+      }, 15000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -27,9 +26,9 @@ export default function TelegramBanner({ lang }: { lang: string }) {
     ? 'Присоединяйтесь к нашему Telegram-каналу для получения экспертных советов по брендингу!'
     : (lang === 'en'
       ? 'Join our Telegram channel for expert branding insights!'
-      : 'Brending boʻyicha foydali maslahatlar uchun Telegram kanalimizga qoʻshiling!');
+      : 'Brending boʿyicha foydali maslahatlar uchun Telegram kanalimizga qoʿshiling!');
 
-  const buttonText = lang === 'ru' ? 'Присоединиться' : (lang === 'en' ? 'Join Now' : 'Qoʻshilish');
+  const buttonText = lang === 'ru' ? 'Присоединиться' : (lang === 'en' ? 'Join Now' : 'Qoʿshilish');
 
   return (
     <AnimatePresence>
@@ -57,13 +56,13 @@ export default function TelegramBanner({ lang }: { lang: string }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={closeBanner}
-                className="whitespace-nowrap px-4 py-1.5 bg-white text-blue-700 text-xs font-bold rounded-full hover:bg-blue-50 transition-colors"
+                className="whitespace-nowrap px-4 py-1.5 bg-white text-blue-700 text-xs font-bold rounded-full hover:bg-blue-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
               >
                 {buttonText}
               </a>
               <button
                 onClick={closeBanner}
-                className="p-1 hover:bg-white/20 rounded-full transition-colors"
+                className="p-1 hover:bg-white/20 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
                 aria-label="Close banner"
               >
                 <X className="w-4 h-4" />
