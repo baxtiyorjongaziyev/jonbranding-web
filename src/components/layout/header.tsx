@@ -218,7 +218,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const useDarkHeaderText = scrolled || startsOnLightSurface;
 
   const navItems = [
-    { href: getLocalizedPath('/#portfolio'), label: dictionary.portfolio },
+    { href: getLocalizedPath('/portfolio'), label: dictionary.portfolio },
     { href: getLocalizedPath('/#founder'), label: dictionary.founder },
     { href: getLocalizedPath('/#process'), label: dictionary.process },
     { href: getLocalizedPath('/blog'), label: dictionary.blog },
