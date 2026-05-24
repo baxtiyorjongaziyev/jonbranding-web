@@ -39,8 +39,22 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
     }
 
     const timer = setTimeout(() => setIsVisible(true), 15000);
-    return () => clearTimeout(timer);
-  }, [isDismissed]);
+
+    // Precise S-Tier Exit Intent detection (trigger when cursor goes above y <= 10)
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 10) {
+        setIsVisible(true);
+        trackEvent({ action: 'lead_magnet_exit_intent', category: 'Funnel', label: 'triggered' });
+      }
+    };
+
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [isDismissed, isVisible]);
 
   const { scrollYProgress } = useScroll();
   useMotionValueEvent(scrollYProgress, "change", (latest) => {

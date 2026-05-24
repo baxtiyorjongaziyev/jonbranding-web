@@ -10,6 +10,7 @@ const AMO_HOST = 'jonbrandingagency.amocrm.ru';
 const MARKER = 'AI_CALL_ANALYSIS';
 const CATEGORY_TAGS = new Set(['Mijoz', 'Jamoa', 'Shaxsiy', 'Oila', 'Boshqa']);
 const MAX_INLINE_AUDIO_BYTES = 18 * 1024 * 1024;
+const BUSINESS_SIGNAL_RE = /(logotip|logo|brend|branding|brending|firma uslubi|naming|dizayn|maket|sayt|veb|web|landing|reklama|marketing|smm|audit|konsultatsiya|narx|to'?lov|paket|xizmat|loyiha|zakaz|buyurtma|portfolio|vizitka|kartochka|upakovka|qadoq)/i;
 
 const args = new Set(process.argv.slice(2));
 const getArg = (name, fallback) => {
@@ -36,6 +37,7 @@ const GOOGLE_STT_GCS_PREFIX = getArg('--google-stt-gcs-prefix', 'amocrm-call-aud
 const GOOGLE_STT_BATCH_TIMEOUT_MS = Number(getArg('--google-stt-batch-timeout-ms', '600000'));
 const GOOGLE_STT_BATCH_POLL_MS = Number(getArg('--google-stt-batch-poll-ms', '5000'));
 const GOOGLE_STT_FORCE_BATCH = args.has('--google-stt-force-batch');
+const ANALYSIS_TRANSCRIPT_MAX_CHARS = Number(getArg('--analysis-transcript-max-chars', '12000'));
 
 function shellQuote(value) {
   return `"${String(value).replace(/"/g, '\\"')}"`;
@@ -243,7 +245,46 @@ async function downloadAudio(url) {
 function parseGeminiJson(text) {
   const trimmed = String(text || '').trim();
   const cleaned = trimmed.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```$/i, '').trim();
-  return JSON.parse(cleaned);
+  try {
+    return JSON.parse(cleaned);
+  } catch {
+    const start = cleaned.indexOf('{');
+    const end = cleaned.lastIndexOf('}');
+    if (start >= 0 && end > start) {
+      return JSON.parse(cleaned.slice(start, end + 1));
+    }
+    throw new Error(`Model returned invalid JSON: ${cleaned.slice(0, 240)}`);
+  }
+}
+
+function transcriptForAnalysis(transcript) {
+  const text = String(transcript || '').replace(/\s+/g, ' ').trim();
+  if (text.length <= ANALYSIS_TRANSCRIPT_MAX_CHARS) return text;
+
+  const half = Math.floor(ANALYSIS_TRANSCRIPT_MAX_CHARS / 2);
+  return [
+    text.slice(0, half),
+    `[${text.length - ANALYSIS_TRANSCRIPT_MAX_CHARS} ta belgi qisqartirildi: uzun transcript]`,
+    text.slice(-half),
+  ].join('\n');
+}
+
+function normalizeAnalysisCategory(analysis, transcript = '') {
+  const category = CATEGORY_TAGS.has(analysis.category) ? analysis.category : 'Boshqa';
+  const transcriptSignal = [
+    transcript,
+    analysis.transcript_uz,
+  ].filter(Boolean).join(' ');
+
+  if (category !== 'Jamoa' && BUSINESS_SIGNAL_RE.test(transcriptSignal)) {
+    return {
+      ...analysis,
+      category: 'Mijoz',
+      category_reason: 'Business/design signal detected',
+    };
+  }
+
+  return { ...analysis, category };
 }
 
 function audioExtension(contentType) {
@@ -297,6 +338,7 @@ async function analyzeTranscriptWithOpenRouter(transcript, call, lead) {
   const baseUrl = (process.env.ANTHROPIC_BASE_URL || 'https://openrouter.ai/api').replace(/\/$/, '');
   if (!apiKey) throw new Error('OpenRouter key is missing in ANTHROPIC_API_KEY');
 
+  const transcriptSample = transcriptForAnalysis(transcript);
   const prompt = `
 Quyidagi telefon suhbat transkriptini tahlil qil. Transkript avtomatik STTdan olingan, xatolar bo'lishi mumkin.
 
@@ -307,6 +349,10 @@ Kategoriyalar:
 - Shaxsiy: do'st, tanish, shaxsiy suhbat
 - Boshqa: noaniq yoki yuqoridagilarga tushmaydi
 
+Qattiq qoida:
+- Agar suhbatda logo/logotip, brend/brending/branding, dizayn, sayt/web, reklama, marketing, audit, konsultatsiya, narx, to'lov, paket, xizmat, loyiha, buyurtma yoki portfolio haqida gap bo'lsa, kategoriya "Mijoz" bo'lsin.
+- "Boshqa" faqat biznes, jamoa, oila yoki shaxsiy kontekst aniq topilmasa ishlatilsin.
+
 Lead konteksti:
 ID: ${lead.id}
 Nomi: ${lead.name}
@@ -314,7 +360,7 @@ Telefon: ${call.phone}
 Davomiylik: ${call.duration} sekund
 
 Transkript:
-${transcript}
+${transcriptSample}
 
 Faqat valid JSON qaytar:
 {
@@ -322,7 +368,7 @@ Faqat valid JSON qaytar:
   "summary_uz": "2-4 gapli o'zbekcha xulosa",
   "next_steps_uz": "aniq keyingi qadamlar yoki CRMdan ajratish tavsiyasi",
   "mood": "Positive | Neutral | Negative | N/A",
-  "transcript_uz": "transkriptni o'zbek tilida tozalangan shakli; ruscha bo'lsa tarjima qil",
+  "transcript_uz": "to'liq transcript emas: 800 belgigacha o'zbekcha tozalangan parcha yoki qisqa tarjima",
   "confidence": 0.0
 }`;
 
@@ -347,8 +393,7 @@ Faqat valid JSON qaytar:
   }
   const content = data?.choices?.[0]?.message?.content || '';
   const analysis = parseGeminiJson(content);
-  const category = CATEGORY_TAGS.has(analysis.category) ? analysis.category : 'Boshqa';
-  return { ...analysis, category };
+  return normalizeAnalysisCategory(analysis, transcript);
 }
 
 async function transcribeWithOpenRouter(buffer, contentType) {
@@ -601,6 +646,10 @@ Vazifa:
 4) Keyingi qadamlarni yoz. Agar biznesga aloqasi bo'lmasa, "CRMdan ajratish / arxivlash" kabi tavsiya ber.
 5) Kayfiyatni belgila.
 
+Qattiq qoida:
+- Agar suhbatda logo/logotip, brend/brending/branding, dizayn, sayt/web, reklama, marketing, audit, konsultatsiya, narx, to'lov, paket, xizmat, loyiha, buyurtma yoki portfolio haqida gap bo'lsa, kategoriya "Mijoz" bo'lsin.
+- "Boshqa" faqat biznes, jamoa, oila yoki shaxsiy kontekst aniq topilmasa ishlatilsin.
+
 Lead konteksti:
 ID: ${lead.id}
 Nomi: ${lead.name}
@@ -613,7 +662,7 @@ Faqat valid JSON qaytar:
   "summary_uz": "...",
   "next_steps_uz": "...",
   "mood": "Positive | Neutral | Negative | N/A",
-  "transcript_uz": "...",
+  "transcript_uz": "to'liq transcript emas: 800 belgigacha o'zbekcha tozalangan parcha yoki qisqa tarjima",
   "confidence": 0.0
 }`;
 
@@ -649,14 +698,19 @@ Faqat valid JSON qaytar:
   }
   const text = data?.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('').trim();
   const analysis = parseGeminiJson(text);
-  const category = CATEGORY_TAGS.has(analysis.category) ? analysis.category : 'Boshqa';
-  return { ...analysis, category };
+  return normalizeAnalysisCategory(analysis, analysis.transcript_uz || '');
 }
 
 function formatNote({ call, lead, analysis }) {
   const date = call.createdAt ? new Date(call.createdAt * 1000).toISOString().slice(0, 19).replace('T', ' ') : 'N/A';
+  const rawTranscript = String(analysis.raw_transcript || '').trim();
+  const cleanedTranscript = String(analysis.transcript_uz || '').trim();
+  const transcriptText = rawTranscript || cleanedTranscript;
+  const cleanedExcerpt = cleanedTranscript && rawTranscript && cleanedTranscript !== rawTranscript
+    ? `\n\nTozalangan UZ parcha:\n${cleanedTranscript.slice(0, 1200)}`
+    : '';
   const transcript = INCLUDE_TRANSCRIPT
-    ? `\n\nTranskript (UZ):\n${String(analysis.transcript_uz || '').slice(0, 4500)}`
+    ? `\n\nTranskript (Google STT):\n${transcriptText.slice(0, 4500)}${cleanedExcerpt}`
     : '';
 
   return [
