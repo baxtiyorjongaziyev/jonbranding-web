@@ -22,7 +22,7 @@ export async function analyzeCallAudio(
 
   const base64Audio = audioBuffer.toString('base64');
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
   const prompt = `Siz Jon Branding premium brend-agentligining aqlli yordamchisisiz.
 Ushbu audio yozuvni diqqat bilan eshitib chiqib, FAQAT quyidagi JSON formatida javob bering (boshqa hech narsa yozmang):
