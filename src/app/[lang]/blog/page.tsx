@@ -7,6 +7,7 @@ import { ArrowRight } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { uz, ru, enUS } from 'date-fns/locale';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { getLocalizedPath } from '@/lib/i18n/locale';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -59,7 +60,7 @@ const BlogPage = async (props: Props) => {
             {sortedPosts.map((post, index) => {
               if (!isSafePathSegment(post.slug)) return null;
 
-              const postHref = `/${safeLang}/blog/${post.slug}`;
+              const postHref = getLocalizedPath(safeLang as Locale, `/blog/${post.slug}`);
 
               return (
                 <Link key={post.slug} href={postHref} className="block group">

@@ -15,6 +15,7 @@ $script:lastEventAt = Get-Date
 $script:watcher = $null
 $script:timer = $null
 $script:subscriptions = @()
+$script:changedFiles = New-Object 'System.Collections.Generic.HashSet[string]'
 
 $logDir = Join-Path $ProjectRoot "tmp"
 $logPath = Join-Path $logDir "autodeploy.log"
@@ -33,7 +34,9 @@ function Write-Log {
 
 function Should-WatchPath {
     param([string]$ChangedPath)
+
     if ([string]::IsNullOrWhiteSpace($ChangedPath)) { return $false }
+
     $fullPath = [System.IO.Path]::GetFullPath($ChangedPath)
     $normalized = $fullPath.Replace("/", "\")
 
@@ -49,7 +52,41 @@ function Should-WatchPath {
     foreach ($part in $ignoredParts) {
         if ($normalized -like "*$part*") { return $false }
     }
+
     return $true
+}
+
+function Get-RelativePath {
+    param([string]$ChangedPath)
+
+    if ([string]::IsNullOrWhiteSpace($ChangedPath)) { return $null }
+
+    try {
+        $normalizedRoot = [System.IO.Path]::GetFullPath($ProjectRoot)
+        $normalizedPath = [System.IO.Path]::GetFullPath($ChangedPath)
+        $rootUri = New-Object System.Uri(($normalizedRoot.TrimEnd('\') + '\'))
+        $pathUri = New-Object System.Uri($normalizedPath)
+        $relative = $rootUri.MakeRelativeUri($pathUri).ToString()
+        return [System.Uri]::UnescapeDataString($relative).Replace('/', '\')
+    } catch {
+        return $null
+    }
+}
+
+function Add-ChangedFile {
+    param([string]$ChangedPath)
+
+    $relativePath = Get-RelativePath -ChangedPath $ChangedPath
+    if ([string]::IsNullOrWhiteSpace($relativePath)) { return }
+    [void]$script:changedFiles.Add($relativePath)
+}
+
+function Get-QueuedFiles {
+    return @($script:changedFiles.ToArray() | Sort-Object)
+}
+
+function Clear-QueuedFiles {
+    $script:changedFiles.Clear()
 }
 
 function Invoke-GitSync {
@@ -60,45 +97,81 @@ function Invoke-GitSync {
 
     $script:isDeploying = $true
     try {
-        Write-Log "🚀 Web Sync started."
+        $queuedFiles = Get-QueuedFiles
+        if (-not $queuedFiles -or $queuedFiles.Count -eq 0) {
+            Write-Log "No queued files. Skipping."
+            return
+        }
+
+        Write-Log "Web sync started."
+        Write-Log ("Queued files: " + ($queuedFiles -join ", "))
         Push-Location $ProjectRoot
 
-        $status = & git status --porcelain
-        if ([string]::IsNullOrWhiteSpace($status)) {
-            Write-Log "No changes. Skipping."
+        Write-Log "Running production build check..."
+        & npm run build
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "Build failed. Push cancelled."
+            return
+        }
+
+        Write-Log "Staging changed files..."
+        & git add -A -- @queuedFiles
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "Git add failed. Push cancelled."
+            return
+        }
+
+        $stagedStatus = & git diff --cached --name-only
+        if ([string]::IsNullOrWhiteSpace(($stagedStatus -join ""))) {
+            Write-Log "No staged changes after filtering. Skipping."
+            Clear-QueuedFiles
             return
         }
 
         Write-Log "Committing web updates..."
-        & git add .
-        & git commit -m "🚀 web-auto-deploy: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
-        
-        Write-Log "Pushing to GitHub..."
+        & git commit -m "web-auto-deploy: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "Git commit failed. Push cancelled."
+            return
+        }
+
+        Write-Log "Rebasing on origin/main..."
         & git pull --rebase origin main
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "Git pull --rebase failed."
+            return
+        }
+
+        Write-Log "Pushing to GitHub..."
         & git push origin main
-        
         if ($LASTEXITCODE -eq 0) {
-            Write-Log "✅ Web Sync successful!"
+            Write-Log "Web sync successful."
+            Clear-QueuedFiles
         } else {
-            Write-Log "⚠️ Web Push failed (Exit Code: $LASTEXITCODE)."
+            Write-Log "Web push failed (Exit Code: $LASTEXITCODE)."
         }
     } catch {
-        Write-Log "🚨 Web Sync crashed: $($_.Exception.Message)"
+        Write-Log "Web sync crashed: $($_.Exception.Message)"
     } finally {
-        Pop-Location
+        if ((Get-Location).Path -eq $ProjectRoot) {
+            Pop-Location
+        }
         $script:isDeploying = $false
     }
 }
 
 function Queue-Sync {
     param([string]$ChangedPath, [string]$ChangeType)
+
     if (-not (Should-WatchPath -ChangedPath $ChangedPath)) { return }
+
     $script:lastEventAt = Get-Date
     $script:pendingChange = $true
+    Add-ChangedFile -ChangedPath $ChangedPath
     Write-Log "Change detected: $ChangedPath ($ChangeType)"
 }
 
-Write-Log "Web Auto-deploy watcher starting for $ProjectRoot"
+Write-Log "Web auto-deploy watcher starting for $ProjectRoot"
 
 $script:watcher = New-Object System.IO.FileSystemWatcher
 $script:watcher.Path = $ProjectRoot
@@ -123,7 +196,11 @@ $script:subscriptions += Register-ObjectEvent -InputObject $script:timer -EventN
 }
 $script:timer.Start()
 
-try { while ($true) { Start-Sleep -Seconds 60 } } finally {
+try {
+    while ($true) {
+        Start-Sleep -Seconds 60
+    }
+} finally {
     Write-Log "Stopping watcher..."
     $script:timer.Stop()
     $script:watcher.EnableRaisingEvents = $false

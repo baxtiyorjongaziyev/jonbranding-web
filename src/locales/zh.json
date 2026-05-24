@@ -285,6 +285,18 @@
         "riskCopy": "留下您的电话并不意味着签署合同。我们会先指出问题和机会。",
         "footerCopyright": "Jon.Branding 品牌代理机构"
     },
+    "oishaWidget": {
+        "title": "Oisha Intelligence",
+        "subtitle": "智能业务助理",
+        "placeholder": "写一条信息...",
+        "error": "连接错误。",
+        "welcome": "您好！我是 Oisha — Jon Branding 的智能助理。今天我能为您做些什么？",
+        "ack": "您的消息已发送给我们的策略师。他们将很快在这里回复您。",
+        "thinking": "Oisha 正在思考...",
+        "openButtonAriaLabel": "打开 Oisha 聊天",
+        "closeButtonAriaLabel": "关闭 Oisha 聊天",
+        "sendButtonAriaLabel": "发送消息"
+    },
     "home": {
         "cta1_title": "您的品牌能否让买家信任您？让我们来检测一下。",
         "cta1_desc": "免费的品牌审计将指出是什么让您的品牌显得廉价、模糊或不可信，以及哪些应该优先修复。",
@@ -718,7 +730,8 @@
     "blog": {
         "title": "我们的博客",
         "subtitle": "来自品牌塑造、市场营销和设计世界的最新消息、技巧和分析文章。我们帮助您的业务成长。",
-        "readMore": "阅读更多"
+        "readMore": "阅读更多",
+        "viewAll": "所有文章"
     },
     "blogPost": {
         "author": "作者",

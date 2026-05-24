@@ -1,23 +1,33 @@
 'use client';
 
-import { useState, useRef, useEffect, FC, Fragment } from 'react';
-import { Button } from '@/components/ui/button';
-import { MessageSquare, Send, X, Bot, User, Loader2, Sparkles } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
+import { FC, useEffect, useRef, useState } from 'react';
+import { Bot, Loader2, Send, Sparkles, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
-import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import uz from '@/locales/uz.json';
+import ru from '@/locales/ru.json';
+import en from '@/locales/en.json';
+import zh from '@/locales/zh.json';
+import type { Locale } from '@/lib/dictionaries';
 
 interface OishaMessage {
   id: string;
   text: string;
-  role: 'user' | 'model'; // Oisha API uses 'user' and 'model'
+  role: 'user' | 'model';
   timestamp: string;
 }
 
 const OISHA_PROXY = '/api/oisha';
+const widgetTranslations = {
+  uz: uz.oishaWidget,
+  ru: ru.oishaWidget,
+  en: en.oishaWidget,
+  zh: zh.oishaWidget,
+} as const;
 
 const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,63 +38,17 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
-  const translations = {
-    uz: {
-      title: 'Oisha Intelligence',
-      subtitle: 'Avtonom Biznes-Konsyerj',
-      placeholder: 'Xabar yozing...',
-      error: 'Ulanishda xatolik yuz berdi.',
-      welcome: "Assalomu alaykum! Men Oisha — Jon Branding agentligining intellektual yordamchisiman. Sizga qanday ko'mak bera olaman?",
-      ack: "Xabaringiz strateglarga yuborildi. Ular tez orada shu yerda javob berishadi.",
-      thinking: "Oisha o'ylamoqda...",
-    },
-    ru: {
-      title: 'Oisha Intelligence',
-      subtitle: 'Автономный Бизнес-Консьерж',
-      placeholder: 'Напишите сообщение...',
-      error: 'Ошибка подключения.',
-      welcome: 'Здравствуйте! Я Оиша — интеллектуальный помощник Jon Branding. Чем я могу вам помочь?',
-      ack: "Ваше сообщение отправлено нашим стратегам. Они скоро свяжутся с вами в этом чате.",
-      thinking: "Оиша думает...",
-    },
-    en: {
-      title: 'Oisha Intelligence',
-      subtitle: 'Autonomous Business Concierge',
-      placeholder: 'Write a message...',
-      error: 'Connection error.',
-      welcome: 'Welcome! I am Oisha — the intellectual assistant for Jon Branding. How can I help you today?',
-      ack: "Your message has been sent to our strategists. They will respond here shortly.",
-      thinking: "Oisha is thinking...",
-    },
-    zh: {
-      title: 'Oisha Intelligence',
-      subtitle: '智能业务助理',
-      placeholder: '写一条信息...',
-      error: '连接错误。',
-      welcome: '您好！我是 Oisha — Jon Branding 的智能助理。今天我能为您做些什么？',
-      ack: "您的消息已发送给我们的规划师。他们将很快在这里回复您。",
-      thinking: "Oisha 正在思考...",
-    },
-  }[lang as 'uz' | 'ru' | 'en' | 'zh'] || {
-    title: 'Oisha Intelligence',
-    subtitle: 'Autonomous Assistant',
-    placeholder: 'Message...',
-    error: 'Error.',
-    welcome: 'Hello, how can I help?',
-    ack: "Message sent to strategists. They will respond shortly.",
-    thinking: "Oisha is thinking...",
-  };
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const translations = widgetTranslations[safeLang];
 
-  // Initialize User ID and Fetch History
   useEffect(() => {
     let storedId = localStorage.getItem('oisha_user_id');
     if (!storedId) {
-      storedId = 'web_' + crypto.randomUUID();
+      storedId = `web_${crypto.randomUUID()}`;
       localStorage.setItem('oisha_user_id', storedId);
     }
-    setUserId(storedId);
 
-    // Initial welcome message if no history
+    setUserId(storedId);
     setMessages((prev) =>
       prev.length > 0
         ? prev
@@ -95,11 +59,10 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
               role: 'model',
               timestamp: new Date().toISOString(),
             },
-          ]
+          ],
     );
-  }, [lang, translations.welcome]);
+  }, [translations.welcome]);
 
-  // Handle scrolling to bottom
   useEffect(() => {
     if (scrollAreaRef.current) {
       const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
@@ -121,16 +84,16 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
       const data = await res.json();
       if (data.history) {
         setMessages(
-          data.history.map((m: any, idx: number) => ({
+          data.history.map((message: any, idx: number) => ({
             id: `hist-${idx}`,
-            text: m.parts[0].text,
-            role: m.role,
-            timestamp: new Date().toISOString(), // API doesn't seem to return time in history yet
-          }))
+            text: message.parts[0].text,
+            role: message.role,
+            timestamp: new Date().toISOString(),
+          })),
         );
       }
-    } catch (e) {
-      console.error('Oisha History Error:', e);
+    } catch (error) {
+      console.error('Oisha History Error:', error);
     }
   };
 
@@ -158,29 +121,27 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
 
       if (!res.ok) throw new Error('API Error');
 
-      // Show an immediate fallback message indicating the query is received if real-time polling isn't instantaneous
       setTimeout(() => {
         setMessages((prev) => {
-          // check if there is already a response from the model since we asked
           const lastMsg = prev[prev.length - 1];
           if (lastMsg && lastMsg.role === 'user') {
             return [
               ...prev,
               {
-                id: 'system-ack-' + Date.now(),
+                id: `system-ack-${Date.now()}`,
                 text: translations.ack,
                 role: 'model',
                 timestamp: new Date().toISOString(),
               },
             ];
           }
+
           return prev;
         });
       }, 3000);
 
-      // Poll once to see if an immediate AI response came back
       setTimeout(() => fetchHistory(userId), 2000);
-    } catch (error) {
+    } catch {
       toast({
         title: translations.error,
         variant: 'destructive',
@@ -192,17 +153,16 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
 
   return (
     <>
-      {/* Floating Button */}
       <div
         className={cn(
           'fixed bottom-24 right-6 z-50 transition-all duration-500 md:bottom-6 hidden md:block',
-          isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'
+          isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100',
         )}
       >
         <button
           onClick={() => setIsOpen(true)}
           className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-all ring-4 ring-white/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-          aria-label="Open Oisha Intelligence"
+          aria-label={translations.openButtonAriaLabel}
           aria-expanded={isOpen}
           aria-controls="oisha-chat-window"
         >
@@ -210,7 +170,6 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
         </button>
       </div>
 
-      {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -236,7 +195,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-1 hover:bg-white/10 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-blue-600"
-                  aria-label="Close chat window"
+                  aria-label={translations.closeButtonAriaLabel}
                   aria-expanded={isOpen}
                   aria-controls="oisha-chat-window"
                 >
@@ -252,7 +211,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
                         key={msg.id}
                         className={cn(
                           'flex flex-col gap-1',
-                          msg.role === 'model' ? 'items-start' : 'items-end'
+                          msg.role === 'model' ? 'items-start' : 'items-end',
                         )}
                       >
                         <div
@@ -260,7 +219,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
                             'max-w-[85%] p-3 rounded-2xl text-sm shadow-sm',
                             msg.role === 'model'
                               ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-tl-none'
-                              : 'bg-blue-600 text-white rounded-tr-none'
+                              : 'bg-blue-600 text-white rounded-tr-none',
                           )}
                         >
                           {msg.text}
@@ -290,7 +249,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputValue.trim()}
                     className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1"
-                    aria-label="Send message"
+                    aria-label={translations.sendButtonAriaLabel}
                   >
                     <Send className="w-5 h-5" />
                   </button>

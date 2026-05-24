@@ -67,33 +67,34 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   };
 
   return (
-    <footer className="relative bg-black text-white pt-24 pb-0 overflow-hidden rounded-t-[2.5rem] md:rounded-t-[5rem]" suppressHydrationWarning>
-      {/* Finch-style Vivid Background Gradient - Anchored to very bottom */}
-      <div 
-        className="absolute bottom-0 left-[-20%] w-[140%] h-[35%] pointer-events-none overflow-hidden select-none"
-        style={{
-          background: 'radial-gradient(ellipse 100% 100% at 50% 100%, rgba(37, 99, 235, 0.9) 0%, rgba(139, 92, 246, 0.45) 45%, rgba(0, 0, 0, 0) 85%)',
-          filter: 'blur(100px)',
-          opacity: 0.85
-        }}
-      />
-      
-      {/* Secondary Vibrant Splash */}
-      <div 
-        className="absolute bottom-[-50px] right-[-10%] w-[60%] h-[20%] pointer-events-none overflow-hidden select-none"
-        style={{
-          background: 'radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.6) 0%, rgba(0, 0, 0, 0) 70%)',
-          filter: 'blur(80px)',
-          opacity: 0.6
-        }}
-      />
-      
-      {/* Intense Corner Splash - Brighter */}
-      <div className="absolute bottom-0 right-0 h-[30%] w-[100%] pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_80%_110%,rgba(215,31,39,0.18),transparent_75%)]" />
-      </div>
+    <footer className="relative bg-black text-white" suppressHydrationWarning>
+      <div className="relative overflow-hidden rounded-t-[4.5rem] bg-black pt-24 pb-0 md:rounded-t-[8rem]">
+        {/* Finch-style Vivid Background Gradient - Anchored to very bottom */}
+        <div 
+          className="absolute bottom-0 left-[-20%] w-[140%] h-[35%] pointer-events-none overflow-hidden select-none"
+          style={{
+            background: 'radial-gradient(ellipse 100% 100% at 50% 100%, rgba(37, 99, 235, 0.9) 0%, rgba(139, 92, 246, 0.45) 45%, rgba(0, 0, 0, 0) 85%)',
+            filter: 'blur(100px)',
+            opacity: 0.85
+          }}
+        />
+        
+        {/* Secondary Vibrant Splash */}
+        <div 
+          className="absolute bottom-[-50px] right-[-10%] w-[60%] h-[20%] pointer-events-none overflow-hidden select-none"
+          style={{
+            background: 'radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.6) 0%, rgba(0, 0, 0, 0) 70%)',
+            filter: 'blur(80px)',
+            opacity: 0.6
+          }}
+        />
+        
+        {/* Intense Corner Splash - Brighter */}
+        <div className="absolute bottom-0 right-0 h-[30%] w-[100%] pointer-events-none z-0">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_80%_110%,rgba(215,31,39,0.18),transparent_75%)]" />
+        </div>
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Section: Multi-Column Grid (Finch.design style) */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 mb-16">
           {/* Services */}
@@ -212,12 +213,13 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           </div>
         </div>
-      </div>
+        </div>
 
-      <div className="relative z-10 select-none pointer-events-none mt-20 pb-0 overflow-hidden leading-none w-full">
-        <h2 className="text-[9vw] font-semibold leading-[0.8] text-white/95 tracking-[-0.05em] text-center transition-all whitespace-nowrap mb-[-0.15em] uppercase">
-          Jon Branding Agency
-        </h2>
+        <div className="relative z-10 select-none pointer-events-none mt-20 pb-0 overflow-hidden leading-none w-full">
+          <h2 className="text-[9vw] font-semibold leading-[0.8] text-white/95 tracking-[-0.05em] text-center transition-all whitespace-nowrap mb-[-0.15em] uppercase">
+            Jon Branding Agency
+          </h2>
+        </div>
       </div>
     </footer>
   );

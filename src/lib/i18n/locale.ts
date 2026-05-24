@@ -13,6 +13,30 @@ export const localeNames: Record<Locale, string> = {
   zh: '\u4e2d\u6587',
 };
 
+export function getLocalePrefix(locale: Locale) {
+  return locale === defaultLocale ? '' : `/${locale}`;
+}
+
+export function getLocalizedPath(locale: Locale, path = '') {
+  const normalizedPath = !path || path === '/' ? '' : path.startsWith('/') ? path : `/${path}`;
+  const localizedPath = `${getLocalePrefix(locale)}${normalizedPath}`;
+
+  return localizedPath || '/';
+}
+
+export function getLocalizedAbsoluteUrl(baseUrl: string, locale: Locale, path = '') {
+  return `${baseUrl}${getLocalizedPath(locale, path)}`;
+}
+
+export function getLocaleAlternates(baseUrl: string, path = '') {
+  return Object.fromEntries(
+    [
+      ...locales.map((locale) => [locale, getLocalizedAbsoluteUrl(baseUrl, locale, path)]),
+      ['x-default', getLocalizedAbsoluteUrl(baseUrl, defaultLocale, path)],
+    ],
+  ) as Record<Locale | 'x-default', string>;
+}
+
 export function getLocale(request: NextRequest): Locale {
   // 1. Cookie orqali foydalanuvchi tanlagan tilni tekshiramiz.
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;

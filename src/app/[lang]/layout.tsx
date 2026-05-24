@@ -5,7 +5,12 @@ import '../globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { locales, defaultLocale } from '@/lib/i18n/locale';
+import {
+  locales,
+  defaultLocale,
+  getLocalizedAbsoluteUrl,
+  getLocaleAlternates,
+} from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 
 
@@ -21,10 +26,10 @@ export const viewport: Viewport = {
 };
 
 const localeUrls = {
-  uz: BASE_URL,
-  ru: `${BASE_URL}/ru`,
-  en: `${BASE_URL}/en`,
-  zh: `${BASE_URL}/zh`,
+  uz: getLocalizedAbsoluteUrl(BASE_URL, 'uz'),
+  ru: getLocalizedAbsoluteUrl(BASE_URL, 'ru'),
+  en: getLocalizedAbsoluteUrl(BASE_URL, 'en'),
+  zh: getLocalizedAbsoluteUrl(BASE_URL, 'zh'),
 } satisfies Record<Locale, string>;
 
 const ogLocales = {
@@ -67,10 +72,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     alternates: {
       canonical: localeUrls[safeLang],
-      languages: {
-        ...localeUrls,
-        'x-default': BASE_URL,
-      },
+      languages: getLocaleAlternates(BASE_URL),
     },
   };
 }

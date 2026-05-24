@@ -276,13 +276,13 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DialogContent className="max-h-[calc(100dvh-1rem)] w-[95vw] max-w-[1000px] overflow-hidden rounded-3xl border-none bg-transparent p-0 shadow-none md:w-full [&>button:last-child]:hidden">
         <DialogDescription className="sr-only">
-          Bepul Brand Audit uchun ism, telefon va ixtiyoriy Telegram kontaktini qoldirish formasi.
+          {translations?.srDescription || 'Brand audit contact form'}
         </DialogDescription>
         {/* Safe, permanent close button that never scrolls away */}
         <button
           type="button"
           onClick={onClose}
-          aria-label={translations?.buttons?.close || 'Oynani yopish'}
+          aria-label={translations?.buttons?.close}
           className="absolute right-4 top-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/80 bg-white/95 text-slate-900 shadow-[0_18px_45px_-24px_rgba(15,23,42,0.9)] transition-[background-color,transform,color] duration-200 hover:bg-slate-950 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 active:scale-[0.96]"
         >
           <X className="h-5 w-5" aria-hidden="true" />
@@ -295,7 +295,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
             
             <div className="relative z-10 w-full">
               <h2 className="text-2xl md:text-5xl font-extrabold leading-tight mb-2 md:mb-4 text-white drop-shadow-sm">
-                {translations?.sidebarTitle || 'Brand Audit'}
+                {translations?.sidebarTitle}
               </h2>
               <p className="text-gray-300/80 text-xs md:text-base leading-relaxed mb-4 md:mb-8 max-w-[280px]">
                 {translations?.sidebarSubtitle || 'Build your high-profit branding system with our experts.'}
@@ -328,11 +328,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
             <div className="relative z-10 mt-6 md:mt-12 flex flex-col gap-4 md:gap-6 hidden md:flex">
               <div className="flex gap-4">
-                <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
+                <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" aria-label={translations?.telegramLinkLabel || 'Telegram'} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
                   <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
-              <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">{translations?.footerCopyright || 'Jon.Branding Agency'}</p>
+              <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">{translations?.footerCopyright}</p>
             </div>
           </div>
 
@@ -351,7 +351,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     <div className="mb-6 flex items-center justify-between shrink-0">
                       <div className="flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full border border-blue-100 shadow-sm animate-pulse-subtle">
                         <Target className="w-3.5 h-3.5 text-blue-500" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">{translations?.header || 'Brand Audit'}</span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider">{translations?.header}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         {step < 4 && (
@@ -364,7 +364,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                           </button>
                         )}
                         <div className="text-[10px] font-bold text-gray-600 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded">
-                          {translations?.contactBadge || quickContactLabel}
+                          {translations?.contactBadge}
                         </div>
                       </div>
                     </div>
@@ -602,7 +602,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                               <Button type="submit" disabled={isSubmitting} className="flex-[2] h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-xl shadow-blue-100 flex items-center justify-center gap-2 group transition-all active:scale-[0.97] duration-150">
                                 {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                                   <>
-                                    {translations?.buttons?.submit || 'Get Strategy'}
+                                    {translations?.buttons?.submit}
                                     <Send className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                   </>
                                 )}
@@ -611,7 +611,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                           </div>
                           <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-gray-600 font-medium tracking-tight">
                             <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
-                            {translations?.trustBadge || 'Data is confidential.'}
+                            {translations?.trustBadge}
                           </div>
                           <div className="mx-auto mt-2 max-w-md text-center text-[10px] font-semibold leading-4 text-gray-600">
                             {riskCopy}
@@ -654,7 +654,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         </a>
                       </Button>
                       <Button variant="ghost" onClick={onClose} className="h-12 rounded-full text-gray-600 font-bold">
-                        {translations?.buttons?.close || 'Close Window'}
+                        {translations?.buttons?.close}
                       </Button>
                     </div>
                   </motion.div>

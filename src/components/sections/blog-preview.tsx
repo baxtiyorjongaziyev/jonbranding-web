@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { getSortedPostsData } from '@/lib/blog-posts';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
+import { Locale } from '@/lib/dictionaries';
+import { getLocalizedPath } from '@/lib/i18n/locale';
 
 const blogCardImages = [
   '/images/cms/blog-post-hero.jpeg',
@@ -44,7 +46,7 @@ export default function BlogPreview({ lang, dictionary }: BlogPreviewProps) {
           {posts.map((post, index) => (
             <Link
               key={post.slug}
-              href={`/${lang}/blog/${post.slug}`}
+              href={getLocalizedPath(lang as Locale, `/blog/${post.slug}`)}
               className="group block"
             >
               <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -80,7 +82,7 @@ export default function BlogPreview({ lang, dictionary }: BlogPreviewProps) {
 
         <div className="mt-10 flex justify-center">
           <Link
-            href={`/${lang}/blog`}
+            href={getLocalizedPath(lang as Locale, '/blog')}
             className="inline-flex items-center gap-2 rounded-full border border-brand-line bg-white px-7 py-3 text-sm font-semibold text-brand-ink shadow-sm transition-all duration-200 hover:border-brand-blue hover:text-brand-blue hover:shadow-md"
           >
             {t.viewAll}

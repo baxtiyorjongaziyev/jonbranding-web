@@ -273,9 +273,23 @@
             "15-minute diagnosis",
             "Written next step"
         ],
+        "srDescription": "Форма для бесплатного Brand Audit: оставьте имя, телефон и при желании Telegram.",
+        "telegramLinkLabel": "Telegram",
         "objectionCopy": "Even if you are not ready to start, the audit gives you clarity.",
         "riskCopy": "Leaving your phone is not a contract. We show the problem first.",
         "footerCopyright": "Jon.Branding Agency"
+    },
+    "oishaWidget": {
+        "title": "Oisha Intelligence",
+        "subtitle": "Автономный бизнес-консьерж",
+        "placeholder": "Напишите сообщение...",
+        "error": "Ошибка подключения.",
+        "welcome": "Здравствуйте! Я Оиша — интеллектуальный помощник Jon Branding. Чем я могу вам помочь?",
+        "ack": "Ваше сообщение отправлено нашим стратегам. Они скоро ответят вам здесь.",
+        "thinking": "Оиша думает...",
+        "openButtonAriaLabel": "Открыть чат Oisha",
+        "closeButtonAriaLabel": "Закрыть чат Oisha",
+        "sendButtonAriaLabel": "Отправить сообщение"
     },
     "home": {
         "cta1_title": "Does your brand help buyers trust you? Let?s check.",
@@ -710,7 +724,8 @@
     "blog": {
         "title": "Наш Блог",
         "subtitle": "Последние новости, советы и аналитические статьи из мира брендинга, маркетинга и дизайна. Помогаем вашему бизнесу расти.",
-        "readMore": "Читать далее"
+        "readMore": "Читать далее",
+        "viewAll": "Все статьи"
     },
     "blogPost": {
         "author": "Автор",

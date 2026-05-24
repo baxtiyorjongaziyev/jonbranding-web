@@ -276,9 +276,23 @@
             "15 daqiqalik diagnostika",
             "Keyingi qadam yozib beriladi"
         ],
+        "srDescription": "Bepul Brand Audit uchun ism, telefon va ixtiyoriy Telegram kontaktini qoldirish formasi.",
+        "telegramLinkLabel": "Telegram",
         "objectionCopy": "Hali loyiha boshlashga tayyor bo'lmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.",
         "riskCopy": "Telefon qoldirish shartnoma degani emas. Avval brendingizdagi muammo, imkoniyat va eng foydali keyingi qadamni ko'rsatamiz.",
         "footerCopyright": "Jon.Branding Agency"
+    },
+    "oishaWidget": {
+        "title": "Oisha Intelligence",
+        "subtitle": "Avtonom Biznes-Konsyerj",
+        "placeholder": "Xabar yozing...",
+        "error": "Ulanishda xatolik yuz berdi.",
+        "welcome": "Assalomu alaykum! Men Oisha — Jon Branding agentligining intellektual yordamchisiman. Sizga qanday ko'mak bera olaman?",
+        "ack": "Xabaringiz strateglarga yuborildi. Ular tez orada shu yerda javob berishadi.",
+        "thinking": "Oisha o'ylamoqda...",
+        "openButtonAriaLabel": "Oisha chatini ochish",
+        "closeButtonAriaLabel": "Oisha chatini yopish",
+        "sendButtonAriaLabel": "Xabar yuborish"
     },
     "home": {
         "cta1_title": "Brendingiz mijozni ishontiryaptimi? Keling, tekshiramiz.",
@@ -721,7 +735,8 @@
     "blog": {
         "title": "Blog",
         "subtitle": "Brending va marketing olamidagi yangiliklar.",
-        "readMore": "Batafsil"
+        "readMore": "Batafsil",
+        "viewAll": "Barcha maqolalar"
     },
     "blogPost": {
         "author": "Muallif",

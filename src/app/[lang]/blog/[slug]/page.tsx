@@ -6,6 +6,12 @@ import BlogPostClient from '@/components/blog-post-client';
 import Script from 'next/script';
 import { BlogPost } from '@/lib/types';
 import { Locale } from '@/lib/dictionaries';
+import {
+  defaultLocale,
+  getLocalizedAbsoluteUrl,
+  getLocaleAlternates,
+  locales,
+} from '@/lib/i18n/locale';
 
 type Props = {
   params: Promise<{ slug: string; lang: string }>;
@@ -13,27 +19,24 @@ type Props = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { slug, lang } = await props.params;
-  const post = await getPostData(lang, slug);
+  const safeLang = locales.includes(lang as Locale) ? (lang as Locale) : defaultLocale;
+  const post = await getPostData(safeLang, slug);
 
   if (!post) {
     return {
       title: 'Maqola topilmadi',
     };
   }
-  
-  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}blog/${post.slug}`;
+  const canonicalPath = `/blog/${post.slug}`;
+  const canonicalUrl = getLocalizedAbsoluteUrl('https://www.jonbranding.uz', safeLang, canonicalPath);
 
 
   return {
     title: `${post.title} | Jon.Branding Blog`,
     description: post.description,
-     alternates: {
+    alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'uz': `https://www.jonbranding.uz/blog/${post.slug}`,
-        'ru': `https://www.jonbranding.uz/ru/blog/${post.slug}`,
-        'en': `https://www.jonbranding.uz/en/blog/${post.slug}`,
-      },
+      languages: getLocaleAlternates('https://www.jonbranding.uz', canonicalPath),
     },
     openGraph: {
       title: `${post.title} | Jon.Branding Blog`,
