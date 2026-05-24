@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { staticBrands } from '@/lib/static-data';
 import { BrandSection } from '@/components/ui/design-system';
+import { Marquee } from '@/components/ui/marquee';
 
 type TrustedByDictionary = {
   eyebrow?: string;
@@ -49,24 +50,28 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-brand-line bg-brand-line shadow-[0_24px_80px_rgba(15,23,42,0.06)] sm:grid-cols-3 lg:grid-cols-6">
-          {brands.map((brand) => (
-            <div key={brand.name} className="flex h-24 items-center justify-center bg-white px-5 py-4 transition-colors duration-200 hover:bg-brand-mist/70">
-              {brand.logo ? (
-                <Image
-                  src={brand.logo}
-                  alt={`${brand.name} logo`}
-                  width={180}
-                  height={72}
-                  loading="lazy"
-                  className="max-h-12 max-w-full object-contain grayscale transition-all duration-200 hover:grayscale-0"
-                  style={{ width: 'auto', height: 'auto' }}
-                />
-              ) : (
-                <span className="text-center text-sm font-black text-brand-slate">{brand.name}</span>
-              )}
-            </div>
-          ))}
+        <div className="relative mt-10 overflow-hidden rounded-2xl border border-brand-line shadow-[0_24px_80px_rgba(15,23,42,0.06)]">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-brand-paper to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-brand-paper to-transparent" />
+          <Marquee pauseOnHover repeat={3} className="[--duration:50s] py-3">
+            {brands.map((brand) => (
+              <div key={brand.name} className="mx-3 flex h-20 w-36 shrink-0 items-center justify-center rounded-xl border border-brand-line bg-white px-5 py-4 transition-colors duration-200 hover:bg-brand-mist/70">
+                {brand.logo ? (
+                  <Image
+                    src={brand.logo}
+                    alt={`${brand.name} logo`}
+                    width={120}
+                    height={48}
+                    loading="lazy"
+                    className="max-h-10 max-w-full object-contain grayscale transition-all duration-200 hover:grayscale-0"
+                    style={{ width: 'auto', height: 'auto' }}
+                  />
+                ) : (
+                  <span className="text-center text-sm font-black text-brand-slate">{brand.name}</span>
+                )}
+              </div>
+            ))}
+          </Marquee>
         </div>
       </div>
     </BrandSection>
