@@ -1,13 +1,15 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { X, Gift, Download, CheckCircle2, Phone, ArrowRight, ShieldAlert, Building2, User, Wallet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { trackEvent, trackLead } from '@/lib/analytics';
 import { useToast } from '@/hooks/use-toast';
+import DOMPurify from 'isomorphic-dompurify';
+import { useParams } from 'next/navigation';
 
 interface LeadMagnetPopupProps {
   dictionary: any;
@@ -16,15 +18,15 @@ interface LeadMagnetPopupProps {
 type FlowStep = 'intro' | 'qualification' | 'registration' | 'blocked' | 'success';
 
 const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
-  if (!dictionary || !dictionary.roleSelection) return null;
-  
   const { toast } = useToast();
+  const params = useParams();
+  const lang = (params?.lang as string) || 'uz';
+  const checklistUrl = `/checklists/7-mistakes-in-branding-${lang}.pdf`;
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const [step, setStep] = useState<FlowStep>('intro');
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Form state
   const [formData, setFormData] = useState({
     role: '',
     businessType: '',
@@ -40,18 +42,15 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
     }
 
     const timer = setTimeout(() => setIsVisible(true), 15000);
-    const handleScroll = () => {
-      if (window.scrollY > document.documentElement.scrollHeight / 2 && !isVisible) {
-        setIsVisible(true);
-      }
-    };
+    return () => clearTimeout(timer);
+  }, [isDismissed]);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isVisible]);
+  const { scrollYProgress } = useScroll();
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (!isVisible && !isDismissed && latest > 0.5) {
+      setIsVisible(true);
+    }
+  });
 
   const handleClose = () => {
     setIsVisible(false);
@@ -110,7 +109,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
     }
   };
 
-  if (isDismissed || !isVisible) return null;
+  if (!dictionary || !dictionary.roleSelection || isDismissed || !isVisible) return null;
 
   return (
     <AnimatePresence>
@@ -121,21 +120,20 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
         className="fixed bottom-0 md:bottom-6 left-0 md:left-6 z-[100] w-full md:max-w-md p-4 md:p-0"
       >
         <Card className="relative overflow-hidden border-none shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#0A0A0A] text-white rounded-3xl md:rounded-2xl border border-white/5">
-          {/* Top accent line */}
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600"></div>
           
           <Button
             variant="ghost"
             size="icon"
             onClick={handleClose}
-            className="absolute top-3 right-3 text-white/40 hover:text-white hover:bg-white/10 z-50 rounded-full"
+            aria-label="Close popup"
+            className="absolute top-3 right-3 text-white/40 hover:text-white hover:bg-white/10 z-50 rounded-full focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]"
           >
             <X className="w-5 h-5" />
           </Button>
 
           <CardContent className="p-8 md:p-10">
             <AnimatePresence mode="wait">
-              {/* STEP: INTRO */}
               {step === 'intro' && (
                 <motion.div
                   key="intro"
@@ -159,7 +157,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                   </div>
 
                   <p className="text-base text-gray-400 leading-relaxed font-medium" 
-                     dangerouslySetInnerHTML={{ __html: dictionary.description }} />
+                     dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dictionary.description) }} />
 
                   <Button 
                     onClick={() => setStep('qualification')} 
@@ -171,7 +169,6 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                 </motion.div>
               )}
 
-              {/* STEP: QUALIFICATION */}
               {step === 'qualification' && (
                 <motion.div
                   key="qualification"
@@ -188,7 +185,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                       <button
                         key={key}
                         onClick={() => handleRoleSelect(key)}
-                        className="w-full h-14 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-600 text-gray-300 hover:text-white font-semibold transition-all duration-300 text-left flex items-center justify-between group"
+                        className="w-full h-14 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-600 text-gray-300 hover:text-white font-semibold transition-all duration-300 text-left flex items-center justify-between group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                       >
                         <span>{label}</span>
                         <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
@@ -198,7 +195,6 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                 </motion.div>
               )}
 
-              {/* STEP: REGISTRATION FORM */}
               {step === 'registration' && (
                 <motion.div
                   key="registration"
@@ -214,10 +210,11 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                   
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-1.5">
-                      <label className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.businessLabel}</label>
+                      <label htmlFor="lm-businessType" className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.businessLabel}</label>
                       <div className="relative">
                         <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
-                        <Input 
+                        <Input
+                          id="lm-businessType"
                           placeholder={dictionary.registration.businessPlaceholder}
                           className="h-12 pl-12 bg-white/5 border-white/10 rounded-xl focus:ring-blue-600 focus:border-blue-600"
                           value={formData.businessType}
@@ -226,10 +223,11 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                       </div>
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.nameLabel}</label>
+                      <label htmlFor="lm-name" className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.nameLabel}</label>
                       <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
-                        <Input 
+                        <Input
+                          id="lm-name"
                           placeholder={dictionary.registration.namePlaceholder}
                           className="h-12 pl-12 bg-white/5 border-white/10 rounded-xl focus:ring-blue-600 focus:border-blue-600"
                           value={formData.name}
@@ -238,16 +236,18 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                       </div>
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.phoneLabel}</label>
+                      <label htmlFor="lm-phone" className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.phoneLabel}</label>
                       <div className="relative">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
-                        <Input 
+                        <Input
+                          id="lm-phone"
                           placeholder={dictionary.registration.phonePlaceholder}
                           className="h-12 pl-12 bg-white/5 border-white/10 rounded-xl focus:ring-blue-600 focus:border-blue-600"
                           value={formData.phone}
                           onChange={(e) => setFormData({...formData, phone: e.target.value})}
                         />
                       </div>
+
                     </div>
                     
                     <Button 
@@ -264,7 +264,6 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                 </motion.div>
               )}
 
-              {/* STEP: BLOCKED SCREEN */}
               {step === 'blocked' && (
                 <motion.div
                   key="blocked"
@@ -278,7 +277,6 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                       <ShieldAlert className="w-12 h-12 text-red-500" />
                     </div>
                   </div>
-
                   <div className="space-y-3">
                     <h3 className="text-3xl font-black text-white leading-tight uppercase tracking-tight">
                       {dictionary.blocked.title}
@@ -287,19 +285,17 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                       {dictionary.blocked.description}
                     </p>
                   </div>
-
                   <div className="bg-white/5 p-6 rounded-3xl border border-white/10 space-y-4">
                     <p className="text-xs text-gray-300 font-medium">
                       {dictionary.blocked.socialHint}
                     </p>
                     <Button asChild className="w-full h-14 bg-[#24A1DE] hover:bg-[#24A1DE]/80 text-white font-bold text-base rounded-2xl shadow-lg shadow-[#24A1DE]/20">
                       <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer">
-                        <X className="w-5 h-5 mr-3 rotate-45" /> {/* Telegram icon surrogate */}
+                        <X className="w-5 h-5 mr-3 rotate-45" />
                         {dictionary.blocked.telegramCTA}
                       </a>
                     </Button>
                   </div>
-
                   <div className="space-y-1">
                     <p className="text-[10px] text-gray-500 uppercase font-bold tracking-[0.2em]">
                       {dictionary.blocked.contactHint}
@@ -311,7 +307,6 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                 </motion.div>
               )}
 
-              {/* STEP: SUCCESS */}
               {step === 'success' && (
                 <motion.div
                   key="success"
@@ -326,12 +321,11 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                     <h3 className="text-2xl font-bold">{dictionary.success.title}</h3>
                     <p className="text-gray-400 text-sm">{dictionary.success.description}</p>
                   </div>
-                  
                   <Button 
                     asChild
                     className="w-full h-14 bg-green-600 hover:bg-green-700 text-white font-bold text-lg rounded-2xl group transition-all shadow-xl shadow-green-900/20"
                   >
-                    <a href="/downloads/jonbranding-checklist.pdf" download="JonBranding-Checklist.pdf">
+                    <a href={checklistUrl} download={`JonBranding-7-Mistakes-${lang}.pdf`}>
                       <Download className="w-5 h-5 mr-3" />
                       {dictionary.success.downloadCta}
                     </a>
@@ -341,7 +335,6 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
             </AnimatePresence>
           </CardContent>
           
-          {/* Bottom decorative bar */}
           <div className="h-2 w-full bg-white/5 flex items-center justify-center gap-1.5 overflow-hidden">
              {[...Array(20)].map((_, i) => (
                 <div key={i} className="w-1 h-1 rounded-full bg-white/10"></div>
