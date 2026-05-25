@@ -43,6 +43,7 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
   },
+  turbopack: {},
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
