@@ -81,3 +81,4 @@ autodeploy.pid
 
 # Codex config
 .codex/
+.env

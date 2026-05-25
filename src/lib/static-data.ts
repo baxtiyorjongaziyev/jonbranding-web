@@ -1,4 +1,4 @@
-﻿
+
 import { type Brand, type Project, type Testimonial } from '@/lib/types';
 
 export const staticBrands: Brand[] = [
