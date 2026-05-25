@@ -67,7 +67,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   };
 
   return (
-    <footer className="relative overflow-hidden rounded-t-[4.5rem] bg-black text-white md:rounded-t-[8rem]" suppressHydrationWarning>
+    <footer className="relative overflow-hidden rounded-t-[5rem] bg-black text-white sm:rounded-t-[6rem] md:rounded-t-[8rem] lg:rounded-t-[10rem]" suppressHydrationWarning>
       <div className="relative bg-black pt-24 pb-0">
         {/* Finch-style Vivid Background Gradient - Anchored to very bottom */}
         <div 
