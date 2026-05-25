@@ -56,7 +56,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
             {outcomes.length > 0 && (
               <div className="mt-7 grid grid-cols-2 gap-3">
                 {outcomes.map((outcome) => (
-                  <div key={outcome.label} className="rounded-2xl border border-brand-line bg-white px-4 py-4 shadow-sm">
+                  <div key={outcome.label} className="rounded-[1.25rem] sm:rounded-[1.5rem] md:rounded-[1.75rem] border border-brand-line bg-white px-4 py-4 shadow-sm">
                     <div className="text-2xl font-black tracking-normal text-brand-ink">{outcome.value}</div>
                     <div className="mt-1 text-xs font-bold uppercase tracking-normal text-brand-slate">{outcome.label}</div>
                   </div>

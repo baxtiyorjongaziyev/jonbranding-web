@@ -115,7 +115,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
         exit={{ opacity: 0, y: 100 }}
         className="fixed bottom-0 md:bottom-6 left-0 md:left-6 z-[100] w-full md:max-w-md p-4 md:p-0"
       >
-        <Card className="relative overflow-hidden border-none shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#0A0A0A] text-white rounded-3xl md:rounded-2xl border border-white/5">
+        <Card className="relative overflow-hidden border-none shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#0A0A0A] text-white rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] lg:rounded-[3.5rem] border border-white/5">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600"></div>
           
           <Button

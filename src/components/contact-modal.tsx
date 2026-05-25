@@ -281,7 +281,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="max-h-[calc(100dvh-1rem)] w-[95vw] max-w-[1000px] overflow-hidden rounded-3xl border-none bg-transparent p-0 shadow-none md:w-full [&>button:last-child]:hidden">
+      <DialogContent className="max-h-[calc(100dvh-1rem)] w-[95vw] max-w-[1000px] overflow-hidden rounded-[2.5rem] sm:rounded-[3rem] md:rounded-[3.5rem] lg:rounded-[4rem] border-none bg-transparent p-0 shadow-none md:w-full [&>button:last-child]:hidden">
         <DialogDescription className="sr-only">
           {translations?.srDescription || 'Brand audit contact form'}
         </DialogDescription>
@@ -295,7 +295,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
           <X className="h-5 w-5" aria-hidden="true" />
         </button>
 
-        <div className="relative flex max-h-[calc(100dvh-1rem)] flex-col overflow-y-auto overscroll-contain rounded-3xl bg-white shadow-2xl md:h-[620px] md:flex-row md:overflow-hidden" onKeyDown={handleKeyDown}>
+        <div className="relative flex max-h-[calc(100dvh-1rem)] flex-col overflow-y-auto overscroll-contain rounded-[2.5rem] sm:rounded-[3rem] md:rounded-[3.5rem] lg:rounded-[4rem] bg-white shadow-2xl md:h-[620px] md:flex-row md:overflow-hidden" onKeyDown={handleKeyDown}>
           
           <div className="relative flex w-full shrink-0 flex-col justify-between overflow-hidden bg-[#050912] p-6 pr-16 text-white md:w-[40%] md:p-12 md:pr-12">
             <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(37,99,235,0.26),transparent_55%,rgba(58,225,255,0.14))] pointer-events-none" />
