@@ -81,8 +81,9 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
       const response = await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          ...formData, 
+        body: JSON.stringify({
+          ...formData,
+          fullName: formData.name,
           source: 'lead_magnet_popup',
           message: `Lead Magnet roles/qualification flow. Role: ${formData.role}, Business: ${formData.businessType}`
         }),
