@@ -109,6 +109,62 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="JonBranding" />
         <Script
+          id="json-ld-organization"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Jon.Branding",
+              "alternateName": "JonBranding Agency",
+              "description": "Premium branding agency in Uzbekistan. Strategic brand design, naming, logo creation, and identity systems.",
+              "url": "https://www.jonbranding.uz",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.jonbranding.uz/icon.svg",
+                "width": 256,
+                "height": 256
+              },
+              "image": "https://www.jonbranding.uz/icon.svg",
+              "email": "mailto:contact@jonbranding.uz",
+              "telephone": "+998336450097",
+              "founded": "2021",
+              "foundingDate": "2021",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Tashkent",
+                "addressLocality": "Tashkent",
+                "addressRegion": "Toshkent",
+                "postalCode": "100000",
+                "addressCountry": "UZ"
+              },
+              "areaServed": [
+                {
+                  "@type": "Country",
+                  "name": "Uzbekistan"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Central Asia"
+                }
+              ],
+              "priceRange": "$$$",
+              "sameAs": [
+                "https://instagram.com/jonbranding",
+                "https://t.me/jonbranding",
+                "https://facebook.com/jonbranding"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "Customer Service",
+                "telephone": "+998336450097",
+                "email": "contact@jonbranding.uz",
+                "availableLanguage": ["uz", "ru", "en", "zh"]
+              }
+            })
+          }}
+        />
+        <Script
           id="json-ld-professional-service"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -157,17 +213,23 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 {
                   "@type": "Service",
                   "name": "Neyming (Naming)",
-                  "description": "Professional brand naming services."
+                  "description": "Professional brand naming services.",
+                  "areaServed": "Uzbekistan",
+                  "priceRange": "$$$"
                 },
                 {
                   "@type": "Service",
                   "name": "Logotip Dizayni (Logo Design)",
-                  "description": "Custom logo creation and identity design."
+                  "description": "Custom logo creation and identity design.",
+                  "areaServed": "Uzbekistan",
+                  "priceRange": "$$$"
                 },
                 {
                   "@type": "Service",
                   "name": "Brend Strategiyasi (Branding Strategy)",
-                  "description": "Comprehensive market analysis and strategy."
+                  "description": "Comprehensive market analysis and strategy.",
+                  "areaServed": "Uzbekistan",
+                  "priceRange": "$$$"
                 }
               ]
             })

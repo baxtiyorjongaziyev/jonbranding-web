@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import TrustedBy from '@/components/sections/trusted-by';
 import AuditOffer from '@/components/sections/audit-offer';
+import TrustSignals from '@/components/sections/trust-signals';
 import BlogPreview from '@/components/sections/blog-preview';
 
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
@@ -35,6 +36,7 @@ export default function HomeDeferredContent({
     <>
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
       <AuditOffer lang={lang} dictionary={dictionary.auditOffer} />
+      <TrustSignals lang={lang} />
 
       <BeforeAfter lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
       <Testimonials lang={lang} dictionary={dictionary.testimonials} />

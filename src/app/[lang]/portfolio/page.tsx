@@ -14,6 +14,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
+  const baseUrl = 'https://www.jonbranding.uz';
+  const canonicalUrl = `${baseUrl}/${safeLang}/portfolio`;
+
   const titles = {
     uz: 'Muvaffaqiyatli Keyslar va Portfolio | Jon.Branding Agentligi',
     ru: 'Портфолио и Кейсы | Брендинговое Агентство Jon.Branding',
@@ -31,6 +34,17 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: titles[safeLang] || titles.uz,
     description: descriptions[safeLang] || descriptions.uz,
+    openGraph: {
+      title: titles[safeLang] || titles.uz,
+      description: descriptions[safeLang] || descriptions.uz,
+      url: canonicalUrl,
+      type: 'website',
+      siteName: 'Jon.Branding',
+      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630, alt: 'Jon.Branding Portfolio' }],
+    },
+    alternates: {
+      canonical: canonicalUrl,
+    },
   };
 }
 

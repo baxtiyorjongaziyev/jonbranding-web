@@ -88,24 +88,65 @@ const QuizPage: FC = () => {
       const resultKey = totalScore <= 8 ? 'bad' : totalScore <= 12 ? 'medium' : 'good';
       const result = translations.result[resultKey];
       const Icon = resultKey === 'bad' ? Frown : resultKey === 'medium' ? Meh : Smile;
+      
+      // Generate personalized recommendations
+      const getRecommendations = () => {
+        const recommendations = [];
+        if (resultKey === 'bad') {
+          recommendations.push(lang === 'uz' ? 'Faqat brend-auditni boshlab yuboring va sizning brendingdagi barcha muammolarni aniqlang' : lang === 'ru' ? 'Начните с полного аудита бренда, чтобы выявить все проблемы' : 'Start with a full brand audit to identify all brand issues');
+          recommendations.push(lang === 'uz' ? 'Brend-strategiya yaratish zarur - bu sizning brendingizning xaritasi' : lang === 'ru' ? 'Разработайте бренд-стратегию - она станет картой вашего бренда' : 'Develop a brand strategy - it will be your brand roadmap');
+          recommendations.push(lang === 'uz' ? 'Kompaniya imijini qayta qurish - premium darajaga ko\'tarish uchun muhim qadami' : lang === 'ru' ? 'Переделайте корпоративную идентичность для премиум-позиционирования' : 'Rebuild corporate identity for premium positioning');
+        } else if (resultKey === 'medium') {
+          recommendations.push(lang === 'uz' ? 'Brendingiz yaxshi, lekin hali 3-4 ta muhim nuqta bor' : lang === 'ru' ? 'Ваш бренд хорош, но есть 3-4 критических области' : 'Your brand is good, but there are 3-4 critical areas');
+          recommendations.push(lang === 'uz' ? 'Logotip yoki qadoqni yangilab yuboring - vizual o\'ziga xoslikni kuchaytirib olasiz' : lang === 'ru' ? 'Обновите логотип или упаковку - усилите визуальное различие' : 'Refresh logo or packaging - strengthen visual differentiation');
+          recommendations.push(lang === 'uz' ? 'Firma uslubini standartlashtirib qo\'ying - barcha kontentda yagona xirmo' : lang === 'ru' ? 'Стандартизируйте фирменный стиль - единство во всех каналах' : 'Standardize corporate style - consistency across all channels');
+        } else {
+          recommendations.push(lang === 'uz' ? 'Sizning brending juda kuchli - shuning uchun bozorga samarali kirib borish yo\'li loyihasiga e\'tibor bering' : lang === 'ru' ? 'Ваш бренд очень сильный - сосредоточьтесь на запуске на рынке' : 'Your brand is very strong - focus on market launch strategy');
+          recommendations.push(lang === 'uz' ? 'Brendbook yaratish - vizual kengaytirishdagi barcha qoidalar va yo\'nalishlarni belgilang' : lang === 'ru' ? 'Создайте брендбук - зафиксируйте все правила визуального развития' : 'Create a brandbook - fix all visual development rules');
+          recommendations.push(lang === 'uz' ? 'Sotuvchi qadoq dizayni - sizning premium imijingizni paketdagi raqiblardan farq qiling' : lang === 'ru' ? 'Дизайн продающей упаковки - отличайтесь прямо на полке' : 'Sales-focused packaging - differentiate directly on shelf');
+        }
+        return recommendations;
+      };
 
     return (
         <main className="flex-grow bg-secondary/50">
             <section className="py-20 sm:py-28">
-                <div className="container mx-auto px-4 text-center">
-                     <Card className="max-w-2xl mx-auto p-8 shadow-2xl rounded-3xl animate-fade-in">
-                        <Icon className={`h-20 w-20 ${resultKey === 'bad' ? 'text-red-500' : resultKey === 'medium' ? 'text-yellow-500' : 'text-green-500'} mx-auto mb-6`} />
-                        <h1 className="text-3xl sm:text-4xl font-extrabold text-dark-blue">
-                           {result.title}
-                        </h1>
-                        <p className="mx-auto mt-4 max-w-xl text-lg text-gray-700">
+                <div className="container mx-auto px-4">
+                     <Card className="max-w-3xl mx-auto p-8 shadow-2xl rounded-3xl animate-fade-in">
+                        <div className="text-center mb-8">
+                          <Icon className={`h-20 w-20 ${resultKey === 'bad' ? 'text-red-500' : resultKey === 'medium' ? 'text-yellow-500' : 'text-green-500'} mx-auto mb-6`} />
+                          <h1 className="text-3xl sm:text-4xl font-extrabold text-dark-blue">
+                             {result.title}
+                          </h1>
+                          <div className="mt-4 inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-full text-2xl font-bold">
+                            {totalScore} / 15 {lang === 'uz' ? 'ball' : lang === 'ru' ? 'баллов' : 'points'}
+                          </div>
+                        </div>
+                        
+                        <p className="mx-auto mt-6 max-w-xl text-lg text-gray-700">
                            {result.description}
                         </p>
-                         <p className="mx-auto mt-4 max-w-xl text-lg text-gray-700 font-bold">
+                        
+                        <div className="mt-8 space-y-3">
+                          <h3 className="font-bold text-lg text-dark-blue">{lang === 'uz' ? 'Tavsiyalar:' : lang === 'ru' ? 'Рекомендации:' : 'Recommendations:'}</h3>
+                          <ul className="space-y-2">
+                            {getRecommendations().map((rec, idx) => (
+                              <li key={idx} className="flex gap-3 p-3 bg-blue-50 rounded-lg">
+                                <span className="text-blue-600 font-bold flex-shrink-0">{idx + 1}.</span>
+                                <span className="text-gray-700">{rec}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        
+                         <p className="mx-auto mt-6 max-w-xl text-base text-gray-600">
                            {translations.result.afterSubmitText}
                         </p>
-                        <div className="mt-8">
-                             <Button asChild className="mt-6" size="lg">
+                        <div className="mt-8 flex flex-col gap-4">
+                             <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
+                                <Link href={`/${lang}/xizmatlar`}>{lang === 'uz' ? 'Xizmatlarni ko\'rish' : lang === 'ru' ? 'Услуги' : 'View Services'}</Link>
+                            </Button>
+                             <Button asChild variant="outline" size="lg">
                                 <Link href={`/${lang}`}>{translations.result.backToHome}</Link>
                             </Button>
                         </div>

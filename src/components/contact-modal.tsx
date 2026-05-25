@@ -111,8 +111,15 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       ambition: z.string().optional(),
       pain: z.string().optional(),
       budget: z.string().optional(),
-      fullName: z.string().min(2, { message: translations?.formErrors?.fullName || 'Ism kiritilishi shart' }),
-      phone: z.string().min(12, { message: translations?.formErrors?.phone || 'To\'liq telefon raqamini kiriting' }),
+      fullName: z
+        .string()
+        .min(2, { message: translations?.formErrors?.fullName || 'Ism kiritilishi shart (minimal 2 ta harf)' })
+        .max(100, { message: 'Ism 100 ta harfdan kam bo\'lishi kerak' })
+        .regex(/^[a-zA-Z\s\u0400-\u04FF\u0600-\u06FF]+$/, { message: 'Ismda faqat harflar bo\'lishi mumkin' }),
+      phone: z
+        .string()
+        .min(12, { message: translations?.formErrors?.phone || '+998 kodni bilan to\'liq telefon raqamini kiriting' })
+        .regex(/^\+998\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}|^\+998\d{9,12}/, { message: 'Telefon raqami noto\'g\'ri formatda' }),
       telegram: z.string().optional(),
     });
   }, [translations]);

@@ -12,6 +12,7 @@ import {
   getLocaleAlternates,
   locales,
 } from '@/lib/i18n/locale';
+import { generateBreadcrumbSchema } from '@/lib/schema-helpers';
 
 type Props = {
   params: Promise<{ slug: string; lang: string }>;
@@ -95,6 +96,15 @@ const BlogPostPage = async (props: Props) => {
   }
   
   const jsonLd = generateJsonLd(post);
+  const safeLang = locales.includes(lang as Locale) ? (lang as Locale) : defaultLocale;
+  
+  const breadcrumbItems = [
+    { name: safeLang === 'uz' ? 'Bosh sahifa' : safeLang === 'ru' ? 'Главная' : safeLang === 'zh' ? '首页' : 'Home', path: '' },
+    { name: safeLang === 'uz' ? 'Blog' : safeLang === 'ru' ? 'Блог' : safeLang === 'zh' ? '博客' : 'Blog', path: '/blog' },
+    { name: post.title, path: `/blog/${slug}` },
+  ];
+  
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems, safeLang);
 
   return (
     <>
@@ -102,6 +112,11 @@ const BlogPostPage = async (props: Props) => {
         id="blog-post-structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id="blog-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <BlogPostClient post={post} />
     </>
