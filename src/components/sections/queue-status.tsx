@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, type FC } from 'react';
+import { useState, useEffect, useRef, type FC } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { User, ArrowRight, Sparkles, UserCheck, Users } from 'lucide-react';
@@ -12,7 +12,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { useParams } from 'next/navigation';
 
@@ -39,36 +39,35 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
   const lang = params.lang as Locale;
   const [translations, setTranslations] = useState<any>(null);
 
-  // ** O'zgartirish uchun ma'lumotlar **
   const totalSlots = 7;
   const currentProjects = 4;
-  const nextAvailableKey = '2 weeks'; // Key for translation
-  // *********************************
+  const nextAvailableKey = '2 weeks';
 
   const [onlineUsers, setOnlineUsers] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: '0px 0px -100px 0px' });
 
   useEffect(() => {
     getDictionary(lang).then(dict => setTranslations(dict.queueStatus));
   }, [lang]);
 
   useEffect(() => {
-    // Set initial random number between 12 and 25
     setOnlineUsers(Math.floor(Math.random() * (25 - 12 + 1)) + 12);
+  }, []);
 
+  useEffect(() => {
+    if (!isInView) return;
     const interval = setInterval(() => {
       setOnlineUsers(prev => {
         const change = Math.random() > 0.5 ? 1 : -1;
-        const newCount = prev + change;
-        // Keep it within a realistic range
-        return Math.max(10, Math.min(30, newCount));
+        return Math.max(10, Math.min(30, prev + change));
       });
-    }, 2500); // Update every 2.5 seconds
-
+    }, 2500);
     return () => clearInterval(interval);
-  }, []);
+  }, [isInView]);
 
   if (!translations) {
-    return null; // Or a loading skeleton
+    return null;
   }
 
   const slots = Array.from({ length: totalSlots });
@@ -76,7 +75,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
   const nextAvailable = translations.timeframes[nextAvailableKey] || nextAvailableKey;
 
   return (
-    <section className="py-16 sm:py-24 bg-white" suppressHydrationWarning>
+    <section ref={sectionRef} className="py-16 sm:py-24 bg-white" suppressHydrationWarning>
       <div className="container mx-auto px-4">
         <Card className="relative overflow-hidden max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl p-6 sm:p-10">
             <div className="absolute inset-0 z-0 opacity-40">
@@ -151,7 +150,6 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                         </div>
                      </TooltipProvider>
                 </div>
-
 
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                   <div className="bg-black/20 p-4 rounded-xl">

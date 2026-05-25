@@ -1,7 +1,20 @@
-
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
+import { getClientIp, rateLimit } from '@/lib/rate-limit';
+
+const bodySchema = z.object({
+  message: z.string().max(2000),
+  stack: z.string().max(5000).optional(),
+  pathname: z.string().max(500).optional(),
+  userInfo: z.string().max(1000).optional(),
+});
 
 export async function POST(request: Request) {
+    const ip = getClientIp(request);
+    if (!rateLimit(`report-error:${ip}`, 10, 60_000)) {
+        return NextResponse.json({ ok: false, error: 'Too many requests' }, { status: 429 });
+    }
+
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
 
@@ -11,11 +24,15 @@ export async function POST(request: Request) {
     }
 
     try {
-        const body = await request.json();
-        const { message, stack, pathname, userInfo } = body;
+        const raw = await request.json();
+        const parsed = bodySchema.safeParse(raw);
+        if (!parsed.success) {
+            return NextResponse.json({ ok: false, error: 'Invalid request' }, { status: 400 });
+        }
+        const { message, stack, pathname, userInfo } = parsed.data;
 
         if (!message) {
-            return NextResponse.json({ ok: false, error: "Xatolik matni mavjud emas" }, { status: 400 });
+            return NextResponse.json({ ok: false, error: 'Invalid request' }, { status: 400 });
         }
 
         const telegramMessage = `
@@ -56,7 +73,6 @@ ${userInfo || 'Noma\'lum'}
         if (!response.ok) {
             const errorResult = await response.json();
             console.error("Telegram API Error while reporting error:", errorResult);
-            // Still return ok to prevent error loops on the client
             return NextResponse.json({ ok: true, reported: false });
         }
 
@@ -64,7 +80,6 @@ ${userInfo || 'Noma\'lum'}
 
     } catch (error: any) {
         console.error("Internal Server Error in error reporting endpoint:", error);
-        // Don't return an error to the client to avoid an error loop
         return NextResponse.json({ ok: true, reported: false });
     }
 }
