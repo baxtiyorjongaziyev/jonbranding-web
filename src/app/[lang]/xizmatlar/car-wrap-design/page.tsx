@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import CarWrapDesignClient from './car-wrap-design-client';
 
