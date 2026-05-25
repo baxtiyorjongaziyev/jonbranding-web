@@ -3,7 +3,6 @@
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
-import CtaBlock from './cta-block';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 
 interface ProcessProps {
@@ -35,7 +34,7 @@ const itemVariants = {
   },
 };
 
-const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
+const Process: React.FC<ProcessProps> = ({ dictionary }) => {
   const translations = dictionary;
 
   if (!translations || !translations.phases) return null;
@@ -43,13 +42,13 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
   const processProof = translations.proofItems || [];
 
   return (
-    <BrandSection id="process" tone="light" className="bg-[#fbfaf7] py-20 sm:py-28 overflow-hidden" suppressHydrationWarning>
+    <BrandSection id="process" tone="light" className="overflow-hidden bg-[#fbfaf7] py-20 sm:py-28" suppressHydrationWarning>
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}
-        className="container mx-auto px-4"
+        className="container mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8"
       >
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <motion.div variants={itemVariants} className="lg:sticky lg:top-28">
@@ -57,8 +56,8 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
             {processProof.length > 0 && (
               <div className="mt-8 grid grid-cols-2 gap-2">
                 {processProof.map((item: string, index: number) => (
-                  <div key={item} className="rounded-xl border border-brand-line bg-white px-4 py-3 shadow-sm">
-                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue">0{index + 1}</div>
+                  <div key={item} className="border-t border-brand-line px-1 py-4">
+                    <div className="font-mono text-[10px] font-extrabold uppercase tracking-normal text-brand-blue tabular-nums">0{index + 1}</div>
                     <div className="mt-1 text-sm font-bold text-brand-ink">{item}</div>
                   </div>
                 ))}
@@ -68,14 +67,14 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
 
           <motion.div variants={itemVariants} className="space-y-4">
             {translations.phases.map((phase: any, index: number) => (
-              <div key={index} className="rounded-2xl border border-brand-line bg-white p-5 shadow-sm">
+              <div key={index} className="rounded-[1.25rem] border border-brand-line bg-white/82 p-5 shadow-[0_20px_65px_rgba(35,41,55,0.055)]">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-lime text-sm font-black text-brand-ink">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-lime text-sm font-extrabold text-brand-ink">
                     0{index + 1}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-black text-brand-ink">{phase.title}</h3>
+                      <h3 className="font-extrabold text-brand-ink">{phase.title}</h3>
                       {phase.badge && <Badge variant="outline" className="text-[10px]">{phase.badge}</Badge>}
                     </div>
                     <p className="mt-1 text-sm leading-6 text-brand-slate">{phase.description}</p>
@@ -96,17 +95,6 @@ const Process: React.FC<ProcessProps> = ({ onCtaClick, dictionary }) => {
           </motion.div>
         </div>
 
-        {translations.ctaTitle && (
-          <motion.div variants={itemVariants} className="mt-12">
-            <CtaBlock
-              title={translations.ctaTitle}
-              description={translations.ctaDesc}
-              buttonText={translations.ctaButton}
-              ctaSection="process"
-              ctaSource="process_section"
-            />
-          </motion.div>
-        )}
       </motion.div>
     </BrandSection>
   );

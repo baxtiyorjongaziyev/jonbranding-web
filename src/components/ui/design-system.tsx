@@ -43,7 +43,7 @@ export function SectionIntro({
           {eyebrow}
         </div>
       )}
-      <h2 className="text-balance text-3xl font-black tracking-normal text-brand-ink sm:text-5xl">
+      <h2 className="text-balance text-3xl font-extrabold leading-tight tracking-normal text-brand-ink sm:text-5xl">
         {title}
       </h2>
       {description && (

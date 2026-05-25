@@ -1,8 +1,8 @@
 'use client';
 
-import { type FC, useCallback, useRef } from 'react';
+import { type FC } from 'react';
 import Link from 'next/link';
-import { BarChart3, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, ShieldCheck, Target } from 'lucide-react';
 import ContactTriggerButton from '@/components/contact-trigger-button';
 
 type HeroDictionary = {
@@ -74,128 +74,99 @@ function renderHeadline(headline: string, className?: string) {
 }
 
 const Hero: FC<HeroProps> = ({ dictionary }) => {
-  const spotlightRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    if (!spotlightRef.current) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    spotlightRef.current.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(132,213,180,0.07), transparent 70%)`;
-  }, []);
-
   if (!dictionary) return null;
 
   const heroCopy = getHeroCopy(dictionary);
 
   return (
-    <section
-      className="relative isolate min-h-[760px] overflow-hidden bg-[#06080d] text-white sm:min-h-[780px] lg:min-h-[820px]"
-      onMouseMove={handleMouseMove}
-    >
-      <div ref={spotlightRef} className="pointer-events-none absolute inset-0 z-0 transition-[background] duration-300" />
+    <section className="relative isolate overflow-hidden bg-[#090b0f] text-white">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,#06080d_0%,#11151f_58%,#132016_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:86px_86px] opacity-28" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,8,13,0.96)_0%,rgba(6,8,13,0.75)_48%,rgba(6,8,13,0.28)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(116deg,#090b0f_0%,#10141b_56%,#121712_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:92px_92px] opacity-20" />
+        <div className="absolute inset-y-0 right-0 w-1/2 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.045))]" />
+        <div className="absolute left-1/2 top-0 h-full w-px bg-white/[0.08]" />
       </div>
 
-      <div
-        className="container relative z-10 mx-auto flex min-h-[760px] max-w-[1400px] items-center px-4 pb-16 pt-24 sm:min-h-[780px] sm:px-6 sm:pb-20 lg:min-h-[820px] lg:px-8 lg:pb-20 lg:pt-28"
-      >
-        <div className="grid w-full items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <div className="flex flex-col justify-center text-center lg:text-left">
-            <div
-              className="mb-6 inline-flex items-center justify-center gap-2 self-center rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md lg:self-start"
-            >
-              <Sparkles className="h-3.5 w-3.5 text-brand-lime" />
-              <span className="text-[11px] font-black uppercase tracking-normal text-white/78">{heroCopy.preHeadline}</span>
-            </div>
-
+      <div className="container relative mx-auto flex min-h-[100dvh] max-w-[1360px] items-center px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:px-8 lg:pb-24">
+        <div className="grid w-full min-w-0 grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(400px,0.92fr)] lg:gap-14 xl:gap-20">
+          <div className="w-full min-w-0 max-w-[calc(100vw-2rem)] sm:max-w-3xl">
             {heroCopy.agencyTagline && (
-              <div className="mb-4 flex items-center justify-center gap-2 self-center lg:self-start text-[11px] font-black uppercase tracking-widest text-brand-lime">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-lime opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-lime"></span>
-                </span>
+              <div className="mb-5 inline-flex items-center gap-3 border-l border-brand-lime/70 pl-4 text-[11px] font-bold uppercase tracking-normal text-white/68">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-lime" />
                 {heroCopy.agencyTagline}
               </div>
             )}
-            <h1
-              className="mx-auto max-w-[292px] text-balance text-4xl font-black leading-[0.96] tracking-normal text-white drop-shadow-md sm:max-w-3xl sm:text-6xl sm:drop-shadow-none lg:mx-0 xl:text-7xl"
-            >
+
+            <h1 className="max-w-[21rem] text-balance text-4xl font-extrabold leading-[1.02] tracking-normal text-white [overflow-wrap:normal] sm:max-w-[780px] sm:text-6xl sm:leading-[0.98] lg:text-[4.35rem] xl:text-[4.85rem]">
               {renderHeadline(heroCopy.title, 'text-white')}
             </h1>
 
-            <p
-              className="mx-auto mt-5 max-w-[292px] text-pretty text-base leading-7 text-white/70 drop-shadow-sm sm:mt-6 sm:max-w-xl sm:text-lg sm:leading-8 sm:drop-shadow-none lg:mx-0"
-            >
+            <p className="mt-6 max-w-2xl text-pretty text-base leading-8 text-white/66 sm:text-lg">
               {heroCopy.description}
             </p>
 
-            <div
-              className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:justify-center lg:justify-start"
-            >
+            <div className="mt-9 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row">
               <ContactTriggerButton
                 section="hero"
                 ctaText={heroCopy.cta}
                 size="lg"
-                className="group h-14 rounded-full bg-white px-8 text-base font-black text-brand-ink shadow-[0_24px_70px_-24px_rgba(255,255,255,0.75)] transition-[background-color,color,box-shadow,transform] duration-200 hover:bg-brand-lime hover:text-brand-ink hover:shadow-[0_24px_70px_-24px_rgba(84,213,233,0.72)] active:scale-[0.98] sm:h-16"
+                showArrow={false}
+                className="group h-14 w-full justify-between rounded-full bg-white py-2 pl-6 pr-2 text-[15px] font-extrabold text-brand-ink shadow-[0_26px_80px_-34px_rgba(255,255,255,0.82)] transition-[background-color,color,box-shadow,transform] duration-300 hover:bg-brand-lime active:scale-[0.98] sm:h-16 sm:w-auto sm:min-w-[260px] sm:text-base"
               >
-                {heroCopy.cta}
+                <span>{heroCopy.cta}</span>
+                <span className="ml-4 flex h-10 w-10 items-center justify-center rounded-full bg-brand-ink text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-12 sm:w-12">
+                  <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+                </span>
               </ContactTriggerButton>
               <Link
                 href="#audit-offer"
-                className="inline-flex h-14 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-6 text-base font-black text-white/85 transition-[background-color,color,border-color] duration-200 hover:bg-white/10 hover:text-white sm:h-16"
+                className="inline-flex h-14 w-full items-center justify-center rounded-full border border-white/14 bg-white/[0.04] px-6 text-[15px] font-extrabold text-white/84 transition-[background-color,color,border-color,transform] duration-300 hover:border-white/24 hover:bg-white/[0.08] hover:text-white active:scale-[0.98] sm:h-16 sm:w-auto"
               >
                 {heroCopy.ctaSecondary}
               </Link>
             </div>
 
-            <div
-              className="mt-6 grid max-w-xl grid-cols-1 gap-2 self-center sm:mt-8 sm:grid-cols-3 lg:self-start"
-            >
-              {heroCopy.proofItems.map((item) => (
-                <div
-                  key={item}
-                  className="flex min-h-11 items-center gap-2 rounded-xl border border-white/[0.09] bg-white/[0.055] px-3 py-2 text-left text-xs font-bold leading-5 text-white/80 backdrop-blur-md sm:min-h-14 sm:px-4 sm:py-3 sm:text-sm"
-                >
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-lime" />
-                  <span className="min-w-0">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div
-            className="relative hidden items-center justify-center lg:flex"
-          >
-            <div className="jb-dark-panel relative w-full max-w-xl overflow-hidden p-5 backdrop-blur-xl lg:max-w-none">
-              <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
-              <AuditPanel copy={heroCopy} />
-              <div className="mt-4 grid gap-3">
-                {heroCopy.auditSignals.map((signal, index) => (
-                  <div key={signal} className="grid grid-cols-[44px_1fr] items-center gap-3 rounded-2xl border border-white/[0.1] bg-white/[0.055] p-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-lime text-sm font-black text-brand-ink">
-                      0{index + 1}
-                    </div>
-                    <div>
-                      <div className="text-[11px] font-black uppercase tracking-normal text-brand-lime">Audit signal</div>
-                      <div className="mt-0.5 text-sm font-bold leading-5 text-white/82">{signal}</div>
-                    </div>
+            {heroCopy.proofItems.length > 0 && (
+              <div className="mt-9 grid max-w-3xl gap-4 sm:grid-cols-3">
+                {heroCopy.proofItems.map((item) => (
+                  <div key={item} className="border-l border-white/14 pl-4">
+                    <CheckCircle2 className="mb-3 h-4 w-4 text-brand-lime" aria-hidden="true" />
+                    <p className="text-sm font-semibold leading-6 text-white/72">{item}</p>
                   </div>
                 ))}
               </div>
-              <div className="mt-3 hidden grid-cols-3 gap-3 lg:grid">
-                {heroCopy.showcaseTags.map((tag) => (
-                  <div
-                    key={tag}
-                    className="flex items-center justify-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.055] px-4 py-3 text-[11px] font-black uppercase tracking-normal text-white/80"
-                  >
-                    <ShieldCheck className="h-3.5 w-3.5 text-brand-lime" />
-                    <span className="truncate">{tag}</span>
+            )}
+          </div>
+
+          <div className="relative mx-auto w-full min-w-0 max-w-[calc(100vw-2rem)] sm:max-w-[540px] lg:mr-0">
+            <div className="rounded-[2rem] border border-white/10 bg-white/[0.055] p-2 shadow-[0_40px_120px_-65px_rgba(0,0,0,0.95)]">
+              <div className="rounded-[1.55rem] border border-white/10 bg-[#0d1118] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:p-7">
+                <AuditPanel copy={heroCopy} />
+
+                {heroCopy.auditSignals.length > 0 && (
+                  <div className="mt-6 divide-y divide-white/[0.08] border-y border-white/[0.08]">
+                    {heroCopy.auditSignals.map((signal, index) => (
+                      <div key={signal} className="grid grid-cols-[3.25rem_1fr] gap-4 py-4">
+                        <div className="font-mono text-sm font-bold text-brand-lime tabular-nums">0{index + 1}</div>
+                        <div>
+                          <div className="text-[11px] font-bold uppercase tracking-normal text-white/38">{heroCopy.auditScoreLabel}</div>
+                          <p className="mt-1 text-sm font-semibold leading-6 text-white/80">{signal}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
+
+                {heroCopy.showcaseTags.length > 0 && (
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {heroCopy.showcaseTags.map((tag) => (
+                      <div key={tag} className="inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.045] px-3 py-2 text-xs font-bold text-white/70">
+                        <ShieldCheck className="h-3.5 w-3.5 text-brand-lime" aria-hidden="true" />
+                        {tag}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -207,24 +178,22 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
 
 function AuditPanel({ copy }: { copy: ReturnType<typeof getHeroCopy> }) {
   return (
-    <div className="mt-2 rounded-2xl border border-white/15 bg-[#06080d]/86 p-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-5">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <div className="flex items-start justify-between gap-5">
         <div>
-          <div className="mb-3 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-normal text-brand-lime">
-            <ShieldCheck className="h-4 w-4" />
-            <span>{copy.auditScoreLabel}</span>
+          <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-normal text-brand-lime">
+            <Target className="h-4 w-4" aria-hidden="true" />
+            <span>{copy.preHeadline || copy.auditScoreLabel}</span>
           </div>
-          <h2 className="text-lg font-black tracking-normal text-white sm:text-xl">{copy.auditTitle}</h2>
-          <p className="mt-1 text-sm leading-6 text-white/60">{copy.auditSubtitle}</p>
+          <h2 className="max-w-sm text-pretty text-2xl font-extrabold leading-tight tracking-normal text-white sm:text-3xl">
+            {copy.auditTitle}
+          </h2>
+          <p className="mt-3 max-w-sm text-sm leading-7 text-white/58">{copy.auditSubtitle}</p>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-lime text-sm font-black text-brand-ink shadow-[0_16px_40px_-18px_rgba(84,213,233,0.8)]">
-            {copy.auditScore}
-          </div>
-          <BarChart3 className="hidden h-7 w-7 text-brand-lime sm:block" />
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-brand-lime/25 bg-brand-lime text-sm font-extrabold text-brand-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.36)]">
+          {copy.auditScore}
         </div>
       </div>
-
     </div>
   );
 }

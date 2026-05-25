@@ -11,13 +11,13 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 226 62% 42%;
+    --primary: 222 42% 28%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 35%;
-    --accent: 184 60% 42%;
+    --accent: 184 54% 38%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -31,11 +31,11 @@
     --input: 214.3 31.8% 91.4%;
     --radius: 0.75rem;
     --brand-ink: 222 48% 6%;
-    --brand-paper: 42 38% 97%;
-    --brand-mist: 38 28% 94%;
-    --brand-blue: 226 62% 42%;
-    --brand-cyan: 184 60% 42%;
-    --brand-lime: 190 82% 62%;
+    --brand-paper: 42 32% 97%;
+    --brand-mist: 38 24% 94%;
+    --brand-blue: 222 42% 28%;
+    --brand-cyan: 184 54% 38%;
+    --brand-lime: 178 56% 58%;
     --brand-slate: 222 12% 38%;
     --brand-line: 38 18% 84%;
     --font-inter: var(--font-jakarta), "Aptos", "Segoe UI", sans-serif;
@@ -104,6 +104,9 @@
 @layer base {
   * {
     @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-brand-paper text-muted-foreground overflow-x-hidden;
@@ -272,7 +275,7 @@
   }
 
   .brand-card {
-    @apply rounded-2xl border border-brand-line/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] duration-300;
+    @apply rounded-xl border border-brand-line/80 p-6 shadow-[0_20px_60px_rgba(35,41,55,0.06)] duration-300;
     background-color: rgb(255 255 255 / 0.9);
     transition-property: box-shadow, transform, border-color, background-color;
   }
@@ -280,7 +283,7 @@
   .brand-card:hover {
     transform: translateY(-3px);
     border-color: hsl(var(--brand-ink) / 0.16);
-    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.1);
+    box-shadow: 0 30px 80px rgba(35, 41, 55, 0.1);
   }
 
   .brand-card-dark {
@@ -290,19 +293,19 @@
   }
 
   .brand-badge {
-    @apply inline-flex items-center rounded-full border border-brand-line/80 bg-white/80 px-3 py-1 text-[11px] font-black uppercase tracking-normal text-brand-blue;
+    @apply inline-flex items-center rounded-full border border-brand-line/80 bg-white/80 px-3 py-1 text-[11px] font-extrabold uppercase tracking-normal text-brand-blue;
   }
 
   .jb-eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-brand-line/80 bg-white/80 px-4 py-2 text-[11px] font-black uppercase tracking-normal text-brand-blue shadow-sm;
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-line/80 bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-normal text-brand-blue shadow-sm;
   }
 
   .jb-dark-panel {
-    @apply rounded-3xl border border-white/10 bg-white/[0.06] shadow-[0_40px_120px_-55px_rgba(0,0,0,0.9)];
+    @apply rounded-[1.75rem] border border-white/10 bg-white/[0.06] shadow-[0_40px_120px_-55px_rgba(0,0,0,0.9)];
   }
 
   .jb-warm-panel {
-    @apply rounded-3xl border border-brand-line/80 bg-white/90 shadow-[0_24px_70px_rgba(15,23,42,0.07)];
+    @apply rounded-2xl border border-brand-line/80 bg-white/90 shadow-[0_24px_70px_rgba(35,41,55,0.07)];
   }
 
   .section-padding {
