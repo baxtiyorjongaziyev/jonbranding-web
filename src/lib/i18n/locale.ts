@@ -50,3 +50,11 @@ export function getLocale(request: NextRequest): Locale {
 export function setLocaleCookie(locale: Locale) {
     document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
 }
+
+export function getLocalizedAbsoluteUrl(baseUrl: string, locale: Locale): string {
+  return `${baseUrl.replace(/\/$/, '')}/${locale}`;
+}
+
+export function getLocaleAlternates(baseUrl: string): Record<string, string> {
+  return Object.fromEntries(locales.map((locale) => [locale, getLocalizedAbsoluteUrl(baseUrl, locale)]));
+}
