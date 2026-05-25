@@ -1,7 +1,8 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useRef } from 'react';
 import { Clock, Flame } from 'lucide-react';
+import { useInView } from 'framer-motion';
 
 function getEndOfWeek(): Date {
   const now = new Date();
@@ -31,22 +32,27 @@ const copy = {
 const CountdownBanner: FC<{ lang: string }> = ({ lang }) => {
   const [mounted, setMounted] = useState(false);
   const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const bannerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(bannerRef);
   const t = copy[(lang as keyof typeof copy) || 'uz'] || copy.uz;
 
   useEffect(() => {
     setMounted(true);
     const target = getEndOfWeek();
     setTime(getTimeLeft(target));
+
+    if (!isInView) return;
+
     const interval = setInterval(() => setTime(getTimeLeft(target)), 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isInView]);
 
   const dayOfWeek = new Date().getDay();
   const spotsLeft = Math.max(1, 5 - dayOfWeek);
 
   if (!mounted) {
     return (
-      <div className="relative overflow-hidden bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 py-1.5">
+      <div ref={bannerRef} className="relative overflow-hidden bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 py-1.5">
         <div className="container mx-auto flex items-center justify-center gap-2 px-4 text-center text-xs text-white sm:gap-3 sm:text-sm">
           <span className="flex items-center gap-1 font-bold">
             <Flame className="h-3 w-3 text-orange-400 sm:h-4 sm:w-4" />
@@ -66,7 +72,7 @@ const CountdownBanner: FC<{ lang: string }> = ({ lang }) => {
   }
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 py-1.5">
+    <div ref={bannerRef} className="relative overflow-hidden bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 py-1.5">
       <div className="container mx-auto flex items-center justify-center gap-2 px-4 text-center text-xs text-white sm:gap-3 sm:text-sm">
         <span className="flex items-center gap-1 font-bold">
           <Flame className="h-3 w-3 text-orange-400 sm:h-4 sm:w-4" />
