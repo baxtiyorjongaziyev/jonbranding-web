@@ -1,28 +1,48 @@
-import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import '../globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { locales, defaultLocale } from '@/lib/i18n/locale';
+import {
+  locales,
+  defaultLocale,
+  getLocalizedAbsoluteUrl,
+  getLocaleAlternates,
+} from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
-import StickyCTA from '@/components/ui/sticky-cta';
-import MobileNavBar from '@/components/layout/mobile-nav-bar';
-import LeadMagnetPopup from '@/components/ui/lead-magnet-popup';
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
-import TabNotification from '@/components/layout/tab-notification';
-import OishaWidget from '@/components/oisha-widget';
-import { cn } from '@/lib/utils';
 
 
-const BASE_URL = 'https://jonbranding.uz';
+const BASE_URL = 'https://www.jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
-const ICON_URL = '/icon.svg';
 
-export async function generateMetadata({ params: { lang } }: Props): Promise<Metadata> {
-  const dictionary = await getDictionary(lang as Locale);
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
+  themeColor: '#2563EB',
+};
+
+const localeUrls = {
+  uz: getLocalizedAbsoluteUrl(BASE_URL, 'uz'),
+  ru: getLocalizedAbsoluteUrl(BASE_URL, 'ru'),
+  en: getLocalizedAbsoluteUrl(BASE_URL, 'en'),
+  zh: getLocalizedAbsoluteUrl(BASE_URL, 'zh'),
+} satisfies Record<Locale, string>;
+
+const ogLocales = {
+  uz: 'uz_UZ',
+  ru: 'ru_RU',
+  en: 'en_US',
+  zh: 'zh_CN',
+} satisfies Record<Locale, string>;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  const safeLang = locales.includes(lang as Locale) ? (lang as Locale) : defaultLocale;
+  const dictionary = await getDictionary(safeLang);
   return {
     metadataBase: new URL(BASE_URL),
     title: {
@@ -41,8 +61,8 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
     },
     openGraph: {
       type: 'website',
-      locale: lang === 'uz' ? 'uz_UZ' : lang === 'ru' ? 'ru_RU' : 'en_US',
-      url: BASE_URL,
+      locale: ogLocales[safeLang],
+      url: localeUrls[safeLang],
       siteName: 'Jon.Branding',
       images: [{ url: OG_IMAGE_URL, width: 1200, height: 630, alt: 'Jon Branding Agency' }],
     },
@@ -51,37 +71,19 @@ export async function generateMetadata({ params: { lang } }: Props): Promise<Met
       images: [OG_IMAGE_URL],
     },
     alternates: {
-      canonical: `${BASE_URL}/${lang}`,
-      languages: {
-        'uz': `${BASE_URL}/uz`,
-        'ru': `${BASE_URL}/ru`,
-        'en': `${BASE_URL}/en`,
-      },
+      canonical: localeUrls[safeLang],
+      languages: getLocaleAlternates(BASE_URL),
     },
   };
 }
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin', 'latin-ext'],
-  display: 'swap',
-  variable: '--font-jakarta',
-  weight: ['400', '500', '600', '700', '800']
-});
-
-const inter = Inter({
-  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
-  display: 'swap',
-  variable: '--font-inter',
-  weight: ['400', '500', '600', '700', '800', '900']
-});
-
 type Props = {
   children: ReactNode;
-  params: { lang: Locale };
+  params: Promise<{ lang: string }>;
 };
 
 export default async function LocalizedLayout({ children, params }: Props) {
-  const { lang: rawLang } = params;
+  const { lang: rawLang } = await params;
   const lang = locales.includes(rawLang as Locale) ? (rawLang as Locale) : defaultLocale;
   let dictionary;
   try {
@@ -92,23 +94,20 @@ export default async function LocalizedLayout({ children, params }: Props) {
     dictionary = await getDictionary('uz');
   }
 
+  const tabNotificationMessage =
+    lang === 'ru' ? '(1) Novoe soobshchenie! | Jon Branding' :
+    lang === 'en' ? '(1) New message! | Jon Branding' :
+    lang === 'zh' ? '(1) New message! | Jon Branding' :
+    '(1) Yangi xabar! | Jon Branding';
+
   return (
-    <html lang={lang} suppressHydrationWarning className={cn(plusJakartaSans.variable, inter.variable)}>
+    <html lang={lang} suppressHydrationWarning>
       <head>
-        <link rel="alternate" hrefLang="x-default" href="https://jonbranding.uz/uz" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#2563EB" />
+        <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#06080d}' }} />
+        <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="JonBranding" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://player.vimeo.com" />
-        <link rel="preconnect" href="https://vimeo.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://player.vimeo.com" />
-        <link rel="dns-prefetch" href="https://vimeo.com" />
         <Script
           id="json-ld-professional-service"
           type="application/ld+json"
@@ -118,9 +117,9 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "@type": "ProfessionalService",
               "name": "Jon.Branding",
               "alternateName": "JonBranding Agency",
-              "image": "https://jonbranding.uz/icon.svg",
-              "logo": "https://jonbranding.uz/icon.svg",
-              "url": "https://jonbranding.uz",
+              "image": "https://www.jonbranding.uz/icon.svg",
+              "logo": "https://www.jonbranding.uz/icon.svg",
+              "url": "https://www.jonbranding.uz",
               "telephone": "+998336450097",
               "priceRange": "$$$",
               "address": {
@@ -174,46 +173,199 @@ export default async function LocalizedLayout({ children, params }: Props) {
             })
           }}
         />
-      </head>
-      <body className="font-body bg-white antialiased" suppressHydrationWarning>
-        <TabNotification 
-          message={
-            lang === 'ru' ? '(1) Новое сообщение! | Jon Branding' :
-            lang === 'en' ? '(1) New message! | Jon Branding' :
-            lang === 'zh' ? '(1) 新消息！ | Jon Branding' :
-            '(1) Yangi xabar! | Jon Branding'
-          } 
+        <Script
+          id="json-ld-faq"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Чем хороший брендинг отличается от простого логотипа?"
+                    : lang === 'en'
+                    ? "What is the difference between good branding and just a logo?"
+                    : "Yaxshi brending va shunchaki chiroyli logotipning farqi nimada?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "Логотип — это визуальный знак. В Jon.Branding мы рассматриваем брендинг как фундамент бизнеса: анализ стратегии, рынка и психологии клиентов. Результат — не просто 'красивый', а приносящий доход бренд."
+                      : lang === 'en'
+                      ? "A logo is just a visual mark. At Jon.Branding we treat branding as the foundation of your business: market positioning, strategy, and customer psychology. The result is not just 'beautiful' — it generates revenue."
+                      : "Shunchaki logotip — bu vizual belgi. Jon.Branding'da biz brendingni biznesingiz poydevori deb bilamiz. Strategiya, bozordagi o'rin va mijozlar ruhiyatini tahlil qilamiz — natijada daromad keltiruvchi brend yaratamiz."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Сколько времени занимает создание бренда?"
+                    : lang === 'en'
+                    ? "How long does a branding project take?"
+                    : "Loyiha qancha muddatda tayyor bo'ladi?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "В среднем 4–8 недель. Это время необходимо для глубокого анализа, создания уникальной концепции и доработки каждой детали. Мы ставим качество на первое место."
+                      : lang === 'en'
+                      ? "On average 4–8 weeks. This time is required for deep analysis, unique concept creation, and perfecting every detail. We prioritise quality."
+                      : "O'rtacha 4 haftadan 8 haftagacha. Bu vaqt chuqur tahlil, noyob konsepsiya yaratish va har bir detalni ideal holatga keltirish uchun zarur."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Почему ваши услуги дороже среднего?"
+                    : lang === 'en'
+                    ? "Why are your services priced above average?"
+                    : "Nega xizmatlaringiz narxi bozor o'rtachasidan yuqori?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "Мы продаём не расходы, а инвестиции. Наши решения направлены на рост продаж и снижение маркетинговых затрат. Работа с Jon.Branding — это система, которая окупается многократно."
+                      : lang === 'en'
+                      ? "We sell investment, not expense. Our solutions are designed to increase sales and reduce marketing costs. Working with Jon.Branding is a system that pays back many times over."
+                      : "Biz xarajatni emas, investitsiyani sotamiz. Bizning yechimlarimiz savdoni oshirishga va marketing xarajatlarini kamaytirishga qaratilgan — bir necha barobar foyda keltiradigan tizim."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Есть ли гарантия результата?"
+                    : lang === 'en'
+                    ? "Is there a result guarantee?"
+                    : "Natijaga kafolat bormi?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "Да. Если начальные концепции не соответствуют вашим требованиям по брифу, мы доработаем проект или выполним согласованные условия возврата."
+                      : lang === 'en'
+                      ? "Yes. If the initial concepts do not match your brief requirements, we will revise the project or fulfil the agreed refund terms."
+                      : "Albatta. Agar dastlabki konsepsiyalar sizning talablaringizga mos kelmasa, biz loyihani qayta ishlaymiz yoki kelishilgan qaytarish shartlarini bajaramiz."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": lang === 'ru'
+                    ? "Можно ли заказать только логотип?"
+                    : lang === 'en'
+                    ? "Can I order just a logo?"
+                    : "Faqatgina logotip buyurtma qilsa bo'ladimi?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": lang === 'ru'
+                      ? "Мы рекомендуем создавать полную систему айдентики, так как только логотип не обеспечивает целостность бренда. Однако для небольших проектов у нас есть пакеты 'Логотип + Минимальный фирменный стиль'."
+                      : lang === 'en'
+                      ? "We recommend building a full identity system, as a logo alone cannot ensure brand integrity. However, for smaller projects we have 'Logo + Minimal Corporate Style' packages."
+                      : "Biz butun aydentika tizimini yaratishni tavsiya qilamiz, chunki faqat logotip brend yaxlitligini ta'minlamaydi. Biroq, kichik loyihalar uchun 'Logo + Minimal firma uslubi' paketlari mavjud."
+                  }
+                }
+              ]
+            })
+          }}
         />
-        <GoogleTagManager gtmId="GTM-5GRQBW84" />
-        {/* Optimized Analytics Loading Strategy */}
-        <Script id="analytics-delayed-load" strategy="afterInteractive">
+        <Script
+          id="json-ld-aggregate-rating"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Jon.Branding",
+              "url": "https://www.jonbranding.uz",
+              "telephone": "+998336450097",
+              "priceRange": "$$$",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Tashkent",
+                "addressLocality": "Tashkent",
+                "addressCountry": "UZ"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "47",
+                "bestRating": "5"
+              },
+              "review": [
+                {
+                  "@type": "Review",
+                  "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                  "author": { "@type": "Person", "name": "Javohir Haqberdiyev" },
+                  "reviewBody": lang === 'ru'
+                    ? "Получилось даже лучше, чем я ожидал. Смотрю на логотип и сам наслаждаюсь. Что мне понравилось — это доверие. И то, что сдали раньше срока, было здорово. Большое спасибо!"
+                    : lang === 'en'
+                    ? "It turned out even better than I expected. I look at the logo and enjoy it myself. What I liked was the trust. And delivering ahead of schedule was great. Thank you so much!"
+                    : "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Muddatdan oldin topshirilgani juda zo'r bo'ldi. Rahmat aka!",
+                  "datePublished": "2024-10-01"
+                },
+                {
+                  "@type": "Review",
+                  "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                  "author": { "@type": "Person", "name": "Nodirbek" },
+                  "reviewBody": lang === 'ru'
+                    ? "3 года назад вы разработали логотип для этого бренда. Получилось великолепно, действительно все хвалят. Большое спасибо, Бахтиёр ака!"
+                    : lang === 'en'
+                    ? "3 years ago you designed the logo for this brand. It came out brilliantly — everyone genuinely praises it. Thank you so much, Bakhtiyor aka!"
+                    : "3 yil oldin shu brendning logosini sizlar ishlab bergandingiz. Ajoyib chiqqan, rostdan hamma maqtayapti. Rahmat katta, Baxtiyor aka.",
+                  "datePublished": "2024-08-01"
+                },
+                {
+                  "@type": "Review",
+                  "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                  "author": { "@type": "Person", "name": "Sevara Xolmanova" },
+                  "reviewBody": lang === 'ru'
+                    ? "Я работала с этой командой, мне очень понравилось. Эффективно, и результат превзошёл все ожидания. Вы работаете честно, да будет доволен вами Аллах. Я очень рада, успехов в вашей работе. Спасибо."
+                    : lang === 'en'
+                    ? "I worked with this team and loved it. Efficient, and the results exceeded all expectations. I ordered branding, stickers and patenting. Very satisfied. Thank you."
+                    : "Men bu jamoa bilan ishlab ko'rdim, menga juda yoqdi. Samarali va natijasi siz kutgandanda a'lo bo'ldi. Brendlashni ham stikerlash va patentlashni ham berdim. Juda xursand bo'ldim. Rahmat.",
+                  "datePublished": "2024-06-01"
+                }
+              ]
+            })
+          }}
+        />
+      </head>
+      <body className="font-body bg-brand-paper antialiased" suppressHydrationWarning>
+        <a href="#main-content" className="skip-link">
+          {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
+        </a>
+        <Script id="analytics-delayed-load" strategy="lazyOnload">
           {`
             (function() {
               const loadAnalytics = () => {
                 if (window.analyticsLoaded) return;
                 window.analyticsLoaded = true;
 
-                // 1. Google Analytics
+                // 1. Google Tag Manager
+                const gtm = document.createElement('script');
+                gtm.async = true;
+                gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5GRQBW84';
+                document.head.appendChild(gtm);
+
+                // 2. Google Analytics
+                const gaId = '${process.env.NEXT_PUBLIC_GA_ID || 'G-BTSGJQLMMV'}';
                 const ga = document.createElement('script');
                 ga.async = true;
-                ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-B3ZSKB40XY';
+                ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
                 document.head.appendChild(ga);
                 ga.onload = () => {
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', 'G-B3ZSKB40XY');
+                  gtag('config', gaId);
                   gtag('config', 'AW-17674872079');
                 };
 
-                // 2. Microsoft Clarity
+                // 3. Microsoft Clarity
                 (function(c,l,a,r,i,t,y){
                   c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                   t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
                   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
                 })(window, document, "clarity", "script", "w7knsud9mg");
 
-                // 3. Hotjar
+                // 4. Hotjar
                 (function(h,o,t,j,a,r){
                   h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
                   h._hjSettings={hjid:6527829,hjsv:6};
@@ -223,7 +375,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
                   a.appendChild(r);
                 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 
-                // 4. FB Pixel
+                // 5. FB Pixel
                 !function(f,b,e,v,n,t,s)
                 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
                 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -236,31 +388,32 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 fbq('track', 'PageView');
               };
 
-              // Events to trigger loading
-              ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-                window.addEventListener(event, loadAnalytics, { once: true, passive: true });
-              });
-              
-              // Fallback for bots or slow interactions
-              setTimeout(loadAnalytics, 5000);
+              window.addEventListener('cookie-consent-accepted', loadAnalytics);
+              if (document.cookie.includes('cookie_consent_accepted=true')) {
+                loadAnalytics();
+              }
             })();
           `}
         </Script>
 
         
-        <MainLayout>
+        <MainLayout
+          leadMagnetDictionary={(dictionary as any).leadMagnetPopup}
+          headerDictionary={dictionary.header}
+          lang={lang}
+          stickyCtaLabel={dictionary.header?.free_consultation || 'Contact us'}
+          tabNotificationMessage={tabNotificationMessage}
+        >
           <Header lang={lang} dictionary={dictionary.header} />
           
-          <div className="flex-grow">
+          <div id="main-content" className="flex-grow">
             {children}
           </div>
         <Footer lang={lang} dictionary={dictionary.footer} />
-          <StickyCTA lang={lang} />
-          <MobileNavBar lang={lang} dictionary={dictionary.common} />
-          <OishaWidget lang={lang as 'uz' | 'ru'} />
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">
           {`
+            if (document.cookie.includes('cookie_consent_accepted=true')) {
             (function(m,e,t,r,i,k,a){
                 m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                 m[i].l=1*new Date();
@@ -269,6 +422,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
             })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
 
             ym(91628105, 'init', {webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+            }
           `}
         </Script>
         <noscript>
@@ -276,8 +430,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
             <img src="https://mc.yandex.ru/watch/91628105" style={{ position: 'absolute', left: '-9999px' }} alt="" />
           </div>
         </noscript>
-        
-          <LeadMagnetPopup dictionary={(dictionary as any).leadMagnetPopup} />
         </MainLayout>
       </body>
     </html>
