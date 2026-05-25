@@ -22,13 +22,16 @@ export default function TelegramBanner({ lang }: { lang: string }) {
     sessionStorage.setItem('telegram_banner_seen', 'true');
   };
 
-  const text = lang === 'ru'
-    ? 'Присоединяйтесь к нашему Telegram-каналу для получения экспертных советов по брендингу!'
-    : (lang === 'en'
-      ? 'Join our Telegram channel for expert branding insights!'
-      : 'Brending boʿyicha foydali maslahatlar uchun Telegram kanalimizga qoʿshiling!');
+  const text =
+    lang === 'ru'
+      ? 'Присоединяйтесь к нашему Telegram-каналу для получения экспертных советов по брендингу!'
+      : lang === 'en'
+        ? 'Join our Telegram channel for expert branding insights!'
+        : 'Brending boʿyicha foydali maslahatlar uchun Telegram kanalimizga qoʿshiling!';
 
-  const buttonText = lang === 'ru' ? 'Присоединиться' : (lang === 'en' ? 'Join Now' : 'Qoʿshilish');
+  const buttonText = lang === 'ru' ? 'Присоединиться' : lang === 'en' ? 'Join Now' : 'Qoʿshilish';
+  const closeAriaLabel =
+    lang === 'ru' ? 'Закрыть баннер' : lang === 'en' ? 'Close banner' : 'Bannerni yopish';
 
   return (
     <AnimatePresence>
@@ -45,9 +48,7 @@ export default function TelegramBanner({ lang }: { lang: string }) {
               <div className="bg-white/20 p-2 rounded-full shrink-0">
                 <Send className="w-4 h-4 text-white" />
               </div>
-              <p className="text-sm font-medium truncate">
-                {text}
-              </p>
+              <p className="text-sm font-medium truncate">{text}</p>
             </div>
 
             <div className="flex items-center gap-3 shrink-0">
@@ -63,7 +64,7 @@ export default function TelegramBanner({ lang }: { lang: string }) {
               <button
                 onClick={closeBanner}
                 className="p-1 hover:bg-white/20 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
-                aria-label="Close banner"
+                aria-label={closeAriaLabel}
               >
                 <X className="w-4 h-4" />
               </button>
