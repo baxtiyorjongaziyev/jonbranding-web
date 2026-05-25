@@ -173,20 +173,24 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
   )
 }
 
-const Testimonials = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
-    let testimonials;
-    switch (lang) {
-        case 'ru':
-            testimonials = staticTestimonialsRu;
-            break;
-        case 'en':
-            testimonials = staticTestimonialsEn;
-            break;
-        case 'zh':
-            testimonials = staticTestimonialsZh;
-            break;
-        default:
-            testimonials = staticTestimonials;
+const Testimonials = ({ lang, dictionary, testimonials: testimonialsProp }: { lang: string; dictionary: any; testimonials?: Testimonial[] }) => {
+    let testimonials: Testimonial[];
+    if (testimonialsProp && testimonialsProp.length > 0) {
+        testimonials = testimonialsProp;
+    } else {
+        switch (lang) {
+            case 'ru':
+                testimonials = staticTestimonialsRu;
+                break;
+            case 'en':
+                testimonials = staticTestimonialsEn;
+                break;
+            case 'zh':
+                testimonials = staticTestimonialsZh;
+                break;
+            default:
+                testimonials = staticTestimonials;
+        }
     }
     return <TestimonialsClient testimonials={testimonials} dictionary={dictionary} lang={lang} />
 };

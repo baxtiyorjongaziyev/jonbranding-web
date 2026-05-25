@@ -13,6 +13,7 @@ import WhyUs from '@/components/sections/why-us';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTelegram } from '@/hooks/use-telegram';
 import { cn } from '@/lib/utils';
+import type { Brand, Testimonial } from '@/lib/types';
 
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'), { 
     loading: () => <Skeleton className="h-96 w-full rounded-3xl" /> 
@@ -73,7 +74,7 @@ const fadeInVariant = {
   }
 };
 
-const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary }) => {
+const HomeComponent: FC<{ lang: string; dictionary: any; brands?: Brand[]; testimonials?: Testimonial[] }> = ({ lang, dictionary, brands, testimonials }) => {
     const [mounted, setMounted] = useState(false);
     const { tg } = useTelegram();
 
@@ -180,7 +181,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 <BentoResultsStats dictionary={dictionary} />
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
-                    <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
+                    <TrustedBy lang={lang} dictionary={dictionary.trustedBy} brands={brands} />
                 </motion.div>
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-150px" }}>
@@ -200,7 +201,7 @@ const HomeComponent: FC<{ lang: string, dictionary: any }> = ({ lang, dictionary
                 </motion.div>
 
                 <motion.div variants={fadeInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-                    <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+                    <Testimonials lang={lang} dictionary={dictionary.testimonials} testimonials={testimonials} />
                 </motion.div>
 
                 <Gallery lang={lang} dictionary={dictionary.gallery} />
