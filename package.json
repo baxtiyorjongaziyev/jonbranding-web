@@ -106,7 +106,7 @@
     "sharp": "^0.34.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
-    "vite": "^8.0.10",
+    "vite": "^8.0.14",
     "vitest": "^4.1.7",
     "wrangler": "^4.92.0"
   },
