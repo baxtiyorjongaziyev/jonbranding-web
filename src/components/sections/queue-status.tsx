@@ -67,7 +67,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
   }, [isInView]);
 
   if (!translations) {
-    return null;
+    return <section ref={sectionRef} className="py-16 sm:py-24 bg-white" />;
   }
 
   const slots = Array.from({ length: totalSlots });
