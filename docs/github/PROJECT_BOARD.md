@@ -2,7 +2,7 @@
 
 Live project:
 
-- https://github.com/users/baxtiyorjongaziyev/projects/2
+- JonBranding Web OS (GitHub user project #2, private)
 
 Recommended GitHub Project columns:
 

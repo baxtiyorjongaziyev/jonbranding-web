@@ -15,21 +15,39 @@ import { type Testimonial } from '@/lib/types';
 import { trackEvent } from '@/lib/analytics';
 
 const CASE_STUDY_VIDEO_IDS = ['1145610708'];
+const VIMEO_HOSTS = new Set(['vimeo.com', 'www.vimeo.com', 'player.vimeo.com']);
 
-const isCaseStudyVideo = (testimonial: Testimonial) => {
-  if (!testimonial.videoUrl) return false;
-  return CASE_STUDY_VIDEO_IDS.some((videoId) => testimonial.videoUrl?.includes(videoId));
+const getVimeoVideoId = (url?: string) => {
+  if (!url) return '';
+
+  try {
+    const parsed = new URL(url);
+    const hostname = parsed.hostname.toLowerCase();
+
+    if (!VIMEO_HOSTS.has(hostname)) return '';
+
+    const parts = parsed.pathname.split('/').filter(Boolean);
+    const videoIndex = parts.indexOf('video');
+    return videoIndex >= 0 ? parts[videoIndex + 1] || '' : parts[0] || '';
+  } catch {
+    return '';
+  }
 };
+
+const isCaseStudyVideo = (testimonial: Testimonial) =>
+  CASE_STUDY_VIDEO_IDS.includes(getVimeoVideoId(testimonial.videoUrl));
 
 const getVimeoEmbedUrl = (url?: string, autoplay = false) => {
   if (!url) return '';
 
   try {
     const parsed = new URL(url);
-    const isVimeo = parsed.hostname.includes('vimeo.com');
+    const hostname = parsed.hostname.toLowerCase();
 
-    if (isVimeo && parsed.hostname !== 'player.vimeo.com') {
-      const videoId = parsed.pathname.split('/').filter(Boolean).pop();
+    if (!VIMEO_HOSTS.has(hostname)) return '';
+
+    if (hostname !== 'player.vimeo.com') {
+      const videoId = getVimeoVideoId(url);
       if (videoId) {
         parsed.hostname = 'player.vimeo.com';
         parsed.pathname = `/video/${videoId}`;
@@ -49,7 +67,7 @@ const getVimeoEmbedUrl = (url?: string, autoplay = false) => {
 
     return parsed.toString();
   } catch {
-    return url;
+    return '';
   }
 };
 

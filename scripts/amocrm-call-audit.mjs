@@ -1,4 +1,4 @@
-import { execFileSync, execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -39,13 +39,8 @@ const GOOGLE_STT_BATCH_POLL_MS = Number(getArg('--google-stt-batch-poll-ms', '50
 const GOOGLE_STT_FORCE_BATCH = args.has('--google-stt-force-batch');
 const ANALYSIS_TRANSCRIPT_MAX_CHARS = Number(getArg('--analysis-transcript-max-chars', '12000'));
 
-function shellQuote(value) {
-  return `"${String(value).replace(/"/g, '\\"')}"`;
-}
-
 function run(command, args) {
-  const cmd = [command, ...args.map(shellQuote)].join(' ');
-  return execSync(cmd, {
+  return execFileSync(command, args, {
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'ignore'],
   }).replace(/^\uFEFF/, '').trim();
