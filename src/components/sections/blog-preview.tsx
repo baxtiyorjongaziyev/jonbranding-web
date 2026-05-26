@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
+import DOMPurify from 'isomorphic-dompurify';
 import { getSortedPostsData } from '@/lib/blog-posts';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 import { Locale } from '@/lib/dictionaries';
@@ -25,6 +26,11 @@ interface BlogPreviewProps {
   };
 }
 
+const sanitizePlainText = (value?: string) =>
+  DOMPurify.sanitize(value || '', { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }).trim();
+
+const sanitizeSlug = (slug: string) => slug.toLowerCase().replace(/[^a-z0-9-]/g, '');
+
 export default function BlogPreview({ lang, dictionary }: BlogPreviewProps) {
   const posts = getSortedPostsData(lang).slice(0, 3);
 
@@ -43,17 +49,24 @@ export default function BlogPreview({ lang, dictionary }: BlogPreviewProps) {
         <SectionIntro eyebrow="Blog" title={t.title} description={t.subtitle} />
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {posts.map((post, index) => (
-            <Link
-              key={post.slug}
-              href={getLocalizedPath(lang as Locale, `/blog/${post.slug}`)}
-              className="group block"
-            >
+          {posts.map((post, index) => {
+            const slug = sanitizeSlug(post.slug);
+            const title = sanitizePlainText(post.title);
+            const description = sanitizePlainText(post.description);
+
+            if (!slug) return null;
+
+            return (
+              <Link
+                key={slug}
+                href={getLocalizedPath(lang as Locale, `/blog/${slug}`)}
+                className="group block"
+              >
               <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="relative h-48 w-full overflow-hidden flex-shrink-0">
                   <Image
                     src={blogCardImages[index % blogCardImages.length]}
-                    alt={post.title}
+                    alt={title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -65,10 +78,10 @@ export default function BlogPreview({ lang, dictionary }: BlogPreviewProps) {
                     {post.date?.slice(0, 7)}
                   </p>
                   <h3 className="mb-3 flex-grow text-base font-bold leading-snug text-brand-ink line-clamp-3 group-hover:text-brand-blue transition-colors duration-200">
-                    {post.title}
+                    {title}
                   </h3>
                   <p className="mb-4 text-sm leading-relaxed text-brand-slate line-clamp-2">
-                    {post.description}
+                    {description}
                   </p>
                   <span className="mt-auto flex items-center gap-1 text-sm font-semibold text-brand-blue">
                     {t.readMore}
@@ -76,8 +89,9 @@ export default function BlogPreview({ lang, dictionary }: BlogPreviewProps) {
                   </span>
                 </div>
               </article>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="mt-10 flex justify-center">
