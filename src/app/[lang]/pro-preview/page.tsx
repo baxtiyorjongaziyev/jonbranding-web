@@ -14,23 +14,25 @@ const stats = [
 
 const painPoints = [
   'Logo bor, lekin xaridor nima uchun aynan sizni tanlashini tushunmaydi.',
-  'Instagram, qadoq, sayt va reklama bir-biriga o\'xshamaydi.',
-  'Brend arzon ko\'rinadi, narxni himoya qilish qiyinlashadi.',
-  'Mijoz ishonishi uchun dalil kam, sotuv jamoasi ko\'p tushuntirishga majbur.',
+  "Instagram, qadoq, sayt va reklama bir-biriga o'xshamaydi.",
+  "Brend arzon ko'rinadi, narxni himoya qilish qiyinlashadi.",
+  "Mijoz ishonishi uchun dalil kam, sotuv jamoasi ko'p tushuntirishga majbur.",
 ];
 
 const services = [
   {
     name: 'Brand Audit',
-    detail: 'Nom, logo, qadoq, sayt va reklama mijoz ko\'zida qanchalik ishonch berishini tekshiramiz.',
+    detail:
+      "Nom, logo, qadoq, sayt va reklama mijoz ko'zida qanchalik ishonch berishini tekshiramiz.",
   },
   {
     name: 'Brand Strategy',
-    detail: 'Bozor pozitsiyasi, va\'da, tone of voice va taklifni bir tizimga keltiramiz.',
+    detail: "Bozor pozitsiyasi, va'da, tone of voice va taklifni bir tizimga keltiramiz.",
   },
   {
     name: 'Identity System',
-    detail: 'Logo emas, ishlaydigan vizual tizim: rang, shrift, kompozitsiya va qo\'llash qoidalari.',
+    detail:
+      "Logo emas, ishlaydigan vizual tizim: rang, shrift, kompozitsiya va qo'llash qoidalari.",
   },
   {
     name: 'Sales Assets',
@@ -42,12 +44,12 @@ const cases = [
   {
     name: 'Prime Fit',
     category: 'Fitness mahsuloti',
-    result: 'Qadoq va vizual til premium ko\'rinishga o\'tdi.',
+    result: "Qadoq va vizual til premium ko'rinishga o'tdi.",
   },
   {
     name: 'Den Aroma',
     category: 'Aroma mahsulotlari',
-    result: 'Mahsulot hikoyasi va qiymat signali aniqroq bo\'ldi.',
+    result: "Mahsulot hikoyasi va qiymat signali aniqroq bo'ldi.",
   },
   {
     name: 'Fidda',
@@ -64,8 +66,8 @@ const process = [
   },
   {
     step: '02',
-    title: 'Strategik yo\'nalish',
-    text: 'Kim uchun, nima va\'da, qanday ko\'rinish va qanday CTA ishlashini belgilaymiz.',
+    title: "Strategik yo'nalish",
+    text: "Kim uchun, nima va'da, qanday ko'rinish va qanday CTA ishlashini belgilaymiz.",
   },
   {
     step: '03',
@@ -78,20 +80,29 @@ const pricing = [
   {
     name: 'Audit',
     price: 'Bepul',
-    description: '15-30 daqiqalik brend tahlili va birinchi yo\'nalish.',
-    features: ['Sayt va vizual ko\'rinish tahlili', 'Ishonchni pasaytirayotgan joylar', 'Keyingi qadamlar ro\'yxati'],
+    description: "15-30 daqiqalik brend tahlili va birinchi yo'nalish.",
+    features: [
+      "Sayt va vizual ko'rinish tahlili",
+      'Ishonchni pasaytirayotgan joylar',
+      "Keyingi qadamlar ro'yxati",
+    ],
   },
   {
     name: 'Strategy Sprint',
     price: 'Kelishiladi',
-    description: 'Brend taklifi, pozitsiya va vizual yo\'nalishni tez yig\'ish.',
-    features: ['Brand platforma', 'Vizual moodboard', 'Sotuv argumentlari', 'CTA va funnel taklifi'],
+    description: "Brend taklifi, pozitsiya va vizual yo'nalishni tez yig'ish.",
+    features: [
+      'Brand platforma',
+      'Vizual moodboard',
+      'Sotuv argumentlari',
+      'CTA va funnel taklifi',
+    ],
     featured: true,
   },
   {
     name: 'Full System',
     price: 'Premium',
-    description: 'Brendni barcha nuqtalarda bir xil qimmat va ishonchli ko\'rsatish.',
+    description: "Brendni barcha nuqtalarda bir xil qimmat va ishonchli ko'rsatish.",
     features: ['Logo va identika', 'Brandbook', 'Landing yoki sales assets', 'Launch materiallari'],
   },
 ];
@@ -99,15 +110,18 @@ const pricing = [
 const faqs = [
   {
     question: 'Auditdan keyin majburiy buyurtma berish kerakmi?',
-    answer: 'Yo\'q. Audit sizga hozirgi muammo va imkoniyatni ko\'rsatish uchun. Qarorni keyin o\'zingiz qabul qilasiz.',
+    answer:
+      "Yo'q. Audit sizga hozirgi muammo va imkoniyatni ko'rsatish uchun. Qarorni keyin o'zingiz qabul qilasiz.",
   },
   {
-    question: 'Faqat logo kerak bo\'lsa ham murojaat qilsak bo\'ladimi?',
-    answer: 'Bo\'ladi, lekin biz logoni alohida rasm emas, biznesingizni qimmatroq ko\'rsatadigan tizim ichida ko\'ramiz.',
+    question: "Faqat logo kerak bo'lsa ham murojaat qilsak bo'ladimi?",
+    answer:
+      "Bo'ladi, lekin biz logoni alohida rasm emas, biznesingizni qimmatroq ko'rsatadigan tizim ichida ko'ramiz.",
   },
   {
-    question: 'Saytni ham shu dizayn yo\'nalishiga o\'tkazish mumkinmi?',
-    answer: 'Ha. Bu preview aynan yangi premium light/dark yo\'nalishni xavfsiz sinash uchun qurildi.',
+    question: "Saytni ham shu dizayn yo'nalishiga o'tkazish mumkinmi?",
+    answer:
+      "Ha. Bu preview aynan yangi premium light/dark yo'nalishni xavfsiz sinash uchun qurildi.",
   },
 ];
 
@@ -142,7 +156,13 @@ export default async function ProPreviewPage({ params }: Props) {
               <a href="#cases">Ishlar</a>
               <a href="#pricing">Tarif</a>
             </nav>
-            <a className={styles.topCta} href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noreferrer">
+            {/* Security: Used rel="noopener noreferrer" instead of only noreferrer to prevent reverse tabnabbing */}
+            <a
+              className={styles.topCta}
+              href="https://t.me/baxtiyorjon_gaziyev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Audit olish
             </a>
           </div>
@@ -159,7 +179,13 @@ export default async function ProPreviewPage({ params }: Props) {
                 kerak.
               </p>
               <div className={styles.heroActions}>
-                <a className={styles.primaryButton} href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noreferrer">
+                {/* Security: Used rel="noopener noreferrer" instead of only noreferrer to prevent reverse tabnabbing */}
+                <a
+                  className={styles.primaryButton}
+                  href="https://t.me/baxtiyorjon_gaziyev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Bepul brend tahlili
                 </a>
                 <a className={styles.secondaryButton} href="#cases">
@@ -210,7 +236,9 @@ export default async function ProPreviewPage({ params }: Props) {
           <div className={styles.split}>
             <div>
               <p className={styles.eyebrow}>Muammo</p>
-              <h2 className={styles.sectionTitle}>Ko'p brendlar yomon emas. Ular shunchaki qimmat ko'rinmaydi.</h2>
+              <h2 className={styles.sectionTitle}>
+                Ko'p brendlar yomon emas. Ular shunchaki qimmat ko'rinmaydi.
+              </h2>
             </div>
             <div className={styles.painList}>
               {painPoints.map((point) => (
@@ -227,7 +255,9 @@ export default async function ProPreviewPage({ params }: Props) {
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <p className={styles.eyebrow}>Yechim</p>
-            <h2 className={styles.sectionTitle}>Biz dizayn qilmaymiz. Biz xaridor sizni qanday qabul qilishini boshqaramiz.</h2>
+            <h2 className={styles.sectionTitle}>
+              Biz dizayn qilmaymiz. Biz xaridor sizni qanday qabul qilishini boshqaramiz.
+            </h2>
           </div>
           <div className={styles.serviceGrid}>
             {services.map((service, index) => (
@@ -246,7 +276,9 @@ export default async function ProPreviewPage({ params }: Props) {
           <div className={styles.caseHeader}>
             <div>
               <p className={styles.eyebrow}>Proof</p>
-              <h2 className={styles.sectionTitle}>Brend qimmat ko'rinsa, sotuv gapirishdan oldin boshlanadi.</h2>
+              <h2 className={styles.sectionTitle}>
+                Brend qimmat ko'rinsa, sotuv gapirishdan oldin boshlanadi.
+              </h2>
             </div>
             <a className={styles.textLink} href={`/${safeLang}/#portfolio`}>
               Portfolio
@@ -293,12 +325,19 @@ export default async function ProPreviewPage({ params }: Props) {
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <p className={styles.eyebrow}>Offer</p>
-            <h2 className={styles.sectionTitle}>Avval brendingiz qayerda pul yo'qotayotganini ko'ramiz.</h2>
+            <h2 className={styles.sectionTitle}>
+              Avval brendingiz qayerda pul yo'qotayotganini ko'ramiz.
+            </h2>
           </div>
           <div className={styles.pricingGrid}>
             {pricing.map((plan) => (
-              <article className={`${styles.priceCard} ${plan.featured ? styles.featuredPrice : ''}`} key={plan.name}>
-                {plan.featured ? <span className={styles.recommended}>Tavsiya qilinadi</span> : null}
+              <article
+                className={`${styles.priceCard} ${plan.featured ? styles.featuredPrice : ''}`}
+                key={plan.name}
+              >
+                {plan.featured ? (
+                  <span className={styles.recommended}>Tavsiya qilinadi</span>
+                ) : null}
                 <h3>{plan.name}</h3>
                 <strong>{plan.price}</strong>
                 <p>{plan.description}</p>
@@ -307,7 +346,12 @@ export default async function ProPreviewPage({ params }: Props) {
                     <li key={feature}>{feature}</li>
                   ))}
                 </ul>
-                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noreferrer">
+                {/* Security: Used rel="noopener noreferrer" instead of only noreferrer to prevent reverse tabnabbing */}
+                <a
+                  href="https://t.me/baxtiyorjon_gaziyev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Konsultatsiya olish
                 </a>
               </article>
@@ -320,8 +364,8 @@ export default async function ProPreviewPage({ params }: Props) {
         <div className={styles.container}>
           <div className={styles.quotePanel}>
             <p>
-              "Premium dizayn degani bezak emas. U biznes egasiga narxini tushuntirishni yengillashtiradigan
-              ishonch tizimi."
+              "Premium dizayn degani bezak emas. U biznes egasiga narxini tushuntirishni
+              yengillashtiradigan ishonch tizimi."
             </p>
             <span>Jon.Branding redesign direction</span>
           </div>
@@ -357,7 +401,13 @@ export default async function ProPreviewPage({ params }: Props) {
                 Avval audit qilamiz. Keyin qaysi nuqta sotuvga halaqit berayotganini ko'rsatamiz.
               </p>
             </div>
-            <a className={styles.primaryButton} href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noreferrer">
+            {/* Security: Used rel="noopener noreferrer" instead of only noreferrer to prevent reverse tabnabbing */}
+            <a
+              className={styles.primaryButton}
+              href="https://t.me/baxtiyorjon_gaziyev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Bepul auditga yozilish
             </a>
           </div>
