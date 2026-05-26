@@ -79,6 +79,7 @@ ListItem.displayName = 'ListItem';
 const ExpandingButton = ({
   href,
   target,
+  rel,
   icon,
   text,
   ariaLabel,
@@ -87,6 +88,7 @@ const ExpandingButton = ({
 }: {
   href: string;
   target?: string;
+  rel?: string;
   icon: React.ReactNode;
   text: string;
   ariaLabel: string;
@@ -100,7 +102,7 @@ const ExpandingButton = ({
     <a
       href={href}
       target={target}
-      rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+      rel={rel || (target === '_blank' ? 'noopener noreferrer' : undefined)}
       aria-label={ariaLabel}
       onMouseEnter={() => setInternalIsHovered(true)}
       onMouseLeave={() => setInternalIsHovered(false)}
