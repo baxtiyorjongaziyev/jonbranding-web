@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import { client } from '@/sanity/lib/client';
-import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
+import { fetchPortfolioList } from '@/lib/data/portfolio';
+import { PortfolioProject } from '@/lib/portfolio-fallbacks';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import PortfolioListClient from '@/components/portfolio-list-client';
 
@@ -45,46 +45,7 @@ export default async function PortfolioPage(props: Props) {
     dictionary = await getDictionary('uz');
   }
 
-  // 1. Fetch from Sanity
-  let sanityProjects: any[] = [];
-  try {
-    sanityProjects = await client.fetch(`
-      *[_type == "portfolio"] | order(order asc, publishedAt desc) {
-        _id,
-        title,
-        "slug": slug.current,
-        client,
-        category,
-        tags,
-        "coverImage": coverImage.asset->url,
-        "beforeImage": beforeImage.asset->url,
-        "afterImage": afterImage.asset->url,
-        description,
-        results,
-        order
-      }
-    `);
-  } catch (e) {
-    console.error('Failed to fetch portfolio from Sanity, using fallback:', e);
-  }
-
-  // 2. If empty, fallback to our beautifully localized dataset
-  const fallbacks = (getPortfolioFallback(safeLang) as PortfolioProject[]) || [];
-  
-  let projects: PortfolioProject[] = [...sanityProjects];
-  
-  // Merge missing items from fallback to populate the page beautifully
-  fallbacks.forEach((fallbackItem) => {
-    const exists = projects.some(
-      (p) => p.slug === fallbackItem.slug || (p.title || '').toLowerCase() === fallbackItem.title.toLowerCase()
-    );
-    if (!exists) {
-      projects.push(fallbackItem);
-    }
-  });
-
-  // Sort by order
-  projects.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+  const projects: PortfolioProject[] = await fetchPortfolioList(safeLang);
 
   return (
     <div className="min-h-screen bg-brand-paper dark:bg-[#070b13] pt-32 pb-24 text-white">
