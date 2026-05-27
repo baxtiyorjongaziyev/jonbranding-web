@@ -7,13 +7,7 @@ import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/icons/logo';
 import { Menu, Phone, Send } from 'lucide-react';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,7 +16,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
+} from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { ScrollArea } from '../ui/scroll-area';
@@ -30,36 +24,36 @@ import LanguageSwitcher from '../language-switcher';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
 
 type Dictionary = {
-    portfolio: string;
-    founder: string;
-    process: string;
-    blog: string;
-    services: string;
-    brand_strategy: string;
-    brand_strategy_desc: string;
-    naming: string;
-    naming_desc: string;
-    logo_design: string;
-    logo_design_desc: string;
-    brandbook: string;
-    brandbook_desc: string;
-    corporate_style: string;
-    corporate_style_desc: string;
-    packaging_design: string;
-    packaging_design_desc: string;
-    services_and_prices: string;
-    services_and_prices_desc: string;
-    contact_by_phone: string;
-    contact_by_telegram: string;
-    free_consultation: string;
-    open_menu: string;
-    switch_lang: string;
-    urgencyBadge?: string;
-}
+  portfolio: string;
+  founder: string;
+  process: string;
+  blog: string;
+  services: string;
+  brand_strategy: string;
+  brand_strategy_desc: string;
+  naming: string;
+  naming_desc: string;
+  logo_design: string;
+  logo_design_desc: string;
+  brandbook: string;
+  brandbook_desc: string;
+  corporate_style: string;
+  corporate_style_desc: string;
+  packaging_design: string;
+  packaging_design_desc: string;
+  services_and_prices: string;
+  services_and_prices_desc: string;
+  contact_by_phone: string;
+  contact_by_telegram: string;
+  free_consultation: string;
+  open_menu: string;
+  switch_lang: string;
+  urgencyBadge?: string;
+};
 
 const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { title: string; children: React.ReactNode }
+  React.ElementRef<'a'>,
+  React.ComponentPropsWithoutRef<'a'> & { title: string; children: React.ReactNode }
 >(({ className, title, children, href, ...props }, ref) => {
   return (
     <li>
@@ -68,34 +62,34 @@ const ListItem = React.forwardRef<
           href={href!}
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary focus:bg-secondary",
+            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary focus:bg-secondary',
             className
           )}
           {...props}
         >
           <div className="text-base font-semibold leading-none text-foreground">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
-            {children}
-          </p>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">{children}</p>
         </Link>
       </NavigationMenuLink>
     </li>
   );
 });
-ListItem.displayName = "ListItem"
+ListItem.displayName = 'ListItem';
 
-const ExpandingButton = ({ 
-  href, 
-  target, 
-  icon, 
+const ExpandingButton = ({
+  href,
+  target,
+  rel,
+  icon,
   text,
   ariaLabel,
   onClick,
-  isHovered: externalIsHovered
-}: { 
-  href: string; 
-  target?: string; 
-  icon: React.ReactNode; 
+  isHovered: externalIsHovered,
+}: {
+  href: string;
+  target?: string;
+  rel?: string;
+  icon: React.ReactNode;
   text: string;
   ariaLabel: string;
   onClick?: () => void;
@@ -108,7 +102,7 @@ const ExpandingButton = ({
     <a
       href={href}
       target={target}
-      rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+      rel={rel || (target === '_blank' ? 'noopener noreferrer' : undefined)}
       aria-label={ariaLabel}
       onMouseEnter={() => setInternalIsHovered(true)}
       onMouseLeave={() => setInternalIsHovered(false)}
@@ -117,7 +111,7 @@ const ExpandingButton = ({
       onClick={onClick}
       style={{ width: isHovered ? 160 : 44 }}
       className={cn(
-        "relative flex h-11 items-center justify-start overflow-hidden rounded-full bg-white/40 text-foreground backdrop-blur-md transition-[background-color,box-shadow,width] duration-300 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 group shrink-0",
+        'relative flex h-11 items-center justify-start overflow-hidden rounded-full bg-white/40 text-foreground backdrop-blur-md transition-[background-color,box-shadow,width] duration-300 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 group shrink-0',
         // Invisible hit area extension to make it easier to "catch" the button
         "before:absolute before:-inset-2 before:content-['']"
       )}
@@ -141,7 +135,7 @@ const ExpandingButton = ({
   );
 };
 
-const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
+const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const pathname = usePathname();
   const [visible, setVisible] = useState(true);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -154,7 +148,7 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
+  useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 20);
 
     const previous = scrollY.getPrevious() || 0;
@@ -185,14 +179,15 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
     setMobileMenuOpen(false);
     trackEvent({ action: 'nav_click', category: 'Navigation', label });
   };
-  
+
   const getLocalizedPath = (path: string) => {
     // If it's already an absolute URL, return it
-    if (path.startsWith('http') || path.startsWith('tel:') || path.startsWith('mailto:')) return path;
-    
+    if (path.startsWith('http') || path.startsWith('tel:') || path.startsWith('mailto:'))
+      return path;
+
     // Ensure path starts with /
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    
+
     if (lang === 'uz') return cleanPath;
     return `/${lang}${cleanPath === '/' ? '' : cleanPath}`;
   };
@@ -225,13 +220,41 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   ];
 
   const services = [
-    { title: dictionary.brand_strategy, href: getLocalizedPath('/xizmatlar/brand-strategiyasi'), description: dictionary.brand_strategy_desc },
-    { title: dictionary.naming, href: getLocalizedPath('/xizmatlar/neyming'), description: dictionary.naming_desc },
-    { title: dictionary.logo_design, href: getLocalizedPath('/xizmatlar/logo-dizayni'), description: dictionary.logo_design_desc },
-    { title: dictionary.corporate_style, href: getLocalizedPath('/xizmatlar/firmenniy-stil'), description: dictionary.corporate_style_desc },
-    { title: dictionary.brandbook, href: getLocalizedPath('/xizmatlar/brandbook'), description: dictionary.brandbook_desc },
-    { title: dictionary.packaging_design, href: getLocalizedPath('/xizmatlar/qadoq-dizayni'), description: dictionary.packaging_design_desc },
-    { title: dictionary.services_and_prices, href: getLocalizedPath('/xizmatlar'), description: dictionary.services_and_prices_desc },
+    {
+      title: dictionary.brand_strategy,
+      href: getLocalizedPath('/xizmatlar/brand-strategiyasi'),
+      description: dictionary.brand_strategy_desc,
+    },
+    {
+      title: dictionary.naming,
+      href: getLocalizedPath('/xizmatlar/neyming'),
+      description: dictionary.naming_desc,
+    },
+    {
+      title: dictionary.logo_design,
+      href: getLocalizedPath('/xizmatlar/logo-dizayni'),
+      description: dictionary.logo_design_desc,
+    },
+    {
+      title: dictionary.corporate_style,
+      href: getLocalizedPath('/xizmatlar/firmenniy-stil'),
+      description: dictionary.corporate_style_desc,
+    },
+    {
+      title: dictionary.brandbook,
+      href: getLocalizedPath('/xizmatlar/brandbook'),
+      description: dictionary.brandbook_desc,
+    },
+    {
+      title: dictionary.packaging_design,
+      href: getLocalizedPath('/xizmatlar/qadoq-dizayni'),
+      description: dictionary.packaging_design_desc,
+    },
+    {
+      title: dictionary.services_and_prices,
+      href: getLocalizedPath('/xizmatlar'),
+      description: dictionary.services_and_prices_desc,
+    },
   ];
 
   return (
@@ -249,155 +272,207 @@ const Header: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </div>
       )}
 
-      <header 
+      <header
         className={cn(
-          "fixed left-0 right-0 z-50 flex flex-col items-center transition-[transform,top] duration-300 ease-out",
-          visible ? "translate-y-0" : "-translate-y-full"
+          'fixed left-0 right-0 z-50 flex flex-col items-center transition-[transform,top] duration-300 ease-out',
+          visible ? 'translate-y-0' : '-translate-y-full'
         )}
         style={{ top: dictionary.urgencyBadge && !scrolled ? 40 : 0 }}
         suppressHydrationWarning
       >
-      <div
-        className={cn(
-          "flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500",
-          scrolled 
-            ? "mx-auto max-w-[95%] rounded-full border border-brand-line/70 bg-brand-paper/[0.82] px-6 py-2 shadow-[0_18px_55px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:max-w-6xl lg:px-8"
-            : startsOnLightSurface
-              ? "max-w-none border-b border-transparent bg-transparent px-6 lg:px-8"
-              : "max-w-none border-b border-transparent bg-transparent px-6 lg:px-8"
-        )}
-        suppressHydrationWarning
-      >
-        <Link href={getLocalizedPath('/')} className="flex items-center shrink-0" aria-label="Jon Branding - Bosh sahifa">
-          <Logo isWhite={!useDarkHeaderText} />
-        </Link>
+        <div
+          className={cn(
+            'flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500',
+            scrolled
+              ? 'mx-auto max-w-[95%] rounded-full border border-brand-line/70 bg-brand-paper/[0.82] px-6 py-2 shadow-[0_18px_55px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:max-w-6xl lg:px-8'
+              : startsOnLightSurface
+                ? 'max-w-none border-b border-transparent bg-transparent px-6 lg:px-8'
+                : 'max-w-none border-b border-transparent bg-transparent px-6 lg:px-8'
+          )}
+          suppressHydrationWarning
+        >
+          <Link
+            href={getLocalizedPath('/')}
+            className="flex items-center shrink-0"
+            aria-label="Jon Branding - Bosh sahifa"
+          >
+            <Logo isWhite={!useDarkHeaderText} />
+          </Link>
 
-        {mounted && (
-          <div className={cn(
-            "hidden lg:flex items-center transition-all duration-500 flex-1",
-            scrolled ? "lg:ml-4 lg:mr-2 xl:ml-12 xl:mr-8" : "lg:ml-8"
-          )}>
-            <div className="flex items-center justify-between w-full">
-              <NavigationMenu aria-label="Asosiy navigatsiya" className="shrink-0">
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className={cn("bg-transparent px-2.5 xl:px-4 text-xs xl:text-sm font-semibold", useDarkHeaderText ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
-                      {dictionary.services}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                        {services.map((component) => (
-                          <ListItem
-                            key={component.title}
-                            title={component.title}
-                            href={component.href}
-                          >
-                            {component.description}
-                          </ListItem>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                  {navItems.map((item) => (
-                    <NavigationMenuItem key={item.label}>
-                      <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "bg-transparent px-2.5 xl:px-4 text-xs xl:text-sm font-semibold whitespace-nowrap", useDarkHeaderText ? "text-foreground hover:bg-black/10" : "text-white hover:bg-white/10")}>
-                        <Link href={item.href}>
-                          {item.label}
-                        </Link>
-                      </NavigationMenuLink>
+          {mounted && (
+            <div
+              className={cn(
+                'hidden lg:flex items-center transition-all duration-500 flex-1',
+                scrolled ? 'lg:ml-4 lg:mr-2 xl:ml-12 xl:mr-8' : 'lg:ml-8'
+              )}
+            >
+              <div className="flex items-center justify-between w-full">
+                <NavigationMenu aria-label="Asosiy navigatsiya" className="shrink-0">
+                  <NavigationMenuList>
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger
+                        className={cn(
+                          'bg-transparent px-2.5 xl:px-4 text-xs xl:text-sm font-semibold',
+                          useDarkHeaderText
+                            ? 'text-foreground hover:bg-black/10'
+                            : 'text-white hover:bg-white/10'
+                        )}
+                      >
+                        {dictionary.services}
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                          {services.map((component) => (
+                            <ListItem
+                              key={component.title}
+                              title={component.title}
+                              href={component.href}
+                            >
+                              {component.description}
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
                     </NavigationMenuItem>
-                  ))}
-                </NavigationMenuList>
-              </NavigationMenu>
+                    {navItems.map((item) => (
+                      <NavigationMenuItem key={item.label}>
+                        <NavigationMenuLink
+                          asChild
+                          className={cn(
+                            navigationMenuTriggerStyle(),
+                            'bg-transparent px-2.5 xl:px-4 text-xs xl:text-sm font-semibold whitespace-nowrap',
+                            useDarkHeaderText
+                              ? 'text-foreground hover:bg-black/10'
+                              : 'text-white hover:bg-white/10'
+                          )}
+                        >
+                          <Link href={item.href}>{item.label}</Link>
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    ))}
+                  </NavigationMenuList>
+                </NavigationMenu>
 
-              <div className="flex items-center space-x-1.5 xl:space-x-2 h-11 shrink-0">
-                <LanguageSwitcher lang={lang as any} isInverted={!useDarkHeaderText} />
-                <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
-                  <ExpandingButton 
-                    href="tel:+998336450097"
-                    ariaLabel={dictionary.contact_by_phone}
-                    icon={<Phone className="h-4.5 w-4.5" />}
-                    text={dictionary.contact_by_phone}
-                    onClick={() => trackContactClick('phone', 'header')}
-                  />
-                  <ExpandingButton 
-                    href="https://t.me/baxtiyorjon_gaziyev"
-                    target="_blank"
-                    ariaLabel={dictionary.contact_by_telegram}
-                    icon={<Send className="h-4.5 w-4.5" />}
-                    text={dictionary.contact_by_telegram}
-                    onClick={() => trackContactClick('telegram', 'header')}
-                  />
-                </div>
-                <div className="rounded-full bg-transparent shrink-0">
-                  <Button 
-                    onClick={handleContactClick} 
-                    className="h-11 rounded-full bg-brand-ink px-3 xl:px-6 text-xs xl:text-sm font-bold text-white shadow-[0_18px_42px_-24px_rgba(15,23,42,0.85)] hover:bg-brand-blue shrink-0 whitespace-nowrap"
-                    aria-label={dictionary.free_consultation}
-                  >
-                    {dictionary.free_consultation}
-                  </Button>
+                <div className="flex items-center space-x-1.5 xl:space-x-2 h-11 shrink-0">
+                  <LanguageSwitcher lang={lang as any} isInverted={!useDarkHeaderText} />
+                  <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
+                    <ExpandingButton
+                      href="tel:+998336450097"
+                      ariaLabel={dictionary.contact_by_phone}
+                      icon={<Phone className="h-4.5 w-4.5" />}
+                      text={dictionary.contact_by_phone}
+                      onClick={() => trackContactClick('phone', 'header')}
+                    />
+                    {/* Security: Added rel="noopener noreferrer" to prevent reverse tabnabbing */}
+                    <ExpandingButton
+                      href="https://t.me/baxtiyorjon_gaziyev"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      ariaLabel={dictionary.contact_by_telegram}
+                      icon={<Send className="h-4.5 w-4.5" />}
+                      text={dictionary.contact_by_telegram}
+                      onClick={() => trackContactClick('telegram', 'header')}
+                    />
+                  </div>
+                  <div className="rounded-full bg-transparent shrink-0">
+                    <Button
+                      onClick={handleContactClick}
+                      className="h-11 rounded-full bg-brand-ink px-3 xl:px-6 text-xs xl:text-sm font-bold text-white shadow-[0_18px_42px_-24px_rgba(15,23,42,0.85)] hover:bg-brand-blue shrink-0 whitespace-nowrap"
+                      aria-label={dictionary.free_consultation}
+                    >
+                      {dictionary.free_consultation}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-        
-        <div className="flex items-center gap-2 lg:hidden">
-          <LanguageSwitcher lang={lang as any} isInverted={!useDarkHeaderText} />
-          <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          )}
+
+          <div className="flex items-center gap-2 lg:hidden">
+            <LanguageSwitcher lang={lang as any} isInverted={!useDarkHeaderText} />
+            <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" aria-label={dictionary.open_menu} className={cn("rounded-full", useDarkHeaderText ? "text-foreground border-black/20 hover:bg-black/10 hover:text-foreground" : "border-white/20 bg-white/10 text-white hover:bg-white/15 hover:text-white")}>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  aria-label={dictionary.open_menu}
+                  className={cn(
+                    'rounded-full',
+                    useDarkHeaderText
+                      ? 'text-foreground border-black/20 hover:bg-black/10 hover:text-foreground'
+                      : 'border-white/20 bg-white/10 text-white hover:bg-white/15 hover:text-white'
+                  )}
+                >
                   <Menu className="h-5 w-5" aria-hidden="true" />
                   <span className="sr-only">{dictionary.open_menu}</span>
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
                 <SheetHeader>
-                    <SheetTitle className="text-xl font-bold">Menyu</SheetTitle>
+                  <SheetTitle className="text-xl font-bold">Menyu</SheetTitle>
                 </SheetHeader>
-                 <ScrollArea className="h-full">
+                <ScrollArea className="h-full">
                   <nav className="flex flex-col gap-6 pt-10 pr-6">
-                      <div className="text-xl font-medium text-foreground">{dictionary.services}</div>
-                      <ul className="pl-4 space-y-4">
-                          {services.map((service) => (
-                          <li key={service.title}>
-                              <Link href={service.href} onClick={() => handleLinkClick(service.title)} className="text-lg font-normal text-muted-foreground hover:text-accent">{service.title}</Link>
-                          </li>
-                          ))}
-                      </ul>
-                      {navItems.map((item) => (
-                      <Link
-                          key={item.label}
-                          href={item.href}
-                          onClick={() => handleLinkClick(item.label)}
-                          className="text-xl font-medium text-foreground transition-colors hover:text-accent"
-                      >
-                          {item.label}
-                      </Link>
+                    <div className="text-xl font-medium text-foreground">{dictionary.services}</div>
+                    <ul className="pl-4 space-y-4">
+                      {services.map((service) => (
+                        <li key={service.title}>
+                          <Link
+                            href={service.href}
+                            onClick={() => handleLinkClick(service.title)}
+                            className="text-lg font-normal text-muted-foreground hover:text-accent"
+                          >
+                            {service.title}
+                          </Link>
+                        </li>
                       ))}
-                      <div className="border-t pt-6 mt-4 space-y-4">
-                          <a href="tel:+998336450097" onClick={() => trackContactClick('phone', 'mobile_menu')} className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
-                          <Phone size={20} aria-hidden="true" />
-                          +998 33 645 00 97
-                          </a>
-                          <a href="https://t.me/baxtiyorjon_gaziyev" onClick={() => trackContactClick('telegram', 'mobile_menu')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent">
-                          <Send size={20} aria-hidden="true" />
-                          {dictionary.contact_by_telegram}
-                          </a>
-                      </div>
-                      <div className="pt-6">
-                          <Button onClick={handleContactClick} className="w-full shadow-ocean mt-4 py-6 text-lg rounded-full" aria-label={dictionary.free_consultation}>
-                          {dictionary.free_consultation}
-                          </Button>
-                      </div>
+                    </ul>
+                    {navItems.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => handleLinkClick(item.label)}
+                        className="text-xl font-medium text-foreground transition-colors hover:text-accent"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                    <div className="border-t pt-6 mt-4 space-y-4">
+                      <a
+                        href="tel:+998336450097"
+                        onClick={() => trackContactClick('phone', 'mobile_menu')}
+                        className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent"
+                      >
+                        <Phone size={20} aria-hidden="true" />
+                        +998 33 645 00 97
+                      </a>
+                      <a
+                        href="https://t.me/baxtiyorjon_gaziyev"
+                        onClick={() => trackContactClick('telegram', 'mobile_menu')}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 text-lg font-medium text-foreground transition-colors hover:text-accent"
+                      >
+                        <Send size={20} aria-hidden="true" />
+                        {dictionary.contact_by_telegram}
+                      </a>
+                    </div>
+                    <div className="pt-6">
+                      <Button
+                        onClick={handleContactClick}
+                        className="w-full shadow-ocean mt-4 py-6 text-lg rounded-full"
+                        aria-label={dictionary.free_consultation}
+                      >
+                        {dictionary.free_consultation}
+                      </Button>
+                    </div>
                   </nav>
-                 </ScrollArea>
+                </ScrollArea>
               </SheetContent>
             </Sheet>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
     </>
   );
 };

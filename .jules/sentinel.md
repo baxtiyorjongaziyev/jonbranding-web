@@ -13,3 +13,8 @@
 **Learning:** Returning unhandled exception messages or internal states in error responses compromises security. Even simple error messages might give away too much context about the backend infrastructure or internal states.
 **Prevention:** API routes must fail securely by logging exact error details internally (e.g., using `console.error`) and returning generic, safe error messages to clients on 500 errors.
 ## 2026-05-22 - Missing HTTP Security Headers\n**Vulnerability:** Application missing standard HTTP security headers (X-Frame-Options, Strict-Transport-Security, X-Content-Type-Options, etc).\n**Learning:** Next.js application needs explicit configuration for security headers using the `async headers()` function in `next.config.js`.\n**Prevention:** Added security headers to `next.config.js` targeting all paths (`/(.*)`) to ensure full coverage across the application.
+
+## 2026-05-26 - Missing rel="noopener noreferrer" on external links
+**Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
+**Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
+**Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
