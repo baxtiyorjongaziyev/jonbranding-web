@@ -90,7 +90,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
 
-  const lightSurfaceRoutes = ['/blog', '/checklist', '/pricing', '/privacy', '/quiz', '/sitemap', '/terms', '/xizmatlar'];
+  const lightSurfaceRoutes = ['/blog', '/checklist', '/portfolio', '/pricing', '/privacy', '/quiz', '/sitemap', '/terms', '/xizmatlar'];
   const startsOnLightSurface = lightSurfaceRoutes.some(
     (route) => pathnameWithoutLocale === route || pathnameWithoutLocale.startsWith(`${route}/`)
   );
