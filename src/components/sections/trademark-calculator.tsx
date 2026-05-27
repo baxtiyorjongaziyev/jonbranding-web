@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { Loader2, Minus, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { event as gtagEvent } from '@/lib/gtag';
+import { event as gtagEvent } from '@/lib/analytics/gtag';
 import { motion } from 'framer-motion';
 import { Slider } from '@/components/ui/slider';
 import { Checkbox } from '../ui/checkbox';

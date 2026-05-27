@@ -1,9 +1,11 @@
 'use client';
 
+import React from 'react';
 import { Medal, Users, Star, Award } from 'lucide-react';
 import { motion, useInView, useAnimate, useMotionValue, useSpring } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
+import type { StatsDictionary } from '@/lib/types/dictionary';
 
 interface AnimatedNumberProps {
   value: number;
@@ -36,7 +38,7 @@ const AnimatedNumber = ({ value, suffix }: AnimatedNumberProps) => {
     );
 };
 
-const StatCard = ({ stat, index }: { stat: any, index: number }) => {
+const StatCard = ({ stat, index }: { stat: { value: number; suffix: string; label: string; description?: string; icon: React.ElementType; color?: string; className?: string; iconColor?: string }, index: number }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -98,7 +100,7 @@ const StatCard = ({ stat, index }: { stat: any, index: number }) => {
     );
 };
 
-const Stats = ({ dictionary }: { dictionary: any }) => {
+const Stats = ({ dictionary }: { dictionary: StatsDictionary }) => {
   if (!dictionary) return null;
 
   const stats = [

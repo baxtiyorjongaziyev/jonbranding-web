@@ -19,6 +19,7 @@ import { useState, type FC } from 'react';
 import { motion } from 'framer-motion';
 import { BrandSection } from '@/components/ui/design-system';
 import DOMPurify from 'isomorphic-dompurify';
+import type { FounderDictionary } from '@/lib/types/dictionary';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
@@ -45,7 +46,7 @@ const itemVariants = {
   },
 };
 
-const Founder: FC<{ lang: string; dictionary: any }> = ({ dictionary }) => {
+const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictionary }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [unmuted, setUnmuted] = useState(false);
   const translations = dictionary;
@@ -85,12 +86,12 @@ const Founder: FC<{ lang: string; dictionary: any }> = ({ dictionary }) => {
             </div>
             <p
               className="mt-4 text-pretty text-lg leading-8 text-white/72"
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(translations.message) }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(translations.message ?? '') }}
             />
 
-            {translations.principles?.length > 0 && (
+            {(translations.principles?.length ?? 0) > 0 && (
               <div className="grid gap-2 rounded-2xl border border-white/8 bg-white/[0.04] p-3 sm:grid-cols-3">
-                {translations.principles.map((item: string) => (
+                {(translations.principles ?? []).map((item: string) => (
                   <div key={item} className="rounded-xl bg-white/[0.06] px-4 py-3 text-sm font-bold text-white/90">
                     {item}
                   </div>
@@ -99,7 +100,7 @@ const Founder: FC<{ lang: string; dictionary: any }> = ({ dictionary }) => {
             )}
 
             <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {translations.points.map((point: any, index: number) => {
+              {(translations.points ?? []).map((point, index: number) => {
                 const Icon = icons[point.icon];
                 return (
                   <div key={index} className="flex items-center gap-3">
