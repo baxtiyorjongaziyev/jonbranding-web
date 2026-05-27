@@ -86,12 +86,12 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
             </div>
             <p
               className="mt-4 text-pretty text-lg leading-8 text-white/72"
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(translations.message) }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(translations.message ?? '') }}
             />
 
-            {translations.principles?.length > 0 && (
+            {(translations.principles?.length ?? 0) > 0 && (
               <div className="grid gap-2 rounded-2xl border border-white/8 bg-white/[0.04] p-3 sm:grid-cols-3">
-                {translations.principles.map((item: string) => (
+                {(translations.principles ?? []).map((item: string) => (
                   <div key={item} className="rounded-xl bg-white/[0.06] px-4 py-3 text-sm font-bold text-white/90">
                     {item}
                   </div>

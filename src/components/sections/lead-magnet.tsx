@@ -67,7 +67,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
                 <div className="flex-grow flex flex-col justify-between">
                   <p className="text-brand-slate mb-6 leading-7">{magnet.description}</p>
                   {isLink ? (
-                      <Link href={magnet.href.replace('{lang}', lang)} passHref>
+                      <Link href={(magnet.href ?? '').replace('{lang}', lang)} passHref>
                           <Button asChild className="w-full rounded-2xl bg-brand-ink hover:bg-brand-blue shadow-none">
                             <span>{buttonContent}</span>
                           </Button>

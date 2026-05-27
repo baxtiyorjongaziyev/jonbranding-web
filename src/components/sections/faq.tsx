@@ -64,9 +64,9 @@ const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: 
 
       {!hideCta && (
         <CtaBlock
-          title={translations.ctaTitle}
-          description={translations.ctaDesc}
-          buttonText={translations.ctaButton}
+          title={translations.ctaTitle ?? ''}
+          description={translations.ctaDesc ?? ''}
+          buttonText={translations.ctaButton ?? ''}
           onCtaClick={handleOpenModal}
         />
       )}

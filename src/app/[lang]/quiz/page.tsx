@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { ArrowRight, Frown, Meh, Smile, Lightbulb } from 'lucide-react';
 import ContactModal from '@/components/contact-modal';
-import { event as gtagEvent } from '@/lib/gtag';
+import { event as gtagEvent } from '@/lib/analytics/gtag';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { getDictionary, Locale } from '@/lib/dictionaries';

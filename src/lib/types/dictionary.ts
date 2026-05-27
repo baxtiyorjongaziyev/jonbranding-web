@@ -62,7 +62,7 @@ export interface ProcessDictionary {
   eyebrow?: string;
   title?: string;
   subtitle?: string;
-  phases?: Array<{ phase: string; title: string; description: string; tasks: string[] }>;
+  phases?: Array<{ phase: string; badge?: string; title: string; description: string; tasks: string[]; steps?: string[] }>;
   ctaTitle?: string;
   ctaDesc?: string;
   ctaButton?: string;
@@ -116,7 +116,7 @@ export interface LeadMagnetDictionary {
   title?: string;
   subtitle?: string;
   cta?: string;
-  magnets?: Array<{ id: string; icon: string; title: string; desc: string; tag?: string }>;
+  magnets?: Array<{ id: string; icon: string; title: string; subtitle?: string; desc: string; description?: string; tag?: string; action?: string; href?: string; cta?: string }>;
   checklistContent?: Record<string, unknown>;
 }
 
