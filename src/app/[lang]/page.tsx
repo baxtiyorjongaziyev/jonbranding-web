@@ -2,8 +2,7 @@
 import HomeComponent from '@/components/home-component';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
-import { client } from '@/sanity/lib/client';
-import { withFallbackComparisons } from '@/lib/comparison-fallbacks';
+import { fetchComparisons } from '@/lib/data/comparisons';
 
 export const revalidate = 60;
 
@@ -50,21 +49,7 @@ export default async function Page(props: Props) {
     dictionary = await getDictionary('uz');
   }
 
-  let comparisons: any[] = [];
-  try {
-    comparisons = await client.fetch(`
-      *[_type == "comparison"]
-        | order(coalesce(order, 999) asc, _createdAt asc) {
-          _id,
-          "brand": coalesce(brand, name, title, "Loyiha"),
-          "oldImg": coalesce(oldImg.asset->url, beforeImage.asset->url),
-          "newImg": coalesce(newImg.asset->url, afterImage.asset->url),
-          "oldHint": coalesce(oldHint, "Before"),
-          "newHint": coalesce(newHint, "After"),
-          "order": coalesce(order, 999)
-        }
-    `);
-  } catch {}
+  const comparisons = await fetchComparisons();
 
-  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={withFallbackComparisons(comparisons)} />;
+  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={comparisons} />;
 }

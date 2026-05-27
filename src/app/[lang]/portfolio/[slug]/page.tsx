@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { client } from '@/sanity/lib/client';
+import { fetchPortfolioBySlug } from '@/lib/data/portfolio';
 import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import PortfolioDetailClient from '@/components/portfolio-detail-client';
@@ -28,23 +28,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang, slug } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
-  // 1. Fetch from Sanity
-  let project: any = null;
-  try {
-    project = await client.fetch(`
-      *[_type == "portfolio" && slug.current == $slug][0] {
-        title,
-        description,
-        client,
-        category
-      }
-    `, { slug });
-  } catch (e) {}
-
-  // 2. If not found, use fallback
-  if (!project) {
-    project = getPortfolioFallback(safeLang, slug);
-  }
+  const project = (await fetchPortfolioBySlug(slug)) ?? (getPortfolioFallback(safeLang, slug) as PortfolioProject | null);
 
   if (!project) {
     return {
@@ -70,33 +54,7 @@ export default async function PortfolioDetailPage(props: Props) {
     dictionary = await getDictionary('uz');
   }
 
-  // 1. Fetch from Sanity
-  let project: any = null;
-  try {
-    project = await client.fetch(`
-      *[_type == "portfolio" && slug.current == $slug][0] {
-        _id,
-        title,
-        "slug": slug.current,
-        client,
-        category,
-        tags,
-        "coverImage": coverImage.asset->url,
-        "beforeImage": beforeImage.asset->url,
-        "afterImage": afterImage.asset->url,
-        description,
-        body,
-        results,
-        "galleryImages": galleryImages[].asset->url,
-        order
-      }
-    `, { slug });
-  } catch (e) {}
-
-  // 2. Fallback to mock
-  if (!project) {
-    project = getPortfolioFallback(safeLang, slug);
-  }
+  const project = (await fetchPortfolioBySlug(slug)) ?? (getPortfolioFallback(safeLang, slug) as PortfolioProject | null);
 
   if (!project) {
     notFound();
