@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils';
 import { staticTestimonials, staticTestimonialsEn, staticTestimonialsRu, staticTestimonialsZh } from '@/lib/static-data';
 import { type Testimonial } from '@/lib/types';
 import { trackEvent } from '@/lib/analytics';
+import type { TestimonialsDictionary } from '@/lib/types/dictionary';
 
 const CASE_STUDY_VIDEO_IDS = ['1145610708'];
 const VIMEO_HOSTS = new Set(['vimeo.com', 'www.vimeo.com', 'player.vimeo.com']);
@@ -219,7 +220,7 @@ const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   );
 };
 
-const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: Testimonial[]; dictionary: any; lang: string }) => {
+const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: Testimonial[]; dictionary: TestimonialsDictionary; lang: string }) => {
   const videoAutoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
   const textAutoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   const translations = dictionary;
@@ -411,7 +412,7 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
   );
 };
 
-const Testimonials = ({ lang, dictionary }: { lang: string; dictionary: any }) => {
+const Testimonials = ({ lang, dictionary }: { lang: string; dictionary: TestimonialsDictionary }) => {
   let testimonials;
   switch (lang) {
     case 'ru':

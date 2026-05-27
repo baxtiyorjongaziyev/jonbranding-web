@@ -3,7 +3,7 @@
 import { Suspense, useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { pageview } from '@/lib/gtag';
+import { pageview } from '@/lib/analytics/gtag';
 import { Toaster } from '@/components/ui/toaster';
 import { trackCtaClick, trackEvent } from '@/lib/analytics';
 

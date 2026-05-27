@@ -4,11 +4,12 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
+import type { ProcessDictionary } from '@/lib/types/dictionary';
 
 interface ProcessProps {
   onCtaClick?: () => void;
   lang: string;
-  dictionary: any;
+  dictionary: ProcessDictionary;
 }
 
 const containerVariants = {
@@ -66,7 +67,7 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
           </motion.div>
 
           <motion.div variants={itemVariants} className="space-y-4">
-            {translations.phases.map((phase: any, index: number) => (
+            {(translations.phases ?? []).map((phase, index: number) => (
               <div key={index} className="rounded-[1.25rem] border border-brand-line bg-white/82 p-5 shadow-[0_20px_65px_rgba(35,41,55,0.055)]">
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-lime text-sm font-extrabold text-brand-ink">

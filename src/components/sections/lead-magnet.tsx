@@ -6,11 +6,12 @@ import { Button } from '@/components/ui/button';
 import { FileText, ListChecks, Film, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { BrandCard, BrandSection, SectionIntro } from '@/components/ui/design-system';
+import type { LeadMagnetDictionary } from '@/lib/types/dictionary';
 
 interface LeadMagnetProps {
     onCtaClick: () => void;
     lang: string;
-    dictionary: any;
+    dictionary: LeadMagnetDictionary;
 }
 
 const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
@@ -27,7 +28,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
     }
   };
 
-  const handleClick = (magnet: any) => {
+  const handleClick = (magnet: NonNullable<LeadMagnetDictionary['magnets']>[number]) => {
     if (magnet.action === 'onCtaClick') {
       onCtaClick();
     } else if (magnet.href?.startsWith('#')) {
@@ -43,7 +44,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
       <div className="container mx-auto px-4">
         <SectionIntro eyebrow="Free resources" title={translations.title} description={translations.subtitle} />
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-          {translations.magnets.map((magnet: any) => {
+          {(translations.magnets ?? []).map((magnet) => {
             const Icon = getIcon(magnet.id);
             const isLink = magnet.href && !magnet.href.startsWith('#');
             const buttonContent = (
@@ -66,7 +67,7 @@ const LeadMagnet: FC<LeadMagnetProps> = ({ onCtaClick, lang, dictionary }) => {
                 <div className="flex-grow flex flex-col justify-between">
                   <p className="text-brand-slate mb-6 leading-7">{magnet.description}</p>
                   {isLink ? (
-                      <Link href={magnet.href.replace('{lang}', lang)} passHref>
+                      <Link href={(magnet.href ?? '').replace('{lang}', lang)} passHref>
                           <Button asChild className="w-full rounded-2xl bg-brand-ink hover:bg-brand-blue shadow-none">
                             <span>{buttonContent}</span>
                           </Button>

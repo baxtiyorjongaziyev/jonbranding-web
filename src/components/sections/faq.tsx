@@ -7,8 +7,9 @@ import {
 } from '@/components/ui/accordion';
 import CtaBlock from './cta-block';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
+import type { FaqDictionary } from '@/lib/types/dictionary';
 
-const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: any, hideCta?: boolean }) => {
+const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: FaqDictionary, hideCta?: boolean }) => {
   const translations = dictionary;
 
   const handleOpenModal = () => {
@@ -63,9 +64,9 @@ const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: 
 
       {!hideCta && (
         <CtaBlock
-          title={translations.ctaTitle}
-          description={translations.ctaDesc}
-          buttonText={translations.ctaButton}
+          title={translations.ctaTitle ?? ''}
+          description={translations.ctaDesc ?? ''}
+          buttonText={translations.ctaButton ?? ''}
           onCtaClick={handleOpenModal}
         />
       )}
