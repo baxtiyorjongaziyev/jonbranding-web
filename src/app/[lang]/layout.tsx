@@ -109,7 +109,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
     '(1) Yangi xabar! | Jon Branding';
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} className={hankenGrotesk.variable} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#ffffff}' }} />
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
