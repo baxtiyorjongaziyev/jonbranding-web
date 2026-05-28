@@ -199,7 +199,17 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
               </div>
 
               <Button
-                onClick={onCtaClick}
+                onClick={onCtaClick || (() => {
+                  window.dispatchEvent(
+                    new CustomEvent('openContactModal', {
+                      detail: {
+                        section: 'opportunity_calculator',
+                        ctaText: t.cta || "Bepul auditga yozilish",
+                        source: 'homepage',
+                      },
+                    })
+                  );
+                })}
                 size="lg"
                 className="w-full h-24 rounded-[2rem] text-xl font-black shadow-none bg-brand-ink hover:bg-brand-blue group transition-all duration-300"
               >
