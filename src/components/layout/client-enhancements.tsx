@@ -47,9 +47,6 @@ const LiveClock = dynamic(() => import('@/components/ui/live-clock'), {
   ssr: false,
 });
 
-const SideBadge = dynamic(() => import('@/components/ui/side-badge'), {
-  ssr: false,
-});
 
 function AnalyticsTracker() {
   const pathname = usePathname();
@@ -231,7 +228,6 @@ export default function ClientEnhancements({
       {enhancementsReady && <OishaWidget lang={lang} />}
       {enhancementsReady && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
       {quickActionsReady && <LiveClock lang={lang} />}
-      {quickActionsReady && <SideBadge lang={lang} />}
     </>
   );
 }

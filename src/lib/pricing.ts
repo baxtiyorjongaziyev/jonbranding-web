@@ -214,7 +214,7 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 15–20 ish kuni" : "⏱ 15–20 business days",
             features: isUz ? [
                 "5 ta logo varianti",
-                "Strategik tahlil",
+                "Raqobatchilar va auditoriya tahlili (Brendingiz adashmasligi uchun)",
                 "To'liq Brandbook (30-50 bet)",
                 "Logo animatsiyasi (Motion)",
                 "Telegram stiker paketi (10 ta)",

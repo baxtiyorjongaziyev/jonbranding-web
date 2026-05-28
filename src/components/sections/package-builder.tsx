@@ -14,6 +14,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { renderHeadline } from '@/lib/headline';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -255,7 +256,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <Badge className="bg-primary/10 text-primary border-none px-8 py-2 rounded-full font-black text-[12px] uppercase tracking-[0.2em] shadow-sm">
                         LOYIHA ME'MORI
                     </Badge>
-                    <h2 className="text-4xl sm:text-6xl font-black text-foreground leading-tight tracking-tighter">{translations.title}</h2>
+                    <h2 className="text-4xl sm:text-6xl font-black text-foreground leading-tight tracking-tighter">
+                        {renderHeadline(translations.title, "text-primary")}
+                    </h2>
                     <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
                 </div>
 

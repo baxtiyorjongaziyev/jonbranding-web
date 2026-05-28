@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { ArrowUpRight, CheckCircle2, FileSearch, Layers3, Route, ShieldCheck, Target } from 'lucide-react';
 import ContactTriggerButton from '@/components/contact-trigger-button';
 import { BrandSection } from '@/components/ui/design-system';
+import { renderHeadline } from '@/lib/headline';
 
 type AuditOfferDictionary = {
   eyebrow?: string;
@@ -34,7 +35,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
               </div>
             )}
             <h2 className="max-w-2xl text-balance text-4xl font-extrabold leading-tight tracking-normal text-brand-ink sm:text-6xl">
-              {dictionary.title}
+              {renderHeadline(dictionary.title ?? '', "text-primary")}
             </h2>
             {dictionary.description && <p className="mt-6 text-pretty text-lg leading-8 text-brand-slate">{dictionary.description}</p>}
 

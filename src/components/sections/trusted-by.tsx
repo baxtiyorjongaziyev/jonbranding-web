@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { staticBrands } from '@/lib/static-data';
 import { BrandSection } from '@/components/ui/design-system';
 import { Marquee } from '@/components/ui/marquee';
+import { renderHeadline } from '@/lib/headline';
 
 type TrustedByDictionary = {
   eyebrow?: string;
@@ -35,7 +36,7 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
               </div>
             )}
             <h2 id="trusted-by-title" className="max-w-2xl text-balance text-3xl font-extrabold leading-tight tracking-normal text-brand-ink sm:text-5xl">
-              {dictionary.title}
+              {renderHeadline(dictionary.title, "text-primary")}
             </h2>
             {dictionary.subtitle && <p className="mt-5 max-w-xl text-base leading-8 text-brand-slate sm:text-lg">{dictionary.subtitle}</p>}
           </div>
