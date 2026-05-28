@@ -135,7 +135,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
           className={cn(
             'flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500',
             scrolled
-              ? 'mx-auto max-w-[95%] rounded-full border border-white/10 bg-[#0c0c12] px-5 py-2 shadow-[0_20px_55px_rgba(12,12,18,0.22)] backdrop-blur-xl lg:max-w-6xl lg:px-7'
+              ? 'mx-auto max-w-[95%] rounded-full liquid-glass-header px-5 py-2 lg:max-w-6xl lg:px-7'
               : 'mx-auto max-w-[1240px] border-b border-transparent bg-transparent px-4 sm:px-6 lg:px-7'
           )}
           suppressHydrationWarning
