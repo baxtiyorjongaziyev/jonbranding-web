@@ -43,7 +43,7 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
   const processProof = translations.proofItems || [];
 
   return (
-    <BrandSection id="process" tone="light" className="overflow-hidden bg-[#fbfaf7] py-20 sm:py-28" suppressHydrationWarning>
+    <BrandSection id="process" tone="soft" className="overflow-hidden py-20 sm:py-28" suppressHydrationWarning>
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -58,8 +58,8 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
               <div className="mt-8 grid grid-cols-2 gap-2">
                 {processProof.map((item: string, index: number) => (
                   <div key={item} className="border-t border-brand-line px-1 py-4">
-                    <div className="font-mono text-[10px] font-extrabold uppercase tracking-normal text-brand-blue tabular-nums">0{index + 1}</div>
-                    <div className="mt-1 text-sm font-bold text-brand-ink">{item}</div>
+                    <div className="font-mono text-[10px] font-extrabold uppercase tracking-widest text-brand-blue tabular-nums">0{index + 1}</div>
+                    <div className="mt-1 text-sm font-bold text-foreground">{item}</div>
                   </div>
                 ))}
               </div>
@@ -68,14 +68,14 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
 
           <motion.div variants={itemVariants} className="space-y-4">
             {(translations.phases ?? []).map((phase, index: number) => (
-              <div key={index} className="rounded-[1.25rem] border border-brand-line bg-white/82 p-5 shadow-[0_20px_65px_rgba(35,41,55,0.055)]">
+              <div key={index} className="rounded-[1.25rem] border border-brand-line bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.05)]">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-lime text-sm font-extrabold text-brand-ink">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue text-sm font-extrabold text-white">
                     0{index + 1}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-extrabold text-brand-ink">{phase.title}</h3>
+                      <h3 className="font-extrabold text-foreground">{phase.title}</h3>
                       {phase.badge && <Badge variant="outline" className="text-[10px]">{phase.badge}</Badge>}
                     </div>
                     <p className="mt-1 text-sm leading-6 text-brand-slate">{phase.description}</p>

@@ -25,16 +25,16 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
   if (!dictionary?.title) return null;
 
   return (
-    <BrandSection tone="light" className="border-y border-brand-line/80 bg-brand-paper py-20 sm:py-24" aria-labelledby="trusted-by-title">
+    <BrandSection tone="light" className="border-y border-brand-line py-20 sm:py-24" aria-labelledby="trusted-by-title">
       <div className="container mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             {dictionary.eyebrow && (
-              <div className="jb-eyebrow mb-4">
+              <div className="jb-eyebrow mb-5">
                 {dictionary.eyebrow}
               </div>
             )}
-            <h2 id="trusted-by-title" className="max-w-2xl text-balance text-3xl font-extrabold leading-tight tracking-normal text-brand-ink sm:text-5xl">
+            <h2 id="trusted-by-title" className="max-w-2xl text-balance text-foreground">
               {dictionary.title}
             </h2>
             {dictionary.subtitle && <p className="mt-5 max-w-xl text-base leading-8 text-brand-slate sm:text-lg">{dictionary.subtitle}</p>}
@@ -43,8 +43,8 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
           <div className="grid grid-cols-2 border-y border-brand-line sm:grid-cols-4 lg:border-y-0 lg:border-l">
             {metrics.map((metric) => (
               <div key={metric.label} className="border-brand-line px-4 py-5 sm:border-r lg:border-r-0 lg:border-l lg:py-3">
-                <div className="font-mono text-2xl font-extrabold tracking-normal text-brand-ink tabular-nums sm:text-3xl">{metric.value}</div>
-                <div className="mt-2 text-xs font-bold uppercase tracking-normal text-brand-slate">{metric.label}</div>
+                <div className="font-mono text-2xl font-extrabold tracking-tight text-foreground tabular-nums sm:text-3xl">{metric.value}</div>
+                <div className="mt-2 text-xs font-bold uppercase tracking-widest text-brand-slate">{metric.label}</div>
               </div>
             ))}
           </div>
