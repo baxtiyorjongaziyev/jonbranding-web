@@ -29,6 +29,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[] }> 
             faq: dictionary.faq,
             home: dictionary.home,
             blog: dictionary.blog,
+            opportunityCalculator: dictionary.opportunityCalculator,
           }}
         />
       </main>

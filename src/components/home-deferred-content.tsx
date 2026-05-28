@@ -9,6 +9,7 @@ const Process = dynamic(() => import('@/components/sections/process'));
 const Founder = dynamic(() => import('@/components/sections/founder'));
 const Faq = dynamic(() => import('@/components/sections/faq'));
 const CtaBlock = dynamic(() => import('@/components/sections/cta-block'));
+const OpportunityCostCalculator = dynamic(() => import('@/components/sections/opportunity-cost-calculator'));
 
 type DeferredDictionary = {
   trustedBy?: any;
@@ -20,6 +21,7 @@ type DeferredDictionary = {
   faq?: any;
   home?: any;
   blog?: any;
+  opportunityCalculator?: any;
 };
 
 export default function HomeDeferredContent({
@@ -35,6 +37,13 @@ export default function HomeDeferredContent({
     <>
       <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
       <AuditOffer lang={lang} dictionary={dictionary.auditOffer} />
+
+      {dictionary.opportunityCalculator && (
+        <OpportunityCostCalculator
+          lang={lang}
+          dictionary={dictionary.opportunityCalculator}
+        />
+      )}
 
       <BeforeAfter lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
       <Testimonials lang={lang} dictionary={dictionary.testimonials} />
