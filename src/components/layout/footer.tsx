@@ -67,13 +67,13 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   };
 
   return (
-    <footer className="relative overflow-hidden rounded-t-[4.5rem] bg-black text-white md:rounded-t-[8rem]" suppressHydrationWarning>
-      <div className="relative bg-black pt-24 pb-0">
+    <footer className="relative overflow-hidden rounded-t-[4.5rem] bg-[#0a0a10] text-white md:rounded-t-[8rem]" suppressHydrationWarning>
+      <div className="relative bg-[#0a0a10] pt-24 pb-0">
         {/* Finch-style Vivid Background Gradient - Anchored to very bottom */}
         <div 
           className="absolute bottom-0 left-[-20%] w-[140%] h-[35%] pointer-events-none overflow-hidden select-none"
           style={{
-            background: 'radial-gradient(ellipse 100% 100% at 50% 100%, rgba(37, 99, 235, 0.9) 0%, rgba(139, 92, 246, 0.45) 45%, rgba(0, 0, 0, 0) 85%)',
+            background: 'radial-gradient(ellipse 100% 100% at 50% 100%, rgba(44, 43, 245, 0.86) 0%, rgba(47, 107, 255, 0.34) 48%, rgba(10, 10, 16, 0) 85%)',
             filter: 'blur(100px)',
             opacity: 0.85
           }}
@@ -83,7 +83,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div 
           className="absolute bottom-[-50px] right-[-10%] w-[60%] h-[20%] pointer-events-none overflow-hidden select-none"
           style={{
-            background: 'radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.6) 0%, rgba(0, 0, 0, 0) 70%)',
+            background: 'radial-gradient(circle at 50% 100%, rgba(61, 58, 255, 0.62) 0%, rgba(10, 10, 16, 0) 70%)',
             filter: 'blur(80px)',
             opacity: 0.6
           }}
@@ -91,7 +91,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         
         {/* Intense Corner Splash - Brighter */}
         <div className="absolute bottom-0 right-0 h-[30%] w-[100%] pointer-events-none z-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_80%_110%,rgba(215,31,39,0.18),transparent_75%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_80%_110%,rgba(44,43,245,0.22),transparent_75%)]" />
         </div>
 
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
@@ -148,7 +148,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 <a 
                   href="tel:+998336450097"
                   onClick={() => trackContactClick('phone', 'footer')}
-                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-black transition-all duration-300 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-[#0a0a10] transition-all duration-300 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   +998 33 645 00 97
                 </a>
@@ -157,7 +157,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackContactClick('telegram', 'footer')}
-                  className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 rounded-full text-sm font-medium hover:bg-blue-700 transition-all duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] rounded-full text-sm font-medium hover:-translate-y-0.5 transition-all duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Send size={16} /> Telegram
                 </a>
@@ -167,13 +167,13 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <div className="space-y-3">
               <Link 
                 href={getLocalizedPath('/#portfolio')}
-                className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
+                className="text-xs font-bold text-[#8f9cff] hover:text-white flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
                 {copy.explore_work}
               </Link>
               <Link 
                 href={getLocalizedPath('/blog')}
-                className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
+                className="text-xs font-bold text-[#8f9cff] hover:text-white flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
                 {copy.read_blogs}
               </Link>
