@@ -40,8 +40,8 @@
     --brand-lime: 232 97% 62%;
     --brand-slate: 240 5% 42%;
     --brand-line: 240 22% 92%;
-    --font-inter: var(--font-hanken), "Aptos", "Segoe UI", sans-serif;
-    --font-jakarta: var(--font-hanken), "Aptos Display", "Segoe UI", sans-serif;
+    --font-inter: var(--font-hanken, "Hanken Grotesk"), "Aptos", "Segoe UI", sans-serif;
+    --font-jakarta: var(--font-hanken, "Hanken Grotesk"), "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
     --finch-bg: #ffffff;
     --finch-ink: #0a0a10;
     --finch-muted: #6c6e78;
@@ -123,6 +123,7 @@
   }
   body {
     @apply bg-brand-paper text-foreground overflow-x-hidden;
+    font-family: var(--font-inter), "Segoe UI", sans-serif;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -132,6 +133,7 @@
   }
   h1,h2,h3,h4,h5,h6 {
     @apply text-foreground font-headline leading-tight tracking-tight;
+    font-family: var(--font-jakarta), "Plus Jakarta Sans", "Segoe UI", sans-serif;
     font-display: swap;
   }
   
