@@ -43,7 +43,7 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
           <div className="grid grid-cols-2 border-y border-brand-line sm:grid-cols-4 lg:border-y-0 lg:border-l">
             {metrics.map((metric) => (
               <div key={metric.label} className="border-brand-line px-4 py-5 sm:border-r lg:border-r-0 lg:border-l lg:py-3">
-                <div className="font-mono text-2xl font-extrabold tracking-normal text-brand-ink tabular-nums sm:text-3xl">{metric.value}</div>
+                <div className="font-headline text-2xl font-black tracking-normal text-brand-ink tabular-nums sm:text-3xl">{metric.value}</div>
                 <div className="mt-2 text-xs font-bold uppercase tracking-normal text-brand-slate">{metric.label}</div>
               </div>
             ))}
