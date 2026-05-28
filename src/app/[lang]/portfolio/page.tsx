@@ -48,11 +48,17 @@ export default async function PortfolioPage(props: Props) {
   const projects: PortfolioProject[] = await fetchPortfolioList(safeLang);
 
   return (
-    <div className="min-h-screen bg-brand-paper dark:bg-[#070b13] pt-32 pb-24 text-white">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
+      {/* Ambient Mesh Glows */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 left-10 w-[450px] h-[450px] rounded-full bg-cyan-500/10 blur-[110px] pointer-events-none z-0" />
+      <div className="absolute inset-0 noise-texture opacity-[0.02] pointer-events-none z-0" />
+
+      <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest animate-pulse">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
             {safeLang === 'uz' ? 'Premium Portfolio' : safeLang === 'ru' ? 'Премиум Портфолио' : safeLang === 'zh' ? '高端作品集' : 'Premium Portfolio'}
           </div>
           

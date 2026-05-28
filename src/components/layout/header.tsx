@@ -90,11 +90,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
 
-  const lightSurfaceRoutes = ['/blog', '/checklist', '/portfolio', '/pricing', '/privacy', '/quiz', '/sitemap', '/terms', '/xizmatlar'];
-  const startsOnLightSurface = lightSurfaceRoutes.some(
-    (route) => pathnameWithoutLocale === route || pathnameWithoutLocale.startsWith(`${route}/`)
-  );
-  const useDarkHeaderText = scrolled || startsOnLightSurface;
+  const useDarkHeaderText = !scrolled;
 
   const navItems = [
     { href: getLocalizedPath('/portfolio'), label: dictionary.portfolio },
@@ -139,8 +135,8 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
           className={cn(
             'flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500',
             scrolled
-              ? 'mx-auto max-w-[95%] rounded-full border border-brand-line/70 bg-brand-paper/[0.82] px-6 py-2 shadow-[0_18px_55px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:max-w-6xl lg:px-8'
-              : 'max-w-none border-b border-transparent bg-transparent px-6 lg:px-8'
+              ? 'mx-auto max-w-[95%] rounded-full border border-white/10 bg-[#0c0c12] px-5 py-2 shadow-[0_20px_55px_rgba(12,12,18,0.22)] backdrop-blur-xl lg:max-w-6xl lg:px-7'
+              : 'mx-auto max-w-[1240px] border-b border-transparent bg-transparent px-4 sm:px-6 lg:px-7'
           )}
           suppressHydrationWarning
         >

@@ -123,6 +123,10 @@ export function DesktopNav({
   onContactClick,
   dictionary,
 }: DesktopNavProps) {
+  const navTextClass = useDarkHeaderText
+    ? 'text-[#23232c] hover:bg-[#eceeff] hover:text-[#2c2bf5]'
+    : 'text-white/88 hover:bg-white/10 hover:text-white';
+
   return (
     <div
       className={cn(
@@ -136,10 +140,8 @@ export function DesktopNav({
             <NavigationMenuItem>
               <NavigationMenuTrigger
                 className={cn(
-                  'bg-transparent px-2.5 xl:px-4 text-xs xl:text-sm font-semibold',
-                  useDarkHeaderText
-                    ? 'text-foreground hover:bg-black/10'
-                    : 'text-white hover:bg-white/10'
+                  'rounded-full bg-transparent px-2.5 text-xs font-bold xl:px-4 xl:text-sm',
+                  navTextClass
                 )}
               >
                 {dictionary.services}
@@ -160,10 +162,8 @@ export function DesktopNav({
                   asChild
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    'bg-transparent px-2.5 xl:px-4 text-xs xl:text-sm font-semibold whitespace-nowrap',
-                    useDarkHeaderText
-                      ? 'text-foreground hover:bg-black/10'
-                      : 'text-white hover:bg-white/10'
+                    'rounded-full bg-transparent px-2.5 text-xs font-bold xl:px-4 xl:text-sm whitespace-nowrap',
+                    navTextClass
                   )}
                 >
                   <Link href={item.href}>{item.label}</Link>
@@ -196,7 +196,12 @@ export function DesktopNav({
           <div className="rounded-full bg-transparent shrink-0">
             <Button
               onClick={onContactClick}
-              className="h-11 rounded-full bg-brand-ink px-3 xl:px-6 text-xs xl:text-sm font-bold text-white shadow-[0_18px_42px_-24px_rgba(15,23,42,0.85)] hover:bg-brand-blue shrink-0 whitespace-nowrap"
+              className={cn(
+                'h-11 rounded-full px-3 text-xs font-extrabold uppercase tracking-[0.04em] shadow-[0_14px_32px_-18px_rgba(44,43,245,0.85)] transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.98] xl:px-6 xl:text-sm shrink-0 whitespace-nowrap',
+                scrolled
+                  ? 'bg-white text-[#2c2bf5] hover:bg-[#eceeff]'
+                  : 'bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] text-white hover:shadow-[0_18px_38px_-16px_rgba(44,43,245,0.9)]'
+              )}
               aria-label={dictionary.free_consultation}
             >
               {dictionary.free_consultation}
