@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2025-05-28 - Timing attacks in Edge Runtime Auth Checks
+**Vulnerability:** Several API endpoints (`amocrm-process-calls`, `amocrm-refresh`) used simple string equality (`!==`) to verify sensitive credentials (cron secrets and auth headers). This exposes the application to timing attacks where an attacker can slowly deduce the secret based on the time it takes the server to reject incorrect characters.
+**Learning:** In Next.js edge environments (like Cloudflare), Node's native `crypto.timingSafeEqual` is not natively available or may behave inconsistently. However, falling back to standard string equality re-introduces the vulnerability.
+**Prevention:** Always use a custom constant-time comparison utility function (e.g. iterating over the full length of the string accumulating XOR mismatches) when evaluating secrets, and importantly, verify lengths match in constant-time (e.g. by comparing the string with itself if lengths differ) to avoid leaking length information.
