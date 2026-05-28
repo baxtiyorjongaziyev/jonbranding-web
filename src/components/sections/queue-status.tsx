@@ -137,7 +137,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                                                 isNext && "animate-subtle-pulse bg-accent/20"
                                             )}>
                                                 {isBooked ? <UserCheck className="h-8 w-8 sm:h-10 sm:w-10" /> : <User className="h-8 w-8 sm:h-10 sm:w-10" />}
-                                                <span className="text-xs font-mono">{isBooked ? translations.booked : translations.available}</span>
+                                                <span className="text-[9px] font-bold uppercase tracking-wider opacity-85">{isBooked ? translations.booked : translations.available}</span>
                                                 {isNext && <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent ring-2 ring-background"></div>}
                                             </div>
                                         </TooltipTrigger>

@@ -59,7 +59,7 @@ const CountdownBanner: FC<{ lang: string }> = ({ lang }) => {
             <span className="hidden sm:inline">{t.label}</span>
             <span className="sm:hidden">{spotsLeft} {t.spots}</span>
           </span>
-          <span className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider sm:px-3 sm:py-1 sm:text-xs">
+          <span className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 font-sans text-[10px] font-bold tracking-wider sm:px-3 sm:py-1 sm:text-xs tabular-nums">
             <Clock className="h-3 w-3" />
             --:--:--
           </span>
@@ -79,7 +79,7 @@ const CountdownBanner: FC<{ lang: string }> = ({ lang }) => {
           <span className="hidden sm:inline">{t.label}</span>
           <span className="sm:hidden">{spotsLeft} {t.spots}</span>
         </span>
-        <span className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider sm:px-3 sm:py-1 sm:text-xs">
+        <span className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 font-sans text-[10px] font-bold tracking-wider sm:px-3 sm:py-1 sm:text-xs tabular-nums">
           <Clock className="h-3 w-3" />
           {time.days > 0 && `${time.days}d `}
           {String(time.hours).padStart(2, '0')}:{String(time.minutes).padStart(2, '0')}:{String(time.seconds).padStart(2, '0')}

@@ -132,7 +132,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
                     key={card.label} 
                     className="border-t border-white/12 p-5 transition-colors duration-300 hover:border-brand-lime/30"
                   >
-                    <div className="font-mono text-3xl font-extrabold tracking-normal text-white tabular-nums">{card.value}</div>
+                    <div className="font-headline text-3xl font-black tracking-normal text-white tabular-nums">{card.value}</div>
                     <div className="mt-2 text-[10px] font-bold uppercase tracking-normal text-white/60">{card.label}</div>
                   </div>
                 ))}

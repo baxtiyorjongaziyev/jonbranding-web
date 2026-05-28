@@ -65,7 +65,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
               <div className="mt-8 grid grid-cols-2 border-y border-brand-line">
                 {outcomes.map((outcome) => (
                   <div key={outcome.label} className="border-r border-brand-line px-4 py-4 even:border-r-0">
-                    <div className="font-mono text-2xl font-extrabold tracking-normal text-brand-ink tabular-nums">{outcome.value}</div>
+                    <div className="font-headline text-2xl font-black tracking-normal text-brand-ink tabular-nums">{outcome.value}</div>
                     <div className="mt-2 text-xs font-bold uppercase tracking-normal text-brand-slate">{outcome.label}</div>
                   </div>
                 ))}
