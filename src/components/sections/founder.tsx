@@ -70,7 +70,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
         className="container relative z-10 mx-auto px-4"
       >
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-20">
-          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-6 md:order-1">
+          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-6 md:order-2">
             <div className="flex items-center gap-4">
               <h2 className="text-pretty text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
                 {renderHeadline(translations.title ?? '', "text-brand-cyan")}
@@ -128,7 +128,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="order-1 flex items-center justify-center md:order-2">
+          <motion.div variants={itemVariants} className="order-1 flex items-center justify-center md:order-1">
             <div className="relative w-full overflow-hidden rounded-3xl border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]">
               <div className="relative aspect-[4/5]">
                 {!showVideo ? (
