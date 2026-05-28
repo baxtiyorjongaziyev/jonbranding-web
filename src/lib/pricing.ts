@@ -112,9 +112,9 @@ export const getServiceDetails = (lang: string = 'uz') => {
         namingVIP: {
             label: "Naming VIP",
             price: basePricesUSD.namingVIP,
-            subDescription: isUz ? "Bir marta to'g'ri qiling — brendingiz 10 yil ishlaydi" : "Premium naming solution",
+            subDescription: isUz ? "Bir marta to'g'ri nom tanlang — brendingiz yillar davomida tanilish, ishonch va huquqiy himoya bilan ishlasin" : "Premium naming solution",
             timeline: isUz ? "⏱ 20–25 ish kuni" : "⏱ 20–25 business days",
-            cta: isUz ? "BRENDIM 10 YIL ISHLASHINI XOHLAYMAN" : null,
+            cta: isUz ? "BRENDIMNI UZOQ MUDDATLI AKTIVGA AYLANTIRAMAN" : null,
             features: isUz ? [
                 "10 ta nom varianti",
                 "Har bir nom uchun to'liq strategik izoh",
