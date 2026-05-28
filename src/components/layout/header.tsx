@@ -52,7 +52,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    setScrolled(latest > 20);
+    setScrolled(latest > 5);
     const previous = scrollY.getPrevious() || 0;
     const diff = Math.abs(latest - previous);
     if (isMobileMenuOpen || latest <= 80) {
@@ -126,10 +126,9 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
       <header
         className={cn(
-          'fixed left-0 right-0 z-50 flex flex-col items-center transition-[transform,top] duration-300 ease-out',
-          visible ? 'translate-y-0' : '-translate-y-full'
+          'fixed left-0 right-0 z-50 flex flex-col items-center transition-[top] duration-300 ease-out'
         )}
-        style={{ top: dictionary.urgencyBadge && !scrolled ? 40 : 0 }}
+        style={{ top: visible ? (dictionary.urgencyBadge && !scrolled ? 40 : 0) : -120 }}
         suppressHydrationWarning
       >
         <div

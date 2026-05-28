@@ -20,6 +20,7 @@ import { motion } from 'framer-motion';
 import { BrandSection } from '@/components/ui/design-system';
 import DOMPurify from 'isomorphic-dompurify';
 import type { FounderDictionary } from '@/lib/types/dictionary';
+import { renderHeadline } from '@/lib/headline';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
@@ -72,7 +73,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
           <motion.div variants={itemVariants} className="order-2 flex flex-col gap-6 md:order-1">
             <div className="flex items-center gap-4">
               <h2 className="text-pretty text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
-                {translations.title}
+                {renderHeadline(translations.title ?? '', "text-brand-cyan")}
               </h2>
               <a
                 href="https://www.linkedin.com/in/baxtiyorjongaziyev/"

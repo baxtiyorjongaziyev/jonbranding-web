@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { BrandSection } from '@/components/ui/design-system';
 import { projects } from '@/lib/static-data';
 import { trackEvent } from '@/lib/analytics';
+import { renderHeadline } from '@/lib/headline';
 
 interface SanityComparison {
   brand: string;
@@ -102,7 +103,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
             )}
             
             <h2 className="max-w-2xl text-balance text-4xl font-extrabold leading-tight tracking-normal text-white sm:text-6xl">
-              {translations.title}
+              {renderHeadline(translations.title ?? '', "text-brand-lime")}
             </h2>
             
             {translations.subtitle && (

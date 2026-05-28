@@ -454,7 +454,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
             <div className="rounded-xl border border-amber-300 bg-amber-100/50 p-4 text-amber-900 text-xs">
               <div className="font-semibold mb-1">{translations?.importantNoteTitle}</div>
               <p>{translations?.importantNoteText}</p>
-              <p>{translations?.importantNoteBHM?.replace("{bhm}", BHM.toLocaleString())}</p>
+              <p>{translations?.importantNoteBHM?.replace("{bhm}", BHM.toLocaleString('fr-FR'))}</p>
             </div>
           </div>
         </Card>

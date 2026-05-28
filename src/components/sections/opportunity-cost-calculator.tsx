@@ -43,10 +43,12 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
     return potentialRevenue - currentRevenue;
   }, [potentialRevenue, currentRevenue]);
 
+  const formatNumberWithSpaces = (val: number) => {
+    return Math.round(val).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); // non-breaking space
+  };
+
   const formatCurrency = (val: number) => {
-    return new Intl.NumberFormat('uz-UZ', {
-      maximumFractionDigits: 0,
-    }).format(val) + " so'm";
+    return formatNumberWithSpaces(val) + " so'm";
   };
 
   return (
@@ -72,7 +74,7 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                         {t.labels.traffic}
                       </label>
                       <span className="text-2xl font-black text-brand-blue">
-                        {traffic.toLocaleString()} {trafficUnit}
+                        {formatNumberWithSpaces(traffic)} {trafficUnit}
                       </span>
                     </div>
                     <Slider

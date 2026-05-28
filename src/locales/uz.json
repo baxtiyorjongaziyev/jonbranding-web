@@ -449,7 +449,7 @@
         "ctaButton": "Brendimni bepul tahlil qilish"
     },
     "targetAudience": {
-        "title": "Nega sizning biznesingiz bozorda 'ko'rinmas' bo'lib qolyapti?",
+        "title": "Nega sizning biznesingiz bozorda **'ko'rinmas'** bo'lib qolyapti?",
         "subtitle": "Brending — bu shunchaki chiroyli rasm emas, bu sizning mijozlaringiz bilan bog'lanadigan yagona 'ko'prik'. Agar ko'prik chirigan bo'lsa, mijozlar o'tmaydi.",
         "problems": [
             {
@@ -471,7 +471,7 @@
     },
     "beforeAfter": {
         "eyebrow": "Isbot",
-        "title": "Brend qimmatroq ko'rinishni isbotlaydi.",
+        "title": "Brend **qimmatroq** ko'rinishni isbotlaydi.",
         "subtitle": "Auditda aynan shunday savolga javob beramiz: mijoz sizni ko'rganda ishonadimi, tushunadimi va tanlashga sabab topadimi?",
         "ctaTitle": "Brendingiz o'zgarishga tayyormi?",
         "ctaDesc": "Avval brend auditdan boshlaymiz va qaysi o'zgarish eng katta ta'sir berishini aniqlaymiz.",
@@ -491,7 +491,7 @@
     },
     "testimonials": {
         "eyebrow": "Mijozlar ovozi",
-        "title": "Mijozlar ishonchi",
+        "title": "Mijozlarning **haqiqiy** ishonchi",
         "subtitle": "Portfolio chiroyli ko'rinishi mumkin. Biz uchun muhimrog'i - biznes egasi natijani his qilishi.",
         "playVideo": "Videoni shu yerda ko'rish",
         "playAudio": "Ovozli izohni tinglash",
