@@ -365,8 +365,9 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                 <Button
                   variant="ghost"
                   size="icon"
+                  aria-label="Close lightbox"
                   onClick={() => setLightboxIndex(null)}
-                  className="h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10"
+                  className="h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   <X className="w-5 h-5" />
                 </Button>
@@ -379,7 +380,8 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                     e.stopPropagation();
                     setLightboxIndex((lightboxIndex - 1 + project.galleryImages!.length) % project.galleryImages!.length);
                   }}
-                  className="absolute left-6 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10 flex items-center justify-center z-50 transition-colors"
+                  aria-label="Previous image"
+                  className="absolute left-6 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10 flex items-center justify-center z-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
@@ -408,7 +410,8 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                     e.stopPropagation();
                     setLightboxIndex((lightboxIndex + 1) % project.galleryImages!.length);
                   }}
-                  className="absolute right-6 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10 flex items-center justify-center z-50 transition-colors"
+                  aria-label="Next image"
+                  className="absolute right-6 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10 flex items-center justify-center z-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>

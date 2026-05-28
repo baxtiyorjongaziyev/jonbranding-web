@@ -19,3 +19,7 @@
 ## 2026-05-22 - Using existing design tokens for focus states
 **Learning:** When adding focus styles to interactive elements for keyboard accessibility, it's crucial to use the established Tailwind design tokens in the codebase (e.g., `focus-visible:ring-primary`, `focus-visible:ring-offset-background`) rather than generic colors like `blue-500` or `black`. This ensures consistency with the site's overall theme, including light/dark modes.
 **Action:** Always check existing components for focus state patterns before applying new ones, and strictly adhere to using semantic design tokens from the Tailwind configuration.
+
+## 2026-05-23 - Adding aria-labels to portfolio lightbox buttons
+**Learning:** The PortfolioDetailClient component features a custom lightbox gallery. It utilizes icon-only buttons (Close, Previous, Next) for navigation. While these buttons use Lucide icons which convey meaning visually, they lacked `aria-label` attributes, rendering them opaque to screen reader users who would only hear 'button' without understanding its function.
+**Action:** When building or enhancing custom interactive components with icon-only controls (like lightboxes, carousels, or modals), explicitly assign descriptive `aria-label` attributes to ensure full accessibility for users relying on assistive technologies.
