@@ -1,4 +1,5 @@
 import Script from 'next/script';
+import { Hanken_Grotesk } from 'next/font/google';
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
@@ -16,6 +17,13 @@ import MainLayout from '@/components/layout/main-layout';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
+
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-hanken',
+  display: 'swap',
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -104,12 +112,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
     <html lang={lang} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#ffffff}' }} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,500;1,700;1,800;1,900&display=swap"
-          rel="stylesheet"
-        />
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -298,7 +300,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           }}
         />
       </head>
-      <body className="font-body bg-brand-paper antialiased" suppressHydrationWarning>
+      <body className={`${hankenGrotesk.variable} font-body bg-brand-paper antialiased`} suppressHydrationWarning>
         <a href="#main-content" className="skip-link">
           {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
         </a>
