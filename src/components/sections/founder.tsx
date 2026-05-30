@@ -54,7 +54,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
   if (!translations) return null;
 
   return (
-    <BrandSection id="founder" tone="dark" className="relative overflow-hidden py-24 sm:py-32">
+    <BrandSection id="founder" tone="dark" className="relative overflow-hidden py-16 sm:py-20 lg:py-0">
 
 
 
@@ -66,12 +66,12 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
         variants={containerVariants}
         initial="visible"
         animate="visible"
-        className="container relative z-10 mx-auto px-4"
+        className="container relative z-10 mx-auto px-4 lg:min-h-screen lg:flex lg:items-center"
       >
-        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-20">
-          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-6 md:order-1">
+        <div className="grid w-full grid-cols-1 items-center gap-10 py-16 sm:py-20 md:grid-cols-2 lg:gap-14 lg:py-0 lg:min-h-screen lg:items-stretch">
+          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-5 py-0 md:order-1 lg:justify-center lg:py-20">
             <div className="flex items-center gap-4">
-              <h2 className="text-pretty text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
+              <h2 className="text-pretty text-3xl font-black leading-tight text-white sm:text-4xl lg:text-[2.5rem]">
                 {translations.title}
               </h2>
               <a
@@ -85,7 +85,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
               </a>
             </div>
             <p
-              className="mt-4 text-pretty text-lg leading-8 text-white/72"
+              className="text-pretty text-base leading-7 text-white/72 lg:text-[0.9375rem]"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(translations.message ?? '') }}
             />
 
@@ -99,7 +99,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
               </div>
             )}
 
-            <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {(translations.points ?? []).map((point, index: number) => {
                 const Icon = icons[point.icon];
                 return (
@@ -111,7 +111,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
               })}
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3">
               <Button size="lg" className="h-[52px] rounded-full bg-white px-6 text-brand-ink transition-[background-color,transform] duration-200 hover:bg-brand-lime active:scale-[0.97]" asChild>
                 <a href="tel:+998336450097">
                   <Phone className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -127,9 +127,9 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="order-1 flex items-center justify-center md:order-2">
-            <div className="relative w-full overflow-hidden rounded-3xl border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]">
-              <div className="relative aspect-[4/5]">
+          <motion.div variants={itemVariants} className="order-1 flex items-stretch md:order-2">
+            <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] lg:rounded-none lg:border-0 lg:shadow-none">
+              <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full lg:min-h-screen">
                 {!showVideo ? (
                   <>
                     <Image
