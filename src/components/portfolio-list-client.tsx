@@ -25,7 +25,6 @@ interface PortfolioListClientProps {
   lang: string;
   dictionary: {
     all: string;
-    brandStrategy: string;
     logoDesign: string;
     packaging: string;
     naming: string;
@@ -78,7 +77,6 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
 
   const filterOptions = [
     { value: 'all', label: dictionary.all },
-    { value: 'brand-strategy', label: dictionary.brandStrategy },
     { value: 'logo-design', label: dictionary.logoDesign },
     { value: 'packaging', label: dictionary.packaging },
     { value: 'naming', label: dictionary.naming },

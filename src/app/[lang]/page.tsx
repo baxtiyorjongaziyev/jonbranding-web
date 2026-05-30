@@ -18,7 +18,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang: rawLang } = await props.params;
   const lang = (['uz', 'ru', 'en', 'zh'].includes(rawLang) ? rawLang : 'uz') as Locale;
   const titles = {
-    uz: "Jon.Branding | Bepul Brand Audit va premium brend strategiyasi",
+    uz: "Jon.Branding | Bepul Brand Audit va premium logotip dizayni",
     ru: "Jon.Branding | Брендинговое Агентство в Ташкенте: Дизайн и Стратегия",
     en: "Jon.Branding | Premier Branding Agency in Uzbekistan: Logo & Naming",
     zh: "Jon.Branding | 乌兹别克斯坦领先的品牌代理机构"
@@ -34,7 +34,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: titles[lang] || titles.uz,
     description: descriptions[lang] || descriptions.uz,
-    keywords: "brand audit, brending uz, logo dizayn, neyming, naming, qadoq dizayn, brand strategiya, brandbook, premium branding",
+    keywords: "brand audit, brending uz, logo dizayn, neyming, naming, qadoq dizayn, brandbook, premium branding",
   };
 }
 
