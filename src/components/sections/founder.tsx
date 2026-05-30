@@ -66,10 +66,10 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
         variants={containerVariants}
         initial="visible"
         animate="visible"
-        className="container relative z-10 mx-auto px-4 lg:min-h-screen lg:flex lg:items-center"
+        className="container relative z-10 mx-auto px-4 lg:h-screen lg:flex lg:items-center"
       >
-        <div className="grid w-full grid-cols-1 items-center gap-10 py-16 sm:py-20 md:grid-cols-2 lg:gap-14 lg:py-0 lg:min-h-screen lg:items-stretch">
-          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-5 py-0 md:order-1 lg:justify-center lg:py-20">
+        <div className="grid w-full grid-cols-1 items-center gap-10 py-16 sm:py-20 md:grid-cols-2 lg:gap-14 lg:py-0 lg:h-screen lg:items-stretch">
+          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-5 py-0 md:order-1 lg:justify-center lg:py-10">
             <div className="flex items-center gap-4">
               <h2 className="text-pretty text-3xl font-black leading-tight text-white sm:text-4xl lg:text-[2.5rem]">
                 {translations.title}
@@ -129,7 +129,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
 
           <motion.div variants={itemVariants} className="order-1 flex items-stretch md:order-2">
             <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] lg:rounded-none lg:border-0 lg:shadow-none">
-              <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full lg:min-h-screen">
+              <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full">
                 {!showVideo ? (
                   <>
                     <Image
