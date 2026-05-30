@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       default: dictionary.meta?.title || "Jon.Branding | Professional Brending Agentligi",
       template: "%s | Jon.Branding"
     },
-    description: dictionary.meta?.description || "Biznesingiz uchun natijali brend strategiyasi, neyming va logotip dizayni.",
+    description: dictionary.meta?.description || "Biznesingiz uchun neyming, logotip va brendbuk dizayni.",
     icons: {
       icon: [
         { url: '/favicon.ico', sizes: 'any' },
