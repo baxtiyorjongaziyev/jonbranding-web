@@ -1,40 +1,43 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 export default function LiveClock({ lang }: { lang: string }) {
   const [timeStr, setTimeStr] = useState('');
+  const clockRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(clockRef);
 
   useEffect(() => {
     const tick = () => {
       const d = new Date();
-      const locale = lang === 'ru' ? 'ru-RU' : lang === 'zh' ? 'zh-CN' : lang === 'en' ? 'en-US' : 'uz-UZ';
-      
+      const locale =
+        lang === 'ru' ? 'ru-RU' : lang === 'zh' ? 'zh-CN' : lang === 'en' ? 'en-US' : 'uz-UZ';
+
       const day = d.toLocaleDateString(locale, {
         weekday: 'short',
         month: 'short',
         day: 'numeric',
       });
-      
+
       let h = d.getHours();
       const m = d.getMinutes();
       const ap = h >= 12 ? 'pm' : 'am';
       h = h % 12 || 12;
-      
+
       const paddedMinutes = String(m).padStart(2, '0');
       setTimeStr(`${day}, ${h}:${paddedMinutes} ${ap}`);
     };
 
     tick();
+    if (!isInView) return;
     const interval = setInterval(tick, 20000);
     return () => clearInterval(interval);
-  }, [lang]);
-
-  if (!timeStr) return null;
+  }, [lang, isInView]);
 
   return (
     <motion.div
+      ref={clockRef}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
@@ -44,7 +47,7 @@ export default function LiveClock({ lang }: { lang: string }) {
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
         <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
       </span>
-      <span>{timeStr}</span>
+      <span className={!timeStr ? 'opacity-0' : ''}>{timeStr || 'Loading...'}</span>
     </motion.div>
   );
 }
