@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { timingSafeEqual } from 'crypto';
 import { getValidAccessToken } from '@/lib/amocrm-token';
 import { analyzeCallAudio } from '@/lib/gemini';
 
@@ -24,7 +25,12 @@ async function handleCallProcessing(request: Request) {
     const configuredSecret = cleanSecret(process.env.AMOCRM_CRON_SECRET);
 
     // 1. Verify cron secret to protect the endpoint
-    if (!configuredSecret || secret !== configuredSecret) {
+    // SECURITY: Use crypto.timingSafeEqual for constant-time comparison to prevent timing attacks.
+    if (!configuredSecret || !secret || secret.length !== configuredSecret.length) {
+      return NextResponse.json({ error: 'Unauthorized secret key' }, { status: 401 });
+    }
+
+    if (!timingSafeEqual(Buffer.from(secret), Buffer.from(configuredSecret))) {
       return NextResponse.json({ error: 'Unauthorized secret key' }, { status: 401 });
     }
 
