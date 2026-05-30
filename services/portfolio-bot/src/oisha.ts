@@ -1,9 +1,8 @@
 import axios from 'axios';
 import type { ParsedProject } from './types.js';
 
-const API_URL = process.env.OISHA_API_URL!;
-const SECRET = process.env.OISHA_SECRET_KEY!;
-const BOT_USER_ID = 'portfolio-bot-parser';
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 const PROMPT = (text: string) => `
 Quyidagi Telegram postdan loyiha ma'lumotlarini ajratib, FAQAT JSON formatda qaytargil (boshqa hech narsa yozma):
@@ -29,15 +28,18 @@ Agar biron maydon postda yo'q bo'lsa — bo'sh string yoki bo'sh array qo'y. cat
 
 export async function parsePostWithOisha(messageText: string): Promise<ParsedProject> {
   const res = await axios.post(
-    `${API_URL}/api/chat/send`,
-    { user_id: BOT_USER_ID, text: PROMPT(messageText), secret_key: SECRET },
+    GEMINI_URL,
+    {
+      contents: [{ parts: [{ text: PROMPT(messageText) }] }],
+      generationConfig: { temperature: 0.1, maxOutputTokens: 1024 },
+    },
     { timeout: 30_000 }
   );
 
-  const reply: string = res.data?.response || res.data?.text || '';
+  const reply: string = res.data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
 
   const jsonMatch = reply.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) throw new Error(`Oisha JSON qaytarmadi: ${reply.slice(0, 200)}`);
+  if (!jsonMatch) throw new Error(`Gemini JSON qaytarmadi: ${reply.slice(0, 200)}`);
 
   const parsed = JSON.parse(jsonMatch[0]) as ParsedProject;
 
