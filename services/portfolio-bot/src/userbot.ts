@@ -24,7 +24,21 @@ export async function startUserbot(): Promise<void> {
     onError: (err) => console.error('[userbot] auth error:', err),
   });
 
-  console.log('[userbot] Connected. Watching channels:', CHANNEL_IDS);
+  // Resolve usernames (@JonBranding) and numeric IDs to canonical numeric strings
+  const resolvedIds = new Set<string>();
+  for (const id of CHANNEL_IDS) {
+    try {
+      const entity = await client.getEntity(id);
+      const numId = String((entity as any).id);
+      resolvedIds.add(numId);
+      console.log(`[userbot] Resolved ${id} → ${numId}`);
+    } catch (err) {
+      console.warn(`[userbot] Could not resolve ${id}:`, err);
+      resolvedIds.add(id.replace(/^-100/, '').replace(/^-/, ''));
+    }
+  }
+
+  console.log('[userbot] Watching channel IDs:', [...resolvedIds]);
 
   client.addEventHandler(async (event: any) => {
     try {
@@ -38,11 +52,7 @@ export async function startUserbot(): Promise<void> {
         'userId' in peerId ? peerId.userId : ''
       );
 
-      const isWatched = CHANNEL_IDS.some(
-        (id) => id === chatId || id === `-100${chatId}`
-      );
-      if (!isWatched) return;
-
+      if (!resolvedIds.has(chatId)) return;
       if (!message.text.includes('drive.google.com')) return;
 
       console.log(`[userbot] New post from ${chatId}: ${message.text.slice(0, 80)}...`);
@@ -53,7 +63,6 @@ export async function startUserbot(): Promise<void> {
         const notifyText = result.success
           ? `✅ Portfolio yaratildi: *${result.title}*\nSanity ID: \`${result.sanityId}\``
           : `❌ Xato: ${result.error}`;
-
         await client.sendMessage(NOTIFY_CHAT_ID, { message: notifyText, parseMode: 'markdown' });
       }
     } catch (err) {
