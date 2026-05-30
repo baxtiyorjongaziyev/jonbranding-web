@@ -1,6 +1,6 @@
 'use client';
 
-import { type FC } from 'react';
+import { type FC, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, CheckCircle2, ShieldCheck, Target } from 'lucide-react';
 import ContactTriggerButton from '@/components/contact-trigger-button';
@@ -77,13 +77,19 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
   if (!dictionary) return null;
 
   const heroCopy = getHeroCopy(dictionary);
+  const [spot, setSpot] = useState({ x: 50, y: 40 });
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setSpot({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+  }, []);
 
   return (
-    <section className="relative isolate overflow-hidden bg-white text-foreground">
+    <section className="relative isolate overflow-hidden bg-white text-foreground" onMouseMove={onMouseMove}>
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-white" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,45,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(20,20,45,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [mask-image:radial-gradient(ellipse_at_center,#000_35%,transparent_78%)]" />
         <div className="absolute left-1/2 top-[-12%] h-[460px] w-[860px] -translate-x-1/2 rounded-full bg-primary/10 blur-[130px]" />
+        <div className="absolute inset-0 transition-opacity duration-500" style={{ background: `radial-gradient(700px circle at ${spot.x}% ${spot.y}%, hsl(37 70% 47% / 0.07), transparent 55%)` }} />
       </div>
 
       <div className="container relative mx-auto flex min-h-[100dvh] max-w-[1360px] items-center px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:px-8 lg:pb-24">
