@@ -161,7 +161,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
       >
         <button
           onClick={() => setIsOpen(true)}
-          className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-all ring-4 ring-white/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-all ring-4 ring-white/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label={translations.openButtonAriaLabel}
           aria-expanded={isOpen}
           aria-controls="oisha-chat-window"
@@ -194,7 +194,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1 hover:bg-white/10 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-blue-600"
+                  className="p-1 hover:bg-white/10 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-1 focus-visible:ring-offset-blue-600"
                   aria-label={translations.closeButtonAriaLabel}
                   aria-expanded={isOpen}
                   aria-controls="oisha-chat-window"
@@ -248,7 +248,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
                   <button
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputValue.trim()}
-                    className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1"
+                    className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-1"
                     aria-label={translations.sendButtonAriaLabel}
                   >
                     <Send className="w-5 h-5" />

@@ -19,3 +19,7 @@
 ## 2026-05-22 - Using existing design tokens for focus states
 **Learning:** When adding focus styles to interactive elements for keyboard accessibility, it's crucial to use the established Tailwind design tokens in the codebase (e.g., `focus-visible:ring-primary`, `focus-visible:ring-offset-background`) rather than generic colors like `blue-500` or `black`. This ensures consistency with the site's overall theme, including light/dark modes.
 **Action:** Always check existing components for focus state patterns before applying new ones, and strictly adhere to using semantic design tokens from the Tailwind configuration.
+
+## 2026-05-30 - Semantic Focus Ring Tokens
+**Learning:** Hardcoded color tokens (like `ring-blue-400` or `ring-offset-black`) for focus rings (`focus-visible`) often break or look visually discordant when switching between light and dark modes or when component backgrounds change.
+**Action:** Always use semantic design system tokens provided in the Tailwind config (e.g., `focus-visible:ring-brand-blue` and `focus-visible:ring-offset-background`) for keyboard navigation focus indicators to ensure consistent, theme-aware accessibility.
