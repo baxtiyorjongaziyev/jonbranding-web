@@ -113,7 +113,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.solutions}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/xizmatlar/qadoq-dizayni')} className="hover:text-white transition-colors">{copy.packaging_design}</Link></li>
-              <li><Link href={getLocalizedPath('/xizmatlar/brand-strategiyasi')} className="hover:text-white transition-colors">{copy.brand_strategy}</Link></li>
+
               <li><Link href={getLocalizedPath('/xizmatlar')} className="hover:text-white transition-colors">{copy.service_prices}</Link></li>
             </ul>
           </div>
