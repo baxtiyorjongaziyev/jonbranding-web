@@ -54,7 +54,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
   if (!translations) return null;
 
   return (
-    <BrandSection id="founder" tone="dark" className="relative overflow-hidden py-16 sm:py-20 lg:py-0">
+    <BrandSection id="founder" tone="dark" className="relative overflow-hidden py-16 sm:py-20 lg:h-[100dvh] lg:py-0">
 
 
 
@@ -66,9 +66,9 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
         variants={containerVariants}
         initial="visible"
         animate="visible"
-        className="container relative z-10 mx-auto px-4 lg:h-screen lg:flex lg:items-center"
+        className="container relative z-10 mx-auto px-4 lg:h-full lg:flex lg:items-center"
       >
-        <div className="grid w-full grid-cols-1 items-center gap-10 py-16 sm:py-20 md:grid-cols-2 lg:gap-14 lg:py-0 lg:h-screen lg:items-stretch">
+        <div className="grid w-full grid-cols-1 items-center gap-10 py-16 sm:py-20 md:grid-cols-2 lg:gap-14 lg:py-0 lg:h-full lg:items-stretch">
           <motion.div variants={itemVariants} className="order-2 flex flex-col gap-5 py-0 md:order-1 lg:justify-center lg:py-10">
             <div className="flex items-center gap-4">
               <h2 className="text-pretty text-3xl font-black leading-tight text-white sm:text-4xl lg:text-[2.5rem]">
