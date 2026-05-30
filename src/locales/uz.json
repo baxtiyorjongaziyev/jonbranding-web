@@ -162,11 +162,11 @@
             "Mijozlar sizni |yana va yana sevib qolishsin|.",
             "Kichik biznesdan |kuchli brendgacha|. Bir qadamda."
         ],
-        "description": "Biznesingiz nomi, logosi, qadoqi va kommunikatsiyasi mijozda ishonch uyg'otishi kerak. Biz buni strategiya va aniq vizual tizim orqali quramiz.",
+        "description": "Biznesingiz nomi, logosi, qadoqi va kommunikatsiyasi mijozda ishonch uyg'otishi kerak. Biz buni aniq vizual tizim va dizayn orqali quramiz.",
         "buttonTexts": [
             "Brendimni tahlil qilish",
             "Sotuvlarni oshirishga yordam bering",
-            "Bepul Strategik Audit",
+            "Bepul Brend Audit",
             "Menga kuchli brend kerak"
         ],
         "buttonHint": "Bepul Brand Audit  ·  Ishonch diagnostikasi  ·  Majburiyatsiz tavsiya",
@@ -223,7 +223,7 @@
         "steps": {
             "step4": {
                 "title": "Auditga yozilish",
-                "subtitle": "Strategimiz bog'lanishi uchun aloqa ma'lumotlaringizni qoldiring."
+                "subtitle": "Dizayn mutaxassisimiz bog'lanishi uchun aloqa ma'lumotlaringizni qoldiring."
             }
         },
         "fields": {
@@ -256,12 +256,12 @@
         },
         "successStep": {
             "title": "So'rov qabul qilindi",
-            "description": "Strategimiz tez orada bog'lanadi va brendingizni audit qilishni boshlaydi.",
+            "description": "Dizayn mutaxassisimiz tez orada bog'lanadi va brendingizni audit qilishni boshlaydi.",
             "nextSteps": "Suhbatgacha",
             "telegramButton": "Telegram kanalga o'tish",
             "telegramDesc": "Brending bo'yicha foydali materiallar."
         },
-        "trustBadge": "Ma'lumotlaringiz maxfiy saqlanadi. Strategimiz bugun siz bilan bog'lanadi.",
+        "trustBadge": "Ma'lumotlaringiz maxfiy saqlanadi. Dizayn mutaxassisimiz bugun siz bilan bog'lanadi.",
         "contactBadge": "15 daqiqa",
         "quickContactLabel": "Tez aloqa",
         "auditGivesLabel": "Auditda olasiz",
@@ -505,7 +505,7 @@
     },
     "founder": {
         "title": "Men dizaynni emas, biznes uchun ishonch tizimini quraman.",
-        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biz biznes egalariga nom, strategiya, aydentika, qadoq va brandbook orqali xaridor tezroq tushunadigan, eslab qoladigan va ishonch bilan tanlaydigan brend tizimini qurishga yordam beramiz.",
+        "message": "Salom! Men Baxtiyorjon, Jon.Branding asoschisiman. Biz biznes egalariga nom, logotip, aydentika, qadoq va brandbook orqali xaridor tezroq tushunadigan, eslab qoladigan va ishonch bilan tanlaydigan brend tizimini qurishga yordam beramiz.",
         "points": [
             {
                 "icon": "Medal",
@@ -529,14 +529,14 @@
         "videoButton": "Asoschidan 45 soniya",
         "videoAlt": "Baxtiyorjon Gaziyev, Jon.Branding asoschisi",
         "principles": [
-            "Strategiya bilan boshlaymiz",
+            "Tizimli yondashuvdan boshlaymiz",
             "Tadbirkor tilida tushuntiramiz",
             "Natija: ishonch va premiumlik"
         ]
     },
     "process": {
         "title": "Auditdan premium brend tizimigacha bo'lgan yo'l.",
-        "subtitle": "Bepul audit sizga birinchi tashxisni beradi. Agar davom etsak, jarayon strategiya, vizual tizim va tatbiq rejasiga aylanadi.",
+        "subtitle": "Bepul audit sizga birinchi tashxisni beradi. Agar davom etsak, jarayon dizayn tizimi va tatbiq rejasiga aylanadi.",
         "phases": [
             {
                 "phase": "01",
@@ -550,7 +550,7 @@
             },
             {
                 "phase": "02",
-                "title": "Strategiya",
+                "title": "Kontseptsiya",
                 "description": "Kim uchun, nima bilan farq qilasiz va nima uchun sizni tanlashlari kerakligini aniqlaymiz.",
                 "tasks": [
                     "Pozitsiyalash",
@@ -595,7 +595,7 @@
         "eyebrow": "Auditdan keyin",
         "proofItems": [
             "Diagnostika",
-            "Strategiya",
+            "Dizayn tizimi",
             "Vizual tizim",
             "Tatbiq yo'riqnomasi"
         ]
@@ -1158,33 +1158,33 @@
         "hero": {
             "eyebrow": "Mashina reklama dizayni",
             "title": "Creative Car Wrap Design",
-            "subtitle": "Brendingizni ko‘chada yuradigan reklamaga aylantiring.",
-            "description": "Mashina ustidagi reklama shunchaki logo yopishtirish emas. To‘g‘ri ishlangan car wrap dizayni biznesingizni yo‘lda ham ko‘zga tashlanadigan, esda qoladigan va ishonchli brendga aylantiradi.",
+            "subtitle": "Brendingizni ko'chada yuradigan reklamaga aylantiring.",
+            "description": "Mashina ustidagi reklama shunchaki logo yopishtirish emas. To'g'ri ishlangan car wrap dizayni biznesingizni yo'lda ham ko'zga tashlanadigan, esda qoladigan va ishonchli brendga aylantiradi.",
             "primaryCta": "Dizayn buyurtma qilish",
-            "secondaryCta": "Tariflarni ko‘rish"
+            "secondaryCta": "Tariflarni ko'rish"
         },
         "visual": {
             "label": "Wrap kompozitsiya",
             "brand": "Jon.Branding",
-            "sloganUz": "Brendingiz ko‘chada ishlasin",
+            "sloganUz": "Brendingiz ko'chada ishlasin",
             "sloganRu": "Реклама, которую замечают",
             "phone": "+998 33 645 00 97",
             "side": "Yon qism",
             "rear": "Orqa qism",
             "front": "Old qism",
             "notes": [
-                "Logo va slogan o‘qiladigan joyda",
+                "Logo va slogan o'qiladigan joyda",
                 "Kontaktlar tez esda qoladigan formatda",
                 "Brend ranglari mashina formasiga mos"
             ]
         },
         "problem": {
-            "title": "Oddiy yopishtirilgan reklama brendni kuchsiz ko‘rsatadi",
-            "description": "Ko‘p bizneslar mashinaga logo, telefon raqam va xizmat nomlarini tartibsiz joylashtirib qo‘yadi. Natijada reklama ko‘zga tashlanmaydi, o‘qilishi qiyin bo‘ladi va brend professional ko‘rinmaydi."
+            "title": "Oddiy yopishtirilgan reklama brendni kuchsiz ko'rsatadi",
+            "description": "Ko'p bizneslar mashinaga logo, telefon raqam va xizmat nomlarini tartibsiz joylashtirib qo'yadi. Natijada reklama ko'zga tashlanmaydi, o'qilishi qiyin bo'ladi va brend professional ko'rinmaydi."
         },
         "solution": {
             "title": "Biz mashinangizni kuchli reklama kanaliga aylantiramiz",
-            "description": "Jon Branding jamoasi mashina formasi, brend rangi, logo, slogan, xizmatlar va kontaktlarni yagona kompozitsiyaga joylashtirib, ko‘chada e’tibor tortadigan professional car wrap design ishlab beradi."
+            "description": "Jon Branding jamoasi mashina formasi, brend rangi, logo, slogan, xizmatlar va kontaktlarni yagona kompozitsiyaga joylashtirib, ko'chada e'tibor tortadigan professional car wrap design ishlab beradi."
         },
         "included": {
             "eyebrow": "Xizmat ichida",
@@ -1193,9 +1193,9 @@
                 "Brendga mos kreativ dizayn konsepti",
                 "Mashina modeli va shakliga mos kompozitsiya",
                 "Logo, slogan va kontaktlar joylashuvi",
-                "O‘zbekcha va ruscha matnlarni balansli joylashtirish",
+                "O'zbekcha va ruscha matnlarni balansli joylashtirish",
                 "Mashinaning yon, orqa va old qismlari uchun dizayn",
-                "Realistic mockup ko‘rinish",
+                "Realistic mockup ko'rinish",
                 "Chop etishga tayyor final fayllar",
                 "Bosmaxona yoki sticker ustaga topshirish uchun texnik tayyorlov"
             ]
@@ -1203,11 +1203,11 @@
         "benefits": {
             "title": "Bu xizmat sizga nima beradi?",
             "items": [
-                "Brendingiz ko‘chada ko‘proq ko‘rinadi",
-                "Mashina reklamangiz professional va ishonchli ko‘rinadi",
+                "Brendingiz ko'chada ko'proq ko'rinadi",
+                "Mashina reklamangiz professional va ishonchli ko'rinadi",
                 "Odamlar biznesingizni tezroq eslab qoladi",
                 "Oddiy transport vositasi reklama kanaliga aylanadi",
-                "Slogan, xizmat va kontaktlar tartibli ko‘rinadi",
+                "Slogan, xizmat va kontaktlar tartibli ko'rinadi",
                 "Brend imiji kuchayadi",
                 "Raqobatchilardan ajralib turasiz",
                 "Offline reklama doimiy ishlaydi"
@@ -1222,16 +1222,16 @@
                 "Konditsioner, texnika va servis xizmatlari",
                 "Oziq-ovqat va ichimlik brendlari",
                 "Kafe, bakery va restoranlar",
-                "Do‘konlar va savdo tarmoqlari",
-                "Ko‘chada tez-tez harakatlanadigan xizmat bizneslari"
+                "Do'konlar va savdo tarmoqlari",
+                "Ko'chada tez-tez harakatlanadigan xizmat bizneslari"
             ]
         },
         "process": {
             "title": "Biz qanday ishlaymiz?",
             "steps": [
                 "Brend va mashina modeli bilan tanishamiz",
-                "Logo, ranglar, slogan va kerakli ma’lumotlarni olamiz",
-                "Car wrap uchun kreativ yo‘nalish ishlab chiqamiz",
+                "Logo, ranglar, slogan va kerakli ma'lumotlarni olamiz",
+                "Car wrap uchun kreativ yo'nalish ishlab chiqamiz",
                 "Dizaynni mashina maketiga joylashtiramiz",
                 "Tuzatishlardan keyin final fayllarni tayyorlab beramiz"
             ]
@@ -1242,18 +1242,18 @@
             "tiers": [
                 {
                     "name": "START",
-                    "price": "1 500 000 so‘m",
+                    "price": "1 500 000 so'm",
                     "features": [
-                        "1 ta kreativ yo‘nalish",
+                        "1 ta kreativ yo'nalish",
                         "Mashinaning 2 yon tomoni dizayni",
-                        "O‘zbekcha va ruscha slogan joylashuvi",
+                        "O'zbekcha va ruscha slogan joylashuvi",
                         "1 marta tuzatish",
                         "Chop etishga tayyor fayl"
                     ]
                 },
                 {
                     "name": "PRO",
-                    "price": "2 500 000 so‘m",
+                    "price": "2 500 000 so'm",
                     "features": [
                         "2 ta dizayn varianti",
                         "Mashinaning ikki yoni va orqa qismi",
@@ -1265,13 +1265,13 @@
                 },
                 {
                     "name": "PREMIUM",
-                    "price": "4 000 000 so‘m",
+                    "price": "4 000 000 so'm",
                     "features": [
-                        "3 ta kreativ dizayn yo‘nalishi",
-                        "Mashinaning 4 tomoni: chap, o‘ng, old, orqa",
+                        "3 ta kreativ dizayn yo'nalishi",
+                        "Mashinaning 4 tomoni: chap, o'ng, old, orqa",
                         "Slogan, xizmatlar va kontaktlar joylashuvi",
                         "Brendga mos reklama konsepti",
-                        "Realistic mockup ko‘rinish",
+                        "Realistic mockup ko'rinish",
                         "3 marta tuzatish",
                         "Chop etishga tayyor final fayllar"
                     ]
@@ -1281,31 +1281,31 @@
         "cta": {
             "brandLabel": "Jon.Branding",
             "title": "Mashinangiz brendingiz uchun ishlasin",
-            "description": "Agar biznesingiz mashinasi ko‘chada yursa, u shunchaki transport emas — reklama maydoni. Biz uni professional brend ko‘rinishiga olib kelamiz.",
+            "description": "Agar biznesingiz mashinasi ko'chada yursa, u shunchaki transport emas — reklama maydoni. Biz uni professional brend ko'rinishiga olib kelamiz.",
             "button": "Car wrap design buyurtma qilish"
         },
         "faq": {
-            "title": "Ko‘p beriladigan savollar",
+            "title": "Ko'p beriladigan savollar",
             "items": [
                 {
-                    "question": "Dizayn chop etishga tayyor bo‘ladimi?",
+                    "question": "Dizayn chop etishga tayyor bo'ladimi?",
                     "answer": "Ha, yakunda bosmaxona yoki sticker ustaga berishga tayyor fayllar topshiriladi."
                 },
                 {
-                    "question": "Mashina modeli kerak bo‘ladimi?",
-                    "answer": "Ha, dizayn mashina modeli va o‘lchamiga moslab tayyorlanadi."
+                    "question": "Mashina modeli kerak bo'ladimi?",
+                    "answer": "Ha, dizayn mashina modeli va o'lchamiga moslab tayyorlanadi."
                 },
                 {
                     "question": "Ikki tilda slogan joylashtirish mumkinmi?",
-                    "answer": "Ha, masalan bir tomoniga o‘zbekcha, ikkinchi tomoniga ruscha slogan joylashtirish mumkin."
+                    "answer": "Ha, masalan bir tomoniga o'zbekcha, ikkinchi tomoniga ruscha slogan joylashtirish mumkin."
                 },
                 {
-                    "question": "Dizaynni ko‘rinishda ko‘rsatib berasizlarmi?",
-                    "answer": "Ha, tarifga qarab realistic mockup ko‘rinish ham tayyorlanadi."
+                    "question": "Dizaynni ko'rinishda ko'rsatib berasizlarmi?",
+                    "answer": "Ha, tarifga qarab realistic mockup ko'rinish ham tayyorlanadi."
                 },
                 {
                     "question": "Faqat dizayn qilasizlarmi yoki yopishtirish ham bormi?",
-                    "answer": "Asosiy xizmat — dizayn va chop etishga tayyor fayl. Yopishtirish bo‘yicha alohida hamkor ustalar bilan yo‘naltirish mumkin."
+                    "answer": "Asosiy xizmat — dizayn va chop etishga tayyor fayl. Yopishtirish bo'yicha alohida hamkor ustalar bilan yo'naltirish mumkin."
                 }
             ]
         }
