@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { staticBrands } from '@/lib/static-data';
 import { BrandSection } from '@/components/ui/design-system';
 import { Marquee } from '@/components/ui/marquee';
+import type { Brand } from '@/lib/types';
 
 type TrustedByDictionary = {
   eyebrow?: string;
@@ -18,8 +19,8 @@ const defaultMetrics = [
   { value: '4 til', label: 'Bozor tili' },
 ];
 
-const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = ({ dictionary }) => {
-  const brands = staticBrands.filter((brand) => !brand.hiddenInHero).slice(0, 18);
+const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary; brands?: Brand[] }> = ({ dictionary, brands: brandsProp }) => {
+  const brands = (brandsProp ?? staticBrands).filter((brand) => !brand.hiddenInHero).slice(0, 18);
   const metrics = dictionary?.metrics?.length ? dictionary.metrics : defaultMetrics;
 
   if (!dictionary?.title) return null;
