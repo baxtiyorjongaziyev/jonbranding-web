@@ -15,11 +15,15 @@ import {
   type LucideProps,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useState, type FC } from 'react';
+import { useState, useRef, useEffect, type FC } from 'react';
 import { motion } from 'framer-motion';
 import { BrandSection } from '@/components/ui/design-system';
 import DOMPurify from 'isomorphic-dompurify';
 import type { FounderDictionary } from '@/lib/types/dictionary';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
@@ -49,12 +53,34 @@ const itemVariants = {
 const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictionary }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [unmuted, setUnmuted] = useState(false);
+  const portraitRef = useRef<HTMLDivElement>(null);
   const translations = dictionary;
+
+  useEffect(() => {
+    if (!portraitRef.current) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        portraitRef.current,
+        { y: 30 },
+        {
+          y: -30,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: portraitRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.5,
+          },
+        }
+      );
+    });
+    return () => ctx.revert();
+  }, []);
 
   if (!translations) return null;
 
   return (
-    <BrandSection id="founder" tone="dark" className="relative overflow-hidden py-16 sm:py-20 lg:py-0">
+    <BrandSection id="founder" tone="dark" className="relative overflow-hidden py-16 sm:py-20 lg:h-[100dvh] lg:py-0">
 
 
 
@@ -64,12 +90,13 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
 
       <motion.div
         variants={containerVariants}
-        initial="visible"
-        animate="visible"
-        className="container relative z-10 mx-auto px-4 lg:min-h-screen lg:flex lg:items-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-60px' }}
+        className="container relative z-10 mx-auto px-4 lg:h-full lg:flex lg:items-center"
       >
-        <div className="grid w-full grid-cols-1 items-center gap-10 py-16 sm:py-20 md:grid-cols-2 lg:gap-14 lg:py-0 lg:min-h-screen lg:items-stretch">
-          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-5 py-0 md:order-1 lg:justify-center lg:py-20">
+        <div className="grid w-full grid-cols-1 items-center gap-10 py-16 sm:py-20 md:grid-cols-2 lg:gap-14 lg:py-0 lg:h-full lg:items-stretch">
+          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-5 py-0 md:order-1 lg:justify-center lg:py-10">
             <div className="flex items-center gap-4">
               <h2 className="text-pretty text-3xl font-black leading-tight text-white sm:text-4xl lg:text-[2.5rem]">
                 {translations.title}
@@ -128,8 +155,8 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
           </motion.div>
 
           <motion.div variants={itemVariants} className="order-1 flex items-stretch md:order-2">
-            <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] lg:rounded-none lg:border-0 lg:shadow-none">
-              <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full lg:min-h-screen">
+            <div ref={portraitRef} className="relative h-full w-full overflow-hidden rounded-3xl border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] lg:rounded-none lg:border-0 lg:shadow-none">
+              <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full">
                 {!showVideo ? (
                   <>
                     <Image

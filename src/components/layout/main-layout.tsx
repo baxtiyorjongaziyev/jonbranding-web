@@ -9,6 +9,7 @@ interface MainLayoutProps {
   lang?: string;
   stickyCtaLabel?: string;
   tabNotificationMessage?: string;
+  settings?: { phone?: string; telegramPersonal?: string; telegramChannel?: string };
 }
 
 const MainLayout: FC<MainLayoutProps> = ({
@@ -18,6 +19,7 @@ const MainLayout: FC<MainLayoutProps> = ({
   lang,
   stickyCtaLabel,
   tabNotificationMessage,
+  settings,
 }) => (
   <LenisProvider>
     <div className="flex min-h-screen flex-col bg-secondary/50" suppressHydrationWarning>
@@ -28,6 +30,7 @@ const MainLayout: FC<MainLayoutProps> = ({
         lang={lang}
         stickyCtaLabel={stickyCtaLabel}
         tabNotificationMessage={tabNotificationMessage}
+        settings={settings}
       />
     </div>
   </LenisProvider>

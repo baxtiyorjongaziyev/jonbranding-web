@@ -18,9 +18,10 @@ interface MobileNavBarProps {
     ai?: string;
     consultation_short?: string;
   };
+  settings?: { phone?: string; telegramPersonal?: string; telegramChannel?: string };
 }
 
-export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
+export default function MobileNavBar({ lang, dictionary, settings }: MobileNavBarProps) {
   const [isVisible, setIsVisible] = useState(true);
   const { scrollY } = useScroll();
 
@@ -81,7 +82,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
         )}
       >
         <a
-          href="tel:+998336450097"
+          href={`tel:${settings?.phone ?? '+998336450097'}`}
           aria-label={labels.call}
           onClick={() => trackContactClick('phone', 'mobile_nav_bar')}
           className="flex min-w-0 flex-1 flex-col items-center justify-center rounded-[12px] px-2 py-2 text-slate-400 transition-[color,background-color,transform] duration-200 hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 active:scale-[0.96]"
@@ -91,7 +92,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
         </a>
 
         <a
-          href="https://t.me/jonbranding"
+          href={settings?.telegramPersonal ?? settings?.telegramChannel ?? 'https://t.me/baxtiyorjon_gaziyev'}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={labels.telegram}

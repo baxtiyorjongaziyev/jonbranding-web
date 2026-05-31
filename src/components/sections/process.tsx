@@ -1,10 +1,15 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 import type { ProcessDictionary } from '@/lib/types/dictionary';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ProcessProps {
   onCtaClick?: () => void;
@@ -12,31 +17,38 @@ interface ProcessProps {
   dictionary: ProcessDictionary;
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: {
-      type: 'spring',
-      damping: 24,
-      stiffness: 160,
-    },
+    transition: { type: 'spring', damping: 24, stiffness: 160 },
   },
 };
 
 const Process: React.FC<ProcessProps> = ({ dictionary }) => {
+  const cardsRef = useRef<HTMLDivElement>(null);
   const translations = dictionary;
+
+  useEffect(() => {
+    if (!cardsRef.current) return;
+    const cards = cardsRef.current.querySelectorAll<HTMLElement>('.process-card');
+    const ctx = gsap.context(() => {
+      gsap.from(cards, {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: 'top 80%',
+          once: true,
+        },
+      });
+    }, cardsRef);
+    return () => ctx.revert();
+  }, []);
 
   if (!translations || !translations.phases) return null;
 
@@ -44,15 +56,15 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
 
   return (
     <BrandSection id="process" tone="soft" className="overflow-hidden py-20 sm:py-28" suppressHydrationWarning>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
-        className="container mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8"
-      >
+      <div className="container mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <motion.div variants={itemVariants} className="lg:sticky lg:top-28">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={itemVariants}
+            className="lg:sticky lg:top-28"
+          >
             <SectionIntro eyebrow={translations.eyebrow} title={translations.title} description={translations.subtitle} align="left" />
             {processProof.length > 0 && (
               <div className="mt-8 grid grid-cols-2 gap-2">
@@ -66,9 +78,9 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
             )}
           </motion.div>
 
-          <motion.div variants={itemVariants} className="space-y-4">
+          <div ref={cardsRef} className="space-y-4">
             {(translations.phases ?? []).map((phase, index: number) => (
-              <div key={index} className="rounded-[1.25rem] border border-brand-line bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.05)]">
+              <div key={index} className="process-card rounded-[1.25rem] border border-brand-line bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.05)]">
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue text-sm font-extrabold text-white">
                     0{index + 1}
@@ -93,10 +105,9 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
-
-      </motion.div>
+      </div>
     </BrandSection>
   );
 };
