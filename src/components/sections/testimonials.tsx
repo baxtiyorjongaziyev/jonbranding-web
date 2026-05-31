@@ -136,10 +136,10 @@ const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Te
   );
 };
 
-const Stars = () => (
-  <div className="flex gap-0.5 text-amber-400" role="img" aria-label="5 star testimonial">
+const Stars = ({ rating = 5 }: { rating?: number }) => (
+  <div className="flex gap-0.5 text-amber-400" role="img" aria-label={`${rating} star testimonial`}>
     {[...Array(5)].map((_, i) => (
-      <Star key={i} fill="currentColor" className="h-4 w-4" aria-hidden="true" />
+      <Star key={i} fill={i < rating ? 'currentColor' : 'none'} className="h-4 w-4" aria-hidden="true" />
     ))}
   </div>
 );
@@ -165,7 +165,7 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
       <audio ref={audioRef} src={testimonial.audioUrl} preload="none" onEnded={() => setIsPlaying(false)} />
       <div className="flex flex-grow flex-col justify-between">
         <div>
-          <Stars />
+          <Stars rating={testimonial.rating} />
           <p className="mt-4 text-pretty text-sm italic leading-relaxed text-brand-slate">&ldquo;{testimonial.quote}&rdquo;</p>
           <button
             type="button"
@@ -202,7 +202,7 @@ const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)]">
       <div className="flex flex-grow flex-col justify-between">
         <div>
-          <Stars />
+          <Stars rating={testimonial.rating} />
           <p className="mt-4 text-pretty text-sm italic leading-relaxed text-brand-slate">&ldquo;{testimonial.quote}&rdquo;</p>
         </div>
         <div className="mt-6 flex items-center gap-3">
@@ -373,7 +373,6 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
               className="relative w-full max-w-[360px] sm:max-w-[400px] aspect-[9/16] overflow-hidden rounded-[20px] border border-white/10 bg-[#070b13] shadow-[0_30px_100px_rgba(0,0,0,0.9)] flex flex-col justify-end"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Vimeo Player */}
               <iframe
                 src={getVimeoEmbedUrl(activeVideo.videoUrl, true)}
                 title={`${activeVideo.name} video testimonial`}
@@ -382,8 +381,6 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
                 allowFullScreen
                 referrerPolicy="strict-origin-when-cross-origin"
               />
-
-              {/* Close Button */}
               <button
                 type="button"
                 onClick={closeLightbox}
@@ -392,8 +389,6 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
               >
                 <X className="h-5 w-5" />
               </button>
-
-              {/* Gradient overlay on bottom of the video */}
               <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-6 pt-16 flex items-center gap-4">
                 <Avatar className="h-12 w-12 ring-2 ring-white/15">
                   <AvatarImage src={getAvatarImageUrl(activeVideo.image)} alt={activeVideo.name} />
@@ -412,20 +407,17 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
   );
 };
 
-const Testimonials = ({ lang, dictionary }: { lang: string; dictionary: TestimonialsDictionary }) => {
-  let testimonials;
-  switch (lang) {
-    case 'ru':
-      testimonials = staticTestimonialsRu;
-      break;
-    case 'en':
-      testimonials = staticTestimonialsEn;
-      break;
-    case 'zh':
-      testimonials = staticTestimonialsZh;
-      break;
-    default:
-      testimonials = staticTestimonials;
+const Testimonials = ({ lang, dictionary, testimonials: testimonialsProp }: { lang: string; dictionary: TestimonialsDictionary; testimonials?: Testimonial[] }) => {
+  let testimonials: Testimonial[];
+  if (testimonialsProp && testimonialsProp.length > 0) {
+    testimonials = testimonialsProp;
+  } else {
+    switch (lang) {
+      case 'ru': testimonials = staticTestimonialsRu; break;
+      case 'en': testimonials = staticTestimonialsEn; break;
+      case 'zh': testimonials = staticTestimonialsZh; break;
+      default: testimonials = staticTestimonials;
+    }
   }
 
   return <TestimonialsClient testimonials={testimonials} dictionary={dictionary} lang={lang} />;

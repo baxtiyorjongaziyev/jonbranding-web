@@ -381,9 +381,10 @@ export default async function LocalizedLayout({ children, params }: Props) {
           lang={lang}
           stickyCtaLabel={dictionary.header?.free_consultation || 'Contact us'}
           tabNotificationMessage={tabNotificationMessage}
+          settings={settings}
         >
           <Header lang={lang} dictionary={dictionary.header} settings={settings} />
-          
+
           <div id="main-content" className="flex-grow">
             {children}
           </div>

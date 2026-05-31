@@ -43,6 +43,11 @@ const TabNotification = dynamic(() => import('@/components/layout/tab-notificati
   ssr: false,
 });
 
+const LiveClock = dynamic(() => import('@/components/ui/live-clock'), {
+  ssr: false,
+});
+
+
 function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -78,6 +83,7 @@ type ClientEnhancementsProps = {
   lang?: string;
   stickyCtaLabel?: string;
   tabNotificationMessage?: string;
+  settings?: { phone?: string; telegramPersonal?: string; telegramChannel?: string };
 };
 
 export default function ClientEnhancements({
@@ -86,6 +92,7 @@ export default function ClientEnhancements({
   lang: langProp,
   stickyCtaLabel,
   tabNotificationMessage,
+  settings,
 }: ClientEnhancementsProps) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [packageSummary, setPackageSummary] = useState('');
@@ -218,10 +225,11 @@ export default function ClientEnhancements({
       )}
       {quickActionsReady && tabNotificationMessage && <TabNotification message={tabNotificationMessage} />}
       {quickActionsReady && <StickyCTA ariaLabel={stickyCtaLabel || 'Contact us'} />}
-      {quickActionsReady && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
+      {quickActionsReady && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} settings={settings} />}
       {enhancementsReady && <CookieConsentBanner />}
       {enhancementsReady && <OishaWidget lang={lang} />}
       {enhancementsReady && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
+      {quickActionsReady && <LiveClock lang={lang} />}
     </>
   );
 }
