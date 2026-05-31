@@ -3,6 +3,8 @@ import HomeComponent from '@/components/home-component';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
 import { fetchComparisons } from '@/lib/data/comparisons';
+import { fetchBrands } from '@/lib/data/brands';
+import { fetchTestimonials } from '@/lib/data/testimonials';
 
 export const revalidate = 60;
 
@@ -49,7 +51,11 @@ export default async function Page(props: Props) {
     dictionary = await getDictionary('uz');
   }
 
-  const comparisons = await fetchComparisons();
+  const [comparisons, brands, testimonials] = await Promise.all([
+    fetchComparisons(),
+    fetchBrands(),
+    fetchTestimonials(lang),
+  ]);
 
-  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={comparisons} />;
+  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={comparisons} brands={brands} testimonials={testimonials} />;
 }
