@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2026-05-27 - Fail-open webhook authorization
+**Vulnerability:** The AmoCRM webhook and process calls endpoints used standard equality operators (`!==` and `===`) for secret comparison, which are vulnerable to timing attacks.
+**Learning:** Using standard string comparison operators allows an attacker to guess a secret character by character by measuring the response time of the server. This is especially risky in serverless edge environments where precise timing characteristics can be measured.
+**Prevention:** Utilize a constant-time string comparison function to evaluate secrets to prevent timing attacks, and implement a custom utility for it since Node.js `crypto` is not universally supported in edge environments.
