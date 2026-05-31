@@ -85,6 +85,7 @@
     "@netlify/plugin-nextjs": "^5.15.11",
     "@opennextjs/cloudflare": "^1.19.8",
     "@sanity/client": "^7.22.0",
+    "@sanity/image-url": "^2.1.1",
     "@tailwindcss/typography": "^0.5.13",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
