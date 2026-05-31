@@ -36,7 +36,7 @@ type Dictionary = {
   urgencyBadge?: string;
 };
 
-const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
+const Header: FC<{ lang: string; dictionary: Dictionary; settings?: { phone?: string; telegramPersonal?: string } }> = ({ lang = 'uz', dictionary, settings }) => {
   const pathname = usePathname();
   const [visible, setVisible] = useState(true);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -50,7 +50,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    setScrolled(latest > 20);
+    setScrolled(latest > 5);
     const previous = scrollY.getPrevious() || 0;
     const diff = Math.abs(latest - previous);
     if (isMobileMenuOpen || latest <= 80) {
@@ -88,11 +88,8 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
 
-  const lightSurfaceRoutes = ['/blog', '/checklist', '/pricing', '/privacy', '/quiz', '/sitemap', '/terms', '/xizmatlar'];
-  const startsOnLightSurface = lightSurfaceRoutes.some(
-    (route) => pathnameWithoutLocale === route || pathnameWithoutLocale.startsWith(`${route}/`)
-  );
-  const useDarkHeaderText = scrolled || startsOnLightSurface;
+  const isDarkPage = pathname.includes('/portfolio');
+  const useDarkHeaderText = scrolled ? true : !isDarkPage;
 
   const navItems = [
     { href: getLocalizedPath('/portfolio'), label: dictionary.portfolio },
@@ -126,18 +123,17 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
       <header
         className={cn(
-          'fixed left-0 right-0 z-50 flex flex-col items-center transition-[transform,top] duration-300 ease-out',
-          visible ? 'translate-y-0' : '-translate-y-full'
+          'fixed left-0 right-0 z-50 flex flex-col items-center transition-[top] duration-300 ease-out'
         )}
-        style={{ top: dictionary.urgencyBadge && !scrolled ? 40 : 0 }}
+        style={{ top: visible ? (dictionary.urgencyBadge && !scrolled ? 40 : 0) : -120 }}
         suppressHydrationWarning
       >
         <div
           className={cn(
             'flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500',
             scrolled
-              ? 'mx-auto max-w-[95%] rounded-full border border-brand-line/70 bg-brand-paper/[0.82] px-6 py-2 shadow-[0_18px_55px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:max-w-6xl lg:px-8'
-              : 'max-w-none border-b border-transparent bg-transparent px-6 lg:px-8'
+              ? 'mx-auto max-w-[95%] rounded-full liquid-glass-header px-5 py-2 lg:max-w-6xl lg:px-7'
+              : 'mx-auto max-w-[1240px] border-b border-transparent bg-transparent px-4 sm:px-6 lg:px-7'
           )}
           suppressHydrationWarning
         >
@@ -158,6 +154,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
               useDarkHeaderText={useDarkHeaderText}
               onContactClick={handleContactClick}
               dictionary={dictionary}
+              settings={settings}
             />
           )}
 

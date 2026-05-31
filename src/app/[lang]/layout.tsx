@@ -1,4 +1,5 @@
 import Script from 'next/script';
+import { Hanken_Grotesk } from 'next/font/google';
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
@@ -12,17 +13,24 @@ import {
   getLocaleAlternates,
 } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
-
+import { fetchSettings } from '@/lib/data/settings';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
+
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-hanken',
+  display: 'swap',
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
   viewportFit: 'cover',
-  themeColor: '#2563EB',
+  themeColor: '#2c2bf5',
 };
 
 const localeUrls = {
@@ -49,6 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       default: dictionary.meta?.title || "Jon.Branding | Professional Brending Agentligi",
       template: "%s | Jon.Branding"
     },
+
     description: dictionary.meta?.description || "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding.",
     icons: {
       icon: [
@@ -94,16 +103,20 @@ export default async function LocalizedLayout({ children, params }: Props) {
     dictionary = await getDictionary('uz');
   }
 
-  const tabNotificationMessage =
-    lang === 'ru' ? '(1) Novoe soobshchenie! | Jon Branding' :
-    lang === 'en' ? '(1) New message! | Jon Branding' :
-    lang === 'zh' ? '(1) New message! | Jon Branding' :
-    '(1) Yangi xabar! | Jon Branding';
+  const [tabNotificationMessage, settings] = await Promise.all([
+    Promise.resolve(
+      lang === 'ru' ? '(1) Novoe soobshchenie! | Jon Branding' :
+      lang === 'en' ? '(1) New message! | Jon Branding' :
+      lang === 'zh' ? '(1) New message! | Jon Branding' :
+      '(1) Yangi xabar! | Jon Branding'
+    ),
+    fetchSettings(),
+  ]);
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} className={hankenGrotesk.variable} suppressHydrationWarning>
       <head>
-        <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#06080d}' }} />
+        <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#ffffff}' }} />
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -120,7 +133,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "image": "https://www.jonbranding.uz/icon.svg",
               "logo": "https://www.jonbranding.uz/icon.svg",
               "url": "https://www.jonbranding.uz",
-              "telephone": "+998336450097",
+              "telephone": settings.phone,
               "priceRange": "$$$",
               "address": {
                 "@type": "PostalAddress",
@@ -274,7 +287,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "@type": "LocalBusiness",
               "name": "Jon.Branding",
               "url": "https://www.jonbranding.uz",
-              "telephone": "+998336450097",
+              "telephone": settings.phone,
               "priceRange": "$$$",
               "address": {
                 "@type": "PostalAddress",
@@ -292,7 +305,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           }}
         />
       </head>
-      <body className="font-body bg-brand-paper antialiased" suppressHydrationWarning>
+      <body className={`${hankenGrotesk.variable} font-body bg-brand-paper antialiased`} suppressHydrationWarning>
         <a href="#main-content" className="skip-link">
           {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
         </a>
@@ -369,12 +382,12 @@ export default async function LocalizedLayout({ children, params }: Props) {
           stickyCtaLabel={dictionary.header?.free_consultation || 'Contact us'}
           tabNotificationMessage={tabNotificationMessage}
         >
-          <Header lang={lang} dictionary={dictionary.header} />
+          <Header lang={lang} dictionary={dictionary.header} settings={settings} />
           
           <div id="main-content" className="flex-grow">
             {children}
           </div>
-        <Footer lang={lang} dictionary={dictionary.footer} />
+        <Footer lang={lang} dictionary={dictionary.footer} settings={settings} />
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">
           {`

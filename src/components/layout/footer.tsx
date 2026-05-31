@@ -17,7 +17,6 @@ type Dictionary = {
     process: string;
     faq: string;
     services: string;
-    brand_strategy: string;
     naming: string;
     brandbook: string;
     packaging_design: string;
@@ -41,7 +40,7 @@ type Dictionary = {
     terms_of_use_link?: string;
 }
 
-const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
+const Footer: FC<{ lang: string; dictionary: Dictionary; settings?: { phone?: string; telegramPersonal?: string; telegramChannel?: string; instagram?: string; linkedin?: string } }> = ({ lang = 'uz', dictionary, settings }) => {
   const pathname = usePathname();
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
@@ -67,13 +66,13 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   };
 
   return (
-    <footer className="relative overflow-hidden rounded-t-[4.5rem] bg-black text-white md:rounded-t-[8rem]" suppressHydrationWarning>
-      <div className="relative bg-black pt-24 pb-0">
+    <footer className="relative overflow-hidden bg-[#0a0a10] text-white" suppressHydrationWarning>
+      <div className="relative bg-[#0a0a10] pt-24 pb-0">
         {/* Finch-style Vivid Background Gradient - Anchored to very bottom */}
         <div 
           className="absolute bottom-0 left-[-20%] w-[140%] h-[35%] pointer-events-none overflow-hidden select-none"
           style={{
-            background: 'radial-gradient(ellipse 100% 100% at 50% 100%, rgba(37, 99, 235, 0.9) 0%, rgba(139, 92, 246, 0.45) 45%, rgba(0, 0, 0, 0) 85%)',
+            background: 'radial-gradient(ellipse 100% 100% at 50% 100%, rgba(44, 43, 245, 0.86) 0%, rgba(47, 107, 255, 0.34) 48%, rgba(10, 10, 16, 0) 85%)',
             filter: 'blur(100px)',
             opacity: 0.85
           }}
@@ -83,7 +82,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         <div 
           className="absolute bottom-[-50px] right-[-10%] w-[60%] h-[20%] pointer-events-none overflow-hidden select-none"
           style={{
-            background: 'radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.6) 0%, rgba(0, 0, 0, 0) 70%)',
+            background: 'radial-gradient(circle at 50% 100%, rgba(61, 58, 255, 0.62) 0%, rgba(10, 10, 16, 0) 70%)',
             filter: 'blur(80px)',
             opacity: 0.6
           }}
@@ -91,7 +90,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         
         {/* Intense Corner Splash - Brighter */}
         <div className="absolute bottom-0 right-0 h-[30%] w-[100%] pointer-events-none z-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_80%_110%,rgba(215,31,39,0.18),transparent_75%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_80%_110%,rgba(44,43,245,0.22),transparent_75%)]" />
         </div>
 
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,7 +112,6 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.solutions}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/xizmatlar/qadoq-dizayni')} className="hover:text-white transition-colors">{copy.packaging_design}</Link></li>
-
               <li><Link href={getLocalizedPath('/xizmatlar')} className="hover:text-white transition-colors">{copy.service_prices}</Link></li>
             </ul>
           </div>
@@ -145,19 +143,19 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <div className="space-y-4">
               <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.contact_us}</h3>
               <div className="space-y-4">
-                <a 
-                  href="tel:+998336450097"
+                <a
+                  href={`tel:${settings?.phone ?? '+998336450097'}`}
                   onClick={() => trackContactClick('phone', 'footer')}
-                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-black transition-all duration-300 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-[#0a0a10] transition-all duration-300 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  +998 33 645 00 97
+                  {(settings?.phone ?? '+998336450097').replace('+998', '+998 ').replace(/(\d{2})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4')}
                 </a>
-                <a 
-                  href="https://t.me/baxtiyorjon_gaziyev"
+                <a
+                  href={settings?.telegramPersonal ?? 'https://t.me/baxtiyorjon_gaziyev'}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackContactClick('telegram', 'footer')}
-                  className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 rounded-full text-sm font-medium hover:bg-blue-700 transition-all duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] rounded-full text-sm font-medium hover:-translate-y-0.5 transition-all duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Send size={16} /> Telegram
                 </a>
@@ -167,13 +165,13 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <div className="space-y-3">
               <Link 
                 href={getLocalizedPath('/#portfolio')}
-                className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
+                className="text-xs font-bold text-[#8f9cff] hover:text-white flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
                 {copy.explore_work}
               </Link>
               <Link 
                 href={getLocalizedPath('/blog')}
-                className="text-xs font-bold text-blue-500 hover:text-blue-400 flex items-center gap-2 uppercase tracking-widest transition-colors"
+                className="text-xs font-bold text-[#8f9cff] hover:text-white flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
                 {copy.read_blogs}
               </Link>
@@ -198,15 +196,17 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-5">
-              <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Instagram">
+              <a href={settings?.instagram ?? 'https://www.instagram.com/jon.branding/'} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Telegram Channel">
+              <a href={settings?.telegramChannel ?? 'https://t.me/JonBranding'} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Telegram Channel">
                 <Send size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="LinkedIn">
-                <Linkedin size={20} />
-              </a>
+              {(settings?.linkedin ?? 'https://www.linkedin.com/in/baxtiyorjongaziyev/') && (
+                <a href={settings?.linkedin ?? 'https://www.linkedin.com/in/baxtiyorjongaziyev/'} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="LinkedIn">
+                  <Linkedin size={20} />
+                </a>
+              )}
             </div>
             
             <Separator orientation="vertical" className="h-4 bg-white/10 hidden sm:block" />
