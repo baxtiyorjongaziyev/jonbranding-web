@@ -11,3 +11,6 @@
 ## 2024-05-25 - Pausing Continuous Intervals with useInView
 **Learning:** Using Framer Motion's `useInView` to pause continuous polling/intervals (like `setInterval`) when a component is off-screen is a great performance optimization to reduce background React re-renders. However, when doing this, it is critical that the tracked element (`ref`) is ALWAYS rendered. Returning `null` early (e.g., while waiting for data) prevents the ref from attaching and permanently breaks the visibility observer.
 **Action:** Always render a placeholder or skeleton with the tracked `ref` attached instead of returning `null` when loading components that use `useInView` for performance optimizations.
+## 2024-05-17 - Prevent Unnecessary Re-renders from Hidden Elements using Framer Motion's useInView
+**Learning:** When using continuous intervals (e.g. `setInterval`) in a component, returning `null` during initialization prevents Framer Motion's `useInView` from attaching to a DOM element, effectively breaking visibility observation.
+**Action:** Always render a visually hidden or skeleton element with the `ref` attached rather than returning `null` initially. This ensures that `useInView` can track intersection and correctly pause intervals when the element is off-screen.
