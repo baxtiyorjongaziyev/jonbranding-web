@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2025-06-01 - Timing Attack via Standard String Equality Operator
+**Vulnerability:** API endpoints using standard Javascript string equality operators (`===` or `!==`) to compare incoming secrets against configured or expected secrets. For example, comparing `authHeader !== 'Bearer ' + cronSecret` in amoCRM refresh route and webhook endpoints.
+**Learning:** Standard string comparisons in JavaScript exit early as soon as a mismatch is found. This slight variation in execution time can be measured by an attacker to guess secrets byte-by-byte (a "timing attack").
+**Prevention:** Implement and enforce the use of a constant-time comparison utility (such as `timingSafeEqual`) for any secret, token, or password verification to ensure the comparison time depends only on the length of the string, not its contents.
