@@ -367,21 +367,24 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                   size="icon"
                   onClick={() => setLightboxIndex(null)}
                   className="h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10"
+                  aria-label={lang === 'uz' ? 'Yopish' : 'Close'}
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5" aria-hidden="true" />
                 </Button>
               </div>
 
               {/* Prev Button */}
               {project.galleryImages.length > 1 && (
                 <button 
+                  type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     setLightboxIndex((lightboxIndex - 1 + project.galleryImages!.length) % project.galleryImages!.length);
                   }}
-                  className="absolute left-6 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10 flex items-center justify-center z-50 transition-colors"
+                  className="absolute left-6 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10 flex items-center justify-center z-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label={lang === 'uz' ? 'Oldingi rasm' : 'Previous image'}
                 >
-                  <ChevronLeft className="w-6 h-6" />
+                  <ChevronLeft className="w-6 h-6" aria-hidden="true" />
                 </button>
               )}
 
@@ -404,13 +407,15 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
               {/* Next Button */}
               {project.galleryImages.length > 1 && (
                 <button 
+                  type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     setLightboxIndex((lightboxIndex + 1) % project.galleryImages!.length);
                   }}
-                  className="absolute right-6 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10 flex items-center justify-center z-50 transition-colors"
+                  className="absolute right-6 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10 flex items-center justify-center z-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label={lang === 'uz' ? 'Keyingi rasm' : 'Next image'}
                 >
-                  <ChevronRight className="w-6 h-6" />
+                  <ChevronRight className="w-6 h-6" aria-hidden="true" />
                 </button>
               )}
             </motion.div>

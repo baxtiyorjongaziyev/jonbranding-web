@@ -19,3 +19,7 @@
 ## 2026-05-22 - Using existing design tokens for focus states
 **Learning:** When adding focus styles to interactive elements for keyboard accessibility, it's crucial to use the established Tailwind design tokens in the codebase (e.g., `focus-visible:ring-primary`, `focus-visible:ring-offset-background`) rather than generic colors like `blue-500` or `black`. This ensures consistency with the site's overall theme, including light/dark modes.
 **Action:** Always check existing components for focus state patterns before applying new ones, and strictly adhere to using semantic design tokens from the Tailwind configuration.
+
+## 2026-05-23 - Ensuring Lightbox controls are accessible
+**Learning:** Custom built image lightboxes and carousels (like the one in `PortfolioDetailClient`) often use raw icon-only `<button>` elements for navigation (Prev, Next, Close). These frequently lack `aria-label` attributes, explicit `type="button"`, and visible keyboard focus states (`focus-visible`), making them invisible to screen readers and difficult or impossible to navigate via keyboard.
+**Action:** When creating or maintaining custom gallery/lightbox components, always ensure navigation controls have clear `aria-label`s (translated if necessary), `type="button"`, `aria-hidden="true"` on inner icons, and explicit `focus-visible` ring utilities to ensure full accessibility.
