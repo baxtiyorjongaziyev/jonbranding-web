@@ -11,14 +11,14 @@
     --card-foreground: 240 12% 7%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 12% 7%;
-    --primary: 37 70% 47%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 222 42% 28%;
+    --primary-foreground: 210 40% 98%;
     --secondary: 240 5% 96%;
     --secondary-foreground: 240 12% 7%;
     --muted: 240 5% 95%;
     --muted-foreground: 240 5% 46%;
-    --accent: 37 70% 47%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 222 42% 28%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --success: 142 71% 45%;
@@ -29,15 +29,15 @@
     --info-foreground: 0 0% 100%;
     --border: 240 6% 90%;
     --input: 240 6% 90%;
-    --ring: 37 70% 47%;
+    --ring: 222 42% 28%;
     --radius: 0.625rem;
 
     /* ── Brand Palette ── */
     --brand-ink:   240 12% 7%;    /* #0C0C14 — near-black headings/dark bg */
     --brand-paper: 0 0% 100%;     /* #FFFFFF — clean white sections */
     --brand-mist:  240 5% 96%;    /* #F3F3F6 — soft neutral sections */
-    --brand-blue:  37 70% 47%;    /* #CB9130 — amber gold (primary accent) */
-    --brand-cyan:  37 58% 65%;    /* #D9B870 — light gold secondary */
+    --brand-blue:  222 42% 28%;   /* #2B3F6B — navy blue (primary accent) */
+    --brand-cyan:  184 54% 38%;   /* #2D8A8A — teal secondary */
     --brand-lime:  142 71% 45%;   /* #22C55E-ish — keep green for hero */
     --brand-slate: 240 5% 46%;    /* #717180 — body text */
     --brand-line:  240 6% 90%;    /* #E3E3E8 — clean neutral border */
@@ -69,17 +69,17 @@
     --card-foreground: 48 15% 94%;
     --popover: 240 10% 8%;
     --popover-foreground: 48 15% 94%;
-    --primary: 37 70% 52%;
-    --primary-foreground: 240 12% 5%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
     --secondary: 240 9% 12%;
     --secondary-foreground: 48 15% 94%;
     --muted: 240 9% 14%;
     --muted-foreground: 240 5% 58%;
-    --accent: 37 70% 52%;
-    --accent-foreground: 240 12% 5%;
+    --accent: 210 40% 98%;
+    --accent-foreground: 222.2 47.4% 11.2%;
     --border: 240 9% 16%;
     --input: 240 9% 16%;
-    --ring: 37 70% 52%;
+    --ring: 222 42% 28%;
   }
 }
 
