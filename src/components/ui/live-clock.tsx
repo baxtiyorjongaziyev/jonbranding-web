@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 export default function LiveClock({ lang }: { lang: string }) {
   const [timeStr, setTimeStr] = useState('');
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
 
   useEffect(() => {
     const tick = () => {
@@ -26,17 +28,20 @@ export default function LiveClock({ lang }: { lang: string }) {
       setTimeStr(`${day}, ${h}:${paddedMinutes} ${ap}`);
     };
 
+    // Initial tick to set time right away
     tick();
+
+    if (!isInView) return;
+
     const interval = setInterval(tick, 20000);
     return () => clearInterval(interval);
-  }, [lang]);
-
-  if (!timeStr) return null;
+  }, [lang, isInView]);
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
+      animate={{ opacity: timeStr ? 1 : 0, x: timeStr ? 0 : -20 }}
       transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
       className="fixed left-6 bottom-6 z-40 hidden md:flex items-center gap-2.5 px-4 py-2 rounded-full border border-brand-line/50 dark:border-white/10 bg-brand-paper/85 dark:bg-[#070b13]/85 backdrop-blur-md shadow-lg text-[13px] font-bold text-brand-ink dark:text-white"
     >
