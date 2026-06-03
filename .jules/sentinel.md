@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2026-06-03 - Timing Attack Vulnerability in Secret Comparisons
+**Vulnerability:** Several API endpoints used the standard equality operator (`!==` or `===`) to compare incoming secrets against expected environment variables. This creates a timing attack vulnerability, allowing an attacker to determine the correct secret character-by-character by measuring the time it takes for the comparison to fail.
+**Learning:** In edge environments where standard Node.js `crypto.timingSafeEqual` might not be available or requires identical length checks that could leak information, standard string comparisons for secrets remain unsafe.
+**Prevention:** Implemented a custom constant-time string comparison function (`timingSafeEqual`) in `src/lib/utils.ts` and refactored API routes (`amocrm-process-calls`, `amocrm-refresh`, `amocrm-webhook`) to securely evaluate secrets without early return optimization.
