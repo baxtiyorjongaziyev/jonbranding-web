@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 export default function LiveClock({ lang }: { lang: string }) {
   const [timeStr, setTimeStr] = useState('');
+  const clockRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(clockRef);
 
   useEffect(() => {
     const tick = () => {
@@ -27,14 +29,16 @@ export default function LiveClock({ lang }: { lang: string }) {
     };
 
     tick();
+
+    if (!isInView) return;
+
     const interval = setInterval(tick, 20000);
     return () => clearInterval(interval);
-  }, [lang]);
-
-  if (!timeStr) return null;
+  }, [lang, isInView]);
 
   return (
     <motion.div
+      ref={clockRef}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
@@ -44,7 +48,7 @@ export default function LiveClock({ lang }: { lang: string }) {
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
         <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
       </span>
-      <span>{timeStr}</span>
+      <span>{timeStr || '--:--'}</span>
     </motion.div>
   );
 }
