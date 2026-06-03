@@ -13,7 +13,7 @@ import {
   getLocaleAlternates,
 } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
-import { fetchSettings } from '@/lib/data/settings';
+
 
 const BASE_URL = 'https://www.jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
@@ -103,20 +103,18 @@ export default async function LocalizedLayout({ children, params }: Props) {
     dictionary = await getDictionary('uz');
   }
 
-  const [tabNotificationMessage, settings] = await Promise.all([
-    Promise.resolve(
-      lang === 'ru' ? '(1) Novoe soobshchenie! | Jon Branding' :
-      lang === 'en' ? '(1) New message! | Jon Branding' :
-      lang === 'zh' ? '(1) New message! | Jon Branding' :
-      '(1) Yangi xabar! | Jon Branding'
-    ),
-    fetchSettings(),
-  ]);
+  const tabNotificationMessage =
+    lang === 'ru' ? '(1) Novoe soobshchenie! | Jon Branding' :
+    lang === 'en' ? '(1) New message! | Jon Branding' :
+    lang === 'zh' ? '(1) New message! | Jon Branding' :
+    '(1) Yangi xabar! | Jon Branding';
 
   return (
     <html lang={lang} className={hankenGrotesk.variable} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#ffffff}' }} />
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500,400&display=swap" />
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -133,7 +131,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "image": "https://www.jonbranding.uz/icon.svg",
               "logo": "https://www.jonbranding.uz/icon.svg",
               "url": "https://www.jonbranding.uz",
-              "telephone": settings.phone,
+              "telephone": "+998336450097",
               "priceRange": "$$$",
               "address": {
                 "@type": "PostalAddress",
@@ -287,7 +285,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "@type": "LocalBusiness",
               "name": "Jon.Branding",
               "url": "https://www.jonbranding.uz",
-              "telephone": settings.phone,
+              "telephone": "+998336450097",
               "priceRange": "$$$",
               "address": {
                 "@type": "PostalAddress",
@@ -381,14 +379,13 @@ export default async function LocalizedLayout({ children, params }: Props) {
           lang={lang}
           stickyCtaLabel={dictionary.header?.free_consultation || 'Contact us'}
           tabNotificationMessage={tabNotificationMessage}
-          settings={settings}
         >
-          <Header lang={lang} dictionary={dictionary.header} settings={settings} />
-
+          <Header lang={lang} dictionary={dictionary.header} />
+          
           <div id="main-content" className="flex-grow">
             {children}
           </div>
-        <Footer lang={lang} dictionary={dictionary.footer} settings={settings} />
+        <Footer lang={lang} dictionary={dictionary.footer} />
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">
           {`
