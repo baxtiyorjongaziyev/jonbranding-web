@@ -11,13 +11,13 @@
     --card-foreground: 240 12% 7%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 12% 7%;
-    --primary: 222 42% 28%;
+    --primary: 238 72% 50%;
     --primary-foreground: 210 40% 98%;
     --secondary: 240 5% 96%;
     --secondary-foreground: 240 12% 7%;
     --muted: 240 5% 95%;
     --muted-foreground: 240 5% 46%;
-    --accent: 222 42% 28%;
+    --accent: 238 72% 50%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -29,22 +29,22 @@
     --info-foreground: 0 0% 100%;
     --border: 240 6% 90%;
     --input: 240 6% 90%;
-    --ring: 222 42% 28%;
+    --ring: 238 72% 50%;
     --radius: 0.625rem;
 
     /* ── Brand Palette ── */
     --brand-ink:   240 12% 7%;    /* #0C0C14 — near-black headings/dark bg */
     --brand-paper: 0 0% 100%;     /* #FFFFFF — clean white sections */
     --brand-mist:  240 5% 96%;    /* #F3F3F6 — soft neutral sections */
-    --brand-blue:  222 42% 28%;   /* #2B3F6B — navy blue (primary accent) */
-    --brand-cyan:  184 54% 38%;   /* #2D8A8A — teal secondary */
+    --brand-blue:  238 72% 50%;   /* #4448E8 — vibrant indigo (primary accent) */
+    --brand-cyan:  262 58% 62%;   /* #8B64D9 — violet secondary */
     --brand-lime:  142 71% 45%;   /* #22C55E-ish — keep green for hero */
     --brand-slate: 240 5% 46%;    /* #717180 — body text */
     --brand-line:  240 6% 90%;    /* #E3E3E8 — clean neutral border */
 
     /* ── Fonts ── */
-    --font-inter:   var(--font-jakarta), "Aptos", "Segoe UI", sans-serif;
-    --font-jakarta: "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
+    --font-inter:   "Cabinet Grotesk", "Hanken Grotesk", "Aptos", sans-serif;
+    --font-jakarta: "Cabinet Grotesk", "Hanken Grotesk", "Aptos Display", sans-serif;
 
     /* ── Spacing ── */
     --section-gap: 6rem;
@@ -79,7 +79,7 @@
     --accent-foreground: 222.2 47.4% 11.2%;
     --border: 240 9% 16%;
     --input: 240 9% 16%;
-    --ring: 222 42% 28%;
+    --ring: 238 72% 50%;
   }
 }
 
