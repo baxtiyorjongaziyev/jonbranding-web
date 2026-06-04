@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2026-06-04 - Timing Attacks in Secret Validation
+**Vulnerability:** Several endpoints (`amocrm-process-calls`, `amocrm-refresh`) used standard equality operators (`===` or `!==`) to compare secrets. This can expose the application to timing attacks, where an attacker can deduce a secret by measuring the time it takes for the comparison to fail.
+**Learning:** Standard string comparison operators terminate early when they find a character mismatch. The varying response times can be measured over many requests to slowly leak the expected secret character by character.
+**Prevention:** Always use constant-time comparison methods (like a custom bitwise XOR loop if `crypto.timingSafeEqual` is unavailable in the environment) when validating secrets, tokens, or passwords to ensure the comparison time depends only on the length of the strings.
