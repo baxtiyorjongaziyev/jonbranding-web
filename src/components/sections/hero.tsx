@@ -74,14 +74,15 @@ function renderHeadline(headline: string, className?: string) {
 }
 
 const Hero: FC<HeroProps> = ({ dictionary }) => {
-  if (!dictionary) return null;
-
-  const heroCopy = getHeroCopy(dictionary);
   const [spot, setSpot] = useState({ x: 50, y: 40 });
   const onMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     setSpot({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
   }, []);
+
+  if (!dictionary) return null;
+
+  const heroCopy = getHeroCopy(dictionary);
 
   return (
     <section className="relative isolate overflow-hidden bg-white text-foreground" onMouseMove={onMouseMove}>
