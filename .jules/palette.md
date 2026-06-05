@@ -1,0 +1,3 @@
+## 2024-05-18 - ARIA labels for icon-only lightbox navigation buttons
+**Learning:** Custom gallery/lightbox modal components often use icon-only navigation controls (Next/Prev). These require explicit localized `aria-label`s, `type="button"` / inner `aria-hidden="true"`, and clear keyboard focus states (`focus-visible`) since they are completely unreadable to screen readers otherwise.
+**Action:** When creating or maintaining custom gallery/lightbox components, ensure navigation controls have clear `aria-label`s, `aria-hidden="true"` on inner icons, and explicit `focus-visible` utility classes for keyboard navigation.
