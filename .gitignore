@@ -82,3 +82,4 @@ autodeploy.pid
 # Codex config
 .codex/
 .env
+services/portfolio-bot/node_modules/
