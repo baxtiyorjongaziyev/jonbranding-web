@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2026-06-05 - Timing Attack Vulnerabilities in Edge Runtimes
+**Vulnerability:** String equality operators (`===`, `!==`) were being used for secret and token comparisons across various API endpoints (e.g., cron secrets, authorization headers). This is susceptible to timing attacks where attackers can guess secrets character by character based on response times.
+**Learning:** In Edge environments (like Cloudflare Workers/Pages), Node.js's `crypto.timingSafeEqual` may not be available or fully compatible. A custom constant-time string comparison utility must be implemented to prevent timing attacks securely across all environments.
+**Prevention:** Centralized a `timingSafeEqual` utility in `src/lib/utils.ts` and refactored API routes to consistently use this function for all secret and token verifications.

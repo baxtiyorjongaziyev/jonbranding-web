@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
+import { timingSafeEqual } from '@/lib/utils';
 
 const botToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -28,13 +29,9 @@ function isAuthorizedWebhook(request: Request) {
   }
 
   const providedSecret = request.headers.get('x-jonbranding-webhook-secret');
-  if (!providedSecret || providedSecret.length !== expectedSecret.length) return false;
+  if (!providedSecret) return false;
 
-  let mismatch = 0;
-  for (let i = 0; i < expectedSecret.length; i++) {
-    mismatch |= expectedSecret.charCodeAt(i) ^ providedSecret.charCodeAt(i);
-  }
-  return mismatch === 0;
+  return timingSafeEqual(providedSecret, expectedSecret);
 }
 
 // Handle preflight requests for CORS
