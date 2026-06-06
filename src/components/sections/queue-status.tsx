@@ -83,6 +83,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
           <div className="absolute inset-0 z-0 opacity-40">
             <div className="absolute inset-0 bg-gradient-to-br from-dark-blue to-blue-900" />
             <AnimatePresence>
+                     {/* Optimization: Unmount expensive LiquidBlob background animations when off-screen to save compositing and GPU resources */}
               {isInView && (
                 <motion.div
                   initial={{ opacity: 0 }}

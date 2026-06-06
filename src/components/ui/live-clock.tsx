@@ -33,6 +33,8 @@ export default function LiveClock({ lang }: { lang: string }) {
 
     if (!isInView) return;
 
+    // Optimization: Only run the clock update interval when the widget is visible on screen
+    // This reduces background CPU usage when the user is scrolled past or the widget is hidden
     const interval = setInterval(tick, 20000);
     return () => clearInterval(interval);
   }, [lang, isInView]);
