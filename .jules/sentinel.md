@@ -18,3 +18,7 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+## 2026-06-06 - Use Constant-Time String Comparison for Secrets
+**Vulnerability:** Weak, timing-based secret comparisons in several API routes. A timing attack could theoretically let an attacker determine expected webhook or cron secrets length and values.
+**Learning:** `===` and `!==` string comparisons on sensitive tokens fail fast, allowing timing attacks. Cloudflare/Vercel edge environments do not easily support Node.js standard `crypto.timingSafeEqual` directly.
+**Prevention:** A custom constant-time string comparison function `timingSafeEqual` was implemented in `src/lib/utils.ts` to perform XOR checks character by character after checking length, preventing fast-fail timing information leakage.
