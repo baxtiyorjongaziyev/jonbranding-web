@@ -78,6 +78,8 @@ const config: Config = {
         'brand-lime':  'hsl(var(--brand-lime))',
         'brand-slate': 'hsl(var(--brand-slate))',
         'brand-line':  'hsl(var(--brand-line))',
+        'dark-blue':   '#1e1b4b',
+        'sky-blue':    '#a5b4fc',
       },
       borderRadius: {
         lg: "var(--radius)",
