@@ -1,0 +1,154 @@
+{
+    "metadata": {
+        "title": "POSM Materiallar Dizayni | Jon.Branding",
+        "description": "Savdo nuqtasi uchun professional POSM materiallar dizayni: wobbler, roll-up banner, poster, sticker, shelf strip, table tent va to'liq POS kit.",
+        "keywords": [
+            "POSM materiallar",
+            "POS materiallar dizayni",
+            "wobbler dizayn",
+            "roll-up banner",
+            "shelf strip",
+            "savdo reklama materiallar",
+            "Jon Branding"
+        ]
+    },
+    "hero": {
+        "eyebrow": "Savdo nuqtasi materiallar",
+        "title": "POSM Materiallar Dizayni",
+        "subtitle": "Xaridorni to'g'ri joyda to'g'ri vaqtda ushlang.",
+        "description": "Wobbler, roll-up banner, shelf strip, poster, table tent — savdo nuqtasida ko'zga tashlanadigan va sotuvni oshiradigan professional POSM materiallar dizayni.",
+        "primaryCta": "POSM buyurtma qilish",
+        "secondaryCta": "Tariflarni ko'rish"
+    },
+    "problem": {
+        "title": "Zaif POSM xaridorni raqobatchi tovarga yo'naltiradi",
+        "description": "Ko'pchilik brendlar savdo nuqtasida o'z mahsulotlarini yetarli darajada ajratib ko'rsatmaydi. Sifatsiz wobbler yoki noto'g'ri ishlangan shelf strip brend imijini tushiradi va xaridorni raqobatchi tovariga yo'naltiradi."
+    },
+    "solution": {
+        "title": "Biz savdo nuqtasini brend maydonchasiga aylantiramiz",
+        "description": "Jon Branding jamoasi brendingiz uslubiga mos, o'qiladigan va e'tiborni tortadigan POSM materiallar to'plamini ishlab beradi. Har bir material savdo psixologiyasi va brend qoidalariga asosida yaratiladi."
+    },
+    "included": {
+        "eyebrow": "Xizmat ichida",
+        "title": "POSM dizayn ichiga nimalar kiradi?",
+        "items": [
+            "Brendga mos kreativ dizayn konsepti",
+            "Wobbler va shelf strip dizayni",
+            "Roll-up banner va poster dizayni",
+            "Table tent va flyer dizayni",
+            "Totem (standee) dizayni",
+            "Pol sticker dizayni",
+            "Chop etishga tayyor final fayllar",
+            "Barcha materiallar uchun print texnik tayyorlov"
+        ]
+    },
+    "benefits": {
+        "title": "Bu xizmat sizga nima beradi?",
+        "items": [
+            "Savdo nuqtasida ko'zga tashlanasiz",
+            "Brendingiz professional va ishonchli ko'rinadi",
+            "Xaridorlar mahsulotingizni tezroq topadi",
+            "Impulsiv xarid qarorlarini rag'batlantiradi",
+            "Butun savdo maydoni brendingiz rangi va uslubida",
+            "Raqobatchilardan vizual ajralib turasiz",
+            "Aksiya va chegirmalar to'g'ri o'tadi",
+            "Kassa va javon yonida brend ishlab turadi"
+        ]
+    },
+    "audience": {
+        "title": "Kimlar uchun mos?",
+        "items": [
+            "Supermarket va do'konlardagi brendlar",
+            "Oziq-ovqat va ichimlik ishlab chiqaruvchilar",
+            "Kosmetika va parfyumeriya brendlari",
+            "Dori-darmon va tibbiy mahsulotlar",
+            "Kafe va restoran zanjirlar",
+            "Elektronika va aksessuarlar brendlari",
+            "Mavsumiy aksiya va promo kampaniyalar",
+            "Yangi mahsulot yoki brend launch"
+        ]
+    },
+    "process": {
+        "title": "Biz qanday ishlaymiz?",
+        "steps": [
+            "Brend qoidalari va savdo formati bilan tanishamiz",
+            "Kerakli materiallar ro'yxati va o'lchamlarni aniqlaymiz",
+            "Brendga mos POSM dizayn konseptini ishlab chiqamiz",
+            "Har bir material uchun dizaynni tayyorlaymiz",
+            "Tuzatishlardan keyin print-ready fayllarni topshiramiz"
+        ]
+    },
+    "pricing": {
+        "eyebrow": "Tariflar",
+        "title": "POSM materiallar dizayni tariflari",
+        "tiers": [
+            {
+                "name": "START",
+                "price": "499 000 so'm",
+                "features": [
+                    "2 ta material turi (wobbler + shelf strip)",
+                    "1 ta kreativ yo'nalish",
+                    "Brendga mos dizayn",
+                    "1 marta tuzatish",
+                    "Chop etishga tayyor fayl"
+                ]
+            },
+            {
+                "name": "STANDARD",
+                "price": "1 290 000 so'm",
+                "features": [
+                    "5 ta material turi",
+                    "Wobbler, shelf strip, poster, table tent, flyer",
+                    "2 ta dizayn varianti",
+                    "Brend qoidalariga mos kompozitsiya",
+                    "2 marta tuzatish",
+                    "Chop etishga tayyor fayllar"
+                ]
+            },
+            {
+                "name": "PREMIUM",
+                "price": "2 490 000 so'm",
+                "features": [
+                    "To'liq POSM kit (7+ material)",
+                    "Wobbler, shelf strip, roll-up, poster, table tent, flyer, totem",
+                    "3 ta kreativ dizayn yo'nalishi",
+                    "Savdo psixologiyasiga mos layout",
+                    "Pol sticker va promo banner",
+                    "3 marta tuzatish",
+                    "Print-ready va mockup fayllar"
+                ]
+            }
+        ]
+    },
+    "cta": {
+        "brandLabel": "Jon.Branding",
+        "title": "Savdo nuqtangiz brend kuchingizni ko'rsatsin",
+        "description": "POSM materiallar xaridorni to'g'ri joyda tanlov qilishga undaydi. Biz brendingizga mos, chiroyli va samarali materiallar to'plamini yaratib beramiz.",
+        "button": "POSM materiallar buyurtma qilish"
+    },
+    "faq": {
+        "title": "Ko'p beriladigan savollar",
+        "items": [
+            {
+                "question": "Qanday material turlarini yasaysizlar?",
+                "answer": "Wobbler, shelf strip, roll-up banner, poster, table tent, flyer, brochure, totem (standee), pol sticker va boshqa savdo nuqtasi materiallarini yaratamiz."
+            },
+            {
+                "question": "Fayllarni qanday formatda berasizlar?",
+                "answer": "Chop etishga tayyor PDF, AI yoki EPS formatlarida, belgilangan CMYK ranglarda topshiriladi."
+            },
+            {
+                "question": "O'lchamlarni o'zimiz bera olamizmi?",
+                "answer": "Ha, har qanday o'lchamda ishlashimiz mumkin. Standart o'lchamlar bo'yicha maslahat ham beramiz."
+            },
+            {
+                "question": "Faqat bir material uchun dizayn qilasizlarmi?",
+                "answer": "Ha, individual materiallar uchun ham buyurtma berish mumkin. Narx material turiga qarab kelishiladi."
+            },
+            {
+                "question": "Aksiya yoki promo uchun tezkor ishlaysizlarmi?",
+                "answer": "Ha, muddatli buyurtmalar uchun tezkor variant bor. Muddatni brifingda aniqlaymiz."
+            }
+        ]
+    }
+}

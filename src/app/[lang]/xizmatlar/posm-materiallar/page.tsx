@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import PosmMateriallarClient from './posm-materiallar-client';
+import posmUzFallback from '@/locales/posm-uz.json';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -9,9 +10,7 @@ type Props = {
 async function getPageTranslations(lang: string) {
   const dictionary = await getDictionary(lang as Locale);
   if (dictionary.posmPage) return dictionary.posmPage;
-
-  const uzDictionary = await getDictionary('uz');
-  return uzDictionary.posmPage;
+  return posmUzFallback;
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
