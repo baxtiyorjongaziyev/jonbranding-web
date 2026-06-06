@@ -47,7 +47,7 @@ function getMarkdownBlogEntries(): MetadataRoute.Sitemap {
       .readdirSync(langDirectory)
       .filter((fileName) => fileName.endsWith('.md'))
       .map((fileName) => ({
-        url: localizedUrl(lang, `/blog/${fileName.replace(/\.md$/, '')}`),,
+        url: localizedUrl(lang, `/blog/${fileName.replace(/\.md$/, '')}`),
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.6,
