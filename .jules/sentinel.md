@@ -18,3 +18,7 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+## 2026-06-07 - Fail-open webhook authorization in call processor
+**Vulnerability:** The `amocrm-process-calls` API route used standard strict equality (`!==`) to verify the cron secret, making it vulnerable to timing attacks.
+**Learning:** Standard string comparisons terminate early when a character mismatch is found, allowing an attacker to incrementally guess the secret by measuring response times. Security tokens/secrets must always be compared in constant time.
+**Prevention:** Use a timing-safe equality function (e.g. bitwise XOR accumulation or `crypto.timingSafeEqual`) when validating secrets or tokens.

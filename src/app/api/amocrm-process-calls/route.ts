@@ -9,6 +9,17 @@ function cleanSecret(value: string | undefined) {
   return String(value || '').replace(/^﻿/, '').trim();
 }
 
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) {
+    return false;
+  }
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return result === 0;
+}
+
 export async function GET(request: Request) {
   return handleCallProcessing(request);
 }
@@ -24,7 +35,7 @@ async function handleCallProcessing(request: Request) {
     const configuredSecret = cleanSecret(process.env.AMOCRM_CRON_SECRET);
 
     // 1. Verify cron secret to protect the endpoint
-    if (!configuredSecret || secret !== configuredSecret) {
+    if (!configuredSecret || !secret || !timingSafeEqual(secret, configuredSecret)) {
       return NextResponse.json({ error: 'Unauthorized secret key' }, { status: 401 });
     }
 
