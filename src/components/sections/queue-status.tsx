@@ -81,9 +81,12 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
             <div className="absolute inset-0 z-0 opacity-40">
                 <div className="absolute inset-0 bg-gradient-to-br from-dark-blue to-blue-900" />
                 <AnimatePresence>
+                    {isInView && (
                      <motion.div 
+                        key="liquid-blob-container"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         transition={{ duration: 1 }}
                         className="absolute inset-0 filter blur-3xl"
                     >
@@ -103,6 +106,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                             transition={{ duration: 40, repeat: Infinity, ease: 'linear', delay: 10 }}
                         />
                     </motion.div>
+                    )}
                 </AnimatePresence>
             </div>
 

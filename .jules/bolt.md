@@ -11,3 +11,7 @@
 ## 2024-05-25 - Pausing Continuous Intervals with useInView
 **Learning:** Using Framer Motion's `useInView` to pause continuous polling/intervals (like `setInterval`) when a component is off-screen is a great performance optimization to reduce background React re-renders. However, when doing this, it is critical that the tracked element (`ref`) is ALWAYS rendered. Returning `null` early (e.g., while waiting for data) prevents the ref from attaching and permanently breaks the visibility observer.
 **Action:** Always render a placeholder or skeleton with the tracked `ref` attached instead of returning `null` when loading components that use `useInView` for performance optimizations.
+
+## 2024-08-16 - Unmounting heavy off-screen animations
+**Learning:** Heavy Framer Motion animations (like continuous rotations with CSS blurs and mix-blend-modes inside `<AnimatePresence>`) consume CPU/GPU resources even when their container is outside the viewport. Just hiding them isn't enough; the browser still computes the animations.
+**Action:** Use `useInView` to conditionally unmount expensive decorative animation nodes (e.g., `{isInView && (<motion.div>...)}`) completely, rather than relying on CSS or just letting them run.
