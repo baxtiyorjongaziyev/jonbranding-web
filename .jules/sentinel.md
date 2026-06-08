@@ -19,11 +19,6 @@
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
 
-## 2026-06-08 - Timing Attacks on Secrets
-**Vulnerability:** Comparing API secrets or tokens using regular string equality operators (, ) leaks information through timing analysis because standard comparison stops at the first mismatched character.
-**Learning:** Malicious actors can guess secrets one character at a time by measuring how long the comparison takes. A secure comparison approach that takes the exact same time regardless of whether the strings match or not is required.
-**Prevention:** Use a hashing technique with `crypto.timingSafeEqual` to compare secrets without exposing their lengths or the contents through timing side-channels.
-
 ## 2024-06-08 - Timing Attacks on Secrets
 **Vulnerability:** Comparing API secrets or tokens using regular string equality operators (`===`, `!==`) leaks information through timing analysis because standard comparison stops at the first mismatched character.
 **Learning:** Malicious actors can guess secrets one character at a time by measuring how long the comparison takes. Also, returning early from comparison logic when lengths differ leaks the expected length of the secret.
