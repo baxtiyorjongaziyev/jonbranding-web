@@ -48,33 +48,25 @@ const QuizPage: FC = () => {
     const currentQuestion = questions[step];
     const selectedOption = currentQuestion.options.find((opt: any) => opt.text === value);
     if (selectedOption) {
-        newAnswers[step] = selectedOption;
+      newAnswers[step] = selectedOption;
+      setAnswers(newAnswers);
     }
-    setAnswers(newAnswers);
   };
 
   const handleNext = () => {
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
-      const answerTexts = answers.map((a, index) => a ? `S${index+1}: ${a.text}` : null).filter(Boolean) as string[];
-      const summaryLabel = lang === 'ru' ? 'Результат бренд-теста' : (lang === 'en' ? 'Brand Test Result' : 'Brending-test natijasi');
-      const answersLabel = lang === 'ru' ? 'Ответы' : (lang === 'en' ? 'Answers' : 'Javoblar');
-      const scoreLabel = lang === 'ru' ? 'Баллы' : (lang === 'en' ? 'Score' : 'Ball');
-      const summary = `${summaryLabel}. ${answersLabel}: ${JSON.stringify(answerTexts)} | ${scoreLabel}: ${totalScore}`;
-      setPackageSummary(summary);
+      setShowResult(true);
+      gtagEvent({ action: 'quiz_completed', category: 'Engagement', label: 'Branding Quiz', value: totalScore });
+      setPackageSummary(`Quiz natijasi: ${totalScore} ball`);
       setModalOpen(true);
     }
   };
 
   const handleFormSubmit = () => {
     setModalOpen(false);
-    setShowResult(true);
-    gtagEvent('form_submit', {
-      'event_category': 'Quiz',
-      'event_label': 'Branding Quiz',
-      'value': totalScore
-    });
+    gtagEvent({ action: 'quiz_lead_submitted', category: 'Lead', label: 'Branding Quiz Lead' });
   };
 
   if (!translations) {
@@ -148,7 +140,7 @@ const QuizPage: FC = () => {
                             className="space-y-4"
                         >
                             {currentQuestion.options.map((option: any, index: number) => (
-                                <Label key={index} htmlFor={`q${step}-o${index}`} className="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-white transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary">
+                                <Label key={index} htmlFor={`q${step}-o${index}`} className="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-white transition-colors has-[:checked]:bg-primary/10 has-[:checked]:border-primary active:scale-[0.98] press-effect min-h-[52px]">
                                     <RadioGroupItem value={option.text} id={`q${step}-o${index}`} />
                                     <span className="font-medium text-base text-gray-800">{option.text}</span>
                                 </Label>
