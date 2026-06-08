@@ -24,11 +24,10 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
   useEffect(() => {
     // Progressive staggered loading to prevent blocking the UI thread
     const timers = [
-      setTimeout(() => setStep(1), 300), // Render PackageBuilder
-      setTimeout(() => setStep(2), 600), // Render Comparison
-      setTimeout(() => setStep(3), 900), // Render TrustedBy
-      setTimeout(() => setStep(4), 1200), // Render Testimonials
-      setTimeout(() => setStep(5), 1500), // Render the rest
+      setTimeout(() => setStep(1), 500), // Render Comparison
+      setTimeout(() => setStep(2), 800), // Render TrustedBy
+      setTimeout(() => setStep(3), 1100), // Render Testimonials
+      setTimeout(() => setStep(4), 1400), // Render the rest
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
@@ -51,33 +50,29 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
     <div suppressHydrationWarning className="flex flex-col gap-0 overflow-visible">
       {/* 1. Hero - Immediate */}
       <ServicesHero onCtaClick={handleOpenServiceModal} dictionary={dictionary?.servicesHero} />
-      
-      {/* 2. Why Us - Immediate */}
-      <WhyUs lang={lang} dictionary={dictionary?.whyUs} />
-      
-      {/* 3. Service Sections - Immediate */}
-      <ServiceSections lang={lang} dictionary={dictionary?.serviceSections} />
-      
-      {/* 4. Package Builder - Step 1 */}
-      {step >= 1 ? (
-        <Suspense fallback={<div className="py-20 text-center"><Skeleton className="h-[800px] w-full max-w-6xl mx-auto rounded-3xl" /></div>}>
-          <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary?.servicesPage?.packageBuilder} />
-        </Suspense>
-      ) : <div className="h-40" />}
 
-      {/* 5. Comparison - Step 2 */}
-      {step >= 2 && (
+      {/* 2. Pricing - immediate, so high-intent visitors reach it after the hero */}
+      <Suspense fallback={<div className="py-20 text-center"><Skeleton className="h-[800px] w-full max-w-6xl mx-auto rounded-3xl" /></div>}>
+        <PackageBuilder onOrderNow={handleOpenModal} lang={lang} dictionary={dictionary?.servicesPage?.packageBuilder} />
+      </Suspense>
+
+      {/* 3. Proof and service overview */}
+      <WhyUs lang={lang} dictionary={dictionary?.whyUs} />
+      <ServiceSections lang={lang} dictionary={dictionary?.serviceSections} />
+
+      {/* 4. Comparison */}
+      {step >= 1 && (
         <Suspense fallback={<div className="py-20"><Skeleton className="h-96 w-full" /></div>}>
           <Comparison onCtaClick={handleOpenModal} lang={lang} dictionary={dictionary?.comparison} />
         </Suspense>
       )}
 
-      {/* 6. Social Proof & Offers - Step 3-5 */}
-      {step >= 3 && (
+      {/* 5. Social proof and offers */}
+      {step >= 2 && (
         <>
           <TrustedBy lang={lang} dictionary={dictionary?.trustedBy} />
-          {step >= 4 && <Testimonials lang={lang} dictionary={dictionary?.testimonials} />}
-          {step >= 5 && (
+          {step >= 3 && <Testimonials lang={lang} dictionary={dictionary?.testimonials} />}
+          {step >= 4 && (
             <div className="flex flex-col">
               <PersonalOfferBlock onCtaClick={handleOpenModal} />
               <UrgencyBlock />

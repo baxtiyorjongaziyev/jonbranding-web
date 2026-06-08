@@ -32,20 +32,20 @@ const UrgencyBlock: FC = () => {
     return (
         <section className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4">
-                <Card className="max-w-3xl mx-auto bg-gradient-to-br from-amber-500 to-red-600 text-white rounded-3xl shadow-2xl p-8 sm:p-12 text-center">
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/20 mb-6 border-2 border-white/30">
+                <Card className="mx-auto max-w-3xl rounded-3xl border border-blue-100 bg-blue-50/70 p-8 text-center shadow-[0_24px_70px_rgba(37,99,235,0.12)] sm:p-12">
+                    <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border-2 border-brand-blue/15 bg-brand-blue">
                         <Flame className="h-8 w-8 text-white" />
                     </div>
-                    <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-wider text-amber-200">
+                    <h2 className="text-xl font-bold uppercase tracking-wider text-brand-blue sm:text-2xl">
                         {translations.title}
                     </h2>
-                    <p className="mt-4 text-2xl sm:text-3xl font-semibold leading-tight">
+                    <p className="mt-4 text-2xl font-semibold leading-tight text-blue-950 sm:text-3xl">
                         {translations.subtitle}
                     </p>
-                    <div className="mt-6 border-t border-white/20 pt-6 space-y-4 text-lg text-amber-100">
+                    <div className="mt-6 space-y-4 border-t border-blue-100 pt-6 text-lg text-slate-600">
                         <p>{translations.line1}</p>
                         <p>{translations.line2}</p>
-                        <p className="font-bold text-white">{translations.line3}</p>
+                        <p className="font-bold text-blue-950">{translations.line3}</p>
                     </div>
                 </Card>
             </div>

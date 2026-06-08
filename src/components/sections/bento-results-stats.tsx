@@ -112,7 +112,7 @@ const BentoCard = ({
         z: isFocused ? 15 : 0
       }}
       className={cn(
-        "group relative overflow-hidden rounded-[2rem] p-6 md:p-12 border border-slate-100/80 dark:border-slate-800/40 bg-slate-50/60 dark:bg-slate-900/40 h-full flex flex-col justify-between cursor-pointer transform-gpu transition-all duration-300",
+        "group relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] p-4 sm:p-6 md:p-10 border border-slate-100/80 dark:border-slate-800/40 bg-slate-50/60 dark:bg-slate-900/40 h-full flex flex-col justify-between cursor-pointer transform-gpu transition-all duration-300",
         isFocused ? "shadow-2xl border-blue-500/25 ring-1 ring-blue-500/10" : "hover:border-slate-200/80 dark:hover:border-slate-700/60",
         className
       )}
@@ -165,14 +165,14 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
   ];
 
   return (
-    <section id="results" className="py-24 bg-white overflow-hidden relative">
+    <section id="results" className="py-14 sm:py-24 bg-white overflow-hidden relative">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mb-16">
+        <div className="max-w-4xl mb-10 sm:mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-black mb-6"
+            className="text-3xl md:text-5xl font-black mb-4 sm:mb-6"
           >
             {dictionary.results?.title || "Natijalar"}
           </motion.h2>
@@ -181,13 +181,13 @@ const BentoResultsStats: React.FC<BentoResultsStatsProps> = ({ dictionary }) => 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-muted-foreground border-l-4 border-primary pl-6 font-medium italic"
+            className="text-base sm:text-xl text-muted-foreground border-l-4 border-primary pl-4 sm:pl-6 font-medium italic"
           >
             {dictionary.results?.subtitle}
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8">
           {/* Main Results Card */}
           <div className="lg:col-span-7">
             <BentoCard 

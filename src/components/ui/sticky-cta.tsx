@@ -26,7 +26,7 @@ export default function StickyCTA({ ariaLabel = 'Contact us' }: { ariaLabel?: st
 
   return (
     <div
-      className={`fixed inset-x-3 bottom-[calc(env(safe-area-inset-bottom)+5.25rem)] z-50 flex items-center transition-[opacity,transform] duration-300 md:inset-x-auto md:bottom-6 md:right-6 ${
+      className={`fixed bottom-6 right-6 z-50 hidden items-center transition-[opacity,transform] duration-300 md:flex ${
         isVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-8 opacity-0'
       }`}
     >

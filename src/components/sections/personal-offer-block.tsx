@@ -35,23 +35,28 @@ const PersonalOfferBlock: FC<PersonalOfferBlockProps> = ({ onCtaClick }) => {
         );
     }
 
+    const cleanTitle = String(translations.title || '').replace(/^💎\s*/, '');
+
     return (
         <section className="py-16 sm:py-24 bg-white">
             <div className="container mx-auto px-4">
-                <Card className="max-w-4xl mx-auto bg-dark-blue text-white rounded-[2.5rem] shadow-2xl p-8 sm:p-14 text-center relative overflow-hidden border-none">
+                <Card className="relative mx-auto max-w-4xl overflow-hidden rounded-[2.5rem] border border-blue-900/40 bg-[linear-gradient(145deg,#050583_0%,#09113f_58%,#111a52_100%)] p-8 text-center text-white shadow-2xl sm:p-14">
                     <div className="absolute -bottom-20 -right-20 w-64 h-64 opacity-10">
                         <Logo isWhite={true} />
                     </div>
                     <div className="relative z-10">
                         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
-                           {translations.title}
+                           {cleanTitle}
                         </h2>
                         <p className="mt-4 text-xl text-blue-200 font-medium opacity-90">{translations.subtitle}</p>
                         
                         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                             {translations.sections.map((section: any, index: number) => (
-                                <div key={index} className="bg-white/5 p-5 rounded-2xl border border-white/10 shadow-inner backdrop-blur-sm">
-                                    <h3 className="font-black text-sm text-sky-blue mb-3 uppercase tracking-widest">{section.title}</h3>
+                                <div key={index} className="rounded-2xl border border-white/15 bg-white/10 p-5 shadow-inner backdrop-blur-sm">
+                                    <h3 className="mb-3 text-sm font-black uppercase tracking-widest text-sky-blue">
+                                      <span className="mr-2 text-white/55">0{index + 1}</span>
+                                      {String(section.title).replace(/^[1-9]️⃣\s*/, '')}
+                                    </h3>
                                     <ul className="space-y-2">
                                         {section.points.map((point: string, pIndex: number) => (
                                             <li key={pIndex} className="flex items-start gap-2.5 text-sm text-blue-100 font-medium leading-tight">

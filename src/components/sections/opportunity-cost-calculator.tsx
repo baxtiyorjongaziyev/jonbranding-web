@@ -63,17 +63,17 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
             description={t.subtitle}
           />
 
-          <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="mt-8 sm:mt-14 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
             {/* Left: Inputs & Analogy (8 cols) */}
-            <div className="lg:col-span-8 space-y-8">
-              <BrandCard className="p-8">
+            <div className="lg:col-span-8 space-y-5 sm:space-y-8">
+              <BrandCard className="p-5 sm:p-8">
                 <div className="space-y-10">
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm font-bold uppercase tracking-widest text-brand-slate">
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                      <label className="text-xs font-bold uppercase tracking-widest text-brand-slate sm:text-sm">
                         {t.labels.traffic}
                       </label>
-                      <span className="text-2xl font-black text-brand-blue">
+                      <span className="text-xl font-black text-brand-blue sm:text-2xl">
                         {formatNumberWithSpaces(traffic)} {trafficUnit}
                       </span>
                     </div>
@@ -86,12 +86,12 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                     />
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm font-bold uppercase tracking-widest text-brand-slate">
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                      <label className="text-xs font-bold uppercase tracking-widest text-brand-slate sm:text-sm">
                         {t.labels.conversion}
                       </label>
-                      <span className="text-2xl font-black text-brand-blue">
+                      <span className="text-xl font-black text-brand-blue sm:text-2xl">
                         {conversion}% {conversionUnit}
                       </span>
                     </div>
@@ -105,12 +105,12 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                     />
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm font-bold uppercase tracking-widest text-brand-slate">
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                      <label className="text-xs font-bold uppercase tracking-widest text-brand-slate sm:text-sm">
                         {t.labels.aov}
                       </label>
-                      <span className="text-2xl font-black text-brand-blue">
+                      <span className="text-xl font-black text-brand-blue sm:text-2xl">
                         {formatCurrency(aov)}
                       </span>
                     </div>
@@ -127,8 +127,8 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
               </BrandCard>
 
               {/* The Analogy Section */}
-              <BrandCard className="p-8">
-                <h3 className="text-2xl font-black mb-6 flex items-center gap-3 text-brand-ink">
+              <BrandCard className="p-5 sm:p-8">
+                <h3 className="text-xl font-black mb-4 sm:text-2xl sm:mb-6 flex items-center gap-3 text-brand-ink">
                    <Droplets className="text-brand-blue w-8 h-8" />
                    {t.analogy.title}
                 </h3>
@@ -158,8 +158,8 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
             </div>
 
             {/* Right: Results (4 cols) */}
-            <div className="lg:col-span-4 flex flex-col gap-6 sticky top-24">
-              <div className="p-8 rounded-[2.5rem] bg-brand-ink text-white border border-white/10 shadow-2xl relative overflow-hidden group">
+            <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-24">
+              <div className="p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-brand-ink text-white border border-white/10 shadow-2xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(58,225,255,0.22),transparent_32rem)]" />
                 <div className="absolute top-0 right-0 p-8 opacity-10 transform translate-x-1/4 -translate-y-1/4 group-hover:scale-110 transition-transform duration-700">
                   <TrendingUp className="w-40 h-40" />

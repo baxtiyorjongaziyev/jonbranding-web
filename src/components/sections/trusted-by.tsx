@@ -26,7 +26,7 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
   if (!dictionary?.title) return null;
 
   return (
-    <BrandSection tone="light" className="border-y border-brand-line/80 bg-brand-paper py-20 sm:py-24" aria-labelledby="trusted-by-title">
+    <BrandSection tone="light" className="border-y border-brand-line/80 bg-white py-20 sm:py-24" aria-labelledby="trusted-by-title">
       <div className="container mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
@@ -45,15 +45,15 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
             {metrics.map((metric) => (
               <div key={metric.label} className="border-brand-line px-4 py-5 sm:border-r lg:border-r-0 lg:border-l lg:py-3">
                 <div className="font-headline text-2xl font-black tracking-normal text-brand-ink tabular-nums sm:text-3xl">{metric.value}</div>
-                <div className="mt-2 text-xs font-bold uppercase tracking-normal text-brand-slate">{metric.label}</div>
+                <div className="mt-2 text-[13px] font-bold uppercase tracking-normal text-brand-slate">{metric.label}</div>
               </div>
             ))}
           </div>
         </div>
 
         <div className="relative mt-12 overflow-hidden border-y border-brand-line">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-brand-paper to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-brand-paper to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent" />
           <Marquee pauseOnHover repeat={3} className="[--duration:54s] py-5">
             {brands.map((brand) => (
               <div key={brand.name} className="mx-2 flex h-16 w-36 shrink-0 items-center justify-center border-r border-brand-line px-5 py-3 transition-opacity duration-200 hover:opacity-100 sm:w-40">

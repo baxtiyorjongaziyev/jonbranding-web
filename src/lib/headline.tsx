@@ -16,7 +16,7 @@ export function renderHeadline(headline: string, highlightColorClass: string = '
         if (isDoubleStar || isPipe) {
           const text = isDoubleStar ? segment.slice(2, -2) : segment.slice(1, -1);
           return (
-            <span key={i} className={`font-black italic ${highlightColorClass}`}>
+            <span key={i} className={`font-serif italic font-normal ${highlightColorClass}`}>
               {text}
             </span>
           );
