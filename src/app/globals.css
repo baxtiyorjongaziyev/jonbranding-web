@@ -90,6 +90,8 @@
 
   html {
     scroll-behavior: smooth;
+    /* Prevent overscroll bounce / pull-to-refresh on iOS */
+    overscroll-behavior-y: none;
   }
 
   body {
@@ -97,6 +99,20 @@
     font-feature-settings: 'rlig' 1, 'calt' 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    /* Prevent overscroll bounce */
+    overscroll-behavior-y: none;
+  }
+
+  /* Remove tap delay + highlight on ALL interactive elements */
+  a, button, [role="button"], [tabindex="0"], label[for], select {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* No text selection on navigational UI */
+  nav, header, [data-nav], .mobile-nav {
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .skip-link {
@@ -411,5 +427,41 @@
       0 2px 8px rgba(0, 0, 0, 0.04),
       inset 0 1.5px 0 rgba(255, 255, 255, 0.92),
       inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+  }
+
+  /* ── Mobile App-Like UX ── */
+  @media (max-width: 768px) {
+    /* Content padding to clear the fixed bottom nav */
+    .mobile-nav-safe {
+      padding-bottom: calc(env(safe-area-inset-bottom) + 5rem);
+    }
+
+    /* Improve tap feedback on all cards */
+    .brand-card, .premium-card {
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+    .brand-card:active, .premium-card:active {
+      transform: scale(0.985);
+    }
+
+    /* Larger default touch row height */
+    .touch-row {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Section headings tighter on small screens */
+    h2 {
+      letter-spacing: -0.03em;
+    }
+  }
+
+  /* App-like press effect for any element with this class */
+  .press-effect {
+    transition: transform 140ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .press-effect:active {
+    transform: scale(0.95);
   }
 }
