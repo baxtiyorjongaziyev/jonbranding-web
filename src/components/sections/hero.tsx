@@ -105,7 +105,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
               </div>
             )}
 
-            <h1 className="max-w-[21rem] text-balance text-[2rem] font-light leading-[1.05] tracking-tight text-foreground [overflow-wrap:normal] sm:max-w-[780px] sm:text-5xl sm:leading-[0.98] lg:text-[4.35rem] xl:text-[4.85rem]">
+            <h1 className="max-w-[21rem] text-balance text-[2.25rem] font-semibold leading-[1.05] tracking-tight text-foreground [overflow-wrap:normal] sm:max-w-[780px] sm:text-5xl sm:font-light sm:leading-[0.98] lg:text-[4.35rem] xl:text-[4.85rem]">
               {renderHeadline(heroCopy.title)}
             </h1>
 
