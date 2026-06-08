@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
@@ -53,13 +53,7 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
       >
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-[minmax(280px,0.72fr)_minmax(0,1.28fr)] lg:items-start">
           <motion.div variants={itemVariants} className="lg:sticky lg:top-28">
-            <SectionIntro
-              eyebrow={translations.eyebrow}
-              title={translations.title}
-              description={translations.subtitle}
-              align="left"
-              className="[&>h2]:max-w-[11ch] [&>p]:mx-0"
-            />
+            <SectionIntro eyebrow={translations.eyebrow} title={translations.title} description={translations.subtitle} align="left" />
             {processProof.length > 0 && (
               <div className="mt-8 grid grid-cols-2 border-y border-brand-line sm:mt-10">
                 {processProof.map((item: string, index: number) => (
@@ -72,8 +66,7 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
             )}
           </motion.div>
 
-          <motion.div variants={itemVariants} className="relative">
-            <div className="absolute left-[2.2rem] top-8 hidden h-[calc(100%-4rem)] w-px bg-brand-line md:block" aria-hidden="true" />
+          <motion.div variants={itemVariants} className="space-y-4">
             {(translations.phases ?? []).map((phase, index: number) => (
               <div key={index} className="group relative grid gap-4 border-t border-brand-line py-6 first:border-t-0 md:grid-cols-[4.5rem_1fr] md:py-8">
                 <div className="relative z-[1] flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-brand-line bg-white text-sm font-black text-brand-blue shadow-[0_18px_42px_-28px_rgba(15,23,42,0.7)] transition-[background-color,color,transform,border-color] duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-blue group-hover:bg-brand-blue group-hover:text-white sm:h-12 sm:w-12">
@@ -96,6 +89,7 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
                       </ul>
                     )}
                   </div>
+                </div>
               </div>
             ))}
           </motion.div>

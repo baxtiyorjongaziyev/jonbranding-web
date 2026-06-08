@@ -17,7 +17,6 @@ type Dictionary = {
     process: string;
     faq: string;
     services: string;
-    brand_strategy: string;
     naming: string;
     brandbook: string;
     packaging_design: string;

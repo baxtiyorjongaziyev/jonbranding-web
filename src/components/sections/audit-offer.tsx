@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { ArrowUpRight, CheckCircle2, FileSearch, Layers3, Route, ShieldCheck, Target } from 'lucide-react';
 import ContactTriggerButton from '@/components/contact-trigger-button';
 import { BrandSection } from '@/components/ui/design-system';
-import { renderHeadline } from '@/lib/headline';
 
 type AuditOfferDictionary = {
   eyebrow?: string;
@@ -34,8 +33,8 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
                 {dictionary.eyebrow}
               </div>
             )}
-            <h2 className="max-w-2xl text-balance text-4xl font-extrabold leading-tight tracking-normal text-brand-ink sm:text-6xl">
-              {renderHeadline(dictionary.title ?? '', "text-primary")}
+            <h2 className="max-w-2xl text-balance text-foreground">
+              {dictionary.title}
             </h2>
             {dictionary.description && <p className="mt-6 text-pretty text-lg leading-8 text-brand-slate">{dictionary.description}</p>}
 
@@ -66,7 +65,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
               <div className="mt-8 grid grid-cols-2 border-y border-brand-line">
                 {outcomes.map((outcome) => (
                   <div key={outcome.label} className="border-r border-brand-line px-4 py-4 even:border-r-0">
-                    <div className="font-headline text-2xl font-black tracking-normal text-brand-ink tabular-nums">{outcome.value}</div>
+                    <div className="font-mono text-2xl font-extrabold tracking-normal text-foreground tabular-nums">{outcome.value}</div>
                     <div className="mt-2 text-xs font-bold uppercase tracking-normal text-brand-slate">{outcome.label}</div>
                   </div>
                 ))}
@@ -84,7 +83,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
                     <Icon className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-extrabold tracking-normal text-brand-ink">{item.title}</h3>
+                    <h3 className="text-xl font-extrabold tracking-normal text-foreground">{item.title}</h3>
                     <p className="mt-3 max-w-2xl text-sm leading-7 text-brand-slate">{item.desc}</p>
                   </div>
                 </article>

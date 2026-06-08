@@ -23,6 +23,7 @@ const staticRoutes = [
   '/xizmatlar/firmenniy-stil',
   '/xizmatlar/qadoq-dizayni',
   '/xizmatlar/car-wrap-design',
+  '/xizmatlar/posm-materiallar',
   '/xizmatlar/brandbook',
   '/xizmatlar/patent-kalkulyatori',
 ];

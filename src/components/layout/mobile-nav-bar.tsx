@@ -20,6 +20,11 @@ interface MobileNavBarProps {
   };
 }
 
+const NAV_SPRING = { type: 'spring', stiffness: 420, damping: 36, mass: 0.8 };
+
+const iconBtn =
+  'press-effect flex min-w-0 flex-1 flex-col items-center justify-center gap-1.5 rounded-[14px] py-2.5 text-white/40 transition-colors duration-150 active:bg-white/[0.06] hover:bg-white/[0.04] hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
+
 export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
@@ -28,7 +33,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const previous = scrollY.getPrevious() || 0;
     const diff = latest - previous;
-    const isAtBottom = window.innerHeight + latest >= document.documentElement.scrollHeight - 60;
+    const atBottom = window.innerHeight + latest >= document.documentElement.scrollHeight - 60;
 
     setScrolled(latest > 60);
 
@@ -49,23 +54,14 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
     ai: dictionary?.ai || 'AI',
   };
 
-  const handleOpenConsultation = () => {
+  const openConsultation = () => {
     window.dispatchEvent(new CustomEvent('openContactModal', {
-      detail: {
-        section: 'mobile_quick_actions',
-        ctaText: labels.consultation,
-        source: 'mobile_nav_bar',
-      },
+      detail: { section: 'mobile_quick_actions', ctaText: labels.consultation, source: 'mobile_nav_bar' },
     }));
   };
 
-  const handleToggleOisha = () => {
-    trackEvent({
-      action: 'assistant_opened',
-      category: 'Engagement',
-      label: 'mobile_nav_bar',
-      section: 'mobile_quick_actions',
-    });
+  const toggleOisha = () => {
+    trackEvent({ action: 'assistant_opened', category: 'Engagement', label: 'mobile_nav_bar', section: 'mobile_quick_actions' });
     window.dispatchEvent(new CustomEvent('toggleOisha'));
   };
 

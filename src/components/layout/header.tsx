@@ -16,8 +16,6 @@ type Dictionary = {
   process: string;
   blog: string;
   services: string;
-  brand_strategy: string;
-  brand_strategy_desc: string;
   naming: string;
   naming_desc: string;
   logo_design: string;
@@ -101,7 +99,6 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   ];
 
   const services = [
-    { title: dictionary.brand_strategy, href: getLocalizedPath('/xizmatlar/brand-strategiyasi'), description: dictionary.brand_strategy_desc },
     { title: dictionary.naming, href: getLocalizedPath('/xizmatlar/neyming'), description: dictionary.naming_desc },
     { title: dictionary.logo_design, href: getLocalizedPath('/xizmatlar/logo-dizayni'), description: dictionary.logo_design_desc },
     { title: dictionary.corporate_style, href: getLocalizedPath('/xizmatlar/firmenniy-stil'), description: dictionary.corporate_style_desc },

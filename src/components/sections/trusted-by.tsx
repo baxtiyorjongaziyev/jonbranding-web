@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { staticBrands } from '@/lib/static-data';
 import { BrandSection } from '@/components/ui/design-system';
 import { Marquee } from '@/components/ui/marquee';
-import { renderHeadline } from '@/lib/headline';
+import type { Brand } from '@/lib/types';
 
 type TrustedByDictionary = {
   eyebrow?: string;
@@ -19,8 +19,8 @@ const defaultMetrics = [
   { value: '4 til', label: 'Bozor tili' },
 ];
 
-const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = ({ dictionary }) => {
-  const brands = staticBrands.filter((brand) => !brand.hiddenInHero).slice(0, 18);
+const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary; brands?: Brand[] }> = ({ dictionary, brands: brandsProp }) => {
+  const brands = (brandsProp ?? staticBrands).filter((brand) => !brand.hiddenInHero).slice(0, 18);
   const metrics = dictionary?.metrics?.length ? dictionary.metrics : defaultMetrics;
 
   if (!dictionary?.title) return null;
@@ -31,12 +31,12 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary }> = (
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             {dictionary.eyebrow && (
-              <div className="jb-eyebrow mb-4">
+              <div className="jb-eyebrow mb-5">
                 {dictionary.eyebrow}
               </div>
             )}
-            <h2 id="trusted-by-title" className="max-w-2xl text-balance text-3xl font-extrabold leading-tight tracking-normal text-brand-ink sm:text-5xl">
-              {renderHeadline(dictionary.title, "text-primary")}
+            <h2 id="trusted-by-title" className="max-w-2xl text-balance text-foreground">
+              {dictionary.title}
             </h2>
             {dictionary.subtitle && <p className="mt-5 max-w-xl text-base leading-8 text-brand-slate sm:text-lg">{dictionary.subtitle}</p>}
           </div>
