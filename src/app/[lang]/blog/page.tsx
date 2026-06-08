@@ -63,7 +63,7 @@ const BlogPage = async (props: Props) => {
               const postHref = getLocalizedPath(safeLang as Locale, `/blog/${post.slug}`);
 
               return (
-                <Link key={post.slug} href={postHref} className="block group">
+                <Link key={post.slug} href={postHref} className="block group press-effect">
                   <Card className="h-full flex flex-col overflow-hidden shadow-lg rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                     <div className="relative w-full h-56 flex-shrink-0 overflow-hidden">
                       <Image
