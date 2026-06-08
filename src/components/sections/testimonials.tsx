@@ -220,28 +220,39 @@ const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   );
 };
 
-const CarouselDots = ({ api, count, label }: { api?: CarouselApi; count: number; label: string }) => {
+const CarouselDots = ({ api, label }: { api?: CarouselApi; label: string }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
   useEffect(() => {
     if (!api) return;
 
-    const syncSelectedIndex = () => setSelectedIndex(api.selectedScrollSnap());
+    const syncSelectedIndex = () => {
+      setSelectedIndex(api.selectedScrollSnap());
+    };
+    const syncScrollSnaps = () => {
+      setScrollSnaps(api.scrollSnapList());
+    };
+
+    syncScrollSnaps();
     syncSelectedIndex();
+
     api.on('select', syncSelectedIndex);
-    api.on('reInit', syncSelectedIndex);
+    api.on('reInit', () => {
+      syncScrollSnaps();
+      syncSelectedIndex();
+    });
 
     return () => {
       api.off('select', syncSelectedIndex);
-      api.off('reInit', syncSelectedIndex);
     };
   }, [api]);
 
-  if (count < 2) return null;
+  if (scrollSnaps.length < 2) return null;
 
   return (
     <div className="mt-5 flex justify-center gap-2 sm:hidden" role="group" aria-label={label}>
-      {Array.from({ length: count }).map((_, index) => (
+      {scrollSnaps.map((_, index) => (
         <button
           key={index}
           type="button"
@@ -360,7 +371,7 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
                 <CarouselNext className="absolute -right-4 h-11 w-11 border-brand-line shadow-md transition-[background-color,color] duration-200 hover:bg-brand-ink hover:text-white lg:-right-12" />
               </div>
             </Carousel>
-            <CarouselDots api={videoApi} count={videoTestimonials.length} label={translations.eyebrow || 'Video testimonials'} />
+            <CarouselDots api={videoApi} label={translations.eyebrow || 'Video testimonials'} />
           </div>
         )}
 
@@ -397,7 +408,6 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
             </Carousel>
             <CarouselDots
               api={textApi}
-              count={audioTestimonials.length + textTestimonials.length}
               label={translations.eyebrow || 'Testimonials'}
             />
           </div>

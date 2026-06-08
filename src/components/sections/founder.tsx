@@ -19,6 +19,7 @@ import { useState, type FC } from 'react';
 import { motion } from 'framer-motion';
 import { BrandSection } from '@/components/ui/design-system';
 import DOMPurify from 'isomorphic-dompurify';
+import { renderHeadline } from '@/lib/headline';
 import type { FounderDictionary } from '@/lib/types/dictionary';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
@@ -74,7 +75,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
           >
             <div className="relative mx-auto w-full max-w-[420px] overflow-hidden rounded-3xl border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]">
               {/* Fixed viewport-relative height so it never overflows the screen */}
-              <div className="relative h-[52vh] max-h-[520px] min-h-[300px] w-full">
+              <div className="relative h-[40vh] md:h-[52vh] max-h-[420px] md:max-h-[520px] min-h-[260px] md:min-h-[300px] w-full">
                 {!showVideo ? (
                   <>
                     <Image
@@ -83,7 +84,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
                       fill
                       sizes="(min-width: 768px) 40vw, 92vw"
                       className="object-cover object-top"
-                      priority
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#050912]/80 via-[#050912]/10 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
@@ -157,9 +158,9 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
 
             {/* Principles */}
             {(translations.principles?.length ?? 0) > 0 && (
-              <div className="grid gap-1.5 rounded-2xl border border-white/8 bg-white/[0.04] p-2 sm:grid-cols-3">
+              <div className="grid gap-1.5 rounded-2xl border border-white/8 bg-white/[0.04] p-2 grid-cols-3">
                 {(translations.principles ?? []).map((item: string) => (
-                  <div key={item} className="rounded-xl bg-white/[0.06] px-3 py-2 text-xs font-bold text-white/90">
+                  <div key={item} className="rounded-xl bg-white/[0.06] px-3 py-2 text-[10px] sm:text-xs font-bold text-white/90 text-center">
                     {item}
                   </div>
                 ))}

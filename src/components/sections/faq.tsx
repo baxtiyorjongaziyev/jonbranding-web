@@ -29,7 +29,7 @@ const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: 
           : ['Price', 'Timeline', 'Outcome', 'Trust', 'Process'];
 
   return (
-    <BrandSection id="faq" tone="light" className="border-y border-brand-line/80 bg-white py-20 sm:py-28">
+    <BrandSection id="faq" tone="light" className="border-y border-brand-line/80 bg-white py-14 sm:py-24">
       <div className="container mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
@@ -59,7 +59,7 @@ const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: 
               {translations.faqItems.map((item: any, index: number) => (
                 <AccordionItem key={index} value={`item-${index}`} className="border-b border-brand-line">
                   <AccordionTrigger
-                    className="group py-6 text-left hover:no-underline sm:py-7"
+                     className="group py-5 text-left hover:no-underline sm:py-7"
                     aria-label={item.question}
                   >
                     <span className="grid min-w-0 grid-cols-[2.75rem_1fr] items-start gap-4 pr-4">
@@ -69,7 +69,7 @@ const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: 
                       </span>
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="pb-7 pl-[3.75rem] text-sm leading-7 text-brand-slate sm:text-base">
+                  <AccordionContent className="pb-7 pl-11 sm:pl-[3.75rem] text-sm leading-7 text-brand-slate sm:text-base">
                     <div className="max-w-2xl">{item.answer}</div>
                   </AccordionContent>
                 </AccordionItem>

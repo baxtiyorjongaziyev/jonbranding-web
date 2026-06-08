@@ -91,9 +91,9 @@ const QuizPage: FC = () => {
 
     return (
         <main className="flex-grow bg-secondary/50">
-            <section className="py-20 sm:py-28">
+            <section className="py-6 sm:py-28">
                 <div className="container mx-auto px-4 text-center">
-                     <Card className="max-w-2xl mx-auto p-8 shadow-2xl rounded-3xl animate-fade-in">
+                     <Card className="max-w-2xl mx-auto p-5 sm:p-8 shadow-2xl rounded-3xl animate-fade-in">
                         <Icon className={`h-20 w-20 ${resultKey === 'bad' ? 'text-red-500' : resultKey === 'medium' ? 'text-yellow-500' : 'text-green-500'} mx-auto mb-6`} />
                         <h1 className="text-3xl sm:text-4xl font-extrabold text-dark-blue">
                            {result.title}
@@ -122,10 +122,10 @@ const QuizPage: FC = () => {
 
   return (
     <main className="flex-grow bg-secondary/50">
-        <section className="py-20 sm:py-28">
+        <section className="py-6 sm:py-28">
             <div className="container mx-auto px-4">
                 <Card className="max-w-3xl mx-auto shadow-2xl rounded-3xl">
-                    <CardHeader className="p-8">
+                    <CardHeader className="p-5 sm:p-8">
                         <Progress value={progressPercentage} className="mb-4 h-2" />
                         <CardTitle className="text-2xl sm:text-3xl font-bold text-dark-blue !mt-4">
                             {currentQuestion.question}
@@ -141,7 +141,7 @@ const QuizPage: FC = () => {
                             </div>
                         )}
                     </CardHeader>
-                    <CardContent className="p-8 pt-0">
+                    <CardContent className="p-5 sm:p-8 pt-0">
                         <RadioGroup
                             value={answers[step]?.text || ''}
                             onValueChange={handleAnswerChange}
@@ -154,11 +154,12 @@ const QuizPage: FC = () => {
                                 </Label>
                             ))}
                         </RadioGroup>
-                        <div className="mt-8 text-right">
+                        <div className="mt-8 flex justify-end">
                             <Button
                                 size="lg"
                                 onClick={handleNext}
                                 disabled={!isCurrentStepAnswered}
+                                className="w-full sm:w-auto h-12 rounded-full text-base font-bold"
                             >
                                 {nextButtonText}
                                 <ArrowRight className="ml-2 h-5 w-5" />
