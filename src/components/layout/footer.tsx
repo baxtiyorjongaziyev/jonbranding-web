@@ -40,7 +40,7 @@ type Dictionary = {
     terms_of_use_link?: string;
 }
 
-const Footer: FC<{ lang: string; dictionary: Dictionary; settings?: { phone?: string; telegramPersonal?: string; telegramChannel?: string; instagram?: string; linkedin?: string } }> = ({ lang = 'uz', dictionary, settings }) => {
+const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const pathname = usePathname();
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
@@ -51,9 +51,9 @@ const Footer: FC<{ lang: string; dictionary: Dictionary; settings?: { phone?: st
     solutions: lang === 'uz' ? 'Yechimlar' : 'Solutions',
     resources: lang === 'uz' ? 'Resurslar' : 'Resources',
     agency: lang === 'uz' ? 'Agentlik' : 'Agency',
-    contact_us: lang === 'uz' ? 'Bog\'lanish' : 'Contact',
-    explore_work: lang === 'uz' ? 'Ishlarni ko\'rish' : 'Explore Work',
-    read_blogs: lang === 'uz' ? 'Blogni o\'qish' : 'Read Blog',
+    contact_us: lang === 'uz' ? "Bog'lanish" : 'Contact',
+    explore_work: lang === 'uz' ? "Ishlarni ko'rish" : 'Explore Work',
+    read_blogs: lang === 'uz' ? "Blogni o'qish" : 'Read Blog',
     privacy_policy_link: lang === 'uz' ? 'Maxfiylik siyosati' : 'Privacy Policy',
     terms_of_use_link: lang === 'uz' ? 'Foydalanish shartlari' : 'Terms',
     ...dictionary,
@@ -67,7 +67,7 @@ const Footer: FC<{ lang: string; dictionary: Dictionary; settings?: { phone?: st
 
   return (
     <footer className="relative overflow-hidden bg-[#0a0a10] text-white" suppressHydrationWarning>
-      <div className="relative bg-[#0a0a10] pt-24 pb-0">
+      <div className="relative bg-[#0a0a10] pt-24 pb-[calc(env(safe-area-inset-bottom)+4.5rem)] md:pb-0">
         {/* Finch-style Vivid Background Gradient - Anchored to very bottom */}
         <div 
           className="absolute bottom-0 left-[-20%] w-[140%] h-[35%] pointer-events-none overflow-hidden select-none"
@@ -143,15 +143,15 @@ const Footer: FC<{ lang: string; dictionary: Dictionary; settings?: { phone?: st
             <div className="space-y-4">
               <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.contact_us}</h3>
               <div className="space-y-4">
-                <a
-                  href={`tel:${settings?.phone ?? '+998336450097'}`}
+                <a 
+                  href="tel:+998336450097"
                   onClick={() => trackContactClick('phone', 'footer')}
                   className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-[#0a0a10] transition-all duration-300 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  {(settings?.phone ?? '+998336450097').replace('+998', '+998 ').replace(/(\d{2})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4')}
+                  +998 33 645 00 97
                 </a>
-                <a
-                  href={settings?.telegramPersonal ?? 'https://t.me/baxtiyorjon_gaziyev'}
+                <a 
+                  href="https://t.me/baxtiyorjon_gaziyev"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackContactClick('telegram', 'footer')}
@@ -196,17 +196,15 @@ const Footer: FC<{ lang: string; dictionary: Dictionary; settings?: { phone?: st
 
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-5">
-              <a href={settings?.instagram ?? 'https://www.instagram.com/jon.branding/'} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Instagram">
+              <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a href={settings?.telegramChannel ?? 'https://t.me/JonBranding'} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Telegram Channel">
+              <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Telegram Channel">
                 <Send size={20} />
               </a>
-              {(settings?.linkedin ?? 'https://www.linkedin.com/in/baxtiyorjongaziyev/') && (
-                <a href={settings?.linkedin ?? 'https://www.linkedin.com/in/baxtiyorjongaziyev/'} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="LinkedIn">
-                  <Linkedin size={20} />
-                </a>
-              )}
+              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="LinkedIn">
+                <Linkedin size={20} />
+              </a>
             </div>
             
             <Separator orientation="vertical" className="h-4 bg-white/10 hidden sm:block" />
