@@ -48,25 +48,33 @@ const QuizPage: FC = () => {
     const currentQuestion = questions[step];
     const selectedOption = currentQuestion.options.find((opt: any) => opt.text === value);
     if (selectedOption) {
-      newAnswers[step] = selectedOption;
-      setAnswers(newAnswers);
+        newAnswers[step] = selectedOption;
     }
+    setAnswers(newAnswers);
   };
 
   const handleNext = () => {
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
-      setShowResult(true);
-      gtagEvent({ action: 'quiz_completed', category: 'Engagement', label: 'Branding Quiz', value: totalScore });
-      setPackageSummary(`Quiz natijasi: ${totalScore} ball`);
+      const answerTexts = answers.map((a, index) => a ? `S${index+1}: ${a.text}` : null).filter(Boolean) as string[];
+      const summaryLabel = lang === 'ru' ? 'Результат бренд-теста' : (lang === 'en' ? 'Brand Test Result' : 'Brending-test natijasi');
+      const answersLabel = lang === 'ru' ? 'Ответы' : (lang === 'en' ? 'Answers' : 'Javoblar');
+      const scoreLabel = lang === 'ru' ? 'Баллы' : (lang === 'en' ? 'Score' : 'Ball');
+      const summary = `${summaryLabel}. ${answersLabel}: ${JSON.stringify(answerTexts)} | ${scoreLabel}: ${totalScore}`;
+      setPackageSummary(summary);
       setModalOpen(true);
     }
   };
 
   const handleFormSubmit = () => {
     setModalOpen(false);
-    gtagEvent({ action: 'quiz_lead_submitted', category: 'Lead', label: 'Branding Quiz Lead' });
+    setShowResult(true);
+    gtagEvent('form_submit', {
+      'event_category': 'Quiz',
+      'event_label': 'Branding Quiz',
+      'value': totalScore
+    });
   };
 
   if (!translations) {
