@@ -338,8 +338,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
 
                 <div className="mt-24 max-w-6xl mx-auto">
-                    <div id="your-package-card" className={cn("rounded-[3rem] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border border-slate-100 transition-all duration-500", total.isPromoApplied && "ring-4 ring-emerald-500/30 scale-[1.01]")}>
-                        <div className="relative lg:w-1/2 overflow-hidden bg-[linear-gradient(145deg,#050583_0%,#09113f_58%,#111a52_100%)] p-8 text-white sm:p-14">
+                    <div id="your-package-card" className={cn("rounded-[2rem] sm:rounded-[3rem] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border border-slate-100 transition-all duration-500", total.isPromoApplied && "ring-4 ring-emerald-500/30 scale-[1.01]")}>
+                        <div className="relative lg:w-1/2 overflow-hidden bg-[linear-gradient(145deg,#050583_0%,#09113f_58%,#111a52_100%)] p-5 sm:p-14 text-white">
                             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(44,43,245,0.55),transparent_42%),radial-gradient(circle_at_10%_90%,rgba(0,201,253,0.18),transparent_40%)]" />
                             <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-white/15" />
                             <div className="relative z-10 h-full flex flex-col">
@@ -382,7 +382,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                         </div>
 
-                        <div className="lg:w-1/2 bg-slate-50 p-6 sm:p-14 flex flex-col lg:border-l border-slate-100 relative">
+                        <div className="lg:w-1/2 bg-slate-50 p-5 sm:p-14 flex flex-col lg:border-l border-slate-100 relative">
                             <div className="space-y-8 flex-grow">
                                 <div className="space-y-6">
                                     <div className="flex justify-between items-center px-2">
@@ -485,7 +485,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                             <Button 
                                 size="lg" 
-                                className="w-full py-8 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group btn-premium bg-primary text-white" 
+                                className="w-full py-5 sm:py-8 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group btn-premium bg-primary text-white" 
                                 onClick={(e) => {
                                     if (typeof window !== 'undefined') {
                                         if ((window as any).fbq) {

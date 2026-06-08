@@ -30,6 +30,13 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
       const newX = Math.max(0, Math.min(1, (info.point.x - rect.left) / rect.width));
       x.set(newX);
   }, [x]);
+
+  const handlePointerDown = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const newX = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+      x.set(newX);
+  }, [x]);
   
   const clipPath = useTransform(x, val => `inset(0 ${100 - (val * 100)}% 0 0)`);
   const handleX = useTransform(x, val => `${val * 100}%`);
@@ -41,6 +48,7 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
         onPan={handlePan}
         onPanStart={handlePan}
         onPanEnd={handlePan}
+        onPointerDown={handlePointerDown}
         style={{ touchAction: 'pan-y' }}
     >
       {/* Before Image */}

@@ -38,6 +38,7 @@ type Dictionary = {
     read_blogs?: string;
     privacy_policy_link?: string;
     terms_of_use_link?: string;
+    brand_strategy?: string;
 }
 
 const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {

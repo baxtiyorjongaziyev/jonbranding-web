@@ -142,13 +142,13 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
           </motion.div>
         </div>
 
-        {/* Bottom Section: 2x2 Grid for all 4 dynamic comparison sliders */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        {/* Bottom Section: Swipeable track on mobile, 2x2 Grid on desktop */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 swipe-track md:grid md:grid-cols-2 md:gap-8 lg:gap-10 md:overflow-visible md:pb-0 md:snap-none md:px-0">
           {displayItems.map((item, idx) => (
             <motion.div 
               key={item.brand || idx}
               variants={itemVariants}
-              className="relative overflow-hidden rounded-[1.75rem] border border-white/12 bg-white/[0.055] p-3 shadow-[0_50px_100px_-42px_rgba(0,0,0,0.9)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-white/22"
+              className="relative overflow-hidden rounded-[1.75rem] border border-white/12 bg-white/[0.055] p-3 shadow-[0_50px_100px_-42px_rgba(0,0,0,0.9)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-white/22 w-[85vw] shrink-0 snap-center md:w-auto md:shrink md:snap-align-none"
             >
               <div className="relative z-10">
                 <ImageComparisonSlider

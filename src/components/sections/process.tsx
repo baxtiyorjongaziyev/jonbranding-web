@@ -90,7 +90,6 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
                     )}
                   </div>
                 </div>
-              </div>
             ))}
           </motion.div>
         </div>

@@ -37,7 +37,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
 
     setScrolled(latest > 60);
 
-    if (isAtBottom || latest < 80) {
+    if (atBottom || latest < 80) {
       setIsVisible(true);
     } else if (diff > 8) {
       setIsVisible(false);
@@ -122,7 +122,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
             {/* AI button */}
             <button
               type="button"
-              onClick={handleToggleOisha}
+              onClick={toggleOisha}
               aria-label={labels.ai}
               className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-400 transition-colors duration-150 hover:text-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"
             >
@@ -140,7 +140,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
             {/* Primary CTA */}
             <button
               type="button"
-              onClick={handleOpenConsultation}
+              onClick={openConsultation}
               className={cn(
                 'group relative flex flex-[1.9] flex-col items-center justify-center gap-1 overflow-hidden',
                 'rounded-[14px] m-1 px-3 py-2.5',

@@ -274,7 +274,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="max-h-[calc(100dvh-1rem)] w-[95vw] max-w-[1000px] overflow-hidden rounded-3xl border-none bg-transparent p-0 shadow-none md:w-full [&>button:last-child]:hidden">
+      <DialogContent className="fixed bottom-0 top-auto left-0 translate-x-0 w-full max-w-full h-[92dvh] max-h-[92dvh] rounded-t-[2.5rem] rounded-b-none border-none p-0 overflow-hidden shadow-2xl transition-all duration-300 sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:w-[95vw] sm:max-w-[1000px] sm:h-[620px] sm:max-h-[85vh] sm:rounded-3xl [&>button:last-child]:hidden">
         <DialogDescription className="sr-only">
           {translations?.srDescription || 'Brand audit contact form'}
         </DialogDescription>
@@ -288,19 +288,22 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
           <X className="h-5 w-5" aria-hidden="true" />
         </button>
 
-        <div className="relative flex max-h-[calc(100dvh-1rem)] flex-col overflow-y-auto overscroll-contain rounded-3xl bg-white shadow-2xl md:h-[620px] md:flex-row md:overflow-hidden" onKeyDown={handleKeyDown}>
+        <div className="relative flex h-full w-full flex-col overflow-y-auto overscroll-contain rounded-t-[2.5rem] sm:rounded-3xl bg-white shadow-2xl sm:h-[620px] sm:flex-row sm:overflow-hidden" onKeyDown={handleKeyDown}>
           
-          <div className="relative flex w-full shrink-0 flex-col justify-between overflow-hidden bg-[#050912] p-6 pr-16 text-white md:w-[40%] md:p-12 md:pr-12">
+          <div className="relative flex w-full shrink-0 flex-col justify-between overflow-hidden bg-[#050912] p-5 pr-16 text-white sm:w-[40%] sm:p-12 sm:pr-12">
             <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(37,99,235,0.26),transparent_55%,rgba(58,225,255,0.14))] pointer-events-none" />
             
+            {/* iOS sheet handle for mobile */}
+            <div className="mx-auto mb-4 mt-1 h-1.5 w-12 rounded-full bg-white/20 sm:hidden relative z-20" />
+
             <div className="relative z-10 w-full">
-              <h2 className="text-2xl md:text-5xl font-extrabold leading-tight mb-2 md:mb-4 text-white drop-shadow-sm">
+              <h2 className="text-xl sm:text-3xl lg:text-[2.1rem] font-extrabold leading-tight mb-1 sm:mb-4 text-white drop-shadow-sm">
                 {translations?.sidebarTitle}
               </h2>
-              <p className="text-gray-300/80 text-xs md:text-base leading-relaxed mb-4 md:mb-8 max-w-[280px]">
+              <p className="text-gray-300/80 text-[11px] sm:text-base leading-relaxed mb-3 sm:mb-8 max-w-[280px]">
                 {translations?.sidebarSubtitle || 'Build your high-profit branding system with our experts.'}
               </p>
-              <div className="grid gap-2 rounded-2xl border border-white/10 bg-white/5 p-3 md:p-4">
+              <div className="grid gap-2 rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4 hidden sm:grid">
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-cyan">
                   {translations?.auditGivesLabel || 'Free audit gives'}
                 </div>
@@ -312,7 +315,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                 ))}
               </div>
               
-              <div className="mt-10 hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 md:block">
+              <div className="mt-10 hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:block">
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-white/60">
                   {translations?.auditTimeLabel || 'Audit format'}
                 </div>
@@ -326,7 +329,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
               </div>
             </div>
 
-            <div className="relative z-10 mt-6 md:mt-12 flex flex-col gap-4 md:gap-6 hidden md:flex">
+            <div className="relative z-10 mt-6 sm:mt-12 flex flex-col gap-4 sm:gap-6 hidden sm:flex">
               <div className="flex gap-4">
                 <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" aria-label={translations?.telegramLinkLabel || 'Telegram'} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
                   <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
@@ -336,10 +339,10 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
             </div>
           </div>
 
-          <div className="relative flex w-full flex-1 flex-col overflow-hidden bg-white p-6 md:w-[60%] md:rounded-r-3xl md:p-8 lg:p-10">
+          <div className="relative flex w-full flex-1 flex-col overflow-hidden bg-white p-5 sm:w-[60%] sm:rounded-r-3xl sm:p-8 lg:p-10">
 
 
-            <div className="flex-1 flex flex-col h-full py-4 md:py-6">
+            <div className="flex-1 flex flex-col h-full py-2 sm:py-6">
               {!translations ? (
                 <div className="flex items-center justify-center h-48">
                   <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
