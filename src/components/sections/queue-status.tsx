@@ -77,7 +77,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
   return (
     <section ref={sectionRef} className="py-16 sm:py-24 bg-white" suppressHydrationWarning>
       <div className="container mx-auto px-4">
-        <Card className="relative overflow-hidden max-w-4xl mx-auto bg-dark-blue text-white rounded-3xl shadow-2xl p-6 sm:p-10">
+        <Card className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl border border-blue-900/40 bg-[linear-gradient(145deg,#050583_0%,#09113f_58%,#111a52_100%)] p-6 text-white shadow-2xl sm:p-10">
             <div className="absolute inset-0 z-0 opacity-40">
                 <div className="absolute inset-0 bg-gradient-to-br from-dark-blue to-blue-900" />
                 <AnimatePresence>
@@ -88,7 +88,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                         className="absolute inset-0 filter blur-3xl"
                     >
                         <LiquidBlob 
-                            className="bg-accent" 
+                            className="bg-brand-blue"
                             style={{ top: '5%', left: '10%', width: 300, height: 300, borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }} 
                             transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
                         />
@@ -109,8 +109,8 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
           <div className="relative z-10">
               <CardHeader className="text-center p-0 mb-8">
                   <div className="flex justify-center items-center gap-2 mb-2">
-                    <Sparkles className="w-6 h-6 text-accent" />
-                    <p className="font-bold text-accent uppercase tracking-widest">{translations.subtitle}</p>
+                    <Sparkles className="h-6 w-6 text-sky-blue" />
+                    <p className="font-bold uppercase tracking-widest text-sky-blue">{translations.subtitle}</p>
                   </div>
                   <CardTitle className="text-3xl md:text-4xl font-extrabold text-white">
                     {translations.title}
@@ -134,11 +134,11 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                                             <div className={cn(
                                                 "relative flex flex-col items-center gap-1 p-1 sm:p-2 rounded-lg transition-all",
                                                 isBooked ? "text-gray-400" : "text-green-400",
-                                                isNext && "animate-subtle-pulse bg-accent/20"
+                                                isNext && "animate-subtle-pulse bg-brand-blue/25"
                                             )}>
                                                 {isBooked ? <UserCheck className="h-8 w-8 sm:h-10 sm:w-10" /> : <User className="h-8 w-8 sm:h-10 sm:w-10" />}
-                                                <span className="text-[9px] font-bold uppercase tracking-wider opacity-85">{isBooked ? translations.booked : translations.available}</span>
-                                                {isNext && <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent ring-2 ring-background"></div>}
+                                                <span className="text-[13px] font-bold uppercase tracking-wider opacity-85">{isBooked ? translations.booked : translations.available}</span>
+                                                {isNext && <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-sky-blue ring-2 ring-background"></div>}
                                             </div>
                                         </TooltipTrigger>
                                         <TooltipContent>
@@ -156,11 +156,11 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                     <p className="text-sm text-blue-200">{translations.remainingSlots}</p>
                     <p className="text-2xl font-bold text-white">{remainingSlots} {translations.slotsUnit}</p>
                   </div>
-                   <div className="bg-black/20 p-4 rounded-xl border-2 border-accent/50 shadow-lg">
-                    <p className="text-sm text-accent flex items-center justify-center gap-2">
+                   <div className="rounded-xl border-2 border-brand-blue/60 bg-black/20 p-4 shadow-lg">
+                    <p className="flex items-center justify-center gap-2 text-sm text-sky-blue">
                         <span className="relative flex h-3 w-3">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-blue opacity-75"></span>
+                          <span className="relative inline-flex h-3 w-3 rounded-full bg-sky-blue"></span>
                         </span>
                         {translations.onlineNow}
                     </p>
@@ -177,7 +177,7 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
                       id="queue-cta"
                       size="lg"
                       onClick={onCtaClick}
-                      className="bg-accent text-white hover:bg-accent/90 shadow-lg transform hover:scale-105 transition-transform text-lg animate-subtle-pulse px-6 sm:px-8 py-6"
+                      className="animate-subtle-pulse bg-brand-blue px-6 py-6 text-lg text-white shadow-lg transition-transform hover:scale-105 hover:bg-blue-600 sm:px-8"
                     >
                       {translations.ctaButton}
                       <ArrowRight className="ml-2 h-5 w-5" />

@@ -1412,7 +1412,7 @@
         "title": "Brendingiz reklama natijasini pasaytirayotgan bo'lishi mumkinmi?",
         "subtitle": "Nega reklama qilsangiz ham foyda kam? Har oy qancha pulni raqobatchilaringizga 'sovg'a' qilayotganingizni hisoblang.",
         "labels": {
-            "traffic": "Saytingizga kirayotgan potentsial mijozlar",
+            "traffic": "Biznesingizga kelayotgan potentsial mijozlar",
             "conversion": "Hozirgi sotuv konversiyasi (%)",
             "aov": "Bitta mijozdan keladigan o'rtacha foyda ($)",
             "traffic_unit": "ta odam",

@@ -143,7 +143,7 @@ const Stats = ({ dictionary }: { dictionary: StatsDictionary }) => {
   ];
 
   return (
-    <section className="bg-background py-24 sm:py-32 relative overflow-hidden">
+    <section className="bg-background py-14 sm:py-24 relative overflow-hidden">
       {/* Background Orbs */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 rounded-full blur-[120px]" />

@@ -29,7 +29,7 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
   const problems = translations.problems || [];
 
   return (
-    <section id="target-audience" className="py-24 sm:py-32 bg-slate-50 overflow-hidden">
+    <section id="target-audience" className="py-14 sm:py-24 bg-slate-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 sm:mb-24">
           <motion.h2 

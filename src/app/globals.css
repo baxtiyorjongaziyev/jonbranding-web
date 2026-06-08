@@ -5,20 +5,20 @@
 
 @layer base {
   :root {
-    /* Finch blue theme (white + electric blue) */
-    --background: 0 0% 100%;
-    --foreground: 240 14% 6%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 14% 6%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 14% 6%;
-    --primary: 240 91% 56%;
+    /* Atelier S-Tier Warm Paper System (Warm Beige & Cobalt/Terracotta) */
+    --background: 45 23% 92%;      /* #F2EFE6 - Warm paper beige */
+    --foreground: 225 20% 7%;      /* #0E1015 - Charcoal ink */
+    --card: 47 37% 97%;            /* #FBF9F2 - Soft cream card paper */
+    --card-foreground: 225 20% 7%;
+    --popover: 47 37% 97%;
+    --popover-foreground: 225 20% 7%;
+    --primary: 227 100% 55%;       /* #1B4DFF - Cobalt Blue */
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 33% 97%;
-    --secondary-foreground: 240 30% 12%;
-    --muted: 240 33% 97%;
-    --muted-foreground: 240 4% 45%;
-    --accent: 223 100% 59%;
+    --secondary: 45 21% 88%;       /* #E9E5D9 - Grayer paper */
+    --secondary-foreground: 225 20% 7%;
+    --muted: 45 10% 51%;           /* #8B8779 - Warm muted tone */
+    --muted-foreground: 225 10% 30%;
+    --accent: 17 64% 46%;          /* #C2552A - Terracotta */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -26,20 +26,20 @@
     --success-foreground: 142.1 76.2% 96.3%;
     --warning: 47.9 95.8% 53.1%;
     --warning-foreground: 47.9 95.8% 5.1%;
-    --info: 223 100% 59%;
+    --info: 227 100% 55%;
     --info-foreground: 0 0% 100%;
-    --border: 240 22% 93%;
-    --input: 240 22% 93%;
-    --ring: 240 91% 56%;
+    --border: 43 21% 80%;          /* #D8D2C2 - Hairline border */
+    --input: 43 21% 80%;
+    --ring: 227 100% 55%;
     --radius: 0.85rem;
-    --brand-ink: 240 16% 6%;
-    --brand-paper: 0 0% 100%;
-    --brand-mist: 240 30% 97%;
-    --brand-blue: 240 91% 56%;
-    --brand-cyan: 223 100% 59%;
-    --brand-lime: 232 97% 62%;
-    --brand-slate: 240 5% 42%;
-    --brand-line: 240 22% 92%;
+    --brand-ink: 225 20% 7%;       /* #0E1015 */
+    --brand-paper: 45 23% 92%;     /* #F2EFE6 */
+    --brand-mist: 47 37% 97%;      /* #FBF9F2 */
+    --brand-blue: 227 100% 55%;    /* Cobalt */
+    --brand-cyan: 17 64% 46%;      /* Terracotta */
+    --brand-lime: 227 100% 55%;
+    --brand-slate: 45 10% 51%;
+    --brand-line: 43 21% 80%;
     --font-inter: var(--font-hanken, "Hanken Grotesk"), "Aptos", "Segoe UI", sans-serif;
     --font-jakarta: var(--font-hanken, "Hanken Grotesk"), "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
     --finch-bg: #ffffff;
@@ -117,16 +117,37 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
   }
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   body {
-    @apply bg-brand-paper text-foreground overflow-x-hidden;
+    @apply bg-brand-paper text-foreground overflow-x-hidden relative;
     font-family: var(--font-inter), "Segoe UI", sans-serif;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    /* iOS momentum scroll */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent overscroll bounce on mobile */
+    overscroll-behavior-y: none;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.16;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .dark body::before {
+    mix-blend-mode: screen;
+    opacity: 0.08;
   }
   .skip-link {
     @apply fixed left-4 top-4 z-[9999] -translate-y-16 rounded-full bg-brand-ink px-4 py-3 text-sm font-bold text-white shadow-xl transition-transform duration-200 focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan;
@@ -142,6 +163,15 @@
   }
   h2 { @apply text-[1.5rem] sm:text-[2rem] lg:text-[2.75rem] font-black leading-tight; }
   h3 { @apply text-[1.25rem] sm:text-[1.5rem] lg:text-[2rem] font-bold; }
+
+  /* Mobile: ensure all interactive elements have minimum 44px touch target */
+  @media (max-width: 767px) {
+    button, a, [role="button"] {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+  }
 }
 
 @property --gradient-angle {
@@ -151,6 +181,7 @@
 }
 
 @layer utilities {
+
   .shadow-ocean {
     box-shadow: 0 10px 15px -3px hsl(var(--accent) / 0.2), 0 4px 6px -4px hsl(var(--accent) / 0.2);
     transition: box-shadow var(--transition-normal), transform var(--transition-normal);
@@ -333,11 +364,11 @@
   }
 
   .brand-badge {
-    @apply inline-flex items-center rounded-full border border-brand-line/80 bg-white/80 px-3 py-1 text-[11px] font-extrabold uppercase tracking-normal text-brand-blue;
+    @apply inline-flex items-center rounded-full border border-brand-line/80 bg-white/80 px-3 py-1 text-[13px] font-extrabold uppercase tracking-normal text-brand-blue;
   }
 
   .jb-eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-brand-line/80 bg-white/80 px-4 py-2 text-[11px] font-extrabold uppercase tracking-normal text-brand-blue shadow-sm;
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-line/80 bg-white/80 px-4 py-2 text-[13px] font-extrabold uppercase tracking-normal text-brand-blue shadow-sm;
   }
 
   .jb-dark-panel {
@@ -540,18 +571,18 @@
   width: max-content;
 }
 
-/* ── Premium Liquid Glass Header (White Glass) ── */
+/* ── Premium Liquid Glass Header (Atelier Warm Glass) ── */
 .liquid-glass-header {
-  background: rgba(255, 255, 255, 0.88) !important;
-  backdrop-filter: blur(40px) saturate(220%) !important;
-  -webkit-backdrop-filter: blur(40px) saturate(220%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  background: rgba(242, 239, 230, 0.90) !important;
+  backdrop-filter: blur(40px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(200%) !important;
+  border: 1px solid rgba(216, 210, 194, 0.55) !important;
   box-shadow: 
-    0 1px 2px rgba(0, 0, 0, 0.03),
-    0 12px 30px -10px rgba(0, 0, 0, 0.05),
-    0 4px 12px -4px rgba(0, 0, 0, 0.02),
-    inset 0 1px 1px rgba(255, 255, 255, 0.95),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.1) !important;
+    0 1px 2px rgba(14, 16, 21, 0.04),
+    0 12px 30px -10px rgba(14, 16, 21, 0.06),
+    0 4px 12px -4px rgba(14, 16, 21, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.15) !important;
   position: relative;
   isolation: isolate;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -592,4 +623,163 @@
   pointer-events: none;
   z-index: -1;
   opacity: 0.9;
+}
+
+/* ── Atelier Design Utilities ── */
+.serif-highlight {
+  font-family: var(--font-serif), 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.atelier-mono {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.atelier-hairline {
+  height: 1px;
+  background: hsl(var(--border));
+  opacity: 0.85;
+}
+
+/* Refined eyebrow using Atelier JetBrains Mono style */
+.jb-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+}
+
+.jb-eyebrow .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  animation: atelier-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes atelier-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.35); }
+}
+
+/* ── Mobile App UX Utilities ── */
+
+/* Safe area padding for iPhone notch & home indicator */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pb-safe-4 {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Horizontal scroll snap container */
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.scroll-snap-x::-webkit-scrollbar {
+  display: none;
+}
+.scroll-snap-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* Mobile card press effect */
+.mobile-press {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.mobile-press:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Swipeable card track */
+.swipe-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 1rem;
+  padding-inline: 1rem;
+}
+.swipe-track::-webkit-scrollbar {
+  display: none;
+}
+.swipe-card {
+  scroll-snap-align: start;
+  flex: 0 0 calc(88vw);
+  max-width: 360px;
+}
+
+/* Mobile floating action button */
+.mobile-fab {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
+  right: 1rem;
+  z-index: 39;
+  display: none;
+}
+@media (max-width: 767px) {
+  .mobile-fab {
+    display: flex;
+  }
+}
+
+/* Bottom nav clearance — ensures content isn't hidden behind mobile nav */
+.mobile-nav-clearance {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 5rem);
+}
+@media (min-width: 768px) {
+  .mobile-nav-clearance {
+    padding-bottom: 0;
+  }
+}
+
+/* App-style divider */
+.mobile-divider {
+  height: 1px;
+  background: hsl(var(--border));
+  opacity: 0.7;
+}
+
+/* Mobile section spacing — more compact than desktop */
+@media (max-width: 767px) {
+  .section-py {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+@media (min-width: 768px) {
+  .section-py {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* Gradient text helper */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
