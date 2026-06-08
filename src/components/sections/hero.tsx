@@ -20,6 +20,7 @@ type HeroDictionary = {
   auditScoreLabel?: string;
   auditSignals?: string[];
   showcaseTags?: string[];
+  mobileStats?: { val: string; label: string }[];
 };
 
 interface HeroProps {
@@ -42,6 +43,7 @@ function getHeroCopy(dictionary: HeroDictionary) {
     auditScoreLabel: dictionary.auditScoreLabel || '',
     auditSignals: dictionary.auditSignals?.length ? dictionary.auditSignals : [],
     showcaseTags: dictionary.showcaseTags?.length ? dictionary.showcaseTags : [],
+    mobileStats: dictionary.mobileStats?.length ? dictionary.mobileStats : [],
   };
 }
 
@@ -112,6 +114,29 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
             <p className="mt-5 max-w-2xl text-pretty text-[15px] leading-7 text-muted-foreground sm:mt-6 sm:text-lg sm:leading-8">
               {heroCopy.description}
             </p>
+
+            {/* Mobile-only: service chips */}
+            {heroCopy.showcaseTags.length > 0 && (
+              <div className="mt-4 flex gap-2 overflow-x-auto pb-1 sm:hidden" style={{ scrollbarWidth: 'none' }}>
+                {heroCopy.showcaseTags.map((tag) => (
+                  <span key={tag} className="flex shrink-0 items-center rounded-full border border-primary/25 bg-primary/8 px-3.5 py-1.5 text-[12px] font-bold text-primary whitespace-nowrap">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Mobile-only: stats grid */}
+            {heroCopy.mobileStats.length > 0 && (
+              <div className="mt-4 grid grid-cols-3 gap-2 sm:hidden">
+                {heroCopy.mobileStats.map((s) => (
+                  <div key={s.val} className="rounded-2xl border border-border bg-white px-2 py-3 text-center shadow-sm">
+                    <div className="text-[15px] font-extrabold text-primary">{s.val}</div>
+                    <div className="mt-0.5 text-[10px] font-medium leading-tight text-muted-foreground">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* CTA Buttons — stacked on mobile, row on sm+ */}
             <div className="mt-7 flex w-full flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
