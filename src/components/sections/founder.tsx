@@ -20,7 +20,6 @@ import { motion } from 'framer-motion';
 import { BrandSection } from '@/components/ui/design-system';
 import DOMPurify from 'isomorphic-dompurify';
 import type { FounderDictionary } from '@/lib/types/dictionary';
-import { renderHeadline } from '@/lib/headline';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
@@ -63,7 +62,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
         variants={containerVariants}
         initial="visible"
         animate="visible"
-        className="container relative z-10 mx-auto px-4"
+        className="container relative z-10 mx-auto px-4 lg:h-full lg:flex lg:items-center"
       >
         {/* 2-column grid: image left, content right */}
         <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 lg:gap-14 xl:gap-20">

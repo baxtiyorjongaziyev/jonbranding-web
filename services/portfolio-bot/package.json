@@ -1,0 +1,25 @@
+{
+  "name": "jonbranding-portfolio-bot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node --esm src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "auth": "ts-node --esm src/auth.ts"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.22.0",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "form-data": "^4.0.1",
+    "googleapis": "^140.0.1",
+    "telegram": "^2.26.0",
+    "input": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

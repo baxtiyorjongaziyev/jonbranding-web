@@ -25,7 +25,7 @@ interface PortfolioListClientProps {
   lang: string;
   dictionary: {
     all: string;
-    brandStrategy: string;
+    brandStrategy?: string;
     logoDesign: string;
     packaging: string;
     naming: string;
@@ -34,7 +34,6 @@ interface PortfolioListClientProps {
   };
 }
 
-// 🌟 Ultra-Premium 3D Spotlight Card Component
 function SpotlightCard({ children, className = '', ...props }: any) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
@@ -78,19 +77,17 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
 
   const filterOptions = [
     { value: 'all', label: dictionary.all },
-    { value: 'brand-strategy', label: dictionary.brandStrategy },
     { value: 'logo-design', label: dictionary.logoDesign },
     { value: 'packaging', label: dictionary.packaging },
     { value: 'naming', label: dictionary.naming },
   ];
 
-  const filteredProjects = selectedCategory === 'all' 
-    ? projects 
+  const filteredProjects = selectedCategory === 'all'
+    ? projects
     : projects.filter(p => p.category === selectedCategory);
 
   return (
     <div className="space-y-16">
-      {/* 🌟 Category Filter Pills (iOS segment slider style) */}
       <div className="relative flex flex-wrap p-1.5 bg-[#0e1424]/65 backdrop-blur-md border border-white/5 rounded-full max-w-3xl mx-auto z-10 shadow-inner">
         {filterOptions.map((opt) => {
           const isActive = selectedCategory === opt.value;
@@ -115,16 +112,10 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
         })}
       </div>
 
-      {/* 🌟 Masonry Asymmetrical Grid Layout */}
-      <motion.div 
-        layout 
-        className="space-y-12 mt-12"
-      >
+      <motion.div layout className="space-y-12 mt-12">
         <AnimatePresence mode="popLayout">
           {filteredProjects.length > 0 && (
             <div className="grid grid-cols-1 gap-12">
-              
-              {/* 🏆 Featured Case Study (First project spans full width in elegant split bento format) */}
               {filteredProjects[0] && (
                 <motion.div
                   layout
@@ -136,8 +127,6 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                 >
                   <SpotlightCard className="group">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-                      
-                      {/* Left: Cinematic Image Box */}
                       <div className="relative h-80 sm:h-[450px] lg:col-span-7 overflow-hidden select-none">
                         <Image
                           src={filteredProjects[0].coverImage}
@@ -147,15 +136,11 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                           className="object-cover group-hover:scale-105 transition-transform duration-700"
                           priority
                         />
-                        
-                        {/* Glow tag overlay */}
                         <div className="absolute top-6 left-6 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-xs font-bold text-blue-400">
                           <Sparkles className="w-4 h-4" />
                           <span>{filteredProjects[0].categoryLabel || filteredProjects[0].category}</span>
                         </div>
                       </div>
-
-                      {/* Right: Splitted Content Info */}
                       <div className="p-8 sm:p-12 lg:col-span-5 flex flex-col justify-between space-y-8">
                         <div className="space-y-4">
                           <div className="flex items-center gap-2">
@@ -164,143 +149,87 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                               {filteredProjects[0].client}
                             </span>
                           </div>
-                          
                           <h3 className="text-3xl sm:text-4xl font-black leading-tight text-white group-hover:text-blue-400 transition-colors">
                             {filteredProjects[0].title}
                           </h3>
-                          
                           <p className="text-sm sm:text-base text-gray-400 leading-relaxed font-medium">
                             {filteredProjects[0].description}
                           </p>
                         </div>
-
-                        {/* Bento Metrics block */}
                         {filteredProjects[0].results && filteredProjects[0].results.length > 0 && (
                           <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5 space-y-3.5 shadow-inner">
                             <div className="flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-widest">
                               <Trophy className="w-4 h-4" />
                               <span>{dictionary.resultsTitle}</span>
                             </div>
-                            
-                            <div className="grid grid-cols-3 gap-4">
-                              {filteredProjects[0].results.slice(0, 3).map((res, i) => (
-                                <div key={i} className="space-y-1">
-                                  <p className="text-xl sm:text-2xl font-black text-white leading-none">
-                                    {res.value}
-                                  </p>
-                                  <p className="text-[10px] font-bold text-gray-500 leading-tight uppercase tracking-wider line-clamp-2">
-                                    {res.metric}
-                                  </p>
+                            <div className="grid grid-cols-2 gap-3">
+                              {filteredProjects[0].results.slice(0, 4).map((result, i) => (
+                                <div key={i} className="text-center p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                                  <div className="text-xl font-black text-white">{result.value}</div>
+                                  <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wide mt-0.5">{result.metric}</div>
                                 </div>
                               ))}
                             </div>
                           </div>
                         )}
-
-                        <div className="pt-2">
-                          <Button 
-                            asChild
-                            className="w-full h-14 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base rounded-full shadow-lg shadow-blue-900/20 group/btn transition-all duration-300"
-                          >
-                            <Link href={`/${lang}/portfolio/${filteredProjects[0].slug}`}>
-                              {dictionary.viewCase}
-                              <ArrowRight className="w-5 h-5 ml-2 group-hover/btn:translate-x-1.5 transition-transform" />
-                            </Link>
+                        <Link href={`/${lang}/portfolio/${filteredProjects[0].slug}`}>
+                          <Button className="w-full bg-blue-600 hover:bg-blue-500 text-white rounded-2xl py-4 font-bold text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25">
+                            {dictionary.viewCase}
+                            <ArrowRight className="ml-2 h-4 w-4" />
                           </Button>
-                        </div>
+                        </Link>
                       </div>
-
                     </div>
                   </SpotlightCard>
                 </motion.div>
               )}
 
-              {/* 🌟 Bottom Grid: Side-by-Side Asymmetric Showcase for subsequent projects */}
               {filteredProjects.length > 1 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-                  {filteredProjects.slice(1).map((project) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredProjects.slice(1).map((project, index) => (
                     <motion.div
                       layout
                       key={project._id}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 20 }}
+                      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.23, 1, 0.32, 1] }}
                     >
                       <SpotlightCard className="group h-full">
-                        {/* Image Box */}
-                        <div className="relative h-64 md:h-72 w-full overflow-hidden select-none">
+                        <div className="relative h-56 overflow-hidden select-none">
                           <Image
                             src={project.coverImage}
                             alt={project.title}
                             fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             className="object-cover group-hover:scale-105 transition-transform duration-700"
                           />
-                          
-                          {/* Tag overlay */}
-                          <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-xs font-bold text-blue-400">
-                            <Sparkles className="w-3.5 h-3.5" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1d]/80 via-transparent to-transparent" />
+                          <div className="absolute bottom-3 left-4 inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-bold text-blue-400">
+                            <Star className="w-3 h-3" />
                             <span>{project.categoryLabel || project.category}</span>
                           </div>
                         </div>
-
-                        {/* Contents details */}
-                        <div className="p-6 md:p-8 flex flex-col flex-grow space-y-6">
-                          <div className="space-y-2">
-                            <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                              {project.client}
-                            </span>
-                            <h3 className="text-2xl font-black leading-tight text-white group-hover:text-blue-400 transition-colors">
+                        <div className="p-6 flex flex-col flex-grow justify-between space-y-4">
+                          <div>
+                            <p className="text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">{project.client}</p>
+                            <h3 className="text-lg font-black leading-tight text-white group-hover:text-blue-400 transition-colors line-clamp-2">
                               {project.title}
                             </h3>
+                            <p className="mt-2 text-sm text-gray-400 line-clamp-2 leading-relaxed">{project.description}</p>
                           </div>
-
-                          <p className="text-sm sm:text-base text-gray-400 leading-relaxed font-medium flex-grow">
-                            {project.description}
-                          </p>
-
-                          {/* Bento results */}
-                          {project.results && project.results.length > 0 && (
-                            <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4 space-y-3 shadow-inner">
-                              <div className="flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-widest">
-                                <Trophy className="w-3.5 h-3.5" />
-                                <span>{dictionary.resultsTitle}</span>
-                              </div>
-                              
-                              <div className="grid grid-cols-3 gap-3">
-                                {project.results.slice(0, 3).map((res, i) => (
-                                  <div key={i} className="space-y-1">
-                                    <p className="text-lg font-black text-white leading-none">
-                                      {res.value}
-                                    </p>
-                                    <p className="text-[10px] font-bold text-gray-500 leading-tight uppercase tracking-wider line-clamp-2">
-                                      {res.metric}
-                                    </p>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-
-                          <div className="pt-2">
-                            <Button 
-                              asChild
-                              className="w-full h-14 bg-white/5 hover:bg-blue-600 text-white hover:text-white border border-white/10 hover:border-blue-600 font-bold text-base rounded-full group/btn transition-all duration-300"
-                            >
-                              <Link href={`/${lang}/portfolio/${project.slug}`}>
-                                {dictionary.viewCase}
-                                <ArrowRight className="w-5 h-5 ml-2 group-hover/btn:translate-x-1.5 transition-transform" />
-                              </Link>
+                          <Link href={`/${lang}/portfolio/${project.slug}`} className="block">
+                            <Button variant="outline" className="w-full border-white/10 text-gray-300 hover:border-blue-500/50 hover:text-blue-400 hover:bg-blue-500/5 rounded-xl transition-all duration-300 text-xs font-bold tracking-wide">
+                              {dictionary.viewCase}
+                              <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                             </Button>
-                          </div>
+                          </Link>
                         </div>
                       </SpotlightCard>
                     </motion.div>
                   ))}
                 </div>
               )}
-
             </div>
           )}
         </AnimatePresence>
