@@ -1,9 +1,10 @@
 'use client';
 
-import { type FC, useState, useCallback } from 'react';
+import { type FC, useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, CheckCircle2, ShieldCheck, Target, Star } from 'lucide-react';
 import ContactTriggerButton from '@/components/contact-trigger-button';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 type HeroDictionary = {
   agencyTagline?: string;
@@ -85,13 +86,25 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
     setSpot({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
   }, []);
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+
+  const blobY = useTransform(scrollYProgress, [0, 1], ['0%', '-40%']);
+  const blobScale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
+  const taglineY = useTransform(scrollYProgress, [0, 1], ['0%', '-25%']);
+  const titleY = useTransform(scrollYProgress, [0, 1], ['0%', '-18%']);
+  const descY = useTransform(scrollYProgress, [0, 1], ['0%', '-10%']);
+  const ctaY = useTransform(scrollYProgress, [0, 1], ['0%', '-6%']);
+  const panelY = useTransform(scrollYProgress, [0, 1], ['0%', '-8%']);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
   return (
-    <section className="relative isolate overflow-hidden bg-brand-paper text-foreground">
+    <section ref={sectionRef} className="relative isolate overflow-hidden bg-brand-paper text-foreground">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-brand-paper" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(20,20,45,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(20,20,45,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [mask-image:radial-gradient(ellipse_at_center,#000_35%,transparent_78%)]" />
-        <div className="absolute left-1/2 top-[-12%] h-[460px] w-[860px] -translate-x-1/2 rounded-full bg-primary/10 blur-[130px]" />
+        <motion.div style={{ y: blobY, scale: blobScale }} className="absolute left-1/2 top-[-12%] h-[460px] w-[860px] -translate-x-1/2 rounded-full bg-primary/10 blur-[130px]" />
         <div className="absolute inset-0 transition-opacity duration-500" style={{ background: `radial-gradient(700px circle at ${spot.x}% ${spot.y}%, hsl(238 72% 50% / 0.08), transparent 55%)` }} />
       </div>
 
@@ -99,21 +112,21 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
         <div className="grid w-full min-w-0 grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(400px,0.92fr)] lg:gap-14 xl:gap-20">
 
           {/* Left: Text Content */}
-          <div className="w-full min-w-0">
+          <motion.div style={{ opacity: contentOpacity }} className="w-full min-w-0">
             {heroCopy.agencyTagline && (
-              <div className="mb-4 inline-flex items-center gap-3 border-l border-primary/50 pl-4 text-[11px] font-bold uppercase tracking-normal text-muted-foreground">
+              <motion.div style={{ y: taglineY }} className="mb-4 inline-flex items-center gap-3 border-l border-primary/50 pl-4 text-[11px] font-bold uppercase tracking-normal text-muted-foreground">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 {heroCopy.agencyTagline}
-              </div>
+              </motion.div>
             )}
 
-            <h1 className="max-w-[21rem] text-balance text-[2.25rem] font-semibold leading-[1.05] tracking-tight text-foreground [overflow-wrap:normal] sm:max-w-[780px] sm:text-5xl sm:font-light sm:leading-[0.98] lg:text-[4.35rem] xl:text-[4.85rem]">
+            <motion.h1 style={{ y: titleY }} className="max-w-[21rem] text-balance text-[2.25rem] font-semibold leading-[1.05] tracking-tight text-foreground [overflow-wrap:normal] sm:max-w-[780px] sm:text-5xl sm:font-light sm:leading-[0.98] lg:text-[4.35rem] xl:text-[4.85rem]">
               {renderHeadline(heroCopy.title)}
-            </h1>
+            </motion.h1>
 
-            <p className="mt-5 max-w-2xl text-pretty text-[15px] leading-7 text-muted-foreground sm:mt-6 sm:text-lg sm:leading-8">
+            <motion.p style={{ y: descY }} className="mt-5 max-w-2xl text-pretty text-[15px] leading-7 text-muted-foreground sm:mt-6 sm:text-lg sm:leading-8">
               {heroCopy.description}
-            </p>
+            </motion.p>
 
             {/* Mobile-only: service chips */}
             {heroCopy.showcaseTags.length > 0 && (
@@ -139,7 +152,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
             )}
 
             {/* CTA Buttons — stacked on mobile, row on sm+ */}
-            <div className="mt-7 flex w-full flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
+            <motion.div style={{ y: ctaY }} className="mt-7 flex w-full flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
               <ContactTriggerButton
                 section="hero"
                 ctaText={heroCopy.cta}
@@ -158,7 +171,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
               >
                 {heroCopy.ctaSecondary}
               </Link>
-            </div>
+            </motion.div>
 
             {/* Proof items — horizontal scroll on mobile */}
             {heroCopy.proofItems.length > 0 && (
@@ -207,10 +220,10 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
                 <span className="text-[12px] font-semibold text-muted-foreground">150+ loyiha</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right: Audit Panel — hidden on mobile, shown sm+ */}
-          <div className="relative mx-auto hidden w-full min-w-0 max-w-[540px] sm:block lg:mr-0">
+          <motion.div style={{ y: panelY, opacity: contentOpacity }} className="relative mx-auto hidden w-full min-w-0 max-w-[540px] sm:block lg:mr-0">
             <div className="rounded-[2rem] border border-border bg-secondary p-2 shadow-[0_40px_120px_-60px_rgba(20,20,60,0.45)]">
               <div className="rounded-[1.55rem] border border-border bg-white p-5 shadow-[0_1px_0_rgba(20,20,60,0.04)] sm:p-7">
                 <AuditPanel copy={heroCopy} />
@@ -241,7 +254,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
