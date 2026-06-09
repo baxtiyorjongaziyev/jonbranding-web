@@ -81,28 +81,32 @@ const QueueStatus: FC<QueueStatusProps> = ({ onCtaClick }) => {
             <div className="absolute inset-0 z-0 opacity-40">
                 <div className="absolute inset-0 bg-gradient-to-br from-dark-blue to-blue-900" />
                 <AnimatePresence>
-                     <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1 }}
-                        className="absolute inset-0 filter blur-3xl"
-                    >
-                        <LiquidBlob 
-                            className="bg-brand-blue"
-                            style={{ top: '5%', left: '10%', width: 300, height: 300, borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }} 
-                            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-                        />
-                         <LiquidBlob 
-                            className="bg-primary" 
-                            style={{ bottom: '10%', right: '15%', width: 350, height: 350, borderRadius: '80% 20% 60% 40% / 50% 70% 30% 50%' }} 
-                            transition={{ duration: 35, repeat: Infinity, ease: 'linear', delay: 5 }}
-                        />
-                         <LiquidBlob 
-                            className="bg-sky-blue" 
-                            style={{ top: '25%', right: '5%', width: 250, height: 250, borderRadius: '30% 70% 50% 50% / 60% 40% 60% 40%' }} 
-                            transition={{ duration: 40, repeat: Infinity, ease: 'linear', delay: 10 }}
-                        />
-                    </motion.div>
+                    {isInView && (
+                        <motion.div
+                            key="liquid-blobs"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 1 }}
+                            className="absolute inset-0 filter blur-3xl"
+                        >
+                            <LiquidBlob
+                                className="bg-brand-blue"
+                                style={{ top: '5%', left: '10%', width: 300, height: 300, borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }}
+                                transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+                            />
+                             <LiquidBlob
+                                className="bg-primary"
+                                style={{ bottom: '10%', right: '15%', width: 350, height: 350, borderRadius: '80% 20% 60% 40% / 50% 70% 30% 50%' }}
+                                transition={{ duration: 35, repeat: Infinity, ease: 'linear', delay: 5 }}
+                            />
+                             <LiquidBlob
+                                className="bg-sky-blue"
+                                style={{ top: '25%', right: '5%', width: 250, height: 250, borderRadius: '30% 70% 50% 50% / 60% 40% 60% 40%' }}
+                                transition={{ duration: 40, repeat: Infinity, ease: 'linear', delay: 10 }}
+                            />
+                        </motion.div>
+                    )}
                 </AnimatePresence>
             </div>
 
