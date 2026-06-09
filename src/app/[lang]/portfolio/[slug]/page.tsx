@@ -77,6 +77,9 @@ export default async function PortfolioDetailPage(props: Props) {
               ? '与我们联系并预订免费的品牌审计，以测试您的品牌在市场上的实力。'
               : 'Get in touch with us and book a Free Brand Audit to discover your brand\'s true potential in the market.',
         ctaBtn: safeLang === 'uz' ? 'Bepul Brand Audit Olish' : safeLang === 'ru' ? 'Получить Бесплатный Аудит' : safeLang === 'zh' ? '获取免费品牌审计' : 'Get Free Brand Audit',
+        galleryClose: safeLang === 'uz' ? 'Yopish' : safeLang === 'ru' ? 'Закрыть' : safeLang === 'zh' ? '关闭' : 'Close',
+        galleryPrev: safeLang === 'uz' ? 'Oldingi' : safeLang === 'ru' ? 'Предыдущий' : safeLang === 'zh' ? '上一个' : 'Previous',
+        galleryNext: safeLang === 'uz' ? 'Keyingi' : safeLang === 'ru' ? 'Следующий' : safeLang === 'zh' ? '下一个' : 'Next',
       }}
     />
   );
