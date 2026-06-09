@@ -196,8 +196,8 @@
     },
     "results": {
         "badge": "РЕЗУЛЬТАТ КЛИЕНТА",
-        "title": "Результаты наших клиентов",
-        "subtitle": "Мы создаем не просто красивый дизайн, а стратегические решения для роста вашего бизнеса.",
+        "title": "Что изменилось после Jon.Branding. Цифры говорят сами.",
+        "subtitle": "Название, логотип, упаковка и коммуникации должны работать как единая система. Мы её выстраиваем.",
         "items": [
             {
                 "impact": "60%+",
@@ -352,7 +352,7 @@
     },
     "servicesHero": {
         "title": "Услуги, которые усилят ваш брендинг",
-        "subtitle": "Гарантированный результат и четкое решение для вашего бизнеса",
+        "subtitle": "Каждая услуга с одной целью: чтобы покупатели выбрали вас.",
         "cta": "Посмотреть цены"
     },
     "serviceSections": {
@@ -403,8 +403,8 @@
     },
     "trustedBy": {
         "eyebrow": "Selected clients",
-        "title": "Businesses trust us with credibility, not decoration.",
-        "subtitle": "We help brands look more valuable, clearer, and easier to choose.",
+        "title": "250+ бизнесов обратились в Jon.Branding, чтобы выглядеть убедительно на рынке.",
+        "subtitle": "Местные бизнесы работают с нами, чтобы выглядеть профессионально и вызывать доверие у покупателей.",
         "metrics": [
             {
                 "value": "150+",
@@ -426,7 +426,7 @@
     },
     "whyUs": {
         "title": "Почему именно мы?",
-        "subtitle": "Мы не просто даем обещания. Мы создаем реальную ценность для вашего бренда через системный подход.",
+        "subtitle": "Каждое решение основано на анализе рынка и психологии покупателей. Не красиво, а работающее.",
         "values": [
             {
                 "title": "Стратегический подход",
@@ -468,8 +468,8 @@
     },
     "beforeAfter": {
         "eyebrow": "Proof",
-        "title": "Branding proves value before the sales call.",
-        "subtitle": "The audit answers one practical question: does the buyer understand, trust, and have a reason to choose you?",
+        "title": "Когда бренд меняется, меняются продажи. Доказательства:",
+        "subtitle": "Аудит отвечает на один вопрос: когда покупатель видит вас, есть ли у него причина выбрать вас за первые 10 секунд?",
         "ctaTitle": "Ready to clarify your brand?",
         "ctaDesc": "We start with a brand audit and identify the change with the highest impact.",
         "ctaButton": "Get the free Brand Audit",
@@ -498,7 +498,7 @@
     },
     "gallery": {
         "title": "Примеры наших работ",
-        "subtitle": "Посмотрите, как созданные нами бренды выделяются в своей нише."
+        "subtitle": "Вот как выглядят бренды, которые выделяются в своей отрасли."
     },
     "founder": {
         "title": "I build trust systems for business, not decoration.",
@@ -532,7 +532,7 @@
         ]
     },
     "process": {
-        "title": "From free audit to a premium brand system.",
+        "title": "От аудита до готового бренда: как мы работаем.",
         "subtitle": "The audit gives the first diagnosis. If we continue, the work becomes strategy, visual system, and rollout.",
         "phases": [
             {
@@ -598,7 +598,7 @@
         ]
     },
     "leadMagnet": {
-        "title": "Выведите свой бренд на новый уровень",
+        "title": "Чего не хватает вашему бренду, чтобы убедить покупателей?",
         "subtitle": "Не знаете, с чего начать работу с нами? Мы подготовили для вас несколько бесплатных и полезных ресурсов. Изучите мир брендинга и сделайте первый шаг.",
         "magnets": [
             {
@@ -688,7 +688,7 @@
     },
     "faq": {
         "title": "Часто задаваемые вопросы",
-        "subtitle": "Ответы на самые распространенные вопросы о процессе брендинга, ценах и других темах.",
+        "subtitle": "Процесс, стоимость, сроки и чего ожидать.",
         "faqItems": [
             {
                 "question": "В чем разница между хорошим брендингом и просто красивым логотипом?",
@@ -1225,7 +1225,7 @@
         "tooltip": "Сначала отмените один"
     },
     "opportunityCalculator": {
-        "title": "Ваш бренд — не 'Дырявое Ведро'?",
+        "title": "Ваш бренд делает рекламу бесполезной? Проверьте прямо сейчас.",
         "subtitle": "Почему реклама идет, а деньги утекают? Посчитайте в цифрах.",
         "labels": {
             "traffic": "Количество людей, зашедших на сайт",
