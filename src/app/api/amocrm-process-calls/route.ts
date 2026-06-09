@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
 import { getValidAccessToken } from '@/lib/amocrm-token';
 import { analyzeCallAudio } from '@/lib/gemini';
+import { secureCompare } from '@/lib/utils';
 
 const TOKENS_DOC = 'amocrm/website_tokens';
 const subdomain = 'jonbrandingagency';
 
 function cleanSecret(value: string | undefined) {
-  return String(value || '').replace(/^﻿/, '').trim();
+  return String(value || '')
+    .replace(/^﻿/, '')
+    .trim();
 }
 
 export async function GET(request: Request) {
@@ -24,7 +27,7 @@ async function handleCallProcessing(request: Request) {
     const configuredSecret = cleanSecret(process.env.AMOCRM_CRON_SECRET);
 
     // 1. Verify cron secret to protect the endpoint
-    if (!configuredSecret || secret !== configuredSecret) {
+    if (!configuredSecret || !secret || !secureCompare(secret, configuredSecret)) {
       return NextResponse.json({ error: 'Unauthorized secret key' }, { status: 401 });
     }
 
@@ -36,13 +39,19 @@ async function handleCallProcessing(request: Request) {
       accessToken = await getValidAccessToken();
     } catch (tokenError: any) {
       console.error('Firestore token fetch failed for call processing:', tokenError);
-      return NextResponse.json({ error: 'Failed to retrieve AmoCRM token from Firestore' }, { status: 500 });
+      return NextResponse.json(
+        { error: 'Failed to retrieve AmoCRM token from Firestore' },
+        { status: 500 }
+      );
     }
 
     // 3. Fetch latest 15 leads with contacts embedded
-    const leadsRes = await fetch(`https://${subdomain}.amocrm.ru/api/v4/leads?limit=15&with=contacts`, {
-      headers: { 'Authorization': `Bearer ${accessToken}` }
-    });
+    const leadsRes = await fetch(
+      `https://${subdomain}.amocrm.ru/api/v4/leads?limit=15&with=contacts`,
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
 
     if (leadsRes.status === 204) {
       return NextResponse.json({ message: 'No leads found to process' }, { status: 200 });
@@ -50,7 +59,10 @@ async function handleCallProcessing(request: Request) {
 
     if (!leadsRes.ok) {
       const errText = await leadsRes.text();
-      return NextResponse.json({ error: `AmoCRM leads API failed: ${errText}` }, { status: leadsRes.status });
+      return NextResponse.json(
+        { error: `AmoCRM leads API failed: ${errText}` },
+        { status: leadsRes.status }
+      );
     }
 
     const leadsData = await leadsRes.json();
@@ -64,15 +76,22 @@ async function handleCallProcessing(request: Request) {
       let callNotes: any[] = [];
       let hasSummaryAlready = false;
 
-      const leadNotesRes = await fetch(`https://${subdomain}.amocrm.ru/api/v4/leads/${lead.id}/notes`, {
-        headers: { 'Authorization': `Bearer ${accessToken}` }
-      });
+      const leadNotesRes = await fetch(
+        `https://${subdomain}.amocrm.ru/api/v4/leads/${lead.id}/notes`,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
 
       if (leadNotesRes.status === 200) {
         const leadNotesData = await leadNotesRes.json();
         const notes = leadNotesData._embedded?.notes || [];
         for (const note of notes) {
-          if (note.note_type === 'common' && note.params?.text && note.params.text.includes('📞 MUHOKAMA XULOSASI')) {
+          if (
+            note.note_type === 'common' &&
+            note.params?.text &&
+            note.params.text.includes('📞 MUHOKAMA XULOSASI')
+          ) {
             hasSummaryAlready = true;
             break;
           }
@@ -85,21 +104,27 @@ async function handleCallProcessing(request: Request) {
       }
 
       for (const contact of contacts) {
-        const contactNotesRes = await fetch(`https://${subdomain}.amocrm.ru/api/v4/contacts/${contact.id}/notes`, {
-          headers: { 'Authorization': `Bearer ${accessToken}` }
-        });
+        const contactNotesRes = await fetch(
+          `https://${subdomain}.amocrm.ru/api/v4/contacts/${contact.id}/notes`,
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        );
 
         if (contactNotesRes.status === 200) {
           const notesData = await contactNotesRes.json();
           const notes = notesData._embedded?.notes || [];
           for (const note of notes) {
-            if ((note.note_type === 'call_in' || note.note_type === 'call_out') && note.params?.link) {
+            if (
+              (note.note_type === 'call_in' || note.note_type === 'call_out') &&
+              note.params?.link
+            ) {
               callNotes.push({
                 noteId: note.id,
                 phone: note.params.phone,
                 duration: note.params.duration,
                 direction: note.note_type === 'call_in' ? 'Kiruvchi' : 'Chiquvchi',
-                link: note.params.link
+                link: note.params.link,
               });
             }
           }
@@ -110,7 +135,9 @@ async function handleCallProcessing(request: Request) {
         continue;
       }
 
-      console.log(`Lead ID ${lead.id} ("${lead.name}") has ${callNotes.length} call recording(s). Processing...`);
+      console.log(
+        `Lead ID ${lead.id} ("${lead.name}") has ${callNotes.length} call recording(s). Processing...`
+      );
 
       const latestCall = callNotes[callNotes.length - 1];
 
@@ -126,38 +153,41 @@ async function handleCallProcessing(request: Request) {
         console.log(`Sending call recording to Gemini 1.5 Flash for Lead ID ${lead.id}...`);
         const analysis = await analyzeCallAudio(audioBuffer, 'audio/mp3');
 
-        console.log(`Gemini analysis completed for Lead ID ${lead.id}. Category: ${analysis.category}`);
+        console.log(
+          `Gemini analysis completed for Lead ID ${lead.id}. Category: ${analysis.category}`
+        );
 
         const noteText = `📞 MUHOKAMA XULOSASI (${analysis.category}):\n\n${analysis.summary}\n\n📝 TO'LIQ TRANSKRIPT:\n"""\n${analysis.transcript}\n"""\n\n📌 Tahlil qilingan sana: ${new Date().toLocaleString('uz-UZ')}`;
 
-        const noteWriteRes = await fetch(`https://${subdomain}.amocrm.ru/api/v4/leads/${lead.id}/notes`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify([
-            {
-              note_type: 'common',
-              params: {
-                text: noteText
-              }
-            }
-          ])
-        });
+        const noteWriteRes = await fetch(
+          `https://${subdomain}.amocrm.ru/api/v4/leads/${lead.id}/notes`,
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify([
+              {
+                note_type: 'common',
+                params: {
+                  text: noteText,
+                },
+              },
+            ]),
+          }
+        );
 
         const tagUpdateRes = await fetch(`https://${subdomain}.amocrm.ru/api/v4/leads/${lead.id}`, {
           method: 'PATCH',
           headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             id: lead.id,
-            tags_to_add: [
-              { name: analysis.category }
-            ]
-          })
+            tags_to_add: [{ name: analysis.category }],
+          }),
         });
 
         processedLeads.push({
@@ -165,22 +195,23 @@ async function handleCallProcessing(request: Request) {
           leadName: lead.name,
           category: analysis.category,
           noteStatus: noteWriteRes.status,
-          tagStatus: tagUpdateRes.status
+          tagStatus: tagUpdateRes.status,
         });
 
         console.log(`✅ Lead ID ${lead.id} processed successfully!`);
-
       } catch (processingError: any) {
         console.error(`Error processing call for Lead ID ${lead.id}:`, processingError.message);
       }
     }
 
-    return NextResponse.json({
-      message: 'Calls analysis process completed',
-      processedLeadsCount: processedLeads.length,
-      processedLeads
-    }, { status: 200 });
-
+    return NextResponse.json(
+      {
+        message: 'Calls analysis process completed',
+        processedLeadsCount: processedLeads.length,
+        processedLeads,
+      },
+      { status: 200 }
+    );
   } catch (error: any) {
     console.error('Call processing fatal error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
