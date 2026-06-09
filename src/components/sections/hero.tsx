@@ -116,7 +116,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
                 ctaText={heroCopy.cta}
                 size="lg"
                 showArrow={false}
-                className="group h-14 w-full justify-between rounded-full bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] py-2 pl-6 pr-2 text-[15px] font-extrabold text-white shadow-[0_26px_80px_-30px_rgba(44,43,245,0.85)] transition-[background-color,color,box-shadow,transform] duration-300 hover:shadow-[0_30px_90px_-26px_rgba(44,43,245,0.95)] active:scale-[0.98] sm:h-16 sm:w-auto sm:min-w-[260px] sm:text-base"
+                className="group h-14 w-full justify-between rounded-full bg-[linear-gradient(135deg,#4448e8_0%,#2d31d4_100%)] py-2 pl-6 pr-2 text-[15px] font-extrabold text-white shadow-[0_26px_80px_-30px_rgba(68,72,232,0.85)] transition-[background-color,color,box-shadow,transform] duration-300 hover:shadow-[0_30px_90px_-26px_rgba(68,72,232,0.95)] active:scale-[0.98] sm:h-16 sm:w-auto sm:min-w-[260px] sm:text-base"
               >
                 <span>{heroCopy.cta}</span>
                 <span className="ml-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-12 sm:w-12">
@@ -195,7 +195,7 @@ function AuditPanel({ copy }: { copy: ReturnType<typeof getHeroCopy> }) {
           </h2>
           <p className="mt-3 max-w-sm text-sm leading-7 text-muted-foreground">{copy.auditSubtitle}</p>
         </div>
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] text-sm font-extrabold text-white shadow-[0_18px_40px_-18px_rgba(44,43,245,0.8)]">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4448e8_0%,#2d31d4_100%)] text-sm font-extrabold text-white shadow-[0_18px_40px_-18px_rgba(68,72,232,0.8)]">
           {copy.auditScore}
         </div>
       </div>

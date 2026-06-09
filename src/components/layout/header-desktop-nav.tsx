@@ -126,7 +126,7 @@ export function DesktopNav({
   settings,
 }: DesktopNavProps) {
   const navTextClass = useDarkHeaderText
-    ? 'text-[#23232c] hover:bg-[#eceeff] hover:text-[#2c2bf5]'
+    ? 'text-[#23232c] hover:bg-[#eceeff] hover:text-[#4448e8]'
     : 'text-white/88 hover:bg-white/10 hover:text-white';
 
   return (
@@ -199,10 +199,10 @@ export function DesktopNav({
             <Button
               onClick={onContactClick}
               className={cn(
-                'h-11 rounded-full px-3 text-xs font-extrabold uppercase tracking-[0.04em] shadow-[0_14px_32px_-18px_rgba(44,43,245,0.85)] transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.98] xl:px-6 xl:text-sm shrink-0 whitespace-nowrap',
+                'h-11 rounded-full px-3 text-xs font-extrabold uppercase tracking-[0.04em] shadow-[0_14px_32px_-18px_rgba(68,72,232,0.85)] transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.98] xl:px-6 xl:text-sm shrink-0 whitespace-nowrap',
                 scrolled
-                  ? 'bg-[#2c2bf5] text-white hover:bg-[#1b18c2] shadow-[0_10px_25px_rgba(44,43,245,0.3)]'
-                  : 'bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] text-white hover:shadow-[0_18px_38px_-16px_rgba(44,43,245,0.9)]'
+                  ? 'bg-[#4448e8] text-white hover:bg-[#2d31d4] shadow-[0_10px_25px_rgba(68,72,232,0.3)]'
+                  : 'bg-[linear-gradient(135deg,#4448e8_0%,#2d31d4_100%)] text-white hover:shadow-[0_18px_38px_-16px_rgba(68,72,232,0.9)]'
               )}
               aria-label={dictionary.free_consultation}
             >

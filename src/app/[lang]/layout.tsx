@@ -30,7 +30,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: 'cover',
-  themeColor: '#2c2bf5',
+  themeColor: '#4448e8',
 };
 
 const localeUrls = {

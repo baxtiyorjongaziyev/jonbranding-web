@@ -17,6 +17,11 @@ interface MobileNavBarProps {
     ai?: string;
     consultation_short?: string;
   };
+  settings?: {
+    phone?: string;
+    telegramPersonal?: string;
+    telegramChannel?: string;
+  };
 }
 
 const NAV_SPRING = { type: 'spring', stiffness: 420, damping: 36, mass: 0.8 };
