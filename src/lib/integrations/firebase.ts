@@ -21,6 +21,7 @@ export function getDb() {
   } else {
     app = getApps()[0];
   }
-  const dbId = process.env.FIREBASE_DATABASE_ID || 'ai-studio-cab24ca1-84fa-4f82-b5cb-5ab2ebac8a44';
+  const dbId = process.env.FIREBASE_DATABASE_ID;
+  if (!dbId) throw new Error('FIREBASE_DATABASE_ID is not set');
   return getFirestore(app, dbId);
 }

@@ -19,8 +19,8 @@ export async function POST(request: Request) {
 
 async function handleCallProcessing(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const secret = searchParams.get('secret');
+    const authHeader = request.headers.get('authorization') || '';
+    const secret = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : authHeader;
     const configuredSecret = cleanSecret(process.env.AMOCRM_CRON_SECRET);
 
     // 1. Verify cron secret to protect the endpoint
