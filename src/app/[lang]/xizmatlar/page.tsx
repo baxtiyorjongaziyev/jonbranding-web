@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import XizmatlarClient from './xizmatlar-client';
 
@@ -53,12 +54,34 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: Loc
   };
 }
 
+const breadcrumbLabels: Record<Locale, { home: string; services: string }> = {
+  uz: { home: 'Bosh sahifa', services: 'Xizmatlar' },
+  ru: { home: 'Главная', services: 'Услуги' },
+  en: { home: 'Home', services: 'Services' },
+  zh: { home: '首页', services: '服务' },
+};
+
 const XizmatlarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
     const { lang } = await props.params;
     const dictionary = await getDictionary(lang);
+    const bl = breadcrumbLabels[lang] ?? breadcrumbLabels.uz;
+
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: bl.home, item: `${BASE_URL}/${lang}` },
+        { '@type': 'ListItem', position: 2, name: bl.services, item: `${BASE_URL}/${lang}/xizmatlar` },
+      ],
+    };
 
     return (
       <main className="flex-grow">
+          <Script
+            id="json-ld-breadcrumb-xizmatlar"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+          />
           <XizmatlarClient lang={lang} dictionary={dictionary} />
       </main>
     );
