@@ -161,32 +161,32 @@
             "Make customers |fall in love with you|. Again and again.",
             "From small business |to a strong brand|. In one step."
         ],
-        "description": "We don’t just draw logos. As a leading branding agency in Tashkent, we build a <span class='font-bold text-foreground font-black'>result-oriented strategy</span> for your business. Naming and professional logo design.",
+        "description": "We don’t just design logos. We build the visual system that makes buyers trust you at first glance — <span class=’font-bold text-foreground font-black’>naming, identity, brand strategy</span>.",
         "buttonTexts": [
             "Analyze my brand",
             "Help me increase sales",
-            "Free Strategic Audit",
+            "Free Brand Audit",
             "I need a strong brand"
         ],
         "buttonHint": "Free. No obligations.",
-        "title": "Your brand should build trust and **make buying easier**.",
-        "descriptionPlain": "In the free Brand Audit, we review your name, logo, packaging, website, and messaging through the eyes of a buyer. You leave knowing which change can improve trust first.",
+        "title": "Your brand builds trust. **Selling gets easier.**",
+        "descriptionPlain": "We check your name, logo, packaging, website, and messaging — as a buyer sees them. You get one clear answer: which change builds trust fastest.",
         "preHeadline": "Free Brand Audit",
         "cta": "Get the free Brand Audit",
         "ctaSecondary": "What is checked?",
         "proofItems": [
             "15-minute audit call",
-            "5 trust signals reviewed",
-            "Clear next-step list"
+            "5 trust signals checked",
+            "Clear priority list"
         ],
-        "auditTitle": "What will the audit reveal?",
-        "auditSubtitle": "Not design opinions. Business priorities that affect trust and sales.",
+        "auditTitle": "What the audit shows",
+        "auditSubtitle": "Not design opinions. The one thing holding your sales back.",
         "auditScore": "15m",
         "auditScoreLabel": "Brand Audit",
         "auditSignals": [
             "What makes you look less premium",
-            "What message is unclear",
-            "What should be fixed first"
+            "Where your message gets lost",
+            "What to fix first"
         ],
         "showcaseTags": [
             "Trust",
@@ -196,8 +196,8 @@
     },
     "results": {
         "badge": "CLIENT RESULTS",
-        "title": "Our Client Results",
-        "subtitle": "We create not just beautiful design, but strategic solutions that contribute to your business development.",
+        "title": "What changed after Jon.Branding. The numbers say it.",
+        "subtitle": "Name, logo, packaging and messaging need to work as a single system. We build that system.",
         "items": [
             {
                 "impact": "60%+",
@@ -352,7 +352,7 @@
     },
     "servicesHero": {
         "title": "Services to Strengthen Your Brand",
-        "subtitle": "Guaranteed results for your business",
+        "subtitle": "Every service has one goal: make buyers choose you.",
         "cta": "View Prices"
     },
     "serviceSections": {
@@ -403,8 +403,8 @@
     },
     "trustedBy": {
         "eyebrow": "Selected clients",
-        "title": "Businesses trust us with credibility, not decoration.",
-        "subtitle": "We help brands look more valuable, clearer, and easier to choose.",
+        "title": "250+ businesses came to Jon.Branding to look credible in their market.",
+        "subtitle": "Local businesses work with us to look professional and trustworthy to buyers.",
         "metrics": [
             {
                 "value": "150+",
@@ -426,7 +426,7 @@
     },
     "whyUs": {
         "title": "Why Choose Us?",
-        "subtitle": "We don't just give promises. We create real value for your brand through a systemic approach.",
+        "subtitle": "Every decision is based on market research and buyer psychology. Not pretty — working.",
         "values": [
             {
                 "title": "Strategic Approach",
@@ -468,8 +468,8 @@
     },
     "beforeAfter": {
         "eyebrow": "Proof",
-        "title": "Branding proves value before the sales call.",
-        "subtitle": "The audit answers one practical question: does the buyer understand, trust, and have a reason to choose you?",
+        "title": "When your brand changes, sales change. Proof:",
+        "subtitle": "The audit answers one question: when a buyer sees you, do they have a reason to choose you in the first 10 seconds?",
         "ctaTitle": "Ready to clarify your brand?",
         "ctaDesc": "We start with a brand audit and identify the change with the highest impact.",
         "ctaButton": "Get the free Brand Audit",
@@ -498,7 +498,7 @@
     },
     "gallery": {
         "title": "Portfolio Examples",
-        "subtitle": "See how our created brands stand out in their niche."
+        "subtitle": "This is what brands that stand out in their industry look like."
     },
     "founder": {
         "title": "I build trust systems for business, not decoration.",
@@ -532,7 +532,7 @@
         ]
     },
     "process": {
-        "title": "From free audit to a premium brand system.",
+        "title": "From audit to a finished brand: how we work.",
         "subtitle": "The audit gives the first diagnosis. If we continue, the work becomes strategy, visual system, and rollout.",
         "phases": [
             {
@@ -598,7 +598,7 @@
         ]
     },
     "leadMagnet": {
-        "title": "Scale Your Brand",
+        "title": "What is your brand missing to convince buyers?",
         "subtitle": "Not sure where to start? We've prepared several free resources to help you explore the world of branding.",
         "magnets": [
             {
@@ -688,7 +688,7 @@
     },
     "faq": {
         "title": "FAQ",
-        "subtitle": "Answers to the most common questions about branding, prices, and process.",
+        "subtitle": "Process, pricing, timelines and what to expect.",
         "faqItems": [
             {
                 "question": "Why aren't prices fixed?",
@@ -1225,7 +1225,7 @@
         "tooltip": "Deselect one first"
     },
     "opportunityCalculator": {
-        "title": "Why is your business 'leaving money on the table'?",
+        "title": "Is your brand making your ads useless? Find out now.",
         "subtitle": "Why are you losing money despite heavy advertising? Let's calculate.",
         "labels": {
             "traffic": "Number of website visitors",
