@@ -9,8 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight } from 'lucide-react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Sparkles, CheckCircle, Crown, Check, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight } from 'lucide-react';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
@@ -309,22 +308,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                         ))}
                     </ServiceGroup>
                     
-                    <div className="w-full">
-                        <Accordion type="single" collapsible className="w-full">
-                            <AccordionItem value="more" className="border-none">
-                                <AccordionTrigger className="text-xl font-black text-foreground justify-center gap-6 hover:no-underline py-8 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm" aria-label={translations.categories?.more_services}>
-                                    {translations.categories?.more_services || "Qo'shimcha xizmatlar va maxsus shartlar"}
-                                    <ChevronsDown className="w-6 h-6 text-primary animate-bounce" />
-                                </AccordionTrigger>
-                                <AccordionContent className="pt-12">
-                                    <ServiceGroup title={translations.categories?.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
-                                        {['packaging', 'smm', 'urgency', 'nda'].map(id => (
-                                            <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
-                                        ))}
-                                    </ServiceGroup>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
+                    <div className="w-full pt-12">
+                        <ServiceGroup title={translations.categories?.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
+                            {['packaging', 'smm', 'urgency', 'nda'].map(id => (
+                                <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                            ))}
+                        </ServiceGroup>
                     </div>
                 </div>
 
