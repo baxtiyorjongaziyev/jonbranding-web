@@ -6,6 +6,8 @@
     "**/*.tsx"
   ],
   "exclude": [
+    "services",
+    "scripts",
     ".next",
     ".netlify",
     ".open-next",
