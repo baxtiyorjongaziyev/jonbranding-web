@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2026-06-11 - Timing Attack Vulnerability in Cron Secret Comparison
+**Vulnerability:** The cron secret validation in `src/app/api/amocrm-process-calls/route.ts` used a standard strict equality operator (`!==`) for string comparison. This approach returns immediately upon finding a mismatched character, making it susceptible to timing attacks, which could allow an attacker to guess the secret over time.
+**Learning:** Standard equality operators in JavaScript expose secret comparisons to timing attacks because they do not execute in constant time.
+**Prevention:** Use a constant-time comparison utility such as Node.js built-in `crypto.timingSafeEqual` or a custom constant-time bitwise XOR comparison (like `secureCompare` in `src/lib/utils.ts`) for evaluating secrets, tokens, or API keys.
