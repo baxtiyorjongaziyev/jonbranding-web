@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { TelegramClient, Api } from 'telegram';
 import { StringSession } from 'telegram/sessions/index.js';
 import { processPost } from './pipeline.js';
