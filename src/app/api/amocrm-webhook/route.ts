@@ -1,3 +1,4 @@
+import { timingSafeEqual } from 'crypto';
 import { NextResponse } from 'next/server';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
@@ -28,13 +29,13 @@ function isAuthorizedWebhook(request: Request) {
   }
 
   const providedSecret = request.headers.get('x-jonbranding-webhook-secret');
-  if (!providedSecret || providedSecret.length !== expectedSecret.length) return false;
+  if (!providedSecret) return false;
 
-  let mismatch = 0;
-  for (let i = 0; i < expectedSecret.length; i++) {
-    mismatch |= expectedSecret.charCodeAt(i) ^ providedSecret.charCodeAt(i);
-  }
-  return mismatch === 0;
+  const a = Buffer.from(expectedSecret);
+  const b = Buffer.from(providedSecret);
+  if (a.length !== b.length) return false;
+
+  return timingSafeEqual(a, b);
 }
 
 // Handle preflight requests for CORS
@@ -101,13 +102,13 @@ export async function POST(request: Request) {
 
 
         const telegramMessage = `
-ðŸ“¢ Yangi voqea (AmoCRM Webhook)
+📢 Yangi voqea (AmoCRM Webhook)
 
 Sdelka: "${leadName}"
 Status: ${status}
 Narxi: ${price}
 
-ðŸ”— Sdelkani ko'rish: ${leadUrl}
+🔗 Sdelkani ko'rish: ${leadUrl}
         `.trim();
         
         const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;

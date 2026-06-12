@@ -1,4 +1,3 @@
-
 import HomeComponent from '@/components/home-component';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
