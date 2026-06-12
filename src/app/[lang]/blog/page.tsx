@@ -20,9 +20,28 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const dictionary = await getDictionary(lang as Locale);
   const metadata = dictionary.blog?.metadata;
 
+  const BASE_URL = 'https://www.jonbranding.uz';
+  const l = lang as string;
   return {
     title: metadata?.title || "Jon.Branding Blog | Branding, Dizayn va Marketing",
     description: metadata?.description || "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
+    alternates: {
+      canonical: `${BASE_URL}/${l}/blog`,
+      languages: {
+        uz: `${BASE_URL}/uz/blog`,
+        ru: `${BASE_URL}/ru/blog`,
+        en: `${BASE_URL}/en/blog`,
+        zh: `${BASE_URL}/zh/blog`,
+        'x-default': `${BASE_URL}/uz/blog`,
+      },
+    },
+    openGraph: {
+      title: metadata?.title,
+      description: metadata?.description,
+      url: `${BASE_URL}/${l}/blog`,
+      siteName: 'Jon.Branding',
+      type: 'website',
+    },
   };
 }
 

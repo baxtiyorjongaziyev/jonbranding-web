@@ -1,7 +1,22 @@
 
+import type { Metadata } from 'next';
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const titles: Record<string, string> = {
+    uz: 'Sayt xaritasi | Jon.Branding',
+    ru: 'Карта сайта | Jon.Branding',
+    en: 'Sitemap | Jon.Branding',
+    zh: '网站地图 | Jon.Branding',
+  };
+  return {
+    title: titles[lang] || titles.uz,
+    robots: { index: false, follow: true },
+  };
+}
 import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon, Truck } from 'lucide-react';
 
 type Props = {
