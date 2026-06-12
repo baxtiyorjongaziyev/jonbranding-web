@@ -1,4 +1,3 @@
-
 import HomeComponent from '@/components/home-component';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
@@ -31,10 +30,28 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     zh: "在塔什干提供战略品牌、命名和标志设计。高端品牌代理服务。"
   };
 
+  const BASE_URL = 'https://www.jonbranding.uz';
   return {
     title: titles[lang] || titles.uz,
     description: descriptions[lang] || descriptions.uz,
     keywords: "brand audit, brending uz, logo dizayn, neyming, naming, qadoq dizayn, brandbook, premium branding",
+    alternates: {
+      canonical: `${BASE_URL}/${lang}`,
+      languages: {
+        uz: `${BASE_URL}/uz`,
+        ru: `${BASE_URL}/ru`,
+        en: `${BASE_URL}/en`,
+        zh: `${BASE_URL}/zh`,
+        'x-default': `${BASE_URL}/uz`,
+      },
+    },
+    openGraph: {
+      title: titles[lang] || titles.uz,
+      description: descriptions[lang] || descriptions.uz,
+      url: `${BASE_URL}/${lang}`,
+      siteName: 'Jon.Branding',
+      type: 'website',
+    },
   };
 }
 
