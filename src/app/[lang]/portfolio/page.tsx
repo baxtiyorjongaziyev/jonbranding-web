@@ -28,9 +28,26 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     zh: "中亚市场领导者的真实品牌、包装和标志设计案例研究，具有经证实的投资回报率。",
   };
 
+  const BASE_URL = 'https://www.jonbranding.uz';
   return {
     title: titles[safeLang] || titles.uz,
     description: descriptions[safeLang] || descriptions.uz,
+    alternates: {
+      canonical: `${BASE_URL}/${safeLang}/portfolio`,
+      languages: {
+        uz: `${BASE_URL}/uz/portfolio`,
+        ru: `${BASE_URL}/ru/portfolio`,
+        en: `${BASE_URL}/en/portfolio`,
+        zh: `${BASE_URL}/zh/portfolio`,
+        'x-default': `${BASE_URL}/uz/portfolio`,
+      },
+    },
+    openGraph: {
+      title: titles[safeLang] || titles.uz,
+      description: descriptions[safeLang] || descriptions.uz,
+      url: `${BASE_URL}/${safeLang}/portfolio`,
+      siteName: 'Jon.Branding',
+    },
   };
 }
 

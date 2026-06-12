@@ -1,4 +1,31 @@
+import type { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+
+const BASE_URL = 'https://www.jonbranding.uz';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const titles: Record<string, string> = {
+    uz: 'Maxfiylik siyosati | Jon.Branding',
+    ru: 'Политика конфиденциальности | Jon.Branding',
+    en: 'Privacy Policy | Jon.Branding',
+    zh: '隐私政策 | Jon.Branding',
+  };
+  return {
+    title: titles[lang] || titles.uz,
+    alternates: {
+      canonical: `${BASE_URL}/${lang}/privacy`,
+      languages: {
+        uz: `${BASE_URL}/uz/privacy`,
+        ru: `${BASE_URL}/ru/privacy`,
+        en: `${BASE_URL}/en/privacy`,
+        zh: `${BASE_URL}/zh/privacy`,
+        'x-default': `${BASE_URL}/uz/privacy`,
+      },
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
 interface PrivacyPageProps {
   params: Promise<{
