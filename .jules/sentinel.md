@@ -18,3 +18,7 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+## 2026-06-12 - Timing Attacks in Secret Validation
+**Vulnerability:** API routes were using standard string equality (`===` or `!==`) to compare expected secrets with provided authorization tokens, making them susceptible to timing attacks.
+**Learning:** Using standard equality operators for secret comparison allows an attacker to deduce the secret byte-by-byte by observing the response time, as the comparison short-circuits on the first mismatch.
+**Prevention:** Implement and use a constant-time string comparison utility (e.g., bitwise XOR comparison) for all token/secret validations, especially in edge environments where standard `crypto.timingSafeEqual` may not be available.

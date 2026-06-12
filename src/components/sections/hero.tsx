@@ -77,9 +77,6 @@ function renderHeadline(headline: string, className?: string) {
 }
 
 const Hero: FC<HeroProps> = ({ dictionary }) => {
-  if (!dictionary) return null;
-
-  const heroCopy = getHeroCopy(dictionary);
   const [spot, setSpot] = useState({ x: 50, y: 40 });
   const onMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -97,6 +94,10 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
   const ctaY = useTransform(scrollYProgress, [0, 1], ['0%', '-6%']);
   const panelY = useTransform(scrollYProgress, [0, 1], ['0%', '-8%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  if (!dictionary) return null;
+
+  const heroCopy = getHeroCopy(dictionary);
 
   return (
     <section ref={sectionRef} className="relative isolate overflow-hidden bg-brand-paper text-foreground">
