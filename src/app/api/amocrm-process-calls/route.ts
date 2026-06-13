@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getValidAccessToken } from '@/lib/amocrm-token';
 import { analyzeCallAudio } from '@/lib/gemini';
+import { secureCompare } from '@/lib/utils';
 
 const TOKENS_DOC = 'amocrm/website_tokens';
 const subdomain = 'jonbrandingagency';
@@ -23,8 +24,8 @@ async function handleCallProcessing(request: Request) {
     const secret = searchParams.get('secret');
     const configuredSecret = cleanSecret(process.env.AMOCRM_CRON_SECRET);
 
-    // 1. Verify cron secret to protect the endpoint
-    if (!configuredSecret || secret !== configuredSecret) {
+    // 1. Verify cron secret to protect the endpoint using secure string comparison
+    if (!configuredSecret || !secureCompare(secret, configuredSecret)) {
       return NextResponse.json({ error: 'Unauthorized secret key' }, { status: 401 });
     }
 

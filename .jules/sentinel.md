@@ -18,3 +18,7 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+## 2024-06-13 - [Edge Environment Timing Attacks]
+**Vulnerability:** The application was using the standard equality operator (`!==`) to compare secrets (cron secrets) in API endpoints running in Edge environments.
+**Learning:** This approach leaves the endpoints susceptible to timing attacks, where an attacker could deduce the secret by measuring the time the comparison takes. Native `crypto.timingSafeEqual` is often not available or fully supported in Edge environments.
+**Prevention:** Always use a constant-time string comparison utility function (e.g. `secureCompare` which compares all characters irrespective of early mismatch) for securely evaluating secrets in Edge or Serverless environments where native modules like `crypto` might not be reliably available.
