@@ -10,6 +10,7 @@
     ".netlify",
     ".open-next",
     ".wrangler",
-    "node_modules"
+    "node_modules",
+    "services/"
   ]
 }
