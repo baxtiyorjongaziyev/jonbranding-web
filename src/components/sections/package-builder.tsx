@@ -9,8 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, ChevronsDown, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight } from 'lucide-react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Sparkles, CheckCircle, Crown, Check, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight } from 'lucide-react';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
@@ -112,53 +111,44 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                 </CardHeader>
 
                 <CardContent className="relative z-10 flex flex-grow flex-col px-5 pb-5 pt-0" suppressHydrationWarning>
-                    {features?.[0] && (
-                        <div className={cn("flex items-start gap-2.5 rounded-xl px-3 py-3", isVip ? "bg-white/[0.07]" : "bg-blue-50/70")}>
-                            <CheckCircle className={cn("mt-0.5 h-4 w-4 shrink-0", isVip ? "text-sky-blue" : "text-primary")} />
-                            <span className={cn("text-[13px] font-bold leading-5", isVip ? "text-white" : "text-slate-700")}>{features[0]}</span>
-                        </div>
-                    )}
-
-                    <Accordion type="single" collapsible className="mt-3">
-                        <AccordionItem value={`${id}-details`} className={cn("border-y", isVip ? "border-white/10" : "border-slate-100")}>
-                            <AccordionTrigger
-                                onClick={(event) => event.stopPropagation()}
-                                className={cn("py-3 text-left text-[13px] font-black uppercase tracking-[0.08em] hover:no-underline", isVip ? "text-sky-blue" : "text-primary")}
-                            >
-                                {dictionary.tabs?.included || "Nima kiradi"} / {dictionary.tabs?.benefits || "Nima olasiz"}
-                            </AccordionTrigger>
-                            <AccordionContent onClick={(event) => event.stopPropagation()} className="pb-4">
-                                <div className="space-y-5">
-                                    <ul className="space-y-2">
-                                        {(features || []).map((r: string, i: number) => (
-                                            <li key={i} className="flex items-start gap-2.5">
-                                                <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-brand-blue/25" : "bg-primary/10")}>
-                                                    <CheckCircle className={cn("h-3.5 w-3.5", isVip ? "text-sky-blue" : "text-primary")} />
-                                                </div>
-                                                <span className={cn("text-[13px] font-medium leading-5", isVip ? "text-slate-200" : "text-slate-700")}>{r}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    {benefits && benefits.length > 0 && (
-                                        <div className={cn("grid grid-cols-1 gap-4 border-t pt-4", isVip ? "border-white/10" : "border-slate-100")}>
-                                            {benefits.map((b: any, i: number) => (
-                                                <div key={i} className="flex items-start gap-3">
-                                                    <div className={cn("mt-0.5 shrink-0", isVip ? "text-sky-blue" : "text-primary")}>
-                                                        <BenefitIcon name={b.icon} className="h-5 w-5" />
-                                                    </div>
-                                                    <div className="min-w-0">
-                                                        <p className={cn("text-[13px] font-black leading-5", isVip ? "text-white" : "text-foreground")}>{b.title}</p>
-                                                        <p className={cn("text-[13px] leading-5 text-slate-500", isVip && "text-slate-300")}>{b.description}</p>
-                                                    </div>
-                                                </div>
-                                            ))}
+                    <div className={cn("mt-3 pt-4 border-t space-y-5", isVip ? "border-white/10" : "border-slate-100")}>
+                        <div className="space-y-2">
+                            <span className={cn("text-[13px] font-black uppercase tracking-[0.08em] block", isVip ? "text-sky-blue" : "text-primary")}>
+                                {dictionary.tabs?.included || "Nima kiradi"}
+                            </span>
+                            <ul className="space-y-2">
+                                {(features || []).map((r: string, i: number) => (
+                                    <li key={i} className="flex items-start gap-2.5">
+                                        <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-brand-blue/25" : "bg-primary/10")}>
+                                            <CheckCircle className={cn("h-3.5 w-3.5", isVip ? "text-sky-blue" : "text-primary")} />
                                         </div>
-                                    )}
+                                        <span className={cn("text-[13px] font-medium leading-5", isVip ? "text-slate-200" : "text-slate-700")}>{r}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {benefits && benefits.length > 0 && (
+                            <div className={cn("space-y-3 border-t pt-4", isVip ? "border-white/10" : "border-slate-100")}>
+                                <span className={cn("text-[13px] font-black uppercase tracking-[0.08em] block", isVip ? "text-sky-blue" : "text-primary")}>
+                                    {dictionary.tabs?.benefits || "Nima olasiz"}
+                                </span>
+                                <div className="grid grid-cols-1 gap-3">
+                                    {benefits.map((b: any, i: number) => (
+                                        <div key={i} className="flex items-start gap-3">
+                                            <div className={cn("mt-0.5 shrink-0", isVip ? "text-sky-blue" : "text-primary")}>
+                                                <BenefitIcon name={b.icon} className="h-4 w-4" />
+                                            </div>
+                                            <div className="min-w-0">
+                                                <p className={cn("text-[13px] font-black leading-5", isVip ? "text-white" : "text-foreground")}>{b.title}</p>
+                                                <p className={cn("text-[13px] leading-5 text-slate-500", isVip && "text-slate-300")}>{b.description}</p>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
+                            </div>
+                        )}
+                    </div>
 
                     <div className={cn("mt-auto pt-6 border-t space-y-4", isVip ? "border-white/10" : "border-slate-100")}>
                         {timeline && (
@@ -318,23 +308,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                         ))}
                     </ServiceGroup>
                     
-                    <div className="w-full">
-                        <Accordion type="single" collapsible className="w-full">
-                            <AccordionItem value="more" className="border-none">
-                                <AccordionTrigger className="text-xl font-black text-foreground justify-center gap-6 hover:no-underline py-8 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 transition-all hover:bg-slate-100 group shadow-sm" aria-label={translations.categories?.more_services}>
-                                    {translations.categories?.more_services || "Qo'shimcha xizmatlar va maxsus shartlar"}
-                                    <ChevronsDown className="w-6 h-6 text-primary animate-bounce" />
-                                </AccordionTrigger>
-                                <AccordionContent className="pt-12">
-                                    <ServiceGroup title={translations.categories?.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
-                                        {['packaging', 'smm', 'urgency', 'nda'].map(id => (
-                                            <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
-                                        ))}
-                                    </ServiceGroup>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                    </div>
+                    <ServiceGroup title={translations.categories?.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
+                        {['packaging', 'smm', 'urgency', 'nda'].map(id => (
+                            <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
                 </div>
 
                 <div className="mt-24 max-w-6xl mx-auto">
