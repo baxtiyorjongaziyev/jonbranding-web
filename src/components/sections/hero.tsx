@@ -2,7 +2,8 @@
 
 import { type FC, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, CheckCircle2, ShieldCheck, Target } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowUpRight, BadgeCheck, CheckCircle2 } from 'lucide-react';
 import ContactTriggerButton from '@/components/contact-trigger-button';
 
 type HeroDictionary = {
@@ -36,12 +37,6 @@ function getHeroCopy(dictionary: HeroDictionary) {
     cta: dictionary.cta || '',
     ctaSecondary: dictionary.ctaSecondary || '',
     proofItems: dictionary.proofItems?.length ? dictionary.proofItems : [],
-    auditTitle: dictionary.auditTitle || '',
-    auditSubtitle: dictionary.auditSubtitle || '',
-    auditScore: dictionary.auditScore || '',
-    auditScoreLabel: dictionary.auditScoreLabel || '',
-    auditSignals: dictionary.auditSignals?.length ? dictionary.auditSignals : [],
-    showcaseTags: dictionary.showcaseTags?.length ? dictionary.showcaseTags : [],
   };
 }
 
@@ -73,6 +68,19 @@ function renderHeadline(headline: string, className?: string) {
   );
 }
 
+const HERO_BRANDS = [
+  { name: 'Boyarin', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/e3f60742daeebc03b51ab018d630a87eb62ae7b1-546x140.png' },
+  { name: 'Sarmilk', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/397532414b3865441a468b33dacc295f195030d1-511x112.png' },
+  { name: 'Velzo', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/5789862c43bcf1423a4e7d9abfa9e976dcdce4c9-383x141.png' },
+];
+
+const HERO_STATS = [
+  { value: '150+', label: 'Loyiha' },
+  { value: '9 yil', label: 'Tajriba' },
+  { value: '30+', label: 'Soha' },
+  { value: '4 til', label: 'Bozor' },
+] as const;
+
 const Hero: FC<HeroProps> = ({ dictionary }) => {
   if (!dictionary) return null;
 
@@ -102,7 +110,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
               </div>
             )}
 
-            <h1 className="max-w-[21rem] text-balance text-4xl font-light leading-[1.02] tracking-tight text-foreground [overflow-wrap:normal] sm:max-w-[780px] sm:text-6xl sm:leading-[0.98] lg:text-[4.35rem] xl:text-[4.85rem]">
+            <h1 className="max-w-[21rem] text-balance text-4xl font-bold leading-[1.02] tracking-tight text-foreground [overflow-wrap:normal] sm:max-w-[780px] sm:text-6xl sm:leading-[0.98] lg:text-[4.35rem] xl:text-[4.85rem]">
               {renderHeadline(heroCopy.title)}
             </h1>
 
@@ -144,36 +152,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
           </div>
 
           <div className="relative mx-auto w-full min-w-0 max-w-[calc(100vw-2rem)] sm:max-w-[540px] lg:mr-0">
-            <div className="rounded-[2rem] border border-border bg-secondary p-2 shadow-[0_40px_120px_-60px_rgba(20,20,60,0.45)]">
-              <div className="rounded-[1.55rem] border border-border bg-white p-5 shadow-[0_1px_0_rgba(20,20,60,0.04)] sm:p-7">
-                <AuditPanel copy={heroCopy} />
-
-                {heroCopy.auditSignals.length > 0 && (
-                  <div className="mt-6 divide-y divide-border border-y border-border">
-                    {heroCopy.auditSignals.map((signal, index) => (
-                      <div key={signal} className="grid grid-cols-[3.25rem_1fr] gap-4 py-4">
-                        <div className="font-mono text-sm font-bold text-primary tabular-nums">0{index + 1}</div>
-                        <div>
-                          <div className="text-[11px] font-bold uppercase tracking-normal text-muted-foreground">{heroCopy.auditScoreLabel}</div>
-                          <p className="mt-1 text-sm font-semibold leading-6 text-foreground">{signal}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {heroCopy.showcaseTags.length > 0 && (
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {heroCopy.showcaseTags.map((tag) => (
-                      <div key={tag} className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-2 text-xs font-bold text-foreground">
-                        <ShieldCheck className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                        {tag}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+            <HeroPortfolio />
           </div>
         </div>
       </div>
@@ -181,23 +160,59 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
   );
 };
 
-function AuditPanel({ copy }: { copy: ReturnType<typeof getHeroCopy> }) {
+function HeroPortfolio() {
   return (
-    <div>
-      <div className="flex items-start justify-between gap-5">
-        <div>
-          <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-normal text-primary">
-            <Target className="h-4 w-4" aria-hidden="true" />
-            <span>{copy.preHeadline || copy.auditScoreLabel}</span>
+    <div className="flex flex-col gap-3">
+      {/* Main portfolio showcase image */}
+      <div className="relative overflow-hidden rounded-[2rem] shadow-[0_40px_120px_-60px_rgba(20,20,60,0.3)] ring-1 ring-black/[0.06]">
+        <Image
+          src="/images/cms/packaging-shelf.webp"
+          alt="Jon.Branding — portfolio: qadoq dizayni"
+          width={600}
+          height={420}
+          className="w-full object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
+        <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/60">Portfolio · Case study</p>
+            <p className="mt-0.5 text-base font-extrabold text-white">Qadoq dizayni</p>
           </div>
-          <h2 className="max-w-sm text-pretty text-2xl font-extrabold leading-tight tracking-normal text-foreground sm:text-3xl">
-            {copy.auditTitle}
-          </h2>
-          <p className="mt-3 max-w-sm text-sm leading-7 text-muted-foreground">{copy.auditSubtitle}</p>
+          <div className="flex items-center gap-1.5 rounded-full border border-white/15 bg-black/35 px-3 py-1.5 backdrop-blur-sm">
+            <BadgeCheck className="h-4 w-4 text-emerald-400" />
+            <span className="text-xs font-bold text-white">Yakunlandi</span>
+          </div>
         </div>
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4448e8_0%,#2d31d4_100%)] text-sm font-extrabold text-white shadow-[0_18px_40px_-18px_rgba(68,72,232,0.8)]">
-          {copy.auditScore}
-        </div>
+      </div>
+
+      {/* Client brand logos */}
+      <div className="grid grid-cols-3 gap-3">
+        {HERO_BRANDS.map((brand) => (
+          <div
+            key={brand.name}
+            className="flex h-16 items-center justify-center rounded-2xl border border-border bg-white px-3 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-shadow duration-200 hover:shadow-[0_4px_14px_rgba(0,0,0,0.07)]"
+          >
+            <Image
+              src={brand.logo}
+              alt={`${brand.name} — Jon.Branding mijozi`}
+              width={100}
+              height={36}
+              className="max-h-7 w-auto object-contain opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+              style={{ width: 'auto', height: 'auto' }}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Stats strip */}
+      <div className="flex items-center divide-x divide-border rounded-2xl border border-border bg-white py-3.5 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+        {HERO_STATS.map((stat) => (
+          <div key={stat.label} className="flex-1 px-4 text-center">
+            <div className="font-mono text-xl font-black tabular-nums text-foreground">{stat.value}</div>
+            <div className="mt-0.5 text-[9px] font-bold uppercase tracking-wider text-muted-foreground">{stat.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   );
