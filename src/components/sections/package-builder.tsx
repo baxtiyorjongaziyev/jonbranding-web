@@ -30,8 +30,8 @@ const serviceIcons: { [key: string]: React.ElementType } = {
 
 const BenefitIcon = ({ name, className }: { name: string, className?: string }) => {
     const icons: Record<string, React.ElementType> = {
-        Search, Lightbulb, ShieldCheck, CheckCircle, MessageSquare, Target, 
-        BarChart, Rocket, Megaphone, Link, Gem, Globe, Lock, Award, Zap, 
+        Search, Lightbulb, ShieldCheck, CheckCircle, MessageSquare, Target,
+        BarChart, Rocket, Megaphone, Link, Gem, Globe, Lock, Award, Zap,
         TrendingUp, BookOpen, Gift, Building2, Smartphone, Sparkles, Scale
     };
     const Icon = icons[name] || Sparkles;
@@ -49,7 +49,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
-        <motion.div 
+        <motion.div
             layout
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -63,7 +63,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                     </Badge>
                 )}
                 {isVip && (
-                    <Badge className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-blue-950 text-[13px] font-black px-10 py-2.5 rounded-full border-none uppercase flex items-center gap-2 shadow-[0_4px_30px_rgba(251,191,36,0.7)] animate-subtle-pulse whitespace-nowrap">
+                    <Badge className="flex items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-gradient-to-r from-brand-blue to-blue-700 px-10 py-2.5 text-[13px] font-black uppercase text-white shadow-[0_4px_30px_rgba(37,99,235,0.45)]">
                         <Crown className="w-4 h-4 fill-current" /> VIP
                     </Badge>
                 )}
@@ -72,19 +72,19 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             <Card
                 onClick={onSelect}
                 className={cn(
-                    "group relative h-full transition-all duration-500 cursor-pointer border flex flex-col rounded-[1.5rem] bg-white",
+                    "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500 cursor-pointer",
                     selected
-                        ? (isVip ? 'border-amber-400 bg-blue-950 shadow-[0_0_60px_rgba(251,191,36,0.35)] scale-[1.03]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.03]')
-                        : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-amber-400/50" : "border-slate-100 hover:border-primary/20 shadow-sm")
+                        ? (isVip ? 'border-brand-blue bg-blue-950 shadow-[0_0_60px_rgba(37,99,235,0.28)] scale-[1.02]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.02]')
+                        : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-brand-blue/60" : "border-slate-100 hover:border-primary/20 shadow-sm")
                 )}
             >
                 <CardHeader className="p-5 pb-3 relative z-10">
                     <div className="flex items-center gap-3 mb-3">
                         <div className={cn(
                             "w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 flex-shrink-0",
-                            selected 
-                                ? (isVip ? "bg-gradient-to-br from-amber-300 to-amber-500 text-blue-950 shadow-xl" : "bg-primary text-white shadow-lg") 
-                                : (isVip ? "bg-white/10 text-amber-400 border border-amber-400/20" : "bg-secondary text-slate-600")
+                            selected
+                                ? (isVip ? "bg-brand-blue text-white shadow-xl" : "bg-primary text-white shadow-lg")
+                                : (isVip ? "border border-brand-blue/30 bg-white/10 text-sky-blue" : "bg-secondary text-slate-600")
                         )}>
                             <Icon className="w-7 h-7" />
                         </div>
@@ -94,9 +94,9 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                             </CardTitle>
                         </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-3 mt-1">
-                        <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-amber-400" : "text-primary")}>
+                        <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-sky-blue" : "text-primary")}>
                             {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
                         </span>
                         {subDescription && (
@@ -110,40 +110,38 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                     </div>
                 </CardHeader>
 
-                <CardContent className="px-5 pt-0 pb-5 flex-grow flex flex-col relative z-10" suppressHydrationWarning>
-                    <div className="space-y-6">
-                        {/* Features Section */}
+                <CardContent className="relative z-10 flex flex-grow flex-col px-5 pb-5 pt-0" suppressHydrationWarning>
+                    <div className={cn("mt-3 space-y-5 border-t pt-3", isVip ? "border-white/10" : "border-slate-100")}>
                         <div className="space-y-3">
-                            <p className={cn("text-[10px] font-black uppercase tracking-[0.15em]", isVip ? "text-amber-400/60" : "text-slate-400")}>
+                            <p className={cn("text-[10px] font-black uppercase tracking-[0.12em]", isVip ? "text-sky-blue/60" : "text-slate-400")}>
                                 {dictionary.tabs?.included || "Nima kiradi"}
                             </p>
                             <ul className="space-y-2">
                                 {(features || []).map((r: string, i: number) => (
                                     <li key={i} className="flex items-start gap-2.5">
-                                        <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-amber-400/20" : "bg-primary/10")}>
-                                            <CheckCircle className={cn("w-3 h-3", isVip ? "text-amber-400" : "text-primary")} />
+                                        <div className={cn("mt-1 shrink-0 rounded-full p-0.5", isVip ? "bg-brand-blue/25" : "bg-primary/10")}>
+                                            <CheckCircle className={cn("h-3.5 w-3.5", isVip ? "text-sky-blue" : "text-primary")} />
                                         </div>
-                                        <span className={cn("text-xs font-medium leading-tight", isVip ? "text-slate-300" : "text-slate-700")}>{r}</span>
+                                        <span className={cn("text-[13px] font-medium leading-5", isVip ? "text-slate-200" : "text-slate-700")}>{r}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
 
-                        {/* Benefits Section - No Toggles, No Boxes, Just Pure Icons and Text */}
                         {benefits && benefits.length > 0 && (
-                            <div className={cn("space-y-3 pt-4 border-t", isVip ? "border-white/10" : "border-slate-100")}>
-                                <p className={cn("text-[10px] font-black uppercase tracking-[0.15em]", isVip ? "text-amber-400/60" : "text-slate-400")}>
+                            <div className={cn("space-y-3 border-t pt-4", isVip ? "border-white/10" : "border-slate-100")}>
+                                <p className={cn("text-[10px] font-black uppercase tracking-[0.12em]", isVip ? "text-sky-blue/60" : "text-slate-400")}>
                                     {dictionary.tabs?.benefits || "Nima olasiz"}
                                 </p>
                                 <div className="grid grid-cols-1 gap-4">
-                                    {(benefits || []).map((b: any, i: number) => (
+                                    {benefits.map((b: any, i: number) => (
                                         <div key={i} className="flex items-start gap-3">
-                                            <div className={cn("shrink-0 mt-0.5", isVip ? "text-amber-400" : "text-primary")}>
-                                                <BenefitIcon name={b.icon} className="w-5 h-5" />
+                                            <div className={cn("mt-0.5 shrink-0", isVip ? "text-sky-blue" : "text-primary")}>
+                                                <BenefitIcon name={b.icon} className="h-5 w-5" />
                                             </div>
                                             <div className="min-w-0">
-                                                <p className={cn("text-xs font-black leading-tight", isVip ? "text-white" : "text-foreground")}>{b.title}</p>
-                                                <p className={cn("text-[10px] leading-snug text-slate-500", isVip && "text-slate-400")}>{b.description}</p>
+                                                <p className={cn("text-[13px] font-black leading-5", isVip ? "text-white" : "text-foreground")}>{b.title}</p>
+                                                <p className={cn("text-[13px] leading-5 text-slate-500", isVip && "text-slate-300")}>{b.description}</p>
                                             </div>
                                         </div>
                                     ))}
@@ -154,7 +152,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
 
                     <div className={cn("mt-auto pt-6 border-t space-y-4", isVip ? "border-white/10" : "border-slate-100")}>
                         {timeline && (
-                            <div className={cn("flex items-center gap-2 text-[11px] font-black uppercase tracking-widest", isVip ? "text-amber-400/60" : "text-slate-400")}>
+                            <div className={cn("flex items-center gap-2 text-[13px] font-black uppercase tracking-[0.08em]", isVip ? "text-sky-blue" : "text-slate-500")}>
                                 <Clock className="w-3.5 h-3.5" />
                                 <span>{timeline}</span>
                             </div>
@@ -163,10 +161,10 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         <Button
                             variant={selected ? (isVip ? "outline" : "default") : "outline"}
                             className={cn(
-                                "w-full py-4 text-xs font-black transition-all duration-300 rounded-full border-2 h-auto uppercase tracking-widest relative z-20",
-                                selected 
-                                    ? (isVip ? "border-none bg-gradient-to-br from-amber-400 to-amber-600 text-blue-950 shadow-[0_0_20px_rgba(251,191,36,0.4)]" : "border-none bg-primary text-white shadow-lg") 
-                                    : (isVip ? "bg-white/5 border-amber-400/20 text-amber-400 hover:bg-amber-400 hover:text-blue-950" : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary shadow-sm")
+                                "relative z-20 h-auto w-full rounded-full border-2 py-4 text-[13px] font-black uppercase tracking-[0.08em] transition-[background-color,border-color,color,box-shadow,transform] duration-300",
+                                selected
+                                    ? (isVip ? "border-none bg-brand-blue text-white shadow-[0_0_20px_rgba(37,99,235,0.35)]" : "border-none bg-primary text-white shadow-lg")
+                                    : (isVip ? "border-brand-blue/40 bg-white/5 text-sky-blue hover:bg-brand-blue hover:text-white" : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary shadow-sm")
                             )}
                             onClick={(e) => { e.stopPropagation(); onSelect(); }}
                         >
@@ -183,7 +181,7 @@ ServiceCard.displayName = 'ServiceCard';
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => {
     return (
         <div className="space-y-8">
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -198,7 +196,7 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 };
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
-    const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
+    const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
         namingPremium: true, logoPremium: true, urgency: false, nda: false
     });
     const [discountType, setDiscountType] = useLocalStorage<'none' | 'package' | 'full'>('discountOption', 'none');
@@ -208,7 +206,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [hasCelebrated, setHasCelebrated] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
-    
+
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
     const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any);
@@ -219,7 +217,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 particleCount: 150,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#050583', '#00C9FD', '#ADFFFE', '#fbbf24']
+                colors: ['#050583', '#2c2bf5', '#00C9FD', '#ffffff']
             });
             setHasCelebrated(true);
         } else if (!total.isPromoApplied && hasCelebrated) {
@@ -251,7 +249,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         <section id="package-builder" className="py-20 sm:py-28 bg-white" suppressHydrationWarning>
             <div className="container mx-auto px-4 max-w-7xl">
                 <div className="max-w-4xl mx-auto mb-16 text-center space-y-4">
-                    <Badge className="bg-primary/10 text-primary border-none px-8 py-2 rounded-full font-black text-[12px] uppercase tracking-[0.2em] shadow-sm">
+                    <Badge className="bg-primary/10 text-primary border-none px-8 py-2 rounded-full font-black text-[13px] uppercase tracking-[0.16em] shadow-sm">
                         LOYIHA ME'MORI
                     </Badge>
                     <h2 className="text-4xl sm:text-6xl font-black text-foreground leading-tight tracking-tighter">{translations.title}</h2>
@@ -276,24 +274,24 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                         ))}
                     </ServiceGroup>
-                    
+
                     {lang === 'uz' && (
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             className="mt-8 mb-16 max-w-4xl mx-auto"
                         >
-                            <Card className="bg-emerald-50 border-emerald-100 rounded-[2.5rem] p-8 shadow-sm border-2 border-dashed relative overflow-hidden group hover:bg-emerald-100/50 transition-colors duration-500">
+                            <Card className="group relative overflow-hidden rounded-[2.5rem] border-2 border-dashed border-blue-100 bg-blue-50/70 p-8 shadow-sm transition-colors duration-500 hover:bg-blue-100/60">
                                 <div className="absolute -right-8 -bottom-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                                    <CheckCircle className="w-40 h-40 text-emerald-600" />
+                                    <CheckCircle className="w-40 h-40 text-brand-blue" />
                                 </div>
                                 <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
-                                    <div className="flex-shrink-0 bg-emerald-500 text-white p-4 rounded-2xl shadow-lg transform group-hover:scale-110 transition-transform duration-500">
+                                    <div className="flex-shrink-0 rounded-2xl bg-brand-blue p-4 text-white shadow-lg transition-transform duration-500 group-hover:scale-110">
                                         <CheckCircle className="w-8 h-8" />
                                     </div>
                                     <div>
-                                        <p className="text-emerald-900 font-black text-lg sm:text-xl leading-relaxed tracking-tight">
+                                        <p className="text-lg font-black leading-relaxed tracking-tight text-blue-950 sm:text-xl">
                                             Agar taqdim etilgan nomlardan hech biri sizga mos kelmasa — to'liq pul qaytaramiz. Xavfsiz sinab ko'ring.
                                         </p>
                                     </div>
@@ -307,7 +305,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                         ))}
                     </ServiceGroup>
-                    
+
                     <div className="w-full pt-12">
                         <ServiceGroup title={translations.categories?.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
                             {['packaging', 'smm', 'urgency', 'nda'].map(id => (
@@ -318,9 +316,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 </div>
 
                 <div className="mt-24 max-w-6xl mx-auto">
-                    <div id="your-package-card" className={cn("rounded-[3rem] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border border-slate-100 transition-all duration-500", total.isPromoApplied && "ring-4 ring-emerald-500/30 scale-[1.01]")}>
-                        <div className="lg:w-1/2 bg-dark-blue p-8 sm:p-14 text-white relative">
-                            <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-[120px]" />
+                    <div id="your-package-card" className={cn("rounded-[2rem] sm:rounded-[3rem] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border border-slate-100 transition-all duration-500", total.isPromoApplied && "ring-4 ring-emerald-500/30 scale-[1.01]")}>
+                        <div className="relative lg:w-1/2 overflow-hidden bg-[linear-gradient(145deg,#050583_0%,#09113f_58%,#111a52_100%)] p-5 sm:p-14 text-white">
+                            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(44,43,245,0.55),transparent_42%),radial-gradient(circle_at_10%_90%,rgba(0,201,253,0.18),transparent_40%)]" />
+                            <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-white/15" />
                             <div className="relative z-10 h-full flex flex-col">
                                 <div className="space-y-3 mb-10">
                                     <div className="flex items-center gap-4">
@@ -329,26 +328,26 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                         <h3 className="text-2xl sm:text-3xl font-black tracking-tight uppercase text-white">{translations.your_package || "Sizning paketingiz"}</h3>
                                     </div>
-                                    <p className="text-blue-100/80 font-medium text-base max-w-sm leading-relaxed">{translations.your_package_desc || "Tanlangan xizmatlar ro'yxati."}</p>
+                                    <p className="max-w-sm text-base font-medium leading-relaxed text-blue-100">{translations.your_package_desc || "Tanlangan xizmatlar ro'yxati."}</p>
                                 </div>
                                 <div className="grid grid-cols-1 gap-3 overflow-y-auto pr-3 custom-scrollbar flex-grow max-h-[300px] lg:max-h-[400px]">
                                     <AnimatePresence mode="popLayout">
                                         {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
                                             const isSurcharge = k === 'urgency' || k === 'nda';
                                             return (
-                                                <motion.div 
-                                                    key={k} 
+                                                <motion.div
+                                                    key={k}
                                                     layout
                                                     initial={{ opacity: 0, x: -20 }}
                                                     animate={{ opacity: 1, x: 0 }}
                                                     exit={{ opacity: 0, x: 20 }}
-                                                    className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all duration-300 shadow-sm group"
+                                                    className="group flex items-center justify-between rounded-xl border border-white/15 bg-white/10 p-4 shadow-[0_12px_30px_rgba(0,0,0,0.16)] backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/15"
                                                 >
                                                     <div className="flex items-center gap-3">
                                                         <div className={cn("p-1.5 rounded-full transition-transform group-hover:scale-110", isSurcharge ? "bg-blue-400/20" : "bg-sky-blue/20")}>
                                                             {isSurcharge ? <Plus className="w-4 h-4 text-blue-400" /> : <Check className="w-4 h-4 text-sky-blue" />}
                                                         </div>
-                                                        <span className="text-base font-bold tracking-tight text-white">{serviceDetails[k]?.label}</span>
+                                                        <span className="text-base font-bold tracking-tight text-white drop-shadow-sm">{serviceDetails[k]?.label}</span>
                                                     </div>
                                                     <span className={cn("font-black text-sm", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
                                                         {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
@@ -361,35 +360,35 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             </div>
                         </div>
 
-                        <div className="lg:w-1/2 bg-slate-50 p-6 sm:p-14 flex flex-col lg:border-l border-slate-100 relative">
+                        <div className="lg:w-1/2 bg-slate-50 p-5 sm:p-14 flex flex-col lg:border-l border-slate-100 relative">
                             <div className="space-y-8 flex-grow">
                                 <div className="space-y-6">
                                     <div className="flex justify-between items-center px-2">
-                                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{translations.base_price_label || "Boshlang'ich narx"}</span>
+                                        <span className="text-[13px] font-bold uppercase tracking-wider text-slate-500">{translations.base_price_label || "Boshlang'ich narx"}</span>
                                         <span className="text-2xl font-bold line-through text-slate-300">{formatPrice(total.base, lang as any, currency)}</span>
                                     </div>
 
                                     <div className="space-y-2">
                                         <AnimatePresence>
                                             {total.surchargesApplied.map((s: any, i: number) => (
-                                                <motion.div 
-                                                    key={i} 
+                                                <motion.div
+                                                    key={i}
                                                     initial={{ opacity: 0, height: 0 }}
                                                     animate={{ opacity: 1, height: 'auto' }}
                                                     exit={{ opacity: 0, height: 0 }}
-                                                    className="flex justify-between items-center text-blue-700 text-[12px] font-bold bg-blue-50 px-5 py-3 rounded-xl border border-blue-100 shadow-sm"
+                                                    className="flex justify-between items-center text-blue-700 text-[13px] font-bold bg-blue-50 px-5 py-3 rounded-xl border border-blue-100 shadow-sm"
                                                 >
                                                     <div className="flex items-center gap-2"><Plus className="w-4 h-4" />{s.name}</div>
                                                     <span className="text-base">+{formatPrice(s.value, lang as any, currency)}</span>
                                                 </motion.div>
                                             ))}
                                             {total.discountApplied.map((d: any, i: number) => (
-                                                <motion.div 
-                                                    key={i} 
+                                                <motion.div
+                                                    key={i}
                                                     initial={{ x: -20, opacity: 0 }}
                                                     animate={{ x: 0, opacity: 1 }}
                                                     exit={{ x: 20, opacity: 0 }}
-                                                    className="flex justify-between items-center text-green-700 text-[12px] font-bold bg-green-50 px-5 py-3 rounded-xl border border-green-100 shadow-sm"
+                                                    className="flex justify-between items-center text-green-700 text-[13px] font-bold bg-green-50 px-5 py-3 rounded-xl border border-green-100 shadow-sm"
                                                 >
                                                     <div className="flex items-center gap-2"><Zap className="w-4 h-4" />{d.name}</div>
                                                     <span className="text-base">-{formatPrice(d.value, lang as any, currency)}</span>
@@ -399,10 +398,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
 
                                     <div className="pt-6 border-t border-slate-200 text-center space-y-2">
-                                        <span className="text-slate-400 text-[11px] font-bold uppercase tracking-widest">{translations.final_price || "Yakuniy narx:"}</span>
+                                        <span className="text-slate-500 text-[13px] font-bold uppercase tracking-widest">{translations.final_price || "Yakuniy narx:"}</span>
                                         <div className="flex flex-col items-center">
                                             <AnimatePresence mode="wait">
-                                                <motion.span 
+                                                <motion.span
                                                     key={total.final}
                                                     initial={{ scale: 0.9, opacity: 0 }}
                                                     animate={{ scale: 1, opacity: 1 }}
@@ -412,10 +411,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 </motion.span>
                                             </AnimatePresence>
                                             {total.savings > 0 && (
-                                                <motion.div 
+                                                <motion.div
                                                     initial={{ y: 10, opacity: 0 }}
                                                     animate={{ y: 0, opacity: 1 }}
-                                                    className="mt-4 flex items-center gap-2 text-green-600 font-bold text-[12px] bg-green-100/70 px-6 py-2 rounded-full border border-green-200 uppercase tracking-widest shadow-sm"
+                                                    className="mt-4 flex items-center gap-2 text-green-600 font-bold text-[13px] bg-green-100/70 px-6 py-2 rounded-full border border-green-200 uppercase tracking-widest shadow-sm"
                                                 >
                                                     <Gift className="w-4 h-4" /> JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
                                                 </motion.div>
@@ -425,16 +424,16 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
                                 <div className="space-y-6">
                                     <div className="space-y-2">
-                                        <Label className="text-[11px] uppercase font-bold text-slate-400 tracking-widest ml-4">{translations.promo_code_label || "Promokod"}</Label>
+                                        <Label className="ml-4 text-[13px] font-bold uppercase tracking-widest text-slate-500">{translations.promo_code_label || "Promokod"}</Label>
                                         <div className="relative">
-                                            <Input 
+                                            <Input
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
                                                 placeholder={translations.promo_code_placeholder || "KODNI KIRITING"}
                                                 className={cn("rounded-full py-3 px-6 border-slate-200 h-14 text-base font-bold uppercase tracking-widest bg-white shadow-inner focus:ring-primary focus:border-primary transition-all", total.isPromoApplied && "border-emerald-500 ring-2 ring-emerald-500/20")}
                                             />
                                             {total.isPromoApplied && (
-                                                <motion.div 
+                                                <motion.div
                                                     initial={{ scale: 0 }}
                                                     animate={{ scale: 1 }}
                                                     className="absolute right-5 top-1/2 -translate-y-1/2 text-emerald-500"
@@ -444,10 +443,10 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             )}
                                         </div>
                                         {total.isPromoApplied && (
-                                            <motion.div 
+                                            <motion.div
                                                 initial={{ y: -10, opacity: 0 }}
                                                 animate={{ y: 0, opacity: 1 }}
-                                                className="mt-2 flex items-center gap-2 text-emerald-600 font-bold text-[10px] bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100 shadow-sm w-fit mx-auto"
+                                                className="mx-auto mt-2 flex w-fit items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-2 text-[13px] font-bold text-emerald-600 shadow-sm"
                                             >
                                                 <Sparkles className="w-3.5 h-3.5" /> TABRIKLAYMIZ! PROMOKOD QABUL QILINDI
                                             </motion.div>
@@ -456,15 +455,15 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
                                     {!total.isPromoApplied && (
                                         <div className="space-y-2">
-                                            <Label className="text-[11px] uppercase font-bold text-slate-400 tracking-widest ml-4">CHEGIRMARAR</Label>
+                                            <Label className="ml-4 text-[13px] font-bold uppercase tracking-widest text-slate-500">CHEGIRMALAR</Label>
                                             <DynamicToggle id="discount-tier" options={discountOptions} selected={discountType} onSelect={(val) => setDiscountType(val as any)} className="h-14" />
                                         </div>
                                     )}
                                 </div>
                             </div>
-                            <Button 
-                                size="lg" 
-                                className="w-full py-8 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group btn-premium bg-primary text-white" 
+                            <Button
+                                size="lg"
+                                className="w-full py-5 sm:py-8 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group btn-premium bg-primary text-white"
                                 onClick={(e) => {
                                     if (typeof window !== 'undefined') {
                                         if ((window as any).fbq) {
@@ -475,12 +474,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         }
                                     }
                                     onOrderNow();
-                                }} 
+                                }}
                                 disabled={total.base === 0}
                                 aria-label="Loyiha narxini tasdiqlash"
                             >
                                 <span className="flex items-center justify-center gap-3 uppercase tracking-wider">
-                                    LOYIHA NARXINI TASDIQLASH 
+                                    LOYIHA NARXINI TASDIQLASH
                                     <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform shrink-0" />
                                 </span>
                             </Button>
