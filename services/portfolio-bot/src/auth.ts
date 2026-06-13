@@ -19,7 +19,7 @@ async function main() {
     phoneNumber: () => input.text('Phone number (+998...): '),
     password: () => input.text('2FA password (or Enter): '),
     phoneCode: () => input.text('SMS/app code: '),
-    onError: (err) => console.error(err),
+    onError: (err: unknown) => console.error(err),
   });
 
   const sessionString = client.session.save() as unknown as string;
