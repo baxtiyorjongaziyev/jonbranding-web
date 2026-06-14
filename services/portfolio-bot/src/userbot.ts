@@ -21,7 +21,7 @@ export async function startUserbot(): Promise<void> {
     phoneNumber: async () => { throw new Error('No session — run auth.ts first'); },
     password: async () => '',
     phoneCode: async () => '',
-    onError: (err) => console.error('[userbot] auth error:', err),
+    onError: (err: any) => console.error('[userbot] auth error:', err),
   });
 
   // Resolve usernames (@JonBranding) and numeric IDs to canonical numeric strings
@@ -42,7 +42,7 @@ export async function startUserbot(): Promise<void> {
 
   client.addEventHandler(async (event: any) => {
     try {
-      const message: Api.Message = event.message;
+      const message: any = event.message;
       if (!message?.text) return;
 
       const peerId = message.peerId;
