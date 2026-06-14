@@ -1,4 +1,3 @@
-
 /** @type {import('next').NextConfig} */
 if (process.env.NODE_ENV === 'development') {
   try {
@@ -38,6 +37,11 @@ const nextConfig = {
         destination: '/zh/xizmatlar/brand-strategiyasi',
         permanent: true,
       },
+    ];
+  },
+  async rewrites() {
+    return [
+      { source: '/avans', destination: '/tools/avans-kalkulyator.html' },
     ];
   },
   experimental: {
