@@ -2,7 +2,7 @@
 
 ![Project Status](https://img.shields.io/badge/status-production--ready-success)
 ![Lighthouse Score](https://img.shields.io/badge/lighthouse-100%2F100-brightgreen)
-![Next.js](https://img.shields.io/badge/framework-Next.js%2014-black)
+![Next.js](https://img.shields.io/badge/framework-Next.js%2016-black)
 
 A high-performance, multilingual, and conversion-optimized web application for Jon Branding Agency. Built with Next.js 16, React 19, Sanity CMS, and integrated with AmoCRM and Meta CAPI.
 
