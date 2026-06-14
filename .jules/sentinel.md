@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2026-06-14 - Timing Attack Vulnerability in API Routes
+**Vulnerability:** API routes (`src/app/api/amocrm-refresh/route.ts` and `src/app/api/amocrm-process-calls/route.ts`) were using strict equality (`===` or `!==`) to compare authentication secrets or tokens.
+**Learning:** Standard string comparison operators fail early when they find a mismatch, allowing an attacker to measure the time it takes for the comparison to fail. This time difference can be used to guess the secret character by character.
+**Prevention:** Always use a constant-time comparison utility (like `crypto.timingSafeEqual` or a custom implementation like `secureCompare`) when verifying secrets, tokens, or signatures.
