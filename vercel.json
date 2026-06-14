@@ -1,4 +1,7 @@
 {
   "buildCommand": "next build --webpack",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "rewrites": [
+    { "source": "/avans", "destination": "/tools/avans-kalkulyator.html" }
+  ]
 }
