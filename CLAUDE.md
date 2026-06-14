@@ -82,6 +82,15 @@ NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_OISHA_API_URL=https://oisha-master-bot-...run.app
 ```
 
+## Token tejash qoidalari
+
+- Faqat kerakli faylni o'qi — butun papkani emas
+- Xato aniq fayl + qator: `src/components/hero.tsx:45`
+- Test yozma (so'ramasam)
+- Izoh yozma (so'ramasam)
+- Faqat o'zgartirilgan kodni ko'rsat, hammasi emas
+- `npm run build` tekshirishsiz boshing — avval TypeScript xatoni ko'r
+
 ## Eslatmalar
 
 - `DEV_LOG.md` — push qilganda avtomatik yangilanadi
