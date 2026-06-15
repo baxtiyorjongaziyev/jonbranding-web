@@ -3,13 +3,14 @@ import type { FC } from 'react';
 interface Props { onOpen: () => void; }
 
 const PROJECTS = [
-  { year: '2025', name: 'Qumri Coffee', scope: 'Kofexona · Samarqand', work: 'Neyming · Aydentika · Qadoq', result: '+41% sotuv' },
-  { year: '2025', name: 'Teshabay osh', scope: 'Restoran · Toshkent', work: 'Rebrending · Menyu', result: '3× takror' },
-  { year: '2024', name: 'Oltin Bulut', scope: 'Sutchilik · Buxoro', work: 'Qadoq · 12 SKU', result: '+31% sotuv' },
-  { year: '2024', name: 'Humo', scope: 'Fintech · Toshkent', work: 'Brend · Ilova · Sayt', result: '180K foydalanuvchi' },
-  { year: '2023', name: 'Nur Sopol', scope: 'Sopol idishlar · Rishton', work: 'Aydentika · Qadoq', result: "2× ko'rinish" },
-  { year: '2023', name: 'Chilla', scope: 'Yozgi kiyim · Toshkent', work: 'Neyming · Aydentika', result: 'Yangi bozor' },
-  { year: '2022', name: 'Asaka Co.', scope: 'Avtomobil servisi', work: 'Rebrending · Sayt', result: '+22% mijoz' },
+  { year: '2026', name: 'ARFADEL', scope: 'Parfyumeriya · Toshkent', work: 'Logotip · Firma uslubi', result: '8 500+ obunachilar' },
+  { year: '2026', name: 'Boyarin', scope: 'Sutchilik · Farg\'ona', work: 'Qadoq dizayni · 2 SKU', result: 'Yangilangan aydentika' },
+  { year: '2026', name: 'Beyaz', scope: 'Premium brend', work: 'Logotip · Rang tizimi', result: 'Gold/Green variantlar' },
+  { year: '2026', name: 'Estem', scope: 'Savdo markasi', work: 'Logotip · Variantlar', result: 'To\'liq aydentika' },
+  { year: '2026', name: 'Geonest Engineering', scope: 'Muhandislik · Toshkent', work: 'Korporativ logotip', result: 'B2B brending' },
+  { year: '2026', name: 'Master Mould', scope: 'Ishlab chiqarish', work: 'Korporativ logotip', result: 'Firma uslubi' },
+  { year: '2025', name: 'Rutera', scope: 'Savdo kompaniyasi', work: 'Logotip · Brendbuk', result: 'To\'liq brendbuk' },
+  { year: '2025', name: 'Doctor Fresh', scope: 'Tijorat tozalash', work: 'Katalog · Brending', result: 'Chakana tarmoq' },
 ];
 
 const AtWorkIndex: FC<Props> = ({ onOpen }) => (
