@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { load as loadYaml } from 'js-yaml';
 import { Marked } from 'marked';
+import DOMPurify from 'isomorphic-dompurify';
 import { type BlogPost } from '@/lib/types';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
@@ -39,7 +40,7 @@ function sanitizeText(value: unknown): string {
   // every consumer renders these values through React/Next metadata, which
   // escape on output. Encoding here caused double-encoding (e.g. O'z -> O&#x27;z
   // shown literally). The one raw-HTML sink (JSON-LD) escapes separately.
-  return value.replace(/<[^>]*>/g, '').trim();
+  return DOMPurify.sanitize(value, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }).trim();
 }
 
 function sanitizeUrl(value: unknown): string {
