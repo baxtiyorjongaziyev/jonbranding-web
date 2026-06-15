@@ -35,16 +35,11 @@ export function getSortedPostsData(lang: string = 'en'): Omit<BlogPost, 'content
 function sanitizeText(value: unknown): string {
   if (value instanceof Date) return value.toISOString();
   if (typeof value !== 'string') return '';
-  return value.replace(/[<>"'&]/g, (ch) => {
-    switch (ch) {
-      case '<': return '&lt;';
-      case '>': return '&gt;';
-      case '"': return '&quot;';
-      case "'": return '&#x27;';
-      case '&': return '&amp;';
-      default: return ch;
-    }
-  });
+  // Strip any HTML tags but keep the text human-readable. Do NOT HTML-encode:
+  // every consumer renders these values through React/Next metadata, which
+  // escape on output. Encoding here caused double-encoding (e.g. O'z -> O&#x27;z
+  // shown literally). The one raw-HTML sink (JSON-LD) escapes separately.
+  return value.replace(/<[^>]*>/g, '').trim();
 }
 
 function sanitizeUrl(value: unknown): string {
