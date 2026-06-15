@@ -34,7 +34,7 @@ const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: 
         <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
             <SectionIntro eyebrow="FAQ" title={translations.title} description={translations.subtitle} align="left" className="[&>p]:mx-0" />
-            <div className="mt-8 hidden max-w-md rounded-[1.6rem] border border-brand-line bg-[#fbfbfd] p-5 lg:block">
+            <div className="mt-8 hidden max-w-md rounded-3xl border border-brand-line/60 bg-white/70 backdrop-blur-md p-6 shadow-[0_15px_35px_rgba(0,0,0,0.02)] lg:block">
               <div className="text-[11px] font-black uppercase tracking-[0.18em] text-brand-blue">Objection map</div>
               <div className="mt-4 flex flex-wrap gap-2">
                 {objectionLabels.map((label, index) => (

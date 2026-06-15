@@ -69,10 +69,10 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
           <motion.div variants={itemVariants} className="space-y-4">
             {(translations.phases ?? []).map((phase, index: number) => (
               <div key={index} className="group relative grid gap-4 border-t border-brand-line py-6 first:border-t-0 md:grid-cols-[4.5rem_1fr] md:py-8">
-                <div className="relative z-[1] flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-brand-line bg-white text-sm font-black text-brand-blue shadow-[0_18px_42px_-28px_rgba(15,23,42,0.7)] transition-[background-color,color,transform,border-color] duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-blue group-hover:bg-brand-blue group-hover:text-white sm:h-12 sm:w-12">
+                <div className="relative z-[1] flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-brand-line/60 bg-white/80 text-sm font-black text-brand-blue shadow-[0_10px_25px_rgba(0,0,0,0.02)] transition-[background-color,color,transform,border-color] duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-blue group-hover:bg-brand-blue group-hover:text-white sm:h-12 sm:w-12">
                     0{index + 1}
                   </div>
-                  <div className="min-w-0 rounded-[1.4rem] sm:rounded-[1.6rem] border border-transparent bg-[#fbfbfd] p-4 transition-[background-color,border-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-line group-hover:bg-white sm:p-7">
+                  <div className="min-w-0 rounded-3xl border border-transparent bg-[#fbfbfd] p-4 transition-[background-color,border-color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-line/60 group-hover:bg-white sm:p-7 shadow-sm group-hover:shadow-md">
                     <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                       <h3 className="text-xl font-black leading-tight tracking-tight text-brand-ink sm:text-2xl lg:text-3xl">{phase.title}</h3>
                       {phase.badge && <Badge variant="outline" className="rounded-full border-brand-line bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-brand-slate">{phase.badge}</Badge>}
@@ -81,8 +81,8 @@ const Process: React.FC<ProcessProps> = ({ dictionary }) => {
                     {phase.steps && (
                       <ul className="mt-4 grid gap-2 sm:mt-5 sm:grid-cols-2">
                         {phase.steps.map((step: string) => (
-                          <li key={step} className="flex items-start gap-2.5 rounded-xl sm:rounded-2xl bg-white px-3 py-2 text-sm font-semibold leading-6 text-brand-slate ring-1 ring-brand-line/70">
-                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" />
+                          <li key={step} className="flex items-start gap-2.5 rounded-2xl bg-white/85 px-4.5 py-3 text-sm font-semibold leading-6 text-brand-slate border border-brand-line/50 shadow-sm">
+                            <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-brand-blue" />
                             <span>{step}</span>
                           </li>
                         ))}

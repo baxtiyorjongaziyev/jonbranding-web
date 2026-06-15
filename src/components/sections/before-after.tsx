@@ -148,7 +148,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
             <motion.div 
               key={item.brand || idx}
               variants={itemVariants}
-              className="relative overflow-hidden rounded-[1.75rem] border border-white/12 bg-white/[0.055] p-3 shadow-[0_50px_100px_-42px_rgba(0,0,0,0.9)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-white/22 w-[85vw] shrink-0 snap-center md:w-auto md:shrink md:snap-align-none"
+              className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/[0.055] p-3 shadow-[0_50px_100px_-42px_rgba(0,0,0,0.9)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-white/22 w-[85vw] shrink-0 snap-center md:w-auto md:shrink md:snap-align-none"
             >
               <div className="relative z-10">
                 <ImageComparisonSlider
