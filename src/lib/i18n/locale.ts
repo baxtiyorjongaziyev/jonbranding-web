@@ -44,12 +44,12 @@ export function getLocale(request: NextRequest): Locale {
     return cookieLocale as Locale;
   }
 
-  // 2. O'zbekiston hududini IP-headerlar orqali aniqlaymiz.
-  const country =
+  const country = (
     request.headers.get('x-vercel-ip-country') ||
     request.headers.get('x-country-code') ||
     request.headers.get('cf-ipcountry') ||
-    request.headers.get('x-appengine-country');
+    request.headers.get('x-appengine-country')
+  )?.toUpperCase();
 
   if (country === 'UZ') {
     return 'uz';
