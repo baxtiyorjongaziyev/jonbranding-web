@@ -134,21 +134,21 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                 </h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="p-5 rounded-2xl bg-brand-blue/5 border border-brand-blue/10">
-                    <div className="font-bold text-blue-700 mb-2">{t.analogy.bucket}</div>
-                    <p className="text-sm text-blue-600/80">Sizning brendingiz, logoyingiz va saytingiz — bu mijozlarni tutib qoluvchi idish.</p>
+                  <div className="p-5 rounded-2xl bg-brand-blue/[0.03] border border-brand-blue/15 text-brand-ink transition-all hover:bg-brand-blue/[0.05]">
+                    <div className="font-bold text-brand-blue mb-2">{t.analogy.bucket}</div>
+                    <p className="text-sm text-brand-ink/80">Sizning brendingiz, logoyingiz va saytingiz — bu mijozlarni tutib qoluvchi idish.</p>
                   </div>
-                  <div className="p-5 rounded-2xl bg-brand-cyan/10 border border-brand-cyan/20">
-                    <div className="font-bold text-sky-700 mb-2">{t.analogy.water}</div>
-                    <p className="text-sm text-sky-600/80">Reklamadan kelayotgan har bir odam — bu chelagingizga quyilayotgan suvdek gap.</p>
+                  <div className="p-5 rounded-2xl bg-brand-cyan/[0.04] border border-brand-cyan/20 text-brand-ink transition-all hover:bg-brand-cyan/[0.06]">
+                    <div className="font-bold text-brand-cyan mb-2">{t.analogy.water}</div>
+                    <p className="text-sm text-brand-ink/80">Reklamadan kelayotgan har bir odam — bu chelagingizga quyilayotgan suvdek gap.</p>
                   </div>
-                  <div className="p-5 rounded-2xl bg-red-50 border border-red-100">
-                    <div className="font-bold text-red-700 mb-2">{t.analogy.leak}</div>
-                    <p className="text-sm text-red-600/80">Ishonchsiz ko'rinish reklama natijasini pasaytiradi va mijoz qarorini sekinlashtiradi.</p>
+                  <div className="p-5 rounded-2xl bg-red-500/[0.03] border border-red-500/15 text-brand-ink transition-all hover:bg-red-500/[0.05]">
+                    <div className="font-bold text-red-500 mb-2">{t.analogy.leak}</div>
+                    <p className="text-sm text-brand-ink/80">Ishonchsiz ko'rinish reklama natijasini pasaytiradi va mijoz qarorini sekinlashtiradi.</p>
                   </div>
                 </div>
 
-                <div className="mt-8 p-6 rounded-2xl bg-brand-blue/5 border-l-4 border-brand-blue">
+                <div className="mt-8 p-6 rounded-2xl bg-brand-blue/[0.02] border-l-4 border-brand-blue/70">
                   <p 
                     className="text-lg font-medium text-brand-ink italic"
                     dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(`"${t.analogy.description}"`) }}
@@ -159,7 +159,7 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
 
             {/* Right: Results (4 cols) */}
             <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-24">
-              <div className="p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-brand-ink text-white border border-white/10 shadow-2xl relative overflow-hidden group">
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#0d0f17]/95 text-white border border-white/10 shadow-2xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(58,225,255,0.22),transparent_32rem)]" />
                 <div className="absolute top-0 right-0 p-8 opacity-10 transform translate-x-1/4 -translate-y-1/4 group-hover:scale-110 transition-transform duration-700">
                   <TrendingUp className="w-40 h-40" />
@@ -213,13 +213,13 @@ const OpportunityCostCalculator: React.FC<OpportunityCostCalculatorProps> = ({
                   );
                 })}
                 size="lg"
-                className="w-full h-24 rounded-[2rem] text-xl font-black shadow-none bg-brand-ink hover:bg-brand-blue group transition-all duration-300"
+                className="w-full h-18 rounded-full py-4 px-8 text-base font-extrabold shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] bg-brand-ink hover:bg-brand-blue group transition-all duration-300"
               >
                 <div className="flex flex-col items-center">
-                   <span>{t.cta}</span>
-                   <span className="text-[10px] opacity-60 font-normal uppercase mt-1">Audit o'tkazish va ustuvor muammolarni aniqlash</span>
+                   <span className="text-white text-lg font-extrabold">{t.cta}</span>
+                   <span className="text-[9px] text-white/50 opacity-80 font-normal uppercase tracking-wider mt-0.5">Audit o'tkazish va ustuvor muammolarni aniqlash</span>
                 </div>
-                <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1.5 transition-transform text-white" />
               </Button>
 
               <div className="text-center px-4">

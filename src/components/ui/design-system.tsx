@@ -23,6 +23,8 @@ export function BrandSection({
   );
 }
 
+import { renderHeadline } from '@/lib/headline';
+
 export function SectionIntro({
   eyebrow,
   title,
@@ -44,7 +46,7 @@ export function SectionIntro({
         </div>
       )}
       <h2 className="text-balance font-headline font-extrabold leading-[1.08] tracking-[-0.025em] text-foreground">
-        {title}
+        {typeof title === 'string' ? renderHeadline(title, 'text-brand-blue') : title}
       </h2>
       {description && (
         <p className={cn(

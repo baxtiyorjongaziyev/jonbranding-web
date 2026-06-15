@@ -5,6 +5,8 @@ import { BrandSection } from '@/components/ui/design-system';
 import { Marquee } from '@/components/ui/marquee';
 import type { Brand } from '@/lib/types';
 
+import { renderHeadline } from '@/lib/headline';
+
 type TrustedByDictionary = {
   eyebrow?: string;
   title?: string;
@@ -36,7 +38,7 @@ const TrustedBy: React.FC<{ lang: string; dictionary: TrustedByDictionary; brand
               </div>
             )}
             <h2 id="trusted-by-title" className="max-w-2xl text-balance text-foreground">
-              {dictionary.title}
+              {typeof dictionary.title === 'string' ? renderHeadline(dictionary.title, 'text-brand-blue') : dictionary.title}
             </h2>
             {dictionary.subtitle && <p className="mt-5 max-w-xl text-base leading-8 text-brand-slate sm:text-lg">{dictionary.subtitle}</p>}
           </div>

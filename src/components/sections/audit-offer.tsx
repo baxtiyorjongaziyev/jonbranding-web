@@ -3,6 +3,8 @@ import { ArrowUpRight, CheckCircle2, FileSearch, Layers3, Route, ShieldCheck, Ta
 import ContactTriggerButton from '@/components/contact-trigger-button';
 import { BrandSection } from '@/components/ui/design-system';
 
+import { renderHeadline } from '@/lib/headline';
+
 type AuditOfferDictionary = {
   eyebrow?: string;
   title?: string;
@@ -34,7 +36,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
               </div>
             )}
             <h2 className="max-w-2xl text-balance text-foreground">
-              {dictionary.title}
+              {typeof dictionary.title === 'string' ? renderHeadline(dictionary.title, 'text-brand-blue') : dictionary.title}
             </h2>
             {dictionary.description && <p className="mt-6 text-pretty text-lg leading-8 text-brand-slate">{dictionary.description}</p>}
 
@@ -73,7 +75,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
             )}
           </div>
 
-          <div className="rounded-[1.75rem] border border-brand-line bg-card p-3 shadow-[0_30px_90px_rgba(14,16,21,0.06)]">
+          <div className="rounded-3xl border border-brand-line bg-card p-3 shadow-[0_24px_50px_rgba(0,0,0,0.04)]">
             {items.map((item, index) => {
               const Icon = auditIcons[index % auditIcons.length];
 

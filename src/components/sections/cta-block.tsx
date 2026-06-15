@@ -4,6 +4,8 @@ import type { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 
+import { renderHeadline } from '@/lib/headline';
+
 interface CtaBlockProps {
   title: string;
   description: string;
@@ -32,7 +34,7 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
   return (
     <section className="bg-brand-paper py-20 sm:py-24">
       <div className="container mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
-        <div className="relative isolate overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#090b0f] px-6 py-12 shadow-[0_42px_110px_-56px_rgba(15,23,42,0.86)] sm:px-10 sm:py-16 lg:px-14">
+        <div className="relative isolate overflow-hidden rounded-3xl border border-white/10 bg-[#090b0f] px-6 py-12 shadow-[0_42px_110px_-56px_rgba(15,23,42,0.86)] sm:px-10 sm:py-16 lg:px-14">
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(118deg,#090b0f_0%,#11151d_64%,#121712_100%)]" />
           <div className="absolute inset-x-0 top-0 h-px bg-white/14" />
           <div className="grid gap-9 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -41,7 +43,9 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
                 <ShieldCheck className="h-4 w-4" />
                 Jon.Branding
               </div>
-              <h2 className="max-w-4xl text-balance text-3xl font-extrabold leading-tight tracking-normal text-white sm:text-5xl">{title}</h2>
+              <h2 className="max-w-4xl text-balance text-3xl font-extrabold leading-tight tracking-normal text-white sm:text-5xl">
+                {typeof title === 'string' ? renderHeadline(title, 'text-brand-lime') : title}
+              </h2>
               <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-white/65 sm:text-lg">{description}</p>
             </div>
             <Button
