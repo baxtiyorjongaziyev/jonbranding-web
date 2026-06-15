@@ -39,11 +39,6 @@ const nextConfig = {
       },
     ];
   },
-  async rewrites() {
-    return [
-      { source: '/avans', destination: '/tools/avans-kalkulyator.html' },
-    ];
-  },
   experimental: {
     optimizeCss: true,
   },
