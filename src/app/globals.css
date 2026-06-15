@@ -575,10 +575,10 @@
 
 /* ── Premium Liquid Glass Header (Atelier Warm Glass) ── */
 .liquid-glass-header {
-  background: rgba(242, 239, 230, 0.90) !important;
+  background: rgba(255, 255, 255, 0.85) !important; /* Clean frosted white glass */
   backdrop-filter: blur(40px) saturate(200%) !important;
   -webkit-backdrop-filter: blur(40px) saturate(200%) !important;
-  border: 1px solid rgba(216, 210, 194, 0.55) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important; /* Clean light border */
   box-shadow: 
     0 1px 2px rgba(14, 16, 21, 0.04),
     0 12px 30px -10px rgba(14, 16, 21, 0.06),
@@ -588,6 +588,16 @@
   position: relative;
   isolation: isolate;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-header.dark-glass {
+  background: rgba(7, 11, 19, 0.85) !important; /* Premium dark glass */
+  border: 1px solid rgba(255, 255, 255, 0.08) !important; /* Premium dark border */
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 12px 30px -10px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.2) !important;
 }
 
 .liquid-glass-header::before {

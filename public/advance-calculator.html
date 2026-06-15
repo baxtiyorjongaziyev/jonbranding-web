@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JON BRANDING | Xavfsiz Avans Kalkulyatori</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brandDark: '#0B0F17',
+                        brandCard: '#131A26',
+                        brandGold: {
+                            DEFAULT: '#F59E0B',
+                            hover: '#D97706',
+                        },
+                        brandGreen: '#10B981',
+                        brandRed: '#EF4444',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for premium look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0B0F17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #1C2635;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #2D3D54;
+        }
+    </style>
+    <script>
+        // Check local storage or system preferences on initial load
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-brandDark text-slate-800 dark:text-slate-200 min-h-screen flex items-center justify-center p-4 sm:p-8 relative overflow-x-hidden transition-colors duration-300">
+    <!-- Background glows -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.06),transparent_50%)] pointer-events-none z-0"></div>
+    <div class="absolute -top-[200px] right-[10%] w-[300px] h-[300px] bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.03),transparent_50%)] pointer-events-none z-0"></div>
+
+    <div class="w-full max-w-4xl bg-white dark:bg-brandCard/40 border border-slate-200/60 dark:border-white/5 backdrop-blur-md rounded-3xl p-6 sm:p-10 shadow-xl dark:shadow-2xl relative z-10 my-4 sm:my-8 transition-colors duration-300">
+        
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-8 mb-8">
+            <div>
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brandGold/10 text-brandGold border border-brandGold/20 uppercase tracking-widest">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brandGold animate-pulse"></span>
+                        Moliya Tizimi
+                    </span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight uppercase">
+                    JON BRANDING <span class="text-brandGold">|</span> Xavfsiz Avans Kalkulyatori
+                </h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                    Kassa uzilishlarining oldini olish va oylik avanslarni xavfsiz hisoblash tizimi
+                </p>
+            </div>
+            
+            <!-- Theme Toggle & Logo -->
+            <div class="flex items-center gap-4 shrink-0 sm:self-start">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-brandCard hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-white/5 flex items-center justify-center text-slate-600 dark:text-brandGold transition-all outline-none" aria-label="Mavzuni o'zgartirish">
+                    <!-- Sun Icon (visible in dark mode) -->
+                    <svg id="sunIcon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                    <!-- Moon Icon (visible in light mode) -->
+                    <svg id="moonIcon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <div class="flex items-center gap-3 bg-slate-100 dark:bg-brandCard border border-slate-200 dark:border-white/5 p-3 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGold to-amber-400 flex items-center justify-center font-extrabold text-black text-lg">
+                        J
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-800 dark:text-slate-300 uppercase tracking-wider font-semibold">Jon Branding</div>
+                        <div class="text-xs text-slate-500">Finance Manager Tool</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Column: Inputs -->
+            <div class="lg:col-span-7 space-y-6">
+                <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brandGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                    </svg>
+                    Kiritish koʻrsatkichlari
+                </h2>
+
+                <!-- Input: Monthly Net Salary -->
+                <div class="space-y-2">
+                    <label for="monthlySalary" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                        Oylik sof maosh (UZS)
+                    </label>
+                    <div class="relative rounded-xl shadow-sm">
+                        <input type="number" id="monthlySalary" min="0" step="500000" value="6000000"
+                            class="block w-full rounded-xl bg-slate-50 dark:bg-brandDark/80 border border-slate-200 dark:border-white/10 px-4 py-3.5 text-slate-900 dark:text-white font-bold text-lg focus:border-brandGold focus:ring-1 focus:ring-brandGold outline-none transition-all placeholder-slate-400">
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400 dark:text-slate-500 font-bold">
+                            UZS
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Xodimning soliqlar chegirib tashlanganidan keyingi oylik sof maoshi</p>
+                </div>
+
+                <!-- Input: Total Working Days & Days Worked in 1 row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label for="totalWorkingDays" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            Oydagi jami ish kunlari
+                        </label>
+                        <input type="number" id="totalWorkingDays" min="1" max="31" value="22"
+                            class="block w-full rounded-xl bg-slate-50 dark:bg-brandDark/80 border border-slate-200 dark:border-white/10 px-4 py-3.5 text-slate-900 dark:text-white font-bold text-lg focus:border-brandGold focus:ring-1 focus:ring-brandGold outline-none transition-all">
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Rejadagi umumiy ish kunlari</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="daysWorked" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            Haqiqatda ishlab berilgan kunlar
+                        </label>
+                        <input type="number" id="daysWorked" min="0" max="22" value="10"
+                            class="block w-full rounded-xl bg-slate-50 dark:bg-brandDark/80 border border-slate-200 dark:border-white/10 px-4 py-3.5 text-slate-900 dark:text-white font-bold text-lg focus:border-brandGold focus:ring-1 focus:ring-brandGold outline-none transition-all">
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Kalkulyatsiya kunigacha ishlab berilgan kunlar</p>
+                    </div>
+                </div>
+
+                <!-- Input: Safety Factor Slider -->
+                <div class="space-y-2 bg-slate-100/50 dark:bg-brandDark/30 border border-slate-200/50 dark:border-white/5 rounded-2xl p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <label for="safetyFactor" class="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            Kassa xavfsizlik koeffitsiyenti
+                        </label>
+                        <span id="safetyFactorValue" class="text-brandGold font-bold text-lg">75%</span>
+                    </div>
+                    <input type="range" id="safetyFactor" min="50" max="80" value="75"
+                        class="w-full h-2 bg-slate-200 dark:bg-brandDark rounded-lg appearance-none cursor-pointer accent-brandGold">
+                    <p class="text-xs text-slate-500 dark:text-slate-400 italic">
+                        * Kassa uzilishining oldini olish uchun 70-75% tavsiya etiladi.
+                    </p>
+                </div>
+
+                <!-- Input: Requested Advance -->
+                <div class="space-y-2">
+                    <label for="requestedAdvance" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                        Xodim soʻrayotgan avans miqdori (UZS)
+                    </label>
+                    <div class="relative rounded-xl shadow-sm">
+                        <input type="number" id="requestedAdvance" min="0" step="100000" value="2000000"
+                            class="block w-full rounded-xl bg-slate-50 dark:bg-brandDark/80 border border-slate-200 dark:border-white/10 px-4 py-3.5 text-slate-900 dark:text-white font-bold text-lg focus:border-brandGold focus:ring-1 focus:ring-brandGold outline-none transition-all placeholder-slate-400">
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400 dark:text-slate-500 font-bold">
+                            UZS
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Xodim tomonidan talab qilingan avans miqdori</p>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Outputs & Warnings -->
+            <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+                
+                <div class="space-y-6">
+                    <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-brandGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        Hisob-kitob natijalari
+                    </h2>
+
+                    <!-- Accrued Salary Display Card -->
+                    <div class="bg-slate-100/50 dark:bg-brandDark/50 border border-slate-200/50 dark:border-white/5 rounded-2xl p-5 space-y-1 transition-all">
+                        <span class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+                            Shu kungacha ishlab topilgan haq
+                        </span>
+                        <div id="accruedSalaryText" class="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                            0 UZS
+                        </div>
+                        <p class="text-xs text-slate-500">
+                            Kunlik haq (<span id="dailyWageText">0 UZS</span>) × ishlab berilgan kunlar
+                        </p>
+                    </div>
+
+                    <!-- Maximum Safe Advance Display Card (Amber/Gold Card) -->
+                    <div class="bg-amber-500/5 dark:bg-brandGold/20 border border-brandGold/30 rounded-2xl p-6 space-y-2 relative overflow-hidden transition-all shadow-sm dark:shadow-lg dark:shadow-brandGold/5">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-brandGold/10 rounded-full blur-2xl -mr-8 -mt-8"></div>
+                        <span class="text-xs uppercase tracking-wider text-brandGold font-bold flex items-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            Maksimal xavfsiz avans miqdori
+                        </span>
+                        <div id="maxSafeAdvanceText" class="text-4xl font-extrabold text-brandGold tracking-tight drop-shadow-sm">
+                            0 UZS
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                            Ishlab topilgan haqning <span id="safetyFactorAppliedText">75%</span> qismi xavfsiz deb hisoblandi.
+                        </p>
+                    </div>
+
+                    <!-- Warning Box (Dynamically toggled) -->
+                    <div id="warningAlert" class="hidden bg-red-50 dark:bg-brandRed/10 border border-red-200 dark:border-brandRed/20 rounded-2xl p-5 space-y-2 animate-pulse transition-all">
+                        <div class="flex items-center gap-2 text-red-800 dark:text-brandRed font-bold">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            Diqqat: Kassa Xavfi!
+                        </div>
+                        <p class="text-sm text-red-700 dark:text-slate-300 leading-relaxed">
+                            Xodim soʻrayotgan miqdor xavfsizlik limitidan yuqori. Bu kassa uzilishiga (cash crunch) sabab boʻlishi mumkin.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Footer Sign/Info -->
+                <div class="pt-6 border-t border-slate-200 dark:border-white/5 mt-6 text-center lg:text-left">
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                        © 2026 Jon Branding. Moliya bo'limi uchun maxsus ishlab chiqilgan.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Script Section -->
+    <script>
+        // DOM Elements
+        const monthlySalaryInput = document.getElementById('monthlySalary');
+        const totalWorkingDaysInput = document.getElementById('totalWorkingDays');
+        const daysWorkedInput = document.getElementById('daysWorked');
+        const safetyFactorInput = document.getElementById('safetyFactor');
+        const safetyFactorValueText = document.getElementById('safetyFactorValue');
+        const requestedAdvanceInput = document.getElementById('requestedAdvance');
+
+        const accruedSalaryText = document.getElementById('accruedSalaryText');
+        const dailyWageText = document.getElementById('dailyWageText');
+        const maxSafeAdvanceText = document.getElementById('maxSafeAdvanceText');
+        const safetyFactorAppliedText = document.getElementById('safetyFactorAppliedText');
+        const warningAlert = document.getElementById('warningAlert');
+
+        // Helper: Format number to UZS format
+        function formatUZS(amount) {
+            const rounded = Math.round(amount);
+            return rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " UZS";
+        }
+
+        // Real-time calculation logic
+        function calculate() {
+            let monthlySalary = parseFloat(monthlySalaryInput.value) || 0;
+            let totalWorkingDays = parseInt(totalWorkingDaysInput.value) || 22;
+            let daysWorked = parseInt(daysWorkedInput.value) || 0;
+            let safetyFactor = parseFloat(safetyFactorInput.value) || 75;
+            let requestedAdvance = parseFloat(requestedAdvanceInput.value) || 0;
+
+            // Enforce constraints
+            if (totalWorkingDays < 1) {
+                totalWorkingDays = 1;
+                totalWorkingDaysInput.value = 1;
+            }
+            if (totalWorkingDays > 31) {
+                totalWorkingDays = 31;
+                totalWorkingDaysInput.value = 31;
+            }
+
+            // Days worked cannot exceed total working days
+            daysWorkedInput.max = totalWorkingDays;
+            if (daysWorked > totalWorkingDays) {
+                daysWorked = totalWorkingDays;
+                daysWorkedInput.value = totalWorkingDays;
+            }
+            if (daysWorked < 0) {
+                daysWorked = 0;
+                daysWorkedInput.value = 0;
+            }
+
+            // Calculations
+            const dailyWage = monthlySalary / totalWorkingDays;
+            const accruedSalary = dailyWage * daysWorked;
+            const maxSafeAdvance = accruedSalary * (safetyFactor / 100);
+
+            // Update safety factor label
+            safetyFactorValueText.textContent = safetyFactor + "%";
+            safetyFactorAppliedText.textContent = safetyFactor + "%";
+
+            // Update displays
+            dailyWageText.textContent = formatUZS(dailyWage);
+            accruedSalaryText.textContent = formatUZS(accruedSalary);
+            maxSafeAdvanceText.textContent = formatUZS(maxSafeAdvance);
+
+            // Check warning alert condition
+            if (requestedAdvance > maxSafeAdvance) {
+                warningAlert.classList.remove('hidden');
+            } else {
+                warningAlert.classList.add('hidden');
+            }
+        }
+
+        // Event Listeners
+        monthlySalaryInput.addEventListener('input', calculate);
+        totalWorkingDaysInput.addEventListener('input', () => {
+            const total = parseInt(totalWorkingDaysInput.value) || 22;
+            daysWorkedInput.max = total;
+            if (parseInt(daysWorkedInput.value) > total) {
+                daysWorkedInput.value = total;
+            }
+            calculate();
+        });
+        daysWorkedInput.addEventListener('input', calculate);
+        safetyFactorInput.addEventListener('input', calculate);
+        requestedAdvanceInput.addEventListener('input', calculate);
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Initial trigger
+        calculate();
+    </script>
+</body>
+</html>

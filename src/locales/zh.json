@@ -1341,5 +1341,225 @@
             "Business language",
             "Sales-focused plan"
         ]
+    },
+    "packagingPage": {
+        "metadata": {
+            "title": "乌兹别克斯坦包装设计服务 | Jon.Branding",
+            "description": "我们不仅仅是创造漂亮的包装; 我们还创造一个强大的营销工具来销售您的产品. 我们在乌兹别克斯坦的包装设计机构将帮助您的品牌从竞争对手中脱颖而出并赢得买家的喜爱。"
+        },
+        "title": "包装设计开发",
+        "subtitle": "在激烈的竞争条件下，包装通常成为主要的营销工具. 它能让品牌在货架上与众不同，讲述它的故事，并从第一眼起就与受众建立联系。",
+        "section1_title": "包装 — 不仅仅是品牌识别的载体",
+        "section1_p1": "包装 — 在销售点与品牌的第一次接触，这种视觉吸引力能瞬间建立产品印象. 在许多情况下，包装决定了一个人是否购买。",
+        "section1_p2": "我们的目标 — 不仅仅是创造审美 and 漂亮的包装，更是一个高效的工具，满足业务任务 and 促进其增长。",
+        "process_title": "我们如何创建包装？",
+        "process_subtitle": "我们对待包装开发不只是作为一个单独的设计，而是一个应该为业务服务的复杂系统，并满足受众的期望. 我们的过程包括几个关键阶段：",
+        "process_steps": [
+            {
+                "title": "分析与策略",
+                "description": "研究您的产品、受众、竞争对手以及包装将被使用的环境. 分析品类的视觉代码。"
+            },
+            {
+                "title": "概念与设计",
+                "description": "基于收集到的数据开发反映产品本质的视觉想法：颜色、图形、排版等。"
+            },
+            {
+                "title": "定稿与准备",
+                "description": "仔细制定所选概念的所有技术方面（针对不同格式的调整，印刷准备）。"
+            }
+        ],
+        "cta_title": "包装不仅吸引注意力，它还能销售",
+        "cta_description": "好的包装设计 — 不只是漂亮的装饰，而是为业务服务的工具. 我们开发功能性的、经过战略深思熟虑的设计，使包装成为一个成熟的销售工具。"
+    },
+    "servicesPage": {
+        "metadata": {
+            "title": "品牌服务与价格 | 塔什干专业品牌设计机构 | Jon.Branding",
+            "description": "了解我们的全方位品牌服务：从 LOGO 设计到品牌策略. 使用在线计算器，即时获取乌兹别克斯坦市场最具竞争力的品牌全案报价."
+        },
+        "packageBuilder": {
+            "title": "服务与价格",
+            "subtitle": "了解我们的全方位服务，为您的企业定制专属品牌方案. 使用在线计算器即时获取精准报价。",
+            "categories": {
+                "tripwire": "快速启动 (低成本服务)",
+                "strategy": "战略咨询服务",
+                "naming": "品牌命名",
+                "identity": "视觉识别：LOGO、画册、品牌手册",
+                "addons": "附加服务",
+                "more_services": "其他条款与服务"
+            },
+            "tabs": {
+                "included": "服务内容",
+                "benefits": "您将获得"
+            },
+            "your_package": "您的方案",
+            "your_package_desc": "请选择适合您业务需求的项。",
+            "selected": "已选择",
+            "select": "选择",
+            "base_price_label": "起始价格",
+            "final_price": "最终报价：",
+            "promo_code_label": "优惠码",
+            "promo_code_placeholder": "输入优惠码",
+            "promo_code_invalid": "优惠码无效",
+            "discountSelector": {
+                "none": "无折扣",
+                "package": "套餐优惠 20%",
+                "full": "全额预付 (28% 折扣)"
+            },
+            "empty_package_desc": "您尚未选择任何服务。请至少选择一项服务。",
+            "recommended": "专家推荐"
+        },
+        "comparison": {
+            "title": "我们与竞争对手",
+            "description": "我们不仅提供比高端机构更具性价比的价格，更确保提交的品牌成果超越您的期望。",
+            "features": "服务特性",
+            "whyPremiumTitle": "为什么只跟高端机构比？",
+            "whyPremiumDesc": "我们只与具备战略思维的顶级公司对标。我们的目标并非单纯的低价，而是在确保顶级品质的同时，回归合理的商业价格。与不具备战略高度的小作坊进行对比，是对客户和我们专业度的不负责任。",
+            "ctaTitle": "差异显而易见。现在，做出您的明智选择！",
+            "ctaDesc": "卓越的品牌建设无需支付溢价。请为您的业务做出正确的决定，立即联系我们。",
+            "ctaButton": "我需要这种专业方案"
+        }
+    },
+    "pickTwoSelector": {
+        "title": "三选二",
+        "subtitle": "价格—质量—速度：很少能同时获得这三者。",
+        "ctaText": "索取方案",
+        "options": {
+            "cheap": "便宜",
+            "quality": "高质量",
+            "fast": "快速"
+        },
+        "messages": {
+            "cheap_fast": "质量可能不稳定. 此方案适用于紧急和低预算项目。",
+            "cheap_quality": "需要等待更长时间才能得到结果. 我们将根据您的预算进行调整，并按排队顺序工作以确保质量。",
+            "quality_fast": "价格会更高. 对于紧急项目（2-3 天），标准价格会额外加收 50% 的费用. 我们将动员团队，优先考虑您的截止日期。",
+            "default": "请选择您认为最重要的 2 个优先事项。"
+        },
+        "tooltip": "先取消一个"
+    },
+    "opportunityCalculator": {
+        "title": "您的品牌是否像一个“漏水的水桶”？",
+        "subtitle": "为什么广告在投放，钱却在流失？用数字算一算。",
+        "labels": {
+            "traffic": "网站访问量",
+            "conversion": "购买转化率 (%)",
+            "aov": "平均客单价 ($)",
+            "traffic_unit": "人",
+            "conversion_unit": "(信任)",
+            "currency_suffix": " 索姆"
+        },
+        "analogy": {
+            "title": "为什么会这样？",
+            "bucket": "水桶 = 您的品牌",
+            "water": "水 = 广告带来的客户",
+            "leak": "漏洞 = 糟糕的设计和缺乏信任",
+            "description": "无论您倒入多少“水”，如果品牌存在“漏洞”，利润就会流失。我们来补上这些漏洞。"
+        },
+        "results": {
+            "title": "您的潜力",
+            "potential": "品牌塑造后的月利润",
+            "loss": "您每个月损失的金额",
+            "lossNote": "您每个月都把这些钱“留在了桌子上”。",
+            "roiNote": "只需增加 1-2% 的信任度，您的利润就能翻 2-3 倍。"
+        },
+        "cta": "获取免费战略审计"
+    },
+    "exitIntentModal": {
+        "title": "需要更多信息吗？",
+        "description": "我们为您提供<span class='font-bold text-primary'>多种灵活的方案</span>，以满足您的业务需求。欢迎查看我们的详细报价。",
+        "button": "查看方案"
+    },
+    "queueStatus": {
+        "subtitle": "项目排期",
+        "title": "预定您的项目档期",
+        "description": "为了确保每一项工作的卓越品质，我们每个月仅承接有限数量的重点项目。",
+        "queueTitle": "项目队列",
+        "booked": "已预订",
+        "available": "可预订",
+        "tooltipBooked": "此名额已预订",
+        "tooltipAvailable": "您可以登记排队",
+        "remainingSlots": "剩余空位",
+        "slotsUnit": "个项目",
+        "onlineNow": "目前咨询人数",
+        "peopleUnit": "位",
+        "nextProjectStart": "下一个项目启动日期",
+        "ctaButton": "预约档期",
+        "ctaSubtitle": "为您的品牌投资高品质服务",
+        "timeframes": {
+            "2 weeks": "在 2 周内"
+        }
+    },
+    "leadMagnetPopup": {
+        "title": "品牌建设工具",
+        "subtitle": "评估您品牌的 10 个关键维度。",
+        "description": "完全免费下载由我们专家编写的<b>《品牌落地检查清单》</b>。",
+        "cta": "获取检查清单",
+        "closeText": "不，谢谢",
+        "success": {
+            "title": "成功！",
+            "description": "您的材料已准备好下载。我们的团队可能会很快与您联系。",
+            "downloadCta": "下载检查清单 (PDF)"
+        }
+    },
+    "auditOffer": {
+        "eyebrow": "Inside the free audit",
+        "title": "Is your brand helping sales or slowing them down?",
+        "description": "Before selling design, we show where your brand loses trust in the buyer?s eyes. You leave knowing what you need now and what can wait.",
+        "cta": "Book the free audit",
+        "promise": "No pressure. We show the problem and opportunity first.",
+        "outcomes": [
+            {
+                "value": "15m",
+                "label": "audit call"
+            },
+            {
+                "value": "5",
+                "label": "trust signals"
+            },
+            {
+                "value": "1",
+                "label": "priority plan"
+            },
+            {
+                "value": "Free",
+                "label": "initial audit"
+            }
+        ],
+        "items": [
+            {
+                "title": "First-impression diagnosis",
+                "desc": "We review whether your site, logo, packaging, or social presence feels premium and trustworthy."
+            },
+            {
+                "title": "Trust-gap map",
+                "desc": "We name the weak points that slow buyer confidence."
+            },
+            {
+                "title": "Competitor position",
+                "desc": "We show who looks stronger and where your brand can win visually."
+            },
+            {
+                "title": "Next steps",
+                "desc": "We rank whether strategy, naming, identity, packaging, or website should come first."
+            }
+        ],
+        "proof": [
+            "No obligation",
+            "Business language",
+            "Sales-focused plan"
+        ]
+    },
+    "pricingPage": {
+        "title": "服务与定价",
+        "subtitle": "适合您公司和产品的优质品牌解决方案。价格透明，量身定制。",
+        "brandServices": {
+            "title": "核心品牌服务",
+            "desc": "命名、徽标设计、企业形象、品牌手册、包装设计和 POSM 材料。定制您的专属礼包。",
+            "cta": "打开费率与定制包生成器"
+        },
+        "marketplaceServices": {
+            "title": "电商产品主图设计",
+            "desc": "适用于 Uzum、Wildberries、Ozon 和 Yandex Market 的高转化率产品卡片设计。折扣与附加服务。",
+            "cta": "卡片定价与计算器"
+        }
     }
 }

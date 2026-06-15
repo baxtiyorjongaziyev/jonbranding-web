@@ -33,6 +33,7 @@ src/lib/static-data.ts           # staticBrands, staticTestimonials
 3. Animatsiyalar — `framer-motion` (`motion.div`, `whileInView`)
 4. Yangi section — `src/components/sections/` + `export default FC<Props>`
 5. TypeScript: `FC<Props>` pattern, `ignoreBuildErrors: true`
+6. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili. Har qanday matn yoki o'zgarish birinchi navbatda o'zbek tilida (uz.json da) amalga oshiriladi, so'ngra boshqa 3 ta tilga tarjima qilinadi.
 
 ## Muhim ogohlantirishlar
 - `git push` → HTTP 403 (local proxy bloklaydi). MCP `mcp__github__push_files` ishlatish

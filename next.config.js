@@ -1,4 +1,3 @@
-
 /** @type {import('next').NextConfig} */
 if (process.env.NODE_ENV === 'development') {
   try {
