@@ -1,9 +1,21 @@
 const HTML = `<!DOCTYPE html>
-<html lang="uz" class="dark">
+<html lang="uz">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
   <title>JON BRANDING | Xavfsiz Avans Kalkulyatori</title>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('avans-theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        if (t === 'dark') document.documentElement.classList.add('dark');
+      } catch (e) {}
+    })();
+  <\/script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -15,43 +27,72 @@ const HTML = `<!DOCTYPE html>
         extend: {
           fontFamily: { jakarta: ['Plus Jakarta Sans', 'sans-serif'] },
           colors: {
-            base:    '#0B0F17',
-            card:    '#131A26',
-            cardHov: '#1A2336',
-            border:  '#1E2A3E',
-            amber:   { DEFAULT: '#F5A623', light: '#FFD580', dark: '#C47D0A' },
-            mint:    { DEFAULT: '#34D399', light: '#A7F3D0', dark: '#059669' },
-            danger:  { DEFAULT: '#EF4444', light: '#FCA5A5', dark: '#991B1B' },
-            muted:   '#6B7A99',
-            subtle:  '#8A9AB8',
+            base:    'rgb(var(--c-base) / <alpha-value>)',
+            card:    'rgb(var(--c-card) / <alpha-value>)',
+            cardHov: 'rgb(var(--c-cardHov) / <alpha-value>)',
+            border:  'rgb(var(--c-border) / <alpha-value>)',
+            ink:     'rgb(var(--c-ink) / <alpha-value>)',
+            amber:   { DEFAULT: 'rgb(var(--c-amber) / <alpha-value>)', light: '#FFD580', dark: '#C47D0A' },
+            mint:    { DEFAULT: 'rgb(var(--c-mint) / <alpha-value>)', light: '#A7F3D0', dark: '#059669' },
+            danger:  { DEFAULT: 'rgb(var(--c-danger) / <alpha-value>)', light: '#FCA5A5', dark: '#991B1B' },
+            muted:   'rgb(var(--c-muted) / <alpha-value>)',
+            subtle:  'rgb(var(--c-subtle) / <alpha-value>)',
           },
         },
       },
     };
   <\/script>
   <style>
+    /* Light (default) - matches jonbranding.uz warm-paper theme */
+    :root {
+      --c-base: 244 242 236;
+      --c-card: 255 255 255;
+      --c-cardHov: 243 244 246;
+      --c-border: 226 223 212;
+      --c-ink: 14 16 21;
+      --c-amber: 180 83 9;
+      --c-mint: 4 120 87;
+      --c-danger: 220 38 38;
+      --c-muted: 107 114 128;
+      --c-subtle: 55 65 81;
+    }
+    /* Dark */
+    .dark {
+      --c-base: 11 15 23;
+      --c-card: 19 26 38;
+      --c-cardHov: 26 35 54;
+      --c-border: 30 42 62;
+      --c-ink: 226 232 240;
+      --c-amber: 245 166 35;
+      --c-mint: 52 211 153;
+      --c-danger: 239 68 68;
+      --c-muted: 107 122 153;
+      --c-subtle: 138 154 184;
+    }
     * { box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0B0F17; color: #E2E8F0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif;
+      background: rgb(var(--c-base)); color: rgb(var(--c-ink));
+      transition: background-color .3s ease, color .3s ease; }
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type=number] { -moz-appearance: textfield; }
     input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
-      border-radius: 9999px; background: #1E2A3E; outline: none; cursor: pointer; }
+      border-radius: 9999px; background: rgb(var(--c-border)); outline: none; cursor: pointer; }
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none; appearance: none;
       width: 20px; height: 20px; border-radius: 50%;
-      background: #F5A623; border: 3px solid #0B0F17;
-      box-shadow: 0 0 0 2px #F5A623; cursor: pointer; transition: transform .15s; }
+      background: rgb(var(--c-amber)); border: 3px solid rgb(var(--c-base));
+      box-shadow: 0 0 0 2px rgb(var(--c-amber)); cursor: pointer; transition: transform .15s; }
     input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
     input[type=range]::-moz-range-thumb {
       width: 20px; height: 20px; border-radius: 50%;
-      background: #F5A623; border: 3px solid #0B0F17; cursor: pointer; }
+      background: rgb(var(--c-amber)); border: 3px solid rgb(var(--c-base)); cursor: pointer; }
     .amber-glow { box-shadow: 0 0 32px -4px rgba(245, 166, 35, 0.25); }
     .mint-glow  { box-shadow: 0 0 24px -4px rgba(52, 211, 153, 0.20); }
     .danger-glow{ box-shadow: 0 0 24px -4px rgba(239, 68, 68, 0.25); }
     @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     .fade-in { animation: fadeInDown .3s ease; }
-    .field-input:focus { outline: none; border-color: #F5A623; box-shadow: 0 0 0 3px rgba(245,166,35,.15); }
+    .field-input:focus { outline: none; border-color: rgb(var(--c-amber)); box-shadow: 0 0 0 3px rgba(245,166,35,.15); }
   </style>
 </head>
 <body class="min-h-screen py-10 px-4">
@@ -62,17 +103,29 @@ const HTML = `<!DOCTYPE html>
           <rect width="28" height="28" rx="7" fill="#F5A623"/>
           <path d="M7 20V10h4a3 3 0 0 1 0 6H7m10 4V10" stroke="#0B0F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span class="text-white font-extrabold tracking-widest text-sm uppercase">Jon Branding</span>
+        <span class="text-ink font-extrabold tracking-widest text-sm uppercase">Jon Branding</span>
       </div>
-      <h1 class="text-2xl md:text-3xl font-extrabold text-white leading-tight">
+      <h1 class="text-2xl md:text-3xl font-extrabold text-ink leading-tight">
         Xavfsiz Avans <span class="text-amber">Kalkulyatori</span>
       </h1>
       <p class="text-muted text-sm mt-1">Xodimga avans berishdan oldin kassa xavfsizligini tekshiring</p>
     </div>
-    <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber/10 text-amber border border-amber/20 whitespace-nowrap">
-      <span class="w-2 h-2 rounded-full bg-amber animate-pulse"></span>
-      Moliya Tizimi
-    </span>
+    <div class="flex items-center gap-2">
+      <button id="themeToggle" type="button" aria-label="Yorug' / Qorong'i mavzu" title="Yorug' / Qorong'i mavzu"
+        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-card border border-border text-subtle hover:text-amber transition-colors">
+        <svg id="iconSun" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4"/>
+          <path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg id="iconMoon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber/10 text-amber border border-amber/20 whitespace-nowrap">
+        <span class="w-2 h-2 rounded-full bg-amber animate-pulse"></span>
+        Moliya Tizimi
+      </span>
+    </div>
   </header>
   <main class="max-w-2xl mx-auto space-y-4">
     <section class="bg-card border border-border rounded-2xl p-6 space-y-5">
@@ -83,7 +136,7 @@ const HTML = `<!DOCTYPE html>
         </label>
         <div class="relative">
           <input id="salary" type="number" value="6000000" step="500000" min="0"
-            class="field-input w-full bg-base border border-border rounded-xl px-4 py-3 pr-16 text-white font-semibold text-base transition-all duration-200" />
+            class="field-input w-full bg-base border border-border rounded-xl px-4 py-3 pr-16 text-ink font-semibold text-base transition-all duration-200" />
           <span class="absolute right-4 top-1/2 -translate-y-1/2 text-muted text-xs font-medium">UZS</span>
         </div>
       </div>
@@ -91,12 +144,12 @@ const HTML = `<!DOCTYPE html>
         <div class="space-y-1.5">
           <label class="block text-sm font-semibold text-subtle" for="totalDays">Jami ish kunlari</label>
           <input id="totalDays" type="number" value="22" min="1" max="31"
-            class="field-input w-full bg-base border border-border rounded-xl px-4 py-3 text-white font-semibold text-base transition-all duration-200" />
+            class="field-input w-full bg-base border border-border rounded-xl px-4 py-3 text-ink font-semibold text-base transition-all duration-200" />
         </div>
         <div class="space-y-1.5">
           <label class="block text-sm font-semibold text-subtle" for="workedDays">Ishlab berilgan kunlar</label>
           <input id="workedDays" type="number" value="10" min="0"
-            class="field-input w-full bg-base border border-border rounded-xl px-4 py-3 text-white font-semibold text-base transition-all duration-200" />
+            class="field-input w-full bg-base border border-border rounded-xl px-4 py-3 text-ink font-semibold text-base transition-all duration-200" />
         </div>
       </div>
       <div class="space-y-2">
@@ -113,7 +166,7 @@ const HTML = `<!DOCTYPE html>
         </label>
         <div class="relative">
           <input id="requested" type="number" value="2000000" step="100000" min="0"
-            class="field-input w-full bg-base border border-border rounded-xl px-4 py-3 pr-16 text-white font-semibold text-base transition-all duration-200" />
+            class="field-input w-full bg-base border border-border rounded-xl px-4 py-3 pr-16 text-ink font-semibold text-base transition-all duration-200" />
           <span class="absolute right-4 top-1/2 -translate-y-1/2 text-muted text-xs font-medium">UZS</span>
         </div>
       </div>
@@ -210,7 +263,7 @@ const HTML = `<!DOCTYPE html>
         const color = pct > 100 ? '#EF4444' : pct > 85 ? '#F5A623' : '#34D399';
         const label = pct > 100 ? 'Xavfli zona' : pct > 85 ? 'Ehtiyot zona' : 'Xavfsiz zona';
         elStatus.classList.remove('hidden');
-        elStatus.innerHTML = '<div class="flex justify-between items-center mb-2"><span class="text-xs font-semibold text-muted uppercase tracking-widest">So\'rov darajasi</span><span class="text-xs font-bold" style="color:' + color + '">' + label + ' · ' + Math.round(pct) + '%</span></div><div class="w-full h-2.5 bg-base rounded-full overflow-hidden"><div class="h-full rounded-full transition-all duration-500" style="width:' + Math.min(pct,100) + '%;background:' + color + ';"></div></div><div class="flex justify-between mt-2 text-xs text-muted"><span>0</span><span class="text-amber font-medium">' + fmt(maxSafe) + ' (limit)</span></div>';
+        elStatus.innerHTML = '<div class="flex justify-between items-center mb-2"><span class="text-xs font-semibold text-muted uppercase tracking-widest">So\\'rov darajasi</span><span class="text-xs font-bold" style="color:' + color + '">' + label + ' · ' + Math.round(pct) + '%</span></div><div class="w-full h-2.5 bg-base rounded-full overflow-hidden"><div class="h-full rounded-full transition-all duration-500" style="width:' + Math.min(pct,100) + '%;background:' + color + ';"></div></div><div class="flex justify-between mt-2 text-xs text-muted"><span>0</span><span class="text-amber font-medium">' + fmt(maxSafe) + ' (limit)</span></div>';
       } else {
         elWarning.classList.add('hidden');
         elSafeMsg.classList.add('hidden');
@@ -218,6 +271,21 @@ const HTML = `<!DOCTYPE html>
       }
     }
     [inSalary, inTotalDays, inWorked, inSafety, inRequested].forEach(el => el.addEventListener('input', calculate));
+
+    const root = document.documentElement;
+    const themeBtn = $('themeToggle'), iconSun = $('iconSun'), iconMoon = $('iconMoon');
+    function syncThemeIcon() {
+      const dark = root.classList.contains('dark');
+      iconSun.style.display = dark ? 'block' : 'none';
+      iconMoon.style.display = dark ? 'none' : 'block';
+    }
+    themeBtn.addEventListener('click', function () {
+      const dark = root.classList.toggle('dark');
+      try { localStorage.setItem('avans-theme', dark ? 'dark' : 'light'); } catch (e) {}
+      syncThemeIcon();
+    });
+    syncThemeIcon();
+
     $('currentDate').textContent = new Date().toLocaleDateString('uz-UZ', { year: 'numeric', month: 'long', day: 'numeric' });
     calculate();
   <\/script>
