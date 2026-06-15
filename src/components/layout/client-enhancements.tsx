@@ -43,9 +43,7 @@ const TabNotification = dynamic(() => import('@/components/layout/tab-notificati
   ssr: false,
 });
 
-const LiveClock = dynamic(() => import('@/components/ui/live-clock'), {
-  ssr: false,
-});
+
 
 
 function AnalyticsTracker() {
@@ -227,7 +225,7 @@ export default function ClientEnhancements({
       {enhancementsReady && <CookieConsentBanner />}
       {enhancementsReady && <OishaWidget lang={lang} />}
       {enhancementsReady && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
-      {quickActionsReady && <LiveClock lang={lang} />}
+
     </>
   );
 }

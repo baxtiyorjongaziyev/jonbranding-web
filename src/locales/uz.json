@@ -1519,5 +1519,19 @@
             "Tadbirkor tilida",
             "Sotuvga ta'sir qiladigan reja"
         ]
+    },
+    "pricingPage": {
+        "title": "Xizmatlar va narxlar",
+        "subtitle": "Kompaniyangiz va mahsulotlaringiz uchun premium brending yechimlari. Narxlar shaffof va sizning maqsadlaringizga moslashtirilgan.",
+        "brandServices": {
+            "title": "Asosiy Brending Xizmatlari",
+            "desc": "Neyming, Logotip dizayni, Firma uslubi, Brendbuk, Qadoq dizayni va POSM materiallari. Paketlarni o'zingiz yig'ing.",
+            "cta": "Tariflar va Paket Builderni Ochish"
+        },
+        "marketplaceServices": {
+            "title": "Sotuvchi Kartochkalari Dizayni",
+            "desc": "Uzum, Wildberries, Ozon va Yandex Market uchun yuqori konversiyali mahsulot rasmlari dizayni. Chegirmalar va qo'shimcha xizmatlar.",
+            "cta": "Kartochka Narxlari va Kalkulyator"
+        }
     }
 }
