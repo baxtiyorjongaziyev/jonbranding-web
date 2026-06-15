@@ -3,16 +3,21 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import AtMasthead from '@/components/sections/at-masthead';
 import AtHero from '@/components/sections/at-hero';
-import AtMiniQuotes from '@/components/sections/at-mini-quotes';
 import AtMarquee from '@/components/sections/at-marquee';
+import AtManifesto from '@/components/sections/at-manifesto';
+import AtLedger from '@/components/sections/at-ledger';
+import AtStats from '@/components/sections/at-stats';
 import AtDiagnosis from '@/components/sections/at-diagnosis';
-import AtLossCalc from '@/components/sections/at-loss-calc';
+import AtServices from '@/components/sections/at-services';
+import AtFeatured from '@/components/sections/at-featured';
+import AtShowcase from '@/components/sections/at-showcase';
 import AtAudit from '@/components/sections/at-audit';
 import AtSampleReport from '@/components/sections/at-sample-report';
-import AtPricing from '@/components/sections/at-pricing';
-import AtProcess from '@/components/sections/at-process';
+import AtMiniQuotes from '@/components/sections/at-mini-quotes';
+import AtLossCalc from '@/components/sections/at-loss-calc';
 import AtWorkIndex from '@/components/sections/at-work-index';
-import AtStats from '@/components/sections/at-stats';
+import AtProcess from '@/components/sections/at-process';
+import AtPricing from '@/components/sections/at-pricing';
 import AtQuotes from '@/components/sections/at-quotes';
 import AtFaq from '@/components/sections/at-faq';
 import AtFinalCta from '@/components/sections/at-final-cta';
@@ -36,16 +41,21 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
     >
       <AtMasthead />
       <AtHero onOpen={open} />
-      <AtMiniQuotes />
       <AtMarquee />
+      <AtManifesto />
+      <AtLedger />
+      <AtStats />
       <AtDiagnosis onOpen={open} />
-      <AtLossCalc onOpen={open} />
+      <AtServices onOpen={open} />
+      <AtFeatured />
+      <AtShowcase onOpen={open} />
       <AtAudit onOpen={open} />
       <AtSampleReport onOpen={open} />
-      <AtPricing onOpen={open} />
-      <AtProcess />
+      <AtMiniQuotes />
+      <AtLossCalc onOpen={open} />
       <AtWorkIndex onOpen={open} />
-      <AtStats />
+      <AtProcess />
+      <AtPricing onOpen={open} />
       <AtQuotes />
       <AtFaq />
       <AtFinalCta onOpen={open} />

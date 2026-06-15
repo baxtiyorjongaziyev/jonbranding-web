@@ -2,6 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Jon Atelier Design Tokens ── */
+:root {
+  --at-bg:      #F2EFE6;   /* Warm paper beige */
+  --at-bg-2:    #E9E5D9;   /* Slightly darker paper */
+  --at-paper:   #FBF9F2;   /* Soft cream */
+  --at-ink:     #0E1015;   /* Charcoal ink */
+  --at-ink-2:   #4A4845;   /* Secondary ink */
+  --at-muted:   #8B8779;   /* Warm muted */
+  --at-line:    #D8D2C2;   /* Hairline border */
+  --at-accent:  #1B4DFF;   /* Cobalt blue */
+  --at-terra:   #C2552A;   /* Terracotta */
+  --at-green:   #2C6E49;   /* Forest green */
+  --at-accent-soft: rgba(27,77,255,0.08);
+}
+
+/* Marquee animation */
+.at-marquee-track {
+  display: inline-block;
+  animation: at-marquee 28s linear infinite;
+}
+@keyframes at-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Pulse dot animation */
+.at-pulse {
+  animation: at-pulse-anim 2s ease-in-out infinite;
+}
+@keyframes at-pulse-anim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.3); }
+}
+
 @layer base {
   :root {
     /* Atelier S-Tier Warm Paper System (Warm Beige & Cobalt/Terracotta) */
