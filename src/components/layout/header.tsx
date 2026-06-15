@@ -88,8 +88,9 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
 
+  const isHomepage = pathnameWithoutLocale === '/';
   const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka');
-  const useDarkHeaderText = !isDarkPage;
+  const useDarkHeaderText = isDarkPage ? false : (isHomepage ? scrolled : true);
 
   const navItems = [
     { href: getLocalizedPath('/portfolio'), label: dictionary.portfolio },
