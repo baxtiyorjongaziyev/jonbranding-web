@@ -1,15 +1,11 @@
-import { getDictionary, Locale } from '@/lib/dictionaries';
-import PricingClient from './pricing-client';
+import { Locale } from '@/lib/dictionaries';
+import { redirect } from 'next/navigation';
 
 const PricingPage = async (props: { params: Promise<{ lang: Locale }> }) => {
     const { lang } = await props.params;
-    const dictionary = await getDictionary(lang);
-
-    return (
-      <main className="flex-grow">
-          <PricingClient lang={lang} dictionary={dictionary} />
-      </main>
-    );
+    const target = lang === 'uz' ? '/xizmatlar#package-builder' : `/${lang}/xizmatlar#package-builder`;
+    redirect(target);
 };
 
 export default PricingPage;
+
