@@ -58,7 +58,7 @@ export function MobileMenu({
           <button
             aria-label={dictionary.open_menu}
             className={cn(
-              'flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 active:scale-95',
+              'flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
               useDarkHeaderText
                 ? 'border-black/15 bg-white/60 text-foreground hover:bg-black/5 backdrop-blur-sm'
                 : 'border-white/20 bg-white/10 text-white hover:bg-white/18 backdrop-blur-sm'
@@ -84,7 +84,7 @@ export function MobileMenu({
             </SheetTitle>
             <button
               onClick={() => onOpenChange(false)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white active:scale-90"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               aria-label="Close menu"
             >
               <X className="h-4.5 w-4.5" />
@@ -190,7 +190,7 @@ export function MobileMenu({
                   onContactClick();
                   onOpenChange(false);
                 }}
-                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-indigo-600 px-5 py-4 text-white shadow-[0_16px_48px_-16px_rgba(27,77,255,0.65)] transition-all duration-300 hover:shadow-[0_20px_56px_-14px_rgba(27,77,255,0.75)] active:scale-[0.98]"
+                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-indigo-600 px-5 py-4 text-white shadow-[0_16px_48px_-16px_rgba(27,77,255,0.65)] transition-all duration-300 hover:shadow-[0_20px_56px_-14px_rgba(27,77,255,0.75)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <div className="flex flex-col">
                   <span className="text-[15px] font-black">{dictionary.free_consultation}</span>
