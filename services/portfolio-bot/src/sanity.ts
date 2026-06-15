@@ -40,21 +40,11 @@ export async function createPortfolioDocument(
   const [cover, ...gallery] = imageFiles;
 
   const coverAsset = await uploadImageFile(cover.path, cover.mime);
-  const galleryAssets: SanityImageAsset[] = [];
-  for (const f of gallery) {
-    galleryAssets.push(await uploadImageFile(f.path, f.mime));
-  }
-
-  let slug = slugify(parsed.title);
-  const existing = await client.fetch<{ _id: string } | null>(
-    `*[_type == "portfolio" && slug.current == $slug][0]{ _id }`,
-    { slug }
+  const galleryAssets = await Promise.all(
+    gallery.map((f) => uploadImageFile(f.path, f.mime))
   );
-  if (existing?._id) {
-    const suffix = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    slug = `${slug}-${suffix}`;
-  }
 
+  const slug = slugify(parsed.title);
   const payload: PortfolioPayload = {
     _type: 'portfolio',
     title: parsed.title,

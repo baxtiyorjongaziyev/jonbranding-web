@@ -3,25 +3,11 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import {
-  Briefcase,
-  ChevronRight,
-  FileText,
-  Globe,
-  LayoutGrid,
-  Menu,
-  Phone,
-  Printer,
-  Send,
-  Sparkles,
-  Tag,
-  Type,
-  User,
-  X,
-} from 'lucide-react';
+import { Menu, Phone, Send, X, ChevronRight, ArrowUpRight, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';
+import { motion } from 'framer-motion';
 
 type NavItem = { href: string; label: string };
 type Service = { title: string; href: string; description: string };
@@ -43,42 +29,15 @@ interface MobileMenuProps {
   };
 }
 
-const SERVICE_ICONS = [Type, LayoutGrid, Briefcase, FileText, Printer, Tag, Globe, Sparkles];
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06 } },
+};
 
-function NavRow({
-  href,
-  label,
-  icon: Icon,
-  onClick,
-  description,
-}: {
-  href: string;
-  label: string;
-  icon?: React.ComponentType<{ className?: string }>;
-  onClick?: () => void;
-  description?: string;
-}) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="group flex min-h-[56px] items-center gap-3.5 rounded-2xl px-4 py-3 transition-colors duration-150 active:bg-white/5 hover:bg-white/5"
-    >
-      {Icon && (
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/[0.07] text-white/60 transition-colors group-hover:bg-brand-blue/20 group-hover:text-brand-blue">
-          <Icon className="h-4 w-4" />
-        </div>
-      )}
-      <div className="flex-1 min-w-0">
-        <p className="text-[15px] font-bold text-white leading-tight">{label}</p>
-        {description && (
-          <p className="mt-0.5 truncate text-[12px] font-medium text-white/40 leading-tight">{description}</p>
-        )}
-      </div>
-      <ChevronRight className="h-4 w-4 shrink-0 text-white/20 transition-transform group-hover:translate-x-0.5" />
-    </Link>
-  );
-}
+const slideIn = {
+  hidden: { opacity: 0, x: -16 },
+  visible: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 260, damping: 28 } },
+};
 
 export function MobileMenu({
   lang,
@@ -99,119 +58,149 @@ export function MobileMenu({
           <button
             aria-label={dictionary.open_menu}
             className={cn(
-              'flex h-9 w-9 items-center justify-center rounded-full border transition-colors duration-200 press-effect',
+              'flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 active:scale-95',
               useDarkHeaderText
-                ? 'border-black/15 text-foreground hover:bg-black/8'
-                : 'border-white/20 bg-white/10 text-white hover:bg-white/15'
+                ? 'border-black/15 bg-white/60 text-foreground hover:bg-black/5 backdrop-blur-sm'
+                : 'border-white/20 bg-white/10 text-white hover:bg-white/18 backdrop-blur-sm'
             )}
           >
-            <Menu className="h-[18px] w-[18px]" aria-hidden="true" />
+            <Menu className="h-5 w-5" aria-hidden="true" />
           </button>
         </SheetTrigger>
 
+        {/* Full-screen mobile drawer */}
         <SheetContent
           side="right"
-          className="w-full max-w-[340px] border-l border-white/[0.08] bg-[#080c14] p-0 text-white shadow-[0_0_80px_rgba(0,0,0,0.8)]"
+          className={cn(
+            'w-full max-w-full border-0 p-0 sm:max-w-[420px]',
+            'bg-[#0a0d14] text-white'
+          )}
         >
           {/* Header */}
-          <SheetHeader className="flex-row items-center justify-between border-b border-white/[0.06] px-5 py-4">
-            <SheetTitle className="text-[15px] font-black text-white">Jon.Branding</SheetTitle>
+          <SheetHeader className="flex flex-row items-center justify-between border-b border-white/8 px-5 py-4">
+            <SheetTitle className="text-base font-bold tracking-wide text-white">
+              <span className="font-serif italic text-primary">Jon</span>
+              <span className="ml-1 text-white/80">.Branding</span>
+            </SheetTitle>
             <button
               onClick={() => onOpenChange(false)}
-              aria-label="Yopish"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white/[0.07] text-white/50 transition-colors hover:bg-white/10 hover:text-white press-effect"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white active:scale-90"
+              aria-label="Close menu"
             >
-              <X className="h-4 w-4" aria-hidden="true" />
+              <X className="h-4.5 w-4.5" />
             </button>
           </SheetHeader>
 
           {/* Scrollable content */}
-          <div className="flex h-[calc(100dvh-65px)] flex-col overflow-y-auto overscroll-contain pb-6">
-
-            {/* Services group */}
-            <div className="px-3 pt-4">
-              <p className="mb-1 px-4 text-[11px] font-black uppercase tracking-widest text-white/30">
-                {dictionary.services}
-              </p>
-              <div className="space-y-0.5">
-                {services.map((service, i) => {
-                  const Icon = SERVICE_ICONS[i % SERVICE_ICONS.length];
-                  return (
-                    <NavRow
-                      key={service.href}
+          <div className="flex h-[calc(100dvh-64px)] flex-col overflow-y-auto pb-safe-4">
+            <motion.nav
+              variants={stagger}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-col gap-0 px-4 pt-4"
+            >
+              {/* Services section */}
+              <motion.div variants={slideIn} className="mb-2">
+                <div className="mb-3 px-2 text-[11px] font-bold uppercase tracking-[0.12em] text-white/40">
+                  {dictionary.services}
+                </div>
+                <div className="flex flex-col gap-1">
+                  {services.map((service) => (
+                    <Link
+                      key={service.title}
                       href={service.href}
-                      label={service.title}
-                      icon={Icon}
-                      description={service.description}
-                      onClick={() => onLinkClick(service.title)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
+                      onClick={() => {
+                        onLinkClick(service.title);
+                        onOpenChange(false);
+                      }}
+                      className="group flex items-center justify-between rounded-2xl border border-white/6 bg-white/[0.04] px-4 py-3.5 transition-all duration-200 hover:border-white/12 hover:bg-white/[0.07] active:scale-[0.98]"
+                    >
+                      <span className="text-[15px] font-medium text-white/85 group-hover:text-white">
+                        {service.title}
+                      </span>
+                      <ChevronRight className="h-4 w-4 text-white/30 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-white/60" />
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
 
-            {/* Divider */}
-            <div className="mx-5 my-3 h-px bg-white/[0.06]" />
+              {/* Divider */}
+              <motion.div variants={slideIn} className="my-2 h-px bg-white/8" />
 
-            {/* Nav links */}
-            <div className="px-3">
-              <p className="mb-1 px-4 text-[11px] font-black uppercase tracking-widest text-white/30">
-                Sahifalar
-              </p>
-              <div className="space-y-0.5">
+              {/* Main nav items */}
+              <motion.div variants={slideIn} className="flex flex-col gap-1">
                 {navItems.map((item) => (
-                  <NavRow
+                  <Link
                     key={item.label}
                     href={item.href}
-                    label={item.label}
-                    icon={User}
-                    onClick={() => onLinkClick(item.label)}
-                  />
+                    onClick={() => {
+                      onLinkClick(item.label);
+                      onOpenChange(false);
+                    }}
+                    className="flex h-12 items-center rounded-2xl px-4 text-[17px] font-semibold text-white/75 transition-all duration-200 hover:bg-white/5 hover:text-white active:scale-[0.98]"
+                  >
+                    {item.label}
+                  </Link>
                 ))}
-              </div>
-            </div>
+              </motion.div>
 
-            {/* Divider */}
-            <div className="mx-5 my-3 h-px bg-white/[0.06]" />
+              {/* Divider */}
+              <motion.div variants={slideIn} className="my-3 h-px bg-white/8" />
 
-            {/* Contact */}
-            <div className="px-3">
-              <p className="mb-1 px-4 text-[11px] font-black uppercase tracking-widest text-white/30">
-                Aloqa
-              </p>
-              <a
-                href="tel:+998336450097"
-                onClick={() => trackContactClick('phone', 'mobile_menu')}
-                className="group flex min-h-[56px] items-center gap-3.5 rounded-2xl px-4 py-3 transition-colors duration-150 active:bg-white/5 hover:bg-white/5"
-              >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-green-500/10 text-green-400">
-                  <Phone className="h-4 w-4" />
+              {/* Contact links */}
+              <motion.div variants={slideIn} className="flex flex-col gap-2">
+                <div className="mb-1 px-2 text-[11px] font-bold uppercase tracking-[0.12em] text-white/40">
+                  Aloqa
                 </div>
-                <p className="text-[15px] font-bold text-white">+998 33 645 00 97</p>
-              </a>
-              <a
-                href="https://t.me/baxtiyorjon_gaziyev"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackContactClick('telegram', 'mobile_menu')}
-                className="group flex min-h-[56px] items-center gap-3.5 rounded-2xl px-4 py-3 transition-colors duration-150 active:bg-white/5 hover:bg-white/5"
-              >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400">
-                  <Send className="h-4 w-4" />
-                </div>
-                <p className="text-[15px] font-bold text-white">{dictionary.contact_by_telegram}</p>
-              </a>
-            </div>
+                <a
+                  href="tel:+998336450097"
+                  onClick={() => trackContactClick('phone', 'mobile_menu')}
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98]"
+                >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-500/15 text-green-400">
+                    <Phone className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <div className="text-[13px] font-bold text-white">+998 33 645 00 97</div>
+                    <div className="text-[11px] text-white/40">Qo'ng'iroq qiling</div>
+                  </div>
+                </a>
+                <a
+                  href="https://t.me/baxtiyorjon_gaziyev"
+                  onClick={() => trackContactClick('telegram', 'mobile_menu')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98]"
+                >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sky-500/15 text-sky-400">
+                    <Send className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <div className="text-[13px] font-bold text-white">{dictionary.contact_by_telegram}</div>
+                    <div className="text-[11px] text-white/40">Telegram</div>
+                  </div>
+                </a>
+              </motion.div>
+            </motion.nav>
 
-            {/* CTA */}
-            <div className="mt-auto px-5 pt-4">
+            {/* Sticky CTA at bottom */}
+            <div className="mt-auto p-4">
               <button
-                type="button"
-                onClick={() => { onContactClick(); onOpenChange(false); }}
-                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-4 text-[15px] font-black text-white shadow-[0_8px_32px_rgba(37,99,235,0.4)] transition-all duration-200 active:scale-[0.97] hover:from-blue-500 hover:to-indigo-500 press-effect"
+                onClick={() => {
+                  onContactClick();
+                  onOpenChange(false);
+                }}
+                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-indigo-600 px-5 py-4 text-white shadow-[0_16px_48px_-16px_rgba(27,77,255,0.65)] transition-all duration-300 hover:shadow-[0_20px_56px_-14px_rgba(27,77,255,0.75)] active:scale-[0.98]"
               >
-                <Sparkles className="h-4 w-4" aria-hidden="true" />
-                {dictionary.free_consultation}
+                <div className="flex flex-col">
+                  <span className="text-[15px] font-black">{dictionary.free_consultation}</span>
+                  <span className="mt-0.5 text-[12px] font-medium text-white/70">Bepul · 30 daqiqa</span>
+                </div>
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                  <ArrowUpRight className="h-4 w-4" />
+                </span>
+                {/* Shimmer effect */}
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
               </button>
             </div>
           </div>

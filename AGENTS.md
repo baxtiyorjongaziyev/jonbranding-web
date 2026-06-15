@@ -74,6 +74,7 @@ src/sanity/schemaTypes/
 6. **TypeScript** — `ignoreBuildErrors: true` (build'da xato o'tadi, lekin yaxshi yoz)
 7. **Yangi section** — `src/components/sections/` ichiga, `export default FC<Props>`
 8. **Tailwind class birlashtirish** — `cn()` utility
+9. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili hisoblanadi. Har qanday matn, xususiyat yoki o'zgarish birinchi navbatda o'zbek tilida (`uz.json` faylida) amalga oshiriladi, so'ngra boshqa 3 ta tilga (`ru.json`, `en.json`, `zh.json`) tarjima qilinadi. Har bir o'zgarish birinchi o'zbek tilda joriy etilishi shart.
 
 ## Muhit o'zgaruvchilari
 

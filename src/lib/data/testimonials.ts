@@ -12,8 +12,7 @@ const QUERY = `
     "videoUrl": videoUrl,
     "audioUrl": audioUrl,
     "company": coalesce(company[$lang], company.uz, company.en, ""),
-    "quote": coalesce(quote[$lang], quote.uz, quote.en, ""),
-    "rating": coalesce(rating, 5)
+    "quote": coalesce(quote[$lang], quote.uz, quote.en, "")
   }
 `;
 

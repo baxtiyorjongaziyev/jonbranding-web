@@ -1335,5 +1335,225 @@
             "Business language",
             "Sales-focused plan"
         ]
+    },
+    "packagingPage": {
+        "metadata": {
+            "title": "Packaging Design Services in Uzbekistan | Jon.Branding",
+            "description": "We don't just create pretty packaging; we create a marketing tool that sells."
+        },
+        "title": "Packaging Design Development",
+        "subtitle": "In high competition, packaging is often the main marketing tool.",
+        "section1_title": "Packaging — More Than a Brand Identity Carrier",
+        "section1_p1": "Packaging is the first contact at points of sale, an instant impression. Often it determines the purchase decision.",
+        "section1_p2": "Our goal is effective tools meeting business goals and growth.",
+        "process_title": "How We Create Packaging?",
+        "process_subtitle": "We approach it as a system working for business and audience expectations.",
+        "process_steps": [
+            {
+                "title": "Analysis and Strategy",
+                "description": "Studying product, audience, and competitors."
+            },
+            {
+                "title": "Concept and Design",
+                "description": "Developing visual ideas: color, graphics, typography."
+            },
+            {
+                "title": "Finalization and Prep",
+                "description": "Handling technical aspects and print preparation."
+            }
+        ],
+        "cta_title": "Packaging Doesn't Just Attract, It Sells",
+        "cta_description": "Functional, strategic design where packaging serves as a sales tool."
+    },
+    "servicesPage": {
+        "metadata": {
+            "title": "Services and Prices | Jon.Branding",
+            "description": "Explore our services and build your package."
+        },
+        "packageBuilder": {
+            "title": "Services & Prices",
+            "subtitle": "Build your package and get an instant price.",
+            "categories": {
+                "tripwire": "First Step (Quick Services)",
+                "strategy": "Strategic Services",
+                "naming": "Naming",
+                "identity": "Visual Identity",
+                "addons": "Additional Services",
+                "more_services": "Additional services and terms"
+            },
+            "tabs": {
+                "included": "Included",
+                "benefits": "Benefits"
+            },
+            "your_package": "Your Package",
+            "your_package_desc": "Select required services below.",
+            "selected": "Selected",
+            "select": "Select",
+            "base_price_label": "Base price",
+            "final_price": "Total Price:",
+            "promo_code_label": "Promo Code",
+            "promo_code_placeholder": "ENTER CODE",
+            "promo_code_invalid": "Invalid promo code",
+            "discountSelector": {
+                "none": "No discount",
+                "package": "Package (-20%)",
+                "full": "Full prepay (-28%)"
+            },
+            "empty_package_desc": "No services selected. Please select appropriate services.",
+            "recommended": "Recommended"
+        },
+        "comparison": {
+            "title": "Us vs Competitors",
+            "description": "High-quality branding at accessible prices compared to premium agencies.",
+            "features": "Features",
+            "whyPremiumTitle": "Why only with premium agencies?",
+            "whyPremiumDesc": "We only compare ourselves with high-level companies that have a strategic approach. Our goal is not just to be cheap, but to provide premium quality at an affordable price. Comparing with agencies that don't match our level in quality and strategy would be wrong for both the client and us.",
+            "ctaTitle": "You've seen the difference. Now it's time to choose!",
+            "ctaDesc": "You don't have to overpay for quality branding. Make the right decision for your business and contact us.",
+            "ctaButton": "I want this approach"
+        }
+    },
+    "pickTwoSelector": {
+        "title": "Pick Two of Three",
+        "subtitle": "Price—Quality—Speed: you rarely get all three at once.",
+        "ctaText": "Request Offer",
+        "options": {
+            "cheap": "Cheap",
+            "quality": "Quality",
+            "fast": "Fast"
+        },
+        "messages": {
+            "cheap_fast": "Quality might be unstable. Good for urgent, budget projects.",
+            "cheap_quality": "Result will take longer. We queue based on budget for quality.",
+            "quality_fast": "Price will be higher. Urgent projects (+50% fee) get priority.",
+            "default": "Please pick your 2 most important priorities."
+        },
+        "tooltip": "Deselect one first"
+    },
+    "opportunityCalculator": {
+        "title": "Why is your business 'leaving money on the table'?",
+        "subtitle": "Why are you losing money despite heavy advertising? Let's calculate.",
+        "labels": {
+            "traffic": "Number of website visitors",
+            "conversion": "Conversion rate (%)",
+            "aov": "Average Order Value ($)",
+            "traffic_unit": "people",
+            "conversion_unit": "(trust)",
+            "currency_suffix": " UZS"
+        },
+        "analogy": {
+            "title": "Why is this happening?",
+            "bucket": "Bucket = Your Brand",
+            "water": "Water = Customers from ads",
+            "leak": "Leaks = Bad design and unreliable appearance",
+            "description": "No matter how much 'water' you pour, if your brand has 'leaks', the profit will continue to flow out. We patch these leaks."
+        },
+        "results": {
+            "title": "Your opportunity",
+            "potential": "Monthly profit after branding",
+            "loss": "Money you are losing every month",
+            "lossNote": "You are leaving this much money 'on the table' every month.",
+            "roiNote": "Just a 1-2% increase in trust can multiply your income by 2-3 times."
+        },
+        "cta": "Get a Free Strategic Audit"
+    },
+    "exitIntentModal": {
+        "title": "New opportunities for your brand",
+        "description": "We have special offers to grow your business. <br/>Currently, there are favorable <span class='font-bold text-primary'>partnership conditions</span>.",
+        "button": "View Offers"
+    },
+    "queueStatus": {
+        "subtitle": "Project Queue",
+        "title": "Join the queue and start your project",
+        "description": "We dedicate time to every project to ensure high quality. Therefore, we only work with a limited number of projects at a time.",
+        "queueTitle": "Project Queue",
+        "booked": "Booked",
+        "available": "Available",
+        "tooltipBooked": "Slot occupied",
+        "tooltipAvailable": "You can join the queue",
+        "remainingSlots": "Slots remaining",
+        "slotsUnit": "slots",
+        "onlineNow": "Online now",
+        "peopleUnit": "people",
+        "nextProjectStart": "Next project start",
+        "ctaButton": "Secure a slot",
+        "ctaSubtitle": "Invest in the quality of your brand",
+        "timeframes": {
+            "2 weeks": "within 2 weeks"
+        }
+    },
+    "leadMagnetPopup": {
+        "title": "Tools for your brand",
+        "subtitle": "Evaluate your brand strength on a 10-point scale.",
+        "description": "Download our <b>'Branding Checklist'</b> prepared by our experts for your business.",
+        "cta": "Get Checklist",
+        "closeText": "No thanks, I'm good",
+        "success": {
+            "title": "Success!",
+            "description": "Your material is ready for download. Our team may contact you soon.",
+            "downloadCta": "Download Checklist (PDF)"
+        }
+    },
+    "auditOffer": {
+        "eyebrow": "Inside the free audit",
+        "title": "Is your brand helping sales or slowing them down?",
+        "description": "Before selling design, we show where your brand loses trust in the buyer?s eyes. You leave knowing what you need now and what can wait.",
+        "cta": "Book the free audit",
+        "promise": "No pressure. We show the problem and opportunity first.",
+        "outcomes": [
+            {
+                "value": "15m",
+                "label": "audit call"
+            },
+            {
+                "value": "5",
+                "label": "trust signals"
+            },
+            {
+                "value": "1",
+                "label": "priority plan"
+            },
+            {
+                "value": "Free",
+                "label": "initial audit"
+            }
+        ],
+        "items": [
+            {
+                "title": "First-impression diagnosis",
+                "desc": "We review whether your site, logo, packaging, or social presence feels premium and trustworthy."
+            },
+            {
+                "title": "Trust-gap map",
+                "desc": "We name the weak points that slow buyer confidence."
+            },
+            {
+                "title": "Competitor position",
+                "desc": "We show who looks stronger and where your brand can win visually."
+            },
+            {
+                "title": "Next steps",
+                "desc": "We rank whether strategy, naming, identity, packaging, or website should come first."
+            }
+        ],
+        "proof": [
+            "No obligation",
+            "Business language",
+            "Sales-focused plan"
+        ]
+    },
+    "pricingPage": {
+        "title": "Services & Pricing",
+        "subtitle": "Premium branding solutions for your company and products. Our pricing is transparent and tailored to your goals.",
+        "brandServices": {
+            "title": "Core Branding Services",
+            "desc": "Naming, Logo design, Corporate identity, Brandbook, Packaging design, and POSM materials. Build your own package.",
+            "cta": "Open Rates & Package Builder"
+        },
+        "marketplaceServices": {
+            "title": "Marketplace Cover Design",
+            "desc": "High-conversion product card design for Uzum, Wildberries, Ozon, and Yandex Market. Discounts and extra services.",
+            "cta": "Card Pricing & Calculator"
+        }
     }
 }

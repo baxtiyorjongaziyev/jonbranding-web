@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Pause, PlayCircle, Star, Volume2, X } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CardContent } from '@/components/ui/card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 import { cn } from '@/lib/utils';
 import { staticTestimonials, staticTestimonialsEn, staticTestimonialsRu, staticTestimonialsZh } from '@/lib/static-data';
@@ -81,7 +81,7 @@ const getAvatarImageUrl = (url?: string) => {
 
 const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Testimonial; labels: { play: string }; onPlay: () => void }) => {
   return (
-    <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.1)]">
+    <div className="group flex h-full flex-col overflow-hidden rounded-3xl border border-brand-line bg-white shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.1)]">
       <CardContent className="p-0">
         <div className="relative aspect-[9/16] overflow-hidden bg-brand-ink">
           <button
@@ -105,7 +105,7 @@ const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Te
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4">
               <div className="min-w-0">
                 <p className="truncate text-sm font-black text-white">{testimonial.name}</p>
-                <p className="mt-1 truncate text-xs font-bold text-white/65">{testimonial.company}</p>
+                <p className="mt-1 truncate text-[13px] font-bold text-white/65">{testimonial.company}</p>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/95 text-brand-ink shadow-[0_14px_35px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:scale-105">
                 <PlayCircle className="h-6 w-6" aria-hidden="true" />
@@ -122,7 +122,7 @@ const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Te
             </Avatar>
             <div className="min-w-0">
               <p className="truncate text-sm font-bold text-brand-ink">{testimonial.name}</p>
-              <p className="truncate text-xs text-brand-slate">{testimonial.company}</p>
+              <p className="truncate text-[13px] text-brand-slate">{testimonial.company}</p>
             </div>
           </div>
           {testimonial.quote && (
@@ -136,10 +136,10 @@ const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Te
   );
 };
 
-const Stars = ({ rating = 5 }: { rating?: number }) => (
-  <div className="flex gap-0.5 text-amber-400" role="img" aria-label={`${rating} star testimonial`}>
+const Stars = () => (
+  <div className="flex gap-0.5 text-brand-blue" role="img" aria-label="5 star testimonial">
     {[...Array(5)].map((_, i) => (
-      <Star key={i} fill={i < rating ? 'currentColor' : 'none'} className="h-4 w-4" aria-hidden="true" />
+      <Star key={i} fill="currentColor" className="h-4 w-4" aria-hidden="true" />
     ))}
   </div>
 );
@@ -161,11 +161,11 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
   };
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)]">
+    <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-brand-line bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)]">
       <audio ref={audioRef} src={testimonial.audioUrl} preload="none" onEnded={() => setIsPlaying(false)} />
       <div className="flex flex-grow flex-col justify-between">
         <div>
-          <Stars rating={testimonial.rating} />
+          <Stars />
           <p className="mt-4 text-pretty text-sm italic leading-relaxed text-brand-slate">&ldquo;{testimonial.quote}&rdquo;</p>
           <button
             type="button"
@@ -189,7 +189,7 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
           </Avatar>
           <div className="min-w-0">
             <p className="truncate text-sm font-bold text-brand-ink">{testimonial.name}</p>
-            <p className="truncate text-xs text-brand-slate">{testimonial.company}</p>
+            <p className="truncate text-[13px] text-brand-slate">{testimonial.company}</p>
           </div>
         </div>
       </div>
@@ -199,10 +199,10 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
 
 const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)]">
+    <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-brand-line bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)]">
       <div className="flex flex-grow flex-col justify-between">
         <div>
-          <Stars rating={testimonial.rating} />
+          <Stars />
           <p className="mt-4 text-pretty text-sm italic leading-relaxed text-brand-slate">&ldquo;{testimonial.quote}&rdquo;</p>
         </div>
         <div className="mt-6 flex items-center gap-3">
@@ -212,10 +212,59 @@ const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
           </Avatar>
           <div className="min-w-0">
             <p className="truncate text-sm font-bold text-brand-ink">{testimonial.name}</p>
-            <p className="truncate text-xs text-brand-slate">{testimonial.company}</p>
+            <p className="truncate text-[13px] text-brand-slate">{testimonial.company}</p>
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+const CarouselDots = ({ api, label }: { api?: CarouselApi; label: string }) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const syncSelectedIndex = () => {
+      setSelectedIndex(api.selectedScrollSnap());
+    };
+    const syncScrollSnaps = () => {
+      setScrollSnaps(api.scrollSnapList());
+    };
+
+    syncScrollSnaps();
+    syncSelectedIndex();
+
+    api.on('select', syncSelectedIndex);
+    api.on('reInit', () => {
+      syncScrollSnaps();
+      syncSelectedIndex();
+    });
+
+    return () => {
+      api.off('select', syncSelectedIndex);
+    };
+  }, [api]);
+
+  if (scrollSnaps.length < 2) return null;
+
+  return (
+    <div className="mt-5 flex justify-center gap-2 sm:hidden" role="group" aria-label={label}>
+      {scrollSnaps.map((_, index) => (
+        <button
+          key={index}
+          type="button"
+          onClick={() => api?.scrollTo(index)}
+          aria-label={`${label}: ${index + 1}`}
+          aria-current={selectedIndex === index ? 'true' : undefined}
+          className={cn(
+            'h-2.5 rounded-full transition-[background-color,width] duration-200',
+            selectedIndex === index ? 'w-8 bg-brand-blue' : 'w-2.5 bg-brand-blue/20',
+          )}
+        />
+      ))}
     </div>
   );
 };
@@ -225,6 +274,8 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
   const textAutoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   const translations = dictionary;
   const [activeVideo, setActiveVideo] = useState<Testimonial | null>(null);
+  const [videoApi, setVideoApi] = useState<CarouselApi>();
+  const [textApi, setTextApi] = useState<CarouselApi>();
 
   const { videoTestimonials, audioTestimonials, textTestimonials } = useMemo(() => {
     const video = testimonials.filter((testimonial) => testimonial.videoUrl && !isCaseStudyVideo(testimonial));
@@ -299,6 +350,7 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
         {videoTestimonials.length > 0 && (
           <div className="mx-auto max-w-6xl">
             <Carousel
+              setApi={setVideoApi}
               plugins={[videoAutoplay.current]}
               opts={{ align: 'center', loop: true }}
               onMouseEnter={videoAutoplay.current.stop}
@@ -319,12 +371,14 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
                 <CarouselNext className="absolute -right-4 h-11 w-11 border-brand-line shadow-md transition-[background-color,color] duration-200 hover:bg-brand-ink hover:text-white lg:-right-12" />
               </div>
             </Carousel>
+            <CarouselDots api={videoApi} label={translations.eyebrow || 'Video testimonials'} />
           </div>
         )}
 
         {(audioTestimonials.length > 0 || textTestimonials.length > 0) && (
           <div className="mx-auto mt-12 max-w-6xl">
             <Carousel
+              setApi={setTextApi}
               plugins={[textAutoplay.current]}
               opts={{ align: 'start', loop: true }}
               onMouseEnter={textAutoplay.current.stop}
@@ -352,6 +406,10 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
                 <CarouselNext className="absolute -right-4 h-11 w-11 border-brand-line shadow-md transition-[background-color,color] duration-200 hover:bg-brand-ink hover:text-white lg:-right-12" />
               </div>
             </Carousel>
+            <CarouselDots
+              api={textApi}
+              label={translations.eyebrow || 'Testimonials'}
+            />
           </div>
         )}
       </div>
@@ -396,7 +454,7 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
                 </Avatar>
                 <div className="min-w-0 text-white">
                   <p className="truncate text-base font-black leading-snug">{activeVideo.name}</p>
-                  <p className="truncate text-xs font-bold text-white/70 mt-0.5">{activeVideo.company}</p>
+                  <p className="mt-0.5 truncate text-[13px] font-bold text-white/70">{activeVideo.company}</p>
                 </div>
               </div>
             </motion.div>

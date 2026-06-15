@@ -99,7 +99,7 @@ const ResultsGrid: React.FC<ResultsGridProps> = ({ dictionary }) => {
   if (!dictionary || !dictionary.items) return null;
 
   return (
-    <section id="results" className="py-24 sm:py-32 bg-background relative overflow-hidden">
+    <section id="results" className="py-14 sm:py-24 bg-background relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[160px]" />

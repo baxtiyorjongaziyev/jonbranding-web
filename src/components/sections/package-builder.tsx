@@ -13,6 +13,7 @@ import { Sparkles, CheckCircle, Crown, Check, Clock, BrainCircuit, Search, Megap
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { renderHeadline } from '@/lib/headline';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -30,8 +31,8 @@ const serviceIcons: { [key: string]: React.ElementType } = {
 
 const BenefitIcon = ({ name, className }: { name: string, className?: string }) => {
     const icons: Record<string, React.ElementType> = {
-        Search, Lightbulb, ShieldCheck, CheckCircle, MessageSquare, Target,
-        BarChart, Rocket, Megaphone, Link, Gem, Globe, Lock, Award, Zap,
+        Search, Lightbulb, ShieldCheck, CheckCircle, MessageSquare, Target, 
+        BarChart, Rocket, Megaphone, Link, Gem, Globe, Lock, Award, Zap, 
         TrendingUp, BookOpen, Gift, Building2, Smartphone, Sparkles, Scale
     };
     const Icon = icons[name] || Sparkles;
@@ -49,7 +50,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
-        <motion.div
+        <motion.div 
             layout
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -70,9 +71,8 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             </div>
 
             <Card
-                onClick={onSelect}
                 className={cn(
-                    "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500 cursor-pointer",
+                    "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500",
                     selected
                         ? (isVip ? 'border-brand-blue bg-blue-950 shadow-[0_0_60px_rgba(37,99,235,0.28)] scale-[1.02]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.02]')
                         : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-brand-blue/60" : "border-slate-100 hover:border-primary/20 shadow-sm")
@@ -82,7 +82,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                     <div className="flex items-center gap-3 mb-3">
                         <div className={cn(
                             "w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 flex-shrink-0",
-                            selected
+                            selected 
                                 ? (isVip ? "bg-brand-blue text-white shadow-xl" : "bg-primary text-white shadow-lg")
                                 : (isVip ? "border border-brand-blue/30 bg-white/10 text-sky-blue" : "bg-secondary text-slate-600")
                         )}>
@@ -94,7 +94,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                             </CardTitle>
                         </div>
                     </div>
-
+                    
                     <div className="flex items-center gap-3 mt-1">
                         <span className={cn("text-2xl font-black whitespace-nowrap", isVip ? "text-sky-blue" : "text-primary")}>
                             {isSurcharge ? "+50%" : formatPrice(price, lang, currency)}
@@ -111,11 +111,11 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                 </CardHeader>
 
                 <CardContent className="relative z-10 flex flex-grow flex-col px-5 pb-5 pt-0" suppressHydrationWarning>
-                    <div className={cn("mt-3 space-y-5 border-t pt-3", isVip ? "border-white/10" : "border-slate-100")}>
-                        <div className="space-y-3">
-                            <p className={cn("text-[10px] font-black uppercase tracking-[0.12em]", isVip ? "text-sky-blue/60" : "text-slate-400")}>
+                    <div className={cn("mt-3 pt-4 border-t space-y-5", isVip ? "border-white/10" : "border-slate-100")}>
+                        <div className="space-y-2">
+                            <span className={cn("text-[13px] font-black uppercase tracking-[0.08em] block", isVip ? "text-sky-blue" : "text-primary")}>
                                 {dictionary.tabs?.included || "Nima kiradi"}
-                            </p>
+                            </span>
                             <ul className="space-y-2">
                                 {(features || []).map((r: string, i: number) => (
                                     <li key={i} className="flex items-start gap-2.5">
@@ -130,14 +130,14 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
 
                         {benefits && benefits.length > 0 && (
                             <div className={cn("space-y-3 border-t pt-4", isVip ? "border-white/10" : "border-slate-100")}>
-                                <p className={cn("text-[10px] font-black uppercase tracking-[0.12em]", isVip ? "text-sky-blue/60" : "text-slate-400")}>
+                                <span className={cn("text-[13px] font-black uppercase tracking-[0.08em] block", isVip ? "text-sky-blue" : "text-primary")}>
                                     {dictionary.tabs?.benefits || "Nima olasiz"}
-                                </p>
-                                <div className="grid grid-cols-1 gap-4">
+                                </span>
+                                <div className="grid grid-cols-1 gap-3">
                                     {benefits.map((b: any, i: number) => (
                                         <div key={i} className="flex items-start gap-3">
                                             <div className={cn("mt-0.5 shrink-0", isVip ? "text-sky-blue" : "text-primary")}>
-                                                <BenefitIcon name={b.icon} className="h-5 w-5" />
+                                                <BenefitIcon name={b.icon} className="h-4 w-4" />
                                             </div>
                                             <div className="min-w-0">
                                                 <p className={cn("text-[13px] font-black leading-5", isVip ? "text-white" : "text-foreground")}>{b.title}</p>
@@ -162,7 +162,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                             variant={selected ? (isVip ? "outline" : "default") : "outline"}
                             className={cn(
                                 "relative z-20 h-auto w-full rounded-full border-2 py-4 text-[13px] font-black uppercase tracking-[0.08em] transition-[background-color,border-color,color,box-shadow,transform] duration-300",
-                                selected
+                                selected 
                                     ? (isVip ? "border-none bg-brand-blue text-white shadow-[0_0_20px_rgba(37,99,235,0.35)]" : "border-none bg-primary text-white shadow-lg")
                                     : (isVip ? "border-brand-blue/40 bg-white/5 text-sky-blue hover:bg-brand-blue hover:text-white" : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary shadow-sm")
                             )}
@@ -181,7 +181,7 @@ ServiceCard.displayName = 'ServiceCard';
 const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title: string, children: React.ReactNode, gridCols?: string }) => {
     return (
         <div className="space-y-8">
-            <motion.div
+            <motion.div 
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -196,7 +196,7 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 };
 
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
-    const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', {
+    const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
         namingPremium: true, logoPremium: true, urgency: false, nda: false
     });
     const [discountType, setDiscountType] = useLocalStorage<'none' | 'package' | 'full'>('discountOption', 'none');
@@ -206,7 +206,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [hasCelebrated, setHasCelebrated] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
-
+    
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
     const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any);
@@ -252,7 +252,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                     <Badge className="bg-primary/10 text-primary border-none px-8 py-2 rounded-full font-black text-[13px] uppercase tracking-[0.16em] shadow-sm">
                         LOYIHA ME'MORI
                     </Badge>
-                    <h2 className="text-4xl sm:text-6xl font-black text-foreground leading-tight tracking-tighter">{translations.title}</h2>
+                    <h2 className="text-4xl sm:text-6xl font-black text-foreground leading-tight tracking-tighter">
+                        {renderHeadline(translations.title, "text-primary")}
+                    </h2>
                     <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto font-medium">{translations.subtitle}</p>
                 </div>
 
@@ -274,9 +276,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                         ))}
                     </ServiceGroup>
-
+                    
                     {lang === 'uz' && (
-                        <motion.div
+                        <motion.div 
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -305,14 +307,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                             <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
                         ))}
                     </ServiceGroup>
-
-                    <div className="w-full pt-12">
-                        <ServiceGroup title={translations.categories?.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
-                            {['packaging', 'smm', 'urgency', 'nda'].map(id => (
-                                <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
-                            ))}
-                        </ServiceGroup>
-                    </div>
+                    
+                    <ServiceGroup title={translations.categories?.addons || "Qo'shimcha xizmatlar"} gridCols="lg:grid-cols-2">
+                        {['packaging', 'smm', 'urgency', 'nda'].map(id => (
+                            <ServiceCard key={id} id={id} selected={!!selectedServices[id as keyof SelectedServices]} onSelect={() => handleServiceToggle(id)} lang={lang} dictionary={translations} currency={currency} />
+                        ))}
+                    </ServiceGroup>
                 </div>
 
                 <div className="mt-24 max-w-6xl mx-auto">
@@ -335,8 +335,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         {Object.entries(selectedServices).filter(([_,v]) => v).map(([k]) => {
                                             const isSurcharge = k === 'urgency' || k === 'nda';
                                             return (
-                                                <motion.div
-                                                    key={k}
+                                                <motion.div 
+                                                    key={k} 
                                                     layout
                                                     initial={{ opacity: 0, x: -20 }}
                                                     animate={{ opacity: 1, x: 0 }}
@@ -371,8 +371,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     <div className="space-y-2">
                                         <AnimatePresence>
                                             {total.surchargesApplied.map((s: any, i: number) => (
-                                                <motion.div
-                                                    key={i}
+                                                <motion.div 
+                                                    key={i} 
                                                     initial={{ opacity: 0, height: 0 }}
                                                     animate={{ opacity: 1, height: 'auto' }}
                                                     exit={{ opacity: 0, height: 0 }}
@@ -383,8 +383,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 </motion.div>
                                             ))}
                                             {total.discountApplied.map((d: any, i: number) => (
-                                                <motion.div
-                                                    key={i}
+                                                <motion.div 
+                                                    key={i} 
                                                     initial={{ x: -20, opacity: 0 }}
                                                     animate={{ x: 0, opacity: 1 }}
                                                     exit={{ x: 20, opacity: 0 }}
@@ -401,7 +401,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         <span className="text-slate-500 text-[13px] font-bold uppercase tracking-widest">{translations.final_price || "Yakuniy narx:"}</span>
                                         <div className="flex flex-col items-center">
                                             <AnimatePresence mode="wait">
-                                                <motion.span
+                                                <motion.span 
                                                     key={total.final}
                                                     initial={{ scale: 0.9, opacity: 0 }}
                                                     animate={{ scale: 1, opacity: 1 }}
@@ -411,7 +411,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 </motion.span>
                                             </AnimatePresence>
                                             {total.savings > 0 && (
-                                                <motion.div
+                                                <motion.div 
                                                     initial={{ y: 10, opacity: 0 }}
                                                     animate={{ y: 0, opacity: 1 }}
                                                     className="mt-4 flex items-center gap-2 text-green-600 font-bold text-[13px] bg-green-100/70 px-6 py-2 rounded-full border border-green-200 uppercase tracking-widest shadow-sm"
@@ -426,14 +426,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     <div className="space-y-2">
                                         <Label className="ml-4 text-[13px] font-bold uppercase tracking-widest text-slate-500">{translations.promo_code_label || "Promokod"}</Label>
                                         <div className="relative">
-                                            <Input
+                                            <Input 
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
                                                 placeholder={translations.promo_code_placeholder || "KODNI KIRITING"}
                                                 className={cn("rounded-full py-3 px-6 border-slate-200 h-14 text-base font-bold uppercase tracking-widest bg-white shadow-inner focus:ring-primary focus:border-primary transition-all", total.isPromoApplied && "border-emerald-500 ring-2 ring-emerald-500/20")}
                                             />
                                             {total.isPromoApplied && (
-                                                <motion.div
+                                                <motion.div 
                                                     initial={{ scale: 0 }}
                                                     animate={{ scale: 1 }}
                                                     className="absolute right-5 top-1/2 -translate-y-1/2 text-emerald-500"
@@ -443,7 +443,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                             )}
                                         </div>
                                         {total.isPromoApplied && (
-                                            <motion.div
+                                            <motion.div 
                                                 initial={{ y: -10, opacity: 0 }}
                                                 animate={{ y: 0, opacity: 1 }}
                                                 className="mx-auto mt-2 flex w-fit items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-2 text-[13px] font-bold text-emerald-600 shadow-sm"
@@ -461,9 +461,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     )}
                                 </div>
                             </div>
-                            <Button
-                                size="lg"
-                                className="w-full py-5 sm:py-8 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group btn-premium bg-primary text-white"
+                            <Button 
+                                size="lg" 
+                                className="w-full py-5 sm:py-8 text-base sm:text-lg font-black rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all mt-8 group btn-premium bg-primary text-white" 
                                 onClick={(e) => {
                                     if (typeof window !== 'undefined') {
                                         if ((window as any).fbq) {
@@ -474,12 +474,12 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         }
                                     }
                                     onOrderNow();
-                                }}
+                                }} 
                                 disabled={total.base === 0}
                                 aria-label="Loyiha narxini tasdiqlash"
                             >
                                 <span className="flex items-center justify-center gap-3 uppercase tracking-wider">
-                                    LOYIHA NARXINI TASDIQLASH
+                                    LOYIHA NARXINI TASDIQLASH 
                                     <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform shrink-0" />
                                 </span>
                             </Button>

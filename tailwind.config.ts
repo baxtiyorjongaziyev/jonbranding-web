@@ -23,6 +23,8 @@ const config: Config = {
         body: ['var(--font-inter)', 'sans-serif'],
         headline: ['var(--font-jakarta)', 'sans-serif'],
         sans: ['var(--font-inter)', 'sans-serif'],
+        serif: ['var(--font-serif)', 'serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -3,6 +3,8 @@ import { ArrowUpRight, CheckCircle2, FileSearch, Layers3, Route, ShieldCheck, Ta
 import ContactTriggerButton from '@/components/contact-trigger-button';
 import { BrandSection } from '@/components/ui/design-system';
 
+import { renderHeadline } from '@/lib/headline';
+
 type AuditOfferDictionary = {
   eyebrow?: string;
   title?: string;
@@ -24,7 +26,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
   const proof = dictionary.proof || [];
 
   return (
-    <BrandSection id="audit-offer" tone="light" className="min-h-0 scroll-mt-24 bg-brand-mist py-20 sm:py-28">
+    <BrandSection id="audit-offer" tone="light" className="min-h-0 scroll-mt-24 border-t border-brand-line bg-brand-mist py-20 sm:py-28">
       <div className="container relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
@@ -34,7 +36,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
               </div>
             )}
             <h2 className="max-w-2xl text-balance text-foreground">
-              {dictionary.title}
+              {typeof dictionary.title === 'string' ? renderHeadline(dictionary.title, 'text-brand-blue') : dictionary.title}
             </h2>
             {dictionary.description && <p className="mt-6 text-pretty text-lg leading-8 text-brand-slate">{dictionary.description}</p>}
 
@@ -73,13 +75,13 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
             )}
           </div>
 
-          <div className="rounded-[1.75rem] border border-brand-line bg-white p-3 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_16px_48px_rgba(0,0,0,0.06)]">
+          <div className="rounded-3xl border border-brand-line bg-card p-3 shadow-[0_24px_50px_rgba(0,0,0,0.04)]">
             {items.map((item, index) => {
               const Icon = auditIcons[index % auditIcons.length];
 
               return (
                 <article key={item.title} className="grid gap-4 border-b border-brand-line px-4 py-6 last:border-b-0 sm:grid-cols-[4.5rem_1fr] sm:px-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/[0.1] text-brand-blue ring-1 ring-brand-blue/[0.2]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20">
                     <Icon className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <div>
@@ -95,7 +97,7 @@ const AuditOffer: FC<{ lang: string; dictionary?: AuditOfferDictionary }> = ({ d
         {proof.length > 0 && (
           <div className="mx-auto mt-8 flex flex-wrap justify-start gap-3 lg:justify-end">
             {proof.map((proofItem) => (
-              <div key={proofItem} className="inline-flex items-center gap-2 rounded-full border border-brand-line bg-white/75 px-4 py-2 text-sm font-extrabold text-foreground">
+              <div key={proofItem} className="inline-flex items-center gap-2 rounded-full border border-brand-line bg-card px-4 py-2 text-sm font-extrabold text-brand-ink">
                 <CheckCircle2 className="h-4 w-4 text-brand-cyan" />
                 {proofItem}
               </div>

@@ -1,5 +1,5 @@
 import Script from 'next/script';
-import { Hanken_Grotesk } from 'next/font/google';
+import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
@@ -25,12 +25,27 @@ const hankenGrotesk = Hanken_Grotesk({
   display: 'swap',
 });
 
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
   viewportFit: 'cover',
-  themeColor: '#4448e8',
+  themeColor: '#2c2bf5',
 };
 
 const localeUrls = {
@@ -110,11 +125,9 @@ export default async function LocalizedLayout({ children, params }: Props) {
     '(1) Yangi xabar! | Jon Branding';
 
   return (
-    <html lang={lang} className={hankenGrotesk.variable} suppressHydrationWarning>
+    <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
-        <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#ffffff}' }} />
-        <link rel="preconnect" href="https://api.fontshare.com" />
-        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500,400&display=swap" />
+        <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#F2EFE6}' }} />
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

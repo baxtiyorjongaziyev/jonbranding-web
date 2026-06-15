@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import TrustedBy from '@/components/sections/trusted-by';
 import AuditOffer from '@/components/sections/audit-offer';
 import BlogPreview from '@/components/sections/blog-preview';
+import type { Brand, Testimonial } from '@/lib/types';
 
 const BeforeAfter = dynamic(() => import('@/components/sections/before-after'));
 const Testimonials = dynamic(() => import('@/components/sections/testimonials'));
@@ -9,6 +10,7 @@ const Process = dynamic(() => import('@/components/sections/process'));
 const Founder = dynamic(() => import('@/components/sections/founder'));
 const Faq = dynamic(() => import('@/components/sections/faq'));
 const CtaBlock = dynamic(() => import('@/components/sections/cta-block'));
+const OpportunityCostCalculator = dynamic(() => import('@/components/sections/opportunity-cost-calculator'));
 
 type DeferredDictionary = {
   trustedBy?: any;
@@ -20,24 +22,36 @@ type DeferredDictionary = {
   faq?: any;
   home?: any;
   blog?: any;
+  opportunityCalculator?: any;
 };
 
 export default function HomeDeferredContent({
   lang,
   dictionary,
   comparisons,
+  brands,
+  testimonials,
 }: {
   lang: string;
   dictionary: DeferredDictionary;
   comparisons?: any[];
+  brands?: Brand[];
+  testimonials?: Testimonial[];
 }) {
   return (
     <>
-      <TrustedBy lang={lang} dictionary={dictionary.trustedBy} />
+      <TrustedBy lang={lang} dictionary={dictionary.trustedBy} brands={brands} />
       <AuditOffer lang={lang} dictionary={dictionary.auditOffer} />
 
+      {dictionary.opportunityCalculator && (
+        <OpportunityCostCalculator
+          lang={lang}
+          dictionary={dictionary.opportunityCalculator}
+        />
+      )}
+
       <BeforeAfter lang={lang} dictionary={dictionary.beforeAfter} comparisons={comparisons} />
-      <Testimonials lang={lang} dictionary={dictionary.testimonials} />
+      <Testimonials lang={lang} dictionary={dictionary.testimonials} testimonials={testimonials} />
       <Process lang={lang} dictionary={dictionary.process} />
       <Founder lang={lang} dictionary={dictionary.founder} />
       <BlogPreview lang={lang} dictionary={dictionary.blog} />

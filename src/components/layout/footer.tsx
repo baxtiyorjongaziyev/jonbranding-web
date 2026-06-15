@@ -90,7 +90,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         
         {/* Intense Corner Splash - Brighter */}
         <div className="absolute bottom-0 right-0 h-[30%] w-[100%] pointer-events-none z-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_80%_110%,rgba(68,72,232,0.22),transparent_75%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_80%_110%,rgba(44,43,245,0.22),transparent_75%)]" />
         </div>
 
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
@@ -155,7 +155,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackContactClick('telegram', 'footer')}
-                  className="inline-flex items-center justify-center px-6 py-3 bg-[linear-gradient(135deg,#4448e8_0%,#2d31d4_100%)] rounded-full text-sm font-medium hover:-translate-y-0.5 transition-all duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] rounded-full text-sm font-medium hover:-translate-y-0.5 transition-all duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Send size={16} /> Telegram
                 </a>

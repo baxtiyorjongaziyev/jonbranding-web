@@ -55,6 +55,7 @@ src/components/
 4. **Responsive** — Mobile-first, Tailwind breakpoints: `sm:`, `md:`, `lg:`
 5. **TypeScript** — `ignoreBuildErrors: true` (build'da xato bo'lsa ham o'tadi, lekin yaxshi yoz)
 6. **DEV_LOG.md** — push qilganda avtomatik yangilanadi
+7. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili hisoblanadi. Har qanday matn, xususiyat yoki o'zgarish birinchi navbatda o'zbek tilida (`uz.json` faylida) amalga oshiriladi, so'ngra boshqa 3 ta tilga (`ru.json`, `en.json`, `zh.json`) tarjima qilinadi. Har bir o'zgarish birinchi o'zbek tilida joriy etilishi shart.
 
 ## Sanity Schema
 

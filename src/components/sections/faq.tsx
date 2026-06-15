@@ -29,36 +29,53 @@ const Faq = ({ lang, dictionary, hideCta = false }: { lang: string, dictionary: 
           : ['Price', 'Timeline', 'Outcome', 'Trust', 'Process'];
 
   return (
-    <BrandSection id="faq" tone="soft">
-      <div className="container mx-auto px-4">
-        <SectionIntro eyebrow="FAQ" title={translations.title} description={translations.subtitle} />
+    <BrandSection id="faq" tone="light" className="border-y border-brand-line/80 bg-white py-14 sm:py-24">
+      <div className="container mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <SectionIntro eyebrow="FAQ" title={translations.title} description={translations.subtitle} align="left" className="[&>p]:mx-0" />
+            <div className="mt-8 hidden max-w-md rounded-3xl border border-brand-line/60 bg-white/70 backdrop-blur-md p-6 shadow-[0_15px_35px_rgba(0,0,0,0.02)] lg:block">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-brand-blue">Objection map</div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {objectionLabels.map((label, index) => (
+                  <span key={label} className="rounded-full border border-brand-line bg-white px-3 py-1.5 text-[11px] font-extrabold text-brand-slate">
+                    {String(index + 1).padStart(2, '0')} {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
 
-        <div className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-2">
+          <div>
+            <div className="mb-8 flex flex-wrap gap-2 lg:hidden">
           {objectionLabels.map((label) => (
-            <span key={label} className="rounded-full border border-brand-line bg-white/80 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-blue shadow-sm">
+            <span key={label} className="rounded-full border border-brand-line bg-white px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-blue shadow-sm">
               {label}
             </span>
           ))}
-        </div>
+            </div>
 
-        <div className="mx-auto mt-12 max-w-3xl space-y-4">
-          <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
-            {translations.faqItems.map((item: any, index: number) => (
-              <div key={index} className="overflow-hidden rounded-2xl border border-brand-line bg-white/90 px-5 sm:px-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md">
-                <AccordionItem value={`item-${index}`} className="border-none">
+            <Accordion type="single" collapsible defaultValue="item-0" className="w-full border-t border-brand-line">
+              {translations.faqItems.map((item: any, index: number) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-brand-line">
                   <AccordionTrigger
-                    className="py-5 sm:py-6 text-left text-base font-bold leading-snug text-brand-ink hover:no-underline sm:text-lg sm:leading-normal"
+                     className="group py-5 text-left hover:no-underline sm:py-7"
                     aria-label={item.question}
                   >
-                    {item.question}
+                    <span className="grid min-w-0 grid-cols-[2.75rem_1fr] items-start gap-4 pr-4">
+                      <span className="font-mono text-xs font-black text-brand-blue tabular-nums">0{index + 1}</span>
+                      <span className="text-lg font-black leading-snug tracking-tight text-brand-ink transition-colors duration-200 group-hover:text-brand-blue sm:text-2xl">
+                        {item.question}
+                      </span>
+                    </span>
                   </AccordionTrigger>
-                  <AccordionContent className="pb-6 text-sm sm:text-base leading-relaxed text-brand-slate">
-                    {item.answer}
+                  <AccordionContent className="pb-7 pl-11 sm:pl-[3.75rem] text-sm leading-7 text-brand-slate sm:text-base">
+                    <div className="max-w-2xl">{item.answer}</div>
                   </AccordionContent>
                 </AccordionItem>
-              </div>
-            ))}
-          </Accordion>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </div>
 
