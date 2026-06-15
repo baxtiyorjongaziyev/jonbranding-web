@@ -12,7 +12,7 @@ export interface PortfolioProject {
   oldHint?: string;
   newHint?: string;
   description: string;
-  results: { metric: string; value: string }[];
+  results?: { metric: string; value: string }[];
   body: { heading: string; paragraph: string }[];
   galleryImages?: string[];
   order: number;
@@ -172,6 +172,96 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         '/images/cms/boyarin-hozir.png'
       ],
       order: 4
+    },
+    {
+      _id: 'fallback-arfadel',
+      slug: 'arfadel',
+      title: 'Arfadel Parfumeriya',
+      client: 'Arfadel',
+      category: 'corporate-style',
+      categoryLabel: 'Firma uslubi',
+      tags: ['Aydentika', 'Parfumeriya', 'Premium'],
+      coverImage: '/images/cms/arfadel-cover.jpg',
+      description: "Premium parfyumeriya brendi uchun \"RR\" monogrammasi asosidagi to'liq vizual aydentika — atir flakonidan do'kon vitrinasigacha yagona oltin uslub.",
+      body: [
+        { heading: "Vazifa va Muammo", paragraph: "Yangi parfyumeriya brendini bozorga premium darajada olib chiqish kerak edi. Har bir aloqa nuqtasi — do'kon, qadoq, mobil ilova — yagona, esda qoladigan va ishonchli qiyofada bo'lishi talab etilardi." },
+        { heading: "Strategik Yechim", paragraph: "\"RR\" monogrammasi va nafis geometrik naqsh asosida oltin-qora palitra ishlab chiqdik. Logotip, vizitka, paket, xodim formasi, do'kon vitrinasi, kassa zonasi va mobil ilova ikonkasi — barchasi bitta vizual tizimda birlashtirildi." },
+        { heading: "Yakuniy Natija", paragraph: "Brend har joyda — flakon yorlig'idan do'kon peshtog'igacha — bir xil premium hissiyot beradi. Mijoz brendni bir ko'rishda taniydi va u raqobatchilardan ajralib turadi." }
+      ],
+      galleryImages: [
+        '/images/cms/arfadel-counter.jpg',
+        '/images/cms/arfadel-bag.jpg',
+        '/images/cms/arfadel-app.jpg',
+        '/images/cms/arfadel-card.jpg'
+      ],
+      order: 5
+    },
+    {
+      _id: 'fallback-beyaz',
+      slug: 'beyaz',
+      title: 'Beyaz',
+      client: 'Beyaz',
+      category: 'logo-design',
+      categoryLabel: 'Logotip dizayni',
+      tags: ['Logotip', 'Belgi', 'Premium'],
+      coverImage: '/images/cms/beyaz-cover.jpg',
+      description: "Kuch va obro'ni ifodalovchi sher belgisi asosidagi premium logotip va belgi tizimi; oltin va to'q yashil palitrada.",
+      body: [
+        { heading: "Vazifa va Muammo", paragraph: "Brendga jiddiy, obro'li va esda qoladigan belgi kerak edi — raqobatchilar orasida darhol ajralib turadigan va ishonch uyg'otadigan." },
+        { heading: "Strategik Yechim", paragraph: "Sher boshi asosidagi nafis va yaxlit belgi yaratdik. Oltin va to'q yashil ranglar hashamat va ishonchni ifodalaydi. Belgi turli fonlarda — oltin, yashil, oq va qora — bir xil kuchli ko'rinadigan qilib ishlandi." },
+        { heading: "Yakuniy Natija", paragraph: "O'ziga xos, kuchli va moslashuvchan logotip — kichik ikonkadan katta bannergacha aniq o'qiladi va brendning premium xarakterini namoyon etadi." }
+      ],
+      galleryImages: [
+        '/images/cms/beyaz-gold.jpg',
+        '/images/cms/beyaz-symbol-green.jpg',
+        '/images/cms/beyaz-symbol-gold.jpg'
+      ],
+      order: 6
+    },
+    {
+      _id: 'fallback-enros',
+      slug: 'enros',
+      title: 'Enros',
+      client: 'Enros',
+      category: 'logo-design',
+      categoryLabel: 'Logotip dizayni',
+      tags: ['Logotip', 'Energiya', 'Dinamik'],
+      coverImage: '/images/cms/enros-cover.jpg',
+      description: "Energiya va tezlikni ifodalovchi chaqmoq belgisi asosidagi dinamik logotip; neon-moviy, laym va qora palitrada.",
+      body: [
+        { heading: "Vazifa va Muammo", paragraph: "Yosh va zamonaviy brendga e'tiborni darhol tortadigan, energiya hissini beruvchi belgi kerak edi." },
+        { heading: "Strategik Yechim", paragraph: "Chaqmoq belgisini logotip bilan birlashtirgan qalin, geometrik yechim ishlab chiqdik. Neon-moviy, laym va qora kontrast harakat va quvvatni ifodalaydi." },
+        { heading: "Yakuniy Natija", paragraph: "Bir ko'rishda yodda qoladigan, raqamli muhitda ham, mahsulotda ham yorqin ishlaydigan kuchli va dinamik belgi." }
+      ],
+      galleryImages: [
+        '/images/cms/enros-lime.jpg',
+        '/images/cms/enros-alt.jpg',
+        '/images/cms/enros-icon.jpg'
+      ],
+      order: 7
+    },
+    {
+      _id: 'fallback-diletta',
+      slug: 'diletta',
+      title: 'Diletta',
+      client: 'Diletta',
+      category: 'corporate-style',
+      categoryLabel: 'Firma uslubi',
+      tags: ['Moda', 'Aydentika', 'Premium'],
+      coverImage: '/images/cms/diletta-cover.jpg',
+      description: "Moda atelyesi uchun nafis \"D\" monogrammasi asosidagi premium aydentika — bordo va oltin uyg'unligida.",
+      body: [
+        { heading: "Vazifa va Muammo", paragraph: "Moda atelyesiga ayollarcha nafislik va premium hissni beruvchi, esda qoladigan brend qiyofasi kerak edi." },
+        { heading: "Strategik Yechim", paragraph: "Qo'lda yozilgan uslubdagi nafis \"D\" monogrammasini yaratdik. Bordo va oltin palitra; logotip, vizitka, paket, do'kon belgisi, yorliq va ijtimoiy tarmoq shablonlari — barchasi yagona uslubda ishlandi." },
+        { heading: "Yakuniy Natija", paragraph: "Brend nafis, qimmatbaho va o'ziga xos ko'rinish oldi. Har bir detal — yorliqdan paketgacha — bitta Diletta tilida gapiradi." }
+      ],
+      galleryImages: [
+        '/images/cms/diletta-fashion.jpg',
+        '/images/cms/diletta-storefront.jpg',
+        '/images/cms/diletta-cards.jpg',
+        '/images/cms/diletta-bag.jpg'
+      ],
+      order: 8
     }
   ],
   ru: [
@@ -327,6 +417,96 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         '/images/cms/boyarin-hozir.png'
       ],
       order: 4
+    },
+    {
+      _id: 'fallback-arfadel',
+      slug: 'arfadel',
+      title: 'Парфюмерия Arfadel',
+      client: 'Arfadel',
+      category: 'corporate-style',
+      categoryLabel: 'Фирменный стиль',
+      tags: ['Айдентика', 'Парфюмерия', 'Премиум'],
+      coverImage: '/images/cms/arfadel-cover.jpg',
+      description: "Полная визуальная айдентика для премиальной парфюмерии на основе монограммы \"RR\" — единый золотой стиль от флакона до витрины магазина.",
+      body: [
+        { heading: "Задача", paragraph: "Нужно было вывести новый парфюмерный бренд на рынок на премиальном уровне. Каждая точка контакта — магазин, упаковка, мобильное приложение — должна была выглядеть единообразно, узнаваемо и вызывать доверие." },
+        { heading: "Решение", paragraph: "Мы разработали золото-чёрную палитру на основе монограммы \"RR\" и изящного геометрического орнамента. Логотип, визитка, пакет, форма персонала, витрина, кассовая зона и иконка приложения объединены в единую систему." },
+        { heading: "Результат", paragraph: "Бренд везде — от этикетки флакона до вывески магазина — передаёт одинаковое премиальное ощущение. Клиент узнаёт бренд с первого взгляда, и он выделяется среди конкурентов." }
+      ],
+      galleryImages: [
+        '/images/cms/arfadel-counter.jpg',
+        '/images/cms/arfadel-bag.jpg',
+        '/images/cms/arfadel-app.jpg',
+        '/images/cms/arfadel-card.jpg'
+      ],
+      order: 5
+    },
+    {
+      _id: 'fallback-beyaz',
+      slug: 'beyaz',
+      title: 'Beyaz',
+      client: 'Beyaz',
+      category: 'logo-design',
+      categoryLabel: 'Дизайн логотипа',
+      tags: ['Логотип', 'Знак', 'Премиум'],
+      coverImage: '/images/cms/beyaz-cover.jpg',
+      description: "Премиальная система логотипа и знака на основе образа льва, символизирующего силу и престиж; в золотой и тёмно-зелёной палитре.",
+      body: [
+        { heading: "Задача", paragraph: "Бренду требовался серьёзный, престижный и запоминающийся знак, мгновенно выделяющийся среди конкурентов и вызывающий доверие." },
+        { heading: "Решение", paragraph: "Мы создали изящный цельный знак на основе головы льва. Золотой и тёмно-зелёный цвета передают роскошь и доверие. Знак одинаково сильно смотрится на разных фонах — золотом, зелёном, белом и чёрном." },
+        { heading: "Результат", paragraph: "Уникальный, сильный и гибкий логотип, который чётко читается от маленькой иконки до большого баннера и раскрывает премиальный характер бренда." }
+      ],
+      galleryImages: [
+        '/images/cms/beyaz-gold.jpg',
+        '/images/cms/beyaz-symbol-green.jpg',
+        '/images/cms/beyaz-symbol-gold.jpg'
+      ],
+      order: 6
+    },
+    {
+      _id: 'fallback-enros',
+      slug: 'enros',
+      title: 'Enros',
+      client: 'Enros',
+      category: 'logo-design',
+      categoryLabel: 'Дизайн логотипа',
+      tags: ['Логотип', 'Энергия', 'Динамика'],
+      coverImage: '/images/cms/enros-cover.jpg',
+      description: "Динамичный логотип на основе знака молнии, символизирующего энергию и скорость; в неоново-синей, лаймовой и чёрной палитре.",
+      body: [
+        { heading: "Задача", paragraph: "Молодому и современному бренду нужен был знак, мгновенно привлекающий внимание и передающий ощущение энергии." },
+        { heading: "Решение", paragraph: "Мы объединили знак молнии с логотипом в смелое геометрическое решение. Неоново-синий, лаймовый и чёрный контраст передают движение и мощь." },
+        { heading: "Результат", paragraph: "Сильный и динамичный знак, который запоминается с первого взгляда и ярко работает как в цифровой среде, так и на продукте." }
+      ],
+      galleryImages: [
+        '/images/cms/enros-lime.jpg',
+        '/images/cms/enros-alt.jpg',
+        '/images/cms/enros-icon.jpg'
+      ],
+      order: 7
+    },
+    {
+      _id: 'fallback-diletta',
+      slug: 'diletta',
+      title: 'Diletta',
+      client: 'Diletta',
+      category: 'corporate-style',
+      categoryLabel: 'Фирменный стиль',
+      tags: ['Мода', 'Айдентика', 'Премиум'],
+      coverImage: '/images/cms/diletta-cover.jpg',
+      description: "Премиальная айдентика для модного ателье на основе изящной монограммы \"D\" — в сочетании бордового и золотого.",
+      body: [
+        { heading: "Задача", paragraph: "Модному ателье нужен был запоминающийся образ бренда, передающий женственную утончённость и премиальное ощущение." },
+        { heading: "Решение", paragraph: "Мы создали изящную монограмму \"D\" в рукописном стиле. Бордово-золотая палитра; логотип, визитка, пакет, вывеска магазина, бирка и шаблоны для соцсетей — всё выполнено в едином стиле." },
+        { heading: "Результат", paragraph: "Бренд получил утончённый, дорогой и узнаваемый вид. Каждая деталь — от бирки до пакета — говорит на одном языке Diletta." }
+      ],
+      galleryImages: [
+        '/images/cms/diletta-fashion.jpg',
+        '/images/cms/diletta-storefront.jpg',
+        '/images/cms/diletta-cards.jpg',
+        '/images/cms/diletta-bag.jpg'
+      ],
+      order: 8
     }
   ],
   en: [
@@ -482,6 +662,96 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         '/images/cms/boyarin-hozir.png'
       ],
       order: 4
+    },
+    {
+      _id: 'fallback-arfadel',
+      slug: 'arfadel',
+      title: 'Arfadel Perfumery',
+      client: 'Arfadel',
+      category: 'corporate-style',
+      categoryLabel: 'Corporate Identity',
+      tags: ['Identity', 'Perfumery', 'Premium'],
+      coverImage: '/images/cms/arfadel-cover.jpg',
+      description: "A complete visual identity for a premium perfumery built around the \"RR\" monogram — one golden style from the bottle to the storefront.",
+      body: [
+        { heading: "The Challenge", paragraph: "A new perfumery brand had to enter the market at a premium level. Every touchpoint — store, packaging, mobile app — needed a single, memorable and trustworthy look." },
+        { heading: "The Solution", paragraph: "We built a gold-and-black palette around the \"RR\" monogram and a refined geometric pattern. Logo, business card, bag, staff uniform, storefront, checkout zone and the app icon were unified into one visual system." },
+        { heading: "The Result", paragraph: "Everywhere — from the bottle label to the storefront sign — the brand delivers the same premium feeling. Customers recognize it at a glance and it stands out from competitors." }
+      ],
+      galleryImages: [
+        '/images/cms/arfadel-counter.jpg',
+        '/images/cms/arfadel-bag.jpg',
+        '/images/cms/arfadel-app.jpg',
+        '/images/cms/arfadel-card.jpg'
+      ],
+      order: 5
+    },
+    {
+      _id: 'fallback-beyaz',
+      slug: 'beyaz',
+      title: 'Beyaz',
+      client: 'Beyaz',
+      category: 'logo-design',
+      categoryLabel: 'Logo Design',
+      tags: ['Logo', 'Mark', 'Premium'],
+      coverImage: '/images/cms/beyaz-cover.jpg',
+      description: "A premium logo and mark system built around a lion that embodies strength and prestige; in a gold and deep-green palette.",
+      body: [
+        { heading: "The Challenge", paragraph: "The brand needed a serious, prestigious and memorable mark that instantly stands out among competitors and inspires trust." },
+        { heading: "The Solution", paragraph: "We crafted a refined, unified mark based on a lion's head. Gold and deep green convey luxury and trust. The mark was built to look equally strong on different backgrounds — gold, green, white and black." },
+        { heading: "The Result", paragraph: "A distinctive, strong and flexible logo that reads clearly from a tiny icon to a large banner and expresses the brand's premium character." }
+      ],
+      galleryImages: [
+        '/images/cms/beyaz-gold.jpg',
+        '/images/cms/beyaz-symbol-green.jpg',
+        '/images/cms/beyaz-symbol-gold.jpg'
+      ],
+      order: 6
+    },
+    {
+      _id: 'fallback-enros',
+      slug: 'enros',
+      title: 'Enros',
+      client: 'Enros',
+      category: 'logo-design',
+      categoryLabel: 'Logo Design',
+      tags: ['Logo', 'Energy', 'Dynamic'],
+      coverImage: '/images/cms/enros-cover.jpg',
+      description: "A dynamic logo built around a lightning mark that conveys energy and speed; in a neon-blue, lime and black palette.",
+      body: [
+        { heading: "The Challenge", paragraph: "A young, modern brand needed a mark that instantly grabs attention and conveys a sense of energy." },
+        { heading: "The Solution", paragraph: "We merged a lightning mark with the wordmark into a bold, geometric solution. Neon blue, lime and black contrast convey motion and power." },
+        { heading: "The Result", paragraph: "A strong, dynamic mark that is memorable at a glance and works vividly both in digital and on product." }
+      ],
+      galleryImages: [
+        '/images/cms/enros-lime.jpg',
+        '/images/cms/enros-alt.jpg',
+        '/images/cms/enros-icon.jpg'
+      ],
+      order: 7
+    },
+    {
+      _id: 'fallback-diletta',
+      slug: 'diletta',
+      title: 'Diletta',
+      client: 'Diletta',
+      category: 'corporate-style',
+      categoryLabel: 'Corporate Identity',
+      tags: ['Fashion', 'Identity', 'Premium'],
+      coverImage: '/images/cms/diletta-cover.jpg',
+      description: "A premium identity for a fashion atelier built around an elegant \"D\" monogram — in a burgundy and gold pairing.",
+      body: [
+        { heading: "The Challenge", paragraph: "The fashion atelier needed a memorable brand image conveying feminine refinement and a premium feel." },
+        { heading: "The Solution", paragraph: "We created an elegant hand-written \"D\" monogram. A burgundy-and-gold palette; logo, business card, bag, storefront sign, tag and social templates were all crafted in one consistent style." },
+        { heading: "The Result", paragraph: "The brand gained a refined, premium and recognizable look. Every detail — from the tag to the bag — speaks one Diletta language." }
+      ],
+      galleryImages: [
+        '/images/cms/diletta-fashion.jpg',
+        '/images/cms/diletta-storefront.jpg',
+        '/images/cms/diletta-cards.jpg',
+        '/images/cms/diletta-bag.jpg'
+      ],
+      order: 8
     }
   ],
   zh: [
@@ -637,6 +907,96 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         '/images/cms/boyarin-hozir.png'
       ],
       order: 4
+    },
+    {
+      _id: 'fallback-arfadel',
+      slug: 'arfadel',
+      title: 'Arfadel 香水',
+      client: 'Arfadel',
+      category: 'corporate-style',
+      categoryLabel: '企业形象',
+      tags: ['品牌识别', '香水', '高端'],
+      coverImage: '/images/cms/arfadel-cover.jpg',
+      description: "为高端香水品牌打造的完整视觉识别系统，以 \"RR\" 字母组合为核心——从香水瓶到店面橱窗，统一的金色风格。",
+      body: [
+        { heading: "挑战", paragraph: "新的香水品牌需要以高端定位进入市场。每一个接触点——门店、包装、移动应用——都需要统一、易记且值得信赖的形象。" },
+        { heading: "解决方案", paragraph: "我们以 \"RR\" 字母组合和精致的几何纹样为基础，打造了金黑配色。标志、名片、手提袋、员工制服、店面橱窗、收银区和应用图标都被统一到同一视觉系统中。" },
+        { heading: "成果", paragraph: "无论在哪里——从瓶身标签到店面招牌——品牌都传递出同样的高端感。顾客一眼就能认出，并在竞争中脱颖而出。" }
+      ],
+      galleryImages: [
+        '/images/cms/arfadel-counter.jpg',
+        '/images/cms/arfadel-bag.jpg',
+        '/images/cms/arfadel-app.jpg',
+        '/images/cms/arfadel-card.jpg'
+      ],
+      order: 5
+    },
+    {
+      _id: 'fallback-beyaz',
+      slug: 'beyaz',
+      title: 'Beyaz',
+      client: 'Beyaz',
+      category: 'logo-design',
+      categoryLabel: '标志设计',
+      tags: ['标志', '符号', '高端'],
+      coverImage: '/images/cms/beyaz-cover.jpg',
+      description: "以象征力量与尊贵的狮子形象为核心的高端标志与符号系统；采用金色与深绿色调。",
+      body: [
+        { heading: "挑战", paragraph: "品牌需要一个庄重、尊贵且令人难忘的标志，在竞争者中立刻脱颖而出并赢得信任。" },
+        { heading: "解决方案", paragraph: "我们以狮头为基础打造了精致而完整的符号。金色与深绿传达奢华与信赖。该符号在金色、绿色、白色和黑色等不同背景上都同样有力。" },
+        { heading: "成果", paragraph: "一个独特、有力且灵活的标志——从小图标到大横幅都清晰可辨，彰显品牌的高端气质。" }
+      ],
+      galleryImages: [
+        '/images/cms/beyaz-gold.jpg',
+        '/images/cms/beyaz-symbol-green.jpg',
+        '/images/cms/beyaz-symbol-gold.jpg'
+      ],
+      order: 6
+    },
+    {
+      _id: 'fallback-enros',
+      slug: 'enros',
+      title: 'Enros',
+      client: 'Enros',
+      category: 'logo-design',
+      categoryLabel: '标志设计',
+      tags: ['标志', '能量', '动感'],
+      coverImage: '/images/cms/enros-cover.jpg',
+      description: "以象征能量与速度的闪电标记为核心的动感标志；采用霍虹蓝、青柠绿与黑色调。",
+      body: [
+        { heading: "挑战", paragraph: "年轻、现代的品牌需要一个能立即抓住注意力、传达能量感的标记。" },
+        { heading: "解决方案", paragraph: "我们将闪电标记与文字标志结合成大胆的几何方案。霍虹蓝、青柠绿与黑色的对比传达动感与力量。" },
+        { heading: "成果", paragraph: "一个有力而动感的标记，一眼难忘，无论在数字环境还是产品上都表现亮眼。" }
+      ],
+      galleryImages: [
+        '/images/cms/enros-lime.jpg',
+        '/images/cms/enros-alt.jpg',
+        '/images/cms/enros-icon.jpg'
+      ],
+      order: 7
+    },
+    {
+      _id: 'fallback-diletta',
+      slug: 'diletta',
+      title: 'Diletta',
+      client: 'Diletta',
+      category: 'corporate-style',
+      categoryLabel: '企业形象',
+      tags: ['时尚', '品牌识别', '高端'],
+      coverImage: '/images/cms/diletta-cover.jpg',
+      description: "为时装工作室打造的高端品牌识别，以优雅的 \"D\" 字母组合为核心——采用酒红与金色搭配。",
+      body: [
+        { heading: "挑战", paragraph: "时装工作室需要一个令人难忘的品牌形象，传达女性的精致与高端感。" },
+        { heading: "解决方案", paragraph: "我们创作了手写风格的优雅 \"D\" 字母组合。酒红配金色；标志、名片、手提袋、店面招牌、吊牌和社交模板均以统一风格呈现。" },
+        { heading: "成果", paragraph: "品牌获得了精致、高贵且具辨识度的形象。每一处细节——从吊牌到手提袋——都讲述着同一种 Diletta 语言。" }
+      ],
+      galleryImages: [
+        '/images/cms/diletta-fashion.jpg',
+        '/images/cms/diletta-storefront.jpg',
+        '/images/cms/diletta-cards.jpg',
+        '/images/cms/diletta-bag.jpg'
+      ],
+      order: 8
     }
   ]
 };
