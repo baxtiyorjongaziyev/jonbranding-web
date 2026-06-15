@@ -104,7 +104,7 @@ const Hero: FC<HeroProps> = ({ dictionary }) => {
   const heroCopy = getHeroCopy(dictionary);
 
   return (
-    <section ref={sectionRef} className="relative isolate overflow-hidden bg-[#05070f] text-white noise-texture" onMouseMove={onMouseMove}>
+    <section ref={sectionRef} className="relative isolate overflow-hidden bg-[#05070f] text-white" onMouseMove={onMouseMove}>
       {/* Background & Spotlight Effects */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[#05070f]" />
