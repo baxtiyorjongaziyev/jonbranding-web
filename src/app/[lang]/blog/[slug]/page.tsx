@@ -12,6 +12,7 @@ import {
   getLocaleAlternates,
   locales,
 } from '@/lib/i18n/locale';
+import { safeJsonStringify } from '@/lib/security';
 
 type Props = {
   params: Promise<{ slug: string; lang: string }>;
@@ -101,7 +102,7 @@ const BlogPostPage = async (props: Props) => {
       <Script
         id="blog-post-structured-data"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonStringify(jsonLd) }}
       />
       <BlogPostClient post={post} />
     </>
