@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { forceRefresh } from '@/lib/amocrm-token';
+import { safeCompare } from '@/lib/security';
 
 export async function POST(request: Request) {
   const cronSecret = process.env.AMOCRM_CRON_SECRET?.trim();
@@ -8,7 +9,7 @@ export async function POST(request: Request) {
   }
 
   const authHeader = request.headers.get('Authorization') ?? '';
-  if (authHeader !== `Bearer ${cronSecret}`) {
+  if (!authHeader.startsWith('Bearer ') || !safeCompare(authHeader.substring(7), cronSecret)) {
     return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
   }
 
