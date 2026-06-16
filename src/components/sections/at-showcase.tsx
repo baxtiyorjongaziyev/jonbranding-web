@@ -1,17 +1,41 @@
 'use client';
 import type { FC } from 'react';
-import AtMock from './at-mocks';
+import Image from 'next/image';
 
 interface Props { onOpen: () => void; }
 
 const ITEMS = [
-  { mock: 'coffee' as const,  name: 'Qumri',    yr: "'25", cat: 'Kofe' },
-  { mock: 'osh' as const,     name: 'Teshabay', yr: "'25", cat: 'Restoran' },
-  { mock: 'fintech' as const, name: 'Humo',     yr: "'24", cat: 'Fintech' },
-  { mock: 'chilla' as const,  name: 'Chilla',   yr: "'23", cat: 'Moda' },
+  {
+    src: '/images/cms/arfadel-brand.png',
+    name: 'ARFADEL',
+    yr: "'26",
+    cat: 'Parfyumeriya',
+    color: '#1A1210',
+  },
+  {
+    src: '/images/cms/beyaz-gold.jpg',
+    name: 'Beyaz',
+    yr: "'26",
+    cat: 'Premium brend',
+    color: '#2C3A2A',
+  },
+  {
+    src: '/images/cms/boyarin-hozir.png',
+    name: 'Boyarin',
+    yr: "'26",
+    cat: 'Sutchilik',
+    color: '#0A1C3A',
+  },
+  {
+    src: '/images/cms/enros-logo-1.png',
+    name: 'Enros',
+    yr: "'25",
+    cat: 'Energiya',
+    color: '#0D0D1A',
+  },
 ];
 
-const OFFSETS = ['translate-y-5', '', 'translate-y-10', 'translate-y-3'];
+const OFFSETS = ['md:translate-y-5', '', 'md:translate-y-10', 'md:translate-y-3'];
 
 const AtShowcase: FC<Props> = ({ onOpen }) => (
   <section className="pb-[88px] pt-6 relative z-[2]">
@@ -19,13 +43,13 @@ const AtShowcase: FC<Props> = ({ onOpen }) => (
       <div className="flex justify-between items-baseline mb-6 flex-wrap gap-3.5">
         <span className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--at-muted)]">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--at-muted)] inline-block" />
-          So&apos;nggi 4 ta loyiha · 2023—2025
+          So&apos;nggi loyihalar · 2025—2026
         </span>
         <button
           onClick={() => document.getElementById('ishlar')?.scrollIntoView({ behavior: 'smooth' })}
-          className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.06em] text-[var(--at-ink-2)] hover:text-[var(--at-accent)] border-b border-[var(--at-line)] hover:border-[var(--at-accent)] pb-0.5 transition-colors inline-flex items-center gap-1.5"
+          className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.06em] text-[var(--at-ink-2)] hover:text-[var(--at-accent)] border-b border-[var(--at-line)] hover:border-[var(--at-accent)] pb-0.5 transition-colors"
         >
-          Barchasini ko&apos;rish — 120+ <span>↗</span>
+          Barcha ishlar ↗
         </button>
       </div>
 
@@ -34,24 +58,31 @@ const AtShowcase: FC<Props> = ({ onOpen }) => (
           <div
             key={i}
             onClick={onOpen}
-            className={`relative rounded-[14px] overflow-hidden border border-[var(--at-line)] bg-[var(--at-bg-2)] cursor-pointer transition-transform duration-400 hover:-translate-y-1.5 ${OFFSETS[i]}`}
-            style={{ aspectRatio: '3/4' }}
+            className={`relative rounded-2xl overflow-hidden border border-[var(--at-line)] cursor-pointer group transition-transform duration-500 hover:-translate-y-2 ${OFFSETS[i]}`}
+            style={{ aspectRatio: '3/4', background: it.color }}
           >
-            <div className="absolute inset-0">
-              <AtMock kind={it.mock} />
-            </div>
+            <Image
+              src={it.src}
+              alt={it.name}
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+            />
+            {/* gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20" />
+
             <div
               className="absolute top-3 left-3 right-3 font-[family-name:var(--font-serif)] italic text-base z-[3]"
-              style={{ color: 'rgba(255,255,255,.95)', textShadow: '0 1px 2px rgba(0,0,0,.3)' }}
+              style={{ color: 'rgba(255,255,255,.95)', textShadow: '0 1px 3px rgba(0,0,0,.5)' }}
             >
               {it.name}
             </div>
             <div
               className="absolute left-3 right-3 bottom-3 flex justify-between items-end font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] z-[3]"
-              style={{ color: 'rgba(255,255,255,.85)', textShadow: '0 1px 2px rgba(0,0,0,.4)' }}
+              style={{ color: 'rgba(255,255,255,.85)' }}
             >
               <span>{it.cat}</span>
-              <span style={{ opacity: .7 }}>{it.yr}</span>
+              <span style={{ opacity: .65 }}>{it.yr}</span>
             </div>
           </div>
         ))}

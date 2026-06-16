@@ -4,13 +4,13 @@ import { useState } from 'react';
 import AtMasthead from '@/components/sections/at-masthead';
 import AtHero from '@/components/sections/at-hero';
 import AtMarquee from '@/components/sections/at-marquee';
-import AtManifesto from '@/components/sections/at-manifesto';
 import AtLedger from '@/components/sections/at-ledger';
+import AtFeatured from '@/components/sections/at-featured';
+import AtShowcase from '@/components/sections/at-showcase';
+import AtManifesto from '@/components/sections/at-manifesto';
 import AtStats from '@/components/sections/at-stats';
 import AtDiagnosis from '@/components/sections/at-diagnosis';
 import AtServices from '@/components/sections/at-services';
-import AtFeatured from '@/components/sections/at-featured';
-import AtShowcase from '@/components/sections/at-showcase';
 import AtAudit from '@/components/sections/at-audit';
 import AtSampleReport from '@/components/sections/at-sample-report';
 import AtMiniQuotes from '@/components/sections/at-mini-quotes';
@@ -42,13 +42,13 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtMasthead />
       <AtHero onOpen={open} />
       <AtMarquee />
-      <AtManifesto />
       <AtLedger />
+      <AtFeatured />
+      <AtShowcase onOpen={open} />
+      <AtManifesto />
       <AtStats />
       <AtDiagnosis onOpen={open} />
       <AtServices onOpen={open} />
-      <AtFeatured />
-      <AtShowcase onOpen={open} />
       <AtAudit onOpen={open} />
       <AtSampleReport onOpen={open} />
       <AtMiniQuotes />
