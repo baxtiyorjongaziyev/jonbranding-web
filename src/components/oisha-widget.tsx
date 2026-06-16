@@ -59,7 +59,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
               role: 'model',
               timestamp: new Date().toISOString(),
             },
-          ],
+          ]
     );
   }, [translations.welcome]);
 
@@ -89,7 +89,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
             text: message.parts[0].text,
             role: message.role,
             timestamp: new Date().toISOString(),
-          })),
+          }))
         );
       }
     } catch (error) {
@@ -156,7 +156,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
       <div
         className={cn(
           'fixed bottom-24 right-6 z-50 transition-all duration-500 md:bottom-6 hidden md:block',
-          isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100',
+          isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'
         )}
       >
         <button
@@ -173,6 +173,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            key="oisha-chat-window"
             id="oisha-chat-window"
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -211,7 +212,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
                         key={msg.id}
                         className={cn(
                           'flex flex-col gap-1',
-                          msg.role === 'model' ? 'items-start' : 'items-end',
+                          msg.role === 'model' ? 'items-start' : 'items-end'
                         )}
                       >
                         <div
@@ -219,7 +220,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
                             'max-w-[85%] p-3 rounded-2xl text-sm shadow-sm',
                             msg.role === 'model'
                               ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-tl-none'
-                              : 'bg-blue-600 text-white rounded-tr-none',
+                              : 'bg-blue-600 text-white rounded-tr-none'
                           )}
                         >
                           {msg.text}
