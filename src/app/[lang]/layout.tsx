@@ -13,7 +13,7 @@ import {
   getLocaleAlternates,
 } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
-
+import { safeJsonStringify } from '@/lib/security';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
@@ -69,19 +69,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     metadataBase: new URL(BASE_URL),
     title: {
-      default: dictionary.meta?.title || "Jon.Branding | Professional Brending Agentligi",
-      template: "%s | Jon.Branding"
+      default: dictionary.meta?.title || 'Jon.Branding | Professional Brending Agentligi',
+      template: '%s | Jon.Branding',
     },
 
-    description: dictionary.meta?.description || "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding.",
+    description:
+      dictionary.meta?.description ||
+      'Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding.',
     icons: {
       icon: [
         { url: '/favicon.ico', sizes: 'any' },
         { url: '/icon.svg', type: 'image/svg+xml' },
       ],
-      apple: [
-        { url: '/icon.svg', type: 'image/svg+xml' },
-      ],
+      apple: [{ url: '/icon.svg', type: 'image/svg+xml' }],
     },
     openGraph: {
       type: 'website',
@@ -113,19 +113,26 @@ export default async function LocalizedLayout({ children, params }: Props) {
   try {
     dictionary = await getDictionary(lang as Locale);
   } catch (e) {
-    console.error("Layout dictionary load error:", e);
+    console.error('Layout dictionary load error:', e);
     // Provide a minimum shape to prevent crash
     dictionary = await getDictionary('uz');
   }
 
   const tabNotificationMessage =
-    lang === 'ru' ? '(1) Novoe soobshchenie! | Jon Branding' :
-    lang === 'en' ? '(1) New message! | Jon Branding' :
-    lang === 'zh' ? '(1) New message! | Jon Branding' :
-    '(1) Yangi xabar! | Jon Branding';
+    lang === 'ru'
+      ? '(1) Novoe soobshchenie! | Jon Branding'
+      : lang === 'en'
+        ? '(1) New message! | Jon Branding'
+        : lang === 'zh'
+          ? '(1) New message! | Jon Branding'
+          : '(1) Yangi xabar! | Jon Branding';
 
   return (
-    <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html
+      lang={lang}
+      className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#F2EFE6}' }} />
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
@@ -136,187 +143,193 @@ export default async function LocalizedLayout({ children, params }: Props) {
           id="json-ld-professional-service"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": "Jon.Branding",
-              "alternateName": "JonBranding Agency",
-              "image": "https://www.jonbranding.uz/icon.svg",
-              "logo": "https://www.jonbranding.uz/icon.svg",
-              "url": "https://www.jonbranding.uz",
-              "telephone": "+998336450097",
-              "priceRange": "$$$",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Tashkent, Uzbekistan",
-                "addressLocality": "Tashkent",
-                "addressRegion": "Toshkent",
-                "postalCode": "100000",
-                "addressCountry": "UZ"
+            __html: safeJsonStringify({
+              '@context': 'https://schema.org',
+              '@type': 'ProfessionalService',
+              name: 'Jon.Branding',
+              alternateName: 'JonBranding Agency',
+              image: 'https://www.jonbranding.uz/icon.svg',
+              logo: 'https://www.jonbranding.uz/icon.svg',
+              url: 'https://www.jonbranding.uz',
+              telephone: '+998336450097',
+              priceRange: '$$$',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'Tashkent, Uzbekistan',
+                addressLocality: 'Tashkent',
+                addressRegion: 'Toshkent',
+                postalCode: '100000',
+                addressCountry: 'UZ',
               },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": 41.2995,
-                "longitude": 69.2401
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: 41.2995,
+                longitude: 69.2401,
               },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday"
-                ],
-                "opens": "09:00",
-                "closes": "20:00"
+              openingHoursSpecification: {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                opens: '09:00',
+                closes: '20:00',
               },
-              "sameAs": [
-                "https://instagram.com/jonbranding",
-                "https://t.me/jonbranding",
-                "https://facebook.com/jonbranding"
+              sameAs: [
+                'https://instagram.com/jonbranding',
+                'https://t.me/jonbranding',
+                'https://facebook.com/jonbranding',
               ],
-              "service": [
+              service: [
                 {
-                  "@type": "Service",
-                  "name": "Neyming (Naming)",
-                  "description": "Professional brand naming services."
+                  '@type': 'Service',
+                  name: 'Neyming (Naming)',
+                  description: 'Professional brand naming services.',
                 },
                 {
-                  "@type": "Service",
-                  "name": "Logotip Dizayni (Logo Design)",
-                  "description": "Custom logo creation and identity design."
+                  '@type': 'Service',
+                  name: 'Logotip Dizayni (Logo Design)',
+                  description: 'Custom logo creation and identity design.',
                 },
                 {
-                  "@type": "Service",
-                  "name": "Brend Strategiyasi (Branding Strategy)",
-                  "description": "Comprehensive market analysis and strategy."
-                }
-              ]
-            })
+                  '@type': 'Service',
+                  name: 'Brend Strategiyasi (Branding Strategy)',
+                  description: 'Comprehensive market analysis and strategy.',
+                },
+              ],
+            }),
           }}
         />
         <Script
           id="json-ld-faq"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [
+            __html: safeJsonStringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: [
                 {
-                  "@type": "Question",
-                  "name": lang === 'ru'
-                    ? "Чем хороший брендинг отличается от простого логотипа?"
-                    : lang === 'en'
-                    ? "What is the difference between good branding and just a logo?"
-                    : "Yaxshi brending va shunchaki chiroyli logotipning farqi nimada?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": lang === 'ru'
-                      ? "Логотип — это визуальный знак. В Jon.Branding мы рассматриваем брендинг как фундамент бизнеса: анализ стратегии, рынка и психологии клиентов. Результат — не просто 'красивый', а приносящий доход бренд."
+                  '@type': 'Question',
+                  name:
+                    lang === 'ru'
+                      ? 'Чем хороший брендинг отличается от простого логотипа?'
                       : lang === 'en'
-                      ? "A logo is just a visual mark. At Jon.Branding we treat branding as the foundation of your business: market positioning, strategy, and customer psychology. The result is not just 'beautiful' — it generates revenue."
-                      : "Shunchaki logotip — bu vizual belgi. Jon.Branding'da biz brendingni biznesingiz poydevori deb bilamiz. Strategiya, bozordagi o'rin va mijozlar ruhiyatini tahlil qilamiz — natijada daromad keltiruvchi brend yaratamiz."
-                  }
+                        ? 'What is the difference between good branding and just a logo?'
+                        : 'Yaxshi brending va shunchaki chiroyli logotipning farqi nimada?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text:
+                      lang === 'ru'
+                        ? "Логотип — это визуальный знак. В Jon.Branding мы рассматриваем брендинг как фундамент бизнеса: анализ стратегии, рынка и психологии клиентов. Результат — не просто 'красивый', а приносящий доход бренд."
+                        : lang === 'en'
+                          ? "A logo is just a visual mark. At Jon.Branding we treat branding as the foundation of your business: market positioning, strategy, and customer psychology. The result is not just 'beautiful' — it generates revenue."
+                          : "Shunchaki logotip — bu vizual belgi. Jon.Branding'da biz brendingni biznesingiz poydevori deb bilamiz. Strategiya, bozordagi o'rin va mijozlar ruhiyatini tahlil qilamiz — natijada daromad keltiruvchi brend yaratamiz.",
+                  },
                 },
                 {
-                  "@type": "Question",
-                  "name": lang === 'ru'
-                    ? "Сколько времени занимает создание бренда?"
-                    : lang === 'en'
-                    ? "How long does a branding project take?"
-                    : "Loyiha qancha muddatda tayyor bo'ladi?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": lang === 'ru'
-                      ? "В среднем 4–8 недель. Это время необходимо для глубокого анализа, создания уникальной концепции и доработки каждой детали. Мы ставим качество на первое место."
+                  '@type': 'Question',
+                  name:
+                    lang === 'ru'
+                      ? 'Сколько времени занимает создание бренда?'
                       : lang === 'en'
-                      ? "On average 4–8 weeks. This time is required for deep analysis, unique concept creation, and perfecting every detail. We prioritise quality."
-                      : "O'rtacha 4 haftadan 8 haftagacha. Bu vaqt chuqur tahlil, noyob konsepsiya yaratish va har bir detalni ideal holatga keltirish uchun zarur."
-                  }
+                        ? 'How long does a branding project take?'
+                        : "Loyiha qancha muddatda tayyor bo'ladi?",
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text:
+                      lang === 'ru'
+                        ? 'В среднем 4–8 недель. Это время необходимо для глубокого анализа, создания уникальной концепции и доработки каждой детали. Мы ставим качество на первое место.'
+                        : lang === 'en'
+                          ? 'On average 4–8 weeks. This time is required for deep analysis, unique concept creation, and perfecting every detail. We prioritise quality.'
+                          : "O'rtacha 4 haftadan 8 haftagacha. Bu vaqt chuqur tahlil, noyob konsepsiya yaratish va har bir detalni ideal holatga keltirish uchun zarur.",
+                  },
                 },
                 {
-                  "@type": "Question",
-                  "name": lang === 'ru'
-                    ? "Почему ваши услуги дороже среднего?"
-                    : lang === 'en'
-                    ? "Why are your services priced above average?"
-                    : "Nega xizmatlaringiz narxi bozor o'rtachasidan yuqori?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": lang === 'ru'
-                      ? "Мы продаём не расходы, а инвестиции. Наши решения направлены на рост продаж и снижение маркетинговых затрат. Работа с Jon.Branding — это система, которая окупается многократно."
+                  '@type': 'Question',
+                  name:
+                    lang === 'ru'
+                      ? 'Почему ваши услуги дороже среднего?'
                       : lang === 'en'
-                      ? "We sell investment, not expense. Our solutions are designed to increase sales and reduce marketing costs. Working with Jon.Branding is a system that pays back many times over."
-                      : "Biz xarajatni emas, investitsiyani sotamiz. Bizning yechimlarimiz savdoni oshirishga va marketing xarajatlarini kamaytirishga qaratilgan — bir necha barobar foyda keltiradigan tizim."
-                  }
+                        ? 'Why are your services priced above average?'
+                        : "Nega xizmatlaringiz narxi bozor o'rtachasidan yuqori?",
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text:
+                      lang === 'ru'
+                        ? 'Мы продаём не расходы, а инвестиции. Наши решения направлены на рост продаж и снижение маркетинговых затрат. Работа с Jon.Branding — это система, которая окупается многократно.'
+                        : lang === 'en'
+                          ? 'We sell investment, not expense. Our solutions are designed to increase sales and reduce marketing costs. Working with Jon.Branding is a system that pays back many times over.'
+                          : 'Biz xarajatni emas, investitsiyani sotamiz. Bizning yechimlarimiz savdoni oshirishga va marketing xarajatlarini kamaytirishga qaratilgan — bir necha barobar foyda keltiradigan tizim.',
+                  },
                 },
                 {
-                  "@type": "Question",
-                  "name": lang === 'ru'
-                    ? "Есть ли гарантия результата?"
-                    : lang === 'en'
-                    ? "Is there a result guarantee?"
-                    : "Natijaga kafolat bormi?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": lang === 'ru'
-                      ? "Да. Если начальные концепции не соответствуют вашим требованиям по брифу, мы доработаем проект или выполним согласованные условия возврата."
+                  '@type': 'Question',
+                  name:
+                    lang === 'ru'
+                      ? 'Есть ли гарантия результата?'
                       : lang === 'en'
-                      ? "Yes. If the initial concepts do not match your brief requirements, we will revise the project or fulfil the agreed refund terms."
-                      : "Albatta. Agar dastlabki konsepsiyalar sizning talablaringizga mos kelmasa, biz loyihani qayta ishlaymiz yoki kelishilgan qaytarish shartlarini bajaramiz."
-                  }
+                        ? 'Is there a result guarantee?'
+                        : 'Natijaga kafolat bormi?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text:
+                      lang === 'ru'
+                        ? 'Да. Если начальные концепции не соответствуют вашим требованиям по брифу, мы доработаем проект или выполним согласованные условия возврата.'
+                        : lang === 'en'
+                          ? 'Yes. If the initial concepts do not match your brief requirements, we will revise the project or fulfil the agreed refund terms.'
+                          : 'Albatta. Agar dastlabki konsepsiyalar sizning talablaringizga mos kelmasa, biz loyihani qayta ishlaymiz yoki kelishilgan qaytarish shartlarini bajaramiz.',
+                  },
                 },
                 {
-                  "@type": "Question",
-                  "name": lang === 'ru'
-                    ? "Можно ли заказать только логотип?"
-                    : lang === 'en'
-                    ? "Can I order just a logo?"
-                    : "Faqatgina logotip buyurtma qilsa bo'ladimi?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": lang === 'ru'
-                      ? "Мы рекомендуем создавать полную систему айдентики, так как только логотип не обеспечивает целостность бренда. Однако для небольших проектов у нас есть пакеты 'Логотип + Минимальный фирменный стиль'."
+                  '@type': 'Question',
+                  name:
+                    lang === 'ru'
+                      ? 'Можно ли заказать только логотип?'
                       : lang === 'en'
-                      ? "We recommend building a full identity system, as a logo alone cannot ensure brand integrity. However, for smaller projects we have 'Logo + Minimal Corporate Style' packages."
-                      : "Biz butun aydentika tizimini yaratishni tavsiya qilamiz, chunki faqat logotip brend yaxlitligini ta'minlamaydi. Biroq, kichik loyihalar uchun 'Logo + Minimal firma uslubi' paketlari mavjud."
-                  }
-                }
-              ]
-            })
+                        ? 'Can I order just a logo?'
+                        : "Faqatgina logotip buyurtma qilsa bo'ladimi?",
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text:
+                      lang === 'ru'
+                        ? "Мы рекомендуем создавать полную систему айдентики, так как только логотип не обеспечивает целостность бренда. Однако для небольших проектов у нас есть пакеты 'Логотип + Минимальный фирменный стиль'."
+                        : lang === 'en'
+                          ? "We recommend building a full identity system, as a logo alone cannot ensure brand integrity. However, for smaller projects we have 'Logo + Minimal Corporate Style' packages."
+                          : "Biz butun aydentika tizimini yaratishni tavsiya qilamiz, chunki faqat logotip brend yaxlitligini ta'minlamaydi. Biroq, kichik loyihalar uchun 'Logo + Minimal firma uslubi' paketlari mavjud.",
+                  },
+                },
+              ],
+            }),
           }}
         />
         <Script
           id="json-ld-aggregate-rating"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Jon.Branding",
-              "url": "https://www.jonbranding.uz",
-              "telephone": "+998336450097",
-              "priceRange": "$$$",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Tashkent",
-                "addressLocality": "Tashkent",
-                "addressCountry": "UZ"
+            __html: safeJsonStringify({
+              '@context': 'https://schema.org',
+              '@type': 'LocalBusiness',
+              name: 'Jon.Branding',
+              url: 'https://www.jonbranding.uz',
+              telephone: '+998336450097',
+              priceRange: '$$$',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'Tashkent',
+                addressLocality: 'Tashkent',
+                addressCountry: 'UZ',
               },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "47",
-                "bestRating": "5"
-              }
-            })
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '4.9',
+                reviewCount: '47',
+                bestRating: '5',
+              },
+            }),
           }}
         />
       </head>
-      <body className={`${hankenGrotesk.variable} font-body bg-brand-paper antialiased`} suppressHydrationWarning>
+      <body
+        className={`${hankenGrotesk.variable} font-body bg-brand-paper antialiased`}
+        suppressHydrationWarning
+      >
         <a href="#main-content" className="skip-link">
           {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
         </a>
@@ -385,7 +398,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
           `}
         </Script>
 
-        
         <MainLayout
           leadMagnetDictionary={(dictionary as any).leadMagnetPopup}
           headerDictionary={dictionary.header}
@@ -394,14 +406,14 @@ export default async function LocalizedLayout({ children, params }: Props) {
           tabNotificationMessage={tabNotificationMessage}
         >
           <Header lang={lang} dictionary={dictionary.header} />
-          
+
           <div id="main-content" className="flex-grow">
             {children}
           </div>
-        <Footer lang={lang} dictionary={dictionary.footer} />
+          <Footer lang={lang} dictionary={dictionary.footer} />
           {/* Yandex.Metrika counter */}
-        <Script id="yandex-metrika" strategy="lazyOnload">
-          {`
+          <Script id="yandex-metrika" strategy="lazyOnload">
+            {`
             if (document.cookie.includes('cookie_consent_accepted=true')) {
             (function(m,e,t,r,i,k,a){
                 m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -413,12 +425,16 @@ export default async function LocalizedLayout({ children, params }: Props) {
             ym(91628105, 'init', {webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
             }
           `}
-        </Script>
-        <noscript>
-          <div>
-            <img src="https://mc.yandex.ru/watch/91628105" style={{ position: 'absolute', left: '-9999px' }} alt="" />
-          </div>
-        </noscript>
+          </Script>
+          <noscript>
+            <div>
+              <img
+                src="https://mc.yandex.ru/watch/91628105"
+                style={{ position: 'absolute', left: '-9999px' }}
+                alt=""
+              />
+            </div>
+          </noscript>
         </MainLayout>
       </body>
     </html>

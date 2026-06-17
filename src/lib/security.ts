@@ -16,3 +16,15 @@ export function safeCompare(a: string, b: string): boolean {
 
   return timingSafeEqual(bufA, bufB);
 }
+
+/**
+ * Safely stringifies data to JSON, escaping special characters to prevent XSS
+ * when the JSON is injected into a <script> tag via dangerouslySetInnerHTML.
+ */
+export function safeJsonStringify(data: any): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/'/g, '\\u0027');
+}

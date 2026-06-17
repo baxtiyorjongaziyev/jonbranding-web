@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2025-02-28 - XSS Vulnerability in JSON-LD Injection
+**Vulnerability:** JSON-LD script tags were being populated directly using `JSON.stringify` inside `dangerouslySetInnerHTML`.
+**Learning:** `JSON.stringify` does not escape HTML characters like `<`, `>`, `&`, or `'`, making it susceptible to XSS if user-controlled input makes it into the JSON object.
+**Prevention:** Always use a custom function to stringify JSON injected directly into the DOM (e.g., `safeJsonStringify` replacing HTML entities) to ensure special characters are properly escaped.

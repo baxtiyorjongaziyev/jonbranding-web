@@ -1,4 +1,3 @@
-
 import { getPostData, getAllPostSlugs } from '@/lib/blog-posts';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
@@ -6,6 +5,7 @@ import BlogPostClient from '@/components/blog-post-client';
 import Script from 'next/script';
 import { BlogPost } from '@/lib/types';
 import { Locale } from '@/lib/dictionaries';
+import { safeJsonStringify } from '@/lib/security';
 import {
   defaultLocale,
   getLocalizedAbsoluteUrl,
@@ -28,8 +28,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     };
   }
   const canonicalPath = `/blog/${post.slug}`;
-  const canonicalUrl = getLocalizedAbsoluteUrl('https://www.jonbranding.uz', safeLang, canonicalPath);
-
+  const canonicalUrl = getLocalizedAbsoluteUrl(
+    'https://www.jonbranding.uz',
+    safeLang,
+    canonicalPath
+  );
 
   return {
     title: `${post.title} | Jon.Branding Blog`,
@@ -93,7 +96,7 @@ const BlogPostPage = async (props: Props) => {
   if (!post) {
     notFound();
   }
-  
+
   const jsonLd = generateJsonLd(post);
 
   return (
@@ -101,7 +104,7 @@ const BlogPostPage = async (props: Props) => {
       <Script
         id="blog-post-structured-data"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{ __html: safeJsonStringify(jsonLd) }}
       />
       <BlogPostClient post={post} />
     </>
