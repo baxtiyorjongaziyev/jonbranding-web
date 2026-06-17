@@ -8,9 +8,6 @@ import AtMarquee from '@/components/sections/at-marquee';
 import AtDiagnosis from '@/components/sections/at-diagnosis';
 import AtLossCalc from '@/components/sections/at-loss-calc';
 import AtAudit from '@/components/sections/at-audit';
-import AtSampleReport from '@/components/sections/at-sample-report';
-import AtPricing from '@/components/sections/at-pricing';
-import AtProcess from '@/components/sections/at-process';
 import AtWorkIndex from '@/components/sections/at-work-index';
 import AtStats from '@/components/sections/at-stats';
 import AtQuotes from '@/components/sections/at-quotes';
@@ -41,9 +38,6 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtDiagnosis onOpen={open} />
       <AtLossCalc onOpen={open} />
       <AtAudit onOpen={open} />
-      <AtSampleReport onOpen={open} />
-      <AtPricing onOpen={open} />
-      <AtProcess />
       <AtWorkIndex onOpen={open} />
       <AtStats />
       <AtQuotes />
