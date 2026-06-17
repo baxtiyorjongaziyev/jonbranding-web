@@ -13,7 +13,8 @@
   --at-line:    #D8D2C2;   /* Hairline border */
   --at-accent:  #1B4DFF;   /* Cobalt blue */
   --at-terra:   #C2552A;   /* Terracotta */
-  --at-green:   #2C6E49;   /* Forest green */
+  --at-green:      #2C6E49;   /* Forest green */
+  --at-green-soft: rgba(44, 110, 73, 0.08);
   --at-accent-soft: rgba(27,77,255,0.08);
 }
 
