@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon, Truck } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -17,7 +18,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     robots: { index: false, follow: true },
   };
 }
-import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon, Truck } from 'lucide-react';
 
 type Props = {
   params: Promise<{ lang: string }>;

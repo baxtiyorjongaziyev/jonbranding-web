@@ -3,8 +3,11 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 
+const isSafePathSegment = (value: string) => /^[a-z]{2}$/i.test(value) && ['uz','ru','en','zh'].includes(value);
+
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
+  const safeLang = isSafePathSegment(lang) ? lang : 'uz';
   const titles: Record<string, string> = {
     uz: 'Foydalanish shartlari | Jon.Branding',
     ru: 'Условия использования | Jon.Branding',
@@ -12,9 +15,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     zh: '服务条款 | Jon.Branding',
   };
   return {
-    title: titles[lang] || titles.uz,
+    title: titles[safeLang] || titles.uz,
     alternates: {
-      canonical: `${BASE_URL}/${lang}/terms`,
+      canonical: `${BASE_URL}/${safeLang}/terms`,
       languages: {
         uz: `${BASE_URL}/uz/terms`,
         ru: `${BASE_URL}/ru/terms`,
