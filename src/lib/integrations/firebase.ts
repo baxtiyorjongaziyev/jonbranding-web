@@ -21,7 +21,6 @@ export function getDb() {
   } else {
     app = getApps()[0];
   }
-  const dbId = process.env.FIREBASE_DATABASE_ID;
-  if (!dbId) throw new Error('FIREBASE_DATABASE_ID is not set');
+  const dbId = process.env.FIREBASE_DATABASE_ID ?? '(default)';
   return getFirestore(app, dbId);
 }

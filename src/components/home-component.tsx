@@ -45,10 +45,10 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtLedger />
       <AtFeatured />
       <AtShowcase onOpen={open} />
-      <AtManifesto />
+      <AtManifesto lang={lang} />
       <AtStats />
       <AtDiagnosis onOpen={open} />
-      <AtServices onOpen={open} />
+      <AtServices onOpen={open} lang={lang} />
       <AtAudit onOpen={open} />
       <AtSampleReport onOpen={open} />
       <AtMiniQuotes />
