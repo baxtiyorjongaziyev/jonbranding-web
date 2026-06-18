@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 
@@ -17,14 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return {
     title: titles[safeLang] || titles.uz,
     alternates: {
-      canonical: `${BASE_URL}/${safeLang}/terms`,
-      languages: {
-        uz: `${BASE_URL}/uz/terms`,
-        ru: `${BASE_URL}/ru/terms`,
-        en: `${BASE_URL}/en/terms`,
-        zh: `${BASE_URL}/zh/terms`,
-        'x-default': `${BASE_URL}/uz/terms`,
-      },
+      canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang as any, '/terms'),
+      languages: getLocaleAlternates(BASE_URL, '/terms'),
     },
     robots: { index: true, follow: true },
   };
@@ -38,6 +33,7 @@ interface TermsPageProps {
 
 const TermsPage = async ({ params }: TermsPageProps) => {
   const { lang } = await params;
+  const safeLang = isSafePathSegment(lang) ? lang : 'uz';
 
   const content = {
     uz: {
@@ -126,13 +122,13 @@ const TermsPage = async ({ params }: TermsPageProps) => {
     }
   };
 
-  const currentContent = content[lang as keyof typeof content] || content.en;
+  const currentContent = content[safeLang as keyof typeof content];
 
   return (
     <main className="min-h-screen pt-32 pb-20 bg-black text-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
-          {{ uz: 'Foydalanish shartlari', ru: 'Условия использования', en: 'Terms of Service', zh: '服务条款' }[lang] || 'Terms of Service'}
+          {{ uz: 'Foydalanish shartlari', ru: 'Условия использования', en: 'Terms of Service', zh: '服务条款' }[safeLang as 'uz' | 'ru' | 'en' | 'zh']}
         </h1>
         
         <div className="prose prose-invert prose-lg max-w-none">

@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { uz, ru, enUS, zhCN } from 'date-fns/locale';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { getLocalizedPath } from '@/lib/i18n/locale';
+import { getLocalizedPath, getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -28,19 +28,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     title: metadata?.title || "Jon.Branding Blog | Branding, Dizayn va Marketing",
     description: metadata?.description || "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
     alternates: {
-      canonical: `${BASE_URL}/${safeLang}/blog`,
-      languages: {
-        uz: `${BASE_URL}/uz/blog`,
-        ru: `${BASE_URL}/ru/blog`,
-        en: `${BASE_URL}/en/blog`,
-        zh: `${BASE_URL}/zh/blog`,
-        'x-default': `${BASE_URL}/uz/blog`,
-      },
+      canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang as any, '/blog'),
+      languages: getLocaleAlternates(BASE_URL, '/blog'),
     },
     openGraph: {
       title: metadata?.title,
       description: metadata?.description,
-      url: `${BASE_URL}/${safeLang}/blog`,
+      url: getLocalizedAbsoluteUrl(BASE_URL, safeLang as any, '/blog'),
       siteName: 'Jon.Branding',
       type: 'website',
     },

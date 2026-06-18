@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import XizmatlarClient from './xizmatlar-client';
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -39,19 +40,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: Loc
     description: m.description,
     keywords: m.keywords,
     alternates: {
-      canonical: `${BASE_URL}/${safeLang}/xizmatlar`,
-      languages: {
-        'uz': `${BASE_URL}/uz/xizmatlar`,
-        'ru': `${BASE_URL}/ru/xizmatlar`,
-        'en': `${BASE_URL}/en/xizmatlar`,
-        'zh': `${BASE_URL}/zh/xizmatlar`,
-        'x-default': `${BASE_URL}/uz/xizmatlar`,
-      },
+      canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/xizmatlar'),
+      languages: getLocaleAlternates(BASE_URL, '/xizmatlar'),
     },
     openGraph: {
       title: m.title,
       description: m.description,
-      url: `${BASE_URL}/${safeLang}/xizmatlar`,
+      url: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/xizmatlar'),
       siteName: 'Jon.Branding',
     },
   };
@@ -74,8 +69,8 @@ const XizmatlarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: bl.home, item: `${BASE_URL}/${safeLang}` },
-        { '@type': 'ListItem', position: 2, name: bl.services, item: `${BASE_URL}/${safeLang}/xizmatlar` },
+        { '@type': 'ListItem', position: 1, name: bl.home, item: getLocalizedAbsoluteUrl(BASE_URL, safeLang) },
+        { '@type': 'ListItem', position: 2, name: bl.services, item: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/xizmatlar') },
       ],
     };
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Locale } from '@/lib/dictionaries';
+import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import HaqimizClient from './haqimizda-client';
 
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
@@ -32,14 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     title: m.title,
     description: m.description,
     alternates: {
-      canonical: `${BASE_URL}/${safeLang}/haqimizda`,
-      languages: {
-        uz: `${BASE_URL}/uz/haqimizda`,
-        ru: `${BASE_URL}/ru/haqimizda`,
-        en: `${BASE_URL}/en/haqimizda`,
-        zh: `${BASE_URL}/zh/haqimizda`,
-        'x-default': `${BASE_URL}/uz/haqimizda`,
-      },
+      canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/haqimizda'),
+      languages: getLocaleAlternates(BASE_URL, '/haqimizda'),
     },
   };
 }

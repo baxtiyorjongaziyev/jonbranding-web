@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Locale } from '@/lib/dictionaries';
+import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import AloqaClient from './aloqa-client';
 
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
@@ -32,14 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     title: m.title,
     description: m.description,
     alternates: {
-      canonical: `${BASE_URL}/${safeLang}/aloqa`,
-      languages: {
-        uz: `${BASE_URL}/uz/aloqa`,
-        ru: `${BASE_URL}/ru/aloqa`,
-        en: `${BASE_URL}/en/aloqa`,
-        zh: `${BASE_URL}/zh/aloqa`,
-        'x-default': `${BASE_URL}/uz/aloqa`,
-      },
+      canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/aloqa'),
+      languages: getLocaleAlternates(BASE_URL, '/aloqa'),
     },
   };
 }

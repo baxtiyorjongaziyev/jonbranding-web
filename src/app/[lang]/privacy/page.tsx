@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 
@@ -17,14 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return {
     title: titles[safeLang] || titles.uz,
     alternates: {
-      canonical: `${BASE_URL}/${safeLang}/privacy`,
-      languages: {
-        uz: `${BASE_URL}/uz/privacy`,
-        ru: `${BASE_URL}/ru/privacy`,
-        en: `${BASE_URL}/en/privacy`,
-        zh: `${BASE_URL}/zh/privacy`,
-        'x-default': `${BASE_URL}/uz/privacy`,
-      },
+      canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang as any, '/privacy'),
+      languages: getLocaleAlternates(BASE_URL, '/privacy'),
     },
     robots: { index: true, follow: true },
   };
@@ -38,6 +33,7 @@ interface PrivacyPageProps {
 
 const PrivacyPage = async ({ params }: PrivacyPageProps) => {
   const { lang } = await params;
+  const safeLang = isSafePathSegment(lang) ? lang : 'uz';
 
   const content = {
     uz: {
@@ -126,13 +122,13 @@ const PrivacyPage = async ({ params }: PrivacyPageProps) => {
     }
   };
 
-  const currentContent = content[lang as keyof typeof content] || content.en;
+  const currentContent = content[safeLang as keyof typeof content];
 
   return (
     <main className="min-h-screen pt-32 pb-20 bg-black text-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
-          {{ uz: 'Maxfiylik siyosati', ru: 'Политика конфиденциальности', en: 'Privacy Policy', zh: '隐私政策' }[lang] || 'Privacy Policy'}
+          {{ uz: 'Maxfiylik siyosati', ru: 'Политика конфиденциальности', en: 'Privacy Policy', zh: '隐私政策' }[safeLang as 'uz' | 'ru' | 'en' | 'zh']}
         </h1>
         
         <div className="prose prose-invert prose-lg max-w-none">

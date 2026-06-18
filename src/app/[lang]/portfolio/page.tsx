@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { fetchPortfolioList } from '@/lib/data/portfolio';
 import { PortfolioProject } from '@/lib/portfolio-fallbacks';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import PortfolioListClient from '@/components/portfolio-list-client';
 
 export const revalidate = 60;
@@ -33,19 +34,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     title: titles[safeLang] || titles.uz,
     description: descriptions[safeLang] || descriptions.uz,
     alternates: {
-      canonical: `${BASE_URL}/${safeLang}/portfolio`,
-      languages: {
-        uz: `${BASE_URL}/uz/portfolio`,
-        ru: `${BASE_URL}/ru/portfolio`,
-        en: `${BASE_URL}/en/portfolio`,
-        zh: `${BASE_URL}/zh/portfolio`,
-        'x-default': `${BASE_URL}/uz/portfolio`,
-      },
+      canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/portfolio'),
+      languages: getLocaleAlternates(BASE_URL, '/portfolio'),
     },
     openGraph: {
       title: titles[safeLang] || titles.uz,
       description: descriptions[safeLang] || descriptions.uz,
-      url: `${BASE_URL}/${safeLang}/portfolio`,
+      url: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/portfolio'),
       siteName: 'Jon.Branding',
     },
   };
