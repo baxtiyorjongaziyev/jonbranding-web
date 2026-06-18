@@ -40,7 +40,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       }}
     >
       <AtMasthead />
-      <AtHero onOpen={open} />
+      <AtHero onOpen={open} lang={lang} />
       <AtMarquee />
       <AtLedger />
       <AtFeatured />
@@ -54,8 +54,8 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtMiniQuotes />
       <AtLossCalc onOpen={open} />
       <AtWorkIndex onOpen={open} />
-      <AtProcess />
-      <AtPricing onOpen={open} />
+      <AtProcess lang={lang} />
+      <AtPricing onOpen={open} lang={lang} />
       <AtQuotes />
       <AtFaq />
       <AtFinalCta onOpen={open} />
