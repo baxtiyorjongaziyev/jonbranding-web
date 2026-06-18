@@ -139,6 +139,8 @@
         },
         "links": {
             "home": "Bosh sahifa",
+            "about": "Haqimizda",
+            "contact": "Aloqa",
             "quiz": "Brending testi",
             "portfolio": "Portfolio",
             "process": "Ish jarayoni",

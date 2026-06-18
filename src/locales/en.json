@@ -139,6 +139,8 @@
         },
         "links": {
             "home": "Home",
+            "about": "About Us",
+            "contact": "Contact",
             "quiz": "Branding test",
             "portfolio": "Portfolio",
             "process": "Workflow",

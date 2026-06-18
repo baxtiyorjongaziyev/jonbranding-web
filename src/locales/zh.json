@@ -139,6 +139,8 @@
         },
         "links": {
             "home": "主页",
+            "about": "关于我们",
+            "contact": "联系我们",
             "quiz": "品牌测试",
             "portfolio": "作品集",
             "process": "工作流程",
