@@ -24,12 +24,10 @@ import AtFinalCta from '@/components/sections/at-final-cta';
 import AtModal from '@/components/sections/at-modal';
 import AtStickyCta from '@/components/sections/at-sticky-cta';
 
-const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[] }> = ({ lang, dictionary }) => {
+const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[] }> = ({ lang, dictionary: _dictionary }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const open = () => setModalOpen(true);
   const close = () => setModalOpen(false);
-
-  void dictionary;
 
   return (
     <div
