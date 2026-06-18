@@ -18,3 +18,7 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+## 2025-05-18 - IP Spoofing via X-Forwarded-For
+**Vulnerability:** The rate limiting logic (`getClientIp`) relied blindly on the `x-forwarded-for` header for client IP identification even when `TRUSTED_PROXY` was not set, allowing an attacker to trivially bypass rate limits by sending direct requests with a spoofed header.
+**Learning:** `x-forwarded-for` is inherently untrusted unless coming from a trusted proxy boundary. Parsing it without verifying the proxy environment creates an IP spoofing vulnerability.
+**Prevention:** Remove untrusted parsing of `x-forwarded-for`. Use secure request properties like `NextRequest.ip` instead, and only parse proxy headers if the proxy explicitly verified them (`TRUSTED_PROXY=cloudflare`).

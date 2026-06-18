@@ -24,7 +24,7 @@ export function rateLimit(ip: string, maxRequests: number, windowMs: number): bo
  * origin — bypassing the rate-limiter's per-IP bucket on every request.
  *
  * Production (Cloudflare → Vercel/Firebase): set TRUSTED_PROXY=cloudflare
- * Development / direct-origin: leave TRUSTED_PROXY unset → X-Forwarded-For
+ * Development / direct-origin: leave TRUSTED_PROXY unset (Next.js .ip or 'unknown')
  */
 export function getClientIp(request: Request): string {
     const headers = (request as any).headers;
@@ -38,11 +38,11 @@ export function getClientIp(request: Request): string {
         if (xRealIp) return xRealIp.trim();
     }
 
-    // Fallback: take only the first entry from X-Forwarded-For.
-    // When behind Cloudflare, CF sets this to the real client IP as the first
-    // value so it is still safe. Without a trusted proxy, an attacker could
-    // append arbitrary values — but we only read the first entry which is the
-    // IP seen by the last upstream hop, making it harder to spoof.
-    const forwarded = headers?.get?.('x-forwarded-for');
-    return forwarded ? forwarded.split(',')[0].trim() : 'unknown';
+    // Fallback: Next.js provides .ip on NextRequest which is secure.
+    const nextIp = (request as any).ip;
+    if (nextIp) return nextIp;
+
+    // Do NOT parse X-Forwarded-For blindly when not behind a trusted proxy,
+    // as it allows trivial IP spoofing by attackers connecting directly.
+    return 'unknown';
 }
