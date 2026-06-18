@@ -13,6 +13,7 @@ import {
   getLocaleAlternates,
 } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
+import { fetchSettings } from '@/lib/data/settings';
 
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -123,6 +124,8 @@ export default async function LocalizedLayout({ children, params }: Props) {
     lang === 'en' ? '(1) New message! | Jon Branding' :
     lang === 'zh' ? '(1) New message! | Jon Branding' :
     '(1) Yangi xabar! | Jon Branding';
+
+  const settings = await fetchSettings();
 
   return (
     <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
@@ -392,6 +395,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           lang={lang}
           stickyCtaLabel={dictionary.header?.free_consultation || 'Contact us'}
           tabNotificationMessage={tabNotificationMessage}
+          settings={settings}
         >
           <Header lang={lang} dictionary={dictionary.header} />
           
