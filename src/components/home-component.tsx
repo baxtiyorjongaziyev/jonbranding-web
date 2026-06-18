@@ -47,16 +47,16 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtShowcase onOpen={open} lang={lang} />
       <AtManifesto lang={lang} />
       <AtStats lang={lang} />
-      <AtDiagnosis onOpen={open} />
+      <AtDiagnosis onOpen={open} lang={lang} />
       <AtServices onOpen={open} lang={lang} />
       <AtAudit onOpen={open} />
       <AtSampleReport onOpen={open} lang={lang} />
-      <AtMiniQuotes />
+      <AtMiniQuotes lang={lang} />
       <AtLossCalc onOpen={open} />
       <AtWorkIndex onOpen={open} />
       <AtProcess lang={lang} />
       <AtPricing onOpen={open} lang={lang} />
-      <AtQuotes />
+      <AtQuotes lang={lang} />
       <AtFaq lang={lang} />
       <AtFinalCta onOpen={open} lang={lang} />
       <AtModal open={modalOpen} onClose={close} />
