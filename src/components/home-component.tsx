@@ -60,7 +60,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtFaq lang={lang} />
       <AtFinalCta onOpen={open} lang={lang} />
       <AtModal open={modalOpen} onClose={close} />
-      <AtStickyCta onOpen={open} />
+      <AtStickyCta onOpen={open} lang={lang} />
     </div>
   );
 };
