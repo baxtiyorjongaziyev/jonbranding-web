@@ -217,70 +217,70 @@
         "detail": "Каждый проект для нас — это не просто дизайн, а инструмент для роста бизнеса."
     },
     "contactModal": {
-        "sidebarTitle": "Free Brand Audit",
-        "sidebarSubtitle": "In 15 minutes, we show where your brand loses buyer trust.",
-        "header": "Brand Audit",
-        "description": "You leave knowing which change can affect trust and sales first.",
+        "sidebarTitle": "Бесплатный аудит бренда",
+        "sidebarSubtitle": "За 15 минут покажем, где ваш бренд теряет доверие покупателей.",
+        "header": "Аудит бренда",
+        "description": "Вы уйдёте зная, какое изменение первым повлияет на доверие и продажи.",
         "steps": {
             "step4": {
-                "title": "Book the audit",
-                "subtitle": "Leave your contact details so our strategist can reach you."
+                "title": "Записаться на аудит",
+                "subtitle": "Оставьте контактные данные, и наш стратег свяжется с вами."
             }
         },
         "fields": {
             "name": {
-                "label": "Full name",
-                "placeholder": "John Doe"
+                "label": "Полное имя",
+                "placeholder": "Иван Иванов"
             },
             "phone": {
-                "label": "Phone number",
+                "label": "Номер телефона",
                 "placeholder": "+..."
             },
             "telegram": {
-                "label": "Telegram / WhatsApp (optional)",
+                "label": "Telegram / WhatsApp (необязательно)",
                 "placeholder": "@username"
             }
         },
         "buttons": {
-            "submit": "Book free audit",
-            "close": "Close window",
-            "back": "Back",
-            "next": "Next step"
+            "submit": "Записаться на бесплатный аудит",
+            "close": "Закрыть окно",
+            "back": "Назад",
+            "next": "Следующий шаг"
         },
         "formErrors": {
-            "fullName": "Enter your name",
-            "phone": "Enter full phone number"
+            "fullName": "Введите ваше имя",
+            "phone": "Введите полный номер телефона"
         },
         "errorToast": {
-            "title": "Error",
-            "description": "Something went wrong. Please try again."
+            "title": "Ошибка",
+            "description": "Что-то пошло не так. Пожалуйста, попробуйте снова."
         },
         "successStep": {
-            "title": "Request received",
-            "description": "Our strategist will contact you soon and start the brand audit.",
-            "nextSteps": "Before the call",
-            "telegramButton": "Open Telegram channel",
-            "telegramDesc": "Useful branding materials."
+            "title": "Заявка получена",
+            "description": "Наш стратег свяжется с вами в ближайшее время и начнёт аудит бренда.",
+            "nextSteps": "До звонка",
+            "telegramButton": "Открыть Telegram-канал",
+            "telegramDesc": "Полезные материалы по брендингу."
         },
-        "trustBadge": "Your data is confidential and used only by Jon.Branding.",
-        "contactBadge": "15 minutes",
-        "quickContactLabel": "Quick contact",
-        "auditGivesLabel": "You get",
+        "trustBadge": "Ваши данные конфиденциальны и используются только Jon.Branding.",
+        "contactBadge": "15 минут",
+        "quickContactLabel": "Быстрый контакт",
+        "auditGivesLabel": "Вы получите",
         "auditOfferStack": [
-            "5 trust gaps",
-            "Clear service recommendation",
-            "No-pressure advice"
+            "5 слабых мест доверия",
+            "Чёткую рекомендацию по услуге",
+            "Консультацию без давления"
         ],
-        "auditTimeLabel": "Format",
+        "auditTimeLabel": "Формат",
         "auditFormat": [
-            "Phone or Telegram",
-            "15-minute diagnosis",
-            "Written next step"
+            "Телефон или Telegram",
+            "15-минутная диагностика",
+            "Письменный следующий шаг"
         ],
-        "srDescription": "Форма для бесплатного Brand Audit: оставьте имя, телефон и при желании Telegram.",
+        "srDescription": "Форма для бесплатного аудита бренда: оставьте имя, телефон и при желании Telegram.",
         "telegramLinkLabel": "Telegram",
-        "objectionCopy": "Even if you are not ready to start, the audit gives you clarity.",
-        "riskCopy": "Leaving your phone is not a contract. We show the problem first.",
+        "objectionCopy": "Даже если вы ещё не готовы начать, аудит даст вам ясность.",
+        "riskCopy": "Оставить телефон — не договор. Сначала мы покажем проблему.",
         "footerCopyright": "Jon.Branding Agency"
     },
     "oishaWidget": {

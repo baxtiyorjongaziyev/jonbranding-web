@@ -19,11 +19,11 @@ const isSafeSlug = (value: string) => /^[a-z0-9-]+$/i.test(value);
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
-  const dictionary = await getDictionary(lang as Locale);
-  const metadata = dictionary.blog?.metadata;
-
   const BASE_URL = 'https://www.jonbranding.uz';
   const safeLang = isSafePathSegment(lang) ? lang : 'uz';
+  const dictionary = await getDictionary(safeLang as Locale);
+  const metadata = dictionary.blog?.metadata;
+
   return {
     title: metadata?.title || "Jon.Branding Blog | Branding, Dizayn va Marketing",
     description: metadata?.description || "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
