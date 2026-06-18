@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
-import { uz, ru, enUS } from 'date-fns/locale';
+import { uz, ru, enUS, zhCN } from 'date-fns/locale';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { getLocalizedPath } from '@/lib/i18n/locale';
 
@@ -62,7 +62,7 @@ const BlogPage = async (props: Props) => {
     '/images/cms/brand-strategy-team.webp',
   ];
   
-  const locale = safeLang === 'ru' ? ru : (safeLang === 'en' ? enUS : uz);
+  const locale = safeLang === 'ru' ? ru : safeLang === 'en' ? enUS : safeLang === 'zh' ? zhCN : uz;
 
   return (
     <main className="flex-grow bg-secondary/50">

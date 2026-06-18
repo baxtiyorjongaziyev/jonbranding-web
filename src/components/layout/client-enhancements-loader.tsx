@@ -14,7 +14,6 @@ type ClientEnhancementsLoaderProps = {
   lang?: string;
   stickyCtaLabel?: string;
   tabNotificationMessage?: string;
-  settings?: { phone?: string; telegramPersonal?: string; telegramChannel?: string };
 };
 
 export default function ClientEnhancementsLoader(props: ClientEnhancementsLoaderProps) {

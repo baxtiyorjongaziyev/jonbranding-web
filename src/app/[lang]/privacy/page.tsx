@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { getDictionary, Locale } from '@/lib/dictionaries';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 
@@ -39,7 +38,6 @@ interface PrivacyPageProps {
 
 const PrivacyPage = async ({ params }: PrivacyPageProps) => {
   const { lang } = await params;
-  const dictionary = await getDictionary(lang as Locale);
 
   const content = {
     uz: {
