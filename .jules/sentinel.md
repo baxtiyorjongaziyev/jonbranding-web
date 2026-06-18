@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2026-05-27 - XSS in JSON-LD Scripts via JSON.stringify
+**Vulnerability:** Utilizing `JSON.stringify` within a `<script>` tag's `dangerouslySetInnerHTML` allows for XSS if the data contains unescaped HTML characters (like `<script>`). In Next.js, this is often seen when injecting JSON-LD schema.
+**Learning:** `JSON.stringify` outputs valid JSON, but inside an HTML `<script>` context, standard HTML parser rules apply before JS execution. An attacker could end the `<script>` block and inject their own if characters like `<` are not escaped.
+**Prevention:** Always use a safe serialization utility (like a custom `safeJsonStringify` that replaces `<`, `>`, `&`, and `'` with unicode escapes) when injecting JSON data into the DOM or HTML scripts.
