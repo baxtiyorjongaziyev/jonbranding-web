@@ -49,7 +49,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtStats lang={lang} />
       <AtDiagnosis onOpen={open} lang={lang} />
       <AtServices onOpen={open} lang={lang} />
-      <AtAudit onOpen={open} />
+      <AtAudit onOpen={open} lang={lang} />
       <AtSampleReport onOpen={open} lang={lang} />
       <AtMiniQuotes lang={lang} />
       <AtLossCalc onOpen={open} />
