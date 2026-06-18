@@ -3,7 +3,8 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 
-const isSafePathSegment = (value: string) => /^[a-z]{2}$/i.test(value) && ['uz','ru','en','zh'].includes(value);
+const VALID_LOCALES = ['uz', 'ru', 'en', 'zh'];
+const isSafePathSegment = (value: string) => /^[a-z]{2}$/i.test(value) && VALID_LOCALES.includes(value);
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -101,6 +102,27 @@ const TermsPage = async ({ params }: TermsPageProps) => {
         {
           title: "4. Изменение условий",
           text: "Агентство оставляет за собой право изменять эти условия в любое время без предварительного уведомления."
+        }
+      ]
+    },
+    zh: {
+      intro: '使用 Jon.Branding Agency 服务即表示您接受以下条款。我们倡导透明度和专业合作。',
+      sections: [
+        {
+          title: '1. 服务提供',
+          text: '该机构提供品牌建设、标志设计、战略及其他服务。每个项目均基于单独的合同或协议执行。'
+        },
+        {
+          title: '2. 知识产权',
+          text: '全额付款后，所有创作资产和设计项目将移交给客户。该机构保留在其作品集中展示其作品的权利。'
+        },
+        {
+          title: '3. 客户责任',
+          text: '客户对为项目提供的所有信息的准确性和合法性负责。'
+        },
+        {
+          title: '4. 条款修改',
+          text: '该机构保留随时修改这些条款而无需事先通知的权利。'
         }
       ]
     }
