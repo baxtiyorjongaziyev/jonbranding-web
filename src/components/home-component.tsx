@@ -57,7 +57,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtProcess lang={lang} />
       <AtPricing onOpen={open} lang={lang} />
       <AtQuotes />
-      <AtFaq />
+      <AtFaq lang={lang} />
       <AtFinalCta onOpen={open} lang={lang} />
       <AtModal open={modalOpen} onClose={close} />
       <AtStickyCta onOpen={open} />
