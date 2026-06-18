@@ -1,6 +1,7 @@
 'use client';
 import type { FC } from 'react';
 import Image from 'next/image';
+import { useRef, useState, useCallback } from 'react';
 
 interface Props { onOpen: () => void; lang?: string; }
 
@@ -71,9 +72,34 @@ const translations = {
 
 const AtHero: FC<Props> = ({ onOpen, lang = 'uz' }) => {
   const l = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
+  const sectionRef = useRef<HTMLElement>(null);
+  const [spot, setSpot] = useState({ x: -999, y: -999, visible: false });
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setSpot({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setSpot((s) => ({ ...s, visible: false }));
+  }, []);
 
   return (
-    <section className="bg-[var(--at-bg)] pt-16 pb-0 md:pt-24">
+    <section
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="bg-[var(--at-bg)] pt-16 pb-0 md:pt-24 relative overflow-hidden"
+    >
+      {/* Spotlight */}
+      <div
+        className="pointer-events-none absolute inset-0 transition-opacity duration-300"
+        style={{
+          opacity: spot.visible ? 1 : 0,
+          background: `radial-gradient(600px circle at ${spot.x}px ${spot.y}px, rgba(27,77,255,0.07), transparent 60%)`,
+        }}
+      />
       <div className="max-w-[1320px] mx-auto px-5 md:px-8">
         <div className="grid md:grid-cols-[1fr_400px] gap-0 items-end">
           {/* LEFT — copy */}
