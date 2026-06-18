@@ -41,31 +41,6 @@
     --brand-line: 43 21% 80%;
     --font-inter: var(--font-hanken, "Hanken Grotesk"), "Aptos", "Segoe UI", sans-serif;
     --font-jakarta: var(--font-hanken, "Hanken Grotesk"), "Plus Jakarta Sans", "Aptos Display", "Segoe UI", sans-serif;
-    --finch-bg: #ffffff;
-    --finch-ink: #0a0a10;
-    --finch-muted: #6c6e78;
-    --finch-line: #ececf1;
-    --finch-blue: #2c2bf5;
-    --finch-blue-dark: #1b18c2;
-    --finch-blue-soft: #eceeff;
-    --finch-black: #0c0c12;
-    --finch-radius: 26px;
-    --finch-maxw: 1240px;
-    --finch-gradient: linear-gradient(135deg, #3d3aff 0%, #1b18c2 100%);
-
-    /* ── Brand Palette ── */
-    --brand-ink:   240 12% 7%;    /* #0C0C14 — near-black headings/dark bg */
-    --brand-paper: 0 0% 100%;     /* #FFFFFF — clean white sections */
-    --brand-mist:  240 5% 96%;    /* #F3F3F6 — soft neutral sections */
-    --brand-blue:  238 72% 50%;   /* #4448E8 — vibrant indigo (primary accent) */
-    --brand-cyan:  262 58% 62%;   /* #8B64D9 — violet secondary */
-    --brand-lime:  142 71% 45%;   /* #22C55E-ish — keep green for hero */
-    --brand-slate: 240 5% 46%;    /* #717180 — body text */
-    --brand-line:  240 6% 90%;    /* #E3E3E8 — clean neutral border */
-
-    /* ── Fonts ── */
-    --font-inter:   "Cabinet Grotesk", "Hanken Grotesk", "Aptos", sans-serif;
-    --font-jakarta: "Cabinet Grotesk", "Hanken Grotesk", "Aptos Display", sans-serif;
 
     /* ── Spacing ── */
     --section-gap: 6rem;
@@ -193,6 +168,16 @@
       min-height: 44px;
       display: inline-flex;
       align-items: center;
+    }
+  }
+
+  /* Reduced motion: disable all animations for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }
@@ -325,27 +310,10 @@
     100% { transform: translateX(-50%); }
   }
 
-  .premium-card {
-    @apply overflow-hidden rounded-3xl border border-brand-line/60 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-[box-shadow,transform,border-color] duration-500 hover:shadow-[0_32px_80px_rgba(15,23,42,0.08)];
-  }
-
   .brand-section {
     position: relative;
     padding-top: var(--section-gap);
     padding-bottom: var(--section-gap);
-  }
-
-  .brand-card {
-    @apply rounded-3xl border border-brand-line/60 p-6 sm:p-8 shadow-[0_24px_50px_rgba(15,23,42,0.04)] duration-300;
-    background-color: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    transition-property: box-shadow, transform, border-color, background-color;
-  }
-
-  .brand-card:hover {
-    transform: translateY(-3px);
-    border-color: hsl(var(--brand-blue) / 0.2);
-    box-shadow: 0 32px 80px rgba(15, 23, 42, 0.08);
   }
 
   .brand-card-dark {
@@ -353,22 +321,6 @@
     border-color: rgba(255, 255, 255, 0.12);
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
     border-radius: 1.5rem;
-  }
-
-  .brand-badge {
-    @apply inline-flex items-center rounded-full border border-brand-line/80 bg-white/80 px-3 py-1 text-[13px] font-extrabold uppercase tracking-normal text-brand-blue;
-  }
-
-  .jb-eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-brand-line/80 bg-white/80 px-4 py-2 text-[13px] font-extrabold uppercase tracking-normal text-brand-blue shadow-sm;
-  }
-
-  .jb-dark-panel {
-    @apply rounded-[1.75rem] border border-white/10 bg-white/[0.06] shadow-[0_40px_120px_-55px_rgba(0,0,0,0.9)];
-  }
-
-  .jb-warm-panel {
-    @apply rounded-2xl border border-brand-line/80 bg-white/90 shadow-[0_24px_70px_rgba(35,41,55,0.07)];
   }
 
   .section-padding {
@@ -457,11 +409,6 @@
   .group:hover .glass-shimmer { left: 200%; }
 
   /* ── Misc ── */
-  .shadow-ocean {
-    box-shadow: 0 8px 24px -4px hsl(var(--accent) / 0.18), 0 2px 6px -2px hsl(var(--accent) / 0.12);
-    transition: box-shadow var(--transition-normal), transform var(--transition-normal);
-  }
-
   .custom-scrollbar::-webkit-scrollbar       { width: 4px; }
   .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
   .custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-primary/20 rounded-full; }

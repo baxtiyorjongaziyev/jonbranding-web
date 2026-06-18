@@ -45,9 +45,9 @@ const DashboardHero: FC<DashboardHeroProps> = ({ lang, dictionary, onPrimaryClic
                             <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
                             <span className="text-[11px] font-bold uppercase tracking-wider text-primary">Branding Agency</span>
                         </div>
-                        <h1 className="text-2xl font-black leading-tight tracking-tight text-foreground mb-3 sm:text-3xl">
+                        <div className="text-2xl font-black leading-tight tracking-tight text-foreground mb-3 sm:text-3xl">
                             {renderHeadline(dictionary.hero.title)}
-                        </h1>
+                        </div>
                         <p className="text-base text-muted-foreground leading-relaxed mb-5">
                             {dictionary.hero.subtitle}
                         </p>

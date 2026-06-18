@@ -1,4 +1,5 @@
 
+import { Metadata } from 'next';
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -7,6 +8,18 @@ import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, 
 type Props = {
   params: Promise<{ lang: string }>;
 };
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { lang } = await props.params;
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const titles: Record<string, string> = {
+    uz: 'Sayt xaritasi | Jon.Branding',
+    ru: 'Карта сайта | Jon.Branding',
+    en: 'Sitemap | Jon.Branding',
+    zh: '网站地图 | Jon.Branding',
+  };
+  return { title: titles[safeLang] || titles.uz };
+}
 
 const SitemapPage = async (props: Props) => {
   const { lang } = await props.params;

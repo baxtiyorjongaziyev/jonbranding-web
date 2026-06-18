@@ -7,14 +7,14 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
   const { lang } = await props.params;
   const safeLang = ['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz';
   const titles: Record<string, string> = {
-    uz: 'Patent Kalkulyatori | Jon.Branding',
-    ru: 'Калькулятор Патентов | Jon.Branding',
-    en: 'Patent Calculator | Jon.Branding',
-    zh: '专利计算器 | Jon.Branding',
+    uz: 'Brending Checklist | Jon.Branding',
+    ru: 'Чеклист по Брендингу | Jon.Branding',
+    en: 'Branding Checklist | Jon.Branding',
+    zh: '品牌核查清单 | Jon.Branding',
   };
   return { title: titles[safeLang] || titles.uz };
 }
 
-export default function PatentCalculatorLayout({ children }: Props) {
+export default function ChecklistLayout({ children }: Props) {
   return <>{children}</>;
 }

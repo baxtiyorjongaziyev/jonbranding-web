@@ -17,12 +17,22 @@ const isSafePathSegment = (value: string) => /^[a-z0-9-]+$/i.test(value);
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
-  const dictionary = await getDictionary(lang as Locale);
-  const metadata = dictionary.blog?.metadata;
-
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const titles: Record<string, string> = {
+    uz: "Jon.Branding Blog | Branding, Dizayn va Marketing",
+    ru: "Блог Jon.Branding | Брендинг, Дизайн и Маркетинг",
+    en: "Jon.Branding Blog | Branding, Design and Marketing",
+    zh: "Jon.Branding 博客 | 品牌、设计和营销",
+  };
+  const descs: Record<string, string> = {
+    uz: "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
+    ru: "Последние статьи и советы по брендингу, неймингу и дизайну.",
+    en: "Latest articles and tips on branding, naming and design.",
+    zh: "关于品牌、命名和设计的最新文章和技巧。",
+  };
   return {
-    title: metadata?.title || "Jon.Branding Blog | Branding, Dizayn va Marketing",
-    description: metadata?.description || "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
+    title: titles[safeLang],
+    description: descs[safeLang],
   };
 }
 
