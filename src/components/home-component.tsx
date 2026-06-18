@@ -41,7 +41,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
     >
       <AtMasthead />
       <AtHero onOpen={open} lang={lang} />
-      <AtMarquee />
+      <AtMarquee lang={lang} />
       <AtLedger lang={lang} />
       <AtFeatured lang={lang} />
       <AtShowcase onOpen={open} lang={lang} />
