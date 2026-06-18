@@ -5,6 +5,8 @@ import XizmatlarClient from './xizmatlar-client';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 
+const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
+
 const metaByLang: Record<Locale, { title: string; description: string; keywords: string }> = {
   uz: {
     title: 'Brending xizmatlari — neyming, logotip, brendbuk | Jon.Branding',
@@ -30,13 +32,14 @@ const metaByLang: Record<Locale, { title: string; description: string; keywords:
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
   const { lang } = await params;
-  const m = metaByLang[lang] ?? metaByLang.uz;
+  const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
+  const m = metaByLang[safeLang];
   return {
     title: m.title,
     description: m.description,
     keywords: m.keywords,
     alternates: {
-      canonical: `${BASE_URL}/${lang}/xizmatlar`,
+      canonical: `${BASE_URL}/${safeLang}/xizmatlar`,
       languages: {
         'uz': `${BASE_URL}/uz/xizmatlar`,
         'ru': `${BASE_URL}/ru/xizmatlar`,
@@ -48,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: Loc
     openGraph: {
       title: m.title,
       description: m.description,
-      url: `${BASE_URL}/${lang}/xizmatlar`,
+      url: `${BASE_URL}/${safeLang}/xizmatlar`,
       siteName: 'Jon.Branding',
     },
   };
@@ -63,15 +66,16 @@ const breadcrumbLabels: Record<Locale, { home: string; services: string }> = {
 
 const XizmatlarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
     const { lang } = await props.params;
-    const dictionary = await getDictionary(lang);
-    const bl = breadcrumbLabels[lang] ?? breadcrumbLabels.uz;
+    const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
+    const dictionary = await getDictionary(safeLang);
+    const bl = breadcrumbLabels[safeLang] ?? breadcrumbLabels.uz;
 
     const breadcrumbSchema = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: bl.home, item: `${BASE_URL}/${lang}` },
-        { '@type': 'ListItem', position: 2, name: bl.services, item: `${BASE_URL}/${lang}/xizmatlar` },
+        { '@type': 'ListItem', position: 1, name: bl.home, item: `${BASE_URL}/${safeLang}` },
+        { '@type': 'ListItem', position: 2, name: bl.services, item: `${BASE_URL}/${safeLang}/xizmatlar` },
       ],
     };
 
@@ -82,7 +86,7 @@ const XizmatlarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
           />
-          <XizmatlarClient lang={lang} dictionary={dictionary} />
+          <XizmatlarClient lang={safeLang} dictionary={dictionary} />
       </main>
     );
 };
