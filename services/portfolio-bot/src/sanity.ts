@@ -1,6 +1,6 @@
 import { createClient } from '@sanity/client';
 import fs from 'fs';
-import type { ParsedProject, PortfolioPayload, SanityImageAsset } from './types.js';
+import type { AIEnrichedData, PortfolioPayload, SanityImageAsset } from './types.js';
 
 const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID!,
@@ -29,22 +29,35 @@ async function uploadImageFile(filePath: string, mime: string): Promise<SanityIm
   return { _type: 'reference', _ref: asset._id };
 }
 
+/**
+ * Portfolio dokumentini yaratish (rasmlarni upload qilib, Sanity'ga saqlaydi)
+ */
 export async function createPortfolioDocument(
-  parsed: ParsedProject,
-  imageFiles: { path: string; mime: string }[]
+  parsed: AIEnrichedData,
+  imageFiles: { path: string; mime: string }[],
+  bodyBlocks?: Array<{ style: string; children: Array<{ text: string }> }>
 ): Promise<string> {
   if (imageFiles.length === 0) {
     throw new Error('No images provided for portfolio document');
   }
 
-  const [cover, ...gallery] = imageFiles;
+  const [cover, ...rest] = imageFiles;
 
   const coverAsset = await uploadImageFile(cover.path, cover.mime);
+
+  // Galereya rasmlari
   const galleryAssets = await Promise.all(
-    gallery.map((f) => uploadImageFile(f.path, f.mime))
+    rest.map((f) => uploadImageFile(f.path, f.mime))
   );
 
+  // After image (2-rasmni after sifatida ishlatish, agar ikkita bo'lsa)
+  let afterAsset: SanityImageAsset | undefined;
+  if (rest.length >= 1) {
+    afterAsset = await uploadImageFile(rest[0].path, rest[0].mime);
+  }
+
   const slug = slugify(parsed.title);
+
   const payload: PortfolioPayload = {
     _type: 'portfolio',
     title: parsed.title,
@@ -55,11 +68,36 @@ export async function createPortfolioDocument(
     description: parsed.description,
     coverImage: { _type: 'image', asset: coverAsset },
     galleryImages: galleryAssets.map((a) => ({ _type: 'image', asset: a })),
+    afterImage: afterAsset ? { _type: 'image', asset: afterAsset } : undefined,
     results: parsed.results.map((r, i) => ({ _key: `result_${i}`, metric: r.metric, value: r.value })),
+    body: bodyBlocks && bodyBlocks.length > 0 ? bodyBlocks : undefined,
     featured: false,
     publishedAt: new Date().toISOString(),
+    order: Math.floor(Date.now() / 1000),
   };
 
   const doc = await client.create(payload);
   return doc._id;
+}
+
+/**
+ * Mavjud portfolio dokumentni yangilash (body qo'shish uchun)
+ */
+export async function updatePortfolioBody(
+  documentId: string,
+  bodyBlocks: Array<{ style: string; children: Array<{ text: string }> }>
+): Promise<void> {
+  await client
+    .patch(documentId)
+    .set({ body: bodyBlocks })
+    .commit();
+}
+
+/**
+ * Portfolio mavjudligini tekshirish (slug bo'yicha)
+ */
+export async function findExistingPortfolio(slug: string): Promise<string | null> {
+  const query = `*[_type == 'portfolio' && slug.current == $slug][0]._id`;
+  const result = await client.fetch<string | null>(query, { slug });
+  return result ?? null;
 }
