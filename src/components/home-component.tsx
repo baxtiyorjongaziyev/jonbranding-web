@@ -29,6 +29,8 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
   const open = () => setModalOpen(true);
   const close = () => setModalOpen(false);
 
+  void dictionary;
+
   return (
     <div
       className="min-h-screen"
@@ -42,15 +44,15 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtMasthead />
       <AtHero onOpen={open} lang={lang} />
       <AtMarquee />
-      <AtLedger />
-      <AtFeatured />
-      <AtShowcase onOpen={open} />
+      <AtLedger lang={lang} />
+      <AtFeatured lang={lang} />
+      <AtShowcase onOpen={open} lang={lang} />
       <AtManifesto lang={lang} />
       <AtStats />
       <AtDiagnosis onOpen={open} />
       <AtServices onOpen={open} lang={lang} />
       <AtAudit onOpen={open} />
-      <AtSampleReport onOpen={open} />
+      <AtSampleReport onOpen={open} lang={lang} />
       <AtMiniQuotes />
       <AtLossCalc onOpen={open} />
       <AtWorkIndex onOpen={open} />

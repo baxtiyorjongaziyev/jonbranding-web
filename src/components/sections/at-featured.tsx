@@ -2,21 +2,65 @@
 import type { FC } from 'react';
 import Image from 'next/image';
 
+interface Props { lang?: string; }
+type Lang = 'uz' | 'ru' | 'en' | 'zh';
+
+const t = {
+  uz: {
+    caseLabel: 'Asosiy keys',
+    status: 'Faol',
+    cat: 'Logotip · Firma uslubi · Tovar belgisi',
+    story: "Toshkentdagi premium parfyumeriya brendiga to'liq vizual identifikatsiya yaratildi. Yangi logotip, rang tizimi va qadoq dizayni bilan brend bozorga chiqdi — 3 oy ichida 8 500+ obunachilar jamg'arildi.",
+    metrics: [
+      { n: '8 500+', l: 'Obunachilar' },
+      { n: '3', l: 'Oy ichida' },
+      { n: '100%', l: "To'liq aydentika" },
+    ],
+  },
+  ru: {
+    caseLabel: 'Ключевой кейс',
+    status: 'Активен',
+    cat: 'Логотип · Фирменный стиль · Товарный знак',
+    story: 'Создана полная визуальная идентичность для премиум-парфюмерного бренда в Ташкенте. С новым логотипом, цветовой системой и дизайном упаковки бренд вышел на рынок — за 3 месяца набрал 8 500+ подписчиков.',
+    metrics: [
+      { n: '8 500+', l: 'Подписчиков' },
+      { n: '3', l: 'Месяца' },
+      { n: '100%', l: 'Полная айдентика' },
+    ],
+  },
+  en: {
+    caseLabel: 'Featured case',
+    status: 'Active',
+    cat: 'Logo · Visual Identity · Trademark',
+    story: 'Full visual identity created for a premium perfumery brand in Tashkent. With a new logo, color system, and packaging design, the brand launched — gaining 8,500+ followers in 3 months.',
+    metrics: [
+      { n: '8 500+', l: 'Followers' },
+      { n: '3', l: 'Months' },
+      { n: '100%', l: 'Full identity' },
+    ],
+  },
+  zh: {
+    caseLabel: '主要案例',
+    status: '进行中',
+    cat: '标志 · 视觉识别 · 商标',
+    story: '为塔什干一个高端香水品牌打造了完整的视觉识别系统。新标志、色彩体系和包装设计帮助品牌成功上市——3个月内积累了8500+粉丝。',
+    metrics: [
+      { n: '8 500+', l: '粉丝' },
+      { n: '3', l: '个月' },
+      { n: '100%', l: '完整识别系统' },
+    ],
+  },
+} as const;
+
 const FEATURED = {
   name: 'ARFADEL',
   city: 'Toshkent',
   year: '2026',
-  cat: 'Logotip · Firma uslubi · Tovar belgisi',
-  story: "Toshkentdagi premium parfyumeriya brendiga to'liq vizual identifikatsiya yaratildi. Yangi logotip, rang tizimi va qadoq dizayni bilan brend bozorga chiqdi — 3 oy ichida 8 500+ obunachilar jamg'arildi.",
-  metrics: [
-    { n: '8 500+', l: 'Obunachilar' },
-    { n: '3', l: 'Oy ichida' },
-    { n: '100%', l: "To'liq aydentika" },
-  ],
   image: '/images/cms/arfadel-brand.png',
 };
 
-const AtFeatured: FC = () => {
+const AtFeatured: FC<Props> = ({ lang = 'uz' }) => {
+  const l = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
   const c = FEATURED;
   return (
     <section
@@ -40,10 +84,10 @@ const AtFeatured: FC = () => {
             className="absolute top-6 left-6 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] flex gap-[18px]"
             style={{ color: 'rgba(255,255,255,.75)' }}
           >
-            <span>Asosiy keys · {c.year}</span>
+            <span>{l.caseLabel} · {c.year}</span>
             <span className="inline-flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#4FB07A' }} />
-              Faol
+              {l.status}
             </span>
           </div>
         </div>
@@ -55,7 +99,7 @@ const AtFeatured: FC = () => {
             style={{ color: 'rgba(255,255,255,.55)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#4FB07A' }} />
-            Asosiy keys · {c.year}
+            {l.caseLabel} · {c.year}
           </span>
 
           <h2
@@ -76,21 +120,21 @@ const AtFeatured: FC = () => {
             className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.06em]"
             style={{ color: 'rgba(244,241,232,.55)' }}
           >
-            {c.cat}
+            {l.cat}
           </div>
 
           <p
             className="leading-[1.6] max-w-[480px]"
             style={{ fontSize: 17, color: 'rgba(244,241,232,.75)' }}
           >
-            {c.story}
+            {l.story}
           </p>
 
           <div
             className="grid grid-cols-3 gap-0 pt-8 mt-3"
             style={{ borderTop: '1px solid rgba(255,255,255,.12)' }}
           >
-            {c.metrics.map((m, i) => (
+            {l.metrics.map((m, i) => (
               <div
                 key={i}
                 className={i > 0 ? 'pl-5' : ''}
