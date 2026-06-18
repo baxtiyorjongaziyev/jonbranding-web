@@ -428,35 +428,133 @@ export async function POST(request: Request) {
 
     const leadData = {
       ...validatedData.data,
+
+  const leadId = Array.isArray(createResult)
+    ? createResult[0]?.id
+    : createResult?._embedded?.items?.[0]?.id || createResult?._embedded?.leads?.[0]?.id || createResult?.id;
+
+  if (leadId && details) {
+    await fetch(`${baseUrl}/api/v4/leads/${leadId}/notes`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([{
+        note_type: 'common',
+        params: { text: details },
+      }]),
+    }).catch((error) => console.error('AmoCRM note error:', error));
+  }
+
+  return { ok: true, leadId };
+}
+
+function buildTelegramMessage(data: any) {
+  const fullName = escapeTelegramHtml(data.fullName);
+  const phone = escapeTelegramHtml(data.phone);
+  const telegram = data.telegram
+    ? `@${escapeTelegramHtml(String(data.telegram).replace('@', ''))}`
+    : 'Nomalum';
+  const packageSummary = data.packageSummary ? escapeTelegramHtml(data.packageSummary) : '';
+  const totalPrice = Number(data.totalPrice) || 0;
+
+  return `
+<b>Yangi lead: Jon.Branding</b>
+
+<b>Mijoz:</b> ${fullName}
+<b>Telefon:</b> ${phone}
+<b>Telegram:</b> ${telegram}
+
+<b>Rol:</b> ${escapeTelegramHtml(data.role || 'Kiritilmagan')}
+<b>Oborot:</b> ${escapeTelegramHtml(data.revenue || 'Kiritilmagan')}
+<b>Maqsad:</b> ${escapeTelegramHtml(data.ambition || 'Kiritilmagan')}
+<b>Tosiq:</b> ${escapeTelegramHtml(data.pain || 'Kiritilmagan')}
+<b>Byudjet:</b> ${escapeTelegramHtml(data.budget || 'Kiritilmagan')}
+
+<b>Til:</b> ${escapeTelegramHtml(String(data.lang || 'uz').toUpperCase())}
+<b>Manba:</b> ${escapeTelegramHtml(data.source || 'website')}
+${data.ctaSource ? `<b>CTA:</b> ${escapeTelegramHtml(data.ctaSource)}\n` : ''}
+${data.eventId ? `<b>Event ID:</b> ${escapeTelegramHtml(data.eventId)}\n` : ''}
+${packageSummary ? `\n<b>Paket:</b> ${packageSummary}` : ''}
+${totalPrice ? `\n<b>Narx:</b> ${escapeTelegramHtml(totalPrice.toLocaleString('fr-FR'))} som` : ''}
+  `.trim();
+}
+
+export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  if (!rateLimit(`submit-form:${ip}`, 5, 60_000)) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many requests. Please try again later.' },
+      { status: 429 },
+    );
+  }
+
+  const botToken = cleanSecret(process.env.TELEGRAM_BOT_TOKEN);
+  const chatId = cleanSecret(process.env.TELEGRAM_CHAT_ID);
+
+  if (!botToken || !chatId) {
+    return NextResponse.json({ ok: false, error: 'Server configuration error' }, { status: 500 });
+  }
+
+  try {
+    const body = await request.json();
+    
+    // Validate input using Zod
+    const validatedData = formSchema.safeParse(body);
+    if (!validatedData.success) {
+        return NextResponse.json(
+            { ok: false, error: "Invalid input data", details: validatedData.error.format() }, 
+            { status: 400 }
+        );
+    }
+
+    const leadData = {
+      ...validatedData.data,
       eventId: validatedData.data.eventId || `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
     };
 
     const { fullName, phone } = leadData;
+
+    const threadId = cleanSecret(process.env.TELEGRAM_MESSAGE_THREAD_ID);
 
     const telegramPayload: any = {
       chat_id: chatId,
       text: buildTelegramMessage(leadData),
       parse_mode: 'HTML',
       disable_web_page_preview: true,
+      ...(threadId ? { message_thread_id: Number(threadId) } : {}),
     };
 
-    await sendTelegramMessage(botToken, telegramPayload);
+    let telegramSuccess = false;
+    try {
+      await sendTelegramMessage(botToken, telegramPayload);
+      telegramSuccess = true;
+    } catch (telegramError) {
+      console.error('Telegram lead alert error:', telegramError);
+    }
 
     const amoCrmResult: any = await sendToAmoCrm(leadData).catch(async (error) => {
       console.error('AmoCRM lead error:', error);
       const queued = await queueFailedAmoCrmLead(leadData, error);
       const reason = describeAmoCrmError(error);
-      await sendTelegramMessage(botToken, {
-        ...telegramPayload,
-        text: [
-          '<b>AmoCRMga lead tushmadi</b>',
-          '',
-          `Sabab: ${escapeTelegramHtml(reason)}`,
-          `Backup: ${queued ? 'Firestore queue saqlandi' : 'Firestore queue xato'}`,
-          `Mijoz: ${escapeTelegramHtml(fullName)}`,
-          `Telefon: ${escapeTelegramHtml(phone)}`,
-        ].join('\n'),
-      }).catch((telegramError) => console.error('AmoCRM failure Telegram alert error:', telegramError));
+      
+      try {
+        await sendTelegramMessage(botToken, {
+          ...telegramPayload,
+          text: [
+            '<b>AmoCRMga lead tushmadi</b>',
+            '',
+            `Sabab: ${escapeTelegramHtml(reason)}`,
+            `Backup: ${queued ? 'Firestore queue saqlandi' : 'Firestore queue xato'}`,
+            `Mijoz: ${escapeTelegramHtml(fullName)}`,
+            `Telefon: ${escapeTelegramHtml(phone)}`,
+          ].join('\n'),
+        });
+      } catch (telegramError) {
+        console.error('AmoCRM failure Telegram alert error:', telegramError);
+      }
+      
       return { ok: false, queued, error: error?.message || String(error) };
     });
 
@@ -468,7 +566,7 @@ export async function POST(request: Request) {
       ok: true,
       eventId: leadData.eventId,
       integrations: {
-        telegram: true,
+        telegram: telegramSuccess,
         amoCrm: amoCrmResult.ok === true,
         amoCrmQueued: amoCrmResult.queued === true,
         analytics: true,

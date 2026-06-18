@@ -1,8 +1,9 @@
 import Script from 'next/script';
-import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
+import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono, Inter_Tight } from 'next/font/google';
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
+import '../atelier.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -22,6 +23,13 @@ const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   variable: '--font-hanken',
+  display: 'swap',
+});
+
+const interTight = Inter_Tight({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-sans-tight',
   display: 'swap',
 });
 
@@ -125,8 +133,9 @@ export default async function LocalizedLayout({ children, params }: Props) {
     '(1) Yangi xabar! | Jon Branding';
 
   return (
-    <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${interTight.variable}`} suppressHydrationWarning>
       <head>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
         <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#F2EFE6}' }} />
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

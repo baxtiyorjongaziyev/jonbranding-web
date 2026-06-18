@@ -6,7 +6,12 @@
     "dev": "ts-node --esm src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "auth": "ts-node --esm src/auth.ts"
+    "auth": "ts-node --esm src/auth.ts",
+    "workflow": "ts-node --esm src/workflow.ts",
+    "workflow:once": "WORKFLOW_MODE=once ts-node --esm src/index.ts",
+    "workflow:instagram": "WORKFLOW_MODE=instagram ts-node --esm src/index.ts",
+    "workflow:telegram": "WORKFLOW_MODE=telegram ts-node --esm src/index.ts",
+    "workflow:all": "WORKFLOW_MODE=all ts-node --esm src/index.ts"
   },
   "dependencies": {
     "@sanity/client": "^6.22.0",

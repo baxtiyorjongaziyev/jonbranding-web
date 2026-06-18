@@ -106,6 +106,13 @@ export const portfolio = defineType({
       type: 'number',
     }),
     defineField({
+      name: 'googleDriveFolderId',
+      title: 'Google Drive Folder ID',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Chiqarilgan sana',
       type: 'datetime',

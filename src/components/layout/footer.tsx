@@ -25,6 +25,7 @@ type Dictionary = {
     additional: string;
     service_prices: string;
     branding_test: string;
+    online_brief?: string;
     blog: string;
     sitemap: string;
     all_rights_reserved: string;
@@ -44,6 +45,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const pathname = usePathname();
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
+  if (pathnameWithoutLocale === '/') return null;
 
   const currentYear = new Date().getFullYear();
   if (!dictionary) return null;
@@ -121,6 +123,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.resources}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/blog')} className="hover:text-white transition-colors">{copy.blog}</Link></li>
+              <li><Link href={getLocalizedPath('/online-brief')} className="hover:text-white transition-colors">{copy.online_brief || 'Onlayn-brief'}</Link></li>
               <li><Link href={getLocalizedPath('/quiz')} className="hover:text-white transition-colors">{copy.branding_test}</Link></li>
               <li><Link href={getLocalizedPath('/xizmatlar/patent-kalkulyatori')} className="hover:text-white transition-colors">{copy.patent_calculator}</Link></li>
               <li><Link href={getLocalizedPath('/sitemap')} className="hover:text-white transition-colors">{copy.sitemap}</Link></li>

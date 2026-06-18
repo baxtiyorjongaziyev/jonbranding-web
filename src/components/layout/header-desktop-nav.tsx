@@ -124,7 +124,7 @@ export function DesktopNav({
   dictionary,
 }: DesktopNavProps) {
   const navTextClass = useDarkHeaderText
-    ? 'text-[#23232c] hover:bg-[#eceeff] hover:text-[#2c2bf5]'
+    ? 'text-foreground hover:bg-secondary hover:text-foreground'
     : 'text-white/88 hover:bg-white/10 hover:text-white';
 
   return (
