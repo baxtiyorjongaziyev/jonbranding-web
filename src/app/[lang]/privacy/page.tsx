@@ -3,7 +3,8 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 
-const isSafePathSegment = (value: string) => /^[a-z]{2}$/i.test(value) && ['uz','ru','en','zh'].includes(value);
+const VALID_LOCALES = ['uz', 'ru', 'en', 'zh'];
+const isSafePathSegment = (value: string) => /^[a-z]{2}$/i.test(value) && VALID_LOCALES.includes(value);
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -101,6 +102,27 @@ const PrivacyPage = async ({ params }: PrivacyPageProps) => {
         {
           title: "4. Техническая безопасность",
           text: "Обмен данными на нашем сайте защищен протоколами безопасности SSL."
+        }
+      ]
+    },
+    zh: {
+      intro: 'Jon.Branding Agency 将客户的隐私和数据安全放在首位。本文件说明我们如何收集和使用您的信息。',
+      sections: [
+        {
+          title: '1. 数据收集',
+          text: '我们通过联系表单收集您提交的姓名、电话号码、Telegram 用户名及项目详情。'
+        },
+        {
+          title: '2. 信息使用',
+          text: '收集的数据仅用于与您联系、签订服务合同及协调项目工作流程。'
+        },
+        {
+          title: '3. 隐私保证',
+          text: '您的个人数据绝不会被出售、出租或转让给第三方。'
+        },
+        {
+          title: '4. 技术安全',
+          text: '我们网站上的数据交换通过 SSL 安全协议进行保护。'
         }
       ]
     }
