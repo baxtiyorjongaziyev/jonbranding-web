@@ -28,7 +28,9 @@
         "lang_uz": "O‘zbekcha",
         "lang_en": "English",
         "ai": "人工智能",
-        "consultation_short": "获取审计"
+        "consultation_short": "获取审计",
+        "about": "关于我们",
+        "contacts": "联系我们"
     },
     "footer": {
         "contact": "联系我们",

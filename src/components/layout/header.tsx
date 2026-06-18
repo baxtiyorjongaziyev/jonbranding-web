@@ -15,6 +15,8 @@ type Dictionary = {
   founder: string;
   process: string;
   blog: string;
+  about: string;
+  contacts: string;
   services: string;
   naming: string;
   naming_desc: string;
@@ -97,6 +99,8 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
     { href: getLocalizedPath('/#founder'), label: dictionary.founder },
     { href: getLocalizedPath('/#process'), label: dictionary.process },
     { href: getLocalizedPath('/blog'), label: dictionary.blog },
+    { href: getLocalizedPath('/haqimizda'), label: dictionary.about },
+    { href: getLocalizedPath('/aloqa'), label: dictionary.contacts },
   ];
 
   const services = [

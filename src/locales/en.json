@@ -28,7 +28,9 @@
         "lang_uz": "Uzbek",
         "lang_en": "English",
         "ai": "AI Assistant",
-        "consultation_short": "Get Audit"
+        "consultation_short": "Get Audit",
+        "about": "About Us",
+        "contacts": "Contact"
     },
     "footer": {
         "contact": "Contact Us",
