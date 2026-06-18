@@ -11,3 +11,7 @@
 ## 2024-05-25 - Pausing Continuous Intervals with useInView
 **Learning:** Using Framer Motion's `useInView` to pause continuous polling/intervals (like `setInterval`) when a component is off-screen is a great performance optimization to reduce background React re-renders. However, when doing this, it is critical that the tracked element (`ref`) is ALWAYS rendered. Returning `null` early (e.g., while waiting for data) prevents the ref from attaching and permanently breaks the visibility observer.
 **Action:** Always render a placeholder or skeleton with the tracked `ref` attached instead of returning `null` when loading components that use `useInView` for performance optimizations.
+
+## 2024-05-28 - Eliminating Unnecessary State with Framer Motion useMotionValueEvent
+**Learning:** Found a case in `src/components/sections/at-sticky-cta.tsx` where a native `window.addEventListener('scroll')` was being used to track the scroll position and update a React state (`setShow` and `setStage`). While I previously learned to swap this with `useMotionValueEvent` and `scrollY.getPrevious()`, this component was using the raw `window.scrollY` directly and saving the result into multiple states.
+**Action:** Replaced the native scroll listener with `useMotionValueEvent` listening to `framer-motion`'s `scrollY` value, passing the latest `y` value directly to the handler function. This ensures the scroll updates are hooked into Framer Motion's optimized loop and completely decoupled from blocking the main thread.
