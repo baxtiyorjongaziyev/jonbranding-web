@@ -1,10 +1,16 @@
 'use client';
 import type { FC } from 'react';
+import Image from 'next/image';
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
 const t = {
   uz: {
+    founderLabel: 'Asoschi',
+    founderName: 'Baxtiyorjon Gaziyev',
+    founderTitle: 'Asoschi va Bosh Dizayner',
+    founderQuote: "Brend — bu faqat ko'rinish emas. Bu biznesingiz nima haqida gapirishi. Biz shu gapni to'g'ri shakllantiramiz.",
+    founderSince: '2019 yildan',
     sectionN: '§ 01',
     label: 'Haqimizda',
     heading: 'Brendning',
@@ -39,6 +45,11 @@ const t = {
     footerNote: "Jon.Branding Agency · Toshkent, O'zbekiston · +998 33 645 00 97",
   },
   ru: {
+    founderLabel: 'Основатель',
+    founderName: 'Baxtiyorjon Gaziyev',
+    founderTitle: 'Основатель и Главный Дизайнер',
+    founderQuote: 'Бренд — это не просто внешний вид. Это то, о чём говорит ваш бизнес. Мы правильно формулируем эту речь.',
+    founderSince: 'С 2019 года',
     sectionN: '§ 01',
     label: 'О нас',
     heading: 'Силу',
@@ -73,6 +84,11 @@ const t = {
     footerNote: 'Jon.Branding Agency · Ташкент, Узбекистан · +998 33 645 00 97',
   },
   en: {
+    founderLabel: 'Founder',
+    founderName: 'Baxtiyorjon Gaziyev',
+    founderTitle: 'Founder & Chief Designer',
+    founderQuote: "A brand is not just about appearance. It's about what your business says. We shape that message right.",
+    founderSince: 'Since 2019',
     sectionN: '§ 01',
     label: 'About us',
     heading: 'Brand',
@@ -107,6 +123,11 @@ const t = {
     footerNote: 'Jon.Branding Agency · Tashkent, Uzbekistan · +998 33 645 00 97',
   },
   zh: {
+    founderLabel: '创始人',
+    founderName: 'Baxtiyorjon Gaziyev',
+    founderTitle: '创始人兼首席设计师',
+    founderQuote: '品牌不仅仅是外观。它是您的企业在说什么。我们帮助您正确塑造这种表达。',
+    founderSince: '自2019年',
     sectionN: '§ 01',
     label: '关于我们',
     heading: '品牌',
@@ -203,6 +224,37 @@ const HaqimizClient: FC<Props> = ({ lang = 'uz' }) => {
                 <p style={{ fontSize: 14, color: 'var(--at-ink-2)', lineHeight: 1.6 }}>{v.text}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Founder */}
+      <section className="py-16 md:py-24 border-b border-[var(--at-line)]">
+        <div className="max-w-[1320px] mx-auto px-5 md:px-8">
+          <div className="grid md:grid-cols-[260px_1fr] gap-12 md:gap-20 items-start">
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--at-muted)', paddingTop: 4 }}>{l.founderLabel}</div>
+            <div className="grid sm:grid-cols-[280px_1fr] gap-10 items-start">
+              <div className="relative">
+                <Image
+                  src="/images/cms/founder-portrait.jpeg"
+                  alt={l.founderName}
+                  width={280}
+                  height={360}
+                  className="w-full rounded-xl object-cover grayscale"
+                  style={{ aspectRatio: '7/9' }}
+                />
+                <div className="absolute bottom-4 left-4 right-4 rounded-lg p-3" style={{ background: 'var(--at-bg)', border: '1px solid var(--at-line)' }}>
+                  <div className="font-bold text-[var(--at-ink)] text-sm">{l.founderName}</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--at-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: 2 }}>{l.founderSince}</div>
+                </div>
+              </div>
+              <div>
+                <div className="font-bold text-[var(--at-ink)] mb-3" style={{ fontSize: 18, letterSpacing: '-0.01em' }}>{l.founderTitle}</div>
+                <blockquote className="font-[family-name:var(--font-serif)] italic text-[var(--at-ink-2)]" style={{ fontSize: 'clamp(18px, 2.2vw, 26px)', lineHeight: 1.35, letterSpacing: '-0.01em' }}>
+                  &ldquo;{l.founderQuote}&rdquo;
+                </blockquote>
+              </div>
+            </div>
           </div>
         </div>
       </section>
