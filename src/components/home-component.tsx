@@ -52,8 +52,8 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtAudit onOpen={open} lang={lang} />
       <AtSampleReport onOpen={open} lang={lang} />
       <AtMiniQuotes lang={lang} />
-      <AtLossCalc onOpen={open} />
-      <AtWorkIndex onOpen={open} />
+      <AtLossCalc onOpen={open} lang={lang} />
+      <AtWorkIndex onOpen={open} lang={lang} />
       <AtProcess lang={lang} />
       <AtPricing onOpen={open} lang={lang} />
       <AtQuotes lang={lang} />

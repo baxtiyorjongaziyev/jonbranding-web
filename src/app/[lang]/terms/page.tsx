@@ -4,7 +4,7 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 const BASE_URL = 'https://www.jonbranding.uz';
 
 const VALID_LOCALES = ['uz', 'ru', 'en', 'zh'];
-const isSafePathSegment = (value: string) => /^[a-z]{2}$/i.test(value) && VALID_LOCALES.includes(value);
+const isSafePathSegment = (value: string) => VALID_LOCALES.includes(value);
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;

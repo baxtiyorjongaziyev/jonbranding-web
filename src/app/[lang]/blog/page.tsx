@@ -14,7 +14,7 @@ type Props = {
 };
 
 const VALID_LOCALES = ['uz', 'ru', 'en', 'zh'];
-const isSafePathSegment = (value: string) => /^[a-z]{2}$/i.test(value) && VALID_LOCALES.includes(value);
+const isSafePathSegment = (value: string) => VALID_LOCALES.includes(value);
 const isSafeSlug = (value: string) => /^[a-z0-9-]+$/i.test(value);
 
 export async function generateMetadata(props: Props): Promise<Metadata> {

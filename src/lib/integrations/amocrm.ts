@@ -87,7 +87,7 @@ export async function getValidAccessToken(): Promise<string> {
   }
 
   // Cold path: memory empty or token expiring — read Firestore once
-  const tokens = memoryToken ?? await readTokensFromFirestore();
+  const tokens = await readTokensFromFirestore();
 
   if (!tokens) {
     const fresh = await forceRefresh();

@@ -14,7 +14,7 @@ const translations = {
     h1a: 'Brendingiz',
     h1b: 'aslida',
     h1c: "qancha yo'qotyapti?",
-    desc: "Brend tashxisi — biznesingizning ko'rinmas yo'qotishlarini topish. |14 kun · 12 mezon · 30–50 betlik hisobot.",
+    desc: { text: "Brend tashxisi — biznesingizning ko'rinmas yo'qotishlarini topish. ", bold: "14 kun · 12 mezon · 30–50 betlik hisobot." },
     cta1: 'Bepul mini-tashxis boshlash ↗',
     cta2: "Paketlarni ko'rish →",
     stats: [
@@ -29,7 +29,7 @@ const translations = {
     h1a: 'Сколько теряет',
     h1b: 'ваш',
     h1c: 'бренд на самом деле?',
-    desc: 'Бренд-диагностика — выявление скрытых потерь вашего бизнеса. |14 дней · 12 критериев · отчёт 30–50 страниц.',
+    desc: { text: 'Бренд-диагностика — выявление скрытых потерь вашего бизнеса. ', bold: '14 дней · 12 критериев · отчёт 30–50 страниц.' },
     cta1: 'Начать бесплатно ↗',
     cta2: 'Посмотреть пакеты →',
     stats: [
@@ -44,7 +44,7 @@ const translations = {
     h1a: 'How much is',
     h1b: 'your',
     h1c: 'brand actually losing?',
-    desc: 'Brand diagnostics — discovering the invisible losses of your business. |14 days · 12 criteria · 30–50 page report.',
+    desc: { text: 'Brand diagnostics — discovering the invisible losses of your business. ', bold: '14 days · 12 criteria · 30–50 page report.' },
     cta1: 'Start free mini-diagnosis ↗',
     cta2: 'View packages →',
     stats: [
@@ -59,7 +59,7 @@ const translations = {
     h1a: '您的品牌',
     h1b: '实际上',
     h1c: '在损失多少？',
-    desc: '品牌诊断 — 发现您业务中的隐形损失。|14天 · 12个标准 · 30–50页报告。',
+    desc: { text: '品牌诊断 — 发现您业务中的隐形损失。', bold: '14天 · 12个标准 · 30–50页报告。' },
     cta1: '开始免费迷你诊断 ↗',
     cta2: '查看套餐 →',
     stats: [
@@ -127,8 +127,8 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz' }) => {
             </h1>
 
             <p className="text-[var(--at-ink-2)] text-base md:text-lg leading-relaxed max-w-[520px] mb-8">
-              {l.desc.split('|')[0]}
-              <strong className="text-[var(--at-ink)]">{l.desc.split('|')[1]}</strong>
+              {l.desc.text}
+              <strong className="text-[var(--at-ink)]">{l.desc.bold}</strong>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-10">
