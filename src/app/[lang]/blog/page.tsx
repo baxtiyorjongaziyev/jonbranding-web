@@ -32,8 +32,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       languages: getLocaleAlternates(BASE_URL, '/blog'),
     },
     openGraph: {
-      title: metadata?.title,
-      description: metadata?.description,
+      title: metadata?.title || "Jon.Branding Blog | Branding, Dizayn va Marketing",
+      description: metadata?.description || "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
       url: getLocalizedAbsoluteUrl(BASE_URL, safeLang as any, '/blog'),
       siteName: 'Jon.Branding',
       type: 'website',

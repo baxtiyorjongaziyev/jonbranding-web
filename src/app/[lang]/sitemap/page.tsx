@@ -59,6 +59,8 @@ const SitemapPage = async (props: Props) => {
       icon: Home,
       links: [
         { href: '/', label: t.links?.home || 'Bosh sahifa' },
+        { href: '/haqimizda', label: t.links?.about || 'Haqimizda' },
+        { href: '/aloqa', label: t.links?.contact || 'Aloqa' },
         { href: '/quiz', label: t.links?.quiz || 'Brending testi' },
         { href: '/#portfolio', label: t.links?.portfolio || 'Portfolio' },
         { href: '/#process', label: t.links?.process || 'Ishlash tartibi' },
