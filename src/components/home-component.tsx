@@ -46,7 +46,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtFeatured lang={lang} />
       <AtShowcase onOpen={open} lang={lang} />
       <AtManifesto lang={lang} />
-      <AtStats />
+      <AtStats lang={lang} />
       <AtDiagnosis onOpen={open} />
       <AtServices onOpen={open} lang={lang} />
       <AtAudit onOpen={open} />
@@ -58,7 +58,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtPricing onOpen={open} lang={lang} />
       <AtQuotes />
       <AtFaq />
-      <AtFinalCta onOpen={open} />
+      <AtFinalCta onOpen={open} lang={lang} />
       <AtModal open={modalOpen} onClose={close} />
       <AtStickyCta onOpen={open} />
     </div>
