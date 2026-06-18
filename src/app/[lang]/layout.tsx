@@ -100,6 +100,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
+      title: dictionary.meta?.title || "Jon.Branding | Professional Brending Agentligi",
+      description: dictionary.meta?.description || "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding.",
       images: [OG_IMAGE_URL],
     },
     alternates: {
@@ -135,12 +137,12 @@ export default async function LocalizedLayout({ children, params }: Props) {
   return (
     <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${interTight.variable}`} suppressHydrationWarning>
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
         <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#F2EFE6}' }} />
         <link rel="alternate" hrefLang="x-default" href="https://www.jonbranding.uz" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="JonBranding" />
+        <meta name="robots" content="index, follow" />
         <Script
           id="json-ld-professional-service"
           type="application/ld+json"
@@ -319,7 +321,28 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",
                 "reviewCount": "47",
-                "bestRating": "5"
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            })
+          }}
+        />
+        <Script
+          id="json-ld-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Jon.Branding",
+              "url": "https://www.jonbranding.uz",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://www.jonbranding.uz/{search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
               }
             })
           }}

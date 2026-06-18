@@ -127,7 +127,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang, isInverted = 
             aria-expanded={open}
             aria-label="Tilni o'zgartirish / Change language"
             className={cn(
-                "w-auto justify-start gap-2 font-semibold !ring-0 !ring-offset-0 !outline-none !shadow-none focus:!ring-0 focus-visible:!ring-0 focus:!outline-none focus-visible:!outline-none focus-visible:!ring-offset-0 rounded-full",
+                "w-auto justify-start gap-2 font-semibold !ring-0 !ring-offset-0 !outline-none !shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-full",
                 triggerTone
             )}
             style={{ border: 'none', boxShadow: 'none' }}

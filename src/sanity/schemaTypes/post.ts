@@ -46,7 +46,8 @@ export const post = defineType({
         list: [
           { title: 'Uzbek', value: 'uz' },
           { title: 'Russian', value: 'ru' },
-          { title: 'English', value: 'en' }
+          { title: 'English', value: 'en' },
+          { title: 'Chinese', value: 'zh' }
         ]
       }
     })

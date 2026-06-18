@@ -31,6 +31,20 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: titles[safeLang] || titles.uz,
     description: descriptions[safeLang] || descriptions.uz,
+    openGraph: {
+      title: titles[safeLang] || titles.uz,
+      description: descriptions[safeLang] || descriptions.uz,
+      type: 'website',
+      locale: safeLang === 'uz' ? 'uz_UZ' : safeLang === 'ru' ? 'ru_RU' : safeLang === 'zh' ? 'zh_CN' : 'en_US',
+      siteName: 'Jon.Branding',
+      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630, alt: 'Jon Branding Portfolio' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: titles[safeLang] || titles.uz,
+      description: descriptions[safeLang] || descriptions.uz,
+      images: ['/images/cms/og-image.jpeg'],
+    },
   };
 }
 

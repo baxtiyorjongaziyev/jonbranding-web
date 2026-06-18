@@ -37,6 +37,20 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     title: titles[lang] || titles.uz,
     description: descriptions[lang] || descriptions.uz,
     keywords: "brand audit, brending uz, logo dizayn, neyming, naming, qadoq dizayn, brandbook, premium branding",
+    openGraph: {
+      title: titles[lang] || titles.uz,
+      description: descriptions[lang] || descriptions.uz,
+      type: 'website',
+      locale: lang === 'uz' ? 'uz_UZ' : lang === 'ru' ? 'ru_RU' : lang === 'zh' ? 'zh_CN' : 'en_US',
+      siteName: 'Jon.Branding',
+      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630, alt: 'Jon Branding Agency' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: titles[lang] || titles.uz,
+      description: descriptions[lang] || descriptions.uz,
+      images: ['/images/cms/og-image.jpeg'],
+    },
   };
 }
 
