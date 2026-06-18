@@ -134,7 +134,7 @@ const PrivacyPage = async ({ params }: PrivacyPageProps) => {
     <main className="min-h-screen pt-32 pb-20 bg-black text-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
-          {dictionary.footer.privacy_policy_link}
+          {{ uz: 'Maxfiylik siyosati', ru: 'Политика конфиденциальности', en: 'Privacy Policy', zh: '隐私政策' }[lang] || 'Privacy Policy'}
         </h1>
         
         <div className="prose prose-invert prose-lg max-w-none">
