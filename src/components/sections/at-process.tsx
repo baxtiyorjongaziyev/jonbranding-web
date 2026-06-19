@@ -1,5 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
@@ -143,6 +148,26 @@ const translations = {
 export default function AtProcess({ lang = 'uz' }: Props) {
   const [open, setOpen] = useState<string | null>('01');
   const l = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
+  const stepsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!stepsRef.current) return;
+    const steps = stepsRef.current.querySelectorAll('.process-step');
+    gsap.fromTo(steps,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.5,
+        stagger: 0.12,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: stepsRef.current,
+          start: 'top 80%',
+          once: true,
+        },
+      }
+    );
+  }, { scope: stepsRef });
 
   return (
     <section className="py-16 md:py-24" id="jarayon" style={{ background: 'var(--at-paper)' }}>
@@ -174,9 +199,9 @@ export default function AtProcess({ lang = 'uz' }: Props) {
         </div>
 
         {/* Accordion steps */}
-        <div className="flex flex-col" style={{ borderTop: '1px solid var(--at-line)' }}>
+        <div ref={stepsRef} className="flex flex-col" style={{ borderTop: '1px solid var(--at-line)' }}>
           {l.steps.map((s) => (
-            <div key={s.n} style={{ borderBottom: '1px solid var(--at-line)' }}>
+            <div key={s.n} className="process-step" style={{ borderBottom: '1px solid var(--at-line)' }}>
               <button
                 className="w-full flex items-center gap-5 py-6 text-left"
                 onClick={() => setOpen(open === s.n ? null : s.n)}

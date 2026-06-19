@@ -1,5 +1,11 @@
 'use client';
 import type { FC } from 'react';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Props { onOpen: () => void; lang?: string; }
 
@@ -51,6 +57,27 @@ const HEADING: Record<string, { h: string; italic: string; sub: string; desc: st
 const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {
   const SERVICES = SERVICES_MAP[lang] ?? SERVICES_UZ;
   const h = HEADING[lang] ?? HEADING.uz;
+  const listRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!listRef.current) return;
+    const rows = listRef.current.querySelectorAll('.service-row');
+    gsap.fromTo(rows,
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: listRef.current,
+          start: 'top 80%',
+          once: true,
+        },
+      }
+    );
+  }, { scope: listRef });
+
   return (
   <section className="py-[120px] relative z-[2]" id="xizmat">
     <div className="max-w-[1320px] mx-auto px-5 md:px-8">
@@ -72,7 +99,7 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {
         </div>
       </div>
 
-      <div className="border-t border-[var(--at-ink)]">
+      <div ref={listRef} className="border-t border-[var(--at-ink)]">
         {SERVICES.map((s) => (
           <div
             key={s.num}
@@ -80,7 +107,7 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); } }}
             role="button"
             tabIndex={0}
-            className="group border-b border-[var(--at-line)] cursor-pointer hover:bg-[var(--at-paper)] transition-all duration-300"
+            className="service-row group border-b border-[var(--at-line)] cursor-pointer hover:bg-[var(--at-paper)] transition-all duration-300"
           >
             <div
               className="grid items-center gap-6 py-8 px-2 group-hover:px-6 transition-all duration-300"

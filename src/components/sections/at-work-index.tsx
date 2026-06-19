@@ -1,4 +1,10 @@
 import type { FC } from 'react';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 interface Props { onOpen: () => void; lang?: string; }
@@ -68,6 +74,27 @@ const t = {
 
 const AtWorkIndex: FC<Props> = ({ onOpen, lang = 'uz' }) => {
   const l = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
+  const tableRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!tableRef.current) return;
+    const rows = tableRef.current.querySelectorAll('tbody tr');
+    gsap.fromTo(rows,
+      { opacity: 0, x: -20 },
+      {
+        opacity: 1, x: 0,
+        duration: 0.4,
+        stagger: 0.06,
+        ease: 'power1.out',
+        scrollTrigger: {
+          trigger: tableRef.current,
+          start: 'top 85%',
+          once: true,
+        },
+      }
+    );
+  }, { scope: tableRef });
+
   return (
     <section className="py-16 md:py-24 border-t border-[var(--at-line)] bg-[var(--at-bg)]">
       <div className="max-w-[1320px] mx-auto px-5 md:px-8">
@@ -75,7 +102,7 @@ const AtWorkIndex: FC<Props> = ({ onOpen, lang = 'uz' }) => {
           <span className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--at-muted)]">{l.sectionLabel}</span>
           <h2 className="mt-3 text-3xl md:text-5xl font-bold text-[var(--at-ink)] leading-tight" style={{ letterSpacing: '-0.02em' }}>{l.heading}</h2>
         </div>
-        <div className="overflow-x-auto -mx-5 md:mx-0 px-5 md:px-0">
+        <div ref={tableRef} className="overflow-x-auto -mx-5 md:mx-0 px-5 md:px-0">
           <table className="w-full min-w-[700px]">
             <thead>
               <tr className="border-b border-[var(--at-line)]">

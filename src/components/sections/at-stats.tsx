@@ -1,4 +1,11 @@
+'use client';
 import type { FC } from 'react';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 interface Props { lang?: string; }
@@ -32,12 +39,33 @@ const STATS: Record<Lang, { n: string; s: string; l: string }[]> = {
 
 const AtStats: FC<Props> = ({ lang = 'uz' }) => {
   const stats = STATS[(lang as Lang) in STATS ? (lang as Lang) : 'uz'];
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+    const cards = containerRef.current.querySelectorAll('.stat-card');
+    gsap.fromTo(cards,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+          once: true,
+        },
+      }
+    );
+  }, { scope: containerRef });
+
   return (
     <section className="border-t border-[var(--at-line)] bg-[var(--at-paper)]">
       <div className="max-w-[1320px] mx-auto px-5 md:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[var(--at-line)]">
+        <div ref={containerRef} className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[var(--at-line)]">
           {stats.map((s, i) => (
-            <div key={i} className="py-10 px-6 first:pl-0">
+            <div key={i} className="stat-card py-10 px-6 first:pl-0">
               <div className="font-bold text-[var(--at-ink)] leading-none mb-2" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.04em' }}>
                 {s.n}<span className="text-[var(--at-accent)]">{s.s}</span>
               </div>
