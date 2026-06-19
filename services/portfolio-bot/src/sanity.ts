@@ -1,5 +1,6 @@
 import { createClient } from '@sanity/client';
 import fs from 'fs';
+import path from 'path';
 import type { AIEnrichedData, PortfolioPayload, SanityImageAsset } from './types.js';
 
 const client = createClient({
@@ -21,7 +22,7 @@ function slugify(text: string): string {
 
 async function uploadImageFile(filePath: string, mime: string): Promise<SanityImageAsset> {
   const buffer = fs.readFileSync(filePath);
-  const filename = filePath.split('/').pop() ?? 'image.jpg';
+  const filename = path.basename(filePath);
   const asset = await client.assets.upload('image', buffer, {
     filename,
     contentType: mime,

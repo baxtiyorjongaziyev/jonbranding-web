@@ -1,5 +1,3 @@
-import { GoogleGenerativeAI } from '@google/genai';
-
 export interface SanityPortfolioItem {
   _type: 'portfolio';
   title: string;
@@ -13,11 +11,11 @@ export interface SanityPortfolioItem {
 }
 
 export class GeminiProcessor {
-  private ai: GoogleGenerativeAI;
+  private apiKey: string;
 
   constructor(apiKey: string) {
     if (!apiKey) throw new Error("GEMINI_API_KEY is required");
-    this.ai = new GoogleGenerativeAI({ apiKey });
+    this.apiKey = apiKey;
   }
 
   async generatePortfolioData(text: string): Promise<SanityPortfolioItem> {
@@ -52,7 +50,7 @@ export class GeminiProcessor {
     // For a real package, you might need to use the REST API directly or the correct SDK structure
     // Since we are mocking the structure with `@google/genai` (or generic AI), we use a placeholder REST fetch:
     
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${this.ai.apiKey}`, {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${this.apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

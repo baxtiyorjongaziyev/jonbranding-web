@@ -1,5 +1,6 @@
 import { TelegramClient, Api } from 'telegram';
 import { StringSession } from 'telegram/sessions/index.js';
+import { NewMessage } from 'telegram/events/index.js';
 import { processPost } from './pipeline.js';
 
 const API_ID = parseInt(process.env.TG_API_ID!, 10);
@@ -68,7 +69,7 @@ export async function startUserbot(): Promise<void> {
     } catch (err) {
       console.error('[userbot] handler error:', err);
     }
-  }, new Api.UpdateNewMessage({}));
+  }, new NewMessage({}));
 
   await new Promise(() => {});
 }
