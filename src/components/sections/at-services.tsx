@@ -42,10 +42,10 @@ const SERVICES_ZH = [
 const SERVICES_MAP: Record<string, typeof SERVICES_UZ> = { uz: SERVICES_UZ, ru: SERVICES_RU, en: SERVICES_EN, zh: SERVICES_ZH };
 
 const HEADING: Record<string, { h: string; italic: string; sub: string; desc: string }> = {
-  uz: { h: 'Brend — boshidan', italic: 'oxirigacha.', sub: '§ 02 Xizmatlar', desc: "Neyming, aydentika, qadoq, tovar belgisi va raqamli ko'rinish — bir joyda, bir jamoa, bir narxda. Har biri alohida ham buyurtma qilinadi." },
-  ru: { h: 'Бренд — с начала', italic: 'до конца.', sub: '§ 02 Услуги', desc: 'Нейминг, айдентика, упаковка, товарный знак и digital-присутствие — в одном месте, одна команда, одна цена. Каждая услуга заказывается отдельно.' },
-  en: { h: 'Brand — from start', italic: 'to finish.', sub: '§ 02 Services', desc: 'Naming, identity, packaging, trademark and digital presence — one place, one team, one price. Each service can be ordered separately.' },
-  zh: { h: '品牌——从开始', italic: '到结束。', sub: '§ 02 服务', desc: '命名、视觉识别、包装、商标注册和数字形象——一站式，一个团队，一个价格。每项服务均可单独订购。' },
+  uz: { h: 'Brend — boshidan', italic: 'oxirigacha.', sub: '§ 04 Xizmatlar', desc: "Neyming, aydentika, qadoq, tovar belgisi va raqamli ko'rinish — bir joyda, bir jamoa, bir narxda. Har biri alohida ham buyurtma qilinadi." },
+  ru: { h: 'Бренд — с начала', italic: 'до конца.', sub: '§ 04 Услуги', desc: 'Нейминг, айдентика, упаковка, товарный знак и digital-присутствие — в одном месте, одна команда, одна цена. Каждая услуга заказывается отдельно.' },
+  en: { h: 'Brand — from start', italic: 'to finish.', sub: '§ 04 Services', desc: 'Naming, identity, packaging, trademark and digital presence — one place, one team, one price. Each service can be ordered separately.' },
+  zh: { h: '品牌——从开始', italic: '到结束。', sub: '§ 04 服务', desc: '命名、视觉识别、包装、商标注册和数字形象——一站式，一个团队，一个价格。每项服务均可单独订购。' },
 };
 
 const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {

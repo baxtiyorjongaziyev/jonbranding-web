@@ -22,6 +22,7 @@ const translations = {
       { label: 'Bu oyda', value: '4 joy' },
       { label: 'Muddati', value: '14 kun' },
     ],
+    portfolioBadge: 'Premium brend',
   },
   ru: {
     tagline: 'Центральная Азия · Brand atelier · Est. 2019',
@@ -37,6 +38,7 @@ const translations = {
       { label: 'В этом месяце', value: '4 места' },
       { label: 'Срок', value: '14 дней' },
     ],
+    portfolioBadge: 'Премиум бренд',
   },
   en: {
     tagline: 'Central Asia · Brand atelier · Est. 2019',
@@ -52,6 +54,7 @@ const translations = {
       { label: 'This month', value: '4 spots' },
       { label: 'Timeline', value: '14 days' },
     ],
+    portfolioBadge: 'Premium brand',
   },
   zh: {
     tagline: '中亚 · 品牌工坊 · 2019年成立',
@@ -67,6 +70,7 @@ const translations = {
       { label: '本月', value: '4个名额' },
       { label: '时限', value: '14天' },
     ],
+    portfolioBadge: '高端品牌',
   },
 } as const;
 
@@ -163,7 +167,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz' }) => {
               style={{ color: 'rgba(255,255,255,.85)' }}
             >
               <span>Beyaz · 2026</span>
-              <span className="text-[#C2552A]">Premium brend</span>
+              <span className="text-[#C2552A]">{l.portfolioBadge}</span>
             </div>
             <div
               className="rounded-t-2xl overflow-hidden"
