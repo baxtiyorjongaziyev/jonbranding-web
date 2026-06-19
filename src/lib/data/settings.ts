@@ -27,7 +27,7 @@ const QUERY = `*[_type == "siteSettings"][0] {
 export async function fetchSettings(): Promise<SiteSettings> {
   try {
     const data = await client.fetch<SiteSettings>(QUERY)
-    if (data?.phone) return { ...DEFAULTS, ...data }
+    if (data) return { ...DEFAULTS, ...data }
   } catch (e) {
     console.error('Sanity settings fetch failed, using defaults:', e)
   }

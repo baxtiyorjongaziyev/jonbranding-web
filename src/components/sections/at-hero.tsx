@@ -179,7 +179,6 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz' }) => {
                 width={400}
                 height={500}
                 className="w-full h-full object-cover object-center"
-                priority
               />
             </div>
           </div>

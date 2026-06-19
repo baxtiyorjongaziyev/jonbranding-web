@@ -60,6 +60,9 @@ const AtShowcase: FC<Props> = ({ onOpen, lang = 'uz' }) => {
             <div
               key={i}
               onClick={onOpen}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); } }}
+              role="button"
+              tabIndex={0}
               className={`relative rounded-2xl overflow-hidden border border-[var(--at-line)] cursor-pointer group transition-transform duration-500 hover:-translate-y-2 ${OFFSETS[i]}`}
               style={{ aspectRatio: '3/4', background: it.color }}
             >

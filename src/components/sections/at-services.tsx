@@ -77,6 +77,9 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {
           <div
             key={s.num}
             onClick={onOpen}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); } }}
+            role="button"
+            tabIndex={0}
             className="group border-b border-[var(--at-line)] cursor-pointer hover:bg-[var(--at-paper)] transition-all duration-300"
           >
             <div

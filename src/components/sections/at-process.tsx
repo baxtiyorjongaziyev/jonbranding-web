@@ -209,7 +209,7 @@ export default function AtProcess({ lang = 'uz' }: Props) {
 
               <div
                 className="overflow-hidden transition-all duration-300"
-                style={{ maxHeight: open === s.n ? '400px' : '0', opacity: open === s.n ? 1 : 0 }}
+                style={{ maxHeight: open === s.n ? '1000px' : '0', opacity: open === s.n ? 1 : 0 }}
               >
                 <div className="pl-[52px] pb-6 grid md:grid-cols-2 gap-5">
                   <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--at-ink-2)' }}>{s.detail}</p>

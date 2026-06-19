@@ -84,13 +84,15 @@ const AtWorkIndex: FC<Props> = ({ onOpen, lang = 'uz' }) => {
             </thead>
             <tbody>
               {l.projects.map((p, i) => (
-                <tr key={i} onClick={onOpen} className="border-b border-[var(--at-line)] last:border-0 cursor-pointer group hover:bg-[var(--at-paper)] transition-colors">
+                <tr key={i} className="border-b border-[var(--at-line)] last:border-0 group hover:bg-[var(--at-paper)] transition-colors">
                   <td className="py-4 pr-6 font-[family-name:var(--font-mono)] text-xs text-[var(--at-muted)]">{p.year}</td>
                   <td className="py-4 pr-6 font-semibold text-[var(--at-ink)] text-sm">{p.name}</td>
                   <td className="py-4 pr-6 text-xs text-[var(--at-ink-2)]">{p.scope}</td>
                   <td className="py-4 pr-6 text-xs text-[var(--at-ink-2)]">{p.work}</td>
                   <td className="py-4 pr-6"><span className="font-[family-name:var(--font-mono)] text-xs font-bold text-[var(--at-green)]">{p.result}</span></td>
-                  <td className="py-4 text-[var(--at-muted)] group-hover:text-[var(--at-ink)] transition-colors text-right">→</td>
+                  <td className="py-4 text-right">
+                    <button onClick={onOpen} className="text-[var(--at-muted)] group-hover:text-[var(--at-ink)] transition-colors cursor-pointer">→</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
