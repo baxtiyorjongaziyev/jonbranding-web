@@ -11,3 +11,7 @@
 ## 2024-05-25 - Pausing Continuous Intervals with useInView
 **Learning:** Using Framer Motion's `useInView` to pause continuous polling/intervals (like `setInterval`) when a component is off-screen is a great performance optimization to reduce background React re-renders. However, when doing this, it is critical that the tracked element (`ref`) is ALWAYS rendered. Returning `null` early (e.g., while waiting for data) prevents the ref from attaching and permanently breaks the visibility observer.
 **Action:** Always render a placeholder or skeleton with the tracked `ref` attached instead of returning `null` when loading components that use `useInView` for performance optimizations.
+
+## 2024-05-27 - useMotionValueEvent dependencies and memory leaks
+**Learning:** Found an issue where replacing native scroll events with `useMotionValueEvent` created excessive listener setup/teardowns when the callback was not wrapped in `useCallback`. This was causing React hooks lint errors, and Framer Motion internal dependency thrashing. Additionally, reading layout properties like `offsetTop` inside the scroll handler causes synchronous layout calculation, which hurts framer motion optimization anyway.
+**Action:** When extracting functions out of `useMotionValueEvent`, ensure they are memoized with `useCallback`. Do not let lock files (`pnpm-lock.yaml`) get unintentionally committed when checking dependencies locally.
