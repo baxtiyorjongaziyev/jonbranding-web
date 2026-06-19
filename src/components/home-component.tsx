@@ -138,7 +138,6 @@ const HomeComponent: FC<HomeComponentProps> = ({ lang, dictionary, comparisons, 
       
       <ATLedger 
         dictionary={atelierDict} 
-        onOpen={open}
       />
       
       <ATDiagnosis 
