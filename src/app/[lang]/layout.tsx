@@ -6,6 +6,7 @@ import '../globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { safeJsonStringify } from '@/lib/security';
 import {
   locales,
   defaultLocale,
@@ -136,7 +137,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           id="json-ld-professional-service"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonStringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
               "name": "Jon.Branding",
@@ -201,7 +202,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           id="json-ld-faq"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonStringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": [
@@ -293,7 +294,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           id="json-ld-aggregate-rating"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonStringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               "name": "Jon.Branding",

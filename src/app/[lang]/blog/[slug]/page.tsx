@@ -6,6 +6,7 @@ import BlogPostClient from '@/components/blog-post-client';
 import Script from 'next/script';
 import { BlogPost } from '@/lib/types';
 import { Locale } from '@/lib/dictionaries';
+import { safeJsonStringify } from '@/lib/security';
 import {
   defaultLocale,
   getLocalizedAbsoluteUrl,
@@ -101,7 +102,7 @@ const BlogPostPage = async (props: Props) => {
       <Script
         id="blog-post-structured-data"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{ __html: safeJsonStringify(jsonLd) }}
       />
       <BlogPostClient post={post} />
     </>
