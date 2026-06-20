@@ -12,6 +12,7 @@
  * Bu fayl faqat eski havola (legacy bridge) — yangi kod services/portfolio-bot/ da
  */
 
+// @ts-ignore
 import { runWorkflow } from '../../services/portfolio-bot/src/workflow.js';
 import { resolve } from 'path';
 import { config } from 'dotenv';
