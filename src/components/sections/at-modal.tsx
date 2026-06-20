@@ -10,12 +10,14 @@ export default function AtModal({ open, onClose, lang = 'uz' }: Props) {
   const [service, setService] = useState('Bepul mini-tashxis');
   const [budget, setBudget] = useState('Bepul — mini-tashxis');
   const [contactErr, setContactErr] = useState('');
+  const [submitErr, setSubmitErr] = useState('');
+  const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     if (open) {
-      setStep(1); setDone(false); setContactErr(''); setContact(''); setName('');
+      setStep(1); setDone(false); setContactErr(''); setSubmitErr(''); setSending(false); setContact(''); setName('');
       (window as { gtag?: (...a: unknown[]) => void }).gtag?.('event', 'modal_open', { event_category: 'engagement' });
     }
     return () => { document.body.style.overflow = ''; };
@@ -32,22 +34,35 @@ export default function AtModal({ open, onClose, lang = 'uz' }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     gtag()?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
-    const isTg = contact.startsWith('@');
+    setSubmitErr('');
+    setSending(true);
+    const trimmed = contact.trim();
+    const isTg = trimmed.startsWith('@');
     try {
-      await fetch('/api/submit-form', {
+      const res = await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           fullName: name || 'Mijoz',
-          ...(isTg ? {} : { phone: contact }),
-          telegram: isTg ? contact : undefined,
+          ...(isTg ? {} : { phone: trimmed }),
+          telegram: isTg ? trimmed : undefined,
           role: service,
           budget,
           source: 'at_modal',
           lang,
         }),
       });
-    } catch {}
+      if (!res.ok) {
+        setSubmitErr("Yuborishda xatolik. Telegram orqali yozing yoki qayta urinib ko'ring.");
+        setSending(false);
+        return;
+      }
+    } catch {
+      setSubmitErr("Tarmoq xatosi. Telegram orqali yozing yoki qayta urinib ko'ring.");
+      setSending(false);
+      return;
+    }
+    setSending(false);
     setDone(true);
   };
 
@@ -123,7 +138,8 @@ export default function AtModal({ open, onClose, lang = 'uz' }: Props) {
                 </div>
               </div>
             </div>
-            <button type="submit" className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-3 transition-all hover:-translate-y-0.5" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>Yuborish ↗</button>
+            {submitErr && <p className="text-xs mb-3 text-center" style={{ color: 'var(--at-red)' }}>{submitErr}</p>}
+            <button type="submit" disabled={sending} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-3 transition-all hover:-translate-y-0.5 disabled:opacity-60" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>{sending ? 'Yuborilmoqda…' : 'Yuborish ↗'}</button>
             <button type="button" onClick={()=>setStep(1)} className="w-full text-sm text-center py-2" style={{ color: 'var(--at-muted)' }}>← Orqaga</button>
           </form>
         )}

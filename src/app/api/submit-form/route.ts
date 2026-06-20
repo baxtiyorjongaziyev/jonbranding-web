@@ -22,7 +22,11 @@ const formSchema = z.object({
     gaClientId: z.string().optional(),
     pageLocation: z.string().optional(),
     ctaSource: z.string().optional(),
-}).refine(data => data.phone || data.telegram, {
+}).refine((data) => {
+    const phone = String(data.phone ?? '').trim();
+    const telegram = String(data.telegram ?? '').trim();
+    return phone.length > 0 || telegram.length > 0;
+}, {
     message: 'Either phone or telegram is required',
     path: ['phone'],
 });
