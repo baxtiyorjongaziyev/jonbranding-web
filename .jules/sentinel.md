@@ -23,3 +23,8 @@
 **Vulnerability:** `JSON.stringify` was used directly inside `dangerouslySetInnerHTML` for injecting JSON-LD `<script>` tags, and standard Node.js `crypto.timingSafeEqual` was used for comparison which is often not supported in Cloudflare Edge environments.
 **Learning:** `JSON.stringify` does not escape HTML characters like `<`, `>`, `&`, or `'`. Injecting untrusted JSON directly into a script tag using `dangerouslySetInnerHTML` can lead to Cross-Site Scripting (XSS). Node.js built-in `crypto` may fail in edge environments.
 **Prevention:** Use a custom sanitization function `safeJsonStringify` to escape HTML entities and replace `crypto.timingSafeEqual` with a custom constant-time bitwise XOR comparison that works across environments.
+
+## 2024-06-20 - Timing Attack Vulnerability in Custom Cron Secret Validation
+**Vulnerability:** Found a timing attack vulnerability in `src/app/api/portfolio-sync/route.ts` where the `secret !== cronSecret` string comparison was used to validate authorization for the webhook/sync endpoint.
+**Learning:** Standard string equality (`===`, `!==`) compares characters one by one and returns early if a mismatch is found. This leaks the amount of time it takes to compare the string, enabling an attacker to brute force the secret character-by-character based on the response time.
+**Prevention:** Always use constant-time string comparison methods like the custom `safeCompare` implementation (which uses bitwise XOR) to compare secrets.
