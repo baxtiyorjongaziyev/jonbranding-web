@@ -33,6 +33,13 @@ export const testimonial = defineType({
         defineField({ name: 'zh', title: 'Xitoy', type: 'text' }),
       ],
     }),
+    defineField({
+      name: 'rating',
+      title: 'Reyting (1-5 yulduz)',
+      type: 'number',
+      initialValue: 5,
+      validation: (r) => r.min(1).max(5),
+    }),
     defineField({ name: 'order', title: 'Tartib raqami', type: 'number', initialValue: 99 }),
     defineField({ name: 'featured', title: 'Featured', type: 'boolean', initialValue: false }),
   ],

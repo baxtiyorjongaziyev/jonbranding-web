@@ -14,9 +14,26 @@ export default function AtModal({ open, onClose }: Props) {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
-    if (open) { setStep(1); setDone(false); setContactErr(''); setContact(''); setName(''); }
+    if (open) {
+      setStep(1); setDone(false); setContactErr(''); setContact(''); setName('');
+      (window as { gtag?: (...a: unknown[]) => void }).gtag?.('event', 'modal_open', { event_category: 'engagement' });
+    }
     return () => { document.body.style.overflow = ''; };
   }, [open]);
+
+  const g = typeof window !== 'undefined' ? (window as { gtag?: (...a: unknown[]) => void }).gtag : undefined;
+
+  const goToStep2 = () => {
+    if (!validateStep1()) return;
+    g?.('event', 'modal_step2', { event_category: 'engagement' });
+    setStep(2);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    g?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
+    setDone(true);
+  };
 
   if (!open) return null;
 
@@ -54,15 +71,15 @@ export default function AtModal({ open, onClose }: Props) {
             <h3 className="font-bold mb-5" style={{ fontSize: 26, lineHeight: 1.1, letterSpacing: '-0.03em', color: 'var(--at-ink)' }}>Faqat telefon yoki <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--at-accent)' }}>Telegram</span> kifoya.</h3>
             <div className="flex flex-col gap-1 mb-4">
               <label className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>Telefon yoki @telegram_username *</label>
-              <input autoFocus value={contact} onChange={e=>setContact(e.target.value)} onKeyDown={e=>e.key==='Enter'&&validateStep1()&&setStep(2)} placeholder="+998 90 ___ __ __  yoki  @sardor" className="rounded-xl px-4 py-3 text-sm outline-none" style={{ border: `1px solid ${contactErr?'var(--at-red)':'var(--at-line)'}`, background: 'var(--at-bg)', color: 'var(--at-ink)' }} />
+              <input autoFocus value={contact} onChange={e=>setContact(e.target.value)} onKeyDown={e=>{if(e.key==='Enter') goToStep2();}} placeholder="+998 90 ___ __ __  yoki  @sardor" className="rounded-xl px-4 py-3 text-sm outline-none" style={{ border: `1px solid ${contactErr?'var(--at-red)':'var(--at-line)'}`, background: 'var(--at-bg)', color: 'var(--at-ink)' }} />
               {contactErr && <span className="text-xs" style={{ color: 'var(--at-red)' }}>{contactErr}</span>}
             </div>
-            <button onClick={()=>validateStep1()&&setStep(2)} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 transition-all hover:-translate-y-0.5" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>Davom etish ↗</button>
+            <button onClick={goToStep2} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 transition-all hover:-translate-y-0.5" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>Davom etish ↗</button>
             <a href="https://t.me/jonbranding" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 text-sm" style={{ border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}>Yoki Telegram&apos;da darhol yozish →</a>
             <p className="text-center text-xs" style={{ color: 'var(--at-muted)' }}>Ma&apos;lumotlaringiz xavfsiz. Spam yo&apos;q.</p>
           </div>
         ) : (
-          <form onSubmit={e=>{e.preventDefault();setDone(true);}}>
+          <form onSubmit={handleSubmit}>
             <div className="inline-flex items-center gap-2 mb-3" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--at-muted)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
               <span className="at-pulse inline-block w-1.5 h-1.5 rounded-full" style={{ background: 'var(--at-green)' }} />
               Mini-tashxis · 1 daqiqada

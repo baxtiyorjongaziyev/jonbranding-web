@@ -1,8 +1,4 @@
 {
-  "meta": {
-    "title": "Jon.Branding | Профессиональное Брендинг-Агентство",
-    "description": "Нейминг, логотип и брендбук для вашего бизнеса — Jon.Branding."
-  },
   "header": {
     "portfolio": "Портфолио",
     "founder": "Основатель",
@@ -33,6 +29,8 @@
     "lang_en": "English",
     "ai": "ИИ Помощник",
     "consultation_short": "Получить аудит",
+    "about": "О нас",
+    "contacts": "Контакты",
     "online_brief": "Онлайн-бриф"
   },
   "footer": {
@@ -134,9 +132,17 @@
     "ctaButton": "Забронировать пакет"
   },
   "sitemapPage": {
+    "title": "Карта сайта",
+    "subtitle": "Обзор всех страниц нашего сайта, чтобы помочь вам быстро найти нужную информацию.",
+    "sections": {
+      "main": "Основные разделы",
+      "services": "Услуги",
+      "blog": "Статьи блога"
+    },
     "links": {
-      "car_wrap_design": "Creative Car Wrap Design",
       "home": "Главная",
+      "about": "О нас",
+      "contact": "Контакты",
       "quiz": "Тест по брендингу",
       "portfolio": "Портфолио",
       "process": "Рабочий процесс",
@@ -149,143 +155,135 @@
       "packaging_design": "Дизайн упаковки",
       "logo_design": "Дизайн логотипа",
       "patent_calculator": "Калькулятор патента",
-      "marketplace_cover": "Продающий дизайн карточек"
-    },
-    "title": "Карта сайта",
-    "subtitle": "Обзор всех страниц нашего сайта, чтобы помочь вам быстро найти нужную информацию.",
-    "sections": {
-      "main": "Основные разделы",
-      "services": "Услуги",
-      "blog": "Статьи блога"
+      "marketplace_cover": "Продающий дизайн карточек",
+      "car_wrap_design": "Creative Car Wrap Design"
     }
   },
   "hero": {
-    "agencyTagline": "Премиум Брендинговое Агентство",
+    "agencyTagline": "Премиум брендинговое агентство",
     "headlines": [
-      "Your branding |not selling?| We'll fix it.",
-      "Stand out |from the competition|.",
-      "Make your brand |profitable|, not just 'pretty'.",
-      "Make customers |fall in love with you|. Again and again.",
-      "From small business |to a strong brand|. In one step."
+      "Ваш брендинг |не продаёт?| Исправим.",
+      "Выделяйтесь |среди конкурентов|.",
+      "Сделайте бренд |прибыльным|, а не просто красивым.",
+      "Пусть клиенты |влюбляются в вас| снова и снова.",
+      "От малого бизнеса |до сильного бренда|. За один шаг."
     ],
-    "description": "We don’t just draw logos. As a leading branding agency in Tashkent, we build a <span class='font-bold text-foreground font-black'>result-oriented strategy</span> for your business. Naming and professional logo design.",
+    "description": "Мы не просто рисуем логотипы. Мы строим визуальную систему, которая заставляет покупателей доверять вам с первого взгляда — <span class='font-bold text-foreground font-black'>нейминг, айдентика, стратегия</span>.",
     "buttonTexts": [
-      "Analyze my brand",
-      "Help me increase sales",
-      "Free Strategic Audit",
-      "I need a strong brand"
+      "Проанализировать мой бренд",
+      "Помогите увеличить продажи",
+      "Бесплатный Brand Audit",
+      "Мне нужен сильный бренд"
     ],
-    "buttonHint": "Free. No obligations.",
-    "title": "Your brand should build trust and **make buying easier**.",
-    "descriptionPlain": "In the free Brand Audit, we review your name, logo, packaging, website, and messaging through the eyes of a buyer. You leave knowing which change can improve trust first.",
-    "preHeadline": "Free Brand Audit",
-    "cta": "Get the free Brand Audit",
-    "ctaSecondary": "What is checked?",
+    "buttonHint": "Бесплатно. Без обязательств.",
+    "title": "Ваш бренд строит доверие. **Продажи идут легче.**",
+    "descriptionPlain": "На бесплатном Brand Audit мы проверяем название, логотип, упаковку, сайт и коммуникации — как их видит покупатель. Вы получаете один чёткий ответ: какое изменение быстрее всего повысит доверие.",
+    "preHeadline": "Бесплатный Brand Audit",
+    "cta": "Получить бесплатный Brand Audit",
+    "ctaSecondary": "Что проверяется?",
     "proofItems": [
-      "15-minute audit call",
-      "5 trust signals reviewed",
-      "Clear next-step list"
+      "15-минутный звонок-аудит",
+      "5 ключевых сигналов доверия",
+      "Чёткий список приоритетов"
     ],
-    "auditTitle": "What will the audit reveal?",
-    "auditSubtitle": "Not design opinions. Business priorities that affect trust and sales.",
+    "auditTitle": "Что покажет аудит",
+    "auditSubtitle": "Не дизайнерские мнения. То, что тормозит ваши продажи.",
     "auditScore": "15m",
     "auditScoreLabel": "Brand Audit",
     "auditSignals": [
-      "What makes you look less premium",
-      "What message is unclear",
-      "What should be fixed first"
+      "Что делает вас менее премиальными",
+      "Где теряется ваше сообщение",
+      "Что исправить в первую очередь"
     ],
     "showcaseTags": [
-      "Trust",
-      "Premium feel",
-      "Sales"
+      "Доверие",
+      "Премиальность",
+      "Продажи"
     ]
   },
   "results": {
+    "badge": "РЕЗУЛЬТАТ КЛИЕНТА",
+    "title": "Что изменилось после Jon.Branding. Цифры говорят сами.",
+    "subtitle": "Название, логотип, упаковка и коммуникации должны работать как единая система. Мы её выстраиваем.",
     "items": [
       {
-        "label": "PROFITS UP",
         "impact": "60%+",
         "title": "Den Aroma",
         "desc": "Увеличение среднего чека"
       },
       {
-        "label": "MARKET SHARE",
         "impact": "40%+",
         "title": "Bexruz Market",
         "desc": "Увеличение потока клиентов"
       }
     ],
-    "badge": "РЕЗУЛЬТАТ КЛИЕНТА",
-    "title": "Результаты наших клиентов",
-    "subtitle": "Мы создаем не просто красивый дизайн, а стратегические решения для роста вашего бизнеса.",
     "detail": "Каждый проект для нас — это не просто дизайн, а инструмент для роста бизнеса."
   },
   "contactModal": {
-    "sidebarTitle": "Free Brand Audit",
-    "sidebarSubtitle": "In 15 minutes, we show where your brand loses buyer trust.",
-    "header": "Brand Audit",
-    "description": "You leave knowing which change can affect trust and sales first.",
+    "sidebarTitle": "Бесплатный аудит бренда",
+    "sidebarSubtitle": "За 15 минут покажем, где ваш бренд теряет доверие покупателей.",
+    "header": "Аудит бренда",
+    "description": "Вы уйдёте зная, какое изменение первым повлияет на доверие и продажи.",
     "steps": {
       "step4": {
-        "title": "Book the audit",
-        "subtitle": "Leave your contact details so our strategist can reach you."
+        "title": "Записаться на аудит",
+        "subtitle": "Оставьте контактные данные, и наш стратег свяжется с вами."
       }
     },
     "fields": {
       "name": {
-        "label": "Full name",
-        "placeholder": "John Doe"
+        "label": "Полное имя",
+        "placeholder": "Иван Иванов"
       },
       "phone": {
-        "label": "Phone number",
+        "label": "Номер телефона",
         "placeholder": "+..."
       },
       "telegram": {
-        "label": "Telegram / WhatsApp (optional)",
+        "label": "Telegram / WhatsApp (необязательно)",
         "placeholder": "@username"
       }
     },
     "buttons": {
-      "submit": "Book free audit",
-      "close": "Close window",
-      "back": "Back",
-      "next": "Next step"
+      "submit": "Записаться на бесплатный аудит",
+      "close": "Закрыть окно",
+      "back": "Назад",
+      "next": "Следующий шаг"
     },
     "formErrors": {
-      "fullName": "Enter your name",
-      "phone": "Enter full phone number"
+      "fullName": "Введите ваше имя",
+      "phone": "Введите полный номер телефона"
     },
     "errorToast": {
-      "title": "Error",
-      "description": "Something went wrong. Please try again."
+      "title": "Ошибка",
+      "description": "Что-то пошло не так. Пожалуйста, попробуйте снова."
     },
     "successStep": {
-      "title": "Request received",
-      "description": "Our strategist will contact you soon and start the brand audit.",
-      "nextSteps": "Before the call",
-      "telegramButton": "Open Telegram channel",
-      "telegramDesc": "Useful branding materials."
+      "title": "Заявка получена",
+      "description": "Наш стратег свяжется с вами в ближайшее время и начнёт аудит бренда.",
+      "nextSteps": "До звонка",
+      "telegramButton": "Открыть Telegram-канал",
+      "telegramDesc": "Полезные материалы по брендингу."
     },
-    "trustBadge": "Your data is confidential and used only by Jon.Branding.",
-    "contactBadge": "15 minutes",
-    "quickContactLabel": "Quick contact",
-    "auditGivesLabel": "You get",
+    "trustBadge": "Ваши данные конфиденциальны и используются только Jon.Branding.",
+    "contactBadge": "15 минут",
+    "quickContactLabel": "Быстрый контакт",
+    "auditGivesLabel": "Вы получите",
     "auditOfferStack": [
-      "5 trust gaps",
-      "Clear service recommendation",
-      "No-pressure advice"
+      "5 слабых мест доверия",
+      "Чёткую рекомендацию по услуге",
+      "Консультацию без давления"
     ],
-    "auditTimeLabel": "Format",
+    "auditTimeLabel": "Формат",
     "auditFormat": [
-      "Phone or Telegram",
-      "15-minute diagnosis",
-      "Written next step"
+      "Телефон или Telegram",
+      "15-минутная диагностика",
+      "Письменный следующий шаг"
     ],
-    "srDescription": "Форма для бесплатного Brand Audit: оставьте имя, телефон и при желании Telegram.",
+    "srDescription": "Форма для бесплатного аудита бренда: оставьте имя, телефон и при желании Telegram.",
     "telegramLinkLabel": "Telegram",
-    "objectionCopy": "Even if you are not ready to start, the audit gives you clarity.",
-    "riskCopy": "Leaving your phone is not a contract. We show the problem first.",
+    "objectionCopy": "Даже если вы ещё не готовы начать, аудит даст вам ясность.",
+    "riskCopy": "Оставить телефон — не договор. Сначала мы покажем проблему.",
     "footerCopyright": "Jon.Branding Agency"
   },
   "oishaWidget": {
@@ -361,7 +359,7 @@
   },
   "servicesHero": {
     "title": "Услуги, которые усилят ваш брендинг",
-    "subtitle": "Гарантированный результат и четкое решение для вашего бизнеса",
+    "subtitle": "Каждая услуга с одной целью: чтобы покупатели выбрали вас.",
     "cta": "Посмотреть цены"
   },
   "serviceSections": {
@@ -411,31 +409,31 @@
     "recommend_val": "90%"
   },
   "trustedBy": {
-    "eyebrow": "Selected clients",
-    "title": "Businesses trust us with credibility, not decoration.",
-    "subtitle": "We help brands look more valuable, clearer, and easier to choose.",
+    "eyebrow": "Наши клиенты",
+    "title": "250+ бизнесов обратились в Jon.Branding, чтобы выглядеть убедительно на рынке.",
+    "subtitle": "Местные бизнесы работают с нами, чтобы выглядеть профессионально и вызывать доверие у покупателей.",
     "metrics": [
       {
         "value": "150+",
-        "label": "Projects"
+        "label": "Проектов"
       },
       {
-        "value": "9 yrs",
-        "label": "Experience"
+        "value": "9 лет",
+        "label": "Опыт"
       },
       {
         "value": "30+",
-        "label": "Categories"
+        "label": "Отраслей"
       },
       {
-        "value": "4 langs",
-        "label": "Markets"
+        "value": "4 языка",
+        "label": "Рынков"
       }
     ]
   },
   "whyUs": {
     "title": "Почему именно мы?",
-    "subtitle": "Мы не просто даем обещания. Мы создаем реальную ценность для вашего бренда через системный подход.",
+    "subtitle": "Каждое решение основано на анализе рынка и психологии покупателей. Не красиво, а работающее.",
     "values": [
       {
         "title": "Стратегический подход",
@@ -476,138 +474,138 @@
     "solutionButton": "Увидеть решение всех проблем"
   },
   "beforeAfter": {
-    "eyebrow": "Proof",
-    "title": "Branding proves value before the sales call.",
-    "subtitle": "The audit answers one practical question: does the buyer understand, trust, and have a reason to choose you?",
-    "ctaTitle": "Ready to clarify your brand?",
-    "ctaDesc": "We start with a brand audit and identify the change with the highest impact.",
-    "ctaButton": "Get the free Brand Audit",
-    "cta": "Get the free Brand Audit",
-    "caseLabel": "Before / After",
+    "eyebrow": "Доказательства",
+    "title": "Когда бренд меняется, меняются продажи. Доказательства:",
+    "subtitle": "Аудит отвечает на один вопрос: когда покупатель видит вас, есть ли у него причина выбрать вас за первые 10 секунд?",
+    "ctaTitle": "Готовы прояснить ваш бренд?",
+    "ctaDesc": "Начнём с аудита бренда и найдём изменение с наибольшим эффектом.",
+    "ctaButton": "Получить бесплатный аудит",
+    "cta": "Получить бесплатный аудит",
+    "caseLabel": "До / После",
     "proofCards": [
       {
-        "value": "Real",
-        "label": "client work"
+        "value": "5 сигналов",
+        "label": "диагностика доверия"
       },
       {
-        "value": "Audit",
-        "label": "diagnosis first"
+        "value": "1 план",
+        "label": "с прицелом на продажи"
       }
     ]
   },
   "testimonials": {
-    "eyebrow": "Client voice",
-    "title": "Client trust",
-    "subtitle": "Portfolio can look nice. What matters is whether business owners feel the result.",
-    "playVideo": "Play video here",
-    "playAudio": "Play voice note",
-    "pauseAudio": "Pause",
-    "textReviewsTitle": "Text reviews",
-    "textReviewsSubtitle": "From entrepreneurs we worked with"
+    "eyebrow": "Голос клиентов",
+    "title": "Доверие клиентов",
+    "subtitle": "Портфолио может выглядеть красиво. Важно то, чувствуют ли владельцы бизнеса реальный результат.",
+    "playVideo": "Смотреть видео",
+    "playAudio": "Прослушать голосовое",
+    "pauseAudio": "Пауза",
+    "textReviewsTitle": "Текстовые отзывы",
+    "textReviewsSubtitle": "От предпринимателей, с которыми мы работали"
   },
   "gallery": {
     "title": "Примеры наших работ",
-    "subtitle": "Посмотрите, как созданные нами бренды выделяются в своей нише."
+    "subtitle": "Вот как выглядят бренды, которые выделяются в своей отрасли."
   },
   "founder": {
-    "title": "I build trust systems for business, not decoration.",
-    "message": "Hi, I am Bahtiyorjon, founder of Jon.Branding. We help business owners build brand systems through naming, strategy, identity, packaging, and brandbooks so buyers understand, remember, and choose them with confidence.",
+    "title": "Я строю системы доверия для бизнеса, а не украшения.",
+    "message": "Привет! Я Бахтиёрджон, основатель Jon.Branding. Мы помогаем владельцам бизнеса создавать бренд-системы через нейминг, стратегию, айдентику, упаковку и брендбук — чтобы покупатели понимали, запоминали и выбирали с уверенностью.",
     "points": [
       {
         "icon": "Medal",
-        "text": "150+ brand and visual projects"
+        "text": "150+ брендовых и визуальных проектов"
       },
       {
         "icon": "Globe",
-        "text": "Local market understanding with global standards"
+        "text": "Знание местного рынка + международные стандарты"
       },
       {
         "icon": "Zap",
-        "text": "A process built for correct decisions"
+        "text": "Процесс, настроенный на правильные решения"
       },
       {
         "icon": "Users",
-        "text": "Clear communication at every stage"
+        "text": "Прозрачная коммуникация на каждом этапе"
       }
     ],
-    "phoneButton": "Call directly",
-    "telegramButton": "Write on Telegram",
-    "videoButton": "45 seconds from founder",
-    "videoAlt": "Bahtiyorjon Gaziyev, founder of Jon.Branding",
+    "phoneButton": "Позвонить напрямую",
+    "telegramButton": "Написать в Telegram",
+    "videoButton": "45 секунд от основателя",
+    "videoAlt": "Бахтиёрджон Газиев, основатель Jon.Branding",
     "principles": [
-      "Strategy first",
-      "Business-language clarity",
-      "Result: trust and premium feel"
+      "Сначала стратегия",
+      "Ясность на языке бизнеса",
+      "Результат: доверие и премиальность"
     ]
   },
   "process": {
-    "title": "From free audit to a premium brand system.",
-    "subtitle": "The audit gives the first diagnosis. If we continue, the work becomes strategy, visual system, and rollout.",
+    "title": "От аудита до готового бренда: как мы работаем.",
+    "subtitle": "Аудит ставит первый диагноз. Если продолжаем — работа превращается в стратегию, визуальную систему и запуск.",
     "phases": [
       {
         "phase": "01",
-        "title": "Brand Audit",
-        "description": "We review trust, premium feel, and clarity through a buyer?s eyes.",
+        "title": "Брендинг-аудит",
+        "description": "Мы оцениваем доверие, премиальность и ясность глазами покупателя.",
         "tasks": [
-          "First impression",
-          "Trust gap",
-          "Competitor mirror"
+          "Первое впечатление",
+          "Разрыв доверия",
+          "Зеркало конкурентов"
         ]
       },
       {
         "phase": "02",
-        "title": "Strategy",
-        "description": "We define who you are for, why you are different, and why buyers should choose you.",
+        "title": "Стратегия",
+        "description": "Определяем, для кого вы, чем отличаетесь и почему покупатели должны выбрать вас.",
         "tasks": [
-          "Positioning",
-          "Audience",
-          "Core message"
+          "Позиционирование",
+          "Аудитория",
+          "Ключевое сообщение"
         ]
       },
       {
         "phase": "03",
-        "title": "Visual system",
-        "description": "We align name, logo, colors, typography, packaging, and website into one system.",
+        "title": "Визуальная система",
+        "description": "Объединяем название, логотип, цвета, типографику, упаковку и сайт в единую систему.",
         "tasks": [
-          "Logo",
-          "Identity",
-          "Brandbook"
+          "Логотип",
+          "Айдентика",
+          "Брендбук"
         ]
       },
       {
         "phase": "04",
-        "title": "Rollout",
-        "description": "We show the brand in real touchpoints: packaging, social, website, and sales materials.",
+        "title": "Запуск",
+        "description": "Показываем бренд в реальных точках контакта: упаковка, соцсети, сайт, продающие материалы.",
         "tasks": [
-          "Mockups",
-          "Rollout",
-          "Content direction"
+          "Мокапы",
+          "Развёртывание",
+          "Направление контента"
         ]
       },
       {
         "phase": "05",
-        "title": "Usage control",
-        "description": "Your team receives rules and files to use the brand consistently.",
+        "title": "Контроль использования",
+        "description": "Ваша команда получает правила и файлы для последовательного применения бренда.",
         "tasks": [
-          "Files",
-          "Rules",
-          "Support"
+          "Файлы",
+          "Правила",
+          "Поддержка"
         ]
       }
     ],
-    "ctaTitle": "Start with a free Brand Audit.",
-    "ctaDesc": "We find what lowers trust and tell you the most important first step.",
-    "ctaButton": "Book the free audit",
-    "eyebrow": "After audit",
+    "ctaTitle": "Начните с бесплатного брендинг-аудита.",
+    "ctaDesc": "Мы найдём, что снижает доверие, и укажем самый важный первый шаг.",
+    "ctaButton": "Записаться на аудит",
+    "eyebrow": "После аудита",
     "proofItems": [
-      "Diagnosis",
-      "Strategy",
-      "Visual system",
-      "Implementation guide"
+      "Диагноз",
+      "Стратегия",
+      "Визуальная система",
+      "Руководство по внедрению"
     ]
   },
   "leadMagnet": {
-    "title": "Выведите свой бренд на новый уровень",
+    "title": "Чего не хватает вашему бренду, чтобы убедить покупателей?",
     "subtitle": "Не знаете, с чего начать работу с нами? Мы подготовили для вас несколько бесплатных и полезных ресурсов. Изучите мир брендинга и сделайте первый шаг.",
     "magnets": [
       {
@@ -696,6 +694,8 @@
     }
   },
   "faq": {
+    "title": "Часто задаваемые вопросы",
+    "subtitle": "Процесс, стоимость, сроки и чего ожидать.",
     "faqItems": [
       {
         "question": "В чем разница между хорошим брендингом и просто красивым логотипом?",
@@ -716,27 +716,17 @@
       {
         "question": "Какие изменения я увижу в своем бизнесе после брендинга?",
         "answer": "Во-первых, повысится доверие клиентов к бренду. Во-вторых, вы получите возможность не просто избегать конкуренции, а превосходить ее. Самое главное — на первый план выйдет не цена вашего продукта, а его ценность."
-      },
-      {
-        "question": "Есть ли гарантия результата?",
-        "answer": "Конечно. Мы ставим удовлетворение наших клиентов на первое место. Если первоначальные концепции совершенно не соответствуют вашим требованиям (согласно брифу), мы переработаем проект или выполним согласованные условия возврата."
-      },
-      {
-        "question": "Можно ли заказать только логотип?",
-        "answer": "Мы рекомендуем создавать целостную систему айдентики, потому что только логотип не обеспечивает целостность бренда. Однако для небольших проектов у нас есть пакеты «Логотип + Минимальный фирменный стиль»."
       }
     ],
-    "title": "Часто задаваемые вопросы",
-    "subtitle": "Ответы на самые распространенные вопросы о процессе брендинга, ценах и других темах.",
     "ctaTitle": "Не оставляйте места сомнениям!",
     "ctaDesc": "Получили ответы на все свои вопросы? Давайте обсудим ваш проект и выведем ваш бренд на новый уровень.",
     "ctaButton": "Я получил все ответы, готов начать!"
   },
   "mobileCtaBar": {
-    "final_price": "Final price",
-    "get_offer": "Get audit",
-    "cta": "Get the free Brand Audit",
-    "hint": "We check the trust signals in your brand"
+    "final_price": "Итоговая цена",
+    "get_offer": "Получить аудит",
+    "cta": "Получить бесплатный аудит",
+    "hint": "Проверяем сигналы доверия в вашем бренде"
   },
   "blog": {
     "title": "Наш Блог",
@@ -1148,6 +1138,17 @@
     }
   },
   "packagingPage": {
+    "metadata": {
+      "title": "Услуги дизайна упаковки в Узбекистане | Jon.Branding",
+      "description": "Мы не просто создаем красивую упаковку; мы создаем мощный маркетинговый инструмент, который продает ваш продукт. Наше агентство по дизайну упаковки в Узбекистане поможет вашему бренду выделиться среди конкурентов и завоевать любовь покупателей."
+    },
+    "title": "Разработка дизайна упаковки",
+    "subtitle": "В условиях высокой конкуренции упаковка часто становится главным маркетинговым инструментом. Она выделяет бренд на полке, рассказывает его историю и выстраивает связь с аудиторией с первого взгляда.",
+    "section1_title": "Упаковка — это больше, чем носитель идентификации бренда",
+    "section1_p1": "Упаковка — это первый контакт с брендом в точках продаж, визуальное обращение, создающее мгновенное впечатление о продукте. Во многих случаях именно упаковка определяет решение человека о покупке.",
+    "section1_p2": "Цель нашего агентства — создать не только эстетичную и красивую упаковку, но и эффективный инструмент, отвечающий бизнес-задачам и способствующий его росту.",
+    "process_title": "Как мы создаем упаковку?",
+    "process_subtitle": "Мы подходим к разработке упаковки не как к отдельному дизайну, а как к сложной системе, которая должна работать на бизнес и отвечать ожиданиям аудитории. Наш процесс включает в себя несколько ключевых этапов:",
     "process_steps": [
       {
         "title": "Анализ и стратегия",
@@ -1160,23 +1161,8 @@
       {
         "title": "Завершение и подготовка",
         "description": "Тщательно прорабатываем все технические аспекты выбранной концепции (адаптация под разные форматы, подготовка к печати)."
-      },
-      {
-        "title": "Передача",
-        "description": "Файлы, готовые к печати, и технические спецификации."
       }
     ],
-    "metadata": {
-      "title": "Услуги дизайна упаковки в Узбекистане | Jon.Branding",
-      "description": "Мы не просто создаем красивую упаковку; мы создаем мощный маркетинговый инструмент, который продает ваш продукт. Наше агентство по дизайну упаковки в Узбекистане поможет вашему бренду выделиться среди конкурентов и завоевать любовь покупателей."
-    },
-    "title": "Разработка дизайна упаковки",
-    "subtitle": "В условиях высокой конкуренции упаковка часто становится главным маркетинговым инструментом. Она выделяет бренд на полке, рассказывает его историю и выстраивает связь с аудиторией с первого взгляда.",
-    "section1_title": "Упаковка — это больше, чем носитель идентификации бренда",
-    "section1_p1": "Упаковка — это первый контакт с брендом в точках продаж, визуальное обращение, создающее мгновенное впечатление о продукте. Во многих случаях именно упаковка определяет решение человека о покупке.",
-    "section1_p2": "Цель нашего агентства — создать не только эстетичную и красивую упаковку, но и эффективный инструмент, отвечающий бизнес-задачам и способствующий его росту.",
-    "process_title": "Как мы создаем упаковку?",
-    "process_subtitle": "Мы подходим к разработке упаковки не как к отдельному дизайну, а как к сложной системе, которая должна работать на бизнес и отвечать ожиданиям аудитории. Наш процесс включает в себя несколько ключевых этапов:",
     "cta_title": "Упаковка не только привлекает внимание, она продает",
     "cta_description": "Хороший дизайн упаковки — это не просто красивое украшение, а инструмент, работающий на бизнес. Мы разрабатываем функциональный, стратегически продуманный дизайн, в котором упаковка служит полноценным инструментом продаж."
   },
@@ -1246,7 +1232,7 @@
     "tooltip": "Сначала отмените один"
   },
   "opportunityCalculator": {
-    "title": "Ваш бренд — не 'Дырявое Ведро'?",
+    "title": "Ваш бренд делает рекламу бесполезной? Проверьте прямо сейчас.",
     "subtitle": "Почему реклама идет, а деньги утекают? Посчитайте в цифрах.",
     "labels": {
       "traffic": "Количество потенциальных клиентов вашего бизнеса",
@@ -1310,51 +1296,51 @@
     }
   },
   "auditOffer": {
-    "eyebrow": "Inside the free audit",
-    "title": "Is your brand helping sales or slowing them down?",
-    "description": "Before selling design, we show where your brand loses trust in the buyer?s eyes. You leave knowing what you need now and what can wait.",
-    "cta": "Book the free audit",
-    "promise": "No pressure. We show the problem and opportunity first.",
+    "eyebrow": "Что входит в бесплатный аудит",
+    "title": "Ваш бренд помогает продажам или тормозит их?",
+    "description": "Прежде чем предлагать дизайн, мы покажем, где ваш бренд теряет доверие в глазах покупателя. После аудита вы точно знаете, что нужно сейчас, а что может подождать.",
+    "cta": "Записаться на бесплатный аудит",
+    "promise": "Никакого давления. Сначала показываем проблему и возможность.",
     "outcomes": [
       {
-        "value": "15m",
-        "label": "audit call"
+        "value": "15м",
+        "label": "звонок-аудит"
       },
       {
         "value": "5",
-        "label": "trust signals"
+        "label": "сигналов доверия"
       },
       {
         "value": "1",
-        "label": "priority plan"
+        "label": "приоритетный план"
       },
       {
-        "value": "Free",
-        "label": "initial audit"
+        "value": "Бесплатно",
+        "label": "первичный аудит"
       }
     ],
     "items": [
       {
-        "title": "First-impression diagnosis",
-        "desc": "We review whether your site, logo, packaging, or social presence feels premium and trustworthy."
+        "title": "Диагностика первого впечатления",
+        "desc": "Проверяем, насколько ваш сайт, логотип, упаковка или Instagram воспринимаются как премиальные и вызывающие доверие."
       },
       {
-        "title": "Trust-gap map",
-        "desc": "We name the weak points that slow buyer confidence."
+        "title": "Карта пробелов доверия",
+        "desc": "Называем слабые места, которые замедляют решение покупателя."
       },
       {
-        "title": "Competitor position",
-        "desc": "We show who looks stronger and where your brand can win visually."
+        "title": "Позиция конкурентов",
+        "desc": "Показываем, кто выглядит сильнее и где ваш бренд может выиграть визуально."
       },
       {
-        "title": "Next steps",
-        "desc": "We rank whether strategy, naming, identity, packaging, or website should come first."
+        "title": "Следующие шаги",
+        "desc": "Определяем, что важнее: стратегия, нейминг, айдентика, упаковка или сайт."
       }
     ],
     "proof": [
-      "No obligation",
-      "Business language",
-      "Sales-focused plan"
+      "Без обязательств",
+      "На языке бизнеса",
+      "План с прицелом на продажи"
     ]
   },
   "pricingPage": {
@@ -1370,6 +1356,10 @@
       "desc": "Высококонверсионный дизайн изображений товаров для Uzum, Wildberries, Ozon и Яндекс.Маркет. Скидки и доп. услуги.",
       "cta": "Цены на карточки и калькулятор"
     }
+  },
+  "meta": {
+    "title": "Jon.Branding | Профессиональное Брендинг-Агентство",
+    "description": "Нейминг, логотип и брендбук для вашего бизнеса — Jon.Branding."
   },
   "atelier": {
     "nav": [

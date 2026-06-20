@@ -9,7 +9,9 @@ interface TokenData {
   expires_at: number; // unix ms
 }
 
-// In-memory promise lock to prevent concurrent refreshes within one instance
+// Module-level cache: survives multiple requests within one serverless instance
+let memoryToken: TokenData | null = null;
+// Mutex: prevents concurrent token refreshes within one instance
 let refreshInFlight: Promise<TokenData> | null = null;
 
 async function readTokensFromFirestore(): Promise<TokenData | null> {
@@ -19,6 +21,7 @@ async function readTokensFromFirestore(): Promise<TokenData | null> {
 }
 
 async function writeTokensToFirestore(data: TokenData): Promise<void> {
+  memoryToken = data;
   await getDb().doc(TOKENS_DOC).set(data);
 }
 
@@ -78,16 +81,22 @@ async function doRefresh(): Promise<TokenData> {
 }
 
 export async function getValidAccessToken(): Promise<string> {
+  // Hot path: valid token in memory — zero Firestore reads
+  if (memoryToken && memoryToken.expires_at - REFRESH_BUFFER_MS > Date.now()) {
+    return memoryToken.access_token;
+  }
+
+  // Cold path: memory empty or token expiring — read Firestore once
   const tokens = await readTokensFromFirestore();
 
   if (!tokens) {
-    // No tokens yet — bootstrap
     const fresh = await forceRefresh();
     return fresh.access_token;
   }
 
   const needsRefresh = tokens.expires_at - REFRESH_BUFFER_MS < Date.now();
   if (!needsRefresh) {
+    memoryToken = tokens;
     return tokens.access_token;
   }
 
