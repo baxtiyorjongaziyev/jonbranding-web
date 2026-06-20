@@ -121,26 +121,40 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
 
       if (!res.ok) throw new Error('API Error');
 
-      setTimeout(() => {
-        setMessages((prev) => {
-          const lastMsg = prev[prev.length - 1];
-          if (lastMsg && lastMsg.role === 'user') {
-            return [
-              ...prev,
-              {
-                id: `system-ack-${Date.now()}`,
-                text: translations.ack,
-                role: 'model',
-                timestamp: new Date().toISOString(),
-              },
-            ];
-          }
+      const data = await res.json();
+      if (data && data.response) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `reply-${Date.now()}`,
+            text: data.response,
+            role: 'model',
+            timestamp: new Date().toISOString(),
+          },
+        ]);
+      } else {
+        // Fallback for asynchronous/queued routing
+        setTimeout(() => {
+          setMessages((prev) => {
+            const lastMsg = prev[prev.length - 1];
+            if (lastMsg && lastMsg.role === 'user') {
+              return [
+                ...prev,
+                {
+                  id: `system-ack-${Date.now()}`,
+                  text: translations.ack,
+                  role: 'model',
+                  timestamp: new Date().toISOString(),
+                },
+              ];
+            }
 
-          return prev;
-        });
-      }, 3000);
+            return prev;
+          });
+        }, 3000);
 
-      setTimeout(() => fetchHistory(userId), 2000);
+        setTimeout(() => fetchHistory(userId), 2000);
+      }
     } catch {
       toast({
         title: translations.error,
