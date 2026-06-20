@@ -5,39 +5,34 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
-import { uz, ru, enUS, zhCN } from 'date-fns/locale';
+import { uz, ru, enUS } from 'date-fns/locale';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { getLocalizedPath, getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
+import { getLocalizedPath } from '@/lib/i18n/locale';
 
 type Props = {
   params: Promise<{ lang: string }>;
 };
 
-const VALID_LOCALES = ['uz', 'ru', 'en', 'zh'];
-const isSafePathSegment = (value: string) => VALID_LOCALES.includes(value);
-const isSafeSlug = (value: string) => /^[a-z0-9-]+$/i.test(value);
+const isSafePathSegment = (value: string) => /^[a-z0-9-]+$/i.test(value);
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
-  const BASE_URL = 'https://www.jonbranding.uz';
-  const safeLang = isSafePathSegment(lang) ? lang : 'uz';
-  const dictionary = await getDictionary(safeLang as Locale);
-  const metadata = dictionary.blog?.metadata;
-
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const titles: Record<string, string> = {
+    uz: "Jon.Branding Blog | Branding, Dizayn va Marketing",
+    ru: "Блог Jon.Branding | Брендинг, Дизайн и Маркетинг",
+    en: "Jon.Branding Blog | Branding, Design and Marketing",
+    zh: "Jon.Branding 博客 | 品牌、设计和营销",
+  };
+  const descs: Record<string, string> = {
+    uz: "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
+    ru: "Последние статьи и советы по брендингу, неймингу и дизайну.",
+    en: "Latest articles and tips on branding, naming and design.",
+    zh: "关于品牌、命名和设计的最新文章和技巧。",
+  };
   return {
-    title: metadata?.title || "Jon.Branding Blog | Branding, Dizayn va Marketing",
-    description: metadata?.description || "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
-    alternates: {
-      canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang as any, '/blog'),
-      languages: getLocaleAlternates(BASE_URL, '/blog'),
-    },
-    openGraph: {
-      title: metadata?.title || "Jon.Branding Blog | Branding, Dizayn va Marketing",
-      description: metadata?.description || "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
-      url: getLocalizedAbsoluteUrl(BASE_URL, safeLang as any, '/blog'),
-      siteName: 'Jon.Branding',
-      type: 'website',
-    },
+    title: titles[safeLang],
+    description: descs[safeLang],
   };
 }
 
@@ -56,7 +51,7 @@ const BlogPage = async (props: Props) => {
     '/images/cms/brand-strategy-team.webp',
   ];
   
-  const locale = safeLang === 'ru' ? ru : safeLang === 'en' ? enUS : safeLang === 'zh' ? zhCN : uz;
+  const locale = safeLang === 'ru' ? ru : (safeLang === 'en' ? enUS : uz);
 
   return (
     <main className="flex-grow bg-secondary/50">
@@ -73,7 +68,7 @@ const BlogPage = async (props: Props) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {sortedPosts.map((post, index) => {
-              if (!isSafeSlug(post.slug)) return null;
+              if (!isSafePathSegment(post.slug)) return null;
 
               const postHref = getLocalizedPath(safeLang as Locale, `/blog/${post.slug}`);
 

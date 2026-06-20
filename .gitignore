@@ -83,3 +83,7 @@ autodeploy.pid
 # Codex config
 .codex/
 .env
+
+# Credentials & caches
+service-account.json
+workflow-state.json

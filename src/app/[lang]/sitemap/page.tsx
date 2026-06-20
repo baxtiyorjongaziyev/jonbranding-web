@@ -1,27 +1,25 @@
 
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon, Truck } from 'lucide-react';
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
-  const { lang } = await params;
+type Props = {
+  params: Promise<{ lang: string }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { lang } = await props.params;
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
   const titles: Record<string, string> = {
     uz: 'Sayt xaritasi | Jon.Branding',
     ru: 'Карта сайта | Jon.Branding',
     en: 'Sitemap | Jon.Branding',
     zh: '网站地图 | Jon.Branding',
   };
-  return {
-    title: titles[lang] || titles.uz,
-    robots: { index: false, follow: true },
-  };
+  return { title: titles[safeLang] || titles.uz };
 }
-
-type Props = {
-  params: Promise<{ lang: string }>;
-};
 
 const SitemapPage = async (props: Props) => {
   const { lang } = await props.params;
@@ -59,8 +57,6 @@ const SitemapPage = async (props: Props) => {
       icon: Home,
       links: [
         { href: '/', label: t.links?.home || 'Bosh sahifa' },
-        { href: '/haqimizda', label: t.links?.about || 'Haqimizda' },
-        { href: '/aloqa', label: t.links?.contact || 'Aloqa' },
         { href: '/quiz', label: t.links?.quiz || 'Brending testi' },
         { href: '/#portfolio', label: t.links?.portfolio || 'Portfolio' },
         { href: '/#process', label: t.links?.process || 'Ishlash tartibi' },

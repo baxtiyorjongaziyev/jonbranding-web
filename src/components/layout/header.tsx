@@ -12,6 +12,7 @@ import { MobileMenu } from './header-mobile-menu';
 
 type Dictionary = {
   portfolio: string;
+  online_brief: string;
   founder: string;
   process: string;
   blog: string;
@@ -89,6 +90,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
+  if (pathnameWithoutLocale === '/') return null;
 
   const isHomepage = pathnameWithoutLocale === '/';
   const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka');
@@ -96,6 +98,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   const navItems = [
     { href: getLocalizedPath('/portfolio'), label: dictionary.portfolio },
+    { href: getLocalizedPath('/online-brief'), label: dictionary.online_brief },
     { href: getLocalizedPath('/#founder'), label: dictionary.founder },
     { href: getLocalizedPath('/#process'), label: dictionary.process },
     { href: getLocalizedPath('/blog'), label: dictionary.blog },

@@ -1,11 +1,13 @@
 import Script from 'next/script';
-import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
+import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono, Inter_Tight } from 'next/font/google';
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
+import '../atelier.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { safeJsonStringify } from '@/lib/security';
 import {
   locales,
   defaultLocale,
@@ -22,6 +24,13 @@ const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   variable: '--font-hanken',
+  display: 'swap',
+});
+
+const interTight = Inter_Tight({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-sans-tight',
   display: 'swap',
 });
 
@@ -92,6 +101,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
+      title: dictionary.meta?.title || "Jon.Branding | Professional Brending Agentligi",
+      description: dictionary.meta?.description || "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding.",
       images: [OG_IMAGE_URL],
     },
     alternates: {
@@ -125,7 +136,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
     '(1) Yangi xabar! | Jon Branding';
 
   return (
-    <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${interTight.variable}`} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#F2EFE6}' }} />
         <link rel="preconnect" href="https://cdn.sanity.io" />
@@ -135,11 +146,12 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="JonBranding" />
+        <meta name="robots" content="index, follow" />
         <Script
           id="json-ld-professional-service"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonStringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
               "name": "Jon.Branding",
@@ -204,7 +216,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           id="json-ld-faq"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonStringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": [
@@ -296,7 +308,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           id="json-ld-aggregate-rating"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonStringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               "name": "Jon.Branding",
@@ -313,7 +325,28 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",
                 "reviewCount": "47",
-                "bestRating": "5"
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            })
+          }}
+        />
+        <Script
+          id="json-ld-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Jon.Branding",
+              "url": "https://www.jonbranding.uz",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://www.jonbranding.uz/{search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
               }
             })
           }}

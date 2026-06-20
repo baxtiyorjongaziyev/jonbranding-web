@@ -398,6 +398,8 @@ ${totalPrice ? `\n<b>Narx:</b> ${escapeTelegramHtml(totalPrice.toLocaleString('f
   `.trim();
 }
 
+
+
 export async function POST(request: Request) {
   const ip = getClientIp(request);
   if (!rateLimit(`submit-form:${ip}`, 5, 60_000)) {
@@ -433,30 +435,45 @@ export async function POST(request: Request) {
 
     const { fullName, phone } = leadData;
 
+    const threadId = cleanSecret(process.env.TELEGRAM_MESSAGE_THREAD_ID);
+
     const telegramPayload: any = {
       chat_id: chatId,
       text: buildTelegramMessage(leadData),
       parse_mode: 'HTML',
       disable_web_page_preview: true,
+      ...(threadId ? { message_thread_id: Number(threadId) } : {}),
     };
 
-    await sendTelegramMessage(botToken, telegramPayload);
+    let telegramSuccess = false;
+    try {
+      await sendTelegramMessage(botToken, telegramPayload);
+      telegramSuccess = true;
+    } catch (telegramError) {
+      console.error('Telegram lead alert error:', telegramError);
+    }
 
     const amoCrmResult: any = await sendToAmoCrm(leadData).catch(async (error) => {
       console.error('AmoCRM lead error:', error);
       const queued = await queueFailedAmoCrmLead(leadData, error);
       const reason = describeAmoCrmError(error);
-      await sendTelegramMessage(botToken, {
-        ...telegramPayload,
-        text: [
-          '<b>AmoCRMga lead tushmadi</b>',
-          '',
-          `Sabab: ${escapeTelegramHtml(reason)}`,
-          `Backup: ${queued ? 'Firestore queue saqlandi' : 'Firestore queue xato'}`,
-          `Mijoz: ${escapeTelegramHtml(fullName)}`,
-          `Telefon: ${escapeTelegramHtml(phone)}`,
-        ].join('\n'),
-      }).catch((telegramError) => console.error('AmoCRM failure Telegram alert error:', telegramError));
+      
+      try {
+        await sendTelegramMessage(botToken, {
+          ...telegramPayload,
+          text: [
+            '<b>AmoCRMga lead tushmadi</b>',
+            '',
+            `Sabab: ${escapeTelegramHtml(reason)}`,
+            `Backup: ${queued ? 'Firestore queue saqlandi' : 'Firestore queue xato'}`,
+            `Mijoz: ${escapeTelegramHtml(fullName)}`,
+            `Telefon: ${escapeTelegramHtml(phone)}`,
+          ].join('\n'),
+        });
+      } catch (telegramError) {
+        console.error('AmoCRM failure Telegram alert error:', telegramError);
+      }
+      
       return { ok: false, queued, error: error?.message || String(error) };
     });
 
@@ -468,7 +485,7 @@ export async function POST(request: Request) {
       ok: true,
       eventId: leadData.eventId,
       integrations: {
-        telegram: true,
+        telegram: telegramSuccess,
         amoCrm: amoCrmResult.ok === true,
         amoCrmQueued: amoCrmResult.queued === true,
         analytics: true,

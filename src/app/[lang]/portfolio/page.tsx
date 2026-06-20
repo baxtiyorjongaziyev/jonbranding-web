@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { fetchPortfolioList } from '@/lib/data/portfolio';
 import { PortfolioProject } from '@/lib/portfolio-fallbacks';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import PortfolioListClient from '@/components/portfolio-list-client';
 
 export const revalidate = 60;
@@ -29,19 +28,22 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     zh: "中亚市场领导者的真实品牌、包装和标志设计案例研究，具有经证实的投资回报率。",
   };
 
-  const BASE_URL = 'https://www.jonbranding.uz';
   return {
     title: titles[safeLang] || titles.uz,
     description: descriptions[safeLang] || descriptions.uz,
-    alternates: {
-      canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/portfolio'),
-      languages: getLocaleAlternates(BASE_URL, '/portfolio'),
-    },
     openGraph: {
       title: titles[safeLang] || titles.uz,
       description: descriptions[safeLang] || descriptions.uz,
-      url: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/portfolio'),
+      type: 'website',
+      locale: safeLang === 'uz' ? 'uz_UZ' : safeLang === 'ru' ? 'ru_RU' : safeLang === 'zh' ? 'zh_CN' : 'en_US',
       siteName: 'Jon.Branding',
+      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630, alt: 'Jon Branding Portfolio' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: titles[safeLang] || titles.uz,
+      description: descriptions[safeLang] || descriptions.uz,
+      images: ['/images/cms/og-image.jpeg'],
     },
   };
 }

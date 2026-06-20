@@ -1,58 +1,20 @@
+import { Metadata } from 'next';
+import { ReactNode } from 'react';
 
-import type { Metadata } from 'next';
-import { FC, ReactNode } from 'react';
-import { getDictionary, Locale } from '@/lib/dictionaries';
-
-type Props = {
-  params: Promise<{ lang: string }>;
-};
+type Props = { children: ReactNode; params: Promise<{ lang: string }> };
 
 export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await props.params;
-  const dict = await getDictionary(lang as Locale);
-  const t = dict.patentCalculatorPage?.metadata || { title: "Patent Calculator", description: "" };
-
-  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/patent-kalkulyatori`;
-
-  return {
-    metadataBase: new URL('https://www.jonbranding.uz'),
-    title: t.title,
-    description: t.description,
-    openGraph: {
-      title: t.title,
-      description: t.description,
-      url: canonicalUrl,
-      siteName: 'Jon.Branding',
-      images: [
-        {
-          url: '/images/cms/og-image.jpeg',
-          width: 1200,
-          height: 630,
-          alt: t.description,
-        },
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: t.title,
-      description: t.description,
-      images: ['/images/cms/og-image.jpeg'],
-    },
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        'uz': 'https://www.jonbranding.uz/xizmatlar/patent-kalkulyatori',
-        'ru': 'https://www.jonbranding.uz/ru/xizmatlar/patent-kalkulyatori',
-        'en': 'https://www.jonbranding.uz/en/xizmatlar/patent-kalkulyatori',
-        'zh': 'https://www.jonbranding.uz/zh/xizmatlar/patent-kalkulyatori',
-      },
-    },
+  const safeLang = ['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz';
+  const titles: Record<string, string> = {
+    uz: 'Patent Kalkulyatori | Jon.Branding',
+    ru: 'Калькулятор Патентов | Jon.Branding',
+    en: 'Patent Calculator | Jon.Branding',
+    zh: '专利计算器 | Jon.Branding',
   };
+  return { title: titles[safeLang] || titles.uz };
 }
 
-const PatentCalculatorLayout: FC<Readonly<{ children: ReactNode, params: Promise<{ lang: string }> }>> = ({ children }) => {
+export default function PatentCalculatorLayout({ children }: Props) {
   return <>{children}</>;
 }
-
-export default PatentCalculatorLayout;
