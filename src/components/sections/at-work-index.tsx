@@ -1,3 +1,4 @@
+'use client';
 import type { FC } from 'react';
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';

@@ -21,17 +21,24 @@ export default function AtModal({ open, onClose }: Props) {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  const g = typeof window !== 'undefined' ? (window as { gtag?: (...a: unknown[]) => void }).gtag : undefined;
+  const gtag = () => (window as { gtag?: (...a: unknown[]) => void }).gtag;
 
   const goToStep2 = () => {
     if (!validateStep1()) return;
-    g?.('event', 'modal_step2', { event_category: 'engagement' });
+    gtag()?.('event', 'modal_step2', { event_category: 'engagement' });
     setStep(2);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    g?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
+    gtag()?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
+    try {
+      await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contact, name, service, budget, source: 'at_modal', lang: 'uz' }),
+      });
+    } catch {}
     setDone(true);
   };
 
