@@ -1,248 +1,66 @@
 'use client';
+import type { FC } from 'react';
+import { useState } from 'react';
+import AtMasthead from '@/components/sections/at-masthead';
+import AtHero from '@/components/sections/at-hero';
+import AtMarquee from '@/components/sections/at-marquee';
+import AtLedger from '@/components/sections/at-ledger';
+import AtFeatured from '@/components/sections/at-featured';
+import AtShowcase from '@/components/sections/at-showcase';
+import AtManifesto from '@/components/sections/at-manifesto';
+import AtStats from '@/components/sections/at-stats';
+import AtDiagnosis from '@/components/sections/at-diagnosis';
+import AtServices from '@/components/sections/at-services';
+import AtAudit from '@/components/sections/at-audit';
+import AtSampleReport from '@/components/sections/at-sample-report';
+import AtMiniQuotes from '@/components/sections/at-mini-quotes';
+import AtLossCalc from '@/components/sections/at-loss-calc';
+import AtWorkIndex from '@/components/sections/at-work-index';
+import AtProcess from '@/components/sections/at-process';
+import AtPricing from '@/components/sections/at-pricing';
+import AtQuotes from '@/components/sections/at-quotes';
+import AtFaq from '@/components/sections/at-faq';
+import AtFinalCta from '@/components/sections/at-final-cta';
+import AtModal from '@/components/sections/at-modal';
+import AtStickyCta from '@/components/sections/at-sticky-cta';
 
-import { FC, useState, useEffect } from 'react';
-import {
-  ATMasthead,
-  ATNav,
-  ATHero,
-  ATMarquee,
-  ATMiniQuotes,
-  ATManifesto,
-  ATLedger,
-  ATDiagnosis,
-  ATServices,
-  ATShowcase,
-  ATFeatured,
-  ATBrandSystem,
-  ATGallery,
-  ATAudit,
-  ATSampleReport,
-  ATLossCalc,
-  ATIndex,
-  ATProcess,
-  ATPricing,
-  ATQuotes,
-  ATFAQ,
-  ATFinal,
-  ATFooter,
-  ATStickyCta,
-  ATTweaks,
-  ATStats
-} from './atelier/atelier-sections';
-
-interface HomeComponentProps {
-  lang: string;
-  dictionary: any;
-  comparisons?: any[];
-  brands?: any[];
-  testimonials?: any[];
-}
-
-const HomeComponent: FC<HomeComponentProps> = ({ lang, dictionary, comparisons, brands, testimonials }) => {
-  const [theme, setTheme] = useState('light');
-  const [grain, setGrain] = useState(false);
-  const [accent, setAccent] = useState('cobalt');
-  const [edit, setEdit] = useState(false);
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    document.body.style.backgroundColor = theme === 'dark' ? '#0B0C10' : '#F2EFE6';
-    return () => {
-      document.body.style.backgroundColor = '';
-    };
-  }, [theme]);
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-accent', accent);
-  }, [accent]);
-
-  useEffect(() => {
-    document.body.classList.toggle('grain', grain);
-  }, [grain]);
-
-  useEffect(() => {
-    const onMsg = (e: MessageEvent) => {
-      const m = e.data;
-      if (!m || typeof m !== 'object') return;
-      if (m.type === '__activate_edit_mode') setEdit(true);
-      if (m.type === '__deactivate_edit_mode') setEdit(false);
-    };
-    window.addEventListener('message', onMsg);
-    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
-    return () => window.removeEventListener('message', onMsg);
-  }, []);
-
-  const persist = (edits: any) => {
-    try {
-      window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
-    } catch {}
-  };
-
-  const setThemeP = (t: string) => {
-    setTheme(t);
-    persist({ theme: t });
-  };
-
-  const setGrainP = (g: boolean) => {
-    setGrain(g);
-    persist({ grain: g });
-  };
-
-  const setAccentP = (a: string) => {
-    setAccent(a);
-    persist({ accent: a });
-  };
-
-  const closeEdit = () => {
-    setEdit(false);
-    try {
-      window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
-    } catch {}
-  };
-
-  const open = () => {
-    window.dispatchEvent(
-      new CustomEvent('openContactModal', {
-        detail: { section: 'atelier_homepage', ctaText: 'Bepul mini-tashxis', source: 'atelier' },
-      })
-    );
-  };
-
-  const atelierDict = dictionary?.atelier || {};
+const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[] }> = ({ lang, dictionary: _dictionary }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const open = () => setModalOpen(true);
+  const close = () => setModalOpen(false);
 
   return (
-    <div className="atelier-theme">
-      <ATMasthead />
-      
-      <ATNav 
-        dictionary={atelierDict} 
-        onOpen={open} 
-        theme={theme} 
-        setTheme={setThemeP} 
-      />
-      
-      <ATHero 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATMarquee 
-        dictionary={atelierDict} 
-      />
-      
-      <ATMiniQuotes />
-      
-      <ATManifesto 
-        dictionary={atelierDict} 
-      />
-      
-      <ATLedger 
-        dictionary={atelierDict} 
-      />
-      
-      <ATDiagnosis 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATServices 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATShowcase 
-        dictionary={atelierDict} 
-        onOpen={open}
-        comparisons={comparisons}
-        lang={lang}
-      />
-      
-      <ATFeatured 
-        dictionary={atelierDict}
-        comparison={comparisons && comparisons.length > 0 ? comparisons[0] : undefined}
-        lang={lang}
-      />
-      
-      <ATBrandSystem 
-        dictionary={atelierDict} 
-      />
-      
-      <ATGallery 
-        dictionary={atelierDict} 
-        onOpen={open}
-        comparisons={comparisons}
-        lang={lang}
-      />
-      
-      <ATAudit 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATSampleReport 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATLossCalc 
-        dictionary={atelierDict} 
-        onOpen={open} 
-        lang={lang}
-      />
-      
-      <ATIndex 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATProcess 
-        dictionary={atelierDict} 
-        lang={lang}
-      />
-      
-      <ATStats 
-        dictionary={atelierDict} 
-      />
-      
-      <ATPricing 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATQuotes 
-        dictionary={atelierDict}
-        testimonials={testimonials}
-        lang={lang}
-      />
-      
-      <ATFAQ 
-        dictionary={atelierDict} 
-      />
-      
-      <ATFinal 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATFooter 
-        dictionary={atelierDict}
-      />
-      
-      <ATStickyCta 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATTweaks
-        visible={edit}
-        onClose={closeEdit}
-        theme={theme}
-        setTheme={setThemeP}
-        grain={grain}
-        setGrain={setGrainP}
-        accent={accent}
-        setAccent={setAccentP}
-      />
+    <div
+      className="min-h-screen"
+      style={{
+        background: 'var(--at-bg)',
+        color: 'var(--at-ink)',
+        fontFamily: 'var(--font-hanken, "Hanken Grotesk", sans-serif)',
+        WebkitFontSmoothing: 'antialiased',
+      }}
+    >
+      <AtMasthead />
+      <AtHero onOpen={open} lang={lang} />
+      <AtMarquee lang={lang} />
+      <AtLedger lang={lang} />
+      <AtFeatured lang={lang} />
+      <AtShowcase onOpen={open} lang={lang} />
+      <AtManifesto lang={lang} />
+      <AtStats lang={lang} />
+      <AtDiagnosis onOpen={open} lang={lang} />
+      <AtServices onOpen={open} lang={lang} />
+      <AtAudit onOpen={open} lang={lang} />
+      <AtSampleReport onOpen={open} lang={lang} />
+      <AtMiniQuotes lang={lang} />
+      <AtLossCalc onOpen={open} lang={lang} />
+      <AtWorkIndex onOpen={open} lang={lang} />
+      <AtProcess lang={lang} />
+      <AtPricing onOpen={open} lang={lang} />
+      <AtQuotes lang={lang} />
+      <AtFaq lang={lang} />
+      <AtFinalCta onOpen={open} lang={lang} />
+      <AtModal open={modalOpen} onClose={close} />
+      <AtStickyCta onOpen={open} lang={lang} />
     </div>
   );
 };

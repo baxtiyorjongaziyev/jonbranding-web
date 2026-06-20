@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import ClientEnhancementsLoader from '@/components/layout/client-enhancements-loader';
 import { LenisProvider } from '@/components/layout/lenis-provider';
+import ScrollDepthTracker from '@/components/layout/scroll-depth-tracker';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -22,6 +23,7 @@ const MainLayout: FC<MainLayoutProps> = ({
   <LenisProvider>
     <div className="flex min-h-screen flex-col bg-secondary/50" suppressHydrationWarning>
       {children}
+      <ScrollDepthTracker />
       <ClientEnhancementsLoader
         leadMagnetDictionary={leadMagnetDictionary}
         headerDictionary={headerDictionary}

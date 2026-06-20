@@ -13,6 +13,7 @@ export interface Testimonial {
     quote: string;
     videoUrl?: string;
     audioUrl?: string;
+    rating?: number;
 }
 
 export interface Brand {

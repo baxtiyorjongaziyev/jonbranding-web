@@ -1,8 +1,4 @@
 {
-  "meta": {
-    "title": "Jon.Branding | Professional Brending Agentligi",
-    "description": "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding."
-  },
   "header": {
     "portfolio": "Portfolio",
     "founder": "Asoschi",
@@ -33,6 +29,8 @@
     "lang_en": "English",
     "ai": "AI Yordamchi",
     "consultation_short": "Audit olish",
+    "about": "Haqimizda",
+    "contacts": "Aloqa",
     "online_brief": "Onlayn-brief"
   },
   "footer": {
@@ -143,6 +141,8 @@
     },
     "links": {
       "home": "Bosh sahifa",
+      "about": "Haqimizda",
+      "contact": "Aloqa",
       "quiz": "Brending testi",
       "portfolio": "Portfolio",
       "process": "Ish jarayoni",
@@ -1539,6 +1539,10 @@
       "desc": "Uzum, Wildberries, Ozon va Yandex Market uchun yuqori konversiyali mahsulot rasmlari dizayni. Chegirmalar va qo'shimcha xizmatlar.",
       "cta": "Kartochka Narxlari va Kalkulyator"
     }
+  },
+  "meta": {
+    "title": "Jon.Branding | Professional Brending Agentligi",
+    "description": "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding."
   },
   "atelier": {
     "nav": [

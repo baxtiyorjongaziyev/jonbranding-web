@@ -50,14 +50,16 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const currentYear = new Date().getFullYear();
   if (!dictionary) return null;
   const copy = {
-    solutions: lang === 'uz' ? 'Yechimlar' : 'Solutions',
-    resources: lang === 'uz' ? 'Resurslar' : 'Resources',
-    agency: lang === 'uz' ? 'Agentlik' : 'Agency',
-    contact_us: lang === 'uz' ? "Bog'lanish" : 'Contact',
-    explore_work: lang === 'uz' ? "Ishlarni ko'rish" : 'Explore Work',
-    read_blogs: lang === 'uz' ? "Blogni o'qish" : 'Read Blog',
-    privacy_policy_link: lang === 'uz' ? 'Maxfiylik siyosati' : 'Privacy Policy',
-    terms_of_use_link: lang === 'uz' ? 'Foydalanish shartlari' : 'Terms',
+    solutions: lang === 'uz' ? 'Yechimlar' : lang === 'ru' ? 'Решения' : lang === 'zh' ? '解决方案' : 'Solutions',
+    resources: lang === 'uz' ? 'Resurslar' : lang === 'ru' ? 'Ресурсы' : lang === 'zh' ? '资源' : 'Resources',
+    agency: lang === 'uz' ? 'Agentlik' : lang === 'ru' ? 'Агентство' : lang === 'zh' ? '机构' : 'Agency',
+    contact_us: lang === 'uz' ? "Bog'lanish" : lang === 'ru' ? 'Контакты' : lang === 'zh' ? '联系我们' : 'Contact',
+    explore_work: lang === 'uz' ? "Ishlarni ko'rish" : lang === 'ru' ? 'Смотреть работы' : lang === 'zh' ? '查看作品' : 'Explore Work',
+    read_blogs: lang === 'uz' ? "Blogni o'qish" : lang === 'ru' ? 'Читать блог' : lang === 'zh' ? '阅读博客' : 'Read Blog',
+    privacy_policy_link: lang === 'uz' ? 'Maxfiylik siyosati' : lang === 'ru' ? 'Политика конфиденциальности' : lang === 'zh' ? '隐私政策' : 'Privacy Policy',
+    terms_of_use_link: lang === 'uz' ? 'Foydalanish shartlari' : lang === 'ru' ? 'Условия использования' : lang === 'zh' ? '使用条款' : 'Terms',
+    about_us: lang === 'uz' ? 'Haqimizda' : lang === 'ru' ? 'О нас' : lang === 'zh' ? '关于我们' : 'About Us',
+    contacts_page: lang === 'uz' ? 'Aloqa' : lang === 'ru' ? 'Контакты' : lang === 'zh' ? '联系我们' : 'Contact',
     ...dictionary,
   };
   const getLocalizedPath = (path: string) => {
@@ -136,7 +138,8 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/#portfolio')} className="hover:text-white transition-colors">{copy.portfolio}</Link></li>
               <li><Link href={getLocalizedPath('/#founder')} className="hover:text-white transition-colors">{copy.founder}</Link></li>
-              <li><Link href={getLocalizedPath('/#process')} className="hover:text-white transition-colors">{copy.process}</Link></li>
+              <li><Link href={getLocalizedPath('/haqimizda')} className="hover:text-white transition-colors">{copy.about_us}</Link></li>
+              <li><Link href={getLocalizedPath('/aloqa')} className="hover:text-white transition-colors">{copy.contacts_page}</Link></li>
               <li><Link href={getLocalizedPath('/#faq')} className="hover:text-white transition-colors">{copy.faq}</Link></li>
             </ul>
           </div>

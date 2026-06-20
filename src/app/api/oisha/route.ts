@@ -35,7 +35,8 @@ export async function GET(request: Request) {
     }
     try {
         const res = await fetch(
-            `${OISHA_API_URL}/api/chat/history/${userId}?secret_key=${OISHA_SECRET}`
+            `${OISHA_API_URL}/api/chat/history/${userId}`,
+            { headers: { 'X-Secret-Key': OISHA_SECRET } }
         );
         const data = await res.json();
         return NextResponse.json(data, { status: res.ok ? 200 : res.status });
@@ -60,8 +61,11 @@ export async function POST(request: Request) {
     try {
         const res = await fetch(`${OISHA_API_URL}/api/chat/send`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user_id, text, secret_key: OISHA_SECRET }),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Secret-Key': OISHA_SECRET,
+            },
+            body: JSON.stringify({ user_id, text }),
         });
         const data = await res.json();
         return NextResponse.json(data, { status: res.ok ? 200 : res.status });
