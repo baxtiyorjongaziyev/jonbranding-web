@@ -12,7 +12,7 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const slugs = ['den-aroma', 'savod', 'fidda', 'boyarin'];
+  const slugs = ['den-aroma', 'savod', 'fidda', 'boyarin', 'arfadel', 'beyaz', 'enros', 'diletta'];
   const params: { lang: string; slug: string }[] = [];
   
   ['uz', 'ru', 'en', 'zh'].forEach((lang) => {
