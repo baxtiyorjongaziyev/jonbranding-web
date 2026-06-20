@@ -59,7 +59,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtQuotes lang={lang} />
       <AtFaq lang={lang} />
       <AtFinalCta onOpen={open} lang={lang} />
-      <AtModal open={modalOpen} onClose={close} />
+      <AtModal open={modalOpen} onClose={close} lang={lang} />
       <AtStickyCta onOpen={open} lang={lang} />
     </div>
   );

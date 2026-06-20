@@ -1,9 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-interface Props { open: boolean; onClose: () => void; }
+interface Props { open: boolean; onClose: () => void; lang?: string; }
 
-export default function AtModal({ open, onClose }: Props) {
+export default function AtModal({ open, onClose, lang = 'uz' }: Props) {
   const [step, setStep] = useState(1);
   const [contact, setContact] = useState('');
   const [name, setName] = useState('');
@@ -36,7 +36,7 @@ export default function AtModal({ open, onClose }: Props) {
       await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contact, name, service, budget, source: 'at_modal', lang: 'uz' }),
+        body: JSON.stringify({ fullName: name || 'Mijoz', phone: contact, telegram: contact.startsWith('@') ? contact : undefined, role: service, budget, source: 'at_modal', lang }),
       });
     } catch {}
     setDone(true);
