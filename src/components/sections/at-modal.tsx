@@ -1,9 +1,10 @@
 'use client';
+import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 
 interface Props { open: boolean; onClose: () => void; lang?: string; }
 
-export default function AtModal({ open, onClose, lang = 'uz' }: Props) {
+const AtModal: FC<Props> = ({ open, onClose, lang = 'uz' }) => {
   const [step, setStep] = useState(1);
   const [contact, setContact] = useState('');
   const [name, setName] = useState('');
@@ -33,7 +34,6 @@ export default function AtModal({ open, onClose, lang = 'uz' }: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    gtag()?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
     setSubmitErr('');
     setSending(true);
     const trimmed = contact.trim();
@@ -62,6 +62,7 @@ export default function AtModal({ open, onClose, lang = 'uz' }: Props) {
       setSending(false);
       return;
     }
+    gtag()?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
     setSending(false);
     setDone(true);
   };
@@ -146,4 +147,6 @@ export default function AtModal({ open, onClose, lang = 'uz' }: Props) {
       </div>
     </div>
   );
-}
+};
+
+export default AtModal;

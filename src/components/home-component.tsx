@@ -21,6 +21,8 @@ import AtPricing from '@/components/sections/at-pricing';
 import AtQuotes from '@/components/sections/at-quotes';
 import AtFaq from '@/components/sections/at-faq';
 import AtFinalCta from '@/components/sections/at-final-cta';
+import AtAwards from '@/components/sections/at-awards';
+import AtRatings from '@/components/sections/at-ratings';
 import AtModal from '@/components/sections/at-modal';
 import AtStickyCta from '@/components/sections/at-sticky-cta';
 
@@ -56,6 +58,8 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtWorkIndex onOpen={open} lang={lang} />
       <AtProcess lang={lang} />
       <AtPricing onOpen={open} lang={lang} />
+      <AtAwards lang={lang} />
+      <AtRatings lang={lang} />
       <AtQuotes lang={lang} />
       <AtFaq lang={lang} />
       <AtFinalCta onOpen={open} lang={lang} />

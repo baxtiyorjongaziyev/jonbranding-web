@@ -376,7 +376,7 @@ async function sendToAmoCrm(data: any) {
 
 function buildTelegramMessage(data: any) {
   const fullName = escapeTelegramHtml(data.fullName);
-  const phone = escapeTelegramHtml(data.phone);
+  const phone = data.phone ? escapeTelegramHtml(data.phone) : null;
   const telegram = data.telegram
     ? `@${escapeTelegramHtml(String(data.telegram).replace('@', ''))}`
     : 'Nomalum';
@@ -387,8 +387,7 @@ function buildTelegramMessage(data: any) {
 <b>Yangi lead: Jon.Branding</b>
 
 <b>Mijoz:</b> ${fullName}
-<b>Telefon:</b> ${phone}
-<b>Telegram:</b> ${telegram}
+${phone ? `<b>Telefon:</b> ${phone}\n` : ''}<b>Telegram:</b> ${telegram}
 
 <b>Rol:</b> ${escapeTelegramHtml(data.role || 'Kiritilmagan')}
 <b>Oborot:</b> ${escapeTelegramHtml(data.revenue || 'Kiritilmagan')}
@@ -474,7 +473,7 @@ export async function POST(request: Request) {
             `Sabab: ${escapeTelegramHtml(reason)}`,
             `Backup: ${queued ? 'Firestore queue saqlandi' : 'Firestore queue xato'}`,
             `Mijoz: ${escapeTelegramHtml(fullName)}`,
-            `Telefon: ${escapeTelegramHtml(phone)}`,
+            ...(phone ? [`Telefon: ${escapeTelegramHtml(phone)}`] : []),
           ].join('\n'),
         });
       } catch (telegramError) {
