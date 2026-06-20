@@ -11,3 +11,7 @@
 ## 2024-05-25 - Pausing Continuous Intervals with useInView
 **Learning:** Using Framer Motion's `useInView` to pause continuous polling/intervals (like `setInterval`) when a component is off-screen is a great performance optimization to reduce background React re-renders. However, when doing this, it is critical that the tracked element (`ref`) is ALWAYS rendered. Returning `null` early (e.g., while waiting for data) prevents the ref from attaching and permanently breaks the visibility observer.
 **Action:** Always render a placeholder or skeleton with the tracked `ref` attached instead of returning `null` when loading components that use `useInView` for performance optimizations.
+
+## 2026-06-20 - Replace native scroll with useMotionValueEvent
+**Learning:** In a codebase heavily utilizing Framer Motion, using native `window.addEventListener('scroll')` along with internal component state (`useState`) causes unnecessary React re-renders and potential layout thrashing, hurting performance. Additionally, not providing an SSR safe-check during mount can trigger hydration errors.
+**Action:** Replaced native scroll listeners with Framer Motion's `useMotionValueEvent` and `useScroll`. Used `useCallback` for the scroll handlers to prevent unnecessary function recreations, and added an initial effect with a `typeof window !== 'undefined'` check to set correct initial state before scrolling occurs.
