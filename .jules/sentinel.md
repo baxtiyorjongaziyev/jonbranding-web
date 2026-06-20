@@ -18,3 +18,8 @@
 **Vulnerability:** External links using `target="_blank"` were missing `rel="noopener"` and `rel="noreferrer"`.
 **Learning:** Missing these attributes on `target="_blank"` links can lead to reverse tabnabbing vulnerabilities, where the newly opened page can exploit the `window.opener` object to redirect the original page to a malicious site.
 **Prevention:** Always add `rel="noopener noreferrer"` when using `target="_blank"`.
+
+## 2024-05-18 - Fix XSS in JSON-LD `<script>` Injection and Edge crypto incompatibility
+**Vulnerability:** `JSON.stringify` was used directly inside `dangerouslySetInnerHTML` for injecting JSON-LD `<script>` tags, and standard Node.js `crypto.timingSafeEqual` was used for comparison which is often not supported in Cloudflare Edge environments.
+**Learning:** `JSON.stringify` does not escape HTML characters like `<`, `>`, `&`, or `'`. Injecting untrusted JSON directly into a script tag using `dangerouslySetInnerHTML` can lead to Cross-Site Scripting (XSS). Node.js built-in `crypto` may fail in edge environments.
+**Prevention:** Use a custom sanitization function `safeJsonStringify` to escape HTML entities and replace `crypto.timingSafeEqual` with a custom constant-time bitwise XOR comparison that works across environments.

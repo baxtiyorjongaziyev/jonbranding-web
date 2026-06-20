@@ -8,6 +8,7 @@ import Script from 'next/script';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
+import { safeJsonStringify } from '@/lib/security';
 
 
 // Data for pricing tiers
@@ -291,12 +292,12 @@ export default function SotuvchiKartochkaPricingPage() {
       <Script
         id="product-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ProductSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonStringify(ProductSchema) }}
       />
       <Script
         id="faq-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FaqSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonStringify(FaqSchema) }}
       />
         <main className="bg-slate-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-200 pt-20">
             <section className="py-12 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
