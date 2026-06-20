@@ -7,7 +7,7 @@ import { getDb } from '@/lib/firebase-admin';
 
 const formSchema = z.object({
     fullName: z.string().min(2, 'Name is too short').max(100),
-    phone: z.string().min(7, 'Phone is too short').max(30),
+    phone: z.string().min(7, 'Phone is too short').max(30).optional(),
     telegram: z.string().optional(),
     role: z.string().optional(),
     revenue: z.string().optional(),
@@ -22,6 +22,9 @@ const formSchema = z.object({
     gaClientId: z.string().optional(),
     pageLocation: z.string().optional(),
     ctaSource: z.string().optional(),
+}).refine(data => data.phone || data.telegram, {
+    message: 'Either phone or telegram is required',
+    path: ['phone'],
 });
 
 const UZS_TO_USD_RATE = 1 / 12700;

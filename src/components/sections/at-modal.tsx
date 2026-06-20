@@ -32,11 +32,20 @@ export default function AtModal({ open, onClose, lang = 'uz' }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     gtag()?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
+    const isTg = contact.startsWith('@');
     try {
       await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName: name || 'Mijoz', phone: contact, telegram: contact.startsWith('@') ? contact : undefined, role: service, budget, source: 'at_modal', lang }),
+        body: JSON.stringify({
+          fullName: name || 'Mijoz',
+          ...(isTg ? {} : { phone: contact }),
+          telegram: isTg ? contact : undefined,
+          role: service,
+          budget,
+          source: 'at_modal',
+          lang,
+        }),
       });
     } catch {}
     setDone(true);
