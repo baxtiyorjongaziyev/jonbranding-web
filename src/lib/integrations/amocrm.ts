@@ -21,8 +21,8 @@ async function readTokensFromFirestore(): Promise<TokenData | null> {
 }
 
 async function writeTokensToFirestore(data: TokenData): Promise<void> {
-  memoryToken = data;
   await getDb().doc(TOKENS_DOC).set(data);
+  memoryToken = data;
 }
 
 async function exchangeRefreshToken(refreshToken: string): Promise<TokenData> {

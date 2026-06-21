@@ -6,7 +6,7 @@ export default function ScrollDepthTracker() {
 
   useEffect(() => {
     const thresholds = [25, 50, 75, 90];
-    const gtag = (window as { gtag?: (...a: unknown[]) => void }).gtag;
+    const getGtag = () => (window as { gtag?: (...a: unknown[]) => void }).gtag;
 
     const onScroll = () => {
       const doc = document.documentElement;
@@ -16,7 +16,7 @@ export default function ScrollDepthTracker() {
       for (const t of thresholds) {
         if (pct >= t && !reached.current.has(t)) {
           reached.current.add(t);
-          gtag?.('event', 'scroll_depth', { percent: t, event_category: 'engagement', non_interaction: true });
+          getGtag()?.('event', 'scroll_depth', { percent: t, event_category: 'engagement', non_interaction: true });
         }
       }
     };

@@ -36,7 +36,7 @@ export async function GET(request: Request) {
     try {
         const res = await fetch(
             `${OISHA_API_URL}/api/chat/history/${userId}`,
-            { headers: { 'X-Secret-Key': OISHA_SECRET } }
+            { headers: { 'X-Secret-Key': OISHA_SECRET }, signal: AbortSignal.timeout(10_000) }
         );
         const data = await res.json();
         return NextResponse.json(data, { status: res.ok ? 200 : res.status });
@@ -66,6 +66,7 @@ export async function POST(request: Request) {
                 'X-Secret-Key': OISHA_SECRET,
             },
             body: JSON.stringify({ user_id, text }),
+            signal: AbortSignal.timeout(10_000),
         });
         const data = await res.json();
         return NextResponse.json(data, { status: res.ok ? 200 : res.status });
