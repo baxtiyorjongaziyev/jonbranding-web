@@ -90,7 +90,6 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
-  if (pathnameWithoutLocale === '/') return null;
 
   const isHomepage = pathnameWithoutLocale === '/';
   const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka');
