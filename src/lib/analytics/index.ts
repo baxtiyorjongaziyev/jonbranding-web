@@ -1,6 +1,6 @@
 'use client';
 
-const ADS_CONVERSION_ID = process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-17674872079';
+const ADS_CONVERSION_ID = process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-389056476';
 export const DEFAULT_GA_ID = 'G-BTSGJQLMMV';
 
 export type AnalyticsEvent = {
