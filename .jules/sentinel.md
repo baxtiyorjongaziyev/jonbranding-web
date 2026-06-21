@@ -23,3 +23,8 @@
 **Vulnerability:** `JSON.stringify` was used directly inside `dangerouslySetInnerHTML` for injecting JSON-LD `<script>` tags, and standard Node.js `crypto.timingSafeEqual` was used for comparison which is often not supported in Cloudflare Edge environments.
 **Learning:** `JSON.stringify` does not escape HTML characters like `<`, `>`, `&`, or `'`. Injecting untrusted JSON directly into a script tag using `dangerouslySetInnerHTML` can lead to Cross-Site Scripting (XSS). Node.js built-in `crypto` may fail in edge environments.
 **Prevention:** Use a custom sanitization function `safeJsonStringify` to escape HTML entities and replace `crypto.timingSafeEqual` with a custom constant-time bitwise XOR comparison that works across environments.
+
+## 2024-05-24 - Timing Attack & Info Leak in API Route
+**Vulnerability:** The portfolio sync endpoint (`src/app/api/portfolio-sync/route.ts`) used a standard inequality operator (`!==`) for comparing secret tokens, making it susceptible to timing attacks. Furthermore, the global catch block leaked internal error details (`error.message`) in the response body on a 500 status.
+**Learning:** Standard string comparison operators fail early when characters don't match, allowing attackers to guess secrets by measuring response times. Returning internal error objects exposes system structure or internal dependencies.
+**Prevention:** Always use a constant-time comparison utility (like `safeCompare`) for secrets and ensure API routes return generic messages (e.g., 'Internal server error') on global catches, keeping detailed logs only on the server.

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parsePortfolioMetadata } from '@/lib/gemini';
+import { safeCompare } from '@/lib/security';
 
 // Initialize Sanity client with write access token
 const sanityWriteClient = createClient({
@@ -33,7 +34,8 @@ async function handleSync(request: NextRequest) {
       );
     }
 
-    if (secret !== cronSecret) {
+    // SECURITY: Use constant-time comparison to prevent timing attacks when verifying secrets
+    if (!secret || !safeCompare(secret, cronSecret)) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized secret token' },
         { status: 401 }
@@ -81,11 +83,9 @@ async function handleSync(request: NextRequest) {
 
         // 3. List files inside folder
         const files = await listFiles(folder.id);
-        const imageFiles = files.filter(f => f.mimeType.startsWith('image/'));
-        const textFiles = files.filter(f => 
-          f.mimeType.startsWith('text/') || 
-          f.name.endsWith('.txt') || 
-          f.name.endsWith('.md')
+        const imageFiles = files.filter((f) => f.mimeType.startsWith('image/'));
+        const textFiles = files.filter(
+          (f) => f.mimeType.startsWith('text/') || f.name.endsWith('.txt') || f.name.endsWith('.md')
         );
 
         if (imageFiles.length === 0) {
@@ -200,9 +200,6 @@ async function handleSync(request: NextRequest) {
     });
   } catch (error) {
     console.error('[portfolio-sync] Global sync error:', error);
-    return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : String(error) },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
