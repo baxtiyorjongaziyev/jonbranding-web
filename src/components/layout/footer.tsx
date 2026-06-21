@@ -45,7 +45,6 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const pathname = usePathname();
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   if (pathnameWithoutLocale === '/pro-preview') return null;
-  if (pathnameWithoutLocale === '/') return null;
 
   const currentYear = new Date().getFullYear();
   if (!dictionary) return null;

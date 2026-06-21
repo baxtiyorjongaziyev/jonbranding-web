@@ -113,7 +113,10 @@ const AtRatings: FC<Props> = ({ lang = 'uz' }) => {
 
             {/* Rating org cards */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-              {l.logos.map((logo, i) => (
+              {l.logos.map((logo, i) => {
+                const c = COLORS[i % COLORS.length];
+                const initials = INITIALS[i % INITIALS.length];
+                return (
                 <div key={logo.nm} style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -129,22 +132,22 @@ const AtRatings: FC<Props> = ({ lang = 'uz' }) => {
                   <div style={{
                     position: 'absolute', left: 0, top: 0, bottom: 0,
                     width: 3,
-                    background: COLORS[i],
+                    background: c,
                     borderRadius: '14px 0 0 14px',
                   }} />
 
                   {/* Initials badge */}
                   <div style={{
                     width: 38, height: 38, borderRadius: 9, flexShrink: 0,
-                    background: `${COLORS[i]}12`,
-                    border: `1px solid ${COLORS[i]}28`,
+                    background: `${c}12`,
+                    border: `1px solid ${c}28`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontWeight: 700, fontSize: 11,
-                    color: COLORS[i],
+                    color: c,
                     letterSpacing: '0.04em',
                     fontFamily: 'var(--font-mono)',
                   }}>
-                    {INITIALS[i]}
+                    {initials}
                   </div>
 
                   <div style={{ flex: 1, minWidth: 0 }}>
@@ -164,11 +167,12 @@ const AtRatings: FC<Props> = ({ lang = 'uz' }) => {
 
                   {/* Verified badge */}
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-                    <circle cx="12" cy="12" r="10" fill={`${COLORS[i]}18`}/>
-                    <path d="M8 12l3 3 5-5" stroke={COLORS[i]} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="12" cy="12" r="10" fill={`${c}18`}/>
+                    <path d="M8 12l3 3 5-5" stroke={c} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
