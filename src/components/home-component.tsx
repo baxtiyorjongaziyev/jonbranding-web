@@ -1,6 +1,6 @@
 'use client';
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AtMasthead from '@/components/sections/at-masthead';
 import AtHero from '@/components/sections/at-hero';
 import AtMarquee from '@/components/sections/at-marquee';
@@ -30,6 +30,35 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
   const [modalOpen, setModalOpen] = useState(false);
   const open = () => setModalOpen(true);
   const close = () => setModalOpen(false);
+
+  // Chuqur scroll'da (85%) lead modalini sessiyada bir marta avtomatik ochish
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const KEY = 'at_modal_auto_popup_v1';
+    if (sessionStorage.getItem(KEY)) return;
+    let fired = false;
+    const onScroll = () => {
+      if (fired) return;
+      const doc = document.documentElement;
+      const ratio = (window.scrollY + window.innerHeight) / doc.scrollHeight;
+      if (ratio >= 0.85) {
+        fired = true;
+        sessionStorage.setItem(KEY, '1');
+        setModalOpen(true);
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Global CTA hodisalarini (mobil nav, boshqa triggerlar) Atelier modaliga yo'naltirish
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const openHandler = () => setModalOpen(true);
+    window.addEventListener('openContactModal', openHandler);
+    return () => window.removeEventListener('openContactModal', openHandler);
+  }, []);
 
   return (
     <div
