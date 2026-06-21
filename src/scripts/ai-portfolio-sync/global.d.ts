@@ -7,5 +7,5 @@ declare module 'telegraf' {
   }
 }
 declare module '../../services/portfolio-bot/src/workflow.js' {
-    export function runWorkflow(): Promise<void>;
+  export function runWorkflow(): Promise<void>;
 }
