@@ -11,6 +11,7 @@
     ".open-next",
     ".wrangler",
     "node_modules",
-    "services"
+    "services",
+    "src/scripts"
   ]
 }
