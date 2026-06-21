@@ -1,37 +1,69 @@
 'use client';
+import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 
-interface Props { open: boolean; onClose: () => void; }
+interface Props { open: boolean; onClose: () => void; lang?: string; }
 
-export default function AtModal({ open, onClose }: Props) {
+const AtModal: FC<Props> = ({ open, onClose, lang = 'uz' }) => {
   const [step, setStep] = useState(1);
   const [contact, setContact] = useState('');
   const [name, setName] = useState('');
   const [service, setService] = useState('Bepul mini-tashxis');
   const [budget, setBudget] = useState('Bepul — mini-tashxis');
   const [contactErr, setContactErr] = useState('');
+  const [submitErr, setSubmitErr] = useState('');
+  const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     if (open) {
-      setStep(1); setDone(false); setContactErr(''); setContact(''); setName('');
+      setStep(1); setDone(false); setContactErr(''); setSubmitErr(''); setSending(false); setContact(''); setName('');
       (window as { gtag?: (...a: unknown[]) => void }).gtag?.('event', 'modal_open', { event_category: 'engagement' });
     }
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  const g = typeof window !== 'undefined' ? (window as { gtag?: (...a: unknown[]) => void }).gtag : undefined;
+  const gtag = () => (window as { gtag?: (...a: unknown[]) => void }).gtag;
 
   const goToStep2 = () => {
     if (!validateStep1()) return;
-    g?.('event', 'modal_step2', { event_category: 'engagement' });
+    gtag()?.('event', 'modal_step2', { event_category: 'engagement' });
     setStep(2);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    g?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
+    setSubmitErr('');
+    setSending(true);
+    const trimmed = contact.trim();
+    const isTg = trimmed.startsWith('@');
+    try {
+      const res = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: name || 'Mijoz',
+          ...(isTg ? {} : { phone: trimmed }),
+          telegram: isTg ? trimmed : undefined,
+          role: service,
+          budget,
+          source: 'at_modal',
+          lang,
+        }),
+      });
+      if (!res.ok) {
+        setSubmitErr("Yuborishda xatolik. Telegram orqali yozing yoki qayta urinib ko'ring.");
+        setSending(false);
+        return;
+      }
+    } catch {
+      setSubmitErr("Tarmoq xatosi. Telegram orqali yozing yoki qayta urinib ko'ring.");
+      setSending(false);
+      return;
+    }
+    gtag()?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
+    setSending(false);
     setDone(true);
   };
 
@@ -107,11 +139,14 @@ export default function AtModal({ open, onClose }: Props) {
                 </div>
               </div>
             </div>
-            <button type="submit" className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-3 transition-all hover:-translate-y-0.5" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>Yuborish ↗</button>
+            {submitErr && <p className="text-xs mb-3 text-center" style={{ color: 'var(--at-red)' }}>{submitErr}</p>}
+            <button type="submit" disabled={sending} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-3 transition-all hover:-translate-y-0.5 disabled:opacity-60" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>{sending ? 'Yuborilmoqda…' : 'Yuborish ↗'}</button>
             <button type="button" onClick={()=>setStep(1)} className="w-full text-sm text-center py-2" style={{ color: 'var(--at-muted)' }}>← Orqaga</button>
           </form>
         )}
       </div>
     </div>
   );
-}
+};
+
+export default AtModal;
