@@ -380,7 +380,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                   gtag('config', gaId);
-                  gtag('config', 'AW-17674872079');
+                  gtag('config', '${process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-389056476'}');
                 };
 
                 // 3. Microsoft Clarity
