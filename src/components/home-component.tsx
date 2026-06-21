@@ -16,13 +16,13 @@ import AtSampleReport from '@/components/sections/at-sample-report';
 import AtMiniQuotes from '@/components/sections/at-mini-quotes';
 import AtLossCalc from '@/components/sections/at-loss-calc';
 import AtWorkIndex from '@/components/sections/at-work-index';
+import AtAwards from '@/components/sections/at-awards';
+import AtRatings from '@/components/sections/at-ratings';
 import AtProcess from '@/components/sections/at-process';
 import AtPricing from '@/components/sections/at-pricing';
 import AtQuotes from '@/components/sections/at-quotes';
 import AtFaq from '@/components/sections/at-faq';
 import AtFinalCta from '@/components/sections/at-final-cta';
-import AtAwards from '@/components/sections/at-awards';
-import AtRatings from '@/components/sections/at-ratings';
 import AtModal from '@/components/sections/at-modal';
 import AtStickyCta from '@/components/sections/at-sticky-cta';
 
@@ -56,10 +56,10 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtMiniQuotes lang={lang} />
       <AtLossCalc onOpen={open} lang={lang} />
       <AtWorkIndex onOpen={open} lang={lang} />
-      <AtProcess lang={lang} />
-      <AtPricing onOpen={open} lang={lang} />
       <AtAwards lang={lang} />
       <AtRatings lang={lang} />
+      <AtProcess lang={lang} />
+      <AtPricing onOpen={open} lang={lang} />
       <AtQuotes lang={lang} />
       <AtFaq lang={lang} />
       <AtFinalCta onOpen={open} lang={lang} />
