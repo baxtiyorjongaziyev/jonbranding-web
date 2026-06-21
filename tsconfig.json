@@ -43,6 +43,6 @@
     ".wrangler",
     "node_modules",
     "services",
-    "src/scripts"
+
   ]
 }
