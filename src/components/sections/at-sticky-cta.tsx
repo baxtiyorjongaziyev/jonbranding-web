@@ -46,6 +46,7 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
   const { scrollY } = useScroll();
 
   const handleScroll = (y: number) => {
+    if (typeof window === 'undefined') return;
     const h = window.innerHeight;
     setShow(y > h * 0.6);
     const sections: Stage[] = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];

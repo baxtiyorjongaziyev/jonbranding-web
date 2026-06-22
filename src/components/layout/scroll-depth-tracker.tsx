@@ -7,6 +7,7 @@ export default function ScrollDepthTracker() {
   const { scrollYProgress } = useScroll();
 
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (typeof window === 'undefined') return;
     const thresholds = [25, 50, 75, 90];
     const getGtag = () => (window as { gtag?: (...a: unknown[]) => void }).gtag;
 
