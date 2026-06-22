@@ -50,7 +50,7 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@sanity/image-url": "^2.1.1",
-    "@sanity/vision": "5.26.0",
+    "@sanity/vision": "6.1.0",
     "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
