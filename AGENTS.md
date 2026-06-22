@@ -8,6 +8,10 @@
 - **Stack**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS, Sanity CMS, Vercel
 - **GitHub**: `baxtiyorjongaziyev/jonbranding-web`
 
+## Locks
+
+- None
+
 ## Buyruqlar
 
 ```bash

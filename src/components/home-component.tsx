@@ -17,7 +17,6 @@ import AtMiniQuotes from '@/components/sections/at-mini-quotes';
 import AtLossCalc from '@/components/sections/at-loss-calc';
 import AtWorkIndex from '@/components/sections/at-work-index';
 import AtAwards from '@/components/sections/at-awards';
-import AtRatings from '@/components/sections/at-ratings';
 import AtProcess from '@/components/sections/at-process';
 import AtPricing from '@/components/sections/at-pricing';
 import AtQuotes from '@/components/sections/at-quotes';
@@ -57,7 +56,6 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtLossCalc onOpen={open} lang={lang} />
       <AtWorkIndex onOpen={open} lang={lang} />
       <AtAwards lang={lang} />
-      <AtRatings lang={lang} />
       <AtProcess lang={lang} />
       <AtPricing onOpen={open} lang={lang} />
       <AtQuotes lang={lang} />

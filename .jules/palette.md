@@ -1,4 +1,4 @@
+## 2024-06-17 - Added Focus Visible States to Mobile Menu
 
-## 2024-05-18 - Ensure Custom Lightbox Controls Are Accessible
-**Learning:** Custom UI controls within lightboxes and galleries (like next/prev or close buttons), often constructed from raw `<button>` elements, frequently lack `type="button"`, ARIA labels, and explicit focus-visibility styling, making them difficult or impossible to use for keyboard navigators and screen readers.
-**Action:** When implementing or updating custom gallery/lightbox components, always ensure navigation controls have clear `aria-label`s, `type="button"`, `aria-hidden="true"` on inner icons, and explicit `focus-visible` utility classes for keyboard navigation.
+**Learning:** Mobile-specific interactive elements (like hamburger menus, off-canvas close buttons, and inner quick actions) are often built with purely touch interactions in mind, leading to missing `focus-visible` utility classes and broken keyboard accessibility. In Next.js/Tailwind codebases, this means keyboard users cannot perceive focus when using the Tab key.
+**Action:** When working on mobile components, always add explicit `focus-visible` states (e.g., `focus-visible:ring-primary`, `focus-visible:ring-offset-2`). Do not rely on default browser focus rings which are often suppressed by reset stylesheets or `outline-none`.

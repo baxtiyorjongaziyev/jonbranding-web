@@ -11,7 +11,7 @@ const t = {
     bodyStrong: '100% pulni qaytaramiz.',
     cta: 'Bepul mini-tashxis olish ↗',
     stats: [
-      { k: 'Bu oyda', v: '4', s: '/6 joy qoldi' },
+      { k: 'Bu oyda', v: '← 6', s: ' joy qoldi' },
       { k: 'Tashxis muddati', v: '14', s: ' kun ichida' },
       { k: 'Mini-tashxis', v: '30', s: ' daqiqa' },
     ],
@@ -24,7 +24,7 @@ const t = {
     bodyStrong: 'вернём 100%.',
     cta: 'Бесплатная мини-диагностика ↗',
     stats: [
-      { k: 'В этом месяце', v: '4', s: '/6 мест' },
+      { k: 'В этом месяце', v: '← 6', s: ' мест осталось' },
       { k: 'Срок диагностики', v: '14', s: ' дней' },
       { k: 'Мини-диагностика', v: '30', s: ' мин' },
     ],
@@ -37,7 +37,7 @@ const t = {
     bodyStrong: '100% money back.',
     cta: 'Free mini-diagnosis ↗',
     stats: [
-      { k: 'This month', v: '4', s: '/6 spots left' },
+      { k: 'This month', v: '← 6', s: ' spots left' },
       { k: 'Diagnosis timeline', v: '14', s: ' days' },
       { k: 'Mini-diagnosis', v: '30', s: ' min' },
     ],
@@ -50,7 +50,7 @@ const t = {
     bodyStrong: '100%退款。',
     cta: '免费迷你诊断 ↗',
     stats: [
-      { k: '本月', v: '4', s: '/6个名额' },
+      { k: '本月', v: '← 6', s: ' 个名额' },
       { k: '诊断时限', v: '14', s: ' 天' },
       { k: '迷你诊断', v: '30', s: ' 分钟' },
     ],

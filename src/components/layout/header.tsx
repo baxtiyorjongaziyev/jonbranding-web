@@ -93,7 +93,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   const isHomepage = pathnameWithoutLocale === '/';
   const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka');
-  const useDarkHeaderText = isDarkPage ? false : (isHomepage ? scrolled : true);
+  const useDarkHeaderText = !isDarkPage;
 
   const navItems = [
     { href: getLocalizedPath('/portfolio'), label: dictionary.portfolio },
@@ -136,7 +136,17 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
         className={cn(
           'fixed left-0 right-0 z-50 flex flex-col items-center transition-[top] duration-300 ease-out'
         )}
-        style={{ top: visible ? (dictionary.urgencyBadge && !scrolled ? 40 : 0) : -120 }}
+        style={{
+          top: visible
+            ? !scrolled
+              ? dictionary.urgencyBadge
+                ? 40
+                : isHomepage
+                ? 37
+                : 0
+              : 0
+            : -120,
+        }}
         suppressHydrationWarning
       >
         <div
