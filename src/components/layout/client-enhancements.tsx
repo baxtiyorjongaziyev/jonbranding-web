@@ -105,6 +105,8 @@ export default function ClientEnhancements({
 
   const handleOpenModal = useCallback(async (detail?: { section?: string; ctaText?: string; source?: string }) => {
     if (typeof window === 'undefined') return;
+    const pathWithoutLocale = window.location.pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
+    if (pathWithoutLocale === '/') return;
 
     let summary = '';
     let finalPrice = 0;

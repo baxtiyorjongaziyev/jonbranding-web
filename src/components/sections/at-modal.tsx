@@ -75,6 +75,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz' }) => {
           gaClientId,
           pageLocation,
           ctaSource: 'at_modal',
+          totalPrice: value,
         }),
       });
       result = await res.json().catch(() => ({}));
