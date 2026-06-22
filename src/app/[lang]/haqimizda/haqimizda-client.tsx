@@ -1,6 +1,7 @@
 'use client';
 import type { FC } from 'react';
 import Image from 'next/image';
+import AtRatings from '@/components/sections/at-ratings';
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
@@ -227,6 +228,9 @@ const HaqimizClient: FC<Props> = ({ lang = 'uz' }) => {
           </div>
         </div>
       </section>
+
+      {/* Ratings */}
+      <AtRatings lang={lang} />
 
       {/* Founder */}
       <section className="py-16 md:py-24 border-b border-[var(--at-line)]">
