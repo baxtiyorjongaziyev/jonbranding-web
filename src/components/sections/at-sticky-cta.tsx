@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 interface Props { onOpen: () => void; lang?: string; }
@@ -42,23 +43,29 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
   const [stage, setStage] = useState<Stage>('belgilar');
   const variants = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
 
+  const { scrollY } = useScroll();
+
+  const handleScroll = (y: number) => {
+    const h = window.innerHeight;
+    setShow(y > h * 0.6);
+    const sections: Stage[] = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
+    let active: Stage = 'belgilar';
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (el && y + 200 >= el.offsetTop) active = id;
+    }
+    setStage(active);
+  };
+
   useEffect(() => {
-    const handler = () => {
-      const y = window.scrollY;
-      const h = window.innerHeight;
-      setShow(y > h * 0.6);
-      const sections: Stage[] = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
-      let active: Stage = 'belgilar';
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el && y + 200 >= el.offsetTop) active = id;
-      }
-      setStage(active);
-    };
-    handler();
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
+    if (typeof window !== 'undefined') {
+      handleScroll(window.scrollY);
+    }
   }, []);
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    handleScroll(latest);
+  });
 
   const v = variants[stage];
 
