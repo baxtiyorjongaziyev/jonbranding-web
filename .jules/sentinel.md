@@ -23,3 +23,8 @@
 **Vulnerability:** `JSON.stringify` was used directly inside `dangerouslySetInnerHTML` for injecting JSON-LD `<script>` tags, and standard Node.js `crypto.timingSafeEqual` was used for comparison which is often not supported in Cloudflare Edge environments.
 **Learning:** `JSON.stringify` does not escape HTML characters like `<`, `>`, `&`, or `'`. Injecting untrusted JSON directly into a script tag using `dangerouslySetInnerHTML` can lead to Cross-Site Scripting (XSS). Node.js built-in `crypto` may fail in edge environments.
 **Prevention:** Use a custom sanitization function `safeJsonStringify` to escape HTML entities and replace `crypto.timingSafeEqual` with a custom constant-time bitwise XOR comparison that works across environments.
+
+## 2026-06-23 - Timing Attacks in API Routes
+**Vulnerability:** API routes comparing secrets using standard inequality operators (e.g. `!==`) are vulnerable to timing attacks.
+**Learning:** Standard string comparison operators return early when a mismatched character is found, leaking the length of the matching prefix through execution time.
+**Prevention:** Always use a constant-time comparison utility, such as `safeCompare` from `@/lib/security`, when verifying secrets or tokens.
