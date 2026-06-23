@@ -57,7 +57,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             whileHover={{ y: -5 }}
             className="h-full relative pt-12"
         >
-            <div className="absolute top-[38px] left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
+            <div className="absolute top-7 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex justify-center">
                 {recommended && !isVip && (
                     <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
                         {dictionary.recommended || "TAVSIYA ETILADI"}
