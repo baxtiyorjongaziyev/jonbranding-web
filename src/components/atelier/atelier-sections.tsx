@@ -18,8 +18,12 @@ interface SectionProps {
 }
 
 /* ── MASTHEAD ──────────────────────────────────── */
+import { useInView } from 'framer-motion';
+
 export const ATMasthead: FC = () => {
   const [time, setTime] = useState('');
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
 
   useEffect(() => {
     const tick = () => {
@@ -39,7 +43,7 @@ export const ATMasthead: FC = () => {
   }, [isInView]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="masthead">
+    <div ref={ref} className="masthead">
       <div className="wrap">
         <div className="masthead-row">
           <div className="masthead-left">
@@ -1852,7 +1856,7 @@ export const ATQuotes: FC<ATQuotesProps> = ({
     try {
       const parsed = new URL(url);
       const hostname = parsed.hostname.toLowerCase();
-      if (!hostname.includes('vimeo.com')) return '';
+      if (hostname !== 'vimeo.com' && !hostname.endsWith('.vimeo.com')) return '';
       const parts = parsed.pathname.split('/').filter(Boolean);
       const videoIndex = parts.indexOf('video');
       return videoIndex >= 0 ? parts[videoIndex + 1] || '' : parts[0] || '';
