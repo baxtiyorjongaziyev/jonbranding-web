@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parsePortfolioMetadata } from '@/lib/gemini';
+import { safeCompare } from '@/lib/security';
 
 // Initialize Sanity client with write access token
 const sanityWriteClient = createClient({
@@ -33,7 +34,7 @@ async function handleSync(request: NextRequest) {
       );
     }
 
-    if (secret !== cronSecret) {
+    if (!secret || !safeCompare(secret, cronSecret)) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized secret token' },
         { status: 401 }
