@@ -1,9 +1,12 @@
 'use client';
 import type { FC } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useInView } from 'framer-motion';
 
 const AtMasthead: FC = () => {
   const [time, setTime] = useState('');
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
 
   useEffect(() => {
     const update = () => {
@@ -17,12 +20,16 @@ const AtMasthead: FC = () => {
       );
     };
     update();
+    if (!isInView) return;
     const id = setInterval(update, 30_000);
     return () => clearInterval(id);
-  }, []);
+  }, [isInView]);
 
   return (
-    <div className="border-b border-[var(--at-line)] bg-[var(--at-bg)] text-[var(--at-muted)] py-2.5 px-5 md:px-8">
+    <div
+      ref={ref}
+      className="border-b border-[var(--at-line)] bg-[var(--at-bg)] text-[var(--at-muted)] py-2.5 px-5 md:px-8"
+    >
       <div className="max-w-[1320px] mx-auto flex items-center justify-between">
         <span className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest">
           Jon · Atelier  |  Toshkent · 41.3°N 69.3°E  |  {time || '——:——'} TST
