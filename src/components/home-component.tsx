@@ -24,8 +24,10 @@ import AtFaq from '@/components/sections/at-faq';
 import AtFinalCta from '@/components/sections/at-final-cta';
 import AtModal from '@/components/sections/at-modal';
 import AtStickyCta from '@/components/sections/at-sticky-cta';
+import AtPortfolio from '@/components/sections/at-portfolio';
+import AtVideo from '@/components/sections/at-video';
 
-const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[] }> = ({ lang, dictionary: _dictionary }) => {
+const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary: _dictionary, portfolioProjects = [] }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const open = () => setModalOpen(true);
   const close = () => setModalOpen(false);
@@ -46,6 +48,8 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtLedger lang={lang} />
       <AtFeatured lang={lang} />
       <AtShowcase onOpen={open} lang={lang} />
+      <AtVideo lang={lang} />
+      <AtPortfolio projects={portfolioProjects} lang={lang} />
       <AtManifesto lang={lang} />
       <AtStats lang={lang} />
       <AtDiagnosis onOpen={open} lang={lang} />

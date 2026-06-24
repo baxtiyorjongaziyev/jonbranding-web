@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import { fetchComparisons } from '@/lib/data/comparisons';
 import { fetchBrands } from '@/lib/data/brands';
 import { fetchTestimonials } from '@/lib/data/testimonials';
+import { fetchPortfolioList } from '@/lib/data/portfolio';
 
 export const revalidate = 60;
 
@@ -65,11 +66,12 @@ export default async function Page(props: Props) {
     dictionary = await getDictionary('uz');
   }
 
-  const [comparisons, brands, testimonials] = await Promise.all([
+  const [comparisons, brands, testimonials, portfolioProjects] = await Promise.all([
     fetchComparisons(),
     fetchBrands(),
     fetchTestimonials(lang),
+    fetchPortfolioList(lang),
   ]);
 
-  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={comparisons} brands={brands} testimonials={testimonials} />;
+  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={comparisons} brands={brands} testimonials={testimonials} portfolioProjects={portfolioProjects} />;
 }
