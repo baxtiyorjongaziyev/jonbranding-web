@@ -5,6 +5,10 @@
     {
       "path": "/api/portfolio-sync",
       "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/content-agent",
+      "schedule": "0 */6 * * *"
     }
   ]
 }
