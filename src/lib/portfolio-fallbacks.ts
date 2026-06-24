@@ -5,6 +5,8 @@ export interface PortfolioProject {
   client: string;
   category: 'brand-strategy' | 'logo-design' | 'brandbook' | 'corporate-style' | 'packaging' | 'naming';
   categoryLabel: string;
+  city?: string;
+  industry?: 'food' | 'fmcg' | 'fintech' | 'fashion';
   tags: string[];
   coverImage: string;
   beforeImage?: string;
@@ -15,6 +17,7 @@ export interface PortfolioProject {
   results?: { metric: string; value: string }[];
   body: { heading: string; paragraph: string }[];
   galleryImages?: string[];
+  featured?: boolean;
   order: number;
 }
 

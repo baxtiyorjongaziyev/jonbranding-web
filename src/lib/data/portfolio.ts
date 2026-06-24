@@ -8,12 +8,15 @@ const LIST_QUERY = `
     "slug": slug.current,
     client,
     category,
+    city,
+    industry,
     tags,
     "coverImage": coverImage.asset->url,
     "beforeImage": beforeImage.asset->url,
     "afterImage": afterImage.asset->url,
     description,
     results,
+    featured,
     order
   }
 `;
