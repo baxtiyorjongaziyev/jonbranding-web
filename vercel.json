@@ -1,4 +1,10 @@
 {
   "buildCommand": "next build --webpack",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "crons": [
+    {
+      "path": "/api/portfolio-sync",
+      "schedule": "0 */6 * * *"
+    }
+  ]
 }

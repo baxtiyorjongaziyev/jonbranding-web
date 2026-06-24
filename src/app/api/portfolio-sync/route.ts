@@ -22,20 +22,22 @@ export async function POST(request: NextRequest) {
 
 async function handleSync(request: NextRequest) {
   try {
-    // 1. Authorize the sync request
+    // 1. Authorize the sync request (secret param OR Vercel cron auth)
     const secret = request.nextUrl.searchParams.get('secret');
-    const cronSecret = process.env.AMOCRM_CRON_SECRET;
+    const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET;
+    const authHeader = request.headers.get('authorization');
+    const isVercelCron = authHeader === `Bearer ${process.env.CRON_SECRET}`;
 
-    if (!cronSecret) {
+    if (!cronSecret && !isVercelCron) {
       return NextResponse.json(
-        { success: false, error: 'AMOCRM_CRON_SECRET environment variable is not configured' },
+        { success: false, error: 'No auth configured' },
         { status: 500 }
       );
     }
 
-    if (secret !== cronSecret) {
+    if (!isVercelCron && secret !== cronSecret) {
       return NextResponse.json(
-        { success: false, error: 'Unauthorized secret token' },
+        { success: false, error: 'Unauthorized' },
         { status: 401 }
       );
     }
