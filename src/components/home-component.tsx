@@ -1,12 +1,12 @@
 'use client';
 import type { FC } from 'react';
-import { useState } from 'react';
-import AtMasthead from '@/components/sections/at-masthead';
+import { useState, useMemo } from 'react';
 import AtHero from '@/components/sections/at-hero';
 import AtMarquee from '@/components/sections/at-marquee';
 import AtLedger from '@/components/sections/at-ledger';
 import AtFeatured from '@/components/sections/at-featured';
 import AtShowcase from '@/components/sections/at-showcase';
+import AtVideo from '@/components/sections/at-video';
 import AtManifesto from '@/components/sections/at-manifesto';
 import AtStats from '@/components/sections/at-stats';
 import AtDiagnosis from '@/components/sections/at-diagnosis';
@@ -24,13 +24,22 @@ import AtFaq from '@/components/sections/at-faq';
 import AtFinalCta from '@/components/sections/at-final-cta';
 import AtModal from '@/components/sections/at-modal';
 import AtStickyCta from '@/components/sections/at-sticky-cta';
-import AtPortfolio from '@/components/sections/at-portfolio';
-import AtVideo from '@/components/sections/at-video';
+import { ATGallery } from '@/components/atelier/atelier-sections';
 
-const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary: _dictionary, portfolioProjects = [] }) => {
+const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary, portfolioProjects = [] }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const open = () => setModalOpen(true);
   const close = () => setModalOpen(false);
+
+  const heroImages = useMemo(() => {
+    return portfolioProjects
+      .filter((p: any) => p.coverImage)
+      .map((p: any) => ({
+        src: p.coverImage,
+        name: p.title?.split(' ')[0] || p.client,
+        year: '2026',
+      }));
+  }, [portfolioProjects]);
 
   return (
     <div
@@ -42,14 +51,15 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
         WebkitFontSmoothing: 'antialiased',
       }}
     >
-      <AtMasthead />
-      <AtHero onOpen={open} lang={lang} />
+      <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} />
       <AtMarquee lang={lang} />
       <AtLedger lang={lang} />
       <AtFeatured lang={lang} />
       <AtShowcase onOpen={open} lang={lang} />
       <AtVideo lang={lang} />
-      <AtPortfolio projects={portfolioProjects} lang={lang} />
+      <div className="atelier-theme" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
+        <ATGallery dictionary={dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
+      </div>
       <AtManifesto lang={lang} />
       <AtStats lang={lang} />
       <AtDiagnosis onOpen={open} lang={lang} />

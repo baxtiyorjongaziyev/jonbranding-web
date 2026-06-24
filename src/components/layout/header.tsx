@@ -141,8 +141,6 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
             ? !scrolled
               ? dictionary.urgencyBadge
                 ? 40
-                : isHomepage
-                ? 37
                 : 0
               : 0
             : -120,

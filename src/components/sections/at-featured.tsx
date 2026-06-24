@@ -1,6 +1,7 @@
 'use client';
 import type { FC } from 'react';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 interface Props { lang?: string; }
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
@@ -52,16 +53,28 @@ const t = {
   },
 } as const;
 
-const FEATURED = {
-  name: 'ARFADEL',
-  city: 'Toshkent',
-  year: '2026',
-  image: '/images/cms/arfadel-brand.png',
-};
+const CASES = [
+  { name: 'ARFADEL', city: 'Toshkent', year: '2026', image: '/images/cms/arfadel-brand.png', color: '#1A1210' },
+  { name: 'Beyaz', city: 'Toshkent', year: '2026', image: '/images/cms/beyaz-gold.jpg', color: '#2C3A2A' },
+  { name: 'Boyarin', city: 'Toshkent', year: '2026', image: '/images/cms/boyarin-hozir.png', color: '#0A1C3A' },
+  { name: 'Enros', city: 'Toshkent', year: '2025', image: '/images/cms/enros-logo-1.png', color: '#0D0D1A' },
+];
+
+const INTERVAL_MS = 4000;
 
 const AtFeatured: FC<Props> = ({ lang = 'uz' }) => {
   const l = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
-  const c = FEATURED;
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIdx((prev) => (prev + 1) % CASES.length);
+    }, INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, []);
+
+  const c = CASES[idx];
+
   return (
     <section
       className="relative overflow-hidden z-[2]"
@@ -69,19 +82,27 @@ const AtFeatured: FC<Props> = ({ lang = 'uz' }) => {
       style={{ background: '#0E1015', color: '#F4F1E8' }}
     >
       <div className="grid md:grid-cols-[1.1fr_1fr] min-h-[480px] md:min-h-[680px]">
-        {/* Image side */}
-        <div className="relative min-h-[320px] md:min-h-0 overflow-hidden bg-[#1A1210]">
-          <Image
-            src={c.image}
-            alt={c.name}
-            fill
-            sizes="(max-width: 768px) 100vw, 55vw"
-            className="object-cover object-center"
-            priority
-          />
+        {/* Image side — crossfade */}
+        <div className="relative min-h-[320px] md:min-h-0 overflow-hidden" style={{ background: c.color }}>
+          {CASES.map((cs, i) => (
+            <div
+              key={cs.name}
+              className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+              style={{ opacity: i === idx ? 1 : 0 }}
+            >
+              <Image
+                src={cs.image}
+                alt={cs.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 55vw"
+                className="object-cover object-center"
+                priority={i === 0}
+              />
+            </div>
+          ))}
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
           <div
-            className="absolute top-6 left-6 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] flex gap-[18px]"
+            className="absolute top-6 left-6 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] flex gap-[18px] z-10"
             style={{ color: 'rgba(255,255,255,.75)' }}
           >
             <span>{l.caseLabel} · {c.year}</span>
@@ -89,6 +110,20 @@ const AtFeatured: FC<Props> = ({ lang = 'uz' }) => {
               <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#4FB07A' }} />
               {l.status}
             </span>
+          </div>
+
+          {/* Dots */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {CASES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIdx(i)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  i === idx ? 'bg-[#E0744A] scale-125' : 'bg-white/30 hover:bg-white/50'
+                }`}
+                aria-label={`Show ${CASES[i].name}`}
+              />
+            ))}
           </div>
         </div>
 
@@ -103,7 +138,7 @@ const AtFeatured: FC<Props> = ({ lang = 'uz' }) => {
           </span>
 
           <h2
-            className="font-bold leading-[0.92]"
+            className="font-bold leading-[0.92] transition-all duration-500"
             style={{ fontSize: 'clamp(48px, 6vw, 96px)', letterSpacing: '-0.04em' }}
           >
             {c.name}

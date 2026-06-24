@@ -39,6 +39,24 @@ export const portfolio = defineType({
       },
     }),
     defineField({
+      name: 'city',
+      title: 'Shahar',
+      type: 'string',
+    }),
+    defineField({
+      name: 'industry',
+      title: 'Soha',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Oziq-ovqat', value: 'food' },
+          { title: 'FMCG', value: 'fmcg' },
+          { title: 'Fintech', value: 'fintech' },
+          { title: 'Moda', value: 'fashion' },
+        ],
+      },
+    }),
+    defineField({
       name: 'tags',
       title: 'Teglar',
       type: 'array',

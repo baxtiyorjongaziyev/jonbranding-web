@@ -1,9 +1,19 @@
 'use client';
 import type { FC } from 'react';
 import Image from 'next/image';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 
-interface Props { onOpen: () => void; lang?: string; }
+interface PortfolioImage {
+  src: string;
+  name: string;
+  year: string;
+}
+
+interface Props {
+  onOpen: () => void;
+  lang?: string;
+  portfolioImages?: PortfolioImage[];
+}
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
@@ -74,10 +84,30 @@ const translations = {
   },
 } as const;
 
-const AtHero: FC<Props> = ({ onOpen, lang = 'uz' }) => {
+const DEFAULT_IMAGES: PortfolioImage[] = [
+  { src: '/images/cms/beyaz-gold.jpg', name: 'Beyaz', year: '2026' },
+  { src: '/images/cms/arfadel-brand.png', name: 'ARFADEL', year: '2026' },
+  { src: '/images/cms/enros-logo-1.png', name: 'Enros', year: '2025' },
+  { src: '/images/cms/boyarin-hozir.png', name: 'Boyarin', year: '2026' },
+];
+
+const INTERVAL_MS = 3500;
+
+const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
   const l = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
   const sectionRef = useRef<HTMLElement>(null);
   const [spot, setSpot] = useState({ x: -999, y: -999, visible: false });
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const images = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % images.length);
+    }, INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, [images.length]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
@@ -88,6 +118,8 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz' }) => {
   const handleMouseLeave = useCallback(() => {
     setSpot((s) => ({ ...s, visible: false }));
   }, []);
+
+  const current = images[activeIdx] || images[0];
 
   return (
     <section
@@ -160,27 +192,54 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz' }) => {
             </div>
           </div>
 
-          {/* RIGHT — real portfolio visual */}
+          {/* RIGHT — rotating portfolio visual */}
           <div className="relative hidden md:block self-end">
+            {/* Label */}
             <div
-              className="absolute top-4 left-4 z-10 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] flex gap-3 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1.5"
+              className="absolute top-4 left-4 z-10 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] flex gap-3 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1.5 transition-all duration-500"
               style={{ color: 'rgba(255,255,255,.85)' }}
             >
-              <span>Beyaz · 2026</span>
+              <span>{current.name} · {current.year}</span>
               <span className="text-[#C2552A]">{l.portfolioBadge}</span>
             </div>
-            <div
-              className="rounded-t-2xl overflow-hidden"
-              style={{ height: 500 }}
-            >
-              <Image
-                src="/images/cms/beyaz-gold.jpg"
-                alt="Beyaz premium brend — Jon Branding"
-                width={400}
-                height={500}
-                className="w-full h-full object-cover object-center"
-              />
+
+            {/* Image carousel */}
+            <div className="rounded-t-2xl overflow-hidden relative" style={{ height: 500 }}>
+              {images.map((img, i) => (
+                <div
+                  key={img.src + i}
+                  className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                  style={{ opacity: i === activeIdx ? 1 : 0 }}
+                >
+                  <Image
+                    src={img.src}
+                    alt={`${img.name} — Jon Branding`}
+                    fill
+                    sizes="400px"
+                    className="object-cover object-center"
+                    priority={i === 0}
+                  />
+                </div>
+              ))}
             </div>
+
+            {/* Dots */}
+            {images.length > 1 && (
+              <div className="flex justify-center gap-2 mt-4">
+                {images.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveIdx(i)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      i === activeIdx
+                        ? 'bg-[var(--at-accent)] scale-125'
+                        : 'bg-[var(--at-line)] hover:bg-[var(--at-muted)]'
+                    }`}
+                    aria-label={`Show project ${i + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

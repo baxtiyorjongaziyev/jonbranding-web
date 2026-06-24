@@ -565,24 +565,101 @@ export const ATBrandSystem: FC<{ dictionary: any }> = ({ dictionary }) => {
 };
 
 /* ── GALLERY (editorial work grid) ─────────────── */
+interface ATGalleryProject {
+  _id: string;
+  slug: string;
+  title: string;
+  client: string;
+  category?: string;
+  city?: string;
+  industry?: string;
+  coverImage: string;
+  results?: { metric: string; value: string }[];
+  featured?: boolean;
+  order?: number;
+}
+
 interface ATGalleryProps {
   dictionary: any;
   onOpen: () => void;
   comparisons?: any[];
   lang: string;
+  projects?: ATGalleryProject[];
 }
 
-export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang }) => {
+const TILE_CLASSES = ['t-1', 't-2', 't-3', 't-4', 't-5'];
+
+const CATEGORY_LABELS: Record<string, Record<string, string>> = {
+  uz: {
+    'brand-strategy': 'Brend-strategiya',
+    'logo-design': 'Logotip dizayni',
+    'brandbook': 'Brendbuk',
+    'corporate-style': 'Firma uslubi',
+    'packaging': 'Qadoq dizayni',
+    'naming': 'Neyming',
+  },
+  ru: {
+    'brand-strategy': 'Бренд-стратегия',
+    'logo-design': 'Дизайн логотипа',
+    'brandbook': 'Брендбук',
+    'corporate-style': 'Фирменный стиль',
+    'packaging': 'Дизайн упаковки',
+    'naming': 'Нейминг',
+  },
+  en: {
+    'brand-strategy': 'Brand Strategy',
+    'logo-design': 'Logo Design',
+    'brandbook': 'Brandbook',
+    'corporate-style': 'Corporate Style',
+    'packaging': 'Packaging Design',
+    'naming': 'Naming',
+  },
+  zh: {
+    'brand-strategy': '品牌战略',
+    'logo-design': '标志设计',
+    'brandbook': '品牌手册',
+    'corporate-style': '企业风格',
+    'packaging': '包装设计',
+    'naming': '命名',
+  },
+};
+
+function getCategoryLabel(category: string | undefined, lang: string): string {
+  if (!category) return '';
+  const labels = CATEGORY_LABELS[lang] || CATEGORY_LABELS.uz;
+  return labels[category] || category;
+}
+
+function getFirstResult(project: ATGalleryProject): string {
+  if (project.results && project.results.length > 0) {
+    return project.results[0].value;
+  }
+  return '';
+}
+
+function getYear(project: ATGalleryProject): string {
+  const d = (project as any).publishedAt;
+  if (d) return new Date(d).getFullYear().toString();
+  return '2025';
+}
+
+export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projects = [] }) => {
   const [filter, setFilter] = useState('all');
-  
-  const all = [
-    { cls: 't-1', img: '/images/cms/denaroma-hozir.png',  name: 'Den Aroma',  yr: '2025', city: lang === 'uz' ? 'Samarqand' : lang === 'ru' ? 'Самарканд' : lang === 'zh' ? '撒马尔罕' : 'Samarkand', cat: 'Neyming · Qadoq', res: '+41% sotuv', dark: false, ind: 'food' },
-    { cls: 't-2', img: 'https://cdn.sanity.io/images/h6ymmj0v/production/f4763a990390239063c4cb13fa0f3d4b1446b9e0-2560x1440.jpg', name: 'Incontrol', yr: '2024', city: lang === 'uz' ? 'Toshkent' : lang === 'ru' ? 'Ташкент' : lang === 'zh' ? '塔什干' : 'Tashkent',  cat: 'Brend · Ilova',    res: '180K user',  dark: false, ind: 'fintech' },
-    { cls: 't-3', img: 'https://cdn.sanity.io/images/h6ymmj0v/production/c02f0468758f0231648b33324f08f7fa8d74ef8d-608x614.png', name: 'Barakah', yr: '2025', city: lang === 'uz' ? 'Toshkent' : lang === 'ru' ? 'Ташкент' : lang === 'zh' ? '塔什干' : 'Tashkent',  cat: 'Rebrending',       res: '3× takror',  dark: false, ind: 'food' },
-    { cls: 't-4', img: '/images/cms/boyarin-hozir.png', name: 'Boyarin', yr: '2024', city: lang === 'uz' ? 'Buxoro' : lang === 'ru' ? 'Бухара' : lang === 'zh' ? '布哈拉' : 'Bukhara',    cat: 'Qadoq · 12 SKU',   res: '+31% sotuv', dark: true,  ind: 'fmcg' },
-    { cls: 't-5', img: 'https://cdn.sanity.io/images/h6ymmj0v/production/ad4e5b4a2b5e1044accc01c93ab3b837a7b6c408-2570x1729.png', name: 'Nur Sopol',  yr: '2023', city: lang === 'uz' ? 'Rishton' : lang === 'ru' ? 'Риштан' : lang === 'zh' ? '里什坦' : 'Rishtan',   cat: 'Aydentika',        res: '2× ko\'rinish', dark: false, ind: 'fmcg' },
-    { cls: 't-6', img: '/images/cms/fidda-hozir.png',  name: 'Fidda',     yr: '2023', city: lang === 'uz' ? 'Toshkent' : lang === 'ru' ? 'Ташкент' : lang === 'zh' ? '塔什干' : 'Tashkent',  cat: 'Neyming · Aydentika', res: 'Yangi bozor', dark: true,  ind: 'fashion' },
-  ];
+
+  const items = projects
+    .filter(p => p.coverImage)
+    .map((p, i) => ({
+      cls: TILE_CLASSES[i % TILE_CLASSES.length],
+      img: p.coverImage,
+      name: p.title,
+      yr: getYear(p),
+      city: p.city || '',
+      cat: getCategoryLabel(p.category, lang),
+      res: getFirstResult(p),
+      dark: i % 2 === 1,
+      ind: p.industry || 'food',
+      slug: p.slug,
+    }));
 
   const filters = [
     { id: 'all', l: lang === 'uz' ? 'Hammasi' : lang === 'ru' ? 'Все' : lang === 'zh' ? '全部' : 'All' },
@@ -592,7 +669,9 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang }) => {
     { id: 'fashion', l: lang === 'uz' ? 'Moda' : lang === 'ru' ? 'Мода' : lang === 'zh' ? '时尚' : 'Fashion' },
   ];
 
-  const tiles = filter === 'all' ? all : all.filter(t => t.ind === filter);
+  const tiles = filter === 'all' ? items : items.filter(t => t.ind === filter);
+
+  if (items.length === 0) return null;
 
   return (
     <section className="gal" id="ishlar">
@@ -606,7 +685,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang }) => {
               <span>{dictionary?.nav?.[1]?.label || "Portfolio"}</span>
             </span>
             <p>
-              {dictionary?.gallery_lede || "2023—2025 davrida tanlangan 6 ta loyiha. Har biri real biznes, real qadoq, real natija. Sohaga qarab filterlang."}
+              {dictionary?.gallery_lede || "2023—2025 davrida tanlangan loyihalar. Har biri real biznes, real qadoq, real natija. Sohaga qarab filterlang."}
             </p>
           </div>
         </div>
@@ -636,7 +715,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang }) => {
                 <div className="name">{t.name}</div>
                 <div className="meta">
                   <span>{t.cat}</span>
-                  <span className="res">{t.res} · {t.yr}</span>
+                  {t.res && <span className="res">{t.res} · {t.yr}</span>}
                 </div>
               </div>
             </div>
