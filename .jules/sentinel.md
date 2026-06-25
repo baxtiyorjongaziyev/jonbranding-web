@@ -23,3 +23,7 @@
 **Vulnerability:** `JSON.stringify` was used directly inside `dangerouslySetInnerHTML` for injecting JSON-LD `<script>` tags, and standard Node.js `crypto.timingSafeEqual` was used for comparison which is often not supported in Cloudflare Edge environments.
 **Learning:** `JSON.stringify` does not escape HTML characters like `<`, `>`, `&`, or `'`. Injecting untrusted JSON directly into a script tag using `dangerouslySetInnerHTML` can lead to Cross-Site Scripting (XSS). Node.js built-in `crypto` may fail in edge environments.
 **Prevention:** Use a custom sanitization function `safeJsonStringify` to escape HTML entities and replace `crypto.timingSafeEqual` with a custom constant-time bitwise XOR comparison that works across environments.
+## 2026-06-25 - Fix XSS in dangerouslySetInnerHTML
+**Vulnerability:** Dynamic HTML content was injected directly into dangerouslySetInnerHTML without sanitization, leading to a potential Cross-Site Scripting (XSS) vulnerability.
+**Learning:** Always sanitize user-provided or external HTML content before injecting it into the DOM to prevent malicious scripts from executing.
+**Prevention:** Use a library like DOMPurify to sanitize HTML content before passing it to dangerouslySetInnerHTML.
