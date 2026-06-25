@@ -1,5 +1,6 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 interface Props { onOpen: () => void; lang?: string; }
@@ -41,24 +42,26 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
   const [show, setShow] = useState(false);
   const [stage, setStage] = useState<Stage>('belgilar');
   const variants = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
+  const { scrollY } = useScroll();
+
+  const handleScroll = useCallback((y: number) => {
+    if (typeof window === 'undefined') return;
+    const h = window.innerHeight;
+    setShow(y > h * 0.6);
+    const sections: Stage[] = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
+    let active: Stage = 'belgilar';
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (el && y + 200 >= el.offsetTop) active = id;
+    }
+    setStage(active);
+  }, []);
+
+  useMotionValueEvent(scrollY, "change", handleScroll);
 
   useEffect(() => {
-    const handler = () => {
-      const y = window.scrollY;
-      const h = window.innerHeight;
-      setShow(y > h * 0.6);
-      const sections: Stage[] = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
-      let active: Stage = 'belgilar';
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el && y + 200 >= el.offsetTop) active = id;
-      }
-      setStage(active);
-    };
-    handler();
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
-  }, []);
+    handleScroll(window.scrollY);
+  }, [handleScroll]);
 
   const v = variants[stage];
 
