@@ -12,7 +12,7 @@ export const client = createClient({
 
 import { createImageUrlBuilder } from '@sanity/image-url'
 
-const builder = createImageUrlBuilder(client)
+const builder = createImageUrlBuilder(client as any)
 
 export function urlFor(source: any) {
   return builder.image(source)
