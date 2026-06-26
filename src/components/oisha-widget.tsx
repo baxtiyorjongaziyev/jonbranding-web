@@ -187,6 +187,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            key="oisha-chat-window"
             id="oisha-chat-window"
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
