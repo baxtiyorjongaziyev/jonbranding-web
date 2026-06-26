@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 9002 -H 0.0.0.0",
     "build": "next build --webpack",
-    "build:netlify": "next build --webpack",
+    "build:netlify": "NODE_OPTIONS=--max-old-space-size=4096 next build --webpack",
     "build:cloudflare": "opennextjs-cloudflare build",
     "preview:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",

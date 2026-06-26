@@ -12,3 +12,7 @@ which are often suppressed by reset stylesheets or `outline-none`.
 ## 2024-08-01 - Added Focus Visible States to Accordion
 **Learning:** The Radix UI/Shadcn Accordion component's default styling might not include explicit focus states that are visible enough for keyboard users. To improve keyboard navigation accessibility, always make sure to add `focus-visible` utility classes (e.g., `focus-visible:ring-primary`, `focus-visible:ring-offset-2`) to interactive elements like `AccordionPrimitive.Trigger`.
 **Action:** When inspecting components with multiple interactive sections, check for keyboard navigation visibility. Add explicit `focus-visible` utility classes where missing to ensure accessibility.
+
+## 2024-06-26 - Add Focus Visible States to Exit Intent Popup
+**Learning:** Similar to mobile navigation items, popups like ExitIntentPopup are prone to missing `focus-visible` utility classes, which impairs keyboard navigation since focus styles are critical for determining the currently active interactive element in modals. Furthermore, custom buttons often lack appropriate aria-labels.
+**Action:** Always verify modals and popups have explicit `focus-visible` states on interactive elements and proper `aria-label` for screen readers.
