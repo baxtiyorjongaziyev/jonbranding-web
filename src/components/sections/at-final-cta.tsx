@@ -11,7 +11,7 @@ const t = {
     bodyStrong: '100% pulni qaytaramiz.',
     cta: 'Bepul mini-tashxis olish ↗',
     stats: [
-      { k: 'Bu oyda', v: '← 6', s: ' joy qoldi' },
+      { k: 'Bu oyda', v: '← 4', s: ' joy qoldi' },
       { k: 'Tashxis muddati', v: '14', s: ' kun ichida' },
       { k: 'Mini-tashxis', v: '30', s: ' daqiqa' },
     ],

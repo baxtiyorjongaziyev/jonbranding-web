@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
-interface Props { lang?: string; }
+interface Props { lang?: string; onOpen?: () => void; }
 
 const t = {
   uz: {
@@ -67,7 +67,7 @@ const t = {
   },
 } as const;
 
-export default function AtFaq({ lang = 'uz' }: Props) {
+export default function AtFaq({ lang = 'uz', onOpen }: Props) {
   const [open, setOpen] = useState<number>(0);
   const l = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
 
@@ -104,6 +104,17 @@ export default function AtFaq({ lang = 'uz' }: Props) {
             ))}
           </div>
         </div>
+
+        {onOpen && (
+          <div className="mt-10 flex flex-col sm:flex-row items-center gap-4" style={{ borderTop: '1px solid var(--at-line)', paddingTop: 28 }}>
+            <button className="btn btn-primary" onClick={onOpen}>
+              {lang === 'uz' ? 'Savolingiz bormi? Yozing' : lang === 'ru' ? 'Есть вопрос? Напишите' : lang === 'zh' ? '有问题？联系我们' : 'Got questions? Reach out'} <span className="ar">↗</span>
+            </button>
+            <span style={{ fontSize: 13, color: 'var(--at-muted)' }}>
+              {lang === 'uz' ? '24 soat ichida javob' : lang === 'ru' ? 'Ответим за 24 часа' : lang === 'zh' ? '24小时内回复' : 'Reply within 24 hours'}
+            </span>
+          </div>
+        )}
       </div>
     </section>
   );

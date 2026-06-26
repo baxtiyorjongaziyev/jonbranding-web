@@ -195,6 +195,68 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
     );
 };
 
+const DISCOUNT_DURATION_MS = 24 * 60 * 60 * 1000;
+
+const DiscountCountdown = ({ startTime, lang }: { startTime: number; lang: string }) => {
+    const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0, expired: true });
+
+    useEffect(() => {
+        const calc = () => {
+            const diff = startTime + DISCOUNT_DURATION_MS - Date.now();
+            if (diff <= 0) return { hours: 0, minutes: 0, seconds: 0, expired: true };
+            return {
+                hours: Math.floor(diff / (1000 * 60 * 60)),
+                minutes: Math.floor((diff / (1000 * 60)) % 60),
+                seconds: Math.floor((diff / 1000) % 60),
+                expired: false,
+            };
+        };
+        setTimeLeft(calc());
+        const interval = setInterval(() => setTimeLeft(calc()), 1000);
+        return () => clearInterval(interval);
+    }, [startTime]);
+
+    if (timeLeft.expired) return null;
+
+    const labels: Record<string, { title: string; hours: string; minutes: string; seconds: string; description: string }> = {
+        uz: { title: 'Chegirma muddati tugaydi:', hours: 'soat', minutes: 'daqiqa', seconds: 'soniya', description: 'Tanlangan chegirma 24 soat davomida amal qiladi' },
+        ru: { title: 'Срок скидки истекает:', hours: 'час', minutes: 'мин', seconds: 'сек', description: 'Выбранная скидка действует 24 часа' },
+        en: { title: 'Discount expires in:', hours: 'hrs', minutes: 'min', seconds: 'sec', description: 'Selected discount is valid for 24 hours' },
+        zh: { title: '折扣剩余时间：', hours: '时', minutes: '分', seconds: '秒', description: '所选折扣有效期为24小时' },
+    };
+    const t = labels[lang] || labels.uz;
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 px-5 py-4 shadow-sm"
+        >
+            <div className="flex items-center justify-center gap-2 mb-2">
+                <Clock className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
+                <span className="text-[12px] font-bold uppercase tracking-wider text-amber-700">{t.title}</span>
+            </div>
+            <div className="flex items-center justify-center gap-3">
+                <div className="flex items-center gap-1.5">
+                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(timeLeft.hours).padStart(2, '0')}</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-600">{t.hours}</span>
+                </div>
+                <span className="text-2xl font-black text-amber-400">:</span>
+                <div className="flex items-center gap-1.5">
+                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-600">{t.minutes}</span>
+                </div>
+                <span className="text-2xl font-black text-amber-400">:</span>
+                <div className="flex items-center gap-1.5">
+                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-600">{t.seconds}</span>
+                </div>
+            </div>
+            <p className="mt-2 text-center text-[11px] font-medium text-amber-600">{t.description}</p>
+        </motion.div>
+    );
+};
+
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
         namingPremium: true, logoPremium: true, urgency: false, nda: false
@@ -202,6 +264,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [discountType, setDiscountType] = useLocalStorage<'none' | 'package' | 'full'>('discountOption', 'none');
     const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
+    const [discountCountdownStart, setDiscountCountdownStart] = useLocalStorage<number | null>('discountCountdownStart', null);
     const [isClient, setIsClient] = useState(false);
     const [hasCelebrated, setHasCelebrated] = useState(false);
 
@@ -224,6 +287,26 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             setHasCelebrated(false);
         }
     }, [total.isPromoApplied, hasCelebrated]);
+
+    const isDiscountActive = total.isPromoApplied || discountType !== 'none';
+
+    useEffect(() => {
+        if (isDiscountActive) {
+            if (!discountCountdownStart) {
+                setDiscountCountdownStart(Date.now());
+            } else {
+                const elapsed = Date.now() - discountCountdownStart;
+                if (elapsed > DISCOUNT_DURATION_MS) {
+                    setDiscountType('none');
+                    setDiscountCountdownStart(null);
+                }
+            }
+        } else {
+            if (discountCountdownStart !== null) {
+                setDiscountCountdownStart(null);
+            }
+        }
+    }, [isDiscountActive, discountCountdownStart, setDiscountCountdownStart]);
 
     const handleServiceToggle = useCallback((id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
@@ -422,7 +505,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                     </div>
                                 </div>
-                                <div className="space-y-6">
+
+                                    {isDiscountActive && discountCountdownStart && (
+                                        <div className="mx-2">
+                                            <DiscountCountdown startTime={discountCountdownStart} lang={lang} />
+                                        </div>
+                                    )}
+
+                                    <div className="space-y-6">
                                     <div className="space-y-2">
                                         <Label className="ml-4 text-[13px] font-bold uppercase tracking-widest text-slate-500">{translations.promo_code_label || "Promokod"}</Label>
                                         <div className="relative">
@@ -454,7 +544,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
 
                                     {!total.isPromoApplied && (
-                                        <div className="space-y-2">
+                                        <div className="space-y-3">
                                             <Label className="ml-4 text-[13px] font-bold uppercase tracking-widest text-slate-500">CHEGIRMALAR</Label>
                                             <DynamicToggle id="discount-tier" options={discountOptions} selected={discountType} onSelect={(val) => setDiscountType(val as any)} className="h-14" />
                                         </div>

@@ -1200,6 +1200,14 @@
         "package": "Package (-20%)",
         "full": "Full prepay (-28%)"
       },
+      "discountCountdown": {
+        "title": "Discount expires in",
+        "description": "Selected discount is valid for 24 hours",
+        "hours": "hours",
+        "minutes": "minutes",
+        "seconds": "seconds",
+        "expired": "Discount has expired"
+      },
       "empty_package_desc": "No services selected. Please select appropriate services.",
       "recommended": "Recommended"
     },

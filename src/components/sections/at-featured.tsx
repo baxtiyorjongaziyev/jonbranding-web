@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
-interface Props { lang?: string; }
+interface Props { lang?: string; onOpen?: () => void; }
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
 const t = {
@@ -62,7 +62,7 @@ const CASES = [
 
 const INTERVAL_MS = 4000;
 
-const AtFeatured: FC<Props> = ({ lang = 'uz' }) => {
+const AtFeatured: FC<Props> = ({ lang = 'uz', onOpen }) => {
   const l = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
   const [idx, setIdx] = useState(0);
 
@@ -193,6 +193,12 @@ const AtFeatured: FC<Props> = ({ lang = 'uz' }) => {
               </div>
             ))}
           </div>
+
+          {onOpen && (
+            <button className="btn btn-primary mt-8" onClick={onOpen}>
+              {lang === 'uz' ? 'Shunga o\'xshash natija olish' : lang === 'ru' ? 'Получить такой результат' : lang === 'zh' ? '获取类似成果' : 'Get similar results'} <span className="ar">↗</span>
+            </button>
+          )}
         </div>
       </div>
     </section>
