@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Layers, Image, ArrowRight } from 'lucide-react';
+import { Layers, Image as ImageIcon, ArrowRight } from 'lucide-react';
 import { FC } from 'react';
 
 type PricingClientProps = {
@@ -12,18 +12,19 @@ type PricingClientProps = {
 
 const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
   const t = dictionary?.pricingPage || {
-    title: "Xizmatlar va narxlar",
-    subtitle: "Kompaniyangiz va mahsulotlaringiz uchun premium brending yechimlari. Narxlar shaffof va sizning maqsadlaringizga moslashtirilgan.",
+    title: 'Xizmatlar va narxlar',
+    subtitle:
+      'Kompaniyangiz va mahsulotlaringiz uchun premium brending yechimlari. Narxlar shaffof va sizning maqsadlaringizga moslashtirilgan.',
     brandServices: {
-      title: "Asosiy Brending Xizmatlari",
+      title: 'Asosiy Brending Xizmatlari',
       desc: "Neyming, Logotip dizayni, Firma uslubi, Brendbuk, Qadoq dizayni va POSM materiallari. Paketlarni o'zingiz yig'ing.",
-      cta: "Tariflar va Paket Builderni Ochish"
+      cta: 'Tariflar va Paket Builderni Ochish',
     },
     marketplaceServices: {
-      title: "Sotuvchi Kartochkalari Dizayni",
+      title: 'Sotuvchi Kartochkalari Dizayni',
       desc: "Uzum, Wildberries, Ozon va Yandex Market uchun yuqori konversiyali mahsulot rasmlari dizayni. Chegirmalar va qo'shimcha xizmatlar.",
-      cta: "Kartochka Narxlari va Kalkulyator"
-    }
+      cta: 'Kartochka Narxlari va Kalkulyator',
+    },
   };
 
   const getLocalizedPath = (path: string) => {
@@ -34,17 +35,19 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
   return (
     <div className="relative min-h-screen bg-[#05070f] text-white overflow-hidden py-24 sm:py-32 flex flex-col justify-center items-center">
       {/* Background glow effects */}
-      <div 
+      <div
         className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] pointer-events-none overflow-hidden select-none"
         style={{
-          background: 'radial-gradient(ellipse at 30% 30%, rgba(99, 102, 241, 0.15) 0%, rgba(10, 10, 16, 0) 70%)',
+          background:
+            'radial-gradient(ellipse at 30% 30%, rgba(99, 102, 241, 0.15) 0%, rgba(10, 10, 16, 0) 70%)',
           filter: 'blur(120px)',
         }}
       />
-      <div 
+      <div
         className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] pointer-events-none overflow-hidden select-none"
         style={{
-          background: 'radial-gradient(ellipse at 70% 70%, rgba(245, 158, 11, 0.1) 0%, rgba(10, 10, 16, 0) 70%)',
+          background:
+            'radial-gradient(ellipse at 70% 70%, rgba(245, 158, 11, 0.1) 0%, rgba(10, 10, 16, 0) 70%)',
           filter: 'blur(120px)',
         }}
       />
@@ -55,7 +58,7 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-24">
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -64,7 +67,7 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
             Pricing machine
           </motion.span>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -72,7 +75,7 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
           >
             {t.title}
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -93,23 +96,23 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
           >
             {/* Hover spotlight background */}
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/0 via-indigo-500/0 to-indigo-500/[0.03] group-hover:to-indigo-500/[0.08] transition-all duration-300 pointer-events-none" />
-            
+
             <div>
               <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6">
                 <Layers className="w-6 h-6" />
               </div>
-              
+
               <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-4">
                 {t.brandServices?.title}
               </h2>
-              
+
               <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
                 {t.brandServices?.desc}
               </p>
             </div>
 
             <div>
-              <Link 
+              <Link
                 href={getLocalizedPath('/xizmatlar#package-builder')}
                 className="inline-flex items-center justify-center w-full px-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all duration-300 shadow-lg shadow-indigo-600/20 gap-2 active:scale-[0.98] text-sm uppercase tracking-wider"
               >
@@ -128,23 +131,23 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
           >
             {/* Hover spotlight background */}
             <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/0 via-amber-500/0 to-amber-500/[0.03] group-hover:to-amber-500/[0.08] transition-all duration-300 pointer-events-none" />
-            
+
             <div>
               <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-6">
-                <Image className="w-6 h-6" alt="" aria-hidden="true" />
+                <ImageIcon className="w-6 h-6" aria-hidden="true" />
               </div>
-              
+
               <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-4">
                 {t.marketplaceServices?.title}
               </h2>
-              
+
               <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
                 {t.marketplaceServices?.desc}
               </p>
             </div>
 
             <div>
-              <Link 
+              <Link
                 href={getLocalizedPath('/pricing/sotuvchi-kartochka')}
                 className="inline-flex items-center justify-center w-full px-6 py-4 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-all duration-300 shadow-lg shadow-amber-500/20 gap-2 active:scale-[0.98] text-sm uppercase tracking-wider"
               >
