@@ -94,8 +94,9 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
             <div className="relative p-8 sm:p-10 text-center space-y-6">
               <button
                 onClick={handleDismiss}
-                className="absolute top-4 right-4 p-2 rounded-full transition-colors"
+                className="absolute top-4 right-4 p-2 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 style={{ color: 'var(--at-muted)' }}
+                aria-label="Close popup"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -114,14 +115,14 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
 
               <div className="flex flex-col gap-3">
                 <button
-                  className="btn btn-primary btn-lg w-full"
+                  className="btn btn-primary btn-lg w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   onClick={handleAccept}
                 >
                   {l.cta} <span className="ar">↗</span>
                 </button>
                 <button
                   onClick={handleDismiss}
-                  className="text-sm font-medium transition-colors"
+                  className="text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   style={{ color: 'var(--at-muted)' }}
                 >
                   {l.dismiss}
