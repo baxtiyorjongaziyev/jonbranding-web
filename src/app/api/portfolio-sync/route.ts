@@ -25,7 +25,7 @@ async function handleSync(request: NextRequest) {
   try {
     // 1. Authorize the sync request (secret param OR Vercel cron auth)
     const secret = request.nextUrl.searchParams.get('secret');
-    const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET;
+    const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET || '';
     const authHeader = request.headers.get('authorization');
     const isVercelCron = authHeader === `Bearer ${process.env.CRON_SECRET}`;
 
