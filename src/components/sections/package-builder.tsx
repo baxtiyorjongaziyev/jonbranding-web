@@ -264,9 +264,24 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [discountType, setDiscountType] = useLocalStorage<'none' | 'package' | 'full'>('discountOption', 'none');
     const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
-    const [discountCountdownStart, setDiscountCountdownStart] = useLocalStorage<number | null>('discountCountdownStart', null);
     const [isClient, setIsClient] = useState(false);
     const [hasCelebrated, setHasCelebrated] = useState(false);
+
+    const [discountCountdownStart, setDiscountCountdownStart] = useState<number | null>(() => {
+        if (typeof window === 'undefined') return null;
+        try {
+            const stored = localStorage.getItem('discountCountdownStart');
+            return stored ? JSON.parse(stored) : null;
+        } catch { return null; }
+    });
+
+    const persistCountdownStart = useCallback((val: number | null) => {
+        setDiscountCountdownStart(val);
+        try {
+            if (val === null) localStorage.removeItem('discountCountdownStart');
+            else localStorage.setItem('discountCountdownStart', JSON.stringify(val));
+        } catch {}
+    }, []);
 
     useEffect(() => { setIsClient(true); }, []);
     
@@ -293,20 +308,20 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     useEffect(() => {
         if (isDiscountActive) {
             if (!discountCountdownStart) {
-                setDiscountCountdownStart(Date.now());
+                persistCountdownStart(Date.now());
             } else {
                 const elapsed = Date.now() - discountCountdownStart;
                 if (elapsed > DISCOUNT_DURATION_MS) {
                     setDiscountType('none');
-                    setDiscountCountdownStart(null);
+                    persistCountdownStart(null);
                 }
             }
         } else {
             if (discountCountdownStart !== null) {
-                setDiscountCountdownStart(null);
+                persistCountdownStart(null);
             }
         }
-    }, [isDiscountActive, discountCountdownStart, setDiscountCountdownStart]);
+    }, [isDiscountActive, discountCountdownStart, persistCountdownStart, setDiscountType]);
 
     const handleServiceToggle = useCallback((id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
