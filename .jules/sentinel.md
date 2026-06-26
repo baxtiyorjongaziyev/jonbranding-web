@@ -37,3 +37,8 @@
 **Vulnerability:** Dynamic HTML content was injected directly into dangerouslySetInnerHTML without sanitization, leading to a potential Cross-Site Scripting (XSS) vulnerability.
 **Learning:** Always sanitize user-provided or external HTML content before injecting it into the DOM to prevent malicious scripts from executing.
 **Prevention:** Use a library like DOMPurify to sanitize HTML content before passing it to dangerouslySetInnerHTML.
+
+## 2026-06-23 - Timing Attacks in API Routes
+**Vulnerability:** API routes comparing secrets using standard inequality operators (e.g. `!==`) are vulnerable to timing attacks.
+**Learning:** Standard string comparison operators return early when a mismatched character is found, leaking the length of the matching prefix through execution time.
+**Prevention:** Always use a constant-time comparison utility, such as `safeCompare` from `@/lib/security`, when verifying secrets or tokens.
