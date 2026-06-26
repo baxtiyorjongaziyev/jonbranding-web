@@ -70,8 +70,8 @@ export default function AtModal({ open, onClose }: Props) {
             <div className="h-1 rounded-full mb-6" style={{ background: 'var(--at-line)' }}><div className="h-full rounded-full w-1/2" style={{ background: 'var(--at-accent)' }} /></div>
             <h3 className="font-bold mb-5" style={{ fontSize: 26, lineHeight: 1.1, letterSpacing: '-0.03em', color: 'var(--at-ink)' }}>Faqat telefon yoki <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--at-accent)' }}>Telegram</span> kifoya.</h3>
             <div className="flex flex-col gap-1 mb-4">
-              <label htmlFor="at-modal-contact" className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>Telefon yoki @telegram_username *</label>
-              <input id="at-modal-contact" autoFocus value={contact} onChange={e=>setContact(e.target.value)} onKeyDown={e=>{if(e.key==='Enter') goToStep2();}} placeholder="+998 90 ___ __ __  yoki  @sardor" className="rounded-xl px-4 py-3 text-sm outline-none" style={{ border: `1px solid ${contactErr?'var(--at-red)':'var(--at-line)'}`, background: 'var(--at-bg)', color: 'var(--at-ink)' }} />
+              <label className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>Telefon yoki @telegram_username *</label>
+              <input autoFocus value={contact} onChange={e=>setContact(e.target.value)} onKeyDown={e=>{if(e.key==='Enter') goToStep2();}} placeholder="+998 90 ___ __ __  yoki  @sardor" className="rounded-xl px-4 py-3 text-sm outline-none" style={{ border: `1px solid ${contactErr?'var(--at-red)':'var(--at-line)'}`, background: 'var(--at-bg)', color: 'var(--at-ink)' }} />
               {contactErr && <span className="text-xs" style={{ color: 'var(--at-red)' }}>{contactErr}</span>}
             </div>
             <button onClick={goToStep2} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 transition-all hover:-translate-y-0.5" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>Davom etish ↗</button>
@@ -89,19 +89,19 @@ export default function AtModal({ open, onClose }: Props) {
             <h3 className="font-bold mb-5" style={{ fontSize: 22, lineHeight: 1.1, letterSpacing: '-0.03em', color: 'var(--at-ink)' }}>Bir nechta savol — yaxshiroq tayyorlanamiz.</h3>
             <div className="flex flex-col gap-4 mb-5">
               <div className="flex flex-col gap-1">
-                <label htmlFor="at-modal-name" className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>Ismingiz</label>
-                <input id="at-modal-name" value={name} onChange={e=>setName(e.target.value)} placeholder="Sardor Toshmatov" className="rounded-xl px-4 py-3 text-sm outline-none" style={{ border: '1px solid var(--at-line)', background: 'var(--at-bg)', color: 'var(--at-ink)' }} />
+                <label className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>Ismingiz</label>
+                <input value={name} onChange={e=>setName(e.target.value)} placeholder="Sardor Toshmatov" className="rounded-xl px-4 py-3 text-sm outline-none" style={{ border: '1px solid var(--at-line)', background: 'var(--at-bg)', color: 'var(--at-ink)' }} />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="at-modal-service" className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>Tashxis turi</label>
-                  <select id="at-modal-service" value={service} onChange={e=>setService(e.target.value)} className="rounded-xl px-3 py-3 text-sm outline-none" style={{ border: '1px solid var(--at-line)', background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
+                  <label className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>Tashxis turi</label>
+                  <select value={service} onChange={e=>setService(e.target.value)} className="rounded-xl px-3 py-3 text-sm outline-none" style={{ border: '1px solid var(--at-line)', background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
                     <option>Bepul mini-tashxis</option><option>To&apos;liq tashxis (4.8M)</option><option>Tashxis + Yo&apos;l xaritasi (12M)</option><option>Hali aniq emas</option>
                   </select>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="at-modal-budget" className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>Byudjet</label>
-                  <select id="at-modal-budget" value={budget} onChange={e=>setBudget(e.target.value)} className="rounded-xl px-3 py-3 text-sm outline-none" style={{ border: '1px solid var(--at-line)', background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
+                  <label className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>Byudjet</label>
+                  <select value={budget} onChange={e=>setBudget(e.target.value)} className="rounded-xl px-3 py-3 text-sm outline-none" style={{ border: '1px solid var(--at-line)', background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
                     <option>Bepul — mini-tashxis</option><option>4—5M</option><option>10—15M</option><option>Hali aniq emas</option>
                   </select>
                 </div>
