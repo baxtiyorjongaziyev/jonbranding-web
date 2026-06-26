@@ -2,7 +2,7 @@
 
 import { FC, useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
-import { useScroll, useMotionValueEvent } from 'framer-motion';
+import { useScroll, useMotionValueEvent, useInView } from 'framer-motion';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
 import { PlayCircle, Pause, Volume2, X, Star } from 'lucide-react';
 import { ATMock } from './atelier-mocks';
@@ -16,6 +16,8 @@ interface SectionProps {
 /* ── MASTHEAD ──────────────────────────────────── */
 export const ATMasthead: FC = () => {
   const [time, setTime] = useState('');
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
 
   useEffect(() => {
     const tick = () => {
@@ -29,12 +31,13 @@ export const ATMasthead: FC = () => {
       setTime(tashkent);
     };
     tick();
+    if (!isInView) return;
     const id = setInterval(tick, 30000);
     return () => clearInterval(id);
-  }, []);
+  }, [isInView]);
 
   return (
-    <div className="masthead">
+    <div ref={ref} className="masthead">
       <div className="wrap">
         <div className="masthead-row">
           <div className="masthead-left">
