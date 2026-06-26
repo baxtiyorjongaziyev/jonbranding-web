@@ -88,7 +88,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz' }) => {
             <h3 className="font-bold" style={{ fontSize: 32, lineHeight: 1.05, letterSpacing: '-0.03em', color: 'var(--at-ink)' }}>Qabul qildik,<br /><span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--at-accent)' }}>rahmat.</span></h3>
             <p style={{ fontSize: 15, color: 'var(--at-ink-2)', lineHeight: 1.6 }}>24 soat ichida siz bilan bog&apos;lanamiz. Yoki darhol Telegram&apos;da yozing — <strong style={{ color: 'var(--at-ink)' }}>tezroq javob.</strong></p>
             <div className="flex flex-col gap-3">
-              <a href="https://t.me/jonbranding" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 font-semibold rounded-full py-4 text-sm" style={{ background: 'var(--at-accent)', color: '#fff' }}>✉ Telegram&apos;da yozish</a>
+              <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 font-semibold rounded-full py-4 text-sm" style={{ background: 'var(--at-accent)', color: '#fff' }}>✉ Telegram&apos;da yozish</a>
               <button onClick={onClose} className="font-semibold rounded-full py-4 text-sm" style={{ border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}>Yopish</button>
             </div>
           </div>
@@ -107,7 +107,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz' }) => {
               {contactErr && <span className="text-xs" style={{ color: 'var(--at-red)' }}>{contactErr}</span>}
             </div>
             <button onClick={goToStep2} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 transition-all hover:-translate-y-0.5" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>Davom etish ↗</button>
-            <a href="https://t.me/jonbranding" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 text-sm" style={{ border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}>Yoki Telegram&apos;da darhol yozish →</a>
+            <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 text-sm" style={{ border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}>Yoki Telegram&apos;da darhol yozish →</a>
             <p className="text-center text-xs" style={{ color: 'var(--at-muted)' }}>Ma&apos;lumotlaringiz xavfsiz. Spam yo&apos;q.</p>
           </div>
         ) : (

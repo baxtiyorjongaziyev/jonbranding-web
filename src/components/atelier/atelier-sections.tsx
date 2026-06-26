@@ -1651,7 +1651,7 @@ export const ATFooter: FC<{ dictionary: any }> = ({ dictionary }) => {
           <div className="foot-cta-inner">
             <div className="foot-cta-text" dangerouslySetInnerHTML={{ __html: (dictionary?.footer_ask || "Sahifa oxirigacha tushdingiz —<br/><span class=\"it\">savol bormi?</span>").replace(/\n/g, '<br/>') }} />
             <div className="foot-cta-btns">
-              <a className="foot-cta-btn tg" href="https://t.me/jonbranding_bot" target="_blank" rel="noreferrer">
+              <a className="foot-cta-btn tg" href="https://t.me/jonbranding_bot" target="_blank" rel="noopener noreferrer">
                 {dictionary?.footer_write_tg || "Telegram'da yozish →"}
               </a>
               <a className="foot-cta-btn" href="tel:+998336450097">
