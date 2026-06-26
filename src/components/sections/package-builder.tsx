@@ -197,26 +197,47 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
 
 const DISCOUNT_DURATION_MS = 24 * 60 * 60 * 1000;
 
-const DiscountCountdown = ({ startTime, lang }: { startTime: number; lang: string }) => {
-    const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0, expired: true });
+const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) => {
+    const [display, setDisplay] = useState<{ hours: number; minutes: number; seconds: number } | null>(null);
 
     useEffect(() => {
-        const calc = () => {
-            const diff = startTime + DISCOUNT_DURATION_MS - Date.now();
-            if (diff <= 0) return { hours: 0, minutes: 0, seconds: 0, expired: true };
-            return {
-                hours: Math.floor(diff / (1000 * 60 * 60)),
-                minutes: Math.floor((diff / (1000 * 60)) % 60),
-                seconds: Math.floor((diff / 1000) % 60),
-                expired: false,
-            };
-        };
-        setTimeLeft(calc());
-        const interval = setInterval(() => setTimeLeft(calc()), 1000);
-        return () => clearInterval(interval);
-    }, [startTime]);
+        if (!active) {
+            setDisplay(null);
+            return;
+        }
 
-    if (timeLeft.expired) return null;
+        const STORAGE_KEY = 'discountCountdownStart';
+        let start = 0;
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            start = stored ? Number(stored) : 0;
+        } catch { /* ignore */ }
+
+        if (!start || start < Date.now() - DISCOUNT_DURATION_MS) {
+            start = Date.now();
+            try { localStorage.setItem(STORAGE_KEY, String(start)); } catch { /* ignore */ }
+        }
+
+        const tick = () => {
+            const diff = start + DISCOUNT_DURATION_MS - Date.now();
+            if (diff <= 0) {
+                setDisplay(null);
+                return false;
+            }
+            setDisplay({
+                hours: Math.floor(diff / 3600000),
+                minutes: Math.floor((diff / 60000) % 60),
+                seconds: Math.floor((diff / 1000) % 60),
+            });
+            return true;
+        };
+
+        tick();
+        const interval = setInterval(() => { if (!tick()) clearInterval(interval); }, 1000);
+        return () => clearInterval(interval);
+    }, [active]);
+
+    if (!display) return null;
 
     const labels: Record<string, { title: string; hours: string; minutes: string; seconds: string; description: string }> = {
         uz: { title: 'Chegirma muddati tugaydi:', hours: 'soat', minutes: 'daqiqa', seconds: 'soniya', description: 'Tanlangan chegirma 24 soat davomida amal qiladi' },
@@ -238,17 +259,17 @@ const DiscountCountdown = ({ startTime, lang }: { startTime: number; lang: strin
             </div>
             <div className="flex items-center justify-center gap-3">
                 <div className="flex items-center gap-1.5">
-                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(timeLeft.hours).padStart(2, '0')}</span>
+                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(display.hours).padStart(2, '0')}</span>
                     <span className="text-[10px] font-bold uppercase text-amber-600">{t.hours}</span>
                 </div>
                 <span className="text-2xl font-black text-amber-400">:</span>
                 <div className="flex items-center gap-1.5">
-                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(display.minutes).padStart(2, '0')}</span>
                     <span className="text-[10px] font-bold uppercase text-amber-600">{t.minutes}</span>
                 </div>
                 <span className="text-2xl font-black text-amber-400">:</span>
                 <div className="flex items-center gap-1.5">
-                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(display.seconds).padStart(2, '0')}</span>
                     <span className="text-[10px] font-bold uppercase text-amber-600">{t.seconds}</span>
                 </div>
             </div>
@@ -266,22 +287,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
     const [hasCelebrated, setHasCelebrated] = useState(false);
-
-    const [discountCountdownStart, setDiscountCountdownStart] = useState<number | null>(() => {
-        if (typeof window === 'undefined') return null;
-        try {
-            const stored = localStorage.getItem('discountCountdownStart');
-            return stored ? JSON.parse(stored) : null;
-        } catch { return null; }
-    });
-
-    const persistCountdownStart = useCallback((val: number | null) => {
-        setDiscountCountdownStart(val);
-        try {
-            if (val === null) localStorage.removeItem('discountCountdownStart');
-            else localStorage.setItem('discountCountdownStart', JSON.stringify(val));
-        } catch {}
-    }, []);
 
     useEffect(() => { setIsClient(true); }, []);
     
@@ -304,24 +309,6 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     }, [total.isPromoApplied, hasCelebrated]);
 
     const isDiscountActive = total.isPromoApplied || discountType !== 'none';
-
-    useEffect(() => {
-        if (isDiscountActive) {
-            if (!discountCountdownStart) {
-                persistCountdownStart(Date.now());
-            } else {
-                const elapsed = Date.now() - discountCountdownStart;
-                if (elapsed > DISCOUNT_DURATION_MS) {
-                    setDiscountType('none');
-                    persistCountdownStart(null);
-                }
-            }
-        } else {
-            if (discountCountdownStart !== null) {
-                persistCountdownStart(null);
-            }
-        }
-    }, [isDiscountActive, discountCountdownStart, persistCountdownStart, setDiscountType]);
 
     const handleServiceToggle = useCallback((id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
@@ -521,9 +508,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                 </div>
 
-                                    {isDiscountActive && discountCountdownStart && (
+                                    {isDiscountActive && (
                                         <div className="mx-2">
-                                            <DiscountCountdown startTime={discountCountdownStart} lang={lang} />
+                                            <DiscountCountdown active={isDiscountActive} lang={lang} />
                                         </div>
                                     )}
 
