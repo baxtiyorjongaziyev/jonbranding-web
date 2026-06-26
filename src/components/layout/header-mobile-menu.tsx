@@ -58,7 +58,7 @@ export function MobileMenu({
           <button
             aria-label={dictionary.open_menu}
             className={cn(
-              'flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+              'flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 active:scale-95',
               useDarkHeaderText
                 ? 'border-black/15 bg-white/60 text-foreground hover:bg-black/5 backdrop-blur-sm'
                 : 'border-white/20 bg-white/10 text-white hover:bg-white/18 backdrop-blur-sm'
@@ -84,7 +84,7 @@ export function MobileMenu({
             </SheetTitle>
             <button
               onClick={() => onOpenChange(false)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white active:scale-90"
               aria-label="Close menu"
             >
               <X className="h-4.5 w-4.5" />
@@ -113,7 +113,7 @@ export function MobileMenu({
                         onLinkClick(service.title);
                         onOpenChange(false);
                       }}
-                      className="group flex items-center justify-between rounded-2xl border border-white/6 bg-white/[0.04] px-4 py-3.5 transition-all duration-200 hover:border-white/12 hover:bg-white/[0.07] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                      className="group flex items-center justify-between rounded-2xl border border-white/6 bg-white/[0.04] px-4 py-3.5 transition-all duration-200 hover:border-white/12 hover:bg-white/[0.07] active:scale-[0.98]"
                     >
                       <span className="text-[15px] font-medium text-white/85 group-hover:text-white">
                         {service.title}
@@ -137,7 +137,7 @@ export function MobileMenu({
                       onLinkClick(item.label);
                       onOpenChange(false);
                     }}
-                    className="flex h-12 items-center rounded-2xl px-4 text-[17px] font-semibold text-white/75 transition-all duration-200 hover:bg-white/5 hover:text-white active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                    className="flex h-12 items-center rounded-2xl px-4 text-[17px] font-semibold text-white/75 transition-all duration-200 hover:bg-white/5 hover:text-white active:scale-[0.98]"
                   >
                     {item.label}
                   </Link>
@@ -155,7 +155,7 @@ export function MobileMenu({
                 <a
                   href="tel:+998336450097"
                   onClick={() => trackContactClick('phone', 'mobile_menu')}
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98]"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-500/15 text-green-400">
                     <Phone className="h-4 w-4" />
@@ -170,7 +170,7 @@ export function MobileMenu({
                   onClick={() => trackContactClick('telegram', 'mobile_menu')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98]"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sky-500/15 text-sky-400">
                     <Send className="h-4 w-4" />
@@ -190,7 +190,7 @@ export function MobileMenu({
                   onContactClick();
                   onOpenChange(false);
                 }}
-                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-indigo-600 px-5 py-4 text-white shadow-[0_16px_48px_-16px_rgba(27,77,255,0.65)] transition-all duration-300 hover:shadow-[0_20px_56px_-14px_rgba(27,77,255,0.75)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-indigo-600 px-5 py-4 text-white shadow-[0_16px_48px_-16px_rgba(27,77,255,0.65)] transition-all duration-300 hover:shadow-[0_20px_56px_-14px_rgba(27,77,255,0.75)] active:scale-[0.98]"
               >
                 <div className="flex flex-col">
                   <span className="text-[15px] font-black">{dictionary.free_consultation}</span>
