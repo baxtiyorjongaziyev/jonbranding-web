@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
+import { safeJsonStringify } from '@/lib/security';
 import XizmatlarClient from './xizmatlar-client';
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -79,7 +80,7 @@ const XizmatlarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
           <Script
             id="json-ld-breadcrumb-xizmatlar"
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbSchema) }}
           />
           <XizmatlarClient lang={safeLang} dictionary={dictionary} />
       </main>
