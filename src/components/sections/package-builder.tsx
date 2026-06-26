@@ -306,7 +306,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                 setDiscountCountdownStart(null);
             }
         }
-    }, [isDiscountActive, discountCountdownStart, setDiscountCountdownStart]);
+    }, [isDiscountActive, discountCountdownStart, setDiscountCountdownStart, setDiscountType]);
 
     const handleServiceToggle = useCallback((id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];

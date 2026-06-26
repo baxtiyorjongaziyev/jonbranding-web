@@ -131,7 +131,7 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
             
             <div>
               <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-6">
-                <Image className="w-6 h-6" />
+                <Image className="w-6 h-6" alt="" aria-hidden="true" />
               </div>
               
               <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-4">
