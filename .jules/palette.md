@@ -25,3 +25,7 @@ which are often suppressed by reset stylesheets or `outline-none`.
 ## 2024-05-18 - [Accessibility] Explicit IDs and ARIA labels for Custom Modals
 **Learning:** Custom interactive components like `AtModal` often lack the inherent semantic structure of standard forms, resulting in disconnected `label`/`input` pairs and icon-only close buttons lacking `aria-label`s.
 **Action:** Always verify that inputs/selects in custom dialogs have `id` attributes that strictly map to the `htmlFor` of their corresponding `label` elements, and ensure icon-only close buttons have explicit `aria-label` attributes and focus visibility styling (`focus-visible:ring-primary`).
+
+## 2025-02-12 - Framer Motion AnimatePresence Exit Animations
+**Learning:** In this project, when conditionally rendering children inside Framer Motion's `<AnimatePresence>`, the direct conditionally rendered child component MUST have a unique `key` prop. Without it, Framer Motion cannot track the component's presence lifecycle and the `exit` animation will be abruptly skipped. This was observed in floating widgets like OishaWidget.
+**Action:** Always verify that the top-level motion component inside `<AnimatePresence>` (like `<motion.div>`) has an explicit, stable `key` prop (e.g. `key="modal-name"`) when creating or fixing interactive modals and widgets.
