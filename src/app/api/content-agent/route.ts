@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/sanity/lib/client';
 import { google } from 'googleapis';
+import { safeCompare } from '@/lib/security';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 const APIFY_API_KEY = process.env.APIFY_API_KEY || '';
@@ -21,16 +22,38 @@ const sanityClient = client.withConfig({
 
 /* ── Auth ─────────────────────────────────────── */
 function verifyAuth(req: NextRequest): boolean {
+  // Fail securely if no secrets are configured
+  if (!CRON_SECRET && !AMOCRM_CRON_SECRET) {
+    return false;
+  }
+
   const auth = req.headers.get('authorization');
-  if (auth === `Bearer ${CRON_SECRET}` || auth === `Bearer ${AMOCRM_CRON_SECRET}`) return true;
+  const providedBearerToken = auth?.startsWith('Bearer ') ? auth.substring(7) : null;
   const url = new URL(req.url);
-  if (url.searchParams.get('secret') === CRON_SECRET || url.searchParams.get('secret') === AMOCRM_CRON_SECRET) return true;
-  return false;
+  const providedQuerySecret = url.searchParams.get('secret');
+
+  const providedSecret = providedBearerToken || providedQuerySecret;
+
+  if (!providedSecret) {
+    return false;
+  }
+
+  // Use timing-safe comparison
+  const isValidCronSecret = Boolean(CRON_SECRET) && safeCompare(providedSecret, CRON_SECRET);
+  const isValidAmocrmCronSecret =
+    Boolean(AMOCRM_CRON_SECRET) && safeCompare(providedSecret, AMOCRM_CRON_SECRET);
+
+  return isValidCronSecret || isValidAmocrmCronSecret;
 }
 
 /* ── Helpers ──────────────────────────────────── */
 function slugify(text: string): string {
-  return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').slice(0, 96);
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .slice(0, 96);
 }
 
 function extractDriveFolderId(text: string): string | null {
@@ -105,13 +128,21 @@ function getDriveAuth() {
   if (!saJson) throw new Error('No service account');
   saJson = saJson.trim();
   if (!saJson.startsWith('{')) {
-    try { saJson = Buffer.from(saJson, 'base64').toString('utf8'); } catch {}
+    try {
+      saJson = Buffer.from(saJson, 'base64').toString('utf8');
+    } catch {}
   }
   const key = JSON.parse(saJson);
-  return new google.auth.JWT({ email: key.client_email, key: key.private_key, scopes: ['https://www.googleapis.com/auth/drive.readonly'] });
+  return new google.auth.JWT({
+    email: key.client_email,
+    key: key.private_key,
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  });
 }
 
-async function listDriveImages(folderId: string): Promise<{ id: string; name: string; mimeType: string }[]> {
+async function listDriveImages(
+  folderId: string
+): Promise<{ id: string; name: string; mimeType: string }[]> {
   const auth = getDriveAuth();
   const drive = google.drive({ version: 'v3', auth });
   const res = await drive.files.list({
@@ -120,7 +151,9 @@ async function listDriveImages(folderId: string): Promise<{ id: string; name: st
     orderBy: 'name',
     pageSize: 50,
   });
-  return (res.data.files ?? []).filter(f => f.id && f.name).map(f => ({ id: f.id!, name: f.name!, mimeType: f.mimeType ?? 'image/jpeg' }));
+  return (res.data.files ?? [])
+    .filter((f) => f.id && f.name)
+    .map((f) => ({ id: f.id!, name: f.name!, mimeType: f.mimeType ?? 'image/jpeg' }));
 }
 
 async function downloadDriveImage(fileId: string): Promise<Buffer> {
@@ -132,16 +165,19 @@ async function downloadDriveImage(fileId: string): Promise<Buffer> {
 
 /* ── Sanity Upload ────────────────────────────── */
 async function uploadImageToSanity(buffer: Buffer, filename: string): Promise<string> {
-  const asset = await sanityClient.assets.upload('image', buffer, { filename, contentType: 'image/jpeg' });
+  const asset = await sanityClient.assets.upload('image', buffer, {
+    filename,
+    contentType: 'image/jpeg',
+  });
   return asset._id;
 }
 
-async function createPortfolioDoc(
-  parsed: AIParsed,
-  imageIds: string[]
-): Promise<string> {
+async function createPortfolioDoc(parsed: AIParsed, imageIds: string[]): Promise<string> {
   const slug = slugify(parsed.title);
-  const existing = await sanityClient.fetch<string | null>(`*[_type == 'portfolio' && slug.current == $slug][0]._id`, { slug });
+  const existing = await sanityClient.fetch<string | null>(
+    `*[_type == 'portfolio' && slug.current == $slug][0]._id`,
+    { slug }
+  );
   if (existing) return existing;
 
   const doc = await sanityClient.create({
@@ -155,7 +191,9 @@ async function createPortfolioDoc(
     tags: parsed.tags,
     description: parsed.description,
     coverImage: { _type: 'image', asset: { _type: 'reference', _ref: imageIds[0] } },
-    galleryImages: imageIds.slice(1).map(id => ({ _type: 'image', asset: { _type: 'reference', _ref: id } })),
+    galleryImages: imageIds
+      .slice(1)
+      .map((id) => ({ _type: 'image', asset: { _type: 'reference', _ref: id } })),
     results: parsed.results.map((r, i) => ({ _key: `r${i}`, metric: r.metric, value: r.value })),
     featured: false,
     publishedAt: new Date().toISOString(),
@@ -165,26 +203,37 @@ async function createPortfolioDoc(
 }
 
 /* ── Instagram (Apify) ───────────────────────── */
-interface IGPost { id: string; caption: string; timestamp: string; }
+interface IGPost {
+  id: string;
+  caption: string;
+  timestamp: string;
+}
 
 async function fetchInstagramPosts(account: string, limit: number): Promise<IGPost[]> {
   if (!APIFY_API_KEY) return [];
   try {
-    const runRes = await fetch(`https://api.apify.com/v2/acts/apify~instagram-profile-scraper/runs`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: account, resultsLimit: limit }),
-    });
+    const runRes = await fetch(
+      `https://api.apify.com/v2/acts/apify~instagram-profile-scraper/runs`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: account, resultsLimit: limit }),
+      }
+    );
     const runData = await runRes.json();
     const runId = runData?.data?.id;
     if (!runId) return [];
 
     for (let i = 0; i < 30; i++) {
-      await new Promise(r => setTimeout(r, 2000));
-      const statusRes = await fetch(`https://api.apify.com/v2/acts/apify~instagram-profile-scraper/runs/${runId}?token=${APIFY_API_KEY}`);
+      await new Promise((r) => setTimeout(r, 2000));
+      const statusRes = await fetch(
+        `https://api.apify.com/v2/acts/apify~instagram-profile-scraper/runs/${runId}?token=${APIFY_API_KEY}`
+      );
       const statusData = await statusRes.json();
       if (statusData?.data?.status === 'SUCCEEDED') {
-        const dataRes = await fetch(`https://api.apify.com/v2/acts/apify~instagram-profile-scraper/runs/${runId}/dataset/items?token=${APIFY_API_KEY}&format=json`);
+        const dataRes = await fetch(
+          `https://api.apify.com/v2/acts/apify~instagram-profile-scraper/runs/${runId}/dataset/items?token=${APIFY_API_KEY}&format=json`
+        );
         const items = await dataRes.json();
         return (items || []).map((item: any) => ({
           id: item.id || `ig_${Date.now()}`,
@@ -195,24 +244,34 @@ async function fetchInstagramPosts(account: string, limit: number): Promise<IGPo
       if (statusData?.data?.status === 'FAILED') return [];
     }
     return [];
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 /* ── Telegram Bot API ─────────────────────────── */
 async function fetchTelegramChannelPosts(channel: string, limit: number): Promise<IGPost[]> {
   if (!TELEGRAM_BOT_TOKEN) return [];
   try {
-    const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?limit=${limit}&allowed_updates=["channel_post"]`);
+    const res = await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?limit=${limit}&allowed_updates=["channel_post"]`
+    );
     const data = await res.json();
     if (!data.ok) return [];
     return (data.result || [])
-      .filter((u: any) => u.channel_post?.chat?.username?.replace('@', '') === channel.replace('@', ''))
+      .filter(
+        (u: any) => u.channel_post?.chat?.username?.replace('@', '') === channel.replace('@', '')
+      )
       .map((u: any) => ({
         id: `tg_${u.channel_post.message_id}`,
         caption: u.channel_post.text || u.channel_post.caption || '',
-        timestamp: u.channel_post.date ? new Date(u.channel_post.date * 1000).toISOString() : new Date().toISOString(),
+        timestamp: u.channel_post.date
+          ? new Date(u.channel_post.date * 1000).toISOString()
+          : new Date().toISOString(),
       }));
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 /* ── Main Handler ─────────────────────────────── */
@@ -230,13 +289,22 @@ export async function GET(req: NextRequest) {
   for (const account of IG_ACCOUNTS) {
     const posts = await fetchInstagramPosts(account, 10);
     for (const post of posts) {
-      if (!post.caption || post.caption.length < 20) { skipped++; continue; }
+      if (!post.caption || post.caption.length < 20) {
+        skipped++;
+        continue;
+      }
       try {
         const parsed = await parseWithGemini(post.caption);
-        if (!parsed.driveFolderId) { skipped++; continue; }
+        if (!parsed.driveFolderId) {
+          skipped++;
+          continue;
+        }
 
         const images = await listDriveImages(parsed.driveFolderId);
-        if (images.length === 0) { skipped++; continue; }
+        if (images.length === 0) {
+          skipped++;
+          continue;
+        }
 
         const imageIds: string[] = [];
         for (const img of images.slice(0, 20)) {
@@ -259,13 +327,22 @@ export async function GET(req: NextRequest) {
   for (const channel of TG_CHANNELS) {
     const posts = await fetchTelegramChannelPosts(channel, 10);
     for (const post of posts) {
-      if (!post.caption || post.caption.length < 20) { skipped++; continue; }
+      if (!post.caption || post.caption.length < 20) {
+        skipped++;
+        continue;
+      }
       try {
         const parsed = await parseWithGemini(post.caption);
-        if (!parsed.driveFolderId) { skipped++; continue; }
+        if (!parsed.driveFolderId) {
+          skipped++;
+          continue;
+        }
 
         const images = await listDriveImages(parsed.driveFolderId);
-        if (images.length === 0) { skipped++; continue; }
+        if (images.length === 0) {
+          skipped++;
+          continue;
+        }
 
         const imageIds: string[] = [];
         for (const img of images.slice(0, 20)) {
