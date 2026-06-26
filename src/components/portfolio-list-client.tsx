@@ -219,7 +219,7 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                             <p className="mt-2 text-sm text-gray-400 line-clamp-2 leading-relaxed">{project.description}</p>
                           </div>
                           <Link href={`/${lang}/portfolio/${project.slug}`} className="block">
-                            <Button variant="outline" className="w-full border-white/10 text-gray-300 hover:border-blue-500/50 hover:text-blue-400 hover:bg-blue-500/5 rounded-xl transition-all duration-300 text-xs font-bold tracking-wide">
+                            <Button className="w-full bg-white/5 hover:bg-blue-500/10 text-gray-300 border border-white/10 hover:border-blue-500/50 hover:text-blue-400 rounded-xl transition-all duration-300 text-xs font-bold tracking-wide">
                               {dictionary.viewCase}
                               <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                             </Button>

@@ -1383,6 +1383,14 @@
         "package": "Paket uchun (-20%)",
         "full": "To'liq to'lov uchun (-28%)"
       },
+      "discountCountdown": {
+        "title": "Chegirma muddati tugaydi",
+        "description": "Tanlangan chegirma 24 soat davomida amal qiladi",
+        "hours": "soat",
+        "minutes": "daqiqa",
+        "seconds": "soniya",
+        "expired": "Chegirma muddati tugadi"
+      },
       "empty_package_desc": "Xizmatlar tanlanmagan. Iltimos, mos xizmatlarni tanlang.",
       "recommended": "Tavsiya etiladi"
     },

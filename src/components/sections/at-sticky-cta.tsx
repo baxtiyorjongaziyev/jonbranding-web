@@ -10,7 +10,7 @@ const t: Record<Lang, Record<Stage, { num: string; text: string; cta: string }>>
   uz: {
     belgilar: { num: '§ 01', text: "Belgilarni ko'ryapsizmi?", cta: 'Tashxis →' },
     tashxis:  { num: '12/12', text: '12 mezon · 14 kun · 4.8M dan', cta: 'Boshlash →' },
-    narxlar:  { num: '4/6',   text: 'Iyul oyida 4 joy qoldi', cta: 'Buyurtma →' },
+    narxlar:  { num: '4',   text: 'Iyul oyida 4 joy qoldi', cta: 'Buyurtma →' },
     jarayon:  { num: '14',    text: '14 kun · 100% kafolat', cta: 'Tashxis →' },
     savol:    { num: '24h',   text: 'Savol bormi? 24h ichida javob', cta: 'Yozish →' },
   },

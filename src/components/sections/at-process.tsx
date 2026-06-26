@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
-interface Props { lang?: string; }
+interface Props { lang?: string; onOpen?: () => void; }
 
 const translations = {
   uz: {
@@ -145,7 +145,7 @@ const translations = {
   },
 } as const;
 
-export default function AtProcess({ lang = 'uz' }: Props) {
+export default function AtProcess({ lang = 'uz', onOpen }: Props) {
   const [open, setOpen] = useState<string | null>('01');
   const l = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
   const stepsRef = useRef<HTMLDivElement>(null);
@@ -252,6 +252,17 @@ export default function AtProcess({ lang = 'uz' }: Props) {
             </div>
           ))}
         </div>
+
+        {onOpen && (
+          <div className="mt-10 flex flex-col sm:flex-row items-center gap-4" style={{ borderTop: '1px solid var(--at-line)', paddingTop: 28 }}>
+            <button className="btn btn-primary" onClick={onOpen}>
+              {lang === 'uz' ? 'Tashxisni boshlash' : lang === 'ru' ? 'Начать диагностику' : lang === 'zh' ? '开始诊断' : 'Start diagnosis'} <span className="ar">↗</span>
+            </button>
+            <span style={{ fontSize: 13, color: 'var(--at-muted)' }}>
+              {lang === 'uz' ? '14 kun · 100% kafolat' : lang === 'ru' ? '14 дней · 100% гарантия' : lang === 'zh' ? '14天 · 100%保证' : '14 days · 100% guarantee'}
+            </span>
+          </div>
+        )}
       </div>
     </section>
   );

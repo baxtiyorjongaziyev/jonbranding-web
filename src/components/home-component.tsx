@@ -25,6 +25,8 @@ import AtFinalCta from '@/components/sections/at-final-cta';
 import AtModal from '@/components/sections/at-modal';
 import AtStickyCta from '@/components/sections/at-sticky-cta';
 import { ATGallery } from '@/components/atelier/atelier-sections';
+import ExitIntentPopup from '@/components/exit-intent-popup';
+import ScrollDepthAnalytics from '@/components/scroll-depth-analytics';
 
 const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary, portfolioProjects = [] }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -54,7 +56,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} />
       <AtMarquee lang={lang} />
       <AtLedger lang={lang} />
-      <AtFeatured lang={lang} />
+      <AtFeatured lang={lang} onOpen={open} />
       <AtShowcase onOpen={open} lang={lang} />
       <AtVideo lang={lang} />
       <div className="atelier-theme" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
@@ -70,13 +72,15 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtLossCalc onOpen={open} lang={lang} />
       <AtWorkIndex onOpen={open} lang={lang} />
       <AtAwards lang={lang} />
-      <AtProcess lang={lang} />
+      <AtProcess lang={lang} onOpen={open} />
       <AtPricing onOpen={open} lang={lang} />
       <AtQuotes lang={lang} />
-      <AtFaq lang={lang} />
+      <AtFaq lang={lang} onOpen={open} />
       <AtFinalCta onOpen={open} lang={lang} />
       <AtModal open={modalOpen} onClose={close} lang={lang} />
       <AtStickyCta onOpen={open} lang={lang} />
+      <ExitIntentPopup onOpen={open} lang={lang} />
+      <ScrollDepthAnalytics />
     </div>
   );
 };
