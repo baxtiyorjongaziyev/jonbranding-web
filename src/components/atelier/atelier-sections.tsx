@@ -1,7 +1,8 @@
 'use client';
 
-import { FC, useState, useEffect, useRef } from 'react';
+import { FC, useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
 import { PlayCircle, Pause, Volume2, X, Star } from 'lucide-react';
 import { ATMock } from './atelier-mocks';
@@ -62,13 +63,17 @@ interface ATNavProps {
 export const ATNav: FC<ATNavProps> = ({ dictionary, onOpen, theme, setTheme }) => {
   const [scroll, setScroll] = useState(false);
   const navItems = dictionary?.nav || [];
+  const { scrollY } = useScroll();
+
+  const handleScroll = useCallback((y: number) => {
+    setScroll(y > 24);
+  }, []);
+
+  useMotionValueEvent(scrollY, "change", handleScroll);
 
   useEffect(() => {
-    const on = () => setScroll(window.scrollY > 24);
-    on();
-    window.addEventListener('scroll', on);
-    return () => window.removeEventListener('scroll', on);
-  }, []);
+    handleScroll(window.scrollY);
+  }, [handleScroll]);
 
   const go = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
@@ -1728,25 +1733,27 @@ export const ATFooter: FC<{ dictionary: any }> = ({ dictionary }) => {
 export const ATStickyCta: FC<SectionProps> = ({ dictionary, onOpen }) => {
   const [show, setShow] = useState(false);
   const [stage, setStage] = useState('belgilar');
+  const { scrollY } = useScroll();
+
+  const handleScroll = useCallback((y: number) => {
+    if (typeof window === 'undefined') return;
+    const h = window.innerHeight;
+    setShow(y > h * 0.6);
+
+    const sections = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
+    let active = 'belgilar';
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (el && y + 200 >= el.offsetTop) active = id;
+    }
+    setStage(active);
+  }, []);
+
+  useMotionValueEvent(scrollY, "change", handleScroll);
 
   useEffect(() => {
-    const on = () => {
-      const y = window.scrollY;
-      const h = window.innerHeight;
-      setShow(y > h * 0.6);
-      
-      const sections = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
-      let active = 'belgilar';
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el && y + 200 >= el.offsetTop) active = id;
-      }
-      setStage(active);
-    };
-    on();
-    window.addEventListener('scroll', on, { passive: true });
-    return () => window.removeEventListener('scroll', on);
-  }, []);
+    handleScroll(window.scrollY);
+  }, [handleScroll]);
 
   const variants: Record<string, any> = {
     belgilar: { num: '§ 01', text: dictionary?.sticky_belgilar_text || "Belgilarni ko'ryapsizmi?", cta: dictionary?.sticky_belgilar_cta || "Tashxis →" },
