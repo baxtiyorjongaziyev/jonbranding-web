@@ -23,3 +23,8 @@
 **Vulnerability:** `JSON.stringify` was used directly inside `dangerouslySetInnerHTML` for injecting JSON-LD `<script>` tags, and standard Node.js `crypto.timingSafeEqual` was used for comparison which is often not supported in Cloudflare Edge environments.
 **Learning:** `JSON.stringify` does not escape HTML characters like `<`, `>`, `&`, or `'`. Injecting untrusted JSON directly into a script tag using `dangerouslySetInnerHTML` can lead to Cross-Site Scripting (XSS). Node.js built-in `crypto` may fail in edge environments.
 **Prevention:** Use a custom sanitization function `safeJsonStringify` to escape HTML entities and replace `crypto.timingSafeEqual` with a custom constant-time bitwise XOR comparison that works across environments.
+
+## 2025-02-18 - [Fix Authorization Bypass in Content Agent API]
+**Vulnerability:** The `verifyAuth` function in `src/app/api/content-agent/route.ts` used strict equality (`===`) for secret comparison, making it susceptible to timing attacks. More critically, it failed open if `CRON_SECRET` or `AMOCRM_CRON_SECRET` environment variables were not configured (evaluating to empty strings), allowing an attacker to bypass authentication by providing an empty secret parameter (e.g., `?secret=`).
+**Learning:** Hardcoded comparisons can fail open if configuration is missing and standard string comparisons are vulnerable to timing attacks. Default values or environment variable fallbacks should never result in empty strings being valid secrets.
+**Prevention:** Always implement fail-secure logic: check if the configured secrets are truthy before proceeding. Use timing-safe comparison utilities like `safeCompare` for evaluating secrets. Ensure that provided inputs are validated and not empty.
