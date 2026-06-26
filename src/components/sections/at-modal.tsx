@@ -1,8 +1,15 @@
 'use client';
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
+import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 
 interface Props { open: boolean; onClose: () => void; lang?: string; }
+
+// Budjet tanlovini taxminiy UZS qiymatga moslash — value-based bidding uchun
+const BUDGET_VALUE: Record<string, number> = {
+  '4—5M': 4500000,
+  '10—15M': 12000000,
+};
 
 const AtModal: FC<Props> = ({ open, onClose, lang = 'uz' }) => {
   const [step, setStep] = useState(1);
@@ -19,16 +26,14 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz' }) => {
     document.body.style.overflow = open ? 'hidden' : '';
     if (open) {
       setStep(1); setDone(false); setContactErr(''); setSubmitErr(''); setSending(false); setContact(''); setName('');
-      (window as { gtag?: (...a: unknown[]) => void }).gtag?.('event', 'modal_open', { event_category: 'engagement' });
+      trackEvent({ action: 'modal_open', category: 'Lead Form', label: 'Atelier Mini Audit', source: 'at_modal' });
     }
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  const gtag = () => (window as { gtag?: (...a: unknown[]) => void }).gtag;
-
   const goToStep2 = () => {
     if (!validateStep1()) return;
-    gtag()?.('event', 'modal_step2', { event_category: 'engagement' });
+    trackEvent({ action: 'modal_step2', category: 'Lead Form', label: 'Atelier Mini Audit', source: 'at_modal' });
     setStep(2);
   };
 
@@ -38,6 +43,22 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz' }) => {
     setSending(true);
     const trimmed = contact.trim();
     const isTg = trimmed.startsWith('@');
+    const eventId = generateEventId('lead');
+    const gaClientId = getGaClientId();
+    const pageLocation = typeof window !== 'undefined' ? window.location.href : undefined;
+    const value = BUDGET_VALUE[budget];
+
+    trackEvent({
+      action: 'lead_form_submitted',
+      category: 'Lead Form',
+      label: 'Atelier Mini Audit',
+      event_id: eventId,
+      form_name: 'atelier_mini_audit',
+      cta_source: 'at_modal',
+      page_location: pageLocation,
+    });
+
+    let result: { ok?: boolean; eventId?: string; error?: string } = {};
     try {
       const res = await fetch('/api/submit-form', {
         method: 'POST',
@@ -50,19 +71,40 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz' }) => {
           budget,
           source: 'at_modal',
           lang,
+          eventId,
+          gaClientId,
+          pageLocation,
+          ctaSource: 'at_modal',
+          totalPrice: value,
         }),
       });
+      result = await res.json().catch(() => ({}));
       if (!res.ok) {
+        trackEvent({ action: 'lead_form_error', category: 'Lead Form', label: 'Atelier Mini Audit', event_id: eventId, error_message: result?.error || 'server' });
         setSubmitErr("Yuborishda xatolik. Telegram orqali yozing yoki qayta urinib ko'ring.");
         setSending(false);
         return;
       }
     } catch {
+      trackEvent({ action: 'lead_form_error', category: 'Lead Form', label: 'Atelier Mini Audit', event_id: eventId, error_message: 'network' });
       setSubmitErr("Tarmoq xatosi. Telegram orqali yozing yoki qayta urinib ko'ring.");
       setSending(false);
       return;
     }
-    gtag()?.('event', 'lead_submitted', { event_category: 'conversion', service, budget });
+
+    // To'liq konversiya — GA4 generate_lead + Google Ads conversion + Meta + Amplitude (server bilan dedup)
+    trackLead({
+      source: 'at_modal',
+      value,
+      eventId: result.eventId || eventId,
+      serverTracked: true,
+      gaClientId,
+      service,
+      budget,
+      has_telegram: isTg,
+      form_name: 'atelier_mini_audit',
+      cta_source: 'at_modal',
+    });
     setSending(false);
     setDone(true);
   };
