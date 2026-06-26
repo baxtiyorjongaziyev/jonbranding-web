@@ -28,3 +28,8 @@
 **Vulnerability:** XSS vulnerability through direct JSON.stringify inside `dangerouslySetInnerHTML` for JSON-LD structured data.
 **Learning:** When using `dangerouslySetInnerHTML`, directly using `JSON.stringify` can lead to XSS attacks since it does not escape HTML-sensitive characters (like `<`, `>`, `&`, `'`).
 **Prevention:** Use a safe alternative like `safeJsonStringify` which escapes these characters.
+
+## 2025-02-18 - [Fix Authorization Bypass in Content Agent API]
+**Vulnerability:** The `verifyAuth` function in `src/app/api/content-agent/route.ts` used strict equality (`===`) for secret comparison, making it susceptible to timing attacks. More critically, it failed open if `CRON_SECRET` or `AMOCRM_CRON_SECRET` environment variables were not configured (evaluating to empty strings), allowing an attacker to bypass authentication by providing an empty secret parameter (e.g., `?secret=`).
+**Learning:** Hardcoded comparisons can fail open if configuration is missing and standard string comparisons are vulnerable to timing attacks. Default values or environment variable fallbacks should never result in empty strings being valid secrets.
+**Prevention:** Always implement fail-secure logic: check if the configured secrets are truthy before proceeding. Use timing-safe comparison utilities like `safeCompare` for evaluating secrets. Ensure that provided inputs are validated and not empty.

@@ -310,6 +310,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     const isDiscountActive = total.isPromoApplied || discountType !== 'none';
 
+
     const handleServiceToggle = useCallback((id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
         const logoGroup = ['logoVIP', 'logoPremium', 'logoStandard'];
