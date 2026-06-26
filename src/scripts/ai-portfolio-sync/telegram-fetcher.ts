@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Telegraf } from 'telegraf';
 
 export interface TelegramPost {
