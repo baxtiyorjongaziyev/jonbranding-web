@@ -335,7 +335,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           id="json-ld-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonStringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "Jon.Branding",
