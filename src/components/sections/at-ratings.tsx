@@ -117,60 +117,60 @@ const AtRatings: FC<Props> = ({ lang = 'uz' }) => {
                 const c = COLORS[i % COLORS.length];
                 const initials = INITIALS[i % INITIALS.length];
                 return (
-                <div key={logo.nm} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                  padding: '14px 16px',
-                  background: 'var(--at-paper)',
-                  border: '1px solid var(--at-line)',
-                  borderRadius: 14,
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}>
-                  {/* Left accent bar */}
-                  <div style={{
-                    position: 'absolute', left: 0, top: 0, bottom: 0,
-                    width: 3,
-                    background: c,
-                    borderRadius: '14px 0 0 14px',
-                  }} />
-
-                  {/* Initials badge */}
-                  <div style={{
-                    width: 38, height: 38, borderRadius: 9, flexShrink: 0,
-                    background: `${c}12`,
-                    border: `1px solid ${c}28`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontWeight: 700, fontSize: 11,
-                    color: c,
-                    letterSpacing: '0.04em',
-                    fontFamily: 'var(--font-mono)',
+                  <div key={logo.nm} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 12,
+                    padding: '14px 16px',
+                    background: 'var(--at-paper)',
+                    border: '1px solid var(--at-line)',
+                    borderRadius: 14,
+                    position: 'relative',
+                    overflow: 'hidden',
                   }}>
-                    {initials}
-                  </div>
-
-                  <div style={{ flex: 1, minWidth: 0 }}>
+                    {/* Left accent bar */}
                     <div style={{
-                      fontWeight: 600, fontSize: 12.5,
-                      color: 'var(--at-ink)',
-                      letterSpacing: '-0.01em', lineHeight: 1.2,
-                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                    }}>{logo.nm}</div>
-                    <div style={{
-                      fontFamily: 'var(--font-mono)', fontSize: 9,
-                      color: 'var(--at-muted)',
-                      textTransform: 'uppercase', letterSpacing: '0.07em',
-                      marginTop: 3,
-                    }}>{logo.pos}</div>
-                  </div>
+                      position: 'absolute', left: 0, top: 0, bottom: 0,
+                      width: 3,
+                      background: c,
+                      borderRadius: '14px 0 0 14px',
+                    }} />
 
-                  {/* Verified badge */}
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-                    <circle cx="12" cy="12" r="10" fill={`${c}18`}/>
-                    <path d="M8 12l3 3 5-5" stroke={c} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
+                    {/* Initials badge */}
+                    <div style={{
+                      width: 38, height: 38, borderRadius: 9, flexShrink: 0,
+                      background: `${c}12`,
+                      border: `1px solid ${c}28`,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontWeight: 700, fontSize: 11,
+                      color: c,
+                      letterSpacing: '0.04em',
+                      fontFamily: 'var(--font-mono)',
+                    }}>
+                      {initials}
+                    </div>
+
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{
+                        fontWeight: 600, fontSize: 12.5,
+                        color: 'var(--at-ink)',
+                        letterSpacing: '-0.01em', lineHeight: 1.2,
+                        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                      }}>{logo.nm}</div>
+                      <div style={{
+                        fontFamily: 'var(--font-mono)', fontSize: 9,
+                        color: 'var(--at-muted)',
+                        textTransform: 'uppercase', letterSpacing: '0.07em',
+                        marginTop: 3,
+                      }}>{logo.pos}</div>
+                    </div>
+
+                    {/* Verified badge */}
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+                      <circle cx="12" cy="12" r="10" fill={`${c}18`}/>
+                      <path d="M8 12l3 3 5-5" stroke={c} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
                 );
               })}
             </div>
