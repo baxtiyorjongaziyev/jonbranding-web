@@ -25,11 +25,11 @@ export function getSortedPostsData(lang: string = 'en'): Omit<BlogPost, 'content
     // Fallback to English if the language directory doesn't exist
     const enDirectory = path.join(postsDirectory, 'en');
      if (!fs.existsSync(enDirectory)) return [];
-     const fileNames = fs.readdirSync(enDirectory);
+     const fileNames = fs.readdirSync(enDirectory).filter(f => f.endsWith('.md'));
      return processFiles(fileNames, enDirectory);
   }
   
-  const fileNames = fs.readdirSync(langDirectory);
+  const fileNames = fs.readdirSync(langDirectory).filter(f => f.endsWith('.md'));
   return processFiles(fileNames, langDirectory);
 }
 
