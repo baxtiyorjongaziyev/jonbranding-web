@@ -23,8 +23,8 @@ export async function generateMetadata(props: PrivacyPageProps): Promise<Metadat
   return {
     title: titles[safeLang] || titles.uz,
     description: descs[safeLang] || descs.uz,
-    openGraph: { title: titles[safeLang], description: descs[safeLang] },
-    twitter: { card: 'summary_large_image', title: titles[safeLang], description: descs[safeLang] },
+    openGraph: { title: titles[safeLang], description: descs[safeLang], images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }] },
+    twitter: { card: 'summary_large_image', title: titles[safeLang], description: descs[safeLang], images: ['/images/cms/og-image.jpeg'] },
   };
 }
 
