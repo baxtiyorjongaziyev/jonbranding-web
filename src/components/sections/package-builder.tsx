@@ -240,10 +240,10 @@ const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) 
     if (!display) return null;
 
     const labels: Record<string, { title: string; hours: string; minutes: string; seconds: string; description: string }> = {
-        uz: { title: 'Chegirma muddati tugaydi:', hours: 'soat', minutes: 'daqiqa', seconds: 'soniya', description: 'Tanlangan chegirma 24 soat davomida amal qiladi' },
-        ru: { title: 'Срок скидки истекает:', hours: 'час', minutes: 'мин', seconds: 'сек', description: 'Выбранная скидка действует 24 часа' },
-        en: { title: 'Discount expires in:', hours: 'hrs', minutes: 'min', seconds: 'sec', description: 'Selected discount is valid for 24 hours' },
-        zh: { title: '折扣剩余时间：', hours: '时', minutes: '分', seconds: '秒', description: '所选折扣有效期为24小时' },
+        uz: { title: 'Chegirma muddati tugaydi:', hours: 'soat', minutes: 'daqiqa', seconds: 'soniya', description: "Ushbu chegirma faqat 24 soat ichida to'lov amalga oshirilganda taqdim etiladi." },
+        ru: { title: 'Срок скидки истекает:', hours: 'час', minutes: 'мин', seconds: 'сек', description: 'Эта скидка предоставляется только при оплате в течение 24 часов.' },
+        en: { title: 'Discount expires in:', hours: 'hrs', minutes: 'min', seconds: 'sec', description: 'This discount is only valid if payment is made within 24 hours.' },
+        zh: { title: '折扣剩余时间：', hours: '时', minutes: '分', seconds: '秒', description: '此折扣仅在24小时内付款时有效。' },
     };
     const t = labels[lang] || labels.uz;
 
