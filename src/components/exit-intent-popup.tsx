@@ -83,7 +83,7 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="relative max-w-md w-full rounded-[2rem] overflow-hidden"
+            className="relative max-w-md w-full rounded-[2rem] overflow-hidden atelier-theme"
             style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)' }}
             onClick={(e) => e.stopPropagation()}
           >
