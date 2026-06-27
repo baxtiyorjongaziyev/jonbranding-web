@@ -160,7 +160,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
 
             <h1
               className="font-bold text-[var(--at-ink)] mb-8"
-              style={{ fontSize: 'clamp(48px, 6vw, 100px)', lineHeight: 0.95, letterSpacing: '-0.04em' }}
+              style={{ fontSize: 'clamp(36px, 5vw, 72px)', lineHeight: 0.95, letterSpacing: '-0.03em' }}
             >
               <span className="block">{l.h1a}</span>
               <span className="block text-[var(--at-accent)] font-[family-name:var(--font-serif)] italic">
