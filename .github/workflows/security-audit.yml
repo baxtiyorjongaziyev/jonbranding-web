@@ -12,27 +12,31 @@ permissions:
   contents: read
 
 jobs:
-  npm-audit:
-    name: npm audit
+  pnpm-audit:
+    name: pnpm audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - uses: actions/setup-node@v6
         with:
           node-version: '20'
-          cache: npm
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Audit production dependencies
         run: |
-          npm audit --audit-level=high --omit=dev --json > npm-audit.json || true
-          node -e "const fs=require('fs'); const audit=JSON.parse(fs.readFileSync('npm-audit.json','utf8')); const m=audit.metadata?.vulnerabilities || {}; const total=Object.values(m).reduce((a,b)=>typeof b==='number'?a+b:a,0); fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## npm audit report\\n\\n' + Object.entries(m).map(([k,v])=>'- '+k+': '+v).join('\\n') + '\\n\\nTotal: '+total+'\\n'); if ((m.critical||0)>0 || (m.high||0)>0) console.log('Security advisories found. Review npm-audit.json and Dependabot alerts.');"
+          pnpm audit --audit-level=high --omit=dev --json > pnpm-audit.json || true
+          node -e "const fs=require('fs'); const audit=JSON.parse(fs.readFileSync('pnpm-audit.json','utf8')); const m=audit.metadata?.vulnerabilities || {}; const total=Object.values(m).reduce((a,b)=>typeof b==='number'?a+b:a,0); fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## pnpm audit report\\n\\n' + Object.entries(m).map(([k,v])=>'- '+k+': '+v).join('\\n') + '\\n\\nTotal: '+total+'\\n'); if ((m.critical||0)>0 || (m.high||0)>0) console.log('Security advisories found. Review pnpm-audit.json and Dependabot alerts.');"
 
       - name: Upload audit report
         uses: actions/upload-artifact@v7
         with:
-          name: npm-audit-report
-          path: npm-audit.json
+          name: pnpm-audit-report
+          path: pnpm-audit.json
