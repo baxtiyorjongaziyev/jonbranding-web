@@ -32,6 +32,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return {
     title: m.title,
     description: m.description,
+    openGraph: {
+      title: m.title,
+      description: m.description,
+      url: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/haqimizda'),
+      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }],
+    },
     alternates: {
       canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/haqimizda'),
       languages: getLocaleAlternates(BASE_URL, '/haqimizda'),

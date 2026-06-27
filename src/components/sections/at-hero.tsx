@@ -213,14 +213,14 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
                   
                   <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex justify-between items-end">
                     <div>
-                      <motion.h3 
+                      <motion.h2 
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.3, duration: 0.5 }}
                         className="text-white font-bold text-3xl md:text-5xl mb-3 tracking-tight leading-tight drop-shadow-lg"
                       >
                         {activeItem.name}
-                      </motion.h3>
+                      </motion.h2>
                       <motion.span 
                         initial={{ y: 10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
