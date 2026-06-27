@@ -9,6 +9,8 @@ type Props = {
   params: Promise<{ lang: string }>;
 };
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
@@ -23,7 +25,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 const SitemapPage = async (props: Props) => {
   const { lang } = await props.params;
-  const sortedPosts = getSortedPostsData(lang);
+  let sortedPosts: { slug: string; title: string }[] = [];
+  try { sortedPosts = getSortedPostsData(lang); } catch (e) { console.error('sitemap: getSortedPostsData failed', e); }
   const dictionary = await getDictionary(lang as Locale);
   
   const t = dictionary.sitemapPage || {
