@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { getPostData, getAllPostSlugs } from '@/lib/blog-posts';
 
@@ -33,9 +34,50 @@ export default async function BlogPostPage(props: Props) {
   const post = await getPostData(safeLang, slug);
   if (!post) notFound();
 
+  const siteUrl = 'https://www.jonbranding.uz';
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: safeLang === 'uz' ? 'Bosh sahifa' : safeLang === 'ru' ? 'Главная' : 'Home', item: `${siteUrl}/${safeLang}` },
+      { '@type': 'ListItem', position: 2, name: safeLang === 'uz' ? 'Blog' : 'Blog', item: `${siteUrl}/${safeLang}/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${siteUrl}/${safeLang}/blog/${slug}` },
+    ],
+  };
+
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description || post.title,
+    image: post.image || `${siteUrl}/images/cms/og-image.jpeg`,
+    datePublished: post.date || new Date().toISOString(),
+    dateModified: post.date || new Date().toISOString(),
+    author: {
+      '@type': 'Person',
+      name: post.author || 'Baxtiyorjon Gaziyev',
+      url: `${siteUrl}/${safeLang}/haqimizda`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Jon.Branding',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/icon.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/${safeLang}/blog/${slug}`,
+    },
+  };
+
   return (
     <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
+      <Script id="json-ld-breadcrumb-post" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <Script id="json-ld-article" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
 
       <article className="container mx-auto px-4 max-w-3xl relative z-10">
         <Link href={`/${safeLang}/blog`} className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors mb-8">

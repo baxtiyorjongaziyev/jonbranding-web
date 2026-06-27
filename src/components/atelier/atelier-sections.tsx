@@ -3,7 +3,7 @@
 import { FC, useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useScroll, useMotionValueEvent, useInView } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent, useInView } from 'framer-motion';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
 import { PlayCircle, Pause, Volume2, X, Star } from 'lucide-react';
 import { ATMock } from './atelier-mocks';
@@ -1290,20 +1290,36 @@ interface ATQuotesProps {
   testimonials?: any[];
   lang: string;
 }
-
 export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimonialsProp, lang }) => {
   const [activeVideo, setActiveVideo] = useState<any | null>(null);
   const [playingAudio, setPlayingAudio] = useState<string | null>(null);
+  const [apiTestimonials, setApiTestimonials] = useState<any[] | null>(null);
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
 
-  const list = testimonialsProp && testimonialsProp.length > 0 ? testimonialsProp : (() => {
+  useEffect(() => {
+    const cached = sessionStorage.getItem(`testimonials_${lang}`);
+    if (cached) {
+      try { setApiTestimonials(JSON.parse(cached)); return; } catch {}
+    }
+    fetch(`/api/testimonials?lang=${lang}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.testimonials?.length) {
+          setApiTestimonials(data.testimonials);
+          try { sessionStorage.setItem(`testimonials_${lang}`, JSON.stringify(data.testimonials)); } catch {}
+        }
+      })
+      .catch(() => {});
+  }, [lang]);
+
+  const list = apiTestimonials && apiTestimonials.length > 0 ? apiTestimonials : (testimonialsProp && testimonialsProp.length > 0 ? testimonialsProp : (() => {
     switch (lang) {
       case 'ru': return staticTestimonialsRu;
       case 'en': return staticTestimonialsEn;
       case 'zh': return staticTestimonialsZh;
       default: return staticTestimonials;
     }
-  })();
+  })());
 
   const videoTestimonials = list.filter((t) => t.videoUrl);
   const audioTestimonials = list.filter((t) => !t.videoUrl && t.audioUrl);
@@ -1356,17 +1372,14 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
   return (
     <section className="sec wrap" id="sharhlar">
       <div className="sec-head">
-        <h2>
-          {dictionary?.quotes_title?.includes('\n') ? (
-            <>
-              {dictionary.quotes_title.split('\n')[0]}<br/>
-              <span className="it">{dictionary.quotes_title.split('\n')[1]}</span>
-            </>
-          ) : (
-            <span className="it">{dictionary?.quotes_title || "Mijozlar o'z so'zlari bilan."}</span>
-          )}
+        <h2 className="it" style={{ maxWidth: 600 }}>
+          {dictionary?.quotes_title
+            ? (dictionary.quotes_title.includes('\n')
+              ? <>{dictionary.quotes_title.split('\n')[0]}<br/><span className="it">{dictionary.quotes_title.split('\n')[1]}</span></>
+              : dictionary.quotes_title)
+            : "Mijozlar o'z so'zlari bilan."}
         </h2>
-        <div className="lede">
+        <div className="lede" style={{ maxWidth: 380 }}>
           <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
             <span className="dot"/>
             <span className="ix">§ 06</span>
@@ -1377,193 +1390,203 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
       </div>
 
       {videoTestimonials.length > 0 && (
-        <div style={{ marginBottom: 48 }}>
-          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 20 }}>
-            ↳ {lang === 'ru' ? 'Видео отзывы' : lang === 'en' ? 'Video reviews' : lang === 'zh' ? '视频反馈' : 'Video sharhlar'}
+        <div style={{ marginBottom: 64 }}>
+          <div style={{
+            fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase',
+            color: 'var(--muted)', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12,
+          }}>
+            <span style={{ width: 28, height: 1, background: 'var(--line)' }}/>
+            {lang === 'ru' ? 'Видео отзывы' : lang === 'en' ? 'Video reviews' : lang === 'zh' ? '视频反馈' : 'Video sharhlar'}
           </div>
-          <div className="quotes-video-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+            gap: 16,
+          }}>
             {videoTestimonials.map((t, idx) => (
-              <div key={idx} className="quote-video-card" onClick={() => setActiveVideo(t)} style={{
-                position: 'relative',
-                width: 260,
-                maxWidth: '100%',
-                aspectRatio: '9/16',
-                borderRadius: 16,
-                overflow: 'hidden',
-                background: '#0E1015',
-                cursor: 'pointer',
-                border: '1px solid var(--line)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-              }}>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: idx * 0.08, duration: 0.5 }}
+                onClick={() => setActiveVideo(t)}
+                style={{
+                  position: 'relative',
+                  aspectRatio: '9/16',
+                  borderRadius: 14,
+                  overflow: 'hidden',
+                  background: '#0E1015',
+                  cursor: 'pointer',
+                  border: '1px solid var(--line)',
+                  minHeight: 320,
+                }}
+                className="group"
+              >
                 {t.image ? (
-                  <Image 
-                    src={t.image} 
-                    alt={t.name} 
-                    fill 
-                    unoptimized
-                    quality={100}
-                    className="object-cover opacity-80 transition-transform duration-300 hover:scale-105" 
-                    sizes="50vw" 
-                  />
+                  <Image src={t.image} alt={t.name} fill unoptimized quality={100} className="object-cover opacity-80 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
                 ) : (
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1B4DFF20, #C2552A20)' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1B4DFF15, #C2552A15)' }} />
                 )}
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(14,16,21,0.95), rgba(14,16,21,0.2) 60%, transparent)' }} />
-                
-                <div style={{ position: 'absolute', top: 16, right: 16, width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.95)', color: '#0E1015', display: 'grid', placeItems: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
-                  <PlayCircle size={20} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(14,16,21,0.9), rgba(14,16,21,0.1) 60%, transparent)' }} />
+                <div style={{ position: 'absolute', top: 12, right: 12, width: 32, height: 32, borderRadius: '50%', background: 'rgba(255,255,255,0.9)', color: '#0E1015', display: 'grid', placeItems: 'center', zIndex: 3 }}>
+                  <PlayCircle size={16} />
                 </div>
-                
-                <div style={{ position: 'relative', zIndex: 2, padding: '16px', color: '#FFF' }}>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: 'rgba(255,255,255,0.6)', marginBottom: 4 }}>{t.company}</div>
-                  <div style={{ fontWeight: 700, fontSize: 15, lineHeight: 1.2 }}>{t.name}</div>
+                <div style={{
+                  position: 'absolute', inset: 0, zIndex: 2,
+                  display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+                  padding: 20, color: '#FFF',
+                }}>
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}>
+                    {t.company || t.role}
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
-        {audioTestimonials.map((t, idx) => (
-          <div key={idx} className="quote-audio-card" style={{
-            background: 'var(--paper)',
-            border: '1px solid var(--line)',
-            borderRadius: 16,
-            padding: 24,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            gap: 20,
+      {(audioTestimonials.length > 0 || textTestimonials.length > 0) && (
+        <>
+          <div style={{
+            fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase',
+            color: 'var(--muted)', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12,
           }}>
-            <audio ref={el => { audioRefs.current[t.audioUrl] = el; }} src={t.audioUrl} preload="none" onEnded={() => handleAudioEnded(t.audioUrl)} />
-            <div>
-              <div style={{ display: 'flex', gap: 2, color: 'var(--accent)', marginBottom: 12 }}>
-                {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
-              </div>
-              <p style={{ fontSize: 14, fontStyle: 'italic', lineHeight: 1.6, color: 'var(--ink-2)' }}>
-                "{t.quote}"
-              </p>
-            </div>
-            
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, borderTop: '1px solid var(--line)', paddingTop: 16 }}>
-              <button onClick={() => toggleAudio(t.audioUrl)} style={{
-                width: 44,
-                height: 44,
-                borderRadius: '50%',
-                background: playingAudio === t.audioUrl ? 'var(--accent)' : 'var(--bg)',
-                color: playingAudio === t.audioUrl ? '#FFF' : 'var(--ink)',
-                border: '1px solid var(--line)',
-                display: 'grid',
-                placeItems: 'center',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-              }}>
-                {playingAudio === t.audioUrl ? <Pause size={18} /> : <Volume2 size={18} />}
-              </button>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
-                <div style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'JetBrains Mono, monospace' }}>{t.company}</div>
-              </div>
-            </div>
+            <span style={{ width: 28, height: 1, background: 'var(--line)' }}/>
+            {lang === 'ru' ? 'Отзывы' : lang === 'en' ? 'Reviews' : lang === 'zh' ? '评论' : 'Matnli sharhlar'}
           </div>
-        ))}
-
-        {textTestimonials.map((t, idx) => (
-          <div key={idx} className="quote-text-card" style={{
-            background: 'var(--paper)',
-            border: '1px solid var(--line)',
-            borderRadius: 16,
-            padding: 24,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            gap: 20,
-          }}>
-            <div>
-              <div style={{ display: 'flex', gap: 2, color: 'var(--accent)', marginBottom: 12 }}>
-                {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
-              </div>
-              <p style={{ fontSize: 14, fontStyle: 'italic', lineHeight: 1.6, color: 'var(--ink-2)' }}>
-                "{t.quote}"
-              </p>
-            </div>
-            
-            <div style={{ borderTop: '1px solid var(--line)', paddingTop: 16 }}>
-              <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
-              <div style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'JetBrains Mono, monospace' }}>{t.company}</div>
-            </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
+            {audioTestimonials.map((t, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ delay: idx * 0.06, duration: 0.4 }}
+                style={{
+                  background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 14, padding: 28,
+                  display: 'flex', flexDirection: 'column', gap: 20,
+                  transition: 'box-shadow 0.3s, transform 0.3s',
+                }}
+                className="hover:shadow-xl hover:-translate-y-0.5"
+              >
+                <audio ref={el => { audioRefs.current[t.audioUrl] = el; }} src={t.audioUrl} preload="none" onEnded={() => handleAudioEnded(t.audioUrl)} />
+                <div>
+                  <div style={{ display: 'flex', gap: 2, color: 'var(--accent)', marginBottom: 14 }}>
+                    {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                  </div>
+                  <blockquote style={{ fontSize: 15, fontStyle: 'italic', lineHeight: 1.7, color: 'var(--ink-2)', margin: 0 }}>
+                    &ldquo;{t.quote}&rdquo;
+                  </blockquote>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderTop: '1px solid var(--line)', paddingTop: 18 }}>
+                  <button onClick={() => toggleAudio(t.audioUrl)} style={{
+                    width: 42, height: 42, borderRadius: '50%', flexShrink: 0,
+                    background: playingAudio === t.audioUrl ? 'var(--accent)' : 'var(--bg)',
+                    color: playingAudio === t.audioUrl ? '#FFF' : 'var(--ink)',
+                    border: '1px solid var(--line)', display: 'grid', placeItems: 'center', cursor: 'pointer', transition: 'all 0.2s',
+                  }}>
+                    {playingAudio === t.audioUrl ? <Pause size={16} /> : <Volume2 size={16} />}
+                  </button>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
+                    <div style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'JetBrains Mono, monospace', marginTop: 2 }}>{t.company}</div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+            {textTestimonials.map((t, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ delay: idx * 0.04, duration: 0.4 }}
+                style={{
+                  background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 14, padding: 28,
+                  display: 'flex', flexDirection: 'column', gap: 14,
+                  transition: 'box-shadow 0.3s, transform 0.3s',
+                }}
+                className="hover:shadow-xl hover:-translate-y-0.5"
+              >
+                <div style={{ display: 'flex', gap: 2, color: 'var(--accent)', marginBottom: 6 }}>
+                  {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                </div>
+                <blockquote style={{ fontSize: 14, fontStyle: 'italic', lineHeight: 1.7, color: 'var(--ink-2)', margin: 0 }}>
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <div style={{ borderTop: '1px solid var(--line)', paddingTop: 16, marginTop: 'auto' }}>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'JetBrains Mono, monospace', marginTop: 2 }}>{t.company}</div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
 
       {activeVideo && (
-        <div onClick={() => setActiveVideo(null)} style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 9999,
-          background: 'rgba(14, 16, 21, 0.9)',
-          backdropFilter: 'blur(8px)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: 20,
-        }}>
-          <div onClick={(e) => e.stopPropagation()} style={{
-            position: 'relative',
-            width: '100%',
-            maxWidth: 360,
-            aspectRatio: '9/16',
-            background: '#0E1015',
-            borderRadius: 20,
-            overflow: 'hidden',
-            boxShadow: '0 30px 100px rgba(0,0,0,0.8)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-          }}>
-            <iframe
-              src={getVimeoEmbedUrl(activeVideo.videoUrl)}
-              title={`${activeVideo.name} video testimonial`}
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-            />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setActiveVideo(null)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: 'rgba(14, 16, 21, 0.85)',
+            backdropFilter: 'blur(12px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+          }}
+        >
+          <motion.div
+            initial={{ scale: 0.92, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.92, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'relative', width: '100%', maxWidth: 400,
+              aspectRatio: '9/16', background: '#0E1015', borderRadius: 20, overflow: 'hidden',
+              boxShadow: '0 40px 120px rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.08)',
+            }}
+          >
+            {activeVideo.videoFileUrl ? (
+              <video
+                controls
+                autoPlay
+                playsInline
+                src={activeVideo.videoFileUrl}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', background: '#000' }}
+              />
+            ) : (
+              <iframe
+                src={getVimeoEmbedUrl(activeVideo.videoUrl)}
+                title={`${activeVideo.name} video`}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+              />
+            )}
             <button onClick={() => setActiveVideo(null)} style={{
-              position: 'absolute',
-              top: 16,
-              right: 16,
-              zIndex: 10,
-              width: 36,
-              height: 36,
-              borderRadius: '50%',
-              background: 'rgba(14,16,21,0.8)',
-              color: '#FFF',
-              border: '1px solid rgba(255,255,255,0.2)',
-              display: 'grid',
-              placeItems: 'center',
-              cursor: 'pointer',
+              position: 'absolute', top: 16, right: 16, zIndex: 10,
+              width: 36, height: 36, borderRadius: '50%',
+              background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
+              color: '#FFF', border: '1px solid rgba(255,255,255,0.15)',
+              display: 'grid', placeItems: 'center', cursor: 'pointer',
             }}>
-              <X size={18} />
+              <X size={16} />
             </button>
             <div style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 2,
-              background: 'linear-gradient(to top, rgba(14,16,21,0.95), rgba(14,16,21,0.4) 60%, transparent)',
-              padding: 24,
-              color: '#FFF',
+              position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 2,
+              background: 'linear-gradient(to top, rgba(14,16,21,0.95), transparent)',
+              padding: 28, color: '#FFF',
             }}>
               <div style={{ fontWeight: 700, fontSize: 16 }}>{activeVideo.name}</div>
-              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', fontFamily: 'JetBrains Mono, monospace', marginTop: 4 }}>{activeVideo.company}</div>
+              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', fontFamily: 'JetBrains Mono, monospace', marginTop: 4 }}>{activeVideo.company}</div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </section>
   );
