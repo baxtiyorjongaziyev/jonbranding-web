@@ -188,7 +188,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 "closes": "20:00"
               },
               "sameAs": [
-                "https://instagram.com/jonbranding",
+                "https://www.instagram.com/jon.branding/",
                 "https://t.me/jonbranding",
                 "https://facebook.com/jonbranding"
               ],
@@ -327,6 +327,30 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 "reviewCount": "47",
                 "bestRating": "5",
                 "worstRating": "1"
+              }
+            })
+          }}
+        />
+        <Script
+          id="json-ld-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: safeJsonStringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Baxtiyorjon Gaziyev",
+              "alternateName": "Baxtiyorjon Gaziyev",
+              "jobTitle": lang === 'uz' ? 'Brending Mutaxassisi, Asoschi' : lang === 'ru' ? 'Специалист по брендингу, Основатель' : 'Branding Specialist, Founder',
+              "url": "https://www.jonbranding.uz",
+              "sameAs": [
+                "https://www.instagram.com/jon.branding/",
+                "https://t.me/jonbranding",
+                "https://facebook.com/jonbranding"
+              ],
+              "knowsAbout": ["Branding", "Naming", "Logo Design", "Packaging Design", "Brand Strategy"],
+              "affiliation": {
+                "@type": "Organization",
+                "name": "Jon.Branding"
               }
             })
           }}

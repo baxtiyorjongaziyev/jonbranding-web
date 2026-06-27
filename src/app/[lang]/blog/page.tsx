@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { getSortedPostsData } from '@/lib/blog-posts';
 
@@ -57,8 +58,19 @@ export default async function BlogPage(props: Props) {
     zh: { label: '博客', title: '文章', empty: '暂无文章。', back: '首页' },
   }[safeLang];
 
+  const siteUrl = 'https://www.jonbranding.uz';
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: safeLang === 'uz' ? 'Bosh sahifa' : safeLang === 'ru' ? 'Главная' : 'Home', item: `${siteUrl}/${safeLang}` },
+      { '@type': 'ListItem', position: 2, name: l.title, item: `${siteUrl}/${safeLang}/blog` },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
+      <Script id="json-ld-breadcrumb-blog" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none z-0" />
 

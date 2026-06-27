@@ -83,6 +83,14 @@ export const staticTestimonials: Testimonial[] = [
     quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!",
     audioUrl: "/audio/javohir-haqberdiyev.ogg"
   },
+  {
+    name: "Hikmatulloh Toxirov",
+    company: "Almaz Shoes asoschisi",
+    avatar: "HT",
+    image: "",
+    imageHint: "Almaz Shoes founder",
+    quote: "Tezkor patent juda foydali bo'ldi. Brend himoyasi haqida o'ylab yurgan edim, juda o'z vaqtida taklif qildingiz. Hujjatlar tez tayyorlandi, jarayon aniq va shaffof. Rahmat!",
+  },
 ];
 
 export const staticTestimonialsRu: Testimonial[] = [
@@ -128,6 +136,14 @@ export const staticTestimonialsRu: Testimonial[] = [
     imageHint: "tech startup founder",
     quote: "ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ð»Ð¾ÑÑŒ Ð´Ð°Ð¶Ðµ Ð»ÑƒÑ‡ÑˆÐµ, Ñ‡ÐµÐ¼ Ñ Ð¾Ð¶Ð¸Ð´Ð°Ð». Ð¡ÐµÐ¹Ñ‡Ð°Ñ ÑÐ¼Ð¾Ñ‚Ñ€ÑŽ Ð½Ð° Ð»Ð¾Ð³Ð¾Ñ‚Ð¸Ð¿ Ð¸ ÑÐ°Ð¼ Ð½Ð°ÑÐ»Ð°Ð¶Ð´Ð°ÑŽÑÑŒ. Ð§Ñ‚Ð¾ Ð¼Ð½Ðµ Ð¿Ð¾Ð½Ñ€Ð°Ð²Ð¸Ð»Ð¾ÑÑŒ â€” ÑÑ‚Ð¾ Ð´Ð¾Ð²ÐµÑ€Ð¸Ðµ. Ð˜ Ñ‚Ð¾, Ñ‡Ñ‚Ð¾ ÑÐ´Ð°Ð»Ð¸ Ñ€Ð°Ð½ÑŒÑˆÐµ ÑÑ€Ð¾ÐºÐ°, Ð±Ñ‹Ð»Ð¾ Ð·Ð´Ð¾Ñ€Ð¾Ð²Ð¾. ÐžÑ‚Ð»Ð¸Ñ‡Ð½Ð¾, Ñ‡Ñ‚Ð¾ Ð±Ñ‹ÑÑ‚Ñ€Ð¾ Ð¿Ð¾Ð´ÐµÐ»Ð¸Ð»Ð¸ÑÑŒ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°Ð¼Ð¸. Ð‘Ð¾Ð»ÑŒÑˆÐ¾Ðµ ÑÐ¿Ð°ÑÐ¸Ð±Ð¾, Ð°ÐºÐ°!"
   },
+  {
+    name: "Ð¥Ð¸ÐºÐ¼Ð°Ñ‚ÑƒÐ»Ð»Ð¾Ñ… Ð¢Ð¾Ñ…Ð¸Ñ€Ð¾Ð²",
+    company: "ÐžÑÐ½Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Almaz Shoes",
+    avatar: "Ð¥Ð¢",
+    image: "",
+    imageHint: "Almaz Shoes founder",
+    quote: "Ð‘Ñ‹ÑÑ‚Ñ€Ñ‹Ð¹ Ð¿Ð°Ñ‚ÐµÐ½Ñ‚ Ð¾ÐºÐ°Ð·Ð°Ð»ÑÑ Ð¾Ñ‡ÐµÐ½ÑŒ Ð¿Ð¾Ð»ÐµÐ·Ð½Ñ‹Ð¼. Ð¯ Ð´ÑƒÐ¼Ð°Ð» Ð¾ Ð·Ð°Ñ‰Ð¸Ñ‚Ðµ Ð±Ñ€ÐµÐ½Ð´Ð°, Ð¸ Ð²Ñ‹ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶Ð¸Ð»Ð¸ ÑÑ‚Ð¾ Ð¾Ñ‡ÐµÐ½ÑŒ Ð²Ð¾Ð²Ñ€ÐµÐ¼Ñ. Ð”Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ð±Ñ‹ÑÑ‚Ñ€Ð¾ Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹, Ð¿Ñ€Ð¾Ñ†ÐµÑÑ Ñ‡Ñ‘Ñ‚ÐºÐ¸Ð¹ Ð¸ Ð¿Ñ€Ð¾Ð·Ñ€Ð°Ñ‡Ð½Ñ‹Ð¹. Ð¡Ð¿Ð°ÑÐ¸Ð±Ð¾!"
+  },
 ];
 
 export const staticTestimonialsEn: Testimonial[] = [
@@ -172,6 +188,14 @@ export const staticTestimonialsEn: Testimonial[] = [
     image: "",
     imageHint: "tech startup founder",
     quote: "It turned out even better than I expected. I'm looking at the logo now and I'm enjoying it myself. What I liked was the trust. And the fact that it was delivered ahead of schedule was great. It's great that you shared the results quickly. Thanks a lot, aka!"
+  },
+  {
+    name: "Hikmatulloh Toxirov",
+    company: "Founder of Almaz Shoes",
+    avatar: "HT",
+    image: "",
+    imageHint: "Almaz Shoes founder",
+    quote: "The quick patent service was very useful. I was thinking about brand protection, and you offered it at the right time. The documents were prepared quickly, the process was clear and transparent. Thank you!",
   },
 ];
 
@@ -272,5 +296,13 @@ export const staticTestimonialsZh: Testimonial[] = [
     image: "",
     imageHint: "tech startup founder",
     quote: "ç»“æžœæ¯”æˆ‘é¢„æƒ³çš„è¿˜è¦å¥½ã€‚æˆ‘çŽ°åœ¨çœ‹ç€æ ‡å¿—ï¼Œè‡ªå·±ä¹Ÿå¾ˆäº«å—ã€‚æˆ‘å–œæ¬¢çš„æ˜¯é‚£ä»½ä¿¡ä»»ã€‚è€Œä¸”æå‰äº¤ä»˜çœŸçš„å¾ˆæ£’ã€‚å¾ˆé«˜å…´ä½ ä»¬èƒ½è¿™ä¹ˆå¿«åˆ†äº«ç»“æžœã€‚å¤šè°¢ï¼Œå¤§å“¥ï¼"
+  },
+  {
+    name: "Hikmatulloh Toxirov",
+    company: "Almaz Shoes åˆ›å§‹äºº",
+    avatar: "HT",
+    image: "",
+    imageHint: "Almaz Shoes founder",
+    quote: "å¿«é€Ÿä¸“åˆ©æœåŠ¡éžå¸¸æœ‰ç”¨ã€‚æˆ‘æ­£åœ¨è€ƒè™‘å“ç‰Œä¿æŠ¤ï¼Œä½ ä»¬åŠæ—¶æä¾›äº†è¿™é¡¹æœåŠ¡ã€‚æ–‡ä»¶å‡†å¤‡å¾—å¾ˆå¿«ï¼Œæµç¨‹æ¸…æ™°é€æ˜Žã€‚è°¢è°¢ï¼"
   },
 ];
