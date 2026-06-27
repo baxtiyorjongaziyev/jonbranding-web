@@ -11,6 +11,8 @@ const QUERY = `
     "imageHint": coalesce(imageHint, name),
     "videoUrl": videoUrl,
     "audioUrl": audioUrl,
+    "audioFileUrl": audioFile.asset->url,
+    "videoFileUrl": videoFile.asset->url,
     "company": coalesce(company[$lang], company.uz, company.en, ""),
     "quote": coalesce(quote[$lang], quote.uz, quote.en, "")
   }

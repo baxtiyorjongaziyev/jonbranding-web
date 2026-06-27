@@ -5,6 +5,7 @@ export interface FaqItem {
 }
 
 export interface Testimonial {
+    _id?: string;
     name: string;
     company: string;
     avatar: string;
@@ -13,6 +14,8 @@ export interface Testimonial {
     quote: string;
     videoUrl?: string;
     audioUrl?: string;
+    audioFileUrl?: string;
+    videoFileUrl?: string;
     rating?: number;
 }
 

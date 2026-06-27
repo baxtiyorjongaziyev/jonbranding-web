@@ -2226,5 +2226,13 @@
         }
       ]
     }
+  },
+  "reviewsPage": {
+    "title": "Our Clients' Reviews",
+    "subtitle": "Results speak for themselves. Voice and video reviews from real people about our work.",
+    "back": "Back to home",
+    "ctaText": "Get free audit",
+    "voiceLabel": "Voice Review",
+    "videoLabel": "Video Review"
   }
 }

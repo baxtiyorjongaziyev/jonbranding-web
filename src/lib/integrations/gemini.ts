@@ -253,3 +253,116 @@ ${text}
     throw new Error('Failed to parse portfolio metadata JSON from Gemini: ' + e);
   }
 }
+
+export interface ParsedTestimonial {
+  name: string;
+  company: {
+    uz: string;
+    ru: string;
+    en: string;
+    zh: string;
+  };
+  quote: {
+    uz: string;
+    ru: string;
+    en: string;
+    zh: string;
+  };
+  rating: number;
+}
+
+export async function parseReviewMetadata(
+  text: string
+): Promise<ParsedTestimonial> {
+  const apiKey = process.env.GEMINI_API_KEY || '';
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY is not configured in environment variables');
+  }
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+  const prompt = `Siz Jon Branding premium brend-agentligining yordamchisisiz.
+Quyidagi mijoz sharhi matnini tahlil qiling. Undan mijozning ismi, kompaniya nomini ajrating va sharh matnini 4 ta tilga (o'zbek, rus, ingliz, xitoy) mukammal professional darajada tarjima qilib, FAQAT quyidagi JSON formatida javob bering (boshqa hech narsa yozmang):
+
+{
+  "name": "Mijoz ismi (masalan: Akmal)",
+  "company": {
+    "uz": "Kompaniya nomi (masalan: Qumri Coffee)",
+    "ru": "Название компании на русском",
+    "en": "Company name in English",
+    "zh": "中文公司名称"
+  },
+  "quote": {
+    "uz": "Sharh matni o'zbek tilida (asl matndan olingan, agar sheva bo'lsa silliqlangan)",
+    "ru": "Перевод отзыва на русский язык (профессиональный, качественный)",
+    "en": "Professional translation of the review into English",
+    "zh": "中文专业翻译的客户评价"
+  },
+  "rating": 5
+}
+
+Muhim qoidalar:
+1. Ism, kompaniya va sharh mazmunini faqat berilgan matndan oling. O'zingizdan fakt to'qimang.
+2. Agar reyting (yulduzchalar) ko'rsatilmagan bo'lsa, avtomatik ravishda 5 deb oling.
+3. Tarjimalar o'ta professional, imloviy va uslubiy jihatdan xatosiz, premium brend darajasiga mos bo'lishi shart.
+
+MATN:
+"""
+${text}
+"""
+`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      contents: [
+        {
+          parts: [
+            {
+              text: prompt,
+            },
+          ],
+        },
+      ],
+      generationConfig: {
+        temperature: 0.1,
+        maxOutputTokens: 2048,
+      },
+      safetySettings: [
+        { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+        { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
+        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+        { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
+      ],
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Gemini API error (${response.status}): ${errorText}`);
+  }
+
+  const result = await response.json();
+  const textResponse = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+  if (!textResponse || textResponse.trim() === '') {
+    throw new Error('Empty response from Gemini');
+  }
+
+  try {
+    const cleaned = textResponse
+      .replace(/^```json\s*/i, '')
+      .replace(/^```\s*/i, '')
+      .replace(/\s*```$/i, '')
+      .trim();
+
+    const parsed = JSON.parse(cleaned) as ParsedTestimonial;
+    return parsed;
+  } catch (e) {
+    console.error('JSON parse error from Gemini response:', textResponse);
+    throw new Error('Failed to parse review metadata JSON from Gemini: ' + e);
+  }
+}

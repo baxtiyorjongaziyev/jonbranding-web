@@ -2240,5 +2240,13 @@
       "title": "Rahmat, brief qabul qilindi!",
       "desc": "Mutaxassisimiz tez orada siz bilan bog'lanib, brendingiz strategiyasini muhokama qiladi."
     }
+  },
+  "reviewsPage": {
+    "title": "Mijozlarimiz sharhlari",
+    "subtitle": "Natijalar o'zi gapiradi. Ishimiz haqida real insonlarning ovozli va video fikrlari.",
+    "back": "Bosh sahifaga",
+    "ctaText": "Bepul audit olish",
+    "voiceLabel": "Ovozli sharh",
+    "videoLabel": "Video sharh"
   }
 }
