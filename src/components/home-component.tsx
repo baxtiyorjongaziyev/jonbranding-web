@@ -14,6 +14,7 @@ import { ATGallery, ATQuotes } from '@/components/atelier/atelier-sections';
 import ExitIntentPopup from '@/components/exit-intent-popup';
 import ScrollDepthAnalytics from '@/components/scroll-depth-analytics';
 import Founder from '@/components/sections/founder';
+import AtProcess from '@/components/sections/at-process';
 
 const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary, testimonials = [], portfolioProjects = [] }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -79,6 +80,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       </div>
 
       <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />
+      <AtProcess lang={lang} onOpen={open} />
       <Founder lang={lang} dictionary={dictionary.founder} />
       <AtPricing onOpen={open} lang={lang} />
       <AtFaq lang={lang} onOpen={open} />

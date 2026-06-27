@@ -10,48 +10,43 @@ const translations = {
   uz: [
     {
       id: 1,
-      title: "Brendingiz aslida qancha yo'qotyapti?",
-      subtitle: "Noto'g'ri qadoq, eskirgan logotip va ishonchsiz veb-sayt sababli yuzlab potensial mijozlar har kuni raqobatchilarni tanlamoqda.",
+      title: "Hozirgi bozor sharoitida brendingiz qayerda? (Vaziyat)",
+      subtitle: "Kompaniyangiz ishlamoqda, reklama yoqilgan, mijozlar saytga yoki ijtimoiy tarmoqqa kirmoqda. Vaziyat barqaror ko'rinadi. Lekin bu haqiqiy potentsialingizmi?",
       theme: "dark"
     },
     {
       id: 2,
-      title: "Reklama sotmaydi, agar brendingiz zaif bo'lsa",
-      subtitle: "Siz qanchalik ko'p reklama qilmang, agar mijoz mahsulotingizni ko'rganda «arzon» yoki «ishonchsiz» degan hisni tuysa, reklama byudjetingiz havoga uchadi.",
+      title: "Bizneslar sezmaydigan yashirin muammolar (Muammo)",
+      subtitle: "Logotip eskirgan, qadoq javonda ko'zga tashlanmaydi, sayt esa arzon ko'rinadi. Mijozlar keladi, lekin vizual ishonch his qilmagani uchun sotib olmasdan chiqib ketadi.",
       theme: "light"
     },
     {
       id: 3,
-      title: "Jon Branding — Premium Brending Agentligi",
-      subtitle: "Biz shunchaki \"chiroyli rasm\" chizmaymiz. Biz biznesingizni bozorda to'g'ri joylashtirib (pozitsiyalab), mijoz ko'zida uning qadrini oshiramiz va sotishni osonlashtiramiz.",
-      theme: "blue"
+      title: "Ushbu zaifliklar sizga qanchaga tushyapti? (Oqibat)",
+      subtitle: "Ishonchsiz ko'rinish sababli har bir reklama so'rovidan 15% dan 35% gacha daromad yo'qotyapsiz. Siz reklamaga pul tikyapsiz, lekin foydani raqiblar olyapti.",
+      theme: "dark"
     },
     {
       id: 4,
-      title: "Sizga qanday yordam bera olamiz?",
+      title: "Vizual ishonchni yechish sizga nima beradi? (Qiymat)",
+      subtitle: "Premium brending vizual ishonchni 2 barobar oshiradi. Mijozlar shubhasiz xarid qiladi, reklama konversiyasi ko'tariladi va mahsulotni 20-30% qimmatroq sota olasiz.",
+      theme: "blue"
+    },
+    {
+      id: 5,
+      title: "Jon Branding — Qanday yordam beramiz?",
       features: [
         "Neyming (Bozorda farqlanuvchi va esda qoluvchi nom)",
         "Aydentika (Kuchli logotip va korporativ uslub tizimi)",
         "Premium Qadoq dizayni (Javondagi eng jozibador ko'rinish)",
-        "Veb-saytlar (Mijozlarni sotuvga yetaklovchiSales Machine)"
+        "Veb-saytlar (Mijozlarni sotuvga yetaklovchi Sales Machine)"
       ],
       theme: "light"
     },
     {
-      id: 5,
-      title: "Hamkorlarimiz erishgan aniq natijalar",
-      features: [
-        "Qumri Coffee (+41% sotuv, 3× takroriy mijoz)",
-        "Oltin Bulut (+31% sotuv yangi qadoqdan keyin)",
-        "Humo Fintech (180K+ faol foydalanuvchi)",
-        "Nur Sopol (Supermarket javonida 2× ko'proq ko'rinish)"
-      ],
-      theme: "dark"
-    },
-    {
       id: 6,
-      title: "Bepul Brand Audit bilan boshlaymiz",
-      subtitle: "Hozirgi brendingiz nima uchun kam sotayotganini 15 daqiqada tahlil qilib, 3 ta eng katta zaiflik va ularni tuzatish rejasini ko'rsatamiz. Majburiyatsiz.",
+      title: "Bepul Brand Audit bilan boshlang",
+      subtitle: "Qumri Coffee (+41% sotuv) va Oltin Bulut (+31% sotuv) kabi natijalarga erishish uchun birinchi qadamni qo'ying. 15 daqiqada brendingizdagi 3 ta eng katta zaiflikni ko'rsatamiz.",
       cta: "Bepul auditga yozilish ↗",
       theme: "blue"
     }
@@ -59,48 +54,43 @@ const translations = {
   ru: [
     {
       id: 1,
-      title: "Сколько ваш бренд теряет на самом деле?",
-      subtitle: "Из-за плохой упаковки, устаревшего логотипа и ненадежного сайта сотни потенциальных клиентов ежедневно уходят к конкурентам.",
+      title: "Где находится ваш бренд на рынке? (Ситуация)",
+      subtitle: "Ваш бизнес работает, реклама запущена, клиенты заходят на сайт или в соцсети. Ситуация кажется стабильной. Но это ли ваш максимум?",
       theme: "dark"
     },
     {
       id: 2,
-      title: "Реклама не продает, если бренд слабый",
-      subtitle: "Сколько бы вы ни тратили на рекламу, если при виде вашего продукта клиент чувствует «дешевизну» или «ненадежность», ваш бюджет тратится впустую.",
+      title: "Скрытые проблемы, которые вы не замечаете (Проблема)",
+      subtitle: "Логотип устарел, упаковка теряется на полке, сайт выглядит дешево. Клиенты приходят, но уходят без покупки, не почувствовав визуального доверия.",
       theme: "light"
     },
     {
       id: 3,
-      title: "Jon Branding — Премиум Бренд-Ателье",
-      subtitle: "Мы не просто рисуем «красивые картинки». Мы правильно позиционируем ваш бизнес на рынке, повышаем его ценность в глазах клиента и облегчаем продажи.",
-      theme: "blue"
+      title: "Во сколько вам обходятся эти слабости? (Последствие)",
+      subtitle: "Из-за недоверия к внешнему виду вы теряете от 15% до 35% дохода с каждого лида. Вы вкладываете в трафик, но прибыль забирают другие.",
+      theme: "dark"
     },
     {
       id: 4,
-      title: "Чем мы можем помочь?",
+      title: "Что даст вам решение проблемы доверия? (Выгода)",
+      subtitle: "Премиальный брендинг удваивает визуальное доверие. Клиенты покупают без сомнений, конверсия рекламы растет, и вы продаете продукт на 20-30% дороже.",
+      theme: "blue"
+    },
+    {
+      id: 5,
+      title: "Jon Branding — Чем мы можем помочь?",
       features: [
         "Нейминг (Выделяющееся и запоминающееся имя)",
         "Айдентика (Сильный логотип и система фирменного стиля)",
-        "Премиум-дизайн упаковки (Самый привлекательный вид на полке)",
-        "Веб-сайты (Конвертящие веб-решения уровня Sales Machine)"
+        "Премиум дизайн упаковки (Заметность на полке с первой секунды)",
+        "Веб-сайты (Системы конверсии уровня Sales Machine)"
       ],
       theme: "light"
     },
     {
-      id: 5,
-      title: "Реальные результаты наших партнеров",
-      features: [
-        "Qumri Coffee (+41% продаж, 3× повторных клиентов)",
-        "Оltin Bulut (+31% продаж после изменения упаковки)",
-        "Humo Fintech (180K+ активных пользователей)",
-        "Nur Sopol (В 2 раза больше видимости на полках)"
-      ],
-      theme: "dark"
-    },
-    {
       id: 6,
       title: "Начнем с бесплатного Бренд-Аудита",
-      subtitle: "За 15 минут проанализируем ваш бренд, укажем на 3 ключевые слабости и дадим план по их устранению. Без обязательств.",
+      subtitle: "Сделайте первый шаг к результатам вроде Qumri Coffee (+41% продаж) и Oltin Bulut (+31% продаж). За 15 минут укажем на 3 главные слабости бренда.",
       cta: "Получить аудит бесплатно ↗",
       theme: "blue"
     }
@@ -108,48 +98,43 @@ const translations = {
   en: [
     {
       id: 1,
-      title: "How much is your brand actually losing?",
-      subtitle: "Due to poor packaging, an outdated logo, and an unreliable website, hundreds of potential clients choose competitors every single day.",
+      title: "Where is your brand in today's market? (Situation)",
+      subtitle: "Your business is running, ads are active, customers visit your site or social media. The situation seems stable. But is this your true potential?",
       theme: "dark"
     },
     {
       id: 2,
-      title: "Ads don't sell if your brand is weak",
-      subtitle: "No matter how much you spend on marketing, if a customer perceives your brand as 'cheap' or 'unreliable', your budget goes down the drain.",
+      title: "Hidden problems you fail to notice (Problem)",
+      subtitle: "The logo is outdated, the packaging fails to stand out, and the website looks cheap. Customers visit, but leave without buying because they feel no visual trust.",
       theme: "light"
     },
     {
       id: 3,
-      title: "Jon Branding — Premium Brand Atelier",
-      subtitle: "We don't just draw 'pretty pictures'. We position your business properly in the market, increase its perceived value, and make selling effortless.",
-      theme: "blue"
+      title: "What are these weaknesses costing you? (Implication)",
+      subtitle: "Due to lack of visual trust, you are losing 15% to 35% of revenue from every single lead. You invest in traffic, but competitors reap the profits.",
+      theme: "dark"
     },
     {
       id: 4,
-      title: "How can we help you?",
+      title: "What does solving visual trust give you? (Need-Payoff)",
+      subtitle: "Premium branding doubles visual trust. Customers buy without hesitation, ad conversion increases, and you can sell your product at a 20-30% premium.",
+      theme: "blue"
+    },
+    {
+      id: 5,
+      title: "Jon Branding — How can we help?",
       features: [
         "Naming (Distinct and highly memorable business name)",
-        "Identica (Strong logo and unified corporate style system)",
+        "Identity (Strong logo and unified corporate style system)",
         "Premium Packaging (The most eye-catching look on the shelf)",
         "Websites (Conversion-driven web solutions to generate sales)"
       ],
       theme: "light"
     },
     {
-      id: 5,
-      title: "Proven results of our partners",
-      features: [
-        "Qumri Coffee (+41% sales, 3× repeat customers)",
-        "Oltin Bulut (+31% sales increase with new packaging)",
-        "Humo Fintech (180K+ active mobile app users)",
-        "Nur Sopol (2× better visibility on store shelves)"
-      ],
-      theme: "dark"
-    },
-    {
       id: 6,
-      title: "Let's start with a Free Brand Audit",
-      subtitle: "We will analyze your current brand in 15 minutes, identify the 3 biggest weaknesses, and share a roadmap to fix them. No obligations.",
+      title: "Start with a Free Brand Audit",
+      subtitle: "Take the first step towards results like Qumri Coffee (+41% sales) and Oltin Bulut (+31% sales). In 15 minutes, we will reveal your 3 biggest brand weaknesses.",
       cta: "Get Free Audit ↗",
       theme: "blue"
     }
@@ -157,49 +142,44 @@ const translations = {
   zh: [
     {
       id: 1,
-      title: "您的品牌实际上损失了多少？",
-      subtitle: "由于包装差、标志过时以及网站不可靠，成百上千的潜在客户每天都会选择您的竞争对手。",
+      title: "在当前的市场环境下，您的品牌处于什么位置？(现状)",
+      subtitle: "您的业务正在运行，广告已投放，客户正在访问您的网站或社交媒体。一切看似稳定。但这真的是您的全部潜力吗？",
       theme: "dark"
     },
     {
       id: 2,
-      title: "如果品牌薄弱，广告也无济于事",
-      subtitle: "无论您投入多少营销预算，如果客户觉得您的品牌“廉价”或“不可靠”，您的预算就等于白费。",
+      title: "企业往往忽视的隐性问题 (问题)",
+      subtitle: "标志陈旧、包装在货架上被淹没、网站显得廉价。客户来了，但因为缺乏视觉信任感，未购买便离开了。",
       theme: "light"
     },
     {
       id: 3,
-      title: "Jon Branding — 精英品牌工作室",
-      subtitle: "我们不只是绘制“好看的图片”。我们精准定位您的商业市场，提升客户眼中的品牌价值，让销售变得轻而易举。",
-      theme: "blue"
+      title: "这些视觉弱点让您付出了什么代价？(影响)",
+      subtitle: "由于缺乏信任感，您在每次广告获客中流失了15%到35%的潜在收入。您为流量付费，但利润却被竞争对手夺走。",
+      theme: "dark"
     },
     {
       id: 4,
-      title: "我们能如何帮助您？",
+      title: "解决信任度能为您带来什么收益？(需求价值)",
+      subtitle: "高端品牌建设使视觉信任度倍增。客户购买时不再犹豫，广告转化率显著提升，您的产品可实现20-30%的溢价销售。",
+      theme: "blue"
+    },
+    {
+      id: 5,
+      title: "Jon Branding — 我们如何助您成功？",
       features: [
-        "命名（在市场中脱颖而出且易记的品牌名称）",
-        "视觉识别（强大的标志及统一的企业形象识别系统）",
-        "高端包装设计（货架上最夺目的外观表现）",
-        "转化型网站（高转化率网络解决方案，打造销售机器）"
+        "命名（在同类市场中脱颖而出且便于传播的名称）",
+        "视觉识别（高端独特的标志与完备的品牌视觉系统）",
+        "高端包装设计（让您的产品在货架上成为吸睛焦点）",
+        "定制化营销网站（真正为您企业获客的销售机器网站）"
       ],
       theme: "light"
     },
     {
-      id: 5,
-      title: "我们合作伙伴的真实成果",
-      features: [
-        "Qumri Coffee（销量增长41%，老客户增加3倍）",
-        "Oltin Bulut（采用新包装后销量增长31%）",
-        "Humo Fintech（拥有超过18万活跃移动应用用户）",
-        "Nur Sopol（在超市货架上的可见度提升2倍）"
-      ],
-      theme: "dark"
-    },
-    {
       id: 6,
       title: "从免费的品牌审计开始",
-      subtitle: "我们将在15分钟内分析您当前的品牌，找出3个最大弱点并提供解决方案路线图。无任何强制约束。",
-      cta: "获取免费品牌审计 ↗",
+      subtitle: "迈出走向成功的第一步，像Qumri Coffee（销量+41%）和Oltin Bulut（销量+31%）一样实现增长。仅需15分钟，我们将指出品牌最大的3个弱点。",
+      cta: "免费获取审计报告 ↗",
       theme: "blue"
     }
   ]
