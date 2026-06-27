@@ -30,7 +30,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const descriptions = {
     uz: "15 daqiqalik Brand Auditda nom, logo, qadoq, sayt va kommunikatsiyangiz xaridor ko'zida qanchalik ishonchli ko'rinishini tekshiramiz.",
     ru: "Стратегический брендинг, нейминг и дизайн логотипов в Ташкенте. Премиальное качество на уровне Ma'no, Mountain, Abba.",
-    en: "Strategic branding, naming, and logo design in Tashkent. Premium quality on par with Ma'no, Mountain, Abba. Expert brand audits, packaging, and full identity systems for Central Asian businesses.",
+    en: "Strategic branding, naming, and logo design in Tashkent. Premium quality. Brand audits, packaging, and full identity systems for Central Asian businesses.",
     zh: "在塔什干提供战略品牌、命名和标志设计。高端品牌代理服务。为中亚企业提供品牌审计、包装设计和完整视觉识别系统。"
   };
 

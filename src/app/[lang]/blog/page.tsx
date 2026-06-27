@@ -27,7 +27,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     zh: '博客 | Jon.Branding'
   };
   const descs = {
-    uz: 'Brending, dizayn va marketing haqida foydali maqolalar va tahliliy materiallar. Neyming, logotip, brend strategiyasi va qadoq dizayni bo\'yicha ekspert maslahatlari.',
+    uz: 'Brending, dizayn va marketing haqida foydali maqolalar. Neyming, logotip, brend strategiyasi va qadoq dizayni bo\'yicha ekspert maslahatlari.',
     ru: 'Полезные статьи и аналитика о брендинге, дизайне и маркетинге. Экспертные советы по неймингу, логотипу, бренд-стратегии и дизайну упаковки.',
     en: 'Actionable articles about branding, naming, logo design and marketing strategy. Expert tips to grow your business with professional brand identity.',
     zh: '关于品牌塑造、命名、标志设计和营销策略的实用文章。通过专业品牌标识发展业务的专家建议。',

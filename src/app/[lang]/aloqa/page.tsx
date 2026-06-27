@@ -9,7 +9,7 @@ const BASE_URL = 'https://www.jonbranding.uz';
 const metaByLang: Record<Locale, { title: string; description: string }> = {
   uz: {
     title: "Aloqa — Jon.Branding | Toshkent Brending Agentligi",
-    description: 'Jon.Branding bilan bog\'laning — Telefon: +998 33 645 00 97, Telegram, Instagram. Online brifing, brend tashxisi va konsultatsiya uchun murojaat qiling. 6 yillik tajriba, 240+ loyiha.',
+    description: 'Jon.Branding bilan bog\'laning: +998 33 645 00 97, Telegram, Instagram. Online brifing, brend tashxisi va konsultatsiya. 6 yillik tajriba, 240+ loyiha.',
   },
   ru: {
     title: 'Контакты — Jon.Branding | Брендинговое агентство Ташкент',
@@ -17,7 +17,7 @@ const metaByLang: Record<Locale, { title: string; description: string }> = {
   },
   en: {
     title: 'Contact — Jon.Branding | Branding Agency Tashkent',
-    description: 'Contact Jon.Branding — Phone: +998 33 645 00 97, Telegram, Instagram. Online briefing, brand audit and consultation available. 6 years of experience, 240+ projects.',
+    description: 'Contact Jon.Branding — Phone: +998 33 645 00 97, Telegram, Instagram. Online briefing, brand audit and consultation. 6 years of experience, 240+ projects.',
   },
   zh: {
     title: '联系我们 — Jon.Branding | 塔什干品牌机构',
