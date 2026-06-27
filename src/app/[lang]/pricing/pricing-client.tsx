@@ -86,11 +86,11 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
         </div>
 
         {/* Pricing options Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="max-w-xl mx-auto">
           {/* Card 1: Core Branding Services */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             className="group relative flex flex-col justify-between p-8 sm:p-10 bg-[#0c0f18]/60 backdrop-blur-xl border border-white/5 hover:border-indigo-500/30 rounded-3xl transition-all duration-300 shadow-2xl overflow-hidden"
           >
@@ -117,41 +117,6 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
                 className="inline-flex items-center justify-center w-full px-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all duration-300 shadow-lg shadow-indigo-600/20 gap-2 active:scale-[0.98] text-sm uppercase tracking-wider"
               >
                 {t.brandServices?.cta}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Card 2: Marketplace Cover Design */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="group relative flex flex-col justify-between p-8 sm:p-10 bg-[#0c0f18]/60 backdrop-blur-xl border border-white/5 hover:border-amber-500/30 rounded-3xl transition-all duration-300 shadow-2xl overflow-hidden"
-          >
-            {/* Hover spotlight background */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/0 via-amber-500/0 to-amber-500/[0.03] group-hover:to-amber-500/[0.08] transition-all duration-300 pointer-events-none" />
-
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-6">
-                <ImageIcon className="w-6 h-6" aria-hidden="true" />
-              </div>
-
-              <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-4">
-                {t.marketplaceServices?.title}
-              </h2>
-
-              <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
-                {t.marketplaceServices?.desc}
-              </p>
-            </div>
-
-            <div>
-              <Link
-                href={getLocalizedPath('/pricing/sotuvchi-kartochka')}
-                className="inline-flex items-center justify-center w-full px-6 py-4 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition-all duration-300 shadow-lg shadow-amber-500/20 gap-2 active:scale-[0.98] text-sm uppercase tracking-wider"
-              >
-                {t.marketplaceServices?.cta}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>

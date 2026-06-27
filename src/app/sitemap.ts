@@ -15,7 +15,6 @@ const staticRoutes = [
   '/aloqa',
   '/privacy',
   '/quiz',
-  '/pricing/sotuvchi-kartochka',
   '/sitemap',
   '/terms',
   '/portfolio',

@@ -76,7 +76,6 @@ const SitemapPage = async (props: Props) => {
         { href: '/xizmatlar', label: t.links?.services_prices || 'Xizmatlar va narxlar', icon: List },
         { href: '/xizmatlar/brand-strategiyasi', label: t.links?.brand_strategy || 'Brend strategiyasi', icon: BrainCircuit },
         { href: '/xizmatlar/patent-kalkulyatori', label: t.links?.patent_calculator || 'Patent kalkulyatori', icon: PenSquare },
-        { href: '/pricing/sotuvchi-kartochka', label: t.links?.marketplace_cover || 'Sotuvchi kartochka dizayni', icon: ImageIcon },
       ],
     },
     {
