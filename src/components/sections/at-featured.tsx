@@ -54,10 +54,10 @@ const t = {
 } as const;
 
 const CASES = [
-  { name: 'ARFADEL', city: 'Toshkent', year: '2026', image: '/images/cms/arfadel-brand.png', color: '#1A1210' },
+  { name: 'ARFADEL', city: 'Toshkent', year: '2026', image: '/images/cms/arfadel-cover.jpg', color: '#1A1210' },
   { name: 'Beyaz', city: 'Toshkent', year: '2026', image: '/images/cms/beyaz-gold.jpg', color: '#2C3A2A' },
   { name: 'Boyarin', city: 'Toshkent', year: '2026', image: '/images/cms/boyarin-hozir.png', color: '#0A1C3A' },
-  { name: 'Enros', city: 'Toshkent', year: '2025', image: '/images/cms/enros-logo-1.png', color: '#0D0D1A' },
+  { name: 'Enros', city: 'Toshkent', year: '2025', image: '/images/cms/enros-cover.jpg', color: '#0D0D1A' },
 ];
 
 const INTERVAL_MS = 4000;

@@ -2,6 +2,7 @@
 
 import { FC, useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useScroll, useMotionValueEvent, useInView } from 'framer-motion';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
 import { PlayCircle, Pause, Volume2, X, Star } from 'lucide-react';
@@ -704,7 +705,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
         </div>
         <div className="gal-grid">
           {tiles.map((t, i) => (
-            <div key={t.name} className={`gal-tile ${t.cls}`} onClick={onOpen}>
+            <Link key={t.name} href={`/${lang}/portfolio/${t.slug}`} className={`gal-tile ${t.cls}`}>
               <div className="body" style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
                 <Image
                   src={t.img}
@@ -726,7 +727,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   {t.res && <span className="res">{t.res} · {t.yr}</span>}
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         {filter !== 'all' && (
@@ -1378,10 +1379,12 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
           <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 20 }}>
             ↳ {lang === 'ru' ? 'Видео отзывы' : lang === 'en' ? 'Video reviews' : lang === 'zh' ? '视频反馈' : 'Video sharhlar'}
           </div>
-          <div className="quotes-video-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 20 }}>
+          <div className="quotes-video-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
             {videoTestimonials.map((t, idx) => (
               <div key={idx} className="quote-video-card" onClick={() => setActiveVideo(t)} style={{
                 position: 'relative',
+                width: 260,
+                maxWidth: '100%',
                 aspectRatio: '9/16',
                 borderRadius: 16,
                 overflow: 'hidden',

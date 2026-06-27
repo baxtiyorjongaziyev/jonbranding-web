@@ -106,7 +106,9 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://static.hotjar.com https://script.hotjar.com https://www.clarity.ms https://cdn.amplitude.com",
+              process.env.NODE_ENV === 'development'
+                ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://static.hotjar.com https://script.hotjar.com https://www.clarity.ms https://cdn.amplitude.com"
+                : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://static.hotjar.com https://script.hotjar.com https://www.clarity.ms https://cdn.amplitude.com",
               "style-src 'self' 'unsafe-inline' https://api.fontshare.com https://fonts.googleapis.com",
               "font-src 'self' data: https://api.fontshare.com https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://cdn.sanity.io https://cdn.prod.website-files.com https://images.unsplash.com https://www.google-analytics.com https://mc.yandex.ru https://www.googletagmanager.com https://www.clarity.ms https://www.facebook.com",
