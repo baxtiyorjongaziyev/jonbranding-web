@@ -49,6 +49,10 @@ const slides = [
   }
 ];
 
+export function generateStaticParams() {
+  return ['uz', 'ru', 'en', 'zh'].map((lang) => ({ lang }));
+}
+
 export default function PresentationPage() {
   
   // To'liq ekranni bloklash va header/footer ni yopish uchun
