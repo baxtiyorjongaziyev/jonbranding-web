@@ -1,39 +1,23 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { client } from '@/sanity/lib/client';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { getPostData, getAllPostSlugs } from '@/lib/blog-posts';
 
 export const revalidate = 300;
 
 type Props = { params: Promise<{ lang: string; slug: string }> };
 
-const POST_QUERY = `*[_type == "post" && slug.current == $slug && language == $lang][0] {
-  _id,
-  title,
-  "slug": slug.current,
-  description,
-  "image": image.asset->url + "?w=1200&q=85",
-  content,
-  publishedAt
-}`;
-
-const ALL_POSTS_QUERY = `*[_type == "post" && language == $lang] { "slug": slug.current }`;
-
 export async function generateStaticParams() {
-  const posts = await client.fetch(ALL_POSTS_QUERY, { lang: 'uz' }).catch(() => []);
-  const params: { lang: string; slug: string }[] = [];
-  ['uz', 'ru', 'en', 'zh'].forEach((lang) => {
-    posts.forEach((p: any) => params.push({ lang, slug: p.slug }));
-  });
-  return params;
+  const slugs = getAllPostSlugs();
+  return slugs.map((s) => ({ lang: s.lang, slug: s.slug }));
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang, slug } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
-  const post = await client.fetch(POST_QUERY, { slug, lang: safeLang }).catch(() => null);
+  const post = await getPostData(safeLang, slug);
   if (!post) return { title: 'Maqola topilmadi' };
   return {
     title: `${post.title} | Jon.Branding Blog`,
@@ -42,34 +26,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-function PortableText({ content }: { content: any[] }) {
-  if (!content || !Array.isArray(content)) return null;
-  return (
-    <div className="prose prose-invert prose-lg max-w-none">
-      {content.map((block: any, i: number) => {
-        if (block._type === 'block') {
-          const text = block.children?.map((c: any) => c.text).join('') || '';
-          const Tag = block.style === 'h2' ? 'h2' : block.style === 'h3' ? 'h3' : 'p';
-          return <Tag key={i} className={block.style === 'h2' ? 'text-2xl font-bold mt-10 mb-4 text-white' : block.style === 'h3' ? 'text-xl font-semibold mt-8 mb-3 text-white' : 'text-gray-300 leading-relaxed mb-4'}>{text}</Tag>;
-        }
-        if (block._type === 'image' && block.asset) {
-          return (
-            <div key={i} className="relative h-64 sm:h-96 rounded-2xl overflow-hidden my-8 border border-white/5">
-              <Image src={block.asset.url} alt="" fill sizes="100vw" className="object-cover" />
-            </div>
-          );
-        }
-        return null;
-      })}
-    </div>
-  );
-}
-
 export default async function BlogPostPage(props: Props) {
   const { lang, slug } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
-  const post = await client.fetch(POST_QUERY, { slug, lang: safeLang }).catch(() => null);
+  const post = await getPostData(safeLang, slug);
   if (!post) notFound();
 
   return (
@@ -81,9 +42,9 @@ export default async function BlogPostPage(props: Props) {
           ← {safeLang === 'uz' ? 'Blogga qaytish' : safeLang === 'ru' ? 'Назад к блогу' : safeLang === 'zh' ? '返回博客' : 'Back to blog'}
         </Link>
 
-        {post.publishedAt && (
+        {post.date && (
           <time className="text-xs text-gray-500 uppercase tracking-widest">
-            {new Date(post.publishedAt).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {new Date(post.date).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </time>
         )}
 
@@ -101,7 +62,12 @@ export default async function BlogPostPage(props: Props) {
           </div>
         )}
 
-        <PortableText content={post.content} />
+        {post.htmlContent && (
+          <div
+            className="prose prose-invert prose-lg max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-white [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-white [&_p]:text-gray-300 [&_p]:leading-relaxed [&_p]:mb-4 [&_blockquote]:border-l-4 [&_blockquote]:border-blue-500/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-400 [&_li]:text-gray-300 [&_strong]:text-white"
+            dangerouslySetInnerHTML={{ __html: post.htmlContent }}
+          />
+        )}
       </article>
     </div>
   );

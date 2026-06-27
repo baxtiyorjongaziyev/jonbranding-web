@@ -779,3 +779,9 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Accessibility and Line-Height fixes from Audit */
+.atelier-theme h1, .atelier-theme h2, .atelier-theme h3,
+h1, h2, h3 {
+  line-height: 1.15 !important;
+}
