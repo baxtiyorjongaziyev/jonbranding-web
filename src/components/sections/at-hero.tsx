@@ -23,7 +23,7 @@ const translations = {
     tagline: 'Premium Brending Agentligi',
     badge: 'Bepul Brand Audit mavjud',
     h1a: 'Brendingiz',
-    h1b: 'aslida',
+    h1b: 'aslida*',
     h1c: "qancha yo'qotyapti?",
     desc: { text: "Noto'g'ri qadoq, eskirgan logotip va ishonchsiz sayt orqali yuzlab mijozlarni yo'qotyapsiz. ", bold: "Bepul Brand Audit orqali buni qanday tuzatishni bilib oling." },
     cta1: 'Bepul Brand Audit olish ↗',
