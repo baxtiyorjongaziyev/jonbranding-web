@@ -32,7 +32,7 @@ jobs:
 
       - name: Audit production dependencies
         run: |
-          pnpm audit --audit-level=high --ignore-dev --json > pnpm-audit.json || true
+          pnpm audit --audit-level=high --prod --json > pnpm-audit.json || true
           node -e "const fs=require('fs'); const audit=JSON.parse(fs.readFileSync('pnpm-audit.json','utf8')); const m=audit.metadata?.vulnerabilities || {}; const total=Object.values(m).reduce((a,b)=>typeof b==='number'?a+b:a,0); fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## pnpm audit report\\n\\n' + Object.entries(m).map(([k,v])=>'- '+k+': '+v).join('\\n') + '\\n\\nTotal: '+total+'\\n'); if ((m.critical||0)>0 || (m.high||0)>0) console.log('Security advisories found. Review pnpm-audit.json and Dependabot alerts.');"
 
       - name: Upload audit report
