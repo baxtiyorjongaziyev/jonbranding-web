@@ -19,66 +19,66 @@ type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
 const translations = {
   uz: {
-    tagline: 'Markaziy Osiyo · Brand atelier · Est. 2019',
-    badge: '2026 · Yangi paketlar mavjud',
+    tagline: 'Premium Brending Agentligi',
+    badge: 'Bepul Brand Audit mavjud',
     h1a: 'Brendingiz',
     h1b: 'aslida',
     h1c: "qancha yo'qotyapti?",
-    desc: { text: "Brend tashxisi — biznesingizning ko'rinmas yo'qotishlarini topish. ", bold: "14 kun · 12 mezon · 30–50 betlik hisobot." },
-    cta1: 'Bepul mini-tashxis boshlash ↗',
-    cta2: "Paketlarni ko'rish →",
+    desc: { text: "Noto'g'ri qadoq, eskirgan logotip va ishonchsiz sayt orqali yuzlab mijozlarni yo'qotyapsiz. ", bold: "Bepul Brand Audit orqali buni qanday tuzatishni bilib oling." },
+    cta1: 'Bepul Brand Audit olish ↗',
+    cta2: "Xizmatlarni ko'rish →",
     stats: [
-      { label: "O'tkazildi", value: '240+' },
-      { label: 'Bu oyda', value: '4 joy' },
-      { label: 'Muddati', value: '14 kun' },
+      { label: "Yillar", value: '2019+' },
+      { label: "O'zgarishlar", value: 'Doimiy' },
+      { label: 'Sifat', value: 'Premium' },
     ],
     portfolioBadge: 'Premium brend',
   },
   ru: {
-    tagline: 'Центральная Азия · Brand atelier · Est. 2019',
-    badge: '2026 · Новые пакеты доступны',
+    tagline: 'Премиальное Брендинговое Агентство',
+    badge: 'Доступен Бесплатный Аудит',
     h1a: 'Сколько теряет',
     h1b: 'ваш',
     h1c: 'бренд на самом деле?',
-    desc: { text: 'Бренд-диагностика — выявление скрытых потерь вашего бизнеса. ', bold: '14 дней · 12 критериев · отчёт 30–50 страниц.' },
-    cta1: 'Начать бесплатно ↗',
-    cta2: 'Посмотреть пакеты →',
+    desc: { text: 'Плохая упаковка, устаревший логотип и ненадежный сайт лишают вас сотен клиентов. ', bold: 'Узнайте, как это исправить с помощью бесплатного бренд-аудита.' },
+    cta1: 'Получить Бесплатный Аудит ↗',
+    cta2: 'Посмотреть услуги →',
     stats: [
-      { label: 'Выполнено', value: '240+' },
-      { label: 'В этом месяце', value: '4 места' },
-      { label: 'Срок', value: '14 дней' },
+      { label: 'Годы', value: '2019+' },
+      { label: 'Изменения', value: 'Постоянно' },
+      { label: 'Качество', value: 'Премиум' },
     ],
     portfolioBadge: 'Премиум бренд',
   },
   en: {
-    tagline: 'Central Asia · Brand atelier · Est. 2019',
-    badge: '2026 · New packages available',
+    tagline: 'Premium Branding Agency',
+    badge: 'Free Brand Audit Available',
     h1a: 'How much is',
     h1b: 'your',
     h1c: 'brand actually losing?',
-    desc: { text: 'Brand diagnostics — discovering the invisible losses of your business. ', bold: '14 days · 12 criteria · 30–50 page report.' },
-    cta1: 'Start free mini-diagnosis ↗',
-    cta2: 'View packages →',
+    desc: { text: 'Poor packaging, an outdated logo, and an unreliable website are costing you hundreds of clients. ', bold: 'Find out how to fix it with a Free Brand Audit.' },
+    cta1: 'Get Free Brand Audit ↗',
+    cta2: 'View services →',
     stats: [
-      { label: 'Completed', value: '240+' },
-      { label: 'This month', value: '4 spots' },
-      { label: 'Timeline', value: '14 days' },
+      { label: 'Years', value: '2019+' },
+      { label: 'Changes', value: 'Constant' },
+      { label: 'Quality', value: 'Premium' },
     ],
     portfolioBadge: 'Premium brand',
   },
   zh: {
-    tagline: '中亚 · 品牌工坊 · 2019年成立',
-    badge: '2026 · 新套餐已上线',
+    tagline: '高端品牌机构',
+    badge: '提供免费品牌诊断',
     h1a: '您的品牌',
     h1b: '实际上',
     h1c: '在损失多少？',
-    desc: { text: '品牌诊断 — 发现您业务中的隐形损失。', bold: '14天 · 12个标准 · 30–50页报告。' },
-    cta1: '开始免费迷你诊断 ↗',
-    cta2: '查看套餐 →',
+    desc: { text: '糟糕的包装、过时的标志和不可靠的网站让您失去了数百名客户。', bold: '通过免费品牌诊断了解如何修复它。' },
+    cta1: '获取免费品牌诊断 ↗',
+    cta2: '查看服务 →',
     stats: [
-      { label: '已完成', value: '240+' },
-      { label: '本月', value: '4个名额' },
-      { label: '时限', value: '14天' },
+      { label: '年份', value: '2019+' },
+      { label: '变化', value: '持续' },
+      { label: '质量', value: '高端' },
     ],
     portfolioBadge: '高端品牌',
   },
@@ -86,28 +86,35 @@ const translations = {
 
 const DEFAULT_IMAGES: PortfolioImage[] = [
   { src: '/images/cms/beyaz-gold.jpg', name: 'Beyaz', year: '2026' },
-  { src: '/images/cms/arfadel-brand.png', name: 'ARFADEL', year: '2026' },
-  { src: '/images/cms/enros-logo-1.png', name: 'Enros', year: '2025' },
+  { src: '/images/cms/arfadel-cover.jpg', name: 'ARFADEL', year: '2026' },
+  { src: '/images/cms/enros-cover.jpg', name: 'Enros', year: '2025' },
   { src: '/images/cms/boyarin-hozir.png', name: 'Boyarin', year: '2026' },
+  { src: '/images/cms/savod-hozir.png', name: 'Savod', year: '2025' },
+  { src: '/images/cms/fidda-hozir.png', name: 'Fidda', year: '2025' },
 ];
-
-const INTERVAL_MS = 3500;
 
 const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
   const l = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
   const sectionRef = useRef<HTMLElement>(null);
   const [spot, setSpot] = useState({ x: -999, y: -999, visible: false });
-  const [activeIdx, setActiveIdx] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
 
-  const images = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
+  const allItems = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
+  // Create a pool of items that is at least 6 items long to avoid empty slots
+  const pool = [...allItems, ...allItems, ...allItems, ...allItems, ...DEFAULT_IMAGES].slice(0, Math.max(6, allItems.length));
 
   useEffect(() => {
-    if (images.length <= 1) return;
+    if (pool.length <= 1) return;
     const timer = setInterval(() => {
-      setActiveIdx((prev) => (prev + 1) % images.length);
-    }, INTERVAL_MS);
+      setStartIndex((prev) => (prev + 1) % pool.length);
+    }, 4000);
     return () => clearInterval(timer);
-  }, [images.length]);
+  }, [pool.length]);
+
+  const items = [];
+  for (let i = 0; i < 6; i++) {
+    items.push(pool[(startIndex + i) % pool.length]);
+  }
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
@@ -119,14 +126,12 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
     setSpot((s) => ({ ...s, visible: false }));
   }, []);
 
-  const current = images[activeIdx] || images[0];
-
   return (
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="bg-[var(--at-bg)] pt-16 pb-0 md:pt-24 relative overflow-hidden"
+      className="bg-[var(--at-bg)] pt-16 pb-16 md:pt-24 relative overflow-hidden"
     >
       {/* Spotlight */}
       <div
@@ -136,10 +141,13 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
           background: `radial-gradient(600px circle at ${spot.x}px ${spot.y}px, rgba(27,77,255,0.07), transparent 60%)`,
         }}
       />
-      <div className="max-w-[1320px] mx-auto px-5 md:px-8">
-        <div className="grid md:grid-cols-[1fr_400px] gap-0 items-end">
-          {/* LEFT — copy */}
-          <div className="pb-12 md:pb-20">
+      
+      <div className="max-w-[1400px] mx-auto px-5 md:px-8 relative z-10">
+        
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+          
+          {/* LEFT — Text Copy */}
+          <div className="flex-1 w-full pb-8 lg:pb-16 max-w-[700px]">
             <div className="flex flex-wrap items-center gap-3 mb-8">
               <span className="flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--at-muted)]">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--at-green)] animate-pulse" />
@@ -152,7 +160,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
 
             <h1
               className="font-bold text-[var(--at-ink)] mb-8"
-              style={{ fontSize: 'clamp(52px, 8.5vw, 140px)', lineHeight: 0.9, letterSpacing: '-0.045em' }}
+              style={{ fontSize: 'clamp(48px, 6vw, 100px)', lineHeight: 0.95, letterSpacing: '-0.04em' }}
             >
               <span className="block">{l.h1a}</span>
               <span className="block text-[var(--at-accent)] font-[family-name:var(--font-serif)] italic">
@@ -162,12 +170,12 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
               <span className="block">{l.h1c}</span>
             </h1>
 
-            <p className="text-[var(--at-ink-2)] text-base md:text-lg leading-relaxed max-w-[520px] mb-8">
+            <p className="text-[var(--at-ink-2)] text-base md:text-lg leading-relaxed max-w-[480px] mb-8">
               {l.desc.text}
               <strong className="text-[var(--at-ink)]">{l.desc.bold}</strong>
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-10">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={onOpen}
                 className="inline-flex items-center justify-center gap-2 bg-[var(--at-accent)] text-white rounded-full px-7 py-4 font-semibold text-sm hover:-translate-y-0.5 transition-transform"
@@ -181,66 +189,75 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
                 {l.cta2}
               </button>
             </div>
-
-            <div className="grid grid-cols-3 gap-6 border-t border-[var(--at-line)] pt-6">
-              {l.stats.map((m) => (
-                <div key={m.label}>
-                  <div className="font-bold text-[var(--at-ink)] text-2xl md:text-3xl leading-none mb-1" style={{ letterSpacing: '-0.03em' }}>{m.value}</div>
-                  <div className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--at-muted)] uppercase tracking-widest">{m.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
 
-          {/* RIGHT — rotating portfolio visual */}
-          <div className="relative hidden md:block self-end">
-            {/* Label */}
-            <div
-              className="absolute top-4 left-4 z-10 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] flex gap-3 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1.5 transition-all duration-500"
-              style={{ color: 'rgba(255,255,255,.85)' }}
-            >
-              <span>{current.name} · {current.year}</span>
-              <span className="text-[#C2552A]">{l.portfolioBadge}</span>
-            </div>
-
-            {/* Image carousel */}
-            <div className="rounded-t-2xl overflow-hidden relative" style={{ height: 500 }}>
-              {images.map((img, i) => (
-                <div
-                  key={img.src + i}
-                  className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-                  style={{ opacity: i === activeIdx ? 1 : 0 }}
-                >
-                  <Image
-                    src={img.src}
-                    alt={`${img.name} — Jon Branding`}
-                    fill
-                    sizes="400px"
-                    className="object-cover object-center"
-                    priority={i === 0}
-                  />
+          {/* RIGHT — Bento Grid Portfolio */}
+          <div className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] flex flex-col gap-3 md:gap-4 pb-12 lg:pb-16">
+            
+            {/* Top Row: 1 Large + 2 Stacked */}
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 h-auto sm:h-[300px] md:h-[340px]">
+              {/* Main Featured Item */}
+              <div key={items[0].name} className="flex-[1.5] relative rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer border border-[var(--at-line)] bg-[var(--at-paper)] h-[280px] sm:h-auto animate-in fade-in duration-500">
+                <Image src={items[0].src} alt={items[0].name} fill sizes="(max-width: 768px) 100vw, 400px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                
+                <div className="absolute bottom-5 left-5 right-5 md:bottom-6 md:left-6 md:right-6">
+                  <h3 className="text-white font-bold text-2xl md:text-3xl mb-2 tracking-tight leading-tight">{items[0].name}</h3>
+                  <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md text-white text-[10px] md:text-xs font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full">
+                    PORTFOLIO · {items[0].year}
+                  </span>
                 </div>
-              ))}
-            </div>
-
-            {/* Dots */}
-            {images.length > 1 && (
-              <div className="flex justify-center gap-2 mt-4">
-                {images.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveIdx(i)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      i === activeIdx
-                        ? 'bg-[var(--at-accent)] scale-125'
-                        : 'bg-[var(--at-line)] hover:bg-[var(--at-muted)]'
-                    }`}
-                    aria-label={`Show project ${i + 1}`}
-                  />
+                
+                <div className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </div>
+              </div>
+              
+              {/* Right Stacked Items */}
+              <div className="flex-1 flex sm:flex-col gap-3 md:gap-4">
+                {[items[1], items[2]].map((item, i) => (
+                  <div key={item.name + i} className="flex-1 relative rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer border border-[var(--at-line)] bg-[var(--at-paper)] h-[160px] sm:h-auto animate-in fade-in duration-500">
+                    <Image src={item.src} alt={item.name} fill sizes="(max-width: 768px) 50vw, 200px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-white font-bold text-lg md:text-xl mb-1 tracking-tight leading-snug">{item.name}</h3>
+                      <span className="inline-block px-2.5 py-1 bg-white/20 backdrop-blur-md text-white text-[9px] font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full">
+                        {item.year}
+                      </span>
+                    </div>
+                    
+                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </div>
+                  </div>
                 ))}
               </div>
-            )}
+            </div>
+
+            {/* Bottom Row: 3 Horizontal Items */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 h-auto sm:h-[180px] md:h-[200px]">
+              {[items[3], items[4], items[5]].map((item, i) => (
+                <div key={item.name + i} className={`relative rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer border border-[var(--at-line)] bg-[var(--at-paper)] h-[160px] sm:h-auto animate-in fade-in duration-500 ${i === 2 ? 'col-span-2 sm:col-span-1' : ''}`}>
+                  <Image src={item.src} alt={item.name} fill sizes="(max-width: 768px) 50vw, 200px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-white font-bold text-base md:text-lg mb-1 tracking-tight leading-snug">{item.name}</h3>
+                    <span className="inline-block px-2.5 py-1 bg-white/20 backdrop-blur-md text-white text-[9px] font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full">
+                      {item.year}
+                    </span>
+                  </div>
+                  
+                  <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </div>
+
         </div>
       </div>
     </section>

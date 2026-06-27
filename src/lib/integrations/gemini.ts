@@ -181,6 +181,11 @@ Kategoriyalar tavsifi:
 - "packaging": qadoq dizayni, packaging
 - "brand-strategy": brend strategiyasi, tadqiqotlar
 
+Juda MUHIM qoidalar:
+1. Loyiha nomi, mijoz, sanoat va faktlarni FAQAT berilgan matndan oling.
+2. O'zingizdan aslo hech narsa to'qib yozmang (gallyutsinatsiya qilmang). Agar mijoz haqida yozilmagan bo'lsa, "Noma'lum" deb bering.
+3. Loyiha faoliyatini yoki natijalarni bo'rttirmang. Faqat hujjatda bor faktlarni yozing.
+
 MATN:
 """
 ${text}

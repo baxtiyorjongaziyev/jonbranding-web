@@ -29,10 +29,10 @@ const t = {
 } as const;
 
 const ITEMS = [
-  { src: '/images/cms/arfadel-brand.png', name: 'ARFADEL', yr: "'26", color: '#1A1210' },
+  { src: '/images/cms/arfadel-cover.jpg', name: 'ARFADEL', yr: "'26", color: '#1A1210' },
   { src: '/images/cms/beyaz-gold.jpg', name: 'Beyaz', yr: "'26", color: '#2C3A2A' },
   { src: '/images/cms/boyarin-hozir.png', name: 'Boyarin', yr: "'26", color: '#0A1C3A' },
-  { src: '/images/cms/enros-logo-1.png', name: 'Enros', yr: "'25", color: '#0D0D1A' },
+  { src: '/images/cms/enros-cover.jpg', name: 'Enros', yr: "'25", color: '#0D0D1A' },
 ];
 
 const OFFSETS = ['md:translate-y-5', '', 'md:translate-y-10', 'md:translate-y-3'];

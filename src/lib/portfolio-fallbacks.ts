@@ -62,44 +62,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       ],
       order: 1
     },
-    {
-      _id: 'fallback-savod',
-      slug: 'savod',
-      title: 'Savod Milliy Nashriyoti',
-      client: 'Savod Nashriyot',
-      category: 'logo-design',
-      categoryLabel: 'Logotip dizayni',
-      tags: ['Logotip', 'Firma uslubi', 'Kreativ'],
-      coverImage: '/images/cms/savod-hozir.png',
-      beforeImage: '/images/cms/savod-avval.png',
-      afterImage: '/images/cms/savod-hozir.png',
-      oldHint: 'Avvalgi vizual ko\'rinish',
-      newHint: 'Savod (Yangi premium aydentika)',
-      description: 'Zamonaviy ma\'rifat va adabiyot olamini birlashtiruvchi, yuridik jihatdan toza va unikal milliy nashriyot aydentikasi.',
-      results: [
-        { metric: 'Kitob sotuvi o\'sishi', value: '+45%' },
-        { metric: 'Foydalanuvchilar ishonchi', value: '94%' },
-        { metric: 'Tanilish ko\'rsatkichi', value: '2.5 barobar' }
-      ],
-      body: [
-        {
-          heading: "Vazifa va Muammo",
-          paragraph: "Savod milliy nashriyoti bozorda eskirgan, oddiy yozuv uslubidagi logotip bilan tanilayotgandi. Nashriyot faqat darsliklar emas, balki premium badiiy adabiyotlar segmentiga kirib borishini ta'kidlash uchun o'ziga xos va falsafiy ma'noga ega aydentika zarur edi."
-        },
-        {
-          heading: "Strategik Yechim",
-          paragraph: "Biz sharqona madaniyat, ilm va kitob varaqlarini uyg'unlashtirgan o'ta unikal simvolik belgi yaratdik. Ranglar palitrasi sifatida oliyjanob zumrad va oltin ranglar tanlandi. Bu brendning ma'rifiy va premium mohiyatini mukammal ochib berdi."
-        },
-        {
-          heading: "Yakuniy Natija",
-          paragraph: "Yangi brending bilan nashr etilgan ilk premium turkum kitoblari do'konlarda rekord darajada tez sotildi. Kitobxonlar orasida 'Savod' brendiga bo'lgan ishonch va uning tanilishi misli ko'rilmagan darajada ko'tarildi."
-        }
-      ],
-      galleryImages: [
-        '/images/cms/savod-hozir.png'
-      ],
-      order: 2
-    },
+
     {
       _id: 'fallback-fidda',
       slug: 'fidda',
@@ -307,44 +270,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       ],
       order: 1
     },
-    {
-      _id: 'fallback-savod',
-      slug: 'savod',
-      title: 'Национальное издательство Savod',
-      client: 'Издательство Savod',
-      category: 'logo-design',
-      categoryLabel: 'Дизайн логотипа',
-      tags: ['Логотип', 'Фирменный стиль', 'Креатив'],
-      coverImage: '/images/cms/savod-hozir.png',
-      beforeImage: '/images/cms/savod-avval.png',
-      afterImage: '/images/cms/savod-hozir.png',
-      oldHint: 'Предыдущий вид',
-      newHint: 'Savod (Новая премиум айдентика)',
-      description: 'Уникальная национальная айдентика издательского дома, объединяющая мир современной литературы и глубоких традиций.',
-      results: [
-        { metric: 'Рост продаж книг', value: '+45%' },
-        { metric: 'Доверие читателей', value: '94%' },
-        { metric: 'Узнаваемость бренда', value: 'В 2.5 раза' }
-      ],
-      body: [
-        {
-          heading: "Задача и Проблема",
-          paragraph: "Издательство Savod использовало устаревший текстовый логотип. Для выхода в сегмент премиальной художественной литературы требовалась глубокая философская айдентика, выделяющая бренд на рынке."
-        },
-        {
-          heading: "Стратегическое Решение",
-          paragraph: "Мы создали символический знак, гармонично сочетающий восточную культуру, просвещение и книжные страницы. В качестве цветовой палитры были выбраны благородный изумрудный и золото, идеально раскрывающие суть бренда."
-        },
-        {
-          heading: "Результат",
-          paragraph: "Первая серия книг, изданная в новой айдентике, установила рекорд по скорости продаж. Доверие и лояльность читателей к бренду Savod выросли до беспрецедентного уровня."
-        }
-      ],
-      galleryImages: [
-        '/images/cms/savod-hozir.png'
-      ],
-      order: 2
-    },
+
     {
       _id: 'fallback-fidda',
       slug: 'fidda',
@@ -552,44 +478,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       ],
       order: 1
     },
-    {
-      _id: 'fallback-savod',
-      slug: 'savod',
-      title: 'Savod National Publishing',
-      client: 'Savod Publishing',
-      category: 'logo-design',
-      categoryLabel: 'Logo Design',
-      tags: ['Logo', 'Brand Identity', 'Creative'],
-      coverImage: '/images/cms/savod-hozir.png',
-      beforeImage: '/images/cms/savod-avval.png',
-      afterImage: '/images/cms/savod-hozir.png',
-      oldHint: 'Previous visual',
-      newHint: 'Savod (New premium identity)',
-      description: 'A unique national publishing identity bridging the world of modern literature and deep scholarly traditions.',
-      results: [
-        { metric: 'Book Sales Increase', value: '+45%' },
-        { metric: 'Reader Loyalty Rate', value: '94%' },
-        { metric: 'Brand Awareness', value: '2.5x' }
-      ],
-      body: [
-        {
-          heading: "The Challenge",
-          paragraph: "Savod publishing used an outdated wordmark. To highlight its entry into premium creative literature, a deep philosophical identity was necessary."
-        },
-        {
-          heading: "Strategic Solution",
-          paragraph: "We created a symbolic logo beautifully merging oriental motifs, education, and paper sheets. Oble emerald green and gold colors were selected to elevate the brand's visual language."
-        },
-        {
-          heading: "The Result",
-          paragraph: "The first collection of books published with the new brand identity set store sales records. Readers' trust and recognition reached unprecedented heights."
-        }
-      ],
-      galleryImages: [
-        '/images/cms/savod-hozir.png'
-      ],
-      order: 2
-    },
+
     {
       _id: 'fallback-fidda',
       slug: 'fidda',
@@ -797,44 +686,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       ],
       order: 1
     },
-    {
-      _id: 'fallback-savod',
-      slug: 'savod',
-      title: 'Savod 国家出版社',
-      client: 'Savod 出版社',
-      category: 'logo-design',
-      categoryLabel: '标志设计',
-      tags: ['标志', '品牌识别', '创意'],
-      coverImage: '/images/cms/savod-hozir.png',
-      beforeImage: '/images/cms/savod-avval.png',
-      afterImage: '/images/cms/savod-hozir.png',
-      oldHint: '旧版视觉效果',
-      newHint: 'Savod (全新高端视觉识别)',
-      description: '融合现代文学世界与深厚学术传统的独特国家出版社品牌视觉系统。',
-      results: [
-        { metric: '图书销量增长', value: '+45%' },
-        { metric: '读者忠诚度', value: '94%' },
-        { metric: '品牌知名度', value: '2.5倍' }
-      ],
-      body: [
-        {
-          heading: "挑战与背景",
-          paragraph: "Savod 出版社曾使用过时的文字标志。为了彰显其进军高端文学创作领域的决心，必须建立一个充满哲学深度的品牌视觉形象。"
-        },
-        {
-          heading: "战略性解决方案",
-          paragraph: "我们设计了一个完美融合东方元素、教育内涵与书页形象的象征性标志。选用高贵的祖母绿和金色作为品牌色，极大地提升了视觉语言的高级感。"
-        },
-        {
-          heading: "成果",
-          paragraph: "以全新品牌形象出版的首批丛书创下了书店销售记录。读者对 Savod 品牌的信任与认可达到了前所未有的高度。"
-        }
-      ],
-      galleryImages: [
-        '/images/cms/savod-hozir.png'
-      ],
-      order: 2
-    },
+
     {
       _id: 'fallback-fidda',
       slug: 'fidda',

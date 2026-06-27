@@ -70,14 +70,21 @@ async function handleSync(request: NextRequest) {
         const query = `*[_type == "portfolio" && googleDriveFolderId == $folderId][0]`;
         const existingDoc = await sanityWriteClient.fetch(query, { folderId: folder.id });
 
+        const forceUpdate = request.nextUrl.searchParams.get('force') === 'true';
+
         if (existingDoc) {
-          results.push({
-            folderName: folder.name,
-            folderId: folder.id,
-            status: 'skipped',
-            reason: 'Already imported (Sanity ID: ' + existingDoc._id + ')',
-          });
-          continue;
+          if (forceUpdate) {
+            console.log(`[portfolio-sync] Force update: Deleting existing document ${existingDoc._id}`);
+            await sanityWriteClient.delete(existingDoc._id);
+          } else {
+            results.push({
+              folderName: folder.name,
+              folderId: folder.id,
+              status: 'skipped',
+              reason: 'Already imported (Sanity ID: ' + existingDoc._id + ')',
+            });
+            continue;
+          }
         }
 
         console.log(`[portfolio-sync] Syncing folder: "${folder.name}" (${folder.id})`);
@@ -119,7 +126,13 @@ async function handleSync(request: NextRequest) {
         console.log(`[portfolio-sync] Successfully parsed metadata: "${parsedMeta.title}"`);
 
         // 6. Upload images to Sanity
-        const [coverImage, ...galleryImages] = imageFiles;
+        let coverImage = imageFiles.find(img => img.name.toLowerCase().includes('cover'));
+        let galleryImages = imageFiles.filter(img => img.id !== coverImage?.id);
+        
+        if (!coverImage) {
+          coverImage = imageFiles[0];
+          galleryImages = imageFiles.slice(1);
+        }
 
         console.log(`[portfolio-sync] Uploading cover image: ${coverImage.name}`);
         const coverBuffer = await downloadFileBuffer(coverImage.id);

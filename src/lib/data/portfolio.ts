@@ -58,7 +58,15 @@ export async function fetchPortfolioList(lang: string): Promise<PortfolioProject
     if (!exists) merged.push(item);
   });
 
-  return merged.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+  return merged.sort((a, b) => {
+    const aIsFallback = a._id?.startsWith('fallback-') || false;
+    const bIsFallback = b._id?.startsWith('fallback-') || false;
+
+    if (aIsFallback && !bIsFallback) return 1;
+    if (!aIsFallback && bIsFallback) return -1;
+
+    return (a.order ?? 999) - (b.order ?? 999);
+  });
 }
 
 export async function fetchPortfolioBySlug(slug: string): Promise<PortfolioProject | null> {
