@@ -20,16 +20,32 @@ const POSTS_QUERY = `*[_type == "post" && language == $lang] | order(publishedAt
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
-  const titles = { uz: 'Blog | Jon.Branding', ru: 'Блог | Jon.Branding', en: 'Blog | Jon.Branding', zh: '博客 | Jon.Branding' };
+  const titles = {
+    uz: 'Blog | Jon.Branding',
+    ru: 'Блог | Jon.Branding',
+    en: 'Branding Blog | Jon.Branding',
+    zh: '博客 | Jon.Branding'
+  };
   const descs = {
-    uz: 'Brending, dizayn va marketing haqida foydali maqolalar.',
-    ru: 'Полезные статьи о брендинге, дизайне и маркетинге.',
-    en: 'Useful articles about branding, design, and marketing.',
-    zh: '关于品牌、设计和营销的有用文章。',
+    uz: 'Brending, dizayn va marketing haqida foydali maqolalar va tahliliy materiallar. Neyming, logotip, brend strategiyasi va qadoq dizayni bo\'yicha ekspert maslahatlari.',
+    ru: 'Полезные статьи и аналитика о брендинге, дизайне и маркетинге. Экспертные советы по неймингу, логотипу, бренд-стратегии и дизайну упаковки.',
+    en: 'Actionable articles about branding, naming, logo design and marketing strategy. Expert tips to grow your business with professional brand identity.',
+    zh: '关于品牌塑造、命名、标志设计和营销策略的实用文章。通过专业品牌标识发展业务的专家建议。',
   };
   return {
     title: titles[safeLang],
     description: descs[safeLang],
+    openGraph: {
+      title: titles[safeLang],
+      description: descs[safeLang],
+      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: titles[safeLang],
+      description: descs[safeLang],
+      images: ['/images/cms/og-image.jpeg'],
+    },
   };
 }
 
