@@ -1,15 +1,14 @@
 
 import { Metadata } from 'next';
-import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon, Truck } from 'lucide-react';
+import fs from 'fs';
+import path from 'path';
 
 type Props = {
   params: Promise<{ lang: string }>;
 };
-
-export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
@@ -23,10 +22,22 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return { title: titles[safeLang] || titles.uz };
 }
 
+function getSitemapBlogPosts(lang: string) {
+  try {
+    const dir = path.join(process.cwd(), 'src/posts', ['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz');
+    if (!fs.existsSync(dir)) return [];
+    return fs.readdirSync(dir).filter(f => f.endsWith('.md')).map(fileName => {
+      const slug = fileName.replace(/\.md$/, '');
+      const content = fs.readFileSync(path.join(dir, fileName), 'utf8');
+      const title = content.startsWith('---') ? content.split('---')[1]?.split('\n').find(l => l.startsWith('title:'))?.replace(/^title:\s*/,'').replace(/^["']|["']$/g,'').trim() : slug;
+      return { slug, title: title || slug };
+    }).sort((a, b) => a.slug.localeCompare(b.slug));
+  } catch { return []; }
+}
+
 const SitemapPage = async (props: Props) => {
   const { lang } = await props.params;
-  let sortedPosts: { slug: string; title: string }[] = [];
-  try { sortedPosts = getSortedPostsData(lang); } catch (e) { console.error('sitemap: getSortedPostsData failed', e); }
+  const sortedPosts = getSitemapBlogPosts(lang);
   const dictionary = await getDictionary(lang as Locale);
   
   const t = dictionary.sitemapPage || {
