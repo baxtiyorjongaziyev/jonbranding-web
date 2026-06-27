@@ -2,6 +2,7 @@
 import type { FC } from 'react';
 import Image from 'next/image';
 import { useRef, useState, useCallback, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface PortfolioImage {
   src: string;
@@ -97,24 +98,19 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
   const l = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
   const sectionRef = useRef<HTMLElement>(null);
   const [spot, setSpot] = useState({ x: -999, y: -999, visible: false });
-  const [startIndex, setStartIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const allItems = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
-  // Create a pool of items that is at least 6 items long to avoid empty slots
-  const pool = [...allItems, ...allItems, ...allItems, ...allItems, ...DEFAULT_IMAGES].slice(0, Math.max(6, allItems.length));
+  const pool = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
 
   useEffect(() => {
     if (pool.length <= 1) return;
     const timer = setInterval(() => {
-      setStartIndex((prev) => (prev + 1) % pool.length);
-    }, 4000);
+      setActiveIndex((prev) => (prev + 1) % pool.length);
+    }, 3500); // 3.5 seconds fast transition
     return () => clearInterval(timer);
   }, [pool.length]);
 
-  const items = [];
-  for (let i = 0; i < 6; i++) {
-    items.push(pool[(startIndex + i) % pool.length]);
-  }
+  const activeItem = pool[activeIndex];
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
@@ -147,7 +143,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           
           {/* LEFT — Text Copy */}
-          <div className="flex-1 w-full pb-8 lg:pb-16 max-w-[700px]">
+          <div className="flex-1 w-full pb-8 lg:pb-16 max-w-[700px] z-20">
             <div className="flex flex-wrap items-center gap-3 mb-8">
               <span className="flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--at-muted)]">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--at-green)] animate-pulse" />
@@ -191,71 +187,56 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
             </div>
           </div>
 
-          {/* RIGHT — Bento Grid Portfolio */}
-          <div className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] flex flex-col gap-3 md:gap-4 pb-12 lg:pb-16">
-            
-            {/* Top Row: 1 Large + 2 Stacked */}
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 h-auto sm:h-[300px] md:h-[340px]">
-              {/* Main Featured Item */}
-              <div key={items[0].name} className="flex-[1.5] relative rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer border border-[var(--at-line)] bg-[var(--at-paper)] h-[280px] sm:h-auto animate-in fade-in duration-500">
-                <Image src={items[0].src} alt={items[0].name} fill sizes="(max-width: 768px) 100vw, 400px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-                
-                <div className="absolute bottom-5 left-5 right-5 md:bottom-6 md:left-6 md:right-6">
-                  <h3 className="text-white font-bold text-2xl md:text-3xl mb-2 tracking-tight leading-tight">{items[0].name}</h3>
-                  <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md text-white text-[10px] md:text-xs font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full">
-                    PORTFOLIO · {items[0].year}
-                  </span>
-                </div>
-                
-                <div className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                </div>
-              </div>
-              
-              {/* Right Stacked Items */}
-              <div className="flex-1 flex sm:flex-col gap-3 md:gap-4">
-                {[items[1], items[2]].map((item, i) => (
-                  <div key={item.name + i} className="flex-1 relative rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer border border-[var(--at-line)] bg-[var(--at-paper)] h-[160px] sm:h-auto animate-in fade-in duration-500">
-                    <Image src={item.src} alt={item.name} fill sizes="(max-width: 768px) 50vw, 200px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-white font-bold text-lg md:text-xl mb-1 tracking-tight leading-snug">{item.name}</h3>
-                      <span className="inline-block px-2.5 py-1 bg-white/20 backdrop-blur-md text-white text-[9px] font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full">
-                        {item.year}
-                      </span>
+          {/* RIGHT — Single Image Slideshow */}
+          <div className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] pb-12 lg:pb-16 flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] rounded-3xl md:rounded-[2.5rem] overflow-hidden border border-[var(--at-line)] bg-[var(--at-paper)] shadow-2xl group cursor-pointer">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  className="absolute inset-0"
+                  onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <Image 
+                    src={activeItem.src} 
+                    alt={activeItem.name} 
+                    fill 
+                    sizes="(max-width: 768px) 100vw, 800px" 
+                    className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" 
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
+                  
+                  <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex justify-between items-end">
+                    <div>
+                      <motion.h3 
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                        className="text-white font-bold text-3xl md:text-5xl mb-3 tracking-tight leading-tight drop-shadow-lg"
+                      >
+                        {activeItem.name}
+                      </motion.h3>
+                      <motion.span 
+                        initial={{ y: 10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.4, duration: 0.5 }}
+                        className="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-xs md:text-sm font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full shadow-lg"
+                      >
+                        PORTFOLIO · {activeItem.year}
+                      </motion.span>
                     </div>
                     
-                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center transition-colors border border-white/20 group-hover:bg-white/20 shadow-lg">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
                     </div>
                   </div>
-                ))}
-              </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
-
-            {/* Bottom Row: 3 Horizontal Items */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 h-auto sm:h-[180px] md:h-[200px]">
-              {[items[3], items[4], items[5]].map((item, i) => (
-                <div key={item.name + i} className={`relative rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer border border-[var(--at-line)] bg-[var(--at-paper)] h-[160px] sm:h-auto animate-in fade-in duration-500 ${i === 2 ? 'col-span-2 sm:col-span-1' : ''}`}>
-                  <Image src={item.src} alt={item.name} fill sizes="(max-width: 768px) 50vw, 200px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-white font-bold text-base md:text-lg mb-1 tracking-tight leading-snug">{item.name}</h3>
-                    <span className="inline-block px-2.5 py-1 bg-white/20 backdrop-blur-md text-white text-[9px] font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full">
-                      {item.year}
-                    </span>
-                  </div>
-                  
-                  <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                  </div>
-                </div>
-              ))}
-            </div>
-
           </div>
 
         </div>
