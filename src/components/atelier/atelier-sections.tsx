@@ -711,8 +711,10 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   src={t.img}
                   alt={t.name}
                   fill
+                  unoptimized
+                  quality={100}
                   className="object-cover transition-transform duration-500 hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, 100vw"
                 />
               </div>
               <div className={`head ${t.dark ? 'dark' : ''}`}>
@@ -1396,7 +1398,15 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
                 justifyContent: 'flex-end',
               }}>
                 {t.image ? (
-                  <Image src={t.image} alt={t.name} fill className="object-cover opacity-80 transition-transform duration-300 hover:scale-105" sizes="220px" />
+                  <Image 
+                    src={t.image} 
+                    alt={t.name} 
+                    fill 
+                    unoptimized
+                    quality={100}
+                    className="object-cover opacity-80 transition-transform duration-300 hover:scale-105" 
+                    sizes="50vw" 
+                  />
                 ) : (
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1B4DFF20, #C2552A20)' }} />
                 )}

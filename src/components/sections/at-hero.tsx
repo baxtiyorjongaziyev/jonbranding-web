@@ -204,6 +204,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
                     src={activeItem.src} 
                     alt={activeItem.name} 
                     fill 
+                    quality={100}
                     sizes="(max-width: 768px) 100vw, 800px" 
                     className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" 
                     priority
