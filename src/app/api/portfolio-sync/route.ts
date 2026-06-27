@@ -25,18 +25,19 @@ async function handleSync(request: NextRequest) {
   try {
     // 1. Authorize the sync request (secret param OR Vercel cron auth)
     const secret = request.nextUrl.searchParams.get('secret');
-    const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET || '';
+    const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET;
+    const expectedAuth = process.env.CRON_SECRET ? `Bearer ${process.env.CRON_SECRET}` : null;
     const authHeader = request.headers.get('authorization');
-    const isVercelCron = authHeader === `Bearer ${process.env.CRON_SECRET}`;
+    const isVercelCron = Boolean(expectedAuth && authHeader && safeCompare(authHeader, expectedAuth));
 
-    if (!cronSecret && !isVercelCron) {
+    if (!cronSecret && !expectedAuth) {
       return NextResponse.json(
         { success: false, error: 'No auth configured' },
         { status: 500 }
       );
     }
 
-    if (!isVercelCron && (!secret || !safeCompare(secret, cronSecret))) {
+    if (!isVercelCron && (!secret || !cronSecret || !safeCompare(secret, cronSecret))) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
@@ -204,7 +205,7 @@ async function handleSync(request: NextRequest) {
           folderName: folder.name,
           folderId: folder.id,
           status: 'failed',
-          reason: folderError instanceof Error ? folderError.message : String(folderError),
+          reason: 'Internal server error while processing folder',
         });
       }
     }
@@ -217,7 +218,7 @@ async function handleSync(request: NextRequest) {
   } catch (error) {
     console.error('[portfolio-sync] Global sync error:', error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : String(error) },
+      { success: false, error: 'Internal server error' },
       { status: 500 }
     );
   }
