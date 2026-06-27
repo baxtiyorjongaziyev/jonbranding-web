@@ -74,10 +74,10 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtServices onOpen={open} lang={lang} />
       
       <div className="atelier-theme" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
-        <ATGallery dictionary={dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
+        <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
       </div>
 
-      <ATQuotes dictionary={dictionary} testimonials={testimonials} lang={lang} />
+      <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />
       <AtPricing onOpen={open} lang={lang} />
       <AtFaq lang={lang} onOpen={open} />
       <AtFinalCta onOpen={open} lang={lang} />
