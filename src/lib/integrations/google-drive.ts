@@ -37,6 +37,20 @@ export interface DriveFile {
   mimeType: string;
 }
 
+export async function findFolderByName(name: string): Promise<string | null> {
+  const auth = getAuth();
+  const drive = google.drive({ version: 'v3', auth });
+
+  const res = await drive.files.list({
+    q: `name = '${name}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
+    fields: 'files(id, name)',
+    pageSize: 1,
+  });
+
+  const files = res.data.files ?? [];
+  return files[0]?.id ?? null;
+}
+
 export async function listSubfolders(parentFolderId: string): Promise<DriveFolder[]> {
   const auth = getAuth();
   const drive = google.drive({ version: 'v3', auth });
