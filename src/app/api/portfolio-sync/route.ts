@@ -3,6 +3,7 @@ import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parsePortfolioMetadata } from '@/lib/gemini';
 import { safeCompare } from '@/lib/security';
+import { scrapeTelegramPosts } from '@/lib/integrations/telegram';
 
 // Initialize Sanity client with write access token
 const sanityWriteClient = createClient({
@@ -117,7 +118,14 @@ async function handleSync(request: NextRequest) {
           textContent = textBuffer.toString('utf8');
           console.log(`[portfolio-sync] Read metadata text from file: ${textFile.name}`);
         } else {
-          console.log(`[portfolio-sync] No text metadata file found, falling back to folder name`);
+          console.log(`[portfolio-sync] No text metadata file found, searching Telegram @jonbranding for project name`);
+          const tgText = await scrapeTelegramPosts('jonbranding', folder.name);
+          if (tgText) {
+            textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Telegramdan olindi):\n${tgText}`;
+            console.log(`[portfolio-sync] Successfully fetched case study from Telegram!`);
+          } else {
+            console.log(`[portfolio-sync] No post found on Telegram, falling back to basic folder name`);
+          }
         }
 
         // 5. Parse metadata using Gemini
