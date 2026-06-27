@@ -1,37 +1,29 @@
 import { Metadata } from 'next';
-import { client } from '@/sanity/lib/client';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { getSortedPostsData } from '@/lib/blog-posts';
 
 export const revalidate = 300;
 
 type Props = { params: Promise<{ lang: string }> };
 
-const POSTS_QUERY = `*[_type == "post" && language == $lang] | order(publishedAt desc) {
-  _id,
-  title,
-  "slug": slug.current,
-  description,
-  "image": image.asset->url + "?w=800&q=80",
-  publishedAt
-}`;
+const titles = {
+  uz: 'Blog | Jon.Branding',
+  ru: 'Блог | Jon.Branding',
+  en: 'Branding Blog | Jon.Branding',
+  zh: '博客 | Jon.Branding'
+};
+const descs = {
+  uz: 'Brending, dizayn va marketing haqida foydali maqolalar. Neyming, logotip, brend strategiyasi va qadoq dizayni bo\'yicha ekspert maslahatlari.',
+  ru: 'Полезные статьи и аналитика о брендинге, дизайне и маркетинге. Экспертные советы по неймингу, логотипу, бренд-стратегии и дизайну упаковки.',
+  en: 'Actionable articles about branding, naming, logo design and marketing strategy. Expert tips to grow your business with professional brand identity.',
+  zh: '关于品牌塑造、命名、标志设计和营销策略的实用文章。通过专业品牌标识发展业务的专家建议。',
+};
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
-  const titles = {
-    uz: 'Blog | Jon.Branding',
-    ru: 'Блог | Jon.Branding',
-    en: 'Branding Blog | Jon.Branding',
-    zh: '博客 | Jon.Branding'
-  };
-  const descs = {
-    uz: 'Brending, dizayn va marketing haqida foydali maqolalar. Neyming, logotip, brend strategiyasi va qadoq dizayni bo\'yicha ekspert maslahatlari.',
-    ru: 'Полезные статьи и аналитика о брендинге, дизайне и маркетинге. Экспертные советы по неймингу, логотипу, бренд-стратегии и дизайну упаковки.',
-    en: 'Actionable articles about branding, naming, logo design and marketing strategy. Expert tips to grow your business with professional brand identity.',
-    zh: '关于品牌塑造、命名、标志设计和营销策略的实用文章。通过专业品牌标识发展业务的专家建议。',
-  };
   return {
     title: titles[safeLang],
     description: descs[safeLang],
@@ -53,12 +45,7 @@ export default async function BlogPage(props: Props) {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
-  let posts: any[] = [];
-  try {
-    posts = await client.fetch(POSTS_QUERY, { lang: safeLang });
-  } catch (e) {
-    console.error('Blog fetch failed:', e);
-  }
+  const posts = getSortedPostsData(safeLang);
 
   let dictionary;
   try { dictionary = await getDictionary(safeLang); } catch { dictionary = await getDictionary('uz'); }
@@ -96,7 +83,7 @@ export default async function BlogPage(props: Props) {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {posts.map((post) => (
-              <Link key={post._id} href={`/${safeLang}/blog/${post.slug}`} className="group block">
+              <Link key={post.slug} href={`/${safeLang}/blog/${post.slug}`} className="group block">
                 <div className="relative h-56 rounded-2xl overflow-hidden mb-4 border border-white/5">
                   {post.image ? (
                     <Image src={post.image} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -110,9 +97,9 @@ export default async function BlogPage(props: Props) {
                 {post.description && (
                   <p className="text-sm text-gray-400 line-clamp-2">{post.description}</p>
                 )}
-                {post.publishedAt && (
+                {post.date && (
                   <time className="text-xs text-gray-600 mt-2 block">
-                    {new Date(post.publishedAt).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    {new Date(post.date).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                   </time>
                 )}
               </Link>
