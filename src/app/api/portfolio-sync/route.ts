@@ -4,6 +4,7 @@ import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-driv
 import { parsePortfolioMetadata } from '@/lib/gemini';
 import { safeCompare } from '@/lib/security';
 import { scrapeTelegramPosts } from '@/lib/integrations/telegram';
+import { scrapeInstagramPosts } from '@/lib/integrations/instagram';
 
 // Initialize Sanity client with write access token
 const sanityWriteClient = createClient({
@@ -118,13 +119,20 @@ async function handleSync(request: NextRequest) {
           textContent = textBuffer.toString('utf8');
           console.log(`[portfolio-sync] Read metadata text from file: ${textFile.name}`);
         } else {
-          console.log(`[portfolio-sync] No text metadata file found, searching Telegram @jonbranding for project name`);
-          const tgText = await scrapeTelegramPosts('jonbranding', folder.name);
-          if (tgText) {
-            textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Telegramdan olindi):\n${tgText}`;
-            console.log(`[portfolio-sync] Successfully fetched case study from Telegram!`);
+          console.log(`[portfolio-sync] No text metadata file found, searching Instagram for project name`);
+          let postText = await scrapeInstagramPosts(folder.name);
+          if (postText) {
+            textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Instagramdan olindi):\n${postText}`;
+            console.log(`[portfolio-sync] Successfully fetched case study from Instagram!`);
           } else {
-            console.log(`[portfolio-sync] No post found on Telegram, falling back to basic folder name`);
+            console.log(`[portfolio-sync] No post found on Instagram, searching Telegram @jonbranding`);
+            const tgText = await scrapeTelegramPosts('jonbranding', folder.name);
+            if (tgText) {
+              textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Telegramdan olindi):\n${tgText}`;
+              console.log(`[portfolio-sync] Successfully fetched case study from Telegram!`);
+            } else {
+              console.log(`[portfolio-sync] No post found on Telegram either, falling back to basic folder name`);
+            }
           }
         }
 
