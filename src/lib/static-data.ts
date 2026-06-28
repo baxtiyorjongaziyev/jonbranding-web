@@ -87,7 +87,7 @@ export const staticTestimonials: Testimonial[] = [
     name: "Hikmatulloh Toxirov",
     company: "Almaz Shoes asoschisi",
     avatar: "HT",
-    image: "https://i.vimeocdn.com/video/2173703371-6744ed7328e7e4922b91f7001b5211914b5b2d62dc7416e41c1a8472e868fc88-d_640?region=us",
+    image: "",
     imageHint: "Almaz Shoes founder",
     quote: "Tezkor patent juda foydali bo'ldi. Brend himoyasi haqida o'ylab yurgan edim, juda o'z vaqtida taklif qildingiz. Hujjatlar tez tayyorlandi, jarayon aniq va shaffof. Rahmat!",
     videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"

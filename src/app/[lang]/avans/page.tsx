@@ -3,6 +3,16 @@
 import React, { useState, useEffect } from 'react';
 
 export default function AvansCalculator() {
+  const [isSystemDark, setIsSystemDark] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsSystemDark(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsSystemDark(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
   const [salary, setSalary] = useState(6000000);
   const [totalDays, setTotalDays] = useState(22);
   const [workedDays, setWorkedDays] = useState(10);
@@ -42,7 +52,7 @@ export default function AvansCalculator() {
   };
 
   return (
-    <div className="min-h-screen py-16 px-4 sm:py-24 flex flex-col items-center relative overflow-hidden" 
+    <div className={`min-h-screen py-16 px-4 sm:py-24 flex flex-col items-center relative overflow-hidden transition-colors duration-500 ${isSystemDark ? 'dark bg-slate-950 text-white' : 'bg-[#F2EFE6] text-slate-900'}`} 
       style={{ 
         fontFamily: "'IBM Plex Sans', sans-serif",
         backgroundImage: `
@@ -63,7 +73,7 @@ export default function AvansCalculator() {
           </div>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Avans Kalkulyatori</h1>
-            <p className="text-zinc-500 text-xs font-semibold uppercase tracking-wider mt-1">Jon Branding Moliya Tizimi</p>
+            <p className="text-zinc-500 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider mt-1">Jon Branding Moliya Tizimi</p>
           </div>
         </div>
       </header>
@@ -85,7 +95,7 @@ export default function AvansCalculator() {
                 step="100000" min="0" 
                 className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-xl font-bold outline-none transition-all focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15" 
               />
-              <span className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 font-medium pointer-events-none">UZS</span>
+              <span className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 font-medium pointer-events-none">UZS</span>
             </div>
           </div>
 
@@ -139,7 +149,7 @@ export default function AvansCalculator() {
                 step="50000" min="0" 
                 className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-xl font-bold outline-none transition-all focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15" 
               />
-              <span className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 font-medium pointer-events-none">UZS</span>
+              <span className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 font-medium pointer-events-none">UZS</span>
             </div>
           </div>
         </section>
@@ -151,7 +161,7 @@ export default function AvansCalculator() {
               <span className="w-2 h-2 rounded-full bg-[#10B981]"></span> Haqiqatda ishlangan
             </p>
             <p className="text-2xl font-bold tracking-tight">{fmt(accrued)}</p>
-            <p className="text-sm text-slate-500 mt-1 font-medium">{fmt(dailyWage)} / kuniga</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 font-medium">{fmt(dailyWage)} / kuniga</p>
           </div>
 
           <div className="relative overflow-hidden bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-[#F59E0B]/30 rounded-[2rem] p-6 shadow-[0_0_40px_-10px_rgba(245,158,11,0.15)]">
@@ -160,7 +170,7 @@ export default function AvansCalculator() {
               <span className="w-2 h-2 rounded-full bg-[#F59E0B]"></span> Xavfsiz Limit
             </p>
             <p className="text-2xl font-bold text-[#F59E0B] tracking-tight">{fmt(maxSafe)}</p>
-            <p className="text-sm text-slate-500 mt-1 font-medium">Tavsiya etilgan maksimal</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 font-medium">Tavsiya etilgan maksimal</p>
           </div>
         </section>
 

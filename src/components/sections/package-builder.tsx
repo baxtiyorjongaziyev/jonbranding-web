@@ -71,11 +71,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             </div>
 
             <Card
+                onClick={onSelect}
                 className={cn(
-                    "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500",
+                    "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500 cursor-pointer",
                     selected
                         ? (isVip ? 'border-brand-blue bg-blue-950 shadow-[0_0_60px_rgba(37,99,235,0.28)] scale-[1.02]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.02]')
-                        : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-brand-blue/60" : "border-slate-100 hover:border-primary/20 shadow-sm")
+                        : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-brand-blue/60" : "border-slate-100 hover:border-primary/30 hover:shadow-md shadow-sm")
                 )}
             >
                 <CardHeader className="p-5 pb-3 relative z-10">
@@ -159,12 +160,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         )}
 
                         <Button
-                            variant={selected ? (isVip ? "outline" : "default") : "outline"}
+                            variant={selected ? (isVip ? "default" : "default") : "outline"}
                             className={cn(
-                                "relative z-20 h-auto w-full rounded-full border-2 py-4 text-[13px] font-black uppercase tracking-[0.08em] transition-[background-color,border-color,color,box-shadow,transform] duration-300",
+                                "relative z-20 h-auto w-full rounded-full border-2 py-4 text-[13px] font-black uppercase tracking-[0.08em] transition-all duration-300",
                                 selected 
-                                    ? (isVip ? "border-none bg-brand-blue text-white shadow-[0_0_20px_rgba(37,99,235,0.35)]" : "border-none bg-primary text-white shadow-lg")
-                                    : (isVip ? "border-brand-blue/40 bg-white/5 text-sky-blue hover:bg-brand-blue hover:text-white" : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary shadow-sm")
+                                    ? (isVip ? "border-transparent bg-brand-blue text-white shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:bg-brand-blue/90" : "border-transparent bg-primary text-white shadow-lg hover:bg-primary/90")
+                                    : (isVip ? "border-brand-blue/40 bg-transparent text-sky-blue group-hover:border-brand-blue/70 group-hover:bg-brand-blue/10 hover:!bg-brand-blue hover:!text-white" : "bg-transparent border-slate-200 text-slate-500 group-hover:border-primary/40 group-hover:text-primary group-hover:bg-primary/5 hover:!border-primary hover:!bg-primary hover:!text-white shadow-none")
                             )}
                             onClick={(e) => { e.stopPropagation(); onSelect(); }}
                         >
@@ -282,7 +283,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
         namingPremium: true, logoPremium: true, urgency: false, nda: false
     });
-    const [discountType, setDiscountType] = useLocalStorage<'none' | 'package' | 'full'>('discountOption', 'none');
+    const [discountType, setDiscountType] = useLocalStorage<'none' | 'half' | 'full'>('discountOption', 'none');
     const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
@@ -326,7 +327,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     if (!isClient || !dictionary) return null;
 
     const discountOptions = [
-        { value: 'none', label: "50/50 TO'LOV" },
+        { value: 'none', label: "CHEGIRMASIZ" },
+        { value: 'half', label: "50/50 TO'LOV" },
         { value: 'full', label: "100% OLDINDAN (-10%)" }
     ];
 
