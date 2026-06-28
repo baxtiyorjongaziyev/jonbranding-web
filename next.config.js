@@ -50,9 +50,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   turbopack: {},
   webpack: (config) => {
     config.resolve.alias = {
