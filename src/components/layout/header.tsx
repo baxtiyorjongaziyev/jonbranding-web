@@ -92,15 +92,11 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   if (pathnameWithoutLocale === '/pro-preview') return null;
 
   const isHomepage = pathnameWithoutLocale === '/';
-  const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka');
+  const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka') || isHomepage;
   const useDarkHeaderText = !isDarkPage;
 
   const navItems = [
     { href: getLocalizedPath('/portfolio'), label: dictionary.portfolio },
-    { href: getLocalizedPath('/online-brief'), label: dictionary.online_brief },
-    { href: getLocalizedPath('/#founder'), label: dictionary.founder },
-    { href: getLocalizedPath('/#process'), label: dictionary.process },
-    { href: getLocalizedPath('/blog'), label: dictionary.blog },
     { href: getLocalizedPath('/haqimizda'), label: dictionary.about },
     { href: getLocalizedPath('/aloqa'), label: dictionary.contacts },
   ];
@@ -151,7 +147,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
           className={cn(
             'flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500',
             scrolled
-              ? cn('mx-auto max-w-[95%] rounded-full liquid-glass-header px-5 py-2 lg:max-w-6xl lg:px-7', isDarkPage && 'dark-glass')
+              ? cn('mx-auto mt-3 max-w-[95%] rounded-full liquid-glass-header px-5 py-2 lg:max-w-6xl lg:px-7', isDarkPage && 'dark-glass')
               : 'mx-auto max-w-[1240px] border-b border-transparent bg-transparent px-4 sm:px-6 lg:px-7'
           )}
           suppressHydrationWarning
@@ -164,17 +160,15 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
             <Logo isWhite={!useDarkHeaderText} />
           </Link>
 
-          {mounted && (
-            <DesktopNav
-              lang={lang}
-              navItems={navItems}
-              services={services}
-              scrolled={scrolled}
-              useDarkHeaderText={useDarkHeaderText}
-              onContactClick={handleContactClick}
-              dictionary={dictionary}
-            />
-          )}
+          <DesktopNav
+            lang={lang}
+            navItems={navItems}
+            services={services}
+            scrolled={scrolled}
+            useDarkHeaderText={useDarkHeaderText}
+            onContactClick={handleContactClick}
+            dictionary={dictionary}
+          />
 
           <MobileMenu
             lang={lang}
