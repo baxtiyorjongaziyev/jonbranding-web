@@ -298,7 +298,13 @@
     "thinking": "Oisha o'ylamoqda...",
     "openButtonAriaLabel": "Oisha chatini ochish",
     "closeButtonAriaLabel": "Oisha chatini yopish",
-    "sendButtonAriaLabel": "Xabar yuborish"
+    "sendButtonAriaLabel": "Xabar yuborish",
+    "proactive": {
+      "sotuvchi-kartochka": "Assalomu alaykum! Ko'rib turibman, Uzum/bozor uchun sotuvchi kartochkalarimiz bilan qiziqyapsiz. Sizga shu yo'nalishdagi yopiq portfolio namunalarini tashlab beraymi?",
+      "xizmatlar": "Assalomu alaykum! Xizmatlarimizni o'rganyapsiz. Qaysi yo'nalish sizni ko'proq qiziqtiradi? Sizga real misollar bilan tanishishingizga yordam beray.",
+      "quiz": "Testni yakunlashga yaqin qoldingiz! Natijalarni oldinroq ko'rishni xohlaysizmi?",
+      "blog": "Maqolani o'qiyotganingizdan xursandman. Aytgancha, shu mavzu bo'yicha brendingizni bepul tekshirib olishingiz mumkin."
+    }
   },
   "home": {
     "cta1_title": "Brendingiz mijozni ishontiryaptimi? Keling, tekshiramiz.",

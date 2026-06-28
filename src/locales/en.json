@@ -296,7 +296,13 @@
     "thinking": "Oisha is thinking...",
     "openButtonAriaLabel": "Open Oisha chat",
     "closeButtonAriaLabel": "Close Oisha chat",
-    "sendButtonAriaLabel": "Send message"
+    "sendButtonAriaLabel": "Send message",
+    "proactive": {
+      "sotuvchi-kartochka": "Assalamu alaykum! I see you're interested in our seller cards for Uzum/marketplaces. Shall I share our private portfolio of work in this area?",
+      "xizmatlar": "Assalamu alaykum! You're exploring our services. Which area interests you most? Let me help you see real examples.",
+      "quiz": "You're almost done with the quiz! Would you like to see results early?",
+      "blog": "Glad you're reading the article. By the way, you can get a free brand check on this topic."
+    }
   },
   "home": {
     "cta1_title": "Does your brand help buyers trust you? Let?s check.",
