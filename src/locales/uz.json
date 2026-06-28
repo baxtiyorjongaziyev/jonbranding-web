@@ -2146,7 +2146,12 @@
     "pricing_cta_standard": "Tanlash",
     "loss_calc_eyebrow": "Yo'qotish kalkulyatori · oraliq hisob",
     "index_archive_eyebrow": "Arxiv",
-    "process_step_label": "Bosqich"
+    "process_step_label": "Bosqich",
+    "instagram": {
+      "title": "Instagramda bizni kuzating",
+      "subtitle": "So'nggi loyihalarimiz va jamoa hayoti",
+      "followBtn": "Kuzatish"
+    }
   },
   "onlineBrief": {
     "meta": {

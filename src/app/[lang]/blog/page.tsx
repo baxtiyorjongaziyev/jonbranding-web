@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { getSortedPostsData } from '@/lib/blog-posts';
+import { client } from '@/sanity/lib/client';
 
 export const revalidate = 300;
 
@@ -46,7 +46,20 @@ export default async function BlogPage(props: Props) {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
-  const posts = getSortedPostsData(safeLang);
+  const postsQuery = `*[_type == "post" && language == $lang] | order(publishedAt desc) {
+    title,
+    "slug": slug.current,
+    description,
+    "image": image.asset->url,
+    publishedAt
+  }`;
+  
+  let posts: any[] = [];
+  try {
+    posts = await client.fetch(postsQuery, { lang: safeLang });
+  } catch (error) {
+    console.error("Failed to fetch blog posts from Sanity:", error);
+  }
 
   let dictionary;
   try { dictionary = await getDictionary(safeLang); } catch { dictionary = await getDictionary('uz'); }
@@ -109,9 +122,9 @@ export default async function BlogPage(props: Props) {
                 {post.description && (
                   <p className="text-sm text-gray-400 line-clamp-2">{post.description}</p>
                 )}
-                {post.date && (
+                {post.publishedAt && (
                   <time className="text-xs text-gray-600 mt-2 block">
-                    {new Date(post.date).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    {new Date(post.publishedAt).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                   </time>
                 )}
               </Link>

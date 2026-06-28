@@ -4,21 +4,27 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { getPostData, getAllPostSlugs } from '@/lib/blog-posts';
+import { getDictionary, Locale } from '@/lib/dictionaries';
+import { client } from '@/sanity/lib/client';
+import { PortableText } from '@portabletext/react';
 
 export const revalidate = 300;
 
 type Props = { params: Promise<{ lang: string; slug: string }> };
 
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs();
-  return slugs.map((s) => ({ lang: s.lang, slug: s.slug }));
+  const query = `*[_type == "post"] { "lang": language, "slug": slug.current }`;
+  const slugs = await client.fetch(query);
+  return slugs.map((s: any) => ({ lang: s.lang || 'uz', slug: s.slug }));
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang, slug } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
-  const post = await getPostData(safeLang, slug);
+  const query = `*[_type == "post" && slug.current == $slug && language == $lang][0] {
+    title, description, "image": image.asset->url
+  }`;
+  const post = await client.fetch(query, { slug, lang: safeLang });
   if (!post) return { title: 'Maqola topilmadi' };
   return {
     title: `${post.title} | Jon.Branding Blog`,
@@ -31,7 +37,10 @@ export default async function BlogPostPage(props: Props) {
   const { lang, slug } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
-  const post = await getPostData(safeLang, slug);
+  const query = `*[_type == "post" && slug.current == $slug && language == $lang][0] {
+    title, description, "image": image.asset->url, publishedAt, content, author
+  }`;
+  const post = await client.fetch(query, { slug, lang: safeLang });
   if (!post) notFound();
 
   const siteUrl = 'https://www.jonbranding.uz';
@@ -52,8 +61,8 @@ export default async function BlogPostPage(props: Props) {
     headline: post.title,
     description: post.description || post.title,
     image: post.image || `${siteUrl}/images/cms/og-image.jpeg`,
-    datePublished: post.date || new Date().toISOString(),
-    dateModified: post.date || new Date().toISOString(),
+    datePublished: post.publishedAt || new Date().toISOString(),
+    dateModified: post.publishedAt || new Date().toISOString(),
     author: {
       '@type': 'Person',
       name: post.author || 'Baxtiyorjon Gaziyev',
@@ -84,9 +93,9 @@ export default async function BlogPostPage(props: Props) {
           ← {safeLang === 'uz' ? 'Blogga qaytish' : safeLang === 'ru' ? 'Назад к блогу' : safeLang === 'zh' ? '返回博客' : 'Back to blog'}
         </Link>
 
-        {post.date && (
+        {post.publishedAt && (
           <time className="text-xs text-gray-500 uppercase tracking-widest">
-            {new Date(post.date).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {new Date(post.publishedAt).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </time>
         )}
 
@@ -104,11 +113,10 @@ export default async function BlogPostPage(props: Props) {
           </div>
         )}
 
-        {post.htmlContent && (
-          <div
-            className="prose prose-invert prose-lg max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-white [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-white [&_p]:text-gray-300 [&_p]:leading-relaxed [&_p]:mb-4 [&_blockquote]:border-l-4 [&_blockquote]:border-blue-500/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-400 [&_li]:text-gray-300 [&_strong]:text-white"
-            dangerouslySetInnerHTML={{ __html: post.htmlContent }}
-          />
+        {post.content && (
+          <div className="prose prose-invert prose-lg max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-white [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-white [&_p]:text-gray-300 [&_p]:leading-relaxed [&_p]:mb-4 [&_blockquote]:border-l-4 [&_blockquote]:border-blue-500/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-400 [&_li]:text-gray-300 [&_strong]:text-white">
+            <PortableText value={post.content} />
+          </div>
         )}
       </article>
     </div>

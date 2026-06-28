@@ -4,6 +4,15 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-06-28 | Antigravity Sessiyasi
+
+**Nima qilindi:**
+- `AGENTS.md` fayliga barcha agentlar (Codex, Claude, Devin, Cursor, Gemini) uchun `DEV_LOG.md` ni har bir o'zgarishdan keyin majburiy yangilash qoidasi qo'shildi.
+- Testimonials (mijozlar fikri) blokiga Almaz Shoes asoschisi Hikmatulloh Toxirovning yangi Vimeo video otzivi qo'shildi.
+- Facebook/Instagram muhit o'zgaruvchilari (App ID va Secret) o'qib olinib, mahalliy `.env.local` va Vercel serveriga yuklandi.
+
+---
+
 ## 2026-06-16 | Antigravity Sessiyasi
 
 **Nima qilindi:**

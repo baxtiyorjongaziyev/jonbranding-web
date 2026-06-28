@@ -79,6 +79,7 @@ src/sanity/schemaTypes/
 7. **Yangi section** — `src/components/sections/` ichiga, `export default FC<Props>`
 8. **Tailwind class birlashtirish** — `cn()` utility
 9. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili hisoblanadi. Har qanday matn, xususiyat yoki o'zgarish birinchi navbatda o'zbek tilida (`uz.json` faylida) amalga oshiriladi, so'ngra boshqa 3 ta tilga (`ru.json`, `en.json`, `zh.json`) tarjima qilinadi. Har bir o'zgarish birinchi o'zbek tilda joriy etilishi shart.
+10. **Agent Log Majburiyati** — Har bir o'zgarish, qadam va jarayon holati mutlaqo `DEV_LOG.md` fayliga yozib, yangilab ketilishi SHART. Bu qoida barcha AI agentlar (Codex, Claude, Devin, Cursor, Gemini va boshqalar) uchun qat'iy majburiydir! Loyihadagi boshqa agentlar sinxron ishlashi uchun doimo loglarni yangilang.
 
 ## Muhit o'zgaruvchilari
 
