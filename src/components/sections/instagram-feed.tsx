@@ -117,12 +117,10 @@ const InstagramFeed: FC<InstagramFeedProps> = ({ dictionary, lang }) => {
           </motion.a>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[200px] md:auto-rows-[300px]">
+        {/* Masonry Layout */}
+        <div className="columns-2 md:columns-3 lg:columns-4 gap-4 md:gap-6 space-y-4 md:space-y-6">
           {posts.map((post, index) => {
-            // Layout logic for bento grid
-            const isLarge = index === 0; // First post is large
-            const isMedium = index === 1 || index === 2; // Next two are normal
+            const isReel = post.media_type === 'VIDEO';
             
             return (
               <motion.a
@@ -135,17 +133,16 @@ const InstagramFeed: FC<InstagramFeedProps> = ({ dictionary, lang }) => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className={cn(
-                  "group relative rounded-3xl overflow-hidden block bg-black/5",
-                  isLarge ? "col-span-2 row-span-2 md:col-span-2 md:row-span-2" : "col-span-1 row-span-1",
-                  index === 3 && "col-span-2 md:col-span-1",
+                  "group relative rounded-2xl md:rounded-3xl overflow-hidden block bg-black/5 w-full break-inside-avoid transform transition-all hover:-translate-y-1 hover:shadow-xl",
+                  isReel ? "aspect-[9/16]" : "aspect-[4/5]"
                 )}
               >
                 <Image
-                  src={post.media_url}
+                  src={post.media_type === 'VIDEO' && (post as any).thumbnail_url ? (post as any).thumbnail_url : post.media_url}
                   alt={post.caption || "Instagram post"}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes={isLarge ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
                 
                 {/* Hover Overlay */}

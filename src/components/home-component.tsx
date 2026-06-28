@@ -17,7 +17,6 @@ import Founder from '@/components/sections/founder';
 import AtProcess from '@/components/sections/at-process';
 import ProcessVideo from '@/components/sections/process-video';
 import InstagramFeed from '@/components/sections/instagram-feed';
-
 const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary, testimonials = [], portfolioProjects = [] }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const open = () => setModalOpen(true);

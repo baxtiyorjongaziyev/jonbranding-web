@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useMotionValueEvent, useInView } from 'framer-motion';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
-import { PlayCircle, Pause, Volume2, X, Star } from 'lucide-react';
+import { PlayCircle, Pause, Play, Volume2, X, Star } from 'lucide-react';
 import { ATMock } from './atelier-mocks';
 import { staticTestimonials, staticTestimonialsEn, staticTestimonialsRu, staticTestimonialsZh } from '@/lib/static-data';
 
@@ -1346,7 +1346,164 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
     const videoId = getVimeoVideoId(url);
     if (!videoId) return '';
     return `https://player.vimeo.com/video/${videoId}?autoplay=1&badge=0&autopause=0&dnt=1`;
-                    <div style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'JetBrains Mono, monospace', marginTop: 2 }}>{t.company}</div>
+  };
+
+  const toggleAudio = (audioUrl: string) => {
+    const el = audioRefs.current[audioUrl];
+    if (!el) return;
+    if (playingAudio === audioUrl) {
+      el.pause();
+      setPlayingAudio(null);
+    } else {
+      Object.keys(audioRefs.current).forEach((k) => {
+        if (k !== audioUrl) {
+          audioRefs.current[k]?.pause();
+        }
+      });
+      el.play();
+      setPlayingAudio(audioUrl);
+    }
+  };
+
+  const handleAudioEnded = (audioUrl: string) => {
+    if (playingAudio === audioUrl) {
+      setPlayingAudio(null);
+    }
+  };
+
+  return (
+    <section className="sec wrap" id="sharhlar">
+      <div className="sec-head" style={{ display: 'flex', flexDirection: 'column', gap: 24, marginBottom: 80, alignItems: 'center', textAlign: 'center' }}>
+        <div className="lede" style={{ maxWidth: 600, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
+            <span className="dot"/>
+            <span className="ix">§ 06</span>
+            <span>{dictionary?.footer_pages_title?.includes('Sharh') ? dictionary.footer_pages_title : 'Sharhlar'}</span>
+          </span>
+        </div>
+        <h2 className="it" style={{ maxWidth: 800 }}>
+          {dictionary?.quotes_title
+            ? (dictionary.quotes_title.includes('\n')
+              ? <>{dictionary.quotes_title.split('\n')[0]}<br/><span className="it">{dictionary.quotes_title.split('\n')[1]}</span></>
+              : dictionary.quotes_title)
+            : "Mijozlar o'z so'zlari bilan."}
+        </h2>
+        <div className="lede" style={{ maxWidth: 500 }}>
+          <p dangerouslySetInnerHTML={{ __html: dictionary?.quotes_lede || "Har bir gap real biznes egasidan, real loyiha haqida. <br/><strong>Yolg'on yoki bo'rttirma yo'q</strong> — tekshirishingiz mumkin." }} />
+        </div>
+      </div>
+
+      {videoTestimonials.length > 0 && (
+        <div style={{ marginBottom: 64 }}>
+          <div style={{
+            fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase',
+            color: 'var(--muted)', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12,
+          }}>
+            <span style={{ width: 28, height: 1, background: 'var(--line)' }}/>
+            {lang === 'ru' ? 'Видео отзывы' : lang === 'en' ? 'Video reviews' : lang === 'zh' ? '视频反馈' : 'Video sharhlar'}
+          </div>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: 16,
+          }}>
+            {videoTestimonials.map((t, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: idx * 0.08, duration: 0.5 }}
+                onClick={() => setActiveVideo(t)}
+                style={{
+                  position: 'relative',
+                  aspectRatio: '9/16',
+                  borderRadius: 14,
+                  overflow: 'hidden',
+                  background: '#0E1015',
+                  cursor: 'pointer',
+                  border: '1px solid var(--line)',
+                  minHeight: 320,
+                  flex: '1 1 180px',
+                  maxWidth: 240,
+                }}
+                className="group"
+              >
+                {t.image ? (
+                  <Image src={t.image} alt={t.name} fill unoptimized quality={100} className="object-cover opacity-80 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
+                ) : (
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1B4DFF15, #C2552A15)' }} />
+                )}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(14,16,21,0.9), rgba(14,16,21,0.1) 60%, transparent)' }} />
+                <div style={{ position: 'absolute', top: 12, right: 12, width: 32, height: 32, borderRadius: '50%', background: 'rgba(255,255,255,0.9)', color: '#0E1015', display: 'grid', placeItems: 'center', zIndex: 3 }}>
+                  <PlayCircle size={16} />
+                </div>
+                <div style={{
+                  position: 'absolute', inset: 0, zIndex: 2,
+                  display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+                  padding: 20, color: '#FFF',
+                }}>
+                  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}>
+                    {t.company || t.role}
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {(audioTestimonials.length > 0 || textTestimonials.length > 0) && (
+        <>
+          <div style={{
+            fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase',
+            color: 'var(--muted)', marginBottom: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
+          }}>
+            <span style={{ width: 28, height: 1, background: 'var(--line)' }}/>
+            {lang === 'ru' ? 'Отзывы' : lang === 'en' ? 'Reviews' : lang === 'zh' ? '评论' : 'Matnli sharhlar'}
+            <span style={{ width: 28, height: 1, background: 'var(--line)' }}/>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 20 }}>
+            {audioTestimonials.map((t, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ delay: idx * 0.06, duration: 0.4 }}
+                style={{
+                  background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 14, padding: 40,
+                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 32,
+                  alignItems: 'center', textAlign: 'center',
+                  transition: 'box-shadow 0.3s, transform 0.3s',
+                }}
+                className="hover:shadow-xl hover:-translate-y-1"
+              >
+                <audio ref={el => { audioRefs.current[t.audioUrl] = el; }} src={t.audioUrl} preload="none" onEnded={() => handleAudioEnded(t.audioUrl)} />
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div style={{ fontFamily: 'var(--font-serif, "Instrument Serif", serif)', fontStyle: 'italic', fontSize: 72, lineHeight: 0.8, color: 'var(--accent)', marginBottom: 16 }}>&#8220;</div>
+                  <p style={{ fontSize: 18, lineHeight: 1.6, color: 'var(--ink)' }}>{t.quote}</p>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, width: '100%' }}>
+                  <button onClick={() => toggleAudio(t.audioUrl)} style={{
+                      display: 'flex', alignItems: 'center', gap: 12, padding: '14px 28px', borderRadius: 40,
+                      background: playingAudio === t.audioUrl ? 'var(--accent)' : 'var(--bg)',
+                      color: playingAudio === t.audioUrl ? '#FFF' : 'var(--ink)',
+                      border: '1px solid var(--line)', cursor: 'pointer', transition: 'all 0.3s',
+                      boxShadow: playingAudio === t.audioUrl ? '0 8px 24px rgba(194, 85, 42, 0.25)' : 'none'
+                    }}>
+                      {playingAudio === t.audioUrl ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" />}
+                      <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: '-0.01em' }}>
+                        {playingAudio === t.audioUrl 
+                          ? (lang === 'ru' ? 'Слушаем...' : lang === 'en' ? 'Playing...' : lang === 'zh' ? '播放中...' : 'Tinglanyapti...') 
+                          : (lang === 'ru' ? 'Слушать отзыв' : lang === 'en' ? 'Listen to review' : lang === 'zh' ? '听评论' : 'Ovozli sharhni eshitish')}
+                      </span>
+                  </button>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                    <div style={{ fontWeight: 600, fontSize: 16, color: 'var(--ink)' }}>{t.name}</div>
+                    <div style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono, monospace)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t.company}</div>
                   </div>
                 </div>
               </motion.div>
@@ -1359,21 +1516,20 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
                 viewport={{ once: true, margin: '-30px' }}
                 transition={{ delay: idx * 0.04, duration: 0.4 }}
                 style={{
-                  background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 14, padding: 28,
-                  display: 'flex', flexDirection: 'column', gap: 14,
+                  background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 14, padding: 40,
+                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 32,
+                  alignItems: 'center', textAlign: 'center',
                   transition: 'box-shadow 0.3s, transform 0.3s',
                 }}
-                className="hover:shadow-xl hover:-translate-y-0.5"
+                className="hover:shadow-xl hover:-translate-y-1"
               >
-                <div style={{ display: 'flex', gap: 2, color: 'var(--accent)', marginBottom: 6 }}>
-                  {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div style={{ fontFamily: 'var(--font-serif, "Instrument Serif", serif)', fontStyle: 'italic', fontSize: 72, lineHeight: 0.8, color: 'var(--accent)', marginBottom: 16 }}>&#8220;</div>
+                  <p style={{ fontSize: 18, lineHeight: 1.6, color: 'var(--ink)' }}>{t.quote}</p>
                 </div>
-                <blockquote style={{ fontSize: 14, fontStyle: 'italic', lineHeight: 1.7, color: 'var(--ink-2)', margin: 0 }}>
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <div style={{ borderTop: '1px solid var(--line)', paddingTop: 16, marginTop: 'auto' }}>
-                  <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'JetBrains Mono, monospace', marginTop: 2 }}>{t.company}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, width: '100%' }}>
+                  <div style={{ fontWeight: 600, fontSize: 16, color: 'var(--ink)' }}>{t.name}</div>
+                  <div style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono, monospace)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t.company}</div>
                 </div>
               </motion.div>
             ))}

@@ -232,29 +232,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     });
   };
 
-  const nextStep = useCallback(async () => {
-    let fields: string[] = [];
-    if (step === 1) fields = ['role', 'revenue'];
-    if (step === 2) fields = ['ambition', 'pain'];
-    if (step === 3) fields = ['budget'];
-    if (step === 4) fields = ['fullName', 'phone'];
-
-    const isValid = await form.trigger(fields as any);
-    if (isValid) {
-      trackEvent({ action: 'form_step_completed', category: 'Contact Form', label: `Step ${step}`, value: step });
-      setStep(prev => prev + 1);
-    } else {
-      trackEvent({ action: 'form_step_failed', category: 'Contact Form', label: `Step ${step}` });
-    }
-  }, [step, form]);
-
-  const prevStep = () => setStep(prev => prev - 1);
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && step < 4 && !isSubmitting) {
-      e.preventDefault();
-      nextStep();
-    }
+    // Single step form, so no need for step navigation logic
   };
 
   useEffect(() => {
@@ -372,158 +351,25 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                       </div>
                     </div>
 
-                    {step === 1 && (
-                      <div className="mb-5 grid grid-cols-1 gap-2 rounded-2xl border border-blue-100 bg-blue-50/70 p-3 sm:grid-cols-3">
-                        <a href="tel:+998336450097" className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-black text-gray-900 shadow-sm transition-colors hover:text-blue-600">
-                          <PhoneCall className="h-4 w-4 text-blue-600" />
-                          +998 33 645 00 97
-                        </a>
-                        <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-black text-gray-900 shadow-sm transition-colors hover:text-blue-600">
-                          <MessageCircle className="h-4 w-4 text-blue-600" />
-                          Telegram
-                        </a>
-                        <button type="button" onClick={() => setStep(4)} className="flex items-center justify-center rounded-xl bg-gray-900 px-3 py-2 text-xs font-black text-white shadow-sm transition-colors hover:bg-blue-600">
-                          {quickContactLabel}
-                        </button>
-                      </div>
-                    )}
+                    <div className="mb-5 flex flex-col gap-2 rounded-2xl border border-blue-100 bg-blue-50/70 p-3">
+                      <a href="tel:+998336450097" className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-black text-gray-900 shadow-sm transition-colors hover:text-blue-600">
+                        <PhoneCall className="h-4 w-4 text-blue-600" />
+                        +998 33 645 00 97
+                      </a>
+                    </div>
 
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} onFocus={handleFormStart} className="flex-1 flex flex-col">
                         <div className="flex-1 py-2 pr-1">
-                          <AnimatePresence mode="wait">
-                            {step === 1 && (
-                              <motion.div key="step1" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-4">
+                              <motion.div key="step-single" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-4">
                                 <div>
-                                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations?.steps?.step1?.title}</h3>
-                                  <p className="text-gray-500 text-xs leading-relaxed">{translations?.steps?.step1?.subtitle}</p>
-                                </div>
-
-                                <FormField control={form.control} name="role" render={({ field }) => (
-                                  <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.role?.label}</FormLabel>
-                                    <FormControl>
-                                      <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-2">
-                                        {translations?.fields?.role?.options?.map((opt: any) => (
-                                          <FormItem key={opt.v}>
-                                            <FormLabel className={`flex items-center p-3 rounded-xl border-2 cursor-pointer transition-all duration-300 ${field.value === opt.v ? 'bg-blue-50 border-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.05)] scale-[1.01]' : 'bg-white border-gray-100 hover:border-gray-200'}`}>
-                                              <FormControl><RadioGroupItem value={opt.v} className="sr-only" /></FormControl>
-                                              <span className={`text-xs font-semibold ${field.value === opt.v ? 'text-blue-700' : 'text-gray-700'}`}>{opt.l}</span>
-                                            </FormLabel>
-                                          </FormItem>
-                                        ))}
-                                      </RadioGroup>
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-
-                                <FormField control={form.control} name="revenue" render={({ field }) => (
-                                  <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.revenue?.label}</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                      <FormControl><SelectTrigger className="border-gray-200 rounded-xl h-11 bg-gray-50/50"><SelectValue placeholder="..." /></SelectTrigger></FormControl>
-                                      <SelectContent className="rounded-xl border-gray-100">
-                                        {translations?.fields?.revenue?.options?.map((opt: string) => (
-                                          <SelectItem key={opt} value={opt} className="rounded-lg">{opt}</SelectItem>
-                                        ))}
-                                      </SelectContent>
-                                    </Select>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-                              </motion.div>
-                            )}
-
-                            {step === 2 && (
-                              <motion.div key="step2" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-4">
-                                <div>
-                                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations?.steps?.step2?.title}</h3>
-                                  <p className="text-gray-500 text-xs">{translations?.steps?.step2?.subtitle}</p>
-                                </div>
-
-                                <FormField control={form.control} name="ambition" render={({ field }) => (
-                                  <FormItem className="space-y-2">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.ambition?.label}</FormLabel>
-                                    <FormControl>
-                                      <Textarea placeholder={translations?.fields?.ambition?.placeholder} className="min-h-[80px] md:min-h-[100px] border-gray-200 rounded-xl bg-gray-50/50 focus:bg-white transition-all resize-none text-sm" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-
-                                <FormField control={form.control} name="pain" render={({ field }) => (
-                                  <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.pain?.label}</FormLabel>
-                                    <FormControl>
-                                      <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-2">
-                                        {translations?.fields?.pain?.options?.map((opt: any) => (
-                                          <FormItem key={opt.v}>
-                                            <FormLabel className={`flex items-center p-3 rounded-xl border-2 cursor-pointer transition-all duration-300 ${field.value === opt.v ? 'bg-blue-50 border-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.05)] scale-[1.01]' : 'bg-white border-gray-100 hover:border-gray-200'}`}>
-                                              <FormControl><RadioGroupItem value={opt.v} className="sr-only" /></FormControl>
-                                              <span className={`text-xs font-semibold ${field.value === opt.v ? 'text-blue-700' : 'text-gray-700'}`}>{opt.l}</span>
-                                            </FormLabel>
-                                          </FormItem>
-                                        ))}
-                                      </RadioGroup>
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-                              </motion.div>
-                            )}
-
-                            {step === 3 && (
-                              <motion.div key="step3" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-4">
-                                <div>
-                                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations?.steps?.step3?.title}</h3>
-                                  <p className="text-gray-500 text-xs">{translations?.steps?.step3?.subtitle}</p>
-                                </div>
-
-                                <FormField control={form.control} name="budget" render={({ field }) => (
-                                  <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.budget?.label}</FormLabel>
-                                    <FormControl>
-                                      <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-2">
-                                        {translations?.fields?.budget?.options?.map((opt: string) => (
-                                          <FormItem key={opt}>
-                                            <FormLabel className={`flex items-center justify-between p-3 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:bg-gray-50 ${field.value === opt ? 'bg-blue-50 border-blue-600 shadow-[0_4px_15px_-5px_rgba(37,99,235,0.2)]' : 'bg-white border-gray-100'}`}>
-                                              <FormControl><RadioGroupItem value={opt} className="sr-only" /></FormControl>
-                                              <div className="flex items-center gap-3">
-                                                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${field.value === opt ? 'border-blue-600' : 'border-gray-300'}`}>
-                                                  {field.value === opt && <div className="w-2 h-2 bg-blue-600 rounded-full" />}
-                                                </div>
-                                                <span className={`text-xs font-bold ${field.value === opt ? 'text-blue-900' : 'text-gray-900'}`}>{opt}</span>
-                                              </div>
-                                              <Wallet className={`w-3.5 h-3.5 transition-colors ${field.value === opt ? 'text-blue-600' : 'text-gray-400'}`} />
-                                            </FormLabel>
-                                          </FormItem>
-                                        ))}
-                                      </RadioGroup>
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-
-                                <div className="p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 flex gap-3 items-center">
-                                  <Sparkles className="w-4 h-4 text-blue-600 shrink-0 animate-pulse" />
-                                  <p className="text-[10px] text-blue-800/80 italic font-medium">
-                                    {translations?.description || objectionCopy}
-                                  </p>
-                                </div>
-                              </motion.div>
-                            )}
-
-                            {step === 4 && (
-                              <motion.div key="step4" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-4">
-                                <div>
-                                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations?.steps?.step4?.title}</h3>
-                                  <p className="text-gray-500 text-xs">{translations?.steps?.step4?.subtitle}</p>
+                                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations?.steps?.step4?.title || 'Kontakt'}</h3>
+                                  <p className="text-gray-500 text-xs">{translations?.steps?.step4?.subtitle || "Ma'lumotlaringizni qoldiring"}</p>
                                 </div>
 
                                 <FormField control={form.control} name="fullName" render={({ field, fieldState }) => (
                                   <FormItem className="space-y-1">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.name?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.name?.label || 'Ism'}</FormLabel>
                                     <FormControl>
                                       <motion.div 
                                         animate={fieldState.invalid ? { x: [0, -6, 6, -6, 6, 0] } : {}}
@@ -532,7 +378,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                       >
                                         <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
                                         <Input
-                                            placeholder={translations?.fields?.name?.placeholder}
+                                            placeholder={translations?.fields?.name?.placeholder || 'Ismingiz'}
                                             className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                             aria-invalid={fieldState.invalid ? "true" : "false"}
                                             autoComplete="name"
@@ -546,7 +392,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="phone" render={({ field, fieldState }) => (
                                   <FormItem className="space-y-1">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.phone?.label}</FormLabel>
+                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.phone?.label || 'Telefon'}</FormLabel>
                                     <FormControl>
                                       <motion.div 
                                         animate={fieldState.invalid ? { x: [0, -6, 6, -6, 6, 0] } : {}}
@@ -555,7 +401,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                       >
                                         <PhoneCall className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
                                         <Input 
-                                          placeholder={translations?.fields?.phone?.placeholder} 
+                                          placeholder={translations?.fields?.phone?.placeholder || '+998'} 
                                           className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white font-mono transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                           value={field.value}
                                           aria-invalid={fieldState.invalid ? "true" : "false"}
@@ -571,47 +417,23 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                     <FormMessage />
                                   </FormItem>
                                 )} />
-
-                                <FormField control={form.control} name="telegram" render={({ field }) => (
-                                  <FormItem className="space-y-1">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.telegram?.label}</FormLabel>
-                                    <FormControl>
-                                      <div className="relative">
-                                        <MessageCircle className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
-                                        <Input placeholder={translations?.fields?.telegram?.placeholder || '@username'} className="pl-12 border-gray-200 rounded-xl h-12 bg-gray-50/50 focus:bg-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600" autoComplete="off" {...field} />
-                                      </div>
-                                    </FormControl>
-                                  </FormItem>
-                                )} />
+                                
+                                <div className="mt-2 text-center text-[10px] text-gray-500 font-medium">
+                                  <ShieldCheck className="w-3 h-3 inline mr-1 -mt-0.5" />
+                                  100% maxfiylik. Spam yubormaymiz.
+                                </div>
                               </motion.div>
-                            )}
-                          </AnimatePresence>
                         </div>
 
                         <div className="z-10 mt-auto shrink-0 border-t border-gray-50 bg-white pt-4 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] md:pb-0 md:pt-4">
-                          <div className="flex gap-4">
-                            {step > 1 && step < 4 && (
-                              <Button type="button" variant="ghost" onClick={prevStep} className="flex-1 h-11 md:h-12 rounded-full text-gray-500 font-bold hover:bg-gray-50 active:scale-[0.97] transition-transform duration-150">
-                                {translations?.buttons?.back || 'Back'}
-                              </Button>
+                          <Button type="submit" disabled={isSubmitting} className="w-full h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold group shadow-xl shadow-blue-600/20 active:scale-[0.97] transition-all duration-150">
+                            {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : (
+                              <span className="flex items-center justify-center gap-2">
+                                {translations?.buttons?.submit || 'Yuborish'}
+                                <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                              </span>
                             )}
-                            
-                            {step < 4 ? (
-                              <Button type="button" onClick={nextStep} className="flex-[2] h-11 md:h-12 bg-gray-900 hover:bg-slate-950 text-white rounded-full font-bold group shadow-xl shadow-gray-200/50 active:scale-[0.97] transition-transform duration-150">
-                                {translations?.buttons?.next || 'Next Step'}
-                                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                              </Button>
-                            ) : (
-                              <Button type="submit" disabled={isSubmitting} className="flex-[2] h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-xl shadow-blue-100 flex items-center justify-center gap-2 group transition-all active:scale-[0.97] duration-150">
-                                {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (
-                                  <>
-                                    {translations?.buttons?.submit}
-                                    <Send className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                  </>
-                                )}
-                              </Button>
-                            )}
-                          </div>
+                          </Button>
                           <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-gray-600 font-medium tracking-tight">
                             <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
                             {translations?.trustBadge}
