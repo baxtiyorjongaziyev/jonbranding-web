@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import DOMPurify from 'isomorphic-dompurify';
-import { getSortedPostsData } from '@/lib/blog-posts';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 import { Locale } from '@/lib/dictionaries';
 import { getLocalizedPath } from '@/lib/i18n/locale';
@@ -18,6 +17,7 @@ const blogCardImages = [
 
 interface BlogPreviewProps {
   lang: string;
+  posts?: any[];
   dictionary?: {
     title?: string;
     subtitle?: string;
@@ -31,9 +31,7 @@ const sanitizePlainText = (value?: string) =>
 
 const sanitizeSlug = (slug: string) => slug.toLowerCase().replace(/[^a-z0-9-]/g, '');
 
-export default function BlogPreview({ lang, dictionary }: BlogPreviewProps) {
-  const posts = getSortedPostsData(lang).slice(0, 3);
-
+export default function BlogPreview({ lang, dictionary, posts = [] }: BlogPreviewProps) {
   const t = {
     title: dictionary?.title || (lang === 'ru' ? 'Наш Блог' : lang === 'en' ? 'Our Blog' : lang === 'zh' ? '我们的博客' : 'Blog'),
     subtitle: dictionary?.subtitle || (lang === 'ru' ? 'Статьи о брендинге, дизайне и маркетинге.' : lang === 'en' ? 'Articles on branding, design and marketing.' : lang === 'zh' ? '关于品牌、设计和营销的文章。' : 'Brending, dizayn va marketing haqida maqolalar.'),
@@ -49,7 +47,7 @@ export default function BlogPreview({ lang, dictionary }: BlogPreviewProps) {
         <SectionIntro eyebrow="Blog" title={t.title} description={t.subtitle} />
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {posts.map((post, index) => {
+          {posts.map((post: any, index: number) => {
             const slug = sanitizeSlug(post.slug);
             const title = sanitizePlainText(post.title);
             const description = sanitizePlainText(post.description);
