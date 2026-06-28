@@ -66,7 +66,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
               className="relative w-full max-w-[420px] overflow-hidden rounded-2xl"
               style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)' }}
             >
-              <div className="relative h-[40vh] md:h-[52vh] max-h-[420px] md:max-h-[520px] min-h-[260px] md:min-h-[300px] w-full">
+              <div className="relative w-full aspect-[4/5]">
                 {!showVideo ? (
                   <>
                     <Image
