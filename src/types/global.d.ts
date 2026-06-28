@@ -28,3 +28,5 @@ declare global {
 }
 
 export {};
+declare module '@portabletext/react';
+declare module 'node-fetch';
