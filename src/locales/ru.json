@@ -1963,7 +1963,12 @@
     "pricing_cta_standard": "Выбрать",
     "loss_calc_eyebrow": "Калькулятор потерь · промежуточный расчет",
     "index_archive_eyebrow": "Архив",
-    "process_step_label": "Этап"
+    "process_step_label": "Этап",
+    "instagram": {
+      "title": "Следите за нами в Instagram",
+      "subtitle": "Наши последние проекты и жизнь команды",
+      "followBtn": "Подписаться"
+    }
   },
   "onlineBrief": {
     "meta": {

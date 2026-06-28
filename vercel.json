@@ -9,6 +9,10 @@
     {
       "path": "/api/content-agent",
       "schedule": "0 1 * * *"
+    },
+    {
+      "path": "/api/blog-agent",
+      "schedule": "0 8 * * *"
     }
   ]
 }

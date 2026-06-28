@@ -1971,7 +1971,12 @@
     "pricing_cta_standard": "选择",
     "loss_calc_eyebrow": "损失计算器 · 中期报告",
     "index_archive_eyebrow": "档案",
-    "process_step_label": "步骤"
+    "process_step_label": "步骤",
+    "instagram": {
+      "title": "在 Instagram 上关注我们",
+      "subtitle": "我们最新的项目和团队生活",
+      "followBtn": "关注"
+    }
   },
   "onlineBrief": {
     "meta": {

@@ -1963,7 +1963,12 @@
     "pricing_cta_standard": "Select",
     "loss_calc_eyebrow": "Loss Calculator · Interim Report",
     "index_archive_eyebrow": "Archive",
-    "process_step_label": "Step"
+    "process_step_label": "Step",
+    "instagram": {
+      "title": "Follow us on Instagram",
+      "subtitle": "Our latest projects and team life",
+      "followBtn": "Follow"
+    }
   },
   "onlineBrief": {
     "meta": {
