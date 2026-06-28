@@ -37,6 +37,11 @@ const nextConfig = {
         destination: '/zh/xizmatlar/brand-strategiyasi',
         permanent: true,
       },
+      {
+        source: '/presentation',
+        destination: '/uz/presentation',
+        permanent: true,
+      },
     ];
   },
   experimental: {
