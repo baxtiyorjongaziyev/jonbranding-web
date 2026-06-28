@@ -6,7 +6,6 @@ publish = ".next"
 NODE_VERSION = "22"
 NODE_OPTIONS = "--max-old-space-size=4096"
 NEXT_TELEMETRY_DISABLED = "1"
-NODE_OPTIONS = "--max-old-space-size=4096"
 
 [[headers]]
 for = "/_next/static/*"
