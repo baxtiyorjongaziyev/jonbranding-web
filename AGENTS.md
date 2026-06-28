@@ -80,6 +80,7 @@ src/sanity/schemaTypes/
 8. **Tailwind class birlashtirish** — `cn()` utility
 9. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili hisoblanadi. Har qanday matn, xususiyat yoki o'zgarish birinchi navbatda o'zbek tilida (`uz.json` faylida) amalga oshiriladi, so'ngra boshqa 3 ta tilga (`ru.json`, `en.json`, `zh.json`) tarjima qilinadi. Har bir o'zgarish birinchi o'zbek tilda joriy etilishi shart.
 10. **Agent Log Majburiyati** — Har bir o'zgarish, qadam va jarayon holati mutlaqo `DEV_LOG.md` fayliga yozib, yangilab ketilishi SHART. Bu qoida barcha AI agentlar (Codex, Claude, Devin, Cursor, Gemini va boshqalar) uchun qat'iy majburiydir! Loyihadagi boshqa agentlar sinxron ishlashi uchun doimo loglarni yangilang.
+11. **Narxlash Algoritmi (Kaskad + Arboun)** — Mijozlarga narx hisoblash qat'iy kaskad tizimiga asoslanadi: (1) Barchaga avtomatik 10% Istisno chegirmasi (2) 100% oldindan to'lov bo'lsa qoldiqdan 10% Salom chegirmasi (3) Promokod bo'lsa oxirgi qoldiqdan yana 10%. Barcha chegirmalar 24 soat ichida to'lov qilinganda amal qiladi. Agar ulgurmasa, $50 to'lab 3 kunga muzlatish (Arboun) taklif qilinadi.
 
 ## Muhit o'zgaruvchilari
 

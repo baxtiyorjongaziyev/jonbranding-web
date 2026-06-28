@@ -326,9 +326,8 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     if (!isClient || !dictionary) return null;
 
     const discountOptions = [
-        { value: 'none', label: translations.discountSelector?.none || "CHEGIRMASIZ" },
-        { value: 'package', label: translations.discountSelector?.package || "PAKETLI (-20%)" },
-        { value: 'full', label: translations.discountSelector?.full || "TO'LIQ (-28%)" }
+        { value: 'none', label: "50/50 TO'LOV" },
+        { value: 'full', label: "100% OLDINDAN (-10%)" }
     ];
 
     return (
@@ -510,8 +509,23 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
 
                                     {isDiscountActive && (
-                                        <div className="mx-2">
+                                        <div className="mx-2 space-y-3">
                                             <DiscountCountdown active={isDiscountActive} lang={lang} />
+                                            
+                                            <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-2xl p-4 sm:p-5 shadow-sm relative overflow-hidden">
+                                                <div className="absolute -right-4 -top-4 w-16 h-16 bg-amber-400/20 rounded-full blur-xl"></div>
+                                                <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center shrink-0">
+                                                        <Clock className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-[14px] font-bold text-amber-900 dark:text-amber-200">Arboun (Bron qilish) Xizmati</h4>
+                                                        <p className="text-[13px] text-amber-800/80 dark:text-amber-300/80 mt-0.5 leading-snug">
+                                                            24 soat ichida to'lovga ulgurmaysizmi? <strong>$50</strong> to'lab chegirmalaringizni yana 3 kunga muzlatib qo'ying.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     )}
 
