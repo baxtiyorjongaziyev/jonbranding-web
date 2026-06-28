@@ -27,7 +27,7 @@ function getFallback(lang: string): Testimonial[] {
 
 export async function fetchTestimonials(lang: string): Promise<Testimonial[]> {
   try {
-    const data: Testimonial[] = await client.fetch(QUERY, { lang });
+    const data: Testimonial[] = await client.fetch(QUERY, { lang }, { next: { revalidate: 30 } });
     if (data && data.length > 0) return data;
   } catch (e) {
     console.error('Sanity testimonials fetch failed, using fallback:', e);
