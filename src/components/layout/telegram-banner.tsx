@@ -37,6 +37,7 @@ export default function TelegramBanner({ lang }: { lang: string }) {
     <AnimatePresence>
       {isVisible && (
         <motion.div
+          key="telegram-banner"
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: 'auto', opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}

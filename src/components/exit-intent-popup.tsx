@@ -12,9 +12,9 @@ interface ExitIntentPopupProps {
 const t = {
   uz: {
     headline: 'Ketishdan oldin...',
-    sub: 'Brendingiz haqida 30 soniyalik bepul tashxis oling. Hech qanday majburiyat yo\'q.',
+    sub: "Brendingiz haqida 30 soniyalik bepul tashxis oling. Hech qanday majburiyat yo'q.",
     cta: 'Bepul tashxis olish',
-    dismiss: 'Yo\'q, rahmat',
+    dismiss: "Yo'q, rahmat",
   },
   ru: {
     headline: 'Перед уходом...',
@@ -41,16 +41,19 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
   const [dismissed, setDismissed] = useState(false);
   const l = t[(lang as keyof typeof t) || 'uz'];
 
-  const handleMouseLeave = useCallback((e: MouseEvent) => {
-    if (dismissed) return;
-    if (e.clientY <= 0 && !show) {
-      const hasSeen = sessionStorage.getItem('exit_intent_seen');
-      if (!hasSeen) {
-        setShow(true);
-        sessionStorage.setItem('exit_intent_seen', 'true');
+  const handleMouseLeave = useCallback(
+    (e: MouseEvent) => {
+      if (dismissed) return;
+      if (e.clientY <= 0 && !show) {
+        const hasSeen = sessionStorage.getItem('exit_intent_seen');
+        if (!hasSeen) {
+          setShow(true);
+          sessionStorage.setItem('exit_intent_seen', 'true');
+        }
       }
-    }
-  }, [show, dismissed]);
+    },
+    [show, dismissed]
+  );
 
   useEffect(() => {
     document.addEventListener('mouseleave', handleMouseLeave);
@@ -71,6 +74,7 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
     <AnimatePresence>
       {show && (
         <motion.div
+          key="exit-intent-popup"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -88,8 +92,10 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
             onClick={(e) => e.stopPropagation()}
           >
             {/* Glow */}
-            <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full opacity-30 pointer-events-none"
-              style={{ background: 'var(--at-accent)', filter: 'blur(80px)' }} />
+            <div
+              className="absolute -top-20 -right-20 w-60 h-60 rounded-full opacity-30 pointer-events-none"
+              style={{ background: 'var(--at-accent)', filter: 'blur(80px)' }}
+            />
 
             <div className="relative p-8 sm:p-10 text-center space-y-6">
               <button
@@ -104,13 +110,15 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
               <div className="space-y-3">
                 <h3
                   className="font-bold leading-tight"
-                  style={{ fontSize: 'clamp(24px, 4vw, 32px)', color: 'var(--at-ink)', letterSpacing: '-0.03em' }}
+                  style={{
+                    fontSize: 'clamp(24px, 4vw, 32px)',
+                    color: 'var(--at-ink)',
+                    letterSpacing: '-0.03em',
+                  }}
                 >
                   {l.headline}
                 </h3>
-                <p style={{ color: 'var(--at-ink-2)', fontSize: 15, lineHeight: 1.6 }}>
-                  {l.sub}
-                </p>
+                <p style={{ color: 'var(--at-ink-2)', fontSize: 15, lineHeight: 1.6 }}>{l.sub}</p>
               </div>
 
               <div className="flex flex-col gap-3">
