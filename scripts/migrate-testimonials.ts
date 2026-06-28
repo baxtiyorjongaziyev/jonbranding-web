@@ -64,7 +64,8 @@ const testimonials = [
 async function migrate() {
   console.log("Starting migration of testimonials to Sanity...");
   try {
-    for (const [index, t] of testimonials.entries()) {
+    for (let index = 0; index < testimonials.length; index++) {
+      const t = testimonials[index];
       const doc = {
         _type: 'testimonial',
         name: t.name,
