@@ -88,3 +88,5 @@ GitHub Remote:    baxtiyorjongaziyev/jonbranding-web (origin)
                   baxtiyorjongaziyev/jonbranding.uz (production mirror)
 Deploy:           Firebase App Hosting (apphosting.yaml)
 ```
+
+- **[2026-06-28 12:11]** Fix: Vercel build failed due to outdated pnpm-lock.yaml (dotenv addition). Updated pnpm-lock.yaml and pushed to origin main to unblock Vercel deployments.
