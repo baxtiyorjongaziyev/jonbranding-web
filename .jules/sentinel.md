@@ -42,3 +42,7 @@
 **Vulnerability:** API routes comparing secrets using standard inequality operators (e.g. `!==`) are vulnerable to timing attacks.
 **Learning:** Standard string comparison operators return early when a mismatched character is found, leaking the length of the matching prefix through execution time.
 **Prevention:** Always use a constant-time comparison utility, such as `safeCompare` from `@/lib/security`, when verifying secrets or tokens.
+## 2025-06-25 - Fix XSS in JSON-LD script tags
+**Vulnerability:** XSS vulnerability through direct JSON.stringify inside dangerouslySetInnerHTML for JSON-LD structured data in blog and post pages.
+**Learning:** When using dangerouslySetInnerHTML, directly using JSON.stringify can lead to XSS attacks since it does not escape HTML-sensitive characters (like <, >, &, ').
+**Prevention:** Use a safe alternative like safeJsonStringify which escapes these characters.

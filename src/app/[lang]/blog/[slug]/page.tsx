@@ -6,6 +6,7 @@ import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
+import { safeJsonStringify } from '@/lib/security';
 
 export const revalidate = 300;
 
@@ -84,8 +85,8 @@ export default async function BlogPostPage(props: Props) {
   return (
     <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
-      <Script id="json-ld-breadcrumb-post" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <Script id="json-ld-article" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <Script id="json-ld-breadcrumb-post" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbJsonLd) }} />
+      <Script id="json-ld-article" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(articleJsonLd) }} />
 
       <article className="container mx-auto px-4 max-w-3xl relative z-10">
         <Link href={`/${safeLang}/blog`} className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors mb-8">

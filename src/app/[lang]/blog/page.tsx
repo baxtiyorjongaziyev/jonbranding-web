@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { client } from '@/sanity/lib/client';
+import { safeJsonStringify } from '@/lib/security';
 
 export const revalidate = 300;
 
@@ -83,7 +84,7 @@ export default async function BlogPage(props: Props) {
 
   return (
     <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
-      <Script id="json-ld-breadcrumb-blog" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <Script id="json-ld-breadcrumb-blog" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbJsonLd) }} />
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none z-0" />
 
