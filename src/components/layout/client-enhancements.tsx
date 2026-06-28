@@ -28,6 +28,10 @@ const CookieConsentBanner = dynamic(() => import('@/components/cookie-consent-ba
   ssr: false,
 });
 
+const ProactiveTrigger = dynamic(() => import('@/components/proactive-trigger'), {
+  ssr: false,
+});
+
 const StickyCTA = dynamic(() => import('@/components/ui/sticky-cta'), {
   loading: () => null,
   ssr: false,
@@ -230,6 +234,7 @@ export default function ClientEnhancements({
       {quickActionsReady && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
       {enhancementsReady && <CookieConsentBanner />}
       {enhancementsReady && <OishaWidget lang={lang} />}
+      {enhancementsReady && <ProactiveTrigger lang={lang} />}
       {enhancementsReady && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
 
     </>

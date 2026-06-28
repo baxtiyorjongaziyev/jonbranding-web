@@ -304,7 +304,13 @@
     "thinking": "Oisha 正在思考...",
     "openButtonAriaLabel": "打开 Oisha 聊天",
     "closeButtonAriaLabel": "关闭 Oisha 聊天",
-    "sendButtonAriaLabel": "发送消息"
+    "sendButtonAriaLabel": "发送消息",
+    "proactive": {
+      "sotuvchi-kartochka": "您好！我看到您对我们的Uzem/平台卖家卡片感兴趣。需要我分享这方面的工作案例集吗？",
+      "xizmatlar": "您好！您正在浏览我们的服务。哪个领域最让您感兴趣？让我帮您看看实际案例。",
+      "quiz": "您快完成测试了！想提前查看结果吗？",
+      "blog": "很高兴您在阅读这篇文章。顺便说一下，您可以就此主题免费检查您的品牌。"
+    }
   },
   "home": {
     "cta1_title": "您的品牌能否让买家信任您？让我们来检测一下。",
