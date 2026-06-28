@@ -7,6 +7,7 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 ## 2026-06-28 | Antigravity Sessiyasi
 
 **Nima qilindi:**
+- `avans` kalkulyatorida kassa xavfsizlik koeffitsiyenti olib tashlanib, uning o'rniga "Oylik maoshga nisbatan avans limiti (%)" kiritildi.
 - `avans` kalkulyatori eski bitta fayldagi (`route.ts`) aralash HTML kodidan to'liq va ideal **Next.js React Client Component** (`page.tsx`) ga ko'chirildi. Glassmorphism va moliya yo'nalishiga xos dizayn tizimi ("Stich" kuratsiyasi bo'yicha) joriy qilindi.
 - `AGENTS.md` fayliga barcha agentlar (Codex, Claude, Devin, Cursor, Gemini) uchun `DEV_LOG.md` ni har bir o'zgarishdan keyin majburiy yangilash qoidasi qo'shildi.
 - Testimonials (mijozlar fikri) blokiga Almaz Shoes asoschisi Hikmatulloh Toxirovning yangi Vimeo video otzivi qo'shildi.
