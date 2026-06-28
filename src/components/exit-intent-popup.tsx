@@ -115,7 +115,7 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
 
               <div className="flex flex-col gap-3">
                 <button
-                  className="btn btn-primary btn-lg w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="btn btn-primary w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   onClick={handleAccept}
                 >
                   {l.cta} <span className="ar">↗</span>
