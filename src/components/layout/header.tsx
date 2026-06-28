@@ -45,9 +45,15 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isSystemDark, setIsSystemDark] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsSystemDark(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsSystemDark(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
   }, []);
 
   const { scrollY } = useScroll();
@@ -92,7 +98,8 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   if (pathnameWithoutLocale === '/pro-preview') return null;
 
   const isHomepage = pathnameWithoutLocale === '/';
-  const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka') || isHomepage;
+  const isAvansPage = pathnameWithoutLocale === '/avans';
+  const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka') || ((isHomepage || isAvansPage) && isSystemDark);
   const useDarkHeaderText = !isDarkPage;
 
   const navItems = [

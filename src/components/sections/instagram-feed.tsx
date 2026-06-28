@@ -21,37 +21,37 @@ interface InstagramFeedProps {
 const FALLBACK_POSTS = [
   {
     id: '1',
-    media_url: 'https://cdn.sanity.io/images/h6ymmj0v/production/892bb83f982187c34f37dc1d2830f3050fb3f9f7-2880x1800.png',
+    media_url: '/images/cms/arfadel-cover.jpg',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '2',
-    media_url: 'https://cdn.sanity.io/images/h6ymmj0v/production/9ed2b146afb3bb379b3846b0d912b7a421685718-2880x1800.png',
+    media_url: '/images/cms/beyaz-cover.jpg',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '3',
-    media_url: 'https://cdn.sanity.io/images/h6ymmj0v/production/9f38c64bb9c5de20bdfbdfcd99dcc313e658ceab-2880x1800.png',
+    media_url: '/images/cms/diletta-cover.jpg',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '4',
-    media_url: 'https://cdn.sanity.io/images/h6ymmj0v/production/02521dd9d7c0792cd8e411ef84f6834b6ba3028c-2880x1800.png',
+    media_url: '/images/cms/enros-cover.jpg',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '5',
-    media_url: 'https://cdn.sanity.io/images/h6ymmj0v/production/9ec96c0baab4043b8110b98eb6970bc2eab59df5-2880x1800.png',
+    media_url: '/images/cms/logo-design-showcase.png',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '6',
-    media_url: 'https://cdn.sanity.io/images/h6ymmj0v/production/2d0e2e5e1e550eef530e872d829dc7792691e847-2880x1800.png',
+    media_url: '/images/cms/arfadel-card.jpg',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },

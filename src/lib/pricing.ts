@@ -338,8 +338,8 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     const normalizedPromo = (promoCode || '').trim().toUpperCase();
     const isPromoApplied = normalizedPromo.length > 0;
 
-    // Faza 1: Barchaga 10% Istisno chegirmasi (Eski paketli chegirma o'rniga)
-    if (totalBeforeDiscounts > 0) {
+    // Faza 1: Barchaga 10% Istisno chegirmasi (Faqatgina to'lov varianti tanlanganda: 50/50 yoki 100%)
+    if ((discountType === 'half' || discountType === 'full') && totalBeforeDiscounts > 0) {
         const istisnoVal = finalPrice * 0.10;
         const istisnoName = isUz ? "Istisno chegirmasi (-10%)" : "Exception Discount (-10%)";
         discountsApplied.push({ name: istisnoName, value: istisnoVal });
