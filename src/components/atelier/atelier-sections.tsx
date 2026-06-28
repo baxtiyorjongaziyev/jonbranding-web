@@ -665,7 +665,6 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
       city: p.city || '',
       cat: getCategoryLabel(p.category, lang),
       res: getFirstResult(p),
-      dark: i % 2 === 1,
       ind: p.industry || 'food',
       slug: p.slug,
     }));
@@ -716,13 +715,16 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   className="object-cover transition-transform duration-500 hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 100vw"
                 />
+                <div className="absolute inset-0 pointer-events-none" style={{
+                  background: 'linear-gradient(to bottom, rgba(5,7,15,0.5) 0%, transparent 30%, transparent 60%, rgba(5,7,15,0.7) 100%)',
+                }} />
               </div>
-              <div className={`head ${t.dark ? 'dark' : ''}`}>
+              <div className="head">
                 <span>№ {String(i+1).padStart(2, '0')}</span>
                 <span>{t.city}</span>
               </div>
-              <div className={`arr ${t.dark ? 'dark' : ''}`}>↗</div>
-              <div className={`foot ${t.dark ? 'dark' : ''}`}>
+              <div className="arr">↗</div>
+              <div className="foot">
                 <div className="name">{t.name}</div>
                 <div className="meta">
                   <span>{t.cat}</span>
