@@ -12,10 +12,8 @@ const client = createClient({
 
 async function run() {
   try {
-    await client.delete('hJHhLJbyZKMyFfwQLdOSBL');
-    console.log('Deleted Azamat Muxammedov');
-    await client.delete('hJHhLJbyZKMyFfwQLdOSTn');
-    console.log('Deleted Akrom Raxmonov');
+    await client.delete('hJHhLJbyZKMyFfwQLdOhD9');
+    console.log('Deleted duplicate Almaz Shoes Testimonial');
   } catch (error) {
     console.error("Deletion failed:", error);
   }
