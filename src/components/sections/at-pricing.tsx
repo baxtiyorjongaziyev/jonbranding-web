@@ -12,7 +12,7 @@ const t = {
     label: 'Bepul',
     heading: 'Brendingiz tayyormi?',
     headingEm: 'tekshirib oling.',
-    sub: "150$ o'rniga bepul · 1 kun",
+    sub: "150$ o'rniga bepul · 30 soniya",
     badge: 'Bepul',
     items: [
       "12 mezon bo'yicha tezkor audit",
@@ -30,7 +30,7 @@ const t = {
     label: 'Бесплатно',
     heading: 'Ваш бренд готов?',
     headingEm: 'проверьте.',
-    sub: 'вместо $150 · 1 день',
+    sub: 'вместо $150 · 30 секунд',
     badge: 'Бесплатно',
     items: [
       'Быстрый аудит по 12 критериям',
@@ -48,7 +48,7 @@ const t = {
     label: 'Free',
     heading: 'Is your brand ready?',
     headingEm: 'find out.',
-    sub: 'instead of $150 · 1 day',
+    sub: 'instead of $150 · 30 seconds',
     badge: 'Free',
     items: [
       'Quick audit across 12 criteria',
