@@ -6,13 +6,13 @@ export default function AvansCalculator() {
   const [salary, setSalary] = useState(6000000);
   const [totalDays, setTotalDays] = useState(22);
   const [workedDays, setWorkedDays] = useState(10);
-  const [safety, setSafety] = useState(75);
+  const [advancePercent, setAdvancePercent] = useState(50);
   const [requested, setRequested] = useState(2000000);
 
   // Derived state
   const dailyWage = totalDays > 0 ? salary / totalDays : 0;
   const accrued = dailyWage * workedDays;
-  const maxSafe = accrued * (safety / 100);
+  const maxSafe = salary * (advancePercent / 100);
 
   const diff = requested - maxSafe;
   const pct = maxSafe > 0 ? (requested / maxSafe) * 100 : 0;
@@ -112,21 +112,21 @@ export default function AvansCalculator() {
 
           <div className="space-y-4 pt-3">
             <div className="flex items-center justify-between">
-              <label className="text-sm font-semibold text-slate-500" htmlFor="safety">Xavfsizlik chegarasi (Limit)</label>
+              <label className="text-sm font-semibold text-slate-500" htmlFor="advancePercent">Maoshga nisbatan avans limiti</label>
               <span className="px-3 py-1 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] font-bold text-sm border border-[#F59E0B]/20">
-                {safety}%
+                {advancePercent}%
               </span>
             </div>
             <div className="relative px-1">
               <input 
-                id="safety" type="range" min="50" max="100" 
-                value={safety} onChange={e => setSafety(Number(e.target.value))}
+                id="advancePercent" type="range" min="10" max="100" step="5"
+                value={advancePercent} onChange={e => setAdvancePercent(Number(e.target.value))}
                 className="w-full h-2 rounded-full appearance-none bg-slate-200 dark:bg-white/10 outline-none cursor-pointer accent-[#F59E0B]" 
               />
             </div>
             <div className="flex justify-between text-xs text-slate-400 font-medium px-1">
-              <span>Konservativ (50%)</span>
-              <span>Erkin (100%)</span>
+              <span>Qat'iy (10%)</span>
+              <span>To'liq (100%)</span>
             </div>
           </div>
 
