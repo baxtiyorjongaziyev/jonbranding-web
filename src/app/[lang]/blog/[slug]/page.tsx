@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { getDictionary, Locale } from '@/lib/dictionaries';
 import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 
