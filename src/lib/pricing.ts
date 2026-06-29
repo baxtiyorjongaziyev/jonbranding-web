@@ -352,28 +352,11 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
         discountsApplied.push({ name, value: val });
         finalPrice -= val;
     } else {
-        if (discountType === 'package' && mainServicesCount >= 2) {
-            const val = totalBeforeDiscounts * 0.20;
-            const name = isUz ? 'Paketli chegirma (-20%)' : 'Package (-20%)';
-            discountsApplied.push({ name, value: val });
-            finalPrice -= val;
-        } else if (discountType === 'full') {
-            if (mainServicesCount >= 2) {
-                const packageVal = totalBeforeDiscounts * 0.20;
-                const packageName = isUz ? 'Paketli chegirma (-20%)' : 'Package (-20%)';
-                discountsApplied.push({ name: packageName, value: packageVal });
-                finalPrice -= packageVal;
-                
-                const upfrontVal = finalPrice * 0.10;
-                const upfrontName = isUz ? "Oldindan to'lov (-10%)" : "Upfront (-10%)";
-                discountsApplied.push({ name: upfrontName, value: upfrontVal });
-                finalPrice -= upfrontVal;
-            } else {
-                const upfrontVal = totalBeforeDiscounts * 0.10;
-                const upfrontName = isUz ? "Oldindan to'lov (-10%)" : "Upfront (-10%)";
-                discountsApplied.push({ name: upfrontName, value: upfrontVal });
-                finalPrice -= upfrontVal;
-            }
+        if (discountType === 'full') {
+            const upfrontVal = totalBeforeDiscounts * 0.10;
+            const upfrontName = isUz ? "100% oldindan to'lov (-10%)" : "100% upfront payment (-10%)";
+            discountsApplied.push({ name: upfrontName, value: upfrontVal });
+            finalPrice -= upfrontVal;
         }
     }
 
