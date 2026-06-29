@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState, useCallback } from 'react';
 import { Bot, Loader2, Send, Sparkles, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -41,6 +41,25 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
 
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
   const translations = widgetTranslations[safeLang];
+
+  const fetchHistory = useCallback(async (uid: string) => {
+    try {
+      const res = await fetch(`${OISHA_PROXY}?user_id=${uid}`);
+      const data = await res.json();
+      if (data.history) {
+        setMessages(
+          data.history.map((message: any, idx: number) => ({
+            id: `hist-${idx}`,
+            text: message.parts[0].text,
+            role: message.role,
+            timestamp: new Date().toISOString(),
+          }))
+        );
+      }
+    } catch {
+      console.error('Failed to fetch history');
+    }
+  }, []);
 
   useEffect(() => {
     let storedId = localStorage.getItem('oisha_user_id');
@@ -128,26 +147,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
       }, 600);
       return () => clearTimeout(timer);
     }
-  }, [proactiveMsg, userId, toast, translations.error]);
-
-  const fetchHistory = async (uid: string) => {
-    try {
-      const res = await fetch(`${OISHA_PROXY}?user_id=${uid}`);
-      const data = await res.json();
-      if (data.history) {
-        setMessages(
-          data.history.map((message: any, idx: number) => ({
-            id: `hist-${idx}`,
-            text: message.parts[0].text,
-            role: message.role,
-            timestamp: new Date().toISOString(),
-          })),
-        );
-      }
-    } catch (error) {
-      console.error('Oisha History Error:', error);
-    }
-  };
+  }, [proactiveMsg, userId, toast, translations.error, fetchHistory]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || !userId || isLoading) return;
