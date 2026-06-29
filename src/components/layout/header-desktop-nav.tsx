@@ -60,6 +60,8 @@ const ListItem = React.forwardRef<
 ListItem.displayName = 'ListItem';
 
 const ExpandingButton = ({
+  useDarkHeaderText,
+
   href,
   target,
   rel,
@@ -67,6 +69,7 @@ const ExpandingButton = ({
   text,
   ariaLabel,
   onClick,
+
 }: {
   href: string;
   target?: string;
