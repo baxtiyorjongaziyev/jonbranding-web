@@ -199,13 +199,17 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
         namingPremium: true, logoPremium: true, urgency: false, nda: false
     });
-    const [discountType, setDiscountType] = useLocalStorage<'none' | 'split' | 'full'>('discountOption', 'none');
+    const [discountType, setDiscountType] = useLocalStorage<'none' | 'split' | 'full' | 'package'>('discountOption', 'none');
     const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
     const [hasCelebrated, setHasCelebrated] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
+
+    useEffect(() => {
+        if (discountType === 'package') setDiscountType('none');
+    }, [discountType, setDiscountType]);
     
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
@@ -239,10 +243,13 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
 
     if (!isClient || !dictionary) return null;
 
+    const getDiscountLabel = (label: unknown, fallback: string) =>
+        typeof label === 'string' && label.trim().length > 0 ? label.trim() : fallback;
+
     const discountOptions = [
-        { value: 'none', label: translations.discountSelector?.none || "CHEGIRMASIZ" },
-        { value: 'split', label: translations.discountSelector?.split || "50/50 TO'LOV" },
-        { value: 'full', label: translations.discountSelector?.full || "100% OLDINDAN (-10%)" }
+        { value: 'none', label: getDiscountLabel(translations.discountSelector?.none, "CHEGIRMASIZ") },
+        { value: 'split', label: getDiscountLabel(translations.discountSelector?.split, "50/50") },
+        { value: 'full', label: getDiscountLabel(translations.discountSelector?.full, "100%") }
     ];
 
     return (

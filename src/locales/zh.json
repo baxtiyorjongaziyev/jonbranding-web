@@ -1217,8 +1217,8 @@
       "promo_code_invalid": "优惠码无效",
       "discountSelector": {
         "none": "无折扣",
-        "split": "50/50 付款",
-        "full": "100% 预付 (-10%)"
+        "split": "50/50",
+        "full": "100%"
       },
       "empty_package_desc": "您尚未选择任何服务。请至少选择一项服务。",
       "recommended": "专家推荐"

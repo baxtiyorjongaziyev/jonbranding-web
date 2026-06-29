@@ -1211,8 +1211,8 @@
       "promo_code_invalid": "Invalid promo code",
       "discountSelector": {
         "none": "No discount",
-        "split": "50/50 payment",
-        "full": "100% upfront (-10%)"
+        "split": "50/50",
+        "full": "100%"
       },
       "empty_package_desc": "No services selected. Please select appropriate services.",
       "recommended": "Recommended"

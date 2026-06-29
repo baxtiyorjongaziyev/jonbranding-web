@@ -1380,8 +1380,8 @@
       "promo_code_invalid": "Noto'g'ri promokod",
       "discountSelector": {
         "none": "Chegirmasiz",
-        "split": "50/50 to'lov",
-        "full": "100% oldindan (-10%)"
+        "split": "50/50",
+        "full": "100%"
       },
       "empty_package_desc": "Xizmatlar tanlanmagan. Iltimos, mos xizmatlarni tanlang.",
       "recommended": "Tavsiya etiladi"
