@@ -279,6 +279,9 @@ const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) 
     );
 };
 
+const DISCOUNT_DEFAULT_VERSION = 'no-discount-first-2026-06-29';
+const DISCOUNT_DEFAULT_VERSION_KEY = 'discountOptionDefaultVersion';
+
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
         namingPremium: true, logoPremium: true, urgency: false, nda: false
@@ -290,6 +293,16 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [hasCelebrated, setHasCelebrated] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const currentVersion = window.localStorage.getItem(DISCOUNT_DEFAULT_VERSION_KEY);
+        if (currentVersion === DISCOUNT_DEFAULT_VERSION) return;
+
+        setDiscountType('none');
+        window.localStorage.setItem(DISCOUNT_DEFAULT_VERSION_KEY, DISCOUNT_DEFAULT_VERSION);
+    }, [setDiscountType]);
     
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
