@@ -2,7 +2,7 @@
 import type { FC } from 'react';
 import Image from 'next/image';
 import { useRef, useState, useCallback, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 
 interface PortfolioImage {
   src: string;
@@ -97,18 +97,19 @@ const DEFAULT_IMAGES: PortfolioImage[] = [
 const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
   const l = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
   const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef);
   const [spot, setSpot] = useState({ x: -999, y: -999, visible: false });
   const [activeIndex, setActiveIndex] = useState(0);
 
   const pool = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
 
   useEffect(() => {
-    if (pool.length <= 1) return;
+    if (pool.length <= 1 || !isInView) return;
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % pool.length);
     }, 3500); // 3.5 seconds fast transition
     return () => clearInterval(timer);
-  }, [pool.length]);
+  }, [pool.length, isInView]);
 
   const activeItem = pool[activeIndex];
 

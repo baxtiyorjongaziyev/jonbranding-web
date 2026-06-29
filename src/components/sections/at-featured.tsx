@@ -1,7 +1,8 @@
 'use client';
 import type { FC } from 'react';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useInView } from 'framer-motion';
 
 interface Props { lang?: string; onOpen?: () => void; }
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
@@ -65,18 +66,22 @@ const INTERVAL_MS = 4000;
 const AtFeatured: FC<Props> = ({ lang = 'uz', onOpen }) => {
   const l = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
   const [idx, setIdx] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef);
 
   useEffect(() => {
+    if (!isInView) return;
     const timer = setInterval(() => {
       setIdx((prev) => (prev + 1) % CASES.length);
     }, INTERVAL_MS);
     return () => clearInterval(timer);
-  }, []);
+  }, [isInView]);
 
   const c = CASES[idx];
 
   return (
     <section
+      ref={sectionRef}
       className="relative overflow-hidden z-[2]"
       id="ishlar-featured"
       style={{ background: '#0E1015', color: '#F4F1E8' }}

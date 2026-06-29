@@ -18,3 +18,7 @@
 ## 2026-06-28 - Optimized Scroll Listeners with useCallback and Initial State Verification
 **Learning:** When replacing native scroll listeners (`window.addEventListener('scroll')`) with Framer Motion's `useMotionValueEvent(scrollY, 'change', handleScroll)`, I discovered that the handler must be wrapped in `useCallback` to prevent unnecessary re-bindings on every render. Furthermore, since the Framer Motion event only fires on *change* (i.e. user scroll), the component might render in an incorrect initial state before the first scroll occurs.
 **Action:** When migrating scroll events to Framer Motion, always: 1) Wrap the event handler in `useCallback`, and 2) Include a `useEffect` that fires the handler once with `window.scrollY` on mount to ensure correct initial UI state.
+
+## 2026-06-29 - Paused Off-Screen Slideshow Intervals
+**Learning:** Background intervals for continuous slideshows (like hero section portfolios or featured projects) consume main-thread execution even when the user has scrolled past them, leading to performance degradation over time on longer pages.
+**Action:** Always wrap continuous component-level intervals with Framer Motion's `useInView` to automatically pause the interval when the container element leaves the viewport, saving CPU cycles.
