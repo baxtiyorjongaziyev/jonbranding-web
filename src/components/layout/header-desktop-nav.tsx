@@ -66,6 +66,7 @@ const ExpandingButton = ({
   icon,
   text,
   ariaLabel,
+  useDarkHeaderText,
   onClick,
 }: {
   href: string;
