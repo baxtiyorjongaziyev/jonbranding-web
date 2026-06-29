@@ -47,13 +47,15 @@ export async function parsePostWithOisha(messageText: string): Promise<ParsedPro
     const match = parsed.driveFolderUrl.match(/folders\/([a-zA-Z0-9_-]+)/);
     parsed.driveFolderId = match ? match[1] : null;
   } else {
-import axios from 'axios';
-import type { ParsedProject } from './types.js';
+    parsed.driveFolderId = null;
+  }
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+  return parsed;
+}
 
-const PROMPT = (text: string) => `
+import fs from 'fs';
+
+const DRIVE_PROMPT = (folderName: string, textContent: string, imageCount: number) => `
 Quyidagi Telegram postdan loyiha ma'lumotlarini ajratib, FAQAT JSON formatda qaytargil (boshqa hech narsa yozma):
 
 POST MATNI:
@@ -149,6 +151,7 @@ async function fetchWithRetry(url: string, data: any, config: any, retries = 3):
       throw err;
     }
   }
+  throw new Error("Max retries reached");
 }
 
 export async function parseDriveFolderWithOisha(

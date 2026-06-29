@@ -91,6 +91,25 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
     return () => window.removeEventListener('oishaProactive', handler as EventListener);
   }, []);
 
+  const fetchHistory = async (uid: string) => {
+    try {
+      const res = await fetch(`${OISHA_PROXY}?user_id=${uid}`);
+      const data = await res.json();
+      if (data.history) {
+        setMessages(
+          data.history.map((message: any, idx: number) => ({
+            id: `hist-${idx}`,
+            text: message.parts[0].text,
+            role: message.role,
+            timestamp: new Date().toISOString(),
+          })),
+        );
+      }
+    } catch (error) {
+      console.error('Oisha History Error:', error);
+    }
+  };
+
   useEffect(() => {
     if (proactiveMsg && userId) {
       const text = proactiveMsg;
@@ -129,25 +148,6 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
       return () => clearTimeout(timer);
     }
   }, [proactiveMsg, userId, toast, translations.error]);
-
-  const fetchHistory = async (uid: string) => {
-    try {
-      const res = await fetch(`${OISHA_PROXY}?user_id=${uid}`);
-      const data = await res.json();
-      if (data.history) {
-        setMessages(
-          data.history.map((message: any, idx: number) => ({
-            id: `hist-${idx}`,
-            text: message.parts[0].text,
-            role: message.role,
-            timestamp: new Date().toISOString(),
-          })),
-        );
-      }
-    } catch (error) {
-      console.error('Oisha History Error:', error);
-    }
-  };
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || !userId || isLoading) return;
