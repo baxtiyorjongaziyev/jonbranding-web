@@ -437,7 +437,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 value={promoCode}
                                                 onChange={(e) => setPromoCode(e.target.value)}
                                                 placeholder={translations.promo_code_placeholder || "KODNI KIRITING"}
-                                                className={cn("rounded-full py-3 px-6 border-slate-200 h-14 text-base font-bold uppercase tracking-widest bg-white shadow-inner focus:ring-primary focus:border-primary transition-all", total.isPromoApplied && "border-emerald-500 ring-2 ring-emerald-500/20")}
+                                                className={cn(
+                                                    "rounded-full py-3 px-6 border-slate-200 h-14 text-base font-bold uppercase tracking-widest bg-white shadow-inner focus:ring-primary focus:border-primary transition-all",
+                                                    total.isPromoApplied && "border-emerald-500 ring-2 ring-emerald-500/20",
+                                                    total.invalidPromo && "border-red-400 ring-2 ring-red-500/10"
+                                                )}
                                             />
                                             {total.isPromoApplied && (
                                                 <motion.div 
@@ -449,6 +453,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 </motion.div>
                                             )}
                                         </div>
+                                        {total.invalidPromo && (
+                                            <p className="mt-2 text-sm font-semibold text-red-500">
+                                                {translations.promo_code_invalid || "Noto'g'ri promokod"}: PCG, TEZNATIJA, KURSDOSH, RAMAZON
+                                            </p>
+                                        )}
                                         {total.isPromoApplied && (
                                             <motion.div 
                                                 initial={{ y: -10, opacity: 0 }}

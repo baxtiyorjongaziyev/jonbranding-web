@@ -1,6 +1,7 @@
 'use client';
 
 const USD_TO_UZS_RATE = 12700;
+export const ALLOWED_PROMO_CODES = ['PCG', 'TEZNATIJA', 'KURSDOSH', 'RAMAZON'] as const;
 
 export type SelectedServices = {
     audit?: boolean;
@@ -336,10 +337,11 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     let finalPrice = totalBeforeDiscounts;
     const discountsApplied = [];
 
-    const normalizedPromo = promoCode?.toUpperCase();
+    const normalizedPromo = promoCode?.trim().toUpperCase();
     const isRamazonPromo = normalizedPromo === 'RAMAZON';
-    const isSpecialPromo = ['PCG', 'KURSDOSH', 'TEZ NATIJA'].includes(normalizedPromo);
+    const isSpecialPromo = ['PCG', 'TEZNATIJA', 'KURSDOSH'].includes(normalizedPromo);
     const isPromoApplied = isRamazonPromo || isSpecialPromo;
+    const invalidPromo = Boolean(normalizedPromo) && !ALLOWED_PROMO_CODES.includes(normalizedPromo as typeof ALLOWED_PROMO_CODES[number]);
 
     if (isRamazonPromo) {
         const val = totalBeforeDiscounts * 0.30;
@@ -367,7 +369,9 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
         discountApplied: discountsApplied, 
         surchargesApplied, 
         savings: totalBeforeDiscounts - finalPrice, 
-        isPromoApplied 
+        isPromoApplied,
+        invalidPromo,
+        allowedPromoCodes: ALLOWED_PROMO_CODES
     };
 }
 
