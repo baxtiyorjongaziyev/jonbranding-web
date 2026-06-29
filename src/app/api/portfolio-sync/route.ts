@@ -29,7 +29,14 @@ async function handleSync(request: NextRequest) {
     const secret = request.nextUrl.searchParams.get('secret');
     const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET || '';
     const authHeader = request.headers.get('authorization');
-    const isVercelCron = authHeader === `Bearer ${process.env.CRON_SECRET}`;
+
+    // Fix: securely verify Vercel Cron auth header to prevent 'Bearer undefined' bypass
+    const vercelCronSecret = process.env.CRON_SECRET;
+    const isVercelCron =
+      Boolean(vercelCronSecret) &&
+      Boolean(authHeader) &&
+      authHeader?.startsWith('Bearer ') &&
+      safeCompare(authHeader.substring(7), vercelCronSecret as string);
 
     if (!cronSecret && !isVercelCron) {
       return NextResponse.json(

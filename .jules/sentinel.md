@@ -46,3 +46,8 @@
 **Vulnerability:** XSS vulnerability through direct JSON.stringify inside dangerouslySetInnerHTML for JSON-LD structured data in blog and post pages.
 **Learning:** When using dangerouslySetInnerHTML, directly using JSON.stringify can lead to XSS attacks since it does not escape HTML-sensitive characters (like <, >, &, ').
 **Prevention:** Use a safe alternative like safeJsonStringify which escapes these characters.
+
+## 2026-06-29 - Prevent Template Literal Coercion Auth Bypass
+**Vulnerability:** Authorization checks using `authHeader === \`Bearer ${process.env.SECRET}\`` can be bypassed if the environment variable is undefined, as it coerces to the string 'undefined', allowing an attacker to pass 'Bearer undefined' to gain access.
+**Learning:** Template literals silently coerce `undefined` into strings instead of causing an error. This creates fail-open scenarios in authentication flows.
+**Prevention:** Always verify the truthiness of environment variables before using them in string comparisons for authorization, and use a constant-time comparison like `safeCompare`.
