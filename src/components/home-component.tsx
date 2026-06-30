@@ -97,7 +97,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtFaq lang={lang} onOpen={open} />
       <AtFinalCta onOpen={open} lang={lang} />
       <AtModal open={modalOpen} onClose={close} lang={lang} />
-      <AtStickyCta onOpen={open} lang={lang} />
+      <AtStickyCta onOpen={open} dictionary={dictionary.atelier || dictionary} />
       <ExitIntentPopup onOpen={open} lang={lang} />
       <ScrollDepthAnalytics />
     </div>
