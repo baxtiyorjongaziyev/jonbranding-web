@@ -4,6 +4,15 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-06-30 | Codex Sessiyasi
+
+**Nima qilindi:**
+- PR #240 uchun cron endpointlarda `CRON_SECRET` undefined bo'lganda `"Bearer undefined"` orqali auth bypass bo'lishi oldini olindi: Bearer token alohida ajratilib, secret mavjudligi tekshirildi va `safeCompare` ishlatildi (`portfolio-sync`, `reviews-sync`, `testimonials`).
+- `.jules/sentinel.md` da shu xavf bo'yicha sentinel yozuvi qo'shildi va markdown inline code formati GitHub reviewdagi `MD038` izohiga mos tuzatildi.
+- GitHub reviewdagi qolgan `DEV_LOG.md` entrysi va sentinel markdown izohlari yopildi.
+
+---
+
 ## 2026-06-28 | Antigravity Sessiyasi
 
 **Nima qilindi:**

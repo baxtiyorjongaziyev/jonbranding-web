@@ -47,6 +47,6 @@
 **Learning:** When using dangerouslySetInnerHTML, directly using JSON.stringify can lead to XSS attacks since it does not escape HTML-sensitive characters (like <, >, &, ').
 **Prevention:** Use a safe alternative like safeJsonStringify which escapes these characters.
 ## 2025-02-23 - [Fix auth bypass from undefined string coercion]
-**Vulnerability:** Authorization token strings constructed using template literals (e.g., `\`Bearer ${process.env.CRON_SECRET}\``) coerce an undefined environment variable into the literal string `"undefined"`. An attacker can bypass authorization if the secret is missing by passing `"Bearer undefined"` as the authorization header.
+**Vulnerability:** Authorization token strings constructed using template literals (e.g., `Bearer ${process.env.CRON_SECRET}`) coerce an undefined environment variable into the literal string `"undefined"`. An attacker can bypass authorization if the secret is missing by passing `"Bearer undefined"` as the authorization header.
 **Learning:** Comparing an auth token string constructed via template literals against an attacker's header value is vulnerable if the underlying secret can be undefined.
 **Prevention:** Always verify that the secret explicitly exists (e.g., via `Boolean(CRON_SECRET)`) before using it in any authorization logic, and use timing-safe comparison on correctly extracted tokens instead of simple string equality.
