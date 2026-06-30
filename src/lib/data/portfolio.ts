@@ -8,12 +8,15 @@ const LIST_QUERY = `
     "slug": slug.current,
     client,
     category,
+    city,
+    industry,
     tags,
-    "coverImage": coverImage.asset->url,
-    "beforeImage": beforeImage.asset->url,
-    "afterImage": afterImage.asset->url,
+    "coverImage": coverImage.asset->url + "?w=800&q=80",
+    "beforeImage": beforeImage.asset->url + "?w=1200&q=85",
+    "afterImage": afterImage.asset->url + "?w=1200&q=85",
     description,
     results,
+    featured,
     order
   }
 `;
@@ -26,13 +29,13 @@ const SLUG_QUERY = `
     client,
     category,
     tags,
-    "coverImage": coverImage.asset->url,
-    "beforeImage": beforeImage.asset->url,
-    "afterImage": afterImage.asset->url,
+    "coverImage": coverImage.asset->url + "?w=1200&q=85",
+    "beforeImage": beforeImage.asset->url + "?w=1400&q=85",
+    "afterImage": afterImage.asset->url + "?w=1400&q=85",
     description,
     body,
     results,
-    "galleryImages": galleryImages[].asset->url,
+    "galleryImages": galleryImages[].asset->url + "?w=1200&q=80",
     order
   }
 `;
@@ -55,7 +58,15 @@ export async function fetchPortfolioList(lang: string): Promise<PortfolioProject
     if (!exists) merged.push(item);
   });
 
-  return merged.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+  return merged.sort((a, b) => {
+    const aIsFallback = a._id?.startsWith('fallback-') || false;
+    const bIsFallback = b._id?.startsWith('fallback-') || false;
+
+    if (aIsFallback && !bIsFallback) return 1;
+    if (!aIsFallback && bIsFallback) return -1;
+
+    return (a.order ?? 999) - (b.order ?? 999);
+  });
 }
 
 export async function fetchPortfolioBySlug(slug: string): Promise<PortfolioProject | null> {

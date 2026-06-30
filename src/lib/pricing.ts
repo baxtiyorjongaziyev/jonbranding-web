@@ -246,9 +246,8 @@ export const getServiceDetails = (lang: string = 'uz') => {
                 "30 kunlik cheksiz tahrirlar",
                 "Ijtimoiy tarmoqlar uchun dizayn (9 ta shablon)",
                 "Vizitka va korporativ blanklar dizayni",
-                "Bir yillik brending nazorati (support)",
-                "Tashqi reklama dizayni"
-            ] : ["5 concepts", "Strategic analysis", "Full Brandbook", "Motion logo", "10 stickers", "25 touchpoints", "Certificate", "Patent filing", "30 days revisions", "9 social templates", "Stationery design", "1-year support", "Outdoor ads"],
+                "Bir yillik brending nazorati (support)"
+            ] : ["5 concepts", "Strategic analysis", "Full Brandbook", "Motion logo", "10 stickers", "25 touchpoints", "Certificate", "Patent filing", "30 days revisions", "9 social templates", "Stationery design", "1-year support"],
             benefits: isUz ? [
                 { icon: "BookOpen", title: "Qo'llanma", description: "Istalgan dizayner to'g'ri ishlatadi." },
                 { icon: "Gem", title: "Sarmoya", description: "Bir marta to'g'ri investitsiya." }

@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Jon Atelier Design Tokens ── */
+:root {
+  --at-bg:      #F2EFE6;   /* Warm paper beige */
+  --at-bg-2:    #E9E5D9;   /* Slightly darker paper */
+  --at-paper:   #FBF9F2;   /* Soft cream */
+  --at-ink:     #0E1015;   /* Charcoal ink */
+  --at-ink-2:   #4A4845;   /* Secondary ink */
+  --at-muted:   #8B8779;   /* Warm muted */
+  --at-line:    #D8D2C2;   /* Hairline border */
+  --at-accent:  #1B4DFF;   /* Cobalt blue */
+  --at-terra:   #1B4DFF;   /* Cobalt blue (formerly Terracotta) */
+  --at-green:      #2C6E49;   /* Forest green */
+  --at-green-soft: rgba(44, 110, 73, 0.08);
+  --at-accent-soft: rgba(27,77,255,0.08);
+}
+
+/* Marquee animation */
+.at-marquee-track {
+  display: inline-block;
+  animation: at-marquee 28s linear infinite;
+}
+@keyframes at-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Pulse dot animation */
+.at-pulse {
+  animation: at-pulse-anim 2s ease-in-out infinite;
+}
+@keyframes at-pulse-anim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.3); }
+}
+
 @layer base {
   :root {
     /* Atelier S-Tier Warm Paper System (Warm Beige & Cobalt/Terracotta) */
@@ -17,8 +52,8 @@
     --secondary-foreground: 225 20% 7%;
     --muted: 45 10% 51%;           /* #8B8779 - Warm muted tone */
     --muted-foreground: 225 10% 30%;
-    --accent: 17 64% 46%;          /* #C2552A - Terracotta */
-    --accent-foreground: 0 0% 100%;
+    --accent: 45 21% 88%;          /* #E9E5D9 - Grayer paper */
+    --accent-foreground: 225 20% 7%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --success: 142.1 76.2% 36.3%;
@@ -35,7 +70,7 @@
     --brand-paper: 45 23% 92%;     /* #F2EFE6 */
     --brand-mist: 47 37% 97%;      /* #FBF9F2 */
     --brand-blue: 227 100% 55%;    /* Cobalt */
-    --brand-cyan: 17 64% 46%;      /* Terracotta */
+    --brand-cyan: 227 100% 55%;      /* Cobalt */
     --brand-lime: 227 100% 55%;
     --brand-slate: 45 10% 51%;
     --brand-line: 43 21% 80%;
@@ -743,4 +778,10 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Accessibility and Line-Height fixes from Audit */
+.atelier-theme h1, .atelier-theme h2, .atelier-theme h3,
+h1, h2, h3 {
+  line-height: 1.15 !important;
 }

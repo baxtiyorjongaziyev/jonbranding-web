@@ -7,7 +7,7 @@ import { getDb } from '@/lib/firebase-admin';
 
 const formSchema = z.object({
     fullName: z.string().min(2, 'Name is too short').max(100),
-    phone: z.string().min(7, 'Phone is too short').max(30),
+    phone: z.string().min(7, 'Phone is too short').max(30).optional(),
     telegram: z.string().optional(),
     role: z.string().optional(),
     revenue: z.string().optional(),
@@ -22,6 +22,13 @@ const formSchema = z.object({
     gaClientId: z.string().optional(),
     pageLocation: z.string().optional(),
     ctaSource: z.string().optional(),
+}).refine((data) => {
+    const phone = String(data.phone ?? '').trim();
+    const telegram = String(data.telegram ?? '').trim();
+    return phone.length > 0 || telegram.length > 0;
+}, {
+    message: 'Either phone or telegram is required',
+    path: ['phone'],
 });
 
 const UZS_TO_USD_RATE = 1 / 12700;
@@ -369,7 +376,7 @@ async function sendToAmoCrm(data: any) {
 
 function buildTelegramMessage(data: any) {
   const fullName = escapeTelegramHtml(data.fullName);
-  const phone = escapeTelegramHtml(data.phone);
+  const phone = data.phone ? escapeTelegramHtml(data.phone) : null;
   const telegram = data.telegram
     ? `@${escapeTelegramHtml(String(data.telegram).replace('@', ''))}`
     : 'Nomalum';
@@ -380,8 +387,7 @@ function buildTelegramMessage(data: any) {
 <b>Yangi lead: Jon.Branding</b>
 
 <b>Mijoz:</b> ${fullName}
-<b>Telefon:</b> ${phone}
-<b>Telegram:</b> ${telegram}
+${phone ? `<b>Telefon:</b> ${phone}\n` : ''}<b>Telegram:</b> ${telegram}
 
 <b>Rol:</b> ${escapeTelegramHtml(data.role || 'Kiritilmagan')}
 <b>Oborot:</b> ${escapeTelegramHtml(data.revenue || 'Kiritilmagan')}
@@ -467,7 +473,7 @@ export async function POST(request: Request) {
             `Sabab: ${escapeTelegramHtml(reason)}`,
             `Backup: ${queued ? 'Firestore queue saqlandi' : 'Firestore queue xato'}`,
             `Mijoz: ${escapeTelegramHtml(fullName)}`,
-            `Telefon: ${escapeTelegramHtml(phone)}`,
+            ...(phone ? [`Telefon: ${escapeTelegramHtml(phone)}`] : []),
           ].join('\n'),
         });
       } catch (telegramError) {

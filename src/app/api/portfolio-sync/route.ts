@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parsePortfolioMetadata } from '@/lib/gemini';
+import { safeCompare } from '@/lib/security';
+import { scrapeTelegramPosts } from '@/lib/integrations/telegram';
+import { scrapeInstagramPosts } from '@/lib/integrations/instagram';
 
 // Initialize Sanity client with write access token
 const sanityWriteClient = createClient({
@@ -22,20 +25,22 @@ export async function POST(request: NextRequest) {
 
 async function handleSync(request: NextRequest) {
   try {
-    // 1. Authorize the sync request
+    // 1. Authorize the sync request (secret param OR Vercel cron auth)
     const secret = request.nextUrl.searchParams.get('secret');
-    const cronSecret = process.env.AMOCRM_CRON_SECRET;
+    const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET || '';
+    const authHeader = request.headers.get('authorization');
+    const isVercelCron = authHeader === `Bearer ${process.env.CRON_SECRET}`;
 
-    if (!cronSecret) {
+    if (!cronSecret && !isVercelCron) {
       return NextResponse.json(
-        { success: false, error: 'AMOCRM_CRON_SECRET environment variable is not configured' },
+        { success: false, error: 'No auth configured' },
         { status: 500 }
       );
     }
 
-    if (secret !== cronSecret) {
+    if (!isVercelCron && (!secret || !safeCompare(secret, cronSecret))) {
       return NextResponse.json(
-        { success: false, error: 'Unauthorized secret token' },
+        { success: false, error: 'Unauthorized' },
         { status: 401 }
       );
     }
@@ -67,14 +72,21 @@ async function handleSync(request: NextRequest) {
         const query = `*[_type == "portfolio" && googleDriveFolderId == $folderId][0]`;
         const existingDoc = await sanityWriteClient.fetch(query, { folderId: folder.id });
 
+        const forceUpdate = request.nextUrl.searchParams.get('force') === 'true';
+
         if (existingDoc) {
-          results.push({
-            folderName: folder.name,
-            folderId: folder.id,
-            status: 'skipped',
-            reason: 'Already imported (Sanity ID: ' + existingDoc._id + ')',
-          });
-          continue;
+          if (forceUpdate) {
+            console.log(`[portfolio-sync] Force update: Deleting existing document ${existingDoc._id}`);
+            await sanityWriteClient.delete(existingDoc._id);
+          } else {
+            results.push({
+              folderName: folder.name,
+              folderId: folder.id,
+              status: 'skipped',
+              reason: 'Already imported (Sanity ID: ' + existingDoc._id + ')',
+            });
+            continue;
+          }
         }
 
         console.log(`[portfolio-sync] Syncing folder: "${folder.name}" (${folder.id})`);
@@ -107,7 +119,21 @@ async function handleSync(request: NextRequest) {
           textContent = textBuffer.toString('utf8');
           console.log(`[portfolio-sync] Read metadata text from file: ${textFile.name}`);
         } else {
-          console.log(`[portfolio-sync] No text metadata file found, falling back to folder name`);
+          console.log(`[portfolio-sync] No text metadata file found, searching Instagram for project name`);
+          let postText = await scrapeInstagramPosts(folder.name);
+          if (postText) {
+            textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Instagramdan olindi):\n${postText}`;
+            console.log(`[portfolio-sync] Successfully fetched case study from Instagram!`);
+          } else {
+            console.log(`[portfolio-sync] No post found on Instagram, searching Telegram @jonbranding`);
+            const tgText = await scrapeTelegramPosts('jonbranding', folder.name);
+            if (tgText) {
+              textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Telegramdan olindi):\n${tgText}`;
+              console.log(`[portfolio-sync] Successfully fetched case study from Telegram!`);
+            } else {
+              console.log(`[portfolio-sync] No post found on Telegram either, falling back to basic folder name`);
+            }
+          }
         }
 
         // 5. Parse metadata using Gemini
@@ -116,7 +142,13 @@ async function handleSync(request: NextRequest) {
         console.log(`[portfolio-sync] Successfully parsed metadata: "${parsedMeta.title}"`);
 
         // 6. Upload images to Sanity
-        const [coverImage, ...galleryImages] = imageFiles;
+        let coverImage = imageFiles.find(img => img.name.toLowerCase().includes('cover'));
+        let galleryImages = imageFiles.filter(img => img.id !== coverImage?.id);
+        
+        if (!coverImage) {
+          coverImage = imageFiles[0];
+          galleryImages = imageFiles.slice(1);
+        }
 
         console.log(`[portfolio-sync] Uploading cover image: ${coverImage.name}`);
         const coverBuffer = await downloadFileBuffer(coverImage.id);

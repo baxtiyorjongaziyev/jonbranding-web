@@ -1,248 +1,105 @@
 'use client';
+import type { FC } from 'react';
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
+import AtHero from '@/components/sections/at-hero';
+import AtMarquee from '@/components/sections/at-marquee';
+import AtManifesto from '@/components/sections/at-manifesto';
+import AtServices from '@/components/sections/at-services';
+import AtPricing from '@/components/sections/at-pricing';
+import AtFaq from '@/components/sections/at-faq';
+import AtFinalCta from '@/components/sections/at-final-cta';
+import AtModal from '@/components/sections/at-modal';
+import AtStickyCta from '@/components/sections/at-sticky-cta';
+import { ATGallery, ATQuotes } from '@/components/atelier/atelier-sections';
+import ExitIntentPopup from '@/components/exit-intent-popup';
+import ScrollDepthAnalytics from '@/components/scroll-depth-analytics';
+import Founder from '@/components/sections/founder';
+import AtProcess from '@/components/sections/at-process';
+import ProcessVideo from '@/components/sections/process-video';
 
-import { FC, useState, useEffect } from 'react';
-import {
-  ATMasthead,
-  ATNav,
-  ATHero,
-  ATMarquee,
-  ATMiniQuotes,
-  ATManifesto,
-  ATLedger,
-  ATDiagnosis,
-  ATServices,
-  ATShowcase,
-  ATFeatured,
-  ATBrandSystem,
-  ATGallery,
-  ATAudit,
-  ATSampleReport,
-  ATLossCalc,
-  ATIndex,
-  ATProcess,
-  ATPricing,
-  ATQuotes,
-  ATFAQ,
-  ATFinal,
-  ATFooter,
-  ATStickyCta,
-  ATTweaks,
-  ATStats
-} from './atelier/atelier-sections';
+const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary, testimonials = [], portfolioProjects = [] }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const open = () => setModalOpen(true);
+  const close = () => setModalOpen(false);
 
-interface HomeComponentProps {
-  lang: string;
-  dictionary: any;
-  comparisons?: any[];
-  brands?: any[];
-  testimonials?: any[];
-}
+  const heroImages = useMemo(() => {
+    return portfolioProjects
+      .filter((p: any) => p.coverImage)
+      .map((p: any) => ({
+        src: p.coverImage,
+        name: p.title?.split(' ')[0] || p.client,
+        year: '2026',
+      }));
+  }, [portfolioProjects]);
 
-const HomeComponent: FC<HomeComponentProps> = ({ lang, dictionary, comparisons, brands, testimonials }) => {
-  const [theme, setTheme] = useState('light');
-  const [grain, setGrain] = useState(false);
-  const [accent, setAccent] = useState('cobalt');
-  const [edit, setEdit] = useState(false);
+  // ⚡ Bolt Optimization: Replacing native scroll listeners and DOM layout reads with Framer Motion's useScroll
+  // to avoid synchronous layout thrashing and main-thread blocking.
+  const { scrollYProgress } = useScroll();
+  const modalFiredRef = useRef(false);
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    document.body.style.backgroundColor = theme === 'dark' ? '#0B0C10' : '#F2EFE6';
-    return () => {
-      document.body.style.backgroundColor = '';
-    };
-  }, [theme]);
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-accent', accent);
-  }, [accent]);
-
-  useEffect(() => {
-    document.body.classList.toggle('grain', grain);
-  }, [grain]);
-
-  useEffect(() => {
-    const onMsg = (e: MessageEvent) => {
-      const m = e.data;
-      if (!m || typeof m !== 'object') return;
-      if (m.type === '__activate_edit_mode') setEdit(true);
-      if (m.type === '__deactivate_edit_mode') setEdit(false);
-    };
-    window.addEventListener('message', onMsg);
-    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
-    return () => window.removeEventListener('message', onMsg);
+  const handleScroll = useCallback((latest: number) => {
+    if (modalFiredRef.current) return;
+    const KEY = 'at_modal_auto_popup_v1';
+    if (typeof window !== 'undefined' && sessionStorage.getItem(KEY)) {
+      modalFiredRef.current = true;
+      return;
+    }
+    if (latest >= 0.85) {
+      modalFiredRef.current = true;
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem(KEY, '1');
+      }
+      setModalOpen(true);
+    }
   }, []);
 
-  const persist = (edits: any) => {
-    try {
-      window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
-    } catch {}
-  };
+  useMotionValueEvent(scrollYProgress, 'change', handleScroll);
 
-  const setThemeP = (t: string) => {
-    setTheme(t);
-    persist({ theme: t });
-  };
+  useEffect(() => {
+    // Initial state check on mount in case the user starts already scrolled down
+    handleScroll(scrollYProgress.get());
+  }, [handleScroll, scrollYProgress]);
 
-  const setGrainP = (g: boolean) => {
-    setGrain(g);
-    persist({ grain: g });
-  };
-
-  const setAccentP = (a: string) => {
-    setAccent(a);
-    persist({ accent: a });
-  };
-
-  const closeEdit = () => {
-    setEdit(false);
-    try {
-      window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
-    } catch {}
-  };
-
-  const open = () => {
-    window.dispatchEvent(
-      new CustomEvent('openContactModal', {
-        detail: { section: 'atelier_homepage', ctaText: 'Bepul mini-tashxis', source: 'atelier' },
-      })
-    );
-  };
-
-  const atelierDict = dictionary?.atelier || {};
+  // Global CTA hodisalarini (mobil nav, boshqa triggerlar) Atelier modaliga yo'naltirish
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const openHandler = () => setModalOpen(true);
+    window.addEventListener('openContactModal', openHandler);
+    return () => window.removeEventListener('openContactModal', openHandler);
+  }, []);
 
   return (
-    <div className="atelier-theme">
-      <ATMasthead />
+    <div
+      className="min-h-screen"
+      style={{
+        background: 'var(--at-bg)',
+        color: 'var(--at-ink)',
+        fontFamily: 'var(--font-hanken, "Hanken Grotesk", sans-serif)',
+        WebkitFontSmoothing: 'antialiased',
+      }}
+    >
+      <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} />
+      <AtMarquee lang={lang} />
+      <AtManifesto lang={lang} />
+      <AtServices onOpen={open} lang={lang} />
       
-      <ATNav 
-        dictionary={atelierDict} 
-        onOpen={open} 
-        theme={theme} 
-        setTheme={setThemeP} 
-      />
-      
-      <ATHero 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATMarquee 
-        dictionary={atelierDict} 
-      />
-      
-      <ATMiniQuotes />
-      
-      <ATManifesto 
-        dictionary={atelierDict} 
-      />
-      
-      <ATLedger 
-        dictionary={atelierDict} 
-      />
-      
-      <ATDiagnosis 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATServices 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATShowcase 
-        dictionary={atelierDict} 
-        onOpen={open}
-        comparisons={comparisons}
-        lang={lang}
-      />
-      
-      <ATFeatured 
-        dictionary={atelierDict}
-        comparison={comparisons && comparisons.length > 0 ? comparisons[0] : undefined}
-        lang={lang}
-      />
-      
-      <ATBrandSystem 
-        dictionary={atelierDict} 
-      />
-      
-      <ATGallery 
-        dictionary={atelierDict} 
-        onOpen={open}
-        comparisons={comparisons}
-        lang={lang}
-      />
-      
-      <ATAudit 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATSampleReport 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATLossCalc 
-        dictionary={atelierDict} 
-        onOpen={open} 
-        lang={lang}
-      />
-      
-      <ATIndex 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATProcess 
-        dictionary={atelierDict} 
-        lang={lang}
-      />
-      
-      <ATStats 
-        dictionary={atelierDict} 
-      />
-      
-      <ATPricing 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATQuotes 
-        dictionary={atelierDict}
-        testimonials={testimonials}
-        lang={lang}
-      />
-      
-      <ATFAQ 
-        dictionary={atelierDict} 
-      />
-      
-      <ATFinal 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATFooter 
-        dictionary={atelierDict}
-      />
-      
-      <ATStickyCta 
-        dictionary={atelierDict} 
-        onOpen={open} 
-      />
-      
-      <ATTweaks
-        visible={edit}
-        onClose={closeEdit}
-        theme={theme}
-        setTheme={setThemeP}
-        grain={grain}
-        setGrain={setGrainP}
-        accent={accent}
-        setAccent={setAccentP}
-      />
+      <div className="atelier-theme" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
+        <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
+      </div>
+
+      <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />
+
+      <ProcessVideo lang={lang} />
+      <AtProcess lang={lang} onOpen={open} />
+      <Founder lang={lang} dictionary={dictionary.founder} />
+      <AtPricing onOpen={open} lang={lang} />
+      <AtFaq lang={lang} onOpen={open} />
+      <AtFinalCta onOpen={open} lang={lang} />
+      <AtModal open={modalOpen} onClose={close} lang={lang} />
+      <AtStickyCta onOpen={open} lang={lang} />
+      <ExitIntentPopup onOpen={open} lang={lang} />
+      <ScrollDepthAnalytics />
     </div>
   );
 };

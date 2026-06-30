@@ -57,9 +57,9 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             whileHover={{ y: -5 }}
             className="h-full relative pt-12"
         >
-            <div className="absolute top-[38px] left-1/2 -translate-x-1/2 z-30 pointer-events-none w-full flex justify-center">
+            <div className="absolute top-7 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex justify-center">
                 {recommended && !isVip && (
-                    <Badge className="bg-primary text-white text-[13px] font-black px-8 py-2 rounded-full border-none uppercase tracking-widest shadow-[0_4px_25px_rgba(37,99,235,0.5)] animate-breathing whitespace-nowrap">
+                    <Badge className="flex items-center gap-2 whitespace-nowrap rounded-full bg-primary px-10 py-2.5 text-[13px] font-black uppercase text-white shadow-[0_4px_30px_rgba(37,99,235,0.5)] animate-breathing">
                         {dictionary.recommended || "TAVSIYA ETILADI"}
                     </Badge>
                 )}
@@ -71,11 +71,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             </div>
 
             <Card
+                onClick={onSelect}
                 className={cn(
-                    "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500",
+                    "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500 cursor-pointer",
                     selected
                         ? (isVip ? 'border-brand-blue bg-blue-950 shadow-[0_0_60px_rgba(37,99,235,0.28)] scale-[1.02]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.02]')
-                        : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-brand-blue/60" : "border-slate-100 hover:border-primary/20 shadow-sm")
+                        : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-brand-blue/60" : "border-slate-100 hover:border-primary/30 hover:shadow-md shadow-sm")
                 )}
             >
                 <CardHeader className="p-5 pb-3 relative z-10">
@@ -159,12 +160,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         )}
 
                         <Button
-                            variant={selected ? (isVip ? "outline" : "default") : "outline"}
+                            variant={selected ? (isVip ? "default" : "default") : "outline"}
                             className={cn(
-                                "relative z-20 h-auto w-full rounded-full border-2 py-4 text-[13px] font-black uppercase tracking-[0.08em] transition-[background-color,border-color,color,box-shadow,transform] duration-300",
+                                "relative z-20 h-auto w-full rounded-full border-2 py-4 text-[13px] font-black uppercase tracking-[0.08em] transition-all duration-300",
                                 selected 
-                                    ? (isVip ? "border-none bg-brand-blue text-white shadow-[0_0_20px_rgba(37,99,235,0.35)]" : "border-none bg-primary text-white shadow-lg")
-                                    : (isVip ? "border-brand-blue/40 bg-white/5 text-sky-blue hover:bg-brand-blue hover:text-white" : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary shadow-sm")
+                                    ? (isVip ? "border-transparent bg-brand-blue text-white shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:bg-brand-blue/90" : "border-transparent bg-primary text-white shadow-lg hover:bg-primary/90")
+                                    : (isVip ? "border-brand-blue/40 bg-transparent text-sky-blue group-hover:border-brand-blue/70 group-hover:bg-brand-blue/10 hover:!bg-brand-blue hover:!text-white" : "bg-transparent border-slate-200 text-slate-500 group-hover:border-primary/40 group-hover:text-primary group-hover:bg-primary/5 hover:!border-primary hover:!bg-primary hover:!text-white shadow-none")
                             )}
                             onClick={(e) => { e.stopPropagation(); onSelect(); }}
                         >
@@ -195,6 +196,92 @@ const ServiceGroup = ({ title, children, gridCols = "lg:grid-cols-3" }: { title:
     );
 };
 
+const DISCOUNT_DURATION_MS = 24 * 60 * 60 * 1000;
+
+const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) => {
+    const [display, setDisplay] = useState<{ hours: number; minutes: number; seconds: number } | null>(null);
+
+    useEffect(() => {
+        if (!active) {
+            setDisplay(null);
+            return;
+        }
+
+        const STORAGE_KEY = 'discountCountdownStart';
+        let start = 0;
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            start = stored ? Number(stored) : 0;
+        } catch { /* ignore */ }
+
+        if (!start || start < Date.now() - DISCOUNT_DURATION_MS) {
+            start = Date.now();
+            try { localStorage.setItem(STORAGE_KEY, String(start)); } catch { /* ignore */ }
+        }
+
+        const tick = () => {
+            const diff = start + DISCOUNT_DURATION_MS - Date.now();
+            if (diff <= 0) {
+                setDisplay(null);
+                return false;
+            }
+            setDisplay({
+                hours: Math.floor(diff / 3600000),
+                minutes: Math.floor((diff / 60000) % 60),
+                seconds: Math.floor((diff / 1000) % 60),
+            });
+            return true;
+        };
+
+        tick();
+        const interval = setInterval(() => { if (!tick()) clearInterval(interval); }, 1000);
+        return () => clearInterval(interval);
+    }, [active]);
+
+    if (!display) return null;
+
+    const labels: Record<string, { title: string; hours: string; minutes: string; seconds: string; description: string }> = {
+        uz: { title: 'Chegirma muddati tugaydi:', hours: 'soat', minutes: 'daqiqa', seconds: 'soniya', description: "Ushbu chegirma faqat 24 soat ichida to'lov amalga oshirilganda taqdim etiladi." },
+        ru: { title: 'Срок скидки истекает:', hours: 'час', minutes: 'мин', seconds: 'сек', description: 'Эта скидка предоставляется только при оплате в течение 24 часов.' },
+        en: { title: 'Discount expires in:', hours: 'hrs', minutes: 'min', seconds: 'sec', description: 'This discount is only valid if payment is made within 24 hours.' },
+        zh: { title: '折扣剩余时间：', hours: '时', minutes: '分', seconds: '秒', description: '此折扣仅在24小时内付款时有效。' },
+    };
+    const t = labels[lang] || labels.uz;
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 px-5 py-4 shadow-sm"
+        >
+            <div className="flex items-center justify-center gap-2 mb-2">
+                <Clock className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
+                <span className="text-[12px] font-bold uppercase tracking-wider text-amber-700">{t.title}</span>
+            </div>
+            <div className="flex items-center justify-center gap-3">
+                <div className="flex items-center gap-1.5">
+                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(display.hours).padStart(2, '0')}</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-600">{t.hours}</span>
+                </div>
+                <span className="text-2xl font-black text-amber-400">:</span>
+                <div className="flex items-center gap-1.5">
+                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(display.minutes).padStart(2, '0')}</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-600">{t.minutes}</span>
+                </div>
+                <span className="text-2xl font-black text-amber-400">:</span>
+                <div className="flex items-center gap-1.5">
+                    <span className="text-2xl font-black tabular-nums text-amber-900">{String(display.seconds).padStart(2, '0')}</span>
+                    <span className="text-[10px] font-bold uppercase text-amber-600">{t.seconds}</span>
+                </div>
+            </div>
+            <p className="mt-2 text-center text-[11px] font-medium text-amber-600">{t.description}</p>
+        </motion.div>
+    );
+};
+
+const DISCOUNT_DEFAULT_VERSION = 'no-discount-first-2026-06-29';
+const DISCOUNT_DEFAULT_VERSION_KEY = 'discountOptionDefaultVersion';
+
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
         namingPremium: true, logoPremium: true, urgency: false, nda: false
@@ -208,7 +295,18 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     useEffect(() => { setIsClient(true); }, []);
 
     useEffect(() => {
-        if (discountType === 'package') setDiscountType('none');
+        if (typeof window === 'undefined') return;
+
+        if (discountType === 'package') {
+            setDiscountType('none');
+            return;
+        }
+
+        const currentVersion = window.localStorage.getItem(DISCOUNT_DEFAULT_VERSION_KEY);
+        if (currentVersion === DISCOUNT_DEFAULT_VERSION) return;
+
+        setDiscountType('none');
+        window.localStorage.setItem(DISCOUNT_DEFAULT_VERSION_KEY, DISCOUNT_DEFAULT_VERSION);
     }, [discountType, setDiscountType]);
     
     const translations = dictionary;
@@ -228,6 +326,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
             setHasCelebrated(false);
         }
     }, [total.isPromoApplied, hasCelebrated]);
+
+    const isDiscountActive = total.isPromoApplied || discountType !== 'none';
+
 
     const handleServiceToggle = useCallback((id: string) => {
         const namingGroup = ['namingVIP', 'namingPremium', 'namingStandard'];
@@ -429,7 +530,29 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                     </div>
                                 </div>
-                                <div className="space-y-6">
+
+                                    {isDiscountActive && (
+                                        <div className="mx-2 space-y-3">
+                                            <DiscountCountdown active={isDiscountActive} lang={lang} />
+                                            
+                                            <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-2xl p-4 sm:p-5 shadow-sm relative overflow-hidden">
+                                                <div className="absolute -right-4 -top-4 w-16 h-16 bg-amber-400/20 rounded-full blur-xl"></div>
+                                                <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center shrink-0">
+                                                        <Clock className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-[14px] font-bold text-amber-900 dark:text-amber-200">Arboun (Bron qilish) Xizmati</h4>
+                                                        <p className="text-[13px] text-amber-800/80 dark:text-amber-300/80 mt-0.5 leading-snug">
+                                                            24 soat ichida to'lovga ulgurmaysizmi? <strong>$50</strong> to'lab chegirmalaringizni yana 3 kunga muzlatib qo'ying.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    <div className="space-y-6">
                                     <div className="space-y-2">
                                         <Label className="ml-4 text-[13px] font-bold uppercase tracking-widest text-slate-500">{translations.promo_code_label || "Promokod"}</Label>
                                         <div className="relative">
@@ -470,7 +593,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
 
                                     {!total.isPromoApplied && (
-                                        <div className="space-y-2">
+                                        <div className="space-y-3">
                                             <Label className="ml-4 text-[13px] font-bold uppercase tracking-widest text-slate-500">CHEGIRMALAR</Label>
                                             <DynamicToggle id="discount-tier" options={discountOptions} selected={discountType} onSelect={(val) => setDiscountType(val as any)} className="h-14" />
                                         </div>

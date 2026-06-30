@@ -12,6 +12,18 @@ export const testimonial = defineType({
     defineField({ name: 'videoUrl', title: 'Video URL', type: 'url' }),
     defineField({ name: 'audioUrl', title: 'Audio URL', type: 'string' }),
     defineField({
+      name: 'audioFile',
+      title: 'Audio fayl (yuklash)',
+      type: 'file',
+      options: { accept: 'audio/*' }
+    }),
+    defineField({
+      name: 'videoFile',
+      title: 'Video fayl (yuklash)',
+      type: 'file',
+      options: { accept: 'video/*' }
+    }),
+    defineField({
       name: 'company',
       title: 'Kompaniya (ko\'p tilli)',
       type: 'object',
@@ -32,6 +44,13 @@ export const testimonial = defineType({
         defineField({ name: 'en', title: 'Ingliz', type: 'text' }),
         defineField({ name: 'zh', title: 'Xitoy', type: 'text' }),
       ],
+    }),
+    defineField({
+      name: 'rating',
+      title: 'Reyting (1-5 yulduz)',
+      type: 'number',
+      initialValue: 5,
+      validation: (r) => r.min(1).max(5),
     }),
     defineField({ name: 'order', title: 'Tartib raqami', type: 'number', initialValue: 99 }),
     defineField({ name: 'featured', title: 'Featured', type: 'boolean', initialValue: false }),

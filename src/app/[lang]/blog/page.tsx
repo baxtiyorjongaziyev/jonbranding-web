@@ -1,119 +1,138 @@
 import { Metadata } from 'next';
-import { getSortedPostsData } from '@/lib/blog-posts';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
-import { format, parseISO } from 'date-fns';
-import { uz, ru, enUS } from 'date-fns/locale';
+import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { getLocalizedPath } from '@/lib/i18n/locale';
+import { client } from '@/sanity/lib/client';
+import { safeJsonStringify } from '@/lib/security';
 
-type Props = {
-  params: Promise<{ lang: string }>;
+export const revalidate = 300;
+
+type Props = { params: Promise<{ lang: string }> };
+
+const titles = {
+  uz: 'Blog | Jon.Branding',
+  ru: 'Блог | Jon.Branding',
+  en: 'Branding Blog | Jon.Branding',
+  zh: '博客 | Jon.Branding'
 };
-
-const isSafePathSegment = (value: string) => /^[a-z0-9-]+$/i.test(value);
+const descs = {
+  uz: 'Brending, dizayn va marketing haqida foydali maqolalar. Neyming, logotip, brend strategiyasi va qadoq dizayni bo\'yicha ekspert maslahatlari.',
+  ru: 'Полезные статьи и аналитика о брендинге, дизайне и маркетинге. Экспертные советы по неймингу, логотипу, бренд-стратегии и дизайну упаковки.',
+  en: 'Actionable articles about branding, naming, logo design and marketing strategy. Expert tips to grow your business with professional brand identity.',
+  zh: '关于品牌塑造、命名、标志设计和营销策略的实用文章。通过专业品牌标识发展业务的专家建议。',
+};
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
-  const titles: Record<string, string> = {
-    uz: "Jon.Branding Blog | Branding, Dizayn va Marketing",
-    ru: "Блог Jon.Branding | Брендинг, Дизайн и Маркетинг",
-    en: "Jon.Branding Blog | Branding, Design and Marketing",
-    zh: "Jon.Branding 博客 | 品牌、设计和营销",
-  };
-  const descs: Record<string, string> = {
-    uz: "Brending, neyming va dizayn sohasidagi eng so'nggi maqolalar va tavsiyalar.",
-    ru: "Последние статьи и советы по брендингу, неймингу и дизайну.",
-    en: "Latest articles and tips on branding, naming and design.",
-    zh: "关于品牌、命名和设计的最新文章和技巧。",
-  };
   return {
     title: titles[safeLang],
     description: descs[safeLang],
+    openGraph: {
+      title: titles[safeLang],
+      description: descs[safeLang],
+      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: titles[safeLang],
+      description: descs[safeLang],
+      images: ['/images/cms/og-image.jpeg'],
+    },
   };
 }
 
-const BlogPage = async (props: Props) => {
+export default async function BlogPage(props: Props) {
   const { lang } = await props.params;
-  const safeLang = isSafePathSegment(lang) ? lang : 'uz';
-  const sortedPosts = getSortedPostsData(safeLang as Locale);
-  const dictionary = await getDictionary(safeLang as Locale);
-  const translations = dictionary.blog;
-  const blogCardImages = [
-    '/images/cms/blog-post-hero.jpeg',
-    '/images/cms/brandbook-guide.jpeg',
-    '/images/cms/corporate-identity.jpeg',
-    '/images/cms/packaging-shelf.webp',
-    '/images/cms/naming-process.webp',
-    '/images/cms/brand-strategy-team.webp',
-  ];
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+
+  const postsQuery = `*[_type == "post" && language == $lang] | order(publishedAt desc) {
+    title,
+    "slug": slug.current,
+    description,
+    "image": image.asset->url,
+    publishedAt
+  }`;
   
-  const locale = safeLang === 'ru' ? ru : (safeLang === 'en' ? enUS : uz);
+  let posts: any[] = [];
+  try {
+    posts = await client.fetch(postsQuery, { lang: safeLang });
+  } catch (error) {
+    console.error("Failed to fetch blog posts from Sanity:", error);
+  }
+
+  let dictionary;
+  try { dictionary = await getDictionary(safeLang); } catch { dictionary = await getDictionary('uz'); }
+
+  const l = {
+    uz: { label: 'Blog', title: 'Maqolalar', empty: 'Hozircha maqolalar yo\'q.', back: 'Bosh sahifaga' },
+    ru: { label: 'Блог', title: 'Статьи', empty: 'Пока нет статей.', back: 'На главную' },
+    en: { label: 'Blog', title: 'Articles', empty: 'No articles yet.', back: 'Homepage' },
+    zh: { label: '博客', title: '文章', empty: '暂无文章。', back: '首页' },
+  }[safeLang];
+
+  const siteUrl = 'https://www.jonbranding.uz';
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: safeLang === 'uz' ? 'Bosh sahifa' : safeLang === 'ru' ? 'Главная' : 'Home', item: `${siteUrl}/${safeLang}` },
+      { '@type': 'ListItem', position: 2, name: l.title, item: `${siteUrl}/${safeLang}/blog` },
+    ],
+  };
 
   return (
-    <main className="flex-grow bg-secondary/50">
-      <section className="py-20 sm:py-28">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue" suppressHydrationWarning>
-              {translations?.title}
-            </h1>
-            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700" suppressHydrationWarning>
-              {translations?.subtitle}
-            </p>
+    <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
+      <Script id="json-ld-breadcrumb-blog" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbJsonLd) }} />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none z-0" />
+
+      <div className="container mx-auto px-4 max-w-5xl relative z-10">
+        <div className="mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+            {l.label}
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sortedPosts.map((post, index) => {
-              if (!isSafePathSegment(post.slug)) return null;
-
-              const postHref = getLocalizedPath(safeLang as Locale, `/blog/${post.slug}`);
-
-              return (
-                <Link key={post.slug} href={postHref} className="block group press-effect">
-                  <Card className="h-full flex flex-col overflow-hidden shadow-lg rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
-                    <div className="relative w-full h-56 flex-shrink-0 overflow-hidden">
-                      <Image
-                        src={blogCardImages[index % blogCardImages.length]}
-                        alt={post.title}
-                        data-ai-hint={post.imageHint}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
-                    </div>
-                    <div className="flex flex-col flex-grow">
-                      <CardHeader>
-                        <CardDescription className="text-sm text-gray-500 pt-1">
-                          <span>{format(parseISO(post.date), 'MMMM d, yyyy', { locale })}</span>
-                          {' '} &bull; {' '}
-                          <span>{post.author}</span>
-                        </CardDescription>
-                        <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
-                          {post.title}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="flex-grow">
-                        <p className="text-gray-600 line-clamp-3">{post.description}</p>
-                      </CardContent>
-                      <div className="p-6 pt-0 mt-auto">
-                         <span className="font-semibold text-primary flex items-center transition-all duration-300">
-                            {translations?.readMore} <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                         </span>
-                      </div>
-                    </div>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
+            {l.title}
+          </h1>
         </div>
-      </section>
-    </main>
-  );
-};
 
-export default BlogPage;
+        {posts.length === 0 ? (
+          <div className="text-center py-20 text-gray-500">
+            <p>{l.empty}</p>
+            <Link href={`/${safeLang}`} className="mt-4 inline-block text-blue-400 hover:text-blue-300 text-sm font-medium">
+              {l.back} →
+            </Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {posts.map((post) => (
+              <Link key={post.slug} href={`/${safeLang}/blog/${post.slug}`} className="group block">
+                <div className="relative h-56 rounded-2xl overflow-hidden mb-4 border border-white/5">
+                  {post.image ? (
+                    <Image src={post.image} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-blue-600/20 to-violet-600/20" />
+                  )}
+                </div>
+                <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors mb-2">
+                  {post.title}
+                </h3>
+                {post.description && (
+                  <p className="text-sm text-gray-400 line-clamp-2">{post.description}</p>
+                )}
+                {post.publishedAt && (
+                  <time className="text-xs text-gray-600 mt-2 block">
+                    {new Date(post.publishedAt).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </time>
+                )}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

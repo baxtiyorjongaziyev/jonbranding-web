@@ -1,8 +1,4 @@
 {
-  "meta": {
-    "title": "Jon.Branding | Professional Brending Agentligi",
-    "description": "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding."
-  },
   "header": {
     "portfolio": "Portfolio",
     "founder": "Asoschi",
@@ -24,7 +20,7 @@
     "services_and_prices": "Xizmatlar va narxlar",
     "services_and_prices_desc": "O'z paketingizni yig'ing va narxni darhol biling.",
     "contact_by_phone": "Qo'ng'iroq",
-    "contact_by_telegram": "Telegram",
+    "contact_by_telegram": "Telegram orqali",
     "free_consultation": "Bepul Brand Audit",
     "open_menu": "Menyuni ochish",
     "switch_lang": "Tilni o'zgartirish",
@@ -33,6 +29,8 @@
     "lang_en": "English",
     "ai": "AI Yordamchi",
     "consultation_short": "Audit olish",
+    "about": "Haqimizda",
+    "contacts": "Aloqa",
     "online_brief": "Onlayn-brief"
   },
   "footer": {
@@ -143,6 +141,8 @@
     },
     "links": {
       "home": "Bosh sahifa",
+      "about": "Haqimizda",
+      "contact": "Aloqa",
       "quiz": "Brending testi",
       "portfolio": "Portfolio",
       "process": "Ish jarayoni",
@@ -298,7 +298,13 @@
     "thinking": "Oisha o'ylamoqda...",
     "openButtonAriaLabel": "Oisha chatini ochish",
     "closeButtonAriaLabel": "Oisha chatini yopish",
-    "sendButtonAriaLabel": "Xabar yuborish"
+    "sendButtonAriaLabel": "Xabar yuborish",
+    "proactive": {
+      "sotuvchi-kartochka": "Assalomu alaykum! Ko'rib turibman, Uzum/bozor uchun sotuvchi kartochkalarimiz bilan qiziqyapsiz. Sizga shu yo'nalishdagi yopiq portfolio namunalarini tashlab beraymi?",
+      "xizmatlar": "Assalomu alaykum! Xizmatlarimizni o'rganyapsiz. Qaysi yo'nalish sizni ko'proq qiziqtiradi? Sizga real misollar bilan tanishishingizga yordam beray.",
+      "quiz": "Testni yakunlashga yaqin qoldingiz! Natijalarni oldinroq ko'rishni xohlaysizmi?",
+      "blog": "Maqolani o'qiyotganingizdan xursandman. Aytgancha, shu mavzu bo'yicha brendingizni bepul tekshirib olishingiz mumkin."
+    }
   },
   "home": {
     "cta1_title": "Brendingiz mijozni ishontiryaptimi? Keling, tekshiramiz.",
@@ -1390,6 +1396,14 @@
         "specialDiscount": "Maxsus chegirma (-50%)",
         "fullPaymentDiscount": "100% oldindan to'lov (-10%)"
       },
+      "discountCountdown": {
+        "title": "Chegirma muddati tugaydi",
+        "description": "Tanlangan chegirma 24 soat davomida amal qiladi",
+        "hours": "soat",
+        "minutes": "daqiqa",
+        "seconds": "soniya",
+        "expired": "Chegirma muddati tugadi"
+      },
       "empty_package_desc": "Xizmatlar tanlanmagan. Iltimos, mos xizmatlarni tanlang.",
       "recommended": "Tavsiya etiladi"
     },
@@ -1546,6 +1560,10 @@
       "desc": "Uzum, Wildberries, Ozon va Yandex Market uchun yuqori konversiyali mahsulot rasmlari dizayni. Chegirmalar va qo'shimcha xizmatlar.",
       "cta": "Kartochka Narxlari va Kalkulyator"
     }
+  },
+  "meta": {
+    "title": "Jon.Branding | Professional Brending Agentligi",
+    "description": "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding."
   },
   "atelier": {
     "nav": [
@@ -2019,7 +2037,7 @@
     ],
     "hero_eyebrow": "Markaziy Osiyo · Brand atelier · Est. 2019",
     "hero_pill": "Yangi paketlar endi mavjud",
-    "hero_title": "Brendingiz\naslida\nqancha yo'qotyapti?",
+    "hero_title": "Brendingiz\naslida*\nqancha yo'qotyapti?",
     "hero_lede": "Brend tashxisi — biznesingizning ko'rinmas yo'qotishlarini topish. 14 kun · 12 mezon · 30—50 betlik hisobot · aniq raqamlarda. Bepul mini-tashxis bilan boshlang — keyin xohlasangiz to'liqqa o'tasiz.",
     "hero_cta": "Bepul mini-tashxis boshlash",
     "hero_cta_sub": "yoki paketlarni ko'ring",
@@ -2062,7 +2080,7 @@
     "gallery_similar": "O'xshash biznesmisiz? Sizga ham shunday natija mumkin.",
     "gallery_cta": "Mening biznesim uchun tashxis",
     "audit_title": "Tashxisda\nnimalarni tekshiramiz.",
-    "audit_lede": "12 mezon · 4 yo'nalish · 14 kun. Har bir nuqta 0—100 baholanadi, yo'qotilayotgan daromad esa aniq raqamda hisoblanadi. Hech bir tomon e'tibordan chetda qolmaydi.",
+    "audit_lede": "12 mezon · 4 yo'nalish. Har bir nuqta 0—100 baholanadi, yo'qotilayotgan daromad esa aniq raqamda hisoblanadi. Hech bir tomon e'tibordan chetda qolmaydi.",
     "audit_deliv_title": "Tashxis yakuni · Sizga nima beriladi",
     "audit_deliv_h3": "6 ta aniq",
     "audit_deliv_h3_span": "natija.",
@@ -2160,7 +2178,12 @@
     "pricing_cta_standard": "Tanlash",
     "loss_calc_eyebrow": "Yo'qotish kalkulyatori · oraliq hisob",
     "index_archive_eyebrow": "Arxiv",
-    "process_step_label": "Bosqich"
+    "process_step_label": "Bosqich",
+    "instagram": {
+      "title": "Instagramda bizni kuzating",
+      "subtitle": "So'nggi loyihalarimiz va jamoa hayoti",
+      "followBtn": "Kuzatish"
+    }
   },
   "onlineBrief": {
     "meta": {
@@ -2254,5 +2277,13 @@
       "title": "Rahmat, brief qabul qilindi!",
       "desc": "Mutaxassisimiz tez orada siz bilan bog'lanib, brendingiz strategiyasini muhokama qiladi."
     }
+  },
+  "reviewsPage": {
+    "title": "Mijozlarimiz sharhlari",
+    "subtitle": "Natijalar o'zi gapiradi. Ishimiz haqida real insonlarning ovozli va video fikrlari.",
+    "back": "Bosh sahifaga",
+    "ctaText": "Bepul audit olish",
+    "voiceLabel": "Ovozli sharh",
+    "videoLabel": "Video sharh"
   }
 }

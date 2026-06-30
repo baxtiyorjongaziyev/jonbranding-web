@@ -1,8 +1,4 @@
 {
-  "meta": {
-    "title": "Jon.Branding | Professional Branding Agency",
-    "description": "Naming, logo design and brandbook for your business — Jon.Branding."
-  },
   "header": {
     "portfolio": "Portfolio",
     "founder": "Founder",
@@ -24,7 +20,7 @@
     "services_and_prices": "Services & Prices",
     "services_and_prices_desc": "Build your package and get a price instantly.",
     "contact_by_phone": "Call",
-    "contact_by_telegram": "Telegram",
+    "contact_by_telegram": "Via Telegram",
     "free_consultation": "Free Brand Audit",
     "open_menu": "Open Menu",
     "switch_lang": "Change Language",
@@ -33,6 +29,8 @@
     "lang_en": "English",
     "ai": "AI Assistant",
     "consultation_short": "Get Audit",
+    "about": "About Us",
+    "contacts": "Contact",
     "online_brief": "Online Brief"
   },
   "footer": {
@@ -134,9 +132,17 @@
     "ctaButton": "Select this package"
   },
   "sitemapPage": {
+    "title": "Sitemap",
+    "subtitle": "Overview of all pages of our site so you can find the necessary information quickly.",
+    "sections": {
+      "main": "Main Sections",
+      "services": "Services",
+      "blog": "Blog Posts"
+    },
     "links": {
-      "car_wrap_design": "Creative Car Wrap Design",
       "home": "Home",
+      "about": "About Us",
+      "contact": "Contact",
       "quiz": "Branding test",
       "portfolio": "Portfolio",
       "process": "Workflow",
@@ -149,14 +155,8 @@
       "packaging_design": "Packaging design",
       "logo_design": "Logo design",
       "patent_calculator": "Patent calculator",
-      "marketplace_cover": "Seller card design"
-    },
-    "title": "Sitemap",
-    "subtitle": "Overview of all pages of our site so you can find the necessary information quickly.",
-    "sections": {
-      "main": "Main Sections",
-      "services": "Services",
-      "blog": "Blog Posts"
+      "marketplace_cover": "Seller card design",
+      "car_wrap_design": "Creative Car Wrap Design"
     }
   },
   "hero": {
@@ -168,32 +168,32 @@
       "Make customers |fall in love with you|. Again and again.",
       "From small business |to a strong brand|. In one step."
     ],
-    "description": "We don’t just draw logos. As a leading branding agency in Tashkent, we build a <span class='font-bold text-foreground font-black'>result-oriented strategy</span> for your business. Naming and professional logo design.",
+    "description": "We don’t just design logos. We build the visual system that makes buyers trust you at first glance — <span class=\"font-bold text-foreground font-black\">naming, identity, brand strategy</span>.",
     "buttonTexts": [
       "Analyze my brand",
       "Help me increase sales",
-      "Free Strategic Audit",
+      "Free Brand Audit",
       "I need a strong brand"
     ],
     "buttonHint": "Free. No obligations.",
-    "title": "Your brand should build trust and **make buying easier**.",
-    "descriptionPlain": "In the free Brand Audit, we review your name, logo, packaging, website, and messaging through the eyes of a buyer. You leave knowing which change can improve trust first.",
+    "title": "Your brand builds trust. **Selling gets easier.**",
+    "descriptionPlain": "We check your name, logo, packaging, website, and messaging — as a buyer sees them. You get one clear answer: which change builds trust fastest.",
     "preHeadline": "Free Brand Audit",
     "cta": "Get the free Brand Audit",
     "ctaSecondary": "What is checked?",
     "proofItems": [
       "15-minute audit call",
-      "5 trust signals reviewed",
-      "Clear next-step list"
+      "5 trust signals checked",
+      "Clear priority list"
     ],
-    "auditTitle": "What will the audit reveal?",
-    "auditSubtitle": "Not design opinions. Business priorities that affect trust and sales.",
+    "auditTitle": "What the audit shows",
+    "auditSubtitle": "Not design opinions. The one thing holding your sales back.",
     "auditScore": "15m",
     "auditScoreLabel": "Brand Audit",
     "auditSignals": [
       "What makes you look less premium",
-      "What message is unclear",
-      "What should be fixed first"
+      "Where your message gets lost",
+      "What to fix first"
     ],
     "showcaseTags": [
       "Trust",
@@ -202,23 +202,21 @@
     ]
   },
   "results": {
+    "badge": "CLIENT RESULTS",
+    "title": "What changed after Jon.Branding. The numbers say it.",
+    "subtitle": "Name, logo, packaging and messaging need to work as a single system. We build that system.",
     "items": [
       {
-        "label": "PROFITS UP",
         "impact": "60%+",
         "title": "Den Aroma",
         "desc": "Increase in average check"
       },
       {
-        "label": "MARKET SHARE",
         "impact": "40%+",
         "title": "Bexruz Market",
         "desc": "Increase in customer flow"
       }
     ],
-    "badge": "CLIENT RESULTS",
-    "title": "Our Client Results",
-    "subtitle": "We create not just beautiful design, but strategic solutions that contribute to your business development.",
     "detail": "Every project for us is more than just design; it is a tool for business growth."
   },
   "contactModal": {
@@ -298,7 +296,13 @@
     "thinking": "Oisha is thinking...",
     "openButtonAriaLabel": "Open Oisha chat",
     "closeButtonAriaLabel": "Close Oisha chat",
-    "sendButtonAriaLabel": "Send message"
+    "sendButtonAriaLabel": "Send message",
+    "proactive": {
+      "sotuvchi-kartochka": "Assalamu alaykum! I see you're interested in our seller cards for Uzum/marketplaces. Shall I share our private portfolio of work in this area?",
+      "xizmatlar": "Assalamu alaykum! You're exploring our services. Which area interests you most? Let me help you see real examples.",
+      "quiz": "You're almost done with the quiz! Would you like to see results early?",
+      "blog": "Glad you're reading the article. By the way, you can get a free brand check on this topic."
+    }
   },
   "home": {
     "cta1_title": "Does your brand help buyers trust you? Let?s check.",
@@ -361,7 +365,7 @@
   },
   "servicesHero": {
     "title": "Services to Strengthen Your Brand",
-    "subtitle": "Guaranteed results for your business",
+    "subtitle": "Every service has one goal: make buyers choose you.",
     "cta": "View Prices"
   },
   "serviceSections": {
@@ -412,8 +416,8 @@
   },
   "trustedBy": {
     "eyebrow": "Selected clients",
-    "title": "Businesses trust us with credibility, not decoration.",
-    "subtitle": "We help brands look more valuable, clearer, and easier to choose.",
+    "title": "250+ businesses came to Jon.Branding to look credible in their market.",
+    "subtitle": "Local businesses work with us to look professional and trustworthy to buyers.",
     "metrics": [
       {
         "value": "150+",
@@ -435,7 +439,7 @@
   },
   "whyUs": {
     "title": "Why Choose Us?",
-    "subtitle": "We don't just give promises. We create real value for your brand through a systemic approach.",
+    "subtitle": "Every decision is based on market research and buyer psychology. Not pretty — working.",
     "values": [
       {
         "title": "Strategic Approach",
@@ -477,8 +481,8 @@
   },
   "beforeAfter": {
     "eyebrow": "Proof",
-    "title": "Branding proves value before the sales call.",
-    "subtitle": "The audit answers one practical question: does the buyer understand, trust, and have a reason to choose you?",
+    "title": "When your brand changes, sales change. Proof:",
+    "subtitle": "The audit answers one question: when a buyer sees you, do they have a reason to choose you in the first 10 seconds?",
     "ctaTitle": "Ready to clarify your brand?",
     "ctaDesc": "We start with a brand audit and identify the change with the highest impact.",
     "ctaButton": "Get the free Brand Audit",
@@ -507,7 +511,7 @@
   },
   "gallery": {
     "title": "Portfolio Examples",
-    "subtitle": "See how our created brands stand out in their niche."
+    "subtitle": "This is what brands that stand out in their industry look like."
   },
   "founder": {
     "title": "I build trust systems for business, not decoration.",
@@ -541,7 +545,7 @@
     ]
   },
   "process": {
-    "title": "From free audit to a premium brand system.",
+    "title": "From audit to a finished brand: how we work.",
     "subtitle": "The audit gives the first diagnosis. If we continue, the work becomes strategy, visual system, and rollout.",
     "phases": [
       {
@@ -607,7 +611,7 @@
     ]
   },
   "leadMagnet": {
-    "title": "Scale Your Brand",
+    "title": "What is your brand missing to convince buyers?",
     "subtitle": "Not sure where to start? We've prepared several free resources to help you explore the world of branding.",
     "magnets": [
       {
@@ -696,6 +700,8 @@
     }
   },
   "faq": {
+    "title": "FAQ",
+    "subtitle": "Process, pricing, timelines and what to expect.",
     "faqItems": [
       {
         "question": "Why aren't prices fixed?",
@@ -716,18 +722,8 @@
       {
         "question": "Are there guarantees?",
         "answer": "Yes, we have a satisfaction guarantee. If initial concepts fail, we refund."
-      },
-      {
-        "question": "Is there a guarantee of results?",
-        "answer": "Of course. We prioritize our clients' satisfaction. If the initial concepts do not meet your requirements (according to the brief), we will rework the project or fulfill the agreed refund terms."
-      },
-      {
-        "question": "Can I only order a logo?",
-        "answer": "We recommend creating an entire identity system, as a logo alone does not ensure brand integrity. However, for smaller projects, we have 'Logo + Minimal corporate style' packages available."
       }
     ],
-    "title": "FAQ",
-    "subtitle": "Answers to the most common questions about branding, prices, and process.",
     "ctaTitle": "No room for doubt!",
     "ctaDesc": "Did you get answers to your questions? Let's discuss your project and take your brand to the next level.",
     "ctaButton": "Ready to start!"
@@ -1148,6 +1144,17 @@
     }
   },
   "packagingPage": {
+    "metadata": {
+      "title": "Packaging Design Services in Uzbekistan | Jon.Branding",
+      "description": "We don't just create pretty packaging; we create a marketing tool that sells."
+    },
+    "title": "Packaging Design Development",
+    "subtitle": "In high competition, packaging is often the main marketing tool.",
+    "section1_title": "Packaging — More Than a Brand Identity Carrier",
+    "section1_p1": "Packaging is the first contact at points of sale, an instant impression. Often it determines the purchase decision.",
+    "section1_p2": "Our goal is effective tools meeting business goals and growth.",
+    "process_title": "How We Create Packaging?",
+    "process_subtitle": "We approach it as a system working for business and audience expectations.",
     "process_steps": [
       {
         "title": "Analysis and Strategy",
@@ -1160,23 +1167,8 @@
       {
         "title": "Finalization and Prep",
         "description": "Handling technical aspects and print preparation."
-      },
-      {
-        "title": "Submission",
-        "description": "Print-ready files and technical specifications."
       }
     ],
-    "metadata": {
-      "title": "Packaging Design Services in Uzbekistan | Jon.Branding",
-      "description": "We don't just create pretty packaging; we create a marketing tool that sells."
-    },
-    "title": "Packaging Design Development",
-    "subtitle": "In high competition, packaging is often the main marketing tool.",
-    "section1_title": "Packaging — More Than a Brand Identity Carrier",
-    "section1_p1": "Packaging is the first contact at points of sale, an instant impression. Often it determines the purchase decision.",
-    "section1_p2": "Our goal is effective tools meeting business goals and growth.",
-    "process_title": "How We Create Packaging?",
-    "process_subtitle": "We approach it as a system working for business and audience expectations.",
     "cta_title": "Packaging Doesn't Just Attract, It Sells",
     "cta_description": "Functional, strategic design where packaging serves as a sales tool."
   },
@@ -1220,6 +1212,14 @@
         "ramazonDiscount": "Ramazon discount (-30%)",
         "specialDiscount": "Special discount (-50%)",
         "fullPaymentDiscount": "100% upfront payment (-10%)"
+      },
+      "discountCountdown": {
+        "title": "Discount expires in",
+        "description": "Selected discount is valid for 24 hours",
+        "hours": "hours",
+        "minutes": "minutes",
+        "seconds": "seconds",
+        "expired": "Discount has expired"
       },
       "empty_package_desc": "No services selected. Please select appropriate services.",
       "recommended": "Recommended"
@@ -1377,6 +1377,10 @@
       "desc": "High-conversion product card design for Uzum, Wildberries, Ozon, and Yandex Market. Discounts and extra services.",
       "cta": "Card Pricing & Calculator"
     }
+  },
+  "meta": {
+    "title": "Jon.Branding | Professional Branding Agency",
+    "description": "Naming, logo design and brandbook for your business — Jon.Branding."
   },
   "atelier": {
     "nav": [
@@ -1893,7 +1897,7 @@
     "gallery_similar": "Do you have a similar business? You can achieve the same results.",
     "gallery_cta": "Diagnosis for my business",
     "audit_title": "What we examine\nin a diagnosis.",
-    "audit_lede": "12 criteria · 4 directions · 14 days. Each point is rated 0—100, and lost revenue is calculated with precise figures. No aspect is overlooked.",
+    "audit_lede": "12 criteria · 4 directions. Each point is rated 0—100, and lost revenue is calculated with precise figures. No aspect is overlooked.",
     "audit_deliv_title": "Diagnosis outcome · What you receive",
     "audit_deliv_h3": "6 precise",
     "audit_deliv_h3_span": "results.",
@@ -1991,7 +1995,12 @@
     "pricing_cta_standard": "Select",
     "loss_calc_eyebrow": "Loss Calculator · Interim Report",
     "index_archive_eyebrow": "Archive",
-    "process_step_label": "Step"
+    "process_step_label": "Step",
+    "instagram": {
+      "title": "Follow us on Instagram",
+      "subtitle": "Our latest projects and team life",
+      "followBtn": "Follow"
+    }
   },
   "onlineBrief": {
     "meta": {
@@ -2254,5 +2263,13 @@
         }
       ]
     }
+  },
+  "reviewsPage": {
+    "title": "Our Clients' Reviews",
+    "subtitle": "Results speak for themselves. Voice and video reviews from real people about our work.",
+    "back": "Back to home",
+    "ctaText": "Get free audit",
+    "voiceLabel": "Voice Review",
+    "videoLabel": "Video Review"
   }
 }

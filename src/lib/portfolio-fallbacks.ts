@@ -5,6 +5,8 @@ export interface PortfolioProject {
   client: string;
   category: 'brand-strategy' | 'logo-design' | 'brandbook' | 'corporate-style' | 'packaging' | 'naming';
   categoryLabel: string;
+  city?: string;
+  industry?: 'food' | 'fmcg' | 'fintech' | 'fashion';
   tags: string[];
   coverImage: string;
   beforeImage?: string;
@@ -15,6 +17,7 @@ export interface PortfolioProject {
   results?: { metric: string; value: string }[];
   body: { heading: string; paragraph: string }[];
   galleryImages?: string[];
+  featured?: boolean;
   order: number;
 }
 
@@ -59,44 +62,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       ],
       order: 1
     },
-    {
-      _id: 'fallback-savod',
-      slug: 'savod',
-      title: 'Savod Milliy Nashriyoti',
-      client: 'Savod Nashriyot',
-      category: 'logo-design',
-      categoryLabel: 'Logotip dizayni',
-      tags: ['Logotip', 'Firma uslubi', 'Kreativ'],
-      coverImage: '/images/cms/savod-hozir.png',
-      beforeImage: '/images/cms/savod-avval.png',
-      afterImage: '/images/cms/savod-hozir.png',
-      oldHint: 'Avvalgi vizual ko\'rinish',
-      newHint: 'Savod (Yangi premium aydentika)',
-      description: 'Zamonaviy ma\'rifat va adabiyot olamini birlashtiruvchi, yuridik jihatdan toza va unikal milliy nashriyot aydentikasi.',
-      results: [
-        { metric: 'Kitob sotuvi o\'sishi', value: '+45%' },
-        { metric: 'Foydalanuvchilar ishonchi', value: '94%' },
-        { metric: 'Tanilish ko\'rsatkichi', value: '2.5 barobar' }
-      ],
-      body: [
-        {
-          heading: "Vazifa va Muammo",
-          paragraph: "Savod milliy nashriyoti bozorda eskirgan, oddiy yozuv uslubidagi logotip bilan tanilayotgandi. Nashriyot faqat darsliklar emas, balki premium badiiy adabiyotlar segmentiga kirib borishini ta'kidlash uchun o'ziga xos va falsafiy ma'noga ega aydentika zarur edi."
-        },
-        {
-          heading: "Strategik Yechim",
-          paragraph: "Biz sharqona madaniyat, ilm va kitob varaqlarini uyg'unlashtirgan o'ta unikal simvolik belgi yaratdik. Ranglar palitrasi sifatida oliyjanob zumrad va oltin ranglar tanlandi. Bu brendning ma'rifiy va premium mohiyatini mukammal ochib berdi."
-        },
-        {
-          heading: "Yakuniy Natija",
-          paragraph: "Yangi brending bilan nashr etilgan ilk premium turkum kitoblari do'konlarda rekord darajada tez sotildi. Kitobxonlar orasida 'Savod' brendiga bo'lgan ishonch va uning tanilishi misli ko'rilmagan darajada ko'tarildi."
-        }
-      ],
-      galleryImages: [
-        '/images/cms/savod-hozir.png'
-      ],
-      order: 2
-    },
+
     {
       _id: 'fallback-fidda',
       slug: 'fidda',
@@ -138,7 +104,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     {
       _id: 'fallback-boyarin',
       slug: 'boyarin',
-      title: 'Boyarin Gurman Go\'sht Mahsulotlari',
+      title: 'Boyarin Saryog\' va Sut Mahsulotlari',
       client: 'Boyarin Foods',
       category: 'packaging',
       categoryLabel: 'Qadoq dizayni',
@@ -148,7 +114,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       afterImage: '/images/cms/boyarin-hozir.png',
       oldHint: 'Eski mahsulot uslubi',
       newHint: 'Boyarin (Premium qadoq)',
-      description: 'Gurman go\'sht va yarim tayyor mahsulotlar uchun supermarket javonlarida darhol ajralib turadigan, premium vizual til va qadoqlar.',
+      description: 'Saryog\' va sut mahsulotlari uchun supermarket javonlarida darhol ajralib turadigan, premium vizual til va qadoqlar.',
       results: [
         { metric: 'Javondagi jozibadorlik', value: '+300%' },
         { metric: 'Supermarket savdolari', value: '+85%' },
@@ -157,7 +123,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       body: [
         {
           heading: "Vazifa va Muammo",
-          paragraph: "Boyarin go'sht mahsulotlari juda yuqori ta'm va sifatga ega bo'lishiga qaramay, uning qadog'i juda oddiy va bozordagi boshqa yuzlab brendlardan farq qilmas edi. Bu javonda mijoz e'tiborini tortish va sotuvni ko'paytirishga to'sqinlik qilardi."
+          paragraph: "Boyarin saryog' va sut mahsulotlari juda yuqori ta'm va sifatga ega bo'lishiga qaramay, uning qadog'i juda oddiy va bozordagi boshqa yuzlab brendlardan farq qilmas edi. Bu javonda mijoz e'tiborini tortish va sotuvni ko'paytirishga to'sqinlik qilardi."
         },
         {
           heading: "Strategik Yechim",
@@ -304,44 +270,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       ],
       order: 1
     },
-    {
-      _id: 'fallback-savod',
-      slug: 'savod',
-      title: 'Национальное издательство Savod',
-      client: 'Издательство Savod',
-      category: 'logo-design',
-      categoryLabel: 'Дизайн логотипа',
-      tags: ['Логотип', 'Фирменный стиль', 'Креатив'],
-      coverImage: '/images/cms/savod-hozir.png',
-      beforeImage: '/images/cms/savod-avval.png',
-      afterImage: '/images/cms/savod-hozir.png',
-      oldHint: 'Предыдущий вид',
-      newHint: 'Savod (Новая премиум айдентика)',
-      description: 'Уникальная национальная айдентика издательского дома, объединяющая мир современной литературы и глубоких традиций.',
-      results: [
-        { metric: 'Рост продаж книг', value: '+45%' },
-        { metric: 'Доверие читателей', value: '94%' },
-        { metric: 'Узнаваемость бренда', value: 'В 2.5 раза' }
-      ],
-      body: [
-        {
-          heading: "Задача и Проблема",
-          paragraph: "Издательство Savod использовало устаревший текстовый логотип. Для выхода в сегмент премиальной художественной литературы требовалась глубокая философская айдентика, выделяющая бренд на рынке."
-        },
-        {
-          heading: "Стратегическое Решение",
-          paragraph: "Мы создали символический знак, гармонично сочетающий восточную культуру, просвещение и книжные страницы. В качестве цветовой палитры были выбраны благородный изумрудный и золото, идеально раскрывающие суть бренда."
-        },
-        {
-          heading: "Результат",
-          paragraph: "Первая серия книг, изданная в новой айдентике, установила рекорд по скорости продаж. Доверие и лояльность читателей к бренду Savod выросли до беспрецедентного уровня."
-        }
-      ],
-      galleryImages: [
-        '/images/cms/savod-hozir.png'
-      ],
-      order: 2
-    },
+
     {
       _id: 'fallback-fidda',
       slug: 'fidda',
@@ -383,7 +312,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     {
       _id: 'fallback-boyarin',
       slug: 'boyarin',
-      title: 'Деликатесы Boyarin Gourmet',
+      title: 'Boyarin Сливочное масло и молочные продукты',
       client: 'Boyarin Foods',
       category: 'packaging',
       categoryLabel: 'Дизайн упаковки',
@@ -393,7 +322,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       afterImage: '/images/cms/boyarin-hozir.png',
       oldHint: 'Старая упаковка',
       newHint: 'Boyarin (Премиум упаковка)',
-      description: 'Премиальный визуальный язык и дизайн упаковки для гурманских мясных деликатесов, доминирующий на полках супермаркетов.',
+      description: 'Премиальный визуальный язык и дизайн упаковки для сливочного масла и молочных продуктов, доминирующий на полках супермаркетов.',
       results: [
         { metric: 'Заметность на полке', value: '+300%' },
         { metric: 'Продажи в сетях', value: '+85%' },
@@ -402,7 +331,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       body: [
         {
           heading: "Задача и Проблема",
-          paragraph: "Мясные деликатесы Boyarin имели великолепный вкус и качество, но их упаковка была невзрачной и терялась среди сотен конкурентов на полках магазинов."
+          paragraph: "Сливочное масло и молочные продукты Boyarin имели великолепный вкус и качество, но их упаковка была невзрачной и терялась среди сотен конкурентов на полках магазинов."
         },
         {
           heading: "Стратегическое Решение",
@@ -549,44 +478,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       ],
       order: 1
     },
-    {
-      _id: 'fallback-savod',
-      slug: 'savod',
-      title: 'Savod National Publishing',
-      client: 'Savod Publishing',
-      category: 'logo-design',
-      categoryLabel: 'Logo Design',
-      tags: ['Logo', 'Brand Identity', 'Creative'],
-      coverImage: '/images/cms/savod-hozir.png',
-      beforeImage: '/images/cms/savod-avval.png',
-      afterImage: '/images/cms/savod-hozir.png',
-      oldHint: 'Previous visual',
-      newHint: 'Savod (New premium identity)',
-      description: 'A unique national publishing identity bridging the world of modern literature and deep scholarly traditions.',
-      results: [
-        { metric: 'Book Sales Increase', value: '+45%' },
-        { metric: 'Reader Loyalty Rate', value: '94%' },
-        { metric: 'Brand Awareness', value: '2.5x' }
-      ],
-      body: [
-        {
-          heading: "The Challenge",
-          paragraph: "Savod publishing used an outdated wordmark. To highlight its entry into premium creative literature, a deep philosophical identity was necessary."
-        },
-        {
-          heading: "Strategic Solution",
-          paragraph: "We created a symbolic logo beautifully merging oriental motifs, education, and paper sheets. Oble emerald green and gold colors were selected to elevate the brand's visual language."
-        },
-        {
-          heading: "The Result",
-          paragraph: "The first collection of books published with the new brand identity set store sales records. Readers' trust and recognition reached unprecedented heights."
-        }
-      ],
-      galleryImages: [
-        '/images/cms/savod-hozir.png'
-      ],
-      order: 2
-    },
+
     {
       _id: 'fallback-fidda',
       slug: 'fidda',
@@ -628,7 +520,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     {
       _id: 'fallback-boyarin',
       slug: 'boyarin',
-      title: 'Boyarin Gourmet Meats',
+      title: 'Boyarin Butter & Dairy Products',
       client: 'Boyarin Foods',
       category: 'packaging',
       categoryLabel: 'Packaging Design',
@@ -647,7 +539,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       body: [
         {
           heading: "The Challenge",
-          paragraph: "Boyarin gourmet meats had excellent quality and taste, but the generic packaging got lost among dozens of competitors on store shelves."
+          paragraph: "Boyarin butter and dairy products had excellent quality and taste, but the generic packaging got lost among dozens of competitors on store shelves."
         },
         {
           heading: "Strategic Solution",
@@ -794,44 +686,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       ],
       order: 1
     },
-    {
-      _id: 'fallback-savod',
-      slug: 'savod',
-      title: 'Savod 国家出版社',
-      client: 'Savod 出版社',
-      category: 'logo-design',
-      categoryLabel: '标志设计',
-      tags: ['标志', '品牌识别', '创意'],
-      coverImage: '/images/cms/savod-hozir.png',
-      beforeImage: '/images/cms/savod-avval.png',
-      afterImage: '/images/cms/savod-hozir.png',
-      oldHint: '旧版视觉效果',
-      newHint: 'Savod (全新高端视觉识别)',
-      description: '融合现代文学世界与深厚学术传统的独特国家出版社品牌视觉系统。',
-      results: [
-        { metric: '图书销量增长', value: '+45%' },
-        { metric: '读者忠诚度', value: '94%' },
-        { metric: '品牌知名度', value: '2.5倍' }
-      ],
-      body: [
-        {
-          heading: "挑战与背景",
-          paragraph: "Savod 出版社曾使用过时的文字标志。为了彰显其进军高端文学创作领域的决心，必须建立一个充满哲学深度的品牌视觉形象。"
-        },
-        {
-          heading: "战略性解决方案",
-          paragraph: "我们设计了一个完美融合东方元素、教育内涵与书页形象的象征性标志。选用高贵的祖母绿和金色作为品牌色，极大地提升了视觉语言的高级感。"
-        },
-        {
-          heading: "成果",
-          paragraph: "以全新品牌形象出版的首批丛书创下了书店销售记录。读者对 Savod 品牌的信任与认可达到了前所未有的高度。"
-        }
-      ],
-      galleryImages: [
-        '/images/cms/savod-hozir.png'
-      ],
-      order: 2
-    },
+
     {
       _id: 'fallback-fidda',
       slug: 'fidda',
@@ -873,7 +728,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     {
       _id: 'fallback-boyarin',
       slug: 'boyarin',
-      title: 'Boyarin 熟食牛肉',
+      title: 'Boyarin 黄油和乳制品',
       client: 'Boyarin 食品',
       category: 'packaging',
       categoryLabel: '包装设计',
@@ -892,7 +747,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       body: [
         {
           heading: "挑战与背景",
-          paragraph: "Boyarin 熟食肉品品质绝佳，但普通的包装导致其在货架上的数百个竞争对手中黯然失色。"
+          paragraph: "Boyarin 黄油和乳制品品质绝佳，但普通的包装导致其在货架上的数百个竞争对手中黯然失色。"
         },
         {
           heading: "战略性解决方案",

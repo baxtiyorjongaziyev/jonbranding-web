@@ -1,8 +1,4 @@
 {
-  "meta": {
-    "title": "Jon.Branding | 专业品牌设计机构",
-    "description": "为您的企业提供命名、标志设计和品牌手册 — Jon.Branding。"
-  },
   "header": {
     "portfolio": "作品集",
     "founder": "创始人",
@@ -24,7 +20,7 @@
     "services_and_prices": "服务与价格",
     "services_and_prices_desc": "构建您自己的服务包并立即获取价格。",
     "contact_by_phone": "联系电话",
-    "contact_by_telegram": "Telegram 联系",
+    "contact_by_telegram": "通过电报",
     "free_consultation": "Brand Audit",
     "open_menu": "菜单",
     "switch_lang": "语言",
@@ -33,6 +29,8 @@
     "lang_en": "English",
     "ai": "人工智能",
     "consultation_short": "获取审计",
+    "about": "关于我们",
+    "contacts": "联系我们",
     "online_brief": "在线简报"
   },
   "footer": {
@@ -134,9 +132,17 @@
     "ctaButton": "选择此套餐"
   },
   "sitemapPage": {
+    "title": "网站地图",
+    "subtitle": "我们网站上所有页面的概览，以帮助您快速找到所需的信息。",
+    "sections": {
+      "main": "主要部分",
+      "services": "服务",
+      "blog": "博客文章"
+    },
     "links": {
-      "car_wrap_design": "创意汽车贴膜设计",
       "home": "主页",
+      "about": "关于我们",
+      "contact": "联系我们",
       "quiz": "品牌测试",
       "portfolio": "作品集",
       "process": "工作流程",
@@ -149,14 +155,8 @@
       "packaging_design": "包装设计",
       "logo_design": "标志设计",
       "patent_calculator": "专利计算器",
-      "marketplace_cover": "销售卡设计"
-    },
-    "title": "网站地图",
-    "subtitle": "我们网站上所有页面的概览，以帮助您快速找到所需的信息。",
-    "sections": {
-      "main": "主要部分",
-      "services": "服务",
-      "blog": "博客文章"
+      "marketplace_cover": "销售卡设计",
+      "car_wrap_design": "创意汽车贴膜设计"
     }
   },
   "hero": {
@@ -176,8 +176,8 @@
       "我需要一个强大的品牌"
     ],
     "buttonHint": "免费品牌审计 · 信任诊断 · 无任何义务",
-    "title": "您的品牌应该建立信任，并**让购买变得更简单**。",
-    "descriptionPlain": "在免费品牌审计中，我们将站在买家的角度审视您的名称、标志、包装、网站和信息传递。您将清楚地了解到哪项改变能最快提升信任度。",
+    "title": "您的品牌建立信任。**购买变得更简单。**",
+    "descriptionPlain": "我们以买家视角审查您的名称、标志、包装、网站和沟通内容。您将得到一个明确答案：哪项改变能最快建立信任。",
     "preHeadline": "免费品牌审计",
     "cta": "获取免费品牌审计",
     "ctaSecondary": "检查哪些内容？",
@@ -228,8 +228,6 @@
     "detail": "企业获得的不仅仅是一个标志。我们分析市场并建立具有**战略性**的品牌视觉，让您在竞争中脱颖而出。这通常会使客户信任度和销量平均增长 40%。"
   },
   "contactModal": {
-    "srDescription": "免费品牌审计的姓名、电话和可选的 Telegram 联系方式填写表格。",
-    "telegramLinkLabel": "电报",
     "sidebarTitle": "免费品牌审计",
     "sidebarSubtitle": "我们将在15分钟内，为您指出品牌在哪里流失了买家的信任。",
     "header": "品牌审计",
@@ -292,7 +290,9 @@
     ],
     "objectionCopy": "即使您尚未准备好开始项目，审计也会让您的下一步清晰明了。",
     "riskCopy": "留下您的电话并不意味着签署合同。我们会先指出问题和机会。",
-    "footerCopyright": "Jon.Branding 品牌代理机构"
+    "footerCopyright": "Jon.Branding 品牌代理机构",
+    "srDescription": "免费品牌审计的姓名、电话和可选的 Telegram 联系方式填写表格。",
+    "telegramLinkLabel": "电报"
   },
   "oishaWidget": {
     "title": "Oisha Intelligence",
@@ -304,7 +304,13 @@
     "thinking": "Oisha 正在思考...",
     "openButtonAriaLabel": "打开 Oisha 聊天",
     "closeButtonAriaLabel": "关闭 Oisha 聊天",
-    "sendButtonAriaLabel": "发送消息"
+    "sendButtonAriaLabel": "发送消息",
+    "proactive": {
+      "sotuvchi-kartochka": "您好！我看到您对我们的Uzem/平台卖家卡片感兴趣。需要我分享这方面的工作案例集吗？",
+      "xizmatlar": "您好！您正在浏览我们的服务。哪个领域最让您感兴趣？让我帮您看看实际案例。",
+      "quiz": "您快完成测试了！想提前查看结果吗？",
+      "blog": "很高兴您在阅读这篇文章。顺便说一下，您可以就此主题免费检查您的品牌。"
+    }
   },
   "home": {
     "cta1_title": "您的品牌能否让买家信任您？让我们来检测一下。",
@@ -702,6 +708,8 @@
     }
   },
   "faq": {
+    "title": "常见问题",
+    "subtitle": "有关品牌塑造过程、价格和其他主题的最常见问题的解答。",
     "faqItems": [
       {
         "question": "为什么价格不固定？",
@@ -722,18 +730,8 @@
       {
         "question": "有任何保证吗？",
         "answer": "是的，我们有“100% 满意保证”。如果您完全不喜欢初始概念，我们准备退还您的款项。您的结果是我们的首要任务。"
-      },
-      {
-        "question": "有结果保证吗？",
-        "answer": "当然。我们将客户满意度放在首位。如果最初的概念完全不符合您的要求（根据简报），我们将重新设计项目或履行约定的退款条款。"
-      },
-      {
-        "question": "只能订购徽标吗？",
-        "answer": "我们建议创建整个识别系统，因为仅凭徽标无法确保品牌完整性。但是，对于小型项目，我们提供“徽标 + 最小企业风格”套餐。"
       }
     ],
-    "title": "常见问题",
-    "subtitle": "有关品牌塑造过程、价格和其他主题的最常见问题的解答。",
     "ctaTitle": "不要留下疑虑的空间！",
     "ctaDesc": "得到所有问题的答案了吗？让我们讨论您的项目，并将您的品牌提升到一个新的水平。",
     "ctaButton": "我已经得到了所有的答案，准备好开始了！"
@@ -1154,6 +1152,17 @@
     }
   },
   "packagingPage": {
+    "metadata": {
+      "title": "乌兹别克斯坦包装设计服务 | Jon.Branding",
+      "description": "我们不仅仅是创造漂亮的包装; 我们还创造一个强大的营销工具来销售您的产品. 我们在乌兹别克斯坦的包装设计机构将帮助您的品牌从竞争对手中脱颖而出并赢得买家的喜爱。"
+    },
+    "title": "包装设计开发",
+    "subtitle": "在激烈的竞争条件下，包装通常成为主要的营销工具. 它能让品牌在货架上与众不同，讲述它的故事，并从第一眼起就与受众建立联系。",
+    "section1_title": "包装 — 不仅仅是品牌识别的载体",
+    "section1_p1": "包装 — 在销售点与品牌的第一次接触，这种视觉吸引力能瞬间建立产品印象. 在许多情况下，包装决定了一个人是否购买。",
+    "section1_p2": "我们的目标 — 不仅仅是创造审美 and 漂亮的包装，更是一个高效的工具，满足业务任务 and 促进其增长。",
+    "process_title": "我们如何创建包装？",
+    "process_subtitle": "我们对待包装开发不只是作为一个单独的设计，而是一个应该为业务服务的复杂系统，并满足受众的期望. 我们的过程包括几个关键阶段：",
     "process_steps": [
       {
         "title": "分析与策略",
@@ -1166,23 +1175,8 @@
       {
         "title": "定稿与准备",
         "description": "仔细制定所选概念的所有技术方面（针对不同格式的调整，印刷准备）。"
-      },
-      {
-        "title": "交付",
-        "description": "准备好打印的文件和技术规格。"
       }
     ],
-    "metadata": {
-      "title": "乌兹别克斯坦包装设计服务 | Jon.Branding",
-      "description": "我们不仅仅是创造漂亮的包装; 我们还创造一个强大的营销工具来销售您的产品. 我们在乌兹别克斯坦的包装设计机构将帮助您的品牌从竞争对手中脱颖而出并赢得买家的喜爱。"
-    },
-    "title": "包装设计开发",
-    "subtitle": "在激烈的竞争条件下，包装通常成为主要的营销工具. 它能让品牌在货架上与众不同，讲述它的故事，并从第一眼起就与受众建立联系。",
-    "section1_title": "包装 — 不仅仅是品牌识别的载体",
-    "section1_p1": "包装 — 在销售点与品牌的第一次接触，这种视觉吸引力能瞬间建立产品印象. 在许多情况下，包装决定了一个人是否购买。",
-    "section1_p2": "我们的目标 — 不仅仅是创造审美 and 漂亮的包装，更是一个高效的工具，满足业务任务 and 促进其增长。",
-    "process_title": "我们如何创建包装？",
-    "process_subtitle": "我们对待包装开发不只是作为一个单独的设计，而是一个应该为业务服务的复杂系统，并满足受众的期望. 我们的过程包括几个关键阶段：",
     "cta_title": "包装不仅吸引注意力，它还能销售",
     "cta_description": "好的包装设计 — 不只是漂亮的装饰，而是为业务服务的工具. 我们开发功能性的、经过战略深思熟虑的设计，使包装成为一个成熟的销售工具。"
   },
@@ -1226,6 +1220,14 @@
         "ramazonDiscount": "Ramazon 优惠 (-30%)",
         "specialDiscount": "特别优惠 (-50%)",
         "fullPaymentDiscount": "100% 预付款 (-10%)"
+      },
+      "discountCountdown": {
+        "title": "折扣倒计时",
+        "description": "所选折扣有效期为24小时",
+        "hours": "小时",
+        "minutes": "分钟",
+        "seconds": "秒",
+        "expired": "折扣已过期"
       },
       "empty_package_desc": "您尚未选择任何服务。请至少选择一项服务。",
       "recommended": "专家推荐"
@@ -1383,6 +1385,10 @@
       "desc": "适用于 Uzum、Wildberries、Ozon 和 Yandex Market 的高转化率产品卡片设计。折扣与附加服务。",
       "cta": "卡片定价与计算器"
     }
+  },
+  "meta": {
+    "title": "Jon.Branding | 专业品牌设计机构",
+    "description": "为您的企业提供命名、标志设计和品牌手册 — Jon.Branding。"
   },
   "atelier": {
     "nav": [
@@ -1899,7 +1905,7 @@
     "gallery_similar": "您的业务类似吗？您也可以获得同样的结果。",
     "gallery_cta": "为我的业务进行诊断",
     "audit_title": "诊断中\n我们检查什么。",
-    "audit_lede": "12 项标准 · 4 个方向 · 14 天。每个点都以 0-100 分进行评估，损失的收入以精确的数字计算。任何方面都不会被忽视。",
+    "audit_lede": "12 项标准 · 4 个方向。每个点都以 0-100 分进行评估，损失的收入以精确的数字计算。任何方面都不会被忽视。",
     "audit_deliv_title": "诊断总结 · 您将获得什么",
     "audit_deliv_h3": "6 项明确",
     "audit_deliv_h3_span": "结果。",
@@ -1997,7 +2003,12 @@
     "pricing_cta_standard": "选择",
     "loss_calc_eyebrow": "损失计算器 · 中期报告",
     "index_archive_eyebrow": "档案",
-    "process_step_label": "步骤"
+    "process_step_label": "步骤",
+    "instagram": {
+      "title": "在 Instagram 上关注我们",
+      "subtitle": "我们最新的项目和团队生活",
+      "followBtn": "关注"
+    }
   },
   "onlineBrief": {
     "meta": {
@@ -2260,5 +2271,13 @@
         }
       ]
     }
+  },
+  "reviewsPage": {
+    "title": "客户评价与反馈",
+    "subtitle": "用事实说话。来自真实客户的语音和视频评价，展现我们的专业水准与成果。",
+    "back": "返回首页",
+    "ctaText": "获取免费审计",
+    "voiceLabel": "语音评价",
+    "videoLabel": "视频评价"
   }
 }

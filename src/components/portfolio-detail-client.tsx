@@ -176,6 +176,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
             src={project.coverImage}
             alt={project.title}
             fill
+            sizes="(max-width: 768px) 100vw, 80vw"
             className="object-cover group-hover:scale-102 transition-transform duration-1000"
             priority
           />
@@ -240,6 +241,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                   src={project.afterImage}
                   alt={project.newHint || 'After'}
                   fill
+                  sizes="100vw"
                   className="object-cover"
                   draggable={false}
                 />
@@ -258,6 +260,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                     src={project.beforeImage}
                     alt={project.oldHint || 'Before'}
                     fill
+                    sizes="100vw"
                     className="object-cover"
                     draggable={false}
                     style={{ width: '100vw', maxWidth: 'none' }}
@@ -334,6 +337,8 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                     src={img}
                     alt={`Gallery ${i}`}
                     fill
+                    loading="lazy"
+                    sizes="(max-width: 640px) 100vw, 50vw"
                     className="object-cover group-hover:scale-102 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

@@ -28,6 +28,10 @@ const CookieConsentBanner = dynamic(() => import('@/components/cookie-consent-ba
   ssr: false,
 });
 
+const ProactiveTrigger = dynamic(() => import('@/components/proactive-trigger'), {
+  ssr: false,
+});
+
 const StickyCTA = dynamic(() => import('@/components/ui/sticky-cta'), {
   loading: () => null,
   ssr: false,
@@ -98,9 +102,15 @@ export default function ClientEnhancements({
 
   const pathname = usePathname();
   const lang = (langProp || pathname.split('/')[1] || 'uz') as any;
+  // Bosh sahifa o'z Atelier lead tizimini (AtStickyCta + AtModal) ishlatadi —
+  // global dublikatlarni (sticky CTA, scroll-popup, ko'k ContactModal) o'chiramiz
+  const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
+  const isHome = pathnameWithoutLocale === '/';
 
   const handleOpenModal = useCallback(async (detail?: { section?: string; ctaText?: string; source?: string }) => {
     if (typeof window === 'undefined') return;
+    const pathWithoutLocale = window.location.pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
+    if (pathWithoutLocale === '/') return;
 
     let summary = '';
     let finalPrice = 0;
@@ -201,7 +211,7 @@ export default function ClientEnhancements({
       <Suspense fallback={null}>
         <AnalyticsTracker />
       </Suspense>
-      {enhancementsReady && (
+      {enhancementsReady && !isHome && (
         <ScrollDepthTrigger
           onTrigger={handleOpenModal}
           threshold={0.88}
@@ -209,7 +219,7 @@ export default function ClientEnhancements({
         />
       )}
       <Toaster />
-      {isModalOpen && (
+      {isModalOpen && !isHome && (
         <ContactModal
           isOpen={isModalOpen}
           onClose={handleCloseModal}
@@ -220,10 +230,11 @@ export default function ClientEnhancements({
         />
       )}
       {quickActionsReady && tabNotificationMessage && <TabNotification message={tabNotificationMessage} />}
-      {quickActionsReady && <StickyCTA ariaLabel={stickyCtaLabel || 'Contact us'} />}
+      {quickActionsReady && !isHome && <StickyCTA ariaLabel={stickyCtaLabel || 'Contact us'} />}
       {quickActionsReady && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
       {enhancementsReady && <CookieConsentBanner />}
       {enhancementsReady && <OishaWidget lang={lang} />}
+      {enhancementsReady && <ProactiveTrigger lang={lang} />}
       {enhancementsReady && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
 
     </>

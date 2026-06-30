@@ -14,10 +14,8 @@ import {
   Zap,
   type LucideProps,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { useState, type FC } from 'react';
 import { motion } from 'framer-motion';
-import { BrandSection } from '@/components/ui/design-system';
 import DOMPurify from 'isomorphic-dompurify';
 import { renderHeadline } from '@/lib/headline';
 import type { FounderDictionary } from '@/lib/types/dictionary';
@@ -49,33 +47,26 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
   if (!translations) return null;
 
   return (
-    <BrandSection
+    <section
       id="founder"
-      tone="dark"
-      className="relative flex min-h-[90dvh] items-center overflow-hidden py-12 sm:py-14"
+      style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}
+      className="relative min-h-[90dvh] overflow-hidden py-16 sm:py-20"
     >
-      {/* Background gradient */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(37,99,235,0.16),transparent_44%,rgba(58,225,255,0.1))]" />
-      </div>
-
       <motion.div
         variants={containerVariants}
         initial="visible"
         animate="visible"
-        className="container relative z-10 mx-auto px-4 lg:h-full lg:flex lg:items-center"
+        className="max-w-[1320px] mx-auto px-5 md:px-8"
       >
-        {/* 2-column grid: image left, content right */}
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 lg:gap-14 xl:gap-20">
+        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 lg:gap-16">
 
           {/* ── LEFT: Portrait / Video ── */}
-          <motion.div
-            variants={itemVariants}
-            className="order-1 flex items-center justify-center md:order-1"
-          >
-            <div className="relative mx-auto w-full max-w-[420px] overflow-hidden rounded-3xl border border-white/8 bg-[#050912] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]">
-              {/* Fixed viewport-relative height so it never overflows the screen */}
-              <div className="relative h-[40vh] md:h-[52vh] max-h-[420px] md:max-h-[520px] min-h-[260px] md:min-h-[300px] w-full">
+          <motion.div variants={itemVariants} className="flex items-center justify-center">
+            <div
+              className="relative w-full max-w-[420px] overflow-hidden rounded-2xl"
+              style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)' }}
+            >
+              <div className="relative w-full aspect-[4/5]">
                 {!showVideo ? (
                   <>
                     <Image
@@ -86,17 +77,18 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
                       className="object-cover object-top"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050912]/80 via-[#050912]/10 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--at-bg)]/80 via-transparent to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
                       <button
                         type="button"
-                        onClick={() => {
-                          setShowVideo(true);
-                          setUnmuted(true);
-                        }}
-                        className="group inline-flex items-center gap-3 rounded-full border border-white/16 bg-white/12 py-2 pl-2 pr-5 text-sm font-black text-white shadow-[0_20px_50px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition-[background-color,transform,border-color] duration-300 hover:border-white/28 hover:bg-white/18 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan active:scale-[0.98]"
+                        onClick={() => { setShowVideo(true); setUnmuted(true); }}
+                        className="group inline-flex items-center gap-3 rounded-full py-2 pl-2 pr-5 text-sm font-semibold transition-all hover:opacity-90"
+                        style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}
                       >
-                        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand-ink transition-transform duration-300 group-hover:scale-105">
+                        <span
+                          className="flex h-9 w-9 items-center justify-center rounded-full"
+                          style={{ background: 'var(--at-accent)', color: '#fff' }}
+                        >
                           <PlayCircle className="h-5 w-5" aria-hidden="true" />
                         </span>
                         {translations.videoButton || "Asoschidan 45 soniya"}
@@ -116,14 +108,11 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
                     <button
                       type="button"
                       onClick={() => setUnmuted(!unmuted)}
-                      className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#050912]/70 text-white backdrop-blur-sm transition-[background-color,transform] duration-200 hover:bg-[#050912]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan active:scale-95"
+                      className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full transition-all hover:opacity-80"
+                      style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', border: '1px solid var(--at-line)' }}
                       aria-label={unmuted ? "Ovozni o'chirish" : "Ovozni yoqish"}
                     >
-                      {unmuted ? (
-                        <Volume2 className="h-5 w-5" aria-hidden="true" />
-                      ) : (
-                        <VolumeX className="h-5 w-5" aria-hidden="true" />
-                      )}
+                      {unmuted ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
                     </button>
                   </>
                 )}
@@ -132,19 +121,32 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
           </motion.div>
 
           {/* ── RIGHT: Text content ── */}
-          <motion.div variants={itemVariants} className="order-2 flex flex-col gap-4 md:order-2">
+          <motion.div variants={itemVariants} className="flex flex-col gap-5">
+
+            {/* Eyebrow */}
+            <div
+              className="inline-flex items-center gap-2"
+              style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--at-muted)' }}
+            >
+              <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: 'var(--at-green)' }} />
+              Asoschi
+            </div>
 
             {/* Title + LinkedIn */}
             <div className="flex items-start gap-3">
-              <h2 className="text-pretty text-2xl font-black leading-tight text-white sm:text-3xl lg:text-[2.1rem] xl:text-4xl">
-                {renderHeadline(translations.title ?? '', "text-brand-cyan")}
+              <h2
+                className="font-bold leading-tight"
+                style={{ fontSize: 'clamp(28px, 3.6vw, 48px)', letterSpacing: '-0.035em', color: 'var(--at-ink)' }}
+              >
+                {renderHeadline(translations.title ?? '', 'var(--at-accent)')}
               </h2>
               <a
                 href="https://www.linkedin.com/in/baxtiyorjongaziyev/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Baxtiyorjon Gaziyev LinkedIn"
-                className="mt-1 flex-shrink-0 rounded-full border border-white/10 bg-white/5 p-2 text-white transition-[background-color,color,transform] duration-200 hover:bg-white hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan active:scale-[0.95]"
+                className="mt-1 flex-shrink-0 rounded-full p-2 transition-all hover:opacity-80"
+                style={{ border: '1px solid var(--at-line)', color: 'var(--at-ink-2)' }}
               >
                 <Linkedin size={15} aria-hidden="true" />
               </a>
@@ -152,15 +154,23 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
 
             {/* Message */}
             <p
-              className="text-[15px] leading-7 text-white/70"
+              className="text-[15px] leading-7"
+              style={{ color: 'var(--at-ink-2)' }}
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(translations.message ?? '') }}
             />
 
             {/* Principles */}
             {(translations.principles?.length ?? 0) > 0 && (
-              <div className="grid gap-1.5 rounded-2xl border border-white/8 bg-white/[0.04] p-2 grid-cols-3">
+              <div
+                className="grid gap-1.5 rounded-2xl p-2 sm:grid-cols-3"
+                style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)' }}
+              >
                 {(translations.principles ?? []).map((item: string) => (
-                  <div key={item} className="rounded-xl bg-white/[0.06] px-3 py-2 text-[10px] sm:text-xs font-bold text-white/90 text-center">
+                  <div
+                    key={item}
+                    className="rounded-xl px-3 py-2.5 text-[11px] sm:text-xs font-semibold text-center"
+                    style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}
+                  >
                     {item}
                   </div>
                 ))}
@@ -169,45 +179,42 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
 
             {/* Points */}
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {(translations.points ?? []).map((point, index: number) => {
-                const Icon = icons[point.icon];
+              {(translations.points ?? []).map((point: { icon: string; text: string }, index: number) => {
+                const IconComp = icons[point.icon];
                 return (
                   <div key={index} className="flex items-center gap-2.5">
-                    {Icon && <Icon className="h-4 w-4 flex-shrink-0 text-brand-cyan" aria-hidden="true" />}
-                    <span className="text-sm font-medium text-white/75">{point.text}</span>
+                    {IconComp && <IconComp className="h-4 w-4 shrink-0" style={{ color: 'var(--at-accent)' }} aria-hidden="true" />}
+                    <span className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>{point.text}</span>
                   </div>
                 );
               })}
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-2.5 pt-1">
-              <Button
-                size="lg"
-                className="h-11 rounded-full bg-white px-5 text-sm font-bold text-brand-ink transition-[background-color,transform] duration-200 hover:bg-brand-lime active:scale-[0.97]"
-                asChild
+            <div className="flex flex-wrap gap-3 pt-1">
+              <a
+                href="tel:+998336450097"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"
+                style={{ background: 'var(--at-accent)', color: '#fff' }}
               >
-                <a href="tel:+998336450097">
-                  <Phone className="mr-2 h-4 w-4" aria-hidden="true" />
-                  {translations.phoneButton}
-                </a>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-11 rounded-full border-white/12 bg-white/5 px-5 text-sm font-bold text-white transition-[background-color,border-color,transform] duration-200 hover:border-[#0088cc] hover:bg-[#0088cc]"
-                asChild
+                <Phone className="h-4 w-4" aria-hidden="true" />
+                {translations.phoneButton}
+              </a>
+              <a
+                href="https://t.me/baxtiyorjon_gaziyev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"
+                style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}
               >
-                <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer">
-                  <Send className="mr-2 h-4 w-4" aria-hidden="true" />
-                  {translations.telegramButton}
-                </a>
-              </Button>
+                <Send className="h-4 w-4" aria-hidden="true" />
+                {translations.telegramButton}
+              </a>
             </div>
           </motion.div>
         </div>
       </motion.div>
-    </BrandSection>
+    </section>
   );
 };
 

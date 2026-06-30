@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useEffect, useCallback, type FC } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 
@@ -25,10 +26,7 @@ const AtStickyCta: FC<Props> = ({ dictionary, onOpen }) => {
     let active: Stage = 'belgilar';
     for (const id of stages) {
       const el = document.getElementById(id);
-      if (el) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= 200) active = id;
-      }
+      if (el && el.getBoundingClientRect().top <= 200) active = id;
     }
     setStage(active);
   }, []);
@@ -52,7 +50,7 @@ const AtStickyCta: FC<Props> = ({ dictionary, onOpen }) => {
       style={{ pointerEvents: show ? 'auto' : 'none' }}
     >
       <div
-        className="flex items-center gap-4 px-5 py-3 rounded-full shadow-2xl"
+        className="flex max-w-[90vw] items-center gap-3 rounded-full px-4 py-3 shadow-2xl sm:max-w-none sm:gap-4 sm:px-5"
         style={{
           background: 'var(--at-ink)',
           border: '1px solid rgba(255,255,255,0.1)',
@@ -60,7 +58,7 @@ const AtStickyCta: FC<Props> = ({ dictionary, onOpen }) => {
         }}
       >
         <span
-          className="text-xs font-semibold"
+          className="shrink-0 text-xs font-semibold"
           style={{
             fontFamily: 'var(--font-mono)',
             color: 'var(--at-accent)',
@@ -69,15 +67,16 @@ const AtStickyCta: FC<Props> = ({ dictionary, onOpen }) => {
         >
           {v.num}
         </span>
-        <span className="text-sm hidden sm:inline" style={{ color: 'rgba(244,241,232,.7)' }}>
+        <span className="min-w-[100px] flex-1 truncate text-[11px] sm:text-sm" style={{ color: 'rgba(244,241,232,.7)' }}>
           {v.text}
         </span>
         <button
           onClick={onOpen}
-          className="font-semibold text-sm rounded-full px-4 py-2 transition-all hover:opacity-90"
+          className="group relative shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-all hover:opacity-90 sm:text-sm"
           style={{ background: 'var(--at-accent)', color: '#fff', whiteSpace: 'nowrap' }}
         >
-          {v.cta}
+          <span className="relative z-10">{v.cta}</span>
+          <span className="absolute inset-0 rounded-full opacity-20 animate-ping" style={{ background: 'var(--at-accent)' }} />
         </button>
       </div>
     </motion.div>

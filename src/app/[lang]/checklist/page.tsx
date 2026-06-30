@@ -102,7 +102,14 @@ const ChecklistPage: FC = () => {
 
 
   if (!translations) {
-    return <main className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></main>;
+    return (
+      <main className="flex-grow pt-20">
+        <h1 className="sr-only">
+          {lang === 'uz' ? 'Brending chek-listi' : lang === 'ru' ? 'Чек-лист по брендингу' : lang === 'en' ? 'Branding Checklist' : '品牌清单'}
+        </h1>
+        <Skeleton className="w-full h-screen" />
+      </main>
+    );
   }
 
   const checklistData = translations.magnets.find((m: any) => m.id === 'pdf');
