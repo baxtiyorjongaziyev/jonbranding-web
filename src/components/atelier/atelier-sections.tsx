@@ -1779,10 +1779,11 @@ export const ATFooter: FC<{ dictionary: any }> = ({ dictionary }) => {
 };
 
 /* ── STICKY ────────────────────────────────────── */
+const STICKY_SECTION_IDS = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
+
 export const ATStickyCta: FC<SectionProps> = ({ dictionary, onOpen }) => {
   const [show, setShow] = useState(false);
   const [stage, setStage] = useState('belgilar');
-  const sections = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
   const variants = dictionary?.sticky_cta?.variants || {};
   const { scrollY } = useScroll();
 
@@ -1792,7 +1793,7 @@ export const ATStickyCta: FC<SectionProps> = ({ dictionary, onOpen }) => {
     setShow(y > h * 0.6);
 
     let active = 'belgilar';
-    for (const id of sections) {
+    for (const id of STICKY_SECTION_IDS) {
       const el = document.getElementById(id);
       if (el && el.getBoundingClientRect().top <= 200) active = id;
     }
