@@ -7,7 +7,12 @@ import { motion, useScroll, useMotionValueEvent, useInView } from 'framer-motion
 import ImageComparisonSlider from '@/components/image-comparison-slider';
 import { PlayCircle, Pause, Play, Volume2, X, Star } from 'lucide-react';
 import { ATMock } from './atelier-mocks';
-import { staticTestimonials, staticTestimonialsEn, staticTestimonialsRu, staticTestimonialsZh } from '@/lib/static-data';
+import {
+  staticTestimonials,
+  staticTestimonialsEn,
+  staticTestimonialsRu,
+  staticTestimonialsZh,
+} from '@/lib/static-data';
 
 interface SectionProps {
   dictionary: any;
@@ -73,7 +78,7 @@ export const ATNav: FC<ATNavProps> = ({ dictionary, onOpen, theme, setTheme }) =
     setScroll(y > 24);
   }, []);
 
-  useMotionValueEvent(scrollY, "change", handleScroll);
+  useMotionValueEvent(scrollY, 'change', handleScroll);
 
   useEffect(() => {
     handleScroll(window.scrollY);
@@ -95,17 +100,26 @@ export const ATNav: FC<ATNavProps> = ({ dictionary, onOpen, theme, setTheme }) =
           </a>
           <div className="nav-links">
             {navItems.map((n: any) => (
-              <a key={n.id} className="nav-link" href={n.href} onClick={n.href.startsWith('#') ? go(n.href.slice(1)) : undefined}>
+              <a
+                key={n.id}
+                className="nav-link"
+                href={n.href}
+                onClick={n.href.startsWith('#') ? go(n.href.slice(1)) : undefined}
+              >
                 {n.label}
               </a>
             ))}
           </div>
           <div className="nav-right">
-            <button className="icon-btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label="theme">
+            <button
+              className="icon-btn"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              aria-label="theme"
+            >
               {theme === 'dark' ? '☀' : '☾'}
             </button>
             <button className="btn btn-primary" onClick={onOpen}>
-              {dictionary?.hero_cta || "Bepul tahlil"} <span className="ar">↗</span>
+              {dictionary?.hero_cta || 'Bepul tahlil'} <span className="ar">↗</span>
             </button>
           </div>
         </div>
@@ -122,24 +136,48 @@ export const ATHero: FC<SectionProps> = ({ dictionary, onOpen }) => {
         <div className="hero-left">
           <div className="hero-eyebrows">
             <span className="eb">
-              <span className="dot"/>
-              <span>{dictionary?.hero_eyebrow || "Markaziy Osiyo · Brand atelier · Est. 2019"}</span>
+              <span className="dot" />
+              <span>
+                {dictionary?.hero_eyebrow || 'Markaziy Osiyo · Brand atelier · Est. 2019'}
+              </span>
             </span>
             <div className="pill">
               <span className="b">2026</span>
-              <span>{dictionary?.hero_pill || "Yangi paketlar endi mavjud"}</span>
+              <span>{dictionary?.hero_pill || 'Yangi paketlar endi mavjud'}</span>
             </div>
           </div>
-          <h1 className="hero-title" dangerouslySetInnerHTML={{ __html: (dictionary?.hero_title || "Brendingiz<br/>aslida<br/>qancha yo'qotyapti?").replace(/\n/g, '<br/>') }} />
+          <h1
+            className="hero-title"
+            dangerouslySetInnerHTML={{
+              __html: (
+                dictionary?.hero_title || "Brendingiz<br/>aslida<br/>qancha yo'qotyapti?"
+              ).replace(/\n/g, '<br/>'),
+            }}
+          />
         </div>
 
         <div className="hero-right">
-          <p className="hero-lede" dangerouslySetInnerHTML={{ __html: (dictionary?.hero_lede || "<strong>Brend tashxisi</strong> — biznesingizning ko'rinmas yo'qotishlarini topish.<br/>14 kun · 12 mezon · 30—50 betlik hisobot · aniq raqamlarda.<br/><br/>Bepul mini-tashxis bilan boshlang — keyin xohlasangiz to'liqqa o'tasiz.").replace(/\n/g, '<br/>') }} />
+          <p
+            className="hero-lede"
+            dangerouslySetInnerHTML={{
+              __html: (
+                dictionary?.hero_lede ||
+                "<strong>Brend tashxisi</strong> — biznesingizning ko'rinmas yo'qotishlarini topish.<br/>14 kun · 12 mezon · 30—50 betlik hisobot · aniq raqamlarda.<br/><br/>Bepul mini-tashxis bilan boshlang — keyin xohlasangiz to'liqqa o'tasiz."
+              ).replace(/\n/g, '<br/>'),
+            }}
+          />
           <div className="hero-cta-row">
             <button className="btn btn-primary btn-xl" onClick={onOpen}>
-              {dictionary?.hero_cta || "Bepul mini-tashxis boshlash"} <span className="ar">↗</span>
+              {dictionary?.hero_cta || 'Bepul mini-tashxis boshlash'} <span className="ar">↗</span>
             </button>
-            <a href="#narxlar" onClick={(e) => { e.preventDefault(); document.getElementById('narxlar')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-link">
+            <a
+              href="#narxlar"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('narxlar')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="text-link"
+            >
               {dictionary?.hero_cta_sub || "yoki paketlarni ko'ring"} →
             </a>
           </div>
@@ -151,19 +189,23 @@ export const ATHero: FC<SectionProps> = ({ dictionary, onOpen }) => {
             <span className="sep">·</span>
             <span>Majburiyatsiz</span>
             <span className="sep">·</span>
-            <span className="hl">{dictionary?.hero_micro_label || "Iyul oyida 4 joy qoldi"}</span>
+            <span className="hl">{dictionary?.hero_micro_label || 'Iyul oyida 4 joy qoldi'}</span>
           </div>
           <div className="hero-meta">
             <div>
               <div className="k">{dictionary?.hero_stat_conducted || "O'tkazildi"}</div>
-              <div className="v"><span className="s">240</span>+ tashxis</div>
+              <div className="v">
+                <span className="s">240</span>+ tashxis
+              </div>
             </div>
             <div>
-              <div className="k">{dictionary?.hero_stat_left || "Bu oyda"}</div>
-              <div className="v"><span className="s">4</span> joy qoldi</div>
+              <div className="k">{dictionary?.hero_stat_left || 'Bu oyda'}</div>
+              <div className="v">
+                <span className="s">4</span> joy qoldi
+              </div>
             </div>
             <div>
-              <div className="k">{dictionary?.hero_stat_ready || "Hisobot tayyor"}</div>
+              <div className="k">{dictionary?.hero_stat_ready || 'Hisobot tayyor'}</div>
               <div className="v">14 kun</div>
             </div>
           </div>
@@ -199,12 +241,21 @@ export const ATManifesto: FC<{ dictionary: any }> = ({ dictionary }) => {
     <section className="manifesto wrap">
       <div className="manifesto-grid">
         <div className="manifesto-meta">
-          <div className="k">— {dictionary?.manifesto_label || "Manifest"}</div>
+          <div className="k">— {dictionary?.manifesto_label || 'Manifest'}</div>
           <div className="v">
-            {dictionary?.manifesto_desc || "Tashxis — bu professional ko'rik. Aniq raqamlar, aniq xulosalar, aniq harakat. Taxmin va his bilan biznesni yo'qotmaymiz."}
+            {dictionary?.manifesto_desc ||
+              "Tashxis — bu professional ko'rik. Aniq raqamlar, aniq xulosalar, aniq harakat. Taxmin va his bilan biznesni yo'qotmaymiz."}
           </div>
         </div>
-        <div className="manifesto-text" dangerouslySetInnerHTML={{ __html: (dictionary?.manifesto_text || "Tashxissiz <s>tuzatish</s> —<br/>bu <em>qorong'ida</em> o'q otish.<br/>Avval ko'rinmagan teshikni topamiz, keyin yopamiz. Tartib shu —<br/>aks holda <strong>siz pul to'laysiz, raqib daromad oladi.</strong>").replace(/\n/g, '<br/>') }} />
+        <div
+          className="manifesto-text"
+          dangerouslySetInnerHTML={{
+            __html: (
+              dictionary?.manifesto_text ||
+              "Tashxissiz <s>tuzatish</s> —<br/>bu <em>qorong'ida</em> o'q otish.<br/>Avval ko'rinmagan teshikni topamiz, keyin yopamiz. Tartib shu —<br/>aks holda <strong>siz pul to'laysiz, raqib daromad oladi.</strong>"
+            ).replace(/\n/g, '<br/>'),
+          }}
+        />
       </div>
     </section>
   );
@@ -219,13 +270,14 @@ export const ATLedger: FC<{ dictionary: any }> = ({ dictionary }) => {
       <div className="wrap">
         <div className="ledger-inner">
           <div className="ledger-label">
-            <span>{dictionary?.brand_system_primary || "Tanlangan mijozlar"}</span>
+            <span>{dictionary?.brand_system_primary || 'Tanlangan mijozlar'}</span>
             <span className="n">120+ brend</span>
           </div>
           <div className="ledger-logos">
             {ledgerItems.map((l: any) => (
               <span key={l.name} className="ledger-logo">
-                {l.name}<span className="yr">'{l.yr}</span>
+                {l.name}
+                <span className="yr">'{l.yr}</span>
               </span>
             ))}
           </div>
@@ -239,10 +291,14 @@ export const ATLedger: FC<{ dictionary: any }> = ({ dictionary }) => {
 export const ATStats: FC<{ dictionary: any }> = ({ dictionary }) => {
   const statsItems = dictionary?.stats || [];
   const tips = [
-    dictionary?.stats_tip_1 || "2019—2026 davrida 240 ta haqiqiy mijoz. Mahalliy ro'yxat va sharhlar bilan tasdiqlangan.",
-    dictionary?.stats_tip_2 || "Qumri Coffee (2.8M), Oltin Bulut (3.7M), Humo (4.1M) o'rtachasi. Auditda aniq raqam.",
-    dictionary?.stats_tip_3 || "Brif yuborilgandan so'ng — birinchi tavsiya 21 kun ichida amalga oshadi.",
-    dictionary?.stats_tip_4 || "PDF hisobotdagi tavsiyalarning kamida 60% 90 kun ichida amalga oshiriladi.",
+    dictionary?.stats_tip_1 ||
+      "2019—2026 davrida 240 ta haqiqiy mijoz. Mahalliy ro'yxat va sharhlar bilan tasdiqlangan.",
+    dictionary?.stats_tip_2 ||
+      "Qumri Coffee (2.8M), Oltin Bulut (3.7M), Humo (4.1M) o'rtachasi. Auditda aniq raqam.",
+    dictionary?.stats_tip_3 ||
+      "Brif yuborilgandan so'ng — birinchi tavsiya 21 kun ichida amalga oshadi.",
+    dictionary?.stats_tip_4 ||
+      'PDF hisobotdagi tavsiyalarning kamida 60% 90 kun ichida amalga oshiriladi.',
   ];
 
   return (
@@ -250,9 +306,12 @@ export const ATStats: FC<{ dictionary: any }> = ({ dictionary }) => {
       <div className="stats-row">
         {statsItems.map((s: any, i: number) => (
           <div key={i} className="stat">
-            <div className="n">{s.n}<span className="s">{s.s}</span></div>
+            <div className="n">
+              {s.n}
+              <span className="s">{s.s}</span>
+            </div>
             <div className="l">{s.l}</div>
-            <div className="stat-tip">{tips[i] || ""}</div>
+            <div className="stat-tip">{tips[i] || ''}</div>
           </div>
         ))}
       </div>
@@ -268,21 +327,36 @@ export const ATDiagnosis: FC<SectionProps> = ({ dictionary, onOpen }) => {
   return (
     <section className="sec wrap" id="belgilar">
       <div className="sec-head">
-        <h2 dangerouslySetInnerHTML={{ __html: (dictionary?.diagnosis_title || "Hozir biznesingizda<br/><span class=\"it\">aslida</span> nima bo'lyapti?").replace(/\n/g, '<br/>') }} />
+        <h2
+          dangerouslySetInnerHTML={{
+            __html: (
+              dictionary?.diagnosis_title ||
+              'Hozir biznesingizda<br/><span class="it">aslida</span> nima bo\'lyapti?'
+            ).replace(/\n/g, '<br/>'),
+          }}
+        />
         <div className="lede">
           <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
-            <span className="dot" style={{ background: 'var(--terra)' }}/>
+            <span className="dot" style={{ background: 'var(--terra)' }} />
             <span className="ix">§ 01</span>
-            <span>{dictionary?.nav?.[0]?.label || "Belgilar"}</span>
+            <span>{dictionary?.nav?.[0]?.label || 'Belgilar'}</span>
           </span>
-          <p dangerouslySetInnerHTML={{ __html: dictionary?.diagnosis_lede || "Brendingiz <strong>ko'rinmas yo'qotishlar</strong> keltiryapti. Mijoz bu yo'qotishlarni sezmaydi — siz ham. Lekin raqib mijozni siz emas, o'ziga olib ketadi." }} />
+          <p
+            dangerouslySetInnerHTML={{
+              __html:
+                dictionary?.diagnosis_lede ||
+                "Brendingiz <strong>ko'rinmas yo'qotishlar</strong> keltiryapti. Mijoz bu yo'qotishlarni sezmaydi — siz ham. Lekin raqib mijozni siz emas, o'ziga olib ketadi.",
+            }}
+          />
         </div>
       </div>
 
       <div className="diag">
         <div className="diag-col bad">
           <div className="diag-head">
-            <span className="tag"><span className="x">●</span> {dictionary?.bad_tag || "Jon'siz · oldindan"}</span>
+            <span className="tag">
+              <span className="x">●</span> {dictionary?.bad_tag || "Jon'siz · oldindan"}
+            </span>
             <h3>{dictionary?.diagnosis_bad_title || "Yashirin yo'qotish"}</h3>
           </div>
           <ul className="diag-list">
@@ -296,8 +370,10 @@ export const ATDiagnosis: FC<SectionProps> = ({ dictionary, onOpen }) => {
         </div>
         <div className="diag-col good">
           <div className="diag-head">
-            <span className="tag"><span className="v">●</span> {dictionary?.good_tag || "Jon bilan · keyin"}</span>
-            <h3>{dictionary?.diagnosis_good_title || "Aniq natija"}</h3>
+            <span className="tag">
+              <span className="v">●</span> {dictionary?.good_tag || 'Jon bilan · keyin'}
+            </span>
+            <h3>{dictionary?.diagnosis_good_title || 'Aniq natija'}</h3>
           </div>
           <ul className="diag-list">
             {goodItems.map((g: any) => (
@@ -310,12 +386,32 @@ export const ATDiagnosis: FC<SectionProps> = ({ dictionary, onOpen }) => {
         </div>
       </div>
 
-      <div style={{ textAlign: 'center', marginTop: 48, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-        <p style={{ fontFamily: 'Instrument Serif, serif', fontStyle: 'italic', fontSize: 'clamp(22px, 2.4vw, 32px)', color: 'var(--ink)', lineHeight: 1.3, maxWidth: 540, textWrap: 'balance' }}>
-          {dictionary?.diagnosis_ogriq || "Sizning biznesingizda qaysi nuqta og'riyapti? 30 daqiqada aniqlaymiz."}
+      <div
+        style={{
+          textAlign: 'center',
+          marginTop: 48,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 12,
+        }}
+      >
+        <p
+          style={{
+            fontFamily: 'Instrument Serif, serif',
+            fontStyle: 'italic',
+            fontSize: 'clamp(22px, 2.4vw, 32px)',
+            color: 'var(--ink)',
+            lineHeight: 1.3,
+            maxWidth: 540,
+            textWrap: 'balance',
+          }}
+        >
+          {dictionary?.diagnosis_ogriq ||
+            "Sizning biznesingizda qaysi nuqta og'riyapti? 30 daqiqada aniqlaymiz."}
         </p>
         <button className="btn btn-primary btn-lg" onClick={onOpen}>
-          {dictionary?.diagnosis_cta || "Belgilarni topish · Bepul"} <span className="ar">↗</span>
+          {dictionary?.diagnosis_cta || 'Belgilarni topish · Bepul'} <span className="ar">↗</span>
         </button>
       </div>
     </section>
@@ -329,14 +425,27 @@ export const ATServices: FC<SectionProps> = ({ dictionary, onOpen }) => {
   return (
     <section className="sec wrap" id="xizmat">
       <div className="sec-head">
-        <h2 dangerouslySetInnerHTML={{ __html: (dictionary?.services_title || "Brend — boshidan<br/><span class=\"it\">oxirigacha.</span>").replace(/\n/g, '<br/>') }} />
+        <h2
+          dangerouslySetInnerHTML={{
+            __html: (
+              dictionary?.services_title ||
+              'Brend — boshidan<br/><span class="it">oxirigacha.</span>'
+            ).replace(/\n/g, '<br/>'),
+          }}
+        />
         <div className="lede">
           <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
-            <span className="dot"/>
+            <span className="dot" />
             <span className="ix">§ 02</span>
-            <span>{dictionary?.nav?.[1]?.label || "Xizmatlar"}</span>
+            <span>{dictionary?.nav?.[1]?.label || 'Xizmatlar'}</span>
           </span>
-          <p dangerouslySetInnerHTML={{ __html: dictionary?.services_lede || "Neyming, aydentika, qadoq, tovar belgisi va raqamli ko'rinish — <strong> bir joyda, bir jamoa, bir narxda.</strong> Har biri alohida ham buyurtma qilinadi." }} />
+          <p
+            dangerouslySetInnerHTML={{
+              __html:
+                dictionary?.services_lede ||
+                "Neyming, aydentika, qadoq, tovar belgisi va raqamli ko'rinish — <strong> bir joyda, bir jamoa, bir narxda.</strong> Har biri alohida ham buyurtma qilinadi.",
+            }}
+          />
         </div>
       </div>
       <div className="svc-table">
@@ -363,16 +472,17 @@ interface ATFeaturedProps {
 
 export const ATFeatured: FC<ATFeaturedProps> = ({ dictionary, comparison, lang }) => {
   const c = dictionary?.featured || {
-    name: "Den Aroma",
-    city: "Samarqand",
-    year: "2025",
-    cat: "Neyming · Aydentika · Qadoq · Tovar belgisi",
-    story: "Samarqanddagi mahalliy kofexona. Eski nom shevali va eslab qolinmaydigan edi. Yangi nom — joy va o'zbek qushini birga olib keldi. Qadoq, menyu va interyer bir uslubda yangilandi.",
+    name: 'Den Aroma',
+    city: 'Samarqand',
+    year: '2025',
+    cat: 'Neyming · Aydentika · Qadoq · Tovar belgisi',
+    story:
+      "Samarqanddagi mahalliy kofexona. Eski nom shevali va eslab qolinmaydigan edi. Yangi nom — joy va o'zbek qushini birga olib keldi. Qadoq, menyu va interyer bir uslubda yangilandi.",
     metrics: [
-      { n: "+41%", l: "Sotuv 3 oyda" },
-      { n: "3×", l: "Takroriy mijozlar" },
-      { n: "2", l: "Yangi filial" }
-    ]
+      { n: '+41%', l: 'Sotuv 3 oyda' },
+      { n: '3×', l: 'Takroriy mijozlar' },
+      { n: '2', l: 'Yangi filial' },
+    ],
   };
 
   const comp = comparison || {
@@ -386,22 +496,33 @@ export const ATFeatured: FC<ATFeaturedProps> = ({ dictionary, comparison, lang }
   return (
     <section className="feat" id="ishlar">
       <div className="feat-inner">
-        <div className="feat-img" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '24px' }}>
+        <div
+          className="feat-img"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '24px',
+          }}
+        >
           <div className="tag" style={{ zIndex: 20 }}>
-            <span>{dictionary?.featured_title || "Asosiy keys"} · {c.year}</span>
-            <span className="live">{dictionary?.featured_live || "Davom etmoqda"}</span>
+            <span>
+              {dictionary?.featured_title || 'Asosiy keys'} · {c.year}
+            </span>
+            <span className="live">{dictionary?.featured_live || 'Davom etmoqda'}</span>
           </div>
           <div style={{ width: '100%', maxWidth: '480px', margin: 'auto' }}>
             <ImageComparisonSlider
               beforeImage={{
                 src: comp.oldImg,
                 alt: `${comp.brand} old`,
-                unoptimized: true
+                unoptimized: true,
               }}
               afterImage={{
                 src: comp.newImg,
                 alt: `${comp.brand} new`,
-                unoptimized: true
+                unoptimized: true,
               }}
               lang={lang}
             />
@@ -409,14 +530,27 @@ export const ATFeatured: FC<ATFeaturedProps> = ({ dictionary, comparison, lang }
         </div>
         <div className="feat-body">
           <span className="eb">
-            <span className="dot"/>
-            <span>{dictionary?.featured_title || "Asosiy keys"} · {c.year}</span>
+            <span className="dot" />
+            <span>
+              {dictionary?.featured_title || 'Asosiy keys'} · {c.year}
+            </span>
           </span>
           <h2 className="feat-title">
-            {c.name}<br/>
+            {c.name}
+            <br />
             <span className="it">{c.city}.</span>
           </h2>
-          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'rgba(244,241,232,.55)', letterSpacing: '.06em', textTransform: 'uppercase' }}>{c.cat}</div>
+          <div
+            style={{
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: 11,
+              color: 'rgba(244,241,232,.55)',
+              letterSpacing: '.06em',
+              textTransform: 'uppercase',
+            }}
+          >
+            {c.cat}
+          </div>
           <p className="feat-story">{c.story}</p>
           <div className="feat-metrics">
             {(c.metrics || []).map((m: any, i: number) => (
@@ -442,32 +576,47 @@ interface ATShowcaseProps {
 
 export const ATShowcase: FC<ATShowcaseProps> = ({ dictionary, onOpen, lang }) => {
   const items = [
-    { img: '/images/cms/denaroma-hozir.png',  name: 'Den Aroma',     yr: "'25", cat: 'Aydentika & Qadoq' },
-    { img: '/images/cms/savod-hozir.png',     name: 'Savod',         yr: "'25", cat: 'Brending' },
-    { img: '/images/cms/fidda-hozir.png',     name: 'Fidda',         yr: "'24", cat: 'Aydentika' },
-    { img: '/images/cms/boyarin-hozir.png',   name: 'Boyarin',       yr: "'24", cat: 'Qadoq dizayni' },
+    {
+      img: '/images/cms/denaroma-hozir.png',
+      name: 'Den Aroma',
+      yr: "'25",
+      cat: 'Aydentika & Qadoq',
+    },
+    { img: '/images/cms/savod-hozir.png', name: 'Savod', yr: "'25", cat: 'Brending' },
+    { img: '/images/cms/fidda-hozir.png', name: 'Fidda', yr: "'24", cat: 'Aydentika' },
+    { img: '/images/cms/boyarin-hozir.png', name: 'Boyarin', yr: "'24", cat: 'Qadoq dizayni' },
   ];
 
   return (
     <section className="showcase wrap">
       <div className="sc-strip-head">
         <span className="eb">
-          <span className="dot"/>
+          <span className="dot" />
           <span>{dictionary?.showcase_title || "So'nggi 4 ta loyiha · 2023—2025"}</span>
         </span>
-        <a href="#ishlar" onClick={(e) => { e.preventDefault(); document.getElementById('ishlar')?.scrollIntoView({ behavior: 'smooth' }); }} className="seemore">
+        <a
+          href="#ishlar"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('ishlar')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="seemore"
+        >
           {dictionary?.showcase_seemore || "Barchasini ko'rish — 120+"} <span>↗</span>
         </a>
       </div>
       <div className="showcase-inner">
         {items.map((it, i) => (
-          <div key={i} className={`sc-card sc-${i+1}`} onClick={onOpen}>
-            <div className="body" style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-              <Image 
-                src={it.img} 
-                alt={it.name} 
-                fill 
-                className="object-cover transition-transform duration-500 hover:scale-105" 
+          <div key={i} className={`sc-card sc-${i + 1}`} onClick={onOpen}>
+            <div
+              className="body"
+              style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}
+            >
+              <Image
+                src={it.img}
+                alt={it.name}
+                fill
+                className="object-cover transition-transform duration-500 hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 25vw"
               />
             </div>
@@ -491,45 +640,79 @@ export const ATBrandSystem: FC<{ dictionary: any }> = ({ dictionary }) => {
         <div className="bsys-grid">
           <div className="bsys-side">
             <span className="eb">
-              <span className="dot"/>
-              <span style={{ color: 'var(--ink-2)' }}>§ {dictionary?.brand_system_title?.split('—')?.[0]?.trim() || "Brend tizimi"}</span>
+              <span className="dot" />
+              <span style={{ color: 'var(--ink-2)' }}>
+                § {dictionary?.brand_system_title?.split('—')?.[0]?.trim() || 'Brend tizimi'}
+              </span>
             </span>
-            <h2 dangerouslySetInnerHTML={{ __html: (dictionary?.brand_system_title || "Logotip emas —<br/><span class=\"it\">tizim.</span>").replace(/\n/g, '<br/>') }} />
+            <h2
+              dangerouslySetInnerHTML={{
+                __html: (
+                  dictionary?.brand_system_title ||
+                  'Logotip emas —<br/><span class="it">tizim.</span>'
+                ).replace(/\n/g, '<br/>'),
+              }}
+            />
             <p>
-              {dictionary?.brand_system_lede || "Rang, shrift, belgi, sayt, qadoq — barchasi bir til, bir ovoz, bir taassurot. Brendbukda har bir foydalanish qoidasi yozilgan."}
+              {dictionary?.brand_system_lede ||
+                'Rang, shrift, belgi, sayt, qadoq — barchasi bir til, bir ovoz, bir taassurot. Brendbukda har bir foydalanish qoidasi yozilgan.'}
             </p>
-            <a href="#xizmat" onClick={(e) => { e.preventDefault(); document.getElementById('xizmat')?.scrollIntoView({ behavior: 'smooth' }); }} style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              marginTop: 28, fontWeight: 600, fontSize: 14,
-              padding: '12px 18px', border: '1px solid var(--line)',
-              borderRadius: 999, background: 'var(--bg)',
-              color: 'var(--ink)',
-            }}>
-              {dictionary?.brand_system_cta || "Xizmatlar ro'yxati"} <span style={{ color: 'var(--accent)' }}>↗</span>
+            <a
+              href="#xizmat"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('xizmat')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                marginTop: 28,
+                fontWeight: 600,
+                fontSize: 14,
+                padding: '12px 18px',
+                border: '1px solid var(--line)',
+                borderRadius: 999,
+                background: 'var(--bg)',
+                color: 'var(--ink)',
+              }}
+            >
+              {dictionary?.brand_system_cta || "Xizmatlar ro'yxati"}{' '}
+              <span style={{ color: 'var(--accent)' }}>↗</span>
             </a>
           </div>
           <div className="bsys-grid-r">
             {/* Ink primary */}
             <div className="bs-cell bs-c1 bs-color">
               <div>
-                <div className="lbl">{dictionary?.brand_system_primary || "Asosiy"}</div>
-                <div style={{ fontFamily: 'Instrument Serif, serif', fontStyle: 'italic', fontSize: 36, lineHeight: 1, marginTop: 8 }}>{dictionary?.brand_system_siyoh || "Siyoh"}</div>
+                <div className="lbl">{dictionary?.brand_system_primary || 'Asosiy'}</div>
+                <div
+                  style={{
+                    fontFamily: 'Instrument Serif, serif',
+                    fontStyle: 'italic',
+                    fontSize: 36,
+                    lineHeight: 1,
+                    marginTop: 8,
+                  }}
+                >
+                  {dictionary?.brand_system_siyoh || 'Siyoh'}
+                </div>
               </div>
               <div className="hex">#0E1015</div>
             </div>
             {/* Cobalt */}
             <div className="bs-cell bs-c2 bs-color" style={{ background: 'var(--accent)' }}>
-              <div className="lbl">{dictionary?.brand_system_accent || "Aksent"}</div>
+              <div className="lbl">{dictionary?.brand_system_accent || 'Aksent'}</div>
               <div className="hex">#1B4DFF</div>
             </div>
             {/* Terra */}
             <div className="bs-cell bs-c3 bs-color">
-              <div className="lbl">{dictionary?.brand_system_issiq || "Issiq"}</div>
+              <div className="lbl">{dictionary?.brand_system_issiq || 'Issiq'}</div>
               <div className="hex">#C2552A</div>
             </div>
             {/* Green */}
             <div className="bs-cell bs-c4 bs-color">
-              <div className="lbl">{dictionary?.brand_system_tirik || "Tirik"}</div>
+              <div className="lbl">{dictionary?.brand_system_tirik || 'Tirik'}</div>
               <div className="hex">#2C6E49</div>
             </div>
             {/* Paper */}
@@ -540,14 +723,41 @@ export const ATBrandSystem: FC<{ dictionary: any }> = ({ dictionary }) => {
 
             {/* Type sample */}
             <div className="bs-cell bs-type bs-type-cell">
-              <div className="lbl">{dictionary?.brand_system_typography || "Tipografika"}</div>
+              <div className="lbl">{dictionary?.brand_system_typography || 'Tipografika'}</div>
               <div style={{ display: 'flex', gap: 18, alignItems: 'baseline', flexWrap: 'wrap' }}>
                 <div className="big sans">Aa</div>
                 <div className="big">Aa</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: 'var(--muted)', letterSpacing: '0.06em' }}>SANS · INTER TIGHT</div>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: 'var(--muted)', letterSpacing: '0.06em' }}>SERIF · INSTRUMENT</div>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: 'var(--muted)', letterSpacing: '0.06em' }}>MONO · JETBRAINS</div>
+                  <div
+                    style={{
+                      fontFamily: 'JetBrains Mono, monospace',
+                      fontSize: 10,
+                      color: 'var(--muted)',
+                      letterSpacing: '0.06em',
+                    }}
+                  >
+                    SANS · INTER TIGHT
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: 'JetBrains Mono, monospace',
+                      fontSize: 10,
+                      color: 'var(--muted)',
+                      letterSpacing: '0.06em',
+                    }}
+                  >
+                    SERIF · INSTRUMENT
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: 'JetBrains Mono, monospace',
+                      fontSize: 10,
+                      color: 'var(--muted)',
+                      letterSpacing: '0.06em',
+                    }}
+                  >
+                    MONO · JETBRAINS
+                  </div>
                 </div>
               </div>
               <div className="val">↳ display 64—156 · body 15—18</div>
@@ -555,15 +765,19 @@ export const ATBrandSystem: FC<{ dictionary: any }> = ({ dictionary }) => {
 
             {/* Mark */}
             <div className="bs-cell bs-mark bs-mark-cell">
-              <div className="lbl">{dictionary?.brand_system_mark || "Belgi"}</div>
-              <div className="glyph">jon<span className="d">.</span></div>
+              <div className="lbl">{dictionary?.brand_system_mark || 'Belgi'}</div>
+              <div className="glyph">
+                jon<span className="d">.</span>
+              </div>
               <div className="val">primary mark</div>
             </div>
 
             {/* Lockup */}
             <div className="bs-cell bs-lock bs-lock-cell">
-              <div className="lbl">{dictionary?.brand_system_lockup || "Lockup"}</div>
-              <div className="lock">jon<span className="s">.</span> branding atelier · est. mmxix</div>
+              <div className="lbl">{dictionary?.brand_system_lockup || 'Lockup'}</div>
+              <div className="lock">
+                jon<span className="s">.</span> branding atelier · est. mmxix
+              </div>
               <div className="val">extended horizontal</div>
             </div>
           </div>
@@ -602,34 +816,34 @@ const CATEGORY_LABELS: Record<string, Record<string, string>> = {
   uz: {
     'brand-strategy': 'Brend-strategiya',
     'logo-design': 'Logotip dizayni',
-    'brandbook': 'Brendbuk',
+    brandbook: 'Brendbuk',
     'corporate-style': 'Firma uslubi',
-    'packaging': 'Qadoq dizayni',
-    'naming': 'Neyming',
+    packaging: 'Qadoq dizayni',
+    naming: 'Neyming',
   },
   ru: {
     'brand-strategy': 'Бренд-стратегия',
     'logo-design': 'Дизайн логотипа',
-    'brandbook': 'Брендбук',
+    brandbook: 'Брендбук',
     'corporate-style': 'Фирменный стиль',
-    'packaging': 'Дизайн упаковки',
-    'naming': 'Нейминг',
+    packaging: 'Дизайн упаковки',
+    naming: 'Нейминг',
   },
   en: {
     'brand-strategy': 'Brand Strategy',
     'logo-design': 'Logo Design',
-    'brandbook': 'Brandbook',
+    brandbook: 'Brandbook',
     'corporate-style': 'Corporate Style',
-    'packaging': 'Packaging Design',
-    'naming': 'Naming',
+    packaging: 'Packaging Design',
+    naming: 'Naming',
   },
   zh: {
     'brand-strategy': '品牌战略',
     'logo-design': '标志设计',
-    'brandbook': '品牌手册',
+    brandbook: '品牌手册',
     'corporate-style': '企业风格',
-    'packaging': '包装设计',
-    'naming': '命名',
+    packaging: '包装设计',
+    naming: '命名',
   },
 };
 
@@ -656,7 +870,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
   const [filter, setFilter] = useState('all');
 
   const items = projects
-    .filter(p => p.coverImage)
+    .filter((p) => p.coverImage)
     .map((p, i) => ({
       cls: TILE_CLASSES[i % TILE_CLASSES.length],
       img: p.coverImage,
@@ -670,14 +884,23 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
     }));
 
   const filters = [
-    { id: 'all', l: lang === 'uz' ? 'Hammasi' : lang === 'ru' ? 'Все' : lang === 'zh' ? '全部' : 'All' },
-    { id: 'food', l: lang === 'uz' ? 'Oziq-ovqat' : lang === 'ru' ? 'Еда' : lang === 'zh' ? '食品' : 'Food' },
+    {
+      id: 'all',
+      l: lang === 'uz' ? 'Hammasi' : lang === 'ru' ? 'Все' : lang === 'zh' ? '全部' : 'All',
+    },
+    {
+      id: 'food',
+      l: lang === 'uz' ? 'Oziq-ovqat' : lang === 'ru' ? 'Еда' : lang === 'zh' ? '食品' : 'Food',
+    },
     { id: 'fmcg', l: 'FMCG' },
     { id: 'fintech', l: 'Fintech' },
-    { id: 'fashion', l: lang === 'uz' ? 'Moda' : lang === 'ru' ? 'Мода' : lang === 'zh' ? '时尚' : 'Fashion' },
+    {
+      id: 'fashion',
+      l: lang === 'uz' ? 'Moda' : lang === 'ru' ? 'Мода' : lang === 'zh' ? '时尚' : 'Fashion',
+    },
   ];
 
-  const tiles = filter === 'all' ? items : items.filter(t => t.ind === filter);
+  const tiles = filter === 'all' ? items : items.filter((t) => t.ind === filter);
 
   if (items.length === 0) return null;
 
@@ -685,27 +908,47 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
     <section className="gal" id="ishlar">
       <div className="wrap">
         <div className="sec-head">
-          <h2 dangerouslySetInnerHTML={{ __html: (dictionary?.gallery_title || "Tanlangan<br/><span class=\"it\">ishlar.</span>").replace(/\n/g, '<br/>') }} />
+          <h2
+            dangerouslySetInnerHTML={{
+              __html: (
+                dictionary?.gallery_title || 'Tanlangan<br/><span class="it">ishlar.</span>'
+              ).replace(/\n/g, '<br/>'),
+            }}
+          />
           <div className="lede">
             <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
-              <span className="dot"/>
+              <span className="dot" />
               <span className="ix">§ 03</span>
-              <span>{dictionary?.nav?.[1]?.label || "Portfolio"}</span>
+              <span>{dictionary?.nav?.[1]?.label || 'Portfolio'}</span>
             </span>
             <p>
-              {dictionary?.gallery_lede || "2023—2025 davrida tanlangan loyihalar. Har biri real biznes, real qadoq, real natija. Sohaga qarab filterlang."}
+              {dictionary?.gallery_lede ||
+                '2023—2025 davrida tanlangan loyihalar. Har biri real biznes, real qadoq, real natija. Sohaga qarab filterlang.'}
             </p>
           </div>
         </div>
         <div className="ind-filter">
-          {filters.map(f => (
-            <button key={f.id} className={`ind-pill ${filter === f.id ? 'on' : ''}`} onClick={() => setFilter(f.id)}>{f.l}</button>
+          {filters.map((f) => (
+            <button
+              key={f.id}
+              className={`ind-pill ${filter === f.id ? 'on' : ''}`}
+              onClick={() => setFilter(f.id)}
+            >
+              {f.l}
+            </button>
           ))}
         </div>
         <div className="gal-grid">
           {tiles.map((t, i) => (
-            <Link key={t.name} href={`/${lang}/portfolio/${t.slug}`} className={`gal-tile ${t.cls}`}>
-              <div className="body" style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+            <Link
+              key={t.name}
+              href={`/${lang}/portfolio/${t.slug}`}
+              className={`gal-tile ${t.cls}`}
+            >
+              <div
+                className="body"
+                style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}
+              >
                 <Image
                   src={t.img}
                   alt={t.name}
@@ -715,12 +958,16 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   className="object-cover transition-transform duration-500 hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 100vw"
                 />
-                <div className="absolute inset-0 pointer-events-none" style={{
-                  background: 'linear-gradient(to bottom, rgba(5,7,15,0.5) 0%, transparent 30%, transparent 60%, rgba(5,7,15,0.7) 100%)',
-                }} />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      'linear-gradient(to bottom, rgba(5,7,15,0.5) 0%, transparent 30%, transparent 60%, rgba(5,7,15,0.7) 100%)',
+                  }}
+                />
               </div>
               <div className="head">
-                <span>№ {String(i+1).padStart(2, '0')}</span>
+                <span>№ {String(i + 1).padStart(2, '0')}</span>
                 <span>{t.city}</span>
               </div>
               <div className="arr">↗</div>
@@ -728,16 +975,39 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                 <div className="name">{t.name}</div>
                 <div className="meta">
                   <span>{t.cat}</span>
-                  {t.res && <span className="res">{t.res} · {t.yr}</span>}
+                  {t.res && (
+                    <span className="res">
+                      {t.res} · {t.yr}
+                    </span>
+                  )}
                 </div>
               </div>
             </Link>
           ))}
         </div>
         {filter !== 'all' && (
-          <div style={{ marginTop: 32, padding: '20px 28px', borderRadius: 14, background: 'var(--paper)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
-            <span style={{ fontSize: 15 }}>{dictionary?.gallery_similar || "O'xshash biznesmisiz? Sizga ham shunday natija mumkin."}</span>
-            <button className="btn btn-primary" onClick={onOpen}>{dictionary?.gallery_cta || "Mening biznesim uchun tashxis"} <span className="ar">↗</span></button>
+          <div
+            style={{
+              marginTop: 32,
+              padding: '20px 28px',
+              borderRadius: 14,
+              background: 'var(--paper)',
+              border: '1px solid var(--line)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 16,
+              flexWrap: 'wrap',
+            }}
+          >
+            <span style={{ fontSize: 15 }}>
+              {dictionary?.gallery_similar ||
+                "O'xshash biznesmisiz? Sizga ham shunday natija mumkin."}
+            </span>
+            <button className="btn btn-primary" onClick={onOpen}>
+              {dictionary?.gallery_cta || 'Mening biznesim uchun tashxis'}{' '}
+              <span className="ar">↗</span>
+            </button>
           </div>
         )}
       </div>
@@ -758,23 +1028,38 @@ export const ATAudit: FC<SectionProps> = ({ dictionary, onOpen }) => {
   });
   const order = ['POZITSIYA', 'VIZUAL', 'RAQAMLI', 'HUQUQ'];
   const labels: Record<string, string> = {
-    POZITSIYA: dictionary?.brand_system_primary?.includes('Mijoz') ? 'Pozitsiya & Strategiya' : (dictionary?.audit_group_1 || 'Pozitsiya & Strategiya'),
+    POZITSIYA: dictionary?.brand_system_primary?.includes('Mijoz')
+      ? 'Pozitsiya & Strategiya'
+      : dictionary?.audit_group_1 || 'Pozitsiya & Strategiya',
     VIZUAL: dictionary?.audit_group_2 || 'Vizual aydentika',
-    RAQAMLI: dictionary?.audit_group_3 || 'Raqamli ko\'rinish',
+    RAQAMLI: dictionary?.audit_group_3 || "Raqamli ko'rinish",
     HUQUQ: dictionary?.audit_group_4 || 'Huquqiy himoya',
   };
 
   return (
     <section className="sec wrap" id="tashxis">
       <div className="sec-head">
-        <h2 dangerouslySetInnerHTML={{ __html: (dictionary?.audit_title || "Tashxisda<br/><span class=\"it\">nimalarni</span> tekshiramiz.").replace(/\n/g, '<br/>') }} />
+        <h2
+          dangerouslySetInnerHTML={{
+            __html: (
+              dictionary?.audit_title ||
+              'Tashxisda<br/><span class="it">nimalarni</span> tekshiramiz.'
+            ).replace(/\n/g, '<br/>'),
+          }}
+        />
         <div className="lede">
           <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
-            <span className="dot"/>
+            <span className="dot" />
             <span className="ix">§ 02</span>
-            <span>{dictionary?.audit_section_badge || "Tashxis"}</span>
+            <span>{dictionary?.audit_section_badge || 'Tashxis'}</span>
           </span>
-          <p dangerouslySetInnerHTML={{ __html: dictionary?.audit_lede || "12 mezon · 4 yo'nalish · 14 kun. Har bir nuqta 0—100 baholanadi, <strong>yo'qotilayotgan daromad esa aniq raqamda</strong> hisoblanadi. Hech bir tomon e'tibordan chetda qolmaydi." }} />
+          <p
+            dangerouslySetInnerHTML={{
+              __html:
+                dictionary?.audit_lede ||
+                "12 mezon · 4 yo'nalish · 14 kun. Har bir nuqta 0—100 baholanadi, <strong>yo'qotilayotgan daromad esa aniq raqamda</strong> hisoblanadi. Hech bir tomon e'tibordan chetda qolmaydi.",
+            }}
+          />
         </div>
       </div>
 
@@ -788,7 +1073,9 @@ export const ATAudit: FC<SectionProps> = ({ dictionary, onOpen }) => {
                 <div className="audit-glabel">{g}</div>
                 <div className="audit-gname">{labels[g]}</div>
               </div>
-              <div className="audit-count">{(groups[g] || []).length} {dictionary?.audit_count_suffix || "mezon"}</div>
+              <div className="audit-count">
+                {(groups[g] || []).length} {dictionary?.audit_count_suffix || 'mezon'}
+              </div>
             </div>
             <ul className="audit-list">
               {(groups[g] || []).map((p: any) => (
@@ -808,15 +1095,26 @@ export const ATAudit: FC<SectionProps> = ({ dictionary, onOpen }) => {
         <div className="audit-deliv-head">
           <div>
             <span className="eb">
-              <span className="dot"/>
-              <span>{dictionary?.audit_deliv_title || "Tashxis yakuni · Sizga nima beriladi"}</span>
+              <span className="dot" />
+              <span>{dictionary?.audit_deliv_title || 'Tashxis yakuni · Sizga nima beriladi'}</span>
             </span>
-            <h3 style={{ fontSize: 'clamp(32px, 4vw, 56px)', lineHeight: 0.98, letterSpacing: '-0.035em', fontWeight: 700, marginTop: 14 }}>
-              {dictionary?.audit_deliv_h3 || "6 ta aniq"} <span className="serif" style={{ color: 'var(--accent)' }}>{dictionary?.audit_deliv_h3_span || "natija."}</span>
+            <h3
+              style={{
+                fontSize: 'clamp(32px, 4vw, 56px)',
+                lineHeight: 0.98,
+                letterSpacing: '-0.035em',
+                fontWeight: 700,
+                marginTop: 14,
+              }}
+            >
+              {dictionary?.audit_deliv_h3 || '6 ta aniq'}{' '}
+              <span className="serif" style={{ color: 'var(--accent)' }}>
+                {dictionary?.audit_deliv_h3_span || 'natija.'}
+              </span>
             </h3>
           </div>
           <button className="btn btn-primary btn-lg" onClick={onOpen}>
-            {dictionary?.audit_cta || "Tashxisni boshlash"} <span className="ar">↗</span>
+            {dictionary?.audit_cta || 'Tashxisni boshlash'} <span className="ar">↗</span>
           </button>
         </div>
         <div className="audit-deliv-grid">
@@ -843,21 +1141,53 @@ export const ATSampleReport: FC<SectionProps> = ({ dictionary, onOpen }) => {
         <div className="sample-grid">
           <div className="sample-left">
             <span className="eb">
-              <span className="dot"/>
-              <span>{dictionary?.sample_report_title || "Hisobot misoli · Qumri Coffee, 2025"}</span>
+              <span className="dot" />
+              <span>
+                {dictionary?.sample_report_title || 'Hisobot misoli · Qumri Coffee, 2025'}
+              </span>
             </span>
-            <h2 style={{ fontSize: 'clamp(40px, 5vw, 72px)', lineHeight: 0.98, letterSpacing: '-0.035em', fontWeight: 700, margin: '18px 0 24px' }} dangerouslySetInnerHTML={{ __html: (dictionary?.sample_report_title_h2 || "Hisobot<br/><span class=\"serif\" style=\"color: var(--accent)\">shunday</span> ko'rinadi.").replace(/\n/g, '<br/>') }} />
-            <p style={{ color: 'var(--ink-2)', fontSize: 16, lineHeight: 1.65, marginBottom: 24, maxWidth: 380 }} dangerouslySetInnerHTML={{ __html: dictionary?.sample_report_lede || "30—50 betlik PDF. Har sahifada aniq holat, aniq tavsiya, aniq raqam. <strong style=\"color: var(--ink)\"> \"Yaxshilash kerak\" emas — \"filan narsani filan kuni qiling\".</strong>" }} />
+            <h2
+              style={{
+                fontSize: 'clamp(40px, 5vw, 72px)',
+                lineHeight: 0.98,
+                letterSpacing: '-0.035em',
+                fontWeight: 700,
+                margin: '18px 0 24px',
+              }}
+              dangerouslySetInnerHTML={{
+                __html: (
+                  dictionary?.sample_report_title_h2 ||
+                  'Hisobot<br/><span class="serif" style="color: var(--accent)">shunday</span> ko\'rinadi.'
+                ).replace(/\n/g, '<br/>'),
+              }}
+            />
+            <p
+              style={{
+                color: 'var(--ink-2)',
+                fontSize: 16,
+                lineHeight: 1.65,
+                marginBottom: 24,
+                maxWidth: 380,
+              }}
+              dangerouslySetInnerHTML={{
+                __html:
+                  dictionary?.sample_report_lede ||
+                  '30—50 betlik PDF. Har sahifada aniq holat, aniq tavsiya, aniq raqam. <strong style="color: var(--ink)"> "Yaxshilash kerak" emas — "filan narsani filan kuni qiling".</strong>',
+              }}
+            />
             <ul className="sample-toc">
               {[
                 { n: '01', t: dictionary?.sample_toc_1 || "Boshlang'ich tahlil va xulosalar" },
-                { n: '02', t: dictionary?.sample_toc_2 || "Pozitsiya va auditoriya kartasi" },
-                { n: '03', t: dictionary?.sample_toc_3 || "Vizual aydentika baholash" },
-                { n: '04', t: dictionary?.sample_toc_4 || "Raqobat tahlili (5 brend)" },
+                { n: '02', t: dictionary?.sample_toc_2 || 'Pozitsiya va auditoriya kartasi' },
+                { n: '03', t: dictionary?.sample_toc_3 || 'Vizual aydentika baholash' },
+                { n: '04', t: dictionary?.sample_toc_4 || 'Raqobat tahlili (5 brend)' },
                 { n: '05', t: dictionary?.sample_toc_5 || "Yo'qotishlar va imkoniyatlar" },
-                { n: '06', t: dictionary?.sample_toc_6 || "90 kunlik harakat rejasi" },
-              ].map(s => (
-                <li key={s.n}><span className="n">{s.n}</span><span>{s.t}</span></li>
+                { n: '06', t: dictionary?.sample_toc_6 || '90 kunlik harakat rejasi' },
+              ].map((s) => (
+                <li key={s.n}>
+                  <span className="n">{s.n}</span>
+                  <span>{s.t}</span>
+                </li>
               ))}
             </ul>
             <button className="btn btn-ghost btn-lg" onClick={onOpen} style={{ marginTop: 28 }}>
@@ -874,9 +1204,15 @@ export const ATSampleReport: FC<SectionProps> = ({ dictionary, onOpen }) => {
                 </div>
                 <div className="rp-mid">
                   <div className="rp-eb">Brend Tashxis Hisoboti</div>
-                  <div className="rp-h1">Qumri<br/><em>Coffee.</em></div>
+                  <div className="rp-h1">
+                    Qumri
+                    <br />
+                    <em>Coffee.</em>
+                  </div>
                   <div className="rp-grade">
-                    <div className="rp-grade-n">68<span>/100</span></div>
+                    <div className="rp-grade-n">
+                      68<span>/100</span>
+                    </div>
                     <div className="rp-grade-l">Umumiy baho</div>
                   </div>
                 </div>
@@ -893,7 +1229,7 @@ export const ATSampleReport: FC<SectionProps> = ({ dictionary, onOpen }) => {
                 <div className="rp-inner-title">Logotip — texnik baho</div>
                 <div className="rp-bars">
                   {[
-                    { l: 'O\'qish', v: 82, c: 'var(--green)' },
+                    { l: "O'qish", v: 82, c: 'var(--green)' },
                     { l: 'Esda qolish', v: 64, c: 'var(--accent)' },
                     { l: 'Farqlanish', v: 38, c: 'var(--terra)' },
                     { l: 'Masshtablanish', v: 91, c: 'var(--green)' },
@@ -902,7 +1238,10 @@ export const ATSampleReport: FC<SectionProps> = ({ dictionary, onOpen }) => {
                     <div key={i} className="rp-bar">
                       <div className="rp-bar-l">{b.l}</div>
                       <div className="rp-bar-track">
-                        <div className="rp-bar-fill" style={{ width: b.v + '%', background: b.c }}/>
+                        <div
+                          className="rp-bar-fill"
+                          style={{ width: b.v + '%', background: b.c }}
+                        />
                       </div>
                       <div className="rp-bar-v">{b.v}</div>
                     </div>
@@ -911,22 +1250,29 @@ export const ATSampleReport: FC<SectionProps> = ({ dictionary, onOpen }) => {
                 <div className="rp-recs">
                   <div className="rp-recs-head">Tavsiyalar</div>
                   <div className="rp-rec">
-                    <span className="rp-rec-dot rp-rec-urgent"/>
+                    <span className="rp-rec-dot rp-rec-urgent" />
                     <span>Belgi nisbatlari qayta hisoblanishi kerak (—2 hafta)</span>
                   </div>
                   <div className="rp-rec">
-                    <span className="rp-rec-dot rp-rec-mid"/>
+                    <span className="rp-rec-dot rp-rec-mid" />
                     <span>Mono versiya yetishmaydi (—1 hafta)</span>
                   </div>
                   <div className="rp-rec">
-                    <span className="rp-rec-dot rp-rec-low"/>
+                    <span className="rp-rec-dot rp-rec-low" />
                     <span>Ikonografik mark — strategik (3 oy)</span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="sample-tag">
-              <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.08em', textTransform: 'uppercase' }}>
+              <span
+                style={{
+                  fontFamily: 'JetBrains Mono, monospace',
+                  fontSize: 10,
+                  letterSpacing: '.08em',
+                  textTransform: 'uppercase',
+                }}
+              >
                 ↳ Bu sahifa 12-bet. Hisobotda yana 38 sahifa shunaqa.
               </span>
             </div>
@@ -940,9 +1286,27 @@ export const ATSampleReport: FC<SectionProps> = ({ dictionary, onOpen }) => {
 /* ── MINI QUOTES STRIP ─────────────────────────── */
 export const ATMiniQuotes: FC = () => {
   const items = [
-    { avatar: 'S', color: '#C2552A', text: '"3 oyda sotuv 41% oshdi"', who: 'Sardor R. · Qumri Coffee', res: '+41% sotuv' },
-    { avatar: 'M', color: '#1B4DFF', text: '"Nomimizni saqlab qoldi"',     who: 'Malika K. · Oltin Bulut', res: 'Himoyalandi' },
-    { avatar: 'R', color: '#2C6E49', text: '"Javonda 2× ko\'rindik"',        who: "Rustam X. · Nur Sopol",  res: '2× ko\'rinish' },
+    {
+      avatar: 'S',
+      color: '#C2552A',
+      text: '"3 oyda sotuv 41% oshdi"',
+      who: 'Sardor R. · Qumri Coffee',
+      res: '+41% sotuv',
+    },
+    {
+      avatar: 'M',
+      color: '#1B4DFF',
+      text: '"Nomimizni saqlab qoldi"',
+      who: 'Malika K. · Oltin Bulut',
+      res: 'Himoyalandi',
+    },
+    {
+      avatar: 'R',
+      color: '#2C6E49',
+      text: '"Javonda 2× ko\'rindik"',
+      who: 'Rustam X. · Nur Sopol',
+      res: "2× ko'rinish",
+    },
   ];
 
   return (
@@ -956,7 +1320,9 @@ export const ATMiniQuotes: FC = () => {
           <div className="miniq-list">
             {items.map((q, i) => (
               <div key={i} className="miniq-q">
-                <div className="miniq-avatar" style={{ background: q.color }}>{q.avatar}</div>
+                <div className="miniq-avatar" style={{ background: q.color }}>
+                  {q.avatar}
+                </div>
                 <div>
                   <div className="miniq-text">{q.text}</div>
                   <div className="miniq-who">{q.who}</div>
@@ -1007,59 +1373,88 @@ export const ATLossCalc: FC<ATLossCalcProps> = ({ dictionary, onOpen, lang = 'uz
 
   return (
     <section className="calc">
-      <div className="calc-bg"/>
+      <div className="calc-bg" />
       <div className="wrap">
         <div className="calc-grid">
           <div className="calc-left">
             <span className="calc-eb">
-              <span className="dot"/>
-              <span>{dictionary?.loss_calc_eyebrow || "Yo'qotish kalkulyatori · oraliq hisob"}</span>
+              <span className="dot" />
+              <span>
+                {dictionary?.loss_calc_eyebrow || "Yo'qotish kalkulyatori · oraliq hisob"}
+              </span>
             </span>
             {dictionary?.loss_calc_title?.includes('\n') ? (
               <h2>
-                {dictionary.loss_calc_title.split('\n')[0]}<br/>
+                {dictionary.loss_calc_title.split('\n')[0]}
+                <br />
                 <span className="it">{dictionary.loss_calc_title.split('\n')[1]}</span>
               </h2>
             ) : (
-              <h2>
-                {dictionary?.loss_calc_title || "Brendingiz qancha yo'qotyapti?"}
-              </h2>
+              <h2>{dictionary?.loss_calc_title || "Brendingiz qancha yo'qotyapti?"}</h2>
             )}
             <p>
-              {dictionary?.loss_calc_lede || "3 ta savolga javob bering — hozirgi brend tufayli oyiga qancha daromad yo'qolayotganini taxminlaymiz. Bu — biz auditda aniq raqam bilan ko'rsatadigan narsamiz."}
+              {dictionary?.loss_calc_lede ||
+                "3 ta savolga javob bering — hozirgi brend tufayli oyiga qancha daromad yo'qolayotganini taxminlaymiz. Bu — biz auditda aniq raqam bilan ko'rsatadigan narsamiz."}
             </p>
           </div>
           <div className="calc-form">
             <div className="calc-field">
               <label>
-                <span>{dictionary?.loss_calc_q1 || "Oyiga necha mijoz keladi?"}</span>
+                <span>{dictionary?.loss_calc_q1 || 'Oyiga necha mijoz keladi?'}</span>
                 <span className="v">{clients}</span>
               </label>
-              <input className="calc-slider" type="range" min={50} max={3000} step={50}
-                value={clients} onChange={e => setClients(+e.target.value)}/>
+              <input
+                className="calc-slider"
+                type="range"
+                min={50}
+                max={3000}
+                step={50}
+                value={clients}
+                onChange={(e) => setClients(+e.target.value)}
+              />
             </div>
             <div className="calc-field">
               <label>
                 <span>{dictionary?.loss_calc_q2 || "O'rtacha chek (ming so'm)"}</span>
                 <span className="v">{check}</span>
               </label>
-              <input className="calc-slider" type="range" min={20} max={500} step={5}
-                value={check} onChange={e => setCheck(+e.target.value)}/>
+              <input
+                className="calc-slider"
+                type="range"
+                min={20}
+                max={500}
+                step={5}
+                value={check}
+                onChange={(e) => setCheck(+e.target.value)}
+              />
             </div>
             <div className="calc-field">
               <label>
                 <span>{dictionary?.loss_calc_q3 || "Brend ta'siri darajasi"}</span>
                 <span className="v">{industry}%</span>
               </label>
-              <input className="calc-slider" type="range" min={5} max={35} step={1}
-                value={industry} onChange={e => setIndustry(+e.target.value)}/>
+              <input
+                className="calc-slider"
+                type="range"
+                min={5}
+                max={35}
+                step={1}
+                value={industry}
+                onChange={(e) => setIndustry(+e.target.value)}
+              />
             </div>
             <div className="calc-out">
               <div className="k">{dictionary?.loss_calc_result || "Taxminiy oylik yo'qotish"}</div>
-              <div className="n">~{fmtSom(loss)}<span className="s"> {dictionary?.loss_calc_result_val || "so'm"}</span></div>
-              <div className="pl">↳ {dictionary?.loss_calc_result_note || "yiliga"} ~{fmtSom(loss * 12)} {dictionary?.loss_calc_result_note_2 || "so'm · auditda aniq raqamda hisoblaymiz"}</div>
+              <div className="n">
+                ~{fmtSom(loss)}
+                <span className="s"> {dictionary?.loss_calc_result_val || "so'm"}</span>
+              </div>
+              <div className="pl">
+                ↳ {dictionary?.loss_calc_result_note || 'yiliga'} ~{fmtSom(loss * 12)}{' '}
+                {dictionary?.loss_calc_result_note_2 || "so'm · auditda aniq raqamda hisoblaymiz"}
+              </div>
               <button className="calc-cta" onClick={onOpen}>
-                {dictionary?.loss_calc_cta || "Mening biznesim uchun aniqlash"} <span>↗</span>
+                {dictionary?.loss_calc_cta || 'Mening biznesim uchun aniqlash'} <span>↗</span>
               </button>
             </div>
           </div>
@@ -1079,29 +1474,37 @@ export const ATIndex: FC<SectionProps> = ({ dictionary, onOpen }) => {
         <h2>
           {dictionary?.index_title?.includes('\n') ? (
             <>
-              {dictionary.index_title.split('\n')[0]}<br/>
+              {dictionary.index_title.split('\n')[0]}
+              <br />
               <span className="it">{dictionary.index_title.split('\n')[1]}</span>
             </>
           ) : (
-            <span className="it">{dictionary?.index_title || "Tanlangan ishlar indeksi."}</span>
+            <span className="it">{dictionary?.index_title || 'Tanlangan ishlar indeksi.'}</span>
           )}
         </h2>
         <div className="lede">
           <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
-            <span className="dot"/>
+            <span className="dot" />
             <span className="ix">§ 03</span>
-            <span>{dictionary?.index_archive_eyebrow || "Arxiv"}</span>
+            <span>{dictionary?.index_archive_eyebrow || 'Arxiv'}</span>
           </span>
-          <p dangerouslySetInnerHTML={{ __html: (dictionary?.index_lede || "2022–2025 davrida tanlangan {count} ta loyiha. Har biri real biznes, real raqam, real natija.").replace('{count}', String(indexItems.length)) }} />
+          <p
+            dangerouslySetInnerHTML={{
+              __html: (
+                dictionary?.index_lede ||
+                '2022–2025 davrida tanlangan {count} ta loyiha. Har biri real biznes, real raqam, real natija.'
+              ).replace('{count}', String(indexItems.length)),
+            }}
+          />
         </div>
       </div>
       <div className="idx">
         <div className="idx-row head">
-          <span>{dictionary?.index_th_year || "Yil"}</span>
-          <span>{dictionary?.index_th_client || "Mijoz"}</span>
-          <span>{dictionary?.index_th_sector || "Soha · Joy"}</span>
+          <span>{dictionary?.index_th_year || 'Yil'}</span>
+          <span>{dictionary?.index_th_client || 'Mijoz'}</span>
+          <span>{dictionary?.index_th_sector || 'Soha · Joy'}</span>
           <span>{dictionary?.index_th_discipline || "Yo'nalish"}</span>
-          <span>{dictionary?.index_th_result || "Natija"}</span>
+          <span>{dictionary?.index_th_result || 'Natija'}</span>
           <span></span>
         </div>
         {indexItems.map((c: any, i: number) => (
@@ -1125,17 +1528,59 @@ export const ATProcess: FC<{ dictionary: any; lang?: string }> = ({ dictionary, 
   const processItems = dictionary?.process || [];
 
   const extra = [
-    { 
-      ex: lang === 'ru' ? "Пример: Qumri Coffee" : lang === 'en' ? "Example: Qumri Coffee" : lang === 'zh' ? "示例：Qumri Coffee" : "Misol: Qumri Coffee", 
-      t: lang === 'ru' ? "7 страниц онлайн-анкеты, запрошено 12 материалов. Техническое задание утверждено на 2-й день." : lang === 'en' ? "7 pages of online questionnaire, 12 materials requested. Technical specification approved on day 2." : lang === 'zh' ? "7页在线问卷，索取12份材料。技术规范在第2天获得批准。" : "7 betlik onlayn anketa, 12 ta materiallar so'raldi. 2-kunga texnik topshiriq tasdiqlandi." 
+    {
+      ex:
+        lang === 'ru'
+          ? 'Пример: Qumri Coffee'
+          : lang === 'en'
+            ? 'Example: Qumri Coffee'
+            : lang === 'zh'
+              ? '示例：Qumri Coffee'
+              : 'Misol: Qumri Coffee',
+      t:
+        lang === 'ru'
+          ? '7 страниц онлайн-анкеты, запрошено 12 материалов. Техническое задание утверждено на 2-й день.'
+          : lang === 'en'
+            ? '7 pages of online questionnaire, 12 materials requested. Technical specification approved on day 2.'
+            : lang === 'zh'
+              ? '7页在线问卷，索取12份材料。技术规范在第2天获得批准。'
+              : "7 betlik onlayn anketa, 12 ta materiallar so'raldi. 2-kunga texnik topshiriq tasdiqlandi.",
     },
-    { 
-      ex: lang === 'ru' ? "Пример: Oltin Bulut" : lang === 'en' ? "Example: Oltin Bulut" : lang === 'zh' ? "示例：Oltin Bulut" : "Misol: Oltin Bulut", 
-      t: lang === 'ru' ? "Проанализировано 5 конкурентов, 6 интервью с клиентами, 12 упаковок продуктов. Упущенная выгода: 3.7 млн в месяц." : lang === 'en' ? "5 competitors, 6 customer interviews, 12 product packaging analyzed. Lost revenue: 3.7M/month." : lang === 'zh' ? "分析了5个竞争对手，6个客户访谈，12个产品包装。每月流失：370万。" : "5 raqobatchi, 6 ta mijoz interviyu, 12 ta mahsulot qadog'i tahlil qilindi. Yo'qotish: oyiga 3.7M." 
+    {
+      ex:
+        lang === 'ru'
+          ? 'Пример: Oltin Bulut'
+          : lang === 'en'
+            ? 'Example: Oltin Bulut'
+            : lang === 'zh'
+              ? '示例：Oltin Bulut'
+              : 'Misol: Oltin Bulut',
+      t:
+        lang === 'ru'
+          ? 'Проанализировано 5 конкурентов, 6 интервью с клиентами, 12 упаковок продуктов. Упущенная выгода: 3.7 млн в месяц.'
+          : lang === 'en'
+            ? '5 competitors, 6 customer interviews, 12 product packaging analyzed. Lost revenue: 3.7M/month.'
+            : lang === 'zh'
+              ? '分析了5个竞争对手，6个客户访谈，12个产品包装。每月流失：370万。'
+              : "5 raqobatchi, 6 ta mijoz interviyu, 12 ta mahsulot qadog'i tahlil qilindi. Yo'qotish: oyiga 3.7M.",
     },
-    { 
-      ex: lang === 'ru' ? "Пример: Humo" : lang === 'en' ? "Example: Humo" : lang === 'zh' ? "示例：Humo" : "Misol: Humo", 
-      t: lang === 'ru' ? "PDF + 1 час онлайн-презентации. 90-дневный план с 12 конкретными действиями." : lang === 'en' ? "PDF + 1-hour online presentation. 90-day plan with 12 specific actions." : lang === 'zh' ? "PDF + 1小时在线展示。90天计划，包含12个具体行动。" : "PDF + 1 soatlik onlayn prezentatsiya. 90 kunlik reja 12 ta aniq harakat bilan." 
+    {
+      ex:
+        lang === 'ru'
+          ? 'Пример: Humo'
+          : lang === 'en'
+            ? 'Example: Humo'
+            : lang === 'zh'
+              ? '示例：Humo'
+              : 'Misol: Humo',
+      t:
+        lang === 'ru'
+          ? 'PDF + 1 час онлайн-презентации. 90-дневный план с 12 конкретными действиями.'
+          : lang === 'en'
+            ? 'PDF + 1-hour online presentation. 90-day plan with 12 specific actions.'
+            : lang === 'zh'
+              ? 'PDF + 1小时在线展示。90天计划，包含12个具体行动。'
+              : 'PDF + 1 soatlik onlayn prezentatsiya. 90 kunlik reja 12 ta aniq harakat bilan.',
     },
   ];
 
@@ -1145,38 +1590,52 @@ export const ATProcess: FC<{ dictionary: any; lang?: string }> = ({ dictionary, 
         <h2>
           {dictionary?.process_title?.includes('\n') ? (
             <>
-              {dictionary.process_title.split('\n')[0]}<br/>
+              {dictionary.process_title.split('\n')[0]}
+              <br />
               <span className="it">{dictionary.process_title.split('\n')[1]}</span>
             </>
           ) : (
-            <span className="it">{dictionary?.process_title || "3 qadam, hech narsa yashirin emas."}</span>
+            <span className="it">
+              {dictionary?.process_title || '3 qadam, hech narsa yashirin emas.'}
+            </span>
           )}
         </h2>
         <div className="lede">
           <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
-            <span className="dot"/>
+            <span className="dot" />
             <span className="ix">§ 04</span>
-            <span>{dictionary?.nav?.[4]?.label || "Jarayon"}</span>
+            <span>{dictionary?.nav?.[4]?.label || 'Jarayon'}</span>
           </span>
-          <p dangerouslySetInnerHTML={{ __html: dictionary?.process_lede || "Har bosqichda sizning fikringizni olamiz. Yoqtirmaganingizni qayta ishlaymiz. <strong>Mamnun bo'lmasangiz, pulni qaytaramiz.</strong>" }} />
+          <p
+            dangerouslySetInnerHTML={{
+              __html:
+                dictionary?.process_lede ||
+                "Har bosqichda sizning fikringizni olamiz. Yoqtirmaganingizni qayta ishlaymiz. <strong>Mamnun bo'lmasangiz, pulni qaytaramiz.</strong>",
+            }}
+          />
         </div>
       </div>
       <div className="proc">
         {processItems.map((p: any, i: number) => (
-          <div key={p.n} className={`proc-col ${open === i ? 'open' : ''}`}
-               onClick={() => setOpen(open === i ? null : i)}>
+          <div
+            key={p.n}
+            className={`proc-col ${open === i ? 'open' : ''}`}
+            onClick={() => setOpen(open === i ? null : i)}
+          >
             <div className="plus-toggle">+</div>
             <div className="num">{p.n}</div>
             <h3>{p.name}</h3>
             <p>{p.note}</p>
             <div className="reveal">
               <div className="reveal-inner">
-                {extra[i] ? extra[i].t : ""}
-                <em>— {extra[i] ? extra[i].ex : ""}</em>
+                {extra[i] ? extra[i].t : ''}
+                <em>— {extra[i] ? extra[i].ex : ''}</em>
               </div>
             </div>
             <div className="meta">
-              <span>{dictionary?.process_step_label || "Bosqich"} · {p.n}</span>
+              <span>
+                {dictionary?.process_step_label || 'Bosqich'} · {p.n}
+              </span>
               <span className="v">{p.time}</span>
             </div>
           </div>
@@ -1196,89 +1655,166 @@ export const ATPricing: FC<SectionProps> = ({ dictionary, onOpen }) => {
         <h2>
           {dictionary?.pricing_title?.includes('\n') ? (
             <>
-              {dictionary.pricing_title.split('\n')[0]}<br/>
+              {dictionary.pricing_title.split('\n')[0]}
+              <br />
               <span className="it">{dictionary.pricing_title.split('\n')[1]}</span>
             </>
           ) : (
-            <span className="it">{dictionary?.pricing_title || "Aniq narx, yashirin xarajat yo'q."}</span>
+            <span className="it">
+              {dictionary?.pricing_title || "Aniq narx, yashirin xarajat yo'q."}
+            </span>
           )}
         </h2>
         <div className="lede">
           <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
-            <span className="dot"/>
+            <span className="dot" />
             <span className="ix">§ 05</span>
-            <span>{dictionary?.nav?.[3]?.label || "Narxlar"}</span>
+            <span>{dictionary?.nav?.[3]?.label || 'Narxlar'}</span>
           </span>
-          <p dangerouslySetInnerHTML={{ __html: dictionary?.pricing_lede || "Paketni tanlaysiz, to'lov jadvalini kelishamiz, boshlaymiz. <strong>Hech qanday tushuntirilmagan summa qo'shilmaydi.</strong>" }} />
+          <p
+            dangerouslySetInnerHTML={{
+              __html:
+                dictionary?.pricing_lede ||
+                "Paketni tanlaysiz, to'lov jadvalini kelishamiz, boshlaymiz. <strong>Hech qanday tushuntirilmagan summa qo'shilmaydi.</strong>",
+            }}
+          />
         </div>
       </div>
       <div className="guarantee">
         <div className="guarantee-item">
           <div className="guarantee-ck">✓</div>
-          <div className="guarantee-text"><span className="l">{dictionary?.pricing_guarantee_1_lbl || "Kafolat"}</span> {dictionary?.pricing_guarantee_1_val || "100% pul qaytarish"}</div>
+          <div className="guarantee-text">
+            <span className="l">{dictionary?.pricing_guarantee_1_lbl || 'Kafolat'}</span>{' '}
+            {dictionary?.pricing_guarantee_1_val || '100% pul qaytarish'}
+          </div>
         </div>
         <div className="guarantee-item">
           <div className="guarantee-ck">✓</div>
-          <div className="guarantee-text"><span className="l">{dictionary?.pricing_guarantee_2_lbl || "Muddati"}</span> {dictionary?.pricing_guarantee_2_val || "14 kun · 0 ta kechikish"}</div>
+          <div className="guarantee-text">
+            <span className="l">{dictionary?.pricing_guarantee_2_lbl || 'Muddati'}</span>{' '}
+            {dictionary?.pricing_guarantee_2_val || '14 kun · 0 ta kechikish'}
+          </div>
         </div>
         <div className="guarantee-item">
           <div className="guarantee-ck">✓</div>
-          <div className="guarantee-text"><span className="l">{dictionary?.pricing_guarantee_3_lbl || "Hujjat"}</span> {dictionary?.pricing_guarantee_3_val || "30—50 betlik PDF"}</div>
+          <div className="guarantee-text">
+            <span className="l">{dictionary?.pricing_guarantee_3_lbl || 'Hujjat'}</span>{' '}
+            {dictionary?.pricing_guarantee_3_val || '30—50 betlik PDF'}
+          </div>
         </div>
         <div className="guarantee-item">
           <div className="guarantee-ck">✓</div>
-          <div className="guarantee-text"><span className="l">{dictionary?.pricing_guarantee_4_lbl || "Tajriba"}</span> {dictionary?.pricing_guarantee_4_val || "6 yil · 240+ tashxis"}</div>
+          <div className="guarantee-text">
+            <span className="l">{dictionary?.pricing_guarantee_4_lbl || 'Tajriba'}</span>{' '}
+            {dictionary?.pricing_guarantee_4_val || '6 yil · 240+ tashxis'}
+          </div>
         </div>
       </div>
       <div className="price-grid">
         {packagesItems.map((p: any) => (
           <div key={p.name} className={`price-card ${p.featured ? 'featured' : ''}`}>
-            {p.featured && <div className="price-badge">{dictionary?.pricing_featured_badge || "87% mijoz tanlaydi"}</div>}
+            {p.featured && (
+              <div className="price-badge">
+                {dictionary?.pricing_featured_badge || '87% mijoz tanlaydi'}
+              </div>
+            )}
             <div className="price-head">
               <span className="price-tag">{p.tag}</span>
               <h3>{p.name}</h3>
             </div>
             <div className="price-desc">{p.desc}</div>
             <div className="price-num">
-              {p.price === 'Kelishiladi' || p.price === 'Договорная' || p.price === 'Negotiable' || p.price === '面议' ? (
-                <span style={{ fontFamily: 'Instrument Serif, serif', fontStyle: 'italic', fontWeight: 400, color: 'var(--ink-2)' }}>{p.price}</span>
+              {p.price === 'Kelishiladi' ||
+              p.price === 'Договорная' ||
+              p.price === 'Negotiable' ||
+              p.price === '面议' ? (
+                <span
+                  style={{
+                    fontFamily: 'Instrument Serif, serif',
+                    fontStyle: 'italic',
+                    fontWeight: 400,
+                    color: 'var(--ink-2)',
+                  }}
+                >
+                  {p.price}
+                </span>
               ) : (
-                <>{p.price}<span className="s">.</span></>
+                <>
+                  {p.price}
+                  <span className="s">.</span>
+                </>
               )}
             </div>
             <div className="price-unit">{p.unit}</div>
-            <div className="price-rule"/>
+            <div className="price-rule" />
             <ul>
               {p.incl.map((x: any, i: number) => (
-                <li key={i}><span className="ck">✓</span><span>{x}</span></li>
+                <li key={i}>
+                  <span className="ck">✓</span>
+                  <span>{x}</span>
+                </li>
               ))}
             </ul>
             <button className="price-cta" onClick={onOpen}>
-              <span>{p.featured ? (dictionary?.pricing_cta_featured || "Hozir boshlash") : (dictionary?.pricing_cta_standard || "Tanlash")}</span>
+              <span>
+                {p.featured
+                  ? dictionary?.pricing_cta_featured || 'Hozir boshlash'
+                  : dictionary?.pricing_cta_standard || 'Tanlash'}
+              </span>
               <span>→</span>
             </button>
           </div>
         ))}
       </div>
 
-      <div style={{
-        marginTop: 32,
-        padding: '24px 32px',
-        borderRadius: 16,
-        background: 'var(--paper)',
-        border: '1px solid var(--line)',
-        display: 'flex', alignItems: 'center', gap: 20,
-        flexWrap: 'wrap', justifyContent: 'space-between',
-      }}>
+      <div
+        style={{
+          marginTop: 32,
+          padding: '24px 32px',
+          borderRadius: 16,
+          background: 'var(--paper)',
+          border: '1px solid var(--line)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 20,
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+        }}
+      >
         <div>
-          <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 8 }}>
+          <div
+            style={{
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: 10,
+              letterSpacing: '.08em',
+              textTransform: 'uppercase',
+              color: 'var(--muted)',
+              marginBottom: 8,
+            }}
+          >
             {dictionary?.pricing_payment_schedule || "To'lov jadvali"}
           </div>
-          <div style={{ fontSize: 15 }}>{dictionary?.pricing_payment_schedule_val || "40% boshida · 30% birinchi variant tasdiqlanganda · 30% topshirishda"}</div>
+          <div style={{ fontSize: 15 }}>
+            {dictionary?.pricing_payment_schedule_val ||
+              '40% boshida · 30% birinchi variant tasdiqlanganda · 30% topshirishda'}
+          </div>
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
-          {['Payme', 'Click', 'Bank'].map(p => (
-            <span key={p} style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--muted)', padding: '6px 12px', background: 'var(--bg)', borderRadius: 999, border: '1px solid var(--line)' }}>{p}</span>
+          {['Payme', 'Click', 'Bank'].map((p) => (
+            <span
+              key={p}
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: 11,
+                color: 'var(--muted)',
+                padding: '6px 12px',
+                background: 'var(--bg)',
+                borderRadius: 999,
+                border: '1px solid var(--line)',
+              }}
+            >
+              {p}
+            </span>
           ))}
         </div>
       </div>
@@ -1292,7 +1828,11 @@ interface ATQuotesProps {
   testimonials?: any[];
   lang: string;
 }
-export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimonialsProp, lang }) => {
+export const ATQuotes: FC<ATQuotesProps> = ({
+  dictionary,
+  testimonials: testimonialsProp,
+  lang,
+}) => {
   const [activeVideo, setActiveVideo] = useState<any | null>(null);
   const [playingAudio, setPlayingAudio] = useState<string | null>(null);
   const [apiTestimonials, setApiTestimonials] = useState<any[] | null>(null);
@@ -1301,27 +1841,41 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
   useEffect(() => {
     const cached = sessionStorage.getItem(`testimonials_${lang}`);
     if (cached) {
-      try { setApiTestimonials(JSON.parse(cached)); return; } catch {}
+      try {
+        setApiTestimonials(JSON.parse(cached));
+        return;
+      } catch {}
     }
     fetch(`/api/testimonials?lang=${lang}`)
       .then((r) => r.json())
       .then((data) => {
         if (data?.testimonials?.length) {
           setApiTestimonials(data.testimonials);
-          try { sessionStorage.setItem(`testimonials_${lang}`, JSON.stringify(data.testimonials)); } catch {}
+          try {
+            sessionStorage.setItem(`testimonials_${lang}`, JSON.stringify(data.testimonials));
+          } catch {}
         }
       })
       .catch(() => {});
   }, [lang]);
 
-  const list = apiTestimonials && apiTestimonials.length > 0 ? apiTestimonials : (testimonialsProp && testimonialsProp.length > 0 ? testimonialsProp : (() => {
-    switch (lang) {
-      case 'ru': return staticTestimonialsRu;
-      case 'en': return staticTestimonialsEn;
-      case 'zh': return staticTestimonialsZh;
-      default: return staticTestimonials;
-    }
-  })());
+  const list =
+    apiTestimonials && apiTestimonials.length > 0
+      ? apiTestimonials
+      : testimonialsProp && testimonialsProp.length > 0
+        ? testimonialsProp
+        : (() => {
+            switch (lang) {
+              case 'ru':
+                return staticTestimonialsRu;
+              case 'en':
+                return staticTestimonialsEn;
+              case 'zh':
+                return staticTestimonialsZh;
+              default:
+                return staticTestimonials;
+            }
+          })();
 
   const videoTestimonials = list.filter((t) => t.videoUrl);
   const audioTestimonials = list.filter((t) => !t.videoUrl && t.audioUrl);
@@ -1373,41 +1927,89 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
 
   return (
     <section className="sec wrap" id="sharhlar">
-      <div className="sec-head" style={{ display: 'flex', flexDirection: 'column', gap: 24, marginBottom: 80, alignItems: 'center', textAlign: 'center' }}>
-        <div className="lede" style={{ maxWidth: 600, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div
+        className="sec-head"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 24,
+          marginBottom: 80,
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
+        <div
+          className="lede"
+          style={{ maxWidth: 600, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+        >
           <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
-            <span className="dot"/>
+            <span className="dot" />
             <span className="ix">§ 06</span>
-            <span>{dictionary?.footer_pages_title?.includes('Sharh') ? dictionary.footer_pages_title : 'Sharhlar'}</span>
+            <span>
+              {dictionary?.footer_pages_title?.includes('Sharh')
+                ? dictionary.footer_pages_title
+                : 'Sharhlar'}
+            </span>
           </span>
         </div>
         <h2 className="it" style={{ maxWidth: 800 }}>
-          {dictionary?.quotes_title
-            ? (dictionary.quotes_title.includes('\n')
-              ? <>{dictionary.quotes_title.split('\n')[0]}<br/><span className="it">{dictionary.quotes_title.split('\n')[1]}</span></>
-              : dictionary.quotes_title)
-            : "Mijozlar o'z so'zlari bilan."}
+          {dictionary?.quotes_title ? (
+            dictionary.quotes_title.includes('\n') ? (
+              <>
+                {dictionary.quotes_title.split('\n')[0]}
+                <br />
+                <span className="it">{dictionary.quotes_title.split('\n')[1]}</span>
+              </>
+            ) : (
+              dictionary.quotes_title
+            )
+          ) : (
+            "Mijozlar o'z so'zlari bilan."
+          )}
         </h2>
         <div className="lede" style={{ maxWidth: 500 }}>
-          <p dangerouslySetInnerHTML={{ __html: dictionary?.quotes_lede || "Har bir gap real biznes egasidan, real loyiha haqida. <br/><strong>Yolg'on yoki bo'rttirma yo'q</strong> — tekshirishingiz mumkin." }} />
+          <p
+            dangerouslySetInnerHTML={{
+              __html:
+                dictionary?.quotes_lede ||
+                "Har bir gap real biznes egasidan, real loyiha haqida. <br/><strong>Yolg'on yoki bo'rttirma yo'q</strong> — tekshirishingiz mumkin.",
+            }}
+          />
         </div>
       </div>
 
       {videoTestimonials.length > 0 && (
         <div style={{ marginBottom: 64 }}>
-          <div style={{
-            fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase',
-            color: 'var(--muted)', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12,
-          }}>
-            <span style={{ width: 28, height: 1, background: 'var(--line)' }}/>
-            {lang === 'ru' ? 'Видео отзывы' : lang === 'en' ? 'Video reviews' : lang === 'zh' ? '视频反馈' : 'Video sharhlar'}
+          <div
+            style={{
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: 11,
+              letterSpacing: '.12em',
+              textTransform: 'uppercase',
+              color: 'var(--muted)',
+              marginBottom: 24,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+            }}
+          >
+            <span style={{ width: 28, height: 1, background: 'var(--line)' }} />
+            {lang === 'ru'
+              ? 'Видео отзывы'
+              : lang === 'en'
+                ? 'Video reviews'
+                : lang === 'zh'
+                  ? '视频反馈'
+                  : 'Video sharhlar'}
           </div>
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: 16,
-          }}>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: 16,
+            }}
+          >
             {videoTestimonials.map((t, idx) => (
               <motion.div
                 key={idx}
@@ -1431,20 +2033,69 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
                 className="group"
               >
                 {t.image ? (
-                  <Image src={t.image} alt={t.name} fill unoptimized quality={100} className="object-cover opacity-80 group-hover:scale-105 transition-all duration-700" sizes="50vw" />
+                  <Image
+                    src={t.image}
+                    alt={t.name}
+                    fill
+                    unoptimized
+                    quality={100}
+                    className="object-cover opacity-80 group-hover:scale-105 transition-all duration-700"
+                    sizes="50vw"
+                  />
                 ) : (
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1B4DFF15, #C2552A15)' }} />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(135deg, #1B4DFF15, #C2552A15)',
+                    }}
+                  />
                 )}
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(14,16,21,0.9), rgba(14,16,21,0.1) 60%, transparent)' }} />
-                <div style={{ position: 'absolute', top: 12, right: 12, width: 32, height: 32, borderRadius: '50%', background: 'rgba(255,255,255,0.9)', color: '#0E1015', display: 'grid', placeItems: 'center', zIndex: 3 }}>
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background:
+                      'linear-gradient(to top, rgba(14,16,21,0.9), rgba(14,16,21,0.1) 60%, transparent)',
+                  }}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 12,
+                    right: 12,
+                    width: 32,
+                    height: 32,
+                    borderRadius: '50%',
+                    background: 'rgba(255,255,255,0.9)',
+                    color: '#0E1015',
+                    display: 'grid',
+                    placeItems: 'center',
+                    zIndex: 3,
+                  }}
+                >
                   <PlayCircle size={16} />
                 </div>
-                <div style={{
-                  position: 'absolute', inset: 0, zIndex: 2,
-                  display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-                  padding: 20, color: '#FFF',
-                }}>
-                  <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}>
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-end',
+                    padding: 20,
+                    color: '#FFF',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: 'JetBrains Mono, monospace',
+                      fontSize: 10,
+                      color: 'rgba(255,255,255,0.5)',
+                      marginBottom: 4,
+                    }}
+                  >
                     {t.company || t.role}
                   </div>
                   <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
@@ -1457,15 +2108,37 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
 
       {(audioTestimonials.length > 0 || textTestimonials.length > 0) && (
         <>
-          <div style={{
-            fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase',
-            color: 'var(--muted)', marginBottom: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
-          }}>
-            <span style={{ width: 28, height: 1, background: 'var(--line)' }}/>
-            {lang === 'ru' ? 'Отзывы' : lang === 'en' ? 'Reviews' : lang === 'zh' ? '评论' : 'Matnli sharhlar'}
-            <span style={{ width: 28, height: 1, background: 'var(--line)' }}/>
+          <div
+            style={{
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: 11,
+              letterSpacing: '.12em',
+              textTransform: 'uppercase',
+              color: 'var(--muted)',
+              marginBottom: 32,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 12,
+            }}
+          >
+            <span style={{ width: 28, height: 1, background: 'var(--line)' }} />
+            {lang === 'ru'
+              ? 'Отзывы'
+              : lang === 'en'
+                ? 'Reviews'
+                : lang === 'zh'
+                  ? '评论'
+                  : 'Matnli sharhlar'}
+            <span style={{ width: 28, height: 1, background: 'var(--line)' }} />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 20 }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+              gap: 20,
+            }}
+          >
             {audioTestimonials.map((t, idx) => (
               <motion.div
                 key={idx}
@@ -1474,36 +2147,114 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
                 viewport={{ once: true, margin: '-30px' }}
                 transition={{ delay: idx * 0.06, duration: 0.4 }}
                 style={{
-                  background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 14, padding: 40,
-                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 32,
-                  alignItems: 'center', textAlign: 'center',
+                  background: 'var(--paper)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 14,
+                  padding: 40,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  gap: 32,
+                  alignItems: 'center',
+                  textAlign: 'center',
                   transition: 'box-shadow 0.3s, transform 0.3s',
                 }}
                 className="hover:shadow-xl hover:-translate-y-1"
               >
-                <audio ref={el => { audioRefs.current[t.audioUrl] = el; }} src={t.audioUrl} preload="none" onEnded={() => handleAudioEnded(t.audioUrl)} />
+                <audio
+                  ref={(el) => {
+                    audioRefs.current[t.audioUrl] = el;
+                  }}
+                  src={t.audioUrl}
+                  preload="none"
+                  onEnded={() => handleAudioEnded(t.audioUrl)}
+                />
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <div style={{ fontFamily: 'var(--font-serif, "Instrument Serif", serif)', fontStyle: 'italic', fontSize: 72, lineHeight: 0.8, color: 'var(--accent)', marginBottom: 16 }}>&#8220;</div>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-serif, "Instrument Serif", serif)',
+                      fontStyle: 'italic',
+                      fontSize: 72,
+                      lineHeight: 0.8,
+                      color: 'var(--accent)',
+                      marginBottom: 16,
+                    }}
+                  >
+                    &#8220;
+                  </div>
                   <p style={{ fontSize: 18, lineHeight: 1.6, color: 'var(--ink)' }}>{t.quote}</p>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, width: '100%' }}>
-                  <button onClick={() => toggleAudio(t.audioUrl)} style={{
-                      display: 'flex', alignItems: 'center', gap: 12, padding: '14px 28px', borderRadius: 40,
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: 20,
+                    width: '100%',
+                  }}
+                >
+                  <button
+                    onClick={() => toggleAudio(t.audioUrl)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 12,
+                      padding: '14px 28px',
+                      borderRadius: 40,
                       background: playingAudio === t.audioUrl ? 'var(--accent)' : 'var(--bg)',
                       color: playingAudio === t.audioUrl ? '#FFF' : 'var(--ink)',
-                      border: '1px solid var(--line)', cursor: 'pointer', transition: 'all 0.3s',
-                      boxShadow: playingAudio === t.audioUrl ? '0 8px 24px rgba(194, 85, 42, 0.25)' : 'none'
-                    }}>
-                      {playingAudio === t.audioUrl ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" />}
-                      <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: '-0.01em' }}>
-                        {playingAudio === t.audioUrl 
-                          ? (lang === 'ru' ? 'Слушаем...' : lang === 'en' ? 'Playing...' : lang === 'zh' ? '播放中...' : 'Tinglanyapti...') 
-                          : (lang === 'ru' ? 'Слушать отзыв' : lang === 'en' ? 'Listen to review' : lang === 'zh' ? '听评论' : 'Ovozli sharhni eshitish')}
-                      </span>
+                      border: '1px solid var(--line)',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s',
+                      boxShadow:
+                        playingAudio === t.audioUrl ? '0 8px 24px rgba(194, 85, 42, 0.25)' : 'none',
+                    }}
+                  >
+                    {playingAudio === t.audioUrl ? (
+                      <Pause size={18} fill="currentColor" />
+                    ) : (
+                      <Play size={18} fill="currentColor" />
+                    )}
+                    <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: '-0.01em' }}>
+                      {playingAudio === t.audioUrl
+                        ? lang === 'ru'
+                          ? 'Слушаем...'
+                          : lang === 'en'
+                            ? 'Playing...'
+                            : lang === 'zh'
+                              ? '播放中...'
+                              : 'Tinglanyapti...'
+                        : lang === 'ru'
+                          ? 'Слушать отзыв'
+                          : lang === 'en'
+                            ? 'Listen to review'
+                            : lang === 'zh'
+                              ? '听评论'
+                              : 'Ovozli sharhni eshitish'}
+                    </span>
                   </button>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                    <div style={{ fontWeight: 600, fontSize: 16, color: 'var(--ink)' }}>{t.name}</div>
-                    <div style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono, monospace)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t.company}</div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: 4,
+                    }}
+                  >
+                    <div style={{ fontWeight: 600, fontSize: 16, color: 'var(--ink)' }}>
+                      {t.name}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: 'var(--muted)',
+                        fontFamily: 'var(--font-mono, monospace)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                      }}
+                    >
+                      {t.company}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -1516,20 +2267,56 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
                 viewport={{ once: true, margin: '-30px' }}
                 transition={{ delay: idx * 0.04, duration: 0.4 }}
                 style={{
-                  background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 14, padding: 40,
-                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 32,
-                  alignItems: 'center', textAlign: 'center',
+                  background: 'var(--paper)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 14,
+                  padding: 40,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  gap: 32,
+                  alignItems: 'center',
+                  textAlign: 'center',
                   transition: 'box-shadow 0.3s, transform 0.3s',
                 }}
                 className="hover:shadow-xl hover:-translate-y-1"
               >
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <div style={{ fontFamily: 'var(--font-serif, "Instrument Serif", serif)', fontStyle: 'italic', fontSize: 72, lineHeight: 0.8, color: 'var(--accent)', marginBottom: 16 }}>&#8220;</div>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-serif, "Instrument Serif", serif)',
+                      fontStyle: 'italic',
+                      fontSize: 72,
+                      lineHeight: 0.8,
+                      color: 'var(--accent)',
+                      marginBottom: 16,
+                    }}
+                  >
+                    &#8220;
+                  </div>
                   <p style={{ fontSize: 18, lineHeight: 1.6, color: 'var(--ink)' }}>{t.quote}</p>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, width: '100%' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: 4,
+                    width: '100%',
+                  }}
+                >
                   <div style={{ fontWeight: 600, fontSize: 16, color: 'var(--ink)' }}>{t.name}</div>
-                  <div style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono, monospace)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t.company}</div>
+                  <div
+                    style={{
+                      fontSize: 12,
+                      color: 'var(--muted)',
+                      fontFamily: 'var(--font-mono, monospace)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    {t.company}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -1544,10 +2331,15 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
           exit={{ opacity: 0 }}
           onClick={() => setActiveVideo(null)}
           style={{
-            position: 'fixed', inset: 0, zIndex: 9999,
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
             background: 'rgba(14, 16, 21, 0.85)',
             backdropFilter: 'blur(12px)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20,
           }}
         >
           <motion.div
@@ -1556,9 +2348,15 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
             exit={{ scale: 0.92, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
             style={{
-              position: 'relative', width: '100%', maxWidth: 400,
-              aspectRatio: '9/16', background: '#0E1015', borderRadius: 20, overflow: 'hidden',
-              boxShadow: '0 40px 120px rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.08)',
+              position: 'relative',
+              width: '100%',
+              maxWidth: 400,
+              aspectRatio: '9/16',
+              background: '#0E1015',
+              borderRadius: 20,
+              overflow: 'hidden',
+              boxShadow: '0 40px 120px rgba(0,0,0,0.6)',
+              border: '1px solid rgba(255,255,255,0.08)',
             }}
           >
             {activeVideo.videoFileUrl ? (
@@ -1567,33 +2365,77 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
                 autoPlay
                 playsInline
                 src={activeVideo.videoFileUrl}
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', background: '#000' }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  background: '#000',
+                }}
               />
             ) : (
               <iframe
                 src={getVimeoEmbedUrl(activeVideo.videoUrl)}
                 title={`${activeVideo.name} video`}
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  border: 'none',
+                }}
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
               />
             )}
-            <button onClick={() => setActiveVideo(null)} style={{
-              position: 'absolute', top: 16, right: 16, zIndex: 10,
-              width: 36, height: 36, borderRadius: '50%',
-              background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
-              color: '#FFF', border: '1px solid rgba(255,255,255,0.15)',
-              display: 'grid', placeItems: 'center', cursor: 'pointer',
-            }}>
-              <X size={16} />
+            <button
+              onClick={() => setActiveVideo(null)}
+              type="button"
+              aria-label="Close video"
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e1015]"
+              style={{
+                position: 'absolute',
+                top: 16,
+                right: 16,
+                zIndex: 10,
+                width: 36,
+                height: 36,
+                borderRadius: '50%',
+                background: 'rgba(0,0,0,0.6)',
+                backdropFilter: 'blur(4px)',
+                color: '#FFF',
+                border: '1px solid rgba(255,255,255,0.15)',
+                display: 'grid',
+                placeItems: 'center',
+                cursor: 'pointer',
+              }}
+            >
+              <X size={16} aria-hidden="true" />
             </button>
-            <div style={{
-              position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 2,
-              background: 'linear-gradient(to top, rgba(14,16,21,0.95), transparent)',
-              padding: 28, color: '#FFF',
-            }}>
+            <div
+              style={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: 2,
+                background: 'linear-gradient(to top, rgba(14,16,21,0.95), transparent)',
+                padding: 28,
+                color: '#FFF',
+              }}
+            >
               <div style={{ fontWeight: 700, fontSize: 16 }}>{activeVideo.name}</div>
-              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', fontFamily: 'JetBrains Mono, monospace', marginTop: 4 }}>{activeVideo.company}</div>
+              <div
+                style={{
+                  fontSize: 12,
+                  color: 'rgba(255,255,255,0.6)',
+                  fontFamily: 'JetBrains Mono, monospace',
+                  marginTop: 4,
+                }}
+              >
+                {activeVideo.company}
+              </div>
             </div>
           </motion.div>
         </motion.div>
@@ -1612,35 +2454,62 @@ export const ATFAQ: FC<{ dictionary: any }> = ({ dictionary }) => {
       <div className="faq-grid">
         <div>
           <span className="eb" style={{ marginBottom: 18, display: 'inline-flex' }}>
-            <span className="dot"/>
+            <span className="dot" />
             <span className="ix">§ 07</span>
-            <span>{dictionary?.faq_section_badge || "Savol-javob"}</span>
+            <span>{dictionary?.faq_section_badge || 'Savol-javob'}</span>
           </span>
-          <h2 style={{ fontSize: 'clamp(36px, 4.4vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.035em', fontWeight: 700, marginBottom: 24 }}>
+          <h2
+            style={{
+              fontSize: 'clamp(36px, 4.4vw, 64px)',
+              lineHeight: 0.98,
+              letterSpacing: '-0.035em',
+              fontWeight: 700,
+              marginBottom: 24,
+            }}
+          >
             {dictionary?.faq_title?.includes('\n') ? (
               <>
-                {dictionary.faq_title.split('\n')[0]}<br/>
-                <span className="serif" style={{ color: 'var(--accent)' }}>{dictionary.faq_title.split('\n')[1]}</span>
+                {dictionary.faq_title.split('\n')[0]}
+                <br />
+                <span className="serif" style={{ color: 'var(--accent)' }}>
+                  {dictionary.faq_title.split('\n')[1]}
+                </span>
               </>
             ) : (
-              <span className="serif" style={{ color: 'var(--accent)' }}>{dictionary?.faq_title || "Tez-tez so'raladi."}</span>
+              <span className="serif" style={{ color: 'var(--accent)' }}>
+                {dictionary?.faq_title || "Tez-tez so'raladi."}
+              </span>
             )}
           </h2>
           <p style={{ color: 'var(--ink-2)', fontSize: 15, lineHeight: 1.65, maxWidth: 320 }}>
-            {dictionary?.faq_lede || "Javob topa olmadingizmi? Yozing — jamoamiz 24 soat ichida javob beradi."}
+            {dictionary?.faq_lede ||
+              'Javob topa olmadingizmi? Yozing — jamoamiz 24 soat ichida javob beradi.'}
           </p>
-          <a href="mailto:salom@jon.uz" style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            marginTop: 24, fontWeight: 600, fontSize: 14,
-            padding: '12px 18px', border: '1px solid var(--line)',
-            borderRadius: 999, background: 'var(--paper)',
-          }}>
+          <a
+            href="mailto:salom@jon.uz"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              marginTop: 24,
+              fontWeight: 600,
+              fontSize: 14,
+              padding: '12px 18px',
+              border: '1px solid var(--line)',
+              borderRadius: 999,
+              background: 'var(--paper)',
+            }}
+          >
             salom@jon.uz <span style={{ color: 'var(--accent)' }}>↗</span>
           </a>
         </div>
         <div className="faq-list">
           {faqItems.map((f: any, i: number) => (
-            <div key={i} className={`faq-item ${open === i ? 'open' : ''}`} onClick={() => setOpen(open === i ? -1 : i)}>
+            <div
+              key={i}
+              className={`faq-item ${open === i ? 'open' : ''}`}
+              onClick={() => setOpen(open === i ? -1 : i)}
+            >
               <div className="faq-q">
                 <span className="n">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{f.q}</h3>
@@ -1659,31 +2528,49 @@ export const ATFAQ: FC<{ dictionary: any }> = ({ dictionary }) => {
 export const ATFinal: FC<SectionProps> = ({ dictionary, onOpen }) => {
   return (
     <section className="final">
-      <div className="final-bg"/>
+      <div className="final-bg" />
       <div className="wrap">
         <div className="final-eb">
-          <span>{dictionary?.final_cta_badge || "Boshlashga tayyormisiz?"}</span>
+          <span>{dictionary?.final_cta_badge || 'Boshlashga tayyormisiz?'}</span>
         </div>
-        <h2 dangerouslySetInnerHTML={{ __html: (dictionary?.final_cta_title || "Tashxis qiling —<br/>keyin tuzating.").replace(/\n/g, '<br/>') }} />
-        <p dangerouslySetInnerHTML={{ __html: dictionary?.final_cta_lede || "14 kun ichida hisobot tayyor. 50% boshida, 50% prezentatsiyada. Foydali tavsiya topilmasa — <strong>100% pulni qaytaramiz.</strong>" }} />
+        <h2
+          dangerouslySetInnerHTML={{
+            __html: (dictionary?.final_cta_title || 'Tashxis qiling —<br/>keyin tuzating.').replace(
+              /\n/g,
+              '<br/>'
+            ),
+          }}
+        />
+        <p
+          dangerouslySetInnerHTML={{
+            __html:
+              dictionary?.final_cta_lede ||
+              '14 kun ichida hisobot tayyor. 50% boshida, 50% prezentatsiyada. Foydali tavsiya topilmasa — <strong>100% pulni qaytaramiz.</strong>',
+          }}
+        />
         <div className="final-row">
           <button className="btn btn-primary btn-lg" onClick={onOpen}>
-            {dictionary?.final_cta_cta || "Bepul mini-tashxis olish"} <span className="ar">↗</span>
+            {dictionary?.final_cta_cta || 'Bepul mini-tashxis olish'} <span className="ar">↗</span>
           </button>
-          <a href="mailto:salom@jon.uz" className="btn btn-ghost btn-lg">salom@jon.uz</a>
+          <a href="mailto:salom@jon.uz" className="btn btn-ghost btn-lg">
+            salom@jon.uz
+          </a>
         </div>
         <div className="final-meta">
           <div className="item">
-            <div className="k">{dictionary?.final_cta_stat_left || "Bu oyda"}</div>
-            <div className="v"><span className="s">4</span>{dictionary?.final_cta_stat_left_val || "/6 joy qoldi"}</div>
+            <div className="k">{dictionary?.final_cta_stat_left || 'Bu oyda'}</div>
+            <div className="v">
+              <span className="s">4</span>
+              {dictionary?.final_cta_stat_left_val || '/6 joy qoldi'}
+            </div>
           </div>
           <div className="item">
-            <div className="k">{dictionary?.final_cta_stat_time || "Tashxis muddati"}</div>
-            <div className="v">{dictionary?.final_cta_stat_time_val || "14 kun ichida"}</div>
+            <div className="k">{dictionary?.final_cta_stat_time || 'Tashxis muddati'}</div>
+            <div className="v">{dictionary?.final_cta_stat_time_val || '14 kun ichida'}</div>
           </div>
           <div className="item">
-            <div className="k">{dictionary?.final_cta_stat_dur || "Mini-tashxis davomiyligi"}</div>
-            <div className="v">{dictionary?.final_cta_stat_dur_val || "30 daqiqa"}</div>
+            <div className="k">{dictionary?.final_cta_stat_dur || 'Mini-tashxis davomiyligi'}</div>
+            <div className="v">{dictionary?.final_cta_stat_dur_val || '30 daqiqa'}</div>
           </div>
         </div>
       </div>
@@ -1698,9 +2585,22 @@ export const ATFooter: FC<{ dictionary: any }> = ({ dictionary }) => {
       <div className="foot-cta">
         <div className="wrap">
           <div className="foot-cta-inner">
-            <div className="foot-cta-text" dangerouslySetInnerHTML={{ __html: (dictionary?.footer_ask || "Sahifa oxirigacha tushdingiz —<br/><span class=\"it\">savol bormi?</span>").replace(/\n/g, '<br/>') }} />
+            <div
+              className="foot-cta-text"
+              dangerouslySetInnerHTML={{
+                __html: (
+                  dictionary?.footer_ask ||
+                  'Sahifa oxirigacha tushdingiz —<br/><span class="it">savol bormi?</span>'
+                ).replace(/\n/g, '<br/>'),
+              }}
+            />
             <div className="foot-cta-btns">
-              <a className="foot-cta-btn tg" href="https://t.me/jonbranding_bot" target="_blank" rel="noopener noreferrer">
+              <a
+                className="foot-cta-btn tg"
+                href="https://t.me/jonbranding_bot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {dictionary?.footer_write_tg || "Telegram'da yozish →"}
               </a>
               <a className="foot-cta-btn" href="tel:+998336450097">
@@ -1713,65 +2613,135 @@ export const ATFooter: FC<{ dictionary: any }> = ({ dictionary }) => {
       <div className="wrap">
         <div className="foot-cols">
           <div className="foot-col">
-            <div style={{
-              display: 'flex', alignItems: 'baseline', gap: 2,
-              fontWeight: 700, fontSize: 28, letterSpacing: '-0.035em',
-              marginBottom: 18,
-              color: 'var(--bg)',
-            }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: 2,
+                fontWeight: 700,
+                fontSize: 28,
+                letterSpacing: '-0.035em',
+                marginBottom: 18,
+                color: 'var(--bg)',
+              }}
+            >
               <span>jon</span>
-              <span style={{ color: 'var(--accent)', fontFamily: 'Instrument Serif, serif', fontStyle: 'italic', fontWeight: 400, fontSize: 36, lineHeight: .7 }}>.</span>
+              <span
+                style={{
+                  color: 'var(--accent)',
+                  fontFamily: 'Instrument Serif, serif',
+                  fontStyle: 'italic',
+                  fontWeight: 400,
+                  fontSize: 36,
+                  lineHeight: 0.7,
+                }}
+              >
+                .
+              </span>
             </div>
-            <p style={{ fontSize: 14, color: 'rgba(244,241,232,.6)', maxWidth: 320, lineHeight: 1.65 }}>
-              {dictionary?.footer_about || "Markaziy Osiyo brending atelyesi. 2019-yildan beri biznesni mijoz xayolida qoldiramiz."}
+            <p
+              style={{
+                fontSize: 14,
+                color: 'rgba(244,241,232,.6)',
+                maxWidth: 320,
+                lineHeight: 1.65,
+              }}
+            >
+              {dictionary?.footer_about ||
+                'Markaziy Osiyo brending atelyesi. 2019-yildan beri biznesni mijoz xayolida qoldiramiz.'}
             </p>
             <div style={{ marginTop: 28, display: 'flex', gap: 8 }}>
-              {['IG', 'TG', 'Be', 'Yt'].map(s => (
-                <a key={s} href="#" style={{
-                  width: 38, height: 38,
-                  borderRadius: 999,
-                  border: '1px solid rgba(244,241,232,.15)',
-                  display: 'grid', placeItems: 'center',
-                  fontSize: 12, fontWeight: 600,
-                  letterSpacing: '0.05em',
-                  transition: 'border-color .2s, background .2s',
-                }}>
+              {['IG', 'TG', 'Be', 'Yt'].map((s) => (
+                <a
+                  key={s}
+                  href="#"
+                  style={{
+                    width: 38,
+                    height: 38,
+                    borderRadius: 999,
+                    border: '1px solid rgba(244,241,232,.15)',
+                    display: 'grid',
+                    placeItems: 'center',
+                    fontSize: 12,
+                    fontWeight: 600,
+                    letterSpacing: '0.05em',
+                    transition: 'border-color .2s, background .2s',
+                  }}
+                >
                   {s}
                 </a>
               ))}
             </div>
           </div>
           <div className="foot-col">
-            <h4>{dictionary?.footer_pages_title || "Sahifalar"}</h4>
+            <h4>{dictionary?.footer_pages_title || 'Sahifalar'}</h4>
             <ul>
-              <li><a href="#tashxis">{dictionary?.nav?.[0]?.label || "Tashxis"}</a></li>
-              <li><a href="#belgilar">{dictionary?.nav?.[1]?.label || "Belgilar"}</a></li>
-              <li><a href="#ishlar">{dictionary?.nav?.[2]?.label || "Ishlar"}</a></li>
-              <li><a href="#narxlar">{dictionary?.nav?.[3]?.label || "Narxlar"}</a></li>
-              <li><a href="#jarayon">{dictionary?.nav?.[4]?.label || "Jarayon"}</a></li>
-              <li><a href="#savol">{dictionary?.nav?.[5]?.label || "Savollar"}</a></li>
+              <li>
+                <a href="#tashxis">{dictionary?.nav?.[0]?.label || 'Tashxis'}</a>
+              </li>
+              <li>
+                <a href="#belgilar">{dictionary?.nav?.[1]?.label || 'Belgilar'}</a>
+              </li>
+              <li>
+                <a href="#ishlar">{dictionary?.nav?.[2]?.label || 'Ishlar'}</a>
+              </li>
+              <li>
+                <a href="#narxlar">{dictionary?.nav?.[3]?.label || 'Narxlar'}</a>
+              </li>
+              <li>
+                <a href="#jarayon">{dictionary?.nav?.[4]?.label || 'Jarayon'}</a>
+              </li>
+              <li>
+                <a href="#savol">{dictionary?.nav?.[5]?.label || 'Savollar'}</a>
+              </li>
             </ul>
           </div>
           <div className="foot-col">
-            <h4>{dictionary?.footer_contact_title || "Aloqa"}</h4>
+            <h4>{dictionary?.footer_contact_title || 'Aloqa'}</h4>
             <ul>
-              <li><a href="tel:+998336450097">+998 33 645 00 97</a></li>
-              <li><a href="mailto:salom@jon.uz">salom@jon.uz</a></li>
-              <li><span style={{ color: 'rgba(244,241,232,.55)' }}>Toshkent, O'zbekiston</span></li>
+              <li>
+                <a href="tel:+998336450097">+998 33 645 00 97</a>
+              </li>
+              <li>
+                <a href="mailto:salom@jon.uz">salom@jon.uz</a>
+              </li>
+              <li>
+                <span style={{ color: 'rgba(244,241,232,.55)' }}>Toshkent, O'zbekiston</span>
+              </li>
             </ul>
           </div>
           <div className="foot-col">
-            <h4>{dictionary?.footer_office_title || "Ofis"}</h4>
+            <h4>{dictionary?.footer_office_title || 'Ofis'}</h4>
             <ul>
-              <li><span style={{ color: 'rgba(244,241,232,.55)' }}>{dictionary?.footer_office_days || "Du–Ju · 10:00–19:00"}</span></li>
-              <li><span style={{ color: 'rgba(244,241,232,.55)' }}>{dictionary?.footer_office_weekend || "Sha–Ya · dam olish"}</span></li>
-              <li><span style={{ color: 'var(--accent)', fontFamily: 'JetBrains Mono, monospace', fontSize: 12 }}>{dictionary?.footer_office_status || "Yangi loyihalar uchun ochiq"}</span></li>
+              <li>
+                <span style={{ color: 'rgba(244,241,232,.55)' }}>
+                  {dictionary?.footer_office_days || 'Du–Ju · 10:00–19:00'}
+                </span>
+              </li>
+              <li>
+                <span style={{ color: 'rgba(244,241,232,.55)' }}>
+                  {dictionary?.footer_office_weekend || 'Sha–Ya · dam olish'}
+                </span>
+              </li>
+              <li>
+                <span
+                  style={{
+                    color: 'var(--accent)',
+                    fontFamily: 'JetBrains Mono, monospace',
+                    fontSize: 12,
+                  }}
+                >
+                  {dictionary?.footer_office_status || 'Yangi loyihalar uchun ochiq'}
+                </span>
+              </li>
             </ul>
           </div>
         </div>
         <div className="foot-strip">
-          <span>{dictionary?.footer_copyright || "© MMXIX—MMXXVI · Jon Branding Atelier · Toshkent"}</span>
-          <span>{dictionary?.footer_made_in || "Made in Tashkent with care"}</span>
+          <span>
+            {dictionary?.footer_copyright || '© MMXIX—MMXXVI · Jon Branding Atelier · Toshkent'}
+          </span>
+          <span>{dictionary?.footer_made_in || 'Made in Tashkent with care'}</span>
         </div>
       </div>
     </footer>
@@ -1798,18 +2768,38 @@ export const ATStickyCta: FC<SectionProps> = ({ dictionary, onOpen }) => {
     setStage(active);
   }, []);
 
-  useMotionValueEvent(scrollY, "change", handleScroll);
+  useMotionValueEvent(scrollY, 'change', handleScroll);
 
   useEffect(() => {
     handleScroll(window.scrollY);
   }, [handleScroll]);
 
   const variants: Record<string, any> = {
-    belgilar: { num: '§ 01', text: dictionary?.sticky_belgilar_text || "Belgilarni ko'ryapsizmi?", cta: dictionary?.sticky_belgilar_cta || "Tashxis →" },
-    tashxis:  { num: '12/12', text: dictionary?.sticky_tashxis_text || "12 mezon · 14 kun · 4.8M dan", cta: dictionary?.sticky_tashxis_cta || "Boshlash →" },
-    narxlar:  { num: '4/6',   text: dictionary?.sticky_narxlar_text || "Iyul oyida 4 joy qoldi", cta: dictionary?.sticky_narxlar_cta || "Buyurtma →" },
-    jarayon:  { num: '14',    text: dictionary?.sticky_jarayon_text || "14 kun · 100% kafolat", cta: dictionary?.sticky_jarayon_cta || "Tashxis →" },
-    savol:    { num: '24h',   text: dictionary?.sticky_savol_text || "Savol bormi? 24h ichida javob", cta: dictionary?.sticky_savol_cta || "Yozish →" },
+    belgilar: {
+      num: '§ 01',
+      text: dictionary?.sticky_belgilar_text || "Belgilarni ko'ryapsizmi?",
+      cta: dictionary?.sticky_belgilar_cta || 'Tashxis →',
+    },
+    tashxis: {
+      num: '12/12',
+      text: dictionary?.sticky_tashxis_text || '12 mezon · 14 kun · 4.8M dan',
+      cta: dictionary?.sticky_tashxis_cta || 'Boshlash →',
+    },
+    narxlar: {
+      num: '4/6',
+      text: dictionary?.sticky_narxlar_text || 'Iyul oyida 4 joy qoldi',
+      cta: dictionary?.sticky_narxlar_cta || 'Buyurtma →',
+    },
+    jarayon: {
+      num: '14',
+      text: dictionary?.sticky_jarayon_text || '14 kun · 100% kafolat',
+      cta: dictionary?.sticky_jarayon_cta || 'Tashxis →',
+    },
+    savol: {
+      num: '24h',
+      text: dictionary?.sticky_savol_text || 'Savol bormi? 24h ichida javob',
+      cta: dictionary?.sticky_savol_cta || 'Yozish →',
+    },
   };
   const v = variants[stage] || variants.belgilar;
 
@@ -1842,29 +2832,79 @@ export const ATTweaks: FC<ATTweaksProps> = ({
   grain,
   setGrain,
   accent,
-  setAccent
+  setAccent,
 }) => {
   if (!visible) return null;
 
   return (
     <div className="tw">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-        <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--muted)', fontWeight: 600 }}>Tweaks</span>
-        <button onClick={onClose} style={{ width: 24, height: 24, borderRadius: '50%', border: '1px solid var(--line)', display: 'grid', placeItems: 'center', fontSize: 11 }}>✕</button>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 10,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: 10,
+            letterSpacing: '.1em',
+            textTransform: 'uppercase',
+            color: 'var(--muted)',
+            fontWeight: 600,
+          }}
+        >
+          Tweaks
+        </span>
+        <button
+          onClick={onClose}
+          style={{
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            border: '1px solid var(--line)',
+            display: 'grid',
+            placeItems: 'center',
+            fontSize: 11,
+          }}
+        >
+          ✕
+        </button>
       </div>
       <div className="tw-r">
         <span>Rejim</span>
         <div style={{ display: 'flex', gap: 4 }}>
-          {[['light', "yorug'"], ['dark', "qorong'i"]].map(([t, l]) => (
-            <button key={t} className={`tw-pill ${theme === t ? 'on' : ''}`} onClick={() => setTheme(t)}>{l}</button>
+          {[
+            ['light', "yorug'"],
+            ['dark', "qorong'i"],
+          ].map(([t, l]) => (
+            <button
+              key={t}
+              className={`tw-pill ${theme === t ? 'on' : ''}`}
+              onClick={() => setTheme(t)}
+            >
+              {l}
+            </button>
           ))}
         </div>
       </div>
       <div className="tw-r">
         <span>Aksent</span>
         <div style={{ display: 'flex', gap: 4 }}>
-          {[['cobalt', 'kobalt'], ['terra', 'terra'], ['ink', 'siyoh']].map(([t, l]) => (
-            <button key={t} className={`tw-pill ${accent === t ? 'on' : ''}`} onClick={() => setAccent(t)}>{l}</button>
+          {[
+            ['cobalt', 'kobalt'],
+            ['terra', 'terra'],
+            ['ink', 'siyoh'],
+          ].map(([t, l]) => (
+            <button
+              key={t}
+              className={`tw-pill ${accent === t ? 'on' : ''}`}
+              onClick={() => setAccent(t)}
+            >
+              {l}
+            </button>
           ))}
         </div>
       </div>

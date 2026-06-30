@@ -29,3 +29,7 @@ which are often suppressed by reset stylesheets or `outline-none`.
 ## 2025-02-12 - Framer Motion AnimatePresence Exit Animations
 **Learning:** In this project, when conditionally rendering children inside Framer Motion's `<AnimatePresence>`, the direct conditionally rendered child component MUST have a unique `key` prop. Without it, Framer Motion cannot track the component's presence lifecycle and the `exit` animation will be abruptly skipped. This was observed in floating widgets like OishaWidget.
 **Action:** Always verify that the top-level motion component inside `<AnimatePresence>` (like `<motion.div>`) has an explicit, stable `key` prop (e.g. `key="modal-name"`) when creating or fixing interactive modals and widgets.
+
+## 2025-02-12 - Video Lightbox Close Button A11y
+**Learning:** The custom video lightbox in the Atelier section (`<button>` at line 1581) lacked essential accessibility attributes, preventing proper keyboard navigation and screen reader support.
+**Action:** Added `type="button"`, `aria-label="Close video"`, `aria-hidden="true"` to the inner `<X />` icon, and explicit `focus-visible` utility classes to ensure it behaves like a semantic and accessible button.
