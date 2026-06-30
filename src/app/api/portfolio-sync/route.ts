@@ -29,7 +29,8 @@ async function handleSync(request: NextRequest) {
     const secret = request.nextUrl.searchParams.get('secret');
     const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET || '';
     const authHeader = request.headers.get('authorization');
-    const isVercelCron = authHeader === `Bearer ${process.env.CRON_SECRET}`;
+    const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+    const isVercelCron = Boolean(process.env.CRON_SECRET) && Boolean(bearerToken) && safeCompare(bearerToken!, process.env.CRON_SECRET!);
 
     if (!cronSecret && !isVercelCron) {
       return NextResponse.json(
