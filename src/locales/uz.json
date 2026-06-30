@@ -1411,6 +1411,13 @@
       "title": "Biz va raqobatchilar",
       "description": "Biz yuqori sifatli brending xizmatlarini premium agentliklarga qaraganda ancha hamyonbop narxlarda taqdim etamiz. Natija esa siz kutganingizdan ham a'lo bo'ladi.",
       "features": "Xususiyatlari",
+      "featureLabels": {
+        "namingPremium": "Naming Premium",
+        "logoIdentity": "Logo va firma uslubi",
+        "packagingDesign": "Qadoq dizayni",
+        "brandStrategy": "Brend-strategiya va platforma",
+        "satisfactionGuarantee": "100% Mamnuniyat kafolati"
+      },
       "whyPremiumTitle": "Nega faqat premium agentliklar bilan?",
       "whyPremiumDesc": "Biz o'zimizni faqat strategik yondashuvga ega yuqori darajadagi kompaniyalar bilan solishtiramiz. Maqsadimiz — shunchaki arzon bo'lish emas, balki premium sifatni hamyonbop narxda taqdim etishdir. Sifat va strategiya bo'yicha bizning darajamizga mos kelmaydigan agentliklar bilan solishtirish mijoz uchun ham, biz uchun ham noto'g'ri bo'lar edi.",
       "ctaTitle": "Siz farqni ko'rdingiz. Endi tanlash vaqti keldi!",
@@ -2037,7 +2044,7 @@
     ],
     "hero_eyebrow": "Markaziy Osiyo · Brand atelier · Est. 2019",
     "hero_pill": "Yangi paketlar endi mavjud",
-    "hero_title": "Brendingiz\naslida*\nqancha yo'qotyapti?",
+    "hero_title": "Brendingiz\naslida\nqancha yo'qotyapti?",
     "hero_lede": "Brend tashxisi — biznesingizning ko'rinmas yo'qotishlarini topish. 14 kun · 12 mezon · 30—50 betlik hisobot · aniq raqamlarda. Bepul mini-tashxis bilan boshlang — keyin xohlasangiz to'liqqa o'tasiz.",
     "hero_cta": "Bepul mini-tashxis boshlash",
     "hero_cta_sub": "yoki paketlarni ko'ring",
@@ -2079,6 +2086,14 @@
     "gallery_lede": "2023—2025 davrida tanlangan 6 ta loyiha. Har biri real biznes, real qadoq, real natija. Sohaga qarab filterlang.",
     "gallery_similar": "O'xshash biznesmisiz? Sizga ham shunday natija mumkin.",
     "gallery_cta": "Mening biznesim uchun tashxis",
+    "gallery_categories": {
+      "brand-strategy": "Brend-strategiya",
+      "logo-design": "Logotip dizayni",
+      "brandbook": "Brendbuk",
+      "corporate-style": "Firma uslubi",
+      "packaging": "Qadoq dizayni",
+      "naming": "Neyming"
+    },
     "audit_title": "Tashxisda\nnimalarni tekshiramiz.",
     "audit_lede": "12 mezon · 4 yo'nalish. Har bir nuqta 0—100 baholanadi, yo'qotilayotgan daromad esa aniq raqamda hisoblanadi. Hech bir tomon e'tibordan chetda qolmaydi.",
     "audit_deliv_title": "Tashxis yakuni · Sizga nima beriladi",

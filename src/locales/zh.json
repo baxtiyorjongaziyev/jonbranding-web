@@ -1236,6 +1236,13 @@
       "title": "我们与竞争对手",
       "description": "我们不仅提供比高端机构更具性价比的价格，更确保提交的品牌成果超越您的期望。",
       "features": "服务特性",
+      "featureLabels": {
+        "namingPremium": "Naming Premium",
+        "logoIdentity": "标志与视觉识别",
+        "packagingDesign": "包装设计",
+        "brandStrategy": "品牌战略与平台",
+        "satisfactionGuarantee": "100% 满意保证"
+      },
       "whyPremiumTitle": "为什么只跟高端机构比？",
       "whyPremiumDesc": "我们只与具备战略思维的顶级公司对标。我们的目标并非单纯的低价，而是在确保顶级品质的同时，回归合理的商业价格。与不具备战略高度的小作坊进行对比，是对客户和我们专业度的不负责任。",
       "ctaTitle": "差异显而易见。现在，做出您的明智选择！",
@@ -1904,6 +1911,14 @@
     "gallery_lede": "2023—2025 期间精选的 6 个项目。每个都是真实的业务、真实的包装、真实的结果。按行业筛选。",
     "gallery_similar": "您的业务类似吗？您也可以获得同样的结果。",
     "gallery_cta": "为我的业务进行诊断",
+    "gallery_categories": {
+      "brand-strategy": "品牌战略",
+      "logo-design": "标志设计",
+      "brandbook": "品牌手册",
+      "corporate-style": "企业风格",
+      "packaging": "包装设计",
+      "naming": "命名"
+    },
     "audit_title": "诊断中\n我们检查什么。",
     "audit_lede": "12 项标准 · 4 个方向。每个点都以 0-100 分进行评估，损失的收入以精确的数字计算。任何方面都不会被忽视。",
     "audit_deliv_title": "诊断总结 · 您将获得什么",

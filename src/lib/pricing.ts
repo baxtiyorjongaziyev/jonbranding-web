@@ -2,6 +2,7 @@
 
 const USD_TO_UZS_RATE = 12700;
 export const ALLOWED_PROMO_CODES = ['PCG', 'TEZNATIJA', 'KURSDOSH', 'RAMAZON'] as const;
+const PUBLIC_PROMO_CODES = ['RAMAZON'] as const;
 const SPECIAL_PROMO_CODES = ['PCG', 'TEZNATIJA', 'KURSDOSH'] as const;
 
 type PromoCode = typeof ALLOWED_PROMO_CODES[number];
@@ -391,31 +392,44 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz', dict
         savings: totalBeforeDiscounts - finalPrice, 
         isPromoApplied,
         invalidPromo,
-        allowedPromoCodes: ALLOWED_PROMO_CODES
+        allowedPromoCodes: PUBLIC_PROMO_CODES
     };
 }
 
-export const comparisonData = (lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz') => {
-    const isUz = lang === 'uz';
+type ComparisonFeatureLabels = {
+    namingPremium?: string;
+    logoIdentity?: string;
+    packagingDesign?: string;
+    brandStrategy?: string;
+    satisfactionGuarantee?: string;
+};
+
+const getComparisonFeatureLabel = (labels: ComparisonFeatureLabels | undefined, key: keyof ComparisonFeatureLabels) =>
+    typeof labels?.[key] === 'string' && labels[key]?.trim() ? labels[key] : key;
+
+export const comparisonData = (
+    _lang: 'uz' | 'ru' | 'en' | 'zh' = 'uz',
+    featureLabels?: ComparisonFeatureLabels,
+) => {
     return [
         { 
-            feature: isUz ? "Naming Premium" : "Naming Premium", 
+            feature: getComparisonFeatureLabel(featureLabels, 'namingPremium'),
             competitors: { jon: "$980", mano: "$3,150", abba: "$3,000", mountain: "$2,750" } 
         },
         { 
-            feature: isUz ? "Logo va firma uslubi" : "Logo & Visual Identity", 
+            feature: getComparisonFeatureLabel(featureLabels, 'logoIdentity'),
             competitors: { jon: "$1,550", mano: "$6,450", abba: "$6,150", mountain: "$5,600" } 
         },
         { 
-            feature: isUz ? "Qadoq dizayni" : "Packaging Design", 
+            feature: getComparisonFeatureLabel(featureLabels, 'packagingDesign'),
             competitors: { jon: "$1,150", mano: "$9,450", abba: "$6,300", mountain: "$4,700" } 
         },
         { 
-            feature: isUz ? "Brend-strategiya va platforma" : "Brand Strategy & Platform", 
+            feature: getComparisonFeatureLabel(featureLabels, 'brandStrategy'),
             competitors: { jon: "$4,750", mano: "$18,900", abba: null, mountain: false } 
         },
         { 
-            feature: isUz ? "100% Mamnuniyat Kafolati" : "100% Satisfaction Guarantee", 
+            feature: getComparisonFeatureLabel(featureLabels, 'satisfactionGuarantee'),
             competitors: { jon: true, mano: false, abba: false, mountain: false } 
         }
     ];

@@ -598,44 +598,9 @@ interface ATGalleryProps {
 
 const TILE_CLASSES = ['t-1', 't-2', 't-3', 't-4', 't-5'];
 
-const CATEGORY_LABELS: Record<string, Record<string, string>> = {
-  uz: {
-    'brand-strategy': 'Brend-strategiya',
-    'logo-design': 'Logotip dizayni',
-    'brandbook': 'Brendbuk',
-    'corporate-style': 'Firma uslubi',
-    'packaging': 'Qadoq dizayni',
-    'naming': 'Neyming',
-  },
-  ru: {
-    'brand-strategy': 'Бренд-стратегия',
-    'logo-design': 'Дизайн логотипа',
-    'brandbook': 'Брендбук',
-    'corporate-style': 'Фирменный стиль',
-    'packaging': 'Дизайн упаковки',
-    'naming': 'Нейминг',
-  },
-  en: {
-    'brand-strategy': 'Brand Strategy',
-    'logo-design': 'Logo Design',
-    'brandbook': 'Brandbook',
-    'corporate-style': 'Corporate Style',
-    'packaging': 'Packaging Design',
-    'naming': 'Naming',
-  },
-  zh: {
-    'brand-strategy': '品牌战略',
-    'logo-design': '标志设计',
-    'brandbook': '品牌手册',
-    'corporate-style': '企业风格',
-    'packaging': '包装设计',
-    'naming': '命名',
-  },
-};
-
-function getCategoryLabel(category: string | undefined, lang: string): string {
+function getCategoryLabel(category: string | undefined, dictionary: any): string {
   if (!category) return '';
-  const labels = CATEGORY_LABELS[lang] || CATEGORY_LABELS.uz;
+  const labels = dictionary?.gallery_categories || {};
   return labels[category] || category;
 }
 
@@ -663,7 +628,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
       name: p.title,
       yr: getYear(p),
       city: p.city || '',
-      cat: getCategoryLabel(p.category, lang),
+      cat: getCategoryLabel(p.category, dictionary),
       res: getFirstResult(p),
       ind: p.industry || 'food',
       slug: p.slug,
@@ -712,6 +677,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   fill
                   unoptimized
                   quality={100}
+                  priority={i < 2}
                   className="object-cover transition-transform duration-500 hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 100vw"
                 />
@@ -1389,7 +1355,7 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
             : "Mijozlar o'z so'zlari bilan."}
         </h2>
         <div className="lede" style={{ maxWidth: 500 }}>
-          <p dangerouslySetInnerHTML={{ __html: dictionary?.quotes_lede || "Har bir gap real biznes egasidan, real loyiha haqida. <br/><strong>Yolg'on yoki bo'rttirma yo'q</strong> — tekshirishingiz mumkin." }} />
+          <p>{dictionary?.quotes_lede || "Har bir gap real biznes egasidan, real loyiha haqida. Yolg'on yoki bo'rttirma yo'q — tekshirishingiz mumkin."}</p>
         </div>
       </div>
 
@@ -1575,6 +1541,8 @@ export const ATQuotes: FC<ATQuotesProps> = ({ dictionary, testimonials: testimon
                 title={`${activeVideo.name} video`}
                 style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
                 allow="autoplay; fullscreen; picture-in-picture"
+                sandbox="allow-scripts allow-same-origin allow-presentation"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             )}
@@ -1793,9 +1761,15 @@ export const ATStickyCta: FC<SectionProps> = ({ dictionary, onOpen }) => {
     setShow(y > h * 0.6);
 
     let active = 'belgilar';
+    let activeTop = Number.NEGATIVE_INFINITY;
     for (const id of STICKY_SECTION_IDS) {
       const el = document.getElementById(id);
-      if (el && el.getBoundingClientRect().top <= 200) active = id;
+      if (!el) continue;
+      const top = el.getBoundingClientRect().top;
+      if (top <= 200 && top > activeTop) {
+        active = id;
+        activeTop = top;
+      }
     }
     setStage(active);
   }, []);

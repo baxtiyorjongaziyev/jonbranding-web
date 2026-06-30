@@ -1228,6 +1228,13 @@
       "title": "Us vs Competitors",
       "description": "High-quality branding at accessible prices compared to premium agencies.",
       "features": "Features",
+      "featureLabels": {
+        "namingPremium": "Naming Premium",
+        "logoIdentity": "Logo & Visual Identity",
+        "packagingDesign": "Packaging Design",
+        "brandStrategy": "Brand Strategy & Platform",
+        "satisfactionGuarantee": "100% Satisfaction Guarantee"
+      },
       "whyPremiumTitle": "Why only with premium agencies?",
       "whyPremiumDesc": "We only compare ourselves with high-level companies that have a strategic approach. Our goal is not just to be cheap, but to provide premium quality at an affordable price. Comparing with agencies that don't match our level in quality and strategy would be wrong for both the client and us.",
       "ctaTitle": "You've seen the difference. Now it's time to choose!",
@@ -1896,6 +1903,14 @@
     "gallery_lede": "6 selected projects from 2023—2025. Each represents a real business, real packaging, real results. Filter by industry.",
     "gallery_similar": "Do you have a similar business? You can achieve the same results.",
     "gallery_cta": "Diagnosis for my business",
+    "gallery_categories": {
+      "brand-strategy": "Brand Strategy",
+      "logo-design": "Logo Design",
+      "brandbook": "Brandbook",
+      "corporate-style": "Corporate Style",
+      "packaging": "Packaging Design",
+      "naming": "Naming"
+    },
     "audit_title": "What we examine\nin a diagnosis.",
     "audit_lede": "12 criteria · 4 directions. Each point is rated 0—100, and lost revenue is calculated with precise figures. No aspect is overlooked.",
     "audit_deliv_title": "Diagnosis outcome · What you receive",

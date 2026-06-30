@@ -40,7 +40,7 @@ const Comparison: React.FC<ComparisonProps> = ({ onCtaClick, lang, dictionary })
   if (!translations) {
       return null;
   }
-  const cData = comparisonData(lang as 'uz' | 'ru' | 'en' | 'zh');
+  const cData = comparisonData(lang as 'uz' | 'ru' | 'en' | 'zh', translations.featureLabels);
 
   return (
     <section className="py-16 sm:py-24 bg-white" suppressHydrationWarning>

@@ -24,9 +24,15 @@ const AtStickyCta: FC<Props> = ({ dictionary, onOpen }) => {
     setShow(y > h * 0.6);
 
     let active: Stage = 'belgilar';
+    let activeTop = Number.NEGATIVE_INFINITY;
     for (const id of stages) {
       const el = document.getElementById(id);
-      if (el && el.getBoundingClientRect().top <= 200) active = id;
+      if (!el) continue;
+      const top = el.getBoundingClientRect().top;
+      if (top <= 200 && top > activeTop) {
+        active = id;
+        activeTop = top;
+      }
     }
     setStage(active);
   }, []);
@@ -70,14 +76,21 @@ const AtStickyCta: FC<Props> = ({ dictionary, onOpen }) => {
         <span className="min-w-[100px] flex-1 truncate text-[11px] sm:text-sm" style={{ color: 'rgba(244,241,232,.7)' }}>
           {v.text}
         </span>
-        <button
+        <motion.button
           onClick={onOpen}
-          className="group relative shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition-all hover:opacity-90 sm:text-sm"
+          whileHover={{ opacity: 0.9 }}
+          className="group relative shrink-0 rounded-full px-4 py-2 text-xs font-semibold sm:text-sm"
           style={{ background: 'var(--at-accent)', color: '#fff', whiteSpace: 'nowrap' }}
         >
           <span className="relative z-10">{v.cta}</span>
-          <span className="absolute inset-0 rounded-full opacity-20 animate-ping" style={{ background: 'var(--at-accent)' }} />
-        </button>
+          <motion.span
+            aria-hidden
+            className="absolute inset-0 rounded-full"
+            style={{ background: 'var(--at-accent)' }}
+            animate={{ scale: [1, 1.6], opacity: [0.2, 0] }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeOut' }}
+          />
+        </motion.button>
       </div>
     </motion.div>
   );
