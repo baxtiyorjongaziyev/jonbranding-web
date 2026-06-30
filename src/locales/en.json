@@ -1214,6 +1214,13 @@
         "split": "50/50",
         "full": "100%"
       },
+      "pricingLabels": {
+        "urgentSurcharge": "Urgent project (+50%)",
+        "ndaSurcharge": "NDA (Confidentiality) (+50%)",
+        "ramazonDiscount": "Ramazon discount (-30%)",
+        "specialDiscount": "Special discount (-50%)",
+        "fullPaymentDiscount": "100% upfront payment (-10%)"
+      },
       "empty_package_desc": "No services selected. Please select appropriate services.",
       "recommended": "Recommended"
     },
@@ -1942,16 +1949,35 @@
     "footer_office_status": "Open for new projects",
     "footer_copyright": "© MMXIX—MMXXVI · Jon Branding Atelier · Tashkent",
     "footer_made_in": "Made in Tashkent with care",
-    "sticky_belgilar_text": "Do you recognize the signs?",
-    "sticky_belgilar_cta": "Diagnosis →",
-    "sticky_tashxis_text": "12 criteria · 14 days · from 4.8M",
-    "sticky_tashxis_cta": "Begin →",
-    "sticky_narxlar_text": "Only 4 slots left in July",
-    "sticky_narxlar_cta": "Book Now →",
-    "sticky_jarayon_text": "14 days · 100% guarantee",
-    "sticky_jarayon_cta": "Diagnosis →",
-    "sticky_savol_text": "Questions? Response within 24h",
-    "sticky_savol_cta": "Inquire →",
+    "sticky_cta": {
+      "variants": {
+        "belgilar": {
+          "num": "§ 01",
+          "text": "Do you recognize the signs?",
+          "cta": "Diagnosis →"
+        },
+        "tashxis": {
+          "num": "12/12",
+          "text": "12 criteria · 14 days · from 4.8M",
+          "cta": "Begin →"
+        },
+        "narxlar": {
+          "num": "4/6",
+          "text": "Only 4 slots left in July",
+          "cta": "Book Now →"
+        },
+        "jarayon": {
+          "num": "14",
+          "text": "14 days · 100% guarantee",
+          "cta": "Diagnosis →"
+        },
+        "savol": {
+          "num": "24h",
+          "text": "Questions? Response within 24h",
+          "cta": "Inquire →"
+        }
+      }
+    },
     "pricing_guarantee_1_lbl": "Guarantee",
     "pricing_guarantee_1_val": "100% Money-Back",
     "pricing_guarantee_2_lbl": "Duration",

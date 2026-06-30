@@ -1,54 +1,55 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useScroll, useMotionValueEvent } from 'framer-motion';
+import { useState, useEffect, useCallback, type FC } from 'react';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 
 interface Props {
+  dictionary?: any;
   onOpen: () => void;
 }
 
-const variants = {
-  belgilar: { num: '§ 01', text: "Belgilarni ko'ryapsizmi?", cta: 'Tashxis →' },
-  tashxis: { num: '12/12', text: '12 mezon · 14 kun · 4.8M dan', cta: 'Boshlash →' },
-  narxlar: { num: '4/6', text: 'Iyul oyida 4 joy qoldi', cta: 'Buyurtma →' },
-  jarayon: { num: '14', text: '14 kun · 100% kafolat', cta: 'Tashxis →' },
-  savol: { num: '24h', text: 'Savol bormi? 24h ichida javob', cta: 'Yozish →' },
-} as const;
+const stages = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'] as const;
 
-type Stage = keyof typeof variants;
+type Stage = typeof stages[number];
+type StickyCtaVariant = { num: string; text: string; cta: string };
 
-export default function AtStickyCta({ onOpen }: Props) {
+const AtStickyCta: FC<Props> = ({ dictionary, onOpen }) => {
   const [show, setShow] = useState(false);
   const [stage, setStage] = useState<Stage>('belgilar');
   const { scrollY } = useScroll();
+  const variants = dictionary?.sticky_cta?.variants as Partial<Record<Stage, StickyCtaVariant>> | undefined;
 
-  const handler = (y: number) => {
+  const handleScroll = useCallback((y: number) => {
     const h = window.innerHeight;
     setShow(y > h * 0.6);
-    const sections: Stage[] = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
+
     let active: Stage = 'belgilar';
-    for (const id of sections) {
+    for (const id of stages) {
       const el = document.getElementById(id);
-      if (el && y + 200 >= el.offsetTop) active = id;
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 200) active = id;
+      }
     }
     setStage(active);
-  };
-
-  useMotionValueEvent(scrollY, 'change', handler);
-
-  useEffect(() => {
-    handler(window.scrollY);
   }, []);
 
-  const v = variants[stage];
+  useMotionValueEvent(scrollY, 'change', handleScroll);
+
+  useEffect(() => {
+    handleScroll(window.scrollY);
+  }, [handleScroll]);
+
+  const v = variants?.[stage] || variants?.belgilar;
+
+  if (!v) return null;
 
   return (
-    <div
-      className="fixed bottom-4 left-1/2 z-40 transition-all duration-300"
-      style={{
-        transform: `translateX(-50%) translateY(${show ? '0' : '80px'})`,
-        opacity: show ? 1 : 0,
-        pointerEvents: show ? 'auto' : 'none',
-      }}
+    <motion.div
+      className="fixed bottom-4 left-1/2 z-40"
+      initial={{ x: '-50%', y: 80, opacity: 0 }}
+      animate={{ x: '-50%', y: show ? 0 : 80, opacity: show ? 1 : 0 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      style={{ pointerEvents: show ? 'auto' : 'none' }}
     >
       <div
         className="flex items-center gap-4 px-5 py-3 rounded-full shadow-2xl"
@@ -79,6 +80,8 @@ export default function AtStickyCta({ onOpen }: Props) {
           {v.cta}
         </button>
       </div>
-    </div>
+    </motion.div>
   );
-}
+};
+
+export default AtStickyCta;

@@ -213,7 +213,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
-    const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any);
+    const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any, translations);
 
     useEffect(() => {
         if (total.isPromoApplied && !hasCelebrated) {
@@ -455,7 +455,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                         </div>
                                         {total.invalidPromo && (
                                             <p className="mt-2 text-sm font-semibold text-red-500">
-                                                {translations.promo_code_invalid || "Noto'g'ri promokod"}: PCG, TEZNATIJA, KURSDOSH, RAMAZON
+                                                {translations.promo_code_invalid}: {total.allowedPromoCodes.join(', ')}
                                             </p>
                                         )}
                                         {total.isPromoApplied && (

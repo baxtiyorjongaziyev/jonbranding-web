@@ -1220,6 +1220,13 @@
         "split": "50/50",
         "full": "100%"
       },
+      "pricingLabels": {
+        "urgentSurcharge": "加急项目 (+50%)",
+        "ndaSurcharge": "NDA（保密）(+50%)",
+        "ramazonDiscount": "Ramazon 优惠 (-30%)",
+        "specialDiscount": "特别优惠 (-50%)",
+        "fullPaymentDiscount": "100% 预付款 (-10%)"
+      },
       "empty_package_desc": "您尚未选择任何服务。请至少选择一项服务。",
       "recommended": "专家推荐"
     },
@@ -1948,16 +1955,35 @@
     "footer_office_status": "对新项目开放",
     "footer_copyright": "© MMXIX—MMXXVI · Jon Branding Atelier · 塔什干",
     "footer_made_in": "在塔什干精心制作",
-    "sticky_belgilar_text": "您看到这些迹象了吗？",
-    "sticky_belgilar_cta": "诊断 →",
-    "sticky_tashxis_text": "12 项标准 · 14 天 · 始于 4.8M",
-    "sticky_tashxis_cta": "立即开始 →",
-    "sticky_narxlar_text": "七月仅余 4 个名额",
-    "sticky_narxlar_cta": "立即预订 →",
-    "sticky_jarayon_text": "14 天 · 100% 保证",
-    "sticky_jarayon_cta": "诊断 →",
-    "sticky_savol_text": "有疑问？24 小时内回复",
-    "sticky_savol_cta": "联系我们 →",
+    "sticky_cta": {
+      "variants": {
+        "belgilar": {
+          "num": "§ 01",
+          "text": "您看到这些迹象了吗？",
+          "cta": "诊断 →"
+        },
+        "tashxis": {
+          "num": "12/12",
+          "text": "12 项标准 · 14 天 · 始于 4.8M",
+          "cta": "立即开始 →"
+        },
+        "narxlar": {
+          "num": "4/6",
+          "text": "七月仅余 4 个名额",
+          "cta": "立即预订 →"
+        },
+        "jarayon": {
+          "num": "14",
+          "text": "14 天 · 100% 保证",
+          "cta": "诊断 →"
+        },
+        "savol": {
+          "num": "24h",
+          "text": "有疑问？24 小时内回复",
+          "cta": "联系我们 →"
+        }
+      }
+    },
     "pricing_guarantee_1_lbl": "保证",
     "pricing_guarantee_1_val": "100% 退款",
     "pricing_guarantee_2_lbl": "期限",

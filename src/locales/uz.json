@@ -1383,6 +1383,13 @@
         "split": "50/50",
         "full": "100%"
       },
+      "pricingLabels": {
+        "urgentSurcharge": "Shoshilinch loyiha (+50%)",
+        "ndaSurcharge": "NDA (Maxfiylik) (+50%)",
+        "ramazonDiscount": "Ramazon chegirmasi (-30%)",
+        "specialDiscount": "Maxsus chegirma (-50%)",
+        "fullPaymentDiscount": "100% oldindan to'lov (-10%)"
+      },
       "empty_package_desc": "Xizmatlar tanlanmagan. Iltimos, mos xizmatlarni tanlang.",
       "recommended": "Tavsiya etiladi"
     },
@@ -2111,16 +2118,35 @@
     "footer_office_status": "Yangi loyihalar uchun ochiq",
     "footer_copyright": "© MMXIX—MMXXVI · Jon Branding Atelier · Toshkent",
     "footer_made_in": "Made in Tashkent with care",
-    "sticky_belgilar_text": "Belgilarni ko'ryapsizmi?",
-    "sticky_belgilar_cta": "Tashxis →",
-    "sticky_tashxis_text": "12 mezon · 14 kun · 4.8M dan",
-    "sticky_tashxis_cta": "Boshlash →",
-    "sticky_narxlar_text": "Iyul oyida 4 joy qoldi",
-    "sticky_narxlar_cta": "Buyurtma →",
-    "sticky_jarayon_text": "14 kun · 100% kafolat",
-    "sticky_jarayon_cta": "Tashxis →",
-    "sticky_savol_text": "Savol bormi? 24h ichida javob",
-    "sticky_savol_cta": "Yozish →",
+    "sticky_cta": {
+      "variants": {
+        "belgilar": {
+          "num": "§ 01",
+          "text": "Belgilarni ko'ryapsizmi?",
+          "cta": "Tashxis →"
+        },
+        "tashxis": {
+          "num": "12/12",
+          "text": "12 mezon · 14 kun · 4.8M dan",
+          "cta": "Boshlash →"
+        },
+        "narxlar": {
+          "num": "4/6",
+          "text": "Iyul oyida 4 joy qoldi",
+          "cta": "Buyurtma →"
+        },
+        "jarayon": {
+          "num": "14",
+          "text": "14 kun · 100% kafolat",
+          "cta": "Tashxis →"
+        },
+        "savol": {
+          "num": "24h",
+          "text": "Savol bormi? 24h ichida javob",
+          "cta": "Yozish →"
+        }
+      }
+    },
     "pricing_guarantee_1_lbl": "Kafolat",
     "pricing_guarantee_1_val": "100% pul qaytarish",
     "pricing_guarantee_2_lbl": "Muddati",

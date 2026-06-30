@@ -1649,6 +1649,8 @@ export const ATFooter: FC<{ dictionary: any }> = ({ dictionary }) => {
 export const ATStickyCta: FC<SectionProps> = ({ dictionary, onOpen }) => {
   const [show, setShow] = useState(false);
   const [stage, setStage] = useState('belgilar');
+  const sections = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
+  const variants = dictionary?.sticky_cta?.variants || {};
 
   useEffect(() => {
     const on = () => {
@@ -1656,11 +1658,10 @@ export const ATStickyCta: FC<SectionProps> = ({ dictionary, onOpen }) => {
       const h = window.innerHeight;
       setShow(y > h * 0.6);
       
-      const sections = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
       let active = 'belgilar';
       for (const id of sections) {
         const el = document.getElementById(id);
-        if (el && y + 200 >= el.offsetTop) active = id;
+        if (el && el.getBoundingClientRect().top <= 200) active = id;
       }
       setStage(active);
     };
@@ -1669,14 +1670,9 @@ export const ATStickyCta: FC<SectionProps> = ({ dictionary, onOpen }) => {
     return () => window.removeEventListener('scroll', on);
   }, []);
 
-  const variants: Record<string, any> = {
-    belgilar: { num: '§ 01', text: dictionary?.sticky_belgilar_text || "Belgilarni ko'ryapsizmi?", cta: dictionary?.sticky_belgilar_cta || "Tashxis →" },
-    tashxis:  { num: '12/12', text: dictionary?.sticky_tashxis_text || "12 mezon · 14 kun · 4.8M dan", cta: dictionary?.sticky_tashxis_cta || "Boshlash →" },
-    narxlar:  { num: '4/6',   text: dictionary?.sticky_narxlar_text || "Iyul oyida 4 joy qoldi", cta: dictionary?.sticky_narxlar_cta || "Buyurtma →" },
-    jarayon:  { num: '14',    text: dictionary?.sticky_jarayon_text || "14 kun · 100% kafolat", cta: dictionary?.sticky_jarayon_cta || "Tashxis →" },
-    savol:    { num: '24h',   text: dictionary?.sticky_savol_text || "Savol bormi? 24h ichida javob", cta: dictionary?.sticky_savol_cta || "Yozish →" },
-  };
   const v = variants[stage] || variants.belgilar;
+
+  if (!v) return null;
 
   return (
     <div className={`stick ${show ? 'show' : ''}`}>

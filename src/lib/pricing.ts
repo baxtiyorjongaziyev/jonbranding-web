@@ -2,6 +2,16 @@
 
 const USD_TO_UZS_RATE = 12700;
 export const ALLOWED_PROMO_CODES = ['PCG', 'TEZNATIJA', 'KURSDOSH', 'RAMAZON'] as const;
+const SPECIAL_PROMO_CODES = ['PCG', 'TEZNATIJA', 'KURSDOSH'] as const;
+
+type PromoCode = typeof ALLOWED_PROMO_CODES[number];
+type SpecialPromoCode = typeof SPECIAL_PROMO_CODES[number];
+
+const isAllowedPromoCode = (code: string): code is PromoCode =>
+    (ALLOWED_PROMO_CODES as readonly string[]).includes(code);
+
+const isSpecialPromoCode = (code: string): code is SpecialPromoCode =>
+    (SPECIAL_PROMO_CODES as readonly string[]).includes(code);
 
 export type SelectedServices = {
     audit?: boolean;
@@ -20,6 +30,17 @@ export type SelectedServices = {
     urgency?: boolean;
     nda?: boolean;
 };
+
+type PricingLabels = {
+    urgentSurcharge?: string;
+    ndaSurcharge?: string;
+    ramazonDiscount?: string;
+    specialDiscount?: string;
+    fullPaymentDiscount?: string;
+};
+
+const getPricingLabel = (labels: PricingLabels | undefined, key: keyof PricingLabels) =>
+    typeof labels?.[key] === 'string' && labels[key]?.trim() ? labels[key] : key;
 
 const basePricesUSD = {
     audit: 59,
@@ -301,8 +322,8 @@ export function formatPrice(priceInUSD: number, lang: string = 'uz', currency: '
     return `${price.toLocaleString('fr-FR')} ${currencyString}`;
 }
 
-export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any => {
-    const isUz = lang === 'uz';
+export const calculatePackagePrice = (selections: any, lang: string = 'uz', dictionary?: any): any => {
+    const pricingLabels = dictionary?.pricingLabels as PricingLabels | undefined;
     const { selectedServices, discountType = 'none', promoCode = '' } = selections;
     const sd = getServiceDetails(lang) as any;
     
@@ -323,13 +344,13 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     if (selectedServices.urgency) {
         const val = basePrice * 0.5;
         surchargesTotal += val;
-        const name = isUz ? 'Shoshilinch loyiha (+50%)' : 'Urgent (+50%)';
+        const name = getPricingLabel(pricingLabels, 'urgentSurcharge');
         surchargesApplied.push({ name, value: val });
     }
     if (selectedServices.nda) {
         const val = basePrice * 0.5;
         surchargesTotal += val;
-        const name = isUz ? 'NDA (Maxfiylik) (+50%)' : 'NDA (+50%)';
+        const name = getPricingLabel(pricingLabels, 'ndaSurcharge');
         surchargesApplied.push({ name, value: val });
     }
 
@@ -337,26 +358,26 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     let finalPrice = totalBeforeDiscounts;
     const discountsApplied = [];
 
-    const normalizedPromo = promoCode?.trim().toUpperCase();
+    const normalizedPromo = typeof promoCode === 'string' ? promoCode.trim().toUpperCase() : '';
     const isRamazonPromo = normalizedPromo === 'RAMAZON';
-    const isSpecialPromo = ['PCG', 'TEZNATIJA', 'KURSDOSH'].includes(normalizedPromo);
+    const isSpecialPromo = isSpecialPromoCode(normalizedPromo);
     const isPromoApplied = isRamazonPromo || isSpecialPromo;
-    const invalidPromo = Boolean(normalizedPromo) && !ALLOWED_PROMO_CODES.includes(normalizedPromo as typeof ALLOWED_PROMO_CODES[number]);
+    const invalidPromo = Boolean(normalizedPromo) && !isAllowedPromoCode(normalizedPromo);
 
     if (isRamazonPromo) {
         const val = totalBeforeDiscounts * 0.30;
-        const name = isUz ? 'Ramazon chegirmasi (-30%)' : 'Ramazon discount (-30%)';
+        const name = getPricingLabel(pricingLabels, 'ramazonDiscount');
         discountsApplied.push({ name, value: val });
         finalPrice -= val;
     } else if (isSpecialPromo) {
         const val = totalBeforeDiscounts * 0.50;
-        const name = isUz ? 'Maxsus chegirma (-50%)' : 'Special (-50%)';
+        const name = getPricingLabel(pricingLabels, 'specialDiscount');
         discountsApplied.push({ name, value: val });
         finalPrice -= val;
     } else {
         if (discountType === 'full') {
             const upfrontVal = totalBeforeDiscounts * 0.10;
-            const upfrontName = isUz ? "100% oldindan to'lov (-10%)" : "100% upfront payment (-10%)";
+            const upfrontName = getPricingLabel(pricingLabels, 'fullPaymentDiscount');
             discountsApplied.push({ name: upfrontName, value: upfrontVal });
             finalPrice -= upfrontVal;
         }

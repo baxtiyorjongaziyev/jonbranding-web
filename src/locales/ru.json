@@ -1214,6 +1214,13 @@
         "split": "50/50",
         "full": "100%"
       },
+      "pricingLabels": {
+        "urgentSurcharge": "Срочный проект (+50%)",
+        "ndaSurcharge": "NDA (Конфиденциальность) (+50%)",
+        "ramazonDiscount": "Скидка Рамазан (-30%)",
+        "specialDiscount": "Специальная скидка (-50%)",
+        "fullPaymentDiscount": "100% предоплата (-10%)"
+      },
       "empty_package_desc": "Услуги не выбраны. Пожалуйста, выберите подходящие услуги.",
       "recommended": "Рекомендуется"
     },
@@ -1942,16 +1949,35 @@
     "footer_office_status": "Открыты для новых проектов",
     "footer_copyright": "© MMXIX—MMXXVI · Jon Branding Atelier · Ташкент",
     "footer_made_in": "Made in Tashkent with care",
-    "sticky_belgilar_text": "Видите признаки?",
-    "sticky_belgilar_cta": "Диагностика →",
-    "sticky_tashxis_text": "12 критериев · 14 дней · от 4.8M",
-    "sticky_tashxis_cta": "Начать →",
-    "sticky_narxlar_text": "В июле осталось 4 места",
-    "sticky_narxlar_cta": "Заказать →",
-    "sticky_jarayon_text": "14 дней · 100% гарантия",
-    "sticky_jarayon_cta": "Диагностика →",
-    "sticky_savol_text": "Есть вопросы? Ответ в течение 24 часов",
-    "sticky_savol_cta": "Написать →",
+    "sticky_cta": {
+      "variants": {
+        "belgilar": {
+          "num": "§ 01",
+          "text": "Видите признаки?",
+          "cta": "Диагностика →"
+        },
+        "tashxis": {
+          "num": "12/12",
+          "text": "12 критериев · 14 дней · от 4.8M",
+          "cta": "Начать →"
+        },
+        "narxlar": {
+          "num": "4/6",
+          "text": "В июле осталось 4 места",
+          "cta": "Заказать →"
+        },
+        "jarayon": {
+          "num": "14",
+          "text": "14 дней · 100% гарантия",
+          "cta": "Диагностика →"
+        },
+        "savol": {
+          "num": "24h",
+          "text": "Есть вопросы? Ответ в течение 24 часов",
+          "cta": "Написать →"
+        }
+      }
+    },
     "pricing_guarantee_1_lbl": "Гарантия",
     "pricing_guarantee_1_val": "100% возврат средств",
     "pricing_guarantee_2_lbl": "Сроки",
