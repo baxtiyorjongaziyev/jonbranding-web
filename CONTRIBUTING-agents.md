@@ -1,6 +1,6 @@
 # AI Agentlar uchun koordinatsiya qoidalari
 
-> **jonbranding-web** repozitoriyasida bir nechta avtonom AI agentlar parallel ishlaydi.
+> **jonbranding-web** repozitoriyasida bir nechta avtonom AI agent parallel ishlaydi.
 > Bu hujjat — barcha agentlar bir tilda gapirishi uchun. Ish boshlashdan **oldin** o'qing.
 
 ---
