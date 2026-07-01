@@ -4,7 +4,15 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
-<<<<<<< Updated upstream
+## 2026-06-30 | Codex Sessiyasi
+
+**Nima qilindi:**
+- PR #240 uchun cron endpointlarda `CRON_SECRET` undefined bo'lganda `"Bearer undefined"` orqali auth bypass bo'lishi oldini olindi: Bearer token alohida ajratilib, secret mavjudligi tekshirildi va `safeCompare` ishlatildi (`portfolio-sync`, `reviews-sync`, `testimonials`).
+- `.jules/sentinel.md` da shu xavf bo'yicha sentinel yozuvi qo'shildi va markdown inline code formati GitHub reviewdagi `MD038` izohiga mos tuzatildi.
+- GitHub reviewdagi qolgan `DEV_LOG.md` entrysi va sentinel markdown izohlari yopildi.
+
+---
+
 ## 2026-06-28 | Antigravity Sessiyasi
 
 **Nima qilindi:**
@@ -18,14 +26,6 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 - `page.tsx` va `sotuvchi-kartochka/layout.tsx` metadata tavsiflaridan (link preview uchun) raqobatchilar nomlari (Ma'no, Mountain, Abba) olib tashlandi.
 - `globals.css` dizayn tizimidan Terracotta (olovrang/jigarrang) rangi butunlay olib tashlandi va o'rniga Cobalt Blue hamda neytral ranglarga o'zgartirildi.
 - Oisha chat ulanishi uchun `OISHA_API_URL` va `OISHA_SECRET_KEY` kalitlari Vercel CLI yordamida loyihaga qo'shildi.
-=======
-## 2026-06-30 | Codex Sessiyasi
-
-**Nima qilindi:**
-- `PR #240` bo'yicha qolgan review commentlar yopildi.
-- `DEV_LOG.md` ga ushbu sessiya uchun yangi entry qo'shildi.
-- `.jules/sentinel.md` dagi malformed inline code span tuzatildi.
->>>>>>> Stashed changes
 
 ---
 
@@ -104,11 +104,6 @@ GitHub Remote:    baxtiyorjongaziyev/jonbranding-web (origin)
                   baxtiyorjongaziyev/jonbranding.uz (production mirror)
 Deploy:           Firebase App Hosting (apphosting.yaml)
 ```
-<<<<<<< Updated upstream
-=======
-<<<<<<< ours
-=======
->>>>>>> Stashed changes
 
 - **[2026-06-28 12:11]** Fix: Vercel build failed due to outdated pnpm-lock.yaml (dotenv addition). Updated pnpm-lock.yaml and pushed to origin main to unblock Vercel deployments.
 - **[2026-06-28 13:51]** Fix: /presentation sahifasidagi infinite redirect loop tuzatildi. next.config.js dagi xato redirect olib tashlandi va src/proxy.ts middleware sifatida Next.js 16.2 konvensiyasiga moslashtirildi.
@@ -122,8 +117,3 @@ Deploy:           Firebase App Hosting (apphosting.yaml)
 
 Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testing — strategik reja va prioritetlar.
 - **[2026-06-29 15:30]** Feat: Oisha Proactive Mode — `oishaProactive` CustomEvent, widget auto-opens + sends message. `ProactiveTrigger` pagelarni (sotuvchi-kartochka 30s, xizmatlar 45s, quiz 60s, blog 90s) kuzatadi. 4 tilda xabarlar. Client-enhancements ga ulandi.
-<<<<<<< Updated upstream
-=======
-- **[2026-06-30 00:00]** Fix: ESLint flat-config circular JSON failure reproduksiya qilindi (`JSON.stringify(eslint.config.mjs)` react/typescript-eslint/@next plugin `configs` sikllarida yiqildi). `eslint.config.mjs` Next core-web-vitals pluginlarini serializable wrapper orqali sanitizatsiya qiladi; PR #190 va oldingi palette PRlaridagi bir xil flat-config serialization failure unblock bo'ladi. Qo'shimcha ravishda lint CI toza o'tishi uchun Oisha widget hook tartibi va portfolio-bot `oisha.ts` duplikat/sintaksis xatosi tuzatildi.
->>>>>>> theirs
->>>>>>> Stashed changes

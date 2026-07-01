@@ -34,9 +34,10 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get('authorization');
-  const isAuthorized = authHeader === `Bearer ${CRON_SECRET}`;
+  const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+  const isAuthorized = Boolean(CRON_SECRET) && Boolean(bearerToken) && safeCompare(bearerToken!, CRON_SECRET);
   const secret = req.nextUrl.searchParams.get('secret');
-  const isSecretValid = secret && safeCompare(secret, CRON_SECRET);
+  const isSecretValid = Boolean(CRON_SECRET) && Boolean(secret) && safeCompare(secret!, CRON_SECRET);
 
   if (!isAuthorized && !isSecretValid) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
