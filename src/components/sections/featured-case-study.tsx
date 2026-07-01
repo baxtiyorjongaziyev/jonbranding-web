@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import Magnetic from '../ui/magnetic';
 import { BrandSection } from '@/components/ui/design-system';
-import DOMPurify from 'isomorphic-dompurify';
+import { sanitizeRichText } from '@/lib/sanitize-html';
 
 const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any}) => {
     const caseData = {
@@ -93,7 +93,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                                <span className="border-l border-brand-cyan/50 pl-3">{t.caseStudyLabel}</span>
                             </div>
                             <h2 className="text-3xl lg:text-4xl font-extrabold text-white">{t.title}</h2>
-                            <p className="mt-4 text-white/72" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(t.description) }} />
+                            <p className="mt-4 text-white/72" dangerouslySetInnerHTML={{ __html: sanitizeRichText(t.description) }} />
                             <p className="mt-4 text-white/72">{t.case_desc}</p>
                             
                             <ul className="mt-6 space-y-2 text-left max-w-md mx-auto lg:mx-0">

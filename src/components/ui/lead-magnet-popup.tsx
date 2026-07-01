@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { trackEvent, trackLead } from '@/lib/analytics';
 import { useToast } from '@/hooks/use-toast';
-import DOMPurify from 'isomorphic-dompurify';
+import { sanitizeRichText } from '@/lib/sanitize-html';
 
 interface LeadMagnetPopupProps {
   dictionary: any;
@@ -153,7 +153,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                   </div>
 
                   <p className="text-base text-gray-400 leading-relaxed font-medium" 
-                     dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dictionary.description) }} />
+                     dangerouslySetInnerHTML={{ __html: sanitizeRichText(dictionary.description) }} />
 
                   <Button 
                     onClick={() => setStep('qualification')} 

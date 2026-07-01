@@ -135,6 +135,30 @@ async function sendTelegramMessage(botToken: string, payload: Record<string, unk
   return result;
 }
 
+function hasTelegramConfig(botToken: string, chatId: string) {
+  return Boolean(botToken && chatId);
+}
+
+async function sendTelegramIfConfigured(
+  botToken: string,
+  chatId: string,
+  payload: Record<string, unknown>,
+  context: string,
+) {
+  if (!hasTelegramConfig(botToken, chatId)) {
+    console.warn(`Telegram skipped for ${context}: missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID`);
+    return false;
+  }
+
+  try {
+    await sendTelegramMessage(botToken, payload);
+    return true;
+  } catch (error) {
+    console.error(`Telegram ${context} error:`, error);
+    return false;
+  }
+}
+
 async function sendMetaConversionEvent(data: any) {
   const accessToken = cleanSecret(process.env.META_API_ACCESS_TOKEN);
   const pixelId = '1134785364752294';
@@ -418,10 +442,6 @@ export async function POST(request: Request) {
   const botToken = cleanSecret(process.env.TELEGRAM_BOT_TOKEN);
   const chatId = cleanSecret(process.env.TELEGRAM_CHAT_ID);
 
-  if (!botToken || !chatId) {
-    return NextResponse.json({ ok: false, error: 'Server configuration error' }, { status: 500 });
-  }
-
   try {
     const body = await request.json();
     
@@ -451,21 +471,22 @@ export async function POST(request: Request) {
       ...(threadId ? { message_thread_id: Number(threadId) } : {}),
     };
 
-    let telegramSuccess = false;
-    try {
-      await sendTelegramMessage(botToken, telegramPayload);
-      telegramSuccess = true;
-    } catch (telegramError) {
-      console.error('Telegram lead alert error:', telegramError);
-    }
+    const telegramSuccess = await sendTelegramIfConfigured(
+      botToken,
+      chatId,
+      telegramPayload,
+      'lead alert',
+    );
 
     const amoCrmResult: any = await sendToAmoCrm(leadData).catch(async (error) => {
       console.error('AmoCRM lead error:', error);
       const queued = await queueFailedAmoCrmLead(leadData, error);
       const reason = describeAmoCrmError(error);
       
-      try {
-        await sendTelegramMessage(botToken, {
+      await sendTelegramIfConfigured(
+        botToken,
+        chatId,
+        {
           ...telegramPayload,
           text: [
             '<b>AmoCRMga lead tushmadi</b>',
@@ -475,10 +496,9 @@ export async function POST(request: Request) {
             `Mijoz: ${escapeTelegramHtml(fullName)}`,
             ...(phone ? [`Telefon: ${escapeTelegramHtml(phone)}`] : []),
           ].join('\n'),
-        });
-      } catch (telegramError) {
-        console.error('AmoCRM failure Telegram alert error:', telegramError);
-      }
+        },
+        'AmoCRM failure alert',
+      );
       
       return { ok: false, queued, error: error?.message || String(error) };
     });

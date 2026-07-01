@@ -1,19 +1,33 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Send, X } from 'lucide-react';
+import type { Locale } from '@/lib/dictionaries';
+import uz from '@/locales/uz.json';
+import ru from '@/locales/ru.json';
+import en from '@/locales/en.json';
+import zh from '@/locales/zh.json';
+
+const bannerTranslations = {
+  uz: uz.telegramBanner,
+  ru: ru.telegramBanner,
+  en: en.telegramBanner,
+  zh: zh.telegramBanner,
+} as const;
 
 export default function TelegramBanner({ lang }: { lang: string }) {
   const [isVisible, setIsVisible] = useState(false);
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const copy = bannerTranslations[safeLang];
 
   useEffect(() => {
     const hasSeenBanner = sessionStorage.getItem('telegram_banner_seen');
     if (!hasSeenBanner) {
-      const timer = setTimeout(() => {
+      const timer = window.setTimeout(() => {
         setIsVisible(true);
       }, 15000);
-      return () => clearTimeout(timer);
+      return () => window.clearTimeout(timer);
     }
   }, []);
 
@@ -21,17 +35,6 @@ export default function TelegramBanner({ lang }: { lang: string }) {
     setIsVisible(false);
     sessionStorage.setItem('telegram_banner_seen', 'true');
   };
-
-  const text =
-    lang === 'ru'
-      ? 'Присоединяйтесь к нашему Telegram-каналу для получения экспертных советов по брендингу!'
-      : lang === 'en'
-        ? 'Join our Telegram channel for expert branding insights!'
-        : 'Brending boʿyicha foydali maslahatlar uchun Telegram kanalimizga qoʿshiling!';
-
-  const buttonText = lang === 'ru' ? 'Присоединиться' : lang === 'en' ? 'Join Now' : 'Qoʿshilish';
-  const closeAriaLabel =
-    lang === 'ru' ? 'Закрыть баннер' : lang === 'en' ? 'Close banner' : 'Bannerni yopish';
 
   return (
     <AnimatePresence>
@@ -42,32 +45,33 @@ export default function TelegramBanner({ lang }: { lang: string }) {
           animate={{ height: 'auto', opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ type: 'spring', damping: 20, stiffness: 100 }}
-          className="sticky top-0 left-0 right-0 z-[60] bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-md overflow-hidden"
+          className="sticky top-0 left-0 right-0 z-[60] overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-md"
         >
-          <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="bg-white/20 p-2 rounded-full shrink-0">
-                <Send className="w-4 h-4 text-white" />
+          <div className="container mx-auto flex items-center justify-between gap-4 px-4 py-3">
+            <div className="flex min-w-0 flex-1 items-center gap-3">
+              <div className="shrink-0 rounded-full bg-white/20 p-2">
+                <Send className="h-4 w-4 text-white" />
               </div>
-              <p className="text-sm font-medium truncate">{text}</p>
+              <p className="truncate text-sm font-medium">{copy.text}</p>
             </div>
 
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex shrink-0 items-center gap-3">
               <a
                 href="https://t.me/JonBranding"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={closeBanner}
-                className="whitespace-nowrap px-4 py-1.5 bg-white text-blue-700 text-xs font-bold rounded-full hover:bg-blue-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
+                className="whitespace-nowrap rounded-full bg-white px-4 py-1.5 text-xs font-bold text-blue-700 transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
               >
-                {buttonText}
+                {copy.buttonText}
               </a>
               <button
+                type="button"
                 onClick={closeBanner}
-                className="p-1 hover:bg-white/20 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
-                aria-label={closeAriaLabel}
+                className="rounded-full p-1 transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
+                aria-label={copy.closeAriaLabel}
               >
-                <X className="w-4 h-4" />
+                <X className="h-4 w-4" />
               </button>
             </div>
           </div>
