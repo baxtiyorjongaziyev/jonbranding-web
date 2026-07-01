@@ -14,16 +14,16 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
   const t = dictionary?.pricingPage || {
     title: 'Xizmatlar va narxlar',
     subtitle:
-      'Kompaniyangiz va mahsulotlaringiz uchun premium brending yechimlari. Narxlar shaffof va sizning maqsadlaringizga moslashtirilgan.',
+      'Brendingizni qimmatroq, tartibliroq va sotishga tayyorroq ko‘rsatadigan yechimlar. Narxlar shaffof, paketlar esa natijaga qarab tuzilgan.',
     brandServices: {
-      title: 'Asosiy Brending Xizmatlari',
-      desc: "Neyming, Logotip dizayni, Firma uslubi, Brendbuk, Qadoq dizayni va POSM materiallari. Paketlarni o'zingiz yig'ing.",
-      cta: 'Tariflar va Paket Builderni Ochish',
+      title: 'Brend tizimi paketlari',
+      desc: "Neyming, logo, firma uslubi, brandbook, qadoq va POSM. Har bir paket biznesingizni bir xil va premium ko‘rsatish uchun yig‘ilgan.",
+      cta: 'Paketlarni ko‘rish',
     },
     marketplaceServices: {
-      title: 'Sotuvchi Kartochkalari Dizayni',
-      desc: "Uzum, Wildberries, Ozon va Yandex Market uchun yuqori konversiyali mahsulot rasmlari dizayni. Chegirmalar va qo'shimcha xizmatlar.",
-      cta: 'Kartochka Narxlari va Kalkulyator',
+      title: 'Sotuvchi kartochka dizayni',
+      desc: "Uzum, Wildberries, Ozon va Yandex Market uchun sotuvchi vizual tizim. A/B variantlar, tezkor ishlab chiqarish va qo‘shimcha xizmatlar bor.",
+      cta: 'Kartochka tariflarini ko‘rish',
     },
   };
 
@@ -113,7 +113,7 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
 
             <div>
               <Link
-                href={getLocalizedPath('/xizmatlar#package-builder')}
+                href={getLocalizedPath('/narxlar')}
                 className="inline-flex items-center justify-center w-full px-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all duration-300 shadow-lg shadow-indigo-600/20 gap-2 active:scale-[0.98] text-sm uppercase tracking-wider"
               >
                 {t.brandServices?.cta}

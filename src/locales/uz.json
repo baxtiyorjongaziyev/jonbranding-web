@@ -29,9 +29,19 @@
     "lang_en": "English",
     "ai": "AI Yordamchi",
     "consultation_short": "Audit olish",
+    "mobile_quick_actions": "Mobil tezkor amallar",
     "about": "Haqimizda",
     "contacts": "Aloqa",
     "online_brief": "Onlayn-brief"
+  },
+  "layout": {
+    "skipToMainContent": "Asosiy kontentga o'tish",
+    "tabNotificationMessage": "(1) Yangi xabar! | Jon Branding"
+  },
+  "telegramBanner": {
+    "text": "Brending bo'yicha foydali maslahatlar uchun Telegram kanalimizga qo'shiling!",
+    "buttonText": "Qo'shilish",
+    "closeAriaLabel": "Bannerni yopish"
   },
   "footer": {
     "contact": "Biz bilan bog'laning",
@@ -57,7 +67,17 @@
     "all_rights_reserved": "Barcha huquqlar himoyalangan.",
     "back_to_top": "Yuqoriga qaytish",
     "patent_calculator": "Patent kalkulyatori",
-    "online_brief": "Onlayn-brief"
+    "online_brief": "Onlayn-brief",
+    "solutions": "Yechimlar",
+    "resources": "Resurslar",
+    "agency": "Agentlik",
+    "contact_us": "Bog'lanish",
+    "explore_work": "Ishlarni ko'rish",
+    "read_blogs": "Blogni o'qish",
+    "privacy_policy_link": "Maxfiylik siyosati",
+    "terms_of_use_link": "Foydalanish shartlari",
+    "about_us": "Haqimizda",
+    "contacts_page": "Aloqa"
   },
   "cookieConsent": {
     "message": "Saytimizda shirin 'cookie'lar bor. Ular bizga sizni eslab qolishga yordam beradi. Agar rozilik bersangiz, ularni birga baham ko'ramiz.",
@@ -158,6 +178,36 @@
       "patent_calculator": "Patent kalkulyatori",
       "marketplace_cover": "Sotuvchi kartochka dizayni"
     }
+  },
+  "termsPage": {
+    "metadata": {
+      "title": "Foydalanish shartlari | Jon.Branding",
+      "description": "Jon.Branding agentligi xizmatlaridan foydalanish shartlari - shaffof va professional hamkorlik."
+    },
+    "title": "Foydalanish shartlari",
+    "intro": "Jon.Branding Agency xizmatlaridan foydalanishda siz quyidagi shartlarni qabul qilasiz. Biz shaffoflik va professional hamkorlik tarafdorimiz.",
+    "sections": [
+      {
+        "title": "1. Xizmat ko'rsatish",
+        "text": "Agentlik brending, logotip dizayni, strategiya va boshqa xizmatlarni taqdim etishi mumkin. Har bir loyiha alohida shartnoma yoki kelishuv asosida amalga oshiriladi."
+      },
+      {
+        "title": "2. Intellektual mulk",
+        "text": "Barcha yaratilgan ma'lumotlar va dizayn loyihalari to'liq to'lovdan so'ng buyurtmachiga topshiriladi. Agentlik o'z ishlarini portfolio sifatida ko'rsatish huquqini o'zida saqlab qoladi."
+      },
+      {
+        "title": "3. Mijoz mas'uliyati",
+        "text": "Mijoz loyiha uchun taqdim etgan barcha ma'lumotlarning to'g'riligi va qonuniyligi uchun mas'uldir."
+      },
+      {
+        "title": "4. Shartlarni o'zgartirish",
+        "text": "Agentlik ushbu shartlarni istalgan vaqtda o'zgartirish huquqiga ega. O'zgarishlar sahifada e'lon qilingan paytdan boshlab kuchga kiradi."
+      },
+      {
+        "title": "5. Aloqa ma'lumotlari",
+        "text": "Savol yoki e'tirozlar bo'lsa, biz bilan +998336450097 yoki Telegram @jonbranding orqali bog'lanishingiz mumkin."
+      }
+    ]
   },
   "hero": {
     "agencyTagline": "Premium Brending Agentligi",
@@ -1362,32 +1412,37 @@
     },
     "packageBuilder": {
       "title": "Xizmatlar va narxlar",
-      "subtitle": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang.",
+      "subtitle": "Qaysi paket sizga eng ko‘p qiymat berishini tez anglang. Narx emas, natija va moslik bo‘yicha tanlang.",
       "categories": {
-        "tripwire": "Birinchi qadam (Tezkor xizmatlar)",
-        "strategy": "Strategik xizmatlar",
-        "naming": "Neyming",
-        "identity": "Vizual aydentika: Logo, Firma uslubi, Brendbuk",
-        "addons": "Qo'shimcha xizmatlar",
+        "tripwire": "Tezkor kirish xizmatlari",
+        "strategy": "Brend strategiyasi",
+        "naming": "Nomlash",
+        "identity": "Identika paketlari",
+        "addons": "Kengaytmalar",
         "more_services": "Qo'shimcha xizmatlar va shartlar"
       },
       "tabs": {
-        "included": "Nimalar kiradi",
-        "benefits": "Nimalar olasiz"
+        "included": "Nima kiradi",
+        "benefits": "Nima olasiz"
       },
       "your_package": "Sizning paketingiz",
-      "your_package_desc": "Quyidan kerakli xizmatlarni tanlang.",
+      "your_package_desc": "Tanlovingiz qanchalik kuchli natija berishini darhol ko‘ring.",
       "selected": "Tanlandi",
       "select": "Tanlash",
       "base_price_label": "Boshlang'ich narx",
-      "final_price": "Yakuniy narx:",
+      "final_price": "Jami investitsiya:",
       "promo_code_label": "Promokod",
       "promo_code_placeholder": "KODNI KIRITING",
       "promo_code_invalid": "Noto'g'ri promokod",
+      "discountRules": {
+        "title": "Chegirma qanday ishlaydi",
+        "single": "1 ta xizmat tanlansa, 50/50 to'lovda chegirma qo'llanilmaydi.",
+        "bundle": "2 va undan ortiq asosiy xizmat tanlansa, chegirma faollashadi."
+      },
       "discountSelector": {
         "none": "Chegirmasiz",
-        "package": "Paket uchun (-20%)",
-        "full": "To'liq to'lov uchun (-28%)"
+        "package": "2+ xizmat uchun (-20%)",
+        "full": "Oldindan to'lov uchun (-28%)"
       },
       "discountCountdown": {
         "title": "Chegirma muddati tugaydi",
@@ -1398,7 +1453,7 @@
         "expired": "Chegirma muddati tugadi"
       },
       "empty_package_desc": "Xizmatlar tanlanmagan. Iltimos, mos xizmatlarni tanlang.",
-      "recommended": "Tavsiya etiladi"
+      "recommended": "Eng yaxshi tanlov"
     },
     "comparison": {
       "title": "Biz va raqobatchilar",
@@ -1540,20 +1595,20 @@
       "Sotuvga ta'sir qiladigan reja"
     ]
   },
-  "pricingPage": {
-    "title": "Xizmatlar va narxlar",
-    "subtitle": "Kompaniyangiz va mahsulotlaringiz uchun premium brending yechimlari. Narxlar shaffof va sizning maqsadlaringizga moslashtirilgan.",
-    "brandServices": {
-      "title": "Asosiy Brending Xizmatlari",
-      "desc": "Neyming, Logotip dizayni, Firma uslubi, Brendbuk, Qadoq dizayni va POSM materiallari. Paketlarni o'zingiz yig'ing.",
-      "cta": "Tariflar va Paket Builderni Ochish"
+    "pricingPage": {
+      "title": "Xizmatlar va narxlar",
+      "subtitle": "Har paket mijozga qaror qabul qilishni osonlashtiradi: kimga mos, nima beradi va nega aynan shu variant tanlanishi kerakligi aniq ko‘rinadi.",
+      "brandServices": {
+      "title": "Brend tizimi paketlari",
+      "desc": "Neyming, logo, firma uslubi, brandbook va qadoq. Paketlar qiymat, tezlik va yakuniy natija bo‘yicha tartiblangan.",
+      "cta": "Paketlarni ko‘rish"
+      },
+      "marketplaceServices": {
+      "title": "Sotuvchi kartochka dizayni",
+      "desc": "Marketplace sotuvini ko‘taradigan vizual paket: A/B variantlar, tez ishlab chiqarish va moslashuvchan qo‘shimchalar.",
+      "cta": "Kartochka tariflarini ko‘rish"
+      }
     },
-    "marketplaceServices": {
-      "title": "Sotuvchi Kartochkalari Dizayni",
-      "desc": "Uzum, Wildberries, Ozon va Yandex Market uchun yuqori konversiyali mahsulot rasmlari dizayni. Chegirmalar va qo'shimcha xizmatlar.",
-      "cta": "Kartochka Narxlari va Kalkulyator"
-    }
-  },
   "meta": {
     "title": "Jon.Branding | Professional Brending Agentligi",
     "description": "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding."

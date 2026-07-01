@@ -1,11 +1,14 @@
-import { MetadataRoute } from 'next';
-import fs from 'fs';
-import path from 'path';
+import type { MetadataRoute } from 'next';
+import { fetchPortfolioList } from '@/lib/data/portfolio';
+import { getAllPostSlugs } from '@/lib/blog-posts';
+import {
+  defaultLocale,
+  getLocalizedAbsoluteUrl,
+  locales,
+  type Locale,
+} from '@/lib/i18n/locale';
 
 const BASE_URL = 'https://www.jonbranding.uz';
-const locales = ['uz', 'ru', 'en', 'zh'] as const;
-type Locale = (typeof locales)[number];
-const defaultLocale: Locale = 'uz';
 
 const staticRoutes = [
   '',
@@ -20,6 +23,8 @@ const staticRoutes = [
   '/portfolio',
   '/online-brief',
   '/online-brief/wizard',
+  '/pricing/sotuvchi-kartochka',
+  '/narxlar',
   '/xizmatlar',
   '/xizmatlar/neyming',
   '/xizmatlar/logo-dizayni',
@@ -30,61 +35,88 @@ const staticRoutes = [
   '/xizmatlar/posm-materiallar',
   '/xizmatlar/brandbook',
   '/xizmatlar/patent-kalkulyatori',
-];
+] as const;
 
 function localizedUrl(lang: Locale, route: string) {
-  if (lang === 'uz') {
-    return `${BASE_URL}${route || '/'}`;
-  }
-  return `${BASE_URL}/${lang}${route}`;
+  return getLocalizedAbsoluteUrl(BASE_URL, lang, route || '/');
+}
+
+function getAlternates(route: string, availableLocales: readonly Locale[] = locales) {
+  const xDefaultLocale = availableLocales.includes(defaultLocale)
+    ? defaultLocale
+    : availableLocales[0];
+
+  return {
+    languages: Object.fromEntries([
+      ...availableLocales.map((lang) => [lang, localizedUrl(lang, route)]),
+      ['x-default', localizedUrl(xDefaultLocale, route)],
+    ]),
+  };
 }
 
 function getMarkdownBlogEntries(): MetadataRoute.Sitemap {
-  const postsDirectory = path.join(process.cwd(), 'src/posts');
-  if (!fs.existsSync(postsDirectory)) return [];
+  const postsBySlug = new Map<string, Set<Locale>>();
 
-  return locales.flatMap((lang) => {
-    const langDirectory = path.join(postsDirectory, lang);
-    if (!fs.existsSync(langDirectory)) return [];
+  getAllPostSlugs().forEach(({ slug, lang }) => {
+    if (!locales.includes(lang as Locale)) return;
+    const translatedLocales = postsBySlug.get(slug) ?? new Set<Locale>();
+    translatedLocales.add(lang as Locale);
+    postsBySlug.set(slug, translatedLocales);
+  });
 
-    return fs
-      .readdirSync(langDirectory)
-      .filter((fileName) => fileName.endsWith('.md'))
-      .map((fileName) => ({
-        url: localizedUrl(lang, `/blog/${fileName.replace(/\.md$/, '')}`),
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-        alternates: {
-        languages: Object.fromEntries(
-          [
-            ...locales.map((l) => [l, localizedUrl(l, `/blog/${fileName.replace(/\.md$/, '')}`)]),
-            ['x-default', localizedUrl(defaultLocale, `/blog/${fileName.replace(/\.md$/, '')}`)],
-          ]
-        ),
-      },
-      }));
+  return Array.from(postsBySlug.entries()).flatMap(([slug, translatedLocales]) => {
+    const availableLocales = locales.filter((lang) => translatedLocales.has(lang));
+    const route = `/blog/${slug}`;
+
+    return availableLocales.map((lang) => ({
+      url: localizedUrl(lang, route),
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+      alternates: getAlternates(route, availableLocales),
+    }));
   });
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  // Generate static localized pages with alternates
-  const staticPages = staticRoutes.flatMap((route) => 
+async function getPortfolioEntries(): Promise<MetadataRoute.Sitemap> {
+  const projectsBySlug = new Map<string, Set<Locale>>();
+  const projectsByLocale = await Promise.all(
+    locales.map(async (lang) => [lang, await fetchPortfolioList(lang)] as const),
+  );
+
+  projectsByLocale.forEach(([lang, projects]) => {
+    projects.forEach(({ slug }) => {
+      if (!slug) return;
+      const availableLocales = projectsBySlug.get(slug) ?? new Set<Locale>();
+      availableLocales.add(lang);
+      projectsBySlug.set(slug, availableLocales);
+    });
+  });
+
+  return Array.from(projectsBySlug.entries()).flatMap(([slug, translatedLocales]) => {
+    const availableLocales = locales.filter((lang) => translatedLocales.has(lang));
+    const route = `/portfolio/${slug}`;
+
+    return availableLocales.map((lang) => ({
+      url: localizedUrl(lang, route),
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+      alternates: getAlternates(route, availableLocales),
+    }));
+  });
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticPages = staticRoutes.flatMap((route) =>
     locales.map((lang) => ({
       url: localizedUrl(lang, route),
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
-      priority: route === '' ? 1.0 : 0.8,
-      alternates: {
-        languages: Object.fromEntries(
-          [
-            ...locales.map((l) => [l, localizedUrl(l, route)]),
-            ['x-default', localizedUrl(defaultLocale, route)],
-          ]
-        ),
-      },
-    }))
+      priority: route === '' ? 1 : 0.8,
+      alternates: getAlternates(route),
+    })),
   );
 
-  return [...staticPages, ...getMarkdownBlogEntries()];
+  return [...staticPages, ...getMarkdownBlogEntries(), ...(await getPortfolioEntries())];
 }

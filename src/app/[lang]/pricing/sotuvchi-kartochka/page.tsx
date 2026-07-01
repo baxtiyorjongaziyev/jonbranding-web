@@ -1,4 +1,4 @@
-
+﻿
 'use client';
 
 import { Metadata } from 'next';
@@ -16,13 +16,13 @@ const pricingData = [
   {
     name: 'START',
     price: 300000,
-    forWho: 'Yangi joylayotgan yoki test qilayotgan sotuvchilar.',
+    forWho: 'Bir mahsulotni tez chiqarib, sotuvini sinab ko‘rmoqchi bo‘lganlar.',
     includes: [
-      '1 ta asosiy sotuvchi kartochka rasmi',
-      'Lightbox surat asosida ishlov',
-      'Rang, matn va foyda qisqacha ko‘rsatiladi',
+      '1 ta asosiy sotuvchi kartochka vizuali',
+      'Lightbox surat asosida toza kompozitsiya',
+      'Foyda, narx va CTA qisqa va aniq ko‘rsatiladi',
     ],
-    difference: 'Tez tayyorlanadi, soddaligi bilan e’tibor tortadi.',
+    difference: 'Minimal, tez va ishonchli ko‘rinish beradi.',
     isRecommended: false,
     discounts: [
       { quantity: '1 dona', price: 300000 },
@@ -33,14 +33,14 @@ const pricingData = [
   {
     name: 'PRO',
     price: 450000,
-    forWho: 'Professional ko‘rinish va ishonch kerak bo‘lgan sotuvchilar.',
+    forWho: 'Mahsulotini aniqroq sotishni va ko‘proq ishonch olishni xohlagan sotuvchilar.',
     includes: [
-      '1 ta asosiy sotuvchi kartochka rasmi',
+      '1 ta asosiy sotuvchi kartochka vizuali',
       'Brend ranglari va muvozanatli kompozitsiya',
-      'Matn bloklari: foyda, afzallik, xaridga undov',
-      'Uzum, Wildberries yoki Ozon formatida tayyor',
+      'Foyda, afzallik va xaridga undov bloklari',
+      'Uzum, Wildberries yoki Ozon talabiga mos tayyor fayl',
     ],
-    difference: 'Mahsulot aniq ajralib turadi, ishonch uyg‘otadi.',
+    difference: 'Mahsulotingiz fondan ajralib turadi va kuchliroq ishonch beradi.',
     isRecommended: true,
     discounts: [
       { quantity: '1 dona', price: 450000 },
@@ -51,15 +51,15 @@ const pricingData = [
   {
     name: 'PREMIUM',
     price: 650000,
-    forWho: 'Brend obro‘sini oshirish va yuqori konversiya xohlaganlar.',
+    forWho: 'Brend qiymatini oshirish va maksimal konversiya olishni istaganlar.',
     includes: [
-      '1 ta asosiy sotuvchi kartochka rasmi',
+      '1 ta asosiy sotuvchi kartochka vizuali',
       '3D yoki realistik mockup ishlov',
-      'Brend muhitida kompozitsiya',
+      'Brend muhitida premium kompozitsiya',
       '2 ta variant (A/B test uchun)',
-      'Professional matnlar va CTA’lar',
+      'Sotishga yo‘naltirilgan professional matn va CTA',
     ],
-    difference: 'Qimmat ko‘rinadi, darrov e’tibor tortadi.',
+    difference: 'Premium ko‘rinadi, yuqori narxga ham munosib signal beradi.',
     isRecommended: false,
     discounts: [
       { quantity: '1 dona', price: 650000 },
@@ -86,7 +86,7 @@ const TierTable = ({
       {data.map((row, index) => (
         <React.Fragment key={index}>
           <div className={`p-2 border-r ${isRecommended ? 'border-blue-800' : 'border-slate-200 dark:border-slate-700'} ${index < data.length - 1 ? 'border-b' : ''} ${isRecommended ? 'text-blue-100' : 'text-slate-600 dark:text-slate-300'}`}>{row.quantity}</div>
-          <div className={`p-2 ${index < data.length - 1 ? `border-b ${isRecommended ? 'border-blue-800' : 'border-slate-200 dark:border-slate-700'}` : ''} ${isRecommended ? 'text-blue-100' : 'text-slate-600 dark:text-slate-300'}`}>{row.price.toLocaleString('fr-FR')} so‘m</div>
+          <div className={`p-2 ${index < data.length - 1 ? `border-b ${isRecommended ? 'border-blue-800' : 'border-slate-200 dark:border-slate-700'}` : ''} ${isRecommended ? 'text-blue-100' : 'text-slate-600 dark:text-slate-300'}`}>{row.price.toLocaleString('fr-FR')} so'm</div>
         </React.Fragment>
       ))}
     </div>
@@ -129,7 +129,7 @@ const PricingCard = ({
           tier.isRecommended ? 'text-blue-300' : 'text-slate-500'
         }`}
       >
-        so‘m / dona
+        so'm / dona
       </span>
     </div>
     <div
@@ -171,7 +171,7 @@ const PricingCard = ({
         tier.isRecommended ? 'border-blue-700' : 'border-slate-200'
       }`}
     >
-      <p className="font-semibold">Miqdor bo‘yicha chegirma:</p>
+      <p className="font-semibold">Miqdor bo'yicha chegirma:</p>
       <TierTable data={tier.discounts} isRecommended={tier.isRecommended} />
     </div>
     <div className="mt-8">
@@ -234,7 +234,7 @@ const FaqSchema = {
       },
       {
         "@type": "Question",
-        "name": "Uzum/WB/Ozon o‘lchamlariga moslab berasizmi?",
+        "name": "Uzum/WB/Ozon o'lchamlariga moslab berasizmi?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Albatta. Biz har bir marketplace'ning texnik talablarini bilamiz va dizaynni aynan kerakli o'lcham va formatda tayyorlab beramiz."
@@ -258,15 +258,15 @@ export default function SotuvchiKartochkaPricingPage() {
   let translations = {
       uz: {
         title: "Uzum, Yandex Market, WB va Ozon uchun sotuvchi kartochka dizayni",
-        subtitle: "Bitta asosiy sotuvchi rasm – qolganlari oddiy lightbox suratlar bilan."
+        subtitle: "Bitta asosiy sotuvchi rasm - qolganlari oddiy lightbox suratlar bilan."
       },
       ru: {
-        title: "Продающий дизайн карточек для Uzum, Yandex market, Wildberries и Ozon",
-        subtitle: "Одна основная продающая картинка – остальные с обычными лайтбокс-фотографиями."
+        title: "Prodazh uchun kartochka dizayni Uzum, Yandex Market, Wildberries va Ozon uchun",
+        subtitle: "Bitta asosiy sotuvchi rasm - qolganlari oddiy lightbox suratlar bilan."
       },
       en: {
         title: "Sales-Driven Card Design for Uzum, Yandex market, Wildberries & Ozon",
-        subtitle: "One main selling image – the rest with standard lightbox photos."
+        subtitle: "One main selling image - the rest with standard lightbox photos."
       }
   };
 
@@ -354,7 +354,7 @@ export default function SotuvchiKartochkaPricingPage() {
                 <div className="max-w-2xl mx-auto bg-white dark:bg-slate-950 rounded-2xl shadow-lg p-8 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
                     <h2 id="additional-services-title" className="text-2xl font-bold text-center text-blue-950 dark:text-white">
-                    Qo‘shimcha xizmatlar kalkulyatori
+                    Qo'shimcha xizmatlar kalkulyatori
                     </h2>
                     <div className="mt-6 space-y-4">
                     <label className="flex justify-between items-center gap-4 cursor-pointer p-4 rounded-xl border border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition-colors">
@@ -414,7 +414,7 @@ export default function SotuvchiKartochkaPricingPage() {
                 <div className="container mx-auto px-6">
                 <div className="max-w-3xl mx-auto">
                     <h2 id="faq-title" className="text-3xl font-bold text-center text-blue-950 dark:text-white">
-                    Ko‘p beriladigan savollar
+                    Ko'p beriladigan savollar
                     </h2>
                     <div className="mt-8 space-y-4">
                         <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
@@ -426,7 +426,7 @@ export default function SotuvchiKartochkaPricingPage() {
                             <p className="text-slate-600 dark:text-slate-300 mt-2">Start va Pro tariflar uchun lightbox suratlar yetarli. Premium tarifda esa mahsulotni yanada jozibador ko'rsatish uchun studiyada olingan professional suratlardan foydalanishni tavsiya etamiz.</p>
                         </div>
                         <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">
-                            <h3 className="font-semibold text-slate-800 dark:text-white">Uzum/WB/Ozon o‘lchamlariga moslab berasizmi?</h3>
+                            <h3 className="font-semibold text-slate-800 dark:text-white">Uzum/WB/Ozon o'lchamlariga moslab berasizmi?</h3>
                             <p className="text-slate-600 dark:text-slate-300 mt-2">Albatta. Biz har bir marketplace'ning texnik talablarini bilamiz va dizaynni aynan kerakli o'lcham va formatda tayyorlab beramiz.</p>
                         </div>
                         <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4">

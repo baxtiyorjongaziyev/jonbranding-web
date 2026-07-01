@@ -13,9 +13,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const dict = await getDictionary(lang as Locale);
   
   const t = dict.servicesPage?.metadata || {
-      title: "Xizmatlar va Narxlar | Jon.Branding",
-      description: "Biznesingiz uchun professional brending xizmatlari va narxlari.",
-      keywords: "branding services, pricing"
+      title: "Xizmatlar | Jon.Branding",
+      description: "Biznesingiz uchun professional brending xizmatlari.",
+      keywords: "branding services"
   };
 
   const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar`;

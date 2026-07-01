@@ -1,5 +1,37 @@
 import nextVitals from "eslint-config-next/core-web-vitals";
 
+const strippedPlugins = new WeakMap();
+
+const stripPluginConfigs = (plugin) => {
+  if (!plugin || typeof plugin !== "object" || !("configs" in plugin)) {
+    return plugin;
+  }
+
+  if (strippedPlugins.has(plugin)) {
+    return strippedPlugins.get(plugin);
+  }
+
+  const { configs, ...serializablePlugin } = plugin;
+  strippedPlugins.set(plugin, serializablePlugin);
+  return serializablePlugin;
+};
+
+const makeSerializableConfig = (entry) => {
+  if (!entry.plugins) {
+    return entry;
+  }
+
+  return {
+    ...entry,
+    plugins: Object.fromEntries(
+      Object.entries(entry.plugins).map(([name, plugin]) => [
+        name,
+        stripPluginConfigs(plugin),
+      ]),
+    ),
+  };
+};
+
 const config = [
   {
     ignores: [
@@ -14,7 +46,7 @@ const config = [
       "DESIGN_AUDIT/**",
     ],
   },
-  ...nextVitals,
+  ...nextVitals.map(makeSerializableConfig),
   {
     rules: {
       "react/no-unescaped-entities": "off",

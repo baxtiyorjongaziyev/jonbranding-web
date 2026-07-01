@@ -20,7 +20,12 @@ export default function ClientEnhancementsLoader(props: ClientEnhancementsLoader
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const loadEnhancements = () => setReady(true);
+    const loadEnhancements = (event?: Event) => {
+      if (event instanceof CustomEvent) {
+        (window as any).__pendingContactModal = event.detail || {};
+      }
+      setReady(true);
+    };
     window.addEventListener('openContactModal', loadEnhancements);
 
     const id = globalThis.setTimeout(loadEnhancements, 6000);

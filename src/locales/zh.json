@@ -29,9 +29,19 @@
     "lang_en": "English",
     "ai": "人工智能",
     "consultation_short": "获取审计",
+    "mobile_quick_actions": "移动端快捷操作",
     "about": "关于我们",
     "contacts": "联系我们",
     "online_brief": "在线简报"
+  },
+  "layout": {
+    "skipToMainContent": "跳到主要内容",
+    "tabNotificationMessage": "(1) 新消息！| Jon Branding"
+  },
+  "telegramBanner": {
+    "text": "加入我们的 Telegram 频道，获取专业品牌洞察！",
+    "buttonText": "立即加入",
+    "closeAriaLabel": "关闭横幅"
   },
   "footer": {
     "contact": "联系我们",
@@ -57,7 +67,17 @@
     "all_rights_reserved": "版权所有。",
     "back_to_top": "返回顶部",
     "patent_calculator": "专利计算器",
-    "online_brief": "在线简报"
+    "online_brief": "在线简报",
+    "solutions": "解决方案",
+    "resources": "资源",
+    "agency": "机构",
+    "contact_us": "联系我们",
+    "explore_work": "查看作品",
+    "read_blogs": "阅读博客",
+    "privacy_policy_link": "隐私政策",
+    "terms_of_use_link": "使用条款",
+    "about_us": "关于我们",
+    "contacts_page": "联系我们"
   },
   "cookieConsent": {
     "message": "我们的网站使用美味的Cookie。它们帮助我们记住您。如果您同意，让我们一起分享它们。",
@@ -158,6 +178,36 @@
       "marketplace_cover": "销售卡设计",
       "car_wrap_design": "创意汽车贴膜设计"
     }
+  },
+  "termsPage": {
+    "metadata": {
+      "title": "服务条款 | Jon.Branding",
+      "description": "Jon.Branding 机构服务使用条款 - 透明、专业的合作。"
+    },
+    "title": "服务条款",
+    "intro": "使用 Jon.Branding Agency 的服务，即表示您接受以下条款。我们倡导透明、专业的合作。",
+    "sections": [
+      {
+        "title": "1. 服务提供",
+        "text": "本机构可提供品牌、标志设计、策略及其他服务。每个项目均根据单独合同或协议执行。"
+      },
+      {
+        "title": "2. 知识产权",
+        "text": "所有创作材料和设计项目将在全额付款后移交给客户。本机构保留在作品集中展示相关作品的权利。"
+      },
+      {
+        "title": "3. 客户责任",
+        "text": "客户需对为项目提供的所有信息的准确性和合法性负责。"
+      },
+      {
+        "title": "4. 条款变更",
+        "text": "本机构有权随时更改这些条款。变更自本页面发布之时起生效。"
+      },
+      {
+        "title": "5. 联系信息",
+        "text": "如有问题或异议，请通过 +998336450097 或 Telegram @jonbranding 联系我们。"
+      }
+    ]
   },
   "hero": {
     "agencyTagline": "高端品牌全案策划设计",
@@ -1189,11 +1239,11 @@
       "title": "服务与价格",
       "subtitle": "了解我们的全方位服务，为您的企业定制专属品牌方案. 使用在线计算器即时获取精准报价。",
       "categories": {
-        "tripwire": "快速启动 (低成本服务)",
-        "strategy": "战略咨询服务",
+        "tripwire": "快速入门服务",
+        "strategy": "品牌战略",
         "naming": "品牌命名",
-        "identity": "视觉识别：LOGO、画册、品牌手册",
-        "addons": "附加服务",
+        "identity": "Logo、形象与品牌手册",
+        "addons": "扩展服务",
         "more_services": "其他条款与服务"
       },
       "tabs": {
@@ -1201,7 +1251,7 @@
         "benefits": "您将获得"
       },
       "your_package": "您的方案",
-      "your_package_desc": "请选择适合您业务需求的项。",
+      "your_package_desc": "选择适合您品牌的服务，立即查看最终总价。",
       "selected": "已选择",
       "select": "选择",
       "base_price_label": "起始价格",
@@ -1209,10 +1259,15 @@
       "promo_code_label": "优惠码",
       "promo_code_placeholder": "输入优惠码",
       "promo_code_invalid": "优惠码无效",
+      "discountRules": {
+        "title": "折扣规则",
+        "single": "如果只选择一项服务，50/50 付款时不适用折扣。",
+        "bundle": "如果选择两项或以上核心服务，折扣将生效。"
+      },
       "discountSelector": {
         "none": "无折扣",
-        "package": "套餐优惠 20%",
-        "full": "全额预付 (28% 折扣)"
+        "package": "2+ 项服务 (-20%)",
+        "full": "预付款 (-28%)"
       },
       "discountCountdown": {
         "title": "折扣倒计时",
@@ -1367,16 +1422,16 @@
   },
   "pricingPage": {
     "title": "服务与定价",
-    "subtitle": "适合您公司和产品的优质品牌解决方案。价格透明，量身定制。",
+    "subtitle": "让您的品牌更有价值、更清晰、更适合销售的解决方案。价格透明，套餐围绕结果设计。",
     "brandServices": {
-      "title": "核心品牌服务",
-      "desc": "命名、徽标设计、企业形象、品牌手册、包装设计和 POSM 材料。定制您的专属礼包。",
-      "cta": "打开费率与定制包生成器"
+      "title": "品牌系统套餐",
+      "desc": "品牌命名、Logo、企业形象、品牌手册、包装与 POSM。每个套餐都为一致和高端的品牌形象而设计。",
+      "cta": "查看套餐"
     },
     "marketplaceServices": {
-      "title": "电商产品主图设计",
-      "desc": "适用于 Uzum、Wildberries、Ozon 和 Yandex Market 的高转化率产品卡片设计。折扣与附加服务。",
-      "cta": "卡片定价与计算器"
+      "title": "销售卡片设计",
+      "desc": "适用于 Uzum、Wildberries、Ozon 和 Yandex Market 的销售型视觉系统。包含 A/B 方案、快速制作与附加服务。",
+      "cta": "查看卡片价格"
     }
   },
   "meta": {

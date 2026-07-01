@@ -3,6 +3,7 @@
 import { useCallback, useState, useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Testimonial } from '@/lib/types';
 
 // Key fold components load immediately for faster perceived performance
 import ServicesHero from '@/components/sections/services-hero';
@@ -18,7 +19,7 @@ const Testimonials = dynamic(() => import('@/components/sections/testimonials'),
 const UrgencyBlock = dynamic(() => import('@/components/sections/urgency-block'), { ssr: false });
 const PersonalOfferBlock = dynamic(() => import('@/components/sections/personal-offer-block'), { ssr: false });
 
-const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }) => {
+const XizmatlarClient = ({ lang, dictionary, testimonials }: { lang: string, dictionary: any, testimonials?: Testimonial[] }) => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const XizmatlarClient = ({ lang, dictionary }: { lang: string, dictionary: any }
       {step >= 2 && (
         <>
           <TrustedBy lang={lang} dictionary={dictionary?.trustedBy} />
-          {step >= 3 && <Testimonials lang={lang} dictionary={dictionary?.testimonials} />}
+          {step >= 3 && <Testimonials lang={lang} dictionary={dictionary?.testimonials} testimonials={testimonials} />}
           {step >= 4 && (
             <div className="flex flex-col">
               <PersonalOfferBlock onCtaClick={handleOpenModal} />

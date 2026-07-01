@@ -114,7 +114,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
     { title: dictionary.corporate_style, href: getLocalizedPath('/xizmatlar/firmenniy-stil'), description: dictionary.corporate_style_desc },
     { title: dictionary.brandbook, href: getLocalizedPath('/xizmatlar/brandbook'), description: dictionary.brandbook_desc },
     { title: dictionary.packaging_design, href: getLocalizedPath('/xizmatlar/qadoq-dizayni'), description: dictionary.packaging_design_desc },
-    { title: dictionary.services_and_prices, href: getLocalizedPath('/xizmatlar'), description: dictionary.services_and_prices_desc },
+    { title: dictionary.services_and_prices, href: getLocalizedPath('/narxlar'), description: dictionary.services_and_prices_desc },
   ];
 
   return (

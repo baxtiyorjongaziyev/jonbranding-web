@@ -38,7 +38,7 @@ Animations: Framer Motion
 |---|---|---|
 | `/[lang]/` | `src/app/[lang]/page.tsx` | Bosh sahifa |
 | `/[lang]/xizmatlar/` | xizmatlar | 6 ta xizmat |
-| `/[lang]/blog/` | Sanity CMS blog | |
+| `/[lang]/blog/` | Markdown blog (`src/posts`); Sanity post schema migration uchun tayyor | |
 | `/[lang]/quiz/` | Brending testi | |
 | `/[lang]/pricing/sotuvchi-kartochka/` | Narxlar | |
 | `/admin/` | Sanity Studio | |

@@ -1,6 +1,6 @@
 # jonbranding-web
 
-**jonbranding.uz** — Markaziy Osiyo brend-agentligi. Next.js 14, TypeScript, Tailwind, Sanity, Vercel.
+**jonbranding.uz** — Markaziy Osiyo brend-agentligi. Next.js 16, TypeScript, Tailwind, Sanity, Vercel.
 **GitHub**: `baxtiyorjongaziyev/jonbranding-web`
 
 ## Buyruqlar
@@ -11,7 +11,7 @@ git push origin main  # → Vercel auto-deploy
 ```
 
 ## Stack
-- Framework: Next.js 14 App Router
+- Framework: Next.js 16 App Router
 - Styling: Tailwind CSS + ShadCN UI + `cn()` utility
 - CMS: Sanity (project: h6ymmj0v, dataset: production)
 - i18n: uz, ru, en, zh — `src/locales/[lang].json`
