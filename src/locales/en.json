@@ -29,9 +29,19 @@
     "lang_en": "English",
     "ai": "AI Assistant",
     "consultation_short": "Get Audit",
+    "mobile_quick_actions": "Mobile quick actions",
     "about": "About Us",
     "contacts": "Contact",
     "online_brief": "Online Brief"
+  },
+  "layout": {
+    "skipToMainContent": "Skip to main content",
+    "tabNotificationMessage": "(1) New message! | Jon Branding"
+  },
+  "telegramBanner": {
+    "text": "Join our Telegram channel for expert branding insights!",
+    "buttonText": "Join Now",
+    "closeAriaLabel": "Close banner"
   },
   "footer": {
     "contact": "Contact Us",
@@ -57,7 +67,17 @@
     "all_rights_reserved": "All rights reserved.",
     "back_to_top": "Back to top",
     "patent_calculator": "Patent Calculator",
-    "online_brief": "Online Brief"
+    "online_brief": "Online Brief",
+    "solutions": "Solutions",
+    "resources": "Resources",
+    "agency": "Agency",
+    "contact_us": "Contact",
+    "explore_work": "Explore Work",
+    "read_blogs": "Read Blog",
+    "privacy_policy_link": "Privacy Policy",
+    "terms_of_use_link": "Terms",
+    "about_us": "About Us",
+    "contacts_page": "Contact"
   },
   "cookieConsent": {
     "message": "We use cookies to improve your experience.",
@@ -158,6 +178,36 @@
       "marketplace_cover": "Seller card design",
       "car_wrap_design": "Creative Car Wrap Design"
     }
+  },
+  "termsPage": {
+    "metadata": {
+      "title": "Terms of Service | Jon.Branding",
+      "description": "Terms of use for Jon.Branding agency services - transparent and professional cooperation."
+    },
+    "title": "Terms of Service",
+    "intro": "By using Jon.Branding Agency services, you agree to the following terms. We believe in transparent and professional cooperation.",
+    "sections": [
+      {
+        "title": "1. Service provision",
+        "text": "The agency may provide branding, logo design, strategy, and other services. Each project is delivered under a separate contract or agreement."
+      },
+      {
+        "title": "2. Intellectual property",
+        "text": "All created materials and design projects are transferred to the client after full payment. The agency retains the right to show its work in its portfolio."
+      },
+      {
+        "title": "3. Client responsibility",
+        "text": "The client is responsible for the accuracy and legality of all information provided for the project."
+      },
+      {
+        "title": "4. Changes to terms",
+        "text": "The agency may change these terms at any time. Changes take effect when they are published on this page."
+      },
+      {
+        "title": "5. Contact information",
+        "text": "For questions or objections, contact us at +998336450097 or on Telegram at @jonbranding."
+      }
+    ]
   },
   "hero": {
     "agencyTagline": "Premium Branding Agency",
@@ -1181,11 +1231,11 @@
       "title": "Services & Prices",
       "subtitle": "Build your package and get an instant price.",
       "categories": {
-        "tripwire": "First Step (Quick Services)",
-        "strategy": "Strategic Services",
+        "tripwire": "Quick Entry Services",
+        "strategy": "Brand Strategy",
         "naming": "Naming",
-        "identity": "Visual Identity",
-        "addons": "Additional Services",
+        "identity": "Logo, Identity & Brandbook",
+        "addons": "Extensions",
         "more_services": "Additional services and terms"
       },
       "tabs": {
@@ -1193,7 +1243,7 @@
         "benefits": "Benefits"
       },
       "your_package": "Your Package",
-      "your_package_desc": "Select required services below.",
+      "your_package_desc": "Select the services your brand needs and see the final total immediately.",
       "selected": "Selected",
       "select": "Select",
       "base_price_label": "Base price",
@@ -1201,10 +1251,15 @@
       "promo_code_label": "Promo Code",
       "promo_code_placeholder": "ENTER CODE",
       "promo_code_invalid": "Invalid promo code",
+      "discountRules": {
+        "title": "Discount rule",
+        "single": "If one service is selected, no discount applies with 50/50 payment.",
+        "bundle": "If two or more core services are selected, the discount becomes active."
+      },
       "discountSelector": {
         "none": "No discount",
-        "package": "Package (-20%)",
-        "full": "Full prepay (-28%)"
+        "package": "2+ services (-20%)",
+        "full": "Upfront payment (-28%)"
       },
       "discountCountdown": {
         "title": "Discount expires in",
@@ -1359,16 +1414,16 @@
   },
   "pricingPage": {
     "title": "Services & Pricing",
-    "subtitle": "Premium branding solutions for your company and products. Our pricing is transparent and tailored to your goals.",
+    "subtitle": "Solutions that make your brand look sharper, more valuable, and ready to sell. Pricing is transparent and packages are built around outcomes.",
     "brandServices": {
-      "title": "Core Branding Services",
-      "desc": "Naming, Logo design, Corporate identity, Brandbook, Packaging design, and POSM materials. Build your own package.",
-      "cta": "Open Rates & Package Builder"
+      "title": "Brand System Packages",
+      "desc": "Naming, logo, corporate identity, brandbook, packaging, and POSM. Each package is assembled to keep your business consistent and premium.",
+      "cta": "View Packages"
     },
     "marketplaceServices": {
-      "title": "Marketplace Cover Design",
-      "desc": "High-conversion product card design for Uzum, Wildberries, Ozon, and Yandex Market. Discounts and extra services.",
-      "cta": "Card Pricing & Calculator"
+      "title": "Selling Card Design",
+      "desc": "Selling visual systems for Uzum, Wildberries, Ozon, and Yandex Market. A/B variants, fast production, and add-ons included.",
+      "cta": "View Card Pricing"
     }
   },
   "meta": {

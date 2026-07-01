@@ -2,6 +2,8 @@ import type { Testimonial } from '@/lib/types';
 
 const TG_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
 const CACHE_FILE = 'public/data/testimonials-telegram.json';
+const HTTP_URL_PATTERN = /https?:\/\/[^\s<>"']+/gi;
+const VIMEO_HOSTS = new Set(['vimeo.com', 'www.vimeo.com', 'player.vimeo.com']);
 
 interface TelegramFileInfo {
   file_id: string;
@@ -24,18 +26,41 @@ interface TelegramChannelPost {
 
 const MAX_BOT_FILE_SIZE = 20 * 1024 * 1024;
 
+function getUrls(text: string): string[] {
+  return Array.from(text.matchAll(HTTP_URL_PATTERN), (match) => match[0]);
+}
+
+function isVimeoUrl(value: string): boolean {
+  try {
+    return VIMEO_HOSTS.has(new URL(value).hostname.toLowerCase());
+  } catch {
+    return false;
+  }
+}
+
+function getVimeoVideoId(text: string): string | undefined {
+  for (const value of getUrls(text)) {
+    if (!isVimeoUrl(value)) continue;
+
+    const match = new URL(value).pathname.match(/^\/(?:video\/)?(\d+)/i);
+    if (match) return match[1];
+  }
+
+  return undefined;
+}
+
 function parseTestimonialFromPost(post: TelegramChannelPost): any | null {
   const text = post.caption || post.text || '';
   if (!text.trim()) return null;
 
   const lines = text.split('\n').map((l) => l.trim()).filter(Boolean);
-  const vimeoMatch = text.match(/https?:\/\/(?:www\.)?(?:player\.)?vimeo\.com\/(?:video\/)?(\d+)/i);
+  const vimeoVideoId = getVimeoVideoId(text);
   const nameLine = lines[0] || '';
   const [name, company] = nameLine.includes('|')
     ? nameLine.split('|').map((s) => s.trim())
     : [nameLine, ''];
 
-  const quoteLines = lines.slice(1).filter((l) => !l.includes('vimeo.com') && !l.includes('http'));
+  const quoteLines = lines.slice(1).filter((line) => getUrls(line).length === 0);
   const quote = quoteLines.join(' ').replace(/^["""]|["""]$/g, '').trim();
 
   if (!name) return null;
@@ -56,7 +81,7 @@ function parseTestimonialFromPost(post: TelegramChannelPost): any | null {
     image: '',
     imageHint: `telegram testimonial from ${name}`,
     quote,
-    videoUrl: vimeoMatch ? `https://player.vimeo.com/video/${vimeoMatch[1]}` : undefined,
+    videoUrl: vimeoVideoId ? `https://player.vimeo.com/video/${vimeoVideoId}` : undefined,
     telegramFileId: mediaInfo?.file_id,
     telegramMimeType: mediaInfo?.mime_type || (post.video ? 'video/mp4' : undefined),
     telegramFileSize: mediaInfo?.file_size,

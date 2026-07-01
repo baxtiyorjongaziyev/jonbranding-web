@@ -5,7 +5,7 @@ import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { ArrowUpRight, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export default function StickyCTA({ ariaLabel = 'Contact us' }: { ariaLabel?: string }) {
+export default function StickyCTA({ ariaLabel }: { ariaLabel: string }) {
   const [isVisible, setIsVisible] = useState(false);
   const { scrollY } = useScroll();
 
