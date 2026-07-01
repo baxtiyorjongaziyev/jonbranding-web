@@ -12,13 +12,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     en: 'Branding Checklist | Jon.Branding',
     zh: '品牌核查清单 | Jon.Branding',
   };
-  const descriptions: Record<string, string> = {
-    uz: 'Brending checklist — biznesingizni tashxisdan o\'tkazish uchun 12 mezondan iborat tezkor ro\'yxat. Neyming, logotip, qadoq va huquqiy himoyani tekshiring.',
-    ru: 'Чеклист по брендингу — быстрая проверка вашего бизнеса по 12 критериям: нейминг, логотип, упаковка и правовая защита.',
-    en: 'Branding checklist — a quick 12-criteria diagnostic for your business: naming, logo, packaging, and legal protection.',
-    zh: '品牌核查清单 — 通过12项标准快速诊断您的业务：命名、标志、包装和法律保护。',
-  };
-  return { title: titles[safeLang] || titles.uz, description: descriptions[safeLang] || descriptions.uz };
+  return { title: titles[safeLang] || titles.uz };
 }
 
 export default function ChecklistLayout({ children }: Props) {

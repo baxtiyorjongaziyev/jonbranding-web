@@ -47,8 +47,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   });
 
   const labels = {
-    call:
-      dictionary?.call || dictionary?.contact_by_phone || (lang === 'en' ? 'Call' : "Qo'ng'iroq"),
+    call: dictionary?.call || dictionary?.contact_by_phone || (lang === 'en' ? 'Call' : "Qo'ng'iroq"),
     telegram: dictionary?.telegram || dictionary?.contact_by_telegram || 'Telegram',
     consultation: dictionary?.consultation || dictionary?.free_consultation || 'Brand Audit',
     consultationShort: dictionary?.consultation_short || (lang === 'uz' ? 'Audit' : 'Audit'),
@@ -56,24 +55,13 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   };
 
   const openConsultation = () => {
-    window.dispatchEvent(
-      new CustomEvent('openContactModal', {
-        detail: {
-          section: 'mobile_quick_actions',
-          ctaText: labels.consultation,
-          source: 'mobile_nav_bar',
-        },
-      })
-    );
+    window.dispatchEvent(new CustomEvent('openContactModal', {
+      detail: { section: 'mobile_quick_actions', ctaText: labels.consultation, source: 'mobile_nav_bar' },
+    }));
   };
 
   const toggleOisha = () => {
-    trackEvent({
-      action: 'assistant_opened',
-      category: 'Engagement',
-      label: 'mobile_nav_bar',
-      section: 'mobile_quick_actions',
-    });
+    trackEvent({ action: 'assistant_opened', category: 'Engagement', label: 'mobile_nav_bar', section: 'mobile_quick_actions' });
     window.dispatchEvent(new CustomEvent('toggleOisha'));
   };
 
@@ -81,7 +69,6 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          key="mobile-nav-bar"
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
@@ -108,9 +95,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
               <div className="flex h-6 w-6 items-center justify-center">
                 <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
               </div>
-              <span className="text-[10px] font-bold leading-none tracking-wide">
-                {labels.call}
-              </span>
+              <span className="text-[10px] font-bold leading-none tracking-wide">{labels.call}</span>
             </a>
 
             {/* Vertical separator */}
@@ -128,9 +113,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
               <div className="flex h-6 w-6 items-center justify-center">
                 <Send className="h-[18px] w-[18px]" aria-hidden="true" />
               </div>
-              <span className="text-[10px] font-bold leading-none tracking-wide">
-                {labels.telegram}
-              </span>
+              <span className="text-[10px] font-bold leading-none tracking-wide">{labels.telegram}</span>
             </a>
 
             {/* Vertical separator */}
@@ -171,9 +154,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
               {/* Shimmer */}
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/12 to-transparent transition-transform duration-600 group-hover:translate-x-full" />
               <MessageSquare className="relative h-[18px] w-[18px] shrink-0" aria-hidden="true" />
-              <span className="relative text-[10px] font-black leading-none tracking-wide">
-                {labels.consultationShort}
-              </span>
+              <span className="relative text-[10px] font-black leading-none tracking-wide">{labels.consultationShort}</span>
             </button>
           </nav>
         </motion.div>

@@ -66,7 +66,6 @@ const ExpandingButton = ({
   icon,
   text,
   ariaLabel,
-  useDarkHeaderText,
   onClick,
 }: {
   href: string;
@@ -75,7 +74,6 @@ const ExpandingButton = ({
   icon: React.ReactNode;
   text: string;
   ariaLabel: string;
-  useDarkHeaderText?: boolean;
   onClick?: () => void;
 }) => {
   const [isHovered, setIsHovered] = React.useState(false);
@@ -91,10 +89,9 @@ const ExpandingButton = ({
       onFocus={() => setIsHovered(true)}
       onBlur={() => setIsHovered(false)}
       onClick={onClick}
-      style={{ width: isHovered ? 180 : 44 }}
+      style={{ width: isHovered ? 160 : 44 }}
       className={cn(
-        'relative flex h-11 items-center justify-start overflow-hidden rounded-full backdrop-blur-md transition-[background-color,box-shadow,width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 group shrink-0',
-        useDarkHeaderText ? 'bg-black/5 text-foreground hover:bg-black/10' : 'bg-white/15 text-white hover:bg-white/25',
+        'relative flex h-11 items-center justify-start overflow-hidden rounded-full bg-white/40 text-foreground backdrop-blur-md transition-[background-color,box-shadow,width] duration-300 hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 group shrink-0',
         "before:absolute before:-inset-2 before:content-['']"
       )}
     >
@@ -105,7 +102,7 @@ const ExpandingButton = ({
         <span
           className="whitespace-nowrap text-sm font-medium ml-3 overflow-hidden transition-[max-width,opacity,transform] duration-200"
           style={{
-            maxWidth: isHovered ? 130 : 0,
+            maxWidth: isHovered ? 108 : 0,
             opacity: isHovered ? 1 : 0,
             transform: isHovered ? 'translateX(0)' : 'translateX(-5px)',
           }}
@@ -184,7 +181,6 @@ export function DesktopNav({
               ariaLabel={dictionary.contact_by_phone}
               icon={<Phone className="h-4.5 w-4.5" />}
               text={dictionary.contact_by_phone}
-              useDarkHeaderText={useDarkHeaderText}
               onClick={() => trackContactClick('phone', 'header')}
             />
             <ExpandingButton
@@ -194,7 +190,6 @@ export function DesktopNav({
               ariaLabel={dictionary.contact_by_telegram}
               icon={<Send className="h-4.5 w-4.5" />}
               text={dictionary.contact_by_telegram}
-              useDarkHeaderText={useDarkHeaderText}
               onClick={() => trackContactClick('telegram', 'header')}
             />
           </div>
@@ -202,7 +197,7 @@ export function DesktopNav({
             <Button
               onClick={onContactClick}
               className={cn(
-                'h-11 rounded-full px-3 text-xs font-extrabold tracking-[0.04em] shadow-[0_14px_32px_-18px_rgba(44,43,245,0.85)] transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.98] xl:px-6 xl:text-sm shrink-0 whitespace-nowrap',
+                'h-11 rounded-full px-3 text-xs font-extrabold uppercase tracking-[0.04em] shadow-[0_14px_32px_-18px_rgba(44,43,245,0.85)] transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.98] xl:px-6 xl:text-sm shrink-0 whitespace-nowrap',
                 scrolled
                   ? 'bg-[#2c2bf5] text-white hover:bg-[#1b18c2] shadow-[0_10px_25px_rgba(44,43,245,0.3)]'
                   : 'bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] text-white hover:shadow-[0_18px_38px_-16px_rgba(44,43,245,0.9)]'

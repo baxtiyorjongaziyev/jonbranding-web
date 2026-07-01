@@ -25,9 +25,6 @@ const OnlineBriefWelcomePage: FC = () => {
     return (
       <main className="flex-grow bg-[#F2EFE6] py-16 sm:py-28 min-h-screen flex items-center justify-center">
         <div className="container max-w-4xl mx-auto px-4">
-          <h1 className="sr-only">
-            {lang === 'uz' ? 'Onlayn Smart Brief' : lang === 'ru' ? 'Онлайн Smart Brief' : lang === 'en' ? 'Online Smart Brief' : '在线智能品牌简报'}
-          </h1>
           <Skeleton className="h-[450px] w-full rounded-3xl" />
         </div>
       </main>

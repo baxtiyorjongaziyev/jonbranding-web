@@ -13,7 +13,7 @@ const t = {
     contacts: [
       { label: 'Telefon', value: '+998 33 645 00 97', href: 'tel:+998336450097' },
       { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
-      { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
+      { label: 'Instagram', value: '@jonbranding.uz', href: 'https://instagram.com/jonbranding.uz' },
       { label: 'Email', value: 'info@jonbranding.uz', href: 'mailto:info@jonbranding.uz' },
     ],
     addressLabel: 'Manzil',
@@ -35,7 +35,7 @@ const t = {
     contacts: [
       { label: 'Телефон', value: '+998 33 645 00 97', href: 'tel:+998336450097' },
       { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
-      { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
+      { label: 'Instagram', value: '@jonbranding.uz', href: 'https://instagram.com/jonbranding.uz' },
       { label: 'Email', value: 'info@jonbranding.uz', href: 'mailto:info@jonbranding.uz' },
     ],
     addressLabel: 'Адрес',
@@ -57,7 +57,7 @@ const t = {
     contacts: [
       { label: 'Phone', value: '+998 33 645 00 97', href: 'tel:+998336450097' },
       { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
-      { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
+      { label: 'Instagram', value: '@jonbranding.uz', href: 'https://instagram.com/jonbranding.uz' },
       { label: 'Email', value: 'info@jonbranding.uz', href: 'mailto:info@jonbranding.uz' },
     ],
     addressLabel: 'Address',
@@ -79,7 +79,7 @@ const t = {
     contacts: [
       { label: '电话', value: '+998 33 645 00 97', href: 'tel:+998336450097' },
       { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
-      { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
+      { label: 'Instagram', value: '@jonbranding.uz', href: 'https://instagram.com/jonbranding.uz' },
       { label: '邮件', value: 'info@jonbranding.uz', href: 'mailto:info@jonbranding.uz' },
     ],
     addressLabel: '地址',

@@ -126,14 +126,10 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {
                 {s.name}
               </div>
               <div className="text-sm text-[var(--at-ink-2)] leading-[1.55] hidden md:block">{s.desc}</div>
-              <div className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.06em] text-[var(--at-muted)] hidden md:block relative group/time">
-                <span className="border-b border-dashed border-[var(--at-muted)] cursor-help pb-0.5 transition-colors group-hover/time:text-[var(--at-accent)] group-hover/time:border-[var(--at-accent)]">{s.time}</span>
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[200px] bg-[var(--at-ink)] text-white text-[10px] normal-case tracking-normal p-2 rounded shadow-xl opacity-0 pointer-events-none group-hover/time:opacity-100 group-hover/time:-translate-y-1 transition-all duration-300 z-10">
-                  {lang === 'uz' ? 'Muddat loyiha hajmiga qarab belgilanadi' : lang === 'ru' ? 'Сроки зависят от объема проекта' : lang === 'en' ? 'Timeline depends on project scope' : '时间表取决于项目范围'}
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-[var(--at-ink)]"></div>
-                </div>
+              <div className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.06em] text-[var(--at-muted)] hidden md:block">
+                {s.time}
               </div>
-              <div className="justify-self-end w-11 h-11 rounded-full border border-[var(--at-line)] grid place-items-center text-sm group-hover:bg-[var(--at-accent)] group-hover:text-white group-hover:border-[var(--at-accent)] group-hover:-rotate-45 group-hover:scale-110 group-hover:shadow-[0_10px_20px_rgba(37,99,235,0.2)] transition-all duration-300">
+              <div className="justify-self-end w-11 h-11 rounded-full border border-[var(--at-line)] grid place-items-center text-sm group-hover:bg-[var(--at-accent)] group-hover:text-white group-hover:border-[var(--at-accent)] group-hover:-rotate-45 transition-all duration-300">
                 ↗
               </div>
             </div>

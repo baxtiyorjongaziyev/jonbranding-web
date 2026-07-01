@@ -23,7 +23,7 @@ const translations = {
     tagline: 'Premium Brending Agentligi',
     badge: 'Bepul Brand Audit mavjud',
     h1a: 'Brendingiz',
-    h1b: 'aslida*',
+    h1b: 'aslida',
     h1c: "qancha yo'qotyapti?",
     desc: { text: "Noto'g'ri qadoq, eskirgan logotip va ishonchsiz sayt orqali yuzlab mijozlarni yo'qotyapsiz. ", bold: "Bepul Brand Audit orqali buni qanday tuzatishni bilib oling." },
     cta1: 'Bepul Brand Audit olish ↗',
@@ -204,7 +204,6 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
                     src={activeItem.src} 
                     alt={activeItem.name} 
                     fill 
-                    quality={100}
                     sizes="(max-width: 768px) 100vw, 800px" 
                     className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" 
                     priority
@@ -213,14 +212,14 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
                   
                   <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex justify-between items-end">
                     <div>
-                      <motion.h2 
+                      <motion.h3
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.3, duration: 0.5 }}
                         className="text-white font-bold text-3xl md:text-5xl mb-3 tracking-tight leading-tight drop-shadow-lg"
                       >
                         {activeItem.name}
-                      </motion.h2>
+                      </motion.h3>
                       <motion.span 
                         initial={{ y: 10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}

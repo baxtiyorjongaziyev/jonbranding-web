@@ -20,7 +20,7 @@
     "services_and_prices": "服务与价格",
     "services_and_prices_desc": "构建您自己的服务包并立即获取价格。",
     "contact_by_phone": "联系电话",
-    "contact_by_telegram": "通过电报",
+    "contact_by_telegram": "Telegram 联系",
     "free_consultation": "Brand Audit",
     "open_menu": "菜单",
     "switch_lang": "语言",
@@ -304,13 +304,7 @@
     "thinking": "Oisha 正在思考...",
     "openButtonAriaLabel": "打开 Oisha 聊天",
     "closeButtonAriaLabel": "关闭 Oisha 聊天",
-    "sendButtonAriaLabel": "发送消息",
-    "proactive": {
-      "sotuvchi-kartochka": "您好！我看到您对我们的Uzem/平台卖家卡片感兴趣。需要我分享这方面的工作案例集吗？",
-      "xizmatlar": "您好！您正在浏览我们的服务。哪个领域最让您感兴趣？让我帮您看看实际案例。",
-      "quiz": "您快完成测试了！想提前查看结果吗？",
-      "blog": "很高兴您在阅读这篇文章。顺便说一下，您可以就此主题免费检查您的品牌。"
-    }
+    "sendButtonAriaLabel": "发送消息"
   },
   "home": {
     "cta1_title": "您的品牌能否让买家信任您？让我们来检测一下。",
@@ -1977,12 +1971,7 @@
     "pricing_cta_standard": "选择",
     "loss_calc_eyebrow": "损失计算器 · 中期报告",
     "index_archive_eyebrow": "档案",
-    "process_step_label": "步骤",
-    "instagram": {
-      "title": "在 Instagram 上关注我们",
-      "subtitle": "我们最新的项目和团队生活",
-      "followBtn": "关注"
-    }
+    "process_step_label": "步骤"
   },
   "onlineBrief": {
     "meta": {
@@ -2245,13 +2234,5 @@
         }
       ]
     }
-  },
-  "reviewsPage": {
-    "title": "客户评价与反馈",
-    "subtitle": "用事实说话。来自真实客户的语音和视频评价，展现我们的专业水准与成果。",
-    "back": "返回首页",
-    "ctaText": "获取免费审计",
-    "voiceLabel": "语音评价",
-    "videoLabel": "视频评价"
   }
 }

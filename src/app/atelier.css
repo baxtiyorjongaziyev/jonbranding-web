@@ -1341,12 +1341,12 @@ html[data-theme="dark"] body:has(.atelier-theme) {
 }
 @media (max-width: 768px) {
   .atelier-theme .calc-slider::-webkit-slider-thumb {
-    width: 38px;
-    height: 38px;
+    width: 28px;
+    height: 28px;
   }
   .atelier-theme .calc-slider::-moz-range-thumb {
-    width: 38px;
-    height: 38px;
+    width: 28px;
+    height: 28px;
   }
 }
 .atelier-theme .calc-out {

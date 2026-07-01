@@ -11,8 +11,6 @@ const QUERY = `
     "imageHint": coalesce(imageHint, name),
     "videoUrl": videoUrl,
     "audioUrl": audioUrl,
-    "audioFileUrl": audioFile.asset->url,
-    "videoFileUrl": videoFile.asset->url,
     "company": coalesce(company[$lang], company.uz, company.en, ""),
     "quote": coalesce(quote[$lang], quote.uz, quote.en, "")
   }
@@ -27,7 +25,7 @@ function getFallback(lang: string): Testimonial[] {
 
 export async function fetchTestimonials(lang: string): Promise<Testimonial[]> {
   try {
-    const data: Testimonial[] = await client.fetch(QUERY, { lang }, { next: { revalidate: 30 } });
+    const data: Testimonial[] = await client.fetch(QUERY, { lang });
     if (data && data.length > 0) return data;
   } catch (e) {
     console.error('Sanity testimonials fetch failed, using fallback:', e);

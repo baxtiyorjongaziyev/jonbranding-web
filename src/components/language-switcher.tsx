@@ -94,13 +94,11 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ lang, isInverted = 
   });
 
   const CurrentLangIcon = localeIcons[lang];
-  const useInvertedTone = isInverted;
+  const useInvertedTone = isInverted && !scrolled;
   const triggerTone = useInvertedTone
-    ? scrolled
-      ? "bg-white/15 text-white hover:bg-white/25"
-      : "bg-white/10 text-white hover:bg-white/15"
+    ? "bg-white/10 text-white hover:bg-white/15 hover:text-white"
     : scrolled
-      ? "bg-black/5 text-foreground hover:bg-black/10"
+      ? "bg-white/20 text-foreground hover:bg-white/30"
       : "bg-black/5 text-foreground hover:bg-black/10";
 
   if (!mounted) {

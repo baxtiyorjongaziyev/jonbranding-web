@@ -49,13 +49,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: Loc
       description: m.description,
       url: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/xizmatlar'),
       siteName: 'Jon.Branding',
-      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630, alt: 'Jon.Branding xizmatlari' }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: m.title,
-      description: m.description,
-      images: ['/images/cms/og-image.jpeg'],
     },
   };
 }

@@ -58,13 +58,13 @@ export const staticTestimonials: Testimonial[] = [
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
   },
   {
-    name: "Sevara Holmanova",
+    name: "Sevara Xolmanova",
     company: "Fidda by Sevara asoschisi",
-    avatar: "SH",
+    avatar: "SX",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png",
     imageHint: "female entrepreneur portrait",
-    quote: "Bu jamoa bilan ishlaganimdan juda xursandman. Tez va kutilganidan ham a'lo darajada natija oldim. O'zim ham brending, ham stiker, ham patentlash bo'yicha buyurtma qoldirgandim. 7 oydan so'ng hammasi tayyor bo'ladi Xudo xohlasa. Halol ishlaysizlar, Alloh rozi bo'lsin. Juda xursandman, ishlaringizda zafarlar tilab qolaman. Rahmat.",
-    audioUrl: "/audio/sevara-holmanova.mp3"
+    quote: "Men bu jamoa bn ishlab ko'rdim menga juda yoqdi samarali va natijasi siz kutgandanda A'lo bo'larkan brendlashni xam stikerlash va patenlashni xam berganman 7 oyda aniq boladi Hudo xohlasa Halol ishlarkansilar Allox rozi bo'lsin silardan juda xursand bo'ldim ishilarga rivoj Rahmat.",
+    audioUrl: "/audio/sevara-holmanova.ogg"
   },
   {
     name: "Nodirbek",
@@ -80,17 +80,8 @@ export const staticTestimonials: Testimonial[] = [
     avatar: "JH",
     image: "",
     imageHint: "tech startup founder",
-    quote: "Kutganimdan ham yaxshiroq bo'lib chiqibdi. Hozir logotipga qarab o'zim maza qilyapman. Menga yoqqan tarafi - ishonchli. Vaqtidan ertaroq qilib berganliklari ham juda yaxshi bo'ldi. Natijalarni tezroq ulashganlari a'lo. Katta rahmat aka!",
-    audioUrl: "/audio/javohir-haqberdiyev.mp3"
-  },
-  {
-    name: "Hikmatulloh Toxirov",
-    company: "Almaz Shoes asoschisi",
-    avatar: "HT",
-    image: "",
-    imageHint: "Almaz Shoes founder",
-    quote: "Tezkor patent juda foydali bo'ldi. Brend himoyasi haqida o'ylab yurgan edim, juda o'z vaqtida taklif qildingiz. Hujjatlar tez tayyorlandi, jarayon aniq va shaffof. Rahmat!",
-    videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"
+    quote: "Men kutganimdan ham zo'r bo'ldi. Hozir logotipni ko'ryapmanda o'zim ham mazza qilyapman. Menga yoqqan tomoni ishonch bo'ldi. Keyin muddatdan oldin topshirilgani juda zo'r bo'ldi. Tez natijalar bilan bo'lishganiz zo'r bo'ldi. Rahmat aka kattakon!",
+    audioUrl: "/audio/javohir-haqberdiyev.ogg"
   },
 ];
 
@@ -137,15 +128,6 @@ export const staticTestimonialsRu: Testimonial[] = [
     imageHint: "tech startup founder",
     quote: "ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ð»Ð¾ÑÑŒ Ð´Ð°Ð¶Ðµ Ð»ÑƒÑ‡ÑˆÐµ, Ñ‡ÐµÐ¼ Ñ Ð¾Ð¶Ð¸Ð´Ð°Ð». Ð¡ÐµÐ¹Ñ‡Ð°Ñ ÑÐ¼Ð¾Ñ‚Ñ€ÑŽ Ð½Ð° Ð»Ð¾Ð³Ð¾Ñ‚Ð¸Ð¿ Ð¸ ÑÐ°Ð¼ Ð½Ð°ÑÐ»Ð°Ð¶Ð´Ð°ÑŽÑÑŒ. Ð§Ñ‚Ð¾ Ð¼Ð½Ðµ Ð¿Ð¾Ð½Ñ€Ð°Ð²Ð¸Ð»Ð¾ÑÑŒ â€” ÑÑ‚Ð¾ Ð´Ð¾Ð²ÐµÑ€Ð¸Ðµ. Ð˜ Ñ‚Ð¾, Ñ‡Ñ‚Ð¾ ÑÐ´Ð°Ð»Ð¸ Ñ€Ð°Ð½ÑŒÑˆÐµ ÑÑ€Ð¾ÐºÐ°, Ð±Ñ‹Ð»Ð¾ Ð·Ð´Ð¾Ñ€Ð¾Ð²Ð¾. ÐžÑ‚Ð»Ð¸Ñ‡Ð½Ð¾, Ñ‡Ñ‚Ð¾ Ð±Ñ‹ÑÑ‚Ñ€Ð¾ Ð¿Ð¾Ð´ÐµÐ»Ð¸Ð»Ð¸ÑÑŒ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð°Ð¼Ð¸. Ð‘Ð¾Ð»ÑŒÑˆÐ¾Ðµ ÑÐ¿Ð°ÑÐ¸Ð±Ð¾, Ð°ÐºÐ°!"
   },
-  {
-    name: "Ð¥Ð¸ÐºÐ¼Ð°Ñ‚ÑƒÐ»Ð»Ð¾Ñ… Ð¢Ð¾Ñ…Ð¸Ñ€Ð¾Ð²",
-    company: "ÐžÑ Ð½Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Almaz Shoes",
-    avatar: "Ð¥Ð¢",
-    image: "",
-    imageHint: "Almaz Shoes founder",
-    quote: "Ð‘Ñ‹Ñ Ñ‚Ñ€Ñ‹Ð¹ Ð¿Ð°Ñ‚ÐµÐ½Ñ‚ Ð¾ÐºÐ°Ð·Ð°Ð»Ñ Ñ  Ð¾Ñ‡ÐµÐ½ÑŒ Ð¿Ð¾Ð»ÐµÐ·Ð½Ñ‹Ð¼. Ð¯ Ð´ÑƒÐ¼Ð°Ð» Ð¾ Ð·Ð°Ñ‰Ð¸Ñ‚Ðµ Ð±Ñ€ÐµÐ½Ð´Ð°, Ð¸ Ð²Ñ‹ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶Ð¸Ð»Ð¸ Ñ Ñ‚Ð¾ Ð¾Ñ‡ÐµÐ½ÑŒ Ð²Ð¾Ð²Ñ€ÐµÐ¼Ñ . Ð”Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ð±Ñ‹Ñ Ñ‚Ñ€Ð¾ Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹, Ð¿Ñ€Ð¾Ñ†ÐµÑ Ñ  Ñ‡Ñ‘Ñ‚ÐºÐ¸Ð¹ Ð¸ Ð¿Ñ€Ð¾Ð·Ñ€Ð°Ñ‡Ð½Ñ‹Ð¹. Ð¡Ð¿Ð°Ñ Ð¸Ð±Ð¾!",
-    videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"
-  },
 ];
 
 export const staticTestimonialsEn: Testimonial[] = [
@@ -181,7 +163,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     avatar: "N",
     image: "",
     imageHint: "restaurant manager portrait",
-    quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! ðŸ¤ ðŸ »ðŸ˜Š"
+    quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! ðŸ¤ðŸ»ðŸ˜Š"
   },
   {
     name: "Javohir Haqberdiyev",
@@ -190,15 +172,6 @@ export const staticTestimonialsEn: Testimonial[] = [
     image: "",
     imageHint: "tech startup founder",
     quote: "It turned out even better than I expected. I'm looking at the logo now and I'm enjoying it myself. What I liked was the trust. And the fact that it was delivered ahead of schedule was great. It's great that you shared the results quickly. Thanks a lot, aka!"
-  },
-  {
-    name: "Hikmatulloh Toxirov",
-    company: "Founder of Almaz Shoes",
-    avatar: "HT",
-    image: "",
-    imageHint: "Almaz Shoes founder",
-    quote: "The quick patent service was very useful. I was thinking about brand protection, and you offered it at the right time. The documents were prepared quickly, the process was clear and transparent. Thank you!",
-    videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"
   },
 ];
 
@@ -282,15 +255,15 @@ export const staticTestimonialsZh: Testimonial[] = [
     avatar: "SX",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png",
     imageHint: "female entrepreneur portrait",
-    quote: "æˆ‘ä¸Žè¿™ä¸ªå›¢é˜Ÿå ˆä½œè¿‡ï¼Œæˆ‘é žå¸¸å–œæ¬¢ã€‚é žå¸¸é«˜æ•ˆï¼Œç»“æžœè¶…å‡ºäº†æˆ‘çš„é¢„æœŸã€‚æˆ‘è®¢è´­äº†å“ ç‰Œè®¾è®¡ã€ è´´çº¸å’Œä¸“åˆ©ç”³è¯·ã€‚åœ¨7ä¸ªæœˆå†…ï¼Œä¸Šå¸ ä¿ ä½‘ï¼Œä¸€åˆ‡éƒ½ä¼šå‡†å¤‡å°±ç»ªã€‚ä½ ä»¬è¯šä¿¡ç» è ¥ï¼Œæ„¿å®‰æ‹‰ä¿ ä½‘ä½ ä»¬ã€‚æˆ‘é žå¸¸å¼€å¿ƒï¼Œç¥ ä½ ä»¬å·¥ä½œæˆ åŠŸã€‚è°¢è°¢ã€‚"
+    quote: "æˆ‘ä¸Žè¿™ä¸ªå›¢é˜Ÿåˆä½œè¿‡ï¼Œæˆ‘éžå¸¸å–œæ¬¢ã€‚éžå¸¸é«˜æ•ˆï¼Œç»“æžœè¶…å‡ºäº†æˆ‘çš„é¢„æœŸã€‚æˆ‘è®¢è´­äº†å“ç‰Œè®¾è®¡ã€è´´çº¸å’Œä¸“åˆ©ç”³è¯·ã€‚åœ¨7ä¸ªæœˆå†…ï¼Œä¸Šå¸ä¿ä½‘ï¼Œä¸€åˆ‡éƒ½ä¼šå‡†å¤‡å°±ç»ªã€‚ä½ ä»¬è¯šä¿¡ç»è¥ï¼Œæ„¿å®‰æ‹‰ä¿ä½‘ä½ ä»¬ã€‚æˆ‘éžå¸¸å¼€å¿ƒï¼Œç¥ä½ ä»¬å·¥ä½œæˆåŠŸã€‚è°¢è°¢ã€‚"
   },
   {
     name: "Nodirbek",
-    company: "Barakah é¤ åŽ…åˆ›å§‹äºº",
+    company: "Barakah é¤åŽ…åˆ›å§‹äºº",
     avatar: "N",
     image: "",
     imageHint: "restaurant manager portrait",
-    quote: "å¦‚æžœä½ è¿˜è®°å¾—çš„è¯ ï¼Œ3å¹´å‰ ä½ ä»¬ä¸ºè¿™ä¸ªå“ ç‰Œè®¾è®¡äº†æ ‡å¿—ã€‚é žå¸¸æ„Ÿè°¢ï¼Œæ•ˆæžœé žå¸¸å¥½ï¼ŒçœŸçš„æ¯ ä¸ªäººéƒ½ç§°èµžå®ƒã€‚é žå¸¸æ„Ÿè°¢ï¼Œå·´èµ«è’‚çº¦å°”å…„å¼Ÿï¼ ðŸ¤ ðŸ »ðŸ˜Š"
+    quote: "å¦‚æžœä½ è¿˜è®°å¾—çš„è¯ï¼Œ3å¹´å‰ä½ ä»¬ä¸ºè¿™ä¸ªå“ç‰Œè®¾è®¡äº†æ ‡å¿—ã€‚éžå¸¸æ„Ÿè°¢ï¼Œæ•ˆæžœéžå¸¸å¥½ï¼ŒçœŸçš„æ¯ä¸ªäººéƒ½ç§°èµžå®ƒã€‚éžå¸¸æ„Ÿè°¢ï¼Œå·´èµ«è’‚çº¦å°”å…„å¼Ÿï¼ðŸ¤ðŸ»ðŸ˜Š"
   },
   {
     name: "Javohir Haqberdiyev",
@@ -298,15 +271,6 @@ export const staticTestimonialsZh: Testimonial[] = [
     avatar: "JH",
     image: "",
     imageHint: "tech startup founder",
-    quote: "ç»“æžœæ¯”æˆ‘é¢„æƒ³çš„è¿˜è¦ å¥½ã€‚æˆ‘çŽ°åœ¨çœ‹ç €æ ‡å¿—ï¼Œè‡ªå·±ä¹Ÿå¾ˆäº«å —ã€‚æˆ‘å–œæ¬¢çš„æ˜¯é‚£ä»½ä¿¡ä»»ã€‚è€Œä¸”æ  å‰ äº¤ä»˜çœŸçš„å¾ˆæ£’ã€‚å¾ˆé«˜å…´ä½ ä»¬èƒ½è¿™ä¹ˆå¿«åˆ†äº«ç»“æžœã€‚å¤šè°¢ï¼Œå¤§å“¥ï¼ "
-  },
-  {
-    name: "Hikmatulloh Toxirov",
-    company: "Almaz Shoes åˆ›å§‹äºº",
-    avatar: "HT",
-    image: "",
-    imageHint: "Almaz Shoes founder",
-    quote: "å¿«é€Ÿä¸“åˆ©æœ åŠ¡é žå¸¸æœ‰ç”¨ã€‚æˆ‘æ­£åœ¨è€ƒè™‘å“ ç‰Œä¿ æŠ¤ï¼Œä½ ä»¬å Šæ—¶æ  ä¾›äº†è¿™é¡¹æœ åŠ¡ã€‚æ–‡ä»¶å‡†å¤‡å¾—å¾ˆå¿«ï¼Œæµ ç¨‹æ¸…æ™°é€ æ˜Žã€‚è°¢è°¢ï¼ ",
-    videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"
+    quote: "ç»“æžœæ¯”æˆ‘é¢„æƒ³çš„è¿˜è¦å¥½ã€‚æˆ‘çŽ°åœ¨çœ‹ç€æ ‡å¿—ï¼Œè‡ªå·±ä¹Ÿå¾ˆäº«å—ã€‚æˆ‘å–œæ¬¢çš„æ˜¯é‚£ä»½ä¿¡ä»»ã€‚è€Œä¸”æå‰äº¤ä»˜çœŸçš„å¾ˆæ£’ã€‚å¾ˆé«˜å…´ä½ ä»¬èƒ½è¿™ä¹ˆå¿«åˆ†äº«ç»“æžœã€‚å¤šè°¢ï¼Œå¤§å“¥ï¼"
   },
 ];

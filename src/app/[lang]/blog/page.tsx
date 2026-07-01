@@ -1,45 +1,35 @@
 import { Metadata } from 'next';
+import { client } from '@/sanity/lib/client';
 import Link from 'next/link';
 import Image from 'next/image';
-import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { client } from '@/sanity/lib/client';
-import { safeJsonStringify } from '@/lib/security';
 
 export const revalidate = 300;
 
 type Props = { params: Promise<{ lang: string }> };
 
-const titles = {
-  uz: 'Blog | Jon.Branding',
-  ru: 'Блог | Jon.Branding',
-  en: 'Branding Blog | Jon.Branding',
-  zh: '博客 | Jon.Branding'
-};
-const descs = {
-  uz: 'Brending, dizayn va marketing haqida foydali maqolalar. Neyming, logotip, brend strategiyasi va qadoq dizayni bo\'yicha ekspert maslahatlari.',
-  ru: 'Полезные статьи и аналитика о брендинге, дизайне и маркетинге. Экспертные советы по неймингу, логотипу, бренд-стратегии и дизайну упаковки.',
-  en: 'Actionable articles about branding, naming, logo design and marketing strategy. Expert tips to grow your business with professional brand identity.',
-  zh: '关于品牌塑造、命名、标志设计和营销策略的实用文章。通过专业品牌标识发展业务的专家建议。',
-};
+const POSTS_QUERY = `*[_type == "post" && language == $lang] | order(publishedAt desc) {
+  _id,
+  title,
+  "slug": slug.current,
+  description,
+  "image": image.asset->url + "?w=800&q=80",
+  publishedAt
+}`;
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const titles = { uz: 'Blog | Jon.Branding', ru: 'Блог | Jon.Branding', en: 'Blog | Jon.Branding', zh: '博客 | Jon.Branding' };
+  const descs = {
+    uz: 'Brending, dizayn va marketing haqida foydali maqolalar.',
+    ru: 'Полезные статьи о брендинге, дизайне и маркетинге.',
+    en: 'Useful articles about branding, design, and marketing.',
+    zh: '关于品牌、设计和营销的有用文章。',
+  };
   return {
     title: titles[safeLang],
     description: descs[safeLang],
-    openGraph: {
-      title: titles[safeLang],
-      description: descs[safeLang],
-      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: titles[safeLang],
-      description: descs[safeLang],
-      images: ['/images/cms/og-image.jpeg'],
-    },
   };
 }
 
@@ -47,19 +37,11 @@ export default async function BlogPage(props: Props) {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
-  const postsQuery = `*[_type == "post" && language == $lang] | order(publishedAt desc) {
-    title,
-    "slug": slug.current,
-    description,
-    "image": image.asset->url,
-    publishedAt
-  }`;
-  
   let posts: any[] = [];
   try {
-    posts = await client.fetch(postsQuery, { lang: safeLang });
-  } catch (error) {
-    console.error("Failed to fetch blog posts from Sanity:", error);
+    posts = await client.fetch(POSTS_QUERY, { lang: safeLang });
+  } catch (e) {
+    console.error('Blog fetch failed:', e);
   }
 
   let dictionary;
@@ -72,19 +54,8 @@ export default async function BlogPage(props: Props) {
     zh: { label: '博客', title: '文章', empty: '暂无文章。', back: '首页' },
   }[safeLang];
 
-  const siteUrl = 'https://www.jonbranding.uz';
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: safeLang === 'uz' ? 'Bosh sahifa' : safeLang === 'ru' ? 'Главная' : 'Home', item: `${siteUrl}/${safeLang}` },
-      { '@type': 'ListItem', position: 2, name: l.title, item: `${siteUrl}/${safeLang}/blog` },
-    ],
-  };
-
   return (
     <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
-      <Script id="json-ld-breadcrumb-blog" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbJsonLd) }} />
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none z-0" />
 
@@ -109,7 +80,7 @@ export default async function BlogPage(props: Props) {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {posts.map((post) => (
-              <Link key={post.slug} href={`/${safeLang}/blog/${post.slug}`} className="group block">
+              <Link key={post._id} href={`/${safeLang}/blog/${post.slug}`} className="group block">
                 <div className="relative h-56 rounded-2xl overflow-hidden mb-4 border border-white/5">
                   {post.image ? (
                     <Image src={post.image} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />

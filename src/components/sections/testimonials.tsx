@@ -81,51 +81,55 @@ const getAvatarImageUrl = (url?: string) => {
 
 const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Testimonial; labels: { play: string }; onPlay: () => void }) => {
   return (
-    <div className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-brand-line/50 bg-white shadow-[0_10px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] hover:border-brand-blue/30">
-      <CardContent className="p-0 h-full flex flex-col">
-        <div className="relative aspect-[9/16] overflow-hidden bg-[linear-gradient(135deg,#070b12,#122055_55%,#07323a)] flex-grow">
+    <div className="group flex h-full flex-col overflow-hidden rounded-3xl border border-brand-line bg-white shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.1)]">
+      <CardContent className="p-0">
+        <div className="relative aspect-[9/16] overflow-hidden bg-brand-ink">
           <button
             type="button"
             onClick={onPlay}
             className="relative block h-full w-full overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-blue"
           >
-            {testimonial.image && (
+            {testimonial.image ? (
               <Image
                 src={testimonial.image}
                 alt={testimonial.name}
                 fill
                 loading="lazy"
                 sizes="(max-width: 640px) 80vw, (max-width: 1024px) 33vw, 25vw"
-                className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+                className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-105"
               />
+            ) : (
+              <div className="h-full w-full bg-[linear-gradient(135deg,#070b12,#122055_55%,#07323a)]" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
-            
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:scale-110 group-hover:bg-brand-blue border border-white/30">
-                <PlayCircle className="h-8 w-8 ml-1" aria-hidden="true" />
-              </span>
-            </div>
-
-            <div className="absolute bottom-6 left-5 right-5 flex flex-col gap-4">
-              {testimonial.quote && (
-                <p className="text-white/90 text-[13px] italic line-clamp-3 leading-relaxed drop-shadow-md">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-              )}
-              <div className="flex items-center gap-3">
-                <Avatar className="h-11 w-11 ring-2 ring-white/20 shadow-lg">
-                  <AvatarImage src={getAvatarImageUrl(testimonial.image)} alt={testimonial.name} />
-                  <AvatarFallback className="bg-brand-blue/80 text-white text-xs">{testimonial.avatar}</AvatarFallback>
-                </Avatar>
-                <div className="min-w-0">
-                  <p className="truncate text-[15px] font-black text-white drop-shadow-md">{testimonial.name}</p>
-                  <p className="truncate text-[11px] font-bold tracking-widest text-white/70 uppercase mt-0.5">{testimonial.company}</p>
-                </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/15 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-black text-white">{testimonial.name}</p>
+                <p className="mt-1 truncate text-[13px] font-bold text-white/65">{testimonial.company}</p>
               </div>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/95 text-brand-ink shadow-[0_14px_35px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:scale-105">
+                <PlayCircle className="h-6 w-6" aria-hidden="true" />
+              </span>
             </div>
             <span className="sr-only">{labels.play}</span>
           </button>
+        </div>
+        <div className="p-5">
+          <div className="flex items-center gap-3">
+            <Avatar className="h-10 w-10 ring-2 ring-brand-line">
+              <AvatarImage src={getAvatarImageUrl(testimonial.image)} alt={testimonial.name} />
+              <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+            </Avatar>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-bold text-brand-ink">{testimonial.name}</p>
+              <p className="truncate text-[13px] text-brand-slate">{testimonial.company}</p>
+            </div>
+          </div>
+          {testimonial.quote && (
+            <p className="mt-3 text-pretty text-sm italic leading-relaxed text-brand-slate">
+              &ldquo;{testimonial.quote}&rdquo;
+            </p>
+          )}
         </div>
       </CardContent>
     </div>
@@ -147,59 +151,45 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
   const toggleAudio = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (!audioRef.current) return;
-    if (isPlaying) { audioRef.current.pause(); } else { audioRef.current.play(); }
+
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
     setIsPlaying(!isPlaying);
   };
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-brand-line/50 bg-white p-7 shadow-[0_10px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] hover:border-brand-blue/30 relative">
-      {isPlaying && <div className="absolute -top-20 -right-20 w-48 h-48 bg-brand-blue/10 rounded-full blur-3xl animate-pulse pointer-events-none" />}
+    <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-brand-line bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)]">
       <audio ref={audioRef} src={testimonial.audioUrl} preload="none" onEnded={() => setIsPlaying(false)} />
-      <div className="flex flex-grow flex-col justify-between relative z-10">
+      <div className="flex flex-grow flex-col justify-between">
         <div>
-          <div className="flex justify-between items-start">
-            <Stars />
-            <div className="bg-brand-blue/10 text-brand-blue px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">Audio</div>
-          </div>
-          <p className="mt-6 text-pretty text-[15px] italic leading-relaxed text-slate-600 font-medium">&ldquo;{testimonial.quote}&rdquo;</p>
-          
+          <Stars />
+          <p className="mt-4 text-pretty text-sm italic leading-relaxed text-brand-slate">&ldquo;{testimonial.quote}&rdquo;</p>
           <button
             type="button"
             onClick={toggleAudio}
             aria-label={isPlaying ? labels.pause : labels.play}
             className={cn(
-              'mt-8 flex w-full items-center justify-between gap-3 rounded-2xl px-5 py-4 text-[13px] uppercase tracking-widest font-black transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue active:scale-[0.98]',
+              'mt-4 flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold transition-[background-color,color,box-shadow,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue active:scale-[0.98]',
               isPlaying
-                ? 'bg-brand-blue text-white shadow-[0_10px_30px_rgba(37,99,235,0.3)] scale-[1.02]'
-                : 'bg-slate-50 text-slate-700 hover:bg-brand-blue hover:text-white border border-slate-100 hover:border-brand-blue shadow-sm hover:shadow-[0_10px_25px_rgba(37,99,235,0.25)]',
+                ? 'bg-brand-blue text-white shadow-lg shadow-brand-blue/25'
+                : 'bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white hover:shadow-lg hover:shadow-brand-blue/25',
             )}
           >
-            <div className="flex items-center gap-3">
-              {isPlaying ? <Pause className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-              {isPlaying ? labels.pause : labels.play}
-            </div>
-            {isPlaying && (
-              <div className="flex items-center gap-1 h-4">
-                {[...Array(4)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    animate={{ height: ['4px', '16px', '4px'] }}
-                    transition={{ duration: 0.5, repeat: Infinity, delay: i * 0.1 }}
-                    className="w-1 bg-white rounded-full"
-                  />
-                ))}
-              </div>
-            )}
+            {isPlaying ? <Pause className="h-5 w-5" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
+            {isPlaying ? labels.pause : labels.play}
           </button>
         </div>
-        <div className="mt-8 flex items-center gap-4 pt-6 border-t border-slate-100">
-          <Avatar className="h-12 w-12 ring-2 ring-slate-100 shadow-sm">
+        <div className="mt-6 flex items-center gap-3">
+          <Avatar className="h-10 w-10 ring-2 ring-brand-line">
             <AvatarImage src={getAvatarImageUrl(testimonial.image)} alt={testimonial.name} />
-            <AvatarFallback className="bg-brand-blue/10 text-brand-blue font-bold">{testimonial.avatar}</AvatarFallback>
+            <AvatarFallback>{testimonial.avatar}</AvatarFallback>
           </Avatar>
           <div className="min-w-0">
-            <p className="truncate text-[15px] font-black text-brand-ink">{testimonial.name}</p>
-            <p className="truncate text-[11px] font-bold text-slate-500 tracking-widest uppercase mt-0.5">{testimonial.company}</p>
+            <p className="truncate text-sm font-bold text-brand-ink">{testimonial.name}</p>
+            <p className="truncate text-[13px] text-brand-slate">{testimonial.company}</p>
           </div>
         </div>
       </div>
@@ -209,21 +199,20 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
 
 const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-brand-line/50 bg-white p-7 shadow-[0_10px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] hover:border-brand-blue/30 relative group">
-      <div className="absolute -top-10 -right-10 text-[120px] font-serif leading-none text-slate-50 opacity-50 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">"</div>
-      <div className="flex flex-grow flex-col justify-between relative z-10">
+    <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-brand-line bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_80px_rgba(15,23,42,0.09)]">
+      <div className="flex flex-grow flex-col justify-between">
         <div>
           <Stars />
-          <p className="mt-6 text-pretty text-[15px] italic leading-relaxed text-slate-600 font-medium">&ldquo;{testimonial.quote}&rdquo;</p>
+          <p className="mt-4 text-pretty text-sm italic leading-relaxed text-brand-slate">&ldquo;{testimonial.quote}&rdquo;</p>
         </div>
-        <div className="mt-8 flex items-center gap-4 pt-6 border-t border-slate-100">
-          <Avatar className="h-12 w-12 ring-2 ring-slate-100 shadow-sm">
+        <div className="mt-6 flex items-center gap-3">
+          <Avatar className="h-10 w-10 ring-2 ring-brand-line">
             <AvatarImage src={getAvatarImageUrl(testimonial.image)} alt={testimonial.name} />
-            <AvatarFallback className="bg-brand-blue/10 text-brand-blue font-bold">{testimonial.avatar}</AvatarFallback>
+            <AvatarFallback>{testimonial.avatar}</AvatarFallback>
           </Avatar>
           <div className="min-w-0">
-            <p className="truncate text-[15px] font-black text-brand-ink">{testimonial.name}</p>
-            <p className="truncate text-[11px] font-bold text-slate-500 tracking-widest uppercase mt-0.5">{testimonial.company}</p>
+            <p className="truncate text-sm font-bold text-brand-ink">{testimonial.name}</p>
+            <p className="truncate text-[13px] text-brand-slate">{testimonial.company}</p>
           </div>
         </div>
       </div>

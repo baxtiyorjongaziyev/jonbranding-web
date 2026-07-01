@@ -14,7 +14,3 @@
 ## 2026-06-25 - Optimized Scroll Listeners with useCallback and Initial State Verification
 **Learning:** When replacing native scroll listeners (`window.addEventListener('scroll')`) with Framer Motion's `useMotionValueEvent(scrollY, 'change', handleScroll)`, I discovered that the handler must be wrapped in `useCallback` to prevent unnecessary re-bindings on every render. Furthermore, since the Framer Motion event only fires on *change* (i.e. user scroll), the component might render in an incorrect initial state before the first scroll occurs.
 **Action:** When migrating scroll events to Framer Motion, always: 1) Wrap the event handler in `useCallback`, and 2) Include a `useEffect` that fires the handler once with `window.scrollY` on mount to ensure correct initial UI state.
-
-## 2026-06-28 - Optimized Scroll Listeners with useCallback and Initial State Verification
-**Learning:** When replacing native scroll listeners (`window.addEventListener('scroll')`) with Framer Motion's `useMotionValueEvent(scrollY, 'change', handleScroll)`, I discovered that the handler must be wrapped in `useCallback` to prevent unnecessary re-bindings on every render. Furthermore, since the Framer Motion event only fires on *change* (i.e. user scroll), the component might render in an incorrect initial state before the first scroll occurs.
-**Action:** When migrating scroll events to Framer Motion, always: 1) Wrap the event handler in `useCallback`, and 2) Include a `useEffect` that fires the handler once with `window.scrollY` on mount to ensure correct initial UI state.

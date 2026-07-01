@@ -20,7 +20,7 @@
     "services_and_prices": "Services & Prices",
     "services_and_prices_desc": "Build your package and get a price instantly.",
     "contact_by_phone": "Call",
-    "contact_by_telegram": "Via Telegram",
+    "contact_by_telegram": "Telegram",
     "free_consultation": "Free Brand Audit",
     "open_menu": "Open Menu",
     "switch_lang": "Change Language",
@@ -296,13 +296,7 @@
     "thinking": "Oisha is thinking...",
     "openButtonAriaLabel": "Open Oisha chat",
     "closeButtonAriaLabel": "Close Oisha chat",
-    "sendButtonAriaLabel": "Send message",
-    "proactive": {
-      "sotuvchi-kartochka": "Assalamu alaykum! I see you're interested in our seller cards for Uzum/marketplaces. Shall I share our private portfolio of work in this area?",
-      "xizmatlar": "Assalamu alaykum! You're exploring our services. Which area interests you most? Let me help you see real examples.",
-      "quiz": "You're almost done with the quiz! Would you like to see results early?",
-      "blog": "Glad you're reading the article. By the way, you can get a free brand check on this topic."
-    }
+    "sendButtonAriaLabel": "Send message"
   },
   "home": {
     "cta1_title": "Does your brand help buyers trust you? Let?s check.",
@@ -1969,12 +1963,7 @@
     "pricing_cta_standard": "Select",
     "loss_calc_eyebrow": "Loss Calculator · Interim Report",
     "index_archive_eyebrow": "Archive",
-    "process_step_label": "Step",
-    "instagram": {
-      "title": "Follow us on Instagram",
-      "subtitle": "Our latest projects and team life",
-      "followBtn": "Follow"
-    }
+    "process_step_label": "Step"
   },
   "onlineBrief": {
     "meta": {
@@ -2237,13 +2226,5 @@
         }
       ]
     }
-  },
-  "reviewsPage": {
-    "title": "Our Clients' Reviews",
-    "subtitle": "Results speak for themselves. Voice and video reviews from real people about our work.",
-    "back": "Back to home",
-    "ctaText": "Get free audit",
-    "voiceLabel": "Voice Review",
-    "videoLabel": "Video Review"
   }
 }

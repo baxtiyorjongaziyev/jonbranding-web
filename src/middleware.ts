@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { defaultLocale, getLocale, locales } from '@/lib/i18n/locale';
 
-export function proxy(request: NextRequest) {
+export const runtime = 'experimental-edge';
+
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const response = NextResponse.next();

@@ -3,8 +3,6 @@ import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parsePortfolioMetadata } from '@/lib/gemini';
 import { safeCompare } from '@/lib/security';
-import { scrapeTelegramPosts } from '@/lib/integrations/telegram';
-import { scrapeInstagramPosts } from '@/lib/integrations/instagram';
 
 // Initialize Sanity client with write access token
 const sanityWriteClient = createClient({
@@ -25,29 +23,21 @@ export async function POST(request: NextRequest) {
 
 async function handleSync(request: NextRequest) {
   try {
-    // 1. Authorize the sync request (secret param OR Bearer cron auth)
-    const querySecret = request.nextUrl.searchParams.get('secret');
+    // 1. Authorize the sync request (secret param OR Vercel cron auth)
+    const secret = request.nextUrl.searchParams.get('secret');
+    const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET;
+    const expectedAuth = process.env.CRON_SECRET ? `Bearer ${process.env.CRON_SECRET}` : null;
     const authHeader = request.headers.get('authorization');
-    const bearerSecret = authHeader?.startsWith('Bearer ') ? authHeader.slice('Bearer '.length) : null;
-    const configuredSecrets = [process.env.CRON_SECRET, process.env.AMOCRM_CRON_SECRET].filter(
-      (value): value is string => Boolean(value)
-    );
-    const providedSecrets = [querySecret, bearerSecret].filter((value): value is string =>
-      Boolean(value)
-    );
+    const isVercelCron = Boolean(expectedAuth && authHeader && safeCompare(authHeader, expectedAuth));
 
-    if (configuredSecrets.length === 0) {
+    if (!cronSecret && !expectedAuth) {
       return NextResponse.json(
         { success: false, error: 'No auth configured' },
         { status: 500 }
       );
     }
 
-    const isAuthorized = providedSecrets.some((provided) =>
-      configuredSecrets.some((configured) => safeCompare(provided, configured))
-    );
-
-    if (!isAuthorized) {
+    if (!isVercelCron && (!secret || !cronSecret || !safeCompare(secret, cronSecret))) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
@@ -128,21 +118,7 @@ async function handleSync(request: NextRequest) {
           textContent = textBuffer.toString('utf8');
           console.log(`[portfolio-sync] Read metadata text from file: ${textFile.name}`);
         } else {
-          console.log(`[portfolio-sync] No text metadata file found, searching Instagram for project name`);
-          let postText = await scrapeInstagramPosts(folder.name);
-          if (postText) {
-            textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Instagramdan olindi):\n${postText}`;
-            console.log(`[portfolio-sync] Successfully fetched case study from Instagram!`);
-          } else {
-            console.log(`[portfolio-sync] No post found on Instagram, searching Telegram @jonbranding`);
-            const tgText = await scrapeTelegramPosts('jonbranding', folder.name);
-            if (tgText) {
-              textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Telegramdan olindi):\n${tgText}`;
-              console.log(`[portfolio-sync] Successfully fetched case study from Telegram!`);
-            } else {
-              console.log(`[portfolio-sync] No post found on Telegram either, falling back to basic folder name`);
-            }
-          }
+          console.log(`[portfolio-sync] No text metadata file found, falling back to folder name`);
         }
 
         // 5. Parse metadata using Gemini

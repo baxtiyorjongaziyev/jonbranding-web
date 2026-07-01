@@ -1,7 +1,6 @@
 'use client';
 import type { FC } from 'react';
-import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
-import { useScroll, useMotionValueEvent } from 'framer-motion';
+import { useState, useMemo, useEffect } from 'react';
 import AtHero from '@/components/sections/at-hero';
 import AtMarquee from '@/components/sections/at-marquee';
 import AtManifesto from '@/components/sections/at-manifesto';
@@ -14,9 +13,6 @@ import AtStickyCta from '@/components/sections/at-sticky-cta';
 import { ATGallery, ATQuotes } from '@/components/atelier/atelier-sections';
 import ExitIntentPopup from '@/components/exit-intent-popup';
 import ScrollDepthAnalytics from '@/components/scroll-depth-analytics';
-import Founder from '@/components/sections/founder';
-import AtProcess from '@/components/sections/at-process';
-import ProcessVideo from '@/components/sections/process-video';
 
 const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary, testimonials = [], portfolioProjects = [] }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -33,33 +29,26 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       }));
   }, [portfolioProjects]);
 
-  // ⚡ Bolt Optimization: Replacing native scroll listeners and DOM layout reads with Framer Motion's useScroll
-  // to avoid synchronous layout thrashing and main-thread blocking.
-  const { scrollYProgress } = useScroll();
-  const modalFiredRef = useRef(false);
-
-  const handleScroll = useCallback((latest: number) => {
-    if (modalFiredRef.current) return;
-    const KEY = 'at_modal_auto_popup_v1';
-    if (typeof window !== 'undefined' && sessionStorage.getItem(KEY)) {
-      modalFiredRef.current = true;
-      return;
-    }
-    if (latest >= 0.85) {
-      modalFiredRef.current = true;
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem(KEY, '1');
-      }
-      setModalOpen(true);
-    }
-  }, []);
-
-  useMotionValueEvent(scrollYProgress, 'change', handleScroll);
-
+  // Chuqur scroll'da (85%) lead modalini sessiyada bir marta avtomatik ochish
   useEffect(() => {
-    // Initial state check on mount in case the user starts already scrolled down
-    handleScroll(scrollYProgress.get());
-  }, [handleScroll, scrollYProgress]);
+    if (typeof window === 'undefined') return;
+    const KEY = 'at_modal_auto_popup_v1';
+    if (sessionStorage.getItem(KEY)) return;
+    let fired = false;
+    const onScroll = () => {
+      if (fired) return;
+      const doc = document.documentElement;
+      const ratio = (window.scrollY + window.innerHeight) / doc.scrollHeight;
+      if (ratio >= 0.85) {
+        fired = true;
+        sessionStorage.setItem(KEY, '1');
+        setModalOpen(true);
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Global CTA hodisalarini (mobil nav, boshqa triggerlar) Atelier modaliga yo'naltirish
   useEffect(() => {
@@ -85,14 +74,10 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtServices onOpen={open} lang={lang} />
       
       <div className="atelier-theme" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
-        <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
+        <ATGallery dictionary={dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
       </div>
 
-      <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />
-
-      <ProcessVideo lang={lang} />
-      <AtProcess lang={lang} onOpen={open} />
-      <Founder lang={lang} dictionary={dictionary.founder} />
+      <ATQuotes dictionary={dictionary} testimonials={testimonials} lang={lang} />
       <AtPricing onOpen={open} lang={lang} />
       <AtFaq lang={lang} onOpen={open} />
       <AtFinalCta onOpen={open} lang={lang} />

@@ -22,7 +22,7 @@ const MainLayout: FC<MainLayoutProps> = ({
 }) => (
   <LenisProvider>
     <div className="flex min-h-screen flex-col bg-secondary/50" suppressHydrationWarning>
-      <main id="main-content">{children}</main>
+      {children}
       <ScrollDepthTracker />
       <ClientEnhancementsLoader
         leadMagnetDictionary={leadMagnetDictionary}

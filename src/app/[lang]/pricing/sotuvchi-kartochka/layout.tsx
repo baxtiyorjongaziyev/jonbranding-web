@@ -15,8 +15,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   let t;
   if (isRu) {
     t = {
-      title: 'Продающий дизайн карточек для Uzum, Yandex Market, WB и Ozon | Jon Branding',
-      description: 'Профессиональный дизайн карточек товаров. Тарифы START, PRO и PREMIUM для маркетплейсов.',
+      title: 'ÐŸÑ€Ð¾Ð´Ð°ÑŽÑ‰Ð¸Ð¹ Ð´Ð¸Ð·Ð°Ð¹Ð½ ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐµÐº Ð´Ð»Ñ Uzum, Yandex Market, WB Ð¸ Ozon | Jon Branding',
+      description: 'ÐŸÑ€Ð¾Ñ„ÐµÑÑÐ¸Ð¾Ð½Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð´Ð¸Ð·Ð°Ð¹Ð½ ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐµÐº Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð² Ð½Ð° ÑƒÑ€Ð¾Ð²Ð½Ðµ Ma\'no Ð¸ Mountain. Ð¢Ð°Ñ€Ð¸Ñ„Ñ‹ START, PRO Ð¸ PREMIUM Ð´Ð»Ñ Ð¼Ð°Ñ€ÐºÐµÑ‚Ð¿Ð»ÐµÐ¹ÑÐ¾Ð².',
     }
   } else if (isEn) {
     t = {
@@ -25,13 +25,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     }
   } else if (isZh) {
     t = {
-      title: 'Uzum, Yandex Market, WB 和 Ozon 的销售卡设计 | Jon Branding',
-      description: '提高销量的专业产品卡设计。探索并订购适用于在线市场的 START、PRO 和 PREMIUM 计划。',
+      title: 'Uzum, Yandex Market, WB å’Œ Ozon çš„é”€å”®å¡è®¾è®¡ | Jon Branding',
+      description: 'æé«˜é”€é‡çš„ä¸“ä¸šäº§å“å¡è®¾è®¡ã€‚æŽ¢ç´¢å¹¶è®¢è´­é€‚ç”¨äºŽåœ¨çº¿å¸‚åœºçš„ STARTã€PRO å’Œ PREMIUM è®¡åˆ’ã€‚',
     }
   } else {
     t = {
       title: 'Uzum, Yandex Market, WB va Ozon uchun sotuvchi kartochka dizayni | Jon Branding',
-      description: 'Sotuvlarni oshiradigan professional mahsulot kartochkasi dizayni.',
+      description: 'Sotuvlarni oshiradigan professional mahsulot kartochkasi dizayni. Ma\'no va Mountain darajasidagi sifat.',
     }
   }
 
@@ -41,7 +41,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     metadataBase: new URL('https://www.jonbranding.uz'),
     title: t.title,
     description: t.description,
-    keywords: ["sotuvchi rasm", "uzum kartochka dizayn", "wildberries dizayn", "marketpleyslar uchun dizayn", "branding uz", "logo", "neyming"],
+    keywords: ["sotuvchi rasm", "uzum kartochka dizayn", "wildberries dizayn", "marketpleyslar uchun dizayn", "branding uz", "logo", "neyming", "Ma'no", "Abba", "Mountain", "Minim", "Redfox"],
     openGraph: {
       title: t.title,
       description: t.description,

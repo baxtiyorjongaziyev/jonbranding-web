@@ -43,18 +43,7 @@
 **Learning:** Standard string comparison operators return early when a mismatched character is found, leaking the length of the matching prefix through execution time.
 **Prevention:** Always use a constant-time comparison utility, such as `safeCompare` from `@/lib/security`, when verifying secrets or tokens.
 
-## 2025-06-25 - Fix XSS in JSON-LD script tags
-**Vulnerability:** XSS vulnerability through direct JSON.stringify inside dangerouslySetInnerHTML for JSON-LD structured data in blog and post pages.
-**Learning:** When using dangerouslySetInnerHTML, directly using JSON.stringify can lead to XSS attacks since it does not escape HTML-sensitive characters (like <, >, &, ').
-**Prevention:** Use a safe alternative like safeJsonStringify which escapes these characters.
-
 ## 2026-06-25 - Fail-open webhook authorization through coercion
-**Vulnerability:** In `src/app/api/portfolio-sync/route.ts`, the authorization logic used this pattern:
-
-```ts
-isVercelCron = authHeader === `Bearer ${process.env.CRON_SECRET}`;
-```
-
-However, if `process.env.CRON_SECRET` was undefined, it coerced to the string "undefined", meaning an attacker could bypass authentication by passing `Authorization: Bearer undefined`.
-**Learning:** Checking against environment variables directly using string interpolation can coerce `undefined` into the string "undefined", inadvertently creating a valid, hardcoded secret that attackers can use to bypass authentication.
+**Vulnerability:** In `portfolio-sync/route.ts`, the authorization logic used `isVercelCron = authHeader === \`Bearer ${process.env.CRON_SECRET}\`;`. However, if `process.env.CRON_SECRET` was undefined, it coerced to the string `"undefined"`, meaning an attacker could bypass authentication by passing `Authorization: Bearer undefined`.
+**Learning:** Checking against environment variables directly using string interpolation can coerce `undefined` into the string `"undefined"`, inadvertently creating a valid, hardcoded secret that attackers can use to bypass authentication.
 **Prevention:** Always verify the existence of the expected secret (e.g., using `Boolean(expectedSecret)`) before attempting a comparison. Construct comparison tokens safely without assuming environment variables are always defined.
