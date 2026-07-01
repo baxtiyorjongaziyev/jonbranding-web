@@ -1,7 +1,7 @@
 # AI Agentlar uchun koordinatsiya qoidalari
 
 > **jonbranding-web** repozitoriyasida bir nechta avtonom AI agent parallel ishlaydi.
-> Bu hujjat — hamma agent bir tildan gapirishi uchun. Ish boshlashdan **oldin** o'qing.
+> Bu hujjat — barcha agentlar bir tilda gapirishi uchun. Ish boshlashdan **oldin** o'qing.
 
 ---
 
@@ -59,14 +59,15 @@ Quyidagi fayllarga tegsangiz, PR izohida **ochiq ayting**:
 
 ## 5. Konflikt hal qilish
 
-- Konflikt chiqsa — **o'z hududingdagi** o'zgarishni saqla, boshqa hududnikini `main`dan ol.
+- Konflikt chiqsa — **o'z hududingizdagi** o'zgarishni saqlang, boshqa hududnikini `main`dan oling.
 - Ikkilanaslik bo'lsa — merge qilmang, PR izohida integratorni (`Claude`) chaqiring.
 - Konflikt markerlarini (`<<<<<<<`, `=======`, `>>>>>>>`) hech qachon commit qilmang.
 
 ---
 
-## 6. CI / Deploy
+## 6. CI / Deploy va mahalliy tekshiruvlar
 
+- **Mahalliy tekshiruvlar** — push qilishdan oldin har doim `npm run lint`, `npm run typecheck` va `npm run test` ni ishga tushiring. Loyihada `ignoreBuildErrors: true` yoqilgan bo'lsa ham, kod sifati va tiplar to'g'riligini saqlash shart.
 - **Vercel** — asosiy deploy. Yashil bo'lishi shart.
 - **Netlify** — hozircha e'tiborsiz (loyiha Vercel'da).
 - **CodeRabbit / Gemini** — review beradi; "high priority" topilmalarni tuzating.
