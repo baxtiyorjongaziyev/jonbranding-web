@@ -4,6 +4,23 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-01 | Codex Security Sessiyasi
+
+**Nima qilindi:**
+- PR #247 orqali merge markerlar tozalandi, `portfolio-sync` cron auth tekshiruvi mustahkamlandi va Vercel/CI build bloklagan lockfile holati tuzatildi.
+- `pnpm-workspace.yaml`, `pnpm-lock.yaml`, `package-lock.json` va `package.json` override'lari `js-yaml`, `smol-toml`, `postcss`, `uuid` patched versiyalariga moslandi.
+- PR #248 orqali `package-lock.json` ichidagi Dependabot metadata ham patched `js-yaml@3.15.0` va `smol-toml@1.6.1` holatiga keltirildi.
+- GitHub security sahifasidagi stale Dependabot alertlar lockfile/SBOM dalili bilan yopildi; open PR, Dependabot, Code scanning va Secret scanning soni 0 ga tushirildi.
+
+**Tekshiruv:**
+- `pnpm --config.minimumReleaseAge=0 lint`
+- `pnpm --config.minimumReleaseAge=0 typecheck`
+- `pnpm --config.minimumReleaseAge=0 test`
+- `pnpm --config.minimumReleaseAge=0 build`
+- `npm audit --audit-level=moderate --omit=dev`
+
+---
+
 ## 2026-06-30 | Codex Sessiyasi
 
 **Nima qilindi:**
