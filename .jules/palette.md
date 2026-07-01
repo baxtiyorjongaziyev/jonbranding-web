@@ -29,3 +29,7 @@ which are often suppressed by reset stylesheets or `outline-none`.
 ## 2025-02-12 - Framer Motion AnimatePresence Exit Animations
 **Learning:** In this project, when conditionally rendering children inside Framer Motion's `<AnimatePresence>`, the direct conditionally rendered child component MUST have a unique `key` prop. Without it, Framer Motion cannot track the component's presence lifecycle and the `exit` animation will be abruptly skipped. This was observed in floating widgets like OishaWidget.
 **Action:** Always verify that the top-level motion component inside `<AnimatePresence>` (like `<motion.div>`) has an explicit, stable `key` prop (e.g. `key="modal-name"`) when creating or fixing interactive modals and widgets.
+
+## 2025-02-12 - Semantic HTML for Interactive Grid Options
+**Learning:** Interactive option cards in multi-step wizards (like selecting business spheres or visual styles) are frequently built using `<div onClick={...}>` tags. This creates an accessibility barrier as they lack native keyboard operability (Space/Enter to select) and focusability, and they often lack explicit focus indicators.
+**Action:** Always convert interactive `<div onClick>` elements to semantic `<button type="button">` elements. Ensure they include explicit `focus-visible` utility classes (e.g., `focus-visible:ring-2 focus-visible:ring-[#0B0F17]`) and preserve the layout by applying `text-left` and `w-full` classes where necessary.

@@ -217,10 +217,11 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                     { id: 'online', title: step1.online, desc: step1.onlineDesc, icon: '📱' },
                     { id: 'product', title: step1.product, desc: step1.productDesc, icon: '📦' }
                   ].map(item => (
-                    <div
+                    <button
+                      type="button"
                       key={item.id}
                       onClick={() => setSphere(item.id as any)}
-                      className={`cursor-pointer p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between min-h-[180px] active:scale-[0.98] ${
+                      className={`cursor-pointer p-6 rounded-2xl border text-left w-full transition-all duration-300 flex flex-col justify-between min-h-[180px] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                         sphere === item.id
                           ? 'border-[#0B0F17] bg-[#EFEEEC] shadow-md ring-1 ring-[#0B0F17]'
                           : 'border-[#cbd5e1] hover:border-gray-400 bg-white shadow-sm'
@@ -231,7 +232,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                         <h4 className="font-extrabold text-lg text-[#0B0F17] mt-4">{item.title}</h4>
                         <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">{item.desc}</p>
                       </div>
-                    </div>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -251,25 +252,26 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                   {visualStyles.map(style => {
                     const isSelected = selectedStyles.includes(style.title);
                     return (
-                      <div
+                      <button
+                        type="button"
                         key={style.id}
                         onClick={() => toggleStyle(style.title)}
-                        className={`cursor-pointer rounded-2xl p-4 border transition-all duration-300 relative select-none min-h-[140px] flex flex-col justify-between active:scale-[0.97] bg-gradient-to-br ${style.gradient} ${
+                        className={`cursor-pointer rounded-2xl p-4 border text-left w-full transition-all duration-300 relative select-none min-h-[140px] flex flex-col justify-between active:scale-[0.97] bg-gradient-to-br focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${style.gradient} ${
                           isSelected ? 'shadow-lg ring-2 ring-[#0B0F17]' : 'opacity-85 hover:opacity-100'
                         }`}
                       >
-                        <div>
-                          <div className="flex justify-between items-start">
+                        <div className="w-full">
+                          <div className="flex justify-between items-start w-full">
                             <span className="font-extrabold text-sm leading-tight">{style.title}</span>
                             {isSelected && (
-                              <span className="w-5 h-5 rounded-full bg-[#0B0F17] text-white flex items-center justify-center border border-white">
+                              <span className="w-5 h-5 rounded-full bg-[#0B0F17] text-white flex items-center justify-center border border-white shrink-0 ml-2">
                                 <Check className="w-3.5 h-3.5" />
                               </span>
                             )}
                           </div>
                           <p className="text-[10px] mt-2 opacity-80 leading-normal">{style.desc}</p>
                         </div>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -347,7 +349,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                             key={item.id}
                             type="button"
                             onClick={() => toggleGender(item.label)}
-                            className={`flex-1 py-2.5 px-3 rounded-full text-xs font-bold transition-all border ${
+                            className={`flex-1 py-2.5 px-3 rounded-full text-xs font-bold transition-all border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                               genders.includes(item.label)
                                 ? 'bg-[#0B0F17] text-white border-[#0B0F17]'
                                 : 'bg-white border-[#cbd5e1] text-gray-600 hover:border-gray-400'
@@ -375,7 +377,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                             key={label}
                             type="button"
                             onClick={() => toggleAge(label)}
-                            className={`py-2 px-3 rounded-full text-[11px] font-bold transition-all border ${
+                            className={`py-2 px-3 rounded-full text-[11px] font-bold transition-all border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                               ages.includes(label)
                                 ? 'bg-[#0B0F17] text-white border-[#0B0F17]'
                                 : 'bg-white border-[#cbd5e1] text-gray-600 hover:border-gray-400'
@@ -405,22 +407,23 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                       ].map(motive => {
                         const isSelected = motives.includes(motive.label);
                         return (
-                          <div
+                          <button
+                            type="button"
                             key={motive.id}
                             onClick={() => toggleMotive(motive.label)}
-                            className={`cursor-pointer p-3 rounded-xl border text-xs flex justify-between items-center transition-all ${
+                            className={`cursor-pointer p-3 rounded-xl border text-left w-full text-xs flex justify-between items-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                               isSelected
                                 ? 'bg-[#0B0F17]/5 border-[#0B0F17] font-bold'
                                 : 'bg-white border-[#cbd5e1] hover:border-gray-400'
                             }`}
                           >
                             <span>{motive.label}</span>
-                            <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                            <div className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ml-2 ${
                               isSelected ? 'bg-[#0B0F17] border-[#0B0F17] text-white' : 'border-[#cbd5e1]'
                             }`}>
                               {isSelected && <Check className="w-3.5 h-3.5" />}
                             </div>
-                          </div>
+                          </button>
                         );
                       })}
                     </div>
@@ -515,7 +518,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                               key={service.id}
                               type="button"
                               onClick={() => toggleService(service.label)}
-                              className={`py-2 px-3 rounded-xl text-left text-[11px] font-semibold transition-all border flex items-center justify-between ${
+                              className={`py-2 px-3 rounded-xl text-left w-full text-[11px] font-semibold transition-all border flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                                 isSelected
                                   ? 'bg-[#0B0F17]/5 border-[#0B0F17] text-[#0B0F17] font-bold'
                                   : 'bg-white border-[#cbd5e1] text-gray-600 hover:border-gray-400'
