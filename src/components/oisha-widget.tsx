@@ -130,7 +130,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
     }
   }, [proactiveMsg, userId, toast, translations.error]);
 
-  const fetchHistory = async (uid: string) => {
+  async function fetchHistory(uid: string) {
     try {
       const res = await fetch(`${OISHA_PROXY}?user_id=${uid}`);
       const data = await res.json();
@@ -147,7 +147,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
     } catch (error) {
       console.error('Oisha History Error:', error);
     }
-  };
+  }
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || !userId || isLoading) return;
