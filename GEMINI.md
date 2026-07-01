@@ -6,13 +6,13 @@ Sen Jon Branding agentligining **jonbranding.uz** veb-saytini ishlab chiquvchi A
 
 **jonbranding.uz** — Markaziy Osiyo brend-agentligi uchun premium "Sales Machine" veb-sayt.
 - **Deploy**: Vercel — `git push origin main` qilganda avtomatik
-- **Stack**: Next.js 14, TypeScript, Tailwind CSS, Sanity CMS, Vercel
+- **Stack**: Next.js 16, TypeScript, Tailwind CSS, Sanity CMS, Vercel
 - **GitHub**: `baxtiyorjongaziyev/jonbranding-web`
 
 ## Stack va muhit
 
 ```
-Framework:  Next.js 14 (App Router)
+Framework:  Next.js 16 (App Router)
 Styling:    Tailwind CSS + ShadCN UI
 CMS:        Sanity (project: h6ymmj0v, dataset: production)
 Deploy:     Vercel (Git Integration)
@@ -26,7 +26,7 @@ Animations: Framer Motion
 |---|---|---|
 | `/[lang]/` | `src/app/[lang]/page.tsx` | Bosh sahifa (HomeComponent) |
 | `/[lang]/xizmatlar/` | xizmatlar sahifalari | 6 ta xizmat |
-| `/[lang]/blog/` | Sanity CMS blog | |
+| `/[lang]/blog/` | Markdown blog (`src/posts`); Sanity post schema migration uchun tayyor | |
 | `/[lang]/quiz/` | Brending testi | |
 | `/[lang]/pricing/sotuvchi-kartochka/` | Narxlar | |
 | `/admin/` | Sanity Studio | |

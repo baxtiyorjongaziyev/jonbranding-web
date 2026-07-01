@@ -25,20 +25,22 @@ type Dictionary = {
     additional: string;
     service_prices: string;
     branding_test: string;
-    online_brief?: string;
+    online_brief: string;
     blog: string;
     sitemap: string;
     all_rights_reserved: string;
     back_to_top: string;
     patent_calculator: string;
-    solutions?: string;
-    resources?: string;
-    agency?: string;
-    contact_us?: string;
-    explore_work?: string;
-    read_blogs?: string;
-    privacy_policy_link?: string;
-    terms_of_use_link?: string;
+    solutions: string;
+    resources: string;
+    agency: string;
+    contact_us: string;
+    explore_work: string;
+    read_blogs: string;
+    privacy_policy_link: string;
+    terms_of_use_link: string;
+    about_us: string;
+    contacts_page: string;
 }
 
 const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
@@ -48,19 +50,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   const currentYear = new Date().getFullYear();
   if (!dictionary) return null;
-  const copy = {
-    solutions: lang === 'uz' ? 'Yechimlar' : lang === 'ru' ? 'Решения' : lang === 'zh' ? '解决方案' : 'Solutions',
-    resources: lang === 'uz' ? 'Resurslar' : lang === 'ru' ? 'Ресурсы' : lang === 'zh' ? '资源' : 'Resources',
-    agency: lang === 'uz' ? 'Agentlik' : lang === 'ru' ? 'Агентство' : lang === 'zh' ? '机构' : 'Agency',
-    contact_us: lang === 'uz' ? "Bog'lanish" : lang === 'ru' ? 'Контакты' : lang === 'zh' ? '联系我们' : 'Contact',
-    explore_work: lang === 'uz' ? "Ishlarni ko'rish" : lang === 'ru' ? 'Смотреть работы' : lang === 'zh' ? '查看作品' : 'Explore Work',
-    read_blogs: lang === 'uz' ? "Blogni o'qish" : lang === 'ru' ? 'Читать блог' : lang === 'zh' ? '阅读博客' : 'Read Blog',
-    privacy_policy_link: lang === 'uz' ? 'Maxfiylik siyosati' : lang === 'ru' ? 'Политика конфиденциальности' : lang === 'zh' ? '隐私政策' : 'Privacy Policy',
-    terms_of_use_link: lang === 'uz' ? 'Foydalanish shartlari' : lang === 'ru' ? 'Условия использования' : lang === 'zh' ? '使用条款' : 'Terms',
-    about_us: lang === 'uz' ? 'Haqimizda' : lang === 'ru' ? 'О нас' : lang === 'zh' ? '关于我们' : 'About Us',
-    contacts_page: lang === 'uz' ? 'Aloqa' : lang === 'ru' ? 'Контакты' : lang === 'zh' ? '联系我们' : 'Contact',
-    ...dictionary,
-  };
+  const copy = dictionary;
   const getLocalizedPath = (path: string) => {
     if (path.startsWith('http') || path.startsWith('tel:') || path.startsWith('mailto:')) return path;
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
@@ -115,7 +105,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.solutions}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/xizmatlar/qadoq-dizayni')} className="hover:text-white transition-colors">{copy.packaging_design}</Link></li>
-              <li><Link href={getLocalizedPath('/xizmatlar')} className="hover:text-white transition-colors">{copy.service_prices}</Link></li>
+              <li><Link href={getLocalizedPath('/narxlar')} className="hover:text-white transition-colors">{copy.service_prices}</Link></li>
             </ul>
           </div>
 
@@ -124,7 +114,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.resources}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/blog')} className="hover:text-white transition-colors">{copy.blog}</Link></li>
-              <li><Link href={getLocalizedPath('/online-brief')} className="hover:text-white transition-colors">{copy.online_brief || 'Onlayn-brief'}</Link></li>
+              <li><Link href={getLocalizedPath('/online-brief')} className="hover:text-white transition-colors">{copy.online_brief}</Link></li>
               <li><Link href={getLocalizedPath('/quiz')} className="hover:text-white transition-colors">{copy.branding_test}</Link></li>
               <li><Link href={getLocalizedPath('/checklist')} className="hover:text-white transition-colors">{lang === 'uz' ? 'Brending chek-listi' : lang === 'ru' ? 'Чек-лист по брендингу' : lang === 'zh' ? '品牌清单' : 'Branding Checklist'}</Link></li>
               <li><Link href={getLocalizedPath('/xizmatlar/patent-kalkulyatori')} className="hover:text-white transition-colors">{copy.patent_calculator}</Link></li>
