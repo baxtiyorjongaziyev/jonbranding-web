@@ -10,7 +10,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Skeleton } from './ui/skeleton';
-import DOMPurify from 'isomorphic-dompurify';
 
 const BlogPostClient = ({ post }: { post: BlogPost }) => {
   const params = useParams();
@@ -66,10 +65,10 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
 
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto prose lg:prose-xl">
-             <p className="text-xl text-gray-700 font-semibold leading-relaxed mb-8 border-l-4 border-primary pl-4">
+            <p className="text-xl text-gray-700 font-semibold leading-relaxed mb-8 border-l-4 border-primary pl-4">
                 {post.description}
             </p>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.htmlContent || '') }} />
+            <div dangerouslySetInnerHTML={{ __html: post.htmlContent || '' }} />
           </div>
         </div>
       </article>

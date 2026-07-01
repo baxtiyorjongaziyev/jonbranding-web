@@ -2,7 +2,7 @@
 
 ![Project Status](https://img.shields.io/badge/status-production--ready-success)
 ![Lighthouse Score](https://img.shields.io/badge/lighthouse-100%2F100-brightgreen)
-![Next.js](https://img.shields.io/badge/framework-Next.js%2014-black)
+![Next.js](https://img.shields.io/badge/framework-Next.js%2016-black)
 
 A high-performance, multilingual, and conversion-optimized web application for Jon Branding Agency. Built with Next.js 16, React 19, Sanity CMS, and integrated with AmoCRM and Meta CAPI.
 
@@ -16,7 +16,7 @@ A high-performance, multilingual, and conversion-optimized web application for J
   - **Meta CAPI**: Server-side conversion tracking for accurate marketing attribution.
   - **Google Analytics 4**: Dynamic tracking with privacy-first lazy loading.
   - **Telegram**: Real-time notifications for every lead.
-- **CMS Powered**: Portfolio and blog managed via Sanity.io.
+- **CMS Powered**: Sanity powers Studio/schema and portfolio fetches with local fallbacks; blog content currently lives in `src/posts` markdown until Sanity post content is migrated.
 
 ## 🛠 Tech Stack
 

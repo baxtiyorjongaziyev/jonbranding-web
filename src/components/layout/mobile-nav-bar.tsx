@@ -2,30 +2,22 @@
 
 import { useState } from 'react';
 import { useScroll, useMotionValueEvent, motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, Phone, Send, Sparkles, Home } from 'lucide-react';
+import { MessageSquare, Phone, Send, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
 
 interface MobileNavBarProps {
-  lang: string;
-  dictionary?: {
-    call?: string;
-    telegram?: string;
-    consultation?: string;
-    contact_by_phone?: string;
-    contact_by_telegram?: string;
-    free_consultation?: string;
-    ai?: string;
-    consultation_short?: string;
+  dictionary: {
+    contact_by_phone: string;
+    contact_by_telegram: string;
+    free_consultation: string;
+    ai: string;
+    consultation_short: string;
+    mobile_quick_actions: string;
   };
 }
 
-const NAV_SPRING = { type: 'spring', stiffness: 420, damping: 36, mass: 0.8 };
-
-const iconBtn =
-  'press-effect flex min-w-0 flex-1 flex-col items-center justify-center gap-1.5 rounded-[14px] py-2.5 text-white/40 transition-colors duration-150 active:bg-white/[0.06] hover:bg-white/[0.04] hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
-
-export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
+export default function MobileNavBar({ dictionary }: MobileNavBarProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
@@ -47,12 +39,21 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   });
 
   const labels = {
+<<<<<<< Updated upstream
     call:
       dictionary?.call || dictionary?.contact_by_phone || (lang === 'en' ? 'Call' : "Qo'ng'iroq"),
     telegram: dictionary?.telegram || dictionary?.contact_by_telegram || 'Telegram',
     consultation: dictionary?.consultation || dictionary?.free_consultation || 'Brand Audit',
     consultationShort: dictionary?.consultation_short || (lang === 'uz' ? 'Audit' : 'Audit'),
     ai: dictionary?.ai || 'AI',
+=======
+    call: dictionary.contact_by_phone,
+    telegram: dictionary.contact_by_telegram,
+    consultation: dictionary.free_consultation,
+    consultationShort: dictionary.consultation_short,
+    ai: dictionary.ai,
+    mobileQuickActions: dictionary.mobile_quick_actions,
+>>>>>>> Stashed changes
   };
 
   const openConsultation = () => {
@@ -89,7 +90,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
           className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] md:hidden"
         >
           <nav
-            aria-label="Mobile quick actions"
+            aria-label={labels.mobileQuickActions}
             className={cn(
               'mx-auto flex max-w-[460px] items-stretch overflow-hidden rounded-[18px]',
               'border shadow-[0_-4px_30px_-8px_rgba(0,0,0,0.4),0_25px_60px_-15px_rgba(0,0,0,0.85)]',

@@ -1881,15 +1881,16 @@ export const ATQuotes: FC<ATQuotesProps> = ({
   const audioTestimonials = list.filter((t) => !t.videoUrl && t.audioUrl);
   const textTestimonials = list.filter((t) => !t.videoUrl && !t.audioUrl && t.quote?.trim());
 
+  const vimeoHosts = new Set(['vimeo.com', 'www.vimeo.com', 'player.vimeo.com']);
+
   const getVimeoVideoId = (url?: string) => {
     if (!url) return '';
     try {
       const parsed = new URL(url);
       const hostname = parsed.hostname.toLowerCase();
-      if (!hostname.includes('vimeo.com')) return '';
-      const parts = parsed.pathname.split('/').filter(Boolean);
-      const videoIndex = parts.indexOf('video');
-      return videoIndex >= 0 ? parts[videoIndex + 1] || '' : parts[0] || '';
+      if (!vimeoHosts.has(hostname)) return '';
+      const match = parsed.pathname.match(/^\/(?:video\/)?(\d+)/i);
+      return match ? match[1] : '';
     } catch {
       return '';
     }

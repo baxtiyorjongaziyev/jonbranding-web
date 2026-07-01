@@ -2,6 +2,7 @@
 import type { FC } from 'react';
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useScroll, useMotionValueEvent } from 'framer-motion';
+import BeforeAfter from '@/components/sections/before-after';
 import AtHero from '@/components/sections/at-hero';
 import AtMarquee from '@/components/sections/at-marquee';
 import AtManifesto from '@/components/sections/at-manifesto';
@@ -18,7 +19,7 @@ import Founder from '@/components/sections/founder';
 import AtProcess from '@/components/sections/at-process';
 import ProcessVideo from '@/components/sections/process-video';
 
-const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary, testimonials = [], portfolioProjects = [] }) => {
+const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; brands?: any[]; testimonials?: any[]; portfolioProjects?: any[] }> = ({ lang, dictionary, comparisons = [], testimonials = [], portfolioProjects = [] }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const open = () => setModalOpen(true);
   const close = () => setModalOpen(false);
@@ -86,6 +87,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       
       <div className="atelier-theme" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
         <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
+        <BeforeAfter lang={lang} dictionary={dictionary} comparisons={comparisons} />
       </div>
 
       <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />

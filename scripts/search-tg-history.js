@@ -1,4 +1,5 @@
 const https = require('https');
+const { load } = require('cheerio');
 
 function fetchPage(url, depth = 0, maxDepth = 15) {
   console.log(`[Depth ${depth}] Fetching: ${url}`);
@@ -17,21 +18,15 @@ function fetchPage(url, depth = 0, maxDepth = 15) {
       const prevMatch = data.match(/<link rel="prev" href="([^"]+)"/);
       const prevUrl = prevMatch ? 'https://t.me' + prevMatch[1] : null;
 
-      // Extract message wraps
-      const regex = /<div class="tgme_widget_message_text[^"]*"[^>]*>([\s\S]*?)<\/div>/g;
-      let match;
-      const foundPosts = [];
-
-      while ((match = regex.exec(data)) !== null) {
-        const text = match[1]
-          .replace(/<br\s*\/?>/gi, '\n')
-          .replace(/<[^>]*>/g, '')
-          .trim();
-        
-        if (text.toLowerCase().includes('savod')) {
-          foundPosts.push(text);
-        }
-      }
+      const $ = load(data);
+      const foundPosts = $('.tgme_widget_message_text')
+        .map((_, el) => {
+          const $el = $(el);
+          $el.find('br').replaceWith('\n');
+          return $el.text().trim();
+        })
+        .get()
+        .filter((text) => text.toLowerCase().includes('savod'));
 
       if (foundPosts.length > 0) {
         console.log('\n=========================================');
