@@ -13,15 +13,13 @@ import { Dialog, DialogContent, DialogDescription } from '@/components/ui/dialog
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Loader2, ArrowRight, MessageCircle, Send, X, User, CheckCircle2, PhoneCall, Wallet, Target, ShieldCheck, ExternalLink, Sparkles } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Loader2, ArrowRight, ArrowLeft, MessageCircle, Mail, Phone, Instagram, Send, X, Globe, User, CheckCircle2, Linkedin, PhoneCall, Building2, Wallet, MapPin, Target, ShieldCheck, ExternalLink, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useTelegram } from '@/hooks/use-telegram';
 import { generateEventId, getGaClientId, trackLead, trackEvent } from '@/lib/analytics';
-import type { Locale } from '@/lib/dictionaries';
-import uz from '@/locales/uz.json';
-import ru from '@/locales/ru.json';
-import en from '@/locales/en.json';
-import zh from '@/locales/zh.json';
+import { getDictionary } from '@/lib/dictionaries';
+import Magnetic from '@/components/ui/magnetic';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -32,13 +30,6 @@ interface ContactModalProps {
   lang: string;
 }
 
-const contactTranslations = {
-  uz: uz.contactModal,
-  ru: ru.contactModal,
-  en: en.contactModal,
-  zh: zh.contactModal,
-} as const;
-
 const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice, onFormSubmitSuccess, lang }) => {
   const { toast } = useToast();
   const [isSubmitting, setSubmitting] = useState(false);
@@ -46,11 +37,72 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const [step, setStep] = useState(4);
   const hasStartedRef = useRef(false);
   const { user } = useTelegram();
-  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
-  const translations = contactTranslations[safeLang] as any;
-  const quickContactLabel = translations.quickContactLabel;
-  const auditOfferStack: string[] = translations.auditOfferStack;
-  const riskCopy = translations.riskCopy;
+  const [translations, setTranslations] = useState<any>(null);
+  const fallback = useMemo(() => {
+    const defaultFallbacks: Record<string, any> = {
+      uz: {
+        quickContactLabel: "Tez aloqa",
+        auditGivesLabel: "Auditda olasiz",
+        auditOfferStack: [
+          "5 ta ishonch yo'qotadigan nuqta",
+          "Qaysi xizmat hozir kerakligini aniqlash",
+          "Majburiy sotuvsiz aniq tavsiya"
+        ],
+        objectionCopy: "Hali loyiha boshlashga tayyor bo'lmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.",
+        riskCopy: "Telefon qoldirish shartnoma degani emas. Avval brendingizdagi muammo, imkoniyat va eng foydali keyingi qadamni ko'rsatamiz."
+      },
+      ru: {
+        quickContactLabel: "Быстрая связь",
+        auditGivesLabel: "Что дает аудит",
+        auditOfferStack: [
+          "5 слабых мест вашего бренда",
+          "Четкая рекомендация по услугам",
+          "Никакого давления"
+        ],
+        objectionCopy: "Даже если вы не готовы к покупке, аудит даст вам четкий следующий шаг.",
+        riskCopy: "Оставить телефон — это не контракт. Сначала мы покажем вам проблему и возможность."
+      },
+      en: {
+        quickContactLabel: "Quick contact",
+        auditGivesLabel: "Free audit gives",
+        auditOfferStack: [
+          "5 trust gaps in your brand",
+          "Clear service recommendation",
+          "No pressure"
+        ],
+        objectionCopy: "Even if you are not ready to buy, the audit gives you a clear next step.",
+        riskCopy: "Leaving your phone is not a contract. First we show the problem and opportunity."
+      },
+      zh: {
+        quickContactLabel: "快速联系",
+        auditGivesLabel: "免费审计提供",
+        auditOfferStack: [
+          "您品牌的 5 个信任漏洞",
+          "明确的服务建议",
+          "没有任何压力"
+        ],
+        objectionCopy: "即使您还没有准备好购买，审计也会给您一个明确的下一步。",
+        riskCopy: "留下您的电话不是合同。首先我们会向您展示问题และ机会。"
+      }
+    };
+    return defaultFallbacks[lang] || defaultFallbacks.uz;
+  }, [lang]);
+
+  const quickContactLabel = translations?.quickContactLabel || fallback.quickContactLabel;
+  const auditOfferStack: string[] = translations?.auditOfferStack || fallback.auditOfferStack;
+  const objectionCopy = translations?.objectionCopy || fallback.objectionCopy;
+  const riskCopy = translations?.riskCopy || fallback.riskCopy;
+
+  useEffect(() => {
+    if (isOpen) {
+      setStep(4);
+      getDictionary(lang as any).then(dict => {
+        if (dict && dict.contactModal) {
+          setTranslations(dict.contactModal);
+        }
+      });
+    }
+  }, [isOpen, lang]);
 
   const formSchema = useMemo(() => {
     return z.object({
@@ -59,8 +111,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       ambition: z.string().optional(),
       pain: z.string().optional(),
       budget: z.string().optional(),
-      fullName: z.string().min(2, { message: translations.formErrors.fullName }),
-      phone: z.string().min(12, { message: translations.formErrors.phone }),
+      fullName: z.string().min(2, { message: translations?.formErrors?.fullName || 'Ism kiritilishi shart' }),
+      phone: z.string().min(12, { message: translations?.formErrors?.phone || 'To\'liq telefon raqamini kiriting' }),
       telegram: z.string().optional(),
     });
   }, [translations]);
@@ -126,7 +178,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       });
 
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || translations.errorToast.description);
+      if (!response.ok) throw new Error(result.error || 'Server error');
       
       setSubmitted(true);
       confetti({ 
@@ -163,7 +215,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         event_id: eventId,
         error_message: error.message,
       });
-      toast({ title: translations.errorToast.title, description: error.message, variant: 'destructive' });
+      toast({ title: translations?.errorToast?.title || 'Xato', description: error.message, variant: 'destructive' });
     } finally {
       setSubmitting(false);
     }
@@ -203,13 +255,13 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DialogContent className="fixed bottom-0 top-auto left-0 translate-x-0 w-full max-w-full h-[92dvh] max-h-[92dvh] rounded-t-[2.5rem] rounded-b-none border-none p-0 overflow-hidden shadow-2xl transition-all duration-300 sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:w-[95vw] sm:max-w-[1000px] sm:h-[620px] sm:max-h-[85vh] sm:rounded-3xl [&>button:last-child]:hidden">
         <DialogDescription className="sr-only">
-          {translations.srDescription}
+          {translations?.srDescription || 'Brand audit contact form'}
         </DialogDescription>
         {/* Safe, permanent close button that never scrolls away */}
         <button
           type="button"
           onClick={onClose}
-          aria-label={translations.buttons.close}
+          aria-label={translations?.buttons?.close}
           className="absolute right-4 top-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/80 bg-white/95 text-slate-900 shadow-[0_18px_45px_-24px_rgba(15,23,42,0.9)] transition-[background-color,transform,color] duration-200 hover:bg-slate-950 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 active:scale-[0.96]"
         >
           <X className="h-5 w-5" aria-hidden="true" />
@@ -225,14 +277,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
             <div className="relative z-10 w-full">
               <h2 className="text-xl sm:text-3xl lg:text-[2.1rem] font-extrabold leading-tight mb-1 sm:mb-4 text-white drop-shadow-sm">
-                {translations.sidebarTitle}
+                {translations?.sidebarTitle}
               </h2>
               <p className="text-gray-300/80 text-[11px] sm:text-base leading-relaxed mb-3 sm:mb-8 max-w-[280px]">
-                {translations.sidebarSubtitle}
+                {translations?.sidebarSubtitle || 'Build your high-profit branding system with our experts.'}
               </p>
               <div className="grid gap-2 rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4 hidden sm:grid">
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-brand-cyan">
-                  {translations.auditGivesLabel}
+                  {translations?.auditGivesLabel || 'Free audit gives'}
                 </div>
                 {auditOfferStack.map((item) => (
                   <div key={item} className="flex items-start gap-2 text-xs font-bold leading-5 text-white/90">
@@ -244,10 +296,10 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
               
               <div className="mt-10 hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:block">
                 <div className="text-[10px] font-black uppercase tracking-[0.24em] text-white/60">
-                  {translations.auditTimeLabel}
+                  {translations?.auditTimeLabel || 'Audit format'}
                 </div>
                 <div className="mt-3 grid gap-2">
-                  {translations.auditFormat.map((item: string) => (
+                  {(translations?.auditFormat || []).map((item: string) => (
                     <div key={item} className="rounded-xl bg-white/[0.06] px-3 py-2 text-xs font-bold leading-5 text-white/86">
                       {item}
                     </div>
@@ -258,11 +310,11 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
             <div className="relative z-10 mt-6 sm:mt-12 flex flex-col gap-4 sm:gap-6 hidden sm:flex">
               <div className="flex gap-4">
-                <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" aria-label={translations.telegramLinkLabel} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
+                <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" aria-label={translations?.telegramLinkLabel || 'Telegram'} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
                   <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
-              <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">{translations.footerCopyright}</p>
+              <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">{translations?.footerCopyright}</p>
             </div>
           </div>
 
@@ -270,13 +322,18 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
 
             <div className="flex-1 flex flex-col h-full py-2 sm:py-6">
-              <AnimatePresence mode="wait">
+              {!translations ? (
+                <div className="flex items-center justify-center h-48">
+                  <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+                </div>
+              ) : (
+                <AnimatePresence mode="wait">
                   {!isSubmitted ? (
                   <motion.div key="form-container" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col h-full">
                     <div className="mb-6 flex items-center justify-between shrink-0">
                       <div className="flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full border border-blue-100 shadow-sm animate-pulse-subtle">
                         <Target className="w-3.5 h-3.5 text-blue-500" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">{translations.header}</span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider">{translations?.header}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         {step < 4 && (
@@ -289,7 +346,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                           </button>
                         )}
                         <div className="text-[10px] font-bold text-gray-600 uppercase tracking-widest bg-gray-50 px-2 py-1 rounded">
-                          {translations.contactBadge}
+                          {translations?.contactBadge}
                         </div>
                       </div>
                     </div>
@@ -306,144 +363,13 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         <div className="flex-1 py-2 pr-1">
                               <motion.div key="step-single" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-4">
                                 <div>
-<<<<<<< Updated upstream
                                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations?.steps?.step4?.title || 'Kontakt'}</h3>
                                   <p className="text-gray-500 text-xs">{translations?.steps?.step4?.subtitle || "Ma'lumotlaringizni qoldiring"}</p>
-=======
-                                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations.steps?.step1?.title || ''}</h3>
-                                  <p className="text-gray-500 text-xs leading-relaxed">{translations.steps?.step1?.subtitle || ''}</p>
-                                </div>
-
-                                <FormField control={form.control} name="role" render={({ field }) => (
-                                  <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations.fields?.role?.label || ''}</FormLabel>
-                                    <FormControl>
-                                      <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-2">
-                                        {(translations.fields?.role?.options || []).map((opt: any) => (
-                                          <FormItem key={opt.v}>
-                                            <FormLabel className={`flex items-center p-3 rounded-xl border-2 cursor-pointer transition-all duration-300 ${field.value === opt.v ? 'bg-blue-50 border-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.05)] scale-[1.01]' : 'bg-white border-gray-100 hover:border-gray-200'}`}>
-                                              <FormControl><RadioGroupItem value={opt.v} className="sr-only" /></FormControl>
-                                              <span className={`text-xs font-semibold ${field.value === opt.v ? 'text-blue-700' : 'text-gray-700'}`}>{opt.l}</span>
-                                            </FormLabel>
-                                          </FormItem>
-                                        ))}
-                                      </RadioGroup>
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-
-                                <FormField control={form.control} name="revenue" render={({ field }) => (
-                                  <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations.fields?.revenue?.label || ''}</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                      <FormControl><SelectTrigger className="border-gray-200 rounded-xl h-11 bg-gray-50/50"><SelectValue placeholder="..." /></SelectTrigger></FormControl>
-                                      <SelectContent className="rounded-xl border-gray-100">
-                                        {(translations.fields?.revenue?.options || []).map((opt: string) => (
-                                          <SelectItem key={opt} value={opt} className="rounded-lg">{opt}</SelectItem>
-                                        ))}
-                                      </SelectContent>
-                                    </Select>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-                              </motion.div>
-                            )}
-
-                            {step === 2 && (
-                              <motion.div key="step2" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-4">
-                                <div>
-                                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations.steps?.step2?.title || ''}</h3>
-                                  <p className="text-gray-500 text-xs">{translations.steps?.step2?.subtitle || ''}</p>
-                                </div>
-
-                                <FormField control={form.control} name="ambition" render={({ field }) => (
-                                  <FormItem className="space-y-2">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations.fields?.ambition?.label || ''}</FormLabel>
-                                    <FormControl>
-                                      <Textarea placeholder={translations.fields?.ambition?.placeholder || ''} className="min-h-[80px] md:min-h-[100px] border-gray-200 rounded-xl bg-gray-50/50 focus:bg-white transition-all resize-none text-sm" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-
-                                <FormField control={form.control} name="pain" render={({ field }) => (
-                                  <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations.fields?.pain?.label || ''}</FormLabel>
-                                    <FormControl>
-                                      <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-2">
-                                        {(translations.fields?.pain?.options || []).map((opt: any) => (
-                                          <FormItem key={opt.v}>
-                                            <FormLabel className={`flex items-center p-3 rounded-xl border-2 cursor-pointer transition-all duration-300 ${field.value === opt.v ? 'bg-blue-50 border-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.05)] scale-[1.01]' : 'bg-white border-gray-100 hover:border-gray-200'}`}>
-                                              <FormControl><RadioGroupItem value={opt.v} className="sr-only" /></FormControl>
-                                              <span className={`text-xs font-semibold ${field.value === opt.v ? 'text-blue-700' : 'text-gray-700'}`}>{opt.l}</span>
-                                            </FormLabel>
-                                          </FormItem>
-                                        ))}
-                                      </RadioGroup>
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-                              </motion.div>
-                            )}
-
-                            {step === 3 && (
-                              <motion.div key="step3" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-4">
-                                <div>
-                                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations.steps?.step3?.title || ''}</h3>
-                                  <p className="text-gray-500 text-xs">{translations.steps?.step3?.subtitle || ''}</p>
-                                </div>
-
-                                <FormField control={form.control} name="budget" render={({ field }) => (
-                                  <FormItem className="space-y-3">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations.fields?.budget?.label || ''}</FormLabel>
-                                    <FormControl>
-                                      <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="grid grid-cols-1 gap-2">
-                                        {(translations.fields?.budget?.options || []).map((opt: string) => (
-                                          <FormItem key={opt}>
-                                            <FormLabel className={`flex items-center justify-between p-3 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:bg-gray-50 ${field.value === opt ? 'bg-blue-50 border-blue-600 shadow-[0_4px_15px_-5px_rgba(37,99,235,0.2)]' : 'bg-white border-gray-100'}`}>
-                                              <FormControl><RadioGroupItem value={opt} className="sr-only" /></FormControl>
-                                              <div className="flex items-center gap-3">
-                                                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${field.value === opt ? 'border-blue-600' : 'border-gray-300'}`}>
-                                                  {field.value === opt && <div className="w-2 h-2 bg-blue-600 rounded-full" />}
-                                                </div>
-                                                <span className={`text-xs font-bold ${field.value === opt ? 'text-blue-900' : 'text-gray-900'}`}>{opt}</span>
-                                              </div>
-                                              <Wallet className={`w-3.5 h-3.5 transition-colors ${field.value === opt ? 'text-blue-600' : 'text-gray-400'}`} />
-                                            </FormLabel>
-                                          </FormItem>
-                                        ))}
-                                      </RadioGroup>
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )} />
-
-                                <div className="p-3 bg-blue-50/50 rounded-xl border border-blue-100/50 flex gap-3 items-center">
-                                  <Sparkles className="w-4 h-4 text-blue-600 shrink-0 animate-pulse" />
-                                  <p className="text-[10px] text-blue-800/80 italic font-medium">
-                                    {translations.description}
-                                  </p>
-                                </div>
-                              </motion.div>
-                            )}
-
-                            {step === 4 && (
-                              <motion.div key="step4" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }} className="space-y-4">
-                                <div>
-                                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{translations.steps.step4.title}</h3>
-                                  <p className="text-gray-500 text-xs">{translations.steps.step4.subtitle}</p>
->>>>>>> Stashed changes
                                 </div>
 
                                 <FormField control={form.control} name="fullName" render={({ field, fieldState }) => (
                                   <FormItem className="space-y-1">
-<<<<<<< Updated upstream
                                     <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.name?.label || 'Ism'}</FormLabel>
-=======
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations.fields.name.label}</FormLabel>
->>>>>>> Stashed changes
                                     <FormControl>
                                       <motion.div 
                                         animate={fieldState.invalid ? { x: [0, -6, 6, -6, 6, 0] } : {}}
@@ -452,11 +378,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                       >
                                         <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
                                         <Input
-<<<<<<< Updated upstream
                                             placeholder={translations?.fields?.name?.placeholder || 'Ismingiz'}
-=======
-                                            placeholder={translations.fields.name.placeholder}
->>>>>>> Stashed changes
                                             className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                             aria-invalid={fieldState.invalid ? "true" : "false"}
                                             autoComplete="name"
@@ -470,11 +392,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                                 <FormField control={form.control} name="phone" render={({ field, fieldState }) => (
                                   <FormItem className="space-y-1">
-<<<<<<< Updated upstream
                                     <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations?.fields?.phone?.label || 'Telefon'}</FormLabel>
-=======
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations.fields.phone.label}</FormLabel>
->>>>>>> Stashed changes
                                     <FormControl>
                                       <motion.div 
                                         animate={fieldState.invalid ? { x: [0, -6, 6, -6, 6, 0] } : {}}
@@ -483,11 +401,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                       >
                                         <PhoneCall className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
                                         <Input 
-<<<<<<< Updated upstream
                                           placeholder={translations?.fields?.phone?.placeholder || '+998'} 
-=======
-                                          placeholder={translations.fields.phone.placeholder} 
->>>>>>> Stashed changes
                                           className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white font-mono transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                           value={field.value}
                                           aria-invalid={fieldState.invalid ? "true" : "false"}
@@ -503,31 +417,15 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                     <FormMessage />
                                   </FormItem>
                                 )} />
-<<<<<<< Updated upstream
                                 
                                 <div className="mt-2 text-center text-[10px] text-gray-500 font-medium">
                                   <ShieldCheck className="w-3 h-3 inline mr-1 -mt-0.5" />
                                   100% maxfiylik. Spam yubormaymiz.
                                 </div>
-=======
-
-                                <FormField control={form.control} name="telegram" render={({ field }) => (
-                                  <FormItem className="space-y-1">
-                                    <FormLabel className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{translations.fields.telegram.label}</FormLabel>
-                                    <FormControl>
-                                      <div className="relative">
-                                        <MessageCircle className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
-                                        <Input placeholder={translations.fields.telegram.placeholder} className="pl-12 border-gray-200 rounded-xl h-12 bg-gray-50/50 focus:bg-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600" autoComplete="off" {...field} />
-                                      </div>
-                                    </FormControl>
-                                  </FormItem>
-                                )} />
->>>>>>> Stashed changes
                               </motion.div>
                         </div>
 
                         <div className="z-10 mt-auto shrink-0 border-t border-gray-50 bg-white pt-4 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] md:pb-0 md:pt-4">
-<<<<<<< Updated upstream
                           <Button type="submit" disabled={isSubmitting} className="w-full h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold group shadow-xl shadow-blue-600/20 active:scale-[0.97] transition-all duration-150">
                             {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : (
                               <span className="flex items-center justify-center gap-2">
@@ -536,34 +434,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                               </span>
                             )}
                           </Button>
-=======
-                          <div className="flex gap-4">
-                            {step > 1 && step < 4 && (
-                              <Button type="button" variant="ghost" onClick={prevStep} className="flex-1 h-11 md:h-12 rounded-full text-gray-500 font-bold hover:bg-gray-50 active:scale-[0.97] transition-transform duration-150">
-                                {translations.buttons.back}
-                              </Button>
-                            )}
-                            
-                            {step < 4 ? (
-                              <Button type="button" onClick={nextStep} className="flex-[2] h-11 md:h-12 bg-gray-900 hover:bg-slate-950 text-white rounded-full font-bold group shadow-xl shadow-gray-200/50 active:scale-[0.97] transition-transform duration-150">
-                                {translations.buttons.next}
-                                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                              </Button>
-                            ) : (
-                              <Button type="submit" disabled={isSubmitting} className="flex-[2] h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-xl shadow-blue-100 flex items-center justify-center gap-2 group transition-all active:scale-[0.97] duration-150">
-                                {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (
-                                  <>
-                                    {translations.buttons.submit}
-                                    <Send className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                  </>
-                                )}
-                              </Button>
-                            )}
-                          </div>
->>>>>>> Stashed changes
                           <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-gray-600 font-medium tracking-tight">
                             <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
-                            {translations.trustBadge}
+                            {translations?.trustBadge}
                           </div>
                           <div className="mx-auto mt-2 max-w-md text-center text-[10px] font-semibold leading-4 text-gray-600">
                             {riskCopy}
@@ -579,21 +452,21 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                       <CheckCircle2 className="w-12 h-12 text-blue-600 relative z-10" />
                     </div>
                     <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
-                      {translations.successStep.title}
+                      {translations?.successStep?.title || 'Success!'}
                     </h3>
                     <p className="text-gray-500 max-w-sm mb-12 leading-relaxed">
-                      {translations.successStep.description}
+                      {translations?.successStep?.description || 'We have received your request. Our strategist will contact you shortly.'}
                     </p>
                     
                     <div className="w-full max-w-sm p-6 bg-gray-50 rounded-3xl border border-gray-100 text-left space-y-4 mb-10">
-                      <p className="text-xs font-bold text-gray-600 uppercase tracking-widest">{translations.successStep.nextSteps}</p>
+                      <p className="text-xs font-bold text-gray-600 uppercase tracking-widest">{translations?.successStep?.nextSteps || 'Next Steps'}</p>
                       <div className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-xl bg-white border border-gray-100 flex items-center justify-center shrink-0 shadow-sm">
                           <MessageCircle className="w-5 h-5 text-blue-600" />
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-gray-900 mb-0.5">{translations.successStep.telegramButton}</p>
-                          <p className="text-[11px] text-gray-500 leading-snug">{translations.successStep.telegramDesc}</p>
+                          <p className="text-sm font-bold text-gray-900 mb-0.5">{translations?.successStep?.telegramButton || 'Join Telegram'}</p>
+                          <p className="text-[11px] text-gray-500 leading-snug">{translations?.successStep?.telegramDesc || 'Get updates and insights.'}</p>
                         </div>
                       </div>
                     </div>
@@ -601,17 +474,18 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     <div className="flex flex-col gap-4 w-full max-w-sm">
                       <Button asChild className="h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-xl shadow-blue-100 group">
                         <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer">
-                          {translations.successStep.telegramButton}
+                          {translations?.successStep?.telegramButton || 'Open Telegram'}
                           <ExternalLink className="ml-2 w-4 h-4 opacity-70 group-hover:opacity-100" />
                         </a>
                       </Button>
                       <Button variant="ghost" onClick={onClose} className="h-12 rounded-full text-gray-600 font-bold">
-                        {translations.buttons.close}
+                        {translations?.buttons?.close}
                       </Button>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
+            )}
             </div>
           </div>
         </div>
