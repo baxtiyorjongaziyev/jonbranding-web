@@ -25,45 +25,29 @@ export async function POST(request: NextRequest) {
 
 async function handleSync(request: NextRequest) {
   try {
-<<<<<<< Updated upstream
-    // 1. Authorize the sync request (secret param OR Vercel cron auth)
-    const secret = request.nextUrl.searchParams.get('secret');
-    const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET || '';
-    const authHeader = request.headers.get('authorization');
-    const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    const isVercelCron = Boolean(process.env.CRON_SECRET) && Boolean(bearerToken) && safeCompare(bearerToken!, process.env.CRON_SECRET!);
-
-    if (!cronSecret && !isVercelCron) {
-=======
     // 1. Authorize the sync request (secret param OR Bearer cron auth)
     const querySecret = request.nextUrl.searchParams.get('secret');
     const authHeader = request.headers.get('authorization');
     const bearerSecret = authHeader?.startsWith('Bearer ') ? authHeader.slice('Bearer '.length) : null;
-    // Query secret is used by AMOCRM-triggered syncs; Bearer auth is reserved for cron callers.
     const configuredSecrets = [process.env.CRON_SECRET, process.env.AMOCRM_CRON_SECRET].filter(
-      (value): value is string => Boolean(value)
+      (value): value is string => Boolean(value),
     );
     const providedSecrets = [querySecret, bearerSecret].filter((value): value is string =>
-      Boolean(value)
+      Boolean(value),
     );
 
     if (configuredSecrets.length === 0) {
->>>>>>> Stashed changes
       return NextResponse.json(
         { success: false, error: 'No auth configured' },
         { status: 500 }
       );
     }
 
-<<<<<<< Updated upstream
-    if (!isVercelCron && (!secret || !safeCompare(secret, cronSecret))) {
-=======
     const isAuthorized = providedSecrets.some((provided) =>
-      configuredSecrets.some((configured) => safeCompare(provided, configured))
+      configuredSecrets.some((configured) => safeCompare(provided, configured)),
     );
 
     if (!isAuthorized) {
->>>>>>> Stashed changes
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }

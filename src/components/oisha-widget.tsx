@@ -98,41 +98,12 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
     return () => window.removeEventListener('toggleOisha', handleToggle);
   }, []);
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< ours
-  const fetchHistory = async (uid: string) => {
-=======
->>>>>>> Stashed changes
   useEffect(() => {
     const handler = (e: CustomEvent) => {
       const msg = e.detail?.message;
       if (msg && typeof msg === 'string') {
         setProactiveMsg(msg);
         setIsOpen(true);
-<<<<<<< Updated upstream
-=======
-      }
-    };
-    window.addEventListener('oishaProactive', handler as EventListener);
-    return () => window.removeEventListener('oishaProactive', handler as EventListener);
-  }, []);
-
-  const fetchHistory = useCallback(async (uid: string) => {
->>>>>>> theirs
-    try {
-      const res = await fetch(`${OISHA_PROXY}?user_id=${uid}`);
-      const data = await res.json();
-      if (data.history) {
-        setMessages(
-          data.history.map((message: any, idx: number) => ({
-            id: `hist-${idx}`,
-            text: message.parts[0].text,
-            role: message.role,
-            timestamp: new Date().toISOString(),
-          })),
-        );
->>>>>>> Stashed changes
       }
     };
     window.addEventListener('oishaProactive', handler as EventListener);
@@ -176,57 +147,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
       }, 600);
       return () => clearTimeout(timer);
     }
-<<<<<<< Updated upstream
   }, [fetchHistory, proactiveMsg, userId, toast, translations.error]);
-=======
-<<<<<<< ours
-  };
-=======
-  }, []);
-
-  useEffect(() => {
-    if (proactiveMsg && userId) {
-      const text = proactiveMsg;
-      setProactiveMsg(null);
-      setInputValue(text);
-      const timer = setTimeout(() => {
-        setInputValue('');
-        setMessages((prev) => [
-          ...prev,
-          { id: Date.now().toString(), text, role: 'user', timestamp: new Date().toISOString() },
-        ]);
-        setIsLoading(true);
-        fetch('/api/oisha', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_id: userId, text }),
-        })
-          .then((r) => (r.ok ? r.json() : Promise.reject()))
-          .then((data) => {
-            if (data?.response) {
-              setMessages((prev) => [
-                ...prev,
-                {
-                  id: `reply-${Date.now()}`,
-                  text: data.response,
-                  role: 'model',
-                  timestamp: new Date().toISOString(),
-                },
-              ]);
-            } else {
-              setTimeout(() => fetchHistory(userId), 2000);
-            }
-          })
-          .catch(() => {
-            toast({ title: translations.error, variant: 'destructive' });
-          })
-          .finally(() => setIsLoading(false));
-      }, 600);
-      return () => clearTimeout(timer);
-    }
-  }, [fetchHistory, proactiveMsg, userId, toast, translations.error]);
->>>>>>> theirs
->>>>>>> Stashed changes
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || !userId || isLoading) return;

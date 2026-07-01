@@ -1,11 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
-<<<<<<< Updated upstream
 import DOMPurify from 'isomorphic-dompurify';
-=======
-import { getSortedPostsData } from '@/lib/blog-posts';
->>>>>>> Stashed changes
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 import { Locale } from '@/lib/dictionaries';
 import { getLocalizedPath } from '@/lib/i18n/locale';
@@ -31,10 +27,7 @@ interface BlogPreviewProps {
 }
 
 const sanitizePlainText = (value?: string) =>
-  (value || '')
-    .replace(/<[^>]*>/g, '')
-    .replace(/[\u0000-\u001F\u007F]/g, '')
-    .trim();
+  DOMPurify.sanitize(value || '', { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }).trim();
 
 const sanitizeSlug = (slug: string) => slug.toLowerCase().replace(/[^a-z0-9-]/g, '');
 

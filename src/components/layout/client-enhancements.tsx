@@ -102,7 +102,6 @@ export default function ClientEnhancements({
 
   const pathname = usePathname();
   const lang = (langProp || pathname.split('/')[1] || 'uz') as any;
-  const defaultCtaText = stickyCtaLabel || headerDictionary?.free_consultation || '';
   // Bosh sahifa o'z Atelier lead tizimini (AtStickyCta + AtModal) ishlatadi —
   // global dublikatlarni (sticky CTA, scroll-popup, ko'k ContactModal) o'chiramiz
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
@@ -139,7 +138,7 @@ export default function ClientEnhancements({
     setPackageSummary(summary);
     setTotalPrice(finalPrice);
     trackCtaClick({
-      ctaText: detail?.ctaText || defaultCtaText,
+      ctaText: detail?.ctaText || 'Bepul Brand Audit olish',
       section: detail?.section || 'unknown',
       source: detail?.source || 'open_contact_modal',
     });
@@ -153,7 +152,7 @@ export default function ClientEnhancements({
       section: detail?.section || 'unknown',
     });
     setModalOpen(true);
-  }, [defaultCtaText, lang]);
+  }, [lang]);
 
   const handleCloseModal = useCallback(() => {
     setModalOpen(false);
@@ -231,15 +230,11 @@ export default function ClientEnhancements({
         />
       )}
       {quickActionsReady && tabNotificationMessage && <TabNotification message={tabNotificationMessage} />}
-      {quickActionsReady && !isHome && stickyCtaLabel && <StickyCTA ariaLabel={stickyCtaLabel} />}
-      {quickActionsReady && headerDictionary && <MobileNavBar dictionary={headerDictionary} />}
-      {quickActionsReady && <OishaWidget lang={lang} />}
+      {quickActionsReady && !isHome && <StickyCTA ariaLabel={stickyCtaLabel || 'Contact us'} />}
+      {quickActionsReady && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
       {enhancementsReady && <CookieConsentBanner />}
-<<<<<<< Updated upstream
       {enhancementsReady && <OishaWidget lang={lang} />}
       {enhancementsReady && <ProactiveTrigger lang={lang} />}
-=======
->>>>>>> Stashed changes
       {enhancementsReady && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
 
     </>

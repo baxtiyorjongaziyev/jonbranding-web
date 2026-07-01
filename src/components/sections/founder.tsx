@@ -16,13 +16,8 @@ import {
 } from 'lucide-react';
 import { useState, type FC } from 'react';
 import { motion } from 'framer-motion';
-<<<<<<< Updated upstream
 import DOMPurify from 'isomorphic-dompurify';
-=======
-import { BrandSection } from '@/components/ui/design-system';
->>>>>>> Stashed changes
 import { renderHeadline } from '@/lib/headline';
-import { sanitizeRichText } from '@/lib/sanitize-html';
 import type { FounderDictionary } from '@/lib/types/dictionary';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
@@ -159,14 +154,9 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
 
             {/* Message */}
             <p
-<<<<<<< Updated upstream
               className="text-[15px] leading-7"
               style={{ color: 'var(--at-ink-2)' }}
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(translations.message ?? '') }}
-=======
-              className="text-[15px] leading-7 text-white/70"
-              dangerouslySetInnerHTML={{ __html: sanitizeRichText(translations.message ?? '') }}
->>>>>>> Stashed changes
             />
 
             {/* Principles */}
