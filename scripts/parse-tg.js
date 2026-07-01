@@ -1,4 +1,5 @@
 const https = require('https');
+const { load } = require('cheerio');
 
 const url = 'https://t.me/s/JonBranding';
 
@@ -17,19 +18,15 @@ https.get(url, {
   res.on('end', () => {
     console.log('Fetch completed. Response status:', res.statusCode);
     
-    // Extract message wraps
-    const regex = /<div class="tgme_widget_message_text[^"]*"[^>]*>([\s\S]*?)<\/div>/g;
-    let match;
-    const messages = [];
-
-    while ((match = regex.exec(data)) !== null) {
-      // Strip HTML tags from message text
-      const text = match[1]
-        .replace(/<br\s*\/?>/gi, '\n')
-        .replace(/<[^>]*>/g, '')
-        .trim();
-      messages.push(text);
-    }
+    const $ = load(data);
+    const messages = $('.tgme_widget_message_text')
+      .map((_, el) => {
+        const $el = $(el);
+        $el.find('br').replaceWith('\n');
+        return $el.text().trim();
+      })
+      .get()
+      .filter(Boolean);
 
     console.log(`Found ${messages.length} messages:`);
     messages.forEach((msg, idx) => {
