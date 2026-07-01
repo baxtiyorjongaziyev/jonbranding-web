@@ -35,6 +35,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [proactiveMsg, setProactiveMsg] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -77,6 +78,57 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
     window.addEventListener('toggleOisha', handleToggle);
     return () => window.removeEventListener('toggleOisha', handleToggle);
   }, []);
+
+  useEffect(() => {
+    const handler = (e: CustomEvent) => {
+      const msg = e.detail?.message;
+      if (msg && typeof msg === 'string') {
+        setProactiveMsg(msg);
+        setIsOpen(true);
+      }
+    };
+    window.addEventListener('oishaProactive', handler as EventListener);
+    return () => window.removeEventListener('oishaProactive', handler as EventListener);
+  }, []);
+
+  useEffect(() => {
+    if (proactiveMsg && userId) {
+      const text = proactiveMsg;
+      setProactiveMsg(null);
+      setInputValue(text);
+      const timer = setTimeout(() => {
+        setInputValue('');
+        setMessages((prev) => [
+          ...prev,
+          { id: Date.now().toString(), text, role: 'user', timestamp: new Date().toISOString() },
+        ]);
+        setIsLoading(true);
+        fetch('/api/oisha', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_id: userId, text }),
+        })
+          .then((r) => r.ok ? r.json() : Promise.reject())
+          .then((data) => {
+            if (data?.response) {
+              setMessages((prev) => [...prev, {
+                id: `reply-${Date.now()}`,
+                text: data.response,
+                role: 'model',
+                timestamp: new Date().toISOString(),
+              }]);
+            } else {
+              setTimeout(() => fetchHistory(userId), 2000);
+            }
+          })
+          .catch(() => {
+            toast({ title: translations.error, variant: 'destructive' });
+          })
+          .finally(() => setIsLoading(false));
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, [proactiveMsg, userId, toast, translations.error]);
 
   const fetchHistory = async (uid: string) => {
     try {

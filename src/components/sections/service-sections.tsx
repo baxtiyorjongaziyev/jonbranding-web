@@ -92,7 +92,7 @@ const ServiceSections: FC<ServiceSectionsProps> = ({ lang, dictionary: initialDi
                 : ['Clear outcome', 'Business-linked solution', 'Obvious next step'];
 
     return (
-        <BrandSection tone="soft" aria-labelledby="services-heading">
+        <BrandSection tone="soft">
             <div className="container mx-auto px-4">
                 <SectionIntro
                   eyebrow="Services system"

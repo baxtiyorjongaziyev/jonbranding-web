@@ -335,45 +335,31 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     let finalPrice = totalBeforeDiscounts;
     const discountsApplied = [];
 
-    const normalizedPromo = promoCode?.toUpperCase();
-    const isRamazonPromo = normalizedPromo === 'RAMAZON';
-    const isSpecialPromo = ['PCG', 'KURSDOSH', 'TEZ NATIJA'].includes(normalizedPromo);
-    const isPromoApplied = isRamazonPromo || isSpecialPromo;
+    const normalizedPromo = (promoCode || '').trim().toUpperCase();
+    const isPromoApplied = normalizedPromo.length > 0;
 
-    if (isRamazonPromo) {
-        const val = totalBeforeDiscounts * 0.30;
-        const name = isUz ? 'Ramazon chegirmasi (-30%)' : 'Ramazon discount (-30%)';
-        discountsApplied.push({ name, value: val });
-        finalPrice -= val;
-    } else if (isSpecialPromo) {
-        const val = totalBeforeDiscounts * 0.50;
-        const name = isUz ? 'Maxsus chegirma (-50%)' : 'Special (-50%)';
-        discountsApplied.push({ name, value: val });
-        finalPrice -= val;
-    } else {
-        if (discountType === 'package' && mainServicesCount >= 2) {
-            const val = totalBeforeDiscounts * 0.20;
-            const name = isUz ? 'Paketli chegirma (-20%)' : 'Package (-20%)';
-            discountsApplied.push({ name, value: val });
-            finalPrice -= val;
-        } else if (discountType === 'full') {
-            if (mainServicesCount >= 2) {
-                const packageVal = totalBeforeDiscounts * 0.20;
-                const packageName = isUz ? 'Paketli chegirma (-20%)' : 'Package (-20%)';
-                discountsApplied.push({ name: packageName, value: packageVal });
-                finalPrice -= packageVal;
-                
-                const upfrontVal = finalPrice * 0.10;
-                const upfrontName = isUz ? "Oldindan to'lov (-10%)" : "Upfront (-10%)";
-                discountsApplied.push({ name: upfrontName, value: upfrontVal });
-                finalPrice -= upfrontVal;
-            } else {
-                const upfrontVal = totalBeforeDiscounts * 0.10;
-                const upfrontName = isUz ? "Oldindan to'lov (-10%)" : "Upfront (-10%)";
-                discountsApplied.push({ name: upfrontName, value: upfrontVal });
-                finalPrice -= upfrontVal;
-            }
-        }
+    // Faza 1: Barchaga 10% Istisno chegirmasi (Faqatgina to'lov varianti tanlanganda: 50/50 yoki 100%)
+    if ((discountType === 'half' || discountType === 'full') && totalBeforeDiscounts > 0) {
+        const istisnoVal = finalPrice * 0.10;
+        const istisnoName = isUz ? "Istisno chegirmasi (-10%)" : "Exception Discount (-10%)";
+        discountsApplied.push({ name: istisnoName, value: istisnoVal });
+        finalPrice -= istisnoVal;
+    }
+
+    // Faza 2: Salom chegirmasi (100% oldindan to'lov qilsa, qoldiqdan yana 10%)
+    if (discountType === 'full' && finalPrice > 0) {
+        const salomVal = finalPrice * 0.10;
+        const salomName = isUz ? "Salom chegirmasi (-10%)" : "Upfront Discount (-10%)";
+        discountsApplied.push({ name: salomName, value: salomVal });
+        finalPrice -= salomVal;
+    }
+
+    // Faza 3: Promokod (Har qanday to'g'ri promokod qoldiqdan yana 10% ayiradi)
+    if (isPromoApplied && finalPrice > 0) {
+        const promoVal = finalPrice * 0.10;
+        const promoName = isUz ? `Promokod: ${normalizedPromo} (-10%)` : `Promo: ${normalizedPromo} (-10%)`;
+        discountsApplied.push({ name: promoName, value: promoVal });
+        finalPrice -= promoVal;
     }
 
     return { 

@@ -23,6 +23,8 @@ export interface AIEnrichedData {
   targetAudience?: string;
   solution?: string;
   testimonials?: string[];
+  coverImageIndex?: number;
+  imageOrder?: number[];
 }
 
 export interface SanityImageAsset {
@@ -55,6 +57,8 @@ export interface WorkflowConfig {
   instagramAccounts: string[];
   /** Instagram hashtaglar */
   instagramHashtags: string[];
+  /** Google Drive asosiy papkasi (agar to'g'ridan-to'g'ri Drive orqali ishlansa) */
+  googleDriveParentId?: string;
   /** Har bir manbadan qancha post tekshiriladi */
   postsPerSource: number;
   /** Faqat drive linki bor postlarmi? */
@@ -66,7 +70,7 @@ export interface WorkflowConfig {
 }
 
 export interface ProcessedPost {
-  source: 'telegram' | 'instagram';
+  source: 'telegram' | 'instagram' | 'drive';
   sourceId: string;
   originalText: string;
   aiData: AIEnrichedData;

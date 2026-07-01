@@ -20,7 +20,7 @@
     "services_and_prices": "Услуги и цены",
     "services_and_prices_desc": "Соберите свой пакет услуг и узнайте цену прямо сейчас.",
     "contact_by_phone": "Звонок",
-    "contact_by_telegram": "Telegram",
+    "contact_by_telegram": "В Telegram",
     "free_consultation": "Brand Audit",
     "open_menu": "Открыть меню",
     "switch_lang": "Сменить язык",
@@ -296,7 +296,13 @@
     "thinking": "Оиша думает...",
     "openButtonAriaLabel": "Открыть чат Oisha",
     "closeButtonAriaLabel": "Закрыть чат Oisha",
-    "sendButtonAriaLabel": "Отправить сообщение"
+    "sendButtonAriaLabel": "Отправить сообщение",
+    "proactive": {
+      "sotuvchi-kartochka": "Ассаляму алейкум! Вижу, вас интересуют продающие карточки для Uzum/маркетплейсов. Скинуть вам закрытое портфолио наших работ в этом направлении?",
+      "xizmatlar": "Ассаляму алейкум! Изучаете наши услуги. Какое направление вас больше интересует? Помогу вам ознакомиться с реальными примерами.",
+      "quiz": "Вы почти завершили тест! Хотите узнать результаты раньше?",
+      "blog": "Рады, что читаете статью. Кстати, можете бесплатно проверить ваш бренд по этой теме."
+    }
   },
   "home": {
     "cta1_title": "Does your brand help buyers trust you? Let?s check.",
@@ -1963,7 +1969,12 @@
     "pricing_cta_standard": "Выбрать",
     "loss_calc_eyebrow": "Калькулятор потерь · промежуточный расчет",
     "index_archive_eyebrow": "Архив",
-    "process_step_label": "Этап"
+    "process_step_label": "Этап",
+    "instagram": {
+      "title": "Следите за нами в Instagram",
+      "subtitle": "Наши последние проекты и жизнь команды",
+      "followBtn": "Подписаться"
+    }
   },
   "onlineBrief": {
     "meta": {
@@ -2226,5 +2237,13 @@
         }
       ]
     }
+  },
+  "reviewsPage": {
+    "title": "Отзывы наших клиентов",
+    "subtitle": "Результаты говорят сами за себя. Голоса и видео реальных людей о нашей работе.",
+    "back": "На главную",
+    "ctaText": "Получить бесплатный аудит",
+    "voiceLabel": "Голосовой отзыв",
+    "videoLabel": "Видео отзыв"
   }
 }

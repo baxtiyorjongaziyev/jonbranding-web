@@ -104,7 +104,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     {
       _id: 'fallback-boyarin',
       slug: 'boyarin',
-      title: 'Boyarin Gurman Go\'sht Mahsulotlari',
+      title: 'Boyarin Saryog\' va Sut Mahsulotlari',
       client: 'Boyarin Foods',
       category: 'packaging',
       categoryLabel: 'Qadoq dizayni',
@@ -114,7 +114,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       afterImage: '/images/cms/boyarin-hozir.png',
       oldHint: 'Eski mahsulot uslubi',
       newHint: 'Boyarin (Premium qadoq)',
-      description: 'Gurman go\'sht va yarim tayyor mahsulotlar uchun supermarket javonlarida darhol ajralib turadigan, premium vizual til va qadoqlar.',
+      description: 'Saryog\' va sut mahsulotlari uchun supermarket javonlarida darhol ajralib turadigan, premium vizual til va qadoqlar.',
       results: [
         { metric: 'Javondagi jozibadorlik', value: '+300%' },
         { metric: 'Supermarket savdolari', value: '+85%' },
@@ -123,7 +123,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       body: [
         {
           heading: "Vazifa va Muammo",
-          paragraph: "Boyarin go'sht mahsulotlari juda yuqori ta'm va sifatga ega bo'lishiga qaramay, uning qadog'i juda oddiy va bozordagi boshqa yuzlab brendlardan farq qilmas edi. Bu javonda mijoz e'tiborini tortish va sotuvni ko'paytirishga to'sqinlik qilardi."
+          paragraph: "Boyarin saryog' va sut mahsulotlari juda yuqori ta'm va sifatga ega bo'lishiga qaramay, uning qadog'i juda oddiy va bozordagi boshqa yuzlab brendlardan farq qilmas edi. Bu javonda mijoz e'tiborini tortish va sotuvni ko'paytirishga to'sqinlik qilardi."
         },
         {
           heading: "Strategik Yechim",
@@ -312,7 +312,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     {
       _id: 'fallback-boyarin',
       slug: 'boyarin',
-      title: 'Деликатесы Boyarin Gourmet',
+      title: 'Boyarin Сливочное масло и молочные продукты',
       client: 'Boyarin Foods',
       category: 'packaging',
       categoryLabel: 'Дизайн упаковки',
@@ -322,7 +322,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       afterImage: '/images/cms/boyarin-hozir.png',
       oldHint: 'Старая упаковка',
       newHint: 'Boyarin (Премиум упаковка)',
-      description: 'Премиальный визуальный язык и дизайн упаковки для гурманских мясных деликатесов, доминирующий на полках супермаркетов.',
+      description: 'Премиальный визуальный язык и дизайн упаковки для сливочного масла и молочных продуктов, доминирующий на полках супермаркетов.',
       results: [
         { metric: 'Заметность на полке', value: '+300%' },
         { metric: 'Продажи в сетях', value: '+85%' },
@@ -331,7 +331,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       body: [
         {
           heading: "Задача и Проблема",
-          paragraph: "Мясные деликатесы Boyarin имели великолепный вкус и качество, но их упаковка была невзрачной и терялась среди сотен конкурентов на полках магазинов."
+          paragraph: "Сливочное масло и молочные продукты Boyarin имели великолепный вкус и качество, но их упаковка была невзрачной и терялась среди сотен конкурентов на полках магазинов."
         },
         {
           heading: "Стратегическое Решение",
@@ -520,7 +520,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     {
       _id: 'fallback-boyarin',
       slug: 'boyarin',
-      title: 'Boyarin Gourmet Meats',
+      title: 'Boyarin Butter & Dairy Products',
       client: 'Boyarin Foods',
       category: 'packaging',
       categoryLabel: 'Packaging Design',
@@ -539,7 +539,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       body: [
         {
           heading: "The Challenge",
-          paragraph: "Boyarin gourmet meats had excellent quality and taste, but the generic packaging got lost among dozens of competitors on store shelves."
+          paragraph: "Boyarin butter and dairy products had excellent quality and taste, but the generic packaging got lost among dozens of competitors on store shelves."
         },
         {
           heading: "Strategic Solution",
@@ -728,7 +728,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     {
       _id: 'fallback-boyarin',
       slug: 'boyarin',
-      title: 'Boyarin 熟食牛肉',
+      title: 'Boyarin 黄油和乳制品',
       client: 'Boyarin 食品',
       category: 'packaging',
       categoryLabel: '包装设计',
@@ -747,7 +747,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       body: [
         {
           heading: "挑战与背景",
-          paragraph: "Boyarin 熟食肉品品质绝佳，但普通的包装导致其在货架上的数百个竞争对手中黯然失色。"
+          paragraph: "Boyarin 黄油和乳制品品质绝佳，但普通的包装导致其在货架上的数百个竞争对手中黯然失色。"
         },
         {
           heading: "战略性解决方案",

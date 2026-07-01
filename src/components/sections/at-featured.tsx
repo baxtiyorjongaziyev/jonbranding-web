@@ -78,7 +78,7 @@ const AtFeatured: FC<Props> = ({ lang = 'uz', onOpen }) => {
   return (
     <section
       className="relative overflow-hidden z-[2]"
-      id="ishlar"
+      id="ishlar-featured"
       style={{ background: '#0E1015', color: '#F4F1E8' }}
     >
       <div className="grid md:grid-cols-[1.1fr_1fr] min-h-[480px] md:min-h-[680px]">

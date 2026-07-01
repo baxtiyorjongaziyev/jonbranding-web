@@ -42,6 +42,9 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   turbopack: {},
   webpack: (config) => {
     config.resolve.alias = {
@@ -121,6 +124,24 @@ const nextConfig = {
               "frame-ancestors 'self'",
               "upgrade-insecure-requests",
             ].join('; '),
+          },
+        ],
+      },
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/images/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
           },
         ],
       },

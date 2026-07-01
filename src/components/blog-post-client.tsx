@@ -29,13 +29,13 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
   };
   
   if (!translations) {
-    return <main className="flex-grow bg-white"><Skeleton className="h-screen w-full"/></main>;
+    return <div className="flex-grow bg-white"><Skeleton className="h-screen w-full"/></div>;
   }
 
   const locale = lang === 'ru' ? ru : (lang === 'en' ? enUS : uz);
 
   return (
-    <main className="flex-grow bg-white">
+    <div className="flex-grow bg-white">
       <article>
         <header className="py-16 sm:py-24 bg-secondary/70">
           <div className="container mx-auto px-4 text-center">
@@ -80,7 +80,7 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
             buttonText={translations.ctaButton}
             onCtaClick={handleOpenModal}
         />
-    </main>
+    </div>
   );
 };
 

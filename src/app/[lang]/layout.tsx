@@ -188,7 +188,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
                 "closes": "20:00"
               },
               "sameAs": [
-                "https://instagram.com/jonbranding",
+                "https://www.instagram.com/jon.branding/",
                 "https://t.me/jonbranding",
                 "https://facebook.com/jonbranding"
               ],
@@ -337,6 +337,30 @@ export default async function LocalizedLayout({ children, params }: Props) {
           dangerouslySetInnerHTML={{
             __html: safeJsonStringify({
               "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Baxtiyorjon Gaziyev",
+              "alternateName": "Baxtiyorjon Gaziyev",
+              "jobTitle": lang === 'uz' ? 'Brending Mutaxassisi, Asoschi' : lang === 'ru' ? 'Специалист по брендингу, Основатель' : 'Branding Specialist, Founder',
+              "url": "https://www.jonbranding.uz",
+              "sameAs": [
+                "https://www.instagram.com/jon.branding/",
+                "https://t.me/jonbranding",
+                "https://facebook.com/jonbranding"
+              ],
+              "knowsAbout": ["Branding", "Naming", "Logo Design", "Packaging Design", "Brand Strategy"],
+              "affiliation": {
+                "@type": "Organization",
+                "name": "Jon.Branding"
+              }
+            })
+          }}
+        />
+        <Script
+          id="json-ld-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: safeJsonStringify({
+              "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "Jon.Branding",
               "url": "https://www.jonbranding.uz",
@@ -358,66 +382,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
         </a>
         <Script id="analytics-delayed-load" strategy="lazyOnload">
           {`
-            (function() {
-              const loadAnalytics = () => {
-                if (window.analyticsLoaded) return;
-                window.analyticsLoaded = true;
-
-                // 1. Google Tag Manager
-                const gtm = document.createElement('script');
-                gtm.async = true;
-                gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5GRQBW84';
-                document.head.appendChild(gtm);
-
-                // 2. Google Analytics
-                const gaId = '${process.env.NEXT_PUBLIC_GA_ID || 'G-BTSGJQLMMV'}';
-                const ga = document.createElement('script');
-                ga.async = true;
-                ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-                document.head.appendChild(ga);
-                ga.onload = () => {
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', gaId);
-                  gtag('config', '${process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-389056476'}');
-                };
-
-                // 3. Microsoft Clarity
-                (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "w7knsud9mg");
-
-                // 4. Hotjar
-                (function(h,o,t,j,a,r){
-                  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                  h._hjSettings={hjid:6527829,hjsv:6};
-                  a=o.getElementsByTagName('head')[0];
-                  r=o.createElement('script');r.async=1;
-                  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-                  a.appendChild(r);
-                })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-
-                // 5. FB Pixel
-                !function(f,b,e,v,n,t,s)
-                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)}(window, document,'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '1134785364752294');
-                fbq('track', 'PageView');
-              };
-
-              window.addEventListener('cookie-consent-accepted', loadAnalytics);
-              if (document.cookie.includes('cookie_consent_accepted=true')) {
-                loadAnalytics();
-              }
-            })();
+(function(){const loadAnalytics=()=>{if(window.analyticsLoaded)return;window.analyticsLoaded=!0;const gtm=document.createElement('script');gtm.async=!0;gtm.src='https://www.googletagmanager.com/gtm.js?id=GTM-5GRQBW84';document.head.appendChild(gtm);const gaId='${process.env.NEXT_PUBLIC_GA_ID || 'G-BTSGJQLMMV'}';const ga=document.createElement('script');ga.async=!0;ga.src='https://www.googletagmanager.com/gtag/js?id='+gaId;document.head.appendChild(ga);ga.onload=()=>{window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config',gaId);gtag('config','${process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-389056476'}')};(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w7knsud9mg");(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:6527829,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r)})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1134785364752294');fbq('track','PageView')};window.addEventListener('cookie-consent-accepted',loadAnalytics);document.cookie.includes('cookie_consent_accepted=true')&&loadAnalytics()})();
           `}
         </Script>
 
@@ -438,16 +403,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">
           {`
-            if (document.cookie.includes('cookie_consent_accepted=true')) {
-            (function(m,e,t,r,i,k,a){
-                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                m[i].l=1*new Date();
-                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
-
-            ym(91628105, 'init', {webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-            }
+if(document.cookie.includes('cookie_consent_accepted=true')){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');ym(91628105,'init',{webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true})}
           `}
         </Script>
         <noscript>

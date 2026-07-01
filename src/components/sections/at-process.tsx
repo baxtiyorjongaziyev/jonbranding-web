@@ -170,7 +170,7 @@ export default function AtProcess({ lang = 'uz', onOpen }: Props) {
   }, { scope: stepsRef });
 
   return (
-    <section className="py-16 md:py-24" id="jarayon" style={{ background: 'var(--at-paper)' }}>
+    <section className="py-16 md:py-24" id="process" style={{ background: 'var(--at-paper)' }}>
       <div className="max-w-[1320px] mx-auto px-8 sm:px-5">
         {/* Header */}
         <div className="mb-12">

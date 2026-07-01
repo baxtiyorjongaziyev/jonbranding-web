@@ -71,11 +71,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             </div>
 
             <Card
+                onClick={onSelect}
                 className={cn(
-                    "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500",
+                    "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500 cursor-pointer",
                     selected
                         ? (isVip ? 'border-brand-blue bg-blue-950 shadow-[0_0_60px_rgba(37,99,235,0.28)] scale-[1.02]' : 'border-primary shadow-[0_0_40px_rgba(37,99,235,0.15)] scale-[1.02]')
-                        : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-brand-blue/60" : "border-slate-100 hover:border-primary/20 shadow-sm")
+                        : (isVip ? "bg-blue-950 border-blue-900/50 hover:border-brand-blue/60" : "border-slate-100 hover:border-primary/30 hover:shadow-md shadow-sm")
                 )}
             >
                 <CardHeader className="p-5 pb-3 relative z-10">
@@ -159,12 +160,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                         )}
 
                         <Button
-                            variant={selected ? (isVip ? "outline" : "default") : "outline"}
+                            variant={selected ? (isVip ? "default" : "default") : "outline"}
                             className={cn(
-                                "relative z-20 h-auto w-full rounded-full border-2 py-4 text-[13px] font-black uppercase tracking-[0.08em] transition-[background-color,border-color,color,box-shadow,transform] duration-300",
+                                "relative z-20 h-auto w-full rounded-full border-2 py-4 text-[13px] font-black uppercase tracking-[0.08em] transition-all duration-300",
                                 selected 
-                                    ? (isVip ? "border-none bg-brand-blue text-white shadow-[0_0_20px_rgba(37,99,235,0.35)]" : "border-none bg-primary text-white shadow-lg")
-                                    : (isVip ? "border-brand-blue/40 bg-white/5 text-sky-blue hover:bg-brand-blue hover:text-white" : "bg-white border-slate-200 text-slate-600 hover:border-primary hover:text-primary shadow-sm")
+                                    ? (isVip ? "border-transparent bg-brand-blue text-white shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:bg-brand-blue/90" : "border-transparent bg-primary text-white shadow-lg hover:bg-primary/90")
+                                    : (isVip ? "border-brand-blue/40 bg-transparent text-sky-blue group-hover:border-brand-blue/70 group-hover:bg-brand-blue/10 hover:!bg-brand-blue hover:!text-white" : "bg-transparent border-slate-200 text-slate-500 group-hover:border-primary/40 group-hover:text-primary group-hover:bg-primary/5 hover:!border-primary hover:!bg-primary hover:!text-white shadow-none")
                             )}
                             onClick={(e) => { e.stopPropagation(); onSelect(); }}
                         >
@@ -278,17 +279,30 @@ const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) 
     );
 };
 
+const DISCOUNT_DEFAULT_VERSION = 'no-discount-first-2026-06-29';
+const DISCOUNT_DEFAULT_VERSION_KEY = 'discountOptionDefaultVersion';
+
 const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary }) => {
     const [selectedServices, setSelectedServices] = useLocalStorage<SelectedServices>('selectedServices', { 
         namingPremium: true, logoPremium: true, urgency: false, nda: false
     });
-    const [discountType, setDiscountType] = useLocalStorage<'none' | 'package' | 'full'>('discountOption', 'none');
+    const [discountType, setDiscountType] = useLocalStorage<'none' | 'half' | 'full'>('discountOption', 'none');
     const [promoCode, setPromoCode] = useLocalStorage<string>('promoCode', '');
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
     const [hasCelebrated, setHasCelebrated] = useState(false);
 
     useEffect(() => { setIsClient(true); }, []);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const currentVersion = window.localStorage.getItem(DISCOUNT_DEFAULT_VERSION_KEY);
+        if (currentVersion === DISCOUNT_DEFAULT_VERSION) return;
+
+        setDiscountType('none');
+        window.localStorage.setItem(DISCOUNT_DEFAULT_VERSION_KEY, DISCOUNT_DEFAULT_VERSION);
+    }, [setDiscountType]);
     
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
@@ -326,9 +340,9 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     if (!isClient || !dictionary) return null;
 
     const discountOptions = [
-        { value: 'none', label: translations.discountSelector?.none || "CHEGIRMASIZ" },
-        { value: 'package', label: translations.discountSelector?.package || "PAKETLI (-20%)" },
-        { value: 'full', label: translations.discountSelector?.full || "TO'LIQ (-28%)" }
+        { value: 'none', label: "CHEGIRMASIZ" },
+        { value: 'half', label: "50/50 TO'LOV" },
+        { value: 'full', label: "100% OLDINDAN (-10%)" }
     ];
 
     return (
@@ -510,8 +524,23 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                 </div>
 
                                     {isDiscountActive && (
-                                        <div className="mx-2">
+                                        <div className="mx-2 space-y-3">
                                             <DiscountCountdown active={isDiscountActive} lang={lang} />
+                                            
+                                            <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-2xl p-4 sm:p-5 shadow-sm relative overflow-hidden">
+                                                <div className="absolute -right-4 -top-4 w-16 h-16 bg-amber-400/20 rounded-full blur-xl"></div>
+                                                <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center shrink-0">
+                                                        <Clock className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-[14px] font-bold text-amber-900 dark:text-amber-200">Arboun (Bron qilish) Xizmati</h4>
+                                                        <p className="text-[13px] text-amber-800/80 dark:text-amber-300/80 mt-0.5 leading-snug">
+                                                            24 soat ichida to'lovga ulgurmaysizmi? <strong>$50</strong> to'lab chegirmalaringizni yana 3 kunga muzlatib qo'ying.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     )}
 

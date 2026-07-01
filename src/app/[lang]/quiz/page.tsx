@@ -78,7 +78,16 @@ const QuizPage: FC = () => {
   };
 
   if (!translations) {
-      return <main className="flex-grow bg-secondary/50"><section className="py-20 sm:py-28"><Skeleton className="h-96 w-full container" /></section></main>
+      return (
+        <main className="flex-grow bg-secondary/50">
+          <section className="py-20 sm:py-28">
+            <h1 className="sr-only">
+              {lang === 'uz' ? 'Brending testi' : lang === 'ru' ? 'Тест по брендингу' : lang === 'en' ? 'Branding Quiz' : '品牌测试'}
+            </h1>
+            <Skeleton className="h-96 w-full container" />
+          </section>
+        </main>
+      );
   }
   
   const progressPercentage = ((step + 1) / questions.length) * 100;
