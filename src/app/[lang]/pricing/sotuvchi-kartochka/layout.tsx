@@ -15,13 +15,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   let t;
   if (isRu) {
     t = {
-<<<<<<< Updated upstream
       title: 'Продающий дизайн карточек для Uzum, Yandex Market, WB и Ozon | Jon Branding',
       description: 'Профессиональный дизайн карточек товаров. Тарифы START, PRO и PREMIUM для маркетплейсов.',
-=======
-      title: 'Prodazh uchun kartochka dizayni Uzum, Yandex Market, WB va Ozon uchun | Jon Branding',
-      description: "Professional sotuvchi kartochka dizayni Ma'no va Mountain darajasida. START, PRO va PREMIUM tariflari marketplace sotuvlari uchun.",
->>>>>>> Stashed changes
     }
   } else if (isEn) {
     t = {
@@ -30,13 +25,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     }
   } else if (isZh) {
     t = {
-<<<<<<< Updated upstream
       title: 'Uzum, Yandex Market, WB 和 Ozon 的销售卡设计 | Jon Branding',
       description: '提高销量的专业产品卡设计。探索并订购适用于在线市场的 START、PRO 和 PREMIUM 计划。',
-=======
-      title: 'Uzum, Yandex Market, WB å’Œ Ozon çš„é”€å”®å¡è®¾è®¡ | Jon Branding',
-      description: 'Professional sotuvchi kartochka dizayni. START, PRO va PREMIUM rejalari onlayn bozorda sotuvni oshirish uchun.',
->>>>>>> Stashed changes
     }
   } else {
     t = {

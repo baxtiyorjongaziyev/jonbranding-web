@@ -1,12 +1,5 @@
 import axios from 'axios';
-<<<<<<< Updated upstream
 import fs from 'fs';
-=======
-<<<<<<< ours
-=======
-import fs from 'fs';
->>>>>>> theirs
->>>>>>> Stashed changes
 import type { ParsedProject } from './types.js';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
@@ -60,17 +53,9 @@ export async function parsePostWithOisha(messageText: string): Promise<ParsedPro
 
   return parsed;
 }
-<<<<<<< Updated upstream
 
 const DRIVE_PROMPT = (folderName: string, textContent: string, imageCount: number) => `
 Quyidagi ma'lumotlar Google Drive papkasidan olindi. Men senga ${imageCount} ta rasmni ham ilova qildim.
-=======
-<<<<<<< ours
-=======
-
-const DRIVE_PROMPT = (folderName: string, textContent: string, imageCount: number) => `
-Quyidagi ma'lumotlar Google Drive papkasidan olindi. Men senga ${imageCount} ta rasmni ham ilova qildim. 
->>>>>>> Stashed changes
 Bularni vizual tahlil qilib, FAQAT JSON formatda qaytargil (boshqa hech narsa yozma).
 
 PAPKA NOMI: "${folderName}"
@@ -117,47 +102,27 @@ async function fetchWithRetry(url: string, data: any, config: any, retries = 3):
 }
 
 export async function parseDriveFolderWithOisha(
-<<<<<<< Updated upstream
   folderName: string,
   textContent: string = '',
   imageFiles: { path: string; mime: string }[] = [],
 ): Promise<ParsedProject & { coverImageIndex?: number; imageOrder?: number[] }> {
   const parts: any[] = [];
+  let attachedImageCount = 0;
 
-=======
-  folderName: string, 
-  textContent: string = '', 
-  imageFiles: { path: string; mime: string }[] = []
-): Promise<ParsedProject & { coverImageIndex?: number; imageOrder?: number[] }> {
-  
-  const parts: any[] = [];
-  
-  // Add image parts
->>>>>>> Stashed changes
   for (const img of imageFiles) {
     if (!fs.existsSync(img.path)) continue;
     const base64 = fs.readFileSync(img.path, { encoding: 'base64' });
     parts.push({
       inlineData: {
         mimeType: img.mime,
-<<<<<<< Updated upstream
         data: base64,
       },
     });
+    attachedImageCount++;
   }
 
   parts.push({
-    text: DRIVE_PROMPT(folderName, textContent, imageFiles.length),
-=======
-        data: base64
-      }
-    });
-  }
-
-  // Add text prompt part
-  parts.push({
-    text: DRIVE_PROMPT(folderName, textContent, imageFiles.length)
->>>>>>> Stashed changes
+    text: DRIVE_PROMPT(folderName, textContent, attachedImageCount),
   });
 
   const res = await fetchWithRetry(
@@ -166,11 +131,7 @@ export async function parseDriveFolderWithOisha(
       contents: [{ parts }],
       generationConfig: { temperature: 0.2, maxOutputTokens: 2048 },
     },
-<<<<<<< Updated upstream
     { timeout: 60_000 },
-=======
-    { timeout: 60_000 }
->>>>>>> Stashed changes
   );
 
   const reply: string = res.data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
@@ -179,13 +140,6 @@ export async function parseDriveFolderWithOisha(
   if (!jsonMatch) throw new Error(`Gemini JSON qaytarmadi: ${reply.slice(0, 200)}`);
 
   const parsed = JSON.parse(jsonMatch[0]) as ParsedProject & { coverImageIndex?: number; imageOrder?: number[] };
-<<<<<<< Updated upstream
   parsed.driveFolderId = null;
   return parsed;
 }
-=======
-  parsed.driveFolderId = null; // Biz buni tashqaridan o'rnatamiz
-  return parsed;
-}
->>>>>>> theirs
->>>>>>> Stashed changes

@@ -27,7 +27,7 @@ interface TelegramChannelPost {
 const MAX_BOT_FILE_SIZE = 20 * 1024 * 1024;
 
 function getUrls(text: string): string[] {
-  return Array.from(text.matchAll(HTTP_URL_PATTERN), (match) => match[0]);
+  return Array.from(text.matchAll(HTTP_URL_PATTERN), (match) => match[0].replace(/[.,;:!?)\]}'"]+$/, ''));
 }
 
 function isVimeoUrl(value: string): boolean {
