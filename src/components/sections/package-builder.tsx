@@ -202,12 +202,14 @@ const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) 
     const [display, setDisplay] = useState<{ hours: number; minutes: number; seconds: number } | null>(null);
 
     useEffect(() => {
+        const STORAGE_KEY = 'discountCountdownStart';
+
         if (!active) {
             setDisplay(null);
+            try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
             return;
         }
 
-        const STORAGE_KEY = 'discountCountdownStart';
         let start = 0;
         try {
             const stored = localStorage.getItem(STORAGE_KEY);
@@ -223,6 +225,7 @@ const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) 
             const diff = start + DISCOUNT_DURATION_MS - Date.now();
             if (diff <= 0) {
                 setDisplay(null);
+                try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
                 return false;
             }
             setDisplay({
@@ -235,7 +238,7 @@ const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) 
 
         tick();
         const interval = setInterval(() => { if (!tick()) clearInterval(interval); }, 1000);
-        return () => clearInterval(interval);
+        return () => { clearInterval(interval); try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ } };
     }, [active]);
 
     if (!display) return null;
@@ -322,7 +325,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         }
     }, [total.isPromoApplied, hasCelebrated]);
 
-    const isDiscountActive = total.isPromoApplied || total.discountApplied.length > 0;
+    const isDiscountActive = discountType === 'half' || discountType === 'full';
 
 
     const handleServiceToggle = useCallback((id: string) => {
