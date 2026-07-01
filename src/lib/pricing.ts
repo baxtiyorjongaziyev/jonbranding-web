@@ -38,6 +38,7 @@ type PricingLabels = {
     ramazonDiscount?: string;
     specialDiscount?: string;
     fullPaymentDiscount?: string;
+    packageDiscount?: string;
 };
 
 const getPricingLabel = (labels: PricingLabels | undefined, key: keyof PricingLabels) =>
@@ -380,6 +381,11 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz', dict
             const upfrontName = getPricingLabel(pricingLabels, 'fullPaymentDiscount');
             discountsApplied.push({ name: upfrontName, value: upfrontVal });
             finalPrice -= upfrontVal;
+        } else if (discountType === 'split' && mainServicesCount >= 2) {
+            const packageVal = totalBeforeDiscounts * 0.20;
+            const packageName = getPricingLabel(pricingLabels, 'packageDiscount');
+            discountsApplied.push({ name: packageName, value: packageVal });
+            finalPrice -= packageVal;
         }
     }
 

@@ -327,7 +327,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
         }
     }, [total.isPromoApplied, hasCelebrated]);
 
-    const isDiscountActive = total.isPromoApplied || discountType !== 'none';
+    const isDiscountActive = total.savings > 0;
 
 
     const handleServiceToggle = useCallback((id: string) => {

@@ -1211,7 +1211,8 @@
         "ndaSurcharge": "NDA (Confidentiality) (+50%)",
         "ramazonDiscount": "Ramazon discount (-30%)",
         "specialDiscount": "Special discount (-50%)",
-        "fullPaymentDiscount": "100% upfront payment (-10%)"
+        "fullPaymentDiscount": "100% upfront discount (-10%)",
+        "packageDiscount": "Package discount (-20%)"
       },
       "discountCountdown": {
         "title": "Discount expires in",

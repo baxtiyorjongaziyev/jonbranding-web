@@ -1394,7 +1394,8 @@
         "ndaSurcharge": "NDA (Maxfiylik) (+50%)",
         "ramazonDiscount": "Ramazon chegirmasi (-30%)",
         "specialDiscount": "Maxsus chegirma (-50%)",
-        "fullPaymentDiscount": "100% oldindan to'lov (-10%)"
+        "fullPaymentDiscount": "100% oldindan to'lov (-10%)",
+        "packageDiscount": "Paketli chegirma (-20%)"
       },
       "discountCountdown": {
         "title": "Chegirma muddati tugaydi",

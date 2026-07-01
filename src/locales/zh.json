@@ -1219,7 +1219,8 @@
         "ndaSurcharge": "NDA（保密）(+50%)",
         "ramazonDiscount": "Ramazon 优惠 (-30%)",
         "specialDiscount": "特别优惠 (-50%)",
-        "fullPaymentDiscount": "100% 预付款 (-10%)"
+        "fullPaymentDiscount": "100% 预付折扣 (-10%)",
+        "packageDiscount": "套餐折扣 (-20%)"
       },
       "discountCountdown": {
         "title": "折扣倒计时",

@@ -1211,7 +1211,8 @@
         "ndaSurcharge": "NDA (Конфиденциальность) (+50%)",
         "ramazonDiscount": "Скидка Рамазан (-30%)",
         "specialDiscount": "Специальная скидка (-50%)",
-        "fullPaymentDiscount": "100% предоплата (-10%)"
+        "fullPaymentDiscount": "100% предоплата (-10%)",
+        "packageDiscount": "Пакетная скидка (-20%)"
       },
       "discountCountdown": {
         "title": "Скидка заканчивается через",
