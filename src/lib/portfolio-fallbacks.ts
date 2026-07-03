@@ -31,9 +31,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'brand-strategy',
       categoryLabel: 'Brend-strategiya',
       tags: ['Brend-strategiya', 'Aydentika', 'Brendbuk'],
-      coverImage: '/images/cms/denaroma-hozir.png',
-      beforeImage: '/images/cms/denaroma-avval.png',
-      afterImage: '/images/cms/denaroma-hozir.png',
+      coverImage: '/images/cms/denaroma-hozir.webp',
+      beforeImage: '/images/cms/denaroma-avval.webp',
+      afterImage: '/images/cms/denaroma-hozir.webp',
       oldHint: '3 Atirchi (Eski brending)',
       newHint: 'Den Aroma (Yangi premium brending)',
       description: 'Selective parfyumeriya tarmog\'i uchun yaratilgan global brend strategiyasi, nafis vizual aydentika va mukammal brendbuk loyihasi.',
@@ -57,8 +57,8 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/denaroma-hozir.png',
-        '/images/cms/denaroma-avval.png'
+        '/images/cms/denaroma-hozir.webp',
+        '/images/cms/denaroma-avval.webp'
       ],
       order: 1
     },
@@ -71,9 +71,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: 'Firma uslubi',
       tags: ['Aydentika', 'Zargarlik', 'Premium'],
-      coverImage: '/images/cms/fidda-hozir.png',
-      beforeImage: '/images/cms/fidda-avval.jpeg',
-      afterImage: '/images/cms/fidda-hozir.png',
+      coverImage: '/images/cms/fidda-hozir.webp',
+      beforeImage: '/images/cms/fidda-avval.webp',
+      afterImage: '/images/cms/fidda-hozir.webp',
       oldHint: 'Oddiy logotip dizayni',
       newHint: 'Fidda (Premium aydentika)',
       description: 'Zargarlik buyumlari butigi uchun nafis, nozik va estetik jihatdan yuqori darajada ishlangan premium vizual aydentika tizimi.',
@@ -97,7 +97,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/fidda-hozir.png'
+        '/images/cms/fidda-hozir.webp'
       ],
       order: 3
     },
@@ -109,9 +109,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'packaging',
       categoryLabel: 'Qadoq dizayni',
       tags: ['Qadoq dizayni', 'Brend', 'Premium'],
-      coverImage: '/images/cms/boyarin-hozir.png',
-      beforeImage: '/images/cms/boyarin-avval.jpeg',
-      afterImage: '/images/cms/boyarin-hozir.png',
+      coverImage: '/images/cms/boyarin-hozir.webp',
+      beforeImage: '/images/cms/boyarin-avval.webp',
+      afterImage: '/images/cms/boyarin-hozir.webp',
       oldHint: 'Eski mahsulot uslubi',
       newHint: 'Boyarin (Premium qadoq)',
       description: 'Saryog\' va sut mahsulotlari uchun supermarket javonlarida darhol ajralib turadigan, premium vizual til va qadoqlar.',
@@ -135,7 +135,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/boyarin-hozir.png'
+        '/images/cms/boyarin-hozir.webp'
       ],
       order: 4
     },
@@ -147,7 +147,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: 'Firma uslubi',
       tags: ['Aydentika', 'Parfumeriya', 'Premium'],
-      coverImage: '/images/cms/arfadel-cover.jpg',
+      coverImage: '/images/cms/arfadel-cover.webp',
       description: "Premium parfyumeriya brendi uchun \"RR\" monogrammasi asosidagi to'liq vizual aydentika — atir flakonidan do'kon vitrinasigacha yagona oltin uslub.",
       body: [
         { heading: "Vazifa va Muammo", paragraph: "Yangi parfyumeriya brendini bozorga premium darajada olib chiqish kerak edi. Har bir aloqa nuqtasi — do'kon, qadoq, mobil ilova — yagona, esda qoladigan va ishonchli qiyofada bo'lishi talab etilardi." },
@@ -155,10 +155,10 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "Yakuniy Natija", paragraph: "Brend har joyda — flakon yorlig'idan do'kon peshtog'igacha — bir xil premium hissiyot beradi. Mijoz brendni bir ko'rishda taniydi va u raqobatchilardan ajralib turadi." }
       ],
       galleryImages: [
-        '/images/cms/arfadel-counter.jpg',
-        '/images/cms/arfadel-bag.jpg',
-        '/images/cms/arfadel-app.jpg',
-        '/images/cms/arfadel-card.jpg'
+        '/images/cms/arfadel-counter.webp',
+        '/images/cms/arfadel-bag.webp',
+        '/images/cms/arfadel-app.webp',
+        '/images/cms/arfadel-card.webp'
       ],
       order: 5
     },
@@ -170,7 +170,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'logo-design',
       categoryLabel: 'Logotip dizayni',
       tags: ['Logotip', 'Belgi', 'Premium'],
-      coverImage: '/images/cms/beyaz-cover.jpg',
+      coverImage: '/images/cms/beyaz-cover.webp',
       description: "Kuch va obro'ni ifodalovchi sher belgisi asosidagi premium logotip va belgi tizimi; oltin va to'q yashil palitrada.",
       body: [
         { heading: "Vazifa va Muammo", paragraph: "Brendga jiddiy, obro'li va esda qoladigan belgi kerak edi — raqobatchilar orasida darhol ajralib turadigan va ishonch uyg'otadigan." },
@@ -178,9 +178,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "Yakuniy Natija", paragraph: "O'ziga xos, kuchli va moslashuvchan logotip — kichik ikonkadan katta bannergacha aniq o'qiladi va brendning premium xarakterini namoyon etadi." }
       ],
       galleryImages: [
-        '/images/cms/beyaz-gold.jpg',
-        '/images/cms/beyaz-symbol-green.jpg',
-        '/images/cms/beyaz-symbol-gold.jpg'
+        '/images/cms/beyaz-gold.webp',
+        '/images/cms/beyaz-symbol-green.webp',
+        '/images/cms/beyaz-symbol-gold.webp'
       ],
       order: 6
     },
@@ -192,7 +192,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'logo-design',
       categoryLabel: 'Logotip dizayni',
       tags: ['Logotip', 'Energiya', 'Dinamik'],
-      coverImage: '/images/cms/enros-cover.jpg',
+      coverImage: '/images/cms/enros-cover.webp',
       description: "Energiya va tezlikni ifodalovchi chaqmoq belgisi asosidagi dinamik logotip; neon-moviy, laym va qora palitrada.",
       body: [
         { heading: "Vazifa va Muammo", paragraph: "Yosh va zamonaviy brendga e'tiborni darhol tortadigan, energiya hissini beruvchi belgi kerak edi." },
@@ -200,9 +200,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "Yakuniy Natija", paragraph: "Bir ko'rishda yodda qoladigan, raqamli muhitda ham, mahsulotda ham yorqin ishlaydigan kuchli va dinamik belgi." }
       ],
       galleryImages: [
-        '/images/cms/enros-lime.jpg',
-        '/images/cms/enros-alt.jpg',
-        '/images/cms/enros-icon.jpg'
+        '/images/cms/enros-lime.webp',
+        '/images/cms/enros-alt.webp',
+        '/images/cms/enros-icon.webp'
       ],
       order: 7
     },
@@ -214,7 +214,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: 'Firma uslubi',
       tags: ['Moda', 'Aydentika', 'Premium'],
-      coverImage: '/images/cms/diletta-cover.jpg',
+      coverImage: '/images/cms/diletta-cover.webp',
       description: "Moda atelyesi uchun nafis \"D\" monogrammasi asosidagi premium aydentika — bordo va oltin uyg'unligida.",
       body: [
         { heading: "Vazifa va Muammo", paragraph: "Moda atelyesiga ayollarcha nafislik va premium hissni beruvchi, esda qoladigan brend qiyofasi kerak edi." },
@@ -222,10 +222,10 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "Yakuniy Natija", paragraph: "Brend nafis, qimmatbaho va o'ziga xos ko'rinish oldi. Har bir detal — yorliqdan paketgacha — bitta Diletta tilida gapiradi." }
       ],
       galleryImages: [
-        '/images/cms/diletta-fashion.jpg',
-        '/images/cms/diletta-storefront.jpg',
-        '/images/cms/diletta-cards.jpg',
-        '/images/cms/diletta-bag.jpg'
+        '/images/cms/diletta-fashion.webp',
+        '/images/cms/diletta-storefront.webp',
+        '/images/cms/diletta-cards.webp',
+        '/images/cms/diletta-bag.webp'
       ],
       order: 8
     }
@@ -239,9 +239,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'brand-strategy',
       categoryLabel: 'Бренд-стратегия',
       tags: ['Бренд-стратегия', 'Айдентика', 'Брендбук'],
-      coverImage: '/images/cms/denaroma-hozir.png',
-      beforeImage: '/images/cms/denaroma-avval.png',
-      afterImage: '/images/cms/denaroma-hozir.png',
+      coverImage: '/images/cms/denaroma-hozir.webp',
+      beforeImage: '/images/cms/denaroma-avval.webp',
+      afterImage: '/images/cms/denaroma-hozir.webp',
       oldHint: '3 Atirchi (Старый бренд)',
       newHint: 'Den Aroma (Новый премиум брендинг)',
       description: 'Глобальная бренд-стратегия, элегантная айдентика и комплексный брендбук для первой премиальной сети селективной парфюмерии.',
@@ -265,8 +265,8 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/denaroma-hozir.png',
-        '/images/cms/denaroma-avval.png'
+        '/images/cms/denaroma-hozir.webp',
+        '/images/cms/denaroma-avval.webp'
       ],
       order: 1
     },
@@ -279,9 +279,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: 'Фирменный стиль',
       tags: ['Айдентика', 'Ювелирные изделия', 'Премиум'],
-      coverImage: '/images/cms/fidda-hozir.png',
-      beforeImage: '/images/cms/fidda-avval.jpeg',
-      afterImage: '/images/cms/fidda-hozir.png',
+      coverImage: '/images/cms/fidda-hozir.webp',
+      beforeImage: '/images/cms/fidda-avval.webp',
+      afterImage: '/images/cms/fidda-hozir.webp',
       oldHint: 'Простой логотип',
       newHint: 'Fidda (Премиум айдентика)',
       description: 'Изящный визуальный стиль премиум-класса для бутика дизайнерских ювелирных украшений ручной работы.',
@@ -305,7 +305,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/fidda-hozir.png'
+        '/images/cms/fidda-hozir.webp'
       ],
       order: 3
     },
@@ -317,9 +317,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'packaging',
       categoryLabel: 'Дизайн упаковки',
       tags: ['Упаковка', 'Бренд', 'Премиум'],
-      coverImage: '/images/cms/boyarin-hozir.png',
-      beforeImage: '/images/cms/boyarin-avval.jpeg',
-      afterImage: '/images/cms/boyarin-hozir.png',
+      coverImage: '/images/cms/boyarin-hozir.webp',
+      beforeImage: '/images/cms/boyarin-avval.webp',
+      afterImage: '/images/cms/boyarin-hozir.webp',
       oldHint: 'Старая упаковка',
       newHint: 'Boyarin (Премиум упаковка)',
       description: 'Премиальный визуальный язык и дизайн упаковки для сливочного масла и молочных продуктов, доминирующий на полках супермаркетов.',
@@ -343,7 +343,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/boyarin-hozir.png'
+        '/images/cms/boyarin-hozir.webp'
       ],
       order: 4
     },
@@ -355,7 +355,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: 'Фирменный стиль',
       tags: ['Айдентика', 'Парфюмерия', 'Премиум'],
-      coverImage: '/images/cms/arfadel-cover.jpg',
+      coverImage: '/images/cms/arfadel-cover.webp',
       description: "Полная визуальная айдентика для премиальной парфюмерии на основе монограммы \"RR\" — единый золотой стиль от флакона до витрины магазина.",
       body: [
         { heading: "Задача", paragraph: "Нужно было вывести новый парфюмерный бренд на рынок на премиальном уровне. Каждая точка контакта — магазин, упаковка, мобильное приложение — должна была выглядеть единообразно, узнаваемо и вызывать доверие." },
@@ -363,10 +363,10 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "Результат", paragraph: "Бренд везде — от этикетки флакона до вывески магазина — передаёт одинаковое премиальное ощущение. Клиент узнаёт бренд с первого взгляда, и он выделяется среди конкурентов." }
       ],
       galleryImages: [
-        '/images/cms/arfadel-counter.jpg',
-        '/images/cms/arfadel-bag.jpg',
-        '/images/cms/arfadel-app.jpg',
-        '/images/cms/arfadel-card.jpg'
+        '/images/cms/arfadel-counter.webp',
+        '/images/cms/arfadel-bag.webp',
+        '/images/cms/arfadel-app.webp',
+        '/images/cms/arfadel-card.webp'
       ],
       order: 5
     },
@@ -378,7 +378,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'logo-design',
       categoryLabel: 'Дизайн логотипа',
       tags: ['Логотип', 'Знак', 'Премиум'],
-      coverImage: '/images/cms/beyaz-cover.jpg',
+      coverImage: '/images/cms/beyaz-cover.webp',
       description: "Премиальная система логотипа и знака на основе образа льва, символизирующего силу и престиж; в золотой и тёмно-зелёной палитре.",
       body: [
         { heading: "Задача", paragraph: "Бренду требовался серьёзный, престижный и запоминающийся знак, мгновенно выделяющийся среди конкурентов и вызывающий доверие." },
@@ -386,9 +386,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "Результат", paragraph: "Уникальный, сильный и гибкий логотип, который чётко читается от маленькой иконки до большого баннера и раскрывает премиальный характер бренда." }
       ],
       galleryImages: [
-        '/images/cms/beyaz-gold.jpg',
-        '/images/cms/beyaz-symbol-green.jpg',
-        '/images/cms/beyaz-symbol-gold.jpg'
+        '/images/cms/beyaz-gold.webp',
+        '/images/cms/beyaz-symbol-green.webp',
+        '/images/cms/beyaz-symbol-gold.webp'
       ],
       order: 6
     },
@@ -400,7 +400,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'logo-design',
       categoryLabel: 'Дизайн логотипа',
       tags: ['Логотип', 'Энергия', 'Динамика'],
-      coverImage: '/images/cms/enros-cover.jpg',
+      coverImage: '/images/cms/enros-cover.webp',
       description: "Динамичный логотип на основе знака молнии, символизирующего энергию и скорость; в неоново-синей, лаймовой и чёрной палитре.",
       body: [
         { heading: "Задача", paragraph: "Молодому и современному бренду нужен был знак, мгновенно привлекающий внимание и передающий ощущение энергии." },
@@ -408,9 +408,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "Результат", paragraph: "Сильный и динамичный знак, который запоминается с первого взгляда и ярко работает как в цифровой среде, так и на продукте." }
       ],
       galleryImages: [
-        '/images/cms/enros-lime.jpg',
-        '/images/cms/enros-alt.jpg',
-        '/images/cms/enros-icon.jpg'
+        '/images/cms/enros-lime.webp',
+        '/images/cms/enros-alt.webp',
+        '/images/cms/enros-icon.webp'
       ],
       order: 7
     },
@@ -422,7 +422,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: 'Фирменный стиль',
       tags: ['Мода', 'Айдентика', 'Премиум'],
-      coverImage: '/images/cms/diletta-cover.jpg',
+      coverImage: '/images/cms/diletta-cover.webp',
       description: "Премиальная айдентика для модного ателье на основе изящной монограммы \"D\" — в сочетании бордового и золотого.",
       body: [
         { heading: "Задача", paragraph: "Модному ателье нужен был запоминающийся образ бренда, передающий женственную утончённость и премиальное ощущение." },
@@ -430,10 +430,10 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "Результат", paragraph: "Бренд получил утончённый, дорогой и узнаваемый вид. Каждая деталь — от бирки до пакета — говорит на одном языке Diletta." }
       ],
       galleryImages: [
-        '/images/cms/diletta-fashion.jpg',
-        '/images/cms/diletta-storefront.jpg',
-        '/images/cms/diletta-cards.jpg',
-        '/images/cms/diletta-bag.jpg'
+        '/images/cms/diletta-fashion.webp',
+        '/images/cms/diletta-storefront.webp',
+        '/images/cms/diletta-cards.webp',
+        '/images/cms/diletta-bag.webp'
       ],
       order: 8
     }
@@ -447,9 +447,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'brand-strategy',
       categoryLabel: 'Brand Strategy',
       tags: ['Brand Strategy', 'Identity', 'Brandbook'],
-      coverImage: '/images/cms/denaroma-hozir.png',
-      beforeImage: '/images/cms/denaroma-avval.png',
-      afterImage: '/images/cms/denaroma-hozir.png',
+      coverImage: '/images/cms/denaroma-hozir.webp',
+      beforeImage: '/images/cms/denaroma-avval.webp',
+      afterImage: '/images/cms/denaroma-hozir.webp',
       oldHint: '3 Atirchi (Old branding)',
       newHint: 'Den Aroma (New premium branding)',
       description: 'Global brand strategy, elegant visual identity, and comprehensive brandbook designed for a premium selective perfumery chain.',
@@ -473,8 +473,8 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/denaroma-hozir.png',
-        '/images/cms/denaroma-avval.png'
+        '/images/cms/denaroma-hozir.webp',
+        '/images/cms/denaroma-avval.webp'
       ],
       order: 1
     },
@@ -487,9 +487,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: 'Corporate Style',
       tags: ['Identity', 'Jewelry', 'Premium'],
-      coverImage: '/images/cms/fidda-hozir.png',
-      beforeImage: '/images/cms/fidda-avval.jpeg',
-      afterImage: '/images/cms/fidda-hozir.png',
+      coverImage: '/images/cms/fidda-hozir.webp',
+      beforeImage: '/images/cms/fidda-avval.webp',
+      afterImage: '/images/cms/fidda-hozir.webp',
       oldHint: 'Simple logo',
       newHint: 'Fidda (Premium identity)',
       description: 'Delicate, sophisticated, and high-end visual identity system designed for a luxury artisan jewelry boutique.',
@@ -513,7 +513,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/fidda-hozir.png'
+        '/images/cms/fidda-hozir.webp'
       ],
       order: 3
     },
@@ -525,9 +525,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'packaging',
       categoryLabel: 'Packaging Design',
       tags: ['Packaging', 'Brand', 'Premium'],
-      coverImage: '/images/cms/boyarin-hozir.png',
-      beforeImage: '/images/cms/boyarin-avval.jpeg',
-      afterImage: '/images/cms/boyarin-hozir.png',
+      coverImage: '/images/cms/boyarin-hozir.webp',
+      beforeImage: '/images/cms/boyarin-avval.webp',
+      afterImage: '/images/cms/boyarin-hozir.webp',
       oldHint: 'Old package',
       newHint: 'Boyarin (Premium packaging)',
       description: 'A striking premium visual identity and packaging system designed to dominate gourmet store shelves.',
@@ -551,7 +551,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/boyarin-hozir.png'
+        '/images/cms/boyarin-hozir.webp'
       ],
       order: 4
     },
@@ -563,7 +563,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: 'Corporate Identity',
       tags: ['Identity', 'Perfumery', 'Premium'],
-      coverImage: '/images/cms/arfadel-cover.jpg',
+      coverImage: '/images/cms/arfadel-cover.webp',
       description: "A complete visual identity for a premium perfumery built around the \"RR\" monogram — one golden style from the bottle to the storefront.",
       body: [
         { heading: "The Challenge", paragraph: "A new perfumery brand had to enter the market at a premium level. Every touchpoint — store, packaging, mobile app — needed a single, memorable and trustworthy look." },
@@ -571,10 +571,10 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "The Result", paragraph: "Everywhere — from the bottle label to the storefront sign — the brand delivers the same premium feeling. Customers recognize it at a glance and it stands out from competitors." }
       ],
       galleryImages: [
-        '/images/cms/arfadel-counter.jpg',
-        '/images/cms/arfadel-bag.jpg',
-        '/images/cms/arfadel-app.jpg',
-        '/images/cms/arfadel-card.jpg'
+        '/images/cms/arfadel-counter.webp',
+        '/images/cms/arfadel-bag.webp',
+        '/images/cms/arfadel-app.webp',
+        '/images/cms/arfadel-card.webp'
       ],
       order: 5
     },
@@ -586,7 +586,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'logo-design',
       categoryLabel: 'Logo Design',
       tags: ['Logo', 'Mark', 'Premium'],
-      coverImage: '/images/cms/beyaz-cover.jpg',
+      coverImage: '/images/cms/beyaz-cover.webp',
       description: "A premium logo and mark system built around a lion that embodies strength and prestige; in a gold and deep-green palette.",
       body: [
         { heading: "The Challenge", paragraph: "The brand needed a serious, prestigious and memorable mark that instantly stands out among competitors and inspires trust." },
@@ -594,9 +594,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "The Result", paragraph: "A distinctive, strong and flexible logo that reads clearly from a tiny icon to a large banner and expresses the brand's premium character." }
       ],
       galleryImages: [
-        '/images/cms/beyaz-gold.jpg',
-        '/images/cms/beyaz-symbol-green.jpg',
-        '/images/cms/beyaz-symbol-gold.jpg'
+        '/images/cms/beyaz-gold.webp',
+        '/images/cms/beyaz-symbol-green.webp',
+        '/images/cms/beyaz-symbol-gold.webp'
       ],
       order: 6
     },
@@ -608,7 +608,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'logo-design',
       categoryLabel: 'Logo Design',
       tags: ['Logo', 'Energy', 'Dynamic'],
-      coverImage: '/images/cms/enros-cover.jpg',
+      coverImage: '/images/cms/enros-cover.webp',
       description: "A dynamic logo built around a lightning mark that conveys energy and speed; in a neon-blue, lime and black palette.",
       body: [
         { heading: "The Challenge", paragraph: "A young, modern brand needed a mark that instantly grabs attention and conveys a sense of energy." },
@@ -616,9 +616,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "The Result", paragraph: "A strong, dynamic mark that is memorable at a glance and works vividly both in digital and on product." }
       ],
       galleryImages: [
-        '/images/cms/enros-lime.jpg',
-        '/images/cms/enros-alt.jpg',
-        '/images/cms/enros-icon.jpg'
+        '/images/cms/enros-lime.webp',
+        '/images/cms/enros-alt.webp',
+        '/images/cms/enros-icon.webp'
       ],
       order: 7
     },
@@ -630,7 +630,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: 'Corporate Identity',
       tags: ['Fashion', 'Identity', 'Premium'],
-      coverImage: '/images/cms/diletta-cover.jpg',
+      coverImage: '/images/cms/diletta-cover.webp',
       description: "A premium identity for a fashion atelier built around an elegant \"D\" monogram — in a burgundy and gold pairing.",
       body: [
         { heading: "The Challenge", paragraph: "The fashion atelier needed a memorable brand image conveying feminine refinement and a premium feel." },
@@ -638,10 +638,10 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "The Result", paragraph: "The brand gained a refined, premium and recognizable look. Every detail — from the tag to the bag — speaks one Diletta language." }
       ],
       galleryImages: [
-        '/images/cms/diletta-fashion.jpg',
-        '/images/cms/diletta-storefront.jpg',
-        '/images/cms/diletta-cards.jpg',
-        '/images/cms/diletta-bag.jpg'
+        '/images/cms/diletta-fashion.webp',
+        '/images/cms/diletta-storefront.webp',
+        '/images/cms/diletta-cards.webp',
+        '/images/cms/diletta-bag.webp'
       ],
       order: 8
     }
@@ -655,9 +655,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'brand-strategy',
       categoryLabel: '品牌战略',
       tags: ['品牌战略', '视觉识别', '品牌指南'],
-      coverImage: '/images/cms/denaroma-hozir.png',
-      beforeImage: '/images/cms/denaroma-avval.png',
-      afterImage: '/images/cms/denaroma-hozir.png',
+      coverImage: '/images/cms/denaroma-hozir.webp',
+      beforeImage: '/images/cms/denaroma-avval.webp',
+      afterImage: '/images/cms/denaroma-hozir.webp',
       oldHint: '3 Atirchi (旧品牌)',
       newHint: 'Den Aroma (全新高端品牌包装)',
       description: '为高端定制香水连锁店打造的全球品牌战略、高雅视觉识别系统以及全方位品牌指南项目。',
@@ -681,8 +681,8 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/denaroma-hozir.png',
-        '/images/cms/denaroma-avval.png'
+        '/images/cms/denaroma-hozir.webp',
+        '/images/cms/denaroma-avval.webp'
       ],
       order: 1
     },
@@ -695,9 +695,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: '企业风格',
       tags: ['视觉识别', '珠宝', '高端'],
-      coverImage: '/images/cms/fidda-hozir.png',
-      beforeImage: '/images/cms/fidda-avval.jpeg',
-      afterImage: '/images/cms/fidda-hozir.png',
+      coverImage: '/images/cms/fidda-hozir.webp',
+      beforeImage: '/images/cms/fidda-avval.webp',
+      afterImage: '/images/cms/fidda-hozir.webp',
       oldHint: '简约标志',
       newHint: 'Fidda (高端视觉识别)',
       description: '为奢华手作珠宝精品店量身定制的精致、典雅的高端视觉识别系统。',
@@ -721,7 +721,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/fidda-hozir.png'
+        '/images/cms/fidda-hozir.webp'
       ],
       order: 3
     },
@@ -733,9 +733,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'packaging',
       categoryLabel: '包装设计',
       tags: ['包装', '品牌', '高端'],
-      coverImage: '/images/cms/boyarin-hozir.png',
-      beforeImage: '/images/cms/boyarin-avval.jpeg',
-      afterImage: '/images/cms/boyarin-hozir.png',
+      coverImage: '/images/cms/boyarin-hozir.webp',
+      beforeImage: '/images/cms/boyarin-avval.webp',
+      afterImage: '/images/cms/boyarin-hozir.webp',
       oldHint: '旧版包装',
       newHint: 'Boyarin (高端包装)',
       description: '专为抢占高端货架设计的醒目高级视觉识别与包装系统。',
@@ -759,7 +759,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         }
       ],
       galleryImages: [
-        '/images/cms/boyarin-hozir.png'
+        '/images/cms/boyarin-hozir.webp'
       ],
       order: 4
     },
@@ -771,7 +771,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: '企业形象',
       tags: ['品牌识别', '香水', '高端'],
-      coverImage: '/images/cms/arfadel-cover.jpg',
+      coverImage: '/images/cms/arfadel-cover.webp',
       description: "为高端香水品牌打造的完整视觉识别系统，以 \"RR\" 字母组合为核心——从香水瓶到店面橱窗，统一的金色风格。",
       body: [
         { heading: "挑战", paragraph: "新的香水品牌需要以高端定位进入市场。每一个接触点——门店、包装、移动应用——都需要统一、易记且值得信赖的形象。" },
@@ -779,10 +779,10 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "成果", paragraph: "无论在哪里——从瓶身标签到店面招牌——品牌都传递出同样的高端感。顾客一眼就能认出，并在竞争中脱颖而出。" }
       ],
       galleryImages: [
-        '/images/cms/arfadel-counter.jpg',
-        '/images/cms/arfadel-bag.jpg',
-        '/images/cms/arfadel-app.jpg',
-        '/images/cms/arfadel-card.jpg'
+        '/images/cms/arfadel-counter.webp',
+        '/images/cms/arfadel-bag.webp',
+        '/images/cms/arfadel-app.webp',
+        '/images/cms/arfadel-card.webp'
       ],
       order: 5
     },
@@ -794,7 +794,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'logo-design',
       categoryLabel: '标志设计',
       tags: ['标志', '符号', '高端'],
-      coverImage: '/images/cms/beyaz-cover.jpg',
+      coverImage: '/images/cms/beyaz-cover.webp',
       description: "以象征力量与尊贵的狮子形象为核心的高端标志与符号系统；采用金色与深绿色调。",
       body: [
         { heading: "挑战", paragraph: "品牌需要一个庄重、尊贵且令人难忘的标志，在竞争者中立刻脱颖而出并赢得信任。" },
@@ -802,9 +802,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "成果", paragraph: "一个独特、有力且灵活的标志——从小图标到大横幅都清晰可辨，彰显品牌的高端气质。" }
       ],
       galleryImages: [
-        '/images/cms/beyaz-gold.jpg',
-        '/images/cms/beyaz-symbol-green.jpg',
-        '/images/cms/beyaz-symbol-gold.jpg'
+        '/images/cms/beyaz-gold.webp',
+        '/images/cms/beyaz-symbol-green.webp',
+        '/images/cms/beyaz-symbol-gold.webp'
       ],
       order: 6
     },
@@ -816,7 +816,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'logo-design',
       categoryLabel: '标志设计',
       tags: ['标志', '能量', '动感'],
-      coverImage: '/images/cms/enros-cover.jpg',
+      coverImage: '/images/cms/enros-cover.webp',
       description: "以象征能量与速度的闪电标记为核心的动感标志；采用霍虹蓝、青柠绿与黑色调。",
       body: [
         { heading: "挑战", paragraph: "年轻、现代的品牌需要一个能立即抓住注意力、传达能量感的标记。" },
@@ -824,9 +824,9 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "成果", paragraph: "一个有力而动感的标记，一眼难忘，无论在数字环境还是产品上都表现亮眼。" }
       ],
       galleryImages: [
-        '/images/cms/enros-lime.jpg',
-        '/images/cms/enros-alt.jpg',
-        '/images/cms/enros-icon.jpg'
+        '/images/cms/enros-lime.webp',
+        '/images/cms/enros-alt.webp',
+        '/images/cms/enros-icon.webp'
       ],
       order: 7
     },
@@ -838,7 +838,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: '企业形象',
       tags: ['时尚', '品牌识别', '高端'],
-      coverImage: '/images/cms/diletta-cover.jpg',
+      coverImage: '/images/cms/diletta-cover.webp',
       description: "为时装工作室打造的高端品牌识别，以优雅的 \"D\" 字母组合为核心——采用酒红与金色搭配。",
       body: [
         { heading: "挑战", paragraph: "时装工作室需要一个令人难忘的品牌形象，传达女性的精致与高端感。" },
@@ -846,10 +846,10 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         { heading: "成果", paragraph: "品牌获得了精致、高贵且具辨识度的形象。每一处细节——从吊牌到手提袋——都讲述着同一种 Diletta 语言。" }
       ],
       galleryImages: [
-        '/images/cms/diletta-fashion.jpg',
-        '/images/cms/diletta-storefront.jpg',
-        '/images/cms/diletta-cards.jpg',
-        '/images/cms/diletta-bag.jpg'
+        '/images/cms/diletta-fashion.webp',
+        '/images/cms/diletta-storefront.webp',
+        '/images/cms/diletta-cards.webp',
+        '/images/cms/diletta-bag.webp'
       ],
       order: 8
     }

@@ -70,7 +70,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
                 {!showVideo ? (
                   <>
                     <Image
-                      src="/images/cms/founder-portrait.jpeg"
+                      src="/images/cms/founder-portrait.webp"
                       alt={translations.videoAlt || 'Baxtiyorjon Gaziyev, Jon.Branding asoschisi'}
                       fill
                       sizes="(min-width: 768px) 40vw, 92vw"

@@ -2,6 +2,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Button } from '../ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import Magnetic from '../ui/magnetic';
@@ -16,6 +17,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             case_desc: "'Den Aroma' misolida biz oddiy atir do'konini premium boutique'ga aylantirdik. Natijada ular endi yuqori narxda sota oladi, 'qimmat' degan e'tirozlarsiz.",
             buttonText: "Batafsil ma'lumot",
             caseStudyLabel: "Keys-stadis",
+            logoAlt: "Den Aroma logotipi",
             videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5",
             ctaButton: "Mening brendim uchun ham",
             results: [
@@ -30,6 +32,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             case_desc: "На примере 'Den Aroma' мы превратили обычный парфюмерный магазин в премиальный бутик. В результате они теперь могут продавать по высокой цене, без возражений 'дорого'.",
             buttonText: "Подробнее",
             caseStudyLabel: "Кейс-стади",
+            logoAlt: "Логотип Den Aroma",
             videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5",
             ctaButton: "И для моего бренда",
             results: [
@@ -44,6 +47,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             case_desc: "Using 'Den Aroma' as an example, we transformed an ordinary perfume shop into a premium boutique. As a result, they can now sell at a high price without 'it's expensive' objections.",
             buttonText: "Learn More",
             caseStudyLabel: "Case Study",
+            logoAlt: "Den Aroma logo",
             videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5",
             ctaButton: "For my brand too",
             results: [
@@ -58,6 +62,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
             case_desc: "以 'Den Aroma' 为例，我们将一家普通的香水店改造成了一家高级精品店。结果，他们现在可以高价销售，而不会有“太贵了”的异议。",
             buttonText: "了解更多",
             caseStudyLabel: "案例研究",
+            logoAlt: "Den Aroma 标志",
             videoUrl: "https://player.vimeo.com/video/1145610708?h=e5d8c312d5",
             ctaButton: "也为我的品牌",
             results: [
@@ -89,7 +94,7 @@ const FeaturedCaseStudy = ({ lang, dictionary }: { lang: string, dictionary: any
                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         <div className="text-center lg:text-left">
                             <div className="flex items-center justify-center lg:justify-start gap-3 text-sm font-semibold text-brand-cyan uppercase tracking-wider mb-4">
-                               <img src="/images/cms/logo-denaroma.png" alt="Den Aroma Logo" width={128} height={32} className="h-6 w-auto" />
+                               <Image src="/images/cms/logo-denaroma.webp" alt={t.logoAlt} width={128} height={32} className="h-6 w-auto" />
                                <span className="border-l border-brand-cyan/50 pl-3">{t.caseStudyLabel}</span>
                             </div>
                             <h2 className="text-3xl lg:text-4xl font-extrabold text-white">{t.title}</h2>

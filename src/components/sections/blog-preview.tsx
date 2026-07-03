@@ -7,9 +7,9 @@ import { Locale } from '@/lib/dictionaries';
 import { getLocalizedPath } from '@/lib/i18n/locale';
 
 const blogCardImages = [
-  '/images/cms/blog-post-hero.jpeg',
-  '/images/cms/brandbook-guide.jpeg',
-  '/images/cms/corporate-identity.jpeg',
+  '/images/cms/blog-post-hero.webp',
+  '/images/cms/brandbook-guide.webp',
+  '/images/cms/corporate-identity.webp',
   '/images/cms/packaging-shelf.webp',
   '/images/cms/naming-process.webp',
   '/images/cms/brand-strategy-team.webp',
