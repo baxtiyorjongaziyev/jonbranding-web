@@ -43,6 +43,7 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 - Portfolio Sanity rasmlariga `auto=format` qo'shildi va before/after slider Next image optimizatsiyasidan foydalanadigan qilindi.
 - `pnpm-workspace.yaml` build-script allowlist placeholderlari real boolean qiymatlarga keltirildi.
 - Dependabot #88 uchun `json-2-csv` override'i patched `5.5.11` versiyasiga mahkamlandi.
+- PR #252 review izohlaridan qolgan dolzarb joylar yopildi: portfolio bot rasm pathlari temp katalog bilan cheklab qo'yildi va package-builder discount label/rule fallbacklari locale kalitlariga ko'chirildi.
 
 ---
 

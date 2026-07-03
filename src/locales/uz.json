@@ -1446,8 +1446,8 @@
       },
       "discountSelector": {
         "none": "Chegirmasiz",
-        "package": "2+ xizmat uchun (-20%)",
-        "full": "Oldindan to'lov uchun (-28%)"
+        "half": "50/50 to'lov",
+        "full": "100% oldindan (-10%)"
       },
       "discountCountdown": {
         "title": "Chegirma muddati tugaydi",

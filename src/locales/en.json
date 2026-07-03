@@ -1258,8 +1258,8 @@
       },
       "discountSelector": {
         "none": "No discount",
-        "package": "2+ services (-20%)",
-        "full": "Upfront payment (-28%)"
+        "half": "50/50 payment",
+        "full": "100% upfront (-10%)"
       },
       "discountCountdown": {
         "title": "Discount expires in",

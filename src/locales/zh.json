@@ -1266,8 +1266,8 @@
       },
       "discountSelector": {
         "none": "无折扣",
-        "package": "2+ 项服务 (-20%)",
-        "full": "预付款 (-28%)"
+        "half": "50/50 \u4ed8\u6b3e",
+        "full": "100% \u9884\u4ed8\u6b3e (-10%)"
       },
       "discountCountdown": {
         "title": "折扣倒计时",

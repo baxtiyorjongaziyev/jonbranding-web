@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, FC, useMemo, useCallback } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
@@ -245,9 +245,9 @@ const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) 
 
     const labels: Record<string, { title: string; hours: string; minutes: string; seconds: string; description: string }> = {
         uz: { title: 'Chegirma muddati tugaydi:', hours: 'soat', minutes: 'daqiqa', seconds: 'soniya', description: "Ushbu chegirma faqat 24 soat ichida to'lov amalga oshirilganda taqdim etiladi." },
-        ru: { title: 'Срок скидки истекает:', hours: 'час', minutes: 'мин', seconds: 'сек', description: 'Эта скидка предоставляется только при оплате в течение 24 часов.' },
+        ru: { title: 'Ð¡Ñ€Ð¾Ðº ÑÐºÐ¸Ð´ÐºÐ¸ Ð¸ÑÑ‚ÐµÐºÐ°ÐµÑ‚:', hours: 'Ñ‡Ð°Ñ', minutes: 'Ð¼Ð¸Ð½', seconds: 'ÑÐµÐº', description: 'Ð­Ñ‚Ð° ÑÐºÐ¸Ð´ÐºÐ° Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¿Ñ€Ð¸ Ð¾Ð¿Ð»Ð°Ñ‚Ðµ Ð² Ñ‚ÐµÑ‡ÐµÐ½Ð¸Ðµ 24 Ñ‡Ð°ÑÐ¾Ð².' },
         en: { title: 'Discount expires in:', hours: 'hrs', minutes: 'min', seconds: 'sec', description: 'This discount is only valid if payment is made within 24 hours.' },
-        zh: { title: '折扣剩余时间：', hours: '时', minutes: '分', seconds: '秒', description: '此折扣仅在24小时内付款时有效。' },
+        zh: { title: 'æŠ˜æ‰£å‰©ä½™æ—¶é—´ï¼š', hours: 'æ—¶', minutes: 'åˆ†', seconds: 'ç§’', description: 'æ­¤æŠ˜æ‰£ä»…åœ¨24å°æ—¶å†…ä»˜æ¬¾æ—¶æœ‰æ•ˆã€‚' },
     };
     const t = labels[lang] || labels.uz;
 
@@ -343,15 +343,11 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     if (!isClient || !dictionary) return null;
 
     const discountOptions = [
-        { value: 'none', label: "CHEGIRMASIZ" },
-        { value: 'half', label: "50/50 TO'LOV" },
-        { value: 'full', label: "100% OLDINDAN (-10%)" }
-    ];
-    const discountRules = translations.discountRules || {
-        title: "Chegirma qoidasi",
-        single: "1 ta xizmat tanlansa, 50/50 to‘lovda chegirma qo‘llanilmaydi.",
-        bundle: "2 va undan ortiq asosiy xizmat tanlansa, chegirma faollashadi."
-    };
+        { value: 'none', label: translations.discountSelector?.none },
+        { value: 'half', label: translations.discountSelector?.half },
+        { value: 'full', label: translations.discountSelector?.full }
+    ].filter((option) => option.label);
+    const discountRules = translations.discountRules;
 
     return (
         <section id="package-builder" className="py-20 sm:py-28 bg-white" suppressHydrationWarning>
@@ -402,7 +398,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                     <div>
                                         <p className="text-lg font-black leading-relaxed tracking-tight text-blue-950 sm:text-xl">
-                                            Agar taqdim etilgan nomlardan hech biri sizga mos kelmasa — to'liq pul qaytaramiz. Xavfsiz sinab ko'ring.
+                                            Agar taqdim etilgan nomlardan hech biri sizga mos kelmasa â€” to'liq pul qaytaramiz. Xavfsiz sinab ko'ring.
                                         </p>
                                     </div>
                                 </div>
