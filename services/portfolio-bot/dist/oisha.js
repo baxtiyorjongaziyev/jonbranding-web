@@ -1,5 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
+import os from 'os';
+import path from 'path';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 const PROMPT = (text) => `
@@ -90,10 +92,20 @@ async function fetchWithRetry(url, data, config, retries = 3) {
 export async function parseDriveFolderWithOisha(folderName, textContent = '', imageFiles = []) {
     const parts = [];
     let attachedImageCount = 0;
+    const tempRoot = path.resolve(os.tmpdir());
+    const firstImageDir = imageFiles[0]?.path ? path.dirname(path.resolve(imageFiles[0].path)) : null;
+    const allowedDir = firstImageDir &&
+        firstImageDir.startsWith(`${tempRoot}${path.sep}`) &&
+        path.basename(firstImageDir).startsWith('portfolio-')
+        ? firstImageDir
+        : null;
     for (const img of imageFiles) {
-        if (!fs.existsSync(img.path))
+        const resolvedPath = path.resolve(img.path);
+        if (!allowedDir || !resolvedPath.startsWith(`${allowedDir}${path.sep}`))
             continue;
-        const base64 = fs.readFileSync(img.path, { encoding: 'base64' });
+        if (!fs.existsSync(resolvedPath))
+            continue;
+        const base64 = fs.readFileSync(resolvedPath, { encoding: 'base64' });
         parts.push({
             inlineData: {
                 mimeType: img.mime,
