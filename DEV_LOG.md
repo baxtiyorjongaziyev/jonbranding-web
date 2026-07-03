@@ -21,7 +21,32 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-01 | Antigravity Sessiyasi — Ideal Holat
+
+**Nima qilindi:**
+- **Merge conflict markerlar tozalandi**: `sotuvchi-kartochka/layout.tsx`, `layout.tsx`, `founder.tsx`, `pricing.ts` — barcha `<<<<<<<`, `=======`, `>>>>>>>` markerlar olib tashlandi. Kaskadli narx algoritmi (Updated upstream) saqlanib qoldi.
+- **Dependabot alertlar yopildi**: `js-yaml` (CVE: GHSA-h67p-54hq-rp68) va `smol-toml` (CVE: GHSA-v3rj-xjv7-4jmq) uchun `pnpm-workspace.yaml` va `package.json` overrides qo'shildi. pnpm audit va npm audit: **0 vulnerability**.
+- **CodeQL alertlar**: 0 (oldingi PR #247 bilan yopilgan).
+- **Open PRlar**: 0 (barcha mergeable yoki yopilgan).
+- **package-lock.json** va **pnpm-lock.yaml** yangilandi — zaif transitive dependency versiyalari override bilan patched versiyalarga almashtirildi.
+- **Build**: muvaffaqiyatli (conflict markerlar olib tashlanganidan keyin).
+- **DEV_LOG.md** yangilandi.
+
+---
+
+## 2026-07-03 | Codex Build Crash Sessiyasi
+
+**Nima qilindi:**
+- Vercel build crashiga sabab bo'lishi mumkin bo'lgan commit qilingan merge conflict markerlari repo bo'ylab tekshirildi.
+- `DEV_LOG.md` ichidagi unresolved `<<<<<<<`, `=======`, `>>>>>>>` markerlari olib tashlandi va ikkala log yozuvi saqlandi.
+- `src/app/[lang]/pricing/sotuvchi-kartochka/layout.tsx` alohida tekshirildi: conflict marker topilmadi.
+- Portfolio Sanity rasmlariga `auto=format` qo'shildi va before/after slider Next image optimizatsiyasidan foydalanadigan qilindi.
+- `pnpm-workspace.yaml` build-script allowlist placeholderlari real boolean qiymatlarga keltirildi.
+
+---
+
 ## 2026-06-30 | Codex Sessiyasi
+
 
 **Nima qilindi:**
 - PR #240 uchun cron endpointlarda `CRON_SECRET` undefined bo'lganda `"Bearer undefined"` orqali auth bypass bo'lishi oldini olindi: Bearer token alohida ajratilib, secret mavjudligi tekshirildi va `safeCompare` ishlatildi (`portfolio-sync`, `reviews-sync`, `testimonials`).
@@ -134,3 +159,15 @@ Deploy:           Firebase App Hosting (apphosting.yaml)
 
 Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testing — strategik reja va prioritetlar.
 - **[2026-06-29 15:30]** Feat: Oisha Proactive Mode — `oishaProactive` CustomEvent, widget auto-opens + sends message. `ProactiveTrigger` pagelarni (sotuvchi-kartochka 30s, xizmatlar 45s, quiz 60s, blog 90s) kuzatadi. 4 tilda xabarlar. Client-enhancements ga ulandi.
+
+---
+## 2026-07-02 | Before/After — Liquid Glass Redesign
+
+**Nima qilindi:**
+- **[before-after.tsx]** To'liq qayta dizayn: eski `BrandSection tone="dark"` va `bg-[#090b0f]` o'rniga atelier section patterniga o'tkazildi (`py-[100px] md:py-[140px]`). Eski brand tokenlar (`text-brand-lime`, `bg-brand-lime/10`, `border-brand-lime/20`) o'rniga `var(--at-*)` CSS variable'lari ishlatildi.
+- **[image-comparison-slider.tsx]** Liquid Glass glassmorphism uslubiga moslashtirildi: `var(--at-bg-2)`, `var(--at-paper)`, `var(--at-line)`, `var(--at-accent)` ranglari, atelier font family'lari, border/rounded styling.
+- **Layout**: 2-column atelier section header (clamp typography, mono eyebrow, accent dot), proof cards atelier pill styling, grid 2-column cards with framer-motion scroll-animations.
+- **Mobile**: clunky horizontal swipe o'rniga oddiy grid layout.
+- **oisha-widget.tsx**: Merge conflict markerlar tozalandi (ikkilangan useEffect/bloklar olib tashlandi).
+- **src/lib/blog-posts.ts**: Yo'qotilgan modul stublendi (sitemap.ts build error fiks).
+- **Build**: muvaffaqiyatli.
