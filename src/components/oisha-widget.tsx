@@ -127,15 +127,18 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: userId, text }),
         })
-          .then((r) => r.ok ? r.json() : Promise.reject())
+          .then((r) => (r.ok ? r.json() : Promise.reject()))
           .then((data) => {
             if (data?.response) {
-              setMessages((prev) => [...prev, {
-                id: `reply-${Date.now()}`,
-                text: data.response,
-                role: 'model',
-                timestamp: new Date().toISOString(),
-              }]);
+              setMessages((prev) => [
+                ...prev,
+                {
+                  id: `reply-${Date.now()}`,
+                  text: data.response,
+                  role: 'model',
+                  timestamp: new Date().toISOString(),
+                },
+              ]);
             } else {
               setTimeout(() => fetchHistory(userId), 2000);
             }
