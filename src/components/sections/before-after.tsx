@@ -13,6 +13,7 @@ interface SanityComparison {
   oldHint: string;
   newHint: string;
   order: number;
+  services?: string[];
 }
 
 interface BeforeAfterDictionary {
@@ -31,6 +32,12 @@ interface BeforeAfterProps {
   comparisons?: SanityComparison[];
 }
 
+const SERVICE_MAPPING: Record<string, string[]> = {
+  'Incontrol': ['Logo Dizayni', 'Aydentika'],
+  'Barakah': ['Logotip', 'Brendbuk', 'Qadoq'],
+  'Fidda by Sevara': ['Neyming', 'Logo & Aydentika'],
+};
+
 const DEFAULT_COMPARISONS: SanityComparison[] = projects
   .filter((project) => project.oldImg && project.newImg)
   .map((project, index) => ({
@@ -40,6 +47,7 @@ const DEFAULT_COMPARISONS: SanityComparison[] = projects
     oldHint: project.oldHint || '',
     newHint: project.newHint || '',
     order: index + 1,
+    services: SERVICE_MAPPING[project.brand] || ['Logo Dizayni', 'Brending'],
   }));
 
 const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons }) => {
@@ -171,8 +179,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
               />
 
               <div style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                gap: 12, padding: '14px 8px 6px',
+                display: 'flex', flexDirection: 'column', gap: 12, padding: '14px 8px 6px',
               }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, minWidth: 0 }}>
                   <span style={{
@@ -186,6 +193,27 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
                     overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                   }}>{item.brand}</span>
                 </div>
+
+                {item.services && item.services.length > 0 && (
+                  <div style={{
+                    display: 'flex', flexWrap: 'wrap', gap: 6,
+                  }}>
+                    {item.services.map((service) => (
+                      <span key={service} style={{
+                        display: 'inline-block',
+                        fontFamily: 'var(--font-mono)', fontSize: 8,
+                        textTransform: 'uppercase', letterSpacing: '0.06em',
+                        color: 'var(--at-accent)',
+                        padding: '4px 8px',
+                        background: 'var(--at-accent-soft, rgba(59,130,246,0.08))',
+                        borderRadius: '4px',
+                        border: '1px solid var(--at-accent-soft, rgba(59,130,246,0.16))',
+                      }}>
+                        {service}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
                 <span style={{
                   display: 'inline-flex', alignItems: 'center', gap: 6, flexShrink: 0,
