@@ -2,6 +2,7 @@
   "name": "jonbranding-portfolio-bot",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "ts-node --esm src/index.ts",
     "build": "tsc",

@@ -309,7 +309,7 @@ async function processGoogleDrive(config: WorkflowConfig, state: Record<string, 
               orderedFiles.unshift(coverFile);
             }
 
-            const sanityId = await createPortfolioDocument(aiData, orderedFiles, aiData.body);
+            const sanityId = await createPortfolioDocument(aiData, orderedFiles);
             result.sanityId = sanityId;
             result.status = 'uploaded';
             log(`[drive:${folder.id}] ✅ Uploaded: ${sanityId}`);
