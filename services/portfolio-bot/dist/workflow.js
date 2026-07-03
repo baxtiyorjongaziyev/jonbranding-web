@@ -4,6 +4,7 @@ import { parseWithAI } from './ai-processor.js';
 import { downloadToTemp, getFolderInfo, listImagesInFolder } from './drive-finder.js';
 import { createPortfolioDocument, findExistingPortfolio } from './sanity.js';
 import { fetchInstagramPosts } from './instagram.js';
+import { slugify } from './slug.js';
 /**
  * Workflow log fayli
  */
@@ -93,12 +94,7 @@ async function processSinglePost(source, sourceId, text, config) {
             // 5. Sanity'ga yuklash (autoUpload = true bo'lsa)
             if (config.autoUpload) {
                 // Duplikatni tekshirish
-                const slug = aiData.title
-                    .toLowerCase()
-                    .replace(/[^\w\s-]/g, '')
-                    .replace(/\s+/g, '-')
-                    .replace(/-+/g, '-')
-                    .slice(0, 96);
+                const slug = slugify(aiData.title, aiData.driveFolderId ?? undefined);
                 const existingId = await findExistingPortfolio(slug);
                 if (existingId) {
                     log(`[${source}:${sourceId}] Portfolio already exists: ${existingId}`);
@@ -199,7 +195,7 @@ async function processGoogleDrive(config, state) {
                 // Check early if already exists in Sanity to save Gemini API calls
                 // We'll do a quick rough slugification of folder name if we don't have aiData yet
                 // However, it's safer to use the exact AI title. But to save API we can guess from folder name
-                const roughSlug = folder.name.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').slice(0, 96);
+                const roughSlug = slugify(folder.name, folder.id);
                 const earlyId = await findExistingPortfolio(roughSlug);
                 if (earlyId) {
                     log(`[drive:${folder.id}] Portfolio already exists in Sanity (by rough slug): ${earlyId}`);
@@ -227,12 +223,7 @@ async function processGoogleDrive(config, state) {
                 aiData.driveFolderId = folder.id;
                 result.aiData = aiData;
                 if (config.autoUpload) {
-                    const slug = aiData.title
-                        .toLowerCase()
-                        .replace(/[^\w\s-]/g, '')
-                        .replace(/\s+/g, '-')
-                        .replace(/-+/g, '-')
-                        .slice(0, 96);
+                    const slug = slugify(aiData.title, folder.id);
                     const existingId = await findExistingPortfolio(slug);
                     if (existingId) {
                         log(`[drive:${folder.id}] Portfolio already exists: ${existingId}`);

@@ -2,6 +2,7 @@ import fs from 'fs';
 import { parseWithAI } from './ai-processor.js';
 import { downloadToTemp, getFolderInfo, listImagesInFolder } from './drive-finder.js';
 import { createPortfolioDocument, findExistingPortfolio } from './sanity.js';
+import { slugify } from './slug.js';
 export async function processPost(messageText, channelId) {
     let tmpDir;
     try {
@@ -36,12 +37,7 @@ export async function processPost(messageText, channelId) {
         }
         tmpDir = imageFiles[0]?.path ? imageFiles[0].path.replace(/\/[^\/]+$/, '') : undefined;
         // Duplikatni tekshirish
-        const slug = aiData.title
-            .toLowerCase()
-            .replace(/[^\w\s-]/g, '')
-            .replace(/\s+/g, '-')
-            .replace(/-+/g, '-')
-            .slice(0, 96);
+        const slug = slugify(aiData.title, aiData.driveFolderId ?? undefined);
         console.log(`[pipeline] Checking for duplicate: "${slug}"`);
         const existingId = await findExistingPortfolio(slug);
         if (existingId) {
