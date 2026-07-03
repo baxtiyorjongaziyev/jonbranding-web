@@ -3,10 +3,6 @@
   "framework": "nextjs",
   "crons": [
     {
-      "path": "/api/portfolio-sync",
-      "schedule": "0 0 * * *"
-    },
-    {
       "path": "/api/content-agent",
       "schedule": "0 1 * * *"
     },

@@ -2,8 +2,8 @@ export const FALLBACK_COMPARISONS = [
   {
     _id: 'fallback-den-aroma',
     brand: 'Den Aroma',
-    oldImg: '/images/cms/denaroma-avval.png',
-    newImg: '/images/cms/denaroma-hozir.png',
+    oldImg: '/images/cms/denaroma-avval.webp',
+    newImg: '/images/cms/denaroma-hozir.webp',
     oldHint: '3 Atirchi (Eski brending)',
     newHint: 'Den Aroma (Yangi brending)',
     order: 1,
@@ -11,8 +11,8 @@ export const FALLBACK_COMPARISONS = [
   {
     _id: 'fallback-savod',
     brand: 'Savod',
-    oldImg: '/images/cms/savod-avval.png',
-    newImg: '/images/cms/savod-hozir.png',
+    oldImg: '/images/cms/savod-avval.webp',
+    newImg: '/images/cms/savod-hozir.webp',
     oldHint: 'Avvalgi vizual ko\'rinish',
     newHint: 'Savod (Yangi premium aydentika)',
     order: 2,
@@ -20,8 +20,8 @@ export const FALLBACK_COMPARISONS = [
   {
     _id: 'fallback-fidda',
     brand: 'Fidda by Sevara',
-    oldImg: '/images/cms/fidda-avval.jpeg',
-    newImg: '/images/cms/fidda-hozir.png',
+    oldImg: '/images/cms/fidda-avval.webp',
+    newImg: '/images/cms/fidda-hozir.webp',
     oldHint: 'Oddiy logotip dizayni',
     newHint: 'Fidda (Premium aydentika)',
     order: 3,
@@ -29,8 +29,8 @@ export const FALLBACK_COMPARISONS = [
   {
     _id: 'fallback-boyarin',
     brand: 'Boyarin',
-    oldImg: '/images/cms/boyarin-avval.jpeg',
-    newImg: '/images/cms/boyarin-hozir.png',
+    oldImg: '/images/cms/boyarin-avval.webp',
+    newImg: '/images/cms/boyarin-hozir.webp',
     oldHint: 'Eski mahsulot uslubi',
     newHint: 'Boyarin (Premium qadoq va brend)',
     order: 4,

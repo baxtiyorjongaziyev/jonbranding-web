@@ -70,7 +70,7 @@ const LogoClient: FC<LogoClientProps> = ({ lang, translations }) => {
                         <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                             <CardContent className="p-0">
                                 <Image 
-                                    src="/images/cms/logo-design-showcase.png"
+                                    src="/images/cms/logo-design-showcase.webp"
                                     alt="Professional logotip dizayni jarayoni"
                                     width={800}
                                     height={600}

@@ -61,7 +61,7 @@ const NamingClient: FC<NamingClientProps> = ({ lang, translations }) => {
                     <div className="lg:order-last">
                         <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                             <Image 
-                                src="/images/cms/naming-process.png"
+                                src="/images/cms/naming-process.webp"
                                 width={800}
                                 height={600}
                                 alt="Neyming jarayoni va g'oyalar to'plash"

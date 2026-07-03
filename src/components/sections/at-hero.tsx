@@ -98,12 +98,12 @@ const translations = {
 } as const;
 
 const DEFAULT_IMAGES: PortfolioImage[] = [
-  { src: '/images/cms/beyaz-gold.jpg', name: 'Beyaz', year: '2026' },
-  { src: '/images/cms/arfadel-cover.jpg', name: 'ARFADEL', year: '2026' },
-  { src: '/images/cms/enros-cover.jpg', name: 'Enros', year: '2025' },
-  { src: '/images/cms/boyarin-hozir.png', name: 'Boyarin', year: '2026' },
-  { src: '/images/cms/savod-hozir.png', name: 'Savod', year: '2025' },
-  { src: '/images/cms/fidda-hozir.png', name: 'Fidda', year: '2025' },
+  { src: '/images/cms/beyaz-gold.webp', name: 'Beyaz', year: '2026' },
+  { src: '/images/cms/arfadel-cover.webp', name: 'ARFADEL', year: '2026' },
+  { src: '/images/cms/enros-cover.webp', name: 'Enros', year: '2025' },
+  { src: '/images/cms/boyarin-hozir.webp', name: 'Boyarin', year: '2026' },
+  { src: '/images/cms/savod-hozir.webp', name: 'Savod', year: '2025' },
+  { src: '/images/cms/fidda-hozir.webp', name: 'Fidda', year: '2025' },
 ];
 
 const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {

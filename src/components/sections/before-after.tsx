@@ -166,13 +166,11 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
                   src: item.oldImg,
                   alt: `${item.brand} — ${lang === 'uz' ? 'avval' : 'before'}`,
                   'data-ai-hint': item.oldHint || '',
-                  unoptimized: true,
                 }}
                 afterImage={{
                   src: item.newImg,
                   alt: `${item.brand} — ${lang === 'uz' ? 'hozir' : 'after'}`,
                   'data-ai-hint': item.newHint || '',
-                  unoptimized: true,
                 }}
                 lang={lang}
                 className="border-0"

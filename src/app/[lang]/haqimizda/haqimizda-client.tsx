@@ -240,7 +240,7 @@ const HaqimizClient: FC<Props> = ({ lang = 'uz' }) => {
             <div className="grid sm:grid-cols-[280px_1fr] gap-10 items-start">
               <div className="relative">
                 <Image
-                  src="/images/cms/founder-portrait.jpeg"
+                  src="/images/cms/founder-portrait.webp"
                   alt={l.founderName}
                   width={280}
                   height={360}

@@ -21,37 +21,37 @@ interface InstagramFeedProps {
 const FALLBACK_POSTS = [
   {
     id: '1',
-    media_url: '/images/cms/arfadel-cover.jpg',
+    media_url: '/images/cms/arfadel-cover.webp',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '2',
-    media_url: '/images/cms/beyaz-cover.jpg',
+    media_url: '/images/cms/beyaz-cover.webp',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '3',
-    media_url: '/images/cms/diletta-cover.jpg',
+    media_url: '/images/cms/diletta-cover.webp',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '4',
-    media_url: '/images/cms/enros-cover.jpg',
+    media_url: '/images/cms/enros-cover.webp',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '5',
-    media_url: '/images/cms/logo-design-showcase.png',
+    media_url: '/images/cms/logo-design-showcase.webp',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },
   {
     id: '6',
-    media_url: '/images/cms/arfadel-card.jpg',
+    media_url: '/images/cms/arfadel-card.webp',
     permalink: 'https://instagram.com/jon.branding',
     media_type: 'IMAGE',
   },

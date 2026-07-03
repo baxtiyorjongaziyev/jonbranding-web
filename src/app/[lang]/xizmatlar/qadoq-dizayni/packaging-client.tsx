@@ -57,7 +57,7 @@ const PackagingClient: FC<PackagingClientProps> = ({ lang, translations }) => {
                         <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                             <CardContent className="p-0">
                             <Image 
-                                src="/images/cms/packaging-shelf.png"
+                                src="/images/cms/packaging-shelf.webp"
                                 width={800}
                                 height={600}
                                 data-ai-hint="product packaging shelf"

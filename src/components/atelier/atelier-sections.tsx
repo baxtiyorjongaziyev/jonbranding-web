@@ -487,8 +487,8 @@ export const ATFeatured: FC<ATFeaturedProps> = ({ dictionary, comparison, lang }
 
   const comp = comparison || {
     brand: 'Den Aroma',
-    oldImg: '/images/cms/denaroma-avval.png',
-    newImg: '/images/cms/denaroma-hozir.png',
+    oldImg: '/images/cms/denaroma-avval.webp',
+    newImg: '/images/cms/denaroma-hozir.webp',
     oldHint: '3 Atirchi (Eski brending)',
     newHint: 'Den Aroma (Yangi brending)',
   };
@@ -517,12 +517,10 @@ export const ATFeatured: FC<ATFeaturedProps> = ({ dictionary, comparison, lang }
               beforeImage={{
                 src: comp.oldImg,
                 alt: `${comp.brand} old`,
-                unoptimized: true,
               }}
               afterImage={{
                 src: comp.newImg,
                 alt: `${comp.brand} new`,
-                unoptimized: true,
               }}
               lang={lang}
             />
@@ -577,14 +575,14 @@ interface ATShowcaseProps {
 export const ATShowcase: FC<ATShowcaseProps> = ({ dictionary, onOpen, lang }) => {
   const items = [
     {
-      img: '/images/cms/denaroma-hozir.png',
+      img: '/images/cms/denaroma-hozir.webp',
       name: 'Den Aroma',
       yr: "'25",
       cat: 'Aydentika & Qadoq',
     },
-    { img: '/images/cms/savod-hozir.png', name: 'Savod', yr: "'25", cat: 'Brending' },
-    { img: '/images/cms/fidda-hozir.png', name: 'Fidda', yr: "'24", cat: 'Aydentika' },
-    { img: '/images/cms/boyarin-hozir.png', name: 'Boyarin', yr: "'24", cat: 'Qadoq dizayni' },
+    { img: '/images/cms/savod-hozir.webp', name: 'Savod', yr: "'25", cat: 'Brending' },
+    { img: '/images/cms/fidda-hozir.webp', name: 'Fidda', yr: "'24", cat: 'Aydentika' },
+    { img: '/images/cms/boyarin-hozir.webp', name: 'Boyarin', yr: "'24", cat: 'Qadoq dizayni' },
   ];
 
   return (
@@ -953,8 +951,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   src={t.img}
                   alt={t.name}
                   fill
-                  unoptimized
-                  quality={100}
+                  quality={85}
                   className="object-cover transition-transform duration-500 hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 100vw"
                 />
@@ -2038,8 +2035,7 @@ export const ATQuotes: FC<ATQuotesProps> = ({
                     src={t.image}
                     alt={t.name}
                     fill
-                    unoptimized
-                    quality={100}
+                    quality={85}
                     className="object-cover opacity-80 group-hover:scale-105 transition-all duration-700"
                     sizes="50vw"
                   />
