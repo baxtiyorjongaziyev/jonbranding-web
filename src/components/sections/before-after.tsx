@@ -1,11 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { ArrowRight, BadgeCheck } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
-import { Button } from '@/components/ui/button';
-import { BrandSection } from '@/components/ui/design-system';
 import { projects } from '@/lib/static-data';
 import { trackEvent } from '@/lib/analytics';
 import { renderHeadline } from '@/lib/headline';
@@ -19,17 +15,19 @@ interface SanityComparison {
   order: number;
 }
 
+interface BeforeAfterDictionary {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  cta?: string;
+  ctaButton?: string;
+  caseLabel?: string;
+  proofCards?: Array<{ value: string; label: string }>;
+}
+
 interface BeforeAfterProps {
   lang: string;
-  dictionary: {
-    eyebrow?: string;
-    title?: string;
-    subtitle?: string;
-    cta?: string;
-    ctaButton?: string;
-    caseLabel?: string;
-    proofCards?: Array<{ value: string; label: string }>;
-  };
+  dictionary: BeforeAfterDictionary & { beforeAfter?: BeforeAfterDictionary };
   comparisons?: SanityComparison[];
 }
 
@@ -44,151 +42,195 @@ const DEFAULT_COMPARISONS: SanityComparison[] = projects
     order: index + 1,
   }));
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 24, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      damping: 24,
-      stiffness: 150,
-    },
-  },
-};
-
 const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons }) => {
-  const translations = dictionary;
+  // O'z bo'limi kaliti bilan ham, to'liq lug'at bilan ham ishlaydi
+  const t = (dictionary?.title ? dictionary : dictionary?.beforeAfter) || {};
   const displayItems = comparisons && comparisons.length > 0 ? comparisons : DEFAULT_COMPARISONS;
 
   const handleCtaClick = () => {
+    trackEvent({
+      action: 'cta_click',
+      category: 'CTA',
+      label: t.cta || t.ctaButton || 'before_after',
+      section: 'before_after',
+    });
     window.dispatchEvent(new CustomEvent('openContactModal', {
       detail: {
         section: 'before_after',
-        ctaText: translations.cta || translations.ctaButton,
+        ctaText: t.cta || t.ctaButton,
         source: 'homepage',
       },
     }));
   };
 
-  if (!translations || !displayItems || displayItems.length === 0) return null;
+  if (!displayItems || displayItems.length === 0) return null;
 
   return (
-    <BrandSection tone="dark" className="relative overflow-hidden bg-[#090b0f] py-20 text-white sm:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.05),transparent_48%,rgba(132,213,180,0.08))]" />
-      
-      <motion.div 
-        variants={containerVariants}
-        initial="visible"
-        animate="visible"
-        className="container relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8"
-      >
-        {/* Top Section: Headline, Subtitle, CTA and Stats */}
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end mb-16">
-          <motion.div variants={itemVariants} className="space-y-6">
-            {translations.eyebrow && (
-              <div className="inline-flex rounded-full border border-white/12 bg-white/[0.06] px-4 py-2 text-[10px] font-bold uppercase tracking-normal text-brand-lime">
-                {translations.eyebrow}
-              </div>
+    <section style={{ background: 'var(--at-bg)', borderTop: '1px solid var(--at-line)' }}>
+      <div style={{ maxWidth: 1300, margin: '0 auto', padding: '88px 32px' }}>
+
+        {/* Header */}
+        <div className="at-ba-head" style={{
+          display: 'grid',
+          gridTemplateColumns: '1.2fr 1fr',
+          gap: 64,
+          alignItems: 'end',
+          marginBottom: 44,
+        }}>
+          <div>
+            {t.eyebrow && (
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', gap: 9,
+                fontFamily: 'var(--font-mono)', fontSize: 10,
+                letterSpacing: '0.1em', textTransform: 'uppercase',
+                color: 'var(--at-muted)',
+              }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--at-green)', display: 'inline-block' }} />
+                § {t.eyebrow}
+              </span>
             )}
-            
-            <h2 className="max-w-2xl text-balance text-4xl font-extrabold leading-tight tracking-normal text-white sm:text-6xl">
-              {renderHeadline(translations.title ?? '', "text-brand-lime")}
+
+            <h2 style={{
+              fontSize: 'clamp(30px, 3.8vw, 52px)',
+              lineHeight: 1.02,
+              letterSpacing: '-0.035em',
+              fontWeight: 800,
+              margin: '16px 0 0',
+              color: 'var(--at-ink)',
+            }}>
+              {renderHeadline(t.title ?? '', '')}
             </h2>
-            
-            {translations.subtitle && (
-              <p className="max-w-xl text-sm sm:text-base leading-relaxed text-white/65">
-                {translations.subtitle}
+          </div>
+
+          <div>
+            {t.subtitle && (
+              <p style={{
+                fontSize: 15,
+                lineHeight: 1.6,
+                color: 'var(--at-ink-2)',
+                margin: '0 0 24px',
+              }}>
+                {t.subtitle}
               </p>
             )}
 
-            <div className="pt-2">
-              <Button
-                onClick={handleCtaClick}
-                size="lg"
-                className="group h-14 rounded-full bg-white px-7 text-sm font-extrabold text-brand-ink shadow-[0_26px_80px_-34px_rgba(255,255,255,0.8)] transition-[background-color,transform] duration-300 hover:bg-brand-lime active:scale-[0.98]"
-              >
-                {translations.cta || translations.ctaButton}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </Button>
-            </div>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="space-y-6">
-            {/* Client Proof Cards */}
-            {translations.proofCards?.length ? (
-              <div className="grid grid-cols-2 gap-4">
-                {translations.proofCards.map((card) => (
-                  <div 
-                    key={card.label} 
-                    className="border-t border-white/12 p-5 transition-colors duration-300 hover:border-brand-lime/30"
-                  >
-                    <div className="font-headline text-3xl font-black tracking-normal text-white tabular-nums">{card.value}</div>
-                    <div className="mt-2 text-[10px] font-bold uppercase tracking-normal text-white/60">{card.label}</div>
+            {t.proofCards?.length ? (
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+                {t.proofCards.map((card) => (
+                  <div key={card.label} style={{ borderTop: '1px solid var(--at-line)', paddingTop: 14 }}>
+                    <div style={{
+                      fontSize: 24, fontWeight: 800,
+                      letterSpacing: '-0.03em',
+                      color: 'var(--at-ink)',
+                    }}>{card.value}</div>
+                    <div style={{
+                      marginTop: 4,
+                      fontFamily: 'var(--font-mono)', fontSize: 9.5,
+                      textTransform: 'uppercase', letterSpacing: '0.08em',
+                      color: 'var(--at-muted)',
+                    }}>{card.label}</div>
                   </div>
                 ))}
               </div>
             ) : null}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Bottom Section: Swipeable track on mobile, 2x2 Grid on desktop */}
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 swipe-track md:grid md:grid-cols-2 md:gap-8 lg:gap-10 md:overflow-visible md:pb-0 md:snap-none md:px-0">
+        {/* Cards: mobilda swipe, desktopda 2x2 grid */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 md:snap-none">
           {displayItems.map((item, idx) => (
-            <motion.div 
+            <motion.div
               key={item.brand || idx}
-              variants={itemVariants}
-              className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/[0.055] p-3 shadow-[0_50px_100px_-42px_rgba(0,0,0,0.9)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-white/22 w-[85vw] shrink-0 snap-center md:w-auto md:shrink md:snap-align-none"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.45, delay: (idx % 2) * 0.08 }}
+              className="w-[85vw] shrink-0 snap-center md:w-auto md:shrink"
+              style={{
+                background: 'var(--at-paper)',
+                border: '1px solid var(--at-line)',
+                borderRadius: 20,
+                padding: 10,
+              }}
             >
-              <div className="relative z-10">
-                <ImageComparisonSlider
-                  beforeImage={{ 
-                    src: item.oldImg, 
-                    alt: `${item.brand} old`, 
-                    'data-ai-hint': item.oldHint || '', 
-                    unoptimized: true 
-                  }}
-                  afterImage={{ 
-                    src: item.newImg, 
-                    alt: `${item.brand} new`, 
-                    'data-ai-hint': item.newHint || '', 
-                    unoptimized: true 
-                  }}
-                  lang={lang}
-                />
-                
-                <div className="mt-2 flex items-center justify-between gap-4 px-3.5 py-4">
-                  <div>
-                    <p className="text-xl font-extrabold tracking-normal text-white">{item.brand}</p>
-                    {translations.caseLabel && (
-                      <p className="mt-1 text-[9px] font-bold uppercase tracking-normal text-white/60">
-                        {translations.caseLabel}
-                      </p>
-                    )}
-                  </div>
-                  
-                  <div className="flex shrink-0 items-center gap-2 rounded-full border border-brand-lime/20 bg-brand-lime/10 px-3.5 py-2 text-brand-lime">
-                    <BadgeCheck className="h-4.5 w-4.5 shrink-0" />
-                    {translations.caseLabel && <span className="text-[9px] font-bold uppercase tracking-normal">{translations.caseLabel}</span>}
-                  </div>
+              <ImageComparisonSlider
+                beforeImage={{
+                  src: item.oldImg,
+                  alt: `${item.brand} — ${lang === 'uz' ? 'avval' : 'before'}`,
+                  'data-ai-hint': item.oldHint || '',
+                  unoptimized: true,
+                }}
+                afterImage={{
+                  src: item.newImg,
+                  alt: `${item.brand} — ${lang === 'uz' ? 'hozir' : 'after'}`,
+                  'data-ai-hint': item.newHint || '',
+                  unoptimized: true,
+                }}
+                lang={lang}
+                className="border-0"
+              />
+
+              <div style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                gap: 12, padding: '14px 8px 6px',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, minWidth: 0 }}>
+                  <span style={{
+                    fontFamily: 'var(--font-mono)', fontSize: 10,
+                    color: 'var(--at-muted)',
+                  }}>{String(idx + 1).padStart(2, '0')}</span>
+                  <span style={{
+                    fontWeight: 700, fontSize: 15,
+                    letterSpacing: '-0.01em',
+                    color: 'var(--at-ink)',
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                  }}>{item.brand}</span>
                 </div>
+
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6, flexShrink: 0,
+                  fontFamily: 'var(--font-mono)', fontSize: 9,
+                  textTransform: 'uppercase', letterSpacing: '0.08em',
+                  color: 'var(--at-muted)',
+                }}>
+                  {t.caseLabel}
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="var(--at-accent-soft, rgba(59,130,246,0.12))" />
+                    <path d="M8 12l3 3 5-5" stroke="var(--at-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
               </div>
             </motion.div>
           ))}
         </div>
 
-      </motion.div>
-    </BrandSection>
+        {/* CTA */}
+        {(t.cta || t.ctaButton) && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 44 }}>
+            <button
+              onClick={handleCtaClick}
+              className="transition-all hover:-translate-y-0.5"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                background: 'var(--at-accent)', color: '#fff',
+                border: 'none', borderRadius: 999,
+                padding: '16px 30px',
+                fontSize: 15, fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              {t.cta || t.ctaButton} ↗
+            </button>
+          </div>
+        )}
+      </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .at-ba-head { grid-template-columns: 1fr !important; gap: 28px !important; }
+        }
+      `}</style>
+    </section>
   );
 };
 
