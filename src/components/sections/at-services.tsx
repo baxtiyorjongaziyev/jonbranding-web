@@ -15,7 +15,7 @@ const SERVICES_UZ = [
   { num: '03', name: 'Brendbuk', desc: "Hamkasblar uchun: logotip, ranglar, shriftlarni qanday ishlatish kerakligini tushuntiradigan qo'llanma.", time: '2–3 hafta' },
   { num: '04', name: 'Qadoq dizayni', desc: 'Mahsulot qadoqini sotish kerak shunchalik chiroyli qilish + bosmaga tayyor fayl.', time: '4–8 hafta' },
   { num: '05', name: 'Tovar belgisi', desc: "Biznesingizni qonuniy tarzda himoya qilish — O'zbekiston, CIS va boshqa mamlakatlar.", time: '4–9 oy' },
-  { num: '06', name: 'Raqamli brend', desc: 'Veb-sayt, ijtimoiy tarmoqlar uchun dizayn, animatsiyalar — internetda shirinli ko'rinish.', time: '4–8 hafta' },
+  { num: '06', name: 'Raqamli brend', desc: "Veb-sayt, ijtimoiy tarmoqlar uchun dizayn, animatsiyalar — internetda shirinli ko'rinish.", time: '4–8 hafta' },
 ];
 
 const SERVICES_RU = [
