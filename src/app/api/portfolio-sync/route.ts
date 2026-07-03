@@ -1,3 +1,6 @@
+// NOTE: superseded by services/portfolio-bot (Railway) — real-time Telegram
+// userbot + Instagram/Drive polling with richer multimodal AI parsing.
+// No longer cron-triggered (removed from vercel.json); kept for manual/backup use.
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
