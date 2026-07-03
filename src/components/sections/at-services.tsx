@@ -10,39 +10,39 @@ gsap.registerPlugin(ScrollTrigger);
 interface Props { onOpen: () => void; lang?: string; }
 
 const SERVICES_UZ = [
-  { num: '01', name: 'Neyming', desc: "Bozor tahlili, 40+ variant, tilshunos tekshiruvi, domen va social hisoblari band qilish.", time: '2–4 hafta' },
-  { num: '02', name: 'Logotip & Aydentika', desc: "Logotip tizimi, rang palitrasi, tipografika, qo'llash qoidalari, real misollar.", time: '3–5 hafta' },
-  { num: '03', name: 'Brendbuk', desc: "40+ betlik to'liq qo'llanma — rang, shrift, ovoz, misollar, qoidalar.", time: '2–3 hafta' },
-  { num: '04', name: 'Qadoq dizayni', desc: 'Mokap, bosmaga tayyor fayl, retsept va texnik chizmalar. SKU tizimi.', time: '4–8 hafta' },
-  { num: '05', name: 'Tovar belgisi', desc: "O'zbekiston, MDH va xalqaro miqyosda davlat himoyasi. To'liq jarayon.", time: '4–9 oy' },
-  { num: '06', name: 'Raqamli brend', desc: 'Sayt, ijtimoiy tarmoq shablonlari, prezentatsiya, banner, motion.', time: '4–8 hafta' },
+  { num: '01', name: 'Neyming', desc: "Biznesingizga to'g'ri nom berish — esda qolarli, yuridik toza, va domen hamda Instagram handle bilan.", time: '2–4 hafta' },
+  { num: '02', name: 'Logotip & Aydentika', desc: "Chiroyli logo + vizitkada, veb-saytda, ijtimoiy tarmoqda bir xil ko'rinis uchun ranglar va shriftlar.", time: '3–5 hafta' },
+  { num: '03', name: 'Brendbuk', desc: "Hamkasblar uchun: logotip, ranglar, shriftlarni qanday ishlatish kerakligini tushuntiradigan qo'llanma.", time: '2–3 hafta' },
+  { num: '04', name: 'Qadoq dizayni', desc: 'Mahsulot qadoqini sotish kerak shunchalik chiroyli qilish + bosmaga tayyor fayl.', time: '4–8 hafta' },
+  { num: '05', name: 'Tovar belgisi', desc: "Biznesingizni qonuniy tarzda himoya qilish — O'zbekiston, CIS va boshqa mamlakatlar.", time: '4–9 oy' },
+  { num: '06', name: 'Raqamli brend', desc: "Veb-sayt, ijtimoiy tarmoqlar uchun dizayn, animatsiyalar — internetda shirinli ko'rinish.", time: '4–8 hafta' },
 ];
 
 const SERVICES_RU = [
-  { num: '01', name: 'Нейминг', desc: 'Анализ рынка, 40+ вариантов, лингвистическая экспертиза, регистрация домена и соцсетей.', time: '2–4 недели' },
-  { num: '02', name: 'Логотип & Айдентика', desc: 'Система логотипа, цветовая палитра, типографика, правила применения, реальные примеры.', time: '3–5 недель' },
-  { num: '03', name: 'Брендбук', desc: 'Полное руководство 40+ страниц — цвет, шрифт, голос, примеры, правила.', time: '2–3 недели' },
-  { num: '04', name: 'Дизайн упаковки', desc: 'Мокап, файл для печати, рецептура и технические чертежи. Система SKU.', time: '4–8 недель' },
-  { num: '05', name: 'Товарный знак', desc: 'Государственная защита в Узбекистане, СНГ и на международном уровне. Полный процесс.', time: '4–9 мес.' },
-  { num: '06', name: 'Цифровой бренд', desc: 'Сайт, шаблоны для соцсетей, презентация, баннер, motion.', time: '4–8 недель' },
+  { num: '01', name: 'Нейминг', desc: 'Правильное имя для вашего бизнеса — запоминающееся, законное, готовое для домена и Instagram.', time: '2–4 недели' },
+  { num: '02', name: 'Логотип & Айдентика', desc: 'Красивый логотип + единый стиль на визитке, сайте, в соцсетях (цвета и шрифты).', time: '3–5 недель' },
+  { num: '03', name: 'Брендбук', desc: 'Инструкция для команды: как правильно использовать логотип, цвета и шрифты.', time: '2–3 недели' },
+  { num: '04', name: 'Дизайн упаковки', desc: 'Красивая упаковка продукта, которая продаёт сама по себе + файл для типографии.', time: '4–8 недель' },
+  { num: '05', name: 'Товарный знак', desc: 'Юридическая защита вашего бренда — в Узбекистане, СНГ и мире.', time: '4–9 мес.' },
+  { num: '06', name: 'Цифровой бренд', desc: 'Сайт, дизайн для соцсетей, анимация — красивый вид в интернете.', time: '4–8 недель' },
 ];
 
 const SERVICES_EN = [
-  { num: '01', name: 'Naming', desc: 'Market analysis, 40+ variants, linguistic review, domain & social handle registration.', time: '2–4 weeks' },
-  { num: '02', name: 'Logo & Identity', desc: 'Logo system, color palette, typography, usage guidelines, real-world examples.', time: '3–5 weeks' },
-  { num: '03', name: 'Brand Book', desc: '40+ page complete guide — color, font, voice, examples, rules.', time: '2–3 weeks' },
-  { num: '04', name: 'Packaging Design', desc: 'Mockup, print-ready file, recipe and technical drawings. SKU system.', time: '4–8 weeks' },
-  { num: '05', name: 'Trademark', desc: 'State protection in Uzbekistan, CIS and internationally. Full process.', time: '4–9 mo.' },
-  { num: '06', name: 'Digital Brand', desc: 'Website, social media templates, presentation, banner, motion.', time: '4–8 weeks' },
+  { num: '01', name: 'Naming', desc: 'The perfect name for your business — memorable, legal, ready for domain and social media.', time: '2–4 weeks' },
+  { num: '02', name: 'Logo & Identity', desc: 'Beautiful logo + consistent look on business cards, website, Instagram (colors & fonts).', time: '3–5 weeks' },
+  { num: '03', name: 'Brand Book', desc: 'Instructions for your team: how to properly use the logo, colors, and fonts.', time: '2–3 weeks' },
+  { num: '04', name: 'Packaging Design', desc: 'Eye-catching product packaging that sells itself + print-ready file for production.', time: '4–8 weeks' },
+  { num: '05', name: 'Trademark', desc: 'Legal protection for your brand — in Uzbekistan, CIS countries, and worldwide.', time: '4–9 mo.' },
+  { num: '06', name: 'Digital Brand', desc: 'Website, social media design, animations — a professional look online.', time: '4–8 weeks' },
 ];
 
 const SERVICES_ZH = [
-  { num: '01', name: '品牌命名', desc: '市场分析，40+方案，语言审核，域名及社交账号注册。', time: '2–4周' },
-  { num: '02', name: '标志与视觉识别', desc: '标志体系、色彩方案、字体规范、使用指南、真实案例。', time: '3–5周' },
-  { num: '03', name: '品牌手册', desc: '40+页完整指南——色彩、字体、语调、案例、规则。', time: '2–3周' },
-  { num: '04', name: '包装设计', desc: '效果图、印刷文件、配方及技术图纸。SKU体系。', time: '4–8周' },
-  { num: '05', name: '商标注册', desc: '乌兹别克斯坦、独联体及国际范围内的国家保护。全流程。', time: '4–9月' },
-  { num: '06', name: '数字品牌', desc: '网站、社交媒体模板、演示文稿、横幅、动效。', time: '4–8周' },
+  { num: '01', name: '品牌命名', desc: '为您的企业取一个好名字——易记、合法、准备好域名和社交账号。', time: '2–4周' },
+  { num: '02', name: '标志与视觉识别', desc: '漂亮的标志 + 名片、网站、Instagram上的统一风格（颜色和字体）。', time: '3–5周' },
+  { num: '03', name: '品牌手册', desc: '您的团队指南：如何正确使用标志、颜色和字体。', time: '2–3周' },
+  { num: '04', name: '包装设计', desc: '抢眼的产品包装能自己销售 + 可用于印刷的文件。', time: '4–8周' },
+  { num: '05', name: '商标注册', desc: '保护您的品牌——在乌兹别克斯坦、独联体和全球范围内。', time: '4–9月' },
+  { num: '06', name: '数字品牌', desc: '网站、社交媒体设计、动画——专业的网络形象。', time: '4–8周' },
 ];
 
 const SERVICES_MAP: Record<string, typeof SERVICES_UZ> = { uz: SERVICES_UZ, ru: SERVICES_RU, en: SERVICES_EN, zh: SERVICES_ZH };
