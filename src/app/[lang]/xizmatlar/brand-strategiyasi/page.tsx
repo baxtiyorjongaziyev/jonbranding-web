@@ -67,7 +67,7 @@ const BrandStrategyPage = async (props: Props) => {
               <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                 <CardContent className="p-0">
                   <Image 
-                    src="/images/cms/brand-strategy-chart.png"
+                    src="/images/cms/brand-strategy-chart.webp"
                     alt="Business growth strategy chart"
                     width={800}
                     height={600}
@@ -96,7 +96,7 @@ const BrandStrategyPage = async (props: Props) => {
             <div>
               <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                 <Image 
-                  src="/images/cms/brand-strategy-team.png"
+                  src="/images/cms/brand-strategy-team.webp"
                   alt="Startup team brainstorming brand strategy"
                   width={800}
                   height={600}

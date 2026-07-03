@@ -259,7 +259,7 @@ function HeroPortfolio() {
       >
         <div className="relative overflow-hidden rounded-[1.5rem]">
           <Image
-            src="/images/cms/denaroma-hozir.png"
+            src="/images/cms/denaroma-hozir.webp"
             alt="Den Aroma — Premium Qadoq dizayni"
             width={450}
             height={320}
@@ -289,7 +289,7 @@ function HeroPortfolio() {
       >
         <div className="relative overflow-hidden rounded-[1.5rem]">
           <Image
-            src="/images/cms/savod-hozir.png"
+            src="/images/cms/savod-hozir.webp"
             alt="Savod — Neyming & Logo"
             width={380}
             height={270}
@@ -318,7 +318,7 @@ function HeroPortfolio() {
       >
         <div className="relative overflow-hidden rounded-[1.5rem]">
           <Image
-            src="/images/cms/brandbook-guide.jpeg"
+            src="/images/cms/brandbook-guide.webp"
             alt="Jon Branding — Brandbook"
             width={320}
             height={220}

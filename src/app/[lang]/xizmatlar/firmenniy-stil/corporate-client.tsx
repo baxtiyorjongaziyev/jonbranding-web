@@ -66,7 +66,7 @@ const CorporateClient: FC<CorporateClientProps> = ({ lang, translations }) => {
                         <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                             <CardContent className="p-0">
                                 <Image 
-                                    src="/images/cms/corporate-identity.jpeg"
+                                    src="/images/cms/corporate-identity.webp"
                                     alt="Brendning yaxlit vizual aydentikasi"
                                     width={800}
                                     height={600}
@@ -98,7 +98,7 @@ const CorporateClient: FC<CorporateClientProps> = ({ lang, translations }) => {
                         <Card className="shadow-xl rounded-2xl overflow-hidden border-none">
                             <CardContent className="p-0">
                                 <Image 
-                                    src="/images/cms/corporate-process.png"
+                                    src="/images/cms/corporate-process.webp"
                                     alt="Firma uslubi va korporativ aydentika tizimi"
                                     width={800}
                                     height={600}

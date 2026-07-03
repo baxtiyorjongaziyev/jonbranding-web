@@ -52,7 +52,7 @@ const BlogPostClient = ({ post }: { post: BlogPost }) => {
         <div className="container mx-auto px-4 -mt-16 z-10 relative">
           <div className="w-full rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src="/images/cms/blog-post-hero.jpeg"
+              src="/images/cms/blog-post-hero.webp"
               alt={post.title}
               data-ai-hint={post.imageHint}
               width={1200}

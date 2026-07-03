@@ -70,7 +70,7 @@ const BrandbookClient: FC<BrandbookClientProps> = ({ lang, translations }) => {
                         <Card className="shadow-xl rounded-2xl border-none overflow-hidden">
                             <CardContent className="p-0">
                             <Image 
-                                src="/images/cms/brandbook-guide.jpeg"
+                                src="/images/cms/brandbook-guide.webp"
                                 width={800}
                                 height={600}
                                 data-ai-hint="brandbook guide document"
