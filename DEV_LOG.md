@@ -4,6 +4,15 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-04 | Codex Testimonial Cover Sessiyasi
+
+**Nima qilindi:**
+- Hikmatulloh Toxirov video testimonial coveri uchun Telegramdan berilgan rasm WebP formatga optimizatsiya qilindi.
+- Sanity yoki fallback testimoniallari qaytganda ham Vimeo `1205182267` uchun yangi `/images/testimonials/hikmatulloh-toxirov-cover.webp` coveri ishlatiladigan qilindi.
+- Local/CI build barqarorligi uchun Next static generation worker soni `experimental.cpus: 1` bilan cheklab qo'yildi.
+
+---
+
 ## 2026-07-01 | Codex Security Sessiyasi
 
 **Nima qilindi:**
