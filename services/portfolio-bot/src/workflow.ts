@@ -85,14 +85,11 @@ async function processSinglePost(
     // Drive linki bormi? Agar yo'q bo'lsa, nomi bo'yicha qidirib ko'ramiz
     if (!aiData.driveFolderId && config.googleDriveParentId) {
       log(`[${source}:${sourceId}] No direct Drive link. Searching by title: "${aiData.title}" or client: "${aiData.client}"...`);
-      let foundId = await findFolderByName(config.googleDriveParentId, aiData.title);
-      if (!foundId && aiData.client) {
-        foundId = await findFolderByName(config.googleDriveParentId, aiData.client);
-      }
-      if (foundId) {
-        aiData.driveFolderId = foundId;
-        result.driveFolderId = foundId;
-        log(`[${source}:${sourceId}] Matching folder found: ${foundId}`);
+      const found = await findFolderByName(config.googleDriveParentId, [aiData.title, aiData.client]);
+      if (found) {
+        aiData.driveFolderId = found.id;
+        result.driveFolderId = found.id;
+        log(`[${source}:${sourceId}] Matching folder found: "${found.name}" (${found.id})`);
       }
     }
 
@@ -291,31 +288,9 @@ async function processGoogleDrive(config: WorkflowConfig, state: Record<string, 
           } else {
             log(`[drive:${folder.id}] Uploading to Sanity...`);
 
-            // Apply AI image ordering
-            let orderedFiles = [...downloadedFiles];
-            if (aiData.imageOrder && Array.isArray(aiData.imageOrder)) {
-              orderedFiles = aiData.imageOrder
-                .filter(idx => idx >= 0 && idx < downloadedFiles.length)
-                .map(idx => downloadedFiles[idx]);
-                
-              // Append any missing images at the end just in case AI skipped them
-              const mappedIndexes = new Set(aiData.imageOrder);
-              downloadedFiles.forEach((file, idx) => {
-                if (!mappedIndexes.has(idx)) {
-                  orderedFiles.push(file);
-                }
-              });
-            }
-
-            // Apply Cover Image
-            if (typeof aiData.coverImageIndex === 'number' && aiData.coverImageIndex >= 0 && aiData.coverImageIndex < downloadedFiles.length) {
-              const coverFile = downloadedFiles[aiData.coverImageIndex];
-              // Remove cover from its current position in ordered array and unshift to front
-              orderedFiles = orderedFiles.filter(f => f.path !== coverFile.path);
-              orderedFiles.unshift(coverFile);
-            }
-
-            const sanityId = await createPortfolioDocument(aiData, orderedFiles);
+            // Cover/tartib tanlash createPortfolioDocument ichida
+            // (aiData.coverImageIndex / aiData.imageOrder orqali) markazlashtirilgan.
+            const sanityId = await createPortfolioDocument(aiData, downloadedFiles);
             result.sanityId = sanityId;
             result.status = 'uploaded';
             log(`[drive:${folder.id}] ✅ Uploaded: ${sanityId}`);

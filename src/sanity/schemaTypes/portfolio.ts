@@ -101,6 +101,28 @@ export const portfolio = defineType({
       of: [{ type: 'block' }],
     }),
     defineField({
+      name: 'metaTitle',
+      title: 'SEO sarlavha (meta title)',
+      description: '60 belgigacha — qidiruv natijalarida sahifa nomi sifatida chiqadi',
+      type: 'string',
+      validation: (Rule) => Rule.max(70),
+    }),
+    defineField({
+      name: 'metaDescription',
+      title: 'SEO tavsif (meta description)',
+      description: '150-160 belgi — qidiruv natijalarida sahifa tavsifi sifatida chiqadi',
+      type: 'text',
+      rows: 2,
+      validation: (Rule) => Rule.max(180),
+    }),
+    defineField({
+      name: 'seoKeywords',
+      title: 'SEO kalit so\'zlar',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+    }),
+    defineField({
       name: 'results',
       title: 'Natijalar',
       type: 'array',

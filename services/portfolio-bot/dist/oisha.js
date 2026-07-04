@@ -62,6 +62,9 @@ Qaytarish formati (faqat JSON):
   "description": "1-2 jumlada qisqa tavsif",
   "tags": ["teg1", "teg2"],
   "results": [{"metric": "ko'rsatkich nomi", "value": "qiymat (masalan: +40%)"}],
+  "metaTitle": "SEO uchun sahifa sarlavhasi, 60 belgigacha, brend nomi + asosiy xizmat bilan",
+  "metaDescription": "SEO uchun qidiruv natijasida chiqadigan tavsif, 150-160 belgi",
+  "seoKeywords": ["5-8 ta qidiruv kalit so'zi, o'zbek tilida"],
   "driveFolderUrl": null,
   "coverImageIndex": 0,
   "imageOrder": [0, 1, 2]
@@ -71,6 +74,7 @@ QOIDALAR:
 1. coverImageIndex: Rasmlar ichidan eng chiroyli, jozibador va muqova (cover) uchun mos bo'lgan bitta rasmning index raqami (0 dan boshlanadi).
 2. imageOrder: Rasmlarni saytda qanday ketma-ketlikda joylashtirish optimal bo'lishini vizual tahlil qilib, ularning indexlarini shu arrayda qaytar. Mantiqiy ketma-ketlik qiling (masalan, logotip oldin, keyin qadoq, oxirida boshqa elementlar).
 3. category faqat ruxsat etilganlardan biri bo'lishi shart. Agar ma'lumot yetishmasa mantiqan o'ylab toping.
+4. metaTitle va metaDescription qidiruv tizimlarida jozibali ko'rinishi kerak, lekin faktlarga mos bo'lsin.
 `;
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 async function fetchWithRetry(url, data, config, retries = 3) {
