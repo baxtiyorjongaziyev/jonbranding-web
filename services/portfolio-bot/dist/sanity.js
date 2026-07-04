@@ -1,6 +1,7 @@
 import { createClient } from '@sanity/client';
 import fs from 'fs';
 import path from 'path';
+import { slugify } from './slug.js';
 const client = createClient({
     projectId: process.env.SANITY_PROJECT_ID,
     dataset: process.env.SANITY_DATASET ?? 'production',
@@ -8,14 +9,6 @@ const client = createClient({
     apiVersion: '2024-01-01',
     useCdn: false,
 });
-function slugify(text) {
-    return text
-        .toLowerCase()
-        .replace(/[^\w\s-]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .slice(0, 96);
-}
 async function uploadImageFile(filePath, mime) {
     const buffer = fs.readFileSync(filePath);
     const filename = path.basename(filePath);

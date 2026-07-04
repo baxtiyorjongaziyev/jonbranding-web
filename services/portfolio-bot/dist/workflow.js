@@ -4,6 +4,7 @@ import { parseWithAI } from './ai-processor.js';
 import { downloadToTemp, getFolderInfo, listImagesInFolder } from './drive-finder.js';
 import { createPortfolioDocument, findExistingPortfolio } from './sanity.js';
 import { fetchInstagramPosts } from './instagram.js';
+import { slugify } from './slug.js';
 /**
  * Workflow log fayli
  */
@@ -17,13 +18,14 @@ function log(msg) {
  * Default konfiguratsiya
  */
 export const DEFAULT_CONFIG = {
-    telegramChannels: ['@JonBranding'],
-    instagramAccounts: ['jonbranding'],
-    instagramHashtags: ['#jonbranding', '#brandinguz', '#logodesignuz'],
-    postsPerSource: 10,
-    requireDriveLink: true,
-    autoUpload: true,
-    intervalMinutes: 60,
+    telegramChannels: process.env.TELEGRAM_CHANNELS ? process.env.TELEGRAM_CHANNELS.split(',') : ['@JonBranding'],
+    instagramAccounts: process.env.INSTAGRAM_ACCOUNTS ? process.env.INSTAGRAM_ACCOUNTS.split(',') : ['jonbranding'],
+    instagramHashtags: process.env.INSTAGRAM_HASHTAGS ? process.env.INSTAGRAM_HASHTAGS.split(',') : ['#jonbranding', '#brandinguz', '#logodesignuz'],
+    googleDriveParentId: process.env.DRIVE_PARENT_FOLDER_ID,
+    postsPerSource: process.env.POSTS_PER_SOURCE ? parseInt(process.env.POSTS_PER_SOURCE, 10) : 10,
+    requireDriveLink: process.env.REQUIRE_DRIVE_LINK !== 'false',
+    autoUpload: process.env.AUTO_UPLOAD !== 'false',
+    intervalMinutes: process.env.INTERVAL_MINUTES ? parseInt(process.env.INTERVAL_MINUTES, 10) : 60,
 };
 /**
  * Workflow state fayli — qaysi postlar allaqachon ishlanganligini saqlaydi
@@ -92,12 +94,7 @@ async function processSinglePost(source, sourceId, text, config) {
             // 5. Sanity'ga yuklash (autoUpload = true bo'lsa)
             if (config.autoUpload) {
                 // Duplikatni tekshirish
-                const slug = aiData.title
-                    .toLowerCase()
-                    .replace(/[^\w\s-]/g, '')
-                    .replace(/\s+/g, '-')
-                    .replace(/-+/g, '-')
-                    .slice(0, 96);
+                const slug = slugify(aiData.title, aiData.driveFolderId ?? undefined);
                 const existingId = await findExistingPortfolio(slug);
                 if (existingId) {
                     log(`[${source}:${sourceId}] Portfolio already exists: ${existingId}`);
@@ -163,6 +160,119 @@ async function processInstagram(config, state) {
         }
     }
 }
+import { parseDriveFolderWithOisha } from './oisha.js';
+import { listSubfolders, getTextFileContent } from './drive-finder.js';
+/**
+ * Google Drive'dagi to'g'ridan-to'g'ri papkalarni tekshirish va yuklash
+ */
+async function processGoogleDrive(config, state) {
+    if (!config.googleDriveParentId) {
+        log('[drive] No googleDriveParentId configured, skipping direct Drive sync.');
+        return;
+    }
+    const processed = getProcessedIds(state);
+    log(`[drive] Scanning parent folder: ${config.googleDriveParentId}`);
+    try {
+        const folders = await listSubfolders(config.googleDriveParentId);
+        log(`[drive] Found ${folders.length} subfolders in parent directory.`);
+        for (const folder of folders) {
+            const key = `drive:${folder.id}`;
+            if (processed.has(key))
+                continue;
+            log(`[drive] New folder found: ${folder.name} (${folder.id})`);
+            const result = {
+                source: 'drive',
+                sourceId: folder.id,
+                originalText: `Folder name: ${folder.name}`,
+                aiData: null,
+                driveFolderId: folder.id,
+                imageCount: 0,
+                status: 'new',
+                timestamp: new Date().toISOString(),
+            };
+            try {
+                const textContent = await getTextFileContent(folder.id) || '';
+                // Check early if already exists in Sanity to save Gemini API calls
+                // We'll do a quick rough slugification of folder name if we don't have aiData yet
+                // However, it's safer to use the exact AI title. But to save API we can guess from folder name
+                const roughSlug = slugify(folder.name, folder.id);
+                const earlyId = await findExistingPortfolio(roughSlug);
+                if (earlyId) {
+                    log(`[drive:${folder.id}] Portfolio already exists in Sanity (by rough slug): ${earlyId}`);
+                    result.sanityId = earlyId;
+                    result.status = 'uploaded';
+                    state[key] = result;
+                    saveState(state);
+                    continue;
+                }
+                // First download images
+                const images = await listImagesInFolder(folder.id);
+                if (images.length === 0) {
+                    result.status = 'failed';
+                    result.error = 'No images found';
+                    state[key] = result;
+                    saveState(state);
+                    continue;
+                }
+                result.imageCount = images.length;
+                log(`[drive:${folder.id}] Downloading ${images.length} images for AI analysis...`);
+                const downloadedFiles = await downloadToTemp(folder.id);
+                result.status = 'downloaded';
+                log(`[drive:${folder.id}] Multimodal AI analysis...`);
+                const aiData = await parseDriveFolderWithOisha(folder.name, textContent, downloadedFiles);
+                aiData.driveFolderId = folder.id;
+                result.aiData = aiData;
+                if (config.autoUpload) {
+                    const slug = slugify(aiData.title, folder.id);
+                    const existingId = await findExistingPortfolio(slug);
+                    if (existingId) {
+                        log(`[drive:${folder.id}] Portfolio already exists: ${existingId}`);
+                        result.sanityId = existingId;
+                        result.status = 'uploaded';
+                    }
+                    else {
+                        log(`[drive:${folder.id}] Uploading to Sanity...`);
+                        // Apply AI image ordering
+                        let orderedFiles = [...downloadedFiles];
+                        if (aiData.imageOrder && Array.isArray(aiData.imageOrder)) {
+                            orderedFiles = aiData.imageOrder
+                                .filter(idx => idx >= 0 && idx < downloadedFiles.length)
+                                .map(idx => downloadedFiles[idx]);
+                            // Append any missing images at the end just in case AI skipped them
+                            const mappedIndexes = new Set(aiData.imageOrder);
+                            downloadedFiles.forEach((file, idx) => {
+                                if (!mappedIndexes.has(idx)) {
+                                    orderedFiles.push(file);
+                                }
+                            });
+                        }
+                        // Apply Cover Image
+                        if (typeof aiData.coverImageIndex === 'number' && aiData.coverImageIndex >= 0 && aiData.coverImageIndex < downloadedFiles.length) {
+                            const coverFile = downloadedFiles[aiData.coverImageIndex];
+                            // Remove cover from its current position in ordered array and unshift to front
+                            orderedFiles = orderedFiles.filter(f => f.path !== coverFile.path);
+                            orderedFiles.unshift(coverFile);
+                        }
+                        const sanityId = await createPortfolioDocument(aiData, orderedFiles);
+                        result.sanityId = sanityId;
+                        result.status = 'uploaded';
+                        log(`[drive:${folder.id}] ✅ Uploaded: ${sanityId}`);
+                    }
+                }
+            }
+            catch (err) {
+                result.status = 'failed';
+                result.error = err instanceof Error ? err.message : String(err);
+                log(`[drive:${folder.id}] ❌ Error: ${result.error}`);
+            }
+            state[key] = result;
+            saveState(state);
+        }
+    }
+    catch (err) {
+        log(`[drive] Error scanning parent folder: ${err}`);
+    }
+}
 /**
  * Asosiy workflow ishga tushirish
  */
@@ -173,13 +283,15 @@ export async function runWorkflow(config = DEFAULT_CONFIG) {
     log(`Loaded ${Object.keys(state).length} previous processed posts`);
     // 1. Instagram postlarni qayta ishlash
     await processInstagram(config, state);
-    // 2. Natijalarni chiqarish
+    // 2. Google Drive to'g'ridan-to'g'ri kuzatish
+    await processGoogleDrive(config, state);
+    // 3. Natijalarni chiqarish
     const keys = Object.keys(state);
     const uploaded = keys.filter((k) => state[k].status === 'uploaded').length;
     const failed = keys.filter((k) => state[k].status === 'failed').length;
     const total = keys.length;
     log(`📊 Workflow complete: ${total} total, ${uploaded} uploaded, ${failed} failed`);
-    // 3. Upload qilinganlarni chiqarish
+    // 4. Upload qilinganlarni chiqarish
     const recentUploads = keys
         .filter((k) => state[k].status === 'uploaded')
         .slice(-5)

@@ -1,4 +1,7 @@
 import axios from 'axios';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 const PROMPT = (text) => `
@@ -20,7 +23,7 @@ Qaytarish formati (faqat JSON):
   "driveFolderUrl": "https://drive.google.com/... yoki null"
 }
 
-Agar biron maydon postda yo'q bo'lsa — bo'sh string yoki bo'sh array qo'y. category faqat yuqoridagilardan biri bo'lishi shart.
+Agar biron maydon postda yo'q bo'lsa - bo'sh string yoki bo'sh array qo'y. category faqat yuqoridagilardan biri bo'lishi shart.
 `;
 export async function parsePostWithOisha(messageText) {
     const res = await axios.post(GEMINI_URL, {
@@ -39,5 +42,90 @@ export async function parsePostWithOisha(messageText) {
     else {
         parsed.driveFolderId = null;
     }
+    return parsed;
+}
+const DRIVE_PROMPT = (folderName, textContent, imageCount) => `
+Quyidagi ma'lumotlar Google Drive papkasidan olindi. Men senga ${imageCount} ta rasmni ham ilova qildim.
+Bularni vizual tahlil qilib, FAQAT JSON formatda qaytargil (boshqa hech narsa yozma).
+
+PAPKA NOMI: "${folderName}"
+MATNLI FAYL MA'LUMOTI (agar bo'lsa):
+"""
+${textContent}
+"""
+
+Qaytarish formati (faqat JSON):
+{
+  "title": "loyiha nomi (qisqa, 2-5 so'z, papka nomidan olinishi mumkin)",
+  "client": "mijoz kompaniya/ism nomi",
+  "category": "logo-design | naming | brandbook | corporate-style | packaging | brand-strategy",
+  "description": "1-2 jumlada qisqa tavsif",
+  "tags": ["teg1", "teg2"],
+  "results": [{"metric": "ko'rsatkich nomi", "value": "qiymat (masalan: +40%)"}],
+  "driveFolderUrl": null,
+  "coverImageIndex": 0,
+  "imageOrder": [0, 1, 2]
+}
+
+QOIDALAR:
+1. coverImageIndex: Rasmlar ichidan eng chiroyli, jozibador va muqova (cover) uchun mos bo'lgan bitta rasmning index raqami (0 dan boshlanadi).
+2. imageOrder: Rasmlarni saytda qanday ketma-ketlikda joylashtirish optimal bo'lishini vizual tahlil qilib, ularning indexlarini shu arrayda qaytar. Mantiqiy ketma-ketlik qiling (masalan, logotip oldin, keyin qadoq, oxirida boshqa elementlar).
+3. category faqat ruxsat etilganlardan biri bo'lishi shart. Agar ma'lumot yetishmasa mantiqan o'ylab toping.
+`;
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+async function fetchWithRetry(url, data, config, retries = 3) {
+    for (let i = 0; i < retries; i++) {
+        try {
+            return await axios.post(url, data, config);
+        }
+        catch (err) {
+            if (err.response && err.response.status === 429 && i < retries - 1) {
+                const waitTime = (i + 1) * 3000;
+                console.warn(`[oisha] 429 Too Many Requests. Retrying in ${waitTime}ms...`);
+                await delay(waitTime);
+                continue;
+            }
+            throw err;
+        }
+    }
+}
+export async function parseDriveFolderWithOisha(folderName, textContent = '', imageFiles = []) {
+    const parts = [];
+    let attachedImageCount = 0;
+    const tempRoot = path.resolve(os.tmpdir());
+    const firstImageDir = imageFiles[0]?.path ? path.dirname(path.resolve(imageFiles[0].path)) : null;
+    const allowedDir = firstImageDir &&
+        firstImageDir.startsWith(`${tempRoot}${path.sep}`) &&
+        path.basename(firstImageDir).startsWith('portfolio-')
+        ? firstImageDir
+        : null;
+    for (const img of imageFiles) {
+        const resolvedPath = path.resolve(img.path);
+        if (!allowedDir || !resolvedPath.startsWith(`${allowedDir}${path.sep}`))
+            continue;
+        if (!fs.existsSync(resolvedPath))
+            continue;
+        const base64 = fs.readFileSync(resolvedPath, { encoding: 'base64' });
+        parts.push({
+            inlineData: {
+                mimeType: img.mime,
+                data: base64,
+            },
+        });
+        attachedImageCount++;
+    }
+    parts.push({
+        text: DRIVE_PROMPT(folderName, textContent, attachedImageCount),
+    });
+    const res = await fetchWithRetry(GEMINI_URL, {
+        contents: [{ parts }],
+        generationConfig: { temperature: 0.2, maxOutputTokens: 2048 },
+    }, { timeout: 60_000 });
+    const reply = res.data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
+    const jsonMatch = reply.match(/\{[\s\S]*\}/);
+    if (!jsonMatch)
+        throw new Error(`Gemini JSON qaytarmadi: ${reply.slice(0, 200)}`);
+    const parsed = JSON.parse(jsonMatch[0]);
+    parsed.driveFolderId = null;
     return parsed;
 }

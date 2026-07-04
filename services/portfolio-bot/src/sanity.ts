@@ -2,6 +2,7 @@ import { createClient } from '@sanity/client';
 import fs from 'fs';
 import path from 'path';
 import type { AIEnrichedData, PortfolioPayload, SanityImageAsset } from './types.js';
+import { slugify } from './slug.js';
 
 const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID!,
@@ -10,15 +11,6 @@ const client = createClient({
   apiVersion: '2024-01-01',
   useCdn: false,
 });
-
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .slice(0, 96);
-}
 
 async function uploadImageFile(filePath: string, mime: string): Promise<SanityImageAsset> {
   const buffer = fs.readFileSync(filePath);
