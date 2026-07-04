@@ -223,3 +223,51 @@ export async function getTextFileContent(folderId: string): Promise<string | nul
     return null;
   }
 }
+
+/**
+ * Berilgan parent folder ichidan loyiha yoki mijoz nomiga mos keluvchi subfolderni qidiradi
+ */
+export async function findFolderByName(
+  parentFolderId: string,
+  projectName: string
+): Promise<string | null> {
+  if (!parentFolderId || !projectName) return null;
+  const auth = getAuth();
+  const drive = google.drive({ version: 'v3', auth });
+
+  try {
+    const cleanName = projectName.trim().toLowerCase();
+    console.log(`[drive-finder] Searching for subfolder matching: "${cleanName}"`);
+
+    // Hamma subfolderlarni olamiz
+    const subfolders = await listSubfolders(parentFolderId);
+    
+    // Exact yoki qisman mos keluvchi papkani qidirish
+    for (const folder of subfolders) {
+      const folderName = folder.name.toLowerCase();
+      // Papka nomi loyiha nomini o'z ichiga olgan bo'lsa yoki aksincha
+      if (folderName.includes(cleanName) || cleanName.includes(folderName)) {
+        console.log(`[drive-finder] Found matching folder: "${folder.name}" (${folder.id})`);
+        return folder.id;
+      }
+    }
+
+    // Agar to'liq mos kelmasa, so'zma-so'z qidiramiz (birinchi so'z bo'yicha)
+    const firstWord = cleanName.split(/\s+/)[0];
+    if (firstWord && firstWord.length > 2) {
+      for (const folder of subfolders) {
+        const folderName = folder.name.toLowerCase();
+        if (folderName.includes(firstWord)) {
+          console.log(`[drive-finder] Found fuzzy matching folder by first word: "${folder.name}" (${folder.id})`);
+          return folder.id;
+        }
+      }
+    }
+
+    console.warn(`[drive-finder] No folder matching "${projectName}" found under parent ${parentFolderId}`);
+    return null;
+  } catch (err) {
+    console.error(`[drive-finder] Error finding folder by name:`, err);
+    return null;
+  }
+}
