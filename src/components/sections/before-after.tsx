@@ -37,6 +37,46 @@ const DEFAULT_COMPARISONS: SanityComparison[] = projects
   .map((project, index) => ({
     brand: project.brand,
     oldImg: project.oldImg,
+'use client';
+
+import { useState, useEffect } from 'react';
+import { ArrowRight, BadgeCheck, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import ImageComparisonSlider from '@/components/image-comparison-slider';
+import { Button } from '@/components/ui/button';
+import { projects } from '@/lib/static-data';
+import { trackEvent } from '@/lib/analytics';
+import { renderHeadline } from '@/lib/headline';
+import { cn } from '@/lib/utils';
+
+interface SanityComparison {
+  brand: string;
+  oldImg: string;
+  newImg: string;
+  oldHint: string;
+  newHint: string;
+  order: number;
+}
+
+interface BeforeAfterProps {
+  lang: string;
+  dictionary: {
+    eyebrow?: string;
+    title?: string;
+    subtitle?: string;
+    cta?: string;
+    ctaButton?: string;
+    caseLabel?: string;
+    proofCards?: Array<{ value: string; label: string }>;
+  };
+  comparisons?: SanityComparison[];
+}
+
+const DEFAULT_COMPARISONS: SanityComparison[] = projects
+  .filter((project) => project.oldImg && project.newImg)
+  .map((project, index) => ({
+    brand: project.brand,
+    oldImg: project.oldImg,
     newImg: project.newImg,
     oldHint: project.oldHint || '',
     newHint: project.newHint || '',
@@ -60,94 +100,117 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
   if (!translations || !displayItems || displayItems.length === 0) return null;
 
   return (
-    <section className="py-[100px] md:py-[140px] relative z-[2]">
-      <div className="max-w-[1320px] mx-auto px-5 md:px-8">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20 mb-14 md:mb-20">
-          <h2
-            className="font-bold text-[var(--at-ink)]"
-            style={{ fontSize: 'clamp(36px, 5vw, 72px)', lineHeight: 0.95, letterSpacing: '-0.035em' }}
-          >
+    <section className="py-[120px] md:py-[180px] relative z-[2] overflow-hidden bg-neutral-950">
+      {/* Decorative premium dark ambient glows */}
+      <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[var(--at-accent)]/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[var(--at-accent)]/3 blur-[150px] pointer-events-none" />
+
+      <div className="max-w-[1320px] mx-auto px-5 md:px-8 relative z-10">
+        <div className="grid md:grid-cols-12 gap-8 md:gap-12 mb-20 md:mb-28 items-end">
+          <div className="md:col-span-7">
             {translations.eyebrow && (
-              <span className="block font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.08em] text-[var(--at-muted)] mb-5 font-normal">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--at-accent)] inline-block mr-2 align-middle" />
+              <span className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.15em] text-[var(--at-accent)] mb-6 font-bold bg-[var(--at-accent)]/10 px-3 py-1.5 rounded-full border border-[var(--at-accent)]/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--at-accent)] inline-block animate-pulse" />
                 {translations.eyebrow}
               </span>
             )}
-            {renderHeadline(translations.title ?? '', "text-[var(--at-accent)]")}
-          </h2>
-          <div className="flex flex-col justify-end">
+            <h2
+              className="font-bold text-white tracking-tight leading-[0.95]"
+              style={{ fontSize: 'clamp(38px, 6vw, 76px)', letterSpacing: '-0.04em' }}
+            >
+              {renderHeadline(translations.title ?? '', "bg-gradient-to-r from-[var(--at-accent)] to-lime-400 bg-clip-text text-transparent")}
+            </h2>
+          </div>
+          <div className="md:col-span-5 flex flex-col justify-end">
             {translations.subtitle && (
-              <p className="text-[var(--at-ink-2)] text-sm leading-[1.55] mb-8">{translations.subtitle}</p>
+              <p className="text-neutral-400 text-sm leading-[1.6] mb-8 font-medium max-w-[440px]">{translations.subtitle}</p>
             )}
             <div className="flex flex-wrap gap-6">
               <Button
                 onClick={handleCtaClick}
                 size="lg"
-                className="group h-14 rounded-full bg-white px-7 text-sm font-extrabold text-brand-ink shadow-[0_26px_80px_-34px_rgba(255,255,255,0.8)] transition-[background-color,transform] duration-300 hover:bg-brand-lime active:scale-[0.98]"
+                className="group h-14 rounded-full bg-white px-8 text-sm font-extrabold text-black hover:text-white transition-all duration-300 hover:bg-neutral-900 border border-transparent hover:border-neutral-800 shadow-[0_20px_50px_rgba(255,255,255,0.05)] active:scale-[0.98]"
               >
                 {translations.cta || translations.ctaButton}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
               </Button>
             </div>
           </div>
         </div>
 
         {translations.proofCards?.length ? (
-          <div className="flex flex-wrap gap-3 mb-12">
+          <div className="flex flex-wrap gap-4 mb-20">
             {translations.proofCards.map((card) => (
               <div
                 key={card.label}
-                className="group relative overflow-hidden rounded-2xl border border-[var(--at-line)] bg-[var(--at-paper)] px-5 py-4 transition-all duration-300 hover:border-[var(--at-accent)]/30"
+                className="group relative overflow-hidden rounded-2xl border border-neutral-800/80 bg-neutral-900/40 backdrop-blur-md px-6 py-5 transition-all duration-300 hover:border-[var(--at-accent)]/30 hover:bg-neutral-900/60"
               >
-                <div className="font-semibold text-[var(--at-ink)] text-lg tracking-tight">{card.value}</div>
-                <div className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] text-[var(--at-muted)] mt-0.5">{card.label}</div>
+                <div className="font-extrabold text-white text-2xl tracking-tight bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">{card.value}</div>
+                <div className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.1em] text-neutral-500 mt-1 font-bold tracking-widest">{card.label}</div>
               </div>
             ))}
           </div>
         ) : null}
 
-        <div className="grid md:grid-cols-2 gap-5 md:gap-8">
-          {displayItems.map((item, idx) => (
-            <motion.div
-              key={item.brand || idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group relative overflow-hidden rounded-3xl border border-[var(--at-line)] bg-[var(--at-paper)] p-3 transition-all duration-500 hover:border-[var(--at-accent)]/20 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.15)]"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--at-bg)]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl" />
-              <div className="relative z-10">
-                <ImageComparisonSlider
-                  beforeImage={{
-                    src: item.oldImg,
-                    alt: `${item.brand} old`,
-                    'data-ai-hint': item.oldHint || ''
-                  }}
-                  afterImage={{
-                    src: item.newImg,
-                    alt: `${item.brand} new`,
-                    'data-ai-hint': item.newHint || ''
-                  }}
-                  lang={lang}
-                />
-                <div className="flex items-center justify-between gap-4 px-3.5 py-4">
-                  <div>
-                    <p className="text-lg font-semibold text-[var(--at-ink)] tracking-tight">{item.brand}</p>
-                    {translations.caseLabel && (
-                      <p className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.06em] text-[var(--at-muted)] mt-0.5">
-                        {translations.caseLabel}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--at-accent)]/15 bg-[var(--at-accent-soft)] px-3 py-1.5 text-[var(--at-accent)]">
-                    <Sparkles className="h-3 w-3 shrink-0" />
-                    {translations.caseLabel && <span className="font-[family-name:var(--font-mono)] text-[8px] uppercase tracking-[0.06em]">{translations.caseLabel}</span>}
+        {/* Bento Parallax Offsetting Grid */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
+          {displayItems.map((item, idx) => {
+            const isEven = idx % 2 === 1;
+            return (
+              <motion.div
+                key={item.brand || idx}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.7, delay: idx * 0.15 }}
+                className={cn(
+                  "group relative overflow-hidden rounded-[32px] border border-neutral-900 bg-neutral-950 p-4 transition-all duration-700 hover:border-neutral-800",
+                  // Apply slight vertical offset to create asymmetric premium gallery layout (Bento Parallax)
+                  isEven ? "md:translate-y-16" : "md:translate-y-0"
+                )}
+              >
+                {/* Radial Glow on Hover */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(132,204,22,0.06)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[32px]" />
+                
+                <div className="relative z-10">
+                  <ImageComparisonSlider
+                    beforeImage={{
+                      src: item.oldImg,
+                      alt: `${item.brand} old`,
+                      'data-ai-hint': item.oldHint || ''
+                    }}
+                    afterImage={{
+                      src: item.newImg,
+                      alt: `${item.brand} new`,
+                      'data-ai-hint': item.newHint || ''
+                    }}
+                    lang={lang}
+                  />
+                  
+                  {/* Rich Glassmorphic Details Bar */}
+                  <div className="flex items-center justify-between gap-4 mt-4 px-4 py-3 bg-neutral-900/30 backdrop-blur-md border border-neutral-900/60 rounded-2xl">
+                    <div>
+                      <p className="text-base font-extrabold text-white tracking-tight">{item.brand}</p>
+                      {translations.caseLabel && (
+                        <p className="font-[family-name:var(--font-mono)] text-[8px] uppercase tracking-[0.1em] text-neutral-500 mt-0.5 font-bold">
+                          {translations.caseLabel}
+                        </p>
+                      )}
+                    </div>
+                    
+                    <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--at-accent)]/20 bg-[var(--at-accent)]/10 px-3.5 py-2 text-[var(--at-accent)] transition-all duration-300 group-hover:bg-[var(--at-accent)]/20 group-hover:border-[var(--at-accent)]/30">
+                      <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                      {translations.caseLabel && (
+                        <span className="font-[family-name:var(--font-mono)] text-[8px] uppercase tracking-[0.12em] font-bold">
+                          {translations.caseLabel}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
