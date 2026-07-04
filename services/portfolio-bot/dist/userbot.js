@@ -48,8 +48,6 @@ export async function startUserbot() {
                     'userId' in peerId ? peerId.userId : '');
             if (!resolvedIds.has(chatId))
                 return;
-            if (!/https?:\/\/(?:[a-zA-Z0-9-]+\.)*drive\.google\.com\b/.test(message.text))
-                return;
             console.log(`[userbot] New post from ${chatId}: ${message.text.slice(0, 80)}...`);
             const result = await processPost(message.text, chatId);
             if (NOTIFY_CHAT_ID) {

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import type { WorkflowConfig, ProcessedPost } from './types.js';
 import { parseWithAI } from './ai-processor.js';
-import { downloadToTemp, getFolderInfo, listImagesInFolder } from './drive-finder.js';
+import { downloadToTemp, getFolderInfo, listImagesInFolder, findFolderByName } from './drive-finder.js';
 import { createPortfolioDocument, findExistingPortfolio } from './sanity.js';
 import { fetchInstagramPosts } from './instagram.js';
 import { slugify } from './slug.js';
@@ -81,11 +81,25 @@ async function processSinglePost(
     result.aiData = aiData;
     result.driveFolderId = aiData.driveFolderId;
 
+    // Drive linki bormi? Agar yo'q bo'lsa, nomi bo'yicha qidirib ko'ramiz
+    if (!aiData.driveFolderId && config.googleDriveParentId) {
+      log(`[${source}:${sourceId}] No direct Drive link. Searching by title: "${aiData.title}" or client: "${aiData.client}"...`);
+      let foundId = await findFolderByName(config.googleDriveParentId, aiData.title);
+      if (!foundId && aiData.client) {
+        foundId = await findFolderByName(config.googleDriveParentId, aiData.client);
+      }
+      if (foundId) {
+        aiData.driveFolderId = foundId;
+        result.driveFolderId = foundId;
+        log(`[${source}:${sourceId}] Matching folder found: ${foundId}`);
+      }
+    }
+
     // 2. Agar drive linki kerak bo'lsa va yo'q bo'lsa — skip
     if (config.requireDriveLink && !aiData.driveFolderId) {
       result.status = 'failed';
-      result.error = 'No Google Drive folder link in post';
-      log(`[${source}:${sourceId}] Skipped — no Drive link`);
+      result.error = 'No Google Drive folder link or matching folder name found';
+      log(`[${source}:${sourceId}] Skipped — no Drive link or matching folder`);
       return result;
     }
 

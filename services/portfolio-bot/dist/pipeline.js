@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { parseWithAI } from './ai-processor.js';
-import { downloadToTemp, getFolderInfo, listImagesInFolder } from './drive-finder.js';
+import { downloadToTemp, getFolderInfo, listImagesInFolder, findFolderByName } from './drive-finder.js';
 import { createPortfolioDocument, findExistingPortfolio } from './sanity.js';
 import { slugify } from './slug.js';
 export async function processPost(messageText, channelId) {
@@ -9,12 +9,28 @@ export async function processPost(messageText, channelId) {
         console.log('[pipeline] Step 1/5: AI parsing post...');
         const aiData = await parseWithAI(messageText);
         console.log(`[pipeline] Step 2/5: Parsed → "${aiData.title}" (${aiData.category})`);
-        // Drive linki bormi?
+        // Drive linki bormi? Agar yo'q bo'lsa, nomi bo'yicha qidirib ko'ramiz
         if (!aiData.driveFolderId) {
-            console.log('[pipeline] No Drive folder link — skipping image download');
+            const parentFolderId = process.env.DRIVE_PARENT_FOLDER_ID;
+            if (parentFolderId) {
+                console.log(`[pipeline] No direct Drive link. Searching under parent folder by title: "${aiData.title}" or client: "${aiData.client}"...`);
+                // Avval title bo'yicha
+                let foundId = await findFolderByName(parentFolderId, aiData.title);
+                // Topilmasa client bo'yicha
+                if (!foundId && aiData.client) {
+                    foundId = await findFolderByName(parentFolderId, aiData.client);
+                }
+                if (foundId) {
+                    aiData.driveFolderId = foundId;
+                    console.log(`[pipeline] Found matching folder from name: ${foundId}`);
+                }
+            }
+        }
+        if (!aiData.driveFolderId) {
+            console.log('[pipeline] No Drive folder found by name or link — skipping image download');
             return {
                 success: false,
-                error: 'No Google Drive folder URL in post',
+                error: 'No Google Drive folder link or matching folder name found for post',
                 hasDriveLink: false,
                 title: aiData.title,
             };
