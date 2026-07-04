@@ -190,13 +190,18 @@ QATTIQ QOIDALAR:
  */
 export async function parseFullCase(postText, folderName, imageFiles) {
     const parts = [];
-    for (const img of imageFiles) {
+    // Gemini so'rov hajmi/vaqt tugashi xavfini kamaytirish uchun tahlilga
+    // faqat dastlabki rasmlarni yuboramiz — Sanity'ga esa barchasi yuklanadi
+    // (createPortfolioDocument to'liq imageFiles bilan chaqiriladi).
+    const MAX_IMAGES_FOR_AI = 10;
+    const limitedImages = imageFiles.slice(0, MAX_IMAGES_FOR_AI);
+    for (const img of limitedImages) {
         if (!fs.existsSync(img.path))
             continue;
         const base64 = fs.readFileSync(img.path, { encoding: 'base64' });
         parts.push({ inlineData: { mimeType: img.mime, data: base64 } });
     }
-    parts.push({ text: FULL_CASE_PROMPT(postText, folderName, imageFiles.length) });
+    parts.push({ text: FULL_CASE_PROMPT(postText, folderName, limitedImages.length) });
     const res = await axios.post(GEMINI_URL, {
         contents: [{ parts }],
         generationConfig: { temperature: 0.2, maxOutputTokens: 3072 },

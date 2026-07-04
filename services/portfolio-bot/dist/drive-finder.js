@@ -152,6 +152,10 @@ export async function listSubfolders(parentFolderId) {
 function normalizeName(text) {
     return text
         .toLowerCase()
+        // O'zbekcha ў/қ/ғ/ҳ so'zlarida apostrof harf ichida bo'ladi (masalan
+        // "Sog'lom", "G'olib") — bo'shliq bilan almashtirsak so'z bo'linib
+        // ketadi, shuning uchun avval shunchaki olib tashlaymiz.
+        .replace(/['’‘ʻʼ`]/g, '')
         .replace(/[^a-z0-9Ѐ-ӿ؀-ۿ]+/g, ' ')
         .trim();
 }

@@ -103,7 +103,12 @@ export async function parseDriveFolderWithOisha(folderName, textContent = '', im
         path.basename(firstImageDir).startsWith('portfolio-')
         ? firstImageDir
         : null;
+    // Gemini so'rov hajmi/vaqt tugashi xavfini kamaytirish uchun tahlilga
+    // faqat dastlabki rasmlarni yuboramiz — Sanity'ga esa barchasi yuklanadi.
+    const MAX_IMAGES_FOR_AI = 10;
     for (const img of imageFiles) {
+        if (attachedImageCount >= MAX_IMAGES_FOR_AI)
+            break;
         const resolvedPath = path.resolve(img.path);
         if (!allowedDir || !resolvedPath.startsWith(`${allowedDir}${path.sep}`))
             continue;

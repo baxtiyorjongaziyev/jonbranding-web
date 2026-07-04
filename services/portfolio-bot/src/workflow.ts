@@ -74,6 +74,7 @@ async function processSinglePost(
     status: 'new',
     timestamp: new Date().toISOString(),
   };
+  let tmpDir: string | undefined;
 
   try {
     // 1. AI bilan tahlil qilish
@@ -123,6 +124,7 @@ async function processSinglePost(
 
       // 4. Rasmlarni yuklab olish
       const imageFiles = await downloadToTemp(aiData.driveFolderId);
+      tmpDir = imageFiles[0]?.path ? path.dirname(imageFiles[0].path) : undefined;
       result.status = 'downloaded';
 
       // 5. Sanity'ga yuklash (autoUpload = true bo'lsa)
@@ -154,6 +156,10 @@ async function processSinglePost(
     result.status = 'failed';
     result.error = error;
     log(`[${source}:${sourceId}] ❌ Error: ${error}`);
+  } finally {
+    if (tmpDir && fs.existsSync(tmpDir)) {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
   }
 
   return result;
@@ -270,30 +276,37 @@ async function processGoogleDrive(config: WorkflowConfig, state: Record<string, 
         result.imageCount = images.length;
         log(`[drive:${folder.id}] Downloading ${images.length} images for AI analysis...`);
         const downloadedFiles = await downloadToTemp(folder.id);
+        const tmpDir = downloadedFiles[0]?.path ? path.dirname(downloadedFiles[0].path) : undefined;
         result.status = 'downloaded';
 
-        log(`[drive:${folder.id}] Multimodal AI analysis...`);
-        const aiData = await parseDriveFolderWithOisha(folder.name, textContent, downloadedFiles);
-        aiData.driveFolderId = folder.id; 
-        result.aiData = aiData;
+        try {
+          log(`[drive:${folder.id}] Multimodal AI analysis...`);
+          const aiData = await parseDriveFolderWithOisha(folder.name, textContent, downloadedFiles);
+          aiData.driveFolderId = folder.id;
+          result.aiData = aiData;
 
-        if (config.autoUpload) {
-          const slug = slugify(aiData.title, folder.id);
+          if (config.autoUpload) {
+            const slug = slugify(aiData.title, folder.id);
 
-          const existingId = await findExistingPortfolio(slug);
-          if (existingId) {
-            log(`[drive:${folder.id}] Portfolio already exists: ${existingId}`);
-            result.sanityId = existingId;
-            result.status = 'uploaded';
-          } else {
-            log(`[drive:${folder.id}] Uploading to Sanity...`);
+            const existingId = await findExistingPortfolio(slug);
+            if (existingId) {
+              log(`[drive:${folder.id}] Portfolio already exists: ${existingId}`);
+              result.sanityId = existingId;
+              result.status = 'uploaded';
+            } else {
+              log(`[drive:${folder.id}] Uploading to Sanity...`);
 
-            // Cover/tartib tanlash createPortfolioDocument ichida
-            // (aiData.coverImageIndex / aiData.imageOrder orqali) markazlashtirilgan.
-            const sanityId = await createPortfolioDocument(aiData, downloadedFiles);
-            result.sanityId = sanityId;
-            result.status = 'uploaded';
-            log(`[drive:${folder.id}] ✅ Uploaded: ${sanityId}`);
+              // Cover/tartib tanlash createPortfolioDocument ichida
+              // (aiData.coverImageIndex / aiData.imageOrder orqali) markazlashtirilgan.
+              const sanityId = await createPortfolioDocument(aiData, downloadedFiles);
+              result.sanityId = sanityId;
+              result.status = 'uploaded';
+              log(`[drive:${folder.id}] ✅ Uploaded: ${sanityId}`);
+            }
+          }
+        } finally {
+          if (tmpDir && fs.existsSync(tmpDir)) {
+            fs.rmSync(tmpDir, { recursive: true, force: true });
           }
         }
       } catch (err) {
