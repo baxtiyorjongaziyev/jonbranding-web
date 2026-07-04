@@ -9,6 +9,26 @@ const SESSION = process.env.TG_SESSION ?? '';
 const CHANNEL_IDS = (process.env.TG_CHANNEL_IDS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
 const NOTIFY_CHAT_ID = process.env.TG_NOTIFY_CHAT_ID ?? '';
 
+export let telegramClient: TelegramClient | null = null;
+
+export async function sendTelegramMessage(messageText: string, chatId?: string): Promise<void> {
+  const target = chatId ?? NOTIFY_CHAT_ID;
+  if (!target) {
+    console.warn('[userbot] No target chat configured for sendTelegramMessage');
+    return;
+  }
+  if (!telegramClient) {
+    console.warn('[userbot] Telegram client not initialized yet');
+    return;
+  }
+  try {
+    await telegramClient.sendMessage(target, { message: messageText, parseMode: 'markdown' });
+    console.log(`[userbot] Sent notification to ${target}`);
+  } catch (err) {
+    console.error(`[userbot] Failed to send message to ${target}:`, err);
+  }
+}
+
 export async function startUserbot(): Promise<void> {
   if (!API_ID || !API_HASH) throw new Error('TG_API_ID and TG_API_HASH required');
   if (CHANNEL_IDS.length === 0) throw new Error('TG_CHANNEL_IDS required (comma-separated)');
@@ -17,6 +37,7 @@ export async function startUserbot(): Promise<void> {
   const client = new TelegramClient(session, API_ID, API_HASH, {
     connectionRetries: 5,
   });
+  telegramClient = client;
 
   await client.start({
     phoneNumber: async () => { throw new Error('No session — run auth.ts first'); },

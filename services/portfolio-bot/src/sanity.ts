@@ -94,3 +94,17 @@ export async function findExistingPortfolio(slug: string): Promise<string | null
   const result = await client.fetch<string | null>(query, { slug });
   return result ?? null;
 }
+
+/**
+ * Sanity'dagi barcha mavjud loyihalarning slug va sarlavhalarini qaytaradi
+ */
+export async function getAllPortfolioSlugsAndTitles(): Promise<{ slug: string; title: string }[]> {
+  const query = `*[_type == 'portfolio']{ "slug": slug.current, title }`;
+  try {
+    const results = await client.fetch<Array<{ slug: string; title: string }>>(query);
+    return results ?? [];
+  } catch (err) {
+    console.error('[sanity] Failed to fetch all portfolio slugs:', err);
+    return [];
+  }
+}

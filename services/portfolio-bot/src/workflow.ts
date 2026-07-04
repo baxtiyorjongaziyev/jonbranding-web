@@ -3,9 +3,10 @@ import path from 'path';
 import type { WorkflowConfig, ProcessedPost } from './types.js';
 import { parseWithAI } from './ai-processor.js';
 import { downloadToTemp, getFolderInfo, listImagesInFolder, findFolderByName } from './drive-finder.js';
-import { createPortfolioDocument, findExistingPortfolio } from './sanity.js';
+import { createPortfolioDocument, findExistingPortfolio, getAllPortfolioSlugsAndTitles } from './sanity.js';
 import { fetchInstagramPosts } from './instagram.js';
 import { slugify } from './slug.js';
+import { sendTelegramMessage } from './userbot.js';
 
 /**
  * Workflow log fayli
@@ -368,6 +369,39 @@ export async function runWorkflow(config: WorkflowConfig = DEFAULT_CONFIG): Prom
     log('--- Latest uploads ---');
     for (const u of recentUploads) {
       log(`✅ ${u.aiData?.title || 'Unknown'} — ID: ${u.sanityId}`);
+    }
+  }
+
+  // 5. Google Drive vs Sanity taqqoslash (chiqmagan ishlarni aniqlash va Telegramga jo'natish)
+  if (config.googleDriveParentId) {
+    try {
+      log('[drive-sync] Checking for unpublished works in Google Drive...');
+      const driveFolders = await listSubfolders(config.googleDriveParentId);
+      const sanityPortfolios = await getAllPortfolioSlugsAndTitles();
+      
+      const sanitySlugs = new Set(sanityPortfolios.map(p => p.slug));
+      
+      const unpublishedFolders: string[] = [];
+      for (const folder of driveFolders) {
+        const folderSlug = slugify(folder.name, folder.id);
+        if (!sanitySlugs.has(folderSlug)) {
+          unpublishedFolders.push(folder.name);
+        }
+      }
+
+      if (unpublishedFolders.length > 0) {
+        log(`[drive-sync] Found ${unpublishedFolders.length} unpublished works: ${unpublishedFolders.join(', ')}`);
+        
+        const messageHeader = `📂 *Google Drive'dagi hali saytga chiqmagan ishlar ro'yxati (jami: ${unpublishedFolders.length} ta):*\n\n`;
+        const messageBody = unpublishedFolders.map((name, index) => `${index + 1}. \`${name}\``).join('\n');
+        const messageFooter = `\n\n💡 _Ushbu ishlarni portfolioga chiqarish uchun, ularning nomi bilan mos keluvchi Telegram postini kanalda e'lon qiling._`;
+        
+        await sendTelegramMessage(messageHeader + messageBody + messageFooter);
+      } else {
+        log('[drive-sync] All Google Drive works are published on Sanity.');
+      }
+    } catch (syncErr) {
+      log(`[drive-sync] Error comparing Drive and Sanity: ${syncErr}`);
     }
   }
 }
