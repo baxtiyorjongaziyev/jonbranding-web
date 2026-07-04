@@ -40,6 +40,7 @@ const nextConfig = {
     ];
   },
   experimental: {
+    cpus: 1,
     optimizeCss: true,
   },
   typescript: {
