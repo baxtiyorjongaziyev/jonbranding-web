@@ -4,6 +4,15 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-05 | Codex Vercel Build Crash Sessiyasi
+
+**Nima qilindi:**
+- Repo bo'ylab `<<<<<<<`, `=======`, `>>>>>>>` merge conflict markerlari tekshirildi: marker topilmadi.
+- `src/app/[lang]/pricing/sotuvchi-kartochka/layout.tsx` alohida tekshirildi: marker topilmadi.
+- Bugungi Vercel/GitHub CI crash sababi `src/components/sections/before-after.tsx` boshida commit bo'lib ketgan duplicate/chala blok ekani aniqlandi va tozalandi.
+
+---
+
 ## 2026-07-04 | Codex Testimonial Cover Sessiyasi
 
 **Nima qilindi:**
