@@ -61,6 +61,7 @@ async function processSinglePost(source, sourceId, text, config) {
         status: 'new',
         timestamp: new Date().toISOString(),
     };
+    let tmpDir;
     try {
         // 1. AI bilan tahlil qilish
         log(`[${source}:${sourceId}] AI analysis...`);
@@ -70,14 +71,11 @@ async function processSinglePost(source, sourceId, text, config) {
         // Drive linki bormi? Agar yo'q bo'lsa, nomi bo'yicha qidirib ko'ramiz
         if (!aiData.driveFolderId && config.googleDriveParentId) {
             log(`[${source}:${sourceId}] No direct Drive link. Searching by title: "${aiData.title}" or client: "${aiData.client}"...`);
-            let foundId = await findFolderByName(config.googleDriveParentId, aiData.title);
-            if (!foundId && aiData.client) {
-                foundId = await findFolderByName(config.googleDriveParentId, aiData.client);
-            }
-            if (foundId) {
-                aiData.driveFolderId = foundId;
-                result.driveFolderId = foundId;
-                log(`[${source}:${sourceId}] Matching folder found: ${foundId}`);
+            const found = await findFolderByName(config.googleDriveParentId, [aiData.title, aiData.client]);
+            if (found) {
+                aiData.driveFolderId = found.id;
+                result.driveFolderId = found.id;
+                log(`[${source}:${sourceId}] Matching folder found: "${found.name}" (${found.id})`);
             }
         }
         // 2. Agar drive linki kerak bo'lsa va yo'q bo'lsa — skip
@@ -104,6 +102,7 @@ async function processSinglePost(source, sourceId, text, config) {
             result.imageCount = images.length;
             // 4. Rasmlarni yuklab olish
             const imageFiles = await downloadToTemp(aiData.driveFolderId);
+            tmpDir = imageFiles[0]?.path ? path.dirname(imageFiles[0].path) : undefined;
             result.status = 'downloaded';
             // 5. Sanity'ga yuklash (autoUpload = true bo'lsa)
             if (config.autoUpload) {
@@ -129,6 +128,11 @@ async function processSinglePost(source, sourceId, text, config) {
         result.status = 'failed';
         result.error = error;
         log(`[${source}:${sourceId}] ❌ Error: ${error}`);
+    }
+    finally {
+        if (tmpDir && fs.existsSync(tmpDir)) {
+            fs.rmSync(tmpDir, { recursive: true, force: true });
+        }
     }
     return result;
 }
@@ -231,46 +235,35 @@ async function processGoogleDrive(config, state) {
                 result.imageCount = images.length;
                 log(`[drive:${folder.id}] Downloading ${images.length} images for AI analysis...`);
                 const downloadedFiles = await downloadToTemp(folder.id);
+                const tmpDir = downloadedFiles[0]?.path ? path.dirname(downloadedFiles[0].path) : undefined;
                 result.status = 'downloaded';
-                log(`[drive:${folder.id}] Multimodal AI analysis...`);
-                const aiData = await parseDriveFolderWithOisha(folder.name, textContent, downloadedFiles);
-                aiData.driveFolderId = folder.id;
-                result.aiData = aiData;
-                if (config.autoUpload) {
-                    const slug = slugify(aiData.title, folder.id);
-                    const existingId = await findExistingPortfolio(slug);
-                    if (existingId) {
-                        log(`[drive:${folder.id}] Portfolio already exists: ${existingId}`);
-                        result.sanityId = existingId;
-                        result.status = 'uploaded';
+                try {
+                    log(`[drive:${folder.id}] Multimodal AI analysis...`);
+                    const aiData = await parseDriveFolderWithOisha(folder.name, textContent, downloadedFiles);
+                    aiData.driveFolderId = folder.id;
+                    result.aiData = aiData;
+                    if (config.autoUpload) {
+                        const slug = slugify(aiData.title, folder.id);
+                        const existingId = await findExistingPortfolio(slug);
+                        if (existingId) {
+                            log(`[drive:${folder.id}] Portfolio already exists: ${existingId}`);
+                            result.sanityId = existingId;
+                            result.status = 'uploaded';
+                        }
+                        else {
+                            log(`[drive:${folder.id}] Uploading to Sanity...`);
+                            // Cover/tartib tanlash createPortfolioDocument ichida
+                            // (aiData.coverImageIndex / aiData.imageOrder orqali) markazlashtirilgan.
+                            const sanityId = await createPortfolioDocument(aiData, downloadedFiles);
+                            result.sanityId = sanityId;
+                            result.status = 'uploaded';
+                            log(`[drive:${folder.id}] ✅ Uploaded: ${sanityId}`);
+                        }
                     }
-                    else {
-                        log(`[drive:${folder.id}] Uploading to Sanity...`);
-                        // Apply AI image ordering
-                        let orderedFiles = [...downloadedFiles];
-                        if (aiData.imageOrder && Array.isArray(aiData.imageOrder)) {
-                            orderedFiles = aiData.imageOrder
-                                .filter(idx => idx >= 0 && idx < downloadedFiles.length)
-                                .map(idx => downloadedFiles[idx]);
-                            // Append any missing images at the end just in case AI skipped them
-                            const mappedIndexes = new Set(aiData.imageOrder);
-                            downloadedFiles.forEach((file, idx) => {
-                                if (!mappedIndexes.has(idx)) {
-                                    orderedFiles.push(file);
-                                }
-                            });
-                        }
-                        // Apply Cover Image
-                        if (typeof aiData.coverImageIndex === 'number' && aiData.coverImageIndex >= 0 && aiData.coverImageIndex < downloadedFiles.length) {
-                            const coverFile = downloadedFiles[aiData.coverImageIndex];
-                            // Remove cover from its current position in ordered array and unshift to front
-                            orderedFiles = orderedFiles.filter(f => f.path !== coverFile.path);
-                            orderedFiles.unshift(coverFile);
-                        }
-                        const sanityId = await createPortfolioDocument(aiData, orderedFiles);
-                        result.sanityId = sanityId;
-                        result.status = 'uploaded';
-                        log(`[drive:${folder.id}] ✅ Uploaded: ${sanityId}`);
+                }
+                finally {
+                    if (tmpDir && fs.existsSync(tmpDir)) {
+                        fs.rmSync(tmpDir, { recursive: true, force: true });
                     }
                 }
             }

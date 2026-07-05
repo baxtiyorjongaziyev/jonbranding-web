@@ -34,9 +34,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${project.title} | Jon.Branding Portfolio`,
-    description: project.description,
-    keywords: `${project.client}, brending, keys, dizayn, case study, premium branding`,
+    title: project.metaTitle || `${project.title} | Jon.Branding Portfolio`,
+    description: project.metaDescription || project.description,
+    keywords: project.seoKeywords?.length
+      ? project.seoKeywords.join(', ')
+      : `${project.client}, brending, keys, dizayn, case study, premium branding`,
   };
 }
 

@@ -14,6 +14,9 @@ export interface PortfolioProject {
   oldHint?: string;
   newHint?: string;
   description: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  seoKeywords?: string[];
   results?: { metric: string; value: string }[];
   body: { heading: string; paragraph: string }[];
   galleryImages?: string[];

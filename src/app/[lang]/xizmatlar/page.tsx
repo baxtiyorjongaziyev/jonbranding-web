@@ -3,11 +3,9 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import { safeJsonStringify } from '@/lib/security';
 import Script from 'next/script';
-import AtHero from '@/components/sections/at-hero';
 import AtMarquee from '@/components/sections/at-marquee';
 import AtManifesto from '@/components/sections/at-manifesto';
-import AtServices from '@/components/sections/at-services';
-import AtFinalCta from '@/components/sections/at-final-cta';
+import { XizmatlarHero, XizmatlarServices, XizmatlarFinalCta } from './xizmatlar-interactive';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
@@ -84,11 +82,11 @@ const ServicesPage = async (props: { params: Promise<{ lang: Locale }> }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbSchema) }}
       />
-      <AtHero onOpen={() => {}} lang={safeLang} />
+      <XizmatlarHero lang={safeLang} />
       <AtMarquee lang={safeLang} />
       <AtManifesto lang={safeLang} />
-      <AtServices onOpen={() => {}} lang={safeLang} />
-      <AtFinalCta onOpen={() => {}} lang={safeLang} />
+      <XizmatlarServices lang={safeLang} />
+      <XizmatlarFinalCta lang={safeLang} />
     </main>
   );
 };
