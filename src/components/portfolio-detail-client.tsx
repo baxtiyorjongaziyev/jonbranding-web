@@ -255,7 +255,10 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                 className="absolute inset-0 h-full overflow-hidden border-r-2 border-white/80"
                 style={{ width: `${sliderPosition}%` }}
               >
-                <div className="absolute inset-0 w-full h-full" style={{ width: '100%' }}>
+                <div
+                  className="absolute inset-0 h-full"
+                  style={{ width: sliderPosition > 0 ? `${(100 / sliderPosition) * 100}%` : '100%' }}
+                >
                   <Image
                     src={project.beforeImage}
                     alt={project.oldHint || 'Before'}
@@ -263,7 +266,6 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                     sizes="100vw"
                     className="object-cover"
                     draggable={false}
-                    style={{ width: '100vw', maxWidth: 'none' }}
                   />
                 </div>
                 <div className="absolute bottom-6 left-6 px-5 py-2.5 rounded-full bg-black/70 backdrop-blur-md text-xs font-black uppercase tracking-widest border border-white/10 z-25 shadow-lg whitespace-nowrap">
