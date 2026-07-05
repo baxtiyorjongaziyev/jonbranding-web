@@ -8,45 +8,6 @@ import { Button } from '@/components/ui/button';
 import { projects } from '@/lib/static-data';
 import { trackEvent } from '@/lib/analytics';
 import { renderHeadline } from '@/lib/headline';
-
-interface SanityComparison {
-  brand: string;
-  oldImg: string;
-  newImg: string;
-  oldHint: string;
-  newHint: string;
-  order: number;
-}
-
-interface BeforeAfterProps {
-  lang: string;
-  dictionary: {
-    eyebrow?: string;
-    title?: string;
-    subtitle?: string;
-    cta?: string;
-    ctaButton?: string;
-    caseLabel?: string;
-    proofCards?: Array<{ value: string; label: string }>;
-  };
-  comparisons?: SanityComparison[];
-}
-
-const DEFAULT_COMPARISONS: SanityComparison[] = projects
-  .filter((project) => project.oldImg && project.newImg)
-  .map((project, index) => ({
-    brand: project.brand,
-    oldImg: project.oldImg,
-'use client';
-
-import { useState, useEffect } from 'react';
-import { ArrowRight, BadgeCheck, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
-import ImageComparisonSlider from '@/components/image-comparison-slider';
-import { Button } from '@/components/ui/button';
-import { projects } from '@/lib/static-data';
-import { trackEvent } from '@/lib/analytics';
-import { renderHeadline } from '@/lib/headline';
 import { cn } from '@/lib/utils';
 
 interface SanityComparison {
