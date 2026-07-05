@@ -33,7 +33,7 @@ nano ~/jonbranding-web/services/portfolio-bot/.env
 | `SANITY_DATASET` | `production` |
 | `SANITY_TOKEN` | sanity.io/manage → loyiha → API → Tokens → Add API token → **Editor** huquqi |
 | `APIFY_API_KEY` | (ixtiyoriy, Instagram uchun) https://console.apify.com — bo'sh qoldirsa mock data ishlatiladi |
-| `DRIVE_PARENT_FOLDER_ID` | Google Drive'da "navbat" papkasi ID'si (papka linkidagi `folders/` dan keyingi qism) |
+| `DRIVE_PARENT_FOLDER_ID` | **Majburiy.** Har bir loyiha uchun rasm subfolder'lari shu papka ichida bo'lishi kerak. Telegram postidan olingan loyiha/mijoz nomi shu subfolder'lar nomi bilan solishtirilib qidiriladi (link shart emas) — subfolder nomini loyiha nomiga imkon qadar yaqin qiling |
 | `TG_NOTIFY_CHAT_ID` | Natija xabarlari yuboriladigan Telegram chat ID (o'zingizga yozib qo'yish uchun) |
 
 ## 3-qadam: Telegram sessiyasini generatsiya qiling (bir martalik, interaktiv)
@@ -76,10 +76,24 @@ saqlanib qoladi.
 
 ## Qanday ishlaydi
 
-- **Telegram** — `@JonBranding` kanaliga Google Drive papka linki bilan post
-  tashlansa, bot darhol o'qiydi (jonli tinglovchi, doimiy ulanish).
+- **Telegram** — `@JonBranding` kanaliga oddiy matn bilan post tashlansa
+  (Drive linki shart emas), bot darhol o'qiydi:
+  1. Gemini postdan loyiha/mijoz nomini ajratadi (tezkor chaqiruv).
+  2. `DRIVE_PARENT_FOLDER_ID` ichidagi subfolder'lar orasidan shu nomga
+     eng mos kelganini so'z-ustma-ustlik bo'yicha qidiradi.
+  3. Topilgan papkadagi rasmlarni yuklab, Gemini'ga matn + barcha rasmlarni
+     birga beradi — u to'liq case matnini, SEO meta-data'ni (sarlavha,
+     tavsif, kalit so'zlar) va rasmlar ichidan eng mos **cover**'ni hamda
+     qolganlarining ko'rsatilish tartibini bitta chaqiruvda aniqlaydi.
 - **Instagram / Google Drive** — har soatda (`INTERVAL_MINUTES=60`, `.env`da
-  o'zgartirish mumkin) tekshiriladi.
-- Har ikkala holatda ham: Gemini AI matn/rasmni tahlil qiladi → Sanity'ga
-  case sifatida **to'g'ridan-to'g'ri publish** qiladi (qo'lda tasdiqlash
-  shart emas) → saytda 60 soniya ichida chiqadi.
+  o'zgartirish mumkin) tekshiriladi, xuddi shu tarzda cover/tartib va SEO
+  meta-data bilan.
+- Har ikkala holatda ham natija Sanity'ga case sifatida **to'g'ridan-to'g'ri
+  publish** qilinadi (qo'lda tasdiqlash shart emas) → saytda 60 soniya
+  ichida chiqadi.
+
+**Muhim:** qidiruv nom bo'yicha ishlagani uchun Drive'dagi subfolder nomi
+loyiha yoki mijoz nomiga imkon qadar yaqin bo'lishi kerak (masalan
+"Fidda by Sevara" posti uchun `Fidda_Sevara` yoki `Fidda by Sevara` nomli
+papka mos keladi, lekin butunlay bog'liqsiz nom — masalan sana yoki
+raqam — topilmaydi).

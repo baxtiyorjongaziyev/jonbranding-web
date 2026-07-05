@@ -196,6 +196,69 @@ export async function listSubfolders(
   return all;
 }
 
+function normalizeName(text: string): string {
+  return text
+    .toLowerCase()
+    // O'zbekcha ў/қ/ғ/ҳ so'zlarida apostrof harf ichida bo'ladi (masalan
+    // "Sog'lom", "G'olib") — bo'shliq bilan almashtirsak so'z bo'linib
+    // ketadi, shuning uchun avval shunchaki olib tashlaymiz.
+    .replace(/['’‘ʻʼ`]/g, '')
+    .replace(/[^a-z0-9Ѐ-ӿ؀-ۿ]+/g, ' ')
+    .trim();
+}
+
+function wordOverlapScore(a: string, b: string): number {
+  const wa = new Set(normalizeName(a).split(' ').filter(Boolean));
+  const wb = new Set(normalizeName(b).split(' ').filter(Boolean));
+  if (wa.size === 0 || wb.size === 0) return 0;
+  let overlap = 0;
+  for (const w of wa) if (wb.has(w)) overlap++;
+  return overlap / Math.max(wa.size, wb.size);
+}
+
+/** Bo'shliqsiz shakl — "Den Aroma" va "Denaroma_2026" kabi holatlarni ham topish uchun */
+function collapsedSubstringScore(a: string, b: string): number {
+  const ca = normalizeName(a).replace(/ /g, '');
+  const cb = normalizeName(b).replace(/ /g, '');
+  if (ca.length < 3 || cb.length < 3) return 0;
+  if (ca.includes(cb) || cb.includes(ca)) {
+    return Math.min(ca.length, cb.length) / Math.max(ca.length, cb.length);
+  }
+  return 0;
+}
+
+function nameSimilarity(a: string, b: string): number {
+  return Math.max(wordOverlapScore(a, b), collapsedSubstringScore(a, b));
+}
+
+/**
+ * `parentFolderId` ichidagi subfolderlar orasidan `candidates` (masalan
+ * [loyiha nomi, mijoz nomi]) ga eng mos keladiganini so'z-ustma-ustlik
+ * (yoki bo'shliqsiz substring) bo'yicha topadi. Aniq link kerak emas —
+ * faqat nom bo'yicha qidiradi.
+ */
+export async function findFolderByName(
+  parentFolderId: string,
+  candidates: string[],
+  minScore = 0.4
+): Promise<{ id: string; name: string } | null> {
+  const folders = await listSubfolders(parentFolderId);
+  let best: { folder: { id: string; name: string }; score: number } | null = null;
+
+  for (const folder of folders) {
+    for (const candidate of candidates) {
+      if (!candidate) continue;
+      const score = nameSimilarity(folder.name, candidate);
+      if (!best || score > best.score) {
+        best = { folder: { id: folder.id, name: folder.name }, score };
+      }
+    }
+  }
+
+  if (best && best.score >= minScore) return best.folder;
+  return null;
+}
+
 /**
  * Berilgan folder ichidan .txt faylni qidirib, uning matnini qaytaradi
  */
@@ -223,51 +286,3 @@ export async function getTextFileContent(folderId: string): Promise<string | nul
     return null;
   }
 }
-
-/**
- * Berilgan parent folder ichidan loyiha yoki mijoz nomiga mos keluvchi subfolderni qidiradi
- */
-export async function findFolderByName(
-  parentFolderId: string,
-  projectName: string
-): Promise<string | null> {
-  if (!parentFolderId || !projectName) return null;
-  const auth = getAuth();
-  const drive = google.drive({ version: 'v3', auth });
-
-  try {
-    const cleanName = projectName.trim().toLowerCase();
-    console.log(`[drive-finder] Searching for subfolder matching: "${cleanName}"`);
-
-    // Hamma subfolderlarni olamiz
-    const subfolders = await listSubfolders(parentFolderId);
-    
-    // Exact yoki qisman mos keluvchi papkani qidirish
-    for (const folder of subfolders) {
-      const folderName = folder.name.toLowerCase();
-      // Papka nomi loyiha nomini o'z ichiga olgan bo'lsa yoki aksincha
-      if (folderName.includes(cleanName) || cleanName.includes(folderName)) {
-        console.log(`[drive-finder] Found matching folder: "${folder.name}" (${folder.id})`);
-        return folder.id;
-      }
-    }
-
-    // Agar to'liq mos kelmasa, so'zma-so'z qidiramiz (birinchi so'z bo'yicha)
-    const firstWord = cleanName.split(/\s+/)[0];
-    if (firstWord && firstWord.length > 2) {
-      for (const folder of subfolders) {
-        const folderName = folder.name.toLowerCase();
-        if (folderName.includes(firstWord)) {
-          console.log(`[drive-finder] Found fuzzy matching folder by first word: "${folder.name}" (${folder.id})`);
-          return folder.id;
-        }
-      }
-    }
-
-    console.warn(`[drive-finder] No folder matching "${projectName}" found under parent ${parentFolderId}`);
-    return null;
-  } catch (err) {
-    console.error(`[drive-finder] Error finding folder by name:`, err);
-    return null;
-  }
-}

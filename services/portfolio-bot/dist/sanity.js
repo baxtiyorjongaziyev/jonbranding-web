@@ -19,13 +19,38 @@ async function uploadImageFile(filePath, mime) {
     return { _type: 'reference', _ref: asset._id };
 }
 /**
+ * AI aniqlagan `coverImageIndex` / `imageOrder` asosida rasmlarni tartiblab,
+ * muqova rasmini eng boshiga chiqaradi. Agar AI hech narsa aniqlamagan
+ * bo'lsa, asl tartib (birinchi rasm = muqova) saqlanadi.
+ */
+function applyCoverAndOrder(imageFiles, coverImageIndex, imageOrder) {
+    let ordered = imageFiles;
+    if (imageOrder && Array.isArray(imageOrder) && imageOrder.length > 0) {
+        const seen = new Set();
+        ordered = imageOrder
+            .filter((idx) => idx >= 0 && idx < imageFiles.length && !seen.has(idx) && seen.add(idx))
+            .map((idx) => imageFiles[idx]);
+        // AI o'tkazib yuborgan rasmlarni oxiriga qo'shib qo'yamiz
+        imageFiles.forEach((file, idx) => {
+            if (!seen.has(idx))
+                ordered.push(file);
+        });
+    }
+    if (typeof coverImageIndex === 'number' && coverImageIndex >= 0 && coverImageIndex < imageFiles.length) {
+        const coverFile = imageFiles[coverImageIndex];
+        ordered = ordered.filter((f) => f.path !== coverFile.path);
+        ordered.unshift(coverFile);
+    }
+    return ordered;
+}
+/**
  * Portfolio dokumentini yaratish (rasmlarni upload qilib, Sanity'ga saqlaydi)
  */
 export async function createPortfolioDocument(parsed, imageFiles, bodyBlocks) {
     if (imageFiles.length === 0) {
         throw new Error('No images provided for portfolio document');
     }
-    const [cover, ...rest] = imageFiles;
+    const [cover, ...rest] = applyCoverAndOrder(imageFiles, parsed.coverImageIndex, parsed.imageOrder);
     const coverAsset = await uploadImageFile(cover.path, cover.mime);
     // Galereya rasmlari
     const galleryAssets = await Promise.all(rest.map((f) => uploadImageFile(f.path, f.mime)));
@@ -51,6 +76,9 @@ export async function createPortfolioDocument(parsed, imageFiles, bodyBlocks) {
         featured: false,
         publishedAt: new Date().toISOString(),
         order: Math.floor(Date.now() / 1000),
+        metaTitle: parsed.metaTitle,
+        metaDescription: parsed.metaDescription,
+        seoKeywords: parsed.seoKeywords,
     };
     const doc = await client.create(payload);
     return doc._id;

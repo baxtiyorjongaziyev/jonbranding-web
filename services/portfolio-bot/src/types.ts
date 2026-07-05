@@ -25,6 +25,18 @@ export interface AIEnrichedData {
   testimonials?: string[];
   coverImageIndex?: number;
   imageOrder?: number[];
+  /** SEO — sahifa <title> uchun, taxminan 60 belgigacha */
+  metaTitle?: string;
+  /** SEO — <meta name="description"> uchun, taxminan 160 belgigacha */
+  metaDescription?: string;
+  /** SEO — qidiruv kalit so'zlari */
+  seoKeywords?: string[];
+}
+
+/** Faqat Drive'da qidirish uchun kerakli minimal ma'lumot (tezkor, faqat matn) */
+export interface SearchTerms {
+  title: string;
+  client: string;
 }
 
 export interface SanityImageAsset {
@@ -48,6 +60,9 @@ export interface PortfolioPayload {
   featured: boolean;
   publishedAt: string;
   order?: number;
+  metaTitle?: string;
+  metaDescription?: string;
+  seoKeywords?: string[];
 }
 
 export interface WorkflowConfig {
