@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateSummary } from './pricing';
+import { generateSummary, calculatePackagePrice } from './pricing';
 
 describe('generateSummary', () => {
     it('should generate an empty string when no services are selected', () => {
@@ -86,4 +86,32 @@ describe('generateSummary', () => {
         };
         expect(generateSummary(selections)).toBe('Logo Auditi');
     });
+});
+
+describe('calculatePackagePrice promo code validation', () => {
+    const baseSelections = {
+        selectedServices: { logoStandard: true },
+        discountType: 'none',
+    };
+
+    it('rejects an arbitrary code (no discount applied)', () => {
+        const result = calculatePackagePrice({ ...baseSelections, promoCode: 'RANDOMCODE' });
+        expect(result.isPromoApplied).toBe(false);
+        expect(result.discountApplied).toHaveLength(0);
+    });
+
+    it('rejects an empty code', () => {
+        const result = calculatePackagePrice({ ...baseSelections, promoCode: '' });
+        expect(result.isPromoApplied).toBe(false);
+    });
+
+    it.each(['RAMAZON', 'PCG', 'TEZNATIJA', 'KURSDOSH', 'SALOM', 'ISTISNO'])(
+        'accepts valid code %s (case-insensitive) and applies a discount',
+        (code) => {
+            const result = calculatePackagePrice({ ...baseSelections, promoCode: code.toLowerCase() });
+            expect(result.isPromoApplied).toBe(true);
+            expect(result.discountApplied.length).toBeGreaterThan(0);
+            expect(result.final).toBeLessThan(result.base);
+        }
+    );
 });
