@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { projects } from '@/lib/static-data';
 import { trackEvent } from '@/lib/analytics';
 import { renderHeadline } from '@/lib/headline';
-import { cn } from '@/lib/utils';
 
 interface SanityComparison {
   brand: string;
@@ -113,22 +112,18 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
           </div>
         ) : null}
 
-        {/* Bento Parallax Offsetting Grid */}
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
+        {/* Even, symmetric showcase grid — 4 cases read as one coherent set */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-stretch">
           {displayItems.map((item, idx) => {
-            const isEven = idx % 2 === 1;
             return (
               <motion.div
                 key={item.brand || idx}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -6 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.7, delay: idx * 0.15 }}
-                className={cn(
-                  "group relative overflow-hidden rounded-[32px] border border-neutral-900 bg-neutral-950 p-4 transition-all duration-700 hover:border-neutral-800",
-                  // Apply slight vertical offset to create asymmetric premium gallery layout (Bento Parallax)
-                  isEven ? "md:translate-y-16" : "md:translate-y-0"
-                )}
+                className="group relative flex flex-col overflow-hidden rounded-[32px] border border-neutral-900 bg-neutral-950 p-4 transition-colors duration-500 hover:border-neutral-800"
               >
                 {/* Radial Glow on Hover */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(132,204,22,0.06)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[32px]" />
