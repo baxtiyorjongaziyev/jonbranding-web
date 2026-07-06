@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateSummary, calculatePackagePrice } from './pricing';
+import { generateSummary, calculatePackagePrice, VALID_PROMO_CODES } from './pricing';
 
 describe('generateSummary', () => {
     it('should generate an empty string when no services are selected', () => {
@@ -105,7 +105,7 @@ describe('calculatePackagePrice promo code validation', () => {
         expect(result.isPromoApplied).toBe(false);
     });
 
-    it.each(['RAMAZON', 'PCG', 'TEZNATIJA', 'KURSDOSH', 'SALOM', 'ISTISNO'])(
+    it.each(VALID_PROMO_CODES)(
         'accepts valid code %s (case-insensitive) and applies a discount',
         (code) => {
             const result = calculatePackagePrice({ ...baseSelections, promoCode: code.toLowerCase() });

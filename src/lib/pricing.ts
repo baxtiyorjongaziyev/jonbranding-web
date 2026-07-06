@@ -2,7 +2,7 @@
 
 const USD_TO_UZS_RATE = 12700;
 
-const VALID_PROMO_CODES = ['RAMAZON', 'PCG', 'TEZNATIJA', 'KURSDOSH', 'SALOM', 'ISTISNO'];
+export const VALID_PROMO_CODES: readonly string[] = ['RAMAZON', 'PCG', 'TEZNATIJA', 'KURSDOSH', 'SALOM', 'ISTISNO'];
 
 export type SelectedServices = {
     audit?: boolean;
