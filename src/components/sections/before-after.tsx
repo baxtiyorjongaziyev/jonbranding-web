@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Sparkles, BarChart3, Target, TrendingUp } from 'lucide-react';
+import { ArrowRight, BarChart3, Target, TrendingUp } from 'lucide-react';
 import { motion } from 'motion/react';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
 import { Button } from '@/components/ui/button';
@@ -59,6 +59,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
   };
 
   if (!translations || !displayItems || displayItems.length === 0) return null;
+
+  const gridSpans = [7, 5, 5, 7];
 
   return (
     <section className="py-[100px] md:py-[140px] relative z-[2] overflow-hidden bg-neutral-950">
@@ -147,41 +149,43 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
           </motion.div>
         ) : null}
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start">
-          {displayItems.map((item, idx) => (
+        <div className="grid md:grid-cols-12 gap-3 md:gap-5 items-start">
+          {displayItems.slice(0, 4).map((item, idx) => (
             <motion.div
               key={item.brand || idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: 0.35 + idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              className="group"
+              transition={{ duration: 0.5, delay: 0.35 + idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className={cn(
+                "group relative overflow-hidden rounded-2xl bg-neutral-900 border border-neutral-800/50 transition-all duration-500",
+                idx === 0 && "md:col-span-7",
+                idx === 1 && "md:col-span-5",
+                idx === 2 && "md:col-span-5",
+                idx === 3 && "md:col-span-7"
+              )}
             >
-              <div className="relative rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800/60 transition-all duration-500 group-hover:border-neutral-700/80 group-hover:shadow-[0_0_30px_rgba(37,99,235,0.06)]">
-                <ImageComparisonSlider
-                  beforeImage={{
-                    src: item.oldImg,
-                    alt: `${item.brand} old`,
-                    'data-ai-hint': item.oldHint || ''
-                  }}
-                  afterImage={{
-                    src: item.newImg,
-                    alt: `${item.brand} new`,
-                    'data-ai-hint': item.newHint || ''
-                  }}
-                  lang={lang}
-                />
-                <div className="flex items-center justify-between gap-4 px-5 py-4 border-t border-neutral-800/40">
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm font-bold text-white tracking-tight">{item.brand}</span>
-                  </div>
-                  {translations.caseLabel && (
-                    <span className="inline-flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-[8px] uppercase tracking-[0.12em] text-[var(--at-accent)] bg-[var(--at-accent)]/8 px-2.5 py-1 rounded-full border border-[var(--at-accent)]/10">
-                      <Sparkles className="h-3 w-3" />
-                      {translations.caseLabel}
-                    </span>
-                  )}
-                </div>
+              <ImageComparisonSlider
+                beforeImage={{
+                  src: item.oldImg,
+                  alt: `${item.brand} old`,
+                  'data-ai-hint': item.oldHint || ''
+                }}
+                afterImage={{
+                  src: item.newImg,
+                  alt: `${item.brand} new`,
+                  'data-ai-hint': item.newHint || ''
+                }}
+                lang={lang}
+                hideLabels
+              />
+              <div className={cn(
+                "absolute bottom-3 z-20",
+                idx % 2 === 0 ? "left-3" : "right-3"
+              )}>
+                <span className="text-[11px] font-bold text-white/90 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/5">
+                  {item.brand}
+                </span>
               </div>
             </motion.div>
           ))}

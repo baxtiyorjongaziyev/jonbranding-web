@@ -11,6 +11,7 @@ interface ImageComparisonSliderProps {
   afterImage: Omit<ImageProps, 'fill' | 'className'> & { [key: string]: any };
   className?: string;
   lang: string;
+  hideLabels?: boolean;
 }
 
 const translationMap: Record<string, { before: string; after: string }> = {
@@ -19,7 +20,7 @@ const translationMap: Record<string, { before: string; after: string }> = {
   zh: { before: "之前", after: "之后" },
 };
 
-const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: ImageComparisonSliderProps) => {
+const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang, hideLabels }: ImageComparisonSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0.5);
   const translations = translationMap[lang] || { before: "BEFORE", after: "AFTER" };
@@ -60,11 +61,13 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
-        <div className="absolute top-3 left-3 z-20">
-          <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.15em] text-white/50 font-bold bg-black/60 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-white/5">
-            {translations.before}
-          </span>
-        </div>
+        {!hideLabels && (
+          <div className="absolute top-3 left-3 z-20">
+            <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.15em] text-white/50 font-bold bg-black/60 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-white/5">
+              {translations.before}
+            </span>
+          </div>
+        )}
       </div>
 
       <motion.div
@@ -81,11 +84,13 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
-          <div className="absolute top-3 right-3 z-20">
-            <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.15em] text-[var(--at-accent)] font-bold bg-black/60 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-[var(--at-accent)]/20">
-              {translations.after}
-            </span>
-          </div>
+          {!hideLabels && (
+            <div className="absolute top-3 right-3 z-20">
+              <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.15em] text-[var(--at-accent)] font-bold bg-black/60 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-[var(--at-accent)]/20">
+                {translations.after}
+              </span>
+            </div>
+          )}
         </div>
       </motion.div>
 
