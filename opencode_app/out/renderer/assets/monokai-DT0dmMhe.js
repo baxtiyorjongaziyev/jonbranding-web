@@ -1,0 +1,39 @@
+!(function() {
+  try {
+    var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+    e.SENTRY_RELEASE = { id: "desktop@1.17.13" };
+  } catch (e2) {
+  }
+})();
+;
+{
+  try {
+    (function() {
+      var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {}, n = new e.Error().stack;
+      n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "4ff4cf21-0c57-4209-965b-419aa539ded6", e._sentryDebugIdIdentifier = "sentry-dbid-4ff4cf21-0c57-4209-965b-419aa539ded6");
+    })();
+  } catch (e) {
+  }
+}
+;
+const $schema = "https://opencode.ai/desktop-theme.json";
+const name = "Monokai";
+const id = "monokai";
+const light = { "palette": { "neutral": "#fdf8ec", "ink": "#292318", "primary": "#bf7bff", "accent": "#d9487c", "success": "#4fb54b", "warning": "#f1a948", "error": "#e54b4b", "info": "#2d9ad7", "diffAdd": "#bfe7a3", "diffDelete": "#f6a3ae" }, "overrides": { "syntax-comment": "#8a816f", "syntax-keyword": "#d9487c", "syntax-string": "#8a6500", "syntax-primitive": "#3c8d2f", "syntax-property": "#1f88c8", "syntax-constant": "#9b5fe0" } };
+const dark = { "palette": { "neutral": "#272822", "ink": "#f8f8f2", "primary": "#ae81ff", "accent": "#f92672", "success": "#a6e22e", "warning": "#fd971f", "error": "#f92672", "info": "#66d9ef", "diffAdd": "#4d7f2a", "diffDelete": "#f4477c" }, "overrides": { "syntax-comment": "#75715e", "syntax-keyword": "#f92672", "syntax-string": "#e6db74", "syntax-primitive": "#a6e22e", "syntax-property": "#66d9ef", "syntax-constant": "#ae81ff" } };
+const monokai = {
+  $schema,
+  name,
+  id,
+  light,
+  dark
+};
+export {
+  $schema,
+  dark,
+  monokai as default,
+  id,
+  light,
+  name
+};
+//# sourceMappingURL=monokai-DT0dmMhe.js.map

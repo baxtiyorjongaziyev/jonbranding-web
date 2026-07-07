@@ -4,6 +4,22 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-05 | Headroom Proxy Fix — Codex Stream Disconnect
+
+**Muammo:** Codex client-da `stream disconnected before completion: error sending request for url (http://127.0.0.1:8787/v1/responses)` xatosi.
+
+**Ildiz sababi:** Headroom proxy (`headroom.EXE`) port 8787 da ishlamayotgan edi. `headroom doctor` tekshiruvi `proxy not reachable` ko'rsatdi. Codex configi `openai_base_url = "http://127.0.0.1:8787/v1"` ga yo'naltirilgan, lekin proxy processi o'lik edi (5 ta zombie MCP server processi bor edi, proxy processi yo'q).
+
+**Nima qilindi:**
+- Barcha headroom zombie processlari o'ldirildi
+- `headroom proxy` qayta ishga tushirildi (PID 11124, port 8787)
+- `/health`, `/livez`, `/readyz`, `/stats` endpointlari ishlayotgani tasdiqlandi
+- Avtomatik ishga tushish uchun Windows Registry Run key qo'shildi: `HKCU:\Software\Microsoft\Windows\CurrentVersion\Run\HeadroomProxy`
+
+**Natija:** Codex Headroom proxy orqali normal ishlashi kerak. Proxy qayta yuklanganda ham Registry orqali avtomatik ishga tushadi.
+
+---
+
 ## 2026-07-05 | Codex Vercel Build Crash Sessiyasi
 
 **Nima qilindi:**
