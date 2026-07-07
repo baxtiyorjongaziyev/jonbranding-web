@@ -56,11 +56,14 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
             {...beforeImage}
             alt={beforeImage.alt ?? translations.before}
             fill
-            className="object-cover pointer-events-none"
+            className="object-cover pointer-events-none brightness-[0.85]"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute top-3 left-3 bg-black/50 text-white/80 px-2.5 py-1 rounded-md text-[9px] font-bold tracking-[0.15em] z-20 font-[family-name:var(--font-mono)]">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
+        <div className="absolute top-3 left-3 z-20">
+          <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.15em] text-white/50 font-bold bg-black/60 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-white/5">
             {translations.before}
+          </span>
         </div>
       </div>
 
@@ -77,23 +80,27 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang }: Ima
               className="object-cover pointer-events-none"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          <div className="absolute top-3 right-3 bg-black/50 text-white/80 px-2.5 py-1 rounded-md text-[9px] font-bold tracking-[0.15em] z-20 font-[family-name:var(--font-mono)]">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
+          <div className="absolute top-3 right-3 z-20">
+            <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.15em] text-[var(--at-accent)] font-bold bg-black/60 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-[var(--at-accent)]/20">
               {translations.after}
+            </span>
           </div>
         </div>
       </motion.div>
 
       <motion.div
-        className="absolute inset-y-0 w-[1px] z-30 pointer-events-none bg-white/20"
+        className="absolute inset-y-0 w-[2px] z-30 pointer-events-none"
         style={{ left: handleX }}
         initial={{ left: '50%' }}
       >
-        <div className="absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full flex items-center justify-center left-1/2 -translate-x-1/2 cursor-grab active:cursor-grabbing bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 hover:scale-110 active:scale-95">
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--at-accent)]/60 via-[var(--at-accent)] to-[var(--at-accent)]/60" />
+        <div className="absolute top-1/2 -translate-y-1/2 h-11 w-11 rounded-full flex items-center justify-center left-1/2 -translate-x-1/2 cursor-grab active:cursor-grabbing bg-neutral-900/80 backdrop-blur-xl border-2 border-[var(--at-accent)]/50 shadow-[0_0_20px_rgba(37,99,235,0.25)] transition-all duration-300 group-hover:scale-110 active:scale-95 hover:border-[var(--at-accent)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]">
             <div className="flex items-center gap-0.5">
-                <ChevronLeft size={12} className="text-white/70" strokeWidth={2} />
-                <ChevronRight size={12} className="text-white/70" strokeWidth={2} />
+              <ChevronLeft size={13} className="text-white/80" strokeWidth={2.5} />
+              <ChevronRight size={13} className="text-white/80" strokeWidth={2.5} />
             </div>
-        </div>
+          </div>
       </motion.div>
     </motion.div>
   );
