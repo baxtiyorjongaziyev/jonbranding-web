@@ -24,18 +24,21 @@ export async function downloadToTemp(folderId: string): Promise<{ path: string; 
 
   const files = list.data.files ?? [];
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-'));
-  const result: { path: string; mime: string }[] = [];
 
-  for (const file of files) {
-    if (!file.id || !file.name) continue;
-    const dest = path.join(tmpDir, file.name);
-    const res = await drive.files.get(
-      { fileId: file.id, alt: 'media' },
-      { responseType: 'arraybuffer' }
-    );
-    fs.writeFileSync(dest, Buffer.from(res.data as ArrayBuffer));
-    result.push({ path: dest, mime: file.mimeType ?? 'image/jpeg' });
-  }
+  const results = await Promise.all(
+    files.map(async (file) => {
+      if (!file.id || !file.name) return null;
+      const dest = path.join(tmpDir, file.name);
 
-  return result;
+      const res = await drive.files.get(
+        { fileId: file.id, alt: 'media' },
+        { responseType: 'arraybuffer' }
+      );
+
+      await fs.promises.writeFile(dest, Buffer.from(res.data as ArrayBuffer));
+      return { path: dest, mime: file.mimeType ?? 'image/jpeg' };
+    })
+  );
+
+  return results.filter((r): r is { path: string; mime: string } => r !== null);
 }

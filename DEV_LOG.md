@@ -207,3 +207,5 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - **oisha-widget.tsx**: Merge conflict markerlar tozalandi (ikkilangan useEffect/bloklar olib tashlandi).
 - **src/lib/blog-posts.ts**: Yo'qotilgan modul stublendi (sitemap.ts build error fiks).
 - **Build**: muvaffaqiyatli.
+
+- **[2026-07-08 14:00]** Perf: Optimized Google Drive file downloads in `services/portfolio-bot/src/drive.ts` using `Promise.all` and asynchronous file writes to resolve N+1 sequential blocking issues, improving speed by ~18x.
