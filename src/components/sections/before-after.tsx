@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowRight, BarChart3, Target, TrendingUp } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import ImageComparisonSlider from '@/components/image-comparison-slider';
 import { Button } from '@/components/ui/button';
 import { projects } from '@/lib/static-data';

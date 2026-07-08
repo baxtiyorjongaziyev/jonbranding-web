@@ -36,7 +36,7 @@ const stagger = {
 
 const slideIn = {
   hidden: { opacity: 0, x: -16 },
-  visible: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 260, damping: 28 } },
+  visible: { opacity: 1, x: 0, transition: { type: 'spring' as const, stiffness: 260, damping: 28 } },
 };
 
 export function MobileMenu({
