@@ -80,7 +80,7 @@ async function handleSync(request: NextRequest) {
     // Batch fetch existing documents
     const query = `*[_type == "portfolio" && googleDriveFolderId in $folderIds]`;
     const existingDocs = await sanityWriteClient.fetch(query, { folderIds });
-    const existingDocMap = new Map(existingDocs.map((doc: any) => [doc.googleDriveFolderId, doc]));
+    const existingDocMap = new Map<string, any>(existingDocs.map((doc: any) => [doc.googleDriveFolderId, doc]));
 
     // Batch delete if force update is on
     if (forceUpdate && existingDocs.length > 0) {
