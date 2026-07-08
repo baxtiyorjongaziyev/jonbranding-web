@@ -15,14 +15,14 @@ import {
   type LucideProps,
 } from 'lucide-react';
 import { useState, type FC } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import DOMPurify from 'isomorphic-dompurify';
 import { renderHeadline } from '@/lib/headline';
 import type { FounderDictionary } from '@/lib/types/dictionary';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
-const containerVariants = {
+const containerVariants: any = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -30,7 +30,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: any = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
@@ -59,7 +59,6 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
         className="max-w-[1320px] mx-auto px-5 md:px-8"
       >
         <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 lg:gap-16">
-
           {/* ── LEFT: Portrait / Video ── */}
           <motion.div variants={itemVariants} className="flex items-center justify-center">
             <div
@@ -81,9 +80,16 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
                     <div className="absolute bottom-4 left-4 right-4">
                       <button
                         type="button"
-                        onClick={() => { setShowVideo(true); setUnmuted(true); }}
+                        onClick={() => {
+                          setShowVideo(true);
+                          setUnmuted(true);
+                        }}
                         className="group inline-flex items-center gap-3 rounded-full py-2 pl-2 pr-5 text-sm font-semibold transition-all hover:opacity-90"
-                        style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}
+                        style={{
+                          background: 'var(--at-paper)',
+                          border: '1px solid var(--at-line)',
+                          color: 'var(--at-ink)',
+                        }}
                       >
                         <span
                           className="flex h-9 w-9 items-center justify-center rounded-full"
@@ -91,7 +97,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
                         >
                           <PlayCircle className="h-5 w-5" aria-hidden="true" />
                         </span>
-                        {translations.videoButton || "Asoschidan 45 soniya"}
+                        {translations.videoButton || 'Asoschidan 45 soniya'}
                       </button>
                     </div>
                   </>
@@ -109,8 +115,12 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
                       type="button"
                       onClick={() => setUnmuted(!unmuted)}
                       className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full transition-all hover:opacity-80"
-                      style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', border: '1px solid var(--at-line)' }}
-                      aria-label={unmuted ? "Ovozni o'chirish" : "Ovozni yoqish"}
+                      style={{
+                        background: 'var(--at-bg)',
+                        color: 'var(--at-ink)',
+                        border: '1px solid var(--at-line)',
+                      }}
+                      aria-label={unmuted ? "Ovozni o'chirish" : 'Ovozni yoqish'}
                     >
                       {unmuted ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
                     </button>
@@ -122,13 +132,21 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
 
           {/* ── RIGHT: Text content ── */}
           <motion.div variants={itemVariants} className="flex flex-col gap-5">
-
             {/* Eyebrow */}
             <div
               className="inline-flex items-center gap-2"
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--at-muted)' }}
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 11,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'var(--at-muted)',
+              }}
             >
-              <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: 'var(--at-green)' }} />
+              <span
+                className="inline-block w-1.5 h-1.5 rounded-full"
+                style={{ background: 'var(--at-green)' }}
+              />
               Asoschi
             </div>
 
@@ -136,7 +154,11 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
             <div className="flex items-start gap-3">
               <h2
                 className="font-bold leading-tight"
-                style={{ fontSize: 'clamp(28px, 3.6vw, 48px)', letterSpacing: '-0.035em', color: 'var(--at-ink)' }}
+                style={{
+                  fontSize: 'clamp(28px, 3.6vw, 48px)',
+                  letterSpacing: '-0.035em',
+                  color: 'var(--at-ink)',
+                }}
               >
                 {renderHeadline(translations.title ?? '', 'var(--at-accent)')}
               </h2>
@@ -179,15 +201,25 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
 
             {/* Points */}
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {(translations.points ?? []).map((point: { icon: string; text: string }, index: number) => {
-                const IconComp = icons[point.icon];
-                return (
-                  <div key={index} className="flex items-center gap-2.5">
-                    {IconComp && <IconComp className="h-4 w-4 shrink-0" style={{ color: 'var(--at-accent)' }} aria-hidden="true" />}
-                    <span className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>{point.text}</span>
-                  </div>
-                );
-              })}
+              {(translations.points ?? []).map(
+                (point: { icon: string; text: string }, index: number) => {
+                  const IconComp = icons[point.icon];
+                  return (
+                    <div key={index} className="flex items-center gap-2.5">
+                      {IconComp && (
+                        <IconComp
+                          className="h-4 w-4 shrink-0"
+                          style={{ color: 'var(--at-accent)' }}
+                          aria-hidden="true"
+                        />
+                      )}
+                      <span className="text-sm font-medium" style={{ color: 'var(--at-ink-2)' }}>
+                        {point.text}
+                      </span>
+                    </div>
+                  );
+                }
+              )}
             </div>
 
             {/* CTA Buttons */}
@@ -205,7 +237,11 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"
-                style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}
+                style={{
+                  background: 'var(--at-paper)',
+                  border: '1px solid var(--at-line)',
+                  color: 'var(--at-ink)',
+                }}
               >
                 <Send className="h-4 w-4" aria-hidden="true" />
                 {translations.telegramButton}

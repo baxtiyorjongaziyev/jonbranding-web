@@ -7,7 +7,7 @@ import { Menu, Phone, Send, X, ChevronRight, ArrowUpRight, Sparkles } from 'luci
 import { cn } from '@/lib/utils';
 import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 type NavItem = { href: string; label: string };
 type Service = { title: string; href: string; description: string };
@@ -94,13 +94,13 @@ export function MobileMenu({
           {/* Scrollable content */}
           <div className="flex h-[calc(100dvh-64px)] flex-col overflow-y-auto pb-safe-4">
             <motion.nav
-              variants={stagger}
+              variants={stagger as any}
               initial="hidden"
               animate="visible"
               className="flex flex-col gap-0 px-4 pt-4"
             >
               {/* Services section */}
-              <motion.div variants={slideIn} className="mb-2">
+              <motion.div variants={slideIn as any} className="mb-2">
                 <div className="mb-3 px-2 text-[11px] font-bold uppercase tracking-[0.12em] text-white/40">
                   {dictionary.services}
                 </div>
@@ -125,10 +125,10 @@ export function MobileMenu({
               </motion.div>
 
               {/* Divider */}
-              <motion.div variants={slideIn} className="my-2 h-px bg-white/8" />
+              <motion.div variants={slideIn as any} className="my-2 h-px bg-white/8" />
 
               {/* Main nav items */}
-              <motion.div variants={slideIn} className="flex flex-col gap-1">
+              <motion.div variants={slideIn as any} className="flex flex-col gap-1">
                 {navItems.map((item) => (
                   <Link
                     key={item.label}
@@ -145,10 +145,10 @@ export function MobileMenu({
               </motion.div>
 
               {/* Divider */}
-              <motion.div variants={slideIn} className="my-3 h-px bg-white/8" />
+              <motion.div variants={slideIn as any} className="my-3 h-px bg-white/8" />
 
               {/* Contact links */}
-              <motion.div variants={slideIn} className="flex flex-col gap-2">
+              <motion.div variants={slideIn as any} className="flex flex-col gap-2">
                 <div className="mb-1 px-2 text-[11px] font-bold uppercase tracking-[0.12em] text-white/40">
                   Aloqa
                 </div>
