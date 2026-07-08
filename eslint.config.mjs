@@ -1,4 +1,9 @@
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
 import nextVitals from "eslint-config-next/core-web-vitals";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const strippedPlugins = new WeakMap();
 
@@ -44,6 +49,7 @@ const config = [
       "dist/**",
       "coverage/**",
       "DESIGN_AUDIT/**",
+      "opencode_app/**"
     ],
   },
   ...nextVitals.map(makeSerializableConfig),
