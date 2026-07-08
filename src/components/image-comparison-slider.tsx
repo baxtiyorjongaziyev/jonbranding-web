@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useTransform, PanInfo } from 'motion/react';
+import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import Image, { type ImageProps } from 'next/image';
 import { useRef, useCallback } from 'react';
 import { cn } from '@/lib/utils';

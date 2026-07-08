@@ -5,6 +5,9 @@ import { FC, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+
+type Variants = any;
+
 import { ArrowRight, ScanText, Package, Paintbrush, Fingerprint, Book, CheckCircle2 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -18,7 +21,7 @@ const serviceIcons: { [key: string]: React.ElementType } = {
     'qadoq-dizayni': Package,
 };
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -28,14 +31,14 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 15 },
   visible: { 
     opacity: 1, 
     y: 0,
     transition: { 
         duration: 0.5, 
-        ease: [0.23, 1, 0.32, 1] 
+        ease: [0.23, 1, 0.32, 1] as any,
     }
   }
 };

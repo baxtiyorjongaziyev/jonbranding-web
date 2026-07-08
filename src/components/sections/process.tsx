@@ -2,6 +2,9 @@
 
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+type Variants = any;
+
 import { Badge } from '@/components/ui/badge';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 import type { ProcessDictionary } from '@/lib/types/dictionary';
@@ -12,7 +15,7 @@ interface ProcessProps {
   dictionary: ProcessDictionary;
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -22,13 +25,13 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      type: 'spring',
+      type: 'spring' as any,
       damping: 24,
       stiffness: 160,
     },
