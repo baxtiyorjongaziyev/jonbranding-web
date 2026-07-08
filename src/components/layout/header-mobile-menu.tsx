@@ -7,7 +7,7 @@ import { Menu, Phone, Send, X, ChevronRight, ArrowUpRight, Sparkles } from 'luci
 import { cn } from '@/lib/utils';
 import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 type NavItem = { href: string; label: string };
 type Service = { title: string; href: string; description: string };
@@ -29,14 +29,14 @@ interface MobileMenuProps {
   };
 }
 
-const stagger = {
+const stagger: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.06 } },
 };
 
-const slideIn = {
+const slideIn: Variants = {
   hidden: { opacity: 0, x: -16 },
-  visible: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 260, damping: 28 } },
+  visible: { opacity: 1, x: 0, transition: { type: 'spring' as const, stiffness: 260, damping: 28 } },
 };
 
 export function MobileMenu({
