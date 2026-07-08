@@ -1,7 +1,7 @@
-// @ts-nocheck
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
+import { configDefaults } from 'vitest/config'
 
 export default defineConfig({
   plugins: [react()],
@@ -14,5 +14,6 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './test/setup.ts',
+    exclude: [...configDefaults.exclude, 'tests/*'],
   },
 })
