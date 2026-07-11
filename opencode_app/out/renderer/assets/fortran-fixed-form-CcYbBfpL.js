@@ -1,0 +1,28 @@
+!(function() {
+  try {
+    var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+    e.SENTRY_RELEASE = { id: "desktop@1.17.13" };
+  } catch (e2) {
+  }
+})();
+;
+{
+  try {
+    (function() {
+      var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {}, n = new e.Error().stack;
+      n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "73e58380-6878-4c4d-94dc-74d42c93af27", e._sentryDebugIdIdentifier = "sentry-dbid-73e58380-6878-4c4d-94dc-74d42c93af27");
+    })();
+  } catch (e) {
+  }
+}
+;
+import fortran_free_form from "./fortran-free-form-DttArpNY.js";
+const lang = Object.freeze(JSON.parse('{"displayName":"Fortran (Fixed Form)","fileTypes":["f","F","f77","F77","for","FOR"],"injections":{"source.fortran.fixed - ( string | comment )":{"patterns":[{"include":"#line-header"},{"include":"#line-end-comment"}]}},"name":"fortran-fixed-form","patterns":[{"include":"#comments"},{"begin":"(?i)^(?=.{5}|(?<!^)\\\\t)\\\\s*(?:([0-9]{1,5})\\\\s+)?(format)\\\\b","beginCaptures":{"1":{"name":"constant.numeric.fortran"},"2":{"name":"keyword.control.format.fortran"}},"end":"(?=^(?![^\\\\n!#]{5}\\\\S))","name":"meta.statement.IO.fortran","patterns":[{"include":"#comments"},{"include":"#line-header"},{"match":"!.*$","name":"comment.line.fortran"},{"include":"source.fortran.free#string-constant"},{"include":"source.fortran.free#numeric-constant"},{"include":"source.fortran.free#operators"},{"include":"source.fortran.free#format-parentheses"}]},{"include":"#line-header"},{"include":"source.fortran.free"}],"repository":{"comments":{"patterns":[{"begin":"^[*Cc]","end":"\\\\n","name":"comment.line.fortran"},{"begin":"^ *!","end":"\\\\n","name":"comment.line.fortran"}]},"line-end-comment":{"begin":"(?<=^.{72})(?!\\\\n)","end":"(?=\\\\n)","name":"comment.line-end.fortran"},"line-header":{"captures":{"1":{"name":"constant.numeric.fortran"},"2":{"name":"keyword.line-continuation-operator.fortran"},"3":{"name":"source.fortran.free"},"4":{"name":"invalid.error.fortran"}},"match":"^(?!\\\\s*[!#])(?:([ \\\\d]{5} )|( {5}.)|(\\\\t)|(.{1,5}))"}},"scopeName":"source.fortran.fixed","embeddedLangs":["fortran-free-form"],"aliases":["f","for","f77"]}'));
+const fortranFixedForm = [
+  ...fortran_free_form,
+  lang
+];
+export {
+  fortranFixedForm as default
+};
+//# sourceMappingURL=fortran-fixed-form-CcYbBfpL.js.map

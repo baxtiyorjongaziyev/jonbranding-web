@@ -1,0 +1,39 @@
+!(function() {
+  try {
+    var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+    e.SENTRY_RELEASE = { id: "desktop@1.17.13" };
+  } catch (e2) {
+  }
+})();
+;
+{
+  try {
+    (function() {
+      var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {}, n = new e.Error().stack;
+      n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "eaebf87e-123a-4207-9354-475ba5a71d7a", e._sentryDebugIdIdentifier = "sentry-dbid-eaebf87e-123a-4207-9354-475ba5a71d7a");
+    })();
+  } catch (e) {
+  }
+}
+;
+const $schema = "https://opencode.ai/desktop-theme.json";
+const name = "Osaka Jade";
+const id = "osaka-jade";
+const light = { "palette": { "neutral": "#F6F5DD", "ink": "#111c18", "primary": "#1faa90", "accent": "#3d7a52", "success": "#3d7a52", "warning": "#b5a020", "error": "#c7392d", "info": "#1faa90" }, "overrides": { "text-weak": "#53685B", "syntax-comment": "#53685B", "syntax-keyword": "#1faa90", "syntax-string": "#3d7a52", "syntax-primitive": "#3d7560", "syntax-variable": "#111c18", "syntax-property": "#3d7a52", "syntax-type": "#3d7a52", "syntax-constant": "#a8527a", "syntax-operator": "#b5a020", "syntax-punctuation": "#111c18", "syntax-object": "#111c18", "markdown-heading": "#1faa90", "markdown-text": "#111c18", "markdown-link": "#1faa90", "markdown-link-text": "#3d7a52", "markdown-code": "#3d7a52", "markdown-block-quote": "#53685B", "markdown-emph": "#a8527a", "markdown-strong": "#111c18", "markdown-horizontal-rule": "#53685B", "markdown-list-item": "#1faa90", "markdown-list-enumeration": "#1faa90", "markdown-image": "#1faa90", "markdown-image-text": "#3d7a52", "markdown-code-block": "#111c18" } };
+const dark = { "palette": { "neutral": "#111c18", "ink": "#C1C497", "primary": "#2DD5B7", "accent": "#549e6a", "success": "#549e6a", "warning": "#E5C736", "error": "#FF5345", "info": "#2DD5B7", "interactive": "#8CD3CB", "diffAdd": "#63b07a", "diffDelete": "#db9f9c" }, "overrides": { "text-weak": "#53685B", "syntax-comment": "#53685B", "syntax-keyword": "#2DD5B7", "syntax-string": "#63b07a", "syntax-primitive": "#509475", "syntax-variable": "#C1C497", "syntax-property": "#549e6a", "syntax-type": "#549e6a", "syntax-constant": "#D2689C", "syntax-operator": "#459451", "syntax-punctuation": "#C1C497", "syntax-object": "#C1C497", "markdown-heading": "#2DD5B7", "markdown-text": "#C1C497", "markdown-link": "#8CD3CB", "markdown-link-text": "#549e6a", "markdown-code": "#63b07a", "markdown-block-quote": "#53685B", "markdown-emph": "#D2689C", "markdown-strong": "#C1C497", "markdown-horizontal-rule": "#53685B", "markdown-list-item": "#2DD5B7", "markdown-list-enumeration": "#8CD3CB", "markdown-image": "#8CD3CB", "markdown-image-text": "#549e6a", "markdown-code-block": "#C1C497" } };
+const osakaJade = {
+  $schema,
+  name,
+  id,
+  light,
+  dark
+};
+export {
+  $schema,
+  dark,
+  osakaJade as default,
+  id,
+  light,
+  name
+};
+//# sourceMappingURL=osaka-jade-DPljXRaQ.js.map

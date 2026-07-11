@@ -92,3 +92,11 @@ workflow-state.json
 /.agents/
 /.claude/skills/
 skills-lock.json
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
