@@ -61,7 +61,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
     }));
   };
 
-  if (!translations || !displayItems || displayItems.length === 0) return null;
+  if (!translations || displayItems.length === 0) return null;
 
   return (
     <section className="py-16 md:py-20 relative z-[2] overflow-hidden bg-neutral-950">
