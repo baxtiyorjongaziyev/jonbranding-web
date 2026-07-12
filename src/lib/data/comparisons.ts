@@ -18,7 +18,8 @@ const QUERY = `
 export async function fetchComparisons(): Promise<Comparison[]> {
   try {
     const data = await client.fetch(QUERY);
-    return withFallbackComparisons(data);
+    const withImages = (data as Comparison[]).filter((item) => item.oldImg && item.newImg);
+    return withFallbackComparisons(withImages);
   } catch {
     return withFallbackComparisons([]);
   }

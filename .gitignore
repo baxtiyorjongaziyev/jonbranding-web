@@ -88,6 +88,11 @@ autodeploy.pid
 service-account.json
 workflow-state.json
 
+# Personal AI skill tooling (not project code)
+/.agents/
+/.claude/skills/
+skills-lock.json
+
 # Playwright
 node_modules/
 /test-results/

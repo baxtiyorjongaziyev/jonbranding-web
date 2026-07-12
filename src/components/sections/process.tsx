@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 import type { ProcessDictionary } from '@/lib/types/dictionary';
@@ -12,7 +12,7 @@ interface ProcessProps {
   dictionary: ProcessDictionary;
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -22,7 +22,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
