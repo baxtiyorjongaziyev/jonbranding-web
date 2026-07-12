@@ -150,7 +150,7 @@ export default function ReviewsClient({ testimonials, lang, dictionary }: Props)
 
         {/* Grid of Feedbacks */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonials.map((t) => {
+          {testimonials.map((t, index) => {
             const hasAudio = !!(t.audioFileUrl || t.audioUrl);
             const hasVideo = !!(t.videoFileUrl || t.videoUrl);
             const audioSourceUrl = t.audioFileUrl || t.audioUrl;
@@ -158,7 +158,7 @@ export default function ReviewsClient({ testimonials, lang, dictionary }: Props)
 
             return (
               <div
-                key={t._id}
+                key={t._id || `${t.name}-${index}`}
                 className="rounded-3xl p-6 sm:p-8 space-y-6 relative overflow-hidden transition-all duration-300 border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/10"
                 style={{ backdropFilter: 'blur(12px)' }}
               >
