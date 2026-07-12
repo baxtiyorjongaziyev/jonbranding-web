@@ -71,6 +71,9 @@ tmp/
 scratch/
 migration-mapping.json
 
+# Unrelated tooling accidentally committed
+opencode_app/
+
 # Audit
 audit/
 logs/
