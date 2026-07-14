@@ -3,16 +3,21 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 
-function getAuth() {
+let cachedAuthKeyData: any = null;
+
+async function getAuth() {
   const keyFile = process.env.GOOGLE_SERVICE_ACCOUNT_JSON!;
-  const key = JSON.parse(fs.readFileSync(keyFile, 'utf-8'));
-  return new google.auth.JWT(key.client_email, undefined, key.private_key, [
+  if (!cachedAuthKeyData) {
+    const data = await fs.promises.readFile(keyFile, 'utf-8');
+    cachedAuthKeyData = JSON.parse(data);
+  }
+  return new google.auth.JWT(cachedAuthKeyData.client_email, undefined, cachedAuthKeyData.private_key, [
     'https://www.googleapis.com/auth/drive.readonly',
   ]);
 }
 
 export async function downloadToTemp(folderId: string): Promise<{ path: string; mime: string }[]> {
-  const auth = getAuth();
+  const auth = await getAuth();
   const drive = google.drive({ version: 'v3', auth });
 
   const list = await drive.files.list({
@@ -24,18 +29,21 @@ export async function downloadToTemp(folderId: string): Promise<{ path: string; 
 
   const files = list.data.files ?? [];
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-'));
-  const result: { path: string; mime: string }[] = [];
 
-  for (const file of files) {
-    if (!file.id || !file.name) continue;
-    const dest = path.join(tmpDir, file.name);
-    const res = await drive.files.get(
-      { fileId: file.id, alt: 'media' },
-      { responseType: 'arraybuffer' }
-    );
-    fs.writeFileSync(dest, Buffer.from(res.data as ArrayBuffer));
-    result.push({ path: dest, mime: file.mimeType ?? 'image/jpeg' });
-  }
+  const results = await Promise.all(
+    files.map(async (file) => {
+      if (!file.id || !file.name) return null;
+      const dest = path.join(tmpDir, file.name);
 
-  return result;
+      const res = await drive.files.get(
+        { fileId: file.id, alt: 'media' },
+        { responseType: 'arraybuffer' }
+      );
+
+      await fs.promises.writeFile(dest, Buffer.from(res.data as ArrayBuffer));
+      return { path: dest, mime: file.mimeType ?? 'image/jpeg' };
+    })
+  );
+
+  return results.filter((r): r is { path: string; mime: string } => r !== null);
 }
