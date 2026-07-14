@@ -1,8 +1,10 @@
-/* Force body background color based on theme when rendering the Atelier homepage */
-body:has(.atelier-theme) {
+/* Force body background color based on theme when rendering the Atelier homepage.
+   Scoped to .atelier-home so embedded .atelier-theme sections on other pages
+   (e.g. narxlar testimonials) don't repaint the whole body. */
+body:has(.atelier-home) {
   background-color: #F2EFE6 !important;
 }
-html[data-theme="dark"] body:has(.atelier-theme) {
+html[data-theme="dark"] body:has(.atelier-home) {
   background-color: #0B0C10 !important;
 }
 
