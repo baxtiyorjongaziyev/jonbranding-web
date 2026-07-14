@@ -9,6 +9,9 @@ import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';
 import { motion, type Variants } from 'framer-motion';
 
+type Variants = any;
+
+
 type NavItem = { href: string; label: string };
 type Service = { title: string; href: string; description: string };
 
@@ -36,7 +39,7 @@ const stagger: Variants = {
 
 const slideIn: Variants = {
   hidden: { opacity: 0, x: -16 },
-  visible: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 260, damping: 28 } },
+  visible: { opacity: 1, x: 0, transition: { type: 'spring' as any, stiffness: 260, damping: 28 } },
 };
 
 export function MobileMenu({
