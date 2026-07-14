@@ -39,8 +39,8 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang, hideL
       x.set(newX);
   }, [x]);
 
-  const clipPath = useTransform(x, val => `inset(0 ${100 - (val * 100)}% 0 0)`);
-  const handleX = useTransform(x, val => `${val * 100}%`);
+  const clipPath = useTransform(x, (val: number) => `inset(0 ${100 - (val * 100)}% 0 0)`);
+  const handleX = useTransform(x, (val: number) => `${val * 100}%`);
 
   return (
     <motion.div

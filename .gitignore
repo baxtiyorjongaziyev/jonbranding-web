@@ -71,6 +71,9 @@ tmp/
 scratch/
 migration-mapping.json
 
+# Unrelated tooling accidentally committed
+opencode_app/
+
 # Audit
 audit/
 logs/
@@ -87,6 +90,11 @@ autodeploy.pid
 # Credentials & caches
 service-account.json
 workflow-state.json
+
+# Personal AI skill tooling (not project code)
+/.agents/
+/.claude/skills/
+skills-lock.json
 
 # Playwright
 node_modules/

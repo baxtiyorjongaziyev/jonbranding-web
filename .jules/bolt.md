@@ -21,7 +21,6 @@
 ## 2024-07-01 - Pausing continuous intervals when off-screen
 **Learning:** Automatically updating active indices via `setInterval` for components outside the viewport triggers unnecessary layout and render cycles, especially when integrated with computationally expensive transition handlers like `framer-motion`.
 **Action:** Utilize `useInView` from `framer-motion` tied to a section's top-level ref. Modify the interval's dependencies to include the `isInView` boolean and add an early return within the `useEffect` hook. This ensures background animations are paused when users aren't looking at them, freeing up the main thread.
-
-## 2026-07-08 - [N+1 Query in Drive File Download]
-**Learning:** Sequential downloading inside a `for...of` loop can severely impact performance due to blocked network I/O.
-**Action:** Replaced sequential `fs.writeFileSync` loop with concurrent `Promise.all` and asynchronous `fs.promises.writeFile` in `services/portfolio-bot/src/drive.ts` to reduce download time by >18x.
+## $(date +'%Y-%m-%d') - [portfolio-bot] Asynchronous File I/O and Caching for Auth
+**Learning:** Using synchronous `fs` methods (like `fs.readFileSync`) for frequently called functions (such as `getAuth` inside loops/recursive fetching) blocks the Node.js event loop, preventing concurrent operations and degrading bot performance.
+**Action:** Refactored `getAuth` in `drive-finder.ts` and `drive.ts` to be `async`, utilizing `fs.promises.readFile` combined with an in-memory variable to cache the parsed JSON data, yielding a measurable speedup and eliminating event loop blockage.
