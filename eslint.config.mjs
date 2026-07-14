@@ -46,6 +46,7 @@ const config = [
       "opencode_app/**",
       "graphify-out/**",
       "DESIGN_AUDIT/**",
+      "opencode_app/**",
     ],
   },
   ...nextVitals.map(makeSerializableConfig),

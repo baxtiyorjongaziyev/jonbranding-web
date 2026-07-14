@@ -21,6 +21,6 @@
 ## 2024-07-01 - Pausing continuous intervals when off-screen
 **Learning:** Automatically updating active indices via `setInterval` for components outside the viewport triggers unnecessary layout and render cycles, especially when integrated with computationally expensive transition handlers like `framer-motion`.
 **Action:** Utilize `useInView` from `framer-motion` tied to a section's top-level ref. Modify the interval's dependencies to include the `isInView` boolean and add an early return within the `useEffect` hook. This ensures background animations are paused when users aren't looking at them, freeing up the main thread.
-## 2026-07-08 - Optimize Portfolio Sync Sanity Deletions
-**Learning:** The Sanity N+1 query issue inside a `for` loop can heavily throttle performance. By batch fetching the requested documents in a single query (`in $folderIds`), and using a `sanityClient.transaction()` for batch deletions, operations scale gracefully and are no longer linear in remote network time per entity. In a test run of 20 worst-case deletes, the performance time reduced by ~88%.
-**Action:** Modified `portfolio-sync/route.ts` to perform a single fetch before the synchronization loop and delete using a single transaction when `forceUpdate` is true.
+## $(date +'%Y-%m-%d') - [portfolio-bot] Asynchronous File I/O and Caching for Auth
+**Learning:** Using synchronous `fs` methods (like `fs.readFileSync`) for frequently called functions (such as `getAuth` inside loops/recursive fetching) blocks the Node.js event loop, preventing concurrent operations and degrading bot performance.
+**Action:** Refactored `getAuth` in `drive-finder.ts` and `drive.ts` to be `async`, utilizing `fs.promises.readFile` combined with an in-memory variable to cache the parsed JSON data, yielding a measurable speedup and eliminating event loop blockage.

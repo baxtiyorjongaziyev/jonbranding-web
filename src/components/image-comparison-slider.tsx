@@ -15,65 +15,50 @@ interface ImageComparisonSliderProps {
 }
 
 const translationMap: Record<string, { before: string; after: string }> = {
-  uz: { before: 'AVVAL', after: 'HOZIR' },
-  ru: { before: 'ДО', after: 'ПОСЛЕ' },
-  zh: { before: '之前', after: '之后' },
+  uz: { before: "AVVAL", after: "HOZIR" },
+  ru: { before: "ДО", after: "ПОСЛЕ" },
+  zh: { before: "之前", after: "之后" },
 };
 
-const ImageComparisonSlider = ({
-  beforeImage,
-  afterImage,
-  className,
-  lang,
-  hideLabels,
-}: ImageComparisonSliderProps) => {
+const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang, hideLabels }: ImageComparisonSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0.5);
-  const translations = translationMap[lang] || { before: 'BEFORE', after: 'AFTER' };
+  const translations = translationMap[lang] || { before: "BEFORE", after: "AFTER" };
 
-  const handlePan = useCallback(
-    (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const handlePan = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const newX = Math.max(0, Math.min(1, (info.point.x - rect.left) / rect.width));
       x.set(newX);
-    },
-    [x]
-  );
+  }, [x]);
 
-  const handlePointerDown = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
+  const handlePointerDown = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const newX = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
       x.set(newX);
-    },
-    [x]
-  );
+  }, [x]);
 
-  const clipPath = useTransform(x, (val) => `inset(0 ${100 - val * 100}% 0 0)`);
-  const handleX = useTransform(x, (val) => `${val * 100}%`);
+  const clipPath = useTransform(x, (val: number) => `inset(0 ${100 - (val * 100)}% 0 0)`);
+  const handleX = useTransform(x, (val: number) => `${val * 100}%`);
 
   return (
     <motion.div
-      ref={containerRef}
-      className={cn(
-        'relative w-full aspect-[4/3] cursor-ew-resize group select-none overflow-hidden rounded-2xl bg-neutral-950',
-        className
-      )}
-      onPan={handlePan}
-      onPanStart={handlePan}
-      onPanEnd={handlePan}
-      onPointerDown={handlePointerDown}
-      style={{ touchAction: 'pan-y' }}
+        ref={containerRef}
+        className={cn("relative w-full aspect-[4/3] cursor-ew-resize group select-none overflow-hidden rounded-2xl bg-neutral-950", className)}
+        onPan={handlePan}
+        onPanStart={handlePan}
+        onPanEnd={handlePan}
+        onPointerDown={handlePointerDown}
+        style={{ touchAction: 'pan-y' }}
     >
       <div className="absolute inset-0 bg-neutral-900">
         <Image
-          {...beforeImage}
-          alt={beforeImage.alt ?? translations.before}
-          fill
-          className="object-cover pointer-events-none brightness-[0.85]"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            {...beforeImage}
+            alt={beforeImage.alt ?? translations.before}
+            fill
+            className="object-cover pointer-events-none brightness-[0.85]"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
         {!hideLabels && (
@@ -88,15 +73,15 @@ const ImageComparisonSlider = ({
       <motion.div
         className="absolute inset-0 z-10"
         style={{ clipPath }}
-        initial={{ clipPath: 'inset(0 50% 0 0)' }}
+        initial={{ clipPath: 'inset(0 50% 0 0)'}}
       >
         <div className="absolute inset-0 bg-neutral-900">
           <Image
-            {...afterImage}
-            alt={afterImage.alt ?? translations.after}
-            fill
-            className="object-cover pointer-events-none"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              {...afterImage}
+              alt={afterImage.alt ?? translations.after}
+              fill
+              className="object-cover pointer-events-none"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
           {!hideLabels && (
@@ -116,11 +101,11 @@ const ImageComparisonSlider = ({
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--at-accent)]/60 via-[var(--at-accent)] to-[var(--at-accent)]/60" />
         <div className="absolute top-1/2 -translate-y-1/2 h-11 w-11 rounded-full flex items-center justify-center left-1/2 -translate-x-1/2 cursor-grab active:cursor-grabbing bg-neutral-900/80 backdrop-blur-xl border-2 border-[var(--at-accent)]/50 shadow-[0_0_20px_rgba(37,99,235,0.25)] transition-all duration-300 group-hover:scale-110 active:scale-95 hover:border-[var(--at-accent)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]">
-          <div className="flex items-center gap-0.5">
-            <ChevronLeft size={13} className="text-white/80" strokeWidth={2.5} />
-            <ChevronRight size={13} className="text-white/80" strokeWidth={2.5} />
+            <div className="flex items-center gap-0.5">
+              <ChevronLeft size={13} className="text-white/80" strokeWidth={2.5} />
+              <ChevronRight size={13} className="text-white/80" strokeWidth={2.5} />
+            </div>
           </div>
-        </div>
       </motion.div>
     </motion.div>
   );
