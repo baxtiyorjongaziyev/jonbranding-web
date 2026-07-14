@@ -4,10 +4,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-
-type Variants = any;
-
+import { motion, type Variants } from 'framer-motion';
 import { ArrowRight, ScanText, Package, Paintbrush, Fingerprint, Book, CheckCircle2 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getDictionary, Locale } from '@/lib/dictionaries';
@@ -38,7 +35,7 @@ const itemVariants: Variants = {
     y: 0,
     transition: { 
         duration: 0.5, 
-        ease: [0.23, 1, 0.32, 1] as any,
+        ease: [0.23, 1, 0.32, 1] 
     }
   }
 };

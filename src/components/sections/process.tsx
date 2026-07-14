@@ -1,10 +1,7 @@
 'use client';
 
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { motion } from 'framer-motion';
-
-type Variants = any;
-
+import { motion, type Variants } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 import type { ProcessDictionary } from '@/lib/types/dictionary';
@@ -31,7 +28,7 @@ const itemVariants: Variants = {
     y: 0,
     opacity: 1,
     transition: {
-      type: 'spring' as any,
+      type: 'spring',
       damping: 24,
       stiffness: 160,
     },

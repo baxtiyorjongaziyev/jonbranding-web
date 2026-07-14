@@ -3,17 +3,14 @@
 import { Card } from '@/components/ui/card';
 import { ArrowRight, Ghost, TrendingDown, Tag, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-
-type Variants = any;
-
+import { motion, type Variants } from 'framer-motion';
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] as any, }
+    transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] }
   }
 };
 
@@ -84,7 +81,7 @@ const TargetAudience = ({ lang, dictionary }: { lang: string, dictionary: any })
            initial={{ opacity: 0, scale: 0.95 }}
            whileInView={{ opacity: 1, scale: 1 }}
            viewport={{ once: true }}
-           transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] as any, }}
+           transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
            className="max-w-5xl mx-auto mt-16"
         >
           <div className="premium-card bg-primary p-12 sm:p-16 text-center text-white relative overflow-hidden group">

@@ -15,10 +15,7 @@ import {
   type LucideProps,
 } from 'lucide-react';
 import { useState, type FC } from 'react';
-import { motion } from 'framer-motion';
-
-type Variants = any;
-
+import { motion, type Variants } from 'framer-motion';
 import DOMPurify from 'isomorphic-dompurify';
 import { renderHeadline } from '@/lib/headline';
 import type { FounderDictionary } from '@/lib/types/dictionary';
@@ -38,7 +35,7 @@ const itemVariants: Variants = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: { type: 'spring' as any, damping: 28, stiffness: 150 },
+    transition: { type: 'spring', damping: 28, stiffness: 150 },
   },
 };
 

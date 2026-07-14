@@ -44,6 +44,7 @@ const config = [
       "dist/**",
       "coverage/**",
       "DESIGN_AUDIT/**",
+      "opencode_app/**",
     ],
   },
   ...nextVitals.map(makeSerializableConfig),
