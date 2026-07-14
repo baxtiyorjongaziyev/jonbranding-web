@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useTransform, PanInfo } from 'motion/react';
+import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import Image, { type ImageProps } from 'next/image';
 import { useRef, useCallback } from 'react';
 import { cn } from '@/lib/utils';
@@ -39,8 +39,8 @@ const ImageComparisonSlider = ({ beforeImage, afterImage, className, lang, hideL
       x.set(newX);
   }, [x]);
 
-  const clipPath = useTransform(x, val => `inset(0 ${100 - (val * 100)}% 0 0)`);
-  const handleX = useTransform(x, val => `${val * 100}%`);
+  const clipPath = useTransform(x, (val: number) => `inset(0 ${100 - (val * 100)}% 0 0)`);
+  const handleX = useTransform(x, (val: number) => `${val * 100}%`);
 
   return (
     <motion.div

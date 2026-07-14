@@ -5,7 +5,8 @@ import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { getValidAccessToken, forceRefresh } from '@/lib/amocrm-token';
 import { getDb } from '@/lib/firebase-admin';
 
-const formSchema = z.object({
+const formSchema = z
+  .object({
     fullName: z.string().min(2, 'Name is too short').max(100),
     phone: z.string().min(7, 'Phone is too short').max(30).optional(),
     telegram: z.string().optional(),
@@ -22,14 +23,18 @@ const formSchema = z.object({
     gaClientId: z.string().optional(),
     pageLocation: z.string().optional(),
     ctaSource: z.string().optional(),
-}).refine((data) => {
-    const phone = String(data.phone ?? '').trim();
-    const telegram = String(data.telegram ?? '').trim();
-    return phone.length > 0 || telegram.length > 0;
-}, {
-    message: 'Either phone or telegram is required',
-    path: ['phone'],
-});
+  })
+  .refine(
+    (data) => {
+      const phone = String(data.phone ?? '').trim();
+      const telegram = String(data.telegram ?? '').trim();
+      return phone.length > 0 || telegram.length > 0;
+    },
+    {
+      message: 'Either phone or telegram is required',
+      path: ['phone'],
+    }
+  );
 
 const UZS_TO_USD_RATE = 1 / 12700;
 const DEFAULT_GA_MEASUREMENT_ID = 'G-BTSGJQLMMV';
@@ -43,7 +48,9 @@ function escapeTelegramHtml(value: unknown) {
 }
 
 function cleanSecret(value: string | undefined) {
-  return String(value || '').replace(/^\uFEFF/, '').trim();
+  return String(value || '')
+    .replace(/^\uFEFF/, '')
+    .trim();
 }
 
 function normalizePhone(phone: unknown) {
@@ -51,7 +58,9 @@ function normalizePhone(phone: unknown) {
 }
 
 function sha256(value: unknown) {
-  const normalized = String(value || '').trim().toLowerCase();
+  const normalized = String(value || '')
+    .trim()
+    .toLowerCase();
   if (!normalized) return '';
   return createHash('sha256').update(normalized).digest('hex');
 }
@@ -62,7 +71,7 @@ function stripUndefined(value: any): any {
     return Object.fromEntries(
       Object.entries(value)
         .filter(([, item]) => item !== undefined)
-        .map(([key, item]) => [key, stripUndefined(item)]),
+        .map(([key, item]) => [key, stripUndefined(item)])
     );
   }
   return value;
@@ -88,7 +97,7 @@ function getAmoCrmApiDomain(accessToken: string) {
     const normalizedPayload = payload.replace(/-/g, '+').replace(/_/g, '/');
     const paddedPayload = normalizedPayload.padEnd(
       normalizedPayload.length + ((4 - (normalizedPayload.length % 4)) % 4),
-      '=',
+      '='
     );
     const claims = JSON.parse(Buffer.from(paddedPayload, 'base64').toString('utf8'));
     return typeof claims.api_domain === 'string' ? claims.api_domain : null;
@@ -143,7 +152,7 @@ async function sendTelegramIfConfigured(
   botToken: string,
   chatId: string,
   payload: Record<string, unknown>,
-  context: string,
+  context: string
 ) {
   if (!hasTelegramConfig(botToken, chatId)) {
     console.warn(`Telegram skipped for ${context}: missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID`);
@@ -172,22 +181,24 @@ async function sendMetaConversionEvent(data: any) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        data: [{
-          event_name: 'Lead',
-          event_time: Math.floor(Date.now() / 1000),
-          event_id: data.eventId,
-          action_source: 'website',
-          event_source_url: data.pageLocation,
-          user_data: {
-            ph: data.phone ? [sha256(normalizePhone(data.phone))] : [],
-            fn: data.fullName ? [sha256(data.fullName)] : [],
+        data: [
+          {
+            event_name: 'Lead',
+            event_time: Math.floor(Date.now() / 1000),
+            event_id: data.eventId,
+            action_source: 'website',
+            event_source_url: data.pageLocation,
+            user_data: {
+              ph: data.phone ? [sha256(normalizePhone(data.phone))] : [],
+              fn: data.fullName ? [sha256(data.fullName)] : [],
+            },
+            custom_data: {
+              value: valueInUsd,
+              currency: 'USD',
+              content_name: data.source || 'website_contact_form',
+            },
           },
-          custom_data: {
-            value: valueInUsd,
-            currency: 'USD',
-            content_name: data.source || 'website_contact_form',
-          },
-        }],
+        ],
         access_token: accessToken,
       }),
     });
@@ -202,24 +213,29 @@ async function sendGAConversionEvent(data: any) {
   if (!gaApiSecret) return;
 
   try {
-    await fetch(`https://www.google-analytics.com/mp/collect?measurement_id=${gaMeasurementId}&api_secret=${gaApiSecret}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        client_id: data.gaClientId || data.eventId || '555.555',
-        events: [{
-          name: 'generate_lead',
-          params: {
-            event_id: data.eventId,
-            value: data.totalPrice || 0,
-            currency: 'UZS',
-            source: data.source || 'website_contact_form',
-            cta_source: data.ctaSource,
-            page_location: data.pageLocation,
-          },
-        }],
-      }),
-    });
+    await fetch(
+      `https://www.google-analytics.com/mp/collect?measurement_id=${gaMeasurementId}&api_secret=${gaApiSecret}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          client_id: data.gaClientId || data.eventId || '555.555',
+          events: [
+            {
+              name: 'generate_lead',
+              params: {
+                event_id: data.eventId,
+                value: data.totalPrice || 0,
+                currency: 'UZS',
+                source: data.source || 'website_contact_form',
+                cta_source: data.ctaSource,
+                page_location: data.pageLocation,
+              },
+            },
+          ],
+        }),
+      }
+    );
   } catch (error) {
     console.error('GA4 error:', error);
   }
@@ -258,19 +274,25 @@ function describeAmoCrmError(error: any) {
 async function queueFailedAmoCrmLead(data: any, error: any) {
   try {
     const eventId = String(data.eventId || `lead_${Date.now()}`);
-    await getDb().collection(AMOCRM_FAILED_LEADS_COLLECTION).doc(eventId).set(stripUndefined({
-      lead: data,
-      status: 'pending',
-      integration: 'amocrm',
-      error: {
-        message: String(error?.message || error || 'Unknown error'),
-        status: Number(error?.status || 0) || null,
-        detail: error?.detail || null,
-        type: error?.type || null,
-      },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    }), { merge: true });
+    await getDb()
+      .collection(AMOCRM_FAILED_LEADS_COLLECTION)
+      .doc(eventId)
+      .set(
+        stripUndefined({
+          lead: data,
+          status: 'pending',
+          integration: 'amocrm',
+          error: {
+            message: String(error?.message || error || 'Unknown error'),
+            status: Number(error?.status || 0) || null,
+            detail: error?.detail || null,
+            type: error?.type || null,
+          },
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        }),
+        { merge: true }
+      );
     return true;
   } catch (queueError) {
     console.error('AmoCRM failed lead queue error:', queueError);
@@ -295,7 +317,9 @@ async function sendToAmoCrm(data: any) {
 
   const fullName = String(data.fullName || 'Website lead').trim();
   const phone = normalizePhone(data.phone);
-  const telegram = String(data.telegram || '').replace(/^@/, '').trim();
+  const telegram = String(data.telegram || '')
+    .replace(/^@/, '')
+    .trim();
   const source = data.source || 'website_contact_form';
   const price = Number(data.totalPrice) || 0;
 
@@ -311,7 +335,9 @@ async function sendToAmoCrm(data: any) {
     data.budget ? `Byudjet: ${data.budget}` : '',
     data.packageSummary ? `Paket: ${data.packageSummary}` : '',
     price ? `Narx: ${price.toLocaleString('fr-FR')} som` : '',
-  ].filter(Boolean).join('\n');
+  ]
+    .filter(Boolean)
+    .join('\n');
 
   const contactFields: any[] = [];
   if (phone) {
@@ -321,21 +347,21 @@ async function sendToAmoCrm(data: any) {
     });
   }
 
-  const leadBody = JSON.stringify([{
-    name: `Jon.Branding site: ${fullName}`,
-    price,
-    tags_to_add: [
-      { name: 'jonbranding.uz' },
-      { name: 'website' },
-      { name: String(source) },
-    ],
-    _embedded: {
-      contacts: [{
-        first_name: fullName,
-        ...(contactFields.length ? { custom_fields_values: contactFields } : {}),
-      }],
+  const leadBody = JSON.stringify([
+    {
+      name: `Jon.Branding site: ${fullName}`,
+      price,
+      tags_to_add: [{ name: 'jonbranding.uz' }, { name: 'website' }, { name: String(source) }],
+      _embedded: {
+        contacts: [
+          {
+            first_name: fullName,
+            ...(contactFields.length ? { custom_fields_values: contactFields } : {}),
+          },
+        ],
+      },
     },
-  }]);
+  ]);
 
   let createResponse = await fetch(`${baseUrl}/api/v4/leads/complex`, {
     method: 'POST',
@@ -349,7 +375,6 @@ async function sendToAmoCrm(data: any) {
   // Retry once with a fresh token if the current one is stale
   if (createResponse.status === 401) {
     try {
-      console.log('AmoCRM returned 401. Triggering force token refresh...');
       const refreshed = await forceRefresh();
       accessToken = refreshed.access_token;
       baseUrl = getAmoCrmBaseUrl(accessToken) || baseUrl;
@@ -369,7 +394,11 @@ async function sendToAmoCrm(data: any) {
   const createResult: any = await createResponse.json().catch(() => null);
 
   if (!createResponse.ok) {
-    const message = createResult?.title || createResult?.detail || createResult?.message || `AmoCRM HTTP ${createResponse.status}`;
+    const message =
+      createResult?.title ||
+      createResult?.detail ||
+      createResult?.message ||
+      `AmoCRM HTTP ${createResponse.status}`;
     const error: any = new Error(message);
     error.status = createResponse.status;
     error.detail = createResult?.detail;
@@ -379,7 +408,9 @@ async function sendToAmoCrm(data: any) {
 
   const leadId = Array.isArray(createResult)
     ? createResult[0]?.id
-    : createResult?._embedded?.items?.[0]?.id || createResult?._embedded?.leads?.[0]?.id || createResult?.id;
+    : createResult?._embedded?.items?.[0]?.id ||
+      createResult?._embedded?.leads?.[0]?.id ||
+      createResult?.id;
 
   if (leadId && details) {
     await fetch(`${baseUrl}/api/v4/leads/${leadId}/notes`, {
@@ -388,10 +419,12 @@ async function sendToAmoCrm(data: any) {
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify([{
-        note_type: 'common',
-        params: { text: details },
-      }]),
+      body: JSON.stringify([
+        {
+          note_type: 'common',
+          params: { text: details },
+        },
+      ]),
     }).catch((error) => console.error('AmoCRM note error:', error));
   }
 
@@ -428,14 +461,12 @@ ${totalPrice ? `\n<b>Narx:</b> ${escapeTelegramHtml(totalPrice.toLocaleString('f
   `.trim();
 }
 
-
-
 export async function POST(request: Request) {
   const ip = getClientIp(request);
   if (!rateLimit(`submit-form:${ip}`, 5, 60_000)) {
     return NextResponse.json(
       { ok: false, error: 'Too many requests. Please try again later.' },
-      { status: 429 },
+      { status: 429 }
     );
   }
 
@@ -444,19 +475,20 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    
+
     // Validate input using Zod
     const validatedData = formSchema.safeParse(body);
     if (!validatedData.success) {
-        return NextResponse.json(
-            { ok: false, error: "Invalid input data", details: validatedData.error.format() }, 
-            { status: 400 }
-        );
+      return NextResponse.json(
+        { ok: false, error: 'Invalid input data', details: validatedData.error.format() },
+        { status: 400 }
+      );
     }
 
     const leadData = {
       ...validatedData.data,
-      eventId: validatedData.data.eventId || `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+      eventId:
+        validatedData.data.eventId || `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
     };
 
     const { fullName, phone } = leadData;
@@ -475,14 +507,14 @@ export async function POST(request: Request) {
       botToken,
       chatId,
       telegramPayload,
-      'lead alert',
+      'lead alert'
     );
 
     const amoCrmResult: any = await sendToAmoCrm(leadData).catch(async (error) => {
       console.error('AmoCRM lead error:', error);
       const queued = await queueFailedAmoCrmLead(leadData, error);
       const reason = describeAmoCrmError(error);
-      
+
       await sendTelegramIfConfigured(
         botToken,
         chatId,
@@ -497,9 +529,9 @@ export async function POST(request: Request) {
             ...(phone ? [`Telefon: ${escapeTelegramHtml(phone)}`] : []),
           ].join('\n'),
         },
-        'AmoCRM failure alert',
+        'AmoCRM failure alert'
       );
-      
+
       return { ok: false, queued, error: error?.message || String(error) };
     });
 
