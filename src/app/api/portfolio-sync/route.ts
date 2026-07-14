@@ -31,30 +31,26 @@ async function handleSync(request: NextRequest) {
     // 1. Authorize the sync request (secret param OR Bearer cron auth)
     const querySecret = request.nextUrl.searchParams.get('secret');
     const authHeader = request.headers.get('authorization');
-    const bearerSecret = authHeader?.startsWith('Bearer ') ? authHeader.slice('Bearer '.length) : null;
+    const bearerSecret = authHeader?.startsWith('Bearer ')
+      ? authHeader.slice('Bearer '.length)
+      : null;
     const configuredSecrets = [process.env.CRON_SECRET, process.env.AMOCRM_CRON_SECRET].filter(
-      (value): value is string => Boolean(value),
+      (value): value is string => Boolean(value)
     );
     const providedSecrets = [querySecret, bearerSecret].filter((value): value is string =>
-      Boolean(value),
+      Boolean(value)
     );
 
     if (configuredSecrets.length === 0) {
-      return NextResponse.json(
-        { success: false, error: 'No auth configured' },
-        { status: 500 }
-      );
+      return NextResponse.json({ success: false, error: 'No auth configured' }, { status: 500 });
     }
 
     const isAuthorized = providedSecrets.some((provided) =>
-      configuredSecrets.some((configured) => safeCompare(provided, configured)),
+      configuredSecrets.some((configured) => safeCompare(provided, configured))
     );
 
     if (!isAuthorized) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     const queueFolderId = process.env.GOOGLE_DRIVE_QUEUE_FOLDER_ID;
@@ -78,18 +74,34 @@ async function handleSync(request: NextRequest) {
 
     const results = [];
 
+    const forceUpdate = request.nextUrl.searchParams.get('force') === 'true';
+    const folderIds = folders.map((f) => f.id);
+
+    // Batch fetch existing documents
+    const query = `*[_type == "portfolio" && googleDriveFolderId in $folderIds]`;
+    const existingDocs = await sanityWriteClient.fetch(query, { folderIds });
+    const existingDocMap = new Map<string, any>(existingDocs.map((doc: any) => [doc.googleDriveFolderId, doc]));
+
+    // Batch delete if force update is on
+    if (forceUpdate && existingDocs.length > 0) {
+      console.log(
+        `[portfolio-sync] Force update: Batch deleting ${existingDocs.length} existing documents`
+      );
+      const tx = sanityWriteClient.transaction();
+      for (const doc of existingDocs) {
+        tx.delete(doc._id);
+      }
+      await tx.commit();
+    }
+
     for (const folder of folders) {
       try {
         // 2. Check if already processed in Sanity
-        const query = `*[_type == "portfolio" && googleDriveFolderId == $folderId][0]`;
-        const existingDoc = await sanityWriteClient.fetch(query, { folderId: folder.id });
-
-        const forceUpdate = request.nextUrl.searchParams.get('force') === 'true';
+        const existingDoc = existingDocMap.get(folder.id);
 
         if (existingDoc) {
           if (forceUpdate) {
-            console.log(`[portfolio-sync] Force update: Deleting existing document ${existingDoc._id}`);
-            await sanityWriteClient.delete(existingDoc._id);
+            // Already deleted in the batch transaction above, proceed with sync
           } else {
             results.push({
               folderName: folder.name,
@@ -105,11 +117,9 @@ async function handleSync(request: NextRequest) {
 
         // 3. List files inside folder
         const files = await listFiles(folder.id);
-        const imageFiles = files.filter(f => f.mimeType.startsWith('image/'));
-        const textFiles = files.filter(f => 
-          f.mimeType.startsWith('text/') || 
-          f.name.endsWith('.txt') || 
-          f.name.endsWith('.md')
+        const imageFiles = files.filter((f) => f.mimeType.startsWith('image/'));
+        const textFiles = files.filter(
+          (f) => f.mimeType.startsWith('text/') || f.name.endsWith('.txt') || f.name.endsWith('.md')
         );
 
         if (imageFiles.length === 0) {
@@ -131,19 +141,25 @@ async function handleSync(request: NextRequest) {
           textContent = textBuffer.toString('utf8');
           console.log(`[portfolio-sync] Read metadata text from file: ${textFile.name}`);
         } else {
-          console.log(`[portfolio-sync] No text metadata file found, searching Instagram for project name`);
+          console.log(
+            `[portfolio-sync] No text metadata file found, searching Instagram for project name`
+          );
           let postText = await scrapeInstagramPosts(folder.name);
           if (postText) {
             textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Instagramdan olindi):\n${postText}`;
             console.log(`[portfolio-sync] Successfully fetched case study from Instagram!`);
           } else {
-            console.log(`[portfolio-sync] No post found on Instagram, searching Telegram @jonbranding`);
+            console.log(
+              `[portfolio-sync] No post found on Instagram, searching Telegram @jonbranding`
+            );
             const tgText = await scrapeTelegramPosts('jonbranding', folder.name);
             if (tgText) {
               textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Telegramdan olindi):\n${tgText}`;
               console.log(`[portfolio-sync] Successfully fetched case study from Telegram!`);
             } else {
-              console.log(`[portfolio-sync] No post found on Telegram either, falling back to basic folder name`);
+              console.log(
+                `[portfolio-sync] No post found on Telegram either, falling back to basic folder name`
+              );
             }
           }
         }
@@ -154,9 +170,9 @@ async function handleSync(request: NextRequest) {
         console.log(`[portfolio-sync] Successfully parsed metadata: "${parsedMeta.title}"`);
 
         // 6. Upload images to Sanity
-        let coverImage = imageFiles.find(img => img.name.toLowerCase().includes('cover'));
-        let galleryImages = imageFiles.filter(img => img.id !== coverImage?.id);
-        
+        let coverImage = imageFiles.find((img) => img.name.toLowerCase().includes('cover'));
+        let galleryImages = imageFiles.filter((img) => img.id !== coverImage?.id);
+
         if (!coverImage) {
           coverImage = imageFiles[0];
           galleryImages = imageFiles.slice(1);
