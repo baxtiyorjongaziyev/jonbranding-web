@@ -15,7 +15,7 @@ const PackageBuilder = dynamic(() => import('@/components/sections/package-build
 const Comparison = dynamic(() => import('@/components/sections/comparison'), { ssr: false });
 const QueueStatus = dynamic(() => import('@/components/sections/queue-status'), { ssr: false });
 const TrustedBy = dynamic(() => import('@/components/sections/trusted-by'), { ssr: false });
-const Testimonials = dynamic(() => import('@/components/sections/testimonials'), { ssr: false });
+const ATQuotes = dynamic(() => import('@/components/atelier/atelier-sections').then((m) => m.ATQuotes), { ssr: false });
 const UrgencyBlock = dynamic(() => import('@/components/sections/urgency-block'), { ssr: false });
 const PersonalOfferBlock = dynamic(() => import('@/components/sections/personal-offer-block'), { ssr: false });
 
@@ -72,7 +72,11 @@ const XizmatlarClient = ({ lang, dictionary, testimonials }: { lang: string, dic
       {step >= 2 && (
         <>
           <TrustedBy lang={lang} dictionary={dictionary?.trustedBy} />
-          {step >= 3 && <Testimonials lang={lang} dictionary={dictionary?.testimonials} testimonials={testimonials} />}
+          {step >= 3 && (
+            <div className="atelier-theme" style={{ background: 'var(--bg)', color: 'var(--ink)' }}>
+              <ATQuotes lang={lang} dictionary={dictionary?.atelier || dictionary} testimonials={testimonials} />
+            </div>
+          )}
           {step >= 4 && (
             <div className="flex flex-col">
               <PersonalOfferBlock onCtaClick={handleOpenModal} />

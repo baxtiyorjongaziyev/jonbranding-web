@@ -85,12 +85,11 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtManifesto lang={lang} />
       <AtServices onOpen={open} lang={lang} />
       
-      <div className="atelier-theme" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
+      <div className="atelier-theme atelier-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
         <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
         <BeforeAfter lang={lang} dictionary={dictionary.beforeAfter || dictionary} comparisons={comparisons} />
+        <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />
       </div>
-
-      <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />
 
       <ProcessVideo lang={lang} />
       <AtProcess lang={lang} onOpen={open} />
