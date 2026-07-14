@@ -2,6 +2,8 @@
 
 const USD_TO_UZS_RATE = 12700;
 
+export const VALID_PROMO_CODES: readonly string[] = ['RAMAZON', 'PCG', 'TEZNATIJA', 'KURSDOSH', 'SALOM', 'ISTISNO'];
+
 export type SelectedServices = {
     audit?: boolean;
     namingCheck?: boolean;
@@ -336,7 +338,7 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     const discountsApplied = [];
 
     const normalizedPromo = (promoCode || '').trim().toUpperCase();
-    const isPromoApplied = normalizedPromo.length > 0;
+    const isPromoApplied = VALID_PROMO_CODES.includes(normalizedPromo);
 
     // Faza 1: Barchaga 10% Istisno chegirmasi (Faqatgina to'lov varianti tanlanganda: 50/50 yoki 100%)
     if ((discountType === 'half' || discountType === 'full') && totalBeforeDiscounts > 0) {
