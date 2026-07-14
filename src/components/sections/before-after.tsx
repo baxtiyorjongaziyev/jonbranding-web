@@ -49,13 +49,15 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
   const displayItems = comparisons && comparisons.length > 0 ? comparisons : DEFAULT_COMPARISONS;
 
   const handleCtaClick = () => {
-    window.dispatchEvent(new CustomEvent('openContactModal', {
-      detail: {
-        section: 'before_after',
-        ctaText: translations.cta || translations.ctaButton,
-        source: 'homepage',
-      },
-    }));
+    window.dispatchEvent(
+      new CustomEvent('openContactModal', {
+        detail: {
+          section: 'before_after',
+          ctaText: translations.cta || translations.ctaButton,
+          source: 'homepage',
+        },
+      })
+    );
   };
 
   if (!translations || !displayItems || displayItems.length === 0) return null;
@@ -93,7 +95,10 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
               className="font-bold text-white tracking-tight leading-[0.95]"
               style={{ fontSize: 'clamp(36px, 5.5vw, 72px)', letterSpacing: '-0.04em' }}
             >
-              {renderHeadline(translations.title ?? '', "bg-gradient-to-r from-white via-white to-neutral-400 bg-clip-text text-transparent")}
+              {renderHeadline(
+                translations.title ?? '',
+                'bg-gradient-to-r from-white via-white to-neutral-400 bg-clip-text text-transparent'
+              )}
             </motion.h2>
           </div>
           <motion.div
@@ -104,7 +109,9 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
             className="md:col-span-5 flex flex-col justify-end"
           >
             {translations.subtitle && (
-              <p className="text-neutral-400 text-sm leading-[1.6] mb-8 font-medium max-w-[440px]">{translations.subtitle}</p>
+              <p className="text-neutral-400 text-sm leading-[1.6] mb-8 font-medium max-w-[440px]">
+                {translations.subtitle}
+              </p>
             )}
             <div className="flex flex-wrap gap-6">
               <Button
@@ -139,8 +146,12 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
                       <Icon className="h-4 w-4 text-[var(--at-accent)]" />
                     </div>
                     <div>
-                      <div className="font-extrabold text-white text-xl tracking-tight leading-none mb-1">{card.value}</div>
-                      <div className="font-[family-name:var(--font-mono)] text-[8px] uppercase tracking-[0.12em] text-neutral-500 font-semibold">{card.label}</div>
+                      <div className="font-extrabold text-white text-xl tracking-tight leading-none mb-1">
+                        {card.value}
+                      </div>
+                      <div className="font-[family-name:var(--font-mono)] text-[8px] uppercase tracking-[0.12em] text-neutral-500 font-semibold">
+                        {card.label}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -158,31 +169,28 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.35 + idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className={cn(
-                "group relative overflow-hidden rounded-2xl bg-neutral-900 border border-neutral-800/50 transition-all duration-500",
-                idx === 0 && "md:col-span-7",
-                idx === 1 && "md:col-span-5",
-                idx === 2 && "md:col-span-5",
-                idx === 3 && "md:col-span-7"
+                'group relative overflow-hidden rounded-2xl bg-neutral-900 border border-neutral-800/50 transition-all duration-500',
+                idx === 0 && 'md:col-span-7',
+                idx === 1 && 'md:col-span-5',
+                idx === 2 && 'md:col-span-5',
+                idx === 3 && 'md:col-span-7'
               )}
             >
               <ImageComparisonSlider
                 beforeImage={{
                   src: item.oldImg,
                   alt: `${item.brand} old`,
-                  'data-ai-hint': item.oldHint || ''
+                  'data-ai-hint': item.oldHint || '',
                 }}
                 afterImage={{
                   src: item.newImg,
                   alt: `${item.brand} new`,
-                  'data-ai-hint': item.newHint || ''
+                  'data-ai-hint': item.newHint || '',
                 }}
                 lang={lang}
                 hideLabels
               />
-              <div className={cn(
-                "absolute bottom-3 z-20",
-                idx % 2 === 0 ? "left-3" : "right-3"
-              )}>
+              <div className={cn('absolute bottom-3 z-20', idx % 2 === 0 ? 'left-3' : 'right-3')}>
                 <span className="text-[11px] font-bold text-white/90 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/5">
                   {item.brand}
                 </span>
