@@ -2,13 +2,27 @@ import { google } from 'googleapis';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+let cachedAuthKeyData = null;
 /** Service Account yoki API Key orqali auth */
-function getAuth(readOnly = true) {
+async function getAuth(readOnly = true) {
     const keyFile = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
     const apiKey = process.env.GOOGLE_API_KEY;
-    if (keyFile && fs.existsSync(keyFile)) {
-        const key = JSON.parse(fs.readFileSync(keyFile, 'utf-8'));
-        return new google.auth.JWT(key.client_email, undefined, key.private_key, [
+    let fileExists = false;
+    if (keyFile) {
+        try {
+            await fs.promises.access(keyFile, fs.constants.F_OK);
+            fileExists = true;
+        }
+        catch (e) {
+            fileExists = false;
+        }
+    }
+    if (keyFile && fileExists) {
+        if (!cachedAuthKeyData) {
+            const data = await fs.promises.readFile(keyFile, 'utf-8');
+            cachedAuthKeyData = JSON.parse(data);
+        }
+        return new google.auth.JWT(cachedAuthKeyData.client_email, undefined, cachedAuthKeyData.private_key, [
             readOnly
                 ? 'https://www.googleapis.com/auth/drive.readonly'
                 : 'https://www.googleapis.com/auth/drive',
@@ -23,7 +37,7 @@ function getAuth(readOnly = true) {
  * Google Drive folder ichidagi barcha rasmlarni list qiladi
  */
 export async function listImagesInFolder(folderId) {
-    const auth = getAuth();
+    const auth = await getAuth();
     const drive = google.drive({ version: 'v3', auth });
     const all = [];
     let pageToken;
@@ -82,7 +96,7 @@ export function extractFolderId(url) {
  * Drive folder haqida ma'lumot olish
  */
 export async function getFolderInfo(folderId) {
-    const auth = getAuth();
+    const auth = await getAuth();
     const drive = google.drive({ version: 'v3', auth });
     const res = await drive.files.get({
         fileId: folderId,
@@ -98,7 +112,7 @@ export async function getFolderInfo(folderId) {
  * Barcha folder va rasmlarni vaqtinchalik joyga yuklab oladi
  */
 export async function downloadToTemp(folderId) {
-    const auth = getAuth();
+    const auth = await getAuth();
     const drive = google.drive({ version: 'v3', auth });
     const images = await listImagesInFolder(folderId);
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-'));
@@ -123,7 +137,7 @@ export async function downloadToTemp(folderId) {
  * Berilgan parent folder ichidagi barcha papkalarni (subfolders) ro'yxatini oladi
  */
 export async function listSubfolders(parentFolderId) {
-    const auth = getAuth();
+    const auth = await getAuth();
     const drive = google.drive({ version: 'v3', auth });
     const all = [];
     let pageToken;
@@ -211,7 +225,7 @@ export async function findFolderByName(parentFolderId, candidates, minScore = 0.
  * Berilgan folder ichidan .txt faylni qidirib, uning matnini qaytaradi
  */
 export async function getTextFileContent(folderId) {
-    const auth = getAuth();
+    const auth = await getAuth();
     const drive = google.drive({ version: 'v3', auth });
     try {
         const res = await drive.files.list({

@@ -3,16 +3,21 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 
-function getAuth() {
+let cachedAuthKeyData: any = null;
+
+async function getAuth() {
   const keyFile = process.env.GOOGLE_SERVICE_ACCOUNT_JSON!;
-  const key = JSON.parse(fs.readFileSync(keyFile, 'utf-8'));
-  return new google.auth.JWT(key.client_email, undefined, key.private_key, [
+  if (!cachedAuthKeyData) {
+    const data = await fs.promises.readFile(keyFile, 'utf-8');
+    cachedAuthKeyData = JSON.parse(data);
+  }
+  return new google.auth.JWT(cachedAuthKeyData.client_email, undefined, cachedAuthKeyData.private_key, [
     'https://www.googleapis.com/auth/drive.readonly',
   ]);
 }
 
 export async function downloadToTemp(folderId: string): Promise<{ path: string; mime: string }[]> {
-  const auth = getAuth();
+  const auth = await getAuth();
   const drive = google.drive({ version: 'v3', auth });
 
   const list = await drive.files.list({
