@@ -73,7 +73,7 @@ const XizmatlarClient = ({ lang, dictionary, testimonials }: { lang: string, dic
         <>
           <TrustedBy lang={lang} dictionary={dictionary?.trustedBy} />
           {step >= 3 && (
-            <div className="atelier-theme" style={{ background: 'var(--bg)', color: 'var(--ink)' }}>
+            <div className="atelier-theme">
               <ATQuotes lang={lang} dictionary={dictionary?.atelier || dictionary} testimonials={testimonials} />
             </div>
           )}
