@@ -53,6 +53,11 @@ A high-performance, multilingual, and conversion-optimized web application for J
 3. **Environment Variables**:
    Create a `.env.local` based on `.env.example`.
 
+   To save Telegram usernames as clickable links in AmoCRM contacts, create a
+   contact field with type `URL` and set its numeric ID as
+   `AMOCRM_TELEGRAM_FIELD_ID`. Without it, Telegram remains available in the
+   lead note while phone delivery continues normally.
+
 4. **Run Development Server**:
    ```bash
    npm run dev

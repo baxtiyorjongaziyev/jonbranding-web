@@ -1,40 +1,15 @@
 import { NextResponse } from 'next/server';
-import { z } from 'zod';
 import { createHash } from 'crypto';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { getValidAccessToken, forceRefresh } from '@/lib/amocrm-token';
 import { getDb } from '@/lib/firebase-admin';
-
-const formSchema = z
-  .object({
-    fullName: z.string().min(2, 'Name is too short').max(100),
-    phone: z.string().min(7, 'Phone is too short').max(30).optional(),
-    telegram: z.string().optional(),
-    role: z.string().optional(),
-    revenue: z.string().optional(),
-    ambition: z.string().optional(),
-    pain: z.string().optional(),
-    budget: z.string().optional(),
-    source: z.string().optional(),
-    lang: z.string().optional(),
-    packageSummary: z.string().optional(),
-    totalPrice: z.number().optional(),
-    eventId: z.string().optional(),
-    gaClientId: z.string().optional(),
-    pageLocation: z.string().optional(),
-    ctaSource: z.string().optional(),
-  })
-  .refine(
-    (data) => {
-      const phone = String(data.phone ?? '').trim();
-      const telegram = String(data.telegram ?? '').trim();
-      return phone.length > 0 || telegram.length > 0;
-    },
-    {
-      message: 'Either phone or telegram is required',
-      path: ['phone'],
-    }
-  );
+import { leadFormSchema } from '@/lib/lead-form-schema';
+import {
+  buildAmoCrmContactFields,
+  normalizePhone,
+  normalizeTelegramUsername,
+  runLeadDeliveries,
+} from '@/lib/lead-contact';
 
 const UZS_TO_USD_RATE = 1 / 12700;
 const DEFAULT_GA_MEASUREMENT_ID = 'G-BTSGJQLMMV';
@@ -51,10 +26,6 @@ function cleanSecret(value: string | undefined) {
   return String(value || '')
     .replace(/^\uFEFF/, '')
     .trim();
-}
-
-function normalizePhone(phone: unknown) {
-  return String(phone || '').replace(/[^\d+]/g, '');
 }
 
 function sha256(value: unknown) {
@@ -317,9 +288,7 @@ async function sendToAmoCrm(data: any) {
 
   const fullName = String(data.fullName || 'Website lead').trim();
   const phone = normalizePhone(data.phone);
-  const telegram = String(data.telegram || '')
-    .replace(/^@/, '')
-    .trim();
+  const telegram = normalizeTelegramUsername(data.telegram);
   const source = data.source || 'website_contact_form';
   const price = Number(data.totalPrice) || 0;
 
@@ -339,29 +308,28 @@ async function sendToAmoCrm(data: any) {
     .filter(Boolean)
     .join('\n');
 
-  const contactFields: any[] = [];
-  if (phone) {
-    contactFields.push({
-      field_code: 'PHONE',
-      values: [{ value: phone, enum_code: 'WORK' }],
-    });
-  }
+  const contactFields = buildAmoCrmContactFields({
+    phone,
+    telegram,
+    telegramFieldId: process.env.AMOCRM_TELEGRAM_FIELD_ID,
+  });
+  const contactName = fullName === 'Mijoz' && telegram ? `@${telegram}` : fullName;
 
-  const leadBody = JSON.stringify([
-    {
-      name: `Jon.Branding site: ${fullName}`,
-      price,
-      tags_to_add: [{ name: 'jonbranding.uz' }, { name: 'website' }, { name: String(source) }],
-      _embedded: {
-        contacts: [
-          {
-            first_name: fullName,
-            ...(contactFields.length ? { custom_fields_values: contactFields } : {}),
-          },
-        ],
-      },
+  const leadBody = JSON.stringify([{
+    name: `Jon.Branding site: ${fullName}`,
+    price,
+    tags_to_add: [
+      { name: 'jonbranding.uz' },
+      { name: 'website' },
+      { name: String(source) },
+    ],
+    _embedded: {
+      contacts: [{
+        first_name: contactName,
+        ...(contactFields.length ? { custom_fields_values: contactFields } : {}),
+      }],
     },
-  ]);
+  }]);
 
   let createResponse = await fetch(`${baseUrl}/api/v4/leads/complex`, {
     method: 'POST',
@@ -406,11 +374,11 @@ async function sendToAmoCrm(data: any) {
     throw error;
   }
 
-  const leadId = Array.isArray(createResult)
-    ? createResult[0]?.id
-    : createResult?._embedded?.items?.[0]?.id ||
-      createResult?._embedded?.leads?.[0]?.id ||
-      createResult?.id;
+  const createdLead = Array.isArray(createResult)
+    ? createResult[0]
+    : createResult?._embedded?.items?.[0] || createResult?._embedded?.leads?.[0] || createResult;
+  const leadId = createdLead?.id;
+  const contactId = createdLead?.contact_id;
 
   if (leadId && details) {
     await fetch(`${baseUrl}/api/v4/leads/${leadId}/notes`, {
@@ -428,7 +396,7 @@ async function sendToAmoCrm(data: any) {
     }).catch((error) => console.error('AmoCRM note error:', error));
   }
 
-  return { ok: true, leadId };
+  return { ok: true, leadId, contactId, merged: createdLead?.merged === true };
 }
 
 function buildTelegramMessage(data: any) {
@@ -463,7 +431,7 @@ ${totalPrice ? `\n<b>Narx:</b> ${escapeTelegramHtml(totalPrice.toLocaleString('f
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  if (!rateLimit(`submit-form:${ip}`, 5, 60_000)) {
+  if (!(await rateLimit(`submit-form:${ip}`, 5, 60_000))) {
     return NextResponse.json(
       { ok: false, error: 'Too many requests. Please try again later.' },
       { status: 429 }
@@ -477,7 +445,7 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     // Validate input using Zod
-    const validatedData = formSchema.safeParse(body);
+    const validatedData = leadFormSchema.safeParse(body);
     if (!validatedData.success) {
       return NextResponse.json(
         { ok: false, error: 'Invalid input data', details: validatedData.error.format() },
@@ -503,37 +471,38 @@ export async function POST(request: Request) {
       ...(threadId ? { message_thread_id: Number(threadId) } : {}),
     };
 
-    const telegramSuccess = await sendTelegramIfConfigured(
-      botToken,
-      chatId,
-      telegramPayload,
-      'lead alert'
-    );
-
-    const amoCrmResult: any = await sendToAmoCrm(leadData).catch(async (error) => {
-      console.error('AmoCRM lead error:', error);
-      const queued = await queueFailedAmoCrmLead(leadData, error);
-      const reason = describeAmoCrmError(error);
-
-      await sendTelegramIfConfigured(
+    const [telegramSuccess, amoCrmResult]: [boolean, any] = await runLeadDeliveries(
+      () => sendTelegramIfConfigured(
         botToken,
         chatId,
-        {
-          ...telegramPayload,
-          text: [
-            '<b>AmoCRMga lead tushmadi</b>',
-            '',
-            `Sabab: ${escapeTelegramHtml(reason)}`,
-            `Backup: ${queued ? 'Firestore queue saqlandi' : 'Firestore queue xato'}`,
-            `Mijoz: ${escapeTelegramHtml(fullName)}`,
-            ...(phone ? [`Telefon: ${escapeTelegramHtml(phone)}`] : []),
-          ].join('\n'),
-        },
-        'AmoCRM failure alert'
-      );
+        telegramPayload,
+        'lead alert',
+      ),
+      () => sendToAmoCrm(leadData).catch(async (error) => {
+        console.error('AmoCRM lead error:', error);
+        const queued = await queueFailedAmoCrmLead(leadData, error);
+        const reason = describeAmoCrmError(error);
 
-      return { ok: false, queued, error: error?.message || String(error) };
-    });
+        await sendTelegramIfConfigured(
+          botToken,
+          chatId,
+          {
+            ...telegramPayload,
+            text: [
+              '<b>AmoCRMga lead tushmadi</b>',
+              '',
+              `Sabab: ${escapeTelegramHtml(reason)}`,
+              `Backup: ${queued ? 'Firestore queue saqlandi' : 'Firestore queue xato'}`,
+              `Mijoz: ${escapeTelegramHtml(fullName)}`,
+              ...(phone ? [`Telefon: ${escapeTelegramHtml(phone)}`] : []),
+            ].join('\n'),
+          },
+          'AmoCRM failure alert',
+        );
+
+        return { ok: false, queued, error: error?.message || String(error) };
+      }),
+    );
 
     sendMetaConversionEvent(leadData).catch(() => {});
     sendGAConversionEvent(leadData).catch(() => {});

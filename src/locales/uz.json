@@ -297,8 +297,29 @@
         "placeholder": "+998 (__) ___-__-__"
       },
       "telegram": {
-        "label": "Telegram / WhatsApp (ixtiyoriy)",
+        "label": "Telegram (ixtiyoriy)",
         "placeholder": "@username"
+      }
+    },
+    "atModal": {
+      "eyebrow": "Mini-tashxis · 1 daqiqa",
+      "stepContact": "1/2 · Aloqa",
+      "stepDetails": "2/2 · Ma'lumotlar (ixtiyoriy)",
+      "detailsTitle": "Bir nechta savol — yaxshiroq tayyorlanamiz.",
+      "serviceLabel": "Tashxis turi",
+      "budgetLabel": "Byudjet",
+      "submitting": "Yuborilmoqda",
+      "serviceOptions": {
+        "free": "Bepul mini-tashxis",
+        "full": "To'liq tashxis (4.8 mln so'm)",
+        "roadmap": "Tashxis + Yo'l xaritasi (12 mln so'm)",
+        "unsure": "Hali aniq emas"
+      },
+      "budgetOptions": {
+        "free": "Bepul — mini-tashxis",
+        "starter": "4—5 mln so'm",
+        "growth": "10—15 mln so'm",
+        "unsure": "Hali aniq emas"
       }
     },
     "buttons": {
@@ -309,7 +330,8 @@
     },
     "formErrors": {
       "fullName": "Ism kiritilishi shart",
-      "phone": "To'liq telefon raqamini kiriting"
+      "phone": "To'liq telefon raqamini kiriting",
+      "telegram": "To'g'ri Telegram username kiriting"
     },
     "errorToast": {
       "title": "Xatolik!",
