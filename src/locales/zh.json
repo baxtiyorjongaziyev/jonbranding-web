@@ -298,8 +298,29 @@
         "placeholder": "+..."
       },
       "telegram": {
-        "label": "Telegram / WhatsApp (选填)",
+        "label": "Telegram（选填）",
         "placeholder": "@用户名"
+      }
+    },
+    "atModal": {
+      "eyebrow": "免费迷你诊断 · 1分钟",
+      "stepContact": "1/2 · 联系方式",
+      "stepDetails": "2/2 · 补充信息（选填）",
+      "detailsTitle": "再回答几个问题，方便我们更充分地准备。",
+      "serviceLabel": "诊断类型",
+      "budgetLabel": "预算",
+      "submitting": "发送中",
+      "serviceOptions": {
+        "free": "免费迷你诊断",
+        "full": "完整诊断（480万苏姆）",
+        "roadmap": "诊断 + 路线图（1200万苏姆）",
+        "unsure": "暂未确定"
+      },
+      "budgetOptions": {
+        "free": "免费 — 迷你诊断",
+        "starter": "400万—500万苏姆",
+        "growth": "1000万—1500万苏姆",
+        "unsure": "暂未确定"
       }
     },
     "buttons": {
@@ -310,7 +331,8 @@
     },
     "formErrors": {
       "fullName": "请输入您的姓名",
-      "phone": "请输入完整的电话号码"
+      "phone": "请输入完整的电话号码",
+      "telegram": "请输入有效的 Telegram 用户名"
     },
     "errorToast": {
       "title": "错误！",

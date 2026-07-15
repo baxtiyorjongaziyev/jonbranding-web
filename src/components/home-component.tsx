@@ -97,7 +97,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtPricing onOpen={open} lang={lang} />
       <AtFaq lang={lang} onOpen={open} />
       <AtFinalCta onOpen={open} lang={lang} />
-      <AtModal open={modalOpen} onClose={close} lang={lang} />
+      <AtModal open={modalOpen} onClose={close} lang={lang} dictionary={dictionary.contactModal} />
       <AtStickyCta onOpen={open} lang={lang} />
       <ExitIntentPopup onOpen={open} lang={lang} />
       <ScrollDepthAnalytics />
