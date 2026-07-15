@@ -9,8 +9,6 @@ import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';
 import { motion, type Variants } from 'framer-motion';
 
-type Variants = any;
-
 
 type NavItem = { href: string; label: string };
 type Service = { title: string; href: string; description: string };
