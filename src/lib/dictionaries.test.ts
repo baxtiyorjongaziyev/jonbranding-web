@@ -16,7 +16,7 @@ describe('Localization Dictionaries', () => {
   });
 
   it('should fallback to Uzbek for unknown locales', async () => {
-    // @ts-ignore
+    // @ts-ignore - Intentionally testing with invalid locale 'fr' to verify fallback behavior
     const dict = await getDictionary('fr');
     expect(dict).toBeDefined();
     expect(dict.header.portfolio).toBe('Portfolio');

@@ -3,6 +3,7 @@ import { createClient } from '@sanity/client';
 import { findFolderByName, listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parseReviewMetadata } from '@/lib/gemini';
 import { safeCompare } from '@/lib/security';
+import { logger } from '@/lib/logger';
 
 // Initialize Sanity client with write access token
 const sanityWriteClient = createClient({
@@ -51,7 +52,7 @@ async function handleSync(request: NextRequest) {
       );
     }
 
-    console.log('[reviews-sync] Searching for "Mijozdan otziv feedback" folder on Google Drive...');
+    logger.info('[reviews-sync] Searching for "Mijozdan otziv feedback" folder on Google Drive...');
     const parentFolderId = await findFolderByName('Mijozdan otziv feedback');
 
     if (!parentFolderId) {
@@ -66,7 +67,7 @@ async function handleSync(request: NextRequest) {
           const key = JSON.parse(saJson);
           serviceAccountEmail = key.client_email || 'Noma\'lum';
         } catch (e) {
-          console.error('[reviews-sync] Error parsing service account email:', e);
+          logger.error('[reviews-sync] Error parsing service account email:', e);
         }
       }
 
@@ -80,9 +81,9 @@ async function handleSync(request: NextRequest) {
       );
     }
 
-    console.log(`[reviews-sync] Found parent folder ID: ${parentFolderId}. Listing subfolders...`);
+    logger.info(`[reviews-sync] Found parent folder ID: ${parentFolderId}. Listing subfolders...`);
     const folders = await listSubfolders(parentFolderId);
-    console.log(`[reviews-sync] Found ${folders.length} client subfolders`);
+    logger.info(`[reviews-sync] Found ${folders.length} client subfolders`);
 
     const results = [];
 
@@ -96,7 +97,7 @@ async function handleSync(request: NextRequest) {
 
         if (existingDoc) {
           if (forceUpdate) {
-            console.log(`[reviews-sync] Force update: Deleting existing testimonial ${existingDoc._id}`);
+            logger.info(`[reviews-sync] Force update: Deleting existing testimonial ${existingDoc._id}`);
             await sanityWriteClient.delete(existingDoc._id);
           } else {
             results.push({
@@ -109,7 +110,7 @@ async function handleSync(request: NextRequest) {
           }
         }
 
-        console.log(`[reviews-sync] Syncing folder: "${folder.name}" (${folder.id})`);
+        logger.info(`[reviews-sync] Syncing folder: "${folder.name}" (${folder.id})`);
 
         // 3. List files inside folder
         const files = await listFiles(folder.id);
@@ -134,21 +135,21 @@ async function handleSync(request: NextRequest) {
           const textFile = textFiles[0];
           const textBuffer = await downloadFileBuffer(textFile.id);
           textContent = textBuffer.toString('utf8');
-          console.log(`[reviews-sync] Read review text from file: ${textFile.name}`);
+          logger.info(`[reviews-sync] Read review text from file: ${textFile.name}`);
         } else {
-          console.log(`[reviews-sync] No info.txt text file found, fallback to folder name`);
+          logger.info(`[reviews-sync] No info.txt text file found, fallback to folder name`);
         }
 
         // 5. Parse and translate metadata using Gemini
-        console.log(`[reviews-sync] Sending text to Gemini 2.5 Flash for translation and parsing...`);
+        logger.info(`[reviews-sync] Sending text to Gemini 2.5 Flash for translation and parsing...`);
         const parsedMeta = await parseReviewMetadata(textContent);
-        console.log(`[reviews-sync] Successfully parsed review for client: "${parsedMeta.name}"`);
+        logger.info(`[reviews-sync] Successfully parsed review for client: "${parsedMeta.name}"`);
 
         // 6. Upload avatar image if exists
         let avatarAsset = null;
         if (imageFiles.length > 0) {
           const avatarFile = imageFiles[0];
-          console.log(`[reviews-sync] Uploading avatar image: ${avatarFile.name}`);
+          logger.info(`[reviews-sync] Uploading avatar image: ${avatarFile.name}`);
           const avatarBuffer = await downloadFileBuffer(avatarFile.id);
           avatarAsset = await sanityWriteClient.assets.upload('image', avatarBuffer, {
             filename: avatarFile.name,
@@ -160,7 +161,7 @@ async function handleSync(request: NextRequest) {
         let audioAsset = null;
         if (audioFiles.length > 0) {
           const audioFile = audioFiles[0];
-          console.log(`[reviews-sync] Uploading audio feedback file: ${audioFile.name}`);
+          logger.info(`[reviews-sync] Uploading audio feedback file: ${audioFile.name}`);
           const audioBuffer = await downloadFileBuffer(audioFile.id);
           audioAsset = await sanityWriteClient.assets.upload('file', audioBuffer, {
             filename: audioFile.name,
@@ -172,7 +173,7 @@ async function handleSync(request: NextRequest) {
         let videoAsset = null;
         if (videoFiles.length > 0) {
           const videoFile = videoFiles[0];
-          console.log(`[reviews-sync] Uploading video feedback file: ${videoFile.name}`);
+          logger.info(`[reviews-sync] Uploading video feedback file: ${videoFile.name}`);
           const videoBuffer = await downloadFileBuffer(videoFile.id);
           videoAsset = await sanityWriteClient.assets.upload('file', videoBuffer, {
             filename: videoFile.name,
@@ -212,9 +213,9 @@ async function handleSync(request: NextRequest) {
           publishedAt: new Date().toISOString(),
         };
 
-        console.log(`[reviews-sync] Saving testimonial document to Sanity...`);
+        logger.info(`[reviews-sync] Saving testimonial document to Sanity...`);
         const createdDoc = await sanityWriteClient.create(testimonialPayload);
-        console.log(`[reviews-sync] Created Sanity Testimonial: ${createdDoc._id}`);
+        logger.info(`[reviews-sync] Created Sanity Testimonial: ${createdDoc._id}`);
 
         results.push({
           folderName: folder.name,
@@ -226,7 +227,7 @@ async function handleSync(request: NextRequest) {
           hasVideo: !!videoAsset,
         });
       } catch (folderError) {
-        console.error(`[reviews-sync] Error syncing folder ${folder.name}:`, folderError);
+        logger.error(`[reviews-sync] Error syncing folder ${folder.name}:`, folderError);
         results.push({
           folderName: folder.name,
           folderId: folder.id,
@@ -242,7 +243,7 @@ async function handleSync(request: NextRequest) {
       results,
     });
   } catch (error) {
-    console.error('[reviews-sync] Global sync error:', error);
+    logger.error('[reviews-sync] Global sync error:', error);
     return NextResponse.json(
       { success: false, error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
