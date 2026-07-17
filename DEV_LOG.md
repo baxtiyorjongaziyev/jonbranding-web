@@ -257,3 +257,10 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - Sinxron blokirovka qiluvchi `fs.existsSync` va `fs.readFileSync` o'rniga asinxron `fs.promises.readFile` dan foydalanildi.
 - Google Service Account kalit fayli (JSON) uchun in-memory kesh joriy etildi, bu orqali fayl faqat bir marta o'qiladi.
 - O'zgarish Node.js event loop bloklanishining oldini oladi va benchmark natijalariga ko'ra Google API ga auth olish vaqtini 5000 ta chaqiriq uchun ~118ms dan ~38ms gacha qisqartiradi, asosiysi, parallel ishlashda qotib qolishni (event loop delay) butunlay yo'q qiladi.
+# 2026-07-15 — at_modal lead delivery
+
+- `at_modal` uchun telefon majburiy, Telegram username ixtiyoriy qilindi.
+- Telefon E.164 formatiga normallashtirilib, AmoCRM kontaktiga PHONE/MOB sifatida yuboriladi.
+- Lead AmoCRM va Telegram guruhiga parallel yuboriladi; bittasi ishlamasa ikkinchisi to'xtamaydi.
+- API, forma va normalizatsiya testlari qo'shildi.
+- Production test: AmoCRM muvaffaqiyatli (`amoCrm: true`), Telegram yuborish muvaffaqiyatsiz (`telegram: false`). Bot token ishlaydi, ammo sozlangan guruh uchun Telegram `Bad Request: chat not found` qaytardi; guruh ID yoki bot a'zoligi tuzatilishi kerak.

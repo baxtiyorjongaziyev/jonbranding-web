@@ -1,4 +1,5 @@
 import { getDb } from './firebase';
+import { logger } from '@/lib/logger';
 
 interface InstagramTokenDoc {
   accessToken: string;
