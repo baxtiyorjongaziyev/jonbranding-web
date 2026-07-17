@@ -18,6 +18,8 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 - `npm run lint`: muvaffaqiyatli.
 - `npm run typecheck`: muvaffaqiyatli.
 - `npm run build`: muvaffaqiyatli; 61/61 static sahifa. Sanity CDN `ECONNRESET` berganda fallback ishladi va build to'xtamadi.
+- Birinchi Vercel preview deploy `pnpm-lock.yaml` eskirgani sabab `ERR_PNPM_OUTDATED_LOCKFILE` bilan yiqildi.
+- `pnpm-lock.yaml` package manifestga sinxron qilindi; `pnpm install --frozen-lockfile --ignore-scripts --config.confirmModulesPurge=false` lokal o'tdi.
 
 ---
 
