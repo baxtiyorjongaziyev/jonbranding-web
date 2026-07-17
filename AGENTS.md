@@ -90,6 +90,16 @@ NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_OISHA_API_URL=https://oisha-master-bot-...run.app
 ```
 
+## NotebookLM Integratsiya
+
+AI agentlar loyiha kontekstini samarali olish uchun **NotebookLM MCP server** dan foydalanishi mumkin.
+
+- **Notebook nomi**: `jonbranding-dev-context`
+- **MCP server**: `notebooklm-mcp-cli` (v0.8.6)
+- **Foydalanish**: Katta kontekst kerak bo'lganda, fayllarni qayta o'qish o'rniga NotebookLM ga savol bering
+- **CLI**: `nlm` buyrug'i orqali notebook yaratish, source qo'shish, savol berish mumkin
+- **Eslatma**: Unofficial tool — Google rasmiy API si emas
+
 ## Eslatmalar
 
 - `DEV_LOG.md` — push qilganda avtomatik yangilanadi
