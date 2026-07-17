@@ -270,7 +270,7 @@ export default function SotuvchiKartochkaPricingPage() {
       }
   };
 
-  // @ts-ignore
+  // @ts-ignore - Dynamic lang lookup requires type assertion; fallback to 'uz' is intentional for robustness
   const t = translations[lang] || translations.uz;
 
   const [selectedTier, setSelectedTier] = useState<number>(pricingData[1].price); // Default to PRO

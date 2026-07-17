@@ -1,11 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/sanity/lib/client';
 import { safeCompare } from '@/lib/security';
+import { logger } from '@/lib/logger';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 const SANITY_TOKEN = process.env.SANITY_TOKEN || '';
 const CRON_SECRET = process.env.CRON_SECRET || '';
 const AMOCRM_CRON_SECRET = process.env.AMOCRM_CRON_SECRET || '';
+
+if (!GEMINI_API_KEY) {
+  logger.warn('[blog-agent] GEMINI_API_KEY not configured');
+}
+if (!SANITY_TOKEN) {
+  logger.warn('[blog-agent] SANITY_TOKEN not configured');
+}
 
 const sanityWriteClient = client.withConfig({
   token: SANITY_TOKEN,
@@ -103,7 +111,7 @@ export async function GET(req: NextRequest) {
     const imageUrl = await fetchUnsplashImage("branding,design");
 
     for (const lang of languages) {
-      console.log(`[blog-agent] Generating article for topic: ${topic} in ${lang}`);
+      logger.info(`[blog-agent] Generating article for topic: ${topic} in ${lang}`);
       const generated = await generateBlogPost(topic, lang);
       
       const slug = lang === 'en' ? slugify(generated.title) : `${slugify(generated.title)}-${lang}`;
@@ -142,7 +150,7 @@ export async function GET(req: NextRequest) {
         publishedAt: new Date().toISOString(),
       };
 
-      console.log(`[blog-agent] Saving to Sanity: ${slug}`);
+      logger.info(`[blog-agent] Saving to Sanity: ${slug}`);
       const doc = await sanityWriteClient.create(payload);
       results.push({ lang, id: doc._id, title: generated.title });
     }
@@ -154,7 +162,7 @@ export async function GET(req: NextRequest) {
       results
     });
   } catch (error) {
-    console.error('[blog-agent] Error:', error);
+    logger.error('[blog-agent] Error:', error);
     return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }
