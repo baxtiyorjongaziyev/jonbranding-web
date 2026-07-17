@@ -53,6 +53,18 @@ A high-performance, multilingual, and conversion-optimized web application for J
 3. **Environment Variables**:
    Create a `.env.local` based on `.env.example`.
 
+   To save Telegram usernames as clickable links in AmoCRM contacts, create a
+   contact field with type `URL` and set its numeric ID as
+   `AMOCRM_TELEGRAM_FIELD_ID`. Without it, Telegram remains available in the
+   lead note while phone delivery continues normally.
+
+   Security-sensitive integrations also require:
+   - `VIMEO_WEBHOOK_SECRET` — verifies Vimeo webhook HMAC signatures.
+   - `INSTAGRAM_OAUTH_ADMIN_SECRET` — protects the Instagram OAuth start route.
+   - `FIREBASE_SERVICE_ACCOUNT_JSON` — enables shared Firestore rate limits in production.
+
+   For automatic cleanup, configure Firestore TTL on `_rate_limits.expiresAt`.
+
 4. **Run Development Server**:
    ```bash
    npm run dev

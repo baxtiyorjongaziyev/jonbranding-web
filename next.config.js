@@ -10,6 +10,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const nextConfig = {
   output: process.env.NETLIFY ? undefined : 'standalone',
+  allowedDevOrigins: ['127.0.0.1'],
   async redirects() {
     return [
       {
@@ -41,12 +42,13 @@ const nextConfig = {
   },
   experimental: {
     cpus: 1,
-    optimizeCss: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-  turbopack: {},
+  turbopack: {
+    root: __dirname,
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
@@ -56,6 +58,7 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 85],
     remotePatterns: [
       {
         protocol: 'https',
@@ -116,36 +119,33 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://api.fontshare.com https://fonts.googleapis.com",
               "font-src 'self' data: https://api.fontshare.com https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://cdn.sanity.io https://cdn.prod.website-files.com https://images.unsplash.com https://www.google-analytics.com https://mc.yandex.ru https://www.googletagmanager.com https://www.clarity.ms https://www.facebook.com",
-              "connect-src 'self' https://cdn.sanity.io https://h6ymmj0v.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://mc.yandex.ru https://in.hotjar.com https://vc.hotjar.io https://o.clarity.ms https://api.amplitude.com https://region1.google-analytics.com wss://ws.hotjar.com https://www.facebook.com",
+              process.env.NODE_ENV === 'development'
+                ? "connect-src 'self' ws://localhost:* ws://127.0.0.1:* https://cdn.sanity.io https://h6ymmj0v.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://mc.yandex.ru https://in.hotjar.com https://vc.hotjar.io https://o.clarity.ms https://api.amplitude.com https://region1.google-analytics.com wss://ws.hotjar.com https://www.facebook.com"
+                : "connect-src 'self' https://cdn.sanity.io https://h6ymmj0v.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://mc.yandex.ru https://in.hotjar.com https://vc.hotjar.io https://o.clarity.ms https://api.amplitude.com https://region1.google-analytics.com wss://ws.hotjar.com https://www.facebook.com",
               "media-src 'self' https://cdn.sanity.io https://player.vimeo.com https://*.vimeocdn.com blob:",
               "frame-src 'self' https://player.vimeo.com https://www.google.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
               "frame-ancestors 'self'",
-              "upgrade-insecure-requests",
+              ...(process.env.NODE_ENV === 'production' ? ["upgrade-insecure-requests"] : []),
             ].join('; '),
           },
         ],
       },
-      {
-        source: '/_next/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/images/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=86400, stale-while-revalidate=604800',
-          },
-        ],
-      },
+      ...(process.env.NODE_ENV === 'production'
+        ? [
+            {
+              source: '/images/(.*)',
+              headers: [
+                {
+                  key: 'Cache-Control',
+                  value: 'public, max-age=86400, stale-while-revalidate=604800',
+                },
+              ],
+            },
+          ]
+        : []),
     ];
   },
 };

@@ -23,21 +23,21 @@ const OnlineBriefWelcomePage: FC = () => {
 
   if (!translations) {
     return (
-      <main className="flex-grow bg-[#F2EFE6] py-16 sm:py-28 min-h-screen flex items-center justify-center">
+      <div className="flex-grow bg-[#F2EFE6] py-16 sm:py-28 min-h-screen flex items-center justify-center">
         <div className="container max-w-4xl mx-auto px-4">
           <h1 className="sr-only">
             {lang === 'uz' ? 'Onlayn Smart Brief' : lang === 'ru' ? 'Онлайн Smart Brief' : lang === 'en' ? 'Online Smart Brief' : '在线智能品牌简报'}
           </h1>
           <Skeleton className="h-[450px] w-full rounded-3xl" />
         </div>
-      </main>
+      </div>
     );
   }
 
   const { welcome } = translations;
 
   return (
-    <main className="flex-grow bg-[#F2EFE6] py-16 sm:py-28 min-h-screen flex items-center justify-center">
+    <div className="flex-grow bg-[#F2EFE6] py-16 sm:py-28 min-h-screen flex items-center justify-center">
       <div className="container max-w-4xl mx-auto px-4">
         <Card className="border border-[#e4dfd3] bg-[#FAF8F5]/90 backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden">
           <CardContent className="p-8 sm:p-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -94,7 +94,7 @@ const OnlineBriefWelcomePage: FC = () => {
           </CardContent>
         </Card>
       </div>
-    </main>
+    </div>
   );
 };
 

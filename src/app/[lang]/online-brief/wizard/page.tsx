@@ -17,10 +17,10 @@ const OnlineBriefWizardPage: FC = () => {
   }[lang] || 'Online Brief | Jon.Branding';
 
   return (
-    <main className="flex-grow bg-[#F2EFE6] py-10 sm:py-20 min-h-screen">
+    <div className="flex-grow bg-[#F2EFE6] py-10 sm:py-20 min-h-screen">
       <h1 className="sr-only">{h1Text}</h1>
       <OnlineBriefWizard lang={lang} />
-    </main>
+    </div>
   );
 };
 

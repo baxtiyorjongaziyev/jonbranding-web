@@ -70,7 +70,7 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
       <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3 rounded-full shadow-2xl max-w-[90vw] sm:max-w-none" style={{ background: 'var(--at-ink)', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 50px -10px rgba(14,16,21,0.5)' }}>
         <span className="text-xs font-semibold shrink-0" style={{ fontFamily: 'var(--font-mono)', color: 'var(--at-accent)', letterSpacing: '0.06em' }}>{v.num}</span>
         <span className="text-[11px] sm:text-sm line-clamp-1 truncate flex-1 min-w-[100px]" style={{ color: 'rgba(244,241,232,.7)' }}>{v.text}</span>
-        <button onClick={onOpen} className="relative font-semibold text-xs sm:text-sm rounded-full px-4 py-2 transition-all hover:opacity-90 group shrink-0" style={{ background: 'var(--at-accent)', color: '#fff', whiteSpace: 'nowrap' }}>
+        <button onClick={onOpen} className="relative overflow-hidden font-semibold text-xs sm:text-sm rounded-full px-4 py-2 transition-all hover:opacity-90 group shrink-0" style={{ background: 'var(--at-accent)', color: '#fff', whiteSpace: 'nowrap' }}>
           <span className="relative z-10">{v.cta}</span>
           <span className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ background: 'var(--at-accent)' }}></span>
         </button>

@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     const corsHeaders = getCorsHeaders(request);
     const ip = getClientIp(request);
 
-    if (!rateLimit(`amocrm:${ip}`, 20, 60_000)) {
+    if (!(await rateLimit(`amocrm:${ip}`, 20, 60_000))) {
         return NextResponse.json(
             { ok: false, error: 'Too many requests' },
             { status: 429, headers: corsHeaders },

@@ -21,7 +21,7 @@ interface NamingClientProps {
 
 const NamingClient: FC<NamingClientProps> = ({ lang, translations }) => {
   if (!translations || !translations.process_steps) {
-    return <main className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></main>;
+    return <div className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></div>;
   }
 
   const creationSteps = [
@@ -34,7 +34,7 @@ const NamingClient: FC<NamingClientProps> = ({ lang, translations }) => {
 
   return (
     <>
-        <main className="flex-grow pt-20">
+        <div className="flex-grow pt-20">
             <section className="py-20 sm:py-28 bg-white">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
@@ -127,7 +127,7 @@ const NamingClient: FC<NamingClientProps> = ({ lang, translations }) => {
         </section>
 
         <ServiceSections lang={lang} />
-        </main>
+        </div>
     </>
   );
 };

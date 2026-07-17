@@ -143,7 +143,7 @@ export default async function ProPreviewPage({ params }: Props) {
   const safeLang = ['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz';
 
   return (
-    <main className={styles.preview}>
+    <div className={styles.preview}>
       <section className={styles.hero} aria-labelledby="pro-preview-title">
         <div className={styles.container}>
           <div className={styles.topbar} aria-label="Jon Pro preview navigation">
@@ -413,6 +413,6 @@ export default async function ProPreviewPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

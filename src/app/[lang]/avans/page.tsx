@@ -78,7 +78,7 @@ export default function AvansCalculator() {
         </div>
       </header>
 
-      <main className="w-full max-w-xl mx-auto space-y-6 z-10">
+      <div className="w-full max-w-xl mx-auto space-y-6 z-10">
         
         {/* Inputs */}
         <section className="relative bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 shadow-[0_4px_40px_rgba(0,0,0,0.05)] rounded-[2rem] p-6 sm:p-8 space-y-7">
@@ -215,7 +215,7 @@ export default function AvansCalculator() {
           </div>
         )}
 
-      </main>
+      </div>
 
       <style dangerouslySetInnerHTML={{__html: `
         input[type=number]::-webkit-inner-spin-button, 

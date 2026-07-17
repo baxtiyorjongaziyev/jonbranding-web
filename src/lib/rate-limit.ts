@@ -1,48 +1,138 @@
-const ipMap = new Map<string, { count: number; resetAt: number }>();
+import { createHash } from 'node:crypto';
+import { isIP } from 'node:net';
+import { getDb } from '@/lib/firebase-admin';
 
-export function rateLimit(ip: string, maxRequests: number, windowMs: number): boolean {
-    const now = Date.now();
-    const entry = ipMap.get(ip);
+type LocalEntry = { count: number; resetAt: number };
 
-    if (!entry || now > entry.resetAt) {
-        ipMap.set(ip, { count: 1, resetAt: now + windowMs });
-        return true;
-    }
+const localBuckets = new Map<string, LocalEntry>();
+let warnedAboutDistributedFallback = false;
 
-    if (entry.count >= maxRequests) return false;
+function cleanupExpiredLocalBuckets(now: number) {
+  if (localBuckets.size < 5_000) return;
 
-    entry.count++;
+  localBuckets.forEach((entry, key) => {
+    if (entry.resetAt <= now) localBuckets.delete(key);
+  });
+}
+
+function checkLocalBucket(key: string, maxRequests: number, windowMs: number, now: number) {
+  cleanupExpiredLocalBuckets(now);
+  const entry = localBuckets.get(key);
+
+  if (!entry || now >= entry.resetAt) {
+    localBuckets.set(key, { count: 1, resetAt: now + windowMs });
     return true;
+  }
+
+  if (entry.count >= maxRequests) return false;
+
+  entry.count += 1;
+  return true;
 }
 
 /**
- * Extracts the real client IP from a request.
- *
- * 🛡️ Security: CF-Connecting-IP and X-Real-IP are only trusted when the
- * TRUSTED_PROXY environment variable is set to "cloudflare". This prevents
- * IP spoofing attacks where an attacker sends forged headers directly to the
- * origin — bypassing the rate-limiter's per-IP bucket on every request.
- *
- * Production (Cloudflare → Vercel/Firebase): set TRUSTED_PROXY=cloudflare
- * Development / direct-origin: leave TRUSTED_PROXY unset → X-Forwarded-For
+ * Uses Firestore transactions in production so every serverless instance shares
+ * the same bucket. Local memory remains a fail-soft fallback for development and
+ * temporary Firestore outages.
+ */
+export async function rateLimit(
+  key: string,
+  maxRequests: number,
+  windowMs: number,
+): Promise<boolean> {
+  if (!key || maxRequests < 1 || windowMs < 1) return false;
+
+  const now = Date.now();
+  const hasDistributedStore =
+    process.env.NODE_ENV !== 'test' && Boolean(process.env.FIREBASE_SERVICE_ACCOUNT_JSON?.trim());
+
+  if (!hasDistributedStore) {
+    return checkLocalBucket(key, maxRequests, windowMs, now);
+  }
+
+  try {
+    const db = getDb();
+    const bucketId = createHash('sha256').update(key).digest('hex');
+    const bucketRef = db.collection('_rate_limits').doc(bucketId);
+
+    return await db.runTransaction(async (transaction) => {
+      const snapshot = await transaction.get(bucketRef);
+      const data = snapshot.data();
+      const resetAt = Number(data?.resetAt ?? 0);
+      const count = Number(data?.count ?? 0);
+
+      if (!snapshot.exists || now >= resetAt) {
+        transaction.set(bucketRef, {
+          count: 1,
+          resetAt: now + windowMs,
+          expiresAt: new Date(now + windowMs * 2),
+          updatedAt: new Date(now),
+        });
+        return true;
+      }
+
+      if (count >= maxRequests) return false;
+
+      transaction.update(bucketRef, {
+        count: count + 1,
+        updatedAt: new Date(now),
+      });
+      return true;
+    });
+  } catch (error) {
+    if (!warnedAboutDistributedFallback) {
+      warnedAboutDistributedFallback = true;
+      console.error('[rate-limit] Firestore unavailable; using local fallback.', error);
+    }
+    return checkLocalBucket(key, maxRequests, windowMs, now);
+  }
+}
+
+function normalizeIp(value: string | null | undefined): string | null {
+  if (!value) return null;
+  const candidate = value.split(',')[0]?.trim();
+  return candidate && isIP(candidate) ? candidate : null;
+}
+
+function anonymousFingerprint(headers: Headers | undefined) {
+  const material = [
+    headers?.get?.('user-agent') ?? '',
+    headers?.get?.('accept-language') ?? '',
+    headers?.get?.('sec-ch-ua-platform') ?? '',
+  ].join('|');
+
+  return `anonymous:${createHash('sha256').update(material || 'no-client-metadata').digest('hex').slice(0, 24)}`;
+}
+
+/**
+ * Extracts a trusted client address. Vercel overwrites its forwarded-IP headers,
+ * while Cloudflare headers are accepted only when that proxy is explicitly set.
  */
 export function getClientIp(request: Request): string {
-    const headers = (request as any).headers;
-    const isBehindCloudflare = process.env.TRUSTED_PROXY === 'cloudflare';
+  const headers = (request as Request | undefined)?.headers;
+  const isBehindCloudflare = process.env.TRUSTED_PROXY === 'cloudflare';
 
-    if (isBehindCloudflare) {
-        const cfConnectingIp = headers?.get?.('cf-connecting-ip');
-        if (cfConnectingIp) return cfConnectingIp.trim();
+  if (isBehindCloudflare) {
+    const cloudflareIp = normalizeIp(headers?.get?.('cf-connecting-ip'));
+    if (cloudflareIp) return cloudflareIp;
 
-        const xRealIp = headers?.get?.('x-real-ip');
-        if (xRealIp) return xRealIp.trim();
-    }
+    const realIp = normalizeIp(headers?.get?.('x-real-ip'));
+    if (realIp) return realIp;
+  }
 
-    // Fallback: Next.js provides .ip on NextRequest which is secure.
-    const nextIp = (request as any).ip;
-    if (nextIp) return nextIp;
+  if (process.env.VERCEL || process.env.VERCEL_ENV) {
+    const vercelIp = normalizeIp(headers?.get?.('x-vercel-forwarded-for'));
+    if (vercelIp) return vercelIp;
 
-    // Do NOT parse X-Forwarded-For blindly when not behind a trusted proxy,
-    // as it allows trivial IP spoofing by attackers connecting directly.
-    return 'unknown';
+    const forwardedIp = normalizeIp(headers?.get?.('x-forwarded-for'));
+    if (forwardedIp) return forwardedIp;
+
+    const realIp = normalizeIp(headers?.get?.('x-real-ip'));
+    if (realIp) return realIp;
+  }
+
+  const nextIp = normalizeIp((request as Request & { ip?: string })?.ip);
+  if (nextIp) return nextIp;
+
+  return anonymousFingerprint(headers);
 }

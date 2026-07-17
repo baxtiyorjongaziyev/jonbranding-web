@@ -290,8 +290,29 @@
         "placeholder": "+..."
       },
       "telegram": {
-        "label": "Telegram / WhatsApp (optional)",
+        "label": "Telegram (optional)",
         "placeholder": "@username"
+      }
+    },
+    "atModal": {
+      "eyebrow": "Mini diagnosis · 1 minute",
+      "stepContact": "1/2 · Contact",
+      "stepDetails": "2/2 · Details (optional)",
+      "detailsTitle": "A few questions help us prepare better.",
+      "serviceLabel": "Diagnosis type",
+      "budgetLabel": "Budget",
+      "submitting": "Sending",
+      "serviceOptions": {
+        "free": "Free mini diagnosis",
+        "full": "Full diagnosis (UZS 4.8M)",
+        "roadmap": "Diagnosis + roadmap (UZS 12M)",
+        "unsure": "Not sure yet"
+      },
+      "budgetOptions": {
+        "free": "Free — mini diagnosis",
+        "starter": "UZS 4—5M",
+        "growth": "UZS 10—15M",
+        "unsure": "Not sure yet"
       }
     },
     "buttons": {
@@ -302,7 +323,8 @@
     },
     "formErrors": {
       "fullName": "Enter your name",
-      "phone": "Enter full phone number"
+      "phone": "Enter full phone number",
+      "telegram": "Enter a valid Telegram username"
     },
     "errorToast": {
       "title": "Error",
@@ -335,6 +357,16 @@
     "objectionCopy": "Even if you are not ready to start, the audit gives you clarity.",
     "riskCopy": "Leaving your phone is not a contract. We show the problem first.",
     "footerCopyright": "Jon.Branding Agency"
+  },
+  "processVideo": {
+    "eyebrow": "Process",
+    "title": "See how we work",
+    "description": "Naming, logo, and visual identity — the sequence and the result in a three-minute video.",
+    "play": "Play the process video",
+    "posterAlt": "Cover image for the Jon.Branding process video",
+    "fallbackHint": "If the video does not open, every stage is available below in text form.",
+    "fallbackCta": "Read the process",
+    "iframeTitle": "Jon.Branding process video"
   },
   "oishaWidget": {
     "title": "Oisha Intelligence",
@@ -1924,6 +1956,8 @@
     "diagnosis_cta": "Find the signs · Free",
     "services_title": "Brand — from start\nto finish.",
     "services_lede": "Naming, identity, packaging, trademark, and digital presence — all in one place, one team, one price. Each can also be ordered separately.",
+    "services_label": "§ 04 Services",
+    "services_timeline_note": "Timeline depends on project scope",
     "featured_title": "Featured case",
     "featured_live": "Ongoing",
     "showcase_title": "Latest 4 projects · 2023—2025",

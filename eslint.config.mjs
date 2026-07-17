@@ -43,6 +43,7 @@ const config = [
       "out/**",
       "dist/**",
       "coverage/**",
+      ".claude/worktrees/**",
       "opencode_app/**",
       "graphify-out/**",
       "DESIGN_AUDIT/**",

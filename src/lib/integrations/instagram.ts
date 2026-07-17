@@ -34,7 +34,7 @@ export async function getInstagramToken(): Promise<string | null> {
           accessToken: newTokenData.accessToken,
           expiresAt: expiresAtVal,
           updatedAt: Date.now()
-        });
+        }, { merge: true });
         return newTokenData.accessToken;
       }
     }

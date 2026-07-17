@@ -22,7 +22,7 @@ const isValidUserId = (value: unknown): value is string =>
 
 export async function GET(request: Request) {
     const ip = getClientIp(request);
-    if (!rateLimit(ip, 30, 60_000)) {
+    if (!(await rateLimit(`oisha:${ip}`, 30, 60_000))) {
         return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
     const { searchParams } = new URL(request.url);
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     const ip = getClientIp(request);
-    if (!rateLimit(ip, 30, 60_000)) {
+    if (!(await rateLimit(`oisha:${ip}`, 30, 60_000))) {
         return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
     const body = await request.json();

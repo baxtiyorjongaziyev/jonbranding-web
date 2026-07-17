@@ -76,7 +76,7 @@ const ServicesPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   };
 
   return (
-    <main className="flex-grow">
+    <div className="flex-grow">
       <Script
         id="json-ld-breadcrumb-xizmatlar"
         type="application/ld+json"
@@ -87,7 +87,7 @@ const ServicesPage = async (props: { params: Promise<{ lang: Locale }> }) => {
       <AtManifesto lang={safeLang} />
       <XizmatlarServices lang={safeLang} />
       <XizmatlarFinalCta lang={safeLang} />
-    </main>
+    </div>
   );
 };
 

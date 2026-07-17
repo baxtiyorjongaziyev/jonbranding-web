@@ -77,14 +77,14 @@ const NarxlarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   };
 
   return (
-    <main className="flex-grow">
+    <div className="flex-grow">
       <Script
         id="json-ld-breadcrumb-narxlar"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbSchema) }}
       />
       <XizmatlarClient lang={safeLang} dictionary={dictionary} testimonials={testimonials} />
-    </main>
+    </div>
   );
 };
 

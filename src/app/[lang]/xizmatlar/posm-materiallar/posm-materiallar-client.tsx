@@ -89,7 +89,7 @@ function openContactModal() {
 
 const PosmMateriallarClient: FC<{ translations: PosmPageTranslations }> = ({ translations: t }) => {
   return (
-    <main className="min-h-screen bg-slate-50 pt-20 text-slate-900">
+    <div className="min-h-screen bg-slate-50 pt-20 text-slate-900">
       <HeroSection t={t} />
       <PricingSection pricing={t.pricing} primaryCta={t.hero.primaryCta} />
       <ProblemSolutionSection problem={t.problem} solution={t.solution} />
@@ -98,7 +98,7 @@ const PosmMateriallarClient: FC<{ translations: PosmPageTranslations }> = ({ tra
       <ProcessSection process={t.process} />
       <FinalCta cta={t.cta} />
       <FaqSection faq={t.faq} />
-    </main>
+    </div>
   );
 };
 

@@ -10,7 +10,10 @@
     ".netlify",
     ".open-next",
     ".wrangler",
+    ".claude/worktrees",
     "node_modules",
+    "playwright-report",
+    "test-results",
     "services",
     "src/scripts"
   ]
