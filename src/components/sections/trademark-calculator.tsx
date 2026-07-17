@@ -266,6 +266,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
         <h3 className="text-xl font-bold text-foreground mb-4">{translations?.formTitle}</h3>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField control={form.control} name="brand" render={({ field }) => ( <FormItem><FormLabel>{translations?.brandNameLabel ?? 'Brend nomi'}</FormLabel><FormControl><Input placeholder={translations?.brandNamePlaceholder ?? 'Masalan: MyBrand'} {...field} /></FormControl><FormMessage /></FormItem> )} />
                 <FormField control={form.control} name="name" render={({ field }) => ( <FormItem><FormLabel>{translations?.yourNameLabel ?? 'Ismingiz'}</FormLabel><FormControl><Input placeholder={translations?.yourNamePlaceholder ?? ''} {...field} /></FormControl><FormMessage /></FormItem> )} />
                 <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>{translations?.phoneLabel ?? 'Telefon'}</FormLabel><FormControl><Input placeholder={translations?.phonePlaceholder ?? ''} {...field} /></FormControl><FormMessage /></FormItem> )} />
 

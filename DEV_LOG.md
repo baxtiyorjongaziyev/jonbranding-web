@@ -4,6 +4,20 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-17 | Patent Kalkulyatori Formasi Xatoligi Tuzatildi
+
+**Muammo:** Patent kalkulyatori sahifasida (`/xizmatlar/patent-kalkulyatori`) foydalanuvchi ma'lumotlarni to'ldirib jo'natganda shakl (form) jimlikda yuborilmayotgan edi (silent failure).
+
+**Ildiz sababi:** `TrademarkCalculator` komponentidagi Zod validation sxemasida `brand` (brend nomi) maydoni majburiy (`min(1)`) qilib belgilangan, ammo React Hook Form-da uning uchun hech qanday `FormField` (input) ko'rinishi yaratilmagan edi. Natijada validatsiya muvaffaqiyatsiz tugab, shaklni yuborishni bloklagan.
+
+**Nima qilindi:**
+- `src/components/sections/trademark-calculator.tsx` ichiga `brand` FormField inputi qo'shildi (tarjima fayllaridan `brandNameLabel` va `brandNamePlaceholder` kalitlari ishlatildi).
+- `npm run build` orqali loyiha muvaffaqiyatli qurilishi va xatolar yo'qligi tekshirildi.
+
+**Natija:** Patent kalkulyatori formasi endi brend nomini ham kiritish imkonini beradi va to'liq ishlaydi.
+
+---
+
 ## 2026-07-17 | P0/P1 Preview Deploy Tayyorlash
 
 **Holat:**
