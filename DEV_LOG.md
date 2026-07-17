@@ -13,6 +13,12 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 - Production emas, Vercel preview deploy proof olinadi; production uchun tashqi env va Vimeo allowlist alohida qoladi.
 - Remote `main` merge qilindi; Vitest local `.claude/worktrees/**` ichidagi Playwright specni ushlamasligi uchun exclude kengaytirildi.
 
+**Preview oldi tekshiruvlari:**
+- `npm test`: 12 fayl, 62/62 test o'tdi.
+- `npm run lint`: muvaffaqiyatli.
+- `npm run typecheck`: muvaffaqiyatli.
+- `npm run build`: muvaffaqiyatli; 61/61 static sahifa. Sanity CDN `ECONNRESET` berganda fallback ishladi va build to'xtamadi.
+
 ---
 
 ## 2026-07-14–15 | P0/P1 Audit Tuzatishlari
