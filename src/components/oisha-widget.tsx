@@ -61,26 +61,22 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
     }
   }, []);
 
+  // Initialize User ID and Fetch History
   useEffect(() => {
     let storedId = localStorage.getItem('oisha_user_id');
     if (!storedId) {
-      storedId = `web_${crypto.randomUUID()}`;
+      storedId = 'web_' + Math.random().toString(36).substring(2, 15);
       localStorage.setItem('oisha_user_id', storedId);
     }
-
     setUserId(storedId);
-    setMessages((prev) =>
-      prev.length > 0
-        ? prev
-        : [
-            {
-              id: 'welcome',
-              text: translations.welcome,
-              role: 'model',
-              timestamp: new Date().toISOString(),
-            },
-          ],
-    );
+
+    // Initial welcome message if no history
+    setMessages(prev => prev.length === 0 ? [{
+        id: 'welcome',
+        text: translations.welcome,
+        role: 'model',
+        timestamp: new Date().toISOString()
+    }] : prev);
   }, [translations.welcome]);
 
   useEffect(() => {

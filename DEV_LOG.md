@@ -4,6 +4,46 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-17 | P0/P1 Preview Deploy Tayyorlash
+
+**Holat:**
+- P0/P1 audit tuzatishlari `codex/p0-p1-audit-preview` branchiga ajratildi.
+- `origin/main` 4 commit oldinda ekani tekshirildi; preview branch remote o'zgarishlar bilan merge qilinadi.
+- Deploy commitiga audit/fix fayllari kiritiladi; `AGENTS.md`, `lighthouse-report.json`, `BAXTIYOR_TONE_OF_VOICE.md` va `OISHA_SELF_IMPROVEMENT.md` chetda qoldiriladi.
+- Production emas, Vercel preview deploy proof olinadi; production uchun tashqi env va Vimeo allowlist alohida qoladi.
+
+---
+
+## 2026-07-14–15 | P0/P1 Audit Tuzatishlari
+
+**Xavfsizlik:**
+- Vimeo webhook endi faqat `VIMEO_WEBHOOK_SECRET` bilan raw-body HMAC SHA-256 imzosini qabul qiladi; query/Bearer bypass, katta body va noto'g'ri JSON yopildi.
+- Instagram OAuth boshlanishi admin secret bilan himoyalandi, random `state` HttpOnly/Secure cookie orqali callbackda tekshiriladi; token xatolari tashqariga sizmaydi.
+- API rate limitlari Firestore transaction orqali umumiy qilindi; ishonchsiz forwarded IP lar va literal `unknown` kaliti olib tashlandi.
+
+**UI, accessibility va i18n:**
+- Xizmatlar grid'i 320px ekranda overflow qilmaydi; sticky CTA `animate-ping` halqasi Firefox gorizontal scrollini chiqarmaydi.
+- Lead modal Radix Dialog fokus trap, Escape, fokusni qaytarish, alert va 4 til matnlari bilan yangilandi.
+- `[lang]` sahifalarda yagona `main#main-content` landmark qoldirildi; yangi matnlar avval `uz.json`, keyin `ru/en/zh` ga kiritildi.
+
+**Performance va lokal barqarorlik:**
+- Hero carousel o'rniga bitta barqaror preload LCP rasmi ishlaydi; Vimeo iframe faqat foydalanuvchi bosganda yuklanadi va matn fallback doim ko'rinadi.
+- Development CSP HTTPS/WSS majburlashdan tozalandi, dev cache override production-only qilindi, `npm run dev` Webpack rejimiga o'tkazildi.
+- Next image quality allowlist, Windows `cross-env` lint/build skriptlari va noto'g'ri Turbopack root tuzatildi; eksperimental CSS optimizatsiyasi olib tashlandi.
+- Tailwind configidagi ESM muhitida yiqiladigan CommonJS `require(...)` pluginlari statik importga o'tkazildi.
+
+**Tekshiruv:**
+- `npm test`: 12 fayl, 62/62 test o'tdi.
+- `npm run lint`: 0 xato, 0 warning.
+- `npm run typecheck`: 0 xato.
+- `npm run build`: muvaffaqiyatli, 61/61 static sahifa; compile 10.0 daqiqa.
+- Playwright Chromium: 4/4; Firefox 320px overflow regressiyasi alohida o'tdi. Uzoq multi-browser dev run Windows virtual xotira chekloviga urildi.
+- `git diff --check`: toza.
+
+**Production uchun qolgan tashqi sozlama:** `VIMEO_WEBHOOK_SECRET`, `INSTAGRAM_OAUTH_ADMIN_SECRET`, `FIREBASE_SERVICE_ACCOUNT_JSON` ni hostingda o'rnatish va Vimeo embed allowlistiga `jonbranding.uz` hamda `www.jonbranding.uz` ni qo'shish. Deploy qilinmadi.
+
+---
+
 ## 2026-07-05 | Headroom Proxy Fix — Codex Stream Disconnect
 
 **Muammo:** Codex client-da `stream disconnected before completion: error sending request for url (http://127.0.0.1:8787/v1/responses)` xatosi.

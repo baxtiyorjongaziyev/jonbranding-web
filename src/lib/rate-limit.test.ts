@@ -7,6 +7,8 @@ describe('rate-limit', () => {
 
         beforeEach(() => {
             process.env = { ...originalEnv };
+            delete process.env.VERCEL;
+            delete process.env.VERCEL_ENV;
         });
 
         afterEach(() => {
@@ -47,7 +49,7 @@ describe('rate-limit', () => {
                 'x-real-ip': '198.51.100.1',
                 'x-forwarded-for': '192.0.2.1',
             });
-            expect(getClientIp(req)).toBe('unknown');
+            expect(getClientIp(req)).toMatch(/^anonymous:[a-f0-9]{24}$/);
         });
 
         it('should return request.ip if present when TRUSTED_PROXY is unset', () => {
@@ -57,34 +59,53 @@ describe('rate-limit', () => {
             expect(getClientIp(req)).toBe('192.0.2.5');
         });
 
-        it('should return "unknown" when no recognized headers are present', () => {
+        it('should return a stable anonymous fingerprint when no trusted IP is present', () => {
             const req = mockRequest({});
-            expect(getClientIp(req)).toBe('unknown');
+            expect(getClientIp(req)).toMatch(/^anonymous:[a-f0-9]{24}$/);
+            expect(getClientIp(req)).toBe(getClientIp(req));
         });
 
         it('should handle undefined headers object gracefully', () => {
-            expect(getClientIp({} as Request)).toBe('unknown');
+            expect(getClientIp({} as Request)).toMatch(/^anonymous:[a-f0-9]{24}$/);
+        });
+
+        it('should trust Vercel forwarded IP only on Vercel', () => {
+            process.env.VERCEL = '1';
+            const req = mockRequest({
+                'x-vercel-forwarded-for': '203.0.113.20',
+                'x-forwarded-for': '198.51.100.7',
+            });
+            expect(getClientIp(req)).toBe('203.0.113.20');
+        });
+
+        it('should reject malformed trusted-proxy IP values', () => {
+            process.env.VERCEL = '1';
+            const req = mockRequest({
+                'x-vercel-forwarded-for': 'not-an-ip',
+                'user-agent': 'test-agent',
+            });
+            expect(getClientIp(req)).toMatch(/^anonymous:[a-f0-9]{24}$/);
         });
     });
 
     describe('rateLimit', () => {
-        it('should allow first request', () => {
+        it('should allow first request', async () => {
             const ip = `192.168.1.${Math.floor(Math.random() * 1000)}`;
-            expect(rateLimit(ip, 5, 1000)).toBe(true);
+            await expect(rateLimit(ip, 5, 1000)).resolves.toBe(true);
         });
 
-        it('should allow requests up to maxRequests', () => {
+        it('should allow requests up to maxRequests', async () => {
             const ip = `192.168.2.${Math.floor(Math.random() * 1000)}`;
-            expect(rateLimit(ip, 3, 1000)).toBe(true); // 1
-            expect(rateLimit(ip, 3, 1000)).toBe(true); // 2
-            expect(rateLimit(ip, 3, 1000)).toBe(true); // 3
+            await expect(rateLimit(ip, 3, 1000)).resolves.toBe(true); // 1
+            await expect(rateLimit(ip, 3, 1000)).resolves.toBe(true); // 2
+            await expect(rateLimit(ip, 3, 1000)).resolves.toBe(true); // 3
         });
 
-        it('should reject requests exceeding maxRequests', () => {
+        it('should reject requests exceeding maxRequests', async () => {
             const ip = `192.168.3.${Math.floor(Math.random() * 1000)}`;
-            expect(rateLimit(ip, 2, 1000)).toBe(true); // 1
-            expect(rateLimit(ip, 2, 1000)).toBe(true); // 2
-            expect(rateLimit(ip, 2, 1000)).toBe(false); // 3
+            await expect(rateLimit(ip, 2, 1000)).resolves.toBe(true); // 1
+            await expect(rateLimit(ip, 2, 1000)).resolves.toBe(true); // 2
+            await expect(rateLimit(ip, 2, 1000)).resolves.toBe(false); // 3
         });
     });
 });

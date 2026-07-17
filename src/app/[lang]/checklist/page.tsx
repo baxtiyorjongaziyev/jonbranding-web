@@ -103,19 +103,19 @@ const ChecklistPage: FC = () => {
 
   if (!translations) {
     return (
-      <main className="flex-grow pt-20">
+      <div className="flex-grow pt-20">
         <h1 className="sr-only">
           {lang === 'uz' ? 'Brending chek-listi' : lang === 'ru' ? 'Чек-лист по брендингу' : lang === 'en' ? 'Branding Checklist' : '品牌清单'}
         </h1>
         <Skeleton className="w-full h-screen" />
-      </main>
+      </div>
     );
   }
 
   const checklistData = translations.magnets.find((m: any) => m.id === 'pdf');
 
   return (
-    <main className="flex-grow bg-white pt-20">
+    <div className="flex-grow bg-white pt-20">
       <header className="py-16 sm:py-24 bg-secondary/70">
         <div className="container mx-auto px-4 text-center">
             {checklistData && (
@@ -165,7 +165,7 @@ const ChecklistPage: FC = () => {
             buttonText={translations.cta.button}
             onCtaClick={handleOpenContact}
         />
-    </main>
+    </div>
   );
 };
 

@@ -7,7 +7,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Props { onOpen: () => void; lang?: string; }
+interface Props { onOpen: () => void; lang?: string; dictionary?: any; }
+interface ServiceItem { num: string; name: string; desc: string; time: string; }
 
 const SERVICES_UZ = [
   { num: '01', name: 'Neyming', desc: "Biznesingizga to'g'ri nom berish — esda qolarli, yuridik toza, va domen hamda Instagram handle bilan.", time: '2–4 hafta' },
@@ -54,9 +55,15 @@ const HEADING: Record<string, { h: string; italic: string; sub: string; desc: st
   zh: { h: '品牌——从开始', italic: '到结束。', sub: '§ 04 服务', desc: '命名、视觉识别、包装、商标注册和数字形象——一站式，一个团队，一个价格。每项服务均可单独订购。' },
 };
 
-const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {
-  const SERVICES = SERVICES_MAP[lang] ?? SERVICES_UZ;
+const AtServices: FC<Props> = ({ onOpen, lang = 'uz', dictionary }) => {
+  const SERVICES: ServiceItem[] = dictionary?.services ?? SERVICES_MAP[lang] ?? SERVICES_UZ;
   const h = HEADING[lang] ?? HEADING.uz;
+  const headingLines = String(dictionary?.services_title ?? `${h.h}\n${h.italic}`).split('\n');
+  const headingFirst = headingLines[0];
+  const headingLast = headingLines.slice(1).join(' ') || h.italic;
+  const sectionLabel = dictionary?.services_label ?? h.sub;
+  const sectionDescription = dictionary?.services_lede ?? h.desc;
+  const timelineNote = dictionary?.services_timeline_note ?? '';
   const listRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -86,32 +93,29 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {
           className="font-bold text-[var(--at-ink)]"
           style={{ fontSize: 'clamp(40px, 5vw, 72px)', lineHeight: 0.95, letterSpacing: '-0.035em' }}
         >
-          {h.h}
+          {headingFirst}
           <br />
-          <span className="font-[family-name:var(--font-serif)] italic font-normal">{h.italic}</span>
+          <span className="font-[family-name:var(--font-serif)] italic font-normal">{headingLast}</span>
         </h2>
         <div>
           <span className="inline-flex items-center gap-2 mb-3.5 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--at-muted)]">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--at-accent)] inline-block" />
-            <span>{h.sub}</span>
+            <span>{sectionLabel}</span>
           </span>
-          <p className="text-[var(--at-ink-2)] text-sm leading-[1.55]">{h.desc}</p>
+          <p className="text-[var(--at-ink-2)] text-sm leading-[1.55]">{sectionDescription}</p>
         </div>
       </div>
 
       <div ref={listRef} className="border-t border-[var(--at-ink)]">
         {SERVICES.map((s) => (
-          <div
+          <button
+            type="button"
             key={s.num}
             onClick={onOpen}
-            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); } }}
-            role="button"
-            tabIndex={0}
-            className="service-row group border-b border-[var(--at-line)] cursor-pointer hover:bg-[var(--at-paper)] transition-all duration-300"
+            className="service-row group block w-full border-b border-[var(--at-line)] cursor-pointer text-left hover:bg-[var(--at-paper)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--at-accent)]"
           >
             <div
-              className="grid items-center gap-6 py-8 px-2 group-hover:px-6 transition-all duration-300"
-              style={{ gridTemplateColumns: '90px 1.4fr 2fr 0.8fr 80px' }}
+              className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-3 px-2 py-6 transition-all duration-300 group-hover:px-3 md:grid-cols-[90px_minmax(0,1.4fr)_minmax(0,2fr)_minmax(0,.8fr)_80px] md:gap-6 md:py-8 md:group-hover:px-6"
             >
               <div
                 className="font-[family-name:var(--font-serif)] italic font-normal text-[var(--at-muted)] leading-none group-hover:text-[var(--at-accent)] transition-colors"
@@ -120,7 +124,7 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {
                 {s.num}
               </div>
               <div
-                className="font-semibold text-[var(--at-ink)]"
+                className="min-w-0 break-words font-semibold text-[var(--at-ink)]"
                 style={{ fontSize: 'clamp(20px, 2.4vw, 30px)', letterSpacing: '-0.025em', lineHeight: 1.05 }}
               >
                 {s.name}
@@ -129,19 +133,19 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz' }) => {
               <div className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.06em] text-[var(--at-muted)] hidden md:block relative group/time">
                 <span className="border-b border-dashed border-[var(--at-muted)] cursor-help pb-0.5 transition-colors group-hover/time:text-[var(--at-accent)] group-hover/time:border-[var(--at-accent)]">{s.time}</span>
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[200px] bg-[var(--at-ink)] text-white text-[10px] normal-case tracking-normal p-2 rounded shadow-xl opacity-0 pointer-events-none group-hover/time:opacity-100 group-hover/time:-translate-y-1 transition-all duration-300 z-10">
-                  {lang === 'uz' ? 'Muddat loyiha hajmiga qarab belgilanadi' : lang === 'ru' ? 'Сроки зависят от объема проекта' : lang === 'en' ? 'Timeline depends on project scope' : '时间表取决于项目范围'}
+                  {timelineNote}
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-[var(--at-ink)]"></div>
                 </div>
               </div>
-              <div className="justify-self-end w-11 h-11 rounded-full border border-[var(--at-line)] grid place-items-center text-sm group-hover:bg-[var(--at-accent)] group-hover:text-white group-hover:border-[var(--at-accent)] group-hover:-rotate-45 group-hover:scale-110 group-hover:shadow-[0_10px_20px_rgba(37,99,235,0.2)] transition-all duration-300">
+              <div aria-hidden="true" className="justify-self-end w-11 h-11 rounded-full border border-[var(--at-line)] grid place-items-center text-sm group-hover:bg-[var(--at-accent)] group-hover:text-white group-hover:border-[var(--at-accent)] group-hover:-rotate-45 group-hover:scale-110 group-hover:shadow-[0_10px_20px_rgba(37,99,235,0.2)] transition-all duration-300">
                 ↗
               </div>
             </div>
-            <div className="md:hidden px-2 pb-4 -mt-2 grid grid-cols-2 gap-x-4">
-              <div className="text-xs text-[var(--at-ink-2)] leading-[1.55] col-span-2">{s.desc}</div>
+            <div className="grid w-full min-w-0 grid-cols-3 gap-x-3 px-2 pb-4 -mt-2 md:hidden">
+              <div className="col-span-3 min-w-0 break-words text-xs text-[var(--at-ink-2)] leading-[1.55]">{s.desc}</div>
               <div className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] text-[var(--at-muted)] mt-2">{s.time}</div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>

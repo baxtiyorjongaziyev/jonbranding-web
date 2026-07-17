@@ -100,7 +100,7 @@ const SitemapPage = async (props: Props) => {
   ];
 
   return (
-    <main className="flex-grow bg-white" suppressHydrationWarning>
+    <div className="flex-grow bg-white" suppressHydrationWarning>
       <section className="py-20 sm:py-28">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -140,7 +140,7 @@ const SitemapPage = async (props: Props) => {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

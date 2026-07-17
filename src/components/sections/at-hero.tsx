@@ -1,8 +1,7 @@
 'use client';
 import type { FC } from 'react';
 import Image from 'next/image';
-import { useRef, useState, useCallback, useEffect } from 'react';
-import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { useRef, useState, useCallback } from 'react';
 
 interface PortfolioImage {
   src: string;
@@ -23,7 +22,7 @@ const translations = {
     tagline: 'Premium Brending Agentligi',
     badge: 'Bepul Brand Audit mavjud',
     h1a: 'Brendingiz',
-    h1b: 'aslida*',
+    h1b: 'aslida',
     h1c: "qancha yo'qotyapti?",
     desc: {
       text: "Noto'g'ri qadoq, eskirgan logotip va ishonchsiz sayt orqali yuzlab mijozlarni yo'qotyapsiz. ",
@@ -109,22 +108,10 @@ const DEFAULT_IMAGES: PortfolioImage[] = [
 const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
   const l = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
   const sectionRef = useRef<HTMLElement>(null);
-  // Optimization: Pause the interval when the component is off-screen
-  const isInView = useInView(sectionRef);
   const [spot, setSpot] = useState({ x: -999, y: -999, visible: false });
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const pool = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
-
-  useEffect(() => {
-    if (pool.length <= 1 || !isInView) return;
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % pool.length);
-    }, 3500); // 3.5 seconds fast transition
-    return () => clearInterval(timer);
-  }, [pool.length, isInView]);
-
-  const activeItem = pool[activeIndex];
+  const activeItem = pool[0];
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
@@ -194,6 +181,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <button
+                data-testid="hero-audit-trigger"
                 onClick={onOpen}
                 className="inline-flex items-center justify-center gap-2 bg-[var(--at-accent)] text-white rounded-full px-7 py-4 font-semibold text-sm hover:-translate-y-0.5 transition-transform"
               >
@@ -212,48 +200,31 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
 
           {/* RIGHT — Single Image Slideshow */}
           <div className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] pb-12 lg:pb-16 flex items-center justify-center">
-            <div className="relative w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] rounded-3xl md:rounded-[2.5rem] overflow-hidden border border-[var(--at-line)] bg-[var(--at-paper)] shadow-2xl group cursor-pointer">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.8, ease: 'easeInOut' }}
-                  className="absolute inset-0"
-                  onClick={() =>
-                    document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })
-                  }
-                >
+            <a
+              href="#ishlar"
+              aria-label={`${l.portfolioBadge}: ${activeItem.name}`}
+              className="relative block w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] rounded-3xl md:rounded-[2.5rem] overflow-hidden border border-[var(--at-line)] bg-[var(--at-paper)] shadow-2xl group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--at-accent)]"
+            >
+                <div className="absolute inset-0">
                   <Image
                     src={activeItem.src}
                     alt={activeItem.name}
                     fill
-                    quality={100}
-                    sizes="(max-width: 768px) 100vw, 800px"
+                    quality={75}
+                    sizes="(max-width: 768px) calc(100vw - 40px), (max-width: 1400px) 50vw, 800px"
                     className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
-                    priority
+                    preload
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
 
                   <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex justify-between items-end">
                     <div>
-                      <motion.h2
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.3, duration: 0.5 }}
-                        className="text-white font-bold text-3xl md:text-5xl mb-3 tracking-tight leading-tight drop-shadow-lg"
-                      >
+                      <h2 className="text-white font-bold text-3xl md:text-5xl mb-3 tracking-tight leading-tight drop-shadow-lg">
                         {activeItem.name}
-                      </motion.h2>
-                      <motion.span
-                        initial={{ y: 10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.5 }}
-                        className="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-xs md:text-sm font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full shadow-lg"
-                      >
-                        PORTFOLIO · {activeItem.year}
-                      </motion.span>
+                      </h2>
+                      <span className="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-xs md:text-sm font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full shadow-lg">
+                        {l.portfolioBadge} · {activeItem.year}
+                      </span>
                     </div>
 
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center transition-colors border border-white/20 group-hover:bg-white/20 shadow-lg">
@@ -272,9 +243,8 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
                       </svg>
                     </div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                </div>
+            </a>
           </div>
         </div>
       </div>

@@ -297,8 +297,29 @@
         "placeholder": "+998 (__) ___-__-__"
       },
       "telegram": {
-        "label": "Telegram / WhatsApp (ixtiyoriy)",
+        "label": "Telegram (ixtiyoriy)",
         "placeholder": "@username"
+      }
+    },
+    "atModal": {
+      "eyebrow": "Mini-tashxis · 1 daqiqa",
+      "stepContact": "1/2 · Aloqa",
+      "stepDetails": "2/2 · Ma'lumotlar (ixtiyoriy)",
+      "detailsTitle": "Bir nechta savol — yaxshiroq tayyorlanamiz.",
+      "serviceLabel": "Tashxis turi",
+      "budgetLabel": "Byudjet",
+      "submitting": "Yuborilmoqda",
+      "serviceOptions": {
+        "free": "Bepul mini-tashxis",
+        "full": "To'liq tashxis (4.8 mln so'm)",
+        "roadmap": "Tashxis + Yo'l xaritasi (12 mln so'm)",
+        "unsure": "Hali aniq emas"
+      },
+      "budgetOptions": {
+        "free": "Bepul — mini-tashxis",
+        "starter": "4—5 mln so'm",
+        "growth": "10—15 mln so'm",
+        "unsure": "Hali aniq emas"
       }
     },
     "buttons": {
@@ -309,7 +330,8 @@
     },
     "formErrors": {
       "fullName": "Ism kiritilishi shart",
-      "phone": "To'liq telefon raqamini kiriting"
+      "phone": "To'liq telefon raqamini kiriting",
+      "telegram": "To'g'ri Telegram username kiriting"
     },
     "errorToast": {
       "title": "Xatolik!",
@@ -342,6 +364,16 @@
     "objectionCopy": "Hali loyiha boshlashga tayyor bo'lmasangiz ham mayli: auditdan keyin nima qilish kerakligini bilib olasiz.",
     "riskCopy": "Telefon qoldirish shartnoma degani emas. Avval brendingizdagi muammo, imkoniyat va eng foydali keyingi qadamni ko'rsatamiz.",
     "footerCopyright": "Jon.Branding Agency"
+  },
+  "processVideo": {
+    "eyebrow": "Jarayon",
+    "title": "Biz qanday ishlashimizni ko'ring",
+    "description": "Neyming, logotip va vizual aydentika — ketma-ketlik va natija. 3 daqiqalik video.",
+    "play": "Jarayon videosini ko'rish",
+    "posterAlt": "Jon.Branding ish jarayoni videosi muqovasi",
+    "fallbackHint": "Video ochilmasa ham, barcha bosqichlar quyida matn ko'rinishida berilgan.",
+    "fallbackCta": "Jarayonni matnda ko'rish",
+    "iframeTitle": "Jon.Branding ish jarayoni videosi"
   },
   "oishaWidget": {
     "title": "Oisha Intelligence",
@@ -2113,6 +2145,8 @@
     "diagnosis_cta": "Belgilarni topish · Bepul",
     "services_title": "Brend — boshidan\noxirigacha.",
     "services_lede": "Neyming, aydentika, qadoq, tovar belgisi va raqamli ko'rinish — bir joyda, bir jamoa, bir narxda. Har biri alohida ham buyurtma qilinadi.",
+    "services_label": "§ 04 Xizmatlar",
+    "services_timeline_note": "Muddat loyiha hajmiga qarab belgilanadi",
     "featured_title": "Asosiy keys",
     "featured_live": "Davom etmoqda",
     "showcase_title": "So'nggi 4 ta loyiha · 2023—2025",

@@ -1,4 +1,4 @@
-﻿
+
 'use client';
 
 import { Metadata } from 'next';
@@ -299,7 +299,7 @@ export default function SotuvchiKartochkaPricingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonStringify(FaqSchema) }}
       />
-        <main className="bg-slate-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-200 pt-20">
+        <div className="bg-slate-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-200 pt-20">
             <section className="py-12 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
             <div className="container mx-auto px-6 text-center">
                 <h1 className="text-4xl md:text-5xl font-extrabold text-blue-950 dark:text-white">
@@ -437,7 +437,7 @@ export default function SotuvchiKartochkaPricingPage() {
                 </div>
                 </div>
             </section>
-        </main>
+        </div>
     </>
   );
 }

@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createHmac } from 'node:crypto';
 import { client } from '@/sanity/lib/client';
+import { safeCompare } from '@/lib/security';
+import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 const SANITY_TOKEN = process.env.SANITY_TOKEN || '';
-const VIMEO_WEBHOOK_SECRET = process.env.VIMEO_WEBHOOK_SECRET || '';
 
 const sanityWriteClient = client.withConfig({
   token: SANITY_TOKEN,
@@ -11,15 +13,20 @@ const sanityWriteClient = client.withConfig({
   useCdn: false,
 });
 
-// Utility to verify Vimeo signature if we have a secret configured
-function verifySignature(req: NextRequest, body: string): boolean {
-  if (!VIMEO_WEBHOOK_SECRET) return true; // Accept if secret not configured yet
-  // Usually, Vimeo sends an Authorization token or a signature we can verify.
-  // For simplicity, we can also just use a custom query param if configured in Vimeo webhook URL: ?secret=VIMEO_WEBHOOK_SECRET
-  const url = new URL(req.url);
-  const secret = url.searchParams.get('secret');
-  if (secret === VIMEO_WEBHOOK_SECRET) return true;
-  return false;
+export function isAuthorizedVimeoWebhook(
+  req: NextRequest,
+  rawBody: string,
+  configuredSecret = process.env.VIMEO_WEBHOOK_SECRET?.trim() ?? '',
+): boolean {
+  if (!configuredSecret) return false;
+
+  const providedSignature = req.headers.get('x-webhook-signature')?.trim().toLowerCase() ?? '';
+  if (!providedSignature || !/^[a-f0-9]{64}$/.test(providedSignature)) return false;
+
+  const expectedSignature = createHmac('sha256', configuredSecret)
+    .update(rawBody, 'utf8')
+    .digest('hex');
+  return safeCompare(providedSignature, expectedSignature);
 }
 
 // Generate an English slug from a title
@@ -76,17 +83,39 @@ Return the result strictly as JSON:
 
 export async function POST(req: NextRequest) {
   try {
-    const rawBody = await req.text();
-    if (!verifySignature(req, rawBody)) {
-      return NextResponse.json({ error: 'Unauthorized signature' }, { status: 401 });
+    const configuredSecret = process.env.VIMEO_WEBHOOK_SECRET?.trim() ?? '';
+    if (!configuredSecret) {
+      console.error('[vimeo-webhook] VIMEO_WEBHOOK_SECRET is not configured; rejecting request.');
+      return NextResponse.json({ error: 'Webhook authentication is not configured' }, { status: 503 });
     }
 
-    const body = JSON.parse(rawBody);
+    const contentLength = Number(req.headers.get('content-length') ?? '0');
+    if (Number.isFinite(contentLength) && contentLength > 256_000) {
+      return NextResponse.json({ error: 'Payload too large' }, { status: 413 });
+    }
+
+    const rawBody = await req.text();
+    if (!isAuthorizedVimeoWebhook(req, rawBody, configuredSecret)) {
+      return NextResponse.json({ error: 'Unauthorized webhook' }, { status: 401 });
+    }
+
+    let body: unknown;
+    try {
+      body = JSON.parse(rawBody);
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON payload' }, { status: 400 });
+    }
+
+    const ip = getClientIp(req);
+    if (!(await rateLimit(`vimeo-webhook:${ip}`, 60, 60_000))) {
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+    }
 
     // Some Vimeo events are wrapped differently or just simple JSON
-    const name = body.name || body.video?.name || 'Untitled Video';
-    const description = body.description || body.video?.description || '';
-    const link = body.link || body.video?.link || '';
+    const payload = body as Record<string, any>;
+    const name = payload.name || payload.video?.name || 'Untitled Video';
+    const description = payload.description || payload.video?.description || '';
+    const link = payload.link || payload.video?.link || '';
 
     if (!link) {
       return NextResponse.json({ success: true, message: 'No video link found, skipping.' });

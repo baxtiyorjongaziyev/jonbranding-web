@@ -83,7 +83,7 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
       <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} />
       <AtMarquee lang={lang} />
       <AtManifesto lang={lang} />
-      <AtServices onOpen={open} lang={lang} />
+      <AtServices onOpen={open} lang={lang} dictionary={dictionary.atelier} />
       
       <div className="atelier-theme atelier-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
         <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
@@ -91,13 +91,13 @@ const HomeComponent: FC<{ lang: string; dictionary: any; comparisons?: any[]; br
         <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />
       </div>
 
-      <ProcessVideo lang={lang} />
+      <ProcessVideo dictionary={dictionary.processVideo} />
       <AtProcess lang={lang} onOpen={open} />
       <Founder lang={lang} dictionary={dictionary.founder} />
       <AtPricing onOpen={open} lang={lang} />
       <AtFaq lang={lang} onOpen={open} />
       <AtFinalCta onOpen={open} lang={lang} />
-      <AtModal open={modalOpen} onClose={close} lang={lang} />
+      <AtModal open={modalOpen} onClose={close} lang={lang} dictionary={dictionary.contactModal} />
       <AtStickyCta onOpen={open} lang={lang} />
       <ExitIntentPopup onOpen={open} lang={lang} />
       <ScrollDepthAnalytics />

@@ -102,7 +102,7 @@ const AloqaClient: FC<Props> = ({ lang = 'uz' }) => {
   const tgHref = 'https://t.me/jonbranding';
 
   return (
-    <main style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', minHeight: '100vh' }}>
       {/* Hero */}
       <section className="pt-16 pb-0 md:pt-24 border-b border-[var(--at-line)]">
         <div className="max-w-[1320px] mx-auto px-5 md:px-8 pb-16 md:pb-24">
@@ -178,7 +178,7 @@ const AloqaClient: FC<Props> = ({ lang = 'uz' }) => {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

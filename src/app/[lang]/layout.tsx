@@ -396,9 +396,9 @@ export default async function LocalizedLayout({ children, params }: Props) {
         >
           <Header lang={lang} dictionary={dictionary.header} />
           
-          <div id="main-content" className="flex-grow">
+          <main id="main-content" tabIndex={-1} className="flex-grow outline-none">
             {children}
-          </div>
+          </main>
         <Footer lang={lang} dictionary={dictionary.footer} />
           {/* Yandex.Metrika counter */}
         <Script id="yandex-metrika" strategy="lazyOnload">

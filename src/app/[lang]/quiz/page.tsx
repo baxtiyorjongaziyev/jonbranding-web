@@ -79,14 +79,14 @@ const QuizPage: FC = () => {
 
   if (!translations) {
       return (
-        <main className="flex-grow bg-secondary/50">
+        <div className="flex-grow bg-secondary/50">
           <section className="py-20 sm:py-28">
             <h1 className="sr-only">
               {lang === 'uz' ? 'Brending testi' : lang === 'ru' ? 'Тест по брендингу' : lang === 'en' ? 'Branding Quiz' : '品牌测试'}
             </h1>
             <Skeleton className="h-96 w-full container" />
           </section>
-        </main>
+        </div>
       );
   }
   
@@ -99,7 +99,7 @@ const QuizPage: FC = () => {
       const Icon = resultKey === 'bad' ? Frown : resultKey === 'medium' ? Meh : Smile;
 
     return (
-        <main className="flex-grow bg-secondary/50">
+        <div className="flex-grow bg-secondary/50">
             <section className="py-6 sm:py-28">
                 <div className="container mx-auto px-4 text-center">
                      <Card className="max-w-2xl mx-auto p-5 sm:p-8 shadow-2xl rounded-3xl animate-fade-in">
@@ -121,7 +121,7 @@ const QuizPage: FC = () => {
                     </Card>
                 </div>
             </section>
-        </main>
+        </div>
     )
   }
 
@@ -130,7 +130,7 @@ const QuizPage: FC = () => {
   const nextButtonText = step < questions.length - 1 ? translations.nextButton : translations.resultButton;
 
   return (
-    <main className="flex-grow bg-secondary/50">
+    <div className="flex-grow bg-secondary/50">
         <section className="py-6 sm:py-28">
             <div className="container mx-auto px-4">
                 <Card className="max-w-3xl mx-auto shadow-2xl rounded-3xl">
@@ -185,7 +185,7 @@ const QuizPage: FC = () => {
            packageSummary={packageSummary}
            lang={lang}
         />
-    </main>
+    </div>
   );
 };
 

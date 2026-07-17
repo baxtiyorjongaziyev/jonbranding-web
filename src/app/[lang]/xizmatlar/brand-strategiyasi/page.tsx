@@ -30,7 +30,7 @@ const BrandStrategyPage = async (props: Props) => {
   const translations = dictionary.brandStrategyPage;
 
   if (!translations) {
-    return <main className="flex-grow pt-20 text-center">Tarjima ma'lumotlari topilmadi.</main>;
+    return <div className="flex-grow pt-20 text-center">Tarjima ma'lumotlari topilmadi.</div>;
   }
 
   const iconNames = ['Search', 'Target', 'FileText', 'Pencil', 'Send'];
@@ -40,7 +40,7 @@ const BrandStrategyPage = async (props: Props) => {
   }));
 
   return (
-    <main className="flex-grow pt-20">
+    <div className="flex-grow pt-20">
       <section className="py-20 sm:py-28 bg-white">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
@@ -117,7 +117,7 @@ const BrandStrategyPage = async (props: Props) => {
       
       <WhyUs lang={lang as Locale} dictionary={dictionary.whyUs} />
       <ServiceSections lang={lang as Locale} dictionary={dictionary.serviceSections} />
-    </main>
+    </div>
   );
 };
 

@@ -298,8 +298,29 @@
         "placeholder": "+..."
       },
       "telegram": {
-        "label": "Telegram / WhatsApp (选填)",
+        "label": "Telegram（选填）",
         "placeholder": "@用户名"
+      }
+    },
+    "atModal": {
+      "eyebrow": "免费迷你诊断 · 1分钟",
+      "stepContact": "1/2 · 联系方式",
+      "stepDetails": "2/2 · 补充信息（选填）",
+      "detailsTitle": "再回答几个问题，方便我们更充分地准备。",
+      "serviceLabel": "诊断类型",
+      "budgetLabel": "预算",
+      "submitting": "发送中",
+      "serviceOptions": {
+        "free": "免费迷你诊断",
+        "full": "完整诊断（480万苏姆）",
+        "roadmap": "诊断 + 路线图（1200万苏姆）",
+        "unsure": "暂未确定"
+      },
+      "budgetOptions": {
+        "free": "免费 — 迷你诊断",
+        "starter": "400万—500万苏姆",
+        "growth": "1000万—1500万苏姆",
+        "unsure": "暂未确定"
       }
     },
     "buttons": {
@@ -310,7 +331,8 @@
     },
     "formErrors": {
       "fullName": "请输入您的姓名",
-      "phone": "请输入完整的电话号码"
+      "phone": "请输入完整的电话号码",
+      "telegram": "请输入有效的 Telegram 用户名"
     },
     "errorToast": {
       "title": "错误！",
@@ -343,6 +365,16 @@
     "footerCopyright": "Jon.Branding 品牌代理机构",
     "srDescription": "免费品牌审计的姓名、电话和可选的 Telegram 联系方式填写表格。",
     "telegramLinkLabel": "电报"
+  },
+  "processVideo": {
+    "eyebrow": "流程",
+    "title": "了解我们的工作方式",
+    "description": "命名、标志和视觉识别——用三分钟视频展示完整流程与成果。",
+    "play": "播放流程视频",
+    "posterAlt": "Jon.Branding 工作流程视频封面",
+    "fallbackHint": "如果视频无法打开，下方提供了所有步骤的文字说明。",
+    "fallbackCta": "阅读流程说明",
+    "iframeTitle": "Jon.Branding 工作流程视频"
   },
   "oishaWidget": {
     "title": "Oisha Intelligence",
@@ -1932,6 +1964,8 @@
     "diagnosis_cta": "发现迹象 · 免费",
     "services_title": "品牌——从\n始至终。",
     "services_lede": "命名、视觉识别、包装、商标和数字形象——一站式服务，一个团队，一个价格。每项服务也可单独订购。",
+    "services_label": "§ 04 服务",
+    "services_timeline_note": "时间表取决于项目范围",
     "featured_title": "主要案例",
     "featured_live": "进行中",
     "showcase_title": "最新 4 个项目 · 2023—2025",

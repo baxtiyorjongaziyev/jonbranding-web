@@ -20,7 +20,7 @@ interface PackagingClientProps {
 
 const PackagingClient: FC<PackagingClientProps> = ({ lang, translations }) => {
   if (!translations) {
-    return <main className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></main>;
+    return <div className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></div>;
   }
 
   const processSteps = [
@@ -31,7 +31,7 @@ const PackagingClient: FC<PackagingClientProps> = ({ lang, translations }) => {
 
   return (
     <>
-        <main className="flex-grow pt-20">
+        <div className="flex-grow pt-20">
             <section className="py-20 sm:py-28 bg-white">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-dark-blue">
@@ -89,7 +89,7 @@ const PackagingClient: FC<PackagingClientProps> = ({ lang, translations }) => {
             </div>
         </section>
         <ServiceSections lang={lang} />
-        </main>
+        </div>
     </>
   );
 };
