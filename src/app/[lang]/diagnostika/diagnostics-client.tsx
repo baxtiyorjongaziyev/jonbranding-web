@@ -214,7 +214,13 @@ const DiagnosticsClient: FC = () => {
       });
       setStage('result');
     } catch (error) {
-      setSubmitError("Yuborishda xatolik yuz berdi. Yana bir bor urinib ko'ring.");
+      // Server xabarlari o'zbekcha va foydalanuvchiga mo'ljallangan (masalan
+      // rate-limit yoki validatsiya). Network xatosida umumiy matn qoladi.
+      setSubmitError(
+        error instanceof Error && error.message && !/^HTTP \d+$/.test(error.message)
+          ? error.message
+          : "Yuborishda xatolik yuz berdi. Yana bir bor urinib ko'ring."
+      );
       console.error('Diagnostic submit failed:', error);
     } finally {
       setSubmitting(false);
@@ -356,7 +362,7 @@ const DiagnosticsClient: FC = () => {
                     <Input
                       id="diagnostic-name"
                       value={form.fullName}
-                      onChange={(inputEvent) => setForm({ ...form, fullName: inputEvent.target.value })}
+                      onChange={(inputEvent) => setForm((prev) => ({ ...prev, fullName: inputEvent.target.value }))}
                       autoComplete="name"
                       required
                       aria-invalid={Boolean(errors.fullName)}
@@ -375,7 +381,7 @@ const DiagnosticsClient: FC = () => {
                     <Input
                       id="diagnostic-company"
                       value={form.companyName}
-                      onChange={(inputEvent) => setForm({ ...form, companyName: inputEvent.target.value })}
+                      onChange={(inputEvent) => setForm((prev) => ({ ...prev, companyName: inputEvent.target.value }))}
                       autoComplete="organization"
                       className="h-12"
                     />
@@ -386,7 +392,7 @@ const DiagnosticsClient: FC = () => {
                     <Input
                       id="diagnostic-industry"
                       value={form.industry}
-                      onChange={(inputEvent) => setForm({ ...form, industry: inputEvent.target.value })}
+                      onChange={(inputEvent) => setForm((prev) => ({ ...prev, industry: inputEvent.target.value }))}
                       className="h-12"
                     />
                   </div>
@@ -396,7 +402,7 @@ const DiagnosticsClient: FC = () => {
                     <Input
                       id="diagnostic-contact"
                       value={form.contact}
-                      onChange={(inputEvent) => setForm({ ...form, contact: inputEvent.target.value })}
+                      onChange={(inputEvent) => setForm((prev) => ({ ...prev, contact: inputEvent.target.value }))}
                       placeholder="+998 90 123 45 67 yoki @username"
                       autoComplete="tel"
                       required
@@ -416,7 +422,7 @@ const DiagnosticsClient: FC = () => {
                       <Checkbox
                         id="diagnostic-consent"
                         checked={form.consent}
-                        onCheckedChange={(checked) => setForm({ ...form, consent: checked === true })}
+                        onCheckedChange={(checked) => setForm((prev) => ({ ...prev, consent: checked === true }))}
                         aria-invalid={Boolean(errors.consent)}
                         aria-describedby={errors.consent ? 'diagnostic-consent-error' : undefined}
                         className="mt-0.5 h-5 w-5"

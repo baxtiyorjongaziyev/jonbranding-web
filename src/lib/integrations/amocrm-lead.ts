@@ -153,11 +153,26 @@ export async function createAmoCrmLead(input: AmoCrmLeadInput): Promise<AmoCrmLe
     const leadId = createdLead?.id;
 
     if (leadId && input.note) {
-      await post(
-        accessToken,
-        `${baseUrl}/api/v4/leads/${leadId}/notes`,
-        JSON.stringify([{ note_type: 'common', params: { text: input.note } }])
-      ).catch((error) => logger.error('AmoCRM note error', { error: String(error) }));
+      // Diagnostika javoblari, ball va prioritet aynan shu note'da saqlanadi.
+      // 401/429 kabi HTTP xatoda fetch reject qilmaydi — statusni o'zimiz
+      // tekshirib loglaymiz, aks holda ma'lumot jimgina yo'qoladi.
+      try {
+        const noteResponse = await post(
+          accessToken,
+          `${baseUrl}/api/v4/leads/${leadId}/notes`,
+          JSON.stringify([{ note_type: 'common', params: { text: input.note } }])
+        );
+        if (!noteResponse.ok) {
+          const detail = await noteResponse.text().catch(() => '');
+          logger.error('AmoCRM note rejected', {
+            leadId,
+            status: noteResponse.status,
+            detail: detail.slice(0, 300),
+          });
+        }
+      } catch (error) {
+        logger.error('AmoCRM note error', { leadId, error: String(error) });
+      }
     }
 
     return { ok: true, leadId, contactId: createdLead?.contact_id };
