@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { HoneypotField } from '@/components/ui/honeypot-field';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import {
   createEmptyAnswerSheet,
@@ -41,6 +42,8 @@ type ContactForm = {
   industry: string;
   contact: string;
   consent: boolean;
+  /** Bot tuzog'i — foydalanuvchi ko'rmaydi, serverda tekshiriladi. */
+  companyWebsite: string;
 };
 
 const EMPTY_CONTACT: ContactForm = {
@@ -49,6 +52,7 @@ const EMPTY_CONTACT: ContactForm = {
   industry: '',
   contact: '',
   consent: false,
+  companyWebsite: '',
 };
 
 function isContactValid(value: string) {
@@ -190,6 +194,7 @@ const DiagnosticsClient: FC = () => {
           utmCampaign: utm.utm_campaign,
           eventId,
           gaClientId: getGaClientId(),
+          companyWebsite: form.companyWebsite,
         }),
       });
 
@@ -342,6 +347,10 @@ const DiagnosticsClient: FC = () => {
               </CardHeader>
               <CardContent className="p-5 pt-0 sm:p-8 sm:pt-0">
                 <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                  <HoneypotField
+                    value={form.companyWebsite}
+                    onChange={(value) => setForm((prev) => ({ ...prev, companyWebsite: value }))}
+                  />
                   <div className="space-y-2">
                     <Label htmlFor="diagnostic-name">Ism *</Label>
                     <Input

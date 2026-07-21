@@ -9,6 +9,7 @@ import {
   type AnswerSheet,
 } from '@/lib/diagnostics';
 import { diagnosticSubmissionSchema, splitContact } from '@/lib/diagnostics-schema';
+import { guardLeadRequest } from '@/lib/lead-guard';
 import { createAmoCrmLead } from '@/lib/integrations/amocrm-lead';
 
 function cleanSecret(value: string | undefined) {
@@ -226,7 +227,8 @@ async function sendToTelegram(record: DiagnosticCrmRecord): Promise<DeliveryResu
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  if (!rateLimit(`diagnostics:${ip}`, 5, 60_000)) {
+  // rateLimit async — await bo'lmasa Promise doim truthy bo'lib, cheklov ishlamaydi.
+  if (!(await rateLimit(`diagnostics:${ip}`, 5, 60_000))) {
     return NextResponse.json(
       { ok: false, error: "Juda ko'p urinish. Bir daqiqadan so'ng qayta urinib ko'ring." },
       { status: 429 }
@@ -236,6 +238,24 @@ export async function POST(request: Request) {
   let parsed;
   try {
     const body = await request.json();
+
+    const guard = await guardLeadRequest(request, body, ip, 'diagnostics');
+    if (guard.action === 'drop') {
+      // Botga haqiqiy natija shaklidagi javob qaytaramiz, lekin hech qayerga yubormaymiz.
+      return NextResponse.json({
+        ok: true,
+        totalScore: 0,
+        resultCategory: 'nurture',
+        delivery: { amoCrm: true, telegram: true, mock: false },
+      });
+    }
+    if (guard.action === 'reject') {
+      return NextResponse.json(
+        { ok: false, error: 'Tekshiruvdan o‘tmadi. Sahifani yangilab, qayta urinib ko‘ring.' },
+        { status: 400 }
+      );
+    }
+
     parsed = diagnosticSubmissionSchema.safeParse(body);
   } catch {
     return NextResponse.json({ ok: false, error: "Ma'lumot formati noto'g'ri" }, { status: 400 });

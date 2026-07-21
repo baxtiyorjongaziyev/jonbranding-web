@@ -37,6 +37,9 @@ export const diagnosticSubmissionSchema = z.object({
   utmCampaign: z.string().trim().max(120).optional(),
   eventId: z.string().trim().max(120).optional(),
   gaClientId: z.string().trim().max(120).optional(),
+  // Bot himoyasi. CRMga yuborilmaydi, faqat tekshiruv uchun.
+  companyWebsite: z.string().optional(),
+  turnstileToken: z.string().optional(),
 });
 
 export type DiagnosticSubmission = z.infer<typeof diagnosticSubmissionSchema>;
