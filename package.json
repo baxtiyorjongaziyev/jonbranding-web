@@ -90,9 +90,6 @@
     "tailwindcss-animate": "^1.0.7",
     "zod": "^4.4.3"
   },
-  "optionalDependencies": {
-    "@next/swc-win32-x64-msvc": "^16.2.10"
-  },
   "devDependencies": {
     "@opennextjs/cloudflare": "^1.19.8",
     "@playwright/test": "^1.61.1",
