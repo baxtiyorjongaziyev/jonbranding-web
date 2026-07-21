@@ -289,6 +289,18 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - Lead AmoCRM va Telegram guruhiga parallel yuboriladi; bittasi ishlamasa ikkinchisi to'xtamaydi.
 - API, forma va normalizatsiya testlari qo'shildi.
 - Production test: AmoCRM muvaffaqiyatli (`amoCrm: true`), Telegram yuborish muvaffaqiyatsiz (`telegram: false`). Bot token ishlaydi, ammo sozlangan guruh uchun Telegram `Bad Request: chat not found` qaytardi; guruh ID yoki bot a'zoligi tuzatilishi kerak.
+- `chat not found` sababi aniqlandi: Vercel'dagi `TELEGRAM_CHAT_ID` eskirgan. To'g'ri qiymatlar — guruh "Sotuv Bolim - | Jon Agency", `TELEGRAM_CHAT_ID=-1003854308552`, "Yangi lead" topic uchun `TELEGRAM_MESSAGE_THREAD_ID=1020`. Bot `@jonairobot` guruhda administrator, forum rejimi yoqilgan, shu ID va topicga test xabar muvaffaqiyatli yetkazildi. Vercel'da Production va Preview muhitlariga yangi qiymatlar o'rnatildi.
+- Bot privacy mode yoqilgan: guruhdagi oddiy xabarlarni ko'rmaydi, shuning uchun `getUpdates` orqali chat ID topish uchun guruhga `/start@jonairobot` yozish kerak. Yuborishga ta'sir qilmaydi.
+
+## Lead yetkazishni mustahkamlash (PR #284)
+
+- Telegram xatolari jimgina yutilardi (`console.error` + route baribir `ok: true`): shu sabab `chat not found` 6 kun sezilmadi. Endi `logger.error` bilan yoziladi; `TELEGRAM_ADMIN_CHAT_ID` sozlangan bo'lsa asosiy guruh yiqilganda ogohlantirish zaxira chatga boradi.
+- Spam leadlar sababi: `/api/submit-form` da bot himoyasi umuman yo'q edi. `src/lib/lead-guard.ts` qo'shildi — honeypot (to'ldirilgan so'rov jimgina tashlanadi, javob haqiqiysidan farq qilmaydi), ixtiyoriy Turnstile (`TURNSTILE_SECRET_KEY` bo'lsagina yoqiladi; Cloudflare 5xx bersa yoki javob buzuq bo'lsa fail-open — lead o'tkaziladi), Origin faqat loglanadi.
+- To'rtala lead formasi (contact-modal, at-modal, trademark-calculator, lead-magnet-popup) honeypot maydoniga ulandi. contact-modal'da `companyWebsite` mahalliy Zod schema'ga ham qo'shildi — aks holda `zodResolver` uni kesib, qiymat serverga yetib bormasdi.
+- `lead-magnet-popup` hech qachon lead yubormagan — `name` yuborardi, schema `fullName` kutadi, har safar 400 qaytgan. Tuzatildi.
+- `src/proxy.ts` `/uz/...` redirectida `new URL(path, base)` query stringni tashlab yuborardi — butun sayt bo'ylab `?source=` va UTM parametrlari yo'qolardi. `nextUrl.clone()` bilan tuzatildi, regressiya testlari qo'shildi.
+- `scripts/check-telegram.mjs` qo'shildi: bot token, chat ID, forum holati va bot ko'rgan chatlarni tekshiradi.
+- DIQQAT: `TURNSTILE_SECRET_KEY` ni frontend widget ulanmaguncha o'rnatmang — kalit qo'yilsa barcha formalar tokensiz 400 oladi.
 
 ## CI: Linux runnerda `npm ci` tuzatildi (PR #286)
 

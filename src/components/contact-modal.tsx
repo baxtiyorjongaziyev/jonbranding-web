@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogDescription } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { HoneypotField } from '@/components/ui/honeypot-field';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Loader2, ArrowRight, ArrowLeft, MessageCircle, Mail, Phone, Instagram, Send, X, Globe, User, CheckCircle2, Linkedin, PhoneCall, Building2, Wallet, MapPin, Target, ShieldCheck, ExternalLink, Sparkles } from 'lucide-react';
@@ -114,6 +115,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       fullName: z.string().min(2, { message: translations?.formErrors?.fullName || 'Ism kiritilishi shart' }),
       phone: z.string().min(12, { message: translations?.formErrors?.phone || 'To\'liq telefon raqamini kiriting' }),
       telegram: z.string().optional(),
+      // Honeypot. Schema'da bo'lmasa zodResolver uni kesib tashlaydi va
+      // onSubmit'ga yetib bormaydi — bot to'ldirgan qiymat serverga ketmay qoladi.
+      companyWebsite: z.string().optional(),
     });
   }, [translations]);
 
@@ -129,6 +133,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       fullName: '',
       phone: '+998',
       telegram: '',
+      companyWebsite: '',
     },
   });
 
@@ -360,6 +365,10 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} onFocus={handleFormStart} className="flex-1 flex flex-col">
+                        <HoneypotField
+                          value={form.watch('companyWebsite') || ''}
+                          onChange={(value) => form.setValue('companyWebsite', value)}
+                        />
                         <div className="flex-1 py-2 pr-1">
                               <motion.div key="step-single" initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-4">
                                 <div>

@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { event as gtagEvent } from '@/lib/analytics/gtag';
 import { motion } from 'framer-motion';
 import { Slider } from '@/components/ui/slider';
+import { HoneypotField } from '@/components/ui/honeypot-field';
 import { Checkbox } from '../ui/checkbox';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '../ui/form';
 import { useForm, useWatch } from 'react-hook-form';
@@ -179,6 +180,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
   
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
 
   const watchFields = useWatch({ control: form.control });
   const fees = useMemo(
@@ -213,10 +215,11 @@ export default function TrademarkCalculator({ translations }: { translations: an
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            fullName: data.name, 
+            fullName: data.name,
             phone: data.phone,
             packageSummary: telegramMessage,
-            totalPrice: fees.total
+            totalPrice: fees.total,
+            companyWebsite: honeypot
         }),
       });
 
@@ -266,6 +269,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
         <h3 className="text-xl font-bold text-foreground mb-4">{translations?.formTitle}</h3>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <HoneypotField value={honeypot} onChange={setHoneypot} />
                 <FormField control={form.control} name="brand" render={({ field }) => ( <FormItem><FormLabel>{translations?.brandNameLabel ?? 'Brend nomi'}</FormLabel><FormControl><Input placeholder={translations?.brandNamePlaceholder ?? 'Masalan: MyBrand'} {...field} /></FormControl><FormMessage /></FormItem> )} />
                 <FormField control={form.control} name="name" render={({ field }) => ( <FormItem><FormLabel>{translations?.yourNameLabel ?? 'Ismingiz'}</FormLabel><FormControl><Input placeholder={translations?.yourNamePlaceholder ?? ''} {...field} /></FormControl><FormMessage /></FormItem> )} />
                 <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>{translations?.phoneLabel ?? 'Telefon'}</FormLabel><FormControl><Input placeholder={translations?.phonePlaceholder ?? ''} {...field} /></FormControl><FormMessage /></FormItem> )} />

@@ -4,6 +4,8 @@ import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { getValidAccessToken, forceRefresh } from '@/lib/amocrm-token';
 import { getDb } from '@/lib/firebase-admin';
 import { leadFormSchema } from '@/lib/lead-form-schema';
+import { guardLeadRequest } from '@/lib/lead-guard';
+import { logger } from '@/lib/logger';
 import {
   buildAmoCrmContactFields,
   normalizePhone,
@@ -126,7 +128,7 @@ async function sendTelegramIfConfigured(
   context: string
 ) {
   if (!hasTelegramConfig(botToken, chatId)) {
-    console.warn(`Telegram skipped for ${context}: missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID`);
+    logger.error(`Telegram skipped for ${context}: missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID`);
     return false;
   }
 
@@ -134,7 +136,32 @@ async function sendTelegramIfConfigured(
     await sendTelegramMessage(botToken, payload);
     return true;
   } catch (error) {
-    console.error(`Telegram ${context} error:`, error);
+    const reason = error instanceof Error ? error.message : String(error);
+
+    // Bu yerda jim qolish leadni ko'rinmas holda yo'qotadi: AmoCRMga tushadi,
+    // guruhga tushmaydi va hech kim sezmaydi. Shuning uchun error darajasi.
+    logger.error(`Telegram ${context} failed`, { chatId, reason });
+
+    // Asosiy guruh yiqilsa (mas. "chat not found") — zaxira chatga urinamiz,
+    // aks holda ogohlantirishning o'zi ham yo'qoladi.
+    const adminChatId = cleanSecret(process.env.TELEGRAM_ADMIN_CHAT_ID);
+    if (adminChatId && adminChatId !== chatId) {
+      try {
+        await sendTelegramMessage(botToken, {
+          ...payload,
+          chat_id: adminChatId,
+          message_thread_id: undefined,
+          text: `<b>Asosiy guruhga yuborilmadi</b>\nSabab: ${escapeTelegramHtml(reason)}\n\n${payload.text}`,
+        });
+        logger.warn(`Telegram ${context} delivered to fallback chat`, { adminChatId });
+      } catch (fallbackError) {
+        logger.error(`Telegram ${context} fallback failed`, {
+          adminChatId,
+          reason: fallbackError instanceof Error ? fallbackError.message : String(fallbackError),
+        });
+      }
+    }
+
     return false;
   }
 }
@@ -444,6 +471,24 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
+    const guard = await guardLeadRequest(request, body, ip, 'submit-form');
+    if (guard.action === 'drop') {
+      // Botga muvaffaqiyat ko'rsatamiz, lekin hech qayerga yubormaymiz.
+      // Javob shakli haqiqiysi bilan bir xil — aks holda bot filtrni sezib,
+      // uni aylanib o'tishga urinadi.
+      return NextResponse.json({
+        ok: true,
+        eventId: `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+        integrations: { telegram: true, amoCrm: true, amoCrmQueued: false, analytics: true },
+      });
+    }
+    if (guard.action === 'reject') {
+      return NextResponse.json(
+        { ok: false, error: 'Verification failed. Please reload the page and try again.' },
+        { status: 400 }
+      );
+    }
+
     // Validate input using Zod
     const validatedData = leadFormSchema.safeParse(body);
     if (!validatedData.success) {
@@ -453,10 +498,13 @@ export async function POST(request: Request) {
       );
     }
 
+    // Guard maydonlari faqat tekshiruv uchun — CRMga ham, Telegramga ham tushmaydi.
+    const { companyWebsite: _honeypot, turnstileToken: _turnstile, ...cleanData } =
+      validatedData.data;
+
     const leadData = {
-      ...validatedData.data,
-      eventId:
-        validatedData.data.eventId || `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+      ...cleanData,
+      eventId: cleanData.eventId || `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
     };
 
     const { fullName, phone } = leadData;

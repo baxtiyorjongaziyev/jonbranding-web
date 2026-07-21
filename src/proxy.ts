@@ -18,8 +18,11 @@ export function proxy(request: NextRequest) {
   }
 
   if (pathname === '/uz' || pathname.startsWith('/uz/')) {
-    const newPath = pathname === '/uz' ? '/' : pathname.replace('/uz/', '/');
-    const url = new URL(newPath, request.url);
+    // nextUrl.clone() query stringni saqlaydi. `new URL(path, base)` esa uni
+    // tashlab yuborardi va /uz/... havolalaridagi ?source= va UTM parametrlari
+    // yo'qolib, reklama atributsiyasi buzilardi.
+    const url = request.nextUrl.clone();
+    url.pathname = pathname === '/uz' ? '/' : pathname.replace('/uz/', '/');
     return NextResponse.redirect(url);
   }
 
