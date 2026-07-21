@@ -115,6 +115,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
       fullName: z.string().min(2, { message: translations?.formErrors?.fullName || 'Ism kiritilishi shart' }),
       phone: z.string().min(12, { message: translations?.formErrors?.phone || 'To\'liq telefon raqamini kiriting' }),
       telegram: z.string().optional(),
+      // Honeypot. Schema'da bo'lmasa zodResolver uni kesib tashlaydi va
+      // onSubmit'ga yetib bormaydi — bot to'ldirgan qiymat serverga ketmay qoladi.
+      companyWebsite: z.string().optional(),
     });
   }, [translations]);
 

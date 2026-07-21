@@ -91,7 +91,6 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@next/swc-win32-x64-msvc": "^16.2.10",
     "@opennextjs/cloudflare": "^1.19.8",
     "@playwright/test": "^1.61.1",
     "@sanity/client": "^7.23.1",
