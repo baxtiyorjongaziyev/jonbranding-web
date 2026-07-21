@@ -193,10 +193,18 @@ export function scoreDiagnostic(answers: AnswerSheet): DiagnosticScoring {
 }
 
 /** Javob kalitini CRM uchun o'qiladigan matnga aylantiradi: "C — Barqaror savdo...". */
+/**
+ * CRM yozuvi uchun javob matni. Savolning o'zi ham kiritiladi — aks holda
+ * sotuv menejeri "A — Hali aniq bilmayman" ni ko'rib nima so'ralganini
+ * bilmay qoladi.
+ */
 export function describeAnswer(questionIndex: number, answer: OptionKey | null) {
-  if (!answer) return '';
-  const option = DIAGNOSTIC_QUESTIONS[questionIndex]?.options.find((item) => item.key === answer);
-  return option ? `${option.key} — ${option.text}` : '';
+  const question = DIAGNOSTIC_QUESTIONS[questionIndex];
+  if (!question) return '';
+  if (!answer) return `${question.question} — javob berilmagan`;
+
+  const option = question.options.find((item) => item.key === answer);
+  return option ? `${question.question} → ${option.key}: ${option.text}` : question.question;
 }
 
 export const DEFAULT_SOURCE = 'website';

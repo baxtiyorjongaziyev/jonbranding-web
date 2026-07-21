@@ -182,13 +182,21 @@ describe('isAnswerSheetComplete', () => {
 });
 
 describe('describeAnswer', () => {
-  it('CRM uchun "C — matn" ko\'rinishini qaytaradi', () => {
-    expect(describeAnswer(0, 'C')).toBe('C — Barqaror savdo va jamoa bor');
-    expect(describeAnswer(6, 'A')).toBe("A — Yo'q");
+  it('savol matnini ham qaytaradi — CRMda nima soralgani korinsin', () => {
+    expect(describeAnswer(0, 'C')).toBe(
+      'Biznesingiz hozir qaysi bosqichda? → C: Barqaror savdo va jamoa bor'
+    );
+    expect(describeAnswer(6, 'A')).toBe(
+      "Oxirgi bir yil ichida marketing yoki brendingga investitsiya qilganmisiz? → A: Yo'q"
+    );
   });
 
-  it('javob yo\'q bo\'lsa — bo\'sh satr', () => {
-    expect(describeAnswer(0, null)).toBe('');
+  it('javob yoq bolsa savol qoladi', () => {
+    expect(describeAnswer(0, null)).toBe('Biznesingiz hozir qaysi bosqichda? — javob berilmagan');
+  });
+
+  it('mavjud bolmagan savol uchun bosh satr', () => {
+    expect(describeAnswer(99, 'A')).toBe('');
   });
 });
 
