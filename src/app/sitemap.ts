@@ -14,6 +14,7 @@ const staticRoutes = [
   '',
   '/blog',
   '/checklist',
+  '/diagnostika',
   '/haqimizda',
   '/aloqa',
   '/privacy',
