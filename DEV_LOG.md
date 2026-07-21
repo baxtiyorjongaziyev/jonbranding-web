@@ -292,6 +292,16 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - `chat not found` sababi aniqlandi: Vercel'dagi `TELEGRAM_CHAT_ID` eskirgan. To'g'ri qiymatlar — guruh "Sotuv Bolim - | Jon Agency", `TELEGRAM_CHAT_ID=-1003854308552`, "Yangi lead" topic uchun `TELEGRAM_MESSAGE_THREAD_ID=1020`. Bot `@jonairobot` guruhda administrator, forum rejimi yoqilgan, shu ID va topicga test xabar muvaffaqiyatli yetkazildi. Vercel'da Production va Preview muhitlariga yangi qiymatlar o'rnatildi.
 - Bot privacy mode yoqilgan: guruhdagi oddiy xabarlarni ko'rmaydi, shuning uchun `getUpdates` orqali chat ID topish uchun guruhga `/start@jonairobot` yozish kerak. Yuborishga ta'sir qilmaydi.
 
+## Brend diagnostikasi sahifasi (PR #285)
+
+- `/diagnostika` — 7 savolli interaktiv diagnostika. Har savol alohida ekranda, progress bar, orqaga/davom; javoblar massivda saqlanadi, ball har safar noldan hisoblanadi (orqaga qaytish ikki marta qo'shmaydi). Ball A=0/B=1/C=2, natija 3 toifa (0–6, 7–10, 11–14).
+- Ichki tasnif (nurture/potential/qualified, priority, sales_status) faqat CRM uchun — foydalanuvchi ekranida ham, API javobida ham yo'q.
+- Lead AmoCRM (sdelka+kontakt+note, teglar bilan) va Telegram "Yangi lead" topic'iga parallel boradi; kalitlar bo'lmasa mock rejim, foydalanuvchi natijani baribir ko'radi. AmoCRM note HTTP xatosi endi status bilan loglanadi (fetch 4xx/5xx da reject qilmaydi).
+- Rebase paytida topildi: route `rateLimit`ni await'siz chaqirardi — Promise doim truthy, cheklov umuman ishlamasdi. Tuzatildi (5 so'rovdan keyin 429, lokal tasdiqlangan).
+- lead-guard (honeypot) diagnostika endpointi va formasiga ulandi.
+- Preview'da to'liq oqim brauzerda tekshirildi: 7 savol, orqaga, validatsiya (bo'sh forma POST yubormaydi), 14 ball → qualified natija.
+- QARZ: matnlar hozircha faqat o'zbekcha (TZ talabi), `diagnostics.ts` va client'da hardcoded — ru/en/zh tarjimasi va `uz.json`ga ko'chirish alohida PR'da. `/ru|/en|/zh/diagnostika` hozir o'zbekcha ko'rinadi.
+
 ## Lead yetkazishni mustahkamlash (PR #284)
 
 - Telegram xatolari jimgina yutilardi (`console.error` + route baribir `ok: true`): shu sabab `chat not found` 6 kun sezilmadi. Endi `logger.error` bilan yoziladi; `TELEGRAM_ADMIN_CHAT_ID` sozlangan bo'lsa asosiy guruh yiqilganda ogohlantirish zaxira chatga boradi.
