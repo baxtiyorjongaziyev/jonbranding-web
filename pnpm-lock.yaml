@@ -216,9 +216,6 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
     devDependencies:
-      '@next/swc-win32-x64-msvc':
-        specifier: ^16.2.10
-        version: 16.2.10
       '@opennextjs/cloudflare':
         specifier: ^1.19.8
         version: 1.19.11(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.61.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(wrangler@4.102.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))
@@ -12386,7 +12383,8 @@ snapshots:
   '@next/swc-win32-arm64-msvc@16.2.10':
     optional: true
 
-  '@next/swc-win32-x64-msvc@16.2.10': {}
+  '@next/swc-win32-x64-msvc@16.2.10':
+    optional: true
 
   '@next/third-parties@16.2.10(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.61.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
     dependencies:

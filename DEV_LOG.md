@@ -289,3 +289,10 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - Lead AmoCRM va Telegram guruhiga parallel yuboriladi; bittasi ishlamasa ikkinchisi to'xtamaydi.
 - API, forma va normalizatsiya testlari qo'shildi.
 - Production test: AmoCRM muvaffaqiyatli (`amoCrm: true`), Telegram yuborish muvaffaqiyatsiz (`telegram: false`). Bot token ishlaydi, ammo sozlangan guruh uchun Telegram `Bad Request: chat not found` qaytardi; guruh ID yoki bot a'zoligi tuzatilishi kerak.
+
+## CI: Linux runnerda `npm ci` tuzatildi (PR #286)
+
+- CI `main`da ham yiqilgan edi (`f311fe25`), sabab `Install dependencies` bosqichida.
+- `@next/swc-win32-x64-msvc` `devDependencies`da turgan. Win32'ga qulflangan paket, Linux runnerda `EBADPLATFORM`. Avval `optionalDependencies`ga ko'chirildi, keyin butunlay olib tashlandi: `next@16.2.10` barcha swc binarlarini o'zining `optionalDependencies`ida tarqatadi, shuning uchun alohida yozuv ortiqcha va Next yangilanganda versiya nomuvofiqligini keltirib chiqarardi.
+- Repo ikkita lockfile ishlatadi: GitHub Actions `npm` (package-lock.json), Vercel va Netlify `pnpm` (pnpm-lock.yaml). Faqat bittasini yangilash Vercel'da `ERR_PNPM_OUTDATED_LOCKFILE` beradi — ikkalasi ham sinxron bo'lishi shart.
+- Lockfile `package.json`dan chetlashgan edi (react/react-dom `19.2.6` vs `^19.2.7`, eslint-config-next `16.2.6` vs `16.2.10`); `npm ci` bunday nomuvofiqlikda ham to'xtaydi. Ikkala lockfile qayta yaratildi.
