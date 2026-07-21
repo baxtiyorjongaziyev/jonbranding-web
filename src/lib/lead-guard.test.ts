@@ -86,6 +86,7 @@ describe('lead-guard', () => {
     it('accepts a token Cloudflare confirms', async () => {
       process.env.TURNSTILE_SECRET_KEY = 'secret';
       vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+        ok: true,
         status: 200,
         json: async () => ({ success: true }),
       }));
@@ -95,12 +96,25 @@ describe('lead-guard', () => {
     it('rejects a token Cloudflare denies', async () => {
       process.env.TURNSTILE_SECRET_KEY = 'secret';
       vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+        ok: true,
         status: 200,
         json: async () => ({ success: false, 'error-codes': ['invalid-input-response'] }),
       }));
       const result = await verifyTurnstile('bad-token');
       expect(result.ok).toBe(false);
       expect(result.reason).toBe('invalid-input-response');
+    });
+
+    it('fails open on a 5xx siteverify response', async () => {
+      process.env.TURNSTILE_SECRET_KEY = 'secret';
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+        ok: false,
+        status: 503,
+        json: async () => { throw new Error('not json'); },
+      }));
+      const result = await verifyTurnstile('token');
+      expect(result.ok).toBe(true);
+      expect(result.skipped).toBe(true);
     });
 
     it('lets the lead through when Cloudflare is unreachable', async () => {

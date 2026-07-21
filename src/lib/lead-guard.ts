@@ -93,6 +93,17 @@ export async function verifyTurnstile(token: unknown, ip?: string): Promise<Turn
     const result: any = await response.json().catch(() => null);
 
     if (result?.success === true) return { ok: true, skipped: false };
+
+    // 5xx yoki buzuq JSON — bu tokenning yaroqsizligi emas, Cloudflare'ning
+    // yiqilgani. fetch bunda reject qilmaydi, shuning uchun catch'ga tushmaydi.
+    // Haqiqiy leadni yo'qotmaslik uchun bu holatda ham o'tkazib yuboramiz.
+    if (!response.ok || result === null) {
+      logger.error('Turnstile siteverify unavailable; allowing lead through', {
+        status: response.status,
+      });
+      return { ok: true, skipped: true, reason: `verify-unavailable-http-${response.status}` };
+    }
+
     return {
       ok: false,
       skipped: false,
