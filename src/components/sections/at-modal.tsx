@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
+import { HoneypotField } from '@/components/ui/honeypot-field';
 import {
   isValidPhone,
   isValidTelegramUsername,
@@ -38,6 +39,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
   const [submitErr, setSubmitErr] = useState('');
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
   const phoneRef = useRef<HTMLInputElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
@@ -96,6 +98,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
           pageLocation,
           ctaSource: 'at_modal',
           totalPrice: value,
+          companyWebsite: honeypot,
         }),
       });
       result = await res.json().catch(() => ({}));
@@ -239,6 +242,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
+            <HoneypotField value={honeypot} onChange={setHoneypot} />
             <div className="inline-flex items-center gap-2 mb-3" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--at-muted)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
               <span className="at-pulse inline-block w-1.5 h-1.5 rounded-full" style={{ background: 'var(--at-green)' }} />
               {dictionary.atModal.eyebrow}

@@ -33,6 +33,9 @@ export const leadFormSchema = z.object({
   gaClientId: z.string().optional(),
   pageLocation: z.string().optional(),
   ctaSource: z.string().optional(),
+  // Bot himoyasi. Ikkalasi ham CRMga yuborilmaydi, faqat tekshiruv uchun.
+  companyWebsite: z.string().optional(),
+  turnstileToken: z.string().optional(),
 }).superRefine((data, context) => {
   if (!data.phone && !data.telegram) {
     context.addIssue({

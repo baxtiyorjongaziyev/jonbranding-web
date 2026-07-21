@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { trackEvent, trackLead } from '@/lib/analytics';
 import { useToast } from '@/hooks/use-toast';
 import { sanitizeRichText } from '@/lib/sanitize-html';
+import { HoneypotField } from '@/components/ui/honeypot-field';
 
 interface LeadMagnetPopupProps {
   dictionary: any;
@@ -27,7 +28,8 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
     role: '',
     businessType: '',
     name: '',
-    phone: ''
+    phone: '',
+    companyWebsite: ''
   });
 
   useEffect(() => {
@@ -77,10 +79,14 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
       const response = await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          ...formData, 
+        body: JSON.stringify({
+          // Schema `fullName` kutadi — `name` yuborilsa 400 qaytadi va lead yo'qoladi.
+          fullName: formData.name,
+          phone: formData.phone,
+          role: formData.role,
+          companyWebsite: formData.companyWebsite,
           source: 'lead_magnet_popup',
-          message: `Lead Magnet roles/qualification flow. Role: ${formData.role}, Business: ${formData.businessType}`
+          pain: `Lead Magnet roles/qualification flow. Role: ${formData.role}, Business: ${formData.businessType}`
         }),
       });
 
@@ -205,6 +211,10 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                   </div>
                   
                   <form onSubmit={handleSubmit} className="space-y-4">
+                    <HoneypotField
+                      value={formData.companyWebsite}
+                      onChange={(value) => setFormData({ ...formData, companyWebsite: value })}
+                    />
                     <div className="space-y-1.5">
                       <label htmlFor="lm-businessType" className="text-[10px] uppercase font-bold text-gray-500 ml-2 tracking-widest">{dictionary.registration.businessLabel}</label>
                       <div className="relative">
