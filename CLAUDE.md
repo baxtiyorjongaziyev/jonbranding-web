@@ -59,3 +59,18 @@ Kelajakdagi sessiyalar kontekstni qayta so'ramasligi uchun asosiy qarorlar:
 - **vitest**: `tests/` katalogi exclude qilingan (Playwright testlari), faqat `src/**/*.test.ts`.
 - **CI**: GitHub Actions (`test.yml`) typecheck+lint+test+build; Vercel/Netlify preview. pnpm lockfile bilan sinxron bo'lishi shart.
 - **Sandbox cheklovlari**: jonbranding.uz, cdn.sanity.io, instagram tarmoqdan bloklangan — lokal testda Sanity rasm xatolari soxta signal. Dev server tez-tez o'chadi, birinchi kompilyatsiya 1-3 daqiqa.
+
+<!-- BRAIN-CAPTURE -->
+## brain — ikkinchi miya (majburiy)
+
+Bu loyiha konteksti Obsidian vault'da: **`10-Projects/JonBranding.md`** (agentlik biznesi, sayt shu brendning bir qismi).
+
+- Ish boshida `brain_context()`, keyin `brain_search("jonbranding-web")`.
+- Bu loyiha haqida yangi fakt/qaror bilsang -> `brain_append("10-Projects/JonBranding.md", ...)`.
+- Ish tugagach -> `brain_log(action, detail)` — boshqa AI agentlar ko'radi.
+- Owner va biznes konteksti: `20-Areas/Baxtiyorjon.md`, `10-Projects/JonBranding.md`.
+- `90-AI/Context.md` va tasdiqlangan qarorlarni o'zgartirma —
+  `brain_memory_proposal()` ishlat.
+
+Repo — kod uchun haqiqat manbai. Vault — biznes va qaror konteksti uchun.
+<!-- BRAIN-CAPTURE -->

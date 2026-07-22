@@ -94,3 +94,18 @@ NEXT_PUBLIC_SANITY_PROJECT_ID=h6ymmj0v
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_OISHA_API_URL=https://oisha-master-bot-...run.app
 ```
+
+<!-- BRAIN-CAPTURE -->
+## brain — ikkinchi miya (majburiy)
+
+Bu loyiha konteksti Obsidian vault'da: **`10-Projects/JonBranding.md`** (agentlik biznesi, sayt shu brendning bir qismi).
+
+- Ish boshida `brain_context()`, keyin `brain_search("jonbranding-web")`.
+- Bu loyiha haqida yangi fakt/qaror bilsang -> `brain_append("10-Projects/JonBranding.md", ...)`.
+- Ish tugagach -> `brain_log(action, detail)` — boshqa AI agentlar ko'radi.
+- Owner va biznes konteksti: `20-Areas/Baxtiyorjon.md`, `10-Projects/JonBranding.md`.
+- `90-AI/Context.md` va tasdiqlangan qarorlarni o'zgartirma —
+  `brain_memory_proposal()` ishlat.
+
+Repo — kod uchun haqiqat manbai. Vault — biznes va qaror konteksti uchun.
+<!-- BRAIN-CAPTURE -->

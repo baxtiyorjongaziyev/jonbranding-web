@@ -16,8 +16,8 @@ import {
 } from 'lucide-react';
 import { useState, type FC } from 'react';
 import { motion, type Variants } from 'framer-motion';
-import DOMPurify from 'isomorphic-dompurify';
 import { renderHeadline } from '@/lib/headline';
+import { sanitizeRichText } from '@/lib/sanitize-html';
 import type { FounderDictionary } from '@/lib/types/dictionary';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
@@ -156,7 +156,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
             <p
               className="text-[15px] leading-7"
               style={{ color: 'var(--at-ink-2)' }}
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(translations.message ?? '') }}
+              dangerouslySetInnerHTML={{ __html: sanitizeRichText(translations.message ?? '') }}
             />
 
             {/* Principles */}

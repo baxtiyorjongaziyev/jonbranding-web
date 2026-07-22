@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
-import DOMPurify from 'isomorphic-dompurify';
 import { BrandSection, SectionIntro } from '@/components/ui/design-system';
 import { Locale } from '@/lib/dictionaries';
 import { getLocalizedPath } from '@/lib/i18n/locale';
@@ -27,7 +26,7 @@ interface BlogPreviewProps {
 }
 
 const sanitizePlainText = (value?: string) =>
-  DOMPurify.sanitize(value || '', { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }).trim();
+  (value || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
 
 const sanitizeSlug = (slug: string) => slug.toLowerCase().replace(/[^a-z0-9-]/g, '');
 

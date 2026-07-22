@@ -104,3 +104,31 @@ AI agentlar loyiha kontekstini samarali olish uchun **NotebookLM MCP server** da
 
 - `DEV_LOG.md` — push qilganda avtomatik yangilanadi
 - TypeScript: `FC<Props>` pattern ishlating
+
+## JonBranding AI Memory Pack
+
+Barcha AI agentlar (Claude, Gemini, ChatGPT va boshqalar) **JonBranding agentligi** kontekstida harakat qilishi uchun qat'iy ko'rsatmalar:
+
+1. **System Prompt**: Har qanday vazifada avval `jonbranding_ai_memory_pack/jonbranding_ai_memory_pack/02_AI_Agent_System_Prompt.md` faylidagi uslub, yondashuv va maqsadlarga rioya qiling.
+2. **Master Context**: Biznes, Baxtiyorjon, maqsadlar, qadriyatlar va xizmatlar haqidagi ma'lumotlar uchun `jonbranding_ai_memory_pack/jonbranding_ai_memory_pack/01_JonBranding_Master_Context.md` faylini o'qib chiqing va shu asosda qaror qabul qiling.
+3. **Agent Roles**: Maxsus vazifalar (Sales, PM, Finance, Content) uchun `07_AI_Agent_Roles.md` dagi agent profillariga moslashing.
+4. Javoblar doimo **qisqa, amaliy, tadbirkor tilida** va **Baxtiyorjonni operatsiyadan chiqarish** hamda **$10K/oy, $300K/yil maqsadlariga xizmat qilish** tamoyillariga mos bo'lishi shart!
+
+## Obsidian "Ikkinchi Miya" Qoidalari (Barcha Agentlar Uchun!)
+
+Barcha AI agentlari (Claude, Cursor, ChatGPT, Gemini, Antigravity) Baxtiyorjon yoki uning loyihalari (JonBranding, Oisha va hk) haqida har qanday yangi ma'lumot, qoida, arxitektura yoki xulosa olsa, buni avtomatik tarzda **Obsidian Vault** ga (MCP Server orqali yoki to'g'ridan-to'g'ri `obsidian-vault/` papkasiga) kiritib qo'yishi **SHART**. Siz topgan yechimlar faqat hozirgi chatda qolib ketmasin, doimo "Ikkinchi Miya"ga yozib borilsin!
+
+<!-- BRAIN-CAPTURE -->
+## brain — ikkinchi miya (majburiy)
+
+Bu loyiha konteksti Obsidian vault'da: **`10-Projects/JonBranding.md`** (agentlik biznesi, sayt shu brendning bir qismi).
+
+- Ish boshida `brain_context()`, keyin `brain_search("jonbranding-web")`.
+- Bu loyiha haqida yangi fakt/qaror bilsang -> `brain_append("10-Projects/JonBranding.md", ...)`.
+- Ish tugagach -> `brain_log(action, detail)` — boshqa AI agentlar ko'radi.
+- Owner va biznes konteksti: `20-Areas/Baxtiyorjon.md`, `10-Projects/JonBranding.md`.
+- `90-AI/Context.md` va tasdiqlangan qarorlarni o'zgartirma —
+  `brain_memory_proposal()` ishlat.
+
+Repo — kod uchun haqiqat manbai. Vault — biznes va qaror konteksti uchun.
+<!-- BRAIN-CAPTURE -->
