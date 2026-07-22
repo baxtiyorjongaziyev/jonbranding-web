@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import {
   calculateScore,
+  collectGaps,
   createEmptyAnswerSheet,
   DEFAULT_SOURCE,
   describeAnswer,
+  describeGaps,
   DIAGNOSTIC_QUESTIONS,
   DIAGNOSTIC_RESULTS,
   getPriority,
@@ -14,6 +16,8 @@ import {
   resolveSource,
   resolveUtmParams,
   scoreDiagnostic,
+  SERVICE_ORDER,
+  SERVICES,
   TOTAL_QUESTIONS,
   type AnswerSheet,
   type OptionKey,
@@ -91,10 +95,28 @@ describe('calculateScore', () => {
 });
 
 describe('getResultCategory', () => {
-  it('0–6 → nurture, 7–10 → potential, 11–14 → qualified', () => {
-    for (let score = 0; score <= 6; score += 1) expect(getResultCategory(score)).toBe('nurture');
-    for (let score = 7; score <= 10; score += 1) expect(getResultCategory(score)).toBe('potential');
-    for (let score = 11; score <= 14; score += 1) expect(getResultCategory(score)).toBe('qualified');
+  // Tasnif faqat 6-savol (muddat) va 7-savol (qaror) dan kelib chiqadi.
+  it('tayyorlik 3–4 → qualified', () => {
+    expect(getResultCategory(sheet('A', 'A', 'A', 'A', 'A', 'C', 'C'))).toBe('qualified');
+    expect(getResultCategory(sheet('A', 'A', 'A', 'A', 'A', 'C', 'B'))).toBe('qualified');
+  });
+
+  it('tayyorlik 2 → potential', () => {
+    expect(getResultCategory(sheet('C', 'C', 'C', 'C', 'C', 'B', 'B'))).toBe('potential');
+    expect(getResultCategory(sheet('C', 'C', 'C', 'C', 'C', 'C', 'A'))).toBe('potential');
+  });
+
+  it('tayyorlik 0–1 → nurture', () => {
+    expect(getResultCategory(allA)).toBe('nurture');
+    expect(getResultCategory(sheet('C', 'C', 'C', 'C', 'C', 'A', 'B'))).toBe('nurture');
+  });
+
+  it('yetuklik balli tasnifga tasir qilmaydi', () => {
+    // Ikkala javob varaqasida ham muddat va qaror bir xil, faqat yetuklik farq qiladi.
+    const yosh = sheet('A', 'A', 'A', 'A', 'A', 'C', 'C');
+    const yetuk = sheet('C', 'C', 'C', 'C', 'C', 'C', 'C');
+    expect(calculateScore(yosh)).toBeLessThan(calculateScore(yetuk));
+    expect(getResultCategory(yosh)).toBe(getResultCategory(yetuk));
   });
 
   it('har bir kategoriya uchun matn mavjud', () => {
@@ -106,66 +128,139 @@ describe('getResultCategory', () => {
   });
 });
 
+describe('collectGaps', () => {
+  it('hech narsasi yoq mijozga hamma xizmat kerak', () => {
+    expect(collectGaps(allA)).toEqual([
+      'naming',
+      'patent',
+      'logo',
+      'firma-uslubi',
+      'brandbook',
+      'qadoq',
+    ]);
+  });
+
+  it('hammasi joyida bolsa boshliq yoq', () => {
+    expect(collectGaps(allC)).toEqual([]);
+  });
+
+  it('takrorlanmaydi va SERVICE_ORDER tartibida qaytadi', () => {
+    // 1-savol A → naming+patent, 2-savol A → yana patent.
+    const gaps = collectGaps(sheet('A', 'A', 'C', 'C', 'C', 'A', 'A'));
+    expect(gaps).toEqual(['naming', 'patent']);
+    expect(new Set(gaps).size).toBe(gaps.length);
+  });
+
+  it('xizmat korsatuvchi biznesga qadoq taklif qilinmaydi', () => {
+    expect(collectGaps(sheet('C', 'C', 'C', 'C', 'B', 'C', 'C'))).toEqual([]);
+  });
+
+  it('faqat brendbuk yetishmasa bitta band qaytadi', () => {
+    expect(collectGaps(sheet('C', 'C', 'C', 'B', 'C', 'C', 'C'))).toEqual(['brandbook']);
+  });
+});
+
 describe('getPriority', () => {
-  it('2,3,5,6-savollar C bo\'lsa — high', () => {
-    expect(getPriority(sheet('A', 'C', 'C', 'A', 'C', 'C', 'A'))).toBe('high');
-    expect(getPriority(allC)).toBe('high');
+  it('muddat 1–3 oy bolsa — high', () => {
+    expect(getPriority(sheet('C', 'C', 'C', 'C', 'C', 'C', 'A'))).toBe('high');
   });
 
-  it('to\'rttadan bittasi C bo\'lmasa — normal', () => {
-    expect(getPriority(sheet('C', 'B', 'C', 'C', 'C', 'C', 'C'))).toBe('normal');
-    expect(getPriority(sheet('C', 'C', 'C', 'C', 'C', 'B', 'C'))).toBe('normal');
-    expect(getPriority(allB)).toBe('normal');
+  it('ozi qaror qiladi va 3+ boshliq bolsa — high', () => {
+    expect(getPriority(sheet('A', 'A', 'A', 'A', 'A', 'B', 'C'))).toBe('high');
+  });
+
+  it('ozi qaror qiladi, lekin boshliq kam — normal', () => {
+    expect(getPriority(sheet('C', 'C', 'C', 'B', 'C', 'B', 'C'))).toBe('normal');
+  });
+
+  it('muddat yoq va qaror boshqada — normal', () => {
     expect(getPriority(allA)).toBe('normal');
-  });
-
-  it('1,4,7-savollar prioritetga ta\'sir qilmaydi', () => {
-    expect(getPriority(sheet('A', 'C', 'C', 'A', 'C', 'C', 'A'))).toBe(
-      getPriority(sheet('C', 'C', 'C', 'C', 'C', 'C', 'C'))
-    );
   });
 });
 
 describe('getSalesStatus', () => {
-  it('ball >= 11 va 5-savol C bo\'lsa — hot', () => {
-    const answers = sheet('C', 'C', 'C', 'C', 'C', 'B', 'A'); // 2+2+2+2+2+1+0 = 11
-    expect(calculateScore(answers)).toBe(11);
-    expect(getSalesStatus(answers, calculateScore(answers))).toBe('hot');
+  it('muddat 1–3 oy va ozi qaror qilsa — hot', () => {
+    expect(getSalesStatus(sheet('A', 'A', 'A', 'A', 'A', 'C', 'C'))).toBe('hot');
+    expect(getSalesStatus(allC)).toBe('hot');
   });
 
-  it('ball 11 dan past bo\'lsa — standard (5-savol C bo\'lsa ham)', () => {
-    const answers = sheet('A', 'A', 'B', 'B', 'C', 'B', 'A'); // 0+0+1+1+2+1+0 = 5
-    expect(getSalesStatus(answers, calculateScore(answers))).toBe('standard');
+  it('muddat yaqin, lekin qaror boshqada — standard', () => {
+    expect(getSalesStatus(sheet('C', 'C', 'C', 'C', 'C', 'C', 'A'))).toBe('standard');
   });
 
-  it('ball yuqori, lekin 5-savol C emas — standard', () => {
-    const answers = sheet('C', 'C', 'C', 'C', 'B', 'C', 'C'); // 13
-    expect(calculateScore(answers)).toBe(13);
-    expect(getSalesStatus(answers, 13)).toBe('standard');
+  it('ozi qaror qiladi, lekin muddat yoq — standard', () => {
+    expect(getSalesStatus(sheet('C', 'C', 'C', 'C', 'C', 'A', 'C'))).toBe('standard');
   });
 });
 
 describe('scoreDiagnostic', () => {
-  it('to\'liq C javoblar: 14 ball, qualified, high, hot', () => {
+  it('toliq C javoblar: 14 ball, boshliq yoq, qualified, hot', () => {
     expect(scoreDiagnostic(allC)).toEqual({
       totalScore: 14,
+      readiness: 4,
+      resultCategory: 'qualified',
+      priority: 'high',
+      salesStatus: 'hot',
+      gaps: [],
+    });
+  });
+
+  it('toliq A javoblar: 0 ball, hamma xizmat kerak, lekin muddat yoq', () => {
+    expect(scoreDiagnostic(allA)).toEqual({
+      totalScore: 0,
+      readiness: 0,
+      resultCategory: 'nurture',
+      priority: 'normal',
+      salesStatus: 'standard',
+      gaps: ['naming', 'patent', 'logo', 'firma-uslubi', 'brandbook', 'qadoq'],
+    });
+  });
+
+  it('goya bosqichi + yaqin muddat + ozi qaror qiladi → qualified va hot', () => {
+    // Aynan shu holat eski modelda 1/14 ball olib "sovuq" deb belgilanardi,
+    // holbuki bunday mijozga barcha xizmatlar kerak.
+    const answers = sheet('A', 'A', 'A', 'A', 'A', 'C', 'C');
+    expect(scoreDiagnostic(answers)).toMatchObject({
+      totalScore: 4,
       resultCategory: 'qualified',
       priority: 'high',
       salesStatus: 'hot',
     });
+    expect(scoreDiagnostic(answers).gaps).toHaveLength(6);
   });
 
-  it('to\'liq A javoblar: 0 ball, nurture, normal, standard', () => {
-    expect(scoreDiagnostic(allA)).toEqual({
-      totalScore: 0,
-      resultCategory: 'nurture',
-      priority: 'normal',
-      salesStatus: 'standard',
-    });
-  });
-
-  it('to\'liq B javoblar: 7 ball, potential', () => {
+  it('toliq B javoblar: 7 ball, potential', () => {
     expect(scoreDiagnostic(allB)).toMatchObject({ totalScore: 7, resultCategory: 'potential' });
+  });
+});
+
+describe('describeGaps', () => {
+  it('boshliqlarni oqiladigan royxatga aylantiradi', () => {
+    expect(describeGaps(['naming', 'qadoq'])).toBe('Nom ishlab chiqish, Qadoq dizayni');
+  });
+
+  it('boshliq yoq bolsa alohida matn', () => {
+    expect(describeGaps([])).toBe("Jiddiy bo'shliq topilmadi");
+  });
+});
+
+describe('SERVICES katalogi', () => {
+  it('har bir xizmat uchun nom, tushuntirish va sabab bor', () => {
+    for (const key of SERVICE_ORDER) {
+      expect(SERVICES[key].label.length).toBeGreaterThan(0);
+      expect(SERVICES[key].what.length).toBeGreaterThan(0);
+      expect(SERVICES[key].why.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('savollardagi barcha boshliqlar katalogda mavjud', () => {
+    for (const question of DIAGNOSTIC_QUESTIONS) {
+      for (const option of question.options) {
+        for (const gap of option.gaps) {
+          expect(SERVICE_ORDER).toContain(gap);
+        }
+      }
+    }
   });
 });
 
@@ -184,15 +279,17 @@ describe('isAnswerSheetComplete', () => {
 describe('describeAnswer', () => {
   it('savol matnini ham qaytaradi — CRMda nima soralgani korinsin', () => {
     expect(describeAnswer(0, 'C')).toBe(
-      'Biznesingiz hozir qaysi bosqichda? → C: Barqaror savdo va jamoa bor'
+      "Biznesingiz yoki mahsulotingiz nomi bormi? → C: Bor va o'zgartirmoqchi emasmiz"
     );
     expect(describeAnswer(6, 'A')).toBe(
-      "Oxirgi bir yil ichida marketing yoki brendingga investitsiya qilganmisiz? → A: Yo'q"
+      'Yakuniy qarorni kim qabul qiladi? → A: Boshqa rahbar'
     );
   });
 
   it('javob yoq bolsa savol qoladi', () => {
-    expect(describeAnswer(0, null)).toBe('Biznesingiz hozir qaysi bosqichda? — javob berilmagan');
+    expect(describeAnswer(0, null)).toBe(
+      'Biznesingiz yoki mahsulotingiz nomi bormi? — javob berilmagan'
+    );
   });
 
   it('mavjud bolmagan savol uchun bosh satr', () => {

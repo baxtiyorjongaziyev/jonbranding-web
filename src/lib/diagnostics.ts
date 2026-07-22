@@ -1,21 +1,89 @@
 /**
- * Brend diagnostikasi (/diagnostika) — savollar, ball tizimi va lead tasnifi.
+ * Brend diagnostikasi (/diagnostika) — savollar, xizmat bo'shliqlari va lead tasnifi.
  *
- * Matn va ball bitta joyda turadi: javob matni bilan ball hech qachon
+ * Maqsad ikki tomonlama:
+ *   1. Mijozga — qaysi xizmat unga kerakligini oddiy til bilan ko'rsatish.
+ *      Mijozlarimiz "brendbuk" yoki "tovar belgisi" nima ekanini bilmaydi,
+ *      shuning uchun savollarning o'zi ham tushuntirish vazifasini bajaradi.
+ *   2. Sotuvga — nima taklif qilishni aniq ro'yxat qilib berish.
+ *
+ * Matn, ball va xizmat bog'lanishi bitta joyda turadi — ular hech qachon
  * ajralib qolmasligi kerak. Sahifa faqat o'zbek tilida ishlaydi.
  */
 
 export type OptionKey = 'A' | 'B' | 'C';
 
+/** Jon Branding xizmatlari. Kalitlar CRMga ham shu ko'rinishda tushadi. */
+export type ServiceKey = 'naming' | 'patent' | 'logo' | 'firma-uslubi' | 'brandbook' | 'qadoq';
+
+export type ServiceInfo = {
+  /** Sotuv va mijoz uchun nom. */
+  label: string;
+  /** Nima ekani — atamasiz, bir jumlada. */
+  what: string;
+  /** Nega kerakligi — mijoz his qiladigan til bilan. */
+  why: string;
+};
+
+/**
+ * Tavsiya tartibi shu ro'yxat bo'yicha: nomdan boshlanadi, chunki nom
+ * o'zgarsa logotip ham, qadoq ham qayta ishlanadi.
+ */
+export const SERVICE_ORDER: ServiceKey[] = [
+  'naming',
+  'patent',
+  'logo',
+  'firma-uslubi',
+  'brandbook',
+  'qadoq',
+];
+
+export const SERVICES: Record<ServiceKey, ServiceInfo> = {
+  naming: {
+    label: 'Nom ishlab chiqish',
+    what: "Biznesingiz uchun eslab qolinadigan va band bo'lmagan nom tanlash.",
+    why: "Nom keyinchalik o'zgarsa, logotip, qadoq va reklama — hammasi qaytadan qilinadi.",
+  },
+  patent: {
+    label: "Tovar belgisini ro'yxatdan o'tkazish",
+    what: "Nomingizni davlat reyestrida o'z nomingizga rasman biriktirish.",
+    why: "Ro'yxatdan o'tmagan nomni istalgan odam o'zi ro'yxatdan o'tkazib, sizni o'z nomingizdan foydalanishni to'xtatishga majbur qilishi mumkin.",
+  },
+  logo: {
+    label: 'Logotip dizayni',
+    what: 'Kichik hajmda ham, katta bannerda ham bir xil ishlaydigan belgi.',
+    why: "Tanishga chizdirilgan logotip ko'pincha bosmaga yaramaydi va kompaniyani arzon ko'rsatadi.",
+  },
+  'firma-uslubi': {
+    label: 'Firma uslubi',
+    what: "Ranglar, shriftlar va tayyor shablonlar to'plami.",
+    why: "Busiz har bir post va banner boshqacha chiqadi, mijoz sizni ko'rib tanimaydi.",
+  },
+  brandbook: {
+    label: 'Brendbuk',
+    what: "Brendni qanday ishlatishni tushuntiruvchi hujjat — yangi dizayner ham shunga qarab ishlaydi.",
+    why: "Xodim yoki dizayner almashganda brend ko'rinishi buzilmaydi.",
+  },
+  qadoq: {
+    label: 'Qadoq dizayni',
+    what: "Mahsulot qadog'i va yorlig'ining dizayni.",
+    why: "Do'kon javonida mijoz avval qadoqni ko'radi, keyin mahsulotni.",
+  },
+};
+
 export type DiagnosticOption = {
   key: OptionKey;
   text: string;
   score: number;
+  /** Shu javob ochib beradigan xizmat bo'shliqlari. */
+  gaps: ServiceKey[];
 };
 
 export type DiagnosticQuestion = {
   id: number;
   question: string;
+  /** Atamani tushuntiruvchi qo'shimcha izoh — savol ostida ko'rsatiladi. */
+  hint?: string;
   options: DiagnosticOption[];
 };
 
@@ -31,76 +99,105 @@ export type DiagnosticResult = {
 
 const OPTION_SCORES: Record<OptionKey, number> = { A: 0, B: 1, C: 2 };
 
-function buildOptions(texts: Record<OptionKey, string>): DiagnosticOption[] {
+function buildOptions(
+  texts: Record<OptionKey, string>,
+  gaps: Partial<Record<OptionKey, ServiceKey[]>> = {}
+): DiagnosticOption[] {
   return (['A', 'B', 'C'] as const).map((key) => ({
     key,
     text: texts[key],
     score: OPTION_SCORES[key],
+    gaps: gaps[key] ?? [],
   }));
 }
 
+/**
+ * 1–5 — inventarizatsiya: mijozda nima yo'qligini aniqlaydi.
+ * 6–7 — sotuv uchun: qachon va kim qaror qiladi.
+ *
+ * Variantlar har doim "hech narsa yo'q" dan "hammasi joyida" tomon
+ * tartiblangan, shu sabab A=0, B=1, C=2 balli mantiqiy qoladi.
+ */
 export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
   {
     id: 1,
-    question: 'Biznesingiz hozir qaysi bosqichda?',
-    options: buildOptions({
-      A: "G'oya yoki boshlang'ich bosqich",
-      B: 'Savdo bor, lekin hali tizimli emas',
-      C: 'Barqaror savdo va jamoa bor',
-    }),
+    question: 'Biznesingiz yoki mahsulotingiz nomi bormi?',
+    options: buildOptions(
+      {
+        A: "Yo'q — nom ustida hali ishlamaganmiz",
+        B: "Bor, lekin unchalik yoqmaydi yoki o'zgartirmoqchimiz",
+        C: "Bor va o'zgartirmoqchi emasmiz",
+      },
+      { A: ['naming', 'patent'], B: ['naming', 'patent'] }
+    ),
   },
   {
     id: 2,
-    question: 'Keyingi 12 oydagi asosiy rejangiz qanday?',
-    options: buildOptions({
-      A: "Biznesni yo'lga qo'yish",
-      B: 'Savdoni oshirish',
-      C: 'Yangi mahsulot, filial yoki bozorga chiqish',
-    }),
+    question: "Raqobatchingiz ertaga sizning nomingiz bilan sotsa, uni to'xtata olasizmi?",
+    hint: "Buni faqat tovar belgisi guvohnomasi beradi — nom O'zbekiston reyestrida sizga biriktirilgan bo'lishi kerak.",
+    options: buildOptions(
+      {
+        A: "Yo'q — bu haqda o'ylamaganmiz",
+        B: "Yo'q, lekin kerakligini bilamiz",
+        C: 'Ha, guvohnomamiz bor',
+      },
+      { A: ['patent'], B: ['patent'] }
+    ),
   },
   {
     id: 3,
-    question: 'Hozirgi brendingiz qanday holatda?',
-    options: buildOptions({
-      A: "Hali to'liq shakllanmagan",
-      B: "Logotip bor, lekin yagona tizim yo'q",
-      C: "Brend bor, lekin hozirgi darajamizni ko'rsatmaydi",
-    }),
+    question: 'Logotipingiz qanday tayyorlangan?',
+    options: buildOptions(
+      {
+        A: "Logotipimiz yo'q",
+        B: "O'zimiz yoki tanishimiz qilib bergan",
+        C: 'Professional dizayner yoki agentlik tayyorlagan',
+      },
+      { A: ['logo'], B: ['logo'] }
+    ),
   },
   {
     id: 4,
-    question: 'Mijozlar kompaniyangizni qanday qabul qilmoqda?',
-    options: buildOptions({
-      A: 'Hali aniq bilmayman',
-      B: 'Raqobatchilardan farqimizni tushunishmaydi',
-      C: "Kompaniya kuchli, ammo tashqi ko'rinishi buni ko'rsatmaydi",
-    }),
+    question:
+      "Yangi banner yoki post kerak bo'lsa, ranglar va shriftlar yozilgan hujjatingiz bormi?",
+    hint: "Bunday hujjat firma uslubi va brendbuk deb ataladi — u bo'lmasa har bir material boshqacha chiqadi.",
+    options: buildOptions(
+      {
+        A: "Yo'q — har safar boshqacha chiqadi",
+        B: "Ba'zi fayllar bor, lekin yagona hujjat emas",
+        C: "Brendbukimiz bor, hamma shunga amal qiladi",
+      },
+      { A: ['firma-uslubi', 'brandbook'], B: ['brandbook'] }
+    ),
   },
   {
     id: 5,
-    question: "Brending bo'yicha o'zgarish qachon kerak?",
+    question: 'Mahsulotingiz qadoq yoki yorliqda sotiladimi?',
+    options: buildOptions(
+      {
+        A: "Ha, lekin qadoq dizayni ustida ishlanmagan",
+        B: "Yo'q — biz xizmat ko'rsatamiz",
+        C: 'Ha, qadoq dizayni professional tayyorlangan',
+      },
+      { A: ['qadoq'] }
+    ),
+  },
+  {
+    id: 6,
+    question: "Brending bo'yicha ishni qachon boshlamoqchisiz?",
     options: buildOptions({
       A: "Hozir rejamizda yo'q",
-      B: "Yaqin 6–12 oy ichida",
+      B: 'Yaqin 6–12 oy ichida',
       C: 'Yaqin 1–3 oy ichida',
     }),
   },
   {
-    id: 6,
-    question: "Brending bo'yicha yakuniy qarorni kim qabul qiladi?",
+    id: 7,
+    question: 'Yakuniy qarorni kim qabul qiladi?',
     options: buildOptions({
       A: 'Boshqa rahbar',
       B: 'Birgalikda qaror qilamiz',
       C: 'Men qaror qabul qilaman',
-    }),
-  },
-  {
-    id: 7,
-    question: 'Oxirgi bir yil ichida marketing yoki brendingga investitsiya qilganmisiz?',
-    options: buildOptions({
-      A: "Yo'q",
-      B: 'Alohida dizayn va reklama xizmatlariga',
-      C: 'Professional mutaxassis yoki agentlik xizmatiga',
     }),
   },
 ];
@@ -108,29 +205,9 @@ export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
 export const TOTAL_QUESTIONS = DIAGNOSTIC_QUESTIONS.length;
 export const MAX_SCORE = TOTAL_QUESTIONS * OPTION_SCORES.C;
 
-/** Foydalanuvchiga ko'rsatiladigan natijalar. Ichki tasnif bu yerda yo'q. */
-export const DIAGNOSTIC_RESULTS: Record<ResultCategory, DiagnosticResult> = {
-  nurture: {
-    title: 'Brendingiz poydevor bosqichida',
-    description:
-      "Avvalo maqsadli mijoz, bozordagi pozitsiya va asosiy taklifni aniqlashtirish kerak. Shundan keyin vizual brending ustida ishlash samaraliroq bo'ladi.",
-    advice: 'Mijoz segmentingiz va asosiy farqingizni bitta aniq jumlada ifodalang.',
-  },
-  potential: {
-    title: "Brendingizda o'sish imkoniyati bor",
-    description:
-      "Biznesingiz ishlayapti, ammo brend elementlari yagona tizimga birlashmagan bo'lishi mumkin. Bu mijozlarning ishonchi va kompaniyani tanib olishiga ta'sir qiladi.",
-    advice:
-      'Logotip, ranglar, kommunikatsiya va savdo materiallarini yagona tizim sifatida tahlil qiling.',
-  },
-  qualified: {
-    title: 'Biznesingiz yangi darajadagi brendga tayyor',
-    description:
-      "Biznesingiz o'sish bosqichida, ammo mavjud brendingiz kompaniyaning bugungi imkoniyati va kelajakdagi rejalarini to'liq ko'rsatmayotgan bo'lishi mumkin.",
-    advice:
-      "Kengayishdan oldin brend pozitsiyasi, identikasi va barcha aloqa nuqtalarini yagona tizimga keltiring.",
-  },
-};
+/** Sotuvga tayyorlik faqat shu ikki savoldan kelib chiqadi (indeks 0 dan). */
+const TIMING_INDEX = 5;
+const DECISION_INDEX = 6;
 
 /** Javoblar massivi: index 0 → 1-savol. Javob berilmagan savol = null. */
 export type AnswerSheet = (OptionKey | null)[];
@@ -141,7 +218,8 @@ export function createEmptyAnswerSheet(): AnswerSheet {
 
 export function isAnswerSheetComplete(answers: AnswerSheet) {
   return (
-    answers.length === TOTAL_QUESTIONS && answers.every((answer) => answer === 'A' || answer === 'B' || answer === 'C')
+    answers.length === TOTAL_QUESTIONS &&
+    answers.every((answer) => answer === 'A' || answer === 'B' || answer === 'C')
   );
 }
 
@@ -149,50 +227,117 @@ export function isAnswerSheetComplete(answers: AnswerSheet) {
  * Ballni har doim javoblar massividan qayta hisoblaymiz — hech qanday
  * yig'indi saqlanmaydi. Shu sabab "orqaga" qaytib javobni almashtirish
  * ballni ikki marta qo'shmaydi.
+ *
+ * Ball brend yetukligini bildiradi, sotib olishga tayyorlikni emas.
  */
 export function calculateScore(answers: AnswerSheet) {
-  return answers.reduce<number>(
-    (total, answer) => total + (answer ? OPTION_SCORES[answer] : 0),
-    0
-  );
+  return answers.reduce<number>((total, answer) => total + (answer ? OPTION_SCORES[answer] : 0), 0);
 }
 
-export function getResultCategory(totalScore: number): ResultCategory {
-  if (totalScore <= 6) return 'nurture';
-  if (totalScore <= 10) return 'potential';
-  return 'qualified';
+/**
+ * Javoblardan kelib chiqadigan xizmat bo'shliqlari, SERVICE_ORDER tartibida
+ * va takrorlanmagan holda.
+ */
+export function collectGaps(answers: AnswerSheet): ServiceKey[] {
+  const found = new Set<ServiceKey>();
+
+  answers.forEach((answer, index) => {
+    if (!answer) return;
+    const option = DIAGNOSTIC_QUESTIONS[index]?.options.find((item) => item.key === answer);
+    option?.gaps.forEach((gap) => found.add(gap));
+  });
+
+  return SERVICE_ORDER.filter((service) => found.has(service));
 }
 
-/** Q2, Q3, Q5, Q6 ning hammasi C bo'lsa — yuqori prioritet. */
+/**
+ * Sotib olishga tayyorlik: muddat + qaror qabul qiluvchi. 0–4.
+ *
+ * Bu ataylab balldan ajratilgan: g'oya bosqichidagi tadbirkorning yetuklik
+ * balli past bo'ladi, lekin unga barcha xizmatlar kerak. Agar u "1–3 oy" va
+ * "men qaror qilaman" desa — bu eng qimmatli lead, uni "sovuq" deb
+ * belgilash xato bo'lardi.
+ */
+export function calculateReadiness(answers: AnswerSheet) {
+  const timing = answers[TIMING_INDEX];
+  const decision = answers[DECISION_INDEX];
+  return (timing ? OPTION_SCORES[timing] : 0) + (decision ? OPTION_SCORES[decision] : 0);
+}
+
+export function getResultCategory(answers: AnswerSheet): ResultCategory {
+  const readiness = calculateReadiness(answers);
+  if (readiness >= 3) return 'qualified';
+  if (readiness === 2) return 'potential';
+  return 'nurture';
+}
+
+/** Muddat yaqin, yoki qaror shu odamda va ish ko'p bo'lsa — yuqori prioritet. */
 export function getPriority(answers: AnswerSheet): Priority {
-  const highIntentQuestionIds = [2, 3, 5, 6];
-  const allHighIntent = highIntentQuestionIds.every((id) => answers[id - 1] === 'C');
-  return allHighIntent ? 'high' : 'normal';
+  const timingSoon = answers[TIMING_INDEX] === 'C';
+  const decidesSelf = answers[DECISION_INDEX] === 'C';
+  const gapCount = collectGaps(answers).length;
+  return timingSoon || (decidesSelf && gapCount >= 3) ? 'high' : 'normal';
 }
 
-/** Ball >= 11 va 5-savol C bo'lsa — issiq lead. */
-export function getSalesStatus(answers: AnswerSheet, totalScore: number): SalesStatus {
-  return totalScore >= 11 && answers[4] === 'C' ? 'hot' : 'standard';
+/** Muddat 1–3 oy va qarorni o'zi qabul qilsa — issiq lead. */
+export function getSalesStatus(answers: AnswerSheet): SalesStatus {
+  return answers[TIMING_INDEX] === 'C' && answers[DECISION_INDEX] === 'C' ? 'hot' : 'standard';
 }
+
+/** Foydalanuvchiga ko'rsatiladigan sarlavha. Ichki tasnif bu yerda yo'q. */
+export const DIAGNOSTIC_RESULTS: Record<ResultCategory, DiagnosticResult> = {
+  nurture: {
+    title: 'Brendingizda tuzatiladigan joylar bor',
+    description:
+      "Quyida biznesingizda hozir yetishmayotgan narsalar ro'yxati. Hammasini birdan qilish shart emas — yuqoridagisidan boshlash kifoya.",
+    advice: "Birinchi bandni hal qiling, qolganini keyinroq bosqichma-bosqich qilsa bo'ladi.",
+  },
+  potential: {
+    title: "Brendingizni tartibga solish vaqti keldi",
+    description:
+      "Quyida yetishmayotgan narsalar ro'yxati. Ular mijozning sizga ishonishiga va sizni raqobatchidan ajratishiga bevosita ta'sir qiladi.",
+    advice: "Ro'yxatni yuqoridan pastga qarab bosqichma-bosqich yoping.",
+  },
+  qualified: {
+    title: 'Ishni boshlash uchun hammasi tayyor',
+    description:
+      "Quyida yetishmayotgan narsalar ro'yxati. Muddatingiz yaqin bo'lgani uchun ularni ketma-ket emas, bitta loyiha sifatida qilish tezroq va arzonroq chiqadi.",
+    advice: "Ro'yxatdagi ishlarni bitta loyihaga birlashtiring — alohida buyurtma qilishdan tejamli.",
+  },
+};
+
+/** Bo'shliq topilmagan holat uchun alohida matn. */
+export const NO_GAPS_RESULT: DiagnosticResult = {
+  title: 'Brendingiz asosiy elementlari joyida',
+  description:
+    "Javoblaringizga ko'ra nom, himoya, logotip va vizual tizim bo'yicha jiddiy bo'shliq ko'rinmadi.",
+  advice:
+    "Keyingi qadam — brendni yangi bozor yoki mahsulotga moslashtirish. Buni bepul tahlilda muhokama qilamiz.",
+};
 
 export type DiagnosticScoring = {
+  /** Brend yetukligi, 0–14. */
   totalScore: number;
+  /** Sotib olishga tayyorlik, 0–4. */
+  readiness: number;
   resultCategory: ResultCategory;
   priority: Priority;
   salesStatus: SalesStatus;
+  /** Sotuvga taklif qilinadigan xizmatlar, tartiblangan. */
+  gaps: ServiceKey[];
 };
 
 export function scoreDiagnostic(answers: AnswerSheet): DiagnosticScoring {
-  const totalScore = calculateScore(answers);
   return {
-    totalScore,
-    resultCategory: getResultCategory(totalScore),
+    totalScore: calculateScore(answers),
+    readiness: calculateReadiness(answers),
+    resultCategory: getResultCategory(answers),
     priority: getPriority(answers),
-    salesStatus: getSalesStatus(answers, totalScore),
+    salesStatus: getSalesStatus(answers),
+    gaps: collectGaps(answers),
   };
 }
 
-/** Javob kalitini CRM uchun o'qiladigan matnga aylantiradi: "C — Barqaror savdo...". */
 /**
  * CRM yozuvi uchun javob matni. Savolning o'zi ham kiritiladi — aks holda
  * sotuv menejeri "A — Hali aniq bilmayman" ni ko'rib nima so'ralganini
@@ -205,6 +350,12 @@ export function describeAnswer(questionIndex: number, answer: OptionKey | null) 
 
   const option = question.options.find((item) => item.key === answer);
   return option ? `${question.question} → ${option.key}: ${option.text}` : question.question;
+}
+
+/** CRM uchun bo'shliqlar ro'yxati: "Nom ishlab chiqish, Logotip dizayni". */
+export function describeGaps(gaps: ServiceKey[]) {
+  if (!gaps.length) return "Jiddiy bo'shliq topilmadi";
+  return gaps.map((gap) => SERVICES[gap].label).join(', ');
 }
 
 export const DEFAULT_SOURCE = 'website';
