@@ -4,6 +4,32 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-22 | Vercel Runtime `ERR_REQUIRE_ESM` P1 Tuzatish
+
+**Muammo:** Production sahifalar 200 qaytargan bo'lsa ham, Vercel runtime log'larida `/uz`, `/ru`, `/en` uchun `ERR_REQUIRE_ESM` xatosi chiqayotgan edi.
+
+**Ildiz sababi:** Sahifa render zanjirida `isomorphic-dompurify` import qilinib, server bundle `jsdom -> html-encoding-sniffer -> @exodus/bytes` dependency zanjirini tortgan. Vercel Node 24 runtime'da CommonJS `require()` orqali ESM modul chaqirilgani log xatosini chiqargan.
+
+**Nima qilindi:**
+- `src/components/sections/blog-preview.tsx` ichidan `isomorphic-dompurify` olib tashlandi; blog title/description uchun React text renderiga mos yengil plain-text sanitizer ishlatildi.
+- `src/components/sections/founder.tsx` ichidan `isomorphic-dompurify` olib tashlandi; mavjud `sanitizeRichText()` helperiga o'tkazildi.
+- Direct dependency `package.json` va `pnpm-lock.yaml` dan olib tashlandi.
+
+**Tekshiruv:**
+- `pnpm remove isomorphic-dompurify`: manifest/lock sinxron.
+- `rg "isomorphic-dompurify|DOMPurify" src package.json pnpm-lock.yaml`: src/package direct import yo'q; lock'da faqat transitive eski versiya qoldi.
+- `npm run lint`: muvaffaqiyatli.
+- `npm run typecheck`: muvaffaqiyatli.
+- `npm test`: muvaffaqiyatli.
+- Clean `origin/main` worktree (`codex/fix-vercel-esm-runtime`) tekshiruvi: `npm run lint` exit 0, eski unrelated `src/components/contact-modal.tsx` `react-hooks/incompatible-library` warning qoldi.
+- `npm run typecheck`: muvaffaqiyatli.
+- `npm test`: muvaffaqiyatli.
+- `npm run build`: muvaffaqiyatli; local env'da `GEMINI_API_KEY` va `SANITY_TOKEN` yo'qligi haqida warning chiqdi, build yiqilmadi.
+- `.next/server` ichida `isomorphic-dompurify`, `html-encoding-sniffer`, `@exodus/bytes` topilmadi.
+- `git diff --check`: toza.
+
+---
+
 ## 2026-07-17 | Patent Kalkulyatori Formasi Xatoligi Tuzatildi
 
 **Muammo:** Patent kalkulyatori sahifasida (`/xizmatlar/patent-kalkulyatori`) foydalanuvchi ma'lumotlarni to'ldirib jo'natganda shakl (form) jimlikda yuborilmayotgan edi (silent failure).
