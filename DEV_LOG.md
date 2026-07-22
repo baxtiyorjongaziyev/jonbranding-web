@@ -4,7 +4,20 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-22 | i18n Parity + zh.json To'liq Tarjima
+
+**Nima qilindi:**
+- `ru.json`, `en.json`, `zh.json` ga 6 ta yetishmayotgan kalit qo'shildi: `naming_simple`, `logo_design_simple`, `brandbook_simple`, `corporate_style_simple`, `packaging_design_simple`, `atelier.hero_title_alt`
+- `zh.json`da inglizcha qolgan 36 ta matn xitoycha tarjimasi bilan almashtirildi: `trustedBy`, `beforeAfter`, `testimonials`, `founder`, `process`, `mobileCtaBar`, `auditOffer`
+- Barcha 4 til: **1007 kalit**, 0 yetishmovchilik
+
+**Tekshiruv:** `audit_locales.js` → 0 missing ✓ | `audit_translations.js` → 6 proper noun ✓ | `npm test` → 63/63 ✓
+**Deploy:** `git push origin main` → Vercel auto-deploy ✓
+
+---
+
 ## 2026-07-22 | Vercel Runtime `ERR_REQUIRE_ESM` P1 Tuzatish
+
 
 **Muammo:** Production sahifalar 200 qaytargan bo'lsa ham, Vercel runtime log'larida `/uz`, `/ru`, `/en` uchun `ERR_REQUIRE_ESM` xatosi chiqayotgan edi.
 
