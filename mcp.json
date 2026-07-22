@@ -7,6 +7,12 @@
         "@modelcontextprotocol/server-filesystem",
         "C:\\Users\\baxti\\projects\\jonbranding-web"
       ]
+    },
+    "jonbranding-mcp": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\baxti\\projects\\jonbranding-web\\mcp-server\\build\\index.js"
+      ]
     }
   }
 }
