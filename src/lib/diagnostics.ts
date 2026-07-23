@@ -205,9 +205,24 @@ export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
 export const TOTAL_QUESTIONS = DIAGNOSTIC_QUESTIONS.length;
 export const MAX_SCORE = TOTAL_QUESTIONS * OPTION_SCORES.C;
 
-/** Sotuvga tayyorlik faqat shu ikki savoldan kelib chiqadi (indeks 0 dan). */
-const TIMING_INDEX = 5;
-const DECISION_INDEX = 6;
+/**
+ * Sotuvga tayyorlik faqat shu ikki savoldan kelib chiqadi.
+ *
+ * Indeks qo'lda yozilmaydi — savol `id` sidan topiladi. Aks holda savollar
+ * tartibi o'zgarsa yoki oraga yangi savol qo'shilsa, tayyorlik jimgina
+ * boshqa javoblarni o'qiy boshlaydi.
+ */
+const TIMING_QUESTION_ID = 6;
+const DECISION_QUESTION_ID = 7;
+
+function indexOfQuestion(id: number) {
+  const index = DIAGNOSTIC_QUESTIONS.findIndex((question) => question.id === id);
+  if (index === -1) throw new Error(`Diagnostika: ${id}-savol topilmadi`);
+  return index;
+}
+
+const TIMING_INDEX = indexOfQuestion(TIMING_QUESTION_ID);
+const DECISION_INDEX = indexOfQuestion(DECISION_QUESTION_ID);
 
 /** Javoblar massivi: index 0 → 1-savol. Javob berilmagan savol = null. */
 export type AnswerSheet = (OptionKey | null)[];
@@ -343,7 +358,7 @@ export function scoreDiagnostic(answers: AnswerSheet): DiagnosticScoring {
  * sotuv menejeri "A — Hali aniq bilmayman" ni ko'rib nima so'ralganini
  * bilmay qoladi.
  */
-export function describeAnswer(questionIndex: number, answer: OptionKey | null) {
+export function describeAnswer(questionIndex: number, answer: OptionKey | null | undefined) {
   const question = DIAGNOSTIC_QUESTIONS[questionIndex];
   if (!question) return '';
   if (!answer) return `${question.question} — javob berilmagan`;

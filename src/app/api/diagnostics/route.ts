@@ -113,7 +113,11 @@ function buildAmoCrmNote(record: DiagnosticCrmRecord) {
     `Rozilik: ${record.consent ? 'ha' : "yo'q"}`,
     '',
     // Menejer birinchi shuni ko'rishi kerak — nima taklif qilish shu yerda.
-    `TAKLIF QILINADI: ${record.missing_services}`,
+    // Bo'shliq bo'lmasa taklif satri chiqmaydi, aks holda "Jiddiy bo'shliq
+    // topilmadi" o'zi taklifdek ko'rinardi.
+    record.gaps.length
+      ? `TAKLIF QILINADI: ${record.missing_services}`
+      : "Asosiy bo'shliq topilmadi — kengaytirish bo'yicha suhbat kerak",
     '',
     'Javoblar:',
     answers,
@@ -189,7 +193,9 @@ function buildTelegramMessage(record: DiagnosticCrmRecord) {
     record.industry ? `<b>Soha:</b> ${escapeTelegramHtml(record.industry)}` : '',
     `<b>Aloqa:</b> ${escapeTelegramHtml(record.contact)}`,
     '',
-    `<b>TAKLIF QILINADI:</b> ${escapeTelegramHtml(record.missing_services)}`,
+    record.gaps.length
+      ? `<b>TAKLIF QILINADI:</b> ${escapeTelegramHtml(record.missing_services)}`
+      : "<b>Asosiy bo'shliq topilmadi</b> — kengaytirish bo'yicha suhbat kerak",
     '',
     `<b>Brend yetukligi:</b> ${record.total_score}/14`,
     `<b>Sotib olishga tayyorlik:</b> ${record.readiness}/4`,

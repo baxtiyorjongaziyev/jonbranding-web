@@ -45,6 +45,17 @@ describe('savollar tuzilishi', () => {
     expect(MAX_SCORE).toBe(14);
     expect(calculateScore(allC)).toBe(14);
   });
+
+  it('savol id lari 1 dan 7 gacha va takrorlanmaydi', () => {
+    expect(DIAGNOSTIC_QUESTIONS.map((question) => question.id)).toEqual([1, 2, 3, 4, 5, 6, 7]);
+  });
+
+  it("tayyorlik savollari o'z o'rnida turadi", () => {
+    // Tayyorlik 6- va 7-savoldan hisoblanadi. Ular boshqa mavzuga
+    // almashtirilsa yoki tartib buzilsa, tasnif jimgina noto'g'ri ishlaydi.
+    expect(DIAGNOSTIC_QUESTIONS[5].question).toMatch(/qachon/i);
+    expect(DIAGNOSTIC_QUESTIONS[6].question).toMatch(/qaror/i);
+  });
 });
 
 describe('calculateScore', () => {
@@ -111,7 +122,7 @@ describe('getResultCategory', () => {
     expect(getResultCategory(sheet('C', 'C', 'C', 'C', 'C', 'A', 'B'))).toBe('nurture');
   });
 
-  it('yetuklik balli tasnifga tasir qilmaydi', () => {
+  it("yetuklik balli tasnifga ta'sir qilmaydi", () => {
     // Ikkala javob varaqasida ham muddat va qaror bir xil, faqat yetuklik farq qiladi.
     const yosh = sheet('A', 'A', 'A', 'A', 'A', 'C', 'C');
     const yetuk = sheet('C', 'C', 'C', 'C', 'C', 'C', 'C');
@@ -129,7 +140,7 @@ describe('getResultCategory', () => {
 });
 
 describe('collectGaps', () => {
-  it('hech narsasi yoq mijozga hamma xizmat kerak', () => {
+  it("hech narsasi yo'q mijozga hamma xizmat kerak", () => {
     expect(collectGaps(allA)).toEqual([
       'naming',
       'patent',
@@ -140,7 +151,7 @@ describe('collectGaps', () => {
     ]);
   });
 
-  it('hammasi joyida bolsa boshliq yoq', () => {
+  it("hammasi joyida bo'lsa bo'shliq yo'q", () => {
     expect(collectGaps(allC)).toEqual([]);
   });
 
@@ -151,7 +162,7 @@ describe('collectGaps', () => {
     expect(new Set(gaps).size).toBe(gaps.length);
   });
 
-  it('xizmat korsatuvchi biznesga qadoq taklif qilinmaydi', () => {
+  it("xizmat ko'rsatuvchi biznesga qadoq taklif qilinmaydi", () => {
     expect(collectGaps(sheet('C', 'C', 'C', 'C', 'B', 'C', 'C'))).toEqual([]);
   });
 
@@ -161,25 +172,25 @@ describe('collectGaps', () => {
 });
 
 describe('getPriority', () => {
-  it('muddat 1–3 oy bolsa — high', () => {
+  it("muddat 1–3 oy bo'lsa — high", () => {
     expect(getPriority(sheet('C', 'C', 'C', 'C', 'C', 'C', 'A'))).toBe('high');
   });
 
-  it('ozi qaror qiladi va 3+ boshliq bolsa — high', () => {
+  it("o'zi qaror qiladi va 3+ bo'shliq bo'lsa — high", () => {
     expect(getPriority(sheet('A', 'A', 'A', 'A', 'A', 'B', 'C'))).toBe('high');
   });
 
-  it('ozi qaror qiladi, lekin boshliq kam — normal', () => {
+  it("o'zi qaror qiladi, lekin bo'shliq kam — normal", () => {
     expect(getPriority(sheet('C', 'C', 'C', 'B', 'C', 'B', 'C'))).toBe('normal');
   });
 
-  it('muddat yoq va qaror boshqada — normal', () => {
+  it("muddat yo'q va qaror boshqada — normal", () => {
     expect(getPriority(allA)).toBe('normal');
   });
 });
 
 describe('getSalesStatus', () => {
-  it('muddat 1–3 oy va ozi qaror qilsa — hot', () => {
+  it("muddat 1–3 oy va o'zi qaror qilsa — hot", () => {
     expect(getSalesStatus(sheet('A', 'A', 'A', 'A', 'A', 'C', 'C'))).toBe('hot');
     expect(getSalesStatus(allC)).toBe('hot');
   });
@@ -188,13 +199,13 @@ describe('getSalesStatus', () => {
     expect(getSalesStatus(sheet('C', 'C', 'C', 'C', 'C', 'C', 'A'))).toBe('standard');
   });
 
-  it('ozi qaror qiladi, lekin muddat yoq — standard', () => {
+  it("o'zi qaror qiladi, lekin muddat yo'q — standard", () => {
     expect(getSalesStatus(sheet('C', 'C', 'C', 'C', 'C', 'A', 'C'))).toBe('standard');
   });
 });
 
 describe('scoreDiagnostic', () => {
-  it('toliq C javoblar: 14 ball, boshliq yoq, qualified, hot', () => {
+  it("to'liq C javoblar: 14 ball, bo'shliq yo'q, qualified, hot", () => {
     expect(scoreDiagnostic(allC)).toEqual({
       totalScore: 14,
       readiness: 4,
@@ -205,7 +216,7 @@ describe('scoreDiagnostic', () => {
     });
   });
 
-  it('toliq A javoblar: 0 ball, hamma xizmat kerak, lekin muddat yoq', () => {
+  it("to'liq A javoblar: 0 ball, hamma xizmat kerak, lekin muddat yo'q", () => {
     expect(scoreDiagnostic(allA)).toEqual({
       totalScore: 0,
       readiness: 0,
@@ -216,7 +227,7 @@ describe('scoreDiagnostic', () => {
     });
   });
 
-  it('goya bosqichi + yaqin muddat + ozi qaror qiladi → qualified va hot', () => {
+  it("g'oya bosqichi + yaqin muddat + o'zi qaror qiladi → qualified va hot", () => {
     // Aynan shu holat eski modelda 1/14 ball olib "sovuq" deb belgilanardi,
     // holbuki bunday mijozga barcha xizmatlar kerak.
     const answers = sheet('A', 'A', 'A', 'A', 'A', 'C', 'C');
@@ -229,17 +240,17 @@ describe('scoreDiagnostic', () => {
     expect(scoreDiagnostic(answers).gaps).toHaveLength(6);
   });
 
-  it('toliq B javoblar: 7 ball, potential', () => {
+  it("to'liq B javoblar: 7 ball, potential", () => {
     expect(scoreDiagnostic(allB)).toMatchObject({ totalScore: 7, resultCategory: 'potential' });
   });
 });
 
 describe('describeGaps', () => {
-  it('boshliqlarni oqiladigan royxatga aylantiradi', () => {
+  it("bo'shliqlarni o'qiladigan ro'yxatga aylantiradi", () => {
     expect(describeGaps(['naming', 'qadoq'])).toBe('Nom ishlab chiqish, Qadoq dizayni');
   });
 
-  it('boshliq yoq bolsa alohida matn', () => {
+  it("bo'shliq yo'q bo'lsa alohida matn", () => {
     expect(describeGaps([])).toBe("Jiddiy bo'shliq topilmadi");
   });
 });
@@ -253,7 +264,7 @@ describe('SERVICES katalogi', () => {
     }
   });
 
-  it('savollardagi barcha boshliqlar katalogda mavjud', () => {
+  it("savollardagi barcha bo'shliqlar katalogda mavjud", () => {
     for (const question of DIAGNOSTIC_QUESTIONS) {
       for (const option of question.options) {
         for (const gap of option.gaps) {
@@ -277,7 +288,7 @@ describe('isAnswerSheetComplete', () => {
 });
 
 describe('describeAnswer', () => {
-  it('savol matnini ham qaytaradi — CRMda nima soralgani korinsin', () => {
+  it("savol matnini ham qaytaradi — CRMda nima so'ralgani ko'rinsin", () => {
     expect(describeAnswer(0, 'C')).toBe(
       "Biznesingiz yoki mahsulotingiz nomi bormi? → C: Bor va o'zgartirmoqchi emasmiz"
     );
@@ -286,13 +297,13 @@ describe('describeAnswer', () => {
     );
   });
 
-  it('javob yoq bolsa savol qoladi', () => {
+  it("javob yo'q bo'lsa savol qoladi", () => {
     expect(describeAnswer(0, null)).toBe(
       'Biznesingiz yoki mahsulotingiz nomi bormi? — javob berilmagan'
     );
   });
 
-  it('mavjud bolmagan savol uchun bosh satr', () => {
+  it("mavjud bo'lmagan savol uchun bo'sh satr", () => {
     expect(describeAnswer(99, 'A')).toBe('');
   });
 });
