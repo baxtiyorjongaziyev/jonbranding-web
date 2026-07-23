@@ -213,7 +213,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
                     quality={75}
                     sizes="(max-width: 768px) calc(100vw - 40px), (max-width: 1400px) 50vw, 800px"
                     className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
-                    preload
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
 

@@ -3,8 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 import AtHero from './at-hero';
 
 vi.mock('next/image', () => ({
-  default: ({ preload, quality, fill: _fill, alt = '', ...props }: any) => (
-    <img alt={alt} {...props} data-preload={String(Boolean(preload))} data-quality={String(quality)} />
+  default: ({ priority, quality, fill: _fill, alt = '', ...props }: any) => (
+    <img alt={alt} {...props} data-priority={String(Boolean(priority))} data-quality={String(quality)} />
   ),
 }));
 
@@ -24,7 +24,7 @@ describe('AtHero LCP media', () => {
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(1);
     expect(images[0]).toHaveAttribute('src', '/first.webp');
-    expect(images[0]).toHaveAttribute('data-preload', 'true');
+    expect(images[0]).toHaveAttribute('data-priority', 'true');
     expect(images[0]).toHaveAttribute('data-quality', '75');
     expect(screen.getByRole('link', { name: /Premium brend: Birinchi/ })).toHaveAttribute('href', '#ishlar');
     expect(screen.getByText('aslida')).toBeInTheDocument();
