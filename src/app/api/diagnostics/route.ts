@@ -4,6 +4,7 @@ import { logger } from '@/lib/logger';
 import {
   DEFAULT_SOURCE,
   describeAnswer,
+  describeGaps,
   scoreDiagnostic,
   TOTAL_QUESTIONS,
   type AnswerSheet,
@@ -41,9 +42,14 @@ type DiagnosticCrmRecord = {
   answer_6: string;
   answer_7: string;
   total_score: number;
+  readiness: number;
   result_category: string;
   priority: string;
   sales_status: string;
+  /** Sotuvga taklif qilinadigan xizmatlar — CRMdagi asosiy qiymat. */
+  missing_services: string;
+  /** O'sha xizmatlarning kalitlari — AmoCRMda teg sifatida, filtrlash uchun. */
+  gaps: string[];
   source: string;
   page_url: string;
   utm_source: string;
@@ -75,9 +81,12 @@ function buildCrmRecord(
     consent: data.consent,
     ...answerFields,
     total_score: scoring.totalScore,
+    readiness: scoring.readiness,
     result_category: scoring.resultCategory,
     priority: scoring.priority,
     sales_status: scoring.salesStatus,
+    missing_services: describeGaps(scoring.gaps),
+    gaps: scoring.gaps,
     source: data.source || DEFAULT_SOURCE,
     page_url: data.pageUrl || '',
     utm_source: data.utmSource || '',
@@ -103,10 +112,18 @@ function buildAmoCrmNote(record: DiagnosticCrmRecord) {
     `Aloqa: ${record.contact}`,
     `Rozilik: ${record.consent ? 'ha' : "yo'q"}`,
     '',
+    // Menejer birinchi shuni ko'rishi kerak — nima taklif qilish shu yerda.
+    // Bo'shliq bo'lmasa taklif satri chiqmaydi, aks holda "Jiddiy bo'shliq
+    // topilmadi" o'zi taklifdek ko'rinardi.
+    record.gaps.length
+      ? `TAKLIF QILINADI: ${record.missing_services}`
+      : "Asosiy bo'shliq topilmadi — kengaytirish bo'yicha suhbat kerak",
+    '',
     'Javoblar:',
     answers,
     '',
-    `Ball: ${record.total_score}/14`,
+    `Brend yetukligi: ${record.total_score}/14`,
+    `Sotib olishga tayyorlik: ${record.readiness}/4`,
     `Kategoriya: ${record.result_category}`,
     `Prioritet: ${record.priority}`,
     `Sales status: ${record.sales_status}`,
@@ -136,6 +153,8 @@ async function sendToAmoCrm(
       record.source,
       record.result_category,
       record.sales_status,
+      // Xizmat teglari — menejer CRMda "kimga patent kerak" deb filtrlay oladi.
+      ...record.gaps.map((gap) => `kerak:${gap}`),
     ],
     note: buildAmoCrmNote(record),
   });
@@ -146,7 +165,9 @@ async function sendToAmoCrm(
   if (result.skipped) {
     logger.warn('AmoCRM skipped: kalitlar sozlanmagan (mock rejim)', {
       full_name: record.full_name,
+      missing_services: record.missing_services,
       total_score: record.total_score,
+      readiness: record.readiness,
       result_category: record.result_category,
       priority: record.priority,
       sales_status: record.sales_status,
@@ -172,7 +193,12 @@ function buildTelegramMessage(record: DiagnosticCrmRecord) {
     record.industry ? `<b>Soha:</b> ${escapeTelegramHtml(record.industry)}` : '',
     `<b>Aloqa:</b> ${escapeTelegramHtml(record.contact)}`,
     '',
-    `<b>Ball:</b> ${record.total_score}/14`,
+    record.gaps.length
+      ? `<b>TAKLIF QILINADI:</b> ${escapeTelegramHtml(record.missing_services)}`
+      : "<b>Asosiy bo'shliq topilmadi</b> — kengaytirish bo'yicha suhbat kerak",
+    '',
+    `<b>Brend yetukligi:</b> ${record.total_score}/14`,
+    `<b>Sotib olishga tayyorlik:</b> ${record.readiness}/4`,
     `<b>Kategoriya:</b> ${escapeTelegramHtml(record.result_category)}`,
     `<b>Prioritet:</b> ${escapeTelegramHtml(record.priority)}`,
     `<b>Sales status:</b> ${escapeTelegramHtml(record.sales_status)}`,

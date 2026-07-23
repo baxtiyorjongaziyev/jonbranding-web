@@ -325,3 +325,41 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - Lead AmoCRM va Telegram guruhiga parallel yuboriladi; bittasi ishlamasa ikkinchisi to'xtamaydi.
 - API, forma va normalizatsiya testlari qo'shildi.
 - Production test: AmoCRM muvaffaqiyatli (`amoCrm: true`), Telegram yuborish muvaffaqiyatsiz (`telegram: false`). Bot token ishlaydi, ammo sozlangan guruh uchun Telegram `Bad Request: chat not found` qaytardi; guruh ID yoki bot a'zoligi tuzatilishi kerak.
+- `chat not found` sababi aniqlandi: Vercel'dagi `TELEGRAM_CHAT_ID` eskirgan. To'g'ri qiymatlar — guruh "Sotuv Bolim - | Jon Agency", `TELEGRAM_CHAT_ID=-1003854308552`, "Yangi lead" topic uchun `TELEGRAM_MESSAGE_THREAD_ID=1020`. Bot `@jonairobot` guruhda administrator, forum rejimi yoqilgan, shu ID va topicga test xabar muvaffaqiyatli yetkazildi. Vercel'da Production va Preview muhitlariga yangi qiymatlar o'rnatildi.
+- Bot privacy mode yoqilgan: guruhdagi oddiy xabarlarni ko'rmaydi, shuning uchun `getUpdates` orqali chat ID topish uchun guruhga `/start@jonairobot` yozish kerak. Yuborishga ta'sir qilmaydi.
+
+## Brend diagnostikasi sahifasi (PR #285)
+
+- `/diagnostika` — 7 savolli interaktiv diagnostika. Har savol alohida ekranda, progress bar, orqaga/davom; javoblar massivda saqlanadi, ball har safar noldan hisoblanadi (orqaga qaytish ikki marta qo'shmaydi). Ball A=0/B=1/C=2, natija 3 toifa (0–6, 7–10, 11–14).
+- Ichki tasnif (nurture/potential/qualified, priority, sales_status) faqat CRM uchun — foydalanuvchi ekranida ham, API javobida ham yo'q.
+- Lead AmoCRM (sdelka+kontakt+note, teglar bilan) va Telegram "Yangi lead" topic'iga parallel boradi; kalitlar bo'lmasa mock rejim, foydalanuvchi natijani baribir ko'radi. AmoCRM note HTTP xatosi endi status bilan loglanadi (fetch 4xx/5xx da reject qilmaydi).
+- Rebase paytida topildi: route `rateLimit`ni await'siz chaqirardi — Promise doim truthy, cheklov umuman ishlamasdi. Tuzatildi (5 so'rovdan keyin 429, lokal tasdiqlangan).
+- lead-guard (honeypot) diagnostika endpointi va formasiga ulandi.
+- Preview'da to'liq oqim brauzerda tekshirildi: 7 savol, orqaga, validatsiya (bo'sh forma POST yubormaydi), 14 ball → qualified natija.
+- QARZ: matnlar hozircha faqat o'zbekcha (TZ talabi), `diagnostics.ts` va client'da hardcoded — ru/en/zh tarjimasi va `uz.json`ga ko'chirish alohida PR'da. `/ru|/en|/zh/diagnostika` hozir o'zbekcha ko'rinadi.
+
+## Lead yetkazishni mustahkamlash (PR #284)
+
+- Telegram xatolari jimgina yutilardi (`console.error` + route baribir `ok: true`): shu sabab `chat not found` 6 kun sezilmadi. Endi `logger.error` bilan yoziladi; `TELEGRAM_ADMIN_CHAT_ID` sozlangan bo'lsa asosiy guruh yiqilganda ogohlantirish zaxira chatga boradi.
+- Spam leadlar sababi: `/api/submit-form` da bot himoyasi umuman yo'q edi. `src/lib/lead-guard.ts` qo'shildi — honeypot (to'ldirilgan so'rov jimgina tashlanadi, javob haqiqiysidan farq qilmaydi), ixtiyoriy Turnstile (`TURNSTILE_SECRET_KEY` bo'lsagina yoqiladi; Cloudflare 5xx bersa yoki javob buzuq bo'lsa fail-open — lead o'tkaziladi), Origin faqat loglanadi.
+- To'rtala lead formasi (contact-modal, at-modal, trademark-calculator, lead-magnet-popup) honeypot maydoniga ulandi. contact-modal'da `companyWebsite` mahalliy Zod schema'ga ham qo'shildi — aks holda `zodResolver` uni kesib, qiymat serverga yetib bormasdi.
+- `lead-magnet-popup` hech qachon lead yubormagan — `name` yuborardi, schema `fullName` kutadi, har safar 400 qaytgan. Tuzatildi.
+- `src/proxy.ts` `/uz/...` redirectida `new URL(path, base)` query stringni tashlab yuborardi — butun sayt bo'ylab `?source=` va UTM parametrlari yo'qolardi. `nextUrl.clone()` bilan tuzatildi, regressiya testlari qo'shildi.
+- `scripts/check-telegram.mjs` qo'shildi: bot token, chat ID, forum holati va bot ko'rgan chatlarni tekshiradi.
+- DIQQAT: `TURNSTILE_SECRET_KEY` ni frontend widget ulanmaguncha o'rnatmang — kalit qo'yilsa barcha formalar tokensiz 400 oladi.
+
+## CI: Linux runnerda `npm ci` tuzatildi (PR #286)
+
+- CI `main`da ham yiqilgan edi (`f311fe25`), sabab `Install dependencies` bosqichida.
+- `@next/swc-win32-x64-msvc` `devDependencies`da turgan. Win32'ga qulflangan paket, Linux runnerda `EBADPLATFORM`. Avval `optionalDependencies`ga ko'chirildi, keyin butunlay olib tashlandi: `next@16.2.10` barcha swc binarlarini o'zining `optionalDependencies`ida tarqatadi, shuning uchun alohida yozuv ortiqcha va Next yangilanganda versiya nomuvofiqligini keltirib chiqarardi.
+- Repo ikkita lockfile ishlatadi: GitHub Actions `npm` (package-lock.json), Vercel va Netlify `pnpm` (pnpm-lock.yaml). Faqat bittasini yangilash Vercel'da `ERR_PNPM_OUTDATED_LOCKFILE` beradi — ikkalasi ham sinxron bo'lishi shart.
+- Lockfile `package.json`dan chetlashgan edi (react/react-dom `19.2.6` vs `^19.2.7`, eslint-config-next `16.2.6` vs `16.2.10`); `npm ci` bunday nomuvofiqlikda ham to'xtaydi. Ikkala lockfile qayta yaratildi.
+
+## Diagnostika: baholashdan xizmat bo'shliqlarini aniqlashga o'tish (PR #289)
+
+- Muammo: eski model faqat leadni baholardi va mijozga mavhum tavsiya berardi ("brend pozitsiyasini aniqlashtiring"). Mijozlarimiz brendbuk yoki tovar belgisi nima ekanini bilmaydi, shu sabab natijadan nima sotib olishni tushunmasdi. Menejer ham CRMda faqat javob variantini ko'rardi (`A — Hali aniq bilmayman`), savol nimaligi bilinmasdi.
+- Savollar inventarizatsiyaga o'tkazildi: 1–5 nima yetishmayotganini aniqlaydi (nom, tovar belgisi, logotip, vizual tizim, qadoq), 6–7 sotuv uchun qoladi (muddat, qaror qabul qiluvchi). Atamalar savol ichida `hint` bilan izohlanadi.
+- Tasnif endi balldan emas, sotib olishga tayyorlikdan (`readiness` = muddat + qaror, 0–4) kelib chiqadi. Eski modelda g'oya bosqichidagi tadbirkor 1/14 ball olib `nurture` bo'lardi, holbuki unga barcha xizmatlar kerak. `total_score` brend yetukligi sifatida saqlanib qoldi, lekin tasnifga ta'sir qilmaydi.
+- `TIMING_INDEX` va `DECISION_INDEX` savol `id` sidan hisoblanadi, qo'lda yozilmaydi — savollar tartibi o'zgarsa tayyorlik jimgina boshqa javoblarni o'qib ketmasligi uchun. Buni qo'riqlaydigan test ham bor.
+- CRM va Telegram: `TAKLIF QILINADI:` satri birinchi o'rinda, javob satrlari savol matni bilan keladi, sdelkaga `kerak:patent` ko'rinishidagi teglar qo'shiladi. Bo'shliq topilmasa taklif satri o'rniga alohida matn chiqadi — "Jiddiy bo'shliq topilmadi" ning o'zi taklifdek ko'rinmasligi uchun.
+- Sahifa faqat o'zbek tilida. Matnlar `src/lib/diagnostics.ts` da, locale lug'atlarida emas — bu ataylab qilingan, chunki savollar va xizmat izohlari mahalliy bozorga yozilgan. Boshqa tillarga tarjima alohida ish sifatida qarz.

@@ -18,9 +18,11 @@ import {
   DIAGNOSTIC_QUESTIONS,
   DIAGNOSTIC_RESULTS,
   isAnswerSheetComplete,
+  NO_GAPS_RESULT,
   resolveSource,
   resolveUtmParams,
   scoreDiagnostic,
+  SERVICES,
   TOTAL_QUESTIONS,
   type AnswerSheet,
   type OptionKey,
@@ -80,7 +82,10 @@ const DiagnosticsClient: FC = () => {
   const utm = useMemo(() => resolveUtmParams(searchParams), [searchParams]);
 
   const scoring = useMemo(() => scoreDiagnostic(answers), [answers]);
-  const result = DIAGNOSTIC_RESULTS[scoring.resultCategory];
+  // Bo'shliq topilmasa ro'yxat bo'sh qoladi, shuning uchun alohida matn kerak.
+  const result = scoring.gaps.length
+    ? DIAGNOSTIC_RESULTS[scoring.resultCategory]
+    : NO_GAPS_RESULT;
 
   useEffect(() => {
     if (openedTracked.current) return;
@@ -491,6 +496,26 @@ const DiagnosticsClient: FC = () => {
                 {result.title}
               </h1>
               <p className="mx-auto mt-4 max-w-xl text-center text-lg text-gray-700">{result.description}</p>
+
+              {scoring.gaps.length > 0 && (
+                <ol className="mt-8 space-y-4">
+                  {scoring.gaps.map((gap, index) => (
+                    <li
+                      key={gap}
+                      className="flex gap-4 rounded-2xl border border-gray-200 bg-white p-5"
+                    >
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
+                        {index + 1}
+                      </span>
+                      <div>
+                        <h3 className="text-lg font-bold text-dark-blue">{SERVICES[gap].label}</h3>
+                        <p className="mt-1 text-base text-gray-700">{SERVICES[gap].what}</p>
+                        <p className="mt-2 text-sm text-gray-600">{SERVICES[gap].why}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              )}
 
               <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-5">
                 <h2 className="text-sm font-bold uppercase tracking-wide text-primary">Tavsiya</h2>
