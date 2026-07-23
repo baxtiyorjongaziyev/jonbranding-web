@@ -4,7 +4,21 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-23 | Performance 10/10 — Dynamic Imports & LCP Optimization
+
+**Nima qilindi:**
+- `HomeComponent` ichidagi below-the-fold 9 ta og'ir section dynamic import (lazy-load) ga o'tkazildi: `ATGallery`, `BeforeAfter`, `ATQuotes`, `ProcessVideo`, `AtProcess`, `Founder`, `AtPricing`, `AtFaq`, `AtFinalCta`.
+- Dynamic import jarayonida CLS (Cumulative Layout Shift) ning oldini olish uchun yengil va xavfsiz `SectionSkeleton` komponenti yaratildi va qo'llandi.
+- `AtHero` komponentidagi LCP (Largest Contentful Paint) rasmi uchun deprecated `preload` o'rniga rasmiy `priority` prop o'rnatildi va mos test `at-hero.test.tsx` yangilandi.
+- `layout.tsx` ga Vimeo iframe resurslari uchun `dns-prefetch` qo'shildi.
+
+**Tekshiruv:** `vitest run` → 16/16 test suites (124 tests) o'tdi ✓
+**Deploy:** `git push origin main` → Vercel auto-deploy qilindi ✓
+
+---
+
 ## 2026-07-22 | i18n Parity + zh.json To'liq Tarjima
+
 
 **Nima qilindi:**
 - `ru.json`, `en.json`, `zh.json` ga 6 ta yetishmayotgan kalit qo'shildi: `naming_simple`, `logo_design_simple`, `brandbook_simple`, `corporate_style_simple`, `packaging_design_simple`, `atelier.hero_title_alt`
