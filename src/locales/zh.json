@@ -9,14 +9,19 @@
     "brand_strategy_desc": "您品牌的基础 — 市场分析、定位和传播。",
     "naming": "命名",
     "naming_desc": "为您的品牌选择一个难忘、强大且法律上清晰的名称。",
+    "naming_simple": "给您的企业一个正确的名称 — 简单、难忘、快速。",
     "logo_design": "标志设计",
     "logo_design_desc": "创建一个独特且令人难忘的标志，以反映您业务的精髓。",
+    "logo_design_simple": "设计一个反映您业务精髓的优秀标志。",
     "brandbook": "品牌手册",
     "brandbook_desc": "一份描述您品牌形象使用规则的文件。",
+    "brandbook_simple": "一份解释如何使用您的标志、颜色和字体的指南。",
     "corporate_style": "企业形象",
     "corporate_style_desc": "一个使您的品牌易于识别的标志、颜色和字体系统。",
+    "corporate_style_simple": "所有接触点上的标志、颜色和字体的统一外观。",
     "packaging_design": "包装设计",
     "packaging_design_desc": "吸引人的设计，使您的产品在货架上脱颖而出。",
+    "packaging_design_simple": "在货架上销售产品的吸引人的包装设计。",
     "services_and_prices": "服务与价格",
     "services_and_prices_desc": "构建您自己的服务包并立即获取价格。",
     "contact_by_phone": "联系电话",
@@ -505,25 +510,25 @@
     "recommend_val": "90%"
   },
   "trustedBy": {
-    "eyebrow": "Selected clients",
-    "title": "Businesses trust us with credibility, not decoration.",
-    "subtitle": "We help brands look more valuable, clearer, and easier to choose.",
+    "eyebrow": "精选客户",
+    "title": "企业信任我们，因为我们构建信誉，而非装饰。",
+    "subtitle": "我们帮助品牌看起来更有价值、更清晰、更易于被选择。",
     "metrics": [
       {
         "value": "150+",
-        "label": "Projects"
+        "label": "项目"
       },
       {
-        "value": "9 yrs",
-        "label": "Experience"
+        "value": "9年",
+        "label": "经验"
       },
       {
         "value": "30+",
-        "label": "Categories"
+        "label": "行业类别"
       },
       {
-        "value": "4 langs",
-        "label": "Markets"
+        "value": "4种语言",
+        "label": "市场"
       }
     ]
   },
@@ -570,134 +575,134 @@
     "solutionButton": "查看所有问题的解决方案"
   },
   "beforeAfter": {
-    "eyebrow": "Proof",
-    "title": "Branding proves value before the sales call.",
-    "subtitle": "The audit answers one practical question: does the buyer understand, trust, and have a reason to choose you?",
-    "ctaTitle": "Ready to clarify your brand?",
-    "ctaDesc": "We start with a brand audit and identify the change with the highest impact.",
-    "ctaButton": "Get the free Brand Audit",
-    "cta": "Get the free Brand Audit",
-    "caseLabel": "Before / After",
+    "eyebrow": "案例证明",
+    "title": "品牌塑造在销售对话之前就证明了价值。",
+    "subtitle": "审计回答一个实际问题：买家是否理解、信任您，并有理由选择您？",
+    "ctaTitle": "准备好为您的品牌正名了吗？",
+    "ctaDesc": "我们从品牌审计开始，找出影响最大的变化。",
+    "ctaButton": "获取免费品牌审计",
+    "cta": "获取免费品牌审计",
+    "caseLabel": "改造前 / 改造后",
     "proofCards": [
       {
-        "value": "Real",
-        "label": "client work"
+        "value": "真实",
+        "label": "客户作品"
       },
       {
-        "value": "Audit",
-        "label": "diagnosis first"
+        "value": "审计",
+        "label": "先诊断后设计"
       }
     ]
   },
   "testimonials": {
-    "eyebrow": "Client voice",
-    "title": "Client trust",
-    "subtitle": "Portfolio can look nice. What matters is whether business owners feel the result.",
-    "playVideo": "Play video here",
-    "playAudio": "Play voice note",
-    "pauseAudio": "Pause",
-    "textReviewsTitle": "Text reviews",
-    "textReviewsSubtitle": "From entrepreneurs we worked with"
+    "eyebrow": "客户声音",
+    "title": "客户信任",
+    "subtitle": "作品集可以看起来很好看。重要的是企业主是否感受到了实际效果。",
+    "playVideo": "播放视频",
+    "playAudio": "播放语音留言",
+    "pauseAudio": "暂停",
+    "textReviewsTitle": "文字评价",
+    "textReviewsSubtitle": "来自我们合作过的企业家"
   },
   "gallery": {
     "title": "我们的作品示例",
     "subtitle": "看看我们创建的品牌如何在他们的利基市场中脱颖而出。"
   },
   "founder": {
-    "title": "I build trust systems for business, not decoration.",
-    "message": "Hi, I am Bahtiyorjon, founder of Jon.Branding. We help business owners build brand systems through naming, strategy, identity, packaging, and brandbooks so buyers understand, remember, and choose them with confidence.",
+    "title": "我为企业构建信任系统，而非装饰。",
+    "message": "您好，我是 Bahtiyorjon，Jon.Branding 的创始人。我们帮助企业主通过命名、策略、视觉识别、包装和品牌手册构建品牌系统，让买家理解、记住并自信地选择他们。",
     "points": [
       {
         "icon": "Medal",
-        "text": "150+ brand and visual projects"
+        "text": "150+ 个品牌和视觉项目"
       },
       {
         "icon": "Globe",
-        "text": "Local market understanding with global standards"
+        "text": "以全球标准理解本地市场"
       },
       {
         "icon": "Zap",
-        "text": "A process built for correct decisions"
+        "text": "专为正确决策而构建的流程"
       },
       {
         "icon": "Users",
-        "text": "Clear communication at every stage"
+        "text": "每个阶段清晰沟通"
       }
     ],
-    "phoneButton": "Call directly",
-    "telegramButton": "Write on Telegram",
-    "videoButton": "45 seconds from founder",
-    "videoAlt": "Bahtiyorjon Gaziyev, founder of Jon.Branding",
+    "phoneButton": "直接致电",
+    "telegramButton": "通过 Telegram 联系",
+    "videoButton": "创始人45秒介绍",
+    "videoAlt": "Jon.Branding 创始人 Bahtiyorjon Gaziyev",
     "principles": [
-      "Strategy first",
-      "Business-language clarity",
-      "Result: trust and premium feel"
+      "策略优先",
+      "商业语言的清晰度",
+      "结果：信任感与高端质感"
     ]
   },
   "process": {
-    "title": "From free audit to a premium brand system.",
-    "subtitle": "The audit gives the first diagnosis. If we continue, the work becomes strategy, visual system, and rollout.",
+    "title": "从免费审计到高端品牌系统。",
+    "subtitle": "审计提供初步诊断。如果我们继续，工作将演变为策略、视觉系统和落地执行。",
     "phases": [
       {
         "phase": "01",
-        "title": "Brand Audit",
-        "description": "We review trust, premium feel, and clarity through a buyer?s eyes.",
+        "title": "品牌审计",
+        "description": "我们以买家视角审查信任度、高端感和清晰度。",
         "tasks": [
-          "First impression",
-          "Trust gap",
-          "Competitor mirror"
+          "第一印象",
+          "信任缺口",
+          "竞争对手对比"
         ]
       },
       {
         "phase": "02",
-        "title": "Strategy",
-        "description": "We define who you are for, why you are different, and why buyers should choose you.",
+        "title": "品牌策略",
+        "description": "我们定义您为谁服务、您有何不同，以及买家为何应该选择您。",
         "tasks": [
-          "Positioning",
-          "Audience",
-          "Core message"
+          "市场定位",
+          "目标受众",
+          "核心信息"
         ]
       },
       {
         "phase": "03",
-        "title": "Visual system",
-        "description": "We align name, logo, colors, typography, packaging, and website into one system.",
+        "title": "视觉系统",
+        "description": "我们将名称、标志、颜色、排版、包装和网站整合成一个统一的系统。",
         "tasks": [
-          "Logo",
-          "Identity",
-          "Brandbook"
+          "标志",
+          "视觉识别",
+          "品牌手册"
         ]
       },
       {
         "phase": "04",
-        "title": "Rollout",
-        "description": "We show the brand in real touchpoints: packaging, social, website, and sales materials.",
+        "title": "落地执行",
+        "description": "我们在真实触点中展示品牌：包装、社交媒体、网站和销售材料。",
         "tasks": [
-          "Mockups",
-          "Rollout",
-          "Content direction"
+          "效果展示",
+          "品牌落地",
+          "内容方向"
         ]
       },
       {
         "phase": "05",
-        "title": "Usage control",
-        "description": "Your team receives rules and files to use the brand consistently.",
+        "title": "使用规范",
+        "description": "您的团队将获得规则和文件，以一致地使用品牌。",
         "tasks": [
-          "Files",
-          "Rules",
-          "Support"
+          "设计文件",
+          "使用规则",
+          "后续支持"
         ]
       }
     ],
-    "ctaTitle": "Start with a free Brand Audit.",
-    "ctaDesc": "We find what lowers trust and tell you the most important first step.",
-    "ctaButton": "Book the free audit",
-    "eyebrow": "After audit",
+    "ctaTitle": "从免费品牌审计开始。",
+    "ctaDesc": "我们找出降低信任度的因素，并告诉您最重要的第一步。",
+    "ctaButton": "预约免费审计",
+    "eyebrow": "审计之后",
     "proofItems": [
-      "Diagnosis",
-      "Strategy",
-      "Visual system",
-      "Implementation guide"
+      "品牌诊断",
+      "品牌策略",
+      "视觉系统",
+      "落地实施指南"
     ]
   },
   "leadMagnet": {
@@ -819,10 +824,10 @@
     "ctaButton": "我已经得到了所有的答案，准备好开始了！"
   },
   "mobileCtaBar": {
-    "final_price": "Final price",
-    "get_offer": "Get audit",
-    "cta": "Get the free Brand Audit",
-    "hint": "We check the trust signals in your brand"
+    "final_price": "最终价格",
+    "get_offer": "获取审计",
+    "cta": "获取免费品牌审计",
+    "hint": "我们检查您品牌中的信任信号"
   },
   "blog": {
     "title": "我们的博客",
@@ -1405,51 +1410,51 @@
     }
   },
   "auditOffer": {
-    "eyebrow": "Inside the free audit",
-    "title": "Is your brand helping sales or slowing them down?",
-    "description": "Before selling design, we show where your brand loses trust in the buyer?s eyes. You leave knowing what you need now and what can wait.",
-    "cta": "Book the free audit",
-    "promise": "No pressure. We show the problem and opportunity first.",
+    "eyebrow": "免费审计内容",
+    "title": "您的品牌是帮助销售还是拖慢销售？",
+    "description": "在出售设计之前，我们展示您的品牌在买家眼中失去信任的地方。您离开时将知道现在需要什么以及可以等待什么。",
+    "cta": "预约免费审计",
+    "promise": "无压力。我们首先展示问题和机遇。",
     "outcomes": [
       {
-        "value": "15m",
-        "label": "audit call"
+        "value": "15分钟",
+        "label": "审计沟通"
       },
       {
         "value": "5",
-        "label": "trust signals"
+        "label": "信任信号"
       },
       {
         "value": "1",
-        "label": "priority plan"
+        "label": "优先计划"
       },
       {
-        "value": "Free",
-        "label": "initial audit"
+        "value": "免费",
+        "label": "初始审计"
       }
     ],
     "items": [
       {
-        "title": "First-impression diagnosis",
-        "desc": "We review whether your site, logo, packaging, or social presence feels premium and trustworthy."
+        "title": "第一印象诊断",
+        "desc": "我们审查您的网站、标志、包装或社交媒体是否具有高端和可信赖的感觉。"
       },
       {
-        "title": "Trust-gap map",
-        "desc": "We name the weak points that slow buyer confidence."
+        "title": "信任缺口图谱",
+        "desc": "我们指出慢化买家信心的弱点。"
       },
       {
-        "title": "Competitor position",
-        "desc": "We show who looks stronger and where your brand can win visually."
+        "title": "竞争对手分析",
+        "desc": "我们展示谁看起来更强，以及您的品牌在哪里可以在视觉上胜出。"
       },
       {
-        "title": "Next steps",
-        "desc": "We rank whether strategy, naming, identity, packaging, or website should come first."
+        "title": "下一步行动",
+        "desc": "我们将策略、命名、识别、包装或网站哪个应该排在首位进行排序。"
       }
     ],
     "proof": [
-      "No obligation",
-      "Business language",
-      "Sales-focused plan"
+      "无任何义务",
+      "商业语言",
+      "以销售为导向的计划"
     ]
   },
   "pricingPage": {
@@ -1943,6 +1948,7 @@
     "hero_eyebrow": "中亚 · 品牌工作室 · 成立于 2019 年",
     "hero_pill": "新套餐现已推出",
     "hero_title": "您的品牌\n实际上\n正在损失多少？",
+    "hero_title_alt": "正在损失多少？",
     "hero_lede": "品牌诊断——发现您业务中无形的损失。14 天 · 12 项标准 · 30-50 页报告 · 精确数据。从免费迷你诊断开始——如果您愿意，可以升级到完整诊断。",
     "hero_cta": "开始免费迷你诊断",
     "hero_cta_sub": "或查看套餐",
