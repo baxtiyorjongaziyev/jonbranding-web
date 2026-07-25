@@ -7,25 +7,17 @@ updates:
       day: monday
       time: "09:00"
       timezone: Asia/Tashkent
-    open-pull-requests-limit: 5
+    # Routine version PRs are paused. Security updates remain enabled and are
+    # grouped into one reviewable PR instead of creating a noisy queue.
+    open-pull-requests-limit: 0
     labels:
       - dependencies
       - security
     groups:
-      nextjs:
+      npm-security:
+        applies-to: security-updates
         patterns:
-          - next
-          - "@next/*"
-      sanity:
-        patterns:
-          - sanity
-          - "@sanity/*"
-          - next-sanity
-      testing:
-        patterns:
-          - vitest
-          - "@testing-library/*"
-          - jsdom
+          - "*"
 
   - package-ecosystem: github-actions
     directory: /
@@ -34,6 +26,12 @@ updates:
       day: monday
       time: "09:20"
       timezone: Asia/Tashkent
+    open-pull-requests-limit: 0
     labels:
       - dependencies
       - ci-cd
+    groups:
+      actions-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
