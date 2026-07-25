@@ -9,12 +9,12 @@ permissions:
   pull-requests: read
 
 jobs:
-  refresh-lockfile:
+  refresh-lockfiles:
     if: >-
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.pull_request.head.ref == 'security/postcss-8.5.23'
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v7
         with:
@@ -26,20 +26,26 @@ jobs:
           node-version: '22'
           cache: npm
 
-      - name: Match repository lockfile tooling
+      - uses: pnpm/action-setup@v5
+        with:
+          version: 10.33.2
+
+      - name: Match repository npm lockfile tooling
         run: npm install --global npm@11
 
-      - name: Refresh package lock without lifecycle scripts
-        run: npm install --package-lock-only --ignore-scripts
+      - name: Refresh npm and pnpm locks without lifecycle scripts
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          pnpm install --lockfile-only --ignore-scripts
 
-      - name: Commit generated package lock
+      - name: Commit generated lockfiles
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package-lock.json
+          git add package-lock.json pnpm-lock.yaml
           if git diff --cached --quiet; then
-            echo "Lockfile already current"
+            echo "Lockfiles already current"
             exit 0
           fi
-          git commit -m "chore(deps): refresh lockfile for PostCSS 8.5.23"
+          git commit -m "chore(deps): refresh lockfiles for PostCSS 8.5.23"
           git push origin HEAD:security/postcss-8.5.23
