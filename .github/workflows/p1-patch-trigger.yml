@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   patch:
+    # One-shot job: exact commit message and exact target branch only.
     if: github.event.head_commit.message == 'chore(ci): trigger controlled P1 branch patch'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
