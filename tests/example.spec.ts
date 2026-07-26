@@ -14,6 +14,6 @@ test('JonBranding homepage has correct brand title and main elements', async ({ 
 test('JonBranding services page or services content is accessible', async ({ page }) => {
   await page.goto(`${baseUrl}/uz`);
 
-  const servicesLink = page.locator('a:has-text("Xizmatlar"), a:has-text("xizmatlar")').first();
-  await expect(servicesLink).toBeVisible();
+  const servicesControl = page.getByRole('button', { name: /Services|Xizmatlar/i }).first();
+  await expect(servicesControl).toBeVisible();
 });
