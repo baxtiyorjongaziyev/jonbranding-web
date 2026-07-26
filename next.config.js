@@ -43,9 +43,6 @@ const nextConfig = {
   experimental: {
     cpus: 1,
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   turbopack: {
     root: __dirname,
   },
