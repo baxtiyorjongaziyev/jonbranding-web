@@ -16,3 +16,5 @@
 - [ ] Remove `ignoreBuildErrors`.
 - [ ] Add local Playwright web server and Chromium CI job.
 - [ ] Run typecheck, lint, unit tests, build, and Playwright checks.
+
+The scoped one-shot workflow applies only to the same-repository `p1/reliability-ci-monitoring` branch and aborts if any expected source fragment is not unique.
