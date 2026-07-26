@@ -5,23 +5,23 @@ Status: Approved for planning
 
 ## Purpose
 
-Strengthen Jon Branding's browser security policy and make every spam-protection fallback visible, measurable, and actionable without breaking lead delivery.
+Strengthen browser security and make every spam-protection fallback visible, measurable, and actionable without breaking lead delivery.
 
 ## Scope
 
-1. Move from a static CSP with `unsafe-inline` toward nonce/hash-based enforcement.
-2. Add CSP violation reporting and rollout controls.
-3. Replace silent spam-protection fallbacks with structured delivery and security telemetry.
-4. Enforce origin validation in production.
-5. Alert when Turnstile, Firestore rate limiting, or other anti-spam controls degrade.
-6. Add staging security and permission tests for lead submission flows.
+1. Move from static CSP with `unsafe-inline` toward nonce/hash enforcement.
+2. Add CSP reporting and rollback controls.
+3. Add structured anti-spam telemetry.
+4. Enforce production origin validation.
+5. Alert when Turnstile, Firestore rate limiting, or another control degrades.
+6. Run staging security tests for lead flows.
 
 ## Non-goals
 
 - No immediate removal of all inline styles before compatibility is measured.
 - No production denial-of-service testing.
-- No logging of submitted message bodies, tokens, or personal data in security telemetry.
-- No change to the existing truthful analytics delivery response contract except where shared monitoring primitives are reused.
+- No lead message bodies, contact details, tokens, or cookies in security telemetry.
+- No breaking change to the truthful analytics delivery response contract.
 
 ## Delivery sequence
 
@@ -34,26 +34,9 @@ Each phase is independently deployable and reversible.
 
 ---
 
-## 1. CSP reporting phase
+## 1. CSP reporting
 
-### Current issue
-
-The current production policy permits inline scripts/styles. Removing these directives without observing actual runtime requirements risks breaking Next.js, third-party analytics, form behavior, and embedded services.
-
-### Report-only policy
-
-Add `Content-Security-Policy-Report-Only` before tightening enforcement. The policy must explicitly list required origins for:
-
-- scripts;
-- styles;
-- images;
-- fonts;
-- connections/API calls;
-- frames;
-- workers;
-- form actions;
-- base URI;
-- object sources.
+Add `Content-Security-Policy-Report-Only` before enforcement. The policy explicitly covers scripts, styles, images, fonts, connections, frames, workers, form actions, base URI, and object sources.
 
 Minimum baseline:
 
@@ -65,87 +48,78 @@ frame-ancestors 'none'
 form-action 'self'
 ```
 
-Existing third-party domains are admitted only when verified as necessary.
+Only verified required third-party domains are admitted.
 
 ### Violation endpoint
 
-Add a server endpoint for CSP reports.
+The endpoint:
 
-Requirements:
-
-- accepts standard CSP report payloads;
-- validates request size and content type;
+- accepts standard CSP reports;
+- validates content type and size;
 - rate limits reports;
-- strips query strings and sensitive values where possible;
-- records directive, blocked origin, document path, disposition, and timestamp;
-- never records cookies, authorization headers, form bodies, or access tokens;
-- deduplicates repeated violations;
-- emits an alert only after a threshold, not for every event.
+- removes query strings and sensitive values;
+- records directive, blocked origin, coarse document path, disposition, and timestamp;
+- never records cookies, auth headers, form bodies, access tokens, or lead content;
+- deduplicates repeated events;
+- alerts only after a threshold.
+
+Primary alert delivery is the existing Telegram admin channel. If Telegram delivery fails, the incident is written to structured server logs with a delivery-failed status.
 
 ### Reporting acceptance criteria
 
-- Report-only policy is present in staging and production.
-- Valid reports are stored or forwarded to monitoring.
-- Malformed and oversized reports are rejected safely.
-- No user-entered lead text is captured.
-- A report dashboard identifies all remaining inline and third-party requirements.
+- Report-only policy is active in staging and production.
+- Valid reports are stored or forwarded.
+- Malformed/oversized reports are rejected.
+- No personal lead data is captured.
+- The report view identifies remaining inline and third-party requirements.
 
 ---
 
-## 2. Nonce/hash CSP enforcement
+## 2. Nonce/hash enforcement
 
-### Request-scoped nonce
+Generate a cryptographically random nonce for every HTML request and propagate it to required framework/application scripts.
 
-Generate a cryptographically random nonce for each HTML request at the middleware/server boundary. Pass it through the rendering path to framework and application scripts that need it.
-
-The enforced script policy becomes equivalent to:
+Target script policy:
 
 ```text
 script-src 'self' 'nonce-<request-value>' 'strict-dynamic'
 ```
 
-Exact directives depend on verified Next.js runtime behavior in the deployed version.
+Exact directives are verified against the deployed Next.js version.
 
-### Inline code handling
+### Inline handling
 
-- Application inline scripts receive a nonce or move into external modules.
-- Stable third-party snippets may use reviewed hashes when nonce propagation is not possible.
+- Application inline scripts receive a nonce or move to external modules.
+- Stable third-party snippets may use reviewed hashes.
 - Unused snippets are removed.
-- `unsafe-eval` is prohibited in production unless a documented framework requirement proves unavoidable.
+- `unsafe-eval` is prohibited unless a verified framework requirement is documented.
 
 ### Styles
 
-Styles are tightened separately:
-
 1. Inventory runtime style injection.
 2. Move application inline styles into CSS/classes.
-3. Use nonces or hashes where the framework supports them.
-4. Keep a temporary style exception only while report data proves it is required.
-5. Remove the exception after compatibility tests pass.
+3. Use nonce/hash support where available.
+4. Keep temporary style exceptions only for an approved allowlist.
+5. Remove exceptions after compatibility tests pass.
 
 ### Rollout
 
-- Staging report-only.
-- Staging enforcement.
-- Production report-only comparison.
-- Production enforcement behind a rollback switch.
+Staging report-only, staging enforcement, production report-only comparison, then production enforcement behind an environment rollback switch.
 
-### CSP enforcement acceptance criteria
+### CSP acceptance criteria
 
-- Core pages render correctly under enforcement.
-- Forms, language switching, analytics, and navigation work.
+- Core routes render and function under enforcement.
+- Forms, locale switching, analytics, CTA navigation, and diagnostics work.
 - No enforced `unsafe-inline` remains in `script-src`.
-- Style exceptions are documented and minimized.
-- CSP violations remain below the agreed threshold for seven consecutive staging test runs.
-- Rollback restores the previous header without a code rollback.
+- No `script-src`, `connect-src`, `frame-src`, `form-action`, `base-uri`, or `object-src` violation occurs in the core Playwright suite.
+- Any remaining style violation matches the documented temporary allowlist; no unexpected style violation is accepted.
+- Rollback restores the previous policy without a code rollback.
 
 ---
 
 ## 3. Spam protection telemetry
 
-### Structured decision report
-
-Every lead submission produces an internal security decision report:
+Every submission emits one internal report:
 
 ```text
 SpamProtectionReport
@@ -163,175 +137,90 @@ SpamProtectionReport
 Allowed statuses:
 
 ```text
-turnstile:
-- verified
-- rejected
-- skipped_missing_secret
-- provider_failed
-- malformed_response
-
-origin:
-- valid
-- invalid
-- missing
-
-rate_limit:
-- firestore_allowed
-- firestore_blocked
-- memory_fallback_allowed
-- memory_fallback_blocked
-- unavailable
-
-honeypot:
-- clean
-- triggered
+turnstile: verified | rejected | skipped_missing_secret | provider_failed | malformed_response
+origin: valid | invalid | missing
+rate_limit: firestore_allowed | firestore_blocked | memory_fallback_allowed | memory_fallback_blocked | unavailable
+honeypot: clean | triggered
 ```
 
-### Production policies
+### Production policy
 
-- Missing Turnstile secret is a configuration incident, not a silent success.
-- Invalid origin is blocked in production.
-- Missing origin follows a documented policy for trusted clients; browser lead endpoints fail closed unless explicitly allowed.
-- Turnstile provider failure follows a configuration switch:
+- Missing Turnstile secret is a configuration incident.
+- Invalid origin is blocked.
+- Missing origin fails closed for browser lead endpoints unless an explicitly authenticated trusted client policy allows it.
+- Turnstile provider failure follows one environment setting:
   - `strict`: reject temporarily;
-  - `business_continuity`: accept only when other controls pass, mark degraded, queue for review, and alert.
-- Firestore failure may fall back to memory for continuity, but the degraded state is recorded and alerted.
-- Honeypot triggers remain non-descriptive to the client.
+  - `business_continuity`: accept only when all remaining controls pass, mark degraded, queue for review, and alert.
+- Firestore failure may fall back to memory, but always records and alerts the degraded state.
+- Honeypot responses remain non-descriptive.
 
-### Monitoring and alerts
+### Alerts
 
-Alerts are sent for:
+Alert on missing production secret, repeated provider failures, repeated origin violations, sustained Firestore fallback, unavailable limiter, and spikes in rejected/degraded submissions.
 
-- Turnstile secret missing in production;
-- repeated Turnstile provider failures;
-- repeated origin violations;
-- sustained Firestore-to-memory fallback;
-- rate limiter unavailable;
-- sudden spike in rejected or degraded submissions.
+Alerts are deduplicated by type/environment, use cooldowns, include counts and first/last occurrence, and exclude personal data.
 
-Alert behavior:
-
-- deduplicate by type and environment;
-- use a cooldown window;
-- include counts and first/last occurrence;
-- exclude personal data and submitted message text;
-- route to the existing admin channel or monitoring integration.
-
-### User-facing response
-
-The public response remains minimal. Internal degradation details are not exposed to attackers. A request ID may be returned for support correlation.
-
-### Spam monitoring acceptance criteria
+### Acceptance criteria
 
 - Every submission has one internal decision report.
-- Production origin violations are blocked.
-- Missing Turnstile secret generates an alert.
-- Provider failure behavior follows the configured policy.
-- Firestore fallback is visible in monitoring.
-- Alerts do not contain lead content, tokens, or contact details.
-- Repeated incidents do not spam the admin channel.
+- Invalid production origins are blocked.
+- Missing Turnstile secret alerts.
+- Provider failure follows the configured policy.
+- Firestore fallback is visible.
+- No lead content, token, or contact detail appears in alerts.
+- Repeated incidents do not flood Telegram.
 
 ---
 
-## 4. Data retention and privacy
+## 4. Privacy and retention
 
-Security telemetry stores only what is necessary:
+The new telemetry stores request ID, coarse route, status categories, duration, timestamp, environment, and an HMAC-based short identifier when correlation is needed.
 
-- request ID;
-- coarse route/path;
-- status categories;
-- durations;
-- hashed or truncated technical identifiers when needed;
-- timestamps and environment.
+Raw IP addresses are not stored by this new telemetry. Correlation uses an HMAC of the IP with a daily rotating secret, and the hash is not reversible.
 
-Do not store:
+Do not store lead messages, phone/email values, Turnstile tokens, cookies, auth headers, analytics secrets, or full query strings.
 
-- full IP addresses beyond the existing lawful security policy;
-- lead message body;
-- phone/email values;
-- Turnstile tokens;
-- cookies;
-- authorization headers;
-- analytics secrets.
-
-Retention defaults to 30 days unless an incident requires a documented extension.
+Default retention is 30 days. Incident extensions require a documented reason and expiry date.
 
 ---
 
-## 5. Testing strategy
+## 5. Testing
 
-### Unit tests
+### Unit
 
-- CSP report validation and redaction.
-- Nonce generation uniqueness and format.
-- Header assembly.
-- Each Turnstile outcome.
-- Origin policy.
-- Firestore fallback outcomes.
-- Alert deduplication and cooldown.
-- No sensitive fields in telemetry.
+CSP report validation/redaction, nonce uniqueness, header assembly, all Turnstile outcomes, origin policy, Firestore fallback, alert dedupe/cooldown, and sensitive-field exclusion.
 
-### Integration tests
+### Integration
 
-- Lead accepted with all controls healthy.
-- Invalid Turnstile rejected.
-- Invalid origin rejected.
-- Missing production secret handled as configured and alerted.
-- Turnstile provider outage in both strict and continuity modes.
-- Firestore outage with monitored memory fallback.
-- Honeypot submission blocked without revealing the rule.
+Healthy acceptance, invalid Turnstile rejection, invalid origin rejection, missing production secret alert, provider outage in both modes, Firestore outage with monitored fallback, and honeypot rejection without rule disclosure.
 
-### Browser tests
+### Browser
 
-Under enforced CSP, verify:
-
-- home and service pages render;
-- locale switching works;
-- CTA navigation works;
-- diagnostic and lead forms submit;
-- analytics requests are not unexpectedly blocked;
-- no critical console CSP errors occur.
+Under enforced CSP verify home/services, locale switching, CTA navigation, diagnostic/lead forms, analytics delivery, and absence of critical CSP console errors.
 
 ---
 
 ## 6. Staging security test
 
-Use a staging deployment and synthetic leads.
+Use synthetic leads only. Test invalid/missing Origin, forged forwarding headers, Turnstile failure cases where supported, safe burst scenarios, Firestore outage, inline injection, bounded CSP report flooding, malformed/oversized payloads, and analytics/CRM downstream failures.
 
-Test cases:
+No destructive load testing.
 
-- missing and invalid Origin;
-- forged forwarding headers;
-- missing, invalid, replayed, and expired Turnstile responses where test tooling permits;
-- burst submissions and distributed rate-limit scenarios;
-- Firestore unavailable;
-- CSP inline-script injection attempts;
-- CSP report flooding within safe limits;
-- malformed JSON and oversized payloads;
-- analytics and CRM downstream failure combinations.
-
-No destructive load testing is allowed.
-
-### Staging acceptance criteria
+### Acceptance criteria
 
 - No unauthorized cross-origin lead submission.
 - No executable inline injection under enforced CSP.
 - No silent anti-spam degradation.
-- No sensitive data in security logs or alerts.
-- Core business flows pass Playwright under CSP enforcement.
-- No unresolved high or critical finding remains.
+- No sensitive data in logs/alerts.
+- Playwright core flows pass under CSP enforcement.
+- No unresolved high/critical finding.
 
 ---
 
 ## Rollout and rollback
 
-- Deploy report-only CSP first.
-- Compare violation data before enforcement.
-- Enable enforced CSP in staging, then production.
-- Keep an environment-controlled rollback to the previous policy during rollout.
-- Spam monitoring ships before stricter failure behavior so impact is measurable.
-- Strict Turnstile mode can be changed independently of code deployment.
+Ship report-only first, compare reports, enforce in staging, then production. Keep an environment rollback switch. Ship monitoring before stricter failure behavior. Turnstile strict/continuity mode changes independently of deployment.
 
 ## Completion definition
 
-This work is complete when production script CSP no longer relies on `unsafe-inline`, all spam-control fallbacks emit structured monitoring, invalid production origins are blocked, Playwright passes under enforced CSP, and staging security testing has no unresolved high or critical finding.
+Complete when production `script-src` no longer uses `unsafe-inline`, all anti-spam fallbacks emit structured monitoring, invalid origins are blocked, Playwright passes under enforced CSP, and staging security testing has no unresolved high/critical finding.
