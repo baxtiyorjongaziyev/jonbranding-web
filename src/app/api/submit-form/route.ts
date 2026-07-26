@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { createHash } from 'crypto';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { getValidAccessToken, forceRefresh } from '@/lib/amocrm-token';
 import { getDb } from '@/lib/firebase-admin';
 import { leadFormSchema } from '@/lib/lead-form-schema';
 import { guardLeadRequest } from '@/lib/lead-guard';
 import { logger } from '@/lib/logger';
+import { runAnalyticsDeliveries } from '@/lib/analytics-delivery';
 import {
   buildAmoCrmContactFields,
   normalizePhone,
@@ -13,8 +13,6 @@ import {
   runLeadDeliveries,
 } from '@/lib/lead-contact';
 
-const UZS_TO_USD_RATE = 1 / 12700;
-const DEFAULT_GA_MEASUREMENT_ID = 'G-BTSGJQLMMV';
 const AMOCRM_FAILED_LEADS_COLLECTION = 'amocrm_failed_leads';
 
 function escapeTelegramHtml(value: unknown) {
@@ -28,14 +26,6 @@ function cleanSecret(value: string | undefined) {
   return String(value || '')
     .replace(/^\uFEFF/, '')
     .trim();
-}
-
-function sha256(value: unknown) {
-  const normalized = String(value || '')
-    .trim()
-    .toLowerCase();
-  if (!normalized) return '';
-  return createHash('sha256').update(normalized).digest('hex');
 }
 
 function stripUndefined(value: any): any {
@@ -138,12 +128,8 @@ async function sendTelegramIfConfigured(
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
 
-    // Bu yerda jim qolish leadni ko'rinmas holda yo'qotadi: AmoCRMga tushadi,
-    // guruhga tushmaydi va hech kim sezmaydi. Shuning uchun error darajasi.
     logger.error(`Telegram ${context} failed`, { chatId, reason });
 
-    // Asosiy guruh yiqilsa (mas. "chat not found") — zaxira chatga urinamiz,
-    // aks holda ogohlantirishning o'zi ham yo'qoladi.
     const adminChatId = cleanSecret(process.env.TELEGRAM_ADMIN_CHAT_ID);
     if (adminChatId && adminChatId !== chatId) {
       try {
@@ -163,98 +149,6 @@ async function sendTelegramIfConfigured(
     }
 
     return false;
-  }
-}
-
-async function sendMetaConversionEvent(data: any) {
-  const accessToken = cleanSecret(process.env.META_API_ACCESS_TOKEN);
-  const pixelId = '1134785364752294';
-  if (!accessToken || !pixelId) return;
-
-  const valueInUzs = data.totalPrice || 0;
-  const valueInUsd = (valueInUzs * UZS_TO_USD_RATE).toFixed(2);
-
-  try {
-    await fetch(`https://graph.facebook.com/v20.0/${pixelId}/events`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: [
-          {
-            event_name: 'Lead',
-            event_time: Math.floor(Date.now() / 1000),
-            event_id: data.eventId,
-            action_source: 'website',
-            event_source_url: data.pageLocation,
-            user_data: {
-              ph: data.phone ? [sha256(normalizePhone(data.phone))] : [],
-              fn: data.fullName ? [sha256(data.fullName)] : [],
-            },
-            custom_data: {
-              value: valueInUsd,
-              currency: 'USD',
-              content_name: data.source || 'website_contact_form',
-            },
-          },
-        ],
-        access_token: accessToken,
-      }),
-    });
-  } catch (error) {
-    console.error('Meta CAPI error:', error);
-  }
-}
-
-async function sendGAConversionEvent(data: any) {
-  const gaApiSecret = cleanSecret(process.env.GA_API_SECRET);
-  const gaMeasurementId = cleanSecret(process.env.NEXT_PUBLIC_GA_ID) || DEFAULT_GA_MEASUREMENT_ID;
-  if (!gaApiSecret) return;
-
-  try {
-    await fetch(
-      `https://www.google-analytics.com/mp/collect?measurement_id=${gaMeasurementId}&api_secret=${gaApiSecret}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          client_id: data.gaClientId || data.eventId || '555.555',
-          events: [
-            {
-              name: 'generate_lead',
-              params: {
-                event_id: data.eventId,
-                value: data.totalPrice || 0,
-                currency: 'UZS',
-                source: data.source || 'website_contact_form',
-                cta_source: data.ctaSource,
-                page_location: data.pageLocation,
-              },
-            },
-          ],
-        }),
-      }
-    );
-  } catch (error) {
-    console.error('GA4 error:', error);
-  }
-}
-
-async function sendToN8n(data: any) {
-  const n8nWebhookUrl = cleanSecret(process.env.N8N_WEBHOOK_URL);
-  if (!n8nWebhookUrl) return;
-
-  try {
-    await fetch(n8nWebhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...data,
-        source: data.source || 'website_contact_form',
-        timestamp: new Date().toISOString(),
-      }),
-    });
-  } catch (error) {
-    console.error('n8n error:', error);
   }
 }
 
@@ -367,7 +261,6 @@ async function sendToAmoCrm(data: any) {
     body: leadBody,
   });
 
-  // Retry once with a fresh token if the current one is stale
   if (createResponse.status === 401) {
     try {
       const refreshed = await forceRefresh();
@@ -473,13 +366,16 @@ export async function POST(request: Request) {
 
     const guard = await guardLeadRequest(request, body, ip, 'submit-form');
     if (guard.action === 'drop') {
-      // Botga muvaffaqiyat ko'rsatamiz, lekin hech qayerga yubormaymiz.
-      // Javob shakli haqiqiysi bilan bir xil — aks holda bot filtrni sezib,
-      // uni aylanib o'tishga urinadi.
       return NextResponse.json({
         ok: true,
         eventId: `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
-        integrations: { telegram: true, amoCrm: true, amoCrmQueued: false, analytics: true },
+        integrations: {
+          telegram: true,
+          amoCrm: true,
+          amoCrmQueued: false,
+          analytics: false,
+          analyticsDelivery: null,
+        },
       });
     }
     if (guard.action === 'reject') {
@@ -489,7 +385,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validate input using Zod
     const validatedData = leadFormSchema.safeParse(body);
     if (!validatedData.success) {
       return NextResponse.json(
@@ -498,7 +393,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Guard maydonlari faqat tekshiruv uchun — CRMga ham, Telegramga ham tushmaydi.
     const { companyWebsite: _honeypot, turnstileToken: _turnstile, ...cleanData } =
       validatedData.data;
 
@@ -508,7 +402,6 @@ export async function POST(request: Request) {
     };
 
     const { fullName, phone } = leadData;
-
     const threadId = cleanSecret(process.env.TELEGRAM_MESSAGE_THREAD_ID);
 
     const telegramPayload: any = {
@@ -552,9 +445,18 @@ export async function POST(request: Request) {
       }),
     );
 
-    sendMetaConversionEvent(leadData).catch(() => {});
-    sendGAConversionEvent(leadData).catch(() => {});
-    sendToN8n(leadData).catch(() => {});
+    const analyticsDelivery = await runAnalyticsDeliveries(leadData);
+    for (const [channel, delivery] of Object.entries(analyticsDelivery.channels)) {
+      if (delivery.state === 'failed') {
+        logger.error('Analytics delivery failed', {
+          channel,
+          eventId: leadData.eventId,
+          statusCode: delivery.statusCode,
+          reason: delivery.reason,
+          durationMs: delivery.durationMs,
+        });
+      }
+    }
 
     return NextResponse.json({
       ok: true,
@@ -563,7 +465,8 @@ export async function POST(request: Request) {
         telegram: telegramSuccess,
         amoCrm: amoCrmResult.ok === true,
         amoCrmQueued: amoCrmResult.queued === true,
-        analytics: true,
+        analytics: analyticsDelivery.ok,
+        analyticsDelivery,
       },
     });
   } catch (error: any) {
