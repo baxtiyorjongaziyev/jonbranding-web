@@ -1,0 +1,94 @@
+name: One-shot P1 analytics route patch
+
+on:
+  pull_request_target:
+    types: [synchronize]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  patch-route:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'p1/reliability-ci-monitoring'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: p1/reliability-ci-monitoring
+          fetch-depth: 0
+
+      - name: Patch submit-form analytics integration
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('src/app/api/submit-form/route.ts')
+          source = path.read_text(encoding='utf-8')
+
+          def replace_once(old: str, new: str, label: str) -> None:
+              global source
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected 1 match, found {count}')
+              source = source.replace(old, new, 1)
+
+          replace_once("import { createHash } from 'crypto';\n", '', 'crypto import')
+          replace_once(
+              "import { logger } from '@/lib/logger';\n",
+              "import { logger } from '@/lib/logger';\nimport { runAnalyticsDeliveries } from '@/lib/analytics-delivery';\n",
+              'analytics import',
+          )
+          replace_once("const UZS_TO_USD_RATE = 1 / 12700;\n", '', 'UZS constant')
+          replace_once("const DEFAULT_GA_MEASUREMENT_ID = 'G-BTSGJQLMMV';\n", '', 'GA constant')
+
+          source, count = re.subn(
+              r"function sha256\(value: unknown\) \{.*?\n\}\n\n(?=function stripUndefined)",
+              '',
+              source,
+              count=1,
+              flags=re.S,
+          )
+          if count != 1:
+              raise SystemExit(f'sha256 helper: expected 1 match, found {count}')
+
+          source, count = re.subn(
+              r"async function sendMetaConversionEvent\(data: any\) \{.*?\n\}\n\n(?=function describeAmoCrmError)",
+              '',
+              source,
+              count=1,
+              flags=re.S,
+          )
+          if count != 1:
+              raise SystemExit(f'legacy analytics functions: expected 1 match, found {count}')
+
+          replace_once(
+              "        integrations: { telegram: true, amoCrm: true, amoCrmQueued: false, analytics: true },\n",
+              "        integrations: {\n          telegram: true,\n          amoCrm: true,\n          amoCrmQueued: false,\n          analytics: false,\n          analyticsDelivery: null,\n        },\n",
+              'guard response',
+          )
+          replace_once(
+              "    sendMetaConversionEvent(leadData).catch(() => {});\n    sendGAConversionEvent(leadData).catch(() => {});\n    sendToN8n(leadData).catch(() => {});\n",
+              "    const analyticsDelivery = await runAnalyticsDeliveries(leadData);\n    for (const [channel, delivery] of Object.entries(analyticsDelivery.channels)) {\n      if (delivery.state === 'failed') {\n        logger.error('Analytics delivery failed', {\n          channel,\n          eventId: leadData.eventId,\n          statusCode: delivery.statusCode,\n          reason: delivery.reason,\n          durationMs: delivery.durationMs,\n        });\n      }\n    }\n",
+              'analytics calls',
+          )
+          replace_once(
+              "        analytics: true,\n",
+              "        analytics: analyticsDelivery.ok,\n        analyticsDelivery,\n",
+              'analytics response',
+          )
+
+          path.write_text(source, encoding='utf-8')
+          PY
+
+      - name: Commit route patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/app/api/submit-form/route.ts
+          git commit -m "fix(analytics): return real delivery monitoring"
+          git push origin HEAD:p1/reliability-ci-monitoring
