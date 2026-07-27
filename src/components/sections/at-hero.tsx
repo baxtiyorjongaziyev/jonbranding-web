@@ -1,7 +1,7 @@
 'use client';
 import type { FC } from 'react';
 import Image from 'next/image';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 
 interface PortfolioImage {
   src: string;
@@ -111,7 +111,26 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
   const [spot, setSpot] = useState({ x: -999, y: -999, visible: false });
 
   const pool = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
-  const activeItem = pool[0];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Pick a random starting image index on mount so page refreshes show different items
+  useEffect(() => {
+    if (pool.length > 1) {
+      const randomIndex = Math.floor(Math.random() * pool.length);
+      setCurrentIndex(randomIndex);
+    }
+  }, [pool.length]);
+
+  // Auto-rotate slideshow every 5 seconds
+  useEffect(() => {
+    if (pool.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % pool.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [pool.length]);
+
+  const activeItem = pool[currentIndex] || pool[0];
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
