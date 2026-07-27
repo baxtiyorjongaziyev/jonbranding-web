@@ -43,6 +43,48 @@
     "skipToMainContent": "跳到主要内容",
     "tabNotificationMessage": "(1) 新消息！| Jon Branding"
   },
+  "homeSeo": {
+    "title": "标志与企业形象设计 — Jon.Branding | 塔什干",
+    "description": "标志、品牌手册与包装设计。服务150多个品牌，拥有6年经验，为企业打造统一且可信的品牌形象。",
+    "keywords": [
+      "塔什干标志设计",
+      "企业形象设计",
+      "品牌手册",
+      "包装设计",
+      "乌兹别克斯坦品牌机构"
+    ]
+  },
+  "answerHub": {
+    "eyebrow": "专家解答",
+    "title": "关于品牌的明确答案。",
+    "intro": "来自 Jon.Branding 实践的简明、可验证答案。每个答案都说明相应服务解决的商业问题。",
+    "items": [
+      {
+        "question": "优秀的标志应具备什么特点？",
+        "answer": "优秀的标志应与同类品牌有明显区别，在小尺寸下依然清晰，简洁且容易记忆。它可以手绘复现，适用于不同媒介，并且每个造型都有明确理由。我们依据这六项标准评估标志方案。",
+        "linkLabel": "查看标志设计流程",
+        "href": "/xizmatlar/logo-dizayni"
+      },
+      {
+        "question": "标志与企业形象有什么区别？",
+        "answer": "标志是企业的核心识别符号。企业形象则是一套系统，使标志、色彩、字体和图形元素在名片、包装、网站、演示文稿和社交媒体中保持一致，让客户在每个接触点都能识别品牌。",
+        "linkLabel": "了解企业形象系统",
+        "href": "/xizmatlar/firmenniy-stil"
+      },
+      {
+        "question": "企业什么时候需要品牌手册？",
+        "answer": "当设计师、营销人员、分支机构或合作伙伴增加时，品牌手册可以控制品牌呈现。它记录标志、色彩、字体和版式规则，让新执行者无需猜测，并确保品牌在所有渠道保持一致。",
+        "linkLabel": "查看品牌手册内容",
+        "href": "/xizmatlar/brandbook"
+      },
+      {
+        "question": "包装设计解决什么商业问题？",
+        "answer": "包装不仅保护产品，还帮助产品在货架上被识别、快速传达价值，并把不同 SKU 组成统一系列。有效的包装既符合品类认知，又能区别于竞争对手，并交付可直接生产的印刷文件。",
+        "linkLabel": "查看包装设计服务",
+        "href": "/xizmatlar/qadoq-dizayni"
+      }
+    ]
+  },
   "telegramBanner": {
     "text": "加入我们的 Telegram 频道，获取专业品牌洞察！",
     "buttonText": "立即加入",

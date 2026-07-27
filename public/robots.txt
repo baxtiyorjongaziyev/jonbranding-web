@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-Disallow: /studio
-Disallow: /admin
-Disallow: /api/
-Disallow: /*.json$
-
-Sitemap: https://www.jonbranding.uz/sitemap.xml

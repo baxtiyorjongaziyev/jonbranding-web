@@ -5,6 +5,12 @@ import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { client } from '@/sanity/lib/client';
 import { safeJsonStringify } from '@/lib/security';
+import {
+  getLocalizedAbsoluteUrl,
+  getLocaleAlternates,
+} from '@/lib/i18n/locale';
+import { ORGANIZATION_ID, SITE_URL, WEBSITE_ID } from '@/lib/seo';
+import { getSortedPostsData } from '@/lib/blog-posts';
 
 export const revalidate = 300;
 
@@ -26,12 +32,18 @@ const descs = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const canonical = getLocalizedAbsoluteUrl(SITE_URL, safeLang, '/blog');
   return {
-    title: titles[safeLang],
+    title: { absolute: titles[safeLang] },
     description: descs[safeLang],
+    alternates: {
+      canonical,
+      languages: getLocaleAlternates(SITE_URL, '/blog'),
+    },
     openGraph: {
       title: titles[safeLang],
       description: descs[safeLang],
+      url: canonical,
       images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }],
     },
     twitter: {
@@ -52,7 +64,9 @@ export default async function BlogPage(props: Props) {
     "slug": slug.current,
     description,
     "image": image.asset->url,
-    publishedAt
+    publishedAt,
+    "updatedAt": _updatedAt,
+    author
   }`;
   
   let posts: any[] = [];
@@ -61,6 +75,27 @@ export default async function BlogPage(props: Props) {
   } catch (error) {
     console.error("Failed to fetch blog posts from Sanity:", error);
   }
+  const markdownPosts = getSortedPostsData(safeLang).map((post) => ({
+    ...post,
+    image:
+      post.image && (
+        post.image.startsWith('/') ||
+        /^https:\/\/(cdn\.sanity\.io|images\.unsplash\.com|cdn\.prod\.website-files\.com)\//i.test(post.image)
+      )
+        ? post.image
+        : '/images/cms/blog-post-hero.webp',
+    publishedAt: post.date,
+    updatedAt: post.date,
+  }));
+  posts = Array.from(
+    new Map(
+      [...markdownPosts, ...posts].map((post) => [post.slug, post]),
+    ).values(),
+  ).sort(
+    (a, b) =>
+      new Date(b.publishedAt || b.updatedAt || 0).getTime() -
+      new Date(a.publishedAt || a.updatedAt || 0).getTime(),
+  );
 
   let dictionary;
   try { dictionary = await getDictionary(safeLang); } catch { dictionary = await getDictionary('uz'); }
@@ -72,19 +107,42 @@ export default async function BlogPage(props: Props) {
     zh: { label: '博客', title: '文章', empty: '暂无文章。', back: '首页' },
   }[safeLang];
 
-  const siteUrl = 'https://www.jonbranding.uz';
+  const canonical = getLocalizedAbsoluteUrl(SITE_URL, safeLang, '/blog');
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: safeLang === 'uz' ? 'Bosh sahifa' : safeLang === 'ru' ? 'Главная' : 'Home', item: `${siteUrl}/${safeLang}` },
-      { '@type': 'ListItem', position: 2, name: l.title, item: `${siteUrl}/${safeLang}/blog` },
+      { '@type': 'ListItem', position: 1, name: safeLang === 'uz' ? 'Bosh sahifa' : safeLang === 'ru' ? 'Главная' : 'Home', item: getLocalizedAbsoluteUrl(SITE_URL, safeLang) },
+      { '@type': 'ListItem', position: 2, name: l.title, item: canonical },
     ],
+  };
+  const blogJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${canonical}#blog`,
+    url: canonical,
+    name: titles[safeLang],
+    description: descs[safeLang],
+    inLanguage: safeLang,
+    publisher: { '@id': ORGANIZATION_ID },
+    isPartOf: { '@id': WEBSITE_ID },
+    blogPost: posts.map((post) => ({
+      '@type': 'BlogPosting',
+      '@id': `${getLocalizedAbsoluteUrl(SITE_URL, safeLang, `/blog/${post.slug}`)}#article`,
+      headline: post.title,
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt,
+      author: post.author
+        ? { '@type': 'Person', name: post.author }
+        : { '@id': ORGANIZATION_ID },
+      url: getLocalizedAbsoluteUrl(SITE_URL, safeLang, `/blog/${post.slug}`),
+    })),
   };
 
   return (
     <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
       <Script id="json-ld-breadcrumb-blog" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbJsonLd) }} />
+      <Script id="json-ld-blog" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(blogJsonLd) }} />
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none z-0" />
 
@@ -97,6 +155,9 @@ export default async function BlogPage(props: Props) {
           <h1 className="text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
             {l.title}
           </h1>
+          <p className="max-w-2xl text-base leading-7 text-gray-400">
+            {descs[safeLang]}
+          </p>
         </div>
 
         {posts.length === 0 ? (

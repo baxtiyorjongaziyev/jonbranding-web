@@ -9,6 +9,7 @@ import AtHero from '@/components/sections/at-hero';
 import AtMarquee from '@/components/sections/at-marquee';
 import AtManifesto from '@/components/sections/at-manifesto';
 import AtServices from '@/components/sections/at-services';
+import SeoAnswerHub from '@/components/sections/seo-answer-hub';
 
 // ── Skeleton placeholder ──────────────────────────────────────────────────────
 import SectionSkeleton from '@/components/ui/section-skeleton';
@@ -153,6 +154,7 @@ const HomeComponent: FC<{
       <ProcessVideo dictionary={dictionary.processVideo} />
       <AtProcess lang={lang} onOpen={open} />
       <Founder lang={lang} dictionary={dictionary.founder} />
+      <SeoAnswerHub lang={lang} {...dictionary.answerHub} />
       <AtPricing onOpen={open} lang={lang} />
       <AtFaq lang={lang} onOpen={open} />
       <AtFinalCta onOpen={open} lang={lang} />
