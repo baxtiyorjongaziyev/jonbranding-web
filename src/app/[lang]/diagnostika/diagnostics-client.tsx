@@ -283,7 +283,7 @@ const DiagnosticsClient: FC = () => {
                 Biznesingiz brendi o‘sishga tayyormi?
               </h1>
               <p className="mx-auto mt-4 max-w-xl text-lg text-gray-700">
-                7 ta savolga javob bering va 2 daqiqada brendingizdagi asosiy o‘sish nuqtasini aniqlang.
+                Bir necha savolga javob bering va 2 daqiqada brendingizdagi asosiy o’sish nuqtasini aniqlang.
               </p>
               <p className="mx-auto mt-3 max-w-xl text-base text-gray-600">
                 Natijada biznesingizning hozirgi bosqichi va birinchi navbatda nimalarga e’tibor berishingiz
