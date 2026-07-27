@@ -308,12 +308,18 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     
     let basePrice = 0;
     let mainServicesCount = 0;
-    const mainKeys = ['strategy', 'commStrategy', 'namingStandard', 'namingPremium', 'namingVIP', 'logoStandard', 'logoPremium', 'logoVIP', 'packaging'];
 
     for (const key in selectedServices) {
         if (selectedServices[key] && sd[key] && key !== 'urgency' && key !== 'nda') {
             basePrice += sd[key].price;
-            if (mainKeys.includes(key)) mainServicesCount++;
+            
+            if (key === 'logoPremium') {
+                mainServicesCount += 2;
+            } else if (key === 'logoVIP') {
+                mainServicesCount += 3;
+            } else {
+                mainServicesCount += 1;
+            }
         }
     }
 
@@ -340,12 +346,12 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     const normalizedPromo = (promoCode || '').trim().toUpperCase();
     const isPromoApplied = VALID_PROMO_CODES.includes(normalizedPromo);
 
-    // Faza 1: Barchaga 10% Istisno chegirmasi (Faqatgina to'lov varianti tanlanganda: 50/50 yoki 100%)
-    if ((discountType === 'half' || discountType === 'full') && totalBeforeDiscounts > 0) {
-        const istisnoVal = finalPrice * 0.10;
-        const istisnoName = isUz ? "Istisno chegirmasi (-10%)" : "Exception Discount (-10%)";
-        discountsApplied.push({ name: istisnoName, value: istisnoVal });
-        finalPrice -= istisnoVal;
+    // Faza 1: Paketli chegirma (Faqat 2 yoki undan ortiq xizmat tanlanganda va to'lov turi tanlanganda)
+    if (mainServicesCount >= 2 && (discountType === 'half' || discountType === 'full') && totalBeforeDiscounts > 0) {
+        const paketliVal = finalPrice * 0.10;
+        const paketliName = isUz ? "Paketli chegirma (-10%)" : "Package Discount (-10%)";
+        discountsApplied.push({ name: paketliName, value: paketliVal });
+        finalPrice -= paketliVal;
     }
 
     // Faza 2: Salom chegirmasi (100% oldindan to'lov qilsa, qoldiqdan yana 10%)

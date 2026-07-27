@@ -402,3 +402,11 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - `TIMING_INDEX` va `DECISION_INDEX` savol `id` sidan hisoblanadi, qo'lda yozilmaydi — savollar tartibi o'zgarsa tayyorlik jimgina boshqa javoblarni o'qib ketmasligi uchun. Buni qo'riqlaydigan test ham bor.
 - CRM va Telegram: `TAKLIF QILINADI:` satri birinchi o'rinda, javob satrlari savol matni bilan keladi, sdelkaga `kerak:patent` ko'rinishidagi teglar qo'shiladi. Bo'shliq topilmasa taklif satri o'rniga alohida matn chiqadi — "Jiddiy bo'shliq topilmadi" ning o'zi taklifdek ko'rinmasligi uchun.
 - Sahifa faqat o'zbek tilida. Matnlar `src/lib/diagnostics.ts` da, locale lug'atlarida emas — bu ataylab qilingan, chunki savollar va xizmat izohlari mahalliy bozorga yozilgan. Boshqa tillarga tarjima alohida ish sifatida qarz.
+
+## 2026-07-27 | Package Builder & Narxlash Algoritmi Yangilandi
+
+**Nima qilindi:**
+- **Paketli Chegirma (Package Discount):** 50/50 to'lovdagi shartsiz "Istisno chegirmasi" o'rniga "Paketli chegirma" qo'shildi. Bu chegirma faqat kamida 2 ta asosiy xizmat tanlangandagina va to'lov usuli (50/50 yoki 100%) tanlansa amal qiladi.
+- **Paketlarni maxsus tortish:** "logoPremium" (Logo va Firma uslubi) 2 ta xizmat, "logoVIP" (Logo, Firma uslubi, Brandbook) 3 ta xizmat deb baholanadigan mantiq kiritildi.
+- **Sizning paketingiz (Cart) oynasi qulaylashtirildi:** Foydalanuvchi endi tanlangan xizmatlarni bevosita xulosa oynasidan turib X tugmasi bilan olib tashlashi mumkin. Shuningdek, qo'shimcha xizmat tanlash uchun tepaga qaytaruvchi "Boshqa xizmat qo'shish" tugmasi qo'shildi.
+- Kod src/lib/pricing.ts va src/components/sections/package-builder.tsx da yangilandi.
