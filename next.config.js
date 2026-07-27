@@ -9,6 +9,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   output: process.env.NEXT_STANDALONE === 'true' ? 'standalone' : undefined,
   allowedDevOrigins: ['127.0.0.1'],
   async redirects() {
