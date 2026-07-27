@@ -2,10 +2,18 @@
 import HomeComponent from '@/components/home-component';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
+import Script from 'next/script';
 import { fetchComparisons } from '@/lib/data/comparisons';
 import { fetchBrands } from '@/lib/data/brands';
 import { fetchTestimonials } from '@/lib/data/testimonials';
 import { fetchPortfolioList } from '@/lib/data/portfolio';
+import { safeJsonStringify } from '@/lib/security';
+import {
+  getLocalizedAbsoluteUrl,
+  getLocaleAlternates,
+  locales,
+} from '@/lib/i18n/locale';
+import { ORGANIZATION_ID, SITE_URL } from '@/lib/seo';
 
 export const revalidate = 60;
 
@@ -19,37 +27,32 @@ export function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang: rawLang } = await props.params;
-  const lang = (['uz', 'ru', 'en', 'zh'].includes(rawLang) ? rawLang : 'uz') as Locale;
-  const titles = {
-    uz: "Jon.Branding | Bepul Brand Audit va premium logotip dizayni",
-    ru: "Jon.Branding | Брендинговое Агентство в Ташкенте: Дизайн и Стратегия",
-    en: "Jon.Branding | Premier Branding Agency in Uzbekistan: Logo & Naming",
-    zh: "Jon.Branding | 乌兹别克斯坦领先的品牌代理机构"
-  };
-
-  const descriptions = {
-    uz: "15 daqiqalik Brand Auditda nom, logo, qadoq, sayt va kommunikatsiyangiz xaridor ko'zida qanchalik ishonchli ko'rinishini tekshiramiz.",
-    ru: "Стратегический брендинг, нейминг и дизайн логотипов в Ташкенте. Премиальное качество для вашего бизнеса.",
-    en: "Strategic branding, naming, and logo design in Tashkent. Premium quality. Brand audits, packaging, and full identity systems for Central Asian businesses.",
-    zh: "在塔什干提供战略品牌、命名和标志设计。高端品牌代理服务。为中亚企业提供品牌审计、包装设计和完整视觉识别系统。"
-  };
+  const lang = (locales.includes(rawLang as Locale) ? rawLang : 'uz') as Locale;
+  const dictionary = await getDictionary(lang);
+  const seo = dictionary.homeSeo;
+  const canonical = getLocalizedAbsoluteUrl(SITE_URL, lang);
 
   return {
-    title: titles[lang] || titles.uz,
-    description: descriptions[lang] || descriptions.uz,
-    keywords: "brand audit, brending uz, logo dizayn, neyming, naming, qadoq dizayn, brandbook, premium branding",
+    title: { absolute: seo.title },
+    description: seo.description,
+    keywords: seo.keywords,
+    alternates: {
+      canonical,
+      languages: getLocaleAlternates(SITE_URL),
+    },
     openGraph: {
-      title: titles[lang] || titles.uz,
-      description: descriptions[lang] || descriptions.uz,
+      title: seo.title,
+      description: seo.description,
       type: 'website',
+      url: canonical,
       locale: lang === 'uz' ? 'uz_UZ' : lang === 'ru' ? 'ru_RU' : lang === 'zh' ? 'zh_CN' : 'en_US',
       siteName: 'Jon.Branding',
       images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630, alt: 'Jon Branding Agency' }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: titles[lang] || titles.uz,
-      description: descriptions[lang] || descriptions.uz,
+      title: seo.title,
+      description: seo.description,
       images: ['/images/cms/og-image.jpeg'],
     },
   };
@@ -73,5 +76,54 @@ export default async function Page(props: Props) {
     fetchPortfolioList(lang),
   ]);
 
-  return <HomeComponent lang={lang as Locale} dictionary={dictionary} comparisons={comparisons} brands={brands} testimonials={testimonials} portfolioProjects={portfolioProjects} />;
+  const safeLang = locales.includes(lang as Locale) ? (lang as Locale) : 'uz';
+  const canonical = getLocalizedAbsoluteUrl(SITE_URL, safeLang);
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${canonical}#branding-answers`,
+    mainEntity: dictionary.answerHub.items.map((item: { question: string; answer: string }) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+  const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${canonical}#webpage`,
+    url: canonical,
+    name: dictionary.homeSeo.title,
+    description: dictionary.homeSeo.description,
+    inLanguage: safeLang,
+    about: { '@id': ORGANIZATION_ID },
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    mainEntity: { '@id': `${canonical}#branding-answers` },
+  };
+
+  return (
+    <>
+      <Script
+        id="json-ld-home-webpage"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonStringify(webPageJsonLd) }}
+      />
+      <Script
+        id="json-ld-home-faq"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonStringify(faqJsonLd) }}
+      />
+      <HomeComponent
+        lang={safeLang}
+        dictionary={dictionary}
+        comparisons={comparisons}
+        brands={brands}
+        testimonials={testimonials}
+        portfolioProjects={portfolioProjects}
+      />
+    </>
+  );
 }
