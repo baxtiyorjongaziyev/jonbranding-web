@@ -4,6 +4,18 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-27 | To'liq Veb-sayt Auditi & Build Verifikatsiyasi (100% SUCCESS)
+
+**Nima qilindi:**
+- **Kod & TypeScript Auditi**: `npm run typecheck` orqali to'liq static typecheck o'tkazildi (0 errors).
+- **Production Build Verifikatsiyasi**: `npm run build` bajarildi — 160 ta sahifa va barcha dynamic/ISR marshrutlar 100% muvaffaqiyatli qurildi (`✓ Compiled successfully`).
+- **i18n Paritet Auditi**: `audit_locales.js` orqali barcha 4 ta tilda (`uz`, `ru`, `en`, `zh`) teng 1016 ta kalit va 0 missing key borligi tasdiqlandi.
+- **SEO & AI Search (GEO/AEO)**: `robots.ts` va `sitemap.ts` auditi o'tkazildi; ChatGPT, Claude va Perplexity botlari uchun ochiq indeksatsiya va `hreflang` / `x-default` alternativalar tekshirildi.
+- **Performance & CWV**: Above-the-fold Hero LCP prioriteti va below-the-fold 9 ta og'ir seksiyalarning `SectionSkeleton` bilan dynamic import qilinishi audit qilindi.
+- **Full Audit Report**: To'liq audit hisoboti [full_website_audit.md](file:///C:/Users/baxti/.gemini/antigravity/brain/c2dc0721-e2ff-421e-84a9-64e6f7d0643f/full_website_audit.md) faylida yaratildi.
+
+---
+
 ## 2026-07-27 | Lead Capture Orchestrator + Security & Governance 10/10 Audit
 
 **Nima qilindi:**

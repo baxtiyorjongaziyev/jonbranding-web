@@ -24,3 +24,8 @@ The generated baseline enables GitHub, Context7, Exa, Memory, Playwright, and Se
 - No dedicated workflow command files were generated for this repo.
 
 Use these workflow files as reusable task scaffolds when the detected repository workflows recur.
+
+## Telegram & AI Tandem Sync
+
+- When Codex reads Telegram messages or dialogs via Telegram MCP, write or append the results to `obsidian-vault/Telegram_Inbox.md`.
+- Antigravity will process `Telegram_Inbox.md` to update Master Context, sales leads, or task backlogs.
