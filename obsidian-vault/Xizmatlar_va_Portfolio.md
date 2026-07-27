@@ -13,7 +13,7 @@
 - **Afzal ko'rilgan uslub (Preferred):** Minimal, premium, zamonaviy, luxury, clean, corporate.
 - **Yoqtirilmaydigan uslub (Disliked):** O'ynoqi, haddan tashqari bold.
 - **Portfolio Case'lar uchun qoida:** "Muammo -> Yechim -> Natija" strukturasi bo'lishi shart. Faqat chiroyli rasm (mockup) emas, strategik ishlar ko'rsatilishi kerak.
-- **Eng zo'r Case'lar:** Goodwell, RashMilk, Shirona, Denaroma, Boyarin, Savod.
+- **Eng zo'r Case'lar:** Goodwell, RashMilk, Shirona, Denaroma, Boyarin, Savod, **Zayyan** (Bekmarket rebranding/naming), **Feel it** (SAT platform identity).
 
 ## Ustuvor Jamoa Kengaytirish (Hire Priority)
 1. Targetolog / Performance marketer (Eng birinchi)

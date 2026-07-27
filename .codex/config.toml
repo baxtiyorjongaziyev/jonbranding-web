@@ -50,3 +50,8 @@ config_file = "agents/docs-researcher.toml"
 [mcp_servers.jonbranding-mcp]
 command = "node"
 args = ["C:\\Users\\baxti\\projects\\jonbranding-web\\mcp-server\\build\\index.js"]
+
+[mcp_servers.telegram]
+command = "npx"
+args = ["-y", "telegram-mcp"]
+env = { TELEGRAM_API_ID = "30643078", TELEGRAM_API_HASH = "e5850001c1d86ac0fb439fbd8319cb7f" }
