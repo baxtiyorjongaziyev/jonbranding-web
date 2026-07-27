@@ -71,6 +71,7 @@ const SitemapPage = async (props: Props) => {
       icon: Home,
       links: [
         { href: '/', label: t.links?.home || 'Bosh sahifa' },
+        { href: '/diagnostika', label: t.links?.diagnostika || 'Brend diagnostikasi' },
         { href: '/quiz', label: t.links?.quiz || 'Brending testi' },
         { href: '/#portfolio', label: t.links?.portfolio || 'Portfolio' },
         { href: '/#process', label: t.links?.process || 'Ishlash tartibi' },
