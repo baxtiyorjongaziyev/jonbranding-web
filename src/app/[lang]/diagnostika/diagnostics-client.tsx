@@ -15,15 +15,16 @@ import { HoneypotField } from '@/components/ui/honeypot-field';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import {
   createEmptyAnswerSheet,
-  DIAGNOSTIC_QUESTIONS,
   DIAGNOSTIC_RESULTS,
+  indexOfQuestion,
   isAnswerSheetComplete,
   NO_GAPS_RESULT,
+  resolveSegment,
   resolveSource,
   resolveUtmParams,
   scoreDiagnostic,
   SERVICES,
-  TOTAL_QUESTIONS,
+  visibleQuestions,
   type AnswerSheet,
   type OptionKey,
 } from '@/lib/diagnostics';
@@ -87,6 +88,19 @@ const DiagnosticsClient: FC = () => {
     ? DIAGNOSTIC_RESULTS[scoring.resultCategory]
     : NO_GAPS_RESULT;
 
+  /**
+   * Ko'rsatiladigan savollar bosqichga bog'liq. Birinchi savolga javob
+   * berilgunicha ro'yxatda faqat o'sha savol turadi.
+   */
+  const visible = useMemo(() => visibleQuestions(scoring.segment), [scoring.segment]);
+
+  /**
+   * Mijoz orqaga qaytib bosqichni o'zgartirsa, yangi ro'yxat qisqaroq
+   * bo'lishi mumkin — qadam chegaradan chiqib ketmasligi uchun qisqartiramiz.
+   */
+  const safeStep = Math.min(step, Math.max(visible.length - 1, 0));
+  const currentQuestion = visible[safeStep];
+
   useEffect(() => {
     if (openedTracked.current) return;
     openedTracked.current = true;
@@ -107,30 +121,35 @@ const DiagnosticsClient: FC = () => {
 
   const handleSelect = useCallback(
     (value: string) => {
+      if (!currentQuestion) return;
       setAnswers((previous) => {
         const next = [...previous];
-        next[step] = value as OptionKey;
+        next[indexOfQuestion(currentQuestion.id)] = value as OptionKey;
         return next;
       });
     },
-    [step]
+    [currentQuestion]
   );
 
   const handleNext = () => {
-    const answer = answers[step];
+    if (!currentQuestion) return;
+    const answer = answers[indexOfQuestion(currentQuestion.id)];
     if (!answer) return;
 
     trackEvent({
       action: 'diagnostic_question_completed',
       category: 'Diagnostic',
-      label: `q${step + 1}`,
-      question_index: step + 1,
+      label: `q${currentQuestion.id}`,
+      question_index: safeStep + 1,
       answer_key: answer,
       source,
     });
 
-    if (step < TOTAL_QUESTIONS - 1) {
-      setStep(step + 1);
+    // Bosqich savoliga javob berilgach ro'yxat kengayadi, shuning uchun
+    // qadam chegarasi shu yerda qayta hisoblanadi.
+    const nextVisible = visibleQuestions(resolveSegment(answers));
+    if (safeStep < nextVisible.length - 1) {
+      setStep(safeStep + 1);
       return;
     }
     setStage('contact');
@@ -139,11 +158,11 @@ const DiagnosticsClient: FC = () => {
   const handleBack = () => {
     if (stage === 'contact') {
       setStage('questions');
-      setStep(TOTAL_QUESTIONS - 1);
+      setStep(visible.length - 1);
       return;
     }
-    if (step > 0) {
-      setStep(step - 1);
+    if (safeStep > 0) {
+      setStep(safeStep - 1);
       return;
     }
     setStage('intro');
@@ -165,8 +184,10 @@ const DiagnosticsClient: FC = () => {
     setSubmitError('');
     if (!validateForm()) return;
     if (!isAnswerSheetComplete(answers)) {
+      // Javobsiz qolgan birinchi ko'rinadigan savolga qaytaramiz.
+      const missing = visible.findIndex((question) => !answers[indexOfQuestion(question.id)]);
       setStage('questions');
-      setStep(answers.findIndex((answer) => answer === null));
+      setStep(missing === -1 ? 0 : missing);
       return;
     }
 
@@ -243,8 +264,10 @@ const DiagnosticsClient: FC = () => {
     });
   };
 
-  const currentQuestion = DIAGNOSTIC_QUESTIONS[step];
-  const progressValue = ((step + 1) / TOTAL_QUESTIONS) * 100;
+  // Bosqich tanlanmaguncha jami savollar soni noma'lum. Progress birinchi
+  // savolda 0 ko'rinmasligi uchun ro'yxat uzunligiga nisbatan hisoblanadi.
+  const totalVisible = visible.length;
+  const progressValue = ((safeStep + 1) / totalVisible) * 100;
 
   return (
     <main className="flex-grow bg-secondary/50">
@@ -283,10 +306,10 @@ const DiagnosticsClient: FC = () => {
                 <Progress
                   value={progressValue}
                   className="h-2"
-                  aria-label={`Diagnostika jarayoni: ${step + 1} / ${TOTAL_QUESTIONS}`}
+                  aria-label={`Diagnostika jarayoni: ${safeStep + 1} / ${totalVisible}`}
                 />
                 <CardDescription className="!mt-4 font-semibold text-primary">
-                  {step + 1}/{TOTAL_QUESTIONS}
+                  {safeStep + 1}/{totalVisible}
                 </CardDescription>
                 <CardTitle
                   ref={headingRef}
@@ -298,7 +321,7 @@ const DiagnosticsClient: FC = () => {
               </CardHeader>
               <CardContent className="p-5 pt-0 sm:p-8 sm:pt-0">
                 <RadioGroup
-                  value={answers[step] ?? ''}
+                  value={answers[indexOfQuestion(currentQuestion.id)] ?? ''}
                   onValueChange={handleSelect}
                   className="space-y-3"
                   aria-label={currentQuestion.question}
@@ -306,10 +329,10 @@ const DiagnosticsClient: FC = () => {
                   {currentQuestion.options.map((option) => (
                     <Label
                       key={option.key}
-                      htmlFor={`q${step}-${option.key}`}
+                      htmlFor={`q${currentQuestion.id}-${option.key}`}
                       className="press-effect flex min-h-[56px] cursor-pointer items-center gap-4 rounded-xl border p-4 transition-colors hover:bg-white has-[:checked]:border-primary has-[:checked]:bg-primary/10 active:scale-[0.99]"
                     >
-                      <RadioGroupItem value={option.key} id={`q${step}-${option.key}`} />
+                      <RadioGroupItem value={option.key} id={`q${currentQuestion.id}-${option.key}`} />
                       <span className="text-base font-medium text-gray-800">{option.text}</span>
                     </Label>
                   ))}
@@ -330,7 +353,7 @@ const DiagnosticsClient: FC = () => {
                     type="button"
                     size="lg"
                     onClick={handleNext}
-                    disabled={!answers[step]}
+                    disabled={!answers[indexOfQuestion(currentQuestion.id)]}
                     className="h-12 rounded-full text-base font-bold"
                   >
                     Davom etish
