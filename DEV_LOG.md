@@ -4,7 +4,20 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-27 | Lead Capture Orchestrator + Security & Governance 10/10 Audit
+
+**Nima qilindi:**
+- **Lead Capture Orchestrator & Multi-trigger Convergence**: `openContactModal` CustomEvent orqali 40+ har xil tugma, kalkulyator, header, sticky CTA va exit-intent hodisalari `AtModal` hamda `ContactModal` ga yagona context va source metadata (`ctaSource`, `gaClientId`, `pageLocation`) bilan yo'naltirildi.
+- **Security & Bot Protection (Triple-layer)**: Honeypot field (`companyWebsite`), Cloudflare Turnstile token verification (`verifyTurnstile`) va Origin check hamda Firestore-backed distributed rate-limiting bilan barcha lead yo'llari xavfsizlandi.
+- **Security Headers & Proxy Governance**: `proxy.ts` orqali `HSTS`, `X-XSS-Protection`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy` va `X-DNS-Prefetch-Control` sarlavhalari to'liq audit qilindi.
+- **JSON-LD Schema Verification**: Script ID dublikatlari tozalanib, Google va AI Search engine lar (AEO/GEO) uchun to'liq sinxronlashtirildi.
+
+**Tekshiruv:** `vitest run` → 22/22 test suites (140 tests) PASS ✓ | `git push origin main` → Vercel production deploy ✓
+
+---
+
 ## 2026-07-23 | Performance 10/10 — Dynamic Imports & LCP Optimization
+
 
 **Nima qilindi:**
 - `HomeComponent` ichidagi below-the-fold 9 ta og'ir section dynamic import (lazy-load) ga o'tkazildi: `ATGallery`, `BeforeAfter`, `ATQuotes`, `ProcessVideo`, `AtProcess`, `Founder`, `AtPricing`, `AtFaq`, `AtFinalCta`.
