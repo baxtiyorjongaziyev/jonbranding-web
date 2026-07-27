@@ -32,7 +32,7 @@ jobs:
           NEXT_TELEMETRY_DISABLED: '1'
 
       - name: Start server
-        run: npm start &
+        run: npx next start --port 3000 &
         env:
           PORT: 3000
 
