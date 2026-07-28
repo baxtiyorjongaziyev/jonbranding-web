@@ -10,10 +10,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const nextConfig = {
   typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
+    ignoreBuildErrors: false,
   },
   output: process.env.NEXT_STANDALONE === 'true' ? 'standalone' : undefined,
   allowedDevOrigins: ['127.0.0.1'],
@@ -117,8 +114,8 @@ const nextConfig = {
             value: [
               "default-src 'self'",
               process.env.NODE_ENV === 'development'
-                ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://static.hotjar.com https://script.hotjar.com https://www.clarity.ms https://cdn.amplitude.com"
-                : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://static.hotjar.com https://script.hotjar.com https://www.clarity.ms https://cdn.amplitude.com",
+                ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://static.hotjar.com https://script.hotjar.com https://www.clarity.ms https://cdn.amplitude.com https://challenges.cloudflare.com"
+                : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://static.hotjar.com https://script.hotjar.com https://www.clarity.ms https://cdn.amplitude.com https://challenges.cloudflare.com",
               "style-src 'self' 'unsafe-inline' https://api.fontshare.com https://fonts.googleapis.com",
               "font-src 'self' data: https://api.fontshare.com https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://cdn.sanity.io https://cdn.prod.website-files.com https://images.unsplash.com https://www.google-analytics.com https://mc.yandex.ru https://www.googletagmanager.com https://www.clarity.ms https://www.facebook.com",
@@ -126,7 +123,7 @@ const nextConfig = {
                 ? "connect-src 'self' ws://localhost:* ws://127.0.0.1:* https://cdn.sanity.io https://h6ymmj0v.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://mc.yandex.ru https://in.hotjar.com https://vc.hotjar.io https://o.clarity.ms https://api.amplitude.com https://region1.google-analytics.com wss://ws.hotjar.com https://www.facebook.com"
                 : "connect-src 'self' https://cdn.sanity.io https://h6ymmj0v.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://mc.yandex.ru https://in.hotjar.com https://vc.hotjar.io https://o.clarity.ms https://api.amplitude.com https://region1.google-analytics.com wss://ws.hotjar.com https://www.facebook.com",
               "media-src 'self' https://cdn.sanity.io https://player.vimeo.com https://*.vimeocdn.com blob:",
-              "frame-src 'self' https://player.vimeo.com https://www.google.com",
+              "frame-src 'self' https://player.vimeo.com https://www.google.com https://challenges.cloudflare.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
