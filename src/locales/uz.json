@@ -320,7 +320,7 @@
   },
   "contactModal": {
     "sidebarTitle": "Bepul Brand Audit",
-    "sidebarSubtitle": "15 daqiqada brendingiz mijoz ko'zida qayerda ishonch yo'qotayotganini ko'rsatamiz.",
+    "sidebarSubtitle": "15 daqiqada mijozlaringiz nega raqobatchilarga ketayotganini va dizayningizdagi xatolarni ko'rsatamiz.",
     "header": "Brand Audit",
     "description": "Auditdan keyin qaysi o'zgarish sotuvga eng tez ta'sir qilishini bilasiz.",
     "steps": {
@@ -391,9 +391,9 @@
     "quickContactLabel": "Tez aloqa",
     "auditGivesLabel": "Auditda olasiz",
     "auditOfferStack": [
-      "5 ta ishonch yo'qotadigan nuqta",
-      "Qaysi xizmat hozir kerakligini aniqlash",
-      "Majburiy sotuvsiz aniq tavsiya"
+      "Saytingizdagi 5 ta qo'pol xato",
+      "Nega mijozlar ishonmayapti?",
+      "Qanday qilib konversiyani oshirish mumkin?"
     ],
     "auditTimeLabel": "Format",
     "auditFormat": [

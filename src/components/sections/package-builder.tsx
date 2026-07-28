@@ -309,7 +309,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
-    const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any);
+    const total = useMemo(() => calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any), [selectedServices, discountType, promoCode, lang]);
 
     useEffect(() => {
         if (total.isPromoApplied && !hasCelebrated) {

@@ -21,6 +21,7 @@ import { useTelegram } from '@/hooks/use-telegram';
 import { generateEventId, getGaClientId, trackLead, trackEvent } from '@/lib/analytics';
 import { getDictionary } from '@/lib/dictionaries';
 import Magnetic from '@/components/ui/magnetic';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -36,6 +37,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
   const [isSubmitting, setSubmitting] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
   const [step, setStep] = useState(4);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const hasStartedRef = useRef(false);
   const { user } = useTelegram();
   const [translations, setTranslations] = useState<any>(null);
@@ -137,6 +139,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     },
   });
 
+  const companyWebsite = form.watch('companyWebsite');
+
   const formatPhoneNumber = (value: string) => {
     const numbers = value.replace(/\D/g, '');
     if (numbers.length <= 3) return '+998';
@@ -171,6 +175,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...data,
+          turnstileToken,
           packageSummary,
           totalPrice,
           source: 'brand_audit_offer',
@@ -366,7 +371,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} onFocus={handleFormStart} className="flex-1 flex flex-col">
                         <HoneypotField
-                          value={form.watch('companyWebsite') || ''}
+                          value={companyWebsite || ''}
                           onChange={(value) => form.setValue('companyWebsite', value)}
                         />
                         <div className="flex-1 py-2 pr-1">
@@ -435,6 +440,14 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                         </div>
 
                         <div className="z-10 mt-auto shrink-0 border-t border-gray-50 bg-white pt-4 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] md:pb-0 md:pt-4">
+                          
+                          <div className="mb-4 flex justify-center">
+                            <Turnstile 
+                              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} 
+                              onSuccess={(token) => setTurnstileToken(token)}
+                            />
+                          </div>
+
                           <Button type="submit" disabled={isSubmitting} className="w-full h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold group shadow-xl shadow-blue-600/20 active:scale-[0.97] transition-all duration-150">
                             {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : (
                               <span className="flex items-center justify-center gap-2">
