@@ -1,14 +1,21 @@
 import { describe, expect, it } from 'vitest';
 import { diagnosticSubmissionSchema, splitContact } from './diagnostics-schema';
 
+// Segment B = tarqoq: barcha 8 savol ko'rinadi, hammasi to'ldirilgan.
 const validPayload = {
   fullName: 'Aziz Karimov',
   companyName: 'Oq Yoʻl MChJ',
   industry: 'Logistika',
   contact: '+998901234567',
   consent: true,
-  answers: ['A', 'B', 'C', 'A', 'C', 'C', 'B'],
+  answers: ['B', 'A', 'B', 'C', 'A', 'C', 'C', 'B'],
   source: 'tez-natija-6',
+};
+
+// Segment A = yangi: brendbuk (5-savol) ko'rinmaydi, shu katak null qoladi.
+const yangiPayload = {
+  ...validPayload,
+  answers: ['A', 'A', 'B', 'C', null, 'C', 'C', 'B'],
 };
 
 describe('diagnosticSubmissionSchema', () => {
@@ -61,7 +68,22 @@ describe('diagnosticSubmissionSchema', () => {
     expect(diagnosticSubmissionSchema.safeParse({ ...rest, companyName: '', industry: '' }).success).toBe(true);
   });
 
-  it('javoblar soni 7 bo\'lishi shart', () => {
+  it('shoxlangan yo\'l: ko\'rinmaydigan savol null bo\'lsa ham qabul qilinadi', () => {
+    expect(diagnosticSubmissionSchema.safeParse(yangiPayload).success).toBe(true);
+  });
+
+  it('segment tanlanmagan bo\'lsa rad etadi', () => {
+    const answers = [null, null, null, null, null, null, null, null];
+    expect(diagnosticSubmissionSchema.safeParse({ ...validPayload, answers }).success).toBe(false);
+  });
+
+  it('ko\'rinadigan savol javobsiz bo\'lsa rad etadi', () => {
+    // tarqoq bosqichda brendbuk (5-savol) ko'rinadi — null bo'lsa to'liq emas.
+    const answers = ['B', 'A', 'B', 'C', null, 'C', 'C', 'B'];
+    expect(diagnosticSubmissionSchema.safeParse({ ...validPayload, answers }).success).toBe(false);
+  });
+
+  it('javoblar soni 8 bo\'lishi shart', () => {
     expect(diagnosticSubmissionSchema.safeParse({ ...validPayload, answers: ['A', 'B', 'C'] }).success).toBe(false);
     expect(
       diagnosticSubmissionSchema.safeParse({ ...validPayload, answers: [...validPayload.answers, 'A'] }).success
@@ -70,10 +92,8 @@ describe('diagnosticSubmissionSchema', () => {
 
   it('noto\'g\'ri javob kaliti rad etiladi', () => {
     expect(
-      diagnosticSubmissionSchema.safeParse({ ...validPayload, answers: ['A', 'B', 'D', 'A', 'C', 'C', 'B'] }).success
-    ).toBe(false);
-    expect(
-      diagnosticSubmissionSchema.safeParse({ ...validPayload, answers: ['A', 'B', null, 'A', 'C', 'C', 'B'] }).success
+      diagnosticSubmissionSchema.safeParse({ ...validPayload, answers: ['B', 'A', 'D', 'C', 'A', 'C', 'C', 'B'] })
+        .success
     ).toBe(false);
   });
 

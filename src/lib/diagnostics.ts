@@ -79,12 +79,32 @@ export type DiagnosticOption = {
   gaps: ServiceKey[];
 };
 
+/**
+ * Biznes bosqichi. Birinchi savol shuni aniqlaydi, qolgan savollar shunga
+ * qarab tanlanadi — hammaga bir xil ro'yxat berilmaydi.
+ */
+export type Segment = 'yangi' | 'tarqoq' | 'kengayish';
+
+export const SEGMENTS: Record<Segment, string> = {
+  yangi: 'Endi boshlayapman',
+  tarqoq: 'Ishlayapti, lekin brend tarqoq',
+  kengayish: 'Barqaror biznes, kengaymoqda',
+};
+
 export type DiagnosticQuestion = {
   id: number;
   question: string;
   /** Atamani tushuntiruvchi qo'shimcha izoh — savol ostida ko'rsatiladi. */
   hint?: string;
   options: DiagnosticOption[];
+  /**
+   * Savol qaysi bosqichdagi mijozga ko'rsatiladi. Belgilanmasa — hammaga.
+   *
+   * Maqsad savollar sonini kamaytirish emas, mosligini oshirish: barqaror
+   * kompaniyadan "logotipingiz bormi?" deb so'rash mijozni bezovta qiladi,
+   * endi boshlayotgan tadbirkorga brendbuk taklif qilish esa erta.
+   */
+  segments?: Segment[];
 };
 
 export type ResultCategory = 'nurture' | 'potential' | 'qualified';
@@ -111,17 +131,30 @@ function buildOptions(
   }));
 }
 
+/** Birinchi savol — bosqichni aniqlaydi va qolgan yo'lni tanlaydi. */
+export const SEGMENT_QUESTION_ID = 1;
+
 /**
- * 1–5 — inventarizatsiya: mijozda nima yo'qligini aniqlaydi.
- * 6–7 — sotuv uchun: qachon va kim qaror qiladi.
+ * 1 — bosqich (hammaga). 2–6 — inventarizatsiya, bosqichga qarab tanlanadi.
+ * 7–8 — sotuv uchun (hammaga): qachon va kim qaror qiladi.
  *
  * Variantlar har doim "hech narsa yo'q" dan "hammasi joyida" tomon
  * tartiblangan, shu sabab A=0, B=1, C=2 balli mantiqiy qoladi.
  */
 export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
   {
-    id: 1,
+    id: SEGMENT_QUESTION_ID,
+    question: 'Biznesingiz hozir qaysi bosqichda?',
+    options: buildOptions({
+      A: "Endi boshlayapman yoki g'oya bosqichidaman",
+      B: 'Ishlayapti, lekin brendim tarqoq',
+      C: 'Barqaror biznes, kengaymoqchiman',
+    }),
+  },
+  {
+    id: 2,
     question: 'Biznesingiz yoki mahsulotingiz nomi bormi?',
+    segments: ['yangi', 'tarqoq'],
     options: buildOptions(
       {
         A: "Yo'q — nom ustida hali ishlamaganmiz",
@@ -132,7 +165,7 @@ export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
     ),
   },
   {
-    id: 2,
+    id: 3,
     question: "Raqobatchingiz ertaga sizning nomingiz bilan sotsa, uni to'xtata olasizmi?",
     hint: "Buni faqat tovar belgisi guvohnomasi beradi — nom O'zbekiston reyestrida sizga biriktirilgan bo'lishi kerak.",
     options: buildOptions(
@@ -145,8 +178,10 @@ export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
     ),
   },
   {
-    id: 3,
+    id: 4,
     question: 'Logotipingiz qanday tayyorlangan?',
+    // Barqaror kompaniyada logotip bor deb hisoblanadi — bu savol ularga berilmaydi.
+    segments: ['yangi', 'tarqoq'],
     options: buildOptions(
       {
         A: "Logotipimiz yo'q",
@@ -157,10 +192,12 @@ export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
     ),
   },
   {
-    id: 4,
+    id: 5,
     question:
       "Yangi banner yoki post kerak bo'lsa, ranglar va shriftlar yozilgan hujjatingiz bormi?",
     hint: "Bunday hujjat firma uslubi va brendbuk deb ataladi — u bo'lmasa har bir material boshqacha chiqadi.",
+    // Endi boshlayotgan tadbirkorga brendbuk erta — avval nom va logotip kerak.
+    segments: ['tarqoq', 'kengayish'],
     options: buildOptions(
       {
         A: "Yo'q — har safar boshqacha chiqadi",
@@ -171,7 +208,7 @@ export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
     ),
   },
   {
-    id: 5,
+    id: 6,
     question: 'Mahsulotingiz qadoq yoki yorliqda sotiladimi?',
     options: buildOptions(
       {
@@ -183,16 +220,16 @@ export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
     ),
   },
   {
-    id: 6,
+    id: 7,
     question: "Brending bo'yicha ishni qachon boshlamoqchisiz?",
     options: buildOptions({
-      A: "Hozir rejamizda yo'q",
-      B: 'Yaqin 6–12 oy ichida',
-      C: 'Yaqin 1–3 oy ichida',
+      A: "Hozircha aniq reja yo'q",
+      B: 'Yaqin 1–3 oy ichida',
+      C: 'Hoziroq — shu oyda boshlaymiz',
     }),
   },
   {
-    id: 7,
+    id: 8,
     question: 'Yakuniy qarorni kim qabul qiladi?',
     options: buildOptions({
       A: 'Boshqa rahbar',
@@ -203,7 +240,42 @@ export const DIAGNOSTIC_QUESTIONS: DiagnosticQuestion[] = [
 ];
 
 export const TOTAL_QUESTIONS = DIAGNOSTIC_QUESTIONS.length;
-export const MAX_SCORE = TOTAL_QUESTIONS * OPTION_SCORES.C;
+
+/** Segment savolining javobi qaysi bosqichni bildiradi. */
+const SEGMENT_BY_OPTION: Record<OptionKey, Segment> = {
+  A: 'yangi',
+  B: 'tarqoq',
+  C: 'kengayish',
+};
+
+export function resolveSegment(answers: AnswerSheet): Segment | null {
+  const answer = answers[indexOfQuestion(SEGMENT_QUESTION_ID)];
+  return answer ? SEGMENT_BY_OPTION[answer] : null;
+}
+
+/**
+ * Shu bosqichda ko'rsatiladigan savollar, asl tartibda.
+ *
+ * Segment hali tanlanmagan bo'lsa faqat birinchi savol ko'rinadi — mijoz
+ * javob bergach ro'yxat kengayadi.
+ */
+export function visibleQuestions(segment: Segment | null): DiagnosticQuestion[] {
+  if (!segment) return DIAGNOSTIC_QUESTIONS.filter((q) => q.id === SEGMENT_QUESTION_ID);
+  return DIAGNOSTIC_QUESTIONS.filter((q) => !q.segments || q.segments.includes(segment));
+}
+
+/**
+ * Ballga kiradigan savollar: segment savoli hisobga olinmaydi — u yo'l
+ * tanlaydi, brend yetukligini o'lchamaydi.
+ */
+function scorableQuestions(segment: Segment | null): DiagnosticQuestion[] {
+  return visibleQuestions(segment).filter((q) => q.id !== SEGMENT_QUESTION_ID);
+}
+
+/** Shu yo'l uchun maksimal ball — savollar soni bosqichga qarab farq qiladi. */
+export function maxScoreFor(segment: Segment | null) {
+  return scorableQuestions(segment).length * OPTION_SCORES.C;
+}
 
 /**
  * Sotuvga tayyorlik faqat shu ikki savoldan kelib chiqadi.
@@ -212,10 +284,11 @@ export const MAX_SCORE = TOTAL_QUESTIONS * OPTION_SCORES.C;
  * tartibi o'zgarsa yoki oraga yangi savol qo'shilsa, tayyorlik jimgina
  * boshqa javoblarni o'qiy boshlaydi.
  */
-const TIMING_QUESTION_ID = 6;
-const DECISION_QUESTION_ID = 7;
+const TIMING_QUESTION_ID = 7;
+const DECISION_QUESTION_ID = 8;
 
-function indexOfQuestion(id: number) {
+/** Savol `id` sining javoblar massividagi o'rni. */
+export function indexOfQuestion(id: number) {
   const index = DIAGNOSTIC_QUESTIONS.findIndex((question) => question.id === id);
   if (index === -1) throw new Error(`Diagnostika: ${id}-savol topilmadi`);
   return index;
@@ -231,11 +304,21 @@ export function createEmptyAnswerSheet(): AnswerSheet {
   return Array<OptionKey | null>(TOTAL_QUESTIONS).fill(null);
 }
 
+/**
+ * Faqat shu bosqichda ko'rsatilgan savollar tekshiriladi. O'tkazib yuborilgan
+ * savollar `null` bo'lib qoladi va bu normal holat — aks holda shoxlangan
+ * yo'ldagi mijoz hech qachon yakunga yeta olmasdi.
+ */
 export function isAnswerSheetComplete(answers: AnswerSheet) {
-  return (
-    answers.length === TOTAL_QUESTIONS &&
-    answers.every((answer) => answer === 'A' || answer === 'B' || answer === 'C')
-  );
+  if (answers.length !== TOTAL_QUESTIONS) return false;
+
+  const segment = resolveSegment(answers);
+  if (!segment) return false;
+
+  return visibleQuestions(segment).every((question) => {
+    const answer = answers[indexOfQuestion(question.id)];
+    return answer === 'A' || answer === 'B' || answer === 'C';
+  });
 }
 
 /**
@@ -246,7 +329,29 @@ export function isAnswerSheetComplete(answers: AnswerSheet) {
  * Ball brend yetukligini bildiradi, sotib olishga tayyorlikni emas.
  */
 export function calculateScore(answers: AnswerSheet) {
-  return answers.reduce<number>((total, answer) => total + (answer ? OPTION_SCORES[answer] : 0), 0);
+  return answeredVisibleOptions(answers).reduce((total, option) => total + option.score, 0);
+}
+
+/**
+ * Shu bosqichda ko'rsatiladigan va javob berilgan variantlar.
+ *
+ * Ko'rinmaydigan savollar chetlab o'tiladi: mijoz orqaga qaytib bosqichni
+ * o'zgartirsa, eski yo'ldagi javoblar massivda qolib ketadi va ularni
+ * hisobga olish ballni ham, tavsiyani ham buzardi.
+ */
+function answeredVisibleOptions(answers: AnswerSheet): DiagnosticOption[] {
+  const segment = resolveSegment(answers);
+  const result: DiagnosticOption[] = [];
+
+  // Segment savoli chetlab o'tiladi — u ballga ham, bo'shliqqa ham kirmaydi.
+  for (const question of scorableQuestions(segment)) {
+    const answer = answers[indexOfQuestion(question.id)];
+    if (!answer) continue;
+    const option = question.options.find((item) => item.key === answer);
+    if (option) result.push(option);
+  }
+
+  return result;
 }
 
 /**
@@ -256,11 +361,9 @@ export function calculateScore(answers: AnswerSheet) {
 export function collectGaps(answers: AnswerSheet): ServiceKey[] {
   const found = new Set<ServiceKey>();
 
-  answers.forEach((answer, index) => {
-    if (!answer) return;
-    const option = DIAGNOSTIC_QUESTIONS[index]?.options.find((item) => item.key === answer);
-    option?.gaps.forEach((gap) => found.add(gap));
-  });
+  for (const option of answeredVisibleOptions(answers)) {
+    option.gaps.forEach((gap) => found.add(gap));
+  }
 
   return SERVICE_ORDER.filter((service) => found.has(service));
 }
@@ -331,9 +434,13 @@ export const NO_GAPS_RESULT: DiagnosticResult = {
 };
 
 export type DiagnosticScoring = {
-  /** Brend yetukligi, 0–14. */
+  /** Mijoz tanlagan bosqich; segment savoliga javob berilmagan bo'lsa null. */
+  segment: Segment | null;
+  /** Brend yetukligi. Maksimal qiymat bosqichga qarab farq qiladi. */
   totalScore: number;
-  /** Sotib olishga tayyorlik, 0–4. */
+  /** Shu yo'l uchun maksimal ball — `totalScore` ni izohlash uchun. */
+  maxScore: number;
+  /** Sotib olishga tayyorlik: muddat + qaror, 0–4. */
   readiness: number;
   resultCategory: ResultCategory;
   priority: Priority;
@@ -343,8 +450,12 @@ export type DiagnosticScoring = {
 };
 
 export function scoreDiagnostic(answers: AnswerSheet): DiagnosticScoring {
+  const segment = resolveSegment(answers);
+
   return {
+    segment,
     totalScore: calculateScore(answers),
+    maxScore: maxScoreFor(segment),
     readiness: calculateReadiness(answers),
     resultCategory: getResultCategory(answers),
     priority: getPriority(answers),

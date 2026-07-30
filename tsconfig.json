@@ -43,6 +43,7 @@
     ".wrangler",
     "node_modules",
     "services",
-    "src/scripts"
+    "src/scripts",
+    "mcp-server"
   ]
 }
