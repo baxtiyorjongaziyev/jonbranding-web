@@ -10,6 +10,7 @@ vi.mock('next/image', () => ({
 
 describe('AtHero LCP media', () => {
   it('renders one stable preloaded hero image at optimized quality', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0);
     render(
       <AtHero
         onOpen={vi.fn()}

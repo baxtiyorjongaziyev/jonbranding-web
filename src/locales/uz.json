@@ -43,6 +43,48 @@
     "skipToMainContent": "Asosiy kontentga o'tish",
     "tabNotificationMessage": "(1) Yangi xabar! | Jon Branding"
   },
+  "homeSeo": {
+    "title": "Logotip va firma uslubi — Jon.Branding | Toshkent",
+    "description": "Logotip, brendbuk va qadoq dizayni. 150+ brend, 6 yil tajriba. Brendingiz hamma joyda bir xil va ishonarli ko'rinadi.",
+    "keywords": [
+      "logotip dizayni Toshkent",
+      "firma uslubi",
+      "brendbuk yaratish",
+      "qadoq dizayni",
+      "brending agentligi O'zbekiston"
+    ]
+  },
+  "answerHub": {
+    "eyebrow": "Ekspert javoblari",
+    "title": "Brending bo'yicha aniq javoblar.",
+    "intro": "Jon.Branding tajribasidan qisqa va tekshiriladigan javoblar. Har bir javob xizmatni emas, biznes uchun qanday muammoni hal qilishini tushuntiradi.",
+    "items": [
+      {
+        "question": "Yaxshi logotip qanday bo'ladi?",
+        "answer": "Yaxshi logotip o'xshashlardan ajraladi, kichik o'lchamda ham o'qiladi, sodda va esda qolarli bo'ladi. Uni qo'lda chizish mumkin, turli joylarda ishlaydi va har bir shaklining sababi bor. Biz logotipni aynan shu olti mezon bo'yicha tekshiramiz.",
+        "linkLabel": "Logotip yaratish jarayonini ko'rish",
+        "href": "/xizmatlar/logo-dizayni"
+      },
+      {
+        "question": "Logotip va firma uslubining farqi nima?",
+        "answer": "Logotip — biznesning asosiy belgisi. Firma uslubi esa shu belgi, ranglar, shriftlar va grafik elementlarning vizitka, qadoq, sayt, taqdimot va ijtimoiy tarmoqlarda bir xil ishlash tizimidir. Natijada mijoz brendni qayerda ko'rmasin, darhol taniydi.",
+        "linkLabel": "Firma uslubi tarkibini ko'rish",
+        "href": "/xizmatlar/firmenniy-stil"
+      },
+      {
+        "question": "Brendbuk kimga va qachon kerak?",
+        "answer": "Brendbuk dizayner, marketolog, filial yoki hamkorlar ko'payganda brend ko'rinishini nazorat qiladi. Unda logotip, rang, shrift, kompozitsiya va qo'llash qoidalari yoziladi. Shu sabab har yangi ijrochi dizaynni boshidan taxmin qilmaydi va brend hamma joyda izchil qoladi.",
+        "linkLabel": "Brendbuk nimalarni qamrashini bilish",
+        "href": "/xizmatlar/brandbook"
+      },
+      {
+        "question": "Qadoq dizayni nimani hal qiladi?",
+        "answer": "Qadoq mahsulotni himoya qilish bilan birga uni javonda tanitadi, foydasini tez tushuntiradi va boshqa SKUlar bilan yagona tizim yaratadi. Kuchli qadoq dizayni kategoriya kodlarini saqlaydi, raqiblardan ajraladi va bosmaxona talablariga tayyor fayl bilan topshiriladi.",
+        "linkLabel": "Qadoq dizayni xizmatini ko'rish",
+        "href": "/xizmatlar/qadoq-dizayni"
+      }
+    ]
+  },
   "telegramBanner": {
     "text": "Brending bo'yicha foydali maslahatlar uchun Telegram kanalimizga qo'shiling!",
     "buttonText": "Qo'shilish",
@@ -280,7 +322,7 @@
   },
   "contactModal": {
     "sidebarTitle": "Bepul Brand Audit",
-    "sidebarSubtitle": "15 daqiqada brendingiz mijoz ko'zida qayerda ishonch yo'qotayotganini ko'rsatamiz.",
+    "sidebarSubtitle": "15 daqiqada mijozlaringiz nega raqobatchilarga ketayotganini va dizayningizdagi xatolarni ko'rsatamiz.",
     "header": "Brand Audit",
     "description": "Auditdan keyin qaysi o'zgarish sotuvga eng tez ta'sir qilishini bilasiz.",
     "steps": {
@@ -351,9 +393,9 @@
     "quickContactLabel": "Tez aloqa",
     "auditGivesLabel": "Auditda olasiz",
     "auditOfferStack": [
-      "5 ta ishonch yo'qotadigan nuqta",
-      "Qaysi xizmat hozir kerakligini aniqlash",
-      "Majburiy sotuvsiz aniq tavsiya"
+      "Saytingizdagi 5 ta qo'pol xato",
+      "Nega mijozlar ishonmayapti?",
+      "Qanday qilib konversiyani oshirish mumkin?"
     ],
     "auditTimeLabel": "Format",
     "auditFormat": [

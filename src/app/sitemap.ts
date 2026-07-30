@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { fetchPortfolioList } from '@/lib/data/portfolio';
+import { client } from '@/sanity/lib/client';
 import { getAllPostSlugs } from '@/lib/blog-posts';
 import {
   defaultLocale,
@@ -55,6 +56,61 @@ function getAlternates(route: string, availableLocales: readonly Locale[] = loca
   };
 }
 
+type SanityPostSitemapRecord = {
+  slug?: string;
+  lang?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+};
+
+async function getSanityBlogEntries(): Promise<MetadataRoute.Sitemap> {
+  let posts: SanityPostSitemapRecord[] = [];
+  try {
+    posts = await client.fetch(`*[_type == "post" && defined(slug.current)] {
+      "slug": slug.current,
+      "lang": language,
+      publishedAt,
+      "updatedAt": _updatedAt
+    }`);
+  } catch (error) {
+    console.error('[sitemap] Failed to fetch Sanity posts:', error);
+    return [];
+  }
+
+  const postsBySlug = new Map<string, Set<Locale>>();
+  const lastModifiedBySlug = new Map<string, Date>();
+
+  posts.forEach(({ slug, lang, publishedAt, updatedAt }) => {
+    if (!slug) return;
+    if (!locales.includes(lang as Locale)) return;
+    const translatedLocales = postsBySlug.get(slug) ?? new Set<Locale>();
+    translatedLocales.add(lang as Locale);
+    postsBySlug.set(slug, translatedLocales);
+
+    const timestamp = updatedAt || publishedAt;
+    if (timestamp) {
+      const parsed = new Date(timestamp);
+      if (!Number.isNaN(parsed.getTime())) {
+        const current = lastModifiedBySlug.get(slug);
+        if (!current || parsed > current) lastModifiedBySlug.set(slug, parsed);
+      }
+    }
+  });
+
+  return Array.from(postsBySlug.entries()).flatMap(([slug, translatedLocales]) => {
+    const availableLocales = locales.filter((lang) => translatedLocales.has(lang));
+    const route = `/blog/${slug}`;
+
+    return availableLocales.map((lang) => ({
+      url: localizedUrl(lang, route),
+      lastModified: lastModifiedBySlug.get(slug),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+      alternates: getAlternates(route, availableLocales),
+    }));
+  });
+}
+
 function getMarkdownBlogEntries(): MetadataRoute.Sitemap {
   const postsBySlug = new Map<string, Set<Locale>>();
 
@@ -68,10 +124,8 @@ function getMarkdownBlogEntries(): MetadataRoute.Sitemap {
   return Array.from(postsBySlug.entries()).flatMap(([slug, translatedLocales]) => {
     const availableLocales = locales.filter((lang) => translatedLocales.has(lang));
     const route = `/blog/${slug}`;
-
     return availableLocales.map((lang) => ({
       url: localizedUrl(lang, route),
-      lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
       alternates: getAlternates(route, availableLocales),
@@ -100,7 +154,6 @@ async function getPortfolioEntries(): Promise<MetadataRoute.Sitemap> {
 
     return availableLocales.map((lang) => ({
       url: localizedUrl(lang, route),
-      lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
       alternates: getAlternates(route, availableLocales),
@@ -112,12 +165,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages = staticRoutes.flatMap((route) =>
     locales.map((lang) => ({
       url: localizedUrl(lang, route),
-      lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: route === '' ? 1 : 0.8,
       alternates: getAlternates(route),
     })),
   );
 
-  return [...staticPages, ...getMarkdownBlogEntries(), ...(await getPortfolioEntries())];
+  const blogEntries = [
+    ...getMarkdownBlogEntries(),
+    ...(await getSanityBlogEntries()),
+  ];
+  const uniqueBlogEntries = Array.from(
+    new Map(blogEntries.map((entry) => [entry.url, entry])).values(),
+  );
+
+  return [...staticPages, ...uniqueBlogEntries, ...(await getPortfolioEntries())];
 }
+
+export const revalidate = 300;

@@ -43,6 +43,48 @@
     "skipToMainContent": "Skip to main content",
     "tabNotificationMessage": "(1) New message! | Jon Branding"
   },
+  "homeSeo": {
+    "title": "Logo and Corporate Identity — Jon.Branding | Tashkent",
+    "description": "Logo, brand guidelines and packaging design. 150+ brands and 6 years of experience creating consistent, credible business identities.",
+    "keywords": [
+      "logo design Tashkent",
+      "corporate identity",
+      "brand guidelines",
+      "packaging design",
+      "branding agency Uzbekistan"
+    ]
+  },
+  "answerHub": {
+    "eyebrow": "Expert answers",
+    "title": "Clear answers about branding.",
+    "intro": "Concise, verifiable answers drawn from Jon.Branding practice. Each answer explains the business problem behind the service.",
+    "items": [
+      {
+        "question": "What makes a good logo?",
+        "answer": "A good logo is distinctive, readable at small sizes, simple and memorable. It can be drawn by hand, works across different applications and has a reason behind every shape. We evaluate logo concepts against these six practical criteria.",
+        "linkLabel": "See our logo design process",
+        "href": "/xizmatlar/logo-dizayni"
+      },
+      {
+        "question": "What is the difference between a logo and corporate identity?",
+        "answer": "A logo is the primary mark of a business. Corporate identity is the system that makes the logo, colours, type and graphic elements work consistently across cards, packaging, websites, presentations and social media. This consistency makes the brand recognisable at every touchpoint.",
+        "linkLabel": "Explore the corporate identity system",
+        "href": "/xizmatlar/firmenniy-stil"
+      },
+      {
+        "question": "When does a business need brand guidelines?",
+        "answer": "Brand guidelines control how a brand appears as more designers, marketers, branches or partners become involved. They document logo, colour, typography and layout rules. New contributors no longer have to guess, and the brand remains consistent across every channel.",
+        "linkLabel": "See what brand guidelines include",
+        "href": "/xizmatlar/brandbook"
+      },
+      {
+        "question": "What business problem does packaging design solve?",
+        "answer": "Packaging protects the product, makes it recognisable on the shelf, explains its value quickly and connects every SKU into one range. Effective packaging respects category cues, stands apart from competitors and is delivered as production-ready artwork.",
+        "linkLabel": "Explore packaging design",
+        "href": "/xizmatlar/qadoq-dizayni"
+      }
+    ]
+  },
   "telegramBanner": {
     "text": "Join our Telegram channel for expert branding insights!",
     "buttonText": "Join Now",

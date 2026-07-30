@@ -334,7 +334,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           }}
         />
         <Script
-          id="json-ld-website"
+          id="json-ld-person"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: safeJsonStringify({
@@ -358,7 +358,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
           }}
         />
         <Script
-          id="json-ld-website"
+          id="json-ld-website-search"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: safeJsonStringify({

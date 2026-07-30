@@ -18,8 +18,24 @@ export const post = defineType({
     }),
     defineField({
       name: 'description',
-      title: 'Description',
+      title: 'Direct answer / meta description',
       type: 'text',
+      description: 'Answer the main query directly in 1–2 concise sentences.',
+      validation: (rule) => rule.required().min(70).max(220),
+    }),
+    defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'string',
+      initialValue: 'Baxtiyorjon Gaziyev',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'keywords',
+      title: 'Topics and entities',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
     }),
     defineField({
       name: 'content',
@@ -37,6 +53,39 @@ export const post = defineType({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
+    }),
+    defineField({
+      name: 'sources',
+      title: 'Sources',
+      description: 'Add only primary or authoritative sources that support article claims.',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Source title',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'url',
+              title: 'Source URL',
+              type: 'url',
+              validation: (rule) => rule.required().uri({ scheme: ['http', 'https'] }),
+            }),
+            defineField({
+              name: 'publisher',
+              title: 'Publisher',
+              type: 'string',
+            }),
+          ],
+          preview: {
+            select: { title: 'title', subtitle: 'publisher' },
+          },
+        },
+      ],
     }),
     defineField({
       name: 'language',

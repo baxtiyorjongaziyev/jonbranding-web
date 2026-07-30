@@ -2,25 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/sanity/lib/client';
 import { safeCompare } from '@/lib/security';
 import { logger } from '@/lib/logger';
+import {
+  getSanityWriteDiagnostic,
+  getSanityWriteToken,
+  SANITY_WRITE_TOKEN_ENV,
+} from '@/lib/sanity-write';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
-const SANITY_TOKEN = process.env.SANITY_TOKEN || '';
 const CRON_SECRET = process.env.CRON_SECRET || '';
 const AMOCRM_CRON_SECRET = process.env.AMOCRM_CRON_SECRET || '';
 
 if (!GEMINI_API_KEY) {
   logger.warn('[blog-agent] GEMINI_API_KEY not configured');
 }
-if (!SANITY_TOKEN) {
-  logger.warn('[blog-agent] SANITY_TOKEN not configured');
-}
-
-const sanityWriteClient = client.withConfig({
-  token: SANITY_TOKEN,
-  apiVersion: '2024-04-14',
-  useCdn: false,
-});
-
 function verifyAuth(req: NextRequest): boolean {
   if (!CRON_SECRET && !AMOCRM_CRON_SECRET) return false;
   const auth = req.headers.get('authorization');
@@ -54,10 +48,16 @@ The article must be written in the following language code: ${language} (uz = Uz
 Format the response strictly as a JSON object with the following structure:
 {
   "title": "Catchy article title",
-  "description": "Short meta description (1-2 sentences)",
-  "content": "Full article content in Markdown format. Use ## for headings, lists, and bold text. Make it comprehensive and engaging."
+  "description": "A self-contained 1-2 sentence direct answer to the main topic (120-180 characters)",
+  "content": "Full article content in Markdown format. Start with the direct answer, then use question-shaped ## headings, numbered steps, practical criteria, and a concise conclusion.",
+  "keywords": ["3-6 specific topic entities"]
 }
-IMPORTANT: Only return the JSON object, no markdown code blocks around it.`;
+IMPORTANT:
+- Only return the JSON object, no markdown code blocks around it.
+- Do not invent statistics, client results, awards, quotations, or external sources.
+- Avoid keyword stuffing and generic filler.
+- Use plain customer language and explain professional terms when necessary.
+- Write as Jon.Branding's experienced design team, without claiming sales guarantees.`;
 
   const res = await fetch(url, {
     method: 'POST',
@@ -89,6 +89,27 @@ export async function GET(req: NextRequest) {
   if (!verifyAuth(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+  const sanityWriteToken = getSanityWriteToken();
+  if (!sanityWriteToken) {
+    logger.error(`[blog-agent] ${SANITY_WRITE_TOKEN_ENV} not configured`);
+    return NextResponse.json(
+      {
+        error: {
+          code: 'SANITY_WRITE_TOKEN_MISSING',
+          message: 'Sanity yozish tokeni sozlanmagan.',
+          hint: `Vercel Production env'ga ${SANITY_WRITE_TOKEN_ENV} nomi bilan Sanity Editor tokenini kiriting va redeploy qiling.`,
+        },
+      },
+      { status: 503 },
+    );
+  }
+
+  const sanityWriteClient = client.withConfig({
+    token: sanityWriteToken,
+    apiVersion: '2024-04-14',
+    useCdn: false,
+  });
 
   try {
     const topics = [
@@ -145,6 +166,8 @@ export async function GET(req: NextRequest) {
         title: generated.title,
         slug: { _type: 'slug', current: slug },
         description: generated.description,
+        author: 'Baxtiyorjon Gaziyev',
+        keywords: Array.isArray(generated.keywords) ? generated.keywords.slice(0, 8) : [],
         language: lang,
         content: contentBlocks,
         publishedAt: new Date().toISOString(),
@@ -163,6 +186,19 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     logger.error('[blog-agent] Error:', error);
+    const diagnostic = getSanityWriteDiagnostic(error);
+    if (diagnostic) {
+      return NextResponse.json(
+        {
+          error: {
+            code: diagnostic.code,
+            message: diagnostic.message,
+            hint: diagnostic.hint,
+          },
+        },
+        { status: diagnostic.status },
+      );
+    }
     return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }

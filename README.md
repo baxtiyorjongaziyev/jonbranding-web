@@ -59,6 +59,12 @@ A high-performance, multilingual, and conversion-optimized web application for J
    lead note while phone delivery continues normally.
 
    Security-sensitive integrations also require:
+   - `SANITY_API_WRITE_TOKEN` — server-only Sanity token with **Editor** access
+     to the `production` dataset; required by scheduled `/api/blog-agent`
+     publishing. In Vercel, add it to **Production** (and Preview only when
+     intentionally testing writes), then redeploy. Do not expose it with a
+     `NEXT_PUBLIC_` prefix and do not use the ambiguous legacy `SANITY_TOKEN`
+     for this route.
    - `VIMEO_WEBHOOK_SECRET` — verifies Vimeo webhook HMAC signatures.
    - `INSTAGRAM_OAUTH_ADMIN_SECRET` — protects the Instagram OAuth start route.
    - `FIREBASE_SERVICE_ACCOUNT_JSON` — enables shared Firestore rate limits in production.

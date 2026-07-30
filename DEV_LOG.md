@@ -4,7 +4,46 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-07-27 | To'liq Veb-sayt Auditi & Build Verifikatsiyasi (100% SUCCESS)
+
+**Nima qilindi:**
+- **Kod & TypeScript Auditi**: `npm run typecheck` orqali to'liq static typecheck o'tkazildi (0 errors).
+- **Production Build Verifikatsiyasi**: `npm run build` bajarildi — 160 ta sahifa va barcha dynamic/ISR marshrutlar 100% muvaffaqiyatli qurildi (`✓ Compiled successfully`).
+- **i18n Paritet Auditi**: `audit_locales.js` orqali barcha 4 ta tilda (`uz`, `ru`, `en`, `zh`) teng 1016 ta kalit va 0 missing key borligi tasdiqlandi.
+- **SEO & AI Search (GEO/AEO)**: `robots.ts` va `sitemap.ts` auditi o'tkazildi; ChatGPT, Claude va Perplexity botlari uchun ochiq indeksatsiya va `hreflang` / `x-default` alternativalar tekshirildi.
+- **Performance & CWV**: Above-the-fold Hero LCP prioriteti va below-the-fold 9 ta og'ir seksiyalarning `SectionSkeleton` bilan dynamic import qilinishi audit qilindi.
+- **Full Audit Report**: To'liq audit hisoboti [full_website_audit.md](file:///C:/Users/baxti/.gemini/antigravity/brain/c2dc0721-e2ff-421e-84a9-64e6f7d0643f/full_website_audit.md) faylida yaratildi.
+
+---
+
+## 2026-07-27 | Lead Capture Orchestrator + Security & Governance 10/10 Audit
+
+**Nima qilindi:**
+- **Lead Capture Orchestrator & Multi-trigger Convergence**: `openContactModal` CustomEvent orqali 40+ har xil tugma, kalkulyator, header, sticky CTA va exit-intent hodisalari `AtModal` hamda `ContactModal` ga yagona context va source metadata (`ctaSource`, `gaClientId`, `pageLocation`) bilan yo'naltirildi.
+- **Security & Bot Protection (Triple-layer)**: Honeypot field (`companyWebsite`), Cloudflare Turnstile token verification (`verifyTurnstile`) va Origin check hamda Firestore-backed distributed rate-limiting bilan barcha lead yo'llari xavfsizlandi.
+- **Security Headers & Proxy Governance**: `proxy.ts` orqali `HSTS`, `X-XSS-Protection`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy` va `X-DNS-Prefetch-Control` sarlavhalari to'liq audit qilindi.
+- **JSON-LD Schema Verification**: Script ID dublikatlari tozalanib, Google va AI Search engine lar (AEO/GEO) uchun to'liq sinxronlashtirildi.
+
+**Tekshiruv:** `vitest run` → 22/22 test suites (140 tests) PASS ✓ | `git push origin main` → Vercel production deploy ✓
+
+---
+
+## 2026-07-23 | Performance 10/10 — Dynamic Imports & LCP Optimization
+
+
+**Nima qilindi:**
+- `HomeComponent` ichidagi below-the-fold 9 ta og'ir section dynamic import (lazy-load) ga o'tkazildi: `ATGallery`, `BeforeAfter`, `ATQuotes`, `ProcessVideo`, `AtProcess`, `Founder`, `AtPricing`, `AtFaq`, `AtFinalCta`.
+- Dynamic import jarayonida CLS (Cumulative Layout Shift) ning oldini olish uchun yengil va xavfsiz `SectionSkeleton` komponenti yaratildi va qo'llandi.
+- `AtHero` komponentidagi LCP (Largest Contentful Paint) rasmi uchun deprecated `preload` o'rniga rasmiy `priority` prop o'rnatildi va mos test `at-hero.test.tsx` yangilandi.
+- `layout.tsx` ga Vimeo iframe resurslari uchun `dns-prefetch` qo'shildi.
+
+**Tekshiruv:** `vitest run` → 16/16 test suites (124 tests) o'tdi ✓
+**Deploy:** `git push origin main` → Vercel auto-deploy qilindi ✓
+
+---
+
 ## 2026-07-22 | i18n Parity + zh.json To'liq Tarjima
+
 
 **Nima qilindi:**
 - `ru.json`, `en.json`, `zh.json` ga 6 ta yetishmayotgan kalit qo'shildi: `naming_simple`, `logo_design_simple`, `brandbook_simple`, `corporate_style_simple`, `packaging_design_simple`, `atelier.hero_title_alt`
@@ -363,3 +402,11 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - `TIMING_INDEX` va `DECISION_INDEX` savol `id` sidan hisoblanadi, qo'lda yozilmaydi — savollar tartibi o'zgarsa tayyorlik jimgina boshqa javoblarni o'qib ketmasligi uchun. Buni qo'riqlaydigan test ham bor.
 - CRM va Telegram: `TAKLIF QILINADI:` satri birinchi o'rinda, javob satrlari savol matni bilan keladi, sdelkaga `kerak:patent` ko'rinishidagi teglar qo'shiladi. Bo'shliq topilmasa taklif satri o'rniga alohida matn chiqadi — "Jiddiy bo'shliq topilmadi" ning o'zi taklifdek ko'rinmasligi uchun.
 - Sahifa faqat o'zbek tilida. Matnlar `src/lib/diagnostics.ts` da, locale lug'atlarida emas — bu ataylab qilingan, chunki savollar va xizmat izohlari mahalliy bozorga yozilgan. Boshqa tillarga tarjima alohida ish sifatida qarz.
+
+## 2026-07-27 | Package Builder & Narxlash Algoritmi Yangilandi
+
+**Nima qilindi:**
+- **Paketli Chegirma (Package Discount):** 50/50 to'lovdagi shartsiz "Istisno chegirmasi" o'rniga "Paketli chegirma" qo'shildi. Bu chegirma faqat kamida 2 ta asosiy xizmat tanlangandagina va to'lov usuli (50/50 yoki 100%) tanlansa amal qiladi.
+- **Paketlarni maxsus tortish:** "logoPremium" (Logo va Firma uslubi) 2 ta xizmat, "logoVIP" (Logo, Firma uslubi, Brandbook) 3 ta xizmat deb baholanadigan mantiq kiritildi.
+- **Sizning paketingiz (Cart) oynasi qulaylashtirildi:** Foydalanuvchi endi tanlangan xizmatlarni bevosita xulosa oynasidan turib X tugmasi bilan olib tashlashi mumkin. Shuningdek, qo'shimcha xizmat tanlash uchun tepaga qaytaruvchi "Boshqa xizmat qo'shish" tugmasi qo'shildi.
+- Kod src/lib/pricing.ts va src/components/sections/package-builder.tsx da yangilandi.

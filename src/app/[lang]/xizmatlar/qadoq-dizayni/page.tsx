@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import PackagingClient from './packaging-client';
+import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -22,5 +23,15 @@ export default async function Page(props: Props) {
   const { lang } = await props.params;
   const dictionary = await getDictionary(lang as Locale);
   
-  return <PackagingClient lang={lang as Locale} translations={dictionary.packagingPage} />;
+  return (
+    <>
+      <ServiceJsonLd
+        lang={lang as Locale}
+        path="/xizmatlar/qadoq-dizayni"
+        name={dictionary.header.packaging_design}
+        description={dictionary.packagingPage.metadata.description}
+      />
+      <PackagingClient lang={lang as Locale} translations={dictionary.packagingPage} />
+    </>
+  );
 }

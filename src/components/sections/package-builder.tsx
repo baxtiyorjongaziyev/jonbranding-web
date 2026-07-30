@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect, FC, useMemo, useCallback } from 'react';
 import { useLocalStorage } from '@/hooks/use-local-storage';
@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight, X } from 'lucide-react';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
@@ -309,7 +309,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
-    const total = calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any);
+    const total = useMemo(() => calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any), [selectedServices, discountType, promoCode, lang]);
 
     useEffect(() => {
         if (total.isPromoApplied && !hasCelebrated) {
@@ -453,13 +453,32 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                         </div>
                                                         <span className="text-base font-bold tracking-tight text-white drop-shadow-sm">{serviceDetails[k]?.label}</span>
                                                     </div>
-                                                    <span className={cn("font-black text-sm", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
-                                                        {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
-                                                    </span>
+                                                    <div className="flex items-center gap-3">
+                                                        <span className={cn("font-black text-sm", isSurcharge ? "text-blue-400" : "text-sky-blue")}>
+                                                            {isSurcharge ? "+50%" : formatPrice(serviceDetails[k]?.price || 0, lang as any, currency)}
+                                                        </span>
+                                                        <button 
+                                                            onClick={() => handleServiceToggle(k)}
+                                                            className="p-1 hover:bg-white/20 rounded-full transition-colors opacity-60 hover:opacity-100"
+                                                            title="Olib tashlash"
+                                                        >
+                                                            <X className="w-4 h-4 text-white" />
+                                                        </button>
+                                                    </div>
                                                 </motion.div>
                                             );
                                         })}
                                     </AnimatePresence>
+                                </div>
+                                <div className="mt-6 pt-4 border-t border-white/10 flex justify-center">
+                                    <button 
+                                        onClick={() => {
+                                            document.getElementById('package-builder')?.scrollIntoView({ behavior: 'smooth' });
+                                        }}
+                                        className="flex items-center gap-2 text-sm font-bold text-sky-blue hover:text-white transition-colors"
+                                    >
+                                        <Plus className="w-4 h-4" /> Boshqa xizmat qo'shish
+                                    </button>
                                 </div>
                             </div>
                         </div>
