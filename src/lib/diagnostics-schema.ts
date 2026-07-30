@@ -5,7 +5,7 @@ import {
   normalizePhone,
   normalizeTelegramUsername,
 } from './lead-contact';
-import { TOTAL_QUESTIONS } from './diagnostics';
+import { isAnswerSheetComplete, TOTAL_QUESTIONS, type AnswerSheet } from './diagnostics';
 
 const answerKeySchema = z.enum(['A', 'B', 'C']);
 
@@ -29,7 +29,13 @@ export const diagnosticSubmissionSchema = z.object({
   industry: z.string().trim().max(120).optional().or(z.literal('')),
   contact: contactSchema,
   consent: z.literal(true, { message: 'Rozilik majburiy' }),
-  answers: z.array(answerKeySchema).length(TOTAL_QUESTIONS, 'Barcha savollarga javob bering'),
+  // Shoxlangan yo'lda ko'rsatilmagan savollar `null` bo'lib qoladi — massiv
+  // uzunligi doim bir xil, lekin har bir katak to'ldirilishi shart emas.
+  // Ko'rsatilgan savollar to'liq javoblanganini `isAnswerSheetComplete`
+  // tekshiradi (superRefine, quyida).
+  answers: z
+    .array(answerKeySchema.nullable())
+    .length(TOTAL_QUESTIONS, 'Javoblar to‘plami to‘g‘ri emas'),
   source: z.string().trim().max(80).optional(),
   pageUrl: z.string().trim().max(500).optional(),
   utmSource: z.string().trim().max(120).optional(),
@@ -40,6 +46,16 @@ export const diagnosticSubmissionSchema = z.object({
   // Bot himoyasi. CRMga yuborilmaydi, faqat tekshiruv uchun.
   companyWebsite: z.string().optional(),
   turnstileToken: z.string().optional(),
+}).superRefine((data, context) => {
+  // Bosqich tanlanmagan yoki shu bosqichdagi savol javobsiz qolgan bo'lsa
+  // natija ishonchsiz bo'ladi, shuning uchun serverda ham tekshiramiz.
+  if (!isAnswerSheetComplete(data.answers as AnswerSheet)) {
+    context.addIssue({
+      code: 'custom',
+      message: 'Barcha savollarga javob bering',
+      path: ['answers'],
+    });
+  }
 });
 
 export type DiagnosticSubmission = z.infer<typeof diagnosticSubmissionSchema>;

@@ -1,9 +1,13 @@
 name: Lighthouse CI
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -32,12 +36,12 @@ jobs:
           NEXT_TELEMETRY_DISABLED: '1'
 
       - name: Start server
-        run: npm start &
+        run: npx next start --port 3000 &
         env:
           PORT: 3000
 
       - name: Wait for server
-        run: npx wait-on http://localhost:3000 --timeout 60000
+        run: npx wait-on http://localhost:3000 --timeout 120000
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v12

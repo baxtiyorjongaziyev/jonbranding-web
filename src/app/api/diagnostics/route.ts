@@ -5,8 +5,10 @@ import {
   DEFAULT_SOURCE,
   describeAnswer,
   describeGaps,
+  indexOfQuestion,
   scoreDiagnostic,
-  TOTAL_QUESTIONS,
+  SEGMENTS,
+  visibleQuestions,
   type AnswerSheet,
 } from '@/lib/diagnostics';
 import { diagnosticSubmissionSchema, splitContact } from '@/lib/diagnostics-schema';
@@ -34,14 +36,12 @@ type DiagnosticCrmRecord = {
   industry: string;
   contact: string;
   consent: boolean;
-  answer_1: string;
-  answer_2: string;
-  answer_3: string;
-  answer_4: string;
-  answer_5: string;
-  answer_6: string;
-  answer_7: string;
+  /** Mijoz tanlagan bosqich (segment). */
+  segment: string;
+  /** Ko'rsatilgan va javob berilgan savollar, tayyor matn ko'rinishida. */
+  answers_text: string;
   total_score: number;
+  max_score: number;
   readiness: number;
   result_category: string;
   priority: string;
@@ -62,15 +62,10 @@ function buildCrmRecord(
   scoring: ReturnType<typeof scoreDiagnostic>
 ): DiagnosticCrmRecord {
   const answers = data.answers as AnswerSheet;
-  const answerFields = Object.fromEntries(
-    Array.from({ length: TOTAL_QUESTIONS }, (_, index) => [
-      `answer_${index + 1}`,
-      describeAnswer(index, answers[index]),
-    ])
-  ) as Pick<
-    DiagnosticCrmRecord,
-    'answer_1' | 'answer_2' | 'answer_3' | 'answer_4' | 'answer_5' | 'answer_6' | 'answer_7'
-  >;
+  // Faqat shu bosqichda ko'rsatilgan savollar; skipped savollar CRMga tushmaydi.
+  const answers_text = visibleQuestions(scoring.segment)
+    .map((question, index) => `${index + 1}. ${describeAnswer(indexOfQuestion(question.id), answers[indexOfQuestion(question.id)])}`)
+    .join('\n');
 
   return {
     created_at: new Date().toISOString(),
@@ -79,8 +74,10 @@ function buildCrmRecord(
     industry: data.industry || '',
     contact: data.contact,
     consent: data.consent,
-    ...answerFields,
+    segment: scoring.segment ? SEGMENTS[scoring.segment] : '—',
+    answers_text,
     total_score: scoring.totalScore,
+    max_score: scoring.maxScore,
     readiness: scoring.readiness,
     result_category: scoring.resultCategory,
     priority: scoring.priority,
@@ -99,14 +96,10 @@ type DeliveryResult = { ok: boolean; skipped?: boolean; error?: string };
 
 /** Sdelka izohi — CRM maydonlarining hammasi shu matnda saqlanadi. */
 function buildAmoCrmNote(record: DiagnosticCrmRecord) {
-  const answers = Array.from(
-    { length: TOTAL_QUESTIONS },
-    (_, index) => `${index + 1}. ${(record as any)[`answer_${index + 1}`]}`
-  ).join('\n');
-
   return [
     'Brend diagnostikasi',
     `Sana: ${record.created_at}`,
+    `Bosqich: ${record.segment}`,
     record.company_name ? `Kompaniya: ${record.company_name}` : '',
     record.industry ? `Soha: ${record.industry}` : '',
     `Aloqa: ${record.contact}`,
@@ -120,9 +113,9 @@ function buildAmoCrmNote(record: DiagnosticCrmRecord) {
       : "Asosiy bo'shliq topilmadi — kengaytirish bo'yicha suhbat kerak",
     '',
     'Javoblar:',
-    answers,
+    record.answers_text,
     '',
-    `Brend yetukligi: ${record.total_score}/14`,
+    `Brend yetukligi: ${record.total_score}/${record.max_score}`,
     `Sotib olishga tayyorlik: ${record.readiness}/4`,
     `Kategoriya: ${record.result_category}`,
     `Prioritet: ${record.priority}`,
@@ -180,15 +173,16 @@ async function sendToAmoCrm(
 }
 
 function buildTelegramMessage(record: DiagnosticCrmRecord) {
-  const answers = Array.from(
-    { length: TOTAL_QUESTIONS },
-    (_, index) => `${index + 1}. ${escapeTelegramHtml((record as any)[`answer_${index + 1}`])}`
-  ).join('\n');
+  const answers = record.answers_text
+    .split('\n')
+    .map((line) => escapeTelegramHtml(line))
+    .join('\n');
 
   return [
     '<b>Brend diagnostikasi: yangi lead</b>',
     '',
     `<b>Ism:</b> ${escapeTelegramHtml(record.full_name)}`,
+    `<b>Bosqich:</b> ${escapeTelegramHtml(record.segment)}`,
     record.company_name ? `<b>Kompaniya:</b> ${escapeTelegramHtml(record.company_name)}` : '',
     record.industry ? `<b>Soha:</b> ${escapeTelegramHtml(record.industry)}` : '',
     `<b>Aloqa:</b> ${escapeTelegramHtml(record.contact)}`,
@@ -197,7 +191,7 @@ function buildTelegramMessage(record: DiagnosticCrmRecord) {
       ? `<b>TAKLIF QILINADI:</b> ${escapeTelegramHtml(record.missing_services)}`
       : "<b>Asosiy bo'shliq topilmadi</b> — kengaytirish bo'yicha suhbat kerak",
     '',
-    `<b>Brend yetukligi:</b> ${record.total_score}/14`,
+    `<b>Brend yetukligi:</b> ${record.total_score}/${record.max_score}`,
     `<b>Sotib olishga tayyorlik:</b> ${record.readiness}/4`,
     `<b>Kategoriya:</b> ${escapeTelegramHtml(record.result_category)}`,
     `<b>Prioritet:</b> ${escapeTelegramHtml(record.priority)}`,

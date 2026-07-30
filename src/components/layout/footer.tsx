@@ -25,6 +25,7 @@ type Dictionary = {
     additional: string;
     service_prices: string;
     branding_test: string;
+    brand_diagnostics: string;
     online_brief: string;
     blog: string;
     sitemap: string;
@@ -115,7 +116,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link href={getLocalizedPath('/blog')} className="hover:text-white transition-colors">{copy.blog}</Link></li>
               <li><Link href={getLocalizedPath('/online-brief')} className="hover:text-white transition-colors">{copy.online_brief}</Link></li>
-              <li><Link href={getLocalizedPath('/quiz')} className="hover:text-white transition-colors">{copy.branding_test}</Link></li>
+              <li><Link href={getLocalizedPath('/diagnostika')} className="hover:text-white transition-colors">{copy.brand_diagnostics}</Link></li>
               <li><Link href={getLocalizedPath('/checklist')} className="hover:text-white transition-colors">{lang === 'uz' ? 'Brending chek-listi' : lang === 'ru' ? 'Чек-лист по брендингу' : lang === 'zh' ? '品牌清单' : 'Branding Checklist'}</Link></li>
               <li><Link href={getLocalizedPath('/xizmatlar/patent-kalkulyatori')} className="hover:text-white transition-colors">{copy.patent_calculator}</Link></li>
               <li><Link href={getLocalizedPath('/sitemap')} className="hover:text-white transition-colors">{copy.sitemap}</Link></li>
