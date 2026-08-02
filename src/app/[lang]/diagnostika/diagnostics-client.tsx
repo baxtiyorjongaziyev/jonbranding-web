@@ -2,7 +2,7 @@
 
 import { FC, FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { ArrowLeft, ArrowRight, CheckCircle2, Loader2, Send, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -67,9 +67,7 @@ function isContactValid(value: string) {
   return isValidPhone(normalizePhone(value)) || isValidTelegramUsername(normalizeTelegramUsername(value));
 }
 
-const DiagnosticsClient: FC<{ dictionary: DiagnosticsDictionary }> = ({ dictionary }) => {
-  const params = useParams();
-  const lang = (params?.lang as string) || 'uz';
+const DiagnosticsClient: FC<{ dictionary: DiagnosticsDictionary; lang: string }> = ({ dictionary, lang }) => {
   const searchParams = useSearchParams();
 
   const [stage, setStage] = useState<Stage>('intro');
@@ -257,7 +255,7 @@ const DiagnosticsClient: FC<{ dictionary: DiagnosticsDictionary }> = ({ dictiona
       // Server xabarlari o'zbekcha va foydalanuvchiga mo'ljallangan (masalan
       // rate-limit yoki validatsiya). Network xatosida umumiy matn qoladi.
       setSubmitError(
-        error instanceof Error && error.message && !/^HTTP \d+$/.test(error.message)
+        lang === 'uz' && error instanceof Error && error.message && !/^HTTP \d+$/.test(error.message)
           ? error.message
           : dictionary.ui.submitError
       );

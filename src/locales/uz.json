@@ -2407,7 +2407,7 @@
     "questions": {
       "1": { "question": "Biznesingiz hozir qaysi bosqichda?", "options": { "A": "Endi boshlayapman yoki g‘oya bosqichidaman", "B": "Ishlayapti, lekin brendim tarqoq", "C": "Barqaror biznes, kengaymoqchiman" } },
       "2": { "question": "Biznesingiz yoki mahsulotingiz nomi bormi?", "options": { "A": "Yo‘q — nom ustida hali ishlamaganmiz", "B": "Bor, lekin o‘zgartirmoqchimiz", "C": "Bor va o‘zgartirmoqchi emasmiz" } },
-      "3": { "question": "Raqobatchingiz ertaga sizning nomingiz bilan sotsa, uni to‘xtata olasizmi?", "hint": "Buni faqat tovar belgisi guvohnomasi beradi.", "options": { "A": "Yo‘q — bu haqda o‘ylamaganmiz", "B": "Yo‘q, lekin kerakligini bilamiz", "C": "Ha, guvohnomamiz bor" } },
+      "3": { "question": "Raqobatchingiz ertaga sizning nomingiz bilan sotsa, uni to‘xtata olasizmi?", "hint": "Buning uchun odatda bozoringizda ro‘yxatdan o‘tgan tovar belgisi kerak bo‘ladi.", "options": { "A": "Yo‘q — bu haqda o‘ylamaganmiz", "B": "Yo‘q, lekin kerakligini bilamiz", "C": "Ha, guvohnomamiz bor" } },
       "4": { "question": "Logotipingiz qanday tayyorlangan?", "options": { "A": "Logotipimiz yo‘q", "B": "O‘zimiz yoki tanishimiz qilib bergan", "C": "Professional dizayner yoki agentlik tayyorlagan" } },
       "5": { "question": "Ranglar va shriftlar yozilgan hujjatingiz bormi?", "hint": "Bunday hujjat firma uslubi va brendbuk deb ataladi.", "options": { "A": "Yo‘q — har safar boshqacha chiqadi", "B": "Ba’zi fayllar bor, lekin yagona hujjat emas", "C": "Brendbukimiz bor, hamma shunga amal qiladi" } },
       "6": { "question": "Mahsulotingiz qadoq yoki yorliqda sotiladimi?", "options": { "A": "Ha, lekin qadoq dizayni ishlanmagan", "B": "Yo‘q — biz xizmat ko‘rsatamiz", "C": "Ha, qadoq professional tayyorlangan" } },

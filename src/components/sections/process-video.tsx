@@ -64,7 +64,7 @@ const ProcessVideo: FC<{ dictionary: ProcessVideoDictionary }> = ({ dictionary }
                     sizes="(max-width: 896px) calc(100vw - 32px), 896px"
                     className="object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
                   />
-                  <span className="absolute inset-0 bg-slate-950/45 transition-colors group-hover:bg-slate-950/35" />
+                  <span className="absolute inset-0 bg-slate-950/45 transition-colors motion-reduce:transition-none group-hover:bg-slate-950/35" />
                   <span className="absolute inset-0 grid place-items-center">
                     <span className="inline-flex items-center gap-3 rounded-full border border-white/40 bg-black/40 px-6 py-4 text-sm font-bold backdrop-blur-md transition-transform duration-200 motion-reduce:transition-none group-hover:scale-105 motion-reduce:group-hover:scale-100">
                       <span aria-hidden="true" className="text-lg">▶</span>

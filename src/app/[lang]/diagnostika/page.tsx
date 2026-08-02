@@ -1,10 +1,12 @@
-import { Suspense } from 'react';
+import { Suspense, type FC } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import DiagnosticsClient from './diagnostics-client';
 import { getDictionary, type Locale } from '@/lib/dictionaries';
 
 // useSearchParams (?source=, UTM) Suspense chegarasini talab qiladi.
-export default async function DiagnosticsPage({ params }: { params: Promise<{ lang: string }> }) {
+type DiagnosticsPageProps = { params: Promise<{ lang: string }> };
+
+const DiagnosticsPage: FC<DiagnosticsPageProps> = async ({ params }) => {
   const { lang } = await params;
   const safeLang: Locale = ['uz', 'ru', 'en', 'zh'].includes(lang) ? (lang as Locale) : 'uz';
   const dictionary = await getDictionary(safeLang);
@@ -21,7 +23,9 @@ export default async function DiagnosticsPage({ params }: { params: Promise<{ la
         </main>
       }
     >
-      <DiagnosticsClient dictionary={dictionary.diagnostics} />
+      <DiagnosticsClient dictionary={dictionary.diagnostics} lang={safeLang} />
     </Suspense>
   );
-}
+};
+
+export default DiagnosticsPage;

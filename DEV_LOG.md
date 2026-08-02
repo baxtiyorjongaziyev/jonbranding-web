@@ -430,5 +430,5 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - Production dependency auditidagi 13 ta zaiflik yopildi; `npm audit --omit=dev` natijasi: 0.
 - `package-lock.json` `package.json` bilan qayta sinxronlandi; oldingi Vercel lockfile drift sababi bartaraf etildi.
 - `/[lang]/diagnostika` savollari, xizmat tavsiyalari, natijalari va forma UI matnlari `uz`, `ru`, `en`, `zh` lug‘atlariga ko‘chirildi.
-- Diagnostika hint matnlari endi foydalanuvchiga ko‘rinadi va 4 til lug‘at to‘liqligi uchun regressiya testi qo‘shildi.
+- Diagnostika hint matnlari endi foydalanuvchiga ko‘rinadi va to‘rt tildagi lug‘atlarning to‘liqligini tekshiruvchi regressiya testi qo‘shildi.
 - Gate: TypeScript xatosiz; ESLint xatosiz; unit testlar xatosiz; Next production build 161/161 sahifa; Playwright responsive/reduced-motion 4/4.
