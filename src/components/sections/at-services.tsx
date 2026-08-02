@@ -69,6 +69,10 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz', dictionary }) => {
   useGSAP(() => {
     if (!listRef.current) return;
     const rows = listRef.current.querySelectorAll('.service-row');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(rows, { opacity: 1, y: 0 });
+      return;
+    }
     gsap.fromTo(rows,
       { opacity: 0, y: 24 },
       {
@@ -112,10 +116,10 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz', dictionary }) => {
             type="button"
             key={s.num}
             onClick={onOpen}
-            className="service-row group block w-full border-b border-[var(--at-line)] cursor-pointer text-left hover:bg-[var(--at-paper)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--at-accent)]"
+            className="service-row group block w-full border-b border-[var(--at-line)] cursor-pointer text-left hover:bg-[var(--at-paper)] transition-[background-color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--at-accent)]"
           >
             <div
-              className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-3 px-2 py-6 transition-all duration-300 group-hover:px-3 md:grid-cols-[90px_minmax(0,1.4fr)_minmax(0,2fr)_minmax(0,.8fr)_80px] md:gap-6 md:py-8 md:group-hover:px-6"
+              className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-3 px-2 py-6 transition-[padding] duration-300 group-hover:px-3 md:grid-cols-[90px_minmax(0,1.4fr)_minmax(0,2fr)_minmax(0,.8fr)_80px] md:gap-6 md:py-8 md:group-hover:px-6 motion-reduce:transition-none"
             >
               <div
                 className="font-[family-name:var(--font-serif)] italic font-normal text-[var(--at-muted)] leading-none group-hover:text-[var(--at-accent)] transition-colors"
@@ -132,12 +136,12 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz', dictionary }) => {
               <div className="text-sm text-[var(--at-ink-2)] leading-[1.55] hidden md:block">{s.desc}</div>
               <div className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.06em] text-[var(--at-muted)] hidden md:block relative group/time">
                 <span className="border-b border-dashed border-[var(--at-muted)] cursor-help pb-0.5 transition-colors group-hover/time:text-[var(--at-accent)] group-hover/time:border-[var(--at-accent)]">{s.time}</span>
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[200px] bg-[var(--at-ink)] text-white text-[10px] normal-case tracking-normal p-2 rounded shadow-xl opacity-0 pointer-events-none group-hover/time:opacity-100 group-hover/time:-translate-y-1 transition-all duration-300 z-10">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[200px] bg-[var(--at-ink)] text-white text-[10px] normal-case tracking-normal p-2 rounded shadow-xl opacity-0 pointer-events-none group-hover/time:opacity-100 group-hover/time:-translate-y-1 transition-[opacity,transform] duration-300 z-10 motion-reduce:transition-none">
                   {timelineNote}
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-[var(--at-ink)]"></div>
                 </div>
               </div>
-              <div aria-hidden="true" className="justify-self-end w-11 h-11 rounded-full border border-[var(--at-line)] grid place-items-center text-sm group-hover:bg-[var(--at-accent)] group-hover:text-white group-hover:border-[var(--at-accent)] group-hover:-rotate-45 group-hover:scale-110 group-hover:shadow-[0_10px_20px_rgba(37,99,235,0.2)] transition-all duration-300">
+              <div aria-hidden="true" className="justify-self-end w-11 h-11 rounded-full border border-[var(--at-line)] grid place-items-center text-sm group-hover:bg-[var(--at-accent)] group-hover:text-white group-hover:border-[var(--at-accent)] group-hover:-rotate-45 group-hover:scale-110 group-hover:shadow-[0_10px_20px_rgba(37,99,235,0.2)] transition-[background-color,border-color,color,transform,box-shadow] duration-300 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100">
                 ↗
               </div>
             </div>

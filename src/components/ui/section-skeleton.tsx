@@ -12,7 +12,7 @@ interface SectionSkeletonProps {
 const SectionSkeleton: FC<SectionSkeletonProps> = ({ minHeight = 'min-h-[400px]' }) => (
   <div
     aria-hidden="true"
-    className={`w-full ${minHeight} animate-pulse bg-[#f0ede7]`}
+    className={`w-full ${minHeight} bg-[#f0ede7] motion-safe:animate-pulse`}
   />
 );
 

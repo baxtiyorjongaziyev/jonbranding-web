@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useForm, useWatch, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -139,7 +139,10 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     },
   });
 
-  const companyWebsite = form.watch('companyWebsite');
+  const companyWebsite = useWatch({
+    control: form.control,
+    name: 'companyWebsite',
+  });
 
   const formatPhoneNumber = (value: string) => {
     const numbers = value.replace(/\D/g, '');

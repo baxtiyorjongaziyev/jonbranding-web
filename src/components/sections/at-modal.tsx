@@ -236,7 +236,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
                 {telegramErr && <span id="at-modal-telegram-error" role="alert" className="text-xs" style={{ color: 'var(--at-red)' }}>{telegramErr}</span>}
               </div>
             </div>
-            <button onClick={goToStep2} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 transition-all hover:-translate-y-0.5" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>{dictionary.buttons.next} ↗</button>
+            <button onClick={goToStep2} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 transition-transform duration-200 motion-reduce:transition-none hover:-translate-y-0.5 motion-reduce:hover:translate-y-0" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>{dictionary.buttons.next} ↗</button>
             <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-4 text-sm" style={{ border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}>{dictionary.telegramLinkLabel} →</a>
             <p className="text-center text-xs" style={{ color: 'var(--at-muted)' }}>{dictionary.trustBadge}</p>
           </div>
@@ -271,7 +271,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
               </div>
             </div>
             {submitErr && <p role="alert" className="text-xs mb-3 text-center" style={{ color: 'var(--at-red)' }}>{submitErr}</p>}
-            <button type="submit" disabled={sending} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-3 transition-all hover:-translate-y-0.5 disabled:opacity-60" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>{sending ? `${dictionary.atModal.submitting}…` : `${dictionary.buttons.submit} ↗`}</button>
+            <button type="submit" disabled={sending} aria-busy={sending} className="w-full flex items-center justify-center gap-2 font-semibold rounded-full py-4 mb-3 transition-[transform,opacity] duration-200 motion-reduce:transition-none hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 disabled:opacity-60" style={{ background: 'var(--at-accent)', color: '#fff', fontSize: 15 }}>{sending ? `${dictionary.atModal.submitting}…` : `${dictionary.buttons.submit} ↗`}</button>
             <button type="button" onClick={()=>setStep(1)} className="w-full text-sm text-center py-2" style={{ color: 'var(--at-muted)' }}>← {dictionary.buttons.back}</button>
           </form>
         )}

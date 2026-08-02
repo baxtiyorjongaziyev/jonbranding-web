@@ -2377,6 +2377,30 @@
       ]
     }
   },
+  "diagnostics": {
+    "ui": { "title": "Brand diagnostics", "headline": "Is your brand ready to grow?", "intro": "Answer a few questions and identify your brand’s main growth opportunity in 2 minutes.", "introDetail": "You’ll see your current stage and what to prioritize first.", "start": "Start diagnostics", "back": "Back", "continue": "Continue", "ready": "Your result is ready", "contactIntro": "Leave a few details so we can tailor the recommendation.", "name": "Name", "company": "Company or business name", "industry": "Industry", "contact": "Phone number or Telegram username", "contactPlaceholder": "+1 202 555 0100 or @username", "consent": "I agree to receive a recommendation and be contacted", "submitting": "Sending…", "showResult": "View result", "recommendation": "Recommendation", "auditCta": "Get a free 15-minute brand review", "telegramCta": "Get the result on Telegram", "nameError": "Enter your name", "contactError": "Enter a valid phone number or Telegram username", "consentError": "Consent is required to continue", "submitError": "Something went wrong. Please try again.", "progress": "Diagnostics progress" },
+    "segments": { "yangi": "Just starting", "tarqoq": "Operating, but the brand is inconsistent", "kengayish": "Established and expanding" },
+    "services": {
+      "naming": { "label": "Brand naming", "what": "A memorable, available name for your business.", "why": "Changing the name later means redoing the logo, packaging, and campaigns." },
+      "patent": { "label": "Trademark registration", "what": "Secure legal ownership of your name in the trademark registry.", "why": "Without registration, someone else may claim the name and restrict your use." },
+      "logo": { "label": "Logo design", "what": "A mark that works from a small icon to a large billboard.", "why": "An amateur logo often fails in production and weakens perceived value." },
+      "firma-uslubi": { "label": "Visual identity", "what": "A coordinated system of colors, typography, and templates.", "why": "Without it, every asset looks different and recognition suffers." },
+      "brandbook": { "label": "Brand guidelines", "what": "Clear rules for applying the brand consistently.", "why": "The identity stays consistent when teams or designers change." },
+      "qadoq": { "label": "Packaging design", "what": "Design for product packaging and labels.", "why": "On shelf, customers see the packaging before the product." }
+    },
+    "questions": {
+      "1": { "question": "What stage is your business at?", "options": { "A": "Just starting or still at idea stage", "B": "Operating, but the brand is inconsistent", "C": "Established and ready to expand" } },
+      "2": { "question": "Do you have a business or product name?", "options": { "A": "No — we haven’t worked on it yet", "B": "Yes, but we may change it", "C": "Yes, and we plan to keep it" } },
+      "3": { "question": "Could you stop a competitor from trading under your name?", "hint": "That generally requires a registered trademark in your market.", "options": { "A": "No — we haven’t considered it", "B": "No, but we know it matters", "C": "Yes, our trademark is registered" } },
+      "4": { "question": "How was your logo created?", "options": { "A": "We don’t have one", "B": "We made it ourselves or asked a friend", "C": "A professional designer or agency created it" } },
+      "5": { "question": "Do you have documented colors and typography?", "hint": "These rules form your visual identity and brand guidelines.", "options": { "A": "No — every asset looks different", "B": "We have some files, but no single guide", "C": "Yes, our team follows brand guidelines" } },
+      "6": { "question": "Is your product sold in packaging or with a label?", "options": { "A": "Yes, but the packaging wasn’t professionally designed", "B": "No — we provide services", "C": "Yes, it was professionally designed" } },
+      "7": { "question": "When do you want to start the branding work?", "options": { "A": "No clear timeline yet", "B": "Within the next 1–3 months", "C": "Now — this month" } },
+      "8": { "question": "Who makes the final decision?", "options": { "A": "Another executive", "B": "We decide together", "C": "I make the decision" } }
+    },
+    "results": { "nurture": { "title": "Your brand has areas to improve", "description": "Here are the most important gaps to address.", "advice": "Start with the first item, then work through the rest." }, "potential": { "title": "It’s time to organize your brand", "description": "These gaps directly affect trust and differentiation.", "advice": "Address the list from top to bottom." }, "qualified": { "title": "You’re ready to begin", "description": "With a near-term timeline, one integrated project will be faster and more efficient.", "advice": "Combine the listed work into one project." } },
+    "noGaps": { "title": "Your brand foundations are in place", "description": "Your answers show no major gaps in the core brand system.", "advice": "Next, adapt the brand for a new market or product." }
+  },
   "reviewsPage": {
     "title": "Our Clients' Reviews",
     "subtitle": "Results speak for themselves. Voice and video reviews from real people about our work.",
