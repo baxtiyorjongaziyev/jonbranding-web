@@ -153,6 +153,10 @@ export default function AtProcess({ lang = 'uz', onOpen }: Props) {
   useGSAP(() => {
     if (!stepsRef.current) return;
     const steps = stepsRef.current.querySelectorAll('.process-step');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(steps, { opacity: 1, y: 0 });
+      return;
+    }
     gsap.fromTo(steps,
       { opacity: 0, y: 20 },
       {
@@ -203,8 +207,10 @@ export default function AtProcess({ lang = 'uz', onOpen }: Props) {
           {l.steps.map((s) => (
             <div key={s.n} className="process-step" style={{ borderBottom: '1px solid var(--at-line)' }}>
               <button
-                className="w-full flex items-center gap-5 py-6 text-left"
+                className="w-full flex min-h-11 items-center gap-5 py-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--at-accent)]"
                 onClick={() => setOpen(open === s.n ? null : s.n)}
+                aria-expanded={open === s.n}
+                aria-controls={`process-panel-${s.n}`}
               >
                 <span
                   className="shrink-0 font-bold"
@@ -233,8 +239,8 @@ export default function AtProcess({ lang = 'uz', onOpen }: Props) {
               </button>
 
               <div
-                className="overflow-hidden transition-all duration-300"
-                style={{ maxHeight: open === s.n ? '1000px' : '0', opacity: open === s.n ? 1 : 0 }}
+                id={`process-panel-${s.n}`}
+                hidden={open !== s.n}
               >
                 <div className="pl-[52px] pb-6 grid md:grid-cols-2 gap-5">
                   <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--at-ink-2)' }}>{s.detail}</p>

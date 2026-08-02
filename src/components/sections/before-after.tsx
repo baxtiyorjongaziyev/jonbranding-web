@@ -139,7 +139,7 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ lang, dictionary, comparisons
               return (
                 <div
                   key={card.label}
-                  className="rounded-2xl border border-neutral-800/60 bg-neutral-900/30 backdrop-blur-sm px-5 py-4 transition-all duration-300 hover:border-[var(--at-accent)]/20 hover:bg-neutral-900/50"
+                  className="rounded-2xl border border-neutral-800/60 bg-neutral-900/30 backdrop-blur-sm px-5 py-4 transition-[background-color,border-color] duration-300 hover:border-[var(--at-accent)]/20 hover:bg-neutral-900/50"
                 >
                   <div className="flex items-center gap-3">
                     <div className="h-8 w-8 rounded-lg bg-[var(--at-accent)]/10 flex items-center justify-center shrink-0">

@@ -140,7 +140,7 @@ export default function AtPricing({ onOpen, lang = 'uz' }: Props) {
 
           <button
             onClick={onOpen}
-            className="w-full font-semibold text-sm rounded-full py-4 transition-all hover:opacity-90"
+            className="w-full font-semibold text-sm rounded-full py-4 transition-opacity duration-200 hover:opacity-90"
             style={{ background: 'var(--at-accent)', color: '#fff', border: 'none' }}
           >
             {l.cta} ↗

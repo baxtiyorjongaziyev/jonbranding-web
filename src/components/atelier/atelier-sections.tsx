@@ -2036,7 +2036,7 @@ export const ATQuotes: FC<ATQuotesProps> = ({
                     alt={t.name}
                     fill
                     quality={85}
-                    className="object-cover opacity-80 group-hover:scale-105 transition-all duration-700"
+                    className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-300 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     sizes="50vw"
                   />
                 ) : (

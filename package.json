@@ -87,7 +87,7 @@
     "react-hook-form": "^7.52.1",
     "recharts": "^2.12.7",
     "sanity": "^6.4.0",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.3",
     "styled-components": "^6.4.2",
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7",
@@ -134,18 +134,21 @@
     ]
   },
   "overrides": {
+    "adm-zip": "0.6.0",
     "@vercel/frameworks": {
       "js-yaml": "3.15.0",
       "smol-toml": "1.6.1"
     },
     "esbuild": "^0.28.1",
     "postcss": "$postcss",
-    "protobufjs": "^7.6.3",
+    "sharp": "$sharp",
+    "protobufjs": "^7.6.5",
     "tmp": "^0.2.7",
     "undici": "^7.28.0",
     "uuid": "^11.1.1",
     "ws": "^8.21.0",
     "json-2-csv": "5.5.11",
-    "smol-toml": ">=1.6.1"
+    "smol-toml": ">=1.6.1",
+    "valibot": "1.4.2"
   }
 }

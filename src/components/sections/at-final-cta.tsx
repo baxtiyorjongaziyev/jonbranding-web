@@ -73,7 +73,7 @@ export default function AtFinalCta({ onOpen, lang = 'uz' }: Props) {
           <strong style={{ color: 'var(--at-bg)' }}>{l.bodyStrong}</strong>
         </p>
         <div className="flex flex-wrap gap-4 justify-center mb-14">
-          <button onClick={onOpen} className="inline-flex items-center gap-2 font-semibold rounded-full transition-all duration-200 hover:-translate-y-0.5" style={{ padding: '17px 28px', fontSize: 16, background: 'var(--at-accent)', color: '#fff', boxShadow: '0 18px 40px -10px rgba(27,77,255,0.45)' }}>
+          <button onClick={onOpen} className="inline-flex items-center gap-2 font-semibold rounded-full transition-transform duration-200 motion-reduce:transition-none hover:-translate-y-0.5 motion-reduce:hover:translate-y-0" style={{ padding: '17px 28px', fontSize: 16, background: 'var(--at-accent)', color: '#fff', boxShadow: '0 18px 40px -10px rgba(27,77,255,0.45)' }}>
             {l.cta}
           </button>
           <a href="mailto:salom@jonbranding.uz" className="inline-flex items-center gap-2 font-semibold rounded-full" style={{ padding: '17px 28px', fontSize: 16, color: 'var(--at-bg)', border: '1px solid rgba(244,241,232,.25)' }}>
