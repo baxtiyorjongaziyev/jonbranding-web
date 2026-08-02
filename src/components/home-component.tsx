@@ -2,7 +2,7 @@
 import type { FC } from 'react';
 import dynamic from 'next/dynamic';
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
-import { useScroll, useMotionValueEvent } from 'framer-motion';
+import { MotionConfig, useScroll, useMotionValueEvent } from 'framer-motion';
 
 // ── Above-the-fold: SSR, no lazy-load ────────────────────────────────────────
 import AtHero from '@/components/sections/at-hero';
@@ -17,47 +17,47 @@ import SectionSkeleton from '@/components/ui/section-skeleton';
 // ── Below-the-fold: lazy-loaded to reduce initial JS bundle ──────────────────
 const ATGallery = dynamic(
   () => import('@/components/atelier/atelier-sections').then((m) => m.ATGallery),
-  { loading: () => <SectionSkeleton minHeight="min-h-[500px]" />, ssr: false }
+  { loading: () => <SectionSkeleton minHeight="min-h-[500px]" /> }
 );
 
 const BeforeAfter = dynamic(
   () => import('@/components/sections/before-after'),
-  { loading: () => <SectionSkeleton minHeight="min-h-[500px]" />, ssr: false }
+  { loading: () => <SectionSkeleton minHeight="min-h-[500px]" /> }
 );
 
 const ATQuotes = dynamic(
   () => import('@/components/atelier/atelier-sections').then((m) => m.ATQuotes),
-  { loading: () => <SectionSkeleton minHeight="min-h-[400px]" />, ssr: false }
+  { loading: () => <SectionSkeleton minHeight="min-h-[400px]" /> }
 );
 
 const ProcessVideo = dynamic(
   () => import('@/components/sections/process-video'),
-  { loading: () => <SectionSkeleton minHeight="min-h-[560px]" />, ssr: false }
+  { loading: () => <SectionSkeleton minHeight="min-h-[560px]" /> }
 );
 
 const AtProcess = dynamic(
   () => import('@/components/sections/at-process'),
-  { loading: () => <SectionSkeleton minHeight="min-h-[600px]" />, ssr: false }
+  { loading: () => <SectionSkeleton minHeight="min-h-[600px]" /> }
 );
 
 const Founder = dynamic(
   () => import('@/components/sections/founder'),
-  { loading: () => <SectionSkeleton minHeight="min-h-[400px]" />, ssr: false }
+  { loading: () => <SectionSkeleton minHeight="min-h-[400px]" /> }
 );
 
 const AtPricing = dynamic(
   () => import('@/components/sections/at-pricing'),
-  { loading: () => <SectionSkeleton minHeight="min-h-[400px]" />, ssr: false }
+  { loading: () => <SectionSkeleton minHeight="min-h-[400px]" /> }
 );
 
 const AtFaq = dynamic(
   () => import('@/components/sections/at-faq'),
-  { loading: () => <SectionSkeleton minHeight="min-h-[400px]" />, ssr: false }
+  { loading: () => <SectionSkeleton minHeight="min-h-[400px]" /> }
 );
 
 const AtFinalCta = dynamic(
   () => import('@/components/sections/at-final-cta'),
-  { loading: () => <SectionSkeleton minHeight="min-h-[200px]" />, ssr: false }
+  { loading: () => <SectionSkeleton minHeight="min-h-[200px]" /> }
 );
 
 // ── Non-visual / utility: lazy but still ssr:false ───────────────────────────
@@ -129,15 +129,16 @@ const HomeComponent: FC<{
   }, []);
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        background: 'var(--at-bg)',
-        color: 'var(--at-ink)',
-        fontFamily: 'var(--font-hanken, "Hanken Grotesk", sans-serif)',
-        WebkitFontSmoothing: 'antialiased',
-      }}
-    >
+    <MotionConfig reducedMotion="user">
+      <div
+        className="min-h-screen"
+        style={{
+          background: 'var(--at-bg)',
+          color: 'var(--at-ink)',
+          fontFamily: 'var(--font-hanken, "Hanken Grotesk", sans-serif)',
+          WebkitFontSmoothing: 'antialiased',
+        }}
+      >
       {/* ── Above-the-fold (SSR) ─── */}
       <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} />
       <AtMarquee lang={lang} />
@@ -164,7 +165,8 @@ const HomeComponent: FC<{
       <AtStickyCta onOpen={open} lang={lang} />
       <ExitIntentPopup onOpen={open} lang={lang} />
       <ScrollDepthAnalytics />
-    </div>
+      </div>
+    </MotionConfig>
   );
 };
 

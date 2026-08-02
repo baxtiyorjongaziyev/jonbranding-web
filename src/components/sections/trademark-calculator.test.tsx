@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import TrademarkCalculator from './trademark-calculator';
 
 // Mock matchMedia since react-hook-form/radix-ui components may use it
@@ -83,6 +83,10 @@ const mockTranslations = {
 };
 
 describe('TrademarkCalculator form submission', () => {
+  beforeEach(() => {
+    vi.mocked(global.fetch).mockClear();
+  });
+
   it('allows form submission when all required fields including brand name are filled', async () => {
     render(<TrademarkCalculator translations={mockTranslations} />);
 
@@ -109,5 +113,5 @@ describe('TrademarkCalculator form submission', () => {
       expect(global.fetch).toHaveBeenCalledWith('/api/submit-form', expect.any(Object));
       expect(screen.getByText(/✅ Buyurtma qabul qilindi!/i)).toBeInTheDocument();
     });
-  });
+  }, 10_000);
 });

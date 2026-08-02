@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useScroll, useMotionValueEvent } from 'framer-motion';
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
@@ -43,16 +43,15 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
   const [stage, setStage] = useState<Stage>('belgilar');
   const variants = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
   const { scrollY } = useScroll();
+  const sectionOffsetsRef = useRef<Array<{ id: Stage; top: number }>>([]);
 
   const handleScroll = useCallback((y: number) => {
     if (typeof window === 'undefined') return;
     const h = window.innerHeight;
     setShow(y > h * 0.6);
-    const sections: Stage[] = ['belgilar', 'tashxis', 'narxlar', 'jarayon', 'savol'];
     let active: Stage = 'belgilar';
-    for (const id of sections) {
-      const el = document.getElementById(id);
-      if (el && y + 200 >= el.offsetTop) active = id;
+    for (const section of sectionOffsetsRef.current) {
+      if (y + 200 >= section.top) active = section.id;
     }
     setStage(active);
   }, []);
@@ -60,19 +59,36 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
   useMotionValueEvent(scrollY, "change", handleScroll);
 
   useEffect(() => {
+    const updateOffsets = () => {
+      const sections: Array<{ id: string; stage: Stage }> = [
+        { id: 'belgilar', stage: 'belgilar' },
+        { id: 'tashxis', stage: 'tashxis' },
+        { id: 'narxlar', stage: 'narxlar' },
+        { id: 'process', stage: 'jarayon' },
+        { id: 'savol', stage: 'savol' },
+      ];
+      sectionOffsetsRef.current = sections.flatMap(({ id, stage }) => {
+        const element = document.getElementById(id);
+        return element ? [{ id: stage, top: element.offsetTop }] : [];
+      });
+    };
+
+    updateOffsets();
     handleScroll(window.scrollY);
+    window.addEventListener('resize', updateOffsets, { passive: true });
+    return () => window.removeEventListener('resize', updateOffsets);
   }, [handleScroll]);
 
   const v = variants[stage];
 
   return (
-    <div className="fixed bottom-4 left-1/2 z-40 transition-all duration-300" style={{ transform: `translateX(-50%) translateY(${show ? '0' : '80px'})`, opacity: show ? 1 : 0, pointerEvents: show ? 'auto' : 'none' }}>
+    <div aria-hidden={!show} inert={!show ? true : undefined} className="fixed bottom-[calc(env(safe-area-inset-bottom)+1rem)] left-1/2 z-40 transition-[transform,opacity] duration-300 motion-reduce:transition-none" style={{ transform: `translateX(-50%) translateY(${show ? '0' : '80px'})`, opacity: show ? 1 : 0, pointerEvents: show ? 'auto' : 'none' }}>
       <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3 rounded-full shadow-2xl max-w-[90vw] sm:max-w-none" style={{ background: 'var(--at-ink)', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 50px -10px rgba(14,16,21,0.5)' }}>
         <span className="text-xs font-semibold shrink-0" style={{ fontFamily: 'var(--font-mono)', color: 'var(--at-accent)', letterSpacing: '0.06em' }}>{v.num}</span>
         <span className="text-[11px] sm:text-sm line-clamp-1 truncate flex-1 min-w-[100px]" style={{ color: 'rgba(244,241,232,.7)' }}>{v.text}</span>
-        <button onClick={onOpen} className="relative overflow-hidden font-semibold text-xs sm:text-sm rounded-full px-4 py-2 transition-all hover:opacity-90 group shrink-0" style={{ background: 'var(--at-accent)', color: '#fff', whiteSpace: 'nowrap' }}>
+        <button onClick={onOpen} tabIndex={show ? 0 : -1} className="relative min-h-11 overflow-hidden font-semibold text-xs sm:text-sm rounded-full px-4 py-2 transition-opacity duration-200 hover:opacity-90 group shrink-0" style={{ background: 'var(--at-accent)', color: '#fff', whiteSpace: 'nowrap' }}>
           <span className="relative z-10">{v.cta}</span>
-          <span className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ background: 'var(--at-accent)' }}></span>
+          <span aria-hidden="true" className="absolute inset-0 rounded-full motion-safe:animate-ping opacity-20" style={{ background: 'var(--at-accent)' }}></span>
         </button>
       </div>
     </div>

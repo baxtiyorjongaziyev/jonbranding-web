@@ -2391,6 +2391,36 @@
       "desc": "Mutaxassisimiz tez orada siz bilan bog'lanib, brendingiz strategiyasini muhokama qiladi."
     }
   },
+  "diagnostics": {
+    "ui": {
+      "title": "Brend diagnostikasi", "headline": "Biznesingiz brendi o‘sishga tayyormi?", "intro": "Bir necha savolga javob bering va 2 daqiqada brendingizdagi asosiy o‘sish nuqtasini aniqlang.", "introDetail": "Natijada biznesingizning hozirgi bosqichi va birinchi navbatda nimalarga e’tibor berishingiz kerakligini bilib olasiz.", "start": "Diagnostikani boshlash", "back": "Orqaga", "continue": "Davom etish", "ready": "Natijangiz tayyor", "contactIntro": "Tavsiyani sizga moslashtirish uchun bir necha ma’lumot qoldiring.", "name": "Ism", "company": "Kompaniya yoki biznes nomi", "industry": "Faoliyat sohasi", "contact": "Telefon raqami yoki Telegram username", "contactPlaceholder": "+998 90 123 45 67 yoki @username", "consent": "Javoblarim asosida tavsiya olishga va men bilan bog‘lanishlariga roziman", "submitting": "Yuborilmoqda…", "showResult": "Natijani ko‘rish", "recommendation": "Tavsiya", "auditCta": "15 daqiqalik bepul brend tahlilini olish", "telegramCta": "Natijani Telegram orqali olish", "nameError": "Ismingizni kiriting", "contactError": "Telefon raqami yoki Telegram username kiriting", "consentError": "Davom etish uchun rozilik kerak", "submitError": "Yuborishda xatolik yuz berdi. Yana bir bor urinib ko‘ring.", "progress": "Diagnostika jarayoni"
+    },
+    "segments": { "yangi": "Endi boshlayapman", "tarqoq": "Ishlayapti, lekin brend tarqoq", "kengayish": "Barqaror biznes, kengaymoqda" },
+    "services": {
+      "naming": { "label": "Nom ishlab chiqish", "what": "Biznesingiz uchun eslab qolinadigan va band bo‘lmagan nom tanlash.", "why": "Nom keyinchalik o‘zgarsa, logotip, qadoq va reklama — hammasi qaytadan qilinadi." },
+      "patent": { "label": "Tovar belgisini ro‘yxatdan o‘tkazish", "what": "Nomingizni davlat reyestrida o‘z nomingizga rasman biriktirish.", "why": "Ro‘yxatdan o‘tmagan nomni boshqa birov egallab, undan foydalanishingizni to‘xtatishi mumkin." },
+      "logo": { "label": "Logotip dizayni", "what": "Kichik hajmda ham, katta bannerda ham bir xil ishlaydigan belgi.", "why": "Noprofessional logotip ko‘pincha bosmaga yaramaydi va kompaniyani arzon ko‘rsatadi." },
+      "firma-uslubi": { "label": "Firma uslubi", "what": "Ranglar, shriftlar va tayyor shablonlar to‘plami.", "why": "Busiz har bir material boshqacha chiqadi va mijoz sizni ko‘rib tanimaydi." },
+      "brandbook": { "label": "Brendbuk", "what": "Brendni qanday ishlatishni tushuntiruvchi hujjat.", "why": "Xodim yoki dizayner almashganda brend ko‘rinishi buzilmaydi." },
+      "qadoq": { "label": "Qadoq dizayni", "what": "Mahsulot qadog‘i va yorlig‘ining dizayni.", "why": "Do‘kon javonida mijoz avval qadoqni, keyin mahsulotni ko‘radi." }
+    },
+    "questions": {
+      "1": { "question": "Biznesingiz hozir qaysi bosqichda?", "options": { "A": "Endi boshlayapman yoki g‘oya bosqichidaman", "B": "Ishlayapti, lekin brendim tarqoq", "C": "Barqaror biznes, kengaymoqchiman" } },
+      "2": { "question": "Biznesingiz yoki mahsulotingiz nomi bormi?", "options": { "A": "Yo‘q — nom ustida hali ishlamaganmiz", "B": "Bor, lekin o‘zgartirmoqchimiz", "C": "Bor va o‘zgartirmoqchi emasmiz" } },
+      "3": { "question": "Raqobatchingiz ertaga sizning nomingiz bilan sotsa, uni to‘xtata olasizmi?", "hint": "Buning uchun odatda bozoringizda ro‘yxatdan o‘tgan tovar belgisi kerak bo‘ladi.", "options": { "A": "Yo‘q — bu haqda o‘ylamaganmiz", "B": "Yo‘q, lekin kerakligini bilamiz", "C": "Ha, guvohnomamiz bor" } },
+      "4": { "question": "Logotipingiz qanday tayyorlangan?", "options": { "A": "Logotipimiz yo‘q", "B": "O‘zimiz yoki tanishimiz qilib bergan", "C": "Professional dizayner yoki agentlik tayyorlagan" } },
+      "5": { "question": "Ranglar va shriftlar yozilgan hujjatingiz bormi?", "hint": "Bunday hujjat firma uslubi va brendbuk deb ataladi.", "options": { "A": "Yo‘q — har safar boshqacha chiqadi", "B": "Ba’zi fayllar bor, lekin yagona hujjat emas", "C": "Brendbukimiz bor, hamma shunga amal qiladi" } },
+      "6": { "question": "Mahsulotingiz qadoq yoki yorliqda sotiladimi?", "options": { "A": "Ha, lekin qadoq dizayni ishlanmagan", "B": "Yo‘q — biz xizmat ko‘rsatamiz", "C": "Ha, qadoq professional tayyorlangan" } },
+      "7": { "question": "Brending bo‘yicha ishni qachon boshlamoqchisiz?", "options": { "A": "Hozircha aniq reja yo‘q", "B": "Yaqin 1–3 oy ichida", "C": "Hoziroq — shu oyda boshlaymiz" } },
+      "8": { "question": "Yakuniy qarorni kim qabul qiladi?", "options": { "A": "Boshqa rahbar", "B": "Birgalikda qaror qilamiz", "C": "Men qaror qabul qilaman" } }
+    },
+    "results": {
+      "nurture": { "title": "Brendingizda tuzatiladigan joylar bor", "description": "Quyida biznesingizda hozir yetishmayotgan narsalar ro‘yxati.", "advice": "Birinchi bandni hal qiling, qolganini bosqichma-bosqich qiling." },
+      "potential": { "title": "Brendingizni tartibga solish vaqti keldi", "description": "Bu kamchiliklar mijoz ishonchi va raqobatdan ajralishga ta’sir qiladi.", "advice": "Ro‘yxatni yuqoridan pastga qarab bosqichma-bosqich yoping." },
+      "qualified": { "title": "Ishni boshlash uchun hammasi tayyor", "description": "Muddatingiz yaqin: ishlarni bitta loyiha sifatida qilish tezroq va tejamli.", "advice": "Ro‘yxatdagi ishlarni bitta loyihaga birlashtiring." }
+    },
+    "noGaps": { "title": "Brendingiz asosiy elementlari joyida", "description": "Javoblaringizga ko‘ra jiddiy bo‘shliq ko‘rinmadi.", "advice": "Keyingi qadam — brendni yangi bozor yoki mahsulotga moslashtirish." }
+  },
   "reviewsPage": {
     "title": "Mijozlarimiz sharhlari",
     "subtitle": "Natijalar o'zi gapiradi. Ishimiz haqida real insonlarning ovozli va video fikrlari.",

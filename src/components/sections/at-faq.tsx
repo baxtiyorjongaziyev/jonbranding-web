@@ -92,12 +92,20 @@ export default function AtFaq({ lang = 'uz', onOpen }: Props) {
           <div className="flex flex-col" style={{ borderTop: '1px solid var(--at-line)' }}>
             {l.faqs.map((f, i) => (
               <div key={i} style={{ borderBottom: i < l.faqs.length - 1 ? '1px solid var(--at-line)' : 'none' }}>
-                <button className="w-full flex items-start gap-4 py-5 text-left" onClick={() => setOpen(open === i ? -1 : i)}>
+                <button
+                  className="w-full flex min-h-11 items-start gap-4 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--at-accent)]"
+                  onClick={() => setOpen(open === i ? -1 : i)}
+                  aria-expanded={open === i}
+                  aria-controls={`faq-panel-${i}`}
+                >
                   <span className="shrink-0 w-7 text-sm" style={{ fontFamily: 'var(--font-mono)', color: 'var(--at-muted)' }}>{String(i + 1).padStart(2, '0')}</span>
                   <h3 className="flex-1 font-semibold text-base" style={{ color: 'var(--at-ink)' }}>{f.q}</h3>
-                  <span className="shrink-0 text-xl leading-none transition-transform duration-200" style={{ color: 'var(--at-muted)', transform: open === i ? 'rotate(45deg)' : 'none' }}>+</span>
+                  <span aria-hidden="true" className="shrink-0 text-xl leading-none transition-transform duration-200 motion-reduce:transition-none" style={{ color: 'var(--at-muted)', transform: open === i ? 'rotate(45deg)' : 'none' }}>+</span>
                 </button>
-                <div className="overflow-hidden transition-all duration-300" style={{ maxHeight: open === i ? '400px' : '0', opacity: open === i ? 1 : 0 }}>
+                <div
+                  id={`faq-panel-${i}`}
+                  hidden={open !== i}
+                >
                   <p className="pl-11 pb-5 text-sm leading-relaxed" style={{ color: 'var(--at-ink-2)' }}>{f.a}</p>
                 </div>
               </div>

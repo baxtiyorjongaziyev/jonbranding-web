@@ -2,7 +2,7 @@
 
 import { FC, FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { ArrowLeft, ArrowRight, CheckCircle2, Loader2, Send, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,15 +15,12 @@ import { HoneypotField } from '@/components/ui/honeypot-field';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import {
   createEmptyAnswerSheet,
-  DIAGNOSTIC_RESULTS,
   indexOfQuestion,
   isAnswerSheetComplete,
-  NO_GAPS_RESULT,
   resolveSegment,
   resolveSource,
   resolveUtmParams,
   scoreDiagnostic,
-  SERVICES,
   visibleQuestions,
   type AnswerSheet,
   type OptionKey,
@@ -36,6 +33,14 @@ import {
 } from '@/lib/lead-contact';
 
 const TELEGRAM_URL = 'https://t.me/jonbranding';
+
+type DiagnosticsDictionary = {
+  ui: Record<string, string>;
+  services: Record<string, { label: string; what: string; why: string }>;
+  questions: Record<string, { question: string; hint?: string; options: Record<OptionKey, string> }>;
+  results: Record<string, { title: string; description: string; advice: string }>;
+  noGaps: { title: string; description: string; advice: string };
+};
 
 type Stage = 'intro' | 'questions' | 'contact' | 'result';
 
@@ -62,9 +67,7 @@ function isContactValid(value: string) {
   return isValidPhone(normalizePhone(value)) || isValidTelegramUsername(normalizeTelegramUsername(value));
 }
 
-const DiagnosticsClient: FC = () => {
-  const params = useParams();
-  const lang = (params?.lang as string) || 'uz';
+const DiagnosticsClient: FC<{ dictionary: DiagnosticsDictionary; lang: string }> = ({ dictionary, lang }) => {
   const searchParams = useSearchParams();
 
   const [stage, setStage] = useState<Stage>('intro');
@@ -84,9 +87,7 @@ const DiagnosticsClient: FC = () => {
 
   const scoring = useMemo(() => scoreDiagnostic(answers), [answers]);
   // Bo'shliq topilmasa ro'yxat bo'sh qoladi, shuning uchun alohida matn kerak.
-  const result = scoring.gaps.length
-    ? DIAGNOSTIC_RESULTS[scoring.resultCategory]
-    : NO_GAPS_RESULT;
+  const result = scoring.gaps.length ? dictionary.results[scoring.resultCategory] : dictionary.noGaps;
 
   /**
    * Ko'rsatiladigan savollar bosqichga bog'liq. Birinchi savolga javob
@@ -99,7 +100,18 @@ const DiagnosticsClient: FC = () => {
    * bo'lishi mumkin — qadam chegaradan chiqib ketmasligi uchun qisqartiramiz.
    */
   const safeStep = Math.min(step, Math.max(visible.length - 1, 0));
-  const currentQuestion = visible[safeStep];
+  const baseQuestion = visible[safeStep];
+  const currentQuestion = useMemo(() => {
+    if (!baseQuestion) return undefined;
+    const copy = dictionary.questions[String(baseQuestion.id)];
+    if (!copy) return baseQuestion;
+    return {
+      ...baseQuestion,
+      question: copy.question,
+      hint: copy.hint,
+      options: baseQuestion.options.map((option) => ({ ...option, text: copy.options[option.key] })),
+    };
+  }, [baseQuestion, dictionary]);
 
   useEffect(() => {
     if (openedTracked.current) return;
@@ -170,11 +182,11 @@ const DiagnosticsClient: FC = () => {
 
   const validateForm = () => {
     const nextErrors: Partial<Record<keyof ContactForm, string>> = {};
-    if (form.fullName.trim().length < 2) nextErrors.fullName = 'Ismingizni kiriting';
+    if (form.fullName.trim().length < 2) nextErrors.fullName = dictionary.ui.nameError;
     if (!isContactValid(form.contact)) {
-      nextErrors.contact = "Telefon raqami (+998 90 123 45 67) yoki Telegram username (@username) kiriting";
+      nextErrors.contact = dictionary.ui.contactError;
     }
-    if (!form.consent) nextErrors.consent = 'Davom etish uchun rozilik kerak';
+    if (!form.consent) nextErrors.consent = dictionary.ui.consentError;
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   };
@@ -243,9 +255,9 @@ const DiagnosticsClient: FC = () => {
       // Server xabarlari o'zbekcha va foydalanuvchiga mo'ljallangan (masalan
       // rate-limit yoki validatsiya). Network xatosida umumiy matn qoladi.
       setSubmitError(
-        error instanceof Error && error.message && !/^HTTP \d+$/.test(error.message)
+        lang === 'uz' && error instanceof Error && error.message && !/^HTTP \d+$/.test(error.message)
           ? error.message
-          : "Yuborishda xatolik yuz berdi. Yana bir bor urinib ko'ring."
+          : dictionary.ui.submitError
       );
       console.error('Diagnostic submit failed:', error);
     } finally {
@@ -277,24 +289,23 @@ const DiagnosticsClient: FC = () => {
             <Card className="mx-auto max-w-2xl rounded-3xl p-6 text-center shadow-2xl sm:p-10">
               <span className="mx-auto inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
-                Brend diagnostikasi
+                {dictionary.ui.title}
               </span>
               <h1 className="mt-5 text-3xl font-extrabold text-dark-blue sm:text-4xl">
-                Biznesingiz brendi o‘sishga tayyormi?
+                {dictionary.ui.headline}
               </h1>
               <p className="mx-auto mt-4 max-w-xl text-lg text-gray-700">
-                Bir necha savolga javob bering va 2 daqiqada brendingizdagi asosiy o’sish nuqtasini aniqlang.
+                {dictionary.ui.intro}
               </p>
               <p className="mx-auto mt-3 max-w-xl text-base text-gray-600">
-                Natijada biznesingizning hozirgi bosqichi va birinchi navbatda nimalarga e’tibor berishingiz
-                kerakligini bilib olasiz.
+                {dictionary.ui.introDetail}
               </p>
               <Button
                 size="lg"
                 onClick={handleStart}
                 className="mt-8 h-14 w-full rounded-full text-base font-bold sm:w-auto"
               >
-                Diagnostikani boshlash
+                {dictionary.ui.start}
                 <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
               </Button>
             </Card>
@@ -306,7 +317,7 @@ const DiagnosticsClient: FC = () => {
                 <Progress
                   value={progressValue}
                   className="h-2"
-                  aria-label={`Diagnostika jarayoni: ${safeStep + 1} / ${totalVisible}`}
+                  aria-label={`${dictionary.ui.progress}: ${safeStep + 1} / ${totalVisible}`}
                 />
                 <CardDescription className="!mt-4 font-semibold text-primary">
                   {safeStep + 1}/{totalVisible}
@@ -318,6 +329,9 @@ const DiagnosticsClient: FC = () => {
                 >
                   {currentQuestion.question}
                 </CardTitle>
+                {currentQuestion.hint && (
+                  <CardDescription className="!mt-2 text-base">{currentQuestion.hint}</CardDescription>
+                )}
               </CardHeader>
               <CardContent className="p-5 pt-0 sm:p-8 sm:pt-0">
                 <RadioGroup
@@ -347,7 +361,7 @@ const DiagnosticsClient: FC = () => {
                     className="h-12 rounded-full text-base"
                   >
                     <ArrowLeft className="mr-2 h-5 w-5" aria-hidden="true" />
-                    Orqaga
+                    {dictionary.ui.back}
                   </Button>
                   <Button
                     type="button"
@@ -356,7 +370,7 @@ const DiagnosticsClient: FC = () => {
                     disabled={!answers[indexOfQuestion(currentQuestion.id)]}
                     className="h-12 rounded-full text-base font-bold"
                   >
-                    Davom etish
+                    {dictionary.ui.continue}
                     <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
                   </Button>
                 </div>
@@ -367,16 +381,16 @@ const DiagnosticsClient: FC = () => {
           {stage === 'contact' && (
             <Card className="mx-auto max-w-2xl rounded-3xl shadow-2xl">
               <CardHeader className="p-5 sm:p-8">
-                <Progress value={100} className="h-2" aria-label="Diagnostika jarayoni: yakuniy bosqich" />
+                <Progress value={100} className="h-2" aria-label={`${dictionary.ui.progress}: 100%`} />
                 <CardTitle
                   ref={headingRef}
                   tabIndex={-1}
                   className="!mt-4 text-2xl font-bold text-dark-blue outline-none sm:text-3xl"
                 >
-                  Natijangiz tayyor
+                  {dictionary.ui.ready}
                 </CardTitle>
                 <CardDescription className="!mt-2 text-base">
-                  Tavsiyani sizga moslashtirish uchun bir necha ma’lumot qoldiring.
+                  {dictionary.ui.contactIntro}
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-5 pt-0 sm:p-8 sm:pt-0">
@@ -386,7 +400,7 @@ const DiagnosticsClient: FC = () => {
                     onChange={(value) => setForm((prev) => ({ ...prev, companyWebsite: value }))}
                   />
                   <div className="space-y-2">
-                    <Label htmlFor="diagnostic-name">Ism *</Label>
+                    <Label htmlFor="diagnostic-name">{dictionary.ui.name} *</Label>
                     <Input
                       id="diagnostic-name"
                       value={form.fullName}
@@ -405,7 +419,7 @@ const DiagnosticsClient: FC = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="diagnostic-company">Kompaniya yoki biznes nomi</Label>
+                    <Label htmlFor="diagnostic-company">{dictionary.ui.company}</Label>
                     <Input
                       id="diagnostic-company"
                       value={form.companyName}
@@ -416,7 +430,7 @@ const DiagnosticsClient: FC = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="diagnostic-industry">Faoliyat sohasi</Label>
+                    <Label htmlFor="diagnostic-industry">{dictionary.ui.industry}</Label>
                     <Input
                       id="diagnostic-industry"
                       value={form.industry}
@@ -426,12 +440,12 @@ const DiagnosticsClient: FC = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="diagnostic-contact">Telefon raqami yoki Telegram username *</Label>
+                    <Label htmlFor="diagnostic-contact">{dictionary.ui.contact} *</Label>
                     <Input
                       id="diagnostic-contact"
                       value={form.contact}
                       onChange={(inputEvent) => setForm((prev) => ({ ...prev, contact: inputEvent.target.value }))}
-                      placeholder="+998 90 123 45 67 yoki @username"
+                      placeholder={dictionary.ui.contactPlaceholder}
                       autoComplete="tel"
                       required
                       aria-invalid={Boolean(errors.contact)}
@@ -456,7 +470,7 @@ const DiagnosticsClient: FC = () => {
                         className="mt-0.5 h-5 w-5"
                       />
                       <Label htmlFor="diagnostic-consent" className="cursor-pointer text-sm font-normal leading-relaxed">
-                        Javoblarim asosida tavsiya olishga va men bilan bog‘lanishlariga roziman *
+                        {dictionary.ui.consent} *
                       </Label>
                     </div>
                     {errors.consent && (
@@ -482,7 +496,7 @@ const DiagnosticsClient: FC = () => {
                       className="h-12 rounded-full text-base"
                     >
                       <ArrowLeft className="mr-2 h-5 w-5" aria-hidden="true" />
-                      Orqaga
+                      {dictionary.ui.back}
                     </Button>
                     <Button
                       type="submit"
@@ -493,11 +507,11 @@ const DiagnosticsClient: FC = () => {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" aria-hidden="true" />
-                          Yuborilmoqda…
+                          {dictionary.ui.submitting}
                         </>
                       ) : (
                         <>
-                          Natijani ko‘rish
+                          {dictionary.ui.showResult}
                           <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
                         </>
                       )}
@@ -531,9 +545,9 @@ const DiagnosticsClient: FC = () => {
                         {index + 1}
                       </span>
                       <div>
-                        <h3 className="text-lg font-bold text-dark-blue">{SERVICES[gap].label}</h3>
-                        <p className="mt-1 text-base text-gray-700">{SERVICES[gap].what}</p>
-                        <p className="mt-2 text-sm text-gray-600">{SERVICES[gap].why}</p>
+                        <h3 className="text-lg font-bold text-dark-blue">{dictionary.services[gap].label}</h3>
+                        <p className="mt-1 text-base text-gray-700">{dictionary.services[gap].what}</p>
+                        <p className="mt-2 text-sm text-gray-600">{dictionary.services[gap].why}</p>
                       </div>
                     </li>
                   ))}
@@ -541,7 +555,7 @@ const DiagnosticsClient: FC = () => {
               )}
 
               <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-5">
-                <h2 className="text-sm font-bold uppercase tracking-wide text-primary">Tavsiya</h2>
+                <h2 className="text-sm font-bold uppercase tracking-wide text-primary">{dictionary.ui.recommendation}</h2>
                 <p className="mt-2 text-base text-gray-800">{result.advice}</p>
               </div>
 
@@ -552,7 +566,7 @@ const DiagnosticsClient: FC = () => {
                   onClick={() => handleCtaClick('free_brand_audit')}
                   className="h-14 rounded-full text-base font-bold"
                 >
-                  <Link href={`/${lang}/aloqa`}>15 daqiqalik bepul brend tahlilini olish</Link>
+                  <Link href={`/${lang}/aloqa`}>{dictionary.ui.auditCta}</Link>
                 </Button>
                 <Button
                   asChild
@@ -563,7 +577,7 @@ const DiagnosticsClient: FC = () => {
                 >
                   <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
                     <Send className="mr-2 h-5 w-5" aria-hidden="true" />
-                    Natijani Telegram orqali olish
+                    {dictionary.ui.telegramCta}
                   </a>
                 </Button>
               </div>

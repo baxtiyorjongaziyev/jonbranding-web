@@ -410,3 +410,25 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - **Paketlarni maxsus tortish:** "logoPremium" (Logo va Firma uslubi) 2 ta xizmat, "logoVIP" (Logo, Firma uslubi, Brandbook) 3 ta xizmat deb baholanadigan mantiq kiritildi.
 - **Sizning paketingiz (Cart) oynasi qulaylashtirildi:** Foydalanuvchi endi tanlangan xizmatlarni bevosita xulosa oynasidan turib X tugmasi bilan olib tashlashi mumkin. Shuningdek, qo'shimcha xizmat tanlash uchun tepaga qaytaruvchi "Boshqa xizmat qo'shish" tugmasi qo'shildi.
 - Kod src/lib/pricing.ts va src/components/sections/package-builder.tsx da yangilandi.
+
+---
+
+## 2026-07-31 | Homepage audit fixlari production uchun ajratildi
+
+- 9 ta vizual below-the-fold section SSR-safe qilindi; utility overlaylar client-only qoldi.
+- Reduced-motion, global focus-visible, FAQ/process accordion ARIA holatlari va 44px touch targetlar tuzatildi.
+- Active homepage `transition-all` ishlatishlari aniq property transitionlariga almashtirildi.
+- Sticky CTA scroll paytidagi layout readlari cache qilindi va safe-area positioning qo'shildi.
+- Contact modal `form.watch()` o'rniga `useWatch()` ishlatadi.
+- Trademark calculator testi parallel suite uchun barqarorlashtirildi.
+- Desktop/tablet/mobile full-scroll, overflow va reduced-motion Playwright regressiya testi qo'shildi.
+
+**Production gate:** `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`, Chromium responsive E2E va `git diff --check`.
+## 2026-08-02 | Production audit, security va diagnostika i18n
+
+- Homepage audit tuzatishlari alohida release branchga ajratildi: responsive, reduced-motion, fokus, ARIA va scroll ishlashi yaxshilandi.
+- Production dependency auditidagi 13 ta zaiflik yopildi; `npm audit --omit=dev` natijasi: 0.
+- `package-lock.json` `package.json` bilan qayta sinxronlandi; oldingi Vercel lockfile drift sababi bartaraf etildi.
+- `/[lang]/diagnostika` savollari, xizmat tavsiyalari, natijalari va forma UI matnlari `uz`, `ru`, `en`, `zh` lug‘atlariga ko‘chirildi.
+- Diagnostika hint matnlari endi foydalanuvchiga ko‘rinadi va to‘rt tildagi lug‘atlarning to‘liqligini tekshiruvchi regressiya testi qo‘shildi.
+- Gate: TypeScript xatosiz; ESLint xatosiz; unit testlar xatosiz; Next production build 161/161 sahifa; Playwright responsive/reduced-motion 4/4.

@@ -206,6 +206,12 @@
     }
   }
 
+  :where(a, button, input, textarea, select, [role="button"], [tabindex]):focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 3px;
+    scroll-margin-block: 5rem;
+  }
+
   /* Reduced motion: disable all animations for users who prefer it */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
