@@ -321,8 +321,8 @@ importers:
   services/portfolio-bot:
     dependencies:
       '@sanity/client':
-        specifier: ^7.23.1
-        version: 7.23.1
+        specifier: ^6.22.0
+        version: 6.29.1
       axios:
         specifier: ^1.7.7
         version: 1.18.1
@@ -3895,6 +3895,10 @@ packages:
     peerDependenciesMeta:
       babel-plugin-react-compiler:
         optional: true
+
+  '@sanity/client@6.29.1':
+    resolution: {integrity: sha512-BQRCMeDlBxwnMbFtB61HUxFf9aSb4HNVrpfrC7IFVqFf4cwcc3o5H8/nlrL9U3cDFedbe4W0AXt1mQzwbY/ljw==}
+    engines: {node: '>=14.18'}
 
   '@sanity/client@7.23.1':
     resolution: {integrity: sha512-zCKrdmsfFRYKXndkw5rVi3tyvr54QIdE+ISuAxFeHfJFiwWHFNu6pL4G8JmRyfxsD7Q9zyrD4C5hczVVmwGbgg==}
@@ -13893,6 +13897,12 @@ snapshots:
       - utf-8-validate
       - vue-tsc
       - xstate
+
+  '@sanity/client@6.29.1':
+    dependencies:
+      '@sanity/eventsource': 5.0.2
+      get-it: 8.8.0
+      rxjs: 7.8.2
 
   '@sanity/client@7.23.1':
     dependencies:
