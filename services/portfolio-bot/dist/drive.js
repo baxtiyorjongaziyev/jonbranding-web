@@ -9,9 +9,11 @@ async function getAuth() {
         const data = await fs.promises.readFile(keyFile, 'utf-8');
         cachedAuthKeyData = JSON.parse(data);
     }
-    return new google.auth.JWT(cachedAuthKeyData.client_email, undefined, cachedAuthKeyData.private_key, [
-        'https://www.googleapis.com/auth/drive.readonly',
-    ]);
+    return new google.auth.JWT({
+        email: cachedAuthKeyData.client_email,
+        key: cachedAuthKeyData.private_key,
+        scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+    });
 }
 export async function downloadToTemp(folderId) {
     const auth = await getAuth();

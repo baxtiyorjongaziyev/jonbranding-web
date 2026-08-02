@@ -29,6 +29,10 @@ const widgetTranslations = {
   zh: zh.oishaWidget,
 } as const;
 
+export function createOishaUserId() {
+  return `web_${crypto.randomUUID()}`;
+}
+
 const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<OishaMessage[]>([]);
@@ -65,7 +69,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
   useEffect(() => {
     let storedId = localStorage.getItem('oisha_user_id');
     if (!storedId) {
-      storedId = 'web_' + Math.random().toString(36).substring(2, 15);
+      storedId = createOishaUserId();
       localStorage.setItem('oisha_user_id', storedId);
     }
     setUserId(storedId);

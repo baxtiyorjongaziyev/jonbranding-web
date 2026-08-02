@@ -39,11 +39,15 @@ async function getAuth(readOnly = true): Promise<any> {
       const data = await fs.promises.readFile(keyFile, 'utf-8');
       cachedAuthKeyData = JSON.parse(data);
     }
-    return new google.auth.JWT(cachedAuthKeyData.client_email, undefined, cachedAuthKeyData.private_key, [
-      readOnly
-        ? 'https://www.googleapis.com/auth/drive.readonly'
-        : 'https://www.googleapis.com/auth/drive',
-    ]);
+    return new google.auth.JWT({
+      email: cachedAuthKeyData.client_email,
+      key: cachedAuthKeyData.private_key,
+      scopes: [
+        readOnly
+          ? 'https://www.googleapis.com/auth/drive.readonly'
+          : 'https://www.googleapis.com/auth/drive',
+      ],
+    });
   }
 
   if (apiKey) {
