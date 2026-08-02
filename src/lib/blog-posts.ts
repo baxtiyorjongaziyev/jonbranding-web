@@ -17,10 +17,12 @@ markdown.use({
   },
 });
 
-function sanitizeText(value: unknown): string {
+export function sanitizeText(value: unknown): string {
   if (value instanceof Date) return value.toISOString();
   if (typeof value !== 'string') return '';
-  return value.replace(/<[^>]*>/g, '').trim();
+  // Frontmatter is displayed as plain text. Removing each angle bracket
+  // independently prevents nested input from reconstructing a tag.
+  return value.replace(/[<>]/g, '').trim();
 }
 
 function sanitizeUrl(value: unknown): string {

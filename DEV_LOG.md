@@ -432,3 +432,10 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - `/[lang]/diagnostika` savollari, xizmat tavsiyalari, natijalari va forma UI matnlari `uz`, `ru`, `en`, `zh` lug‘atlariga ko‘chirildi.
 - Diagnostika hint matnlari endi foydalanuvchiga ko‘rinadi va to‘rt tildagi lug‘atlarning to‘liqligini tekshiruvchi regressiya testi qo‘shildi.
 - Gate: TypeScript xatosiz; ESLint xatosiz; unit testlar xatosiz; Next production build 161/161 sahifa; Playwright responsive/reduced-motion 4/4.
+## 2026-08-02 | GitHub security alertlarni nolga tushirish
+
+- CodeQL topilmalari tuzatildi: blog plain-text sanitizatsiyasi nested tag qayta hosil qilmaydi; Oisha browser ID `crypto.randomUUID()` bilan yaratiladi.
+- `mcp-server` dependency lock yangilandi: `@modelcontextprotocol/sdk` 1.30.0 va patched `@hono/node-server` 2.0.12.
+- `services/portfolio-bot` lock manifest bilan sinxronlandi va `brace-expansion` 2.1.4 ga yangilandi.
+- Nested sanitizer va cryptographic ID uchun regressiya testlari qo‘shildi.
+- Production merge gate: root hamda ikkala subproject audit/build/test tekshiruvlari va GitHub security rescan.

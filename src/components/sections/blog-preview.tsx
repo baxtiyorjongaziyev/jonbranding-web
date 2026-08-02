@@ -25,8 +25,8 @@ interface BlogPreviewProps {
   };
 }
 
-const sanitizePlainText = (value?: string) =>
-  (value || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+export const sanitizePlainText = (value?: string) =>
+  (value || '').replace(/[<>]/g, '').replace(/\s+/g, ' ').trim();
 
 const sanitizeSlug = (slug: string) => slug.toLowerCase().replace(/[^a-z0-9-]/g, '');
 
