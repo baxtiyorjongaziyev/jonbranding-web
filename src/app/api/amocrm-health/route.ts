@@ -6,6 +6,7 @@ import { safeCompare } from '@/lib/security';
 export const dynamic = 'force-dynamic';
 
 const AMOCRM_FAILED_LEADS_COLLECTION = 'amocrm_failed_leads';
+const AMOCRM_TIMEOUT_MS = 8000;
 
 const BOM = String.fromCharCode(0xfeff);
 
@@ -57,21 +58,30 @@ function getRefreshHost() {
   return subdomain ? `${subdomain}.amocrm.ru` : null;
 }
 
-async function countPendingFailedLeads() {
+type QueueCheck =
+  | { ok: true; pending: number; newest: string | null }
+  | { ok: false; reason: string };
+
+async function countPendingFailedLeads(): Promise<QueueCheck> {
   try {
-    const snapshot = await getDb()
+    const pendingQuery = getDb()
       .collection(AMOCRM_FAILED_LEADS_COLLECTION)
-      .where('status', '==', 'pending')
-      .limit(50)
-      .get();
+      .where('status', '==', 'pending');
 
-    const newest = snapshot.docs
-      .map((doc) => String(doc.data()?.createdAt || ''))
-      .filter(Boolean)
-      .sort()
-      .pop();
+    // count() keeps the real backlog size: a capped .get() would report any
+    // backlog of N or more as exactly N, hiding the worst case.
+    const [countSnapshot, newestSnapshot] = await Promise.all([
+      pendingQuery.count().get(),
+      pendingQuery.orderBy('createdAt', 'desc').limit(1).get(),
+    ]);
 
-    return { ok: true, pending: snapshot.size, newest: newest || null };
+    const newest = newestSnapshot.docs[0]?.data()?.createdAt;
+
+    return {
+      ok: true,
+      pending: Number(countSnapshot.data().count) || 0,
+      newest: newest ? String(newest) : null,
+    };
   } catch (error) {
     return {
       ok: false,
@@ -130,8 +140,12 @@ export async function GET(request: Request) {
   // 3. Live AmoCRM call — read-only, creates nothing.
   if (accessToken && leadHost) {
     try {
+      // Without a timeout an unresponsive AmoCRM would hang this request until
+      // the platform kills it, so the check would never report the very outage
+      // it exists to detect.
       const response = await fetch(`https://${leadHost}/api/v4/account`, {
         headers: { Authorization: `Bearer ${accessToken}` },
+        signal: AbortSignal.timeout(AMOCRM_TIMEOUT_MS),
       });
 
       if (response.ok) {
@@ -147,11 +161,13 @@ export async function GET(request: Request) {
         problems.push(`amocrm-http-${response.status}`);
       }
     } catch (error) {
+      const timedOut = error instanceof Error && error.name === 'TimeoutError';
       checks.amocrm = {
         ok: false,
+        timedOut,
         reason: error instanceof Error ? error.message : String(error),
       };
-      problems.push('amocrm-unreachable');
+      problems.push(timedOut ? 'amocrm-timeout' : 'amocrm-unreachable');
     }
   } else {
     checks.amocrm = { ok: false, skipped: true };
@@ -160,7 +176,7 @@ export async function GET(request: Request) {
   // 4. Backup queue — pending entries mean leads were dropped.
   const queue = await countPendingFailedLeads();
   checks.failedLeadQueue = queue;
-  if (queue.ok && Number(queue.pending) > 0) {
+  if (queue.ok && queue.pending > 0) {
     problems.push('pending-failed-leads');
   }
 
