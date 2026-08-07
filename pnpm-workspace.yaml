@@ -16,8 +16,12 @@ allowBuilds:
 
 overrides:
   adm-zip@<0.6.0: '>=0.6.0'
-  brace-expansion@<1.1.16: '>=1.1.16'
-  brace-expansion@<=5.0.7: '>=5.0.8'
+  # Keep each major on its own line: minimatch@3 requires the v1 API, and
+  # v5 renamed the export, so an unbounded '>=1.1.16' breaks ESLint with
+  # "TypeError: expand is not a function". Upper bounds pin the fix per major.
+  brace-expansion@<1.1.16: '>=1.1.18 <2'
+  brace-expansion@>=2 <2.0.2: '>=2.0.2 <3'
+  brace-expansion@>=3 <5.0.9: '>=5.0.9 <6'
   js-yaml@<3.15.0: 3.15.0
   postcss@<8.5.10: 8.5.15
   postcss@<=8.5.17: '>=8.5.18'
