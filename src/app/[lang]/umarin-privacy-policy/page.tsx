@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { FC } from 'react';
 
 interface UmarinPrivacyPageProps {
   params: Promise<{ lang: string }>;
@@ -25,7 +26,7 @@ export async function generateMetadata(props: UmarinPrivacyPageProps): Promise<M
   };
 }
 
-const UmarinPrivacyPage = async ({ params }: UmarinPrivacyPageProps) => {
+const UmarinPrivacyPage: FC<UmarinPrivacyPageProps> = async ({ params }) => {
   const { lang } = await params;
 
   const content: Record<string, { title: string; intro: string; sections: { title: string; text: string }[] }> = {
@@ -38,7 +39,7 @@ const UmarinPrivacyPage = async ({ params }: UmarinPrivacyPageProps) => {
         { title: "3. Maxfiylik kafolati", text: "Sizning shaxsiy ma'lumotlaringiz hech qachon uchinchi shaxslarga sotilmaydi, ijaraga berilmaydi yoki topshirilmaydi." },
         { title: "4. Texnik xavfsizlik", text: "Ma'lumotlaringizni himoya qilish uchun zamonaviy texnik va tashkiliy choralarni qo'llaymiz." },
         { title: "5. Ma'lumotlarni saqlash muddati", text: "Ma'lumotlar faqat buyurtma va mijozlar bilan aloqa maqsadida, zarur bo'lgan muddat davomida saqlanadi." },
-        { title: "6. Aloqa", text: "Maxfiylik siyosati bo'yicha savollaringiz bo'lsa, biz bilan bog'lanishingiz mumkin." },
+        { title: "6. Aloqa", text: "Maxfiylik siyosati bo'yicha savollaringiz bo'lsa, Instagram orqali bog'lanishingiz mumkin: instagram.com/umarin.uz" },
       ],
     },
     ru: {
@@ -50,7 +51,7 @@ const UmarinPrivacyPage = async ({ params }: UmarinPrivacyPageProps) => {
         { title: '3. Гарантия конфиденциальности', text: 'Ваши личные данные никогда не продаются, не передаются и не сдаются в аренду третьим лицам.' },
         { title: '4. Техническая безопасность', text: 'Мы применяем современные технические и организационные меры для защиты ваших данных.' },
         { title: '5. Срок хранения данных', text: 'Данные хранятся только в течение срока, необходимого для обработки заказов и связи с клиентами.' },
-        { title: '6. Контакты', text: 'По вопросам политики конфиденциальности вы можете связаться с нами.' },
+        { title: '6. Контакты', text: 'По вопросам политики конфиденциальности вы можете связаться с нами в Instagram: instagram.com/umarin.uz' },
       ],
     },
     en: {
@@ -62,7 +63,7 @@ const UmarinPrivacyPage = async ({ params }: UmarinPrivacyPageProps) => {
         { title: '3. Confidentiality Guarantee', text: 'Your personal data is never sold, rented or transferred to third parties.' },
         { title: '4. Technical Security', text: 'We use modern technical and organisational measures to protect your data.' },
         { title: '5. Data Retention', text: 'Data is retained only for as long as necessary to process orders and communicate with customers.' },
-        { title: '6. Contact', text: 'If you have questions about this privacy policy, you can contact us.' },
+        { title: '6. Contact', text: 'If you have questions about this privacy policy, you can contact us on Instagram: instagram.com/umarin.uz' },
       ],
     },
     zh: {
@@ -74,7 +75,7 @@ const UmarinPrivacyPage = async ({ params }: UmarinPrivacyPageProps) => {
         { title: '3. 保密保证', text: '您的个人数据绝不会出售、出租或转让给第三方。' },
         { title: '4. 技术安全', text: '我们采用现代技术和管理措施保护您的数据。' },
         { title: '5. 数据保留期限', text: '数据仅在处理订单和与客户沟通所需的期限内保留。' },
-        { title: '6. 联系方式', text: '如有隐私政策问题，欢迎与我们联系。' },
+        { title: '6. 联系方式', text: '如有隐私政策问题，欢迎通过 Instagram 与我们联系：instagram.com/umarin.uz' },
       ],
     },
   };
