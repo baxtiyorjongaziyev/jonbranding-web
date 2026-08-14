@@ -296,7 +296,7 @@ const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) 
 
     const labels: Record<string, { title: string; hours: string; minutes: string; seconds: string; description: string }> = {
         uz: { title: 'Chegirma muddati tugaydi:', hours: 'soat', minutes: 'daqiqa', seconds: 'soniya', description: "Ushbu chegirma faqat 24 soat ichida to'lov amalga oshirilganda taqdim etiladi." },
-        ru: { title: 'Ð¡Ñ€Ð¾Ðº ÑÐºÐ¸Ð´ÐºÐ¸ Ð¸ÑÑ‚ÐµÐºÐ°ÐµÑ‚:', hours: 'Ñ‡Ð°Ñ', minutes: 'Ð¼Ð¸Ð½', seconds: 'ÑÐµÐº', description: 'Ð­Ñ‚Ð° ÑÐºÐ¸Ð´ÐºÐ° Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¿Ñ€Ð¸ Ð¾Ð¿Ð»Ð°Ñ‚Ðµ Ð² Ñ‚ÐµÑ‡ÐµÐ½Ð¸Ðµ 24 Ñ‡Ð°ÑÐ¾Ð².' },
+        ru: { title: 'Срок скидки истекает:', hours: 'час', minutes: 'мин', seconds: 'сек', description: 'Эта скидка предоставляется только при оплате в течение 24 часов.' },
         en: { title: 'Discount expires in:', hours: 'hrs', minutes: 'min', seconds: 'sec', description: 'This discount is only valid if payment is made within 24 hours.' },
         zh: { title: 'æŠ˜æ‰£å‰©ä½™æ—¶é—´ï¼š', hours: 'æ—¶', minutes: 'åˆ†', seconds: 'ç§’', description: 'æ­¤æŠ˜æ‰£ä»…åœ¨24å°æ—¶å†…ä»˜æ¬¾æ—¶æœ‰æ•ˆã€‚' },
     };
@@ -449,7 +449,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                     <div>
                                         <p className="text-lg font-black leading-relaxed tracking-tight text-blue-950 sm:text-xl">
-                                            Agar taqdim etilgan nomlardan hech biri sizga mos kelmasa â€” to'liq pul qaytaramiz. Xavfsiz sinab ko'ring.
+                                            Agar taqdim etilgan nomlardan hech biri sizga mos kelmasa — to'liq pul qaytaramiz. Xavfsiz sinab ko'ring.
                                         </p>
                                     </div>
                                 </div>
@@ -585,12 +585,29 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 </motion.span>
                                             </AnimatePresence>
                                             {total.savings > 0 && (
-                                                <motion.div 
+                                                <motion.div
                                                     initial={{ y: 10, opacity: 0 }}
                                                     animate={{ y: 0, opacity: 1 }}
                                                     className="mt-4 flex items-center gap-2 text-green-600 font-bold text-[13px] bg-green-100/70 px-6 py-2 rounded-full border border-green-200 uppercase tracking-widest shadow-sm"
                                                 >
                                                     <Gift className="w-4 h-4" /> JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
+                                                </motion.div>
+                                            )}
+                                            {discountType === 'half' && total.upfrontAmount > 0 && (
+                                                <motion.div
+                                                    initial={{ y: 10, opacity: 0 }}
+                                                    animate={{ y: 0, opacity: 1 }}
+                                                    className="mt-4 w-full rounded-2xl border border-blue-100 bg-blue-50 px-6 py-4 text-center shadow-sm"
+                                                >
+                                                    <p className="text-[13px] font-bold uppercase tracking-widest text-blue-700">
+                                                        {translations.upfront_label || "Boshlash uchun faqat"}
+                                                    </p>
+                                                    <p className="mt-1 text-3xl font-black text-blue-700">
+                                                        {formatPrice(total.upfrontAmount, lang as any, currency)}
+                                                    </p>
+                                                    <p className="mt-1 text-[13px] font-medium text-blue-600">
+                                                        {translations.upfront_desc || "Qolgan 50% loyiha topshirilgach to'lanadi"}
+                                                    </p>
                                                 </motion.div>
                                             )}
                                         </div>

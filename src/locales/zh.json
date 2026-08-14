@@ -1336,6 +1336,8 @@
       "selected": "已选择",
       "select": "选择",
       "downloadCard": "下载卡片图片",
+      "upfront_label": "起步只需",
+      "upfront_desc": "剩余50%在项目完成后支付",
       "base_price_label": "起始价格",
       "final_price": "最终报价：",
       "promo_code_label": "优惠码",
