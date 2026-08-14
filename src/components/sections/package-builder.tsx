@@ -9,11 +9,12 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight, X } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight, X, Download } from 'lucide-react';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { renderHeadline } from '@/lib/headline';
+import { toPng } from 'html-to-image';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -42,15 +43,48 @@ const BenefitIcon = ({ name, className }: { name: string, className?: string }) 
 const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, currency }: { id: string, onSelect: () => void, selected: boolean, lang: any, dictionary: any, currency: any }) => {
     const serviceDetails = useMemo(() => getServiceDetails(lang) as any, [lang]);
     const detail = serviceDetails[id];
+    const cardRef = React.useRef<HTMLDivElement>(null);
+    const [isDownloading, setIsDownloading] = useState(false);
     if (!detail) return null;
 
     const { label, price, subDescription, features, benefits, timeline, recommended, cta } = detail;
     const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
     const isSurcharge = id === 'urgency' || id === 'nda';
+    const isDownloadable = id.toLowerCase().startsWith('naming') || id.toLowerCase().startsWith('logo');
+
+    const handleDownload = useCallback(async (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (!cardRef.current || isDownloading) return;
+        setIsDownloading(true);
+        try {
+            const dataUrl = await toPng(cardRef.current, { pixelRatio: 3, cacheBust: true, backgroundColor: isVip ? '#0a1130' : '#ffffff' });
+            const link = document.createElement('a');
+            link.download = `jonbranding-${id}.png`;
+            link.href = dataUrl;
+            link.click();
+        } catch {
+            /* ignore export failure */
+        } finally {
+            setIsDownloading(false);
+        }
+    }, [id, isVip, isDownloading]);
+
+    useEffect(() => {
+        if (!isDownloadable) return;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (!selected) return;
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
+                e.preventDefault();
+                handleDownload(e as unknown as React.MouseEvent);
+            }
+        };
+        window.addEventListener('keydown', onKeyDown);
+        return () => window.removeEventListener('keydown', onKeyDown);
+    }, [isDownloadable, selected, handleDownload]);
 
     return (
-        <motion.div 
+        <motion.div
             layout
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -70,7 +104,23 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                 )}
             </div>
 
+            {isDownloadable && (
+                <button
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    title={`${dictionary.downloadCard || "Kartani rasm sifatida yuklab olish"} (Ctrl+D)`}
+                    aria-label={dictionary.downloadCard || "Kartani rasm sifatida yuklab olish"}
+                    className={cn(
+                        "absolute top-3 right-3 z-40 flex h-9 w-9 items-center justify-center rounded-full border opacity-0 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 hover:scale-110 disabled:opacity-50",
+                        isVip ? "border-white/20 bg-white/10 text-sky-blue hover:bg-white/20" : "border-slate-200 bg-white/90 text-primary hover:bg-white"
+                    )}
+                >
+                    <Download className={cn("h-4 w-4", isDownloading && "animate-pulse")} />
+                </button>
+            )}
+
             <Card
+                ref={cardRef}
                 onClick={onSelect}
                 className={cn(
                     "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500 cursor-pointer",
