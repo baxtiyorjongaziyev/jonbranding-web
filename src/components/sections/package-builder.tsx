@@ -9,11 +9,12 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { getServiceDetails, calculatePackagePrice, type SelectedServices, formatPrice } from '@/lib/pricing';
-import { Sparkles, CheckCircle, Crown, Check, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight, X } from 'lucide-react';
+import { Sparkles, CheckCircle, Crown, Check, Clock, BrainCircuit, Search, Megaphone, Palette, Box, Type, Layers, ClipboardSignature, Info, Flame, ShieldCheck, Zap, Gift, Plus, Lightbulb, MessageSquare, Target, BarChart, Rocket, Link, Gem, Globe, Lock, Award, TrendingUp, BookOpen, Building2, Smartphone, Scale, ArrowRight, X, Download } from 'lucide-react';
 import DynamicToggle from '@/components/ui/dynamic-toggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { renderHeadline } from '@/lib/headline';
+import { toPng } from 'html-to-image';
 
 interface PackageBuilderProps {
     onOrderNow: () => void;
@@ -42,20 +43,58 @@ const BenefitIcon = ({ name, className }: { name: string, className?: string }) 
 const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, currency }: { id: string, onSelect: () => void, selected: boolean, lang: any, dictionary: any, currency: any }) => {
     const serviceDetails = useMemo(() => getServiceDetails(lang) as any, [lang]);
     const detail = serviceDetails[id];
+    const cardRef = React.useRef<HTMLDivElement>(null);
+    const [isDownloading, setIsDownloading] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const isVip = id.toLowerCase().includes('vip');
+    const isDownloadable = id.toLowerCase().startsWith('naming') || id.toLowerCase().startsWith('logo');
+    const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPod|iPad/.test(navigator.platform);
+    const shortcutKey = isMac ? '⌘D' : 'Ctrl+D';
+
+    const handleDownload = useCallback(async (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (!cardRef.current || isDownloading) return;
+        setIsDownloading(true);
+        try {
+            const dataUrl = await toPng(cardRef.current, { pixelRatio: 3, cacheBust: true, backgroundColor: isVip ? '#0a1130' : '#ffffff' });
+            const link = document.createElement('a');
+            link.download = `jonbranding-${id}.png`;
+            link.href = dataUrl;
+            link.click();
+        } catch {
+            /* ignore export failure */
+        } finally {
+            setIsDownloading(false);
+        }
+    }, [id, isVip, isDownloading]);
+
+    useEffect(() => {
+        if (!isDownloadable || !isHovered) return;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
+                e.preventDefault();
+                handleDownload(e as unknown as React.MouseEvent);
+            }
+        };
+        window.addEventListener('keydown', onKeyDown);
+        return () => window.removeEventListener('keydown', onKeyDown);
+    }, [isDownloadable, isHovered, handleDownload]);
+
     if (!detail) return null;
 
     const { label, price, subDescription, features, benefits, timeline, recommended, cta } = detail;
     const Icon = serviceIcons[id] || Sparkles;
-    const isVip = id.toLowerCase().includes('vip');
     const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
-        <motion.div 
+        <motion.div
             layout
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ y: -5 }}
-            className="h-full relative pt-12"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="group h-full relative pt-12"
         >
             <div className="absolute top-7 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex justify-center">
                 {recommended && !isVip && (
@@ -70,7 +109,28 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                 )}
             </div>
 
+            {isDownloadable && (
+                <button
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    title={`${dictionary.downloadCard} (${shortcutKey})`}
+                    aria-label={dictionary.downloadCard}
+                    className={cn(
+                        "absolute top-3 right-3 z-40 flex h-9 w-9 items-center justify-center rounded-full border opacity-0 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 focus-visible:opacity-100 hover:scale-110 disabled:opacity-50",
+                        isVip ? "border-white/20 bg-white/10 text-sky-blue hover:bg-white/20" : "border-slate-200 bg-white/90 text-primary hover:bg-white"
+                    )}
+                >
+                    <motion.div
+                        animate={isDownloading ? { opacity: [1, 0.4, 1] } : { opacity: 1 }}
+                        transition={isDownloading ? { duration: 1, repeat: Infinity, ease: "easeInOut" } : undefined}
+                    >
+                        <Download className="h-4 w-4" />
+                    </motion.div>
+                </button>
+            )}
+
             <Card
+                ref={cardRef}
                 onClick={onSelect}
                 className={cn(
                     "group relative h-full border flex flex-col rounded-[1.5rem] bg-white transition-[border-color,box-shadow,transform,background-color] duration-500 cursor-pointer",
@@ -245,7 +305,7 @@ const DiscountCountdown = ({ active, lang }: { active: boolean; lang: string }) 
 
     const labels: Record<string, { title: string; hours: string; minutes: string; seconds: string; description: string }> = {
         uz: { title: 'Chegirma muddati tugaydi:', hours: 'soat', minutes: 'daqiqa', seconds: 'soniya', description: "Ushbu chegirma faqat 24 soat ichida to'lov amalga oshirilganda taqdim etiladi." },
-        ru: { title: 'Ð¡Ñ€Ð¾Ðº ÑÐºÐ¸Ð´ÐºÐ¸ Ð¸ÑÑ‚ÐµÐºÐ°ÐµÑ‚:', hours: 'Ñ‡Ð°Ñ', minutes: 'Ð¼Ð¸Ð½', seconds: 'ÑÐµÐº', description: 'Ð­Ñ‚Ð° ÑÐºÐ¸Ð´ÐºÐ° Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¿Ñ€Ð¸ Ð¾Ð¿Ð»Ð°Ñ‚Ðµ Ð² Ñ‚ÐµÑ‡ÐµÐ½Ð¸Ðµ 24 Ñ‡Ð°ÑÐ¾Ð².' },
+        ru: { title: 'Срок скидки истекает:', hours: 'час', minutes: 'мин', seconds: 'сек', description: 'Эта скидка предоставляется только при оплате в течение 24 часов.' },
         en: { title: 'Discount expires in:', hours: 'hrs', minutes: 'min', seconds: 'sec', description: 'This discount is only valid if payment is made within 24 hours.' },
         zh: { title: 'æŠ˜æ‰£å‰©ä½™æ—¶é—´ï¼š', hours: 'æ—¶', minutes: 'åˆ†', seconds: 'ç§’', description: 'æ­¤æŠ˜æ‰£ä»…åœ¨24å°æ—¶å†…ä»˜æ¬¾æ—¶æœ‰æ•ˆã€‚' },
     };
@@ -398,7 +458,7 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                     </div>
                                     <div>
                                         <p className="text-lg font-black leading-relaxed tracking-tight text-blue-950 sm:text-xl">
-                                            Agar taqdim etilgan nomlardan hech biri sizga mos kelmasa â€” to'liq pul qaytaramiz. Xavfsiz sinab ko'ring.
+                                            Agar taqdim etilgan nomlardan hech biri sizga mos kelmasa — to'liq pul qaytaramiz. Xavfsiz sinab ko'ring.
                                         </p>
                                     </div>
                                 </div>
@@ -534,12 +594,29 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
                                                 </motion.span>
                                             </AnimatePresence>
                                             {total.savings > 0 && (
-                                                <motion.div 
+                                                <motion.div
                                                     initial={{ y: 10, opacity: 0 }}
                                                     animate={{ y: 0, opacity: 1 }}
                                                     className="mt-4 flex items-center gap-2 text-green-600 font-bold text-[13px] bg-green-100/70 px-6 py-2 rounded-full border border-green-200 uppercase tracking-widest shadow-sm"
                                                 >
                                                     <Gift className="w-4 h-4" /> JAMI TEJALDI: {formatPrice(total.savings, lang as any, currency)}
+                                                </motion.div>
+                                            )}
+                                            {discountType === 'half' && total.upfrontAmount > 0 && (
+                                                <motion.div
+                                                    initial={{ y: 10, opacity: 0 }}
+                                                    animate={{ y: 0, opacity: 1 }}
+                                                    className="mt-4 w-full rounded-2xl border border-blue-100 bg-blue-50 px-6 py-4 text-center shadow-sm"
+                                                >
+                                                    <p className="text-[13px] font-bold uppercase tracking-widest text-blue-700">
+                                                        {translations.upfront_label || "Boshlash uchun faqat"}
+                                                    </p>
+                                                    <p className="mt-1 text-3xl font-black text-blue-700">
+                                                        {formatPrice(total.upfrontAmount, lang as any, currency)}
+                                                    </p>
+                                                    <p className="mt-1 text-[13px] font-medium text-blue-600">
+                                                        {translations.upfront_desc || "Qolgan 50% loyiha topshirilgach to'lanadi"}
+                                                    </p>
                                                 </motion.div>
                                             )}
                                         </div>

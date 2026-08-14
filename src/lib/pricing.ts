@@ -370,14 +370,17 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
         finalPrice -= promoVal;
     }
 
-    return { 
-        base: basePrice, 
-        surchargesTotal, 
-        final: finalPrice, 
-        discountApplied: discountsApplied, 
-        surchargesApplied, 
-        savings: totalBeforeDiscounts - finalPrice, 
-        isPromoApplied 
+    const upfrontAmount = discountType === 'half' ? finalPrice * 0.5 : (discountType === 'full' ? finalPrice : 0);
+
+    return {
+        base: basePrice,
+        surchargesTotal,
+        final: finalPrice,
+        discountApplied: discountsApplied,
+        surchargesApplied,
+        savings: totalBeforeDiscounts - finalPrice,
+        isPromoApplied,
+        upfrontAmount
     };
 }
 
