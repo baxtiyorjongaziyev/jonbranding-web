@@ -45,12 +45,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const detail = serviceDetails[id];
     const cardRef = React.useRef<HTMLDivElement>(null);
     const [isDownloading, setIsDownloading] = useState(false);
-    if (!detail) return null;
-
-    const { label, price, subDescription, features, benefits, timeline, recommended, cta } = detail;
-    const Icon = serviceIcons[id] || Sparkles;
     const isVip = id.toLowerCase().includes('vip');
-    const isSurcharge = id === 'urgency' || id === 'nda';
     const isDownloadable = id.toLowerCase().startsWith('naming') || id.toLowerCase().startsWith('logo');
 
     const handleDownload = useCallback(async (e: React.MouseEvent) => {
@@ -82,6 +77,12 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
         window.addEventListener('keydown', onKeyDown);
         return () => window.removeEventListener('keydown', onKeyDown);
     }, [isDownloadable, selected, handleDownload]);
+
+    if (!detail) return null;
+
+    const { label, price, subDescription, features, benefits, timeline, recommended, cta } = detail;
+    const Icon = serviceIcons[id] || Sparkles;
+    const isSurcharge = id === 'urgency' || id === 'nda';
 
     return (
         <motion.div
