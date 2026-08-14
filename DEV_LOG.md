@@ -4,6 +4,19 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-08-14 | Naming/Logo Kartalarni PNG Yuklab Olish + Security/Encoding Auditi (PR #313)
+
+**Nima qilindi:**
+- **PNG Export**: `package-builder.tsx` — naming va logo tarif kartalariga hover-reveal download tugma qo'shildi, `html-to-image` bilan yuqori sifatli (3x) PNG export. Hover-fokuslangan kartada Ctrl+D / Cmd+D shortcut (bir vaqtda faqat bitta karta uchun, hover state orqali). 4 tilga (`downloadCard`) tarjima.
+- **50/50 To'lov UI**: `pricing.ts`'ga `upfrontAmount` hisoblash qo'shildi; `package-builder.tsx`'da 50/50 tanlanganda "boshlash uchun faqat X" bloki chiqadi.
+- **Dependency Security**: `package.json` `overrides` sintaksisidagi xato tuzatildi (nested `@sanity/cli` override versiyasiz yozilgani butun override zanjirini buzayotgan edi) — `npm audit` 13 high/22 moderate/1 low → **0 vulnerability**.
+- **Mojibake Tuzatish**: `static-data.ts` (ru testimonial'lar), `brand-strategiyasi/layout.tsx` (ru/zh SEO keywords), `package-builder.tsx` (ru chegirma taymer matni) — ikki marta noto'g'ri encode qilingan UTF-8 matn asl holiga qaytarildi.
+- **Code review fixlar** (Codex/CodeRabbit): `group` class sibling Card'dan wrapping `motion.div`ga ko'chirildi (hover ishlamas edi), Ctrl+D endi faqat hover qilingan kartaga bog'langan, hardcoded Uzbek fallback olib tashlandi (`dictionary.downloadCard` majburiy), `animate-pulse` → Framer Motion `motion.div`.
+
+**Tekshiruv:** `npx tsc --noEmit` ✓ | `npx eslint` ✓ | `npm audit` → 0 vulnerabilities | Local dev serverda 50/50 blok va download tugmalar brauzerda tekshirildi.
+
+---
+
 ## 2026-07-27 | To'liq Veb-sayt Auditi & Build Verifikatsiyasi (100% SUCCESS)
 
 **Nima qilindi:**

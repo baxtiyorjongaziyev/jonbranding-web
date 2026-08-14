@@ -45,8 +45,11 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     const detail = serviceDetails[id];
     const cardRef = React.useRef<HTMLDivElement>(null);
     const [isDownloading, setIsDownloading] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const isVip = id.toLowerCase().includes('vip');
     const isDownloadable = id.toLowerCase().startsWith('naming') || id.toLowerCase().startsWith('logo');
+    const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPod|iPad/.test(navigator.platform);
+    const shortcutKey = isMac ? '⌘D' : 'Ctrl+D';
 
     const handleDownload = useCallback(async (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -66,9 +69,8 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
     }, [id, isVip, isDownloading]);
 
     useEffect(() => {
-        if (!isDownloadable) return;
+        if (!isDownloadable || !isHovered) return;
         const onKeyDown = (e: KeyboardEvent) => {
-            if (!selected) return;
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
                 e.preventDefault();
                 handleDownload(e as unknown as React.MouseEvent);
@@ -76,7 +78,7 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
         };
         window.addEventListener('keydown', onKeyDown);
         return () => window.removeEventListener('keydown', onKeyDown);
-    }, [isDownloadable, selected, handleDownload]);
+    }, [isDownloadable, isHovered, handleDownload]);
 
     if (!detail) return null;
 
@@ -90,7 +92,9 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ y: -5 }}
-            className="h-full relative pt-12"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="group h-full relative pt-12"
         >
             <div className="absolute top-7 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex justify-center">
                 {recommended && !isVip && (
@@ -109,14 +113,19 @@ const ServiceCard = React.memo(({ id, onSelect, selected, lang, dictionary, curr
                 <button
                     onClick={handleDownload}
                     disabled={isDownloading}
-                    title={`${dictionary.downloadCard || "Kartani rasm sifatida yuklab olish"} (Ctrl+D)`}
-                    aria-label={dictionary.downloadCard || "Kartani rasm sifatida yuklab olish"}
+                    title={`${dictionary.downloadCard} (${shortcutKey})`}
+                    aria-label={dictionary.downloadCard}
                     className={cn(
-                        "absolute top-3 right-3 z-40 flex h-9 w-9 items-center justify-center rounded-full border opacity-0 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 hover:scale-110 disabled:opacity-50",
+                        "absolute top-3 right-3 z-40 flex h-9 w-9 items-center justify-center rounded-full border opacity-0 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 focus-visible:opacity-100 hover:scale-110 disabled:opacity-50",
                         isVip ? "border-white/20 bg-white/10 text-sky-blue hover:bg-white/20" : "border-slate-200 bg-white/90 text-primary hover:bg-white"
                     )}
                 >
-                    <Download className={cn("h-4 w-4", isDownloading && "animate-pulse")} />
+                    <motion.div
+                        animate={isDownloading ? { opacity: [1, 0.4, 1] } : { opacity: 1 }}
+                        transition={isDownloading ? { duration: 1, repeat: Infinity, ease: "easeInOut" } : undefined}
+                    >
+                        <Download className="h-4 w-4" />
+                    </motion.div>
                 </button>
             )}
 
