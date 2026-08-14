@@ -15,11 +15,11 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
   
   let keywords = ["brend strategiyasi", "brend platformasi", "brending agentligi toshkent", "strategik brending", "biznes uchun strategiya", "biznes upakovka"];
   if (lang === 'ru') {
-    keywords = ["Ð±Ñ€ÐµÐ½Ð´ ÑÑ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ñ", "Ð¿Ð»Ð°Ñ‚Ñ„Ð¾Ñ€Ð¼Ð° Ð±Ñ€ÐµÐ½Ð´Ð°", "Ð±Ñ€ÐµÐ½Ð´Ð¸Ð½Ð³Ð¾Ð²Ð¾Ðµ Ð°Ð³ÐµÐ½Ñ‚ÑÑ‚Ð²Ð¾ Ñ‚Ð°ÑˆÐºÐµÐ½Ñ‚", "ÑÑ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ð±Ñ€ÐµÐ½Ð´Ð¸Ð½Ð³", "ÑÑ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ñ Ð´Ð»Ñ Ð±Ð¸Ð·Ð½ÐµÑÐ°", "ÑƒÐ¿Ð°ÐºÐ¾Ð²ÐºÐ° Ð±Ð¸Ð·Ð½ÐµÑÐ°"];
+    keywords = ["бренд стратегия", "платформа бренда", "брендинговое агентство ташкент", "стратегический брендинг", "стратегия для бизнеса", "упаковка бизнеса"];
   } else if (lang === 'en') {
     keywords = ["brand strategy", "brand platform", "branding agency tashkent", "strategic branding", "strategy for business", "business packaging"];
   } else if (lang === 'zh') {
-    keywords = ["å“ç‰Œç­–ç•¥", "å“ç‰Œå¹³å°", "å¡”ä»€å¹²å“ç‰Œä»£ç†", "æˆ˜ç•¥å“ç‰Œ", "å•†ä¸šç­–ç•¥", "å•†ä¸šåŒ…è£…"];
+    keywords = ["品牌战略", "品牌平台", "塔什干品牌代理", "战略品牌", "商业策略", "商业包装"];
   }
 
   return {
