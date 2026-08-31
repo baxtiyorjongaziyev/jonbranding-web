@@ -4,6 +4,24 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-08-31 | BHM 412,000 → 440,000 so'm yangilanishi (PR #316)
+
+**Nima qilindi:**
+- **Sabab:** O'zbekistonda Bazaviy hisoblash miqdori (BHM) 440,000 so'mga oshdi. Barcha davlat bojlari BHM ga bog'liq.
+- **`src/components/sections/trademark-calculator.tsx`:**
+  - `BHM` konstanta: `412000` → `440000`.
+  - `EXPEDITE_EXTRA`: hardcoded `461000` (eski BHM asosida) → `Math.round(1 * BHM * 1.12)` formulaga o'tkazildi, endi yangi BHM dan hisoblanadi (492,800 so'm).
+- **Blog postlar (8 fayl, 4 til × 2 mavzu):**
+  - `how-much-does-patent-cost-2026` (uz/ru/en/zh): BHM matni 440,000; `2 * BHM` → 880,000; Step 1 (yuridik, 1 klass) → 2,640,000; Step 2 → 5,104,000.
+  - `trademark-registration-guide` (uz/ru/en/zh): BHM matni 440,000; Step 1 → 2,640,000. Agentlik xizmati narxlari (5M/7M) o'zgarmadi (flat rate).
+  - Hosila summalar kalkulyator formulasidan olindi: `6*BHM` (Step 1 legal), `11.6*BHM` (Step 2 legal).
+
+**Tekshiruv:**
+- `npm test -- src/components/sections/trademark-calculator.test.tsx --run` — passed (1/1).
+- Repo bo'yicha `412000` / eski hosila summalar qidiruvi — 0 natija.
+
+---
+
 ## 2026-08-31 | GitHub Security & Dependabot Pull Requests Resolution (0 Vulnerabilities)
 
 **Nima qilindi:**
