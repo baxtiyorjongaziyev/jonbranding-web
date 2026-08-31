@@ -4,6 +4,31 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-08-31 | GitHub Security & Dependabot Pull Requests Resolution (0 Vulnerabilities)
+
+**Nima qilindi:**
+- **GitHub Security Alerts To'liq Bartaraf Etildi**: GitHub Dependabotdagi barcha 26 ta xavfsizlik alerti va tegishli pull requestlar (PR #309 va unga bog'liq dependabot guruhlari) to'liq hal qilindi.
+- **Root Paket (`package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`, `package-lock.json`)**:
+  - `dompurify`: `3.4.12` → `^3.4.13` ga ko'tarildi (GHSA-55q2-fjhq-7xh7 IN_PLACE XSS zaifligi yopildi).
+  - `nanoid`: `3.3.16` → `^3.3.18` ga yangilandi (GHSA-2v37-7h3g-55p8 cheksiz sikl zaifligi yopildi).
+  - `js-yaml`: `3.15.1` va `4.3.1` ga override qilindi (GHSA-5p4m-2wfm-xmqj !!omap CPU exhaustion yopildi).
+  - `undici`: `6.28.0` va `7.29.0` ga override qilindi (CRLF, cookie injection, downstream response desync yopildi).
+  - `ip-address`: `10.4.0` ga override qilindi (SSRF va IPv4-mapped address bypass zaifliklari yopildi).
+- **MCP Server (`mcp-server/package.json`, `mcp-server/package-lock.json`)**:
+  - `hono`: `4.12.31` → `4.13.5` (>= 4.12.34) ga yangilandi (memo() SSR disclosure, language middleware DoS, CORS ReDoS yopildi).
+  - `fast-uri`: `3.1.4` → `4.1.3` (>= 3.1.5) ga yangilandi (host confusion zaifligi yopildi).
+  - `ip-address`: `10.2.0` → `10.7.0` (>= 10.4.0) ga yangilandi.
+- **Portfolio Bot (`services/portfolio-bot/package.json`, `services/portfolio-bot/package-lock.json`)**:
+  - `ip-address`: `10.2.0` → `10.7.0` (>= 10.4.0) ga yangilandi.
+- **Verifikatsiya**:
+  - `pnpm audit --audit-level=moderate`: **0 vulnerabilities (No known vulnerabilities found)** ✓
+  - `npm audit` (root, mcp-server, portfolio-bot): **0 vulnerabilities** ✓
+  - `npm run typecheck`: **0 errors (100% PASS)** ✓
+  - `npx vitest run`: **26/26 test suites (175 tests) PASS** ✓
+  - `npm run build`: **161/161 static & dynamic pages successfully compiled** ✓
+
+---
+
 ## 2026-08-14 | Naming/Logo Kartalarni PNG Yuklab Olish + Security/Encoding Auditi (PR #313)
 
 **Nima qilindi:**
