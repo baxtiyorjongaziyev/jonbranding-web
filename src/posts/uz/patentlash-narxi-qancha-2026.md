@@ -18,12 +18,12 @@ Patentlash jarayonidagi to'lovlarni uchta asosiy qismga bo'lish mumkin:
 
 ### 1. Dastlabki tekshiruv (0-bosqich)
 Hujjat topshirishdan oldin logotipingiz "toza" ekanligini bilish juda muhim. Agar brendingiz boshqasiga o'xshash bo'lsa, davlat boji qaytarilmaydi.
-- **Xarajat:** 2 * BHM (~824,000 so'm).
+- **Xarajat:** 2 * BHM (~880,000 so'm).
 
 ### 2. Davlat bojlari (2026-yil)
-O'zbekistonda BHM **412 000 so'm**. 
-- **1-bosqich (Ariza topshirish):** Yuridik shaxslar uchun 1 ta klassga taxminan **2,266,000 so'm**. Har bir qo'shimcha klass uchun qo'shimcha to'lov mavjud.
-- **2-bosqich (Guvohnoma olish):** Taxminan **4,350,000 so'm**.
+O'zbekistonda BHM **440 000 so'm**. 
+- **1-bosqich (Ariza topshirish):** Yuridik shaxslar uchun 1 ta klassga taxminan **2,640,000 so'm**. Har bir qo'shimcha klass uchun qo'shimcha to'lov mavjud.
+- **2-bosqich (Guvohnoma olish):** Taxminan **5,104,000 so'm**.
 
 ### 3. Agentlik xizmati (Jon Branding)
 Biz jarayonning barcha texnik va huquqiy tomonlarini o'z bo'ynimizga olamiz. Sizning vaqtingizni va asabingizni tejaymiz.

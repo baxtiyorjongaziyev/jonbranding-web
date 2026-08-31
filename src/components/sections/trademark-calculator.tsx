@@ -20,7 +20,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 
-const BHM = 412000;
+const BHM = 440000;
 
 // State Fees - Step 1 (Ariza)
 const BASE_STEP1_INDIVIDUAL = 4 * BHM;
@@ -30,7 +30,7 @@ const STEP1_EXTRA_LEGAL = 1 * BHM;
 
 // State Fees - Expedite (Tezkor)
 const EXPEDITE_BASE = Math.round(12 * BHM * 1.12);
-const EXPEDITE_EXTRA = 461000;
+const EXPEDITE_EXTRA = Math.round(1 * BHM * 1.12);
 
 // State Fees - Step 2 (Certificate)
 const BASE_STEP2_INDIVIDUAL = 6.8 * BHM;
