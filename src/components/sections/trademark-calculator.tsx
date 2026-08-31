@@ -20,7 +20,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 
-const BHM = 412000;
+const BHM = 440000;
 
 // State Fees - Step 1 (Ariza)
 const BASE_STEP1_INDIVIDUAL = 4 * BHM;

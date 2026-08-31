@@ -21,7 +21,7 @@ Hujjat topshirishdan oldin logotipingiz "toza" ekanligini bilish juda muhim. Aga
 - **Xarajat:** 2 * BHM (~824,000 so'm).
 
 ### 2. Davlat bojlari (2026-yil)
-O'zbekistonda BHM **412 000 so'm**. 
+O'zbekistonda BHM **440 000 so'm**. 
 - **1-bosqich (Ariza topshirish):** Yuridik shaxslar uchun 1 ta klassga taxminan **2,266,000 so'm**. Har bir qo'shimcha klass uchun qo'shimcha to'lov mavjud.
 - **2-bosqich (Guvohnoma olish):** Taxminan **4,350,000 so'm**.
 
