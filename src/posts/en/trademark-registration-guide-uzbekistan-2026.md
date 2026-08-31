@@ -34,9 +34,9 @@ Specialists examine your brand for 7–9 months (standard procedure). If you nee
 
 ## Prices and Fees (2026)
 
-As of 2026, the BRV (Base Calculation Value) in Uzbekistan is **412,000 UZS**.
+As of 2026, the BRV (Base Calculation Value) in Uzbekistan is **440,000 UZS**.
 
-- **For legal entities:** Filing application (Step 1) ~2,266,000 UZS (for 1 class).
+- **For legal entities:** Filing application (Step 1) ~2,640,000 UZS (for 1 class).
 - **Agency service:** Professional support from Jon Branding — **5,000,000 UZS** (standard) or **7,000,000 UZS** (expedited).
 
 ## Conclusion

@@ -18,12 +18,12 @@ Payments during trademark registration in Uzbekistan can be broken down into thr
 
 ### 1. Initial Check (Step 0)
 Before submitting documents, it's critical to ensure your brand is "clean." If your brand is similar to an existing one, state fees **will not be refunded**.
-- **Cost:** 2 × BRV (~824,000 UZS).
+- **Cost:** 2 × BRV (~880,000 UZS).
 
 ### 2. Government Fees (2026)
-The BRV in Uzbekistan is **412,000 UZS**.
-- **Step 1 (Application filing):** For legal entities, filing 1 class costs approximately **2,266,000 UZS**. Additional fees apply per extra class.
-- **Step 2 (Obtaining the Certificate):** Approximately **4,350,000 UZS**.
+The BRV in Uzbekistan is **440,000 UZS**.
+- **Step 1 (Application filing):** For legal entities, filing 1 class costs approximately **2,640,000 UZS**. Additional fees apply per extra class.
+- **Step 2 (Obtaining the Certificate):** Approximately **5,104,000 UZS**.
 
 ### 3. Agency Service (Jon Branding)
 We handle all technical and legal aspects of the process, saving you time and stress. Our price is fixed and does not increase.

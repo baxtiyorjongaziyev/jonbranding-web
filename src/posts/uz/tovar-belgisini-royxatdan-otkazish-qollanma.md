@@ -37,7 +37,7 @@ Mutaxassislar sizning brendingizni 7-9 oy davomida (oddiy tartibda) o'rganib chi
 
 2026-yil holatiga ko'ra, O'zbekistonda BHM (Bazaviy hisoblash miqdori) **440 000 so'm**ni tashkil etadi. 
 
-- **Yuridik shaxslar uchun:** Ariza topshirish (Step 1) ~2,266,000 so'm (1 ta klass uchun).
+- **Yuridik shaxslar uchun:** Ariza topshirish (Step 1) ~2,640,000 so'm (1 ta klass uchun).
 - **Agentlik xizmati:** Jon Branding orqali professional hamrohlik — **5 000 000 so'm** (oddiy) yoki **7 000 000 so'm** (tezkor).
 
 ## Xulosa
