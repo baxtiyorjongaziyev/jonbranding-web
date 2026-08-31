@@ -3,7 +3,7 @@
 import { useState, useMemo, FC } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowRight, Share2, Users } from 'lucide-react';
+import { ArrowRight, Lock, Share2, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ContactModal from '@/components/contact-modal';
 import { event as gtagEvent } from '@/lib/analytics/gtag';
@@ -36,10 +36,10 @@ const QUESTIONS: Question[] = [
     ],
   },
   {
-    question: 'Yangi biznes g‘oya keldi:',
+    question: 'Yangi g‘oya yoki taklif keldi:',
     options: [
       { text: 'Darrov kim bilan amalga oshirish mumkinligini o‘ylayman', type: '01' },
-      { text: 'Avval iqtisodiyoti va jarayonini hisoblayman', type: '19' },
+      { text: 'Avval unumi va jarayonini hisoblayman', type: '19' },
     ],
   },
   {
@@ -101,8 +101,8 @@ const QUESTIONS: Question[] = [
   {
     question: 'Sizni ko‘proq nima g‘ashingizga tegadi?',
     options: [
-      { text: 'Sekin va ortiqcha muhokamali qarorlar', type: '19' },
-      { text: 'Tartibsizlik va aniq bo‘lmagan masʼuliyat', type: '01' },
+      { text: 'Sekin va ortiqcha muhokamali qarorlar', type: '01' },
+      { text: 'Tartibsizlik va aniq bo‘lmagan masʼuliyat', type: '19' },
     ],
   },
   {
@@ -120,10 +120,10 @@ const QUESTIONS: Question[] = [
     ],
   },
   {
-    question: 'Biznesda eng katta yutuq deb nimani hisoblaysiz?',
+    question: 'Ishingizda eng katta yutuq deb nimani hisoblaysiz?',
     options: [
-      { text: 'Katta savdo yoki yangi bozorga chiqish', type: '01' },
-      { text: 'Jarayonni odamsiz ham ishlaydigan qilib qo‘yish', type: '19' },
+      { text: 'Yangi mijoz, hamkor yoki imkoniyat topish', type: '01' },
+      { text: 'Jarayonni sizsiz ham ishlaydigan qilib qo‘yish', type: '19' },
     ],
   },
 ];
@@ -133,47 +133,67 @@ type ResultKey = 'natural01' | 'dominant01' | 'dominant19' | 'natural19';
 const RESULTS: Record<ResultKey, {
   title: (pct: number) => string;
   subtitle: string;
+  strengthsIntro: string;
   strengths: string[];
+  rolesIntro: string;
   roles: string[];
+  slowdownsIntro: string;
   slowdowns: string[];
+  teamNeedTitle: string;
   teamNeed: string;
   teamInsight: string;
 }> = {
   natural01: {
     title: (pct) => `${pct}% — 0.1 Visionary`,
-    subtitle: 'Sizning tabiiy kuchingiz — yangi imkoniyat va harakatni boshlash.',
+    subtitle: 'Sizning tabiiy kuchingiz — yangi imkoniyat va harakatni boshlash. Siz hayajon va tezlik bilan yashaysiz, boshqalar hali o‘ylab turganda siz allaqachon yo‘lda bo‘lasiz.',
+    strengthsIntro: 'Sizda tabiiy ravishda kuchli:',
     strengths: ['Sotuv va muzokara', 'Networking', 'Yangi loyiha boshlash', 'Tez qaror qabul qilish', 'Risk olish', 'Imkoniyatni ko‘ra bilish'],
+    rolesIntro: 'Bu uslub bilan siz eng ko‘p qiymatni shu rollarda yaratasiz:',
     roles: ['Founder', 'Business Development', 'Sales', 'Closer', 'Marketing', 'Partnership', 'Creative Lead'],
-    slowdowns: ['Tizim, nazorat va yakunlash sizni tez charchatishi mumkin.'],
-    teamNeed: 'Sizga kerak: kuchli 1.9 — Integrator.',
-    teamInsight: 'G‘oya va harakat ko‘p, lekin yakunlash, nazorat va barqaror tizim yetishmasligi mumkin.',
+    slowdownsIntro: 'Lekin bu kuch bir narsani yashiradi:',
+    slowdowns: ['Tizim, nazorat va yakunlash sizni tez charchatishi mumkin — g‘oya 10 ta, lekin oxirigacha yetgani 2 ta bo‘lishi mumkin. Buning oqibati: mijozlar tushib qoladi, sifat notekis bo‘ladi, jamoa sizdan keyingi qadamni kutib qoladi.'],
+    teamNeedTitle: 'Komandangizga qaysi tip kerak',
+    teamNeed: 'Sizga kerak — kuchli 1.9 Integrator: sizning g‘oyalaringizni ushlab qolib, oxirigacha yetkazadigan, tizim va nazoratni qo‘lga oladigan odam.',
+    teamInsight: 'G‘oya va harakat ko‘p, lekin yakunlash, nazorat va barqaror tizim yetishmasligi mumkin — natijada bir xil xatolar qaytarilaveradi, sifat odamga qarab o‘zgaradi va ish jarayoni sizsiz to‘xtab qoladi.',
   },
   dominant01: {
     title: (pct) => `${pct}% — 0.1 Visionary dominant`,
-    subtitle: 'Sizda 0.1 kuchli, lekin kerak bo‘lganda tizim bilan ham ishlay olasiz.',
+    subtitle: 'Sizda 0.1 kuchli, lekin kerak bo‘lganda tizim bilan ham ishlay olasiz — bu sizni ancha moslashuvchan qiladi.',
+    strengthsIntro: 'Sizda tabiiy ravishda kuchli:',
     strengths: ['Yangi imkoniyatlarni sezish', 'Tez qaror qabul qilish', 'Muzokara va savdo', 'Kerak bo‘lsa tizim bilan ham ishlash'],
+    rolesIntro: 'Bu uslub bilan siz eng ko‘p qiymatni shu rollarda yaratasiz:',
     roles: ['Founder', 'Business Development', 'Sales', 'Marketing', 'Partnership'],
-    slowdowns: ['Katta tizim va nazoratga uzoq vaqt bag‘ishlash sizni charchatadi.'],
-    teamNeed: 'Sizga kerak: yonida kuchli Integrator.',
-    teamInsight: 'G‘oya va harakat ko‘p, lekin yakunlash, nazorat va barqaror tizim yetishmasligi mumkin.',
+    slowdownsIntro: 'Lekin bu kuch bir narsani yashiradi:',
+    slowdowns: ['Katta tizim va uzoq nazoratga vaqt sarflash sizni charchatadi — shuning uchun ko‘pincha yaxshi jarayonlar boshlab, oxirigacha etkazilmay qoladi.'],
+    teamNeedTitle: 'Komandangizga qaysi tip kerak',
+    teamNeed: 'Sizga kerak — yonida kuchli Integrator: siz olib kelgan imkoniyatlarni tizimga aylantiradigan odam.',
+    teamInsight: 'G‘oya va harakat ko‘p, lekin yakunlash, nazorat va barqaror tizim yetishmasligi mumkin — bu tez o‘sishni sekinlashtiradigan asosiy omil.',
   },
   dominant19: {
     title: (pct) => `${pct}% — 1.9 Integrator dominant`,
-    subtitle: 'Siz tizim, nazorat va struktura tarafida kuchliroqsiz, lekin tashabbus ham qila olasiz.',
+    subtitle: 'Siz tizim, nazorat va struktura tarafida kuchliroqsiz, lekin tashabbus ham qila olasiz — bu kamdan-kam uchraydigan muvozanat.',
+    strengthsIntro: 'Sizda tabiiy ravishda kuchli:',
     strengths: ['Tizimlashtirish', 'Operatsion boshqaruv', 'Deadline va nazorat', 'Kerak bo‘lsa tashabbus ko‘rsatish'],
+    rolesIntro: 'Bu uslub bilan siz eng ko‘p qiymatni shu rollarda yaratasiz:',
     roles: ['COO', 'Integrator', 'Project Manager', 'Operations', 'Finance'],
-    slowdowns: ['Baʼzan yangi imkoniyatlarga sekinroq kirishasiz.'],
-    teamNeed: 'Sizga kerak: yonida kuchli Visionary.',
-    teamInsight: 'Tizim ko‘p, lekin yangi pul va yangi imkoniyat olib kiradigan odamlar yetishmasligi mumkin.',
+    slowdownsIntro: 'Lekin bu kuch bir narsani yashiradi:',
+    slowdowns: ['Ba’zan yangi imkoniyatlarga sekinroq kirishasiz — raqamlar va tartib hali aniq bo‘lmagan g‘oyani "yo‘q" deb qaytarib yuborishi mumkin.'],
+    teamNeedTitle: 'Komandangizga qaysi tip kerak',
+    teamNeed: 'Sizga kerak — yonida kuchli Visionary: yangi g‘oya va yangi imkoniyatlarni doimiy olib keladigan odam.',
+    teamInsight: 'Tizim ko‘p, lekin yangi g‘oya va yangi imkoniyat olib kiradigan odamlar yetishmasligi mumkin — bu esa o‘sishni to‘xtatib, faqat "saqlab qolish" rejimida ushlab turadi.',
   },
   natural19: {
     title: (pct) => `${pct}% — 1.9 Integrator`,
-    subtitle: 'Sizning tabiiy kuchingiz — tartibsizlikni tizimga aylantirish.',
+    subtitle: 'Sizning tabiiy kuchingiz — tartibsizlikni tizimga aylantirish. Boshqalar tartibsizlikdan qochsa, siz aynan shu yerda ishlaysiz — va yaxshi ishlaysiz.',
+    strengthsIntro: 'Sizda tabiiy ravishda kuchli:',
     strengths: ['Tizimlashtirish', 'Operatsion boshqaruv', 'Deadline', 'Nazorat', 'SOP', 'Moliya va raqam', 'Yakunlash'],
+    rolesIntro: 'Bu uslub bilan siz eng ko‘p qiymatni shu rollarda yaratasiz:',
     roles: ['COO', 'Integrator', 'Project Manager', 'Finance', 'Operations', 'Administrator', 'Quality Control'],
-    slowdowns: ['Juda ko‘p analiz qilib, yangi imkoniyatlarga sekin kirishingiz mumkin.'],
-    teamNeed: 'Sizga kerak: kuchli 0.1 — Visionary / Entrepreneur.',
-    teamInsight: 'Tizim ko‘p, lekin yangi pul va yangi imkoniyat olib kiradigan odamlar yetishmasligi mumkin.',
+    slowdownsIntro: 'Lekin bu kuch bir narsani yashiradi:',
+    slowdowns: ['Juda ko‘p analiz qilib, yangi imkoniyatlarga sekin kirishingiz mumkin — raqam va tizim to‘liq aniq bo‘lgunicha "yo‘q" deb javob berish odat bo‘lib qolishi mumkin, va shu payt raqobatchi tezroq harakat qiladi.'],
+    teamNeedTitle: 'Komandangizga qaysi tip kerak',
+    teamNeed: 'Sizga kerak — kuchli 0.1 Visionary: yangi mijoz, yangi imkoniyat va yangi g‘oya olib keladigan odam.',
+    teamInsight: 'Tizim ko‘p, lekin yangi imkoniyat va yangi g‘oya olib kiradigan odamlar yetishmasligi mumkin — bu o‘sishni emas, faqat mavjud holatni saqlab turadi.',
   },
 };
 
@@ -191,7 +211,8 @@ const StyleTestPage: FC = () => {
 
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Type[]>([]);
-  const [showResult, setShowResult] = useState(false);
+  const [finished, setFinished] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -204,7 +225,7 @@ const StyleTestPage: FC = () => {
     if (step < total - 1) {
       setStep(step + 1);
     } else {
-      setShowResult(true);
+      setFinished(true);
       gtagEvent('quiz_complete', { event_category: 'StyleTest', event_label: '0.1 vs 1.9' });
     }
   };
@@ -241,7 +262,12 @@ const StyleTestPage: FC = () => {
 
   const packageSummary = `Uslub testi natijasi: ${pctDisplay}% ${isNatural01 || resultKey === 'dominant01' ? '0.1 (Visionary)' : '1.9 (Integrator)'}`;
 
-  if (!showResult) {
+  const handleUnlock = () => {
+    setUnlocked(true);
+    gtagEvent('form_submit', { event_category: 'StyleTest', event_label: 'Result unlocked', value: pctDisplay });
+  };
+
+  if (!finished) {
     const q = QUESTIONS[step];
     const progress = ((step + 1) / total) * 100;
 
@@ -281,6 +307,39 @@ const StyleTestPage: FC = () => {
     );
   }
 
+  if (!unlocked) {
+    return (
+      <div className="flex-grow bg-background min-h-[100dvh]">
+        <div className="container mx-auto px-5 py-16 sm:py-24 max-w-xl text-center">
+          <div className="mx-auto mb-6 h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+            <Lock className="h-7 w-7 text-primary" />
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight mb-4">
+            Sizning natijangiz tayyor
+          </h1>
+          <p className="text-lg text-foreground/70 mb-10">
+            16 ta javobingiz asosida siz qaysi ish uslubga ko‘proq moyilligingiz — Visionary (0.1) yoki Integrator (1.9) — aniqlandi. Bu qaysi sohada ishlashingizdan qat’i nazar amal qiladi. Natijani, kuchli tomonlaringizni va jamoangizga qaysi tip kerakligini ko‘rish uchun aloqa maʼlumotingizni qoldiring.
+          </p>
+          <Button
+            size="lg"
+            onClick={() => setModalOpen(true)}
+            className="w-full sm:w-auto h-14 rounded-full text-base font-bold px-10"
+          >
+            Natijamni ko‘rish
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
+        <ContactModal
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          onFormSubmitSuccess={handleUnlock}
+          packageSummary={packageSummary}
+          lang={lang}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="flex-grow bg-background min-h-[100dvh]">
       <div className="container mx-auto px-5 py-10 sm:py-20 max-w-2xl">
@@ -307,6 +366,7 @@ const StyleTestPage: FC = () => {
         <div className="grid gap-4 sm:gap-6 mb-8">
           <div className="p-6 rounded-2xl border-2 border-foreground/10">
             <h3 className="font-bold text-lg mb-3 text-foreground">Kuchli tomonlaringiz</h3>
+            <p className="text-sm text-foreground/60 mb-3">{result.strengthsIntro}</p>
             <ul className="flex flex-wrap gap-2">
               {result.strengths.map((s) => (
                 <li key={s} className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
@@ -318,6 +378,7 @@ const StyleTestPage: FC = () => {
 
           <div className="p-6 rounded-2xl border-2 border-foreground/10">
             <h3 className="font-bold text-lg mb-3 text-foreground">Sizga mos rollar</h3>
+            <p className="text-sm text-foreground/60 mb-3">{result.rolesIntro}</p>
             <ul className="flex flex-wrap gap-2">
               {result.roles.map((r) => (
                 <li key={r} className="px-3 py-1.5 rounded-full bg-foreground/5 text-foreground text-sm font-medium">
@@ -329,11 +390,12 @@ const StyleTestPage: FC = () => {
 
           <div className="p-6 rounded-2xl border-2 border-foreground/10">
             <h3 className="font-bold text-lg mb-3 text-foreground">Sizni sekinlashtiradigan narsalar</h3>
+            <p className="text-sm text-foreground/60 mb-2">{result.slowdownsIntro}</p>
             <p className="text-foreground/70">{result.slowdowns.join(' ')}</p>
           </div>
 
           <div className="p-6 rounded-2xl bg-foreground text-background">
-            <h3 className="font-bold text-lg mb-3">Komandangizga qaysi tip kerak</h3>
+            <h3 className="font-bold text-lg mb-3">{result.teamNeedTitle}</h3>
             <p className="opacity-90">{result.teamNeed}</p>
           </div>
         </div>
@@ -360,13 +422,11 @@ const StyleTestPage: FC = () => {
             <Share2 className="mr-2 h-5 w-5" />
             {copied ? 'Nusxalandi!' : 'Testni ulashish'}
           </Button>
-          <Button
-            size="lg"
-            onClick={() => setModalOpen(true)}
-            className="w-full sm:w-auto h-14 rounded-full text-base font-bold"
-          >
-            Jamoamni tahlil qilish
-            <ArrowRight className="ml-2 h-5 w-5" />
+          <Button asChild size="lg" className="w-full sm:w-auto h-14 rounded-full text-base font-bold">
+            <Link href={`/${lang}/aloqa`}>
+              Jamoamni tahlil qilish
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
           </Button>
         </div>
 
@@ -376,13 +436,6 @@ const StyleTestPage: FC = () => {
           </Link>
         </div>
       </div>
-
-      <ContactModal
-        isOpen={isModalOpen}
-        onClose={() => setModalOpen(false)}
-        packageSummary={packageSummary}
-        lang={lang}
-      />
     </div>
   );
 };

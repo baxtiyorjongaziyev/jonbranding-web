@@ -8,8 +8,8 @@ type Props = {
 
 export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await props.params;
-  const title = 'Siz 0.1misiz yoki 1.9mi? — Biznes uslub testi | Jon.Branding';
-  const description = 'Biznesdagi tabiiy ish uslubingizni aniqlang: Visionary (0.1) yoki Integrator (1.9). 16 ta savol, 2 daqiqada natija.';
+  const title = 'Siz 0.1misiz yoki 1.9mi? — Ish uslubi testi | Jon.Branding';
+  const description = 'Qaysi sohada ishlashingizdan qat’i nazar, tabiiy ish uslubingizni aniqlang: Visionary (0.1) yoki Integrator (1.9). 16 ta savol, 2 daqiqada natija.';
   const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}uslub-test`;
 
   return {
