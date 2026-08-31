@@ -36,10 +36,10 @@ const QUESTIONS: Question[] = [
     ],
   },
   {
-    question: 'Yangi biznes g‘oya keldi:',
+    question: 'Yangi g‘oya yoki taklif keldi:',
     options: [
       { text: 'Darrov kim bilan amalga oshirish mumkinligini o‘ylayman', type: '01' },
-      { text: 'Avval iqtisodiyoti va jarayonini hisoblayman', type: '19' },
+      { text: 'Avval unumi va jarayonini hisoblayman', type: '19' },
     ],
   },
   {
@@ -101,8 +101,8 @@ const QUESTIONS: Question[] = [
   {
     question: 'Sizni ko‘proq nima g‘ashingizga tegadi?',
     options: [
-      { text: 'Sekin va ortiqcha muhokamali qarorlar', type: '19' },
-      { text: 'Tartibsizlik va aniq bo‘lmagan masʼuliyat', type: '01' },
+      { text: 'Sekin va ortiqcha muhokamali qarorlar', type: '01' },
+      { text: 'Tartibsizlik va aniq bo‘lmagan masʼuliyat', type: '19' },
     ],
   },
   {
@@ -120,10 +120,10 @@ const QUESTIONS: Question[] = [
     ],
   },
   {
-    question: 'Biznesda eng katta yutuq deb nimani hisoblaysiz?',
+    question: 'Ishingizda eng katta yutuq deb nimani hisoblaysiz?',
     options: [
-      { text: 'Katta savdo yoki yangi bozorga chiqish', type: '01' },
-      { text: 'Jarayonni odamsiz ham ishlaydigan qilib qo‘yish', type: '19' },
+      { text: 'Yangi mijoz, hamkor yoki imkoniyat topish', type: '01' },
+      { text: 'Jarayonni sizsiz ham ishlaydigan qilib qo‘yish', type: '19' },
     ],
   },
 ];
@@ -154,7 +154,7 @@ const RESULTS: Record<ResultKey, {
     slowdowns: ['Tizim, nazorat va yakunlash sizni tez charchatishi mumkin — g‘oya 10 ta, lekin oxirigacha yetgani 2 ta bo‘lishi mumkin. Buning oqibati: mijozlar tushib qoladi, sifat notekis bo‘ladi, jamoa sizdan keyingi qadamni kutib qoladi.'],
     teamNeedTitle: 'Komandangizga qaysi tip kerak',
     teamNeed: 'Sizga kerak — kuchli 1.9 Integrator: sizning g‘oyalaringizni ushlab qolib, oxirigacha yetkazadigan, tizim va nazoratni qo‘lga oladigan odam.',
-    teamInsight: 'G‘oya va harakat ko‘p, lekin yakunlash, nazorat va barqaror tizim yetishmasligi mumkin — natijada bir xil xatolar qaytarilaveradi, sifat odamga qarab o‘zgaradi va biznes sizsiz to‘xtab qoladi.',
+    teamInsight: 'G‘oya va harakat ko‘p, lekin yakunlash, nazorat va barqaror tizim yetishmasligi mumkin — natijada bir xil xatolar qaytarilaveradi, sifat odamga qarab o‘zgaradi va ish jarayoni sizsiz to‘xtab qoladi.',
   },
   dominant01: {
     title: (pct) => `${pct}% — 0.1 Visionary dominant`,
@@ -179,8 +179,8 @@ const RESULTS: Record<ResultKey, {
     slowdownsIntro: 'Lekin bu kuch bir narsani yashiradi:',
     slowdowns: ['Ba’zan yangi imkoniyatlarga sekinroq kirishasiz — raqamlar va tartib hali aniq bo‘lmagan g‘oyani "yo‘q" deb qaytarib yuborishi mumkin.'],
     teamNeedTitle: 'Komandangizga qaysi tip kerak',
-    teamNeed: 'Sizga kerak — yonida kuchli Visionary: yangi pul va yangi imkoniyatlarni doimiy olib keladigan odam.',
-    teamInsight: 'Tizim ko‘p, lekin yangi pul va yangi imkoniyat olib kiradigan odamlar yetishmasligi mumkin — bu esa o‘sishni to‘xtatib, faqat "saqlab qolish" rejimida ushlab turadi.',
+    teamNeed: 'Sizga kerak — yonida kuchli Visionary: yangi g‘oya va yangi imkoniyatlarni doimiy olib keladigan odam.',
+    teamInsight: 'Tizim ko‘p, lekin yangi g‘oya va yangi imkoniyat olib kiradigan odamlar yetishmasligi mumkin — bu esa o‘sishni to‘xtatib, faqat "saqlab qolish" rejimida ushlab turadi.',
   },
   natural19: {
     title: (pct) => `${pct}% — 1.9 Integrator`,
@@ -192,8 +192,8 @@ const RESULTS: Record<ResultKey, {
     slowdownsIntro: 'Lekin bu kuch bir narsani yashiradi:',
     slowdowns: ['Juda ko‘p analiz qilib, yangi imkoniyatlarga sekin kirishingiz mumkin — raqam va tizim to‘liq aniq bo‘lgunicha "yo‘q" deb javob berish odat bo‘lib qolishi mumkin, va shu payt raqobatchi tezroq harakat qiladi.'],
     teamNeedTitle: 'Komandangizga qaysi tip kerak',
-    teamNeed: 'Sizga kerak — kuchli 0.1 Visionary / Entrepreneur: yangi mijoz, yangi bozor va yangi pul olib keladigan odam.',
-    teamInsight: 'Tizim ko‘p, lekin yangi pul va yangi imkoniyat olib kiradigan odamlar yetishmasligi mumkin — bu biznesning o‘sishini emas, faqat mavjud holatni saqlab turadi.',
+    teamNeed: 'Sizga kerak — kuchli 0.1 Visionary: yangi mijoz, yangi imkoniyat va yangi g‘oya olib keladigan odam.',
+    teamInsight: 'Tizim ko‘p, lekin yangi imkoniyat va yangi g‘oya olib kiradigan odamlar yetishmasligi mumkin — bu o‘sishni emas, faqat mavjud holatni saqlab turadi.',
   },
 };
 
@@ -318,7 +318,7 @@ const StyleTestPage: FC = () => {
             Sizning natijangiz tayyor
           </h1>
           <p className="text-lg text-foreground/70 mb-10">
-            16 ta javobingiz asosida siz qaysi biznes uslubga ko‘proq moyilligingiz — Visionary (0.1) yoki Integrator (1.9) — aniqlandi. Natijani, kuchli tomonlaringizni va komandangizga qaysi tip kerakligini ko‘rish uchun aloqa maʼlumotingizni qoldiring.
+            16 ta javobingiz asosida siz qaysi ish uslubga ko‘proq moyilligingiz — Visionary (0.1) yoki Integrator (1.9) — aniqlandi. Bu qaysi sohada ishlashingizdan qat’i nazar amal qiladi. Natijani, kuchli tomonlaringizni va jamoangizga qaysi tip kerakligini ko‘rish uchun aloqa maʼlumotingizni qoldiring.
           </p>
           <Button
             size="lg"
