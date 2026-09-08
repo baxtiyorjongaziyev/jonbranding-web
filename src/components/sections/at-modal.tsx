@@ -99,6 +99,9 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
           ctaSource: 'at_modal',
           totalPrice: value,
           companyWebsite: honeypot,
+          promoCode: typeof window !== 'undefined'
+            ? (localStorage.getItem('promoCode') || '').replace(/"/g, '')
+            : undefined,
         }),
       });
       result = await res.json().catch(() => ({}));
