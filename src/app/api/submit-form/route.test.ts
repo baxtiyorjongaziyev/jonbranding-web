@@ -94,4 +94,66 @@ describe('POST /api/submit-form', () => {
       values: [{ value: '+998901234567', enum_code: 'MOB' }],
     });
   });
+
+  it('creates a referral when promoCode matches an affiliate', async () => {
+    const { findAffiliateByPromoCode, createReferral } = await import('@/lib/affiliate/store');
+    const storeMock = await import('@/lib/affiliate/store');
+    vi.spyOn(storeMock, 'findAffiliateByPromoCode').mockResolvedValue({
+      id: 'aff-1',
+      promoCode: 'SHERBEK',
+      fullName: 'Sherbek',
+      phone: '+998900000000',
+      telegramUsername: null,
+      accessToken: 't',
+      createdAt: '2026-09-04T00:00:00Z',
+    });
+    const createReferralSpy = vi.spyOn(storeMock, 'createReferral').mockResolvedValue({
+      id: 'ref-1',
+      affiliateId: 'aff-1',
+      amocrmLeadId: 101,
+      leadName: 'Sardor',
+      leadPhone: '+998901234567',
+      serviceHint: 'logo',
+      status: 'new',
+      createdAt: '2026-09-04T00:00:00Z',
+      wonAt: null,
+    });
+
+    const fetchMock = vi.fn((input: string | URL | Request) => {
+      const url = String(input);
+      if (url.startsWith('https://api.telegram.org/')) return Promise.resolve(apiResponse({ ok: true }));
+      if (url.endsWith('/api/v4/leads/complex')) {
+        return Promise.resolve(apiResponse([{ id: 101, contact_id: 202, merged: false }]));
+      }
+      if (url.endsWith('/api/v4/leads/101/notes')) {
+        return Promise.resolve(apiResponse({ ok: true }));
+      }
+      throw new Error(`Unexpected fetch: ${url}`);
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const response = await POST(new Request('http://localhost/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: 'Sardor',
+        phone: '90 123 45 67',
+        promoCode: 'sherbek',
+        packageSummary: 'Logo VIP',
+        source: 'brand_audit_offer',
+        lang: 'uz',
+      }),
+    }));
+
+    expect(response.status).toBe(200);
+    expect(createReferralSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        affiliateId: 'aff-1',
+        amocrmLeadId: 101,
+        leadName: 'Sardor',
+        leadPhone: '+998901234567',
+        serviceHint: 'logo',
+      }),
+    );
+  });
 });

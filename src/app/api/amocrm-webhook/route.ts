@@ -1,6 +1,80 @@
 import { NextResponse } from 'next/server';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { safeCompare } from '@/lib/security';
+import { logger } from '@/lib/logger';
+import {
+  createPayoutIfAbsent,
+  findReferralByLeadId,
+  markReferralLost,
+  markReferralWon,
+} from '@/lib/affiliate/store';
+import { serviceFromHint, type PayoutService } from '@/lib/affiliate/payouts';
+
+function parseStatusIds(raw: string | undefined): Set<number> {
+  return new Set(
+    String(raw || '')
+      .split(',')
+      .map((s) => Number(s.trim()))
+      .filter((n) => Number.isFinite(n)),
+  );
+}
+
+async function notifyAffiliateBonus(text: string) {
+  const t = process.env.TELEGRAM_BOT_TOKEN;
+  const c = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
+  if (!t || !c) return;
+  await fetch(`https://api.telegram.org/bot${t}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: c, text, parse_mode: 'HTML' }),
+  }).catch(() => {});
+}
+
+async function processAffiliatePayouts(body: any) {
+  const wonIds = parseStatusIds(process.env.AMOCRM_WON_STATUS_ID);
+  const lostIds = parseStatusIds(process.env.AMOCRM_LOST_STATUS_ID);
+  if (wonIds.size === 0 && lostIds.size === 0) return;
+
+  const leadEvents = [
+    ...(Array.isArray(body?.leads?.status) ? body.leads.status : []),
+    ...(Array.isArray(body?.leads?.update) ? body.leads.update : []),
+  ];
+
+  for (const lead of leadEvents) {
+    const leadId = Number(lead?.id);
+    const statusId = Number(lead?.status_id);
+    if (!Number.isFinite(leadId) || !Number.isFinite(statusId)) continue;
+
+    const isWon = wonIds.has(statusId);
+    const isLost = lostIds.has(statusId);
+    if (!isWon && !isLost) continue;
+
+    const referral = await findReferralByLeadId(leadId);
+    if (!referral) continue;
+
+    if (isLost) {
+      if (referral.status !== 'lost') await markReferralLost(referral.id);
+      continue;
+    }
+
+    // isWon
+    if (referral.status === 'won') continue; // idempotent
+
+    await markReferralWon(referral.id);
+
+    const service = (serviceFromHint(referral.serviceHint) ?? 'full_branding') as PayoutService;
+    const payout = await createPayoutIfAbsent({
+      referralId: referral.id,
+      affiliateId: referral.affiliateId,
+      service,
+    });
+    if (payout) {
+      await notifyAffiliateBonus(
+        `<b>💰 Hamkor bonusi</b>\nReferral: ${referral.leadName}\nXizmat: ${service}\nSumma: ${payout.amount.toLocaleString('fr-FR')} so'm\nHolat: to'lanmagan`,
+      );
+    }
+  }
+}
 
 const botToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -74,6 +148,14 @@ export async function POST(request: Request) {
 
     try {
         const body = await request.json();
+
+        try {
+          await processAffiliatePayouts(body);
+        } catch (error) {
+          logger.error('Affiliate payout processing failed', {
+            reason: error instanceof Error ? error.message : String(error),
+          });
+        }
         
         // Extract relevant data from the webhook payload. 
         // AmoCRM's payload structure can be complex, so we'll look for the newest lead.
