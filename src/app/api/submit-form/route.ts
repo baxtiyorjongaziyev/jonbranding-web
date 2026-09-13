@@ -12,6 +12,8 @@ import {
   normalizeTelegramUsername,
   runLeadDeliveries,
 } from '@/lib/lead-contact';
+import { findAffiliateByPromoCode, createReferral } from '@/lib/affiliate/store';
+import { serviceFromHint } from '@/lib/affiliate/payouts';
 
 const AMOCRM_FAILED_LEADS_COLLECTION = 'amocrm_failed_leads';
 
@@ -456,6 +458,38 @@ export async function POST(request: Request) {
           durationMs: delivery.durationMs,
         });
       }
+    }
+
+    try {
+      const promoRaw = String((leadData as any).promoCode || '').trim();
+      if (promoRaw) {
+        const affiliate = await findAffiliateByPromoCode(promoRaw.toUpperCase());
+        if (affiliate) {
+          const serviceHintSource =
+            (leadData as any).packageSummary ||
+            (typeof (leadData as any).selectedServices === 'object'
+              ? Object.keys((leadData as any).selectedServices || {}).join(',')
+              : '') ||
+            (leadData as any).role ||
+            '';
+          const hint = serviceFromHint(serviceHintSource);
+          await createReferral({
+            affiliateId: affiliate.id,
+            amocrmLeadId: amoCrmResult?.leadId ?? null,
+            leadName: String(fullName || 'Mijoz'),
+            leadPhone: normalizePhone((leadData as any).phone) || '',
+            serviceHint: hint ?? (serviceHintSource || null),
+          });
+          logger.info('Affiliate referral recorded', {
+            promoCode: affiliate.promoCode,
+            leadId: amoCrmResult?.leadId ?? null,
+          });
+        }
+      }
+    } catch (error) {
+      logger.error('Affiliate attribution failed', {
+        reason: error instanceof Error ? error.message : String(error),
+      });
     }
 
     return NextResponse.json({

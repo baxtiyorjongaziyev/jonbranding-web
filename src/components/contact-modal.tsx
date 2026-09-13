@@ -187,6 +187,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
           gaClientId,
           pageLocation,
           ctaSource,
+          promoCode: typeof window !== 'undefined'
+            ? (localStorage.getItem('promoCode') || '').replace(/"/g, '')
+            : undefined,
         }),
       });
 
