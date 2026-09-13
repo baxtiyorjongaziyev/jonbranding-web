@@ -96,6 +96,9 @@ workflow-state.json
 /.claude/skills/
 skills-lock.json
 
+# Local video drafts (mebel reels etc.)
+*.mp4
+
 # Playwright
 node_modules/
 /test-results/
