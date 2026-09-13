@@ -99,4 +99,17 @@ describe('amocrm-webhook affiliate payout', () => {
     const res = await callWebhook({ leads: { status: [{ id: 555, status_id: 142 }] } });
     expect(res.status).toBe(200);
   });
+
+  it('still processes affiliate payouts and returns 200 when Telegram env is missing', async () => {
+    delete process.env.TELEGRAM_BOT_TOKEN;
+    delete process.env.TELEGRAM_CHAT_ID;
+    const res = await callWebhook({ leads: { status: [{ id: 555, status_id: 142 }] } });
+    expect(res.status).toBe(200);
+    expect(storeMock.markReferralWon).toHaveBeenCalledWith('ref-1');
+    expect(storeMock.createPayoutIfAbsent).toHaveBeenCalledWith({
+      referralId: 'ref-1',
+      affiliateId: 'aff-1',
+      service: 'packaging',
+    });
+  });
 });

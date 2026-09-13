@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 
   const parsed = affiliateRegisterSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ ok: false, error: 'invalid', details: parsed.error.format() }, { status: 400 });
+    return NextResponse.json({ ok: false, error: 'invalid' }, { status: 400 });
   }
 
   const { fullName, phone, telegramUsername } = parsed.data;
@@ -64,6 +64,15 @@ export async function POST(request: Request) {
 
     const created = await createAffiliate({ fullName, phone, telegramUsername, promoCode, accessToken });
     if (!created) {
+      // A concurrent request may have just inserted this phone (unique constraint) — check before failing.
+      const concurrent = await findAffiliateByPhone(phone);
+      if (concurrent) {
+        return NextResponse.json({
+          ok: true,
+          promoCode: concurrent.promoCode,
+          accessUrl: `/hamkor/${concurrent.accessToken}`,
+        });
+      }
       return NextResponse.json({ ok: false, error: 'unavailable' }, { status: 503 });
     }
 

@@ -473,6 +473,11 @@ export async function POST(request: Request) {
             (leadData as any).role ||
             '';
           const hint = serviceFromHint(serviceHintSource);
+          if (!amoCrmResult?.leadId) {
+            logger.warn('Affiliate referral created without amoCRM lead id — will not auto-match on webhook', {
+              promoCode: affiliate.promoCode,
+            });
+          }
           await createReferral({
             affiliateId: affiliate.id,
             amocrmLeadId: amoCrmResult?.leadId ?? null,

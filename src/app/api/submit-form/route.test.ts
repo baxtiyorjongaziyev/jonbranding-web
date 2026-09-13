@@ -156,4 +156,70 @@ describe('POST /api/submit-form', () => {
       }),
     );
   });
+
+  it('does not create a referral when no promo code is given', async () => {
+    const storeMock = await import('@/lib/affiliate/store');
+    const findAffiliateSpy = vi.spyOn(storeMock, 'findAffiliateByPromoCode');
+
+    const fetchMock = vi.fn((input: string | URL | Request) => {
+      const url = String(input);
+      if (url.startsWith('https://api.telegram.org/')) return Promise.resolve(apiResponse({ ok: true }));
+      if (url.endsWith('/api/v4/leads/complex')) {
+        return Promise.resolve(apiResponse([{ id: 101, contact_id: 202, merged: false }]));
+      }
+      if (url.endsWith('/api/v4/leads/101/notes')) {
+        return Promise.resolve(apiResponse({ ok: true }));
+      }
+      throw new Error(`Unexpected fetch: ${url}`);
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const response = await POST(new Request('http://localhost/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: 'Sardor',
+        phone: '90 123 45 67',
+        source: 'at_modal',
+        lang: 'uz',
+      }),
+    }));
+
+    expect(response.status).toBe(200);
+    expect(findAffiliateSpy).not.toHaveBeenCalled();
+  });
+
+  it('never fails the lead when the affiliate store throws', async () => {
+    const storeMock = await import('@/lib/affiliate/store');
+    vi.spyOn(storeMock, 'findAffiliateByPromoCode').mockRejectedValue(new Error('db down'));
+
+    const fetchMock = vi.fn((input: string | URL | Request) => {
+      const url = String(input);
+      if (url.startsWith('https://api.telegram.org/')) return Promise.resolve(apiResponse({ ok: true }));
+      if (url.endsWith('/api/v4/leads/complex')) {
+        return Promise.resolve(apiResponse([{ id: 101, contact_id: 202, merged: false }]));
+      }
+      if (url.endsWith('/api/v4/leads/101/notes')) {
+        return Promise.resolve(apiResponse({ ok: true }));
+      }
+      throw new Error(`Unexpected fetch: ${url}`);
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const response = await POST(new Request('http://localhost/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: 'Sardor',
+        phone: '90 123 45 67',
+        promoCode: 'sherbek',
+        source: 'at_modal',
+        lang: 'uz',
+      }),
+    }));
+
+    expect(response.status).toBe(200);
+    const result = await response.json();
+    expect(result.ok).toBe(true);
+  });
 });
