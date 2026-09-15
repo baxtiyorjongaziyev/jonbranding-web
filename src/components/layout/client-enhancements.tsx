@@ -96,6 +96,7 @@ export default function ClientEnhancements({
 }: ClientEnhancementsProps) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [packageSummary, setPackageSummary] = useState('');
+  const [serviceKeys, setServiceKeys] = useState<string[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [enhancementsReady, setEnhancementsReady] = useState(false);
   const [quickActionsReady, setQuickActionsReady] = useState(false);
@@ -114,6 +115,7 @@ export default function ClientEnhancements({
 
     let summary = '';
     let finalPrice = 0;
+    let keys: string[] = [];
 
     try {
       const selectionsJSON = localStorage.getItem('selectedServices');
@@ -129,6 +131,12 @@ export default function ClientEnhancements({
         if (priceDetails.base > 0) {
           summary = generateSummary(selections, lang);
           finalPrice = priceDetails.final;
+          // Stable, locale-independent calculator IDs (e.g. "logoPremium") —
+          // sent alongside the localized summary so affiliate payout
+          // matching doesn't depend on parsing translated display text.
+          keys = Object.entries(selectedServices)
+            .filter(([, v]) => v)
+            .map(([k]) => k);
         }
       }
     } catch (e) {
@@ -136,6 +144,7 @@ export default function ClientEnhancements({
     }
 
     setPackageSummary(summary);
+    setServiceKeys(keys);
     setTotalPrice(finalPrice);
     trackCtaClick({
       ctaText: detail?.ctaText || 'Bepul Brand Audit olish',
@@ -224,6 +233,7 @@ export default function ClientEnhancements({
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           packageSummary={packageSummary}
+          serviceKeys={serviceKeys}
           totalPrice={totalPrice}
           onFormSubmitSuccess={handleCloseModal}
           lang={lang}

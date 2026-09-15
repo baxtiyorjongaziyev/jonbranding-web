@@ -112,4 +112,26 @@ describe('amocrm-webhook affiliate payout', () => {
       service: 'packaging',
     });
   });
+
+  it('does NOT default an unmapped service hint to the most expensive tier', async () => {
+    // Localized package text that doesn't tokenize to any known service
+    // (e.g. Cyrillic/Chinese labels, or a phrase with no matching token).
+    storeMock.findReferralByLeadId.mockResolvedValue({
+      id: 'ref-1',
+      affiliateId: 'aff-1',
+      status: 'new',
+      serviceHint: 'Қадоқ дизайни',
+      amocrmLeadId: 555,
+      leadName: 'X',
+      leadPhone: '+998900000000',
+      createdAt: '2026-09-04T00:00:00Z',
+      wonAt: null,
+    });
+    const res = await callWebhook({ leads: { status: [{ id: 555, status_id: 142 }] } });
+    expect(res.status).toBe(200);
+    // Still marks the deal won so it isn't lost from tracking...
+    expect(storeMock.markReferralWon).toHaveBeenCalledWith('ref-1');
+    // ...but must NOT guess a payout amount (especially not full_branding, the largest).
+    expect(storeMock.createPayoutIfAbsent).not.toHaveBeenCalled();
+  });
 });

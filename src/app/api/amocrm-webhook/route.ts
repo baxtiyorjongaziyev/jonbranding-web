@@ -68,7 +68,24 @@ async function processAffiliatePayouts(body: any) {
     // isWon
     if (referral.status === 'won') continue; // idempotent
 
-    const service = (serviceFromHint(referral.serviceHint) ?? 'full_branding') as PayoutService;
+    const service = serviceFromHint(referral.serviceHint) as PayoutService | null;
+
+    if (!service) {
+      // Unknown/unmapped service hint (e.g. localized package text that
+      // doesn't tokenize to a known calculator ID) — do NOT guess the
+      // most expensive tier. Mark won so the deal isn't lost, but skip
+      // automatic payout creation and flag it for a human to resolve.
+      await markReferralWon(referral.id);
+      logger.warn('Affiliate referral won with unmapped service hint — no automatic payout', {
+        referralId: referral.id,
+        serviceHint: referral.serviceHint,
+      });
+      await notifyAffiliateBonus(
+        `<b>⚠️ Hamkor bonusi — qo'lda tekshirish kerak</b>\nReferral: ${referral.leadName}\nXizmat aniqlanmadi: ${referral.serviceHint || '(bo\'sh)'}\nBonusni admin panelda qo'lda hisoblang.`,
+      );
+      continue;
+    }
+
     const payout = await createPayoutIfAbsent({
       referralId: referral.id,
       affiliateId: referral.affiliateId,
