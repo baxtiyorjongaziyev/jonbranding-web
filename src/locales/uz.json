@@ -1192,6 +1192,13 @@
     },
     "title": "Patent Kalkulyatori",
     "subtitle": "Brendingizni yuridik himoya qilish xarajatlarini darhol hisoblang.",
+    "landing": {
+      "title": "Tovar Belgingiz Narxini 30 Soniyada Biling",
+      "subtitle": "Brendingizni raqobatchilardan himoya qiling. Davlat boji va xizmat haqini aniq hisoblang — yashirin to'lovlarsiz.",
+      "trustSpeed": "30 soniyada natija",
+      "trustAccuracy": "Davlat boji bo'yicha aniq hisob",
+      "trustExperts": "Patent mutaxassislari yordamida"
+    },
     "trademarkCalculator": {
       "formTitle": "Ma'lumotlarni kiriting",
       "brandNameLabel": "Brend nomi",
@@ -1246,6 +1253,8 @@
       "submittingButton": "Yuborilmoqda...",
       "successMessage": "✅ Buyurtma qabul qilindi!",
       "tryAgainButton": "Qayta hisoblash",
+      "gateTitle": "Aniq narxni ko'rish uchun formani to'ldiring",
+      "gateSubtitle": "Tafsilotlar forma to'ldirilgach ochiladi",
       "summaryTitle": "Xarajatlar tafsiloti",
       "totalCostTitle": "10 yilga patentning taxminiy umumiy qiymati",
       "currency": "so'm",
